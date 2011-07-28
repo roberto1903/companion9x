@@ -1,5 +1,5 @@
 /*
- * Author - Erez Raviv <erezraviv@gmail.com>
+ * Author - Bertrand Songis <bsongis@gmail.com>
  * 
  * Based on th9x -> http://code.google.com/p/th9x/
  *
