@@ -431,8 +431,8 @@ Mode 4:
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.cpp" line="93"/>
-        <source>eePe - EEPROM Editor</source>
-        <translation>eePe - Editor de EEPROM</translation>
+        <source>companion9x - EEPROM Editor</source>
+        <translation>companion9x - Editor de EEPROM</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="118"/>
@@ -441,8 +441,8 @@ Mode 4:
         <translation>Ficheiro carregado</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
+        <source>companion9x</source>
+        <translation type="obsolete">companion9x</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="214"/>
@@ -559,8 +559,8 @@ Mode 4:
     </message>
     <message>
         <location filename="mainwindow.cpp" line="629"/>
-        <source>About eePe</source>
-        <translation>Sobre o eePe</translation>
+        <source>About companion9x</source>
+        <translation>Sobre o companion9x</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="674"/>
@@ -629,7 +629,7 @@ Mode 4:
     </message>
     <message>
         <location filename="mainwindow.cpp" line="728"/>
-        <source>Check for new version of eePe/er9x</source>
+        <source>Check for new version of companion9x/er9x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -879,8 +879,8 @@ Mode 4:
     </message>
     <message>
         <location filename="mainwindow.cpp" line="846"/>
-        <source>List er9x/eePe Contributors</source>
-        <translation>Lista de contribuidores do er9x/eePe</translation>
+        <source>List er9x/companion9x Contributors</source>
+        <translation>Lista de contribuidores do er9x/companion9x</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="850"/>
@@ -919,7 +919,7 @@ Mode 4:
     </message>
     <message>
         <location filename="mainwindow.cpp" line="271"/>
-        <source>A new version of eePe is available (r%1)&lt;br&gt;Would you like to download it?</source>
+        <source>A new version of companion9x is available (r%1)&lt;br&gt;Would you like to download it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -978,8 +978,8 @@ Mode 4:
     <message>
         <location filename="mdichild.cpp" line="686"/>
         <location filename="mdichild.cpp" line="727"/>
-        <source>eePe</source>
-        <translation>eePe</translation>
+        <source>companion9x</source>
+        <translation>companion9x</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="174"/>
@@ -2149,8 +2149,8 @@ Right</source>
         <translation>Curva %1</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
+        <source>companion9x</source>
+        <translation type="obsolete">companion9x</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1885"/>
@@ -2475,8 +2475,8 @@ Please only use this if you know what you are doing.  There are no error checks 
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="176"/>
-        <source>eePe</source>
-        <translation>eePe</translation>
+        <source>companion9x</source>
+        <translation>companion9x</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="177"/>
@@ -2506,8 +2506,8 @@ Please only use this if you know what you are doing.  There are no error checks 
     </message>
     <message>
         <location filename="downloaddialog.cpp" line="56"/>
-        <source>eePe</source>
-        <translation type="unfinished">eePe</translation>
+        <source>companion9x</source>
+        <translation type="unfinished">companion9x</translation>
     </message>
     <message>
         <location filename="downloaddialog.cpp" line="57"/>
@@ -2642,8 +2642,8 @@ This is used by the templated to determine which channel goes to what number out
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="53"/>
-        <source>eePe</source>
-        <translation type="unfinished">eePe</translation>
+        <source>companion9x</source>
+        <translation type="unfinished">companion9x</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="65"/>

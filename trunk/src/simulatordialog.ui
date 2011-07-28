@@ -14,7 +14,7 @@
    <string>ER9x Simulator</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="eepe.qrc">
+   <iconset resource="companion9x.qrc">
     <normaloff>:/images/simulate.png</normaloff>:/images/simulate.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,0,0,0">
@@ -2208,7 +2208,7 @@ border-radius: 4px;
   </layout>
  </widget>
  <resources>
-  <include location="eepe.qrc"/>
+  <include location="companion9x.qrc"/>
  </resources>
  <connections/>
 </ui>

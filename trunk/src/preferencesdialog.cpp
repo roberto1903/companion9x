@@ -29,7 +29,7 @@ void preferencesDialog::write_values()
     settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("startup_check_er9x", ui->startupCheck_er9x->isChecked());
-    settings.setValue("startup_check_eepe", ui->startupCheck_eepe->isChecked());
+    settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
     settings.setValue("show_splash", ui->showSplash->isChecked());
     settings.setValue("download-version", ui->downloadVerCB->currentIndex());
 }
@@ -47,7 +47,7 @@ void preferencesDialog::initSettings()
     ui->downloadVerCB->setCurrentIndex(settings.value("download-version", 0).toInt());
 
     ui->startupCheck_er9x->setChecked(settings.value("startup_check_er9x", true).toBool());
-    ui->startupCheck_eepe->setChecked(settings.value("startup_check_eepe", true).toBool());
+    ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
 
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
 }
@@ -62,7 +62,7 @@ void preferencesDialog::populateLocale()
     if(!strl.count()) return;
 
     QDir directory = QDir(":/");
-    QStringList files = directory.entryList(QStringList("eepe_*.qm"), QDir::Files | QDir::NoSymLinks);
+    QStringList files = directory.entryList(QStringList("companion9x_*.qm"), QDir::Files | QDir::NoSymLinks);
 
     foreach(QString file, files)
     {

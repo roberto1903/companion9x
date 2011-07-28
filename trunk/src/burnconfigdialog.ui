@@ -14,7 +14,7 @@
    <string>AVRDUDE Configuration</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="eepe.qrc">
+   <iconset resource="companion9x.qrc">
     <normaloff>:/images/configure.png</normaloff>:/images/configure.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -534,7 +534,7 @@ Please only use this if you know what you are doing.  There are no error checks 
   </layout>
  </widget>
  <resources>
-  <include location="eepe.qrc"/>
+  <include location="companion9x.qrc"/>
  </resources>
  <connections>
   <connection>

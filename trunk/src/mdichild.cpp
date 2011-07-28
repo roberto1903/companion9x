@@ -126,7 +126,7 @@ void MdiChild::mouseMoveEvent(QMouseEvent *event)
     doCopy(&gmData);
 
     QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-eepe", gmData);
+    mimeData->setData("application/x-companion9x", gmData);
 
     drag->setMimeData(mimeData);
 
@@ -154,7 +154,7 @@ void MdiChild::restoreSelection()
 
 void MdiChild::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasFormat("application/x-eepe"))
+    if (event->mimeData()->hasFormat("application/x-companion9x"))
     {
          event->acceptProposedAction();
          saveSelection();
@@ -170,9 +170,9 @@ void MdiChild::dragMoveEvent(QDragMoveEvent *event)
 {
     int row=this->indexAt(event->pos()).row();
     const QMimeData *mimeData = event->mimeData();
-    if (mimeData->hasFormat("application/x-eepe"))
+    if (mimeData->hasFormat("application/x-companion9x"))
     {
-         QByteArray gmData = mimeData->data("application/x-eepe");
+         QByteArray gmData = mimeData->data("application/x-companion9x");
          event->acceptProposedAction();
          clearSelection();
          DragDropHeader *header = (DragDropHeader *)gmData.data();
@@ -193,9 +193,9 @@ void MdiChild::dropEvent(QDropEvent *event)
 
     // QMessageBox::warning(this, tr("eePe"),tr("Index :%1").arg(row));
     const QMimeData  *mimeData = event->mimeData();
-    if(mimeData->hasFormat("application/x-eepe"))
+    if(mimeData->hasFormat("application/x-companion9x"))
     {
-        QByteArray gmData = mimeData->data("application/x-eepe");
+        QByteArray gmData = mimeData->data("application/x-companion9x");
         if (event->source() && event->dropAction() == Qt::MoveAction)
           ((MdiChild*)event->source())->doCut(&gmData);
         doPaste(&gmData, row);
@@ -297,7 +297,7 @@ void MdiChild::copy()
     doCopy(&gmData);
 
     QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-eepe", gmData);
+    mimeData->setData("application/x-companion9x", gmData);
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setMimeData(mimeData,QClipboard::Clipboard);
@@ -305,7 +305,7 @@ void MdiChild::copy()
 
 void MdiChild::doPaste(QByteArray *gmData, int index)
 {
-    //QByteArray gmData = mimeD->data("application/x-eepe");
+    //QByteArray gmData = mimeD->data("application/x-companion9x");
     char *gData = gmData->data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
     int i = sizeof(DragDropHeader);
     int id = index;
@@ -338,7 +338,7 @@ bool MdiChild::hasPasteData()
     const QClipboard *clipboard = QApplication::clipboard();
     const QMimeData *mimeData = clipboard->mimeData();
 
-    return mimeData->hasFormat("application/x-eepe");
+    return mimeData->hasFormat("application/x-companion9x");
 }
 
 void MdiChild::paste()
@@ -348,7 +348,7 @@ void MdiChild::paste()
         const QClipboard *clipboard = QApplication::clipboard();
         const QMimeData *mimeData = clipboard->mimeData();
 
-        QByteArray gmData = mimeData->data("application/x-eepe");
+        QByteArray gmData = mimeData->data("application/x-companion9x");
         doPaste(&gmData,this->currentRow());
     }
 
@@ -773,7 +773,7 @@ void MdiChild::ShowContextMenu(const QPoint& pos)
 
     const QClipboard *clipboard = QApplication::clipboard();
     const QMimeData *mimeData = clipboard->mimeData();
-    bool hasData = mimeData->hasFormat("application/x-eepe");
+    bool hasData = mimeData->hasFormat("application/x-companion9x");
 
     QMenu contextMenu;
     contextMenu.addAction(QIcon(":/images/edit.png"), tr("&Edit"),this,SLOT(OpenEditWindow()));

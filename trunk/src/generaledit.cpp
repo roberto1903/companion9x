@@ -19,7 +19,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/icon.png"));
 
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("generalEditTab", 0).toInt());
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
@@ -384,7 +384,7 @@ void GeneralEdit::on_PPM8_editingFinished()
 
 void GeneralEdit::on_tabWidget_currentChanged(int index)
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     settings.setValue("generalEditTab",index);//ui->tabWidget->currentIndex());
 }
 
