@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="eepe.qrc">
+   <iconset resource="companion9x.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <property name="sizeGripEnabled">
@@ -5415,7 +5415,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5432,7 +5432,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5449,7 +5449,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5466,7 +5466,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5483,7 +5483,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5500,7 +5500,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5517,7 +5517,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5534,7 +5534,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5551,7 +5551,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5568,7 +5568,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5585,7 +5585,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5602,7 +5602,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5619,7 +5619,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5636,7 +5636,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5653,7 +5653,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5670,7 +5670,7 @@ Right</string>
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -5681,7 +5681,7 @@ Right</string>
           <string>Clear All Curves</string>
          </property>
          <property name="icon">
-          <iconset resource="eepe.qrc">
+          <iconset resource="companion9x.qrc">
            <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
          </property>
         </widget>
@@ -6441,7 +6441,7 @@ Right</string>
       <string>Simulate</string>
      </property>
      <property name="icon">
-      <iconset resource="eepe.qrc">
+      <iconset resource="companion9x.qrc">
        <normaloff>:/images/simulate.png</normaloff>:/images/simulate.png</iconset>
      </property>
     </widget>
@@ -6737,7 +6737,7 @@ Right</string>
   <tabstop>slider_S4</tabstop>
  </tabstops>
  <resources>
-  <include location="eepe.qrc"/>
+  <include location="companion9x.qrc"/>
  </resources>
  <connections>
   <connection>

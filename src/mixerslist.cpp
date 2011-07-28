@@ -39,7 +39,7 @@ bool MixersList::dropMimeData( int index, const QMimeData * data, Qt::DropAction
     if(qba.length()>0)
     {
         QMimeData *mimeData = new QMimeData;
-        mimeData->setData("application/x-eepe-mix", qba);
+        mimeData->setData("application/x-companion9x-mix", qba);
 
         emit mimeDropped(index, mimeData, action);
     }

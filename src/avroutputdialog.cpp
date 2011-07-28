@@ -107,12 +107,12 @@ void avrOutputDialog::doFinished(int code=0)
     case (AVR_DIALOG_SHOW_DONE):
         if(code)
         {
-            QMessageBox::critical(this, "eePe", tr("AVRDUDE did not finish correctly"));
+            QMessageBox::critical(this, "companion9x", tr("AVRDUDE did not finish correctly"));
             reject();
         }
         else
         {
-            QMessageBox::information(this, "eePe", tr("AVRDUDE finished correctly"));
+            QMessageBox::information(this, "companion9x", tr("AVRDUDE finished correctly"));
             accept();
         }
         break;

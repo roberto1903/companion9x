@@ -611,8 +611,8 @@ p, li { white-space: pre-wrap; }
         <translation>Fichier chargé</translation>
     </message>
     <message>
-        <source>eePe - EEPROM Editor</source>
-        <translation>eePe - Éditeur d&apos;EEPROM</translation>
+        <source>companion9x - EEPROM Editor</source>
+        <translation>companion9x - Éditeur d&apos;EEPROM</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -655,8 +655,8 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Cascade</translation>
     </message>
     <message>
-        <source>List er9x/eePe Contributors</source>
-        <translation>Liste les contributeurs à er9x/eePe</translation>
+        <source>List er9x/companion9x Contributors</source>
+        <translation>Liste les contributeurs à er9x/companion9x</translation>
     </message>
     <message>
         <source>Simulate selected model.</source>
@@ -687,8 +687,8 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Préférences...</translation>
     </message>
     <message>
-        <source>About eePe</source>
-        <translation>À propos d&apos;eePe</translation>
+        <source>About companion9x</source>
+        <translation>À propos d&apos;companion9x</translation>
     </message>
     <message>
         <source>&amp;Fuses...</source>
@@ -763,8 +763,8 @@ p, li { white-space: pre-wrap; }
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur vers un fichier</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
+        <source>companion9x</source>
+        <translation type="obsolete">companion9x</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -803,8 +803,8 @@ p, li { white-space: pre-wrap; }
         <translation>Re&amp;chercher des mises à jour...</translation>
     </message>
     <message>
-        <source>Check for new version of eePe/er9x</source>
-        <translation>Vérifier l&apos;existence d&apos;un nouvelle version d&apos;eePe/er9x</translation>
+        <source>Check for new version of companion9x/er9x</source>
+        <translation>Vérifier l&apos;existence d&apos;un nouvelle version d&apos;companion9x/er9x</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -827,8 +827,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ignorer cette version (r%1)?</translation>
     </message>
     <message>
-        <source>A new version of eePe is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation>Une nouvelle version d&apos;eePe est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
+        <source>A new version of companion9x is available (r%1)&lt;br&gt;Would you like to download it?</source>
+        <translation>Une nouvelle version d&apos;companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
     </message>
     <message>
         <source>A new version of ER9x (%2) is available (r%1)&lt;br&gt;Would you like to download it?</source>
@@ -862,7 +862,7 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Couper</translation>
     </message>
     <message>
-        <source>eePe</source>
+        <source>companion9x</source>
         <translation></translation>
     </message>
     <message>
@@ -1880,7 +1880,7 @@ Droite</translation>
         <translation>Port</translation>
     </message>
     <message>
-        <source>eePe</source>
+        <source>companion9x</source>
         <translation></translation>
     </message>
     <message>
@@ -2007,8 +2007,8 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
         <translation>Impossible d&apos;enregistrer le fichier %1 : %2.</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation>eePe</translation>
+        <source>companion9x</source>
+        <translation>companion9x</translation>
     </message>
     <message>
         <source>Download failed: %1.</source>
@@ -2208,7 +2208,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <source>Language (requires restart)</source>
         <translatorcomment>Version française par Pascal Dugué / Octobre 2010.</translatorcomment>
-        <translation>Langue (nécessite un redémarrage d&apos;eePe)</translation>
+        <translation>Langue (nécessite un redémarrage d&apos;companion9x)</translation>
     </message>
     <message>
         <source>Default Channel Order</source>
@@ -2231,8 +2231,8 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation>er9x</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation>eePe</translation>
+        <source>companion9x</source>
+        <translation>companion9x</translation>
     </message>
     <message>
         <source>Check for updates on startup</source>

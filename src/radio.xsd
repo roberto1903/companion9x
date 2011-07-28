@@ -3,7 +3,7 @@
 
  <xs:annotation>
   <xs:documentation xml:lang="en">
-   Radio data schema for eepe.
+   Radio data schema for companion9x.
   </xs:documentation>
  </xs:annotation>
 

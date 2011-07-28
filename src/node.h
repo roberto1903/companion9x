@@ -39,53 +39,62 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
-#include <QTranslator>
-#include <QLocale>
-#include <QString>
-#include <QDir>
-#include <QFileInfo>
-#include <QSettings>
-#include <QSplashScreen>
-#include <QThread>
+#ifndef NODE_H
+#define NODE_H
 
-#include <iostream>
-#include "mainwindow.h"
+#include <QtGui>
 
+#define DEFAULT_BALL_SIZE 14
+#define BALL_HEIGHT 2
 
-int main(int argc, char *argv[])
+class Edge;
+QT_BEGIN_NAMESPACE
+class QGraphicsSceneMouseEvent;
+QT_END_NAMESPACE
+
+class Node : public QGraphicsItem
 {
-    Q_INIT_RESOURCE(companion9x);
-    QApplication app(argc, argv);
 
-    QString dir;
-    if(argc) dir = QFileInfo(argv[0]).canonicalPath() + "/lang";
+public:
+    Node(QSpinBox *sb = 0);
 
-    QSettings settings("er9x-eePe", "eePe");
-    QString locale = settings.value("locale",QLocale::system().name()).toString();
-    bool showSplash = settings.value("show_splash", true).toBool();
+    void addEdge(Edge *edge);
+    QList<Edge *> edges() const;
 
+    enum { Type = UserType + 1 };
+    int type() const { return Type; }
 
-    QPixmap pixmap(":/images/companion9x-title.png");
-    QSplashScreen *splash = new QSplashScreen(pixmap);
-    if(showSplash)
-    {
-        splash->show();
+    QRectF boundingRect() const;
+    QPainterPath shape() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void setBallSize(int size);
+    void stepToCenter(qreal step=10);
+    int  getBallSize() {return ballSize;}
+    qreal getX();
+    qreal getY();
 
-        bool checkER9X  = settings.value("startup_check_er9x", true).toBool();
-        bool checkEEPE  = settings.value("startup_check_companion9x", true).toBool();
+    void setCenteringX(bool val) {centerX = val;}
+    void setCenteringY(bool val) {centerY = val;}
+    void setFixedX(bool val) {fixedX = val;}
+    void setFixedY(bool val) {fixedY = val;}
 
-        if(checkEEPE || checkER9X)
-            splash->showMessage(QObject::tr("Checking for updates..."));
-    }
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    
+private:
 
-    QTranslator companion9xTranslator;
-    companion9xTranslator.load(":/companion9x_" + locale);
-    app.installTranslator(&companion9xTranslator);
+    bool bPressed;
+    bool centerX;
+    bool centerY;
+    bool fixedX;
+    bool fixedY;
+    int  ballSize;
+    QSpinBox *qsb;
+    QList<Edge *> edgeList;
+    QPointF newPos;
+};
 
-    MainWindow mainWin;
-    mainWin.show();
-    splash->finish(&mainWin);
-    return app.exec();
-}
+#endif

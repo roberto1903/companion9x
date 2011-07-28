@@ -36,7 +36,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
 
     setupMixerListWidget();
 
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("modelEditTab", 0).toInt());
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
@@ -128,7 +128,7 @@ void ModelEdit::updateSettings()
 
 void ModelEdit::on_tabWidget_currentChanged(int index)
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     settings.setValue("modelEditTab",index);//ui->tabWidget->currentIndex());
 }
 
@@ -1976,7 +1976,7 @@ void ModelEdit::mixersDelete(bool ask)
     QMessageBox::StandardButton ret = QMessageBox::No;
 
     if(ask)
-        ret = QMessageBox::warning(this, "eePe",
+        ret = QMessageBox::warning(this, "companion9x",
                  tr("Delete Selected Mixes?"),
                  QMessageBox::Yes | QMessageBox::No);
 
@@ -2004,7 +2004,7 @@ void ModelEdit::mixersCopy()
         mxData.append((char*)&g_model.mixData[idx],sizeof(MixData));
 
     QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-eepe-mix", mxData);
+    mimeData->setData("application/x-companion9x-mix", mxData);
 
     QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
 }
@@ -2018,7 +2018,7 @@ void ModelEdit::mimeDropped(int index, const QMimeData *data, Qt::DropAction act
 
 void ModelEdit::pasteMIMEData(const QMimeData * mimeData, int destIdx)
 {
-    if(mimeData->hasFormat("application/x-eepe-mix"))
+    if(mimeData->hasFormat("application/x-companion9x-mix"))
     {
         int idx = MixerlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
         if(destIdx!=1000)
@@ -2031,7 +2031,7 @@ void ModelEdit::pasteMIMEData(const QMimeData * mimeData, int destIdx)
         else
             dch = g_model.mixData[idx].destCh;
 
-        QByteArray mxData = mimeData->data("application/x-eepe-mix");
+        QByteArray mxData = mimeData->data("application/x-companion9x-mix");
 
         int i = 0;
         while(i<mxData.size())
@@ -2107,7 +2107,7 @@ void ModelEdit::mixerlistWidget_customContextMenuRequested(QPoint pos)
 
     const QClipboard *clipboard = QApplication::clipboard();
     const QMimeData *mimeData = clipboard->mimeData();
-    bool hasData = mimeData->hasFormat("application/x-eepe-mix");
+    bool hasData = mimeData->hasFormat("application/x-companion9x-mix");
 
     QMenu contextMenu;
     contextMenu.addAction(QIcon(":/images/add.png"), tr("&Add"),this,SLOT(mixerAdd()),tr("Ctrl+A"));

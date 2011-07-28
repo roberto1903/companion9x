@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="eepe.qrc">
+   <iconset resource="companion9x.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -34,7 +34,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="eepe.qrc"/>
+  <include location="companion9x.qrc"/>
  </resources>
  <connections/>
 </ui>

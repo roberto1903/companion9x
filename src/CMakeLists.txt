@@ -1,4 +1,4 @@
-PROJECT( eepe )
+PROJECT( companion9x )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -20,7 +20,7 @@ ADD_CUSTOM_COMMAND(
 
 INCLUDE_DIRECTORIES( ${xsdcxx_INC} )
 
-SET( eepe_SRCS
+SET( companion9x_SRCS
      eeprominterface.cpp
      hexinterface.cpp
      file.cpp
@@ -50,7 +50,7 @@ SET( eepe_SRCS
      main.cpp
 )
 
-SET( eepe_MOC_HDRS
+SET( companion9x_MOC_HDRS
      avroutputdialog.h
      preferencesdialog.h
      burnconfigdialog.h
@@ -67,7 +67,7 @@ SET( eepe_MOC_HDRS
      mainwindow.h
 )
      
-SET( eepe_UIS
+SET( companion9x_UIS
      avroutputdialog.ui
      donatorsdialog.ui
      fusesdialog.ui
@@ -81,16 +81,16 @@ SET( eepe_UIS
      printdialog.ui
 )
 
-SET( eepe_RCS
-     eepe.qrc
+SET( companion9x_RCS
+     companion9x.qrc
 )
 
-SET( eepe_TS
-     eepe_he.ts
-     eepe_pt.ts
-     eepe_ru.ts
-     eepe_de.ts
-     eepe_fr.ts
+SET( companion9x_TS
+     companion9x_he.ts
+     companion9x_pt.ts
+     companion9x_ru.ts
+     companion9x_de.ts
+     companion9x_fr.ts
 )
 
 FIND_PACKAGE( Qt4 REQUIRED )
@@ -98,13 +98,13 @@ SET( QT_USE_QTNETWORK True )
 INCLUDE( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
-QT4_WRAP_UI( eepe_SRCS ${eepe_UIS} )
-QT4_WRAP_CPP( eepe_SRCS ${eepe_MOC_HDRS} )
-QT4_ADD_TRANSLATION( eepe_QM ${eepe_TS} )
-QT4_ADD_RESOURCES( eepe_SRCS ${eepe_RCS} )
+QT4_WRAP_UI( companion9x_SRCS ${companion9x_UIS} )
+QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
+QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS} )
+QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
 
-ADD_EXECUTABLE( eepe ${eepe_SRCS} ${eepe_QM} )
-TARGET_LINK_LIBRARIES( eepe ${QT_LIBRARIES} )
-TARGET_LINK_LIBRARIES( eepe xerces-c )
+ADD_EXECUTABLE( companion9x ${companion9x_SRCS} ${companion9x_QM} )
+TARGET_LINK_LIBRARIES( companion9x ${QT_LIBRARIES} )
+TARGET_LINK_LIBRARIES( companion9x xerces-c )
  
-INSTALL( TARGETS eepe DESTINATION ${QT_BINARY_DIR} )
+INSTALL( TARGETS companion9x DESTINATION ${QT_BINARY_DIR} )

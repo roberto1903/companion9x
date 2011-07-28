@@ -14,7 +14,7 @@
    <string>Preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="eepe.qrc">
+   <iconset resource="companion9x.qrc">
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -48,9 +48,9 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QCheckBox" name="startupCheck_eepe">
+      <widget class="QCheckBox" name="startupCheck_companion9x">
        <property name="text">
-        <string>eePe</string>
+        <string>companion9x</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -345,7 +345,7 @@ Mode 4:
   </layout>
  </widget>
  <resources>
-  <include location="eepe.qrc"/>
+  <include location="companion9x.qrc"/>
  </resources>
  <connections>
   <connection>

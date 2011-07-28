@@ -50,9 +50,9 @@
 #include "preferencesdialog.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
-#include "stamp-eepe.h"
+#include "stamp-companion9x.h"
 
-#define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TGT92W338DPGN&lc=IL&item_name=Erez%20Raviv&item_number=eePe&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
+#define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TGT92W338DPGN&lc=IL&item_name=Erez%20Raviv&item_number=companion9x&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
 
 #define ER9X_URL   "http://er9x.googlecode.com/svn/trunk/er9x.hex"
 #define ER9X_JETI_URL   "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"
@@ -60,8 +60,8 @@
 #define ER9X_ARDUPILOT_URL   "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex"
 #define ER9X_STAMP "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"
 
-#define EEPE_URL   "http://eepe.googlecode.com/svn/trunk/eePeInstall.exe"
-#define EEPE_STAMP "http://eepe.googlecode.com/svn/trunk/src/stamp-eepe.h"
+#define EEPE_URL   "http://companion9x.googlecode.com/svn/trunk/companion9xInstall.exe"
+#define EEPE_STAMP "http://companion9x.googlecode.com/svn/trunk/src/stamp-companion9x.h"
 
 MainWindow::MainWindow()
 {
@@ -83,7 +83,7 @@ MainWindow::MainWindow()
 
     readSettings();
 
-    setWindowTitle(tr("eePe - EEPROM Editor"));
+    setWindowTitle(tr("companion9x - EEPROM Editor"));
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
 
@@ -127,7 +127,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
 
     if(checkER9X || ignoreSettings)
     {
-        QSettings settings("er9x-eePe", "eePe");
+        QSettings settings("er9x-companion9x", "companion9x");
         if (settings.value("download-version", 0).toInt() != DNLD_VER_GRUVIN9X) {
           manager1 = new QNetworkAccessManager(this);
           connect(manager1, SIGNAL(finished(QNetworkReply*)),this, SLOT(reply1Finished(QNetworkReply*)));
@@ -171,13 +171,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 
         if(!cres)
         {
-            QMessageBox::warning(this, "eePe", tr("Unable to check for updates."));
+            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
             return;
         }
 
         if(rev>currentER9Xrev)
         {
-            QSettings settings("er9x-eePe", "eePe");
+            QSettings settings("er9x-companion9x", "companion9x");
 
             QString dnldURL, baseFileName;
             switch (settings.value("download-version", 0).toInt())
@@ -203,7 +203,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             }
 
             showcheckForUpdatesResult = false; // update is available - do not show dialog
-            int ret = QMessageBox::question(this, "eePe",tr("A new version of ER9x (%2) is available (r%1)<br>"
+            int ret = QMessageBox::question(this, "companion9x",tr("A new version of ER9x (%2) is available (r%1)<br>"
                                                                 "Would you like to download it?").arg(rev).arg(baseFileName) ,
                                             QMessageBox::Yes | QMessageBox::No);
 
@@ -221,7 +221,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 
             if(ret == QMessageBox::No)
             {
-                int res = QMessageBox::question(this, "eePe",tr("Ignore this version (r%1)?").arg(rev) ,
+                int res = QMessageBox::question(this, "companion9x",tr("Ignore this version (r%1)?").arg(rev) ,
                                                 QMessageBox::Yes | QMessageBox::No);
                 if(res == QMessageBox::Yes)
                 {
@@ -233,13 +233,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         else
         {
             if(showcheckForUpdatesResult && check1done && check2done)
-                QMessageBox::information(this, "eePe", tr("No updates available at this time."));
+                QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
         }
     }
     else
     {
         if(check1done && check2done)
-            QMessageBox::warning(this, "eePe", tr("Unable to check for updates."));
+            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
     }
 }
 
@@ -259,22 +259,22 @@ void MainWindow::reply2Finished(QNetworkReply * reply)
 
         if(!cres)
         {
-            QMessageBox::warning(this, "eePe", tr("Unable to check for updates."));
+            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
             return;
         }
 
         if(rev>currentEEPErev)
         {
             showcheckForUpdatesResult = false; // update is available - do not show dialog
-            int ret = QMessageBox::question(this, "eePe", tr("A new version of eePe is available (r%1)<br>"
+            int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (r%1)<br>"
                                                                 "Would you like to download it?").arg(rev) ,
                                             QMessageBox::Yes | QMessageBox::No);
 
-            QSettings settings("er9x-eePe", "eePe");
+            QSettings settings("er9x-companion9x", "companion9x");
 
             if (ret == QMessageBox::Yes)
             {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/eePeInstall.exe",tr("Executable (*.exe)"));
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/companion9xInstall.exe",tr("Executable (*.exe)"));
                 if (fileName.isEmpty()) return;
 //                settings.setValue("lastDir",QFileInfo(fileName)s.dir().absolutePath());
 
@@ -287,26 +287,26 @@ void MainWindow::reply2Finished(QNetworkReply * reply)
         else
         {
             if(showcheckForUpdatesResult && check1done && check2done)
-                QMessageBox::information(this, "eePe", tr("No updates available at this time."));
+                QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
         }
     }
     else
     {
         if(check1done && check2done)
-            QMessageBox::warning(this, "eePe", tr("Unable to check for updates."));
+            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
     }
 }
 
 void MainWindow::reply1Accepted()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     currentER9Xrev = currentER9Xrev_temp;
     settings.setValue("currentER9Xrev", currentER9Xrev);
 }
 
 void MainWindow::reply2Accepted()
 {
-    int ret2 = QMessageBox::question(this, "eePe",tr("Would you like to launch the installer?") ,
+    int ret2 = QMessageBox::question(this, "companion9x",tr("Would you like to launch the installer?") ,
                                      QMessageBox::Yes | QMessageBox::No);
     if (ret2 == QMessageBox::Yes)
     {
@@ -338,7 +338,7 @@ void MainWindow::newFile()
 
 void MainWindow::open()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open"),settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -454,13 +454,13 @@ void MainWindow::burnFrom()
 
 void MainWindow::burnExtenalToEEPROM()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
         settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
 
-        int ret = QMessageBox::question(this, "eePe", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+        int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
 
         burnConfigDialog bcd;
@@ -485,7 +485,7 @@ void MainWindow::burnExtenalToEEPROM()
 
 void MainWindow::burnToFlash(QString fileToFlash)
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     QString fileName;
     if(fileToFlash.isEmpty())
         fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to flash memory"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
@@ -496,7 +496,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
     {
         settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
 
-        int ret = QMessageBox::question(this, "eePe", tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+        int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
 
         burnConfigDialog bcd;
@@ -522,7 +522,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
 
 void MainWindow::burnExtenalFromEEPROM()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     QString fileName = QFileDialog::getSaveFileName(this,tr("Read EEPROM memory to File"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -552,7 +552,7 @@ void MainWindow::burnExtenalFromEEPROM()
 
 void MainWindow::burnFromFlash()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     QString fileName = QFileDialog::getSaveFileName(this,tr("Read Flash to File"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -617,14 +617,14 @@ void MainWindow::showEr9xManual()
 
 void MainWindow::about()
 {
-    QString aboutStr = "<center><img src=\":/images/eepe-title.png\"><br>";
+    QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
     aboutStr.append(tr("Copyright") +" Erez Raviv &copy;2010<br>");
-    aboutStr.append(QString("<a href='http://code.google.com/p/eepe/'>http://code.google.com/p/eepe/</a><br>Revision: %1, %2<br><br>").arg(currentEEPErev).arg(__DATE__));
+    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br><br>").arg(currentEEPErev).arg(__DATE__));
     aboutStr.append(tr("If you've found this program and/or the er9x firmware useful please support by"));
     aboutStr.append(" <a href='" DONATE_STR "'>");
     aboutStr.append(tr("donating") + "</a></center>");
 
-    QMessageBox::about(this, tr("About eePe"),aboutStr);
+    QMessageBox::about(this, tr("About companion9x"),aboutStr);
 }
 
 void MainWindow::updateMenus()
@@ -723,7 +723,7 @@ void MainWindow::createActions()
     connect(preferencesAct, SIGNAL(triggered()), this, SLOT(preferences()));
 
     checkForUpdatesAct = new QAction(QIcon(":/images/update.png"), tr("&Check for updates..."), this);
-    checkForUpdatesAct->setStatusTip(tr("Check for new version of eePe/er9x"));
+    checkForUpdatesAct->setStatusTip(tr("Check for new version of companion9x/er9x"));
     connect(checkForUpdatesAct, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
 
 //! [0]
@@ -841,7 +841,7 @@ void MainWindow::createActions()
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 
     donatorsAct = new QAction(QIcon(":/images/contributors.png"), tr("&Contributors"), this);
-    donatorsAct->setStatusTip(tr("List er9x/eePe Contributors"));
+    donatorsAct->setStatusTip(tr("List er9x/companion9x Contributors"));
     connect(donatorsAct, SIGNAL(triggered()), this, SLOT(donators()));
 
     switchLayoutDirectionAct = new QAction(QIcon(":/images/switch_dir.png"),  tr("Switch layout direction"), this);
@@ -944,7 +944,7 @@ void MainWindow::createStatusBar()
 
 void MainWindow::readSettings()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
     bool maximized = settings.value("maximized", false).toBool();
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     QSize size = settings.value("size", QSize(400, 400)).toSize();
@@ -953,7 +953,7 @@ void MainWindow::readSettings()
     currentEEPErev = SVN_VER_NUM;
 
     checkER9X  = settings.value("startup_check_er9x", true).toBool();
-    checkEEPE  = settings.value("startup_check_eepe", true).toBool();
+    checkEEPE  = settings.value("startup_check_companion9x", true).toBool();
 
     if(maximized)
     {
@@ -968,7 +968,7 @@ void MainWindow::readSettings()
 
 void MainWindow::writeSettings()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("er9x-companion9x", "companion9x");
 
     settings.setValue("maximized", isMaximized());
     if(!isMaximized())
