@@ -52,7 +52,7 @@
 #include "downloaddialog.h"
 #include "stamp-companion9x.h"
 
-#define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TGT92W338DPGN&lc=IL&item_name=Erez%20Raviv&item_number=companion9x&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
+#define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
 #define ER9X_URL   "http://er9x.googlecode.com/svn/trunk/er9x.hex"
 #define ER9X_JETI_URL   "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"
@@ -263,7 +263,7 @@ void MainWindow::reply2Finished(QNetworkReply * reply)
             return;
         }
 
-        if(rev>currentEEPErev)
+        if(rev>currentCompanion9xRev)
         {
             showcheckForUpdatesResult = false; // update is available - do not show dialog
             int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (r%1)<br>"
@@ -604,23 +604,12 @@ void MainWindow::donators()
     dd->exec();
 }
 
-void MainWindow::showEr9xManual()
-{
-//    ER9x Users Guide.pdf
-    QString cdir = QApplication::applicationDirPath();
-#ifdef Q_WS_WIN
-    QDesktopServices::openUrl(QUrl::fromLocalFile(cdir + "/ER9x Users Guide.pdf")); // WIN
-#else
-    QDesktopServices::openUrl(QUrl("file:///" + cdir + "/ER9x Users Guide.pdf"));   // MAC & Linux (X11)
-#endif
-}
-
 void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
-    aboutStr.append(tr("Copyright") +" Erez Raviv &copy;2010<br>");
-    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br><br>").arg(currentEEPErev).arg(__DATE__));
-    aboutStr.append(tr("If you've found this program and/or the er9x firmware useful please support by"));
+    aboutStr.append(tr("Copyright") +" Bertrand Songis &copy; 2011<br>");
+    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br><br>").arg(currentCompanion9xRev).arg(__DATE__));
+    aboutStr.append(tr("If you've found this program please support by"));
     aboutStr.append(" <a href='" DONATE_STR "'>");
     aboutStr.append(tr("donating") + "</a></center>");
 
@@ -848,9 +837,6 @@ void MainWindow::createActions()
     switchLayoutDirectionAct->setStatusTip(tr("Switch layout Left/Right"));
     connect(switchLayoutDirectionAct, SIGNAL(triggered()), this, SLOT(switchLayoutDirection()));
 
-    showEr9xManualAct = new QAction(QIcon(":/images/er9x_manual.png"), tr("&ER9x Users Guide"), this);
-    showEr9xManualAct->setStatusTip(tr("Show ER9x Users Guide"));
-    connect(showEr9xManualAct, SIGNAL(triggered()), this, SLOT(showEr9xManual()));
 }
 
 void MainWindow::createMenus()
@@ -895,7 +881,6 @@ void MainWindow::createMenus()
     menuBar()->addSeparator();
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
-    helpMenu->addAction(showEr9xManualAct);
     helpMenu->addSeparator();
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(donatorsAct);
@@ -931,7 +916,6 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
-    helpToolBar->addAction(showEr9xManualAct);
     helpToolBar->addAction(aboutAct);
     helpToolBar->addAction(donatorsAct);
     helpToolBar->addAction(checkForUpdatesAct);
@@ -950,7 +934,7 @@ void MainWindow::readSettings()
     QSize size = settings.value("size", QSize(400, 400)).toSize();
 
     currentER9Xrev = settings.value("currentER9Xrev", 1).toInt();
-    currentEEPErev = SVN_VER_NUM;
+    currentCompanion9xRev = SVN_VER_NUM;
 
     checkER9X  = settings.value("startup_check_er9x", true).toBool();
     checkEEPE  = settings.value("startup_check_companion9x", true).toBool();

@@ -95,7 +95,6 @@ private slots:
     void print();
     void preferences();
     void donators();
-    void showEr9xManual();
     void updateMenus();
     void updateWindowMenu();
     MdiChild *createMdiChild();
@@ -120,7 +119,7 @@ private:
 
     int currentER9Xrev;
     int currentER9Xrev_temp;
-    int currentEEPErev;
+    int currentCompanion9xRev;
     bool checkER9X;
     bool checkEEPE;
     bool showcheckForUpdatesResult;
@@ -170,7 +169,6 @@ private:
     QAction *donatorsAct;
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
-    QAction *showEr9xManualAct;
     //QAction *aboutQtAct;
 };
 
