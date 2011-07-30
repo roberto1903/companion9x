@@ -73,8 +73,13 @@ private:
     void centerSticks();
     void timerTick();
 
+    int applyCurve(int16_t x, uint8_t idx, uint8_t srcRaw);
+    void applyExpos(int16_t *anas);
+
     bool keyState(EnumKeys key);
-    qint16 getValue(qint8 i);
+    int getValue(qint8 i);
+    unsigned int getFlightPhase();
+    unsigned int getTrimFlightPhase(uint8_t idx, int8_t phase=-1);
     bool getSwitch(int swtch, bool nc, qint8 level=0);
     void beepWarn();
     void beepWarn1();

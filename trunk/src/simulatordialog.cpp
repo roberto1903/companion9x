@@ -89,8 +89,8 @@ void simulatorDialog::onTimerEvent()
         setWindowTitle(modelName + QString(" - Timer: (%3, %4) %1:%2")
                        .arg(abs(-s_timerVal)/60, 2, 10, QChar('0'))
                        .arg(abs(-s_timerVal)%60, 2, 10, QChar('0'))
-                       .arg(getTimerMode(g_model.tmrMode))
-                       .arg(g_model.tmrDir ? "Count Up" : "Count Down"));
+                       .arg(getTimerMode(g_model.timers[0].mode)) // TODO why timers[0]
+                       .arg(g_model.timers[0].dir ? "Count Up" : "Count Down"));
 
     if(beepVal)
     {
@@ -132,10 +132,10 @@ void simulatorDialog::loadParams(const GeneralSettings &gg, const ModelData &gm)
     }
 
 
-    ui->trimHLeft->setValue(g_model.trim[0]);
-    ui->trimVLeft->setValue(g_model.trim[1]);
-    ui->trimVRight->setValue(g_model.trim[2]);
-    ui->trimHRight->setValue(g_model.trim[3]);
+    ui->trimHLeft->setValue(g_model.phaseData[0].trim[0]);
+    ui->trimVLeft->setValue(g_model.phaseData[0].trim[1]);
+    ui->trimVRight->setValue(g_model.phaseData[0].trim[2]);
+    ui->trimHRight->setValue(g_model.phaseData[0].trim[3]);
 
     beepVal = 0;
     beepShow = 0;
@@ -354,12 +354,38 @@ bool simulatorDialog::keyState(EnumKeys key)
     }
 }
 
-qint16 simulatorDialog::getValue(qint8 i)
+int simulatorDialog::getValue(qint8 i)
 {
-    if(i<PPM_BASE) return calibratedStick[i];//-512..512
-    else if(i<CHOUT_BASE) return g_ppmIns[i-PPM_BASE] - g_eeGeneral.ppmInCalib[i-PPM_BASE];
-    else return ex_chans[i-CHOUT_BASE];
-    return 0;
+  if(i<NUM_STICKS+NUM_POTS) return calibratedStick[i];//-512..512
+  else if(i<MIX_FULL/*srcRaw is shifted +1!*/) return 1024; //FULL/MAX
+  else if(i<PPM_BASE+NUM_CAL_PPM) return (g_ppmIns[i-PPM_BASE] - g_eeGeneral.trainer.calib[i-PPM_BASE])*2;
+  else if(i<PPM_BASE+NUM_PPM) return g_ppmIns[i-PPM_BASE]*2;
+  else if(i<CHOUT_BASE+NUM_CHNOUT) return ex_chans[i-CHOUT_BASE];
+// TODO   else if(i<CHOUT_BASE+NUM_CHNOUT+NUM_TELEMETRY) return frskyTelemetry[i-CHOUT_BASE-NUM_CHNOUT].value;
+  else return 0;
+}
+
+unsigned int simulatorDialog::getFlightPhase()
+{
+  for (uint8_t i=1; i<MAX_PHASES; i++) {
+    PhaseData *phase = &g_model.phaseData[i];
+    if (phase->swtch && getSwitch(phase->swtch, 0)) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+unsigned int simulatorDialog::getTrimFlightPhase(uint8_t idx, int8_t phase)
+{
+  if (phase == -1) phase = getFlightPhase();
+  if (phase == 0) return phase;
+  int8_t trim = g_model.phaseData[phase].trim[idx];
+  if (trim > 125) return 0;
+  if (trim >= -125) return phase;
+  uint8_t result = 129 + trim;
+  if (result == phase) result++;
+  return result;
 }
 
 bool simulatorDialog::getSwitch(int swtch, bool nc, qint8 level)
@@ -383,7 +409,7 @@ bool simulatorDialog::getSwitch(int swtch, bool nc, qint8 level)
      //input -> 1..4 -> sticks,  5..8 pots
      //MAX,FULL - disregard
      //ppm
-     CSwData &cs = g_model.customSw[abs(swtch)-(MAX_DRSWITCH-NUM_CSW)];
+     CustomSwData &cs = g_model.customSw[abs(swtch)-(MAX_DRSWITCH-NUM_CSW)];
      if(!cs.func) return false;
 
 
@@ -526,91 +552,173 @@ int16_t simulatorDialog::intpol(int16_t x, uint8_t idx) // -100, -75, -50, -25, 
 void simulatorDialog::timerTick()
 {
     int16_t val = 0;
-    if((abs(g_model.tmrMode)>1) && (abs(g_model.tmrMode)<TMR_VAROFS)) {
-      val = calibratedStick[CONVERT_MODE(abs(g_model.tmrMode)/2)-1];
-      val = (g_model.tmrMode<0 ? RESX-val : val+RESX ) / (RESX/16);  // only used for %
+  if ((abs(g_model.timers[0].mode) > 1) && (abs(g_model.timers[0].mode)
+      < TMR_VAROFS)) {
+    val = calibratedStick[CONVERT_MODE(abs(g_model.timers[0].mode)/2) - 1];
+    val = (g_model.timers[0].mode < 0 ? RESX - val : val + RESX) / (RESX / 16); // only used for %
+  }
+
+  int8_t tm = g_model.timers[0].mode;
+
+  if (abs(tm) >= (TMR_VAROFS + MAX_DRSWITCH - 1)) { //toggeled switch//abs(g_model.timers[0].mode)<(10+MAX_DRSWITCH-1)
+    static uint8_t lastSwPos;
+    if (!(sw_toggled | s_sum | s_cnt | s_time | lastSwPos)) lastSwPos = tm < 0; // if initializing then init the lastSwPos
+    uint8_t swPos = getSwitch(tm > 0 ? tm - (TMR_VAROFS + MAX_DRSWITCH - 1 - 1)
+        : tm + (TMR_VAROFS + MAX_DRSWITCH - 1 - 1), 0);
+    if (swPos && !lastSwPos) sw_toggled = !sw_toggled; //if switcdh is flipped first time -> change counter state
+    lastSwPos = swPos;
+  }
+
+  s_time++;
+  if (s_time < 100) return; //1 sec
+  s_time = 0;
+
+  if (abs(tm) < TMR_VAROFS)
+    sw_toggled = false; // not switch - sw timer off
+  else if (abs(tm) < (TMR_VAROFS + MAX_DRSWITCH - 1)) sw_toggled = getSwitch(
+      (tm > 0 ? tm - (TMR_VAROFS - 1) : tm + (TMR_VAROFS - 1)), 0); //normal switch
+
+  s_timeCumTot += 1;
+  s_timeCumAbs += 1;
+  if (val) s_timeCumThr += 1;
+  if (sw_toggled) s_timeCumSw += 1;
+  s_timeCum16ThrP += val / 2;
+
+  s_timerVal = g_model.timers[0].val;
+  uint8_t tmrM = abs(g_model.timers[0].mode);
+  if (tmrM == TMRMODE_NONE)
+    s_timerState = TMR_OFF;
+  else if (tmrM == TMRMODE_ABS)
+    s_timerVal -= s_timeCumAbs;
+  else if (tmrM < TMR_VAROFS)
+    s_timerVal -= (tmrM & 1) ? s_timeCum16ThrP / 16 : s_timeCumThr;// stick% : stick
+  else
+    s_timerVal -= s_timeCumSw; //switch
+
+  switch (s_timerState) {
+  case TMR_OFF:
+    if (g_model.timers[0].mode != TMRMODE_NONE) s_timerState = TMR_RUNNING;
+    break;
+  case TMR_RUNNING:
+    if (s_timerVal <= 0 && g_model.timers[0].val) s_timerState = TMR_BEEPING;
+    break;
+  case TMR_BEEPING:
+    if (s_timerVal <= -MAX_ALERT_TIME) s_timerState = TMR_STOPPED;
+    if (g_model.timers[0].val == 0) s_timerState = TMR_RUNNING;
+    break;
+  case TMR_STOPPED:
+    break;
+  }
+
+  static int16_t last_tmr;
+
+  if (last_tmr != s_timerVal) //beep only if seconds advance
+  {
+    if (s_timerState == TMR_RUNNING) {
+      if (g_eeGeneral.preBeep && g_model.timers[0].val) // beep when 30, 15, 10, 5,4,3,2,1 seconds remaining
+      {
+        if (s_timerVal == 30) {
+          beepAgain = 2;
+          beepWarn2();
+        } //beep three times
+        if (s_timerVal == 20) {
+          beepAgain = 1;
+          beepWarn2();
+        } //beep two times
+        if (s_timerVal == 10) beepWarn2();
+        if (s_timerVal <= 3) beepWarn2();
+
+        if (g_eeGeneral.flashBeep && (s_timerVal == 30 || s_timerVal == 20
+            || s_timerVal == 10 || s_timerVal <= 3)) g_LightOffCounter
+            = FLASH_DURATION;
+      }
+
+      if (g_eeGeneral.minuteBeep && (((g_model.timers[0].dir ? g_model.timers[0].val
+          - s_timerVal : s_timerVal) % 60) == 0)) //short beep every minute
+      {
+        beepWarn2();
+        if (g_eeGeneral.flashBeep) g_LightOffCounter = FLASH_DURATION;
+      }
     }
+    else if (s_timerState == TMR_BEEPING) {
+      beepWarn();
+      if (g_eeGeneral.flashBeep) g_LightOffCounter = FLASH_DURATION;
+    }
+  }
+  last_tmr = s_timerVal;
+  if (g_model.timers[0].dir) s_timerVal = g_model.timers[0].val - s_timerVal; //if counting backwards - display backwards
+}
 
-      int8_t tm = g_model.tmrMode;
+int simulatorDialog::applyCurve(int16_t x, uint8_t idx, uint8_t srcRaw)
+{
+  switch(idx) {
+  case 0:
+    return x;
+  case 1:
+    if (srcRaw == MIX_FULL) { //FULL
+      if (x<0 ) x=-RESX;   //x|x>0
+      else x=-RESX+2*x;
+    }
+    else {
+      if (x<0) x=0;   //x|x>0
+    }
+    return x;
+  case 2:
+    if (srcRaw == MIX_FULL) { //FULL
+      if (x>0) x=RESX;   //x|x<0
+      else x=RESX+2*x;
+    }
+    else {
+      if (x>0) x=0;   //x|x<0
+    }
+    return x;
+  case 3:       // x|abs(x)
+    return abs(x);
+  case 4:       //f|f>0
+    return x>0 ? RESX : 0;
+  case 5:       //f|f<0
+    return x<0 ? -RESX : 0;
+  case 6:       //f|abs(f)
+    return x>0 ? RESX : -RESX;
+  }
+  return intpol(x, idx-7);
+}
 
-      if(abs(tm)>=(TMR_VAROFS+MAX_DRSWITCH-1)){ //toggeled switch//abs(g_model.tmrMode)<(10+MAX_DRSWITCH-1)
-        static uint8_t lastSwPos;
-        if(!(sw_toggled | s_sum | s_cnt | s_time | lastSwPos)) lastSwPos = tm < 0;  // if initializing then init the lastSwPos
-        uint8_t swPos = getSwitch(tm>0 ? tm-(TMR_VAROFS+MAX_DRSWITCH-1-1) : tm+(TMR_VAROFS+MAX_DRSWITCH-1-1) ,0);
-        if(swPos && !lastSwPos)  sw_toggled = !sw_toggled;  //if switcdh is flipped first time -> change counter state
-        lastSwPos = swPos;
+void simulatorDialog::applyExpos(int16_t *anas)
+{
+  static int16_t anas2[4]; // values before expo, to ensure same expo base when multiple expo lines are used
+  memcpy(anas2, anas, sizeof(anas2));
+
+  uint8_t phase = getFlightPhase();
+
+  for (uint8_t i=0; i<MAX_EXPOS; i++) {
+    ExpoData &ed = g_model.expoData[i];
+    if (ed.mode==0) break; // end of list
+    if (ed.phase != 0) {
+      if (ed.phase < 0) {
+        if (phase+1 == -ed.phase)
+          continue;
       }
-
-      s_time++;
-      if(s_time<100) return; //1 sec
-      s_time = 0;
-
-      if(abs(tm)<TMR_VAROFS) sw_toggled = false; // not switch - sw timer off
-      else if(abs(tm)<(TMR_VAROFS+MAX_DRSWITCH-1)) sw_toggled = getSwitch((tm>0 ? tm-(TMR_VAROFS-1) : tm+(TMR_VAROFS-1)) ,0); //normal switch
-
-      s_timeCumTot               += 1;
-      s_timeCumAbs               += 1;
-      if(val) s_timeCumThr       += 1;
-      if(sw_toggled) s_timeCumSw += 1;
-      s_timeCum16ThrP            += val/2;
-
-      s_timerVal = g_model.tmrVal;
-      uint8_t tmrM = abs(g_model.tmrMode);
-      if(tmrM==TMRMODE_NONE) s_timerState = TMR_OFF;
-      else if(tmrM==TMRMODE_ABS) s_timerVal -= s_timeCumAbs;
-      else if(tmrM<TMR_VAROFS) s_timerVal -= (tmrM&1) ? s_timeCum16ThrP/16 : s_timeCumThr;// stick% : stick
-      else s_timerVal -= s_timeCumSw; //switch
-
-      switch(s_timerState)
-      {
-        case TMR_OFF:
-          if(g_model.tmrMode != TMRMODE_NONE) s_timerState=TMR_RUNNING;
-          break;
-        case TMR_RUNNING:
-          if(s_timerVal<=0 && g_model.tmrVal) s_timerState=TMR_BEEPING;
-          break;
-        case TMR_BEEPING:
-          if(s_timerVal <= -MAX_ALERT_TIME)   s_timerState=TMR_STOPPED;
-          if(g_model.tmrVal == 0)             s_timerState=TMR_RUNNING;
-          break;
-        case TMR_STOPPED:
-          break;
+      else {
+        if (phase+1 != ed.phase)
+          continue;
       }
-
-      static int16_t last_tmr;
-
-      if(last_tmr != s_timerVal)  //beep only if seconds advance
-      {
-          if(s_timerState==TMR_RUNNING)
-          {
-              if(g_eeGeneral.preBeep && g_model.tmrVal) // beep when 30, 15, 10, 5,4,3,2,1 seconds remaining
-              {
-                  if(s_timerVal==30) {beepAgain=2; beepWarn2();} //beep three times
-                  if(s_timerVal==20) {beepAgain=1; beepWarn2();} //beep two times
-                  if(s_timerVal==10)  beepWarn2();
-                  if(s_timerVal<= 3)  beepWarn2();
-
-                  if(g_eeGeneral.flashBeep && (s_timerVal==30 || s_timerVal==20 || s_timerVal==10 || s_timerVal<=3))
-                      g_LightOffCounter = FLASH_DURATION;
-              }
-
-              if(g_eeGeneral.minuteBeep && (((g_model.tmrDir ? g_model.tmrVal-s_timerVal : s_timerVal)%60)==0)) //short beep every minute
-              {
-                  beepWarn2();
-                  if(g_eeGeneral.flashBeep) g_LightOffCounter = FLASH_DURATION;
-              }
-          }
-          else if(s_timerState==TMR_BEEPING)
-          {
-              beepWarn();
-              if(g_eeGeneral.flashBeep) g_LightOffCounter = FLASH_DURATION;
-          }
+    }
+    if (getSwitch(ed.swtch, 1)) {
+      int16_t v = anas2[ed.chn];
+      if((v<0 && ed.mode&1) || (v>=0 && ed.mode&2)) {
+        int16_t k = ed.expo;
+        if (IS_THROTTLE(i) && g_model.thrExpo)
+          v = 2*expo((v+RESX)/2, k);
+        else
+          v = expo(v, k);
+        if (ed.curve) v = applyCurve(v, ed.curve, 0);
+        v = ((int32_t)v * ed.weight) / 100;
+        if (IS_THROTTLE(i) && g_model.thrExpo) v -= RESX;
+        anas[ed.chn] = v;
       }
-      last_tmr = s_timerVal;
-      if(g_model.tmrDir) s_timerVal = g_model.tmrVal-s_timerVal; //if counting backwards - display backwards
-
-
-
+    }
+  }
 }
 
 void simulatorDialog::perOut(bool init)
@@ -620,11 +728,11 @@ void simulatorDialog::perOut(bool init)
   uint16_t d = 0;
 
   //===========Swash Ring================
-  if(g_model.swashRingValue)
+  if(g_model.swashRingData.value)
   {
       uint32_t v = (calibratedStick[ELE_STICK]*calibratedStick[ELE_STICK] +
                     calibratedStick[AIL_STICK]*calibratedStick[AIL_STICK]);
-      uint32_t q = RESX*g_model.swashRingValue/100;
+      uint32_t q = RESX*g_model.swashRingData.value/100;
       q *= q;
       if(v>q)
           d = isqrt32(v);
@@ -649,33 +757,27 @@ void simulatorDialog::perOut(bool init)
 
     //===========Swash Ring================
     if(d && (i==ELE_STICK || i==AIL_STICK))
-        v = (int32_t)v*g_model.swashRingValue*RESX/(d*100);
+        v = (int32_t)v*g_model.swashRingData.value*RESX/(d*100);
     //===========Swash Ring================
 
+    anas[i] = v;
+  }
 
-    if(i<4) { //only do this for sticks
-      uint8_t expoDrOn = GET_DR_STATE(i);
-      uint8_t stkDir = v>0 ? DR_RIGHT : DR_LEFT;
+  /* EXPOs */
+  applyExpos(anas);
 
-      if(IS_THROTTLE(i) && g_model.thrExpo){
-        v  = 2*expo((v+RESX)/2,g_model.expoData[i].expo[expoDrOn][DR_EXPO][DR_RIGHT]);
-        stkDir = DR_RIGHT;
-      }
-      else
-        v  = expo(v,g_model.expoData[i].expo[expoDrOn][DR_EXPO][stkDir]);
-
-      int32_t x = (int32_t)v * (g_model.expoData[i].expo[expoDrOn][DR_WEIGHT][stkDir]+100)/100;
-      v = (int16_t)x;
-      if (IS_THROTTLE(i) && g_model.thrExpo) v -= RESX;
-
-      //do trim -> throttle trim if applicable
+  /* TRIMs */
+  for(uint8_t i=0; i<4; i++) {
+      // do trim -> throttle trim if applicable
+      int16_t v = anas[i];
       int32_t vv = 2*RESX;
-      if(IS_THROTTLE(i) && g_model.thrTrim) vv = ((int32_t)trim[i]+125)*(RESX-v)/(2*RESX);
+      int8_t trim = g_model.phaseData[getTrimFlightPhase(i)].trim[i];
+      if(IS_THROTTLE(i) && g_model.thrTrim) vv = (g_eeGeneral.throttleReversed) ?
+                                 ((int32_t)trim-125)*(RESX+v)/(2*RESX) :
+                                 ((int32_t)trim+125)*(RESX-v)/(2*RESX);
 
       //trim
-      trimA[i] = (vv==2*RESX) ? trim[i]*2 : (int16_t)vv*2; //    if throttle trim -> trim low end
-    }
-    anas[i] = v; //set values for mixer
+      trimA[i] = (vv==2*RESX) ? (int16_t)trim*2 : (int16_t)vv*2; //    if throttle trim -> trim low end
   }
 
   //===========BEEP CENTER================
@@ -687,10 +789,10 @@ void simulatorDialog::perOut(bool init)
   calibratedStick[MIX_MAX-1]=calibratedStick[MIX_FULL-1]=1024;
   anas[MIX_MAX-1]  = RESX;     // MAX
   anas[MIX_FULL-1] = RESX;     // FULL
-  for(uint8_t i=0;i<NUM_PPM;i++)    anas[i+PPM_BASE]   = g_ppmIns[i] - g_eeGeneral.ppmInCalib[i]; //add ppm channels
+// TODO  for(uint8_t i=0;i<NUM_PPM;i++)    anas[i+PPM_BASE]   = g_ppmIns[i] - g_eeGeneral.ppmInCalib[i]; //add ppm channels
   for(uint8_t i=0;i<NUM_CHNOUT;i++) anas[i+CHOUT_BASE] = chans[i]; //other mixes previous outputs
 
-
+#if 0 // TODO
   //===========Swash Mix================
 #define REZ_SWASH_X(x)  ((x) - (x)/8 - (x)/128 - (x)/512)   //  1024*sin(60) ~= 886
 #define REZ_SWASH_Y(x)  ((x))   //  1024 => 1024
@@ -745,6 +847,7 @@ void simulatorDialog::perOut(bool init)
       calibratedStick[MIX_CYC2-1]=anas[MIX_CYC2-1];
       calibratedStick[MIX_CYC3-1]=anas[MIX_CYC3-1];
   }
+#endif
 
   memset(chans,0,sizeof(chans));        // All outputs to 0
 

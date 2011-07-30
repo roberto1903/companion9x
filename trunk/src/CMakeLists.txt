@@ -28,8 +28,8 @@ SET( companion9x_SRCS
      ${PROJECT_BINARY_DIR}/radio.cxx
      er9xeeprom.cpp
      er9xinterface.cpp
-     #gruvin9xeeprom.cpp
-     #gruvin9xinterface.cpp  
+     gruvin9xeeprom.cpp
+     gruvin9xinterface.cpp  
      node.cpp
      edge.cpp
      helpers.cpp 
