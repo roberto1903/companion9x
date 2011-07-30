@@ -57,6 +57,27 @@
 #define WARN_MEM     (!(g_eeGeneral.warnOpts & WARN_MEM_BIT))
 #define BEEP_VAL     ( (g_eeGeneral.warnOpts & WARN_BVAL_BIT) >>3 )
 
+typedef struct t_Er9xTrainerMix {
+  uint8_t srcChn:3; //0-7 = ch1-8
+  int8_t  swtch:5;
+  int8_t  studWeight:6;
+  uint8_t mode:2;   //off,add-mode,subst-mode
+
+  operator TrainerMix();
+  t_Er9xTrainerMix();
+  t_Er9xTrainerMix(TrainerMix&);
+
+} __attribute__((packed)) Er9xTrainerMix; //
+
+typedef struct t_Er9xTrainerData {
+  int16_t        calib[4];
+  Er9xTrainerMix mix[4];
+
+  operator TrainerData();
+  t_Er9xTrainerData();
+  t_Er9xTrainerData(TrainerData&);
+
+} __attribute__((packed)) Er9xTrainerData;
 
 typedef struct t_Er9xGeneral {
   uint8_t   myVers;
@@ -69,7 +90,7 @@ typedef struct t_Er9xGeneral {
   uint8_t   vBatWarn;
   int8_t    vBatCalib;
   int8_t    lightSw;
-  int16_t   ppmInCalib[8];
+  Er9xTrainerData trainer;
   uint8_t   view;
   uint8_t   disableThrottleWarning:1;
   uint8_t   disableSwitchWarning:1;
@@ -156,15 +177,15 @@ typedef struct t_Er9xMixData {
 } __attribute__((packed)) Er9xMixData;
 
 
-typedef struct t_Er9xCSwData { // Custom Switches data
+typedef struct t_Er9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
 
-  operator CSwData();
-  t_Er9xCSwData();
-  t_Er9xCSwData(CSwData&);
-} __attribute__((packed)) Er9xCSwData;
+  operator CustomSwData();
+  t_Er9xCustomSwData();
+  t_Er9xCustomSwData(CustomSwData&);
+} __attribute__((packed)) Er9xCustomSwData;
 
 typedef struct t_Er9xSafetySwData { // Custom Switches data
   int8_t  swtch;
@@ -226,7 +247,7 @@ typedef struct t_Er9xModelData {
   int8_t    trim[4];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Er9xCSwData   customSw[NUM_CSW];
+  Er9xCustomSwData   customSw[NUM_CSW];
   uint8_t   a1voltRatio;  //FrSky
   uint8_t   a2voltRatio;  //FrSky
   uint8_t   res3;

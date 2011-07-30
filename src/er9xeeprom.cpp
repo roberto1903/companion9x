@@ -1,5 +1,52 @@
 #include "er9xeeprom.h"
 
+t_Er9xTrainerMix::t_Er9xTrainerMix()
+{
+  memset(this, 0, sizeof(t_Er9xTrainerMix));
+}
+
+t_Er9xTrainerMix::t_Er9xTrainerMix(TrainerMix &eepe)
+{
+  memset(this, 0, sizeof(t_Er9xTrainerMix));
+  srcChn = eepe.srcChn;
+  swtch = eepe.swtch;
+  studWeight = eepe.studWeight;
+  mode = eepe.mode;
+}
+
+t_Er9xTrainerMix::operator TrainerMix()
+{
+  TrainerMix eepe;
+  eepe.srcChn = srcChn;
+  eepe.swtch = swtch;
+  eepe.studWeight = studWeight;
+  eepe.mode = mode;
+  return eepe;
+}
+
+t_Er9xTrainerData::t_Er9xTrainerData()
+{
+  memset(this, 0, sizeof(t_Er9xTrainerData));
+}
+
+t_Er9xTrainerData::t_Er9xTrainerData(TrainerData &eepe)
+{
+  memset(this, 0, sizeof(t_Er9xTrainerData));
+  for (int i=0; i<NUM_STICKS; i++) {
+    calib[i] = eepe.calib[i];
+    mix[i] = eepe.mix[i];
+  }
+}
+
+t_Er9xTrainerData::operator TrainerData ()
+{
+  TrainerData eepe;
+  for (int i=0; i<NUM_STICKS; i++) {
+    eepe.calib[i] = calib[i];
+    eepe.mix[i] = mix[i];
+  }
+}
+
 t_Er9xGeneral::t_Er9xGeneral()
 {
   memset(this, 0, sizeof(t_Er9xGeneral));
@@ -27,14 +74,10 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
   vBatWarn = eepe.vBatWarn;
   vBatCalib = eepe.vBatCalib;
   lightSw = eepe.lightSw;
-
-  for (int i=0; i<NUM_PPM; i++) {
-    ppmInCalib[i] = eepe.ppmInCalib[i];
-  }
-  
+  trainer = eepe.trainer;
   view = eepe.view;
   disableThrottleWarning = eepe.disableThrottleWarning;
-  disableSwitchWarning = eepe.disableSwitchWarning;
+  disableSwitchWarning = (eepe.switchWarning != -1);
   disableMemoryWarning = eepe.disableMemoryWarning;
   beeperVal = eepe.beeperVal;
   disableAlarmWarning = eepe.disableAlarmWarning;
@@ -67,14 +110,10 @@ Er9xGeneral::operator GeneralSettings ()
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
   result.lightSw = lightSw;
-
-  for (int i=0; i<NUM_PPM; i++) {
-    result.ppmInCalib[i] = ppmInCalib[i];
-  }
-  
+  result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
-  result.disableSwitchWarning = disableSwitchWarning;
+  result.switchWarning = disableSwitchWarning ? 0 : -1;
   result.disableMemoryWarning = disableMemoryWarning;
   result.beeperVal = beeperVal;
   result.disableAlarmWarning = disableAlarmWarning;
@@ -98,30 +137,6 @@ t_Er9xExpoData::t_Er9xExpoData()
 {
   memset(this, 0, sizeof(t_Er9xExpoData));
 }
-
-t_Er9xExpoData::t_Er9xExpoData(ExpoData &eepe)
-{
-  memset(this, 0, sizeof(t_Er9xExpoData));
-  for (int i=0; i<3; i++)
-    for (int j=0; j<2; j++)
-      for (int k=0; k<2; k++)
-        expo[i][j][k] = eepe.expo[i][j][k];
-  drSw1 = eepe.drSw1;
-  drSw2 = eepe.drSw2;
-}
-
-t_Er9xExpoData::operator ExpoData ()
-{
-  ExpoData eepe;
-  for (int i=0; i<3; i++)
-    for (int j=0; j<2; j++)
-      for (int k=0; k<2; k++)
-        eepe.expo[i][j][k] = expo[i][j][k];
-  eepe.drSw1 = drSw1;
-  eepe.drSw2 = drSw2;
-  return eepe;
-}
-
 
 t_Er9xLimitData::t_Er9xLimitData()
 {
@@ -191,22 +206,22 @@ t_Er9xMixData::operator MixData ()
 }
 
 
-t_Er9xCSwData::t_Er9xCSwData()
+t_Er9xCustomSwData::t_Er9xCustomSwData()
 {
-  memset(this, 0, sizeof(t_Er9xCSwData));
+  memset(this, 0, sizeof(t_Er9xCustomSwData));
 }
 
-t_Er9xCSwData::t_Er9xCSwData(CSwData &eepe)
+t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &eepe)
 {
-  memset(this, 0, sizeof(t_Er9xCSwData));
+  memset(this, 0, sizeof(t_Er9xCustomSwData));
   v1 = eepe.v1;
   v2 = eepe.v2;
   func = eepe.func;
 }
 
-Er9xCSwData::operator CSwData ()
+Er9xCustomSwData::operator CustomSwData ()
 {
-  CSwData eepe;
+  CustomSwData eepe;
   eepe.v1 = v1;
   eepe.v2 = v2;
   eepe.func = func;
@@ -299,9 +314,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
   if (eepe.used) {
     setEEPROMString(name, eepe.name, sizeof(name));
     mdVers = MDVERS;
-    tmrMode = eepe.tmrMode;
-    tmrDir = eepe.tmrDir;
-    tmrVal = eepe.tmrVal;
+    tmrMode = eepe.timers[0].mode;
+    tmrDir = eepe.timers[0].dir;
+    tmrVal = eepe.timers[0].val;
     protocol = eepe.protocol;
     ppmNCH = eepe.ppmNCH;
     thrTrim = eepe.thrTrim;
@@ -313,20 +328,19 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
     beepANACenter = eepe.beepANACenter;
     pulsePol = eepe.pulsePol;
     extendedLimits = eepe.extendedLimits;
-    swashInvertELE = eepe.swashInvertELE;
-    swashInvertAIL = eepe.swashInvertAIL;
-    swashInvertCOL = eepe.swashInvertCOL;
-    swashType = eepe.swashType;
-    swashCollectiveSource = eepe.swashCollectiveSource;
-    swashRingValue = eepe.swashRingValue;
+    swashInvertELE = eepe.swashRingData.invertELE;
+    swashInvertAIL = eepe.swashRingData.invertAIL;
+    swashInvertCOL = eepe.swashRingData.invertCOL;
+    swashType = eepe.swashRingData.type;
+    swashCollectiveSource = eepe.swashRingData.collectiveSource;
+    swashRingValue = eepe.swashRingData.value;
     for (int i=0; i<MAX_MIXERS; i++)
       mixData[i] = eepe.mixData[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       limitData[i] = eepe.limitData[i];
-    for (int i=0; i<NUM_STICKS; i++) {
-      expoData[i] = eepe.expoData[i];
-      trim[i] = eepe.trim[i];
-    }
+    // TODO expoData
+    for (int i=0; i<NUM_STICKS; i++)
+      trim[i] = eepe.phaseData[0].trim[i];
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = eepe.curves5[i][j];
@@ -349,9 +363,9 @@ t_Er9xModelData::operator ModelData ()
   ModelData eepe;
   eepe.used = true;
   getEEPROMString(eepe.name, name, sizeof(name));
-  eepe.tmrMode = tmrMode;
-  eepe.tmrDir = tmrDir;
-  eepe.tmrVal = tmrVal;
+  eepe.timers[0].mode = tmrMode;
+  eepe.timers[0].dir = tmrDir;
+  eepe.timers[0].val = tmrVal;
   eepe.protocol = protocol;
   eepe.ppmNCH = ppmNCH;
   eepe.thrTrim = thrTrim;
@@ -363,20 +377,48 @@ t_Er9xModelData::operator ModelData ()
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;
   eepe.extendedLimits = extendedLimits;
-  eepe.swashInvertELE = swashInvertELE;
-  eepe.swashInvertAIL = swashInvertAIL;
-  eepe.swashInvertCOL = swashInvertCOL;
-  eepe.swashType = swashType;
-  eepe.swashCollectiveSource = swashCollectiveSource;
-  eepe.swashRingValue = swashRingValue;
+  eepe.swashRingData.invertELE = swashInvertELE;
+  eepe.swashRingData.invertAIL = swashInvertAIL;
+  eepe.swashRingData.invertCOL = swashInvertCOL;
+  eepe.swashRingData.type = swashType;
+  eepe.swashRingData.collectiveSource = swashCollectiveSource;
+  eepe.swashRingData.value = swashRingValue;
   for (int i=0; i<MAX_MIXERS; i++)
     eepe.mixData[i] = mixData[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     eepe.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++) {
-    eepe.expoData[i] = expoData[i];
-    eepe.trim[i] = trim[i];
+
+  // expoData
+  uint8_t e = 0;
+  for (uint8_t ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
+    for (int8_t dr = 2; dr >= 0 && e < MAX_EXPOS; dr--) {
+      if ((dr == 2 && !expoData[ch].drSw1) || (dr == 1 && !expoData[ch].drSw2) || (dr
+          == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1]
+          && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[2][1][1])) continue;
+      eepe.expoData[e].swtch = (dr == 0 ? expoData[ch].drSw1
+          : (dr == 1 ? expoData[ch].drSw2 : 0));
+      eepe.expoData[e].chn = ch;
+      eepe.expoData[e].expo = expoData[ch].expo[dr][0][0];
+      eepe.expoData[e].weight = 100 + expoData[ch].expo[dr][1][0];
+      if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1]
+          && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
+        eepe.expoData[e++].mode = 3;
+      }
+      else {
+        eepe.expoData[e].mode = 1;
+        if (e < MAX_EXPOS - 1) {
+          eepe.expoData[e + 1].swtch = eepe.expoData[e].swtch;
+          eepe.expoData[++e].chn = ch;
+          eepe.expoData[e].mode = 2;
+          eepe.expoData[e].expo = expoData[ch].expo[dr][0][1];
+          eepe.expoData[e++].weight = 100 + expoData[ch].expo[dr][1][1];
+        }
+      }
+    }
   }
+
+  for (int i=0; i<NUM_STICKS; i++)
+    eepe.phaseData[0].trim[i] = trim[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
       eepe.curves5[i][j] = curves5[i][j];

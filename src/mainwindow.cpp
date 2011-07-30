@@ -124,7 +124,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
     check2done = true;
 
     QNetworkProxyFactory::setUseSystemConfiguration(true);
-
+/* TODO
     if(checkER9X || ignoreSettings)
     {
         QSettings settings("er9x-companion9x", "companion9x");
@@ -152,6 +152,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         downloadDialog_forWait = new downloadDialog(this, tr("Checking for updates"));
         downloadDialog_forWait->show();
     }
+    */
 }
 
 

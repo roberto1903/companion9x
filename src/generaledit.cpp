@@ -38,7 +38,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
     ui->inputfilterCB->setCurrentIndex(g_eeGeneral.filterInput);
     ui->thrwarnChkB->setChecked(!g_eeGeneral.disableThrottleWarning);   //Default is zero=checked
-    ui->switchwarnChkB->setChecked(!g_eeGeneral.disableSwitchWarning); //Default is zero=checked
+    // TODO ui->switchwarnChkB->setChecked(!g_eeGeneral.disableSwitchWarning); //Default is zero=checked
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
     ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperVal);
@@ -74,7 +74,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->ana6Pos->setValue(g_eeGeneral.calibSpanPos[5]);
     ui->ana7Pos->setValue(g_eeGeneral.calibSpanPos[6]);
 
-    ui->PPM1->setValue(g_eeGeneral.ppmInCalib[0]);
+/* TODO TRAINER SCREEN    ui->PPM1->setValue(g_eeGeneral.ppmInCalib[0]);
     ui->PPM2->setValue(g_eeGeneral.ppmInCalib[1]);
     ui->PPM3->setValue(g_eeGeneral.ppmInCalib[2]);
     ui->PPM4->setValue(g_eeGeneral.ppmInCalib[3]);
@@ -82,7 +82,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->PPM6->setValue(g_eeGeneral.ppmInCalib[5]);
     ui->PPM7->setValue(g_eeGeneral.ppmInCalib[6]);
     ui->PPM8->setValue(g_eeGeneral.ppmInCalib[7]);
-
+*/
     ui->PPM_MultiplierDSB->setValue((qreal)(g_eeGeneral.PPM_Multiplier+10)/10);
 
 }
@@ -161,7 +161,7 @@ void GeneralEdit::on_thrwarnChkB_stateChanged(int )
 
 void GeneralEdit::on_switchwarnChkB_stateChanged(int )
 {
-    g_eeGeneral.disableSwitchWarning = ui->switchwarnChkB->isChecked() ? 0 : 1;
+// TODO    g_eeGeneral.disableSwitchWarning = ui->switchwarnChkB->isChecked() ? 0 : 1;
     updateSettings();
 }
 
@@ -336,54 +336,55 @@ void GeneralEdit::on_battCalib_editingFinished()
 
 void GeneralEdit::on_PPM1_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[0] = ui->PPM1->value();
+// TODO     g_eeGeneral.ppmInCalib[0] = ui->PPM1->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM2_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[1] = ui->PPM2->value();
+  // TODO   g_eeGeneral.ppmInCalib[1] = ui->PPM2->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM3_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[2] = ui->PPM3->value();
+  // TODO   g_eeGeneral.ppmInCalib[2] = ui->PPM3->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM4_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[3] = ui->PPM4->value();
+  // TODO    g_eeGeneral.ppmInCalib[3] = ui->PPM4->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM5_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[4] = ui->PPM5->value();
+  // TODO   g_eeGeneral.ppmInCalib[4] = ui->PPM5->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM6_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[5] = ui->PPM6->value();
+  // TODO   g_eeGeneral.ppmInCalib[5] = ui->PPM6->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM7_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[6] = ui->PPM7->value();
+  // TODO   g_eeGeneral.ppmInCalib[6] = ui->PPM7->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM8_editingFinished()
 {
-    g_eeGeneral.ppmInCalib[7] = ui->PPM8->value();
+  // TODO   g_eeGeneral.ppmInCalib[7] = ui->PPM8->value();
     updateSettings();
 }
 
 void GeneralEdit::on_tabWidget_currentChanged(int index)
 {
+  // TODO why er9x here
     QSettings settings("er9x-companion9x", "companion9x");
     settings.setValue("generalEditTab",index);//ui->tabWidget->currentIndex());
 }

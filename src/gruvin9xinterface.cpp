@@ -43,14 +43,14 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
     
   efile->openRd(FILE_GENERAL);
   Gruvin9xGeneral er9xGeneral;
-  if (!efile->readRlc((uint8_t*)&er9xGeneral, sizeof(Gruvin9xGeneral)))
+  if (!efile->readRlc2((uint8_t*)&er9xGeneral, sizeof(Gruvin9xGeneral)))
     return false;
   radioData.generalSettings = er9xGeneral;
   
   for (int i=0; i<MAX_MODELS; i++) {
     Gruvin9xModelData gruvin9xModel;
     efile->openRd(FILE_MODEL(i));
-    if (efile->readRlc((uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData)))
+    if (efile->readRlc2((uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData)))
       radioData.models[i] = gruvin9xModel;
     else
       radioData.models[i].clear();
@@ -64,7 +64,7 @@ bool Gruvin9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
   efile->EeFsInit(eeprom, true);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
   if(sz != sizeof(Gruvin9xGeneral)) {
     return false;
   }
@@ -73,7 +73,7 @@ bool Gruvin9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Gruvin9xModelData gruvin9xModel(radioData.models[i]);
-      sz = efile->writeRlc(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
+      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
       if(sz != sizeof(Gruvin9xModelData)) {
         return false;
       }
@@ -93,7 +93,7 @@ int Gruvin9xInterface::getSize(ModelData &model)
   efile->EeFsInit(tmp, true);
 
   Gruvin9xModelData gruvin9xModel(model);
-  int sz = efile->writeRlc(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
   if(sz != sizeof(Gruvin9xModelData)) {
      return -1;
   }

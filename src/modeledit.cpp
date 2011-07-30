@@ -139,17 +139,19 @@ void ModelEdit::tabModelEditSetup()
     ui->modelNameLE->setText(g_model.name);
 
     //timer mode direction value
-    populateTimerSwitchCB(ui->timerModeCB,g_model.tmrMode);
-    int min = g_model.tmrVal/60;
-    int sec = g_model.tmrVal%60;
+    populateTimerSwitchCB(ui->timerModeCB,g_model.timers[0].mode);
+    int min = g_model.timers[0].val/60;
+    int sec = g_model.timers[0].val%60;
     ui->timerValTE->setTime(QTime(0,min,sec));
+    // TODO timer2
 
     //trim inc, thro trim, thro expo, instatrim
     ui->trimIncCB->setCurrentIndex(g_model.trimInc);
     populateSwitchCB(ui->trimSWCB,g_model.trimSw);
     ui->thrExpoChkB->setChecked(g_model.thrExpo);
     ui->thrTrimChkB->setChecked(g_model.thrTrim);
-    ui->timerDirCB->setCurrentIndex(g_model.tmrDir);
+    ui->timerDirCB->setCurrentIndex(g_model.timers[0].dir);
+    // TODO timer2
 
     //center beep
     ui->bcRUDChkB->setChecked(g_model.beepANACenter & BC_BIT_RUD);
@@ -193,7 +195,8 @@ void ModelEdit::tabModelEditSetup()
 
 void ModelEdit::tabExpo()
 {
-    populateSwitchCB(ui->RUD_edrSw1,g_model.expoData[CONVERT_MODE(RUD)-1].drSw1);
+# if 0 // TODO ++ !
+  populateSwitchCB(ui->RUD_edrSw1,g_model.expoData[CONVERT_MODE(RUD)-1].drSw1);
     populateSwitchCB(ui->RUD_edrSw2,g_model.expoData[CONVERT_MODE(RUD)-1].drSw2);
     populateSwitchCB(ui->ELE_edrSw1,g_model.expoData[CONVERT_MODE(ELE)-1].drSw1);
     populateSwitchCB(ui->ELE_edrSw2,g_model.expoData[CONVERT_MODE(ELE)-1].drSw2);
@@ -336,12 +339,13 @@ void ModelEdit::tabExpo()
     connect(ui->AIL_ExpoRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
     connect(ui->AIL_ExpoRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
 
-
+#endif
 }
 
 
 void ModelEdit::expoEdited()
 {
+#if 0 // TODO ++
     g_model.expoData[CONVERT_MODE(RUD)-1].drSw1 = ui->RUD_edrSw1->currentIndex()-MAX_DRSWITCH;
     g_model.expoData[CONVERT_MODE(RUD)-1].drSw2 = ui->RUD_edrSw2->currentIndex()-MAX_DRSWITCH;
     g_model.expoData[CONVERT_MODE(ELE)-1].drSw1 = ui->ELE_edrSw1->currentIndex()-MAX_DRSWITCH;
@@ -402,7 +406,7 @@ void ModelEdit::expoEdited()
     g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]   = ui->AIL_ExpoRHi->value();
     g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]    = ui->AIL_ExpoRLow->value();
     g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]    = ui->AIL_ExpoRMid->value();
-
+#endif
     updateSettings();
 }
 
@@ -512,12 +516,12 @@ void ModelEdit::updateHeliTab()
 {
     heliEditLock = true;
 
-    ui->swashTypeCB->setCurrentIndex(g_model.swashType);
-    populateSourceCB(ui->swashCollectiveCB,g_eeGeneral.stickMode,g_model.swashCollectiveSource);
-    ui->swashRingValSB->setValue(g_model.swashRingValue);
-    ui->swashInvertELE->setChecked(g_model.swashInvertELE);
-    ui->swashInvertAIL->setChecked(g_model.swashInvertAIL);
-    ui->swashInvertCOL->setChecked(g_model.swashInvertCOL);
+    ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
+    populateSourceCB(ui->swashCollectiveCB,g_eeGeneral.stickMode,g_model.swashRingData.collectiveSource);
+    ui->swashRingValSB->setValue(g_model.swashRingData.value);
+    ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
+    ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
+    ui->swashInvertCOL->setChecked(g_model.swashRingData.invertCOL);
 
     heliEditLock = false;
 }
@@ -525,12 +529,12 @@ void ModelEdit::updateHeliTab()
 void ModelEdit::heliEdited()
 {
     if(heliEditLock) return;
-    g_model.swashType  = ui->swashTypeCB->currentIndex();
-    g_model.swashCollectiveSource = ui->swashCollectiveCB->currentIndex();
-    g_model.swashRingValue = ui->swashRingValSB->value();
-    g_model.swashInvertELE = ui->swashInvertELE->isChecked();
-    g_model.swashInvertAIL = ui->swashInvertAIL->isChecked();
-    g_model.swashInvertCOL = ui->swashInvertCOL->isChecked();
+    g_model.swashRingData.type  = ui->swashTypeCB->currentIndex();
+    g_model.swashRingData.collectiveSource = ui->swashCollectiveCB->currentIndex();
+    g_model.swashRingData.value = ui->swashRingValSB->value();
+    g_model.swashRingData.invertELE = ui->swashInvertELE->isChecked();
+    g_model.swashRingData.invertAIL = ui->swashInvertAIL->isChecked();
+    g_model.swashRingData.invertCOL = ui->swashInvertCOL->isChecked();
     updateSettings();
 }
 
@@ -1275,10 +1279,11 @@ void ModelEdit::switchesEdited()
 
 void ModelEdit::tabTrims()
 {
-    ui->spinBox_S1->setValue(g_model.trim[CONVERT_MODE(RUD)-1]);
+/* TODO phases    ui->spinBox_S1->setValue(g_model.trim[CONVERT_MODE(RUD)-1]);
     ui->spinBox_S2->setValue(g_model.trim[CONVERT_MODE(ELE)-1]);
     ui->spinBox_S3->setValue(g_model.trim[CONVERT_MODE(THR)-1]);
     ui->spinBox_S4->setValue(g_model.trim[CONVERT_MODE(AIL)-1]);
+*/
 
     switch (g_eeGeneral.stickMode)
     {
@@ -1339,15 +1344,16 @@ void ModelEdit::on_modelNameLE_editingFinished()
     updateSettings();
 }
 
+// TODO timer2
 void ModelEdit::on_timerModeCB_currentIndexChanged(int index)
 {
-    g_model.tmrMode = index-TMR_NUM_OPTION;
+    g_model.timers[0].mode = index-TMR_NUM_OPTION;
     updateSettings();
 }
 
 void ModelEdit::on_timerDirCB_currentIndexChanged(int index)
 {
-    g_model.tmrDir = index;
+    g_model.timers[0].dir = index;
     updateSettings();
 }
 
@@ -1380,7 +1386,7 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 
 void ModelEdit::on_timerValTE_editingFinished()
 {
-    g_model.tmrVal = ui->timerValTE->time().minute()*60 + ui->timerValTE->time().second();
+    g_model.timers[0].val = ui->timerValTE->time().minute()*60 + ui->timerValTE->time().second();
     updateSettings();
 }
 
@@ -1577,25 +1583,25 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
 
 void ModelEdit::on_spinBox_S1_valueChanged(int value)
 {
-        g_model.trim[CONVERT_MODE(RUD)-1] = value;
+     // TODO   g_model.trim[CONVERT_MODE(RUD)-1] = value;
         updateSettings();
 }
 
 void ModelEdit::on_spinBox_S2_valueChanged(int value)
 {
-        g_model.trim[CONVERT_MODE(ELE)-1] = value;
+    // TODO    g_model.trim[CONVERT_MODE(ELE)-1] = value;
         updateSettings();
 }
 
 void ModelEdit::on_spinBox_S3_valueChanged(int value)
 {
-        g_model.trim[CONVERT_MODE(THR)-1] = value;
+     // TODO   g_model.trim[CONVERT_MODE(THR)-1] = value;
         updateSettings();
 }
 
 void ModelEdit::on_spinBox_S4_valueChanged(int value)
 {
-        g_model.trim[CONVERT_MODE(AIL)-1] = value;
+   // TODO     g_model.trim[CONVERT_MODE(AIL)-1] = value;
         updateSettings();
 }
 
@@ -2598,8 +2604,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
         md=setDest(11); md->srcRaw=CM(STK_THR);  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
         md=setDest(11); md->srcRaw=CM(STK_THR);  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-        g_model.swashType = SWASH_TYPE_120;
-        g_model.swashCollectiveSource = CH(11);
+        g_model.swashRingData.type = SWASH_TYPE_120;
+        g_model.swashRingData.collectiveSource = CH(11);
 
         //Set up Curves
         setCurve(CURVE5(1),heli_ar1);

@@ -58,7 +58,7 @@ EEPROMInterface *GetEepromInterface()
 
   QSettings settings("er9x-eePe", "eePe");
   if (settings.value("download-version", 0).toInt() == DNLD_VER_GRUVIN9X) {
-    // eepromInterface = new Gruvin9xInterface();
+    eepromInterface = new Gruvin9xInterface();
   }
   else {
     eepromInterface = new Er9xInterface();

@@ -44,14 +44,14 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
     
   efile->openRd(FILE_GENERAL);
   Er9xGeneral er9xGeneral;
-  if (!efile->readRlc((uint8_t*)&er9xGeneral, sizeof(Er9xGeneral)))
+  if (!efile->readRlc1((uint8_t*)&er9xGeneral, sizeof(Er9xGeneral)))
     return false;
   radioData.generalSettings = er9xGeneral;
   
   for (int i=0; i<MAX_MODELS; i++) {
     Er9xModelData er9xModel;
     efile->openRd(FILE_MODEL(i));
-    if (!efile->readRlc((uint8_t*)&er9xModel, sizeof(Er9xModelData))) {
+    if (!efile->readRlc1((uint8_t*)&er9xModel, sizeof(Er9xModelData))) {
       radioData.models[i].clear();
     }
     else {
@@ -67,7 +67,7 @@ bool Er9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
   efile->EeFsInit(eeprom, true);
 
   Er9xGeneral er9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
   if(sz != sizeof(Er9xGeneral)) {
     return false;
   }
@@ -76,7 +76,7 @@ bool Er9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Er9xModelData er9xModel(radioData.models[i]);
-      sz = efile->writeRlc(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
+      sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
       if(sz != sizeof(Er9xModelData)) {
         return false;
       }
@@ -96,7 +96,7 @@ int Er9xInterface::getSize(ModelData &model)
   efile->EeFsInit(tmp, true);
 
   Er9xModelData er9xModel(model);
-  int sz = efile->writeRlc(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
   if(sz != sizeof(Er9xModelData)) {
      return -1;
   }

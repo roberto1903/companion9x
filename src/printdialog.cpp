@@ -47,8 +47,9 @@ QString printDialog::fv(const QString name, const QString value)
 
 QString printDialog::getTimer()
 {
-    QString str = ", " + g_model->tmrDir ? ", Count Down" : " Count Up";
-    return tr("%1:%2, ").arg(g_model->tmrVal/60, 2, 10, QChar('0')).arg(g_model->tmrVal%60, 2, 10, QChar('0')) + getTimerMode(g_model->tmrMode) + str;
+  // TODO timer2
+    QString str = ", " + g_model->timers[0].dir ? ", Count Down" : " Count Up";
+    return tr("%1:%2, ").arg(g_model->timers[0].val/60, 2, 10, QChar('0')).arg(g_model->timers[0].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[0].mode) + str;
 }
 
 QString printDialog::getProtocol()
@@ -124,8 +125,8 @@ void printDialog::printExpo()
         str.append("<h3>" + getSourceStr(g_eeGeneral->stickMode, i+1) + "</h3>");
         //high, mid, low
         //left right / expo, dr
-        str.append(fv(tr("Switch 1:"), getSWName(g_model->expoData[i].drSw1)));
-        str.append(fv(tr("Switch 2:"), getSWName(g_model->expoData[i].drSw2)));
+// TODO        str.append(fv(tr("Switch 1:"), getSWName(g_model->expoData[i].drSw1)));
+        // TODO        str.append(fv(tr("Switch 2:"), getSWName(g_model->expoData[i].drSw2)));
         str.append("<table border=1 cellspacing=0 cellpadding=3>");
 
         str.append("<tr>");
@@ -139,26 +140,26 @@ void printDialog::printExpo()
 
         str.append("<tr>");
         str.append(doTC(tr("High"), "", true));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_LEFT]),"green"));
+     /* TODO   str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_LEFT]),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_RIGHT]),"green"));
+        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_RIGHT]),"green")); */
         str.append("</tr>");
 
         str.append("<tr>");
         str.append(doTC(tr("Mid"), "", true));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_LEFT]),"green"));
+/* TODO        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_LEFT]),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_RIGHT]),"green"));
+        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_RIGHT]),"green")); */
         str.append("</tr>");
 
         str.append("<tr>");
         str.append(doTC(tr("Low"), "", true));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_LEFT]),"green"));
+  /* TODO      str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_LEFT]),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100),"green"));
         str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_RIGHT]),"green"));
+        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_RIGHT]),"green")); */
         str.append("</tr>");
 
         str.append("</table>");

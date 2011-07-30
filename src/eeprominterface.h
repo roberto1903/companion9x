@@ -34,20 +34,14 @@ const uint8_t modn12x3[4][4]= {
   {4, 3, 2, 1} };
 
 #define MAX_MODELS  16
+#define MAX_PHASES  5
 #define MAX_MIXERS  32
+#define MAX_EXPOS   14
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
 #define NUM_CHNOUT      16 // number of real output channels CH1-CH8
 #define NUM_CSW         12 // number of custom switches
-#define NUM_STICKS      4
-#define NUM_POTS        3
-#define NUM_PPM         8  // number of PPM inputs / outputs
-
-///number of real input channels (1-9) plus virtual input channels X1-X4
-#define NUM_XCHNRAW (NUM_CHNOUT+12+NUM_PPM) // NUMCH + P1P2P3+ AIL/RUD/ELE/THR + MAX/FULL + CYC1/CYC2/CYC3
-///number of real output channels (CH1-CH8) plus virtual output channels X1-X4
-#define NUM_XCHNOUT (NUM_CHNOUT) //(NUM_CHNOUT)//+NUM_VIRT)
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -202,8 +196,38 @@ enum EnumKeys {
 #define MIX_CYC2  11
 #define MIX_CYC3  12
 
-#define PPM_BASE   (MIX_CYC3)
-#define CHOUT_BASE (PPM_BASE+NUM_PPM)
+#define NUM_STICKS      4
+#define NUM_POTS        3
+#define PPM_BASE        (MIX_FULL) // because srcRaw is shifted +1!
+#define NUM_CAL_PPM     4
+#define NUM_PPM         8
+#define CHOUT_BASE      (PPM_BASE+NUM_PPM)
+
+#define NUM_TELEMETRY 2
+#define TELEMETRY_CHANNELS "AD1 AD2 "
+
+///number of real input channels (1-9) plus virtual input channels X1-X4
+#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+2/*MAX/FULL*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT+NUM_TELEMETRY)
+///number of real output channels (CH1-CH8) plus virtual output channels X1-X4
+#define NUM_XCHNOUT (NUM_CHNOUT) //(NUM_CHNOUT)//+NUM_VIRT)
+
+class TrainerMix {
+  public:
+	TrainerMix() { clear(); }
+	uint8_t srcChn; //0-7 = ch1-8
+	int8_t  swtch;
+	int8_t  studWeight;
+	uint8_t mode;   //off,add-mode,subst-mode
+	void clear() { memset(this, 0, sizeof(TrainerMix)); }
+};
+
+class TrainerData {
+  public:
+	TrainerData() { clear(); }
+	int16_t     calib[4];
+	TrainerMix  mix[4];
+	void clear() { memset(this, 0, sizeof(TrainerData)); }
+};
 
 class GeneralSettings {
   public:
@@ -217,10 +241,10 @@ class GeneralSettings {
     uint8_t   vBatWarn;
     int8_t    vBatCalib;
     int8_t    lightSw; // TODO Switch enum
-    int16_t   ppmInCalib[NUM_PPM];
+    TrainerData trainer;
     uint8_t   view;    // main screen view // TODO enum
     bool      disableThrottleWarning;
-    bool      disableSwitchWarning;
+    int8_t    switchWarning; // -1=down, 0=off, 1=up
     bool      disableMemoryWarning;
     uint8_t   beeperVal; // TODO enum
     bool      disableAlarmWarning;
@@ -241,9 +265,13 @@ class GeneralSettings {
 class ExpoData {
   public:
     ExpoData() { clear(); }
-    int8_t  expo[3][2][2];
-    int8_t  drSw1;
-    int8_t  drSw2;
+    uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
+    uint8_t chn;
+    uint8_t curve;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+    int8_t  swtch;
+    int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
+    uint8_t weight;
+    int8_t  expo;
 
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
@@ -280,19 +308,20 @@ class MixData {
     bool carryTrim;
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
     uint8_t mixWarn;           // mixer warning
+    int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
     int8_t  sOffset;
 
     void clear() { memset(this, 0, sizeof(MixData)); }
 };
 
-class CSwData { // Custom Switches data
+class CustomSwData { // Custom Switches data
   public:
-    CSwData() { clear(); }
+    CustomSwData() { clear(); }
     int8_t  v1; //input
     int8_t  v2; //offset
     uint8_t func;
 
-    void clear() { memset(this, 0, sizeof(CSwData)); }
+    void clear() { memset(this, 0, sizeof(CustomSwData)); }
 };
 
 class SafetySwData { // Custom Switches data
@@ -304,13 +333,26 @@ class SafetySwData { // Custom Switches data
     void clear() { memset(this, 0, sizeof(SafetySwData)); }
 };
 
+class PhaseData {
+  public:
+    PhaseData() { clear(); }
+    int8_t trim[NUM_STICKS]; // -125..125 => trim value, 127 => use trim of phase 0, -128, -127, -126 => use trim of phases 1|2|3|4 instead
+    int8_t swtch;            // swtch of phase[0] is the trimSw
+    char name[6+1];
+    uint8_t speedUp;
+    uint8_t speedDown;
+    void clear() { memset(this, 0, sizeof(PhaseData)); }
+};
+
 class SwashRingData { // Swash Ring data
   public:
     SwashRingData() { clear(); }
-    uint8_t lim;   // 0 mean off 100 full deflection
-    uint8_t chX; // 2 channels to limit
-    uint8_t chY; // 2 channels to limit
-
+    bool      invertELE;
+    bool      invertAIL;
+    bool      invertCOL;
+    uint8_t   type;
+    uint8_t   collectiveSource;
+    uint8_t   value;
     void clear() { memset(this, 0, sizeof(SwashRingData)); }
 };
 
@@ -342,15 +384,21 @@ class FrSkyData {
     void clear() { memset(this, 0, sizeof(FrSkyData)); }
 };
 
+class TimerData {
+  public:
+    TimerData() { clear(); }
+    int8_t    mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+    bool      dir;    // 0=>Count Down, 1=>Count Up
+    uint16_t  val;
+    void clear() { memset(this, 0, sizeof(TimerData)); }
+};
+
 class ModelData {
   public:
     ModelData();
-
     bool      used;
     char      name[10+1];
-    int8_t    tmrMode;   //timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-    int8_t    tmrDir;    //0=>Count Down, 1=>Count Up
-    uint16_t  tmrVal;
+    TimerData timers[2];
     uint8_t   protocol;
     int8_t    ppmNCH;
     int8_t    thrTrim:4;            // Enable Throttle Trim
@@ -362,19 +410,13 @@ class ModelData {
     uint8_t   beepANACenter;        //1<<0->A1.. 1<<6->A7
     bool      pulsePol;
     bool      extendedLimits;
-    bool      swashInvertELE;
-    bool      swashInvertAIL;
-    bool      swashInvertCOL;
-    uint8_t   swashType:3;
-    uint8_t   swashCollectiveSource;
-    uint8_t   swashRingValue;
+    PhaseData phaseData[MAX_PHASES];
     MixData   mixData[MAX_MIXERS];
     LimitData limitData[NUM_CHNOUT];
-    ExpoData  expoData[NUM_STICKS];
-    int8_t    trim[NUM_STICKS];
+    ExpoData  expoData[MAX_EXPOS];
     int8_t    curves5[MAX_CURVE5][5];
     int8_t    curves9[MAX_CURVE9][9];
-    CSwData   customSw[NUM_CSW];
+    CustomSwData   customSw[NUM_CSW];
     SafetySwData  safetySw[NUM_CHNOUT];
     SwashRingData swashRingData;
 
