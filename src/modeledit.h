@@ -24,6 +24,8 @@ public:
 private:
     Ui::ModelEdit *ui;
 
+    MixersList *ExposlistWidget;
+
     MixersList *MixerlistWidget;
 
     RadioData &radioData;
@@ -41,10 +43,12 @@ private:
     QSpinBox  * safetySwitchValue[NUM_CHNOUT];
     QComboBox * safetySwitchSwtch[NUM_CHNOUT];
 
+    void setupExposListWidget();
     void setupMixerListWidget();
+
     void updateSettings();
     void tabModelEditSetup();
-    void tabExpo();
+    void tabExpos();
     void tabMixes();
     void tabHeli();
     void tabLimits();
@@ -67,14 +71,23 @@ private:
 
     QSpinBox *getNodeSB(int i);
 
-    void gm_insertMix(int idx);
+    int getExpoIndex(int dch);
+    void gm_insertExpo(int idx);
+    void gm_deleteExpo(int index);
+    void gm_openExpo(int index);
+    int gm_moveExpo(int idx, bool dir);
+    void exposDeleteList(QList<int> list);
+    QList<int> createExpoListFromSelected();
+    void setSelectedByExpoList(QList<int> list);
+
     int getMixerIndex(int dch);
+    void gm_insertMix(int idx);
     void gm_deleteMix(int index);
     void gm_openMix(int index);
     int gm_moveMix(int idx, bool dir);
     void mixersDeleteList(QList<int> list);
-    QList<int> createListFromSelected();
-    void setSelectedByList(QList<int> list);
+    QList<int> createMixListFromSelected();
+    void setSelectedByMixList(QList<int> list);
 
     void applyTemplate(uint8_t idx);
     MixData* setDest(uint8_t dch);
@@ -85,6 +98,7 @@ signals:
     void modelValuesChanged();
 
 private slots:
+    void clearExpos(bool ask=true);
     void clearMixes(bool ask=true);
     void clearCurves(bool ask=true);
 
@@ -106,9 +120,24 @@ private slots:
     void on_resetCurve_15_clicked();
     void on_resetCurve_16_clicked();
 
-    void mimeDropped(int index, const QMimeData *data, Qt::DropAction action);
-    void pasteMIMEData(const QMimeData * mimeData, int destIdx=1000);
+    void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
+    void pasteMixerMimeData(const QMimeData * mimeData, int destIdx=1000);
+
+    void mimeExpoDropped(int index, const QMimeData *data, Qt::DropAction action);
+    void pasteExpoMimeData(const QMimeData * mimeData, int destIdx=1000);
+
     void on_pushButton_clicked();
+
+    void exposDelete(bool ask=true);
+    void exposCut();
+    void exposCopy();
+    void exposPaste();
+    void exposDuplicate();
+    void expoOpen(QListWidgetItem *item = NULL);
+    void expoAdd();
+    void moveExpoUp();
+    void moveExpoDown();
+
     void mixersDelete(bool ask=true);
     void mixersCut();
     void mixersCopy();
@@ -118,6 +147,11 @@ private slots:
     void mixerAdd();
     void moveMixUp();
     void moveMixDown();
+
+    void expolistWidget_customContextMenuRequested(QPoint pos);
+    void expolistWidget_doubleClicked(QModelIndex index);
+    void expolistWidget_KeyPress(QKeyEvent *event);
+
 
     void mixerlistWidget_customContextMenuRequested(QPoint pos);
     void mixerlistWidget_doubleClicked(QModelIndex index);
@@ -146,7 +180,7 @@ private slots:
     void limitEdited();
     void switchesEdited();
     void safetySwitchesEdited();
-    void expoEdited();
+    void exposEdited();
     void mixesEdited();
     void heliEdited();
 

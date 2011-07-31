@@ -14,6 +14,7 @@ QString getSWName(int val)
     return QString(val<0 ? "!" : "") + QString(SWITCHES_STR).mid((abs(val)-1)*3,3);
 }
 
+
 void populateSwitchCB(QComboBox *b, int value=0)
 {
     b->clear();
@@ -21,6 +22,14 @@ void populateSwitchCB(QComboBox *b, int value=0)
         b->addItem(getSWName(i));
     b->setCurrentIndex(value+MAX_DRSWITCH);
     b->setMaxVisibleItems(10);
+}
+
+void populatePhasesCB(QComboBox *b, int value)
+{
+    QString str = PHASES_STR;
+    b->clear();
+    for(int i=0; i<(str.length()/4); i++)  b->addItem(str.mid(i*4,4).replace("FP","Phase "));
+    b->setCurrentIndex(value+MAX_PHASES);
 }
 
 void populateCurvesCB(QComboBox *b, int value)

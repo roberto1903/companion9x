@@ -153,6 +153,7 @@ enum EnumKeys {
 #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
 #define CURV_STR     "---x>0x<0|x|f>0f<0|f|c1 c2 c3 c4 c5 c6 c7 c8 c9 c10c11c12c13c14c15c16"
+#define PHASES_STR     "!FP4!FP3!FP2!FP1!FP0----FP0 FP1 FP2 FP3 FP4 "
 #define CURVE_BASE 7
 #define CSWITCH_STR  "----   v>ofs  v<ofs  |v|>ofs|v|<ofsAND    OR     XOR    ""v1==v2 ""v1!=v2 ""v1>v2  ""v1<v2  ""v1>=v2 ""v1<=v2 "
 #define CSW_NUM_FUNC 14

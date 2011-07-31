@@ -13,8 +13,8 @@ int8_t char2idx(char c)
   if (c>='0' && c<='9') return 27+c-'0';
   for (int8_t i=0;;i++) {
     char cc = specialCharsTab[i];
-    if(cc==c) return 37+i;
     if(cc==0) return 0;
+    if(cc==c) return 37+i;
   }
 }
 
@@ -40,19 +40,15 @@ void setEEPROMZString(char *dst, const char *src, int size)
 #include <stdio.h>
 void getEEPROMZString(char *dst, const char *src, int size)
 {
-  for (int i=size-1; i>=0; i--) {
-    if (src[i]) printf("%d ", src[i]); fflush(stdout);
-
+  for (int i=size-1; i>=0; i--)
     dst[i] = idx2char(src[i]);
-  }
   dst[size] = '\0';
-  /*for (int i=size-1; i>=0; i--) {
+  for (int i=size-1; i>=0; i--) {
     if (dst[i] == ' ')
       dst[i] = '\0';
     else
       break;
-  }*/
-  printf("\n");
+  }
 }
 
 t_Gruvin9xTrainerMix::t_Gruvin9xTrainerMix()
