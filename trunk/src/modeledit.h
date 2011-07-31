@@ -121,10 +121,10 @@ private slots:
     void on_resetCurve_16_clicked();
 
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
-    void pasteMixerMimeData(const QMimeData * mimeData, int destIdx=1000);
+    void pasteMixerMimeData(const QMimeData * mimeData, int destIdx);
 
     void mimeExpoDropped(int index, const QMimeData *data, Qt::DropAction action);
-    void pasteExpoMimeData(const QMimeData * mimeData, int destIdx=1000);
+    void pasteExpoMimeData(const QMimeData * mimeData, int destIdx);
 
     void on_pushButton_clicked();
 
