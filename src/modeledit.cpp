@@ -241,7 +241,6 @@ void ModelEdit::tabExpos()
     {
         ExpoData *md = &g_model.expoData[i];
 
-        printf("expo %d chn %d\n", i, md->chn);
         if(md->mode==0) break;
         QString str = "";
         while(curDest<md->chn-1)
@@ -295,12 +294,12 @@ void ModelEdit::tabExpos()
     while(curDest<NUM_STICKS-1)
     {
         curDest++;
-        QString str = getSourceStr(g_eeGeneral.stickMode,curDest);
+        QString str = getSourceStr(g_eeGeneral.stickMode,curDest+1);
 
         qba.clear();
         qba.append((quint8)-curDest);
         QListWidgetItem *itm = new QListWidgetItem(str);
-        itm->setData(Qt::UserRole,qba); // add new mixer
+        itm->setData(Qt::UserRole,qba); // add new expo
         ExposlistWidget->addItem(itm);
     }
 }
@@ -1836,7 +1835,6 @@ void ModelEdit::gm_insertExpo(int idx)
 
 void ModelEdit::gm_deleteExpo(int index)
 {
-  printf("delete %d", index); fflush(stdout);
   memmove(&g_model.expoData[index],&g_model.expoData[index+1],
             (MAX_EXPOS-(index+1))*sizeof(ExpoData));
   memset(&g_model.expoData[MAX_EXPOS-1],0,sizeof(ExpoData));
@@ -1885,32 +1883,27 @@ void ModelEdit::expolistWidget_doubleClicked(QModelIndex index)
 {
   expoOpen(ExposlistWidget->item(index.row()));
 }
-#include <iostream>
+
 void ModelEdit::exposDeleteList(QList<int> list)
 {
+  qSort(list.begin(), list.end());
 
-printf("ICI list size=%d", list.size());
-    qSort(list.begin(), list.end());
-
-
-    int iDec = 0;
-    foreach(int idx, list)
-    {
-        gm_deleteExpo(idx-iDec);
-        iDec++;
-    }
+  int iDec = 0;
+  foreach(int idx, list) {
+    gm_deleteExpo(idx-iDec);
+    iDec++;
+  }
 }
 
 void ModelEdit::mixersDeleteList(QList<int> list)
 {
-    qSort(list.begin(), list.end());
+  qSort(list.begin(), list.end());
 
-    int iDec = 0;
-    foreach(int idx, list)
-    {
-        gm_deleteMix(idx-iDec);
-        iDec++;
-    }
+  int iDec = 0;
+  foreach(int idx, list) {
+    gm_deleteMix(idx-iDec);
+    iDec++;
+  }
 }
 
 QList<int> ModelEdit::createMixListFromSelected()
@@ -2033,101 +2026,93 @@ void ModelEdit::exposCopy()
     QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
 }
 
-void ModelEdit::mimeExpoDropped(int index, const QMimeData *data, Qt::DropAction action)
+void ModelEdit::mimeExpoDropped(int index, const QMimeData *data, Qt::DropAction /*action*/)
 {
-    int idx = ExposlistWidget->item(index)->data(Qt::UserRole).toByteArray().at(0);
-    pasteExpoMimeData(data, idx);
-    if(action) {}
+  int idx = ExposlistWidget->item(index > 0 ? index-1 : 0)->data(Qt::UserRole).toByteArray().at(0);
+  pasteExpoMimeData(data, idx);
 }
 
-void ModelEdit::mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action)
+void ModelEdit::mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction /*action*/)
 {
-    int idx= MixerlistWidget->item(index)->data(Qt::UserRole).toByteArray().at(0);
-    pasteMixerMimeData(data, idx);
-    if(action) {}
+  int idx= MixerlistWidget->item(index > 0 ? index-1 : 0)->data(Qt::UserRole).toByteArray().at(0);
+  pasteMixerMimeData(data, idx);
 }
 
 void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
 {
-      if(mimeData->hasFormat("application/x-companion9x-mix"))
-    {
-        int idx = MixerlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
-        if(destIdx!=1000)
-            idx = destIdx>=0 ? destIdx-1 : destIdx;
+  if(mimeData->hasFormat("application/x-companion9x-mix"))
+  {
+    int idx; // mixer index
+    int dch;
 
-
-        int dch = -idx;
-        if(idx<0)
-            idx = getMixerIndex(-idx) - 1; //get mixer index to insert
-        else
-            dch = g_model.mixData[idx].destCh;
-
-        QByteArray mxData = mimeData->data("application/x-companion9x-mix");
-
-        int i = 0;
-        while(i<mxData.size())
-        {
-            idx++;
-            if(idx==MAX_MIXERS) break;
-
-            gm_insertMix(idx);
-            MixData *md = &g_model.mixData[idx];
-            memcpy(md,mxData.mid(i,sizeof(MixData)).constData(),sizeof(MixData));
-            md->destCh = dch;
-
-            i     += sizeof(MixData);
-        }
-
-        updateSettings();
-        tabMixes();
+    if(destIdx<0) {
+      dch = -destIdx;
+      idx = getMixerIndex(dch) - 1; //get mixer index to insert
     }
+    else {
+      idx = destIdx;
+      dch = g_model.mixData[idx].destCh;
+    }
+
+    QByteArray mxData = mimeData->data("application/x-companion9x-mix");
+
+    int i = 0;
+    while(i<mxData.size()) {
+      idx++;
+      if(idx==MAX_MIXERS) break;
+
+      gm_insertMix(idx);
+      MixData *md = &g_model.mixData[idx];
+      memcpy(md,mxData.mid(i,sizeof(MixData)).constData(),sizeof(MixData));
+      md->destCh = dch;
+      i += sizeof(MixData);
+    }
+
+    updateSettings();
+    tabMixes();
+  }
 }
 
 void ModelEdit::pasteExpoMimeData(const QMimeData * mimeData, int destIdx)
 {
-  // TODO core quand copy a la fin (expo + mix)
+  if (mimeData->hasFormat("application/x-companion9x-expo")) {
+    int idx; // mixer index
+    int dch;
 
-  std::cout << "pasteExpoMimeData" ;
-    if(mimeData->hasFormat("application/x-companion9x-expo"))
-    {
-      std::cout << "pasteExpoMimeData"  << 1;
-        int idx = ExposlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
-        if(destIdx!=1000)
-          idx = destIdx>=0 ? destIdx-1 : destIdx;
-
-        int dch = -idx-1;
-        if(idx<0)
-            idx = getExpoIndex(dch) - 1; //get expo index to insert
-        else
-            dch = g_model.expoData[idx].chn;
-
-        std::cout << idx << dch ;
-        QByteArray mxData = mimeData->data("application/x-companion9x-expo");
-
-        int i = 0;
-        while(i<mxData.size())
-        {
-            idx++;
-            if(idx==MAX_EXPOS) break;
-
-            gm_insertExpo(idx);
-            ExpoData *md = &g_model.expoData[idx];
-            memcpy(md, mxData.mid(i, sizeof(ExpoData)).constData(), sizeof(ExpoData));
-            md->chn = dch;
-            i     += sizeof(ExpoData);
-        }
-
-        updateSettings();
-        tabExpos();
+    if (destIdx < 0) {
+      dch = -destIdx - 1;
+      idx = getExpoIndex(dch) - 1; //get expo index to insert
     }
+    else {
+      idx = destIdx;
+      dch = g_model.expoData[idx].chn;
+    }
+
+    QByteArray mxData = mimeData->data("application/x-companion9x-expo");
+
+    int i = 0;
+    while (i < mxData.size()) {
+      idx++;
+      if (idx == MAX_EXPOS) break;
+      gm_insertExpo(idx);
+      ExpoData *md = &g_model.expoData[idx];
+      memcpy(md, mxData.mid(i, sizeof(ExpoData)).constData(), sizeof(ExpoData));
+      md->chn = dch;
+      i += sizeof(ExpoData);
+    }
+
+    updateSettings();
+    tabExpos();
+  }
 }
 
 void ModelEdit::mixersPaste()
 {
-    const QClipboard *clipboard = QApplication::clipboard();
-    const QMimeData *mimeData = clipboard->mimeData();
-
-    pasteMixerMimeData(mimeData);
+  const QClipboard *clipboard = QApplication::clipboard();
+  const QMimeData *mimeData = clipboard->mimeData();
+  QListWidgetItem *item = MixerlistWidget->currentItem();
+  if (item)
+    pasteMixerMimeData(mimeData, item->data(Qt::UserRole).toByteArray().at(0));
 }
 
 void ModelEdit::mixersDuplicate()
@@ -2138,10 +2123,11 @@ void ModelEdit::mixersDuplicate()
 
 void ModelEdit::exposPaste()
 {
-    const QClipboard *clipboard = QApplication::clipboard();
-    const QMimeData *mimeData = clipboard->mimeData();
-
-    pasteExpoMimeData(mimeData);
+  const QClipboard *clipboard = QApplication::clipboard();
+  const QMimeData *mimeData = clipboard->mimeData();
+  QListWidgetItem *item = MixerlistWidget->currentItem();
+  if (item)
+    pasteExpoMimeData(mimeData, item->data(Qt::UserRole).toByteArray().at(0));
 }
 
 void ModelEdit::exposDuplicate()
@@ -2191,8 +2177,7 @@ void ModelEdit::expoOpen(QListWidgetItem *item)
     item = ExposlistWidget->currentItem();
 
   int idx = item->data(Qt::UserRole).toByteArray().at(0);
-  if(idx<0)
-  {
+  if(idx<0) {
       int ch = -idx-1;
       idx = getExpoIndex(ch); //get expo index to insert
       gm_insertExpo(idx);
@@ -2203,22 +2188,18 @@ void ModelEdit::expoOpen(QListWidgetItem *item)
 
 void ModelEdit::expoAdd()
 {
-    int index = ExposlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
+  int index = ExposlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
 
-    if(index<0)  // if empty then return relevant index
-    {
-      expoOpen();
-    }
-    else
-    {
-        index++;
-        gm_insertExpo(index);
-        g_model.expoData[index].chn = g_model.expoData[index-1].chn;
-        printf("ICI chn = %d", g_model.expoData[index-1].chn); fflush(stdout);
+  if(index<0) {  // if empty then return relevant index
+    expoOpen();
+  }
+  else {
+    index++;
+    gm_insertExpo(index);
+    g_model.expoData[index].chn = g_model.expoData[index-1].chn;
+  }
 
-    }
-
-    gm_openExpo(index);
+  gm_openExpo(index);
 
 }
 
