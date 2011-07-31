@@ -1,9 +1,11 @@
 #include "mixerslist.h"
 //Q_DECLARE_METATYPE(QModelIndex); //at start of BookMarkList.cpp file (after #includes)
 
-MixersList::MixersList(QWidget *parent) :
-    QListWidget(parent)
+MixersList::MixersList(QWidget *parent, bool expo) :
+    QListWidget(parent),
+    expo(expo)
 {
+
     setFont(QFont("Courier New",12));
     setContextMenuPolicy(Qt::CustomContextMenu);
     setSelectionMode(QAbstractItemView::SingleSelection);
@@ -39,7 +41,10 @@ bool MixersList::dropMimeData( int index, const QMimeData * data, Qt::DropAction
     if(qba.length()>0)
     {
         QMimeData *mimeData = new QMimeData;
-        mimeData->setData("application/x-companion9x-mix", qba);
+        if (expo)
+          mimeData->setData("application/x-companion9x-expo", qba);
+        else
+          mimeData->setData("application/x-companion9x-mix", qba);
 
         emit mimeDropped(index, mimeData, action);
     }

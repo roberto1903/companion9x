@@ -43,6 +43,7 @@ SET( companion9x_SRCS
      printdialog.cpp
      donatorsdialog.cpp
      fusesdialog.cpp
+     expodialog.cpp
      mixerdialog.cpp
      downloaddialog.cpp
      simulatordialog.cpp
@@ -58,6 +59,7 @@ SET( companion9x_MOC_HDRS
      donatorsdialog.h
      fusesdialog.h
      mixerdialog.h
+     expodialog.h
      downloaddialog.h
      simulatordialog.h
      generaledit.h
@@ -71,6 +73,7 @@ SET( companion9x_UIS
      avroutputdialog.ui
      donatorsdialog.ui
      fusesdialog.ui
+     expodialog.ui
      mixerdialog.ui
      preferencesdialog.ui
      simulatordialog.ui

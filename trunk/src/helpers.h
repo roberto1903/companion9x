@@ -23,6 +23,7 @@
 #define CURVE9(x) (MAX_CURVE5+(x)-1)
 
 void populateSwitchCB(QComboBox *b, int value);
+void populatePhasesCB(QComboBox *b, int value);
 void populateCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, int stickMode=1, int value=0);

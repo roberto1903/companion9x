@@ -3,9 +3,10 @@
 #include "helpers.h"
 #include "edge.h"
 #include "node.h"
+#include "expodialog.h"
 #include "mixerdialog.h"
 #include "simulatordialog.h"
-
+#include <assert.h>
 #include <QtGui>
 
 #define BC_BIT_RUD (0x01)
@@ -35,6 +36,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     ui->setupUi(this);
 
     setupMixerListWidget();
+    setupExposListWidget();
 
     QSettings settings("er9x-companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("modelEditTab", 0).toInt());
@@ -43,7 +45,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     ui->modelNameLE->setValidator(new QRegExpValidator(rx, this));
 
     tabModelEditSetup();
-    tabExpo();
+    tabExpos();
     tabMixes();
     tabLimits();
     tabCurves();
@@ -66,9 +68,43 @@ ModelEdit::~ModelEdit()
     delete ui;
 }
 
+
+void ModelEdit::setupExposListWidget()
+{
+    ExposlistWidget = new MixersList(this, true);
+    QPushButton * qbUp = new QPushButton(this);
+    QPushButton * qbDown = new QPushButton(this);
+    QPushButton * qbClear = new QPushButton(this);
+
+    qbUp->setText("Move Up");
+    qbUp->setIcon(QIcon(":/images/moveup.png"));
+    qbUp->setShortcut(QKeySequence(tr("Ctrl+Up")));
+    qbDown->setText("Move Down");
+    qbDown->setIcon(QIcon(":/images/movedown.png"));
+    qbDown->setShortcut(QKeySequence(tr("Ctrl+Down")));
+    qbClear->setText("Clear Mixes");
+    qbClear->setIcon(QIcon(":/images/clear.png"));
+
+    ui->exposLayout->addWidget(ExposlistWidget,1,1,1,3);
+    ui->exposLayout->addWidget(qbUp,2,1);
+    ui->exposLayout->addWidget(qbClear,2,2);
+    ui->exposLayout->addWidget(qbDown,2,3);
+
+    connect(ExposlistWidget,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(expolistWidget_customContextMenuRequested(QPoint)));
+    connect(ExposlistWidget,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(expolistWidget_doubleClicked(QModelIndex)));
+    connect(ExposlistWidget,SIGNAL(mimeDropped(int,const QMimeData*,Qt::DropAction)),this,SLOT(mimeExpoDropped(int,const QMimeData*,Qt::DropAction)));
+
+    connect(qbUp,SIGNAL(pressed()),SLOT(moveExpoUp()));
+    connect(qbDown,SIGNAL(pressed()),SLOT(moveExpoDown()));
+    connect(qbClear,SIGNAL(pressed()),SLOT(clearExpos()));
+
+    connect(ExposlistWidget,SIGNAL(keyWasPressed(QKeyEvent*)), this, SLOT(expolistWidget_KeyPress(QKeyEvent*)));
+}
+
+
 void ModelEdit::setupMixerListWidget()
 {
-    MixerlistWidget = new MixersList(this);
+    MixerlistWidget = new MixersList(this, false); // TODO enum
     QPushButton * qbUp = new QPushButton(this);
     QPushButton * qbDown = new QPushButton(this);
     QPushButton * qbClear = new QPushButton(this);
@@ -89,7 +125,7 @@ void ModelEdit::setupMixerListWidget()
 
     connect(MixerlistWidget,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(mixerlistWidget_customContextMenuRequested(QPoint)));
     connect(MixerlistWidget,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(mixerlistWidget_doubleClicked(QModelIndex)));
-    connect(MixerlistWidget,SIGNAL(mimeDropped(int,const QMimeData*,Qt::DropAction)),this,SLOT(mimeDropped(int,const QMimeData*,Qt::DropAction)));
+    connect(MixerlistWidget,SIGNAL(mimeDropped(int,const QMimeData*,Qt::DropAction)),this,SLOT(mimeMixerDropped(int,const QMimeData*,Qt::DropAction)));
 
     connect(qbUp,SIGNAL(pressed()),SLOT(moveMixUp()));
     connect(qbDown,SIGNAL(pressed()),SLOT(moveMixDown()));
@@ -177,7 +213,7 @@ void ModelEdit::tabModelEditSetup()
     ui->trainerChkB->setChecked(g_model.traineron);
 
     //FrSky settings
-    ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
+/*    ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
     ui->a11LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].level);
     ui->a11GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].greater);
     ui->a11ValueSB->setValue(g_model.frsky.channels[0].alarms[0].value);
@@ -190,226 +226,89 @@ void ModelEdit::tabModelEditSetup()
     ui->a21ValueSB->setValue(g_model.frsky.channels[1].alarms[0].value);
     ui->a22LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].level);
     ui->a22GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].greater);
-    ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);
+    ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);*/
 }
 
-void ModelEdit::tabExpo()
+void ModelEdit::tabExpos()
 {
-# if 0 // TODO ++ !
-  populateSwitchCB(ui->RUD_edrSw1,g_model.expoData[CONVERT_MODE(RUD)-1].drSw1);
-    populateSwitchCB(ui->RUD_edrSw2,g_model.expoData[CONVERT_MODE(RUD)-1].drSw2);
-    populateSwitchCB(ui->ELE_edrSw1,g_model.expoData[CONVERT_MODE(ELE)-1].drSw1);
-    populateSwitchCB(ui->ELE_edrSw2,g_model.expoData[CONVERT_MODE(ELE)-1].drSw2);
-    populateSwitchCB(ui->THR_edrSw1,g_model.expoData[CONVERT_MODE(THR)-1].drSw1);
-    populateSwitchCB(ui->THR_edrSw2,g_model.expoData[CONVERT_MODE(THR)-1].drSw2);
-    populateSwitchCB(ui->AIL_edrSw1,g_model.expoData[CONVERT_MODE(AIL)-1].drSw1);
-    populateSwitchCB(ui->AIL_edrSw2,g_model.expoData[CONVERT_MODE(AIL)-1].drSw2);
+    // curDest -> destination channel
+    // i -> mixer number
+    QByteArray qba;
+    ExposlistWidget->clear();
+    int curDest = -1;
 
-
-
-//#define DR_HIGH   0
-//#define DR_MID    1
-//#define DR_LOW    2
-//#define DR_EXPO   0
-//#define DR_WEIGHT 1
-//#define DR_RIGHT  0
-//#define DR_LEFT   1
-//expo[3][2][2] //[HI/MID/LOW][expo/weight][R/L]
-    ui->RUD_DrLHi->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100);
-    ui->RUD_DrLLow->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100);
-    ui->RUD_DrLMid->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100);
-    ui->RUD_DrRHi->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100);
-    ui->RUD_DrRLow->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100);
-    ui->RUD_DrRMid->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100);
-    ui->RUD_ExpoLHi->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]);
-    ui->RUD_ExpoLLow->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]);
-    ui->RUD_ExpoLMid->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_EXPO][DR_LEFT]);
-    ui->RUD_ExpoRHi->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]);
-    ui->RUD_ExpoRLow->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]);
-    ui->RUD_ExpoRMid->setValue(g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]);
-
-    ui->ELE_DrLHi->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100);
-    ui->ELE_DrLLow->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100);
-    ui->ELE_DrLMid->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100);
-    ui->ELE_DrRHi->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100);
-    ui->ELE_DrRLow->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100);
-    ui->ELE_DrRMid->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100);
-    ui->ELE_ExpoLHi->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]);
-    ui->ELE_ExpoLLow->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]);
-    ui->ELE_ExpoLMid->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_EXPO][DR_LEFT]);
-    ui->ELE_ExpoRHi->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]);
-    ui->ELE_ExpoRLow->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]);
-    ui->ELE_ExpoRMid->setValue(g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]);
-
-    ui->THR_DrLHi->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100);
-    ui->THR_DrLLow->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100);
-    ui->THR_DrLMid->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100);
-    ui->THR_DrRHi->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100);
-    ui->THR_DrRLow->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100);
-    ui->THR_DrRMid->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100);
-    ui->THR_ExpoLHi->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]);
-    ui->THR_ExpoLLow->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]);
-    ui->THR_ExpoLMid->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_EXPO][DR_LEFT]);
-    ui->THR_ExpoRHi->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]);
-    ui->THR_ExpoRLow->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]);
-    ui->THR_ExpoRMid->setValue(g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]);
-
-    ui->AIL_DrLHi->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100);
-    ui->AIL_DrLLow->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100);
-    ui->AIL_DrLMid->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100);
-    ui->AIL_DrRHi->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100);
-    ui->AIL_DrRLow->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100);
-    ui->AIL_DrRMid->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100);
-    ui->AIL_ExpoLHi->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]);
-    ui->AIL_ExpoLLow->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]);
-    ui->AIL_ExpoLMid->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_EXPO][DR_LEFT]);
-    ui->AIL_ExpoRHi->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]);
-    ui->AIL_ExpoRLow->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]);
-    ui->AIL_ExpoRMid->setValue(g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]);
-
-
-    if(g_model.thrExpo)
+    for(int i=0; i<MAX_EXPOS; i++)
     {
-        ui->THR_DrLHi->setEnabled(false);
-        ui->THR_DrLLow->setEnabled(false);
-        ui->THR_DrLMid->setEnabled(false);
-        ui->THR_ExpoLHi->setEnabled(false);
-        ui->THR_ExpoLLow->setEnabled(false);
-        ui->THR_ExpoLMid->setEnabled(false);
+        ExpoData *md = &g_model.expoData[i];
+
+        printf("expo %d chn %d\n", i, md->chn);
+        if(md->mode==0) break;
+        QString str = "";
+        while(curDest<md->chn-1)
+        {
+            curDest++;
+            str = getSourceStr(g_eeGeneral.stickMode,curDest+1);
+            qba.clear();
+            qba.append((quint8)-curDest-1);
+            QListWidgetItem *itm = new QListWidgetItem(str);
+            itm->setData(Qt::UserRole,qba);
+            ExposlistWidget->addItem(itm);
+        }
+
+        if(curDest!=md->chn)
+        {
+            str = getSourceStr(g_eeGeneral.stickMode,md->chn+1);
+            curDest=md->chn;
+        }
+        else
+            str = "    ";
+
+        switch(md->mode)
+        {
+        case (1): str += " ->"; break;
+        case (2): str += " <-"; break;
+        default:  str += " --"; break;
+        };
+
+        str += md->expo<0 ? QString(" %1\%").arg(md->expo).rightJustified(6,' ') :
+                                      QString(" +%1\%").arg(md->expo).rightJustified(6, ' ');
+
+        str += md->weight<0 ? QString(" %1\%").arg(md->weight).rightJustified(6,' ') :
+                              QString(" +%1\%").arg(md->weight).rightJustified(6, ' ');
+
+
+        if(md->curve)
+        {
+            QString crvStr = CURV_STR;
+            str += tr(" Curve(%1)").arg(crvStr.mid(md->curve*3,3).remove(' '));
+        }
+
+        // TODO phase
+        qba.clear();
+        qba.append((quint8)i);
+        qba.append((const char*)md, sizeof(ExpoData));
+        QListWidgetItem *itm = new QListWidgetItem(str);
+        itm->setData(Qt::UserRole,qba);  // expo number
+        ExposlistWidget->addItem(itm);   //(str);
     }
 
-    connect(ui->RUD_edrSw1,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->RUD_edrSw2,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->ELE_edrSw1,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->ELE_edrSw2,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->THR_edrSw1,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->THR_edrSw2,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->AIL_edrSw1,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
-    connect(ui->AIL_edrSw2,SIGNAL(currentIndexChanged(int)),this,SLOT(expoEdited()));
+    while(curDest<NUM_STICKS-1)
+    {
+        curDest++;
+        QString str = getSourceStr(g_eeGeneral.stickMode,curDest);
 
-    connect(ui->RUD_DrLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_DrLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_DrLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_DrRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_DrRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_DrRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->RUD_ExpoRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-
-    connect(ui->ELE_DrLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_DrLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_DrLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_DrRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_DrRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_DrRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->ELE_ExpoRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-
-    connect(ui->THR_DrLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_DrLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_DrLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_DrRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_DrRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_DrRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->THR_ExpoRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-
-    connect(ui->AIL_DrLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_DrLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_DrLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_DrRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_DrRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_DrRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoLHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoLLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoLMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoRHi,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoRLow,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-    connect(ui->AIL_ExpoRMid,SIGNAL(editingFinished()),this,SLOT(expoEdited()));
-
-#endif
+        qba.clear();
+        qba.append((quint8)-curDest);
+        QListWidgetItem *itm = new QListWidgetItem(str);
+        itm->setData(Qt::UserRole,qba); // add new mixer
+        ExposlistWidget->addItem(itm);
+    }
 }
 
-
-void ModelEdit::expoEdited()
+void ModelEdit::exposEdited()
 {
-#if 0 // TODO ++
-    g_model.expoData[CONVERT_MODE(RUD)-1].drSw1 = ui->RUD_edrSw1->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(RUD)-1].drSw2 = ui->RUD_edrSw2->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(ELE)-1].drSw1 = ui->ELE_edrSw1->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(ELE)-1].drSw2 = ui->ELE_edrSw2->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(THR)-1].drSw1 = ui->THR_edrSw1->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(THR)-1].drSw2 = ui->THR_edrSw2->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(AIL)-1].drSw1 = ui->AIL_edrSw1->currentIndex()-MAX_DRSWITCH;
-    g_model.expoData[CONVERT_MODE(AIL)-1].drSw2 = ui->AIL_edrSw2->currentIndex()-MAX_DRSWITCH;
-
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]  = ui->RUD_DrLHi->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]   = ui->RUD_DrLLow->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]   = ui->RUD_DrLMid->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT] = ui->RUD_DrRHi->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]  = ui->RUD_DrRLow->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]  = ui->RUD_DrRMid->value()-100;
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]    = ui->RUD_ExpoLHi->value();
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]     = ui->RUD_ExpoLLow->value();
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_EXPO][DR_LEFT]     = ui->RUD_ExpoLMid->value();
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]   = ui->RUD_ExpoRHi->value();
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]    = ui->RUD_ExpoRLow->value();
-    g_model.expoData[CONVERT_MODE(RUD)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]    = ui->RUD_ExpoRMid->value();
-
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]  = ui->ELE_DrLHi->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]   = ui->ELE_DrLLow->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]   = ui->ELE_DrLMid->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT] = ui->ELE_DrRHi->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]  = ui->ELE_DrRLow->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]  = ui->ELE_DrRMid->value()-100;
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]    = ui->ELE_ExpoLHi->value();
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]     = ui->ELE_ExpoLLow->value();
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_EXPO][DR_LEFT]     = ui->ELE_ExpoLMid->value();
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]   = ui->ELE_ExpoRHi->value();
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]    = ui->ELE_ExpoRLow->value();
-    g_model.expoData[CONVERT_MODE(ELE)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]    = ui->ELE_ExpoRMid->value();
-
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]  = ui->THR_DrLHi->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]   = ui->THR_DrLLow->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]   = ui->THR_DrLMid->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT] = ui->THR_DrRHi->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]  = ui->THR_DrRLow->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]  = ui->THR_DrRMid->value()-100;
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]    = ui->THR_ExpoLHi->value();
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]     = ui->THR_ExpoLLow->value();
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_EXPO][DR_LEFT]     = ui->THR_ExpoLMid->value();
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]   = ui->THR_ExpoRHi->value();
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]    = ui->THR_ExpoRLow->value();
-    g_model.expoData[CONVERT_MODE(THR)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]    = ui->THR_ExpoRMid->value();
-
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]  = ui->AIL_DrLHi->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_WEIGHT][DR_LEFT]   = ui->AIL_DrLLow->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_WEIGHT][DR_LEFT]   = ui->AIL_DrLMid->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT] = ui->AIL_DrRHi->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]  = ui->AIL_DrRLow->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_WEIGHT][DR_RIGHT]  = ui->AIL_DrRMid->value()-100;
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_EXPO][DR_LEFT]    = ui->AIL_ExpoLHi->value();
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_EXPO][DR_LEFT]     = ui->AIL_ExpoLLow->value();
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_EXPO][DR_LEFT]     = ui->AIL_ExpoLMid->value();
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_HIGH][DR_EXPO][DR_RIGHT]   = ui->AIL_ExpoRHi->value();
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_LOW][DR_EXPO][DR_RIGHT]    = ui->AIL_ExpoRLow->value();
-    g_model.expoData[CONVERT_MODE(AIL)-1].expo[DR_MID][DR_EXPO][DR_RIGHT]    = ui->AIL_ExpoRMid->value();
-#endif
     updateSettings();
 }
-
 
 void ModelEdit::tabMixes()
 {
@@ -1408,85 +1307,85 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
 
 void ModelEdit::on_a1RatioSB_editingFinished()
 {
-    g_model.frsky.channels[0].ratio = ui->a1RatioSB->value();
+//    g_model.frsky.channels[0].ratio = ui->a1RatioSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[0].alarms[0].level = index;
+  //  g_model.frsky.channels[0].alarms[0].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a11GreaterCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[0].alarms[0].greater = index;
+ //   g_model.frsky.channels[0].alarms[0].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a11ValueSB_editingFinished()
 {
-    g_model.frsky.channels[0].alarms[0].value = ui->a11ValueSB->value();
+  //  g_model.frsky.channels[0].alarms[0].value = ui->a11ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a12LevelCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[0].alarms[1].level = index;
+  //   g_model.frsky.channels[0].alarms[1].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a12GreaterCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[0].alarms[1].greater = index;
+  //   g_model.frsky.channels[0].alarms[1].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a12ValueSB_editingFinished()
 {
-    g_model.frsky.channels[0].alarms[1].value = ui->a12ValueSB->value();
+  //   g_model.frsky.channels[0].alarms[1].value = ui->a12ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a2RatioSB_editingFinished()
 {
-    g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
+  //   g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a21LevelCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[1].alarms[0].level = index;
+  //   g_model.frsky.channels[1].alarms[0].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a21GreaterCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[1].alarms[0].greater = index;
+  //   g_model.frsky.channels[1].alarms[0].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a21ValueSB_editingFinished()
 {
-    g_model.frsky.channels[1].alarms[0].value = ui->a21ValueSB->value();
+  //  g_model.frsky.channels[1].alarms[0].value = ui->a21ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a22LevelCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[1].alarms[1].level = index;
+  //   g_model.frsky.channels[1].alarms[1].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a22GreaterCB_currentIndexChanged(int index)
 {
-    g_model.frsky.channels[1].alarms[1].greater = index;
+  //    g_model.frsky.channels[1].alarms[1].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a22ValueSB_editingFinished()
 {
-    g_model.frsky.channels[1].alarms[1].value = ui->a22ValueSB->value();
+  //   g_model.frsky.channels[1].alarms[1].value = ui->a22ValueSB->value();
     updateSettings();
 }
 
@@ -1505,15 +1404,6 @@ void ModelEdit::on_trainerChkB_toggled(bool checked)
 void ModelEdit::on_thrExpoChkB_toggled(bool checked)
 {
     g_model.thrExpo = checked;
-    if(g_model.thrExpo)
-    {
-        ui->THR_DrLHi->setEnabled(false);
-        ui->THR_DrLLow->setEnabled(false);
-        ui->THR_DrLMid->setEnabled(false);
-        ui->THR_ExpoLHi->setEnabled(false);
-        ui->THR_ExpoLLow->setEnabled(false);
-        ui->THR_ExpoLMid->setEnabled(false);
-    }
     updateSettings();
 }
 
@@ -1930,6 +1820,53 @@ int ModelEdit::getMixerIndex(int dch)
     return i;
 }
 
+void ModelEdit::gm_insertExpo(int idx)
+{
+    if(idx<0 || idx>=MAX_EXPOS) return;
+
+    int chn = g_model.expoData[idx].chn;
+    memmove(&g_model.expoData[idx+1],&g_model.expoData[idx],
+            (MAX_EXPOS-(idx+1))*sizeof(ExpoData) );
+    memset(&g_model.expoData[idx],0,sizeof(ExpoData));
+    g_model.expoData[idx].chn = chn;
+    g_model.expoData[idx].weight = 100;
+    g_model.expoData[idx].mode = 3 /* TODO enum */;
+
+}
+
+void ModelEdit::gm_deleteExpo(int index)
+{
+  printf("delete %d", index); fflush(stdout);
+  memmove(&g_model.expoData[index],&g_model.expoData[index+1],
+            (MAX_EXPOS-(index+1))*sizeof(ExpoData));
+  memset(&g_model.expoData[MAX_EXPOS-1],0,sizeof(ExpoData));
+}
+
+void ModelEdit::gm_openExpo(int index)
+{
+    if(index<0 || index>=MAX_EXPOS) return;
+
+    ExpoData mixd(g_model.expoData[index]);
+    updateSettings();
+    tabExpos();
+
+    ExpoDialog *g = new ExpoDialog(this, &mixd, g_eeGeneral.stickMode);
+    if(g->exec())
+    {
+        g_model.expoData[index] = mixd;
+        updateSettings();
+        tabExpos();
+    }
+}
+
+int ModelEdit::getExpoIndex(int dch)
+{
+    int i = 0;
+    while (g_model.expoData[i].chn<=dch && g_model.expoData[i].mode && i<MAX_EXPOS) i++;
+    if(i==MAX_EXPOS) return -1;
+    return i;
+}
+
 void ModelEdit::mixerlistWidget_doubleClicked(QModelIndex index)
 {
     int idx= MixerlistWidget->item(index.row())->data(Qt::UserRole).toByteArray().at(0);
@@ -1941,6 +1878,27 @@ void ModelEdit::mixerlistWidget_doubleClicked(QModelIndex index)
         g_model.mixData[idx].destCh = i;
     }
     gm_openMix(idx);
+}
+
+
+void ModelEdit::expolistWidget_doubleClicked(QModelIndex index)
+{
+  expoOpen(ExposlistWidget->item(index.row()));
+}
+#include <iostream>
+void ModelEdit::exposDeleteList(QList<int> list)
+{
+
+printf("ICI list size=%d", list.size());
+    qSort(list.begin(), list.end());
+
+
+    int iDec = 0;
+    foreach(int idx, list)
+    {
+        gm_deleteExpo(idx-iDec);
+        iDec++;
+    }
 }
 
 void ModelEdit::mixersDeleteList(QList<int> list)
@@ -1955,7 +1913,7 @@ void ModelEdit::mixersDeleteList(QList<int> list)
     }
 }
 
-QList<int> ModelEdit::createListFromSelected()
+QList<int> ModelEdit::createMixListFromSelected()
 {
     QList<int> list;
     foreach(QListWidgetItem *item, MixerlistWidget->selectedItems())
@@ -1966,14 +1924,35 @@ QList<int> ModelEdit::createListFromSelected()
     return list;
 }
 
+QList<int> ModelEdit::createExpoListFromSelected()
+{
+    QList<int> list;
+    foreach(QListWidgetItem *item, ExposlistWidget->selectedItems())
+    {
+        int idx= item->data(Qt::UserRole).toByteArray().at(0);
+        if(idx>=0 && idx<MAX_EXPOS) list << idx;
+    }
+    return list;
+}
 
-void ModelEdit::setSelectedByList(QList<int> list)
+// TODO duplicated code
+void ModelEdit::setSelectedByMixList(QList<int> list)
 {
     for(int i=0; i<MixerlistWidget->count(); i++)
     {
         int t = MixerlistWidget->item(i)->data(Qt::UserRole).toByteArray().at(0);
         if(list.contains(t))
             MixerlistWidget->item(i)->setSelected(true);
+    }
+}
+
+void ModelEdit::setSelectedByExpoList(QList<int> list)
+{
+    for(int i=0; i<ExposlistWidget->count(); i++)
+    {
+        int t = ExposlistWidget->item(i)->data(Qt::UserRole).toByteArray().at(0);
+        if(list.contains(t))
+          ExposlistWidget->item(i)->setSelected(true);
     }
 }
 
@@ -1989,7 +1968,7 @@ void ModelEdit::mixersDelete(bool ask)
 
     if ((ret == QMessageBox::Yes) || (!ask))
     {
-        mixersDeleteList(createListFromSelected());
+        mixersDeleteList(createMixListFromSelected());
         updateSettings();
         tabMixes();
     }
@@ -2003,7 +1982,8 @@ void ModelEdit::mixersCut()
 
 void ModelEdit::mixersCopy()
 {
-    QList<int> list = createListFromSelected();
+
+    QList<int> list = createMixListFromSelected();
 
     QByteArray mxData;
     foreach(int idx, list)
@@ -2015,16 +1995,61 @@ void ModelEdit::mixersCopy()
     QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
 }
 
-void ModelEdit::mimeDropped(int index, const QMimeData *data, Qt::DropAction action)
+void ModelEdit::exposDelete(bool ask)
 {
-    int idx= MixerlistWidget->item(index)->data(Qt::UserRole).toByteArray().at(0);
-    pasteMIMEData(data,idx);
+    QMessageBox::StandardButton ret = QMessageBox::No;
+
+    if(ask)
+        ret = QMessageBox::warning(this, "companion9x",
+                 tr("Delete Selected Expos?"),
+                 QMessageBox::Yes | QMessageBox::No);
+
+
+    if ((ret == QMessageBox::Yes) || (!ask))
+    {
+        exposDeleteList(createExpoListFromSelected());
+        updateSettings();
+        tabExpos();
+    }
+}
+
+void ModelEdit::exposCut()
+{
+    exposCopy();
+    exposDelete(false);
+}
+
+void ModelEdit::exposCopy()
+{
+    QList<int> list = createExpoListFromSelected();
+
+    QByteArray mxData;
+    foreach(int idx, list)
+      mxData.append((char*)&g_model.expoData[idx],sizeof(ExpoData));
+
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setData("application/x-companion9x-expo", mxData);
+
+    QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
+}
+
+void ModelEdit::mimeExpoDropped(int index, const QMimeData *data, Qt::DropAction action)
+{
+    int idx = ExposlistWidget->item(index)->data(Qt::UserRole).toByteArray().at(0);
+    pasteExpoMimeData(data, idx);
     if(action) {}
 }
 
-void ModelEdit::pasteMIMEData(const QMimeData * mimeData, int destIdx)
+void ModelEdit::mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action)
 {
-    if(mimeData->hasFormat("application/x-companion9x-mix"))
+    int idx= MixerlistWidget->item(index)->data(Qt::UserRole).toByteArray().at(0);
+    pasteMixerMimeData(data, idx);
+    if(action) {}
+}
+
+void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
+{
+      if(mimeData->hasFormat("application/x-companion9x-mix"))
     {
         int idx = MixerlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
         if(destIdx!=1000)
@@ -2058,18 +2083,71 @@ void ModelEdit::pasteMIMEData(const QMimeData * mimeData, int destIdx)
     }
 }
 
+void ModelEdit::pasteExpoMimeData(const QMimeData * mimeData, int destIdx)
+{
+  // TODO core quand copy a la fin (expo + mix)
+
+  std::cout << "pasteExpoMimeData" ;
+    if(mimeData->hasFormat("application/x-companion9x-expo"))
+    {
+      std::cout << "pasteExpoMimeData"  << 1;
+        int idx = ExposlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
+        if(destIdx!=1000)
+          idx = destIdx>=0 ? destIdx-1 : destIdx;
+
+        int dch = -idx-1;
+        if(idx<0)
+            idx = getExpoIndex(dch) - 1; //get expo index to insert
+        else
+            dch = g_model.expoData[idx].chn;
+
+        std::cout << idx << dch ;
+        QByteArray mxData = mimeData->data("application/x-companion9x-expo");
+
+        int i = 0;
+        while(i<mxData.size())
+        {
+            idx++;
+            if(idx==MAX_EXPOS) break;
+
+            gm_insertExpo(idx);
+            ExpoData *md = &g_model.expoData[idx];
+            memcpy(md, mxData.mid(i, sizeof(ExpoData)).constData(), sizeof(ExpoData));
+            md->chn = dch;
+            i     += sizeof(ExpoData);
+        }
+
+        updateSettings();
+        tabExpos();
+    }
+}
+
 void ModelEdit::mixersPaste()
 {
     const QClipboard *clipboard = QApplication::clipboard();
     const QMimeData *mimeData = clipboard->mimeData();
 
-    pasteMIMEData(mimeData);
+    pasteMixerMimeData(mimeData);
 }
 
 void ModelEdit::mixersDuplicate()
 {
     mixersCopy();
     mixersPaste();
+}
+
+void ModelEdit::exposPaste()
+{
+    const QClipboard *clipboard = QApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+
+    pasteExpoMimeData(mimeData);
+}
+
+void ModelEdit::exposDuplicate()
+{
+    exposCopy();
+    exposPaste();
 }
 
 void ModelEdit::mixerOpen()
@@ -2107,6 +2185,43 @@ void ModelEdit::mixerAdd()
 
 }
 
+void ModelEdit::expoOpen(QListWidgetItem *item)
+{
+  if (!item)
+    item = ExposlistWidget->currentItem();
+
+  int idx = item->data(Qt::UserRole).toByteArray().at(0);
+  if(idx<0)
+  {
+      int ch = -idx-1;
+      idx = getExpoIndex(ch); //get expo index to insert
+      gm_insertExpo(idx);
+      g_model.expoData[idx].chn = ch;
+  }
+  gm_openExpo(idx);
+}
+
+void ModelEdit::expoAdd()
+{
+    int index = ExposlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
+
+    if(index<0)  // if empty then return relevant index
+    {
+      expoOpen();
+    }
+    else
+    {
+        index++;
+        gm_insertExpo(index);
+        g_model.expoData[index].chn = g_model.expoData[index-1].chn;
+        printf("ICI chn = %d", g_model.expoData[index-1].chn); fflush(stdout);
+
+    }
+
+    gm_openExpo(index);
+
+}
+
 void ModelEdit::mixerlistWidget_customContextMenuRequested(QPoint pos)
 {
     QPoint globalPos = MixerlistWidget->mapToGlobal(pos);
@@ -2131,6 +2246,30 @@ void ModelEdit::mixerlistWidget_customContextMenuRequested(QPoint pos)
     contextMenu.exec(globalPos);
 }
 
+void ModelEdit::expolistWidget_customContextMenuRequested(QPoint pos)
+{
+    QPoint globalPos = ExposlistWidget->mapToGlobal(pos);
+
+    const QClipboard *clipboard = QApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+    bool hasData = mimeData->hasFormat("application/x-companion9x-expo");
+
+    QMenu contextMenu;
+    contextMenu.addAction(QIcon(":/images/add.png"), tr("&Add"),this,SLOT(expoAdd()),tr("Ctrl+A"));
+    contextMenu.addAction(QIcon(":/images/edit.png"), tr("&Edit"),this,SLOT(expoOpen()),tr("Enter"));
+    contextMenu.addSeparator();
+    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(exposDelete()),tr("Delete"));
+    contextMenu.addAction(QIcon(":/images/copy.png"), tr("&Copy"),this,SLOT(exposCopy()),tr("Ctrl+C"));
+    contextMenu.addAction(QIcon(":/images/cut.png"), tr("&Cut"),this,SLOT(exposCut()),tr("Ctrl+X"));
+    contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(exposPaste()),tr("Ctrl+V"))->setEnabled(hasData);
+    contextMenu.addAction(QIcon(":/images/duplicate.png"), tr("Du&plicate"),this,SLOT(exposDuplicate()),tr("Ctrl+U"));
+    contextMenu.addSeparator();
+    contextMenu.addAction(QIcon(":/images/moveup.png"), tr("Move Up"),this,SLOT(moveExpoUp()),tr("Ctrl+Up"));
+    contextMenu.addAction(QIcon(":/images/movedown.png"), tr("Move Down"),this,SLOT(moveExpoDown()),tr("Ctrl+Down"));
+
+    contextMenu.exec(globalPos);
+}
+
 void ModelEdit::mixerlistWidget_KeyPress(QKeyEvent *event)
 {
     if(event->matches(QKeySequence::SelectAll)) mixerAdd();  //Ctrl A
@@ -2145,6 +2284,22 @@ void ModelEdit::mixerlistWidget_KeyPress(QKeyEvent *event)
         MixerlistWidget->setCurrentRow(MixerlistWidget->currentRow()+1);
     if(event->matches(QKeySequence::MoveToPreviousLine))
         MixerlistWidget->setCurrentRow(MixerlistWidget->currentRow()-1);
+}
+
+void ModelEdit::expolistWidget_KeyPress(QKeyEvent *event)
+{
+    if(event->matches(QKeySequence::SelectAll)) expoAdd();  //Ctrl A
+    if(event->matches(QKeySequence::Delete))    exposDelete();
+    if(event->matches(QKeySequence::Copy))      exposCopy();
+    if(event->matches(QKeySequence::Cut))       exposCut();
+    if(event->matches(QKeySequence::Paste))     exposPaste();
+    if(event->matches(QKeySequence::Underline)) exposDuplicate();
+
+    if(event->key()==Qt::Key_Return || event->key()==Qt::Key_Enter) expoOpen();
+    if(event->matches(QKeySequence::MoveToNextLine))
+        ExposlistWidget->setCurrentRow(ExposlistWidget->currentRow()+1);
+    if(event->matches(QKeySequence::MoveToPreviousLine))
+        ExposlistWidget->setCurrentRow(ExposlistWidget->currentRow()-1);
 }
 
 int ModelEdit::gm_moveMix(int idx, bool dir) //true=inc=down false=dec=up
@@ -2173,7 +2328,7 @@ int ModelEdit::gm_moveMix(int idx, bool dir) //true=inc=down false=dec=up
 
 void ModelEdit::moveMixUp()
 {
-    QList<int> list = createListFromSelected();
+    QList<int> list = createMixListFromSelected();
     QList<int> highlightList;
     foreach(int idx, list)
         highlightList << gm_moveMix(idx, false);
@@ -2181,12 +2336,12 @@ void ModelEdit::moveMixUp()
     updateSettings();
     tabMixes();
 
-    setSelectedByList(highlightList);
+    setSelectedByMixList(highlightList);
 }
 
 void ModelEdit::moveMixDown()
 {
-    QList<int> list = createListFromSelected();
+    QList<int> list = createMixListFromSelected();
     QList<int> highlightList;
     foreach(int idx, list)
         highlightList << gm_moveMix(idx, true);
@@ -2194,7 +2349,57 @@ void ModelEdit::moveMixDown()
     updateSettings();
     tabMixes();
 
-    setSelectedByList(highlightList);
+    setSelectedByMixList(highlightList);
+}
+
+int ModelEdit::gm_moveExpo(int idx, bool dir) //true=inc=down false=dec=up
+{
+    if(idx>MAX_EXPOS || (idx==0 && !dir) || (idx==MAX_EXPOS && dir)) return idx;
+
+    int tdx = dir ? idx+1 : idx-1;
+    ExpoData &src=g_model.expoData[idx];
+    ExpoData &tgt=g_model.expoData[tdx];
+
+    if(src.chn==0) return idx;
+
+    if(tgt.chn!=src.chn) {
+        if ((dir)  && (src.chn<NUM_STICKS)) src.chn++;
+        if ((!dir) && (src.chn>0))          src.chn--;
+        return idx;
+    }
+
+    //flip between idx and tgt
+    ExpoData temp;
+    memcpy(&temp,&src,sizeof(ExpoData));
+    memcpy(&src,&tgt,sizeof(ExpoData));
+    memcpy(&tgt,&temp,sizeof(ExpoData));
+    return tdx;
+}
+
+void ModelEdit::moveExpoUp()
+{
+    QList<int> list = createExpoListFromSelected();
+    QList<int> highlightList;
+    foreach(int idx, list)
+        highlightList << gm_moveExpo(idx, false);
+
+    updateSettings();
+    tabExpos();
+
+    setSelectedByExpoList(highlightList);
+}
+
+void ModelEdit::moveExpoDown()
+{
+    QList<int> list = createExpoListFromSelected();
+    QList<int> highlightList;
+    foreach(int idx, list)
+        highlightList << gm_moveExpo(idx, true);
+
+    updateSettings();
+    tabExpos();
+
+    setSelectedByExpoList(highlightList);
 }
 
 void ModelEdit::launchSimulation()
@@ -2460,6 +2665,18 @@ MixData* ModelEdit::setDest(uint8_t dch)
     memset(&g_model.mixData[i],0,sizeof(MixData));
     g_model.mixData[i].destCh = dch;
     return &g_model.mixData[i];
+}
+
+void ModelEdit::clearExpos(bool ask)
+{
+    if(ask)
+    {
+        int res = QMessageBox::question(this,tr("Clear Expos?"),tr("Really clear all the expos?"),QMessageBox::Yes | QMessageBox::No);
+        if(res!=QMessageBox::Yes) return;
+    }
+    memset(g_model.expoData,0,sizeof(g_model.expoData)); //clear all expos
+    updateSettings();
+    tabExpos();
 }
 
 void ModelEdit::clearMixes(bool ask)

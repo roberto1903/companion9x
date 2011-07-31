@@ -7,7 +7,7 @@ class MixersList : public QListWidget
 {
     Q_OBJECT
 public:
-    explicit MixersList(QWidget *parent = 0);
+    explicit MixersList(QWidget *parent, bool expo);
 //    QMimeData * mimeData ( const QList<QListWidgetItem *> items );
 
     void keyPressEvent(QKeyEvent *event);
@@ -25,6 +25,7 @@ public slots:
 
 private:
     QPoint dragStartPosition;
+    bool expo;
 
 };
 
