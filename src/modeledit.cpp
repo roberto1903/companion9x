@@ -213,7 +213,7 @@ void ModelEdit::tabModelEditSetup()
     ui->trainerChkB->setChecked(g_model.traineron);
 
     //FrSky settings
-/*    ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
+    ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
     ui->a11LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].level);
     ui->a11GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].greater);
     ui->a11ValueSB->setValue(g_model.frsky.channels[0].alarms[0].value);
@@ -226,7 +226,7 @@ void ModelEdit::tabModelEditSetup()
     ui->a21ValueSB->setValue(g_model.frsky.channels[1].alarms[0].value);
     ui->a22LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].level);
     ui->a22GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].greater);
-    ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);*/
+    ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);
 }
 
 void ModelEdit::tabExpos()
@@ -1307,85 +1307,85 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
 
 void ModelEdit::on_a1RatioSB_editingFinished()
 {
-//    g_model.frsky.channels[0].ratio = ui->a1RatioSB->value();
+    g_model.frsky.channels[0].ratio = ui->a1RatioSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
 {
-  //  g_model.frsky.channels[0].alarms[0].level = index;
+    g_model.frsky.channels[0].alarms[0].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a11GreaterCB_currentIndexChanged(int index)
 {
- //   g_model.frsky.channels[0].alarms[0].greater = index;
+    g_model.frsky.channels[0].alarms[0].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a11ValueSB_editingFinished()
 {
-  //  g_model.frsky.channels[0].alarms[0].value = ui->a11ValueSB->value();
+    g_model.frsky.channels[0].alarms[0].value = ui->a11ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a12LevelCB_currentIndexChanged(int index)
 {
-  //   g_model.frsky.channels[0].alarms[1].level = index;
+    g_model.frsky.channels[0].alarms[1].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a12GreaterCB_currentIndexChanged(int index)
 {
-  //   g_model.frsky.channels[0].alarms[1].greater = index;
+    g_model.frsky.channels[0].alarms[1].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a12ValueSB_editingFinished()
 {
-  //   g_model.frsky.channels[0].alarms[1].value = ui->a12ValueSB->value();
+    g_model.frsky.channels[0].alarms[1].value = ui->a12ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a2RatioSB_editingFinished()
 {
-  //   g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
+    g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a21LevelCB_currentIndexChanged(int index)
 {
-  //   g_model.frsky.channels[1].alarms[0].level = index;
+    g_model.frsky.channels[1].alarms[0].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a21GreaterCB_currentIndexChanged(int index)
 {
-  //   g_model.frsky.channels[1].alarms[0].greater = index;
+    g_model.frsky.channels[1].alarms[0].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a21ValueSB_editingFinished()
 {
-  //  g_model.frsky.channels[1].alarms[0].value = ui->a21ValueSB->value();
+    g_model.frsky.channels[1].alarms[0].value = ui->a21ValueSB->value();
     updateSettings();
 }
 
 void ModelEdit::on_a22LevelCB_currentIndexChanged(int index)
 {
-  //   g_model.frsky.channels[1].alarms[1].level = index;
+    g_model.frsky.channels[1].alarms[1].level = index;
     updateSettings();
 }
 
 void ModelEdit::on_a22GreaterCB_currentIndexChanged(int index)
 {
-  //    g_model.frsky.channels[1].alarms[1].greater = index;
+    g_model.frsky.channels[1].alarms[1].greater = index;
     updateSettings();
 }
 
 void ModelEdit::on_a22ValueSB_editingFinished()
 {
-  //   g_model.frsky.channels[1].alarms[1].value = ui->a22ValueSB->value();
+    g_model.frsky.channels[1].alarms[1].value = ui->a22ValueSB->value();
     updateSettings();
 }
 
