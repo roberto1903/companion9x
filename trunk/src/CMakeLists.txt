@@ -2,6 +2,8 @@ PROJECT( companion9x )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
+#TODO xerces check
+
 MESSAGE( STATUS "Looking for xsdcxx " )
 FIND_PROGRAM( xsdcxx_BIN NAMES xsdcxx xsd xsd.exe )
 GET_FILENAME_COMPONENT(xsdcxx_DIR ${xsdcxx_BIN} PATH )
