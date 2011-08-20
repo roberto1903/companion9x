@@ -50,24 +50,6 @@
 #include "simulatordialog.h"
 #include "printdialog.h"
 
-EEPROMInterface *GetEepromInterface()
-{
-  static EEPROMInterface * eepromInterface = NULL;
-
-  delete eepromInterface;
-
-  QSettings settings("er9x-eePe", "eePe");
-  if (settings.value("download-version", 0).toInt() == DNLD_VER_GRUVIN9X) {
-    eepromInterface = new Gruvin9xInterface();
-  }
-  else {
-    eepromInterface = new Er9xInterface();
-  }
-
-  return eepromInterface;
-}
-
-
 class DragDropHeader {
 public:
   DragDropHeader():
@@ -476,55 +458,53 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
     int fileType = getFileType(fileName);
 
-    if(fileType==FILE_TYPE_XML)
-    {
+    if(fileType==FILE_TYPE_XML) {
     }
-    else if(fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) //read HEX file
-    {
-        if((file.size()>(6*1024)) || (file.size()<(4*1024)))  //if filesize> 6k and <4kb
-        {
-            QMessageBox::critical(this, tr("Error"),tr("Error reading file:\n"
-                                                       "File wrong size - %1").arg(fileName));
-            return false;
-        }
+    else if(fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
+      if((file.size()>(6*1024)) || (file.size()<(4*1024)))  //if filesize> 6k and <4kb
+      {
+          QMessageBox::critical(this, tr("Error"),tr("Error reading file:\n"
+                                                     "File wrong size - %1").arg(fileName));
+          return false;
+      }
 
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
-            QMessageBox::critical(this, tr("Error"),
-                                 tr("Error opening file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-            return false;
-        }
+      if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+          QMessageBox::critical(this, tr("Error"),
+                               tr("Error opening file %1:\n%2.")
+                               .arg(fileName)
+                               .arg(file.errorString()));
+          return false;
+      }
 
-        QTextStream inputStream(&file);
+      QTextStream inputStream(&file);
 
-        if(fileType==FILE_TYPE_EEPE) {  // read EEPE file header
-          QString hline = inputStream.readLine();
-          if(hline!=EEPE_EEPROM_FILE_HEADER) {
-            file.close();
-            return false;
-          }
-        }
-        
-        uint8_t eeprom[EESIZE];
-        if (!HexInterface(inputStream).load(eeprom, EESIZE)) {
+      if(fileType==FILE_TYPE_EEPE) {  // read EEPE file header
+        QString hline = inputStream.readLine();
+        if(hline!=EEPE_EEPROM_FILE_HEADER) {
           file.close();
           return false;
         }
+      }
 
+      uint8_t eeprom[EESIZE];
+      if (!HexInterface(inputStream).load(eeprom, EESIZE)) {
         file.close();
+        return false;
+      }
 
-        if (!GetEepromInterface()->load(radioData, eeprom)) {
-          QMessageBox::critical(this, tr("Error"),
-                               tr("Invalid EEPE EEPROM File %1")
-                               .arg(fileName));
-          return false;
-        }
+      file.close();
 
-        refreshList();
-        if(resetCurrentFile) setCurrentFile(fileName);
+      if (!LoadEeprom(radioData, eeprom)) {
+        QMessageBox::critical(this, tr("Error"),
+            tr("Invalid EEPE EEPROM File %1")
+            .arg(fileName));
+        return false;
+      }
 
-        return true;
+      refreshList();
+      if(resetCurrentFile) setCurrentFile(fileName);
+
+      return true;
     }
     else if(fileType==FILE_TYPE_BIN) //read binary
     {
@@ -557,10 +537,10 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
             return false;
         }
 
-        if (!GetEepromInterface()->load(radioData, eeprom)) {
+        if (!LoadEeprom(radioData, eeprom)) {
           QMessageBox::critical(this, tr("Error"),
-                               tr("Invalid EEPE EEPROM File %1")
-                               .arg(fileName));
+              tr("Invalid binary EEPROM File %1")
+              .arg(fileName));
           return false;
         }
 

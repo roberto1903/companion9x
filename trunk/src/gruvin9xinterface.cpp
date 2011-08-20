@@ -14,6 +14,7 @@
  *
  */
 
+#include <iostream>
 #include "gruvin9xinterface.h"
 #include "gruvin9xeeprom.h"
 #include "file.h"
@@ -37,25 +38,69 @@ Gruvin9xInterface::~Gruvin9xInterface()
   delete efile;
 }
 
+template <class T>
+void Gruvin9xInterface::loadModel(ModelData &model)
+{
+  T _model;
+  if (efile->readRlc2((uint8_t*)&_model, sizeof(T)))
+    model = _model;
+  else
+    model.clear();
+}
+
 bool Gruvin9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
 {
+  std::cout << "trying gruvin9x import... ";
+
   efile->EeFsInit(eeprom);
     
   efile->openRd(FILE_GENERAL);
   Gruvin9xGeneral er9xGeneral;
-  if (!efile->readRlc2((uint8_t*)&er9xGeneral, sizeof(Gruvin9xGeneral)))
+
+  if (efile->readRlc2((uint8_t*)&er9xGeneral, 1) != 1) {
+    std::cout << "no\n";
     return false;
+  }
+
+  std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
+
+  switch(er9xGeneral.myVers) {
+    case 3:
+    case 5:
+    case 100:
+    case 101:
+    case 102:
+    case 103:
+      // TODO
+    case 105:
+      // subtrims + function switches added
+      break;
+    default:
+      std::cout << "not gruvin9x\n";
+      return false;
+  }
+
+  efile->openRd(FILE_GENERAL);
+  if (!efile->readRlc2((uint8_t*)&er9xGeneral, sizeof(Gruvin9xGeneral))) {
+    std::cout << "ko\n";
+    return false;
+  }
   radioData.generalSettings = er9xGeneral;
   
   for (int i=0; i<MAX_MODELS; i++) {
-    Gruvin9xModelData gruvin9xModel;
     efile->openRd(FILE_MODEL(i));
-    if (efile->readRlc2((uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData)))
-      radioData.models[i] = gruvin9xModel;
-    else
-      radioData.models[i].clear();
+    if (er9xGeneral.myVers < 103) {
+      loadModel<Gruvin9xModelData_v102>(radioData.models[i]);
+    }
+    else if (er9xGeneral.myVers == 103) {
+      loadModel<Gruvin9xModelData_v103>(radioData.models[i]);
+    }
+    else {
+      loadModel<Gruvin9xModelData>(radioData.models[i]);
+    }
   }
 
+  std::cout << "ok\n";
   return true;
 }
 
@@ -98,5 +143,21 @@ int Gruvin9xInterface::getSize(ModelData &model)
      return -1;
   }
   return efile->size(FILE_TMP);
+}
+
+int Gruvin9xInterface::getCapability(const Capability capability)
+{
+  switch (capability) {
+    case OwnerName:
+      return 0;
+    case Phases:
+      return 4;
+    case Timers:
+      return 2;
+    case FuncSwitches:
+      return 12;
+    case ExtendedTrims:
+      return 1024;
+  }
 }
 

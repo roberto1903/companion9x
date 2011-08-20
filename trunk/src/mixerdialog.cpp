@@ -17,6 +17,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->offsetSB->setValue(md->sOffset);
     ui->trimChkB->setChecked(md->carryTrim==0);
     populateCurvesCB(ui->curvesCB,md->curve);
+    populatePhasesCB(ui->phasesCB,md->phase);
     populateSwitchCB(ui->switchesCB,md->swtch);
     ui->warningCB->setCurrentIndex(md->mixWarn);
     ui->mltpxCB->setCurrentIndex(md->mltpx);
@@ -35,6 +36,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->trimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->warningCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->mltpxCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->delayDownSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
@@ -68,6 +70,7 @@ void MixerDialog::valuesChanged()
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimChkB->checkState() ? 0 : 1;
     md->curve     = ui->curvesCB->currentIndex();
+    md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
     md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();

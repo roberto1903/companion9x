@@ -14,10 +14,10 @@
  *
  */
 
+#include <iostream>
 #include "er9xinterface.h"
 #include "er9xeeprom.h"
 #include "file.h"
-#include "stdio.h"
 
 #define FILE_TYP_GENERAL 1
 #define FILE_TYP_MODEL   2
@@ -40,12 +40,33 @@ Er9xInterface::~Er9xInterface()
 
 bool Er9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
 {
+  std::cout << "trying er9x import... ";
+
   efile->EeFsInit(eeprom);
     
   efile->openRd(FILE_GENERAL);
   Er9xGeneral er9xGeneral;
-  if (!efile->readRlc1((uint8_t*)&er9xGeneral, sizeof(Er9xGeneral)))
+
+  if (efile->readRlc1((uint8_t*)&er9xGeneral, 1) != 1) {
+    std::cout << "no\n";
     return false;
+  }
+
+  std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
+
+  switch(er9xGeneral.myVers) {
+    case 4:
+      break;
+    default:
+      std::cout << "not er9x\n";
+      return false;
+  }
+
+  efile->openRd(FILE_GENERAL);
+  if (!efile->readRlc1((uint8_t*)&er9xGeneral, sizeof(Er9xGeneral))) {
+    std::cout << "ko\n";
+    return false;
+  }
   radioData.generalSettings = er9xGeneral;
   
   for (int i=0; i<MAX_MODELS; i++) {
@@ -59,6 +80,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
     } 
   }
 
+  std::cout << "ok\n";
   return true;
 }
 
@@ -103,3 +125,16 @@ int Er9xInterface::getSize(ModelData &model)
   return efile->size(FILE_TMP);
 }
 
+int Er9xInterface::getCapability(const Capability capability)
+{
+  switch (capability) {
+    case OwnerName:
+      return 10;
+    case Timers:
+      return 1;
+    case FuncSwitches:
+      return 1;
+    default:
+      return 0;
+  }
+}

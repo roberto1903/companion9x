@@ -34,7 +34,12 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual int getSize(ModelData &);
 
+    virtual int getCapability(const Capability);
+
   protected:
+
+    template <class T>
+    void loadModel(ModelData &model);
 
     EFile *efile;
 

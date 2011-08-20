@@ -79,7 +79,6 @@ private:
     bool keyState(EnumKeys key);
     int getValue(qint8 i);
     unsigned int getFlightPhase();
-    unsigned int getTrimFlightPhase(uint8_t idx, int8_t phase=-1);
     bool getSwitch(int swtch, bool nc, qint8 level=0);
     void beepWarn();
     void beepWarn1();

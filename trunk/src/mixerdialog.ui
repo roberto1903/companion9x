@@ -118,14 +118,14 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="label_7">
        <property name="text">
         <string>Switch</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <widget class="QComboBox" name="switchesCB">
        <property name="whatsThis">
         <string>Switch used by the mix.
@@ -133,14 +133,14 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="label_8">
        <property name="text">
         <string>Warning</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="7" column="1">
       <widget class="QComboBox" name="warningCB">
        <property name="whatsThis">
         <string>Mixer warning.
@@ -168,14 +168,14 @@ Setting this value will cause a beep to be emmitted when this value is active.</
        </item>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="8" column="0">
       <widget class="QLabel" name="label_9">
        <property name="text">
         <string>Multiplex</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="8" column="1">
       <widget class="QComboBox" name="mltpxCB">
        <property name="whatsThis">
         <string>Multiplexer
@@ -201,6 +201,21 @@ This determines how mixer values are added.
          <string>REPLACE</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QComboBox" name="phasesCB">
+       <property name="whatsThis">
+        <string>Switch used by the mix.
+If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Phase</string>
+       </property>
       </widget>
      </item>
     </layout>

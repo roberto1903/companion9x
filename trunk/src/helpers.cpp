@@ -4,6 +4,12 @@
 
 #define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
 
+QString getPhaseName(int val)
+{
+    if(!val) return "---";
+    return QString(val<0 ? "!" : "") + QString("FP%1").arg(abs(val)-1);
+}
+
 QString getSWName(int val)
 {
 
@@ -14,8 +20,7 @@ QString getSWName(int val)
     return QString(val<0 ? "!" : "") + QString(SWITCHES_STR).mid((abs(val)-1)*3,3);
 }
 
-
-void populateSwitchCB(QComboBox *b, int value=0)
+void populateSwitchCB(QComboBox *b, int value)
 {
     b->clear();
     for(int i=-MAX_DRSWITCH; i<=MAX_DRSWITCH; i++)
@@ -23,6 +28,25 @@ void populateSwitchCB(QComboBox *b, int value=0)
     b->setCurrentIndex(value+MAX_DRSWITCH);
     b->setMaxVisibleItems(10);
 }
+
+const char * F2SWITCH_STR[] = { "", ""};
+#define FSWITCH_STR  "----          ""Trainer       ""Instant Trim  ""Trims2Offsets ""Telemetry View"
+#define FSW_LEN_FUNC 14
+
+QString getFuncName(unsigned int val)
+{
+  return QString(FSWITCH_STR).mid(val*FSW_LEN_FUNC, FSW_LEN_FUNC);
+}
+
+void populateFuncCB(QComboBox *b, unsigned int value)
+{
+    b->clear();
+    for(unsigned int i=0; i<FuncCount; i++)
+      b->addItem(getFuncName(i));
+    b->setCurrentIndex(value);
+    b->setMaxVisibleItems(10);
+}
+
 
 void populatePhasesCB(QComboBox *b, int value)
 {
@@ -41,6 +65,15 @@ void populateCurvesCB(QComboBox *b, int value)
     b->setMaxVisibleItems(10);
 }
 
+void populateTrimUseCB(QComboBox *b, unsigned int phase)
+{
+  b->addItem("Own trim");
+  for (unsigned int i=0; i<MAX_PHASES; i++) {
+    if (i != phase) {
+      b->addItem(QString("Flight phase %1 trim").arg(i));
+    }
+  }
+}
 
 void populateTimerSwitchCB(QComboBox *b, int value=0)
 {

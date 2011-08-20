@@ -34,6 +34,8 @@ class Er9xInterface : public EEPROMInterface
 
     virtual int getSize(ModelData &);
 
+    virtual int getCapability(const Capability);
+
   protected:
 
     EFile *efile;

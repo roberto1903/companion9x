@@ -28,6 +28,8 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     populateSwitchCB(ui->backlightswCB,g_eeGeneral.lightSw);
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
+    if (!GetEepromInterface()->getCapability(OwnerName))
+      ui->ownerNameLE->setDisabled(true);
 
     ui->contrastSB->setValue(g_eeGeneral.contrast);
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
@@ -38,9 +40,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
     ui->inputfilterCB->setCurrentIndex(g_eeGeneral.filterInput);
     ui->thrwarnChkB->setChecked(!g_eeGeneral.disableThrottleWarning);   //Default is zero=checked
-    // TODO ui->switchwarnChkB->setChecked(!g_eeGeneral.disableSwitchWarning); //Default is zero=checked
+    ui->swtchWarnCB->setCurrentIndex(g_eeGeneral.switchWarning == -1 ? 2 : g_eeGeneral.switchWarning);
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
+    ui->noTelemetryAlarmChkB->setChecked(g_eeGeneral.noTelemetryAlarm);
     ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperVal);
     ui->channelorderCB->setCurrentIndex(g_eeGeneral.templateSetup);
     ui->stickmodeCB->setCurrentIndex(g_eeGeneral.stickMode);
@@ -49,6 +52,19 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->beepCountDownChkB->setChecked(g_eeGeneral.preBeep);
     ui->beepFlashChkB->setChecked(g_eeGeneral.flashBeep);
     ui->splashScreenChkB->setChecked(!g_eeGeneral.disableSplashScreen);
+
+    ui->trnMode_1->setCurrentIndex(g_eeGeneral.trainer.mix[0].mode);
+    ui->trnChn_1->setCurrentIndex(g_eeGeneral.trainer.mix[0].src);
+    ui->trnWeight_1->setValue(g_eeGeneral.trainer.mix[0].weight);
+    ui->trnMode_2->setCurrentIndex(g_eeGeneral.trainer.mix[1].mode);
+    ui->trnChn_2->setCurrentIndex(g_eeGeneral.trainer.mix[1].src);
+    ui->trnWeight_2->setValue(g_eeGeneral.trainer.mix[1].weight);
+    ui->trnMode_3->setCurrentIndex(g_eeGeneral.trainer.mix[2].mode);
+    ui->trnChn_3->setCurrentIndex(g_eeGeneral.trainer.mix[2].src);
+    ui->trnWeight_3->setValue(g_eeGeneral.trainer.mix[2].weight);
+    ui->trnMode_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].mode);
+    ui->trnChn_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].src);
+    ui->trnWeight_4->setValue(g_eeGeneral.trainer.mix[3].weight);
 
     ui->ana1Neg->setValue(g_eeGeneral.calibSpanNeg[0]);
     ui->ana2Neg->setValue(g_eeGeneral.calibSpanNeg[1]);
@@ -74,17 +90,11 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->ana6Pos->setValue(g_eeGeneral.calibSpanPos[5]);
     ui->ana7Pos->setValue(g_eeGeneral.calibSpanPos[6]);
 
-/* TODO TRAINER SCREEN    ui->PPM1->setValue(g_eeGeneral.ppmInCalib[0]);
-    ui->PPM2->setValue(g_eeGeneral.ppmInCalib[1]);
-    ui->PPM3->setValue(g_eeGeneral.ppmInCalib[2]);
-    ui->PPM4->setValue(g_eeGeneral.ppmInCalib[3]);
-    ui->PPM5->setValue(g_eeGeneral.ppmInCalib[4]);
-    ui->PPM6->setValue(g_eeGeneral.ppmInCalib[5]);
-    ui->PPM7->setValue(g_eeGeneral.ppmInCalib[6]);
-    ui->PPM8->setValue(g_eeGeneral.ppmInCalib[7]);
-*/
+    ui->PPM1->setValue(g_eeGeneral.trainer.calib[0]);
+    ui->PPM2->setValue(g_eeGeneral.trainer.calib[1]);
+    ui->PPM3->setValue(g_eeGeneral.trainer.calib[2]);
+    ui->PPM4->setValue(g_eeGeneral.trainer.calib[3]);
     ui->PPM_MultiplierDSB->setValue((qreal)(g_eeGeneral.PPM_Multiplier+10)/10);
-
 }
 
 GeneralEdit::~GeneralEdit()
@@ -159,9 +169,9 @@ void GeneralEdit::on_thrwarnChkB_stateChanged(int )
     updateSettings();
 }
 
-void GeneralEdit::on_switchwarnChkB_stateChanged(int )
+void GeneralEdit::on_swtchWarnCB_currentIndexChanged(int index)
 {
-// TODO    g_eeGeneral.disableSwitchWarning = ui->switchwarnChkB->isChecked() ? 0 : 1;
+    g_eeGeneral.switchWarning = (index == 2 ? -1 : index);
     updateSettings();
 }
 
@@ -174,6 +184,12 @@ void GeneralEdit::on_memwarnChkB_stateChanged(int )
 void GeneralEdit::on_alarmwarnChkB_stateChanged(int )
 {
     g_eeGeneral.disableAlarmWarning = ui->alarmwarnChkB->isChecked() ? 0 : 1;
+    updateSettings();
+}
+
+void GeneralEdit::on_noTelemetryAlarmChkB_stateChanged(int )
+{
+    g_eeGeneral.noTelemetryAlarm = ui->noTelemetryAlarmChkB->isChecked();
     updateSettings();
 }
 
@@ -195,7 +211,77 @@ void GeneralEdit::on_stickmodeCB_currentIndexChanged(int index)
     updateSettings();
 }
 
+void GeneralEdit::on_trnMode_1_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[0].mode = index;
+    updateSettings();
+}
 
+void GeneralEdit::on_trnChn_1_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[0].src = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnWeight_1_editingFinished()
+{
+    g_eeGeneral.trainer.mix[0].weight = ui->trnWeight_1->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_trnMode_2_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[1].mode = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnChn_2_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[1].src = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnWeight_2_editingFinished()
+{
+    g_eeGeneral.trainer.mix[1].weight = ui->trnWeight_2->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_trnMode_3_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[2].mode = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnChn_3_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[2].src = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnWeight_3_editingFinished()
+{
+    g_eeGeneral.trainer.mix[2].weight = ui->trnWeight_3->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_trnMode_4_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[3].mode = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnChn_4_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[3].src = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_trnWeight_4_editingFinished()
+{
+    g_eeGeneral.trainer.mix[3].weight = ui->trnWeight_4->value();
+    updateSettings();
+}
 
 void GeneralEdit::on_ana1Neg_editingFinished()
 {
@@ -336,49 +422,25 @@ void GeneralEdit::on_battCalib_editingFinished()
 
 void GeneralEdit::on_PPM1_editingFinished()
 {
-// TODO     g_eeGeneral.ppmInCalib[0] = ui->PPM1->value();
+    g_eeGeneral.trainer.calib[0] = ui->PPM1->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM2_editingFinished()
 {
-  // TODO   g_eeGeneral.ppmInCalib[1] = ui->PPM2->value();
+    g_eeGeneral.trainer.calib[1] = ui->PPM2->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM3_editingFinished()
 {
-  // TODO   g_eeGeneral.ppmInCalib[2] = ui->PPM3->value();
+    g_eeGeneral.trainer.calib[2] = ui->PPM3->value();
     updateSettings();
 }
 
 void GeneralEdit::on_PPM4_editingFinished()
 {
-  // TODO    g_eeGeneral.ppmInCalib[3] = ui->PPM4->value();
-    updateSettings();
-}
-
-void GeneralEdit::on_PPM5_editingFinished()
-{
-  // TODO   g_eeGeneral.ppmInCalib[4] = ui->PPM5->value();
-    updateSettings();
-}
-
-void GeneralEdit::on_PPM6_editingFinished()
-{
-  // TODO   g_eeGeneral.ppmInCalib[5] = ui->PPM6->value();
-    updateSettings();
-}
-
-void GeneralEdit::on_PPM7_editingFinished()
-{
-  // TODO   g_eeGeneral.ppmInCalib[6] = ui->PPM7->value();
-    updateSettings();
-}
-
-void GeneralEdit::on_PPM8_editingFinished()
-{
-  // TODO   g_eeGeneral.ppmInCalib[7] = ui->PPM8->value();
+    g_eeGeneral.trainer.calib[3] = ui->PPM4->value();
     updateSettings();
 }
 

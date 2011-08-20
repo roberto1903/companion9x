@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "er9xeeprom.h"
 
 t_Er9xTrainerMix::t_Er9xTrainerMix()
@@ -8,18 +9,18 @@ t_Er9xTrainerMix::t_Er9xTrainerMix()
 t_Er9xTrainerMix::t_Er9xTrainerMix(TrainerMix &eepe)
 {
   memset(this, 0, sizeof(t_Er9xTrainerMix));
-  srcChn = eepe.srcChn;
+  srcChn = eepe.src;
   swtch = eepe.swtch;
-  studWeight = eepe.studWeight;
+  studWeight = (8 * eepe.weight) / 25;
   mode = eepe.mode;
 }
 
 t_Er9xTrainerMix::operator TrainerMix()
 {
   TrainerMix eepe;
-  eepe.srcChn = srcChn;
+  eepe.src = srcChn;
   eepe.swtch = swtch;
-  eepe.studWeight = studWeight;
+  eepe.weight = (25 * studWeight) / 8;
   eepe.mode = mode;
   return eepe;
 }
@@ -322,9 +323,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
     thrTrim = eepe.thrTrim;
     thrExpo = eepe.thrExpo;
     trimInc = eepe.trimInc;
-    traineron = eepe.traineron;
     ppmDelay = eepe.ppmDelay;
-    trimSw = eepe.trimSw;
+    for (unsigned int i=0; i<NUM_FSW; i++)
+      if (eepe.funcSw[i].func == FuncTrims2Offsets) trimSw = eepe.funcSw[i].swtch;
     beepANACenter = eepe.beepANACenter;
     pulsePol = eepe.pulsePol;
     extendedLimits = eepe.extendedLimits;
@@ -340,7 +341,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
       limitData[i] = eepe.limitData[i];
     // TODO expoData
     for (int i=0; i<NUM_STICKS; i++)
-      trim[i] = eepe.phaseData[0].trim[i];
+      trim[i] = std::max(-125, std::min(125, eepe.phaseData[0].trim[i]));
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = eepe.curves5[i][j];
@@ -371,9 +372,11 @@ t_Er9xModelData::operator ModelData ()
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;
   eepe.trimInc = trimInc;
-  eepe.traineron = traineron;
   eepe.ppmDelay = ppmDelay;
-  eepe.trimSw = trimSw;
+  if (trimSw) {
+    eepe.funcSw[0].swtch = trimSw;
+    eepe.funcSw[0].func = FuncTrims2Offsets;
+  }
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;
   eepe.extendedLimits = extendedLimits;

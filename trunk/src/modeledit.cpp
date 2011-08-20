@@ -24,7 +24,6 @@
 
 #define GFX_MARGIN 16
 
-
 ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ModelEdit),
@@ -43,31 +42,35 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->modelNameLE->setValidator(new QRegExpValidator(rx, this));
+    ui->phase0Name->setValidator(new QRegExpValidator(rx, this));
+    ui->phase1Name->setValidator(new QRegExpValidator(rx, this));
+    ui->phase2Name->setValidator(new QRegExpValidator(rx, this));
+    ui->phase3Name->setValidator(new QRegExpValidator(rx, this));
+    ui->phase4Name->setValidator(new QRegExpValidator(rx, this));
 
     tabModelEditSetup();
+    tabPhases();
     tabExpos();
     tabMixes();
     tabLimits();
     tabCurves();
-    tabSwitches();
+    tabCustomSwitches();
     tabSafetySwitches();
-    tabTrims();
+    tabFunctionSwitches();
     tabTemplates();
     tabHeli();
+    tabTelemetry();
 
     ui->curvePreview->setMinimumWidth(260);
     ui->curvePreview->setMinimumHeight(260);
 
     resizeEvent();  // draws the curves and Expo
-
 }
-
 
 ModelEdit::~ModelEdit()
 {
-    delete ui;
+  delete ui;
 }
-
 
 void ModelEdit::setupExposListWidget()
 {
@@ -168,26 +171,29 @@ void ModelEdit::on_tabWidget_currentChanged(int index)
     settings.setValue("modelEditTab",index);//ui->tabWidget->currentIndex());
 }
 
-
 void ModelEdit::tabModelEditSetup()
 {
     //name
     ui->modelNameLE->setText(g_model.name);
 
-    //timer mode direction value
-    populateTimerSwitchCB(ui->timerModeCB,g_model.timers[0].mode);
+    //timer1 mode direction value
+    populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode);
     int min = g_model.timers[0].val/60;
     int sec = g_model.timers[0].val%60;
-    ui->timerValTE->setTime(QTime(0,min,sec));
-    // TODO timer2
+    ui->timer1ValTE->setTime(QTime(0,min,sec));
+    ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
+
+    //timer2 mode direction value
+    populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
+    min = g_model.timers[1].val/60;
+    sec = g_model.timers[1].val%60;
+    ui->timer2ValTE->setTime(QTime(0,min,sec));
+    ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
 
     //trim inc, thro trim, thro expo, instatrim
     ui->trimIncCB->setCurrentIndex(g_model.trimInc);
-    populateSwitchCB(ui->trimSWCB,g_model.trimSw);
     ui->thrExpoChkB->setChecked(g_model.thrExpo);
     ui->thrTrimChkB->setChecked(g_model.thrTrim);
-    ui->timerDirCB->setCurrentIndex(g_model.timers[0].dir);
-    // TODO timer2
 
     //center beep
     ui->bcRUDChkB->setChecked(g_model.beepANACenter & BC_BIT_RUD);
@@ -208,25 +214,135 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
     ui->numChannelsSB->setEnabled(!g_model.protocol);
     ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
+}
 
-    //trainer enable
-    ui->trainerChkB->setChecked(g_model.traineron);
+void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim_idx, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)
+{
+  PhaseData *phase = &g_model.phaseData[phase_idx];
+  int idx = CONVERT_MODE(trim_idx)-1;
+  int trim = phase->trim[idx];
+  if (trimUse) populateTrimUseCB(trimUse, phase_idx);
+  if (phase->trimRef[idx] >= 0) {
+    if (trimUse) trimUse->setCurrentIndex(1 + phase->trimRef[idx] - (phase->trimRef[idx] >= phase_idx ? 1 : 0));
+    trim = g_model.phaseData[g_model.getTrimFlightPhase(idx, phase_idx)].trim[idx];
+    trimVal->setEnabled(false);
+    trimSlider->setEnabled(false);
+  }
+  else {
+    trimVal->setEnabled(true);
+    trimSlider->setEnabled(true);
+    if (trimUse) trimUse->setCurrentIndex(0);
+  }
+  int trimsMax = GetEepromInterface()->getCapability(ExtendedTrims);
+  if (trimsMax == 0)
+    trimsMax = 125;
+  else if (trimsMax == 1024)
+    trimSlider->setTickInterval(256);
+  trimSlider->setRange(-trimsMax, +trimsMax);
+  trimVal->setRange(-trimsMax, +trimsMax);
+  trimVal->setValue(trim);
+}
 
-    //FrSky settings
-    ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
-    ui->a11LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].level);
-    ui->a11GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].greater);
-    ui->a11ValueSB->setValue(g_model.frsky.channels[0].alarms[0].value);
-    ui->a12LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[1].level);
-    ui->a12GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[1].greater);
-    ui->a12ValueSB->setValue(g_model.frsky.channels[0].alarms[1].value);
-    ui->a2RatioSB->setValue(g_model.frsky.channels[1].ratio);
-    ui->a21LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[0].level);
-    ui->a21GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[0].greater);
-    ui->a21ValueSB->setValue(g_model.frsky.channels[1].alarms[0].value);
-    ui->a22LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].level);
-    ui->a22GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].greater);
-    ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);
+void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider)
+{
+  PhaseData *phase = &g_model.phaseData[phase_idx];
+  if (name) name->setText(phase->name);
+  if (fadeIn) fadeIn->setValue(phase->fadeIn);
+  if (fadeOut) fadeOut->setValue(phase->fadeOut);
+
+  displayOnePhaseOneTrim(phase_idx, ELE, trim1Use, trim1, trim1Slider);
+  displayOnePhaseOneTrim(phase_idx, RUD, trim2Use, trim2, trim2Slider);
+  displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
+  displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
+
+  switch (g_eeGeneral.stickMode) {
+    case (0):
+      if (trim1Label) {
+        trim1Label->setText("RUD");
+        trim2Label->setText("ELE");
+        trim3Label->setText("THR");
+        trim4Label->setText("AIL");
+      }
+      if (g_eeGeneral.throttleReversed)
+        trim3Slider->setInvertedAppearance(true);
+      break;
+    case (1):
+      if (trim1Label) {
+        trim1Label->setText("RUD");
+        trim2Label->setText("THR");
+        trim3Label->setText("ELE");
+        trim4Label->setText("AIL");
+      }
+      if (g_eeGeneral.throttleReversed)
+        trim1Slider->setInvertedAppearance(true);
+      break;
+    case (2):
+      if (trim1Label) {
+        trim1Label->setText("AIL");
+        trim2Label->setText("ELE");
+        trim3Label->setText("THR");
+        trim4Label->setText("RUD");
+      }
+      if (g_eeGeneral.throttleReversed)
+        trim3Slider->setInvertedAppearance(true);
+      break;
+    case (3):
+      if (trim1Label) {
+        trim1Label->setText("AIL");
+        trim2Label->setText("THR");
+        trim3Label->setText("ELE");
+        trim4Label->setText("RUD");
+      }
+      if (g_eeGeneral.throttleReversed)
+        trim1Slider->setInvertedAppearance(true);
+      break;
+    }
+}
+
+void ModelEdit::tabPhases()
+{
+  phasesLock = true;
+  displayOnePhase(0, ui->phase0Name, ui->phase0FadeIn, ui->phase0FadeOut, NULL,               ui->phase0Trim1,      ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,               ui->phase0Trim2,      ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,               ui->phase0Trim3,      ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,               ui->phase0Trim4,      ui->phase0Trim4Label, ui->phase0Trim4Slider);
+  displayOnePhase(1, ui->phase1Name, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider);
+  displayOnePhase(2, ui->phase2Name, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider);
+  displayOnePhase(3, ui->phase3Name, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider);
+  displayOnePhase(4, ui->phase4Name, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider);
+
+  int phases = GetEepromInterface()->getCapability(Phases);
+  if (phases < 4)
+    ui->phase4->setDisabled(true);
+  if (phases < 3)
+    ui->phase3->setDisabled(true);
+  if (phases < 2)
+    ui->phase2->setDisabled(true);
+  if (phases < 1) {
+    ui->phase1->setDisabled(true);
+    ui->phase0Name->setDisabled(true);
+    ui->phase0FadeIn->setDisabled(true);
+    ui->phase0FadeOut->setDisabled(true);
+  }
+
+  phasesLock = false;
+}
+
+void ModelEdit::on_phases_currentChanged(int index)
+{
+  phasesLock = true;
+  switch(index) {
+    case 1:
+      displayOnePhase(1, NULL, NULL, NULL, NULL, ui->phase1Trim1Value, NULL, ui->phase1Trim1Slider, NULL, ui->phase1Trim2Value, NULL, ui->phase1Trim2Slider, NULL, ui->phase1Trim3Value, NULL, ui->phase1Trim3Slider, NULL, ui->phase1Trim4Value, NULL, ui->phase1Trim4Slider);
+      break;
+    case 2:
+      displayOnePhase(2, NULL, NULL, NULL, NULL, ui->phase2Trim1Value, NULL, ui->phase2Trim1Slider, NULL, ui->phase2Trim2Value, NULL, ui->phase2Trim2Slider, NULL, ui->phase2Trim3Value, NULL, ui->phase2Trim3Slider, NULL, ui->phase2Trim4Value, NULL, ui->phase2Trim4Slider);
+      break;
+    case 3:
+      displayOnePhase(3, NULL, NULL, NULL, NULL, ui->phase3Trim1Value, NULL, ui->phase3Trim1Slider, NULL, ui->phase3Trim2Value, NULL, ui->phase3Trim2Slider, NULL, ui->phase3Trim3Value, NULL, ui->phase3Trim3Slider, NULL, ui->phase3Trim4Value, NULL, ui->phase3Trim4Slider);
+      break;
+    case 4:
+      displayOnePhase(4, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
+      break;
+  }
+  phasesLock = false;
 }
 
 void ModelEdit::tabExpos()
@@ -266,23 +382,23 @@ void ModelEdit::tabExpos()
         {
         case (1): str += " ->"; break;
         case (2): str += " <-"; break;
-        default:  str += " --"; break;
+        default:  str += "   "; break;
         };
 
-        str += md->expo<0 ? QString(" %1\%").arg(md->expo).rightJustified(6,' ') :
-                                      QString(" +%1\%").arg(md->expo).rightJustified(6, ' ');
+        str += md->weight<0 ? QString("Weight(%1\%)").arg(md->weight).rightJustified(6,' ') :
+                              QString("Weight(+%1\%)").arg(md->weight).rightJustified(6, ' ');
 
-        str += md->weight<0 ? QString(" %1\%").arg(md->weight).rightJustified(6,' ') :
-                              QString(" +%1\%").arg(md->weight).rightJustified(6, ' ');
+        str += md->expo<0 ? QString(" Expo(%1\%)").arg(md->expo).rightJustified(6,' ') :
+                                      QString(" Expo(+%1\%)").arg(md->expo).rightJustified(6, ' ');
 
+        if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
+        if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
 
-        if(md->curve)
-        {
-            QString crvStr = CURV_STR;
-            str += tr(" Curve(%1)").arg(crvStr.mid(md->curve*3,3).remove(' '));
+        if(md->curve) {
+          QString crvStr = CURV_STR;
+          str += tr(" Curve(%1)").arg(crvStr.mid(md->curve*3,3).remove(' '));
         }
 
-        // TODO phase
         qba.clear();
         qba.append((quint8)i);
         qba.append((const char*)md, sizeof(ExpoData));
@@ -1044,19 +1160,19 @@ void ModelEdit::updateSwitchesTab()
     switchEditLock = false;
 }
 
-void ModelEdit::tabSwitches()
+void ModelEdit::tabCustomSwitches()
 {
     switchEditLock = true;
 
     for(int i=0; i<NUM_CSW; i++)
     {
         cswitchSource1[i] = new QComboBox(this);
-        connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
+        connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_8->addWidget(cswitchSource1[i],i+1,2);
         cswitchSource1[i]->setVisible(false);
 
         cswitchSource2[i] = new QComboBox(this);
-        connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
+        connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_8->addWidget(cswitchSource2[i],i+1,3);
         cswitchSource2[i]->setVisible(false);
 
@@ -1064,7 +1180,7 @@ void ModelEdit::tabSwitches()
         cswitchOffset[i]->setMaximum(125);
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
-        connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(switchesEdited()));
+        connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_8->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
     }
@@ -1072,18 +1188,43 @@ void ModelEdit::tabSwitches()
     updateSwitchesTab();
 
     //connects
-    connect(ui->cswitchFunc_1,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_2,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_3,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_4,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_5,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_6,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_7,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_8,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_9,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_10,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_11,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
-    connect(ui->cswitchFunc_12,SIGNAL(currentIndexChanged(int)),this,SLOT(switchesEdited()));
+    connect(ui->cswitchFunc_1,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_2,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_3,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_4,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_5,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_6,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_7,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_8,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_9,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_10,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_11,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    connect(ui->cswitchFunc_12,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+
+    switchEditLock = false;
+}
+
+void ModelEdit::tabFunctionSwitches()
+{
+    switchEditLock = true;
+
+    for(int i=0; i<NUM_FSW; i++)
+    {
+        fswtchSwtch[i] = new QComboBox(this);
+        connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+        ui->gridLayout_fswitches->addWidget(fswtchSwtch[i],i+1,1);
+        populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
+
+        fswtchFunc[i] = new QComboBox(this);
+        connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+        ui->gridLayout_fswitches->addWidget(fswtchFunc[i],i+1,2);
+        populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+
+        if (i >= GetEepromInterface()->getCapability(FuncSwitches)) {
+          fswtchSwtch[i]->setDisabled(true);
+          fswtchFunc[i]->setDisabled(true);
+        }
+    }
 
     switchEditLock = false;
 }
@@ -1108,7 +1249,7 @@ void ModelEdit::tabSafetySwitches()
     }
 }
 
-void ModelEdit::switchesEdited()
+void ModelEdit::customSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
@@ -1175,50 +1316,37 @@ void ModelEdit::switchesEdited()
     switchEditLock = false;
 }
 
-void ModelEdit::tabTrims()
+void ModelEdit::functionSwitchesEdited()
 {
-/* TODO phases    ui->spinBox_S1->setValue(g_model.trim[CONVERT_MODE(RUD)-1]);
-    ui->spinBox_S2->setValue(g_model.trim[CONVERT_MODE(ELE)-1]);
-    ui->spinBox_S3->setValue(g_model.trim[CONVERT_MODE(THR)-1]);
-    ui->spinBox_S4->setValue(g_model.trim[CONVERT_MODE(AIL)-1]);
-*/
+    if(switchEditLock) return;
+    switchEditLock = true;
 
-    switch (g_eeGeneral.stickMode)
-    {
-        case (0):
-            ui->Label_S1->setText("RUD");
-            ui->Label_S2->setText("ELE");
-            ui->Label_S3->setText("THR");
-            ui->Label_S4->setText("AIL");
-            if(g_eeGeneral.throttleReversed)
-                ui->slider_S3->setInvertedAppearance(true);
-            break;
-        case (1):
-            ui->Label_S1->setText("RUD");
-            ui->Label_S2->setText("THR");
-            ui->Label_S3->setText("ELE");
-            ui->Label_S4->setText("AIL");
-            if(g_eeGeneral.throttleReversed)
-                ui->slider_S2->setInvertedAppearance(true);
-            break;
-        case (2):
-            ui->Label_S1->setText("AIL");
-            ui->Label_S2->setText("ELE");
-            ui->Label_S3->setText("THR");
-            ui->Label_S4->setText("RUD");
-            if(g_eeGeneral.throttleReversed)
-                ui->slider_S3->setInvertedAppearance(true);
-            break;
-        case (3):
-            ui->Label_S1->setText("AIL");
-            ui->Label_S2->setText("THR");
-            ui->Label_S3->setText("ELE");
-            ui->Label_S4->setText("RUD");
-            if(g_eeGeneral.throttleReversed)
-                ui->slider_S2->setInvertedAppearance(true);
-            break;
+    for(int i=0; i<NUM_FSW; i++) {
+      g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
+      g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
     }
 
+    updateSettings();
+    switchEditLock = false;
+}
+
+void ModelEdit::tabTelemetry()
+{
+  //FrSky settings
+  ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
+  ui->a11LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].level);
+  ui->a11GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].greater);
+  ui->a11ValueSB->setValue(g_model.frsky.channels[0].alarms[0].value);
+  ui->a12LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[1].level);
+  ui->a12GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[1].greater);
+  ui->a12ValueSB->setValue(g_model.frsky.channels[0].alarms[1].value);
+  ui->a2RatioSB->setValue(g_model.frsky.channels[1].ratio);
+  ui->a21LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[0].level);
+  ui->a21GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[0].greater);
+  ui->a21ValueSB->setValue(g_model.frsky.channels[1].alarms[0].value);
+  ui->a22LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].level);
+  ui->a22GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].greater);
+  ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);
 }
 
 void ModelEdit::tabTemplates()
@@ -1232,8 +1360,6 @@ void ModelEdit::tabTemplates()
     ui->templateList->addItem("Heli Setup");
     ui->templateList->addItem("Heli Gyro Setup");
     ui->templateList->addItem("Servo Test");
-
-
 }
 
 void ModelEdit::on_modelNameLE_editingFinished()
@@ -1242,28 +1368,79 @@ void ModelEdit::on_modelNameLE_editingFinished()
     updateSettings();
 }
 
-// TODO timer2
-void ModelEdit::on_timerModeCB_currentIndexChanged(int index)
+void ModelEdit::on_phaseName_editingFinished(unsigned int phase, QLineEdit *edit)
+{
+  strncpy(g_model.phaseData[phase].name, edit->text().toAscii(), 6);
+  updateSettings();
+}
+
+void ModelEdit::on_phaseFadeIn_valueChanged(unsigned int phase, int value)
+{
+  g_model.phaseData[phase].fadeIn = value;
+  updateSettings();
+}
+
+void ModelEdit::on_phaseFadeOut_valueChanged(unsigned int phase, int value)
+{
+  g_model.phaseData[phase].fadeOut = value;
+  updateSettings();
+}
+
+void ModelEdit::on_phase0Name_editingFinished() { on_phaseName_editingFinished(0, ui->phase0Name); }
+void ModelEdit::on_phase1Name_editingFinished() { on_phaseName_editingFinished(1, ui->phase1Name); }
+void ModelEdit::on_phase2Name_editingFinished() { on_phaseName_editingFinished(2, ui->phase2Name); }
+void ModelEdit::on_phase3Name_editingFinished() { on_phaseName_editingFinished(3, ui->phase3Name); }
+void ModelEdit::on_phase4Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase4Name); }
+void ModelEdit::on_phase0FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(0, value); }
+void ModelEdit::on_phase0FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(0, value); }
+void ModelEdit::on_phase1FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(1, value); }
+void ModelEdit::on_phase1FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(1, value); }
+void ModelEdit::on_phase2FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(2, value); }
+void ModelEdit::on_phase2FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(2, value); }
+void ModelEdit::on_phase3FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(3, value); }
+void ModelEdit::on_phase3FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(3, value); }
+void ModelEdit::on_phase4FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(4, value); }
+void ModelEdit::on_phase4FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(4, value); }
+
+void ModelEdit::on_timer1ModeCB_currentIndexChanged(int index)
 {
     g_model.timers[0].mode = index-TMR_NUM_OPTION;
     updateSettings();
 }
 
-void ModelEdit::on_timerDirCB_currentIndexChanged(int index)
+void ModelEdit::on_timer1DirCB_currentIndexChanged(int index)
 {
     g_model.timers[0].dir = index;
+    updateSettings();
+}
+
+void ModelEdit::on_timer1ValTE_editingFinished()
+{
+    g_model.timers[0].val = ui->timer1ValTE->time().minute()*60 + ui->timer1ValTE->time().second();
+    updateSettings();
+}
+
+void ModelEdit::on_timer2ModeCB_currentIndexChanged(int index)
+{
+    g_model.timers[1].mode = index-TMR_NUM_OPTION;
+    updateSettings();
+}
+
+void ModelEdit::on_timer2DirCB_currentIndexChanged(int index)
+{
+    g_model.timers[1].dir = index;
+    updateSettings();
+}
+
+void ModelEdit::on_timer2ValTE_editingFinished()
+{
+    g_model.timers[1].val = ui->timer2ValTE->time().minute()*60 + ui->timer2ValTE->time().second();
     updateSettings();
 }
 
 void ModelEdit::on_trimIncCB_currentIndexChanged(int index)
 {
     g_model.trimInc = index;
-    updateSettings();
-}
-
-void ModelEdit::on_trimSWCB_currentIndexChanged(int index)
-{
-    g_model.trimSw = index-MAX_DRSWITCH;
     updateSettings();
 }
 
@@ -1280,12 +1457,6 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
     ui->numChannelsSB->setEnabled(!g_model.protocol);
-}
-
-void ModelEdit::on_timerValTE_editingFinished()
-{
-    g_model.timers[0].val = ui->timerValTE->time().minute()*60 + ui->timerValTE->time().second();
-    updateSettings();
 }
 
 void ModelEdit::on_numChannelsSB_editingFinished()
@@ -1394,12 +1565,6 @@ void ModelEdit::on_thrTrimChkB_toggled(bool checked)
     updateSettings();
 }
 
-void ModelEdit::on_trainerChkB_toggled(bool checked)
-{
-    g_model.traineron = checked;
-    updateSettings();
-}
-
 void ModelEdit::on_thrExpoChkB_toggled(bool checked)
 {
     g_model.thrExpo = checked;
@@ -1469,30 +1634,72 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
     updateSettings();
 }
 
-
-void ModelEdit::on_spinBox_S1_valueChanged(int value)
+void ModelEdit::on_phaseTrim_valueChanged(int stick, int phase, int value)
 {
-     // TODO   g_model.trim[CONVERT_MODE(RUD)-1] = value;
-        updateSettings();
+  if (phasesLock) return;
+  int idx = CONVERT_MODE(stick)-1;
+  g_model.phaseData[phase].trim[idx] = value;
+  updateSettings();
 }
 
-void ModelEdit::on_spinBox_S2_valueChanged(int value)
+void ModelEdit::on_phaseTrimUse_currentIndexChanged(int phase_idx, int stick, int index, QSpinBox *trim, QSlider *slider)
 {
-    // TODO    g_model.trim[CONVERT_MODE(ELE)-1] = value;
-        updateSettings();
+  if (phasesLock) return;
+
+  int idx = CONVERT_MODE(stick)-1;
+
+  if (index == 0) {
+    g_model.phaseData[phase_idx].trim[idx] = g_model.phaseData[g_model.getTrimFlightPhase(idx, phase_idx)].trim[idx];
+    g_model.phaseData[phase_idx].trimRef[idx] = -1;
+  }
+  else {
+    g_model.phaseData[phase_idx].trim[idx] = 0;
+    g_model.phaseData[phase_idx].trimRef[idx] = index - 1 + (index > phase_idx ? 1 : 0);
+  }
+
+  phasesLock = true;
+  displayOnePhaseOneTrim(phase_idx, stick, NULL, trim, slider);
+  phasesLock = false;
+  updateSettings();
 }
 
-void ModelEdit::on_spinBox_S3_valueChanged(int value)
-{
-     // TODO   g_model.trim[CONVERT_MODE(THR)-1] = value;
-        updateSettings();
-}
+void ModelEdit::on_phase1Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, ELE, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); }
+void ModelEdit::on_phase1Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, RUD, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); }
+void ModelEdit::on_phase1Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, THR, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); }
+void ModelEdit::on_phase1Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, AIL, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); }
+void ModelEdit::on_phase2Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, ELE, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); }
+void ModelEdit::on_phase2Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, RUD, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); }
+void ModelEdit::on_phase2Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, THR, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); }
+void ModelEdit::on_phase2Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, AIL, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); }
+void ModelEdit::on_phase3Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, ELE, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); }
+void ModelEdit::on_phase3Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, RUD, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); }
+void ModelEdit::on_phase3Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, THR, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); }
+void ModelEdit::on_phase3Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, AIL, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); }
+void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, ELE, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); }
+void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, RUD, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); }
+void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, THR, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); }
+void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, AIL, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); }
 
-void ModelEdit::on_spinBox_S4_valueChanged(int value)
-{
-   // TODO     g_model.trim[CONVERT_MODE(AIL)-1] = value;
-        updateSettings();
-}
+void ModelEdit::on_phase0Trim1_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 0, value); }
+void ModelEdit::on_phase0Trim2_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 0, value); }
+void ModelEdit::on_phase0Trim3_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 0, value); }
+void ModelEdit::on_phase0Trim4_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 0, value); }
+void ModelEdit::on_phase1Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 1, value); }
+void ModelEdit::on_phase1Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 1, value); }
+void ModelEdit::on_phase1Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 1, value); }
+void ModelEdit::on_phase1Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 1, value); }
+void ModelEdit::on_phase2Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 2, value); }
+void ModelEdit::on_phase2Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 2, value); }
+void ModelEdit::on_phase2Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 2, value); }
+void ModelEdit::on_phase2Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 2, value); }
+void ModelEdit::on_phase3Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 3, value); }
+void ModelEdit::on_phase3Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 3, value); }
+void ModelEdit::on_phase3Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 3, value); }
+void ModelEdit::on_phase3Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 3, value); }
+void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 4, value); }
+void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 4, value); }
+void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 4, value); }
+void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 4, value); }
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {

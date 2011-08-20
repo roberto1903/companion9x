@@ -23,13 +23,16 @@
 #define CURVE9(x) (MAX_CURVE5+(x)-1)
 
 void populateSwitchCB(QComboBox *b, int value);
+void populateFuncCB(QComboBox *b, unsigned int value);
 void populatePhasesCB(QComboBox *b, int value);
+void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, int stickMode=1, int value=0);
 void populateCSWCB(QComboBox *b, int value);
 QString getSourceStr(int stickMode, int idx);
 QString getTimerMode(int tm);
+QString getPhaseName(int val);
 QString getSWName(int val);
 QString getCSWFunc(int val);
 
