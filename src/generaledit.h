@@ -32,17 +32,24 @@ private slots:
     void on_beepCountDownChkB_stateChanged(int );
     void on_beepMinuteChkB_stateChanged(int );
     void on_alarmwarnChkB_stateChanged(int );
+    void on_noTelemetryAlarmChkB_stateChanged(int );
     void on_tabWidget_currentChanged(int index);
-    void on_PPM1_editingFinished();
-    void on_PPM2_editingFinished();
-    void on_PPM3_editingFinished();
-    void on_PPM4_editingFinished();
-    void on_PPM5_editingFinished();
-    void on_PPM6_editingFinished();
-    void on_PPM7_editingFinished();
-    void on_PPM8_editingFinished();
+
+    void on_trnMode_1_currentIndexChanged(int index);
+    void on_trnChn_1_currentIndexChanged(int index);
+    void on_trnWeight_1_editingFinished();
+    void on_trnMode_2_currentIndexChanged(int index);
+    void on_trnChn_2_currentIndexChanged(int index);
+    void on_trnWeight_2_editingFinished();
+    void on_trnMode_3_currentIndexChanged(int index);
+    void on_trnChn_3_currentIndexChanged(int index);
+    void on_trnWeight_3_editingFinished();
+    void on_trnMode_4_currentIndexChanged(int index);
+    void on_trnChn_4_currentIndexChanged(int index);
+    void on_trnWeight_4_editingFinished();
 
     void on_battCalib_editingFinished();
+
     void on_ana1Neg_editingFinished();
     void on_ana2Neg_editingFinished();
     void on_ana3Neg_editingFinished();
@@ -67,12 +74,16 @@ private slots:
     void on_ana6Pos_editingFinished();
     void on_ana7Pos_editingFinished();
 
+    void on_PPM1_editingFinished();
+    void on_PPM2_editingFinished();
+    void on_PPM3_editingFinished();
+    void on_PPM4_editingFinished();
 
     void on_stickmodeCB_currentIndexChanged(int index);
     void on_channelorderCB_currentIndexChanged(int index);
     void on_beeperCB_currentIndexChanged(int index);
     void on_memwarnChkB_stateChanged(int );
-    void on_switchwarnChkB_stateChanged(int );
+    void on_swtchWarnCB_currentIndexChanged(int index);
     void on_thrwarnChkB_stateChanged(int );
     void on_inputfilterCB_currentIndexChanged(int index);
     void on_thrrevChkB_stateChanged(int );

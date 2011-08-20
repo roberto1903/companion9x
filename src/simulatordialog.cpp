@@ -376,18 +376,6 @@ unsigned int simulatorDialog::getFlightPhase()
   return 0;
 }
 
-unsigned int simulatorDialog::getTrimFlightPhase(uint8_t idx, int8_t phase)
-{
-  if (phase == -1) phase = getFlightPhase();
-  if (phase == 0) return phase;
-  int8_t trim = g_model.phaseData[phase].trim[idx];
-  if (trim > 125) return 0;
-  if (trim >= -125) return phase;
-  uint8_t result = 129 + trim;
-  if (result == phase) result++;
-  return result;
-}
-
 bool simulatorDialog::getSwitch(int swtch, bool nc, qint8 level)
 {
     if(level>5) return false; //prevent recursive loop going too deep
@@ -771,7 +759,7 @@ void simulatorDialog::perOut(bool init)
       // do trim -> throttle trim if applicable
       int16_t v = anas[i];
       int32_t vv = 2*RESX;
-      int8_t trim = g_model.phaseData[getTrimFlightPhase(i)].trim[i];
+      int trim = g_model.phaseData[g_model.getTrimFlightPhase(i, getFlightPhase())].trim[i];
       if(IS_THROTTLE(i) && g_model.thrTrim) vv = (g_eeGeneral.throttleReversed) ?
                                  ((int32_t)trim-125)*(RESX+v)/(2*RESX) :
                                  ((int32_t)trim+125)*(RESX-v)/(2*RESX);

@@ -61,7 +61,7 @@ typedef struct t_Er9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
   int8_t  swtch:5;
   int8_t  studWeight:6;
-  uint8_t mode:2;   //off,add-mode,subst-mode
+  uint8_t mode:2;   // off, add-mode, subst-mode
 
   operator TrainerMix();
   t_Er9xTrainerMix();

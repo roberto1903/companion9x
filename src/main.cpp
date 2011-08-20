@@ -48,10 +48,9 @@
 #include <QSettings>
 #include <QSplashScreen>
 #include <QThread>
-
 #include <iostream>
 #include "mainwindow.h"
-
+#include "eeprominterface.h"
 
 int main(int argc, char *argv[])
 {
@@ -65,6 +64,7 @@ int main(int argc, char *argv[])
     QString locale = settings.value("locale",QLocale::system().name()).toString();
     bool showSplash = settings.value("show_splash", true).toBool();
 
+    RegisterEepromInterfaces();
 
     QPixmap pixmap(":/images/companion9x-title.png");
     QSplashScreen *splash = new QSplashScreen(pixmap);

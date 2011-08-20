@@ -42,6 +42,7 @@ const uint8_t modn12x3[4][4]= {
 
 #define NUM_CHNOUT      16 // number of real output channels CH1-CH8
 #define NUM_CSW         12 // number of custom switches
+#define NUM_FSW         12 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -181,7 +182,7 @@ enum EnumKeys {
 #define CS_STATE(x)   ((x)<CS_AND ? CS_VOFS : ((x)<CS_EQUAL ? CS_VBOOL : CS_VCOMP))
 
 #define CHAR_FOR_NAMES " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-."
-#define CHAR_FOR_NAMES_REGEX "[ A-Za-z0-9_.-]*"
+#define CHAR_FOR_NAMES_REGEX "[ A-Za-z0-9_.-,]*"
 
 #define SWASH_TYPE_120   1
 #define SWASH_TYPE_120X  2
@@ -214,20 +215,20 @@ enum EnumKeys {
 
 class TrainerMix {
   public:
-	TrainerMix() { clear(); }
-	uint8_t srcChn; //0-7 = ch1-8
-	int8_t  swtch;
-	int8_t  studWeight;
-	uint8_t mode;   //off,add-mode,subst-mode
-	void clear() { memset(this, 0, sizeof(TrainerMix)); }
+    TrainerMix() { clear(); }
+    unsigned int src; // 0-7 = ch1-8
+    int swtch;
+    int weight;
+    unsigned int mode;   // off, add-mode, subst-mode
+    void clear() { memset(this, 0, sizeof(TrainerMix)); }
 };
 
 class TrainerData {
   public:
-	TrainerData() { clear(); }
-	int16_t     calib[4];
-	TrainerMix  mix[4];
-	void clear() { memset(this, 0, sizeof(TrainerData)); }
+    TrainerData() { clear(); }
+    int         calib[4];
+    TrainerMix  mix[4];
+    void clear() { memset(this, 0, sizeof(TrainerData)); }
 };
 
 class GeneralSettings {
@@ -249,6 +250,7 @@ class GeneralSettings {
     bool      disableMemoryWarning;
     uint8_t   beeperVal; // TODO enum
     bool      disableAlarmWarning;
+    bool      noTelemetryAlarm;
     uint8_t   stickMode; // TODO enum
     int8_t    inactivityTimer;
     bool      throttleReversed;
@@ -334,15 +336,34 @@ class SafetySwData { // Custom Switches data
     void clear() { memset(this, 0, sizeof(SafetySwData)); }
 };
 
+enum AssignFunc {
+  FuncNone = 0,
+  FuncTrainer = 1,
+  FuncInstantTrim = 2,
+  FuncTrims2Offsets = 3,
+  FuncViewTelemetry = 4,
+  FuncCount
+};
+
+class FuncSwData { // Function Switches data
+  public:
+    FuncSwData() { clear(); }
+    int     swtch;
+    AssignFunc func;
+
+    void clear() { memset(this, 0, sizeof(FuncSwData)); }
+};
+
 class PhaseData {
   public:
     PhaseData() { clear(); }
-    int8_t trim[NUM_STICKS]; // -125..125 => trim value, 127 => use trim of phase 0, -128, -127, -126 => use trim of phases 1|2|3|4 instead
-    int8_t swtch;            // swtch of phase[0] is the trimSw
+    int trimRef[NUM_STICKS]; //
+    int trim[NUM_STICKS];
+    int swtch;
     char name[6+1];
-    uint8_t speedUp;
-    uint8_t speedDown;
-    void clear() { memset(this, 0, sizeof(PhaseData)); }
+    unsigned int fadeIn;
+    unsigned int fadeOut;
+    void clear() { memset(this, 0, sizeof(PhaseData)); for (int i=0; i<NUM_STICKS; i++) trimRef[i] = -1; }
 };
 
 class SwashRingData { // Swash Ring data
@@ -405,19 +426,19 @@ class ModelData {
     int8_t    thrTrim:4;            // Enable Throttle Trim
     int8_t    thrExpo:4;            // Enable Throttle Expo
     int8_t    trimInc;              // Trim Increments
-    bool      traineron;
     int8_t    ppmDelay;
-    int8_t    trimSw;
     uint8_t   beepANACenter;        //1<<0->A1.. 1<<6->A7
     bool      pulsePol;
     bool      extendedLimits;
+    bool      extendedTrims;
     PhaseData phaseData[MAX_PHASES];
     MixData   mixData[MAX_MIXERS];
     LimitData limitData[NUM_CHNOUT];
     ExpoData  expoData[MAX_EXPOS];
     int8_t    curves5[MAX_CURVE5][5];
     int8_t    curves9[MAX_CURVE9][9];
-    CustomSwData   customSw[NUM_CSW];
+    CustomSwData  customSw[NUM_CSW];
+    FuncSwData    funcSw[NUM_FSW];
     SafetySwData  safetySw[NUM_CHNOUT];
     SwashRingData swashRingData;
 
@@ -427,12 +448,21 @@ class ModelData {
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
+    unsigned int getTrimFlightPhase(uint8_t idx, int8_t phase);
 };
 
 class RadioData {
   public:   
     GeneralSettings generalSettings;
     ModelData models[MAX_MODELS];    
+};
+
+enum Capability {
+ OwnerName,
+ Phases,
+ Timers,
+ FuncSwitches,
+ ExtendedTrims,
 };
 
 class EEPROMInterface
@@ -446,10 +476,17 @@ class EEPROMInterface
 
     virtual int getSize(ModelData &) = 0;
 
+    virtual int getCapability(const Capability) = 0;
+
 };
 
 /* EEPROM string conversion functions */
 void setEEPROMString(char *dst, const char *src, int size);
 void getEEPROMString(char *dst, const char *src, int size);
+
+void RegisterEepromInterfaces();
+bool LoadEeprom(RadioData &radioData, uint8_t eeprom[EESIZE]);
+
+EEPROMInterface *GetEepromInterface();
 
 #endif

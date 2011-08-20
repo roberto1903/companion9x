@@ -35,10 +35,14 @@ private:
 
     bool switchEditLock;
     bool heliEditLock;
+    bool phasesLock;
 
     QSpinBox  * cswitchOffset[NUM_CSW];
     QComboBox * cswitchSource1[NUM_CSW];
     QComboBox * cswitchSource2[NUM_CSW];
+
+    QComboBox * fswtchSwtch[NUM_FSW];
+    QComboBox * fswtchFunc[NUM_FSW];
 
     QSpinBox  * safetySwitchValue[NUM_CHNOUT];
     QComboBox * safetySwitchSwtch[NUM_CHNOUT];
@@ -48,14 +52,16 @@ private:
 
     void updateSettings();
     void tabModelEditSetup();
+    void tabPhases();
     void tabExpos();
     void tabMixes();
     void tabHeli();
     void tabLimits();
     void tabCurves();
-    void tabSwitches();
+    void tabCustomSwitches();
     void tabSafetySwitches();
-    void tabTrims();
+    void tabFunctionSwitches();
+    void tabTelemetry();
     void tabTemplates();
     void updateCurvesTab();
     void setSwitchWidgetVisibility(int i);
@@ -93,6 +99,15 @@ private:
     MixData* setDest(uint8_t dch);
     void setCurve(uint8_t c, int8_t ar[]);
     void setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2);
+
+    void on_phaseName_editingFinished(unsigned int phase, QLineEdit *edit);
+    void on_phaseFadeIn_valueChanged(unsigned int phase, int value);
+    void on_phaseFadeOut_valueChanged(unsigned int phase, int value);
+    void on_phaseTrim_valueChanged(int stick, int phase, int value);
+    void on_phaseTrimUse_currentIndexChanged(int phase_idx, int stick, int index, QSpinBox *trim, QSlider *slider);
+    void displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim_idx, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider);
+    void displayOnePhase(unsigned int phase_idx, QLineEdit *name, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider);
+    void incSubtrim(uint8_t idx, int16_t inc);
 
 signals:
     void modelValuesChanged();
@@ -178,16 +193,12 @@ private slots:
 
     void curvePointEdited();
     void limitEdited();
-    void switchesEdited();
+    void customSwitchesEdited();
     void safetySwitchesEdited();
+    void functionSwitchesEdited();
     void exposEdited();
     void mixesEdited();
     void heliEdited();
-
-    void on_spinBox_S1_valueChanged(int value);
-    void on_spinBox_S2_valueChanged(int value);
-    void on_spinBox_S3_valueChanged(int value);
-    void on_spinBox_S4_valueChanged(int value);
 
     void on_bcRUDChkB_toggled(bool checked);
     void on_bcELEChkB_toggled(bool checked);
@@ -200,7 +211,6 @@ private slots:
     void on_thrExpoChkB_toggled(bool checked);
     void on_thrTrimChkB_toggled(bool checked);
     void on_ppmDelaySB_editingFinished();
-    void on_trainerChkB_toggled(bool checked);
     void on_a1RatioSB_editingFinished();
     void on_a11LevelCB_currentIndexChanged(int index);
     void on_a11GreaterCB_currentIndexChanged(int index);
@@ -216,14 +226,73 @@ private slots:
     void on_a22GreaterCB_currentIndexChanged(int index);
     void on_a22ValueSB_editingFinished();
     void on_numChannelsSB_editingFinished();
-    void on_timerValTE_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);
-    void on_trimSWCB_currentIndexChanged(int index);
+    // TODO void on_trimSWCB_currentIndexChanged(int index);
     void on_trimIncCB_currentIndexChanged(int index);
-    void on_timerDirCB_currentIndexChanged(int index);
-    void on_timerModeCB_currentIndexChanged(int index);
+    void on_timer1DirCB_currentIndexChanged(int index);
+    void on_timer1ModeCB_currentIndexChanged(int index);
+    void on_timer1ValTE_editingFinished();
+    void on_timer2DirCB_currentIndexChanged(int index);
+    void on_timer2ModeCB_currentIndexChanged(int index);
+    void on_timer2ValTE_editingFinished();
     void on_modelNameLE_editingFinished();
+
+    void on_phase0Name_editingFinished();
+    void on_phase1Name_editingFinished();
+    void on_phase2Name_editingFinished();
+    void on_phase3Name_editingFinished();
+    void on_phase4Name_editingFinished();
+    void on_phase0FadeIn_valueChanged(int value);
+    void on_phase0FadeOut_valueChanged(int value);
+    void on_phase1FadeIn_valueChanged(int value);
+    void on_phase1FadeOut_valueChanged(int value);
+    void on_phase2FadeIn_valueChanged(int value);
+    void on_phase2FadeOut_valueChanged(int value);
+    void on_phase3FadeIn_valueChanged(int value);
+    void on_phase3FadeOut_valueChanged(int value);
+    void on_phase4FadeIn_valueChanged(int value);
+    void on_phase4FadeOut_valueChanged(int value);
+
+    void on_phase0Trim1_valueChanged(int value);
+    void on_phase0Trim2_valueChanged(int value);
+    void on_phase0Trim3_valueChanged(int value);
+    void on_phase0Trim4_valueChanged(int value);
+    void on_phase1Trim1Value_valueChanged(int value);
+    void on_phase1Trim2Value_valueChanged(int value);
+    void on_phase1Trim3Value_valueChanged(int value);
+    void on_phase1Trim4Value_valueChanged(int value);
+    void on_phase2Trim1Value_valueChanged(int value);
+    void on_phase2Trim2Value_valueChanged(int value);
+    void on_phase2Trim3Value_valueChanged(int value);
+    void on_phase2Trim4Value_valueChanged(int value);
+    void on_phase3Trim1Value_valueChanged(int value);
+    void on_phase3Trim2Value_valueChanged(int value);
+    void on_phase3Trim3Value_valueChanged(int value);
+    void on_phase3Trim4Value_valueChanged(int value);
+    void on_phase4Trim1Value_valueChanged(int value);
+    void on_phase4Trim2Value_valueChanged(int value);
+    void on_phase4Trim3Value_valueChanged(int value);
+    void on_phase4Trim4Value_valueChanged(int value);
+
+    void on_phase1Trim1Use_currentIndexChanged(int index);
+    void on_phase1Trim2Use_currentIndexChanged(int index);
+    void on_phase1Trim3Use_currentIndexChanged(int index);
+    void on_phase1Trim4Use_currentIndexChanged(int index);
+    void on_phase2Trim1Use_currentIndexChanged(int index);
+    void on_phase2Trim2Use_currentIndexChanged(int index);
+    void on_phase2Trim3Use_currentIndexChanged(int index);
+    void on_phase2Trim4Use_currentIndexChanged(int index);
+    void on_phase3Trim1Use_currentIndexChanged(int index);
+    void on_phase3Trim2Use_currentIndexChanged(int index);
+    void on_phase3Trim3Use_currentIndexChanged(int index);
+    void on_phase3Trim4Use_currentIndexChanged(int index);
+    void on_phase4Trim1Use_currentIndexChanged(int index);
+    void on_phase4Trim2Use_currentIndexChanged(int index);
+    void on_phase4Trim3Use_currentIndexChanged(int index);
+    void on_phase4Trim4Use_currentIndexChanged(int index);
+
+    void on_phases_currentChanged(int index);
     void on_tabWidget_currentChanged(int index);
     void on_templateList_doubleClicked(QModelIndex index);
 };

@@ -2,25 +2,33 @@ PROJECT( companion9x )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
-#TODO xerces check
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-MESSAGE( STATUS "Looking for xsdcxx " )
-FIND_PROGRAM( xsdcxx_BIN NAMES xsdcxx xsd xsd.exe )
-GET_FILENAME_COMPONENT(xsdcxx_DIR ${xsdcxx_BIN} PATH )
-FIND_PATH( xsdcxx_INC xsd/cxx/config.hxx /usr/local/include /usr/include "${xsdcxx_DIR}/../libxsd" )
-IF( NOT "${xsdcxx_BIN}" STREQUAL "xsdcxx_BIN-NOTFOUND" AND NOT "${xsdcxx_INC}" STREQUAL "xsdcxx_INC-NOTFOUND" )
-  MESSAGE( STATUS "  found xsdcxx: ${xsdcxx_BIN} ${xsdcxx_INC}")
-ELSE( )
-  MESSAGE( STATUS "  xsdcxx not found" )
-ENDIF( )
+MESSAGE( STATUS "Looking for XercesC " )
+FIND_PACKAGE(XercesC)
+IF ( XERCESC_FOUND )
+    INCLUDE_DIRECTORIES( ${XERCESC_INCLUDE_DIR} )
+    SET(LidarFormat_LIBRAIRIES ${LidarFormat_LIBRAIRIES} ${XERCESC_LIBRARIES})
+ELSE()
+    MESSAGE( FATAL_ERROR "XercesC not found! Please set XercesC path ..." )
+ENDIF()
+
+MESSAGE( STATUS "Looking for Xsd " )
+FIND_PACKAGE(Xsd)
+IF ( XSD_FOUND )
+    INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
+    MESSAGE("XSD Include Path: " ${XSD_INCLUDE_DIR} )
+ELSE()
+    MESSAGE( FATAL_ERROR "XSD not found ! Please set XSD path ..." )
+ENDIF()
 
 ADD_CUSTOM_COMMAND(
-  COMMAND ${xsdcxx_BIN} cxx-tree --root-element-all --generate-serialization --output-dir ${PROJECT_BINARY_DIR}/ ${PROJECT_SOURCE_DIR}/radio.xsd
+  COMMAND ${XSD_EXECUTABLE} cxx-tree --root-element-all --generate-serialization --output-dir ${PROJECT_BINARY_DIR}/ ${PROJECT_SOURCE_DIR}/radio.xsd
   OUTPUT ${PROJECT_BINARY_DIR}/radio.hxx ${PROJECT_BINARY_DIR}/radio.cxx
   DEPENDS ${PROJECT_SOURCE_DIR}/radio.xsd
 )
 
-INCLUDE_DIRECTORIES( ${xsdcxx_INC} )
+INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
 SET( companion9x_SRCS
      eeprominterface.cpp
