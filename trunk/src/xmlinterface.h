@@ -13,38 +13,26 @@
  * GNU General Public License for more details.
  *
  */
-#ifndef gruvin9x_interface_h
-#define gruvin9x_interface_h
+
+#ifndef xml_interface_h
+#define xml_interface_h
 
 #include "eeprominterface.h"
+#include <QTextStream>
 
-class EFile;
-
-class Gruvin9xInterface : public EEPROMInterface
+class XmlInterface
 {
   public:
 
-    Gruvin9xInterface();
+    XmlInterface(QTextStream & stream);
 
-    virtual ~Gruvin9xInterface();
+    bool load(RadioData &);
 
-    virtual bool load(RadioData &, uint8_t eeprom[EESIZE]);
-
-    virtual bool save(uint8_t eeprom[EESIZE], RadioData &radioData);
-
-    virtual int getSize(ModelData &);
-
-    virtual int getCapability(const Capability);
+    bool save(RadioData &radioData);
 
   protected:
 
-    template <class T>
-    void loadModel(ModelData &model);
-
-    template <class T>
-    bool loadGeneral(GeneralSettings &settings);
-
-    EFile *efile;
+    QTextStream & stream;
 
 };
 

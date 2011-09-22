@@ -32,7 +32,7 @@ private slots:
     void on_beepCountDownChkB_stateChanged(int );
     void on_beepMinuteChkB_stateChanged(int );
     void on_alarmwarnChkB_stateChanged(int );
-    void on_noTelemetryAlarmChkB_stateChanged(int );
+    void on_enableTelemetryAlarmChkB_stateChanged(int );
     void on_tabWidget_currentChanged(int index);
 
     void on_trnMode_1_currentIndexChanged(int index);

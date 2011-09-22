@@ -7,12 +7,12 @@
   </xs:documentation>
  </xs:annotation>
 
-	<xs:simpleType name="CalibrationValue">
-		<xs:restriction base="xs:int">
+ <xs:simpleType name="CalibrationValue">
+  <xs:restriction base="xs:int">
    <xs:minInclusive value="-125"/>
    <xs:maxInclusive value="125"/>
   </xs:restriction>
-	</xs:simpleType>
+ </xs:simpleType>
 
  <xs:complexType name="Calibration">
   <xs:attribute name="middle" type="CalibrationValue" use="required"/>
@@ -281,13 +281,23 @@
   </xs:restriction>
  </xs:simpleType>
 
- <xs:simpleType name="Trim">
+ <xs:simpleType name="TrimValue">
   <xs:restriction base="xs:int">
-   <xs:minInclusive value="-127"/>
-   <xs:maxInclusive value="127"/>
+   <xs:minInclusive value="-1024"/>
+   <xs:maxInclusive value="+1024"/>
   </xs:restriction>
  </xs:simpleType>
 
+ <xs:complexType name="TrimType">
+  <xs:attribute name="phaseRef" type="xs:int"/> <!-- TODO either phaseRef or value -->
+  <xs:attribute name="value" type="TrimValue"/>
+ </xs:complexType>
+ <!-- TODO <xs:key name="phaseRef">
+  <xs:selector xpath="model/phases/phase"/> 
+  <xs:field xpath="@id"/> 
+ </xs:key> -->
+ 
+ 
  <xs:element name="radio">
 		<xs:complexType>
 			<xs:sequence>
@@ -327,18 +337,16 @@
           <xs:element name="ch2" type="PPMCalibration"/>
           <xs:element name="ch3" type="PPMCalibration"/>
           <xs:element name="ch4" type="PPMCalibration"/>
-          <xs:element name="ch5" type="PPMCalibration"/>
+          <!-- <xs:element name="ch5" type="PPMCalibration"/>
           <xs:element name="ch6" type="PPMCalibration"/>
           <xs:element name="ch7" type="PPMCalibration"/>
-          <xs:element name="ch8" type="PPMCalibration"/>
+          <xs:element name="ch8" type="PPMCalibration"/> //-->
          </xs:sequence>
-					   </xs:complexType>
-				   </xs:element>
-				
-				   <xs:element name="view" type="xs:unsignedByte" minOccurs="0"/> <!-- switch -->
-				   <xs:element name="beeper" type="xs:unsignedByte" minOccurs="0"/> <!-- switch -->
-				   <xs:element name="inactivity-timer" type="xs:byte" minOccurs="0"/>
-
+		</xs:complexType>
+       </xs:element>
+       <xs:element name="view" type="xs:unsignedByte" minOccurs="0"/> <!-- switch -->
+       <xs:element name="beeper" type="xs:unsignedByte" minOccurs="0"/> <!-- switch -->
+       <xs:element name="inactivity-timer" type="xs:byte" minOccurs="0"/>
        <xs:element name="timer-beeps" minOccurs="0">
         <xs:complexType>
          <xs:attribute name="minute" type="xs:boolean"/>
@@ -398,7 +406,7 @@
         <xs:complexType>
          <xs:sequence>
           <xs:element name="name" type="xs:normalizedString"/>
-          <xs:element name="timer" minOccurs="0">
+          <xs:element name="timer" minOccurs="0" maxOccurs="unbounded">
            <xs:complexType>
             <xs:attribute name="mode" type="TimerSwitch" use="required"/>
             <xs:attribute name="direction" use="required">
@@ -430,11 +438,10 @@
             <xs:attribute name="channels">
              <xs:simpleType>
               <xs:restriction base="xs:nonNegativeInteger">
-               <xs:maxExclusive value="15"/>
+               <xs:maxExclusive value="17"/>
               </xs:restriction>
              </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="extendedLimits" type="xs:boolean"/>
             <xs:attribute name="delay" type="xs:nonNegativeInteger"/>
             <xs:attribute name="polarity">
              <xs:simpleType>
@@ -448,6 +455,7 @@
           </xs:element>
           <xs:element name="trims" minOccurs="0">
            <xs:complexType>
+            <xs:attribute name="extended" type="xs:boolean"/>            
             <xs:attribute name="inc">
              <xs:simpleType>
               <xs:restriction base="xs:string">
@@ -461,20 +469,17 @@
             </xs:attribute>
             <xs:attribute name="throttleTrim" type="xs:boolean"/>
             <xs:attribute name="throttleTrimExpo" type="xs:boolean"/>
-            <xs:attribute name="switch" type="Switch"/>
            </xs:complexType>
           </xs:element>
           <xs:element name="centerBeep" minOccurs="0">
            <xs:complexType>
-            <xs:sequence>
-             <xs:element name="throttle" type="xs:boolean"/>
-             <xs:element name="aileron" type="xs:boolean"/>
-             <xs:element name="rudder" type="xs:boolean"/>
-             <xs:element name="elevator" type="xs:boolean"/>
-             <xs:element name="p1" type="xs:boolean"/>
-             <xs:element name="p2" type="xs:boolean"/>
-             <xs:element name="p3" type="xs:boolean"/>
-            </xs:sequence>
+            <xs:attribute name="rudder" type="xs:boolean"/>
+            <xs:attribute name="elevator" type="xs:boolean"/>
+            <xs:attribute name="throttle" type="xs:boolean"/>
+            <xs:attribute name="aileron" type="xs:boolean"/>
+            <xs:attribute name="p1" type="xs:boolean"/>
+            <xs:attribute name="p2" type="xs:boolean"/>
+            <xs:attribute name="p3" type="xs:boolean"/>
            </xs:complexType>
           </xs:element>
           
@@ -507,6 +512,40 @@
            </xs:complexType>
           </xs:element>
 
+          <xs:element name="phases" minOccurs="0">
+           <xs:complexType>
+            <xs:sequence>
+             <xs:element name="phase" maxOccurs="unbounded">
+              <xs:complexType>
+               <xs:sequence>
+                <xs:element name="trims">
+                 <xs:complexType>
+                  <xs:sequence>
+                   <xs:element name="rudder" type="TrimType"/>
+                   <xs:element name="elevator" type="TrimType"/>
+                   <xs:element name="throttle" type="TrimType"/>
+                   <xs:element name="aileron" type="TrimType"/>
+                  </xs:sequence>
+                 </xs:complexType>
+                </xs:element>
+               </xs:sequence>
+               <xs:attribute name="id" type="xs:int" use="required"/>
+               <xs:attribute name="name" type="xs:string"/>
+               <xs:attribute name="switch" type="Switch"/>
+               <xs:attribute name="fadeIn" type="xs:int"/>
+               <xs:attribute name="fadeOut" type="xs:int"/>
+              </xs:complexType>
+              <xs:unique name="uniquePhaseId">
+               <xs:selector xpath="model/phases/phase"/> 
+               <xs:field xpath="@id"/> 
+              </xs:unique>
+             </xs:element>
+            </xs:sequence>
+           </xs:complexType>
+          </xs:element>
+           
+            
+          
           <xs:element name="outputs" minOccurs="0"> <!-- TODO pas de minOccurs -->
            <xs:complexType>
             <xs:sequence>
@@ -593,6 +632,7 @@
               </xs:unique>
              </xs:element>
             </xs:sequence>
+            <xs:attribute name="extendedLimits" type="xs:boolean"/>
            </xs:complexType>
           </xs:element>
 
@@ -621,7 +661,7 @@
                   <xs:attribute name="value" type="Switch"/>
                  </xs:complexType>
                 </xs:element>
-                <xs:element name="trim" type="Trim"/>
+                <xs:element name="trim" type="TrimValue"/>
                </xs:sequence>
                <xs:attribute name="id" type="Stick"/>
               </xs:complexType>

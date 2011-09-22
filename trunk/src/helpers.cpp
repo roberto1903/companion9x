@@ -54,6 +54,8 @@ void populatePhasesCB(QComboBox *b, int value)
     b->clear();
     for(int i=0; i<(str.length()/4); i++)  b->addItem(str.mid(i*4,4).replace("FP","Phase "));
     b->setCurrentIndex(value+MAX_PHASES);
+    if (!GetEepromInterface()->getCapability(Phases))
+      b->setDisabled(true);
 }
 
 void populateCurvesCB(QComboBox *b, int value)
