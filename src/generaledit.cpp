@@ -43,7 +43,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->swtchWarnCB->setCurrentIndex(g_eeGeneral.switchWarning == -1 ? 2 : g_eeGeneral.switchWarning);
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
-    ui->noTelemetryAlarmChkB->setChecked(g_eeGeneral.noTelemetryAlarm);
+    ui->enableTelemetryAlarmChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperVal);
     ui->channelorderCB->setCurrentIndex(g_eeGeneral.templateSetup);
     ui->stickmodeCB->setCurrentIndex(g_eeGeneral.stickMode);
@@ -187,9 +187,9 @@ void GeneralEdit::on_alarmwarnChkB_stateChanged(int )
     updateSettings();
 }
 
-void GeneralEdit::on_noTelemetryAlarmChkB_stateChanged(int )
+void GeneralEdit::on_enableTelemetryAlarmChkB_stateChanged(int )
 {
-    g_eeGeneral.noTelemetryAlarm = ui->noTelemetryAlarmChkB->isChecked();
+    g_eeGeneral.enableTelemetryAlarm = ui->enableTelemetryAlarmChkB->isChecked();
     updateSettings();
 }
 

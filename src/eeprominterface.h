@@ -13,6 +13,7 @@
  * GNU General Public License for more details.
  *
  */
+
 #ifndef eeprom_interface_h
 #define eeprom_interface_h
 
@@ -250,7 +251,7 @@ class GeneralSettings {
     bool      disableMemoryWarning;
     uint8_t   beeperVal; // TODO enum
     bool      disableAlarmWarning;
-    bool      noTelemetryAlarm;
+    bool      enableTelemetryAlarm;
     uint8_t   stickMode; // TODO enum
     int8_t    inactivityTimer;
     bool      throttleReversed;
@@ -412,7 +413,16 @@ class TimerData {
     int8_t    mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
     bool      dir;    // 0=>Count Down, 1=>Count Up
     uint16_t  val;
+    bool      persistent;
     void clear() { memset(this, 0, sizeof(TimerData)); }
+};
+
+enum Protocol {
+  PPM,
+  SILV_A,
+  SILV_B,
+  SILV_C,
+  TRAC09
 };
 
 class ModelData {
@@ -421,15 +431,15 @@ class ModelData {
     bool      used;
     char      name[10+1];
     TimerData timers[2];
-    uint8_t   protocol;
-    int8_t    ppmNCH;
-    int8_t    thrTrim:4;            // Enable Throttle Trim
-    int8_t    thrExpo:4;            // Enable Throttle Expo
-    int8_t    trimInc;              // Trim Increments
-    int8_t    ppmDelay;
-    uint8_t   beepANACenter;        //1<<0->A1.. 1<<6->A7
-    bool      pulsePol;
-    bool      extendedLimits;
+    Protocol  protocol;
+    int       ppmNCH;
+    bool      thrTrim;            // Enable Throttle Trim
+    bool      thrExpo;            // Enable Throttle Expo
+    int       trimInc;            // Trim Increments
+    int       ppmDelay;
+    uint8_t   beepANACenter;      // 1<<0->A1.. 1<<6->A7
+    bool      pulsePol;           // false = positive
+    bool      extendedLimits; // TODO xml
     bool      extendedTrims;
     PhaseData phaseData[MAX_PHASES];
     MixData   mixData[MAX_MIXERS];
@@ -468,6 +478,7 @@ enum Capability {
 class EEPROMInterface
 {
   public:
+
     virtual ~EEPROMInterface() {}
 
     virtual bool load(RadioData &radioData, uint8_t eeprom[EESIZE]) = 0;

@@ -319,13 +319,13 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
     tmrDir = eepe.timers[0].dir;
     tmrVal = eepe.timers[0].val;
     protocol = eepe.protocol;
-    ppmNCH = eepe.ppmNCH;
+    ppmNCH = (eepe.ppmNCH - 8) / 2;
     thrTrim = eepe.thrTrim;
     thrExpo = eepe.thrExpo;
     trimInc = eepe.trimInc;
-    ppmDelay = eepe.ppmDelay;
+    ppmDelay = (eepe.ppmDelay - 300) / 50;
     for (unsigned int i=0; i<NUM_FSW; i++)
-      if (eepe.funcSw[i].func == FuncTrims2Offsets) trimSw = eepe.funcSw[i].swtch;
+      if (eepe.funcSw[i].func == FuncTrims2Offsets && eepe.funcSw[i].swtch) trimSw = eepe.funcSw[i].swtch;
     beepANACenter = eepe.beepANACenter;
     pulsePol = eepe.pulsePol;
     extendedLimits = eepe.extendedLimits;
@@ -367,15 +367,15 @@ t_Er9xModelData::operator ModelData ()
   eepe.timers[0].mode = tmrMode;
   eepe.timers[0].dir = tmrDir;
   eepe.timers[0].val = tmrVal;
-  eepe.protocol = protocol;
-  eepe.ppmNCH = ppmNCH;
+  eepe.protocol = (Protocol)protocol;
+  eepe.ppmNCH = 8 + 2 * ppmNCH;
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;
   eepe.trimInc = trimInc;
-  eepe.ppmDelay = ppmDelay;
+  eepe.ppmDelay = 300 + 50 * ppmDelay;
+  eepe.funcSw[0].func = FuncTrims2Offsets;
   if (trimSw) {
     eepe.funcSw[0].swtch = trimSw;
-    eepe.funcSw[0].func = FuncTrims2Offsets;
   }
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;

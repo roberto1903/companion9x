@@ -30,41 +30,40 @@ typedef struct t_Gruvin9xTrainerMix_v103 {
 
 } __attribute__((packed)) Gruvin9xTrainerMix_v103; //
 
-typedef struct t_Gruvin9xTrainerMix {
+typedef struct t_Gruvin9xTrainerMix_v104 {
   uint8_t srcChn:6; // 0-7 = ch1-8
   uint8_t mode:2;   // off,add-mode,subst-mode
   int8_t  studWeight;
 
   operator TrainerMix();
-  t_Gruvin9xTrainerMix() { memset(this, 0, sizeof(t_Gruvin9xTrainerMix)); }
-  t_Gruvin9xTrainerMix(TrainerMix&);
+  t_Gruvin9xTrainerMix_v104() { memset(this, 0, sizeof(t_Gruvin9xTrainerMix_v104)); }
+  t_Gruvin9xTrainerMix_v104(TrainerMix&);
 
-} __attribute__((packed)) Gruvin9xTrainerMix; //
+} __attribute__((packed)) Gruvin9xTrainerMix_v104; //
 
 typedef struct t_Gruvin9xTrainerData_v103 {
   int16_t        calib[4];
   Gruvin9xTrainerMix_v103     mix[4];
 
   operator TrainerData();
-  t_Gruvin9xTrainerData_v103() { memset(this, 0, sizeof(t_Gruvin9xTrainerData_v103)); }
 } __attribute__((packed)) Gruvin9xTrainerData_v103;
 
-typedef struct t_Gruvin9xTrainerData {
+typedef struct t_Gruvin9xTrainerData_v104 {
   int16_t        calib[4];
-  Gruvin9xTrainerMix     mix[4];
+  Gruvin9xTrainerMix_v104     mix[4];
 
   operator TrainerData();
-  t_Gruvin9xTrainerData() { memset(this, 0, sizeof(t_Gruvin9xTrainerData)); }
-  t_Gruvin9xTrainerData(TrainerData&);
+  t_Gruvin9xTrainerData_v104() { memset(this, 0, sizeof(t_Gruvin9xTrainerData_v104)); }
+  t_Gruvin9xTrainerData_v104(TrainerData&);
 
-} __attribute__((packed)) Gruvin9xTrainerData;
+} __attribute__((packed)) Gruvin9xTrainerData_v104;
 
 typedef struct t_Gruvin9xFrSkyRSSIAlarm {
   uint8_t       level:2;
   int8_t        value:6;
 } __attribute__((packed)) Gruvin9xFrSkyRSSIAlarm;
 
-typedef struct t_Gruvin9xGeneral {
+typedef struct t_Gruvin9xGeneral_v103 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -75,7 +74,7 @@ typedef struct t_Gruvin9xGeneral {
   uint8_t   vBatWarn;
   int8_t    vBatCalib;
   int8_t    lightSw;
-  Gruvin9xTrainerData trainer;
+  Gruvin9xTrainerData_v103 trainer;
   uint8_t   view;      //index of subview in main scrren
   uint8_t   disableThrottleWarning:1;
   int8_t    switchWarning:2; // -1=down, 0=off, 1=up
@@ -89,7 +88,7 @@ typedef struct t_Gruvin9xGeneral {
   uint8_t   preBeep:1;
   uint8_t   flashBeep:1;
   uint8_t   disableSplashScreen:1;
-  uint8_t   noTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
   uint8_t   spare:2;
   uint8_t   filterInput;
   uint8_t   lightAutoOff;
@@ -98,10 +97,49 @@ typedef struct t_Gruvin9xGeneral {
   Gruvin9xFrSkyRSSIAlarm frskyRssiAlarms[2];
 
   operator GeneralSettings();
-  t_Gruvin9xGeneral();
-  t_Gruvin9xGeneral(GeneralSettings&);
+  t_Gruvin9xGeneral_v103() { memset(this, 0, sizeof(t_Gruvin9xGeneral_v103)); }
+} __attribute__((packed)) Gruvin9xGeneral_v103;
 
-} __attribute__((packed)) Gruvin9xGeneral;
+typedef struct t_Gruvin9xGeneral_v104 {
+  uint8_t   myVers;
+  int16_t   calibMid[7];
+  int16_t   calibSpanNeg[7];
+  int16_t   calibSpanPos[7];
+  uint16_t  chkSum;
+  uint8_t   currModel; //0..15
+  uint8_t   contrast;
+  uint8_t   vBatWarn;
+  int8_t    vBatCalib;
+  int8_t    lightSw;
+  Gruvin9xTrainerData_v104 trainer;
+  uint8_t   view;      //index of subview in main scrren
+  uint8_t   disableThrottleWarning:1;
+  int8_t    switchWarning:2; // -1=down, 0=off, 1=up
+  uint8_t   beeperVal:3;
+  uint8_t   disableMemoryWarning:1;
+  uint8_t   disableAlarmWarning:1;
+  uint8_t   stickMode;
+  uint8_t   inactivityTimer;
+  uint8_t   throttleReversed:1;
+  uint8_t   minuteBeep:1;
+  uint8_t   preBeep:1;
+  uint8_t   flashBeep:1;
+  uint8_t   disableSplashScreen:1;
+  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  uint8_t   spare:2;
+  uint8_t   filterInput;
+  uint8_t   lightAutoOff;
+  uint8_t   templateSetup;  //RETA order according to chout_ar array
+  int8_t    PPM_Multiplier;
+  Gruvin9xFrSkyRSSIAlarm frskyRssiAlarms[2];
+
+  operator GeneralSettings();
+  t_Gruvin9xGeneral_v104() { memset(this, 0, sizeof(t_Gruvin9xGeneral_v104)); }
+  t_Gruvin9xGeneral_v104(GeneralSettings&);
+
+} __attribute__((packed)) Gruvin9xGeneral_v104;
+
+typedef Gruvin9xGeneral_v104 Gruvin9xGeneral;
 
 // eeprom modelspec
 
@@ -237,7 +275,7 @@ typedef struct t_Gruvin9xSwashRingData { // Swash Ring data
 
 } __attribute__((packed)) Gruvin9xSwashRingData;
 
-typedef struct t_Gruvin9xPhaseData {
+typedef struct t_Gruvin9xPhaseData_v102 {
   int8_t trim[4];     // -125..125 => trim value, 127 => use trim of phase 0, -128, -127, -126 => use trim of phases 1|2|3|4 instead
   int8_t swtch;       // swtch of phase[0] is not used
   char name[6];
@@ -245,10 +283,42 @@ typedef struct t_Gruvin9xPhaseData {
   uint8_t fadeOut:4;
 
   operator PhaseData();
-  t_Gruvin9xPhaseData();
-  t_Gruvin9xPhaseData(PhaseData&);
+  t_Gruvin9xPhaseData_v102() { memset(this, 0, sizeof(t_Gruvin9xPhaseData_v102)); }
+} __attribute__((packed)) Gruvin9xPhaseData_v102;
 
-} __attribute__((packed)) Gruvin9xPhaseData;
+
+typedef struct t_Gruvin9xPhaseData_v106 {
+  int8_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
+  int8_t trim_ext:8;  // 2 less significant extra bits per trim (10bits trims)
+  int8_t swtch;       // swtch of phase[0] is not used
+  char name[6];
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+
+  operator PhaseData();
+  t_Gruvin9xPhaseData_v106() { memset(this, 0, sizeof(t_Gruvin9xPhaseData_v106)); }
+  t_Gruvin9xPhaseData_v106(PhaseData &eepe);
+} __attribute__((packed)) Gruvin9xPhaseData_v106;
+
+typedef struct t_Gruvin9xTimerData_v102 {
+  int8_t    mode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  uint8_t   dir:1;             // 0=>Count Down, 1=>Count Up
+  uint16_t  val;
+
+  operator TimerData();
+  t_Gruvin9xTimerData_v102() { memset(this, 0, sizeof(t_Gruvin9xTimerData_v102)); }
+} __attribute__((packed)) Gruvin9xTimerData_v102;
+
+typedef struct t_Gruvin9xTimerData_v106 {
+  int8_t    mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  uint16_t  val:14;
+  uint8_t   persistent:1;
+  uint8_t   dir:1;             // 0=>Count Down, 1=>Count Up
+
+  operator TimerData();
+  t_Gruvin9xTimerData_v106() { memset(this, 0, sizeof(t_Gruvin9xTimerData_v106)); }
+  t_Gruvin9xTimerData_v106(TimerData &eepe);
+} __attribute__((packed)) Gruvin9xTimerData_v106;
 
 #define MAX_MODELS 16
 #define MAX_PHASES 5
@@ -264,24 +334,20 @@ typedef struct t_Gruvin9xPhaseData {
 // TODO
 typedef struct t_Gruvin9xModelData_v102 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  int8_t    tmrMode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmrDir:1;             // 0=>Count Down, 1=>Count Up
-  uint16_t  tmrVal;
+  Gruvin9xTimerData_v102 timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   uint8_t   thrExpo:1;            // Enable Throttle Expo
   uint8_t   trimInc:3;            // Trim Increments
-  uint8_t   spare1:1;          // 0 disable trainer, 1 allow trainer
+  uint8_t   spare1:1;
   uint8_t   pulsePol:1;
   uint8_t   extendedLimits:1;
   uint8_t   extendedTrims:1;
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  int8_t    tmr2Mode:7;           // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmr2Dir:1;            // 0=>Count Down, 1=>Count Up
-  uint16_t  tmr2Val;
+  Gruvin9xTimerData_v102 timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -290,7 +356,7 @@ typedef struct t_Gruvin9xModelData_v102 {
   Gruvin9xCustomSwData  customSw[NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();
@@ -300,24 +366,20 @@ typedef struct t_Gruvin9xModelData_v102 {
 
 typedef struct t_Gruvin9xModelData_v103 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  int8_t    tmrMode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmrDir:1;             // 0=>Count Down, 1=>Count Up
-  uint16_t  tmrVal;
+  Gruvin9xTimerData_v102 timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   uint8_t   thrExpo:1;            // Enable Throttle Expo
   uint8_t   trimInc:3;            // Trim Increments
-  uint8_t   spare1:1;          // 0 disable trainer, 1 allow trainer
+  uint8_t   spare1:1;
   uint8_t   pulsePol:1;
   uint8_t   extendedLimits:1;
   uint8_t   extendedTrims:1;
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  int8_t    tmr2Mode:7;           // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmr2Dir:1;            // 0=>Count Down, 1=>Count Up
-  uint16_t  tmr2Val;
+  Gruvin9xTimerData_v102 timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -326,7 +388,7 @@ typedef struct t_Gruvin9xModelData_v103 {
   Gruvin9xCustomSwData  customSw[NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();
@@ -334,26 +396,22 @@ typedef struct t_Gruvin9xModelData_v103 {
 
 } __attribute__((packed)) Gruvin9xModelData_v103;
 
-typedef struct t_Gruvin9xModelData {
+typedef struct t_Gruvin9xModelData_v105 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  int8_t    tmrMode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmrDir:1;             // 0=>Count Down, 1=>Count Up
-  uint16_t  tmrVal;
+  Gruvin9xTimerData_v102 timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   uint8_t   thrExpo:1;            // Enable Throttle Expo
   uint8_t   trimInc:3;            // Trim Increments
-  uint8_t   spare1:1;          // 0 disable trainer, 1 allow trainer
+  uint8_t   spare1:1;
   uint8_t   pulsePol:1;
   uint8_t   extendedLimits:1;
   uint8_t   extendedTrims:1;
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  int8_t    tmr2Mode:7;           // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmr2Dir:1;            // 0=>Count Down, 1=>Count Up
-  uint16_t  tmr2Val;
+  Gruvin9xTimerData_v102 timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -363,15 +421,51 @@ typedef struct t_Gruvin9xModelData {
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[NUM_FSW];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   int16_t   subtrim[NUM_STICKS];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();
-  t_Gruvin9xModelData() { memset(this, 0, sizeof(t_Gruvin9xModelData)); }
-  t_Gruvin9xModelData(ModelData&);
+  t_Gruvin9xModelData_v105() { memset(this, 0, sizeof(t_Gruvin9xModelData_v105)); }
+  t_Gruvin9xModelData_v105(ModelData&);
 
-} __attribute__((packed)) Gruvin9xModelData;
+} __attribute__((packed)) Gruvin9xModelData_v105;
+
+typedef struct t_Gruvin9xModelData_v106 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Gruvin9xTimerData_v106 timer1;
+  uint8_t   protocol:3;
+  int8_t    ppmNCH:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  uint8_t   thrExpo:1;            // Enable Throttle Expo
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   spare1:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Gruvin9xTimerData_v106 timer2;
+  Gruvin9xMixData   mixData[MAX_MIXERS];
+  Gruvin9xLimitData limitData[NUM_CHNOUT];
+  Gruvin9xExpoData  expoData[MAX_EXPOS];
+  int8_t    curves5[MAX_CURVE5][5];
+  int8_t    curves9[MAX_CURVE9][9];
+  Gruvin9xCustomSwData  customSw[NUM_CSW];
+  Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
+  Gruvin9xFuncSwData    funcSw[NUM_FSW];
+  Gruvin9xSwashRingData swashR;
+  Gruvin9xPhaseData_v106 phaseData[MAX_PHASES];
+  Gruvin9xFrSkyData frsky;
+
+  operator ModelData();
+  t_Gruvin9xModelData_v106() { memset(this, 0, sizeof(t_Gruvin9xModelData_v106)); }
+  t_Gruvin9xModelData_v106(ModelData&);
+
+} __attribute__((packed)) Gruvin9xModelData_v106;
+
+typedef Gruvin9xModelData_v106 Gruvin9xModelData;
 
 #endif
 /*eof*/

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "gruvin9xeeprom.h"
 
-#define EEPROM_VER       105
+#define EEPROM_VER       106
 
 static const char specialCharsTab[] = "_-.,";
 
@@ -52,6 +52,7 @@ void getEEPROMZString(char *dst, const char *src, int size)
   }
 }
 
+#include <iostream>
 t_Gruvin9xTrainerMix_v103::operator TrainerMix()
 {
   TrainerMix eepe;
@@ -62,21 +63,21 @@ t_Gruvin9xTrainerMix_v103::operator TrainerMix()
   return eepe;
 }
 
-t_Gruvin9xTrainerMix::t_Gruvin9xTrainerMix(TrainerMix &eepe)
-{
-  memset(this, 0, sizeof(t_Gruvin9xTrainerMix));
-  srcChn = eepe.src;
-  studWeight = eepe.weight;
-  mode = eepe.mode;
-}
-
-t_Gruvin9xTrainerMix::operator TrainerMix()
+t_Gruvin9xTrainerMix_v104::operator TrainerMix()
 {
   TrainerMix eepe;
   eepe.src = srcChn;
   eepe.weight = studWeight;
   eepe.mode = mode;
   return eepe;
+}
+
+t_Gruvin9xTrainerMix_v104::t_Gruvin9xTrainerMix_v104(TrainerMix &eepe)
+{
+  memset(this, 0, sizeof(t_Gruvin9xTrainerMix_v104));
+  srcChn = eepe.src;
+  studWeight = eepe.weight;
+  mode = eepe.mode;
 }
 
 t_Gruvin9xTrainerData_v103::operator TrainerData ()
@@ -86,34 +87,70 @@ t_Gruvin9xTrainerData_v103::operator TrainerData ()
     eepe.calib[i] = calib[i];
     eepe.mix[i] = mix[i];
   }
+  return eepe;
 }
 
-t_Gruvin9xTrainerData::t_Gruvin9xTrainerData(TrainerData &eepe)
-{
-  memset(this, 0, sizeof(t_Gruvin9xTrainerData));
-  for (int i=0; i<NUM_STICKS; i++) {
-    calib[i] = eepe.calib[i];
-    mix[i] = eepe.mix[i];
-  }
-}
-
-t_Gruvin9xTrainerData::operator TrainerData ()
+t_Gruvin9xTrainerData_v104::operator TrainerData ()
 {
   TrainerData eepe;
   for (int i=0; i<NUM_STICKS; i++) {
     eepe.calib[i] = calib[i];
     eepe.mix[i] = mix[i];
   }
+  return eepe;
 }
 
-t_Gruvin9xGeneral::t_Gruvin9xGeneral()
+t_Gruvin9xTrainerData_v104::t_Gruvin9xTrainerData_v104(TrainerData &eepe)
 {
-  memset(this, 0, sizeof(t_Gruvin9xGeneral));
+  memset(this, 0, sizeof(t_Gruvin9xTrainerData_v104));
+  for (int i=0; i<NUM_STICKS; i++) {
+    calib[i] = eepe.calib[i];
+    mix[i] = eepe.mix[i];
+  }
 }
 
-t_Gruvin9xGeneral::t_Gruvin9xGeneral(GeneralSettings &eepe)
+
+Gruvin9xGeneral_v103::operator GeneralSettings ()
 {
-  memset(this, 0, sizeof(t_Gruvin9xGeneral));
+  GeneralSettings result;
+
+  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+    result.calibMid[i] = calibMid[i];
+    result.calibSpanNeg[i] = calibSpanNeg[i];
+    result.calibSpanPos[i] = calibSpanPos[i];
+  }
+
+  result.currModel = currModel;
+  result.contrast = contrast;
+  result.vBatWarn = vBatWarn;
+  result.vBatCalib = vBatCalib;
+  result.lightSw = lightSw;
+  result.trainer = trainer;
+  result.view = view;
+  result.disableThrottleWarning = disableThrottleWarning;
+  result.switchWarning = switchWarning;
+  result.beeperVal = beeperVal;
+  result.disableMemoryWarning = disableMemoryWarning;
+  result.disableAlarmWarning = disableAlarmWarning;
+  result.stickMode = stickMode;
+  result.inactivityTimer = inactivityTimer;
+  result.throttleReversed = throttleReversed;
+  result.minuteBeep = minuteBeep;
+  result.preBeep = preBeep;
+  result.flashBeep = flashBeep;
+  result.disableSplashScreen = disableSplashScreen;
+  result.enableTelemetryAlarm = enableTelemetryAlarm;
+  result.filterInput = filterInput;
+  result.lightAutoOff = lightAutoOff;
+  result.templateSetup = templateSetup;
+  result.PPM_Multiplier = PPM_Multiplier;
+  // TODO frskyRssiAlarms[2];
+  return result;
+}
+
+t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &eepe)
+{
+  memset(this, 0, sizeof(t_Gruvin9xGeneral_v104));
 
   myVers = EEPROM_VER;
 
@@ -147,7 +184,7 @@ t_Gruvin9xGeneral::t_Gruvin9xGeneral(GeneralSettings &eepe)
   preBeep = eepe.preBeep;
   flashBeep = eepe.flashBeep;
   disableSplashScreen = eepe.disableSplashScreen;
-  noTelemetryAlarm = eepe.noTelemetryAlarm;
+  enableTelemetryAlarm = eepe.enableTelemetryAlarm;
   spare = 0;
   filterInput = eepe.filterInput;
   lightAutoOff = eepe.lightAutoOff;
@@ -156,7 +193,7 @@ t_Gruvin9xGeneral::t_Gruvin9xGeneral(GeneralSettings &eepe)
   // TODO frskyRssiAlarms[2];
 }
 
-Gruvin9xGeneral::operator GeneralSettings ()
+Gruvin9xGeneral_v104::operator GeneralSettings ()
 {
   GeneralSettings result;
 
@@ -185,7 +222,7 @@ Gruvin9xGeneral::operator GeneralSettings ()
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
   result.disableSplashScreen = disableSplashScreen;
-  result.noTelemetryAlarm = noTelemetryAlarm;
+  result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.filterInput = filterInput;
   result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;
@@ -357,22 +394,7 @@ t_Gruvin9xSwashRingData::operator SwashRingData ()
   return eepe;
 }
 
-t_Gruvin9xPhaseData::t_Gruvin9xPhaseData()
-{
-  memset(this, 0, sizeof(t_Gruvin9xPhaseData));
-}
-
-t_Gruvin9xPhaseData::t_Gruvin9xPhaseData(PhaseData &eepe)
-{
-  for (int i=0; i<NUM_STICKS; i++)
-    trim[i] = std::max(-125, std::min(125, eepe.trim[i]));
-  swtch = eepe.swtch;
-  setEEPROMZString(name, eepe.name, sizeof(name));
-  fadeIn = eepe.fadeIn;
-  fadeOut = eepe.fadeOut;
-}
-
-t_Gruvin9xPhaseData::operator PhaseData ()
+t_Gruvin9xPhaseData_v102::operator PhaseData ()
 {
   PhaseData eepe;
   for (int i=0; i<NUM_STICKS; i++)
@@ -382,6 +404,58 @@ t_Gruvin9xPhaseData::operator PhaseData ()
   eepe.fadeIn = fadeIn;
   eepe.fadeOut = fadeOut;
   return eepe;
+}
+
+t_Gruvin9xPhaseData_v106::operator PhaseData ()
+{
+  PhaseData eepe;
+  for (int i=0; i<NUM_STICKS; i++)
+    eepe.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
+  eepe.swtch = swtch;
+  getEEPROMZString(eepe.name, name, sizeof(name));
+  eepe.fadeIn = fadeIn;
+  eepe.fadeOut = fadeOut;
+  return eepe;
+}
+
+t_Gruvin9xPhaseData_v106::t_Gruvin9xPhaseData_v106(PhaseData &eepe)
+{
+  trim_ext = 0;
+  for (int i=0; i<NUM_STICKS; i++) {
+    trim[i] = (int8_t)(eepe.trim[i] >> 2);
+    trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((eepe.trim[i] & 0x03) << (2*i)));
+  }
+  swtch = eepe.swtch;
+  setEEPROMZString(name, eepe.name, sizeof(name));
+  fadeIn = eepe.fadeIn;
+  fadeOut = eepe.fadeOut;
+}
+
+t_Gruvin9xTimerData_v102::operator TimerData ()
+{
+  TimerData eepe;
+  eepe.mode = mode;
+  eepe.val = val;
+  eepe.dir = dir;
+  return eepe;
+}
+
+t_Gruvin9xTimerData_v106::operator TimerData ()
+{
+  TimerData eepe;
+  eepe.mode = mode;
+  eepe.val = val;
+  eepe.persistent = persistent;
+  eepe.dir = dir;
+  return eepe;
+}
+
+t_Gruvin9xTimerData_v106::t_Gruvin9xTimerData_v106(TimerData &eepe)
+{
+  mode = eepe.mode;
+  val = eepe.val;
+  persistent = eepe.persistent;
+  dir = eepe.dir;
 }
 
 
@@ -437,96 +511,20 @@ t_Gruvin9xFrSkyData::operator FrSkyData ()
   return eepe;
 }
 
-t_Gruvin9xModelData::t_Gruvin9xModelData(ModelData &eepe)
-{
-  if (eepe.used) {
-    setEEPROMZString(name, eepe.name, sizeof(name));
-    tmrMode = eepe.timers[0].mode;
-    tmrDir = eepe.timers[0].dir;
-    tmrVal = eepe.timers[0].val;
-    protocol = eepe.protocol;
-    ppmNCH = eepe.ppmNCH;
-    thrTrim = eepe.thrTrim;
-    thrExpo = eepe.thrExpo;
-    trimInc = eepe.trimInc;
-    spare1 = 0;
-    pulsePol = eepe.pulsePol;
-    extendedLimits = eepe.extendedLimits;
-    extendedTrims = eepe.extendedTrims;
-    spare2 = 0;
-    ppmDelay = eepe.ppmDelay;
-    beepANACenter = eepe.beepANACenter;
-    tmr2Mode = eepe.timers[1].mode;
-    tmr2Dir = eepe.timers[1].dir;
-    tmr2Val = eepe.timers[1].val;
-    for (int i=0; i<MAX_MIXERS; i++)
-      mixData[i] = eepe.mixData[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
-      limitData[i] = eepe.limitData[i];
-    for (int i=0; i<MAX_EXPOS; i++)
-      expoData[i] = eepe.expoData[i];
-    for (int i=0; i<MAX_CURVE5; i++)
-      for (int j=0; j<5; j++)
-        curves5[i][j] = eepe.curves5[i][j];
-    for (int i=0; i<MAX_CURVE9; i++)
-      for (int j=0; j<9; j++)
-        curves9[i][j] = eepe.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
-      customSw[i] = eepe.customSw[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
-      safetySw[i] = eepe.safetySw[i];
-    swashR = eepe.swashRingData;
-    // local copy of phases
-    PhaseData phases[MAX_PHASES] = eepe.phaseData;
-    // extract the subtrims from the trims
-    for (int i=0; i<NUM_STICKS; i++) {
-      int min = 1024;
-      int max = -1024;
-      for (int j=0; j<MAX_PHASES; j++) {
-        if (phases[j].trim[i] > max)
-          max = phases[j].trim[i];
-        if (phases[j].trim[i] < min)
-          min = phases[j].trim[i];
-      }
-      if (max > 125 || min < -125) {
-        int zero = (max - min) / 2;
-        subtrim[i] = zero;
-        for (int j=0; j<MAX_PHASES; j++)
-          phases[j].trim[i] -= zero;
-      }
-    }
-    for (int i=0; i<MAX_PHASES; i++) {
-      phaseData[i] = phases[i];
-      for (int j=0; j<NUM_STICKS; j++) {
-        if (phases[i].trimRef[j] >= 0) {
-          phaseData[i].trim[j] = -129 + phases[i].trimRef[j] + (phases[i].trimRef[j] >= j ? 1 : 0);
-        }
-      }
-    }
-    frsky = eepe.frsky;
-  }
-  else {
-    memset(this, 0, sizeof(t_Gruvin9xModelData));
-  }
-}
 
 t_Gruvin9xModelData_v102::operator ModelData ()
 {
   ModelData eepe;
   eepe.used = true;
   getEEPROMString(eepe.name, name, sizeof(name));
-  eepe.timers[0].mode = tmrMode;
-  eepe.timers[0].dir = tmrDir;
-  eepe.timers[0].val = tmrVal;
-  eepe.timers[1].mode = tmr2Mode;
-  eepe.timers[1].dir = tmr2Dir;
-  eepe.timers[1].val = tmr2Val;
-  eepe.protocol = protocol;
-  eepe.ppmNCH = ppmNCH;
+  eepe.timers[0] = timer1;
+  eepe.timers[1] = timer2;
+  eepe.protocol = (Protocol)protocol;
+  eepe.ppmNCH = 8 + (2 * ppmNCH);
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;
   eepe.trimInc = trimInc;
-  eepe.ppmDelay = ppmDelay;
+  eepe.ppmDelay = 300 + 50 * ppmDelay;
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;
   eepe.extendedLimits = extendedLimits;
@@ -558,18 +556,14 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   ModelData eepe;
   eepe.used = true;
   getEEPROMZString(eepe.name, name, sizeof(name));
-  eepe.timers[0].mode = tmrMode;
-  eepe.timers[0].dir = tmrDir;
-  eepe.timers[0].val = tmrVal;
-  eepe.timers[1].mode = tmr2Mode;
-  eepe.timers[1].dir = tmr2Dir;
-  eepe.timers[1].val = tmr2Val;
-  eepe.protocol = protocol;
-  eepe.ppmNCH = ppmNCH;
+  eepe.timers[0] = timer1;
+  eepe.timers[1] = timer2;
+  eepe.protocol = (Protocol)protocol;
+  eepe.ppmNCH = 8 + (2 * ppmNCH);
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;
   eepe.trimInc = trimInc;
-  eepe.ppmDelay = ppmDelay;
+  eepe.ppmDelay = 300 + 50 * ppmDelay;
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;
   eepe.extendedLimits = extendedLimits;
@@ -596,23 +590,19 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   return eepe;
 }
 
-t_Gruvin9xModelData::operator ModelData ()
+t_Gruvin9xModelData_v105::operator ModelData ()
 {
   ModelData eepe;
   eepe.used = true;
   getEEPROMZString(eepe.name, name, sizeof(name));
-  eepe.timers[0].mode = tmrMode;
-  eepe.timers[0].dir = tmrDir;
-  eepe.timers[0].val = tmrVal;
-  eepe.timers[1].mode = tmr2Mode;
-  eepe.timers[1].dir = tmr2Dir;
-  eepe.timers[1].val = tmr2Val;
-  eepe.protocol = protocol;
-  eepe.ppmNCH = ppmNCH;
+  eepe.timers[0] = timer1;
+  eepe.timers[1] = timer2;
+  eepe.protocol = (Protocol)protocol;
+  eepe.ppmNCH = 8 + (2 * ppmNCH);
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;
   eepe.trimInc = trimInc;
-  eepe.ppmDelay = ppmDelay;
+  eepe.ppmDelay = 300 + 50 * ppmDelay;
   eepe.beepANACenter = beepANACenter;
   eepe.pulsePol = pulsePol;
   eepe.extendedLimits = extendedLimits;
@@ -658,3 +648,111 @@ t_Gruvin9xModelData::operator ModelData ()
 
   return eepe;
 }
+
+t_Gruvin9xModelData_v106::operator ModelData ()
+{
+  ModelData eepe;
+  eepe.used = true;
+  getEEPROMZString(eepe.name, name, sizeof(name));
+  eepe.timers[0] = timer1;
+  eepe.timers[1] = timer2;
+  eepe.protocol = (Protocol)protocol;
+  eepe.ppmNCH = 8 + (2 * ppmNCH);
+  eepe.thrTrim = thrTrim;
+  eepe.thrExpo = thrExpo;
+  eepe.trimInc = trimInc;
+  eepe.ppmDelay = 300 + 50 * ppmDelay;
+  eepe.beepANACenter = beepANACenter;
+  eepe.pulsePol = pulsePol;
+  eepe.extendedLimits = extendedLimits;
+  eepe.extendedTrims = extendedTrims;
+  for (int i=0; i<MAX_PHASES; i++) {
+    eepe.phaseData[i] = phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (phaseData[i].trim[j] > 500) {
+        eepe.phaseData[i].trimRef[j] = phaseData[i].trim[j] - 501;
+        if (eepe.phaseData[i].trimRef[j] >= i)
+          eepe.phaseData[i].trimRef[j] += 1;
+        eepe.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<MAX_MIXERS; i++)
+    eepe.mixData[i] = mixData[i];
+  for (int i=0; i<NUM_CHNOUT; i++)
+    eepe.limitData[i] = limitData[i];
+  for (int i=0; i<NUM_STICKS; i++)
+    eepe.expoData[i] = expoData[i];
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      eepe.curves5[i][j] = curves5[i][j];
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      eepe.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<NUM_CSW; i++)
+    eepe.customSw[i] = customSw[i];
+  for (int i=0; i<NUM_FSW; i++)
+    eepe.funcSw[i] = funcSw[i];
+  for (int i=0; i<NUM_CHNOUT; i++)
+    eepe.safetySw[i] = safetySw[i];
+  eepe.swashRingData = swashR;
+  eepe.frsky = frsky;
+
+  return eepe;
+}
+
+t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &eepe)
+{
+  if (eepe.used) {
+    setEEPROMZString(name, eepe.name, sizeof(name));
+    timer1 = eepe.timers[0];
+    protocol = eepe.protocol;
+    ppmNCH = (eepe.ppmNCH - 8) / 2;
+    thrTrim = eepe.thrTrim;
+    thrExpo = eepe.thrExpo;
+    trimInc = eepe.trimInc;
+    spare1 = 0;
+    pulsePol = eepe.pulsePol;
+    extendedLimits = eepe.extendedLimits;
+    extendedTrims = eepe.extendedTrims;
+    spare2 = 0;
+    ppmDelay = (eepe.ppmDelay - 300) / 50;
+    beepANACenter = eepe.beepANACenter;
+    timer2 = eepe.timers[1];
+    for (int i=0; i<MAX_MIXERS; i++)
+      mixData[i] = eepe.mixData[i];
+    for (int i=0; i<NUM_CHNOUT; i++)
+      limitData[i] = eepe.limitData[i];
+    for (int i=0; i<MAX_EXPOS; i++)
+      expoData[i] = eepe.expoData[i];
+    for (int i=0; i<MAX_CURVE5; i++)
+      for (int j=0; j<5; j++)
+        curves5[i][j] = eepe.curves5[i][j];
+    for (int i=0; i<MAX_CURVE9; i++)
+      for (int j=0; j<9; j++)
+        curves9[i][j] = eepe.curves9[i][j];
+    for (int i=0; i<NUM_CSW; i++)
+      customSw[i] = eepe.customSw[i];
+    for (int i=0; i<NUM_CHNOUT; i++)
+      safetySw[i] = eepe.safetySw[i];
+    swashR = eepe.swashRingData;
+    // local copy of phases
+    PhaseData phases[MAX_PHASES] = eepe.phaseData;
+    for (int i=0; i<MAX_PHASES; i++) {
+      for (int j=0; j<NUM_STICKS; j++) {
+        if (phases[i].trimRef[j] >= 0) {
+          phases[i].trim[j] = 501 + phases[i].trimRef[j] - (phases[i].trimRef[j] >= j ? 1 : 0);
+        }
+        else {
+          phases[i].trim[j] = std::max(-500, std::min(500, phases[i].trim[j]));
+        }
+      }
+      phaseData[i] = phases[i];
+    }
+    frsky = eepe.frsky;
+  }
+  else {
+    memset(this, 0, sizeof(t_Gruvin9xModelData_v106));
+  }
+}
+

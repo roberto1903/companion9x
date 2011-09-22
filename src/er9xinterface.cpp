@@ -133,7 +133,7 @@ int Er9xInterface::getCapability(const Capability capability)
     case Timers:
       return 1;
     case FuncSwitches:
-      return 1;
+      return 0;
     default:
       return 0;
   }

@@ -209,8 +209,8 @@ void ModelEdit::tabModelEditSetup()
 
     //protocol channels ppm delay (disable if needed)
     ui->protocolCB->setCurrentIndex(g_model.protocol);
-    ui->ppmDelaySB->setValue(300+50*g_model.ppmDelay);
-    ui->numChannelsSB->setValue(8+2*g_model.ppmNCH);
+    ui->ppmDelaySB->setValue(g_model.ppmDelay);
+    ui->numChannelsSB->setValue(g_model.ppmNCH);
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
     ui->numChannelsSB->setEnabled(!g_model.protocol);
     ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
@@ -236,8 +236,8 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim
   int trimsMax = GetEepromInterface()->getCapability(ExtendedTrims);
   if (trimsMax == 0)
     trimsMax = 125;
-  else if (trimsMax == 1024)
-    trimSlider->setTickInterval(256);
+  /*else if (trimsMax == 500)
+    trimSlider->setTickInterval(50);*/
   trimSlider->setRange(-trimsMax, +trimsMax);
   trimVal->setRange(-trimsMax, +trimsMax);
   trimVal->setValue(trim);
@@ -250,8 +250,8 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QSpinBo
   if (fadeIn) fadeIn->setValue(phase->fadeIn);
   if (fadeOut) fadeOut->setValue(phase->fadeOut);
 
-  displayOnePhaseOneTrim(phase_idx, ELE, trim1Use, trim1, trim1Slider);
-  displayOnePhaseOneTrim(phase_idx, RUD, trim2Use, trim2, trim2Slider);
+  displayOnePhaseOneTrim(phase_idx, RUD, trim1Use, trim1, trim1Slider);
+  displayOnePhaseOneTrim(phase_idx, ELE, trim2Use, trim2, trim2Slider);
   displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
   displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
 
@@ -1155,7 +1155,7 @@ void ModelEdit::updateSwitchesTab()
     populateCSWCB(ui->cswitchFunc_12,g_model.customSw[11].func);
 
     for(int i=0; i<NUM_CSW; i++)
-        setSwitchWidgetVisibility(i);
+      setSwitchWidgetVisibility(i);
 
     switchEditLock = false;
 }
@@ -1220,9 +1220,11 @@ void ModelEdit::tabFunctionSwitches()
         ui->gridLayout_fswitches->addWidget(fswtchFunc[i],i+1,2);
         populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
-        if (i >= GetEepromInterface()->getCapability(FuncSwitches)) {
-          fswtchSwtch[i]->setDisabled(true);
+        if (!GetEepromInterface()->getCapability(FuncSwitches)) {
           fswtchFunc[i]->setDisabled(true);
+          if (i != 0) {
+            fswtchSwtch[i]->setDisabled(true);
+          }
         }
     }
 
@@ -1452,7 +1454,7 @@ void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 
 void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 {
-    g_model.protocol = index;
+    g_model.protocol = (Protocol)index;
     updateSettings();
 
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
@@ -1461,18 +1463,16 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 
 void ModelEdit::on_numChannelsSB_editingFinished()
 {
-    int i = (ui->numChannelsSB->value()-8)/2;
-    if((i*2+8)!=ui->numChannelsSB->value()) ui->numChannelsSB->setValue(i*2+8);
-    g_model.ppmNCH = i;
-    updateSettings();
+  // TODO only accept valid values
+  g_model.ppmNCH = ui->numChannelsSB->value();
+  updateSettings();
 }
 
 void ModelEdit::on_ppmDelaySB_editingFinished()
 {
-    int i = (ui->ppmDelaySB->value()-300)/50;
-    if((i*50+300)!=ui->ppmDelaySB->value()) ui->ppmDelaySB->setValue(i*50+300);
-    g_model.ppmDelay = i;
-    updateSettings();
+  // TODO only accept valid values
+  g_model.ppmDelay = ui->ppmDelaySB->value();
+  updateSettings();
 }
 
 void ModelEdit::on_a1RatioSB_editingFinished()

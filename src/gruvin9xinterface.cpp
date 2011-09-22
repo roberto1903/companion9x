@@ -48,6 +48,19 @@ void Gruvin9xInterface::loadModel(ModelData &model)
     model.clear();
 }
 
+template <class T>
+bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings)
+{
+  T _settings;
+  if (efile->readRlc2((uint8_t*)&_settings, sizeof(T))) {
+    settings = _settings;
+    return true;
+  }
+
+  std::cerr << "error when loading general settings";
+  return false;
+}
+
 bool Gruvin9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
 {
   std::cout << "trying gruvin9x import... ";
@@ -55,25 +68,27 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
   efile->EeFsInit(eeprom);
     
   efile->openRd(FILE_GENERAL);
-  Gruvin9xGeneral er9xGeneral;
+  uint8_t version;
 
-  if (efile->readRlc2((uint8_t*)&er9xGeneral, 1) != 1) {
+  if (efile->readRlc2(&version, 1) != 1) {
     std::cout << "no\n";
     return false;
   }
 
-  std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
+  std::cout << "version " << (unsigned int)version << " ";
 
-  switch(er9xGeneral.myVers) {
+  switch(version) {
     case 3:
     case 5:
     case 100:
     case 101:
     case 102:
     case 103:
-      // TODO
+    case 104:
     case 105:
-      // subtrims + function switches added
+      // subtrims(16bits) + function switches added
+    case 106:
+      // trims(10bits), no subtrims
       break;
     default:
       std::cout << "not gruvin9x\n";
@@ -81,22 +96,36 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
   }
 
   efile->openRd(FILE_GENERAL);
-  if (!efile->readRlc2((uint8_t*)&er9xGeneral, sizeof(Gruvin9xGeneral))) {
+  if (version < 104) {
+    if (!loadGeneral<Gruvin9xGeneral_v103>(radioData.generalSettings))
+      return false;
+  }
+  else if (version <= 106) {
+    if (!loadGeneral<Gruvin9xGeneral_v104>(radioData.generalSettings))
+      return false;
+  }
+  else {
     std::cout << "ko\n";
     return false;
   }
-  radioData.generalSettings = er9xGeneral;
   
   for (int i=0; i<MAX_MODELS; i++) {
     efile->openRd(FILE_MODEL(i));
-    if (er9xGeneral.myVers < 103) {
+    if (version < 103) {
       loadModel<Gruvin9xModelData_v102>(radioData.models[i]);
     }
-    else if (er9xGeneral.myVers == 103) {
+    else if (version == 103) {
       loadModel<Gruvin9xModelData_v103>(radioData.models[i]);
     }
+    else if (version == 105) {
+      loadModel<Gruvin9xModelData_v105>(radioData.models[i]);
+    }
+    else if (version == 106) {
+      loadModel<Gruvin9xModelData_v106>(radioData.models[i]);
+    }
     else {
-      loadModel<Gruvin9xModelData>(radioData.models[i]);
+      std::cout << "ko\n";
+      return false;
     }
   }
 
@@ -157,7 +186,7 @@ int Gruvin9xInterface::getCapability(const Capability capability)
     case FuncSwitches:
       return 12;
     case ExtendedTrims:
-      return 1024;
+      return 500;
   }
 }
 
