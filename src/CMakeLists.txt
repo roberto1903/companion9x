@@ -34,7 +34,7 @@ SET( companion9x_SRCS
      eeprominterface.cpp
      hexinterface.cpp
      file.cpp
-     # xmlinterface.cpp
+     xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx
      er9xeeprom.cpp
      er9xinterface.cpp
