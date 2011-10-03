@@ -24,9 +24,12 @@
 #define DNLD_VER_ER9X_JETI      1
 #define DNLD_VER_ER9X_FRSKY     2
 #define DNLD_VER_ER9X_ARDUPILOT 3
-#define DNLD_VER_GRUVIN9X       4
+#define DNLD_VER_GRUVIN9X_STOCK 4
+#define DNLD_VER_GRUVIN9X_V4    5
+#define DNLD_VER_OPEN9X         6
 
-#define EESIZE   2048
+#define EESIZE_STOCK   2048
+#define EESIZE_V4      4096
 
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
@@ -481,9 +484,9 @@ class EEPROMInterface
 
     virtual ~EEPROMInterface() {}
 
-    virtual bool load(RadioData &radioData, uint8_t eeprom[EESIZE]) = 0;
+    virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
 
-    virtual bool save(uint8_t eeprom[EESIZE], RadioData &radioData) = 0;
+    virtual int save(uint8_t *eeprom, RadioData &radioData) = 0;
 
     virtual int getSize(ModelData &) = 0;
 
@@ -496,7 +499,7 @@ void setEEPROMString(char *dst, const char *src, int size);
 void getEEPROMString(char *dst, const char *src, int size);
 
 void RegisterEepromInterfaces();
-bool LoadEeprom(RadioData &radioData, uint8_t eeprom[EESIZE]);
+bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 
 EEPROMInterface *GetEepromInterface();
 

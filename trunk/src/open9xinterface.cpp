@@ -15,8 +15,8 @@
  */
 
 #include <iostream>
-#include "gruvin9xinterface.h"
-#include "gruvin9xeeprom.h"
+#include "open9xinterface.h"
+#include "open9xeeprom.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -28,19 +28,18 @@
 #define FILE_MODEL(n) (1+n)
 #define FILE_TMP      (1+16)
 
-Gruvin9xInterface::Gruvin9xInterface(int size):
-efile(new EFile()),
-size(size)
+Open9xInterface::Open9xInterface():
+efile(new EFile())
 {
 }
 
-Gruvin9xInterface::~Gruvin9xInterface()
+Open9xInterface::~Open9xInterface()
 {
   delete efile;
 }
 
 template <class T>
-void Gruvin9xInterface::loadModel(ModelData &model)
+void Open9xInterface::loadModel(ModelData &model)
 {
   T _model;
   if (efile->readRlc2((uint8_t*)&_model, sizeof(T)))
@@ -50,7 +49,7 @@ void Gruvin9xInterface::loadModel(ModelData &model)
 }
 
 template <class T>
-bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings)
+bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 {
   T _settings;
   if (efile->readRlc2((uint8_t*)&_settings, sizeof(T))) {
@@ -62,11 +61,11 @@ bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings)
   return false;
 }
 
-bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
+bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  std::cout << "trying gruvin9x " << this->size << " import... ";
+  std::cout << "trying open9x import... ";
 
-  if (size != this->size) {
+  if (size != EESIZE_STOCK) {
     std::cout << "wrong size\n";
     return false;
   }
@@ -84,30 +83,17 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << "version " << (unsigned int)version << " ";
 
   switch(version) {
-    case 3:
-    case 5:
-    case 100:
-    case 101:
-    case 102:
-    case 103:
-    case 104:
-    case 105:
-      // subtrims(16bits) + function switches added
-    case 106:
-      // trims(10bits), no subtrims
+    case 201:
+      // first version
       break;
     default:
-      std::cout << "not gruvin9x\n";
+      std::cout << "not open9x\n";
       return false;
   }
 
   efile->openRd(FILE_GENERAL);
-  if (version < 104) {
-    if (!loadGeneral<Gruvin9xGeneral_v103>(radioData.generalSettings))
-      return false;
-  }
-  else if (version <= 106) {
-    if (!loadGeneral<Gruvin9xGeneral_v104>(radioData.generalSettings))
+  if (version == 201) {
+    if (!loadGeneral<Open9xGeneral_v201>(radioData.generalSettings))
       return false;
   }
   else {
@@ -117,17 +103,8 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   
   for (int i=0; i<MAX_MODELS; i++) {
     efile->openRd(FILE_MODEL(i));
-    if (version < 103) {
-      loadModel<Gruvin9xModelData_v102>(radioData.models[i]);
-    }
-    else if (version == 103) {
-      loadModel<Gruvin9xModelData_v103>(radioData.models[i]);
-    }
-    else if (version == 105) {
-      loadModel<Gruvin9xModelData_v105>(radioData.models[i]);
-    }
-    else if (version == 106) {
-      loadModel<Gruvin9xModelData_v106>(radioData.models[i]);
+    if (version == 201) {
+      loadModel<Open9xModelData_v201>(radioData.models[i]);
     }
     else {
       std::cout << "ko\n";
@@ -139,33 +116,32 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData)
+int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
-  efile->EeFsInit(eeprom, size, true);
+  efile->EeFsInit(eeprom, EESIZE_STOCK, true);
 
-  Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
-  if(sz != sizeof(Gruvin9xGeneral)) {
+  Open9xGeneral open9xGeneral(radioData.generalSettings);
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneral));
+  if(sz != sizeof(Open9xGeneral)) {
     return 0;
   }
-
   efile->swap(FILE_GENERAL, FILE_TMP);
 
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
-      Gruvin9xModelData gruvin9xModel(radioData.models[i]);
-      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
-      if(sz != sizeof(Gruvin9xModelData)) {
+      Open9xModelData open9xModel(radioData.models[i]);
+      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
+      if(sz != sizeof(Open9xModelData)) {
         return 0;
       }
       efile->swap(FILE_MODEL(i), FILE_TMP);
     }
   }
 
-  return size;
+  return EESIZE_STOCK;
 }
 
-int Gruvin9xInterface::getSize(ModelData &model)
+int Open9xInterface::getSize(ModelData &model)
 {
   if (model.isempty())
     return 0;
@@ -173,15 +149,15 @@ int Gruvin9xInterface::getSize(ModelData &model)
   uint8_t tmp[EESIZE_V4];
   efile->EeFsInit(tmp, EESIZE_V4, true);
 
-  Gruvin9xModelData gruvin9xModel(model);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
-  if(sz != sizeof(Gruvin9xModelData)) {
+  Open9xModelData open9xModel(model);
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
+  if(sz != sizeof(Open9xModelData)) {
      return -1;
   }
   return efile->size(FILE_TMP);
 }
 
-int Gruvin9xInterface::getCapability(const Capability capability)
+int Open9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
     case OwnerName:

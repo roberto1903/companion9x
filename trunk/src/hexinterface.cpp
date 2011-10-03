@@ -28,8 +28,10 @@ int HexInterface::getValueFromLine(const QString &line, int pos, int len)
     return ok ? hex : -1;
 }
 
-bool HexInterface::load(uint8_t *data, const int size)
+int HexInterface::load(uint8_t *data)
 {
+  int result = 0;
+
   while (!stream.atEnd()) {
     QString line = stream.readLine();
 
@@ -40,7 +42,7 @@ bool HexInterface::load(uint8_t *data, const int size)
     int recType = getValueFromLine(line,7);
 
     if(byteCount<0 || address<0 || recType<0)
-      return false;
+      return 0;
 
     QByteArray ba;
     ba.clear();
@@ -59,25 +61,26 @@ bool HexInterface::load(uint8_t *data, const int size)
 
     quint8 retV = getValueFromLine(line,(byteCount*2)+9) & 0xFF;
     if(chkSum!=retV)
-      return false;
+      return 0;
 
-    if((recType == 0x00) && ((address+byteCount)<=size)) //data record - ba holds record
+    if (recType == 0x00) { //data record - ba holds record
       memcpy(&data[address],ba.data(),byteCount);
-
+      result = std::max(result, address+byteCount);
+    }
   }
   
-  return true;
+  return result;
 }
 
 bool HexInterface::save(uint8_t *data, const int size)
 {
-  for(int i=0; i<(size/32); i++) {
+  for (int i=0; i<(size/32); i++) {
     QString str = QString(":20%1000").arg(i*32,4,16,QChar('0')); //write start, bytecount (32), address and record type
     quint8 chkSum = 0;
     chkSum = -32; //-bytecount; recordtype is zero
     chkSum -= (i*32) & 0xFF;
     chkSum -= (i*32) >> 8;
-    for(int j=0; j<32; j++)
+    for (int j=0; j<32; j++)
     {
         str += QString("%1").arg(data[i*32+j],2,16,QChar('0'));
         chkSum -= data[i*32+j];

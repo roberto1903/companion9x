@@ -13,20 +13,20 @@
  * GNU General Public License for more details.
  *
  */
-#ifndef gruvin9x_interface_h
-#define gruvin9x_interface_h
+#ifndef open9x_interface_h
+#define open9x_interface_h
 
 #include "eeprominterface.h"
 
 class EFile;
 
-class Gruvin9xInterface : public EEPROMInterface
+class Open9xInterface : public EEPROMInterface
 {
   public:
 
-    Gruvin9xInterface(int size);
+    Open9xInterface();
 
-    virtual ~Gruvin9xInterface();
+    virtual ~Open9xInterface();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
 
@@ -45,8 +45,6 @@ class Gruvin9xInterface : public EEPROMInterface
     bool loadGeneral(GeneralSettings &settings);
 
     EFile *efile;
-
-    int size;
 
 };
 

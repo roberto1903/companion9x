@@ -3,6 +3,7 @@
 #include "eeprominterface.h"
 #include "er9xinterface.h"
 #include "gruvin9xinterface.h"
+#include "open9xinterface.h"
 #include "qsettings.h"
 
 void setEEPROMString(char *dst, const char *src, int size)
@@ -41,6 +42,8 @@ ModelData::ModelData()
 void ModelData::clear()
 {
   memset(this, 0, sizeof(ModelData));
+  for (int i=0; i<MAX_PHASES; i++)
+    phaseData[i].clear();
   for (int i=0; i<MAX_MIXERS; i++)
     mixData[i].clear();
   for(int i=0; i<4; i++){
@@ -86,13 +89,15 @@ std::list<EEPROMInterface *> eeprom_interfaces;
 void RegisterEepromInterfaces()
 {
   eeprom_interfaces.push_back(new Er9xInterface());
-  eeprom_interfaces.push_back(new Gruvin9xInterface());
+  eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
+  eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
+  eeprom_interfaces.push_back(new Open9xInterface());
 }
 
-bool LoadEeprom(RadioData &radioData, uint8_t eeprom[EESIZE])
+bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
 {
   for (std::list<EEPROMInterface *>::iterator i=eeprom_interfaces.begin(); i!=eeprom_interfaces.end(); i++) {
-    if ((*i)->load(radioData, eeprom))
+    if ((*i)->load(radioData, eeprom, size))
       return true;
   }
 
@@ -106,11 +111,19 @@ EEPROMInterface *GetEepromInterface()
   delete eepromInterface;
 
   QSettings settings("er9x-eePe", "eePe");
-  if (settings.value("download-version", 0).toInt() == DNLD_VER_GRUVIN9X) {
-    eepromInterface = new Gruvin9xInterface();
-  }
-  else {
-    eepromInterface = new Er9xInterface();
+  switch (settings.value("download-version", 0).toInt()) {
+    case DNLD_VER_OPEN9X:
+      eepromInterface = new Open9xInterface();
+      break;
+    case DNLD_VER_GRUVIN9X_STOCK:
+      eepromInterface = new Gruvin9xInterface(EESIZE_STOCK);
+      break;
+    case DNLD_VER_GRUVIN9X_V4:
+      eepromInterface = new Gruvin9xInterface(EESIZE_V4);
+      break;
+    default:
+      eepromInterface = new Er9xInterface();
+      break;
   }
 
   return eepromInterface;

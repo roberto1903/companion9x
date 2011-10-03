@@ -183,21 +183,23 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             QString dnldURL, baseFileName;
             switch (settings.value("download-version", 0).toInt())
             {
-            case (DNLD_VER_ER9X_JETI):
+              case DNLD_VER_ER9X_JETI:
                 dnldURL = ER9X_JETI_URL;
                 baseFileName = "er9x-jeti.hex";
                 break;
-            case (DNLD_VER_ER9X_FRSKY):
+              case DNLD_VER_ER9X_FRSKY:
                 dnldURL = ER9X_FRSKY_URL;
                 baseFileName = "er9x-frsky.hex";
                 break;
-            case (DNLD_VER_ER9X_ARDUPILOT):
+              case DNLD_VER_ER9X_ARDUPILOT:
                 dnldURL = ER9X_ARDUPILOT_URL;
                 baseFileName = "er9x-ardupilot.hex";
                 break;
-            case (DNLD_VER_GRUVIN9X):
+              case DNLD_VER_GRUVIN9X_STOCK:
+              case DNLD_VER_GRUVIN9X_V4:
+              case DNLD_VER_OPEN9X:
                 return;
-            default:
+              default:
                 dnldURL = ER9X_URL;
                 baseFileName = "er9x.hex";
                 break;

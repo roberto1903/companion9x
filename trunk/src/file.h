@@ -22,19 +22,10 @@
 #define ERR_FULL 1
 #define ERR_TMO  2
 
-//#define eeprom_write_block eeWriteBlockCmp
-// bs=16  128 blocks    verlust link:128  16files:16*8  128     sum 256
-// bs=32   64 blocks    verlust link: 64  16files:16*16 256     sum 320
-//
-#  define EESIZE   2048
-#  define BS       16
-#  define RESV     64  //reserv for eeprom header with directory (eeFs)
-#define FIRSTBLK (RESV/BS)
-#define BLOCKS   (EESIZE/BS)
-#define EEFS_VERS 4
+#define EEFS_VERS  4
 
 #define MAX_MODELS 16
-#define MAXFILES (1+MAX_MODELS+3)
+#define MAXFILES   20
 
 struct DirEnt{
   uint8_t  startBlk;
@@ -50,6 +41,9 @@ struct EeFs{
   DirEnt   files[MAXFILES];
 }__attribute__((packed));
 
+#define BS                 16
+#define EEPROM_HEADER_SIZE 64
+#define FIRSTBLK           (EEPROM_HEADER_SIZE/BS)
 
 class EFile
 {
@@ -64,6 +58,7 @@ class EFile
 
 
   uint8_t *eeprom;
+  int eeprom_size;
   EeFs    *eeFs;
 
   void eeprom_read_block (void *pointer_ram, uint16_t pointer_eeprom, size_t size);
@@ -80,18 +75,13 @@ class EFile
   uint16_t EeFsGetFree();
   void EeFsFree(uint8_t blk);///free one or more blocks
   uint8_t EeFsAlloc(); ///alloc one block from freelist
-  int8_t EeFsck();
-  void EeFsFormat();
   bool EeFsOpen();
-
-
-
 
 public:
 
   EFile();
 
-  void EeFsInit(uint8_t eeprom[EESIZE], bool format=false);
+  void EeFsInit(uint8_t *eeprom, int size, bool format=false);
 
   ///remove contents of given file
   void rm(uint8_t i_fileId);
@@ -133,7 +123,7 @@ public:
   }
   inline uint16_t readRlc2(uint8_t*buf, uint16_t i_len)
   {
-    return readRlc12(buf,i_len,true);
+    return readRlc12(buf, i_len, true);
   }
 
 };

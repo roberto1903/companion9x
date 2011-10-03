@@ -32,8 +32,6 @@
 #define MDVERS_r261 6
 #define MDVERS      7
 
-#define MAXFILES (1+MAX_MODELS+3)
-
 #define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
 #define NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots

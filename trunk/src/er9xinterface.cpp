@@ -38,11 +38,16 @@ Er9xInterface::~Er9xInterface()
   delete efile;
 }
 
-bool Er9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
+bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying er9x import... ";
 
-  efile->EeFsInit(eeprom);
+  if (size != EESIZE_STOCK) {
+    std::cout << "wrong size\n";
+    return false;
+  }
+
+  efile->EeFsInit(eeprom, size);
     
   efile->openRd(FILE_GENERAL);
   Er9xGeneral er9xGeneral;
@@ -89,14 +94,14 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t eeprom[EESIZE])
   return true;
 }
 
-bool Er9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
+int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
-  efile->EeFsInit(eeprom, true);
+  efile->EeFsInit(eeprom, EESIZE_STOCK, true);
 
   Er9xGeneral er9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
   if(sz != sizeof(Er9xGeneral)) {
-    return false;
+    return 0;
   }
   efile->swap(FILE_GENERAL, FILE_TMP);
 
@@ -105,13 +110,13 @@ bool Er9xInterface::save(uint8_t eeprom[EESIZE], RadioData &radioData)
       Er9xModelData er9xModel(radioData.models[i]);
       sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
       if(sz != sizeof(Er9xModelData)) {
-        return false;
+        return 0;
       }
       efile->swap(FILE_MODEL(i), FILE_TMP);
     }
   }
 
-  return true;
+  return EESIZE_STOCK;
 }
 
 int Er9xInterface::getSize(ModelData &model)
@@ -119,8 +124,8 @@ int Er9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE];
-  efile->EeFsInit(tmp, true);
+  uint8_t tmp[EESIZE_STOCK];
+  efile->EeFsInit(tmp, EESIZE_STOCK);
 
   Er9xModelData er9xModel(model);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));

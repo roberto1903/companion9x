@@ -20,26 +20,29 @@
 #include "string.h"
 #include "file.h"
 #include <assert.h>
+#include <algorithm>
 
 EFile::EFile():
 eeprom(NULL),
+eeprom_size(0),
 eeFs(NULL)
 {
 }
 
-void EFile::EeFsInit(uint8_t eeprom[EESIZE], bool format)
+void EFile::EeFsInit(uint8_t *eeprom, int size, bool format)
 {
   this->eeprom = eeprom;
+  this->eeprom_size = size;
   eeFs = (EeFs *)eeprom;
 
   if (format) {
-    memset(eeprom,0, EESIZE);
+    memset(eeprom, 0, size);
     eeFs->version  = EEFS_VERS;
     eeFs->mySize   = sizeof(EeFs);
     eeFs->freeList = 0;
     eeFs->bs       = BS;
-    for(uint8_t i = FIRSTBLK; i < BLOCKS; i++) EeFsSetLink(i,i+1);
-    EeFsSetLink(BLOCKS-1, 0);
+    for (int i=FIRSTBLK; i<std::min(eeprom_size/BS, 255)-1; i++) EeFsSetLink(i, i+1);
+    EeFsSetLink(std::min(eeprom_size/BS, 255)-1, 0);
     eeFs->freeList = FIRSTBLK;
     EeFsFlush();
   }
@@ -49,63 +52,85 @@ void EFile::eeprom_read_block (void *pointer_ram, uint16_t pointer_eeprom, size_
 {
   memcpy(pointer_ram,&eeprom[pointer_eeprom],size);
 }
+
 void EFile::eeWriteBlockCmp(void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size)
 {
   memcpy(&eeprom[i_pointer_eeprom],i_pointer_ram,size);
 }
 
-
-uint8_t EFile::EeFsRead(uint8_t blk,uint8_t ofs){
+uint8_t EFile::EeFsRead(uint8_t blk,uint8_t ofs)
+{
   uint8_t ret;
   eeprom_read_block(&ret,(uint16_t)(blk*BS+ofs),1);
   return ret;
 }
-void EFile::EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val){
+
+void EFile::EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val)
+{
   eeWriteBlockCmp(&val, (uint16_t)(blk*BS+ofs), 1);
 }
 
-uint8_t EFile::EeFsGetLink(uint8_t blk){
-  return EeFsRead( blk,0);
+uint8_t EFile::EeFsGetLink(uint8_t blk)
+{
+  return EeFsRead(blk, 0);
 }
-void EFile::EeFsSetLink(uint8_t blk,uint8_t val){
-  EeFsWrite( blk,0,val);
+
+void EFile::EeFsSetLink(uint8_t blk, uint8_t val)
+{
+  EeFsWrite(blk, 0, val);
 }
-uint8_t EFile::EeFsGetDat(uint8_t blk,uint8_t ofs){
-  return EeFsRead( blk,ofs+1);
+
+uint8_t EFile::EeFsGetDat(uint8_t blk,uint8_t ofs)
+{
+  return EeFsRead(blk,ofs+1);
 }
-void EFile::EeFsSetDat(uint8_t blk,uint8_t ofs,uint8_t*buf,uint8_t len){
+
+void EFile::EeFsSetDat(uint8_t blk, uint8_t ofs, uint8_t *buf, uint8_t len)
+{
   //EeFsWrite( blk,ofs+1,val);
   eeWriteBlockCmp(buf, (uint16_t)(blk*BS+ofs+1), len);
 }
+
 void EFile::EeFsFlushFreelist()
 {
-  //eeWriteBlockCmp(eeFs->freeList,eeFs->freeList ,sizeof(eeFs->freeList));
+  // eeWriteBlockCmp(&eeFs->freeList, eeFs->freeList, sizeof(eeFs->freeList));
 }
+
 void EFile::EeFsFlush()
 {
-  eeWriteBlockCmp(eeFs, 0,sizeof(eeFs));
+  // eeWriteBlockCmp(eeFs, 0, sizeof(eeFs));
 }
 
 uint16_t EFile::EeFsGetFree()
 {
   uint16_t  ret = 0;
   uint8_t i = eeFs->freeList;
-  while( i ){
+  while (i) {
     ret += BS-1;
     i = EeFsGetLink(i);
   }
   return ret;
 }
-void EFile::EeFsFree(uint8_t blk){///free one or more blocks
+
+/*
+ * free one or more blocks
+ */
+void EFile::EeFsFree(uint8_t blk)
+{
   uint8_t i = blk;
   while( EeFsGetLink(i)) i = EeFsGetLink(i);
   EeFsSetLink(i,eeFs->freeList);
   eeFs->freeList = blk; //chain in front
   EeFsFlushFreelist();
 }
-uint8_t EFile::EeFsAlloc(){ ///alloc one block from freelist
+
+/*
+ * alloc one block from freelist
+ */
+uint8_t EFile::EeFsAlloc()
+{
   uint8_t ret=eeFs->freeList;
-  if(ret){
+  if (ret){
     eeFs->freeList = EeFsGetLink(ret);
     EeFsFlushFreelist();
     EeFsSetLink(ret,0);
@@ -113,79 +138,10 @@ uint8_t EFile::EeFsAlloc(){ ///alloc one block from freelist
   return ret;
 }
 
-int8_t EFile::EeFsck()
-{
-printf("EeFsck"); fflush(stdout);
-  uint8_t *bufp;
-  static uint8_t buffer[BLOCKS];
-  bufp = buffer;
-  memset(bufp,0,BLOCKS);
-  uint8_t blk ;
-  int8_t ret=0;
-  for(uint8_t i = 0; i <= MAXFILES; i++){
-    uint8_t *startP = i==MAXFILES ? &(eeFs->freeList) : &(eeFs->files[i].startBlk);
-    uint8_t lastBlk = 0;
-    blk = *startP;
-      //if(i == MAXFILES) blk = eeFs->freeList;
-      //    else              blk = eeFs->files[i].startBlk;
-    while(blk){
-      //      if(blk <  FIRSTBLK ) goto err_1; //bad blk index
-      //      if(blk >= BLOCKS   ) goto err_2; //bad blk index
-      //      if(bufp[blk])        goto err_3; //blk double usage
-      if( (   blk <  FIRSTBLK ) //goto err_1; //bad blk index
-          || (blk >= BLOCKS   ) //goto err_2; //bad blk index
-          || (bufp[blk]       ))//goto err_3; //blk double usage
-      {
-        if(lastBlk){
-          EeFsSetLink(lastBlk,0);
-        }else{
-          *startP = 0; //interrupt chain at startpos
-          EeFsFlush();
-        }
-        blk=0; //abort
-      }else{
-        bufp[blk] = i+1;
-        lastBlk   = blk;
-        blk       = EeFsGetLink(blk);
-      }
-    }
-  }
-  for(blk = FIRSTBLK; blk < BLOCKS; blk++){
-    if(bufp[blk]==0) {       //goto err_4; //unused block
-      EeFsSetLink(blk,eeFs->freeList);
-      eeFs->freeList = blk; //chain in front
-      EeFsFlushFreelist();
-    }
-  }
-  //  if(0){
-    //err_4: ret--;
-    //err_3: ret--;
-    //    err_2: ret--;
-    //    err_1: ret--;
-  //  }
-  return ret;
-}
-void EFile::EeFsFormat()
-{
-//  if(sizeof(eeFs) != RESV){
-//    extern void eeprom_RESV_mismatch();
-//    eeprom_RESV_mismatch();
-//  }
-  memset(eeFs,0, sizeof(EeFs));
-  eeFs->version  = EEFS_VERS;
-  eeFs->mySize   = sizeof(EeFs);
-  eeFs->freeList = 0;
-  eeFs->bs       = BS;
-  for(uint8_t i = FIRSTBLK; i < BLOCKS; i++) EeFsSetLink(i,i+1);
-  EeFsSetLink(BLOCKS-1, 0);
-  eeFs->freeList = FIRSTBLK;
-  EeFsFlush();
-}
 bool EFile::EeFsOpen()
 {
-  eeprom_read_block(&eeFs,0,sizeof(eeFs));
-
-  return eeFs->version == EEFS_VERS && eeFs->mySize  == sizeof(eeFs);
+  eeprom_read_block(&eeFs, 0, sizeof(eeFs));
+  return eeFs->version == EEFS_VERS && eeFs->mySize == sizeof(eeFs);
 }
 
 bool EFile::exists(uint8_t i_fileId)
@@ -201,7 +157,8 @@ void EFile::swap(uint8_t i_fileId1,uint8_t i_fileId2)
   EeFsFlush();
 }
 
-void EFile::rm(uint8_t i_fileId){
+void EFile::rm(uint8_t i_fileId)
+{
   uint8_t i = eeFs->files[i_fileId].startBlk;
   memset(&(eeFs->files[i_fileId]), 0, sizeof(eeFs->files[i_fileId]));
   EeFsFlush(); //chained out
@@ -209,12 +166,14 @@ void EFile::rm(uint8_t i_fileId){
   if(i) EeFsFree( i ); //chain in
 }
 
-uint16_t EFile::size(uint8_t id){
+uint16_t EFile::size(uint8_t id)
+{
   return eeFs->files[id].size;
 }
 
 
-uint8_t EFile::openRd(uint8_t i_fileId){
+uint8_t EFile::openRd(uint8_t i_fileId)
+{
   m_fileId = i_fileId;
   m_pos      = 0;
   m_currBlk  = eeFs->files[m_fileId].startBlk;
@@ -222,17 +181,18 @@ uint8_t EFile::openRd(uint8_t i_fileId){
   m_zeroes   = 0;
   m_bRlc     = 0;
   m_err      = ERR_NONE;       //error reasons
-  return  eeFs->files[m_fileId].typ;
+  return eeFs->files[m_fileId].typ;
 }
-uint8_t EFile::read(uint8_t*buf,uint16_t i_len){
+
+uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
+{
   uint16_t len = eeFs->files[m_fileId].size - m_pos;
-  if(len < i_len) i_len = len;
+  if (len < i_len) i_len = len;
   len = i_len;
-  while(len)
-  {
+  while(len) {
     if(!m_currBlk) break;
     *buf++ = EeFsGetDat(m_currBlk, m_ofs++);
-    if(m_ofs>=(BS-1)){
+    if (m_ofs >= (BS-1)){
       m_ofs=0;
       m_currBlk=EeFsGetLink(m_currBlk);
     }
@@ -242,26 +202,24 @@ uint8_t EFile::read(uint8_t*buf,uint16_t i_len){
   return i_len - len;
 }
 
-template<class t> inline t min(t a, t b){ return a<b?a:b; }
-
 // G: Read runlength (RLE) compressed bytes into buf.
-uint16_t EFile::readRlc12(uint8_t*buf,uint16_t i_len, bool rlc2)
+uint16_t EFile::readRlc12(uint8_t*buf, uint16_t i_len, bool rlc2)
 {
   uint16_t i=0;
-  for( ; 1; ){
-    uint8_t l=min<uint16_t>(m_zeroes,i_len-i);
+  for( ; 1; ) {
+    uint8_t l = std::min<uint16_t>(m_zeroes, i_len-i);
     memset(&buf[i],0,l);
     i        += l;
     m_zeroes -= l;
     if(m_zeroes) break;
 
-    l=min<uint16_t>(m_bRlc,i_len-i);
-    uint8_t lr = read(&buf[i],l);
+    l=std::min<uint16_t>(m_bRlc, i_len-i);
+    uint8_t lr = read(&buf[i], l);
     i        += lr ;
     m_bRlc   -= lr;
     if(m_bRlc) break;
 
-    if(read(&m_bRlc,1)!=1) break; //read how many bytes to read
+    if (read(&m_bRlc,1)!=1) break; //read how many bytes to read
 
     assert(m_bRlc & 0x7f);
     if (rlc2) {
@@ -284,31 +242,35 @@ uint16_t EFile::readRlc12(uint8_t*buf,uint16_t i_len, bool rlc2)
   }
   return i;
 }
-uint8_t EFile::write1(uint8_t b){
-  return write(&b,1);
+
+uint8_t EFile::write1(uint8_t b)
+{
+  return write(&b, 1);
 }
-uint8_t EFile::write(uint8_t*buf,uint8_t i_len){
-  uint8_t len=i_len;
-  if(!m_currBlk && m_pos==0)
+
+uint8_t EFile::write(uint8_t *buf, uint8_t i_len)
+{
+  uint8_t len = i_len;
+  if (!m_currBlk && m_pos==0)
   {
     eeFs->files[m_fileId].startBlk = m_currBlk = EeFsAlloc();
   }
-  while(len)
+  while (len)
   {
-    if(!m_currBlk) {
+    if (!m_currBlk) {
       m_err = ERR_FULL;
-      break;
+      return 0;
     }
-    if(m_ofs>=(BS-1)){
+    if (m_ofs>=(BS-1)) {
       m_ofs=0;
-      if( ! EeFsGetLink(m_currBlk) ){
+      if (!EeFsGetLink(m_currBlk) ){
         EeFsSetLink(m_currBlk, EeFsAlloc());
       }
       m_currBlk = EeFsGetLink(m_currBlk);
     }
-    if(!m_currBlk) {
+    if (!m_currBlk) {
       m_err = ERR_FULL;
-      break;
+      return 0;
     }
     uint8_t l = BS-1-m_ofs; if(l>len) l=len;
     EeFsSetDat(m_currBlk, m_ofs, buf, l);
@@ -317,49 +279,54 @@ uint8_t EFile::write(uint8_t*buf,uint8_t i_len){
     len   -=l;
   }
   m_pos += i_len - len;
-  return   i_len - len;
+  return i_len - len;
 }
-void EFile::create(uint8_t i_fileId, uint8_t typ){
+
+void EFile::create(uint8_t i_fileId, uint8_t typ)
+{
   openRd(i_fileId); //internal use
   eeFs->files[i_fileId].typ      = typ;
   eeFs->files[i_fileId].size     = 0;
 }
+
 void EFile::closeTrunc()
 {
   uint8_t fri=0;
   eeFs->files[m_fileId].size     = m_pos;
-  if(m_currBlk && ( fri = EeFsGetLink(m_currBlk)))    EeFsSetLink(m_currBlk, 0);
+  if (m_currBlk && ( fri = EeFsGetLink(m_currBlk))) EeFsSetLink(m_currBlk, 0);
   EeFsFlush(); //chained out
 
   if(fri) EeFsFree( fri );  //chain in
 }
 
-uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ,uint8_t*buf,uint16_t i_len){
-  create(i_fileId,typ);
-  bool    state0 = true;
-  uint8_t cnt    = 0;
+uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t i_len)
+{
+  create(i_fileId, typ);
+  bool state0 = true;
+  uint8_t cnt = 0;
   uint16_t i;
 
   //RLE compression:
   //rb = read byte
   //if (rb | 0x80) write rb & 0x7F zeros
   //else write rb bytes
-  for( i=0; i<=i_len; i++)
+  for (i=0; i<=i_len; i++)
   {
     bool nst0 = buf[i] == 0;                   
-    if( nst0 && !state0 && buf[i+1]!=0) nst0 = false ;
-    if(nst0 != state0 || cnt>=0x7f || i==i_len){
-      if(state0){  
-        if(cnt>0){
-          cnt|=0x80;
-          if( write(&cnt,1)!=1)           goto error;
+    if (nst0 && !state0 && buf[i+1]!=0) nst0 = false ;
+    if (nst0 != state0 || cnt>=0x7f || i==i_len) {
+      if (state0) {
+        if(cnt>0) {
+          cnt |= 0x80;
+          if (write(&cnt,1)!=1)           goto error;
           cnt=0;
         }
-      }else{
-        if(cnt>0) {
-          if( write(&cnt,1) !=1)            goto error;
+      }
+      else {
+        if (cnt>0) {
+          if (write(&cnt,1) !=1)            goto error;
           uint8_t ret=write(&buf[i-cnt],cnt);
-          if( ret !=cnt) { cnt-=ret;        goto error;}
+          if (ret!=cnt) { cnt-=ret;        goto error;}
           cnt=0;
         }
       }
@@ -374,50 +341,56 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ,uint8_t*buf,uint16_t i_l
   closeTrunc();
   return i_len;
 }
-// G: Write runlength (RLE) compressed bytes
-uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ,uint8_t*buf,uint16_t i_len){
-  create(i_fileId,typ);
+
+/*
+ * Write runlength (RLE) compressed bytes
+ */
+uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t i_len)
+{
+  create(i_fileId, typ);
   bool    run0   = buf[0] == 0;
   uint8_t cnt    = 1;
   uint8_t cnt0   = 0;
   uint16_t i     = 0;
-  if(i_len==0) goto close;
+  if (i_len==0) goto close;
 
   //RLE compression:
   //rb = read byte
   //if (rb | 0x80) write rb & 0x7F zeros
   //else write rb bytes
-  for( i=1; 1 ; i++) // !! laeuft ein byte zu weit !!
-  {
+  for (i=1; 1; i++) { // !! laeuft ein byte zu weit !!
     bool cur0 = buf[i] == 0;
-    if(cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)|| i==i_len){
-      if(run0){
+    if (cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)|| i==i_len){
+      if (run0){
         assert(cnt0==0);
-        if(cnt<8 && i!=i_len)
+        if (cnt<8 && i!=i_len)
           cnt0 = cnt; //aufbew fuer spaeter
         else {
-          if( write1(cnt|0x40)!=1)                goto error;//-cnt&0x3f
+          if (write1(cnt|0x40)!=1)                goto error;//-cnt&0x3f
         }
-      }else{
-        if(cnt0){
-          if( write1(0x80 | (cnt0<<4) | cnt)!=1)  goto error;//-cnt0xx-cnt
+      }
+      else {
+        if (cnt0) {
+          if (write1(0x80 | (cnt0<<4) | cnt)!=1)  goto error;//-cnt0xx-cnt
           cnt0 = 0;
-        }else{
-          if( write1(cnt) !=1)                    goto error;//-cnt
         }
-        uint8_t ret=write(&buf[i-cnt],cnt);
-        if( ret !=cnt) { cnt-=ret;                goto error;}//-cnt
+        else {
+          if (write1(cnt)!=1)                    goto error;//-cnt
+        }
+        uint8_t ret = write(&buf[i-cnt], cnt);
+        if (ret != cnt) { cnt-=ret;                goto error;}//-cnt
       }
       cnt=0;
-      if(i==i_len) break;
+      if (i==i_len) break;
       run0 = cur0;
     }
     cnt++;
   }
-  if(0){
+  if (0) {
     error:
     i-=cnt+cnt0;
   }
+
   close:
   closeTrunc();
   return i;

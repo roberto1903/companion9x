@@ -107,7 +107,17 @@
      </item>
      <item>
       <property name="text">
-       <string>gruvin9x</string>
+       <string>gruvin9x - stock board</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>gruvin9x - v3/v4 board</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>open9x</string>
       </property>
      </item>
     </widget>
