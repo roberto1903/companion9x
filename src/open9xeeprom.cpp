@@ -1,24 +1,58 @@
 #include <stdlib.h>
 #include <algorithm>
-#include "gruvin9xeeprom.h"
+#include "open9xeeprom.h"
 
-#define EEPROM_VER       106
+#define EEPROM_VER       201
 
-extern void setEEPROMZString(char *dst, const char *src, int size);
-extern void getEEPROMZString(char *dst, const char *src, int size);
+static const char specialCharsTab[] = "_-.,";
 
-#include <iostream>
-t_Gruvin9xTrainerMix_v103::operator TrainerMix()
+int8_t char2idx(char c)
 {
-  TrainerMix eepe;
-  eepe.src = srcChn;
-  eepe.swtch = swtch;
-  eepe.weight = (25 * studWeight) / 8;
-  eepe.mode = mode;
-  return eepe;
+  if (c==' ') return 0;
+  if (c>='A' && c<='Z') return 1+c-'A';
+  if (c>='a' && c<='z') return -1-c+'a';
+  if (c>='0' && c<='9') return 27+c-'0';
+  for (int8_t i=0;;i++) {
+    char cc = specialCharsTab[i];
+    if(cc==0) return 0;
+    if(cc==c) return 37+i;
+  }
 }
 
-t_Gruvin9xTrainerMix_v104::operator TrainerMix()
+#define ZCHAR_MAX 40
+char idx2char(int8_t idx)
+{
+  if (idx == 0) return ' ';
+  if (idx < 0) {
+    if (idx > -27) return 'a' - idx - 1;
+    idx = -idx;
+  }
+  if (idx < 27) return 'A' + idx - 1;
+  if (idx < 37) return '0' + idx - 27;
+  if (idx <= ZCHAR_MAX) return specialCharsTab[idx-37];
+  return ' ';
+}
+
+void setEEPROMZString(char *dst, const char *src, int size)
+{
+  for (int i=size-1; i>=0; i--)
+    dst[i] = char2idx(src[i]);
+}
+
+void getEEPROMZString(char *dst, const char *src, int size)
+{
+  for (int i=size-1; i>=0; i--)
+    dst[i] = idx2char(src[i]);
+  dst[size] = '\0';
+  for (int i=size-1; i>=0; i--) {
+    if (dst[i] == ' ')
+      dst[i] = '\0';
+    else
+      break;
+  }
+}
+
+t_Open9xTrainerMix_v201::operator TrainerMix()
 {
   TrainerMix eepe;
   eepe.src = srcChn;
@@ -27,15 +61,15 @@ t_Gruvin9xTrainerMix_v104::operator TrainerMix()
   return eepe;
 }
 
-t_Gruvin9xTrainerMix_v104::t_Gruvin9xTrainerMix_v104(TrainerMix &eepe)
+t_Open9xTrainerMix_v201::t_Open9xTrainerMix_v201(TrainerMix &eepe)
 {
-  memset(this, 0, sizeof(t_Gruvin9xTrainerMix_v104));
+  memset(this, 0, sizeof(t_Open9xTrainerMix_v201));
   srcChn = eepe.src;
   studWeight = eepe.weight;
   mode = eepe.mode;
 }
 
-t_Gruvin9xTrainerData_v103::operator TrainerData ()
+t_Open9xTrainerData_v201::operator TrainerData ()
 {
   TrainerData eepe;
   for (int i=0; i<NUM_STICKS; i++) {
@@ -45,67 +79,18 @@ t_Gruvin9xTrainerData_v103::operator TrainerData ()
   return eepe;
 }
 
-t_Gruvin9xTrainerData_v104::operator TrainerData ()
+t_Open9xTrainerData_v201::t_Open9xTrainerData_v201(TrainerData &eepe)
 {
-  TrainerData eepe;
-  for (int i=0; i<NUM_STICKS; i++) {
-    eepe.calib[i] = calib[i];
-    eepe.mix[i] = mix[i];
-  }
-  return eepe;
-}
-
-t_Gruvin9xTrainerData_v104::t_Gruvin9xTrainerData_v104(TrainerData &eepe)
-{
-  memset(this, 0, sizeof(t_Gruvin9xTrainerData_v104));
+  memset(this, 0, sizeof(t_Open9xTrainerData_v201));
   for (int i=0; i<NUM_STICKS; i++) {
     calib[i] = eepe.calib[i];
     mix[i] = eepe.mix[i];
   }
 }
 
-
-Gruvin9xGeneral_v103::operator GeneralSettings ()
+t_Open9xGeneral_v201::t_Open9xGeneral_v201(GeneralSettings &eepe)
 {
-  GeneralSettings result;
-
-  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
-    result.calibMid[i] = calibMid[i];
-    result.calibSpanNeg[i] = calibSpanNeg[i];
-    result.calibSpanPos[i] = calibSpanPos[i];
-  }
-
-  result.currModel = currModel;
-  result.contrast = contrast;
-  result.vBatWarn = vBatWarn;
-  result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
-  result.trainer = trainer;
-  result.view = view;
-  result.disableThrottleWarning = disableThrottleWarning;
-  result.switchWarning = switchWarning;
-  result.beeperVal = beeperVal;
-  result.disableMemoryWarning = disableMemoryWarning;
-  result.disableAlarmWarning = disableAlarmWarning;
-  result.stickMode = stickMode;
-  result.inactivityTimer = inactivityTimer;
-  result.throttleReversed = throttleReversed;
-  result.minuteBeep = minuteBeep;
-  result.preBeep = preBeep;
-  result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
-  result.enableTelemetryAlarm = enableTelemetryAlarm;
-  result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
-  result.templateSetup = templateSetup;
-  result.PPM_Multiplier = PPM_Multiplier;
-  // TODO frskyRssiAlarms[2];
-  return result;
-}
-
-t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &eepe)
-{
-  memset(this, 0, sizeof(t_Gruvin9xGeneral_v104));
+  memset(this, 0, sizeof(t_Open9xGeneral_v201));
 
   myVers = EEPROM_VER;
 
@@ -148,7 +133,7 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &eepe)
   // TODO frskyRssiAlarms[2];
 }
 
-Gruvin9xGeneral_v104::operator GeneralSettings ()
+Open9xGeneral_v201::operator GeneralSettings ()
 {
   GeneralSettings result;
 
@@ -186,12 +171,12 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   return result;
 }
 
-t_Gruvin9xExpoData::t_Gruvin9xExpoData()
+t_Open9xExpoData::t_Open9xExpoData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xExpoData));
+  memset(this, 0, sizeof(t_Open9xExpoData));
 }
 
-t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &eepe)
+t_Open9xExpoData::t_Open9xExpoData(ExpoData &eepe)
 {
   mode = eepe.mode;
   chn = eepe.chn;
@@ -203,7 +188,7 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &eepe)
   expo = eepe.expo;
 }
 
-t_Gruvin9xExpoData::operator ExpoData ()
+t_Open9xExpoData::operator ExpoData ()
 {
   ExpoData eepe;
   eepe.mode = mode;
@@ -216,12 +201,12 @@ t_Gruvin9xExpoData::operator ExpoData ()
   return eepe;
 }
 
-t_Gruvin9xLimitData::t_Gruvin9xLimitData()
+t_Open9xLimitData::t_Open9xLimitData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xLimitData));
+  memset(this, 0, sizeof(t_Open9xLimitData));
 }
 
-t_Gruvin9xLimitData::t_Gruvin9xLimitData(LimitData &eepe)
+t_Open9xLimitData::t_Open9xLimitData(LimitData &eepe)
 {
   min = eepe.min;
   max = eepe.max;
@@ -229,7 +214,7 @@ t_Gruvin9xLimitData::t_Gruvin9xLimitData(LimitData &eepe)
   offset = eepe.offset;
 }
 
-t_Gruvin9xLimitData::operator LimitData ()
+t_Open9xLimitData::operator LimitData ()
 {
   LimitData eepe;
   eepe.min = min;
@@ -240,12 +225,12 @@ t_Gruvin9xLimitData::operator LimitData ()
 }
 
 
-t_Gruvin9xMixData::t_Gruvin9xMixData()
+t_Open9xMixData::t_Open9xMixData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xMixData));
+  memset(this, 0, sizeof(t_Open9xMixData));
 }
 
-t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &eepe)
+t_Open9xMixData::t_Open9xMixData(MixData &eepe)
 {
   destCh = eepe.destCh;
   mixWarn = eepe.mixWarn;
@@ -263,7 +248,7 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &eepe)
   sOffset = eepe.sOffset;
 }
 
-t_Gruvin9xMixData::operator MixData ()
+t_Open9xMixData::operator MixData ()
 {
   MixData eepe;
   eepe.destCh = destCh;
@@ -284,14 +269,14 @@ t_Gruvin9xMixData::operator MixData ()
 }
 
 
-t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &eepe)
+t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &eepe)
 {
   v1 = eepe.v1;
   v2 = eepe.v2;
   func = eepe.func;
 }
 
-Gruvin9xCustomSwData::operator CustomSwData ()
+Open9xCustomSwData::operator CustomSwData ()
 {
   CustomSwData eepe;
   eepe.v1 = v1;
@@ -300,7 +285,7 @@ Gruvin9xCustomSwData::operator CustomSwData ()
   return eepe;
 }
 
-Gruvin9xFuncSwData::operator FuncSwData ()
+Open9xFuncSwData::operator FuncSwData ()
 {
   FuncSwData eepe;
   eepe.swtch = swtch;
@@ -308,13 +293,13 @@ Gruvin9xFuncSwData::operator FuncSwData ()
   return eepe;
 }
 
-t_Gruvin9xSafetySwData::t_Gruvin9xSafetySwData(SafetySwData &eepe)
+t_Open9xSafetySwData::t_Open9xSafetySwData(SafetySwData &eepe)
 {
   swtch = eepe.swtch;
   val = eepe.val;
 }
 
-t_Gruvin9xSafetySwData::operator SafetySwData ()
+t_Open9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData eepe;
   eepe.swtch = swtch;
@@ -322,12 +307,12 @@ t_Gruvin9xSafetySwData::operator SafetySwData ()
   return eepe;
 }
 
-t_Gruvin9xSwashRingData::t_Gruvin9xSwashRingData()
+t_Open9xSwashRingData::t_Open9xSwashRingData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xSwashRingData));
+  memset(this, 0, sizeof(t_Open9xSwashRingData));
 }
 
-t_Gruvin9xSwashRingData::t_Gruvin9xSwashRingData(SwashRingData &eepe)
+t_Open9xSwashRingData::t_Open9xSwashRingData(SwashRingData &eepe)
 {
   invertELE = eepe.invertELE;
   invertAIL = eepe.invertAIL;
@@ -337,7 +322,7 @@ t_Gruvin9xSwashRingData::t_Gruvin9xSwashRingData(SwashRingData &eepe)
   value = eepe.value;
 }
 
-t_Gruvin9xSwashRingData::operator SwashRingData ()
+t_Open9xSwashRingData::operator SwashRingData ()
 {
   SwashRingData eepe;
   eepe.invertELE = invertELE;
@@ -349,19 +334,7 @@ t_Gruvin9xSwashRingData::operator SwashRingData ()
   return eepe;
 }
 
-t_Gruvin9xPhaseData_v102::operator PhaseData ()
-{
-  PhaseData eepe;
-  for (int i=0; i<NUM_STICKS; i++)
-    eepe.trim[i] = trim[i];
-  eepe.swtch = swtch;
-  getEEPROMZString(eepe.name, name, sizeof(name));
-  eepe.fadeIn = fadeIn;
-  eepe.fadeOut = fadeOut;
-  return eepe;
-}
-
-t_Gruvin9xPhaseData_v106::operator PhaseData ()
+t_Open9xPhaseData_v201::operator PhaseData ()
 {
   PhaseData eepe;
   for (int i=0; i<NUM_STICKS; i++)
@@ -373,7 +346,7 @@ t_Gruvin9xPhaseData_v106::operator PhaseData ()
   return eepe;
 }
 
-t_Gruvin9xPhaseData_v106::t_Gruvin9xPhaseData_v106(PhaseData &eepe)
+t_Open9xPhaseData_v201::t_Open9xPhaseData_v201(PhaseData &eepe)
 {
   trim_ext = 0;
   for (int i=0; i<NUM_STICKS; i++) {
@@ -386,30 +359,33 @@ t_Gruvin9xPhaseData_v106::t_Gruvin9xPhaseData_v106(PhaseData &eepe)
   fadeOut = eepe.fadeOut;
 }
 
-t_Gruvin9xTimerData::operator TimerData ()
+t_Open9xTimerData_v201::operator TimerData ()
 {
   TimerData eepe;
   eepe.mode = mode;
   eepe.val = val;
+  eepe.persistent = persistent;
   eepe.dir = dir;
   return eepe;
 }
 
-t_Gruvin9xTimerData::t_Gruvin9xTimerData(TimerData &eepe)
+t_Open9xTimerData_v201::t_Open9xTimerData_v201(TimerData &eepe)
 {
   mode = eepe.mode;
   val = eepe.val;
+  persistent = eepe.persistent;
   dir = eepe.dir;
 }
 
-t_Gruvin9xFrSkyChannelData::t_Gruvin9xFrSkyChannelData()
+
+t_Open9xFrSkyChannelData::t_Open9xFrSkyChannelData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Open9xFrSkyChannelData));
 }
 
-t_Gruvin9xFrSkyChannelData::t_Gruvin9xFrSkyChannelData(FrSkyChannelData &eepe)
+t_Open9xFrSkyChannelData::t_Open9xFrSkyChannelData(FrSkyChannelData &eepe)
 {
-  memset(this, 0, sizeof(t_Gruvin9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Open9xFrSkyChannelData));
   ratio = eepe.ratio;
   alarms_value[0] = eepe.alarms[0].value;
   alarms_value[1] = eepe.alarms[1].value;
@@ -418,7 +394,7 @@ t_Gruvin9xFrSkyChannelData::t_Gruvin9xFrSkyChannelData(FrSkyChannelData &eepe)
   type = eepe.type;
 }
 
-t_Gruvin9xFrSkyChannelData::operator FrSkyChannelData ()
+t_Open9xFrSkyChannelData::operator FrSkyChannelData ()
 {
   FrSkyChannelData eepe;
   eepe.ratio = ratio;
@@ -433,19 +409,19 @@ t_Gruvin9xFrSkyChannelData::operator FrSkyChannelData ()
 }
 
 
-t_Gruvin9xFrSkyData::t_Gruvin9xFrSkyData()
+t_Open9xFrSkyData::t_Open9xFrSkyData()
 {
-  memset(this, 0, sizeof(t_Gruvin9xFrSkyData));
+  memset(this, 0, sizeof(t_Open9xFrSkyData));
 }
 
-t_Gruvin9xFrSkyData::t_Gruvin9xFrSkyData(FrSkyData &eepe)
+t_Open9xFrSkyData::t_Open9xFrSkyData(FrSkyData &eepe)
 {
-  memset(this, 0, sizeof(t_Gruvin9xFrSkyData));
+  memset(this, 0, sizeof(t_Open9xFrSkyData));
   channels[0] = eepe.channels[0];
   channels[1] = eepe.channels[1];
 }
 
-t_Gruvin9xFrSkyData::operator FrSkyData ()
+t_Open9xFrSkyData::operator FrSkyData ()
 {
   FrSkyData eepe;
   eepe.channels[0] = channels[0];
@@ -453,145 +429,7 @@ t_Gruvin9xFrSkyData::operator FrSkyData ()
   return eepe;
 }
 
-
-t_Gruvin9xModelData_v102::operator ModelData ()
-{
-  ModelData eepe;
-  eepe.used = true;
-  getEEPROMString(eepe.name, name, sizeof(name));
-  eepe.timers[0] = timer1;
-  eepe.timers[1] = timer2;
-  eepe.protocol = (Protocol)protocol;
-  eepe.ppmNCH = 8 + (2 * ppmNCH);
-  eepe.thrTrim = thrTrim;
-  eepe.thrExpo = thrExpo;
-  eepe.trimInc = trimInc;
-  eepe.ppmDelay = 300 + 50 * ppmDelay;
-  eepe.beepANACenter = beepANACenter;
-  eepe.pulsePol = pulsePol;
-  eepe.extendedLimits = extendedLimits;
-  for (int i=0; i<MAX_PHASES; i++)
-    eepe.phaseData[i] = phaseData[i];
-  for (int i=0; i<MAX_MIXERS; i++)
-    eepe.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
-    eepe.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      eepe.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      eepe.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
-    eepe.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.safetySw[i] = safetySw[i];
-  eepe.swashRingData = swashR;
-  eepe.frsky = frsky;
-  return eepe;
-}
-
-t_Gruvin9xModelData_v103::operator ModelData ()
-{
-  ModelData eepe;
-  eepe.used = true;
-  getEEPROMZString(eepe.name, name, sizeof(name));
-  eepe.timers[0] = timer1;
-  eepe.timers[1] = timer2;
-  eepe.protocol = (Protocol)protocol;
-  eepe.ppmNCH = 8 + (2 * ppmNCH);
-  eepe.thrTrim = thrTrim;
-  eepe.thrExpo = thrExpo;
-  eepe.trimInc = trimInc;
-  eepe.ppmDelay = 300 + 50 * ppmDelay;
-  eepe.beepANACenter = beepANACenter;
-  eepe.pulsePol = pulsePol;
-  eepe.extendedLimits = extendedLimits;
-  for (int i=0; i<MAX_PHASES; i++)
-    eepe.phaseData[i] = phaseData[i];
-  for (int i=0; i<MAX_MIXERS; i++)
-    eepe.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
-    eepe.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      eepe.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      eepe.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
-    eepe.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.safetySw[i] = safetySw[i];
-  eepe.swashRingData = swashR;
-  eepe.frsky = frsky;
-  return eepe;
-}
-
-t_Gruvin9xModelData_v105::operator ModelData ()
-{
-  ModelData eepe;
-  eepe.used = true;
-  getEEPROMZString(eepe.name, name, sizeof(name));
-  eepe.timers[0] = timer1;
-  eepe.timers[1] = timer2;
-  eepe.protocol = (Protocol)protocol;
-  eepe.ppmNCH = 8 + (2 * ppmNCH);
-  eepe.thrTrim = thrTrim;
-  eepe.thrExpo = thrExpo;
-  eepe.trimInc = trimInc;
-  eepe.ppmDelay = 300 + 50 * ppmDelay;
-  eepe.beepANACenter = beepANACenter;
-  eepe.pulsePol = pulsePol;
-  eepe.extendedLimits = extendedLimits;
-  eepe.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
-    eepe.phaseData[i] = phaseData[i];
-    for (int j=0; j<NUM_STICKS; j++) {
-      if (phaseData[i].trim[j] > 125) {
-        eepe.phaseData[i].trimRef[j] = 0;
-        eepe.phaseData[i].trim[j] = 0;
-      }
-      else if (phaseData[i].trim[j] < -125) {
-        eepe.phaseData[i].trimRef[j] = 129 + phaseData[i].trim[j];
-        if (eepe.phaseData[i].trimRef[j] >= i)
-          eepe.phaseData[i].trimRef[j] += 1;
-        eepe.phaseData[i].trim[j] = 0;
-      }
-      else {
-        eepe.phaseData[i].trim[j] += subtrim[j];
-      }
-    }
-  }
-  for (int i=0; i<MAX_MIXERS; i++)
-    eepe.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
-    eepe.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      eepe.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      eepe.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
-    eepe.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
-    eepe.funcSw[i] = funcSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    eepe.safetySw[i] = safetySw[i];
-  eepe.swashRingData = swashR;
-  eepe.frsky = frsky;
-
-  return eepe;
-}
-
-t_Gruvin9xModelData_v106::operator ModelData ()
+t_Open9xModelData_v201::operator ModelData ()
 {
   ModelData eepe;
   eepe.used = true;
@@ -643,7 +481,7 @@ t_Gruvin9xModelData_v106::operator ModelData ()
   return eepe;
 }
 
-t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &eepe)
+t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &eepe)
 {
   if (eepe.used) {
     setEEPROMZString(name, eepe.name, sizeof(name));
@@ -694,7 +532,7 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &eepe)
     frsky = eepe.frsky;
   }
   else {
-    memset(this, 0, sizeof(t_Gruvin9xModelData_v106));
+    memset(this, 0, sizeof(t_Open9xModelData_v201));
   }
 }
 

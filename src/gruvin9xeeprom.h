@@ -236,15 +236,15 @@ typedef struct t_Gruvin9xFuncSwData { // Function Switches data
 } __attribute__((packed)) Gruvin9xFuncSwData;
 
 typedef struct t_Gruvin9xFrSkyChannelData {
-  uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
-  uint8_t   type:4;             // channel unit (0=volts, ...)
-  int8_t    offset:4;           // calibration offset. Signed 0.1V steps. EG. -4 to substract 0.4V
-  uint8_t   alarms_value[2];    // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
-  uint8_t   alarms_level:4;
-  uint8_t   alarms_greater:2;   // 0=LT(<), 1=GT(>)
+  uint16_t  ratio:12;           // (Maximum resistor divider input volts +/- calibration. 0 means channel not used.
+                                    // 0.01v steps from 0 to 40.95V. Ex. 6.60 Volts = 660. 40.95V = 4095
+  uint16_t  type:4;             // channel display unit (0=volts, 1=raw, 2-15=reserverd.)
+  uint8_t   alarms_value[2];    // raw sample values 0..255
+  uint8_t   alarms_level:4;     // two pairs of 2bits. none=0, yel=1, org=2, red=3
+  uint8_t   alarms_greater:2;   // two alarms, 1 bit each. 0=LT(<), 1=GT(>)
   uint8_t   spare:2;
-  int8_t    barMin;             // minimum for bar display
-  uint8_t   barMax;             // ditto for max display (would usually = ratio)
+  uint8_t   barMin;             // minimum for bar display (raw ADC value)
+  uint8_t   barMax;             // ditto for max display (would G:NOT usually = ratio)
 
   operator FrSkyChannelData();
   t_Gruvin9xFrSkyChannelData();
@@ -300,25 +300,15 @@ typedef struct t_Gruvin9xPhaseData_v106 {
   t_Gruvin9xPhaseData_v106(PhaseData &eepe);
 } __attribute__((packed)) Gruvin9xPhaseData_v106;
 
-typedef struct t_Gruvin9xTimerData_v102 {
+typedef struct t_Gruvin9xTimerData {
   int8_t    mode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
   uint8_t   dir:1;             // 0=>Count Down, 1=>Count Up
   uint16_t  val;
 
   operator TimerData();
-  t_Gruvin9xTimerData_v102() { memset(this, 0, sizeof(t_Gruvin9xTimerData_v102)); }
-} __attribute__((packed)) Gruvin9xTimerData_v102;
-
-typedef struct t_Gruvin9xTimerData_v106 {
-  int8_t    mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint16_t  val:14;
-  uint8_t   persistent:1;
-  uint8_t   dir:1;             // 0=>Count Down, 1=>Count Up
-
-  operator TimerData();
-  t_Gruvin9xTimerData_v106() { memset(this, 0, sizeof(t_Gruvin9xTimerData_v106)); }
-  t_Gruvin9xTimerData_v106(TimerData &eepe);
-} __attribute__((packed)) Gruvin9xTimerData_v106;
+  t_Gruvin9xTimerData() { memset(this, 0, sizeof(t_Gruvin9xTimerData)); }
+  t_Gruvin9xTimerData(TimerData &eepe);
+} __attribute__((packed)) Gruvin9xTimerData;
 
 #define MAX_MODELS 16
 #define MAX_PHASES 5
@@ -334,7 +324,7 @@ typedef struct t_Gruvin9xTimerData_v106 {
 // TODO
 typedef struct t_Gruvin9xModelData_v102 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Gruvin9xTimerData_v102 timer1;
+  Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
@@ -347,7 +337,7 @@ typedef struct t_Gruvin9xModelData_v102 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Gruvin9xTimerData_v102 timer2;
+  Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -366,7 +356,7 @@ typedef struct t_Gruvin9xModelData_v102 {
 
 typedef struct t_Gruvin9xModelData_v103 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Gruvin9xTimerData_v102 timer1;
+  Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
@@ -379,7 +369,7 @@ typedef struct t_Gruvin9xModelData_v103 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Gruvin9xTimerData_v102 timer2;
+  Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -398,7 +388,7 @@ typedef struct t_Gruvin9xModelData_v103 {
 
 typedef struct t_Gruvin9xModelData_v105 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Gruvin9xTimerData_v102 timer1;
+  Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
@@ -411,7 +401,7 @@ typedef struct t_Gruvin9xModelData_v105 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Gruvin9xTimerData_v102 timer2;
+  Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];
@@ -433,7 +423,7 @@ typedef struct t_Gruvin9xModelData_v105 {
 
 typedef struct t_Gruvin9xModelData_v106 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Gruvin9xTimerData_v106 timer1;
+  Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
   int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
@@ -446,7 +436,7 @@ typedef struct t_Gruvin9xModelData_v106 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Gruvin9xTimerData_v106 timer2;
+  Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
   Gruvin9xExpoData  expoData[MAX_EXPOS];

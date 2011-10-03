@@ -28,9 +28,9 @@ class Er9xInterface : public EEPROMInterface
 
     virtual ~Er9xInterface();
 
-    virtual bool load(RadioData &, uint8_t eeprom[EESIZE]);
+    virtual bool load(RadioData &, uint8_t *eeprom, int size);
 
-    virtual bool save(uint8_t eeprom[EESIZE], RadioData &radioData);
+    virtual int save(uint8_t *eeprom, RadioData &radioData);
 
     virtual int getSize(ModelData &);
 

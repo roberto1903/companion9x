@@ -451,15 +451,14 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 {
     QFile file(fileName);
 
-    if(!file.exists())
-    {
-        QMessageBox::critical(this, tr("Error"),tr("Unable to find file %1!").arg(fileName));
-        return false;
+    if (!file.exists()) {
+      QMessageBox::critical(this, tr("Error"),tr("Unable to find file %1!").arg(fileName));
+      return false;
     }
 
     int fileType = getFileType(fileName);
 
-    if(fileType==FILE_TYPE_XML) {
+    if (fileType==FILE_TYPE_XML) {
       if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
         QMessageBox::critical(this, tr("Error"),
             tr("Error opening file %1:\n%2.")
@@ -470,14 +469,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
       QTextStream inputStream(&file);
       XmlInterface(inputStream).load(radioData);
     }
-    else if(fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
-      if((file.size()>(6*1024)) || (file.size()<(4*1024)))  //if filesize> 6k and <4kb
-      {
-          QMessageBox::critical(this, tr("Error"),tr("Error reading file:\n"
-                                                     "File wrong size - %1").arg(fileName));
-          return false;
-      }
-
+    else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
       if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
           QMessageBox::critical(this, tr("Error"),
                                tr("Error opening file %1:\n%2.")
@@ -488,23 +480,24 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
       QTextStream inputStream(&file);
 
-      if(fileType==FILE_TYPE_EEPE) {  // read EEPE file header
+      if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
         QString hline = inputStream.readLine();
-        if(hline!=EEPE_EEPROM_FILE_HEADER) {
+        if (hline!=EEPE_EEPROM_FILE_HEADER) {
           file.close();
           return false;
         }
       }
 
-      uint8_t eeprom[EESIZE];
-      if (!HexInterface(inputStream).load(eeprom, EESIZE)) {
+      uint8_t eeprom[EESIZE_V4];
+      int eeprom_size = HexInterface(inputStream).load(eeprom);
+      if (!eeprom_size) {
         file.close();
         return false;
       }
 
       file.close();
 
-      if (!LoadEeprom(radioData, eeprom)) {
+      if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
         QMessageBox::critical(this, tr("Error"),
             tr("Invalid EEPE EEPROM File %1")
             .arg(fileName));
@@ -516,48 +509,41 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
       return true;
     }
-    else if(fileType==FILE_TYPE_BIN) //read binary
-    {
-        if(file.size()!=EESIZE)
-        {
-            QMessageBox::critical(this, tr("Error"),tr("Error reading file:\n"
-                                                       "File wrong size - %1").arg(fileName));
-            return false;
-        }
+    else if (fileType==FILE_TYPE_BIN) { //read binary
+      int eeprom_size = file.size();
 
-        if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
-            QMessageBox::critical(this, tr("Error"),
-                                 tr("Error opening file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-            return false;
-        }
-
-        uint8_t eeprom[EESIZE];
-        long result = file.read((char*)eeprom, EESIZE);
-        file.close();
-
-        if (result!=EESIZE)
-        {
-            QMessageBox::critical(this, tr("Error"),
-                                 tr("Error reading file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-
-            return false;
-        }
-
-        if (!LoadEeprom(radioData, eeprom)) {
+      if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
           QMessageBox::critical(this, tr("Error"),
-              tr("Invalid binary EEPROM File %1")
-              .arg(fileName));
+                               tr("Error opening file %1:\n%2.")
+                               .arg(fileName)
+                               .arg(file.errorString()));
           return false;
-        }
+      }
 
-        refreshList();
-        if(resetCurrentFile) setCurrentFile(fileName);
+      uint8_t eeprom[EESIZE_V4];
+      long result = file.read((char*)eeprom, eeprom_size);
+      file.close();
 
-        return true;
+      if (result != eeprom_size) {
+          QMessageBox::critical(this, tr("Error"),
+                               tr("Error reading file %1:\n%2.")
+                               .arg(fileName)
+                               .arg(file.errorString()));
+
+          return false;
+      }
+
+      if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+        QMessageBox::critical(this, tr("Error"),
+            tr("Invalid binary EEPROM File %1")
+            .arg(fileName));
+        return false;
+      }
+
+      refreshList();
+      if(resetCurrentFile) setCurrentFile(fileName);
+
+      return true;
     }
 
     return false;
@@ -589,10 +575,12 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
     int fileType = getFileType(fileName);
 
-    uint8_t eeprom[EESIZE];
+    uint8_t eeprom[EESIZE_V4];
+    int eeprom_size = 0;
 
     if (fileType != FILE_TYPE_XML) {
-      if (!GetEepromInterface()->save(eeprom, radioData)) {
+      eeprom_size = GetEepromInterface()->save(eeprom, radioData);
+      if (!eeprom_size) {
         QMessageBox::warning(this, tr("Error"),
                                tr("Cannot write file %1:\n%2.")
                                .arg(fileName)
@@ -622,22 +610,22 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
       }
     }
     else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { // write hex
-        if (fileType==FILE_TYPE_EEPE)   // read EEPE file header
-          outputStream << EEPE_EEPROM_FILE_HEADER << "\n";
-        
-        if (!HexInterface(outputStream).save(eeprom, EESIZE)) {
-            QMessageBox::warning(this, tr("Error"),
-                                 tr("Cannot write file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-            file.close();
-            return false;
-        }
+      if (fileType==FILE_TYPE_EEPE)
+        outputStream << EEPE_EEPROM_FILE_HEADER << "\n";
+
+      if (!HexInterface(outputStream).save(eeprom, eeprom_size)) {
+          QMessageBox::warning(this, tr("Error"),
+                               tr("Cannot write file %1:\n%2.")
+                               .arg(fileName)
+                               .arg(file.errorString()));
+          file.close();
+          return false;
+      }
     }
-    else if(fileType==FILE_TYPE_BIN) //write binary
+    else if (fileType==FILE_TYPE_BIN) // write binary
     {
-      long result = file.write((char*)eeprom, EESIZE);
-      if(result!=EESIZE) {
+      long result = file.write((char*)eeprom, eeprom_size);
+      if(result!=eeprom_size) {
         QMessageBox::warning(this, tr("Error"),
             tr("Error writing file %1:\n%2.")
             .arg(fileName)

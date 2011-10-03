@@ -40,6 +40,8 @@ SET( companion9x_SRCS
      er9xinterface.cpp
      gruvin9xeeprom.cpp
      gruvin9xinterface.cpp  
+     open9xeeprom.cpp
+     open9xinterface.cpp  
      node.cpp
      edge.cpp
      helpers.cpp 
