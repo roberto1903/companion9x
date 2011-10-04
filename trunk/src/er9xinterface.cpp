@@ -125,7 +125,7 @@ int Er9xInterface::getSize(ModelData &model)
     return 0;
 
   uint8_t tmp[EESIZE_STOCK];
-  efile->EeFsInit(tmp, EESIZE_STOCK);
+  efile->EeFsInit(tmp, EESIZE_STOCK, true);
 
   Er9xModelData er9xModel(model);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
