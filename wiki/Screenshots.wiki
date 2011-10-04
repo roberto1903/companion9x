@@ -3,6 +3,5 @@
 
 = Model edit =
 
-
-|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <p align="center">*Flight phases edition*</p> || second snapshot ||
+|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <p align="center">*Flight phases edition*</p> || [http://companion9x.googlecode.com/svn/wiki/expos.png http://companion9x.googlecode.com/svn/wiki/expos-resized.png] <p align="center">*Expos edition*</p> ||
 || || ||
