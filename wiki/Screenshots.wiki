@@ -4,5 +4,5 @@
 = Model edit =
 
 
-|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <br/> Flight phases edition || second snapshot ||
+|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <p align="center">*Flight phases edition*</p> || second snapshot ||
 || || ||
