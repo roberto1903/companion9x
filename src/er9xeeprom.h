@@ -24,24 +24,12 @@
 #define MAX_MIXERS  32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
-#define MDVERS_r9   1
-#define MDVERS_r14  2
-#define MDVERS_r22  3
-#define MDVERS_r77  4
-#define MDVERS_r85  5
-#define MDVERS_r261 6
-#define MDVERS      7
+
+#define MDVERS      9
 
 #define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
 #define NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
-
-#define GENERAL_MYVER_r261 3
-#define GENERAL_MYVER      4
-
-
-// eeprom ver <9 => mdvers == 1
-// eeprom ver >9 => mdvers ==2
 
 #define WARN_THR_BIT  0x01
 #define WARN_BEP_BIT  0x80

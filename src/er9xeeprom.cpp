@@ -57,7 +57,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
 {
   memset(this, 0, sizeof(t_Er9xGeneral));
 
-  myVers = GENERAL_MYVER;
+  myVers = MDVERS;
 
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     calibMid[i] = eepe.calibMid[i];
