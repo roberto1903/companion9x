@@ -3,5 +3,5 @@
 
 = Model edit =
 
-|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <p align="center">*Flight phases edition*</p> || [http://companion9x.googlecode.com/svn/wiki/expos.png http://companion9x.googlecode.com/svn/wiki/expos-resized.png] <p align="center">*Expos edition*</p> ||
-|| || ||
+|| [http://companion9x.googlecode.com/svn/wiki/phases.png http://companion9x.googlecode.com/svn/wiki/phases-resized.png] <p align="center">*Flight phases*</p> || [http://companion9x.googlecode.com/svn/wiki/expos.png http://companion9x.googlecode.com/svn/wiki/expos-resized.png] <p align="center">*Expos/Dual rates*</p> ||
+|| [http://companion9x.googlecode.com/svn/wiki/functions-switches.png http://companion9x.googlecode.com/svn/wiki/functions-switches-resized.png] <p align="center">*Flight phases edition*</p> || [http://companion9x.googlecode.com/svn/wiki/telemetry.png http://companion9x.googlecode.com/svn/wiki/telemetry-resized.png] <p align="center">*Telemetry*</p> ||
