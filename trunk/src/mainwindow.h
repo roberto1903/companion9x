@@ -94,7 +94,6 @@ private slots:
     void about();
     void print();
     void preferences();
-    void donators();
     void updateMenus();
     void updateWindowMenu();
     MdiChild *createMdiChild();
@@ -166,10 +165,8 @@ private:
     QAction *previousAct;
     QAction *separatorAct;
     QAction *aboutAct;
-    QAction *donatorsAct;
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
-    //QAction *aboutQtAct;
 };
 
 #endif

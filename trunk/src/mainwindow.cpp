@@ -46,7 +46,6 @@
 #include "mdichild.h"
 #include "burnconfigdialog.h"
 #include "avroutputdialog.h"
-#include "donatorsdialog.h"
 #include "preferencesdialog.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
@@ -601,18 +600,13 @@ void MainWindow::burnFuses()
     fd->exec();
 }
 
-void MainWindow::donators()
-{
-    donatorsDialog *dd = new donatorsDialog(this);
-    dd->exec();
-}
-
 void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
     aboutStr.append(tr("Copyright") +" Bertrand Songis &copy; 2011<br>");
-    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br><br>").arg(currentCompanion9xRev).arg(__DATE__));
-    aboutStr.append(tr("If you've found this program please support by"));
+    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br/><br/>").arg(currentCompanion9xRev).arg(__DATE__));
+    aboutStr.append(QString("The companion9x project was originally forked from eePe <a href='http://code.google.com/p/eepe'>http://code.google.com/p/eepe</a><br/><br/>"));
+    aboutStr.append(tr("If you've found this program useful, please support by"));
     aboutStr.append(" <a href='" DONATE_STR "'>");
     aboutStr.append(tr("donating") + "</a></center>");
 
@@ -832,10 +826,6 @@ void MainWindow::createActions()
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 
-    donatorsAct = new QAction(QIcon(":/images/contributors.png"), tr("&Contributors"), this);
-    donatorsAct->setStatusTip(tr("List er9x/companion9x Contributors"));
-    connect(donatorsAct, SIGNAL(triggered()), this, SLOT(donators()));
-
     switchLayoutDirectionAct = new QAction(QIcon(":/images/switch_dir.png"),  tr("Switch layout direction"), this);
     switchLayoutDirectionAct->setStatusTip(tr("Switch layout Left/Right"));
     connect(switchLayoutDirectionAct, SIGNAL(triggered()), this, SLOT(switchLayoutDirection()));
@@ -886,7 +876,6 @@ void MainWindow::createMenus()
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addSeparator();
     helpMenu->addAction(aboutAct);
-    helpMenu->addAction(donatorsAct);
     helpMenu->addSeparator();
     helpMenu->addAction(checkForUpdatesAct);
 }
@@ -920,7 +909,6 @@ void MainWindow::createToolBars()
 
     helpToolBar = addToolBar(tr("Help"));
     helpToolBar->addAction(aboutAct);
-    helpToolBar->addAction(donatorsAct);
     helpToolBar->addAction(checkForUpdatesAct);
 }
 
