@@ -53,7 +53,6 @@ SET( companion9x_SRCS
      preferencesdialog.cpp
      burnconfigdialog.cpp
      printdialog.cpp
-     donatorsdialog.cpp
      fusesdialog.cpp
      expodialog.cpp
      mixerdialog.cpp
@@ -68,7 +67,6 @@ SET( companion9x_MOC_HDRS
      preferencesdialog.h
      burnconfigdialog.h
      printdialog.h
-     donatorsdialog.h
      fusesdialog.h
      mixerdialog.h
      expodialog.h
@@ -83,7 +81,6 @@ SET( companion9x_MOC_HDRS
      
 SET( companion9x_UIS
      avroutputdialog.ui
-     donatorsdialog.ui
      fusesdialog.ui
      expodialog.ui
      mixerdialog.ui
