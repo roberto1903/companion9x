@@ -2,4 +2,4 @@
 
 = Model edit =
 
-http://code.google.com/p/companion9x/wiki/images/phases.png
+http://code.google.com/p/companion9x/wiki/phases.png
