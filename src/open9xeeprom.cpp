@@ -100,10 +100,10 @@ t_Open9xGeneral_v201::t_Open9xGeneral_v201(GeneralSettings &eepe)
     calibSpanPos[i] = eepe.calibSpanPos[i];
   }
 
-  int16_t sum=0;
-  for(int i=0; i<12;i++)
-    sum+=calibMid[i];
-    chkSum = sum;
+  uint16_t sum = 0;
+  for (int i=0; i<12; i++)
+    sum += calibMid[i];
+  chkSum = sum;
 
   currModel = eepe.currModel;
   contrast = eepe.contrast;
