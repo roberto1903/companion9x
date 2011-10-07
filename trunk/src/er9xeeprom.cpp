@@ -83,7 +83,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
   beeperVal = eepe.beeperVal;
   disableAlarmWarning = eepe.disableAlarmWarning;
   stickMode = eepe.stickMode;
-  inactivityTimer = eepe.inactivityTimer;
+  inactivityTimer = eepe.inactivityTimer - 10;
   throttleReversed = eepe.throttleReversed;
   minuteBeep = eepe.minuteBeep;
   preBeep = eepe.preBeep;
@@ -119,7 +119,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.beeperVal = beeperVal;
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = stickMode;
-  result.inactivityTimer = inactivityTimer;
+  result.inactivityTimer = inactivityTimer + 10;
   result.throttleReversed = throttleReversed;
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
