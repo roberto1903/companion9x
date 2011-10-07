@@ -410,7 +410,7 @@ void MdiChild::OpenEditWindow()
 
         if(model.isempty())
         {
-            model.setDefault(row);
+            model.setDefault(row-1);
             isNew = true; //modeledit - clear mixes, apply first template
             setModified();
         }

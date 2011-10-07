@@ -115,10 +115,10 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &eepe)
     calibSpanPos[i] = eepe.calibSpanPos[i];
   }
 
-  int16_t sum=0;
-  for(int i=0; i<12;i++)
-    sum+=calibMid[i];
-    chkSum = sum;
+  uint16_t sum = 0;
+  for (int i=0; i<12; i++)
+    sum += calibMid[i];
+  chkSum = sum;
 
   currModel = eepe.currModel;
   contrast = eepe.contrast;
