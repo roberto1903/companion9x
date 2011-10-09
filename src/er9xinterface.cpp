@@ -60,8 +60,10 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
 
   switch(er9xGeneral.myVers) {
+    case 3:
+      std::cout << "(old gruvin9x) ";
     case 4:
-    case 5:
+//    case 5:
     case 6:
     case 7:
     case 8:

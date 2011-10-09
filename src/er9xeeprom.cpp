@@ -386,8 +386,14 @@ t_Er9xModelData::operator ModelData ()
   eepe.swashRingData.type = swashType;
   eepe.swashRingData.collectiveSource = swashCollectiveSource;
   eepe.swashRingData.value = swashRingValue;
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<MAX_MIXERS; i++) {
     eepe.mixData[i] = mixData[i];
+    if (mdVers == 6) {
+      if (eepe.mixData[i].srcRaw > MIX_FULL) {
+        eepe.mixData[i].srcRaw += 3; /* because of [CYC1:CYC3] inserted after MIX_FULL */
+      }
+    }
+  }
   for (int i=0; i<NUM_CHNOUT; i++)
     eepe.limitData[i] = limitData[i];
 
