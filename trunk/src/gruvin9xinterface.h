@@ -39,10 +39,10 @@ class Gruvin9xInterface : public EEPROMInterface
   protected:
 
     template <class T>
-    void loadModel(ModelData &model);
+    void loadModel(ModelData &model, int version=2);
 
     template <class T>
-    bool loadGeneral(GeneralSettings &settings);
+    bool loadGeneral(GeneralSettings &settings, int version=2);
 
     EFile *efile;
 

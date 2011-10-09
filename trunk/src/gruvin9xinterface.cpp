@@ -40,20 +40,22 @@ Gruvin9xInterface::~Gruvin9xInterface()
 }
 
 template <class T>
-void Gruvin9xInterface::loadModel(ModelData &model)
+void Gruvin9xInterface::loadModel(ModelData &model, int version)
 {
   T _model;
-  if (efile->readRlc2((uint8_t*)&_model, sizeof(T)))
+  if ((version == 2 && efile->readRlc2((uint8_t*)&_model, sizeof(T))) ||
+      (version == 1 && efile->readRlc1((uint8_t*)&_model, sizeof(T))))
     model = _model;
   else
     model.clear();
 }
 
 template <class T>
-bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings)
+bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings, int version)
 {
   T _settings;
-  if (efile->readRlc2((uint8_t*)&_settings, sizeof(T))) {
+  if ((version == 2 && efile->readRlc2((uint8_t*)&_settings, sizeof(T))) ||
+      (version == 1 && efile->readRlc1((uint8_t*)&_settings, sizeof(T)))) {
     settings = _settings;
     return true;
   }
@@ -72,19 +74,25 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
 
   efile->EeFsInit(eeprom, size);
-    
   efile->openRd(FILE_GENERAL);
-  uint8_t version;
 
+  uint8_t version;
   if (efile->readRlc2(&version, 1) != 1) {
     std::cout << "no\n";
     return false;
   }
 
+  if (version == 0) {
+    efile->openRd(FILE_GENERAL);
+    if (efile->readRlc1(&version, 1) != 1) {
+      std::cout << "no\n";
+      return false;
+    }
+  }
+
   std::cout << "version " << (unsigned int)version << " ";
 
   switch(version) {
-    case 3:
     case 5:
     case 100:
     case 101:
@@ -102,7 +110,11 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
 
   efile->openRd(FILE_GENERAL);
-  if (version < 104) {
+  if (version == 5) {
+    if (!loadGeneral<Gruvin9xGeneral_v103>(radioData.generalSettings, 1))
+      return false;
+  }
+  else if (version < 104) {
     if (!loadGeneral<Gruvin9xGeneral_v103>(radioData.generalSettings))
       return false;
   }
@@ -117,7 +129,10 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   
   for (int i=0; i<MAX_MODELS; i++) {
     efile->openRd(FILE_MODEL(i));
-    if (version < 103) {
+    if (version == 5) {
+      loadModel<Gruvin9xModelData_v102>(radioData.models[i], 1);
+    }
+    else if (version < 103) {
       loadModel<Gruvin9xModelData_v102>(radioData.models[i]);
     }
     else if (version == 103) {
