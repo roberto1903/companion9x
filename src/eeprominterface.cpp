@@ -70,7 +70,7 @@ void ModelData::setDefault(uint8_t id)
 {
   clear();  
   used = true;
-  sprintf(name, "MODEL %02d", id+1);
+  sprintf(name, "MODEL%02d", id+1);
 }
 
 unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
