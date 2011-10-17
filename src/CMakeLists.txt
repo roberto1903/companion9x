@@ -115,8 +115,53 @@ QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
 QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS} )
 QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
 
-ADD_EXECUTABLE( companion9x ${companion9x_SRCS} ${companion9x_QM} )
+
+IF( APPLE )
+    # Copy the icon files
+    # TODO: put these in some sort of add_custom_command( TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ...)
+    # also delete the Sigil.app folder as PRE_BUILD of Sigil executable
+
+    #exec_program( "mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/companion9x.app/Contents/Resources")
+    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+
+    # Copy the PLIST file...
+    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/mac/MacOSXBundleInfo.plist ${PROJECT_BINARY_DIR}")
+
+    # ...and set the Sigil version string
+    #exec_program( "sed -i -e 's/SGVERSION/${SIGIL_FULL_VERSION}/g' ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist")
+
+    ADD_EXECUTABLE( ${PROJECT_NAME} MACOSX_BUNDLE ${companion9x_SRCS} ${companion9x_QM} )
+    # SET_TARGET_PROPERTIES( ${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ../mac/MacOSXBundleInfo.plist )
+ELSE( )
+    ADD_EXECUTABLE( ${PROJECT_NAME} WIN32 ${companion9x_SRCS} ${companion9x_QM} )
+ENDIF( )
+
 TARGET_LINK_LIBRARIES( companion9x ${QT_LIBRARIES} )
 TARGET_LINK_LIBRARIES( companion9x xerces-c )
- 
+
 INSTALL( TARGETS companion9x DESTINATION ${QT_BINARY_DIR} )
+
+IF( WIN32 )
+  FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
+
+  ADD_CUSTOM_COMMAND(OUTPUT ../winbuild/companion9xInstall.exe
+                     COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
+                     MAIN_DEPENDENCY companion9x
+                     DEPENDS ${EXECUTABLE_NAME}
+                     #[IMPLICIT_DEPENDS <lang1> depend1 ...]
+                     WORKING_DIRECTORY ../winbuild/
+                     COMMENT "Windows NSIS Installer")
+
+  ADD_CUSTOM_TARGET( installer
+    DEPENDS ../winbuild/companion9xInstall.exe
+    SOURCES ../winbuild/companion9x.nsi)
+ENDIF( )
+
+IF( APPLE )
+  ADD_CUSTOM_TARGET( makedmg
+                     COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
+                     # WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+                     DEPENDS ${PROJECT_NAME} )
+ENDIF( )
