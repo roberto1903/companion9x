@@ -105,6 +105,11 @@ SET( companion9x_TS
      companion9x_fr.ts
 )
 
+IF( WIN32 )
+    SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
+    SET(LINK_FLAGS -Wl,-subsystem,windows)
+ENDIF( )
+
 FIND_PACKAGE( Qt4 REQUIRED )
 SET( QT_USE_QTNETWORK True )
 INCLUDE( ${QT_USE_FILE} )
@@ -114,7 +119,6 @@ QT4_WRAP_UI( companion9x_SRCS ${companion9x_UIS} )
 QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
 QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS} )
 QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
-
 
 IF( APPLE )
     # Copy the icon files
@@ -149,7 +153,7 @@ IF( WIN32 )
   ADD_CUSTOM_COMMAND(OUTPUT ../winbuild/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
                      MAIN_DEPENDENCY companion9x
-                     DEPENDS ${EXECUTABLE_NAME}
+                     DEPENDS ${EXECUTABLE_NAME} ../winbuild/companion9x.nsi
                      #[IMPLICIT_DEPENDS <lang1> depend1 ...]
                      WORKING_DIRECTORY ../winbuild/
                      COMMENT "Windows NSIS Installer")
