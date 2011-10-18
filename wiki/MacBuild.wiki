@@ -1,6 +1,6 @@
 #summary Building companion9x for the Mac
  
-= Building C'9X for OS X =
+= Building companion9X for OS X =
 
 Brief notes only until I figure out how it all works -- gruvin.
 
@@ -36,3 +36,46 @@ MacPorts to the rescue again ...
 sudo port install cmake
 }}}
 
+
+== Check out the c9x source ==
+
+See the [http://code.google.com/p/companion9x/source/checkout project's Source page], as provided by Googlecode.
+
+== Prepare a Makefile using CMAKE ==
+
+{{{
+cd companion9x/trunk/src
+
+cmake -G 'Unix Makefiles'
+}}}
+
+Finally, we're ready to compile ...
+
+{{{
+make clean && make
+}}}
+
+When the build process completes (with no errors) you should end up with a folder named `companion9x.app`.
+
+It's probably a good idea at this point to check that the application runs OK by running the raw executable from the command line ...
+
+{{{
+companion9x.app/Contents/MacOSX/companion9x
+}}}
+
+*_You can stop here if you're not needed a drag-n-drop application bundle to give to a friend or whatever._*
+
+== Creating a distributable Application Bundle ==
+
+Assuming build and test step above run went well, you can now use a Qt utility `macdeplyqt` to build an OS X application bundle and also copy that into a new disk image file -- `companion9x.dmg`.
+
+{{{
+sudo macdeployqt companion9x.app -dmg -no-plug-ins
+}}}
+
+(sudo should not be required in my opinion. But for some reason it just seems to be needed.)
+
+The end result of that should be a file `companion9x.dmg`, which when opened will contain a companion9x application icon, which can be dragged to your `/Applications` folder, in typical OS X fashion.
+
+
+ 
