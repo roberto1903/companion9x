@@ -22,7 +22,7 @@ burnConfigDialog::~burnConfigDialog()
 
 void burnConfigDialog::getSettings()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("companion9x", "companion9x");
     avrLoc = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
     QString str = settings.value("avr_arguments").toString();
     avrArgs = str.split(" ", QString::SkipEmptyParts);
@@ -48,7 +48,7 @@ void burnConfigDialog::putSettings()
 //    avrEraseEEPROM = ui->eraseEEPROM_CB->isChecked();
 
 
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("companion9x", "companion9x");
     settings.setValue("avrdude_location", avrLoc);
     settings.setValue("programmer", avrProgrammer);
     settings.setValue("avr_port", avrPort);
@@ -173,7 +173,7 @@ void burnConfigDialog::restFuses(bool eeProtect)
 
     QMessageBox::StandardButton ret = QMessageBox::No;
 
-    ret = QMessageBox::warning(this, tr("eePe"),
+    ret = QMessageBox::warning(this, tr("companion9x"),
                                tr("<b><u>WARNING!</u></b><br>This will reset the fuses to the factory settings.<br>Writing fuses can mess up your radio.<br>Do this only if you are sure they are wrong!<br>Are you sure you want to continue?"),
                                QMessageBox::Yes | QMessageBox::No);
     if (ret == QMessageBox::Yes)

@@ -174,7 +174,7 @@ void MdiChild::dropEvent(QDropEvent *event)
     if (row < 0)
       return;
 
-    // QMessageBox::warning(this, tr("eePe"),tr("Index :%1").arg(row));
+    // QMessageBox::warning(this, tr("companion9x"),tr("Index :%1").arg(row));
     const QMimeData  *mimeData = event->mimeData();
     if(mimeData->hasFormat("application/x-companion9x"))
     {
@@ -227,7 +227,7 @@ void MdiChild::deleteSelected(bool ask=true)
     QMessageBox::StandardButton ret = QMessageBox::Yes;
 
     if(ask)
-        ret = QMessageBox::warning(this, "eePe",
+        ret = QMessageBox::warning(this, "companion9x",
                  tr("Delete Selected Models?"),
                  QMessageBox::Yes | QMessageBox::No);
 
@@ -560,7 +560,7 @@ bool MdiChild::save()
 
 bool MdiChild::saveAs()
 {
-    QSettings settings("er9x-eePe", "eePe");
+    QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/" +curFile,tr(EEPROM_FILES_FILTER));
     if (fileName.isEmpty())
         return false;
@@ -670,7 +670,7 @@ bool MdiChild::maybeSave()
 {
     if (fileChanged) {
         QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("eePe"),
+        ret = QMessageBox::warning(this, tr("companion9x"),
                      tr("'%1' has been modified.\n"
                         "Do you want to save your changes?")
                      .arg(userFriendlyCurrentFile()),
@@ -711,7 +711,7 @@ int MdiChild::getFileType(const QString &fullFileName)
 void MdiChild::burnTo()  // write to Tx
 {
 
-    QMessageBox::StandardButton ret = QMessageBox::question(this, tr("eePe"),
+    QMessageBox::StandardButton ret = QMessageBox::question(this, tr("companion9x"),
                  tr("Write %1 to EEPROM memory?").arg(strippedName(curFile)),
                  QMessageBox::Yes | QMessageBox::No);
 

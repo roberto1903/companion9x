@@ -37,7 +37,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     setupMixerListWidget();
     setupExposListWidget();
 
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("modelEditTab", 0).toInt());
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
@@ -167,7 +167,7 @@ void ModelEdit::updateSettings()
 
 void ModelEdit::on_tabWidget_currentChanged(int index)
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     settings.setValue("modelEditTab",index);//ui->tabWidget->currentIndex());
 }
 
