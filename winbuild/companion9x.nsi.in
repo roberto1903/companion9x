@@ -6,7 +6,7 @@
 ;Include Modern UI
 
   !include "MUI2.nsh"
-  !include "FileAssociation.nsh"
+  !include "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\FileAssociation.nsh"
 
 ;--------------------------------
 ;General
@@ -41,7 +41,7 @@
 ;--------------------------------
 ;Pages
 
-  !insertmacro MUI_PAGE_LICENSE "license.txt"
+  !insertmacro MUI_PAGE_LICENSE "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   
@@ -80,20 +80,20 @@ Section "companion9x" SecDummy
 
   SetOutPath "$INSTDIR"
   
-  File "license.txt"
-  File "..\src\companion9x.exe"
-  File "libgcc_s_dw2-1.dll"
-  File "mingwm10.dll"
-  File "QtCore4.dll"
-  File "QtGui4.dll"
-  File "QtNetwork4.dll"
-  File "avrdude.exe"
-  File "avrdude.conf"
-  File "libusb0.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
+  File "companion9x.exe"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\libgcc_s_dw2-1.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\mingwm10.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\QtCore4.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\QtGui4.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\QtNetwork4.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.exe"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.conf"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\libusb0.dll"
   
   CreateDirectory "$INSTDIR\lang"
   SetOutPath "$INSTDIR\lang"
-  File "..\src\*.qm"
+  File "*.qm"
   
   SetOutPath "$INSTDIR"
   ;Store installation folder

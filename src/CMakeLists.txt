@@ -138,6 +138,7 @@ SET( companion9x_TS
 )
 
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)
 # CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in version.h @ONLY)
 
 IF( WIN32 )
@@ -185,17 +186,17 @@ INSTALL( TARGETS companion9x DESTINATION ${QT_BINARY_DIR} )
 IF( WIN32 )
   FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
 
-  ADD_CUSTOM_COMMAND(OUTPUT ../winbuild/companion9xInstall.exe
+  ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
                      # MAIN_DEPENDENCY companion9x.exe
-                     DEPENDS ${EXECUTABLE_NAME} ../winbuild/companion9x.nsi
+                     DEPENDS ${EXECUTABLE_NAME} ${PROJECT_BINARY_DIR}/companion9x.nsi
                      #[IMPLICIT_DEPENDS <lang1> depend1 ...]
-                     WORKING_DIRECTORY ../winbuild/
+                     # WORKING_DIRECTORY ../winbuild/
                      COMMENT "Windows NSIS Installer")
 
   ADD_CUSTOM_TARGET( installer
-    DEPENDS ../winbuild/companion9xInstall.exe
-    SOURCES ../winbuild/companion9x.nsi)
+    DEPENDS ${PROJECT_BINARY_DIR}/companion9xInstall.exe
+    SOURCES ${PROJECT_BINARY_DIR}/companion9x.nsi)
 ENDIF( )
 
 IF( APPLE )
