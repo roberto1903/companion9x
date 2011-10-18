@@ -8,27 +8,24 @@ Brief notes only until I figure out how it all works -- gruvin.
 
 You will need ...
  * [http://developer.apple.com/xcode/index.php Xcode 4] (Apple Developer Tools)
- * [http://qt.nokia.com/ Qt] (Mac version, 4.x)
+ * [http://qt.nokia.com/ Qt] (v4)
  * [http://www.cmake.org cmake]
 
 == Installing Xcode ==
 
 If you're doing any source compiling or code development on your Mac, then you already have Xcode. If not, you can get started by registering at the [http://developer.apple.com/devcenter/mac/index.action Apple Developer] site. Alternatively, you can also obtain Xcode 4 from the Apple App Store.
 
-Xcode 4 is a rather large (4GB!) download. I believe it's free for OS X developmen, which is what we need here. If not mistaken, you only have to pay an annual membership fee to get the iOS development library. _Somebody check me on this? I'm a paid up member, so not sure._
+Xcode 4 is a rather large (4GB!) download. I believe it's free for OS X development, which is what we need here. If not mistaken, you only have to pay an annual membership fee to get the iOS development library. _Somebody check me on this? I'm a paid up member, so not sure._
  
 == Installing Qt ==
 
 I used [http://www.macports.org/ MacPorts] ...
 
 {{{
-sudo port install qt4-mac +framework
+sudo port install qt4-mac
 }}}
 
-The framework files are needed to be available for bundling with our final C'9X application.
-*WRONG* This did NOT work. In fact, it broke everything. Back to the drawing board.
-
-*NOTE* The qt4-mac build takes a _long_ time -- like an hour or more. So it's advisable not to just sit around waiting for it!
+*NOTE*: At this stage, we are not set up to be able to use Qt in frameworks mode. Despite Qt's [http://doc.trolltech.com/4.7/deployment-mac.html documentation to the contrary], MacPorts does NOT in fact build the Qt-frameworks version by default. So we're OK.
 
 == Installing CMAKE ==
 
@@ -38,7 +35,7 @@ sudo port install cmake
 }}}
 
 
-= Buuilding companion9x itself =
+= Building companion9x itself =
 
 Finally, we're ready to grab the source files and build companion9x itself.
 
@@ -60,29 +57,19 @@ Finally, we're ready to compile ...
 make clean && make
 }}}
 
-When the build process completes (with no show-stopping errors) you should end up with a folder named `companion9x.app`.
+When the build process completes (with no show-stopping errors!) you will end up with a folder named `companion9x.app`.
 
-It's probably a good idea at this point to check that the application runs OK, by running the raw executable from the command line ...
-
+You should now be able to run companion9x from your terminal, like so ...
 {{{
-companion9x.app/Contents/MacOSX/companion9x
+./companion9x.app/Contents/MacOSX/companion9x
 }}}
 
-*_You can stop here if you're not needing a drag-n-drop application bundle to install on a different Mac._*
+You can also locate 'companion9x' (of type Application) in Finder and double-click that to launch.
 
-The above direct, test run should work fine on your system, because you have the entire Qt framework installed. To distribute the application to other users who will likely not have Qt (or even MacPorts etc) installed, you'll need to continue on to build an application bundle.
-    
-== Creating a distributable Application Bundle ==
+At the time of this writing, we do not yet have an icon file to make the application look pretty. I'm sure there will be one soon though.
 
-Assuming the build and test-run steps above went well, you can now use a Qt utility `macdeployqt` to build an OS X application bundle and then copy that into a new disk image file -- `companion9x.dmg`, for convenient distribution.
+== IMPORTANT ==
 
-{{{
-sudo macdeployqt companion9x.app -dmg -no-plug-ins
-}}}
+The above process does not bundle the required cross-platform, Qt run-time library files into the companion9x application bundle. Therefore, the compiled program will only run on OS X system where Qt4 has been installed _using MacPorts_. (It needs to be MacPorts rather than Fink for example, because the libraries need to be located in `/opt/local/lib`.)
 
-(sudo should not be required in my opinion. But for some reason it just seems to be needed.)
-
-The end result of that should be a disk image file named `companion9x.dmg`, which when opened should contain a companion9x application icon, which in turn can be dragged to your `/Applications` folder, in typical OS X fashion.
-
-
-*IMPORTANT* As of this writing, I have NOT successfully created a working app bundle using the process above. But I'm pretty sure I will be able to, once my newly configured Qt has finished building. I'll update this page as soon as I have the good news to hand.
+We may look into changing this -- or making it an option -- in the future. But for now, not bundling the Qt files keeps the application's size much smaller and more portable -- that is, quicker to download, etc.
