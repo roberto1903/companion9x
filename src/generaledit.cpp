@@ -19,7 +19,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/icon.png"));
 
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("generalEditTab", 0).toInt());
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
@@ -447,7 +447,7 @@ void GeneralEdit::on_PPM4_editingFinished()
 void GeneralEdit::on_tabWidget_currentChanged(int index)
 {
   // TODO why er9x here
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     settings.setValue("generalEditTab",index);//ui->tabWidget->currentIndex());
 }
 

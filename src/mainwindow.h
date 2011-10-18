@@ -68,10 +68,7 @@ protected:
 
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
-    void reply1Finished(QNetworkReply * reply);
-    void reply2Finished(QNetworkReply * reply);
-
-    void reply1Accepted();
+    void reply2Finished(QNetworkReply * reply); // TODO rename
     void reply2Accepted();
 
     void newFile();
@@ -116,11 +113,8 @@ private:
     QString installer_fileName;
     downloadDialog * downloadDialog_forWait;
 
-    int currentER9Xrev;
-    int currentER9Xrev_temp;
     int currentCompanion9xRev;
-    bool checkER9X;
-    bool checkEEPE;
+    bool checkCompanion9x;
     bool showcheckForUpdatesResult;
     bool check1done;
     bool check2done;

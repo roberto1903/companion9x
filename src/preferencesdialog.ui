@@ -35,30 +35,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="startupCheck_er9x">
-       <property name="text">
-        <string>er9x</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QCheckBox" name="startupCheck_companion9x">
-       <property name="text">
-        <string>companion9x</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
@@ -79,32 +55,12 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Version to download</string>
+      <string>EEPROM format</string>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="QComboBox" name="downloadVerCB">
-     <item>
-      <property name="text">
-       <string>er9x</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>er9x - JETI</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>er9x - FrSky</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>er9x - Ardupilot</string>
-      </property>
-     </item>
+    <widget class="QComboBox" name="eepromFormatCB">
      <item>
       <property name="text">
        <string>gruvin9x - stock board</string>
@@ -113,6 +69,11 @@
      <item>
       <property name="text">
        <string>gruvin9x - v3/v4 board</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>er9x</string>
       </property>
      </item>
      <item>
@@ -349,6 +310,16 @@ Mode 4:
      </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="startupCheck_companion9x">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

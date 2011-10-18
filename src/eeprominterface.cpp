@@ -110,8 +110,8 @@ EEPROMInterface *GetEepromInterface()
 
   delete eepromInterface;
 
-  QSettings settings("er9x-eePe", "eePe");
-  switch (settings.value("download-version", 0).toInt()) {
+  QSettings settings("companion9x", "companion9x");
+  switch (settings.value("eeprom_format", 0).toInt()) {
     case DNLD_VER_OPEN9X:
       eepromInterface = new Open9xInterface();
       break;

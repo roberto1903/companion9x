@@ -2208,7 +2208,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <source>Language (requires restart)</source>
         <translatorcomment>Version française par Pascal Dugué / Octobre 2010.</translatorcomment>
-        <translation>Langue (nécessite un redémarrage d&apos;companion9x)</translation>
+        <translation>Langue (nécessite un redémarrage de companion9x)</translation>
     </message>
     <message>
         <source>Default Channel Order</source>

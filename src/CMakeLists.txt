@@ -30,6 +30,37 @@ ADD_CUSTOM_COMMAND(
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
+IF (0)
+SET(C9X_Revision 0)
+IF( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn" )
+  # SET(Subversion_SVN_EXECUTABLE "${svn_EXECUTABLE}")
+  FIND_PACKAGE(Subversion)
+  #IF(Subversion_FOUND)
+    SVN_INFO(. SVN_REVISION)
+    SET(Mummy_VERSION_SVN_REVISION "${companion9x_WC_LAST_CHANGED_REV}")
+    MESSAGE(STATUS  ${Mummy_VERSION_SVN_REVISION} )
+    
+    #SET(Mummy_VERSION_SVN_REVISION "${Mummy_WC_LAST_CHANGED_REV}")
+
+    # Now the following variables are available for use:
+  #  MESSAGE("Subversion_VERSION_SVN='${Subversion_VERSION_SVN}'")
+  #  MESSAGE("Subversion_LAST_CHANGED_LOG='${Subversion_LAST_CHANGED_LOG}'")
+  #  MESSAGE("Mummy_WC_INFO='${Mummy_WC_INFO}'")
+  #  MESSAGE("Mummy_WC_URL='${Mummy_WC_URL}'")
+  #  MESSAGE("Mummy_WC_REVISION='${Mummy_WC_REVISION}'")
+  #  MESSAGE("Mummy_WC_LAST_CHANGED_AUTHOR='${Mummy_WC_LAST_CHANGED_AUTHOR}'")
+  #  MESSAGE("Mummy_WC_LAST_CHANGED_REV='${Mummy_WC_LAST_CHANGED_REV}'")
+  #  MESSAGE("Mummy_WC_LAST_CHANGED_DATE='${Mummy_WC_LAST_CHANGED_DATE}'")
+  #ENDIF(Subversion_FOUND)
+ENDIF( )
+
+SET(C9X_Author "$Author: david.cole $")
+SET(C9X_Date "$Date: 2011-01-27 $")
+SET(C9X_Id "$Id: CMakeLists.txt $")
+
+SET(C9X_URL "$URL: git://public.kitware.com/mummy.git $")
+ENDIF(0)
+
 SET( companion9x_SRCS
      eeprominterface.cpp
      hexinterface.cpp
@@ -95,6 +126,7 @@ SET( companion9x_UIS
 
 SET( companion9x_RCS
      companion9x.qrc
+     ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
 )
 
 SET( companion9x_TS
@@ -104,6 +136,9 @@ SET( companion9x_TS
      companion9x_de.ts
      companion9x_fr.ts
 )
+
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
+# CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in version.h @ONLY)
 
 IF( WIN32 )
     SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
@@ -152,7 +187,7 @@ IF( WIN32 )
 
   ADD_CUSTOM_COMMAND(OUTPUT ../winbuild/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
-                     MAIN_DEPENDENCY companion9x
+                     # MAIN_DEPENDENCY companion9x.exe
                      DEPENDS ${EXECUTABLE_NAME} ../winbuild/companion9x.nsi
                      #[IMPLICIT_DEPENDS <lang1> depend1 ...]
                      WORKING_DIRECTORY ../winbuild/

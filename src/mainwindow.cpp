@@ -119,23 +119,12 @@ MainWindow::MainWindow()
 void MainWindow::checkForUpdates(bool ignoreSettings)
 {
     showcheckForUpdatesResult = ignoreSettings;
-    check1done = true;
-    check2done = true;
+
+    check2done = true; // TODO rename!
 
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 /* TODO
-    if(checkER9X || ignoreSettings)
-    {
-        QSettings settings("er9x-companion9x", "companion9x");
-        if (settings.value("download-version", 0).toInt() != DNLD_VER_GRUVIN9X) {
-          manager1 = new QNetworkAccessManager(this);
-          connect(manager1, SIGNAL(finished(QNetworkReply*)),this, SLOT(reply1Finished(QNetworkReply*)));
-          manager1->get(QNetworkRequest(QUrl(ER9X_STAMP)));
-          check1done = false;
-        }
-    }
-
-    if(checkEEPE || ignoreSettings)
+    if(checkCompanion9x || ignoreSettings)
     {
         manager2 = new QNetworkAccessManager(this);
         connect(manager2, SIGNAL(finished(QNetworkReply*)),this, SLOT(reply2Finished(QNetworkReply*)));
@@ -152,97 +141,6 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         downloadDialog_forWait->show();
     }
     */
-}
-
-
-void MainWindow::reply1Finished(QNetworkReply * reply)
-{
-    check1done = true;
-    if(check1done && check2done && downloadDialog_forWait)
-        downloadDialog_forWait->close();
-
-    QByteArray qba = reply->readAll();
-    int i = qba.indexOf("SVN_VERS");
-
-    if(i>0)
-    {
-        bool cres;
-        int rev = QString::fromAscii(qba.mid(i+17,3)).toInt(&cres);
-
-        if(!cres)
-        {
-            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
-            return;
-        }
-
-        if(rev>currentER9Xrev)
-        {
-            QSettings settings("er9x-companion9x", "companion9x");
-
-            QString dnldURL, baseFileName;
-            switch (settings.value("download-version", 0).toInt())
-            {
-              case DNLD_VER_ER9X_JETI:
-                dnldURL = ER9X_JETI_URL;
-                baseFileName = "er9x-jeti.hex";
-                break;
-              case DNLD_VER_ER9X_FRSKY:
-                dnldURL = ER9X_FRSKY_URL;
-                baseFileName = "er9x-frsky.hex";
-                break;
-              case DNLD_VER_ER9X_ARDUPILOT:
-                dnldURL = ER9X_ARDUPILOT_URL;
-                baseFileName = "er9x-ardupilot.hex";
-                break;
-              case DNLD_VER_GRUVIN9X_STOCK:
-              case DNLD_VER_GRUVIN9X_V4:
-              case DNLD_VER_OPEN9X:
-                return;
-              default:
-                dnldURL = ER9X_URL;
-                baseFileName = "er9x.hex";
-                break;
-            }
-
-            showcheckForUpdatesResult = false; // update is available - do not show dialog
-            int ret = QMessageBox::question(this, "companion9x",tr("A new version of ER9x (%2) is available (r%1)<br>"
-                                                                "Would you like to download it?").arg(rev).arg(baseFileName) ,
-                                            QMessageBox::Yes | QMessageBox::No);
-
-            if (ret == QMessageBox::Yes)
-            {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/" + baseFileName,tr(HEX_FILES_FILTER));
-                if (fileName.isEmpty()) return;
-                settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
-
-                downloadDialog * dd = new downloadDialog(this,dnldURL,fileName);
-                currentER9Xrev_temp = rev;
-                connect(dd,SIGNAL(accepted()),this,SLOT(reply1Accepted()));
-                dd->show();
-            }
-
-            if(ret == QMessageBox::No)
-            {
-                int res = QMessageBox::question(this, "companion9x",tr("Ignore this version (r%1)?").arg(rev) ,
-                                                QMessageBox::Yes | QMessageBox::No);
-                if(res == QMessageBox::Yes)
-                {
-                    currentER9Xrev = rev;
-                    settings.setValue("currentER9Xrev", rev);
-                }
-            }
-        }
-        else
-        {
-            if(showcheckForUpdatesResult && check1done && check2done)
-                QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
-        }
-    }
-    else
-    {
-        if(check1done && check2done)
-            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
-    }
 }
 
 void MainWindow::reply2Finished(QNetworkReply * reply)
@@ -272,7 +170,7 @@ void MainWindow::reply2Finished(QNetworkReply * reply)
                                                                 "Would you like to download it?").arg(rev) ,
                                             QMessageBox::Yes | QMessageBox::No);
 
-            QSettings settings("er9x-companion9x", "companion9x");
+            QSettings settings("companion9x", "companion9x");
 
             if (ret == QMessageBox::Yes)
             {
@@ -299,23 +197,14 @@ void MainWindow::reply2Finished(QNetworkReply * reply)
     }
 }
 
-void MainWindow::reply1Accepted()
-{
-    QSettings settings("er9x-companion9x", "companion9x");
-    currentER9Xrev = currentER9Xrev_temp;
-    settings.setValue("currentER9Xrev", currentER9Xrev);
-}
-
 void MainWindow::reply2Accepted()
 {
-    int ret2 = QMessageBox::question(this, "companion9x",tr("Would you like to launch the installer?") ,
+    int ret = QMessageBox::question(this, "companion9x", tr("Would you like to launch the installer?") ,
                                      QMessageBox::Yes | QMessageBox::No);
-    if (ret2 == QMessageBox::Yes)
-    {
+    if (ret == QMessageBox::Yes) {
         if(QDesktopServices::openUrl(QUrl::fromLocalFile(installer_fileName)))
             QApplication::exit();
     }
-
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -340,7 +229,7 @@ void MainWindow::newFile()
 
 void MainWindow::open()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open"),settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -456,7 +345,7 @@ void MainWindow::burnFrom()
 
 void MainWindow::burnExtenalToEEPROM()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -487,7 +376,7 @@ void MainWindow::burnExtenalToEEPROM()
 
 void MainWindow::burnToFlash(QString fileToFlash)
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     QString fileName;
     if(fileToFlash.isEmpty())
         fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to flash memory"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
@@ -524,7 +413,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
 
 void MainWindow::burnExtenalFromEEPROM()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getSaveFileName(this,tr("Read EEPROM memory to File"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -554,7 +443,7 @@ void MainWindow::burnExtenalFromEEPROM()
 
 void MainWindow::burnFromFlash()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getSaveFileName(this,tr("Read Flash to File"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
     if (!fileName.isEmpty())
     {
@@ -919,31 +808,27 @@ void MainWindow::createStatusBar()
 
 void MainWindow::readSettings()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
     bool maximized = settings.value("maximized", false).toBool();
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     QSize size = settings.value("size", QSize(400, 400)).toSize();
 
-    currentER9Xrev = settings.value("currentER9Xrev", 1).toInt();
     currentCompanion9xRev = SVN_VER_NUM;
 
-    checkER9X  = settings.value("startup_check_er9x", true).toBool();
-    checkEEPE  = settings.value("startup_check_companion9x", true).toBool();
+    checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
 
-    if(maximized)
-    {
-         setWindowState(Qt::WindowMaximized);
+    if (maximized) {
+      setWindowState(Qt::WindowMaximized);
     }
-    else
-    {
-        move(pos);
-        resize(size);
+    else {
+      move(pos);
+      resize(size);
     }
 }
 
 void MainWindow::writeSettings()
 {
-    QSettings settings("er9x-companion9x", "companion9x");
+    QSettings settings("companion9x", "companion9x");
 
     settings.setValue("maximized", isMaximized());
     if(!isMaximized())
