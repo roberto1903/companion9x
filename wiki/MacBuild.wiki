@@ -1,0 +1,38 @@
+#summary Building companion9x for the Mac
+ 
+= Building C'9X for OS X =
+
+Brief notes only until I figure out how it all works -- gruvin.
+
+= Prerequisites =
+
+You will need ...
+ * [http://developer.apple.com/xcode/index.php Xcode 4] ( Apple Developer Tools)
+ * [http://qt.nokia.com/ Qt] (Mac version, 4.x)
+ * [http://www.cmake.org cmake]
+
+== Installing Xcode ==
+
+Xcode 4 is a massive (4GB) download. I believe it's free for OS X development, as opposed to iOS. _Somebody check me on this? I'm a paid up member, so not sure._
+
+If you're doing any source compiling or code development on your Mac, then you already have Xcode. If not, you can get started by registering at the [http://developer.apple.com/devcenter/mac/index.action Apple Developer] site.
+ 
+== Installing Qt ==
+
+I used [http://www.macports.org/ MacPorts] ...
+
+{{{
+sudo port install qt4-mac +framework
+}}}
+
+Frameworks is needed so that frameworks are available to bundle with our final C'9X application bundle.
+
+The build take quite a while, so don't bother sitting around waiting for it!
+
+== Installing CMAKE ==
+
+MacPorts to the rescue again ...
+{{{
+sudo port install cmake
+}}}
+
