@@ -78,4 +78,4 @@ sudo macdeployqt companion9x.app -dmg -no-plug-ins
 The end result of that should be a file `companion9x.dmg`, which when opened will contain a companion9x application icon, which can be dragged to your `/Applications` folder, in typical OS X fashion.
 
 
-*IMPORT* As of this writing, I have NOT successfully created a working app bundle using the process above. But I'm pretty sure I will be able to, once my newly configured Qt has finished building. I'll update this page as soon as I have the good news to hand.
+*IMPORTANT* As of this writing, I have NOT successfully created a working app bundle using the process above. But I'm pretty sure I will be able to, once my newly configured Qt has finished building. I'll update this page as soon as I have the good news to hand.
