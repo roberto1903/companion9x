@@ -30,36 +30,13 @@ ADD_CUSTOM_COMMAND(
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
-IF (0)
-SET(C9X_Revision 0)
-IF( EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn" )
-  # SET(Subversion_SVN_EXECUTABLE "${svn_EXECUTABLE}")
-  FIND_PACKAGE(Subversion)
-  #IF(Subversion_FOUND)
-    SVN_INFO(. SVN_REVISION)
-    SET(Mummy_VERSION_SVN_REVISION "${companion9x_WC_LAST_CHANGED_REV}")
-    MESSAGE(STATUS  ${Mummy_VERSION_SVN_REVISION} )
-    
-    #SET(Mummy_VERSION_SVN_REVISION "${Mummy_WC_LAST_CHANGED_REV}")
-
-    # Now the following variables are available for use:
-  #  MESSAGE("Subversion_VERSION_SVN='${Subversion_VERSION_SVN}'")
-  #  MESSAGE("Subversion_LAST_CHANGED_LOG='${Subversion_LAST_CHANGED_LOG}'")
-  #  MESSAGE("Mummy_WC_INFO='${Mummy_WC_INFO}'")
-  #  MESSAGE("Mummy_WC_URL='${Mummy_WC_URL}'")
-  #  MESSAGE("Mummy_WC_REVISION='${Mummy_WC_REVISION}'")
-  #  MESSAGE("Mummy_WC_LAST_CHANGED_AUTHOR='${Mummy_WC_LAST_CHANGED_AUTHOR}'")
-  #  MESSAGE("Mummy_WC_LAST_CHANGED_REV='${Mummy_WC_LAST_CHANGED_REV}'")
-  #  MESSAGE("Mummy_WC_LAST_CHANGED_DATE='${Mummy_WC_LAST_CHANGED_DATE}'")
-  #ENDIF(Subversion_FOUND)
-ENDIF( )
-
-SET(C9X_Author "$Author: david.cole $")
-SET(C9X_Date "$Date: 2011-01-27 $")
-SET(C9X_Id "$Id: CMakeLists.txt $")
-
-SET(C9X_URL "$URL: git://public.kitware.com/mummy.git $")
-ENDIF(0)
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
+ADD_CUSTOM_TARGET( svnrevision ALL DEPENDS svn_revision )
+ADD_CUSTOM_COMMAND( OUTPUT svn_revision ${CMAKE_CURRENT_BINARY_DIR}/svnrevision.h
+   COMMAND ${CMAKE_COMMAND}
+   -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} 
+   -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/GetRevision.cmake)
+SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/svnrevision.h PROPERTIES GENERATED 1)
 
 SET( companion9x_SRCS
      eeprominterface.cpp
@@ -178,20 +155,19 @@ ELSE( )
     ADD_EXECUTABLE( ${PROJECT_NAME} WIN32 ${companion9x_SRCS} ${companion9x_QM} )
 ENDIF( )
 
-TARGET_LINK_LIBRARIES( companion9x ${QT_LIBRARIES} )
-TARGET_LINK_LIBRARIES( companion9x xerces-c )
+ADD_DEPENDENCIES( ${PROJECT_NAME} svnrevision )
 
-INSTALL( TARGETS companion9x DESTINATION ${QT_BINARY_DIR} )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} xerces-c )
+
+INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 
 IF( WIN32 )
   FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
 
   ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
-                     # MAIN_DEPENDENCY companion9x.exe
                      DEPENDS ${EXECUTABLE_NAME} ${PROJECT_BINARY_DIR}/companion9x.nsi
-                     #[IMPLICIT_DEPENDS <lang1> depend1 ...]
-                     # WORKING_DIRECTORY ../winbuild/
                      COMMENT "Windows NSIS Installer")
 
   ADD_CUSTOM_TARGET( installer
