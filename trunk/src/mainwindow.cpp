@@ -41,7 +41,6 @@
 
 #include <QtGui>
 #include <QNetworkProxyFactory>
-
 #include "mainwindow.h"
 #include "mdichild.h"
 #include "burnconfigdialog.h"
@@ -49,16 +48,11 @@
 #include "preferencesdialog.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
-#include "stamp-companion9x.h"
+#include "svnrevision.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
-#define ER9X_URL   "http://er9x.googlecode.com/svn/trunk/er9x.hex"
-#define ER9X_JETI_URL   "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"
-#define ER9X_FRSKY_URL   "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex"
-#define ER9X_ARDUPILOT_URL   "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex"
-#define ER9X_STAMP "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"
-
+// TODO
 #define EEPE_URL   "http://companion9x.googlecode.com/svn/trunk/companion9xInstall.exe"
 #define EEPE_STAMP "http://companion9x.googlecode.com/svn/trunk/src/stamp-companion9x.h"
 
@@ -813,9 +807,9 @@ void MainWindow::readSettings()
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     QSize size = settings.value("size", QSize(400, 400)).toSize();
 
-    currentCompanion9xRev = SVN_VER_NUM;
+    currentCompanion9xRev = C9X_REVISION;
 
-    checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
+    checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
 
     if (maximized) {
       setWindowState(Qt::WindowMaximized);
