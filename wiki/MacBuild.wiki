@@ -4,6 +4,12 @@
 
 Brief notes only until I figure out how it all works -- gruvin.
 
+I'm building on OS X 10.7 (Lion). That means my OS is 'too new' for most binary installers of most development libraries -- including Qt4.7.4, who's binary distro only supports up to OS X 10.6, still. *yawn* So it's good old 'compile your own' Unix methods being employed here.
+
+*The biggest challenge* we seem to have right now is getting Qt et al to bundle their shared libraries into a final project that doesn't just crash out when launched. This may be an OS X Lion issue only -- I have no way to test, yet.
+
+That said, companion9x will run happily on OS X Lion, if the following procedure is followed in full. Allow up to three hours for the first time you go through this though -- because Qt takes a long, long time to compile.
+
 = Prerequisites =
 
 You will need ...
