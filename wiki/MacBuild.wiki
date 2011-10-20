@@ -43,7 +43,7 @@ sudo port install cmake
 }}}
 
 
-= Building companion9x itself =
+= Building companion9x =
 
 Finally, we're ready to grab the source files and build companion9x itself.
 
