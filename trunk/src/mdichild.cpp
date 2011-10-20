@@ -491,6 +491,9 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
       uint8_t eeprom[EESIZE_V4];
       int eeprom_size = HexInterface(inputStream).load(eeprom);
       if (!eeprom_size) {
+        QMessageBox::critical(this, tr("Error"),
+            tr("Invalid EEPROM File %1")
+            .arg(fileName));
         file.close();
         return false;
       }
@@ -499,7 +502,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
       if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
         QMessageBox::critical(this, tr("Error"),
-            tr("Invalid EEPE EEPROM File %1")
+            tr("Invalid EEPROM File %1")
             .arg(fileName));
         return false;
       }

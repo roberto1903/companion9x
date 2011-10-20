@@ -63,9 +63,14 @@ int HexInterface::load(uint8_t *data)
     if(chkSum!=retV)
       return 0;
 
-    if (recType == 0x00) { //data record - ba holds record
-      memcpy(&data[address],ba.data(),byteCount);
-      result = std::max(result, address+byteCount);
+    if (address + byteCount < 4096) {
+      if (recType == 0x00) { //data record - ba holds record
+        memcpy(&data[address],ba.data(),byteCount);
+        result = std::max(result, address+byteCount);
+      }
+    }
+    else {
+      return 0;
     }
   }
   
