@@ -48,7 +48,7 @@
 #include "preferencesdialog.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
-#include "svnrevision.h"
+#include "version.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
@@ -306,23 +306,43 @@ void MainWindow::print()
         activeMdiChild()->print();
 }
 
+QString MainWindow::GetAvrdudeLocation()
+{
+  burnConfigDialog bcd;
+  return bcd.getAVRDUDE();
+}
+
+QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
+{
+  QStringList arguments;
+
+  burnConfigDialog bcd;
+  QString programmer = bcd.getProgrammer();
+  QStringList args   = bcd.getAVRArgs();
+  if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
+
+  arguments << "-c" << programmer << "-p";
+
+  QSettings settings("companion9x", "companion9x");
+  if (settings.value("eeprom_format", 0).toInt() == DNLD_VER_GRUVIN9X_V4)
+    arguments << "m2560";
+  else
+    arguments << "m64";
+
+  arguments << args;
+  arguments << "-U" << cmd;
+
+  return arguments;
+}
+
 void MainWindow::burnFrom()
 {
-    burnConfigDialog bcd;
-    QString avrdudeLoc = bcd.getAVRDUDE();
     QString tempDir    = QDir::tempPath();
-    QString programmer = bcd.getProgrammer();
-    QStringList args   = bcd.getAVRArgs();
-    if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
 
     QString tempFile = tempDir + "/temp.hex";
     QString str = "eeprom:r:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
 
-    QStringList arguments;
-    arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-    avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments,tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
     ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
     int res = ad->exec();
 
@@ -348,21 +368,12 @@ void MainWindow::burnExtenalToEEPROM()
         int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
 
-        burnConfigDialog bcd;
-        QString avrdudeLoc = bcd.getAVRDUDE();
-        QString programmer = bcd.getProgrammer();
-        QStringList args   = bcd.getAVRArgs();
-        if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
         QString str = "eeprom:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
 
-        QStringList arguments;
-        arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-        avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
         ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
         ad->show();
     }
@@ -384,21 +395,12 @@ void MainWindow::burnToFlash(QString fileToFlash)
         int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
 
-        burnConfigDialog bcd;
-        QString avrdudeLoc = bcd.getAVRDUDE();
-        QString programmer = bcd.getProgrammer();
-        QStringList args   = bcd.getAVRArgs();
-        if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
         QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
 
-        QStringList arguments;
-        arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-        avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments, "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
         ad->setWindowIcon(QIcon(":/images/write_flash.png"));
         ad->show();
     }
@@ -413,22 +415,12 @@ void MainWindow::burnExtenalFromEEPROM()
     {
         settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
 
-        burnConfigDialog bcd;
-        QString avrdudeLoc = bcd.getAVRDUDE();
-        QString programmer = bcd.getProgrammer();
-        QStringList args   = bcd.getAVRArgs();
-        if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
-
         QString str = "eeprom:r:" + fileName;
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
 
-        QStringList arguments;
-        arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-        avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments, "Read EEPROM From Tx");
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Read EEPROM From Tx");
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->show();
     }
@@ -443,22 +435,12 @@ void MainWindow::burnFromFlash()
     {
         settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
 
-        burnConfigDialog bcd;
-        QString avrdudeLoc = bcd.getAVRDUDE();
-        QString programmer = bcd.getProgrammer();
-        QStringList args   = bcd.getAVRArgs();
-        if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
-
         QString str = "flash:r:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
 
-        QStringList arguments;
-        arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-        avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments, "Read Flash From Tx");
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Read Flash From Tx");
         ad->setWindowIcon(QIcon(":/images/read_flash.png"));
         ad->show();
     }
@@ -487,7 +469,7 @@ void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
     aboutStr.append(tr("Copyright") +" Bertrand Songis &copy; 2011<br>");
-    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Revision: %1, %2<br/><br/>").arg(currentCompanion9xRev).arg(__DATE__));
+    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Version %1 (revision %2), %3<br/><br/>").arg(C9X_VERSION).arg(currentCompanion9xRev).arg(__DATE__));
     aboutStr.append(QString("The companion9x project was originally forked from eePe <a href='http://code.google.com/p/eepe'>http://code.google.com/p/eepe</a><br/><br/>"));
     aboutStr.append(tr("If you've found this program useful, please support by"));
     aboutStr.append(" <a href='" DONATE_STR "'>");

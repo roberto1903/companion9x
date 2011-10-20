@@ -106,6 +106,8 @@ private:
     void writeSettings();
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
+    QString GetAvrdudeLocation();
+    QStringList GetAvrdudeArguments(const QString &cmd);
 
     QMdiArea *mdiArea;
     QSignalMapper *windowMapper;
