@@ -30,7 +30,7 @@ void preferencesDialog::write_values()
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
     settings.setValue("show_splash", ui->showSplash->isChecked());
-    settings.setValue("eeprom-format", ui->eepromFormatCB->currentIndex());
+    settings.setValue("eeprom_format", ui->eepromFormatCB->currentIndex());
 }
 
 
@@ -43,7 +43,7 @@ void preferencesDialog::initSettings()
 
     ui->channelorderCB->setCurrentIndex(settings.value("default_channel_order", 0).toInt());
     ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
-    ui->eepromFormatCB->setCurrentIndex(settings.value("eeprom-format", 0).toInt());
+    ui->eepromFormatCB->setCurrentIndex(settings.value("eeprom_format", 0).toInt());
     ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
 }

@@ -1,5 +1,7 @@
 PROJECT( companion9x )
 
+SET( C9X_VERSION "0.11" )
+
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -30,13 +32,13 @@ ADD_CUSTOM_COMMAND(
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
+FIND_PACKAGE( Subversion )
+SET( C9X_WC_REVISION 0 )
+IF( Subversion_FOUND )
+  Subversion_WC_INFO( ${PROJECT_SOURCE_DIR} C9X )
+ENDIF( )
+
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
-ADD_CUSTOM_TARGET( svnrevision ALL DEPENDS svn_revision )
-ADD_CUSTOM_COMMAND( OUTPUT svn_revision ${CMAKE_CURRENT_BINARY_DIR}/svnrevision.h
-   COMMAND ${CMAKE_COMMAND}
-   -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} 
-   -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/GetRevision.cmake)
-SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/svnrevision.h PROPERTIES GENERATED 1)
 
 SET( companion9x_SRCS
      eeprominterface.cpp
@@ -114,9 +116,9 @@ SET( companion9x_TS
      companion9x_fr.ts
 )
 
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)
-# CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in version.h @ONLY)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
 IF( WIN32 )
     SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
@@ -155,8 +157,6 @@ ELSE( )
     ADD_EXECUTABLE( ${PROJECT_NAME} WIN32 ${companion9x_SRCS} ${companion9x_QM} )
 ENDIF( )
 
-ADD_DEPENDENCIES( ${PROJECT_NAME} svnrevision )
-
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} xerces-c )
 
@@ -167,7 +167,7 @@ IF( WIN32 )
 
   ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
-                     DEPENDS ${EXECUTABLE_NAME} ${PROJECT_BINARY_DIR}/companion9x.nsi
+                     DEPENDS ${PROJECT_NAME} ${PROJECT_BINARY_DIR}/companion9x.nsi
                      COMMENT "Windows NSIS Installer")
 
   ADD_CUSTOM_TARGET( installer
