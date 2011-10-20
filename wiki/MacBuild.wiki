@@ -8,7 +8,8 @@ Brief notes only until I figure out how it all works -- gruvin.
 
 You will need ...
  * [http://developer.apple.com/xcode/index.php Xcode 4] (Apple Developer Tools)
- * [http://qt.nokia.com/ Qt] (v4)
+ * [http://qt.nokia.com/ Qt] (v4.7.4)
+ * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
  * [http://www.cmake.org cmake]
 
 == Installing Xcode ==
@@ -27,9 +28,16 @@ sudo port install qt4-mac
 
 *NOTE*: At this stage, we are not set up to be able to use Qt in frameworks mode. Despite Qt's [http://doc.trolltech.com/4.7/deployment-mac.html documentation to the contrary], MacPorts does NOT in fact build the Qt-frameworks version by default. So we're OK.
 
-== Installing CMAKE ==
+== Installing Apache Xerces-C++ ==
 
 MacPorts to the rescue again ...
+{{{
+sudo port install xercesc
+}}}
+
+== Installing CMAKE ==
+
+MacPorts to the rescue yet again ...
 {{{
 sudo port install cmake
 }}}
@@ -63,13 +71,17 @@ You should now be able to run companion9x from your terminal, like so ...
 {{{
 ./companion9x.app/Contents/MacOSX/companion9x
 }}}
+or
+{{{
+open companion9x.app
+}}}
 
-You can also locate 'companion9x' (of type Application) in Finder and double-click that to launch.
+You can also locate 'companion9x' (of type Application) in Finder and double-click that to launch it -- or copy the application to /Applications, if you like.
 
 At the time of this writing, we do not yet have an icon file to make the application look pretty. I'm sure there will be one soon though.
 
 == IMPORTANT ==
 
-The above process does not bundle the required cross-platform, Qt run-time library files into the companion9x application bundle. Therefore, the compiled program will only run on OS X system where Qt4 has been installed _using MacPorts_. (It needs to be MacPorts rather than Fink for example, because the libraries need to be located in `/opt/local/lib`.)
+The above process does _not_ bundle the required Xerces or Qt shared library files into the companion9x application. Therefore, this compiled version of companion9x *will _only_ run on OS X systems where Xerces-C++ and Qt4 have been installed _using MacPorts_*, as detailed above. (It needs to be MacPorts rather than Fink or the Qt binary install from Nokia, because the libraries need to be located in `/opt/local/lib`.)
 
-We may look into changing this -- or making it an option -- in the future. But for now, not bundling the Qt files keeps the application's size much smaller and more portable -- that is, quicker to download, etc.
+We are working on getting Qt bundling to work -- or to at make it an option. For now though, at least not bundling the Xerces-C++ and Qt4 library files does keep companion9x's download size much smaller and thus more portable.
