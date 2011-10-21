@@ -195,25 +195,23 @@ void MdiChild::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
+#ifndef WIN32
 void MdiChild::focusInEvent ( QFocusEvent * event )
 {
-#ifndef WIN32
   QPalette palette = this->palette();
   palette.setColor(QPalette::Active, QPalette::Highlight, active_highlight_color);
   palette.setColor(QPalette::Inactive, QPalette::Highlight, active_highlight_color);
   this->setPalette(palette);
-#endif
 }
 
 void MdiChild::focusOutEvent ( QFocusEvent * event )
 {
-#ifndef WIN32
   QPalette palette = this->palette();
   palette.setColor(QPalette::Active, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
   palette.setColor(QPalette::Inactive, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
   this->setPalette(palette);
-#endif
 }
+#endif
 
 void MdiChild::refreshList()
 {
