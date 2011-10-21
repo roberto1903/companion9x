@@ -198,6 +198,7 @@ void MdiChild::dropEvent(QDropEvent *event)
 #ifndef WIN32
 void MdiChild::focusInEvent ( QFocusEvent * event )
 {
+  QListWidget::focusInEvent(event);
   QPalette palette = this->palette();
   palette.setColor(QPalette::Active, QPalette::Highlight, active_highlight_color);
   palette.setColor(QPalette::Inactive, QPalette::Highlight, active_highlight_color);
@@ -206,6 +207,7 @@ void MdiChild::focusInEvent ( QFocusEvent * event )
 
 void MdiChild::focusOutEvent ( QFocusEvent * event )
 {
+  QListWidget::focusOutEvent(event);
   QPalette palette = this->palette();
   palette.setColor(QPalette::Active, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
   palette.setColor(QPalette::Inactive, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
