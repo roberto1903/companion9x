@@ -99,8 +99,10 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event);
     void dragLeaveEvent(QDragLeaveEvent *event);
     void dragMoveEvent(QDragMoveEvent *event);
+#ifndef WIN32
     void focusInEvent ( QFocusEvent * event );
     void focusOutEvent ( QFocusEvent * event );
+#endif
 
 private slots:
     void documentWasModified();
