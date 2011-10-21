@@ -85,6 +85,8 @@ MdiChild::MdiChild():
     setAcceptDrops(true);
     setDragDropOverwriteMode(true);
     setDropIndicatorShown(true);
+
+    active_highlight_color = this->palette().color(QPalette::Active, QPalette::Highlight);
 }
 
 void MdiChild::mousePressEvent(QMouseEvent *event)
@@ -193,6 +195,26 @@ void MdiChild::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
+void MdiChild::focusInEvent ( QFocusEvent * event )
+{
+#ifndef WIN32
+  QPalette palette = this->palette();
+  palette.setColor(QPalette::Active, QPalette::Highlight, active_highlight_color);
+  palette.setColor(QPalette::Inactive, QPalette::Highlight, active_highlight_color);
+  this->setPalette(palette);
+#endif
+}
+
+void MdiChild::focusOutEvent ( QFocusEvent * event )
+{
+#ifndef WIN32
+  QPalette palette = this->palette();
+  palette.setColor(QPalette::Active, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
+  palette.setColor(QPalette::Inactive, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
+  this->setPalette(palette);
+#endif
+}
+
 void MdiChild::refreshList()
 {
     clear();
@@ -213,7 +235,9 @@ void MdiChild::refreshList()
            item += QString().sprintf("%5d", eepromInterface->getSize(radioData.models[i]));
        }
        addItem(item);
+
     }
+
 }
 
 void MdiChild::cut()
