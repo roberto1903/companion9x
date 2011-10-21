@@ -69,7 +69,7 @@ struct CurrentSelection
   bool selected[MAX_MODELS+1];
 };
 
-class MdiChild : public QListWidget//QMdiSubWindow
+class MdiChild : public QListWidget
 {
     Q_OBJECT
 
@@ -99,6 +99,8 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event);
     void dragLeaveEvent(QDragLeaveEvent *event);
     void dragMoveEvent(QDragMoveEvent *event);
+    void focusInEvent ( QFocusEvent * event );
+    void focusOutEvent ( QFocusEvent * event );
 
 private slots:
     void documentWasModified();
@@ -138,6 +140,7 @@ private:
     bool fileChanged;
 
     CurrentSelection currentSelection;
+    QColor active_highlight_color;
 
 };
 
