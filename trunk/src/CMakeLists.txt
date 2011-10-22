@@ -118,11 +118,10 @@ SET( companion9x_TS
 
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
 IF( WIN32 )
-    SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
-    SET(LINK_FLAGS -Wl,-subsystem,windows)
+  SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
+  SET(LINK_FLAGS -Wl,-subsystem,windows)
 ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
@@ -163,6 +162,8 @@ TARGET_LINK_LIBRARIES( ${PROJECT_NAME} xerces-c )
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 
 IF( WIN32 )
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
+
   FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
 
   ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
