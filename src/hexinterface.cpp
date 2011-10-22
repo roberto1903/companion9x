@@ -28,6 +28,7 @@ int HexInterface::getValueFromLine(const QString &line, int pos, int len)
     return ok ? hex : -1;
 }
 
+#include <stdio.h>
 int HexInterface::load(uint8_t *data)
 {
   int result = 0;
@@ -63,15 +64,18 @@ int HexInterface::load(uint8_t *data)
     if(chkSum!=retV)
       return 0;
 
-    if (address + byteCount < 4096) {
-      if (recType == 0x00) { //data record - ba holds record
-        memcpy(&data[address],ba.data(),byteCount);
-        result = std::max(result, address+byteCount);
-      }
+    if (address + byteCount >= 4096) {
+      printf("strange, it will write over the limits (%d)\n", address + byteCount);
+      fflush(stdout);
     }
+    if (recType == 0x00) { //data record - ba holds record
+      memcpy(&data[address],ba.data(),byteCount);
+      result = std::max(result, address+byteCount);
+    }
+    /*}
     else {
       return 0;
-    }
+    }*/
   }
   
   return result;
