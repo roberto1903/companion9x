@@ -32,6 +32,17 @@ void getEEPROMString(char *dst, const char *src, int size)
 GeneralSettings::GeneralSettings()
 {
   memset(this, 0, sizeof(GeneralSettings));
+  contrast = 25;
+  vBatWarn = 90;
+  stickMode=  1;
+  for (int i=0; i<7; ++i) {
+    calibMid[i]     = 0x200;
+    calibSpanNeg[i] = 0x180;
+    calibSpanPos[i] = 0x180;
+  }
+  QSettings settings("companion9x", "companion9x");
+  templateSetup = settings.value("default_channel_order", 0).toInt();
+  stickMode = settings.value("default_mode", 1).toInt();
 }
 
 ModelData::ModelData()
