@@ -401,15 +401,14 @@ t_Er9xModelData::operator ModelData ()
   uint8_t e = 0;
   for (uint8_t ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
     for (int8_t dr = 2; dr >= 0 && e < MAX_EXPOS; dr--) {
-      if ((dr == 2 && !expoData[ch].drSw2) || (dr == 1 && !expoData[ch].drSw1) || (dr
-          == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1]
-               && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
+      if ((dr == 2 && !expoData[ch].drSw2) ||
+          (dr == 1 && !expoData[ch].drSw1) ||
+          (dr == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
       eepe.expoData[e].swtch = (dr == 2 ? expoData[ch].drSw2 : (dr == 1 ? expoData[ch].drSw1 : 0));
       eepe.expoData[e].chn = ch;
       eepe.expoData[e].expo = expoData[ch].expo[dr][0][0];
       eepe.expoData[e].weight = 100 + expoData[ch].expo[dr][1][0];
-      if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1]
-          && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
+      if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1] && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
         eepe.expoData[e++].mode = 3;
       }
       else {

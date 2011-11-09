@@ -31,18 +31,6 @@
 #define NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
-#define WARN_THR_BIT  0x01
-#define WARN_BEP_BIT  0x80
-#define WARN_SW_BIT   0x02
-#define WARN_MEM_BIT  0x04
-#define WARN_BVAL_BIT 0x38
-
-#define WARN_THR     (!(g_eeGeneral.warnOpts & WARN_THR_BIT))
-#define WARN_BEP     (!(g_eeGeneral.warnOpts & WARN_BEP_BIT))
-#define WARN_SW      (!(g_eeGeneral.warnOpts & WARN_SW_BIT))
-#define WARN_MEM     (!(g_eeGeneral.warnOpts & WARN_MEM_BIT))
-#define BEEP_VAL     ( (g_eeGeneral.warnOpts & WARN_BVAL_BIT) >>3 )
-
 typedef struct t_Er9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
   int8_t  swtch:5;
