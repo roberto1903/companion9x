@@ -1,6 +1,6 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.11" )
+SET( C9X_VERSION "0.12" )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -46,6 +46,8 @@ SET( companion9x_SRCS
      file.cpp
      xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx
+     # th9xeeprom.cpp
+     # th9xinterface.cpp
      er9xeeprom.cpp
      er9xinterface.cpp
      gruvin9xeeprom.cpp

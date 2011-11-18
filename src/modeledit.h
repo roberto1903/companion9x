@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QtGui>
+#include <QPen>
 #include "eeprominterface.h"
 #include "mixerslist.h"
 
@@ -19,7 +20,7 @@ public:
     ~ModelEdit();
 
     void applyBaseTemplate();
-
+    bool redrawCurve;
 
 private:
     Ui::ModelEdit *ui;
@@ -36,6 +37,8 @@ private:
     bool switchEditLock;
     bool heliEditLock;
     bool phasesLock;
+
+    bool plot_curve[16];
 
     QSpinBox  * cswitchOffset[NUM_CSW];
     QComboBox * cswitchSource1[NUM_CSW];
@@ -74,6 +77,7 @@ private:
 
     void drawCurve();
     int currentCurve;
+    void setCurrentCurve(int curveId);
 
     QSpinBox *getNodeSB(int i);
 
@@ -191,6 +195,23 @@ private slots:
     void on_curveEdit_15_clicked();
     void on_curveEdit_16_clicked();
 
+    void on_plotCB_1_toggled(bool checked);
+    void on_plotCB_2_toggled(bool checked);
+    void on_plotCB_3_toggled(bool checked);
+    void on_plotCB_4_toggled(bool checked);
+    void on_plotCB_5_toggled(bool checked);
+    void on_plotCB_6_toggled(bool checked);
+    void on_plotCB_7_toggled(bool checked);
+    void on_plotCB_8_toggled(bool checked);
+    void on_plotCB_9_toggled(bool checked);
+    void on_plotCB_10_toggled(bool checked);
+    void on_plotCB_11_toggled(bool checked);
+    void on_plotCB_12_toggled(bool checked);
+    void on_plotCB_13_toggled(bool checked);
+    void on_plotCB_14_toggled(bool checked);
+    void on_plotCB_15_toggled(bool checked);
+    void on_plotCB_16_toggled(bool checked);
+
     void curvePointEdited();
     void limitEdited();
     void customSwitchesEdited();
@@ -295,6 +316,7 @@ private slots:
     void on_phases_currentChanged(int index);
     void on_tabWidget_currentChanged(int index);
     void on_templateList_doubleClicked(QModelIndex index);
+    void ControlCurveSignal(bool flag);
 };
 
 #endif // MODELEDIT_H

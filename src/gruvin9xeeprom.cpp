@@ -653,7 +653,6 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &eepe)
     thrTrim = eepe.thrTrim;
     thrExpo = eepe.thrExpo;
     trimInc = eepe.trimInc;
-    spare1 = 0;
     pulsePol = eepe.pulsePol;
     extendedLimits = eepe.extendedLimits;
     extendedTrims = eepe.extendedTrims;
