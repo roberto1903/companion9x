@@ -627,138 +627,162 @@ void ModelEdit::tabLimits()
 
 void ModelEdit::updateCurvesTab()
 {
-   ui->curvePt1_1->setValue(g_model.curves5[0][0]);
-   ui->curvePt2_1->setValue(g_model.curves5[0][1]);
-   ui->curvePt3_1->setValue(g_model.curves5[0][2]);
-   ui->curvePt4_1->setValue(g_model.curves5[0][3]);
-   ui->curvePt5_1->setValue(g_model.curves5[0][4]);
+  ControlCurveSignal(true);
+  ui->plotCB_1->setChecked(plot_curve[0]);
+  ui->plotCB_2->setChecked(plot_curve[1]);
+  ui->plotCB_3->setChecked(plot_curve[2]);
+  ui->plotCB_4->setChecked(plot_curve[3]);
+  ui->plotCB_5->setChecked(plot_curve[4]);
+  ui->plotCB_6->setChecked(plot_curve[5]);
+  ui->plotCB_7->setChecked(plot_curve[6]);
+  ui->plotCB_8->setChecked(plot_curve[7]);
+  ui->plotCB_9->setChecked(plot_curve[8]);
+  ui->plotCB_10->setChecked(plot_curve[9]);
+  ui->plotCB_11->setChecked(plot_curve[10]);
+  ui->plotCB_12->setChecked(plot_curve[11]);
+  ui->plotCB_13->setChecked(plot_curve[12]);
+  ui->plotCB_14->setChecked(plot_curve[13]);
+  ui->plotCB_15->setChecked(plot_curve[14]);
+  ui->plotCB_16->setChecked(plot_curve[15]);
 
-   ui->curvePt1_2->setValue(g_model.curves5[1][0]);
-   ui->curvePt2_2->setValue(g_model.curves5[1][1]);
-   ui->curvePt3_2->setValue(g_model.curves5[1][2]);
-   ui->curvePt4_2->setValue(g_model.curves5[1][3]);
-   ui->curvePt5_2->setValue(g_model.curves5[1][4]);
+  ui->curvePt1_1->setValue(g_model.curves5[0][0]);
+  ui->curvePt2_1->setValue(g_model.curves5[0][1]);
+  ui->curvePt3_1->setValue(g_model.curves5[0][2]);
+  ui->curvePt4_1->setValue(g_model.curves5[0][3]);
+  ui->curvePt5_1->setValue(g_model.curves5[0][4]);
 
-   ui->curvePt1_3->setValue(g_model.curves5[2][0]);
-   ui->curvePt2_3->setValue(g_model.curves5[2][1]);
-   ui->curvePt3_3->setValue(g_model.curves5[2][2]);
-   ui->curvePt4_3->setValue(g_model.curves5[2][3]);
-   ui->curvePt5_3->setValue(g_model.curves5[2][4]);
+  ui->curvePt1_2->setValue(g_model.curves5[1][0]);
+  ui->curvePt2_2->setValue(g_model.curves5[1][1]);
+  ui->curvePt3_2->setValue(g_model.curves5[1][2]);
+  ui->curvePt4_2->setValue(g_model.curves5[1][3]);
+  ui->curvePt5_2->setValue(g_model.curves5[1][4]);
 
-   ui->curvePt1_4->setValue(g_model.curves5[3][0]);
-   ui->curvePt2_4->setValue(g_model.curves5[3][1]);
-   ui->curvePt3_4->setValue(g_model.curves5[3][2]);
-   ui->curvePt4_4->setValue(g_model.curves5[3][3]);
-   ui->curvePt5_4->setValue(g_model.curves5[3][4]);
+  ui->curvePt1_3->setValue(g_model.curves5[2][0]);
+  ui->curvePt2_3->setValue(g_model.curves5[2][1]);
+  ui->curvePt3_3->setValue(g_model.curves5[2][2]);
+  ui->curvePt4_3->setValue(g_model.curves5[2][3]);
+  ui->curvePt5_3->setValue(g_model.curves5[2][4]);
 
-   ui->curvePt1_5->setValue(g_model.curves5[4][0]);
-   ui->curvePt2_5->setValue(g_model.curves5[4][1]);
-   ui->curvePt3_5->setValue(g_model.curves5[4][2]);
-   ui->curvePt4_5->setValue(g_model.curves5[4][3]);
-   ui->curvePt5_5->setValue(g_model.curves5[4][4]);
+  ui->curvePt1_4->setValue(g_model.curves5[3][0]);
+  ui->curvePt2_4->setValue(g_model.curves5[3][1]);
+  ui->curvePt3_4->setValue(g_model.curves5[3][2]);
+  ui->curvePt4_4->setValue(g_model.curves5[3][3]);
+  ui->curvePt5_4->setValue(g_model.curves5[3][4]);
 
-   ui->curvePt1_6->setValue(g_model.curves5[5][0]);
-   ui->curvePt2_6->setValue(g_model.curves5[5][1]);
-   ui->curvePt3_6->setValue(g_model.curves5[5][2]);
-   ui->curvePt4_6->setValue(g_model.curves5[5][3]);
-   ui->curvePt5_6->setValue(g_model.curves5[5][4]);
+  ui->curvePt1_5->setValue(g_model.curves5[4][0]);
+  ui->curvePt2_5->setValue(g_model.curves5[4][1]);
+  ui->curvePt3_5->setValue(g_model.curves5[4][2]);
+  ui->curvePt4_5->setValue(g_model.curves5[4][3]);
+  ui->curvePt5_5->setValue(g_model.curves5[4][4]);
 
-   ui->curvePt1_7->setValue(g_model.curves5[6][0]);
-   ui->curvePt2_7->setValue(g_model.curves5[6][1]);
-   ui->curvePt3_7->setValue(g_model.curves5[6][2]);
-   ui->curvePt4_7->setValue(g_model.curves5[6][3]);
-   ui->curvePt5_7->setValue(g_model.curves5[6][4]);
+  ui->curvePt1_6->setValue(g_model.curves5[5][0]);
+  ui->curvePt2_6->setValue(g_model.curves5[5][1]);
+  ui->curvePt3_6->setValue(g_model.curves5[5][2]);
+  ui->curvePt4_6->setValue(g_model.curves5[5][3]);
+  ui->curvePt5_6->setValue(g_model.curves5[5][4]);
 
-   ui->curvePt1_8->setValue(g_model.curves5[7][0]);
-   ui->curvePt2_8->setValue(g_model.curves5[7][1]);
-   ui->curvePt3_8->setValue(g_model.curves5[7][2]);
-   ui->curvePt4_8->setValue(g_model.curves5[7][3]);
-   ui->curvePt5_8->setValue(g_model.curves5[7][4]);
+  ui->curvePt1_7->setValue(g_model.curves5[6][0]);
+  ui->curvePt2_7->setValue(g_model.curves5[6][1]);
+  ui->curvePt3_7->setValue(g_model.curves5[6][2]);
+  ui->curvePt4_7->setValue(g_model.curves5[6][3]);
+  ui->curvePt5_7->setValue(g_model.curves5[6][4]);
 
-   ui->curvePt1_9->setValue(g_model.curves9[0][0]);
-   ui->curvePt2_9->setValue(g_model.curves9[0][1]);
-   ui->curvePt3_9->setValue(g_model.curves9[0][2]);
-   ui->curvePt4_9->setValue(g_model.curves9[0][3]);
-   ui->curvePt5_9->setValue(g_model.curves9[0][4]);
-   ui->curvePt6_9->setValue(g_model.curves9[0][5]);
-   ui->curvePt7_9->setValue(g_model.curves9[0][6]);
-   ui->curvePt8_9->setValue(g_model.curves9[0][7]);
-   ui->curvePt9_9->setValue(g_model.curves9[0][8]);
+  ui->curvePt1_8->setValue(g_model.curves5[7][0]);
+  ui->curvePt2_8->setValue(g_model.curves5[7][1]);
+  ui->curvePt3_8->setValue(g_model.curves5[7][2]);
+  ui->curvePt4_8->setValue(g_model.curves5[7][3]);
+  ui->curvePt5_8->setValue(g_model.curves5[7][4]);
 
-   ui->curvePt1_10->setValue(g_model.curves9[1][0]);
-   ui->curvePt2_10->setValue(g_model.curves9[1][1]);
-   ui->curvePt3_10->setValue(g_model.curves9[1][2]);
-   ui->curvePt4_10->setValue(g_model.curves9[1][3]);
-   ui->curvePt5_10->setValue(g_model.curves9[1][4]);
-   ui->curvePt6_10->setValue(g_model.curves9[1][5]);
-   ui->curvePt7_10->setValue(g_model.curves9[1][6]);
-   ui->curvePt8_10->setValue(g_model.curves9[1][7]);
-   ui->curvePt9_10->setValue(g_model.curves9[1][8]);
+  ui->curvePt1_9->setValue(g_model.curves9[0][0]);
+  ui->curvePt2_9->setValue(g_model.curves9[0][1]);
+  ui->curvePt3_9->setValue(g_model.curves9[0][2]);
+  ui->curvePt4_9->setValue(g_model.curves9[0][3]);
+  ui->curvePt5_9->setValue(g_model.curves9[0][4]);
+  ui->curvePt6_9->setValue(g_model.curves9[0][5]);
+  ui->curvePt7_9->setValue(g_model.curves9[0][6]);
+  ui->curvePt8_9->setValue(g_model.curves9[0][7]);
+  ui->curvePt9_9->setValue(g_model.curves9[0][8]);
 
-   ui->curvePt1_11->setValue(g_model.curves9[2][0]);
-   ui->curvePt2_11->setValue(g_model.curves9[2][1]);
-   ui->curvePt3_11->setValue(g_model.curves9[2][2]);
-   ui->curvePt4_11->setValue(g_model.curves9[2][3]);
-   ui->curvePt5_11->setValue(g_model.curves9[2][4]);
-   ui->curvePt6_11->setValue(g_model.curves9[2][5]);
-   ui->curvePt7_11->setValue(g_model.curves9[2][6]);
-   ui->curvePt8_11->setValue(g_model.curves9[2][7]);
-   ui->curvePt9_11->setValue(g_model.curves9[2][8]);
+  ui->curvePt1_10->setValue(g_model.curves9[1][0]);
+  ui->curvePt2_10->setValue(g_model.curves9[1][1]);
+  ui->curvePt3_10->setValue(g_model.curves9[1][2]);
+  ui->curvePt4_10->setValue(g_model.curves9[1][3]);
+  ui->curvePt5_10->setValue(g_model.curves9[1][4]);
+  ui->curvePt6_10->setValue(g_model.curves9[1][5]);
+  ui->curvePt7_10->setValue(g_model.curves9[1][6]);
+  ui->curvePt8_10->setValue(g_model.curves9[1][7]);
+  ui->curvePt9_10->setValue(g_model.curves9[1][8]);
 
-   ui->curvePt1_12->setValue(g_model.curves9[3][0]);
-   ui->curvePt2_12->setValue(g_model.curves9[3][1]);
-   ui->curvePt3_12->setValue(g_model.curves9[3][2]);
-   ui->curvePt4_12->setValue(g_model.curves9[3][3]);
-   ui->curvePt5_12->setValue(g_model.curves9[3][4]);
-   ui->curvePt6_12->setValue(g_model.curves9[3][5]);
-   ui->curvePt7_12->setValue(g_model.curves9[3][6]);
-   ui->curvePt8_12->setValue(g_model.curves9[3][7]);
-   ui->curvePt9_12->setValue(g_model.curves9[3][8]);
+  ui->curvePt1_11->setValue(g_model.curves9[2][0]);
+  ui->curvePt2_11->setValue(g_model.curves9[2][1]);
+  ui->curvePt3_11->setValue(g_model.curves9[2][2]);
+  ui->curvePt4_11->setValue(g_model.curves9[2][3]);
+  ui->curvePt5_11->setValue(g_model.curves9[2][4]);
+  ui->curvePt6_11->setValue(g_model.curves9[2][5]);
+  ui->curvePt7_11->setValue(g_model.curves9[2][6]);
+  ui->curvePt8_11->setValue(g_model.curves9[2][7]);
+  ui->curvePt9_11->setValue(g_model.curves9[2][8]);
 
-   ui->curvePt1_13->setValue(g_model.curves9[4][0]);
-   ui->curvePt2_13->setValue(g_model.curves9[4][1]);
-   ui->curvePt3_13->setValue(g_model.curves9[4][2]);
-   ui->curvePt4_13->setValue(g_model.curves9[4][3]);
-   ui->curvePt5_13->setValue(g_model.curves9[4][4]);
-   ui->curvePt6_13->setValue(g_model.curves9[4][5]);
-   ui->curvePt7_13->setValue(g_model.curves9[4][6]);
-   ui->curvePt8_13->setValue(g_model.curves9[4][7]);
-   ui->curvePt9_13->setValue(g_model.curves9[4][8]);
+  ui->curvePt1_12->setValue(g_model.curves9[3][0]);
+  ui->curvePt2_12->setValue(g_model.curves9[3][1]);
+  ui->curvePt3_12->setValue(g_model.curves9[3][2]);
+  ui->curvePt4_12->setValue(g_model.curves9[3][3]);
+  ui->curvePt5_12->setValue(g_model.curves9[3][4]);
+  ui->curvePt6_12->setValue(g_model.curves9[3][5]);
+  ui->curvePt7_12->setValue(g_model.curves9[3][6]);
+  ui->curvePt8_12->setValue(g_model.curves9[3][7]);
+  ui->curvePt9_12->setValue(g_model.curves9[3][8]);
 
-   ui->curvePt1_14->setValue(g_model.curves9[5][0]);
-   ui->curvePt2_14->setValue(g_model.curves9[5][1]);
-   ui->curvePt3_14->setValue(g_model.curves9[5][2]);
-   ui->curvePt4_14->setValue(g_model.curves9[5][3]);
-   ui->curvePt5_14->setValue(g_model.curves9[5][4]);
-   ui->curvePt6_14->setValue(g_model.curves9[5][5]);
-   ui->curvePt7_14->setValue(g_model.curves9[5][6]);
-   ui->curvePt8_14->setValue(g_model.curves9[5][7]);
-   ui->curvePt9_14->setValue(g_model.curves9[5][8]);
+  ui->curvePt1_13->setValue(g_model.curves9[4][0]);
+  ui->curvePt2_13->setValue(g_model.curves9[4][1]);
+  ui->curvePt3_13->setValue(g_model.curves9[4][2]);
+  ui->curvePt4_13->setValue(g_model.curves9[4][3]);
+  ui->curvePt5_13->setValue(g_model.curves9[4][4]);
+  ui->curvePt6_13->setValue(g_model.curves9[4][5]);
+  ui->curvePt7_13->setValue(g_model.curves9[4][6]);
+  ui->curvePt8_13->setValue(g_model.curves9[4][7]);
+  ui->curvePt9_13->setValue(g_model.curves9[4][8]);
 
-   ui->curvePt1_15->setValue(g_model.curves9[6][0]);
-   ui->curvePt2_15->setValue(g_model.curves9[6][1]);
-   ui->curvePt3_15->setValue(g_model.curves9[6][2]);
-   ui->curvePt4_15->setValue(g_model.curves9[6][3]);
-   ui->curvePt5_15->setValue(g_model.curves9[6][4]);
-   ui->curvePt6_15->setValue(g_model.curves9[6][5]);
-   ui->curvePt7_15->setValue(g_model.curves9[6][6]);
-   ui->curvePt8_15->setValue(g_model.curves9[6][7]);
-   ui->curvePt9_15->setValue(g_model.curves9[6][8]);
+  ui->curvePt1_14->setValue(g_model.curves9[5][0]);
+  ui->curvePt2_14->setValue(g_model.curves9[5][1]);
+  ui->curvePt3_14->setValue(g_model.curves9[5][2]);
+  ui->curvePt4_14->setValue(g_model.curves9[5][3]);
+  ui->curvePt5_14->setValue(g_model.curves9[5][4]);
+  ui->curvePt6_14->setValue(g_model.curves9[5][5]);
+  ui->curvePt7_14->setValue(g_model.curves9[5][6]);
+  ui->curvePt8_14->setValue(g_model.curves9[5][7]);
+  ui->curvePt9_14->setValue(g_model.curves9[5][8]);
 
-   ui->curvePt1_16->setValue(g_model.curves9[7][0]);
-   ui->curvePt2_16->setValue(g_model.curves9[7][1]);
-   ui->curvePt3_16->setValue(g_model.curves9[7][2]);
-   ui->curvePt4_16->setValue(g_model.curves9[7][3]);
-   ui->curvePt5_16->setValue(g_model.curves9[7][4]);
-   ui->curvePt6_16->setValue(g_model.curves9[7][5]);
-   ui->curvePt7_16->setValue(g_model.curves9[7][6]);
-   ui->curvePt8_16->setValue(g_model.curves9[7][7]);
-   ui->curvePt9_16->setValue(g_model.curves9[7][8]);
+  ui->curvePt1_15->setValue(g_model.curves9[6][0]);
+  ui->curvePt2_15->setValue(g_model.curves9[6][1]);
+  ui->curvePt3_15->setValue(g_model.curves9[6][2]);
+  ui->curvePt4_15->setValue(g_model.curves9[6][3]);
+  ui->curvePt5_15->setValue(g_model.curves9[6][4]);
+  ui->curvePt6_15->setValue(g_model.curves9[6][5]);
+  ui->curvePt7_15->setValue(g_model.curves9[6][6]);
+  ui->curvePt8_15->setValue(g_model.curves9[6][7]);
+  ui->curvePt9_15->setValue(g_model.curves9[6][8]);
+
+  ui->curvePt1_16->setValue(g_model.curves9[7][0]);
+  ui->curvePt2_16->setValue(g_model.curves9[7][1]);
+  ui->curvePt3_16->setValue(g_model.curves9[7][2]);
+  ui->curvePt4_16->setValue(g_model.curves9[7][3]);
+  ui->curvePt5_16->setValue(g_model.curves9[7][4]);
+  ui->curvePt6_16->setValue(g_model.curves9[7][5]);
+  ui->curvePt7_16->setValue(g_model.curves9[7][6]);
+  ui->curvePt8_16->setValue(g_model.curves9[7][7]);
+  ui->curvePt9_16->setValue(g_model.curves9[7][8]);
+
+  ControlCurveSignal(false);
 }
 
 
 void ModelEdit::tabCurves()
 {
+   for (int i=0; i<16;i++) {
+     plot_curve[i]=FALSE;
+   }
+
    updateCurvesTab();
 
    QGraphicsScene *scene = new QGraphicsScene(ui->curvePreview);
@@ -768,133 +792,133 @@ void ModelEdit::tabCurves()
 
    connect(ui->clearMixesPB,SIGNAL(pressed()),this,SLOT(clearCurves()));
 
-   connect(ui->curvePt1_1,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_1,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_1,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_1,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_1,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_1,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_1,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_1,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_1,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_1,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_2,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_2,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_2,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_2,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_2,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_2,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_2,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_2,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_2,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_2,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_3,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_3,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_3,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_3,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_3,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_3,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_3,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_3,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_3,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_3,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_4,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_4,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_4,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_4,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_4,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_4,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_4,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_4,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_4,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_4,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_5,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_5,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_5,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_5,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_5,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_5,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_5,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_5,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_5,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_5,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_6,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_6,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_6,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_6,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_6,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_6,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_6,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_6,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_6,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_6,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_7,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_7,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_7,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_7,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_7,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_7,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_7,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_7,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_7,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_7,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_8,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_8,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_8,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_8,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_8,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_8,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_8,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_8,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_8,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_8,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_9,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_9,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_10,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_10,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_11,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_11,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_12,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_12,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_13,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_13,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_14,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_14,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_15,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_15,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 
-   connect(ui->curvePt1_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt2_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt3_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt4_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt5_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt6_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt7_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt8_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
-   connect(ui->curvePt9_16,SIGNAL(editingFinished()),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt1_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt2_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt3_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt4_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt5_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt6_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt7_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt8_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
+   connect(ui->curvePt9_16,SIGNAL(valueChanged(int)),this,SLOT(curvePointEdited()));
 }
 
 
@@ -971,8 +995,59 @@ void ModelEdit::limitEdited()
     updateSettings();
 }
 
+void ModelEdit::setCurrentCurve(int curveId)
+{
+    currentCurve = curveId;
+    QString ss = "QSpinBox { background-color:rgb(255, 255, 127);}";
+
+    QSpinBox* spn[][16] = {
+          { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
+        , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
+        , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
+        , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
+        , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
+        , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
+        , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
+        , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
+        , { ui->curvePt1_9, ui->curvePt2_9, ui->curvePt3_9, ui->curvePt4_9, ui->curvePt5_9, ui->curvePt6_9, ui->curvePt7_9, ui->curvePt8_9, ui->curvePt9_9 }
+        , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
+        , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
+        , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
+        , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
+        , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
+        , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
+        , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
+    };
+    for (int i = 0; i < 16; i++)
+    {
+        int jMax = 5;
+        if (i > 7) { jMax = 9; }
+        for (int j = 0; j < jMax; j++)
+        {
+            if (curveId == i)
+            {
+                spn[i][j]->setStyleSheet(ss);
+            }
+            else
+            {
+                spn[i][j]->setStyleSheet("");
+            }
+        }
+   }
+}
+
 void ModelEdit::curvePointEdited()
 {
+  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+
+  int curveId = spinBox->objectName().right(1).toInt() - 1;
+  if (spinBox->objectName().right(2).left(1).toInt() == 1)
+  {
+      curveId += 10;
+  }
+
+  setCurrentCurve(curveId);
+
     g_model.curves5[0][0] = ui->curvePt1_1->value();
     g_model.curves5[0][1] = ui->curvePt2_1->value();
     g_model.curves5[0][2] = ui->curvePt3_1->value();
@@ -1102,7 +1177,9 @@ void ModelEdit::curvePointEdited()
     g_model.curves9[7][7] = ui->curvePt8_16->value();
     g_model.curves9[7][8] = ui->curvePt9_16->value();
 
-    //drawCurve();
+    if (redrawCurve)
+      drawCurve();
+
     updateSettings();
 }
 
@@ -1837,12 +1914,34 @@ QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to t
 
 void ModelEdit::drawCurve()
 {
+    int k,i;
+    QColor * plot_color[16];
+
+    plot_color[0]=new QColor(0,0,127);
+    plot_color[1]=new QColor(0,127,0);
+    plot_color[2]=new QColor(127,0,0);
+    plot_color[3]=new QColor(0,127,127);
+    plot_color[4]=new QColor(127,0,127);
+    plot_color[5]=new QColor(127,127,0);
+    plot_color[6]=new QColor(127,127,127);
+    plot_color[7]=new QColor(0,0,255);
+    plot_color[8]=new QColor(0,127,255);
+    plot_color[9]=new QColor(127,0,255);
+    plot_color[10]=new QColor(0,255,0);
+    plot_color[11]=new QColor(0,255,127);
+    plot_color[12]=new QColor(127,255,0);
+    plot_color[13]=new QColor(255,0,0);
+    plot_color[14]=new QColor(255,0,127);
+    plot_color[15]=new QColor(255,127,0);
+
     if(currentCurve<0 || currentCurve>15) return;
 
     Node *nodel = 0;
     Node *nodex = 0;
 
     QGraphicsScene *scene = ui->curvePreview->scene();
+    QPen pen;
+    QColor color;
     scene->clear();
 
     qreal width  = scene->sceneRect().width();
@@ -1852,12 +1951,30 @@ void ModelEdit::drawCurve()
     qreal centerY = scene->sceneRect().top() + height/2; //center Y
 
     QGraphicsSimpleTextItem *ti;
-    ti = scene->addSimpleText(tr("Curve %1").arg(currentCurve+1));
+    ti = scene->addSimpleText(tr("Editing curve %1").arg(currentCurve+1));
     ti->setPos(3,3);
 
     scene->addLine(centerX,GFX_MARGIN,centerX,height+GFX_MARGIN);
     scene->addLine(GFX_MARGIN,centerY,width+GFX_MARGIN,centerY);
 
+    pen.setWidth(2);
+    pen.setStyle(Qt::SolidLine);
+    for(k=0; k<8; k++) {
+        pen.setColor(*plot_color[k]);
+        if ((currentCurve!=k) && (plot_curve[k])) {
+           for(i=0; i<4; i++) {
+                scene->addLine(GFX_MARGIN + i*width/(5-1),centerY - (qreal)g_model.curves5[k][i]*height/200,GFX_MARGIN + (i+1)*width/(5-1),centerY - (qreal)g_model.curves5[k][i+1]*height/200,pen);
+           }
+        }
+    }
+    for(k=0; k<8; k++) {
+        pen.setColor(*plot_color[k+8]);
+        if ((currentCurve!=(k+8)) && (plot_curve[k+8])) {
+           for(i=0; i<8; i++) {
+                scene->addLine(GFX_MARGIN + i*width/(9-1),centerY - (qreal)g_model.curves9[k][i]*height/200,GFX_MARGIN + (i+1)*width/(9-1),centerY - (qreal)g_model.curves9[k][i+1]*height/200,pen);
+           }
+        }
+    }
 
     if(currentCurve<8)
         for(int i=0; i<5; i++)
@@ -1887,98 +2004,98 @@ void ModelEdit::drawCurve()
 
 void ModelEdit::on_curveEdit_1_clicked()
 {
-    currentCurve = 0;
-    drawCurve();
+  setCurrentCurve(0);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_2_clicked()
 {
-    currentCurve = 1;
-    drawCurve();
+  setCurrentCurve(1);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_3_clicked()
 {
-    currentCurve = 2;
-    drawCurve();
+  setCurrentCurve(2);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_4_clicked()
 {
-    currentCurve = 3;
-    drawCurve();
+  setCurrentCurve(3);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_5_clicked()
 {
-    currentCurve = 4;
+  setCurrentCurve(4);
     drawCurve();
 }
 
 void ModelEdit::on_curveEdit_6_clicked()
 {
-    currentCurve = 5;
+  setCurrentCurve(5);
     drawCurve();
 }
 
 void ModelEdit::on_curveEdit_7_clicked()
 {
-    currentCurve = 6;
-    drawCurve();
+  setCurrentCurve(6);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_8_clicked()
 {
-    currentCurve = 7;
-    drawCurve();
+  setCurrentCurve(7);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_9_clicked()
 {
-    currentCurve = 8;
-    drawCurve();
+  setCurrentCurve(8);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_10_clicked()
 {
-    currentCurve = 9;
-    drawCurve();
+  setCurrentCurve(9);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_11_clicked()
 {
-    currentCurve = 10;
-    drawCurve();
+  setCurrentCurve(10);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_12_clicked()
 {
-    currentCurve = 11;
-    drawCurve();
+  setCurrentCurve(11);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_13_clicked()
 {
-    currentCurve = 12;
-    drawCurve();
+  setCurrentCurve(12);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_14_clicked()
 {
-    currentCurve = 13;
-    drawCurve();
+  setCurrentCurve(13);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_15_clicked()
 {
-    currentCurve = 14;
-    drawCurve();
+  setCurrentCurve(14);
+  drawCurve();
 }
 
 void ModelEdit::on_curveEdit_16_clicked()
 {
-    currentCurve = 15;
-    drawCurve();
+  setCurrentCurve(15);
+  drawCurve();
 }
 
 
@@ -2933,10 +3050,12 @@ void ModelEdit::applyTemplate(uint8_t idx)
     //Simple 4-Ch
     if(idx==j++)
     {
-        md=setDest(ICC(STK_RUD));  md->srcRaw=CM(STK_RUD);  md->weight=100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=CM(STK_ELE);  md->weight=100;
-        md=setDest(ICC(STK_THR));  md->srcRaw=CM(STK_THR);  md->weight=100;
-        md=setDest(ICC(STK_AIL));  md->srcRaw=CM(STK_AIL);  md->weight=100;
+      if (md->destCh)
+        clearMixes();
+      md=setDest(ICC(STK_RUD));  md->srcRaw=CM(STK_RUD);  md->weight=100;
+      md=setDest(ICC(STK_ELE));  md->srcRaw=CM(STK_ELE);  md->weight=100;
+      md=setDest(ICC(STK_THR));  md->srcRaw=CM(STK_THR);  md->weight=100;
+      md=setDest(ICC(STK_AIL));  md->srcRaw=CM(STK_AIL);  md->weight=100;
     }
 
     //T-Cut
@@ -3049,8 +3168,217 @@ void ModelEdit::applyTemplate(uint8_t idx)
         updateSwitchesTab();
     }
 
+}
 
+void ModelEdit::on_plotCB_1_toggled(bool checked)
+{
+    plot_curve[0] = checked;
+    drawCurve();
+}
 
+void ModelEdit::on_plotCB_2_toggled(bool checked)
+{
+    plot_curve[1] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_3_toggled(bool checked)
+{
+    plot_curve[2] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_4_toggled(bool checked)
+{
+    plot_curve[3] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_5_toggled(bool checked)
+{
+    plot_curve[4] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_6_toggled(bool checked)
+{
+    plot_curve[5] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_7_toggled(bool checked)
+{
+    plot_curve[6] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_8_toggled(bool checked)
+{
+    plot_curve[7] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_9_toggled(bool checked)
+{
+    plot_curve[8] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_10_toggled(bool checked)
+{
+    plot_curve[9] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_11_toggled(bool checked)
+{
+    plot_curve[10] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_12_toggled(bool checked)
+{
+    plot_curve[11] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_13_toggled(bool checked)
+{
+    plot_curve[12] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_14_toggled(bool checked)
+{
+    plot_curve[13] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_15_toggled(bool checked)
+{
+    plot_curve[14] = checked;
+    drawCurve();
+}
+
+void ModelEdit::on_plotCB_16_toggled(bool checked)
+{
+    plot_curve[15] = checked;
+    drawCurve();
+}
+
+void ModelEdit::ControlCurveSignal(bool flag)
+{
+  ui->curvePt1_1->blockSignals(flag);
+  ui->curvePt2_1->blockSignals(flag);
+  ui->curvePt3_1->blockSignals(flag);
+  ui->curvePt4_1->blockSignals(flag);
+  ui->curvePt5_1->blockSignals(flag);
+  ui->curvePt1_2->blockSignals(flag);
+  ui->curvePt2_2->blockSignals(flag);
+  ui->curvePt3_2->blockSignals(flag);
+  ui->curvePt4_2->blockSignals(flag);
+  ui->curvePt5_2->blockSignals(flag);
+  ui->curvePt1_3->blockSignals(flag);
+  ui->curvePt2_3->blockSignals(flag);
+  ui->curvePt3_3->blockSignals(flag);
+  ui->curvePt4_3->blockSignals(flag);
+  ui->curvePt5_3->blockSignals(flag);
+  ui->curvePt1_4->blockSignals(flag);
+  ui->curvePt2_4->blockSignals(flag);
+  ui->curvePt3_4->blockSignals(flag);
+  ui->curvePt4_4->blockSignals(flag);
+  ui->curvePt5_4->blockSignals(flag);
+  ui->curvePt1_5->blockSignals(flag);
+  ui->curvePt2_5->blockSignals(flag);
+  ui->curvePt3_5->blockSignals(flag);
+  ui->curvePt4_5->blockSignals(flag);
+  ui->curvePt1_6->blockSignals(flag);
+  ui->curvePt2_6->blockSignals(flag);
+  ui->curvePt3_6->blockSignals(flag);
+  ui->curvePt4_6->blockSignals(flag);
+  ui->curvePt5_6->blockSignals(flag);
+  ui->curvePt1_7->blockSignals(flag);
+  ui->curvePt2_7->blockSignals(flag);
+  ui->curvePt3_7->blockSignals(flag);
+  ui->curvePt4_7->blockSignals(flag);
+  ui->curvePt5_7->blockSignals(flag);
+  ui->curvePt1_8->blockSignals(flag);
+  ui->curvePt2_8->blockSignals(flag);
+  ui->curvePt3_8->blockSignals(flag);
+  ui->curvePt4_8->blockSignals(flag);
+  ui->curvePt5_8->blockSignals(flag);
+  ui->curvePt1_9->blockSignals(flag);
+  ui->curvePt2_9->blockSignals(flag);
+  ui->curvePt3_9->blockSignals(flag);
+  ui->curvePt4_9->blockSignals(flag);
+  ui->curvePt5_9->blockSignals(flag);
+  ui->curvePt6_9->blockSignals(flag);
+  ui->curvePt7_9->blockSignals(flag);
+  ui->curvePt8_9->blockSignals(flag);
+  ui->curvePt9_9->blockSignals(flag);
+  ui->curvePt1_10->blockSignals(flag);
+  ui->curvePt2_10->blockSignals(flag);
+  ui->curvePt3_10->blockSignals(flag);
+  ui->curvePt4_10->blockSignals(flag);
+  ui->curvePt5_10->blockSignals(flag);
+  ui->curvePt6_10->blockSignals(flag);
+  ui->curvePt7_10->blockSignals(flag);
+  ui->curvePt8_10->blockSignals(flag);
+  ui->curvePt9_10->blockSignals(flag);
+  ui->curvePt1_11->blockSignals(flag);
+  ui->curvePt2_11->blockSignals(flag);
+  ui->curvePt3_11->blockSignals(flag);
+  ui->curvePt4_11->blockSignals(flag);
+  ui->curvePt5_11->blockSignals(flag);
+  ui->curvePt6_11->blockSignals(flag);
+  ui->curvePt7_11->blockSignals(flag);
+  ui->curvePt8_11->blockSignals(flag);
+  ui->curvePt9_11->blockSignals(flag);
+  ui->curvePt1_12->blockSignals(flag);
+  ui->curvePt2_12->blockSignals(flag);
+  ui->curvePt3_12->blockSignals(flag);
+  ui->curvePt4_12->blockSignals(flag);
+  ui->curvePt5_12->blockSignals(flag);
+  ui->curvePt6_12->blockSignals(flag);
+  ui->curvePt7_12->blockSignals(flag);
+  ui->curvePt8_12->blockSignals(flag);
+  ui->curvePt9_12->blockSignals(flag);
+  ui->curvePt1_13->blockSignals(flag);
+  ui->curvePt2_13->blockSignals(flag);
+  ui->curvePt3_13->blockSignals(flag);
+  ui->curvePt4_13->blockSignals(flag);
+  ui->curvePt5_13->blockSignals(flag);
+  ui->curvePt6_13->blockSignals(flag);
+  ui->curvePt7_13->blockSignals(flag);
+  ui->curvePt8_13->blockSignals(flag);
+  ui->curvePt9_13->blockSignals(flag);
+  ui->curvePt1_14->blockSignals(flag);
+  ui->curvePt2_14->blockSignals(flag);
+  ui->curvePt3_14->blockSignals(flag);
+  ui->curvePt4_14->blockSignals(flag);
+  ui->curvePt5_14->blockSignals(flag);
+  ui->curvePt6_14->blockSignals(flag);
+  ui->curvePt7_14->blockSignals(flag);
+  ui->curvePt8_14->blockSignals(flag);
+  ui->curvePt9_14->blockSignals(flag);
+  ui->curvePt1_15->blockSignals(flag);
+  ui->curvePt2_15->blockSignals(flag);
+  ui->curvePt3_15->blockSignals(flag);
+  ui->curvePt4_15->blockSignals(flag);
+  ui->curvePt5_15->blockSignals(flag);
+  ui->curvePt6_15->blockSignals(flag);
+  ui->curvePt7_15->blockSignals(flag);
+  ui->curvePt8_15->blockSignals(flag);
+  ui->curvePt9_15->blockSignals(flag);
+  ui->curvePt1_16->blockSignals(flag);
+  ui->curvePt2_16->blockSignals(flag);
+  ui->curvePt3_16->blockSignals(flag);
+  ui->curvePt4_16->blockSignals(flag);
+  ui->curvePt5_16->blockSignals(flag);
+  ui->curvePt6_16->blockSignals(flag);
+  ui->curvePt7_16->blockSignals(flag);
+  ui->curvePt8_16->blockSignals(flag);
+  ui->curvePt9_16->blockSignals(flag);
 }
 
 
