@@ -46,6 +46,7 @@
 
 #include "edge.h"
 #include "node.h"
+#include "modeledit.h"
 
 Node::Node(QSpinBox *sb)
 {
@@ -179,7 +180,12 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
              if(fixedY) newPos.setY(y());//make sure x doesn't change
              newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));// bound X
              newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));// bound Y
-             if(qsb) qsb->setValue(100+(rect.top()-y())*200/rect.height());
+             if (qsb) {
+               ModelEdit* modeledit = qobject_cast<ModelEdit*>(qsb->parent()->parent()->parent()->parent()->parent()->parent()->parent());
+               modeledit->redrawCurve = false;
+               qsb->setValue(100+(rect.top()-y())*200/rect.height());
+               modeledit->redrawCurve = true;
+             }
              return newPos;
          }
         break;
