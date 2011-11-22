@@ -538,15 +538,15 @@
          <item row="1" column="0">
           <widget class="QToolBox" name="phases">
            <property name="currentIndex">
-            <number>0</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="phase0">
             <property name="geometry">
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>796</width>
-              <height>372</height>
+              <width>248</width>
+              <height>180</height>
              </rect>
             </property>
             <attribute name="label">
@@ -576,6 +576,13 @@
                  </property>
                 </widget>
                </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_39c">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="2">
                 <widget class="QSpinBox" name="phase0FadeIn">
                  <property name="minimum">
@@ -583,13 +590,6 @@
                  </property>
                  <property name="maximum">
                   <number>15</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39c">
-                 <property name="text">
-                  <string>Fade Out</string>
                  </property>
                 </widget>
                </item>
@@ -799,7 +799,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>260</height>
+              <height>292</height>
              </rect>
             </property>
             <attribute name="label">
@@ -822,14 +822,31 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_38d">
                  <property name="text">
                   <string>Fade In</string>
                  </property>
                 </widget>
                </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_39d">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37d_2">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="2">
+                <widget class="QComboBox" name="phase1Switch"/>
+               </item>
+               <item row="2" column="2">
                 <widget class="QSpinBox" name="phase1FadeIn">
                  <property name="minimum">
                   <number>0</number>
@@ -839,14 +856,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39d">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QSpinBox" name="phase1FadeOut">
                  <property name="minimum">
                   <number>0</number>
@@ -935,7 +945,7 @@
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <layout class="QVBoxLayout" name="verticalLayout_5b" stretch="0,0,0,0">
+                  <layout class="QVBoxLayout" name="verticalLayout_5b" stretch="0,0,0,0,0">
                    <property name="spacing">
                     <number>6</number>
                    </property>
@@ -951,6 +961,19 @@
                       <size>
                        <width>0</width>
                        <height>0</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_4d_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -1179,7 +1202,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>260</height>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1202,14 +1225,31 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_38e">
                  <property name="text">
                   <string>Fade In</string>
                  </property>
                 </widget>
                </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_39e">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37e_2">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="2">
+                <widget class="QComboBox" name="phase2Switch"/>
+               </item>
+               <item row="2" column="2">
                 <widget class="QSpinBox" name="phase2FadeIn">
                  <property name="minimum">
                   <number>0</number>
@@ -1219,14 +1259,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39e">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QSpinBox" name="phase2FadeOut">
                  <property name="minimum">
                   <number>0</number>
@@ -1540,7 +1573,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>260</height>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1563,14 +1596,31 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_38a">
                  <property name="text">
                   <string>Fade In</string>
                  </property>
                 </widget>
                </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_39a">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37a_2">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="2">
+                <widget class="QComboBox" name="phase3Switch"/>
+               </item>
+               <item row="2" column="2">
                 <widget class="QSpinBox" name="phase3FadeIn">
                  <property name="minimum">
                   <number>0</number>
@@ -1580,14 +1630,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39a">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QSpinBox" name="phase3FadeOut">
                  <property name="minimum">
                   <number>0</number>
@@ -1900,8 +1943,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>260</height>
+              <width>796</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1924,14 +1967,31 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_38b">
                  <property name="text">
                   <string>Fade In</string>
                  </property>
                 </widget>
                </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_39b">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37b_2">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="2">
+                <widget class="QComboBox" name="phase4Switch"/>
+               </item>
+               <item row="2" column="2">
                 <widget class="QSpinBox" name="phase4FadeIn">
                  <property name="minimum">
                   <number>0</number>
@@ -1941,14 +2001,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39b">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QSpinBox" name="phase4FadeOut">
                  <property name="minimum">
                   <number>0</number>

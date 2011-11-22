@@ -244,10 +244,11 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim
   trimVal->setValue(trim);
 }
 
-void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider)
+void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider)
 {
   PhaseData *phase = &g_model.phaseData[phase_idx];
   if (name) name->setText(phase->name);
+  if (sw) populateSwitchCB(sw, phase->swtch);
   if (fadeIn) fadeIn->setValue(phase->fadeIn);
   if (fadeOut) fadeOut->setValue(phase->fadeOut);
 
@@ -303,11 +304,11 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QSpinBo
 void ModelEdit::tabPhases()
 {
   phasesLock = true;
-  displayOnePhase(0, ui->phase0Name, ui->phase0FadeIn, ui->phase0FadeOut, NULL,               ui->phase0Trim1,      ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,               ui->phase0Trim2,      ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,               ui->phase0Trim3,      ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,               ui->phase0Trim4,      ui->phase0Trim4Label, ui->phase0Trim4Slider);
-  displayOnePhase(1, ui->phase1Name, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider);
-  displayOnePhase(2, ui->phase2Name, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider);
-  displayOnePhase(3, ui->phase3Name, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider);
-  displayOnePhase(4, ui->phase4Name, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider);
+  displayOnePhase(0, ui->phase0Name, NULL,             ui->phase0FadeIn, ui->phase0FadeOut, NULL,               ui->phase0Trim1,      ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,               ui->phase0Trim2,      ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,               ui->phase0Trim3,      ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,               ui->phase0Trim4,      ui->phase0Trim4Label, ui->phase0Trim4Slider);
+  displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider);
+  displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider);
+  displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider);
+  displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider);
 
   int phases = GetEepromInterface()->getCapability(Phases);
   if (phases < 4)
@@ -331,16 +332,16 @@ void ModelEdit::on_phases_currentChanged(int index)
   phasesLock = true;
   switch(index) {
     case 1:
-      displayOnePhase(1, NULL, NULL, NULL, NULL, ui->phase1Trim1Value, NULL, ui->phase1Trim1Slider, NULL, ui->phase1Trim2Value, NULL, ui->phase1Trim2Slider, NULL, ui->phase1Trim3Value, NULL, ui->phase1Trim3Slider, NULL, ui->phase1Trim4Value, NULL, ui->phase1Trim4Slider);
+      displayOnePhase(1, NULL, NULL, NULL, NULL, NULL, ui->phase1Trim1Value, NULL, ui->phase1Trim1Slider, NULL, ui->phase1Trim2Value, NULL, ui->phase1Trim2Slider, NULL, ui->phase1Trim3Value, NULL, ui->phase1Trim3Slider, NULL, ui->phase1Trim4Value, NULL, ui->phase1Trim4Slider);
       break;
     case 2:
-      displayOnePhase(2, NULL, NULL, NULL, NULL, ui->phase2Trim1Value, NULL, ui->phase2Trim1Slider, NULL, ui->phase2Trim2Value, NULL, ui->phase2Trim2Slider, NULL, ui->phase2Trim3Value, NULL, ui->phase2Trim3Slider, NULL, ui->phase2Trim4Value, NULL, ui->phase2Trim4Slider);
+      displayOnePhase(2, NULL, NULL, NULL, NULL, NULL, ui->phase2Trim1Value, NULL, ui->phase2Trim1Slider, NULL, ui->phase2Trim2Value, NULL, ui->phase2Trim2Slider, NULL, ui->phase2Trim3Value, NULL, ui->phase2Trim3Slider, NULL, ui->phase2Trim4Value, NULL, ui->phase2Trim4Slider);
       break;
     case 3:
-      displayOnePhase(3, NULL, NULL, NULL, NULL, ui->phase3Trim1Value, NULL, ui->phase3Trim1Slider, NULL, ui->phase3Trim2Value, NULL, ui->phase3Trim2Slider, NULL, ui->phase3Trim3Value, NULL, ui->phase3Trim3Slider, NULL, ui->phase3Trim4Value, NULL, ui->phase3Trim4Slider);
+      displayOnePhase(3, NULL, NULL, NULL, NULL, NULL, ui->phase3Trim1Value, NULL, ui->phase3Trim1Slider, NULL, ui->phase3Trim2Value, NULL, ui->phase3Trim2Slider, NULL, ui->phase3Trim3Value, NULL, ui->phase3Trim3Slider, NULL, ui->phase3Trim4Value, NULL, ui->phase3Trim4Slider);
       break;
     case 4:
-      displayOnePhase(4, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
+      displayOnePhase(4, NULL, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
       break;
   }
   phasesLock = false;
@@ -473,6 +474,7 @@ void ModelEdit::tabMixes()
         //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
         str += getSourceStr(g_eeGeneral.stickMode,md->srcRaw);
 
+        if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
         if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
         if(md->carryTrim) str += tr(" noTrim");
         if(md->sOffset)  str += tr(" Offset(%1\%)").arg(md->sOffset);
@@ -1454,6 +1456,12 @@ void ModelEdit::on_phaseName_editingFinished(unsigned int phase, QLineEdit *edit
   updateSettings();
 }
 
+void ModelEdit::on_phaseSwitch_currentIndexChanged(unsigned int phase, int index)
+{
+  g_model.phaseData[phase].swtch = (int)index - MAX_DRSWITCH;
+  updateSettings();
+}
+
 void ModelEdit::on_phaseFadeIn_valueChanged(unsigned int phase, int value)
 {
   g_model.phaseData[phase].fadeIn = value;
@@ -1471,6 +1479,10 @@ void ModelEdit::on_phase1Name_editingFinished() { on_phaseName_editingFinished(1
 void ModelEdit::on_phase2Name_editingFinished() { on_phaseName_editingFinished(2, ui->phase2Name); }
 void ModelEdit::on_phase3Name_editingFinished() { on_phaseName_editingFinished(3, ui->phase3Name); }
 void ModelEdit::on_phase4Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase4Name); }
+void ModelEdit::on_phase1Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(1, index); }
+void ModelEdit::on_phase2Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(2, index); }
+void ModelEdit::on_phase3Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(3, index); }
+void ModelEdit::on_phase4Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(4, index); }
 void ModelEdit::on_phase0FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(0, value); }
 void ModelEdit::on_phase0FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(0, value); }
 void ModelEdit::on_phase1FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(1, value); }

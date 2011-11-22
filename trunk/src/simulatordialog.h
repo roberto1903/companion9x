@@ -69,7 +69,7 @@ private:
 
     void getValues();
     void setValues();
-    void perOut(bool init=false);
+    void perOut(int16_t *chanOut);
     void centerSticks();
     void timerTick();
 
