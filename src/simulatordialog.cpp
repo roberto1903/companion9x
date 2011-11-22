@@ -69,7 +69,6 @@ void simulatorDialog::setupTimer()
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(onTimerEvent()));
     getValues();
-    perOut(true);
     timer->start(10);
 }
 
@@ -79,10 +78,43 @@ void simulatorDialog::onTimerEvent()
 
     getValues();
 
-    perOut();
+    static int32_t last_chans512[NUM_CHNOUT] = {0};
+    int16_t next_chans512[NUM_CHNOUT];
+
+    static uint8_t last_phase = 0;
+    uint8_t phase = getFlightPhase();
+
+    static uint16_t fading_out_timer = 0;
+    if (last_phase != phase) {
+      for (uint8_t i=0; i<NUM_CHNOUT; i++)
+        last_chans512[i] = 100 * chanOut[i];
+      fading_out_timer = 100 * std::max(g_model.phaseData[last_phase].fadeOut, g_model.phaseData[phase].fadeIn);
+      last_phase = phase;
+    }
+
+    perOut(next_chans512);
+
+    for (uint8_t i=0; i<NUM_CHNOUT; i++) {
+      int16_t output;
+      if (fading_out_timer) {
+        last_chans512[i] += (100*next_chans512[i] - last_chans512[i]) / fading_out_timer;
+        output = last_chans512[i] / 100;
+      }
+      else {
+        output = next_chans512[i];
+      }
+
+      // cli();
+      chanOut[i] = output;
+      // sei();
+    }
 
     setValues();
     centerSticks();
+
+    if (fading_out_timer) {
+      fading_out_timer--;
+    }
 
     timerTick();
 //    if(s_timerState != TMR_OFF)
@@ -696,9 +728,9 @@ void simulatorDialog::applyExpos(int16_t *anas)
       }
     }
     if (getSwitch(ed.swtch, 1)) {
-      cur_chn = ed.chn;
-      int16_t v = anas2[cur_chn];
+      int16_t v = anas2[ed.chn];
       if((v<0 && ed.mode&1) || (v>=0 && ed.mode&2)) {
+        cur_chn = ed.chn;
         int16_t k = ed.expo;
         if (IS_THROTTLE(cur_chn) && g_model.thrExpo)
           v = 2*expo((v+RESX)/2, k);
@@ -713,7 +745,7 @@ void simulatorDialog::applyExpos(int16_t *anas)
   }
 }
 
-void simulatorDialog::perOut(bool init)
+void simulatorDialog::perOut(int16_t *chanOut)
 {
   int16_t trimA[4];
   uint8_t  anaCenter = 0;
@@ -882,10 +914,6 @@ void simulatorDialog::perOut(bool init)
 
 #define DEL_MULT 256
 
-        if(init) {
-          act[i]=(int32_t)v*DEL_MULT;
-          swTog = false;
-        }
         int16_t diff = v-act[i]/DEL_MULT;
 
         if(swTog) {
