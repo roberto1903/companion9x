@@ -1,0 +1,48 @@
+#summary Building companion9x for Linux
+ 
+= Building companion9X for Linux =
+
+= Prerequisites =
+
+You will need ...
+ * [http://qt.nokia.com/ Qt] (v4.7.4)
+ * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
+ * [http://www.cmake.org cmake]
+ * what else ???
+
+{{{
+sudo apt-get install cmake libxerces xsdcxx ???
+}}}
+
+= Building companion9x =
+
+We're ready to grab the source files and build companion9x itself.
+
+== Check out the c9x source ==
+
+See the [http://code.google.com/p/companion9x/source/checkout project's Source page], as provided by Googlecode.
+
+{{{
+svn checkout http://companion9x.googlecode.com/svn/trunk companion9x
+}}}
+
+== Prepare a Makefile using CMake ==
+
+{{{
+cd companion9x/src
+
+cmake .
+}}}
+
+Finally, we're ready to compile ...
+
+{{{
+make clean && make
+}}}
+
+When the build process completes (with no show-stopping errors!) you will end up with a binary named `companion9x`.
+
+You should now be able to run companion9x from your terminal, like so ...
+{{{
+./companion9x
+}}}
