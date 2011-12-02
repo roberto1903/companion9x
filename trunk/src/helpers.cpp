@@ -29,8 +29,7 @@ void populateSwitchCB(QComboBox *b, int value)
     b->setMaxVisibleItems(10);
 }
 
-const char * F2SWITCH_STR[] = { "", ""};
-#define FSWITCH_STR  "----          ""Trainer       ""Instant Trim  ""Trims2Offsets ""Telemetry View"
+#define FSWITCH_STR  "----          ""Trainer       ""Trainer RUD   ""Trainer ELE   ""Trainer THR   ""Trainer AIL   ""Instant Trim  ""Trims2Offsets ""Telemetry View"
 #define FSW_LEN_FUNC 14
 
 QString getFuncName(unsigned int val)
