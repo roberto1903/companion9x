@@ -538,15 +538,15 @@
          <item row="1" column="0">
           <widget class="QToolBox" name="phases">
            <property name="currentIndex">
-            <number>4</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="phase0">
             <property name="geometry">
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>248</width>
-              <height>180</height>
+              <width>796</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2350,8 +2350,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>794</width>
-            <height>505</height>
+            <width>293</width>
+            <height>455</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3599,7 +3599,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>778</width>
+            <width>679</width>
             <height>556</height>
            </rect>
           </property>
@@ -8513,8 +8513,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>794</width>
-            <height>505</height>
+            <width>149</width>
+            <height>343</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

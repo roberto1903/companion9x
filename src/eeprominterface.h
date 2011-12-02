@@ -340,9 +340,13 @@ class SafetySwData { // Custom Switches data
 enum AssignFunc {
   FuncNone = 0,
   FuncTrainer = 1,
-  FuncInstantTrim = 2,
-  FuncTrims2Offsets = 3,
-  FuncViewTelemetry = 4,
+  FuncTrainerRUD = 2,
+  FuncTrainerELE = 3,
+  FuncTrainerTHR = 4,
+  FuncTrainerAIL = 5,
+  FuncInstantTrim = 6,
+  FuncTrims2Offsets = 7,
+  FuncViewTelemetry = 8,
   FuncCount
 };
 
