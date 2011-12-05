@@ -300,6 +300,12 @@ Gruvin9xCustomSwData::operator CustomSwData ()
   return c9x;
 }
 
+t_Gruvin9xFuncSwData::t_Gruvin9xFuncSwData(FuncSwData &c9x)
+{
+  swtch = c9x.swtch;
+  func = c9x.func;
+}
+
 Gruvin9xFuncSwData::operator FuncSwData ()
 {
   FuncSwData c9x;
@@ -674,6 +680,8 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
         curves9[i][j] = c9x.curves9[i][j];
     for (int i=0; i<NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
+    for (int i=0; i<NUM_FSW; i++)
+      funcSw[i] = c9x.funcSw[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
