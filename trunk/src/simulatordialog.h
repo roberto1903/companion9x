@@ -16,6 +16,8 @@ namespace Ui {
     class simulatorDialog;
 }
 
+// TODO only one simulator window is possible at a moment
+
 class simulatorDialog : public QDialog
 {
     Q_OBJECT
@@ -24,27 +26,17 @@ public:
     explicit simulatorDialog(QWidget *parent = 0);
     ~simulatorDialog();
 
-    void loadParams(const GeneralSettings &gg, const ModelData &gm);
+    void loadParams(RadioData &radioData, const int model_idx=-1);
 
 private:
     Ui::simulatorDialog *ui;
     Node *nodeLeft;
     Node *nodeRight;
     QTimer *timer;
-    QString modelName;
+    QString windowName;
 
-    quint16 g_tmr10ms;
-    qint16  chanOut[NUM_CHNOUT];
-    qint16  calibratedStick[7+2+3];
     qint16  g_ppmIns[8];
-    qint16  ex_chans[NUM_CHNOUT];
     qint16  trim[4];
-    qint16  sDelay[MAX_MIXERS];
-    qint32  act[MAX_MIXERS];
-    qint16  anas [NUM_XCHNRAW];
-    qint32  chans[NUM_CHNOUT];
-    quint8  bpanaCenter;
-    bool    swOn[MAX_MIXERS];
 
     quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
@@ -60,25 +52,22 @@ private:
     quint16 s_sum;
     quint8  sw_toggled;
 
-    ModelData g_model;
-    GeneralSettings g_eeGeneral;
-
+    EEPROMInterface *txInterface;
+    RadioData g_radioData;
+    ModelData * g_model;
+    GeneralSettings * g_eeGeneral;
+    
     void setupSticks();
     void setupTimer();
     void resizeEvent(QResizeEvent *event  = 0);
 
     void getValues();
     void setValues();
-    void perOut(int16_t *chanOut);
     void centerSticks();
     void timerTick();
 
-    int applyCurve(int16_t x, uint8_t idx, uint8_t srcRaw);
-    void applyExpos(int16_t *anas);
-
     bool keyState(EnumKeys key);
     int getValue(qint8 i);
-    unsigned int getFlightPhase();
     bool getSwitch(int swtch, bool nc, qint8 level=0);
     void beepWarn();
     void beepWarn1();
@@ -86,8 +75,6 @@ private:
 
     int beepVal;
     int beepShow;
-
-    int16_t intpol(int16_t x, uint8_t idx);
 
 protected:
     void closeEvent (QCloseEvent* );
@@ -102,8 +89,6 @@ private slots:
     void on_holdLeftY_clicked(bool checked);
     void on_holdLeftX_clicked(bool checked);
     void onTimerEvent();
-
-
 };
 
 #endif // SIMULATORDIALOG_H

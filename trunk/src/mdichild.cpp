@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 #include "mdichild.h"
+#include "ui_mdichild.h"
 #include "xmlinterface.h"
 #include "hexinterface.h"
 #include "er9xinterface.h"
@@ -51,424 +52,103 @@
 #include "simulatordialog.h"
 #include "printdialog.h"
 
-class DragDropHeader {
-public:
-  DragDropHeader():
-    general_settings(false),
-    models_count(0)
-  {
-  }
-  bool general_settings;
-  uint8_t models_count;
-  uint8_t models[MAX_MODELS];
-};
-
-
 MdiChild::MdiChild():
+  QWidget(),
+  ui(new Ui::mdiChild),
   isUntitled(true),
   fileChanged(false)
 {
-    setAttribute(Qt::WA_DeleteOnClose);
-    //setWindowFlags(Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
+  ui->setupUi(this);
 
-    this->setFont(QFont("Courier New",12));
-    refreshList();
-    if(!(this->isMaximized() || this->isMinimized())) this->adjustSize();
+  setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(this, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(OpenEditWindow()));
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
-    connect(this,SIGNAL(currentRowChanged(int)), this,SLOT(viableModelSelected(int)));
+  eepromInterfaceChanged();
 
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    setSelectionMode(QAbstractItemView::ExtendedSelection);
-    setDragEnabled(true);
-    setAcceptDrops(true);
-    setDragDropOverwriteMode(true);
-    setDropIndicatorShown(true);
-
-    active_highlight_color = this->palette().color(QPalette::Active, QPalette::Highlight);
+  if(!(this->isMaximized() || this->isMinimized())) this->adjustSize();
 }
 
-void MdiChild::mousePressEvent(QMouseEvent *event)
+void MdiChild::eepromInterfaceChanged()
 {
-    if (event->button() == Qt::LeftButton)
-        dragStartPosition = event->pos();
-
-    QListWidget::mousePressEvent(event);
-}
-
-void MdiChild::mouseMoveEvent(QMouseEvent *event)
-{
-    if (!(event->buttons() & Qt::LeftButton))
-        return;
-    if ((event->pos() - dragStartPosition).manhattanLength()
-         < QApplication::startDragDistance())
-        return;
-
-    QDrag *drag = new QDrag(this);
-
-    QByteArray gmData;
-    doCopy(&gmData);
-
-    QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-companion9x", gmData);
-
-    drag->setMimeData(mimeData);
-
-    //Qt::DropAction dropAction =
-            drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction);
-
-    //if(dropAction==Qt::MoveAction)
-
-   // QListWidget::mouseMoveEvent(event);
-}
-
-void MdiChild::saveSelection()
-{
-  currentSelection.current_item = currentItem();
-  for (int i=0; i<MAX_MODELS+1; ++i)
-    currentSelection.selected[i] = item(i)->isSelected();
-}
-
-void MdiChild::restoreSelection()
-{
-  setCurrentItem(currentSelection.current_item);
-  for (int i=0; i<MAX_MODELS+1; ++i)
-    item(i)->setSelected(currentSelection.selected[i]);
-}
-
-void MdiChild::dragEnterEvent(QDragEnterEvent *event)
-{
-    if (event->mimeData()->hasFormat("application/x-companion9x"))
-    {
-         event->acceptProposedAction();
-         saveSelection();
-    }
-}
-
-void MdiChild::dragLeaveEvent(QDragLeaveEvent */*event*/)
-{
-    restoreSelection();
-}
-
-void MdiChild::dragMoveEvent(QDragMoveEvent *event)
-{
-    int row=this->indexAt(event->pos()).row();
-    const QMimeData *mimeData = event->mimeData();
-    if (mimeData->hasFormat("application/x-companion9x"))
-    {
-         QByteArray gmData = mimeData->data("application/x-companion9x");
-         event->acceptProposedAction();
-         clearSelection();
-         DragDropHeader *header = (DragDropHeader *)gmData.data();
-         if (row >= 0) {
-           if (header->general_settings)
-             item(0)->setSelected(true);
-           for (int i=row, end=std::min(MAX_MODELS+1, row+header->models_count); i<end; i++)
-             item(i)->setSelected(true);
-         }
-    }
-}
-
-void MdiChild::dropEvent(QDropEvent *event)
-{
-    int row = this->indexAt(event->pos()).row();
-    if (row < 0)
-      return;
-
-    // QMessageBox::warning(this, tr("companion9x"),tr("Index :%1").arg(row));
-    const QMimeData  *mimeData = event->mimeData();
-    if(mimeData->hasFormat("application/x-companion9x"))
-    {
-        QByteArray gmData = mimeData->data("application/x-companion9x");
-        if (event->source() && event->dropAction() == Qt::MoveAction)
-          ((MdiChild*)event->source())->doCut(&gmData);
-        doPaste(&gmData, row);
-        clearSelection();
-        setCurrentItem(item(row));
-        DragDropHeader *header = (DragDropHeader *)gmData.data();
-        if (header->general_settings)
-          item(0)->setSelected(true);
-        for (int i=row, end=std::min(MAX_MODELS+1, row+header->models_count); i<end; i++)
-          item(i)->setSelected(true);
-    }
-    event->acceptProposedAction();
-}
-
-#ifndef WIN32
-void MdiChild::focusInEvent ( QFocusEvent * event )
-{
-  QListWidget::focusInEvent(event);
-  QPalette palette = this->palette();
-  palette.setColor(QPalette::Active, QPalette::Highlight, active_highlight_color);
-  palette.setColor(QPalette::Inactive, QPalette::Highlight, active_highlight_color);
-  this->setPalette(palette);
-}
-
-void MdiChild::focusOutEvent ( QFocusEvent * event )
-{
-  QListWidget::focusOutEvent(event);
-  QPalette palette = this->palette();
-  palette.setColor(QPalette::Active, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
-  palette.setColor(QPalette::Inactive, QPalette::Highlight, palette.color(QPalette::Active, QPalette::Midlight));
-  this->setPalette(palette);
-}
-#endif
-
-void MdiChild::refreshList()
-{
-    clear();
-
-    QString name = radioData.generalSettings.ownerName;
-    if(!name.isEmpty())
-        name.prepend(" - ");
-    addItem(tr("General Settings") + name);
-
-    EEPROMInterface *eepromInterface = GetEepromInterface();
-
-    for(uint8_t i=0; i<MAX_MODELS; i++)
-    {
-       QString item = QString().sprintf("%02d: ", i+1);
-       if (!radioData.models[i].isempty()) {
-         item += QString().sprintf("%10s", radioData.models[i].name);
-         if (eepromInterface)
-           item += QString().sprintf("%5d", eepromInterface->getSize(radioData.models[i]));
-       }
-       addItem(item);
-
-    }
-
+  ui->modelsList->refreshList();
+  ui->SimulateTxButton->setEnabled(GetEepromInterface()->getCapability(Simulation));
 }
 
 void MdiChild::cut()
 {
-    copy();
-    deleteSelected(false);
-}
-
-void MdiChild::deleteSelected(bool ask=true)
-{
-    QMessageBox::StandardButton ret = QMessageBox::Yes;
-
-    if(ask)
-        ret = QMessageBox::warning(this, "companion9x",
-                 tr("Delete Selected Models?"),
-                 QMessageBox::Yes | QMessageBox::No);
-
-
-    if (ret == QMessageBox::Yes)
-    {
-           foreach(QModelIndex index, this->selectionModel()->selectedIndexes())
-           {
-               if(index.row()>0)
-                 radioData.models[index.row()-1].clear();
-           }
-           setModified();
-    }
-}
-
-void MdiChild::doCut(QByteArray *gmData)
-{
-    DragDropHeader *header = (DragDropHeader *)gmData->data();
-    for (int i=0; i<header->models_count; i++) {
-      radioData.models[header->models[i]-1].clear();
-    }
-    setModified();
-}
-
-void MdiChild::doCopy(QByteArray *gmData)
-{
-    DragDropHeader header;
-
-    foreach(QModelIndex index, this->selectionModel()->selectedIndexes())
-    {
-        char row = index.row();
-        if(!row) {
-            header.general_settings = true;
-            gmData->append('G');
-            gmData->append((char*)&radioData.generalSettings, sizeof(GeneralSettings));
-        }
-        else {
-            header.models[header.models_count++] = row;
-            gmData->append('M');
-            gmData->append((char*)&radioData.models[row-1], sizeof(ModelData));
-        }
-    }
-
-    gmData->prepend((char *)&header, sizeof(header));
+  ui->modelsList->cut();
 }
 
 void MdiChild::copy()
 {
-    QByteArray gmData;
-    doCopy(&gmData);
-
-    QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-companion9x", gmData);
-
-    QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setMimeData(mimeData,QClipboard::Clipboard);
-}
-
-void MdiChild::doPaste(QByteArray *gmData, int index)
-{
-    //QByteArray gmData = mimeD->data("application/x-companion9x");
-    char *gData = gmData->data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
-    int i = sizeof(DragDropHeader);
-    int id = index;
-    if(!id) id++;
-
-    while((i<gmData->size()) && (id<=MAX_MODELS))
-    {
-        char c = *gData;
-        i++;
-        gData++;
-        if(c=='G')  //general settings
-        {
-            radioData.generalSettings = *((GeneralSettings *)gData);
-            gData += sizeof(GeneralSettings);
-            i     += sizeof(GeneralSettings);
-        }
-        else //model data
-        {
-            radioData.models[id-1] = *((ModelData *)gData);
-            gData += sizeof(ModelData);
-            i     += sizeof(ModelData);
-            id++;
-        }
-    }
-    setModified();
-}
-
-bool MdiChild::hasPasteData()
-{
-    const QClipboard *clipboard = QApplication::clipboard();
-    const QMimeData *mimeData = clipboard->mimeData();
-
-    return mimeData->hasFormat("application/x-companion9x");
+  ui->modelsList->copy();
 }
 
 void MdiChild::paste()
 {
-    if(hasPasteData())
-    {
-        const QClipboard *clipboard = QApplication::clipboard();
-        const QMimeData *mimeData = clipboard->mimeData();
-
-        QByteArray gmData = mimeData->data("application/x-companion9x");
-        doPaste(&gmData,this->currentRow());
-    }
-
+  ui->modelsList->paste();
 }
 
-void MdiChild::duplicate()
+bool MdiChild::hasPasteData()
 {
-    int i = this->currentRow();
-    if(i && i<MAX_MODELS)
-    {
-        ModelData *model = &radioData.models[i-1];
-        while(i<MAX_MODELS) {
-          if (radioData.models[i].isempty()) {
-            radioData.models[i] = *model;
-            setModified();
-            break;
-          }
-        }
-    }
+  return ui->modelsList->hasPasteData();
 }
 
 bool MdiChild::hasSelection()
 {
-    return (this->selectionModel()->hasSelection());
+    return ui->modelsList->hasSelection();
 }
 
-void MdiChild::keyPressEvent(QKeyEvent *event)
+void MdiChild::setModified()
 {
-
-
-    if(event->matches(QKeySequence::Delete))
-    {
-        deleteSelected();
-        return;
-    }
-
-    if(event->matches(QKeySequence::Cut))
-    {
-        cut();
-        return;
-    }
-
-    if(event->matches(QKeySequence::Copy))
-    {
-        copy();
-        return;
-    }
-
-    if(event->matches(QKeySequence::Paste))
-    {
-        paste();
-        return;
-    }
-
-    if(event->matches(QKeySequence::Underline))
-    {
-        duplicate();
-        return;
-    }
-
-
-
-    QListWidget::keyPressEvent(event);//run the standard event in case we didn't catch an action
+  ui->modelsList->refreshList();
+  fileChanged = true;
+  documentWasModified();
 }
 
+void MdiChild::on_SimulateTxButton_clicked()
+{
+  simulatorDialog *sd = new simulatorDialog(this);
+  sd->loadParams(radioData);
+  sd->show();
+}
 
 void MdiChild::OpenEditWindow()
 {
-    int row = this->currentRow();
+  int row = ui->modelsList->currentRow();
 
-    if(row)
-    {
-        //TODO error checking
-        bool isNew = false;
-        ModelData &model = radioData.models[row-1];
+  if (row) {
+    //TODO error checking
+    bool isNew = false;
+    ModelData &model = radioData.models[row - 1];
 
-        if(model.isempty())
-        {
-            model.setDefault(row-1);
-            isNew = true; //modeledit - clear mixes, apply first template
-            setModified();
-        }
-
-        ModelEdit *t = new ModelEdit(radioData,(row-1),this);
-        if(isNew) t->applyBaseTemplate();
-        t->setWindowTitle(tr("Editing model %1: ").arg(row) + model.name);
-        connect(t,SIGNAL(modelValuesChanged()),this,SLOT(setModified()));
-        //t->exec();
-        t->show();
+    if (model.isempty()) {
+      model.setDefault(row - 1);
+      isNew = true; //modeledit - clear mixes, apply first template
+      setModified();
     }
-    else
-    {      
-        GeneralEdit *t = new GeneralEdit(radioData, this);
-        connect(t,SIGNAL(modelValuesChanged()),this,SLOT(setModified()));
-        t->show();
-    }
+
+    ModelEdit *t = new ModelEdit(radioData, (row - 1), this);
+    if (isNew) t->applyBaseTemplate();
+    t->setWindowTitle(tr("Editing model %1: ").arg(row) + model.name);
+    connect(t, SIGNAL(modelValuesChanged()), this, SLOT(setModified()));
+    //t->exec();
+    t->show();
+  }
+  else {
+    GeneralEdit *t = new GeneralEdit(radioData, this);
+    connect(t, SIGNAL(modelValuesChanged()), this, SLOT(setModified()));
+    t->show();
+  }
 }
 
 void MdiChild::newFile()
 {
-    static int sequenceNumber = 1;
+  static int sequenceNumber = 1;
 
-    isUntitled = true;
-    curFile = tr("document%1.eepe").arg(sequenceNumber++);
-    setWindowTitle(curFile + "[*]");
+  isUntitled = true;
+  curFile = tr("document%1.eepe").arg(sequenceNumber++);
+  setWindowTitle(curFile + "[*]");
 
-}
-
-int getValueFromLine(const QString &line, int pos, int len=2)
-{
-    bool ok;
-    int hex = line.mid(pos,len).toInt(&ok, 16);
-    return ok ? hex : -1;
 }
 
 bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
@@ -531,7 +211,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
         return false;
       }
 
-      refreshList();
+      ui->modelsList->refreshList();
       if(resetCurrentFile) setCurrentFile(fileName);
 
       return true;
@@ -567,7 +247,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
         return false;
       }
 
-      refreshList();
+      ui->modelsList->refreshList();
       if(resetCurrentFile) setCurrentFile(fileName);
 
       return true;
@@ -578,11 +258,12 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
 bool MdiChild::save()
 {
-    if (isUntitled) {
-        return saveAs();
-    } else {
-        return saveFile(curFile);
-    }
+  if (isUntitled) {
+      return saveAs();
+  }
+  else {
+      return saveFile(curFile);
+  }
 }
 
 bool MdiChild::saveAs()
@@ -676,16 +357,17 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
 QString MdiChild::userFriendlyCurrentFile()
 {
-    return strippedName(curFile);
+  return strippedName(curFile);
 }
 
 void MdiChild::closeEvent(QCloseEvent *event)
 {
-    if (maybeSave()) {
-        event->accept();
-    } else {
-        event->ignore();
-    }
+  if (maybeSave()) {
+    event->accept();
+  }
+  else {
+    event->ignore();
+  }
 }
 
 void MdiChild::documentWasModified()
@@ -695,44 +377,43 @@ void MdiChild::documentWasModified()
 
 bool MdiChild::maybeSave()
 {
-    if (fileChanged) {
-        QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("companion9x"),
-                     tr("'%1' has been modified.\n"
-                        "Do you want to save your changes?")
-                     .arg(userFriendlyCurrentFile()),
-                     QMessageBox::Save | QMessageBox::Discard
-                     | QMessageBox::Cancel);
-        if (ret == QMessageBox::Save)
-            return save();
-        else if (ret == QMessageBox::Cancel)
-            return false;
-    }
-    return true;
+  if (fileChanged) {
+    QMessageBox::StandardButton ret;
+    ret = QMessageBox::warning(this, tr("companion9x"),
+        tr("%1 has been modified.\n"
+           "Do you want to save your changes?").arg(userFriendlyCurrentFile()),
+        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+
+    if (ret == QMessageBox::Save)
+      return save();
+    else if (ret == QMessageBox::Cancel)
+      return false;
+  }
+  return true;
 }
 
 void MdiChild::setCurrentFile(const QString &fileName)
 {
-    curFile = QFileInfo(fileName).canonicalFilePath();
-    isUntitled = false;
-    fileChanged = false;
-    setWindowModified(false);
-    setWindowTitle(userFriendlyCurrentFile() + "[*]");
+  curFile = QFileInfo(fileName).canonicalFilePath();
+  isUntitled = false;
+  fileChanged = false;
+  setWindowModified(false);
+  setWindowTitle(userFriendlyCurrentFile() + "[*]");
 }
 
 QString MdiChild::strippedName(const QString &fullFileName)
 {
-    return QFileInfo(fullFileName).fileName();
+  return QFileInfo(fullFileName).fileName();
 }
 
 int MdiChild::getFileType(const QString &fullFileName)
 {
-    if(QFileInfo(fullFileName).suffix().toUpper()=="HEX")  return FILE_TYPE_HEX;
-    if(QFileInfo(fullFileName).suffix().toUpper()=="BIN")  return FILE_TYPE_BIN;
-    if(QFileInfo(fullFileName).suffix().toUpper()=="EEPM") return FILE_TYPE_EEPM;
-    if(QFileInfo(fullFileName).suffix().toUpper()=="EEPE") return FILE_TYPE_EEPE;
-    if(QFileInfo(fullFileName).suffix().toUpper()=="XML") return FILE_TYPE_XML;
-    return 0;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="HEX")  return FILE_TYPE_HEX;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="BIN")  return FILE_TYPE_BIN;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPM") return FILE_TYPE_EEPM;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPE") return FILE_TYPE_EEPE;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="XML") return FILE_TYPE_XML;
+  return 0;
 }
 
 void MdiChild::burnTo()  // write to Tx
@@ -769,63 +450,24 @@ void MdiChild::burnTo()  // write to Tx
     }
 }
 
-void MdiChild::ShowContextMenu(const QPoint& pos)
-{
-    QPoint globalPos = this->mapToGlobal(pos);
-
-    const QClipboard *clipboard = QApplication::clipboard();
-    const QMimeData *mimeData = clipboard->mimeData();
-    bool hasData = mimeData->hasFormat("application/x-companion9x");
-
-    QMenu contextMenu;
-    contextMenu.addAction(QIcon(":/images/edit.png"), tr("&Edit"),this,SLOT(OpenEditWindow()));
-    contextMenu.addSeparator();
-    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(deleteSelected(bool)),tr("Delete"));
-    contextMenu.addAction(QIcon(":/images/copy.png"), tr("&Copy"),this,SLOT(copy()),tr("Ctrl+C"));
-    contextMenu.addAction(QIcon(":/images/cut.png"), tr("&Cut"),this,SLOT(cut()),tr("Ctrl+X"));
-    contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(paste()),tr("Ctrl+V"))->setEnabled(hasData);
-    contextMenu.addAction(QIcon(":/images/duplicate.png"), tr("D&uplicate"),this,SLOT(duplicate()),tr("Ctrl+U"));
-    contextMenu.addSeparator();
-    contextMenu.addAction(QIcon(":/images/simulate.png"), tr("&Simulate"),this,SLOT(simulate()),tr("Alt+S"));
-    contextMenu.addSeparator();
-    contextMenu.addAction(QIcon(":/images/write_eeprom.png"), tr("&Write To Tx"),this,SLOT(burnTo()),tr("Ctrl+Alt+W"));
-
-    contextMenu.exec(globalPos);
-}
-
-void MdiChild::setModified()
-{
-    refreshList();
-    fileChanged = true;
-    documentWasModified();
-}
-
 void MdiChild::simulate()
 {
-    if(currentRow()<1) return;
+    if(ui->modelsList->currentRow()<1) return;
     simulatorDialog *sd = new simulatorDialog(this);
-    sd->loadParams(radioData.generalSettings, radioData.models[currentRow()-1]);
+    sd->loadParams(radioData, ui->modelsList->currentRow()-1);
     sd->show();
 }
 
 void MdiChild::print()
 {
-    if(currentRow()<1) return;
-    printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[currentRow()-1]);
+    if(ui->modelsList->currentRow()<1) return;
+    printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
     pd->show();
 }
 
-
-void MdiChild::viableModelSelected(int idx)
+void MdiChild::viableModelSelected(bool viable)
 {
-    if(!isVisible())
-        emit copyAvailable(false);
-    else if(idx<1)
-        emit copyAvailable(false);
-    else
-        emit copyAvailable(!radioData.models[currentRow()-1].isempty());
+  emit copyAvailable(viable);
 }
-
-
 
 

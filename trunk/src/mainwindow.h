@@ -68,8 +68,8 @@ protected:
 
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
-    void reply2Finished(QNetworkReply * reply); // TODO rename
-    void reply2Accepted();
+    void checkForUpdateFinished(QNetworkReply * reply);
+    void updateDownloaded();
 
     void newFile();
     void open();
@@ -115,11 +115,8 @@ private:
     QString installer_fileName;
     downloadDialog * downloadDialog_forWait;
 
-    int currentCompanion9xRev;
     bool checkCompanion9x;
     bool showcheckForUpdatesResult;
-    bool check1done;
-    bool check2done;
 
     QNetworkAccessManager *manager1;
     QNetworkAccessManager *manager2;

@@ -2726,7 +2726,7 @@ void ModelEdit::launchSimulation()
     ModelData gm(g_model);
 
     simulatorDialog *sd = new simulatorDialog(this);
-    sd->loadParams(gg, gm);
+    sd->loadParams(radioData, id_model);
     sd->show();
 }
 

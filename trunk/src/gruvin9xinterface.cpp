@@ -209,6 +209,140 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return 12;
     case ExtendedTrims:
       return 500;
+    case Simulation:
+      return true;
   }
 }
 
+namespace Gruvin9x {
+
+void StartEepromThread(const char *filename);
+void StartMainThread();
+void StopEepromThread();
+void StopMainThread();
+
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+
+#define INP_E_ID2     6
+#define OUT_E_BUZZER  3
+#define INP_E_AileDR  1
+#define INP_E_ThrCt   0
+#define INP_E_ElevDR  2
+#define INP_E_Trainer 5
+#define INP_E_Gear    4
+#define INP_C_ThrCt   6
+#define INP_C_AileDR  7
+#define INP_G_ID1      3
+#define INP_G_RF_POW   1
+#define INP_G_RuddDR   0
+
+#define INP_P_KEY_EXT   5
+#define INP_P_KEY_MEN   4
+#define INP_P_KEY_LFT   3
+#define INP_P_KEY_RGT   2
+#define INP_P_KEY_UP    1
+#define INP_P_KEY_DWN   0
+
+#define INP_B_KEY_LFT 6
+#define INP_B_KEY_RGT 5
+#define INP_B_KEY_UP  4
+#define INP_B_KEY_DWN 3
+#define INP_B_KEY_EXT 2
+#define INP_B_KEY_MEN 1
+
+extern uint8_t eeprom[2048]; // TODO size 4096
+extern int16_t g_anas[NUM_STICKS+NUM_POTS];
+extern int16_t g_chans512[NUM_CHNOUT];
+
+extern uint8_t lcd_buf[128*64/8];
+extern bool lcd_refresh;
+
+extern void per10ms();
+extern bool getSwitch(int8_t swtch, bool nc=0);
+
+}
+
+void Gruvin9xInterface::timer10ms()
+{
+  Gruvin9x::per10ms();
+}
+
+uint8_t * Gruvin9xInterface::getLcd()
+{
+  return Gruvin9x::lcd_buf;
+}
+
+bool Gruvin9xInterface::lcdChanged()
+{
+  if (Gruvin9x::lcd_refresh) {
+    Gruvin9x::lcd_refresh = false;
+    return true;
+  }
+
+  return false;
+}
+
+void Gruvin9xInterface::startSimulation(RadioData &radioData)
+{
+  save(&Gruvin9x::eeprom[0], radioData);
+
+  Gruvin9x::StartEepromThread(NULL);
+  Gruvin9x::StartMainThread();
+}
+
+void Gruvin9xInterface::stopSimulation()
+{
+  Gruvin9x::StopEepromThread();
+  Gruvin9x::StopMainThread();
+}
+
+void Gruvin9xInterface::getValues(TxOutputs &outputs)
+{
+  memcpy(outputs.chans, Gruvin9x::g_chans512, sizeof(outputs.chans));
+  for (int i=0; i<12; i++)
+    outputs.vsw[i] = Gruvin9x::getSwitch(DSW_SW1+i, 0);
+}
+
+void Gruvin9xInterface::setValues(TxInputs &inputs)
+{
+  Gruvin9x::g_anas[0] = inputs.rud;
+  Gruvin9x::g_anas[1] = inputs.ele;
+  Gruvin9x::g_anas[2] = inputs.thr;
+  Gruvin9x::g_anas[3] = inputs.ail;
+  Gruvin9x::g_anas[4] = inputs.pot1;
+  Gruvin9x::g_anas[5] = inputs.pot2;
+  Gruvin9x::g_anas[6] = inputs.pot3;
+
+  if (inputs.sRud) Gruvin9x::ping &= ~(1<<INP_G_RuddDR); else Gruvin9x::ping |= (1<<INP_G_RuddDR);
+  if (inputs.sEle) Gruvin9x::pine &= ~(1<<INP_E_ElevDR); else Gruvin9x::pine |= (1<<INP_E_ElevDR);
+  if (inputs.sThr) Gruvin9x::pine &= ~(1<<INP_E_ThrCt); else Gruvin9x::pine |= (1<<INP_E_ThrCt);
+  if (inputs.sAil) Gruvin9x::pine &= ~(1<<INP_E_AileDR); else Gruvin9x::pine |= (1<<INP_E_AileDR);
+  if (inputs.sGea) Gruvin9x::pine &= ~(1<<INP_E_Gear); else Gruvin9x::pine |= (1<<INP_E_Gear);
+  if (inputs.sTrn) Gruvin9x::pine &= ~(1<<INP_E_Trainer); else Gruvin9x::pine |= (1<<INP_E_Trainer);
+
+  switch (inputs.sId0) {
+    case 2:
+      Gruvin9x::ping &= ~(1<<INP_G_ID1);
+      Gruvin9x::pine |= (1<<INP_E_ID2);
+      break;
+    case 1:
+      Gruvin9x::ping &= ~(1<<INP_G_ID1);
+      Gruvin9x::pine &= ~(1<<INP_E_ID2);
+      break;
+    case 0:
+      Gruvin9x::ping |=  (1<<INP_G_ID1);
+      Gruvin9x::pine &= ~(1<<INP_E_ID2);
+      break;
+  }
+
+  // keyboad
+  Gruvin9x::pinb &= ~ 0x7e;
+  Gruvin9x::pinl &= ~ 0x3f; // for v4
+
+  if (inputs.menu) { Gruvin9x::pinb |= (1<<INP_B_KEY_MEN); Gruvin9x::pinl |= (1<<INP_P_KEY_MEN); }
+  if (inputs.exit) { Gruvin9x::pinb |= (1<<INP_B_KEY_EXT); Gruvin9x::pinl |= (1<<INP_P_KEY_EXT); }
+  if (inputs.up) { Gruvin9x::pinb |= (1<<INP_B_KEY_UP); Gruvin9x::pinl |= (1<<INP_P_KEY_UP); }
+  if (inputs.down) { Gruvin9x::pinb |= (1<<INP_B_KEY_DWN); Gruvin9x::pinl |= (1<<INP_P_KEY_DWN); }
+  if (inputs.left) { Gruvin9x::pinb |= (1<<INP_B_KEY_LFT); Gruvin9x::pinl |= (1<<INP_P_KEY_LFT); }
+  if (inputs.right) { Gruvin9x::pinb |= (1<<INP_B_KEY_RGT); Gruvin9x::pinl |= (1<<INP_P_KEY_RGT); }
+}
