@@ -52,9 +52,8 @@
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
-// TODO
-#define EEPE_URL   "http://companion9x.googlecode.com/svn/trunk/companion9xInstall.exe"
-#define EEPE_STAMP "http://companion9x.googlecode.com/svn/trunk/src/stamp-companion9x.h"
+#define C9X_URL   "http://companion9x.googlecode.com/files/companion9xInstall_v%1.exe"
+#define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/src/companion9x.stamp"
 
 MainWindow::MainWindow()
 {
@@ -114,16 +113,13 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
 {
     showcheckForUpdatesResult = ignoreSettings;
 
-    check2done = true; // TODO rename!
-
     QNetworkProxyFactory::setUseSystemConfiguration(true);
-/* TODO
-    if(checkCompanion9x || ignoreSettings)
+
+    if (checkCompanion9x || ignoreSettings)
     {
         manager2 = new QNetworkAccessManager(this);
-        connect(manager2, SIGNAL(finished(QNetworkReply*)),this, SLOT(reply2Finished(QNetworkReply*)));
-        manager2->get(QNetworkRequest(QUrl(EEPE_STAMP)));
-        check2done = false;
+        connect(manager2, SIGNAL(finished(QNetworkReply*)),this, SLOT(checkForUpdateFinished(QNetworkReply*)));
+        manager2->get(QNetworkRequest(QUrl(C9X_STAMP)));
     }
 
     if(downloadDialog_forWait!=0)
@@ -134,64 +130,55 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         downloadDialog_forWait = new downloadDialog(this, tr("Checking for updates"));
         downloadDialog_forWait->show();
     }
-    */
 }
 
-void MainWindow::reply2Finished(QNetworkReply * reply)
+void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
 {
-    check2done = true;
-    if(check1done && check2done && downloadDialog_forWait)
+    if(downloadDialog_forWait)
         downloadDialog_forWait->close();
 
     QByteArray qba = reply->readAll();
-    int i = qba.indexOf("SVN_VERS");
+    int i = qba.indexOf("C9X_VERSION");
 
-    if(i>0)
-    {
-        bool cres;
-        int rev = QString::fromAscii(qba.mid(i+17,3)).toInt(&cres);
+    if (i>0) {
+        QString version = qba.mid(i+14, 4);
 
-        if(!cres)
-        {
+        if (version.isNull()) {
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
             return;
         }
 
-        if(rev>currentCompanion9xRev)
-        {
+        if (version != C9X_VERSION) {
             showcheckForUpdatesResult = false; // update is available - do not show dialog
-            int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (r%1)<br>"
-                                                                "Would you like to download it?").arg(rev) ,
+            int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (version %1)<br>"
+                                                                "Would you like to download it?").arg(version) ,
                                             QMessageBox::Yes | QMessageBox::No);
 
-            QSettings settings("companion9x", "companion9x");
+            QSettings settings("companion9x", "companion9x");http://companion9x.googlecode.com/files/companion9xInstall_v0.13.exe
 
-            if (ret == QMessageBox::Yes)
-            {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/companion9xInstall.exe",tr("Executable (*.exe)"));
+            if (ret == QMessageBox::Yes) {
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + QString("/companion9xInstall_v%1.exe").arg(C9X_VERSION), tr("Executable (*.exe)"));
                 if (fileName.isEmpty()) return;
 //                settings.setValue("lastDir",QFileInfo(fileName)s.dir().absolutePath());
 
-                downloadDialog * dd = new downloadDialog(this,EEPE_URL,fileName);
+                downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(C9X_VERSION), fileName);
                 installer_fileName = fileName;
-                connect(dd,SIGNAL(accepted()),this,SLOT(reply2Accepted()));
+                connect(dd, SIGNAL(accepted()), this, SLOT(updateDownloaded()));
                 dd->show();
             }
         }
         else
         {
-            if(showcheckForUpdatesResult && check1done && check2done)
+            if (showcheckForUpdatesResult)
                 QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
         }
     }
-    else
-    {
-        if(check1done && check2done)
-            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
+    else {
+      QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
     }
 }
 
-void MainWindow::reply2Accepted()
+void MainWindow::updateDownloaded()
 {
     int ret = QMessageBox::question(this, "companion9x", tr("Would you like to launch the installer?") ,
                                      QMessageBox::Yes | QMessageBox::No);
@@ -261,6 +248,11 @@ void MainWindow::preferences()
 {
     preferencesDialog *pd = new preferencesDialog(this);
     pd->exec();
+
+    foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
+      MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+      mdiChild->eepromInterfaceChanged();
+    }
 }
 
 void MainWindow::cut()
@@ -351,7 +343,6 @@ void MainWindow::burnFrom()
         MdiChild *child = createMdiChild();
         child->newFile();
         child->loadFile(tempFile,false);
-        child->setModified();
         child->show();
         if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
     }
@@ -469,7 +460,7 @@ void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
     aboutStr.append(tr("Copyright") +" Bertrand Songis &copy; 2011<br>");
-    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Version %1 (revision %2), %3<br/><br/>").arg(C9X_VERSION).arg(currentCompanion9xRev).arg(__DATE__));
+    aboutStr.append(QString("<a href='http://code.google.com/p/companion9x/'>http://code.google.com/p/companion9x/</a><br>Version %1 (revision %2), %3<br/><br/>").arg(C9X_VERSION).arg(C9X_REVISION).arg(__DATE__));
     aboutStr.append(QString("The companion9x project was originally forked from eePe <a href='http://code.google.com/p/eepe'>http://code.google.com/p/eepe</a><br/><br/>"));
     aboutStr.append(tr("If you've found this program useful, please support by"));
     aboutStr.append(" <a href='" DONATE_STR "'>");
@@ -788,8 +779,6 @@ void MainWindow::readSettings()
     bool maximized = settings.value("maximized", false).toBool();
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     QSize size = settings.value("size", QSize(400, 400)).toSize();
-
-    currentCompanion9xRev = C9X_REVISION;
 
     checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
 

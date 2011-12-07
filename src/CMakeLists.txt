@@ -30,6 +30,18 @@ ADD_CUSTOM_COMMAND(
   DEPENDS ${PROJECT_SOURCE_DIR}/radio.xsd
 )
 
+ADD_CUSTOM_COMMAND(
+  COMMAND make stamp
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x
+  OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
+)
+
+ADD_CUSTOM_COMMAND(
+  COMMAND make stamp
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../open9x
+  OUTPUT ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
+)
+
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
 FIND_PACKAGE( Subversion )
@@ -46,20 +58,25 @@ SET( companion9x_SRCS
      file.cpp
      xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx
+     ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
+     ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
      # th9xeeprom.cpp
      # th9xinterface.cpp
      er9xeeprom.cpp
      er9xinterface.cpp
      gruvin9xeeprom.cpp
      gruvin9xinterface.cpp  
+     gruvin9xsimulator.cpp  
      open9xeeprom.cpp
-     open9xinterface.cpp  
+     open9xinterface.cpp
+     open9xsimulator.cpp  
      node.cpp
      edge.cpp
      helpers.cpp 
      mdichild.cpp
      generaledit.cpp
      modeledit.cpp 
+     modelslist.cpp
      mixerslist.cpp 
      avroutputdialog.cpp
      preferencesdialog.cpp
@@ -86,12 +103,14 @@ SET( companion9x_MOC_HDRS
      simulatordialog.h
      generaledit.h
      modeledit.h
+     modelslist.h
      mixerslist.h
      mdichild.h
      mainwindow.h
 )
      
 SET( companion9x_UIS
+     mdichild.ui
      avroutputdialog.ui
      fusesdialog.ui
      expodialog.ui
@@ -123,13 +142,16 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_B
 
 IF( WIN32 )
   SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
-  SET(LINK_FLAGS -Wl,-subsystem,windows)
+  # SET(LINK_FLAGS -Wl,-subsystem,windows -mno-cygwin -mwindows)
+  SET(CMAKE_EXE_LINKER_FLAGS -mno-cygwin -mwindows)
+  SET(CMAKE_CXX_FLAGS -mno-cygwin)
 ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
 SET( QT_USE_QTNETWORK True )
 INCLUDE( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
+INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} )
 
 QT4_WRAP_UI( companion9x_SRCS ${companion9x_UIS} )
 QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
@@ -160,6 +182,7 @@ ENDIF( )
 
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} xerces-c )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} pthread )
 
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 

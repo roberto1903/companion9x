@@ -477,6 +477,35 @@ enum Capability {
  Timers,
  FuncSwitches,
  ExtendedTrims,
+ Simulation,
+};
+
+struct TxInputs {
+    int16_t rud;
+    int16_t ele;
+    int16_t thr;
+    int16_t ail;
+    int16_t pot1;
+    int16_t pot2;
+    int16_t pot3;
+    bool sRud;
+    bool sEle;
+    bool sThr;
+    bool sAil;
+    bool sGea;
+    bool sTrn;
+    uint8_t sId0;
+    bool menu;
+    bool exit;
+    bool up;
+    bool down;
+    bool left;
+    bool right;
+};
+
+struct TxOutputs {
+  int16_t chans[NUM_CHNOUT];
+  bool vsw[12];
 };
 
 class EEPROMInterface
@@ -492,6 +521,20 @@ class EEPROMInterface
     virtual int getSize(ModelData &) = 0;
 
     virtual int getCapability(const Capability) = 0;
+
+    virtual void startSimulation(RadioData &radioData) { }
+
+    virtual void stopSimulation() { }
+
+    virtual void timer10ms() { }
+
+    virtual uint8_t * getLcd() { return NULL; }
+
+    virtual bool lcdChanged() { }
+
+    virtual void setValues(TxInputs &inputs) { }
+
+    virtual void getValues(TxOutputs &outputs) { }
 
 };
 

@@ -39,92 +39,67 @@
 **
 ****************************************************************************/
 
-#ifndef MDICHILD_H
-#define MDICHILD_H
+#ifndef MODELSLIST_H
+#define MODELSLIST_H
 
-#define FILE_TYPE_BIN  1
-#define FILE_TYPE_HEX  2
-#define FILE_TYPE_EEPE 3
-#define FILE_TYPE_EEPM 4
-#define FILE_TYPE_XML  5
-
-#include <QtGui>
 #include "eeprominterface.h"
+#include <QListWidget>
 
-namespace Ui {
-class mdiChild;
-}
-
-#define EEPE_EEPROM_FILE_HEADER  "EEPE EEPROM FILE"
-#define EEPE_MODEL_FILE_HEADER   "EEPE MODEL FILE"
-
-#define XML_FILES_FILTER     "XML files (*.xml);;"
-#define HEX_FILES_FILTER     "HEX files (*.hex);;"
-#define BIN_FILES_FILTER     "BIN files (*.bin);;"
-#define EEPE_FILES_FILTER    "EEPE EEPROM files (*.eepe);;"
-#define EEPM_FILES_FILTER    "EEPE MODEL files (*.eepm);;"
-#define EEPROM_FILES_FILTER  "EEPE files (*.xml *.eepe *.eepm *.bin *.hex);;" XML_FILES_FILTER EEPE_FILES_FILTER EEPM_FILES_FILTER BIN_FILES_FILTER HEX_FILES_FILTER
-#define FLASH_FILES_FILTER   "FLASH files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
-#define EXTERNAL_EEPROM_FILES_FILTER   "EEPROM files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
-
-class MdiChild : public QWidget
+struct CurrentSelection
 {
-    friend class ModelsListWidget;
+  QListWidgetItem *current_item;
+  bool selected[MAX_MODELS+1];
+};
 
+class ModelsListWidget : public QListWidget
+{
     Q_OBJECT
 
 public:
-    MdiChild();
+    ModelsListWidget(QWidget *parent = 0);
 
-    void newFile();
-    bool loadFile(const QString &fileName, bool resetCurrentFile=true);
-    bool save();
-    bool saveAs();
-    bool saveFile(const QString &fileName, bool setCurrent=true);
     bool hasSelection();
-    QString userFriendlyCurrentFile();
-    QString currentFile() { return curFile; }
-    // void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event);
     bool hasPasteData();
-    static int getFileType(const QString &fullFileName);
-    void viableModelSelected(bool viable);
-    void eepromInterfaceChanged();
-
-signals:
-    void copyAvailable(bool val);
 
 protected:
-    void closeEvent(QCloseEvent *event);
-
-private slots:
-    void documentWasModified();
-    void on_SimulateTxButton_clicked();
+    void dropEvent(QDropEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+#ifndef WIN32
+    void focusInEvent ( QFocusEvent * event );
+    void focusOutEvent ( QFocusEvent * event );
+#endif
 
 public slots:
-    void OpenEditWindow();
-
+    void refreshList();
+    void ShowContextMenu(const QPoint& pos);
     void cut();
     void copy();
     void paste();
-    void burnTo();
+    void OpenEditWindow();
     void simulate();
-    void print();
-    void setModified();
+    void duplicate();
+    void deleteSelected(bool ask);
+    void viableModelSelected(int idx);
 
 private:
-    bool maybeSave();
-    void setCurrentFile(const QString &fileName);
-    QString strippedName(const QString &fullFileName);
+    void doCut(QByteArray *gmData);
+    void doPaste(QByteArray *gmData, int index);
+    void doCopy(QByteArray *gmData);
     void saveSelection();
     void restoreSelection();
 
-    Ui::mdiChild *ui;
+    RadioData *radioData;
 
-    QString curFile;
-    RadioData radioData;
+    QPoint dragStartPosition;
 
-    bool isUntitled;
-    bool fileChanged;
+    CurrentSelection currentSelection;
+    QColor active_highlight_color;
+
 };
 
 #endif

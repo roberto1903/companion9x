@@ -36,6 +36,20 @@ class Open9xInterface : public EEPROMInterface
 
     virtual int getCapability(const Capability);
 
+    virtual void startSimulation(RadioData &radioData);
+
+    virtual void stopSimulation();
+
+    virtual void timer10ms();
+
+    virtual uint8_t * getLcd();
+
+    bool lcdChanged();
+
+    void setValues(TxInputs &inputs);
+
+    void getValues(TxOutputs &outputs);
+
   protected:
 
     template <class T>
