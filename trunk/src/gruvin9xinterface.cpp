@@ -221,7 +221,7 @@ int Gruvin9xInterface::getCapability(const Capability capability)
 namespace Gruvin9x {
 
 void StartEepromThread(const char *filename);
-void StartMainThread();
+void StartMainThread(bool tests);
 void StopEepromThread();
 void StopMainThread();
 
@@ -264,6 +264,12 @@ extern bool lcd_refresh;
 extern void per10ms();
 extern bool getSwitch(int8_t swtch, bool nc=0);
 
+extern uint8_t getTrimFlightPhase(uint8_t idx, uint8_t phase);
+extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
+extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
+extern uint8_t getFlightPhase();
+extern bool hasExtendedTrims();
+
 }
 
 void Gruvin9xInterface::timer10ms()
@@ -286,17 +292,17 @@ bool Gruvin9xInterface::lcdChanged()
   return false;
 }
 
-void Gruvin9xInterface::startSimulation(RadioData &radioData)
+void Gruvin9xInterface::startSimulation(RadioData &radioData, bool tests)
 {
   save(&Gruvin9x::eeprom[0], radioData);
   Gruvin9x::StartEepromThread(NULL);
-  Gruvin9x::StartMainThread();
+  Gruvin9x::StartMainThread(tests);
 }
 
 void Gruvin9xInterface::stopSimulation()
 {
-  Gruvin9x::StopEepromThread();
   Gruvin9x::StopMainThread();
+  Gruvin9x::StopEepromThread();
 }
 
 void Gruvin9xInterface::getValues(TxOutputs &outputs)
@@ -348,4 +354,19 @@ void Gruvin9xInterface::setValues(TxInputs &inputs)
   if (inputs.down) { Gruvin9x::pinb |= (1<<INP_B_KEY_DWN); Gruvin9x::pinl |= (1<<INP_P_KEY_DWN); }
   if (inputs.left) { Gruvin9x::pinb |= (1<<INP_B_KEY_LFT); Gruvin9x::pinl |= (1<<INP_P_KEY_LFT); }
   if (inputs.right) { Gruvin9x::pinb |= (1<<INP_B_KEY_RGT); Gruvin9x::pinl |= (1<<INP_P_KEY_RGT); }
+}
+
+void Gruvin9xInterface::setTrim(unsigned int idx, int value)
+{
+  uint8_t phase = Gruvin9x::getTrimFlightPhase(idx, Gruvin9x::getFlightPhase());
+  Gruvin9x::setTrimValue(phase, idx, value);
+}
+
+void Gruvin9xInterface::getTrims(Trims & trims)
+{
+  uint8_t phase = Gruvin9x::getFlightPhase();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.extended = Gruvin9x::hasExtendedTrims();
+    trims.values[idx] = Gruvin9x::getTrimValue(Gruvin9x::getTrimFlightPhase(idx, phase), idx);
+  }
 }
