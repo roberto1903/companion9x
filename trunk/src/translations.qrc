@@ -1,9 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-    <qresource prefix="/">
-        <file>companion9x_fr.qm</file>
-        <file>companion9x_de.qm</file>
-        <file>companion9x_he.qm</file>
-        <file>companion9x_pt.qm</file>
-        <file>companion9x_ru.qm</file>
-    </qresource>
-</RCC>
