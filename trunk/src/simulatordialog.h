@@ -36,7 +36,6 @@ private:
     QString windowName;
 
     qint16  g_ppmIns[8];
-    qint16  trim[4];
 
     quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
@@ -54,8 +53,7 @@ private:
 
     EEPROMInterface *txInterface;
     RadioData g_radioData;
-    ModelData * g_model;
-    GeneralSettings * g_eeGeneral;
+    int g_modelIdx;
     
     void setupSticks();
     void setupTimer();
@@ -72,6 +70,7 @@ private:
     void beepWarn();
     void beepWarn1();
     void beepWarn2();
+    void setTrims();
 
     int beepVal;
     int beepShow;
@@ -88,6 +87,10 @@ private slots:
     void on_holdRightX_clicked(bool checked);
     void on_holdLeftY_clicked(bool checked);
     void on_holdLeftX_clicked(bool checked);
+    void on_trimHLeft_valueChanged(int);
+    void on_trimVLeft_valueChanged(int);
+    void on_trimHRight_valueChanged(int);
+    void on_trimVRight_valueChanged(int);
     void onTimerEvent();
 };
 

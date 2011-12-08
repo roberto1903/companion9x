@@ -235,8 +235,9 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim
     if (trimUse) trimUse->setCurrentIndex(0);
   }
   int trimsMax = GetEepromInterface()->getCapability(ExtendedTrims);
-  if (trimsMax == 0)
+  if (trimsMax == 0 || !g_model.extendedTrims) {
     trimsMax = 125;
+  }
   /*else if (trimsMax == 500)
     trimSlider->setTickInterval(50);*/
   trimSlider->setRange(-trimsMax, +trimsMax);
@@ -2722,12 +2723,9 @@ void ModelEdit::moveExpoDown()
 
 void ModelEdit::launchSimulation()
 {
-    GeneralSettings gg(g_eeGeneral);
-    ModelData gm(g_model);
-
-    simulatorDialog *sd = new simulatorDialog(this);
-    sd->loadParams(radioData, id_model);
-    sd->show();
+  simulatorDialog sd(this);
+  sd.loadParams(radioData, id_model);
+  sd.exec();
 }
 
 void ModelEdit::on_pushButton_clicked()
@@ -2870,6 +2868,13 @@ void ModelEdit::on_extendedLimitsChkB_toggled(bool checked)
 {
     g_model.extendedLimits = checked;
     setLimitMinMax();
+    updateSettings();
+}
+
+void ModelEdit::on_extendedTrimsChkB_toggled(bool checked)
+{
+    g_model.extendedTrims = checked;
+    tabPhases();
     updateSettings();
 }
 

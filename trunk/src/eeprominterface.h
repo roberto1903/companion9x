@@ -508,9 +508,19 @@ struct TxOutputs {
   bool vsw[12];
 };
 
+struct Trims {
+  int16_t values[4];
+  bool extended;
+};
+
 class EEPROMInterface
 {
   public:
+
+    EEPROMInterface():
+      name(NULL)
+    {
+    }
 
     virtual ~EEPROMInterface() {}
 
@@ -522,7 +532,7 @@ class EEPROMInterface
 
     virtual int getCapability(const Capability) = 0;
 
-    virtual void startSimulation(RadioData &radioData) { }
+    virtual void startSimulation(RadioData &radioData, bool tests) { }
 
     virtual void stopSimulation() { }
 
@@ -536,6 +546,11 @@ class EEPROMInterface
 
     virtual void getValues(TxOutputs &outputs) { }
 
+    virtual void setTrim(unsigned int idx, int value) { /*TODO*/};
+
+    virtual void getTrims(Trims & trims) { /*TODO*/};
+
+    const char * name;
 };
 
 /* EEPROM string conversion functions */

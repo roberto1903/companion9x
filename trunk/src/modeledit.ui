@@ -608,7 +608,7 @@
              <item>
               <layout class="QGridLayout" name="gridLayout_12c">
                <item row="0" column="0">
-                <widget class="QSlider" name="phase0Trim1Slider">
+                <widget class="QSlider" name="phase0Trim2Slider">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -653,7 +653,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QSlider" name="phase0Trim2Slider">
+                <widget class="QSlider" name="phase0Trim1Slider">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -798,8 +798,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>292</height>
+              <width>796</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -871,7 +871,7 @@
              <item>
               <layout class="QGridLayout" name="gridLayout_12d">
                <item row="0" column="0">
-                <widget class="QSlider" name="phase1Trim1Slider">
+                <widget class="QSlider" name="phase1Trim2Slider">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -916,7 +916,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QSlider" name="phase1Trim2Slider">
+                <widget class="QSlider" name="phase1Trim1Slider">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -1201,8 +1201,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>796</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1274,7 +1274,7 @@
              <item>
               <layout class="QGridLayout" name="gridLayout_12e">
                <item row="0" column="0">
-                <widget class="QSlider" name="phase2Trim1Slider">
+                <widget class="QSlider" name="phase2Trim2Slider">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -1319,7 +1319,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QSlider" name="phase2Trim2Slider">
+                <widget class="QSlider" name="phase2Trim1Slider">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -1572,8 +1572,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>796</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1645,7 +1645,7 @@
              <item>
               <layout class="QGridLayout" name="gridLayout_12a">
                <item row="0" column="0">
-                <widget class="QSlider" name="phase3Trim1Slider">
+                <widget class="QSlider" name="phase3Trim2Slider">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -1690,7 +1690,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QSlider" name="phase3Trim2Slider">
+                <widget class="QSlider" name="phase3Trim1Slider">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2016,7 +2016,7 @@
              <item>
               <layout class="QGridLayout" name="gridLayout_12b">
                <item row="0" column="0">
-                <widget class="QSlider" name="phase4Trim1Slider">
+                <widget class="QSlider" name="phase4Trim2Slider">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -2061,7 +2061,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QSlider" name="phase4Trim2Slider">
+                <widget class="QSlider" name="phase4Trim1Slider">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -9723,7 +9723,7 @@
   <connection>
    <sender>phase3Trim1Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase3Trim1Slider</receiver>
+   <receiver>phase3Trim2Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9755,7 +9755,7 @@
   <connection>
    <sender>phase4Trim1Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase4Trim1Slider</receiver>
+   <receiver>phase4Trim2Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9771,7 +9771,7 @@
   <connection>
    <sender>phase0Trim2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase0Trim2Slider</receiver>
+   <receiver>phase0Trim1Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9785,7 +9785,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase4Trim2Slider</sender>
+   <sender>phase4Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase4Trim2Value</receiver>
    <slot>setValue(int)</slot>
@@ -9803,7 +9803,7 @@
   <connection>
    <sender>phase0Trim1</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase0Trim1Slider</receiver>
+   <receiver>phase0Trim2Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9817,7 +9817,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase3Trim1Slider</sender>
+   <sender>phase3Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase3Trim1Value</receiver>
    <slot>setValue(int)</slot>
@@ -9851,7 +9851,7 @@
   <connection>
    <sender>phase2Trim1Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase2Trim1Slider</receiver>
+   <receiver>phase2Trim2Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9929,7 +9929,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase0Trim1Slider</sender>
+   <sender>phase0Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase0Trim1</receiver>
    <slot>setValue(int)</slot>
@@ -9947,7 +9947,7 @@
   <connection>
    <sender>phase4Trim2Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase4Trim2Slider</receiver>
+   <receiver>phase4Trim1Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9977,7 +9977,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase1Trim2Slider</sender>
+   <sender>phase1Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase1Trim2Value</receiver>
    <slot>setValue(int)</slot>
@@ -9993,7 +9993,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase1Trim1Slider</sender>
+   <sender>phase1Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase1Trim1Value</receiver>
    <slot>setValue(int)</slot>
@@ -10009,7 +10009,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase0Trim2Slider</sender>
+   <sender>phase0Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase0Trim2</receiver>
    <slot>setValue(int)</slot>
@@ -10075,7 +10075,7 @@
   <connection>
    <sender>phase1Trim1Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase1Trim1Slider</receiver>
+   <receiver>phase1Trim2Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10091,7 +10091,7 @@
   <connection>
    <sender>phase1Trim2Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase1Trim2Slider</receiver>
+   <receiver>phase1Trim1Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10105,7 +10105,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase2Trim1Slider</sender>
+   <sender>phase2Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase2Trim1Value</receiver>
    <slot>setValue(int)</slot>
@@ -10201,7 +10201,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase4Trim1Slider</sender>
+   <sender>phase4Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase4Trim1Value</receiver>
    <slot>setValue(int)</slot>
@@ -10219,7 +10219,7 @@
   <connection>
    <sender>phase3Trim2Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase3Trim2Slider</receiver>
+   <receiver>phase3Trim1Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10251,7 +10251,7 @@
   <connection>
    <sender>phase2Trim2Value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase2Trim2Slider</receiver>
+   <receiver>phase2Trim1Slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10281,7 +10281,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase3Trim2Slider</sender>
+   <sender>phase3Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase3Trim2Value</receiver>
    <slot>setValue(int)</slot>
@@ -10345,7 +10345,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase2Trim2Slider</sender>
+   <sender>phase2Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase2Trim2Value</receiver>
    <slot>setValue(int)</slot>

@@ -31,6 +31,7 @@
 Open9xInterface::Open9xInterface():
 efile(new EFile())
 {
+  name = "Open9x";
 }
 
 Open9xInterface::~Open9xInterface()
@@ -178,7 +179,7 @@ int Open9xInterface::getCapability(const Capability capability)
 namespace Open9x {
 
 void StartEepromThread(const char *filename);
-void StartMainThread();
+void StartMainThread(bool tests);
 void StopEepromThread();
 void StopMainThread();
 
@@ -221,6 +222,12 @@ extern bool lcd_refresh;
 extern void per10ms();
 extern bool getSwitch(int8_t swtch, bool nc=0);
 
+extern uint8_t getTrimFlightPhase(uint8_t idx, uint8_t phase);
+extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
+extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
+extern uint8_t getFlightPhase();
+extern bool hasExtendedTrims();
+
 }
 
 void Open9xInterface::timer10ms()
@@ -243,18 +250,17 @@ bool Open9xInterface::lcdChanged()
   return false;
 }
 
-void Open9xInterface::startSimulation(RadioData &radioData)
+void Open9xInterface::startSimulation(RadioData &radioData, bool tests)
 {
   save(&Open9x::eeprom[0], radioData);
-
   Open9x::StartEepromThread(NULL);
-  Open9x::StartMainThread();
+  Open9x::StartMainThread(tests);
 }
 
 void Open9xInterface::stopSimulation()
 {
-  Open9x::StopEepromThread();
   Open9x::StopMainThread();
+  Open9x::StopEepromThread();
 }
 
 void Open9xInterface::getValues(TxOutputs &outputs)
@@ -306,4 +312,19 @@ void Open9xInterface::setValues(TxInputs &inputs)
   if (inputs.down) { Open9x::pinb |= (1<<INP_B_KEY_DWN); Open9x::pinl |= (1<<INP_P_KEY_DWN); }
   if (inputs.left) { Open9x::pinb |= (1<<INP_B_KEY_LFT); Open9x::pinl |= (1<<INP_P_KEY_LFT); }
   if (inputs.right) { Open9x::pinb |= (1<<INP_B_KEY_RGT); Open9x::pinl |= (1<<INP_P_KEY_RGT); }
+}
+
+void Open9xInterface::setTrim(unsigned int idx, int value)
+{
+  uint8_t phase = Open9x::getTrimFlightPhase(idx, Open9x::getFlightPhase());
+  Open9x::setTrimValue(phase, idx, value);
+}
+
+void Open9xInterface::getTrims(Trims & trims)
+{
+  uint8_t phase = Open9x::getFlightPhase();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.extended = Open9x::hasExtendedTrims();
+    trims.values[idx] = Open9x::getTrimValue(Open9x::getTrimFlightPhase(idx, phase), idx);
+  }
 }
