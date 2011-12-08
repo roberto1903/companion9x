@@ -14,7 +14,8 @@
 simulatorDialog::simulatorDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::simulatorDialog),
-    txInterface(NULL)
+    txInterface(NULL),
+    g_modelIdx(-1)
 {
     ui->setupUi(this);
 
@@ -23,10 +24,6 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 
 // TODO    bpanaCenter = 0;
 
-    memset(&trim,0,sizeof(trim));
-
-   /* memset(&sDelay,0,sizeof(sDelay));
-    memset(&act,0,sizeof(act));*/
 
 // TODO    memset(&swOn,0,sizeof(swOn));
 
@@ -63,11 +60,12 @@ void simulatorDialog::onTimerEvent()
 
     getValues();
 
-    if (g_model) {
+    if (g_modelIdx >= 0) {
+      ModelData *model = & g_radioData.models[g_modelIdx];
       setWindowTitle(windowName + QString(" - Timer: (%3, %4) %1:%2") .arg(abs(
-          -s_timerVal) / 60, 2, 10, QChar('0')) .arg(abs(-s_timerVal) % 60, 2, 10,
-          QChar('0')) .arg(getTimerMode(g_model->timers[0].mode)) // TODO why timers[0]
-          .arg(g_model->timers[0].dir ? "Count Up" : "Count Down"));
+          -s_timerVal) / 60, 2, 10, QChar('0')).arg(abs(-s_timerVal) % 60, 2, 10,
+          QChar('0')) .arg(getTimerMode(model->timers[0].mode)) // TODO why timers[0]
+          .arg(model->timers[0].dir ? "Count Up" : "Count Down"));
     }
     else if (ui->tabWidget->currentIndex() == 0) {
       if (txInterface->lcdChanged())
@@ -75,6 +73,8 @@ void simulatorDialog::onTimerEvent()
     }
 
     setValues();
+
+    setTrims();
 
     centerSticks();
 
@@ -100,29 +100,27 @@ void simulatorDialog::centerSticks()
     if(ui->rightStick->scene()) nodeRight->stepToCenter();
 }
 
-#include "open9xinterface.h"
-
 void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
 {
+    g_modelIdx = model_idx;
+
     txInterface = GetEepromInterface();
 
     g_radioData = radioData;
-    g_eeGeneral = &radioData.generalSettings;
    
     if (model_idx < 0) {
-      g_model = NULL;
-      windowName = tr("Simulating Tx");
+      windowName = QString(tr("Simulating Tx (%1)").arg(txInterface->name));
       ui->lcd->setData(txInterface->getLcd());
     }
     else {
       ui->tabWidget->removeTab(0);
-      g_model = & radioData.models[model_idx];
-      windowName = tr("Simulating ") + g_model->name;
+      radioData.generalSettings.currModel = model_idx;
+      windowName = tr("Simulating ") + radioData.models[model_idx].name;
     }
 
     setWindowTitle(windowName);
 
-    if (g_eeGeneral->stickMode & 1)
+    if (radioData.generalSettings.stickMode & 1)
     {
         nodeLeft->setCenteringY(false);   //mode 1,3 -> THR on left
         ui->holdLeftY->setChecked(true);
@@ -133,18 +131,7 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
         ui->holdRightY->setChecked(true);
     }
 
-    if (g_model) {
-      ui->trimHLeft->setValue(g_model->phaseData[0].trim[0]);
-      ui->trimVLeft->setValue(g_model->phaseData[0].trim[1]);
-      ui->trimVRight->setValue(g_model->phaseData[0].trim[2]);
-      ui->trimHRight->setValue(g_model->phaseData[0].trim[3]);
-    }
-    else {
-      ui->trimHLeft->setEnabled(false);
-      ui->trimVLeft->setEnabled(false);
-      ui->trimVRight->setEnabled(false);
-      ui->trimHRight->setEnabled(false);
-    }
+    setTrims();
 
     beepVal = 0;
     beepShow = 0;
@@ -164,9 +151,25 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
     s_sum = 0;
     sw_toggled = 0;
 
-    txInterface->startSimulation(radioData);
+    txInterface->startSimulation(radioData, model_idx<0);
 
     setupTimer();
+}
+
+void simulatorDialog::setTrims()
+{
+  Trims trims;
+  txInterface->getTrims(trims);
+
+  int trimMin = -125, trimMax = +125;
+  if (trims.extended) {
+    trimMin = -500;
+    trimMax = +500;
+  }
+  ui->trimHLeft->setRange(trimMin, trimMax);  ui->trimHLeft->setValue(trims.values[0]);
+  ui->trimVLeft->setRange(trimMin, trimMax);  ui->trimVLeft->setValue(trims.values[1]);
+  ui->trimHRight->setRange(trimMin, trimMax); ui->trimVRight->setValue(trims.values[2]);
+  ui->trimHRight->setRange(trimMin, trimMax); ui->trimHRight->setValue(trims.values[3]);
 }
 
 void simulatorDialog::getValues()
@@ -193,7 +196,6 @@ void simulatorDialog::getValues()
                      ui->rightButton->isDown()
                     };
 
-
   txInterface->setValues(inputs);
 
    /* TODO trim[0] = ui->trimHLeft->value();
@@ -205,6 +207,26 @@ void simulatorDialog::getValues()
 inline int chVal(int val)
 {
   return qMin(1024, qMax(-1024, val));
+}
+
+void simulatorDialog::on_trimHLeft_valueChanged(int value)
+{
+  txInterface->setTrim(0, value);
+}
+
+void simulatorDialog::on_trimVLeft_valueChanged(int value)
+{
+  txInterface->setTrim(1, value);
+}
+
+void simulatorDialog::on_trimHRight_valueChanged(int value)
+{
+  txInterface->setTrim(3, value);
+}
+
+void simulatorDialog::on_trimVRight_valueChanged(int value)
+{
+  txInterface->setTrim(2, value);
 }
 
 void simulatorDialog::setValues()

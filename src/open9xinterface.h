@@ -36,7 +36,7 @@ class Open9xInterface : public EEPROMInterface
 
     virtual int getCapability(const Capability);
 
-    virtual void startSimulation(RadioData &radioData);
+    virtual void startSimulation(RadioData &radioData, bool tests);
 
     virtual void stopSimulation();
 
@@ -49,6 +49,10 @@ class Open9xInterface : public EEPROMInterface
     void setValues(TxInputs &inputs);
 
     void getValues(TxOutputs &outputs);
+
+    virtual void setTrim(unsigned int idx, int value);
+
+    virtual void getTrims(Trims & trims);
 
   protected:
 

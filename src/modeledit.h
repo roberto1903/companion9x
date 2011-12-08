@@ -123,6 +123,7 @@ private slots:
     void clearCurves(bool ask=true);
 
     void on_extendedLimitsChkB_toggled(bool checked);
+    void on_extendedTrimsChkB_toggled(bool checked);
     void on_resetCurve_1_clicked();
     void on_resetCurve_2_clicked();
     void on_resetCurve_3_clicked();

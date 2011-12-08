@@ -107,9 +107,9 @@ void MdiChild::setModified()
 
 void MdiChild::on_SimulateTxButton_clicked()
 {
-  simulatorDialog *sd = new simulatorDialog(this);
-  sd->loadParams(radioData);
-  sd->show();
+  simulatorDialog sd(this);
+  sd.loadParams(radioData);
+  sd.exec();
 }
 
 void MdiChild::OpenEditWindow()

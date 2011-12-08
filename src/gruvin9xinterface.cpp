@@ -32,6 +32,10 @@ Gruvin9xInterface::Gruvin9xInterface(int size):
 efile(new EFile()),
 size(size)
 {
+  if (size == 2048)
+    name = "Gruvin9x";
+  else
+    name = "Gruvin9x v4";
 }
 
 Gruvin9xInterface::~Gruvin9xInterface()
@@ -285,7 +289,6 @@ bool Gruvin9xInterface::lcdChanged()
 void Gruvin9xInterface::startSimulation(RadioData &radioData)
 {
   save(&Gruvin9x::eeprom[0], radioData);
-
   Gruvin9x::StartEepromThread(NULL);
   Gruvin9x::StartMainThread();
 }
