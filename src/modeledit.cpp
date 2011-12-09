@@ -786,7 +786,23 @@ void ModelEdit::tabCurves()
    for (int i=0; i<16;i++) {
      plot_curve[i]=FALSE;
    }
-
+   redrawCurve=true;
+   ui->curveEdit_1->setStyleSheet("background-color: #00007f; color: white;");
+   ui->curveEdit_2->setStyleSheet("background-color: #007f00; color: white;");
+   ui->curveEdit_3->setStyleSheet("background-color: #7f0000; color: white;");
+   ui->curveEdit_4->setStyleSheet("background-color: #007f7f; color: white;");
+   ui->curveEdit_5->setStyleSheet("background-color: #7f007f; color: white;");
+   ui->curveEdit_6->setStyleSheet("background-color: #7f7f00; color: white;");
+   ui->curveEdit_7->setStyleSheet("background-color: #7f7f7f; color: white;");
+   ui->curveEdit_8->setStyleSheet("background-color: #0000ff; color: white;");
+   ui->curveEdit_9->setStyleSheet("background-color: #007fff; color: white;");
+   ui->curveEdit_10->setStyleSheet("background-color: #7f00ff; color: white;");
+   ui->curveEdit_11->setStyleSheet("background-color: #00ff00; color: white;");
+   ui->curveEdit_12->setStyleSheet("background-color: #00ff7f; color: white;");
+   ui->curveEdit_13->setStyleSheet("background-color: #7fff00; color: white;");
+   ui->curveEdit_14->setStyleSheet("background-color: #ff0000; color: white;");
+   ui->curveEdit_15->setStyleSheet("background-color: #ff007f; color: white;");
+   ui->curveEdit_16->setStyleSheet("background-color: #ff7f00; color: white;");
    updateCurvesTab();
 
    QGraphicsScene *scene = new QGraphicsScene(ui->curvePreview);
