@@ -86,7 +86,7 @@ void ModelEdit::setupExposListWidget()
     qbDown->setText("Move Down");
     qbDown->setIcon(QIcon(":/images/movedown.png"));
     qbDown->setShortcut(QKeySequence(tr("Ctrl+Down")));
-    qbClear->setText("Clear Mixes");
+    qbClear->setText("Clear Expo Settings");
     qbClear->setIcon(QIcon(":/images/clear.png"));
 
     ui->exposLayout->addWidget(ExposlistWidget,1,1,1,3);
@@ -253,26 +253,29 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   if (fadeIn) fadeIn->setValue(phase->fadeIn);
   if (fadeOut) fadeOut->setValue(phase->fadeOut);
 
-  displayOnePhaseOneTrim(phase_idx, RUD, trim1Use, trim1, trim1Slider);
-  displayOnePhaseOneTrim(phase_idx, ELE, trim2Use, trim2, trim2Slider);
-  displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
-  displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
-
   switch (g_eeGeneral.stickMode) {
     case (0):
+      displayOnePhaseOneTrim(phase_idx, ELE, trim1Use, trim1, trim1Slider);
+      displayOnePhaseOneTrim(phase_idx, RUD, trim2Use, trim2, trim2Slider);
+      displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
+      displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("RUD");
-        trim2Label->setText("ELE");
-        trim3Label->setText("THR");
-        trim4Label->setText("AIL");
+          trim1Label->setText("ELE");
+          trim2Label->setText("RUD");
+          trim3Label->setText("THR");
+          trim4Label->setText("AIL");
       }
       if (g_eeGeneral.throttleReversed)
         trim3Slider->setInvertedAppearance(true);
       break;
     case (1):
+      displayOnePhaseOneTrim(phase_idx, THR, trim1Use, trim1, trim1Slider);
+      displayOnePhaseOneTrim(phase_idx, RUD, trim2Use, trim2, trim2Slider);
+      displayOnePhaseOneTrim(phase_idx, ELE, trim3Use, trim3, trim3Slider);
+      displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("RUD");
-        trim2Label->setText("THR");
+        trim1Label->setText("THR");
+        trim2Label->setText("RUD");
         trim3Label->setText("ELE");
         trim4Label->setText("AIL");
       }
@@ -280,9 +283,13 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
         trim1Slider->setInvertedAppearance(true);
       break;
     case (2):
+      displayOnePhaseOneTrim(phase_idx, ELE, trim1Use, trim1, trim1Slider);
+      displayOnePhaseOneTrim(phase_idx, AIL, trim2Use, trim2, trim2Slider);
+      displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
+      displayOnePhaseOneTrim(phase_idx, RUD, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("AIL");
-        trim2Label->setText("ELE");
+        trim1Label->setText("ELE");
+        trim2Label->setText("AIL");
         trim3Label->setText("THR");
         trim4Label->setText("RUD");
       }
@@ -290,9 +297,13 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
         trim3Slider->setInvertedAppearance(true);
       break;
     case (3):
+      displayOnePhaseOneTrim(phase_idx, THR, trim1Use, trim1, trim1Slider);
+      displayOnePhaseOneTrim(phase_idx, AIL, trim2Use, trim2, trim2Slider);
+      displayOnePhaseOneTrim(phase_idx, ELE, trim3Use, trim3, trim3Slider);
+      displayOnePhaseOneTrim(phase_idx, RUD, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("AIL");
-        trim2Label->setText("THR");
+        trim1Label->setText("THR");
+        trim2Label->setText("AIL");
         trim3Label->setText("ELE");
         trim4Label->setText("RUD");
       }
@@ -1770,43 +1781,471 @@ void ModelEdit::on_phaseTrimUse_currentIndexChanged(int phase_idx, int stick, in
   updateSettings();
 }
 
-void ModelEdit::on_phase1Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, ELE, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); }
-void ModelEdit::on_phase1Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, RUD, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); }
-void ModelEdit::on_phase1Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, THR, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); }
-void ModelEdit::on_phase1Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, AIL, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); }
-void ModelEdit::on_phase2Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, ELE, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); }
-void ModelEdit::on_phase2Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, RUD, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); }
-void ModelEdit::on_phase2Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, THR, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); }
-void ModelEdit::on_phase2Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, AIL, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); }
-void ModelEdit::on_phase3Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, ELE, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); }
-void ModelEdit::on_phase3Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, RUD, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); }
-void ModelEdit::on_phase3Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, THR, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); }
-void ModelEdit::on_phase3Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, AIL, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); }
-void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, ELE, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); }
-void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, RUD, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); }
-void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, THR, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); }
-void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, AIL, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); }
+void ModelEdit::on_phase1Trim1Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(1, ELE, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(1, THR, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); 
+          break;
+  }
+}
 
-void ModelEdit::on_phase0Trim1_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 0, value); }
-void ModelEdit::on_phase0Trim2_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 0, value); }
-void ModelEdit::on_phase0Trim3_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 0, value); }
-void ModelEdit::on_phase0Trim4_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 0, value); }
-void ModelEdit::on_phase1Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 1, value); }
-void ModelEdit::on_phase1Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 1, value); }
-void ModelEdit::on_phase1Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 1, value); }
-void ModelEdit::on_phase1Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 1, value); }
-void ModelEdit::on_phase2Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 2, value); }
-void ModelEdit::on_phase2Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 2, value); }
-void ModelEdit::on_phase2Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 2, value); }
-void ModelEdit::on_phase2Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 2, value); }
-void ModelEdit::on_phase3Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 3, value); }
-void ModelEdit::on_phase3Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 3, value); }
-void ModelEdit::on_phase3Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 3, value); }
-void ModelEdit::on_phase3Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 3, value); }
-void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(ELE, 4, value); }
-void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(RUD, 4, value); }
-void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(THR, 4, value); }
-void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(AIL, 4, value); }
+void ModelEdit::on_phase1Trim2Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(1, RUD, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(1, AIL, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim3Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(1, THR, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(1, ELE, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim4Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(1, AIL, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(1, RUD, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim1Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(2, ELE, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(2, THR, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim2Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(2, RUD, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(2, AIL, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim3Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(2, THR, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(2, ELE, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim4Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(2, AIL, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(2, RUD, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim1Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(3, ELE, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(3, THR, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim2Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(3, RUD, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(3, AIL, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim3Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(3, THR, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(3, ELE, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim4Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(3, AIL, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(3, RUD, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(4, ELE, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(4, THR, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(4, RUD, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(4, AIL, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrimUse_currentIndexChanged(4, THR, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(4, ELE, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrimUse_currentIndexChanged(4, AIL, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); 
+          break;
+      case 2:
+      case 3:
+          on_phaseTrimUse_currentIndexChanged(4, RUD, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase0Trim1_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(ELE, 0, value); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(THR, 0, value); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase0Trim2_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(RUD, 0, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(AIL, 0, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase0Trim3_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(THR, 0, value);
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(ELE, 0, value);
+          break;
+  }
+}
+void ModelEdit::on_phase0Trim4_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(AIL, 0, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(RUD, 0, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim1Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(ELE, 1, value); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(THR, 1, value); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim2Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(RUD, 1, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(AIL, 1, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim3Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(THR, 1, value);
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(ELE, 1, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase1Trim4Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(AIL, 1, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(RUD, 1, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim1Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(ELE, 2, value); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(THR, 2, value); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim2Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(RUD, 2, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(AIL, 2, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim3Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(THR, 2, value);
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(ELE, 2, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase2Trim4Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(AIL, 2, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(RUD, 2, value);
+          break;
+  }
+}
+void ModelEdit::on_phase3Trim1Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(ELE, 3, value); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(THR, 3, value); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim2Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(RUD, 3, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(AIL, 3, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim3Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(THR, 3, value);
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(ELE, 3, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase3Trim4Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(AIL, 3, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(RUD, 3, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(ELE, 4, value); 
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(THR, 4, value); 
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(RUD, 4, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(AIL, 4, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 2:
+          on_phaseTrim_valueChanged(THR, 4, value);
+          break;
+      case 1:
+      case 3:
+          on_phaseTrim_valueChanged(ELE, 4, value);
+          break;
+  }
+}
+
+void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { 
+  switch (g_eeGeneral.stickMode) {
+      case 0:
+      case 1:
+          on_phaseTrim_valueChanged(AIL, 4, value);
+          break;
+      case 2:
+      case 3:
+          on_phaseTrim_valueChanged(RUD, 4, value);
+          break;
+  }
+}
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
