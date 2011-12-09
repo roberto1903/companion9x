@@ -35,8 +35,6 @@ private:
     QTimer *timer;
     QString windowName;
 
-    qint16  g_ppmIns[8];
-
     quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
     quint16 s_timeCumSw;
@@ -76,9 +74,31 @@ private:
     int beepShow;
 
 protected:
-    void closeEvent (QCloseEvent* );
+    virtual void closeEvent (QCloseEvent* );
+    virtual void wheelEvent (QWheelEvent *event);
+    virtual void keyPressEvent (QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    static int screenshotIdx;
+    bool menuButtonPressed;
+    bool exitButtonPressed;
+    bool upButtonPressed;
+    bool downButtonPressed;
+    bool rightButtonPressed;
+    bool leftButtonPressed;
 
 private slots:
+    void on_menuButton_pressed() { menuButtonPressed = true; }
+    void on_menuButton_released() { menuButtonPressed = false; }
+    void on_exitButton_pressed() { exitButtonPressed = true; }
+    void on_exitButton_released() { exitButtonPressed = false; }
+    void on_upButton_pressed() { upButtonPressed = true; }
+    void on_upButton_released() { upButtonPressed = false; }
+    void on_downButton_pressed() { downButtonPressed = true; }
+    void on_downButton_released() { downButtonPressed = false; }
+    void on_rightButton_pressed() { rightButtonPressed = true; }
+    void on_rightButton_released() { rightButtonPressed = false; }
+    void on_leftButton_pressed() { leftButtonPressed = true; }
+    void on_leftButton_released() { leftButtonPressed = false; }
     void on_FixRightY_clicked(bool checked);
     void on_FixRightX_clicked(bool checked);
     void on_FixLeftY_clicked(bool checked);
@@ -92,6 +112,7 @@ private slots:
     void on_trimHRight_valueChanged(int);
     void on_trimVRight_valueChanged(int);
     void onTimerEvent();
+    void on_screenshotButton_clicked();
 };
 
 #endif // SIMULATORDIALOG_H

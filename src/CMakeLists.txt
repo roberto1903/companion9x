@@ -66,7 +66,8 @@ SET( companion9x_SRCS
      er9xinterface.cpp
      gruvin9xeeprom.cpp
      gruvin9xinterface.cpp  
-     gruvin9xsimulator.cpp  
+     gruvin9xsimulator.cpp
+     gruvin9xv4simulator.cpp  
      open9xeeprom.cpp
      open9xinterface.cpp
      open9xsimulator.cpp  

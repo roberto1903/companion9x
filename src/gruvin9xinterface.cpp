@@ -218,6 +218,38 @@ int Gruvin9xInterface::getCapability(const Capability capability)
   }
 }
 
+#define INP_E_ID2     6
+#define OUT_E_BUZZER  3
+#define INP_E_AileDR  1
+#define INP_E_ThrCt   0
+#define INP_E_ElevDR  2
+#define INP_E_Trainer 5
+#define INP_E_Gear    4
+#define INP_C_ThrCt   6
+#define INP_C_ElevDR  6
+#define INP_C_AileDR  7
+#define INP_G_ID1     3
+#define INP_G_RF_POW  1
+#define INP_G_RuddDR  0
+#define INP_G_ThrCt   2
+#define INP_G_Gear    5
+
+#define INP_P_KEY_EXT 5
+#define INP_P_KEY_MEN 4
+#define INP_P_KEY_LFT 3
+#define INP_P_KEY_RGT 2
+#define INP_P_KEY_UP  1
+#define INP_P_KEY_DWN 0
+
+#define INP_B_Trainer 5
+#define INP_B_KEY_LFT 6
+#define INP_B_KEY_RGT 5
+#define INP_B_KEY_UP  4
+#define INP_B_KEY_DWN 3
+#define INP_B_KEY_EXT 2
+#define INP_B_KEY_MEN 1
+#define INP_B_ID2     4
+
 namespace Gruvin9x {
 
 void StartEepromThread(const char *filename);
@@ -227,34 +259,7 @@ void StopMainThread();
 
 extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
 
-#define INP_E_ID2     6
-#define OUT_E_BUZZER  3
-#define INP_E_AileDR  1
-#define INP_E_ThrCt   0
-#define INP_E_ElevDR  2
-#define INP_E_Trainer 5
-#define INP_E_Gear    4
-#define INP_C_ThrCt   6
-#define INP_C_AileDR  7
-#define INP_G_ID1      3
-#define INP_G_RF_POW   1
-#define INP_G_RuddDR   0
-
-#define INP_P_KEY_EXT   5
-#define INP_P_KEY_MEN   4
-#define INP_P_KEY_LFT   3
-#define INP_P_KEY_RGT   2
-#define INP_P_KEY_UP    1
-#define INP_P_KEY_DWN   0
-
-#define INP_B_KEY_LFT 6
-#define INP_B_KEY_RGT 5
-#define INP_B_KEY_UP  4
-#define INP_B_KEY_DWN 3
-#define INP_B_KEY_EXT 2
-#define INP_B_KEY_MEN 1
-
-extern uint8_t eeprom[2048]; // TODO size 4096
+extern uint8_t eeprom[2048];
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
 extern int16_t g_chans512[NUM_CHNOUT];
 
@@ -272,21 +277,63 @@ extern bool hasExtendedTrims();
 
 }
 
+namespace Gruvin9xV4 {
+
+void StartEepromThread(const char *filename);
+void StartMainThread(bool tests);
+void StopEepromThread();
+void StopMainThread();
+
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+
+extern uint8_t eeprom[4080];
+extern int16_t g_anas[NUM_STICKS+NUM_POTS];
+extern int16_t g_chans512[NUM_CHNOUT];
+extern volatile uint8_t g_rotenc[2];
+
+extern uint8_t lcd_buf[128*64/8];
+extern bool lcd_refresh;
+
+extern void per10ms();
+extern bool getSwitch(int8_t swtch, bool nc=0);
+
+extern uint8_t getTrimFlightPhase(uint8_t idx, uint8_t phase);
+extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
+extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
+extern uint8_t getFlightPhase();
+extern bool hasExtendedTrims();
+
+}
+
 void Gruvin9xInterface::timer10ms()
 {
-  Gruvin9x::per10ms();
+  if (size == 2048)
+    Gruvin9x::per10ms();
+  else
+    Gruvin9xV4::per10ms();
 }
 
 uint8_t * Gruvin9xInterface::getLcd()
 {
-  return Gruvin9x::lcd_buf;
+  if (size == 2048)
+    return Gruvin9x::lcd_buf;
+  else
+    return Gruvin9xV4::lcd_buf;
 }
 
 bool Gruvin9xInterface::lcdChanged()
 {
-  if (Gruvin9x::lcd_refresh) {
-    Gruvin9x::lcd_refresh = false;
-    return true;
+  if (size == 2048) {
+    if (Gruvin9x::lcd_refresh) {
+      Gruvin9x::lcd_refresh = false;
+      return true;
+    }
+  }
+  else {
+    if (Gruvin9xV4::lcd_refresh) {
+      Gruvin9xV4::lcd_refresh = false;
+      return true;
+    }
   }
 
   return false;
@@ -294,79 +341,166 @@ bool Gruvin9xInterface::lcdChanged()
 
 void Gruvin9xInterface::startSimulation(RadioData &radioData, bool tests)
 {
-  save(&Gruvin9x::eeprom[0], radioData);
-  Gruvin9x::StartEepromThread(NULL);
-  Gruvin9x::StartMainThread(tests);
+  if (size == 2048) {
+    save(&Gruvin9x::eeprom[0], radioData);
+    Gruvin9x::StartEepromThread(NULL);
+    Gruvin9x::StartMainThread(tests);
+  }
+  else {
+    Gruvin9xV4::g_rotenc[0] = 0;
+    Gruvin9xV4::g_rotenc[1] = 0;
+    save(&Gruvin9xV4::eeprom[0], radioData);
+    Gruvin9xV4::StartEepromThread(NULL);
+    Gruvin9xV4::StartMainThread(tests);
+  }
 }
 
 void Gruvin9xInterface::stopSimulation()
 {
-  Gruvin9x::StopMainThread();
-  Gruvin9x::StopEepromThread();
+  if (size == 2048) {
+    Gruvin9x::StopMainThread();
+    Gruvin9x::StopEepromThread();
+  }
+  else {
+    Gruvin9xV4::StopMainThread();
+    Gruvin9xV4::StopEepromThread();
+  }
 }
 
 void Gruvin9xInterface::getValues(TxOutputs &outputs)
 {
-  memcpy(outputs.chans, Gruvin9x::g_chans512, sizeof(outputs.chans));
-  for (int i=0; i<12; i++)
-    outputs.vsw[i] = Gruvin9x::getSwitch(DSW_SW1+i, 0);
+  if (size == 2048) {
+    memcpy(outputs.chans, Gruvin9x::g_chans512, sizeof(outputs.chans));
+    for (int i=0; i<12; i++)
+      outputs.vsw[i] = Gruvin9x::getSwitch(DSW_SW1+i, 0);
+  }
+  else {
+    memcpy(outputs.chans, Gruvin9xV4::g_chans512, sizeof(outputs.chans));
+    for (int i=0; i<12; i++)
+      outputs.vsw[i] = Gruvin9xV4::getSwitch(DSW_SW1+i, 0);
+  }
 }
 
 void Gruvin9xInterface::setValues(TxInputs &inputs)
 {
-  Gruvin9x::g_anas[0] = inputs.rud;
-  Gruvin9x::g_anas[1] = inputs.ele;
-  Gruvin9x::g_anas[2] = inputs.thr;
-  Gruvin9x::g_anas[3] = inputs.ail;
-  Gruvin9x::g_anas[4] = inputs.pot1;
-  Gruvin9x::g_anas[5] = inputs.pot2;
-  Gruvin9x::g_anas[6] = inputs.pot3;
+  if (size == 2048) {
+    Gruvin9x::g_anas[0] = inputs.rud;
+    Gruvin9x::g_anas[1] = inputs.ele;
+    Gruvin9x::g_anas[2] = inputs.thr;
+    Gruvin9x::g_anas[3] = inputs.ail;
+    Gruvin9x::g_anas[4] = inputs.pot1;
+    Gruvin9x::g_anas[5] = inputs.pot2;
+    Gruvin9x::g_anas[6] = inputs.pot3;
 
-  if (inputs.sRud) Gruvin9x::ping &= ~(1<<INP_G_RuddDR); else Gruvin9x::ping |= (1<<INP_G_RuddDR);
-  if (inputs.sEle) Gruvin9x::pine &= ~(1<<INP_E_ElevDR); else Gruvin9x::pine |= (1<<INP_E_ElevDR);
-  if (inputs.sThr) Gruvin9x::pine &= ~(1<<INP_E_ThrCt); else Gruvin9x::pine |= (1<<INP_E_ThrCt);
-  if (inputs.sAil) Gruvin9x::pine &= ~(1<<INP_E_AileDR); else Gruvin9x::pine |= (1<<INP_E_AileDR);
-  if (inputs.sGea) Gruvin9x::pine &= ~(1<<INP_E_Gear); else Gruvin9x::pine |= (1<<INP_E_Gear);
-  if (inputs.sTrn) Gruvin9x::pine &= ~(1<<INP_E_Trainer); else Gruvin9x::pine |= (1<<INP_E_Trainer);
+    if (inputs.sRud) Gruvin9x::ping &= ~(1<<INP_G_RuddDR); else Gruvin9x::ping |= (1<<INP_G_RuddDR);
+    if (inputs.sEle) Gruvin9x::pine &= ~(1<<INP_E_ElevDR); else Gruvin9x::pine |= (1<<INP_E_ElevDR);
+    if (inputs.sThr) Gruvin9x::pine &= ~(1<<INP_E_ThrCt); else Gruvin9x::pine |= (1<<INP_E_ThrCt);
+    if (inputs.sAil) Gruvin9x::pine &= ~(1<<INP_E_AileDR); else Gruvin9x::pine |= (1<<INP_E_AileDR);
+    if (inputs.sGea) Gruvin9x::pine &= ~(1<<INP_E_Gear); else Gruvin9x::pine |= (1<<INP_E_Gear);
+    if (inputs.sTrn) Gruvin9x::pine &= ~(1<<INP_E_Trainer); else Gruvin9x::pine |= (1<<INP_E_Trainer);
 
-  switch (inputs.sId0) {
-    case 2:
-      Gruvin9x::ping &= ~(1<<INP_G_ID1);
-      Gruvin9x::pine |= (1<<INP_E_ID2);
-      break;
-    case 1:
-      Gruvin9x::ping &= ~(1<<INP_G_ID1);
-      Gruvin9x::pine &= ~(1<<INP_E_ID2);
-      break;
-    case 0:
-      Gruvin9x::ping |=  (1<<INP_G_ID1);
-      Gruvin9x::pine &= ~(1<<INP_E_ID2);
-      break;
+    switch (inputs.sId0) {
+      case 2:
+        Gruvin9x::ping &= ~(1<<INP_G_ID1);
+        Gruvin9x::pine |= (1<<INP_E_ID2);
+        break;
+      case 1:
+        Gruvin9x::ping &= ~(1<<INP_G_ID1);
+        Gruvin9x::pine &= ~(1<<INP_E_ID2);
+        break;
+      case 0:
+        Gruvin9x::ping |=  (1<<INP_G_ID1);
+        Gruvin9x::pine &= ~(1<<INP_E_ID2);
+        break;
+    }
+
+    // keyboad
+    Gruvin9x::pinb &= ~ 0x7e;
+
+    if (inputs.menu)  Gruvin9x::pinb |= (1<<INP_B_KEY_MEN);
+    if (inputs.exit)  Gruvin9x::pinb |= (1<<INP_B_KEY_EXT);
+    if (inputs.up)    Gruvin9x::pinb |= (1<<INP_B_KEY_UP);
+    if (inputs.down)  Gruvin9x::pinb |= (1<<INP_B_KEY_DWN);
+    if (inputs.left)  Gruvin9x::pinb |= (1<<INP_B_KEY_LFT);
+    if (inputs.right) Gruvin9x::pinb |= (1<<INP_B_KEY_RGT);
   }
+  else {
+    Gruvin9xV4::g_anas[0] = inputs.rud;
+    Gruvin9xV4::g_anas[1] = inputs.ele;
+    Gruvin9xV4::g_anas[2] = inputs.thr;
+    Gruvin9xV4::g_anas[3] = inputs.ail;
+    Gruvin9xV4::g_anas[4] = inputs.pot1;
+    Gruvin9xV4::g_anas[5] = inputs.pot2;
+    Gruvin9xV4::g_anas[6] = inputs.pot3;
 
-  // keyboad
-  Gruvin9x::pinb &= ~ 0x7e;
-  Gruvin9x::pinl &= ~ 0x3f; // for v4
+    Gruvin9xV4::pinj = 0;
+    Gruvin9xV4::pinl = 0;
 
-  if (inputs.menu) { Gruvin9x::pinb |= (1<<INP_B_KEY_MEN); Gruvin9x::pinl |= (1<<INP_P_KEY_MEN); }
-  if (inputs.exit) { Gruvin9x::pinb |= (1<<INP_B_KEY_EXT); Gruvin9x::pinl |= (1<<INP_P_KEY_EXT); }
-  if (inputs.up) { Gruvin9x::pinb |= (1<<INP_B_KEY_UP); Gruvin9x::pinl |= (1<<INP_P_KEY_UP); }
-  if (inputs.down) { Gruvin9x::pinb |= (1<<INP_B_KEY_DWN); Gruvin9x::pinl |= (1<<INP_P_KEY_DWN); }
-  if (inputs.left) { Gruvin9x::pinb |= (1<<INP_B_KEY_LFT); Gruvin9x::pinl |= (1<<INP_P_KEY_LFT); }
-  if (inputs.right) { Gruvin9x::pinb |= (1<<INP_B_KEY_RGT); Gruvin9x::pinl |= (1<<INP_P_KEY_RGT); }
+    if (inputs.sRud) Gruvin9xV4::ping &= ~(1<<INP_G_RuddDR); else Gruvin9xV4::ping |= (1<<INP_G_RuddDR);
+    if (inputs.sEle) Gruvin9xV4::pinc &= ~(1<<INP_C_ElevDR); else Gruvin9xV4::pinc |= (1<<INP_C_ElevDR);
+    if (inputs.sThr) Gruvin9xV4::ping &= ~(1<<INP_G_ThrCt); else Gruvin9xV4::ping |= (1<<INP_G_ThrCt);
+    if (inputs.sAil) Gruvin9xV4::pinc &= ~(1<<INP_C_AileDR); else Gruvin9xV4::pinc |= (1<<INP_C_AileDR);
+    if (inputs.sGea) Gruvin9xV4::ping &= ~(1<<INP_G_Gear); else Gruvin9xV4::ping |= (1<<INP_G_Gear);
+    if (inputs.sTrn) Gruvin9xV4::pinb &= ~(1<<INP_B_Trainer); else Gruvin9xV4::pinb |= (1<<INP_B_Trainer);
+
+    switch (inputs.sId0) {
+      case 2:
+        Gruvin9xV4::ping &= ~(1<<INP_G_ID1);
+        Gruvin9xV4::pinb |= (1<<INP_B_ID2);
+        break;
+      case 1:
+        Gruvin9xV4::ping &= ~(1<<INP_G_ID1);
+        Gruvin9xV4::pinb &= ~(1<<INP_B_ID2);
+        break;
+      case 0:
+        Gruvin9xV4::ping |=  (1<<INP_G_ID1);
+        Gruvin9xV4::pinb &= ~(1<<INP_B_ID2);
+        break;
+    }
+
+    // keyboad
+    if (inputs.menu)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_MEN);
+    if (inputs.exit)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_EXT);
+    if (inputs.up)    Gruvin9xV4::pinl |= (1<<INP_P_KEY_UP);
+    if (inputs.down)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_DWN);
+    if (inputs.left)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_LFT);
+    if (inputs.right) Gruvin9xV4::pinl |= (1<<INP_P_KEY_RGT);
+  }
 }
 
 void Gruvin9xInterface::setTrim(unsigned int idx, int value)
 {
-  uint8_t phase = Gruvin9x::getTrimFlightPhase(idx, Gruvin9x::getFlightPhase());
-  Gruvin9x::setTrimValue(phase, idx, value);
+  if (size == 2048) {
+    uint8_t phase = Gruvin9x::getTrimFlightPhase(idx, Gruvin9x::getFlightPhase());
+    Gruvin9x::setTrimValue(phase, idx, value);
+  }
+  else {
+    uint8_t phase = Gruvin9xV4::getTrimFlightPhase(idx, Gruvin9xV4::getFlightPhase());
+    Gruvin9xV4::setTrimValue(phase, idx, value);
+  }
 }
 
 void Gruvin9xInterface::getTrims(Trims & trims)
 {
-  uint8_t phase = Gruvin9x::getFlightPhase();
-  for (uint8_t idx=0; idx<4; idx++) {
-    trims.extended = Gruvin9x::hasExtendedTrims();
-    trims.values[idx] = Gruvin9x::getTrimValue(Gruvin9x::getTrimFlightPhase(idx, phase), idx);
+  if (size == 2048) {
+    uint8_t phase = Gruvin9x::getFlightPhase();
+    for (uint8_t idx=0; idx<4; idx++) {
+      trims.extended = Gruvin9x::hasExtendedTrims();
+      trims.values[idx] = Gruvin9x::getTrimValue(Gruvin9x::getTrimFlightPhase(idx, phase), idx);
+    }
+  }
+  else {
+    uint8_t phase = Gruvin9xV4::getFlightPhase();
+    for (uint8_t idx=0; idx<4; idx++) {
+      trims.extended = Gruvin9xV4::hasExtendedTrims();
+      trims.values[idx] = Gruvin9xV4::getTrimValue(Gruvin9xV4::getTrimFlightPhase(idx, phase), idx);
+    }
+  }
+}
+
+void Gruvin9xInterface::wheelEvent(uint8_t steps)
+{
+  if (size > 2048) {
+    Gruvin9xV4::g_rotenc[0] += steps;
   }
 }

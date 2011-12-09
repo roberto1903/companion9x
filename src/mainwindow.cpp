@@ -79,8 +79,9 @@ MainWindow::MainWindow()
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
 
+#ifdef WIN32
     checkForUpdates(false);
-
+#endif
 
     QStringList strl = QApplication::arguments();
     QString str;
