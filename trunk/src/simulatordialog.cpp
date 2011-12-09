@@ -3,6 +3,7 @@
 #include "node.h"
 #include <QtGui>
 #include <inttypes.h>
+#include <iostream>
 #include "eeprominterface.h"
 #include "helpers.h"
 
@@ -11,11 +12,19 @@
 #define W           128
 #define H           64
 
+int simulatorDialog::screenshotIdx = 0;
+
 simulatorDialog::simulatorDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::simulatorDialog),
     txInterface(NULL),
-    g_modelIdx(-1)
+    g_modelIdx(-1),
+    menuButtonPressed(false),
+    exitButtonPressed(false),
+    upButtonPressed(false),
+    downButtonPressed(false),
+    rightButtonPressed(false),
+    leftButtonPressed(false)
 {
     ui->setupUi(this);
 
@@ -23,8 +32,6 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     beepShow = 0;
 
 // TODO    bpanaCenter = 0;
-
-
 // TODO    memset(&swOn,0,sizeof(swOn));
 
     setupSticks();
@@ -40,6 +47,61 @@ void simulatorDialog::closeEvent (QCloseEvent*)
   txInterface->stopSimulation();
   timer->stop();
   delete timer;
+}
+
+void simulatorDialog::wheelEvent (QWheelEvent * event)
+{
+  txInterface->wheelEvent(event->delta() > 0 ? 1 : -1);
+}
+
+void simulatorDialog::keyPressEvent (QKeyEvent * event)
+{
+  switch (event->key()) {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+      menuButtonPressed = true;
+      break;
+    case Qt::Key_Backspace:
+      exitButtonPressed = true;
+      break;
+    case Qt::Key_Up:
+      upButtonPressed = true;
+      break;
+    case Qt::Key_Down:
+      downButtonPressed = true;
+      break;
+    case Qt::Key_Right:
+      rightButtonPressed = true;
+      break;
+    case Qt::Key_Left:
+      leftButtonPressed = true;
+      break;
+  }
+}
+
+void simulatorDialog::keyReleaseEvent(QKeyEvent * event)
+{
+  switch (event->key()) {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+      menuButtonPressed = false;
+      break;
+    case Qt::Key_Backspace:
+      exitButtonPressed = false;
+      break;
+    case Qt::Key_Up:
+      upButtonPressed = false;
+      break;
+    case Qt::Key_Down:
+      downButtonPressed = false;
+      break;
+    case Qt::Key_Right:
+      rightButtonPressed = false;
+      break;
+    case Qt::Key_Left:
+      leftButtonPressed = false;
+      break;
+  }
 }
 
 void simulatorDialog::setupTimer()
@@ -70,6 +132,7 @@ void simulatorDialog::onTimerEvent()
     else if (ui->tabWidget->currentIndex() == 0) {
       if (txInterface->lcdChanged())
         ui->lcd->update();
+      ui->lcd->setFocus();
     }
 
     setValues();
@@ -92,6 +155,13 @@ void simulatorDialog::onTimerEvent()
     if (beepShow) beepShow--;
 
   }
+}
+
+void simulatorDialog::on_screenshotButton_clicked()
+{
+  QString fileName = QString("./screenshot-%1.png").arg(++screenshotIdx);
+  qDebug() << "Screenshot" << fileName;
+  ui->lcd->makeScreenshot(fileName);
 }
 
 void simulatorDialog::centerSticks()
@@ -188,20 +258,15 @@ void simulatorDialog::getValues()
                      ui->switchGEA->isChecked(),
                      ui->switchTRN->isDown(),
                      ui->switchID2->isChecked() ? 2 : (ui->switchID1->isChecked() ? 1 : 0),
-                     ui->menuButton->isDown(),
-                     ui->exitButton->isDown(),
-                     ui->upButton->isDown(),
-                     ui->downButton->isDown(),
-                     ui->leftButton->isDown(),
-                     ui->rightButton->isDown()
+                     menuButtonPressed,
+                     exitButtonPressed,
+                     upButtonPressed,
+                     downButtonPressed,
+                     leftButtonPressed,
+                     rightButtonPressed
                     };
 
   txInterface->setValues(inputs);
-
-   /* TODO trim[0] = ui->trimHLeft->value();
-    trim[1] = ui->trimVLeft->value();
-    trim[2] = ui->trimVRight->value();
-    trim[3] = ui->trimHRight->value(); */
 }
 
 inline int chVal(int val)

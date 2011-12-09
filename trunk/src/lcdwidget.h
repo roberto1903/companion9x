@@ -33,18 +33,24 @@ class lcdWidget : public QWidget {
       lcd_buf = buf;
     }
 
+    void makeScreenshot(const QString & fileName)
+    {
+      QPixmap buffer(2*W, 2*H);
+      QPainter p(&buffer);
+      doPaint(p);
+      buffer.toImage().save(fileName);
+    }
+
   protected:
 
     uint8_t *lcd_buf;
 
-    void paintEvent(QPaintEvent*)
+    inline void doPaint(QPainter & p)
     {
-      QPainter p(this);
-
       QRgb rgb = qRgb(150, 200, 152);
-      p.setPen(rgb);
-      p.setBrush(QBrush(rgb));
-      p.drawRect(0, 0, W*2, H*2);
+      //TODO QRgb rgb = qRgb(200, 200, 200);
+      p.setBackground(QBrush(rgb));
+      p.eraseRect(0, 0, 2*W, 2*H);
 
       if (lcd_buf) {
         rgb = qRgb(0, 0, 0);
@@ -55,13 +61,19 @@ class lcdWidget : public QWidget {
         for (int x=0; x<W; x++) {
           for (int y=0; y<H; y++) {
             int idx = x+(y/8)*W;
-            //TODO QRgb rgb = qRgb(200, 200, 200);
             if (lcd_buf[idx] & (1<<(y%8)))
               p.drawRect(2*x, 2*y, 1, 1);
           }
         }
       }
     }
+
+    void paintEvent(QPaintEvent*)
+    {
+      QPainter p(this);
+      doPaint(p);
+    }
+
 };
 
 #endif

@@ -926,11 +926,41 @@ QPushButton:checked {
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
+          <widget class="QPushButton" name="screenshotButton">
+           <property name="text">
+            <string>&amp;Screenshot</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>:/images/screenshot.png</normaloff>:/images/screenshot.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QPushButton" name="menuButton">
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>60</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -939,17 +969,43 @@ QPushButton:checked {
           </widget>
          </item>
          <item>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QPushButton" name="exitButton">
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>60</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
             <string>EXIT</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

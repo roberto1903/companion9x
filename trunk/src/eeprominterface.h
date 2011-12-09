@@ -550,6 +550,8 @@ class EEPROMInterface
 
     virtual void getTrims(Trims & trims) { /*TODO*/};
 
+    virtual void wheelEvent(uint8_t steps) { };
+
     const char * name;
 };
 

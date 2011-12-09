@@ -54,6 +54,8 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual void getTrims(Trims & trims);
 
+    virtual void wheelEvent(uint8_t steps);
+
   protected:
 
     template <class T>
