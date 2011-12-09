@@ -1,6 +1,6 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.14" )
+SET( C9X_VERSION "0.15" )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -207,3 +207,8 @@ IF( APPLE )
                      # WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
                      DEPENDS ${PROJECT_NAME} )
 ENDIF( )
+
+ADD_CUSTOM_TARGET( stamp
+                   COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/version.h ${CMAKE_SOURCE_DIR}/../companion9x.stamp 
+                   DEPENDS ${CMAKE_BINARY_DIR}/version.h )
+

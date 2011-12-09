@@ -51,9 +51,9 @@
 #include "version.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
-
+#define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x.stamp"
+#define C9X_INSTALLER "/companion9xInstall_v%1.exe"
 #define C9X_URL   "http://companion9x.googlecode.com/files/companion9xInstall_v%1.exe"
-#define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/src/companion9x.stamp"
 
 MainWindow::MainWindow()
 {
@@ -154,14 +154,14 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
                                                                 "Would you like to download it?").arg(version) ,
                                             QMessageBox::Yes | QMessageBox::No);
 
-            QSettings settings("companion9x", "companion9x");http://companion9x.googlecode.com/files/companion9xInstall_v0.13.exe
+            QSettings settings("companion9x", "companion9x");
 
             if (ret == QMessageBox::Yes) {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + QString("/companion9xInstall_v%1.exe").arg(C9X_VERSION), tr("Executable (*.exe)"));
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
                 if (fileName.isEmpty()) return;
 //                settings.setValue("lastDir",QFileInfo(fileName)s.dir().absolutePath());
 
-                downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(C9X_VERSION), fileName);
+                downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
                 installer_fileName = fileName;
                 connect(dd, SIGNAL(accepted()), this, SLOT(updateDownloaded()));
                 dd->show();
