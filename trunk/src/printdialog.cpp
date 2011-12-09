@@ -191,8 +191,13 @@ void printDialog::printMixes()
         if(lastCHN!=md->destCh)
         {
             str.append("<br>");
-            continue;
-        }
+            lastCHN++;
+            for (int k=lastCHN; k<md->destCh; k++) {
+                str.append(tr("<font size=+1 face='Courier New'><b>CH%1</b><br></font>").arg(lastCHN,2,10,QChar('0')));
+                lastCHN++;        
+            }   
+            str.append(tr("<font size=+1 face='Courier New'><b>CH%1</b></font>").arg(lastCHN,2,10,QChar('0')));
+        } 
 
         str.append("<font size=+1 face='Courier New' color=green>");
 
@@ -224,7 +229,18 @@ void printDialog::printMixes()
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
 
         if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
+        if(md->phase!=0)
+        {
+            PhaseData *pd = &g_model->phaseData[abs(md->phase)];
 
+            if (md->phase<0) 
+            {
+                str += tr(" Phase !FP%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
+            } else 
+            {
+                str += tr(" Phase FP%1 (%2)").arg(md->phase-1).arg(pd->name);               
+            }
+        }
         str.append("</font><br>");
 
     }
