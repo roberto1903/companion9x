@@ -132,7 +132,7 @@ void simulatorDialog::onTimerEvent()
     else if (ui->tabWidget->currentIndex() == 0) {
       if (txInterface->lcdChanged())
         ui->lcd->update();
-      ui->lcd->setFocus();
+      // ui->lcd->setFocus();
     }
 
     setValues();
