@@ -27,6 +27,7 @@ class lcdWidget : public QWidget {
       QWidget(parent),
       lcd_buf(NULL)
     {
+      memset(previous_buf, 0, W*H/8);
     }
 
     void setData(uint8_t *buf) {
@@ -41,9 +42,24 @@ class lcdWidget : public QWidget {
       buffer.toImage().save(fileName);
     }
 
+    void onLcdChanged()
+    {
+      if (memcmp(previous_buf, lcd_buf, W*H/8)) {
+        memcpy(previous_buf, lcd_buf, W*H/8);
+        update();
+      }
+    }
+
+    virtual void mousePressEvent(QMouseEvent * event)
+    {
+      setFocus();
+    }
+
   protected:
 
     uint8_t *lcd_buf;
+
+    uint8_t previous_buf[W*H/8];
 
     inline void doPaint(QPainter & p)
     {

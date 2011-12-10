@@ -16,8 +16,6 @@ namespace Ui {
     class simulatorDialog;
 }
 
-// TODO only one simulator window is possible at a moment
-
 class simulatorDialog : public QDialog
 {
     Q_OBJECT
