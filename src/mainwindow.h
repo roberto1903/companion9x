@@ -88,6 +88,7 @@ private slots:
     void burnList();
     void burnFuses();
     void simulate();
+    void contributors();
     void about();
     void print();
     void preferences();
@@ -137,6 +138,7 @@ private:
     QAction *exitAct;
     QAction *preferencesAct;
     QAction *checkForUpdatesAct;
+    QAction *contributorsAct;
     QAction *cutAct;
     QAction *copyAct;
     QAction *pasteAct;

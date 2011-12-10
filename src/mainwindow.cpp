@@ -49,6 +49,7 @@
 #include "fusesdialog.h"
 #include "downloaddialog.h"
 #include "version.h"
+#include "contributorsdialog.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 #define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x.stamp"
@@ -255,6 +256,13 @@ void MainWindow::preferences()
       mdiChild->eepromInterfaceChanged();
     }
 }
+
+void MainWindow::contributors()
+{
+    contributorsDialog *cd = new contributorsDialog(this);
+    cd->exec();
+}
+
 
 void MainWindow::cut()
 {
@@ -569,6 +577,11 @@ void MainWindow::createActions()
     checkForUpdatesAct->setStatusTip(tr("Check for new version of companion9x/er9x"));
     connect(checkForUpdatesAct, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
 
+    contributorsAct = new QAction(QIcon(":/images/contributors.png"), tr("Contributors &List..."), this);
+    contributorsAct->setStatusTip(tr("Show companion9x contributors list"));
+    connect(contributorsAct, SIGNAL(triggered()), this, SLOT(contributors()));
+    
+    
 //! [0]
     exitAct = new QAction(QIcon(":/images/exit.png"), tr("E&xit"), this);
     exitAct->setShortcuts(QKeySequence::Quit);
@@ -735,6 +748,8 @@ void MainWindow::createMenus()
     helpMenu->addAction(aboutAct);
     helpMenu->addSeparator();
     helpMenu->addAction(checkForUpdatesAct);
+    helpMenu->addSeparator();
+    helpMenu->addAction(contributorsAct);
 }
 
 void MainWindow::createToolBars()
