@@ -27,6 +27,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     leftButtonPressed(false)
 {
     ui->setupUi(this);
+    ui->lcd->setFocus();
 
     beepVal = 0;
     beepShow = 0;
