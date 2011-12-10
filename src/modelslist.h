@@ -80,6 +80,7 @@ public slots:
     void cut();
     void copy();
     void paste();
+    void print();
     void OpenEditWindow();
     void simulate();
     void duplicate();

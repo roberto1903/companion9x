@@ -92,6 +92,8 @@ void ModelsListWidget::ShowContextMenu(const QPoint& pos)
     contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(paste()),tr("Ctrl+V"))->setEnabled(hasData);
     contextMenu.addAction(QIcon(":/images/duplicate.png"), tr("D&uplicate"),this,SLOT(duplicate()),tr("Ctrl+U"));
     contextMenu.addSeparator();
+    contextMenu.addAction(QIcon(":/images/print.png"), tr("P&rint model"),this, SLOT(print()),tr("Alt+S"));
+    contextMenu.addSeparator();
     contextMenu.addAction(QIcon(":/images/simulate.png"), tr("&Simulate model"),this, SLOT(simulate()),tr("Alt+S"));
     contextMenu.exec(globalPos);
 }
@@ -104,6 +106,11 @@ void ModelsListWidget::OpenEditWindow()
 void ModelsListWidget::simulate()
 {
   ((MdiChild *)parent())->simulate();
+}
+
+void ModelsListWidget::print()
+{
+  ((MdiChild *)parent())->print();
 }
 
 void ModelsListWidget::mousePressEvent(QMouseEvent *event)
