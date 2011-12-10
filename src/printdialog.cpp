@@ -119,50 +119,48 @@ void printDialog::printSetup()
 void printDialog::printExpo()
 {
     QString str = tr("<h2>Expo/Dr Settings</h2>");
-
-    for(int i=0; i<4; i++)
+    int lastCHN = -1;
+  
+    for(int i=0; i<MAX_EXPOS; i++)
     {
-        str.append("<h3>" + getSourceStr(g_eeGeneral->stickMode, i+1) + "</h3>");
-        //high, mid, low
-        //left right / expo, dr
-// TODO        str.append(fv(tr("Switch 1:"), getSWName(g_model->expoData[i].drSw1)));
-        // TODO        str.append(fv(tr("Switch 2:"), getSWName(g_model->expoData[i].drSw2)));
-        str.append("<table border=1 cellspacing=0 cellpadding=3>");
+        ExpoData *ed=&g_model->expoData[i];
+        if(ed->mode==0)
+            continue;
+        str.append("<font size=+1 face='Courier New'>");
+        if(lastCHN!=ed->chn) {
+            lastCHN=ed->chn;
+            str.append("<b>"+getSourceStr(g_eeGeneral->stickMode, ed->chn+1)+"</b>");
+        }
+        else
+            str.append("<b>&nbsp;&nbsp;&nbsp;&nbsp;</b>");
 
-        str.append("<tr>");
-        str.append(doTC("&nbsp;"));
-        str.append(doTC(tr("Expo Left"), "", true));
-        str.append(doTC(tr("D/R Left"), "", true));
-        str.append(doTC(tr("D/R Right"), "", true));
-        str.append(doTC(tr("Expo Right"), "", true));
-        str.append("</tr>");
+        str.append("</font>");
+        str.append("<font size=+1 face='Courier New' color=green>");
+        switch(ed->mode) {
+            case (1): 
+                str += "&lt;-&nbsp;";
+                break;
+            case (2): 
+                str += "-&gt;&nbsp;";
+                break;
+            default:
+                str += "&nbsp;&nbsp;&nbsp;";
+                break;
+        };        
+        str += ed->weight<0 ? QString("Weight(%1\%)").arg(ed->weight).rightJustified(6,' ') :
+                              QString("Weight(+%1\%)").arg(ed->weight).rightJustified(6, ' ');
 
+        str += ed->expo<0 ? QString(" Expo(%1\%)").arg(ed->expo).rightJustified(6,' ') :
+                                      QString(" Expo(+%1\%)").arg(ed->expo).rightJustified(6, ' ');
 
-        str.append("<tr>");
-        str.append(doTC(tr("High"), "", true));
-     /* TODO   str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_LEFT]),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_WEIGHT][DR_LEFT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_HIGH][DR_EXPO][DR_RIGHT]),"green")); */
-        str.append("</tr>");
-
-        str.append("<tr>");
-        str.append(doTC(tr("Mid"), "", true));
-/* TODO        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_LEFT]),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_WEIGHT][DR_LEFT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_MID][DR_EXPO][DR_RIGHT]),"green")); */
-        str.append("</tr>");
-
-        str.append("<tr>");
-        str.append(doTC(tr("Low"), "", true));
-  /* TODO      str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_LEFT]),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_WEIGHT][DR_LEFT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_WEIGHT][DR_RIGHT]+100),"green"));
-        str.append(doTC(QString::number(g_model->expoData[i].expo[DR_LOW][DR_EXPO][DR_RIGHT]),"green")); */
-        str.append("</tr>");
-
-        str.append("</table>");
+        if(ed->phase) str += tr(" Phase(") + getPhaseName(ed->phase) + ")";
+        if(ed->swtch) str += tr(" Switch(") + getSWName(ed->swtch) + ")";
+        
+        if (ed->curve!=0) {
+          QString crvStr = CURV_STR;
+          str.append(" Curve("+crvStr.mid(ed->curve*3,3)+")");
+        }
+        str.append("</font><br>");
     }
     str.append("<br><br>");
     te->append(str);
