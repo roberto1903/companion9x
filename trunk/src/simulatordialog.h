@@ -72,10 +72,12 @@ private:
     int beepShow;
 
 protected:
-    virtual void closeEvent (QCloseEvent* );
-    virtual void wheelEvent (QWheelEvent *event);
-    virtual void keyPressEvent (QKeyEvent *event);
-    virtual void keyReleaseEvent(QKeyEvent *event);
+    virtual void closeEvent(QCloseEvent *);
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual void wheelEvent(QWheelEvent *);
+    virtual void keyPressEvent(QKeyEvent *);
+    virtual void keyReleaseEvent(QKeyEvent *);
     static int screenshotIdx;
     bool menuButtonPressed;
     bool exitButtonPressed;
@@ -83,6 +85,7 @@ protected:
     bool downButtonPressed;
     bool rightButtonPressed;
     bool leftButtonPressed;
+    bool middleButtonPressed;
 
 private slots:
     void on_menuButton_pressed() { menuButtonPressed = true; }
