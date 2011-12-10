@@ -465,6 +465,10 @@ void Gruvin9xInterface::setValues(TxInputs &inputs)
     if (inputs.down)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_DWN);
     if (inputs.left)  Gruvin9xV4::pinl |= (1<<INP_P_KEY_LFT);
     if (inputs.right) Gruvin9xV4::pinl |= (1<<INP_P_KEY_RGT);
+
+    // rotary encoders
+    Gruvin9xV4::pind = 0;
+    if (inputs.re1)   Gruvin9xV4::pind |= 0b00100000;
   }
 }
 
@@ -500,7 +504,6 @@ void Gruvin9xInterface::getTrims(Trims & trims)
 
 void Gruvin9xInterface::wheelEvent(uint8_t steps)
 {
-  if (size > 2048) {
+  if (size > 2048)
     Gruvin9xV4::g_rotenc[0] += steps;
-  }
 }

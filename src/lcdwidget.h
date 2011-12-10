@@ -53,6 +53,7 @@ class lcdWidget : public QWidget {
     virtual void mousePressEvent(QMouseEvent * event)
     {
       setFocus();
+      QWidget::mousePressEvent(event);
     }
 
   protected:

@@ -43,19 +43,31 @@ simulatorDialog::~simulatorDialog()
   delete ui;
 }
 
-void simulatorDialog::closeEvent (QCloseEvent*)
+void simulatorDialog::closeEvent (QCloseEvent *)
 {
   txInterface->stopSimulation();
   timer->stop();
   delete timer;
 }
 
-void simulatorDialog::wheelEvent (QWheelEvent * event)
+void simulatorDialog::mousePressEvent(QMouseEvent *event)
+{
+  if (event->button() == Qt::MidButton)
+    middleButtonPressed = true;
+}
+
+void simulatorDialog::mouseReleaseEvent(QMouseEvent *event)
+{
+  if (event->button() == Qt::MidButton)
+    middleButtonPressed = false;
+}
+
+void simulatorDialog::wheelEvent (QWheelEvent *event)
 {
   txInterface->wheelEvent(event->delta() > 0 ? 1 : -1);
 }
 
-void simulatorDialog::keyPressEvent (QKeyEvent * event)
+void simulatorDialog::keyPressEvent (QKeyEvent *event)
 {
   switch (event->key()) {
     case Qt::Key_Enter:
@@ -263,7 +275,8 @@ void simulatorDialog::getValues()
                      upButtonPressed,
                      downButtonPressed,
                      leftButtonPressed,
-                     rightButtonPressed
+                     rightButtonPressed,
+                     middleButtonPressed
                     };
 
   txInterface->setValues(inputs);

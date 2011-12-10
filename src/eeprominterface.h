@@ -501,6 +501,7 @@ struct TxInputs {
     bool down;
     bool left;
     bool right;
+    bool re1;
 };
 
 struct TxOutputs {
