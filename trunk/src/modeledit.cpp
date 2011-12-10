@@ -394,8 +394,8 @@ void ModelEdit::tabExpos()
 
         switch(md->mode)
         {
-        case (1): str += " ->"; break;
-        case (2): str += " <-"; break;
+        case (1): str += " <-"; break;
+        case (2): str += " ->"; break;
         default:  str += "   "; break;
         };
 

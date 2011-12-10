@@ -133,12 +133,12 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
       <widget class="QComboBox" name="modeCB">
        <item>
         <property name="text">
-         <string>POS</string>
+         <string>NEG</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>NEG</string>
+         <string>POS</string>
         </property>
        </item>
        <item>
