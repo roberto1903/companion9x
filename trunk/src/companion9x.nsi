@@ -85,6 +85,7 @@ Section "companion9x" SecDummy
   File "C:\MinGW\bin\libgcc_s_dw2-1.dll"
   File "C:\MinGW\bin\mingwm10.dll"
   File "C:\MinGW\bin\libstdc++-6.dll"
+  File "C:\MinGW\bin\libpthread-2.dll"
   File "C:\Qt\4.7.3\bin\QtCore4.dll"
   File "C:\Qt\4.7.3\bin\QtGui4.dll"
   File "C:\Qt\4.7.3\bin\QtNetwork4.dll"
