@@ -250,6 +250,9 @@ int Gruvin9xInterface::getCapability(const Capability capability)
 #define INP_B_KEY_MEN 1
 #define INP_B_ID2     4
 
+#define OUT_C_LIGHT   0
+#define OUT_B_LIGHT   7
+
 namespace Gruvin9x {
 
 void StartEepromThread(const char *filename);
@@ -257,7 +260,7 @@ void StartMainThread(bool tests);
 void StopEepromThread();
 void StopMainThread();
 
-extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl, portb;
 
 extern uint8_t eeprom[2048];
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
@@ -284,7 +287,7 @@ void StartMainThread(bool tests);
 void StopEepromThread();
 void StopMainThread();
 
-extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl, portc;
 
 extern uint8_t eeprom[4080];
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
@@ -321,16 +324,18 @@ uint8_t * Gruvin9xInterface::getLcd()
     return Gruvin9xV4::lcd_buf;
 }
 
-bool Gruvin9xInterface::lcdChanged()
+bool Gruvin9xInterface::lcdChanged(bool & lightEnable)
 {
   if (size == 2048) {
     if (Gruvin9x::lcd_refresh) {
+      lightEnable = (Gruvin9x::portb & (1<<OUT_B_LIGHT));
       Gruvin9x::lcd_refresh = false;
       return true;
     }
   }
   else {
     if (Gruvin9xV4::lcd_refresh) {
+      lightEnable = (Gruvin9xV4::portc & (1<<OUT_C_LIGHT));
       Gruvin9xV4::lcd_refresh = false;
       return true;
     }

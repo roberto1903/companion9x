@@ -44,7 +44,7 @@ class Open9xInterface : public EEPROMInterface
 
     virtual uint8_t * getLcd();
 
-    bool lcdChanged();
+    bool lcdChanged(bool & lightEnable);
 
     void setValues(TxInputs &inputs);
 

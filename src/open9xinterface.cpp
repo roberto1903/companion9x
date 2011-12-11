@@ -183,7 +183,7 @@ void StartMainThread(bool tests);
 void StopEepromThread();
 void StopMainThread();
 
-extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl, portb;
 
 #define INP_E_ID2     6
 #define OUT_E_BUZZER  3
@@ -211,6 +211,9 @@ extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
 #define INP_B_KEY_DWN 3
 #define INP_B_KEY_EXT 2
 #define INP_B_KEY_MEN 1
+
+#define OUT_C_LIGHT   0
+#define OUT_B_LIGHT   7
 
 extern uint8_t eeprom[2048]; // TODO size 4096
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
@@ -240,12 +243,22 @@ uint8_t * Open9xInterface::getLcd()
   return Open9x::lcd_buf;
 }
 
-bool Open9xInterface::lcdChanged()
+bool Open9xInterface::lcdChanged(bool & lightEnable)
 {
-  if (Open9x::lcd_refresh) {
-    Open9x::lcd_refresh = false;
-    return true;
-  }
+//  if (size == 2048) {
+    if (Open9x::lcd_refresh) {
+      lightEnable = (Open9x::portb & (1<<OUT_B_LIGHT));
+      Open9x::lcd_refresh = false;
+      return true;
+    }
+//  }
+  /*else {
+    if (Gruvin9xV4::lcd_refresh) {
+      lightEnable = (Gruvin9xV4::portc & (1<<OUT_C_LIGHT));
+      Gruvin9xV4::lcd_refresh = false;
+      return true;
+    }
+  }*/
 
   return false;
 }
