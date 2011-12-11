@@ -371,7 +371,7 @@ void ModelEdit::tabExpos()
     {
         ExpoData *md = &g_model.expoData[i];
 
-        if(md->mode==0) break;
+        if (md->mode==0) break;
         QString str = "";
         while(curDest<md->chn-1)
         {
@@ -425,9 +425,8 @@ void ModelEdit::tabExpos()
     {
         curDest++;
         QString str = getSourceStr(g_eeGeneral.stickMode,curDest+1);
-
         qba.clear();
-        qba.append((quint8)-curDest);
+        qba.append((quint8)-curDest-1);
         QListWidgetItem *itm = new QListWidgetItem(str);
         itm->setData(Qt::UserRole,qba); // add new expo
         ExposlistWidget->addItem(itm);
@@ -2970,9 +2969,9 @@ void ModelEdit::expoOpen(QListWidgetItem *item)
     item = ExposlistWidget->currentItem();
 
   int idx = item->data(Qt::UserRole).toByteArray().at(0);
-  if(idx<0) {
+  if (idx<0) {
       int ch = -idx-1;
-      idx = getExpoIndex(ch); //get expo index to insert
+      idx = getExpoIndex(ch); // get expo index to insert
       gm_insertExpo(idx);
       g_model.expoData[idx].chn = ch;
   }
