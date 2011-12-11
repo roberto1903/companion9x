@@ -541,7 +541,7 @@ class EEPROMInterface
 
     virtual uint8_t * getLcd() { return NULL; }
 
-    virtual bool lcdChanged() { }
+    virtual bool lcdChanged(bool & lightEnable) { }
 
     virtual void setValues(TxInputs &inputs) { }
 

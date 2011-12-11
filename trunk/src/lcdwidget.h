@@ -25,12 +25,14 @@ class lcdWidget : public QWidget {
   public:
     lcdWidget(QWidget * parent = 0):
       QWidget(parent),
-      lcd_buf(NULL)
+      lcd_buf(NULL),
+      lightEnable(false)
     {
       memset(previous_buf, 0, W*H/8);
     }
 
-    void setData(uint8_t *buf) {
+    void setData(uint8_t *buf)
+    {
       lcd_buf = buf;
     }
 
@@ -42,9 +44,10 @@ class lcdWidget : public QWidget {
       buffer.toImage().save(fileName);
     }
 
-    void onLcdChanged()
+    void onLcdChanged(bool light)
     {
-      if (memcmp(previous_buf, lcd_buf, W*H/8)) {
+      if (light != lightEnable || memcmp(previous_buf, lcd_buf, W*H/8)) {
+        lightEnable = light;
         memcpy(previous_buf, lcd_buf, W*H/8);
         update();
       }
@@ -60,12 +63,17 @@ class lcdWidget : public QWidget {
 
     uint8_t *lcd_buf;
 
+    bool lightEnable;
+
     uint8_t previous_buf[W*H/8];
 
     inline void doPaint(QPainter & p)
     {
-      QRgb rgb = qRgb(150, 200, 152);
-      //TODO QRgb rgb = qRgb(200, 200, 200);
+      QRgb rgb;
+      if (lightEnable)
+        rgb = qRgb(150, 200, 152);
+      else
+        rgb = qRgb(200, 200, 200);
       p.setBackground(QBrush(rgb));
       p.eraseRect(0, 0, 2*W, 2*H);
 

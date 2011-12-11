@@ -141,8 +141,9 @@ void simulatorDialog::onTimerEvent()
             .arg(model->timers[0].dir ? "Count Up" : "Count Down"));
   }
   else if (ui->tabWidget->currentIndex() == 0) {
-    if (txInterface->lcdChanged())
-      ui->lcd->onLcdChanged();
+    bool lightEnable;
+    if (txInterface->lcdChanged(lightEnable))
+      ui->lcd->onLcdChanged(lightEnable);
   }
 
   if (!(lcd_counter++ % 5)) {
