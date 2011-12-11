@@ -63,7 +63,7 @@ public:
 
     enum { Type = UserType + 1 };
     int type() const { return Type; }
-
+    QColor nodecolor;
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
