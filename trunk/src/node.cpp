@@ -54,7 +54,7 @@ Node::Node(QSpinBox *sb)
     setFlag(ItemSendsGeometryChanges);
     setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
-
+    nodecolor = QColor(Qt::yellow);
     qsb = sb;
     bPressed  = false;
     centerX   = true;
@@ -100,6 +100,12 @@ void Node::stepToCenter(qreal step)
     }
 
 }
+
+void Node::setColor(QColor color)
+{
+    nodecolor=color;
+}
+
 
 void Node::setBallSize(int size)
 {
@@ -156,7 +162,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if (option->state & QStyle::State_Sunken) {
         gradient.setCenter(BALL_HEIGHT, BALL_HEIGHT);
         gradient.setFocalPoint(BALL_HEIGHT, BALL_HEIGHT);
-        gradient.setColorAt(1, nodecolor.light(120));
+        gradient.setColorAt(1, nodecolor.light(180));
         gradient.setColorAt(0, nodecolor.light(120));
     } else {
         gradient.setColorAt(0, nodecolor);

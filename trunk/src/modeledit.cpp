@@ -2449,7 +2449,7 @@ void ModelEdit::drawCurve()
         {
             nodel = nodex;
             nodex = new Node(getNodeSB(i));
-            nodex->nodecolor=*plot_color[currentCurve];
+            nodex->setColor(*plot_color[currentCurve]);
             nodex->setFixedX(true);
 
             nodex->setPos(GFX_MARGIN + i*width/(5-1),centerY - (qreal)g_model.curves5[currentCurve][i]*height/200);
@@ -2461,7 +2461,7 @@ void ModelEdit::drawCurve()
         {
             nodel = nodex;
             nodex = new Node(getNodeSB(i));
-            nodex->nodecolor=*plot_color[currentCurve];
+            nodex->setColor(*plot_color[currentCurve]);
             nodex->setFixedX(true);
 
             nodex->setPos(GFX_MARGIN + i*width/(9-1),centerY - (qreal)g_model.curves9[currentCurve-8][i]*height/200);

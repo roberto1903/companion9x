@@ -63,7 +63,6 @@ public:
 
     enum { Type = UserType + 1 };
     int type() const { return Type; }
-    QColor nodecolor;
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -77,7 +76,8 @@ public:
     void setCenteringY(bool val) {centerY = val;}
     void setFixedX(bool val) {fixedX = val;}
     void setFixedY(bool val) {fixedY = val;}
-
+    void setColor(QColor color);
+    
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
@@ -95,6 +95,7 @@ private:
     QSpinBox *qsb;
     QList<Edge *> edgeList;
     QPointF newPos;
+    QColor nodecolor;
 };
 
 #endif
