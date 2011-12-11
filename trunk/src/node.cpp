@@ -156,11 +156,11 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if (option->state & QStyle::State_Sunken) {
         gradient.setCenter(BALL_HEIGHT, BALL_HEIGHT);
         gradient.setFocalPoint(BALL_HEIGHT, BALL_HEIGHT);
-        gradient.setColorAt(1, QColor(Qt::yellow).light(120));
-        gradient.setColorAt(0, QColor(Qt::darkYellow).light(120));
+        gradient.setColorAt(1, nodecolor.light(120));
+        gradient.setColorAt(0, nodecolor.light(120));
     } else {
-        gradient.setColorAt(0, Qt::yellow);
-        gradient.setColorAt(1, Qt::darkYellow);
+        gradient.setColorAt(0, nodecolor);
+        gradient.setColorAt(1, nodecolor.dark(120));
     }
     painter->setBrush(gradient);
     painter->setPen(QPen(Qt::black, 0));
