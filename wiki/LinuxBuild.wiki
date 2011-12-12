@@ -6,12 +6,12 @@
 
 You will need ...
  * [http://qt.nokia.com/ Qt] (v4.7.4)
- * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
  * [http://www.cmake.org cmake]
- * what else ???
+ * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
+ * [http://www.codesynthesis.com/projects/xsd xsdcxx]
 
 {{{
-sudo apt-get install cmake libxerces xsdcxx ???
+sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx
 }}}
 
 = Building companion9x =
