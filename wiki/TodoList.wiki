@@ -1,0 +1,19 @@
+#summary TODO list
+
+= General =
+
+  * Display somewhere the current firmware chosen, so that it is always visible
+  * Current model displayed in bold in the MDI child windows
+  * Better look & feel for the simu layout. These big buttons are not so beautiful!
+  * Models configuration print
+  * Gruvin9x-stable simulation (should be the default)
+  * Try to catch exceptions from external firmwares and display them as errors (rather than exiting with a SEGFAULT + core dumped)
+  * Design a new dialog box with a simple progress bar, based on avrdude output interpretation. With a details hide / show button which shows what we have today
+
+
+= Import / export
+  * One model data import / export
+  * Make our own .c9x files based on an xml formalism defined in the xsd
+  * Er9x export (one TODO remaining) / simulation
+  * Th9x import / export / simulation
+
