@@ -63,22 +63,27 @@
     <widget class="QComboBox" name="eepromFormatCB">
      <item>
       <property name="text">
-       <string>gruvin9x - stock board</string>
+       <string>gruvin9x stable - stock board</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>gruvin9x - v3/v4 board</string>
+       <string>gruvin9x trunk - stock board</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>er9x</string>
+       <string>gruvin9x trunk - v3/v4 board</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>open9x</string>
+       <string>er9x trunk</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>open9x trunk</string>
       </property>
      </item>
     </widget>

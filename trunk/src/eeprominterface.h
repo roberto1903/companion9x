@@ -20,10 +20,11 @@
 #include <inttypes.h>
 #include <string.h>
 
-#define DNLD_VER_GRUVIN9X_STOCK 0
-#define DNLD_VER_GRUVIN9X_V4    1
-#define DNLD_VER_ER9X           2
-#define DNLD_VER_OPEN9X         3
+#define DNLD_VER_GRUVIN9X_STABLE_STOCK 0
+#define DNLD_VER_GRUVIN9X_STOCK 1
+#define DNLD_VER_GRUVIN9X_V4    2
+#define DNLD_VER_ER9X           3
+#define DNLD_VER_OPEN9X         4
 
 #define EESIZE_STOCK   2048
 #define EESIZE_V4      4096
