@@ -11,9 +11,8 @@
   * Design a new dialog box with a simple progress bar, based on avrdude output interpretation. With a details hide / show button which shows what we have today
 
 
-= Import / export
+= Import / export =
   * One model data import / export
   * Make our own .c9x files based on an xml formalism defined in the xsd
   * Er9x export (one TODO remaining) / simulation
   * Th9x import / export / simulation
-
