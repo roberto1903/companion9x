@@ -3,6 +3,7 @@
 #include "eeprominterface.h"
 #include "er9xinterface.h"
 #include "gruvin9xinterface.h"
+#include "gruvin9xstableinterface.h"
 #include "open9xinterface.h"
 #include "qsettings.h"
 
@@ -99,6 +100,7 @@ std::list<EEPROMInterface *> eeprom_interfaces;
 
 void RegisterEepromInterfaces()
 {
+  // TODO eeprom_interfaces.push_back(new Gruvin9xStableInterface());
   eeprom_interfaces.push_back(new Er9xInterface());
   eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
   eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
@@ -123,6 +125,9 @@ EEPROMInterface *GetEepromInterface()
 
   QSettings settings("companion9x", "companion9x");
   switch (settings.value("eeprom_format", 0).toInt()) {
+    case DNLD_VER_GRUVIN9X_STABLE_STOCK:
+      eepromInterface = new Gruvin9xStableInterface();
+      break;
     case DNLD_VER_OPEN9X:
       eepromInterface = new Open9xInterface();
       break;

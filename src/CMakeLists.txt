@@ -32,6 +32,12 @@ ADD_CUSTOM_COMMAND(
 
 ADD_CUSTOM_COMMAND(
   COMMAND make stamp
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x-stable
+  OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
+)
+
+ADD_CUSTOM_COMMAND(
+  COMMAND make stamp
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x
   OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
 )
@@ -60,11 +66,14 @@ SET( companion9x_SRCS
      ${PROJECT_BINARY_DIR}/radio.cxx
      ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
+     ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
      # th9xeeprom.cpp
      # th9xinterface.cpp
      er9xeeprom.cpp
      er9xinterface.cpp
      gruvin9xeeprom.cpp
+     gruvin9xstableinterface.cpp
+     gruvin9xstablesimulator.cpp
      gruvin9xinterface.cpp  
      gruvin9xsimulator.cpp
      gruvin9xv4simulator.cpp  
