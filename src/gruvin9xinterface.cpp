@@ -473,7 +473,7 @@ void Gruvin9xInterface::setValues(TxInputs &inputs)
 
     // rotary encoders
     Gruvin9xV4::pind = 0;
-    if (inputs.re1)   Gruvin9xV4::pind |= 0b00100000;
+    if (inputs.re1)   Gruvin9xV4::pind |= 0x20;
   }
 }
 
