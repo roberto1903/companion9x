@@ -35,5 +35,6 @@ QString getTimerMode(int tm);
 QString getPhaseName(int val);
 QString getSWName(int val);
 QString getCSWFunc(int val);
+QString getFuncName(unsigned int val);
 
 #endif // HELPERS_H

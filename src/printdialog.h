@@ -25,12 +25,14 @@ private:
 
     void printTitle();
     void printSetup();
+    void printPhases();
     void printExpo();
     void printMixes();
     void printLimits();
     void printCurves();
     void printSwitches();
     void printSafetySwitches();
+    void printFSwitches();
 
     QString fv(const QString name, const QString value);
     QString getModelName();
