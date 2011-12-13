@@ -16,7 +16,6 @@
 = Ideas from eePe =
   * Diff feature to compare two models
   * Solid bars for simulators instead of standard sliders (perhaps only css)
-  * 
 
 = Import / export =
   * One model data import / export
