@@ -360,7 +360,7 @@ void printDialog::printCurves()
         {
             str.append(doTR(QString::number(g_model->curves5[i][j]),"green"));
             if (j>0) {
-                painter.drawLine(ISIZE*(j-1)/4,ISIZE/2-(ISIZE*g_model->curves9[i][j-1])/200,ISIZE*(j)/4,ISIZE/2-(ISIZE*g_model->curves9[i][j])/200);
+                painter.drawLine(ISIZE*(j-1)/4,ISIZE/2-(ISIZE*g_model->curves5[i][j-1])/200,ISIZE*(j)/4,ISIZE/2-(ISIZE*g_model->curves5[i][j])/200);
             }
         }
         str.append("</tr>");
