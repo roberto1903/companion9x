@@ -2,7 +2,6 @@
 #include "ui_printdialog.h"
 #include "helpers.h"
 #include "eeprominterface.h"
-#include <QDir>
 #include <QImage>
 #include <QColor>
 #include <QPainter>
@@ -21,7 +20,10 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
 
     setWindowTitle(tr("Setup for: ") + g_model->name);
     ui->textEdit->clear();
-
+    curvefile5.clear();
+    curvefile9.clear();
+    curvefile5.append(tr("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name));
+    curvefile9.append(tr("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name));
     printSetup();
     printExpo();
     printMixes();
@@ -33,6 +35,16 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
     printFrSky();
     
     te->scrollToAnchor("1");
+}
+
+void printDialog::closeEvent(QCloseEvent *event) 
+{
+    QByteArray ba = curvefile5.toLatin1();
+    const char *name = ba.data(); 
+    unlink(name);
+    ba = curvefile9.toLatin1();
+    name = ba.data(); 
+    unlink(name);    
 }
 
 printDialog::~printDialog()
@@ -83,6 +95,35 @@ QString printDialog::getTimer2()
     QString str = ", " + g_model->timers[1].dir ? ", Count Up" : " Count Down";
     return tr("%1:%2, ").arg(g_model->timers[1].val/60, 2, 10, QChar('0')).arg(g_model->timers[1].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[1].mode) + str;
 }
+
+QString printDialog::FrSkyAtype(int alarm) {
+    switch(alarm) {
+        case 1:
+            return tr("Yellow");
+            break;
+        case 2:
+            return tr("Orange");
+            break;
+        case 3:
+            return tr("Red");
+            break;
+        default:
+            return "----";
+            break;
+    }
+ }
+
+QString printDialog::FrSkyUnits(int units) {
+    switch(units) {
+        case 1:
+            return tr("---");
+            break;
+        default:
+            return "V";
+            break;
+    }
+ }
+
 
 QString printDialog::getProtocol()
 {
@@ -335,7 +376,6 @@ void printDialog::printCurves()
 {
     int i,r,g,b,c;
     char buffer [16];
-    QDir *qd;
     QColor * qplot_color[8];
     qplot_color[0]=new QColor(0,0,255);
     qplot_color[1]=new QColor(0,255,0);
@@ -585,20 +625,19 @@ void printDialog::printFSwitches()
 void printDialog::printFrSky()
 {
     int tc=0;
-   QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"684\">";
+    QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"684\">";
     str.append("<tr><td colspan=9><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
     str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\">"+tr("Alarm 1")+"</td><td colspan=3 align=\"center\">"+tr("Alarm 2")+"</td></tr>");
     str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Ratio")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+    FrSkyData *fd=&g_model->frsky;
     for (int i=0; i<2; i++) {
-        FrSkyData *fd=&g_model->frsky;
-        
         if (fd->channels[i].ratio!=0) {
             tc++;
-            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><b>"+fd->channels[i].type+"</b></td><td align=\"center\"><b>"+fd->channels[i].ratio+"</b></td>");
-            str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
-            str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><font color=green>"+FrSkyUnits(fd->channels[i].type)+"</font></td><td align=\"center\"><font color=green>"+QString::number(fd->channels[i].ratio,10)+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[0].level)+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+((fd->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;")+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(fd->channels[i].alarms[0].value,10)+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[1].level)+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+((fd->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;")+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(fd->channels[i].alarms[1].value,10)+"</font></td></tr>");
         }
     }
     str.append("</table>");
