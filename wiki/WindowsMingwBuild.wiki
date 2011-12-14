@@ -13,9 +13,13 @@ The only exceptions to this where MinGW and Qt. These exceptions were made to re
 
 = Useful tools =
 
-This software is very handy for editing your PATH environmental variable
+This software is very handy for editing your PATH environmental variable:
 
 http://www.redfernplace.com/software-projects/patheditor/
+
+Or this for all environmental variables:
+
+http://sourceforge.net/projects/env-man/
 
 This file <a href="http://companion9x.googlecode.com/svn/wiki/doshere.reg">doshere.reg</a> gives you the ability to right click on a file or folder and have a DOS prompt pop up already CDed to that location. Just download it and double click it to add it to the registry. WARNING only tested on XP.
 
@@ -124,6 +128,11 @@ We have to build the Xerces library from scratch as there is no binary distribut
 Unzip the contents of xerces-c-3.1.1.zip to C:\Programs\
 
 Rename xerces-c-3.1.1 to Xerces
+
+Add an environmental variable like so (use the editor mentioned at the start or "Right click My Computer - Properties - Advanced - Environment Variables - System Variables - New"):
+{{{
+XERCESCROOT=C:\Programs\Xerces
+}}}
 
 Open a command prompt in the directory C:\Programs\Xerces
 
@@ -262,5 +271,3 @@ Finally if you want to make the installer:
 {{{
 make installer
 }}}
-
-
