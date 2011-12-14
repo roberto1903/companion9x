@@ -155,7 +155,7 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_B
 
 IF( WIN32 )
   SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
-  SET(CMAKE_EXE_LINKER_FLAGS -mno-cygwin -mwindows)
+  SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
 ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
@@ -200,7 +200,7 @@ INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 IF( WIN32 )
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
-  FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
+  FIND_PROGRAM(NSIS_EXE makensis.exe)
 
   ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi

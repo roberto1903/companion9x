@@ -19,6 +19,7 @@ FIND_PROGRAM( XSD_EXECUTABLE
   NAMES
     xsdcxx xsd xsd.exe
   PATHS
+    "C:/mingw/xsd-3.3.0-i686-windows/bin"  
     "C:/Program Files/CodeSynthesis XSD 3.2/bin"
     "[HKEY_CURRENT_USER\\xsd\\bin"
     $ENV{XSDDIR}/bin
