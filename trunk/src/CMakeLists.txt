@@ -155,9 +155,7 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_B
 
 IF( WIN32 )
   SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
-  # SET(LINK_FLAGS -Wl,-subsystem,windows -mno-cygwin -mwindows)
   SET(CMAKE_EXE_LINKER_FLAGS -mno-cygwin -mwindows)
-  SET(CMAKE_CXX_FLAGS -mno-cygwin)
 ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
