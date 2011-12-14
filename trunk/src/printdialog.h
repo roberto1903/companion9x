@@ -32,10 +32,12 @@ private:
     void printSwitches();
     void printSafetySwitches();
     void printFSwitches();
-
+    void printFrSky();
+    
     QString fv(const QString name, const QString value);
     QString getModelName();
-    QString getTimer();
+    QString getTimer1();
+    QString getTimer2();
     QString getProtocol();
     QString getCenterBeep();
     QString getTrimInc();
