@@ -30,7 +30,8 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
     printSwitches();
     printSafetySwitches();
     printFSwitches();
-
+    printFrSky();
+    
     te->scrollToAnchor("1");
 }
 
@@ -69,11 +70,18 @@ QString printDialog::fv(const QString name, const QString value)
     return "<b>" + name + ": </b><font color=green>" + value + "</font><br>";
 }
 
-QString printDialog::getTimer()
+QString printDialog::getTimer1()
 {
   // TODO timer2
-    QString str = ", " + g_model->timers[0].dir ? ", Count Down" : " Count Up";
+    QString str = ", " + g_model->timers[0].dir ? ", Count Up" : " Count Down";
     return tr("%1:%2, ").arg(g_model->timers[0].val/60, 2, 10, QChar('0')).arg(g_model->timers[0].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[0].mode) + str;
+}
+
+QString printDialog::getTimer2()
+{
+  // TODO timer2
+    QString str = ", " + g_model->timers[1].dir ? ", Count Up" : " Count Down";
+    return tr("%1:%2, ").arg(g_model->timers[1].val/60, 2, 10, QChar('0')).arg(g_model->timers[1].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[1].mode) + str;
 }
 
 QString printDialog::getProtocol()
@@ -120,7 +128,6 @@ QString printDialog::getTrimInc()
 void printDialog::printSetup()
 {
     int i,k;
-    EEPROMInterface *eepromInterface = GetEepromInterface();
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"684\">";
     str.append("<tr><td colspan=2 ><h1>");
     str.append(g_model->name);
@@ -131,7 +138,8 @@ void printDialog::printSetup()
     str.append("<tr><td>");
     str.append(fv(tr("Name"), g_model->name));
     str.append(tr("<b>EEprom Size: </b><font color=green>%1</font><br>").arg(eepromInterface->getSize(*g_model)));
-    str.append(fv(tr("Timer"), getTimer()));  //value, mode, count up/down
+    str.append(fv(tr("Timer1"), getTimer1()));  //value, mode, count up/down
+    str.append(fv(tr("Timer2"), getTimer2()));  //value, mode, count up/down
     str.append(fv(tr("Protocol"), getProtocol())); //proto, numch, delay,
     str.append(fv(tr("Pulse Polarity"), g_model->pulsePol ? "NEG" : "POS"));
     str.append(fv(tr("Throttle Trim"), g_model->thrTrim ? tr("Enabled") : tr("Disabled")));
@@ -216,7 +224,8 @@ void printDialog::printExpo()
         str.append("</font></td></tr>");
     }
     str.append("</table></td></tr></table><br>");
-    te->append(str);
+    if (ec>0)
+        te->append(str);
 }
 
 
@@ -290,7 +299,7 @@ void printDialog::printLimits()
     str.append("<tr><td>&nbsp;</td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
-        str.append(doTC(tr("CH%1").arg(i+1,2,10,QChar('0')),"",true));
+        str.append(doTC(tr("CH %1").arg(i+1,2,10,QChar('0')),"",true));
     }
     str.append("</tr>");
     str.append("<tr><td><b>Offset</b></td>");
@@ -573,6 +582,30 @@ void printDialog::printFSwitches()
         te->append(str);
 }
 
+void printDialog::printFrSky()
+{
+    int tc=0;
+   QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"684\">";
+    str.append("<tr><td colspan=9><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
+    str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\">"+tr("Alarm 1")+"</td><td colspan=3 align=\"center\">"+tr("Alarm 2")+"</td></tr>");
+    str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Ratio")+"</b></td>");
+    str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+    str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+    for (int i=0; i<2; i++) {
+        FrSkyData *fd=&g_model->frsky;
+        
+        if (fd->channels[i].ratio!=0) {
+            tc++;
+            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><b>"+fd->channels[i].type+"</b></td><td align=\"center\"><b>"+fd->channels[i].ratio+"</b></td>");
+            str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+            str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+        }
+    }
+    str.append("</table>");
+    if (tc>0)
+        te->append(str);    
+
+}
 void printDialog::on_printButton_clicked()
 {
     QPrinter printer;
