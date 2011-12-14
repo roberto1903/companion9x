@@ -17,6 +17,7 @@ int simulatorDialog::screenshotIdx = 0;
 simulatorDialog::simulatorDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::simulatorDialog),
+    timer(NULL),
     txInterface(NULL),
     g_modelIdx(-1),
     menuButtonPressed(false),
@@ -132,6 +133,13 @@ void simulatorDialog::onTimerEvent()
   txInterface->timer10ms();
 
   getValues();
+
+
+  if (txInterface->getSimulationError()) {
+    QMessageBox::critical(this, "companion9x", QString(tr("Firmware %1 error: %2")).arg(txInterface->name).arg(txInterface->getSimulationError()));
+    timer->stop();
+    return;
+  }
 
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];

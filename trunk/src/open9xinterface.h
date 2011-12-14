@@ -54,6 +54,8 @@ class Open9xInterface : public EEPROMInterface
 
     virtual void getTrims(Trims & trims);
 
+    virtual const char * getSimulationError();
+
   protected:
 
     template <class T>

@@ -1,8 +1,11 @@
 #define SIMU
+#define SIMU_EXCEPTIONS
 #define PCBSTD
 
 #undef min
 #undef max
+
+#include <exception>
 
 namespace Gruvin9x {
 

@@ -157,6 +157,8 @@ extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
 extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
 extern uint8_t getFlightPhase();
 extern bool hasExtendedTrims();
+extern uint8_t main_thread_running;
+extern char * main_thread_error;
 
 }
 
@@ -258,4 +260,9 @@ void Gruvin9xStableInterface::getTrims(Trims & trims)
     trims.extended = Gruvin9xStable::hasExtendedTrims();
     trims.values[idx] = Gruvin9xStable::getTrimValue(Gruvin9xStable::getTrimFlightPhase(idx, phase), idx);
   }
+}
+
+const char * Gruvin9xStableInterface::getSimulationError()
+{
+  return Gruvin9xStable::main_thread_running ? 0 : Gruvin9xStable::main_thread_error;
 }

@@ -554,6 +554,8 @@ class EEPROMInterface
 
     virtual void wheelEvent(uint8_t steps) { };
 
+    virtual const char * getSimulationError() { return NULL; }
+
     const char * name;
 };
 
