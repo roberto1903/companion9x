@@ -20,10 +20,9 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
 
     setWindowTitle(tr("Setup for: ") + g_model->name);
     ui->textEdit->clear();
-    curvefile5.clear();
-    curvefile9.clear();
-    curvefile5.append(tr("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name));
-    curvefile9.append(tr("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name));
+    
+    curvefile5=QString("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name);
+    curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name);
     printSetup();
     printExpo();
     printMixes();
@@ -40,7 +39,7 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
 void printDialog::closeEvent(QCloseEvent *event) 
 {
     QByteArray ba = curvefile5.toLatin1();
-    const char *name = ba.data(); 
+    char *name = ba.data(); 
     unlink(name);
     ba = curvefile9.toLatin1();
     name = ba.data(); 
@@ -85,14 +84,14 @@ QString printDialog::fv(const QString name, const QString value)
 QString printDialog::getTimer1()
 {
   // TODO timer2
-    QString str = ", " + g_model->timers[0].dir ? ", Count Up" : " Count Down";
+    QString str = ", " + g_model->timers[0].dir ? tr("Count Up") : tr("Count Down");
     return tr("%1:%2, ").arg(g_model->timers[0].val/60, 2, 10, QChar('0')).arg(g_model->timers[0].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[0].mode) + str;
 }
 
 QString printDialog::getTimer2()
 {
   // TODO timer2
-    QString str = ", " + g_model->timers[1].dir ? ", Count Up" : " Count Down";
+    QString str = ", " + g_model->timers[1].dir ? tr("Count Up") : tr("Count Down");
     return tr("%1:%2, ").arg(g_model->timers[1].val/60, 2, 10, QChar('0')).arg(g_model->timers[1].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[1].mode) + str;
 }
 
@@ -141,10 +140,10 @@ QString printDialog::getCenterBeep()
     //RETA123
     QStringList strl;
 
-    if(g_model->beepANACenter & 0x01) strl << "Rudder";
-    if(g_model->beepANACenter & 0x02) strl << "Elevator";
-    if(g_model->beepANACenter & 0x04) strl << "Throttle";
-    if(g_model->beepANACenter & 0x08) strl << "Aileron";
+    if(g_model->beepANACenter & 0x01) strl << tr("Rudder");
+    if(g_model->beepANACenter & 0x02) strl << tr("Elevator");
+    if(g_model->beepANACenter & 0x04) strl << tr("Throttle");
+    if(g_model->beepANACenter & 0x08) strl << tr("Aileron");
     if(g_model->beepANACenter & 0x10) strl << "P1";
     if(g_model->beepANACenter & 0x20) strl << "P2";
     if(g_model->beepANACenter & 0x40) strl << "P3";
@@ -157,13 +156,12 @@ QString printDialog::getTrimInc()
 {
     switch (g_model->trimInc)
     {
-    case (1): return "Extra Fine"; break;
-    case (2): return "Fine"; break;
-    case (3): return "Medium"; break;
-    case (4): return "Coarse"; break;
-    default: return "Exponential"; break;
+    case (1): return tr("Extra Fine"); break;
+    case (2): return tr("Fine"); break;
+    case (3): return tr("Medium"); break;
+    case (4): return tr("Coarse"); break;
+    default: return tr("Exponential"); break;
     }
-
 }
 
 void printDialog::printSetup()
@@ -218,7 +216,7 @@ void printDialog::printSetup()
 
 void printDialog::printExpo()
 {
-    QString str = "<table border=1 cellspacing=0 cellpadding=3><tr><td  width=\"680\"><h2>";
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td><h2>";
     str.append(tr("Expo/Dr Settings"));
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
     int ec=0;
@@ -272,7 +270,7 @@ void printDialog::printExpo()
 
 void printDialog::printMixes()
 {
-    QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\"><tr><td  width=\"680\"><h2>";
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"684\"><tr><td><h2>";
     str.append(tr("Mixers"));
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
@@ -327,7 +325,6 @@ void printDialog::printMixes()
             }
         }
         str.append("</font></td></tr>");
-
     }
     str.append("</table></td></tr></table><br>");
     te->append(str);
@@ -335,8 +332,8 @@ void printDialog::printMixes()
 
 void printDialog::printLimits()
 {
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3>");
-    str.append(tr("<tr><td colspan=%1  width=\"645\"><h2>Limits</h2></td></tr>").arg(NUM_XCHNOUT+1));
+    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"684\">");
+    str.append(tr("<tr><td colspan=%1><h2>Limits</h2></td></tr>").arg(NUM_XCHNOUT+1));
     str.append("<tr><td>&nbsp;</td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
@@ -403,8 +400,7 @@ void printDialog::printCurves()
         painter.drawLine(ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2,(ISIZE*i)/4);
         painter.drawLine((ISIZE*i)/4,ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2);
     }
-
-    str.append(tr("<table border=1 cellspacing=0 cellpadding=3><tr><td colspan=2><b>5 Points Curves</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td width=\"470\"><table border=1 cellspacing=0 cellpadding=3  width=\"100\">").arg(curvefile5));
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("5 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile5));
     str.append("<tr>");
     str.append(doTC("&nbsp;"));
     for(i=0; i<5; i++) 
@@ -421,7 +417,7 @@ void printDialog::printCurves()
         c+=b;
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
-        str.append(tr("<td width=\"70\"><font color=#%2><b>Curve %1</b></font></td>").arg(i+1).arg(buffer));
+        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
         for(int j=0; j<5; j++)
         {
             str.append(doTR(QString::number(g_model->curves5[i][j]),"green"));
@@ -435,7 +431,7 @@ void printDialog::printCurves()
     str.append("<br>");
     qi.save(curvefile5, "png",100); 
     
-    str.append(tr("<table border=1 cellspacing=0 cellpadding=3><tr><td colspan=2><b>9 Points Curves</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td width=\"470\"><table border=1 cellspacing=0 cellpadding=3 width=\"100\">").arg(curvefile9));
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("9 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile9));
     str.append("<tr><td width=\"70\">&nbsp;</td>");
     for(i=0; i<9; i++) str.append(doTC(tr("pt %1").arg(i+1), "", true));
     str.append("</tr>");
@@ -460,7 +456,7 @@ void printDialog::printCurves()
         c+=b;
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
-        str.append(tr("<td width=\"70\"><font color=#%2><b>Curve %1</b></font></td>").arg(i+1).arg(buffer));
+        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
         for(int j=0; j<9; j++) {
             str.append(doTR(QString::number(g_model->curves9[i][j]),"green"));
             if (j>0) {
@@ -479,8 +475,8 @@ void printDialog::printCurves()
 void printDialog::printSwitches()
 {
     int sc=0;
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3>");
-    str.append("<tr><td width=\"680\"><h2>"+tr("Custom Switches")+"</h2></td></tr>");
+    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"684\">");
+    str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
     for(int i=0; i<NUM_CSW; i++)
@@ -488,7 +484,7 @@ void printDialog::printSwitches()
         if(g_model->customSw[i].func)
         {
             str.append("<tr>");
-            str.append("<td width=\"60\" align=\"center\"><b>"+tr("SW%1").arg(i+1)+"</b></td>");
+            str.append("<td width=\"60\" align=\"center\"><b>"+tr("SW")+QString("%1</b></td>").arg(i+1));
             QString tstr;
             switch CS_STATE(g_model->customSw[i].func)
             {
@@ -571,8 +567,8 @@ void printDialog::printSwitches()
 void printDialog::printSafetySwitches()
 {
     int sc=0;
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3>");
-    str.append("<tr><td width=\"680\"><h2>"+tr("Safety Switches")+"</h2></td></tr>");
+    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"684\">");
+    str.append("<tr><td><h2>"+tr("Safety Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3><tr>");
     str.append("<td width=\"60\">&nbsp;</td>");
     str.append(doTC(tr("Switch"), "", true));
@@ -582,7 +578,7 @@ void printDialog::printSafetySwitches()
     {
         if (g_model->safetySw[i].swtch!=0) {
            str.append("<tr>");
-           str.append(doTC(tr("CH%1").arg(i+1),"",true));
+           str.append(doTC(tr("CH")+QString("%1").arg(i+1),"",true));
            str.append(doTC(getSWName(g_model->safetySw[i].swtch),"green"));
            str.append(doTC(QString::number(g_model->safetySw[i].val),"green"));
            str.append("</tr>");
@@ -609,7 +605,7 @@ void printDialog::printFSwitches()
     {
         if (g_model->funcSw[i].swtch!=0) {
            str.append("<tr>");
-           str.append(doTC(tr("FSW%1").arg(i+1),"",true));
+           str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
            str.append(doTC(getSWName(g_model->funcSw[i].swtch),"green"));
            str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
            str.append("</tr>");
@@ -627,7 +623,7 @@ void printDialog::printFrSky()
     int tc=0;
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"684\">";
     str.append("<tr><td colspan=9><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
-    str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\">"+tr("Alarm 1")+"</td><td colspan=3 align=\"center\">"+tr("Alarm 2")+"</td></tr>");
+    str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
     str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Ratio")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
@@ -643,8 +639,8 @@ void printDialog::printFrSky()
     str.append("</table>");
     if (tc>0)
         te->append(str);    
-
 }
+
 void printDialog::on_printButton_clicked()
 {
     QPrinter printer;
