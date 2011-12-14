@@ -6,6 +6,7 @@
 
 # Look for a root installation
 FIND_PATH(XERCESC_ROOT_DIR include/xercesc/parsers/SAXParser.hpp
+  "C:/mingw/msys/1.0/local"
   "C:/Program Files/CodeSynthesis XSD 3.2"
   /usr
   /usr/local
