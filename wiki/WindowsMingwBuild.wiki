@@ -39,7 +39,7 @@ Credit to: http://oldwiki.mingw.org/index.php/MsysShell
 
 http://sourceforge.net/projects/mingw/files/latest/download?source=files
 
-Run mingw-get-inst-20111118.exe
+Run mingw-get-inst-20111118.exe (0.4-alpha-1)
 
 *Installer choices*
   * Download latest repository Catalogs
