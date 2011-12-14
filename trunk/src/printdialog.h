@@ -19,13 +19,12 @@ public:
 
     ModelData *g_model;
     GeneralSettings *g_eeGeneral;
+    EEPROMInterface *eepromInterface;
 
 private:
     Ui::printDialog *ui;
 
-    void printTitle();
     void printSetup();
-    void printPhases();
     void printExpo();
     void printMixes();
     void printLimits();
