@@ -1,0 +1,47 @@
+#summary Building companion9x for Windows with Visual Studio
+ 
+= Building companion9X on Visual Studio for Windows =
+
+= Prerequisites =
+
+You will need ...
+ * [http://msdn.microsoft.com/fr-fr/express/aa975050.aspx Visual C++ 2010 Express] 
+ * [http://qt.nokia.com/downloads/ Qt source zip] (v4.7.4)
+ * 
+ * 
+ * 
+
+... in progress ...
+
+= Building companion9x =
+
+We're ready to grab the source files and build companion9x itself.
+
+== Check out the c9x source ==
+
+See the [http://code.google.com/p/companion9x/source/checkout project's Source page], as provided by Googlecode.
+
+{{{
+svn checkout http://companion9x.googlecode.com/svn/trunk companion9x
+}}}
+
+== Prepare a Makefile using CMake ==
+
+{{{
+cd companion9x/src
+
+cmake .
+}}}
+
+Finally, we're ready to compile ...
+
+{{{
+make clean && make
+}}}
+
+When the build process completes (with no show-stopping errors!) you will end up with a binary named `companion9x`.
+
+You should now be able to run companion9x from your terminal, like so ...
+{{{
+./companion9x
+}}}
