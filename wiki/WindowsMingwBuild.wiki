@@ -1,0 +1,266 @@
+#summary Building companion9x on Windows via MinGW
+
+= Introduction =
+
+This is a walk though describing how to build companion9x on a Windows XP box, should work on Windows 7 to.
+
+All software was installed in paths with no spaces. I tried installing in paths with spaces but it created no end of problems. It is not needed for all packages but it is much safer this way.
+
+I also don't like software that installs in the C:\ root directory so I put everything in C:\Programs\
+
+The only exceptions to this where MinGW and Qt. These exceptions were made to remain the same as Bertrand and therefore stop problems with the installer creator failing to find files.
+
+
+= Useful tools =
+
+This software is very handy for editing your PATH environmental variable
+
+http://www.redfernplace.com/software-projects/patheditor/
+
+This file <a href="http://companion9x.googlecode.com/svn/wiki/doshere.reg">doshere.reg</a> gives you the ability to right click on a file or folder and have a DOS prompt pop up already CDed to that location. Just download it and double click it to add it to the registry. WARNING only tested on XP.
+
+Once you start SH in a regular DOS prompt window the right click copy and paste menu disappears, so:
+
+  * Clicking the C:\ icon in the upper left corner reveals an edit menu that contains options for copy and paste.
+
+  * You can also use the properties option on this menu to enable "!QuickEdit Mode" so that a left-button drag highlights, a right-button click completes the copy, and then further right-button click pastes.
+
+Credit to: http://oldwiki.mingw.org/index.php/MsysShell
+
+
+
+= Get the needed tools =
+
+== MinGW ==
+
+http://sourceforge.net/projects/mingw/files/latest/download?source=files
+
+Run mingw-get-inst-20111118.exe
+
+*Installer choices*
+  * Download latest repository Catalogs
+  * Install path c:\MinGW\
+  * Select the following for install
+    *  C Compiler
+    *  C++ Compiler
+    *  MSYS Basic System
+    *  MinGW Developer Toolkit
+
+It will run and download a lot of packages then install them.
+
+Add the following to the PATH environmental variable
+
+C:\MinGW\bin
+C:\MinGW\msys\1.0\bin
+
+
+== CMake ==
+
+http://www.cmake.org/files/v2.8/cmake-2.8.6-win32-x86.exe
+
+Run cmake-2.8.6-win32-x86.exe
+
+*Installer choices*
+  * Add CMake to the system PATH for all users
+  * Install path C:\Programs\CMake-2.8
+
+Check it has added the following to the PATH environmental variable 
+
+C:\Programs\CMake-2.8\bin
+
+
+== Nokia Qt ==
+
+http://qt.nokia.com/downloads/windows-cpp
+
+Get the Qt Libraries for MinGW not the SDK
+
+Run qt-win-opensource-4.7.4-mingw.exe
+
+*Installer choices*
+  * Install path c:\Qt
+  * The installer will whine that w32api.h is V1.17 and it only likes version v1.13 ignore this warning and continue
+
+Add the following to the PATH environmental variable
+
+C:\Qt\4.7.4\bin
+
+
+== TortoiseSVN ==
+
+http://tortoisesvn.net/downloads.html
+
+Run TortoiseSVN-1.7.2.22327-win32-svn-1.7.2.msi
+
+*Installer choices*
+  * Install "command line client tools"
+  * Install path c:\Programs\TortiseSVN
+
+Add the following to the PATH environmental variable
+
+C:\Programs\TortiseSVN\bin
+
+
+== NSIS ==
+
+http://nsis.sourceforge.net/Download
+
+Run nsis-2.46-setup.exe
+
+*Installer choices*
+  * Install path c:\Programs\NSIS
+
+Add the following to the PATH environmental variable
+
+C:\Programs\NSIS\bin
+
+
+== Xerces == 
+
+http://mirror.lividpenguin.com/pub/apache//xerces/c/3/sources/xerces-c-3.1.1.zip
+
+We have to build the Xerces library from scratch as there is no binary distribution for MingGW. 
+
+Unzip the contents of xerces-c-3.1.1.zip to C:\Programs\
+
+Rename xerces-c-3.1.1 to Xerces
+
+Open a command prompt in the directory C:\Programs\Xerces
+
+Type the following at the console
+
+{{{
+sh
+./configure
+}}}
+
+This will take 2-3 minutes, once done enter:
+
+{{{
+make libxerces_c_la_LDFLAGS="-release 3.1 -no-undefined"
+}}}
+
+This extra make option is needed due a bug in the current distribution.
+See here for the current build procedure (which is wrong) <br>
+http://xerces.apache.org/xerces-c/build-3.html <br>
+And here for the correction <br>
+http://old.nabble.com/MinGW-g%2B%2B-4.6.1-error%3A-unrecognized-option-%27-no-undefined%27-td32747454.html#a32747454
+
+Get a large cup of tea, this takes a while, around 35 minutes. When done continue with:
+
+{{{
+make install
+}}}
+
+
+== !CodeSynthesis XSD ==
+
+http://www.codesynthesis.com/download/xsd/3.3/windows/i686/xsd-3.3.0-i686-windows.zip
+
+Unzip xsd-3.3.0-i686-windows.zip to C:\MinGW
+
+
+== Get companion9x via SVN ==
+
+In a path somewhere with no spaces in it create yourself a directory called companion9x. 
+
+Right click on this directory and select SVNCheckout in the menu.
+
+In the dialog box that pops up set the *URL of repository:* to http://companion9x.googlecode.com/svn/
+Leave the other options as is.
+Click OK.
+
+Some files will download.
+
+
+== FILE MODIFICATIONS (soon won't be needed) ==
+
+*In trunk/src/cmake/FindXercesC.cmake*
+
+Add the next line below line 8 (include the quotes):
+{{{
+  "C:/mingw/msys/1.0/local"
+}}}
+
+*In trunk/src/cmake/!FindXsd.cmake*
+
+Add the next line below line 21 (include the quotes):
+{{{
+    "C:/mingw/xsd-3.3.0-i686-windows/bin" 
+}}}  
+
+*In trunk/src/CMakeLists.txt*  
+  
+Change line 205 <br>
+from this: <br>
+{{{
+  FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
+}}}
+to this: <br>
+{{{
+  FIND_PROGRAM(NSIS_EXE makensis.exe)
+}}}
+  
+Change lines 158-160 <br>
+from this: <br>
+{{{  
+  # SET(LINK_FLAGS -Wl,-subsystem,windows -mno-cygwin -mwindows)
+  SET(CMAKE_EXE_LINKER_FLAGS -mno-cygwin -mwindows)
+  SET(CMAKE_CXX_FLAGS -mno-cygwin)
+}}}
+to this: <br>
+{{{
+  # SET(LINK_FLAGS -Wl,-subsystem,windows -mwindows)
+  SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
+  SET(CMAKE_CXX_FLAGS) 
+}}}
+  
+*In trunk/winbuild/companion9x.nsi.in*
+
+Change lines 89-91
+from this:
+{{{
+  File "C:\Qt\4.7.3\bin\QtCore4.dll"
+  File "C:\Qt\4.7.3\bin\QtGui4.dll"
+  File "C:\Qt\4.7.3\bin\QtNetwork4.dll"
+}}}
+to this:
+{{{
+  File "C:\Qt\4.7.4\bin\QtCore4.dll"
+  File "C:\Qt\4.7.4\bin\QtGui4.dll"
+  File "C:\Qt\4.7.4\bin\QtNetwork4.dll"  
+}}}
+  
+Remove line 88
+was:
+{{{
+  File "C:\MinGW\bin\libpthread-2.dll"
+}}}
+
+
+== Building ==
+
+Open a command prompt in the directory trunk/src
+
+Type the following at the console:
+
+{{{
+sh
+mkdir ../build
+cd ../build
+cmake -G "MSYS Makefiles" ../src
+make
+}}}
+
+Typing this will allow you to run companion9x from the build directory:
+{{{
+cp C:/Programs/Xerces/src/.libs/libxerces-c-3-1.dll .
+}}}
+
+Finally if you want to make the installer:
+
+{{{
+make installer
+}}}
+
+
