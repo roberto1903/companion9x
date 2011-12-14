@@ -169,7 +169,7 @@ http://www.codesynthesis.com/download/xsd/3.3/windows/i686/xsd-3.3.0-i686-window
 Unzip xsd-3.3.0-i686-windows.zip to C:\MinGW
 
 
-== Get companion9x via SVN ==
+= Get companion9x via SVN =
 
 In a path somewhere with no spaces in it create yourself a directory called companion9x. 
 
@@ -182,7 +182,7 @@ Click OK.
 Some files will download.
 
 
-== FILE MODIFICATIONS (soon won't be needed) ==
+= FILE MODIFICATIONS (soon won't be needed) =
 
 *In trunk/src/cmake/FindXercesC.cmake*
 
@@ -247,7 +247,7 @@ was:
 }}}
 
 
-== Building ==
+= Building =
 
 Open a command prompt in the directory trunk/src
 
