@@ -1,9 +1,12 @@
 #define SIMU
+#define SIMU_EXCEPTIONS
 #define PCBSTD
 #define DECIMALS_DISPLAYED
 
 #undef min
 #undef max
+
+#include <exception>
 
 namespace Open9x {
 

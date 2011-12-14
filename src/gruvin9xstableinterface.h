@@ -54,6 +54,8 @@ class Gruvin9xStableInterface : public EEPROMInterface
 
     virtual void getTrims(Trims & trims);
 
+    virtual const char * getSimulationError();
+
   protected:
 
     EFile *efile;

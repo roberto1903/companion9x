@@ -230,7 +230,8 @@ extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
 extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
 extern uint8_t getFlightPhase();
 extern bool hasExtendedTrims();
-
+extern uint8_t main_thread_running;
+extern char * main_thread_error;
 }
 
 void Open9xInterface::timer10ms()
@@ -340,4 +341,9 @@ void Open9xInterface::getTrims(Trims & trims)
     trims.extended = Open9x::hasExtendedTrims();
     trims.values[idx] = Open9x::getTrimValue(Open9x::getTrimFlightPhase(idx, phase), idx);
   }
+}
+
+const char * Open9xInterface::getSimulationError()
+{
+  return Open9x::main_thread_running ? 0 : Open9x::main_thread_error;
 }

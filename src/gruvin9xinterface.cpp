@@ -277,6 +277,8 @@ extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
 extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
 extern uint8_t getFlightPhase();
 extern bool hasExtendedTrims();
+extern uint8_t main_thread_running;
+extern char * main_thread_error;
 
 }
 
@@ -305,6 +307,8 @@ extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
 extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
 extern uint8_t getFlightPhase();
 extern bool hasExtendedTrims();
+extern uint8_t main_thread_running;
+extern char * main_thread_error;
 
 }
 
@@ -511,4 +515,12 @@ void Gruvin9xInterface::wheelEvent(uint8_t steps)
 {
   if (size > 2048)
     Gruvin9xV4::g_rotenc[0] += steps;
+}
+
+const char * Gruvin9xInterface::getSimulationError()
+{
+  if (size == 2048)
+    return Gruvin9x::main_thread_running ? 0 : Gruvin9x::main_thread_error;
+  else
+    return Gruvin9xV4::main_thread_running ? 0 : Gruvin9xV4::main_thread_error;
 }

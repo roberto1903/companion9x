@@ -1,10 +1,13 @@
 #define SIMU
+#define SIMU_EXCEPTIONS
 #define PCBV3
 #define PCBV4
 #define NAVIGATION_RE1
 
 #undef min
 #undef max
+
+#include <exception>
 
 namespace Gruvin9xV4 {
 

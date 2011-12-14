@@ -56,6 +56,8 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual void wheelEvent(uint8_t steps);
 
+    virtual const char * getSimulationError();
+
   protected:
 
     template <class T>
