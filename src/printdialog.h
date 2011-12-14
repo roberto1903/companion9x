@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QtGui>
+#include <QDir>
 #include "eeprominterface.h"
 
 namespace Ui {
@@ -15,8 +16,10 @@ class printDialog : public QDialog
 
 public:
     explicit printDialog(QWidget *parent = 0, GeneralSettings *gg = 0, ModelData *gm = 0);
+    
     ~printDialog();
-
+    void  closeEvent(QCloseEvent *event);
+    
     ModelData *g_model;
     GeneralSettings *g_eeGeneral;
     EEPROMInterface *eepromInterface;
@@ -41,8 +44,14 @@ private:
     QString getProtocol();
     QString getCenterBeep();
     QString getTrimInc();
+    QString FrSkyAtype(int alarm);
+    QString FrSkyUnits(int units);
+    
     QTextEdit * te;
-
+    QString curvefile5;
+    QString curvefile9;
+    QDir *qd;
+    
 private slots:
     void on_printButton_clicked();
 };
