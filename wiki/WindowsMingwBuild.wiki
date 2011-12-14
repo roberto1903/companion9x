@@ -184,49 +184,9 @@ Some files will download.
 
 = FILE MODIFICATIONS (soon won't be needed) =
 
-*In trunk/src/cmake/FindXercesC.cmake*
-
-Add the next line below line 8 (include the quotes):
-{{{
-  "C:/mingw/msys/1.0/local"
-}}}
-
-*In trunk/src/cmake/!FindXsd.cmake*
-
-Add the next line below line 21 (include the quotes):
-{{{
-    "C:/mingw/xsd-3.3.0-i686-windows/bin" 
-}}}  
-
-*In trunk/src/CMakeLists.txt*  
-  
-Change line 205 <br>
-from this: <br>
-{{{
-  FIND_PROGRAM(NSIS_EXE NSIS/makensis.exe)
-}}}
-to this: <br>
-{{{
-  FIND_PROGRAM(NSIS_EXE makensis.exe)
-}}}
-  
-Change lines 158-160 <br>
-from this: <br>
-{{{  
-  # SET(LINK_FLAGS -Wl,-subsystem,windows -mno-cygwin -mwindows)
-  SET(CMAKE_EXE_LINKER_FLAGS -mno-cygwin -mwindows)
-  SET(CMAKE_CXX_FLAGS -mno-cygwin)
-}}}
-to this: <br>
-{{{
-  # SET(LINK_FLAGS -Wl,-subsystem,windows -mwindows)
-  SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
-  SET(CMAKE_CXX_FLAGS) 
-}}}
-  
 *In trunk/winbuild/companion9x.nsi.in*
 
-Change lines 89-91
+Change lines 89-90
 from this:
 {{{
   File "C:\Qt\4.7.3\bin\QtCore4.dll"
@@ -240,12 +200,6 @@ to this:
   File "C:\Qt\4.7.4\bin\QtNetwork4.dll"  
 }}}
   
-Remove line 88
-was:
-{{{
-  File "C:\MinGW\bin\libpthread-2.dll"
-}}}
-
 
 = Building =
 
