@@ -371,8 +371,9 @@ void printDialog::printLimits()
 
 void printDialog::printCurves()
 {
-    int i,r,g,b,c;
+    int i,r,g,b,c,count;
     char buffer [16];
+    QPen pen(Qt::black, 2, Qt::SolidLine);
     QColor * qplot_color[8];
     qplot_color[0]=new QColor(0,0,255);
     qplot_color[1]=new QColor(0,255,0);
@@ -394,12 +395,6 @@ void printDialog::printCurves()
     painter.setBrush(QBrush("#FFFFFF"));
     painter.setPen(QColor(0,0,0));
     painter.drawRect(0,0,ISIZE,ISIZE);
-    painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
-    painter.drawLine(ISIZE/2,0,ISIZE/2,ISIZE);
-    for(i=0; i<5; i++) {
-        painter.drawLine(ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2,(ISIZE*i)/4);
-        painter.drawLine((ISIZE*i)/4,ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2);
-    }
     str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("5 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile5));
     str.append("<tr>");
     str.append(doTC("&nbsp;"));
@@ -408,7 +403,8 @@ void printDialog::printCurves()
     str.append("</tr>");
     for(i=0; i<MAX_CURVE5; i++)
     {
-        painter.setPen(*qplot_color[i]);
+        pen.setColor(*qplot_color[i]);
+        painter.setPen(pen);
         qplot_color[i]->getRgb(&r,&g,&b);
         c=r;
         c*=256;
@@ -418,10 +414,16 @@ void printDialog::printCurves()
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
         str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
+        count=0;
         for(int j=0; j<5; j++)
         {
+            if (g_model->curves5[i][j]!=0)
+                count++;
+        }
+        for(int j=0; j<5; j++)
+        {    
             str.append(doTR(QString::number(g_model->curves5[i][j]),"green"));
-            if (j>0) {
+            if (j>0 && count!=0) {
                 painter.drawLine(ISIZE*(j-1)/4,ISIZE/2-(ISIZE*g_model->curves5[i][j-1])/200,ISIZE*(j)/4,ISIZE/2-(ISIZE*g_model->curves5[i][j])/200);
             }
         }
@@ -429,8 +431,15 @@ void printDialog::printCurves()
     }
     str.append("</table></td></tr></table>");
     str.append("<br>");
+    painter.setPen(QColor(0,0,0));
+    painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
+    painter.drawLine(ISIZE/2,0,ISIZE/2,ISIZE);
+    for(i=0; i<5; i++) {
+        painter.drawLine(ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2,(ISIZE*i)/4);
+        painter.drawLine((ISIZE*i)/4,ISIZE/2-2,(ISIZE*i)/4,ISIZE/2+2);
+    }
+
     qi.save(curvefile5, "png",100); 
-    
     str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("9 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile9));
     str.append("<tr><td width=\"70\">&nbsp;</td>");
     for(i=0; i<9; i++) str.append(doTC(tr("pt %1").arg(i+1), "", true));
@@ -439,15 +448,14 @@ void printDialog::printCurves()
     painter.setBrush(QBrush("#FFFFFF"));
     painter.setPen(QColor(0,0,0));
     painter.drawRect(0,0,ISIZE,ISIZE);
-    painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
-    painter.drawLine(ISIZE/2,0,ISIZE/2,ISIZE);
     for(i=0; i<9; i++) {
         painter.drawLine(ISIZE/2-2,(ISIZE*i)/8,ISIZE/2+2,(ISIZE*i)/8);
         painter.drawLine((ISIZE*i)/8,ISIZE/2-2,(ISIZE*i)/8,ISIZE/2+2);
     }
     for(i=0; i<MAX_CURVE9; i++)
     {
-        painter.setPen(*qplot_color[i]);
+        pen.setColor(*qplot_color[i]);
+        painter.setPen(pen);
         qplot_color[i]->getRgb(&r,&g,&b);
         c=r;
         c*=256;
@@ -457,9 +465,15 @@ void printDialog::printCurves()
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
         str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
+        count=0;
+        for(int j=0; j<9; j++)
+        {
+            if (g_model->curves9[i][j]!=0)
+                count++;
+        }
         for(int j=0; j<9; j++) {
             str.append(doTR(QString::number(g_model->curves9[i][j]),"green"));
-            if (j>0) {
+            if (j>0 && count!=0) {
                 painter.drawLine(ISIZE*(j-1)/8,ISIZE/2-(ISIZE*g_model->curves9[i][j-1])/200,ISIZE*(j)/8,ISIZE/2-(ISIZE*g_model->curves9[i][j])/200);
             }
         }
@@ -467,6 +481,14 @@ void printDialog::printCurves()
     }
     str.append("</table></td></tr></table>");
     str.append("<br>");
+    painter.setPen(QColor(0,0,0));
+    painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
+    painter.drawLine(ISIZE/2,0,ISIZE/2,ISIZE);
+    for(i=0; i<9; i++) {
+        painter.drawLine(ISIZE/2-2,(ISIZE*i)/8,ISIZE/2+2,(ISIZE*i)/8);
+        painter.drawLine((ISIZE*i)/8,ISIZE/2-2,(ISIZE*i)/8,ISIZE/2+2);
+    }
+
     qi.save(curvefile9, "png",100);     
     
     te->append(str);
