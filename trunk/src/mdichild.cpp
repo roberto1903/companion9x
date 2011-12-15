@@ -399,6 +399,15 @@ void MdiChild::setCurrentFile(const QString &fileName)
   fileChanged = false;
   setWindowModified(false);
   setWindowTitle(userFriendlyCurrentFile() + "[*]");
+ 
+  QSettings settings("companion9x", "companion9x");
+  QStringList files = settings.value("recentFileList").toStringList();
+  files.removeAll(fileName);
+  files.prepend(fileName);
+  while (files.size() > MaxRecentFiles)
+      files.removeLast();
+ 
+  settings.setValue("recentFileList", files);
 }
 
 QString MdiChild::strippedName(const QString &fullFileName)
