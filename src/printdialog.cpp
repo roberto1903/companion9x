@@ -84,14 +84,14 @@ QString printDialog::fv(const QString name, const QString value)
 QString printDialog::getTimer1()
 {
   // TODO timer2
-    QString str = ", " + g_model->timers[0].dir ? tr("Count Up") : tr("Count Down");
+    QString str = ", " + (g_model->timers[0].dir ? tr("Count Up") : tr("Count Down"));
     return tr("%1:%2, ").arg(g_model->timers[0].val/60, 2, 10, QChar('0')).arg(g_model->timers[0].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[0].mode) + str;
 }
 
 QString printDialog::getTimer2()
 {
   // TODO timer2
-    QString str = ", " + g_model->timers[1].dir ? tr("Count Up") : tr("Count Down");
+    QString str = ", " + (g_model->timers[1].dir ? tr("Count Up") : tr("Count Down"));
     return tr("%1:%2, ").arg(g_model->timers[1].val/60, 2, 10, QChar('0')).arg(g_model->timers[1].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[1].mode) + str;
 }
 
@@ -333,7 +333,7 @@ void printDialog::printMixes()
 void printDialog::printLimits()
 {
     QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"684\">");
-    str.append(tr("<tr><td colspan=%1><h2>Limits</h2></td></tr>").arg(NUM_XCHNOUT+1));
+    str.append(QString("<tr><td colspan=%1><h2>").arg(NUM_XCHNOUT+1)+tr("Limits")+"</h2></td></tr>");
     str.append("<tr><td>&nbsp;</td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
@@ -389,13 +389,15 @@ void printDialog::printCurves()
     curvefile5.append(tr("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name));
     curvefile9.append(tr("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name));
 
-    QString str = tr("<h2>Curves</h2>");
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"684\"><tr><td><h2>";
+    str.append(tr("Curves"));
+    str.append("</h2></td></tr><tr><td>");
     QImage qi(ISIZE+1,ISIZE+1,QImage::Format_RGB32);
     QPainter painter(&qi);
     painter.setBrush(QBrush("#FFFFFF"));
     painter.setPen(QColor(0,0,0));
     painter.drawRect(0,0,ISIZE,ISIZE);
-    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("5 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile5));
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=2><b>"+tr("5 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile5));
     str.append("<tr>");
     str.append(doTC("&nbsp;"));
     for(i=0; i<5; i++) 
@@ -429,8 +431,7 @@ void printDialog::printCurves()
         }
         str.append("</tr>");
     }
-    str.append("</table></td></tr></table>");
-    str.append("<br>");
+    str.append("</table></td></tr></table></td></tr><tr><td>");
     painter.setPen(QColor(0,0,0));
     painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
     painter.drawLine(ISIZE/2,0,ISIZE/2,ISIZE);
@@ -440,7 +441,7 @@ void printDialog::printCurves()
     }
 
     qi.save(curvefile5, "png",100); 
-    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"684\"><tr><td colspan=2><b>"+tr("9 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile9));
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=2><b>"+tr("9 Points Curves")+QString("</b></td></tr><tr><td width=\"200\"><img src=\"%1\" border=0></td><td><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">").arg(curvefile9));
     str.append("<tr><td width=\"70\">&nbsp;</td>");
     for(i=0; i<9; i++) str.append(doTC(tr("pt %1").arg(i+1), "", true));
     str.append("</tr>");
@@ -479,7 +480,7 @@ void printDialog::printCurves()
         }
         str.append("</tr>");
     }
-    str.append("</table></td></tr></table>");
+    str.append("</table></td></tr></table></td></tr></table>");
     str.append("<br>");
     painter.setPen(QColor(0,0,0));
     painter.drawLine(0,ISIZE/2,ISIZE,ISIZE/2);
