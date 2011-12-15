@@ -176,7 +176,7 @@ void printDialog::printSetup()
     str.append("<tr><td><h2>"+tr("General Model Settings")+"</h2></td></tr>");
     str.append("<tr><td>");
     str.append(fv(tr("Name"), g_model->name));
-    str.append(tr("<b>EEprom Size: </b><font color=green>%1</font><br>").arg(eepromInterface->getSize(*g_model)));
+    str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=green>%1</font><br>").arg(eepromInterface->getSize(*g_model)));
     str.append(fv(tr("Timer1"), getTimer1()));  //value, mode, count up/down
     str.append(fv(tr("Timer2"), getTimer2()));  //value, mode, count up/down
     str.append(fv(tr("Protocol"), getProtocol())); //proto, numch, delay,
@@ -191,7 +191,7 @@ void printDialog::printSetup()
     str.append(tr("Flight Phases Settings"));
     str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
     str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
-    str.append("</b></td><td rowspan=2 align=center><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
+    str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
     str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
     for (i=0; i<4; i++) {
         str.append(tr("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(g_eeGeneral->stickMode, i+1)));
@@ -199,7 +199,7 @@ void printDialog::printSetup()
     str.append("</tr>");
     for (i=0; i<MAX_PHASES; i++) {
         PhaseData *pd=&g_model->phaseData[i];
-        str.append(tr("<tr><td><b>FP%1</b> <font size=+1 face='Courier New' color=green>%2</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%3</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%4</font></td>").arg(i).arg(pd->name).arg(pd->fadeIn).arg(pd->fadeOut));
+        str.append("<tr><td><b>"+tr("FP")+QString("%1</b> <font size=+1 face='Courier New' color=green>%2</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%3</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%4</font></td>").arg(i).arg(pd->name).arg(pd->fadeIn).arg(pd->fadeOut));
         for (k=0; k<4; k++) {
             if (pd->trimRef[k]==-1) {
                 str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->trim[k]));
@@ -207,7 +207,7 @@ void printDialog::printSetup()
                 str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->trimRef[k]));
             }
         }
-        str.append(tr("<td align=center>%1</td>").arg(getSWName(pd->swtch)));
+        str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(getSWName(pd->swtch)));
         str.append("</tr>");
     }
     str.append("</table></td></tr></table><br>");
@@ -233,7 +233,7 @@ void printDialog::printExpo()
             str.append("<b>"+getSourceStr(g_eeGeneral->stickMode, ed->chn+1)+"</b>");
         }
         else
-            str.append("<b>&nbsp;&nbsp;&nbsp;&nbsp;</b>");
+            str.append("<b>&nbsp;</b>");
         str.append("</font></td>");
         str.append("<td><font size=+1 face='Courier New' color=green>");
         
@@ -248,12 +248,12 @@ void printDialog::printExpo()
                 str += "&nbsp;&nbsp;&nbsp;";
                 break;
         };        
-        str += (ed->weight<0 ? tr("Weight(%1\%)").arg(ed->weight).rightJustified(6,' ') :
-                              tr("Weight(+%1\%)").arg(ed->weight).rightJustified(6, ' '));
-        str += (ed->expo<0 ? tr(" Expo(%1\%)").arg(ed->expo).rightJustified(6,' ') :
-                                      tr(" Expo(+%1\%)").arg(ed->expo).rightJustified(6, ' '));
-        if(ed->phase) str += tr(" Phase")+ "(" + getPhaseName(ed->phase) + ")";
-        if(ed->swtch) str += tr(" Switch")+ "(" + getSWName(ed->swtch) + ")";
+        str += (ed->weight<0 ? (tr("Weight")+QString("(%1\%)").arg(ed->weight).rightJustified(6,' ')) :
+                              (tr("Weight")+QString("(+%1\%)").arg(ed->weight).rightJustified(6, ' ')));
+        str += (ed->expo<0 ? (" "+tr("Expo")+QString("(%1\%)").arg(ed->expo).rightJustified(6,' ')) :
+                                      (" "+tr("Expo")+QString("(+%1\%)").arg(ed->expo).rightJustified(6, ' ')));
+        if(ed->phase) str += " "+tr("Phase")+ "(" + getPhaseName(ed->phase) + ")";
+        if(ed->swtch) str += " "+tr("Switch")+ "(" + getSWName(ed->swtch) + ")";
         if (ed->curve!=0) {
            QString crvStr = CURV_STR;
            crvStr=crvStr.mid(ed->curve*3,3);
@@ -300,7 +300,7 @@ void printDialog::printMixes()
         //QString srcStr = SRC_STR;
         //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
         str += getSourceStr(g_eeGeneral->stickMode,md->srcRaw);
-        if(md->swtch) str += " "+ tr("Switch(") + getSWName(md->swtch) + ")";
+        if(md->swtch) str += " "+ tr("Switch")+ "(" + getSWName(md->swtch) + ")";
         if(md->carryTrim) str += " "+ tr("noTrim");
         if(md->sOffset)  str += tr("Offset")+QString(" %1\%)").arg(md->sOffset);
         if(md->curve)
@@ -312,16 +312,16 @@ void printDialog::printMixes()
         }
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
-        if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
+        if(md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
         if(md->phase!=0)
         {
             PhaseData *pd = &g_model->phaseData[abs(md->phase)];
             if (md->phase<0) 
             {
-                str += tr(" Phase !FP%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
+                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
             } else 
             {
-                str += tr(" Phase FP%1 (%2)").arg(md->phase-1).arg(pd->name);               
+                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
             }
         }
         str.append("</font></td></tr>");
@@ -337,16 +337,16 @@ void printDialog::printLimits()
     str.append("<tr><td>&nbsp;</td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
-        str.append(doTC(tr("CH %1").arg(i+1,2,10,QChar('0')),"",true));
+        str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
     }
     str.append("</tr>");
-    str.append("<tr><td><b>Offset</b></td>");
+    str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
     }
     str.append("</tr>");
-    str.append("<tr><td><b>Min</b></td>");
+    str.append("<tr><td><b>"+tr("Min")+"</b></td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
         str.append(doTR(QString::number(g_model->limitData[i].min-100),"green"));
@@ -639,7 +639,7 @@ void printDialog::printFSwitches()
 void printDialog::printFrSky()
 {
     int tc=0;
-    QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td colspan=9><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
     str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
     str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Ratio")+"</b></td>");
