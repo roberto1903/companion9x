@@ -7,7 +7,7 @@
 You will need ...
  * [http://msdn.microsoft.com/fr-fr/express/aa975050.aspx Visual C++ 2010 Express] 
  * [http://qt.nokia.com/downloads/ Qt source zip] (v4.7.4)
- * 
+ * [http://xerces.apache.org/xerces-c/download.cgi Xerces vc10 version]
  * 
  * 
 
