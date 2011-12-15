@@ -246,6 +246,20 @@ void MainWindow::saveAs()
         statusBar()->showMessage(tr("File saved"), 2000);
 }
 
+void MainWindow::openRecentFile()
+ {
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+                MdiChild *child = createMdiChild();
+                if (child->loadFile(action->data().toString()))
+                {
+                    statusBar()->showMessage(tr("File loaded"), 2000);
+                    child->show();
+                    if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
+                }
+    }
+}
+
 void MainWindow::preferences()
 {
     preferencesDialog *pd = new preferencesDialog(this);
@@ -699,17 +713,28 @@ void MainWindow::createActions()
     switchLayoutDirectionAct = new QAction(QIcon(":/images/switch_dir.png"),  tr("Switch layout direction"), this);
     switchLayoutDirectionAct->setStatusTip(tr("Switch layout Left/Right"));
     connect(switchLayoutDirectionAct, SIGNAL(triggered()), this, SLOT(switchLayoutDirection()));
-
+    for (int i = 0; i < MaxRecentFiles; ++i)  {
+        recentFileActs[i] = new QAction(this);
+        recentFileActs[i]->setVisible(false);
+        connect(recentFileActs[i], SIGNAL(triggered()),
+                this, SLOT(openRecentFile()));
+    }
+    updateRecentFileActions();
 }
 
 void MainWindow::createMenus()
 
 {
+    QMenu *recentFileMenu=new QMenu(tr("Recent Files"));
+    
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
+    fileMenu->addMenu(recentFileMenu);
+    for ( int i = 0; i < MaxRecentFiles; ++i)
+        recentFileMenu->addAction(recentFileActs[i]);
     fileMenu->addSeparator();
     fileMenu->addAction(simulateAct);
     fileMenu->addAction(printAct);
@@ -851,4 +876,29 @@ void MainWindow::setActiveSubWindow(QWidget *window)
     if (!window)
         return;
     mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
+}
+
+void MainWindow::updateRecentFileActions()
+ {
+    int i,j, numRecentFiles;
+    QSettings settings("companion9x", "companion9x");
+    QStringList files = settings.value("recentFileList").toStringList();
+ 
+    numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+ 
+    for ( i = 0; i < numRecentFiles; ++i)  {
+        QString text = tr("&%1 %2").arg(i + 1).arg(strippedName(files[i]));
+        recentFileActs[i]->setText(text);
+        recentFileActs[i]->setData(files[i]);
+        recentFileActs[i]->setVisible(true);
+    }
+    for ( j = numRecentFiles; j < MaxRecentFiles; ++j)
+        recentFileActs[j]->setVisible(false);
+ 
+    separatorAct->setVisible(numRecentFiles > 0);
+}
+ 
+QString MainWindow::strippedName(const QString &fullFileName)
+ {
+    return QFileInfo(fullFileName).fileName();
 }

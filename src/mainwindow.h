@@ -42,6 +42,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define MaxRecentFiles 10
 #include <QMainWindow>
 #include <QDateTime>
 #include "downloaddialog.h"
@@ -76,6 +77,7 @@ private slots:
     void save();
     void saveAs();
     void cut();
+    void openRecentFile();
     void copy();
     void paste();
     void burnTo();
@@ -105,6 +107,9 @@ private:
     void createStatusBar();
     void readSettings();
     void writeSettings();
+    void updateRecentFileActions();
+    QString strippedName(const QString &fullFileName);
+
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     QString GetAvrdudeLocation();
@@ -162,6 +167,7 @@ private:
     QAction *aboutAct;
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
+    QAction *recentFileActs[MaxRecentFiles];
 };
 
 #endif
