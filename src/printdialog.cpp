@@ -308,7 +308,7 @@ void printDialog::printMixes()
             QString crvStr = CURV_STR;
             crvStr=crvStr.mid(md->curve*3,3);
             crvStr.replace(QString("<") ,QString("&lt;"));
-            str += tr("Curve")+QString("(%1)").arg(crvStr.remove(' '));
+            str += " "+tr("Curve")+QString("(%1)").arg(crvStr.remove(' '));
         }
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
