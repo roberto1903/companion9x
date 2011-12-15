@@ -171,7 +171,7 @@ void printDialog::printSetup()
     str.append("<tr><td colspan=2 ><h1>");
     str.append(g_model->name);
     str.append("&nbsp;(");
-    str.append(eepromInterface->name);
+    str.append(eepromInterface->getName());
     str.append(")</h1></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
     str.append("<tr><td><h2>"+tr("General Model Settings")+"</h2></td></tr>");
     str.append("<tr><td>");

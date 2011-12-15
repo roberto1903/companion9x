@@ -48,6 +48,7 @@ private:
     quint8  sw_toggled;
 
     EEPROMInterface *txInterface;
+    SimulatorInterface *simulator;
     RadioData g_radioData;
     int g_modelIdx;
     

@@ -1,11 +1,8 @@
 #include "simulatordialog.h"
 #include "ui_simulatordialog.h"
-#include "node.h"
-#include <QtGui>
-#include <inttypes.h>
 #include <iostream>
-#include "eeprominterface.h"
 #include "helpers.h"
+#include "simulatorinterface.h"
 
 #define GBALL_SIZE  20
 #define RESX        1024
@@ -19,6 +16,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     ui(new Ui::simulatorDialog),
     timer(NULL),
     txInterface(NULL),
+    simulator(NULL),
     g_modelIdx(-1),
     menuButtonPressed(false),
     exitButtonPressed(false),
@@ -46,7 +44,7 @@ simulatorDialog::~simulatorDialog()
 
 void simulatorDialog::closeEvent (QCloseEvent *)
 {
-  txInterface->stopSimulation();
+  simulator->stop();
   timer->stop();
   delete timer;
 }
@@ -65,7 +63,7 @@ void simulatorDialog::mouseReleaseEvent(QMouseEvent *event)
 
 void simulatorDialog::wheelEvent (QWheelEvent *event)
 {
-  txInterface->wheelEvent(event->delta() > 0 ? 1 : -1);
+  simulator->wheelEvent(event->delta() > 0 ? 1 : -1);
 }
 
 void simulatorDialog::keyPressEvent (QKeyEvent *event)
@@ -130,16 +128,13 @@ void simulatorDialog::onTimerEvent()
 {
   static unsigned int lcd_counter = 0;
 
-  txInterface->timer10ms();
-
-  getValues();
-
-
-  if (txInterface->getSimulationError()) {
-    QMessageBox::critical(this, "companion9x", QString(tr("Firmware %1 error: %2")).arg(txInterface->name).arg(txInterface->getSimulationError()));
+  if (!simulator->timer10ms()) {
+    QMessageBox::critical(this, "companion9x", QString(tr("Firmware %1 error: %2")).arg(txInterface->getName()).arg(simulator->getError()));
     timer->stop();
     return;
   }
+
+  getValues();
 
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];
@@ -150,7 +145,7 @@ void simulatorDialog::onTimerEvent()
   }
   else if (ui->tabWidget->currentIndex() == 0) {
     bool lightEnable;
-    if (txInterface->lcdChanged(lightEnable))
+    if (simulator->lcdChanged(lightEnable))
       ui->lcd->onLcdChanged(lightEnable);
   }
 
@@ -196,12 +191,13 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
     g_modelIdx = model_idx;
 
     txInterface = GetEepromInterface();
+    simulator = txInterface->getSimulator();
 
     g_radioData = radioData;
    
     if (model_idx < 0) {
-      windowName = QString(tr("Simulating Tx (%1)").arg(txInterface->name));
-      ui->lcd->setData(txInterface->getLcd());
+      windowName = QString(tr("Simulating Tx (%1)").arg(txInterface->getName()));
+      ui->lcd->setData(simulator->getLcd());
     }
     else {
       ui->tabWidget->removeTab(0);
@@ -242,7 +238,7 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
     s_sum = 0;
     sw_toggled = 0;
 
-    txInterface->startSimulation(radioData, model_idx<0);
+    simulator->start(radioData, model_idx<0);
 
     setupTimer();
 }
@@ -250,7 +246,7 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
 void simulatorDialog::setTrims()
 {
   Trims trims;
-  txInterface->getTrims(trims);
+  simulator->getTrims(trims);
 
   int trimMin = -125, trimMax = +125;
   if (trims.extended) {
@@ -288,7 +284,7 @@ void simulatorDialog::getValues()
                      middleButtonPressed
                     };
 
-  txInterface->setValues(inputs);
+  simulator->setValues(inputs);
 }
 
 inline int chVal(int val)
@@ -298,28 +294,28 @@ inline int chVal(int val)
 
 void simulatorDialog::on_trimHLeft_valueChanged(int value)
 {
-  txInterface->setTrim(0, value);
+  simulator->setTrim(0, value);
 }
 
 void simulatorDialog::on_trimVLeft_valueChanged(int value)
 {
-  txInterface->setTrim(1, value);
+  simulator->setTrim(1, value);
 }
 
 void simulatorDialog::on_trimHRight_valueChanged(int value)
 {
-  txInterface->setTrim(3, value);
+  simulator->setTrim(3, value);
 }
 
 void simulatorDialog::on_trimVRight_valueChanged(int value)
 {
-  txInterface->setTrim(2, value);
+  simulator->setTrim(2, value);
 }
 
 void simulatorDialog::setValues()
 {
   TxOutputs outputs;
-  txInterface->getValues(outputs);
+  simulator->getValues(outputs);
 
   ui->chnout_1->setValue(chVal(outputs.chans[0]));
   ui->chnout_2->setValue(chVal(outputs.chans[1]));

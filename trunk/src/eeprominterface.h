@@ -481,50 +481,18 @@ enum Capability {
  Simulation,
 };
 
-struct TxInputs {
-    int16_t rud;
-    int16_t ele;
-    int16_t thr;
-    int16_t ail;
-    int16_t pot1;
-    int16_t pot2;
-    int16_t pot3;
-    bool sRud;
-    bool sEle;
-    bool sThr;
-    bool sAil;
-    bool sGea;
-    bool sTrn;
-    uint8_t sId0;
-    bool menu;
-    bool exit;
-    bool up;
-    bool down;
-    bool left;
-    bool right;
-    bool re1;
-};
-
-struct TxOutputs {
-  int16_t chans[NUM_CHNOUT];
-  bool vsw[12];
-};
-
-struct Trims {
-  int16_t values[4];
-  bool extended;
-};
-
+class SimulatorInterface;
 class EEPROMInterface
 {
   public:
 
-    EEPROMInterface():
-      name(NULL)
+    EEPROMInterface()
     {
     }
 
     virtual ~EEPROMInterface() {}
+
+    virtual const char * getName() = 0;
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
 
@@ -534,29 +502,8 @@ class EEPROMInterface
 
     virtual int getCapability(const Capability) = 0;
 
-    virtual void startSimulation(RadioData &radioData, bool tests) { }
+    virtual SimulatorInterface * getSimulator() = 0;
 
-    virtual void stopSimulation() { }
-
-    virtual void timer10ms() { }
-
-    virtual uint8_t * getLcd() { return NULL; }
-
-    virtual bool lcdChanged(bool & lightEnable) { }
-
-    virtual void setValues(TxInputs &inputs) { }
-
-    virtual void getValues(TxOutputs &outputs) { }
-
-    virtual void setTrim(unsigned int idx, int value) { /*TODO*/};
-
-    virtual void getTrims(Trims & trims) { /*TODO*/};
-
-    virtual void wheelEvent(uint8_t steps) { };
-
-    virtual const char * getSimulationError() { return NULL; }
-
-    const char * name;
 };
 
 /* EEPROM string conversion functions */

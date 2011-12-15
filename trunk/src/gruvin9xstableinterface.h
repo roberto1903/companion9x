@@ -28,6 +28,8 @@ class Gruvin9xStableInterface : public EEPROMInterface
 
     virtual ~Gruvin9xStableInterface();
 
+    virtual const char * getName();
+
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
 
     virtual int save(uint8_t *eeprom, RadioData &radioData);
@@ -36,25 +38,7 @@ class Gruvin9xStableInterface : public EEPROMInterface
 
     virtual int getCapability(const Capability);
 
-    virtual void startSimulation(RadioData &radioData, bool tests);
-
-    virtual void stopSimulation();
-
-    virtual void timer10ms();
-
-    virtual uint8_t * getLcd();
-
-    bool lcdChanged(bool & lightEnable);
-
-    void setValues(TxInputs &inputs);
-
-    void getValues(TxOutputs &outputs);
-
-    virtual void setTrim(unsigned int idx, int value);
-
-    virtual void getTrims(Trims & trims);
-
-    virtual const char * getSimulationError();
+    virtual SimulatorInterface * getSimulator();
 
   protected:
 

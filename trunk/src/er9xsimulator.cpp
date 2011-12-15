@@ -14,77 +14,76 @@
  *
  */
 
-#include "gruvin9xstablesimulator.h"
-#include "gruvin9xstableinterface.h"
+#include "er9xsimulator.h"
+#include "er9xinterface.h"
 
-namespace Gruvin9xStable {
+namespace Er9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+extern void setTrim(uint8_t idx, int8_t value);
+extern void getTrims(int16_t values[4]);
 }
 
-using namespace Gruvin9xStable;
+using namespace Er9x;
 
-Gruvin9xStableSimulator::Gruvin9xStableSimulator(Gruvin9xStableInterface * gruvin9xInterface):
-  gruvin9xInterface(gruvin9xInterface)
+Er9xSimulator::Er9xSimulator(Er9xInterface * er9xInterface):
+  er9xInterface(er9xInterface)
 {
 }
 
-bool Gruvin9xStableSimulator::timer10ms()
+bool Er9xSimulator::timer10ms()
 {
 #define TIMER10MS_IMPORT
 #include "simulatorimport.h"
 }
 
-uint8_t * Gruvin9xStableSimulator::getLcd()
+uint8_t * Er9xSimulator::getLcd()
 {
 #define GETLCD_IMPORT
 #include "simulatorimport.h"
 }
 
-bool Gruvin9xStableSimulator::lcdChanged(bool & lightEnable)
+bool Er9xSimulator::lcdChanged(bool & lightEnable)
 {
 #define LCDCHANGED_IMPORT
 #include "simulatorimport.h"
 }
 
-void Gruvin9xStableSimulator::start(RadioData &radioData, bool tests)
+void Er9xSimulator::start(RadioData &radioData, bool tests)
 {
-  gruvin9xInterface->save(&Gruvin9xStable::eeprom[0], radioData);
-  StartEepromThread(NULL);
+  er9xInterface->save(&eeprom[0], radioData);
   StartMainThread(tests);
 }
 
-void Gruvin9xStableSimulator::stop()
+void Er9xSimulator::stop()
 {
   StopMainThread();
-  StopEepromThread();
 }
 
-void Gruvin9xStableSimulator::getValues(TxOutputs &outputs)
+void Er9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
 }
 
-void Gruvin9xStableSimulator::setValues(TxInputs &inputs)
+void Er9xSimulator::setValues(TxInputs &inputs)
 {
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }
 
-void Gruvin9xStableSimulator::setTrim(unsigned int idx, int value)
+void Er9xSimulator::setTrim(unsigned int idx, int value)
 {
-#define SETTRIM_IMPORT
-#include "simulatorimport.h"
+  Er9x::setTrim(idx, value);
 }
 
-void Gruvin9xStableSimulator::getTrims(Trims & trims)
+void Er9xSimulator::getTrims(Trims & trims)
 {
-#define GETTRIMS_IMPORT
-#include "simulatorimport.h"
+  trims.extended = false;
+  Er9x::getTrims(trims.values);
 }
 
-const char * Gruvin9xStableSimulator::getError()
+const char * Er9xSimulator::getError()
 {
 #define GETERROR_IMPORT
 #include "simulatorimport.h"

@@ -48,6 +48,12 @@ ADD_CUSTOM_COMMAND(
   OUTPUT ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
 )
 
+ADD_CUSTOM_COMMAND(
+  COMMAND patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
+  OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+)
+
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
 FIND_PACKAGE( Subversion )
@@ -67,19 +73,26 @@ SET( companion9x_SRCS
      ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
+     ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
      # th9xeeprom.cpp
      # th9xinterface.cpp
      er9xeeprom.cpp
      er9xinterface.cpp
+     er9xsimulator.cpp
+     er9ximport.cpp
      gruvin9xeeprom.cpp
      gruvin9xstableinterface.cpp
      gruvin9xstablesimulator.cpp
+     gruvin9xstableimport.cpp
      gruvin9xinterface.cpp  
      gruvin9xsimulator.cpp
-     gruvin9xv4simulator.cpp  
+     gruvin9ximport.cpp
+     gruvin9xv4simulator.cpp
+     gruvin9xv4import.cpp  
      open9xeeprom.cpp
      open9xinterface.cpp
      open9xsimulator.cpp  
+     open9ximport.cpp
      node.cpp
      edge.cpp
      helpers.cpp 

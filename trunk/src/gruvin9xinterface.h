@@ -22,11 +22,16 @@ class EFile;
 
 class Gruvin9xInterface : public EEPROMInterface
 {
+
+  friend class Gruvin9xSimulator;
+
   public:
 
     Gruvin9xInterface(int size);
 
     virtual ~Gruvin9xInterface();
+
+    virtual const char * getName();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
 
@@ -36,27 +41,7 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual int getCapability(const Capability);
 
-    virtual void startSimulation(RadioData &radioData, bool tests);
-
-    virtual void stopSimulation();
-
-    virtual void timer10ms();
-
-    virtual uint8_t * getLcd();
-
-    bool lcdChanged(bool & lightEnable);
-
-    void setValues(TxInputs &inputs);
-
-    void getValues(TxOutputs &outputs);
-
-    virtual void setTrim(unsigned int idx, int value);
-
-    virtual void getTrims(Trims & trims);
-
-    virtual void wheelEvent(uint8_t steps);
-
-    virtual const char * getSimulationError();
+    virtual SimulatorInterface * getSimulator();
 
   protected:
 
