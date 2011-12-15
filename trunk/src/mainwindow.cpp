@@ -511,6 +511,7 @@ void MainWindow::updateMenus()
                          activeMdiChild()->hasSelection());
     cutAct->setEnabled(hasSelection);
     copyAct->setEnabled(hasSelection);
+    updateRecentFileActions();
 }
 
 void MainWindow::updateWindowMenu()
