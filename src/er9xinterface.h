@@ -28,13 +28,17 @@ class Er9xInterface : public EEPROMInterface
 
     virtual ~Er9xInterface();
 
-    virtual bool load(RadioData &, uint8_t *eeprom, int size);
+    virtual const char * getName();
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData);
+    virtual bool load(RadioData &, uint8_t * eeprom, int size);
+
+    virtual int save(uint8_t * eeprom, RadioData & radioData);
 
     virtual int getSize(ModelData &);
 
     virtual int getCapability(const Capability);
+
+    virtual SimulatorInterface * getSimulator();
 
   protected:
 

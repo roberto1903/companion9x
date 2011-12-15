@@ -17,6 +17,7 @@
 #include <iostream>
 #include "er9xinterface.h"
 #include "er9xeeprom.h"
+#include "er9xsimulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -36,6 +37,11 @@ efile(new EFile())
 Er9xInterface::~Er9xInterface()
 {
   delete efile;
+}
+
+const char * Er9xInterface::getName()
+{
+  return "Er9x";
 }
 
 bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
@@ -146,7 +152,14 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case FuncSwitches:
       return 0;
+    case Simulation:
+      return 1;
     default:
       return 0;
   }
+}
+
+SimulatorInterface * Er9xInterface::getSimulator()
+{
+  return new Er9xSimulator(this);
 }

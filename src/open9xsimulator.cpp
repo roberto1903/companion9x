@@ -1,43 +1,91 @@
-#define SIMU
-#define SIMU_EXCEPTIONS
-#define PCBSTD
-#define DECIMALS_DISPLAYED
+/*
+ * Author - Bertrand Songis <bsongis@gmail.com>
+ * 
+ * Based on th9x -> http://code.google.com/p/th9x/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
 
-#undef min
-#undef max
-
-#include <exception>
+#include "open9xsimulator.h"
+#include "open9xinterface.h"
 
 namespace Open9x {
+#define NAMESPACE_IMPORT
+#include "simulatorimport.h"
+}
 
-#include "../open9x/gruvin9x.cpp"
-#include "../open9x/pulses.cpp"
-#include "../open9x/stamp.cpp"
-#include "../open9x/menus.cpp"
-#include "../open9x/model_menus.cpp"
-#include "../open9x/general_menus.cpp"
-#include "../open9x/main_views.cpp"
-#include "../open9x/statistics_views.cpp"
-#include "../open9x/pers.cpp"
-#include "../open9x/file.cpp"
-#include "../open9x/lcd.cpp"
-#include "../open9x/drivers.cpp"
-#include "../open9x/simpgmspace.cpp"
+using namespace Open9x;
 
-int16_t g_anas[NUM_STICKS+NUM_POTS];
-
-uint16_t anaIn(uint8_t chan)
+Open9xSimulator::Open9xSimulator(Open9xInterface * open9xInterface):
+    open9xInterface(open9xInterface)
 {
-  if (chan == 7)
-    return 1500;
-  else
-    return g_anas[chan];
 }
 
-bool hasExtendedTrims()
+bool Open9xSimulator::timer10ms()
 {
-  return g_model.extendedTrims;
+#define TIMER10MS_IMPORT
+#include "simulatorimport.h"
 }
 
+uint8_t * Open9xSimulator::getLcd()
+{
+#define GETLCD_IMPORT
+#include "simulatorimport.h"
 }
 
+bool Open9xSimulator::lcdChanged(bool & lightEnable)
+{
+#define LCDCHANGED_IMPORT
+#include "simulatorimport.h"
+}
+
+void Open9xSimulator::start(RadioData &radioData, bool tests)
+{
+  open9xInterface->save(&Open9x::eeprom[0], radioData);
+  StartEepromThread(NULL);
+  StartMainThread(tests);
+}
+
+void Open9xSimulator::stop()
+{
+  StopMainThread();
+  StopEepromThread();
+}
+
+void Open9xSimulator::getValues(TxOutputs &outputs)
+{
+#define GETVALUES_IMPORT
+#include "simulatorimport.h"
+}
+
+void Open9xSimulator::setValues(TxInputs &inputs)
+{
+#define SETVALUES_IMPORT
+#include "simulatorimport.h"
+}
+
+void Open9xSimulator::setTrim(unsigned int idx, int value)
+{
+#define SETTRIM_IMPORT
+#include "simulatorimport.h"
+}
+
+void Open9xSimulator::getTrims(Trims & trims)
+{
+#define GETTRIMS_IMPORT
+#include "simulatorimport.h"
+}
+
+const char * Open9xSimulator::getError()
+{
+#define GETERROR_IMPORT
+#include "simulatorimport.h"
+}

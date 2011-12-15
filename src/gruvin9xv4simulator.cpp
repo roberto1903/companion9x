@@ -1,46 +1,100 @@
-#define SIMU
-#define SIMU_EXCEPTIONS
-#define PCBV3
+/*
+ * Author - Bertrand Songis <bsongis@gmail.com>
+ * 
+ * Based on th9x -> http://code.google.com/p/th9x/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
+
+#include "gruvin9xv4simulator.h"
+#include "gruvin9xinterface.h"
+
 #define PCBV4
-#define NAVIGATION_RE1
-
-#undef min
-#undef max
-
-#include <exception>
 
 namespace Gruvin9xV4 {
+#define NAMESPACE_IMPORT
+#include "simulatorimport.h"
+}
 
-#include "../gruvin9x/gruvin9x.cpp"
-#include "../gruvin9x/gtime.cpp"
-#include "../gruvin9x/rtc.cpp"
-#include "../gruvin9x/pulses.cpp"
-#include "../gruvin9x/stamp.cpp"
-#include "../gruvin9x/menus.cpp"
-#include "../gruvin9x/model_menus.cpp"
-#include "../gruvin9x/general_menus.cpp"
-#include "../gruvin9x/main_views.cpp"
-#include "../gruvin9x/statistics_views.cpp"
-#include "../gruvin9x/pers.cpp"
-#include "../gruvin9x/file.cpp"
-#include "../gruvin9x/lcd.cpp"
-#include "../gruvin9x/drivers.cpp"
-#include "../gruvin9x/simpgmspace.cpp"
+using namespace Gruvin9xV4;
 
-int16_t g_anas[NUM_STICKS+NUM_POTS];
-
-uint16_t anaIn(uint8_t chan)
+Gruvin9xV4Simulator::Gruvin9xV4Simulator(Gruvin9xInterface * gruvin9xInterface):
+  gruvin9xInterface(gruvin9xInterface)
 {
-  if (chan == 7)
-    return 1500;
-  else
-    return g_anas[chan];
 }
 
-bool hasExtendedTrims()
+bool Gruvin9xV4Simulator::timer10ms()
 {
-  return g_model.extendedTrims;
+#define TIMER10MS_IMPORT
+#include "simulatorimport.h"
 }
 
+uint8_t * Gruvin9xV4Simulator::getLcd()
+{
+#define GETLCD_IMPORT
+#include "simulatorimport.h"
 }
 
+bool Gruvin9xV4Simulator::lcdChanged(bool & lightEnable)
+{
+#define LCDCHANGED_IMPORT
+#include "simulatorimport.h"
+}
+
+void Gruvin9xV4Simulator::start(RadioData &radioData, bool tests)
+{
+  g_rotenc[0] = 0;
+  g_rotenc[1] = 0;
+  gruvin9xInterface->save(&eeprom[0], radioData);
+  StartEepromThread(NULL);
+  StartMainThread(tests);
+}
+
+void Gruvin9xV4Simulator::stop()
+{
+  StopMainThread();
+  StopEepromThread();
+}
+
+void Gruvin9xV4Simulator::getValues(TxOutputs &outputs)
+{
+#define GETVALUES_IMPORT
+#include "simulatorimport.h"
+}
+
+void Gruvin9xV4Simulator::setValues(TxInputs &inputs)
+{
+#define SETVALUES_IMPORT
+#include "simulatorimport.h"
+}
+
+void Gruvin9xV4Simulator::setTrim(unsigned int idx, int value)
+{
+#define SETTRIM_IMPORT
+#include "simulatorimport.h"
+}
+
+void Gruvin9xV4Simulator::getTrims(Trims & trims)
+{
+#define GETTRIMS_IMPORT
+#include "simulatorimport.h"
+}
+
+void Gruvin9xV4Simulator::wheelEvent(uint8_t steps)
+{
+  g_rotenc[0] += steps;
+}
+
+const char * Gruvin9xV4Simulator::getError()
+{
+#define GETERROR_IMPORT
+#include "simulatorimport.h"
+}

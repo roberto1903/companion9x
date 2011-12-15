@@ -17,6 +17,7 @@
 #include <iostream>
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
+#include "open9xsimulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -31,12 +32,16 @@
 Open9xInterface::Open9xInterface():
 efile(new EFile())
 {
-  name = "Open9x";
 }
 
 Open9xInterface::~Open9xInterface()
 {
   delete efile;
+}
+
+const char * Open9xInterface::getName()
+{
+  return "Open9x";
 }
 
 template <class T>
@@ -176,174 +181,7 @@ int Open9xInterface::getCapability(const Capability capability)
   }
 }
 
-namespace Open9x {
-
-void StartEepromThread(const char *filename);
-void StartMainThread(bool tests);
-void StopEepromThread();
-void StopMainThread();
-
-extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl, portb;
-
-#define INP_E_ID2     6
-#define OUT_E_BUZZER  3
-#define INP_E_AileDR  1
-#define INP_E_ThrCt   0
-#define INP_E_ElevDR  2
-#define INP_E_Trainer 5
-#define INP_E_Gear    4
-#define INP_C_ThrCt   6
-#define INP_C_AileDR  7
-#define INP_G_ID1      3
-#define INP_G_RF_POW   1
-#define INP_G_RuddDR   0
-
-#define INP_P_KEY_EXT   5
-#define INP_P_KEY_MEN   4
-#define INP_P_KEY_LFT   3
-#define INP_P_KEY_RGT   2
-#define INP_P_KEY_UP    1
-#define INP_P_KEY_DWN   0
-
-#define INP_B_KEY_LFT 6
-#define INP_B_KEY_RGT 5
-#define INP_B_KEY_UP  4
-#define INP_B_KEY_DWN 3
-#define INP_B_KEY_EXT 2
-#define INP_B_KEY_MEN 1
-
-#define OUT_C_LIGHT   0
-#define OUT_B_LIGHT   7
-
-extern uint8_t eeprom[2048]; // TODO size 4096
-extern int16_t g_anas[NUM_STICKS+NUM_POTS];
-extern int16_t g_chans512[NUM_CHNOUT];
-
-extern uint8_t lcd_buf[128*64/8];
-extern bool lcd_refresh;
-
-extern void per10ms();
-extern bool getSwitch(int8_t swtch, bool nc=0);
-
-extern uint8_t getTrimFlightPhase(uint8_t idx, uint8_t phase);
-extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
-extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
-extern uint8_t getFlightPhase();
-extern bool hasExtendedTrims();
-extern uint8_t main_thread_running;
-extern char * main_thread_error;
-}
-
-void Open9xInterface::timer10ms()
+SimulatorInterface * Open9xInterface::getSimulator()
 {
-  Open9x::per10ms();
-}
-
-uint8_t * Open9xInterface::getLcd()
-{
-  return Open9x::lcd_buf;
-}
-
-bool Open9xInterface::lcdChanged(bool & lightEnable)
-{
-//  if (size == 2048) {
-    if (Open9x::lcd_refresh) {
-      lightEnable = (Open9x::portb & (1<<OUT_B_LIGHT));
-      Open9x::lcd_refresh = false;
-      return true;
-    }
-//  }
-  /*else {
-    if (Gruvin9xV4::lcd_refresh) {
-      lightEnable = (Gruvin9xV4::portc & (1<<OUT_C_LIGHT));
-      Gruvin9xV4::lcd_refresh = false;
-      return true;
-    }
-  }*/
-
-  return false;
-}
-
-void Open9xInterface::startSimulation(RadioData &radioData, bool tests)
-{
-  save(&Open9x::eeprom[0], radioData);
-  Open9x::StartEepromThread(NULL);
-  Open9x::StartMainThread(tests);
-}
-
-void Open9xInterface::stopSimulation()
-{
-  Open9x::StopMainThread();
-  Open9x::StopEepromThread();
-}
-
-void Open9xInterface::getValues(TxOutputs &outputs)
-{
-  memcpy(outputs.chans, Open9x::g_chans512, sizeof(outputs.chans));
-  for (int i=0; i<12; i++)
-    outputs.vsw[i] = Open9x::getSwitch(DSW_SW1+i, 0);
-}
-
-void Open9xInterface::setValues(TxInputs &inputs)
-{
-  Open9x::g_anas[0] = inputs.rud;
-  Open9x::g_anas[1] = inputs.ele;
-  Open9x::g_anas[2] = inputs.thr;
-  Open9x::g_anas[3] = inputs.ail;
-  Open9x::g_anas[4] = inputs.pot1;
-  Open9x::g_anas[5] = inputs.pot2;
-  Open9x::g_anas[6] = inputs.pot3;
-
-  if (inputs.sRud) Open9x::ping &= ~(1<<INP_G_RuddDR); else Open9x::ping |= (1<<INP_G_RuddDR);
-  if (inputs.sEle) Open9x::pine &= ~(1<<INP_E_ElevDR); else Open9x::pine |= (1<<INP_E_ElevDR);
-  if (inputs.sThr) Open9x::pine &= ~(1<<INP_E_ThrCt); else Open9x::pine |= (1<<INP_E_ThrCt);
-  if (inputs.sAil) Open9x::pine &= ~(1<<INP_E_AileDR); else Open9x::pine |= (1<<INP_E_AileDR);
-  if (inputs.sGea) Open9x::pine &= ~(1<<INP_E_Gear); else Open9x::pine |= (1<<INP_E_Gear);
-  if (inputs.sTrn) Open9x::pine &= ~(1<<INP_E_Trainer); else Open9x::pine |= (1<<INP_E_Trainer);
-
-  switch (inputs.sId0) {
-    case 2:
-      Open9x::ping &= ~(1<<INP_G_ID1);
-      Open9x::pine |= (1<<INP_E_ID2);
-      break;
-    case 1:
-      Open9x::ping &= ~(1<<INP_G_ID1);
-      Open9x::pine &= ~(1<<INP_E_ID2);
-      break;
-    case 0:
-      Open9x::ping |=  (1<<INP_G_ID1);
-      Open9x::pine &= ~(1<<INP_E_ID2);
-      break;
-  }
-
-  // keyboad
-  Open9x::pinb &= ~ 0x7e;
-  Open9x::pinl &= ~ 0x3f; // for v4
-
-  if (inputs.menu) { Open9x::pinb |= (1<<INP_B_KEY_MEN); Open9x::pinl |= (1<<INP_P_KEY_MEN); }
-  if (inputs.exit) { Open9x::pinb |= (1<<INP_B_KEY_EXT); Open9x::pinl |= (1<<INP_P_KEY_EXT); }
-  if (inputs.up) { Open9x::pinb |= (1<<INP_B_KEY_UP); Open9x::pinl |= (1<<INP_P_KEY_UP); }
-  if (inputs.down) { Open9x::pinb |= (1<<INP_B_KEY_DWN); Open9x::pinl |= (1<<INP_P_KEY_DWN); }
-  if (inputs.left) { Open9x::pinb |= (1<<INP_B_KEY_LFT); Open9x::pinl |= (1<<INP_P_KEY_LFT); }
-  if (inputs.right) { Open9x::pinb |= (1<<INP_B_KEY_RGT); Open9x::pinl |= (1<<INP_P_KEY_RGT); }
-}
-
-void Open9xInterface::setTrim(unsigned int idx, int value)
-{
-  uint8_t phase = Open9x::getTrimFlightPhase(idx, Open9x::getFlightPhase());
-  Open9x::setTrimValue(phase, idx, value);
-}
-
-void Open9xInterface::getTrims(Trims & trims)
-{
-  uint8_t phase = Open9x::getFlightPhase();
-  for (uint8_t idx=0; idx<4; idx++) {
-    trims.extended = Open9x::hasExtendedTrims();
-    trims.values[idx] = Open9x::getTrimValue(Open9x::getTrimFlightPhase(idx, phase), idx);
-  }
-}
-
-const char * Open9xInterface::getSimulationError()
-{
-  return Open9x::main_thread_running ? 0 : Open9x::main_thread_error;
+  return new Open9xSimulator(this);
 }
