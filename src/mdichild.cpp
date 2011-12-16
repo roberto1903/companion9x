@@ -398,7 +398,7 @@ void MdiChild::setCurrentFile(const QString &fileName)
   isUntitled = false;
   fileChanged = false;
   setWindowModified(false);
-  setWindowTitle(userFriendlyCurrentFile() + "[*]");
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+")");
  
   QSettings settings("companion9x", "companion9x");
   int MaxRecentFiles =settings.value("history_size",10).toInt();
