@@ -44,6 +44,10 @@ const char * Open9xInterface::getName()
   return "Open9x";
 }
 
+const int Open9xInterface::EEpromSize() {
+    return EESIZE_STOCK;
+}
+
 template <class T>
 void Open9xInterface::loadModel(ModelData &model)
 {

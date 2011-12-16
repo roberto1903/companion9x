@@ -32,6 +32,8 @@ class Gruvin9xInterface : public EEPROMInterface
     virtual ~Gruvin9xInterface();
 
     virtual const char * getName();
+    
+    virtual const int  EEpromSize();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
 

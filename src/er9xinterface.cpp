@@ -44,6 +44,10 @@ const char * Er9xInterface::getName()
   return "Er9x";
 }
 
+const int Er9xInterface::EEpromSize() {
+    return EESIZE_STOCK;
+}
+
 bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying er9x import... ";
