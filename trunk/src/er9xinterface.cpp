@@ -44,7 +44,7 @@ const char * Er9xInterface::getName()
   return "Er9x";
 }
 
-const int Er9xInterface::EEpromSize() {
+const int Er9xInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
@@ -143,6 +143,19 @@ int Er9xInterface::getSize(ModelData &model)
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
   if(sz != sizeof(Er9xModelData)) {
      return -1;
+  }
+  return efile->size(FILE_TMP);
+}
+
+int Er9xInterface::getSize(GeneralSettings &settings)
+{
+  uint8_t tmp[EESIZE_STOCK];
+  efile->EeFsInit(tmp, EESIZE_STOCK, true);
+  
+  Er9xGeneral er9xGeneral(settings);
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
+  if(sz != sizeof(Er9xGeneral)) {
+    return -1;
   }
   return efile->size(FILE_TMP);
 }

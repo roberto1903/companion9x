@@ -71,6 +71,7 @@ void MdiChild::eepromInterfaceChanged()
 {
   ui->modelsList->refreshList();
   ui->SimulateTxButton->setEnabled(GetEepromInterface()->getCapability(Simulation));
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
 }
 
 void MdiChild::cut()
@@ -102,6 +103,7 @@ void MdiChild::setModified()
 {
   ui->modelsList->refreshList();
   fileChanged = true;
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
   documentWasModified();
 }
 
@@ -116,7 +118,7 @@ void MdiChild::OpenEditWindow()
 {
   int row = ui->modelsList->currentRow();
 
-  if (row) {
+  if (row<17) {
     //TODO error checking
     bool isNew = false;
     ModelData &model = radioData.models[row - 1];
@@ -147,8 +149,7 @@ void MdiChild::newFile()
 
   isUntitled = true;
   curFile = tr("document%1.eepe").arg(sequenceNumber++);
-  setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+")");
-
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
 }
 
 bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
@@ -398,8 +399,7 @@ void MdiChild::setCurrentFile(const QString &fileName)
   isUntitled = false;
   fileChanged = false;
   setWindowModified(false);
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+")");
- 
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
   QSettings settings("companion9x", "companion9x");
   int MaxRecentFiles =settings.value("history_size",10).toInt();
   QStringList files = settings.value("recentFileList").toStringList();
@@ -480,4 +480,8 @@ void MdiChild::viableModelSelected(bool viable)
   emit copyAvailable(viable);
 }
 
+void MdiChild::setEEpromAvail(int eavail)
+{
+    EEPromAvail=eavail;
+}
 

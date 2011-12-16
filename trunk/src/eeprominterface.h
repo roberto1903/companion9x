@@ -499,12 +499,14 @@ class EEPROMInterface
     virtual int save(uint8_t *eeprom, RadioData &radioData) = 0;
 
     virtual int getSize(ModelData &) = 0;
-
+    
+    virtual int getSize(GeneralSettings &) = 0;
+    
     virtual int getCapability(const Capability) = 0;
 
     virtual SimulatorInterface * getSimulator() = 0;
 
-    virtual const int EEpromSize() = 0;
+    virtual const int getEEpromSize() = 0;
 };
 
 /* EEPROM string conversion functions */

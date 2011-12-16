@@ -89,6 +89,7 @@ public:
     static int getFileType(const QString &fullFileName);
     void viableModelSelected(bool viable);
     void eepromInterfaceChanged();
+    void setEEpromAvail(int eavail);
 
 signals:
     void copyAvailable(bool val);
@@ -125,6 +126,7 @@ private:
 
     bool isUntitled;
     bool fileChanged;
+    int EEPromAvail;
 };
 
 #endif
