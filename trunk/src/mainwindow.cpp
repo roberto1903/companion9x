@@ -249,15 +249,26 @@ void MainWindow::saveAs()
 
 void MainWindow::openRecentFile()
  {
+    QSettings settings("companion9x", "companion9x");
     QAction *action = qobject_cast<QAction *>(sender());
-    if (action) {
-                MdiChild *child = createMdiChild();
-                if (child->loadFile(action->data().toString()))
-                {
-                    statusBar()->showMessage(tr("File loaded"), 2000);
-                    child->show();
-                    if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
-                }
+    if (action) 
+    {
+        QString fileName=action->data().toString();
+        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+
+        QMdiSubWindow *existing = findMdiChild(fileName);
+        if (existing) {
+            mdiArea->setActiveSubWindow(existing);
+            return;
+        }
+
+        MdiChild *child = createMdiChild();
+        if (child->loadFile(fileName))
+        {
+            statusBar()->showMessage(tr("File loaded"), 2000);
+            child->show();
+            if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
+        }
     }
 }
 
