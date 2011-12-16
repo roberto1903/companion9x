@@ -21,6 +21,13 @@ Or this for all environmental variables:
 
 http://sourceforge.net/projects/env-man/
 
+If you don't want to use either of these tools (and I really recommend you do) then you can edit environmental variables by
+  * Right clicking on My Computer
+  * Select Properties
+  * Click the Advanced tab on the window that pops up
+  * Click the Environment Variables button
+  * You will find PATH in the System Variables list
+
 This file <a href="http://companion9x.googlecode.com/svn/wiki/doshere.reg">doshere.reg</a> gives you the ability to right click on a file or folder and have a DOS prompt pop up already CDed to that location. Just download it and double click it to add it to the registry. WARNING only tested on XP.
 
 Once you start SH in a regular DOS prompt window the right click copy and paste menu disappears, so:
@@ -54,7 +61,7 @@ It will run and download a lot of packages then install them.
 
 Add the following to the PATH environmental variable
 
-C:\MinGW\bin
+C:\MinGW\bin <br>
 C:\MinGW\msys\1.0\bin
 
 
@@ -121,18 +128,13 @@ C:\Programs\NSIS\bin
 
 == Xerces == 
 
-http://mirror.lividpenguin.com/pub/apache//xerces/c/3/sources/xerces-c-3.1.1.zip
+http://mirror.lividpenguin.com/pub/apache/xerces/c/3/sources/xerces-c-3.1.1.zip
 
 We have to build the Xerces library from scratch as there is no binary distribution for MingGW. 
 
 Unzip the contents of xerces-c-3.1.1.zip to C:\Programs\
 
 Rename xerces-c-3.1.1 to Xerces
-
-Add an environmental variable like so (use the editor mentioned at the start or "Right click My Computer - Properties - Advanced - Environment Variables - System Variables - New"):
-{{{
-XERCESCROOT=C:\Programs\Xerces
-}}}
 
 Open a command prompt in the directory C:\Programs\Xerces
 
@@ -181,25 +183,6 @@ Click OK.
 
 Some files will download.
 
-
-= FILE MODIFICATIONS (soon won't be needed) =
-
-*In trunk/winbuild/companion9x.nsi.in*
-
-Change lines 89-90
-from this:
-{{{
-  File "C:\Qt\4.7.3\bin\QtCore4.dll"
-  File "C:\Qt\4.7.3\bin\QtGui4.dll"
-  File "C:\Qt\4.7.3\bin\QtNetwork4.dll"
-}}}
-to this:
-{{{
-  File "C:\Qt\4.7.4\bin\QtCore4.dll"
-  File "C:\Qt\4.7.4\bin\QtGui4.dll"
-  File "C:\Qt\4.7.4\bin\QtNetwork4.dll"  
-}}}
-  
 
 = Building =
 
