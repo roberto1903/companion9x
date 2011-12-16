@@ -71,7 +71,7 @@ void MdiChild::eepromInterfaceChanged()
 {
   ui->modelsList->refreshList();
   ui->SimulateTxButton->setEnabled(GetEepromInterface()->getCapability(Simulation));
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") %1 Bytes free").arg(EEPromAvail));
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
 }
 
 void MdiChild::cut()
@@ -103,7 +103,7 @@ void MdiChild::setModified()
 {
   ui->modelsList->refreshList();
   fileChanged = true;
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") %1 Bytes free").arg(EEPromAvail));
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
   documentWasModified();
 }
 
@@ -149,7 +149,7 @@ void MdiChild::newFile()
 
   isUntitled = true;
   curFile = tr("document%1.eepe").arg(sequenceNumber++);
-  setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+QString(") %1 Bytes free").arg(EEPromAvail));
+  setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
 
 }
 
@@ -400,7 +400,7 @@ void MdiChild::setCurrentFile(const QString &fileName)
   isUntitled = false;
   fileChanged = false;
   setWindowModified(false);
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") %1 Bytes free").arg(EEPromAvail));
+  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
  
   QSettings settings("companion9x", "companion9x");
   int MaxRecentFiles =settings.value("history_size",10).toInt();
