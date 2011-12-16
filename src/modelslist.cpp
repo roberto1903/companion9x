@@ -242,24 +242,30 @@ void ModelsListWidget::focusOutEvent ( QFocusEvent * event )
 void ModelsListWidget::refreshList()
 {
     clear();
-
+    int msize;
     QString name = radioData->generalSettings.ownerName;
     if(!name.isEmpty())
         name.prepend(" - ");
     addItem(tr("General Settings") + name);
 
     EEPROMInterface *eepromInterface = GetEepromInterface();
-
+    UsedEEpromSize=0;
+    UsedEEpromSize+=eepromInterface->getSize(radioData->generalSettings);
+    
     for(uint8_t i=0; i<MAX_MODELS; i++)
     {
        QString item = QString().sprintf("%02d: ", i+1);
        if (!radioData->models[i].isempty()) {
          item += QString().sprintf("%10s", radioData->models[i].name);
-         if (eepromInterface)
-           item += QString().sprintf("%5d", eepromInterface->getSize(radioData->models[i]));
+         if (eepromInterface) {
+           msize= eepromInterface->getSize(radioData->models[i]);
+           item += QString().sprintf("%5d", msize);
+           UsedEEpromSize+=msize;
+         }
        }
        addItem(item);
     }
+    ((MdiChild*)parent())->setEEpromAvail(eepromInterface->getEEpromSize()-UsedEEpromSize);
 }
 
 void ModelsListWidget::cut()

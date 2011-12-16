@@ -73,7 +73,7 @@ protected:
     void focusInEvent ( QFocusEvent * event );
     void focusOutEvent ( QFocusEvent * event );
 #endif
-
+    
 public slots:
     void refreshList();
     void ShowContextMenu(const QPoint& pos);
@@ -95,12 +95,12 @@ private:
     void restoreSelection();
 
     RadioData *radioData;
-
+    int UsedEEpromSize;
     QPoint dragStartPosition;
 
     CurrentSelection currentSelection;
     QColor active_highlight_color;
-
+    
 };
 
 #endif

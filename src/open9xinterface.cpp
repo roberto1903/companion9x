@@ -44,7 +44,7 @@ const char * Open9xInterface::getName()
   return "Open9x";
 }
 
-const int Open9xInterface::EEpromSize() {
+const int Open9xInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
@@ -163,6 +163,19 @@ int Open9xInterface::getSize(ModelData &model)
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
   if(sz != sizeof(Open9xModelData)) {
      return -1;
+  }
+  return efile->size(FILE_TMP);
+}
+
+int Open9xInterface::getSize(GeneralSettings &settings)
+{
+  uint8_t tmp[EESIZE_V4];
+  efile->EeFsInit(tmp, EESIZE_V4, true);
+
+  Open9xGeneral open9xGeneral(settings);
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneral));
+  if(sz != sizeof(open9xGeneral)) {
+    return -1;
   }
   return efile->size(FILE_TMP);
 }

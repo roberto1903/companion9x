@@ -44,7 +44,7 @@ const char * Gruvin9xStableInterface::getName()
   return "Gruvin9x stable";
 }
 
-const int Gruvin9xStableInterface::EEpromSize() {
+const int Gruvin9xStableInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
@@ -90,6 +90,19 @@ int Gruvin9xStableInterface::getSize(ModelData &model)
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
   if(sz != sizeof(Gruvin9xModelData)) {
      return -1;
+  }
+  return efile->size(FILE_TMP);
+}
+
+int Gruvin9xStableInterface::getSize(GeneralSettings &settings)
+{
+  uint8_t tmp[EESIZE_V4];
+  efile->EeFsInit(tmp, EESIZE_V4, true);
+
+  Gruvin9xGeneral gruvin9xGeneral(settings);
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));
+  if(sz != sizeof(gruvin9xGeneral)) {
+    return -1;
   }
   return efile->size(FILE_TMP);
 }
