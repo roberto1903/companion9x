@@ -6,9 +6,9 @@
 
 # Look for a root installation
 IF( MSVC )
-SET( XERCES_WINDIR, C:/Programs/xerces-vc )
+SET( XERCES_WINDIR C:/Programs/xerces-vc )
 ELSE( )
-SET( XERCES_WINDIR, C:/Programs/xerces )
+SET( XERCES_WINDIR C:/Programs/xerces )
 ENDIF( )
 
 FIND_PATH(XERCESC_ROOT_DIR include/xercesc/parsers/SAXParser.hpp
