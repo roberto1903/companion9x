@@ -1,8 +1,8 @@
 #summary TODO list
 
 = General =
-  * Display somewhere the current firmware chosen, so that it is always visible
-  * Display the available size on the EEPROM
+  * ~~Display somewhere the current firmware chosen, so that it is always visible~~
+  * ~~Display the available size on the EEPROM~~
   * Current model displayed in bold in the MDI child windows
   * Better look & feel for the simu layout. These big buttons are not so beautiful!
   * ~~Models configuration print~~
