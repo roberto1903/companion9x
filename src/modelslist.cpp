@@ -170,7 +170,7 @@ void ModelsListWidget::dragEnterEvent(QDragEnterEvent *event)
     }
 }
 
-void ModelsListWidget::dragLeaveEvent(QDragLeaveEvent */*event*/)
+void ModelsListWidget::dragLeaveEvent(QDragLeaveEvent *)
 {
     restoreSelection();
 }

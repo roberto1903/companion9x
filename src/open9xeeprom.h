@@ -19,7 +19,7 @@
 #include <inttypes.h>
 #include "eeprominterface.h"
 
-typedef struct t_Open9xTrainerMix_v201 {
+PACK(typedef struct t_Open9xTrainerMix_v201 {
   uint8_t srcChn:6; // 0-7 = ch1-8
   uint8_t mode:2;   // off,add-mode,subst-mode
   int8_t  studWeight;
@@ -28,9 +28,9 @@ typedef struct t_Open9xTrainerMix_v201 {
   t_Open9xTrainerMix_v201() { memset(this, 0, sizeof(t_Open9xTrainerMix_v201)); }
   t_Open9xTrainerMix_v201(TrainerMix&);
 
-} __attribute__((packed)) Open9xTrainerMix_v201; //
+}) Open9xTrainerMix_v201; //
 
-typedef struct t_Open9xTrainerData_v201 {
+PACK(typedef struct t_Open9xTrainerData_v201 {
   int16_t        calib[4];
   Open9xTrainerMix_v201     mix[4];
 
@@ -38,14 +38,14 @@ typedef struct t_Open9xTrainerData_v201 {
   t_Open9xTrainerData_v201() { memset(this, 0, sizeof(t_Open9xTrainerData_v201)); }
   t_Open9xTrainerData_v201(TrainerData&);
 
-} __attribute__((packed)) Open9xTrainerData_v201;
+}) Open9xTrainerData_v201;
 
-typedef struct t_Open9xFrSkyRSSIAlarm {
+PACK(typedef struct t_Open9xFrSkyRSSIAlarm {
   uint8_t       level:2;
   int8_t        value:6;
-} __attribute__((packed)) Open9xFrSkyRSSIAlarm;
+}) Open9xFrSkyRSSIAlarm;
 
-typedef struct t_Open9xGeneral_v201 {
+PACK(typedef struct t_Open9xGeneral_v201 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -82,13 +82,13 @@ typedef struct t_Open9xGeneral_v201 {
   t_Open9xGeneral_v201() { memset(this, 0, sizeof(t_Open9xGeneral_v201)); }
   t_Open9xGeneral_v201(GeneralSettings&);
 
-} __attribute__((packed)) Open9xGeneral_v201;
+}) Open9xGeneral_v201;
 
 typedef Open9xGeneral_v201 Open9xGeneral;
 
 // eeprom modelspec
 
-typedef struct t_Open9xExpoData {
+PACK(typedef struct t_Open9xExpoData {
   uint8_t mode:2;         // 0=end, 1=pos, 2=neg, 3=both
   uint8_t chn:2;
   uint8_t curve:4;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
@@ -102,9 +102,9 @@ typedef struct t_Open9xExpoData {
   t_Open9xExpoData();
   t_Open9xExpoData(ExpoData&);
 
-} __attribute__((packed)) Open9xExpoData;
+}) Open9xExpoData;
 
-typedef struct t_Open9xLimitData {
+PACK(typedef struct t_Open9xLimitData {
   int8_t  min;
   int8_t  max;
   bool    revert;
@@ -114,11 +114,8 @@ typedef struct t_Open9xLimitData {
   t_Open9xLimitData();
   t_Open9xLimitData(LimitData&);
 
-} __attribute__((packed)) Open9xLimitData;
+}) Open9xLimitData;
 
-typedef struct t_Open9xMixData {
-  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
-  uint8_t mixWarn:3;         // mixer warning
 #define MIX_P1    5
 #define MIX_P2    6
 #define MIX_P3    7
@@ -127,6 +124,14 @@ typedef struct t_Open9xMixData {
 #define MIX_CYC1  10
 #define MIX_CYC2  11
 #define MIX_CYC3  12
+
+#define MLTPX_ADD  0
+#define MLTPX_MUL  1
+#define MLTPX_REP  2
+
+PACK(typedef struct t_Open9xMixData {
+  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
   int8_t  weight;
   int8_t  swtch;
@@ -136,9 +141,6 @@ typedef struct t_Open9xMixData {
   uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
   uint8_t speedDown:4;       // 0 nichts
   uint8_t carryTrim:1;
-#define MLTPX_ADD  0
-#define MLTPX_MUL  1
-#define MLTPX_REP  2
   uint8_t mltpx:3;           // multiplex method 0=+ 1=* 2=replace
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  sOffset;
@@ -147,9 +149,9 @@ typedef struct t_Open9xMixData {
   t_Open9xMixData();
   t_Open9xMixData(MixData&);
 
-} __attribute__((packed)) Open9xMixData;
+}) Open9xMixData;
 
-typedef struct t_Open9xCustomSwData { // Custom Switches data
+PACK(typedef struct t_Open9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
@@ -158,9 +160,9 @@ typedef struct t_Open9xCustomSwData { // Custom Switches data
   t_Open9xCustomSwData() { memset(this, 0, sizeof(t_Open9xCustomSwData)); }
   t_Open9xCustomSwData(CustomSwData&);
 
-} __attribute__((packed)) Open9xCustomSwData;
+}) Open9xCustomSwData;
 
-typedef struct t_Open9xSafetySwData { // Safety Switches data
+PACK(typedef struct t_Open9xSafetySwData { // Safety Switches data
   int8_t  swtch;
   int8_t  val;
 
@@ -168,9 +170,9 @@ typedef struct t_Open9xSafetySwData { // Safety Switches data
   t_Open9xSafetySwData() { memset(this, 0, sizeof(t_Open9xSafetySwData)); }
   t_Open9xSafetySwData(SafetySwData&);
 
-} __attribute__((packed)) Open9xSafetySwData;
+}) Open9xSafetySwData;
 
-typedef struct t_Open9xFuncSwData { // Function Switches data
+PACK(typedef struct t_Open9xFuncSwData { // Function Switches data
   int8_t  swtch; // input
   uint8_t func;
 
@@ -178,9 +180,9 @@ typedef struct t_Open9xFuncSwData { // Function Switches data
   t_Open9xFuncSwData() { memset(this, 0, sizeof(t_Open9xFuncSwData)); }
   t_Open9xFuncSwData(FuncSwData&);
 
-} __attribute__((packed)) Open9xFuncSwData;
+}) Open9xFuncSwData;
 
-typedef struct t_Open9xFrSkyChannelData {
+PACK(typedef struct t_Open9xFrSkyChannelData {
   uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   type:4;             // channel unit (0=volts, ...)
   int8_t    offset:4;           // calibration offset. Signed 0.1V steps. EG. -4 to substract 0.4V
@@ -195,18 +197,18 @@ typedef struct t_Open9xFrSkyChannelData {
   t_Open9xFrSkyChannelData();
   t_Open9xFrSkyChannelData(FrSkyChannelData&);
 
-} __attribute__((packed)) Open9xFrSkyChannelData;
+}) Open9xFrSkyChannelData;
 
-typedef struct t_Open9xFrSkyData {
+PACK(typedef struct t_Open9xFrSkyData {
 	Open9xFrSkyChannelData channels[2];
 
 	operator FrSkyData();
 	t_Open9xFrSkyData();
 	t_Open9xFrSkyData(FrSkyData&);
 
-} __attribute__((packed)) Open9xFrSkyData;
+}) Open9xFrSkyData;
 
-typedef struct t_Open9xSwashRingData { // Swash Ring data
+PACK(typedef struct t_Open9xSwashRingData { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
   uint8_t   invertCOL:1;
@@ -218,10 +220,10 @@ typedef struct t_Open9xSwashRingData { // Swash Ring data
   t_Open9xSwashRingData();
   t_Open9xSwashRingData(SwashRingData&);
 
-} __attribute__((packed)) Open9xSwashRingData;
+}) Open9xSwashRingData;
 
 
-typedef struct t_Open9xPhaseData_v201 {
+PACK(typedef struct t_Open9xPhaseData_v201 {
   int8_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t trim_ext:8;  // 2 less significant extra bits per trim (10bits trims)
   int8_t swtch;       // swtch of phase[0] is not used
@@ -232,9 +234,9 @@ typedef struct t_Open9xPhaseData_v201 {
   operator PhaseData();
   t_Open9xPhaseData_v201() { memset(this, 0, sizeof(t_Open9xPhaseData_v201)); }
   t_Open9xPhaseData_v201(PhaseData &eepe);
-} __attribute__((packed)) Open9xPhaseData_v201;
+}) Open9xPhaseData_v201;
 
-typedef struct t_Open9xTimerData_v201 {
+PACK(typedef struct t_Open9xTimerData_v201 {
   int8_t    mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
   uint16_t  val:14;
   uint8_t   persistent:1;
@@ -243,7 +245,7 @@ typedef struct t_Open9xTimerData_v201 {
   operator TimerData();
   t_Open9xTimerData_v201() { memset(this, 0, sizeof(t_Open9xTimerData_v201)); }
   t_Open9xTimerData_v201(TimerData &eepe);
-} __attribute__((packed)) Open9xTimerData_v201;
+}) Open9xTimerData_v201;
 
 #define MAX_MODELS 16
 #define MAX_PHASES 5
@@ -256,7 +258,7 @@ typedef struct t_Open9xTimerData_v201 {
 #define NUM_CSW      12 // number of custom switches
 #define NUM_FSW      12 // number of functions assigned to switches
 
-typedef struct t_Open9xModelData_v201 {
+PACK(typedef struct t_Open9xModelData_v201 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v201 timer1;
   uint8_t   protocol:3;
@@ -288,7 +290,7 @@ typedef struct t_Open9xModelData_v201 {
   t_Open9xModelData_v201() { memset(this, 0, sizeof(t_Open9xModelData_v201)); }
   t_Open9xModelData_v201(ModelData&);
 
-} __attribute__((packed)) Open9xModelData_v201;
+}) Open9xModelData_v201;
 
 typedef Open9xModelData_v201 Open9xModelData;
 

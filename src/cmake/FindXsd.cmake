@@ -8,6 +8,7 @@
 # XSD_FOUND, If false, don't try to use xsd
 
 FIND_PATH( XSD_INCLUDE_DIR xsd/cxx/parser/elements.hxx
+  "C:/Programs/xsd-3.3.0/libxsd"
   "C:/Program Files/CodeSynthesis XSD 3.2/include"
   "C:/mingw/xsd-3.3.0-i686-windows/libxsd"
   $ENV{XSDDIR}/include
@@ -15,26 +16,35 @@ FIND_PATH( XSD_INCLUDE_DIR xsd/cxx/parser/elements.hxx
   /usr/local/include /usr/include  
 )
 
-FIND_PROGRAM( XSD_EXECUTABLE
+IF( WIN32 )
+  SET( XSDCXX_FILENAME1 xsd-cxx.exe )
+ELSE( )
+  SET( XSDCXX_FILENAME1 xsdcxx )
+  SET( XSDCXX_FILENAME2 xsd )
+ENDIF( )
+
+FIND_PROGRAM( XSDCXX_EXECUTABLE
   NAMES
-    xsdcxx xsd xsd.exe
+    ${XSDCXX_FILENAME1} ${XSDCXX_FILENAME2}
   PATHS
+    "C:/Programs/xsd-3.3.0/bin"
     "C:/mingw/xsd-3.3.0-i686-windows/bin"  
     "C:/Program Files/CodeSynthesis XSD 3.2/bin"
-    "[HKEY_CURRENT_USER\\xsd\\bin"
     $ENV{XSDDIR}/bin
     /usr/local/bin
     /usr/bin
 )
+
+MESSAGE(STATUS ${XSDCXX_EXECUTABLE})
       
 # if the include and the program are found then we have it
 IF( XSD_INCLUDE_DIR )
-  IF( XSD_EXECUTABLE )
+  IF( XSDCXX_EXECUTABLE )
     SET( XSD_FOUND "YES" )
-  ENDIF( XSD_EXECUTABLE )
+  ENDIF( XSDCXX_EXECUTABLE )
 ENDIF( XSD_INCLUDE_DIR )
 
 MARK_AS_ADVANCED(
   XSD_INCLUDE_DIR
-  XSD_EXECUTABLE
+  XSDCXX_EXECUTABLE
 )

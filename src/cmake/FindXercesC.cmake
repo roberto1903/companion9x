@@ -5,12 +5,19 @@
 # XERCESC_LIBRARIES, the name of the xerces-c library (ADVANCED)
 
 # Look for a root installation
+IF( MSVC )
+SET( XERCES_WINDIR, C:/Programs/xerces-vc )
+ELSE( )
+SET( XERCES_WINDIR, C:/Programs/xerces )
+ENDIF( )
+
 FIND_PATH(XERCESC_ROOT_DIR include/xercesc/parsers/SAXParser.hpp
+  ${XERCES_WINDIR}
   "C:/mingw/msys/1.0/local"
   "C:/Program Files/CodeSynthesis XSD 3.2"
   /usr
   /usr/local
-  "C:/mingw"
+  "C:/MinGW"
   $ENV{CODESYNTH}
   DOC "The root of an installed xerces-c installation"
 )

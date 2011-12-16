@@ -19,7 +19,7 @@
 #include <inttypes.h>
 #include "eeprominterface.h"
 
-typedef struct t_Gruvin9xTrainerMix_v103 {
+PACK(typedef struct t_Gruvin9xTrainerMix_v103 {
   uint8_t srcChn:3; //0-7 = ch1-8
   int8_t  swtch:5;
   int8_t  studWeight:6;
@@ -28,9 +28,9 @@ typedef struct t_Gruvin9xTrainerMix_v103 {
   operator TrainerMix();
   t_Gruvin9xTrainerMix_v103() { memset(this, 0, sizeof(t_Gruvin9xTrainerMix_v103)); }
 
-} __attribute__((packed)) Gruvin9xTrainerMix_v103; //
+}) Gruvin9xTrainerMix_v103; //
 
-typedef struct t_Gruvin9xTrainerMix_v104 {
+PACK(typedef struct t_Gruvin9xTrainerMix_v104 {
   uint8_t srcChn:6; // 0-7 = ch1-8
   uint8_t mode:2;   // off,add-mode,subst-mode
   int8_t  studWeight;
@@ -39,16 +39,16 @@ typedef struct t_Gruvin9xTrainerMix_v104 {
   t_Gruvin9xTrainerMix_v104() { memset(this, 0, sizeof(t_Gruvin9xTrainerMix_v104)); }
   t_Gruvin9xTrainerMix_v104(TrainerMix&);
 
-} __attribute__((packed)) Gruvin9xTrainerMix_v104; //
+}) Gruvin9xTrainerMix_v104; //
 
-typedef struct t_Gruvin9xTrainerData_v103 {
+PACK(typedef struct t_Gruvin9xTrainerData_v103 {
   int16_t        calib[4];
   Gruvin9xTrainerMix_v103     mix[4];
 
   operator TrainerData();
-} __attribute__((packed)) Gruvin9xTrainerData_v103;
+}) Gruvin9xTrainerData_v103;
 
-typedef struct t_Gruvin9xTrainerData_v104 {
+PACK(typedef struct t_Gruvin9xTrainerData_v104 {
   int16_t        calib[4];
   Gruvin9xTrainerMix_v104     mix[4];
 
@@ -56,14 +56,14 @@ typedef struct t_Gruvin9xTrainerData_v104 {
   t_Gruvin9xTrainerData_v104() { memset(this, 0, sizeof(t_Gruvin9xTrainerData_v104)); }
   t_Gruvin9xTrainerData_v104(TrainerData&);
 
-} __attribute__((packed)) Gruvin9xTrainerData_v104;
+}) Gruvin9xTrainerData_v104;
 
-typedef struct t_Gruvin9xFrSkyRSSIAlarm {
+PACK(typedef struct t_Gruvin9xFrSkyRSSIAlarm {
   uint8_t       level:2;
   int8_t        value:6;
-} __attribute__((packed)) Gruvin9xFrSkyRSSIAlarm;
+}) Gruvin9xFrSkyRSSIAlarm;
 
-typedef struct t_Gruvin9xGeneral_v103 {
+PACK(typedef struct t_Gruvin9xGeneral_v103 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -98,9 +98,9 @@ typedef struct t_Gruvin9xGeneral_v103 {
 
   operator GeneralSettings();
   t_Gruvin9xGeneral_v103() { memset(this, 0, sizeof(t_Gruvin9xGeneral_v103)); }
-} __attribute__((packed)) Gruvin9xGeneral_v103;
+}) Gruvin9xGeneral_v103;
 
-typedef struct t_Gruvin9xGeneral_v104 {
+PACK(typedef struct t_Gruvin9xGeneral_v104 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -137,13 +137,13 @@ typedef struct t_Gruvin9xGeneral_v104 {
   t_Gruvin9xGeneral_v104() { memset(this, 0, sizeof(t_Gruvin9xGeneral_v104)); }
   t_Gruvin9xGeneral_v104(GeneralSettings&);
 
-} __attribute__((packed)) Gruvin9xGeneral_v104;
+}) Gruvin9xGeneral_v104;
 
 typedef Gruvin9xGeneral_v104 Gruvin9xGeneral;
 
 // eeprom modelspec
 
-typedef struct t_Gruvin9xExpoData {
+PACK(typedef struct t_Gruvin9xExpoData {
   uint8_t mode:2;         // 0=end, 1=pos, 2=neg, 3=both
   uint8_t chn:2;
   uint8_t curve:4;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
@@ -157,9 +157,9 @@ typedef struct t_Gruvin9xExpoData {
   t_Gruvin9xExpoData();
   t_Gruvin9xExpoData(ExpoData&);
 
-} __attribute__((packed)) Gruvin9xExpoData;
+}) Gruvin9xExpoData;
 
-typedef struct t_Gruvin9xLimitData {
+PACK(typedef struct t_Gruvin9xLimitData {
   int8_t  min;
   int8_t  max;
   bool    revert;
@@ -169,11 +169,8 @@ typedef struct t_Gruvin9xLimitData {
   t_Gruvin9xLimitData();
   t_Gruvin9xLimitData(LimitData&);
 
-} __attribute__((packed)) Gruvin9xLimitData;
+}) Gruvin9xLimitData;
 
-typedef struct t_Gruvin9xMixData {
-  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
-  uint8_t mixWarn:3;         // mixer warning
 #define MIX_P1    5
 #define MIX_P2    6
 #define MIX_P3    7
@@ -182,6 +179,14 @@ typedef struct t_Gruvin9xMixData {
 #define MIX_CYC1  10
 #define MIX_CYC2  11
 #define MIX_CYC3  12
+
+#define MLTPX_ADD  0
+#define MLTPX_MUL  1
+#define MLTPX_REP  2
+
+PACK(typedef struct t_Gruvin9xMixData {
+  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
   int8_t  weight;
   int8_t  swtch;
@@ -191,9 +196,6 @@ typedef struct t_Gruvin9xMixData {
   uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
   uint8_t speedDown:4;       // 0 nichts
   uint8_t carryTrim:1;
-#define MLTPX_ADD  0
-#define MLTPX_MUL  1
-#define MLTPX_REP  2
   uint8_t mltpx:3;           // multiplex method 0=+ 1=* 2=replace
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  sOffset;
@@ -202,9 +204,9 @@ typedef struct t_Gruvin9xMixData {
   t_Gruvin9xMixData();
   t_Gruvin9xMixData(MixData&);
 
-} __attribute__((packed)) Gruvin9xMixData;
+}) Gruvin9xMixData;
 
-typedef struct t_Gruvin9xCustomSwData { // Custom Switches data
+PACK(typedef struct t_Gruvin9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
@@ -213,9 +215,9 @@ typedef struct t_Gruvin9xCustomSwData { // Custom Switches data
   t_Gruvin9xCustomSwData() { memset(this, 0, sizeof(t_Gruvin9xCustomSwData)); }
   t_Gruvin9xCustomSwData(CustomSwData&);
 
-} __attribute__((packed)) Gruvin9xCustomSwData;
+}) Gruvin9xCustomSwData;
 
-typedef struct t_Gruvin9xSafetySwData { // Safety Switches data
+PACK(typedef struct t_Gruvin9xSafetySwData { // Safety Switches data
   int8_t  swtch;
   int8_t  val;
 
@@ -223,9 +225,9 @@ typedef struct t_Gruvin9xSafetySwData { // Safety Switches data
   t_Gruvin9xSafetySwData() { memset(this, 0, sizeof(t_Gruvin9xSafetySwData)); }
   t_Gruvin9xSafetySwData(SafetySwData&);
 
-} __attribute__((packed)) Gruvin9xSafetySwData;
+}) Gruvin9xSafetySwData;
 
-typedef struct t_Gruvin9xFuncSwData { // Function Switches data
+PACK(typedef struct t_Gruvin9xFuncSwData { // Function Switches data
   int8_t  swtch; // input
   uint8_t func;
 
@@ -233,9 +235,9 @@ typedef struct t_Gruvin9xFuncSwData { // Function Switches data
   t_Gruvin9xFuncSwData() { memset(this, 0, sizeof(t_Gruvin9xFuncSwData)); }
   t_Gruvin9xFuncSwData(FuncSwData&);
 
-} __attribute__((packed)) Gruvin9xFuncSwData;
+}) Gruvin9xFuncSwData;
 
-typedef struct t_Gruvin9xFrSkyChannelData {
+PACK(typedef struct t_Gruvin9xFrSkyChannelData {
   uint16_t  ratio:12;           // (Maximum resistor divider input volts +/- calibration. 0 means channel not used.
                                     // 0.01v steps from 0 to 40.95V. Ex. 6.60 Volts = 660. 40.95V = 4095
   uint16_t  type:4;             // channel display unit (0=volts, 1=raw, 2-15=reserverd.)
@@ -250,18 +252,18 @@ typedef struct t_Gruvin9xFrSkyChannelData {
   t_Gruvin9xFrSkyChannelData();
   t_Gruvin9xFrSkyChannelData(FrSkyChannelData&);
 
-} __attribute__((packed)) Gruvin9xFrSkyChannelData;
+}) Gruvin9xFrSkyChannelData;
 
-typedef struct t_Gruvin9xFrSkyData {
+PACK(typedef struct t_Gruvin9xFrSkyData {
 	Gruvin9xFrSkyChannelData channels[2];
 
 	operator FrSkyData();
 	t_Gruvin9xFrSkyData();
 	t_Gruvin9xFrSkyData(FrSkyData&);
 
-} __attribute__((packed)) Gruvin9xFrSkyData;
+}) Gruvin9xFrSkyData;
 
-typedef struct t_Gruvin9xSwashRingData { // Swash Ring data
+PACK(typedef struct t_Gruvin9xSwashRingData { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
   uint8_t   invertCOL:1;
@@ -273,9 +275,9 @@ typedef struct t_Gruvin9xSwashRingData { // Swash Ring data
   t_Gruvin9xSwashRingData();
   t_Gruvin9xSwashRingData(SwashRingData&);
 
-} __attribute__((packed)) Gruvin9xSwashRingData;
+}) Gruvin9xSwashRingData;
 
-typedef struct t_Gruvin9xPhaseData_v102 {
+PACK(typedef struct t_Gruvin9xPhaseData_v102 {
   int8_t trim[4];     // -125..125 => trim value, 127 => use trim of phase 0, -128, -127, -126 => use trim of phases 1|2|3|4 instead
   int8_t swtch;       // swtch of phase[0] is not used
   char name[6];
@@ -284,10 +286,10 @@ typedef struct t_Gruvin9xPhaseData_v102 {
 
   operator PhaseData();
   t_Gruvin9xPhaseData_v102() { memset(this, 0, sizeof(t_Gruvin9xPhaseData_v102)); }
-} __attribute__((packed)) Gruvin9xPhaseData_v102;
+}) Gruvin9xPhaseData_v102;
 
 
-typedef struct t_Gruvin9xPhaseData_v106 {
+PACK(typedef struct t_Gruvin9xPhaseData_v106 {
   int8_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t trim_ext:8;  // 2 less significant extra bits per trim (10bits trims)
   int8_t swtch;       // swtch of phase[0] is not used
@@ -298,9 +300,9 @@ typedef struct t_Gruvin9xPhaseData_v106 {
   operator PhaseData();
   t_Gruvin9xPhaseData_v106() { memset(this, 0, sizeof(t_Gruvin9xPhaseData_v106)); }
   t_Gruvin9xPhaseData_v106(PhaseData &eepe);
-} __attribute__((packed)) Gruvin9xPhaseData_v106;
+}) Gruvin9xPhaseData_v106;
 
-typedef struct t_Gruvin9xTimerData {
+PACK(typedef struct t_Gruvin9xTimerData {
   int8_t    mode:7;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
   uint8_t   dir:1;             // 0=>Count Down, 1=>Count Up
   uint16_t  val;
@@ -308,7 +310,7 @@ typedef struct t_Gruvin9xTimerData {
   operator TimerData();
   t_Gruvin9xTimerData() { memset(this, 0, sizeof(t_Gruvin9xTimerData)); }
   t_Gruvin9xTimerData(TimerData &eepe);
-} __attribute__((packed)) Gruvin9xTimerData;
+}) Gruvin9xTimerData;
 
 #define MAX_MODELS 16
 #define MAX_PHASES 5
@@ -322,7 +324,7 @@ typedef struct t_Gruvin9xTimerData {
 #define NUM_FSW      12 // number of functions assigned to switches
 
 // TODO
-typedef struct t_Gruvin9xModelData_v102 {
+PACK(typedef struct t_Gruvin9xModelData_v102 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
@@ -352,9 +354,9 @@ typedef struct t_Gruvin9xModelData_v102 {
   operator ModelData();
   t_Gruvin9xModelData_v102() { memset(this, 0, sizeof(t_Gruvin9xModelData_v102)); }
 
-} __attribute__((packed)) Gruvin9xModelData_v102;
+}) Gruvin9xModelData_v102;
 
-typedef struct t_Gruvin9xModelData_v103 {
+PACK(typedef struct t_Gruvin9xModelData_v103 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
@@ -384,9 +386,9 @@ typedef struct t_Gruvin9xModelData_v103 {
   operator ModelData();
   t_Gruvin9xModelData_v103() { memset(this, 0, sizeof(t_Gruvin9xModelData_v103)); }
 
-} __attribute__((packed)) Gruvin9xModelData_v103;
+}) Gruvin9xModelData_v103;
 
-typedef struct t_Gruvin9xModelData_v105 {
+PACK(typedef struct t_Gruvin9xModelData_v105 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
@@ -419,9 +421,9 @@ typedef struct t_Gruvin9xModelData_v105 {
   t_Gruvin9xModelData_v105() { memset(this, 0, sizeof(t_Gruvin9xModelData_v105)); }
   t_Gruvin9xModelData_v105(ModelData&);
 
-} __attribute__((packed)) Gruvin9xModelData_v105;
+}) Gruvin9xModelData_v105;
 
-typedef struct t_Gruvin9xModelData_v106 {
+PACK(typedef struct t_Gruvin9xModelData_v106 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Gruvin9xTimerData timer1;
   uint8_t   protocol:3;
@@ -452,7 +454,7 @@ typedef struct t_Gruvin9xModelData_v106 {
   t_Gruvin9xModelData_v106() { memset(this, 0, sizeof(t_Gruvin9xModelData_v106)); }
   t_Gruvin9xModelData_v106(ModelData&);
 
-} __attribute__((packed)) Gruvin9xModelData_v106;
+}) Gruvin9xModelData_v106;
 
 typedef Gruvin9xModelData_v106 Gruvin9xModelData;
 

@@ -164,6 +164,48 @@ Index: er9x/er9x.h
  #include "file.h"
  //
  //                  elev                        thr
+Index: er9x/er9x_patch_applied.h
+===================================================================
+Index: er9x/file.cpp
+===================================================================
+--- er9x/file.cpp	(revision 646)
++++ er9x/file.cpp	(working copy)
+@@ -39,19 +39,20 @@
+ #define BLOCKS   (EESIZE/BS)
+ 
+ #define EEFS_VERS 4
+-struct DirEnt{
++PACK(struct DirEnt{
+   uint8_t  startBlk;
+   uint16_t size:12;
+   uint16_t typ:4;
+-}__attribute__((packed));
++});
++
+ #define MAXFILES (1+MAX_MODELS+3)
+-struct EeFs{
++PACK(struct EeFs{
+   uint8_t  version;
+   uint8_t  mySize;
+   uint8_t  freeList;
+   uint8_t  bs;
+   DirEnt   files[MAXFILES];
+-}__attribute__((packed)) eeFs;
++}) eeFs;
+ 
+ 
+ static uint8_t EeFsRead(uint8_t blk,uint8_t ofs){
+@@ -165,10 +166,6 @@
+ }
+ void EeFsFormat()
+ {
+-  if(sizeof(eeFs) != RESV){
+-    extern void eeprom_RESV_mismatch();
+-    eeprom_RESV_mismatch();
+-  }
+   memset(&eeFs,0, sizeof(eeFs));
+   eeFs.version  = EEFS_VERS;
+   eeFs.mySize   = sizeof(eeFs);
 Index: er9x/file.h
 ===================================================================
 --- er9x/file.h	(revision 646)
@@ -245,6 +287,162 @@ Index: er9x/menus.cpp
      lcd_puts_P( 3*FW,  7*FH, PSTR("[MENU] to refresh"));
  }
  
+Index: er9x/menus.h
+===================================================================
+--- er9x/menus.h	(revision 646)
++++ er9x/menus.h	(working copy)
+@@ -77,10 +77,10 @@
+ #define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
+ #define TITLE(str)   TITLEP(PSTR(str))
+ 
+-#define MENU(title, tab, menu, lines_count, lines...) \
++#define MENU(title, tab, menu, lines_count, ...) \
+ TITLE(title); \
+ static MState2 mstate2; \
+-static prog_uint8_t APM mstate_tab[] = lines; \
++static prog_uint8_t APM mstate_tab[] = __VA_ARGS__; \
+ mstate2.check(event,menu,tab,DIM(tab),mstate_tab,DIM(mstate_tab)-1,lines_count-1)
+ 
+ #define SIMPLE_MENU(title, tab, menu, lines_count) \
+@@ -88,10 +88,10 @@
+ static MState2 mstate2; \
+ mstate2.check_simple(event,menu,tab,DIM(tab),lines_count-1)
+ 
+-#define SUBMENU(title, lines_count, lines...) \
++#define SUBMENU(title, lines_count, ...) \
+ TITLE(title); \
+ static MState2 mstate2; \
+-static prog_uint8_t APM mstate_tab[] = lines; \
++static prog_uint8_t APM mstate_tab[] = __VA_ARGS__; \
+ mstate2.check(event,0,NULL,0,mstate_tab,DIM(mstate_tab)-1,lines_count-1)
+ 
+ #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
+Index: er9x/myeeprom.h
+===================================================================
+--- er9x/myeeprom.h	(revision 646)
++++ er9x/myeeprom.h	(working copy)
+@@ -59,19 +59,23 @@
+ #define GENERAL_OWNER_NAME_LEN 10
+ #define MODEL_NAME_LEN         10
+ 
+-typedef struct t_TrainerMix {
++#ifndef PACK
++#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
++#endif
++
++PACK(typedef struct t_TrainerMix {
+   uint8_t srcChn:3; //0-7 = ch1-8
+   int8_t  swtch:5;
+   int8_t  studWeight:6;
+   uint8_t mode:2;   //off,add-mode,subst-mode
+-} __attribute__((packed)) TrainerMix; //
++}) TrainerMix; //
+  
+-typedef struct t_TrainerData {
++PACK(typedef struct t_TrainerData {
+   int16_t        calib[4];
+   TrainerMix     mix[4];
+-} __attribute__((packed)) TrainerData;
++}) TrainerData;
+ 
+-typedef struct t_EEGeneral {
++PACK(typedef struct t_EEGeneral {
+   uint8_t   myVers;
+   int16_t   calibMid[7];
+   int16_t   calibSpanNeg[7];
+@@ -115,7 +119,7 @@
+   uint8_t   res[1];
+ //  uint8_t	FRSkyRed;  //mike please check these are correct
+   char      ownerName[GENERAL_OWNER_NAME_LEN];
+-} __attribute__((packed)) EEGeneral;
++}) EEGeneral;
+ 
+ 
+ 
+@@ -124,25 +128,25 @@
+ //eeprom modelspec
+ //expo[3][2][2] //[Norm/Dr][expo/weight][R/L]
+ 
+-typedef struct t_ExpoData {
++PACK(typedef struct t_ExpoData {
+   int8_t  expo[3][2][2];
+   int8_t  drSw1;
+   int8_t  drSw2;
+-} __attribute__((packed)) ExpoData;
++}) ExpoData;
+ 
+ 
+-typedef struct t_LimitData {
++PACK(typedef struct t_LimitData {
+   int8_t  min;
+   int8_t  max;
+   bool    revert;
+   int16_t  offset;
+-} __attribute__((packed)) LimitData;
++}) LimitData;
+ 
+ #define MLTPX_ADD  0
+ #define MLTPX_MUL  1
+ #define MLTPX_REP  2
+ 
+-typedef struct t_MixData {
++PACK(typedef struct t_MixData {
+   uint8_t destCh;            //        1..NUM_CHNOUT
+   uint8_t srcRaw;            //
+   int8_t  weight;
+@@ -159,33 +163,33 @@
+   uint8_t mixres:1;
+   int8_t  sOffset;
+   int8_t  res;
+-} __attribute__((packed)) MixData;
++}) MixData;
+ 
+ 
+-typedef struct t_CSwData { // Custom Switches data
++PACK(typedef struct t_CSwData { // Custom Switches data
+   int8_t  v1; //input
+   int8_t  v2; //offset
+   uint8_t func;
+-} __attribute__((packed)) CSwData;
++}) CSwData;
+ 
+-typedef struct t_SafetySwData { // Custom Switches data
++PACK(typedef struct t_SafetySwData { // Custom Switches data
+   int8_t  swtch;
+   int8_t  val;
+-} __attribute__((packed)) SafetySwData;
++}) SafetySwData;
+ 
+-typedef struct t_FrSkyChannelData {
++PACK(typedef struct t_FrSkyChannelData {
+   uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+   uint8_t   alarms_value[2];      // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+   uint8_t   alarms_level:4;
+   uint8_t   alarms_greater:2;     // 0=LT(<), 1=GT(>)
+   uint8_t   type:2;               // 0=volts, 1=raw, 2=volts*2, 3=Amps
+-} __attribute__((packed)) FrSkyChannelData;
++}) FrSkyChannelData;
+ 
+-typedef struct t_FrSkyData {
++PACK(typedef struct t_FrSkyData {
+   FrSkyChannelData channels[2];
+-} __attribute__((packed)) FrSkyData;
++}) FrSkyData;
+ 
+-typedef struct t_ModelData {
++PACK(typedef struct t_ModelData {
+   char      name[MODEL_NAME_LEN];             // 10 must be first for eeLoadModelName
+   uint8_t   mdVers;
+   int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+@@ -224,7 +228,7 @@
+   uint8_t   res3[2];
+   SafetySwData  safetySw[NUM_CHNOUT];
+   FrSkyData frsky;
+-} __attribute__((packed)) ModelData;
++}) ModelData;
+ 
+ #define TOTAL_EEPROM_USAGE (sizeof(ModelData)*MAX_MODELS + sizeof(EEGeneral))
+ 
 Index: er9x/pers.cpp
 ===================================================================
 --- er9x/pers.cpp	(revision 646)
@@ -280,7 +478,7 @@ Index: er9x/simpgmspace.cpp
 ===================================================================
 --- er9x/simpgmspace.cpp	(revision 0)
 +++ er9x/simpgmspace.cpp	(revision 0)
-@@ -0,0 +1,133 @@
+@@ -0,0 +1,139 @@
 +/*
 + * Authors (alphabetical order)
 + * - Bertrand Songis <bsongis@gmail.com>
@@ -302,8 +500,14 @@ Index: er9x/simpgmspace.cpp
 + *
 + */
 +
++#ifndef __GNUC__
++#include <windows.h>
++#define sleep(x) Sleep(x)
++#else
 +#include <unistd.h>
-+#include <time.h>
++#define sleep(x) usleep(1000*x)
++#endif
++
 +#include <ctype.h>
 +#include "simpgmspace.h"
 +#include "lcd.h"
@@ -380,15 +584,15 @@ Index: er9x/simpgmspace.cpp
 +
 +    while (main_thread_running) {
 +      perMain();
-+      usleep(1000);
++      sleep(1/*ms*/);
 +    }
-+    return NULL;
 +#ifdef SIMU_EXCEPTIONS
 +  }
 +  catch (...) {
 +    main_thread_running = 0;
 +  }
 +#endif
++  return NULL;
 +}
 +
 +pthread_t main_thread_pid;
@@ -446,7 +650,7 @@ Index: er9x/simpgmspace.h
 +#include <stdio.h>
 +#include <string.h>
 +#include <signal.h>
-+#ifdef WIN32
++#if defined(WIN32) || !defined(__GNUC__)
 +#define write_backtrace(output)
 +#else
 +#include <execinfo.h>
@@ -611,3 +815,16 @@ Index: er9x/simpgmspace.h
  #define wdt_reset()
 +
 +#endif
+Index: er9x/templates.cpp
+===================================================================
+--- er9x/templates.cpp	(revision 646)
++++ er9x/templates.cpp	(working copy)
+@@ -99,7 +99,7 @@
+     g_model.customSw[idx-1].v2   = v2;
+ }
+ 
+-__attribute__((noinline)) uint8_t convert_mode_helper(uint8_t x)
++uint8_t convert_mode_helper(uint8_t x)
+ {
+     return pgm_read_byte(modn12x3 + g_eeGeneral.stickMode*4 + (x) - 1) ;
+ }

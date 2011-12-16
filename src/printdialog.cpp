@@ -248,10 +248,10 @@ void printDialog::printExpo()
                 str += "&nbsp;&nbsp;&nbsp;";
                 break;
         };        
-        str += (ed->weight<0 ? (tr("Weight")+QString("(%1\%)").arg(ed->weight).rightJustified(6,' ')) :
-                              (tr("Weight")+QString("(+%1\%)").arg(ed->weight).rightJustified(6, ' ')));
-        str += (ed->expo<0 ? (" "+tr("Expo")+QString("(%1\%)").arg(ed->expo).rightJustified(6,' ')) :
-                                      (" "+tr("Expo")+QString("(+%1\%)").arg(ed->expo).rightJustified(6, ' ')));
+        str += (ed->weight<0 ? (tr("Weight")+QString("(%1%%)").arg(ed->weight).rightJustified(6,' ')) :
+                              (tr("Weight")+QString("(+%1%%)").arg(ed->weight).rightJustified(6, ' ')));
+        str += (ed->expo<0 ? (" "+tr("Expo")+QString("(%1%%)").arg(ed->expo).rightJustified(6,' ')) :
+                                      (" "+tr("Expo")+QString("(+%1%%)").arg(ed->expo).rightJustified(6, ' ')));
         if(ed->phase) str += " "+tr("Phase")+ "(" + getPhaseName(ed->phase) + ")";
         if(ed->swtch) str += " "+tr("Switch")+ "(" + getSWName(ed->swtch) + ")";
         if (ed->curve!=0) {
@@ -295,14 +295,14 @@ void printDialog::printMixes()
         case (2): str += "&nbsp;R"; break;
         default:  str += "&nbsp;&nbsp;"; break;
         };
-        str += md->weight<0 ? QString(" %1\%").arg(md->weight).rightJustified(6,' ') :
-                              QString(" +%1\%").arg(md->weight).rightJustified(6, ' ');
+        str += md->weight<0 ? QString(" %1%%").arg(md->weight).rightJustified(6,' ') :
+                              QString(" +%1%%").arg(md->weight).rightJustified(6, ' ');
         //QString srcStr = SRC_STR;
         //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
         str += getSourceStr(g_eeGeneral->stickMode,md->srcRaw);
         if(md->swtch) str += " "+ tr("Switch")+ "(" + getSWName(md->swtch) + ")";
         if(md->carryTrim) str += " "+ tr("noTrim");
-        if(md->sOffset)  str += tr("Offset")+QString(" %1\%)").arg(md->sOffset);
+        if(md->sOffset)  str += tr("Offset")+QString(" %1%%)").arg(md->sOffset);
         if(md->curve)
         {
             QString crvStr = CURV_STR;

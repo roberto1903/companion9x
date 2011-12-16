@@ -46,6 +46,7 @@ t_Er9xTrainerData::operator TrainerData ()
     eepe.calib[i] = calib[i];
     eepe.mix[i] = mix[i];
   }
+  return eepe;
 }
 
 t_Er9xGeneral::t_Er9xGeneral()
