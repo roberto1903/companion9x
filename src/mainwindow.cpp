@@ -68,6 +68,7 @@ MainWindow::MainWindow()
     connect(windowMapper, SIGNAL(mapped(QWidget*)),
             this, SLOT(setActiveSubWindow(QWidget*)));
 
+    MaxRecentFiles=MAX_RECENT;
     createActions();
     createMenus();
     createToolBars();
@@ -823,7 +824,8 @@ void MainWindow::readSettings()
     QSize size = settings.value("size", QSize(400, 400)).toSize();
 
     checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
-
+    MaxRecentFiles =settings.value("history_size",10).toInt();
+    
     if (maximized) {
       setWindowState(Qt::WindowMaximized);
     }

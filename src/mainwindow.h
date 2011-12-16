@@ -42,11 +42,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define MaxRecentFiles 10
 #include <QMainWindow>
 #include <QDateTime>
 #include "downloaddialog.h"
-
+#define MAX_RECENT 15
 
 class MdiChild;
 QT_BEGIN_NAMESPACE
@@ -123,7 +122,8 @@ private:
 
     bool checkCompanion9x;
     bool showcheckForUpdatesResult;
-
+    int MaxRecentFiles;
+    
     QNetworkAccessManager *manager1;
     QNetworkAccessManager *manager2;
 
@@ -167,7 +167,7 @@ private:
     QAction *aboutAct;
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
-    QAction *recentFileActs[MaxRecentFiles];
+    QAction *recentFileActs[MAX_RECENT];
 };
 
 #endif

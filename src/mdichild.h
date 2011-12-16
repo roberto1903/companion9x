@@ -47,7 +47,6 @@
 #define FILE_TYPE_EEPE 3
 #define FILE_TYPE_EEPM 4
 #define FILE_TYPE_XML  5
-#define MaxRecentFiles 10
 
 #include <QtGui>
 #include "eeprominterface.h"
