@@ -29,6 +29,8 @@ class Er9xInterface : public EEPROMInterface
     virtual ~Er9xInterface();
 
     virtual const char * getName();
+    
+    virtual const int  EEpromSize();
 
     virtual bool load(RadioData &, uint8_t * eeprom, int size);
 

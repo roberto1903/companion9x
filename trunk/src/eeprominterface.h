@@ -504,6 +504,7 @@ class EEPROMInterface
 
     virtual SimulatorInterface * getSimulator() = 0;
 
+    virtual const int EEpromSize() = 0;
 };
 
 /* EEPROM string conversion functions */
@@ -514,5 +515,6 @@ void RegisterEepromInterfaces();
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 
 EEPROMInterface *GetEepromInterface();
+
 
 #endif

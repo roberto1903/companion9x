@@ -44,6 +44,10 @@ const char * Gruvin9xStableInterface::getName()
   return "Gruvin9x stable";
 }
 
+const int Gruvin9xStableInterface::EEpromSize() {
+    return EESIZE_STOCK;
+}
+
 bool Gruvin9xStableInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   return false;

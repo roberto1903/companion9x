@@ -49,6 +49,10 @@ const char * Gruvin9xInterface::getName()
     return "Gruvin9x v4";
 }
 
+const int Gruvin9xInterface::EEpromSize() {
+    return size;
+}
+
 template <class T>
 void Gruvin9xInterface::loadModel(ModelData &model, int version)
 {
