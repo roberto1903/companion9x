@@ -255,6 +255,7 @@ void ModelsListWidget::refreshList()
     for(uint8_t i=0; i<MAX_MODELS; i++)
     {
        QString item = QString().sprintf("%02d: ", i+1);
+       
        if (!radioData->models[i].isempty()) {
          item += QString().sprintf("%10s", radioData->models[i].name);
          if (eepromInterface) {
@@ -264,6 +265,11 @@ void ModelsListWidget::refreshList()
          }
        }
        addItem(item);
+       if (i==radioData->generalSettings.currModel) {
+           QFont f=QFont("Courier New",12);
+           f.setBold(true);
+           this->item(i+1)->setFont(f);
+       }
     }
     ((MdiChild*)parent())->setEEpromAvail(eepromInterface->getEEpromSize()-UsedEEpromSize);
 }
