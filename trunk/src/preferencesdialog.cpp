@@ -31,6 +31,7 @@ void preferencesDialog::write_values()
     settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
     settings.setValue("show_splash", ui->showSplash->isChecked());
     settings.setValue("eeprom_format", ui->eepromFormatCB->currentIndex());
+    settings.setValue("history_size", ui->historySize->value());
 }
 
 
@@ -46,6 +47,7 @@ void preferencesDialog::initSettings()
     ui->eepromFormatCB->setCurrentIndex(settings.value("eeprom_format", 0).toInt());
     ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
+    ui->historySize->setValue(settings.value("history_size", 10).toInt());
 }
 
 void preferencesDialog::populateLocale()

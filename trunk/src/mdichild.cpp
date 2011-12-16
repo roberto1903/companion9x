@@ -401,6 +401,7 @@ void MdiChild::setCurrentFile(const QString &fileName)
   setWindowTitle(userFriendlyCurrentFile() + "[*]");
  
   QSettings settings("companion9x", "companion9x");
+  int MaxRecentFiles =settings.value("history_size",10).toInt();
   QStringList files = settings.value("recentFileList").toStringList();
   files.removeAll(fileName);
   files.prepend(fileName);
