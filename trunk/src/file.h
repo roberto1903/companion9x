@@ -18,6 +18,12 @@
 #ifndef file_h
 #define file_h
 
+#if __GNUC__
+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
+#else
+#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop) )
+#endif
+
 #define ERR_NONE 0
 #define ERR_FULL 1
 #define ERR_TMO  2
@@ -27,19 +33,19 @@
 #define MAX_MODELS 16
 #define MAXFILES   20
 
-struct DirEnt{
+PACK(struct DirEnt{
   uint8_t  startBlk;
   uint16_t size:12;
   uint16_t typ:4;
-}__attribute__((packed));
+});
 
-struct EeFs{
+PACK(struct EeFs{
   uint8_t  version;
   uint8_t  mySize;
   uint8_t  freeList;
   uint8_t  bs;
   DirEnt   files[MAXFILES];
-}__attribute__((packed));
+});
 
 #define BS                 16
 #define EEPROM_HEADER_SIZE 64

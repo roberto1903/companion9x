@@ -351,11 +351,11 @@ void simulatorDialog::setValues()
   ui->chnoutV_15->setText(QString("%1").arg((qreal)outputs.chans[14]*100/1024, 0, 'f', 1));
   ui->chnoutV_16->setText(QString("%1").arg((qreal)outputs.chans[15]*100/1024, 0, 'f', 1));
 
-  ui->leftXPerc->setText(QString("X %1\%").arg((qreal)nodeLeft->getX()*100, 2, 'f', 0));
-  ui->leftYPerc->setText(QString("Y %1\%").arg((qreal)nodeLeft->getY()*-100, 2, 'f', 0));
+  ui->leftXPerc->setText(QString("X %1%%").arg((qreal)nodeLeft->getX()*100, 2, 'f', 0));
+  ui->leftYPerc->setText(QString("Y %1%%").arg((qreal)nodeLeft->getY()*-100, 2, 'f', 0));
 
-  ui->rightXPerc->setText(QString("X %1\%").arg((qreal)nodeRight->getX()*100, 2, 'f', 0));
-  ui->rightYPerc->setText(QString("Y %1\%").arg((qreal)nodeRight->getY()*-100, 2, 'f', 0));
+  ui->rightXPerc->setText(QString("X %1%%").arg((qreal)nodeRight->getX()*100, 2, 'f', 0));
+  ui->rightYPerc->setText(QString("Y %1%%").arg((qreal)nodeRight->getY()*-100, 2, 'f', 0));
 
 #define CSWITCH_ON  "QLabel { background-color: #4CC417 }"
 #define CSWITCH_OFF "QLabel { }"

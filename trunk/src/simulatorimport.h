@@ -22,7 +22,8 @@ extern void StartMainThread(bool tests);
 extern void StopEepromThread();
 extern void StopMainThread();
 
-extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl, portb;
+extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
+extern uint8_t portb;
 
 #define INP_E_ID2     6
 #define OUT_E_BUZZER  3

@@ -1,6 +1,6 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.19" )
+SET( C9X_VERSION "0.20" )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -25,10 +25,17 @@ ELSE()
 ENDIF()
 
 ADD_CUSTOM_COMMAND(
-  COMMAND ${XSD_EXECUTABLE} cxx-tree --root-element-all --generate-serialization --output-dir ${PROJECT_BINARY_DIR}/ ${PROJECT_SOURCE_DIR}/radio.xsd
+  COMMAND ${XSDCXX_EXECUTABLE} cxx-tree --root-element-all --generate-serialization --output-dir ${PROJECT_BINARY_DIR}/ ${PROJECT_SOURCE_DIR}/radio.xsd
   OUTPUT ${PROJECT_BINARY_DIR}/radio.hxx ${PROJECT_BINARY_DIR}/radio.cxx
   DEPENDS ${PROJECT_SOURCE_DIR}/radio.xsd
 )
+
+IF( MSVC )
+
+SET(CMAKE_CXX_FLAGS "/EHa")
+INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
+
+ELSE( )
 
 ADD_CUSTOM_COMMAND(
   COMMAND make stamp
@@ -53,6 +60,8 @@ ADD_CUSTOM_COMMAND(
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
   OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
 )
+
+ENDIF()
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
@@ -167,8 +176,10 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_D
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
 
 IF( WIN32 )
-  SET(companion9x_SRCS ${companion9x_SRCS} icon.rc)
-  SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
+  SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )
+  IF ( NOT MSVC )
+    SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
+  ENDIF( )
 ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
@@ -205,16 +216,28 @@ ELSE( )
 ENDIF( )
 
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
+
+IF( MSVC )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Programs/pthreads/Pre-built.2/lib/pthread.lib )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Qt/4.7.4/lib/qtmaind.lib )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${XERCESC_LIBRARY} )
+# LINK_DIRECTORIES( C:/Programs/pthreads/Pre-built.2/lib )
+ELSE( )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} xerces-c )
+LINK_DIRECTORIES( /usr/local/lib )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} pthread )
+ENDIF( )
 
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 
 IF( WIN32 )
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
-  FIND_PROGRAM(NSIS_EXE makensis.exe)
-
+  FIND_PROGRAM(NSIS_EXE makensis.exe PATHS
+    "C:/Program Files/NSIS"
+    "C:/Programs/NSIS"
+  )
+  
   ADD_CUSTOM_COMMAND(OUTPUT ${PROJECT_BINARY_DIR}/companion9xInstall.exe
                      COMMAND "${NSIS_EXE}" ARGS companion9x.nsi
                      DEPENDS ${PROJECT_NAME} ${PROJECT_BINARY_DIR}/companion9x.nsi

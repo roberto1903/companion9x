@@ -399,11 +399,11 @@ void ModelEdit::tabExpos()
         default:  str += "   "; break;
         };
 
-        str += md->weight<0 ? QString("Weight(%1\%)").arg(md->weight).rightJustified(6,' ') :
-                              QString("Weight(+%1\%)").arg(md->weight).rightJustified(6, ' ');
+        str += md->weight<0 ? QString("Weight(%1%%)").arg(md->weight).rightJustified(6,' ') :
+                              QString("Weight(+%1%%)").arg(md->weight).rightJustified(6, ' ');
 
-        str += md->expo<0 ? QString(" Expo(%1\%)").arg(md->expo).rightJustified(6,' ') :
-                                      QString(" Expo(+%1\%)").arg(md->expo).rightJustified(6, ' ');
+        str += md->expo<0 ? QString(" Expo(%1%%)").arg(md->expo).rightJustified(6,' ') :
+                                      QString(" Expo(+%1%%)").arg(md->expo).rightJustified(6, ' ');
 
         if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
         if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
@@ -477,8 +477,8 @@ void ModelEdit::tabMixes()
         default:  str += "  "; break;
         };
 
-        str += md->weight<0 ? QString(" %1\%").arg(md->weight).rightJustified(6,' ') :
-                              QString(" +%1\%").arg(md->weight).rightJustified(6, ' ');
+        str += md->weight<0 ? QString(" %1%%").arg(md->weight).rightJustified(6,' ') :
+                              QString(" +%1%%").arg(md->weight).rightJustified(6, ' ');
 
 
         //QString srcStr = SRC_STR;
@@ -488,7 +488,7 @@ void ModelEdit::tabMixes()
         if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
         if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
         if(md->carryTrim) str += tr(" noTrim");
-        if(md->sOffset)  str += tr(" Offset(%1\%)").arg(md->sOffset);
+        if(md->sOffset)  str += tr(" Offset(%1%%)").arg(md->sOffset);
         if(md->curve)
         {
             QString crvStr = CURV_STR;

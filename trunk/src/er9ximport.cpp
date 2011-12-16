@@ -1,8 +1,12 @@
 #define SIMU
-// #define SIMU_EXCEPTIONS
+#define SIMU_EXCEPTIONS
 
 #undef min
 #undef max
+
+#ifndef __GNUC__
+#include "../winbuild/winbuild.h"
+#endif
 
 #include <exception>
 

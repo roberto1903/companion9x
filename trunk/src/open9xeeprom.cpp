@@ -516,18 +516,17 @@ t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &eepe)
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = eepe.safetySw[i];
     swashR = eepe.swashRingData;
-    // local copy of phases
-    PhaseData phases[MAX_PHASES] = eepe.phaseData;
     for (int i=0; i<MAX_PHASES; i++) {
+      PhaseData phase = eepe.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
-        if (phases[i].trimRef[j] >= 0) {
-          phases[i].trim[j] = 501 + phases[i].trimRef[j] - (phases[i].trimRef[j] >= j ? 1 : 0);
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= j ? 1 : 0);
         }
         else {
-          phases[i].trim[j] = std::max(-500, std::min(500, phases[i].trim[j]));
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
         }
       }
-      phaseData[i] = phases[i];
+      phaseData[i] = phase;
     }
     frsky = eepe.frsky;
   }

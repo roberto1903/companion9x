@@ -31,7 +31,7 @@
 #define NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
-typedef struct t_Er9xTrainerMix {
+PACK(typedef struct t_Er9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
   int8_t  swtch:5;
   int8_t  studWeight:6;
@@ -41,9 +41,9 @@ typedef struct t_Er9xTrainerMix {
   t_Er9xTrainerMix();
   t_Er9xTrainerMix(TrainerMix&);
 
-} __attribute__((packed)) Er9xTrainerMix; //
+}) Er9xTrainerMix; //
 
-typedef struct t_Er9xTrainerData {
+PACK(typedef struct t_Er9xTrainerData {
   int16_t        calib[4];
   Er9xTrainerMix mix[4];
 
@@ -51,9 +51,9 @@ typedef struct t_Er9xTrainerData {
   t_Er9xTrainerData();
   t_Er9xTrainerData(TrainerData&);
 
-} __attribute__((packed)) Er9xTrainerData;
+}) Er9xTrainerData;
 
-typedef struct t_Er9xGeneral {
+PACK(typedef struct t_Er9xGeneral {
   uint8_t   myVers;
   int16_t   calibMid[NUM_STICKSnPOTS];
   int16_t   calibSpanNeg[NUM_STICKSnPOTS];
@@ -94,7 +94,7 @@ typedef struct t_Er9xGeneral {
   t_Er9xGeneral();
   t_Er9xGeneral(GeneralSettings&);
 
-} __attribute__((packed)) Er9xGeneral;
+}) Er9xGeneral;
 
 
 
@@ -103,7 +103,7 @@ typedef struct t_Er9xGeneral {
 //eeprom modelspec
 //expo[3][2][2] //[Norm/Dr][expo/weight][R/L]
 
-typedef struct t_Er9xExpoData {
+PACK(typedef struct t_Er9xExpoData {
   int8_t  expo[3][2][2];
   int8_t  drSw1;
   int8_t  drSw2;
@@ -111,10 +111,10 @@ typedef struct t_Er9xExpoData {
   operator ExpoData();
   t_Er9xExpoData();
   t_Er9xExpoData(ExpoData&);
-} __attribute__((packed)) Er9xExpoData;
+}) Er9xExpoData;
 
 
-typedef struct t_Er9xLimitData {
+PACK(typedef struct t_Er9xLimitData {
   int8_t  min;
   int8_t  max;
   bool    revert;
@@ -123,13 +123,13 @@ typedef struct t_Er9xLimitData {
   operator LimitData();
   t_Er9xLimitData();
   t_Er9xLimitData(LimitData&);
-} __attribute__((packed)) Er9xLimitData;
+}) Er9xLimitData;
 
 #define MLTPX_ADD  0
 #define MLTPX_MUL  1
 #define MLTPX_REP  2
 
-typedef struct t_Er9xMixData {
+PACK(typedef struct t_Er9xMixData {
   uint8_t destCh;            //        1..NUM_CHNOUT
   uint8_t srcRaw;            //
   int8_t  weight;
@@ -148,10 +148,10 @@ typedef struct t_Er9xMixData {
   operator MixData();
   t_Er9xMixData();
   t_Er9xMixData(MixData&);
-} __attribute__((packed)) Er9xMixData;
+}) Er9xMixData;
 
 
-typedef struct t_Er9xCustomSwData { // Custom Switches data
+PACK(typedef struct t_Er9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
@@ -159,18 +159,18 @@ typedef struct t_Er9xCustomSwData { // Custom Switches data
   operator CustomSwData();
   t_Er9xCustomSwData();
   t_Er9xCustomSwData(CustomSwData&);
-} __attribute__((packed)) Er9xCustomSwData;
+}) Er9xCustomSwData;
 
-typedef struct t_Er9xSafetySwData { // Custom Switches data
+PACK(typedef struct t_Er9xSafetySwData { // Custom Switches data
   int8_t  swtch;
   int8_t  val;
 
   operator SafetySwData();
   t_Er9xSafetySwData();
   t_Er9xSafetySwData(SafetySwData&);
-} __attribute__((packed)) Er9xSafetySwData;
+}) Er9xSafetySwData;
 
-typedef struct t_Er9xFrSkyChannelData {
+PACK(typedef struct t_Er9xFrSkyChannelData {
   uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   alarms_value[2];      // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   alarms_level:4;
@@ -180,17 +180,17 @@ typedef struct t_Er9xFrSkyChannelData {
   operator FrSkyChannelData();
   t_Er9xFrSkyChannelData();
   t_Er9xFrSkyChannelData(FrSkyChannelData&);
-} __attribute__((packed)) Er9xFrSkyChannelData;
+}) Er9xFrSkyChannelData;
 
-typedef struct t_Er9xFrSkyData {
+PACK(typedef struct t_Er9xFrSkyData {
   Er9xFrSkyChannelData channels[2];
 
   operator FrSkyData();
   t_Er9xFrSkyData();
   t_Er9xFrSkyData(FrSkyData&);
-} __attribute__((packed)) Er9xFrSkyData;
+}) Er9xFrSkyData;
 
-typedef struct t_Er9xModelData {
+PACK(typedef struct t_Er9xModelData {
   char      name[10];             // 10 must be first for eeLoadModelName
   uint8_t   mdVers;
   int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
@@ -230,7 +230,7 @@ typedef struct t_Er9xModelData {
   operator ModelData();
   t_Er9xModelData();
   t_Er9xModelData(ModelData&);
-} __attribute__((packed)) Er9xModelData;
+}) Er9xModelData;
 
 
 #endif

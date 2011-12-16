@@ -685,18 +685,17 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
-    // local copy of phases
-    PhaseData phases[MAX_PHASES] = c9x.phaseData;
     for (int i=0; i<MAX_PHASES; i++) {
+      PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
-        if (phases[i].trimRef[j] >= 0) {
-          phases[i].trim[j] = 501 + phases[i].trimRef[j] - (phases[i].trimRef[j] >= i ? 1 : 0);
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
         }
         else {
-          phases[i].trim[j] = std::max(-500, std::min(500, phases[i].trim[j]));
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
         }
       }
-      phaseData[i] = phases[i];
+      phaseData[i] = phase;
     }
     frsky = c9x.frsky;
   }

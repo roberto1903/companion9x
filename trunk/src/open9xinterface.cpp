@@ -195,6 +195,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return true;
+    default:
+      return false;
   }
 }
 

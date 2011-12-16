@@ -1,9 +1,15 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSTD
+#define HELI
+#define TEMPLATES
 
 #undef min
 #undef max
+
+#ifndef __GNUC__
+#include "../winbuild/winbuild.h"
+#endif
 
 #include <exception>
 
@@ -22,6 +28,7 @@ namespace Gruvin9x {
 #include "../gruvin9x/lcd.cpp"
 #include "../gruvin9x/drivers.cpp"
 #include "../gruvin9x/simpgmspace.cpp"
+#include "../gruvin9x/templates.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
