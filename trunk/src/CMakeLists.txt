@@ -219,7 +219,7 @@ TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
 
 IF( MSVC )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Programs/pthreads/Pre-built.2/lib/pthread.lib )
-TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Qt/4.7.4/lib/qtmaind.lib )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Qt/4.7.4/lib/qtmain.lib )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${XERCESC_LIBRARY} )
 # LINK_DIRECTORIES( C:/Programs/pthreads/Pre-built.2/lib )
 ELSE( )
@@ -231,7 +231,13 @@ ENDIF( )
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 
 IF( WIN32 )
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/companion9x.nsi.in ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
+  IF( MSVC )
+    SET( NSI_IN_FILE companion9x-vs.nsi.in )  
+  ELSE( )
+    SET( NSI_IN_FILE companion9x-msys.nsi.in )
+  ENDIF( )
+  
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/${NSI_IN_FILE} ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
   FIND_PROGRAM(NSIS_EXE makensis.exe PATHS
     "C:/Program Files/NSIS"
