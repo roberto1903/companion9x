@@ -147,7 +147,7 @@ void MdiChild::newFile()
 
   isUntitled = true;
   curFile = tr("document%1.eepe").arg(sequenceNumber++);
-  setWindowTitle(curFile + "[*]");
+  setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+")");
 
 }
 
