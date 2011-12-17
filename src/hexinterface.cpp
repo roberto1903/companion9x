@@ -28,7 +28,7 @@ int HexInterface::getValueFromLine(const QString &line, int pos, int len)
     return ok ? hex : -1;
 }
 
-int HexInterface::load(uint8_t *data)
+int HexInterface::load(uint8_t *data, int maxsize)
 {
   int result = 0;
 
@@ -63,7 +63,7 @@ int HexInterface::load(uint8_t *data)
     if(chkSum!=retV)
       return 0;
 
-    if (address + byteCount <= 4096) {
+    if (address + byteCount <= maxsize) {
       if (recType == 0x00) { //data record - ba holds record
         memcpy(&data[address],ba.data(),byteCount);
         result = std::max(result, address+byteCount);
@@ -76,6 +76,7 @@ int HexInterface::load(uint8_t *data)
   
   return result;
 }
+
 
 bool HexInterface::save(uint8_t *data, const int size)
 {

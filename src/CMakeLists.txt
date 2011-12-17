@@ -76,6 +76,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
 SET( companion9x_SRCS
      eeprominterface.cpp
      hexinterface.cpp
+     flashinterface.cpp
      file.cpp
      xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx

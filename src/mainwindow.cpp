@@ -46,6 +46,7 @@
 #include "burnconfigdialog.h"
 #include "avroutputdialog.h"
 #include "preferencesdialog.h"
+#include "flashinterface.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
 #include "version.h"
@@ -413,12 +414,13 @@ void MainWindow::burnToFlash(QString fileToFlash)
         fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to flash memory"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
     else
         fileName = fileToFlash;
-
+    
     if (!fileName.isEmpty())
     {
         settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
-
-        int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+        FlashInterface flash(fileName);
+        
+        int ret = QMessageBox::question(this, "companion9x", (tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName())+ "\n" + (tr("Version %1").arg(flash.getVers()))+ "\n" + (tr("Release %1 %2").arg(flash.getSvn()).arg(flash.getBuild()))+ "\n" + (tr("Date %1 %2").arg(flash.getDate()).arg(flash.getTime()))), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
 
         QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
