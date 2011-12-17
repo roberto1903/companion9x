@@ -92,6 +92,8 @@ void ModelsListWidget::ShowContextMenu(const QPoint& pos)
     contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(paste()),tr("Ctrl+V"))->setEnabled(hasData);
     contextMenu.addAction(QIcon(":/images/duplicate.png"), tr("D&uplicate"),this,SLOT(duplicate()),tr("Ctrl+U"));
     contextMenu.addSeparator();
+    contextMenu.addAction(QIcon(":/images/currentmodel.png"), tr("&Use as default"),this,SLOT(setdefault()));
+    contextMenu.addSeparator();
     contextMenu.addAction(QIcon(":/images/print.png"), tr("P&rint model"),this, SLOT(print()),tr("Alt+S"));
     contextMenu.addSeparator();
     contextMenu.addAction(QIcon(":/images/simulate.png"), tr("&Simulate model"),this, SLOT(simulate()),tr("Alt+S"));
@@ -112,6 +114,17 @@ void ModelsListWidget::print()
 {
   ((MdiChild *)parent())->print();
 }
+
+void ModelsListWidget::setdefault()
+{
+    if(currentRow()==0) return;
+    if (!radioData->models[currentRow()-1].isempty()) {
+        radioData->generalSettings.currModel=currentRow()-1;
+        refreshList();
+    }
+  //((MdiChild *)parent())->setdefault();
+}
+
 
 void ModelsListWidget::mousePressEvent(QMouseEvent *event)
 {
@@ -458,7 +471,6 @@ void ModelsListWidget::viableModelSelected(int idx)
   else
     ((MdiChild*)parent())->viableModelSelected(!radioData->models[currentRow()-1].isempty());
 }
-
 
 
 

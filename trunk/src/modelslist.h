@@ -84,6 +84,7 @@ public slots:
     void OpenEditWindow();
     void simulate();
     void duplicate();
+    void setdefault();
     void deleteSelected(bool ask);
     void viableModelSelected(int idx);
 
