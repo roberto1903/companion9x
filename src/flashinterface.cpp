@@ -27,27 +27,27 @@ FlashInterface::FlashInterface(QString fileName) {
         QFile file(fileName);
 
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
-            isValid=-1;
-            return ;
-        }
-        QTextStream inputStream(&file);
-        flash_size = HexInterface(inputStream).load(flash, MAX_FSIZE);
-        file.close();
-        inputStream.reset();
-        if (flash_size==0) {
-            QFile file(fileName);
-            file.open(QIODevice::ReadOnly);
-            char bin_flash[MAX_FSIZE];
-            flash_size=file.read(bin_flash,MAX_FSIZE);
-            for (int i=0; i<flash_size;i++)
-                flash[i]=(uint8_t)bin_flash[i];
-        }
-        if (flash_size>0) {
-            SeekVer();
-            SeekSvn();
-            SeekDate();
-            SeekTime();
-            SeekBuild();
+            isValid=false;
+        } else {
+            QTextStream inputStream(&file);
+            flash_size = HexInterface(inputStream).load(flash, MAX_FSIZE);
+            file.close();
+            inputStream.reset();
+            if (flash_size==0) {
+                QFile file(fileName);
+                file.open(QIODevice::ReadOnly);
+                char bin_flash[MAX_FSIZE];
+                flash_size=file.read(bin_flash,MAX_FSIZE);
+                for (int i=0; i<flash_size;i++)
+                    flash[i]=(uint8_t)bin_flash[i];
+            }
+            if (flash_size>0) {
+                SeekVer();
+                SeekSvn();
+                SeekDate();
+                SeekTime();
+                SeekBuild();
+            }
         }
 }
 
