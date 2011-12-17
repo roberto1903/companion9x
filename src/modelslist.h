@@ -95,7 +95,6 @@ private:
     void restoreSelection();
 
     RadioData *radioData;
-    int UsedEEpromSize;
     QPoint dragStartPosition;
 
     CurrentSelection currentSelection;

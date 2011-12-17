@@ -249,8 +249,8 @@ void ModelsListWidget::refreshList()
     addItem(tr("General Settings") + name);
 
     EEPROMInterface *eepromInterface = GetEepromInterface();
-    UsedEEpromSize=0;
-    UsedEEpromSize+=eepromInterface->getSize(radioData->generalSettings);
+    int availableEEpromSize = eepromInterface->getEEpromSize();
+    availableEEpromSize -= eepromInterface->getSize(radioData->generalSettings);
     
     for(uint8_t i=0; i<MAX_MODELS; i++)
     {
@@ -259,20 +259,20 @@ void ModelsListWidget::refreshList()
        if (!radioData->models[i].isempty()) {
          item += QString().sprintf("%10s", radioData->models[i].name);
          if (eepromInterface) {
-           msize= eepromInterface->getSize(radioData->models[i]);
+           msize = eepromInterface->getSize(radioData->models[i]);
            item += QString().sprintf("%5d", msize);
-           UsedEEpromSize+=msize;
+           availableEEpromSize -= msize;
          }
        }
        addItem(item);
     }
-    if (radioData->generalSettings.currModel>0 && radioData->generalSettings.currModel<MAX_MODELS) {
-        QFont f=QFont("Courier New",12);
+    if (radioData->generalSettings.currModel>=0 && radioData->generalSettings.currModel<MAX_MODELS) {
+        QFont f = QFont("Courier New", 12);
         f.setBold(true);
         this->item(radioData->generalSettings.currModel+1)->setFont(f);
     }
 
-    ((MdiChild*)parent())->setEEpromAvail(eepromInterface->getEEpromSize()-UsedEEpromSize);
+    ((MdiChild*)parent())->setEEpromAvail(availableEEpromSize);
 }
 
 void ModelsListWidget::cut()
