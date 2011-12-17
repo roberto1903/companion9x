@@ -82,11 +82,10 @@ Section "companion9x" SecDummy
   
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
   File "Release\companion9x.exe"
-  File "C:\MinGW\bin\libgcc_s_dw2-1.dll"
-  File "C:\MinGW\bin\mingwm10.dll"
-  File "C:\MinGW\bin\libstdc++-6.dll"
   File "C:\Programs\pthreads\Pre-built.2\lib\pthreadVSE2.dll"
   File "C:\Programs\xerces-vc\bin\xerces-c_3_1.dll"
+  File "C:\WINNT\system32\msvcp100.dll"
+  File "C:\WINNT\system32\msvcr100.dll"
   File "@QT_BINARY_DIR@\QtCore4.dll"
   File "@QT_BINARY_DIR@\QtGui4.dll"
   File "@QT_BINARY_DIR@\QtNetwork4.dll"
