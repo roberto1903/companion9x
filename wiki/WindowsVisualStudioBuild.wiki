@@ -2,46 +2,35 @@
  
 = Building companion9X on Visual Studio for Windows =
 
+Starting with version 0.20, companion9x is compiled under Visual C++ Express 2010
+
 = Prerequisites =
 
 You will need ...
  * [http://msdn.microsoft.com/fr-fr/express/aa975050.aspx Visual C++ 2010 Express] 
  * [http://qt.nokia.com/downloads/ Qt source zip] (v4.7.4)
  * [http://xerces.apache.org/xerces-c/download.cgi Xerces vc10 version]
- * 
- * 
+ * [http://www.codesynthesis.com/download/xsd/3.3/windows/i686/xsd-3.3.0-i686-windows.zip xsd]
+ * [http://mir2.ovh.net/ftp.apache.org/dist//xerces/c/3/binaries/xerces-c-3.1.1-x86-windows-vc-10.0.zip xerces]
+ * [ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-8-0-release.exe pthreads-w32]
+ * [http://msinttypes.googlecode.com/files/msinttypes-r26.zip msinttypes]
 
-... in progress ...
 
-= Building companion9x =
+= Random notes for Cam before I forget them =
 
-We're ready to grab the source files and build companion9x itself.
+I have put the pthread directory under C:\Programs. Could be better somewhere else? Also I have put the two files of inttypes inside C:\Programs\pthreads\pthreads.2 (yes, I am lazy, I know)
 
-== Check out the c9x source ==
+And (horrible) I put the 2 dlls for pthreads and xerces inside my companion9x/vsbuild directory (I have one source dir and 3 build dirs: msysbuild, vsbuild and lbuild for linux)
 
-See the [http://code.google.com/p/companion9x/source/checkout project's Source page], as provided by Googlecode.
+The command for CMake (inside the Visual Studio 2010 console): 
+cmake ../src -G "Visual Studio 10" 
 
-{{{
-svn checkout http://companion9x.googlecode.com/svn/trunk companion9x
-}}}
+= Links =
+http://code.google.com/p/sigil/wiki/BuildingFromSource
+http://www.siteduzero.com/tutoriel-3-36553-utiliser-qt-avec-visual-studio-2010.html (french!)
 
-== Prepare a Makefile using CMake ==
 
-{{{
-cd companion9x/src
 
-cmake .
-}}}
 
-Finally, we're ready to compile ...
 
-{{{
-make clean && make
-}}}
 
-When the build process completes (with no show-stopping errors!) you will end up with a binary named `companion9x`.
-
-You should now be able to run companion9x from your terminal, like so ...
-{{{
-./companion9x
-}}}
