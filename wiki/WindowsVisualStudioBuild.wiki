@@ -27,9 +27,8 @@ cmake ../src -G "Visual Studio 10"
 
 = Links =
 http://code.google.com/p/sigil/wiki/BuildingFromSource
+
 http://www.siteduzero.com/tutoriel-3-36553-utiliser-qt-avec-visual-studio-2010.html (french!)
-
-
 
 
 
