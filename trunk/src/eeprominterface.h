@@ -23,7 +23,7 @@
 #if __GNUC__
 #define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
 #else
-#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop) )
+#include "../winbuild/winbuild.h"
 #endif
 
 #define DNLD_VER_GRUVIN9X_STABLE_STOCK 0
