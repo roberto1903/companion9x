@@ -45,6 +45,8 @@ class Open9xSimulator : public SimulatorInterface {
 
     virtual void getTrims(Trims & trims);
 
+    virtual unsigned int getPhase();
+
     virtual void wheelEvent(uint8_t steps) { }
 
     virtual const char * getError();

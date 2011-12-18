@@ -93,6 +93,11 @@ void Gruvin9xV4Simulator::wheelEvent(uint8_t steps)
   g_rotenc[0] += steps;
 }
 
+unsigned int Gruvin9xV4Simulator::getPhase()
+{
+  return getFlightPhase();
+}
+
 const char * Gruvin9xV4Simulator::getError()
 {
 #define GETERROR_IMPORT

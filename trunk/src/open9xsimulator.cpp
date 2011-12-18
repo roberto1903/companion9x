@@ -84,6 +84,11 @@ void Open9xSimulator::getTrims(Trims & trims)
 #include "simulatorimport.h"
 }
 
+unsigned int Open9xSimulator::getPhase()
+{
+  return getFlightPhase();
+}
+
 const char * Open9xSimulator::getError()
 {
 #define GETERROR_IMPORT
