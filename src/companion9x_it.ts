@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ExpoDialog</name>
     <message>
         <location filename="expodialog.ui" line="20"/>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="35"/>
@@ -25,7 +25,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="expodialog.ui" line="62"/>
         <source>Weight</source>
-        <translation type="unfinished">Вес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="69"/>
@@ -56,7 +56,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
     <message>
         <location filename="expodialog.ui" line="114"/>
         <source>Curve</source>
-        <translation type="unfinished">Кривая</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="121"/>
@@ -94,24 +94,23 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
     <message>
         <location filename="generaledit.ui" line="14"/>
         <source>General Edit</source>
-        <translation>Основная настройка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="27"/>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
-        <translation>Основные настройки передатчика.
-Это относится ко всем моделям сохраненным в EEPROM.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="35"/>
         <source>Setup</source>
-        <translation>Настройка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="44"/>
         <source>Contrast</source>
-        <translation>Конраст</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="57"/>
@@ -121,13 +120,12 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Контраст LCD дисплея
-Значения в пределах 20-45</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="81"/>
         <source>Battery Warning</source>
-        <translation>Напряж. при разряде</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="94"/>
@@ -135,87 +133,65 @@ p, li { white-space: pre-wrap; }
 This is the threashhold where the battery warning sounds.
 
 Acceptable values are 5v..10v</source>
-        <translation>Предупреждение о разряде.
-Значение при котором сработает сигнализация.
-
-Диапазон 5В..10В</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1771"/>
-        <source>v</source>
-        <translation>В</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="125"/>
         <source>Battery Calibration</source>
-        <translation>Калибровка батареи</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="138"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
-        <translation>Калибровка батареи:
-Это значение добавляется к измеренному напряжению.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="164"/>
         <source>Backlight Switch</source>
-        <translation>Тумблер подсветки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="177"/>
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
-        <translation>Включение подсветки (при ее наличии).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="189"/>
         <source>Backlight Auto On/OFF after</source>
-        <translation>Подсветка вкл/выкл после</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="202"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
-        <translation>Если не равно нулю, то любое нажатие кнопок будет включать подсветку и выключать ее через указанное кол-во секунд.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="205"/>
         <source> sec</source>
-        <translation> сек</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="218"/>
         <source>Inactivity Timer</source>
-        <translation>Таймер активности</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="231"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
-        <translation>Если не равно нулю, начнет бипать при отсутсвии активности через указанное кол-во минут.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="234"/>
         <source> min</source>
-        <translation> мин</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="293"/>
-        <source>Reverse Throttle Operation</source>
-        <translation>Реверс газа</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="300"/>
-        <source>Reverse throttle operation.
-If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
-
-</source>
-        <translation>Реверсировать канал газа (а также триммеры и предупреждения)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="244"/>
         <source>Timer Beeps</source>
-        <translation>Звук таймера</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="253"/>
@@ -224,22 +200,22 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Single Beep Every whole Minute&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Бип каждую минуту</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="260"/>
         <source>Every Minute</source>
-        <translation>Кажд. минуту</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="267"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
-        <translation>Бипать за 30, 15, 10, и 5 секунд до конца.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="270"/>
         <source>Count Down to Zero</source>
-        <translation>Достиж. нуля</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="277"/>
@@ -248,68 +224,208 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Flash backlight on timer  beep&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Моргать подсветкой при бипах таймера</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="284"/>
         <source>Flash on beep</source>
-        <translation>Моргать</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="293"/>
+        <source>Reverse Throttle Operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="300"/>
+        <source>Reverse throttle operation.
+If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="313"/>
+        <source>Show Splash Screen on Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="320"/>
+        <location filename="generaledit.ui" line="323"/>
+        <source>Show splash screen on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="333"/>
+        <source>Throttle Startup Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="340"/>
+        <location filename="generaledit.ui" line="380"/>
+        <location filename="generaledit.ui" line="723"/>
+        <location filename="generaledit.ui" line="1382"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there&apos;s not a lot of memory left&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="366"/>
+        <source>Switch Startup Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="373"/>
+        <source>Memory Startup Warning</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="403"/>
         <source>Alarm Warning</source>
-        <translation>Предупр. &quot;тишина&quot;</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="410"/>
+        <source>Channel Order (For Templates)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="423"/>
+        <source>Channel order
+
+This is used by the templated to determine which channel goes to what number output.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="555"/>
+        <source>Stick Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="568"/>
+        <source>Mode selection:
+
+Mode 1:
+  Left stick:  Elevator, Rudder
+  Right stick:  Throttle, Aileron
+
+Mode 2:
+  Left stick:  Throttle, Rudder
+  Right stick:  Elevator, Aileron
+
+Mode 3:
+  Left stick:  Elevator, Aileron
+  Right stick:  Throttle, Rudder
+
+Mode 4:
+  Left stick:  Throttle, Aileron
+  Right stick:  Elevator, Rudder
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="593"/>
+        <source>Mode 1 (RUD ELE THR AIL)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="598"/>
+        <source>Mode 2 (RUD THR ELE AIL)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="603"/>
+        <source>Mode 3 (AIL ELE THR RUD)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="608"/>
+        <source>Mode 4 (AIL THR ELE RUD)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="629"/>
+        <source>Beeper Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="642"/>
+        <location filename="generaledit.ui" line="785"/>
+        <location filename="generaledit.ui" line="819"/>
+        <location filename="generaledit.ui" line="932"/>
+        <location filename="generaledit.ui" line="966"/>
+        <location filename="generaledit.ui" line="1000"/>
+        <location filename="generaledit.ui" line="1034"/>
+        <location filename="generaledit.ui" line="1073"/>
+        <location filename="generaledit.ui" line="1112"/>
+        <source>Beeper volume
+
+0 - Quiet.  No beeps at all.
+1 - No Keys.  Normal beeps but menu keys do not beep.
+2 - Normal.
+3 - Loud.
+4 - Extra loud.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="652"/>
         <source>Quiet</source>
-        <translation>тихо</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="657"/>
         <source>No Keys</source>
-        <translation>без кнопок</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="662"/>
         <source>Normal</source>
-        <translation>нормально</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="667"/>
         <source>Long</source>
-        <translation>долго</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="672"/>
         <source>Extra Long</source>
-        <translation>очень долго</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="680"/>
         <source>Input Filter</source>
-        <translation>Входной фильтр</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="688"/>
         <source>Single</source>
-        <translatorcomment>???</translatorcomment>
-        <translation>Одиночный</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="693"/>
         <source>Oversample</source>
-        <translation>Передискретизация</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="698"/>
         <source>Filter</source>
-        <translation>Фильтр</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="709"/>
         <source>Owner Name</source>
-        <translation>Имя владельца</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="747"/>
@@ -402,7 +518,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="898"/>
         <source>Weight</source>
-        <translation type="unfinished">Вес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="905"/>
@@ -467,6 +583,26 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="generaledit.ui" line="1406"/>
+        <source>Calibration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1412"/>
+        <source>Negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1419"/>
+        <source>Mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1426"/>
+        <source>Positive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="generaledit.ui" line="1433"/>
         <source>STICK 1</source>
         <translation type="unfinished"></translation>
@@ -507,226 +643,33 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="generaledit.ui" line="1771"/>
+        <source>v</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="generaledit.ui" line="1790"/>
         <source>PPM Multiplier</source>
-        <translation>PPM множитель</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="333"/>
-        <source>Throttle Startup Warning</source>
-        <translation>Предупр. &quot;газ не в нуле&quot;</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="340"/>
-        <location filename="generaledit.ui" line="380"/>
-        <location filename="generaledit.ui" line="723"/>
-        <location filename="generaledit.ui" line="1382"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there&apos;s not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Определение предупреждений при включении.
-&quot;Газ не в нуле&quot; - Стик газа не в нулевом положении
-&quot;Тумблеры&quot; - Переключатели не в положении по-умолчанию
-&quot;Память&quot; - Не осталось свободной памяти под модели
-&quot;Тишина&quot; - Предупреждение о &quot;тихом&quot; режиме (без звука)</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="366"/>
-        <source>Switch Startup Warning</source>
-        <translation>Предупр. &quot;тумблеры&quot;</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="373"/>
-        <source>Memory Startup Warning</source>
-        <translation>Предупр. &quot;память&quot;</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="629"/>
-        <source>Beeper Mode</source>
-        <translation>Режим бипов</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="642"/>
-        <location filename="generaledit.ui" line="785"/>
-        <location filename="generaledit.ui" line="819"/>
-        <location filename="generaledit.ui" line="932"/>
-        <location filename="generaledit.ui" line="966"/>
-        <location filename="generaledit.ui" line="1000"/>
-        <location filename="generaledit.ui" line="1034"/>
-        <location filename="generaledit.ui" line="1073"/>
-        <location filename="generaledit.ui" line="1112"/>
-        <source>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</source>
-        <translation>Громкость.
-
-0 - Тишина.
-1 - Без кнопок.
-2 - Обычная.
-3 - Громкая.
-4 - Очень громкая.</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="410"/>
-        <source>Channel Order (For Templates)</source>
-        <translation>Порядок каналов</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="423"/>
-        <source>Channel order
-
-This is used by the templated to determine which channel goes to what number output.</source>
-        <translation>Порядок каналов
-
-Используется в шаблоне порядка следования каналов.</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="555"/>
-        <source>Stick Mode</source>
-        <translation>Режим стиков</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="568"/>
-        <source>Mode selection:
-
-Mode 1:
-  Left stick:  Elevator, Rudder
-  Right stick:  Throttle, Aileron
-
-Mode 2:
-  Left stick:  Throttle, Rudder
-  Right stick:  Elevator, Aileron
-
-Mode 3:
-  Left stick:  Elevator, Aileron
-  Right stick:  Throttle, Rudder
-
-Mode 4:
-  Left stick:  Throttle, Aileron
-  Right stick:  Elevator, Rudder
-
-</source>
-        <translatorcomment>позже</translatorcomment>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="593"/>
-        <source>Mode 1 (RUD ELE THR AIL)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="598"/>
-        <source>Mode 2 (RUD THR ELE AIL)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="603"/>
-        <source>Mode 3 (AIL ELE THR RUD)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="608"/>
-        <source>Mode 4 (AIL THR ELE RUD)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="313"/>
-        <source>Show Splash Screen on Startup</source>
-        <translation>Показывать заставку</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="320"/>
-        <location filename="generaledit.ui" line="323"/>
-        <source>Show splash screen on startup</source>
-        <translation>Показывать заставку при включении</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1406"/>
-        <source>Calibration</source>
-        <translation>Калибровка.</translation>
-    </message>
-    <message>
-        <source>ANALOG 7</source>
-        <translation type="obsolete">АНАЛОГ 7</translation>
-    </message>
-    <message>
-        <source>ANALOG 6</source>
-        <translation type="obsolete">АНАЛОГ 6</translation>
-    </message>
-    <message>
-        <source>ANALOG 5</source>
-        <translation type="obsolete">АНАЛОГ 5</translation>
-    </message>
-    <message>
-        <source>ANALOG 4</source>
-        <translation type="obsolete">АНАЛОГ 4</translation>
-    </message>
-    <message>
-        <source>ANALOG 3</source>
-        <translation type="obsolete">АНАЛОГ 3</translation>
-    </message>
-    <message>
-        <source>ANALOG 2</source>
-        <translation type="obsolete">АНАЛОГ 2</translation>
-    </message>
-    <message>
-        <source>ANALOG 1</source>
-        <translation type="obsolete">АНАЛОГ 1</translation>
-    </message>
-    <message>
-        <source>PPM In</source>
-        <translation type="obsolete">Вход PPM</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1412"/>
-        <source>Negative</source>
-        <translation>негатив</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1419"/>
-        <source>Mid</source>
-        <translation>центр</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1426"/>
-        <source>Positive</source>
-        <translation>позитив</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
+        <location filename="mainwindow.cpp" line="81"/>
+        <source>companion9x - EEPROM Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="107"/>
         <location filename="mainwindow.cpp" line="232"/>
         <location filename="mainwindow.cpp" line="269"/>
         <source>File loaded</source>
-        <translation>Файл загружен</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="157"/>
-        <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="164"/>
-        <source>Save As</source>
-        <translation type="unfinished">Сохранить как...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="177"/>
-        <source>No updates available at this time.</source>
+        <location filename="mainwindow.cpp" line="134"/>
+        <source>Checking for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -736,8 +679,23 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="157"/>
+        <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="164"/>
+        <source>Save As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="164"/>
         <source>Executable (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="177"/>
+        <source>No updates available at this time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -746,39 +704,35 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>EEPROM files (*.bin *.hex);;BIN files (*.bin);;HEX files (*.hex)</source>
-        <translation type="obsolete">файлы EEPROM (*.bin *.hex);;файлы BIN (*.bin);;файлы HEX (*.hex)</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="218"/>
         <source>Open</source>
-        <translation>Открыть</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="242"/>
         <location filename="mainwindow.cpp" line="248"/>
         <source>File saved</source>
-        <translation>Файл записан</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="373"/>
         <source>Read EEPROM From Tx</source>
-        <translation>Считать EEPROM из TX</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="390"/>
         <source>Choose file to write to EEPROM memory</source>
-        <translation>Выберите файл для записи в EEPROM</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="395"/>
         <source>Write %1 to EEPROM memory?</source>
-        <translation type="unfinished">Прошить %1 в передатчик?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="414"/>
         <source>Choose file to write to flash memory</source>
-        <translation>Выберите файл для записи в прошивку</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="423"/>
@@ -803,96 +757,16 @@ Mode 4:
     <message>
         <location filename="mainwindow.cpp" line="441"/>
         <source>Read EEPROM memory to File</source>
-        <translation>Считать EEPROM в файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="461"/>
         <source>Read Flash to File</source>
-        <translation>Считать прошивку в файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="499"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you&apos;ve found this program and/or the er9x firmware useful please support by</source>
-        <oldsource>If you&apos;ve found this program and/or the Firmware useful please support by</oldsource>
-        <translation type="obsolete">Если эта программа и/или прошивка оказалась полезной, вы можете </translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="504"/>
-        <source>donating</source>
-        <translation>поддержать ее</translation>
-    </message>
-    <message>
-        <source>About eePe</source>
-        <translation type="obsolete">О eePe</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="552"/>
-        <location filename="mainwindow.cpp" line="906"/>
-        <source>&amp;%1 %2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="555"/>
-        <source>%1 %2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="581"/>
-        <source>&amp;New</source>
-        <translation>Новый</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="583"/>
-        <source>Create a new file</source>
-        <translation>Создать новый файл</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="586"/>
-        <source>&amp;Open...</source>
-        <translation>Открыть</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="588"/>
-        <source>Open an existing file</source>
-        <translation>Открыть файл</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="591"/>
-        <source>&amp;Save</source>
-        <translation>Сохранить</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="593"/>
-        <source>Save the document to disk</source>
-        <translation>Записать на диск</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="596"/>
-        <source>Save &amp;As...</source>
-        <translation>Сохранить как...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="598"/>
-        <source>Save the document under a new name</source>
-        <translation>Записать с другим именем</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="601"/>
-        <source>&amp;Preferences...</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="602"/>
-        <source>Edit general preferences</source>
-        <translation>Редактировать основные настройки</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="605"/>
-        <source>&amp;Check for updates...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -901,8 +775,79 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="504"/>
+        <source>donating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="506"/>
         <source>About companion9x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="552"/>
+        <location filename="mainwindow.cpp" line="906"/>
+        <source>&amp;%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="555"/>
+        <source>%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="581"/>
+        <source>&amp;New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="583"/>
+        <source>Create a new file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="586"/>
+        <source>&amp;Open...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="588"/>
+        <source>Open an existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="591"/>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="593"/>
+        <source>Save the document to disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="596"/>
+        <source>Save &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="598"/>
+        <source>Save the document under a new name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="601"/>
+        <source>&amp;Preferences...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="602"/>
+        <source>Edit general preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="605"/>
+        <source>&amp;Check for updates...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -923,251 +868,247 @@ Mode 4:
     <message>
         <location filename="mainwindow.cpp" line="615"/>
         <source>E&amp;xit</source>
-        <translation>Выход</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="617"/>
         <source>Exit the application</source>
-        <translation>Выйти из программы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="621"/>
         <source>Cu&amp;t</source>
-        <translation>Вырезать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="623"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
-        <translation>Вырезать выделение в буфер обмена</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="627"/>
         <source>&amp;Copy</source>
-        <translation>Копировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="629"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation>Копировать выделение в буфер обмена</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="633"/>
         <source>&amp;Paste</source>
-        <translation>Вставить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="635"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation>Вставить выделение из буфера обмена</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="640"/>
         <source>&amp;Write EEPROM To Tx</source>
-        <translation>Записать EEPROM в TX</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="641"/>
         <source>Ctrl+Alt+W</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="642"/>
         <source>Write EEPROM to transmitter</source>
-        <translation>Записать EEPROM в передатчик</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="645"/>
         <source>&amp;Read EEPROM From Tx</source>
-        <translation>Считать EEPROM из TX</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="646"/>
         <source>Ctrl+Alt+R</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="647"/>
         <source>Read EEPROM from transmitter</source>
-        <translation>Считать EEPROM из передатчика</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="650"/>
         <source>Write Flash memory</source>
-        <translation>Загрузить прошивку</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="651"/>
         <source>Write flash memory to transmitter</source>
-        <translation>Загрузить прошивку в передатчик</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="654"/>
         <source>Write EEPROM memory from file</source>
-        <translation>Загрузить EEPROM из файла</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="655"/>
         <source>Write EEPROM memory from file to transmitter</source>
-        <translation>Загрузить EEPROM из файла в передатчик</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="658"/>
         <source>Read EEPROM memory to file</source>
-        <translation>Считать EEPROM в файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="659"/>
         <source>Read EEPROM memory from transmitter to file</source>
-        <translation>Считать EEPROM из передатчика в файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="662"/>
         <source>Read Flash memory</source>
-        <translation>Считать прошивку</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="663"/>
         <source>Read flash memory to transmitter</source>
-        <translation>Считать прошивку из передатчика</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="666"/>
         <source>&amp;Configure...</source>
-        <translation>Настройка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="667"/>
         <source>Configure burning software</source>
-        <translation>Настроить программатор</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="670"/>
         <source>&amp;List programmers</source>
-        <translation>Список программаторов</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="671"/>
         <source>List available programmers</source>
-        <translation>Показать список программаторов</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="674"/>
         <source>&amp;Fuses...</source>
-        <translation>Фьюзы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="675"/>
         <source>Show fuses dialog</source>
-        <translation>Показать диалог установки фьюзов</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="678"/>
         <source>&amp;Simulate</source>
-        <translation>Симуляция</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="679"/>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="680"/>
         <source>Simulate selected model.</source>
-        <translation>Запустить симуляцию</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="684"/>
         <source>&amp;Print</source>
-        <translation>Печать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="685"/>
         <source>Ctrl+P</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="686"/>
         <source>Print current model.</source>
-        <translation>Распечатать текущую модель</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="690"/>
         <source>Cl&amp;ose</source>
-        <translation>Закрыть</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="691"/>
         <source>Close the active window</source>
-        <translation>Закрыть активное окно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="695"/>
         <source>Close &amp;All</source>
-        <translation>Закрыть все</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="696"/>
         <source>Close all the windows</source>
-        <translation>Закрыть все окна</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="700"/>
         <source>&amp;Tile</source>
-        <translation>Мозаика</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="701"/>
         <source>Tile the windows</source>
-        <translation>Расположить окна мозаикой</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="704"/>
         <source>&amp;Cascade</source>
-        <translation>Каскад</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="705"/>
         <source>Cascade the windows</source>
-        <translation>Разместить окна каскадом</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="708"/>
         <source>Ne&amp;xt</source>
-        <translation>Следующее</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="710"/>
         <source>Move the focus to the next window</source>
-        <translation>Переместить фокус на следующее окно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="714"/>
         <source>Pre&amp;vious</source>
-        <translation>Предыдущее</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="716"/>
         <source>Move the focus to the previous window</source>
-        <translation>Переместить фокус на предыдущее окно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="724"/>
         <source>&amp;About</source>
-        <translation>О программе</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="725"/>
         <source>Show the application&apos;s About box</source>
-        <translation>Показать окно &quot;О программе&quot;</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="743"/>
-        <source>Recent Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Contributors</source>
-        <translation type="obsolete">Авторы</translation>
+        <location filename="mainwindow.cpp" line="728"/>
+        <source>Switch layout direction</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="729"/>
@@ -1175,59 +1116,49 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="745"/>
-        <source>&amp;File</source>
-        <translation>Файл</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="728"/>
-        <source>Switch layout direction</source>
-        <translation>Зеркало</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="81"/>
-        <source>companion9x - EEPROM Editor</source>
+        <location filename="mainwindow.cpp" line="743"/>
+        <source>Recent Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="134"/>
-        <source>Checking for updates</source>
+        <location filename="mainwindow.cpp" line="745"/>
+        <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="761"/>
         <source>&amp;Edit</source>
-        <translation>Правка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="766"/>
         <source>&amp;Burn</source>
-        <translation>Запись</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="780"/>
         <source>&amp;Window</source>
-        <translation>Окна</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="786"/>
         <source>&amp;Help</source>
-        <translation>Помощь</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="797"/>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="805"/>
         <source>Edit</source>
-        <translation>Правка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="810"/>
         <source>Burn</source>
-        <translation>Запись</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="822"/>
@@ -1237,18 +1168,23 @@ Mode 4:
     <message>
         <location filename="mainwindow.cpp" line="829"/>
         <source>Ready</source>
-        <translation>Готово</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MdiChild</name>
     <message>
-        <source>General Settings</source>
-        <translation type="obsolete">Основные настройки</translation>
+        <location filename="mdichild.cpp" line="74"/>
+        <location filename="mdichild.cpp" line="106"/>
+        <location filename="mdichild.cpp" line="152"/>
+        <location filename="mdichild.cpp" line="403"/>
+        <source>free bytes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Selected Models?</source>
-        <translation type="obsolete">Удалить выбранные модели?</translation>
+        <location filename="mdichild.cpp" line="134"/>
+        <source>Editing model %1: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="161"/>
@@ -1267,52 +1203,12 @@ Mode 4:
         <location filename="mdichild.cpp" line="347"/>
         <location filename="mdichild.cpp" line="451"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Unable set data!</source>
-        <translation type="obsolete">Невозможно установить данные!</translation>
-    </message>
-    <message>
-        <source>Unable set model!</source>
-        <translation type="obsolete">Невозможно установить модель!</translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="134"/>
-        <source>Editing model %1: </source>
-        <translation>Редактирование модели %1: </translation>
-    </message>
-    <message>
-        <source>Unable to read settings!</source>
-        <translation type="obsolete">Невозможно считать настройки!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="161"/>
         <source>Unable to find file %1!</source>
-        <translation>Невозможно найти файл %1!</translation>
-    </message>
-    <message>
-        <source>Cannot read file %1:
-%2.</source>
-        <translation type="obsolete">Не удается считать файл %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Error reading file %1!</source>
-        <translation type="obsolete">Ошибка при считывании файла %1!</translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="238"/>
-        <source>Error reading file %1:
-%2.</source>
-        <translation>Ошибка при считывании файла %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Error loading file %1:
-%2.</source>
-        <oldsource>File wrong size - %1</oldsource>
-        <translation type="obsolete">Неверный размер файла - %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="170"/>
@@ -1323,17 +1219,15 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="74"/>
-        <location filename="mdichild.cpp" line="106"/>
-        <location filename="mdichild.cpp" line="152"/>
-        <location filename="mdichild.cpp" line="403"/>
-        <source>free bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="201"/>
         <location filename="mdichild.cpp" line="211"/>
         <source>Invalid EEPROM File %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="238"/>
+        <source>Error reading file %1:
+%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1344,7 +1238,7 @@ Mode 4:
     <message>
         <location filename="mdichild.cpp" line="274"/>
         <source>Save As</source>
-        <translation>Сохранить как...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="295"/>
@@ -1353,8 +1247,14 @@ Mode 4:
         <location filename="mdichild.cpp" line="328"/>
         <source>Cannot write file %1:
 %2.</source>
-        <translation>Не удается записать файл %1:
-%2.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="340"/>
+        <location filename="mdichild.cpp" line="348"/>
+        <source>Error writing file %1:
+%2.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="384"/>
@@ -1369,65 +1269,14 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="340"/>
-        <location filename="mdichild.cpp" line="348"/>
-        <source>Error writing file %1:
-%2.</source>
-        <translation>Ошибка при записи файла %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; has been modified.
-Do you want to save your changes?</source>
-        <translation type="obsolete">&apos;%1&apos; был изменен.
-Вы хотите сохранить изменения?</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="435"/>
         <source>Write %1 to EEPROM memory?</source>
-        <oldsource>Burn %1 to transmitter?</oldsource>
-        <translation type="unfinished">Прошить %1 в передатчик?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="451"/>
         <source>Cannot write temporary file!</source>
-        <translation>Не удается записать временный файл!</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">Править</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">Удалить</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Удалить</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">Копировать</translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation type="obsolete">Вырезать</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">Вставить</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">Дублировать</translation>
-    </message>
-    <message>
-        <source>&amp;Simulate</source>
-        <translation type="obsolete">Симуляция</translation>
-    </message>
-    <message>
-        <source>&amp;Write To Tx</source>
-        <translation type="obsolete">Записать в TX</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1435,33 +1284,32 @@ Do you want to save your changes?</source>
     <message>
         <location filename="mixerdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translatorcomment>???</translatorcomment>
-        <translation>Диалог</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="29"/>
         <source>Source</source>
-        <translation>Источник</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="36"/>
         <source>The source for the mixer</source>
-        <translation>Источник для микшера</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="43"/>
         <source>Weight</source>
-        <translation>Вес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="50"/>
         <source>The value of the mixer is multiplied by this value and divided by 100.</source>
-        <translation>Значение микшера умножается на это значение и делится на 100</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="66"/>
         <source>Offset</source>
-        <translation>Смещен.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="73"/>
@@ -1470,77 +1318,75 @@ Do you want to save your changes?</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This value is added to the &lt;span style=&quot; font-weight:600;&quot;&gt;input &lt;/span&gt;of the mixer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Это значение добавляется к микшеру.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="93"/>
         <source>Include Trim</source>
-        <translation>Исп. трим</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="100"/>
         <source>If checked - will add the trim from the source (if available)</source>
-        <translation>Если отмечено - использует триммеры из источника (при их наличии)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="110"/>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="117"/>
         <source>The curve used by the mix</source>
-        <translation>Кривая используемая микшером</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="124"/>
         <source>Switch</source>
-        <translation>Тумблер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="131"/>
         <location filename="mixerdialog.ui" line="209"/>
         <source>Switch used by the mix.
 If blank then the mix is considered to be &quot;ON&quot; all the time.</source>
-        <translation>Переключатель используемый микшером. Если пусто - микшер включен все время.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="139"/>
         <source>Warning</source>
-        <translation>Звук</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="146"/>
         <source>Mixer warning.
 Setting this value will cause a beep to be emmitted when this value is active.</source>
-        <translation>Индикация включения.
-Когда микшер активируется звучит выбранный сигнал.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="151"/>
         <source>OFF</source>
-        <translation>ВЫКЛ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="156"/>
         <source>1 Beep</source>
-        <translation>1 бип</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="161"/>
         <source>2 Beep</source>
-        <oldsource>2 Beeo</oldsource>
-        <translation>2 бипа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="166"/>
         <source>3 Beep</source>
-        <translation>3 бипа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="174"/>
         <source>Multiplex</source>
-        <translation>Режим</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="181"/>
@@ -1551,28 +1397,22 @@ This determines how mixer values are added.
 &quot;+&quot; means the value of the current mix is added to the previous mixes in the same channel.
 &quot;*&quot; means the value of the current mix is amultiplied with the previous mixes in the same channel.
 &quot;R&quot; means the value replaces the previous values.  If the switch is off the value will be ignored.</source>
-        <translation>Мультиплексор
-
-Определяет, каким образом добавляется значение микшера.
-
-&quot;+&quot; - значение текущего микшера добавляется к предыдущему значению на этом же канале.
-&quot;*&quot; - значение текущего микшера умножается на предыдущее значение на этом же канале
-&quot;R&quot; - значение текущего микшера заменяет предыдущее значение на этом же канале.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="191"/>
         <source>ADD</source>
-        <translation>ДОБАВИТЬ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="196"/>
         <source>MULTIPLY</source>
-        <translation>УМНОЖИТЬ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="201"/>
         <source>REPLACE</source>
-        <translation>ЗАМЕНИТЬ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="217"/>
@@ -1582,17 +1422,17 @@ This determines how mixer values are added.
     <message>
         <location filename="mixerdialog.ui" line="228"/>
         <source>Delay</source>
-        <translation>Задержка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="235"/>
         <source>Slow</source>
-        <translation>Замедлен.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="242"/>
         <source>Up</source>
-        <translation>Верх</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="252"/>
@@ -1610,21 +1450,17 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If Delay is not zero the actuation of the mix will be delayed by the specified amount of seconds.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If Slow is not zero then the speed of the mix will be set by the value specified -&amp;gt; the value states the number of seconds it takes to transit from -100 to 100.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Задержка и замедление.
-Эти значение управляют скоростью и задержкой на выходе микшера.
-Если &quot;Задержка&quot; не равна нулю, то срабатывание микшера происходит через указанное число секунд.
-Если &quot;Замедление&quot; не равно нулю, то это значение означает число секунд для перемещения от -100 до +100.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="298"/>
         <source>Down</source>
-        <translation>Низ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="13"/>
         <source>DEST -&gt; CH%1%2</source>
-        <translatorcomment>???</translatorcomment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1632,175 +1468,180 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="27"/>
+        <source>Simulate</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="42"/>
         <source>Setup</source>
-        <translation>Настройка</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="51"/>
         <source>Model Name</source>
-        <translation>Название модели</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timer Mode</source>
-        <translation type="obsolete">Режим таймера</translation>
-    </message>
-    <message>
-        <source>Timer Direction</source>
-        <translation type="obsolete">Направ. таймера</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="88"/>
-        <location filename="modeledit.ui" line="129"/>
-        <source>Count Down</source>
-        <translation>Обратный отсчет</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="93"/>
-        <location filename="modeledit.ui" line="134"/>
-        <source>Count Up</source>
-        <translation>Прямой отсчет</translation>
-    </message>
-    <message>
-        <source>Timer Value</source>
-        <translation type="obsolete">Значен. таймера</translation>
+        <location filename="modeledit.ui" line="65"/>
+        <source>Timer1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="80"/>
         <location filename="modeledit.ui" line="121"/>
         <source>mm:ss</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="88"/>
+        <location filename="modeledit.ui" line="129"/>
+        <source>Count Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="93"/>
+        <location filename="modeledit.ui" line="134"/>
+        <source>Count Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="106"/>
+        <source>Timer2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="147"/>
         <source>Trim Increment</source>
-        <translation>Изм. триммеров</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="155"/>
         <source>Exponential</source>
-        <translation>экспонента</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="160"/>
         <source>Extra Fine</source>
-        <translation>очень точно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="165"/>
         <source>Fine</source>
-        <translation>точно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="170"/>
         <source>Medium</source>
-        <translation>средне</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="175"/>
         <source>Coarse</source>
-        <translation>грубо</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="183"/>
         <source>Throttle Trim</source>
-        <translation>Газ трим</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="197"/>
         <source>Throttle Expo</source>
-        <translation>Газ экспо</translation>
-    </message>
-    <message>
-        <source>instaTrim Switch</source>
-        <translation type="obsolete">инстаТрим</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="211"/>
         <source>Center beep</source>
-        <translation>Бип в центре</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="220"/>
         <source>RUD</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="227"/>
         <source>ELE</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="234"/>
         <source>THR</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="241"/>
         <source>AIL</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="248"/>
         <source>P1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="255"/>
         <source>P2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="262"/>
         <source>P3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="271"/>
         <source>Pulse Shift (polarity)</source>
-        <translation>PPM модуляция</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="279"/>
         <source>Positive</source>
-        <translation>Положительная</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="284"/>
         <source>Negative</source>
-        <translation>Негативная</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="306"/>
-        <source>Protocol</source>
-        <translation>Протокол</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="342"/>
-        <source>Channels</source>
-        <translation>Каналы</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="349"/>
-        <source>ch</source>
-        <translation>ch</translation>
-    </message>
-    <message>
-        <source>ppm Delay</source>
-        <translation type="obsolete">PPM пауза</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="375"/>
-        <source> usec</source>
-        <translation>мсек</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="292"/>
         <source>Extended Limits</source>
-        <translation>Расш. лимиты</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="306"/>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="342"/>
+        <source>Channels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="349"/>
+        <source>ch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="368"/>
+        <source>PPM delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="375"/>
+        <source> usec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="394"/>
+        <source>Extended Trims</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="409"/>
@@ -1848,6 +1689,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="modeledit.ui" line="487"/>
+        <location filename="modeledit.ui" line="3562"/>
+        <source>Invert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="modeledit.ui" line="496"/>
         <source>Invert Elevator</source>
         <translation type="unfinished"></translation>
@@ -1860,170 +1707,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="510"/>
         <source>Invert Collective</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Expo/Dr</source>
-        <translation type="obsolete">Расходы/Экспо</translation>
-    </message>
-    <message>
-        <source>Expo
-Left</source>
-        <translation type="obsolete">Expo
-слева</translation>
-    </message>
-    <message>
-        <source>D/R
-Left</source>
-        <translation type="obsolete">D/R
-слева</translation>
-    </message>
-    <message>
-        <source>D/R
-Right</source>
-        <translation type="obsolete">D/R
-справа</translation>
-    </message>
-    <message>
-        <source>Expo
-Right</source>
-        <translation type="obsolete">Expo
-справа</translation>
-    </message>
-    <message>
-        <source>Switch1</source>
-        <translation type="obsolete">Тумблер 1</translation>
-    </message>
-    <message>
-        <source>Switch2</source>
-        <translation type="obsolete">Тумблер 2</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation type="obsolete">Руддер</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation type="obsolete">Элероны</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation type="obsolete">Газ</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation type="obsolete">Элеватор</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="2330"/>
-        <source>Mixes</source>
-        <translation>Микшеры</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="2340"/>
-        <source>Limits</source>
-        <translation>Лимиты</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="2417"/>
-        <location filename="modeledit.ui" line="2486"/>
-        <location filename="modeledit.ui" line="2555"/>
-        <location filename="modeledit.ui" line="2624"/>
-        <location filename="modeledit.ui" line="2693"/>
-        <location filename="modeledit.ui" line="2762"/>
-        <location filename="modeledit.ui" line="2831"/>
-        <location filename="modeledit.ui" line="2900"/>
-        <location filename="modeledit.ui" line="2969"/>
-        <location filename="modeledit.ui" line="3038"/>
-        <location filename="modeledit.ui" line="3107"/>
-        <location filename="modeledit.ui" line="3176"/>
-        <location filename="modeledit.ui" line="3245"/>
-        <location filename="modeledit.ui" line="3314"/>
-        <location filename="modeledit.ui" line="3383"/>
-        <location filename="modeledit.ui" line="3452"/>
-        <source>NOR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="2422"/>
-        <location filename="modeledit.ui" line="2491"/>
-        <location filename="modeledit.ui" line="2560"/>
-        <location filename="modeledit.ui" line="2629"/>
-        <location filename="modeledit.ui" line="2698"/>
-        <location filename="modeledit.ui" line="2767"/>
-        <location filename="modeledit.ui" line="2836"/>
-        <location filename="modeledit.ui" line="2905"/>
-        <location filename="modeledit.ui" line="2974"/>
-        <location filename="modeledit.ui" line="3043"/>
-        <location filename="modeledit.ui" line="3112"/>
-        <location filename="modeledit.ui" line="3181"/>
-        <location filename="modeledit.ui" line="3250"/>
-        <location filename="modeledit.ui" line="3319"/>
-        <location filename="modeledit.ui" line="3388"/>
-        <location filename="modeledit.ui" line="3457"/>
-        <source>INV</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="3474"/>
-        <location filename="modeledit.ui" line="8533"/>
-        <source>Channel</source>
-        <translation>Канал</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="3496"/>
-        <source>Offset</source>
-        <translation>Смещение</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="3518"/>
-        <source>Min</source>
-        <translation>Мин</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="3540"/>
-        <source>Max</source>
-        <translation>Макс</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="487"/>
-        <location filename="modeledit.ui" line="3562"/>
-        <source>Invert</source>
-        <translation>Инверт</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="3580"/>
-        <source>Curves</source>
-        <translation>Кривые</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="5788"/>
-        <source>Curve 1</source>
-        <translation>Кривая 1</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="5781"/>
-        <source>Curve 2</source>
-        <translation>Кривая 2</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="65"/>
-        <source>Timer1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="106"/>
-        <source>Timer2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="368"/>
-        <source>PPM delay</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="394"/>
-        <source>Extended Trims</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2105,6 +1788,16 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="modeledit.ui" line="842"/>
+        <location filename="modeledit.ui" line="1245"/>
+        <location filename="modeledit.ui" line="1616"/>
+        <location filename="modeledit.ui" line="1987"/>
+        <location filename="modeledit.ui" line="8555"/>
+        <location filename="modeledit.ui" line="8771"/>
+        <source>Switch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="modeledit.ui" line="1209"/>
         <source>Flight Phase 2</source>
         <translation type="unfinished"></translation>
@@ -2125,79 +1818,255 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="modeledit.ui" line="2330"/>
+        <source>Mixes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="2340"/>
+        <source>Limits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="2417"/>
+        <location filename="modeledit.ui" line="2486"/>
+        <location filename="modeledit.ui" line="2555"/>
+        <location filename="modeledit.ui" line="2624"/>
+        <location filename="modeledit.ui" line="2693"/>
+        <location filename="modeledit.ui" line="2762"/>
+        <location filename="modeledit.ui" line="2831"/>
+        <location filename="modeledit.ui" line="2900"/>
+        <location filename="modeledit.ui" line="2969"/>
+        <location filename="modeledit.ui" line="3038"/>
+        <location filename="modeledit.ui" line="3107"/>
+        <location filename="modeledit.ui" line="3176"/>
+        <location filename="modeledit.ui" line="3245"/>
+        <location filename="modeledit.ui" line="3314"/>
+        <location filename="modeledit.ui" line="3383"/>
+        <location filename="modeledit.ui" line="3452"/>
+        <source>NOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="2422"/>
+        <location filename="modeledit.ui" line="2491"/>
+        <location filename="modeledit.ui" line="2560"/>
+        <location filename="modeledit.ui" line="2629"/>
+        <location filename="modeledit.ui" line="2698"/>
+        <location filename="modeledit.ui" line="2767"/>
+        <location filename="modeledit.ui" line="2836"/>
+        <location filename="modeledit.ui" line="2905"/>
+        <location filename="modeledit.ui" line="2974"/>
+        <location filename="modeledit.ui" line="3043"/>
+        <location filename="modeledit.ui" line="3112"/>
+        <location filename="modeledit.ui" line="3181"/>
+        <location filename="modeledit.ui" line="3250"/>
+        <location filename="modeledit.ui" line="3319"/>
+        <location filename="modeledit.ui" line="3388"/>
+        <location filename="modeledit.ui" line="3457"/>
+        <source>INV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3474"/>
+        <location filename="modeledit.ui" line="8533"/>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3496"/>
+        <source>Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3518"/>
+        <source>Min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3540"/>
+        <source>Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3580"/>
+        <source>Curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="modeledit.ui" line="3616"/>
         <source>Curve 3</source>
-        <translation>Кривая 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="3703"/>
         <source>Curve 4</source>
-        <translation>Кривая 4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="3790"/>
         <source>Curve 5</source>
-        <translation>Кривая 5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="3877"/>
         <source>Curve 6</source>
-        <translation>Кривая 6</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="3964"/>
         <source>Curve 7</source>
-        <translation>Кривая 7</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4051"/>
         <source>Curve 8</source>
-        <translation>Кривая 8</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4138"/>
         <source>Curve 9</source>
-        <translation>Кривая 9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4289"/>
         <source>Curve 10</source>
-        <translation>Кривая 10</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4440"/>
         <source>Curve 11</source>
-        <translation>Кривая 11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4591"/>
         <source>Curve 12</source>
-        <translation>Кривая 12</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4742"/>
         <source>Curve 13</source>
-        <translation>Кривая 13</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="4893"/>
         <source>Curve 14</source>
-        <translation>Кривая 14</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="5044"/>
         <source>Curve 15</source>
-        <translation>Кривая 15</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="5195"/>
         <source>Curve 16</source>
-        <translation>Кривая 16</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="5781"/>
+        <source>Curve 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="5788"/>
+        <source>Curve 1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="8240"/>
         <source>Clear All Curves</source>
-        <oldsource>Clear All Mixes</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8252"/>
+        <source>Custom switches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8264"/>
+        <source>CSwitch1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8280"/>
+        <source>CSwitch2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8296"/>
+        <source>CSwitch3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8312"/>
+        <source>CSwitch4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8328"/>
+        <source>CSwitch5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8347"/>
+        <location filename="modeledit.ui" line="8784"/>
+        <source>Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8360"/>
+        <source>V1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8373"/>
+        <source>V2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8386"/>
+        <source>CSwitch6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8399"/>
+        <source>CSwitch7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8412"/>
+        <source>CSwitch8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8425"/>
+        <source>CSwitch9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8438"/>
+        <source>CSwitchA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8451"/>
+        <source>CSwitchB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8464"/>
+        <source>CSwitchC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8503"/>
+        <source>Safety Switches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="8577"/>
+        <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2365,267 +2234,8 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switches</source>
-        <translation type="obsolete">Триггеры</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8264"/>
-        <source>CSwitch1</source>
-        <translation>Триггер 1</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8280"/>
-        <source>CSwitch2</source>
-        <translation>Триггер 2</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8296"/>
-        <source>CSwitch3</source>
-        <translation>Триггер 3</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8312"/>
-        <source>CSwitch4</source>
-        <translation>Триггер 4</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8328"/>
-        <source>CSwitch5</source>
-        <translation>Триггер 5</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8386"/>
-        <source>CSwitch6</source>
-        <translation>Триггер 6</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8347"/>
-        <location filename="modeledit.ui" line="8784"/>
-        <source>Function</source>
-        <translation>Функция</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8252"/>
-        <source>Custom switches</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8360"/>
-        <source>V1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8373"/>
-        <source>V2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8399"/>
-        <source>CSwitch7</source>
-        <translation type="unfinished">Триггер 7</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8412"/>
-        <source>CSwitch8</source>
-        <translation type="unfinished">Триггер 8</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8425"/>
-        <source>CSwitch9</source>
-        <translation type="unfinished">Триггер 9</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8438"/>
-        <source>CSwitchA</source>
-        <oldsource>CSwitch10</oldsource>
-        <translation type="unfinished">Триггер 10</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8451"/>
-        <source>CSwitchB</source>
-        <oldsource>CSwitch11</oldsource>
-        <translation type="unfinished">Триггер 11</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8464"/>
-        <source>CSwitchC</source>
-        <oldsource>CSwitch12</oldsource>
-        <translation type="unfinished">Триггер 12</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8503"/>
-        <source>Safety Switches</source>
-        <translation>Защитные выкл.</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="842"/>
-        <location filename="modeledit.ui" line="1245"/>
-        <location filename="modeledit.ui" line="1616"/>
-        <location filename="modeledit.ui" line="1987"/>
-        <location filename="modeledit.ui" line="8555"/>
-        <location filename="modeledit.ui" line="8771"/>
-        <source>Switch</source>
-        <translation>Выключатель</translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="8577"/>
-        <source>Value</source>
-        <translation>Значение</translation>
-    </message>
-    <message>
-        <source>Trims</source>
-        <translation type="obsolete">Триммеры</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="9443"/>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="27"/>
-        <source>Simulate</source>
-        <translation>Симуляция</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="457"/>
-        <location filename="modeledit.cpp" line="467"/>
-        <location filename="modeledit.cpp" line="514"/>
-        <source>CH%1%2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="409"/>
-        <location filename="modeledit.cpp" line="489"/>
-        <source> Switch(</source>
-        <translation> Тумблер(</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="490"/>
-        <source> noTrim</source>
-        <translation>безТрим</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="491"/>
-        <source> Offset(%1%)</source>
-        <translation>Смещение(%1%)</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="413"/>
-        <location filename="modeledit.cpp" line="495"/>
-        <source> Curve(%1)</source>
-        <translation>Кривая(%1)</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="498"/>
-        <source> Delay(u%1:d%2)</source>
-        <translation> Задержка(u%1:d%2)</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="499"/>
-        <source> Slow(u%1:d%2)</source>
-        <translation> Задержка(u%1:d%2)</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="501"/>
-        <source> Warn(%1)</source>
-        <translation> Пред(%1)</translation>
-    </message>
-    <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Кривая %1</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="2752"/>
-        <source>Delete Selected Mixes?</source>
-        <translation>Удалить выбранные микшеры?</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="2791"/>
-        <source>Delete Selected Expos?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3009"/>
-        <location filename="modeledit.cpp" line="3033"/>
-        <source>&amp;Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3009"/>
-        <location filename="modeledit.cpp" line="3033"/>
-        <source>Ctrl+A</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3010"/>
-        <location filename="modeledit.cpp" line="3034"/>
-        <source>&amp;Edit</source>
-        <translation>Правка</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3010"/>
-        <location filename="modeledit.cpp" line="3034"/>
-        <source>Enter</source>
-        <translation>Ввод</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3012"/>
-        <location filename="modeledit.cpp" line="3036"/>
-        <source>&amp;Delete</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3012"/>
-        <location filename="modeledit.cpp" line="3036"/>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3013"/>
-        <location filename="modeledit.cpp" line="3037"/>
-        <source>&amp;Copy</source>
-        <translation>Копировать</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3013"/>
-        <location filename="modeledit.cpp" line="3037"/>
-        <source>Ctrl+C</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3014"/>
-        <location filename="modeledit.cpp" line="3038"/>
-        <source>&amp;Cut</source>
-        <translation>Вырезать</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3014"/>
-        <location filename="modeledit.cpp" line="3038"/>
-        <source>Ctrl+X</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3015"/>
-        <location filename="modeledit.cpp" line="3039"/>
-        <source>&amp;Paste</source>
-        <translation>Вставить</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3015"/>
-        <location filename="modeledit.cpp" line="3039"/>
-        <source>Ctrl+V</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3016"/>
-        <location filename="modeledit.cpp" line="3040"/>
-        <source>Du&amp;plicate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3018"/>
-        <location filename="modeledit.cpp" line="3042"/>
-        <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2634,12 +2244,6 @@ Right</source>
         <location filename="modeledit.cpp" line="3018"/>
         <location filename="modeledit.cpp" line="3042"/>
         <source>Ctrl+Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3019"/>
-        <location filename="modeledit.cpp" line="3043"/>
-        <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2657,8 +2261,158 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="modeledit.cpp" line="409"/>
+        <location filename="modeledit.cpp" line="489"/>
+        <source> Switch(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="413"/>
+        <location filename="modeledit.cpp" line="495"/>
+        <source> Curve(%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="457"/>
+        <location filename="modeledit.cpp" line="467"/>
+        <location filename="modeledit.cpp" line="514"/>
+        <source>CH%1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="490"/>
+        <source> noTrim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="491"/>
+        <source> Offset(%1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="498"/>
+        <source> Delay(u%1:d%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="499"/>
+        <source> Slow(u%1:d%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="501"/>
+        <source> Warn(%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="modeledit.cpp" line="2422"/>
         <source>Editing curve %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="2752"/>
+        <source>Delete Selected Mixes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="2791"/>
+        <source>Delete Selected Expos?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3009"/>
+        <location filename="modeledit.cpp" line="3033"/>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3009"/>
+        <location filename="modeledit.cpp" line="3033"/>
+        <source>Ctrl+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3010"/>
+        <location filename="modeledit.cpp" line="3034"/>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3010"/>
+        <location filename="modeledit.cpp" line="3034"/>
+        <source>Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3012"/>
+        <location filename="modeledit.cpp" line="3036"/>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3012"/>
+        <location filename="modeledit.cpp" line="3036"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3013"/>
+        <location filename="modeledit.cpp" line="3037"/>
+        <source>&amp;Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3013"/>
+        <location filename="modeledit.cpp" line="3037"/>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3014"/>
+        <location filename="modeledit.cpp" line="3038"/>
+        <source>&amp;Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3014"/>
+        <location filename="modeledit.cpp" line="3038"/>
+        <source>Ctrl+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3015"/>
+        <location filename="modeledit.cpp" line="3039"/>
+        <source>&amp;Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3015"/>
+        <location filename="modeledit.cpp" line="3039"/>
+        <source>Ctrl+V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3016"/>
+        <location filename="modeledit.cpp" line="3040"/>
+        <source>Du&amp;plicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3016"/>
+        <location filename="modeledit.cpp" line="3040"/>
+        <source>Ctrl+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3018"/>
+        <location filename="modeledit.cpp" line="3042"/>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="3019"/>
+        <location filename="modeledit.cpp" line="3043"/>
+        <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2701,16 +2455,6 @@ Right</source>
         <source>Really clear all the curves?</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">Дублировать</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="3016"/>
-        <location filename="modeledit.cpp" line="3040"/>
-        <source>Ctrl+U</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>ModelsListWidget</name>
@@ -2722,17 +2466,17 @@ Right</source>
     <message>
         <location filename="modelslist.cpp" line="89"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="89"/>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="90"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">Копировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="90"/>
@@ -2742,7 +2486,7 @@ Right</source>
     <message>
         <location filename="modelslist.cpp" line="91"/>
         <source>&amp;Cut</source>
-        <translation type="unfinished">Вырезать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="91"/>
@@ -2752,7 +2496,7 @@ Right</source>
     <message>
         <location filename="modelslist.cpp" line="92"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished">Вставить</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="92"/>
@@ -2762,7 +2506,7 @@ Right</source>
     <message>
         <location filename="modelslist.cpp" line="93"/>
         <source>D&amp;uplicate</source>
-        <translation type="unfinished">Дублировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="93"/>
@@ -2793,12 +2537,12 @@ Right</source>
     <message>
         <location filename="modelslist.cpp" line="262"/>
         <source>General Settings</source>
-        <translation type="unfinished">Основные настройки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="303"/>
         <source>Delete Selected Models?</source>
-        <translation type="unfinished">Удалить выбранные модели?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2814,31 +2558,27 @@ Right</source>
     <message>
         <location filename="avroutputdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="12"/>
         <source>AVRDUDE result</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="14"/>
         <source>AVRDUDE - </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="96"/>
         <source>AVRDUDE done - exit code %1</source>
-        <oldsource>
-AVRDUDE done - exit code %1</oldsource>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="98"/>
         <source>AVRDUDE done - SUCCESSFUL</source>
-        <oldsource>
-AVRDUDE done - SUCCESSFUL</oldsource>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="110"/>
@@ -2853,14 +2593,12 @@ AVRDUDE done - SUCCESSFUL</oldsource>
     <message>
         <location filename="avroutputdialog.cpp" line="129"/>
         <source>Started AVRDUDE</source>
-        <oldsource>Started AVRDUDE
-</oldsource>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="139"/>
         <source>FUSES: Low=%1 High=%2 Ext=%3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2868,59 +2606,53 @@ AVRDUDE done - SUCCESSFUL</oldsource>
     <message>
         <location filename="burnconfigdialog.ui" line="14"/>
         <source>AVRDUDE Configuration</source>
-        <translation>Настроить программатор</translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="499"/>
-        <source>AVRDUDE Location</source>
-        <translation>Путь к AVRDUDE</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="26"/>
         <source>Location of AVRDUDE executable</source>
-        <oldsource>Locatioon of AVRDUDE executable</oldsource>
-        <translation>Расположение AVRDUDE</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="29"/>
         <source>The location of the AVRDUDE.EXE executable.</source>
-        <translation>Расположение исполняемого файла AVRDUDE.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="39"/>
         <source>Use this button to browse and look for the AVRDUDE.EXE executable file.</source>
-        <translation>Поиск AVRDUDE.EXE.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="42"/>
         <source>Browse...</source>
-        <translation>Найти</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="49"/>
         <source>Programmer</source>
-        <translation>Программатор</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="59"/>
         <source>Programmer used for communicating with the controller.
 Please consult the programmer&apos;s documentation and the AVRDUDE documentation to select the appropriate programmer.</source>
-        <translation>Используемый программатор. Обратитесь к документации для выбора нужного.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="380"/>
         <source>List all available programmers.</source>
-        <translation>Показать все доступные программаторы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="383"/>
         <source>List Available</source>
-        <translation>В наличии</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="390"/>
         <source>Extra arguments that will be passed to AVRDUDE on every call</source>
-        <translation>Доп. аргументы передаваемые AVRDUDE при каждом вызове</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="393"/>
@@ -2928,29 +2660,28 @@ Please consult the programmer&apos;s documentation and the AVRDUDE documentation
 This can be used for providing extra information to AVRDUDE.
 
 Please only use this if you know what you are doing.  There are no error checks and you could cripple your controller.</source>
-        <translation>Доп. аргументы передаваемые AVRDUDE при каждом вызове.
-Контроль ошибок и неправильного ввода не производится!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="406"/>
         <source>Extra Arguments</source>
-        <translation>Доп. аргументы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="416"/>
         <source>Show AVRDUDE help</source>
-        <translation>Помощь AVRDUDE</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="419"/>
         <source>Show Help</source>
-        <translation>Помощь</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="426"/>
         <source>Communication port to the programmer.
 </source>
-        <translation>Комукационный порт программатора.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="481"/>
@@ -2960,12 +2691,17 @@ Please only use this if you know what you are doing.  There are no error checks 
     <message>
         <location filename="burnconfigdialog.ui" line="489"/>
         <source>Port</source>
-        <translation>Порт</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="burnconfigdialog.ui" line="499"/>
+        <source>AVRDUDE Location</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="113"/>
         <source>Select Location</source>
-        <translation>Выбрать расположение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="176"/>
@@ -2975,7 +2711,7 @@ Please only use this if you know what you are doing.  There are no error checks 
     <message>
         <location filename="burnconfigdialog.cpp" line="177"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
-        <translation>Внимание!&lt;br&gt;Произойдет сброс фьюзов на значения по-умолчанию. Вы уверены в том, что хотите продолжить?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2983,14 +2719,7 @@ Please only use this if you know what you are doing.  There are no error checks 
     <message>
         <location filename="contributorsdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
-    </message>
-</context>
-<context>
-    <name>donatorsDialog</name>
-    <message>
-        <source>List of Contributors</source>
-        <translation type="obsolete">Список авторов</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3021,7 +2750,7 @@ Please only use this if you know what you are doing.  There are no error checks 
     <message>
         <location filename="fusesdialog.ui" line="14"/>
         <source>Fuses</source>
-        <translation>Фьюзы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="24"/>
@@ -3039,7 +2768,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="fusesdialog.ui" line="35"/>
         <source>Read Fuses</source>
-        <translation>Считать фьюзы</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="42"/>
@@ -3124,12 +2853,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="preferencesdialog.ui" line="14"/>
         <source>Preferences</source>
-        <translation>Настройки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="24"/>
         <source>Language (requires restart)</source>
-        <translation>Язык (треб. перезапуск)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="34"/>
+        <source>Check for updates on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="51"/>
+        <source>Show Splash Screen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="68"/>
@@ -3169,25 +2908,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="preferencesdialog.ui" line="140"/>
         <source>Default Channel Order</source>
-        <translation>Порядок следов. каналов</translation>
-    </message>
-    <message>
-        <location filename="preferencesdialog.ui" line="279"/>
-        <source>Default Stick Mode</source>
-        <translation>Режим стиков</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="147"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
-        <translation>Порядок каналов
-
-Шаблон для определения порядка следования каналов.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="51"/>
-        <source>Show Splash Screen</source>
+        <location filename="preferencesdialog.ui" line="279"/>
+        <source>Default Stick Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3216,27 +2948,22 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="311"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="316"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="321"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="326"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="preferencesdialog.ui" line="34"/>
-        <source>Check for updates on startup</source>
-        <translation>Проверять обновления</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3244,7 +2971,7 @@ Mode 4:
     <message>
         <location filename="printdialog.ui" line="26"/>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.ui" line="58"/>
@@ -3262,465 +2989,432 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="21"/>
+        <location filename="printdialog.cpp" line="22"/>
         <source>Setup for: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="87"/>
-        <location filename="printdialog.cpp" line="94"/>
+        <location filename="printdialog.cpp" line="88"/>
+        <location filename="printdialog.cpp" line="95"/>
         <source>Count Up</source>
-        <translation type="unfinished">Прямой отсчет</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="87"/>
-        <location filename="printdialog.cpp" line="94"/>
-        <source>Count Down</source>
-        <translation type="unfinished">Обратный отсчет</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="88"/>
         <location filename="printdialog.cpp" line="95"/>
+        <source>Count Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="89"/>
+        <location filename="printdialog.cpp" line="96"/>
         <source>%1:%2, </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="178"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="101"/>
+        <location filename="printdialog.cpp" line="102"/>
         <source>Yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="104"/>
+        <location filename="printdialog.cpp" line="105"/>
         <source>Orange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="107"/>
+        <location filename="printdialog.cpp" line="108"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="118"/>
+        <location filename="printdialog.cpp" line="119"/>
         <source>---</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="133"/>
+        <location filename="printdialog.cpp" line="134"/>
         <source>: %1 Channels, %2msec Delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="143"/>
-        <source>Rudder</source>
-        <translation type="unfinished">Руддер</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="144"/>
-        <source>Elevator</source>
-        <translation type="unfinished">Элеватор</translation>
+        <source>Rudder</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="145"/>
-        <source>Throttle</source>
-        <translation type="unfinished">Газ</translation>
+        <source>Elevator</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="146"/>
-        <source>Aileron</source>
-        <translation type="unfinished">Элероны</translation>
+        <source>Throttle</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="159"/>
-        <source>Extra Fine</source>
-        <translation type="unfinished">очень точно</translation>
+        <location filename="printdialog.cpp" line="147"/>
+        <source>Aileron</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="160"/>
-        <source>Fine</source>
-        <translation type="unfinished">точно</translation>
+        <source>Extra Fine</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="161"/>
-        <source>Medium</source>
-        <translation type="unfinished">средне</translation>
+        <source>Fine</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="162"/>
-        <source>Coarse</source>
-        <translation type="unfinished">грубо</translation>
+        <source>Medium</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="163"/>
-        <source>Exponential</source>
-        <translation type="unfinished">экспонента</translation>
+        <source>Coarse</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="176"/>
+        <location filename="printdialog.cpp" line="164"/>
+        <source>Exponential</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="177"/>
         <source>General Model Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="179"/>
-        <source>EEprom Size</source>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="180"/>
-        <source>Timer1</source>
+        <source>EEprom Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="181"/>
-        <source>Timer2</source>
+        <source>Timer1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="182"/>
-        <source>Protocol</source>
-        <translation type="unfinished">Протокол</translation>
+        <source>Timer2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="183"/>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="184"/>
         <source>Pulse Polarity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="184"/>
         <location filename="printdialog.cpp" line="185"/>
+        <source>Throttle Trim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="185"/>
+        <location filename="printdialog.cpp" line="186"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="184"/>
         <location filename="printdialog.cpp" line="185"/>
+        <location filename="printdialog.cpp" line="186"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="184"/>
-        <source>Throttle Trim</source>
-        <translation type="unfinished">Газ трим</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="185"/>
+        <location filename="printdialog.cpp" line="186"/>
         <source>Throttle Expo</source>
-        <translation type="unfinished">Газ экспо</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="191"/>
-        <source>Flight Phases Settings</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="193"/>
-        <source>Fades</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="193"/>
-        <source>Trims</source>
-        <translation type="unfinished">Триммеры</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="187"/>
-        <source>Trim Increment</source>
-        <translation type="unfinished">Изм. триммеров</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="188"/>
+        <source>Trim Increment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="189"/>
         <source>Center Beep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mid</source>
-        <translation type="obsolete">центр</translation>
-    </message>
-    <message>
-        <source> Switch(</source>
-        <translation type="obsolete"> Тумблем(</translation>
-    </message>
-    <message>
-        <source> noTrim</source>
-        <translation type="obsolete">безТрим</translation>
-    </message>
-    <message>
-        <source> Offset(%1%)</source>
-        <translation type="obsolete">Смещение(%1%)</translation>
-    </message>
-    <message>
-        <source> Curve(%1)</source>
-        <translation type="obsolete">Кривая(%1)</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="313"/>
-        <source> Delay(u%1:d%2)</source>
-        <translation type="unfinished"> Задержка(u%1:d%2)</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="314"/>
-        <source> Slow(u%1:d%2)</source>
-        <translation type="unfinished"> Задержка(u%1:d%2)</translation>
-    </message>
-    <message>
-        <source> Warn(%1)</source>
-        <translation type="obsolete"> Пред(%1)</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="399"/>
-        <location filename="printdialog.cpp" line="441"/>
-        <source>pt %1</source>
+        <location filename="printdialog.cpp" line="192"/>
+        <source>Flight Phases Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Кривая %1</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">Источник</translation>
-    </message>
-    <message>
-        <location filename="printdialog.cpp" line="620"/>
-        <source>Function</source>
-        <translation type="unfinished">Функция</translation>
+        <location filename="printdialog.cpp" line="194"/>
+        <source>Fades</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="194"/>
-        <location filename="printdialog.cpp" line="256"/>
-        <location filename="printdialog.cpp" line="303"/>
-        <location filename="printdialog.cpp" line="592"/>
-        <location filename="printdialog.cpp" line="619"/>
+        <source>Trims</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="195"/>
+        <location filename="printdialog.cpp" line="257"/>
+        <location filename="printdialog.cpp" line="304"/>
+        <location filename="printdialog.cpp" line="593"/>
+        <location filename="printdialog.cpp" line="620"/>
         <source>Switch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="194"/>
+        <location filename="printdialog.cpp" line="195"/>
         <source>Phase name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="195"/>
+        <location filename="printdialog.cpp" line="196"/>
         <source>IN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="195"/>
+        <location filename="printdialog.cpp" line="196"/>
         <source>OUT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="197"/>
+        <location filename="printdialog.cpp" line="198"/>
         <source>&lt;td width=&quot;40&quot; align=&quot;center&quot;&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/td&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="202"/>
-        <location filename="printdialog.cpp" line="207"/>
-        <location filename="printdialog.cpp" line="321"/>
-        <location filename="printdialog.cpp" line="324"/>
+        <location filename="printdialog.cpp" line="203"/>
+        <location filename="printdialog.cpp" line="208"/>
+        <location filename="printdialog.cpp" line="322"/>
+        <location filename="printdialog.cpp" line="325"/>
         <source>FP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="220"/>
+        <location filename="printdialog.cpp" line="221"/>
         <source>Expo/Dr Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="251"/>
         <location filename="printdialog.cpp" line="252"/>
+        <location filename="printdialog.cpp" line="253"/>
         <source>Weight</source>
-        <translation type="unfinished">Вес</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="253"/>
         <location filename="printdialog.cpp" line="254"/>
+        <location filename="printdialog.cpp" line="255"/>
         <source>Expo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="255"/>
-        <location filename="printdialog.cpp" line="321"/>
-        <location filename="printdialog.cpp" line="324"/>
+        <location filename="printdialog.cpp" line="256"/>
+        <location filename="printdialog.cpp" line="322"/>
+        <location filename="printdialog.cpp" line="325"/>
         <source>Phase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="261"/>
-        <location filename="printdialog.cpp" line="311"/>
-        <location filename="printdialog.cpp" line="413"/>
-        <location filename="printdialog.cpp" line="463"/>
+        <location filename="printdialog.cpp" line="262"/>
+        <location filename="printdialog.cpp" line="312"/>
+        <location filename="printdialog.cpp" line="414"/>
+        <location filename="printdialog.cpp" line="464"/>
         <source>Curve</source>
-        <translation type="unfinished">Кривая</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="274"/>
+        <location filename="printdialog.cpp" line="275"/>
         <source>Mixers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="286"/>
-        <location filename="printdialog.cpp" line="340"/>
-        <location filename="printdialog.cpp" line="599"/>
+        <location filename="printdialog.cpp" line="287"/>
+        <location filename="printdialog.cpp" line="341"/>
+        <location filename="printdialog.cpp" line="600"/>
         <source>CH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="304"/>
+        <location filename="printdialog.cpp" line="305"/>
         <source>noTrim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="305"/>
-        <location filename="printdialog.cpp" line="343"/>
+        <location filename="printdialog.cpp" line="306"/>
+        <location filename="printdialog.cpp" line="344"/>
         <source>Offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="printdialog.cpp" line="314"/>
+        <source> Delay(u%1:d%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="printdialog.cpp" line="315"/>
+        <source> Slow(u%1:d%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="316"/>
         <source>Warn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="335"/>
-        <location filename="printdialog.cpp" line="496"/>
-        <location filename="printdialog.cpp" line="588"/>
-        <location filename="printdialog.cpp" line="615"/>
+        <location filename="printdialog.cpp" line="336"/>
+        <location filename="printdialog.cpp" line="497"/>
+        <location filename="printdialog.cpp" line="589"/>
+        <location filename="printdialog.cpp" line="616"/>
         <source>&lt;table border=1 cellspacing=0 cellpadding=3 width=&quot;100%&quot;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="336"/>
+        <location filename="printdialog.cpp" line="337"/>
         <source>Limits</source>
-        <translation type="unfinished">Лимиты</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="349"/>
+        <location filename="printdialog.cpp" line="350"/>
         <source>Min</source>
-        <translation type="unfinished">Мин</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="355"/>
+        <location filename="printdialog.cpp" line="356"/>
         <source>Max</source>
-        <translation type="unfinished">Макс</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="361"/>
+        <location filename="printdialog.cpp" line="362"/>
         <source>Invert</source>
-        <translation type="unfinished">Инверт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="364"/>
+        <location filename="printdialog.cpp" line="365"/>
         <source>INV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="364"/>
+        <location filename="printdialog.cpp" line="365"/>
         <source>NOR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="388"/>
+        <location filename="printdialog.cpp" line="389"/>
         <source>Curves</source>
-        <translation type="unfinished">Кривые</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="395"/>
+        <location filename="printdialog.cpp" line="396"/>
         <source>5 Points Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="439"/>
+        <location filename="printdialog.cpp" line="400"/>
+        <location filename="printdialog.cpp" line="442"/>
+        <source>pt %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="440"/>
         <source>9 Points Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="497"/>
+        <location filename="printdialog.cpp" line="498"/>
         <source>Custom Switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="505"/>
+        <location filename="printdialog.cpp" line="506"/>
         <source>SW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="589"/>
+        <location filename="printdialog.cpp" line="590"/>
         <source>Safety Switches</source>
-        <translation type="unfinished">Защитные выкл.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="593"/>
-        <location filename="printdialog.cpp" line="646"/>
+        <location filename="printdialog.cpp" line="594"/>
         <location filename="printdialog.cpp" line="647"/>
+        <location filename="printdialog.cpp" line="648"/>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="616"/>
+        <location filename="printdialog.cpp" line="617"/>
         <source>Function Switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="626"/>
+        <location filename="printdialog.cpp" line="621"/>
+        <source>Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="627"/>
         <source>FSW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="643"/>
+        <location filename="printdialog.cpp" line="644"/>
         <source>Telemetry Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="644"/>
+        <location filename="printdialog.cpp" line="645"/>
         <source>Alarm 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="644"/>
+        <location filename="printdialog.cpp" line="645"/>
         <source>Alarm 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="645"/>
+        <location filename="printdialog.cpp" line="646"/>
         <source>Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="645"/>
+        <location filename="printdialog.cpp" line="646"/>
         <source>Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="645"/>
+        <location filename="printdialog.cpp" line="646"/>
         <source>Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="646"/>
         <location filename="printdialog.cpp" line="647"/>
+        <location filename="printdialog.cpp" line="648"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="646"/>
         <location filename="printdialog.cpp" line="647"/>
+        <location filename="printdialog.cpp" line="648"/>
         <source>Condition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="652"/>
+        <location filename="printdialog.cpp" line="653"/>
         <source>A%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="667"/>
-        <location filename="printdialog.cpp" line="679"/>
+        <location filename="printdialog.cpp" line="668"/>
         <source>Print Document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3730,8 +3424,7 @@ Mode 4:
     <message>
         <location filename="simulatordialog.ui" line="14"/>
         <source>Companion9x Simulator</source>
-        <oldsource>ER9x Simulator</oldsource>
-        <translation type="unfinished">ER9x Симулятор</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="32"/>
@@ -3826,31 +3519,6 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1060"/>
-        <source>SW1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1091"/>
-        <source>SW2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1122"/>
-        <source>SW3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1246"/>
-        <source>BEEP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1153"/>
-        <source>SW4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="simulatordialog.ui" line="751"/>
         <source>9x Simulator</source>
         <translation type="unfinished"></translation>
@@ -3896,6 +3564,26 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="simulatordialog.ui" line="1060"/>
+        <source>SW1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1091"/>
+        <source>SW2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1122"/>
+        <source>SW3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1153"/>
+        <source>SW4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="simulatordialog.ui" line="1184"/>
         <source>SW5</source>
         <translation type="unfinished"></translation>
@@ -3903,6 +3591,11 @@ Mode 4:
     <message>
         <location filename="simulatordialog.ui" line="1215"/>
         <source>SW6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1246"/>
+        <source>BEEP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3923,19 +3616,16 @@ Mode 4:
     <message>
         <location filename="simulatordialog.ui" line="1370"/>
         <source>SWA</source>
-        <oldsource>SW10</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1401"/>
         <source>SWB</source>
-        <oldsource>SW11</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1432"/>
         <source>SWC</source>
-        <oldsource>SW12</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4051,7 +3741,7 @@ Mode 4:
     <message>
         <location filename="simulatordialog.cpp" line="205"/>
         <source>Simulating </source>
-        <translation>Симуляция</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
