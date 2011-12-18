@@ -47,6 +47,8 @@ class Gruvin9xStableSimulator : public SimulatorInterface {
 
     virtual void wheelEvent(uint8_t steps) { }
 
+    virtual unsigned int getPhase();
+
     virtual const char * getError();
 
   protected:

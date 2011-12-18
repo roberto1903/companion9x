@@ -75,6 +75,8 @@ class SimulatorInterface {
 
     virtual void getTrims(Trims & trims) = 0;
 
+    virtual unsigned int getPhase() = 0;
+
     virtual void wheelEvent(uint8_t steps) = 0;
 
     virtual const char * getError() = 0;

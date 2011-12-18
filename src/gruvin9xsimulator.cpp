@@ -84,6 +84,11 @@ void Gruvin9xSimulator::getTrims(Trims & trims)
 #include "simulatorimport.h"
 }
 
+unsigned int Gruvin9xSimulator::getPhase()
+{
+  return getFlightPhase();
+}
+
 const char * Gruvin9xSimulator::getError()
 {
 #define GETERROR_IMPORT
