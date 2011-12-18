@@ -2,6 +2,7 @@
 #include "ui_printdialog.h"
 #include "helpers.h"
 #include "eeprominterface.h"
+#include <QtGui>
 #include <QImage>
 #include <QColor>
 #include <QPainter>
@@ -673,11 +674,13 @@ void printDialog::on_printButton_clicked()
 void printDialog::on_printFileButton_clicked()
 {
     QPrinter printer;
+    QString filename = QFileDialog::getOpenFileName(this,"Open File",QString(),"Pdf File(*.pdf)"); 
     printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
     printer.setOutputFormat(QPrinter::PdfFormat);
-    QPrintDialog *dialog = new QPrintDialog(&printer, this);
-    dialog->setWindowTitle(tr("Print Document"));
-    if (dialog->exec() != QDialog::Accepted)
-        return;
-    te->print(&printer);
+    if(!filename.isEmpty()) { 
+        if(QFileInfo(filename).suffix().isEmpty()) 
+            filename.append(".pdf"); 
+        printer.setOutputFileName(filename);
+        te->print(&printer);
+    }
 }
