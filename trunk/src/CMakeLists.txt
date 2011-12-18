@@ -165,14 +165,6 @@ SET( companion9x_RCS
      ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
 )
 
-SET( companion9x_TS
-     companion9x_he.ts
-     companion9x_pt.ts
-     companion9x_ru.ts
-     companion9x_de.ts
-     companion9x_fr.ts
-)
-
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
 
@@ -189,10 +181,18 @@ INCLUDE( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} )
 
+SET( LANGUAGES he pt ru de fr it )
+FOREACH( language ${LANGUAGES} )
+  SET( companion9x_TS ${companion9x_TS} companion9x_${language}.ts )
+ENDFOREACH( language )
+QT4_CREATE_TRANSLATION( QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} ${companion9x_TS} )
+
 QT4_WRAP_UI( companion9x_SRCS ${companion9x_UIS} )
 QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
 QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS} )
 QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
+
+# ADD_CUSTOM_TARGET( update_translations DEPENDS ${companion9x_QM} ${companion9x_TS} )
 
 IF( APPLE )
     # Copy the icon files

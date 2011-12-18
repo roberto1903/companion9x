@@ -2,6 +2,78 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
 <context>
+    <name>ExpoDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogue</translation>
+    </message>
+    <message>
+        <source>Expo</source>
+        <translation>Expo</translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expo value&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Ratio</translation>
+    </message>
+    <message>
+        <source>The value of the weight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phase</source>
+        <translation>Phase</translation>
+    </message>
+    <message>
+        <source>Phase used by the expo.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch</source>
+        <translation>Interrupteur</translation>
+    </message>
+    <message>
+        <source>Switch used by the expo.
+If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve</source>
+        <translation>Courbe</translation>
+    </message>
+    <message>
+        <source>The curve used by the expo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation>Mode</translation>
+    </message>
+    <message>
+        <source>NEG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ALL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEST -&gt; %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GeneralEdit</name>
     <message>
         <source>v</source>
@@ -52,34 +124,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every Minute</source>
         <translation>Toutes les minutes</translation>
-    </message>
-    <message>
-        <source>ANALOG 1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 6</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANALOG 7</source>
-        <translation></translation>
     </message>
     <message>
         <source>Silent mode (No Alarm)</source>
@@ -148,7 +192,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>PPM In</source>
-        <translation>Entrée PPM</translation>
+        <translation type="obsolete">Entrée PPM</translation>
     </message>
     <message>
         <source>2 - Normal</source>
@@ -407,6 +451,138 @@ p, li { white-space: pre-wrap; }
         <source>Owner Name</source>
         <translation>Nom du propriétaire</translation>
     </message>
+    <message>
+        <source>Off</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+    <message>
+        <source>Switches Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switches Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trainer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PPM 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chn1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chn2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chn3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chn4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation type="unfinished">Ratio</translation>
+    </message>
+    <message>
+        <source>PPM 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PPM 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PPM 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Telemetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RSSI Alarm 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>----</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RSSI Alarm 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NO DATA Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STICK 1</source>
+        <translation type="unfinished">MANCHE 1</translation>
+    </message>
+    <message>
+        <source>STICK 2</source>
+        <translation type="unfinished">MANCHE 2</translation>
+    </message>
+    <message>
+        <source>STICK 3</source>
+        <translation type="unfinished">MANCHE 3</translation>
+    </message>
+    <message>
+        <source>STICK 4</source>
+        <translation type="unfinished">MANCHE 4</translation>
+    </message>
+    <message>
+        <source>POT 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POT 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POT 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -580,7 +756,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Contributors</source>
-        <translation>&amp;Contributeurs</translation>
+        <translation type="obsolete">&amp;Contributeurs</translation>
     </message>
     <message>
         <source>Write Flash Memory</source>
@@ -656,7 +832,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>List er9x/companion9x Contributors</source>
-        <translation>Liste les contributeurs à er9x/companion9x</translation>
+        <translation type="obsolete">Liste les contributeurs à er9x/companion9x</translation>
     </message>
     <message>
         <source>Simulate selected model.</source>
@@ -812,7 +988,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>If you&apos;ve found this program and/or the er9x firmware useful please support by</source>
-        <translation>Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
+        <translation type="obsolete">Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
     </message>
     <message>
         <source>Switch layout Left/Right</source>
@@ -824,23 +1000,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ignore this version (r%1)?</source>
-        <translation>Ignorer cette version (r%1)?</translation>
+        <translation type="obsolete">Ignorer cette version (r%1)?</translation>
     </message>
     <message>
         <source>A new version of companion9x is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation>Une nouvelle version d&apos;companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
+        <translation type="obsolete">Une nouvelle version d&apos;companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
     </message>
     <message>
         <source>A new version of ER9x (%2) is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation>Une nouvelle version d&apos;ER9X (%2) est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
+        <translation type="obsolete">Une nouvelle version d&apos;ER9X (%2) est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
     </message>
     <message>
         <source>&amp;ER9x Users Guide</source>
-        <translation>Manuel d&apos;utilisation d&apos;&amp;ER9x</translation>
+        <translation type="obsolete">Manuel d&apos;utilisation d&apos;&amp;ER9x</translation>
     </message>
     <message>
         <source>Show ER9x Users Guide</source>
-        <translation>Affiche le manuel d&apos;utilisation d&apos;ER9x</translation>
+        <translation type="obsolete">Affiche le manuel d&apos;utilisation d&apos;ER9x</translation>
     </message>
     <message>
         <source>Help</source>
@@ -848,18 +1024,46 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Checking for updates</source>
+        <translation>Recherche des mises à jour</translation>
+    </message>
+    <message>
+        <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
+        <translation>Une nouvelle version de companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
+    </message>
+    <message>
+        <source>Version %1</source>
+        <translation>Version %1</translation>
+    </message>
+    <message>
+        <source>Release %1 %2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you&apos;ve found this program useful, please support by</source>
+        <translation>Si vous trouvez ce programme utile, merci d&apos;apporter votre soutien en effectuant un</translation>
+    </message>
+    <message>
+        <source>Contributors &amp;List...</source>
+        <translation>&amp;Liste des contributeurs...</translation>
+    </message>
+    <message>
+        <source>Show companion9x contributors list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent Files</source>
+        <translation>Derniers documents utilisés</translation>
     </message>
 </context>
 <context>
     <name>MdiChild</name>
     <message>
-        <source>%1</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Couper</translation>
+        <translation type="obsolete">&amp;Couper</translation>
     </message>
     <message>
         <source>companion9x</source>
@@ -867,23 +1071,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Copier</translation>
+        <translation type="obsolete">&amp;Copier</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Éditio&amp;n</translation>
+        <translation type="obsolete">Éditio&amp;n</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation>Paramètres généraux</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation></translation>
+        <translation type="obsolete">Paramètres généraux</translation>
     </message>
     <message>
         <source>&amp;Simulate</source>
-        <translation>&amp;Simulation</translation>
+        <translation type="obsolete">&amp;Simulation</translation>
     </message>
     <message>
         <source>Error</source>
@@ -897,11 +1097,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unable to read settings!</source>
-        <translation>Lecture  des paramètres impossible!</translation>
+        <translation type="obsolete">Lecture  des paramètres impossible!</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Coller</translation>
+        <translation type="obsolete">&amp;Coller</translation>
     </message>
     <message>
         <source>Unable to find file %1!</source>
@@ -909,43 +1109,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete Selected Models?</source>
-        <translation>Supprimer le Modèle Sélectionné?</translation>
+        <translation type="obsolete">Supprimer le Modèle Sélectionné?</translation>
     </message>
     <message>
         <source>EEPROM hex files (*.hex);;EEPROM bin files (*.bin)</source>
         <translation type="obsolete">Fichiers EEPROM hexa (*.hex);;Fichiers EEPROM binaires (*.bin)</translation>
     </message>
     <message>
-        <source>Ctrl+C</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+U</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
+        <translation type="obsolete">Supprimer</translation>
     </message>
     <message>
         <source>Error reading file %1!</source>
-        <translation>Fichier %1 corrompu!</translation>
+        <translation type="obsolete">Fichier %1 corrompu!</translation>
     </message>
     <message>
         <source>Unable set model!</source>
-        <translation>Sélection du modèle impossible!</translation>
+        <translation type="obsolete">Sélection du modèle impossible!</translation>
     </message>
     <message>
         <source>&amp;Write To Tx</source>
-        <translation>&amp;Envoyer à l&apos;émetteur</translation>
+        <translation type="obsolete">&amp;Envoyer à l&apos;émetteur</translation>
     </message>
     <message>
         <source>File wrong size - %1</source>
@@ -953,7 +1137,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>D&amp;uplicate</source>
-        <translation>D&amp;upliquer</translation>
+        <translation type="obsolete">D&amp;upliquer</translation>
     </message>
     <message>
         <source>Burn %1 to transmitter?</source>
@@ -962,7 +1146,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&apos;%1&apos; has been modified.
 Do you want to save your changes?</source>
-        <translation> %1 modifié.
+        <translation type="obsolete"> %1 modifié.
 Enregistrer les changements?</translation>
     </message>
     <message>
@@ -971,7 +1155,7 @@ Enregistrer les changements?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Suppression</translation>
+        <translation type="obsolete">&amp;Suppression</translation>
     </message>
     <message>
         <source>Cannot write temporary file!</source>
@@ -1000,17 +1184,13 @@ Enregistrer les changements?</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Ctrl+Alt+W</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Unable set data!</source>
-        <translation>Sélection des données impossible!</translation>
+        <translation type="obsolete">Sélection des données impossible!</translation>
     </message>
     <message>
         <source>Error reading file:
 File wrong size - %1</source>
-        <translation>Erreur de lecture du fichier : taille de fichier incorrecte - %1</translation>
+        <translation type="obsolete">Erreur de lecture du fichier : taille de fichier incorrecte - %1</translation>
     </message>
     <message>
         <source>Error opening file %1:
@@ -1021,7 +1201,7 @@ File wrong size - %1</source>
     <message>
         <source>Error loading file %1:
 %2.</source>
-        <translation>Erreur au chargement du fichier %1:
+        <translation type="obsolete">Erreur au chargement du fichier %1:
 %2.</translation>
     </message>
     <message>
@@ -1029,11 +1209,20 @@ File wrong size - %1</source>
         <translation>Transférer %1 dans la mémoire EEPROM de l&apos;émetteur ?</translation>
     </message>
     <message>
-        <source>document%1.eepe</source>
+        <source>free bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid EEPE EEPROM File %1</source>
+        <source>Invalid EEPROM File %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid binary EEPROM File %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 has been modified.
+Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1203,6 +1392,10 @@ p, li { white-space: pre-wrap; }
         <source>Include Trim</source>
         <translation>Inclure Trim</translation>
     </message>
+    <message>
+        <source>Phase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModelEdit</name>
@@ -1236,11 +1429,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>LOW</source>
-        <translation>BAS</translation>
+        <translation type="obsolete">BAS</translation>
     </message>
     <message>
         <source>MID</source>
-        <translation>CENTRE</translation>
+        <translation type="obsolete">CENTRE</translation>
     </message>
     <message>
         <source>NOR</source>
@@ -1272,7 +1465,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HIGH</source>
-        <translation>HAUT</translation>
+        <translation type="obsolete">HAUT</translation>
     </message>
     <message>
         <source>Fine</source>
@@ -1307,10 +1500,6 @@ p, li { white-space: pre-wrap; }
         <translation>Configuration</translation>
     </message>
     <message>
-        <source>Trims</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>mm:ss</source>
         <translation></translation>
     </message>
@@ -1328,12 +1517,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Elevator</source>
-        <translation>Profondeur</translation>
+        <translation type="obsolete">Profondeur</translation>
     </message>
     <message>
         <source>D/R
 Right</source>
-        <translation>D/R
+        <translation type="obsolete">D/R
 Droite</translation>
     </message>
     <message>
@@ -1342,12 +1531,12 @@ Droite</translation>
     </message>
     <message>
         <source>Timer Value</source>
-        <translation>Durée du chrono</translation>
+        <translation type="obsolete">Durée du chrono</translation>
     </message>
     <message>
         <source>D/R
 Left</source>
-        <translation>D/R
+        <translation type="obsolete">D/R
 Gauche</translation>
     </message>
     <message>
@@ -1420,7 +1609,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Rudder</source>
-        <translation>Direction</translation>
+        <translation type="obsolete">Direction</translation>
     </message>
     <message>
         <source>Pulse Shift (polarity)</source>
@@ -1437,7 +1626,7 @@ Gauche</translation>
     <message>
         <source>Expo
 Left</source>
-        <translation>Expo
+        <translation type="obsolete">Expo
 Gauche</translation>
     </message>
     <message>
@@ -1450,7 +1639,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Aileron</source>
-        <translation>Ailerons</translation>
+        <translation type="obsolete">Ailerons</translation>
     </message>
     <message>
         <source>Extra Fine</source>
@@ -1462,19 +1651,19 @@ Gauche</translation>
     </message>
     <message>
         <source>STICK 1</source>
-        <translation>MANCHE 1</translation>
+        <translation type="obsolete">MANCHE 1</translation>
     </message>
     <message>
         <source>STICK 2</source>
-        <translation>MANCHE 2</translation>
+        <translation type="obsolete">MANCHE 2</translation>
     </message>
     <message>
         <source>STICK 3</source>
-        <translation>MANCHE 3</translation>
+        <translation type="obsolete">MANCHE 3</translation>
     </message>
     <message>
         <source>STICK 4</source>
-        <translation>MANCHE 4</translation>
+        <translation type="obsolete">MANCHE 4</translation>
     </message>
     <message>
         <source>Throttle Expo</source>
@@ -1538,11 +1727,11 @@ Gauche</translation>
     </message>
     <message>
         <source>Switch1</source>
-        <translation>Interrupteur 1</translation>
+        <translation type="obsolete">Interrupteur 1</translation>
     </message>
     <message>
         <source>Switch2</source>
-        <translation>Interrupteur 2</translation>
+        <translation type="obsolete">Interrupteur 2</translation>
     </message>
     <message>
         <source> Switch(</source>
@@ -1578,7 +1767,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Timer Direction</source>
-        <translation>Sens du chrono</translation>
+        <translation type="obsolete">Sens du chrono</translation>
     </message>
     <message>
         <source>Negative</source>
@@ -1594,7 +1783,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Timer Mode</source>
-        <translation>Mode du chrono</translation>
+        <translation type="obsolete">Mode du chrono</translation>
     </message>
     <message>
         <source>Function</source>
@@ -1602,7 +1791,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Curve %1</source>
-        <translation>Courbe %1</translation>
+        <translation type="obsolete">Courbe %1</translation>
     </message>
     <message>
         <source>Curve 10</source>
@@ -1633,12 +1822,8 @@ Gauche</translation>
         <translation>Courbe 16</translation>
     </message>
     <message>
-        <source>Expo/Dr</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Switches</source>
-        <translation>Inters personnalisés</translation>
+        <translation type="obsolete">Inters personnalisés</translation>
     </message>
     <message>
         <source> Offset(%1%)</source>
@@ -1650,20 +1835,20 @@ Gauche</translation>
     </message>
     <message>
         <source>ppm Delay</source>
-        <translation>Délai PPM</translation>
+        <translation type="obsolete">Délai PPM</translation>
     </message>
     <message>
         <source>Throttle</source>
-        <translation>Gaz</translation>
+        <translation type="obsolete">Gaz</translation>
     </message>
     <message>
         <source>instaTrim Switch</source>
-        <translation>Inter. instaTrim</translation>
+        <translation type="obsolete">Inter. instaTrim</translation>
     </message>
     <message>
         <source>Expo
 Right</source>
-        <translation>Expo
+        <translation type="obsolete">Expo
 Droite</translation>
     </message>
     <message>
@@ -1825,6 +2010,285 @@ Droite</translation>
     <message>
         <source>CSwitchC</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer1</source>
+        <translation>Chrono1</translation>
+    </message>
+    <message>
+        <source>Timer2</source>
+        <translation>Chrono2</translation>
+    </message>
+    <message>
+        <source>PPM delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extended Trims</source>
+        <translation>Trims étendus</translation>
+    </message>
+    <message>
+        <source>Phases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flight Phase 0 (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phase Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fade In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fade Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trim2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trim1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trim4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trim3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flight Phase 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flight Phase 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flight Phase 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flight Phase 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom switches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function switches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSwitch12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Telemetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volts (v)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 1    </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>----</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Phase(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Editing curve %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Expos?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Expos?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really clear all the expos?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ModelsListWidget</name>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Supprimer</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation type="unfinished">&amp;Copier</translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cut</source>
+        <translation type="unfinished">&amp;Couper</translation>
+    </message>
+    <message>
+        <source>Ctrl+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;uplicate</source>
+        <translation type="unfinished">D&amp;upliquer</translation>
+    </message>
+    <message>
+        <source>Ctrl+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Use as default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P&amp;rint model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Simulate model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General Settings</source>
+        <translation type="unfinished">Paramètres généraux</translation>
+    </message>
+    <message>
+        <source>Delete Selected Models?</source>
+        <translation type="unfinished">Supprimer le Modèle Sélectionné?</translation>
     </message>
 </context>
 <context>
@@ -1990,10 +2454,17 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
     </message>
 </context>
 <context>
+    <name>contributorsDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogue</translation>
+    </message>
+</context>
+<context>
     <name>donatorsDialog</name>
     <message>
         <source>List of Contributors</source>
-        <translation>Liste des Contributeurs</translation>
+        <translation type="obsolete">Liste des Contributeurs</translation>
     </message>
 </context>
 <context>
@@ -2145,6 +2616,17 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>mdiChild</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simulate Tx</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>preferencesDialog</name>
     <message>
         <source>Mode 2 (RUD THR ELE AIL)</source>
@@ -2228,11 +2710,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>er9x</source>
-        <translation>er9x</translation>
+        <translation type="obsolete">er9x</translation>
     </message>
     <message>
         <source>companion9x</source>
-        <translation>companion9x</translation>
+        <translation type="obsolete">companion9x</translation>
     </message>
     <message>
         <source>Check for updates on startup</source>
@@ -2240,22 +2722,38 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Version to download</source>
-        <translation>Version à télécharger</translation>
-    </message>
-    <message>
-        <source>er9x - JETI</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>er9x - FrSky</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>er9x - Ardupilot</source>
-        <translation></translation>
+        <translation type="obsolete">Version à télécharger</translation>
     </message>
     <message>
         <source>Show Splash Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent History Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EEPROM format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gruvin9x stable - stock board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gruvin9x trunk - stock board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gruvin9x trunk - v3/v4 board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>er9x trunk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open9x trunk</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2263,23 +2761,19 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <name>printDialog</name>
     <message>
         <source>Low</source>
-        <translation>Bas</translation>
+        <translation type="obsolete">Bas</translation>
     </message>
     <message>
         <source>Mid</source>
-        <translation>Centre</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation></translation>
+        <translation type="obsolete">Centre</translation>
     </message>
     <message>
         <source>CH%1</source>
-        <translation>VOIE%1</translation>
+        <translation type="obsolete">VOIE%1</translation>
     </message>
     <message>
         <source>High</source>
-        <translation>Haut</translation>
+        <translation type="obsolete">Haut</translation>
     </message>
     <message>
         <source>Name</source>
@@ -2287,11 +2781,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>SW%1</source>
-        <translation>INTER%1</translation>
-    </message>
-    <message>
-        <source> +%1%</source>
-        <translation></translation>
+        <translation type="obsolete">INTER%1</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2303,7 +2793,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Timer</source>
-        <translation>Chrono</translation>
+        <translation type="obsolete">Chrono</translation>
     </message>
     <message>
         <source>pt %1</source>
@@ -2315,27 +2805,27 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Switch 1:</source>
-        <translation>Inter 1:</translation>
+        <translation type="obsolete">Inter 1:</translation>
     </message>
     <message>
         <source>Switch 2:</source>
-        <translation>Inter 2:</translation>
+        <translation type="obsolete">Inter 2:</translation>
     </message>
     <message>
         <source>5-point Curves</source>
-        <translation>Courbes à 5 points</translation>
+        <translation type="obsolete">Courbes à 5 points</translation>
     </message>
     <message>
         <source>9-point Curves</source>
-        <translation>Courbes à 9 points</translation>
+        <translation type="obsolete">Courbes à 9 points</translation>
     </message>
     <message>
         <source>Expo Right</source>
-        <translation>Expo Droite</translation>
+        <translation type="obsolete">Expo Droite</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Expo/Dr Settings&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Réglages Expo/Dr&lt;/h2&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Réglages Expo/Dr&lt;/h2&gt;</translation>
     </message>
     <message>
         <source>Setup for: </source>
@@ -2351,11 +2841,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>D/R Left</source>
-        <translation>D/R Gauche</translation>
+        <translation type="obsolete">D/R Gauche</translation>
     </message>
     <message>
         <source>D/R Right</source>
-        <translation>D/R Droite</translation>
+        <translation type="obsolete">D/R Droite</translation>
     </message>
     <message>
         <source> Delay(u%1:d%2)</source>
@@ -2367,7 +2857,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Offset</source>
-        <translation type="obsolete">Décalage</translation>
+        <translation>Décalage</translation>
     </message>
     <message>
         <source>Source</source>
@@ -2375,23 +2865,23 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Trim Switch</source>
-        <translation>Inter de Trim</translation>
+        <translation type="obsolete">Inter de Trim</translation>
     </message>
     <message>
         <source>&lt;a name=1&gt;&lt;/a&gt;&lt;h1&gt;ER9x Model: %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;a name=1&gt;&lt;/a&gt;&lt;h1&gt;Modèle ER9x: %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;a name=1&gt;&lt;/a&gt;&lt;h1&gt;Modèle ER9x: %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Expo Left</source>
-        <translation>Expo Gauche</translation>
+        <translation type="obsolete">Expo Gauche</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Mixers&lt;/h2&gt;&lt;br&gt;</source>
-        <translation>&lt;h2&gt;Mixages&lt;/h2&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Mixages&lt;/h2&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source> noTrim</source>
-        <translation> PasDeTrim(</translation>
+        <translation type="obsolete"> PasDeTrim(</translation>
     </message>
     <message>
         <source>%1:%2, </source>
@@ -2407,11 +2897,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source> Warn(%1)</source>
-        <translation> Alerte(%1)</translation>
+        <translation type="obsolete"> Alerte(%1)</translation>
     </message>
     <message>
         <source>&lt;h2&gt;General Model Settings&lt;/h2&gt;&lt;br&gt;</source>
-        <translation>&lt;h2&gt;Paramètres Généraux&lt;/h2&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Paramètres Généraux&lt;/h2&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Protocol</source>
@@ -2419,7 +2909,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source> Curve(%1)</source>
-        <translation> Courbe(%1)</translation>
+        <translation type="obsolete"> Courbe(%1)</translation>
     </message>
     <message>
         <source>Pulse Polarity</source>
@@ -2427,19 +2917,19 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>: %1 Channels, %3msec Delay</source>
-        <translation>: Voie %1, Délai %3msec</translation>
+        <translation type="obsolete">: Voie %1, Délai %3msec</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Curves&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Courbes&lt;/h2&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Courbes&lt;/h2&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;CH%1&lt;/b&gt;</source>
-        <translation>&lt;b&gt;VOIE%1&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;VOIE%1&lt;/b&gt;</translation>
     </message>
     <message>
         <source> Switch(</source>
-        <translation> Inter(</translation>
+        <translation type="obsolete"> Inter(</translation>
     </message>
     <message>
         <source>Center Beep</source>
@@ -2451,11 +2941,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Function</source>
-        <translation type="obsolete">Fonction</translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>Curve %1</source>
-        <translation>Courbe %1</translation>
+        <translation type="obsolete">Courbe %1</translation>
     </message>
     <message>
         <source>Print Document</source>
@@ -2463,19 +2953,19 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>&lt;h2&gt;Limits&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Débattements&lt;/h2&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Débattements&lt;/h2&gt;</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Custom Switches&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Inters Personnalisés&lt;/h2&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Inters Personnalisés&lt;/h2&gt;</translation>
     </message>
     <message>
         <source> Offset(%1%)</source>
-        <translation> Décalage(%1%)</translation>
+        <translation type="obsolete"> Décalage(%1%)</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Safety Switches&lt;/h2&gt;</source>
-        <translation>&lt;h2&gt;Inters de sécurité&lt;/h2&gt;</translation>
+        <translation type="obsolete">&lt;h2&gt;Inters de sécurité&lt;/h2&gt;</translation>
     </message>
     <message>
         <source>Switch</source>
@@ -2484,6 +2974,254 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <source>Value</source>
         <translation>Valeur</translation>
+    </message>
+    <message>
+        <source>Print to file</source>
+        <translation>Imprimer vers un fichier</translation>
+    </message>
+    <message>
+        <source>Count Up</source>
+        <translation>Croissant</translation>
+    </message>
+    <message>
+        <source>Count Down</source>
+        <translation>Décroissant</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Jaune</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rouge</translation>
+    </message>
+    <message>
+        <source>---</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>: %1 Channels, %2msec Delay</source>
+        <translation>: %1 voies, Délai de %2ms</translation>
+    </message>
+    <message>
+        <source>Rudder</source>
+        <translation>Dérive</translation>
+    </message>
+    <message>
+        <source>Elevator</source>
+        <translation>Profondeur</translation>
+    </message>
+    <message>
+        <source>Throttle</source>
+        <translation>Gaz</translation>
+    </message>
+    <message>
+        <source>Aileron</source>
+        <translation>Ailerons</translation>
+    </message>
+    <message>
+        <source>Extra Fine</source>
+        <translation>Extra fin</translation>
+    </message>
+    <message>
+        <source>Fine</source>
+        <translation>Fine</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Moyenne</translation>
+    </message>
+    <message>
+        <source>Coarse</source>
+        <translation>Elevée</translation>
+    </message>
+    <message>
+        <source>Exponential</source>
+        <translation>Exponentielle</translation>
+    </message>
+    <message>
+        <source>General Model Settings</source>
+        <translation>Paramètres généraux</translation>
+    </message>
+    <message>
+        <source>EEprom Size</source>
+        <translation>Taille d&apos;EEPROM</translation>
+    </message>
+    <message>
+        <source>Timer1</source>
+        <translation>Chrono1</translation>
+    </message>
+    <message>
+        <source>Timer2</source>
+        <translation>Chrono2</translation>
+    </message>
+    <message>
+        <source>Flight Phases Settings</source>
+        <translation>Paramètres de phases de vol</translation>
+    </message>
+    <message>
+        <source>Fades</source>
+        <translation>Fondus</translation>
+    </message>
+    <message>
+        <source>Trims</source>
+        <translation>Trims</translation>
+    </message>
+    <message>
+        <source>Phase name</source>
+        <translation>Nom de la phase</translation>
+    </message>
+    <message>
+        <source>IN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OUT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;td width=&quot;40&quot; align=&quot;center&quot;&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/td&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expo/Dr Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation type="unfinished">Ratio</translation>
+    </message>
+    <message>
+        <source>Expo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Courbe</translation>
+    </message>
+    <message>
+        <source>Mixers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>noTrim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;table border=1 cellspacing=0 cellpadding=3 width=&quot;100%&quot;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limits</source>
+        <translation>Débattements</translation>
+    </message>
+    <message>
+        <source>Min</source>
+        <translation>Min</translation>
+    </message>
+    <message>
+        <source>Max</source>
+        <translation>Max</translation>
+    </message>
+    <message>
+        <source>Invert</source>
+        <translation>Inversion</translation>
+    </message>
+    <message>
+        <source>INV</source>
+        <translation>Inversion</translation>
+    </message>
+    <message>
+        <source>NOR</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Curves</source>
+        <translation>Courbes</translation>
+    </message>
+    <message>
+        <source>5 Points Curves</source>
+        <translation>Courbes à 5 points</translation>
+    </message>
+    <message>
+        <source>9 Points Curves</source>
+        <translation>Courbes à 9 points</translation>
+    </message>
+    <message>
+        <source>Custom Switches</source>
+        <translation>Inters personnalisés</translation>
+    </message>
+    <message>
+        <source>SW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Safety Switches</source>
+        <translation>Inters de sécurité</translation>
+    </message>
+    <message>
+        <source>Function Switches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Telemetry Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm 1</source>
+        <translation>Alarme 1</translation>
+    </message>
+    <message>
+        <source>Alarm 2</source>
+        <translation>Alarme 2</translation>
+    </message>
+    <message>
+        <source>Analog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation>Unité</translation>
+    </message>
+    <message>
+        <source>Ratio</source>
+        <translation>Ratio</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Condition</source>
+        <translation>Condition</translation>
+    </message>
+    <message>
+        <source>A%1</source>
+        <translation>A%1</translation>
     </message>
 </context>
 <context>
@@ -2638,7 +3376,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>ER9x Simulator</source>
-        <translation>Simulateur ER9x</translation>
+        <translation type="obsolete">Simulateur ER9x</translation>
     </message>
     <message>
         <source>-100.1</source>
@@ -2682,6 +3420,54 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>SWC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Companion9x Simulator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9x Simulator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MENU</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EXIT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Outputs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firmware %1 error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simulating Tx (%1)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
