@@ -497,7 +497,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mode</translation>
     </message>
     <message>
         <source>Input</source>
@@ -533,15 +533,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jaune</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Orange</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rouge</translation>
     </message>
     <message>
         <source>RSSI Alarm 2</source>
@@ -1394,7 +1394,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Phase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Phase</translation>
     </message>
 </context>
 <context>
@@ -2149,7 +2149,7 @@ Droite</translation>
     </message>
     <message>
         <source>Unit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Unité</translation>
     </message>
     <message>
         <source>Volts (v)</source>
@@ -2161,7 +2161,7 @@ Droite</translation>
     </message>
     <message>
         <source>Ratio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ratio</translation>
     </message>
     <message>
         <source>Alarm 1    </source>
@@ -2173,15 +2173,15 @@ Droite</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jaune</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Orange</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rouge</translation>
     </message>
     <message>
         <source>&lt;</source>
@@ -2193,7 +2193,7 @@ Droite</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alarme 2</translation>
     </message>
     <message>
         <source>A2</source>
@@ -3101,11 +3101,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Expo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Expo</translation>
     </message>
     <message>
         <source>Phase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Phase</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -3468,6 +3468,10 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Simulating Tx (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - Phase: %1(%2)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
