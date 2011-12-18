@@ -13,7 +13,7 @@
   * ~~Recent documents easier to access~~
   * Implement a correct handling of Tx modes so that it's possible to change the mode without messing everything (same as g9x issue 63)
   * Checking updates and download of selected firmware.
-  * Add an entry in the contextual menu to change the current model
+  * ~~Add an entry in the contextual menu to change the current model~~
   * Change the icon which comes from eePe (a graphist is welcome!!)
 
 = Ideas from eePe =
