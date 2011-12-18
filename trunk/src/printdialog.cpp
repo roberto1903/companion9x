@@ -674,7 +674,7 @@ void printDialog::on_printButton_clicked()
 void printDialog::on_printFileButton_clicked()
 {
     QPrinter printer;
-    QString filename = QFileDialog::getOpenFileName(this,"Open File",QString(),"Pdf File(*.pdf)"); 
+    QString filename = QFileDialog::getSaveFileName(this,tr("Select PDF output file"),QString(),"Pdf File(*.pdf)"); 
     printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
     printer.setOutputFormat(QPrinter::PdfFormat);
     if(!filename.isEmpty()) { 
