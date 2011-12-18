@@ -148,7 +148,7 @@ void MdiChild::newFile()
   static int sequenceNumber = 1;
 
   isUntitled = true;
-  curFile = tr("document%1.eepe").arg(sequenceNumber++);
+  curFile = QString("document%1.eepe").arg(sequenceNumber++);
   setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
 
 }
