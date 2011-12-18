@@ -54,6 +54,7 @@ private:
     
 private slots:
     void on_printButton_clicked();
+    void on_printFileButton_clicked();
 };
 
 #endif // PRINTDIALOG_H

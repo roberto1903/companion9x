@@ -375,13 +375,13 @@ void printDialog::printCurves()
     char buffer [16];
     QPen pen(Qt::black, 2, Qt::SolidLine);
     QColor * qplot_color[8];
-    qplot_color[0]=new QColor(0,0,255);
-    qplot_color[1]=new QColor(0,255,0);
-    qplot_color[2]=new QColor(255,0,0);
-    qplot_color[3]=new QColor(0,127,255);
-    qplot_color[4]=new QColor(0,255,127);
-    qplot_color[5]=new QColor(255,127,0);
-    qplot_color[6]=new QColor(255,0,255);
+    qplot_color[0]=new QColor(0,0,127);
+    qplot_color[1]=new QColor(0,127,0);
+    qplot_color[2]=new QColor(127,0,0);
+    qplot_color[3]=new QColor(127,127,0);
+    qplot_color[4]=new QColor(0,0,255);
+    qplot_color[5]=new QColor(0,255,0);
+    qplot_color[6]=new QColor(255,0,0);
     qplot_color[7]=new QColor(255,255,0);
     
     QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
@@ -663,6 +663,18 @@ void printDialog::on_printButton_clicked()
 {
     QPrinter printer;
     printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
+    QPrintDialog *dialog = new QPrintDialog(&printer, this);
+    dialog->setWindowTitle(tr("Print Document"));
+    if (dialog->exec() != QDialog::Accepted)
+        return;
+    te->print(&printer);
+}
+
+void printDialog::on_printFileButton_clicked()
+{
+    QPrinter printer;
+    printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
+    printer.setOutputFormat(QPrinter::PdfFormat);
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
     dialog->setWindowTitle(tr("Print Document"));
     if (dialog->exec() != QDialog::Accepted)
