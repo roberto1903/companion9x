@@ -3734,6 +3734,11 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="simulatordialog.cpp" line="141"/>
+        <source> - Phase: %1(%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="simulatordialog.cpp" line="199"/>
         <source>Simulating Tx (%1)</source>
         <translation type="unfinished"></translation>
