@@ -56,7 +56,7 @@ ADD_CUSTOM_COMMAND(
 )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
   OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
 )
@@ -185,14 +185,11 @@ SET( LANGUAGES he pt ru de fr it )
 FOREACH( language ${LANGUAGES} )
   SET( companion9x_TS ${companion9x_TS} companion9x_${language}.ts )
 ENDFOREACH( language )
-QT4_CREATE_TRANSLATION( QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} ${companion9x_TS} )
 
 QT4_WRAP_UI( companion9x_SRCS ${companion9x_UIS} )
 QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
-QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS} )
+QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS}  )
 QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
-
-# ADD_CUSTOM_TARGET( update_translations DEPENDS ${companion9x_QM} ${companion9x_TS} )
 
 IF( APPLE )
     # Copy the icon files
@@ -270,4 +267,7 @@ ENDIF( )
 ADD_CUSTOM_TARGET( stamp
                    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/version.h ${CMAKE_SOURCE_DIR}/../companion9x.stamp 
                    DEPENDS ${CMAKE_BINARY_DIR}/version.h )
+
+ADD_CUSTOM_TARGET( translations
+                   COMMAND lupdate ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )
 
