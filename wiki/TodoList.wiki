@@ -17,7 +17,7 @@
   * Change the icon which comes from eePe (a graphist is welcome!!)
   * Add a what's new information to be displayed while prompting for updates
   * Splash window should be visible at least 2-3 seconds!
-  * Phase names visible on simulation
+  * ~~Phase names visible on simulation~~
 
 = Ideas from eePe =
   * Diff feature to compare two models
