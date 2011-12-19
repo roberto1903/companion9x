@@ -4,11 +4,6 @@
 <context>
     <name>ExpoDialog</name>
     <message>
-        <location filename="expodialog.ui" line="20"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="expodialog.ui" line="35"/>
         <source>Expo</source>
         <translation type="unfinished"></translation>
@@ -1547,21 +1542,37 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="modeledit.ui" line="220"/>
+        <location filename="modeledit.cpp" line="264"/>
+        <location filename="modeledit.cpp" line="278"/>
+        <location filename="modeledit.cpp" line="294"/>
+        <location filename="modeledit.cpp" line="308"/>
         <source>RUD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="227"/>
+        <location filename="modeledit.cpp" line="263"/>
+        <location filename="modeledit.cpp" line="279"/>
+        <location filename="modeledit.cpp" line="291"/>
+        <location filename="modeledit.cpp" line="307"/>
         <source>ELE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="234"/>
+        <location filename="modeledit.cpp" line="265"/>
+        <location filename="modeledit.cpp" line="277"/>
+        <location filename="modeledit.cpp" line="293"/>
+        <location filename="modeledit.cpp" line="305"/>
         <source>THR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="241"/>
+        <location filename="modeledit.cpp" line="266"/>
+        <location filename="modeledit.cpp" line="280"/>
+        <location filename="modeledit.cpp" line="292"/>
+        <location filename="modeledit.cpp" line="306"/>
         <source>AIL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2274,6 +2285,26 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="modeledit.cpp" line="402"/>
+        <source>Weight(%1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="403"/>
+        <source>Weight(+%1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="405"/>
+        <source> Expo(%1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="406"/>
+        <source> Expo(+%1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="modeledit.cpp" line="498"/>
         <source> Delay(u%1:d%2)</source>
         <translation type="unfinished"></translation>
@@ -2851,11 +2882,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>mdiChild</name>
     <message>
-        <location filename="mdichild.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mdichild.ui" line="23"/>
         <source>Simulate Tx</source>
         <translation type="unfinished"></translation>
@@ -3290,7 +3316,6 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="336"/>
         <location filename="printdialog.cpp" line="497"/>
         <location filename="printdialog.cpp" line="589"/>
         <location filename="printdialog.cpp" line="616"/>
@@ -3429,6 +3454,11 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="668"/>
         <source>Print Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="printdialog.cpp" line="677"/>
+        <source>Select PDF output file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

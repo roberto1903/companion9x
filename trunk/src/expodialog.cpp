@@ -48,10 +48,10 @@ void ExpoDialog::changeEvent(QEvent *e)
 
 void ExpoDialog::valuesChanged()
 {
-    md->expo    = ui->expoSB->value();
-    md->weight    = ui->weightSB->value();
-    md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
-    md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
-    md->curve     = ui->curvesCB->currentIndex();
-    md->mode     = ui->modeCB->currentIndex() + 1;
+    md->expo   = ui->expoSB->value();
+    md->weight = ui->weightSB->value();
+    md->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
+    md->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    md->curve  = ui->curvesCB->currentIndex();
+    md->mode   = ui->modeCB->currentIndex() + 1;
 }

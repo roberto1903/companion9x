@@ -5,7 +5,7 @@
     <name>ExpoDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation type="obsolete">Dialogue</translation>
     </message>
     <message>
         <source>Expo</source>
@@ -25,7 +25,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>The value of the weight</source>
-        <translation type="unfinished"></translation>
+        <translation>La valeur du ratio</translation>
     </message>
     <message>
         <source>Phase</source>
@@ -33,7 +33,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Phase used by the expo.</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase utilisée par l&apos;expo.</translation>
     </message>
     <message>
         <source>Switch</source>
@@ -42,7 +42,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur utilisé par l&apos;expo.
+Expo actif par défaut si non renseigné.</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -50,7 +51,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
     </message>
     <message>
         <source>The curve used by the expo</source>
-        <translation type="unfinished"></translation>
+        <translation>Courbe utilisée par l&apos;expo</translation>
     </message>
     <message>
         <source>Mode</source>
@@ -58,19 +59,19 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
     </message>
     <message>
         <source>NEG</source>
-        <translation type="unfinished"></translation>
+        <translation>Négatif</translation>
     </message>
     <message>
         <source>POS</source>
-        <translation type="unfinished"></translation>
+        <translation>Positif</translation>
     </message>
     <message>
         <source>ALL</source>
-        <translation type="unfinished"></translation>
+        <translation>Partout</translation>
     </message>
     <message>
         <source>DEST -&gt; %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Destination -&gt; %1</translation>
     </message>
 </context>
 <context>
@@ -453,135 +454,135 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Switches Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Inters vers le haut</translation>
     </message>
     <message>
         <source>Switches Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Inters vers le bas</translation>
     </message>
     <message>
         <source>Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecolage</translation>
     </message>
     <message>
         <source>PPM 1</source>
-        <translation type="unfinished"></translation>
+        <translation>PPM 1</translation>
     </message>
     <message>
         <source>+=</source>
-        <translation type="unfinished"></translation>
+        <translation>+=</translation>
     </message>
     <message>
         <source>:=</source>
-        <translation type="unfinished"></translation>
+        <translation>:=</translation>
     </message>
     <message>
         <source>chn1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>chn2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>chn3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>chn4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Mode</translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished">Ratio</translation>
+        <translation>Ratio</translation>
     </message>
     <message>
         <source>PPM 2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PPM 3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PPM 4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Telemetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Télémétrie</translation>
     </message>
     <message>
         <source>RSSI Alarm 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme RSSI 1</translation>
     </message>
     <message>
         <source>----</source>
-        <translation type="unfinished"></translation>
+        <translation>----</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished">Jaune</translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished">Orange</translation>
+        <translation>Orange</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished">Rouge</translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>RSSI Alarm 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme RSSI 2</translation>
     </message>
     <message>
         <source>NO DATA Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme Pas de télémétrie</translation>
     </message>
     <message>
         <source>STICK 1</source>
-        <translation type="unfinished">MANCHE 1</translation>
+        <translation>MANCHE 1</translation>
     </message>
     <message>
         <source>STICK 2</source>
-        <translation type="unfinished">MANCHE 2</translation>
+        <translation>MANCHE 2</translation>
     </message>
     <message>
         <source>STICK 3</source>
-        <translation type="unfinished">MANCHE 3</translation>
+        <translation>MANCHE 3</translation>
     </message>
     <message>
         <source>STICK 4</source>
-        <translation type="unfinished">MANCHE 4</translation>
+        <translation>MANCHE 4</translation>
     </message>
     <message>
         <source>POT 1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>POT 2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>POT 3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
 </context>
 <context>
@@ -1036,11 +1037,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Release %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Version %1 %2</translation>
     </message>
     <message>
         <source>Date %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Date %1 %2</translation>
     </message>
     <message>
         <source>If you&apos;ve found this program useful, please support by</source>
@@ -1052,7 +1053,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show companion9x contributors list</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste les contributeurs de companion9x</translation>
     </message>
     <message>
         <source>Recent Files</source>
@@ -1163,7 +1164,7 @@ Enregistrer les changements?</translation>
     </message>
     <message>
         <source>Editing model %1: </source>
-        <translation>Édition du modèle %1: </translation>
+        <translation>Édition du modèle %1 : </translation>
     </message>
     <message>
         <source>Error writing file %1:
@@ -1210,20 +1211,21 @@ File wrong size - %1</source>
     </message>
     <message>
         <source>free bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>octets libres</translation>
     </message>
     <message>
         <source>Invalid EEPROM File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier EEPROM %1 invalide</translation>
     </message>
     <message>
         <source>Invalid binary EEPROM File %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier binaire %1 invalide</translation>
     </message>
     <message>
         <source>%1 has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 a été modifié.
+Enregistrer les changements ?</translation>
     </message>
 </context>
 <context>
@@ -1394,7 +1396,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Phase</source>
-        <translation type="unfinished">Phase</translation>
+        <translation>Phase</translation>
     </message>
 </context>
 <context>
@@ -2001,15 +2003,15 @@ Droite</translation>
     </message>
     <message>
         <source>CSwitchA</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur personnalisé SWA</translation>
     </message>
     <message>
         <source>CSwitchB</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur personnalisé SWB</translation>
     </message>
     <message>
         <source>CSwitchC</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur personnalisé SWC</translation>
     </message>
     <message>
         <source>Timer1</source>
@@ -2021,7 +2023,7 @@ Droite</translation>
     </message>
     <message>
         <source>PPM delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai PPM</translation>
     </message>
     <message>
         <source>Extended Trims</source>
@@ -2029,266 +2031,282 @@ Droite</translation>
     </message>
     <message>
         <source>Phases</source>
-        <translation type="unfinished"></translation>
+        <translation>Phases</translation>
     </message>
     <message>
         <source>Flight Phase 0 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
         <source>Phase Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de la phase</translation>
     </message>
     <message>
         <source>Fade In</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondu en entrée</translation>
     </message>
     <message>
         <source>Fade Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondu en sortie</translation>
     </message>
     <message>
         <source>trim2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>trim1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>trim4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>trim3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Flight Phase 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase de vol 1</translation>
     </message>
     <message>
         <source>Flight Phase 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase de vol 2</translation>
     </message>
     <message>
         <source>Flight Phase 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase de vol 3</translation>
     </message>
     <message>
         <source>Flight Phase 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Phase de vol 4</translation>
     </message>
     <message>
         <source>Expos</source>
-        <translation type="unfinished"></translation>
+        <translation>Expos</translation>
     </message>
     <message>
         <source>Custom switches</source>
-        <translation type="unfinished"></translation>
+        <translation>Inters personnalisés</translation>
     </message>
     <message>
         <source>Function switches</source>
-        <translation type="unfinished"></translation>
+        <translation>Inters de fonctions</translation>
     </message>
     <message>
         <source>FSwitch1</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 1</translation>
     </message>
     <message>
         <source>FSwitch2</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 2</translation>
     </message>
     <message>
         <source>FSwitch3</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 3</translation>
     </message>
     <message>
         <source>FSwitch4</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 4</translation>
     </message>
     <message>
         <source>FSwitch5</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 5</translation>
     </message>
     <message>
         <source>FSwitch6</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 6</translation>
     </message>
     <message>
         <source>FSwitch7</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 7</translation>
     </message>
     <message>
         <source>FSwitch8</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 8</translation>
     </message>
     <message>
         <source>FSwitch9</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 9</translation>
     </message>
     <message>
         <source>FSwitch10</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 10</translation>
     </message>
     <message>
         <source>FSwitch11</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 11</translation>
     </message>
     <message>
         <source>FSwitch12</source>
-        <translation type="unfinished"></translation>
+        <translation>Interrupteur de fonction 12</translation>
     </message>
     <message>
         <source>Telemetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Télémétrie</translation>
     </message>
     <message>
         <source>A1</source>
-        <translation type="unfinished"></translation>
+        <translation>A1</translation>
     </message>
     <message>
         <source>Unit</source>
-        <translation type="unfinished">Unité</translation>
+        <translation>Unité</translation>
     </message>
     <message>
         <source>Volts (v)</source>
-        <translation type="unfinished"></translation>
+        <translation>Volts (v)</translation>
     </message>
     <message>
         <source>Raw (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiffres bruts (-)</translation>
     </message>
     <message>
         <source>Ratio</source>
-        <translation type="unfinished">Ratio</translation>
+        <translation>Ratio</translation>
     </message>
     <message>
         <source>Alarm 1    </source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme 1</translation>
     </message>
     <message>
         <source>----</source>
-        <translation type="unfinished"></translation>
+        <translation>----</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished">Jaune</translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished">Orange</translation>
+        <translation>Orange</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished">Rouge</translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>&lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt;</translation>
     </message>
     <message>
         <source>Alarm 2</source>
-        <translation type="unfinished">Alarme 2</translation>
+        <translation>Alarme 2</translation>
     </message>
     <message>
         <source>A2</source>
-        <translation type="unfinished"></translation>
+        <translation>A2</translation>
     </message>
     <message>
         <source> Phase(</source>
-        <translation type="unfinished"></translation>
+        <translation> Phase(</translation>
     </message>
     <message>
         <source>Editing curve %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Édition de la courbe %1</translation>
     </message>
     <message>
         <source>Delete Selected Expos?</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les expos sélectionnés ?</translation>
     </message>
     <message>
         <source>Clear Expos?</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer les expos ?</translation>
     </message>
     <message>
         <source>Really clear all the expos?</source>
-        <translation type="unfinished"></translation>
+        <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
+    </message>
+    <message>
+        <source>Weight(%1%)</source>
+        <translation>Ratio(%1%)</translation>
+    </message>
+    <message>
+        <source>Weight(+%1%)</source>
+        <translation>Ratio(+%1%)</translation>
+    </message>
+    <message>
+        <source> Expo(%1%)</source>
+        <translation> Expo(%1%)</translation>
+    </message>
+    <message>
+        <source> Expo(+%1%)</source>
+        <translation> Expo(+%1%)</translation>
     </message>
 </context>
 <context>
     <name>ModelsListWidget</name>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditio&amp;n</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suppression</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Copier</translation>
+        <translation>&amp;Copier</translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation type="unfinished">&amp;Couper</translation>
+        <translation>&amp;Couper</translation>
     </message>
     <message>
         <source>Ctrl+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+X</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Co&amp;ller</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+V</translation>
     </message>
     <message>
         <source>D&amp;uplicate</source>
-        <translation type="unfinished">D&amp;upliquer</translation>
+        <translation>D&amp;upliquer</translation>
     </message>
     <message>
         <source>Ctrl+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctlf+U</translation>
     </message>
     <message>
         <source>&amp;Use as default</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Choisir comme modèle par défaut</translation>
     </message>
     <message>
         <source>P&amp;rint model</source>
-        <translation type="unfinished"></translation>
+        <translation>Im&amp;prime les données du modèle</translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+S</translation>
     </message>
     <message>
         <source>&amp;Simulate model</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Simule le modèle sélectionné</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished">Paramètres généraux</translation>
+        <translation>Paramètres généraux</translation>
     </message>
     <message>
         <source>Delete Selected Models?</source>
-        <translation type="unfinished">Supprimer le Modèle Sélectionné?</translation>
+        <translation>Supprimer les modèles sélectionnés ?</translation>
     </message>
 </context>
 <context>
@@ -2618,12 +2636,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>mdiChild</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Simulate Tx</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulation de l&apos;émetteur</translation>
     </message>
 </context>
 <context>
@@ -2726,35 +2740,35 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Show Splash Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche l&apos;écran d&apos;accueil au démarrage</translation>
     </message>
     <message>
         <source>Recent History Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de l&apos;historique des derniers documents utilisés</translation>
     </message>
     <message>
         <source>EEPROM format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format d&apos;EEPROM</translation>
     </message>
     <message>
         <source>gruvin9x stable - stock board</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x stable - carte d&apos;origine</translation>
     </message>
     <message>
         <source>gruvin9x trunk - stock board</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk - carte d&apos;origine</translation>
     </message>
     <message>
         <source>gruvin9x trunk - v3/v4 board</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk - carte v3/v4</translation>
     </message>
     <message>
         <source>er9x trunk</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>open9x trunk</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2797,7 +2811,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>pt %1</source>
-        <translation></translation>
+        <translation>point %1</translation>
     </message>
     <message>
         <source>Disabled</source>
@@ -3001,7 +3015,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>---</source>
-        <translation type="unfinished"></translation>
+        <translation>---</translation>
     </message>
     <message>
         <source>: %1 Channels, %2msec Delay</source>
@@ -3077,11 +3091,11 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>IN</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <source>OUT</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
     <message>
         <source>&lt;td width=&quot;40&quot; align=&quot;center&quot;&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/td&gt;</source>
@@ -3089,35 +3103,35 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>FP</source>
-        <translation type="unfinished"></translation>
+        <translation>FP</translation>
     </message>
     <message>
         <source>Expo/Dr Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Expos / Valeurs de dual rates</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished">Ratio</translation>
+        <translation>Ratio</translation>
     </message>
     <message>
         <source>Expo</source>
-        <translation type="unfinished">Expo</translation>
+        <translation>Expo</translation>
     </message>
     <message>
         <source>Phase</source>
-        <translation type="unfinished">Phase</translation>
+        <translation>Phase</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Courbe</translation>
+        <translation>Courbe</translation>
     </message>
     <message>
         <source>Mixers</source>
-        <translation type="unfinished"></translation>
+        <translation>Mixages</translation>
     </message>
     <message>
         <source>CH</source>
-        <translation type="unfinished"></translation>
+        <translation>CH</translation>
     </message>
     <message>
         <source>noTrim</source>
@@ -3125,7 +3139,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Warn</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme</translation>
     </message>
     <message>
         <source>&lt;table border=1 cellspacing=0 cellpadding=3 width=&quot;100%&quot;&gt;</source>
@@ -3173,7 +3187,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>SW</source>
-        <translation type="unfinished"></translation>
+        <translation>SW</translation>
     </message>
     <message>
         <source>Safety Switches</source>
@@ -3181,15 +3195,15 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Function Switches</source>
-        <translation type="unfinished"></translation>
+        <translation>Inters de fonctions</translation>
     </message>
     <message>
         <source>FSW</source>
-        <translation type="unfinished"></translation>
+        <translation>FSW</translation>
     </message>
     <message>
         <source>Telemetry Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de télémétrie</translation>
     </message>
     <message>
         <source>Alarm 1</source>
@@ -3201,7 +3215,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <source>Analog</source>
-        <translation type="unfinished"></translation>
+        <translation>Analogue</translation>
     </message>
     <message>
         <source>Unit</source>
@@ -3222,6 +3236,10 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <source>A%1</source>
         <translation>A%1</translation>
+    </message>
+    <message>
+        <source>Select PDF output file</source>
+        <translation>Choisir le fichier PDF de sortie</translation>
     </message>
 </context>
 <context>
