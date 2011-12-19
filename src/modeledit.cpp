@@ -260,10 +260,10 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
       displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
       displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-          trim1Label->setText("ELE");
-          trim2Label->setText("RUD");
-          trim3Label->setText("THR");
-          trim4Label->setText("AIL");
+          trim1Label->setText(tr("ELE"));
+          trim2Label->setText(tr("RUD"));
+          trim3Label->setText(tr("THR"));
+          trim4Label->setText(tr("AIL"));
       }
       if (g_eeGeneral.throttleReversed)
         trim3Slider->setInvertedAppearance(true);
@@ -274,10 +274,10 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
       displayOnePhaseOneTrim(phase_idx, ELE, trim3Use, trim3, trim3Slider);
       displayOnePhaseOneTrim(phase_idx, AIL, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("THR");
-        trim2Label->setText("RUD");
-        trim3Label->setText("ELE");
-        trim4Label->setText("AIL");
+        trim1Label->setText(tr("THR"));
+        trim2Label->setText(tr("RUD"));
+        trim3Label->setText(tr("ELE"));
+        trim4Label->setText(tr("AIL"));
       }
       if (g_eeGeneral.throttleReversed)
         trim1Slider->setInvertedAppearance(true);
@@ -288,10 +288,10 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
       displayOnePhaseOneTrim(phase_idx, THR, trim3Use, trim3, trim3Slider);
       displayOnePhaseOneTrim(phase_idx, RUD, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("ELE");
-        trim2Label->setText("AIL");
-        trim3Label->setText("THR");
-        trim4Label->setText("RUD");
+        trim1Label->setText(tr("ELE"));
+        trim2Label->setText(tr("AIL"));
+        trim3Label->setText(tr("THR"));
+        trim4Label->setText(tr("RUD"));
       }
       if (g_eeGeneral.throttleReversed)
         trim3Slider->setInvertedAppearance(true);
@@ -302,10 +302,10 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
       displayOnePhaseOneTrim(phase_idx, ELE, trim3Use, trim3, trim3Slider);
       displayOnePhaseOneTrim(phase_idx, RUD, trim4Use, trim4, trim4Slider);
       if (trim1Label) {
-        trim1Label->setText("THR");
-        trim2Label->setText("AIL");
-        trim3Label->setText("ELE");
-        trim4Label->setText("RUD");
+        trim1Label->setText(tr("THR"));
+        trim2Label->setText(tr("AIL"));
+        trim3Label->setText(tr("ELE"));
+        trim4Label->setText(tr("RUD"));
       }
       if (g_eeGeneral.throttleReversed)
         trim1Slider->setInvertedAppearance(true);
@@ -376,7 +376,7 @@ void ModelEdit::tabExpos()
         while(curDest<md->chn-1)
         {
             curDest++;
-            str = getSourceStr(g_eeGeneral.stickMode,curDest+1);
+			str = tr(getSourceStr(g_eeGeneral.stickMode, curDest+1).toAscii());
             qba.clear();
             qba.append((quint8)-curDest-1);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -386,24 +386,24 @@ void ModelEdit::tabExpos()
 
         if(curDest!=md->chn)
         {
-            str = getSourceStr(g_eeGeneral.stickMode,md->chn+1);
-            curDest=md->chn;
+			str = tr(getSourceStr(g_eeGeneral.stickMode,md->chn+1).toAscii());
+            curDest = md->chn;
         }
         else
             str = "    ";
 
-        switch(md->mode)
+        switch (md->mode)
         {
         case (1): str += " <-"; break;
         case (2): str += " ->"; break;
         default:  str += "   "; break;
         };
 
-        str += md->weight<0 ? QString("Weight(%1%)").arg(md->weight).rightJustified(6,' ') :
-                              QString("Weight(+%1%)").arg(md->weight).rightJustified(6, ' ');
+        str += md->weight<0 ? tr("Weight(%1%)").arg(md->weight).rightJustified(6,' ') :
+                              tr("Weight(+%1%)").arg(md->weight).rightJustified(6, ' ');
 
-        str += md->expo<0 ? QString(" Expo(%1%)").arg(md->expo).rightJustified(6,' ') :
-                                      QString(" Expo(+%1%)").arg(md->expo).rightJustified(6, ' ');
+        str += md->expo<0 ? tr(" Expo(%1%)").arg(md->expo).rightJustified(6,' ') :
+                            tr(" Expo(+%1%)").arg(md->expo).rightJustified(6, ' ');
 
         if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
         if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";

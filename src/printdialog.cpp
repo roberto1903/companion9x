@@ -333,7 +333,7 @@ void printDialog::printMixes()
 
 void printDialog::printLimits()
 {
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">");
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append(QString("<tr><td colspan=%1><h2>").arg(NUM_XCHNOUT+1)+tr("Limits")+"</h2></td></tr>");
     str.append("<tr><td>&nbsp;</td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
