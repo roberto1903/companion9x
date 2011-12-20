@@ -158,7 +158,7 @@ ENDMACRO (TODAY)
 MACRO (NOW RESULT)
     IF (WIN32)
         EXECUTE_PROCESS(COMMAND "cmd" " /C time /T" OUTPUT_VARIABLE ${RESULT})
-        string(REGEX REPLACE "(..):(..):(..).*" "\\1:\\2:\\3" ${RESULT} ${${RESULT}})
+        string(REGEX REPLACE "(..):(..).*" "\\1:\\2:00" ${RESULT} ${${RESULT}})
     ELSEIF(UNIX)
         EXECUTE_PROCESS(COMMAND "date" "+%H:%M:%S" OUTPUT_VARIABLE ${RESULT})
         string(REGEX REPLACE "(..):(..):(..).*" "\\1:\\2:\\3" ${RESULT} ${${RESULT}})
@@ -181,7 +181,7 @@ FOREACH( FIRMWARE ${FIRMWARES} )
 ENDFOREACH( FIRMWARE )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  COMMAND svn revert --recursive ./er9x && patch -f -p0 < ./er9x.patch
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
   OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
 )
