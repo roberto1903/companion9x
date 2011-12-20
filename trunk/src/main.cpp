@@ -52,6 +52,11 @@
 #include "mainwindow.h"
 #include "eeprominterface.h"
 
+#ifndef __GNUC__
+#include <windows.h>
+#define sleep(x) Sleep(x*1000)
+#endif
+
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(companion9x);
@@ -71,7 +76,7 @@ int main(int argc, char *argv[])
     if(showSplash)
     {
         splash->show();
-        sleep (SPLASH_TIME);
+        sleep(SPLASH_TIME);
         bool checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
 
         if (checkCompanion9x)
