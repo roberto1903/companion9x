@@ -80,13 +80,13 @@ void ModelEdit::setupExposListWidget()
     QPushButton * qbDown = new QPushButton(this);
     QPushButton * qbClear = new QPushButton(this);
 
-    qbUp->setText("Move Up");
+    qbUp->setText(tr("Move Up"));
     qbUp->setIcon(QIcon(":/images/moveup.png"));
     qbUp->setShortcut(QKeySequence(tr("Ctrl+Up")));
-    qbDown->setText("Move Down");
+    qbDown->setText(tr("Move Down"));
     qbDown->setIcon(QIcon(":/images/movedown.png"));
     qbDown->setShortcut(QKeySequence(tr("Ctrl+Down")));
-    qbClear->setText("Clear Expo Settings");
+    qbClear->setText(tr("Clear Expo Settings"));
     qbClear->setIcon(QIcon(":/images/clear.png"));
 
     ui->exposLayout->addWidget(ExposlistWidget,1,1,1,3);
@@ -113,13 +113,13 @@ void ModelEdit::setupMixerListWidget()
     QPushButton * qbDown = new QPushButton(this);
     QPushButton * qbClear = new QPushButton(this);
 
-    qbUp->setText("Move Up");
+    qbUp->setText(tr("Move Up"));
     qbUp->setIcon(QIcon(":/images/moveup.png"));
     qbUp->setShortcut(QKeySequence(tr("Ctrl+Up")));
-    qbDown->setText("Move Down");
+    qbDown->setText(tr("Move Down"));
     qbDown->setIcon(QIcon(":/images/movedown.png"));
     qbDown->setShortcut(QKeySequence(tr("Ctrl+Down")));
-    qbClear->setText("Clear Mixes");
+    qbClear->setText(tr("Clear Mixes"));
     qbClear->setIcon(QIcon(":/images/clear.png"));
 
     ui->mixersLayout->addWidget(MixerlistWidget,1,1,1,3);
