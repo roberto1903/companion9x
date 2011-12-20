@@ -6,7 +6,6 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-MESSAGE( STATUS "Looking for pthread " )
 FIND_PACKAGE (Threads)
 
 MESSAGE( STATUS "Looking for XercesC " )
@@ -37,6 +36,7 @@ IF( MSVC )
 
   SET(CMAKE_CXX_FLAGS "/EHsc /LD")
   INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
+  SET(CMAKE_THREAD_LIBS_INIT pthreadVC2.lib)
 
 ELSE( )
 
