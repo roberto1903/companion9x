@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     if(showSplash)
     {
         splash->show();
-
+        sleep (SPLASH_TIME);
         bool checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
 
         if (checkCompanion9x)
