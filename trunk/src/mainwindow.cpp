@@ -347,15 +347,16 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
   burnConfigDialog bcd;
   QString programmer = bcd.getProgrammer();
   QStringList args   = bcd.getAVRArgs();
+  QString mcu   = bcd.getMCU();
+
   if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
 
   arguments << "-c" << programmer << "-p";
-
   QSettings settings("companion9x", "companion9x");
   if (settings.value("eeprom_format", 0).toInt() == DNLD_VER_GRUVIN9X_V4)
     arguments << "m2560";
   else
-    arguments << "m64";
+    arguments << mcu;
 
   arguments << args;
   arguments << "-U" << cmd;
