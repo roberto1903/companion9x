@@ -32,36 +32,36 @@ ADD_CUSTOM_COMMAND(
 
 IF( MSVC )
 
-SET(CMAKE_CXX_FLAGS "/EHsc /LD")
-INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
+  SET(CMAKE_CXX_FLAGS "/EHsc /LD")
+  INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
 
 ELSE( )
 
-ADD_CUSTOM_COMMAND(
-  COMMAND make stamp
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x-stable
-  OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
-)
+  ADD_CUSTOM_COMMAND(
+    COMMAND make stamp
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x-stable
+    OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
+  )
 
-ADD_CUSTOM_COMMAND(
-  COMMAND make stamp
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x
-  OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
-)
+  ADD_CUSTOM_COMMAND(
+    COMMAND make stamp
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x
+    OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
+  )
 
-ADD_CUSTOM_COMMAND(
-  COMMAND make stamp
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../open9x
-  OUTPUT ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
-)
+  ADD_CUSTOM_COMMAND(
+    COMMAND make stamp
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../open9x
+    OUTPUT ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
+  )
 
-ADD_CUSTOM_COMMAND(
-  COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
-  OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
-)
+  ADD_CUSTOM_COMMAND(
+    COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
+    OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  )
 
-ENDIF()
+ENDIF( )
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
@@ -217,12 +217,7 @@ TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} )
 
 IF( MSVC )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} C:/Programs/pthreads/Pre-built.2/lib/pthread.lib )
-IF( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-  SET( QTMAIN_LIB qtmaind.lib )
-ELSE( )
-  SET( QTMAIN_LIB qtmain.lib )
-ENDIF( )
-TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_BINARY_DIR}/../lib/${QTMAIN_LIB} )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_QTMAIN_LIBRARY} )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${XERCESC_LIBRARY} )
 # LINK_DIRECTORIES( C:/Programs/pthreads/Pre-built.2/lib )
 ELSE( )
