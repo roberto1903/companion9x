@@ -3713,13 +3713,13 @@ Mode 4:
         <location filename="printdialog.cpp" line="88"/>
         <location filename="printdialog.cpp" line="95"/>
         <source>Count Up</source>
-        <translation>Incrementa</translation>
+        <translation>Incr.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="88"/>
         <location filename="printdialog.cpp" line="95"/>
         <source>Count Down</source>
-        <translation>Decrementa</translation>
+        <translation>Decr.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="89"/>
@@ -3815,12 +3815,12 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="181"/>
         <source>Timer1</source>
-        <translation>Temporizzatore1</translation>
+        <translation>Tempo1</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="182"/>
         <source>Timer2</source>
-        <translation>Temporizzatore2</translation>
+        <translation>Tempo2</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="183"/>
@@ -3886,7 +3886,7 @@ Mode 4:
         <location filename="printdialog.cpp" line="593"/>
         <location filename="printdialog.cpp" line="620"/>
         <source>Switch</source>
-        <translation>Interruttore</translation>
+        <translation>Int.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="195"/>
@@ -3896,12 +3896,12 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="196"/>
         <source>IN</source>
-        <translation>Ingresso</translation>
+        <translation>Ingr</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="196"/>
         <source>OUT</source>
-        <translation>Uscita</translation>
+        <translation>Usc.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="198"/>
@@ -4052,7 +4052,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="498"/>
         <source>Custom Switches</source>
-        <translation>Interruttori personalizzati</translation>
+        <translation type="unfinished">Interruttori personalizzati</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="506"/>
