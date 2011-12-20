@@ -37,33 +37,7 @@ IF( MSVC )
   SET(CMAKE_CXX_FLAGS "/EHsc /LD")
   INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
   SET(CMAKE_THREAD_LIBS_INIT pthreadVC2.lib)
-
-ELSE( )
-
-  ADD_CUSTOM_COMMAND(
-    COMMAND make stamp
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x-stable
-    OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
-  )
-
-  ADD_CUSTOM_COMMAND(
-    COMMAND make stamp
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../gruvin9x
-    OUTPUT ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
-  )
-
-  ADD_CUSTOM_COMMAND(
-    COMMAND make stamp
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../open9x
-    OUTPUT ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
-  )
-
-  ADD_CUSTOM_COMMAND(
-    COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
-    OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
-  )
-
+  
 ENDIF( )
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
@@ -168,8 +142,49 @@ SET( companion9x_RCS
      ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
 )
 
+MACRO (TODAY RESULT)
+    IF (WIN32)
+        EXECUTE_PROCESS(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${RESULT})
+        string(REGEX REPLACE "(..)/(..)/(....).*" "\\1.\\2.\\3" ${RESULT} ${${RESULT}})
+    ELSEIF(UNIX)
+        EXECUTE_PROCESS(COMMAND "date" "+%d/%m/%Y" OUTPUT_VARIABLE ${RESULT})
+        string(REGEX REPLACE "(..)/(..)/(....).*" "\\1.\\2.\\3" ${RESULT} ${${RESULT}})
+    ELSE (WIN32)
+        MESSAGE(SEND_ERROR "date not implemented")
+        SET(${RESULT} 00.00.0000)
+    ENDIF (WIN32)
+ENDMACRO (TODAY)
+
+MACRO (NOW RESULT)
+    IF (WIN32)
+        EXECUTE_PROCESS(COMMAND "cmd" " /C time /T" OUTPUT_VARIABLE ${RESULT})
+        string(REGEX REPLACE "(..):(..):(..).*" "\\1:\\2:\\3" ${RESULT} ${${RESULT}})
+    ELSEIF(UNIX)
+        EXECUTE_PROCESS(COMMAND "date" "+%H:%M:%S" OUTPUT_VARIABLE ${RESULT})
+        string(REGEX REPLACE "(..):(..):(..).*" "\\1:\\2:\\3" ${RESULT} ${${RESULT}})
+    ELSE (WIN32)
+        MESSAGE(SEND_ERROR "time not implemented")
+        SET(${RESULT} 00:00:00)
+    ENDIF (WIN32)
+ENDMACRO (NOW)
+
+TODAY(DATE)
+NOW(TIME)
+
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
+
+SET( FIRMWARES gruvin9x-stable gruvin9x open9x )
+FOREACH( FIRMWARE ${FIRMWARES} )
+  Subversion_WC_INFO( ${PROJECT_SOURCE_DIR}/../${FIRMWARE} G9X )
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-gruvin9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-gruvin9x.h @ONLY)
+ENDFOREACH( FIRMWARE )
+
+ADD_CUSTOM_COMMAND(
+  COMMAND svn revert --recursive ./er9x && patch -f -p0 -r - < ./er9x.patch && touch ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
+  OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+)
 
 IF( WIN32 )
   SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )
