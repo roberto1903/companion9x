@@ -1459,11 +1459,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation>&amp;Ajouter</translation>
+        <translation type="unfinished">&amp;Ajouter</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Couper</translation>
+        <translation type="unfinished">&amp;Couper</translation>
     </message>
     <message>
         <source>HIGH</source>
@@ -1479,11 +1479,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Copier</translation>
+        <translation type="unfinished">&amp;Copier</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edition</translation>
+        <translation type="unfinished">&amp;Edition</translation>
     </message>
     <message>
         <source>Simulate</source>
@@ -1491,7 +1491,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter</source>
-        <translation>Entrée</translation>
+        <translation type="unfinished">Entrée</translation>
     </message>
     <message>
         <source>Mixes</source>
@@ -1511,11 +1511,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> Slow(u%1:d%2)</source>
-        <translation> Ralentissement(u%1:d%2)</translation>
+        <translation type="unfinished"> Ralentissement(u%1:d%2)</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Coller</translation>
+        <translation type="unfinished">&amp;Coller</translation>
     </message>
     <message>
         <source>Elevator</source>
@@ -1543,39 +1543,15 @@ Gauche</translation>
     </message>
     <message>
         <source> Delay(u%1:d%2)</source>
-        <translation> Délai(u%1:d%2)</translation>
-    </message>
-    <message>
-        <source>CH%1%2</source>
-        <translation></translation>
+        <translation type="unfinished"> Délai(u%1:d%2)</translation>
     </message>
     <message>
         <source>Coarse</source>
         <translation>Elevée</translation>
     </message>
     <message>
-        <source>Ctrl+A</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+U</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
+        <translation type="unfinished">Supprimer</translation>
     </message>
     <message>
         <source>Curves</source>
@@ -1637,7 +1613,7 @@ Gauche</translation>
     </message>
     <message>
         <source> noTrim</source>
-        <translation> PasDeTrim</translation>
+        <translation type="unfinished"> PasDeTrim</translation>
     </message>
     <message>
         <source>Aileron</source>
@@ -1673,7 +1649,7 @@ Gauche</translation>
     </message>
     <message>
         <source> Warn(%1)</source>
-        <translation> Alerte(%1)</translation>
+        <translation type="unfinished"> Alerte(%1)</translation>
     </message>
     <message>
         <source>Protocol</source>
@@ -1681,7 +1657,7 @@ Gauche</translation>
     </message>
     <message>
         <source> Curve(%1)</source>
-        <translation> Courbe(%1)</translation>
+        <translation type="unfinished"> Courbe(%1)</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -1689,7 +1665,7 @@ Gauche</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>Curve 1</source>
@@ -1737,7 +1713,7 @@ Gauche</translation>
     </message>
     <message>
         <source> Switch(</source>
-        <translation> Inter(</translation>
+        <translation type="unfinished"> Inter(</translation>
     </message>
     <message>
         <source>CSwitch1</source>
@@ -1765,7 +1741,7 @@ Gauche</translation>
     </message>
     <message>
         <source>Delete Selected Mixes?</source>
-        <translation>Supprimer mixages sélectionnés ?</translation>
+        <translation type="unfinished">Supprimer mixages sélectionnés ?</translation>
     </message>
     <message>
         <source>Timer Direction</source>
@@ -1829,7 +1805,7 @@ Gauche</translation>
     </message>
     <message>
         <source> Offset(%1%)</source>
-        <translation> Décalage(%1%)</translation>
+        <translation type="unfinished"> Décalage(%1%)</translation>
     </message>
     <message>
         <source>Channels</source>
@@ -1879,7 +1855,7 @@ Droite</translation>
     </message>
     <message>
         <source>Du&amp;plicate</source>
-        <translation>D&amp;upliquer</translation>
+        <translation type="unfinished">D&amp;upliquer</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -1955,27 +1931,27 @@ Droite</translation>
     </message>
     <message>
         <source>Apply Template?</source>
-        <translation>Appliquer le gabarit ?</translation>
+        <translation type="unfinished">Appliquer le gabarit ?</translation>
     </message>
     <message>
         <source>Apply template &quot;%1&quot;?</source>
-        <translation>Appliquer le gabarit &quot;%1&quot; ?</translation>
+        <translation type="unfinished">Appliquer le gabarit &quot;%1&quot; ?</translation>
     </message>
     <message>
         <source>Clear Mixes?</source>
-        <translation>Effacer les mixages ?</translation>
+        <translation type="unfinished">Effacer les mixages ?</translation>
     </message>
     <message>
         <source>Really clear all the mixes?</source>
-        <translation>Êtes-vous sûr de vraiment vouloir effacer tous les mixages ?</translation>
+        <translation type="unfinished">Êtes-vous sûr de vraiment vouloir effacer tous les mixages ?</translation>
     </message>
     <message>
         <source>Clear Curves?</source>
-        <translation>Effacer les courbes ?</translation>
+        <translation type="unfinished">Effacer les courbes ?</translation>
     </message>
     <message>
         <source>Really clear all the curves?</source>
-        <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les courbes ?</translation>
+        <translation type="unfinished">Êtes-vous sûr de vraiment vouloir effacer toutes les courbes ?</translation>
     </message>
     <message>
         <source>Swash Ring</source>
@@ -2203,39 +2179,71 @@ Droite</translation>
     </message>
     <message>
         <source> Phase(</source>
-        <translation> Phase(</translation>
+        <translation type="unfinished"> Phase(</translation>
     </message>
     <message>
         <source>Editing curve %1</source>
-        <translation>Édition de la courbe %1</translation>
+        <translation type="unfinished">Édition de la courbe %1</translation>
     </message>
     <message>
         <source>Delete Selected Expos?</source>
-        <translation>Supprimer les expos sélectionnés ?</translation>
+        <translation type="unfinished">Supprimer les expos sélectionnés ?</translation>
     </message>
     <message>
         <source>Clear Expos?</source>
-        <translation>Effacer les expos ?</translation>
+        <translation type="unfinished">Effacer les expos ?</translation>
     </message>
     <message>
         <source>Really clear all the expos?</source>
-        <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
+        <translation type="unfinished">Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
     </message>
     <message>
         <source>Weight(%1%)</source>
-        <translation>Ratio(%1%)</translation>
+        <translation type="unfinished">Ratio(%1%)</translation>
     </message>
     <message>
         <source>Weight(+%1%)</source>
-        <translation>Ratio(+%1%)</translation>
+        <translation type="unfinished">Ratio(+%1%)</translation>
     </message>
     <message>
         <source> Expo(%1%)</source>
-        <translation> Expo(%1%)</translation>
+        <translation type="unfinished"> Expo(%1%)</translation>
     </message>
     <message>
         <source> Expo(+%1%)</source>
-        <translation> Expo(+%1%)</translation>
+        <translation type="unfinished"> Expo(+%1%)</translation>
+    </message>
+    <message>
+        <source>Clear Expo Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Mixes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CH%1%2</source>
+        <translation type="unfinished">VOIE%1%2</translation>
+    </message>
+    <message>
+        <source>Ctrl+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished">Ctrl+C</translation>
+    </message>
+    <message>
+        <source>Ctrl+X</source>
+        <translation type="unfinished">Ctrl+X</translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation type="unfinished">Ctrl+V</translation>
+    </message>
+    <message>
+        <source>Ctrl+U</source>
+        <translation type="unfinished">Ctlf+U</translation>
     </message>
 </context>
 <context>
@@ -2308,6 +2316,10 @@ Droite</translation>
         <source>Delete Selected Models?</source>
         <translation>Supprimer les modèles sélectionnés ?</translation>
     </message>
+    <message>
+        <source>Alt+R</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -2360,10 +2372,6 @@ Droite</translation>
     <message>
         <source>Port</source>
         <translation>Port</translation>
-    </message>
-    <message>
-        <source>companion9x</source>
-        <translation></translation>
     </message>
     <message>
         <source>List all available programmers.</source>
@@ -2469,6 +2477,30 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
     <message>
         <source>avrdoper</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>mcu (not used for V4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m128</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m328p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m2560</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>eePe</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
