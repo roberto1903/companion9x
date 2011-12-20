@@ -181,7 +181,7 @@ FOREACH( FIRMWARE ${FIRMWARES} )
 ENDFOREACH( FIRMWARE )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND svn revert --recursive ./er9x && patch -f -p0 < ./er9x.patch
+  COMMAND svn revert --recursive ./er9x && cmake -E remove -f ./er9x/simpgmspace.cpp && patch -f -p0 < ./er9x.patch
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
   OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
 )
