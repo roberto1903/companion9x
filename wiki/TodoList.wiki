@@ -11,7 +11,7 @@
   * ~~Try to catch exceptions from external firmwares and display them as errors (rather than exiting with a SEGFAULT + core dumped)~~
   * Design a new dialog box with a simple progress bar, based on avrdude output interpretation. With a details hide / show button which shows what we have today
   * ~~Recent documents easier to access~~
-  * Implement a correct handling of Tx modes so that it's possible to change the mode without messing everything (same as g9x issue 63)
+  * ~~Implement a correct handling of Tx modes so that it's possible to change the mode without messing everything (same as g9x issue 63)~~
   * Checking updates and download of selected firmware.
   * ~~Add an entry in the contextual menu to change the current model~~
   * Change the icon which comes from eePe (a graphist is welcome!!)
