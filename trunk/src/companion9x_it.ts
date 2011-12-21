@@ -833,12 +833,12 @@ Mode 4:
     <message>
         <location filename="mainwindow.cpp" line="501"/>
         <source>Version %1 (revision %2), %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione %1 (revisione %2), %3</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="502"/>
         <source>The companion9x project was originally forked from eePe</source>
-        <translation type="unfinished"></translation>
+        <translation>Il progetto companion9x è stato inizialmente derivato da eePe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="503"/>
@@ -3052,7 +3052,7 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
     <message>
         <location filename="burnconfigdialog.cpp" line="185"/>
         <source>companion9x</source>
-        <translation type="unfinished">companion9x</translation>
+        <translation>companion9x</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.cpp" line="186"/>
@@ -3621,7 +3621,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="196"/>
         <source>IN</source>
-        <translation>Ingr</translation>
+        <translation>Ingr.</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="196"/>
