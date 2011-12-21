@@ -113,34 +113,92 @@ QString getTimerMode(int tm)
 
 }
 
-
-
-
-#define MODI_STR  "RUD ELE THR AIL RUD THR ELE AIL AIL ELE THR RUD AIL THR ELE RUD "
-#define SRCP_STR  "P1  P2  P3  MAX FULLCYC1CYC2CYC3PPM1PPM2PPM3PPM4PPM5PPM6PPM7PPM8CH1 CH2 CH3 CH4 CH5 CH6 CH7 CH8 CH9 CH10CH11CH12CH13CH14CH15CH16CH17CH18CH19CH20CH21CH22CH23CH24CH25CH26CH27CH28CH29CH30"
-
-QString getSourceStr(int stickMode=1, int idx=0)
+QString getSourceStr(int idx)
 {
-    if(!idx)
-        return "----";
-    else if(idx>=1 && idx<=4)
-    {
-        QString modi = MODI_STR;
-        return modi.mid((idx-1)*4+stickMode*16,4);
-    }
-    else
-    {
-        QString str = SRCP_STR;
-        return str.mid((idx-5)*4,4);
-    }
-
-    return "";
+  switch (idx) {
+    case 0:
+      return QObject::tr("----");
+    case 1:
+      return QObject::tr("RUD");
+    case 2:
+      return QObject::tr("ELE");
+    case 3:
+      return QObject::tr("THR");
+    case 4:
+      return QObject::tr("AIL");
+    case 5:
+      return QObject::tr("P1");
+    case 6:
+      return QObject::tr("P2");
+    case 7:
+      return QObject::tr("P3");
+    case 8:
+      return QObject::tr("MAX");
+    case 9:
+      return QObject::tr("FULL");
+    case 10:
+      return QObject::tr("CYC1");
+    case 11:
+      return QObject::tr("CYC2");
+    case 12:
+      return QObject::tr("CYC3");
+    case 13:
+      return QObject::tr("PPM1");
+    case 14:
+      return QObject::tr("PPM2");
+    case 15:
+      return QObject::tr("PPM3");
+    case 16:
+      return QObject::tr("PPM4");
+    case 17:
+      return QObject::tr("PPM5");
+    case 18:
+      return QObject::tr("PPM6");
+    case 19:
+      return QObject::tr("PPM7");
+    case 20:
+      return QObject::tr("PPM8");
+    case 21:
+      return QObject::tr("CH1");
+    case 22:
+      return QObject::tr("CH2");
+    case 23:
+      return QObject::tr("CH3");
+    case 24:
+      return QObject::tr("CH4");
+    case 25:
+      return QObject::tr("CH5");
+    case 26:
+      return QObject::tr("CH6");
+    case 27:
+      return QObject::tr("CH7");
+    case 28:
+      return QObject::tr("CH8");
+    case 29:
+      return QObject::tr("CH9");
+    case 30:
+      return QObject::tr("CH10");
+    case 31:
+      return QObject::tr("CH11");
+    case 32:
+      return QObject::tr("CH12");
+    case 33:
+      return QObject::tr("CH13");
+    case 34:
+      return QObject::tr("CH14");
+    case 35:
+      return QObject::tr("CH15");
+    case 36:
+      return QObject::tr("CH16");
+    default:
+      return "";
+  }
 }
 
 void populateSourceCB(QComboBox *b, int stickMode, int value)
 {
     b->clear();
-    for(int i=0; i<37; i++) b->addItem(getSourceStr(stickMode,i));
+    for(int i=0; i<37; i++) b->addItem(getSourceStr(i));
     b->setCurrentIndex(value);
     b->setMaxVisibleItems(10);
 }

@@ -49,13 +49,18 @@ const int Open9xInterface::getEEpromSize() {
 }
 
 template <class T>
-void Open9xInterface::loadModel(ModelData &model)
+void Open9xInterface::loadModel(ModelData &model, unsigned int stickMode)
 {
   T _model;
-  if (efile->readRlc2((uint8_t*)&_model, sizeof(T)))
+  if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
+    if (stickMode) {
+      applyStickModeToModel(_model, stickMode);
+    }
     model = _model;
-  else
+  }
+  else {
     model.clear();
+  }
 }
 
 template <class T>
@@ -114,7 +119,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   for (int i=0; i<MAX_MODELS; i++) {
     efile->openRd(FILE_MODEL(i));
     if (version == 201) {
-      loadModel<Open9xModelData_v201>(radioData.models[i]);
+      loadModel<Open9xModelData_v201>(radioData.models[i], radioData.generalSettings.stickMode+1);
     }
     else {
       std::cout << "ko\n";
@@ -140,6 +145,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Open9xModelData open9xModel(radioData.models[i]);
+      if (1/*version < */) {
+        applyStickModeToModel(open9xModel, radioData.generalSettings.stickMode+1);
+      }
       sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
       if(sz != sizeof(Open9xModelData)) {
         return 0;

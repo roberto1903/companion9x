@@ -376,7 +376,7 @@ void ModelEdit::tabExpos()
         while(curDest<md->chn-1)
         {
             curDest++;
-			str = tr(getSourceStr(g_eeGeneral.stickMode, curDest+1).toAscii());
+            str = tr(getSourceStr(curDest+1).toAscii());
             qba.clear();
             qba.append((quint8)-curDest-1);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -386,7 +386,7 @@ void ModelEdit::tabExpos()
 
         if(curDest!=md->chn)
         {
-			str = tr(getSourceStr(g_eeGeneral.stickMode,md->chn+1).toAscii());
+            str = tr(getSourceStr(md->chn+1).toAscii());
             curDest = md->chn;
         }
         else
@@ -424,7 +424,7 @@ void ModelEdit::tabExpos()
     while(curDest<NUM_STICKS-1)
     {
         curDest++;
-        QString str = getSourceStr(g_eeGeneral.stickMode,curDest+1);
+        QString str = getSourceStr(curDest+1);
         qba.clear();
         qba.append((quint8)-curDest-1);
         QListWidgetItem *itm = new QListWidgetItem(str);
@@ -480,10 +480,7 @@ void ModelEdit::tabMixes()
         str += md->weight<0 ? QString(" %1%").arg(md->weight).rightJustified(6,' ') :
                               QString(" +%1%").arg(md->weight).rightJustified(6, ' ');
 
-
-        //QString srcStr = SRC_STR;
-        //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
-        str += getSourceStr(g_eeGeneral.stickMode,md->srcRaw);
+        str += getSourceStr(md->srcRaw);
 
         if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
         if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";

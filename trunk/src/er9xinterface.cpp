@@ -48,6 +48,28 @@ const int Er9xInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
+inline void applyStickModeToModel(Er9xModelData model, unsigned int mode)
+{
+  for (int i=0; i<2; i++) {
+    unsigned int stick = applyStickMode(i, mode);
+    Er9xExpoData tmp = model.expoData[i];
+    model.expoData[i] = model.expoData[stick];
+    model.expoData[stick] = tmp;
+  }
+  for (int i=0; i<MAX_MIXERS; i++)
+    model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
+  for (int i=0; i<NUM_CSW; i++) {
+    switch (CS_STATE(model.customSw[i].func)) {
+      case CS_VCOMP:
+        model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
+        // no break
+      case CS_VOFS:
+        model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+    }
+  }
+  model.swashCollectiveSource = applyStickMode(model.swashCollectiveSource, mode);
+}
+
 bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying er9x import... ";
@@ -98,6 +120,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       radioData.models[i].clear();
     }
     else {
+      applyStickModeToModel(er9xModel, radioData.generalSettings.stickMode+1);
       radioData.models[i] = er9xModel;
     } 
   }
@@ -120,6 +143,7 @@ int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData)
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Er9xModelData er9xModel(radioData.models[i]);
+      applyStickModeToModel(er9xModel, radioData.generalSettings.stickMode+1);
       sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
       if(sz != sizeof(Er9xModelData)) {
         return 0;

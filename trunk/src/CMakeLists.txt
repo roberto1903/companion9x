@@ -35,7 +35,7 @@ ADD_CUSTOM_COMMAND(
 IF( MSVC )
 
   SET(CMAKE_CXX_FLAGS "/EHsc /LD")
-  INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild C:/Programs/pthreads/pthreads.2)
+  INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/winbuild)
   SET(CMAKE_THREAD_LIBS_INIT pthreadVC2.lib)
   
 ENDIF( )
@@ -60,7 +60,7 @@ SET( companion9x_SRCS
      ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
-     ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+     ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
      # th9xeeprom.cpp
      # th9xinterface.cpp
      er9xeeprom.cpp
@@ -181,9 +181,10 @@ FOREACH( FIRMWARE ${FIRMWARES} )
 ENDFOREACH( FIRMWARE )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND svn revert --recursive ./er9x && cmake -E remove -f ./er9x/simpgmspace.cpp && patch -f -p0 < ./er9x.patch
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/..
-  OUTPUT ${PROJECT_SOURCE_DIR}/../er9x/er9x_patch_applied.h
+  COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
+  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+  OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
+  DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
 )
 
 IF( WIN32 )
@@ -241,7 +242,8 @@ IF( WIN32 )
   ELSE( )
     SET( NSI_IN_FILE companion9x-msys.nsi.in )
   ENDIF( )
-  
+
+  SET( SYSDIR "$ENV{windir}/system32" )  
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/../winbuild/${NSI_IN_FILE} ${CMAKE_CURRENT_BINARY_DIR}/companion9x.nsi @ONLY)     
 
   FIND_PROGRAM(NSIS_EXE makensis.exe PATHS

@@ -47,7 +47,7 @@ class Open9xInterface : public EEPROMInterface
   protected:
 
     template <class T>
-    void loadModel(ModelData &model);
+    void loadModel(ModelData &model, unsigned int stickMode=0);
 
     template <class T>
     bool loadGeneral(GeneralSettings &settings);

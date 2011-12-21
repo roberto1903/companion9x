@@ -82,10 +82,10 @@ Section "companion9x" SecDummy
   
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
   File "Release\companion9x.exe"
-  File "C:\Programs\pthreads\Pre-built.2\lib\pthreadVSE2.dll"
+  File "@SYSDIR@\pthreadVC2.dll"
   File "C:\Programs\xerces-vc\bin\xerces-c_3_1.dll"
-  File "C:\WINNT\system32\msvcp100.dll"
-  File "C:\WINNT\system32\msvcr100.dll"
+  File "@SYSDIR@\msvcp100.dll"
+  File "@SYSDIR@\msvcr100.dll"
   File "@QT_BINARY_DIR@\QtCore4.dll"
   File "@QT_BINARY_DIR@\QtGui4.dll"
   File "@QT_BINARY_DIR@\QtNetwork4.dll"
@@ -131,7 +131,7 @@ SectionEnd
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecDummy} $(DESC_SecDummy)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecDummy} $(DESC_SecDummy)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
  
 ;--------------------------------
@@ -139,12 +139,14 @@ SectionEnd
 
 Section "Uninstall"
 
-  ;ADD YOUR OWN FILES HERE...
-
+  ;ADD YOUR OWN FILES HERE...  
+  
   Delete "$INSTDIR\license.txt"
   Delete "$INSTDIR\companion9x.exe"
-  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-  Delete "$INSTDIR\mingwm10.dll"
+  Delete "$INSTDIR\pthreadVC2.dll"
+  Delete "$INSTDIR\xerces-c_3_1.dll"
+  Delete "$INSTDIR\msvcp100.dll"
+  Delete "$INSTDIR\msvcr100.dll"
   Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\QtGui4.dll"
   Delete "$INSTDIR\QtNetwork4.dll"

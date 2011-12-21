@@ -50,7 +50,7 @@ class Gruvin9xInterface : public EEPROMInterface
   protected:
 
     template <class T>
-    void loadModel(ModelData &model, int version=2);
+    void loadModel(ModelData &model, unsigned int stickMode=0, int version=2);
 
     template <class T>
     bool loadGeneral(GeneralSettings &settings, int version=2);

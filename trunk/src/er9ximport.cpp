@@ -12,17 +12,17 @@
 
 namespace Er9x {
 
-#include "../er9x/simpgmspace.h"
-#include "../er9x/er9x.cpp"
-#include "../er9x/stamp.cpp"
-#include "../er9x/menus.cpp"
-#include "../er9x/pers.cpp"
-#include "../er9x/file.cpp"
-#include "../er9x/lcd.cpp"
-#include "../er9x/drivers.cpp"
-#include "../er9x/simpgmspace.cpp"
-#include "../er9x/templates.cpp"
-#include "../er9x/audio.cpp"
+#include "./er9x/simpgmspace.h"
+#include "./er9x/er9x.cpp"
+#include "./er9x/stamp.cpp"
+#include "./er9x/menus.cpp"
+#include "./er9x/pers.cpp"
+#include "./er9x/file.cpp"
+#include "./er9x/lcd.cpp"
+#include "./er9x/drivers.cpp"
+#include "./er9x/simpgmspace.cpp"
+#include "./er9x/templates.cpp"
+#include "./er9x/audio.cpp"
 
 int16_t g_anas[7];
 
