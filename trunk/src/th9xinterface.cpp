@@ -17,6 +17,7 @@
 #include <iostream>
 #include "th9xinterface.h"
 #include "th9xeeprom.h"
+#include "th9xsimulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -36,6 +37,15 @@ efile(new EFile())
 Th9xInterface::~Th9xInterface()
 {
   delete efile;
+}
+
+const char * Th9xInterface::getName()
+{
+  return "Th9x";
+}
+
+const int Th9xInterface::getEEpromSize() {
+  return EESIZE_STOCK;
 }
 
 bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
@@ -137,16 +147,36 @@ int Th9xInterface::getSize(ModelData &model)
   return efile->size(FILE_TMP);
 }
 
+int Th9xInterface::getSize(GeneralSettings &settings)
+{
+  uint8_t tmp[EESIZE_V4];
+  efile->EeFsInit(tmp, EESIZE_V4, true);
+
+  Th9xGeneral th9xGeneral(settings);
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
+  if(sz != sizeof(th9xGeneral)) {
+    return -1;
+  }
+  return efile->size(FILE_TMP);
+}
+
 int Th9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
     case OwnerName:
-      return 10;
+      return 0;
     case Timers:
       return 1;
     case FuncSwitches:
       return 0;
+    case Simulation:
+      return 1;
     default:
       return 0;
   }
+}
+
+SimulatorInterface * Th9xInterface::getSimulator()
+{
+  return new Th9xSimulator(this);
 }
