@@ -214,6 +214,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
   memset(this, 0, sizeof(t_Th9xModelData));
 
   if (c9x.used) {
+#if 0
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
     tmrMode = c9x.timers[0].mode;
@@ -251,12 +252,13 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
         curves9[i][j] = c9x.curves9[i][j];
     for (int i=0; i<NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
-
+#endif
   }
 }
 
 t_Th9xModelData::operator ModelData ()
 {
+#if 0
   ModelData c9x;
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
@@ -333,5 +335,6 @@ t_Th9xModelData::operator ModelData ()
     c9x.customSw[i] = customSw[i];
 
   return c9x;
+#endif
 }
 

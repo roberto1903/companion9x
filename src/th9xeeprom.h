@@ -159,7 +159,7 @@ typedef struct t_Th9xTrimData {
   int8_t  itrim:6; //trim index
   uint8_t tmode:2;
 
-  t_Th9xTrimData();
+  t_Th9xTrimData() { }
 } __attribute__((packed)) Th9xTrimData;
 
 typedef struct t_Th9xModelData {

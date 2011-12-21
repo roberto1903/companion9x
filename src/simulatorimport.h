@@ -143,14 +143,22 @@ switch (inputs.sId0) {
 
 // keyboad
 pinb &= ~ 0x7e;
+#ifdef PCBV4
 pinl &= ~ 0x3f; // for v4
-
 if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); pinl |= (1<<INP_P_KEY_MEN); }
 if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); pinl |= (1<<INP_P_KEY_EXT); }
 if (inputs.up) { pinb |= (1<<INP_B_KEY_UP); pinl |= (1<<INP_P_KEY_UP); }
 if (inputs.down) { pinb |= (1<<INP_B_KEY_DWN); pinl |= (1<<INP_P_KEY_DWN); }
 if (inputs.left) { pinb |= (1<<INP_B_KEY_LFT); pinl |= (1<<INP_P_KEY_LFT); }
 if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); pinl |= (1<<INP_P_KEY_RGT); }
+#else
+if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); }
+if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); }
+if (inputs.up) { pinb |= (1<<INP_B_KEY_UP); }
+if (inputs.down) { pinb |= (1<<INP_B_KEY_DWN); }
+if (inputs.left) { pinb |= (1<<INP_B_KEY_LFT); }
+if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); }
+#endif
 
 #ifdef PCBV4
 // rotary encoders
