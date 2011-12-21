@@ -376,7 +376,7 @@ void ModelEdit::tabExpos()
         while(curDest<md->chn-1)
         {
             curDest++;
-            str = tr(getSourceStr(curDest+1).toAscii());
+            str = getSourceStr(curDest+1).toAscii();
             qba.clear();
             qba.append((quint8)-curDest-1);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -386,11 +386,12 @@ void ModelEdit::tabExpos()
 
         if(curDest!=md->chn)
         {
-            str = tr(getSourceStr(md->chn+1).toAscii());
+            str = getSourceStr(md->chn+1).toAscii();
             curDest = md->chn;
         }
-        else
-            str = "    ";
+        else {
+            str = "   ";
+        }
 
         switch (md->mode)
         {
