@@ -195,7 +195,7 @@ void printDialog::printSetup()
     str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
     str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
     for (i=0; i<4; i++) {
-        str.append(tr("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(g_eeGeneral->stickMode, i+1)));
+      str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
     }
     str.append("</tr>");
     for (i=0; i<MAX_PHASES; i++) {
@@ -231,7 +231,7 @@ void printDialog::printExpo()
         str.append("<tr><td><font size=+1 face='Courier New'>");
         if(lastCHN!=ed->chn) {
             lastCHN=ed->chn;
-            str.append("<b>"+getSourceStr(g_eeGeneral->stickMode, ed->chn+1)+"</b>");
+            str.append("<b>"+getSourceStr(ed->chn+1)+"</b>");
         }
         else
             str.append("<b>&nbsp;</b>");
@@ -300,7 +300,7 @@ void printDialog::printMixes()
                               QString(" +%1%%").arg(md->weight).rightJustified(6, ' ');
         //QString srcStr = SRC_STR;
         //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
-        str += getSourceStr(g_eeGeneral->stickMode,md->srcRaw);
+        str += getSourceStr(md->srcRaw);
         if(md->swtch) str += " "+ tr("Switch")+ "(" + getSWName(md->swtch) + ")";
         if(md->carryTrim) str += " "+ tr("noTrim");
         if(md->sOffset)  str += tr("Offset")+QString(" %1%%)").arg(md->sOffset);
@@ -494,7 +494,7 @@ void printDialog::printCurves()
 void printDialog::printSwitches()
 {
     int sc=0;
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">");
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
@@ -509,7 +509,7 @@ void printDialog::printSwitches()
             {
             case CS_VOFS:
                 tstr = g_model->customSw[i].v1 ?
-                       getSourceStr(g_eeGeneral->stickMode,g_model->customSw[i].v1) :
+                       getSourceStr(g_model->customSw[i].v1) :
                        "0";
                 tstr.remove(" ");
                 if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_ANEG)
@@ -540,7 +540,7 @@ void printDialog::printSwitches()
                 break;
             case CS_VCOMP:
                 tstr = g_model->customSw[i].v1 ?
-                       getSourceStr(g_eeGeneral->stickMode,g_model->customSw[i].v1) :
+                       getSourceStr(g_model->customSw[i].v1) :
                        "0";
                 switch (g_model->customSw[i].func)
                 {
@@ -566,7 +566,7 @@ void printDialog::printSwitches()
                     break;
                 }
                 tstr += g_model->customSw[i].v2 ?
-                        getSourceStr(g_eeGeneral->stickMode,g_model->customSw[i].v2) :
+                        getSourceStr(g_model->customSw[i].v2) :
                         "0";
                 break;
             default:
@@ -586,7 +586,7 @@ void printDialog::printSwitches()
 void printDialog::printSafetySwitches()
 {
     int sc=0;
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">");
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td><h2>"+tr("Safety Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3><tr>");
     str.append("<td width=\"60\">&nbsp;</td>");
@@ -613,7 +613,7 @@ void printDialog::printSafetySwitches()
 void printDialog::printFSwitches()
 {
     int sc=0;
-    QString str = tr("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">");
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3><tr>");
     str.append("<td width=\"60\">&nbsp;</td>");

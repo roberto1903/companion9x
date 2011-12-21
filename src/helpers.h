@@ -30,7 +30,7 @@ void populateCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, int stickMode=1, int value=0);
 void populateCSWCB(QComboBox *b, int value);
-QString getSourceStr(int stickMode, int idx);
+QString getSourceStr(int idx);
 QString getTimerMode(int tm);
 QString getPhaseName(int val);
 QString getSWName(int val);

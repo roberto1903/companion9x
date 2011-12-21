@@ -164,8 +164,6 @@ Index: er9x/er9x.h
  #include "file.h"
  //
  //                  elev                        thr
-Index: er9x/er9x_patch_applied.h
-===================================================================
 Index: er9x/file.cpp
 ===================================================================
 --- er9x/file.cpp	(revision 646)

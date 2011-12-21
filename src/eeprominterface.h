@@ -35,7 +35,7 @@
 #define EESIZE_STOCK   2048
 #define EESIZE_V4      4096
 
-const uint8_t modn12x3[4][4]= {
+const uint8_t modn12x3[4][4]= { // TODO delete it?
   {1, 2, 3, 4},
   {1, 3, 2, 4},
   {4, 2, 3, 1},
@@ -113,6 +113,7 @@ const uint8_t modn12x3[4][4]= {
 #define PROTO_SILV_C     3
 #define PROTO_TRACER_CTP1009 4
 #define PROT_MAX         4
+// TODO review it
 #define PROT_STR "PPM   SILV_ASILV_BSILV_CTRAC09"
 #define PROT_STR_LEN     6
 
@@ -126,8 +127,7 @@ const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second 
 1,2,3,4 , 1,2,4,3 , 1,3,2,4 , 1,3,4,2 , 1,4,2,3 , 1,4,3,2,
 2,1,3,4 , 2,1,4,3 , 2,3,1,4 , 2,3,4,1 , 2,4,1,3 , 2,4,3,1,
 3,1,2,4 , 3,1,4,2 , 3,2,1,4 , 3,2,4,1 , 3,4,1,2 , 3,4,2,1,
-4,1,2,3 , 4,1,3,2 , 4,2,1,3 , 4,2,3,1 , 4,3,1,2 , 4,3,2,1    };
-
+4,1,2,3 , 4,1,3,2 , 4,2,1,3 , 4,2,3,1 , 4,3,1,2 , 4,3,2,1    }; // TODO delete it?
 
 enum EnumKeys {
   KEY_MENU ,
@@ -518,6 +518,52 @@ class EEPROMInterface
 /* EEPROM string conversion functions */
 void setEEPROMString(char *dst, const char *src, int size);
 void getEEPROMString(char *dst, const char *src, int size);
+
+inline int applyStickMode(int stick, unsigned int mode)
+{
+  const unsigned int stickModes[]= {
+      1, 2, 3, 4,
+      1, 3, 2, 4,
+      4, 2, 3, 1,
+      4, 3, 2, 1 };
+
+  if (stick >= 1 && stick <= 4)
+    return stickModes[(mode-1)*4 + stick - 1];
+  else
+    return stick;
+}
+
+template <class T>
+inline void applyStickModeToModel(T & model, unsigned int mode)
+{
+  T model_copy = model;
+
+  for (int i=0; i<MAX_EXPOS; i++) {
+    if (model.expoData[i].mode)
+      model_copy.expoData[i].chn = applyStickMode(model.expoData[i].chn+1, mode) - 1;
+  }
+
+  int index=0;
+  for (int i=0; i<NUM_STICKS; i++) {
+    for (int e=0; e<MAX_EXPOS; e++) {
+      if (model_copy.expoData[e].mode && model_copy.expoData[e].chn == i)
+        model.expoData[index++] = model_copy.expoData[e];
+    }
+  }
+
+  for (int i=0; i<MAX_MIXERS; i++)
+    model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
+  for (int i=0; i<NUM_CSW; i++) {
+    switch (CS_STATE(model.customSw[i].func)) {
+      case CS_VCOMP:
+        model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
+        // no break
+      case CS_VOFS:
+        model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+    }
+  }
+  model.swashR.collectiveSource = applyStickMode(model.swashR.collectiveSource, mode);
+}
 
 void RegisterEepromInterfaces();
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
