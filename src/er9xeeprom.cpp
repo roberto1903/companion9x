@@ -340,7 +340,34 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
       mixData[i] = eepe.mixData[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       limitData[i] = eepe.limitData[i];
-    // TODO expoData
+
+    // expoData
+    for (uint8_t i=0; i<4; i++) {
+      for (uint8_t e=0; e<MAX_EXPOS && eepe.expoData[e].mode; e++) {
+        if (eepe.expoData[e].chn == i) {
+          unsigned int pos = 0;
+          if (eepe.expoData[e].swtch) {
+            if (!expoData[i].drSw1) {
+              expoData[i].drSw1 = eepe.expoData[e].swtch;
+              pos = 1;
+            }
+            else if (!expoData[i].drSw2) {
+              expoData[i].drSw2 = eepe.expoData[e].swtch;
+              pos = 2;
+            }
+          }
+          if (eepe.expoData[e].mode & 1) {
+            expoData[i].expo[pos][0][1] = eepe.expoData[e].expo;
+            expoData[i].expo[pos][1][1] = eepe.expoData[e].weight - 100;
+          }
+          if (eepe.expoData[e].mode & 2) {
+            expoData[i].expo[pos][0][0] = eepe.expoData[e].expo;
+            expoData[i].expo[pos][1][0] = eepe.expoData[e].weight - 100;
+          }
+        }
+      }
+    }
+
     for (int i=0; i<NUM_STICKS; i++)
       trim[i] = std::max(-125, std::min(125, eepe.phaseData[0].trim[i]));
     for (int i=0; i<MAX_CURVE5; i++)
