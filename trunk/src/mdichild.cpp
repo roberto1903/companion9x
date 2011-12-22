@@ -467,7 +467,7 @@ void MdiChild::simulate()
     if(ui->modelsList->currentRow()<1) return;
     simulatorDialog *sd = new simulatorDialog(this);
     sd->loadParams(radioData, ui->modelsList->currentRow()-1);
-    sd->show();
+    sd->exec();
 }
 
 void MdiChild::print()
