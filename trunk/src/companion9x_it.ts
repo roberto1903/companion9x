@@ -1934,7 +1934,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="2330"/>
         <source>Mixes</source>
-        <translation>Mscelazioni</translation>
+        <translation>Miscelazioni</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2340"/>
@@ -3773,7 +3773,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="498"/>
         <source>Custom Switches</source>
-        <translation type="unfinished">Interruttori personalizzati</translation>
+        <translation>Interruttori personalizzati</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="506"/>
