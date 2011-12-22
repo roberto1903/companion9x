@@ -155,13 +155,15 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
 {
   memset(this, 0, sizeof(t_Th9xMixData));
   destCh = c9x.destCh;
-  srcRaw = c9x.srcRaw;
+  mixMode = c9x.mltpx;
+  srcRaw = c9x.srcRaw-1;
+  switchMode = 1;
+  curveNeg = 0;
   weight = c9x.weight;
   swtch = c9x.swtch;
   curve = c9x.curve;
   speedUp = c9x.speedUp;
   speedDown = c9x.speedDown;
-  mixMode = (MltpxValue)c9x.mltpx;
 }
 
 t_Th9xMixData::operator MixData ()
@@ -214,13 +216,27 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
   memset(this, 0, sizeof(t_Th9xModelData));
 
   if (c9x.used) {
-#if 0
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
-    tmrMode = c9x.timers[0].mode;
-    tmrDir = c9x.timers[0].dir;
+    switch (c9x.timers[0].mode) {
+      case 1:
+      case -1:
+        tmrMode = 1;
+        break;
+      case 6:
+        tmrMode = 2;
+        break;
+      case 7:
+        tmrMode = 3;
+        break;
+      default:
+        tmrMode = 0;
+        break;
+    }
+    // TODO tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
-    protocol = c9x.protocol;
+    //protocol = c9x.protocol;
+    /*
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
@@ -229,30 +245,22 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (unsigned int i=0; i<NUM_FSW; i++)
       if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch) trimSw = c9x.funcSw[i].swtch;
     beepANACenter = c9x.beepANACenter;
-    pulsePol = c9x.pulsePol;
-    extendedLimits = c9x.extendedLimits;
-    swashInvertELE = c9x.swashRingData.invertELE;
-    swashInvertAIL = c9x.swashRingData.invertAIL;
-    swashInvertCOL = c9x.swashRingData.invertCOL;
-    swashType = c9x.swashRingData.type;
-    swashCollectiveSource = c9x.swashRingData.collectiveSource;
-    swashRingValue = c9x.swashRingData.value;
-    for (int i=0; i<MAX_MIXERS; i++)
+    pulsePol = c9x.pulsePol;*/
+    for (int i=0; i<TH9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<TH9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
     // TODO expoData
     for (int i=0; i<NUM_STICKS; i++)
-      trim[i] = std::max(-125, std::min(125, c9x.phaseData[0].trim[i]));
-    for (int i=0; i<MAX_CURVE5; i++)
+      trimData[i].itrim = std::max(-30, std::min(30, c9x.phaseData[0].trim[i]));
+    for (int i=0; i<TH9X_MAX_CURVES5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
-    for (int i=0; i<MAX_CURVE9; i++)
+    for (int i=0; i<TH9X_MAX_CURVES9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
-      customSw[i] = c9x.customSw[i];
-#endif
+    /*for (int i=0; i<NUM_CSW; i++)
+      customSw[i] = c9x.customSw[i];*/
   }
 }
 

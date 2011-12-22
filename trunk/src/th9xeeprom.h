@@ -20,11 +20,16 @@
 #include "eeprominterface.h"
 
 //eeprom data
+#define TH9X_NUM_CHNOUT   8
 #define TH9X_MAX_EXPOS    15
 #define TH9X_MAX_MIXERS   25
 #define TH9X_MAX_SWITCHES 16
+#define TH9X_MAX_SWITCHES 16
+#define TH9X_MAX_CURVES3  3
+#define TH9X_MAX_CURVES5  2
+#define TH9X_MAX_CURVES9  2
 
-#define MDVERS      9
+#define MDVERS      6
 
 #define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
 #define NUM_CSW         12 //number of custom switches
@@ -171,12 +176,12 @@ typedef struct t_Th9xModelData {
   uint8_t   protocol:5;           // 1
   uint8_t   protocolPar:3;        //
   char      res[3];               // 3
-  Th9xLimitData limitData[NUM_CHNOUT];// 3*8
+  Th9xLimitData limitData[TH9X_NUM_CHNOUT];// 3*8
   Th9xExpoData  expoTab[TH9X_MAX_EXPOS];      // 5*4 -> 3*15
   Th9xMixData   mixData[TH9X_MAX_MIXERS];  //0 5*25
-  int8_t    curves3[3][3];        // 9  new143
-  int8_t    curves5[2][5];        // 10
-  int8_t    curves9[2][9];        // 18
+  int8_t    curves3[TH9X_MAX_CURVES3][3];        // 9  new143
+  int8_t    curves5[TH9X_MAX_CURVES5][5];        // 10
+  int8_t    curves9[TH9X_MAX_CURVES9][9];        // 18
   Th9xCustomSwData switchTab[TH9X_MAX_SWITCHES];//
   Th9xTrimData   trimData[NUM_STICKS];    // 3*4 -> 1*4
   operator ModelData();
