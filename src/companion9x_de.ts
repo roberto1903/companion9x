@@ -2303,6 +2303,7 @@ Right</source>
     </message>
     <message>
         <location filename="modeledit.ui" line="3496"/>
+        <location filename="modeledit.cpp" line="478"/>
         <source>Offset</source>
         <translation>Offset</translation>
     </message>
@@ -2631,6 +2632,8 @@ Right</source>
         <location filename="modeledit.ui" line="1987"/>
         <location filename="modeledit.ui" line="8555"/>
         <location filename="modeledit.ui" line="8771"/>
+        <location filename="modeledit.cpp" line="406"/>
+        <location filename="modeledit.cpp" line="476"/>
         <source>Switch</source>
         <translation>Schalter</translation>
     </message>
@@ -2660,46 +2663,40 @@ Right</source>
         <translation type="obsolete">KNÜPPEL 3</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="457"/>
-        <location filename="modeledit.cpp" line="467"/>
-        <location filename="modeledit.cpp" line="511"/>
+        <location filename="modeledit.cpp" line="450"/>
+        <location filename="modeledit.cpp" line="460"/>
+        <location filename="modeledit.cpp" line="495"/>
         <source>CH%1%2</source>
         <translation type="unfinished">CH%1%2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="409"/>
-        <location filename="modeledit.cpp" line="486"/>
         <source> Switch(</source>
-        <translation type="unfinished">Schalter(</translation>
+        <translation type="obsolete">Schalter(</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="487"/>
         <source> noTrim</source>
-        <translation type="unfinished">kein Trimmer</translation>
+        <translation type="obsolete">kein Trimmer</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="488"/>
         <source> Offset(%1%)</source>
-        <translation type="unfinished"> Offset(%1%)</translation>
+        <translation type="obsolete"> Offset(%1%)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="413"/>
-        <location filename="modeledit.cpp" line="492"/>
         <source> Curve(%1)</source>
-        <translation type="unfinished">Kurve(%1)</translation>
+        <translation type="obsolete">Kurve(%1)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="495"/>
+        <location filename="modeledit.cpp" line="480"/>
         <source> Delay(u%1:d%2)</source>
         <translation type="unfinished">Verzögerung(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="496"/>
+        <location filename="modeledit.cpp" line="481"/>
         <source> Slow(u%1:d%2)</source>
         <translation type="unfinished">Langsam/u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="498"/>
+        <location filename="modeledit.cpp" line="482"/>
         <source> Warn(%1)</source>
         <translation type="unfinished">Warnung(%1)</translation>
     </message>
@@ -2708,117 +2705,139 @@ Right</source>
         <translation type="obsolete">Kurve %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2749"/>
+        <location filename="modeledit.cpp" line="404"/>
+        <source>Expo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="405"/>
+        <location filename="modeledit.cpp" line="475"/>
+        <source>Phase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="407"/>
+        <location filename="modeledit.cpp" line="479"/>
+        <source>Curve</source>
+        <translation type="unfinished">Kurve</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="477"/>
+        <source>noTrim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="2733"/>
         <source>Delete Selected Mixes?</source>
         <translation type="unfinished">Lösche ausgewählte Mischer ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3006"/>
-        <location filename="modeledit.cpp" line="3030"/>
+        <location filename="modeledit.cpp" line="2990"/>
+        <location filename="modeledit.cpp" line="3014"/>
         <source>&amp;Add</source>
         <translation type="unfinished">&amp;Addieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3006"/>
-        <location filename="modeledit.cpp" line="3030"/>
+        <location filename="modeledit.cpp" line="2990"/>
+        <location filename="modeledit.cpp" line="3014"/>
         <source>Ctrl+A</source>
         <translation type="unfinished">CTRL+A</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3007"/>
-        <location filename="modeledit.cpp" line="3031"/>
+        <location filename="modeledit.cpp" line="2991"/>
+        <location filename="modeledit.cpp" line="3015"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Editieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3007"/>
-        <location filename="modeledit.cpp" line="3031"/>
+        <location filename="modeledit.cpp" line="2991"/>
+        <location filename="modeledit.cpp" line="3015"/>
         <source>Enter</source>
         <translation type="unfinished">Eingabe</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3009"/>
-        <location filename="modeledit.cpp" line="3033"/>
+        <location filename="modeledit.cpp" line="2993"/>
+        <location filename="modeledit.cpp" line="3017"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3009"/>
-        <location filename="modeledit.cpp" line="3033"/>
+        <location filename="modeledit.cpp" line="2993"/>
+        <location filename="modeledit.cpp" line="3017"/>
         <source>Delete</source>
         <translation type="unfinished">Löschen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3010"/>
-        <location filename="modeledit.cpp" line="3034"/>
+        <location filename="modeledit.cpp" line="2994"/>
+        <location filename="modeledit.cpp" line="3018"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3010"/>
-        <location filename="modeledit.cpp" line="3034"/>
+        <location filename="modeledit.cpp" line="2994"/>
+        <location filename="modeledit.cpp" line="3018"/>
         <source>Ctrl+C</source>
         <translation type="unfinished">Ctrl*C</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3011"/>
-        <location filename="modeledit.cpp" line="3035"/>
+        <location filename="modeledit.cpp" line="2995"/>
+        <location filename="modeledit.cpp" line="3019"/>
         <source>&amp;Cut</source>
         <translation type="unfinished">&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3011"/>
-        <location filename="modeledit.cpp" line="3035"/>
+        <location filename="modeledit.cpp" line="2995"/>
+        <location filename="modeledit.cpp" line="3019"/>
         <source>Ctrl+X</source>
         <translation type="unfinished">Ctrl+X</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3012"/>
-        <location filename="modeledit.cpp" line="3036"/>
+        <location filename="modeledit.cpp" line="2996"/>
+        <location filename="modeledit.cpp" line="3020"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3012"/>
-        <location filename="modeledit.cpp" line="3036"/>
+        <location filename="modeledit.cpp" line="2996"/>
+        <location filename="modeledit.cpp" line="3020"/>
         <source>Ctrl+V</source>
         <translation type="unfinished">Ctrl+V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3013"/>
-        <location filename="modeledit.cpp" line="3037"/>
+        <location filename="modeledit.cpp" line="2997"/>
+        <location filename="modeledit.cpp" line="3021"/>
         <source>Du&amp;plicate</source>
         <translation type="unfinished">D&amp;uplizieren</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="83"/>
         <location filename="modeledit.cpp" line="116"/>
-        <location filename="modeledit.cpp" line="3015"/>
-        <location filename="modeledit.cpp" line="3039"/>
+        <location filename="modeledit.cpp" line="2999"/>
+        <location filename="modeledit.cpp" line="3023"/>
         <source>Move Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="85"/>
         <location filename="modeledit.cpp" line="118"/>
-        <location filename="modeledit.cpp" line="3015"/>
-        <location filename="modeledit.cpp" line="3039"/>
+        <location filename="modeledit.cpp" line="2999"/>
+        <location filename="modeledit.cpp" line="3023"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Up</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="86"/>
         <location filename="modeledit.cpp" line="119"/>
-        <location filename="modeledit.cpp" line="3016"/>
-        <location filename="modeledit.cpp" line="3040"/>
+        <location filename="modeledit.cpp" line="3000"/>
+        <location filename="modeledit.cpp" line="3024"/>
         <source>Move Down</source>
         <translation>Nach unten</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="88"/>
         <location filename="modeledit.cpp" line="121"/>
-        <location filename="modeledit.cpp" line="3016"/>
-        <location filename="modeledit.cpp" line="3040"/>
+        <location filename="modeledit.cpp" line="3000"/>
+        <location filename="modeledit.cpp" line="3024"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Down</translation>
     </message>
@@ -2833,78 +2852,58 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="402"/>
-        <source>Weight(%1%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="modeledit.cpp" line="403"/>
-        <source>Weight(+%1%)</source>
-        <translation type="unfinished"></translation>
+        <source>Weight</source>
+        <oldsource>Weight(+%1%)</oldsource>
+        <translation type="unfinished">Gewichtung</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="405"/>
-        <source> Expo(%1%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="406"/>
-        <source> Expo(+%1%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="408"/>
-        <location filename="modeledit.cpp" line="485"/>
-        <source> Phase(</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="2419"/>
+        <location filename="modeledit.cpp" line="2403"/>
         <source>Editing curve %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2788"/>
+        <location filename="modeledit.cpp" line="2772"/>
         <source>Delete Selected Expos?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3423"/>
+        <location filename="modeledit.cpp" line="3407"/>
         <source>Apply Template?</source>
         <translation type="unfinished">Vorlage anwenden ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3423"/>
+        <location filename="modeledit.cpp" line="3407"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation type="unfinished">Vorlage anwenden &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3450"/>
+        <location filename="modeledit.cpp" line="3434"/>
         <source>Clear Expos?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3450"/>
+        <location filename="modeledit.cpp" line="3434"/>
         <source>Really clear all the expos?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3462"/>
+        <location filename="modeledit.cpp" line="3446"/>
         <source>Clear Mixes?</source>
         <translation type="unfinished">Mischer löschen ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3462"/>
+        <location filename="modeledit.cpp" line="3446"/>
         <source>Really clear all the mixes?</source>
         <translation type="unfinished">Wirklich alle Mischer löschen ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3474"/>
+        <location filename="modeledit.cpp" line="3458"/>
         <source>Clear Curves?</source>
         <translation type="unfinished">Kurven löschen ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3474"/>
+        <location filename="modeledit.cpp" line="3458"/>
         <source>Really clear all the curves?</source>
         <translation type="unfinished">Wirklich alle Kurven löschen ?</translation>
     </message>
@@ -2913,8 +2912,8 @@ Right</source>
         <translation type="obsolete">D&amp;uplizieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3013"/>
-        <location filename="modeledit.cpp" line="3037"/>
+        <location filename="modeledit.cpp" line="2997"/>
+        <location filename="modeledit.cpp" line="3021"/>
         <source>Ctrl+U</source>
         <translation type="unfinished">Ctrl+U</translation>
     </message>
@@ -3017,6 +3016,11 @@ Right</source>
     <message>
         <location filename="main.cpp" line="83"/>
         <source>Checking for updates...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="74"/>
+        <source>Flight phase %1 trim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3203,6 +3207,11 @@ Right</source>
         <location filename="helpers.cpp" line="192"/>
         <source>CH16</source>
         <translation type="unfinished">CH16</translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="229"/>
+        <source>Curve</source>
+        <translation type="unfinished">Kurve</translation>
     </message>
 </context>
 <context>
@@ -3646,12 +3655,17 @@ Mache nur weiter, wenn Du weißt was Du machst</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="140"/>
+        <location filename="preferencesdialog.ui" line="124"/>
+        <source>th9x trunk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="145"/>
         <source>Default Channel Order</source>
         <translation>Standardeinstellung Kanalzuordnung</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="147"/>
+        <location filename="preferencesdialog.ui" line="152"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -3660,12 +3674,12 @@ This is used by the templated to determine which channel goes to what number out
 Hier wird die Zuordnung der Kanäle zum Ausgang festgelegt</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="279"/>
+        <location filename="preferencesdialog.ui" line="284"/>
         <source>Default Stick Mode</source>
         <translation>Standard Knüppelmodus</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="286"/>
+        <location filename="preferencesdialog.ui" line="291"/>
         <source>Mode selection:
 
 Mode 1:
@@ -3706,22 +3720,22 @@ Mode 4:
 </translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="311"/>
+        <location filename="preferencesdialog.ui" line="316"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mode 1 (RUD ELE THR AIL)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="316"/>
+        <location filename="preferencesdialog.ui" line="321"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mode 2 (RUD THR ELE AIL)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="321"/>
+        <location filename="preferencesdialog.ui" line="326"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mode 3 (AIL ELE THR RUD)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="326"/>
+        <location filename="preferencesdialog.ui" line="331"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mode 4 (AIL THR ELE RUD)</translation>
     </message>
@@ -4021,12 +4035,12 @@ Mode 4:
         <translation type="obsolete">Kurve(%1)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="314"/>
+        <location filename="printdialog.cpp" line="301"/>
         <source> Delay(u%1:d%2)</source>
         <translation>Verzögerung(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="315"/>
+        <location filename="printdialog.cpp" line="302"/>
         <source> Slow(u%1:d%2)</source>
         <translation>Langsam/u%1:d%2)</translation>
     </message>
@@ -4051,8 +4065,8 @@ Mode 4:
         <translation type="obsolete">5-Punkt-Kurven</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="400"/>
-        <location filename="printdialog.cpp" line="442"/>
+        <location filename="printdialog.cpp" line="386"/>
+        <location filename="printdialog.cpp" line="428"/>
         <source>pt %1</source>
         <translation>pt %1</translation>
     </message>
@@ -4073,13 +4087,13 @@ Mode 4:
         <translation type="obsolete">Quelle</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="306"/>
-        <location filename="printdialog.cpp" line="344"/>
+        <location filename="printdialog.cpp" line="299"/>
+        <location filename="printdialog.cpp" line="330"/>
         <source>Offset</source>
         <translation type="unfinished">Offset</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="621"/>
+        <location filename="printdialog.cpp" line="607"/>
         <source>Function</source>
         <translation type="unfinished">Funktion</translation>
     </message>
@@ -4093,10 +4107,10 @@ Mode 4:
     </message>
     <message>
         <location filename="printdialog.cpp" line="195"/>
-        <location filename="printdialog.cpp" line="257"/>
-        <location filename="printdialog.cpp" line="304"/>
-        <location filename="printdialog.cpp" line="593"/>
-        <location filename="printdialog.cpp" line="620"/>
+        <location filename="printdialog.cpp" line="256"/>
+        <location filename="printdialog.cpp" line="297"/>
+        <location filename="printdialog.cpp" line="579"/>
+        <location filename="printdialog.cpp" line="606"/>
         <source>Switch</source>
         <translation>Schalter</translation>
     </message>
@@ -4118,8 +4132,8 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="203"/>
         <location filename="printdialog.cpp" line="208"/>
-        <location filename="printdialog.cpp" line="322"/>
-        <location filename="printdialog.cpp" line="325"/>
+        <location filename="printdialog.cpp" line="308"/>
+        <location filename="printdialog.cpp" line="311"/>
         <source>FP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4129,185 +4143,183 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="252"/>
         <location filename="printdialog.cpp" line="253"/>
         <source>Weight</source>
         <translation type="unfinished">Gewichtung</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="254"/>
-        <location filename="printdialog.cpp" line="255"/>
         <source>Expo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="256"/>
-        <location filename="printdialog.cpp" line="322"/>
-        <location filename="printdialog.cpp" line="325"/>
+        <location filename="printdialog.cpp" line="255"/>
+        <location filename="printdialog.cpp" line="308"/>
+        <location filename="printdialog.cpp" line="311"/>
         <source>Phase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="262"/>
-        <location filename="printdialog.cpp" line="312"/>
-        <location filename="printdialog.cpp" line="414"/>
-        <location filename="printdialog.cpp" line="464"/>
+        <location filename="printdialog.cpp" line="258"/>
+        <location filename="printdialog.cpp" line="300"/>
+        <location filename="printdialog.cpp" line="400"/>
+        <location filename="printdialog.cpp" line="450"/>
         <source>Curve</source>
         <translation type="unfinished">Kurve</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="275"/>
+        <location filename="printdialog.cpp" line="271"/>
         <source>Mixers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="287"/>
-        <location filename="printdialog.cpp" line="341"/>
-        <location filename="printdialog.cpp" line="600"/>
+        <location filename="printdialog.cpp" line="283"/>
+        <location filename="printdialog.cpp" line="327"/>
+        <location filename="printdialog.cpp" line="586"/>
         <source>CH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="305"/>
+        <location filename="printdialog.cpp" line="298"/>
         <source>noTrim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="316"/>
+        <location filename="printdialog.cpp" line="303"/>
         <source>Warn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="337"/>
+        <location filename="printdialog.cpp" line="323"/>
         <source>Limits</source>
         <translation type="unfinished">Grenzen</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="350"/>
+        <location filename="printdialog.cpp" line="336"/>
         <source>Min</source>
         <translation type="unfinished">Min</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="356"/>
+        <location filename="printdialog.cpp" line="342"/>
         <source>Max</source>
         <translation type="unfinished">Max</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="362"/>
+        <location filename="printdialog.cpp" line="348"/>
         <source>Invert</source>
         <translation type="unfinished">Invertieren</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="365"/>
+        <location filename="printdialog.cpp" line="351"/>
         <source>INV</source>
         <translation type="unfinished">INV</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="365"/>
+        <location filename="printdialog.cpp" line="351"/>
         <source>NOR</source>
         <translation type="unfinished">NOR</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="389"/>
+        <location filename="printdialog.cpp" line="375"/>
         <source>Curves</source>
         <translation type="unfinished">Kurven</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="396"/>
+        <location filename="printdialog.cpp" line="382"/>
         <source>5 Points Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="440"/>
+        <location filename="printdialog.cpp" line="426"/>
         <source>9 Points Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="498"/>
+        <location filename="printdialog.cpp" line="484"/>
         <source>Custom Switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="506"/>
+        <location filename="printdialog.cpp" line="492"/>
         <source>SW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="590"/>
+        <location filename="printdialog.cpp" line="576"/>
         <source>Safety Switches</source>
         <translation type="unfinished">Sicherheitsschalter</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="594"/>
-        <location filename="printdialog.cpp" line="647"/>
-        <location filename="printdialog.cpp" line="648"/>
+        <location filename="printdialog.cpp" line="580"/>
+        <location filename="printdialog.cpp" line="633"/>
+        <location filename="printdialog.cpp" line="634"/>
         <source>Value</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="617"/>
+        <location filename="printdialog.cpp" line="603"/>
         <source>Function Switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="627"/>
+        <location filename="printdialog.cpp" line="613"/>
         <source>FSW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="644"/>
+        <location filename="printdialog.cpp" line="630"/>
         <source>Telemetry Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="645"/>
+        <location filename="printdialog.cpp" line="631"/>
         <source>Alarm 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="645"/>
+        <location filename="printdialog.cpp" line="631"/>
         <source>Alarm 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="646"/>
+        <location filename="printdialog.cpp" line="632"/>
         <source>Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="646"/>
+        <location filename="printdialog.cpp" line="632"/>
         <source>Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="646"/>
+        <location filename="printdialog.cpp" line="632"/>
         <source>Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="647"/>
-        <location filename="printdialog.cpp" line="648"/>
+        <location filename="printdialog.cpp" line="633"/>
+        <location filename="printdialog.cpp" line="634"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="647"/>
-        <location filename="printdialog.cpp" line="648"/>
+        <location filename="printdialog.cpp" line="633"/>
+        <location filename="printdialog.cpp" line="634"/>
         <source>Condition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="653"/>
+        <location filename="printdialog.cpp" line="639"/>
         <source>A%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="668"/>
+        <location filename="printdialog.cpp" line="654"/>
         <source>Print Document</source>
         <translation>Drucke Dokument</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="677"/>
+        <location filename="printdialog.cpp" line="663"/>
         <source>Select PDF output file</source>
         <translation type="unfinished"></translation>
     </message>
