@@ -59,9 +59,9 @@ void populatePhasesCB(QComboBox *b, int value)
 
 void populateCurvesCB(QComboBox *b, int value)
 {
-    QString str = CURV_STR;
     b->clear();
-    for(int i=0; i<(str.length()/3); i++)  b->addItem(str.mid(i*3,3).replace("c","Curve "));
+    for (int i=0; i<CURVE_BASE+MAX_CURVE5+MAX_CURVE9; i++)
+      b->addItem(getCurveStr(i));
     b->setCurrentIndex(value);
     b->setMaxVisibleItems(10);
 }
@@ -71,7 +71,7 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase)
   b->addItem("Own trim");
   for (unsigned int i=0; i<MAX_PHASES; i++) {
     if (i != phase) {
-      b->addItem(QString("Flight phase %1 trim").arg(i));
+      b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
     }
   }
 }
@@ -218,5 +218,15 @@ void populateCSWCB(QComboBox *b, int value)
     b->setMaxVisibleItems(10);
 }
 
+QString getSignedStr(int value)
+{
+  return value > 0 ? QString("+%1").arg(value) : QString("%1").arg(value);
+}
+
+QString getCurveStr(int curve)
+{
+  QString crvStr = "---x>0x<0|x|f>0f<0|f|c1 c2 c3 c4 c5 c6 c7 c8 c9 c10c11c12c13c14c15c16";
+  return crvStr.mid(curve*3, 3).remove(' ').replace("c", QObject::tr("Curve") + " ");
+}
 
 
