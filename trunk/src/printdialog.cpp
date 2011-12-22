@@ -248,24 +248,20 @@ void printDialog::printExpo()
             default:
                 str += "&nbsp;&nbsp;&nbsp;";
                 break;
-        };        
-        str += (ed->weight<0 ? (tr("Weight")+QString("(%1%%)").arg(ed->weight).rightJustified(6,' ')) :
-                              (tr("Weight")+QString("(+%1%%)").arg(ed->weight).rightJustified(6, ' ')));
-        str += (ed->expo<0 ? (" "+tr("Expo")+QString("(%1%%)").arg(ed->expo).rightJustified(6,' ')) :
-                                      (" "+tr("Expo")+QString("(+%1%%)").arg(ed->expo).rightJustified(6, ' ')));
-        if(ed->phase) str += " "+tr("Phase")+ "(" + getPhaseName(ed->phase) + ")";
-        if(ed->swtch) str += " "+tr("Switch")+ "(" + getSWName(ed->swtch) + ")";
-        if (ed->curve!=0) {
-           QString crvStr = CURV_STR;
-           crvStr=crvStr.mid(ed->curve*3,3);
-           crvStr.replace(QString("<") ,QString("&lt;"));
-           str += " "+tr("Curve")+QString("(%1)").arg(crvStr.remove(' '));
+        };
+
+        str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
+        str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+        if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
+        if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+        if (ed->curve) {
+          str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
         }
-        str.append("</font></td></tr>");
+        str += "</font></td></tr>";
     }
-    str.append("</table></td></tr></table><br>");
+    str += "</table></td></tr></table><br>";
     if (ec>0)
-        te->append(str);
+      te->append(str);
 }
 
 
@@ -296,26 +292,16 @@ void printDialog::printMixes()
         case (2): str += "&nbsp;R"; break;
         default:  str += "&nbsp;&nbsp;"; break;
         };
-        str += md->weight<0 ? QString(" %1%%").arg(md->weight).rightJustified(6,' ') :
-                              QString(" +%1%%").arg(md->weight).rightJustified(6, ' ');
-        //QString srcStr = SRC_STR;
-        //str += " " + srcStr.mid(CONVERT_MODE(md->srcRaw+1)*4,4);
+        str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
         str += getSourceStr(md->srcRaw);
-        if(md->swtch) str += " "+ tr("Switch")+ "(" + getSWName(md->swtch) + ")";
-        if(md->carryTrim) str += " "+ tr("noTrim");
-        if(md->sOffset)  str += tr("Offset")+QString(" %1%%)").arg(md->sOffset);
-        if(md->curve)
-        {
-            QString crvStr = CURV_STR;
-            crvStr=crvStr.mid(md->curve*3,3);
-            crvStr.replace(QString("<") ,QString("&lt;"));
-            str += " "+tr("Curve")+QString("(%1)").arg(crvStr.remove(' '));
-        }
-        if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
-        if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
-        if(md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
-        if(md->phase!=0)
-        {
+        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if (md->carryTrim) str += " " + tr("noTrim");
+        if (md->sOffset)  str += tr("Offset") + QString(" %1%)").arg(md->sOffset);
+        if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
+        if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
+        if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
+        if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
+        if (md->phase!=0) {
             PhaseData *pd = &g_model->phaseData[abs(md->phase)];
             if (md->phase<0) 
             {

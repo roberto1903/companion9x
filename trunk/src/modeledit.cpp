@@ -395,24 +395,16 @@ void ModelEdit::tabExpos()
 
         switch (md->mode)
         {
-        case (1): str += " <-"; break;
-        case (2): str += " ->"; break;
-        default:  str += "   "; break;
+          case (1): str += " <-"; break;
+          case (2): str += " ->"; break;
+          default:  str += "   "; break;
         };
 
-        str += md->weight<0 ? tr("Weight(%1%)").arg(md->weight).rightJustified(6,' ') :
-                              tr("Weight(+%1%)").arg(md->weight).rightJustified(6, ' ');
-
-        str += md->expo<0 ? tr(" Expo(%1%)").arg(md->expo).rightJustified(6,' ') :
-                            tr(" Expo(+%1%)").arg(md->expo).rightJustified(6, ' ');
-
-        if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
-        if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
-
-        if(md->curve) {
-          QString crvStr = CURV_STR;
-          str += tr(" Curve(%1)").arg(crvStr.mid(md->curve*3,3).remove(' '));
-        }
+        str += tr("Weight") + QString("(%1%)").arg(md->weight).rightJustified(6, ' ');
+        str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
+        if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
 
         qba.clear();
         qba.append((quint8)i);
@@ -478,24 +470,15 @@ void ModelEdit::tabMixes()
         default:  str += "  "; break;
         };
 
-        str += md->weight<0 ? QString(" %1%").arg(md->weight).rightJustified(6,' ') :
-                              QString(" +%1%").arg(md->weight).rightJustified(6, ' ');
-
+        str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
         str += getSourceStr(md->srcRaw);
-
-        if(md->phase) str += tr(" Phase(") + getPhaseName(md->phase) + ")";
-        if(md->swtch) str += tr(" Switch(") + getSWName(md->swtch) + ")";
-        if(md->carryTrim) str += tr(" noTrim");
-        if(md->sOffset)  str += tr(" Offset(%1%)").arg(md->sOffset);
-        if(md->curve)
-        {
-            QString crvStr = CURV_STR;
-            str += tr(" Curve(%1)").arg(crvStr.mid(md->curve*3,3).remove(' '));
-        }
-
+        if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+        if(md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if(md->carryTrim) str += " " + tr("noTrim");
+        if(md->sOffset) str += " " + tr("Offset") + QString("(%1%)").arg(md->sOffset);
+        if(md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
-
         if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
 
         qba.clear();

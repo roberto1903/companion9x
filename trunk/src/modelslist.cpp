@@ -279,7 +279,7 @@ void ModelsListWidget::refreshList()
        }
        addItem(item);
     }
-    if (radioData->generalSettings.currModel>=0 && radioData->generalSettings.currModel<MAX_MODELS) {
+    if (radioData->generalSettings.currModel < MAX_MODELS) {
         QFont f = QFont("Courier New", 12);
         f.setBold(true);
         this->item(radioData->generalSettings.currModel+1)->setFont(f);
