@@ -121,6 +121,29 @@ t_Th9xExpoData::t_Th9xExpoData()
   memset(this, 0, sizeof(t_Th9xExpoData));
 }
 
+t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
+{
+  memset(this, 0, sizeof(t_Th9xLimitData));
+  exp5 = c9x.expo;
+  mode3 = c9x.mode;
+  weight6 = c9x.weight;
+  chn = c9x.chn;
+  drSw = c9x.swtch;
+  curve = c9x.curve;
+}
+
+t_Th9xExpoData::operator ExpoData ()
+{
+  ExpoData c9x;
+  c9x.expo = exp5;
+  c9x.mode = mode3;
+  c9x.weight = weight6;
+  c9x.chn = chn;
+  c9x.swtch = drSw;
+  c9x.curve = curve;
+  return c9x;
+}
+
 t_Th9xLimitData::t_Th9xLimitData()
 {
   memset(this, 0, sizeof(t_Th9xLimitData));
@@ -170,7 +193,7 @@ t_Th9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.srcRaw = srcRaw;
+  c9x.srcRaw = srcRaw+1;
   c9x.weight = weight;
   c9x.swtch = swtch;
   c9x.curve = curve;
@@ -246,11 +269,12 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
       if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch) trimSw = c9x.funcSw[i].swtch;
     beepANACenter = c9x.beepANACenter;
     pulsePol = c9x.pulsePol;*/
-    for (int i=0; i<TH9X_MAX_MIXERS; i++)
-      mixData[i] = c9x.mixData[i];
     for (int i=0; i<TH9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
-    // TODO expoData
+    for (int i=0; i<TH9X_MAX_EXPOS; i++)
+      expoTab[i] = c9x.expoData[i];
+    for (int i=0; i<TH9X_MAX_MIXERS; i++)
+      mixData[i] = c9x.mixData[i];
     for (int i=0; i<NUM_STICKS; i++)
       trimData[i].itrim = std::max(-30, std::min(30, c9x.phaseData[0].trim[i]));
     for (int i=0; i<TH9X_MAX_CURVES5; i++)
@@ -266,14 +290,26 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
 
 t_Th9xModelData::operator ModelData ()
 {
-#if 0
   ModelData c9x;
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
-  c9x.timers[0].mode = tmrMode;
-  c9x.timers[0].dir = tmrDir;
+  switch(tmrMode) {
+    case 1:
+      c9x.timers[0].mode = 1;
+      break;
+    case 2:
+      c9x.timers[0].mode = 6;
+      break;
+    case 3:
+      c9x.timers[0].mode = 7;
+      break;
+    default:
+      c9x.timers[0].mode = 0;
+      break;
+  }
+  // c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
-  c9x.protocol = (Protocol)protocol;
+  /*c9x.protocol = (Protocol)protocol;
   c9x.ppmNCH = 8 + 2 * ppmNCH;
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -291,58 +327,24 @@ t_Th9xModelData::operator ModelData ()
   c9x.swashRingData.invertCOL = swashInvertCOL;
   c9x.swashRingData.type = swashType;
   c9x.swashRingData.collectiveSource = swashCollectiveSource;
-  c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<MAX_MIXERS; i++) {
-    c9x.mixData[i] = mixData[i];
-    if (mdVers == 6) {
-      if (c9x.mixData[i].srcRaw > MIX_FULL) {
-        c9x.mixData[i].srcRaw += 3; /* because of [CYC1:CYC3] inserted after MIX_FULL */
-      }
-    }
-  }
-  for (int i=0; i<NUM_CHNOUT; i++)
+  c9x.swashRingData.value = swashRingValue;*/
+  for (int i=0; i<TH9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-
-  // expoData
-  uint8_t e = 0;
-  for (uint8_t ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
-    for (int8_t dr = 2; dr >= 0 && e < MAX_EXPOS; dr--) {
-      if ((dr == 2 && !expoData[ch].drSw2) || (dr == 1 && !expoData[ch].drSw1) || (dr
-          == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1]
-               && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
-      c9x.expoData[e].swtch = (dr == 2 ? expoData[ch].drSw2 : (dr == 1 ? expoData[ch].drSw1 : 0));
-      c9x.expoData[e].chn = ch;
-      c9x.expoData[e].expo = expoData[ch].expo[dr][0][0];
-      c9x.expoData[e].weight = 100 + expoData[ch].expo[dr][1][0];
-      if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1]
-          && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
-        c9x.expoData[e++].mode = 3;
-      }
-      else {
-        c9x.expoData[e].mode = 1;
-        if (e < MAX_EXPOS - 1) {
-          c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
-          c9x.expoData[++e].chn = ch;
-          c9x.expoData[e].mode = 2;
-          c9x.expoData[e].expo = expoData[ch].expo[dr][0][1];
-          c9x.expoData[e++].weight = 100 + expoData[ch].expo[dr][1][1];
-        }
-      }
-    }
-  }
-
+  for (int i=0; i<TH9X_MAX_EXPOS; i++)
+    c9x.expoData[i] = expoTab[i];
+  for (int i=0; i<TH9X_MAX_MIXERS; i++)
+    c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_STICKS; i++)
-    c9x.phaseData[0].trim[i] = trim[i];
-  for (int i=0; i<MAX_CURVE5; i++)
+    c9x.phaseData[0].trim[i] = trimData[i].itrim;
+  for (int i=0; i<TH9X_MAX_CURVES5; i++)
     for (int j=0; j<5; j++)
       c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
+  for (int i=0; i<TH9X_MAX_CURVES9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
-    c9x.customSw[i] = customSw[i];
+  /*for (int i=0; i<NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];*/
 
   return c9x;
-#endif
 }
 
