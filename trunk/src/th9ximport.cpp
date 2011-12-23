@@ -1,4 +1,5 @@
 #define SIM
+#define SIMU
 #define SIMU_EXCEPTIONS
 
 #undef min
@@ -9,6 +10,7 @@
 #endif
 
 #include <exception>
+#include <algorithm>
 
 namespace Th9x {
 
@@ -41,13 +43,14 @@ bool hasExtendedTrims()
 
 void setTrim(uint8_t idx, int8_t value)
 {
-  g_model.trimData[idx].itrim = value;
+  g_model.trimData[idx].itrim = trimRevertM(value, g_model.trimData[idx].tmode);
 }
 
 void getTrims(int16_t values[4])
 {
-  for (int i=0; i<4; i++)
-    values[i] = g_model.trimData[i].itrim;
+  for (int i=0; i<4; i++) {
+    values[i] = trimVal(i);
+  }
 }
 
 }

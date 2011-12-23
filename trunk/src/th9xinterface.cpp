@@ -62,7 +62,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   efile->openRd(FILE_GENERAL);
   Th9xGeneral th9xGeneral;
 
-  if (efile->readRlc1((uint8_t*)&th9xGeneral, 1) != 1) {
+  if (efile->readRlc2((uint8_t*)&th9xGeneral, 1) != 1) {
     std::cout << "no\n";
     return false;
   }
@@ -70,14 +70,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << "version " << (unsigned int)th9xGeneral.myVers << " ";
 
   switch(th9xGeneral.myVers) {
-    case 3:
-      std::cout << "(old gruvin9x) ";
-    case 4:
-//    case 5:
     case 6:
-    case 7:
-    case 8:
-    case 9:
       break;
     default:
       std::cout << "not th9x\n";
@@ -85,8 +78,9 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
 
   efile->openRd(FILE_GENERAL);
-  if (!efile->readRlc1((uint8_t*)&th9xGeneral, sizeof(Th9xGeneral))) {
-    std::cout << "ko\n";
+  int len = efile->readRlc2((uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
+  if (len != sizeof(Th9xGeneral)) {
+    std::cout << "not th9x\n";
     return false;
   }
   radioData.generalSettings = th9xGeneral;
@@ -94,7 +88,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   for (int i=0; i<MAX_MODELS; i++) {
     Th9xModelData th9xModel;
     efile->openRd(FILE_MODEL(i));
-    if (!efile->readRlc1((uint8_t*)&th9xModel, sizeof(Th9xModelData))) {
+    if (!efile->readRlc2((uint8_t*)&th9xModel, sizeof(Th9xModelData))) {
       radioData.models[i].clear();
     }
     else {
