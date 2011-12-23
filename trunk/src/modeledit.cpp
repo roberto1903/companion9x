@@ -455,13 +455,12 @@ void ModelEdit::tabMixes()
             MixerlistWidget->addItem(itm);
         }
 
-        if(curDest!=md->destCh)
-        {
-            str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
-            curDest=md->destCh;
-        }
+        str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
+
+        if (curDest != md->destCh)
+          curDest = md->destCh;
         else
-            str = "    ";
+          str.fill(' ');
 
         switch(md->mltpx)
         {
