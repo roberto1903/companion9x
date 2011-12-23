@@ -119,6 +119,11 @@
        <string>open9x trunk</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>th9x trunk</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="5" column="1">

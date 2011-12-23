@@ -2,6 +2,7 @@
 #include <list>
 #include "eeprominterface.h"
 #include "er9xinterface.h"
+#include "th9xinterface.h"
 #include "gruvin9xinterface.h"
 #include "gruvin9xstableinterface.h"
 #include "open9xinterface.h"
@@ -100,7 +101,7 @@ std::list<EEPROMInterface *> eeprom_interfaces;
 
 void RegisterEepromInterfaces()
 {
-  // TODO eeprom_interfaces.push_back(new Gruvin9xStableInterface());
+  eeprom_interfaces.push_back(new Th9xInterface());
   eeprom_interfaces.push_back(new Er9xInterface());
   eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
   eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
@@ -125,9 +126,6 @@ EEPROMInterface *GetEepromInterface()
 
   QSettings settings("companion9x", "companion9x");
   switch (settings.value("eeprom_format", 0).toInt()) {
-    case DNLD_VER_GRUVIN9X_STABLE_STOCK:
-      eepromInterface = new Gruvin9xStableInterface();
-      break;
     case DNLD_VER_OPEN9X:
       eepromInterface = new Open9xInterface();
       break;
@@ -137,8 +135,14 @@ EEPROMInterface *GetEepromInterface()
     case DNLD_VER_GRUVIN9X_V4:
       eepromInterface = new Gruvin9xInterface(EESIZE_V4);
       break;
-    default:
+    case DNLD_VER_ER9X:
       eepromInterface = new Er9xInterface();
+      break;
+    case DNLD_VER_TH9X:
+      eepromInterface = new Th9xInterface();
+      break;
+    default:
+      eepromInterface = new Gruvin9xStableInterface();
       break;
   }
 
