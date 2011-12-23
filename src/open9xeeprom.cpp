@@ -450,7 +450,7 @@ t_Open9xModelData_v201::operator ModelData ()
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
-        c9x.phaseData[i].trimRef[j] = phaseData[i].trim[j] - 501;
+        c9x.phaseData[i].trimRef[j] = c9x.phaseData[i].trim[j] - 501;
         if (c9x.phaseData[i].trimRef[j] >= i)
           c9x.phaseData[i].trimRef[j] += 1;
         c9x.phaseData[i].trim[j] = 0;
