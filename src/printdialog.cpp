@@ -302,7 +302,7 @@ void printDialog::printMixes()
         if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
         if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
         if (md->phase!=0) {
-            PhaseData *pd = &g_model->phaseData[abs(md->phase+(md->phase<0 ? 1 : -1))];
+            PhaseData *pd = &g_model->phaseData[abs(md->phase)-1];
             if (md->phase<0) 
             {
                 str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
