@@ -265,6 +265,8 @@ class GeneralSettings {
     bool      minuteBeep;
     bool      preBeep;
     bool      flashBeep;
+    bool      disablePotScroll;
+    bool      disableBG;
     bool      disableSplashScreen;
     uint8_t   filterInput; // TODO enum
     uint8_t   lightAutoOff;
@@ -490,6 +492,8 @@ enum Capability {
  Simulation,
  SoundMod,
  Haptic,
+ BandgapMeasure,
+ PotScrolling,
 };
 
 class SimulatorInterface;

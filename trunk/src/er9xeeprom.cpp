@@ -90,6 +90,8 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
   preBeep = eepe.preBeep;
   flashBeep = eepe.flashBeep;
   disableSplashScreen = eepe.disableSplashScreen;
+  disablePotScroll=(eepe.disablePotScroll ? 1 : 0);
+  disableBG=(eepe.disableBG ? 1 :0);
   filterInput = eepe.filterInput;
   lightAutoOff = eepe.lightAutoOff;
   templateSetup = eepe.templateSetup;
@@ -129,6 +131,8 @@ Er9xGeneral::operator GeneralSettings ()
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
   result.disableSplashScreen = disableSplashScreen;
+  result.disablePotScroll=(disablePotScroll==1);
+  result.disableBG=(disableBG==1);
   result.filterInput = filterInput;
   result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;

@@ -46,6 +46,17 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->hapticStrengthSB->hide();
       ui->label_hapticStrengthSB->hide();
     }
+    if (!GetEepromInterface()->getCapability(BandgapMeasure)) {
+      ui->BandGapEnableChkB->setDisabled(true);
+      ui->BandGapEnableChkB->hide();
+      ui->label_BandGapEnable->hide();
+    }
+    if (!GetEepromInterface()->getCapability(PotScrolling)) {
+      ui->PotScrollEnableChkB->setDisabled(true);
+      ui->PotScrollEnableChkB->hide();
+      ui->label_PotScrollEnable->hide();
+    }
+    
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
     ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
     ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
@@ -522,5 +533,17 @@ void GeneralEdit::on_hapticStrengthSB_editingFinished()
 void GeneralEdit::on_soundModeCB_currentIndexChanged(int index)
 {
     g_eeGeneral.speakerMode = index;
+    updateSettings();
+}
+
+void GeneralEdit::on_PotScrollEnableChkB_stateChanged(int )
+{
+    g_eeGeneral.disablePotScroll = ui->PotScrollEnableChkB->isChecked() ? false : true;
+    updateSettings();
+}
+
+void GeneralEdit::on_BandGapEnableChkB_stateChanged(int )
+{
+    g_eeGeneral.disableBG = ui->BandGapEnableChkB->isChecked() ? false : true;
     updateSettings();
 }
