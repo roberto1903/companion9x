@@ -208,7 +208,7 @@ enum EnumKeys {
 
 #define NUM_STICKS      4
 #define NUM_POTS        3
-#define PPM_BASE        (MIX_FULL) // because srcRaw is shifted +1!
+#define PPM_BASE        (MIX_CYC3) // because srcRaw is shifted +1!
 #define NUM_CAL_PPM     4
 #define NUM_PPM         8
 #define CHOUT_BASE      (PPM_BASE+NUM_PPM)
@@ -269,7 +269,10 @@ class GeneralSettings {
     uint8_t   filterInput; // TODO enum
     uint8_t   lightAutoOff;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
-    int8_t    PPM_Multiplier;   
+    int8_t    PPM_Multiplier;
+    uint8_t   speakerPitch;
+    uint8_t   hapticStrength;
+    uint8_t   speakerMode;
     char      ownerName[10+1];
 };
 
@@ -485,6 +488,8 @@ enum Capability {
  FuncSwitches,
  ExtendedTrims,
  Simulation,
+ SoundMod,
+ Haptic,
 };
 
 class SimulatorInterface;

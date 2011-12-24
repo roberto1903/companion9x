@@ -95,6 +95,9 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
   templateSetup = eepe.templateSetup;
   PPM_Multiplier = eepe.PPM_Multiplier;
   setEEPROMString(ownerName, eepe.ownerName, sizeof(ownerName));
+  speakerPitch = eepe.speakerPitch;
+  hapticStrength = eepe.hapticStrength;
+  speakerMode = eepe.speakerMode;
 }
 
 Er9xGeneral::operator GeneralSettings ()
@@ -131,6 +134,10 @@ Er9xGeneral::operator GeneralSettings ()
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   getEEPROMString(result.ownerName, ownerName, sizeof(ownerName));
+  result.speakerPitch = speakerPitch;
+  result.hapticStrength = hapticStrength;
+  result.speakerMode = speakerMode;
+
   return result;
 }
 

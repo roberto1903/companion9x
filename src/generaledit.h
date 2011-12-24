@@ -27,6 +27,9 @@ signals:
 
 private slots:
     void on_ownerNameLE_editingFinished();
+    void on_speakerPitchSB_editingFinished();
+    void on_hapticStrengthSB_editingFinished();
+    void on_soundModeCB_currentIndexChanged(int index);
     void on_PPM_MultiplierDSB_editingFinished();
     void on_splashScreenChkB_stateChanged(int );
     void on_beepCountDownChkB_stateChanged(int );

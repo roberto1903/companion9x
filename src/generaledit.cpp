@@ -28,9 +28,28 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     populateSwitchCB(ui->backlightswCB,g_eeGeneral.lightSw);
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
-    if (!GetEepromInterface()->getCapability(OwnerName))
+    if (!GetEepromInterface()->getCapability(OwnerName)) {
       ui->ownerNameLE->setDisabled(true);
-
+      ui->label_ownerName->hide();
+      ui->ownerNameLE->hide();
+    }
+    if (!GetEepromInterface()->getCapability(SoundMod)) {
+      ui->soundModeCB->setDisabled(true);
+      ui->speakerPitchSB->setDisabled(true);
+      ui->label_soundMode->hide();
+      ui->label_speakerPitch->hide();
+      ui->soundModeCB->hide();
+      ui->speakerPitchSB->hide();
+    }
+    if (!GetEepromInterface()->getCapability(Haptic)) {
+      ui->hapticStrengthSB->setDisabled(true);
+      ui->hapticStrengthSB->hide();
+      ui->label_hapticStrengthSB->hide();
+    }
+    ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
+    ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
+    ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
+    
     ui->contrastSB->setValue(g_eeGeneral.contrast);
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
     ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
@@ -485,5 +504,23 @@ void GeneralEdit::on_PPM_MultiplierDSB_editingFinished()
 void GeneralEdit::on_ownerNameLE_editingFinished()
 {
     strncpy(g_eeGeneral.ownerName, ui->ownerNameLE->text().toAscii(), 10);
+    updateSettings();
+}
+
+void GeneralEdit::on_speakerPitchSB_editingFinished()
+{
+    g_eeGeneral.speakerPitch = ui->speakerPitchSB->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_hapticStrengthSB_editingFinished()
+{
+    g_eeGeneral.hapticStrength = ui->hapticStrengthSB->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_soundModeCB_currentIndexChanged(int index)
+{
+    g_eeGeneral.speakerMode = index;
     updateSettings();
 }
