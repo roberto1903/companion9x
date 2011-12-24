@@ -187,6 +187,10 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case BandgapMeasure:
+      return 1;
+    case PotScrolling:
+      return 1;
     case SoundMod:
       return 1;
     case Haptic:
