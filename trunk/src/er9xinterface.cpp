@@ -187,6 +187,10 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case SoundMod:
+      return 1;
+    case Haptic:
+      return 1;
     case OwnerName:
       return 10;
     case Timers:

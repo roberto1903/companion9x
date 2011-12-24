@@ -87,7 +87,12 @@ PACK(typedef struct t_Er9xGeneral {
 
   // ver4 and up :=>
 
-  uint8_t   res[6];
+  uint8_t   respre[2];   
+  uint8_t   speakerPitch;
+  uint8_t   hapticStrength;
+  uint8_t   speakerMode;
+  uint8_t   res[1];
+
   char      ownerName[10];
 
   operator GeneralSettings();
