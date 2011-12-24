@@ -494,6 +494,7 @@ enum Capability {
  Haptic,
  BandgapMeasure,
  PotScrolling,
+ TrainerSwitch,
 };
 
 class SimulatorInterface;
