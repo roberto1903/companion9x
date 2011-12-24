@@ -42,14 +42,18 @@ private slots:
 
     void on_trnMode_1_currentIndexChanged(int index);
     void on_trnChn_1_currentIndexChanged(int index);
+    void on_swtchCB_1_currentIndexChanged(int index);
     void on_trnWeight_1_editingFinished();
     void on_trnMode_2_currentIndexChanged(int index);
     void on_trnChn_2_currentIndexChanged(int index);
+    void on_swtchCB_2_currentIndexChanged(int index);
     void on_trnWeight_2_editingFinished();
     void on_trnMode_3_currentIndexChanged(int index);
     void on_trnChn_3_currentIndexChanged(int index);
+    void on_swtchCB_3_currentIndexChanged(int index);
     void on_trnWeight_3_editingFinished();
     void on_trnMode_4_currentIndexChanged(int index);
+    void on_swtchCB_4_currentIndexChanged(int index);
     void on_trnChn_4_currentIndexChanged(int index);
     void on_trnWeight_4_editingFinished();
 

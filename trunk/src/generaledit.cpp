@@ -56,7 +56,22 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->PotScrollEnableChkB->hide();
       ui->label_PotScrollEnable->hide();
     }
-    
+    if (!GetEepromInterface()->getCapability(TrainerSwitch)) {
+      ui->label_switch->hide();
+      ui->swtchCB_1->setDisabled(true);
+      ui->swtchCB_2->setDisabled(true);
+      ui->swtchCB_3->setDisabled(true);
+      ui->swtchCB_4->setDisabled(true);
+      ui->swtchCB_1->hide();
+      ui->swtchCB_2->hide();
+      ui->swtchCB_3->hide();
+      ui->swtchCB_4->hide();
+    } else {
+      populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
+      populateSwitchCB(ui->swtchCB_2,g_eeGeneral.trainer.mix[1].swtch);
+      populateSwitchCB(ui->swtchCB_3,g_eeGeneral.trainer.mix[2].swtch);
+      populateSwitchCB(ui->swtchCB_4,g_eeGeneral.trainer.mix[3].swtch);
+    }
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
     ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
     ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
@@ -545,5 +560,29 @@ void GeneralEdit::on_PotScrollEnableChkB_stateChanged(int )
 void GeneralEdit::on_BandGapEnableChkB_stateChanged(int )
 {
     g_eeGeneral.disableBG = ui->BandGapEnableChkB->isChecked() ? false : true;
+    updateSettings();
+}
+
+void GeneralEdit::on_swtchCB_1_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[0].swtch = ui->swtchCB_1->currentIndex()-MAX_DRSWITCH;
+    updateSettings();
+}
+
+void GeneralEdit::on_swtchCB_2_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[1].swtch = ui->swtchCB_2->currentIndex()-MAX_DRSWITCH;
+    updateSettings();
+}
+
+void GeneralEdit::on_swtchCB_3_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[2].swtch = ui->swtchCB_3->currentIndex()-MAX_DRSWITCH;
+    updateSettings();
+}
+
+void GeneralEdit::on_swtchCB_4_currentIndexChanged(int index)
+{
+    g_eeGeneral.trainer.mix[3].swtch = ui->swtchCB_4->currentIndex()-MAX_DRSWITCH;
     updateSettings();
 }

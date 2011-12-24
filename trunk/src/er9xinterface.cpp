@@ -187,6 +187,8 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case TrainerSwitch:
+      return 1;
     case BandgapMeasure:
       return 1;
     case PotScrolling:
