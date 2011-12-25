@@ -28,7 +28,6 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     ui->plainTextEdit->hide();
     QTimer::singleShot(0, this, SLOT(shrink()));
     process = new QProcess(this);
-    connect(this,SIGNAL(clicked()),this,SLOT(on_checkBox_toggled()));
     connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
     connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
     connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
