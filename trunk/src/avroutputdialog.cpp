@@ -13,7 +13,7 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     else
         setWindowTitle(tr("AVRDUDE - ") + wTitle);
 
-
+    winTitle=wTitle;
 
     cmdLine = prog;
     foreach(QString str, arg) cmdLine.append(" " + str);
@@ -22,9 +22,13 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     lfuse = 0;
     hfuse = 0;
     efuse = 0;
-
+    phase=0;
+    currLine.clear();
+    prevLine.clear();
+    ui->plainTextEdit->hide();
+    QTimer::singleShot(0, this, SLOT(shrink()));
     process = new QProcess(this);
-
+    connect(this,SIGNAL(clicked()),this,SLOT(on_checkBox_toggled()));
     connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
     connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
     connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
@@ -42,6 +46,8 @@ void avrOutputDialog::runAgain(QString prog, QStringList arg, int closeBehaviour
     cmdLine = prog;
     foreach(QString str, arg) cmdLine.append(" " + str);
     closeOpt = closeBehaviour;
+    currLine.clear();
+    prevLine.clear();
     process->start(prog,arg);
 }
 
@@ -83,8 +89,46 @@ void avrOutputDialog::doAddTextStdOut()
 
 void avrOutputDialog::doAddTextStdErr()
 {
+    int nlPos;
+    int pbvalue;
+    QString avrphase;
     QByteArray data = process->readAllStandardError();
     QString text = QString(data);
+    currLine.append(text);
+    if (currLine.contains("#")) {
+        avrphase=currLine.left(1).toLower();
+        if (avrphase=="w") {
+            ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #ff0000; text-align:center;}:");
+            phase=1;
+            if(winTitle.isEmpty())
+                setWindowTitle(tr("AVRDUDE - ")+tr("Writing"));
+            else
+                setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Writing"));
+        }
+        if (avrphase=="r") {
+            if (phase==0) {
+                ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #00ff00; text-align:center;}:");
+                if(winTitle.isEmpty())
+                    setWindowTitle(tr("AVRDUDE - ")+tr("Reading"));
+                else
+                    setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Reading"));
+            } else {
+                ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #0000ff; text-align:center;}:");
+                phase=2;
+                if(winTitle.isEmpty())
+                    setWindowTitle(tr("AVRDUDE - ")+tr("Verifying"));
+                else
+                    setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Verifying"));
+            }
+        }
+        pbvalue=currLine.count("#")*2;
+        ui->progressBar->setValue(pbvalue);
+    }
+    if (currLine.contains("\n")) {
+        nlPos=currLine.lastIndexOf("\n");
+        prevLine=currLine.left(nlPos).trimmed();
+        currLine=currLine.mid(nlPos+1);
+    }
     addText(text);
 }
 
@@ -92,10 +136,12 @@ void avrOutputDialog::doAddTextStdErr()
 void avrOutputDialog::doFinished(int code=0)
 {
     addText("\n" HLINE_SEPARATOR);
-    if(code)
+    if(code) {
+        ui->checkBox->setChecked(true);
         addText("\n" + tr("AVRDUDE done - exit code %1").arg(code));
-    else
+    } else {
         addText("\n" + tr("AVRDUDE done - SUCCESSFUL"));
+    }
     addText("\n" HLINE_SEPARATOR "\n");
 
     if(lfuse || hfuse || efuse) addReadFuses();
@@ -140,3 +186,15 @@ void avrOutputDialog::addReadFuses()
     addText("\n" HLINE_SEPARATOR "\n");
 }
 
+void avrOutputDialog::on_checkBox_toggled(bool checked) {
+    if (checked) {
+        ui->plainTextEdit->show();
+    } else {
+        ui->plainTextEdit->hide();
+        QTimer::singleShot(0, this, SLOT(shrink()));
+    }
+}
+
+void avrOutputDialog::shrink() {
+    resize(0,0);
+}

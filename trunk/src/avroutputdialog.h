@@ -32,6 +32,8 @@ protected slots:
     void doAddTextStdErr();
     void doProcessStarted();
     void doFinished(int code);
+    void on_checkBox_toggled(bool checked);
+    void shrink();
 
 private:
     Ui::avrOutputDialog *ui;
@@ -42,6 +44,11 @@ private:
     quint8 lfuse;
     quint8 hfuse;
     quint8 efuse;
+    QString prevLine;
+    QString currLine;
+    int phase;
+    QString winTitle;
+    
 };
 
 #endif // AVROUTPUTDIALOG_H
