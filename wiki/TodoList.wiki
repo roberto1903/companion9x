@@ -26,8 +26,8 @@
 = Import / export =
   * One model data import / export
   * Make our own .c9x files based on an xml formalism defined in the xsd
-  * Er9x export (one TODO remaining) / simulation
-  * Th9x import / export / simulation
+  * ~~Er9x export (one TODO remaining) / simulation~~
+  * ~~Th9x import / export / simulation~~
 
 = Help / translations =
   * All tooltips. A lot of work here!
