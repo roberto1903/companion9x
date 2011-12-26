@@ -215,6 +215,22 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
     ui->numChannelsSB->setEnabled(!g_model.protocol);
     ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
+    ui->TrainerChkB->setChecked(g_model.traineron);
+    if (!GetEepromInterface()->getCapability(ModelTrainerEnable)) {
+        ui->label_Trainer->hide();
+        ui->TrainerChkB->hide();
+    }
+    ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
+    if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
+        ui->T2ThrTrg->hide();
+        ui->T2ThrTrgChkB->hide();
+    }
+    ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
+    if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
+        ui->ppmFrameLengthDSB->hide();
+        ui->label_ppmFrameLengthDSB->hide();
+    }
+    
 }
 
 void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim_idx, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)
@@ -3298,6 +3314,24 @@ void ModelEdit::on_resetCurve_16_clicked()
     updateCurvesTab();
     updateSettings();
     drawCurve();
+}
+
+void ModelEdit::on_TrainerChkB_toggled(bool checked)
+{
+    g_model.traineron = checked;
+    updateSettings();
+}
+
+void ModelEdit::on_T2ThrTrgChkB_toggled(bool checked)
+{
+    g_model.t2throttle = checked;
+    updateSettings();
+}
+
+void ModelEdit::on_ppmFrameLengthDSB_editingFinished()
+{
+    g_model.ppmFrameLength = (ui->ppmFrameLengthDSB->value()-22.5)/0.5;
+    updateSettings();
 }
 
 void ModelEdit::on_extendedLimitsChkB_toggled(bool checked)

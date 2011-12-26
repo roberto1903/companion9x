@@ -187,6 +187,12 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case PPMExtCtrl:
+      return 1;
+    case ModelTrainerEnable:
+      return 1;
+    case Timer2ThrTrig:
+      return 1;
     case TrainerSwitch:
       return 1;
     case BandgapMeasure:
