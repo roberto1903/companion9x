@@ -45,7 +45,7 @@ const uint8_t modn12x3[4][4]= { // TODO delete it?
 #define MAX_MODELS  16
 #define MAX_PHASES  5
 #define MAX_MIXERS  32
-#define MAX_EXPOS   14
+#define MAX_EXPOS   24
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 

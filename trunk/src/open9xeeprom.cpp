@@ -461,7 +461,7 @@ t_Open9xModelData_v201::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
@@ -503,7 +503,7 @@ t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &c9x)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
-    for (int i=0; i<MAX_EXPOS; i++)
+    for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
