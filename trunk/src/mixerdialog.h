@@ -19,6 +19,7 @@ protected:
 
 private slots:
     void valuesChanged();
+    void shrink();
 
 
 private:

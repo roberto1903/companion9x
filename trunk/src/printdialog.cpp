@@ -169,7 +169,7 @@ void printDialog::printSetup()
 {
     int i,k;
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append("<tr><td colspan=2 ><h1>");
+    str.append(QString("<tr><td colspan=%1 ><h1>").arg(GetEepromInterface()->getCapability(Phases) ? 2 : 1));
     str.append(g_model->name);
     str.append("&nbsp;(");
     str.append(eepromInterface->getName());
@@ -187,31 +187,34 @@ void printDialog::printSetup()
     // TODO    str.append(fv(tr("Trim Switch"), getSWName(g_model->trimSw)));
     str.append(fv(tr("Trim Increment"), getTrimInc()));
     str.append(fv(tr("Center Beep"), getCenterBeep())); // specify which channels beep
-    str.append("</td></tr></table></td><td width=\"380\">");
-    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=8><h2>");
-    str.append(tr("Flight Phases Settings"));
-    str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
-    str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
-    str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
-    str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
-    for (i=0; i<4; i++) {
-      str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
-    }
-    str.append("</tr>");
-    for (i=0; i<MAX_PHASES; i++) {
-        PhaseData *pd=&g_model->phaseData[i];
-        str.append("<tr><td><b>"+tr("FP")+QString("%1</b> <font size=+1 face='Courier New' color=green>%2</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%3</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%4</font></td>").arg(i).arg(pd->name).arg(pd->fadeIn).arg(pd->fadeOut));
-        for (k=0; k<4; k++) {
-            if (pd->trimRef[k]==-1) {
-                str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->trim[k]));
-            } else {
-                str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->trimRef[k]));
-            }
+    str.append("</td></tr></table></td>");
+    if (GetEepromInterface()->getCapability(Phases)) {
+        str.append("<td width=\"380\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=8><h2>");
+        str.append(tr("Flight Phases Settings"));
+        str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
+        str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
+        str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
+        str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
+        for (i=0; i<4; i++) {
+          str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
         }
-        str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(getSWName(pd->swtch)));
         str.append("</tr>");
+        for (i=0; i<MAX_PHASES; i++) {
+            PhaseData *pd=&g_model->phaseData[i];
+            str.append("<tr><td><b>"+tr("FP")+QString("%1</b> <font size=+1 face='Courier New' color=green>%2</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%3</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%4</font></td>").arg(i).arg(pd->name).arg(pd->fadeIn).arg(pd->fadeOut));
+            for (k=0; k<4; k++) {
+                if (pd->trimRef[k]==-1) {
+                    str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->trim[k]));
+                } else {
+                    str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->trimRef[k]));
+                }
+            }
+            str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(getSWName(pd->swtch)));
+            str.append("</tr>");
+        }
+        str.append("</table></td>");
     }
-    str.append("</table></td></tr></table><br>");
+    str.append("</tr></table><br>");
     te->append(str);
 }
 
@@ -296,7 +299,11 @@ void printDialog::printMixes()
         str += getSourceStr(md->srcRaw);
         if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
         if (md->carryTrim) str += " " + tr("noTrim");
-        if (md->sOffset)  str += tr("Offset") + QString(" %1%)").arg(md->sOffset);
+        if(md->enableFmTrim==1){ 
+                if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
+        } else {
+                if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+        }
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
         if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);

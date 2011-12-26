@@ -197,6 +197,7 @@ t_Er9xMixData::t_Er9xMixData(MixData &eepe)
   carryTrim = eepe.carryTrim;
   mltpx = (MltpxValue)eepe.mltpx;
   mixWarn = eepe.mixWarn;
+  enableFmTrim=eepe.enableFmTrim;
   sOffset = eepe.sOffset;
 }
 
@@ -215,6 +216,7 @@ t_Er9xMixData::operator MixData ()
   eepe.carryTrim = carryTrim;
   eepe.mltpx = (MltpxValue)mltpx;
   eepe.mixWarn = mixWarn;
+  eepe.enableFmTrim=enableFmTrim;
   eepe.sOffset = sOffset;
   return eepe;
 }
