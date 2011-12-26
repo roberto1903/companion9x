@@ -299,7 +299,7 @@ void printDialog::printMixes()
         str += getSourceStr(md->srcRaw);
         if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
         if (md->carryTrim) str += " " + tr("noTrim");
-        if(md->enableFmTrim==1){ 
+        if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                 if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
         } else {
                 if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
