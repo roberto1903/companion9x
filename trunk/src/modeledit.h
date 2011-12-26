@@ -121,7 +121,9 @@ private slots:
     void clearExpos(bool ask=true);
     void clearMixes(bool ask=true);
     void clearCurves(bool ask=true);
-
+    void on_T2ThrTrgChkB_toggled(bool checked);
+    void on_TrainerChkB_toggled(bool checked);
+    void on_ppmFrameLengthDSB_editingFinished();
     void on_extendedLimitsChkB_toggled(bool checked);
     void on_extendedTrimsChkB_toggled(bool checked);
     void on_resetCurve_1_clicked();

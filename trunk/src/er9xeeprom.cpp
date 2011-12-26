@@ -100,6 +100,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &eepe)
   speakerPitch = eepe.speakerPitch;
   hapticStrength = eepe.hapticStrength;
   speakerMode = eepe.speakerMode;
+  
 }
 
 Er9xGeneral::operator GeneralSettings ()
@@ -331,6 +332,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &eepe)
     tmrDir = eepe.timers[0].dir;
     tmrVal = eepe.timers[0].val;
     protocol = eepe.protocol;
+    traineron = eepe.traineron;
+    t2throttle = eepe.t2throttle;
+    ppmFrameLength = eepe.ppmFrameLength;
     ppmNCH = (eepe.ppmNCH - 8) / 2;
     thrTrim = eepe.thrTrim;
     thrExpo = eepe.thrExpo;
@@ -407,6 +411,9 @@ t_Er9xModelData::operator ModelData ()
   eepe.timers[0].dir = tmrDir;
   eepe.timers[0].val = tmrVal;
   eepe.protocol = (Protocol)protocol;
+  eepe.traineron= traineron;
+  eepe.t2throttle =  t2throttle;
+  eepe.ppmFrameLength=ppmFrameLength;
   eepe.ppmNCH = 8 + 2 * ppmNCH;
   eepe.thrTrim = thrTrim;
   eepe.thrExpo = thrExpo;

@@ -203,7 +203,10 @@ PACK(typedef struct t_Er9xModelData {
   int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
   uint8_t   tmrDir:1;    //0=>Count Down, 1=>Count Up
   uint8_t   traineron:1;  // 0 disable trainer, 1 allow trainer
-  uint8_t   spare:6;
+  uint8_t   t2throttle:1 ;  // Start timer2 using throttle
+  uint8_t   FrSkyUsrProto:2 ;  // Protocol in FrSky User Data, 0=FrSky Hub, 1=WS HowHigh
+  uint8_t   FrSkyImperial:1 ;  // Convert FrSky values to imperial units
+  uint8_t   spare:2;
   uint16_t  tmrVal;
   uint8_t   protocol;
   int8_t    ppmNCH;
@@ -221,7 +224,7 @@ PACK(typedef struct t_Er9xModelData {
   uint8_t   swashType:3;
   uint8_t   swashCollectiveSource;
   uint8_t   swashRingValue;
-  uint8_t   res1;
+  int8_t    ppmFrameLength;
   Er9xMixData   mixData[MAX_MIXERS];
   Er9xLimitData limitData[NUM_CHNOUT];
   Er9xExpoData  expoData[4];

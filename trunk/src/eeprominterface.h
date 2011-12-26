@@ -467,7 +467,10 @@ class ModelData {
     FuncSwData    funcSw[NUM_FSW];
     SafetySwData  safetySw[NUM_CHNOUT];
     SwashRingData swashRingData;
-
+    int8_t   ppmFrameLength;
+    int8_t   traineron;  // 0 disable trainer, 1 allow trainer
+    int8_t   t2throttle;  // Start timer2 using throttle
+    
     /* FrSky */    
     FrSkyData frsky;
 
@@ -495,6 +498,9 @@ enum Capability {
  BandgapMeasure,
  PotScrolling,
  TrainerSwitch,
+ ModelTrainerEnable,
+ Timer2ThrTrig,
+ PPMExtCtrl,
 };
 
 class SimulatorInterface;
