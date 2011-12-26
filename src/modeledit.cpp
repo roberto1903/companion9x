@@ -490,11 +490,16 @@ void ModelEdit::tabMixes()
         if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
         if(md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
         if(md->carryTrim) str += " " + tr("noTrim");
-        if(md->sOffset) str += " " + tr("Offset") + QString("(%1%)").arg(md->sOffset);
+        if(md->enableFmTrim==1){
+            if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
+        } else {
+                if(md->sOffset) str += " " + tr("Offset") + QString("(%1%)").arg(md->sOffset);
+        }
         if(md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
         if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
+        
 
         qba.clear();
         qba.append((quint8)i);

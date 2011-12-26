@@ -324,6 +324,7 @@ class MixData {
     bool carryTrim;
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
     uint8_t mixWarn;           // mixer warning
+    uint8_t enableFmTrim;
     int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
     int8_t  sOffset;
 
@@ -501,6 +502,7 @@ enum Capability {
  ModelTrainerEnable,
  Timer2ThrTrig,
  PPMExtCtrl,
+ MixFmTrim,
 };
 
 class SimulatorInterface;

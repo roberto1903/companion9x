@@ -16,6 +16,16 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
     ui->trimChkB->setChecked(md->carryTrim==0);
+    ui->FMtrimChkB->setChecked(md->enableFmTrim);
+    if (md->enableFmTrim==1) {
+        ui->label_4->setText(tr("FM Trim Value"));
+    } else {
+        ui->label_4->setText(tr("Offset"));
+    }
+    if (!GetEepromInterface()->getCapability(MixFmTrim)) {
+        ui->FMtrimChkB->hide();
+        ui->label_FMtrim->hide();
+    }
     populateCurvesCB(ui->curvesCB,md->curve);
     populatePhasesCB(ui->phasesCB,md->phase);
     populateSwitchCB(ui->switchesCB,md->swtch);
@@ -26,7 +36,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->delayUpSB->setValue(md->delayUp);
     ui->slowDownSB->setValue(md->speedDown);
     ui->slowUpSB->setValue(md->speedUp);
-
+    QTimer::singleShot(0, this, SLOT(shrink()));
 
     valuesChanged();
 
@@ -34,6 +44,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->trimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
+    connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -69,6 +80,7 @@ void MixerDialog::valuesChanged()
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimChkB->checkState() ? 0 : 1;
+    md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     md->curve     = ui->curvesCB->currentIndex();
     md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
     md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
@@ -78,4 +90,13 @@ void MixerDialog::valuesChanged()
     md->delayUp   = ui->delayUpSB->value();
     md->speedDown = ui->slowDownSB->value();
     md->speedUp   = ui->slowUpSB->value();
+    if (md->enableFmTrim==1) {
+        ui->label_4->setText(tr("FM Trim Value"));
+    } else {
+        ui->label_4->setText(tr("Offset"));
+    }
+}
+
+void MixerDialog::shrink() {
+    resize(0,0);
 }

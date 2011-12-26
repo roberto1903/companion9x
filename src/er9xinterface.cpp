@@ -187,6 +187,8 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case MixFmTrim:
+      return 1;      
     case PPMExtCtrl:
       return 1;
     case ModelTrainerEnable:
