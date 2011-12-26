@@ -35,7 +35,7 @@
 #define NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
-typedef struct t_Th9xTrainerMix {
+PACK(typedef struct t_Th9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
   int8_t  swtch:5;
   int8_t  studWeight:6;
@@ -45,9 +45,9 @@ typedef struct t_Th9xTrainerMix {
   t_Th9xTrainerMix();
   t_Th9xTrainerMix(TrainerMix&);
 
-} __attribute__((packed)) Th9xTrainerMix; //
+}) Th9xTrainerMix; //
 
-typedef struct t_Th9xTrainerData {
+PACK(typedef struct t_Th9xTrainerData {
   int16_t        calib[8];
   Th9xTrainerMix mix[4];
 
@@ -55,9 +55,9 @@ typedef struct t_Th9xTrainerData {
   t_Th9xTrainerData();
   t_Th9xTrainerData(TrainerData&);
 
-} __attribute__((packed)) Th9xTrainerData;
+}) Th9xTrainerData;
 
-typedef struct t_Th9xGeneral {
+PACK(typedef struct t_Th9xGeneral {
   uint8_t   myVers;
   int16_t   calibMid[NUM_STICKSnPOTS];
   int16_t   calibSpanNeg[NUM_STICKSnPOTS];
@@ -87,13 +87,13 @@ typedef struct t_Th9xGeneral {
   t_Th9xGeneral();
   t_Th9xGeneral(GeneralSettings&);
 
-} __attribute__((packed)) Th9xGeneral;
+}) Th9xGeneral;
 
 /*
  * ModelData
  */
 
-typedef struct t_Th9xExpoData {
+PACK(typedef struct t_Th9xExpoData {
   int8_t  exp5:5;
   uint8_t mode3:3; //0=end 1=pos 2=neg 3=both 4=trimNeg
 
@@ -106,10 +106,10 @@ typedef struct t_Th9xExpoData {
   operator ExpoData();
   t_Th9xExpoData();
   t_Th9xExpoData(ExpoData&);
-} __attribute__((packed)) Th9xExpoData;
+}) Th9xExpoData;
 
 
-typedef struct t_Th9xLimitData {
+PACK(typedef struct t_Th9xLimitData {
   int8_t  min:7;
   bool    scale:1;
   int8_t  max:7;
@@ -120,13 +120,13 @@ typedef struct t_Th9xLimitData {
   operator LimitData();
   t_Th9xLimitData();
   t_Th9xLimitData(LimitData&);
-} __attribute__((packed)) Th9xLimitData;
+}) Th9xLimitData;
 
 #define MLTPX_ADD  0
 #define MLTPX_MUL  1
 #define MLTPX_REP  2
 
-typedef struct t_Th9xMixData {
+PACK(typedef struct t_Th9xMixData {
   uint8_t destCh:4;     // 1..NUM_CHNOUT,X1-X4
   uint8_t mixMode:2;    // + * =
   uint8_t dmy1:2;       //
@@ -146,9 +146,9 @@ typedef struct t_Th9xMixData {
   operator MixData();
   t_Th9xMixData();
   t_Th9xMixData(MixData&);
-} __attribute__((packed)) Th9xMixData;
+}) Th9xMixData;
 
-typedef struct t_Th9xCustomSwData {
+PACK(typedef struct t_Th9xCustomSwData {
   uint8_t sw:3;    // 0..7
   uint8_t opCmp:2; // < & | ^
   uint8_t opRes:3; // 0 => 1=> 0=> !=> & | ^
@@ -158,16 +158,16 @@ typedef struct t_Th9xCustomSwData {
   operator CustomSwData();
   t_Th9xCustomSwData();
   t_Th9xCustomSwData(CustomSwData &);
-} __attribute__((packed)) Th9xCustomSwData;
+}) Th9xCustomSwData;
 
-typedef struct t_Th9xTrimData {
+PACK(typedef struct t_Th9xTrimData {
   int8_t  itrim:6; //trim index
   uint8_t tmode:2;
 
   t_Th9xTrimData() { }
-} __attribute__((packed)) Th9xTrimData;
+}) Th9xTrimData;
 
-typedef struct t_Th9xModelData {
+PACK(typedef struct t_Th9xModelData {
   char      name[10];             // 10 must be first for eeLoadModelName
   uint8_t   mdVers;               // 1
   uint8_t   tmrMode:3;            // 1
@@ -187,7 +187,7 @@ typedef struct t_Th9xModelData {
   operator ModelData();
   t_Th9xModelData();
   t_Th9xModelData(ModelData&);
-} __attribute__((packed)) Th9xModelData;
+}) Th9xModelData;
 
 
 #endif

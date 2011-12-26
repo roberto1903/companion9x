@@ -46,6 +46,7 @@ t_Th9xTrainerData::operator TrainerData ()
     c9x.calib[i] = calib[i];
     c9x.mix[i] = mix[i];
   }
+  return c9x;
 }
 
 t_Th9xGeneral::t_Th9xGeneral()
