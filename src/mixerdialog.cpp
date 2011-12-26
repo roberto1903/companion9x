@@ -25,6 +25,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     if (!GetEepromInterface()->getCapability(MixFmTrim)) {
         ui->FMtrimChkB->hide();
         ui->label_FMtrim->hide();
+        ui->label_4->setText(tr("Offset"));
     }
     populateCurvesCB(ui->curvesCB,md->curve);
     populatePhasesCB(ui->phasesCB,md->phase);
@@ -90,7 +91,7 @@ void MixerDialog::valuesChanged()
     md->delayUp   = ui->delayUpSB->value();
     md->speedDown = ui->slowDownSB->value();
     md->speedUp   = ui->slowUpSB->value();
-    if (md->enableFmTrim==1) {
+    if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
     } else {
         ui->label_4->setText(tr("Offset"));
