@@ -315,7 +315,7 @@ PACK(typedef struct t_Gruvin9xTimerData {
 #define MAX_MODELS 16
 #define MAX_PHASES 5
 #define MAX_MIXERS 32
-#define MAX_EXPOS  14
+#define G9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
 #define MAX_CURVE9 8
 
@@ -342,7 +342,7 @@ PACK(typedef struct t_Gruvin9xModelData_v102 {
   Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
-  Gruvin9xExpoData  expoData[MAX_EXPOS];
+  Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[NUM_CSW];
@@ -374,7 +374,7 @@ PACK(typedef struct t_Gruvin9xModelData_v103 {
   Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
-  Gruvin9xExpoData  expoData[MAX_EXPOS];
+  Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[NUM_CSW];
@@ -406,7 +406,7 @@ PACK(typedef struct t_Gruvin9xModelData_v105 {
   Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
-  Gruvin9xExpoData  expoData[MAX_EXPOS];
+  Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[NUM_CSW];
@@ -440,7 +440,7 @@ PACK(typedef struct t_Gruvin9xModelData_v106 {
   Gruvin9xTimerData timer2;
   Gruvin9xMixData   mixData[MAX_MIXERS];
   Gruvin9xLimitData limitData[NUM_CHNOUT];
-  Gruvin9xExpoData  expoData[MAX_EXPOS];
+  Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[NUM_CSW];

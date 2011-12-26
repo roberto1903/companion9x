@@ -250,7 +250,7 @@ PACK(typedef struct t_Open9xTimerData_v201 {
 #define MAX_MODELS 16
 #define MAX_PHASES 5
 #define MAX_MIXERS 32
-#define MAX_EXPOS  14
+#define G9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
 #define MAX_CURVE9 8
 
@@ -276,7 +276,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   Open9xTimerData_v201 timer2;
   Open9xMixData   mixData[MAX_MIXERS];
   Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[MAX_EXPOS];
+  Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[NUM_CSW];
