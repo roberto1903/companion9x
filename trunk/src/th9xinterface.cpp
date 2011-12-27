@@ -102,6 +102,8 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
 int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
+  EEPROMWarnings.clear();
+
   efile->EeFsInit(eeprom, EESIZE_STOCK, true);
 
   Th9xGeneral th9xGeneral(radioData.generalSettings);

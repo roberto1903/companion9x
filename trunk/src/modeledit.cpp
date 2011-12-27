@@ -2570,16 +2570,20 @@ void ModelEdit::on_curveEdit_16_clicked()
 }
 
 
-void ModelEdit::gm_insertMix(int idx)
+bool ModelEdit::gm_insertMix(int idx)
 {
-    if(idx<0 || idx>=MAX_MIXERS) return;
+  if (idx<0 || idx>=MAX_MIXERS || g_model.mixData[MAX_MIXERS-1].destCh > 0) {
+    QMessageBox::information(this, "companion9x", tr("Not enough available mixers!"));
+    return false;
+  }
 
-    int i = g_model.mixData[idx].destCh;
-    memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
-            (MAX_MIXERS-(idx+1))*sizeof(MixData) );
-    memset(&g_model.mixData[idx],0,sizeof(MixData));
-    g_model.mixData[idx].destCh = i;
-    g_model.mixData[idx].weight = 100;
+  int i = g_model.mixData[idx].destCh;
+  memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
+      (MAX_MIXERS-(idx+1))*sizeof(MixData) );
+  memset(&g_model.mixData[idx],0,sizeof(MixData));
+  g_model.mixData[idx].destCh = i;
+  g_model.mixData[idx].weight = 100;
+  return true;
 }
 
 void ModelEdit::gm_deleteMix(int index)
@@ -2614,9 +2618,12 @@ int ModelEdit::getMixerIndex(int dch)
     return i;
 }
 
-void ModelEdit::gm_insertExpo(int idx)
+bool ModelEdit::gm_insertExpo(int idx)
 {
-    if(idx<0 || idx>=MAX_EXPOS) return;
+    if (idx<0 || idx>=MAX_EXPOS || g_model.expoData[MAX_EXPOS-1].mode > 0) {
+      QMessageBox::information(this, "companion9x", tr("Not enough available expos!"));
+      return false;
+    }
 
     int chn = g_model.expoData[idx].chn;
     memmove(&g_model.expoData[idx+1],&g_model.expoData[idx],
@@ -2625,7 +2632,7 @@ void ModelEdit::gm_insertExpo(int idx)
     g_model.expoData[idx].chn = chn;
     g_model.expoData[idx].weight = 100;
     g_model.expoData[idx].mode = 3 /* TODO enum */;
-
+    return true;
 }
 
 void ModelEdit::gm_deleteExpo(int index)
@@ -2667,7 +2674,8 @@ void ModelEdit::mixerlistWidget_doubleClicked(QModelIndex index)
     {
         int i = -idx;
         idx = getMixerIndex(i); //get mixer index to insert
-        gm_insertMix(idx);
+        if (!gm_insertMix(idx))
+          return;
         g_model.mixData[idx].destCh = i;
     }
     gm_openMix(idx);
@@ -2856,7 +2864,8 @@ void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
       idx++;
       if(idx==MAX_MIXERS) break;
 
-      gm_insertMix(idx);
+      if (!gm_insertMix(idx))
+        break;
       MixData *md = &g_model.mixData[idx];
       memcpy(md,mxData.mid(i,sizeof(MixData)).constData(),sizeof(MixData));
       md->destCh = dch;
@@ -2867,7 +2876,7 @@ void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
     tabMixes();
   }
 }
-
+#include <iostream>
 void ModelEdit::pasteExpoMimeData(const QMimeData * mimeData, int destIdx)
 {
   if (mimeData->hasFormat("application/x-companion9x-expo")) {
@@ -2888,8 +2897,8 @@ void ModelEdit::pasteExpoMimeData(const QMimeData * mimeData, int destIdx)
     int i = 0;
     while (i < mxData.size()) {
       idx++;
-      if (idx == MAX_EXPOS) break;
-      gm_insertExpo(idx);
+      if (!gm_insertExpo(idx))
+        break;
       ExpoData *md = &g_model.expoData[idx];
       memcpy(md, mxData.mid(i, sizeof(ExpoData)).constData(), sizeof(ExpoData));
       md->chn = dch;
@@ -2938,7 +2947,8 @@ void ModelEdit::mixerOpen()
     {
         int i = -idx;
         idx = getMixerIndex(i); //get mixer index to insert
-        gm_insertMix(idx);
+        if (!gm_insertMix(idx))
+          return;
         g_model.mixData[idx].destCh = i;
     }
     gm_openMix(idx);
@@ -2952,13 +2962,15 @@ void ModelEdit::mixerAdd()
     {
         int i = -index;
         index = getMixerIndex(i); //get mixer index to insert
-        gm_insertMix(index);
+        if (!gm_insertMix(index))
+          return;
         g_model.mixData[index].destCh = i;
     }
     else
     {
         index++;
-        gm_insertMix(index);
+        if (!gm_insertMix(index))
+          return;
         g_model.mixData[index].destCh = g_model.mixData[index-1].destCh;
     }
 
@@ -2975,7 +2987,8 @@ void ModelEdit::expoOpen(QListWidgetItem *item)
   if (idx<0) {
       int ch = -idx-1;
       idx = getExpoIndex(ch); // get expo index to insert
-      gm_insertExpo(idx);
+      if (!gm_insertExpo(idx))
+        return;
       g_model.expoData[idx].chn = ch;
   }
   gm_openExpo(idx);
@@ -2990,7 +3003,8 @@ void ModelEdit::expoAdd()
   }
   else {
     index++;
-    gm_insertExpo(index);
+    if (!gm_insertExpo(index))
+      return;
     g_model.expoData[index].chn = g_model.expoData[index-1].chn;
   }
 

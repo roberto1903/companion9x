@@ -82,7 +82,7 @@ private:
     QSpinBox *getNodeSB(int i);
 
     int getExpoIndex(int dch);
-    void gm_insertExpo(int idx);
+    bool gm_insertExpo(int idx);
     void gm_deleteExpo(int index);
     void gm_openExpo(int index);
     int gm_moveExpo(int idx, bool dir);
@@ -91,7 +91,7 @@ private:
     void setSelectedByExpoList(QList<int> list);
 
     int getMixerIndex(int dch);
-    void gm_insertMix(int idx);
+    bool gm_insertMix(int idx);
     void gm_deleteMix(int index);
     void gm_openMix(int index);
     int gm_moveMix(int idx, bool dir);

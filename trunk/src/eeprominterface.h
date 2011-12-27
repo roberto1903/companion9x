@@ -19,6 +19,7 @@
 
 #include <inttypes.h>
 #include <string.h>
+#include <QString>
 
 #if __GNUC__
 #define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
@@ -531,7 +532,10 @@ class EEPROMInterface
     virtual SimulatorInterface * getSimulator() = 0;
 
     virtual const int getEEpromSize() = 0;
+
 };
+
+extern QString EEPROMWarnings;
 
 /* EEPROM string conversion functions */
 void setEEPROMString(char *dst, const char *src, int size);

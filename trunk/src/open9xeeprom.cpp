@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "open9xeeprom.h"
+#include <QObject>
 
 #define EEPROM_VER       201
 
@@ -505,6 +506,8 @@ t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &c9x)
       limitData[i] = c9x.limitData[i];
     for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
+    if (c9x.expoData[G9X_MAX_EXPOS].mode)
+      EEPROMWarnings += QObject::tr("Gruvin9x firmware only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];

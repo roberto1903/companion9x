@@ -1,11 +1,9 @@
 #include "mixerslist.h"
-//Q_DECLARE_METATYPE(QModelIndex); //at start of BookMarkList.cpp file (after #includes)
 
 MixersList::MixersList(QWidget *parent, bool expo) :
     QListWidget(parent),
     expo(expo)
 {
-
     setFont(QFont("Courier New",12));
     setContextMenuPolicy(Qt::CustomContextMenu);
     setSelectionMode(QAbstractItemView::SingleSelection);

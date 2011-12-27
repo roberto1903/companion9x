@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "gruvin9xeeprom.h"
+#include <QObject>
 
 #define EEPROM_VER       106
 
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
-#include <iostream>
 t_Gruvin9xTrainerMix_v103::operator TrainerMix()
 {
   TrainerMix c9x;
@@ -521,7 +521,7 @@ t_Gruvin9xModelData_v103::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
@@ -577,7 +577,7 @@ t_Gruvin9xModelData_v105::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
@@ -629,7 +629,7 @@ t_Gruvin9xModelData_v106::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-  for (int i=0; i<NUM_STICKS; i++)
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
@@ -670,8 +670,10 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
-    for (int i=0; i<G9X_MAX_EXPOS; i++) // TODO warning if >
+    for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
+    if (c9x.expoData[G9X_MAX_EXPOS].mode)
+      EEPROMWarnings += QObject::tr("gruvin9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
