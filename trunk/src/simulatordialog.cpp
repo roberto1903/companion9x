@@ -471,11 +471,6 @@ bool simulatorDialog::keyState(EnumKeys key)
     }
 }
 
-
-// TODO
-#undef CONVERT_MODE
-#define CONVERT_MODE(x) (((x)<=4) ? modn12x3[g_eeGeneral->stickMode][((x)-1)] : (x))
-
 void simulatorDialog::timerTick()
 {
 #if 0
