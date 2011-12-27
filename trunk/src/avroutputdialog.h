@@ -19,7 +19,7 @@ class avrOutputDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour=AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+    explicit avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour=AVR_DIALOG_CLOSE_IF_SUCCESSFUL, bool displayDetails=false);
     ~avrOutputDialog();
 
     void addText(const QString &text);
