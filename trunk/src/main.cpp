@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(companion9x);
     QApplication app(argc, argv);
-
+    time_t start,elapsed;
     QString dir;
     if(argc) dir = QFileInfo(argv[0]).canonicalPath() + "/lang";
 
@@ -71,23 +71,21 @@ int main(int argc, char *argv[])
 
     RegisterEepromInterfaces();
 
-    QPixmap pixmap(":/images/companion9x-title.png");
-    QSplashScreen *splash = new QSplashScreen(pixmap);
-    if(showSplash)
-    {
-        splash->show();
-        sleep(SPLASH_TIME);
-        bool checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
-
-        if (checkCompanion9x)
-            splash->showMessage(QObject::tr("Checking for updates..."));
-    }
-
-
     QTranslator companion9xTranslator;
     companion9xTranslator.load(":/companion9x_" + locale);
     app.installTranslator(&companion9xTranslator);
-
+    
+    QPixmap pixmap(":/images/companion9x-title.png");
+    QSplashScreen *splash = new QSplashScreen(pixmap);
+ 
+    if(showSplash)
+    {
+        splash->show();
+        bool checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
+        if (checkCompanion9x)
+            splash->showMessage(QObject::tr("Checking for updates..."));        
+        sleep(SPLASH_TIME);
+    }
     MainWindow mainWin;
     mainWin.show();
     splash->finish(&mainWin);
