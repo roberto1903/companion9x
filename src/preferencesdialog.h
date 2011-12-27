@@ -23,6 +23,7 @@ private:
 
 private slots:
     void write_values();
+    void on_fw_dnld_clicked();
 };
 
 #endif // PREFERENCESDIALOG_H

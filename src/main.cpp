@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(companion9x);
     QApplication app(argc, argv);
-    time_t start,elapsed;
     QString dir;
     if(argc) dir = QFileInfo(argv[0]).canonicalPath() + "/lang";
 

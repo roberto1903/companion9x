@@ -34,6 +34,35 @@
 #define DNLD_VER_OPEN9X                 4
 #define DNLD_VER_TH9X                   5
 
+#define FW_VER_ER9X            0
+#define FW_VER_ER9X_JETI       1
+#define FW_VER_ER9X_FRSKY      2
+#define FW_VER_ER9X_ARDUPILOT  3
+#define FW_VER_ER9X_FRSKY_NOHT 4
+#define FW_VER_ER9X_NOHT       5
+#define FW_VER_ER9X_NMEA      6
+#define FW_VER_GR9X_STD      7
+#define FW_VER_GR9X_SPK      8
+#define FW_VER_GR9X_FRSKY      9
+#define FW_VER_GR9X_FRSKYSPK      10
+#define FW_VER_GR9X_V4      11
+#define FW_VER_TH9X      12
+
+
+#define ER9X_URL   "http://er9x.googlecode.com/svn/trunk/er9x.hex"
+#define ER9X_NOHT_URL   "http://er9x.googlecode.com/svn/trunk/er9x-noht.hex"
+#define ER9X_JETI_URL   "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"
+#define ER9X_FRSKY_URL   "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex"
+#define ER9X_FRSKY_NOHT_URL   "http://er9x.googlecode.com/svn/trunk/er9x-frsky-noht.hex"
+#define ER9X_ARDUPILOT_URL   "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex"
+#define ER9X_NMEA_URL   "http://er9x.googlecode.com/svn/trunk/er9x-nmea.hex"
+#define GR9X_STD_URL "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-stock.hex"
+#define GR9X_SPK_URL "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-std-speaker.hex"
+#define GR9X_FRSKY_URL "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-nospeaker.hex"
+#define GR9X_FRSKYSPK_URL "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-speaker.hex"
+#define GR9X_V4_URL "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"
+#define TH9X_URL "http://th9x.googlecode.com/svn/trunk/th9x.bin"
+
 #define EESIZE_STOCK   2048
 #define EESIZE_V4      4096
 
