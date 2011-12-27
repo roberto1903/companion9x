@@ -134,7 +134,7 @@ void burnConfigDialog::listProgrammers()
     QStringList arguments;
     arguments << "-c?";
 
-    avrOutputDialog *ad = new avrOutputDialog(this, ui->avrdude_location->text(), arguments, "List available programmers", AVR_DIALOG_KEEP_OPEN);
+    avrOutputDialog *ad = new avrOutputDialog(this, ui->avrdude_location->text(), arguments, "List available programmers", AVR_DIALOG_KEEP_OPEN, TRUE);
     ad->setWindowIcon(QIcon(":/images/list.png"));
     ad->show();
 }
@@ -151,7 +151,7 @@ void burnConfigDialog::on_pushButton_4_clicked()
     QStringList arguments;
     arguments << "-?";
 
-    avrOutputDialog *ad = new avrOutputDialog(this, ui->avrdude_location->text(), arguments, "Show help", AVR_DIALOG_KEEP_OPEN);
+    avrOutputDialog *ad = new avrOutputDialog(this, ui->avrdude_location->text(), arguments, "Show help", AVR_DIALOG_KEEP_OPEN,TRUE);
     ad->setWindowIcon(QIcon(":/images/configure.png"));
     ad->show();
 }
@@ -168,7 +168,7 @@ void burnConfigDialog::readFuses()
     QStringList arguments;
     arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << str;
 
-    avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, arguments, "Read Fuses",AVR_DIALOG_KEEP_OPEN);
+    avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, arguments, "Read Fuses",AVR_DIALOG_KEEP_OPEN,TRUE);
     ad->setWindowIcon(QIcon(":/images/fuses.png"));
     ad->show();
 }
@@ -198,7 +198,7 @@ void burnConfigDialog::restFuses(bool eeProtect)
         QStringList arguments;
         arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << "-u" << str;
 
-        avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, arguments, "Reset Fuses",AVR_DIALOG_KEEP_OPEN);
+        avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, arguments, "Reset Fuses",AVR_DIALOG_KEEP_OPEN,TRUE);
         ad->setWindowIcon(QIcon(":/images/fuses.png"));
         ad->show();
     }

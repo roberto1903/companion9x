@@ -2,7 +2,7 @@
 #include "ui_avroutputdialog.h"
 #include <QtGui>
 
-avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour) :
+avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour, bool displayDetails) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::avrOutputDialog)
 {
@@ -25,8 +25,12 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     phase=0;
     currLine.clear();
     prevLine.clear();
-    ui->plainTextEdit->hide();
-    QTimer::singleShot(0, this, SLOT(shrink()));
+    if (!displayDetails) {
+        ui->plainTextEdit->hide();
+        QTimer::singleShot(0, this, SLOT(shrink()));
+    } else {
+        ui->checkBox->setChecked(true);
+    }
     process = new QProcess(this);
     connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
     connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
@@ -103,6 +107,8 @@ void avrOutputDialog::doAddTextStdErr()
                 setWindowTitle(tr("AVRDUDE - ")+tr("Writing"));
             else
                 setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Writing"));
+            pbvalue=currLine.count("#")*2;
+            ui->progressBar->setValue(pbvalue);
         }
         if (avrphase=="r") {
             if (phase==0) {
@@ -119,9 +125,9 @@ void avrOutputDialog::doAddTextStdErr()
                 else
                     setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Verifying"));
             }
+            pbvalue=currLine.count("#")*2;
+            ui->progressBar->setValue(pbvalue);
         }
-        pbvalue=currLine.count("#")*2;
-        ui->progressBar->setValue(pbvalue);
     }
     if (currLine.contains("\n")) {
         nlPos=currLine.lastIndexOf("\n");
