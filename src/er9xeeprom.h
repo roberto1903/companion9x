@@ -103,21 +103,12 @@ PACK(typedef struct t_Er9xGeneral {
 
 }) Er9xGeneral;
 
-
-
-
-
-//eeprom modelspec
-//expo[3][2][2] //[Norm/Dr][expo/weight][R/L]
-
 PACK(typedef struct t_Er9xExpoData {
   int8_t  expo[3][2][2];
   int8_t  drSw1;
   int8_t  drSw2;
 
-  operator ExpoData();
-  t_Er9xExpoData();
-  t_Er9xExpoData(ExpoData&);
+  t_Er9xExpoData() { memset(this, 0, sizeof(t_Er9xExpoData)); }
 }) Er9xExpoData;
 
 
@@ -240,7 +231,7 @@ PACK(typedef struct t_Er9xModelData {
   Er9xSafetySwData  safetySw[NUM_CHNOUT];
   Er9xFrSkyData frsky;
   operator ModelData();
-  t_Er9xModelData();
+  t_Er9xModelData() { memset(this, 0, sizeof(t_Er9xModelData)); }
   t_Er9xModelData(ModelData&);
 }) Er9xModelData;
 

@@ -175,6 +175,8 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
 int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
+  EEPROMWarnings.clear();
+
   efile->EeFsInit(eeprom, size, true);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);

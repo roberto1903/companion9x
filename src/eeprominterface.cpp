@@ -8,6 +8,8 @@
 #include "open9xinterface.h"
 #include "qsettings.h"
 
+QString EEPROMWarnings;
+
 void setEEPROMString(char *dst, const char *src, int size)
 {
   memcpy(dst, src, size);

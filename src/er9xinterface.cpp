@@ -131,6 +131,8 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
 int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
+  EEPROMWarnings.clear();
+
   efile->EeFsInit(eeprom, EESIZE_STOCK, true);
 
   Er9xGeneral er9xGeneral(radioData.generalSettings);

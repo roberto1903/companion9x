@@ -133,6 +133,8 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
 int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
+  EEPROMWarnings.clear();
+
   efile->EeFsInit(eeprom, EESIZE_STOCK, true);
 
   Open9xGeneral open9xGeneral(radioData.generalSettings);
