@@ -57,6 +57,8 @@ ModelData::ModelData()
 void ModelData::clear()
 {
   memset(this, 0, sizeof(ModelData));
+  ppmNCH = 8;
+  ppmDelay = 300;
   for (int i=0; i<MAX_PHASES; i++)
     phaseData[i].clear();
   for (int i=0; i<MAX_MIXERS; i++)
