@@ -67,11 +67,14 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
 
+    public slots:
+    void downloadLatestFW();
+    
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
     void checkForUpdateFinished(QNetworkReply * reply);
     void updateDownloaded();
-
+    void reply1Accepted();
     void newFile();
     void open();
     void save();
@@ -124,6 +127,8 @@ private:
     bool checkCompanion9x;
     bool showcheckForUpdatesResult;
     int MaxRecentFiles;
+    int currentFWrev;
+    int currentFWrev_temp;
     
     QNetworkAccessManager *manager1;
     QNetworkAccessManager *manager2;
