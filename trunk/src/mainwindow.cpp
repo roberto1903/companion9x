@@ -193,74 +193,26 @@ void MainWindow::updateDownloaded()
     }
 }
 
-void MainWindow::downloadLatestFW()
+void MainWindow::downloadLatestFW(const QString & selected_firmware)
 {
-
     QSettings settings("companion9x", "companion9x");
+    QString dnldURL;
 
-    QString dnldURL, baseFileName;
-    int version;
-    version=settings.value("download-version", 0).toInt();
-    switch (version)
-    {
-    case (FW_VER_ER9X_JETI):
-        dnldURL = ER9X_JETI_URL;
-        baseFileName = "er9x-jeti.hex";
+    foreach(FirmwareInfo firmware, firmwares) {
+      if (firmware.id == selected_firmware) {
+        dnldURL = firmware.url;
         break;
-    case (FW_VER_ER9X_FRSKY):
-        dnldURL = ER9X_FRSKY_URL;
-        baseFileName = "er9x-frsky.hex";
-        break;
-    case (FW_VER_ER9X_ARDUPILOT):
-        dnldURL = ER9X_ARDUPILOT_URL;
-        baseFileName = "er9x-ardupilot.hex";
-        break;
-    case (FW_VER_ER9X_NMEA):
-        dnldURL = ER9X_NMEA_URL;
-        baseFileName = "er9x-nmea.hex";
-        break;
-    case (FW_VER_ER9X_FRSKY_NOHT):
-        dnldURL = ER9X_FRSKY_NOHT_URL;
-        baseFileName = "er9x-frsky-noht.hex";
-        break;
-    case (FW_VER_ER9X_NOHT):
-        dnldURL = ER9X_NOHT_URL;
-        baseFileName = "er9x-noht.hex";
-        break;
-    case (FW_VER_GR9X_STD):
-        dnldURL = GR9X_STD_URL;
-        baseFileName = "gruvin9x-stock.hex";
-        break;
-    case (FW_VER_GR9X_SPK):
-        dnldURL = GR9X_SPK_URL;
-        baseFileName = "gruvin9x-std-speaker.hex";
-        break;
-    case (FW_VER_GR9X_FRSKY):
-        dnldURL = GR9X_FRSKY_URL;
-        baseFileName = "gruvin9x-frsky-nospeaker.hex";
-        break;
-    case (FW_VER_GR9X_FRSKYSPK):
-        dnldURL = GR9X_FRSKYSPK_URL;
-        baseFileName = "gruvin9x-frsky-speaker.hex";
-        break;
-    case (FW_VER_GR9X_V4):
-        dnldURL = GR9X_V4_URL;
-        baseFileName = "gruvin9x.hex";
-        break;
-    case (FW_VER_TH9X):
-        dnldURL = TH9X_URL;
-        baseFileName = "gruvin9x.hex";
-        break;
+      }
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/" + baseFileName,tr(HEX_FILES_FILTER));
-    if (fileName.isEmpty()) return;
-    settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
-
-    downloadDialog * dd = new downloadDialog(this,dnldURL,fileName);
-    currentFWrev_temp = currentFWrev;
-    connect(dd,SIGNAL(accepted()),this,SLOT(reply1Accepted()));
-    dd->exec();
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + selected_firmware + ".hex", tr(HEX_FILES_FILTER));
+    if (!fileName.isEmpty()) {
+      settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+      downloadDialog * dd = new downloadDialog(this, dnldURL, fileName);
+      currentFWrev_temp = currentFWrev;
+      connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
+      dd->exec();
+    }
 }
 
 void MainWindow::reply1Accepted()
@@ -430,8 +382,7 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
   if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
 
   arguments << "-c" << programmer << "-p";
-  QSettings settings("companion9x", "companion9x");
-  if (settings.value("eeprom_format", 0).toInt() == DNLD_VER_GRUVIN9X_V4)
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_V4)
     arguments << "m2560";
   else
     arguments << mcu;

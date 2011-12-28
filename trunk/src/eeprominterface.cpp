@@ -101,21 +101,45 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
   return 0;
 }
 
-std::list<EEPROMInterface *> eeprom_interfaces;
-
+QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
-  eeprom_interfaces.push_back(new Th9xInterface());
-  eeprom_interfaces.push_back(new Er9xInterface());
-  eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
-  eeprom_interfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
-  eeprom_interfaces.push_back(new Open9xInterface());
+  eepromInterfaces.push_back(new Th9xInterface());
+  eepromInterfaces.push_back(new Er9xInterface());
+  eepromInterfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
+  eepromInterfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
+  eepromInterfaces.push_back(new Open9xInterface());
+}
+
+QList<FirmwareInfo> firmwares;
+void RegisterFirmwares()
+{
+  firmwares.push_back(FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/th9x.bin"));
+  firmwares.push_back(FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-noht", QObject::tr("er9x - No heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-noht.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-jeti", QObject::tr("er9x - JETI"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-ardupilot", QObject::tr("er9x - ArDuPilot"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-frsky", QObject::tr("er9x - FrSky"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-frsky-noht", QObject::tr("er9x - FrSky, no heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky-noht.hex"));
+  firmwares.push_back(FirmwareInfo("er9x-nmea", QObject::tr("er9x - NMEA"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-nmea.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock", QObject::tr("gruvin9x stable for stock board"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-stock.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-speaker", QObject::tr("gruvin9x stable for stock board - Speaker mod"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-std-speaker.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-frsky", QObject::tr("gruvin9x stable for stock board - FrSky"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-nospeaker.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-frsky-speaker", QObject::tr("gruvin9x stable for stock board - Frsky, speaker"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-speaker.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock", QObject::tr("gruvin9x trunk for stock board"), new Gruvin9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-speaker", QObject::tr("gruvin9x trunk for stock board - Speaker mod"), new Gruvin9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky", QObject::tr("gruvin9x trunk for stock board - FrSky"), new Gruvin9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky-speaker", QObject::tr("gruvin9x trunk for stock board - Frsky, speaker"), new Gruvin9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
+  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x - trunk"), new Open9xInterface()));
+
+  RegisterEepromInterfaces();
 }
 
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  for (std::list<EEPROMInterface *>::iterator i=eeprom_interfaces.begin(); i!=eeprom_interfaces.end(); i++) {
-    if ((*i)->load(radioData, eeprom, size))
+  foreach(EEPROMInterface *eepromInterface, eepromInterfaces) {
+    if (eepromInterface->load(radioData, eeprom, size))
       return true;
   }
 
@@ -124,31 +148,16 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
 
 EEPROMInterface *GetEepromInterface()
 {
-  static EEPROMInterface * eepromInterface = NULL;
-
-  delete eepromInterface;
+  static EEPROMInterface * defaultEepromInterface = new Gruvin9xInterface(EESIZE_STOCK);
 
   QSettings settings("companion9x", "companion9x");
-  switch (settings.value("eeprom_format", 0).toInt()) {
-    case DNLD_VER_OPEN9X:
-      eepromInterface = new Open9xInterface();
-      break;
-    case DNLD_VER_GRUVIN9X_STOCK:
-      eepromInterface = new Gruvin9xInterface(EESIZE_STOCK);
-      break;
-    case DNLD_VER_GRUVIN9X_V4:
-      eepromInterface = new Gruvin9xInterface(EESIZE_V4);
-      break;
-    case DNLD_VER_ER9X:
-      eepromInterface = new Er9xInterface();
-      break;
-    case DNLD_VER_TH9X:
-      eepromInterface = new Th9xInterface();
-      break;
-    default:
-      eepromInterface = new Gruvin9xStableInterface();
-      break;
+  QVariant current_firmware = settings.value("firmware", "gruvin9x");
+
+  foreach(FirmwareInfo firmware, firmwares) {
+    if (firmware.id == current_firmware)
+      return firmware.eepromInterface;
   }
 
-  return eepromInterface;
+  return defaultEepromInterface;
 }
+

@@ -182,7 +182,6 @@ FOREACH( FIRMWARE ${FIRMWARES} )
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-gruvin9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-gruvin9x.h @ONLY)
 ENDFOREACH( FIRMWARE )
 
-IF( WIN32 )
 ADD_CUSTOM_COMMAND(
   COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch --binary -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
@@ -196,21 +195,6 @@ ADD_CUSTOM_COMMAND(
   OUTPUT ${PROJECT_BINARY_DIR}/th9x/stamp-th9x.h
   DEPENDS ${PROJECT_SOURCE_DIR}/../th9x.patch
 )
-ELSE( )
-ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
-  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
-  DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
-)
-
-ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./th9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../th9x ./th9x && patch -s -f -p0 < ${PROJECT_SOURCE_DIR}/../th9x.patch
-  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  OUTPUT ${PROJECT_BINARY_DIR}/th9x/stamp-th9x.h
-  DEPENDS ${PROJECT_SOURCE_DIR}/../th9x.patch
-)
-ENDIF( )
 
 IF( WIN32 )
   SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )

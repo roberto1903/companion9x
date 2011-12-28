@@ -18,6 +18,71 @@
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="1">
+    <widget class="QComboBox" name="stickmodeCB">
+     <property name="whatsThis">
+      <string>Mode selection:
+
+Mode 1:
+  Left stick:  Elevator, Rudder
+  Right stick:  Throttle, Aileron
+
+Mode 2:
+  Left stick:  Throttle, Rudder
+  Right stick:  Elevator, Aileron
+
+Mode 3:
+  Left stick:  Elevator, Aileron
+  Right stick:  Throttle, Rudder
+
+Mode 4:
+  Left stick:  Throttle, Aileron
+  Right stick:  Elevator, Rudder
+
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>Mode 1 (RUD ELE THR AIL)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 2 (RUD THR ELE AIL)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 3 (AIL ELE THR RUD)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 4 (AIL THR ELE RUD)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="startupCheck_companion9x">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Recent History Size</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -25,10 +90,10 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
+   <item row="5" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Version to download</string>
+      <string>Firmware</string>
      </property>
     </widget>
    </item>
@@ -39,21 +104,14 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>EEPROM format</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
+   <item row="7" column="0">
     <widget class="QLabel" name="label_13">
      <property name="text">
       <string>Default Channel Order</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="1">
+   <item row="11" column="1">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -63,7 +121,7 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
+   <item row="6" column="1">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -79,7 +137,7 @@
    <item row="0" column="1">
     <widget class="QComboBox" name="locale_QB"/>
    </item>
-   <item row="8" column="1">
+   <item row="7" column="1">
     <widget class="QComboBox" name="channelorderCB">
      <property name="whatsThis">
       <string>Channel order
@@ -227,76 +285,10 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </widget>
    </item>
-   <item row="6" column="1" colspan="2">
+   <item row="5" column="1" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QComboBox" name="downloadVerCB">
-       <item>
-        <property name="text">
-         <string>er9x</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - JETI</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - FrSky</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - Ardupilot</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - FrSky NOHT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - NOHT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>er9x - NMEA</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gruvin9x-stock</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gruvin9x-speaker</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gruvin9x-frsky-nospeaker</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gruvin9x-frsky-speaker</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gruvin9x-V4 board</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>th9x</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QComboBox" name="downloadVerCB"/>
      </item>
      <item>
       <widget class="QPushButton" name="fw_dnld">
@@ -313,103 +305,11 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="4" column="1">
-    <widget class="QComboBox" name="eepromFormatCB">
-     <item>
-      <property name="text">
-       <string>gruvin9x stable - stock board</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>gruvin9x trunk - stock board</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>gruvin9x trunk - v3/v4 board</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>er9x trunk</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>open9x trunk</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>th9x trunk</string>
-      </property>
-     </item>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Check for updates on startup</string>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="startupCheck_companion9x">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QComboBox" name="stickmodeCB">
-     <property name="whatsThis">
-      <string>Mode selection:
-
-Mode 1:
-  Left stick:  Elevator, Rudder
-  Right stick:  Throttle, Aileron
-
-Mode 2:
-  Left stick:  Throttle, Rudder
-  Right stick:  Elevator, Aileron
-
-Mode 3:
-  Left stick:  Elevator, Aileron
-  Right stick:  Throttle, Rudder
-
-Mode 4:
-  Left stick:  Throttle, Aileron
-  Right stick:  Elevator, Rudder
-
-</string>
-     </property>
-     <property name="currentIndex">
-      <number>1</number>
-     </property>
-     <item>
-      <property name="text">
-       <string>Mode 1 (RUD ELE THR AIL)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 2 (RUD THR ELE AIL)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 3 (AIL ELE THR RUD)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 4 (AIL THR ELE RUD)</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item row="2" column="1">
@@ -422,7 +322,7 @@ Mode 4:
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="4" column="1">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -435,21 +335,14 @@ Mode 4:
      </property>
     </spacer>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Recent History Size</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="label_14">
      <property name="text">
       <string>Default Stick Mode</string>
      </property>
     </widget>
    </item>
-   <item row="11" column="1">
+   <item row="10" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

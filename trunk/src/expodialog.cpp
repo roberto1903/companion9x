@@ -3,20 +3,20 @@
 #include "eeprominterface.h"
 #include "helpers.h"
 
-ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *mixdata, int stickMode) :
+ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     QDialog(parent),
-    ui(new Ui::ExpoDialog)
+    ui(new Ui::ExpoDialog),
+    ed(expoData)
 {
     ui->setupUi(this);
-    md = mixdata;
 
-    setWindowTitle(tr("DEST -> %1").arg(getSourceStr(mixdata->chn+1)));
-    ui->expoSB->setValue(md->expo);
-    ui->weightSB->setValue(md->weight);
-    populatePhasesCB(ui->phasesCB, md->phase);
-    populateSwitchCB(ui->switchesCB,md->swtch);
-    populateCurvesCB(ui->curvesCB,md->curve);
-    ui->modeCB->setCurrentIndex(md->mode-1);
+    setWindowTitle(tr("DEST -> %1").arg(getSourceStr(ed->chn+1)));
+    ui->expoSB->setValue(ed->expo);
+    ui->weightSB->setValue(ed->weight);
+    populatePhasesCB(ui->phasesCB, ed->phase);
+    populateSwitchCB(ui->switchesCB,ed->swtch);
+    populateCurvesCB(ui->curvesCB,ed->curve); // TODO capacity for er9x
+    ui->modeCB->setCurrentIndex(ed->mode-1);
 
     valuesChanged();
 
@@ -47,10 +47,10 @@ void ExpoDialog::changeEvent(QEvent *e)
 
 void ExpoDialog::valuesChanged()
 {
-    md->expo   = ui->expoSB->value();
-    md->weight = ui->weightSB->value();
-    md->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
-    md->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
-    md->curve  = ui->curvesCB->currentIndex();
-    md->mode   = ui->modeCB->currentIndex() + 1;
+    ed->expo   = ui->expoSB->value();
+    ed->weight = ui->weightSB->value();
+    ed->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
+    ed->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    ed->curve  = ui->curvesCB->currentIndex();
+    ed->mode   = ui->modeCB->currentIndex() + 1;
 }
