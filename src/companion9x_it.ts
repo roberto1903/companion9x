@@ -55,7 +55,7 @@ p, li { white-space: pre-wrap; }
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <translation>Interruttore utilizzato per attivare l&apos;esponenziale.
-Se vuoto l&apos;esponeziale è sempre attivo nella fase scelta (o in tutte).</translation>
+Se vuoto l&apos;esponenziale è sempre attivo nella fase scelta (o in tutte).</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="114"/>
@@ -136,32 +136,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="115"/>
         <source>Sound Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modatlità audio</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="123"/>
         <source>Beeper</source>
-        <translation type="unfinished"></translation>
+        <translation>Altoparlante standard</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="128"/>
         <source>PiSpkr</source>
-        <translation type="unfinished"></translation>
+        <translation>Altoparlante Piezo</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="133"/>
         <source>PcmWav</source>
-        <translation type="unfinished"></translation>
+        <translation>Scheda sintesi PCM</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="141"/>
         <source>Speaker Pitch (spkr only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonalità suono (modifica HW)</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="175"/>
         <source>Haptic Strength (spkr only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensità vibrazione (modifica HW)</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="255"/>
@@ -364,12 +364,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="626"/>
         <source>Pot Scrolling Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita scorrimento con POT</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="656"/>
         <source>Bandgap Measuring Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Misurazione BandGap</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="686"/>
@@ -627,7 +627,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="933"/>
         <source>Switch</source>
-        <translation type="unfinished"></translation>
+        <translation>Interruttore</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1042"/>
@@ -1383,12 +1383,12 @@ Mode 4:
     <message>
         <location filename="mdichild.cpp" line="359"/>
         <source>Warning</source>
-        <translation type="unfinished">Avviso</translation>
+        <translation>Avviso</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="360"/>
         <source>EEPROM saved with these warnings:</source>
-        <translation type="unfinished"></translation>
+        <translation>EEPROM salvata con questi avvisi:</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="390"/>
@@ -1572,7 +1572,7 @@ Determina come il valore viene aggiunto alla miscelazione.
     <message>
         <location filename="mixerdialog.ui" line="230"/>
         <source>Enable FM Trim</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita FM Trim</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="251"/>
@@ -1631,7 +1631,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mixerdialog.cpp" line="21"/>
         <location filename="mixerdialog.cpp" line="96"/>
         <source>FM Trim Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore FM Trim</translation>
     </message>
 </context>
 <context>
@@ -1682,7 +1682,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="95"/>
         <source>Timer2</source>
-        <translation>Temporizzatore1</translation>
+        <translation>Temporizzatore2</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="136"/>
@@ -1833,22 +1833,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="397"/>
         <source>Trainer</source>
-        <translation type="unfinished">Maestro/Allievo</translation>
+        <translation>Maestro/Allievo</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="407"/>
         <source>Throttle2Trig</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia T2 con motore</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="417"/>
         <source>PPM Frame Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Lunghezza segnale PPM</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="424"/>
         <source> mSec</source>
-        <translation type="unfinished"></translation>
+        <translation> mSec</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="447"/>
@@ -2482,7 +2482,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.cpp" line="419"/>
         <source>Weight</source>
         <oldsource>Weight(+%1%)</oldsource>
-        <translation type="unfinished">Peso(+%1%)</translation>
+        <translation>Peso</translation>
     </message>
     <message>
         <source> Expo(%1%)</source>
@@ -2542,12 +2542,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.cpp" line="2576"/>
         <source>Not enough available mixers!</source>
-        <translation type="unfinished"></translation>
+        <translation>Non ci sono più miscelazioni disponibili!</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2624"/>
         <source>Not enough available expos!</source>
-        <translation type="unfinished"></translation>
+        <translation>Non ci sono più esponenziali disponibili!</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2761"/>
@@ -2662,29 +2662,29 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.cpp" line="420"/>
         <source>Expo</source>
-        <translation type="unfinished"></translation>
+        <translation>Espo</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="421"/>
         <location filename="modeledit.cpp" line="490"/>
         <source>Phase</source>
-        <translation type="unfinished">Fase</translation>
+        <translation>Fase</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="423"/>
         <location filename="modeledit.cpp" line="498"/>
         <source>Curve</source>
-        <translation type="unfinished">Curva</translation>
+        <translation>Curva</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="492"/>
         <source>noTrim</source>
-        <translation type="unfinished">noTrim</translation>
+        <translation>noTrim</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="494"/>
         <source>FMTrim</source>
-        <translation type="unfinished"></translation>
+        <translation>FMTrim</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3459"/>
@@ -2830,7 +2830,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="74"/>
         <source>Flight phase %1 trim</source>
-        <translation type="unfinished"></translation>
+        <translation>Trim Fase di Volo %1</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="120"/>
@@ -3020,18 +3020,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="229"/>
         <source>Curve</source>
-        <translation type="unfinished">Curva</translation>
+        <translation>Curva</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="676"/>
         <source>gruvin9x only accepts %1 expos</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x accetta solamente %1 esponenziali</translation>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="510"/>
         <source>open9x only accepts %1 expos</source>
         <oldsource>Gruvin9x firmware only accepts %1 expos</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>open9x accetta solamente %1 esponenziali</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="117"/>
@@ -3134,7 +3134,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="avroutputdialog.ui" line="63"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra dettagli</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -3160,19 +3160,19 @@ p, li { white-space: pre-wrap; }
         <location filename="avroutputdialog.cpp" line="107"/>
         <location filename="avroutputdialog.cpp" line="109"/>
         <source>Writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrittura in corso</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="117"/>
         <location filename="avroutputdialog.cpp" line="119"/>
         <source>Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettura in corso</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="124"/>
         <location filename="avroutputdialog.cpp" line="126"/>
         <source>Verifying</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifica in corso</translation>
     </message>
     <message>
         <location filename="avroutputdialog.cpp" line="146"/>
@@ -3547,7 +3547,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="preferencesdialog.ui" line="96"/>
         <source>Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="311"/>
@@ -3571,7 +3571,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="preferencesdialog.ui" line="302"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica</translation>
     </message>
     <message>
         <source>gruvin9x stable - stock board</source>
@@ -3920,7 +3920,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="257"/>
         <source>Expo</source>
-        <translation>Esponeziale</translation>
+        <translation>Esponenziale</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="258"/>
@@ -3992,7 +3992,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="303"/>
         <source>FMTrim</source>
-        <translation type="unfinished"></translation>
+        <translation>FMTrim</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="343"/>
