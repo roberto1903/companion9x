@@ -82,6 +82,7 @@ Section "companion9x" SecDummy
   
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
   File "companion9x.exe"
+  File "C:\Programs\xerces\src\.libs\libxerces-c-3-1.dll"
   File "C:\MinGW\bin\libgcc_s_dw2-1.dll"
   File "C:\MinGW\bin\mingwm10.dll"
   File "C:\MinGW\bin\libstdc++-6.dll"
@@ -142,6 +143,7 @@ Section "Uninstall"
  
   Delete "$INSTDIR\license.txt"
   Delete "$INSTDIR\companion9x.exe"
+  Delete "$INSTDIR\libxerces-c-3-1.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
   Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\libstdc++-6.dll"

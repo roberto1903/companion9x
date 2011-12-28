@@ -39,6 +39,25 @@
   !define MUI_ABORTWARNING
 
 ;--------------------------------
+;File Exists Macro
+
+; See http://nsis.sourceforge.net/Check_if_a_file_exists_at_compile_time for documentation
+!macro !defineifexist _VAR_NAME _FILE_NAME
+	!tempfile _TEMPFILE
+	!ifdef NSIS_WIN32_MAKENSIS
+		; Windows - cmd.exe
+		!system 'if exist "${_FILE_NAME}" echo !define ${_VAR_NAME} > "${_TEMPFILE}"'
+	!else
+		; Posix - sh
+		!system 'if [ -e "${_FILE_NAME}" ]; then echo "!define ${_VAR_NAME}" > "${_TEMPFILE}"; fi'
+	!endif
+	!include '${_TEMPFILE}'
+	!delfile '${_TEMPFILE}'
+	!undef _TEMPFILE
+!macroend
+!define !defineifexist "!insertmacro !defineifexist"
+
+;--------------------------------
 ;Pages
 
   !insertmacro MUI_PAGE_LICENSE "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
@@ -82,7 +101,12 @@ Section "companion9x" SecDummy
   
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\license.txt"
   File "Release\companion9x.exe"
-  File "@SYSDIR@\pthreadVC2.dll"
+  ${!defineifexist} PTHREAD_WINDIR "C:\Programs\pthreads\Pre-built.2\lib\pthreadVC2.dll"
+  !ifdef PTHREAD_WINDIR
+  File "C:\Programs\pthreads\Pre-built.2\lib\pthreadVC2.dll"
+  !else
+  File "@SYSDIR@\system32\pthreadVC2.dll"
+  !endif
   File "C:\Programs\xerces-vc\bin\xerces-c_3_1.dll"
   File "@SYSDIR@\msvcp100.dll"
   File "@SYSDIR@\msvcr100.dll"
