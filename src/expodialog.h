@@ -20,9 +20,8 @@ protected:
 private slots:
     void valuesChanged();
 
-
 private:
-    ExpoData *md;
+    ExpoData *ed;
     Ui::ExpoDialog *ui;
 };
 

@@ -5,10 +5,10 @@
 
 MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     QDialog(parent),
-    ui(new Ui::MixerDialog)
+    ui(new Ui::MixerDialog),
+    md(mixdata)
 {
     ui->setupUi(this);
-    md = mixdata;
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     populateSourceCB(ui->sourceCB, stickMode, md->srcRaw);
@@ -19,7 +19,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
-    } else {
+    }
+    else {
         ui->label_4->setText(tr("Offset"));
     }
     if (!GetEepromInterface()->getCapability(MixFmTrim)) {

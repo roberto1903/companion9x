@@ -68,15 +68,15 @@ int main(int argc, char *argv[])
     QString locale = settings.value("locale",QLocale::system().name()).toString();
     bool showSplash = settings.value("show_splash", true).toBool();
 
-    RegisterEepromInterfaces();
-
     QTranslator companion9xTranslator;
     companion9xTranslator.load(":/companion9x_" + locale);
     app.installTranslator(&companion9xTranslator);
     
     QPixmap pixmap(":/images/companion9x-title.png");
     QSplashScreen *splash = new QSplashScreen(pixmap);
- 
+
+    RegisterFirmwares();
+
     if(showSplash)
     {
         splash->show();

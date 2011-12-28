@@ -22,7 +22,8 @@ private:
     void initSettings();
 
 private slots:
-    void write_values();
+    void writeValues();
+    void firmwareChanged();
     void on_fw_dnld_clicked();
 };
 

@@ -1,6 +1,7 @@
 #include "preferencesdialog.h"
 #include "ui_preferencesdialog.h"
 #include "mainwindow.h"
+#include "eeprominterface.h"
 #include <QtGui>
 
 preferencesDialog::preferencesDialog(QWidget *parent) :
@@ -11,8 +12,8 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
 
     populateLocale();
     initSettings();
-    connect(ui->downloadVerCB,SIGNAL(currentIndexChanged(int)),this,SLOT(write_values()));
-    connect(this,SIGNAL(accepted()),this,SLOT(write_values()));
+    connect(ui->downloadVerCB, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareChanged()));
+    connect(this, SIGNAL(accepted()), this, SLOT(writeValues()));
 }
 
 preferencesDialog::~preferencesDialog()
@@ -20,7 +21,18 @@ preferencesDialog::~preferencesDialog()
     delete ui;
 }
 
-void preferencesDialog::write_values()
+void preferencesDialog::firmwareChanged()
+{
+  QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
+  foreach(FirmwareInfo firmware, firmwares) {
+    if (firmware.id == selected_firmware) {
+      ui->fw_dnld->setEnabled(firmware.url);
+      break;
+    }
+  }
+}
+
+void preferencesDialog::writeValues()
 {
     QSettings settings("companion9x", "companion9x");
     if (ui->locale_QB->currentIndex() > 0)
@@ -31,11 +43,9 @@ void preferencesDialog::write_values()
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
     settings.setValue("show_splash", ui->showSplash->isChecked());
-    settings.setValue("eeprom_format", ui->eepromFormatCB->currentIndex());
     settings.setValue("history_size", ui->historySize->value());
-    settings.setValue("download-version", ui->downloadVerCB->currentIndex());
+    settings.setValue("firmware", ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()));
 }
-
 
 void preferencesDialog::initSettings()
 {
@@ -46,11 +56,18 @@ void preferencesDialog::initSettings()
 
     ui->channelorderCB->setCurrentIndex(settings.value("default_channel_order", 0).toInt());
     ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
-    ui->eepromFormatCB->setCurrentIndex(settings.value("eeprom_format", 0).toInt());
     ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
     ui->historySize->setValue(settings.value("history_size", 10).toInt());
-    ui->downloadVerCB->setCurrentIndex(settings.value("download-version", 0).toInt());
+
+    QVariant current_firmware = settings.value("firmware", "gruvin9x");
+    foreach(FirmwareInfo firmware, firmwares) {
+      ui->downloadVerCB->addItem(firmware.name, firmware.id);
+      if (firmware.id == current_firmware)
+        ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
+    }
+
+    firmwareChanged();
 }
 
 void preferencesDialog::populateLocale()
@@ -74,6 +91,5 @@ void preferencesDialog::populateLocale()
 void preferencesDialog::on_fw_dnld_clicked()
 {
     MainWindow * mw = (MainWindow *)this->parent();
-
-    mw->downloadLatestFW();
+    mw->downloadLatestFW(ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString());
 }

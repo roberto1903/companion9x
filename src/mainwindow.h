@@ -68,7 +68,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
     public slots:
-    void downloadLatestFW();
+    void downloadLatestFW(const QString & selected_firmware);
     
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
