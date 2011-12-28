@@ -182,26 +182,27 @@ FOREACH( FIRMWARE ${FIRMWARES} )
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-gruvin9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-gruvin9x.h @ONLY)
 ENDFOREACH( FIRMWARE )
 
+IF( WIN32 )
+  SET( PATCH_FLAGS "--binary" )
+  SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )
+  IF ( NOT MSVC )
+    SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
+  ENDIF( )
+ENDIF( )
+
 ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch --binary -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
+  COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
   DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
 )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./th9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../th9x ./th9x && patch --binary -s -f -p0 < ${PROJECT_SOURCE_DIR}/../th9x.patch
+  COMMAND cmake -E remove_directory ./th9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../th9x ./th9x && patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../th9x.patch
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   OUTPUT ${PROJECT_BINARY_DIR}/th9x/stamp-th9x.h
   DEPENDS ${PROJECT_SOURCE_DIR}/../th9x.patch
 )
-
-IF( WIN32 )
-  SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )
-  IF ( NOT MSVC )
-    SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
-  ENDIF( )
-ENDIF( )
 
 FIND_PACKAGE( Qt4 REQUIRED )
 SET( QT_USE_QTNETWORK True )
