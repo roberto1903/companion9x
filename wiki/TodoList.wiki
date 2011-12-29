@@ -4,7 +4,7 @@
   * ~~Display somewhere the current firmware chosen, so that it is always visible~~
   * ~~Display the available size on the EEPROM~~
   * ~~Current model displayed in bold in the MDI child windows~~
-  * Better look & feel for the simu layout. These big buttons are not so beautiful!
+  * ~~Better look & feel for the simu layout. These big buttons are not so beautiful!~~
   * ~~Models configuration print~~
   * ~~Curves printed as graphics~~
   * ~~Gruvin9x-stable simulation~~
