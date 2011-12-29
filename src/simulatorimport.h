@@ -23,7 +23,7 @@ extern void StopEepromThread();
 extern void StopMainThread();
 
 extern volatile unsigned char pinb, pinc, pind, pine, ping, pinj, pinl;
-extern uint8_t portb;
+extern uint8_t portb, portc;
 
 #define INP_E_ID2     6
 #define OUT_E_BUZZER  3
@@ -177,7 +177,11 @@ for (int i=0; i<12; i++)
 #ifdef LCDCHANGED_IMPORT
 #undef LCDCHANGED_IMPORT
 if (lcd_refresh) {
+#ifdef PCBV4
+  lightEnable = (portc & (1<<OUT_C_LIGHT));
+#else
   lightEnable = (portb & (1<<OUT_B_LIGHT));
+#endif
   lcd_refresh = false;
   return true;
 }
