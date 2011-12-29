@@ -268,7 +268,7 @@ void simulatorDialog::getValues()
                      buttonPressed == Qt::Key_Down,
                      buttonPressed == Qt::Key_Left,
                      buttonPressed == Qt::Key_Right,
-                     buttonPressed
+                     middleButtonPressed
                     };
 
   simulator->setValues(inputs);
