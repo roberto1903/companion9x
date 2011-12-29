@@ -3349,7 +3349,7 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="118"/>
         <source>er9x</source>
-        <translation>OUH er9x</translation>
+        <translation>er9x</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="119"/>
