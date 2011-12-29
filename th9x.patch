@@ -584,7 +584,7 @@ Index: th9x/simpgmspace.cpp
 +                    void *pointer_eeprom,
 +                    size_t size)
 +{
-+  printf("eeprom_write_block p=%p ofs=%d l=%2d\n",pointer_ram,(long int)pointer_eeprom,(long int)size);
++  // printf("eeprom_write_block p=%p ofs=%d l=%2d\n",pointer_ram,(long int)pointer_eeprom,(long int)size);
 +  //  FILE *fp=fopen(eepromFile, "r+");
 +  if(!fp) fp = fopen(eepromFile, "r+");
 +  if(fseek(fp, (long) pointer_eeprom, SEEK_SET)==-1) perror("error in seek");
