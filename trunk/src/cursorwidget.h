@@ -36,12 +36,12 @@ class cursorWidget : public QWidget {
     {
         float upx[] = {68,28,51,83,105,68};
         float upy[] = {83,45,32,32,45,83};
-        float minx[] = {74,114,127,127,1114,74};
-        float miny[] = {90.51,80,106,130,90};
+        float minx[] = {74,114,127,127,114,74};
+        float miny[] = {90,51,80,106,130,90};
         float dox[] = {68,28,51,83,105,68};
         float doy[] = {98,137,151,151,137,98};
         float plusx[] = { 80,20,7,7,20,80};
-        float plusy[] = { 90,131,106,80,51,90};
+        float plusy[] = {90,51,80,106,130,90};
 
         int x=event->x();
         int y=event->y();
