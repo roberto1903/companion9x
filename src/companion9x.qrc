@@ -1,5 +1,9 @@
-<!DOCTYPE RCC><RCC version="1.0">
+<RCC>
   <qresource prefix="/">
+    <file>images/9xbott.png</file>
+    <file>images/9xcurs.png</file>
+    <file>images/9xmenu.png</file>
+    <file>images/9xtop.png</file>
     <file>contributors</file>
     <file>images/copy.png</file>
     <file>images/cut.png</file>

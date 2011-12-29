@@ -114,6 +114,8 @@ SET( companion9x_MOC_HDRS
      expodialog.h
      contributorsdialog.h
      downloaddialog.h
+     cursorwidget.h
+     menuwidget.h
      simulatordialog.h
      generaledit.h
      modeledit.h
