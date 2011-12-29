@@ -41,26 +41,22 @@ class cursorWidget : public QWidget {
         float dox[] = {68,28,51,83,105,68};
         float doy[] = {98,137,151,151,137,98};
         float plusx[] = { 80,20,7,7,20,80};
-        float plusy[] = { 80,20,7,7,20,80};
+        float plusy[] = { 90,131,106,80,51,90};
 
         int x=event->x();
         int y=event->y();
         setFocus();
         if (event->button()==Qt::LeftButton) {
           if (pnpoly(6,upx,upy,(float)x,(float)y)==1) {
-            qDebug() << "1";
             emit buttonPressed(Qt::Key_Up);
           }
           else if (pnpoly(6,minx,miny,(float)x,(float)y)==1) {
-            qDebug() << "2";
             emit buttonPressed(Qt::Key_Right);
           }
           else if (pnpoly(6,dox,doy,(float)x,(float)y)==1) {
-            qDebug() << "3";
             emit buttonPressed(Qt::Key_Down);
           }
           else if (pnpoly(6,plusx,plusy,(float)x,(float)y)==1) {
-            qDebug() << "4";
             emit buttonPressed(Qt::Key_Left);
           }
         }
