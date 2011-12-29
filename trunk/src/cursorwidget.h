@@ -48,15 +48,19 @@ class cursorWidget : public QWidget {
         setFocus();
         if (event->button()==Qt::LeftButton) {
           if (pnpoly(6,upx,upy,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/9xcursup.png);");
             emit buttonPressed(Qt::Key_Up);
           }
           else if (pnpoly(6,minx,miny,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/9xcursmin.png);");
             emit buttonPressed(Qt::Key_Right);
           }
           else if (pnpoly(6,dox,doy,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/9xcursdown.png);");
             emit buttonPressed(Qt::Key_Down);
           }
           else if (pnpoly(6,plusx,plusy,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/9xcursplus.png);");
             emit buttonPressed(Qt::Key_Left);
           }
         }
@@ -65,6 +69,7 @@ class cursorWidget : public QWidget {
     
     virtual void mouseReleaseEvent(QMouseEvent * event)
     {
+      setStyleSheet("background:url(:/images/9xcurs.png);");
       emit buttonPressed(0);
       setFocus();
       //QWidget::mouseReleaseEvent(event);
