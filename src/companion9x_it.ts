@@ -4176,25 +4176,25 @@ Mode 4:
         <location filename="simulatordialog.ui" line="288"/>
         <location filename="simulatordialog.ui" line="609"/>
         <source>Hold X</source>
-        <translation>Mantieni X</translation>
+        <translation>Tieni X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="313"/>
         <location filename="simulatordialog.ui" line="634"/>
         <source>Fix X</source>
-        <translation>Blocca X</translation>
+        <translation>Fissa X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="338"/>
         <location filename="simulatordialog.ui" line="659"/>
         <source>Fix Y</source>
-        <translation>Blocca Y</translation>
+        <translation>Fissa Y</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="363"/>
         <location filename="simulatordialog.ui" line="684"/>
         <source>Hold Y</source>
-        <translation>Mantieni Y</translation>
+        <translation>Tieni Y</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="383"/>
