@@ -18,12 +18,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     txInterface(NULL),
     simulator(NULL),
     g_modelIdx(-1),
-    menuButtonPressed(false),
-    exitButtonPressed(false),
-    upButtonPressed(false),
-    downButtonPressed(false),
-    rightButtonPressed(false),
-    leftButtonPressed(false)
+    buttonPressed(0)
 {
     ui->setupUi(this);
     ui->lcd->setFocus();
@@ -35,6 +30,8 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 // TODO    memset(&swOn,0,sizeof(swOn));
 
     setupSticks();
+    connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
+    connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
 }
 
 simulatorDialog::~simulatorDialog()
@@ -71,22 +68,17 @@ void simulatorDialog::keyPressEvent (QKeyEvent *event)
   switch (event->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      menuButtonPressed = true;
+      buttonPressed = Qt::Key_Enter;
       break;
+    case Qt::Key_Escape:
     case Qt::Key_Backspace:
-      exitButtonPressed = true;
+      buttonPressed = Qt::Key_Escape;
       break;
     case Qt::Key_Up:
-      upButtonPressed = true;
-      break;
     case Qt::Key_Down:
-      downButtonPressed = true;
-      break;
     case Qt::Key_Right:
-      rightButtonPressed = true;
-      break;
     case Qt::Key_Left:
-      leftButtonPressed = true;
+      buttonPressed = event->key();
       break;
   }
 }
@@ -96,22 +88,13 @@ void simulatorDialog::keyReleaseEvent(QKeyEvent * event)
   switch (event->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      menuButtonPressed = false;
-      break;
+    case Qt::Key_Escape:
     case Qt::Key_Backspace:
-      exitButtonPressed = false;
-      break;
     case Qt::Key_Up:
-      upButtonPressed = false;
-      break;
     case Qt::Key_Down:
-      downButtonPressed = false;
-      break;
     case Qt::Key_Right:
-      rightButtonPressed = false;
-      break;
     case Qt::Key_Left:
-      leftButtonPressed = false;
+      buttonPressed = 0;
       break;
   }
 }
@@ -123,6 +106,10 @@ void simulatorDialog::setupTimer()
     timer->start(10);
 }
 
+void simulatorDialog::onButtonPressed(int value)
+{
+  buttonPressed = value;
+}
 
 void simulatorDialog::onTimerEvent()
 {
@@ -275,13 +262,13 @@ void simulatorDialog::getValues()
                      ui->switchGEA->isChecked(),
                      ui->switchTRN->isDown(),
                      ui->switchID2->isChecked() ? 2 : (ui->switchID1->isChecked() ? 1 : 0),
-                     menuButtonPressed,
-                     exitButtonPressed,
-                     upButtonPressed,
-                     downButtonPressed,
-                     leftButtonPressed,
-                     rightButtonPressed,
-                     middleButtonPressed
+                     buttonPressed == Qt::Key_Enter,
+                     buttonPressed == Qt::Key_Escape,
+                     buttonPressed == Qt::Key_Up,
+                     buttonPressed == Qt::Key_Down,
+                     buttonPressed == Qt::Key_Left,
+                     buttonPressed == Qt::Key_Right,
+                     buttonPressed
                     };
 
   simulator->setValues(inputs);

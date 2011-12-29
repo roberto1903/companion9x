@@ -80,27 +80,11 @@ protected:
     virtual void keyPressEvent(QKeyEvent *);
     virtual void keyReleaseEvent(QKeyEvent *);
     static int screenshotIdx;
-    bool menuButtonPressed;
-    bool exitButtonPressed;
-    bool upButtonPressed;
-    bool downButtonPressed;
-    bool rightButtonPressed;
-    bool leftButtonPressed;
+    int buttonPressed;
     bool middleButtonPressed;
 
 private slots:
-    void on_menuButton_pressed() { menuButtonPressed = true; }
-    void on_menuButton_released() { menuButtonPressed = false; }
-    void on_exitButton_pressed() { exitButtonPressed = true; }
-    void on_exitButton_released() { exitButtonPressed = false; }
-    void on_upButton_pressed() { upButtonPressed = true; }
-    void on_upButton_released() { upButtonPressed = false; }
-    void on_downButton_pressed() { downButtonPressed = true; }
-    void on_downButton_released() { downButtonPressed = false; }
-    void on_rightButton_pressed() { rightButtonPressed = true; }
-    void on_rightButton_released() { rightButtonPressed = false; }
-    void on_leftButton_pressed() { leftButtonPressed = true; }
-    void on_leftButton_released() { leftButtonPressed = false; }
+    void onButtonPressed(int value);
     void on_FixRightY_clicked(bool checked);
     void on_FixRightX_clicked(bool checked);
     void on_FixLeftY_clicked(bool checked);
