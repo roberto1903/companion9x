@@ -789,117 +789,117 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="613"/>
+        <location filename="mainwindow.cpp" line="617"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="842"/>
+        <location filename="mainwindow.cpp" line="846"/>
         <source>Burn</source>
         <translation>Flasher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="653"/>
+        <location filename="mainwindow.cpp" line="657"/>
         <source>Cu&amp;t</source>
         <translation>Co&amp;uper</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="837"/>
+        <location filename="mainwindow.cpp" line="841"/>
         <source>Edit</source>
         <translation>Edition</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="829"/>
+        <location filename="mainwindow.cpp" line="833"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="248"/>
+        <location filename="mainwindow.cpp" line="252"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="591"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="707"/>
+        <location filename="mainwindow.cpp" line="711"/>
         <source>Show fuses dialog</source>
         <translation>Affiche les réglages des fusibles</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="672"/>
+        <location filename="mainwindow.cpp" line="676"/>
         <source>&amp;Write EEPROM To Tx</source>
         <translation>&amp;Transférer l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="798"/>
+        <location filename="mainwindow.cpp" line="802"/>
         <source>&amp;Burn</source>
         <translation>Fl&amp;asher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="659"/>
+        <location filename="mainwindow.cpp" line="663"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="793"/>
+        <location filename="mainwindow.cpp" line="797"/>
         <source>&amp;Edit</source>
         <translation>Éditio&amp;n</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="777"/>
+        <location filename="mainwindow.cpp" line="781"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="818"/>
+        <location filename="mainwindow.cpp" line="822"/>
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="623"/>
+        <location filename="mainwindow.cpp" line="627"/>
         <source>&amp;Save</source>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="732"/>
+        <location filename="mainwindow.cpp" line="736"/>
         <source>&amp;Tile</source>
         <translation>&amp;Mosaïque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="647"/>
+        <location filename="mainwindow.cpp" line="651"/>
         <source>E&amp;xit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="711"/>
+        <location filename="mainwindow.cpp" line="715"/>
         <source>Alt+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="710"/>
+        <location filename="mainwindow.cpp" line="714"/>
         <source>&amp;Simulate</source>
         <translation>&amp;Simulation</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="740"/>
+        <location filename="mainwindow.cpp" line="744"/>
         <source>Ne&amp;xt</source>
         <translation>Sui&amp;vante</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="861"/>
+        <location filename="mainwindow.cpp" line="865"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="491"/>
+        <location filename="mainwindow.cpp" line="495"/>
         <source>Read Flash to File</source>
         <translation>Enregistrer la mémoire Flash sous</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="757"/>
+        <location filename="mainwindow.cpp" line="761"/>
         <source>Show the application&apos;s About box</source>
         <translation>Affiche la fenêtre &quot;A propos&quot; de l&apos;application</translation>
     </message>
@@ -908,33 +908,33 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fichiers FLASH (*.bin *.hex);;fichiers BIN (*.bin);;fichiers HEX (*.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="584"/>
-        <location filename="mainwindow.cpp" line="938"/>
+        <location filename="mainwindow.cpp" line="588"/>
+        <location filename="mainwindow.cpp" line="942"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="756"/>
+        <location filename="mainwindow.cpp" line="760"/>
         <source>&amp;About</source>
         <translation>&amp;À Propos</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="665"/>
+        <location filename="mainwindow.cpp" line="669"/>
         <source>&amp;Paste</source>
         <translation>Co&amp;ller</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="716"/>
+        <location filename="mainwindow.cpp" line="720"/>
         <source>&amp;Print</source>
         <translation>Im&amp;primer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="628"/>
+        <location filename="mainwindow.cpp" line="632"/>
         <source>Save &amp;As...</source>
         <translation>Enregistrer &amp;Sous...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="737"/>
+        <location filename="mainwindow.cpp" line="741"/>
         <source>Cascade the windows</source>
         <translation>Dispose les fenêtres en cascade</translation>
     </message>
@@ -943,12 +943,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fichiers EEPROM (*.bin *.hex);;fichiers BIN (*.bin);;fichiers HEX (*.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="694"/>
+        <location filename="mainwindow.cpp" line="698"/>
         <source>Read Flash memory</source>
         <translation>Lire la mémoire Flash</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="667"/>
+        <location filename="mainwindow.cpp" line="671"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Colle le contenu du presse-papier à l&apos;emplacement sélectionné</translation>
     </message>
@@ -957,42 +957,42 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="620"/>
+        <location filename="mainwindow.cpp" line="624"/>
         <source>Open an existing file</source>
         <translation>Ouvre un fichier existant</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="698"/>
+        <location filename="mainwindow.cpp" line="702"/>
         <source>&amp;Configure...</source>
         <translation>&amp;Configurer AVRDUDE...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="722"/>
+        <location filename="mainwindow.cpp" line="726"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="717"/>
+        <location filename="mainwindow.cpp" line="721"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="718"/>
+        <location filename="mainwindow.cpp" line="722"/>
         <source>Print current model.</source>
         <translation>Imprime les données du modèle sélectionné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="679"/>
+        <location filename="mainwindow.cpp" line="683"/>
         <source>Read EEPROM from transmitter</source>
         <translation>Charge l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="728"/>
+        <location filename="mainwindow.cpp" line="732"/>
         <source>Close all the windows</source>
         <translation>Ferme toutes les fenêtres</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="683"/>
+        <location filename="mainwindow.cpp" line="687"/>
         <source>Write flash memory to transmitter</source>
         <translation>Écrit dans la mémoire Flash de l&apos;émetteur</translation>
     </message>
@@ -1005,7 +1005,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Sélectionner le fichier à flasher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="534"/>
+        <location filename="mainwindow.cpp" line="538"/>
         <source>donating</source>
         <translation>don</translation>
     </message>
@@ -1014,24 +1014,24 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fichiers HEX (*.hex);;fichiers BIN (*.bin);;fichiers FLASH (*.bin *.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="618"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>&amp;Open...</source>
         <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="615"/>
+        <location filename="mainwindow.cpp" line="619"/>
         <source>Create a new file</source>
         <translation>Crée un nouveau fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="723"/>
+        <location filename="mainwindow.cpp" line="727"/>
         <source>Close the active window</source>
         <translation>Ferme la fenêtre active</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="108"/>
-        <location filename="mainwindow.cpp" line="262"/>
-        <location filename="mainwindow.cpp" line="299"/>
+        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="303"/>
         <source>File loaded</source>
         <translation>Fichier chargé</translation>
     </message>
@@ -1041,53 +1041,53 @@ p, li { white-space: pre-wrap; }
         <translation>companion9x - Éditeur d&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="272"/>
-        <location filename="mainwindow.cpp" line="278"/>
+        <location filename="mainwindow.cpp" line="276"/>
+        <location filename="mainwindow.cpp" line="282"/>
         <source>File saved</source>
         <translation>Fichier sauvegardé</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="760"/>
+        <location filename="mainwindow.cpp" line="764"/>
         <source>Switch layout direction</source>
         <translation>Inverser l&apos;interface</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="748"/>
+        <location filename="mainwindow.cpp" line="752"/>
         <source>Move the focus to the previous window</source>
         <translation>Active la fenêtre précedente</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="746"/>
+        <location filename="mainwindow.cpp" line="750"/>
         <source>Pre&amp;vious</source>
         <translation>P&amp;récédente</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="649"/>
+        <location filename="mainwindow.cpp" line="653"/>
         <source>Exit the application</source>
         <translation>Quitte l&apos;application</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="682"/>
+        <location filename="mainwindow.cpp" line="686"/>
         <source>Write Flash memory</source>
         <translation>Écrire la mémoire Flash</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="707"/>
         <source>List available programmers</source>
         <translation>Liste les programmateurs supportés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="625"/>
+        <location filename="mainwindow.cpp" line="629"/>
         <source>Save the document to disk</source>
         <translation>Enregistre sur le disque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="727"/>
+        <location filename="mainwindow.cpp" line="731"/>
         <source>Close &amp;All</source>
         <translation>Fermer To&amp;ut</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="736"/>
+        <location filename="mainwindow.cpp" line="740"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Cascade</translation>
     </message>
@@ -1096,142 +1096,147 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Liste les contributeurs à er9x/companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="712"/>
+        <location filename="mainwindow.cpp" line="716"/>
         <source>Simulate selected model.</source>
         <translation>Simule le modèle sélectionné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="733"/>
+        <location filename="mainwindow.cpp" line="737"/>
         <source>Tile the windows</source>
         <translation>Dispose les fenêtres en mosaïque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="695"/>
+        <location filename="mainwindow.cpp" line="699"/>
         <source>Read flash memory to transmitter</source>
         <translation>Lit la mémoire Flash de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="630"/>
+        <location filename="mainwindow.cpp" line="634"/>
         <source>Save the document under a new name</source>
         <translation>Enregistre sous un nom différent</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="812"/>
+        <location filename="mainwindow.cpp" line="816"/>
         <source>&amp;Window</source>
         <translation>Fe&amp;nêtre</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="634"/>
+        <location filename="mainwindow.cpp" line="638"/>
         <source>Edit general preferences</source>
         <translation>Définit les préférences générales</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="633"/>
+        <location filename="mainwindow.cpp" line="637"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Préférences...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="536"/>
+        <location filename="mainwindow.cpp" line="540"/>
         <source>About companion9x</source>
         <translation>À propos de companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="706"/>
+        <location filename="mainwindow.cpp" line="710"/>
         <source>&amp;Fuses...</source>
         <translation>&amp;Fusibles...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="661"/>
+        <location filename="mainwindow.cpp" line="665"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Copie la sélection dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="742"/>
+        <location filename="mainwindow.cpp" line="746"/>
         <source>Move the focus to the next window</source>
         <translation>Active la fenêtre suivante</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="702"/>
+        <location filename="mainwindow.cpp" line="706"/>
         <source>&amp;List programmers</source>
         <translation>&amp;Programmateurs supportés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="674"/>
+        <location filename="mainwindow.cpp" line="678"/>
         <source>Write EEPROM to transmitter</source>
         <translation>Transfère l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="655"/>
+        <location filename="mainwindow.cpp" line="659"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Coupe la sélection et la copie dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="678"/>
+        <location filename="mainwindow.cpp" line="682"/>
         <source>Ctrl+Alt+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="673"/>
+        <location filename="mainwindow.cpp" line="677"/>
         <source>Ctrl+Alt+W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="699"/>
+        <location filename="mainwindow.cpp" line="703"/>
         <source>Configure burning software</source>
         <translation>Configure le logiciel de flashage</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="677"/>
+        <location filename="mainwindow.cpp" line="681"/>
         <source>&amp;Read EEPROM From Tx</source>
         <translation>&amp;Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="403"/>
+        <location filename="mainwindow.cpp" line="140"/>
+        <source>Automatic update not available on this operating system type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="407"/>
         <source>Read EEPROM From Tx</source>
         <translation>Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="420"/>
+        <location filename="mainwindow.cpp" line="424"/>
         <source>Choose file to write to EEPROM memory</source>
         <translation>Choisir le fichier EEPROM à transmettre à l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="444"/>
+        <location filename="mainwindow.cpp" line="448"/>
         <source>Choose file to write to flash memory</source>
         <translation>Choisir le fichier FLASH à transmettre à l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="471"/>
+        <location filename="mainwindow.cpp" line="475"/>
         <source>Read EEPROM memory to File</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur dans un fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="530"/>
+        <location filename="mainwindow.cpp" line="534"/>
         <source>Version %1 (revision %2), %3</source>
         <translation>Version %1 (révision %2), %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="531"/>
+        <location filename="mainwindow.cpp" line="535"/>
         <source>The companion9x project was originally forked from eePe</source>
         <translation>Le projet companion9x a été créé à partir de eePe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="686"/>
+        <location filename="mainwindow.cpp" line="690"/>
         <source>Write EEPROM memory from file</source>
         <translation>Transfèrer un fichier EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="687"/>
+        <location filename="mainwindow.cpp" line="691"/>
         <source>Write EEPROM memory from file to transmitter</source>
         <translation>Transfère un fichier EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="690"/>
+        <location filename="mainwindow.cpp" line="694"/>
         <source>Read EEPROM memory to file</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur dans un fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="691"/>
+        <location filename="mainwindow.cpp" line="695"/>
         <source>Read EEPROM memory from transmitter to file</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur vers un fichier</translation>
     </message>
@@ -1240,8 +1245,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="165"/>
-        <location filename="mainwindow.cpp" line="208"/>
+        <location filename="mainwindow.cpp" line="169"/>
+        <location filename="mainwindow.cpp" line="212"/>
         <source>Save As</source>
         <translation>Enregister Sous</translation>
     </message>
@@ -1250,48 +1255,48 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fichiers EEPROM hexa (*.hex);;Fichiers EEPROM binaires (*.bin)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="165"/>
+        <location filename="mainwindow.cpp" line="169"/>
         <source>Executable (*.exe)</source>
         <translation>Exécutable (*.exe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="178"/>
+        <location filename="mainwindow.cpp" line="182"/>
         <source>No updates available at this time.</source>
         <translation>Aucune mise à jour disponible.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="152"/>
-        <location filename="mainwindow.cpp" line="182"/>
+        <location filename="mainwindow.cpp" line="156"/>
+        <location filename="mainwindow.cpp" line="186"/>
         <source>Unable to check for updates.</source>
         <translation>Impossible de rechercher des mises à jour.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="188"/>
+        <location filename="mainwindow.cpp" line="192"/>
         <source>Would you like to launch the installer?</source>
         <translation>Voulez-vous lancer l&apos;installation ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="425"/>
+        <location filename="mainwindow.cpp" line="429"/>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Transférer %1 dans la mémoire EEPROM de l&apos;émetteur ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="457"/>
         <source>Write %1 to flash memory?</source>
         <translation>Transférer %1 dans la mémoire FLASH de l&apos;émetteur ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="637"/>
+        <location filename="mainwindow.cpp" line="641"/>
         <source>&amp;Check for updates...</source>
         <translation>Re&amp;chercher des mises à jour...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="638"/>
+        <location filename="mainwindow.cpp" line="642"/>
         <source>Check for new version of companion9x/er9x</source>
         <translation>Vérifier l&apos;existence d&apos;un nouvelle version d&apos;companion9x/er9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="529"/>
+        <location filename="mainwindow.cpp" line="533"/>
         <source>Copyright</source>
         <translation>Copyright</translation>
     </message>
@@ -1300,7 +1305,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="761"/>
+        <location filename="mainwindow.cpp" line="765"/>
         <source>Switch layout Left/Right</source>
         <translation>Inverser l&apos;interface gauche/droite</translation>
     </message>
@@ -1329,52 +1334,52 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Affiche le manuel d&apos;utilisation d&apos;ER9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="854"/>
+        <location filename="mainwindow.cpp" line="858"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="135"/>
+        <location filename="mainwindow.cpp" line="136"/>
         <source>Checking for updates</source>
         <translation>Recherche des mises à jour</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="158"/>
+        <location filename="mainwindow.cpp" line="162"/>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation>Une nouvelle version de companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="457"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="457"/>
         <source>Release %1 %2</source>
         <translation>Version %1 %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="457"/>
         <source>Date %1 %2</source>
         <translation>Date %1 %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="532"/>
+        <location filename="mainwindow.cpp" line="536"/>
         <source>If you&apos;ve found this program useful, please support by</source>
         <translation>Si vous trouvez ce programme utile, merci d&apos;apporter votre soutien en effectuant un</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="641"/>
+        <location filename="mainwindow.cpp" line="645"/>
         <source>Contributors &amp;List...</source>
         <translation>&amp;Liste des contributeurs...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="642"/>
+        <location filename="mainwindow.cpp" line="646"/>
         <source>Show companion9x contributors list</source>
         <translation>Liste les contributeurs de companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="775"/>
+        <location filename="mainwindow.cpp" line="779"/>
         <source>Recent Files</source>
         <translation>Derniers documents utilisés</translation>
     </message>
@@ -2623,7 +2628,7 @@ Droite</translation>
     <message>
         <location filename="modeledit.ui" line="397"/>
         <source>Trainer</source>
-        <translation type="unfinished">Ecolage</translation>
+        <translation>Ecolage</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="407"/>
@@ -2633,12 +2638,12 @@ Droite</translation>
     <message>
         <location filename="modeledit.ui" line="417"/>
         <source>PPM Frame Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur de trame PPM</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="424"/>
         <source> mSec</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="571"/>
@@ -2991,17 +2996,17 @@ Droite</translation>
     <message>
         <location filename="modeledit.cpp" line="494"/>
         <source>FMTrim</source>
-        <translation type="unfinished">Trims des phases de vol</translation>
+        <translation>Trims des phases de vol</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2576"/>
         <source>Not enough available mixers!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus de mixages disponibles !</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="2624"/>
         <source>Not enough available expos!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus d&apos;expos disponibles !</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3024"/>
@@ -3399,7 +3404,7 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="129"/>
         <source>gruvin9x trunk for stock board</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk pour carte d&apos;origine</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="130"/>
@@ -3678,6 +3683,11 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
         <location filename="contributorsdialog.ui" line="14"/>
         <source>Dialog</source>
         <translation>Dialogue</translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="20"/>
+        <source>Contributors</source>
+        <translation>Contributeurs</translation>
     </message>
 </context>
 <context>
@@ -4596,47 +4606,47 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1451"/>
+        <location filename="simulatordialog.ui" line="1387"/>
         <source>CH1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1465"/>
+        <location filename="simulatordialog.ui" line="1401"/>
         <source>CH2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1479"/>
+        <location filename="simulatordialog.ui" line="1415"/>
         <source>CH3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1493"/>
+        <location filename="simulatordialog.ui" line="1429"/>
         <source>CH4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1507"/>
+        <location filename="simulatordialog.ui" line="1443"/>
         <source>CH5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1521"/>
+        <location filename="simulatordialog.ui" line="1457"/>
         <source>CH6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1535"/>
+        <location filename="simulatordialog.ui" line="1471"/>
         <source>CH7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1549"/>
+        <location filename="simulatordialog.ui" line="1485"/>
         <source>CH8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1458"/>
+        <location filename="simulatordialog.ui" line="1394"/>
         <source>CH9</source>
         <translation></translation>
     </message>
@@ -4671,32 +4681,32 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1060"/>
+        <location filename="simulatordialog.ui" line="996"/>
         <source>SW1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1091"/>
+        <location filename="simulatordialog.ui" line="1027"/>
         <source>SW2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1122"/>
+        <location filename="simulatordialog.ui" line="1058"/>
         <source>SW3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1153"/>
+        <location filename="simulatordialog.ui" line="1089"/>
         <source>SW4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1184"/>
+        <location filename="simulatordialog.ui" line="1120"/>
         <source>SW5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1215"/>
+        <location filename="simulatordialog.ui" line="1151"/>
         <source>SW6</source>
         <translation></translation>
     </message>
@@ -4711,42 +4721,42 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1246"/>
+        <location filename="simulatordialog.ui" line="1182"/>
         <source>BEEP</source>
         <translation>BIP</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1472"/>
+        <location filename="simulatordialog.ui" line="1408"/>
         <source>CH10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1486"/>
+        <location filename="simulatordialog.ui" line="1422"/>
         <source>CH11</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1500"/>
+        <location filename="simulatordialog.ui" line="1436"/>
         <source>CH12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1514"/>
+        <location filename="simulatordialog.ui" line="1450"/>
         <source>CH13</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1528"/>
+        <location filename="simulatordialog.ui" line="1464"/>
         <source>CH14</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1542"/>
+        <location filename="simulatordialog.ui" line="1478"/>
         <source>CH15</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1556"/>
+        <location filename="simulatordialog.ui" line="1492"/>
         <source>CH16</source>
         <translation></translation>
     </message>
@@ -4767,6 +4777,10 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Simulateur ER9x</translation>
     </message>
     <message>
+        <location filename="simulatordialog.ui" line="2193"/>
+        <location filename="simulatordialog.ui" line="2209"/>
+        <location filename="simulatordialog.ui" line="2225"/>
+        <location filename="simulatordialog.ui" line="2241"/>
         <location filename="simulatordialog.ui" line="2257"/>
         <location filename="simulatordialog.ui" line="2273"/>
         <location filename="simulatordialog.ui" line="2289"/>
@@ -4779,10 +4793,6 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="2401"/>
         <location filename="simulatordialog.ui" line="2417"/>
         <location filename="simulatordialog.ui" line="2433"/>
-        <location filename="simulatordialog.ui" line="2449"/>
-        <location filename="simulatordialog.ui" line="2465"/>
-        <location filename="simulatordialog.ui" line="2481"/>
-        <location filename="simulatordialog.ui" line="2497"/>
         <source>-100.1</source>
         <translation></translation>
     </message>
@@ -4799,7 +4809,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation>Rappel Y</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="205"/>
+        <location filename="simulatordialog.cpp" line="192"/>
         <source>Simulating </source>
         <translation>Simulation </translation>
     </message>
@@ -4812,32 +4822,32 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1277"/>
+        <location filename="simulatordialog.ui" line="1213"/>
         <source>SW7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1308"/>
+        <location filename="simulatordialog.ui" line="1244"/>
         <source>SW8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1339"/>
+        <location filename="simulatordialog.ui" line="1275"/>
         <source>SW9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1370"/>
+        <location filename="simulatordialog.ui" line="1306"/>
         <source>SWA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1401"/>
+        <location filename="simulatordialog.ui" line="1337"/>
         <source>SWB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1432"/>
+        <location filename="simulatordialog.ui" line="1368"/>
         <source>SWC</source>
         <translation></translation>
     </message>
@@ -4847,62 +4857,32 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation>Simulateur companion9x</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="751"/>
+        <location filename="simulatordialog.ui" line="780"/>
         <source>9x Simulator</source>
         <translation>Simulateur 9x</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="784"/>
-        <source>UP</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="803"/>
-        <source>DN</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="835"/>
-        <source>-</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="854"/>
-        <source>+</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="931"/>
+        <location filename="simulatordialog.ui" line="801"/>
         <source>&amp;Screenshot</source>
         <translation>&amp;Copie d&apos;écran</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="967"/>
-        <source>MENU</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="993"/>
-        <source>EXIT</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1029"/>
+        <location filename="simulatordialog.ui" line="965"/>
         <source>Outputs</source>
         <translation>Sorties</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="132"/>
+        <location filename="simulatordialog.cpp" line="119"/>
         <source>Firmware %1 error: %2</source>
         <translation>Firmware %1 erreur : %2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="199"/>
+        <location filename="simulatordialog.cpp" line="186"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simulation de l&apos;émetteur (%1)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="141"/>
+        <location filename="simulatordialog.cpp" line="128"/>
         <source> - Phase: %1(%2)</source>
         <translation> - Phase : %1(%2)</translation>
     </message>

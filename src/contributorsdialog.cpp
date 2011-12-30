@@ -14,12 +14,10 @@ contributorsDialog::contributorsDialog(QWidget *parent) :
         ui->plainTextEdit->insertPlainText(file.readAll());
     }
 
-    //ui->plainTextEdit->insertPlainText();
     ui->plainTextEdit->setReadOnly(true);
-
-//    ui->plainTextEdit->verticalScrollBar()->setValue(ui->plainTextEdit->verticalScrollBar()->minimum());
     ui->plainTextEdit->centerOnScroll();
     ui->plainTextEdit->verticalScrollBar()->setValue(0);
+    this->setWindowTitle(tr("Contributors"));
 }
 
 void contributorsDialog::showEvent ( QShowEvent * )
