@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>coders</file>
     <file>contributors</file>
     <file>images/9xtop.png</file>
     <file>images/9xbott.png</file>
