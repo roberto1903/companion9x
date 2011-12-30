@@ -595,6 +595,13 @@ EEPROMInterface *GetEepromInterface();
 
 class FirmwareInfo {
   public:
+    FirmwareInfo():
+      id(NULL),
+      eepromInterface(NULL),
+      url(NULL)
+    {
+    }
+
     FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL):
       id(id),
       name(name),
@@ -602,11 +609,13 @@ class FirmwareInfo {
       url(url)
     {
     }
+
     const char * id;
     QString name;
     EEPROMInterface * eepromInterface;
     const char * url;
 };
 extern QList<FirmwareInfo> firmwares;
+extern FirmwareInfo default_firmware;
 
 #endif
