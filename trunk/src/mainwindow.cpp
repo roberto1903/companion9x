@@ -118,7 +118,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
 {
     showcheckForUpdatesResult = ignoreSettings;
 
-#if defined WIN32
+#if defined WIN32 || !defined __GNUC__
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     if (checkCompanion9x || ignoreSettings)
