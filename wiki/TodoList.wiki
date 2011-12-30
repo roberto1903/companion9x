@@ -20,6 +20,8 @@
   * ~~Phase names visible on simulation~~
   * Beeps not handled yet
   * Use the Tx as an input for moving the sticks (2 inputs modes: the usb connection (FMS) and the mic input)
+  * UNDO command for cut & paste, alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)
+
 
 = Ideas from eePe =
   * Diff feature to compare two models
