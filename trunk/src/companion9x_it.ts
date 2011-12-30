@@ -784,7 +784,7 @@ Mode 4:
     <message>
         <location filename="mainwindow.cpp" line="140"/>
         <source>Automatic update not available on this operating system type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gli aggiornamenti automatici non sono disponibili per questo Sistema Operativo.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="156"/>
@@ -3367,29 +3367,31 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
     <message>
         <location filename="contributorsdialog.cpp" line="12"/>
         <source>People who have contributed to this project</source>
-        <translation type="unfinished"></translation>
+        <translation>Persone che hanno contribuito a questo progetto</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="23"/>
         <source>Coders</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmatori e grafici</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="33"/>
         <source>Honors go to Rafal Tomczak (RadioClone) and Thomas Husterer (th9x) 
 of course. Also to Erez Raviv (er9x) and it&apos;s fantastic eePe, from which
 companion9x was forked out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sentiti ringraziamenti a Rafal Tomczak (RadioClone) e Thomas Husterer (th9x).
+Anche a Erez Raviv (er9x) e al fantastico eePe dal quale è stato derivato
+companion9x.  </translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="35"/>
         <source>Thank you all !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Grazie a tutti !!!</translation>
     </message>
     <message>
         <location filename="contributorsdialog.cpp" line="40"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Amici e Programmatori </translation>
     </message>
 </context>
 <context>
