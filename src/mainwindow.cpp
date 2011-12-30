@@ -118,6 +118,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
 {
     showcheckForUpdatesResult = ignoreSettings;
 
+#if defined WIN32
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     if (checkCompanion9x || ignoreSettings)
@@ -135,6 +136,9 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         downloadDialog_forWait = new downloadDialog(this, tr("Checking for updates"));
         downloadDialog_forWait->show();
     }
+#else
+    QMessageBox::information(this, "companion9x", tr("Automatic update not available on this operating system type."));
+#endif   
 }
 
 void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
