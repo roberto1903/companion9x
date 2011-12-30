@@ -83,7 +83,7 @@ MainWindow::MainWindow()
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
 
-#ifdef WIN32
+#if defined WIN32 || !defined __GNUC__
     checkForUpdates(false);
 #endif
 
