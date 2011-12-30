@@ -51,7 +51,7 @@ const int Er9xInterface::getEEpromSize() {
 inline void applyStickModeToModel(Er9xModelData model, unsigned int mode)
 {
   for (int i=0; i<2; i++) {
-    unsigned int stick = applyStickMode(i, mode);
+    int stick = applyStickMode(i+1, mode) - 1;
     Er9xExpoData tmp = model.expoData[i];
     model.expoData[i] = model.expoData[stick];
     model.expoData[stick] = tmp;
