@@ -61,10 +61,14 @@ void preferencesDialog::initSettings()
     ui->historySize->setValue(settings.value("history_size", 10).toInt());
 
     QVariant current_firmware = settings.value("firmware", "gruvin9x");
-    foreach(FirmwareInfo firmware, firmwares) {
-      ui->downloadVerCB->addItem(firmware.name, firmware.id);
-      if (firmware.id == current_firmware)
-        ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
+    for (int it=0; it<2; it++, current_firmware=default_firmware.id) {
+      foreach(FirmwareInfo firmware, firmwares) {
+        ui->downloadVerCB->addItem(firmware.name, firmware.id);
+        if (firmware.id == current_firmware) {
+          ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
+          it = 2;
+        }
+      }
     }
 
     firmwareChanged();
