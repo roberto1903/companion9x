@@ -3307,92 +3307,92 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="117"/>
+        <location filename="eeprominterface.cpp" line="120"/>
         <source>th9x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="118"/>
+        <location filename="eeprominterface.cpp" line="121"/>
         <source>er9x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="119"/>
+        <location filename="eeprominterface.cpp" line="122"/>
         <source>er9x - No heli, no templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="120"/>
+        <location filename="eeprominterface.cpp" line="123"/>
         <source>er9x - JETI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="122"/>
+        <location filename="eeprominterface.cpp" line="125"/>
         <source>er9x - FrSky</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="123"/>
+        <location filename="eeprominterface.cpp" line="126"/>
         <source>er9x - FrSky, no heli, no templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="124"/>
+        <location filename="eeprominterface.cpp" line="127"/>
         <source>er9x - NMEA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="125"/>
+        <location filename="eeprominterface.cpp" line="128"/>
         <source>gruvin9x stable for stock board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="126"/>
+        <location filename="eeprominterface.cpp" line="130"/>
         <source>gruvin9x stable for stock board - Speaker mod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="127"/>
+        <location filename="eeprominterface.cpp" line="131"/>
         <source>gruvin9x stable for stock board - FrSky</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="128"/>
+        <location filename="eeprominterface.cpp" line="132"/>
         <source>gruvin9x stable for stock board - Frsky, speaker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="129"/>
+        <location filename="eeprominterface.cpp" line="133"/>
         <source>gruvin9x trunk for stock board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="130"/>
+        <location filename="eeprominterface.cpp" line="134"/>
         <source>gruvin9x trunk for stock board - Speaker mod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="131"/>
+        <location filename="eeprominterface.cpp" line="135"/>
         <source>gruvin9x trunk for stock board - FrSky</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="132"/>
+        <location filename="eeprominterface.cpp" line="136"/>
         <source>gruvin9x trunk for stock board - Frsky, speaker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="133"/>
+        <location filename="eeprominterface.cpp" line="137"/>
         <source>gruvin9x trunk for v4 board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="134"/>
+        <location filename="eeprominterface.cpp" line="138"/>
         <source>open9x - trunk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="121"/>
+        <location filename="eeprominterface.cpp" line="124"/>
         <source>er9x - ArDuPilot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3652,7 +3652,29 @@ Please only use this if you know what you are doing.  There are no error checks 
         <translation type="unfinished">Dialogo</translation>
     </message>
     <message>
-        <location filename="contributorsdialog.cpp" line="20"/>
+        <location filename="contributorsdialog.cpp" line="12"/>
+        <source>People who have contributed to this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="23"/>
+        <source>Coders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="33"/>
+        <source>Honors go to Rafal Tomczak (RadioClone) and Thomas Husterer (th9x) 
+of course. Also to Erez Raviv (er9x) and it&apos;s fantastic eePe, from which
+companion9x was forked out.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="35"/>
+        <source>Thank you all !!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="40"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
