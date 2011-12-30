@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     companion9xTranslator.load(":/companion9x_" + locale);
     app.installTranslator(&companion9xTranslator);
     
-    QPixmap pixmap(":/images/companion9x-title.png");
+    QPixmap pixmap(":/images/splash.png");
     QSplashScreen *splash = new QSplashScreen(pixmap);
 
     RegisterFirmwares();

@@ -46,7 +46,7 @@
 #include <QDateTime>
 #include "downloaddialog.h"
 #define MAX_RECENT  15
-#define SPLASH_TIME 3
+#define SPLASH_TIME 5
 
 class MdiChild;
 QT_BEGIN_NAMESPACE
