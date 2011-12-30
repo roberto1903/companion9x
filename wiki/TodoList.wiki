@@ -18,6 +18,8 @@
   * Add a what's new information to be displayed while prompting for updates
   * ~~Splash window should be visible at least 2-3 seconds!~~
   * ~~Phase names visible on simulation~~
+  * Beeps not handled yet
+  * Use the Tx as an input for moving the sticks (2 inputs modes: the usb connection (FMS) and the mic input)
 
 = Ideas from eePe =
   * Diff feature to compare two models
