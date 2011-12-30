@@ -1188,7 +1188,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.cpp" line="140"/>
         <source>Automatic update not available on this operating system type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mises à jour automatiques ne sont pas disponibles sur ce système d&apos;exploitation.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="407"/>
@@ -3192,7 +3192,7 @@ Droite</translation>
     <message>
         <location filename="helpers.cpp" line="138"/>
         <source>FULL</source>
-        <translation type="unfinished"></translation>
+        <translation>COMPLET</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="140"/>
@@ -3347,92 +3347,92 @@ Droite</translation>
         <translation>open9x accepte jusqu&apos;à %1 expos</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="117"/>
+        <location filename="eeprominterface.cpp" line="120"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="118"/>
+        <location filename="eeprominterface.cpp" line="121"/>
         <source>er9x</source>
         <translation>er9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="119"/>
+        <location filename="eeprominterface.cpp" line="122"/>
         <source>er9x - No heli, no templates</source>
         <translation>er9x - sans les menus hélicos et templates</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="120"/>
+        <location filename="eeprominterface.cpp" line="123"/>
         <source>er9x - JETI</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="122"/>
+        <location filename="eeprominterface.cpp" line="125"/>
         <source>er9x - FrSky</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="123"/>
+        <location filename="eeprominterface.cpp" line="126"/>
         <source>er9x - FrSky, no heli, no templates</source>
         <translation>er9x - FrSky, sans les menus hélicos et templates</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="124"/>
+        <location filename="eeprominterface.cpp" line="127"/>
         <source>er9x - NMEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="125"/>
+        <location filename="eeprominterface.cpp" line="128"/>
         <source>gruvin9x stable for stock board</source>
         <translation>gruvin9x stable pour carte d&apos;origine</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="126"/>
+        <location filename="eeprominterface.cpp" line="130"/>
         <source>gruvin9x stable for stock board - Speaker mod</source>
         <translation>gruvin9x stable pour carte d&apos;origine - modification haut-parleur</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="127"/>
+        <location filename="eeprominterface.cpp" line="131"/>
         <source>gruvin9x stable for stock board - FrSky</source>
         <translation>gruvin9x stable pour carte d&apos;origine - FrSky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="128"/>
+        <location filename="eeprominterface.cpp" line="132"/>
         <source>gruvin9x stable for stock board - Frsky, speaker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="129"/>
+        <location filename="eeprominterface.cpp" line="133"/>
         <source>gruvin9x trunk for stock board</source>
         <translation>gruvin9x trunk pour carte d&apos;origine</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="130"/>
+        <location filename="eeprominterface.cpp" line="134"/>
         <source>gruvin9x trunk for stock board - Speaker mod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="131"/>
+        <location filename="eeprominterface.cpp" line="135"/>
         <source>gruvin9x trunk for stock board - FrSky</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk pour la carte d&apos;origine - FrSky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="132"/>
+        <location filename="eeprominterface.cpp" line="136"/>
         <source>gruvin9x trunk for stock board - Frsky, speaker</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk pour la carte d&apos;origine - FrSky, speaker</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="133"/>
+        <location filename="eeprominterface.cpp" line="137"/>
         <source>gruvin9x trunk for v4 board</source>
         <translation>gruvin9x trunk pour carte v4</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="134"/>
+        <location filename="eeprominterface.cpp" line="138"/>
         <source>open9x - trunk</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="121"/>
+        <location filename="eeprominterface.cpp" line="124"/>
         <source>er9x - ArDuPilot</source>
         <translation></translation>
     </message>
@@ -3685,7 +3685,30 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
         <translation>Dialogue</translation>
     </message>
     <message>
-        <location filename="contributorsdialog.cpp" line="20"/>
+        <location filename="contributorsdialog.cpp" line="12"/>
+        <source>People who have contributed to this project</source>
+        <translation>Personnes qui ont contribué au projet</translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="23"/>
+        <source>Coders</source>
+        <translation>Développeurs</translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="33"/>
+        <source>Honors go to Rafal Tomczak (RadioClone) and Thomas Husterer (th9x) 
+of course. Also to Erez Raviv (er9x) and it&apos;s fantastic eePe, from which
+companion9x was forked out.</source>
+        <translation>Un merci tout particulier à Rafal Tomczak (RadioClone) et Thomas Husterer (th9x) bien sûr.
+Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est parti companion9x.</translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="35"/>
+        <source>Thank you all !!!</source>
+        <translation>Merci à tous !!!</translation>
+    </message>
+    <message>
+        <location filename="contributorsdialog.cpp" line="40"/>
         <source>Contributors</source>
         <translation>Contributeurs</translation>
     </message>
