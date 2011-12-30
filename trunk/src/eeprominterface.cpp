@@ -36,9 +36,9 @@ void getEEPROMString(char *dst, const char *src, int size)
 GeneralSettings::GeneralSettings()
 {
   memset(this, 0, sizeof(GeneralSettings));
-  contrast = 25;
-  vBatWarn = 90;
-  stickMode=  1;
+  contrast  = 25;
+  vBatWarn  = 90;
+  stickMode =  1;
   for (int i=0; i<7; ++i) {
     calibMid[i]     = 0x200;
     calibSpanNeg[i] = 0x180;
@@ -61,6 +61,8 @@ void ModelData::clear()
   ppmDelay = 300;
   for (int i=0; i<MAX_PHASES; i++)
     phaseData[i].clear();
+  for (int i=0; i<MAX_EXPOS; i++)
+    expoData[i].clear();
   for (int i=0; i<MAX_MIXERS; i++)
     mixData[i].clear();
   for(int i=0; i<4; i++){
