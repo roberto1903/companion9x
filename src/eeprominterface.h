@@ -20,6 +20,7 @@
 #include <inttypes.h>
 #include <string.h>
 #include <QString>
+#include <iostream>
 
 #if __GNUC__
 #define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
@@ -536,6 +537,11 @@ void getEEPROMString(char *dst, const char *src, int size);
 
 inline int applyStickMode(int stick, unsigned int mode)
 {
+  if (mode == 0 || mode > 4) {
+    std::cerr << "Incorrect stick mode", mode;
+    return stick;
+  }
+
   const unsigned int stickModes[]= {
       1, 2, 3, 4,
       1, 3, 2, 4,
@@ -553,14 +559,15 @@ inline void applyStickModeToModel(T & model, unsigned int mode)
 {
   T model_copy = model;
 
-  for (int i=0; i<MAX_EXPOS; i++) {
+
+  for (int i=0; i<sizeof(model.expoData) / sizeof(model.expoData[1]); i++) {
     if (model.expoData[i].mode)
       model_copy.expoData[i].chn = applyStickMode(model.expoData[i].chn+1, mode) - 1;
   }
 
   int index=0;
   for (int i=0; i<NUM_STICKS; i++) {
-    for (int e=0; e<MAX_EXPOS; e++) {
+    for (int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
       if (model_copy.expoData[e].mode && model_copy.expoData[e].chn == i)
         model.expoData[index++] = model_copy.expoData[e];
     }
