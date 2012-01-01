@@ -31,7 +31,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 
     setupSticks();
     resize(0,0);
-
+    this->setFixedSize(this->width(),this->height());
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
 }
