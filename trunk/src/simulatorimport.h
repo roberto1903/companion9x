@@ -108,8 +108,13 @@ if (inputs.sGea) ping &= ~(1<<INP_G_Gear); else ping |= (1<<INP_G_Gear);
 if (inputs.sTrn) pinb &= ~(1<<INP_B_Trainer); else pinb |= (1<<INP_B_Trainer);
 #else
 if (inputs.sEle) pine &= ~(1<<INP_E_ElevDR); else pine |= (1<<INP_E_ElevDR);
-if (inputs.sThr) pine &= ~(1<<INP_E_ThrCt); else pine |= (1<<INP_E_ThrCt);
-if (inputs.sAil) pine &= ~(1<<INP_E_AileDR); else pine |= (1<<INP_E_AileDR);
+#if defined(JETI) || defined(FRSKY)
+  if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
+  if (inputs.sThr) pinc &= ~(1<<INP_C_ThrCt); else pinc |= (1<<INP_C_ThrCt);
+#else
+  if (inputs.sAil) pine &= ~(1<<INP_E_AileDR); else pine |= (1<<INP_E_AileDR);
+  if (inputs.sThr) pine &= ~(1<<INP_E_ThrCt); else pine |= (1<<INP_E_ThrCt);
+#endif
 if (inputs.sGea) pine &= ~(1<<INP_E_Gear); else pine |= (1<<INP_E_Gear);
 if (inputs.sTrn) pine &= ~(1<<INP_E_Trainer); else pine |= (1<<INP_E_Trainer);
 #endif
