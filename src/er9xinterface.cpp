@@ -48,7 +48,7 @@ const int Er9xInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
-inline void applyStickModeToModel(Er9xModelData model, unsigned int mode)
+inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)
 {
   for (int i=0; i<2; i++) {
     int stick = applyStickMode(i+1, mode) - 1;
