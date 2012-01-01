@@ -3,6 +3,7 @@
 #define PCBSTD
 #define HELI
 #define TEMPLATES
+#define FRSKY
 
 #undef min
 #undef max
@@ -29,6 +30,7 @@ namespace Gruvin9x {
 #include "../gruvin9x/drivers.cpp"
 #include "../gruvin9x/simpgmspace.cpp"
 #include "../gruvin9x/templates.cpp"
+#include "../gruvin9x/frsky.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
