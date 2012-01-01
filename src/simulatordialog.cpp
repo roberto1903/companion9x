@@ -30,6 +30,8 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 // TODO    memset(&swOn,0,sizeof(swOn));
 
     setupSticks();
+    resize(0,0);
+
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
 }
@@ -114,7 +116,7 @@ void simulatorDialog::onButtonPressed(int value)
 void simulatorDialog::onTimerEvent()
 {
   static unsigned int lcd_counter = 0;
-
+  static bool lightOn=false;
   if (!simulator->timer10ms()) {
     QMessageBox::critical(this, "companion9x", QString(tr("Firmware %1 error: %2")).arg(txInterface->getName()).arg(simulator->getError()));
     timer->stop();
@@ -132,8 +134,23 @@ void simulatorDialog::onTimerEvent()
   }
   else if (ui->tabWidget->currentIndex() == 0) {
     bool lightEnable;
-    if (simulator->lcdChanged(lightEnable))
+    if (simulator->lcdChanged(lightEnable)) {
       ui->lcd->onLcdChanged(lightEnable);
+      if (lightOn!=lightEnable) {
+          if (lightEnable) {
+              ui->top->setStyleSheet("background:url(:/images/9xdt-lo.png);");
+              ui->bottom->setStyleSheet("background:url(:/images/9xdb-lo.png);");
+              ui->left->setStyleSheet("background:url(:/images/9xdl-lo.png);");
+              ui->right->setStyleSheet("background:url(:/images/9xdr-lo.png);");
+          } else {
+              ui->top->setStyleSheet("background:url(:/images/9xdt.png);");
+              ui->bottom->setStyleSheet("background:url(:/images/9xdb.png);");
+              ui->left->setStyleSheet("background:url(:/images/9xdl.png);");
+              ui->right->setStyleSheet("background:url(:/images/9xdr.png);");
+          }
+          lightOn=lightEnable;
+      }
+    }
   }
 
   if (!(lcd_counter++ % 5)) {

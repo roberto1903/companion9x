@@ -38,10 +38,10 @@ class menuWidget : public QWidget {
       int y=event->y();
       setFocus();
       if (event->button()==Qt::LeftButton) {
-         if (x>78 && x<124 && y>60 && y<81) {
+         if (x>25 && x<71 && y>60 && y<81) {
             setStyleSheet("background:url(:/images/9xmenumenu.png);");
             emit buttonPressed(Qt::Key_Enter);
-         } else if (x>78 && x<124 && y>117 && y<139) {
+         } else if (x>25 && x<71 && y>117 && y<139) {
             setStyleSheet("background:url(:/images/9xmenuexit.png);");
             emit buttonPressed(Qt::Key_Escape);
          }

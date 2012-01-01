@@ -2,16 +2,22 @@
   <qresource prefix="/">
     <file>coders</file>
     <file>contributors</file>
-    <file>images/9xtop.png</file>
-    <file>images/9xbott.png</file>
-    <file>images/9xcurs.png</file>
-    <file>images/9xcursdown.png</file>
-    <file>images/9xcursmin.png</file>
-    <file>images/9xcursplus.png</file>
-    <file>images/9xcursup.png</file>
+    <file>images/9xdb-lo.png</file>
+    <file>images/9xdb.png</file>
+    <file>images/9xdl-lo.png</file>
+    <file>images/9xdl.png</file>
+    <file>images/9xdr-lo.png</file>
+    <file>images/9xdr.png</file>
+    <file>images/9xdt-lo.png</file>
+    <file>images/9xdt.png</file>
     <file>images/9xmenu.png</file>
     <file>images/9xmenumenu.png</file>
     <file>images/9xmenuexit.png</file>
+    <file>images/9xcurs.png</file>
+    <file>images/9xcursup.png</file>
+    <file>images/9xcursplus.png</file>
+    <file>images/9xcursmin.png</file>
+    <file>images/9xcursdown.png</file>
     <file>images/copy.png</file>
     <file>images/cut.png</file>
     <file>images/currentmodel.png</file>

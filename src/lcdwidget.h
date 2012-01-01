@@ -71,9 +71,9 @@ class lcdWidget : public QWidget {
     {
       QRgb rgb;
       if (lightEnable)
-        rgb = qRgb(150, 200, 152);
+        rgb = qRgb(159, 165, 247);
       else
-        rgb = qRgb(200, 200, 200);
+        rgb = qRgb(161, 161, 161);
       p.setBackground(QBrush(rgb));
       p.eraseRect(0, 0, 2*W, 2*H);
 
