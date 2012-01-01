@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>569</height>
+    <width>667</width>
+    <height>622</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>690</width>
+    <width>739</width>
     <height>16777215</height>
    </size>
   </property>
@@ -33,21 +33,21 @@
    <item row="0" column="0">
     <widget class="QFrame" name="controlFrame">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="minimumSize">
       <size>
-       <width>599</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>280</height>
+       <height>16777215</height>
       </size>
      </property>
      <property name="frameShape">
@@ -79,8 +79,8 @@
          <widget class="QGraphicsView" name="leftStick">
           <property name="minimumSize">
            <size>
-            <width>200</width>
-            <height>200</height>
+            <width>220</width>
+            <height>220</height>
            </size>
           </property>
           <property name="verticalScrollBarPolicy">
@@ -409,8 +409,8 @@ QPushButton:checked {
          <widget class="QGraphicsView" name="rightStick">
           <property name="minimumSize">
            <size>
-            <width>200</width>
-            <height>200</height>
+            <width>220</width>
+            <height>220</height>
            </size>
           </property>
           <property name="verticalScrollBarPolicy">
@@ -893,7 +893,7 @@ QPushButton:checked {
        <string>9x Simulator</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="2">
+       <item row="0" column="1">
         <layout class="QGridLayout" name="gridLayout_3">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinimumSize</enum>
@@ -1049,49 +1049,7 @@ QPushButton:checked {
          </property>
         </spacer>
        </item>
-       <item row="2" column="2">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>1</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="1">
-        <spacer name="horizontalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>0</width>
-           <height>185</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="3">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>0</width>
-           <height>185</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="2">
+       <item row="1" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
           <spacer name="horizontalSpacer_3">
@@ -1125,7 +1083,7 @@ QPushButton:checked {
          </item>
         </layout>
        </item>
-       <item row="0" column="4">
+       <item row="0" column="2">
         <spacer name="horizontalSpacer_5">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>

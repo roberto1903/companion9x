@@ -30,7 +30,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 // TODO    memset(&swOn,0,sizeof(swOn));
 
     setupSticks();
-    resize(0,0);
+    resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(),this->height());
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
