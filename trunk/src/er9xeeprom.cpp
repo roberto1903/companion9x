@@ -119,7 +119,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.vBatCalib = vBatCalib;
   result.lightSw = lightSw;
   result.trainer = trainer;
-  result.view = view;
+  result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = disableSwitchWarning ? 0 : -1;
   result.disableMemoryWarning = disableMemoryWarning;

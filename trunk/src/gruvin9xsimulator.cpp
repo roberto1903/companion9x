@@ -17,6 +17,8 @@
 #include "gruvin9xsimulator.h"
 #include "gruvin9xinterface.h"
 
+#define FRSKY
+
 namespace Gruvin9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
