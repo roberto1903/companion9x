@@ -17,6 +17,9 @@
 #include "open9xsimulator.h"
 #include "open9xinterface.h"
 
+#define FRSKY
+#define FRSKY_HUB
+
 namespace Open9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
@@ -27,6 +30,8 @@ using namespace Open9x;
 Open9xSimulator::Open9xSimulator(Open9xInterface * open9xInterface):
     open9xInterface(open9xInterface)
 {
+#define INIT_IMPORT
+#include "simulatorimport.h"
 }
 
 bool Open9xSimulator::timer10ms()
