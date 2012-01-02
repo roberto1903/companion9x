@@ -8,6 +8,7 @@
 # XSD_FOUND, If false, don't try to use xsd
 
 FIND_PATH( XSD_INCLUDE_DIR xsd/cxx/parser/elements.hxx
+  "/Volumes/Data/xsd-3.3.0-i686-macosx/libxsd"
   "C:/Programs/xsd-3.3.0/libxsd"
   "C:/Program Files/CodeSynthesis XSD 3.2/include"
   "C:/mingw/xsd-3.3.0-i686-windows/libxsd"
@@ -27,6 +28,7 @@ FIND_PROGRAM( XSDCXX_EXECUTABLE
   NAMES
     ${XSDCXX_FILENAME1} ${XSDCXX_FILENAME2}
   PATHS
+    "/Volumes/Data/xsd-3.3.0-i686-macosx/bin"
     "C:/Programs/xsd-3.3.0/bin"
     "C:/mingw/xsd-3.3.0-i686-windows/bin"  
     "C:/Program Files/CodeSynthesis XSD 3.2/bin"
