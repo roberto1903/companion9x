@@ -23,8 +23,8 @@ private slots:
 
 
 private:
-    MixData *md;
     Ui::MixerDialog *ui;
+    MixData *md;
 };
 
 #endif // MIXERDIALOG_H

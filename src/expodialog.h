@@ -21,8 +21,8 @@ private slots:
     void valuesChanged();
 
 private:
-    ExpoData *ed;
     Ui::ExpoDialog *ui;
+    ExpoData *ed;
 };
 
 #endif // EXPODIALOG_H
