@@ -26,12 +26,12 @@
 
 ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     QDialog(parent),
+    redrawCurve(true),
     ui(new Ui::ModelEdit),
     radioData(radioData),
     id_model(id),
     g_model(radioData.models[id]),
-    g_eeGeneral(radioData.generalSettings),
-    redrawCurve(true)
+    g_eeGeneral(radioData.generalSettings)
 {
     ui->setupUi(this);
 
