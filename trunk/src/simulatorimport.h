@@ -81,6 +81,17 @@ extern uint8_t getFlightPhase();
 extern bool hasExtendedTrims();
 extern uint8_t main_thread_running;
 extern char * main_thread_error;
+
+#ifdef FRSKY
+extern uint8_t frskyStreaming;
+#endif
+#endif
+
+#ifdef INIT_IMPORT
+#undef INIT_IMPORT
+#ifdef FRSKY
+frskyStreaming = 255;
+#endif
 #endif
 
 #ifdef SETVALUES_IMPORT

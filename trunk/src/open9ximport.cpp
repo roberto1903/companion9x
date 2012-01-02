@@ -2,6 +2,8 @@
 #define SIMU_EXCEPTIONS
 #define PCBSTD
 #define DECIMALS_DISPLAYED
+#define FRSKY
+#define FRSKY_HUB
 
 #undef min
 #undef max
@@ -27,6 +29,7 @@ namespace Open9x {
 #include "../open9x/lcd.cpp"
 #include "../open9x/drivers.cpp"
 #include "../open9x/simpgmspace.cpp"
+#include "../open9x/frsky.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
