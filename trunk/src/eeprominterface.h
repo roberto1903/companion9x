@@ -538,7 +538,7 @@ void getEEPROMString(char *dst, const char *src, int size);
 inline int applyStickMode(int stick, unsigned int mode)
 {
   if (mode == 0 || mode > 4) {
-    std::cerr << "Incorrect stick mode", mode;
+    std::cerr << "Incorrect stick mode" << mode;
     return stick;
   }
 
@@ -566,14 +566,14 @@ inline void applyStickModeToModel(T & model, unsigned int mode)
   }
 
   int index=0;
-  for (int i=0; i<NUM_STICKS; i++) {
+  for (unsigned int i=0; i<NUM_STICKS; i++) {
     for (int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
       if (model_copy.expoData[e].mode && model_copy.expoData[e].chn == i)
         model.expoData[index++] = model_copy.expoData[e];
     }
   }
 
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (unsigned int i=0; i<MAX_MIXERS; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<NUM_CSW; i++) {
     switch (CS_STATE(model.customSw[i].func)) {

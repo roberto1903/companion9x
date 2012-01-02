@@ -240,7 +240,7 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim
   int trim = phase->trim[idx];
   if (trimUse) populateTrimUseCB(trimUse, phase_idx);
   if (phase->trimRef[idx] >= 0) {
-    if (trimUse) trimUse->setCurrentIndex(1 + phase->trimRef[idx] - (phase->trimRef[idx] >= phase_idx ? 1 : 0));
+    if (trimUse) trimUse->setCurrentIndex(1 + phase->trimRef[idx] - (phase->trimRef[idx] >= (int)phase_idx ? 1 : 0));
     trim = g_model.phaseData[g_model.getTrimFlightPhase(idx, phase_idx)].trim[idx];
     trimVal->setEnabled(false);
     trimSlider->setEnabled(false);
