@@ -560,20 +560,20 @@ inline void applyStickModeToModel(T & model, unsigned int mode)
   T model_copy = model;
 
 
-  for (int i=0; i<sizeof(model.expoData) / sizeof(model.expoData[1]); i++) {
+  for (unsigned int i=0; i<sizeof(model.expoData) / sizeof(model.expoData[1]); i++) {
     if (model.expoData[i].mode)
       model_copy.expoData[i].chn = applyStickMode(model.expoData[i].chn+1, mode) - 1;
   }
 
   int index=0;
-  for (unsigned int i=0; i<NUM_STICKS; i++) {
-    for (int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
+  for (int i=0; i<NUM_STICKS; i++) {
+    for (unsigned int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
       if (model_copy.expoData[e].mode && model_copy.expoData[e].chn == i)
         model.expoData[index++] = model_copy.expoData[e];
     }
   }
 
-  for (unsigned int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<MAX_MIXERS; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<NUM_CSW; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
