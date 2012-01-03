@@ -359,7 +359,7 @@ This is used by the templated to determine which channel goes to what number out
     <widget class="QComboBox" name="backLightColor">
      <item>
       <property name="text">
-       <string>Blu</string>
+       <string>Blue</string>
       </property>
      </item>
      <item>
