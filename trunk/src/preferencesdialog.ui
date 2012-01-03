@@ -355,6 +355,42 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </spacer>
    </item>
+   <item row="9" column="1">
+    <widget class="QComboBox" name="backLightColor">
+     <item>
+      <property name="text">
+       <string>Blu</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Green</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Red</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Orange</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Yellow</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>BackLight Color</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources>

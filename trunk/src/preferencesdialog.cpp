@@ -45,6 +45,7 @@ void preferencesDialog::writeValues()
     settings.setValue("show_splash", ui->showSplash->isChecked());
     settings.setValue("history_size", ui->historySize->value());
     settings.setValue("firmware", ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()));
+    settings.setValue("backLight", ui->backLightColor->currentIndex());
 }
 
 void preferencesDialog::initSettings()
@@ -59,7 +60,7 @@ void preferencesDialog::initSettings()
     ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
     ui->historySize->setValue(settings.value("history_size", 10).toInt());
-
+    ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
     QVariant current_firmware = settings.value("firmware", "gruvin9x");
     for (int it=0; it<2; it++, current_firmware=default_firmware.id) {
       foreach(FirmwareInfo firmware, firmwares) {

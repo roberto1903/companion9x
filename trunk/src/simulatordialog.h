@@ -32,7 +32,9 @@ private:
     Node *nodeRight;
     QTimer *timer;
     QString windowName;
-
+    int backLight;
+    bool lightOn;
+    
     quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
     quint16 s_timeCumSw;

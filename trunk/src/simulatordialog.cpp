@@ -28,7 +28,25 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 
 // TODO    bpanaCenter = 0;
 // TODO    memset(&swOn,0,sizeof(swOn));
-
+    QSettings settings("companion9x", "companion9x");
+    backLight = settings.value("backLight",0).toInt();
+    switch (backLight) {
+        case 1:
+            ui->lcd->setRgb(166,247,159);
+            break;
+        case 2:
+            ui->lcd->setRgb(247,159,166);
+            break;
+        case 3:
+            ui->lcd->setRgb(255,195,151);
+            break;
+        case 4:
+            ui->lcd->setRgb(274,242,159);
+            break;
+        default:
+            ui->lcd->setRgb(159,165,247);
+    }
+    lightOn=NULL;
     setupSticks();
     resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(),this->height());
@@ -116,7 +134,6 @@ void simulatorDialog::onButtonPressed(int value)
 void simulatorDialog::onTimerEvent()
 {
   static unsigned int lcd_counter = 0;
-  static bool lightOn=false;
   if (!simulator->timer10ms()) {
     QMessageBox::critical(this, "companion9x", QString(tr("Firmware %1 error: %2")).arg(txInterface->getName()).arg(simulator->getError()));
     timer->stop();
@@ -138,10 +155,38 @@ void simulatorDialog::onTimerEvent()
       ui->lcd->onLcdChanged(lightEnable);
       if (lightOn!=lightEnable) {
           if (lightEnable) {
-              ui->top->setStyleSheet("background:url(:/images/9xdt-lo.png);");
-              ui->bottom->setStyleSheet("background:url(:/images/9xdb-lo.png);");
-              ui->left->setStyleSheet("background:url(:/images/9xdl-lo.png);");
-              ui->right->setStyleSheet("background:url(:/images/9xdr-lo.png);");
+              switch (backLight) {
+                  case 1:
+                      ui->top->setStyleSheet("background:url(:/images/9xdt-gr.png);");
+                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-gr.png);");
+                      ui->left->setStyleSheet("background:url(:/images/9xdl-gr.png);");
+                      ui->right->setStyleSheet("background:url(:/images/9xdr-gr.png);");
+                      break;
+                  case 2:
+                      ui->top->setStyleSheet("background:url(:/images/9xdt-rd.png);");
+                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-rd.png);");
+                      ui->left->setStyleSheet("background:url(:/images/9xdl-rd.png);");
+                      ui->right->setStyleSheet("background:url(:/images/9xdr-rd.png);");
+                      break;
+                  case 3:
+                      ui->top->setStyleSheet("background:url(:/images/9xdt-or.png);");
+                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-or.png);");
+                      ui->left->setStyleSheet("background:url(:/images/9xdl-or.png);");
+                      ui->right->setStyleSheet("background:url(:/images/9xdr-or.png);");
+                      break;
+                  case 4:
+                      ui->top->setStyleSheet("background:url(:/images/9xdt-yl.png);");
+                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-yl.png);");
+                      ui->left->setStyleSheet("background:url(:/images/9xdl-yl.png);");
+                      ui->right->setStyleSheet("background:url(:/images/9xdr-yl.png);");
+                      break;
+                  default:
+                      ui->top->setStyleSheet("background:url(:/images/9xdt-bl.png);");
+                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-bl.png);");
+                      ui->left->setStyleSheet("background:url(:/images/9xdl-bl.png);");
+                      ui->right->setStyleSheet("background:url(:/images/9xdr-bl.png);");
+                      break;
+              }
           } else {
               ui->top->setStyleSheet("background:url(:/images/9xdt.png);");
               ui->bottom->setStyleSheet("background:url(:/images/9xdb.png);");
