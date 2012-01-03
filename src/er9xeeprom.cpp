@@ -456,10 +456,10 @@ t_Er9xModelData::operator ModelData ()
   int e = 0;
   for (int ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
     for (int dr = 2; dr >= 0 && e < MAX_EXPOS; dr--) {
-      if ((dr == 2 && !expoData[ch].drSw2) ||
-          (dr == 1 && !expoData[ch].drSw1) ||
+      if ((dr == 2 && !expoData[ch].drSw1) ||
+          (dr == 1 && !expoData[ch].drSw2) ||
           (dr == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
-      c9x.expoData[e].swtch = (dr == 2 ? -expoData[ch].drSw2 : (dr == 1 ? -expoData[ch].drSw1 : 0));
+      c9x.expoData[e].swtch = (dr == 1 ? -expoData[ch].drSw2 : (dr == 2 ? -expoData[ch].drSw1 : 0));
       c9x.expoData[e].chn = ch;
       c9x.expoData[e].expo = expoData[ch].expo[2-dr][0][0];
       c9x.expoData[e].weight = 100 + expoData[ch].expo[2-dr][1][0];
