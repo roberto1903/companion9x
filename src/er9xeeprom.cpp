@@ -461,8 +461,8 @@ t_Er9xModelData::operator ModelData ()
           (dr == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
       c9x.expoData[e].swtch = (dr == 2 ? -expoData[ch].drSw2 : (dr == 1 ? -expoData[ch].drSw1 : 0));
       c9x.expoData[e].chn = ch;
-      c9x.expoData[e].expo = expoData[ch].expo[dr][0][0];
-      c9x.expoData[e].weight = 100 + expoData[ch].expo[dr][1][0];
+      c9x.expoData[e].expo = expoData[ch].expo[2-dr][0][0];
+      c9x.expoData[e].weight = 100 + expoData[ch].expo[2-dr][1][0];
       if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1] && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
         c9x.expoData[e++].mode = 3;
       }
@@ -472,8 +472,8 @@ t_Er9xModelData::operator ModelData ()
           c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
           c9x.expoData[++e].chn = ch;
           c9x.expoData[e].mode = 1;
-          c9x.expoData[e].expo = expoData[ch].expo[dr][0][1];
-          c9x.expoData[e++].weight = 100 + expoData[ch].expo[dr][1][1];
+          c9x.expoData[e].expo = expoData[ch].expo[2-dr][0][1];
+          c9x.expoData[e++].weight = 100 + expoData[ch].expo[2-dr][1][1];
         }
       }
     }
