@@ -8,12 +8,12 @@
         <translation type="obsolete">Dialogue</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="35"/>
+        <location filename="expodialog.ui" line="74"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="42"/>
+        <location filename="expodialog.ui" line="81"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -26,64 +26,64 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Valeur d&apos;expo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="62"/>
+        <location filename="expodialog.ui" line="51"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="69"/>
+        <location filename="expodialog.ui" line="58"/>
         <source>The value of the weight</source>
         <translation>La valeur du ratio</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="85"/>
+        <location filename="expodialog.ui" line="101"/>
         <source>Phase</source>
         <translation>Phase</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="92"/>
+        <location filename="expodialog.ui" line="108"/>
         <source>Phase used by the expo.</source>
         <translation>Phase utilisée par l&apos;expo.</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="99"/>
+        <location filename="expodialog.ui" line="115"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="106"/>
+        <location filename="expodialog.ui" line="122"/>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <translation>Interrupteur utilisé par l&apos;expo.
 Expo actif par défaut si non renseigné.</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="114"/>
+        <location filename="expodialog.ui" line="130"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="121"/>
+        <location filename="expodialog.ui" line="137"/>
         <source>The curve used by the expo</source>
         <translation>Courbe utilisée par l&apos;expo</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="128"/>
+        <location filename="expodialog.ui" line="144"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="136"/>
+        <location filename="expodialog.ui" line="152"/>
         <source>NEG</source>
         <translation>Négatif</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="141"/>
+        <location filename="expodialog.ui" line="157"/>
         <source>POS</source>
         <translation>Positif</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="146"/>
+        <location filename="expodialog.ui" line="162"/>
         <source>ALL</source>
         <translation>Partout</translation>
     </message>
@@ -106,12 +106,12 @@ Expo actif par défaut si non renseigné.</translation>
         <translation>Centre</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="408"/>
+        <location filename="generaledit.ui" line="415"/>
         <source> min</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="379"/>
+        <location filename="generaledit.ui" line="386"/>
         <source> sec</source>
         <translation></translation>
     </message>
@@ -137,7 +137,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Plage de valeurs: 20...45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="363"/>
+        <location filename="generaledit.ui" line="370"/>
         <source>Backlight Auto On/OFF after</source>
         <translation>Rétroéclairage, extinction auto après</translation>
     </message>
@@ -147,12 +147,12 @@ p, li { white-space: pre-wrap; }
         <translation>Conversion</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="392"/>
+        <location filename="generaledit.ui" line="399"/>
         <source>Inactivity Timer</source>
         <translation>Alerte d&apos;inactivité</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="434"/>
+        <location filename="generaledit.ui" line="441"/>
         <source>Every Minute</source>
         <translation>Toutes les minutes</translation>
     </message>
@@ -161,7 +161,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Mode silencieux (alarme désactivée)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="405"/>
+        <location filename="generaledit.ui" line="412"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
         <translation>Si différent de 0, émission d&apos;un bip sonore régulier si aucune action n&apos;a été effectuée sur l&apos;émetteur depuis le temps spécifié (en minutes).
 Réinitialisation en agissant sur n&apos;importe lequel des manches / touches de navigation.</translation>
@@ -176,7 +176,7 @@ Réinitialisation en agissant sur n&apos;importe lequel des manches / touches de
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="474"/>
+        <location filename="generaledit.ui" line="481"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -187,7 +187,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="451"/>
+        <location filename="generaledit.ui" line="458"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -196,24 +196,24 @@ p, li { white-space: pre-wrap; }
         <translation>Le rétroéclairage clignote en synchro avec les bips du chrono</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="566"/>
+        <location filename="generaledit.ui" line="299"/>
         <source>Memory Startup Warning</source>
         <translation>Alerte mémoire</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="441"/>
+        <location filename="generaledit.ui" line="448"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
         <translation>Bip à 30, 15, 10, 5 puis toutes les secondes</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="351"/>
+        <location filename="generaledit.ui" line="358"/>
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
         <translation>Interrupteur déclenchant le rétroéclairage&apos; (si installé).</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="418"/>
+        <location filename="generaledit.ui" line="425"/>
         <source>Timer Beeps</source>
         <translation>Bips du chrono</translation>
     </message>
@@ -241,12 +241,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="77"/>
-        <location filename="generaledit.ui" line="953"/>
-        <location filename="generaledit.ui" line="987"/>
-        <location filename="generaledit.ui" line="1055"/>
-        <location filename="generaledit.ui" line="1089"/>
-        <location filename="generaledit.ui" line="1157"/>
-        <location filename="generaledit.ui" line="1191"/>
+        <location filename="generaledit.ui" line="972"/>
+        <location filename="generaledit.ui" line="1006"/>
+        <location filename="generaledit.ui" line="1074"/>
+        <location filename="generaledit.ui" line="1108"/>
+        <location filename="generaledit.ui" line="1147"/>
+        <location filename="generaledit.ui" line="1215"/>
         <location filename="generaledit.ui" line="1259"/>
         <location filename="generaledit.ui" line="1293"/>
         <source>Beeper volume
@@ -265,7 +265,7 @@ Long : bips plus longs.
 Extra long : bips extra longs.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="507"/>
+        <location filename="generaledit.ui" line="514"/>
         <source>Throttle Startup Warning</source>
         <translation>Alerte gaz</translation>
     </message>
@@ -336,7 +336,7 @@ Manche Droit:  Profondeur, Direction
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="338"/>
+        <location filename="generaledit.ui" line="345"/>
         <source>Backlight Switch</source>
         <translation>Interrupteur du rétroéclairage</translation>
     </message>
@@ -346,7 +346,7 @@ Manche Droit:  Profondeur, Direction
         <translation>Mode 3 (AIL PROF GAZ DIR)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="467"/>
+        <location filename="generaledit.ui" line="474"/>
         <source>Reverse Throttle Operation</source>
         <translation>Inversion des gaz</translation>
     </message>
@@ -358,7 +358,7 @@ These will be relevant for all models in the same EEPROM.</source>
 Communs à tous les modèles d&apos;une même EEPROM.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="458"/>
+        <location filename="generaledit.ui" line="465"/>
         <source>Flash on beep</source>
         <translation>Clignotement avec les bips</translation>
     </message>
@@ -397,7 +397,7 @@ This is used by the templated to determine which channel goes to what number out
 Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélections (=Templates).</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="299"/>
+        <location filename="generaledit.ui" line="306"/>
         <source>Battery Calibration</source>
         <translation>Étalonnage batterie</translation>
     </message>
@@ -406,12 +406,12 @@ Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélection
         <translation type="obsolete">4 - Très Fort</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="444"/>
+        <location filename="generaledit.ui" line="451"/>
         <source>Count Down to Zero</source>
         <translation>Compte à rebours </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="376"/>
+        <location filename="generaledit.ui" line="383"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
         <translation>Si cette valeur est différente de 0, l&apos;appui sur une touche de navigation déclenche le rétroéclairage qui s&apos;éteint après la durée spécifiée (en secondes).</translation>
     </message>
@@ -426,14 +426,14 @@ Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélection
         <translation>Réglage des bips</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="312"/>
+        <location filename="generaledit.ui" line="319"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Étalonnage batterie:
 Cette valeur est ajoutée à la tension mesurée.Mesurer la tension réelle&apos; à l&apos;aide d&apos;un multimètre pour déterminer l&apos;écart à appliquer.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="427"/>
+        <location filename="generaledit.ui" line="434"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -446,7 +446,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Emet un bip à chaque minute écoulée&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="514"/>
+        <location filename="generaledit.ui" line="521"/>
         <location filename="generaledit.ui" line="573"/>
         <location filename="generaledit.ui" line="603"/>
         <location filename="generaledit.ui" line="633"/>
@@ -490,18 +490,18 @@ p, li { white-space: pre-wrap; }
         <translation>Ordre des voies par défaut</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="540"/>
+        <location filename="generaledit.ui" line="547"/>
         <source>Switch Startup Warning</source>
         <translation>Alerte interrupteurs</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="487"/>
+        <location filename="generaledit.ui" line="494"/>
         <source>Show Splash Screen on Startup</source>
         <translation>Afficher l&apos;écran de démarrage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="494"/>
-        <location filename="generaledit.ui" line="497"/>
+        <location filename="generaledit.ui" line="501"/>
+        <location filename="generaledit.ui" line="504"/>
         <source>Show splash screen on startup</source>
         <translation>Affiche l&apos;écran d&apos;accueil au démarrage</translation>
     </message>
@@ -546,21 +546,21 @@ p, li { white-space: pre-wrap; }
         <translation>Nom du propriétaire</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="548"/>
-        <location filename="generaledit.ui" line="963"/>
-        <location filename="generaledit.ui" line="1065"/>
-        <location filename="generaledit.ui" line="1167"/>
+        <location filename="generaledit.ui" line="555"/>
+        <location filename="generaledit.ui" line="982"/>
+        <location filename="generaledit.ui" line="1084"/>
+        <location filename="generaledit.ui" line="1225"/>
         <location filename="generaledit.ui" line="1269"/>
         <source>Off</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="553"/>
+        <location filename="generaledit.ui" line="560"/>
         <source>Switches Up</source>
         <translation>Inters vers le haut</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="558"/>
+        <location filename="generaledit.ui" line="565"/>
         <source>Switches Down</source>
         <translation>Inters vers le bas</translation>
     </message>
@@ -570,61 +570,61 @@ p, li { white-space: pre-wrap; }
         <translation>Ecolage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="940"/>
+        <location filename="generaledit.ui" line="959"/>
         <location filename="generaledit.ui" line="2004"/>
         <source>PPM 1</source>
         <translation>PPM 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="968"/>
-        <location filename="generaledit.ui" line="1070"/>
-        <location filename="generaledit.ui" line="1172"/>
+        <location filename="generaledit.ui" line="987"/>
+        <location filename="generaledit.ui" line="1089"/>
+        <location filename="generaledit.ui" line="1230"/>
         <location filename="generaledit.ui" line="1274"/>
         <source>+=</source>
         <translation>+=</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="973"/>
-        <location filename="generaledit.ui" line="1075"/>
-        <location filename="generaledit.ui" line="1177"/>
+        <location filename="generaledit.ui" line="992"/>
+        <location filename="generaledit.ui" line="1094"/>
+        <location filename="generaledit.ui" line="1235"/>
         <location filename="generaledit.ui" line="1279"/>
         <source>:=</source>
         <translation>:=</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="997"/>
-        <location filename="generaledit.ui" line="1099"/>
-        <location filename="generaledit.ui" line="1201"/>
+        <location filename="generaledit.ui" line="1016"/>
+        <location filename="generaledit.ui" line="1118"/>
+        <location filename="generaledit.ui" line="1157"/>
         <location filename="generaledit.ui" line="1303"/>
         <source>chn1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1002"/>
-        <location filename="generaledit.ui" line="1104"/>
-        <location filename="generaledit.ui" line="1206"/>
+        <location filename="generaledit.ui" line="1021"/>
+        <location filename="generaledit.ui" line="1123"/>
+        <location filename="generaledit.ui" line="1162"/>
         <location filename="generaledit.ui" line="1308"/>
         <source>chn2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1007"/>
-        <location filename="generaledit.ui" line="1109"/>
-        <location filename="generaledit.ui" line="1211"/>
+        <location filename="generaledit.ui" line="1026"/>
+        <location filename="generaledit.ui" line="1128"/>
+        <location filename="generaledit.ui" line="1167"/>
         <location filename="generaledit.ui" line="1313"/>
         <source>chn3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1012"/>
-        <location filename="generaledit.ui" line="1114"/>
-        <location filename="generaledit.ui" line="1216"/>
+        <location filename="generaledit.ui" line="1031"/>
+        <location filename="generaledit.ui" line="1133"/>
+        <location filename="generaledit.ui" line="1172"/>
         <location filename="generaledit.ui" line="1318"/>
         <source>chn4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="912"/>
+        <location filename="generaledit.ui" line="931"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
@@ -669,28 +669,28 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="919"/>
+        <location filename="generaledit.ui" line="938"/>
         <source>Input</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="926"/>
+        <location filename="generaledit.ui" line="945"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="933"/>
+        <location filename="generaledit.ui" line="952"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1042"/>
+        <location filename="generaledit.ui" line="1061"/>
         <location filename="generaledit.ui" line="2087"/>
         <source>PPM 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1144"/>
+        <location filename="generaledit.ui" line="1202"/>
         <location filename="generaledit.ui" line="2094"/>
         <source>PPM 3</source>
         <translation></translation>
@@ -3960,6 +3960,37 @@ This is used by the templated to determine which channel goes to what number out
 Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de la création  d&apos;un modèle.</translation>
     </message>
     <message>
+        <location filename="preferencesdialog.ui" line="362"/>
+        <source>Blue</source>
+        <oldsource>Blu</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="367"/>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="372"/>
+        <source>Red</source>
+        <translation type="unfinished">Rouge</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="377"/>
+        <source>Orange</source>
+        <translation type="unfinished">Orange</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="382"/>
+        <source>Yellow</source>
+        <translation type="unfinished">Jaune</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="390"/>
+        <source>BackLight Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="preferencesdialog.ui" line="89"/>
         <source>Language (requires restart)</source>
         <translatorcomment>Version française par Pascal Dugué / Octobre 2010.</translatorcomment>
@@ -4609,189 +4640,189 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
 <context>
     <name>simulatorDialog</name>
     <message>
-        <location filename="simulatordialog.ui" line="32"/>
+        <location filename="simulatordialog.ui" line="776"/>
         <source>P1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="60"/>
+        <location filename="simulatordialog.ui" line="810"/>
         <source>P2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="91"/>
+        <location filename="simulatordialog.ui" line="847"/>
         <source>P3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="259"/>
+        <location filename="simulatordialog.ui" line="215"/>
         <source>AIL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1387"/>
+        <location filename="simulatordialog.ui" line="1531"/>
         <source>CH1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1401"/>
+        <location filename="simulatordialog.ui" line="1711"/>
         <source>CH2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1415"/>
+        <location filename="simulatordialog.ui" line="1891"/>
         <source>CH3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1429"/>
+        <location filename="simulatordialog.ui" line="2071"/>
         <source>CH4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1443"/>
+        <location filename="simulatordialog.ui" line="2251"/>
         <source>CH5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1457"/>
+        <location filename="simulatordialog.ui" line="2425"/>
         <source>CH6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1471"/>
+        <location filename="simulatordialog.ui" line="2605"/>
         <source>CH7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1485"/>
+        <location filename="simulatordialog.ui" line="2785"/>
         <source>CH8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1394"/>
+        <location filename="simulatordialog.ui" line="1698"/>
         <source>CH9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="234"/>
+        <location filename="simulatordialog.ui" line="185"/>
         <source>ELE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="490"/>
+        <location filename="simulatordialog.ui" line="476"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="518"/>
+        <location filename="simulatordialog.ui" line="509"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="549"/>
+        <location filename="simulatordialog.ui" line="545"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="577"/>
+        <location filename="simulatordialog.ui" line="578"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="209"/>
+        <location filename="simulatordialog.ui" line="155"/>
         <source>RUD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="996"/>
+        <location filename="simulatordialog.ui" line="1134"/>
         <source>SW1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1027"/>
+        <location filename="simulatordialog.ui" line="1165"/>
         <source>SW2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1058"/>
+        <location filename="simulatordialog.ui" line="1196"/>
         <source>SW3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1089"/>
+        <location filename="simulatordialog.ui" line="1227"/>
         <source>SW4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1120"/>
+        <location filename="simulatordialog.ui" line="1258"/>
         <source>SW5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1151"/>
+        <location filename="simulatordialog.ui" line="1289"/>
         <source>SW6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="184"/>
+        <location filename="simulatordialog.ui" line="125"/>
         <source>THR</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="468"/>
+        <location filename="simulatordialog.ui" line="449"/>
         <source>TRN</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1182"/>
+        <location filename="simulatordialog.ui" line="1320"/>
         <source>BEEP</source>
         <translation>BIP</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1408"/>
+        <location filename="simulatordialog.ui" line="1878"/>
         <source>CH10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1422"/>
+        <location filename="simulatordialog.ui" line="2058"/>
         <source>CH11</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1436"/>
+        <location filename="simulatordialog.ui" line="2238"/>
         <source>CH12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1450"/>
+        <location filename="simulatordialog.ui" line="2412"/>
         <source>CH13</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1464"/>
+        <location filename="simulatordialog.ui" line="2592"/>
         <source>CH14</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1478"/>
+        <location filename="simulatordialog.ui" line="2772"/>
         <source>CH15</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1492"/>
+        <location filename="simulatordialog.ui" line="2952"/>
         <source>CH16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="313"/>
-        <location filename="simulatordialog.ui" line="634"/>
+        <location filename="simulatordialog.ui" line="279"/>
+        <location filename="simulatordialog.ui" line="645"/>
         <source>Fix X</source>
         <translation>Verrou. Y</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="338"/>
-        <location filename="simulatordialog.ui" line="659"/>
+        <location filename="simulatordialog.ui" line="309"/>
+        <location filename="simulatordialog.ui" line="675"/>
         <source>Fix Y</source>
         <translation>Verrou. X</translation>
     </message>
@@ -4800,112 +4831,112 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Simulateur ER9x</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2193"/>
-        <location filename="simulatordialog.ui" line="2209"/>
-        <location filename="simulatordialog.ui" line="2225"/>
-        <location filename="simulatordialog.ui" line="2241"/>
-        <location filename="simulatordialog.ui" line="2257"/>
-        <location filename="simulatordialog.ui" line="2273"/>
-        <location filename="simulatordialog.ui" line="2289"/>
-        <location filename="simulatordialog.ui" line="2305"/>
-        <location filename="simulatordialog.ui" line="2321"/>
-        <location filename="simulatordialog.ui" line="2337"/>
-        <location filename="simulatordialog.ui" line="2353"/>
-        <location filename="simulatordialog.ui" line="2369"/>
-        <location filename="simulatordialog.ui" line="2385"/>
-        <location filename="simulatordialog.ui" line="2401"/>
-        <location filename="simulatordialog.ui" line="2417"/>
-        <location filename="simulatordialog.ui" line="2433"/>
+        <location filename="simulatordialog.ui" line="1605"/>
+        <location filename="simulatordialog.ui" line="1627"/>
+        <location filename="simulatordialog.ui" line="1785"/>
+        <location filename="simulatordialog.ui" line="1807"/>
+        <location filename="simulatordialog.ui" line="1965"/>
+        <location filename="simulatordialog.ui" line="1987"/>
+        <location filename="simulatordialog.ui" line="2145"/>
+        <location filename="simulatordialog.ui" line="2167"/>
+        <location filename="simulatordialog.ui" line="2319"/>
+        <location filename="simulatordialog.ui" line="2341"/>
+        <location filename="simulatordialog.ui" line="2499"/>
+        <location filename="simulatordialog.ui" line="2521"/>
+        <location filename="simulatordialog.ui" line="2679"/>
+        <location filename="simulatordialog.ui" line="2701"/>
+        <location filename="simulatordialog.ui" line="2859"/>
+        <location filename="simulatordialog.ui" line="2881"/>
         <source>-100.1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="288"/>
-        <location filename="simulatordialog.ui" line="609"/>
+        <location filename="simulatordialog.ui" line="249"/>
+        <location filename="simulatordialog.ui" line="615"/>
         <source>Hold X</source>
         <translation>Rappel X</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="363"/>
-        <location filename="simulatordialog.ui" line="684"/>
+        <location filename="simulatordialog.ui" line="339"/>
+        <location filename="simulatordialog.ui" line="705"/>
         <source>Hold Y</source>
         <translation>Rappel Y</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="192"/>
+        <location filename="simulatordialog.cpp" line="254"/>
         <source>Simulating </source>
         <translation>Simulation </translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="383"/>
-        <location filename="simulatordialog.ui" line="393"/>
-        <location filename="simulatordialog.ui" line="704"/>
-        <location filename="simulatordialog.ui" line="714"/>
+        <location filename="simulatordialog.ui" line="359"/>
+        <location filename="simulatordialog.ui" line="369"/>
+        <location filename="simulatordialog.ui" line="725"/>
+        <location filename="simulatordialog.ui" line="735"/>
         <source>TextLabel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1213"/>
+        <location filename="simulatordialog.ui" line="1351"/>
         <source>SW7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1244"/>
+        <location filename="simulatordialog.ui" line="1382"/>
         <source>SW8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1275"/>
+        <location filename="simulatordialog.ui" line="1413"/>
         <source>SW9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1306"/>
+        <location filename="simulatordialog.ui" line="1444"/>
         <source>SWA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1337"/>
+        <location filename="simulatordialog.ui" line="1475"/>
         <source>SWB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1368"/>
+        <location filename="simulatordialog.ui" line="1506"/>
         <source>SWC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="14"/>
+        <location filename="simulatordialog.ui" line="26"/>
         <source>Companion9x Simulator</source>
         <translation>Simulateur companion9x</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="780"/>
+        <location filename="simulatordialog.ui" line="893"/>
         <source>9x Simulator</source>
         <translation>Simulateur 9x</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="801"/>
+        <location filename="simulatordialog.ui" line="1070"/>
         <source>&amp;Screenshot</source>
         <translation>&amp;Copie d&apos;écran</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="965"/>
+        <location filename="simulatordialog.ui" line="1103"/>
         <source>Outputs</source>
         <translation>Sorties</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="119"/>
+        <location filename="simulatordialog.cpp" line="138"/>
         <source>Firmware %1 error: %2</source>
         <translation>Firmware %1 erreur : %2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="186"/>
+        <location filename="simulatordialog.cpp" line="248"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simulation de l&apos;émetteur (%1)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="128"/>
+        <location filename="simulatordialog.cpp" line="147"/>
         <source> - Phase: %1(%2)</source>
         <translation> - Phase : %1(%2)</translation>
     </message>
