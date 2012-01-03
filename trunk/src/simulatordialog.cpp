@@ -41,7 +41,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
             ui->lcd->setRgb(255,195,151);
             break;
         case 4:
-            ui->lcd->setRgb(274,242,159);
+            ui->lcd->setRgb(247,242,159);
             break;
         default:
             ui->lcd->setRgb(159,165,247);
