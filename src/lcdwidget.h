@@ -35,7 +35,11 @@ class lcdWidget : public QWidget {
     {
       lcd_buf = buf;
     }
-
+    void setRgb(uint8_t R, uint8_t G, uint8_t B) {
+        r=R;
+        g=G;
+        b=B;
+    }
     void makeScreenshot(const QString & fileName)
     {
       QPixmap buffer(2*W, 2*H);
@@ -64,14 +68,15 @@ class lcdWidget : public QWidget {
     uint8_t *lcd_buf;
 
     bool lightEnable;
-
+    uint8_t r,g,b;
+    
     uint8_t previous_buf[W*H/8];
 
     inline void doPaint(QPainter & p)
     {
       QRgb rgb;
       if (lightEnable)
-        rgb = qRgb(159, 165, 247);
+        rgb = qRgb(r, g, b);
       else
         rgb = qRgb(161, 161, 161);
       p.setBackground(QBrush(rgb));
