@@ -31,6 +31,8 @@ int HexInterface::getValueFromLine(const QString &line, int pos, int len)
 int HexInterface::load(uint8_t *data, int maxsize)
 {
   int result = 0;
+  int page = 0;
+  int prev_address = 0;
 
   while (!stream.atEnd()) {
     QString line = stream.readLine();
@@ -40,6 +42,12 @@ int HexInterface::load(uint8_t *data, int maxsize)
     int byteCount = getValueFromLine(line,1);
     int address = getValueFromLine(line,3,4);
     int recType = getValueFromLine(line,7);
+
+    if (address < prev_address)
+      page++;
+
+    prev_address = address;
+    address += page * 0xffff;
 
     if(byteCount<0 || address<0 || recType<0)
       return 0;
