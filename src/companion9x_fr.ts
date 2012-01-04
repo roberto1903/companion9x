@@ -1354,24 +1354,28 @@ p, li { white-space: pre-wrap; }
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le firmware %1 n&apos;a jamais été téléchargé.
+La version %2 est disponible.
+Voulez-vous la télécharger maintenant ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="239"/>
         <source>A new version of  %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Une nouvelle version du firmware %1 est disponible (courante %2 - nouvelle %3).
+Voulez vous la télécharger maintenant ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="245"/>
         <source>Latest version (%1) of  %2 has already been downloaded.
 Do you want to download it again ?</source>
-        <translation type="unfinished"></translation>
+        <translation>La dernière version (%1) de %2 a déjà été téléchargée.
+Voulez-vous la télécharger à nouveau ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="263"/>
         <source>Cannot chek for updates now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de rechercher des mises à jour.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="547"/>
@@ -2767,7 +2771,7 @@ Droite</translation>
         <location filename="modeledit.ui" line="2358"/>
         <source>Expos/DR</source>
         <oldsource>Expos</oldsource>
-        <translation type="unfinished">Expos</translation>
+        <translation>Expos / Doubles débattements</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="8290"/>
@@ -3425,7 +3429,7 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="132"/>
         <source>gruvin9x stable for stock board - Frsky, speaker</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x stable pour la carte d&apos;origine - FrSky, speaker</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="133"/>
@@ -3435,7 +3439,7 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="134"/>
         <source>gruvin9x trunk for stock board - Speaker mod</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x trunk pour carte d&apos;origine - speaker</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="135"/>
@@ -3970,7 +3974,7 @@ Manche Droit:  Profondeur, Direction
     <message>
         <location filename="preferencesdialog.ui" line="24"/>
         <source>Check selected Fw updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier les mises à jour de firmwares au démarrage</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="66"/>
@@ -3994,37 +3998,37 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="preferencesdialog.ui" line="352"/>
         <source>Blue</source>
         <oldsource>Blu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="357"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="362"/>
         <source>Red</source>
-        <translation type="unfinished">Rouge</translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="367"/>
         <source>Orange</source>
-        <translation type="unfinished">Orange</translation>
+        <translation>Orange</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="372"/>
         <source>Yellow</source>
-        <translation type="unfinished">Jaune</translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="380"/>
         <source>BackLight Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur du rétro-éclairage</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="387"/>
         <source>FwInfo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="109"/>
@@ -4099,17 +4103,17 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <location filename="preferencesdialog.cpp" line="40"/>
         <source>Last downloaded release: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dernière version téléchargée : %1</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="43"/>
         <source>The selected firmware has never been downloaded by companion9x.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le firmware séléctionné n&apos;a jamais été téléchargé par companion9x.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="45"/>
         <source>The selected firmware cannot be downloaded by companion9x.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le firmware sélectionné ne peut pas être téléchargé par companion9x.</translation>
     </message>
 </context>
 <context>
