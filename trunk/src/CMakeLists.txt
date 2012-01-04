@@ -276,7 +276,7 @@ ENDIF( )
 
 IF( APPLE )
   IF( CMAKE_GENERATOR STREQUAL Xcode )
-    SET( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release" )
+    SET( WORK_DIR ${CMAKE_BINARY_DIR}/Debug )
   ELSE( )
     SET( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" )
   ENDIF()
@@ -285,8 +285,9 @@ IF( APPLE )
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
-                     
-  ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations/ )
+ 
+# the line here creates a build fail with the cp                    
+ # ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
