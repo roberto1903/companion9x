@@ -68,12 +68,13 @@ protected:
     void closeEvent(QCloseEvent *event);
 
     public slots:
-    void downloadLatestFW(const QString & selected_firmware);
+    void downloadLatestFW(const QString & selected_firmware,bool force=false);
     
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
     void checkForUpdateFinished(QNetworkReply * reply);
     void updateDownloaded();
+    void reply1Finished(QNetworkReply * reply);
     void reply1Accepted();
     void newFile();
     void open();
@@ -122,13 +123,20 @@ private:
     QSignalMapper *windowMapper;
 
     QString installer_fileName;
+    QString default_firmware;
+    QString downloadedFW;
+    QString downloadedFWFilename;
     downloadDialog * downloadDialog_forWait;
 
     bool checkCompanion9x;
+    bool checkFW;
     bool showcheckForUpdatesResult;
     int MaxRecentFiles;
     int currentFWrev;
     int currentFWrev_temp;
+    int NewFwRev;
+    bool checkFwRevDone;
+    
     
     QNetworkAccessManager *manager1;
     QNetworkAccessManager *manager2;

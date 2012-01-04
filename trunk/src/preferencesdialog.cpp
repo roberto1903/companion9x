@@ -23,13 +23,28 @@ preferencesDialog::~preferencesDialog()
 
 void preferencesDialog::firmwareChanged()
 {
-  QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
-  foreach(FirmwareInfo firmware, firmwares) {
-    if (firmware.id == selected_firmware) {
-      ui->fw_dnld->setEnabled(firmware.url);
-      break;
+    QString fwid;
+    QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
+    foreach(FirmwareInfo firmware, firmwares) {
+        if (firmware.id == selected_firmware) {
+          fwid=firmware.id;
+          ui->fw_dnld->setEnabled(firmware.url);
+          break;
+        }
     }
-  }
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("FwRevisions");
+    int fwrev=settings.value(fwid, -1).toInt();
+    settings.endGroup();
+    if (fwrev!=-1) {
+        ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
+    } else {
+        if  (ui->fw_dnld->isEnabled()) {
+            ui->FwInfo->setText(tr("The selected firmware has never been downloaded by companion9x."));
+        } else {
+            ui->FwInfo->setText(tr("The selected firmware cannot be downloaded by companion9x."));
+        }
+    }
 }
 
 void preferencesDialog::writeValues()
@@ -42,6 +57,7 @@ void preferencesDialog::writeValues()
     settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
+    settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
     settings.setValue("show_splash", ui->showSplash->isChecked());
     settings.setValue("history_size", ui->historySize->value());
     settings.setValue("firmware", ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()));
@@ -61,6 +77,7 @@ void preferencesDialog::initSettings()
     ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
     ui->historySize->setValue(settings.value("history_size", 10).toInt());
     ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
+    ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
     QVariant current_firmware = settings.value("firmware", "gruvin9x");
     for (int it=0; it<2; it++, current_firmware=default_firmware.id) {
       foreach(FirmwareInfo firmware, firmwares) {
@@ -96,5 +113,6 @@ void preferencesDialog::populateLocale()
 void preferencesDialog::on_fw_dnld_clicked()
 {
     MainWindow * mw = (MainWindow *)this->parent();
-    mw->downloadLatestFW(ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString());
+    mw->downloadLatestFW(ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString(),true);
+    firmwareChanged();
 }

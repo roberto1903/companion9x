@@ -117,14 +117,14 @@ QList<FirmwareInfo> firmwares;
 FirmwareInfo default_firmware;
 void RegisterFirmwares()
 {
-  firmwares.push_back(FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/th9x.bin"));
-  firmwares.push_back(FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-noht", QObject::tr("er9x - No heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-noht.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-jeti", QObject::tr("er9x - JETI"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-ardupilot", QObject::tr("er9x - ArDuPilot"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-frsky", QObject::tr("er9x - FrSky"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-frsky-noht", QObject::tr("er9x - FrSky, no heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky-noht.hex"));
-  firmwares.push_back(FirmwareInfo("er9x-nmea", QObject::tr("er9x - NMEA"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-nmea.hex"));
+  firmwares.push_back(FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/th9x.bin","http://th9x.googlecode.com/svn/trunk/src/stamp-th9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-noht", QObject::tr("er9x - No heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-noht.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-jeti", QObject::tr("er9x - JETI"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-ardupilot", QObject::tr("er9x - ArDuPilot"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-frsky", QObject::tr("er9x - FrSky"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-frsky-noht", QObject::tr("er9x - FrSky, no heli, no templates"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky-noht.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
+  firmwares.push_back(FirmwareInfo("er9x-nmea", QObject::tr("er9x - NMEA"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-nmea.hex","http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h"));
   default_firmware = FirmwareInfo("gruvin9x-stable-stock", QObject::tr("gruvin9x stable for stock board"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-stock.hex");
   firmwares.push_back(default_firmware);
   firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-speaker", QObject::tr("gruvin9x stable for stock board - Speaker mod"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-std-speaker.hex"));
