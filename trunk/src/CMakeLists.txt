@@ -285,9 +285,10 @@ IF( APPLE )
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
- 
-# the line here creates a build fail with the cp                    
- # ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations )
+                     
+ ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
+		     COMMAND mkdir -p ${WORK_DIR}/companion9x.app/Contents/translations
+		     COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
