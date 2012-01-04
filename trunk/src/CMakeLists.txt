@@ -41,6 +41,8 @@ ENDIF( )
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
 
+ADD_DEFINITIONS(-O2 -Wall)
+
 FIND_PACKAGE( Subversion )
 SET( C9X_WC_REVISION 0 )
 IF( Subversion_FOUND )
@@ -274,10 +276,23 @@ IF( WIN32 )
 ENDIF( )
 
 IF( APPLE )
+  IF( CMAKE_GENERATOR STREQUAL Xcode )
+    SET( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release" )
+  ELSE( )
+    SET( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" )
+  ENDIF()
+    
+  ADD_CUSTOM_TARGET( addframeworks ALL 
+                     COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
+                     WORKING_DIRECTORY ${WORK_DIR}
+                     DEPENDS ${PROJECT_NAME} )
+                     
+  ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations/ )
+                        
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
-                     # WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-                     DEPENDS ${PROJECT_NAME} )
+                     WORKING_DIRECTORY ${WORK_DIR}
+                     DEPENDS addframeworks )
 ENDIF( )
 
 ADD_CUSTOM_TARGET( stamp
