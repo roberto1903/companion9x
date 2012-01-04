@@ -103,6 +103,7 @@ private slots:
     MdiChild *createMdiChild();
     void switchLayoutDirection();
     void setActiveSubWindow(QWidget *window);
+    QMenu * createRecentFileMenu();
 
 private:
     void createActions();
@@ -152,6 +153,7 @@ private:
     QToolBar *helpToolBar;
     QAction *newAct;
     QAction *openAct;
+    QAction *recentAct;
     QAction *saveAct;
     QAction *saveAsAct;
     QAction *exitAct;
