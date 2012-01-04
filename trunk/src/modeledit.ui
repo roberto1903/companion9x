@@ -24,7 +24,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -583,8 +583,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>260</width>
-              <height>177</height>
+              <width>804</width>
+              <height>424</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2359,21 +2359,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_118">
        <item row="0" column="0">
-        <layout class="QGridLayout" name="exposLayout">
-         <item row="0" column="0">
-          <spacer name="verticalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
+        <layout class="QGridLayout" name="exposLayout"/>
        </item>
       </layout>
      </widget>
@@ -2402,8 +2388,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>307</width>
-            <height>462</height>
+            <width>810</width>
+            <height>560</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3651,8 +3637,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>702</width>
-            <height>468</height>
+            <width>810</width>
+            <height>531</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8565,8 +8551,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>810</width>
+            <height>560</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
