@@ -455,15 +455,16 @@ t_Er9xModelData::operator ModelData ()
   // expoData
   int e = 0;
   for (int ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
-    for (int dr = 2; dr >= 0 && e < MAX_EXPOS; dr--) {
-      if ((dr == 2 && !expoData[ch].drSw1) ||
-          (dr == 1 && !expoData[ch].drSw2) ||
-          (dr == 0 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])) continue;
-      c9x.expoData[e].swtch = (dr == 1 ? -expoData[ch].drSw2 : (dr == 2 ? -expoData[ch].drSw1 : 0));
+    for (int dr = 0, pos = 0; dr < 3 && e < MAX_EXPOS; dr++, pos++) {
+      if ((dr == 0 && !expoData[ch].drSw1) || (dr == 1 && !expoData[ch].drSw2))
+        dr = 2;
+      if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
+        break;
+      c9x.expoData[e].swtch = (dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
       c9x.expoData[e].chn = ch;
-      c9x.expoData[e].expo = expoData[ch].expo[2-dr][0][0];
-      c9x.expoData[e].weight = 100 + expoData[ch].expo[2-dr][1][0];
-      if (expoData[ch].expo[dr][0][0] == expoData[ch].expo[dr][0][1] && expoData[ch].expo[dr][1][0] == expoData[ch].expo[dr][1][1]) {
+      c9x.expoData[e].expo = expoData[ch].expo[pos][0][0];
+      c9x.expoData[e].weight = 100 + expoData[ch].expo[pos][1][0];
+      if (expoData[ch].expo[pos][0][0] == expoData[ch].expo[pos][0][1] && expoData[ch].expo[pos][1][0] == expoData[ch].expo[pos][1][1]) {
         c9x.expoData[e++].mode = 3;
       }
       else {
@@ -472,8 +473,8 @@ t_Er9xModelData::operator ModelData ()
           c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
           c9x.expoData[++e].chn = ch;
           c9x.expoData[e].mode = 1;
-          c9x.expoData[e].expo = expoData[ch].expo[2-dr][0][1];
-          c9x.expoData[e++].weight = 100 + expoData[ch].expo[2-dr][1][1];
+          c9x.expoData[e].expo = expoData[ch].expo[pos][0][1];
+          c9x.expoData[e++].weight = 100 + expoData[ch].expo[pos][1][1];
         }
       }
     }
