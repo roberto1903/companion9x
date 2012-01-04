@@ -86,7 +86,10 @@ MainWindow::MainWindow()
 #if defined WIN32 || !defined __GNUC__
     checkForUpdates(false);
 #endif
-
+    if (checkFW && !default_firmware.isEmpty()) {
+        downloadLatestFW(default_firmware);
+    }
+   
     QStringList strl = QApplication::arguments();
     QString str;
     if(strl.count()>1) str = strl[1];
@@ -197,33 +200,119 @@ void MainWindow::updateDownloaded()
     }
 }
 
-void MainWindow::downloadLatestFW(const QString & selected_firmware)
+void MainWindow::downloadLatestFW(const QString & selected_firmware,bool force)
 {
     QSettings settings("companion9x", "companion9x");
-    QString dnldURL;
-
+    QString dnldURL,stamp;
+    QString fileName;
     foreach(FirmwareInfo firmware, firmwares) {
-      if (firmware.id == selected_firmware) {
-        dnldURL = firmware.url;
+        if (firmware.id == selected_firmware) {
+            dnldURL = firmware.url;
+            if (firmware.stamp)
+                    stamp=firmware.stamp;
         break;
-      }
+        }
     }
+    if (!stamp.isEmpty()) {
+        checkFwRevDone = false;
+        int OldFwRev;
+        bool download = false;
+        NewFwRev = 0;
+        manager1 = new QNetworkAccessManager(this);
+        connect(manager1, SIGNAL(finished(QNetworkReply*)), this, SLOT(reply1Finished(QNetworkReply*)));
+        manager1->get(QNetworkRequest(QUrl(stamp)));
+        downloadDialog_forWait = new downloadDialog(this, tr("Checking for updates"));
+        downloadDialog_forWait->exec();
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + selected_firmware + ".hex", tr(HEX_FILES_FILTER));
-    if (!fileName.isEmpty()) {
-      settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-      downloadDialog * dd = new downloadDialog(this, dnldURL, fileName);
-      currentFWrev_temp = currentFWrev;
-      connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
-      dd->exec();
+        if (NewFwRev != 0) {
+            settings.beginGroup("FwRevisions");
+            OldFwRev = settings.value(selected_firmware, 0).toInt();
+            settings.endGroup();
+            if (OldFwRev == 0) {
+                int ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(selected_firmware).arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No);
+                if (ret == QMessageBox::Yes) {
+                    download = true;
+                }
+            } else if (NewFwRev > OldFwRev) {
+                int ret = QMessageBox::question(this, "companion9x", tr("A new version of  %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(selected_firmware).arg(OldFwRev).arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No);
+                if (ret == QMessageBox::Yes) {
+                    download = true;
+                }
+            } else if ((NewFwRev == OldFwRev) && force) {
+                int ret = QMessageBox::question(this, "companion9x", tr("Latest version (%1) of  %2 has already been downloaded.\nDo you want to download it again ?").arg(OldFwRev).arg(selected_firmware),
+                        QMessageBox::Yes | QMessageBox::No);
+                if (ret == QMessageBox::Yes) {
+                    download = true;
+                }
+            } 
+            if (download == true) {
+                downloadedFW=selected_firmware;
+                fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + selected_firmware + ".hex", tr(HEX_FILES_FILTER));
+                if (!fileName.isEmpty()) {
+                    settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+                    downloadDialog * dd = new downloadDialog(this, dnldURL, fileName);
+                    currentFWrev_temp = NewFwRev;
+                    connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
+                    dd->exec();
+                }
+            }
+        } else {
+            QMessageBox::information(this, "companion9x", tr("Cannot chek for updates now."));
+        }
+    } else if (force) {
+        fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + selected_firmware + ".hex", tr(HEX_FILES_FILTER));
+        if (!fileName.isEmpty()) {
+          downloadedFW=selected_firmware;
+          downloadedFWFilename=fileName;
+          settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+          downloadDialog * dd = new downloadDialog(this, dnldURL, fileName);
+          currentFWrev_temp = currentFWrev;
+          connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
+          dd->exec();
+        }
     }
 }
 
 void MainWindow::reply1Accepted()
 {
     QSettings settings("companion9x", "companion9x");
-    currentFWrev = currentFWrev_temp;
-    settings.setValue("currentFWrev", currentFWrev);
+    settings.beginGroup("FwRevisions");
+    if (downloadedFWFilename.isEmpty()) {
+        if (!(downloadedFW.isEmpty())) {
+                currentFWrev = currentFWrev_temp;
+                settings.setValue(downloadedFW, currentFWrev);
+        }
+    } else {
+        FlashInterface flash(downloadedFWFilename);
+        QString rev=flash.getSvn();
+        int pos=rev.lastIndexOf("-r");
+        if (pos>0) {
+                currentFWrev=rev.mid(pos+2).toInt();
+                settings.setValue(downloadedFW, currentFWrev);
+        }
+    }
+    settings.endGroup();
+}
+
+void MainWindow::reply1Finished(QNetworkReply * reply)
+{
+    QByteArray qba = reply->readAll();
+    int i = qba.indexOf("SVN_VERS");
+
+    if(i>0)
+    {
+        bool cres;
+        int rev = QString::fromAscii(qba.mid(i+17,3)).toInt(&cres);
+
+        if(cres)
+        {
+            NewFwRev=rev;
+        }
+    }
+    downloadDialog_forWait->close();
+    checkFwRevDone=true;
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -873,7 +962,9 @@ void MainWindow::readSettings()
     QSize size = settings.value("size", QSize(400, 400)).toSize();
 
     checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
+    checkFW = settings.value("startup_check_fw", true).toBool();
     MaxRecentFiles =settings.value("history_size",10).toInt();
+    default_firmware =settings.value("firmware","").toString();
     
     if (maximized) {
       setWindowState(Qt::WindowMaximized);

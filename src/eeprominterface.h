@@ -598,15 +598,17 @@ class FirmwareInfo {
     FirmwareInfo():
       id(NULL),
       eepromInterface(NULL),
-      url(NULL)
+      url(NULL),
+      stamp(NULL)
     {
     }
 
-    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL):
+    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL, const char * stamp = NULL):
       id(id),
       name(name),
       eepromInterface(eepromInterface),
-      url(url)
+      url(url),
+      stamp(stamp)
     {
     }
 
@@ -614,6 +616,7 @@ class FirmwareInfo {
     QString name;
     EEPROMInterface * eepromInterface;
     const char * url;
+    const char * stamp;
 };
 extern QList<FirmwareInfo> firmwares;
 extern FirmwareInfo default_firmware;
