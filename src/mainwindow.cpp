@@ -843,7 +843,7 @@ void MainWindow::createActions()
                                  "window"));
     connect(previousAct, SIGNAL(triggered()),
             mdiArea, SLOT(activatePreviousSubWindow()));
-
+             
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
 
@@ -917,12 +917,27 @@ void MainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(contributorsAct);
 }
+ 
+QMenu *MainWindow::createRecentFileMenu()
+ {
+    QMenu *recentFileMenu = new QMenu(this);
+    for ( int i = 0; i < MaxRecentFiles; ++i)
+        recentFileMenu->addAction(recentFileActs[i]);
+     return recentFileMenu;
+ }
 
 void MainWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
+
+    QToolButton * recentToolButton = new QToolButton;
+    recentToolButton->setPopupMode(QToolButton::InstantPopup);
+    recentToolButton->setMenu(createRecentFileMenu());
+    recentToolButton->setIcon(QIcon(":/images/recentdocument.png"));
+    fileToolBar->addWidget(recentToolButton);
+    
     fileToolBar->addAction(saveAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(simulateAct);
