@@ -824,24 +824,28 @@ Mode 4:
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il firmware %1 son sembra mai essere stato scaricato.
+E&apos; disponibile la versione %2.
+Volete scaricarla adesso ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="239"/>
         <source>A new version of  %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Una nuova versione del firmware %1 è disponibile (attuale %2 - nuova %3).
+Volete scaricarla ora ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="245"/>
         <source>Latest version (%1) of  %2 has already been downloaded.
 Do you want to download it again ?</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;ultima versione (%1) di %2 è già stata scaricata,.
+Volete scaricarla nuovamente ? </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="263"/>
         <source>Cannot chek for updates now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile controllare gli aggiornamenti ora.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="342"/>
@@ -2055,7 +2059,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="2358"/>
         <source>Expos/DR</source>
         <oldsource>Expos</oldsource>
-        <translation type="unfinished">Esponenziali</translation>
+        <translation>Esponenziali/DR</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2368"/>
@@ -3617,7 +3621,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="preferencesdialog.ui" line="387"/>
         <source>FwInfo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="411"/>
@@ -3721,7 +3725,7 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="24"/>
         <source>Check selected Fw updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Controllo aggiornamenti FW</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="56"/>
@@ -3777,17 +3781,17 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.cpp" line="40"/>
         <source>Last downloaded release: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultima versione scaricata: %1 </translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="43"/>
         <source>The selected firmware has never been downloaded by companion9x.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il firmware selezionato non è mai stato scaricato da companion9x.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="45"/>
         <source>The selected firmware cannot be downloaded by companion9x.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il firmware selezionato non può essere scaricato da companion9x.</translation>
     </message>
 </context>
 <context>
