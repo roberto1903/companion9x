@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>667</width>
-    <height>622</height>
+    <width>645</width>
+    <height>583</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,6 +30,12 @@
     <normaloff>:/images/simulate.png</normaloff>:/images/simulate.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
+   <property name="margin">
+    <number>5</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QFrame" name="controlFrame">
      <property name="sizePolicy">
@@ -60,6 +66,12 @@
       <number>2</number>
      </property>
      <layout class="QGridLayout" name="gridLayout_8">
+      <property name="margin">
+       <number>5</number>
+      </property>
+      <property name="spacing">
+       <number>6</number>
+      </property>
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
         <item row="1" column="2">
@@ -886,7 +898,7 @@ QPushButton:checked {
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="simu">
       <attribute name="title">
