@@ -233,13 +233,13 @@ void MainWindow::downloadLatestFW(FirmwareInfo * force_firmware)
                     download = true;
                 }
             } else if (NewFwRev > OldFwRev) {
-                int ret = QMessageBox::question(this, "companion9x", tr("A new version of  %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(firmware.id).arg(OldFwRev).arg(NewFwRev),
+                int ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(firmware.id).arg(OldFwRev).arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
                 }
             } else if ((NewFwRev == OldFwRev) && force_firmware) {
-                int ret = QMessageBox::question(this, "companion9x", tr("Latest version (%1) of  %2 has already been downloaded.\nDo you want to download it again ?").arg(OldFwRev).arg(firmware.id),
+                int ret = QMessageBox::question(this, "companion9x", tr("Latest version (%1) of %2 has already been downloaded.\nDo you want to download it again ?").arg(OldFwRev).arg(firmware.id),
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
