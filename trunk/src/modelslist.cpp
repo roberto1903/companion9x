@@ -86,7 +86,7 @@ void ModelsListWidget::ShowContextMenu(const QPoint& pos)
     QMenu contextMenu;
     contextMenu.addAction(QIcon(":/images/edit.png"), tr("&Edit"),this,SLOT(OpenEditWindow()));
     contextMenu.addSeparator();
-    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(deleteSelected(bool)),tr("Delete"));
+    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(confirmDelete()),tr("Delete"));
     contextMenu.addAction(QIcon(":/images/copy.png"), tr("&Copy"),this,SLOT(copy()),tr("Ctrl+C"));
     contextMenu.addAction(QIcon(":/images/cut.png"), tr("&Cut"),this,SLOT(cut()),tr("Ctrl+X"));
     contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(paste()),tr("Ctrl+V"))->setEnabled(hasData);
@@ -297,6 +297,11 @@ void ModelsListWidget::cut()
     deleteSelected(false);
 }
 
+void ModelsListWidget::confirmDelete() {
+    deleteSelected(true);
+}
+
+
 void ModelsListWidget::deleteSelected(bool ask=true)
 {
     QMessageBox::StandardButton ret = QMessageBox::Yes;
@@ -367,6 +372,7 @@ void ModelsListWidget::doPaste(QByteArray *gmData, int index)
     char *gData = gmData->data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
     int i = sizeof(DragDropHeader);
     int id = index;
+    int ret,modified=0;
     if(!id) id++;
 
     while((i<gmData->size()) && (id<=MAX_MODELS)) {
@@ -378,16 +384,37 @@ void ModelsListWidget::doPaste(QByteArray *gmData, int index)
             radioData->generalSettings = *((GeneralSettings *)gData);
             gData += sizeof(GeneralSettings);
             i     += sizeof(GeneralSettings);
+            modified=1;
         }
         else //model data
         {
-            radioData->models[id-1] = *((ModelData *)gData);
-            gData += sizeof(ModelData);
-            i     += sizeof(ModelData);
-            id++;
+            QString name=(QString)radioData->models[id-1].name;
+            if (!name.isEmpty()) {
+                ret = QMessageBox::question(this, "companion9x", tr("You are pasting on an not empty model, are you sure ?"),
+                        QMessageBox::Yes | QMessageBox::No);
+                if (ret == QMessageBox::Yes) {
+                    radioData->models[id-1] = *((ModelData *)gData);
+                    gData += sizeof(ModelData);
+                    i += sizeof(ModelData);
+                    id++;
+                    modified = 1;
+                } else {
+                    gData += sizeof(ModelData);
+                    i += sizeof(ModelData);
+                    id++;
+                }
+            } else {
+                radioData->models[id-1] = *((ModelData *)gData);
+                gData += sizeof(ModelData);
+                i     += sizeof(ModelData);
+                id++;
+                modified=1;
+            }
         }
     }
-    ((MdiChild *)parent())->setModified();
+    if (modified==1) {
+        ((MdiChild *)parent())->setModified();
+    }
 }
 
 bool ModelsListWidget::hasPasteData()

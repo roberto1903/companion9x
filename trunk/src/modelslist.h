@@ -86,6 +86,7 @@ public slots:
     void duplicate();
     void setdefault();
     void deleteSelected(bool ask);
+    void confirmDelete();
     void viableModelSelected(int idx);
 
 private:
