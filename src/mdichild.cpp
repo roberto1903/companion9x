@@ -64,7 +64,9 @@ MdiChild::MdiChild():
 
   eepromInterfaceChanged();
 
-  if(!(this->isMaximized() || this->isMinimized())) this->adjustSize();
+  if(!(this->isMaximized() || this->isMinimized())) {
+    adjustSize();
+  }
 }
 
 void MdiChild::eepromInterfaceChanged()
