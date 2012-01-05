@@ -78,15 +78,11 @@ void preferencesDialog::initSettings()
     ui->historySize->setValue(settings.value("history_size", 10).toInt());
     ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
     ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
-    QVariant current_firmware = settings.value("firmware", "gruvin9x");
-    for (int it=0; it<2; it++, current_firmware=default_firmware.id) {
-      foreach(FirmwareInfo firmware, firmwares) {
-        ui->downloadVerCB->addItem(firmware.name, firmware.id);
-        if (firmware.id == current_firmware) {
-          ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
-          it = 2;
-        }
-      }
+    FirmwareInfo current_firmware = GetCurrentFirmware();
+    foreach(FirmwareInfo firmware, firmwares) {
+      ui->downloadVerCB->addItem(firmware.name, firmware.id);
+      if (firmware.id == current_firmware.id)
+        ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
     }
 
     firmwareChanged();
@@ -113,6 +109,13 @@ void preferencesDialog::populateLocale()
 void preferencesDialog::on_fw_dnld_clicked()
 {
     MainWindow * mw = (MainWindow *)this->parent();
-    mw->downloadLatestFW(ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString(),true);
+    QString firmware_id = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString();
+    foreach(FirmwareInfo firmware, firmwares) {
+      if (firmware.id == firmware_id) {
+        mw->downloadLatestFW(&firmware);
+        break;
+      }
+    }
+
     firmwareChanged();
 }

@@ -591,7 +591,7 @@ void RegisterFirmwares();
 
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 
-EEPROMInterface *GetEepromInterface();
+EEPROMInterface * GetEepromInterface();
 
 class FirmwareInfo {
   public:
@@ -618,7 +618,9 @@ class FirmwareInfo {
     const char * url;
     const char * stamp;
 };
+
+FirmwareInfo GetCurrentFirmware();
+
 extern QList<FirmwareInfo> firmwares;
-extern FirmwareInfo default_firmware;
 
 #endif

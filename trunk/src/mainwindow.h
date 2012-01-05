@@ -45,6 +45,8 @@
 #include <QMainWindow>
 #include <QDateTime>
 #include "downloaddialog.h"
+#include "eeprominterface.h"
+
 #define MAX_RECENT  15
 #define SPLASH_TIME 5
 
@@ -68,7 +70,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 public slots:
-    void downloadLatestFW(const QString & selected_firmware,bool force=false);
+    void downloadLatestFW(FirmwareInfo * force_firmware = NULL);
     
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
@@ -126,7 +128,6 @@ private:
     QSignalMapper *windowMapper;
 
     QString installer_fileName;
-    QString default_firmware;
     QString downloadedFW;
     QString downloadedFWFilename;
     downloadDialog * downloadDialog_forWait;

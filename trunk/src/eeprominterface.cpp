@@ -150,18 +150,23 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
   return false;
 }
 
-EEPROMInterface *GetEepromInterface()
+FirmwareInfo GetCurrentFirmware()
 {
-  static EEPROMInterface * defaultEepromInterface = new Gruvin9xInterface(EESIZE_STOCK);
-
   QSettings settings("companion9x", "companion9x");
-  QVariant current_firmware = settings.value("firmware", "gruvin9x");
+  QVariant firmware_id = settings.value("firmware", default_firmware.id);
 
   foreach(FirmwareInfo firmware, firmwares) {
-    if (firmware.id == current_firmware)
-      return firmware.eepromInterface;
+    if (firmware.id == firmware_id)
+      return firmware;
   }
 
-  return defaultEepromInterface;
+  return default_firmware;
 }
+
+EEPROMInterface *GetEepromInterface()
+{
+  return GetCurrentFirmware().eepromInterface;
+}
+
+
 
