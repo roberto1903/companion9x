@@ -851,7 +851,8 @@ Volete scaricarla nuovamente ? </translation>
         <location filename="mainwindow.cpp" line="293"/>
         <source>A new version of %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Una nuova versione del firmware %1 è disponibile (attuale %2 - nuova %3).
+Volete scaricarla ora ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="345"/>
@@ -2864,7 +2865,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modelslist.cpp" line="393"/>
         <source>You are pasting on an not empty model, are you sure?</source>
         <oldsource>You are pasting on an not empty model, are you sure ?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>State copiando su un modello non vuoto, siete sicuri ?</translation>
     </message>
 </context>
 <context>
