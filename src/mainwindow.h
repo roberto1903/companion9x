@@ -67,12 +67,14 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
 
-    public slots:
+public slots:
     void downloadLatestFW(const QString & selected_firmware,bool force=false);
     
 private slots:
     void checkForUpdates(bool ignoreSettings=true);
     void checkForUpdateFinished(QNetworkReply * reply);
+    void doAutoUpdates();
+    void doUpdates();
     void updateDownloaded();
     void reply1Finished(QNetworkReply * reply);
     void reply1Accepted();

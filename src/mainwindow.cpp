@@ -82,14 +82,10 @@ MainWindow::MainWindow()
     setWindowTitle(tr("companion9x - EEPROM Editor"));
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
-
-#if defined WIN32 || !defined __GNUC__
-    checkForUpdates(false);
-#endif
-    if (checkFW && !default_firmware.isEmpty()) {
-        downloadLatestFW(default_firmware);
-    }
-   
+    
+    // give time to the main windows to open before starting updates, delay 1s
+    QTimer::singleShot(1000, this, SLOT(doAutoUpdates()));
+    
     QStringList strl = QApplication::arguments();
     QString str;
     if(strl.count()>1) str = strl[1];
@@ -116,6 +112,19 @@ MainWindow::MainWindow()
     }
 }
 
+void MainWindow::doAutoUpdates() {
+    if (this->checkCompanion9x)
+        checkForUpdates(false);
+    if (this->checkFW)
+        if (!default_firmware.isEmpty()) {
+            downloadLatestFW(default_firmware);
+        }    
+}
+
+void MainWindow::doUpdates() {
+        checkForUpdates(true);
+        downloadLatestFW(default_firmware);
+}
 
 void MainWindow::checkForUpdates(bool ignoreSettings)
 {
@@ -140,9 +149,6 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         downloadDialog_forWait->show();
     }
 #endif
-    if (checkFW && !default_firmware.isEmpty()) {
-        downloadLatestFW(default_firmware);
-    }    
 }
 
 void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
@@ -730,7 +736,7 @@ void MainWindow::createActions()
 
     checkForUpdatesAct = new QAction(QIcon(":/images/update.png"), tr("&Check for updates..."), this);
     checkForUpdatesAct->setStatusTip(tr("Check for new version of companion9x/er9x"));
-    connect(checkForUpdatesAct, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
+    connect(checkForUpdatesAct, SIGNAL(triggered()), this, SLOT(doUpdates()));
 
     contributorsAct = new QAction(QIcon(":/images/contributors.png"), tr("Contributors &List..."), this);
     contributorsAct->setStatusTip(tr("Show companion9x contributors list"));
