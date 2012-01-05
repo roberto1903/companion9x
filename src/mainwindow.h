@@ -139,7 +139,9 @@ private:
     int currentFWrev;
     int currentFWrev_temp;
     int NewFwRev;
-    bool checkFwRevDone;
+    bool check1done;
+    bool check2done;
+
     
     
     QNetworkAccessManager *manager1;
