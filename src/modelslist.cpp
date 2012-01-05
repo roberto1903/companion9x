@@ -390,7 +390,7 @@ void ModelsListWidget::doPaste(QByteArray *gmData, int index)
         {
             QString name=(QString)radioData->models[id-1].name;
             if (!name.isEmpty()) {
-                ret = QMessageBox::question(this, "companion9x", tr("You are pasting on an not empty model, are you sure ?"),
+                ret = QMessageBox::question(this, "companion9x", tr("You are pasting on an not empty model, are you sure?"),
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     radioData->models[id-1] = *((ModelData *)gData);
