@@ -770,15 +770,14 @@ Mode 4:
         <translation>companion9x - EEPROM Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="111"/>
-        <location filename="mainwindow.cpp" line="356"/>
-        <location filename="mainwindow.cpp" line="393"/>
+        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="359"/>
+        <location filename="mainwindow.cpp" line="395"/>
         <source>File loaded</source>
         <translation>Documento caricato</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="139"/>
-        <location filename="mainwindow.cpp" line="225"/>
+        <location filename="mainwindow.cpp" line="155"/>
         <source>Checking for updates</source>
         <translation>Controllo aggiornamenti</translation>
     </message>
@@ -787,40 +786,44 @@ Mode 4:
         <translation type="obsolete">Gli aggiornamenti automatici non sono disponibili per questo Sistema Operativo.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="160"/>
-        <location filename="mainwindow.cpp" line="190"/>
+        <location filename="mainwindow.cpp" line="173"/>
+        <location filename="mainwindow.cpp" line="201"/>
+        <location filename="mainwindow.cpp" line="274"/>
+        <location filename="mainwindow.cpp" line="314"/>
+        <location filename="mainwindow.cpp" line="320"/>
         <source>Unable to check for updates.</source>
         <translation>Impossibile controllare gli aggiornamenti.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="166"/>
+        <location filename="mainwindow.cpp" line="179"/>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation>Una nuova versione di companion9x è disponibile (versione %1)&lt;br&gt;Desiderate scaricarla ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="173"/>
-        <location filename="mainwindow.cpp" line="253"/>
-        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="186"/>
+        <location filename="mainwindow.cpp" line="220"/>
+        <location filename="mainwindow.cpp" line="304"/>
         <source>Save As</source>
         <translation>Salva come</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="173"/>
+        <location filename="mainwindow.cpp" line="186"/>
         <source>Executable (*.exe)</source>
         <translation>Eseguibili (*.exe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="186"/>
+        <location filename="mainwindow.cpp" line="197"/>
+        <location filename="mainwindow.cpp" line="300"/>
         <source>No updates available at this time.</source>
         <translation>Nessun aggiornamento disponibile.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="196"/>
+        <location filename="mainwindow.cpp" line="207"/>
         <source>Would you like to launch the installer?</source>
         <translation>Desiderate eseguire l&apos;aggiornamento ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="286"/>
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
@@ -829,37 +832,40 @@ E&apos; disponibile la versione %2.
 Volete scaricarla adesso ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="239"/>
         <source>A new version of  %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation>Una nuova versione del firmware %1 è disponibile (attuale %2 - nuova %3).
+        <translation type="obsolete">Una nuova versione del firmware %1 è disponibile (attuale %2 - nuova %3).
 Volete scaricarla ora ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="245"/>
         <source>Latest version (%1) of  %2 has already been downloaded.
 Do you want to download it again ?</source>
-        <translation>L&apos;ultima versione (%1) di %2 è già stata scaricata,.
+        <translation type="obsolete">L&apos;ultima versione (%1) di %2 è già stata scaricata,.
 Volete scaricarla nuovamente ? </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="263"/>
         <source>Cannot chek for updates now.</source>
-        <translation>Impossibile controllare gli aggiornamenti ora.</translation>
+        <translation type="obsolete">Impossibile controllare gli aggiornamenti ora.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="342"/>
+        <location filename="mainwindow.cpp" line="293"/>
+        <source>A new version of %1 firmware is available (current %2 - newer %3).
+Do you want to download it now ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="345"/>
         <source>Open</source>
         <translation>Apri</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
-        <location filename="mainwindow.cpp" line="372"/>
+        <location filename="mainwindow.cpp" line="368"/>
+        <location filename="mainwindow.cpp" line="374"/>
         <source>File saved</source>
         <translation>Documento salvato</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="497"/>
+        <location filename="mainwindow.cpp" line="498"/>
         <source>Read EEPROM From Tx</source>
         <translation>Leggi l&apos;EEPROM dalla radio</translation>
     </message>
@@ -940,7 +946,7 @@ Volete scaricarla nuovamente ? </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="678"/>
-        <location filename="mainwindow.cpp" line="1049"/>
+        <location filename="mainwindow.cpp" line="1048"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
@@ -2850,9 +2856,15 @@ p, li { white-space: pre-wrap; }
         <translation>Impostazioni generali radio</translation>
     </message>
     <message>
-        <location filename="modelslist.cpp" line="306"/>
+        <location filename="modelslist.cpp" line="311"/>
         <source>Delete Selected Models?</source>
         <translation>Cancellare i modelli selezionati ?</translation>
+    </message>
+    <message>
+        <location filename="modelslist.cpp" line="393"/>
+        <source>You are pasting on an not empty model, are you sure?</source>
+        <oldsource>You are pasting on an not empty model, are you sure ?</oldsource>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2861,6 +2873,11 @@ p, li { white-space: pre-wrap; }
         <location filename="main.cpp" line="85"/>
         <source>Checking for updates...</source>
         <translation>Controllo aggiornamenti...</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="87"/>
+        <source>Starting...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="74"/>

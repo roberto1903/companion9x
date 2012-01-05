@@ -661,7 +661,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="626"/>
         <source>Pot Scrolling Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation avec les pots</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="656"/>
@@ -814,7 +814,7 @@ p, li { white-space: pre-wrap; }
         <translation>Fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="342"/>
+        <location filename="mainwindow.cpp" line="345"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
@@ -909,7 +909,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.cpp" line="678"/>
-        <location filename="mainwindow.cpp" line="1049"/>
+        <location filename="mainwindow.cpp" line="1048"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
@@ -1029,9 +1029,9 @@ p, li { white-space: pre-wrap; }
         <translation>Ferme la fenêtre active</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="111"/>
-        <location filename="mainwindow.cpp" line="356"/>
-        <location filename="mainwindow.cpp" line="393"/>
+        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="359"/>
+        <location filename="mainwindow.cpp" line="395"/>
         <source>File loaded</source>
         <translation>Fichier chargé</translation>
     </message>
@@ -1041,8 +1041,8 @@ p, li { white-space: pre-wrap; }
         <translation>companion9x - Éditeur d&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
-        <location filename="mainwindow.cpp" line="372"/>
+        <location filename="mainwindow.cpp" line="368"/>
+        <location filename="mainwindow.cpp" line="374"/>
         <source>File saved</source>
         <translation>Fichier sauvegardé</translation>
     </message>
@@ -1190,7 +1190,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Les mises à jour automatiques ne sont pas disponibles sur ce système d&apos;exploitation.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="497"/>
+        <location filename="mainwindow.cpp" line="498"/>
         <source>Read EEPROM From Tx</source>
         <translation>Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
@@ -1244,9 +1244,9 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="173"/>
-        <location filename="mainwindow.cpp" line="253"/>
-        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="186"/>
+        <location filename="mainwindow.cpp" line="220"/>
+        <location filename="mainwindow.cpp" line="304"/>
         <source>Save As</source>
         <translation>Enregister Sous</translation>
     </message>
@@ -1255,25 +1255,36 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fichiers EEPROM hexa (*.hex);;Fichiers EEPROM binaires (*.bin)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="173"/>
+        <location filename="mainwindow.cpp" line="186"/>
         <source>Executable (*.exe)</source>
         <translation>Exécutable (*.exe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="186"/>
+        <location filename="mainwindow.cpp" line="197"/>
+        <location filename="mainwindow.cpp" line="300"/>
         <source>No updates available at this time.</source>
         <translation>Aucune mise à jour disponible.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="160"/>
-        <location filename="mainwindow.cpp" line="190"/>
+        <location filename="mainwindow.cpp" line="173"/>
+        <location filename="mainwindow.cpp" line="201"/>
+        <location filename="mainwindow.cpp" line="274"/>
+        <location filename="mainwindow.cpp" line="314"/>
+        <location filename="mainwindow.cpp" line="320"/>
         <source>Unable to check for updates.</source>
         <translation>Impossible de rechercher des mises à jour.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="196"/>
+        <location filename="mainwindow.cpp" line="207"/>
         <source>Would you like to launch the installer?</source>
         <translation>Voulez-vous lancer l&apos;installation ?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="293"/>
+        <source>A new version of %1 firmware is available (current %2 - newer %3).
+Do you want to download it now ?</source>
+        <translation>Une nouvelle version du firmware %1 est disponible (courante %2 - nouvelle %3).
+Voulez vous la télécharger maintenant ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="519"/>
@@ -1339,18 +1350,17 @@ p, li { white-space: pre-wrap; }
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="139"/>
-        <location filename="mainwindow.cpp" line="225"/>
+        <location filename="mainwindow.cpp" line="155"/>
         <source>Checking for updates</source>
         <translation>Recherche des mises à jour</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="166"/>
+        <location filename="mainwindow.cpp" line="179"/>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation>Une nouvelle version de companion9x est disponible (r%1)&lt;br&gt;Voulez-vous la télécharger ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="286"/>
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
@@ -1359,23 +1369,20 @@ La version %2 est disponible.
 Voulez-vous la télécharger maintenant ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="239"/>
         <source>A new version of  %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
-        <translation>Une nouvelle version du firmware %1 est disponible (courante %2 - nouvelle %3).
+        <translation type="obsolete">Une nouvelle version du firmware %1 est disponible (courante %2 - nouvelle %3).
 Voulez vous la télécharger maintenant ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="245"/>
         <source>Latest version (%1) of  %2 has already been downloaded.
 Do you want to download it again ?</source>
-        <translation>La dernière version (%1) de %2 a déjà été téléchargée.
+        <translation type="obsolete">La dernière version (%1) de %2 a déjà été téléchargée.
 Voulez-vous la télécharger à nouveau ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="263"/>
         <source>Cannot chek for updates now.</source>
-        <translation>Impossible de rechercher des mises à jour.</translation>
+        <translation type="obsolete">Impossible de rechercher des mises à jour.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="547"/>
@@ -1651,7 +1658,7 @@ Enregistrer les changements ?</translation>
     <message>
         <location filename="mixerdialog.ui" line="230"/>
         <source>Enable FM Trim</source>
-        <translation type="unfinished"></translation>
+        <translation>Trims de phases de vol</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="321"/>
@@ -1833,7 +1840,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mixerdialog.cpp" line="21"/>
         <location filename="mixerdialog.cpp" line="96"/>
         <source>FM Trim Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Trim de phase de vol</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="56"/>
@@ -3152,9 +3159,15 @@ Droite</translation>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="modelslist.cpp" line="306"/>
+        <location filename="modelslist.cpp" line="311"/>
         <source>Delete Selected Models?</source>
         <translation>Supprimer les modèles sélectionnés ?</translation>
+    </message>
+    <message>
+        <location filename="modelslist.cpp" line="393"/>
+        <source>You are pasting on an not empty model, are you sure?</source>
+        <oldsource>You are pasting on an not empty model, are you sure ?</oldsource>
+        <translation>Vous allez écraser un modèle, êtes vous sûr ?</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="97"/>
@@ -3168,6 +3181,11 @@ Droite</translation>
         <location filename="main.cpp" line="85"/>
         <source>Checking for updates...</source>
         <translation>Recherche des mises à jour...</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="87"/>
+        <source>Starting...</source>
+        <translation>Démarrage...</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="74"/>
