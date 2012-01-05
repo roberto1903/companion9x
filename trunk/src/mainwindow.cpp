@@ -82,6 +82,7 @@ MainWindow::MainWindow()
     setWindowTitle(tr("companion9x - EEPROM Editor"));
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
     
     // give time to the main windows to open before starting updates, delay 1s
     QTimer::singleShot(1000, this, SLOT(doAutoUpdates()));
