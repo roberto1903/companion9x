@@ -258,7 +258,7 @@ void MainWindow::downloadLatestFW(FirmwareInfo * force_firmware)
             }
         }
         else {
-            QMessageBox::information(this, "companion9x", tr("Cannot chek for updates now."));
+            QMessageBox::information(this, "companion9x", tr("Cannot check for updates now."));
         }
     }
     else if (force_firmware) {
