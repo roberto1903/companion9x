@@ -107,7 +107,6 @@ MainWindow::MainWindow()
             {
                 statusBar()->showMessage(tr("File loaded"), 2000);
                 child->show();
-                if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
             }
         }
     }
@@ -338,8 +337,6 @@ void MainWindow::newFile()
     MdiChild *child = createMdiChild();
     child->newFile();
     child->show();
-
-    if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
 }
 
 void MainWindow::open()
@@ -361,7 +358,6 @@ void MainWindow::open()
         {
             statusBar()->showMessage(tr("File loaded"), 2000);
             child->show();
-            if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
         }
     }
 }
@@ -398,7 +394,6 @@ void MainWindow::openRecentFile()
         {
             statusBar()->showMessage(tr("File loaded"), 2000);
             child->show();
-            if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
         }
     }
 }
@@ -510,7 +505,6 @@ void MainWindow::burnFrom()
         child->newFile();
         child->loadFile(tempFile,false);
         child->show();
-        if(!child->parentWidget()->isMaximized() && !child->parentWidget()->isMinimized()) child->parentWidget()->resize(400,500);
     }
 }
 
