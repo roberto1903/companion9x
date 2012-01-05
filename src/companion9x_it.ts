@@ -1262,7 +1262,7 @@ Volete scaricarla nuovamente ? </translation>
     <message>
         <location filename="mainwindow.cpp" line="854"/>
         <source>Switch layout direction</source>
-        <translation>Cambia orientazione</translation>
+        <translation>Cambia orientamento</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="855"/>
@@ -4491,7 +4491,7 @@ Mode 4:
     <message>
         <location filename="simulatordialog.ui" line="2238"/>
         <source>CH12</source>
-        <translation>CH2</translation>
+        <translation>CH12</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2251"/>
