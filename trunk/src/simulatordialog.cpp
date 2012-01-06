@@ -128,7 +128,13 @@ void simulatorDialog::setupTimer()
 
 void simulatorDialog::onButtonPressed(int value)
 {
-  buttonPressed = value;
+  if (value==Qt::Key_Print) {
+      QString fileName = QString("./screenshot-%1.png").arg(++screenshotIdx);
+      qDebug() << "Screenshot" << fileName;
+      ui->lcd->makeScreenshot(fileName);      
+  } else {
+      buttonPressed = value;
+  }
 }
 
 void simulatorDialog::onTimerEvent()
@@ -220,13 +226,6 @@ void simulatorDialog::onTimerEvent()
     if (beepShow) beepShow--;
 
   }
-}
-
-void simulatorDialog::on_screenshotButton_clicked()
-{
-  QString fileName = QString("./screenshot-%1.png").arg(++screenshotIdx);
-  qDebug() << "Screenshot" << fileName;
-  ui->lcd->makeScreenshot(fileName);
 }
 
 void simulatorDialog::centerSticks()
