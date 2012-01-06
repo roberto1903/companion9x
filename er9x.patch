@@ -1,6 +1,6 @@
 Index: er9x/drivers.cpp
 ===================================================================
---- er9x/drivers.cpp	(revision 646)
+--- er9x/drivers.cpp	(revision 651)
 +++ er9x/drivers.cpp	(working copy)
 @@ -17,6 +17,7 @@
  
@@ -27,7 +27,7 @@ Index: er9x/drivers.cpp
  //{
 Index: er9x/er9x.cpp
 ===================================================================
---- er9x/er9x.cpp	(revision 646)
+--- er9x/er9x.cpp	(revision 651)
 +++ er9x/er9x.cpp	(working copy)
 @@ -390,8 +390,10 @@
  
@@ -143,7 +143,7 @@ Index: er9x/er9x.cpp
 +#endif
 Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 646)
+--- er9x/er9x.h	(revision 651)
 +++ er9x/er9x.h	(working copy)
 @@ -23,6 +23,9 @@
  
@@ -166,7 +166,7 @@ Index: er9x/er9x.h
  //                  elev                        thr
 Index: er9x/file.cpp
 ===================================================================
---- er9x/file.cpp	(revision 646)
+--- er9x/file.cpp	(revision 651)
 +++ er9x/file.cpp	(working copy)
 @@ -39,19 +39,20 @@
  #define BLOCKS   (EESIZE/BS)
@@ -206,7 +206,7 @@ Index: er9x/file.cpp
    eeFs.mySize   = sizeof(eeFs);
 Index: er9x/file.h
 ===================================================================
---- er9x/file.h	(revision 646)
+--- er9x/file.h	(revision 651)
 +++ er9x/file.h	(working copy)
 @@ -75,7 +75,7 @@
    ///read from opened file and decode rlc-coded data
@@ -219,7 +219,7 @@ Index: er9x/file.h
  #endif
 Index: er9x/lcd.cpp
 ===================================================================
---- er9x/lcd.cpp	(revision 646)
+--- er9x/lcd.cpp	(revision 651)
 +++ er9x/lcd.cpp	(working copy)
 @@ -16,7 +16,12 @@
  
@@ -254,7 +254,7 @@ Index: er9x/lcd.cpp
  }
 Index: er9x/menus.cpp
 ===================================================================
---- er9x/menus.cpp	(revision 646)
+--- er9x/menus.cpp	(revision 651)
 +++ er9x/menus.cpp	(working copy)
 @@ -565,7 +565,7 @@
          v += g_model.limitData[i].revert ?
@@ -302,7 +302,7 @@ Index: er9x/menus.cpp
  	  				if ( g_eeGeneral.throttleReversed )
 Index: er9x/menus.h
 ===================================================================
---- er9x/menus.h	(revision 646)
+--- er9x/menus.h	(revision 651)
 +++ er9x/menus.h	(working copy)
 @@ -77,10 +77,10 @@
  #define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
@@ -332,7 +332,7 @@ Index: er9x/menus.h
  #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 646)
+--- er9x/myeeprom.h	(revision 651)
 +++ er9x/myeeprom.h	(working copy)
 @@ -59,19 +59,23 @@
  #define GENERAL_OWNER_NAME_LEN 10
@@ -458,8 +458,26 @@ Index: er9x/myeeprom.h
  
 Index: er9x/pers.cpp
 ===================================================================
---- er9x/pers.cpp	(revision 646)
+--- er9x/pers.cpp	(revision 651)
 +++ er9x/pers.cpp	(working copy)
+@@ -47,7 +47,7 @@
+     g_eeGeneral.calibSpanNeg[i] = 0x180;
+     g_eeGeneral.calibSpanPos[i] = 0x180;
+   }
+-  strcpy_P(g_model.name,PSTR("ME        "));
++  // strcpy_P(g_model.name,PSTR("ME        "));
+   int16_t sum=0;
+   for(int i=0; i<12;i++) sum+=g_eeGeneral.calibMid[i];
+   g_eeGeneral.chkSum = sum;
+@@ -78,7 +78,7 @@
+ void modelDefault(uint8_t id)
+ {
+   memset(&g_model, 0, sizeof(ModelData));
+-  strcpy_P(g_model.name,PSTR("MODEL     "));
++  memcpy(g_model.name,PSTR("MODEL     "),10);
+   g_model.name[5]='0'+(id+1)/10;
+   g_model.name[6]='0'+(id+1)%10;
+   g_model.mdVers = MDVERS;
 @@ -159,7 +159,7 @@
    while((l=theFile.read(buf,15)))
    {
@@ -633,7 +651,7 @@ Index: er9x/simpgmspace.cpp
 +#endif
 Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/simpgmspace.h	(revision 646)
+--- er9x/simpgmspace.h	(revision 651)
 +++ er9x/simpgmspace.h	(working copy)
 @@ -1,7 +1,12 @@
  /*
@@ -830,7 +848,7 @@ Index: er9x/simpgmspace.h
 +#endif
 Index: er9x/templates.cpp
 ===================================================================
---- er9x/templates.cpp	(revision 646)
+--- er9x/templates.cpp	(revision 651)
 +++ er9x/templates.cpp	(working copy)
 @@ -99,7 +99,7 @@
      g_model.customSw[idx-1].v2   = v2;
