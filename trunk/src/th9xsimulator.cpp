@@ -64,10 +64,14 @@ void Th9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
+  for (int i=0; i<8; i++)
+    outputs.chans[i] *= 2;
 }
 
-void Th9xSimulator::setValues(TxInputs &inputs)
+void Th9xSimulator::setValues(TxInputs &_inputs)
 {
+  TxInputs inputs = _inputs;
+  inputs.rud/=2; inputs.ele/=2; inputs.thr/=2; inputs.ail/=2; inputs.pot1/=2; inputs.pot2/=2; inputs.pot3/=2;
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }

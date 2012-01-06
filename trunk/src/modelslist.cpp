@@ -117,15 +117,14 @@ void ModelsListWidget::print()
 
 void ModelsListWidget::setdefault()
 {
-    if(currentRow()==0) return;
-    if (!radioData->models[currentRow()-1].isempty()) {
-        if (radioData->generalSettings.currModel!=(currentRow()-1)) {
-                radioData->generalSettings.currModel=currentRow()-1;
-                refreshList();
-                ((MdiChild *)parent())->setModified();
-        }
+  if(currentRow()==0) return;
+  if (!radioData->models[currentRow()-1].isempty()) {
+    if (radioData->generalSettings.currModel!=(currentRow()-1)) {
+      radioData->generalSettings.currModel=currentRow()-1;
+      refreshList();
+      ((MdiChild *)parent())->setModified();
     }
-  //((MdiChild *)parent())->setdefault();
+  }
 }
 
 

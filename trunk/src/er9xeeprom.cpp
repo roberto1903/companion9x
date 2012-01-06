@@ -199,7 +199,7 @@ t_Er9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.srcRaw = srcRaw;
+  c9x.srcRaw = RawSource(srcRaw);
   c9x.weight = weight;
   c9x.swtch = swtch;
   c9x.curve = curve;
@@ -444,8 +444,8 @@ t_Er9xModelData::operator ModelData ()
   for (int i=0; i<MAX_MIXERS; i++) {
     c9x.mixData[i] = mixData[i];
     if (mdVers == 6) {
-      if (c9x.mixData[i].srcRaw > MIX_FULL) {
-        c9x.mixData[i].srcRaw += 3; /* because of [CYC1:CYC3] inserted after MIX_FULL */
+      if (c9x.mixData[i].srcRaw > SRC_FULL) {
+        c9x.mixData[i].srcRaw = RawSource(c9x.mixData[i].srcRaw + 3); /* because of [CYC1:CYC3] inserted after MIX_FULL */
       }
     }
   }

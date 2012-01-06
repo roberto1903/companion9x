@@ -3559,28 +3559,28 @@ void ModelEdit::applyTemplate(uint8_t idx)
     {
       if (md->destCh)
         clearMixes();
-      md=setDest(ICC(STK_RUD));  md->srcRaw=STK_RUD;  md->weight=100;
-      md=setDest(ICC(STK_ELE));  md->srcRaw=STK_ELE;  md->weight=100;
-      md=setDest(ICC(STK_THR));  md->srcRaw=STK_THR;  md->weight=100;
-      md=setDest(ICC(STK_AIL));  md->srcRaw=STK_AIL;  md->weight=100;
+      md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
+      md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight=100;
+      md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
+      md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
     }
 
     //T-Cut
     if(idx==j++)
     {
-        md=setDest(ICC(STK_THR));  md->srcRaw=MIX_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+        md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
     }
 
     //sticky t-cut
     if(idx==j++)
     {
-        md=setDest(ICC(STK_THR));  md->srcRaw=MIX_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
-        md=setDest(14);            md->srcRaw=CH(14);   md->weight= 100;
-        md=setDest(14);            md->srcRaw=MIX_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
-        md=setDest(14);            md->srcRaw=MIX_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+        md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
+        md=setDest(14);            md->srcRaw=SRC_CH14;   md->weight= 100;
+        md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
+        md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
 
         setSwitch(0xB,CS_VNEG, STK_THR, -99);
-        setSwitch(0xC,CS_VPOS, CH(14), 0);
+        setSwitch(0xC,CS_VPOS, SRC_CH14, 0);
 
         updateSwitchesTab();
     }
@@ -3589,20 +3589,20 @@ void ModelEdit::applyTemplate(uint8_t idx)
     if(idx==j++)
     {
         clearMixes();
-        md=setDest(ICC(STK_RUD));  md->srcRaw=STK_RUD;  md->weight= 100;
-        md=setDest(ICC(STK_RUD));  md->srcRaw=STK_ELE;  md->weight=-100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=STK_RUD;  md->weight= 100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=STK_ELE;  md->weight= 100;
+        md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight= 100;
+        md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_ELE;  md->weight=-100;
+        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_RUD;  md->weight= 100;
+        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
     }
 
     //Elevon\\Delta
     if(idx==j++)
     {
         clearMixes();
-        md=setDest(ICC(STK_ELE));  md->srcRaw=STK_ELE;  md->weight= 100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=STK_AIL;  md->weight= 100;
-        md=setDest(ICC(STK_AIL));  md->srcRaw=STK_ELE;  md->weight= 100;
-        md=setDest(ICC(STK_AIL));  md->srcRaw=STK_AIL;  md->weight=-100;
+        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
+        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_AIL;  md->weight= 100;
+        md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_ELE;  md->weight= 100;
+        md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=-100;
     }
 
 
@@ -3614,26 +3614,26 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
         //Set up Mixes
         //3 cyclic channels
-        md=setDest(1);  md->srcRaw=MIX_CYC1;  md->weight= 100;
-        md=setDest(2);  md->srcRaw=MIX_CYC2;  md->weight= 100;
-        md=setDest(3);  md->srcRaw=MIX_CYC3;  md->weight= 100;
+        md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
+        md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
+        md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
 
         //rudder
-        md=setDest(4);  md->srcRaw=STK_RUD; md->weight=100;
+        md=setDest(4);  md->srcRaw=SRC_RUD; md->weight=100;
 
         //Throttle
-        md=setDest(5);  md->srcRaw=STK_THR;  md->weight= 100; md->swtch= DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=STK_THR;  md->weight= 100; md->swtch= DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=STK_THR;  md->weight= 100; md->swtch= DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=MIX_MAX;      md->weight=-100; md->swtch= DSW_THR; md->mltpx=MLTPX_REP;
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_MAX;      md->weight=-100; md->swtch= DSW_THR; md->mltpx=MLTPX_REP;
 
         //gyro gain
-        md=setDest(6);  md->srcRaw=MIX_FULL; md->weight=30; md->swtch=-DSW_GEA;
+        md=setDest(6);  md->srcRaw=SRC_FULL; md->weight=30; md->swtch=-DSW_GEA;
 
         //collective
-        md=setDest(11); md->srcRaw=STK_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
-        md=setDest(11); md->srcRaw=STK_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
-        md=setDest(11); md->srcRaw=STK_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
+        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
+        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
+        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
         g_model.swashRingData.type = SWASH_TYPE_120;
         g_model.swashRingData.collectiveSource = CH(11);
@@ -3655,17 +3655,17 @@ void ModelEdit::applyTemplate(uint8_t idx)
     //Gyro Gain
     if(idx==j++)
     {
-        md=setDest(6);  md->srcRaw=STK_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
-        md=setDest(6);  md->srcRaw=STK_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
+        md=setDest(6);  md->srcRaw=SRC_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
+        md=setDest(6);  md->srcRaw=SRC_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
     }
 
     //Servo Test
     if(idx==j++)
     {
-        md=setDest(15); md->srcRaw=CH(16);   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
-        md=setDest(16); md->srcRaw=MIX_FULL; md->weight= 110; md->swtch=DSW_SW1;
-        md=setDest(16); md->srcRaw=MIX_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
-        md=setDest(16); md->srcRaw=MIX_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
+        md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
+        md=setDest(16); md->srcRaw=SRC_FULL; md->weight= 110; md->swtch=DSW_SW1;
+        md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
+        md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
 
         setSwitch(1,CS_LESS,CH(15), CH(16));
         setSwitch(2,CS_VPOS,CH(15), 105);

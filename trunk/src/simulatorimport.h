@@ -185,7 +185,8 @@ if (inputs.re1) pind |= 0x20;
 
 #ifdef GETVALUES_IMPORT
 #undef GETVALUES_IMPORT
-memcpy(outputs.chans, g_chans512, sizeof(outputs.chans));
+memset(outputs.chans, 0, sizeof(outputs.chans));
+memcpy(outputs.chans, g_chans512, sizeof(g_chans512));
 for (int i=0; i<12; i++)
   outputs.vsw[i] = getSwitch(DSW_SW1+i, 0);
 #endif

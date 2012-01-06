@@ -180,7 +180,22 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Th9xMixData));
   destCh = c9x.destCh;
   mixMode = c9x.mltpx;
-  srcRaw = c9x.srcRaw-1;
+  if (c9x.srcRaw == 0)
+    srcRaw = 0; // TODO
+  else if (c9x.srcRaw <= SRC_P3)
+    srcRaw = c9x.srcRaw - 1;
+  else if (c9x.srcRaw == SRC_MAX)
+    srcRaw = 10;
+  else if (c9x.srcRaw == SRC_FULL)
+    srcRaw = 0; // TODO
+  else if (c9x.srcRaw <= SRC_CYC3)
+    srcRaw = 0; // TODO
+  else if (c9x.srcRaw <= SRC_PPM8)
+    srcRaw = 24 + c9x.srcRaw - SRC_PPM1;
+  else if (c9x.srcRaw <= SRC_CH12)
+    srcRaw = 12 + c9x.srcRaw - SRC_CH1;
+  else
+    srcRaw = 0; // TODO
   switchMode = 1;
   curveNeg = 0;
   weight = c9x.weight;
@@ -194,7 +209,18 @@ t_Th9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.srcRaw = srcRaw+1;
+  if (srcRaw < 7)
+    c9x.srcRaw = RawSource(srcRaw + 1);
+  else if (srcRaw < 10)
+    c9x.srcRaw = RawSource(0); // TODO
+  else if (srcRaw == 10)
+    c9x.srcRaw = SRC_MAX;
+  else if (srcRaw == 11)
+    c9x.srcRaw = RawSource(0); // TODO CUR
+  else if (srcRaw < 24)
+    c9x.srcRaw = RawSource(SRC_CH1 + 12 - srcRaw);
+  else /* always true if (srcRaw < 32) */
+    c9x.srcRaw = RawSource(SRC_PPM1 + 24 - srcRaw);
   c9x.weight = weight;
   c9x.swtch = swtch;
   c9x.curve = curve;

@@ -165,6 +165,10 @@ int Th9xInterface::getCapability(const Capability capability)
       return 1;
     case FuncSwitches:
       return 0;
+    case Outputs:
+      return 8;
+    case ExtraChannels:
+      return 4;
     case Simulation:
       return 1;
     default:

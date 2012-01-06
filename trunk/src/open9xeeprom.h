@@ -116,19 +116,6 @@ PACK(typedef struct t_Open9xLimitData {
 
 }) Open9xLimitData;
 
-#define MIX_P1    5
-#define MIX_P2    6
-#define MIX_P3    7
-#define MIX_MAX   8
-#define MIX_FULL  9
-#define MIX_CYC1  10
-#define MIX_CYC2  11
-#define MIX_CYC3  12
-
-#define MLTPX_ADD  0
-#define MLTPX_MUL  1
-#define MLTPX_REP  2
-
 PACK(typedef struct t_Open9xMixData {
   uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
   uint8_t mixWarn:3;         // mixer warning

@@ -78,7 +78,7 @@ void MixerDialog::changeEvent(QEvent *e)
 
 void MixerDialog::valuesChanged()
 {
-    md->srcRaw    = ui->sourceCB->currentIndex()+1;
+    md->srcRaw    = RawSource(ui->sourceCB->currentIndex()+1);
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimChkB->checkState() ? 0 : 1;

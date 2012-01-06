@@ -213,6 +213,10 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case FuncSwitches:
       return 0;
+    case Outputs:
+      return 16;
+    case ExtraChannels:
+      return 8;
     case Simulation:
       return 1;
     default:
