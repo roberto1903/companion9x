@@ -201,6 +201,17 @@ void populateSourceCB(QComboBox *b, int stickMode, int value)
     for(int i=0; i<37; i++) b->addItem(getSourceStr(i));
     b->setCurrentIndex(value);
     b->setMaxVisibleItems(10);
+
+    for (int i=0; i<8-GetEepromInterface()->getCapability(ExtraChannels); i++) {
+      // Get the index of the value to disable
+      QModelIndex index = b->model()->index(SRC_CH16-i,0);
+
+      // This is the effective 'disable' flag
+      QVariant v(0);
+
+      //the magic
+      b->model()->setData( index, v, Qt::UserRole -1);
+    }
 }
 
 
