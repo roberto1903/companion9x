@@ -100,7 +100,6 @@ private slots:
     void on_trimHRight_valueChanged(int);
     void on_trimVRight_valueChanged(int);
     void onTimerEvent();
-    void on_screenshotButton_clicked();
 };
 
 #endif // SIMULATORDIALOG_H

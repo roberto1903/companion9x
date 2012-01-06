@@ -62,6 +62,9 @@ class cursorWidget : public QWidget {
           else if (pnpoly(6,plusx,plusy,(float)x,(float)y)==1) {
             setStyleSheet("background:url(:/images/9xcursplus.png);");
             emit buttonPressed(Qt::Key_Left);
+          } else if (sqrt(((float)x-22)*((float)x-22)+((float)y-165)*((float)y-165))<17) {
+            setStyleSheet("background:url(:/images/9xcursphoto.png);");
+            emit buttonPressed(Qt::Key_Print);
           }
         }
         // QWidget::mousePressEvent(event);

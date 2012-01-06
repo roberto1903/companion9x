@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>583</height>
+    <width>653</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -898,7 +898,7 @@ QPushButton:checked {
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="simu">
       <attribute name="title">
@@ -1025,29 +1025,6 @@ QPushButton:checked {
            <property name="styleSheet">
             <string notr="true">background:url(:/images/9xcurs.png);</string>
            </property>
-           <widget class="QPushButton" name="screenshotButton">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>31</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="companion9x.qrc">
-              <normaloff>:/images/screenshot.png</normaloff>:/images/screenshot.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
           </widget>
          </item>
          <item row="0" column="3" rowspan="3">
