@@ -171,15 +171,6 @@ PACK(typedef struct t_Gruvin9xLimitData {
 
 }) Gruvin9xLimitData;
 
-#define MIX_P1    5
-#define MIX_P2    6
-#define MIX_P3    7
-#define MIX_MAX   8
-#define MIX_FULL  9
-#define MIX_CYC1  10
-#define MIX_CYC2  11
-#define MIX_CYC3  12
-
 #define MLTPX_ADD  0
 #define MLTPX_MUL  1
 #define MLTPX_REP  2

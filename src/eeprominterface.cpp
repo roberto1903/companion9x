@@ -67,7 +67,7 @@ void ModelData::clear()
     mixData[i].clear();
   for(int i=0; i<4; i++){
     mixData[i].destCh = i+1;
-    mixData[i].srcRaw = i+1;
+    mixData[i].srcRaw = (RawSource)(i+1);
     mixData[i].weight = 100;
   }
   for (int i=0; i<NUM_CHNOUT; i++)

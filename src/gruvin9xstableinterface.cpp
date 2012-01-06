@@ -120,6 +120,10 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
       return 2;
     case FuncSwitches:
       return 12;
+    case Outputs:
+      return 16;
+    case ExtraChannels:
+      return 8;
     case ExtendedTrims:
       return 500;
     case Simulation:

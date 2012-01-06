@@ -373,14 +373,16 @@ void simulatorDialog::setValues()
   ui->chnout_6->setValue(chVal(outputs.chans[5]));
   ui->chnout_7->setValue(chVal(outputs.chans[6]));
   ui->chnout_8->setValue(chVal(outputs.chans[7]));
-  ui->chnout_9->setValue(chVal(outputs.chans[8]));
-  ui->chnout_10->setValue(chVal(outputs.chans[9]));
-  ui->chnout_11->setValue(chVal(outputs.chans[10]));
-  ui->chnout_12->setValue(chVal(outputs.chans[11]));
-  ui->chnout_13->setValue(chVal(outputs.chans[12]));
-  ui->chnout_14->setValue(chVal(outputs.chans[13]));
-  ui->chnout_15->setValue(chVal(outputs.chans[14]));
-  ui->chnout_16->setValue(chVal(outputs.chans[15]));
+  if (txInterface->getCapability(Outputs) > 8) {
+    ui->chnout_9->setValue(chVal(outputs.chans[8]));
+    ui->chnout_10->setValue(chVal(outputs.chans[9]));
+    ui->chnout_11->setValue(chVal(outputs.chans[10]));
+    ui->chnout_12->setValue(chVal(outputs.chans[11]));
+    ui->chnout_13->setValue(chVal(outputs.chans[12]));
+    ui->chnout_14->setValue(chVal(outputs.chans[13]));
+    ui->chnout_15->setValue(chVal(outputs.chans[14]));
+    ui->chnout_16->setValue(chVal(outputs.chans[15]));
+  }
 
   ui->chnoutV_1->setText(QString("%1").arg((qreal)outputs.chans[0]*100/1024, 0, 'f', 1));
   ui->chnoutV_2->setText(QString("%1").arg((qreal)outputs.chans[1]*100/1024, 0, 'f', 1));
@@ -390,14 +392,16 @@ void simulatorDialog::setValues()
   ui->chnoutV_6->setText(QString("%1").arg((qreal)outputs.chans[5]*100/1024, 0, 'f', 1));
   ui->chnoutV_7->setText(QString("%1").arg((qreal)outputs.chans[6]*100/1024, 0, 'f', 1));
   ui->chnoutV_8->setText(QString("%1").arg((qreal)outputs.chans[7]*100/1024, 0, 'f', 1));
-  ui->chnoutV_9->setText(QString("%1").arg((qreal)outputs.chans[8]*100/1024, 0, 'f', 1));
-  ui->chnoutV_10->setText(QString("%1").arg((qreal)outputs.chans[9]*100/1024, 0, 'f', 1));
-  ui->chnoutV_11->setText(QString("%1").arg((qreal)outputs.chans[10]*100/1024, 0, 'f', 1));
-  ui->chnoutV_12->setText(QString("%1").arg((qreal)outputs.chans[11]*100/1024, 0, 'f', 1));
-  ui->chnoutV_13->setText(QString("%1").arg((qreal)outputs.chans[12]*100/1024, 0, 'f', 1));
-  ui->chnoutV_14->setText(QString("%1").arg((qreal)outputs.chans[13]*100/1024, 0, 'f', 1));
-  ui->chnoutV_15->setText(QString("%1").arg((qreal)outputs.chans[14]*100/1024, 0, 'f', 1));
-  ui->chnoutV_16->setText(QString("%1").arg((qreal)outputs.chans[15]*100/1024, 0, 'f', 1));
+  if (txInterface->getCapability(Outputs) > 8) {
+    ui->chnoutV_9->setText(QString("%1").arg((qreal)outputs.chans[8]*100/1024, 0, 'f', 1));
+    ui->chnoutV_10->setText(QString("%1").arg((qreal)outputs.chans[9]*100/1024, 0, 'f', 1));
+    ui->chnoutV_11->setText(QString("%1").arg((qreal)outputs.chans[10]*100/1024, 0, 'f', 1));
+    ui->chnoutV_12->setText(QString("%1").arg((qreal)outputs.chans[11]*100/1024, 0, 'f', 1));
+    ui->chnoutV_13->setText(QString("%1").arg((qreal)outputs.chans[12]*100/1024, 0, 'f', 1));
+    ui->chnoutV_14->setText(QString("%1").arg((qreal)outputs.chans[13]*100/1024, 0, 'f', 1));
+    ui->chnoutV_15->setText(QString("%1").arg((qreal)outputs.chans[14]*100/1024, 0, 'f', 1));
+    ui->chnoutV_16->setText(QString("%1").arg((qreal)outputs.chans[15]*100/1024, 0, 'f', 1));
+  }
 
   ui->leftXPerc->setText(QString("X %1%").arg((qreal)nodeLeft->getX()*100, 2, 'f', 0));
   ui->leftYPerc->setText(QString("Y %1%").arg((qreal)nodeLeft->getY()*-100, 2, 'f', 0));

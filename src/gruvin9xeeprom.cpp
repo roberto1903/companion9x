@@ -267,7 +267,7 @@ t_Gruvin9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.srcRaw = srcRaw;
+  c9x.srcRaw = RawSource(srcRaw);
   c9x.weight = weight;
   c9x.swtch = swtch;
   c9x.curve = curve;

@@ -192,27 +192,14 @@ enum EnumKeys {
 #define SWASH_TYPE_140   3
 #define SWASH_TYPE_90    4
 
-#define MIX_P1    5
-#define MIX_P2    6
-#define MIX_P3    7
-#define MIX_MAX   8
-#define MIX_FULL  9
-#define MIX_CYC1  10
-#define MIX_CYC2  11
-#define MIX_CYC3  12
-
 #define NUM_STICKS      4
 #define NUM_POTS        3
-#define PPM_BASE        (MIX_CYC3) // because srcRaw is shifted +1!
 #define NUM_CAL_PPM     4
 #define NUM_PPM         8
-#define CHOUT_BASE      (PPM_BASE+NUM_PPM)
 
 #define NUM_TELEMETRY 2
 #define TELEMETRY_CHANNELS "AD1 AD2 "
 
-///number of real input channels (1-9) plus virtual input channels X1-X4
-#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+2/*MAX/FULL*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT+NUM_TELEMETRY)
 ///number of real output channels (CH1-CH8) plus virtual output channels X1-X4
 #define NUM_XCHNOUT (NUM_CHNOUT) //(NUM_CHNOUT)//+NUM_VIRT)
 
@@ -304,11 +291,35 @@ enum MltpxValue {
   MLTPX_REP=2
 };
 
+enum RawSource {
+  SRC_NONE,
+  SRC_RUD,
+  SRC_ELE,
+  SRC_THR,
+  SRC_AIL,
+  SRC_P1,
+  SRC_P2,
+  SRC_P3,
+  SRC_MAX,
+  SRC_FULL,
+  SRC_CYC1,
+  SRC_CYC2,
+  SRC_CYC3,
+  SRC_PPM1,
+  SRC_PPM8 = SRC_PPM1+7,
+  SRC_CH1,
+  SRC_CH12 = SRC_CH1+11,
+  SRC_CH13,
+  SRC_CH14,
+  SRC_CH15,
+  SRC_CH16
+};
+
 class MixData {
   public:
     MixData() { clear(); }
     uint8_t destCh;            //        1..NUM_CHNOUT
-    uint8_t srcRaw;            //
+    RawSource srcRaw;
     int8_t  weight;
     int8_t  swtch;
     uint8_t curve;             //0=symmetrisch 1=no neg 2=no pos
@@ -487,6 +498,8 @@ enum Capability {
  Phases,
  Timers,
  FuncSwitches,
+ Outputs,
+ ExtraChannels,
  ExtendedTrims,
  Simulation,
  SoundMod,
