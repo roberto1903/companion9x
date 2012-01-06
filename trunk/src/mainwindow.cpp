@@ -258,7 +258,8 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     int OldFwRev;
     check1done = true;
     bool download=false;
-    
+    bool ignore=false;
+        
     if(check1done && check2done && downloadDialog_forWait)
         downloadDialog_forWait->close();
     
@@ -291,6 +292,8 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
+                } else {
+                    ignore = true;
                 }
             } else if (NewFwRev > OldFwRev) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
@@ -298,12 +301,22 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
+                } else {
+                    ignore = true;
                 }
             } else {
                 if(showcheckForUpdatesResult && check1done && check2done)
                     QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
             }
-            if (download == true) {
+            if (ignore) {
+                int res = QMessageBox::question(this, "companion9x",tr("Ignore this version (r%1)?").arg(rev) ,
+                                                QMessageBox::Yes | QMessageBox::No);
+                if (res==QMessageBox::Yes)   {
+                    settings.beginGroup("FwRevisions");
+                    settings.setValue(firmware.id, NewFwRev);
+                    settings.endGroup();
+                }
+            } else if (download == true) {
                 downloadedFW = firmware.id;
                 QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ".hex", tr(HEX_FILES_FILTER));
                 if (!fileName.isEmpty()) {
