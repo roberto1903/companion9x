@@ -132,7 +132,9 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
         if (checkFW || ignoreSettings) {
             manager1 = new QNetworkAccessManager(this);
             connect(manager1, SIGNAL(finished(QNetworkReply*)), this, SLOT(reply1Finished(QNetworkReply*)));
-            manager1->get(QNetworkRequest(QUrl(firmware.stamp)));
+            QNetworkRequest request(QUrl(firmware.stamp));
+            request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+            manager1->get(request);
             check1done=false;
         }
     }
@@ -142,7 +144,9 @@ void MainWindow::checkForUpdates(bool ignoreSettings)
     {
         manager2 = new QNetworkAccessManager(this);
         connect(manager2, SIGNAL(finished(QNetworkReply*)),this, SLOT(checkForUpdateFinished(QNetworkReply*)));
-        manager2->get(QNetworkRequest(QUrl(C9X_STAMP)));
+        QNetworkRequest request(QUrl(C9X_STAMP));
+        request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+        manager2->get(request);
         check2done = false;
     }
 #endif
