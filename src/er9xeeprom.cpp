@@ -361,20 +361,39 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
         }
       }
 
+      if (expoData[i].drSw1 && !expoData[i].drSw2) {
+        expoData[i].drSw1 = -expoData[i].drSw1;
+      }
+
       for (int pos=0; pos<3; pos++) {
         int swtch1=0, swtch2=0;
-        switch (pos) {
-          case 0:
-            swtch1 = -expoData[i].drSw1;
-            break;
-          case 1:
-            swtch1 = expoData[i].drSw1;
-            swtch2 = -expoData[i].drSw2;
-            break;
-          default:
-            swtch1 = expoData[i].drSw1;
-            swtch2 = expoData[i].drSw2;
-            break;
+        if (expoData[i].drSw1 && !expoData[i].drSw2) {
+          switch (pos) {
+            case 0:
+              swtch1 = -expoData[i].drSw1;
+              break;
+            case 1:
+              swtch1 = expoData[i].drSw1;
+              break;
+            default:
+              swtch1 = expoData[i].drSw1;
+              break;
+          }
+        }
+        else {
+          switch (pos) {
+            case 0:
+              swtch1 = -expoData[i].drSw1;
+              break;
+            case 1:
+              swtch1 = expoData[i].drSw1;
+              swtch2 = -expoData[i].drSw2;
+              break;
+            default:
+              swtch1 = expoData[i].drSw1;
+              swtch2 = expoData[i].drSw2;
+              break;
+          }
         }
         for (int mode=0; mode<2; mode++) {
           for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
@@ -460,7 +479,13 @@ t_Er9xModelData::operator ModelData ()
         dr = 2;
       if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
         break;
-      c9x.expoData[e].swtch = (dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
+      if (expoData[ch].drSw1 && !expoData[ch].drSw2) {
+        c9x.expoData[e].swtch = (dr == 0 ? expoData[ch].drSw1 : 0);
+        pos = dr == 0 ? 1 : 0;
+      }
+      else {
+        c9x.expoData[e].swtch = (dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
+      }
       c9x.expoData[e].chn = ch;
       c9x.expoData[e].expo = expoData[ch].expo[pos][0][0];
       c9x.expoData[e].weight = 100 + expoData[ch].expo[pos][1][0];
