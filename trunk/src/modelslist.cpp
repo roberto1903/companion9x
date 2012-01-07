@@ -303,23 +303,23 @@ void ModelsListWidget::confirmDelete() {
 
 void ModelsListWidget::deleteSelected(bool ask=true)
 {
-    QMessageBox::StandardButton ret = QMessageBox::Yes;
-
-    if(ask)
-        ret = QMessageBox::warning(this, "companion9x",
-                 tr("Delete Selected Models?"),
-                 QMessageBox::Yes | QMessageBox::No);
-
-
-    if (ret == QMessageBox::Yes)
-    {
-           foreach(QModelIndex index, this->selectionModel()->selectedIndexes())
-           {
-               if(index.row()>0)
-                 radioData->models[index.row()-1].clear();
-           }
-           ((MdiChild *)parent())->setModified();
+  bool isModel=false;
+  QMessageBox::StandardButton ret = QMessageBox::Yes;
+  if(ask) {
+    foreach(QModelIndex index, this->selectionModel()->selectedIndexes())
+      if  (index.row()>0 && !radioData->models[index.row()-1].isempty())
+        isModel=true;
+    if (isModel==true) {
+      ret = QMessageBox::warning(this, "companion9x", tr("Delete Selected Models?"), QMessageBox::Yes | QMessageBox::No);
     }
+  }
+  if (ret == QMessageBox::Yes) {
+    foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
+      if(index.row()>0)
+        radioData->models[index.row()-1].clear();
+    }
+    ((MdiChild *)parent())->setModified();
+  }
 }
 
 void ModelsListWidget::doCut(QByteArray *gmData)
@@ -367,53 +367,56 @@ void ModelsListWidget::copy()
 
 void ModelsListWidget::doPaste(QByteArray *gmData, int index)
 {
-    //QByteArray gmData = mimeD->data("application/x-companion9x");
-    char *gData = gmData->data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
-    int i = sizeof(DragDropHeader);
-    int id = index;
-    int ret,modified=0;
-    if(!id) id++;
+  //QByteArray gmData = mimeD->data("application/x-companion9x");
+  char *gData = gmData->data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
+  int i = sizeof(DragDropHeader);
+  int id = index;
+  int ret,modified=0;
+  if(!id) id++;
 
-    while((i<gmData->size()) && (id<=MAX_MODELS)) {
-        char c = *gData;
-        i++;
-        gData++;
-        if(c=='G')  //general settings
-        {
-            radioData->generalSettings = *((GeneralSettings *)gData);
-            gData += sizeof(GeneralSettings);
-            i     += sizeof(GeneralSettings);
-            modified=1;
-        }
-        else //model data
-        {
-            QString name=(QString)radioData->models[id-1].name;
-            if (!name.isEmpty()) {
-                ret = QMessageBox::question(this, "companion9x", tr("You are pasting on an not empty model, are you sure?"),
-                        QMessageBox::Yes | QMessageBox::No);
-                if (ret == QMessageBox::Yes) {
-                    radioData->models[id-1] = *((ModelData *)gData);
-                    gData += sizeof(ModelData);
-                    i += sizeof(ModelData);
-                    id++;
-                    modified = 1;
-                } else {
-                    gData += sizeof(ModelData);
-                    i += sizeof(ModelData);
-                    id++;
-                }
-            } else {
-                radioData->models[id-1] = *((ModelData *)gData);
-                gData += sizeof(ModelData);
-                i     += sizeof(ModelData);
-                id++;
-                modified=1;
-            }
-        }
+  while((i<gmData->size()) && (id<=MAX_MODELS)) {
+    char c = *gData;
+    i++;
+    gData++;
+    if(c=='G') { //General settings
+      ret = QMessageBox::question(this, "companion9x", tr("Do you want to overwrite TX general settings?"),
+              QMessageBox::Yes | QMessageBox::No);
+      if (ret == QMessageBox::Yes) {
+        radioData->generalSettings = *((GeneralSettings *)gData);
+        modified=1;
+      }
+      gData += sizeof(GeneralSettings);
+      i += sizeof(GeneralSettings);
     }
-    if (modified==1) {
-        ((MdiChild *)parent())->setModified();
+    else { //model data
+      if (!radioData->models[id-1].isempty()) {
+        ret = QMessageBox::question(this, "companion9x", tr("You are pasting on an not empty model, are you sure?"),
+                QMessageBox::Yes | QMessageBox::No);
+        if (ret == QMessageBox::Yes) {
+          radioData->models[id-1] = *((ModelData *)gData);
+          gData += sizeof(ModelData);
+          i += sizeof(ModelData);
+          id++;
+          modified = 1;
+        }
+        else {
+          gData += sizeof(ModelData);
+          i += sizeof(ModelData);
+          id++;
+        }
+      } 
+      else {
+        radioData->models[id-1] = *((ModelData *)gData);
+        gData += sizeof(ModelData);
+        i += sizeof(ModelData);
+        id++;
+        modified=1;
+      }
     }
+  }
+  if (modified==1) {
+    ((MdiChild *)parent())->setModified();
+  }
 }
 
 bool ModelsListWidget::hasPasteData()
