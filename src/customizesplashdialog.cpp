@@ -23,6 +23,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   ui->SaveFlashButton->setDisabled(true);
   ui->ImageFileName->clear();
   ui->imageLabel->clear();
+  ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"));
   if (fileName.isEmpty()) {
     ui->FWFileName->clear();
@@ -83,15 +84,13 @@ void customizeSplashDialog::on_SaveFlashButton_clicked() {
   QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
   flash.setSplash(image);
   if (flash.saveFlash(fileName) > 0) {
+    ui->HowToLabel->setStyleSheet("background:rgb(0,255.0);");
     ui->HowToLabel->setText(tr("Firmware correctly saved."));
   }
-
-  /*
-    if (saveiHEX(this, fileName, (quint8*) & temp, fileSize, "", 0)) {
-      QMessageBox::information(this, tr("Save To File"),
-              tr("Successfully updated %1").arg(fileName));
-    }
-   */
+  else {
+    ui->HowToLabel->setStyleSheet("background:rgb(255.0.0);");
+    ui->HowToLabel->setText(tr("Firmware not saved."));
+  }
 
 }
 
