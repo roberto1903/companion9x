@@ -464,21 +464,22 @@ Index: er9x/pers.cpp
      g_eeGeneral.calibSpanNeg[i] = 0x180;
      g_eeGeneral.calibSpanPos[i] = 0x180;
    }
--  strcpy_P(g_model.name,PSTR("ME        "));
-+  // strcpy_P(g_model.name,PSTR("ME        "));
+-  strncpy_P(g_eeGeneral.ownerName,PSTR("ME        "),10);
++  //strncpy_P(g_eeGeneral.ownerName,PSTR("ME        "),10);
    int16_t sum=0;
    for(int i=0; i<12;i++) sum+=g_eeGeneral.calibMid[i];
    g_eeGeneral.chkSum = sum;
-@@ -78,7 +78,7 @@
+@@ -78,7 +78,8 @@
  void modelDefault(uint8_t id)
  {
    memset(&g_model, 0, sizeof(ModelData));
--  strcpy_P(g_model.name,PSTR("MODEL     "));
+-  strncpy_P(g_model.name,PSTR("MODEL     "), 10);
++  //strncpy_P(g_model.name,PSTR("MODEL     "), 10);
 +  memcpy(g_model.name,PSTR("MODEL     "),10);
    g_model.name[5]='0'+(id+1)/10;
    g_model.name[6]='0'+(id+1)%10;
    g_model.mdVers = MDVERS;
-@@ -159,7 +159,7 @@
+@@ -159,7 +160,7 @@
    while((l=theFile.read(buf,15)))
    {
      theFile2.write(buf,l);
@@ -487,7 +488,7 @@ Index: er9x/pers.cpp
  //    {
  //        //wait for 10ms and try again
  //        uint16_t tgtime = get_tmr10ms() + 100;
-@@ -247,7 +247,7 @@
+@@ -247,7 +248,7 @@
      {
        EFile::swap(FILE_GENERAL,FILE_TMP);
      }else{
@@ -496,7 +497,7 @@ Index: er9x/pers.cpp
          s_eeDirtyMsk |= EE_GENERAL; //try again
          s_eeDirtyTime10ms = get_tmr10ms() - WRITE_DELAY_10MS;
        }else{
-@@ -262,7 +262,7 @@
+@@ -262,7 +263,7 @@
      {
        EFile::swap(FILE_MODEL(g_eeGeneral.currModel),FILE_TMP);
      }else{
