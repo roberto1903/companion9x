@@ -95,6 +95,7 @@ SET( companion9x_SRCS
      preferencesdialog.cpp
      burnconfigdialog.cpp
      contributorsdialog.cpp
+    customizesplashdialog.cpp
      printdialog.cpp
      fusesdialog.cpp
      expodialog.cpp
@@ -114,6 +115,7 @@ SET( companion9x_MOC_HDRS
      mixerdialog.h
      expodialog.h
      contributorsdialog.h
+     customizesplashdialog.h
      downloaddialog.h
      cursorwidget.h
      menuwidget.h
@@ -140,6 +142,7 @@ SET( companion9x_UIS
      modeledit.ui
      printdialog.ui
      contributorsdialog.ui
+     customizesplashdialog.ui
 )
 
 SET( companion9x_RCS

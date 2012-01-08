@@ -18,7 +18,8 @@
 #include "splash.h"
 #include "flashinterface.h"
 
-FlashInterface::FlashInterface(QString fileName) {
+FlashInterface::FlashInterface(QString fileName)
+{
   uint8_t temp[MAX_FSIZE];
   version = "";
   date = "";
@@ -27,13 +28,13 @@ FlashInterface::FlashInterface(QString fileName) {
   build = "";
 
   QFile file(fileName);
-
+  flash_size=0;
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
     isValid = false;
   }
   else {
     QTextStream inputStream(&file);
-    int flash_size = HexInterface(inputStream).load(temp, MAX_FSIZE);
+    flash_size = HexInterface(inputStream).load(temp, MAX_FSIZE);
     file.close();
     inputStream.reset();
     if (flash_size == 0) {
@@ -57,27 +58,33 @@ FlashInterface::FlashInterface(QString fileName) {
   }
 }
 
-QString FlashInterface::getVers(void) {
+QString FlashInterface::getVers(void)
+{
   return version;
 }
 
-QString FlashInterface::getDate(void) {
+QString FlashInterface::getDate(void)
+{
   return date;
 }
 
-QString FlashInterface::getTime(void) {
+QString FlashInterface::getTime(void)
+{
   return time;
 }
 
-QString FlashInterface::getSvn(void) {
+QString FlashInterface::getSvn(void)
+{
   return svn;
 }
 
-QString FlashInterface::getBuild(void) {
+QString FlashInterface::getBuild(void)
+{
   return build;
 }
 
-void FlashInterface::SeekVer(void) {
+void FlashInterface::SeekVer(void)
+{
   int i, start = -1, end = -1;
   start = flash.indexOf(QString(VERS_MARK));
   if (start > 0) {
@@ -97,7 +104,8 @@ void FlashInterface::SeekVer(void) {
   }
 }
 
-void FlashInterface::SeekSvn(void) {
+void FlashInterface::SeekSvn(void) 
+{
   int i, start = -1, end = -1;
   start = flash.indexOf(QString(SVN_MARK));
   if (start > 0) {
@@ -117,7 +125,8 @@ void FlashInterface::SeekSvn(void) {
   }
 }
 
-void FlashInterface::SeekDate(void) {
+void FlashInterface::SeekDate(void) 
+{
   int i, start = -1, end = -1;
   start = flash.indexOf(QString(DATE_MARK));
   if (start > 0) {
@@ -137,7 +146,8 @@ void FlashInterface::SeekDate(void) {
   }
 }
 
-void FlashInterface::SeekTime(void) {
+void FlashInterface::SeekTime(void)
+{
   int i, start = -1, end = -1;
   start = flash.indexOf(QString(TIME_MARK));
   if (start > 0) {
@@ -157,7 +167,8 @@ void FlashInterface::SeekTime(void) {
   }
 }
 
-void FlashInterface::SeekBuild(void) {
+void FlashInterface::SeekBuild(void) 
+{
   int i, start = -1, end = -1;
   start = flash.indexOf(QString(BLD_MARK));
   if (start > 0) {
@@ -195,7 +206,8 @@ void FlashInterface::SeekBuild(void) {
   }
 }
 
-void FlashInterface::SeekSplash(void) {
+void FlashInterface::SeekSplash(void) 
+{
   QByteArray splash;
   splash_offset=0;
   splash.clear();
@@ -203,6 +215,8 @@ void FlashInterface::SeekSplash(void) {
   int start = flash.indexOf(splash);
   if (start>0) {
     splash_offset=start;
+    splash_type=1;
+    splash_size=sizeof(gr9x_splash);
   } 
   if (start==-1) {
     splash.clear();
@@ -210,6 +224,8 @@ void FlashInterface::SeekSplash(void) {
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
+      splash_type=2;
+      splash_size=sizeof(er9x_splash);
     }
   }
   if (start==-1) {
@@ -218,6 +234,65 @@ void FlashInterface::SeekSplash(void) {
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
+      splash_type=1;
+      splash_size=sizeof(gr9xv4_splash);
     }
+  }
+}
+
+bool FlashInterface::setSplash(QImage newsplash) 
+{
+  char b[SPLASH_SIZE]= {0};
+  quint8 * p = newsplash.bits();
+  QByteArray splash;
+  if (splash_offset==0) {
+    return false;
+  }
+  else {
+    for(int y=0; y<SPLASH_HEIGHT; y++)
+        for(int x=0; x<SPLASH_WIDTH; x++)
+            b[SPLASH_WIDTH*(y/8) + x] |= ((p[(y*SPLASH_WIDTH + x)/8] & (1<<(x%8))) ? 1 : 0)<<(y % 8);
+
+    splash.clear();
+    splash.append(b, sizeof(b));
+    flash.replace(splash_offset,splash_size,splash);
+    return true;
+  }
+}
+
+QImage FlashInterface::getSplash()
+{
+  uint k=0;
+  QImage image(128, 64, QImage::Format_Mono);
+  uchar b[SPLASH_SIZE] = {0};
+  if (splash_offset>0) {
+    for (k=0; k<sizeof(b); k++)
+      b[k]=flash.at(splash_offset+k);
+    for(int y=0; y<SPLASH_HEIGHT; y++)
+      for(int x=0; x<SPLASH_WIDTH; x++)
+        image.setPixel(x,y,((b[SPLASH_WIDTH*(y/8) + x]) & (1<<(y % 8))) ? 0 : 1  );
+  }
+  return image;
+}
+
+bool FlashInterface::hasSplash()
+{
+  return (splash_offset > 0 ? true : false);
+}
+
+uint FlashInterface::saveFlash(QString fileName)
+{
+  uint8_t binflash[MAX_FSIZE];
+  memcpy(&binflash, flash.constData(), flash_size);
+  QFile file(fileName);
+  
+  if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) { //reading HEX TEXT file
+    return -1;
+  }
+  else {
+    QTextStream outputStream(&file);
+    HexInterface hex=HexInterface(outputStream);
+    hex.save(binflash,flash_size);
+    return flash_size;
   }
 }

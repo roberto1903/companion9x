@@ -99,6 +99,7 @@ private slots:
     void burnFuses();
     void simulate();
     void contributors();
+    void customizeSplash();
     void about();
     void print();
     void preferences();
@@ -165,6 +166,7 @@ private:
     QAction *preferencesAct;
     QAction *checkForUpdatesAct;
     QAction *contributorsAct;
+    QAction *customizeSplashAct;
     QAction *cutAct;
     QAction *copyAct;
     QAction *pasteAct;

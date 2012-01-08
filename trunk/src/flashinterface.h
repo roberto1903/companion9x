@@ -19,8 +19,9 @@
 #include <inttypes.h>
 #include "file.h"
 #define MAX_FSIZE 256*1024
-#define SPLASH_WIDTH 256
-#define SPLASH_HEIGHT 128
+#define SPLASH_WIDTH (128)
+#define SPLASH_HEIGHT (64)
+#define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
 #define VERS_MARK "VERS:"
 #define SVN_MARK "SVN:"
 #define DATE_MARK "DATE:"
@@ -37,9 +38,10 @@ public:
   QString getTime();
   QString getSvn();
   QString getBuild();
-  QByteArray getSplash();
-  bool setSplash(QByteArray splash);
-  void saveFlash();
+  QImage getSplash();
+  bool setSplash(QImage newsplash);
+  bool hasSplash();
+  uint saveFlash(QString fileName);
 
 private:
   QByteArray flash;
@@ -57,6 +59,9 @@ private:
   QString build;
   QByteArray splash;
   uint splash_offset;
+  uint splash_type;
+  uint splash_size;
+  uint flash_size;
 
 protected:
   bool isValid;
