@@ -9,6 +9,7 @@ customizeSplashDialog::customizeSplashDialog(QWidget *parent) :
 QDialog(parent),
 ui(new Ui::customizeSplashDialog) {
   ui->setupUi(this);
+  ui->HowToLabel->setText(tr("Select an original firmware file"));
 }
 
 customizeSplashDialog::~customizeSplashDialog() {
@@ -30,6 +31,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   ui->FWFileName->setText(fileName);
   FlashInterface flash(fileName);
   if (flash.hasSplash()) {
+    ui->HowToLabel->setText(tr("Select an image to customize your splash"));
     ui->ImageLoadButton->setEnabled(true);
     ui->imageLabel->setPixmap(QPixmap::fromImage(flash.getSplash()));
   }
@@ -37,7 +39,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
     QMessageBox::information(this, tr("Error"), tr("Could not find bitmap to replace in file"));
     return;
   }
-  settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+  settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 }
 
 void customizeSplashDialog::on_ImageLoadButton_clicked() {
@@ -53,13 +55,13 @@ void customizeSplashDialog::on_ImageLoadButton_clicked() {
   if (!fileName.isEmpty()) {
     QImage image(fileName);
     if (image.isNull()) {
-      QMessageBox::critical(this, tr("Error"),
-              tr("Cannot load %1.").arg(fileName));
+      QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
       return;
     }
     ui->ImageFileName->setText(fileName);
     ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
     ui->SaveFlashButton->setEnabled(true);
+    ui->HowToLabel->setText(tr("Save your custimized firmware"));
   }
 }
 
@@ -73,21 +75,22 @@ void customizeSplashDialog::on_SaveFlashButton_clicked() {
   }
   FlashInterface flash(ui->FWFileName->text());
   if (!flash.hasSplash()) {
-    QMessageBox::critical(this, tr("Error"),
-            tr("Error reading file %1").arg(fileName));
+    QMessageBox::critical(this, tr("Error"), tr("Error reading file %1").arg(fileName));
     return;
   }
   settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
   QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
   flash.setSplash(image);
-  flash.saveFlash(fileName);
-  
-/*
-  if (saveiHEX(this, fileName, (quint8*) & temp, fileSize, "", 0)) {
-    QMessageBox::information(this, tr("Save To File"),
-            tr("Successfully updated %1").arg(fileName));
+  if (flash.saveFlash(fileName) > 0) {
+    ui->HowToLabel->setText(tr("Firmware correctly saved."));
   }
-*/
+
+  /*
+    if (saveiHEX(this, fileName, (quint8*) & temp, fileSize, "", 0)) {
+      QMessageBox::information(this, tr("Save To File"),
+              tr("Successfully updated %1").arg(fileName));
+    }
+   */
 
 }
 
