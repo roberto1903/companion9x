@@ -26,6 +26,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"));
   if (fileName.isEmpty()) {
     ui->FWFileName->clear();
+    ui->HowToLabel->setText(tr("Select an original firmware file"));
     return;
   }
   ui->FWFileName->setText(fileName);
