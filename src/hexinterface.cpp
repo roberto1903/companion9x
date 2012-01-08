@@ -80,27 +80,49 @@ int HexInterface::load(uint8_t *data, int maxsize)
 }
 
 
-bool HexInterface::save(uint8_t *data, const int size)
-{
-  for (int i=0; i<(size/32); i++) {
-    QString str = QString(":20%1000").arg(i*32,4,16,QChar('0')); //write start, bytecount (32), address and record type
-    quint8 chkSum = 0;
-    chkSum = -32; //-bytecount; recordtype is zero
-    chkSum -= (i*32) & 0xFF;
-    chkSum -= (i*32) >> 8;
-    for (int j=0; j<32; j++)
-    {
-        str += QString("%1").arg(data[i*32+j],2,16,QChar('0'));
-        chkSum -= data[i*32+j];
+bool HexInterface::save(uint8_t *data, const int size) {
+  int addr = 0;
+  uint8_t nextbank=1;
+  while (addr < size) {
+    if (addr>(nextbank*0x010000)-1) {
+      stream << iHEXExtRec(nextbank) << "\n";
+      nextbank++;
     }
-
-    str += QString("%1").arg(chkSum,2,16,QChar('0'));
-    stream << str.toUpper() << "\n"; // output to file and lf;
+    int llen = 32;
+    if ((size - addr) < llen)
+      llen = size - addr;
+    stream << iHEXLine(data, addr, llen) << "\n";
+    addr += llen;
   }
-
-  stream << ":00000001FF";  // write EOF
-
+  stream << ":00000001FF\n"; // write EOF
   return true;
 }
 
+QString HexInterface::iHEXLine(quint8 * data, quint32 addr, quint8 len) {
+  quint16 bankaddr;
+  bankaddr=addr&0xffff;
+  QString str = QString(":%1%2000").arg(len, 2, 16, QChar('0')).arg(bankaddr, 4, 16, QChar('0')); //write start, bytecount (32), address and record type
+  quint8 chkSum = 0;
+  chkSum = -len; //-bytecount; recordtype is zero
+  chkSum -= bankaddr & 0xFF;
+  chkSum -= bankaddr >> 8;
+  for (int j = 0; j < len; j++) {
+    str += QString("%1").arg(data[addr + j], 2, 16, QChar('0'));
+    chkSum -= data[addr + j];
+  }
+
+  str += QString("%1").arg(chkSum, 2, 16, QChar('0'));
+  return str.toUpper(); // output to file and lf;
+}
+
+QString HexInterface::iHEXExtRec(quint8 bank) {
+  QString str = QString(":02000002"); //write record type 2 record
+  quint8 chkSum = 0;
+  chkSum = -2; //-bytecount; recordtype is zero
+  chkSum -= 2; // type 2 record type
+  str += QString("%1000").arg((bank&0x0f)<<4,1,16,QChar('0'));
+  chkSum -= ((bank&0x0f)<<4); // type 2 record type
+  str += QString("%1").arg(chkSum, 2, 16, QChar('0'));
+  return str.toUpper(); // output to file and lf;
+}
 

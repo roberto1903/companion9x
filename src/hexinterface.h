@@ -29,6 +29,8 @@ class HexInterface {
   protected:
 
     int getValueFromLine(const QString &line, int pos, int len=2);
+    QString iHEXLine(quint8 * data, quint32 addr, quint8 len);
+    QString iHEXExtRec(quint8 bank);
 
     QTextStream & stream;
 };

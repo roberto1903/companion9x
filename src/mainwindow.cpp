@@ -51,6 +51,7 @@
 #include "downloaddialog.h"
 #include "version.h"
 #include "contributorsdialog.h"
+#include "customizesplashdialog.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
@@ -432,6 +433,11 @@ void MainWindow::contributors()
     cd->exec();
 }
 
+void MainWindow::customizeSplash()
+{
+    customizeSplashDialog *cd = new customizeSplashDialog(this);
+    cd->exec();
+}
 
 void MainWindow::cut()
 {
@@ -754,7 +760,11 @@ void MainWindow::createActions()
     contributorsAct = new QAction(QIcon(":/images/contributors.png"), tr("Contributors &List..."), this);
     contributorsAct->setStatusTip(tr("Show companion9x contributors list"));
     connect(contributorsAct, SIGNAL(triggered()), this, SLOT(contributors()));
-    
+
+    customizeSplashAct = new QAction(QIcon(":/images/customize.png"), tr("Customize your &TX..."), this);
+    customizeSplashAct->setStatusTip(tr("Customize the splash screen of your TX"));
+    connect(customizeSplashAct, SIGNAL(triggered()), this, SLOT(customizeSplash()));
+
     
 //! [0]
     exitAct = new QAction(QIcon(":/images/exit.png"), tr("E&xit"), this);
@@ -977,6 +987,7 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnToFlashAct);
     burnToolBar->addAction(burnFromFlashAct);
     burnToolBar->addSeparator();
+    burnToolBar->addAction(customizeSplashAct);
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
