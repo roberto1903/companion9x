@@ -1,5 +1,6 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
+#define FRSKY
 
 #undef min
 #undef max
@@ -22,6 +23,7 @@ namespace Er9x {
 #include "./er9x/drivers.cpp"
 #include "./er9x/simpgmspace.cpp"
 #include "./er9x/templates.cpp"
+#include "./er9x/frsky.cpp"
 #include "./er9x/audio.cpp"
 
 int16_t g_anas[7];

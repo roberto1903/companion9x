@@ -1,6 +1,6 @@
 Index: er9x/drivers.cpp
 ===================================================================
---- er9x/drivers.cpp	(revision 651)
+--- er9x/drivers.cpp	(revision 656)
 +++ er9x/drivers.cpp	(working copy)
 @@ -17,6 +17,7 @@
  
@@ -10,12 +10,16 @@ Index: er9x/drivers.cpp
  #include "avr/interrupt.h"
  
  ///opt/cross/avr/include/avr/eeprom.h
-@@ -47,12 +48,13 @@
- void eeWriteBlockCmp(const void *i_pointer_ram, void *i_pointer_eeprom, size_t size)
+@@ -44,15 +45,16 @@
+   SREG = flags;
+ }
+ 
+-void eeWriteBlockCmp(const void *i_pointer_ram, void *i_pointer_eeprom, size_t size)
++void eeWriteBlockCmp(const void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size)
  {
    const char* pointer_ram = (const char*)i_pointer_ram;
 -  uint16_t    pointer_eeprom = (uint16_t)i_pointer_eeprom;
-+  uint16_t    pointer_eeprom = (uint16_t)(uint64_t)i_pointer_eeprom;
++  uint16_t    pointer_eeprom = i_pointer_eeprom;
    while(size){
      eeprom_write_byte_cmp(*pointer_ram++,pointer_eeprom++);
      size--;
@@ -27,9 +31,9 @@ Index: er9x/drivers.cpp
  //{
 Index: er9x/er9x.cpp
 ===================================================================
---- er9x/er9x.cpp	(revision 651)
+--- er9x/er9x.cpp	(revision 656)
 +++ er9x/er9x.cpp	(working copy)
-@@ -390,8 +390,10 @@
+@@ -391,8 +391,10 @@
  
          clearKeyEvents();
  
@@ -40,7 +44,7 @@ Index: er9x/er9x.cpp
  
  #define INAC_DEVISOR 256   // Issue 206 - bypass splash screen with stick movement
          uint16_t inacSum = 0;
-@@ -401,7 +403,11 @@
+@@ -402,7 +404,11 @@
          uint16_t tgtime = get_tmr10ms() + SPLASH_TIMEOUT;  
          while(tgtime != get_tmr10ms())
          {
@@ -52,7 +56,7 @@ Index: er9x/er9x.cpp
              uint16_t tsum = 0;
              for(uint8_t i=0; i<4; i++)
                 tsum += anaIn(i)/INAC_DEVISOR;
-@@ -447,7 +453,10 @@
+@@ -448,7 +454,10 @@
  
    int16_t lowLim = THRCHK_DEADBAND + g_eeGeneral.calibMid[thrchn] - g_eeGeneral.calibSpanNeg[thrchn];// + g_eeGeneral.calibSpanNeg[thrchn]/8;
  
@@ -63,7 +67,7 @@ Index: er9x/er9x.cpp
    int16_t v      = anaIn(thrchn);
    if((v<=lowLim) || (keyDown()))
    {
-@@ -460,7 +469,11 @@
+@@ -461,7 +470,11 @@
  	//loop until all switches are reset
    while (1)
    {
@@ -75,7 +79,7 @@ Index: er9x/er9x.cpp
        int16_t v      = anaIn(thrchn);
        if((v<=lowLim) || (keyDown()))
        {
-@@ -499,6 +512,10 @@
+@@ -500,6 +513,10 @@
  	//loop until all switches are reset
    while (1)
    {
@@ -86,7 +90,7 @@ Index: er9x/er9x.cpp
      uint8_t i;
      for(i=SW_BASE; i<SW_Trainer; i++)
      {
-@@ -583,6 +600,9 @@
+@@ -584,6 +601,9 @@
      clearKeyEvents();
      while(1)
      {
@@ -96,7 +100,7 @@ Index: er9x/er9x.cpp
          if(keyDown())
          {
              return;  //wait for key release
-@@ -928,7 +948,10 @@
+@@ -929,7 +949,10 @@
  int16_t g_ppmIns[8];
  uint8_t ppmInState = 0; //0=unsync 1..8= wait for value i-1
  
@@ -107,7 +111,7 @@ Index: er9x/er9x.cpp
  //#include <avr/wdt.h>
  
  //class AutoLock
-@@ -948,6 +971,7 @@
+@@ -949,6 +972,7 @@
  //#define STARTADCONV (ADCSRA  = (1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2) | (1<<ADSC) | (1 << ADIE))
  int16_t BandGap = 240 ;
  
@@ -115,15 +119,7 @@ Index: er9x/er9x.cpp
  static uint16_t s_anaFilt[8];
  uint16_t anaIn(uint8_t chan)
  {
-@@ -959,7 +983,6 @@
-   return  *p;
- }
- 
--
- #define ADC_VREF_TYPE 0x40
- void getADC_filt()
- {
-@@ -1063,9 +1086,11 @@
+@@ -1064,9 +1088,11 @@
    getADC_osmp,
    getADC_filt
    };
@@ -135,15 +131,15 @@ Index: er9x/er9x.cpp
  ISR(TIMER0_OVF_vect, ISR_NOBLOCK) //continuous timer 16ms (16MHz/1024)
  {
    g_tmr16KHz++;
-@@ -1322,4 +1347,4 @@
-       if ( t0 > g_timeMain ) g_timeMain = t0 ;
+@@ -1332,4 +1358,4 @@
+ #endif
  }
  
 -
 +#endif
 Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 651)
+--- er9x/er9x.h	(revision 656)
 +++ er9x/er9x.h	(working copy)
 @@ -23,6 +23,9 @@
  
@@ -164,9 +160,18 @@ Index: er9x/er9x.h
  #include "file.h"
  //
  //                  elev                        thr
+@@ -487,7 +492,7 @@
+ 
+ /// Markiert einen EEPROM-Bereich als dirty. der Bereich wird dann in
+ /// eeCheck ins EEPROM zurueckgeschrieben.
+-void eeWriteBlockCmp(const void *i_pointer_ram, void *i_pointer_eeprom, size_t size);
++void eeWriteBlockCmp(const void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size);
+ void eeWaitComplete();
+ void eeDirty(uint8_t msk);
+ void eeCheck(bool immediately=false);
 Index: er9x/file.cpp
 ===================================================================
---- er9x/file.cpp	(revision 651)
+--- er9x/file.cpp	(revision 656)
 +++ er9x/file.cpp	(working copy)
 @@ -39,19 +39,20 @@
  #define BLOCKS   (EESIZE/BS)
@@ -193,6 +198,29 @@ Index: er9x/file.cpp
  
  
  static uint8_t EeFsRead(uint8_t blk,uint8_t ofs){
+@@ -60,7 +61,7 @@
+   return ret;
+ }
+ static void EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val){
+-  eeWriteBlockCmp(&val, (void*)(blk*BS+ofs), 1);
++  eeWriteBlockCmp(&val, (uint16_t)(blk*BS+ofs), 1);
+ }
+ 
+ static uint8_t EeFsGetLink(uint8_t blk){
+@@ -74,11 +75,11 @@
+ }
+ static void EeFsSetDat(uint8_t blk,uint8_t ofs,uint8_t*buf,uint8_t len){
+   //EeFsWrite( blk,ofs+1,val);
+-  eeWriteBlockCmp(buf, (void*)(blk*BS+ofs+1), len);
++  eeWriteBlockCmp(buf, (uint16_t)(blk*BS+ofs+1), len);
+ }
+ static void EeFsFlushFreelist()
+ {
+-  eeWriteBlockCmp(&eeFs.freeList,&((EeFs*)0)->freeList ,sizeof(eeFs.freeList));
++  eeWriteBlockCmp(&eeFs.freeList, offsetof(EeFs, freeList), sizeof(eeFs.freeList));
+ }
+ static void EeFsFlush()
+ {
 @@ -165,10 +166,6 @@
  }
  void EeFsFormat()
@@ -206,7 +234,7 @@ Index: er9x/file.cpp
    eeFs.mySize   = sizeof(eeFs);
 Index: er9x/file.h
 ===================================================================
---- er9x/file.h	(revision 651)
+--- er9x/file.h	(revision 656)
 +++ er9x/file.h	(working copy)
 @@ -75,7 +75,7 @@
    ///read from opened file and decode rlc-coded data
@@ -217,11 +245,88 @@ Index: er9x/file.h
  };
  
  #endif
+Index: er9x/frsky.cpp
+===================================================================
+--- er9x/frsky.cpp	(revision 656)
++++ er9x/frsky.cpp	(working copy)
+@@ -220,6 +220,7 @@
+    a second buffer to receive data while one buffer is being processed (slowly).
+ */
+ 
++#ifndef SIMU
+ ISR(USART0_RX_vect)
+ {
+   uint8_t stat;
+@@ -317,12 +318,15 @@
+ 	cli() ;
+   UCSR0B |= (1 << RXCIE0); // enable Interrupt
+ }
++#endif
+ 
+ /*
+    USART0 (transmit) Data Register Emtpy ISR
+    Usef to transmit FrSky data packets, which are buffered in frskyTXBuffer. 
+ */
+ uint8_t frskyTxISRIndex = 0;
++
++#ifndef SIMU
+ ISR(USART0_UDRE_vect)
+ {
+   if (frskyTxBufferCount > 0) 
+@@ -332,6 +336,7 @@
+   } else
+     UCSR0B &= ~(1 << UDRIE0); // disable UDRE0 interrupt
+ }
++#endif
+ 
+ /******************************************/
+ 
+@@ -504,6 +509,9 @@
+ 
+ #undef BAUD
+ #define BAUD 9600
++
++#ifndef SIMU
++
+ #include <util/setbaud.h>
+ 
+   UBRR0H = UBRRH_VALUE;
+@@ -517,6 +525,8 @@
+   
+   while (UCSR0A & (1 << RXC0)) UDR0; // flush receive buffer
+ 
++#endif
++
+   // These should be running right from power up on a FrSky enabled '9X.
+   FRSKY_EnableTXD(); // enable FrSky-Telemetry reception
+   FRSKY_EnableRXD(); // enable FrSky-Telemetry reception
+@@ -600,8 +610,10 @@
+ {
+   // Used to detect presence of valid FrSky telemetry packets inside the
+   // last FRSKY_TIMEOUT10ms 10ms intervals
++#ifndef SIMU
+   if (frskyStreaming > 0) frskyStreaming--;
+   if (frskyUsrStreaming > 0) frskyUsrStreaming--;
++#endif
+ 	
+   if ( FrskyAlarmSendState )
+   {
+@@ -634,8 +646,10 @@
+ {
+   FrskyAlarmSendState |= 0x0F ;
+ 	
++#ifndef SIMU
+   Frsky_current[0].Amp_hour_boundary = 360000L/ g_model.frsky.channels[0].ratio ;
+ 	Frsky_current[1].Amp_hour_boundary = 360000L/ g_model.frsky.channels[1].ratio ;
++#endif
+ }
+ 
+ 
 Index: er9x/lcd.cpp
 ===================================================================
---- er9x/lcd.cpp	(revision 651)
+--- er9x/lcd.cpp	(revision 656)
 +++ er9x/lcd.cpp	(working copy)
-@@ -16,7 +16,12 @@
+@@ -16,6 +16,10 @@
  
  #include "er9x.h"
  
@@ -230,11 +335,9 @@ Index: er9x/lcd.cpp
 +uint8_t lcd_buf[DISPLAY_W*DISPLAY_H/8];
 +#endif
  
-+
  uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8];
  #define DISPLAY_END (displayBuf+sizeof(displayBuf))
- #include "font.lbm"
-@@ -427,6 +432,11 @@
+@@ -427,6 +431,11 @@
  
  void refreshDiplay()
  {
@@ -246,7 +349,7 @@ Index: er9x/lcd.cpp
    uint8_t *p=displayBuf;
    for(uint8_t y=0; y < 8; y++) {
      lcdSendCtl(0x04);
-@@ -456,4 +466,5 @@
+@@ -456,4 +465,5 @@
      PORTC_LCD_CTRL |=  (1<<OUT_C_LCD_A0);
      PORTC_LCD_CTRL |=  (1<<OUT_C_LCD_CS1);
    }
@@ -254,7 +357,7 @@ Index: er9x/lcd.cpp
  }
 Index: er9x/menus.cpp
 ===================================================================
---- er9x/menus.cpp	(revision 651)
+--- er9x/menus.cpp	(revision 656)
 +++ er9x/menus.cpp	(working copy)
 @@ -565,7 +565,7 @@
          v += g_model.limitData[i].revert ?
@@ -274,7 +377,7 @@ Index: er9x/menus.cpp
          y+=FH;
      }
  
-@@ -3018,8 +3018,9 @@
+@@ -3035,8 +3035,9 @@
      lcd_outdezAtt(14*FW , 4*FH, (g_timeMain*100)/16 ,PREC2);
  
      lcd_puts_P( 0*FW,  5*FH, PSTR("Stack          b"));
@@ -285,7 +388,7 @@ Index: er9x/menus.cpp
      lcd_puts_P( 3*FW,  7*FH, PSTR("[MENU] to refresh"));
  }
  
-@@ -3667,10 +3668,14 @@
+@@ -3654,10 +3655,14 @@
              //Normalization  [0..2048] ->   [-1024..1024]
  
              int16_t v = anaIn(i);
@@ -302,7 +405,7 @@ Index: er9x/menus.cpp
  	  				if ( g_eeGeneral.throttleReversed )
 Index: er9x/menus.h
 ===================================================================
---- er9x/menus.h	(revision 651)
+--- er9x/menus.h	(revision 656)
 +++ er9x/menus.h	(working copy)
 @@ -77,10 +77,10 @@
  #define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
@@ -332,7 +435,7 @@ Index: er9x/menus.h
  #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 651)
+--- er9x/myeeprom.h	(revision 656)
 +++ er9x/myeeprom.h	(working copy)
 @@ -59,19 +59,23 @@
  #define GENERAL_OWNER_NAME_LEN 10
@@ -458,28 +561,9 @@ Index: er9x/myeeprom.h
  
 Index: er9x/pers.cpp
 ===================================================================
---- er9x/pers.cpp	(revision 651)
+--- er9x/pers.cpp	(revision 656)
 +++ er9x/pers.cpp	(working copy)
-@@ -47,7 +47,7 @@
-     g_eeGeneral.calibSpanNeg[i] = 0x180;
-     g_eeGeneral.calibSpanPos[i] = 0x180;
-   }
--  strncpy_P(g_eeGeneral.ownerName,PSTR("ME        "),10);
-+  //strncpy_P(g_eeGeneral.ownerName,PSTR("ME        "),10);
-   int16_t sum=0;
-   for(int i=0; i<12;i++) sum+=g_eeGeneral.calibMid[i];
-   g_eeGeneral.chkSum = sum;
-@@ -78,7 +78,8 @@
- void modelDefault(uint8_t id)
- {
-   memset(&g_model, 0, sizeof(ModelData));
--  strncpy_P(g_model.name,PSTR("MODEL     "), 10);
-+  //strncpy_P(g_model.name,PSTR("MODEL     "), 10);
-+  memcpy(g_model.name,PSTR("MODEL     "),10);
-   g_model.name[5]='0'+(id+1)/10;
-   g_model.name[6]='0'+(id+1)%10;
-   g_model.mdVers = MDVERS;
-@@ -159,7 +160,7 @@
+@@ -159,7 +159,7 @@
    while((l=theFile.read(buf,15)))
    {
      theFile2.write(buf,l);
@@ -488,7 +572,7 @@ Index: er9x/pers.cpp
  //    {
  //        //wait for 10ms and try again
  //        uint16_t tgtime = get_tmr10ms() + 100;
-@@ -247,7 +248,7 @@
+@@ -247,7 +247,7 @@
      {
        EFile::swap(FILE_GENERAL,FILE_TMP);
      }else{
@@ -497,7 +581,7 @@ Index: er9x/pers.cpp
          s_eeDirtyMsk |= EE_GENERAL; //try again
          s_eeDirtyTime10ms = get_tmr10ms() - WRITE_DELAY_10MS;
        }else{
-@@ -262,7 +263,7 @@
+@@ -262,7 +262,7 @@
      {
        EFile::swap(FILE_MODEL(g_eeGeneral.currModel),FILE_TMP);
      }else{
@@ -510,7 +594,7 @@ Index: er9x/simpgmspace.cpp
 ===================================================================
 --- er9x/simpgmspace.cpp	(revision 0)
 +++ er9x/simpgmspace.cpp	(revision 0)
-@@ -0,0 +1,139 @@
+@@ -0,0 +1,142 @@
 +/*
 + * Authors (alphabetical order)
 + * - Bertrand Songis <bsongis@gmail.com>
@@ -570,7 +654,7 @@ Index: er9x/simpgmspace.cpp
 +
 +uint8_t eeprom[EESIZE];
 +
-+void eeWriteBlockCmp(const void *i_pointer_ram, void *pointer_eeprom, size_t size)
++void eeWriteBlockCmp(const void *i_pointer_ram, uint16_t pointer_eeprom, size_t size)
 +{
 +#if 0
 +  printf(" eeWriteBlockCmp(%d %d)", size, (int)pointer_eeprom);
@@ -579,7 +663,7 @@ Index: er9x/simpgmspace.cpp
 +  printf("\n");fflush(stdout);
 +#endif
 +
-+  memcpy(&eeprom[(int64_t)pointer_eeprom], i_pointer_ram, size);
++  memcpy(&eeprom[pointer_eeprom], i_pointer_ram, size);
 +}
 +
 +void eeprom_read_block (void *pointer_ram,
@@ -630,6 +714,9 @@ Index: er9x/simpgmspace.cpp
 +pthread_t main_thread_pid;
 +void StartMainThread(bool tests)
 +{
++  frskyStreaming = 1;
++  frskyUsrStreaming = 1;
++
 +  main_thread_running = (tests ? 1 : 2);
 +  pthread_create(&main_thread_pid, NULL, &main_thread, NULL);
 +}
@@ -652,7 +739,7 @@ Index: er9x/simpgmspace.cpp
 +#endif
 Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/simpgmspace.h	(revision 651)
+--- er9x/simpgmspace.h	(revision 656)
 +++ er9x/simpgmspace.h	(working copy)
 @@ -1,7 +1,12 @@
  /*
@@ -725,7 +812,7 @@ Index: er9x/simpgmspace.h
  typedef unsigned char prog_uchar;
  typedef const char prog_char;
  typedef const uint16_t prog_uint16_t;
-@@ -25,12 +75,15 @@
+@@ -25,41 +75,114 @@
  typedef const int16_t prog_int16_t;
  typedef const int8_t prog_int8_t;
  
@@ -742,7 +829,11 @@ Index: er9x/simpgmspace.h
  #define pgm_read_stringP(adr) ((adr))
  #define PSTR(adr) adr
  #define _delay_us(a)
-@@ -41,25 +94,94 @@
+ #define cli()
+ #define sei()
+ #define strcpy_P strcpy
++#define strncpy_P strncpy
+ #define memcpy_P memcpy
  
  #define PORTA dummyport
  #define PORTB portb
@@ -849,7 +940,7 @@ Index: er9x/simpgmspace.h
 +#endif
 Index: er9x/templates.cpp
 ===================================================================
---- er9x/templates.cpp	(revision 651)
+--- er9x/templates.cpp	(revision 656)
 +++ er9x/templates.cpp	(working copy)
 @@ -99,7 +99,7 @@
      g_model.customSw[idx-1].v2   = v2;
