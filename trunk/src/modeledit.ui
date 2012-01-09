@@ -9007,7 +9007,7 @@
                <number>0</number>
               </property>
               <property name="maximum">
-               <number>256</number>
+               <number>255</number>
               </property>
               <property name="singleStep">
                <number>1</number>
@@ -9264,7 +9264,7 @@
                <number>0</number>
               </property>
               <property name="maximum">
-               <number>256</number>
+               <number>255</number>
               </property>
               <property name="singleStep">
                <number>1</number>
