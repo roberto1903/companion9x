@@ -25,6 +25,8 @@ private slots:
     void writeValues();
     void firmwareChanged();
     void on_fw_dnld_clicked();
+    void on_SplashSelect_clicked();
+    void on_InvertPixels_clicked();
 };
 
 #endif // PREFERENCESDIALOG_H

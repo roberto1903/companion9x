@@ -33,6 +33,7 @@ QString getCSWFunc(int val);
 QString getFuncName(unsigned int val);
 QString getSignedStr(int value);
 QString getCurveStr(int curve);
-
+QString image2qstring(QImage image);
+QImage qstring2image(QString imagestr);
 
 #endif // HELPERS_H
