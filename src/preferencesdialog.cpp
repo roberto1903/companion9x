@@ -66,7 +66,6 @@ void preferencesDialog::writeValues() {
     QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
     settings.setValue("SplashImage", image2qstring(Image));
     settings.setValue("SplashFileName", ui->SplashFileName->text());
-    settings.setValue("ApplySplashToFw", ui->AutoApplySplash->isChecked());
   }
 }
 
@@ -92,12 +91,19 @@ void preferencesDialog::initSettings() {
   }
   QString ImageStr = settings.value("SplashImage", "").toString();
   if (!ImageStr.isEmpty()) {
-    ui->AutoApplySplash->setEnabled(true);
-    ui->AutoApplySplash->setChecked(settings.value("ApplySplashToFw", false).toBool());
     QImage Image = qstring2image(ImageStr);
     ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Mono)));
     ui->InvertPixels->setEnabled(true);
-    ui->SplashFileName->setText(tr("Image stored in settings"));
+    QString fileName=settings.value("SplashFileName","").toString();
+    if (!fileName.isEmpty()) {
+      QFile file(fileName);
+      if (!file.exists()) {
+        ui->SplashFileName->setText(tr("Image stored in settings"));
+      }
+      else {
+        ui->SplashFileName->setText(fileName);
+      }
+    }
   }
   firmwareChanged();
 }
@@ -151,7 +157,6 @@ void preferencesDialog::on_SplashSelect_clicked() {
     }
     ui->SplashFileName->setText(fileName);
     ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
-    ui->AutoApplySplash->setEnabled(true);
     ui->InvertPixels->setEnabled(true);
     //    ui->SaveFlashButton->setEnabled(true);
     //    ui->HowToLabel->setText(tr("Save your custimized firmware"));
