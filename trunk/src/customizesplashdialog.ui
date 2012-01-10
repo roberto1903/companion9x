@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>371</width>
-    <height>280</height>
+    <height>312</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -139,14 +139,20 @@
        <item>
         <widget class="QLineEdit" name="FWFileName">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="ImageFileName">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
