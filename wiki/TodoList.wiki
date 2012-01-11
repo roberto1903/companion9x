@@ -15,9 +15,9 @@
   * ~~Checking updates and download of selected firmware.~~
   * ~~Add an entry in the contextual menu to change the current model~~
   * ~~Change the icon which comes from eePe (a graphist is welcome!!)~~
-  * Add a what's new information to be displayed while prompting for updates
   * ~~Splash window should be visible at least 2-3 seconds!~~
   * ~~Phase names visible on simulation~~
+  * Add a what's new information to be displayed while prompting for updates
   * Beeps not handled yet
   * Use the Tx as an input for moving the sticks (2 inputs modes: the usb connection (FMS) and the mic input)
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
