@@ -128,6 +128,7 @@ SET( companion9x_MOC_HDRS
      mixerslist.h
      mdichild.h
      mainwindow.h
+     myslider.h
 )
      
 SET( companion9x_UIS

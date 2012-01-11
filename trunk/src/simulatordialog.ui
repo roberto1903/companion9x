@@ -75,7 +75,10 @@
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
         <item row="1" column="2">
-         <widget class="QSlider" name="trimVLeft">
+         <widget class="mySlider" name="trimVLeft">
+          <property name="toolTip">
+           <string>Right Double Click to Reset</string>
+          </property>
           <property name="minimum">
            <number>-125</number>
           </property>
@@ -388,7 +391,10 @@ QPushButton:checked {
          </layout>
         </item>
         <item row="2" column="1">
-         <widget class="QSlider" name="trimHLeft">
+         <widget class="mySlider" name="trimHLeft">
+          <property name="toolTip">
+           <string>Right Double Click to Reset</string>
+          </property>
           <property name="minimum">
            <number>-125</number>
           </property>
@@ -405,7 +411,10 @@ QPushButton:checked {
       <item row="0" column="2">
        <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
         <item row="1" column="0">
-         <widget class="QSlider" name="trimVRight">
+         <widget class="mySlider" name="trimVRight">
+          <property name="toolTip">
+           <string>Right Double Click to Reset</string>
+          </property>
           <property name="minimum">
            <number>-125</number>
           </property>
@@ -754,7 +763,10 @@ QPushButton:checked {
          </layout>
         </item>
         <item row="2" column="1">
-         <widget class="QSlider" name="trimHRight">
+         <widget class="mySlider" name="trimHRight">
+          <property name="toolTip">
+           <string>Right Double Click to Reset</string>
+          </property>
           <property name="minimum">
            <number>-125</number>
           </property>
@@ -2990,6 +3002,11 @@ border-radius: 4px;
    <extends>QWidget</extends>
    <header>menuwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mySlider</class>
+   <extends>QSlider</extends>
+   <header location="global">myslider.h</header>
   </customwidget>
  </customwidgets>
  <resources>
