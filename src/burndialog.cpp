@@ -34,9 +34,16 @@ void burnDialog::on_FlashLoadButton_clicked() {
   ui->BurnFlashButton->setDisabled(true);
   ui->ImageFileName->clear();
   ui->FwImage->clear();
+  ui->FWFileName->clear();
+  ui->VersionField->clear();
+  ui->DateField->clear();
+  ui->SVNField->clear();
+  ui->ModField->clear();
+  ui->FramFWInfo->hide();
+  ui->SplashFrame->hide();
+  ui->BurnFlashButton->setDisabled(true);  
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"));
   if (fileName.isEmpty()) {
-    ui->FWFileName->clear();
     return;
   }
   ui->FWFileName->setText(fileName);
@@ -51,6 +58,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
     if (flash.hasSplash()) {
       ui->SplashFrame->show();
       ui->ImageLoadButton->setEnabled(true);
+      ui->FwImage->show();
       ui->FwImage->setPixmap(QPixmap::fromImage(flash.getSplash()));
       QString ImageStr = settings.value("SplashImage", "").toString();
       if (!ImageStr.isEmpty()) {
@@ -60,9 +68,26 @@ void burnDialog::on_FlashLoadButton_clicked() {
         ui->PreferredImageCB->setChecked(true);
       }
       else {
-        ui->PreferredImageCB->setDisabled(true);
+        QString fileName=ui->ImageFileName->text();
+        if (!fileName.isEmpty()) {
+          QImage image(fileName);
+          if (!image.isNull()) {
+            ui->InvertColorButton->setEnabled(true);
+            ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+            ui->PatchFWCB->setEnabled(true);
+          }
+          else {
+            ui->PatchFWCB->setDisabled(true);
+            ui->PatchFWCB->setChecked(false);
+            ui->PreferredImageCB->setDisabled(true);         
+          }
+        }
+        else {
+          ui->PatchFWCB->setDisabled(true);
+          ui->PatchFWCB->setChecked(false);
+          ui->PreferredImageCB->setDisabled(true);
+        }
       }
-
     }
     else {
       ui->FwImage->hide();
@@ -75,7 +100,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
     QMessageBox::critical(this, tr("Warning"), tr("%1 doesn't seem to be a firmware").arg(fileName));
     ui->BurnFlashButton->setText("Burn anyway !");
   }
-  resize(0,0);
+  QTimer::singleShot(0, this, SLOT(shrink()));
   settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 }
 
@@ -170,4 +195,8 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked) {
       ui->PatchFWCB->setChecked(false);
     }
   }
+}
+
+void burnDialog::shrink() {
+    resize(0,0);
 }

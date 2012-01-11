@@ -52,6 +52,8 @@
 #include "version.h"
 #include "contributorsdialog.h"
 #include "customizesplashdialog.h"
+#include "burndialog.h"
+
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
@@ -219,10 +221,12 @@ void MainWindow::updateDownloaded()
 
 void MainWindow::downloadLatestFW(FirmwareInfo * force_firmware)
 {
+    QString tmp, ext;
     QSettings settings("companion9x", "companion9x");
     FirmwareInfo firmware =  *force_firmware;
-
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ".hex", tr(HEX_FILES_FILTER));
+    tmp=firmware.url;
+    ext=tmp.mid(tmp.lastIndexOf("."));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ext, tr(FLASH_FILES_FILTER));
     if (!fileName.isEmpty()) {
       downloadedFW = firmware.id;
       downloadedFWFilename = fileName;
@@ -319,7 +323,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 }
             } else if (download == true) {
                 downloadedFW = firmware.id;
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ".hex", tr(HEX_FILES_FILTER));
+                QString tmp=firmware.url;
+                QString ext=tmp.mid(tmp.lastIndexOf("."));
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ext, tr(HEX_FILES_FILTER));
                 if (!fileName.isEmpty()) {
                     settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
                     downloadDialog * dd = new downloadDialog(this, firmware.url, fileName);
@@ -434,7 +440,7 @@ void MainWindow::contributors()
 }
 
 void MainWindow::customizeSplash()
-{
+{    
     customizeSplashDialog *cd = new customizeSplashDialog(this);
     cd->exec();
 }
