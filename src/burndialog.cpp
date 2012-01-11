@@ -5,20 +5,24 @@
 #include "helpers.h"
 #include "flashinterface.h"
 
-burnDialog::burnDialog(QWidget *parent, int Type, QString fileName) : QDialog(parent), ui(new Ui::burnDialog) {
+burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName) : QDialog(parent), ui(new Ui::burnDialog) {
   hexType = Type;
   ui->setupUi(this);
   ui->SplashFrame->hide();
   ui->FramFWInfo->hide();
+  hexfileName = fileName;
   if (Type == 2) {
     ui->EEpromCB->hide();
     this->setWindowTitle("Write firmware to TX");
   }
-  if (!fileName.isEmpty()) {
-    hexfileName = fileName;
-    ui->FWFileName->hide();
-    ui->FlashLoadButton->hide();
+  else {
     this->setWindowTitle("Write models to TX");
+  }
+  if (!hexfileName->isEmpty()) {
+    ui->FWFileName->setText(*hexfileName);
+    ui->FWFileName->hide();
+    ui->FlashLoadButton->hide();   
+    hexfileName->clear();
   }
   resize(0, 0);
 }
@@ -99,6 +103,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
     QMessageBox::
     QMessageBox::critical(this, tr("Warning"), tr("%1 doesn't seem to be a firmware").arg(fileName));
     ui->BurnFlashButton->setText("Burn anyway !");
+    ui->BurnFlashButton->setEnabled(true);
   }
   QTimer::singleShot(0, this, SLOT(shrink()));
   settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
@@ -130,6 +135,50 @@ void burnDialog::on_ImageLoadButton_clicked() {
   }
 }
 
+void burnDialog::on_BurnFlashButton_clicked() {
+  if (hexType==2) {
+    QString fileName=ui->FWFileName->text();
+    if (!fileName.isEmpty()) {
+      if (ui->PatchFWCB->isChecked()) {
+        QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
+        if (!image.isNull()) {
+          QString tempDir    = QDir::tempPath();
+          QString tempFile = tempDir + "/flash.hex";
+          FlashInterface flash(fileName);
+          flash.setSplash(image);
+          if (flash.saveFlash(tempFile) > 0) {
+            hexfileName->clear();
+            hexfileName->append(tempFile);
+          }
+          else {
+            hexfileName->clear();
+            QMessageBox::critical(this, tr("Warning"), tr("Cannot save customized firmware"));
+          }
+        }
+        else {
+          hexfileName->clear();
+          QMessageBox::critical(this, tr("Warning"), tr("Custom image not found"));
+        }
+      }
+      else {
+            hexfileName->clear();
+            hexfileName->append(fileName);
+      }
+    }
+    else {
+      QMessageBox::critical(this, tr("Warning"), tr("No firmware selected"));
+      hexfileName->clear();     
+    }
+  }
+  this->close();
+}
+
+void burnDialog::on_cancelButton_clicked() {
+  hexfileName->clear();     
+  this->close();  
+}
+
+/*
 void burnDialog::on_SaveFlashButton_clicked() {
   QString fileName;
   QSettings settings("companion9x", "companion9x");
@@ -150,7 +199,7 @@ void burnDialog::on_SaveFlashButton_clicked() {
   }
 
 }
-
+*/
 void burnDialog::on_InvertColorButton_clicked() {
   QImage image = ui->imageLabel->pixmap()->toImage();
   image.invertPixels();
