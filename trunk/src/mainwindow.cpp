@@ -441,8 +441,8 @@ void MainWindow::contributors()
 
 void MainWindow::customizeSplash()
 {    
-    customizeSplashDialog *cd = new customizeSplashDialog(this);
-    cd->exec();
+  customizeSplashDialog *cd = new customizeSplashDialog(this);
+  cd->exec();
 }
 
 void MainWindow::cut()
@@ -561,30 +561,26 @@ void MainWindow::burnExtenalToEEPROM()
 
 void MainWindow::burnToFlash(QString fileToFlash)
 {
-    QSettings settings("companion9x", "companion9x");
-    QString fileName;
-    if(fileToFlash.isEmpty())
-        fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to flash memory"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
-    else
-        fileName = fileToFlash;
-    
-    if (!fileName.isEmpty())
-    {
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
-        FlashInterface flash(fileName);
-        
-        int ret = QMessageBox::question(this, "companion9x", (tr("Write %1 to flash memory?").arg(QFileInfo(fileName).fileName())+ "\n" + (tr("Version %1").arg(flash.getVers()))+ "\n" + (tr("Release %1 %2").arg(flash.getSvn()).arg(flash.getBuild()))+ "\n" + (tr("Date %1 %2").arg(flash.getDate()).arg(flash.getTime()))), QMessageBox::Yes | QMessageBox::No);
-        if(ret!=QMessageBox::Yes) return;
+  QSettings settings("companion9x", "companion9x");
+  QString fileName;
+  if(!fileToFlash.isEmpty())
+    fileName = fileToFlash;
+  burnDialog *cd = new burnDialog(this,2,&fileName);
+  cd->exec();
 
-        QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-        else str += ":a";
+  if (!fileName.isEmpty()) {
+    settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+    FlashInterface flash(fileName);
 
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
-        ad->setWindowIcon(QIcon(":/images/write_flash.png"));
-        ad->show();
-    }
+    QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+    if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
+    else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
+    else str += ":a";
+
+    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
+    ad->setWindowIcon(QIcon(":/images/write_flash.png"));
+    ad->show();
+  }
 }
 
 
@@ -993,7 +989,7 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnToFlashAct);
     burnToolBar->addAction(burnFromFlashAct);
     burnToolBar->addSeparator();
-    burnToolBar->addAction(customizeSplashAct);
+//    burnToolBar->addAction(customizeSplashAct);
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
