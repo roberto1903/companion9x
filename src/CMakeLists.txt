@@ -37,7 +37,7 @@ IF( MSVC )
   SET( PTHREAD_LIBRARY pthreadVC2.lib )
 ELSE( )
   SET( PTHREAD_LIBRARY pthread )
-  ADD_DEFINITIONS( -O2 -Wall )
+  ADD_DEFINITIONS( -Wall )
 ENDIF( )
 
 INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
@@ -95,7 +95,8 @@ SET( companion9x_SRCS
      preferencesdialog.cpp
      burnconfigdialog.cpp
      contributorsdialog.cpp
-    customizesplashdialog.cpp
+     customizesplashdialog.cpp
+     burndialog.cpp
      printdialog.cpp
      fusesdialog.cpp
      expodialog.cpp
@@ -116,6 +117,7 @@ SET( companion9x_MOC_HDRS
      expodialog.h
      contributorsdialog.h
      customizesplashdialog.h
+     burndialog.h
      downloaddialog.h
      cursorwidget.h
      menuwidget.h
@@ -143,6 +145,7 @@ SET( companion9x_UIS
      printdialog.ui
      contributorsdialog.ui
      customizesplashdialog.ui
+     burndialog.ui
 )
 
 SET( companion9x_RCS
