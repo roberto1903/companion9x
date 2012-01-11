@@ -26,11 +26,11 @@ FlashInterface::FlashInterface(QString fileName)
   time = "";
   svn = "";
   build = "";
-
+  isValidFlag=true;
   QFile file(fileName);
   flash_size=0;
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
-    isValid = false;
+    isValidFlag = false;
   }
   else {
     QTextStream inputStream(&file);
@@ -54,6 +54,8 @@ FlashInterface::FlashInterface(QString fileName)
       SeekTime();
       SeekBuild();
       SeekSplash();
+    } else {
+      isValidFlag=false;
     }
   }
 }
@@ -101,6 +103,8 @@ void FlashInterface::SeekVer(void)
     else {
       version = QString("");
     }
+  } else {
+    isValidFlag=false;
   }
 }
 
@@ -279,6 +283,12 @@ bool FlashInterface::hasSplash()
 {
   return (splash_offset > 0 ? true : false);
 }
+
+bool FlashInterface::isValid()
+{
+  return isValidFlag;
+}
+
 
 uint FlashInterface::saveFlash(QString fileName)
 {

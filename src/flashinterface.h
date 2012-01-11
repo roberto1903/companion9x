@@ -42,6 +42,7 @@ public:
   bool setSplash(QImage newsplash);
   bool hasSplash();
   uint saveFlash(QString fileName);
+  bool isValid();
 
 private:
   QByteArray flash;
@@ -64,7 +65,7 @@ private:
   uint flash_size;
 
 protected:
-  bool isValid;
+  bool isValidFlag;
 };
 #endif	/* FLASHINTERFACE_H */
 
