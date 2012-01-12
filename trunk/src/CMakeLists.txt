@@ -289,10 +289,13 @@ IF( APPLE )
   ENDIF()
     
   ADD_CUSTOM_TARGET( addframeworks ALL 
+                     COMMAND mkdir companion9x.app/Contents/Frameworks
+                     COMMAND cp /opt/local/lib/libssl.1.0.0.dylib companion9x.app/Contents/Frameworks
+                     COMMAND cp /opt/local/lib/libcrypto.1.0.0.dylib companion9x.app/Contents/Frameworks
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
-                     
+
   ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
                       COMMAND mkdir -p ${WORK_DIR}/companion9x.app/Contents/translations
                       COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations
