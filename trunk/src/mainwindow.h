@@ -48,7 +48,7 @@
 #include "eeprominterface.h"
 
 #define MAX_RECENT  15
-#define SPLASH_TIME 1
+#define SPLASH_TIME 5
 
 class MdiChild;
 QT_BEGIN_NAMESPACE

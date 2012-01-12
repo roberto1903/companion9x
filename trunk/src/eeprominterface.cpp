@@ -130,11 +130,12 @@ void RegisterFirmwares()
   firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-speaker", QObject::tr("gruvin9x stable for stock board - Speaker mod"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-std-speaker.hex"));
   firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-frsky", QObject::tr("gruvin9x stable for stock board - FrSky"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-nospeaker.hex"));
   firmwares.push_back(FirmwareInfo("gruvin9x-stable-stock-frsky-speaker", QObject::tr("gruvin9x stable for stock board - Frsky, speaker"), new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-speaker.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock", QObject::tr("gruvin9x trunk for stock board"), new Gruvin9xInterface(EESIZE_STOCK)));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-speaker", QObject::tr("gruvin9x trunk for stock board - Speaker mod"), new Gruvin9xInterface(EESIZE_STOCK)));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky", QObject::tr("gruvin9x trunk for stock board - FrSky"), new Gruvin9xInterface(EESIZE_STOCK)));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky-speaker", QObject::tr("gruvin9x trunk for stock board - Frsky, speaker"), new Gruvin9xInterface(EESIZE_STOCK)));
-  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
+  firmwares.push_back(FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4)));
   firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x - trunk"), new Open9xInterface()));
 
   RegisterEepromInterfaces();
