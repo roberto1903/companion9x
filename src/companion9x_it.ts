@@ -857,7 +857,7 @@ Volete scaricarla ora ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="317"/>
         <source>Ignore this version (r%1)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorare questa version (r%1) ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="369"/>
@@ -1029,12 +1029,12 @@ Volete scaricarla ora ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="766"/>
         <source>Customize your &amp;TX...</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizza il &amp;TX...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="767"/>
         <source>Customize the splash screen of your TX</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizza la schermata di avvio della radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="772"/>
@@ -2874,7 +2874,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modelslist.cpp" line="382"/>
         <source>Do you want to overwrite TX general settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Volete sovrascrivere le impostazioni generali della radio ?</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="393"/>
@@ -3425,77 +3425,77 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
     <message>
         <location filename="burndialog.ui" line="26"/>
         <source>Customize Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizza schermata di avvio</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="62"/>
         <source>Load Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica Firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="86"/>
         <source>Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione:</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="134"/>
         <source>Date &amp; Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Data e ora</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="148"/>
         <source>SVN</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="162"/>
         <source>MOD/Build</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="219"/>
         <source>Load Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri immagine</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="230"/>
         <source>Substitute image in firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Sostituisci schermata di avvio</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="256"/>
         <source>Use image in settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa immagine predefinita</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="305"/>
         <source>Invert Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Negativo</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="327"/>
         <source>Check Firmware compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifica compatibilità firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="357"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="386"/>
         <source>Burn to TX</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrivi sulla radio</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="49"/>
         <source>Open</source>
-        <translation type="unfinished">Apri</translation>
+        <translation>Apri</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="49"/>
         <source>iHEX (*.hex);;BIN Files (*.bin)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="103"/>
@@ -3503,47 +3503,47 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
         <location filename="burndialog.cpp" line="159"/>
         <location filename="burndialog.cpp" line="168"/>
         <source>Warning</source>
-        <translation type="unfinished">Avviso</translation>
+        <translation>Avviso</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="103"/>
         <source>%1 doesn&apos;t seem to be a firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 non sembra essere un firmware valido</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="119"/>
         <source>Open Image to load</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri l&apos;immagine da caricare</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="119"/>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagini (%1)</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="124"/>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="124"/>
         <source>Cannot load %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non posso caricare %1.</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="154"/>
         <source>Cannot save customized firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante la scrittura del file temporaneo</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="159"/>
         <source>Custom image not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagine personalizzata non trovata</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="168"/>
         <source>No firmware selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun firmware selezionato</translation>
     </message>
 </context>
 <context>
@@ -3588,106 +3588,106 @@ companion9x.  </translation>
     <message>
         <location filename="customizesplashdialog.ui" line="20"/>
         <source>Customize Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizza schermata di avvio</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="112"/>
         <source>Invert Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Negativo</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="192"/>
         <source>Load Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica Firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="202"/>
         <source>Load Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri immagine</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="212"/>
         <source>Save To Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="245"/>
         <source>HowTo</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiuto</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="12"/>
         <location filename="customizesplashdialog.cpp" line="30"/>
         <source>Select an original firmware file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona un firmware (possibilmente non modificato)</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="27"/>
         <source>Open</source>
-        <translation type="unfinished">Apri</translation>
+        <translation>Apri</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="27"/>
         <location filename="customizesplashdialog.cpp" line="74"/>
         <source>HEX files (*.hex);;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="36"/>
         <source>Select an image to customize your splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare un&apos;immagine di personalizzazione</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="41"/>
         <location filename="customizesplashdialog.cpp" line="60"/>
         <location filename="customizesplashdialog.cpp" line="80"/>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="41"/>
         <source>Could not find bitmap to replace in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagine non trovata nel firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="55"/>
         <source>Open Image to load</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri l&apos;immagine da caricare</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="55"/>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagini (%1)</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="60"/>
         <source>Cannot load %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non posso caricare %1.</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="66"/>
         <source>Save your custimized firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva il firmware personalizzato</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="74"/>
         <source>Write to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrivi in un file</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="80"/>
         <source>Error reading file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error durante la lettura del file %1</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="88"/>
         <source>Firmware correctly saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware salvato correttamente.</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="92"/>
         <source>Firmware not saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware non slavato correttamente.</translation>
     </message>
 </context>
 <context>
@@ -3996,7 +3996,7 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="72"/>
         <source>Custom TX splash screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermo personalizzato</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="296"/>
@@ -4047,12 +4047,12 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="480"/>
         <source>Open Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri immagine</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="490"/>
         <source>Invert Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>Negativo</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="319"/>
@@ -4077,27 +4077,27 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.cpp" line="101"/>
         <source>Image stored in settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagine predefinita</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="150"/>
         <source>Open Image to load</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri l&apos;immagine da caricare</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="150"/>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagini (%1)</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="155"/>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="155"/>
         <source>Cannot load %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non posso caricare %1.</translation>
     </message>
 </context>
 <context>
@@ -4218,7 +4218,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="176"/>
         <source>printed on: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>stampato il: %1</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="177"/>
@@ -4594,7 +4594,7 @@ Mode 4:
         <location filename="simulatordialog.ui" line="416"/>
         <location filename="simulatordialog.ui" line="768"/>
         <source>Right Double Click to Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppio click con il destro per portare a 0</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="170"/>
