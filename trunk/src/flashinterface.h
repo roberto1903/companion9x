@@ -22,7 +22,7 @@
 #define SPLASH_WIDTH (128)
 #define SPLASH_HEIGHT (64)
 #define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
-#define SPLASH_MARK "Splash\0"
+#define SPLASH_MARK "Splash"
 #define VERS_MARK "VERS:"
 #define SVN_MARK "SVN:"
 #define DATE_MARK "DATE:"
