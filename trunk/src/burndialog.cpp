@@ -100,7 +100,6 @@ void burnDialog::on_FlashLoadButton_clicked() {
     }
   }
   else {
-    QMessageBox::
     QMessageBox::critical(this, tr("Warning"), tr("%1 doesn't seem to be a firmware").arg(fileName));
     ui->BurnFlashButton->setText("Burn anyway !");
     ui->BurnFlashButton->setEnabled(true);
