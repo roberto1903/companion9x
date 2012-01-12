@@ -285,7 +285,7 @@ IF( APPLE )
   IF( CMAKE_GENERATOR STREQUAL Xcode )
     SET( WORK_DIR ${CMAKE_BINARY_DIR}/Debug )
   ELSE( )
-    SET( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" )
+    SET( WORK_DIR "${PROJECT_BINARY_DIR}" )
   ENDIF()
     
   ADD_CUSTOM_TARGET( addframeworks ALL 
@@ -293,9 +293,10 @@ IF( APPLE )
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
                      
- ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
-		     COMMAND mkdir -p ${WORK_DIR}/companion9x.app/Contents/translations
-		     COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations )
+  ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
+                      COMMAND mkdir -p ${WORK_DIR}/companion9x.app/Contents/translations
+                      COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations
+                      COMMAND cp -r /opt/local/lib/Resources/qt_menu.nib ${WORK_DIR}/companion9x.app/Contents/Resources )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
