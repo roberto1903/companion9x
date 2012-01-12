@@ -244,11 +244,11 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
-    splash.append(SPLASH_MARK);
+    splash.append(ERSPLASH_MARKER);
     splash.append('\0');
     start = flash.indexOf(splash);
     if (start>0) {
-      splash_offset=start+10;
+      splash_offset=start+ERSPLASH_OFFSET;
       splash_type=2;
       splash_size=sizeof(er9x_splash);
     }

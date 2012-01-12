@@ -18,11 +18,12 @@
 #include <QtGui>
 #include <inttypes.h>
 #include "file.h"
-#define MAX_FSIZE 256*1024
+#define MAX_FSIZE (256*1024)
 #define SPLASH_WIDTH (128)
 #define SPLASH_HEIGHT (64)
 #define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
-#define SPLASH_MARK "Splash"
+#define ERSPLASH_MARKER "Splash"
+#define ERSPLASH_OFFSET (10)
 #define VERS_MARK "VERS:"
 #define SVN_MARK "SVN:"
 #define DATE_MARK "DATE:"
