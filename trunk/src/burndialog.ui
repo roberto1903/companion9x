@@ -403,11 +403,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>BurnFlashButton</zorder>
-  <zorder>hs2</zorder>
-  <zorder>cancelButton</zorder>
-  <zorder>hs2_2</zorder>
-  <zorder>horizontalSpacer</zorder>
  </widget>
  <resources>
   <include location="companion9x.qrc"/>
