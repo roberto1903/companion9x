@@ -70,7 +70,10 @@ int main(int argc, char *argv[])
 
     QTranslator companion9xTranslator;
     companion9xTranslator.load(":/companion9x_" + locale);
+    QTranslator qtTranslator;
+    qtTranslator.load((QString)QT_TRANSLATIONS_DIR + "/qt_" + locale);
     app.installTranslator(&companion9xTranslator);
+    app.installTranslator(&qtTranslator);
     
     QPixmap pixmap(":/images/splash.png");
     QSplashScreen *splash = new QSplashScreen(pixmap);

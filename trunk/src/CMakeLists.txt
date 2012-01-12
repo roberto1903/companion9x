@@ -230,6 +230,8 @@ QT4_WRAP_CPP( companion9x_SRCS ${companion9x_MOC_HDRS} )
 QT4_ADD_TRANSLATION( companion9x_QM ${companion9x_TS}  )
 QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
 
+ADD_DEFINITIONS( -DQT_TRANSLATIONS_DIR="${QT_TRANSLATIONS_DIR}" )
+
 IF( APPLE )
     # Copy the icon files
     # TODO: put these in some sort of add_custom_command( TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ...)
