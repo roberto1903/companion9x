@@ -242,6 +242,17 @@ void FlashInterface::SeekSplash(void)
       splash_size=sizeof(gr9xv4_splash);
     }
   }
+  if (start==-1) {
+    splash.clear();
+    splash.append(SPLASH_MARK);
+    start = flash.indexOf(splash);
+    if (start>0) {
+      splash_offset=start+10;
+      splash_type=2;
+      splash_size=sizeof(er9x_splash);
+    }
+  }
+
 }
 
 bool FlashInterface::setSplash(QImage newsplash) 
