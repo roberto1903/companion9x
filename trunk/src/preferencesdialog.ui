@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>492</width>
-    <height>362</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -450,9 +450,6 @@ Mode 4:
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="companion9x.qrc">:/images/customize.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
