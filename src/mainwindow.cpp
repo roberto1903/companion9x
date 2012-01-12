@@ -226,7 +226,7 @@ void MainWindow::downloadLatestFW(FirmwareInfo * force_firmware)
     FirmwareInfo firmware =  *force_firmware;
     tmp=firmware.url;
     ext=tmp.mid(tmp.lastIndexOf("."));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ext, tr(FLASH_FILES_FILTER));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ext);
     if (!fileName.isEmpty()) {
       downloadedFW = firmware.id;
       downloadedFWFilename = fileName;
