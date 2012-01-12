@@ -24,6 +24,9 @@
 #define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
 #define ERSPLASH_MARKER "Splash"
 #define ERSPLASH_OFFSET (10)
+#define O9X_SPS "SPS"
+#define O9X_SPE "SPE"
+#define O9X_OFFSET (6)
 #define VERS_MARK "VERS:"
 #define SVN_MARK "SVN:"
 #define DATE_MARK "DATE:"
