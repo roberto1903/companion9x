@@ -169,11 +169,11 @@ void printDialog::printSetup()
 {
     int i,k;
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1 ><h1>").arg(GetEepromInterface()->getCapability(Phases) ? 2 : 1));
+    str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg(GetEepromInterface()->getCapability(Phases) ? 2 : 1));
     str.append(g_model->name);
     str.append("&nbsp;(");
     str.append(eepromInterface->getName());
-    str.append(")</h1></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
+    str.append(")</h1></td><td align=right valign=top NOWRAP><font size=-1>"+tr("printed on: %1").arg(QDateTime::currentDateTime().toString(Qt::SystemLocaleShortDate))+"</font></td></tr></tabl></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
     str.append("<tr><td><h2>"+tr("General Model Settings")+"</h2></td></tr>");
     str.append("<tr><td>");
     str.append(fv(tr("Name"), g_model->name));
