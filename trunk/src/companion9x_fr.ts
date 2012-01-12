@@ -1221,12 +1221,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.cpp" line="766"/>
         <source>Customize your &amp;TX...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Personnalisez votre émetteur...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="767"/>
         <source>Customize the splash screen of your TX</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisez l&apos;écran de démarrage de votre émetteur</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="811"/>
@@ -3172,7 +3172,7 @@ Droite</translation>
     <message>
         <location filename="modelslist.cpp" line="382"/>
         <source>Do you want to overwrite TX general settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez vous écraser les paramètres généraux de l&apos;émetteur ?</translation>
     </message>
     <message>
         <location filename="modelslist.cpp" line="393"/>
@@ -3741,77 +3741,77 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
     <message>
         <location filename="burndialog.ui" line="26"/>
         <source>Customize Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnaliser l&apos;écran d&apos;accueil</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="62"/>
         <source>Load Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger le firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="86"/>
         <source>Version:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="134"/>
         <source>Date &amp; Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Date et heure</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="148"/>
         <source>SVN</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="162"/>
         <source>MOD/Build</source>
-        <translation type="unfinished"></translation>
+        <translation>MOD / Build</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="219"/>
         <source>Load Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger une image</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="230"/>
         <source>Substitute image in firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer l&apos;écran de démarrage du firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="256"/>
         <source>Use image in settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;image choisie dans les paramètres</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="305"/>
         <source>Invert Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser les couleurs</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="327"/>
         <source>Check Firmware compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier la compatibilité du firmware</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="357"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="386"/>
         <source>Burn to TX</source>
-        <translation type="unfinished"></translation>
+        <translation>Flasher l&apos;émetteur</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="49"/>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="49"/>
         <source>iHEX (*.hex);;BIN Files (*.bin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers iHEX (*.hex);;Fichiers BIN (*.bin)</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="103"/>
@@ -3819,47 +3819,47 @@ Assurez-vous de posséder les droits en écriture sur ce dossier.</translation>
         <location filename="burndialog.cpp" line="159"/>
         <location filename="burndialog.cpp" line="168"/>
         <source>Warning</source>
-        <translation type="unfinished">Avertissement</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="103"/>
         <source>%1 doesn&apos;t seem to be a firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 semble ne pas être un firmware</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="119"/>
         <source>Open Image to load</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvre l&apos;image à charger</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="119"/>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Images (%1)</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="124"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="124"/>
         <source>Cannot load %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger %1.</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="154"/>
         <source>Cannot save customized firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer le firmware personnalisé</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="159"/>
         <source>Custom image not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Image personnalisée non trouvée</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="168"/>
         <source>No firmware selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun firmware sélectionné</translation>
     </message>
 </context>
 <context>
@@ -3903,12 +3903,12 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
     <message>
         <location filename="customizesplashdialog.ui" line="20"/>
         <source>Customize Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnaliser l&apos;écran d&apos;accueil</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="112"/>
         <source>Invert Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser les couleurs</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="192"/>
@@ -3939,7 +3939,7 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
     <message>
         <location filename="customizesplashdialog.cpp" line="27"/>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="27"/>
@@ -3957,7 +3957,7 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
         <location filename="customizesplashdialog.cpp" line="60"/>
         <location filename="customizesplashdialog.cpp" line="80"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="41"/>
@@ -3992,7 +3992,7 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
     <message>
         <location filename="customizesplashdialog.cpp" line="80"/>
         <source>Error reading file %1</source>
-        <translation type="unfinished">Fichier %1 corrompu! {1?}</translation>
+        <translation>Fichier %1 corrompu! {1?}</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="88"/>
@@ -4290,12 +4290,12 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <location filename="preferencesdialog.ui" line="480"/>
         <source>Open Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger une image</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="490"/>
         <source>Invert Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser les couleurs</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="319"/>
@@ -4410,7 +4410,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <location filename="preferencesdialog.cpp" line="155"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="155"/>
@@ -4759,7 +4759,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <location filename="printdialog.cpp" line="176"/>
         <source>printed on: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimé le : %1</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="177"/>
@@ -5137,7 +5137,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="416"/>
         <location filename="simulatordialog.ui" line="768"/>
         <source>Right Double Click to Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Double clicker pour remettre à 0</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="470"/>
