@@ -212,7 +212,7 @@ void FlashInterface::SeekBuild(void)
 
 void FlashInterface::SeekSplash(void) 
 {
-  QByteArray splash;
+  QByteArray splash,spe;
   splash_offset=0;
   splash.clear();
   splash.append(gr9x_splash, sizeof(gr9x_splash));
@@ -234,12 +234,55 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
+    splash.append(open9x_splash, sizeof(open9x_splash));
+    start = flash.indexOf(splash);
+    if (start>0) {
+      splash_offset=start;
+      splash_type=3;
+      splash_size=sizeof(open9x_splash);
+    }
+  }
+  if (start==-1) {
+    splash.clear();
     splash.append(gr9xv4_splash, sizeof(gr9xv4_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
       splash_type=1;
       splash_size=sizeof(gr9xv4_splash);
+    }
+  }
+  if (start==-1) {
+    start=0;
+    splash.clear();
+    splash.append(O9X_SPS);
+    splash.append('\0');
+    spe.clear();
+    spe.append(O9X_SPE);
+    spe.append('\0');   
+    int diff=0;
+    int end=0;
+    while (start>=0) {
+      start = flash.indexOf(splash,start+1);
+      if (start>0) {
+        end=flash.indexOf(spe,start+1);
+        if (end>0) {
+          diff=end-start;
+          while (diff<1030 && end>0) {
+            end=flash.indexOf(spe,end+1);
+            diff=end-start;
+          }
+          if (end>0) {
+            diff=end-start;
+            if (diff==1030) {
+              splash_offset=start+O9X_OFFSET;
+              splash_type=2;
+              splash_size=sizeof(open9x_splash);
+              break;
+            }
+          }
+        }
+      }
     }
   }
   if (start==-1) {
