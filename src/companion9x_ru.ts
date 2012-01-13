@@ -863,7 +863,7 @@ Mode 4:
     </message>
     <message>
         <location filename="mainwindow.cpp" line="703"/>
-        <location filename="mainwindow.cpp" line="1080"/>
+        <location filename="mainwindow.cpp" line="1081"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
@@ -1275,37 +1275,37 @@ Do you want to download it now ?</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="937"/>
+        <location filename="mainwindow.cpp" line="939"/>
         <source>&amp;Window</source>
         <translation>Окна</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="943"/>
+        <location filename="mainwindow.cpp" line="945"/>
         <source>&amp;Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="962"/>
+        <location filename="mainwindow.cpp" line="964"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="977"/>
+        <location filename="mainwindow.cpp" line="979"/>
         <source>Edit</source>
         <translation>Правка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="982"/>
+        <location filename="mainwindow.cpp" line="984"/>
         <source>Burn</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="995"/>
+        <location filename="mainwindow.cpp" line="996"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1002"/>
+        <location filename="mainwindow.cpp" line="1003"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -3203,12 +3203,12 @@ Right</source>
         <translation type="unfinished">Кривая</translation>
     </message>
     <message>
-        <location filename="gruvin9xeeprom.cpp" line="676"/>
+        <location filename="gruvin9xeeprom.cpp" line="685"/>
         <source>gruvin9x only accepts %1 expos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="510"/>
+        <location filename="open9xeeprom.cpp" line="592"/>
         <source>open9x only accepts %1 expos</source>
         <oldsource>Gruvin9x firmware only accepts %1 expos</oldsource>
         <translation type="unfinished"></translation>
@@ -3266,6 +3266,11 @@ Right</source>
     <message>
         <location filename="eeprominterface.cpp" line="132"/>
         <source>gruvin9x stable for stock board - Frsky, speaker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="133"/>
+        <source>gruvin9x stable for v4 board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3697,102 +3702,117 @@ companion9x was forked out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.ui" line="112"/>
+        <location filename="customizesplashdialog.ui" line="86"/>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customizesplashdialog.ui" line="106"/>
         <source>Invert Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.ui" line="192"/>
+        <location filename="customizesplashdialog.ui" line="173"/>
         <source>Load Firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.ui" line="202"/>
+        <location filename="customizesplashdialog.ui" line="183"/>
         <source>Load Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.ui" line="212"/>
+        <location filename="customizesplashdialog.ui" line="193"/>
         <source>Save To Hex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.ui" line="245"/>
-        <source>HowTo</source>
+        <location filename="customizesplashdialog.ui" line="241"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="12"/>
-        <location filename="customizesplashdialog.cpp" line="30"/>
+        <location filename="customizesplashdialog.cpp" line="13"/>
+        <location filename="customizesplashdialog.cpp" line="33"/>
         <source>Select an original firmware file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="27"/>
+        <location filename="customizesplashdialog.cpp" line="30"/>
         <source>Open</source>
         <translation type="unfinished">Открыть</translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="27"/>
-        <location filename="customizesplashdialog.cpp" line="74"/>
+        <location filename="customizesplashdialog.cpp" line="30"/>
+        <location filename="customizesplashdialog.cpp" line="79"/>
         <source>HEX files (*.hex);;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="36"/>
-        <source>Select an image to customize your splash</source>
+        <location filename="customizesplashdialog.cpp" line="39"/>
+        <source>Select an image to customize your splash &lt;br /&gt;or save actual firmware splash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="41"/>
-        <location filename="customizesplashdialog.cpp" line="60"/>
-        <location filename="customizesplashdialog.cpp" line="80"/>
+        <location filename="customizesplashdialog.cpp" line="45"/>
+        <location filename="customizesplashdialog.cpp" line="65"/>
+        <location filename="customizesplashdialog.cpp" line="85"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="41"/>
+        <location filename="customizesplashdialog.cpp" line="45"/>
         <source>Could not find bitmap to replace in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="55"/>
+        <location filename="customizesplashdialog.cpp" line="60"/>
         <source>Open Image to load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="55"/>
+        <location filename="customizesplashdialog.cpp" line="60"/>
         <source>Images (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="60"/>
+        <location filename="customizesplashdialog.cpp" line="65"/>
         <source>Cannot load %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="66"/>
+        <location filename="customizesplashdialog.cpp" line="71"/>
         <source>Save your custimized firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="74"/>
+        <location filename="customizesplashdialog.cpp" line="79"/>
+        <location filename="customizesplashdialog.cpp" line="112"/>
         <source>Write to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="80"/>
+        <location filename="customizesplashdialog.cpp" line="85"/>
         <source>Error reading file %1</source>
         <translation type="unfinished">Ошибка при считывании файла %1! {1?}</translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="88"/>
+        <location filename="customizesplashdialog.cpp" line="93"/>
         <source>Firmware correctly saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customizesplashdialog.cpp" line="92"/>
+        <location filename="customizesplashdialog.cpp" line="97"/>
         <source>Firmware not saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customizesplashdialog.cpp" line="112"/>
+        <source>PNG images (*.png);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4892,22 +4912,22 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="144"/>
+        <location filename="simulatordialog.cpp" line="142"/>
         <source>Firmware %1 error: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="153"/>
+        <location filename="simulatordialog.cpp" line="151"/>
         <source> - Phase: %1(%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="247"/>
+        <location filename="simulatordialog.cpp" line="246"/>
         <source>Simulating Tx (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="253"/>
+        <location filename="simulatordialog.cpp" line="252"/>
         <source>Simulating </source>
         <translation>Симуляция</translation>
     </message>
