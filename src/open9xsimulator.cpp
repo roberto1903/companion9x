@@ -23,6 +23,7 @@
 namespace Open9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+extern uint8_t g_beepCnt;
 }
 
 using namespace Open9x;
@@ -69,6 +70,12 @@ void Open9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
+  outputs.beep = g_beepCnt;
+  g_beepCnt = 0;
+
+/*  extern uint8_t beepOn;
+
+  outputs.beep = beepOn;*/
 }
 
 void Open9xSimulator::setValues(TxInputs &inputs)

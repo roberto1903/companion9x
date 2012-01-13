@@ -225,14 +225,22 @@ PACK(typedef struct t_Open9xPhaseData_v201 {
 
 PACK(typedef struct t_Open9xTimerData_v201 {
   int8_t    mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint16_t   val:14;
-  uint16_t   persistent:1;
-  uint16_t   dir:1;          // 0=>Count Down, 1=>Count Up
+  uint16_t  val:14;
+  uint16_t  persistent:1;
+  uint16_t  dir:1;          // 0=>Count Down, 1=>Count Up
 
   operator TimerData();
   t_Open9xTimerData_v201() { memset(this, 0, sizeof(t_Open9xTimerData_v201)); }
-  t_Open9xTimerData_v201(TimerData &eepe);
 }) Open9xTimerData_v201;
+
+PACK(typedef struct t_Open9xTimerData_v202 {
+  int8_t     mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  uint16_t   val;
+
+  operator TimerData();
+  t_Open9xTimerData_v202() { memset(this, 0, sizeof(t_Open9xTimerData_v202)); }
+  t_Open9xTimerData_v202(TimerData &eepe);
+}) Open9xTimerData_v202;
 
 #define MAX_MODELS 16
 #define MAX_PHASES 5
@@ -279,7 +287,43 @@ PACK(typedef struct t_Open9xModelData_v201 {
 
 }) Open9xModelData_v201;
 
-typedef Open9xModelData_v201 Open9xModelData;
+PACK(typedef struct t_Open9xModelData_v202 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timer1;
+  uint8_t   protocol:3;
+  int8_t    ppmNCH:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  uint8_t   thrExpo:1;            // Enable Throttle Expo
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   spare1:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xTimerData_v202 timer2;
+  Open9xMixData   mixData[MAX_MIXERS];
+  Open9xLimitData limitData[NUM_CHNOUT];
+  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  int8_t    curves5[MAX_CURVE5][5];
+  int8_t    curves9[MAX_CURVE9][9];
+  Open9xCustomSwData  customSw[NUM_CSW];
+  Open9xSafetySwData  safetySw[NUM_CHNOUT];
+  Open9xFuncSwData    funcSw[NUM_FSW];
+  Open9xSwashRingData swashR;
+  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xFrSkyData frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+
+  operator ModelData();
+  t_Open9xModelData_v202() { memset(this, 0, sizeof(t_Open9xModelData_v202)); }
+  t_Open9xModelData_v202(ModelData&);
+
+}) Open9xModelData_v202;
+
+typedef Open9xModelData_v202 Open9xModelData;
 
 #endif
 /*eof*/

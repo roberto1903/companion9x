@@ -46,6 +46,7 @@ struct TxInputs {
 struct TxOutputs {
   int16_t chans[NUM_CHNOUT];
   bool vsw[12];
+  unsigned int beep;
 };
 
 struct Trims {

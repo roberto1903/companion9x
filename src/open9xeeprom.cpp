@@ -3,7 +3,7 @@
 #include "open9xeeprom.h"
 #include <QObject>
 
-#define EEPROM_VER       201
+#define EEPROM_VER       202
 
 static const char specialCharsTab[] = "_-.,";
 
@@ -363,21 +363,49 @@ t_Open9xPhaseData_v201::t_Open9xPhaseData_v201(PhaseData &c9x)
 t_Open9xTimerData_v201::operator TimerData ()
 {
   TimerData c9x;
-  c9x.mode = mode;
+  if (mode > TMRMODE_THR_REL)
+    c9x.mode = TimerMode(mode+1);
+  else if (mode < -TMRMODE_THR_REL)
+    c9x.mode = TimerMode(mode-1);
+  else
+    c9x.mode = TimerMode(mode);
   c9x.val = val;
   c9x.persistent = persistent;
   c9x.dir = dir;
   return c9x;
 }
 
-t_Open9xTimerData_v201::t_Open9xTimerData_v201(TimerData &c9x)
+t_Open9xTimerData_v202::operator TimerData ()
 {
-  mode = c9x.mode;
-  val = c9x.val;
-  persistent = c9x.persistent;
-  dir = c9x.dir;
+  TimerData c9x;
+  if (mode < 0)
+    c9x.mode = TimerMode(mode-1-TMR_VAROFS);
+  else if (mode <= 1)
+    c9x.mode = TimerMode(mode);
+  else if (mode <= 4)
+    c9x.mode = TimerMode(TMRMODE_THR+mode-2);
+  else
+    c9x.mode = TimerMode(TMR_VAROFS+mode-5);
+  c9x.val = val;
+  c9x.persistent = false;
+  c9x.dir = (val == 0);
+  return c9x;
 }
 
+t_Open9xTimerData_v202::t_Open9xTimerData_v202(TimerData &c9x)
+{
+  if (abs(c9x.mode) == TMRMODE_ABS)
+    mode = 1;
+  else if (c9x.mode >= TMRMODE_THR && c9x.mode <= TMRMODE_THR_TRG)
+    mode = 2+c9x.mode-TMRMODE_THR;
+  else if (c9x.mode >= TMR_VAROFS)
+    mode = 5+c9x.mode-TMR_VAROFS;
+  else if (c9x.mode <= -TMR_VAROFS)
+    mode = c9x.mode+TMR_VAROFS-1;
+  else
+    mode = 0;
+  val = c9x.val;
+}
 
 t_Open9xFrSkyChannelData::t_Open9xFrSkyChannelData()
 {
@@ -482,7 +510,61 @@ t_Open9xModelData_v201::operator ModelData ()
   return c9x;
 }
 
-t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &c9x)
+t_Open9xModelData_v202::operator ModelData ()
+{
+  ModelData c9x;
+  c9x.used = true;
+  getEEPROMZString(c9x.name, name, sizeof(name));
+  c9x.timers[0] = timer1;
+  c9x.timers[1] = timer2;
+  c9x.protocol = (Protocol)protocol;
+  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.thrTrim = thrTrim;
+  c9x.thrExpo = thrExpo;
+  c9x.trimInc = trimInc;
+  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.beepANACenter = beepANACenter;
+  c9x.pulsePol = pulsePol;
+  c9x.extendedLimits = extendedLimits;
+  c9x.extendedTrims = extendedTrims;
+  for (int i=0; i<MAX_PHASES; i++) {
+    c9x.phaseData[i] = phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (c9x.phaseData[i].trim[j] > 500) {
+        c9x.phaseData[i].trimRef[j] = c9x.phaseData[i].trim[j] - 501;
+        if (c9x.phaseData[i].trimRef[j] >= i)
+          c9x.phaseData[i].trimRef[j] += 1;
+        c9x.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<MAX_MIXERS; i++)
+    c9x.mixData[i] = mixData[i];
+  for (int i=0; i<NUM_CHNOUT; i++)
+    c9x.limitData[i] = limitData[i];
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
+    c9x.expoData[i] = expoData[i];
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      c9x.curves5[i][j] = curves5[i][j];
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      c9x.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];
+  for (int i=0; i<NUM_FSW; i++)
+    c9x.funcSw[i] = funcSw[i];
+  for (int i=0; i<NUM_CHNOUT; i++)
+    c9x.safetySw[i] = safetySw[i];
+  c9x.swashRingData = swashR;
+  c9x.frsky = frsky;
+  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.thrTraceSrc = thrTraceSrc;
+
+  return c9x;
+}
+
+t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
 {
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
@@ -532,9 +614,11 @@ t_Open9xModelData_v201::t_Open9xModelData_v201(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
+    ppmFrameLength = c9x.ppmFrameLength;
+    thrTraceSrc = c9x.thrTraceSrc;
   }
   else {
-    memset(this, 0, sizeof(t_Open9xModelData_v201));
+    memset(this, 0, sizeof(t_Open9xModelData_v202));
   }
 }
 

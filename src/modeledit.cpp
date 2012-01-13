@@ -1524,7 +1524,7 @@ void ModelEdit::on_phase4FadeOut_valueChanged(int value) { on_phaseFadeOut_value
 
 void ModelEdit::on_timer1ModeCB_currentIndexChanged(int index)
 {
-    g_model.timers[0].mode = index-TMR_NUM_OPTION;
+    g_model.timers[0].mode = TimerMode(index-TMR_NUM_OPTION);
     updateSettings();
 }
 
@@ -1542,7 +1542,7 @@ void ModelEdit::on_timer1ValTE_editingFinished()
 
 void ModelEdit::on_timer2ModeCB_currentIndexChanged(int index)
 {
-    g_model.timers[1].mode = index-TMR_NUM_OPTION;
+    g_model.timers[1].mode = TimerMode(index-TMR_NUM_OPTION);
     updateSettings();
 }
 
