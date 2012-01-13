@@ -3463,7 +3463,7 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="133"/>
         <source>gruvin9x stable for v4 board</source>
-        <translation type="unfinished"></translation>
+        <translation>gruvin9x stable pour carte v4</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="134"/>
@@ -3923,12 +3923,12 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
     <message>
         <location filename="customizesplashdialog.ui" line="173"/>
         <source>Load Firmware</source>
-        <translation type="unfinished">Charger le firmware</translation>
+        <translation>Charger le firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="183"/>
         <source>Load Image</source>
-        <translation type="unfinished">Charger une image</translation>
+        <translation>Charger une image</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="193"/>
@@ -3981,17 +3981,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="customizesplashdialog.cpp" line="60"/>
         <source>Open Image to load</source>
-        <translation type="unfinished">Ouvre l&apos;image à charger</translation>
+        <translation>Ouvre l&apos;image à charger</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="60"/>
         <source>Images (%1)</source>
-        <translation type="unfinished">Images (%1)</translation>
+        <translation>Images (%1)</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="65"/>
         <source>Cannot load %1.</source>
-        <translation type="unfinished">Impossible de charger %1.</translation>
+        <translation>Impossible de charger %1.</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="71"/>
@@ -4002,7 +4002,7 @@ p, li { white-space: pre-wrap; }
         <location filename="customizesplashdialog.cpp" line="79"/>
         <location filename="customizesplashdialog.cpp" line="112"/>
         <source>Write to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrire vers le fichier</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="85"/>
@@ -4012,17 +4012,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="customizesplashdialog.cpp" line="93"/>
         <source>Firmware correctly saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware entregistré.</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="97"/>
         <source>Firmware not saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware non enregistré.</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.cpp" line="112"/>
         <source>PNG images (*.png);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Images PNG (*.png);;</translation>
     </message>
 </context>
 <context>
