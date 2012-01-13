@@ -9,6 +9,7 @@ customizeSplashDialog::customizeSplashDialog(QWidget *parent) :
 QDialog(parent),
 ui(new Ui::customizeSplashDialog) {
   ui->setupUi(this);
+  ui->HowToLabel->clear();
   ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
 }
 
