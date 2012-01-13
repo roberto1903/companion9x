@@ -83,11 +83,7 @@ int main(int argc, char *argv[])
     if(showSplash)
     {
         splash->show();
-        bool checkCompanion9x  = settings.value("startup_check_companion9x", true).toBool();
-        if (checkCompanion9x)
-            splash->showMessage(QObject::tr("Checking for updates..."));
-        else
-            splash->showMessage(QObject::tr("Starting..."));
+        splash->showMessage(QObject::tr(""));
         sleep(SPLASH_TIME);
     }
     MainWindow mainWin;
