@@ -1,247 +1,127 @@
-### Eclipse Workspace Patch 1.0
-#P companion9x
-Index: th9x/simpgmspace.h
+Index: th9x/file.cpp
 ===================================================================
---- th9x/simpgmspace.h	(revision 268)
-+++ th9x/simpgmspace.h	(working copy)
-@@ -12,9 +12,48 @@
+--- th9x/file.cpp	(revision 269)
++++ th9x/file.cpp	(working copy)
+@@ -37,19 +37,19 @@
+ #define BLOCKS   (EESIZE/BS)
  
-  */
+ #define EEFS_VERS 4
+-struct DirEnt{
++PACK(struct DirEnt{
+   uint8_t  startBlk;
+   uint16_t size:12;
+   uint16_t typ:4;
+-}__attribute__((packed));
++});
+ #define MAXFILES (1+MAX_MODELS+3)
+-struct EeFs{
++PACK(struct EeFs{
+   uint8_t  version;
+   uint8_t  mySize;
+   uint8_t  freeList;
+   uint8_t  bs;
+   DirEnt   files[MAXFILES]; //20*3
+-}__attribute__((packed)) eeFs; //64
++}) eeFs; //64
  
-+#ifndef simpgmspace_h
-+#define simpgmspace_h
-+
-+#ifdef SIMU_EXCEPTIONS
-+extern char * main_thread_error;
-+#include <stdlib.h>
-+#include <stdio.h>
-+#include <signal.h>
-+#if defined(WIN32) || !defined(__GNUC__)
-+#define write_backtrace(output)
-+#else
-+#include <execinfo.h>
-+#include <string.h>
-+inline void write_backtrace(char *output)
-+{
-+
-+  void *buf[16];
-+  char **s;
-+  int n = backtrace(buf,16);
-+  s = backtrace_symbols(buf, n);
-+  if (s) {
-+    for(int i=0; i<n; i++)
-+      sprintf(output+strlen(output), "%02i: %s\n",i,s[i]);
-+  }
-+}
-+#endif
-+void sig(int sgn)
-+{
-+  main_thread_error = (char *)malloc(2048);
-+  sprintf(main_thread_error,"Signal %d caught\n", sgn);
-+  write_backtrace(main_thread_error);
-+  throw std::exception();
-+}
-+#define assert(x) do { if (!(x)) { main_thread_error = (char *)malloc(2048); sprintf(main_thread_error, "Assert failed, %s:%d: %s\n", __FILE__, __LINE__, #x); write_backtrace(main_thread_error); throw std::exception(); } } while(0)
-+#else
- #include <assert.h>
-+#endif
-+
- #include <inttypes.h>
- #include <stdio.h>
-+#include <pthread.h>
-+#include <semaphore.h>
  
- typedef unsigned char prog_uchar;
- typedef const char prog_char;
-@@ -53,7 +92,8 @@
- #define PING  ~ping
- #define EEMEM
- 
--extern volatile unsigned char pinb,portb,pinc,pind,pine,ping;
-+extern volatile unsigned char pinb,pinc,pind,pine,ping;
-+extern uint8_t portb;
- extern unsigned char dummyport;
- //extern uint16_t anaIn(uint8_t chan);
- //void eeprom_write_block (const void *pointer_ram,
-@@ -62,5 +102,8 @@
- void eeprom_read_block (void *pointer_ram,
-                    const void *pointer_eeprom,
-                         size_t size);
-+#undef offsetof
- #define offsetof(st, m) ((size_t) ( (char *)&((st *)(0))->m - (char *)0 ))
- #define wdt_reset()
-+
-+#endif
-Index: th9x/pers.cpp
-===================================================================
---- th9x/pers.cpp	(revision 268)
-+++ th9x/pers.cpp	(working copy)
-@@ -223,7 +223,7 @@
- void modelDefault(uint8_t id)
- {
-   memset(&g_model,0,sizeof(g_model));
--  strcpy_P(g_model.name,PSTR("MODEL     "));
-+  memcpy(g_model.name,PSTR("MODEL     "), 10);
-   g_model.name[5]='0'+(id+1)/10;
-   g_model.name[6]='0'+(id+1)%10;
-   g_model.mdVers = 0; //MDVERS143;
-@@ -499,7 +499,7 @@
-     {   
-       EFile::swap(FILE_GENERAL,FILE_TMP);
-     }else{
--      if(theFile.errno()==ERR_TMO){
-+      if(theFile.write_errno()==ERR_TMO){
-         s_eeDirtyMsk |= EE_GENERAL; //try again
-         s_eeDirtyTime10ms = g_tmr10ms - WRITE_DELAY_10MS;
-         printf("writing aborted GENERAL\n");
-@@ -517,7 +517,7 @@
-     {
-       EFile::swap(FILE_MODEL(g_eeGeneral.currModel),FILE_TMP);
-     }else{
--      if(theFile.errno()==ERR_TMO){
-+      if(theFile.write_errno()==ERR_TMO){
-         s_eeDirtyMsk |= EE_MODEL; //try again
-         s_eeDirtyTime10ms = g_tmr10ms - WRITE_DELAY_10MS;
-         printf("writing aborted MODEL\n");
-Index: th9x/simu.cpp
-===================================================================
---- th9x/simu.cpp	(revision 268)
-+++ th9x/simu.cpp	(working copy)
-@@ -23,93 +23,6 @@
- #include <time.h>
- #include <ctype.h>
- 
--
--volatile unsigned char pinb,portb,pinc,pind,pine,ping;
--unsigned char dummyport;
--char g_title[80];
--const char *eepromFile = "eeprom.bin";
--
--extern unsigned char displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W];
--
--void lcd_img_f(int ofs,unsigned char x,unsigned char y,int i_w,int i_h)
--{
--  
--  prog_uchar  buf[1000];
--  FILE *fp=fopen("../th9x-orig/flash.bin", "r");
--  fseek(fp,ofs,SEEK_SET);
--  fread(buf,1,i_h/8*i_w,fp);
--  fclose(fp);
--  prog_uchar  *q = buf;//+0x10e*3+0x10;
--  int h=i_h;
--  while(h>0){
--    int w=i_w;
--    unsigned char *p = &displayBuf[ y / 8 * DISPLAY_W + x ];
--    while(w>0){
--      *p = pgm_read_byte(q); p++; q++;
--      w--;
--    }
--    h-=8;
--    y+=8;
--  }
--}
--
--
--FILE *fp = 0;
--
--void eeWriteBlockCmp(const void *i_pointer_ram, void *pointer_eeprom, size_t size)
--{
--  if(!fp) fp = fopen(eepromFile, "r+");
--  long ofs = (long) pointer_eeprom;
--  const char* pointer_ram= (const char*)i_pointer_ram;
--  //printf("eeWr p=%10p blk%3d ofs=%2d l=%d",pointer_ram,
--  //       (int)pointer_eeprom/16,
--  //       (int)pointer_eeprom%16,
--  //       (int)size);
--  while(size){
--    if(fseek(fp, ofs , SEEK_SET)==-1) perror("error in seek");
--    char buf[1];
--    fread(buf, 1, 1,fp);
--
--    if(buf[0] !=  pointer_ram[0]){
--      //printf("X");
--      g_tmr10ms++;
--      if(fseek(fp, ofs , SEEK_SET)==-1) perror("error in seek");
--      fwrite(pointer_ram, 1, 1,fp);
--    }else{
--      //printf(".");
--    }
--
--    size--;
--    ofs++;
--    (const char*)pointer_ram++;
--  }
--  //fclose(fp);
--  //puts("");
--}
--void eeprom_write_blockxx (const void *pointer_ram,
--                    void *pointer_eeprom,
--                    size_t size)
--{
--  printf("eeprom_write_block p=%p ofs=%d l=%2d\n",pointer_ram,(int)pointer_eeprom,(int)size);
--  //  FILE *fp=fopen(eepromFile, "r+");
--  if(!fp) fp = fopen(eepromFile, "r+");
--  if(fseek(fp, (long) pointer_eeprom, SEEK_SET)==-1) perror("error in seek");
--  fwrite(pointer_ram, size, 1,fp);
--  //fclose(fp);
--}
--
--void eeprom_read_block (void *pointer_ram,
--                   const void *pointer_eeprom,
--                   size_t size)
--{
--  //FILE *fp=fopen(eepromFile, "r");
--  if(!fp) fp = fopen(eepromFile, "r+");
--  if(fseek(fp, (long) pointer_eeprom, SEEK_SET)==-1) perror("error in seek");
--  fread(pointer_ram, size, 1, fp);
--  //fclose(fp);
--}
--
--
- #define W  DISPLAY_W
- #define H  DISPLAY_H
- #define W2 W*2
-@@ -448,10 +361,7 @@
- 
- int main(int argc,char **argv)
- {
--  
--  if(argc>=2){
--    eepromFile = argv[1];
--  }
-+  eepromFile = (argc>=2 ? argv[1] : "eeprom.bin");
-   printf("eeprom = %s\n",eepromFile);
- 
-   pine = 0xff & ~(1<<INP_E_ID2);// & ~(1<<INP_E_ElevDR);
-Index: th9x/pulses.cpp
-===================================================================
---- th9x/pulses.cpp	(revision 268)
-+++ th9x/pulses.cpp	(working copy)
-@@ -215,9 +215,7 @@
- #define BITS  10
- #define BITS2 (BITS-1)
- 
--uint8_t reduce7u(int16_t v, uint8_t sfr)
--__attribute__ ((noinline)); 
--uint8_t reduce7u(int16_t v, uint8_t sfr)
-+NOINLINE uint8_t reduce7u(int16_t v, uint8_t sfr)
- {
-   v += (1<<BITS2);
-   if(v <  0) v=0;
-@@ -225,9 +223,7 @@
-   return v>>sfr;
+ static uint8_t EeFsRead(uint8_t blk,uint8_t ofs){
+@@ -154,10 +154,6 @@
  }
- 
--int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
--__attribute__ ((noinline)); 
--int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
-+NOINLINE int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
+ void EeFsFormat()
  {
-   v += (1<<BITS2)+sf2;
-   if(v&(1<<BITS)) v = (1<<BITS)-1; //no overflow
+-  if(sizeof(eeFs) != RESV){
+-    extern void eeprom_RESV_mismatch();
+-    eeprom_RESV_mismatch();
+-  }
+   memset(&eeFs,0, sizeof(eeFs));
+   eeFs.version  = EEFS_VERS;
+   eeFs.mySize   = sizeof(eeFs);
+Index: th9x/file.h
+===================================================================
+--- th9x/file.h	(revision 269)
++++ th9x/file.h	(working copy)
+@@ -80,7 +80,7 @@
+     return readRlc12(buf,i_len,true);
+   }
+   ///deliver current errno, this is reset in open
+-  uint8_t errno(){return m_err;}
++  uint8_t write_errno(){return m_err;}
+ };
+ 
+ #endif
+Index: th9x/lcd.cpp
+===================================================================
+--- th9x/lcd.cpp	(revision 269)
++++ th9x/lcd.cpp	(working copy)
+@@ -18,7 +18,9 @@
+ 
+ 
+ #ifdef SIM
+-uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W]; 
++uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W];
++bool lcd_refresh = true;
++uint8_t lcd_buf[DISPLAY_W*DISPLAY_H/8];
+ #else
+ uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8]; 
+ #endif
+@@ -63,7 +65,7 @@
+ {
+   uint8_t   *p  = &displayBuf[ y / 8 * DISPLAY_W + x ];
+   bool     inv  = (mode & INVERS) ? true : (mode & BLINK ? BLINK_ON_PHASE : false);
+-  uint8_t     i = min(DISPLAY_END-p,(int)w);
++  uint8_t     i = min((int)(DISPLAY_END-p),(int)w);
+   if(inv)  for(; i!=0; i--){
+     assert(p<DISPLAY_END);
+     *p++ ^= 0xff;
+@@ -121,7 +123,7 @@
+       }
+     }
+   }else{
+-    uint8_t i = min(DISPLAY_END-p,5);
++    uint8_t i = min((int)(DISPLAY_END-p),(int)5);
+     if(inv) for(; i!=0; i--) *p++ = ~pgm_read_byte(q++);
+     else    for(; i!=0; i--) *p++ =  pgm_read_byte(q++);
+     if(p<DISPLAY_END) *p++ = inv ? ~0 : 0;
+@@ -389,6 +391,10 @@
+ 
+ void refreshDiplay()
+ {
++#ifdef SIM
++  memcpy(lcd_buf, displayBuf, sizeof(lcd_buf));
++  lcd_refresh = true;
++#else
+   uint8_t *p=displayBuf; 
+   for(uint8_t y=0; y < 8; y++) {
+     lcdSendCtl(0x04);
+@@ -399,4 +405,5 @@
+       p++;
+     }
+   }
++#endif
+ }
+Index: th9x/menus.cpp
+===================================================================
+--- th9x/menus.cpp	(revision 269)
++++ th9x/menus.cpp	(working copy)
+@@ -2613,11 +2613,14 @@
+   for(uint8_t iHw=0;iHw<7;iHw++){        // calc Sticks
+     int16_t v= anaIn(iHw);
+     g_sumAna += (uint8_t)v;
++
++#ifndef SIM
+     v -= g_eeGeneral.calibMid[iHw];
+     v  =  v * (int32_t)RESX /  (max((int16_t)100,
+                                     (v>0 ? 
+                                      g_eeGeneral.calibSpanPos[iHw] : 
+                                      g_eeGeneral.calibSpanNeg[iHw])));
++#endif
+ 
+     if(v <= -RESX) v = -RESX;
+     if(v >=  RESX) v =  RESX;
 Index: th9x/myeeprom.h
 ===================================================================
---- th9x/myeeprom.h	(revision 268)
+--- th9x/myeeprom.h	(revision 269)
 +++ th9x/myeeprom.h	(working copy)
 @@ -22,27 +22,29 @@
  #define MAX_SWITCHES 16
@@ -369,7 +249,7 @@ Index: th9x/myeeprom.h
  #define EEGeneral_TOP EEGeneral_r192
  #define GENVERS_TOP GENVERS192
  
-@@ -153,22 +155,22 @@
+@@ -153,20 +155,20 @@
  /////////////////////////////////////////////////////////////////////////////
  
  
@@ -392,12 +272,18 @@ Index: th9x/myeeprom.h
 -} __attribute__((packed)) ExpoData_r84; //5*4=20
 +}) ExpoData_r84; //5*4=20
  
+ 
+ #define EM_POS      1
+@@ -174,7 +176,7 @@
+ #define EM_BOTH     3
+ #define EM_TRIM_INV 4
+ #define EM_ALT_TRIM 5
 -typedef struct t_ExpoData_r171 {
 +PACK(typedef struct t_ExpoData_r171 {
    int8_t  exp5:5;
-   uint8_t mode3:3; //0=end 1=pos 2=neg 3=both 4=trimNeg
+   uint8_t mode3:3; //0=end 1=pos 2=neg 3=both 4=trimNeg 5=alt trim
  
-@@ -177,36 +179,36 @@
+@@ -183,36 +185,36 @@
  
    int8_t  drSw:5;
    uint8_t curve:3; //
@@ -444,7 +330,7 @@ Index: th9x/myeeprom.h
    uint8_t destCh:4; //0=end   1..NUM_CHNOUT,X1-X4
    uint8_t srcRaw:4; //0=off   S1-4,P1-3,max,ful ,X1-X4
    int8_t  weight;
-@@ -214,7 +216,7 @@
+@@ -220,7 +222,7 @@
    uint8_t curve:3; //0=off 1..7=cv1..7
    uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
    uint8_t speedDown:4;      // 0 nichts
@@ -453,7 +339,7 @@ Index: th9x/myeeprom.h
  //more data:
  // destCh 12 -> 16                                     4+1?
  // srcRaw 14 -> S1-4,P1-3,ful,s1-4,p1-3,max,ch1-16 32  4+1
-@@ -224,7 +226,7 @@
+@@ -230,7 +232,7 @@
  // sw-mode -100,0,disable                              0+2
  // mix-mode + * = 1?                                    0+2
  //
@@ -462,7 +348,7 @@ Index: th9x/myeeprom.h
    uint8_t destCh:4;    // 1..NUM_CHNOUT,X1-X4
    uint8_t mixMode:2;   // + * =
    uint8_t dmy1:2;   //
-@@ -240,12 +242,12 @@
+@@ -246,12 +248,12 @@
  
    uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
    uint8_t speedDown:4;      // 0 nichts
@@ -477,7 +363,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode;              // 1
-@@ -258,10 +260,10 @@
+@@ -264,10 +266,10 @@
    int8_t    curves5[2][5];        // 10
    int8_t    curves9[2][9];        // 18
    TrimData_r0  trimData[4];          // 3*4
@@ -490,7 +376,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode;              // 1
-@@ -275,10 +277,10 @@
+@@ -281,10 +283,10 @@
    int8_t    curves5[2][5];        // 10
    int8_t    curves9[2][9];        // 18
    TrimData_r143  trimData[4];    // 3*4 -> 1*4
@@ -503,7 +389,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode;              // 1
-@@ -292,10 +294,10 @@
+@@ -298,10 +300,10 @@
    int8_t    curves5[2][5];        // 10
    int8_t    curves9[2][9];        // 18
    TrimData_r143  trimData[4];    // 3*4 -> 1*4
@@ -516,7 +402,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode;              // 1
-@@ -309,10 +311,10 @@
+@@ -315,10 +317,10 @@
    int8_t    curves5[2][5];        // 10
    int8_t    curves9[2][9];        // 18
    TrimData_r143  trimData[4];    // 3*4 -> 1*4
@@ -529,7 +415,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode;              // 1
-@@ -326,10 +328,10 @@
+@@ -332,10 +334,10 @@
    int8_t    curves5[2][5];        // 10
    int8_t    curves9[2][9];        // 18
    TrimData_r143  trimData[4];    // 3*4 -> 1*4
@@ -542,7 +428,7 @@ Index: th9x/myeeprom.h
    char      name[10];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;               // 1
    uint8_t   tmrMode:3;            // 1
-@@ -346,7 +348,7 @@
+@@ -352,7 +354,7 @@
    int8_t    curves9[2][9];        // 18
    SwitchData_r204 switchTab[MAX_SWITCHES];//
    TrimData_r143   trimData[4];    // 3*4 -> 1*4
@@ -551,108 +437,63 @@ Index: th9x/myeeprom.h
  #define MDVERS_TOP    MDVERS204
  #define ModelData_TOP ModelData_r204
  
-Index: th9x/lcd.cpp
+Index: th9x/pers.cpp
 ===================================================================
---- th9x/lcd.cpp	(revision 268)
-+++ th9x/lcd.cpp	(working copy)
-@@ -18,7 +18,9 @@
- 
- 
- #ifdef SIM
--uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W]; 
-+uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W];
-+bool lcd_refresh = true;
-+uint8_t lcd_buf[DISPLAY_W*DISPLAY_H/8];
- #else
- uint8_t displayBuf[DISPLAY_W*DISPLAY_H/8]; 
- #endif
-@@ -63,7 +65,7 @@
+--- th9x/pers.cpp	(revision 269)
++++ th9x/pers.cpp	(working copy)
+@@ -224,7 +224,7 @@
+ void modelDefault(uint8_t id)
  {
-   uint8_t   *p  = &displayBuf[ y / 8 * DISPLAY_W + x ];
-   bool     inv  = (mode & INVERS) ? true : (mode & BLINK ? BLINK_ON_PHASE : false);
--  uint8_t     i = min(DISPLAY_END-p,(int)w);
-+  uint8_t     i = min((int)(DISPLAY_END-p),(int)w);
-   if(inv)  for(; i!=0; i--){
-     assert(p<DISPLAY_END);
-     *p++ ^= 0xff;
-@@ -121,7 +123,7 @@
-       }
-     }
-   }else{
--    uint8_t i = min(DISPLAY_END-p,5);
-+    uint8_t i = min((int)(DISPLAY_END-p),(int)5);
-     if(inv) for(; i!=0; i--) *p++ = ~pgm_read_byte(q++);
-     else    for(; i!=0; i--) *p++ =  pgm_read_byte(q++);
-     if(p<DISPLAY_END) *p++ = inv ? ~0 : 0;
-@@ -389,6 +391,10 @@
+   memset(&g_model,0,sizeof(g_model));
+-  strcpy_P(g_model.name,PSTR("MODEL     "));
++  memcpy(g_model.name,PSTR("MODEL     "), 10);
+   g_model.name[5]='0'+(id+1)/10;
+   g_model.name[6]='0'+(id+1)%10;
+   g_model.mdVers = 0; //MDVERS143;
+@@ -500,7 +500,7 @@
+     {   
+       EFile::swap(FILE_GENERAL,FILE_TMP);
+     }else{
+-      if(theFile.errno()==ERR_TMO){
++      if(theFile.write_errno()==ERR_TMO){
+         s_eeDirtyMsk |= EE_GENERAL; //try again
+         s_eeDirtyTime10ms = g_tmr10ms - WRITE_DELAY_10MS;
+         printf("writing aborted GENERAL\n");
+@@ -518,7 +518,7 @@
+     {
+       EFile::swap(FILE_MODEL(g_eeGeneral.currModel),FILE_TMP);
+     }else{
+-      if(theFile.errno()==ERR_TMO){
++      if(theFile.write_errno()==ERR_TMO){
+         s_eeDirtyMsk |= EE_MODEL; //try again
+         s_eeDirtyTime10ms = g_tmr10ms - WRITE_DELAY_10MS;
+         printf("writing aborted MODEL\n");
+Index: th9x/pulses.cpp
+===================================================================
+--- th9x/pulses.cpp	(revision 269)
++++ th9x/pulses.cpp	(working copy)
+@@ -215,9 +215,7 @@
+ #define BITS  10
+ #define BITS2 (BITS-1)
  
- void refreshDiplay()
+-uint8_t reduce7u(int16_t v, uint8_t sfr)
+-__attribute__ ((noinline)); 
+-uint8_t reduce7u(int16_t v, uint8_t sfr)
++NOINLINE uint8_t reduce7u(int16_t v, uint8_t sfr)
  {
-+#ifdef SIM
-+  memcpy(lcd_buf, displayBuf, sizeof(lcd_buf));
-+  lcd_refresh = true;
-+#else
-   uint8_t *p=displayBuf; 
-   for(uint8_t y=0; y < 8; y++) {
-     lcdSendCtl(0x04);
-@@ -399,4 +405,5 @@
-       p++;
-     }
-   }
-+#endif
+   v += (1<<BITS2);
+   if(v <  0) v=0;
+@@ -225,9 +223,7 @@
+   return v>>sfr;
  }
-Index: th9x/file.h
-===================================================================
---- th9x/file.h	(revision 268)
-+++ th9x/file.h	(working copy)
-@@ -80,7 +80,7 @@
-     return readRlc12(buf,i_len,true);
-   }
-   ///deliver current errno, this is reset in open
--  uint8_t errno(){return m_err;}
-+  uint8_t write_errno(){return m_err;}
- };
  
- #endif
-Index: th9x/file.cpp
-===================================================================
---- th9x/file.cpp	(revision 268)
-+++ th9x/file.cpp	(working copy)
-@@ -37,19 +37,19 @@
- #define BLOCKS   (EESIZE/BS)
- 
- #define EEFS_VERS 4
--struct DirEnt{
-+PACK(struct DirEnt{
-   uint8_t  startBlk;
-   uint16_t size:12;
-   uint16_t typ:4;
--}__attribute__((packed));
-+});
- #define MAXFILES (1+MAX_MODELS+3)
--struct EeFs{
-+PACK(struct EeFs{
-   uint8_t  version;
-   uint8_t  mySize;
-   uint8_t  freeList;
-   uint8_t  bs;
-   DirEnt   files[MAXFILES]; //20*3
--}__attribute__((packed)) eeFs; //64
-+}) eeFs; //64
- 
- 
- static uint8_t EeFsRead(uint8_t blk,uint8_t ofs){
-@@ -154,10 +154,6 @@
- }
- void EeFsFormat()
+-int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
+-__attribute__ ((noinline)); 
+-int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
++NOINLINE int8_t reduce7s(int16_t v, uint8_t sfr, uint8_t sf2, int8_t ofs2)
  {
--  if(sizeof(eeFs) != RESV){
--    extern void eeprom_RESV_mismatch();
--    eeprom_RESV_mismatch();
--  }
-   memset(&eeFs,0, sizeof(eeFs));
-   eeFs.version  = EEFS_VERS;
-   eeFs.mySize   = sizeof(eeFs);
+   v += (1<<BITS2)+sf2;
+   if(v&(1<<BITS)) v = (1<<BITS)-1; //no overflow
 Index: th9x/simpgmspace.cpp
 ===================================================================
 --- th9x/simpgmspace.cpp	(revision 0)
@@ -829,45 +670,193 @@ Index: th9x/simpgmspace.cpp
 +  pthread_join(main_thread_pid, NULL);
 +}
 +
-Index: th9x/menus.cpp
+Index: th9x/simpgmspace.h
 ===================================================================
---- th9x/menus.cpp	(revision 268)
-+++ th9x/menus.cpp	(working copy)
-@@ -2561,11 +2561,14 @@
-   for(uint8_t iHw=0;iHw<7;iHw++){        // calc Sticks
-     int16_t v= anaIn(iHw);
-     g_sumAna += (uint8_t)v;
-+
-+#ifndef SIM
-     v -= g_eeGeneral.calibMid[iHw];
-     v  =  v * (int32_t)RESX /  (max((int16_t)100,
-                                     (v>0 ? 
-                                      g_eeGeneral.calibSpanPos[iHw] : 
-                                      g_eeGeneral.calibSpanNeg[iHw])));
-+#endif
+--- th9x/simpgmspace.h	(revision 269)
++++ th9x/simpgmspace.h	(working copy)
+@@ -12,9 +12,48 @@
  
-     if(v <= -RESX) v = -RESX;
-     if(v >=  RESX) v =  RESX;
-Index: th9x/th9x.h
+  */
+ 
++#ifndef simpgmspace_h
++#define simpgmspace_h
++
++#ifdef SIMU_EXCEPTIONS
++extern char * main_thread_error;
++#include <stdlib.h>
++#include <stdio.h>
++#include <signal.h>
++#if defined(WIN32) || !defined(__GNUC__)
++#define write_backtrace(output)
++#else
++#include <execinfo.h>
++#include <string.h>
++inline void write_backtrace(char *output)
++{
++
++  void *buf[16];
++  char **s;
++  int n = backtrace(buf,16);
++  s = backtrace_symbols(buf, n);
++  if (s) {
++    for(int i=0; i<n; i++)
++      sprintf(output+strlen(output), "%02i: %s\n",i,s[i]);
++  }
++}
++#endif
++void sig(int sgn)
++{
++  main_thread_error = (char *)malloc(2048);
++  sprintf(main_thread_error,"Signal %d caught\n", sgn);
++  write_backtrace(main_thread_error);
++  throw std::exception();
++}
++#define assert(x) do { if (!(x)) { main_thread_error = (char *)malloc(2048); sprintf(main_thread_error, "Assert failed, %s:%d: %s\n", __FILE__, __LINE__, #x); write_backtrace(main_thread_error); throw std::exception(); } } while(0)
++#else
+ #include <assert.h>
++#endif
++
+ #include <inttypes.h>
+ #include <stdio.h>
++#include <pthread.h>
++#include <semaphore.h>
+ 
+ typedef unsigned char prog_uchar;
+ typedef const char prog_char;
+@@ -53,7 +92,8 @@
+ #define PING  ~ping
+ #define EEMEM
+ 
+-extern volatile unsigned char pinb,portb,pinc,pind,pine,ping;
++extern volatile unsigned char pinb,pinc,pind,pine,ping;
++extern uint8_t portb;
+ extern unsigned char dummyport;
+ //extern uint16_t anaIn(uint8_t chan);
+ //void eeprom_write_block (const void *pointer_ram,
+@@ -62,5 +102,8 @@
+ void eeprom_read_block (void *pointer_ram,
+                    const void *pointer_eeprom,
+                         size_t size);
++#undef offsetof
+ #define offsetof(st, m) ((size_t) ( (char *)&((st *)(0))->m - (char *)0 ))
+ #define wdt_reset()
++
++#endif
+Index: th9x/simu.cpp
 ===================================================================
---- th9x/th9x.h	(revision 268)
-+++ th9x/th9x.h	(working copy)
-@@ -441,6 +441,10 @@
- /// liefert Dimension eines Arrays
- #define DIM(arr) (sizeof((arr))/sizeof((arr)[0]))
+--- th9x/simu.cpp	(revision 269)
++++ th9x/simu.cpp	(working copy)
+@@ -23,93 +23,6 @@
+ #include <time.h>
+ #include <ctype.h>
  
-+#ifndef NOINLINE
-+#define NOINLINE __attribute__ ((noinline))
-+#endif
-+
- /// liefert Betrag des Arguments
- template<class t> inline t abs(t a){ return a >  0 ? a : (t)-a; }
- /// liefert das Minimum der Argumente
+-
+-volatile unsigned char pinb,portb,pinc,pind,pine,ping;
+-unsigned char dummyport;
+-char g_title[80];
+-const char *eepromFile = "eeprom.bin";
+-
+-extern unsigned char displayBuf[DISPLAY_W*DISPLAY_H/8+DISPLAY_W];
+-
+-void lcd_img_f(int ofs,unsigned char x,unsigned char y,int i_w,int i_h)
+-{
+-  
+-  prog_uchar  buf[1000];
+-  FILE *fp=fopen("../th9x-orig/flash.bin", "r");
+-  fseek(fp,ofs,SEEK_SET);
+-  fread(buf,1,i_h/8*i_w,fp);
+-  fclose(fp);
+-  prog_uchar  *q = buf;//+0x10e*3+0x10;
+-  int h=i_h;
+-  while(h>0){
+-    int w=i_w;
+-    unsigned char *p = &displayBuf[ y / 8 * DISPLAY_W + x ];
+-    while(w>0){
+-      *p = pgm_read_byte(q); p++; q++;
+-      w--;
+-    }
+-    h-=8;
+-    y+=8;
+-  }
+-}
+-
+-
+-FILE *fp = 0;
+-
+-void eeWriteBlockCmp(const void *i_pointer_ram, void *pointer_eeprom, size_t size)
+-{
+-  if(!fp) fp = fopen(eepromFile, "r+");
+-  long ofs = (long) pointer_eeprom;
+-  const char* pointer_ram= (const char*)i_pointer_ram;
+-  //printf("eeWr p=%10p blk%3d ofs=%2d l=%d",pointer_ram,
+-  //       (int)pointer_eeprom/16,
+-  //       (int)pointer_eeprom%16,
+-  //       (int)size);
+-  while(size){
+-    if(fseek(fp, ofs , SEEK_SET)==-1) perror("error in seek");
+-    char buf[1];
+-    fread(buf, 1, 1,fp);
+-
+-    if(buf[0] !=  pointer_ram[0]){
+-      //printf("X");
+-      g_tmr10ms++;
+-      if(fseek(fp, ofs , SEEK_SET)==-1) perror("error in seek");
+-      fwrite(pointer_ram, 1, 1,fp);
+-    }else{
+-      //printf(".");
+-    }
+-
+-    size--;
+-    ofs++;
+-    (const char*)pointer_ram++;
+-  }
+-  //fclose(fp);
+-  //puts("");
+-}
+-void eeprom_write_blockxx (const void *pointer_ram,
+-                    void *pointer_eeprom,
+-                    size_t size)
+-{
+-  printf("eeprom_write_block p=%p ofs=%d l=%2d\n",pointer_ram,(int)pointer_eeprom,(int)size);
+-  //  FILE *fp=fopen(eepromFile, "r+");
+-  if(!fp) fp = fopen(eepromFile, "r+");
+-  if(fseek(fp, (long) pointer_eeprom, SEEK_SET)==-1) perror("error in seek");
+-  fwrite(pointer_ram, size, 1,fp);
+-  //fclose(fp);
+-}
+-
+-void eeprom_read_block (void *pointer_ram,
+-                   const void *pointer_eeprom,
+-                   size_t size)
+-{
+-  //FILE *fp=fopen(eepromFile, "r");
+-  if(!fp) fp = fopen(eepromFile, "r+");
+-  if(fseek(fp, (long) pointer_eeprom, SEEK_SET)==-1) perror("error in seek");
+-  fread(pointer_ram, size, 1, fp);
+-  //fclose(fp);
+-}
+-
+-
+ #define W  DISPLAY_W
+ #define H  DISPLAY_H
+ #define W2 W*2
+@@ -448,10 +361,7 @@
+ 
+ int main(int argc,char **argv)
+ {
+-  
+-  if(argc>=2){
+-    eepromFile = argv[1];
+-  }
++  eepromFile = (argc>=2 ? argv[1] : "eeprom.bin");
+   printf("eeprom = %s\n",eepromFile);
+ 
+   pine = 0xff & ~(1<<INP_E_ID2);// & ~(1<<INP_E_ElevDR);
 Index: th9x/th9x.cpp
 ===================================================================
---- th9x/th9x.cpp	(revision 268)
+--- th9x/th9x.cpp	(revision 269)
 +++ th9x/th9x.cpp	(working copy)
-@@ -518,10 +518,12 @@
+@@ -522,10 +522,12 @@
      perChecks(); //check light switch in timerint, issue 51
  
      if(IS_KEY_BREAK(getEvent()))   return false;  //wait for key release
@@ -881,3 +870,18 @@ Index: th9x/th9x.cpp
    } while(! (mode&1));
    return true;
  }
+Index: th9x/th9x.h
+===================================================================
+--- th9x/th9x.h	(revision 269)
++++ th9x/th9x.h	(working copy)
+@@ -441,6 +441,10 @@
+ /// liefert Dimension eines Arrays
+ #define DIM(arr) (sizeof((arr))/sizeof((arr)[0]))
+ 
++#ifndef NOINLINE
++#define NOINLINE __attribute__ ((noinline))
++#endif
++
+ /// liefert Betrag des Arguments
+ template<class t> inline t abs(t a){ return a >  0 ? a : (t)-a; }
+ /// liefert das Minimum der Argumente
