@@ -43,15 +43,20 @@ struct TxInputs {
     bool re1;
 };
 
-struct TxOutputs {
-  int16_t chans[NUM_CHNOUT];
-  bool vsw[12];
-  unsigned int beep;
+class TxOutputs {
+  public:
+    TxOutputs() {
+      memset(this, 0, sizeof(TxOutputs));
+    }
+
+    int16_t chans[NUM_CHNOUT];
+    bool vsw[12];
+    unsigned int beep;
 };
 
 struct Trims {
-  int16_t values[4];
-  bool extended;
+    int16_t values[4];
+    bool extended;
 };
 
 class SimulatorInterface {
