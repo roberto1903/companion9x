@@ -35,7 +35,7 @@ private:
     int backLight;
     bool lightOn;
     
-    quint16 s_timeCumTot;
+    /* quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
     quint16 s_timeCumSw;
     quint16 s_timeCumThr;
@@ -47,7 +47,7 @@ private:
     quint16 s_time;
     quint16 s_cnt;
     quint16 s_sum;
-    quint8  sw_toggled;
+    quint8  sw_toggled; */
 
     EEPROMInterface *txInterface;
     SimulatorInterface *simulator;
@@ -61,14 +61,11 @@ private:
     void getValues();
     void setValues();
     void centerSticks();
-    void timerTick();
+    // void timerTick();
 
     bool keyState(EnumKeys key);
     int getValue(qint8 i);
     bool getSwitch(int swtch, bool nc, qint8 level=0);
-    void beepWarn();
-    void beepWarn1();
-    void beepWarn2();
     void setTrims();
 
     int beepVal;

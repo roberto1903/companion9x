@@ -269,14 +269,14 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
     switch (c9x.timers[0].mode) {
-      case 1:
-      case -1:
+      case TMRMODE_ABS:
+      case -TMRMODE_ABS:
         tmrMode = 1;
         break;
-      case 6:
+      case TMRMODE_THR:
         tmrMode = 2;
         break;
-      case 7:
+      case TMRMODE_THR_REL:
         tmrMode = 3;
         break;
       default:
@@ -322,16 +322,16 @@ t_Th9xModelData::operator ModelData ()
   getEEPROMString(c9x.name, name, sizeof(name));
   switch(tmrMode) {
     case 1:
-      c9x.timers[0].mode = 1;
+      c9x.timers[0].mode = TMRMODE_ABS;
       break;
     case 2:
-      c9x.timers[0].mode = 6;
+      c9x.timers[0].mode = TMRMODE_THR;
       break;
     case 3:
-      c9x.timers[0].mode = 7;
+      c9x.timers[0].mode = TMRMODE_THR_REL;
       break;
     default:
-      c9x.timers[0].mode = 0;
+      c9x.timers[0].mode = TMRMODE_OFF;
       break;
   }
   // c9x.timers[0].dir = tmrDir;

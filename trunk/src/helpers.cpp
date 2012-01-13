@@ -78,7 +78,7 @@ void populateTimerSwitchCB(QComboBox *b, int value = 0) {
 QString getTimerMode(int tm) {
 
   QString str = SWITCHES_STR;
-  QString stt = "OFFABSRUsRU%ELsEL%THsTH%ALsAL%P1 P1%P2 P2%P3 P3%";
+  QString stt = "OFFABSRUsRU%ELsEL%THsTH%THtALsAL%P1 P1%P2 P2%P3 P3%";
 
   QString s;
   if (abs(tm) < TMR_VAROFS) {

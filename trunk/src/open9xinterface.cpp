@@ -101,25 +101,32 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 201:
       // first version
       break;
+    case 202:
+      // channel order is now always RUD - ELE - THR - AIL
+      // changes in timers
+      // ppmFrameLength added
+      // thrTraceSrc added
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
   }
 
   efile->openRd(FILE_GENERAL);
-  if (version == 201) {
-    if (!loadGeneral<Open9xGeneral_v201>(radioData.generalSettings))
+  if (1/*version == 201 || version == 202*/) {
+    if (!loadGeneral<Open9xGeneral_v201>(radioData.generalSettings)) {
+      std::cout << "ko\n";
       return false;
-  }
-  else {
-    std::cout << "ko\n";
-    return false;
+    }
   }
   
   for (int i=0; i<MAX_MODELS; i++) {
     efile->openRd(FILE_MODEL(i));
     if (version == 201) {
       loadModel<Open9xModelData_v201>(radioData.models[i], radioData.generalSettings.stickMode+1);
+    }
+    else if (version == 202) {
+      loadModel<Open9xModelData_v202>(radioData.models[i], 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -147,9 +154,6 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Open9xModelData open9xModel(radioData.models[i]);
-      if (1/*version < */) {
-        applyStickModeToModel(open9xModel, radioData.generalSettings.stickMode+1);
-      }
       sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
       if(sz != sizeof(Open9xModelData)) {
         return 0;

@@ -319,6 +319,10 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
     tmrMode = c9x.timers[0].mode;
+    if (tmrMode > TMRMODE_THR_REL)
+      tmrMode--;
+    if (tmrMode < -TMRMODE_THR_REL)
+      tmrMode++;
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
     protocol = c9x.protocol;
@@ -435,7 +439,13 @@ t_Er9xModelData::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
-  c9x.timers[0].mode = tmrMode;
+  c9x.timers[0].mode = TimerMode(tmrMode);
+  if (tmrMode > TMRMODE_THR_REL)
+    c9x.timers[0].mode = TimerMode(tmrMode+1);
+  else if (tmrMode < -TMRMODE_THR_REL)
+    c9x.timers[0].mode = TimerMode(tmrMode-1);
+  else
+    c9x.timers[0].mode = TimerMode(tmrMode);
   c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
   c9x.protocol = (Protocol)protocol;

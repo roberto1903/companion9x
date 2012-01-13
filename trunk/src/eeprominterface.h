@@ -97,10 +97,6 @@ const uint8_t modn12x3[4][4]= {
 #define NUM_KEYS TRM_RH_UP+1
 #define TRM_BASE TRM_LH_DWN
 
-#define TMRMODE_NONE     0
-#define TMRMODE_ABS      1
-#define TMRMODE_THR      2
-#define TMRMODE_THR_REL  3
 #define MAX_ALERT_TIME   60
 
 #define PROTO_PPM        0
@@ -112,8 +108,6 @@ const uint8_t modn12x3[4][4]= {
 // TODO review it
 #define PROT_STR "PPM   SILV_ASILV_BSILV_CTRAC09"
 #define PROT_STR_LEN     6
-
-#define TMR_VAROFS  16
 
 #define SUB_MODE_V     1
 #define SUB_MODE_H     2
@@ -430,10 +424,33 @@ class FrSkyData {
     void clear() { memset(this, 0, sizeof(FrSkyData)); }
 };
 
+enum TimerMode {
+    /* negative */
+  TMRMODE_OFF=0,
+  TMRMODE_ABS,
+  TMRMODE_RUD,
+  TMRMODE_RUD_REL,
+  TMRMODE_ELE,
+  TMRMODE_ELE_REL,
+  TMRMODE_THR,
+  TMRMODE_THR_REL,
+  TMRMODE_THR_TRG,
+  TMRMODE_AIL,
+  TMRMODE_AIL_REL,
+  TMRMODE_P1,
+  TMRMODE_P1_REL,
+  TMRMODE_P2,
+  TMRMODE_P2_REL,
+  TMRMODE_P3,
+  TMRMODE_P3_REL,
+  TMR_VAROFS
+   /* sw/!sw, !m_sw/!m_sw */
+};
+
 class TimerData {
   public:
     TimerData() { clear(); }
-    int8_t    mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+    TimerMode mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
     bool      dir;    // 0=>Count Down, 1=>Count Up
     uint16_t  val;
     bool      persistent;
@@ -475,6 +492,7 @@ class ModelData {
     SafetySwData  safetySw[NUM_CHNOUT];
     SwashRingData swashRingData;
     int8_t   ppmFrameLength;
+    uint8_t  thrTraceSrc;
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
     

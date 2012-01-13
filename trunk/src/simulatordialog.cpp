@@ -26,8 +26,6 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     beepVal = 0;
     beepShow = 0;
 
-// TODO    bpanaCenter = 0;
-// TODO    memset(&swOn,0,sizeof(swOn));
     QSettings settings("companion9x", "companion9x");
     backLight = settings.value("backLight",0).toInt();
     switch (backLight) {
@@ -150,10 +148,11 @@ void simulatorDialog::onTimerEvent()
 
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];
-    setWindowTitle(windowName + (txInterface->getCapability(Phases) ? tr(" - Phase: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : "") + QString(" - Timer: (%3, %4) %1:%2") .arg(abs(
+    setWindowTitle(windowName + (txInterface->getCapability(Phases) ? tr(" - Phase: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
+/* TODO + QString(" - Timer: (%3, %4) %1:%2") .arg(abs(
         -s_timerVal) / 60, 2, 10, QChar('0')).arg(abs(-s_timerVal) % 60, 2, 10,
             QChar('0')) .arg(getTimerMode(model->timers[0].mode)) // TODO why timers[0]
-            .arg(model->timers[0].dir ? "Count Up" : "Count Down"));
+            .arg(model->timers[0].dir ? "Count Up" : "Count Down")); */
   }
   else if (ui->tabWidget->currentIndex() == 0) {
     bool lightEnable;
@@ -212,8 +211,6 @@ void simulatorDialog::onTimerEvent()
 
     centerSticks();
 
-    // TODO timerTick();
-
     if (beepVal) {
       beepVal = 0;
       QApplication::beep();
@@ -270,21 +267,6 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
 
     beepVal = 0;
     beepShow = 0;
-// TODO    bpanaCenter = 0;
-
-    s_timeCumTot = 0;
-    s_timeCumAbs = 0;
-    s_timeCumSw = 0;
-    s_timeCumThr = 0;
-    s_timeCum16ThrP = 0;
-    s_timerState = 0;
-    beepAgain = 0;
-    g_LightOffCounter = 0;
-    s_timerVal = 0;
-    s_time = 0;
-    s_cnt = 0;
-    s_sum = 0;
-    sw_toggled = 0;
 
     simulator->start(radioData, model_idx<0);
 
@@ -424,24 +406,11 @@ void simulatorDialog::setValues()
   ui->labelCSW_10->setStyleSheet(outputs.vsw[9] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_11->setStyleSheet(outputs.vsw[10] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_12->setStyleSheet(outputs.vsw[11] ? CSWITCH_ON : CSWITCH_OFF);
-}
 
-void simulatorDialog::beepWarn1()
-{
-    beepVal = 1;
-    beepShow = 20;
-}
-
-void simulatorDialog::beepWarn2()
-{
-    beepVal = 1;
-    beepShow = 20;
-}
-
-void simulatorDialog::beepWarn()
-{
-    beepVal = 1;
-    beepShow = 20;
+  if (outputs.beep) {
+    beepVal = outputs.beep;
+    // beepShow
+  }
 }
 
 void simulatorDialog::setupSticks()
@@ -521,110 +490,6 @@ bool simulatorDialog::keyState(EnumKeys key)
         return false;
         break;
     }
-}
-
-void simulatorDialog::timerTick()
-{
-#if 0
-  if (g_model) {
-    int16_t val = 0;
-    if ((abs(g_model->timers[0].mode) > 1) && (abs(g_model->timers[0].mode)
-        < TMR_VAROFS)) {
-      val = g_anas[CONVERT_MODE(abs(g_model->timers[0].mode)/2) - 1];
-      val = (g_model->timers[0].mode < 0 ? RESX - val : val + RESX) / (RESX / 16); // only used for %
-    }
-
-    int8_t tm = g_model->timers[0].mode;
-
-    if (abs(tm) >= (TMR_VAROFS + MAX_DRSWITCH - 1)) { //toggeled switch//abs(g_model->timers[0].mode)<(10+MAX_DRSWITCH-1)
-      static uint8_t lastSwPos;
-      if (!(sw_toggled | s_sum | s_cnt | s_time | lastSwPos)) lastSwPos = tm < 0; // if initializing then init the lastSwPos
-      uint8_t swPos = getSwitch(tm > 0 ? tm - (TMR_VAROFS + MAX_DRSWITCH - 1 - 1)
-          : tm + (TMR_VAROFS + MAX_DRSWITCH - 1 - 1), 0);
-      if (swPos && !lastSwPos) sw_toggled = !sw_toggled; //if switcdh is flipped first time -> change counter state
-      lastSwPos = swPos;
-    }
-
-    s_time++;
-    if (s_time < 100) return; //1 sec
-    s_time = 0;
-
-    if (abs(tm) < TMR_VAROFS)
-      sw_toggled = false; // not switch - sw timer off
-    else if (abs(tm) < (TMR_VAROFS + MAX_DRSWITCH - 1)) sw_toggled = getSwitch(
-        (tm > 0 ? tm - (TMR_VAROFS - 1) : tm + (TMR_VAROFS - 1)), 0); //normal switch
-
-    s_timeCumTot += 1;
-    s_timeCumAbs += 1;
-    if (val) s_timeCumThr += 1;
-    if (sw_toggled) s_timeCumSw += 1;
-    s_timeCum16ThrP += val / 2;
-
-    s_timerVal = g_model->timers[0].val;
-    uint8_t tmrM = abs(g_model->timers[0].mode);
-    if (tmrM == TMRMODE_NONE)
-      s_timerState = TMR_OFF;
-    else if (tmrM == TMRMODE_ABS)
-      s_timerVal -= s_timeCumAbs;
-    else if (tmrM < TMR_VAROFS)
-      s_timerVal -= (tmrM & 1) ? s_timeCum16ThrP / 16 : s_timeCumThr;// stick% : stick
-    else
-      s_timerVal -= s_timeCumSw; //switch
-
-    switch (s_timerState) {
-    case TMR_OFF:
-      if (g_model->timers[0].mode != TMRMODE_NONE) s_timerState = TMR_RUNNING;
-      break;
-    case TMR_RUNNING:
-      if (s_timerVal <= 0 && g_model->timers[0].val) s_timerState = TMR_BEEPING;
-      break;
-    case TMR_BEEPING:
-      if (s_timerVal <= -MAX_ALERT_TIME) s_timerState = TMR_STOPPED;
-      if (g_model->timers[0].val == 0) s_timerState = TMR_RUNNING;
-      break;
-    case TMR_STOPPED:
-      break;
-    }
-
-    static int16_t last_tmr;
-
-    if (last_tmr != s_timerVal) //beep only if seconds advance
-    {
-      if (s_timerState == TMR_RUNNING) {
-        if (g_eeGeneral->preBeep && g_model->timers[0].val) // beep when 30, 15, 10, 5,4,3,2,1 seconds remaining
-        {
-          if (s_timerVal == 30) {
-            beepAgain = 2;
-            beepWarn2();
-          } //beep three times
-          if (s_timerVal == 20) {
-            beepAgain = 1;
-            beepWarn2();
-          } //beep two times
-          if (s_timerVal == 10) beepWarn2();
-          if (s_timerVal <= 3) beepWarn2();
-
-          if (g_eeGeneral->flashBeep && (s_timerVal == 30 || s_timerVal == 20
-              || s_timerVal == 10 || s_timerVal <= 3)) g_LightOffCounter
-              = FLASH_DURATION;
-        }
-
-        if (g_eeGeneral->minuteBeep && (((g_model->timers[0].dir ? g_model->timers[0].val
-            - s_timerVal : s_timerVal) % 60) == 0)) //short beep every minute
-        {
-          beepWarn2();
-          if (g_eeGeneral->flashBeep) g_LightOffCounter = FLASH_DURATION;
-        }
-      }
-      else if (s_timerState == TMR_BEEPING) {
-        beepWarn();
-        if (g_eeGeneral->flashBeep) g_LightOffCounter = FLASH_DURATION;
-      }
-    }
-    last_tmr = s_timerVal;
-    if (g_model->timers[0].dir) s_timerVal = g_model->timers[0].val - s_timerVal; //if counting backwards - display backwards
-  }
-#endif
 }
 
 void simulatorDialog::on_holdLeftX_clicked(bool checked)

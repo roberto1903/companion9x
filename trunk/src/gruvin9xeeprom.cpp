@@ -395,7 +395,12 @@ t_Gruvin9xPhaseData_v106::t_Gruvin9xPhaseData_v106(PhaseData &c9x)
 t_Gruvin9xTimerData::operator TimerData ()
 {
   TimerData c9x;
-  c9x.mode = mode;
+  if (mode > TMRMODE_THR_REL)
+    c9x.mode = TimerMode(mode+1);
+  else if (mode < -TMRMODE_THR_REL)
+    c9x.mode = TimerMode(mode-1);
+  else
+    c9x.mode = TimerMode(mode);
   c9x.val = val;
   c9x.dir = dir;
   return c9x;
@@ -404,6 +409,10 @@ t_Gruvin9xTimerData::operator TimerData ()
 t_Gruvin9xTimerData::t_Gruvin9xTimerData(TimerData &c9x)
 {
   mode = c9x.mode;
+  if (mode > TMRMODE_THR_REL)
+    mode--;
+  if (mode < -TMRMODE_THR_REL)
+    mode++;
   val = c9x.val;
   dir = c9x.dir;
 }

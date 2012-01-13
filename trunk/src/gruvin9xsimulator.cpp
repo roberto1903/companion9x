@@ -66,6 +66,7 @@ void Gruvin9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
+  // outputs.beep = beepOn;
 }
 
 void Gruvin9xSimulator::setValues(TxInputs &inputs)
