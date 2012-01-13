@@ -930,6 +930,8 @@ void MainWindow::createMenus()
     burnMenu->addAction(burnToFlashAct);
     burnMenu->addAction(burnFromFlashAct);
     burnMenu->addSeparator();
+    burnMenu->addAction(customizeSplashAct);
+    burnMenu->addSeparator();
     burnMenu->addAction(burnConfigAct);
     burnMenu->addAction(burnFusesAct);
     burnMenu->addAction(burnListAct);
@@ -989,7 +991,6 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnToFlashAct);
     burnToolBar->addAction(burnFromFlashAct);
     burnToolBar->addSeparator();
-//    burnToolBar->addAction(customizeSplashAct);
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
