@@ -220,8 +220,9 @@ void simulatorDialog::onTimerEvent()
 #define CBEEP_OFF "QLabel { }"
 
     ui->label_beep->setStyleSheet(beepShow ? CBEEP_ON : CBEEP_OFF);
-    if (beepShow) beepShow--;
-
+    if (beepShow) {
+      beepShow--;
+    }
   }
 }
 
@@ -409,7 +410,7 @@ void simulatorDialog::setValues()
 
   if (outputs.beep) {
     beepVal = outputs.beep;
-    // beepShow
+    beepShow=20;
   }
 }
 
