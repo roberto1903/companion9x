@@ -38,6 +38,6 @@
   * Translations in all languages. Perhaps propose something really simple and intuitive, using Google Documents
 
 = Multi platforms =
-  * Mac packaging
+  * Mac packaging - Icon and DMG build working - do we need a installer ?
   * Debian / Ubuntu packaging
   * RedHat / Suse packaging
