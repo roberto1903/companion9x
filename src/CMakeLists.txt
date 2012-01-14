@@ -284,6 +284,7 @@ IF( WIN32 )
 ENDIF( )
 
 IF( APPLE )
+    SET(MACOSX_BUNDLE_ICON_FILE iconmac.icns)
   IF( CMAKE_GENERATOR STREQUAL Xcode )
     SET( WORK_DIR ${CMAKE_BINARY_DIR}/Debug )
   ELSE( )
@@ -291,17 +292,19 @@ IF( APPLE )
   ENDIF()
     
   ADD_CUSTOM_TARGET( addframeworks ALL 
-                     COMMAND mkdir companion9x.app/Contents/Frameworks
-                     COMMAND cp /opt/local/lib/libssl.1.0.0.dylib companion9x.app/Contents/Frameworks
-                     COMMAND cp /opt/local/lib/libcrypto.1.0.0.dylib companion9x.app/Contents/Frameworks
+                     COMMAND mkdir -p companion9x.app/Contents/Frameworks
+                     COMMAND mkdir -p companion9x.app/Contents/Resources
+                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/images/${MACOSX_BUNDLE_ICON_FILE} companion9x.app/Contents/Resources/${MACOSX_BUNDLE_ICON_FILE}
+                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/../macbuild/libssl.1.0.0.dylib companion9x.app/Contents/Frameworks
+                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/../macbuild/libcrypto.1.0.0.dylib companion9x.app/Contents/Frameworks
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
 
   ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
-                      COMMAND mkdir -p ${WORK_DIR}/companion9x.app/Contents/translations
-                      COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/companion9x.app/Contents/translations
-                      COMMAND cp -r /opt/local/lib/Resources/qt_menu.nib ${WORK_DIR}/companion9x.app/Contents/Resources )
+                      COMMAND mkdir -p companion9x.app/Contents/translations
+                      COMMAND cp -r ${PROJECT_BINARY_DIR}/*.qm companion9x.app/Contents/translations
+                      COMMAND cp -r ${PROJECT_SOURCE_DIR}/../macbuild/qt_menu.nib companion9x.app/Contents/Resources )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
