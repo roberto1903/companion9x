@@ -1,6 +1,6 @@
-How to install on Mac
+===How to install on Mac===
 
-== Prerequisites ==
+= Prerequisites =
 
 You will need ....
 
@@ -10,7 +10,7 @@ There are other options out there, [http://www.google.com Google] is your friend
 I used OSX-AVR because it's easy.
 
 
-== Installing ==
+= Installing =
 
 Download the current .dmg from the downloads area.
 
