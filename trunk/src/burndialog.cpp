@@ -35,6 +35,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->ImageLoadButton->setDisabled(true);
+  ui->InvertColorButton->setDisabled(true);
   ui->BurnFlashButton->setDisabled(true);
   ui->ImageFileName->clear();
   ui->FwImage->clear();
@@ -179,9 +180,9 @@ void burnDialog::on_cancelButton_clicked() {
 }
 
 void burnDialog::on_InvertColorButton_clicked() {
-  QImage image = ui->imageLabel->pixmap()->toImage();
-  image.invertPixels();
-  ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    QImage image = ui->imageLabel->pixmap()->toImage();
+    image.invertPixels();
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
 }
 
 void burnDialog::on_PreferredImageCB_toggled(bool checked) {
