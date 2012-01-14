@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -23,7 +23,7 @@
    <iconset resource="companion9x.qrc">
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -116,7 +116,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="3" column="0" colspan="2">
     <widget class="QLabel" name="label_4">
      <property name="text">
       <string>Show Splash Screen</string>
@@ -185,7 +185,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="2" colspan="3">
+   <item row="6" column="2">
     <widget class="QSpinBox" name="historySize">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -222,11 +222,11 @@
     </widget>
    </item>
    <item row="8" column="2" colspan="3">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
       <widget class="QComboBox" name="downloadVerCB"/>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QPushButton" name="fw_dnld">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -239,16 +239,16 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="FwInfo">
+       <property name="text">
+        <string>FwInfo</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item row="9" column="2">
-    <widget class="QLabel" name="FwInfo">
-     <property name="text">
-      <string>FwInfo</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="2" colspan="3">
+   <item row="9" column="2" colspan="3">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -261,14 +261,14 @@
      </property>
     </spacer>
    </item>
-   <item row="11" column="0" colspan="2">
+   <item row="10" column="0" colspan="2">
     <widget class="QLabel" name="label_13">
      <property name="text">
       <string>Default Channel Order</string>
      </property>
     </widget>
    </item>
-   <item row="11" column="2" colspan="3">
+   <item row="10" column="2" colspan="3">
     <widget class="QComboBox" name="channelorderCB">
      <property name="whatsThis">
       <string>Channel order
@@ -400,14 +400,14 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </widget>
    </item>
-   <item row="12" column="0">
+   <item row="11" column="0">
     <widget class="QLabel" name="label_14">
      <property name="text">
       <string>Default Stick Mode</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="2" colspan="3">
+   <item row="11" column="2" colspan="3">
     <widget class="QComboBox" name="stickmodeCB">
      <property name="whatsThis">
       <string>Mode selection:
@@ -455,14 +455,14 @@ Mode 4:
      </item>
     </widget>
    </item>
-   <item row="13" column="0">
+   <item row="12" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>BackLight Color</string>
      </property>
     </widget>
    </item>
-   <item row="13" column="2" colspan="3">
+   <item row="12" column="2" colspan="3">
     <widget class="QComboBox" name="backLightColor">
      <item>
       <property name="text">
@@ -491,7 +491,7 @@ Mode 4:
      </item>
     </widget>
    </item>
-   <item row="14" column="0" colspan="5">
+   <item row="13" column="0" colspan="5">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <spacer name="horizontalSpacer_3">
@@ -534,7 +534,7 @@ Mode 4:
      </item>
     </layout>
    </item>
-   <item row="15" column="3">
+   <item row="14" column="3">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -567,6 +567,7 @@ Mode 4:
   <zorder>backLightColor</zorder>
   <zorder>FwInfo</zorder>
   <zorder>startupCheck_companion9x</zorder>
+  <zorder>verticalSpacer_2</zorder>
  </widget>
  <resources>
   <include location="companion9x.qrc"/>
