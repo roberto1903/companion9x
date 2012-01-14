@@ -46,6 +46,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
   ui->FramFWInfo->hide();
   ui->SplashFrame->hide();
   ui->BurnFlashButton->setDisabled(true);  
+  QTimer::singleShot(0, this, SLOT(shrink()));
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
   if (fileName.isEmpty()) {
     return;
