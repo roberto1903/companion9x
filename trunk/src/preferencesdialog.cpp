@@ -66,7 +66,11 @@ void preferencesDialog::writeValues() {
     QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
     settings.setValue("SplashImage", image2qstring(Image));
     settings.setValue("SplashFileName", ui->SplashFileName->text());
+  } else {
+    settings.setValue("SplashFileName", "");
+    settings.setValue("SplashImage", "");
   }
+  
 }
 
 void preferencesDialog::initSettings() {
@@ -167,4 +171,9 @@ void preferencesDialog::on_InvertPixels_clicked() {
   QImage image = ui->imageLabel->pixmap()->toImage();
   image.invertPixels();
   ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+}
+
+void preferencesDialog::on_clearImageButton_clicked() {
+  ui->imageLabel->clear();
+  ui->SplashFileName->clear();
 }

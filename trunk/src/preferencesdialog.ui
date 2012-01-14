@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>370</height>
+    <width>510</width>
+    <height>396</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Preferences</string>
@@ -18,28 +24,89 @@
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Check for updates on startup</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_7">
-     <property name="text">
-      <string>Check selected Fw updates</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Language (requires restart)</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="0" column="2" colspan="3">
+    <widget class="QComboBox" name="locale_QB"/>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Check for updates on startup</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QCheckBox" name="startupCheck_companion9x">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4" rowspan="4">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="imageLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>128</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>128</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="InvertPixels">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Invert Pixels</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Check selected Fw updates</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
     <widget class="QCheckBox" name="startupCheck_fw">
      <property name="text">
       <string/>
@@ -56,7 +123,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="3" column="2">
     <widget class="QCheckBox" name="showSplash">
      <property name="text">
       <string/>
@@ -66,14 +133,75 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="5" column="0" colspan="2">
     <widget class="QLabel" name="label_8">
      <property name="text">
       <string>Custom TX splash screen</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="5" column="2" colspan="3">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="SplashFileName">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="clearImageButton">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="companion9x.qrc">
+         <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="SplashSelect">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Open Image</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Recent History Size</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2" colspan="3">
+    <widget class="QSpinBox" name="historySize">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>40</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximum">
+      <number>15</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -86,21 +214,61 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Firmware</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="0">
+   <item row="8" column="2" colspan="3">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QComboBox" name="downloadVerCB"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="fw_dnld">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Download</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="2">
+    <widget class="QLabel" name="FwInfo">
+     <property name="text">
+      <string>FwInfo</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2" colspan="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>340</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="11" column="0" colspan="2">
     <widget class="QLabel" name="label_13">
      <property name="text">
       <string>Default Channel Order</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="1" colspan="2">
+   <item row="11" column="2" colspan="3">
     <widget class="QComboBox" name="channelorderCB">
      <property name="whatsThis">
       <string>Channel order
@@ -232,40 +400,14 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </widget>
    </item>
-   <item row="11" column="0">
+   <item row="12" column="0">
     <widget class="QLabel" name="label_14">
      <property name="text">
       <string>Default Stick Mode</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Recent History Size</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QComboBox" name="locale_QB"/>
-   </item>
-   <item row="5" column="1">
-    <widget class="QSpinBox" name="historySize">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-       <horstretch>40</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximum">
-      <number>15</number>
-     </property>
-     <property name="value">
-      <number>10</number>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1" colspan="2">
+   <item row="12" column="2" colspan="3">
     <widget class="QComboBox" name="stickmodeCB">
      <property name="whatsThis">
       <string>Mode selection:
@@ -313,14 +455,14 @@ Mode 4:
      </item>
     </widget>
    </item>
-   <item row="12" column="0">
+   <item row="13" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>BackLight Color</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="1" colspan="2">
+   <item row="13" column="2" colspan="3">
     <widget class="QComboBox" name="backLightColor">
      <item>
       <property name="text">
@@ -349,7 +491,50 @@ Mode 4:
      </item>
     </widget>
    </item>
-   <item row="13" column="1" colspan="2">
+   <item row="14" column="0" colspan="5">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+       <property name="centerButtons">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="15" column="3">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -362,138 +547,26 @@ Mode 4:
      </property>
     </spacer>
    </item>
-   <item row="14" column="1" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QComboBox" name="downloadVerCB"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="fw_dnld">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Download</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="8" column="1">
-    <widget class="QLabel" name="FwInfo">
-     <property name="text">
-      <string>FwInfo</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1" colspan="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>340</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="startupCheck_companion9x">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2" rowspan="3">
-    <widget class="QLabel" name="imageLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>128</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>128</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="SplashFileName">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="SplashSelect">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Open Image</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="InvertPixels">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Invert Pixels</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
+  <zorder>label_2</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label</zorder>
+  <zorder>startupCheck_fw</zorder>
+  <zorder>label_4</zorder>
+  <zorder>showSplash</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_13</zorder>
+  <zorder>channelorderCB</zorder>
+  <zorder>label_14</zorder>
+  <zorder>label_5</zorder>
+  <zorder>locale_QB</zorder>
+  <zorder>historySize</zorder>
+  <zorder>stickmodeCB</zorder>
+  <zorder>label_3</zorder>
+  <zorder>backLightColor</zorder>
+  <zorder>FwInfo</zorder>
+  <zorder>startupCheck_companion9x</zorder>
  </widget>
  <resources>
   <include location="companion9x.qrc"/>
