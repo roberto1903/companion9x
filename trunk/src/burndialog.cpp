@@ -45,7 +45,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
   ui->ModField->clear();
   ui->FramFWInfo->hide();
   ui->SplashFrame->hide();
-  ui->BurnFlashButton->setDisabled(true);  
+  ui->BurnFlashButton->setDisabled(true);
   QTimer::singleShot(0, this, SLOT(shrink()));
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
   if (fileName.isEmpty()) {
@@ -178,28 +178,6 @@ void burnDialog::on_cancelButton_clicked() {
   this->close();  
 }
 
-/*
-void burnDialog::on_SaveFlashButton_clicked() {
-  QString fileName;
-  QSettings settings("companion9x", "companion9x");
-
-  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"), 0, QFileDialog::DontConfirmOverwrite);
-  if (fileName.isEmpty()) {
-    return;
-  }
-  FlashInterface flash(ui->FWFileName->text());
-  if (!flash.hasSplash()) {
-    QMessageBox::critical(this, tr("Error"), tr("Error reading file %1").arg(fileName));
-    return;
-  }
-  settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-  QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
-  flash.setSplash(image);
-  if (flash.saveFlash(fileName) > 0) {
-  }
-
-}
-*/
 void burnDialog::on_InvertColorButton_clicked() {
   QImage image = ui->imageLabel->pixmap()->toImage();
   image.invertPixels();
