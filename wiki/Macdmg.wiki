@@ -1,3 +1,4 @@
+#summary How to install on Mac
 =How to install on Mac=
 
 === Prerequisites ===
