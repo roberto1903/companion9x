@@ -569,7 +569,6 @@ void MainWindow::burnToFlash(QString fileToFlash)
   cd->exec();
 
   if (!fileName.isEmpty()) {
-    settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
     FlashInterface flash(fileName);
 
     QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
