@@ -92,6 +92,7 @@ void splashLibrary::getFileList() {
   }
   if (imageList.size() == 0) {
     QMessageBox::information(this, tr("Information"), tr("No valid image found in library, check your settings"));
+    QTimer::singleShot(0, this, SLOT(dclose()));
   }
   else {
     imageList.sort();
@@ -100,6 +101,10 @@ void splashLibrary::getFileList() {
 
 void splashLibrary::shrink() {
   resize(0, 0);
+}
+
+void splashLibrary::dclose() {
+  close();
 }
 
 void splashLibrary::onButtonPressed(int button) {
