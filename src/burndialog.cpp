@@ -173,6 +173,8 @@ void burnDialog::on_BurnFlashButton_clicked() {
           if (flash.saveFlash(tempFile) > 0) {
             hexfileName->clear();
             hexfileName->append(tempFile);
+            QSettings settings("companion9x", "companion9x");
+            settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
           }
           else {
             hexfileName->clear();
