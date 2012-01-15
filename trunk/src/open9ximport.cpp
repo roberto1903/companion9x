@@ -1,6 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSTD
+#define SPLASH
 #define DECIMALS_DISPLAYED
 #define FRSKY
 #define FRSKY_HUB
