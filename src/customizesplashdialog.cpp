@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include "helpers.h"
+#include "splashlibrary.h"
 #include "flashinterface.h"
 
 customizeSplashDialog::customizeSplashDialog(QWidget *parent) :
@@ -21,6 +22,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->ImageLoadButton->setDisabled(true);
+  ui->libraryButton->setDisabled(true);
   ui->SaveFlashButton->setDisabled(true);
   ui->SaveImageButton->setDisabled(true);
   ui->ImageFileName->clear();
@@ -38,6 +40,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   if (flash.hasSplash()) {
     ui->HowToLabel->append("<center>" + tr("Select an image to customize your splash <br />or save actual firmware splash") + "</center>");
     ui->ImageLoadButton->setEnabled(true);
+    ui->libraryButton->setEnabled(true);
     ui->SaveImageButton->setEnabled(true);
     ui->imageLabel->setPixmap(QPixmap::fromImage(flash.getSplash()));
   }
@@ -50,7 +53,6 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
 
 void customizeSplashDialog::on_ImageLoadButton_clicked() {
   QString supportedImageFormats;
-  ui->HowToLabel->clear();
   for (int formatIndex = 0; formatIndex < QImageReader::supportedImageFormats().count(); formatIndex++) {
     supportedImageFormats += QLatin1String(" *.") + QImageReader::supportedImageFormats()[formatIndex];
   }
@@ -65,6 +67,26 @@ void customizeSplashDialog::on_ImageLoadButton_clicked() {
       QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
       return;
     }
+    ui->HowToLabel->clear();
+    ui->ImageFileName->setText(fileName);
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->SaveFlashButton->setEnabled(true);
+    ui->HowToLabel->append("<center>" + tr("Save your custimized firmware") + "</center>");
+  }
+}
+
+void customizeSplashDialog::on_libraryButton_clicked() {
+  QString fileName;
+  
+  splashLibrary *ld = new splashLibrary(this,&fileName);
+  ld->exec();
+  if (!fileName.isEmpty()) {
+    QImage image(fileName);
+    if (image.isNull()) {
+      QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
+      return;
+    }
+    ui->HowToLabel->clear();
     ui->ImageFileName->setText(fileName);
     ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
     ui->SaveFlashButton->setEnabled(true);

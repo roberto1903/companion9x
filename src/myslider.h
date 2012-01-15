@@ -1,6 +1,6 @@
 /* 
  * File:   mySlider.h
- * Author: root
+ * Author: Romolo Manfredini
  *
  * Created on 11 gennaio 2012, 23.39
  */

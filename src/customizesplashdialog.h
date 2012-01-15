@@ -21,6 +21,7 @@ public:
 private slots:
   void on_FlashLoadButton_clicked();
   void on_ImageLoadButton_clicked();
+  void on_libraryButton_clicked();
   void on_SaveFlashButton_clicked();
   void on_InvertColorButton_clicked();
   void on_SaveImageButton_clicked();

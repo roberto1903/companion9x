@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include "helpers.h"
+#include "splashlibrary.h"
 #include "flashinterface.h"
 
 burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName) : QDialog(parent), ui(new Ui::burnDialog) {
@@ -35,6 +36,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->ImageLoadButton->setDisabled(true);
+  ui->libraryButton->setDisabled(true);
   ui->InvertColorButton->setDisabled(true);
   ui->BurnFlashButton->setDisabled(true);
   ui->ImageFileName->clear();
@@ -64,6 +66,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
     if (flash.hasSplash()) {
       ui->SplashFrame->show();
       ui->ImageLoadButton->setEnabled(true);
+      ui->libraryButton->setEnabled(true);
       ui->FwImage->show();
       ui->FwImage->setPixmap(QPixmap::fromImage(flash.getSplash()));
       QString ImageStr = settings.value("SplashImage", "").toString();
@@ -120,6 +123,26 @@ void burnDialog::on_ImageLoadButton_clicked() {
   QString fileName = QFileDialog::getOpenFileName(this,
           tr("Open Image to load"), settings.value("lastDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
 
+  if (!fileName.isEmpty()) {
+    QImage image(fileName);
+    if (image.isNull()) {
+      QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
+      ui->PatchFWCB->setDisabled(true);
+      ui->PatchFWCB->setChecked(false);
+      ui->InvertColorButton->setDisabled(true);
+      return;
+    }
+    ui->ImageFileName->setText(fileName);
+    ui->InvertColorButton->setEnabled(true);
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->PatchFWCB->setEnabled(true);
+  }
+}
+
+void burnDialog::on_libraryButton_clicked() {
+  QString fileName;
+  splashLibrary *ld = new splashLibrary(this,&fileName);
+  ld->exec();
   if (!fileName.isEmpty()) {
     QImage image(fileName);
     if (image.isNull()) {
@@ -197,12 +220,14 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked) {
       ui->PreferredImageCB->setChecked(true);
       ui->ImageFileName->setDisabled(true);
       ui->ImageLoadButton->setDisabled(true);
+      ui->libraryButton->setDisabled(true);
       ui->PatchFWCB->setEnabled(true);
     }
   }
   else {
     ui->imageLabel->clear();
     ui->ImageLoadButton->setEnabled(true);
+    ui->libraryButton->setEnabled(true);
     tmpFileName = ui->ImageFileName->text();
     if (!tmpFileName.isEmpty()) {
       QImage image(tmpFileName);

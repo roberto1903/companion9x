@@ -28,6 +28,8 @@ private slots:
     void on_SplashSelect_clicked();
     void on_InvertPixels_clicked();
     void on_clearImageButton_clicked();
+    void on_libraryPathButton_clicked();
+    void on_splashLibraryButton_clicked();
 };
 
 #endif // PREFERENCESDIALOG_H

@@ -2,6 +2,7 @@
 #include "ui_preferencesdialog.h"
 #include "mainwindow.h"
 #include "eeprominterface.h"
+#include "splashlibrary.h"
 #include "helpers.h"
 #include <QtGui>
 
@@ -62,6 +63,8 @@ void preferencesDialog::writeValues() {
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("firmware", ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()));
   settings.setValue("backLight", ui->backLightColor->currentIndex());
+  settings.setValue("libraryPath", ui->libraryPath->text());
+  settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
   if (!ui->SplashFileName->text().isEmpty()) {
     QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
     settings.setValue("SplashImage", image2qstring(Image));
@@ -86,6 +89,11 @@ void preferencesDialog::initSettings() {
   ui->historySize->setValue(settings.value("history_size", 10).toInt());
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
+  QString Path=settings.value("libraryPath", "").toString();
+  if (QDir(Path).exists()) {
+        ui->libraryPath->setText(Path);
+  }
+  ui->splashincludeCB->setCurrentIndex(settings.value("embedded_splashes", 0).toInt());
   FirmwareInfo current_firmware = GetCurrentFirmware();
 
   foreach(FirmwareInfo firmware, firmwares) {
@@ -143,6 +151,30 @@ void preferencesDialog::on_fw_dnld_clicked() {
   firmwareChanged();
 }
 
+void preferencesDialog::on_libraryPathButton_clicked() {
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library dir"), settings.value("lastDir").toString());
+  if (!fileName.isEmpty()) {
+    ui->libraryPath->setText(fileName);
+  }
+}
+
+void preferencesDialog::on_splashLibraryButton_clicked() {
+  QString fileName;
+  splashLibrary *ld = new splashLibrary(this,&fileName);
+  ld->exec();
+  if (!fileName.isEmpty()) {
+    QImage image(fileName);
+    if (image.isNull()) {
+      QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
+      return;
+    }
+    ui->SplashFileName->setText(fileName);
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
+    ui->InvertPixels->setEnabled(true);
+  }  
+}
+
 void preferencesDialog::on_SplashSelect_clicked() {
   QString supportedImageFormats;
   for (int formatIndex = 0; formatIndex < QImageReader::supportedImageFormats().count(); formatIndex++) {
@@ -162,8 +194,6 @@ void preferencesDialog::on_SplashSelect_clicked() {
     ui->SplashFileName->setText(fileName);
     ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
     ui->InvertPixels->setEnabled(true);
-    //    ui->SaveFlashButton->setEnabled(true);
-    //    ui->HowToLabel->setText(tr("Save your custimized firmware"));
   }
 }
 
