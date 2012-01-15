@@ -24,6 +24,7 @@ namespace Open9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
 extern uint8_t g_beepCnt;
+uint8_t getStickMode();
 }
 
 using namespace Open9x;
@@ -72,10 +73,6 @@ void Open9xSimulator::getValues(TxOutputs &outputs)
 #include "simulatorimport.h"
   outputs.beep = g_beepCnt;
   g_beepCnt = 0;
-
-/*  extern uint8_t beepOn;
-
-  outputs.beep = beepOn;*/
 }
 
 void Open9xSimulator::setValues(TxInputs &inputs)
@@ -86,6 +83,7 @@ void Open9xSimulator::setValues(TxInputs &inputs)
 
 void Open9xSimulator::setTrim(unsigned int idx, int value)
 {
+idx = modn12x3[getStickMode()][idx] - 1;
 #define SETTRIM_IMPORT
 #include "simulatorimport.h"
 }
@@ -94,6 +92,12 @@ void Open9xSimulator::getTrims(Trims & trims)
 {
 #define GETTRIMS_IMPORT
 #include "simulatorimport.h"
+  for (int i=0; i<2; i++) {
+    uint8_t idx = modn12x3[getStickMode()][i] - 1;
+    int16_t tmp = trims.values[i];
+    trims.values[i] = trims.values[idx];
+    trims.values[idx] = tmp;
+  }
 }
 
 unsigned int Open9xSimulator::getPhase()
