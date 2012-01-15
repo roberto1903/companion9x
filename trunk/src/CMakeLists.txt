@@ -103,6 +103,7 @@ SET( companion9x_SRCS
      mixerdialog.cpp
      downloaddialog.cpp
      simulatordialog.cpp
+     splashlibrary.cpp
      mainwindow.cpp
      main.cpp
 )
@@ -117,6 +118,8 @@ SET( companion9x_MOC_HDRS
      expodialog.h
      contributorsdialog.h
      customizesplashdialog.h
+     splashlibrary.h
+     splashlabel.h
      burndialog.h
      downloaddialog.h
      cursorwidget.h
@@ -146,6 +149,7 @@ SET( companion9x_UIS
      printdialog.ui
      contributorsdialog.ui
      customizesplashdialog.ui
+     splashlibrary.ui
      burndialog.ui
 )
 
