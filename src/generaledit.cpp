@@ -32,6 +32,9 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->ownerNameLE->setDisabled(true);
       ui->label_ownerName->hide();
       ui->ownerNameLE->hide();
+      ui->hideNameOnSplashChkB->setDisabled(true);
+      ui->hideNameOnSplashChkB->hide();
+      ui->label_hideOwnerName->hide();      
     }
     
     if (!GetEepromInterface()->getCapability(SoundMod)) {
@@ -105,6 +108,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->beepCountDownChkB->setChecked(g_eeGeneral.preBeep);
     ui->beepFlashChkB->setChecked(g_eeGeneral.flashBeep);
     ui->splashScreenChkB->setChecked(!g_eeGeneral.disableSplashScreen);
+    ui->hideNameOnSplashChkB->setChecked(g_eeGeneral.hideNameOnSplash);
 
     ui->trnMode_1->setCurrentIndex(g_eeGeneral.trainer.mix[0].mode);
     ui->trnChn_1->setCurrentIndex(g_eeGeneral.trainer.mix[0].src);
@@ -526,6 +530,12 @@ void GeneralEdit::on_beepFlashChkB_stateChanged(int )
 void GeneralEdit::on_splashScreenChkB_stateChanged(int )
 {
     g_eeGeneral.disableSplashScreen = ui->splashScreenChkB->isChecked() ? 0 : 1;
+    updateSettings();
+}
+
+void GeneralEdit::on_hideNameOnSplashChkB_stateChanged(int )
+{
+    g_eeGeneral.hideNameOnSplash = ui->hideNameOnSplashChkB->isChecked();
     updateSettings();
 }
 
