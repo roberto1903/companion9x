@@ -248,6 +248,7 @@ class GeneralSettings {
     uint8_t   lightAutoOff;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
+    bool        hideNameOnSplash;
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;
     uint8_t   speakerMode;
