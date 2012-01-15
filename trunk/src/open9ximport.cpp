@@ -46,5 +46,10 @@ bool hasExtendedTrims()
   return g_model.extendedTrims;
 }
 
+uint8_t getStickMode()
+{
+  return g_eeGeneral.stickMode;
+}
+
 }
 
