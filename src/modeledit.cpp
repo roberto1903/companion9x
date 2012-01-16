@@ -533,13 +533,13 @@ void ModelEdit::tabLimits()
 
   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
     int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-    sb->setValue(g_model.limitData[sbn].min-100);
+    sb->setValue(g_model.limitData[sbn].min);
     connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
   }
 
   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("maxSB_[0-9]+"))) {
     int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-    sb->setValue(g_model.limitData[sbn].max+100);
+    sb->setValue(g_model.limitData[sbn].max);
     connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
   }
 
@@ -656,10 +656,10 @@ void ModelEdit::limitEdited()
   QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
   int limitId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
   if (sb->objectName().indexOf("max")!=-1) {
-    g_model.limitData[limitId].max = sb->value()-100;
+    g_model.limitData[limitId].max = sb->value();
   }
   else {
-    g_model.limitData[limitId].min = sb->value()+100;
+    g_model.limitData[limitId].min = sb->value();
   }
   updateSettings();
 }
@@ -2438,7 +2438,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     if(idx==j++)
     {
         md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
-        md=setDest(14);            md->srcRaw=SRC_CH14;   md->weight= 100;
+        md=setDest(14);            md->srcRaw=SRC_CH14; md->weight= 100;
         md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
         md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
 
@@ -2475,25 +2475,25 @@ void ModelEdit::applyTemplate(uint8_t idx)
         clearMixes();  //This time we want a clean slate
         clearCurves();
 
-        //Set up Mixes
-        //3 cyclic channels
+        // Set up Mixes
+        // 3 cyclic channels
         md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
         md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
         md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
 
-        //rudder
-        md=setDest(4);  md->srcRaw=SRC_RUD; md->weight=100;
+        // rudder
+        md=setDest(4);  md->srcRaw=SRC_RUD;   md->weight=100;
 
-        //Throttle
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch= DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_MAX;      md->weight=-100; md->swtch= DSW_THR; md->mltpx=MLTPX_REP;
+        // throttle
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
-        //gyro gain
+        // gyro gain
         md=setDest(6);  md->srcRaw=SRC_FULL; md->weight=30; md->swtch=-DSW_GEA;
 
-        //collective
+        // collective
         md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
         md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
         md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
@@ -2501,7 +2501,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
         g_model.swashRingData.type = SWASH_TYPE_120;
         g_model.swashRingData.collectiveSource = CH(11);
 
-        //Set up Curves
+        // set up Curves
         setCurve(CURVE5(1),heli_ar1);
         setCurve(CURVE5(2),heli_ar2);
         setCurve(CURVE5(3),heli_ar3);

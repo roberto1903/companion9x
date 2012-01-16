@@ -3,6 +3,7 @@
 #define PCBSTD
 #define SPLASH
 #define DECIMALS_DISPLAYED
+#define TEMPLATES
 #define FRSKY
 #define FRSKY_HUB
 
@@ -31,6 +32,7 @@ namespace Open9x {
 #include "../open9x/drivers.cpp"
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/frsky.cpp"
+#include "../open9x/templates.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
