@@ -526,30 +526,29 @@ void ModelEdit::heliEdited()
 void ModelEdit::tabLimits()
 {
   foreach(QDoubleSpinBox *sb, findChildren<QDoubleSpinBox *>(QRegExp("offsetDSB_[0-9]+"))) {
-      int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-      sb->setValue(g_model.limitData[sbn].offset/10);
-      connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
-    }
+    int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+    sb->setValue(g_model.limitData[sbn].offset/10);
+    connect(sb, SIGNAL(editingFinished()), this, SLOT(limitOffsetEdited()));
+  }
 
-    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
-      int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-      sb->setValue(g_model.limitData[sbn].min-100);
-      connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
-    }
+  foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
+    int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+    sb->setValue(g_model.limitData[sbn].min-100);
+    connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
+  }
 
-    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("maxSB_[0-9]+"))) {
-      int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-      sb->setValue(g_model.limitData[sbn].max+100);
-      connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
-    }
+  foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("maxSB_[0-9]+"))) {
+    int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+    sb->setValue(g_model.limitData[sbn].max+100);
+    connect(sb, SIGNAL(editingFinished()), this, SLOT(limitEdited()));
+  }
 
-    foreach(QComboBox *cb, findChildren<QComboBox *>(QRegExp("chInvCB_[0-9]+"))) {
-      int cbn=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
-      cb->setCurrentIndex((g_model.limitData[cbn].revert) ? 1 : 0);
-      connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(limitEdited()));
-    }
- 
-    setLimitMinMax();
+  foreach(QComboBox *cb, findChildren<QComboBox *>(QRegExp("chInvCB_[0-9]+"))) {
+    int cbn=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
+    cb->setCurrentIndex((g_model.limitData[cbn].revert) ? 1 : 0);
+    connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(limitInvEdited()));
+  }
+  setLimitMinMax();
 }
 
 void ModelEdit::updateCurvesTab()
@@ -644,77 +643,33 @@ void ModelEdit::tabCurves()
   }
 }
 
+void ModelEdit::limitOffsetEdited()
+{
+  QDoubleSpinBox *dsb = qobject_cast<QDoubleSpinBox*>(sender());
+  int limitId=dsb->objectName().mid(dsb->objectName().lastIndexOf("_")+1).toInt()-1;
+  g_model.limitData[limitId].offset = dsb->value()*10;
+  updateSettings(); 
+}
+
 void ModelEdit::limitEdited()
 {
-    g_model.limitData[0].offset = ui->offsetDSB_1->value()*10;
-    g_model.limitData[1].offset = ui->offsetDSB_2->value()*10;
-    g_model.limitData[2].offset = ui->offsetDSB_3->value()*10;
-    g_model.limitData[3].offset = ui->offsetDSB_4->value()*10;
-    g_model.limitData[4].offset = ui->offsetDSB_5->value()*10;
-    g_model.limitData[5].offset = ui->offsetDSB_6->value()*10;
-    g_model.limitData[6].offset = ui->offsetDSB_7->value()*10;
-    g_model.limitData[7].offset = ui->offsetDSB_8->value()*10;
-    g_model.limitData[8].offset = ui->offsetDSB_9->value()*10;
-    g_model.limitData[9].offset = ui->offsetDSB_10->value()*10;
-    g_model.limitData[10].offset = ui->offsetDSB_11->value()*10;
-    g_model.limitData[11].offset = ui->offsetDSB_12->value()*10;
-    g_model.limitData[12].offset = ui->offsetDSB_13->value()*10;
-    g_model.limitData[13].offset = ui->offsetDSB_14->value()*10;
-    g_model.limitData[14].offset = ui->offsetDSB_15->value()*10;
-    g_model.limitData[15].offset = ui->offsetDSB_16->value()*10;
+  QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+  int limitId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+  if (sb->objectName().indexOf("max")!=-1) {
+    g_model.limitData[limitId].max = sb->value()-100;
+  }
+  else {
+    g_model.limitData[limitId].min = sb->value()+100;
+  }
+  updateSettings();
+}
 
-    g_model.limitData[0].min = ui->minSB_1->value()+100;
-    g_model.limitData[1].min = ui->minSB_2->value()+100;
-    g_model.limitData[2].min = ui->minSB_3->value()+100;
-    g_model.limitData[3].min = ui->minSB_4->value()+100;
-    g_model.limitData[4].min = ui->minSB_5->value()+100;
-    g_model.limitData[5].min = ui->minSB_6->value()+100;
-    g_model.limitData[6].min = ui->minSB_7->value()+100;
-    g_model.limitData[7].min = ui->minSB_8->value()+100;
-    g_model.limitData[8].min = ui->minSB_9->value()+100;
-    g_model.limitData[9].min = ui->minSB_10->value()+100;
-    g_model.limitData[10].min = ui->minSB_11->value()+100;
-    g_model.limitData[11].min = ui->minSB_12->value()+100;
-    g_model.limitData[12].min = ui->minSB_13->value()+100;
-    g_model.limitData[13].min = ui->minSB_14->value()+100;
-    g_model.limitData[14].min = ui->minSB_15->value()+100;
-    g_model.limitData[15].min = ui->minSB_16->value()+100;
-
-    g_model.limitData[0].max = ui->maxSB_1->value()-100;
-    g_model.limitData[1].max = ui->maxSB_2->value()-100;
-    g_model.limitData[2].max = ui->maxSB_3->value()-100;
-    g_model.limitData[3].max = ui->maxSB_4->value()-100;
-    g_model.limitData[4].max = ui->maxSB_5->value()-100;
-    g_model.limitData[5].max = ui->maxSB_6->value()-100;
-    g_model.limitData[6].max = ui->maxSB_7->value()-100;
-    g_model.limitData[7].max = ui->maxSB_8->value()-100;
-    g_model.limitData[8].max = ui->maxSB_9->value()-100;
-    g_model.limitData[9].max = ui->maxSB_10->value()-100;
-    g_model.limitData[10].max = ui->maxSB_11->value()-100;
-    g_model.limitData[11].max = ui->maxSB_12->value()-100;
-    g_model.limitData[12].max = ui->maxSB_13->value()-100;
-    g_model.limitData[13].max = ui->maxSB_14->value()-100;
-    g_model.limitData[14].max = ui->maxSB_15->value()-100;
-    g_model.limitData[15].max = ui->maxSB_16->value()-100;
-
-    g_model.limitData[0].revert = ui->chInvCB_1->currentIndex();
-    g_model.limitData[1].revert = ui->chInvCB_2->currentIndex();
-    g_model.limitData[2].revert = ui->chInvCB_3->currentIndex();
-    g_model.limitData[3].revert = ui->chInvCB_4->currentIndex();
-    g_model.limitData[4].revert = ui->chInvCB_5->currentIndex();
-    g_model.limitData[5].revert = ui->chInvCB_6->currentIndex();
-    g_model.limitData[6].revert = ui->chInvCB_7->currentIndex();
-    g_model.limitData[7].revert = ui->chInvCB_8->currentIndex();
-    g_model.limitData[8].revert = ui->chInvCB_9->currentIndex();
-    g_model.limitData[9].revert = ui->chInvCB_10->currentIndex();
-    g_model.limitData[10].revert = ui->chInvCB_11->currentIndex();
-    g_model.limitData[11].revert = ui->chInvCB_12->currentIndex();
-    g_model.limitData[12].revert = ui->chInvCB_13->currentIndex();
-    g_model.limitData[13].revert = ui->chInvCB_14->currentIndex();
-    g_model.limitData[14].revert = ui->chInvCB_15->currentIndex();
-    g_model.limitData[15].revert = ui->chInvCB_16->currentIndex();
-
-    updateSettings();
+void ModelEdit::limitInvEdited()
+{
+  QComboBox *cb = qobject_cast<QComboBox*>(sender());
+  int limitId=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
+  g_model.limitData[limitId].revert = cb->currentIndex();
+  updateSettings();
 }
 
 void ModelEdit::setCurrentCurve(int curveId)

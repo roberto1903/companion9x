@@ -168,7 +168,9 @@ private slots:
     void mixerlistWidget_KeyPress(QKeyEvent *event);
 
     void curvePointEdited();
+    void limitOffsetEdited();
     void limitEdited();
+    void limitInvEdited();
     void customSwitchesEdited();
     void safetySwitchesEdited();
     void functionSwitchesEdited();
