@@ -14,19 +14,20 @@
 
 namespace Th9x {
 
-#include "./th9x/simpgmspace.h"
-#include "./th9x/th9x.cpp"
-#include "./th9x/stamp.cpp"
-#include "./th9x/menus.cpp"
-#include "./th9x/pers.cpp"
-#include "./th9x/file.cpp"
-#include "./th9x/lcd.cpp"
-#include "./th9x/drivers.cpp"
-#include "./th9x/foldedlist.cpp"
-#include "./th9x/simpgmspace.cpp"
-#include "./th9x/pulses.cpp"
+#include "../th9x/simpgmspace.h"
+#include "../th9x/th9x.cpp"
+#include "../th9x/stamp.cpp"
+#include "../th9x/menus.cpp"
+#include "../th9x/pers.cpp"
+#include "../th9x/file.cpp"
+#include "../th9x/lcd.cpp"
+#include "../th9x/drivers.cpp"
+#include "../th9x/foldedlist.cpp"
+#include "../th9x/simpgmspace.cpp"
+#include "../th9x/pulses.cpp"
 
 int16_t g_anas[7];
+char g_title[80] = "";
 
 uint16_t anaIn(uint8_t chan)
 {

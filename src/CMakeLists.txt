@@ -60,8 +60,8 @@ SET( companion9x_SRCS
      ${PROJECT_SOURCE_DIR}/../open9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
+     ${PROJECT_SOURCE_DIR}/../th9x/stamp-th9x.h
      ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
-     ${PROJECT_BINARY_DIR}/th9x/stamp-th9x.h
      th9xeeprom.cpp
      th9xinterface.cpp
      th9xsimulator.cpp
@@ -209,13 +209,6 @@ ADD_CUSTOM_COMMAND(
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
   DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
-)
-
-ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./th9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../th9x ./th9x && patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../th9x.patch
-  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  OUTPUT ${PROJECT_BINARY_DIR}/th9x/stamp-th9x.h
-  DEPENDS ${PROJECT_SOURCE_DIR}/../th9x.patch
 )
 
 FIND_PACKAGE( Qt4 REQUIRED )
