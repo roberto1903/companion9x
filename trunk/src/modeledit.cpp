@@ -2177,11 +2177,11 @@ void ModelEdit::resetCurve()
 {
   QPushButton *button = (QPushButton *)sender();
   int btn=button->objectName().mid(button->objectName().lastIndexOf("_")+1).toInt()-1;
-  if (btn<8) {
+  if (btn<MAX_CURVE5) {
     memset(&g_model.curves5[btn],0,sizeof(g_model.curves5[0]));
   }
   else {
-    memset(&g_model.curves9[btn],0,sizeof(g_model.curves9[0]));
+    memset(&g_model.curves9[btn-MAX_CURVE5],0,sizeof(g_model.curves9[0]));
   }
   updateCurvesTab();
   updateSettings();
