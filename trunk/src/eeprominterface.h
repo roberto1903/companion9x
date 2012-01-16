@@ -272,8 +272,8 @@ class ExpoData {
 class LimitData {
   public:
     LimitData() { clear(); }
-    int8_t  min;
-    int8_t  max;
+    int     min;
+    int     max;
     bool    revert;
     int16_t  offset;
 
