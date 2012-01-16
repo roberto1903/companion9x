@@ -20,13 +20,8 @@
 #include "eeprominterface.h"
 
 struct TxInputs {
-    int16_t rud;
-    int16_t ele;
-    int16_t thr;
-    int16_t ail;
-    int16_t pot1;
-    int16_t pot2;
-    int16_t pot3;
+    int16_t sticks[4]; /* lh lv rv rh */
+    int16_t pots[3];
     bool sRud;
     bool sEle;
     bool sThr;
@@ -55,7 +50,7 @@ class TxOutputs {
 };
 
 struct Trims {
-    int16_t values[4];
+    int16_t values[4]; /* lh lv rv rh */
     bool extended;
 };
 

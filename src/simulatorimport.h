@@ -96,13 +96,10 @@ frskyStreaming = 255;
 
 #ifdef SETVALUES_IMPORT
 #undef SETVALUES_IMPORT
-g_anas[0] = inputs.rud;
-g_anas[1] = inputs.ele;
-g_anas[2] = inputs.thr;
-g_anas[3] = inputs.ail;
-g_anas[4] = inputs.pot1;
-g_anas[5] = inputs.pot2;
-g_anas[6] = inputs.pot3;
+for (int i=0; i<4; i++)
+  g_anas[0] = inputs.sticks[i];
+for (int i=0; i<3; i++)
+  g_anas[4+i] = inputs.pots[i];
 
 #ifdef PCBV4
 pinj = 0;

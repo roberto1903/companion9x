@@ -286,19 +286,19 @@ void simulatorDialog::setTrims()
   }
   ui->trimHLeft->setRange(trimMin, trimMax);  ui->trimHLeft->setValue(trims.values[0]);
   ui->trimVLeft->setRange(trimMin, trimMax);  ui->trimVLeft->setValue(trims.values[1]);
-  ui->trimHRight->setRange(trimMin, trimMax); ui->trimVRight->setValue(trims.values[2]);
+  ui->trimVRight->setRange(trimMin, trimMax); ui->trimVRight->setValue(trims.values[2]);
   ui->trimHRight->setRange(trimMin, trimMax); ui->trimHRight->setValue(trims.values[3]);
 }
 
 void simulatorDialog::getValues()
 {
-  TxInputs inputs = { 1024*nodeLeft->getX(), //RUD
-                     -1024*nodeLeft->getY(), //ELE
-                     -1024*nodeRight->getY(), //THR
-                     1024*nodeRight->getX(), //AIL
-                     ui->dialP_1->value(),
-                     ui->dialP_2->value(),
-                     ui->dialP_3->value(),
+  TxInputs inputs = {{ 1024*nodeLeft->getX(),  // LEFT HORZ
+                      -1024*nodeLeft->getY(),  // LEFT VERT
+                      -1024*nodeRight->getY(), // RGHT VERT
+                       1024*nodeRight->getX() },  // RGHT HORZ
+                     { ui->dialP_1->value(),
+                       ui->dialP_2->value(),
+                       ui->dialP_3->value()} ,
                      ui->switchRUD->isChecked(),
                      ui->switchELE->isChecked(),
                      ui->switchTHR->isChecked(),

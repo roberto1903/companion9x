@@ -71,7 +71,10 @@ void Th9xSimulator::getValues(TxOutputs &outputs)
 void Th9xSimulator::setValues(TxInputs &_inputs)
 {
   TxInputs inputs = _inputs;
-  inputs.rud/=2; inputs.ele/=2; inputs.thr/=2; inputs.ail/=2; inputs.pot1/=2; inputs.pot2/=2; inputs.pot3/=2;
+  for (int i=0; i<4; i++)
+    inputs.sticks[i] /= 2;
+  for (int i=0; i<3; i++)
+    inputs.pots[i] /= 2;  
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }
