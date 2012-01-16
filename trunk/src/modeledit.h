@@ -25,6 +25,9 @@ public:
 private:
     Ui::ModelEdit *ui;
 
+    QSpinBox* spn5[MAX_CURVE5][5];
+    QSpinBox* spn9[MAX_CURVE9][9];
+
     MixersList *ExposlistWidget;
 
     MixersList *MixerlistWidget;
