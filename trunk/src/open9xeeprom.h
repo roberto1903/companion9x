@@ -177,7 +177,7 @@ PACK(typedef struct t_Open9xFrSkyChannelData {
   uint8_t   alarms_level:4;
   uint8_t   alarms_greater:2;   // 0=LT(<), 1=GT(>)
   uint8_t   spare:2;
-  int8_t    barMin;             // minimum for bar display
+  uint8_t   barMin;             // minimum for bar display
   uint8_t   barMax;             // ditto for max display (would usually = ratio)
 
   operator FrSkyChannelData();
@@ -186,14 +186,24 @@ PACK(typedef struct t_Open9xFrSkyChannelData {
 
 }) Open9xFrSkyChannelData;
 
-PACK(typedef struct t_Open9xFrSkyData {
+PACK(typedef struct t_Open9xFrSkyData_v201 {
 	Open9xFrSkyChannelData channels[2];
 
 	operator FrSkyData();
-	t_Open9xFrSkyData();
-	t_Open9xFrSkyData(FrSkyData&);
+	t_Open9xFrSkyData_v201() { memset(this, 0, sizeof(t_Open9xFrSkyData_v201)); }
 
-}) Open9xFrSkyData;
+}) Open9xFrSkyData_v201;
+
+PACK(typedef struct t_Open9xFrSkyData_v202 {
+	Open9xFrSkyChannelData channels[2];
+	uint8_t usrProto:2;  // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+	uint8_t spare:6;
+
+	operator FrSkyData();
+	t_Open9xFrSkyData_v202() { memset(this, 0, sizeof(t_Open9xFrSkyData_v202)); }
+	t_Open9xFrSkyData_v202(FrSkyData&);
+
+}) Open9xFrSkyData_v202;
 
 PACK(typedef struct t_Open9xSwashRingData { // Swash Ring data
   uint8_t   invertELE:1;
@@ -279,7 +289,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   Open9xFuncSwData    funcSw[NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
-  Open9xFrSkyData frsky;
+  Open9xFrSkyData_v201 frsky;
 
   operator ModelData();
   t_Open9xModelData_v201() { memset(this, 0, sizeof(t_Open9xModelData_v201)); }
@@ -291,9 +301,8 @@ PACK(typedef struct t_Open9xModelData_v202 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timer1;
   uint8_t   protocol:3;
-  int8_t    ppmNCH:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
-  uint8_t   thrExpo:1;            // Enable Throttle Expo
+  int8_t    ppmNCH:4;
   uint8_t   trimInc:3;            // Trim Increments
   uint8_t   spare1:1;
   uint8_t   pulsePol:1;
@@ -313,7 +322,7 @@ PACK(typedef struct t_Open9xModelData_v202 {
   Open9xFuncSwData    funcSw[NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
-  Open9xFrSkyData frsky;
+  Open9xFrSkyData_v202 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
 
