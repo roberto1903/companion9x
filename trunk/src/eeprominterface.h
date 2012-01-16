@@ -277,7 +277,7 @@ class LimitData {
     bool    revert;
     int16_t  offset;
 
-    void clear() { memset(this, 0, sizeof(LimitData)); }
+    void clear() { min = -100; max = +100; revert = false; offset = 0; }
 };
 
 enum MltpxValue {
