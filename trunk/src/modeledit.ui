@@ -706,14 +706,14 @@
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14c">
                  <item row="1" column="0">
-                  <widget class="QLabel" name="phase0Trim2Label">
+                  <widget class="QLabel" name="phase0Trim1Label">
                    <property name="text">
-                    <string>trim2</string>
+                    <string>trim1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QSpinBox" name="phase0Trim2">
+                  <widget class="QSpinBox" name="phase0Trim1">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -735,14 +735,14 @@
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="phase0Trim1Label">
+                  <widget class="QLabel" name="phase0Trim2Label">
                    <property name="text">
-                    <string>trim1</string>
+                    <string>trim2</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QSpinBox" name="phase0Trim1">
+                  <widget class="QSpinBox" name="phase0Trim2">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -836,8 +836,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>292</height>
+              <width>798</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -969,16 +969,16 @@
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14d" columnstretch="0,1">
                  <item row="1" column="0">
-                  <widget class="QLabel" name="phase1Trim2Label">
+                  <widget class="QLabel" name="phase1Trim1Label">
                    <property name="text">
-                    <string>trim2</string>
+                    <string>trim1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="phase1Trim1Label">
+                  <widget class="QLabel" name="phase1Trim2Label">
                    <property name="text">
-                    <string>trim1</string>
+                    <string>trim2</string>
                    </property>
                   </widget>
                  </item>
@@ -1017,7 +1017,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase1Trim1Use">
+                    <widget class="QComboBox" name="phase1Trim2Use">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                        <horstretch>1</horstretch>
@@ -1027,7 +1027,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase1Trim1Value">
+                    <widget class="QSpinBox" name="phase1Trim2Value">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                        <horstretch>1</horstretch>
@@ -1079,10 +1079,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase1Trim2Use"/>
+                    <widget class="QComboBox" name="phase1Trim1Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase1Trim2Value">
+                    <widget class="QSpinBox" name="phase1Trim1Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -1239,8 +1239,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>798</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1372,16 +1372,16 @@
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14e" columnstretch="0,1">
                  <item row="1" column="0">
-                  <widget class="QLabel" name="phase2Trim2Label">
+                  <widget class="QLabel" name="phase2Trim1Label">
                    <property name="text">
-                    <string>trim2</string>
+                    <string>trim1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="phase2Trim1Label">
+                  <widget class="QLabel" name="phase2Trim2Label">
                    <property name="text">
-                    <string>trim1</string>
+                    <string>trim2</string>
                    </property>
                   </widget>
                  </item>
@@ -1401,10 +1401,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase2Trim1Use"/>
+                    <widget class="QComboBox" name="phase2Trim2Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase2Trim1Value">
+                    <widget class="QSpinBox" name="phase2Trim2Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -1450,10 +1450,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase2Trim2Use"/>
+                    <widget class="QComboBox" name="phase2Trim1Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase2Trim2Value">
+                    <widget class="QSpinBox" name="phase2Trim1Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -1610,8 +1610,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>798</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1743,16 +1743,16 @@
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14a" columnstretch="0,1">
                  <item row="1" column="0">
-                  <widget class="QLabel" name="phase3Trim2Label">
+                  <widget class="QLabel" name="phase3Trim1Label">
                    <property name="text">
-                    <string>trim2</string>
+                    <string>trim1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="phase3Trim1Label">
+                  <widget class="QLabel" name="phase3Trim2Label">
                    <property name="text">
-                    <string>trim1</string>
+                    <string>trim2</string>
                    </property>
                   </widget>
                  </item>
@@ -1772,10 +1772,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase3Trim1Use"/>
+                    <widget class="QComboBox" name="phase3Trim2Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase3Trim1Value">
+                    <widget class="QSpinBox" name="phase3Trim2Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -1821,10 +1821,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase3Trim2Use"/>
+                    <widget class="QComboBox" name="phase3Trim1Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase3Trim2Value">
+                    <widget class="QSpinBox" name="phase3Trim1Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -1981,8 +1981,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>798</width>
+              <height>372</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2114,16 +2114,16 @@
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14b" columnstretch="0,1">
                  <item row="1" column="0">
-                  <widget class="QLabel" name="phase4Trim2Label">
+                  <widget class="QLabel" name="phase4Trim1Label">
                    <property name="text">
-                    <string>trim2</string>
+                    <string>trim1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="phase4Trim1Label">
+                  <widget class="QLabel" name="phase4Trim2Label">
                    <property name="text">
-                    <string>trim1</string>
+                    <string>trim2</string>
                    </property>
                   </widget>
                  </item>
@@ -2143,10 +2143,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase4Trim1Use"/>
+                    <widget class="QComboBox" name="phase4Trim2Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase4Trim1Value">
+                    <widget class="QSpinBox" name="phase4Trim2Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -2192,10 +2192,10 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase4Trim2Use"/>
+                    <widget class="QComboBox" name="phase4Trim1Use"/>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="phase4Trim2Value">
+                    <widget class="QSpinBox" name="phase4Trim1Value">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -9770,7 +9770,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>phase3Trim1Value</sender>
+   <sender>phase3Trim2Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase3Trim2Slider</receiver>
    <slot>setValue(int)</slot>
@@ -9802,7 +9802,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase4Trim1Value</sender>
+   <sender>phase4Trim2Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase4Trim2Slider</receiver>
    <slot>setValue(int)</slot>
@@ -9818,7 +9818,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase0Trim2</sender>
+   <sender>phase0Trim1</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase0Trim1Slider</receiver>
    <slot>setValue(int)</slot>
@@ -9836,7 +9836,7 @@
   <connection>
    <sender>phase4Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase4Trim2Value</receiver>
+   <receiver>phase4Trim1Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9850,7 +9850,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase0Trim1</sender>
+   <sender>phase0Trim2</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase0Trim2Slider</receiver>
    <slot>setValue(int)</slot>
@@ -9868,7 +9868,7 @@
   <connection>
    <sender>phase3Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase3Trim1Value</receiver>
+   <receiver>phase3Trim2Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9898,7 +9898,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase2Trim1Value</sender>
+   <sender>phase2Trim2Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase2Trim2Slider</receiver>
    <slot>setValue(int)</slot>
@@ -9980,7 +9980,7 @@
   <connection>
    <sender>phase0Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase0Trim1</receiver>
+   <receiver>phase0Trim2</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -9994,7 +9994,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase4Trim2Value</sender>
+   <sender>phase4Trim1Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase4Trim1Slider</receiver>
    <slot>setValue(int)</slot>
@@ -10028,7 +10028,7 @@
   <connection>
    <sender>phase1Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase1Trim2Value</receiver>
+   <receiver>phase1Trim1Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10044,7 +10044,7 @@
   <connection>
    <sender>phase1Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase1Trim1Value</receiver>
+   <receiver>phase1Trim2Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10060,7 +10060,7 @@
   <connection>
    <sender>phase0Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase0Trim2</receiver>
+   <receiver>phase0Trim1</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10122,7 +10122,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase1Trim1Value</sender>
+   <sender>phase1Trim2Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase1Trim2Slider</receiver>
    <slot>setValue(int)</slot>
@@ -10138,7 +10138,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase1Trim2Value</sender>
+   <sender>phase1Trim1Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase1Trim1Slider</receiver>
    <slot>setValue(int)</slot>
@@ -10156,7 +10156,7 @@
   <connection>
    <sender>phase2Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase2Trim1Value</receiver>
+   <receiver>phase2Trim2Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10252,7 +10252,7 @@
   <connection>
    <sender>phase4Trim2Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase4Trim1Value</receiver>
+   <receiver>phase4Trim2Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10266,7 +10266,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase3Trim2Value</sender>
+   <sender>phase3Trim1Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase3Trim1Slider</receiver>
    <slot>setValue(int)</slot>
@@ -10298,7 +10298,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>phase2Trim2Value</sender>
+   <sender>phase2Trim1Value</sender>
    <signal>valueChanged(int)</signal>
    <receiver>phase2Trim1Slider</receiver>
    <slot>setValue(int)</slot>
@@ -10332,7 +10332,7 @@
   <connection>
    <sender>phase3Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase3Trim2Value</receiver>
+   <receiver>phase3Trim1Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -10396,7 +10396,7 @@
   <connection>
    <sender>phase2Trim1Slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>phase2Trim2Value</receiver>
+   <receiver>phase2Trim1Value</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">

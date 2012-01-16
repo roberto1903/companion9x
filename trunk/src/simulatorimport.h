@@ -97,7 +97,7 @@ frskyStreaming = 255;
 #ifdef SETVALUES_IMPORT
 #undef SETVALUES_IMPORT
 for (int i=0; i<4; i++)
-  g_anas[0] = inputs.sticks[i];
+  g_anas[i] = inputs.sticks[i];
 for (int i=0; i<3; i++)
   g_anas[4+i] = inputs.pots[i];
 
@@ -224,8 +224,8 @@ setTrimValue(phase, idx, value);
 #ifdef GETTRIMS_IMPORT
 #undef GETTRIMS_IMPORT
 uint8_t phase = getFlightPhase();
+trims.extended = hasExtendedTrims();
 for (uint8_t idx=0; idx<4; idx++) {
-  trims.extended = hasExtendedTrims();
   trims.values[idx] = getTrimValue(getTrimFlightPhase(idx, phase), idx);
 }
 #endif

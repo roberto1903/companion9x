@@ -59,10 +59,10 @@ void Gruvin9xInterface::loadModel(ModelData &model, unsigned int stickMode, int 
   T _model;
   if ((version == 2 && efile->readRlc2((uint8_t*)&_model, sizeof(T))) ||
       (version == 1 && efile->readRlc1((uint8_t*)&_model, sizeof(T)))) {
-    if (stickMode) {
-      applyStickModeToModel(_model, stickMode);
-    }
     model = _model;
+    if (stickMode) {
+      applyStickModeToModel(model, stickMode);
+    }
   }
   else {
     model.clear();
@@ -189,10 +189,11 @@ int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
-      Gruvin9xModelData gruvin9xModel(radioData.models[i]);
+      ModelData model = radioData.models[i];
       if (1/*version < */) {
-        applyStickModeToModel(gruvin9xModel, radioData.generalSettings.stickMode+1);
+        applyStickModeToModel(model, radioData.generalSettings.stickMode+1);
       }
+      Gruvin9xModelData gruvin9xModel(model);
       sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
       if(sz != sizeof(Gruvin9xModelData)) {
         return 0;

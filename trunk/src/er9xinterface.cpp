@@ -52,9 +52,16 @@ inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)
 {
   for (int i=0; i<2; i++) {
     int stick = applyStickMode(i+1, mode) - 1;
-    Er9xExpoData tmp = model.expoData[i];
-    model.expoData[i] = model.expoData[stick];
-    model.expoData[stick] = tmp;
+    {
+      int tmp = model.trim[i];
+      model.trim[i] = model.trim[stick];
+      model.trim[stick] = tmp;
+    }
+    {
+      Er9xExpoData tmp = model.expoData[i];
+      model.expoData[i] = model.expoData[stick];
+      model.expoData[stick] = tmp;
+    }
   }
   for (int i=0; i<MAX_MIXERS; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
