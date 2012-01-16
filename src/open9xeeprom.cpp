@@ -605,7 +605,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {
-          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= j ? 1 : 0);
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
         }
         else {
           phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
