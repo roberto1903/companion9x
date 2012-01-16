@@ -559,86 +559,86 @@ void ModelEdit::updateCurvesTab()
     ChkB->setChecked(plot_curve[ChkBn]);
   }
 
-  QSpinBox* spn[][9] = {
-      { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
-    , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
-    , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
-    , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
-    , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
-    , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
-    , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
-    , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
-    , { ui->curvePt1_9, ui->curvePt2_9, ui->curvePt3_9, ui->curvePt4_9, ui->curvePt5_9, ui->curvePt6_9, ui->curvePt7_9, ui->curvePt8_9, ui->curvePt9_9 }
-    , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
-    , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
-    , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
-    , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
-    , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
-    , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
-    , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
-  };
-  for (int i = 0; i < 16; i++) {
-    int jMax = 5;
-    if (i > 7) {
-      jMax = 9;
-    }
-    for (int j = 0; j < jMax; j++) {
-      if (i > 7) {
-        spn[i][j]->setValue(g_model.curves9[i-8][j]);
-      }
-      else   {
-        spn[i][j]->setValue(g_model.curves5[i][j]);
-      }
-    }
-  }
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      spn5[i][j]->setValue(g_model.curves5[i][j]);
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      spn9[i][j]->setValue(g_model.curves9[i][j]);
+
   ControlCurveSignal(false);
 }
 
 
 void ModelEdit::tabCurves()
 {
-   for (int i=0; i<16;i++) {
-     plot_curve[i]=FALSE;
-   }
-   redrawCurve=true;
-   ui->curveEdit_1->setStyleSheet("background-color: #00007f; color: white;");
-   ui->curveEdit_2->setStyleSheet("background-color: #007f00; color: white;");
-   ui->curveEdit_3->setStyleSheet("background-color: #7f0000; color: white;");
-   ui->curveEdit_4->setStyleSheet("background-color: #007f7f; color: white;");
-   ui->curveEdit_5->setStyleSheet("background-color: #7f007f; color: white;");
-   ui->curveEdit_6->setStyleSheet("background-color: #7f7f00; color: white;");
-   ui->curveEdit_7->setStyleSheet("background-color: #7f7f7f; color: white;");
-   ui->curveEdit_8->setStyleSheet("background-color: #0000ff; color: white;");
-   ui->curveEdit_9->setStyleSheet("background-color: #007fff; color: white;");
-   ui->curveEdit_10->setStyleSheet("background-color: #7f00ff; color: white;");
-   ui->curveEdit_11->setStyleSheet("background-color: #00ff00; color: white;");
-   ui->curveEdit_12->setStyleSheet("background-color: #00ff7f; color: white;");
-   ui->curveEdit_13->setStyleSheet("background-color: #7fff00; color: white;");
-   ui->curveEdit_14->setStyleSheet("background-color: #ff0000; color: white;");
-   ui->curveEdit_15->setStyleSheet("background-color: #ff007f; color: white;");
-   ui->curveEdit_16->setStyleSheet("background-color: #ff7f00; color: white;");
-   updateCurvesTab();
+  QSpinBox* tmp5[MAX_CURVE5][5] = {
+        { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
+      , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
+      , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
+      , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
+      , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
+      , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
+      , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
+      , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
+  };
 
-   QGraphicsScene *scene = new QGraphicsScene(ui->curvePreview);
-   scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-   ui->curvePreview->setScene(scene);
-   currentCurve = 0;
+  QSpinBox* tmp9[MAX_CURVE9][9] = {
+        { ui->curvePt1_9,  ui->curvePt2_9,  ui->curvePt3_9,  ui->curvePt4_9,  ui->curvePt5_9,  ui->curvePt6_9,  ui->curvePt7_9,  ui->curvePt8_9,  ui->curvePt9_9 }
+      , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
+      , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
+      , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
+      , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
+      , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
+      , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
+      , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
+  };
 
-   connect(ui->clearMixesPB,SIGNAL(pressed()),this,SLOT(clearCurves()));
+  memcpy(spn5, tmp5, sizeof(spn5));
+  memcpy(spn9, tmp9, sizeof(spn9));
 
-   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("curvePt[0-9]+"))) {
+  for (int i=0; i<16;i++) {
+    plot_curve[i]=FALSE;
+  }
+  redrawCurve=true;
+  ui->curveEdit_1->setStyleSheet("background-color: #00007f; color: white;");
+  ui->curveEdit_2->setStyleSheet("background-color: #007f00; color: white;");
+  ui->curveEdit_3->setStyleSheet("background-color: #7f0000; color: white;");
+  ui->curveEdit_4->setStyleSheet("background-color: #007f7f; color: white;");
+  ui->curveEdit_5->setStyleSheet("background-color: #7f007f; color: white;");
+  ui->curveEdit_6->setStyleSheet("background-color: #7f7f00; color: white;");
+  ui->curveEdit_7->setStyleSheet("background-color: #7f7f7f; color: white;");
+  ui->curveEdit_8->setStyleSheet("background-color: #0000ff; color: white;");
+  ui->curveEdit_9->setStyleSheet("background-color: #007fff; color: white;");
+  ui->curveEdit_10->setStyleSheet("background-color: #7f00ff; color: white;");
+  ui->curveEdit_11->setStyleSheet("background-color: #00ff00; color: white;");
+  ui->curveEdit_12->setStyleSheet("background-color: #00ff7f; color: white;");
+  ui->curveEdit_13->setStyleSheet("background-color: #7fff00; color: white;");
+  ui->curveEdit_14->setStyleSheet("background-color: #ff0000; color: white;");
+  ui->curveEdit_15->setStyleSheet("background-color: #ff007f; color: white;");
+  ui->curveEdit_16->setStyleSheet("background-color: #ff7f00; color: white;");
+  updateCurvesTab();
+
+  QGraphicsScene *scene = new QGraphicsScene(ui->curvePreview);
+  scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+  ui->curvePreview->setScene(scene);
+  currentCurve = 0;
+
+  connect(ui->clearMixesPB,SIGNAL(pressed()),this,SLOT(clearCurves()));
+
+  foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("curvePt[0-9]+"))) {
     connect(sb, SIGNAL(valueChanged(int)), this, SLOT(curvePointEdited()));
   }
 
-   foreach(QPushButton *pb, findChildren<QPushButton *>(QRegExp("resetCurve_[0-9]+"))) {
+  foreach(QPushButton *pb, findChildren<QPushButton *>(QRegExp("resetCurve_[0-9]+"))) {
     connect(pb, SIGNAL(clicked()), this, SLOT(resetCurve()));
   }
    
-   foreach(QPushButton *pb, findChildren<QPushButton *>(QRegExp("curveEdit_[0-9]+"))) {
+  foreach(QPushButton *pb, findChildren<QPushButton *>(QRegExp("curveEdit_[0-9]+"))) {
     connect(pb, SIGNAL(clicked()), this, SLOT(editCurve()));
   }
    
-   foreach(QCheckBox *ChkB, findChildren<QCheckBox *>(QRegExp("plotCB_[0-9]+"))) {
+  foreach(QCheckBox *ChkB, findChildren<QCheckBox *>(QRegExp("plotCB_[0-9]+"))) {
     connect(ChkB, SIGNAL(toggled(bool)), this, SLOT(plotCurve(bool)));
   }
 }
@@ -674,43 +674,15 @@ void ModelEdit::limitInvEdited()
 
 void ModelEdit::setCurrentCurve(int curveId)
 {
-    currentCurve = curveId;
-    QString ss = "QSpinBox { background-color:rgb(255, 255, 127);}";
+  currentCurve = curveId;
+  QString ss = "QSpinBox { background-color:rgb(255, 255, 127);}";
 
-    QSpinBox* spn[][16] = {
-          { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
-        , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
-        , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
-        , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
-        , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
-        , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
-        , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
-        , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
-        , { ui->curvePt1_9, ui->curvePt2_9, ui->curvePt3_9, ui->curvePt4_9, ui->curvePt5_9, ui->curvePt6_9, ui->curvePt7_9, ui->curvePt8_9, ui->curvePt9_9 }
-        , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
-        , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
-        , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
-        , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
-        , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
-        , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
-        , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
-    };
-    for (int i = 0; i < 16; i++)
-    {
-        int jMax = 5;
-        if (i > 7) { jMax = 9; }
-        for (int j = 0; j < jMax; j++)
-        {
-            if (curveId == i)
-            {
-                spn[i][j]->setStyleSheet(ss);
-            }
-            else
-            {
-                spn[i][j]->setStyleSheet("");
-            }
-        }
-   }
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      spn5[i][j]->setStyleSheet(curveId == i ? ss : "");
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      spn9[i][j]->setStyleSheet(curveId == i+MAX_CURVE5 ? ss : "");
 }
 
 void ModelEdit::curvePointEdited()
@@ -722,38 +694,13 @@ void ModelEdit::curvePointEdited()
       curveId += 10;
   }
   setCurrentCurve(curveId);
-  QSpinBox* spn[][16] = {
-          { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
-        , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
-        , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
-        , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
-        , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
-        , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
-        , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
-        , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
-        , { ui->curvePt1_9, ui->curvePt2_9, ui->curvePt3_9, ui->curvePt4_9, ui->curvePt5_9, ui->curvePt6_9, ui->curvePt7_9, ui->curvePt8_9, ui->curvePt9_9 }
-        , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
-        , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
-        , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
-        , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
-        , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
-        , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
-        , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
-  };
-  for (int i = 0; i < 16; i++) {
-    int jMax = 5;
-    if (i > 7) { 
-      jMax = 9;
-    }
-    for (int j = 0; j < jMax; j++)  {
-      if (i>7) {
-       g_model.curves9[i-8][j]=spn[i][j]->value();
-      }
-      else {
-        g_model.curves5[i][j]=spn[i][j]->value();
-      }
-    }
-  }
+
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      g_model.curves5[i][j] = spn5[i][j]->value();
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      g_model.curves9[i][j] = spn9[i][j]->value();
 
   if (redrawCurve)
     drawCurve();
@@ -1369,25 +1316,6 @@ void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_value
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
-/*   QSpinBox* spn[][16] = {
-          { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
-        , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
-        , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
-        , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
-        , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
-        , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
-        , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
-        , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
-        , { ui->curvePt1_9, ui->curvePt2_9, ui->curvePt3_9, ui->curvePt4_9, ui->curvePt5_9, ui->curvePt6_9, ui->curvePt7_9, ui->curvePt8_9, ui->curvePt9_9 }
-        , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
-        , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
-        , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
-        , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
-        , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
-        , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
-        , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
-    };
-    return spn[currentCurve][i];*/
     if(currentCurve==0 && i==0) return ui->curvePt1_1;
     if(currentCurve==0 && i==1) return ui->curvePt2_1;
     if(currentCurve==0 && i==2) return ui->curvePt3_1;
