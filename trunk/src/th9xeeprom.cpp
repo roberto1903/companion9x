@@ -268,7 +268,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
-    switch (c9x.timers[0].mode) {
+    switch ((int)c9x.timers[0].mode) {
       case TMRMODE_ABS:
       case -TMRMODE_ABS:
         tmrMode = 1;
