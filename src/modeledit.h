@@ -126,22 +126,9 @@ private slots:
     void on_ppmFrameLengthDSB_editingFinished();
     void on_extendedLimitsChkB_toggled(bool checked);
     void on_extendedTrimsChkB_toggled(bool checked);
-    void on_resetCurve_1_clicked();
-    void on_resetCurve_2_clicked();
-    void on_resetCurve_3_clicked();
-    void on_resetCurve_4_clicked();
-    void on_resetCurve_5_clicked();
-    void on_resetCurve_6_clicked();
-    void on_resetCurve_7_clicked();
-    void on_resetCurve_8_clicked();
-    void on_resetCurve_9_clicked();
-    void on_resetCurve_10_clicked();
-    void on_resetCurve_11_clicked();
-    void on_resetCurve_12_clicked();
-    void on_resetCurve_13_clicked();
-    void on_resetCurve_14_clicked();
-    void on_resetCurve_15_clicked();
-    void on_resetCurve_16_clicked();
+    void resetCurve();
+    void editCurve();
+    void plotCurve(bool checked);
 
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
     void pasteMixerMimeData(const QMimeData * mimeData, int destIdx);
@@ -179,42 +166,6 @@ private slots:
     void mixerlistWidget_customContextMenuRequested(QPoint pos);
     void mixerlistWidget_doubleClicked(QModelIndex index);
     void mixerlistWidget_KeyPress(QKeyEvent *event);
-
-
-
-    void on_curveEdit_1_clicked();
-    void on_curveEdit_2_clicked();
-    void on_curveEdit_3_clicked();
-    void on_curveEdit_4_clicked();
-    void on_curveEdit_5_clicked();
-    void on_curveEdit_6_clicked();
-    void on_curveEdit_7_clicked();
-    void on_curveEdit_8_clicked();
-    void on_curveEdit_9_clicked();
-    void on_curveEdit_10_clicked();
-    void on_curveEdit_11_clicked();
-    void on_curveEdit_12_clicked();
-    void on_curveEdit_13_clicked();
-    void on_curveEdit_14_clicked();
-    void on_curveEdit_15_clicked();
-    void on_curveEdit_16_clicked();
-
-    void on_plotCB_1_toggled(bool checked);
-    void on_plotCB_2_toggled(bool checked);
-    void on_plotCB_3_toggled(bool checked);
-    void on_plotCB_4_toggled(bool checked);
-    void on_plotCB_5_toggled(bool checked);
-    void on_plotCB_6_toggled(bool checked);
-    void on_plotCB_7_toggled(bool checked);
-    void on_plotCB_8_toggled(bool checked);
-    void on_plotCB_9_toggled(bool checked);
-    void on_plotCB_10_toggled(bool checked);
-    void on_plotCB_11_toggled(bool checked);
-    void on_plotCB_12_toggled(bool checked);
-    void on_plotCB_13_toggled(bool checked);
-    void on_plotCB_14_toggled(bool checked);
-    void on_plotCB_15_toggled(bool checked);
-    void on_plotCB_16_toggled(bool checked);
 
     void curvePointEdited();
     void limitEdited();
