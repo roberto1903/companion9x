@@ -53,10 +53,10 @@ void Open9xInterface::loadModel(ModelData &model, unsigned int stickMode)
 {
   T _model;
   if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
-    if (stickMode) {
-      applyStickModeToModel(_model, stickMode);
-    }
     model = _model;
+    if (stickMode) {
+      applyStickModeToModel(model, stickMode);
+    }
   }
   else {
     model.clear();

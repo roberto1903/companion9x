@@ -426,7 +426,7 @@ class FrSkyData {
 };
 
 enum TimerMode {
-    /* negative */
+  TMRMODE_NEGATIVE=-128, /* avoid warnings */
   TMRMODE_OFF=0,
   TMRMODE_ABS,
   TMRMODE_RUD,
@@ -586,17 +586,28 @@ inline int applyStickMode(int stick, unsigned int mode)
     return stick;
 }
 
-template <class T>
-inline void applyStickModeToModel(T & model, unsigned int mode)
+inline void applyStickModeToModel(ModelData &model, unsigned int mode)
 {
-  T model_copy = model;
+  ModelData model_copy = model;
 
+  // trims
+  for (int p=0; p<MAX_PHASES; p++) {
+    for (int i=0; i<NUM_STICKS/2; i++) {
+      int converted_stick = applyStickMode(i+1, mode) - 1;
+      int tmp = model.phaseData[p].trim[i];
+      model.phaseData[p].trim[i] = model.phaseData[p].trim[converted_stick];
+      model.phaseData[p].trim[converted_stick] = tmp;
+      tmp = model.phaseData[p].trimRef[i];
+      model.phaseData[p].trimRef[i] = model.phaseData[p].trimRef[converted_stick];
+      model.phaseData[p].trimRef[converted_stick] = tmp;
+    }
+  }
 
+  // expos
   for (unsigned int i=0; i<sizeof(model.expoData) / sizeof(model.expoData[1]); i++) {
     if (model.expoData[i].mode)
       model_copy.expoData[i].chn = applyStickMode(model.expoData[i].chn+1, mode) - 1;
   }
-
   int index=0;
   for (int i=0; i<NUM_STICKS; i++) {
     for (unsigned int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
@@ -605,8 +616,11 @@ inline void applyStickModeToModel(T & model, unsigned int mode)
     }
   }
 
+  // mixers
   for (int i=0; i<MAX_MIXERS; i++)
-    model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
+    model.mixData[i].srcRaw = (RawSource)applyStickMode(model.mixData[i].srcRaw, mode);
+
+  // virtual switches
   for (int i=0; i<NUM_CSW; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
@@ -616,7 +630,9 @@ inline void applyStickModeToModel(T & model, unsigned int mode)
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
     }
   }
-  model.swashR.collectiveSource = applyStickMode(model.swashR.collectiveSource, mode);
+
+  // heli
+  model.swashRingData.collectiveSource = applyStickMode(model.swashRingData.collectiveSource, mode);
 }
 
 void RegisterFirmwares();
