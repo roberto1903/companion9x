@@ -2114,12 +2114,12 @@ void ModelEdit::setLimitMinMax()
 {
   int v = g_model.extendedLimits ? 125 : 100;
   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
-    sb->setMaximum(v);
+    sb->setMaximum(25);
     sb->setMinimum(-v);
   }
   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("maxSB_[0-9]+"))) {
     sb->setMaximum(v);
-    sb->setMinimum(-v);
+    sb->setMinimum(-25);
   }
 }
 
