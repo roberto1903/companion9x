@@ -27,30 +27,32 @@ splashLibrary::~splashLibrary() {
 }
 
 void splashLibrary::setupPage(int page) {
-  int i = 0;
-
-  foreach(splashLabel *sl, findChildren<splashLabel *>()) {
+  splashLabel * sl[] = { ui->FwImage_01, ui->FwImage_02, ui->FwImage_03, ui->FwImage_04 ,
+        ui->FwImage_05, ui->FwImage_06, ui->FwImage_07, ui->FwImage_08 ,
+        ui->FwImage_09, ui->FwImage_10, ui->FwImage_11, ui->FwImage_12 ,
+        ui->FwImage_13, ui->FwImage_14, ui->FwImage_15, ui->FwImage_16 ,
+        ui->FwImage_17, ui->FwImage_18, ui->FwImage_19, ui->FwImage_20 };
+  for(int i=0; i<20; i++) {
     if ((i + 20 * page) < imageList.size()) {
       QImage image(imageList.at(i + 20 * page));
       if (!image.isNull()) {
-        sl->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
-        sl->setEnabled(true);
-        sl->setId((i + 20 * page));
-        sl->setStyleSheet("border:1px solid; border-color:#999999;");
+        sl[i]->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+        sl[i]->setEnabled(true);
+        sl[i]->setId((i + 20 * page));
+        sl[i]->setStyleSheet("border:1px solid; border-color:#999999;");
       }
       else {
-        sl->clear();
-        sl->setDisabled(true);
-        sl->setStyleSheet("border:1px;");
-        sl->setId(-1);
+        sl[i]->clear();
+        sl[i]->setDisabled(true);
+        sl[i]->setStyleSheet("border:1px;");
+        sl[i]->setId(-1);
       }
-      i++;
     }
     else {
-      sl->clear();
-      sl->setDisabled(true);
-      sl->setStyleSheet("border:1px;");
-      sl->setId(-1);
+      sl[i]->clear();
+      sl[i]->setDisabled(true);
+      sl[i]->setStyleSheet("border:1px;");
+      sl[i]->setId(-1);
     }
   }
   setWindowTitle(tr("Splash Library - page %1 of %2").arg(page + 1).arg(ceil((float) imageList.size() / 20.0)));
