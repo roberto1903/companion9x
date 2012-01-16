@@ -1316,136 +1316,10 @@ void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_value
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
-    if(currentCurve==0 && i==0) return ui->curvePt1_1;
-    if(currentCurve==0 && i==1) return ui->curvePt2_1;
-    if(currentCurve==0 && i==2) return ui->curvePt3_1;
-    if(currentCurve==0 && i==3) return ui->curvePt4_1;
-    if(currentCurve==0 && i==4) return ui->curvePt5_1;
-
-    if(currentCurve==1 && i==0) return ui->curvePt1_2;
-    if(currentCurve==1 && i==1) return ui->curvePt2_2;
-    if(currentCurve==1 && i==2) return ui->curvePt3_2;
-    if(currentCurve==1 && i==3) return ui->curvePt4_2;
-    if(currentCurve==1 && i==4) return ui->curvePt5_2;
-
-    if(currentCurve==2 && i==0) return ui->curvePt1_3;
-    if(currentCurve==2 && i==1) return ui->curvePt2_3;
-    if(currentCurve==2 && i==2) return ui->curvePt3_3;
-    if(currentCurve==2 && i==3) return ui->curvePt4_3;
-    if(currentCurve==2 && i==4) return ui->curvePt5_3;
-
-    if(currentCurve==3 && i==0) return ui->curvePt1_4;
-    if(currentCurve==3 && i==1) return ui->curvePt2_4;
-    if(currentCurve==3 && i==2) return ui->curvePt3_4;
-    if(currentCurve==3 && i==3) return ui->curvePt4_4;
-    if(currentCurve==3 && i==4) return ui->curvePt5_4;
-
-    if(currentCurve==4 && i==0) return ui->curvePt1_5;
-    if(currentCurve==4 && i==1) return ui->curvePt2_5;
-    if(currentCurve==4 && i==2) return ui->curvePt3_5;
-    if(currentCurve==4 && i==3) return ui->curvePt4_5;
-    if(currentCurve==4 && i==4) return ui->curvePt5_5;
-
-    if(currentCurve==5 && i==0) return ui->curvePt1_6;
-    if(currentCurve==5 && i==1) return ui->curvePt2_6;
-    if(currentCurve==5 && i==2) return ui->curvePt3_6;
-    if(currentCurve==5 && i==3) return ui->curvePt4_6;
-    if(currentCurve==5 && i==4) return ui->curvePt5_6;
-
-    if(currentCurve==6 && i==0) return ui->curvePt1_7;
-    if(currentCurve==6 && i==1) return ui->curvePt2_7;
-    if(currentCurve==6 && i==2) return ui->curvePt3_7;
-    if(currentCurve==6 && i==3) return ui->curvePt4_7;
-    if(currentCurve==6 && i==4) return ui->curvePt5_7;
-
-    if(currentCurve==7 && i==0) return ui->curvePt1_8;
-    if(currentCurve==7 && i==1) return ui->curvePt2_8;
-    if(currentCurve==7 && i==2) return ui->curvePt3_8;
-    if(currentCurve==7 && i==3) return ui->curvePt4_8;
-    if(currentCurve==7 && i==4) return ui->curvePt5_8;
-
-
-    if(currentCurve==8 && i==0) return ui->curvePt1_9;
-    if(currentCurve==8 && i==1) return ui->curvePt2_9;
-    if(currentCurve==8 && i==2) return ui->curvePt3_9;
-    if(currentCurve==8 && i==3) return ui->curvePt4_9;
-    if(currentCurve==8 && i==4) return ui->curvePt5_9;
-    if(currentCurve==8 && i==5) return ui->curvePt6_9;
-    if(currentCurve==8 && i==6) return ui->curvePt7_9;
-    if(currentCurve==8 && i==7) return ui->curvePt8_9;
-    if(currentCurve==8 && i==8) return ui->curvePt9_9;
-
-    if(currentCurve==9 && i==0) return ui->curvePt1_10;
-    if(currentCurve==9 && i==1) return ui->curvePt2_10;
-    if(currentCurve==9 && i==2) return ui->curvePt3_10;
-    if(currentCurve==9 && i==3) return ui->curvePt4_10;
-    if(currentCurve==9 && i==4) return ui->curvePt5_10;
-    if(currentCurve==9 && i==5) return ui->curvePt6_10;
-    if(currentCurve==9 && i==6) return ui->curvePt7_10;
-    if(currentCurve==9 && i==7) return ui->curvePt8_10;
-    if(currentCurve==9 && i==8) return ui->curvePt9_10;
-
-    if(currentCurve==10 && i==0) return ui->curvePt1_11;
-    if(currentCurve==10 && i==1) return ui->curvePt2_11;
-    if(currentCurve==10 && i==2) return ui->curvePt3_11;
-    if(currentCurve==10 && i==3) return ui->curvePt4_11;
-    if(currentCurve==10 && i==4) return ui->curvePt5_11;
-    if(currentCurve==10 && i==5) return ui->curvePt6_11;
-    if(currentCurve==10 && i==6) return ui->curvePt7_11;
-    if(currentCurve==10 && i==7) return ui->curvePt8_11;
-    if(currentCurve==10 && i==8) return ui->curvePt9_11;
-
-    if(currentCurve==11 && i==0) return ui->curvePt1_12;
-    if(currentCurve==11 && i==1) return ui->curvePt2_12;
-    if(currentCurve==11 && i==2) return ui->curvePt3_12;
-    if(currentCurve==11 && i==3) return ui->curvePt4_12;
-    if(currentCurve==11 && i==4) return ui->curvePt5_12;
-    if(currentCurve==11 && i==5) return ui->curvePt6_12;
-    if(currentCurve==11 && i==6) return ui->curvePt7_12;
-    if(currentCurve==11 && i==7) return ui->curvePt8_12;
-    if(currentCurve==11 && i==8) return ui->curvePt9_12;
-
-    if(currentCurve==12 && i==0) return ui->curvePt1_13;
-    if(currentCurve==12 && i==1) return ui->curvePt2_13;
-    if(currentCurve==12 && i==2) return ui->curvePt3_13;
-    if(currentCurve==12 && i==3) return ui->curvePt4_13;
-    if(currentCurve==12 && i==4) return ui->curvePt5_13;
-    if(currentCurve==12 && i==5) return ui->curvePt6_13;
-    if(currentCurve==12 && i==6) return ui->curvePt7_13;
-    if(currentCurve==12 && i==7) return ui->curvePt8_13;
-    if(currentCurve==12 && i==8) return ui->curvePt9_13;
-
-    if(currentCurve==13 && i==0) return ui->curvePt1_14;
-    if(currentCurve==13 && i==1) return ui->curvePt2_14;
-    if(currentCurve==13 && i==2) return ui->curvePt3_14;
-    if(currentCurve==13 && i==3) return ui->curvePt4_14;
-    if(currentCurve==13 && i==4) return ui->curvePt5_14;
-    if(currentCurve==13 && i==5) return ui->curvePt6_14;
-    if(currentCurve==13 && i==6) return ui->curvePt7_14;
-    if(currentCurve==13 && i==7) return ui->curvePt8_14;
-    if(currentCurve==13 && i==8) return ui->curvePt9_14;
-
-    if(currentCurve==14 && i==0) return ui->curvePt1_15;
-    if(currentCurve==14 && i==1) return ui->curvePt2_15;
-    if(currentCurve==14 && i==2) return ui->curvePt3_15;
-    if(currentCurve==14 && i==3) return ui->curvePt4_15;
-    if(currentCurve==14 && i==4) return ui->curvePt5_15;
-    if(currentCurve==14 && i==5) return ui->curvePt6_15;
-    if(currentCurve==14 && i==6) return ui->curvePt7_15;
-    if(currentCurve==14 && i==7) return ui->curvePt8_15;
-    if(currentCurve==14 && i==8) return ui->curvePt9_15;
-
-    if(currentCurve==15 && i==0) return ui->curvePt1_16;
-    if(currentCurve==15 && i==1) return ui->curvePt2_16;
-    if(currentCurve==15 && i==2) return ui->curvePt3_16;
-    if(currentCurve==15 && i==3) return ui->curvePt4_16;
-    if(currentCurve==15 && i==4) return ui->curvePt5_16;
-    if(currentCurve==15 && i==5) return ui->curvePt6_16;
-    if(currentCurve==15 && i==6) return ui->curvePt7_16;
-    if(currentCurve==15 && i==7) return ui->curvePt8_16;
-    if(currentCurve==15 && i==8) return ui->curvePt9_16;
-
-    return 0;
+  if (currentCurve < MAX_CURVE5)
+    return spn5[currentCurve][i];
+  else
+    return spn9[currentCurve - MAX_CURVE5][i];
 }
 
 void ModelEdit::drawCurve()
@@ -1512,7 +1386,7 @@ void ModelEdit::drawCurve()
         }
     }
 
-    if(currentCurve<8)
+    if (currentCurve<MAX_CURVE5)
         for(int i=0; i<5; i++)
         {
             nodel = nodex;
