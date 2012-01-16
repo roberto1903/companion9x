@@ -2864,74 +2864,15 @@ void ModelEdit::on_extendedTrimsChkB_toggled(bool checked)
 
 void ModelEdit::setLimitMinMax()
 {
-    int v = g_model.extendedLimits ? 125 : 100;
-    ui->minSB_1->setMaximum(v);
-    ui->minSB_2->setMaximum(v);
-    ui->minSB_3->setMaximum(v);
-    ui->minSB_4->setMaximum(v);
-    ui->minSB_5->setMaximum(v);
-    ui->minSB_6->setMaximum(v);
-    ui->minSB_7->setMaximum(v);
-    ui->minSB_8->setMaximum(v);
-    ui->minSB_9->setMaximum(v);
-    ui->minSB_10->setMaximum(v);
-    ui->minSB_11->setMaximum(v);
-    ui->minSB_12->setMaximum(v);
-    ui->minSB_13->setMaximum(v);
-    ui->minSB_14->setMaximum(v);
-    ui->minSB_15->setMaximum(v);
-    ui->minSB_16->setMaximum(v);
-
-    ui->minSB_1->setMinimum(-v);
-    ui->minSB_2->setMinimum(-v);
-    ui->minSB_3->setMinimum(-v);
-    ui->minSB_4->setMinimum(-v);
-    ui->minSB_5->setMinimum(-v);
-    ui->minSB_6->setMinimum(-v);
-    ui->minSB_7->setMinimum(-v);
-    ui->minSB_8->setMinimum(-v);
-    ui->minSB_9->setMinimum(-v);
-    ui->minSB_10->setMinimum(-v);
-    ui->minSB_11->setMinimum(-v);
-    ui->minSB_12->setMinimum(-v);
-    ui->minSB_13->setMinimum(-v);
-    ui->minSB_14->setMinimum(-v);
-    ui->minSB_15->setMinimum(-v);
-    ui->minSB_16->setMinimum(-v);
-
-    ui->maxSB_1->setMaximum(v);
-    ui->maxSB_2->setMaximum(v);
-    ui->maxSB_3->setMaximum(v);
-    ui->maxSB_4->setMaximum(v);
-    ui->maxSB_5->setMaximum(v);
-    ui->maxSB_6->setMaximum(v);
-    ui->maxSB_7->setMaximum(v);
-    ui->maxSB_8->setMaximum(v);
-    ui->maxSB_9->setMaximum(v);
-    ui->maxSB_10->setMaximum(v);
-    ui->maxSB_11->setMaximum(v);
-    ui->maxSB_12->setMaximum(v);
-    ui->maxSB_13->setMaximum(v);
-    ui->maxSB_14->setMaximum(v);
-    ui->maxSB_15->setMaximum(v);
-    ui->maxSB_16->setMaximum(v);
-
-    ui->maxSB_1->setMinimum(-v);
-    ui->maxSB_2->setMinimum(-v);
-    ui->maxSB_3->setMinimum(-v);
-    ui->maxSB_4->setMinimum(-v);
-    ui->maxSB_5->setMinimum(-v);
-    ui->maxSB_6->setMinimum(-v);
-    ui->maxSB_7->setMinimum(-v);
-    ui->maxSB_8->setMinimum(-v);
-    ui->maxSB_9->setMinimum(-v);
-    ui->maxSB_10->setMinimum(-v);
-    ui->maxSB_11->setMinimum(-v);
-    ui->maxSB_12->setMinimum(-v);
-    ui->maxSB_13->setMinimum(-v);
-    ui->maxSB_14->setMinimum(-v);
-    ui->maxSB_15->setMinimum(-v);
-    ui->maxSB_16->setMinimum(-v);
+  int v = g_model.extendedLimits ? 125 : 100;
+  foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
+    sb->setMaximum(v);
+    sb->setMinimum(-v);
+  }
+  foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("maxSB_[0-9]+"))) {
+    sb->setMaximum(v);
+    sb->setMinimum(-v);
+  }
 }
 
 
