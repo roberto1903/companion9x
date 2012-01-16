@@ -438,24 +438,29 @@ t_Open9xFrSkyChannelData::operator FrSkyChannelData ()
 }
 
 
-t_Open9xFrSkyData::t_Open9xFrSkyData()
-{
-  memset(this, 0, sizeof(t_Open9xFrSkyData));
-}
-
-t_Open9xFrSkyData::t_Open9xFrSkyData(FrSkyData &c9x)
-{
-  memset(this, 0, sizeof(t_Open9xFrSkyData));
-  channels[0] = c9x.channels[0];
-  channels[1] = c9x.channels[1];
-}
-
-t_Open9xFrSkyData::operator FrSkyData ()
+t_Open9xFrSkyData_v201::operator FrSkyData ()
 {
   FrSkyData c9x;
   c9x.channels[0] = channels[0];
   c9x.channels[1] = channels[1];
   return c9x;
+}
+
+t_Open9xFrSkyData_v202::operator FrSkyData ()
+{
+  FrSkyData c9x;
+  c9x.channels[0] = channels[0];
+  c9x.channels[1] = channels[1];
+  // TODO usrProto
+  return c9x;
+}
+
+t_Open9xFrSkyData_v202::t_Open9xFrSkyData_v202(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xFrSkyData_v202));
+  channels[0] = c9x.channels[0];
+  channels[1] = c9x.channels[1];
+  // TODO usrProto
 }
 
 t_Open9xModelData_v201::operator ModelData ()
@@ -520,7 +525,6 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.protocol = (Protocol)protocol;
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
-  c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
   c9x.ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
@@ -570,9 +574,8 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
     protocol = c9x.protocol;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
     thrTrim = c9x.thrTrim;
-    thrExpo = c9x.thrExpo;
+    ppmNCH = (c9x.ppmNCH - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
     pulsePol = c9x.pulsePol;
