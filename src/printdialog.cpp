@@ -343,13 +343,13 @@ void printDialog::printLimits()
     str.append("<tr><td><b>"+tr("Min")+"</b></td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
-        str.append(doTR(QString::number(g_model->limitData[i].min-100),"green"));
+        str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Max")+"</b></td>");
     for(int i=0; i<NUM_XCHNOUT; i++)
     {
-        str.append(doTR(QString::number(g_model->limitData[i].max+100),"green"));
+        str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
