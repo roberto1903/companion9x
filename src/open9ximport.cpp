@@ -18,7 +18,7 @@
 
 namespace Open9x {
 
-#include "../open9x/gruvin9x.cpp"
+#include "../open9x/open9x.cpp"
 #include "../open9x/pulses.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
