@@ -85,7 +85,9 @@ SET( companion9x_SRCS
      open9ximport.cpp
      node.cpp
      edge.cpp
-     helpers.cpp 
+     helpers.cpp
+     joystick.cpp
+     joystickdialog.cpp
      mdichild.cpp
      generaledit.cpp
      modeledit.cpp 
@@ -121,6 +123,8 @@ SET( companion9x_MOC_HDRS
      splashlibrary.h
      splashlabel.h
      burndialog.h
+     joystick.h
+     joystickdialog.h
      downloaddialog.h
      cursorwidget.h
      menuwidget.h
@@ -151,6 +155,7 @@ SET( companion9x_UIS
      customizesplashdialog.ui
      splashlibrary.ui
      burndialog.ui
+     joystickdialog.ui
 )
 
 SET( companion9x_RCS
@@ -257,7 +262,7 @@ ELSE( )
     ADD_EXECUTABLE( ${PROJECT_NAME} WIN32 ${companion9x_SRCS} ${companion9x_QM} )
 ENDIF( )
 
-TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} ${QT_QTMAIN_LIBRARY} ${XERCESC_LIBRARY} ${PTHREAD_LIBRARY} )
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} ${QT_QTMAIN_LIBRARY} ${XERCESC_LIBRARY} ${PTHREAD_LIBRARY} -lSDL )
 
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 

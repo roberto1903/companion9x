@@ -2,6 +2,7 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
+#include "joystick.h"
 
 namespace Ui {
     class preferencesDialog;
@@ -14,6 +15,7 @@ class preferencesDialog : public QDialog
 public:
     explicit preferencesDialog(QWidget *parent = 0);
     ~preferencesDialog();
+    Joystick *joystick;
 
 private:
     Ui::preferencesDialog *ui;
@@ -30,6 +32,8 @@ private slots:
     void on_clearImageButton_clicked();
     void on_libraryPathButton_clicked();
     void on_splashLibraryButton_clicked();
+    void on_joystickChkB_clicked();
+    void on_joystickcalButton_clicked();
 };
 
 #endif // PREFERENCESDIALOG_H
