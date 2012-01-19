@@ -563,22 +563,55 @@ void MainWindow::burnToFlash(QString fileToFlash)
 {
   QSettings settings("companion9x", "companion9x");
   QString fileName;
+  bool backup=false;
   if(!fileToFlash.isEmpty())
     fileName = fileToFlash;
-  burnDialog *cd = new burnDialog(this,2,&fileName);
+  burnDialog *cd = new burnDialog(this,2,&fileName,&backup);
   cd->exec();
 
   if (!fileName.isEmpty()) {
-    FlashInterface flash(fileName);
+    if (backup) {
+      QString tempDir    = QDir::tempPath();
+      QString tempFile = tempDir + "/backup.hex";
+      QString str = "eeprom:r:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Backup EEPROM From Tx"),AVR_DIALOG_CLOSE_IF_SUCCESSFUL); //, AVR_DIALOG_KEEP_OPEN);
+      ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+      int res = ad->exec();
+      if(QFileInfo(tempFile).exists() && res) {
+        QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
+        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
+        else str += ":a";
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+        ad->setWindowIcon(QIcon(":/images/write_flash.png"));
+        int res = ad->exec();
+        if (res) {
+          QString str = "eeprom:w:" + tempFile +":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Restore EEPROM To Tx",AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+          ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
+          res=ad->exec();
+          if (!res) {
+            QMessageBox::warning(this, tr("Restore failed"),tr("Cannot restore EEProm to TX, original EEProm file can be found at: %1").arg(tempFile));
+          }
+        }
+        else {
+          QMessageBox::warning(this, tr("Flash failed"),tr("Cannot flash the TX, original EEProm file can be found at: %1").arg(tempFile));
+        }
+      }
+      else {
+        QMessageBox::warning(this, tr("Backup failed"),tr("Cannot backup existing EEProm from TX, Flash process aborted"));
+      }
+    }
+    else {
+      QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+      if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
+      else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
+      else str += ":a";
 
-    QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-    if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-    else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-    else str += ":a";
-
-    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
-    ad->setWindowIcon(QIcon(":/images/write_flash.png"));
-    ad->show();
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
+      ad->setWindowIcon(QIcon(":/images/write_flash.png"));
+      ad->show();
+    }
   }
 }
 
