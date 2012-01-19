@@ -15,7 +15,7 @@ class burnDialog : public QDialog
   Q_OBJECT
 
 public:
-  explicit burnDialog(QWidget *parent = 0, int Type = 2, QString * fileName = NULL);
+  explicit burnDialog(QWidget *parent = 0, int Type = 2, QString * fileName = NULL, bool * backupEE=NULL);
   ~burnDialog();
 
 private slots:
@@ -25,6 +25,7 @@ private slots:
   void on_BurnFlashButton_clicked();
   void on_cancelButton_clicked();
   void on_InvertColorButton_clicked();
+  void on_EEbackupCB_clicked();
   void on_PreferredImageCB_toggled(bool checked);
   ;
   void shrink();
@@ -32,6 +33,7 @@ private slots:
 private:
   Ui::burnDialog *ui;
   QString * hexfileName;
+  bool * backup;
   int hexType;
 };
 

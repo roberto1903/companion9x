@@ -6,12 +6,15 @@
 #include "splashlibrary.h"
 #include "flashinterface.h"
 
-burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName) : QDialog(parent), ui(new Ui::burnDialog) {
+burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE) : QDialog(parent), ui(new Ui::burnDialog) {
   hexType = Type;
   ui->setupUi(this);
   ui->SplashFrame->hide();
   ui->FramFWInfo->hide();
+  ui->EEbackupCB->hide();
   hexfileName = fileName;
+  backup=backupEE;
+  
   if (Type == 2) {
     ui->EEpromCB->hide();
     this->setWindowTitle("Write firmware to TX");
@@ -49,11 +52,13 @@ void burnDialog::on_FlashLoadButton_clicked() {
   ui->FramFWInfo->hide();
   ui->SplashFrame->hide();
   ui->BurnFlashButton->setDisabled(true);
+  ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
   if (fileName.isEmpty()) {
     return;
   }
+  ui->EEbackupCB->show();
   ui->FWFileName->setText(fileName);
   FlashInterface flash(fileName);
   if (flash.isValid()) {
@@ -254,4 +259,13 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked) {
 
 void burnDialog::shrink() {
     resize(0,0);
+}
+
+void burnDialog::on_EEbackupCB_clicked() {
+  if (ui->EEbackupCB->isChecked()) {
+    *backup=true;
+  }
+  else {
+    *backup=false;
+  }
 }
