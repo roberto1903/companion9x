@@ -6,7 +6,7 @@
 #include <QTime>
 #include <QTimer>
 #include <QStringList>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #define SDL_JOYSTICK_DEFAULT_EVENT_TIMEOUT         25
 #define SDL_JOYSTICK_DEFAULT_AUTOREPEAT_DELAY      250
