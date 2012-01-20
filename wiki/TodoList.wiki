@@ -19,7 +19,7 @@
   * ~~Phase names visible on simulation~~
   * Add a what's new information to be displayed while prompting for updates
   * Beeps not handled yet
-  * Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS) - Partially done
+  * ~~Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS)~~
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
 
 
