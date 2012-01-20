@@ -600,19 +600,19 @@ void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
       float currX=nodeRight->getX();
       float currY=nodeRight->getY();
       if (stick==1 && !nodeRight->getFixedY()) {
-        nodeRight->setPos(currX,-stickval*100/1024);
+        nodeRight->setPos(currX*100,-stickval*100/1024);
       } 
       if (stick==2 && !nodeRight->getFixedX()) {
-        nodeRight->setPos(stickval*100/1024,currY);
+        nodeRight->setPos(stickval*100/1024,currY*100);
       } 
     }  else if (stick==3 || stick==4) {
       float currX=nodeLeft->getX();
       float currY=nodeLeft->getY();
       if (stick==3 && !nodeLeft->getFixedY()) {
-        nodeLeft->setPos(currX,-stickval*100/1024);
+        nodeLeft->setPos(currX*100,-stickval*100/1024);
       } 
       if (stick==4 && !nodeLeft->getFixedX()) {
-        nodeLeft->setPos(stickval*100/1024,currY);
+        nodeLeft->setPos(stickval*100/1024,currY*100);
       } 
     }
 
