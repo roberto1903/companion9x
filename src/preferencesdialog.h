@@ -33,8 +33,10 @@ private slots:
     void on_clearImageButton_clicked();
     void on_libraryPathButton_clicked();
     void on_splashLibraryButton_clicked();
+#ifdef JOYSTICKS
     void on_joystickChkB_clicked();
     void on_joystickcalButton_clicked();
+#endif
 };
 
 #endif // PREFERENCESDIALOG_H
