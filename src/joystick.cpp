@@ -1,10 +1,5 @@
 #include "joystick.h"
 
-#if defined WIN32 || !defined __GNUC__
-#include <windows.h>
-#define sleep(x) Sleep(x*1000)
-#endif
-
 Joystick::Joystick(QObject *parent, int joystickEventTimeout, bool doAutoRepeat, int repeatDelay)
   : QObject(parent)
 {
