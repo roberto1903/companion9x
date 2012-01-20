@@ -76,6 +76,8 @@ public:
     void setCenteringY(bool val) {centerY = val;}
     void setFixedX(bool val) {fixedX = val;}
     void setFixedY(bool val) {fixedY = val;}
+    bool getFixedX() {return fixedX;}
+    bool getFixedY() {return fixedY;}
     void setColor(QColor color);
     
 protected:

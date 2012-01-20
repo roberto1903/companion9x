@@ -4,6 +4,9 @@
 #include <QDialog>
 #include "node.h"
 #include "eeprominterface.h"
+#ifdef JOYSTICKS
+#include "joystick.h"
+#endif
 
 #define TMR_OFF     0
 #define TMR_RUNNING 1
@@ -34,6 +37,12 @@ private:
     QString windowName;
     int backLight;
     bool lightOn;
+#ifdef JOYSTICKS
+    Joystick *joystick;
+    int jscal[8][4];
+    int jsmap[8];
+#endif
+
     
     /* quint16 s_timeCumTot;
     quint16 s_timeCumAbs;
@@ -97,6 +106,10 @@ private slots:
     void on_trimHRight_valueChanged(int);
     void on_trimVRight_valueChanged(int);
     void onTimerEvent();
+#ifdef JOYSTICKS
+    void on_joystickAxisValueChanged(int axis, int value);
+#endif
+ 
 };
 
 #endif // SIMULATORDIALOG_H
