@@ -3,6 +3,9 @@
 #include <iostream>
 #include "helpers.h"
 #include "simulatorinterface.h"
+#ifdef JOYSTICKS
+#include "joystick.h"
+#endif
 
 #define GBALL_SIZE  20
 #define RESX        1024
@@ -48,6 +51,45 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     setupSticks();
     resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(),this->height());
+
+#ifdef JOYSTICKS
+    int js_enable=settings.value("js_support",-1).toInt();
+    int js_ctrl=settings.value("js_ctrl",-1).toInt();
+    if (js_enable==1) {
+      settings.beginGroup("JsCalibration");
+      int count=0;
+      for (int j=0; j<8;j++){
+        int axe=settings.value(QString("stick%1_axe").arg(j),-1).toInt();
+        if (axe>=0 && axe<8) {
+          jsmap[axe]=j;
+          jscal[axe][0]=settings.value(QString("stick%1_min").arg(j),-32767).toInt();
+          jscal[axe][1]=settings.value(QString("stick%1_med").arg(j),0).toInt();
+          jscal[axe][2]=settings.value(QString("stick%1_max").arg(j),0).toInt();
+          jscal[axe][3]=settings.value(QString("stick%1_inv").arg(j),0).toInt();
+          count++;
+        }
+      }
+      if (count<3) {
+        QMessageBox::critical(this, tr("Warning"), tr("Joystick enabled but not configured correctly"));
+      }
+      if (js_ctrl!=-1) {
+        joystick = new Joystick(this);
+        if (joystick) {
+          if (joystick->open(js_ctrl)) {
+            for (int j=0; j<joystick->numAxes; j++) {
+                joystick->sensitivities[j] = 0;
+                joystick->deadzones[j]=20;
+            }
+            connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
+          }
+          else {
+            QMessageBox::critical(this, tr("Warning"), tr("Cannot open joystick, joystick disabled"));        
+          }
+        }
+      }
+    }
+#endif
+    
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
 }
@@ -534,3 +576,50 @@ void simulatorDialog::on_FixRightY_clicked(bool checked)
     nodeRight->setFixedY(checked);
 }
 
+#ifdef JOYSTICKS
+void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
+  int stick;
+  if (axis>0 && axis<8) {
+    stick=jsmap[axis];
+    int stickval;
+    if (value>jscal[axis][1]) {
+      stickval=(1024*(value-jscal[axis][1]))/(jscal[axis][2]-jscal[axis][1]);
+    }
+    else {
+      stickval=(1024*(value-jscal[axis][1]))/(jscal[axis][0]-jscal[axis][1]);
+    }
+    if (jscal[axis][3]==1) {
+      stickval*=-1;
+    }
+/*    if (stick==1 || stick==2) {
+      int currX=nodeRight->getX();
+      int currY=nodeRight->getY();
+      if (stick==1 && !nodeRight->getFixedY()) {
+        nodeRight->setPos(currX,int(stickval));
+      } 
+      if (stick==2 && !nodeRight->getFixedX()) {
+        nodeRight->setPos(int(stickval),currY);
+      } 
+    }  else if (stick==3 || stick==4) {
+      int currX=nodeLeft->getX();
+      int currY=nodeLeft->getY();
+      if (stick==1 && !nodeLeft->getFixedY()) {
+        nodeLeft->setPos(currX,int(stickval));
+      } 
+      if (stick==2 && !nodeLeft->getFixedX()) {
+        nodeLeft->setPos(int(stickval),currY);
+      } 
+    }
+ */
+    if (stick==5) {
+      ui->dialP_1->setValue(stickval);
+    }
+    if (stick==6) {
+      ui->dialP_2->setValue(stickval);
+    }
+    if (stick==7) {
+      ui->dialP_1->setValue(stickval);
+    }
+  }
+}
+#endif
