@@ -215,24 +215,29 @@ void preferencesDialog::on_joystickChkB_clicked() {
     QStringList joystickNames;
     joystickNames << tr("No joysticks found");
     joystick = new Joystick(0,false,0,0);
+    ui->joystickcalButton->setDisabled(true);
+    ui->joystickCB->setDisabled(true);
 
-    if ( joystick )
-      if ( joystick->joystickNames.count() > 0 )
+    if ( joystick ) {
+      if ( joystick->joystickNames.count() > 0 ) {
         joystickNames = joystick->joystickNames;
-
+        ui->joystickCB->setEnabled(true);
+        ui->joystickcalButton->setEnabled(true);
+      }
+    }
     ui->joystickCB->clear();
     ui->joystickCB->insertItems(0, joystickNames);
-    ui->joystickCB->setEnabled(true);
   }
   else {
     ui->joystickCB->clear();
     ui->joystickCB->setDisabled(true);
+    ui->joystickcalButton->setDisabled(true);
   }
 }
 
 void preferencesDialog::on_joystickcalButton_clicked() {
    //QSettings settings("companion9x", "companion9x");
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
-   joystickDialog * jd=new joystickDialog(this);
+   joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
    jd->show();
 }
