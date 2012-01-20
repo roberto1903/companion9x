@@ -19,6 +19,12 @@ ui(new Ui::preferencesDialog) {
   initSettings();
   connect(ui->downloadVerCB, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareChanged()));
   connect(this, SIGNAL(accepted()), this, SLOT(writeValues()));
+#ifndef JOYSTICKS
+  ui->joystickCB->hide();
+  ui->joystickcalButton->hide();
+  ui->joystickChkB->hide();
+  ui->label_11->hide();
+#endif
 }
 
 preferencesDialog::~preferencesDialog() {
@@ -212,8 +218,9 @@ void preferencesDialog::on_clearImageButton_clicked() {
   ui->SplashFileName->clear();
 }
 
-void preferencesDialog::on_joystickChkB_clicked() {
 #ifdef JOYSTICKS
+
+void preferencesDialog::on_joystickChkB_clicked() {
   if (ui->joystickChkB->isChecked()) {
     QStringList joystickNames;
     joystickNames << tr("No joysticks found");
@@ -237,14 +244,13 @@ void preferencesDialog::on_joystickChkB_clicked() {
     ui->joystickCB->setDisabled(true);
     ui->joystickcalButton->setDisabled(true);
   }
-#endif
 }
 
 void preferencesDialog::on_joystickcalButton_clicked() {
-#ifdef JOYSTICKS
    //QSettings settings("companion9x", "companion9x");
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
    joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
    jd->show();
-#endif
 }
+
+#endif
