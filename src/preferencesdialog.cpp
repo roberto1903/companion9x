@@ -21,6 +21,7 @@ ui(new Ui::preferencesDialog) {
   connect(this, SIGNAL(accepted()), this, SLOT(writeValues()));
 #ifndef JOYSTICKS
   ui->joystickCB->hide();
+  ui->joystickCB->setDisabled(true);
   ui->joystickcalButton->hide();
   ui->joystickChkB->hide();
   ui->label_11->hide();
@@ -84,6 +85,15 @@ void preferencesDialog::writeValues() {
     settings.setValue("SplashImage", "");
   }
   
+  if (ui->joystickChkB ->isChecked() && ui->joystickCB->isEnabled()) {
+    settings.setValue("js_support", ui->joystickChkB ->isChecked());  
+    settings.setValue("js_ctrl", ui->joystickCB ->currentIndex());
+  }
+  else {
+    settings.remove("js_support");
+    settings.remove("js_ctrl");
+  }
+    
 }
 
 void preferencesDialog::initSettings() {
