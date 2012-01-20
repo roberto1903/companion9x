@@ -137,6 +137,33 @@ void preferencesDialog::initSettings() {
       }
     }
   }
+#ifdef JOYSTICKS
+  ui->joystickChkB->setChecked(settings.value("js_support", false).toBool());
+  if (ui->joystickChkB->isChecked()) {
+    QStringList joystickNames;
+    joystickNames << tr("No joysticks found");
+    joystick = new Joystick(0,false,0,0);
+    ui->joystickcalButton->setDisabled(true);
+    ui->joystickCB->setDisabled(true);
+
+    if ( joystick ) {
+      if ( joystick->joystickNames.count() > 0 ) {
+        joystickNames = joystick->joystickNames;
+        ui->joystickCB->setEnabled(true);
+        ui->joystickcalButton->setEnabled(true);
+      }
+      joystick->close();
+    }
+    ui->joystickCB->clear();
+    ui->joystickCB->insertItems(0, joystickNames);
+    ui->joystickCB->setCurrentIndex(settings.value("js_ctrl", 0).toInt());
+  }
+  else {
+    ui->joystickCB->clear();
+    ui->joystickCB->setDisabled(true);
+    ui->joystickcalButton->setDisabled(true);
+  }
+#endif  
   firmwareChanged();
 }
 
