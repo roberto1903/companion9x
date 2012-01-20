@@ -5208,13 +5208,13 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="294"/>
         <location filename="simulatordialog.ui" line="666"/>
         <source>Fix X</source>
-        <translation>Verrou. Y</translation>
+        <translation>Verrou X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="324"/>
         <location filename="simulatordialog.ui" line="696"/>
         <source>Fix Y</source>
-        <translation>Verrou. X</translation>
+        <translation>Verrou Y</translation>
     </message>
     <message>
         <source>ER9x Simulator</source>
@@ -5244,13 +5244,13 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="264"/>
         <location filename="simulatordialog.ui" line="636"/>
         <source>Hold X</source>
-        <translation>Rappel X</translation>
+        <translation>Retenir X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="354"/>
         <location filename="simulatordialog.ui" line="726"/>
         <source>Hold Y</source>
-        <translation>Rappel Y</translation>
+        <translation>Retenir Y</translation>
     </message>
     <message>
         <location filename="simulatordialog.cpp" line="252"/>
