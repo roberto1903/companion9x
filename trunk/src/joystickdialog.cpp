@@ -65,13 +65,12 @@ void joystickDialog::on_joystickAxisValueChanged(int axis, int value) {
   QSlider * sl[]= {ui->Ch_1, ui->Ch_2, ui->Ch_3, ui->Ch_4, ui->Ch_5, ui->Ch_6, ui->Ch_7, ui->Ch_8};
   QCheckBox * ib[]={ui->ChInv_1, ui->ChInv_2, ui->ChInv_3, ui->ChInv_4, ui->ChInv_5, ui->ChInv_6, ui->ChInv_7, ui->ChInv_8};
   if (ib[axis]->isChecked()) {
-    sl[axis]->setMinimum(jscal[axis][2]);
-    sl[axis]->setMaximum(jscal[axis][0]);
+    sl[axis]->setInvertedAppearance(true);
+  } else {
+    sl[axis]->setInvertedAppearance(false);
   }
-  else {
-    sl[axis]->setMinimum(jscal[axis][0]);
-    sl[axis]->setMaximum(jscal[axis][2]);    
-  }
+  sl[axis]->setMinimum(jscal[axis][0]);
+  sl[axis]->setMaximum(jscal[axis][2]);    
   sl[axis]->setValue(value);
 }
 
