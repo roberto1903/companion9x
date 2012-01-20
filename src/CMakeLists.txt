@@ -21,7 +21,7 @@ IF ( XSD_FOUND )
     INCLUDE_DIRECTORIES( ${XSD_INCLUDE_DIR} )
     MESSAGE("XSD Include Path: " ${XSD_INCLUDE_DIR} )
 ELSE()
-    MESSAGE( FATAL_ERROR "XSD not found ! Please set XSD path ..." )
+    MESSAGE( FATAL_ERROR "XSD not found! Please set XSD path ..." )
 ENDIF()
 
 MESSAGE( STATUS "Looking for SDL " )
@@ -29,8 +29,9 @@ FIND_PACKAGE(Sdl)
 IF ( SDL_FOUND )
     INCLUDE_DIRECTORIES( ${SDL_INCLUDE_DIR} )
     MESSAGE("SDL Include Path: " ${SDL_INCLUDE_DIR} )
+    ADD_DEFINITIONS( -DJOYSTICKS )
 ELSE()
-    MESSAGE( FATAL_ERROR "SDL not found ! Please set SDL path ..." )
+    MESSAGE( "SDL not found! Joysticks support will be disabled" )
 ENDIF()
 
 ADD_CUSTOM_COMMAND(
@@ -95,8 +96,6 @@ SET( companion9x_SRCS
      node.cpp
      edge.cpp
      helpers.cpp
-     joystick.cpp
-     joystickdialog.cpp
      mdichild.cpp
      generaledit.cpp
      modeledit.cpp 
@@ -132,8 +131,6 @@ SET( companion9x_MOC_HDRS
      splashlibrary.h
      splashlabel.h
      burndialog.h
-     joystick.h
-     joystickdialog.h
      downloaddialog.h
      cursorwidget.h
      menuwidget.h
@@ -164,8 +161,26 @@ SET( companion9x_UIS
      customizesplashdialog.ui
      splashlibrary.ui
      burndialog.ui
-     joystickdialog.ui
 )
+
+IF ( SDL_FOUND )
+  SET( companion9x_SRCS
+       ${companion9x_SRCS}
+       joystick.cpp
+       joystickdialog.cpp
+     )
+  
+  SET( companion9x_MOC_HDRS
+       ${companion9x_MOC_HDRS}
+       joystick.h
+       joystickdialog.h
+     )
+     
+  SET( companion9x_UIS
+       ${companion9x_UIS}
+       joystickdialog.ui
+     ) 
+ENDIF( ) 
 
 SET( companion9x_RCS
      companion9x.qrc

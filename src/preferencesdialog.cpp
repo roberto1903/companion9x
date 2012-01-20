@@ -4,8 +4,10 @@
 #include "eeprominterface.h"
 #include "splashlibrary.h"
 #include "helpers.h"
+#ifdef JOYSTICKS
 #include "joystick.h"
 #include "joystickdialog.h"
+#endif
 #include <QtGui>
 
 preferencesDialog::preferencesDialog(QWidget *parent) :
@@ -211,6 +213,7 @@ void preferencesDialog::on_clearImageButton_clicked() {
 }
 
 void preferencesDialog::on_joystickChkB_clicked() {
+#ifdef JOYSTICKS
   if (ui->joystickChkB->isChecked()) {
     QStringList joystickNames;
     joystickNames << tr("No joysticks found");
@@ -234,11 +237,14 @@ void preferencesDialog::on_joystickChkB_clicked() {
     ui->joystickCB->setDisabled(true);
     ui->joystickcalButton->setDisabled(true);
   }
+#endif
 }
 
 void preferencesDialog::on_joystickcalButton_clicked() {
+#ifdef JOYSTICKS
    //QSettings settings("companion9x", "companion9x");
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
    joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
    jd->show();
+#endif
 }
