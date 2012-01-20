@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>418</width>
-    <height>301</height>
+    <height>299</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -69,7 +69,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
+       <item row="1" column="3">
         <widget class="QComboBox" name="jsmapCB_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -84,22 +84,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -126,7 +126,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="2" column="3">
         <widget class="QComboBox" name="jsmapCB_3">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -141,22 +141,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -201,7 +201,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="0" column="3">
         <widget class="QComboBox" name="jsmapCB_1">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -216,22 +216,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -297,7 +297,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
+       <item row="4" column="3">
         <widget class="QComboBox" name="jsmapCB_5">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -312,22 +312,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -372,7 +372,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="3" column="3">
         <widget class="QComboBox" name="jsmapCB_4">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -387,22 +387,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -447,7 +447,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
+       <item row="5" column="3">
         <widget class="QComboBox" name="jsmapCB_6">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -462,22 +462,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -536,7 +536,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
+       <item row="6" column="3">
         <widget class="QComboBox" name="jsmapCB_7">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -551,22 +551,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -618,7 +618,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="2">
+       <item row="7" column="3">
         <widget class="QComboBox" name="jsmapCB_8">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -633,22 +633,22 @@
          </item>
          <item>
           <property name="text">
-           <string>THR</string>
+           <string>Right Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>AIL</string>
+           <string>Right Horizontal</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ELE</string>
+           <string>Left Vertical</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>RUD</string>
+           <string>Left Horizontal</string>
           </property>
          </item>
          <item>
@@ -693,6 +693,62 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="ChInv_1">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="ChInv_2">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="ChInv_3">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QCheckBox" name="ChInv_4">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="ChInv_5">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QCheckBox" name="ChInv_6">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QCheckBox" name="ChInv_7">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QCheckBox" name="ChInv_8">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item row="1" column="0">
@@ -719,7 +775,7 @@
         <enum>QFrame::Box</enum>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Instructions</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
