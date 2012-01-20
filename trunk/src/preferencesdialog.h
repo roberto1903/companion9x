@@ -2,11 +2,12 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
-#include "joystick.h"
 
 namespace Ui {
     class preferencesDialog;
 }
+
+class Joystick;
 
 class preferencesDialog : public QDialog
 {
