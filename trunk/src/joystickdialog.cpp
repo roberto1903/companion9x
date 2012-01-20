@@ -96,5 +96,39 @@ void joystickDialog::on_cancelButton_clicked() {
 }
 
 void joystickDialog::on_okButton_clicked() {
+  int sticks[8]={0,0,0,0,0,0,0,0};
+  foreach(QComboBox *cb, findChildren<QComboBox *>(QRegExp("jsmapCB_[0-9]+"))) {
+    sticks[cb->currentIndex()]++;
+  }
+  bool duplicated=false;
+  for (int i=1; i<8;i++) {
+    if (sticks[i]>1) {
+      duplicated=true;
+    }
+  }
+  if (duplicated) {
+    QMessageBox::critical(this, tr("Error"), tr("Duplicated stick assignement"));
+    return;
+  }
+  joystick->close();
+  QSettings settings("companion9x", "companion9x");
+  settings.beginGroup("JsCalibration");
+  for (int i=0; i<8;i++) {
+    settings.remove(QString("stick%1_axe"));
+    settings.remove(QString("stick%1_max"));
+    settings.remove(QString("stick%1_med"));
+    settings.remove(QString("stick%1_min"));
+  }
+  foreach(QComboBox *cb, findChildren<QComboBox *>(QRegExp("jsmapCB_[0-9]+"))) {
+    int axe=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
+    int stick=cb->currentIndex();
+    if (stick>0) {
+      settings.setValue(QString("stick%1_axe").arg(stick),axe);
+      settings.setValue(QString("stick%1_max").arg(stick),jscal[axe][2]);
+      settings.setValue(QString("stick%1_med").arg(stick),jscal[axe][1]);
+      settings.setValue(QString("stick%1_min").arg(stick),jscal[axe][0]);
+    }
+  }
+  settings.endGroup();
   this->close();
 }
