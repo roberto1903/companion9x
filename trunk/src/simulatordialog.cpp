@@ -81,6 +81,14 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
                 joystick->sensitivities[j] = 0;
                 joystick->deadzones[j]=20;
             }
+            nodeRight->setCenteringY(false);   //mode 1,3 -> THR on right
+            ui->holdRightY->setChecked(true);
+            nodeRight->setCenteringX(false);   //mode 1,3 -> THR on right
+            ui->holdRightX->setChecked(true);
+            nodeLeft->setCenteringY(false);   //mode 1,3 -> THR on right
+            ui->holdLeftY->setChecked(true);
+            nodeLeft->setCenteringX(false);   //mode 1,3 -> THR on right
+            ui->holdLeftX->setChecked(true);
             connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
           }
           else {
@@ -600,7 +608,6 @@ void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
       float currX=nodeRight->getX();
       float currY=nodeRight->getY();
       if (stick==1 ) {
-//        nodeRight->setPos(currX*100,-50);
          nodeRight->setPos(currX*100-10,-stickval*100/1024-10);
       } 
       if (stick==2) {
@@ -612,7 +619,7 @@ void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
       if (stick==3) {
         nodeLeft->setPos(currX*100-10,-stickval*100/1024-10);
       } 
-      if (stick==4 && !nodeLeft->getFixedX()) {
+      if (stick==4) {
         nodeLeft->setPos(stickval*100/1024-10,currY*100-10);
       } 
     }
