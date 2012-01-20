@@ -69,13 +69,7 @@ void Joystick::processEvents()
 
   int i;
   for (i = 0; i < numAxes; i++) {
-    int ax=0;
-    for (int j=0; j<10;j++  ) {
-      ax+=SDL_JoystickGetAxis(joystick, i);
-      sleep(3);
-    }
-    
-    Sint16 moved = ax/10;
+    Sint16 moved = SDL_JoystickGetAxis(joystick, i);
     if ( abs(moved) >= deadzones[i] ) {
       if ( (moved != axes[i]) ) {
         int deltaMoved = abs(axes[i] - moved);
