@@ -53,9 +53,9 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     this->setFixedSize(this->width(),this->height());
 
 #ifdef JOYSTICKS
-    int js_enable=settings.value("js_support",-1).toInt();
+    bool js_enable=settings.value("js_support",-1).toBool();
     int js_ctrl=settings.value("js_ctrl",-1).toInt();
-    if (js_enable==1) {
+    if (js_enable) {
       settings.beginGroup("JsCalibration");
       int count=0;
       for (int j=0; j<8;j++){
@@ -69,6 +69,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
           count++;
         }
       }
+      settings.endGroup();
       if (count<3) {
         QMessageBox::critical(this, tr("Warning"), tr("Joystick enabled but not configured correctly"));
       }
@@ -579,38 +580,43 @@ void simulatorDialog::on_FixRightY_clicked(bool checked)
 #ifdef JOYSTICKS
 void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
   int stick;
-  if (axis>0 && axis<8) {
+  if (axis>=0 && axis<8) {
     stick=jsmap[axis];
     int stickval;
     if (value>jscal[axis][1]) {
+      if ((jscal[axis][2]-jscal[axis][1])==0)
+        return;
       stickval=(1024*(value-jscal[axis][1]))/(jscal[axis][2]-jscal[axis][1]);
     }
     else {
-      stickval=(1024*(value-jscal[axis][1]))/(jscal[axis][0]-jscal[axis][1]);
+      if ((jscal[axis][1]-jscal[axis][0])==0)
+        return;
+      stickval=(1024*(value-jscal[axis][1]))/(jscal[axis][1]-jscal[axis][0]);
     }
     if (jscal[axis][3]==1) {
-      stickval*=-1;
+       stickval*=-1;
     }
-/*    if (stick==1 || stick==2) {
-      int currX=nodeRight->getX();
-      int currY=nodeRight->getY();
+    if (stick==1 || stick==2) {
+      float currX=nodeRight->getX();
+      float currY=nodeRight->getY();
       if (stick==1 && !nodeRight->getFixedY()) {
-        nodeRight->setPos(currX,int(stickval));
+        nodeRight->setPos(currX,-stickval*100/1024);
       } 
       if (stick==2 && !nodeRight->getFixedX()) {
-        nodeRight->setPos(int(stickval),currY);
+        nodeRight->setPos(stickval*100/1024,currY);
       } 
     }  else if (stick==3 || stick==4) {
-      int currX=nodeLeft->getX();
-      int currY=nodeLeft->getY();
-      if (stick==1 && !nodeLeft->getFixedY()) {
-        nodeLeft->setPos(currX,int(stickval));
+      float currX=nodeLeft->getX();
+      float currY=nodeLeft->getY();
+      if (stick==3 && !nodeLeft->getFixedY()) {
+        nodeLeft->setPos(currX,-stickval*100/1024);
       } 
-      if (stick==2 && !nodeLeft->getFixedX()) {
-        nodeLeft->setPos(int(stickval),currY);
+      if (stick==4 && !nodeLeft->getFixedX()) {
+        nodeLeft->setPos(stickval*100/1024,currY);
       } 
     }
- */
+
+    
     if (stick==5) {
       ui->dialP_1->setValue(stickval);
     }
