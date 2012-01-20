@@ -40,7 +40,7 @@ void joystickDialog::joystickOpen(int stick) {
     this->close();
     return;
   }
-  joystick = new Joystick(this);
+  joystick = new Joystick(this, 1, false, 0);
 
   if (joystick) {
     joystick->open(stick);
