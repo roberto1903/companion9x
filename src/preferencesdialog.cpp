@@ -224,6 +224,7 @@ void preferencesDialog::on_joystickChkB_clicked() {
         ui->joystickCB->setEnabled(true);
         ui->joystickcalButton->setEnabled(true);
       }
+      joystick->close();
     }
     ui->joystickCB->clear();
     ui->joystickCB->insertItems(0, joystickNames);

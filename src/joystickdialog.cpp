@@ -25,6 +25,7 @@ ui(new Ui::joystickDialog) {
     cb->setDisabled(true);
   }
   joystickOpen(stick);
+  connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
 }
 
 joystickDialog::~joystickDialog() {
@@ -44,7 +45,6 @@ void joystickDialog::joystickOpen(int stick) {
         joystick->sensitivities[j] = 0;
         joystick->deadzones[j]=20;
     }
-    connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
   }
   else {
     QMessageBox::critical(this, tr("Error"), tr("Cannot open joystick."));
@@ -92,6 +92,7 @@ void joystickDialog::on_nextButton_clicked() {
 }
 
 void joystickDialog::on_cancelButton_clicked() {
+  joystick->close();
   this->close();
 }
 
