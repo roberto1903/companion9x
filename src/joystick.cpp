@@ -1,5 +1,10 @@
 #include "joystick.h"
 
+#if defined WIN32 || !defined __GNUC__
+#include <windows.h>
+#define sleep(x) Sleep(x*1000)
+#endif
+
 Joystick::Joystick(QObject *parent, int joystickEventTimeout, bool doAutoRepeat, int repeatDelay)
   : QObject(parent)
 {
@@ -67,7 +72,7 @@ void Joystick::processEvents()
     int ax=0;
     for (int j=0; j<10;j++  ) {
       ax+=SDL_JoystickGetAxis(joystick, i);
-      usleep(3000);
+      sleep(3);
     }
     
     Sint16 moved = ax/10;
