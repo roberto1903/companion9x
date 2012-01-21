@@ -11,7 +11,7 @@ You will need ...
  * [http://www.codesynthesis.com/projects/xsd xsdcxx]
 
 {{{
-sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx
+sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
 }}}
 
 = Building companion9x =
@@ -46,3 +46,19 @@ You should now be able to run companion9x from your terminal, like so ...
 {{{
 ./companion9x
 }}}
+
+== Joystick support ==
+Companion9x does support joystick for firmware simulator control.
+Latest version of SDL use by default a device that cannot be calibrated properly by the OS.
+To avoid problems use the following command before launching companion9x
+{{{
+export SDL_JOYSTICK_DEVICE=/dev/input/js0 (where js0 is your joystick / RC Sim adapter)
+}}}
+or write
+{{{
+SDL_JOYSTICK_DEVICE=/dev/input/js0
+}}}
+in /etc/environment
+
+In companion9x you will have two joysticks, choose the first one.
+If you experience calibration problems have a look to the jscal utility.
