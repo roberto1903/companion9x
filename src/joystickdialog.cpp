@@ -28,7 +28,7 @@ ui(new Ui::joystickDialog) {
     ib->setDisabled(true);
   }
   joystickOpen(stick);
-  connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
+  connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(onjoystickAxisValueChanged(int, int)));
 }
 
 joystickDialog::~joystickDialog() {
@@ -55,7 +55,7 @@ void joystickDialog::joystickOpen(int stick) {
   }
 }
 
-void joystickDialog::on_joystickAxisValueChanged(int axis, int value) {
+void joystickDialog::onjoystickAxisValueChanged(int axis, int value) {
   if (value > jscal[axis][2]) {
     jscal[axis][2] = value;
   }

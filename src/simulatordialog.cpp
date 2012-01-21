@@ -79,7 +79,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
           if (joystick->open(js_ctrl)) {
             for (int j=0; j<joystick->numAxes; j++) {
                 joystick->sensitivities[j] = 0;
-                joystick->deadzones[j]=20;
+                joystick->deadzones[j]=0;
             }
             nodeRight->setCenteringY(false);   //mode 1,3 -> THR on right
             ui->holdRightY->setChecked(true);
@@ -586,7 +586,7 @@ void simulatorDialog::on_FixRightY_clicked(bool checked)
 }
 
 #ifdef JOYSTICKS
-void simulatorDialog::on_joystickAxisValueChanged(int axis, int value) {
+void simulatorDialog::onjoystickAxisValueChanged(int axis, int value) {
   int stick;
   if (axis>=0 && axis<8) {
     stick=jsmap[axis];

@@ -18,7 +18,7 @@ public:
     Joystick *joystick;
 
 public slots:
-    void on_joystickAxisValueChanged(int axis, int value);
+    void onjoystickAxisValueChanged(int axis, int value);
     
 private:
     Ui::joystickDialog *ui;
