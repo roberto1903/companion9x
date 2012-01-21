@@ -139,13 +139,13 @@ void RegisterFirmwares()
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky", QObject::tr("gruvin9x trunk for stock board - FrSky"), new Gruvin9xInterface(EESIZE_STOCK)));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-stock-frsky-speaker", QObject::tr("gruvin9x trunk for stock board - Frsky, speaker"), new Gruvin9xInterface(EESIZE_STOCK)));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4)));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - heli, templates"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-heli-templates.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - heli, templates, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-heli-templates-speaker.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - frsky"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - frsky, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-speaker.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - frsky, heli, templates"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-heli-templates.hex", OPEN9X_STAMP));
-  firmwares.push_back(FirmwareInfo("open9x", QObject::tr("open9x for stock board - frsky, heli, templates, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-heli-templates-speaker.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-heli-templates", QObject::tr("open9x for stock board - heli, templates"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-heli-templates.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-heli-templates-speaker", QObject::tr("open9x for stock board - heli, templates, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-heli-templates-speaker.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-frsky", QObject::tr("open9x for stock board - frsky"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-frsky-speaker", QObject::tr("open9x for stock board - frsky, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-speaker.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-frsky-heli-templates", QObject::tr("open9x for stock board - frsky, heli, templates"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-heli-templates.hex", OPEN9X_STAMP));
+  firmwares.push_back(FirmwareInfo("open9x-stock-frsky-heli-templates-speaker", QObject::tr("open9x for stock board - frsky, heli, templates, speaker"), new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-frsky-heli-templates-speaker.hex", OPEN9X_STAMP));
 
   RegisterEepromInterfaces();
 }
