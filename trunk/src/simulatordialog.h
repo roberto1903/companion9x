@@ -107,7 +107,7 @@ private slots:
     void on_trimVRight_valueChanged(int);
     void onTimerEvent();
 #ifdef JOYSTICKS
-    void on_joystickAxisValueChanged(int axis, int value);
+    void onjoystickAxisValueChanged(int axis, int value);
 #endif
  
 };
