@@ -287,7 +287,7 @@ void preferencesDialog::on_joystickcalButton_clicked() {
    //QSettings settings("companion9x", "companion9x");
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
    joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
-   jd->show();
+   jd->exec();
 }
 
 #endif
