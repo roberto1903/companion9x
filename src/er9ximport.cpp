@@ -26,6 +26,7 @@ namespace Er9x {
 #include "./er9x/frsky.cpp"
 #include "./er9x/audio.cpp"
 
+uint8_t pxxFlag = 0;
 int16_t g_anas[7];
 
 uint16_t anaIn(uint8_t chan)
