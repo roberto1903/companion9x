@@ -89,7 +89,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
             ui->holdLeftY->setChecked(true);
             nodeLeft->setCenteringX(false);   //mode 1,3 -> THR on right
             ui->holdLeftX->setChecked(true);
-            connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(on_joystickAxisValueChanged(int, int)));
+            connect(joystick, SIGNAL(axisValueChanged(int, int)), this, SLOT(onjoystickAxisValueChanged(int, int)));
           }
           else {
             QMessageBox::critical(this, tr("Warning"), tr("Cannot open joystick, joystick disabled"));        
