@@ -1,6 +1,6 @@
 Index: er9x/drivers.cpp
 ===================================================================
---- er9x/drivers.cpp	(revision 669)
+--- er9x/drivers.cpp	(revision 671)
 +++ er9x/drivers.cpp	(working copy)
 @@ -17,6 +17,7 @@
  
@@ -31,9 +31,22 @@ Index: er9x/drivers.cpp
  //{
 Index: er9x/er9x.cpp
 ===================================================================
---- er9x/er9x.cpp	(revision 669)
+--- er9x/er9x.cpp	(revision 671)
 +++ er9x/er9x.cpp	(working copy)
-@@ -392,8 +392,10 @@
+@@ -367,7 +367,11 @@
+ 
+ void clearKeyEvents()
+ {
+-    while(keyDown());  // loop until all keys are up
++#ifdef SIMU
++    while (keyDown() && main_thread_running) sleep(1/*ms*/);
++#else
++    while (keyDown());  // loop until all keys are up
++#endif
+     putEvent(0);
+ }
+ 
+@@ -392,8 +396,10 @@
  
          clearKeyEvents();
  
@@ -44,7 +57,7 @@ Index: er9x/er9x.cpp
  
  #define INAC_DEVISOR 256   // Issue 206 - bypass splash screen with stick movement
          uint16_t inacSum = 0;
-@@ -403,7 +405,12 @@
+@@ -403,7 +409,12 @@
          uint16_t tgtime = get_tmr10ms() + SPLASH_TIMEOUT;  
          while(tgtime != get_tmr10ms())
          {
@@ -57,7 +70,7 @@ Index: er9x/er9x.cpp
              uint16_t tsum = 0;
              for(uint8_t i=0; i<4; i++)
                 tsum += anaIn(i)/INAC_DEVISOR;
-@@ -449,7 +456,10 @@
+@@ -449,7 +460,10 @@
  
    int16_t lowLim = THRCHK_DEADBAND + g_eeGeneral.calibMid[thrchn] - g_eeGeneral.calibSpanNeg[thrchn];// + g_eeGeneral.calibSpanNeg[thrchn]/8;
  
@@ -68,7 +81,7 @@ Index: er9x/er9x.cpp
    int16_t v      = anaIn(thrchn);
    if((v<=lowLim) || (keyDown()))
    {
-@@ -462,7 +472,12 @@
+@@ -462,7 +476,12 @@
  	//loop until all switches are reset
    while (1)
    {
@@ -81,19 +94,19 @@ Index: er9x/er9x.cpp
        int16_t v      = anaIn(thrchn);
        if((v<=lowLim) || (keyDown()))
        {
-@@ -501,6 +516,11 @@
- 	//loop until all switches are reset
-   while (1)
-   {
+@@ -520,6 +539,11 @@
+         return;  //wait for key release
+     }
+ 
 +#ifdef SIMU
 +    if (!main_thread_running) return;
 +    sleep(1/*ms*/);
 +#endif
 +
-     uint8_t i;
-     for(i=0; i<(SW_Trainer+SW_BASE); i++)
-     {
-@@ -582,6 +602,10 @@
+     if(getSwitch(g_eeGeneral.lightSw,0) || g_eeGeneral.lightAutoOff)
+         BACKLIGHT_ON;
+     else
+@@ -588,6 +612,10 @@
      clearKeyEvents();
      while(1)
      {
@@ -104,7 +117,7 @@ Index: er9x/er9x.cpp
          if(keyDown())
          {
              return;  //wait for key release
-@@ -938,7 +962,10 @@
+@@ -944,7 +972,10 @@
  int16_t g_ppmIns[8];
  uint8_t ppmInState = 0; //0=unsync 1..8= wait for value i-1
  
@@ -115,7 +128,7 @@ Index: er9x/er9x.cpp
  //#include <avr/wdt.h>
  
  //class AutoLock
-@@ -958,6 +985,7 @@
+@@ -964,6 +995,7 @@
  //#define STARTADCONV (ADCSRA  = (1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2) | (1<<ADSC) | (1 << ADIE))
  int16_t BandGap = 240 ;
  
@@ -123,7 +136,7 @@ Index: er9x/er9x.cpp
  static uint16_t s_anaFilt[8];
  uint16_t anaIn(uint8_t chan)
  {
-@@ -1073,9 +1101,11 @@
+@@ -1079,9 +1111,11 @@
    getADC_osmp,
    getADC_filt
    };
@@ -135,7 +148,7 @@ Index: er9x/er9x.cpp
  ISR(TIMER0_OVF_vect, ISR_NOBLOCK) //continuous timer 16ms (16MHz/1024)
  {
    g_tmr16KHz++;
-@@ -1392,4 +1422,4 @@
+@@ -1398,4 +1432,4 @@
  #endif
  }
  
@@ -143,7 +156,7 @@ Index: er9x/er9x.cpp
 +#endif
 Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 669)
+--- er9x/er9x.h	(revision 671)
 +++ er9x/er9x.h	(working copy)
 @@ -23,6 +23,9 @@
  
@@ -164,7 +177,7 @@ Index: er9x/er9x.h
  #include "file.h"
  //
  //                  elev                        thr
-@@ -494,7 +499,7 @@
+@@ -508,7 +513,7 @@
  
  /// Markiert einen EEPROM-Bereich als dirty. der Bereich wird dann in
  /// eeCheck ins EEPROM zurueckgeschrieben.
@@ -175,7 +188,7 @@ Index: er9x/er9x.h
  void eeCheck(bool immediately=false);
 Index: er9x/file.cpp
 ===================================================================
---- er9x/file.cpp	(revision 669)
+--- er9x/file.cpp	(revision 671)
 +++ er9x/file.cpp	(working copy)
 @@ -39,19 +39,20 @@
  #define BLOCKS   (EESIZE/BS)
@@ -238,7 +251,7 @@ Index: er9x/file.cpp
    eeFs.mySize   = sizeof(eeFs);
 Index: er9x/file.h
 ===================================================================
---- er9x/file.h	(revision 669)
+--- er9x/file.h	(revision 671)
 +++ er9x/file.h	(working copy)
 @@ -75,7 +75,7 @@
    ///read from opened file and decode rlc-coded data
@@ -251,7 +264,7 @@ Index: er9x/file.h
  #endif
 Index: er9x/frsky.cpp
 ===================================================================
---- er9x/frsky.cpp	(revision 669)
+--- er9x/frsky.cpp	(revision 671)
 +++ er9x/frsky.cpp	(working copy)
 @@ -220,6 +220,7 @@
     a second buffer to receive data while one buffer is being processed (slowly).
@@ -328,7 +341,7 @@ Index: er9x/frsky.cpp
  
 Index: er9x/lcd.cpp
 ===================================================================
---- er9x/lcd.cpp	(revision 669)
+--- er9x/lcd.cpp	(revision 671)
 +++ er9x/lcd.cpp	(working copy)
 @@ -16,6 +16,10 @@
  
@@ -361,7 +374,7 @@ Index: er9x/lcd.cpp
  }
 Index: er9x/menus.cpp
 ===================================================================
---- er9x/menus.cpp	(revision 669)
+--- er9x/menus.cpp	(revision 671)
 +++ er9x/menus.cpp	(working copy)
 @@ -567,7 +567,7 @@
          v += g_model.limitData[i].revert ?
@@ -381,7 +394,7 @@ Index: er9x/menus.cpp
          y+=FH;
      }
  
-@@ -3087,10 +3087,10 @@
+@@ -3129,10 +3129,10 @@
      lcd_outdez(14*FW , 3*FH, (g_tmr1Latency_max - g_tmr1Latency_min) /2 );
      lcd_puts_Pleft( 4*FH, PSTR("tmain          ms"));
      lcd_outdezAtt(14*FW , 4*FH, (g_timeMain*100)/16 ,PREC2);
@@ -394,7 +407,7 @@ Index: er9x/menus.cpp
      lcd_puts_P( 3*FW,  7*FH, PSTR("[MENU] to refresh"));
  }
  
-@@ -3723,10 +3723,14 @@
+@@ -3765,10 +3765,14 @@
              //Normalization  [0..2048] ->   [-1024..1024]
  
              int16_t v = anaIn(i);
@@ -411,7 +424,7 @@ Index: er9x/menus.cpp
  	  				if ( g_eeGeneral.throttleReversed )
 Index: er9x/menus.h
 ===================================================================
---- er9x/menus.h	(revision 669)
+--- er9x/menus.h	(revision 671)
 +++ er9x/menus.h	(working copy)
 @@ -77,10 +77,10 @@
  #define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
@@ -441,65 +454,71 @@ Index: er9x/menus.h
  #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 669)
+--- er9x/myeeprom.h	(revision 671)
 +++ er9x/myeeprom.h	(working copy)
-@@ -60,19 +60,23 @@
+@@ -18,6 +18,9 @@
+ 
+ #include <inttypes.h>
+ 
++#ifndef PACK
++#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
++#endif
+ 
+ //eeprom data
+ //#define EE_VERSION 2
+@@ -60,19 +63,19 @@
  #define GENERAL_OWNER_NAME_LEN 10
  #define MODEL_NAME_LEN         10
  
 -typedef struct t_TrainerMix {
-+#ifndef PACK
-+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
-+#endif
-+
 +PACK(typedef struct t_TrainerMix {
-   uint8_t srcChn:3; //0-7 = ch1-8
-   int8_t  swtch:5;
-   int8_t  studWeight:6;
-   uint8_t mode:2;   //off,add-mode,subst-mode
+     uint8_t srcChn:3; //0-7 = ch1-8
+     int8_t  swtch:5;
+     int8_t  studWeight:6;
+     uint8_t mode:2;   //off,add-mode,subst-mode
 -} __attribute__((packed)) TrainerMix; //
 +}) TrainerMix; //
-  
+ 
 -typedef struct t_TrainerData {
 +PACK(typedef struct t_TrainerData {
-   int16_t        calib[4];
-   TrainerMix     mix[4];
+     int16_t        calib[4];
+     TrainerMix     mix[4];
 -} __attribute__((packed)) TrainerData;
 +}) TrainerData;
  
 -typedef struct t_EEGeneral {
 +PACK(typedef struct t_EEGeneral {
-   uint8_t   myVers;
-   int16_t   calibMid[7];
-   int16_t   calibSpanNeg[7];
-@@ -117,7 +121,7 @@
-   char      ownerName[GENERAL_OWNER_NAME_LEN];
-   uint8_t   switchWarningStates;
-   uint8_t   res[4];
+     uint8_t   myVers;
+     int16_t   calibMid[7];
+     int16_t   calibSpanNeg[7];
+@@ -117,7 +120,7 @@
+     char      ownerName[GENERAL_OWNER_NAME_LEN];
+     uint8_t   switchWarningStates;
+     uint8_t   res[4];
 -} __attribute__((packed)) EEGeneral;
 +}) EEGeneral;
  
  
  
-@@ -126,25 +130,25 @@
+@@ -126,25 +129,25 @@
  //eeprom modelspec
  //expo[3][2][2] //[Norm/Dr][expo/weight][R/L]
  
 -typedef struct t_ExpoData {
 +PACK(typedef struct t_ExpoData {
-   int8_t  expo[3][2][2];
-   int8_t  drSw1;
-   int8_t  drSw2;
+     int8_t  expo[3][2][2];
+     int8_t  drSw1;
+     int8_t  drSw2;
 -} __attribute__((packed)) ExpoData;
 +}) ExpoData;
  
  
 -typedef struct t_LimitData {
 +PACK(typedef struct t_LimitData {
-   int8_t  min;
-   int8_t  max;
-   bool    revert;
-   int16_t  offset;
+     int8_t  min;
+     int8_t  max;
+     bool    revert;
+     int16_t  offset;
 -} __attribute__((packed)) LimitData;
 +}) LimitData;
  
@@ -509,57 +528,57 @@ Index: er9x/myeeprom.h
  
 -typedef struct t_MixData {
 +PACK(typedef struct t_MixData {
-   uint8_t destCh;            //        1..NUM_CHNOUT
-   uint8_t srcRaw;            //
-   int8_t  weight;
-@@ -161,33 +165,33 @@
-   uint8_t mixres:1;
-   int8_t  sOffset;
-   int8_t  res;
+     uint8_t destCh;            //        1..NUM_CHNOUT
+     uint8_t srcRaw;            //
+     int8_t  weight;
+@@ -161,33 +164,33 @@
+     uint8_t mixres:1;
+     int8_t  sOffset;
+     int8_t  res;
 -} __attribute__((packed)) MixData;
 +}) MixData;
  
  
 -typedef struct t_CSwData { // Custom Switches data
 +PACK(typedef struct t_CSwData { // Custom Switches data
-   int8_t  v1; //input
-   int8_t  v2; //offset
-   uint8_t func;
+     int8_t  v1; //input
+     int8_t  v2; //offset
+     uint8_t func;
 -} __attribute__((packed)) CSwData;
 +}) CSwData;
  
 -typedef struct t_SafetySwData { // Custom Switches data
 +PACK(typedef struct t_SafetySwData { // Custom Switches data
-   int8_t  swtch;
-   int8_t  val;
+     int8_t  swtch;
+     int8_t  val;
 -} __attribute__((packed)) SafetySwData;
 +}) SafetySwData;
  
 -typedef struct t_FrSkyChannelData {
 +PACK(typedef struct t_FrSkyChannelData {
-   uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
-   uint8_t   alarms_value[2];      // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
-   uint8_t   alarms_level:4;
-   uint8_t   alarms_greater:2;     // 0=LT(<), 1=GT(>)
-   uint8_t   type:2;               // 0=volts, 1=raw, 2=volts*2, 3=Amps
+     uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+     uint8_t   alarms_value[2];      // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+     uint8_t   alarms_level:4;
+     uint8_t   alarms_greater:2;     // 0=LT(<), 1=GT(>)
+     uint8_t   type:2;               // 0=volts, 1=raw, 2=volts*2, 3=Amps
 -} __attribute__((packed)) FrSkyChannelData;
 +}) FrSkyChannelData;
  
 -typedef struct t_FrSkyData {
 +PACK(typedef struct t_FrSkyData {
-   FrSkyChannelData channels[2];
+     FrSkyChannelData channels[2];
 -} __attribute__((packed)) FrSkyData;
 +}) FrSkyData;
  
 -typedef struct t_ModelData {
 +PACK(typedef struct t_ModelData {
-   char      name[MODEL_NAME_LEN];             // 10 must be first for eeLoadModelName
-   uint8_t   mdVers;
-   int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-@@ -226,7 +230,7 @@
-   uint8_t   res3[2];
-   SafetySwData  safetySw[NUM_CHNOUT];
-   FrSkyData frsky;
+     char      name[MODEL_NAME_LEN];             // 10 must be first for eeLoadModelName
+     uint8_t   mdVers;
+     int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+@@ -225,7 +228,7 @@
+     uint8_t   res3[3];
+     SafetySwData  safetySw[NUM_CHNOUT];
+     FrSkyData frsky;
 -} __attribute__((packed)) ModelData;
 +}) ModelData;
  
@@ -567,7 +586,7 @@ Index: er9x/myeeprom.h
  
 Index: er9x/pers.cpp
 ===================================================================
---- er9x/pers.cpp	(revision 669)
+--- er9x/pers.cpp	(revision 671)
 +++ er9x/pers.cpp	(working copy)
 @@ -159,7 +159,7 @@
    while((l=theFile.read(buf,15)))
@@ -745,7 +764,7 @@ Index: er9x/simpgmspace.cpp
 +#endif
 Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/simpgmspace.h	(revision 669)
+--- er9x/simpgmspace.h	(revision 671)
 +++ er9x/simpgmspace.h	(working copy)
 @@ -1,7 +1,12 @@
  /*
@@ -954,7 +973,7 @@ Index: er9x/simpgmspace.h
 +#endif
 Index: er9x/templates.cpp
 ===================================================================
---- er9x/templates.cpp	(revision 669)
+--- er9x/templates.cpp	(revision 671)
 +++ er9x/templates.cpp	(working copy)
 @@ -107,7 +107,7 @@
  
