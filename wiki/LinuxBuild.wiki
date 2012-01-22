@@ -9,6 +9,7 @@ You will need ...
  * [http://www.cmake.org cmake]
  * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
  * [http://www.codesynthesis.com/projects/xsd xsdcxx]
+ * [http://www.libsdl.org/ SDL] (v1.2)
 
 {{{
 sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
