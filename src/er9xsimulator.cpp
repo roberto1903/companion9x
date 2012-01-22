@@ -17,6 +17,9 @@
 #include "er9xsimulator.h"
 #include "er9xinterface.h"
 
+#define FRSKY
+#define FRSKY_HUB
+
 namespace Er9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
