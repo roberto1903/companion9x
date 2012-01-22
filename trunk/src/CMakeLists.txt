@@ -336,7 +336,7 @@ IF( APPLE )
   ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
                       COMMAND mkdir -p companion9x.app/Contents/translations
                       COMMAND cp -r ${PROJECT_BINARY_DIR}/*.qm companion9x.app/Contents/translations
-                      COMMAND cp -r -f ${PROJECT_SOURCE_DIR}/../macbuild/qt_menu.nib companion9x.app/Contents/Resources )
+                      COMMAND rsync -r --exclude=.svn ${PROJECT_SOURCE_DIR}/../macbuild/qt_menu.nib companion9x.app/Contents/Resources )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
