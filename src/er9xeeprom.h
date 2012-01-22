@@ -25,7 +25,7 @@
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
-#define MDVERS      9
+#define MDVERS      10
 
 #define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
 #define NUM_CSW         12 //number of custom switches
