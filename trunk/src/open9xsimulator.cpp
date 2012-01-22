@@ -19,6 +19,7 @@
 
 #define FRSKY
 #define FRSKY_HUB
+#define WS_HOW_HIGH
 
 namespace Open9x {
 #define NAMESPACE_IMPORT
