@@ -46,7 +46,7 @@ Index: er9x/er9x.cpp
      putEvent(0);
  }
  
-@@ -392,8 +396,10 @@
+@@ -406,8 +410,10 @@
  
          clearKeyEvents();
  
@@ -55,9 +55,9 @@ Index: er9x/er9x.cpp
              getADC_filt(); // init ADC array
 +#endif
  
- #define INAC_DEVISOR 256   // Issue 206 - bypass splash screen with stick movement
-         uint16_t inacSum = 0;
-@@ -403,7 +409,12 @@
+         uint16_t inacSum = stickMoveValue();
+ //        for(uint8_t i=0; i<4; i++)
+@@ -416,7 +422,12 @@
          uint16_t tgtime = get_tmr10ms() + SPLASH_TIMEOUT;  
          while(tgtime != get_tmr10ms())
          {
@@ -67,10 +67,10 @@ Index: er9x/er9x.cpp
 +#else
              getADC_filt();
 +#endif
-             uint16_t tsum = 0;
-             for(uint8_t i=0; i<4; i++)
-                tsum += anaIn(i)/INAC_DEVISOR;
-@@ -449,7 +460,10 @@
+             uint16_t tsum = stickMoveValue();
+ //            for(uint8_t i=0; i<4; i++)
+ //               tsum += anaIn(i)/INAC_DEVISOR;
+@@ -459,7 +470,10 @@
  
    int16_t lowLim = THRCHK_DEADBAND + g_eeGeneral.calibMid[thrchn] - g_eeGeneral.calibSpanNeg[thrchn];// + g_eeGeneral.calibSpanNeg[thrchn]/8;
  
@@ -81,7 +81,7 @@ Index: er9x/er9x.cpp
    int16_t v      = anaIn(thrchn);
    if((v<=lowLim) || (keyDown()))
    {
-@@ -462,7 +476,12 @@
+@@ -472,7 +486,12 @@
  	//loop until all switches are reset
    while (1)
    {
@@ -94,7 +94,7 @@ Index: er9x/er9x.cpp
        int16_t v      = anaIn(thrchn);
        if((v<=lowLim) || (keyDown()))
        {
-@@ -520,6 +539,11 @@
+@@ -527,6 +546,10 @@
          return;  //wait for key release
      }
  
@@ -102,11 +102,10 @@ Index: er9x/er9x.cpp
 +    if (!main_thread_running) return;
 +    sleep(1/*ms*/);
 +#endif
-+
-     if(getSwitch(g_eeGeneral.lightSw,0) || g_eeGeneral.lightAutoOff)
-         BACKLIGHT_ON;
-     else
-@@ -588,6 +612,10 @@
+ 		check_backlight() ;
+   }
+ }
+@@ -592,6 +615,10 @@
      clearKeyEvents();
      while(1)
      {
@@ -117,7 +116,7 @@ Index: er9x/er9x.cpp
          if(keyDown())
          {
              return;  //wait for key release
-@@ -944,7 +972,10 @@
+@@ -943,7 +970,10 @@
  int16_t g_ppmIns[8];
  uint8_t ppmInState = 0; //0=unsync 1..8= wait for value i-1
  
@@ -128,7 +127,7 @@ Index: er9x/er9x.cpp
  //#include <avr/wdt.h>
  
  //class AutoLock
-@@ -964,6 +995,7 @@
+@@ -963,6 +993,7 @@
  //#define STARTADCONV (ADCSRA  = (1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2) | (1<<ADSC) | (1 << ADIE))
  int16_t BandGap = 240 ;
  
@@ -136,10 +135,10 @@ Index: er9x/er9x.cpp
  static uint16_t s_anaFilt[8];
  uint16_t anaIn(uint8_t chan)
  {
-@@ -1079,9 +1111,11 @@
-   getADC_osmp,
-   getADC_filt
-   };
+@@ -1078,9 +1109,11 @@
+ //  getADC_osmp,
+ //  getADC_filt
+ //  };
 +#endif
  
  volatile uint8_t g_tmr16KHz;
@@ -148,7 +147,7 @@ Index: er9x/er9x.cpp
  ISR(TIMER0_OVF_vect, ISR_NOBLOCK) //continuous timer 16ms (16MHz/1024)
  {
    g_tmr16KHz++;
-@@ -1398,4 +1432,4 @@
+@@ -1409,4 +1442,4 @@
  #endif
  }
  
