@@ -18,6 +18,8 @@
 #include "gruvin9xinterface.h"
 
 #define FRSKY
+#define FRSKY_HUB
+#define WS_HOW_HIGH
 
 namespace Gruvin9x {
 #define NAMESPACE_IMPORT
