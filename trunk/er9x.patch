@@ -1,6 +1,6 @@
 Index: er9x/drivers.cpp
 ===================================================================
---- er9x/drivers.cpp	(revision 668)
+--- er9x/drivers.cpp	(revision 669)
 +++ er9x/drivers.cpp	(working copy)
 @@ -17,6 +17,7 @@
  
@@ -31,7 +31,7 @@ Index: er9x/drivers.cpp
  //{
 Index: er9x/er9x.cpp
 ===================================================================
---- er9x/er9x.cpp	(revision 668)
+--- er9x/er9x.cpp	(revision 669)
 +++ er9x/er9x.cpp	(working copy)
 @@ -392,8 +392,10 @@
  
@@ -91,9 +91,9 @@ Index: er9x/er9x.cpp
 +#endif
 +
      uint8_t i;
-     for(i=SW_BASE; i<SW_Trainer; i++)
+     for(i=0; i<(SW_Trainer+SW_BASE); i++)
      {
-@@ -585,6 +605,10 @@
+@@ -582,6 +602,10 @@
      clearKeyEvents();
      while(1)
      {
@@ -104,7 +104,7 @@ Index: er9x/er9x.cpp
          if(keyDown())
          {
              return;  //wait for key release
-@@ -932,7 +956,10 @@
+@@ -938,7 +962,10 @@
  int16_t g_ppmIns[8];
  uint8_t ppmInState = 0; //0=unsync 1..8= wait for value i-1
  
@@ -115,7 +115,7 @@ Index: er9x/er9x.cpp
  //#include <avr/wdt.h>
  
  //class AutoLock
-@@ -952,6 +979,7 @@
+@@ -958,6 +985,7 @@
  //#define STARTADCONV (ADCSRA  = (1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2) | (1<<ADSC) | (1 << ADIE))
  int16_t BandGap = 240 ;
  
@@ -123,7 +123,7 @@ Index: er9x/er9x.cpp
  static uint16_t s_anaFilt[8];
  uint16_t anaIn(uint8_t chan)
  {
-@@ -1067,9 +1095,11 @@
+@@ -1073,9 +1101,11 @@
    getADC_osmp,
    getADC_filt
    };
@@ -135,7 +135,7 @@ Index: er9x/er9x.cpp
  ISR(TIMER0_OVF_vect, ISR_NOBLOCK) //continuous timer 16ms (16MHz/1024)
  {
    g_tmr16KHz++;
-@@ -1386,4 +1416,4 @@
+@@ -1392,4 +1422,4 @@
  #endif
  }
  
@@ -143,7 +143,7 @@ Index: er9x/er9x.cpp
 +#endif
 Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 668)
+--- er9x/er9x.h	(revision 669)
 +++ er9x/er9x.h	(working copy)
 @@ -23,6 +23,9 @@
  
@@ -164,7 +164,7 @@ Index: er9x/er9x.h
  #include "file.h"
  //
  //                  elev                        thr
-@@ -493,7 +498,7 @@
+@@ -494,7 +499,7 @@
  
  /// Markiert einen EEPROM-Bereich als dirty. der Bereich wird dann in
  /// eeCheck ins EEPROM zurueckgeschrieben.
@@ -175,7 +175,7 @@ Index: er9x/er9x.h
  void eeCheck(bool immediately=false);
 Index: er9x/file.cpp
 ===================================================================
---- er9x/file.cpp	(revision 668)
+--- er9x/file.cpp	(revision 669)
 +++ er9x/file.cpp	(working copy)
 @@ -39,19 +39,20 @@
  #define BLOCKS   (EESIZE/BS)
@@ -238,7 +238,7 @@ Index: er9x/file.cpp
    eeFs.mySize   = sizeof(eeFs);
 Index: er9x/file.h
 ===================================================================
---- er9x/file.h	(revision 668)
+--- er9x/file.h	(revision 669)
 +++ er9x/file.h	(working copy)
 @@ -75,7 +75,7 @@
    ///read from opened file and decode rlc-coded data
@@ -251,7 +251,7 @@ Index: er9x/file.h
  #endif
 Index: er9x/frsky.cpp
 ===================================================================
---- er9x/frsky.cpp	(revision 668)
+--- er9x/frsky.cpp	(revision 669)
 +++ er9x/frsky.cpp	(working copy)
 @@ -220,6 +220,7 @@
     a second buffer to receive data while one buffer is being processed (slowly).
@@ -328,7 +328,7 @@ Index: er9x/frsky.cpp
  
 Index: er9x/lcd.cpp
 ===================================================================
---- er9x/lcd.cpp	(revision 668)
+--- er9x/lcd.cpp	(revision 669)
 +++ er9x/lcd.cpp	(working copy)
 @@ -16,6 +16,10 @@
  
@@ -361,7 +361,7 @@ Index: er9x/lcd.cpp
  }
 Index: er9x/menus.cpp
 ===================================================================
---- er9x/menus.cpp	(revision 668)
+--- er9x/menus.cpp	(revision 669)
 +++ er9x/menus.cpp	(working copy)
 @@ -567,7 +567,7 @@
          v += g_model.limitData[i].revert ?
@@ -381,7 +381,7 @@ Index: er9x/menus.cpp
          y+=FH;
      }
  
-@@ -3075,10 +3075,10 @@
+@@ -3087,10 +3087,10 @@
      lcd_outdez(14*FW , 3*FH, (g_tmr1Latency_max - g_tmr1Latency_min) /2 );
      lcd_puts_Pleft( 4*FH, PSTR("tmain          ms"));
      lcd_outdezAtt(14*FW , 4*FH, (g_timeMain*100)/16 ,PREC2);
@@ -394,7 +394,7 @@ Index: er9x/menus.cpp
      lcd_puts_P( 3*FW,  7*FH, PSTR("[MENU] to refresh"));
  }
  
-@@ -3707,10 +3707,14 @@
+@@ -3723,10 +3723,14 @@
              //Normalization  [0..2048] ->   [-1024..1024]
  
              int16_t v = anaIn(i);
@@ -411,7 +411,7 @@ Index: er9x/menus.cpp
  	  				if ( g_eeGeneral.throttleReversed )
 Index: er9x/menus.h
 ===================================================================
---- er9x/menus.h	(revision 668)
+--- er9x/menus.h	(revision 669)
 +++ er9x/menus.h	(working copy)
 @@ -77,10 +77,10 @@
  #define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
@@ -441,9 +441,9 @@ Index: er9x/menus.h
  #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 668)
+--- er9x/myeeprom.h	(revision 669)
 +++ er9x/myeeprom.h	(working copy)
-@@ -59,19 +59,23 @@
+@@ -60,19 +60,23 @@
  #define GENERAL_OWNER_NAME_LEN 10
  #define MODEL_NAME_LEN         10
  
@@ -472,16 +472,16 @@ Index: er9x/myeeprom.h
    uint8_t   myVers;
    int16_t   calibMid[7];
    int16_t   calibSpanNeg[7];
-@@ -116,7 +120,7 @@
-   uint8_t   res[1];
- //  uint8_t	FRSkyRed;  //mike please check these are correct
+@@ -117,7 +121,7 @@
    char      ownerName[GENERAL_OWNER_NAME_LEN];
+   uint8_t   switchWarningStates;
+   uint8_t   res[4];
 -} __attribute__((packed)) EEGeneral;
 +}) EEGeneral;
  
  
  
-@@ -125,25 +129,25 @@
+@@ -126,25 +130,25 @@
  //eeprom modelspec
  //expo[3][2][2] //[Norm/Dr][expo/weight][R/L]
  
@@ -512,7 +512,7 @@ Index: er9x/myeeprom.h
    uint8_t destCh;            //        1..NUM_CHNOUT
    uint8_t srcRaw;            //
    int8_t  weight;
-@@ -160,33 +164,33 @@
+@@ -161,33 +165,33 @@
    uint8_t mixres:1;
    int8_t  sOffset;
    int8_t  res;
@@ -556,7 +556,7 @@ Index: er9x/myeeprom.h
    char      name[MODEL_NAME_LEN];             // 10 must be first for eeLoadModelName
    uint8_t   mdVers;
    int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-@@ -225,7 +229,7 @@
+@@ -226,7 +230,7 @@
    uint8_t   res3[2];
    SafetySwData  safetySw[NUM_CHNOUT];
    FrSkyData frsky;
@@ -567,7 +567,7 @@ Index: er9x/myeeprom.h
  
 Index: er9x/pers.cpp
 ===================================================================
---- er9x/pers.cpp	(revision 668)
+--- er9x/pers.cpp	(revision 669)
 +++ er9x/pers.cpp	(working copy)
 @@ -159,7 +159,7 @@
    while((l=theFile.read(buf,15)))
@@ -745,7 +745,7 @@ Index: er9x/simpgmspace.cpp
 +#endif
 Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/simpgmspace.h	(revision 668)
+--- er9x/simpgmspace.h	(revision 669)
 +++ er9x/simpgmspace.h	(working copy)
 @@ -1,7 +1,12 @@
  /*
@@ -826,7 +826,7 @@ Index: er9x/simpgmspace.h
  typedef unsigned char prog_uchar;
  typedef const char prog_char;
  typedef const uint16_t prog_uint16_t;
-@@ -25,41 +75,114 @@
+@@ -25,41 +83,114 @@
  typedef const int16_t prog_int16_t;
  typedef const int8_t prog_int8_t;
  
@@ -954,7 +954,7 @@ Index: er9x/simpgmspace.h
 +#endif
 Index: er9x/templates.cpp
 ===================================================================
---- er9x/templates.cpp	(revision 668)
+--- er9x/templates.cpp	(revision 669)
 +++ er9x/templates.cpp	(working copy)
 @@ -107,7 +107,7 @@
  
