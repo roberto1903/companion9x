@@ -5265,7 +5265,7 @@ Mode 4:
     <message>
         <location filename="simulatordialog.cpp" line="74"/>
         <source>Joystick enabled but not configured correctly</source>
-        <translation>Joystick aabilitato ma non configurato correttamente</translation>
+        <translation type="unfinished">Joystick abilitato ma non configurato correttamente</translation>
     </message>
     <message>
         <location filename="simulatordialog.cpp" line="95"/>

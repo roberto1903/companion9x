@@ -53,7 +53,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     this->setFixedSize(this->width(),this->height());
 
 #ifdef JOYSTICKS
-    bool js_enable=settings.value("js_support",-1).toBool();
+    bool js_enable=settings.value("js_support",false).toBool();
     int js_ctrl=settings.value("js_ctrl",-1).toInt();
     if (js_enable) {
       settings.beginGroup("JsCalibration");
