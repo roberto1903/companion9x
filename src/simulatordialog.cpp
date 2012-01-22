@@ -632,7 +632,7 @@ void simulatorDialog::onjoystickAxisValueChanged(int axis, int value) {
       ui->dialP_2->setValue(stickval);
     }
     if (stick==7) {
-      ui->dialP_1->setValue(stickval);
+      ui->dialP_3->setValue(stickval);
     }
   }
 }
