@@ -4,6 +4,8 @@
 #define HELI
 #define TEMPLATES
 #define FRSKY
+#define FRSKY_HUB
+#define WS_HOW_HIGH
 
 #undef min
 #undef max
