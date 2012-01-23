@@ -252,7 +252,9 @@ class GeneralSettings {
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;
     uint8_t   speakerMode;
+    uint8_t   lightOnStickMove;
     char      ownerName[10+1];
+    uint8_t   switchWarningStates;
 };
 
 class ExpoData {
@@ -530,6 +532,8 @@ enum Capability {
  Timer2ThrTrig,
  PPMExtCtrl,
  MixFmTrim,
+ gsSwitchMask,
+ BLonStickMove,
 };
 
 class SimulatorInterface;

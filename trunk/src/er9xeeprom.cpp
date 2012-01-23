@@ -99,7 +99,9 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   setEEPROMString(ownerName, c9x.ownerName, sizeof(ownerName));
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
+  lightOnStickMove = c9x.lightOnStickMove;
   speakerMode = c9x.speakerMode;
+  switchWarningStates =c9x.switchWarningStates;
   
 }
 
@@ -141,8 +143,9 @@ Er9xGeneral::operator GeneralSettings ()
   getEEPROMString(result.ownerName, ownerName, sizeof(ownerName));
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
+  result.lightOnStickMove = lightOnStickMove;
   result.speakerMode = speakerMode;
-
+  result.switchWarningStates =switchWarningStates;
   return result;
 }
 

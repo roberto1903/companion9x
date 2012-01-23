@@ -226,6 +226,10 @@ int Er9xInterface::getCapability(const Capability capability)
       return 8;
     case Simulation:
       return 1;
+    case gsSwitchMask:
+      return 1;
+    case BLonStickMove:
+      return 1;
     default:
       return 0;
   }

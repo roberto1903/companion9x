@@ -22,6 +22,10 @@ private:
     RadioData &radioData;
     GeneralSettings g_eeGeneral;
 
+    bool switchDefPosEditLock;
+    void getGeneralSwitchDefPos(int i, bool val);
+    void setSwitchDefPos();
+    
 signals:
     void modelValuesChanged();
 
@@ -100,10 +104,20 @@ private slots:
     void on_inactimerSB_editingFinished();
     void on_backlightautoSB_editingFinished();
     void on_backlightswCB_currentIndexChanged(int index);
+    void on_blOnStickMoveSB_editingFinished();
     void on_battcalibDSB_editingFinished();
     void on_battwarningDSB_editingFinished();
     void on_contrastSB_editingFinished();
     void on_beepFlashChkB_stateChanged(int );
+    void on_swTHRChkB_stateChanged(int );
+    void on_swRUDChkB_stateChanged(int );
+    void on_swELEChkB_stateChanged(int );
+    void on_swID0ChkB_stateChanged(int );
+    void on_swID1ChkB_stateChanged(int );
+    void on_swID2ChkB_stateChanged(int );
+    void on_swAILChkB_stateChanged(int );
+    void on_swGEAChkB_stateChanged(int );
+    void shrink();
 };
 
 #endif // GENERALEDIT_H
