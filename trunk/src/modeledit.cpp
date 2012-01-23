@@ -184,9 +184,15 @@ void ModelEdit::tabModelEditSetup()
     ui->timer1ValTE->setTime(QTime(0,min,sec));
     ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
     ui->protocolCB->clear();
+    int index, selindex=0
+    
     for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
-      if (GetEepromInterface()->hasProtocol(prot_list[i].prot_num))
+      if (GetEepromInterface()->hasProtocol(prot_list[i].prot_num)) {
         ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
+        if (g_model.protocol==prot_list[i].prot_num) {
+          selindex=index;
+        }
+        index++;
     }
     
     
@@ -215,7 +221,7 @@ void ModelEdit::tabModelEditSetup()
     ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
 
     //protocol channels ppm delay (disable if needed)
-    ui->protocolCB->setCurrentIndex(g_model.protocol);
+    ui->protocolCB->setCurrentIndex(selindex);
     ui->ppmDelaySB->setValue(g_model.ppmDelay);
     ui->numChannelsSB->setValue(g_model.ppmNCH);
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
