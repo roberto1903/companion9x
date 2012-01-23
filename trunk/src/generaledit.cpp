@@ -299,7 +299,7 @@ void GeneralEdit::on_swtchWarnCB_currentIndexChanged(int index)
 
 void GeneralEdit::on_swtchWarnChkB_stateChanged(int )
 {
-    g_eeGeneral.switchWarning = ui->swtchWarnChkB->isChecked() ? 0 : 1;
+    g_eeGeneral.switchWarning = ui->swtchWarnChkB->isChecked() ? 0 : -1;
     updateSettings();
 }
 
