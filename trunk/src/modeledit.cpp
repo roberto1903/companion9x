@@ -184,7 +184,7 @@ void ModelEdit::tabModelEditSetup()
     ui->timer1ValTE->setTime(QTime(0,min,sec));
     ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
     ui->protocolCB->clear();
-    int index, selindex=0
+    int index, selindex=0;
     
     for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
       if (GetEepromInterface()->hasProtocol(prot_list[i].prot_num)) {
@@ -193,6 +193,7 @@ void ModelEdit::tabModelEditSetup()
           selindex=index;
         }
         index++;
+      }
     }
     
     
