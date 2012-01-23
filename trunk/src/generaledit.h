@@ -98,6 +98,7 @@ private slots:
     void on_beeperCB_currentIndexChanged(int index);
     void on_memwarnChkB_stateChanged(int );
     void on_swtchWarnCB_currentIndexChanged(int index);
+    void on_swtchWarnChkB_stateChanged(int );
     void on_thrwarnChkB_stateChanged(int );
     void on_inputfilterCB_currentIndexChanged(int index);
     void on_thrrevChkB_stateChanged(int );
