@@ -10,6 +10,7 @@
 #define BIT_BEEP_VAL     ( 0x38 ) // >>3
 #define BEEP_VAL_SHIFT   3
 
+
 GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GeneralEdit),
@@ -80,7 +81,35 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       populateSwitchCB(ui->swtchCB_3,g_eeGeneral.trainer.mix[2].swtch);
       populateSwitchCB(ui->swtchCB_4,g_eeGeneral.trainer.mix[3].swtch);
     }
-    
+    if (!GetEepromInterface()->getCapability(BLonStickMove)) {
+      ui->blOnStickMoveSB->setDisabled(true);
+      ui->blOnStickMoveSB->hide();
+      ui->label_blOnStickMove->hide();
+    }
+    else {
+      ui->blOnStickMoveSB->setValue(g_eeGeneral.lightOnStickMove*5);
+    }
+    if (!GetEepromInterface()->getCapability(gsSwitchMask)) {
+      ui->swAILChkB->setDisabled(true);
+      ui->swELEChkB->setDisabled(true);
+      ui->swTHRChkB->setDisabled(true);
+      ui->swRUDChkB->setDisabled(true);
+      ui->swGEAChkB->setDisabled(true);
+      ui->swID0ChkB->setDisabled(true);
+      ui->swID1ChkB->setDisabled(true);
+      ui->swID2ChkB->setDisabled(true);
+      ui->swAILChkB->hide();
+      ui->swELEChkB->hide();
+      ui->swTHRChkB->hide();
+      ui->swRUDChkB->hide();
+      ui->swGEAChkB->hide();
+      ui->swID0ChkB->hide();
+      ui->swID1ChkB->hide();
+      ui->swID2ChkB->hide();
+    }
+    else {
+      setSwitchDefPos();
+    }
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
     ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
     ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
@@ -152,11 +181,33 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->PPM3->setValue(g_eeGeneral.trainer.calib[2]);
     ui->PPM4->setValue(g_eeGeneral.trainer.calib[3]);
     ui->PPM_MultiplierDSB->setValue((qreal)(g_eeGeneral.PPM_Multiplier+10)/10);
+    QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 GeneralEdit::~GeneralEdit()
 {
     delete ui;
+}
+
+void GeneralEdit::setSwitchDefPos()
+{
+    quint8 x = g_eeGeneral.switchWarningStates & 0x38;
+    if(x==0x00 || x==0x18 || x== 0x28 || x==0x38 || x==0x30) //illegal states for ID0/1/2
+    {
+        g_eeGeneral.switchWarningStates &= ~0x38; // turn all off, make sure only one is on
+        g_eeGeneral.switchWarningStates |=  0x08;
+    }
+
+    switchDefPosEditLock = true;
+    ui->swTHRChkB->setChecked(g_eeGeneral.switchWarningStates & 0x01);
+    ui->swRUDChkB->setChecked(g_eeGeneral.switchWarningStates & 0x02);
+    ui->swELEChkB->setChecked(g_eeGeneral.switchWarningStates & 0x04);
+    ui->swID0ChkB->setChecked(g_eeGeneral.switchWarningStates & 0x08);
+    ui->swID1ChkB->setChecked(g_eeGeneral.switchWarningStates & 0x10);
+    ui->swID2ChkB->setChecked(g_eeGeneral.switchWarningStates & 0x20);
+    ui->swAILChkB->setChecked(g_eeGeneral.switchWarningStates & 0x40);
+    ui->swGEAChkB->setChecked(g_eeGeneral.switchWarningStates & 0x80);
+    switchDefPosEditLock = false;
 }
 
 void GeneralEdit::updateSettings()
@@ -200,6 +251,16 @@ void GeneralEdit::on_backlightautoSB_editingFinished()
         g_eeGeneral.lightAutoOff = i;
         updateSettings();
     }
+}
+
+void GeneralEdit::on_blOnStickMoveSB_editingFinished()
+{
+    int i = ui->blOnStickMoveSB->value()/5;
+    if((i*5)!=ui->blOnStickMoveSB->value())
+        ui->blOnStickMoveSB->setValue(i*5);
+
+    g_eeGeneral.lightOnStickMove = i;
+    updateSettings();
 }
 
 void GeneralEdit::on_inactimerSB_editingFinished()
@@ -603,4 +664,100 @@ void GeneralEdit::on_swtchCB_4_currentIndexChanged(int index)
 {
     g_eeGeneral.trainer.mix[3].swtch = ui->swtchCB_4->currentIndex()-MAX_DRSWITCH;
     updateSettings();
+}
+
+void GeneralEdit::getGeneralSwitchDefPos(int i, bool val)
+{
+    if(val)
+        g_eeGeneral.switchWarningStates |= (1<<(i-1));
+    else
+        g_eeGeneral.switchWarningStates &= ~(1<<(i-1));
+}
+
+void GeneralEdit::on_swTHRChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+    getGeneralSwitchDefPos(1,ui->swTHRChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swRUDChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+    getGeneralSwitchDefPos(2,ui->swRUDChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swELEChkB_stateChanged(int )
+{
+    getGeneralSwitchDefPos(3,ui->swELEChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swID0ChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+
+    if(ui->swID0ChkB->isChecked())
+    {
+        switchDefPosEditLock = true;
+        ui->swID1ChkB->setChecked(false);
+        ui->swID2ChkB->setChecked(false);
+        switchDefPosEditLock = false;
+    }
+    else
+        return;
+
+    g_eeGeneral.switchWarningStates &= ~0x30; //turn off ID1/2
+    getGeneralSwitchDefPos(4,ui->swID0ChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swID1ChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+
+    if(ui->swID1ChkB->isChecked())
+    {
+        switchDefPosEditLock = true;
+        ui->swID0ChkB->setChecked(false);
+        ui->swID2ChkB->setChecked(false);
+        switchDefPosEditLock = false;
+    }
+    else
+        return;
+
+    g_eeGeneral.switchWarningStates &= ~0x28; //turn off ID0/2
+    getGeneralSwitchDefPos(5,ui->swID1ChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swID2ChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+
+    if(ui->swID2ChkB->isChecked())
+    {
+        switchDefPosEditLock = true;
+        ui->swID0ChkB->setChecked(false);
+        ui->swID1ChkB->setChecked(false);
+        switchDefPosEditLock = false;
+    }
+    else
+        return;
+
+    g_eeGeneral.switchWarningStates &= ~0x18; //turn off ID1/2
+    getGeneralSwitchDefPos(6,ui->swID2ChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swAILChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+    getGeneralSwitchDefPos(7,ui->swAILChkB->isChecked());
+    updateSettings();
+}
+void GeneralEdit::on_swGEAChkB_stateChanged(int )
+{
+    if(switchDefPosEditLock) return;
+    getGeneralSwitchDefPos(8,ui->swGEAChkB->isChecked());
+    updateSettings();
+}
+
+void GeneralEdit::shrink() {
+    resize(0,0);
 }

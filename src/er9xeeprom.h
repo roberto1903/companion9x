@@ -95,9 +95,10 @@ PACK(typedef struct t_Er9xGeneral {
   uint8_t   speakerPitch;
   uint8_t   hapticStrength;
   uint8_t   speakerMode;
-  uint8_t   res[1];
+  uint8_t   lightOnStickMove;
 
   char      ownerName[10];
+  uint8_t switchWarningStates;
 
   operator GeneralSettings();
   t_Er9xGeneral();
