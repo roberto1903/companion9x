@@ -236,13 +236,13 @@ int Er9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Er9xInterface::hasProtocol(int prot_id)
+int Er9xInterface::hasProtocol(Protocol prot)
 {
-  switch (prot_id) {
-    case PROTO_PPM:
-    case PROTO_DSM2:
-    case PROTO_PXX:
-    case PROTO_PPM16:
+  switch (prot) {
+    case PPM:
+    case DSM2:
+    case PXX:
+    case PPM16:
       return 1;
     default:
       return 0;

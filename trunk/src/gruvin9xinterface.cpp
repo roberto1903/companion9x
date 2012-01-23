@@ -258,15 +258,15 @@ int Gruvin9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Gruvin9xInterface::hasProtocol(int prot_id)
+int Gruvin9xInterface::hasProtocol(Protocol proto)
 {
-  switch (prot_id) {
-    case PROTO_PPM:
-    case PROTO_SILV_A:
-    case PROTO_SILV_B:
-    case PROTO_SILV_C:
-    case PROTO_TRACER_CTP1009:  
-    case PROTO_DSM2:
+  switch (proto) {
+    case PPM:
+    case SILV_A:
+    case SILV_B:
+    case SILV_C:
+    case CTP1009:
+    case DSM2:
       return 1;
     default:
       return 0;

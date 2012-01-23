@@ -218,13 +218,13 @@ int Open9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Open9xInterface::hasProtocol(int prot_id)
+int Open9xInterface::hasProtocol(Protocol proto)
 {
-  switch (prot_id) {
-    case PROTO_PPM:
-    case PROTO_DSM2:
-    case PROTO_PXX:
-    case PROTO_PPM16:
+  switch (proto) {
+    case PPM:
+    case DSM2:
+    case PXX:
+    case PPM16:
       return 1;
     default:
       return 0;

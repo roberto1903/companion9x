@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "er9xeeprom.h"
+#include <QObject>
 
 t_Er9xTrainerMix::t_Er9xTrainerMix()
 {
@@ -328,7 +329,25 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
       tmrMode++;
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
-    protocol = c9x.protocol;
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PXX:
+        protocol = 1;
+        break;
+      case DSM2:
+        protocol = 2;
+        break;
+      case PPM16:
+        protocol = 3;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += QObject::tr("Er9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
     traineron = c9x.traineron;
     t2throttle = c9x.t2throttle;
     ppmFrameLength = c9x.ppmFrameLength;
@@ -451,7 +470,20 @@ t_Er9xModelData::operator ModelData ()
     c9x.timers[0].mode = TimerMode(tmrMode);
   c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = PPM16;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.traineron= traineron;
   c9x.t2throttle =  t2throttle;
   c9x.ppmFrameLength=ppmFrameLength;
