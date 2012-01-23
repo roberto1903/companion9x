@@ -476,7 +476,30 @@ t_Gruvin9xModelData_v102::operator ModelData ()
   getEEPROMString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = SILV_A;
+      break;
+    case 4:
+      c9x.protocol = SILV_B;
+      break;
+    case 5:
+      c9x.protocol = SILV_C;
+      break;
+    case 6:
+      c9x.protocol = CTP1009;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -515,7 +538,29 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = SILV_A;
+      break;
+    case 4:
+      c9x.protocol = SILV_B;
+      break;
+    case 5:
+      c9x.protocol = SILV_C;
+      break;
+    case 6:
+      c9x.protocol = CTP1009;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -554,7 +599,29 @@ t_Gruvin9xModelData_v105::operator ModelData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = SILV_A;
+      break;
+    case 4:
+      c9x.protocol = SILV_B;
+      break;
+    case 5:
+      c9x.protocol = SILV_C;
+      break;
+    case 6:
+      c9x.protocol = CTP1009;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -613,7 +680,29 @@ t_Gruvin9xModelData_v106::operator ModelData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = SILV_A;
+      break;
+    case 4:
+      c9x.protocol = SILV_B;
+      break;
+    case 5:
+      c9x.protocol = SILV_C;
+      break;
+    case 6:
+      c9x.protocol = CTP1009;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -663,7 +752,34 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
-    protocol = c9x.protocol;
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PXX:
+        protocol = 1;
+        break;
+      case DSM2:
+        protocol = 2;
+        break;
+      case SILV_A:
+        protocol = 3;
+        break;
+      case SILV_B:
+        protocol = 4;
+        break;
+      case SILV_C:
+        protocol = 5;
+        break;
+      case CTP1009:
+        protocol = 6;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += QObject::tr("Er9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;

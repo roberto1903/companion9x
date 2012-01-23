@@ -470,7 +470,20 @@ t_Open9xModelData_v201::operator ModelData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = PPM16;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
@@ -522,7 +535,20 @@ t_Open9xModelData_v202::operator ModelData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.timers[0] = timer1;
   c9x.timers[1] = timer2;
-  c9x.protocol = (Protocol)protocol;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = PPM16;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
@@ -573,7 +599,25 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
-    protocol = c9x.protocol;
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PXX:
+        protocol = 1;
+        break;
+      case DSM2:
+        protocol = 2;
+        break;
+      case PPM16:
+        protocol = 3;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += QObject::tr("Er9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
     thrTrim = c9x.thrTrim;
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     trimInc = c9x.trimInc;
