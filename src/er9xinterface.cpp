@@ -107,6 +107,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 7:
     case 8:
     case 9:
+    case 10:
       break;
     default:
       std::cout << "not er9x\n";
