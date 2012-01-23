@@ -128,7 +128,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
     ui->inputfilterCB->setCurrentIndex(g_eeGeneral.filterInput);
     ui->thrwarnChkB->setChecked(!g_eeGeneral.disableThrottleWarning);   //Default is zero=checked
-    ui->swtchWarnChkB->setChecked(g_eeGeneral.switchWarning == 0);
+    ui->swtchWarnChkB->setChecked(g_eeGeneral.switchWarning == -1);
     ui->swtchWarnCB->setCurrentIndex(g_eeGeneral.switchWarning == -1 ? 2 : g_eeGeneral.switchWarning);
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
@@ -299,7 +299,7 @@ void GeneralEdit::on_swtchWarnCB_currentIndexChanged(int index)
 
 void GeneralEdit::on_swtchWarnChkB_stateChanged(int )
 {
-    g_eeGeneral.switchWarning = ui->swtchWarnChkB->isChecked() ? 0 : -1;
+    g_eeGeneral.switchWarning = ui->swtchWarnChkB->isChecked() ? -1 : 0;
     updateSettings();
 }
 
