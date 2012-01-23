@@ -36,7 +36,7 @@ private:
     int       id_model;
     ModelData g_model;
     GeneralSettings g_eeGeneral;
-
+    bool protocolEditLock;
     bool switchEditLock;
     bool heliEditLock;
     bool phasesLock;
@@ -283,6 +283,7 @@ private slots:
     void on_tabWidget_currentChanged(int index);
     void on_templateList_doubleClicked(QModelIndex index);
     void ControlCurveSignal(bool flag);
+    
 };
 
 #endif // MODELEDIT_H
