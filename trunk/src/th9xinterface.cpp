@@ -176,6 +176,21 @@ int Th9xInterface::getCapability(const Capability capability)
   }
 }
 
+int Th9xInterface::hasProtocol(int prot_id)
+{
+  switch (prot_id) {
+    case PROTO_PPM:
+    case PROTO_SILV_A:
+    case PROTO_SILV_B:
+    case PROTO_SILV_C:
+    case PROTO_TRACER_CTP1009:  
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+
 SimulatorInterface * Th9xInterface::getSimulator()
 {
   return new Th9xSimulator(this);

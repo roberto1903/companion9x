@@ -183,7 +183,13 @@ void ModelEdit::tabModelEditSetup()
     int sec = g_model.timers[0].val%60;
     ui->timer1ValTE->setTime(QTime(0,min,sec));
     ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
-
+    ui->protocolCB->clear();
+    for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
+      if (GetEepromInterface()->hasProtocol(prot_list[i].prot_num))
+        ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
+    }
+    
+    
     //timer2 mode direction value
     populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
     min = g_model.timers[1].val/60;
@@ -1066,7 +1072,8 @@ void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 
 void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 {
-    g_model.protocol = (Protocol)index;
+  g_model.protocol=(Protocol)ui->protocolCB->itemData(index).toInt();
+//  g_model.protocol = (Protocol)index;
     updateSettings();
 
     ui->ppmDelaySB->setEnabled(!g_model.protocol);

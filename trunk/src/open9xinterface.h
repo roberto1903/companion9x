@@ -41,7 +41,9 @@ class Open9xInterface : public EEPROMInterface
     virtual int getSize(GeneralSettings &);
     
     virtual int getCapability(const Capability);
-
+    
+    virtual int hasProtocol(int prot_id);
+    
     virtual SimulatorInterface * getSimulator();
 
   protected:
