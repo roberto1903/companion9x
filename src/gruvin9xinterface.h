@@ -44,6 +44,8 @@ class Gruvin9xInterface : public EEPROMInterface
     virtual int getSize(GeneralSettings &settings);
 
     virtual int getCapability(const Capability);
+    
+    virtual int hasProtocol(int prot_id);
 
     virtual SimulatorInterface * getSimulator();
 

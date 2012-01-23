@@ -218,6 +218,20 @@ int Open9xInterface::getCapability(const Capability capability)
   }
 }
 
+int Open9xInterface::hasProtocol(int prot_id)
+{
+  switch (prot_id) {
+    case PROTO_PPM:
+    case PROTO_DSM2:
+    case PROTO_PXX:
+    case PROTO_PPM16:
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+
 SimulatorInterface * Open9xInterface::getSimulator()
 {
   return new Open9xSimulator(this);

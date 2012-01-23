@@ -104,6 +104,10 @@ const uint8_t modn12x3[4][4]= {
 #define PROTO_SILV_B     2
 #define PROTO_SILV_C     3
 #define PROTO_TRACER_CTP1009 4
+#define PROTO_PXX 5
+#define PROTO_DSM2 6
+#define PROTO_PPM16 7
+
 #define PROT_MAX         4
 // TODO review it
 #define PROT_STR "PPM   SILV_ASILV_BSILV_CTRAC09"
@@ -112,6 +116,24 @@ const uint8_t modn12x3[4][4]= {
 #define SUB_MODE_V     1
 #define SUB_MODE_H     2
 #define SUB_MODE_H_DBL 3
+
+typedef struct proto
+{
+  int prot_num;
+  char prot_descr[50];
+} t_protocol;
+
+const t_protocol prot_list[]= {
+  {PROTO_PPM,"PPM"}, 
+  {PROTO_SILV_A,"Silverlit A"},
+  {PROTO_SILV_B,"Silverlit B"},
+  {PROTO_SILV_C,"Silverlit C"},
+  {PROTO_TRACER_CTP1009,"CTP1009"},
+  {PROTO_DSM2,"DSM2"},
+  {PROTO_PXX,"FRSky PXX"},
+  {PROTO_PPM16,"PPM16"},
+};
+
 
 const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second is relevant channel out
 1,2,3,4 , 1,2,4,3 , 1,3,2,4 , 1,3,4,2 , 1,4,2,3 , 1,4,3,2,
@@ -474,7 +496,7 @@ class ModelData {
     bool      used;
     char      name[10+1];
     TimerData timers[2];
-    Protocol  protocol;
+    Protocol protocol;
     int       ppmNCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
@@ -558,6 +580,8 @@ class EEPROMInterface
     virtual int getSize(GeneralSettings &) = 0;
     
     virtual int getCapability(const Capability) = 0;
+    
+    virtual int hasProtocol(int prot_id) = 0;
 
     virtual SimulatorInterface * getSimulator() = 0;
 
