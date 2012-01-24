@@ -197,6 +197,22 @@ void ModelEdit::tabModelEditSetup()
         index++;
       }
     }
+    switch (g_model.protocol) {
+      case PXX:
+          ui->numChannelsSB->setValue(8);
+          ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+          ui->DSM_Type->setCurrentIndex(1);
+          break;
+      case DSM2:
+          ui->numChannelsSB->setValue(8);
+          ui->pxxRxNum->setValue(1);
+          ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
+          break;
+      default:
+          ui->numChannelsSB->setValue(g_model.ppmNCH);
+          break;
+    }
+
     protocolEditLock=false;  
     ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
     //timer2 mode direction value
@@ -225,7 +241,6 @@ void ModelEdit::tabModelEditSetup()
 
     //protocol channels ppm delay (disable if needed)
     ui->ppmDelaySB->setValue(g_model.ppmDelay);
-    ui->numChannelsSB->setValue(g_model.ppmNCH);
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
     ui->numChannelsSB->setEnabled(!g_model.protocol);
     ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
@@ -243,17 +258,6 @@ void ModelEdit::tabModelEditSetup()
     if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
         ui->ppmFrameLengthDSB->hide();
         ui->label_ppmFrameLength->hide();
-    }
-        switch (g_model.protocol)
-    {
-    case PXX:
-        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
-        break;
-    case DSM2:
-        ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
-        break;
-    default:
-        break;
     }
 
 }
