@@ -199,6 +199,8 @@ int Open9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
+    case PPMExtCtrl:
+      return 1;      
     case Phases:
       return 4;
     case Timers:
@@ -212,9 +214,9 @@ int Open9xInterface::getCapability(const Capability capability)
     case ExtendedTrims:
       return 500;
     case Simulation:
-      return true;
+      return 1;
     default:
-      return false;
+      return 0;
   }
 }
 

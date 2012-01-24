@@ -201,7 +201,7 @@ void ModelEdit::tabModelEditSetup()
       case PXX:
           ui->numChannelsSB->setValue(8);
           ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
-          ui->DSM_Type->setCurrentIndex(1);
+          ui->DSM_Type->setCurrentIndex(0);
           break;
       case DSM2:
           ui->numChannelsSB->setValue(8);
