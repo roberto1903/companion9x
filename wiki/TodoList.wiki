@@ -21,7 +21,7 @@
   * Beeps not handled yet
   * ~~Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS)~~
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
-
+  * In simulator: highlight real channels to differentiate them from virtual ones
 
 = Ideas from eePe =
   * Diff feature to compare two models
