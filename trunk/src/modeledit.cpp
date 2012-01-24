@@ -197,21 +197,7 @@ void ModelEdit::tabModelEditSetup()
         index++;
       }
     }
-    switch (g_model.protocol) {
-      case PXX:
-          ui->numChannelsSB->setValue(8);
-          ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
-          ui->DSM_Type->setCurrentIndex(0);
-          break;
-      case DSM2:
-          ui->numChannelsSB->setValue(8);
-          ui->pxxRxNum->setValue(1);
-          ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
-          break;
-      default:
-          ui->numChannelsSB->setValue(g_model.ppmNCH);
-          break;
-    }
+
 
     protocolEditLock=false;  
     ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
@@ -251,15 +237,35 @@ void ModelEdit::tabModelEditSetup()
     }
     ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
     if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
-        ui->T2ThrTrg->hide();
-        ui->T2ThrTrgChkB->hide();
+      ui->T2ThrTrg->hide();
+      ui->T2ThrTrgChkB->hide();
     }
     ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
     if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
-        ui->ppmFrameLengthDSB->hide();
-        ui->label_ppmFrameLength->hide();
+      ui->ppmFrameLengthDSB->hide();
+      ui->label_ppmFrameLength->hide();
     }
-
+    switch (g_model.protocol) {
+      case PXX:
+        ui->numChannelsSB->setValue(8);
+        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+        ui->DSM_Type->setCurrentIndex(0);
+        break;
+      case DSM2:
+        ui->numChannelsSB->setValue(8);
+        ui->pxxRxNum->setValue(1);
+        ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
+        break;
+      default:
+        ui->label_DSM->hide();
+        ui->DSM_Type->hide();
+        ui->DSM_Type->setEnabled(false);
+        ui->label_PXX->hide();
+        ui->pxxRxNum->hide();
+        ui->pxxRxNum->setEnabled(false);
+        ui->numChannelsSB->setValue(g_model.ppmNCH);
+        break;
+    }
 }
 
 void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)
