@@ -202,7 +202,7 @@ PACK(typedef struct t_Er9xModelData {
   uint8_t   t2throttle:1 ;  // Start timer2 using throttle
   uint8_t   FrSkyUsrProto:2 ;  // Protocol in FrSky User Data, 0=FrSky Hub, 1=WS HowHigh
   uint8_t   FrSkyImperial:1 ;  // Convert FrSky values to imperial units
-  uint8_t   spare:2;
+  uint8_t   FrSkyAltAlarm:2;
   uint16_t  tmrVal;
   uint8_t   protocol;
   int8_t    ppmNCH;

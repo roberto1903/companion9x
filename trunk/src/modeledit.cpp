@@ -197,8 +197,8 @@ void ModelEdit::tabModelEditSetup()
         index++;
       }
     }
-    ui->protocolCB->setCurrentIndex(selindex);
     protocolEditLock=false;  
+    ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
     //timer2 mode direction value
     populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
     min = g_model.timers[1].val/60;
@@ -242,9 +242,20 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
     if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
         ui->ppmFrameLengthDSB->hide();
-        ui->label_ppmFrameLengthDSB->hide();
+        ui->label_ppmFrameLength->hide();
     }
-    
+        switch (g_model.protocol)
+    {
+    case PXX:
+        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+        break;
+    case DSM2:
+        ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
+        break;
+    default:
+        break;
+    }
+
 }
 
 void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)
@@ -1081,12 +1092,70 @@ void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 {
   if (!protocolEditLock) {
+    protocolEditLock=true;
     g_model.protocol=(Protocol)ui->protocolCB->itemData(index).toInt();
   //  g_model.protocol = (Protocol)index;
-      updateSettings();
+    updateSettings();
 
-      ui->ppmDelaySB->setEnabled(!g_model.protocol);
-      ui->numChannelsSB->setEnabled(!g_model.protocol);
+    ui->ppmDelaySB->setEnabled(!g_model.protocol);
+    ui->numChannelsSB->setEnabled(!g_model.protocol);
+    switch (g_model.protocol) {
+      case PXX:
+        ui->label_PPM->hide();
+        ui->ppmDelaySB->hide();
+        ui->ppmDelaySB->setEnabled(false);
+        ui->label_PPMCH->hide();
+        ui->numChannelsSB->hide();
+        ui->numChannelsSB->setEnabled(false);
+        ui->label_ppmFrameLength->hide();
+        ui->ppmFrameLengthDSB->hide();
+        ui->ppmFrameLengthDSB->setEnabled(false);
+        ui->label_DSM->hide();
+        ui->DSM_Type->hide();
+        ui->DSM_Type->setEnabled(false);
+        ui->label_PXX->show();
+        ui->pxxRxNum->show();
+        ui->pxxRxNum->setEnabled(true);
+        break;
+      case DSM2:
+        ui->label_PPM->hide();
+        ui->ppmDelaySB->hide();
+        ui->ppmDelaySB->setEnabled(false);
+        ui->label_PPMCH->hide();
+        ui->numChannelsSB->hide();
+        ui->numChannelsSB->setEnabled(false);
+        ui->label_ppmFrameLength->hide();
+        ui->ppmFrameLengthDSB->hide();
+        ui->ppmFrameLengthDSB->setEnabled(false);
+        ui->label_PXX->hide();
+        ui->pxxRxNum->hide();
+        ui->pxxRxNum->setEnabled(false);
+        ui->DSM_Type->setEnabled(true);
+        ui->label_DSM->show();
+        ui->DSM_Type->show();
+        break;
+      default:
+        ui->label_DSM->hide();
+        ui->DSM_Type->hide();
+        ui->DSM_Type->setEnabled(false);
+        ui->label_PXX->hide();
+        ui->pxxRxNum->hide();
+        ui->pxxRxNum->setEnabled(false);
+        ui->label_PPM->show();
+        ui->ppmDelaySB->show();        
+        ui->ppmDelaySB->setEnabled(true);
+        ui->label_PPMCH->show();
+        ui->numChannelsSB->show();        
+        ui->numChannelsSB->setEnabled(true);
+        ui->ppmFrameLengthDSB->setEnabled(true);
+        if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
+          ui->ppmFrameLengthDSB->show();
+          ui->label_ppmFrameLength->show();
+        }
+
+        break;
+    }
+    protocolEditLock=false;
   }
 }
 
@@ -1099,8 +1168,23 @@ void ModelEdit::on_numChannelsSB_editingFinished()
 
 void ModelEdit::on_ppmDelaySB_editingFinished()
 {
+  if(protocolEditLock) return;
   // TODO only accept valid values
   g_model.ppmDelay = ui->ppmDelaySB->value();
+  updateSettings();
+}
+
+void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
+{
+  if(protocolEditLock) return;
+  g_model.ppmNCH = (index*2)+8;
+  updateSettings();
+}
+
+void ModelEdit::on_pxxRxNum_editingFinished()
+{
+  if(protocolEditLock) return;
+  g_model.ppmNCH = (ui->pxxRxNum->value()-1)*2+8;
   updateSettings();
 }
 

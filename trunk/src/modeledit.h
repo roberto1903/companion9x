@@ -127,6 +127,8 @@ private slots:
     void on_T2ThrTrgChkB_toggled(bool checked);
     void on_TrainerChkB_toggled(bool checked);
     void on_ppmFrameLengthDSB_editingFinished();
+    void on_DSM_Type_currentIndexChanged(int index);
+    void on_pxxRxNum_editingFinished();
     void on_extendedLimitsChkB_toggled(bool checked);
     void on_extendedTrimsChkB_toggled(bool checked);
     void resetCurve();
