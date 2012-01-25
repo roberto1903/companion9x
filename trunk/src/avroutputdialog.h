@@ -34,6 +34,7 @@ protected slots:
     void doFinished(int code);
     void on_checkBox_toggled(bool checked);
     void shrink();
+    void forceClose();
 
 private:
     Ui::avrOutputDialog *ui;
