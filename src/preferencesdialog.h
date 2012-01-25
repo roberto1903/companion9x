@@ -31,6 +31,7 @@ private:
     void initSettings();
 
 private slots:
+    void shrink();
     void writeValues();
     void firmwareLangChanged();
     void baseFirmwareChanged();

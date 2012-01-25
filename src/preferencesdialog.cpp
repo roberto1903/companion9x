@@ -34,6 +34,7 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
   ui->joystickChkB->hide();
   ui->label_11->hide();
 #endif
+  resize(0,0);
 }
 
 
@@ -214,6 +215,7 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo &firmware)
   }
 
   updateLock = false;
+  QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 void preferencesDialog::initSettings()
@@ -418,6 +420,11 @@ void preferencesDialog::on_joystickcalButton_clicked() {
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
    joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
    jd->exec();
+}
+
+
+void preferencesDialog::shrink() {
+    resize(0,0);
 }
 
 #endif
