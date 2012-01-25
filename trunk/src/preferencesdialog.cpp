@@ -118,13 +118,16 @@ void preferencesDialog::firmwareChanged(bool state)
     settings.endGroup();
     if (fwrev != -1) {
       ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
+      ui->checkFWUpdates->show();
     }
     else {
       if (ui->fw_dnld->isEnabled()) {
         ui->FwInfo->setText(tr("The selected firmware has never been downloaded by companion9x."));
+        ui->checkFWUpdates->hide();
       }
       else {
         ui->FwInfo->setText(tr("The selected firmware cannot be downloaded by companion9x."));
+        ui->checkFWUpdates->hide();
       }
     }
   }
@@ -421,6 +424,11 @@ void preferencesDialog::on_joystickcalButton_clicked() {
    //settings.setValue("joystick-name",ui->joystickCB->currentText());
    joystickDialog * jd=new joystickDialog(this, ui->joystickCB->currentIndex());
    jd->exec();
+}
+
+void preferencesDialog::on_checkFWUpdates_clicked() {
+    MainWindow * mw = (MainWindow *)this->parent();
+    mw->checkForUpdates(true);
 }
 
 
