@@ -12,10 +12,14 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
         setWindowTitle(tr("AVRDUDE result"));
     else
         setWindowTitle(tr("AVRDUDE - ") + wTitle);
-
+    QFile exec;
     winTitle=wTitle;
 
     cmdLine = prog;
+    if (!(exec.exists(prog))) {
+      QMessageBox::critical(this, "companion9x", tr("AVRDUDE executable not found"));
+      delete ui;
+    }
     foreach(QString str, arg) cmdLine.append(" " + str);
     closeOpt = closeBehaviour;
 
