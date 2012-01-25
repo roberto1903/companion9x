@@ -618,7 +618,7 @@ Index: er9x/simpgmspace.cpp
 ===================================================================
 --- er9x/simpgmspace.cpp	(revision 0)
 +++ er9x/simpgmspace.cpp	(revision 0)
-@@ -0,0 +1,142 @@
+@@ -0,0 +1,135 @@
 +/*
 + * Authors (alphabetical order)
 + * - Bertrand Songis <bsongis@gmail.com>
@@ -640,13 +640,6 @@ Index: er9x/simpgmspace.cpp
 + *
 + */
 +
-+#ifndef __GNUC__
-+#include <windows.h>
-+#define sleep(x) Sleep(x)
-+#else
-+#include <unistd.h>
-+#define sleep(x) usleep(1000*x)
-+#endif
 +
 +#include <ctype.h>
 +#include "simpgmspace.h"
