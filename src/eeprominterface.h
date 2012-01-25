@@ -20,6 +20,8 @@
 #include <inttypes.h>
 #include <string.h>
 #include <QString>
+#include <QStringList>
+#include <QList>
 #include <iostream>
 
 #if __GNUC__
@@ -661,6 +663,7 @@ EEPROMInterface * GetEepromInterface();
 class FirmwareInfo {
   public:
     FirmwareInfo():
+      parent(NULL),
       id(NULL),
       eepromInterface(NULL),
       url(NULL),
@@ -668,7 +671,8 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL, const char * stamp = NULL):
+    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface=NULL, const char * url = NULL, const char * stamp = NULL):
+      parent(NULL),
       id(id),
       name(name),
       eepromInterface(eepromInterface),
@@ -677,11 +681,35 @@ class FirmwareInfo {
     {
     }
 
+    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface=NULL, const char * url = NULL, const char * stamp = NULL):
+      parent(NULL),
+      id(id),
+      name(QString::null),
+      eepromInterface(eepromInterface),
+      url(url),
+      stamp(stamp)
+    {
+    }
+
+    void add_option(FirmwareInfo option) {
+      option.parent = this;
+      options.push_back(option);
+    }
+
+    QStringList get_options() {
+      if (parent)
+        return QString(id).mid(strlen(parent->id)+1).split("-", QString::SkipEmptyParts);
+      else
+        return QStringList();
+    }
+
+    FirmwareInfo *parent;
     const char * id;
     QString name;
     EEPROMInterface * eepromInterface;
     const char * url;
     const char * stamp;
+    QList<FirmwareInfo> options;
 };
 
 FirmwareInfo GetCurrentFirmware();

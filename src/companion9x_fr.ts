@@ -4751,7 +4751,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <message>
         <location filename="preferencesdialog.cpp" line="55"/>
         <source>The selected firmware has never been downloaded by companion9x.</source>
-        <translation>Le firmware séléctionné n&apos;a jamais été téléchargé par companion9x.</translation>
+        <translation>Le firmware sélectionné n&apos;a jamais été téléchargé par companion9x.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="58"/>
