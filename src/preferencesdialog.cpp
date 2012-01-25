@@ -52,6 +52,7 @@ void preferencesDialog::baseFirmwareChanged()
       break;
     }
   }
+  firmwareChanged(false);
 }
 
 FirmwareInfo preferencesDialog::getFirmware(bool state)
