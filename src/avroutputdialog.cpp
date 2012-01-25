@@ -18,29 +18,31 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     cmdLine = prog;
     if (!(exec.exists(prog))) {
       QMessageBox::critical(this, "companion9x", tr("AVRDUDE executable not found"));
-      delete ui;
-    }
-    foreach(QString str, arg) cmdLine.append(" " + str);
-    closeOpt = closeBehaviour;
-
-    lfuse = 0;
-    hfuse = 0;
-    efuse = 0;
-    phase=0;
-    currLine.clear();
-    prevLine.clear();
-    if (!displayDetails) {
-        ui->plainTextEdit->hide();
-        QTimer::singleShot(0, this, SLOT(shrink()));
+      closeOpt=AVR_DIALOG_FORCE_CLOSE;
+      QTimer::singleShot(0, this, SLOT(forceClose()));
     } else {
-        ui->checkBox->setChecked(true);
-    }
-    process = new QProcess(this);
-    connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
-    connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
-    connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
-    connect(process,SIGNAL(finished(int)),this,SLOT(doFinished(int)));
-    process->start(prog,arg);
+      foreach(QString str, arg) cmdLine.append(" " + str);
+      closeOpt = closeBehaviour;
+
+      lfuse = 0;
+      hfuse = 0;
+      efuse = 0;
+      phase=0;
+      currLine.clear();
+      prevLine.clear();
+      if (!displayDetails) {
+          ui->plainTextEdit->hide();
+          QTimer::singleShot(0, this, SLOT(shrink()));
+      } else {
+          ui->checkBox->setChecked(true);
+      }
+      process = new QProcess(this);
+      connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
+      connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
+      connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
+      connect(process,SIGNAL(finished(int)),this,SLOT(doFinished(int)));
+      process->start(prog,arg);
+   }
 }
 
 avrOutputDialog::~avrOutputDialog()
@@ -206,4 +208,8 @@ void avrOutputDialog::on_checkBox_toggled(bool checked) {
 
 void avrOutputDialog::shrink() {
     resize(0,0);
+}
+
+void avrOutputDialog::forceClose() {
+    accept();;
 }

@@ -521,8 +521,11 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
 void MainWindow::burnFrom()
 {
     QString tempDir    = QDir::tempPath();
-
+    QFile tempEEprom;
     QString tempFile = tempDir + "/temp.hex";
+    if (tempEEprom.exists(tempFile)) {
+      unlink(tempFile.toAscii());
+    }
     QString str = "eeprom:r:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
 
     avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
