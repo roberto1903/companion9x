@@ -11,13 +11,21 @@
 #include <QtGui>
 
 preferencesDialog::preferencesDialog(QWidget *parent) :
-QDialog(parent),
-ui(new Ui::preferencesDialog) {
+  QDialog(parent),
+  ui(new Ui::preferencesDialog),
+  updateLock(false)
+{
   ui->setupUi(this);
+
+  connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
+  foreach(QCheckBox *cb, findChildren<QCheckBox *>(QRegExp("optionCheckBox_[0-9]+"))) {
+    optionsCheckBoxes.push_back(cb);
+    connect(cb, SIGNAL(toggled(bool)), this, SLOT(firmwareChanged(bool)));
+  }
 
   populateLocale();
   initSettings();
-  connect(ui->downloadVerCB, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareChanged()));
+  connect(ui->downloadVerCB, SIGNAL(currentIndexChanged(int)), this, SLOT(baseFirmwareChanged()));
   connect(this, SIGNAL(accepted()), this, SLOT(writeValues()));
 #ifndef JOYSTICKS
   ui->joystickCB->hide();
@@ -28,39 +36,100 @@ ui(new Ui::preferencesDialog) {
 #endif
 }
 
-preferencesDialog::~preferencesDialog() {
+
+preferencesDialog::~preferencesDialog()
+{
   delete ui;
 }
 
-void preferencesDialog::firmwareChanged() {
-  QString fwid;
+void preferencesDialog::baseFirmwareChanged()
+{
+  QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
+  foreach(FirmwareInfo firmware, firmwares) {
+    if (firmware.id == selected_firmware) {
+      populateFirmwareOptions(firmware);
+      break;
+    }
+  }
+}
+
+FirmwareInfo preferencesDialog::getFirmware(bool state)
+{
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
 
   foreach(FirmwareInfo firmware, firmwares) {
     if (firmware.id == selected_firmware) {
-      fwid = firmware.id;
-      ui->fw_dnld->setEnabled(firmware.url);
-      break;
+      QStringList options;
+      foreach(QCheckBox *cb, optionsCheckBoxes) {
+        if (cb->isChecked()) {
+          options.append(cb->text());
+        }
+      }
+      if (ui->langCombo->count())
+        options.append(ui->langCombo->currentText());
+
+      if (options.size()) {
+        FirmwareInfo fw;
+        foreach(FirmwareInfo firmware_option, firmware.options) {
+          if (state || options.size() == firmware_option.get_options().size()) {
+            fw = firmware_option;
+            foreach(QString option, options) {
+              if ((option.size() == 2 && !QString(firmware_option.id).endsWith(option)) ||
+                  (option.size() > 2 && !QString(firmware_option.id).contains(option))) {
+                fw.id = NULL;
+                break;
+              }
+            }
+          }
+          if (fw.id) return fw;
+        }
+        return firmware.options.at(0);
+      }
+      else {
+        return firmware;
+      }
     }
   }
-  QSettings settings("companion9x", "companion9x");
-  settings.beginGroup("FwRevisions");
-  int fwrev = settings.value(fwid, -1).toInt();
-  settings.endGroup();
-  if (fwrev != -1) {
-    ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
-  }
-  else {
-    if (ui->fw_dnld->isEnabled()) {
-      ui->FwInfo->setText(tr("The selected firmware has never been downloaded by companion9x."));
+
+  return FirmwareInfo();
+}
+
+void preferencesDialog::firmwareLangChanged()
+{
+  firmwareChanged(false);
+}
+
+void preferencesDialog::firmwareChanged(bool state)
+{
+  if (updateLock)
+    return;
+
+  FirmwareInfo fw = getFirmware(state);
+
+  if (fw.id) {
+    ui->fw_dnld->setEnabled(fw.url);
+    populateFirmwareOptions(fw);
+
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("FwRevisions");
+    int fwrev = settings.value(fw.id, -1).toInt();
+    settings.endGroup();
+    if (fwrev != -1) {
+      ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
     }
     else {
-      ui->FwInfo->setText(tr("The selected firmware cannot be downloaded by companion9x."));
+      if (ui->fw_dnld->isEnabled()) {
+        ui->FwInfo->setText(tr("The selected firmware has never been downloaded by companion9x."));
+      }
+      else {
+        ui->FwInfo->setText(tr("The selected firmware cannot be downloaded by companion9x."));
+      }
     }
   }
 }
 
-void preferencesDialog::writeValues() {
+void preferencesDialog::writeValues()
+{
   QSettings settings("companion9x", "companion9x");
   if (ui->locale_QB->currentIndex() > 0)
     settings.setValue("locale", ui->locale_QB->itemData(ui->locale_QB->currentIndex()));
@@ -72,7 +141,9 @@ void preferencesDialog::writeValues() {
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
-  settings.setValue("firmware", ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()));
+  FirmwareInfo firmware = getFirmware();
+  settings.setValue("firmware", firmware.id);
+
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
@@ -93,10 +164,60 @@ void preferencesDialog::writeValues() {
     settings.remove("js_support");
     settings.remove("js_ctrl");
   }
-    
 }
 
-void preferencesDialog::initSettings() {
+void preferencesDialog::populateFirmwareOptions(const FirmwareInfo &firmware)
+{
+  QString firmware_id = QString(firmware.id);
+
+  const FirmwareInfo *parent = &firmware;
+
+  if (firmware.parent)
+    parent = firmware.parent;
+
+  QStringList options;
+  foreach(FirmwareInfo option, parent->options) {
+    options.append(option.get_options());
+  }
+
+  options.removeDuplicates();
+
+  updateLock = true;
+
+  ui->langCombo->clear();
+  for (int i=0; i<options.size(); i++) {
+    if (options.at(i).size() == 2) {
+      QString option = options.takeAt(i--);
+      ui->langCombo->addItem(option);
+      if (firmware_id.endsWith(option))
+        ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
+    }
+  }
+  if (ui->langCombo->count())
+    ui->langCombo->show();
+  else
+    ui->langCombo->hide();
+
+  int index = 0;
+  for (; index<options.size() && index<optionsCheckBoxes.size(); index++) {
+    QCheckBox *cb = optionsCheckBoxes.at(index);
+    cb->show();
+    QString option = options.at(index);
+    cb->setText(option);
+    cb->setCheckState(firmware_id.contains(option) ? Qt::Checked : Qt::Unchecked);
+  }
+
+  for (; index<optionsCheckBoxes.size(); index++) {
+    QCheckBox *cb = optionsCheckBoxes.at(index);
+    cb->hide();
+    cb->setCheckState(Qt::Unchecked);
+  }
+
+  updateLock = false;
+}
+
+void preferencesDialog::initSettings()
+{
   QSettings settings("companion9x", "companion9x");
   int i = ui->locale_QB->findData(settings.value("locale"));
   if (i < 0) i = 0;
@@ -116,11 +237,24 @@ void preferencesDialog::initSettings() {
   ui->splashincludeCB->setCurrentIndex(settings.value("embedded_splashes", 0).toInt());
   FirmwareInfo current_firmware = GetCurrentFirmware();
 
+  // qDebug() << current_firmware.id;
+
   foreach(FirmwareInfo firmware, firmwares) {
     ui->downloadVerCB->addItem(firmware.name, firmware.id);
-    if (firmware.id == current_firmware.id)
+    if (firmware.id == current_firmware.id) {
       ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
+      baseFirmwareChanged();
+    }
+    else {
+      foreach(FirmwareInfo option, firmware.options) {
+        if (option.id == current_firmware.id) {
+          ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
+          populateFirmwareOptions(option);
+        }
+      }
+    }
   }
+
   QString ImageStr = settings.value("SplashImage", "").toString();
   if (!ImageStr.isEmpty()) {
     QImage Image = qstring2image(ImageStr);
@@ -164,10 +298,11 @@ void preferencesDialog::initSettings() {
     ui->joystickcalButton->setDisabled(true);
   }
 #endif  
-  firmwareChanged();
+  firmwareChanged(true);
 }
 
-void preferencesDialog::populateLocale() {
+void preferencesDialog::populateLocale()
+{
   ui->locale_QB->clear();
   ui->locale_QB->addItem("System default language", "");
   ui->locale_QB->addItem("English", "en");
@@ -184,18 +319,13 @@ void preferencesDialog::populateLocale() {
   }
 }
 
-void preferencesDialog::on_fw_dnld_clicked() {
+void preferencesDialog::on_fw_dnld_clicked()
+{
   MainWindow * mw = (MainWindow *)this->parent();
-  QString firmware_id = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex()).toString();
-
-  foreach(FirmwareInfo firmware, firmwares) {
-    if (firmware.id == firmware_id) {
-      mw->downloadLatestFW(&firmware);
-      break;
-    }
-  }
-
-  firmwareChanged();
+  FirmwareInfo fw = getFirmware();
+  if (fw.url)
+    mw->downloadLatestFW(&fw);
+  firmwareChanged(true);
 }
 
 void preferencesDialog::on_libraryPathButton_clicked() {

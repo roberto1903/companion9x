@@ -2,6 +2,8 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
+#include <QCheckBox>
+#include "eeprominterface.h"
 
 namespace Ui {
     class preferencesDialog;
@@ -20,13 +22,19 @@ public:
 
 private:
     Ui::preferencesDialog *ui;
+    QList<QCheckBox *> optionsCheckBoxes;
+    bool updateLock;
 
     void populateLocale();
+    void populateFirmwareOptions(const FirmwareInfo &);
+    FirmwareInfo getFirmware(bool state=true);
     void initSettings();
 
 private slots:
     void writeValues();
-    void firmwareChanged();
+    void firmwareLangChanged();
+    void baseFirmwareChanged();
+    void firmwareChanged(bool state=false);
     void on_fw_dnld_clicked();
     void on_SplashSelect_clicked();
     void on_InvertPixels_clicked();
