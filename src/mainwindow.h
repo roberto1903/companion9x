@@ -193,6 +193,7 @@ private:
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
     QAction *recentFileActs[MAX_RECENT];
+    FirmwareInfo fwToUpdate;
 };
 
 #endif
