@@ -123,13 +123,16 @@ void MainWindow::doUpdates() {
         checkForUpdates(true);
 }
 
-void MainWindow::checkForUpdates(bool ignoreSettings)
+void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
 {
     showcheckForUpdatesResult = ignoreSettings;
     check1done = true;
     check2done = true;
     QSettings settings("companion9x", "companion9x");
     FirmwareInfo firmware =  GetCurrentFirmware();
+    if (fw!=NULL) {
+      memcpy(&firmware,fw, sizeof(firmware));
+    }
     
     if (firmware.stamp) {
         if (checkFW || ignoreSettings) {
