@@ -265,23 +265,7 @@ QT4_ADD_RESOURCES( companion9x_SRCS ${companion9x_RCS} )
 ADD_DEFINITIONS( -DQT_TRANSLATIONS_DIR="${QT_TRANSLATIONS_DIR}" )
 
 IF( APPLE )
-    # Copy the icon files
-    # TODO: put these in some sort of add_custom_command( TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ...)
-    # also delete the Sigil.app folder as PRE_BUILD of Sigil executable
-
-    #exec_program( "mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/companion9x.app/Contents/Resources")
-    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
-    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
-    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
-
-    # Copy the PLIST file...
-    #exec_program( "cp ${PROJECT_SOURCE_DIR}/Resource_Files/mac/MacOSXBundleInfo.plist ${PROJECT_BINARY_DIR}")
-
-    # ...and set the Sigil version string
-    #exec_program( "sed -i -e 's/SGVERSION/${SIGIL_FULL_VERSION}/g' ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist")
-
     ADD_EXECUTABLE( ${PROJECT_NAME} MACOSX_BUNDLE ${companion9x_SRCS} ${companion9x_QM} )
-    # SET_TARGET_PROPERTIES( ${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ../mac/MacOSXBundleInfo.plist )
 ELSE( )
     ADD_EXECUTABLE( ${PROJECT_NAME} WIN32 ${companion9x_SRCS} ${companion9x_QM} )
 ENDIF( )
@@ -320,28 +304,28 @@ IF( APPLE )
   IF( CMAKE_GENERATOR STREQUAL Xcode )
     SET( WORK_DIR ${CMAKE_BINARY_DIR}/Debug )
   ELSE( )
-    SET( WORK_DIR "${PROJECT_BINARY_DIR}" )
+    SET( WORK_DIR ${PROJECT_BINARY_DIR} )
   ENDIF()
-    
+  
   ADD_CUSTOM_TARGET( addframeworks ALL 
                      COMMAND mkdir -p companion9x.app/Contents/Frameworks
                      COMMAND mkdir -p companion9x.app/Contents/Resources
-                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/images/${MACOSX_BUNDLE_ICON_FILE} companion9x.app/Contents/Resources/${MACOSX_BUNDLE_ICON_FILE}
-                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/../macbuild/libssl.1.0.0.dylib companion9x.app/Contents/Frameworks
-                     COMMAND cp -r ${PROJECT_SOURCE_DIR}/../macbuild/libcrypto.1.0.0.dylib companion9x.app/Contents/Frameworks
-                     COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
+		     COMMAND mkdir -p companion9x.app/Contents/translations                     
+		     COMMAND rsync ${PROJECT_SOURCE_DIR}/images/${MACOSX_BUNDLE_ICON_FILE} companion9x.app/Contents/Resources/${MACOSX_BUNDLE_ICON_FILE} # Copy the icon files
+                     COMMAND rsync ${PROJECT_SOURCE_DIR}/../macbuild/lib* companion9x.app/Contents/Frameworks
+                     #COMMAND rsync ${PROJECT_SOURCE_DIR}/../macbuild/libcrypto.1.0.0.dylib companion9x.app/Contents/Frameworks
+                     COMMAND rsync -r --exclude=.svn  ${PROJECT_SOURCE_DIR}/../macbuild/qt_menu.nib companion9x.app/Contents/Resources/
+                     COMMAND rsync ${PROJECT_BINARY_DIR}/*.qm companion9x.app/Contents/translations
+		     COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS ${PROJECT_NAME} )
 
-  ADD_CUSTOM_COMMAND( TARGET addframeworks POST_BUILD 
-                      COMMAND mkdir -p companion9x.app/Contents/translations
-                      COMMAND cp -r ${PROJECT_BINARY_DIR}/*.qm companion9x.app/Contents/translations
-                      COMMAND cp -rf ${PROJECT_SOURCE_DIR}/../macbuild/qt_menu.nib companion9x.app/Contents/Resources )
                         
   ADD_CUSTOM_TARGET( makedmg
                      COMMAND ${QT_BINARY_DIR}/macdeployqt companion9x.app -dmg -no-plugins
                      WORKING_DIRECTORY ${WORK_DIR}
                      DEPENDS addframeworks )
+
 ENDIF( )
 
 ADD_CUSTOM_TARGET( stamp
@@ -351,4 +335,3 @@ ADD_CUSTOM_TARGET( stamp
 ADD_CUSTOM_TARGET( translations
                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
                    COMMAND lupdate ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )
-
