@@ -61,6 +61,8 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
+    friend class preferencesDialog;
+
     Q_OBJECT
 
 public:
