@@ -121,6 +121,8 @@ void preferencesDialog::firmwareChanged(bool state)
     ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
     if (!stamp.isEmpty()) {
       ui->checkFWUpdates->show();
+    } else {
+      ui->checkFWUpdates->hide();
     }
   }
   else {
