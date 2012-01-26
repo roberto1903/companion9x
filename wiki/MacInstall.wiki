@@ -16,7 +16,7 @@ I used OSX-AVR because it's easy.
 
 Download the current .dmg from the downloads area.
 
-Open the .dmg and just drag the companion9x app to you Application folder (or where ever you like)
+Open the .dmg and just run the installer. Companion9x is placed in Applications folder
 
 You have to set the location of AVRDude under Burn>Configure
 If you used OSX-AVR to install AVRDude it wil be 
