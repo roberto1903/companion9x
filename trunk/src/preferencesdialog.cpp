@@ -84,8 +84,10 @@ FirmwareInfo * preferencesDialog::getFirmware(bool state)
             if (ok) return firmware_option;
           }
         }
-        qDebug() << "ICI" << firmware->options.at(0)->id;
-        return firmware->options.at(0);
+        if (firmware->url)
+          return firmware;
+        else
+          return firmware->options.at(0);
       }
       else {
         return firmware;
