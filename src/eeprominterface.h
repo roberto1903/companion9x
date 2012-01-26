@@ -658,8 +658,6 @@ void RegisterFirmwares();
 
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 
-EEPROMInterface * GetEepromInterface();
-
 class FirmwareInfo {
   public:
     FirmwareInfo():
@@ -691,8 +689,8 @@ class FirmwareInfo {
     {
     }
 
-    void add_option(FirmwareInfo option) {
-      option.parent = this;
+    void add_option(FirmwareInfo * option) {
+      option->parent = this;
       options.push_back(option);
     }
 
@@ -709,11 +707,13 @@ class FirmwareInfo {
     EEPROMInterface * eepromInterface;
     const char * url;
     const char * stamp;
-    QList<FirmwareInfo> options;
+    QList<FirmwareInfo *> options;
 };
 
-FirmwareInfo GetCurrentFirmware();
+FirmwareInfo * GetCurrentFirmware();
+EEPROMInterface * GetEepromInterface();
 
-extern QList<FirmwareInfo> firmwares;
+extern QList<FirmwareInfo *> firmwares;
+extern FirmwareInfo * default_firmware;
 
 #endif
