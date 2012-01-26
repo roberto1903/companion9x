@@ -108,7 +108,8 @@ void preferencesDialog::firmwareChanged(bool state)
     return;
 
   FirmwareInfo * fw = getFirmware(state);
-
+  QString stamp;
+  stamp.append(fw->stamp);
   ui->fw_dnld->setEnabled(fw->url);
   populateFirmwareOptions(fw);
 
@@ -118,12 +119,14 @@ void preferencesDialog::firmwareChanged(bool state)
   settings.endGroup();
   if (fwrev != -1) {
     ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
-    ui->checkFWUpdates->show();
+    if (!stamp.isEmpty()) {
+      ui->checkFWUpdates->show();
+    }
   }
   else {
     if (ui->fw_dnld->isEnabled()) {
       ui->FwInfo->setText(tr("The selected firmware has never been downloaded by companion9x."));
-      ui->checkFWUpdates->hide();
+        ui->checkFWUpdates->hide();   
     }
     else {
       ui->FwInfo->setText(tr("The selected firmware cannot be downloaded by companion9x."));
