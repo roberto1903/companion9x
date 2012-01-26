@@ -115,12 +115,14 @@ MainWindow::MainWindow()
     }
 }
 
-void MainWindow::doAutoUpdates() {
-        checkForUpdates(false);
+void MainWindow::doAutoUpdates()
+{
+  checkForUpdates(false);
 }
 
-void MainWindow::doUpdates() {
-        checkForUpdates(true);
+void MainWindow::doUpdates()
+{
+  checkForUpdates(true);
 }
 
 void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
@@ -129,16 +131,13 @@ void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
     check1done = true;
     check2done = true;
     QSettings settings("companion9x", "companion9x");
-    fwToUpdate =  GetCurrentFirmware();
-    if (fw!=NULL) {
-      memcpy(&fwToUpdate,fw, sizeof(fwToUpdate));
-    }
+    fwToUpdate = (fw ? fw : GetCurrentFirmware());
     
-    if (fwToUpdate.stamp) {
+    if (fwToUpdate->stamp) {
         if (checkFW || ignoreSettings) {
             manager1 = new QNetworkAccessManager(this);
             connect(manager1, SIGNAL(finished(QNetworkReply*)), this, SLOT(reply1Finished(QNetworkReply*)));
-            QNetworkRequest request(QUrl(fwToUpdate.stamp));
+            QNetworkRequest request(QUrl(fwToUpdate->stamp));
             request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
             manager1->get(request);
             check1done=false;
@@ -222,19 +221,18 @@ void MainWindow::updateDownloaded()
     }
 }
 
-void MainWindow::downloadLatestFW(FirmwareInfo * force_firmware)
+void MainWindow::downloadLatestFW(FirmwareInfo * firmware)
 {
     QString tmp, ext;
     QSettings settings("companion9x", "companion9x");
-    FirmwareInfo firmware =  *force_firmware;
-    tmp=firmware.url;
-    ext=tmp.mid(tmp.lastIndexOf("."));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware.id + ext);
+    tmp = firmware->url;
+    ext = tmp.mid(tmp.lastIndexOf("."));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware->id + ext);
     if (!fileName.isEmpty()) {
-      downloadedFW = firmware.id;
+      downloadedFW = firmware->id;
       downloadedFWFilename = fileName;
       settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-      downloadDialog * dd = new downloadDialog(this, firmware.url, fileName);
+      downloadDialog * dd = new downloadDialog(this, firmware->url, fileName);
       connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
       dd->exec();
     }
@@ -265,8 +263,8 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 {
     int OldFwRev;
     check1done = true;
-    bool download=false;
-    bool ignore=false;
+    bool download = false;
+    bool ignore = false;
         
     if(check1done && check2done && downloadDialog_forWait)
         downloadDialog_forWait->close();
@@ -279,7 +277,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     if(i>0)
     {
         bool cres;
-        int k=qba.indexOf("-r",i);
+        int k = qba.indexOf("-r",i);
         int rev = QString::fromAscii(qba.mid(k+2,3)).toInt(&cres);
 
         if(!cres)
@@ -292,11 +290,11 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         {
             NewFwRev=rev;
             settings.beginGroup("FwRevisions");
-            OldFwRev = settings.value(fwToUpdate.id, 0).toInt();
+            OldFwRev = settings.value(fwToUpdate->id, 0).toInt();
             settings.endGroup();
             if (OldFwRev == 0) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
-                int ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate.id).arg(NewFwRev),
+                int ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate->id).arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
@@ -305,7 +303,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 }
             } else if (NewFwRev > OldFwRev) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
-                int ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate.id).arg(OldFwRev).arg(NewFwRev),
+                int ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate->id).arg(OldFwRev).arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
                 if (ret == QMessageBox::Yes) {
                     download = true;
@@ -321,17 +319,17 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                                                 QMessageBox::Yes | QMessageBox::No);
                 if (res==QMessageBox::Yes)   {
                     settings.beginGroup("FwRevisions");
-                    settings.setValue(fwToUpdate.id, NewFwRev);
+                    settings.setValue(fwToUpdate->id, NewFwRev);
                     settings.endGroup();
                 }
             } else if (download == true) {
-                downloadedFW = fwToUpdate.id;
-                QString tmp=fwToUpdate.url;
+                downloadedFW = fwToUpdate->id;
+                QString tmp=fwToUpdate->url;
                 QString ext=tmp.mid(tmp.lastIndexOf("."));
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + fwToUpdate.id + ext, tr(HEX_FILES_FILTER));
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + fwToUpdate->id + ext, tr(HEX_FILES_FILTER));
                 if (!fileName.isEmpty()) {
                     settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-                    downloadDialog * dd = new downloadDialog(this, fwToUpdate.url, fileName);
+                    downloadDialog * dd = new downloadDialog(this, fwToUpdate->url, fileName);
                     currentFWrev_temp = NewFwRev;
                     connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
                     dd->exec();

@@ -26,8 +26,8 @@ private:
     bool updateLock;
 
     void populateLocale();
-    void populateFirmwareOptions(const FirmwareInfo &);
-    FirmwareInfo getFirmware(bool state=true);
+    void populateFirmwareOptions(const FirmwareInfo *);
+    FirmwareInfo * getFirmware(bool state=true);
     void initSettings();
 
 private slots:
