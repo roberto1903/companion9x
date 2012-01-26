@@ -272,7 +272,6 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         downloadDialog_forWait->close();
     
     QSettings settings("companion9x", "companion9x");
-    FirmwareInfo firmware =  GetCurrentFirmware();
 
     QByteArray qba = reply->readAll();
     int i = qba.indexOf("SVN_VERS");
