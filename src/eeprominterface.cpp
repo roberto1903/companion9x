@@ -148,7 +148,7 @@ void RegisterFirmwares()
   firmwares.push_back(FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4)));
 
-  firmwares.push_back(FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board")));
+  firmwares.push_back(FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface()));
   FirmwareInfo & open9x = firmwares.last();
   open9x.add_option(FirmwareInfo("open9x-stock-en", new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-en.hex", OPEN9X_STAMP));
   open9x.add_option(FirmwareInfo("open9x-stock-templates-en", new Open9xInterface(), "http://open9x.googlecode.com/svn/trunk/open9x-stock-templates-en.hex", OPEN9X_STAMP));

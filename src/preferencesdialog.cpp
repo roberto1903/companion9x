@@ -426,15 +426,16 @@ void preferencesDialog::on_joystickcalButton_clicked() {
    jd->exec();
 }
 
+#endif
+
 void preferencesDialog::on_checkFWUpdates_clicked()
 {
     MainWindow * mw = (MainWindow *)this->parent();
     mw->checkForUpdates(true);
 }
 
-
-void preferencesDialog::shrink() {
+void preferencesDialog::shrink()
+{
     resize(0,0);
 }
 
-#endif

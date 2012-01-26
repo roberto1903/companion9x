@@ -671,7 +671,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface=NULL, const char * url = NULL, const char * stamp = NULL):
+    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL, const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(name),
@@ -681,7 +681,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface=NULL, const char * url = NULL, const char * stamp = NULL):
+    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface, const char * url = NULL, const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(QString::null),
