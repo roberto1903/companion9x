@@ -430,8 +430,10 @@ void preferencesDialog::on_joystickcalButton_clicked() {
 
 void preferencesDialog::on_checkFWUpdates_clicked()
 {
+    FirmwareInfo fw = getFirmware();
     MainWindow * mw = (MainWindow *)this->parent();
-    mw->checkForUpdates(true);
+    mw->checkForUpdates(true,&fw);
+    firmwareChanged(true);
 }
 
 void preferencesDialog::shrink()

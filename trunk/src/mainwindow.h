@@ -75,7 +75,7 @@ public slots:
     void downloadLatestFW(FirmwareInfo * force_firmware = NULL);
     
 private slots:
-    void checkForUpdates(bool ignoreSettings=true);
+    void checkForUpdates(bool ignoreSettings=true, FirmwareInfo * fw = NULL);
     void checkForUpdateFinished(QNetworkReply * reply);
     void doAutoUpdates();
     void doUpdates();
