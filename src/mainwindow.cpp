@@ -61,6 +61,11 @@
 #define C9X_INSTALLER "/companion9xInstall_v%1.exe"
 #define C9X_URL   "http://companion9x.googlecode.com/files/companion9xInstall_v%1.exe"
 
+#if defined WIN32 || !defined __GNUC__
+#include <windows.h>
+#define sleep(x) Sleep(x*1000)
+#endif
+
 MainWindow::MainWindow()
 {
     mdiArea = new QMdiArea;
@@ -582,6 +587,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
       int res = ad->exec();
       if(QFileInfo(tempFile).exists() && res) {
+        sleep(1);
         QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
@@ -590,6 +596,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
         ad->setWindowIcon(QIcon(":/images/write_flash.png"));
         int res = ad->exec();
         if (res) {
+          sleep(1);
           QString str = "eeprom:w:" + tempFile +":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
           avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Restore EEPROM To Tx",AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
           ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
