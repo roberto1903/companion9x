@@ -215,6 +215,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return 1;
+    case DSM2Indexes:
+      return 1;
     default:
       return 0;
   }

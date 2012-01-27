@@ -547,6 +547,7 @@ enum Capability {
  MixFmTrim,
  gsSwitchMask,
  BLonStickMove,
+ DSM2Indexes,
 };
 
 class SimulatorInterface;
