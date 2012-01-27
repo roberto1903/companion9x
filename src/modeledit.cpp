@@ -247,6 +247,7 @@ void ModelEdit::tabModelEditSetup()
     }
     switch (g_model.protocol) {
       case PXX:
+        ui->pxxRxNum->setMinimum(1);
         ui->numChannelsSB->setValue(8);
         ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
         ui->DSM_Type->setCurrentIndex(0);
@@ -256,7 +257,8 @@ void ModelEdit::tabModelEditSetup()
           ui->pxxRxNum->setValue(1);
         }
          else {
-           ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+           ui->pxxRxNum->setMinimum(0);
+           ui->pxxRxNum->setValue((g_model.modelId));
         }
         ui->numChannelsSB->setValue(8);
         ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
@@ -1129,8 +1131,10 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->DSM_Type->hide();
         ui->DSM_Type->setEnabled(false);
         ui->label_PXX->show();
+        ui->pxxRxNum->setMinimum(1);
         ui->pxxRxNum->show();
         ui->pxxRxNum->setEnabled(true);
+        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
         break;
       case DSM2:
         ui->label_PPM->hide();
@@ -1148,6 +1152,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
           ui->pxxRxNum->setEnabled(false);
         }
         else {
+          ui->pxxRxNum->setMinimum(0);
+          ui->pxxRxNum->setValue(g_model.modelId);
           ui->label_PXX->show();
           ui->pxxRxNum->show();
           ui->pxxRxNum->setEnabled(true);         
@@ -1205,8 +1211,15 @@ void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
 
 void ModelEdit::on_pxxRxNum_editingFinished()
 {
-  if(protocolEditLock) return;
-  g_model.ppmNCH = (ui->pxxRxNum->value()-1)*2+8;
+  if(protocolEditLock)
+    return;
+
+  if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+    g_model.ppmNCH = (ui->pxxRxNum->value()-1)*2+8;
+  }
+   else {
+    g_model.modelId= ui->pxxRxNum->value();
+  }
   updateSettings();
 }
 

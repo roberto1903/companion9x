@@ -590,7 +590,7 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.frsky = frsky;
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
-
+  c9x.modelId=modelId;
   return c9x;
 }
 
@@ -663,6 +663,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     frsky = c9x.frsky;
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
+    modelId=c9x.modelId;
   }
   else {
     memset(this, 0, sizeof(t_Open9xModelData_v202));
