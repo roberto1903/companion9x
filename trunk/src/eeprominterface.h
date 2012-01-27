@@ -511,6 +511,7 @@ class ModelData {
     uint8_t  thrTraceSrc;
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
+    uint8_t   modelId;
     
     /* FrSky */    
     FrSkyData frsky;
