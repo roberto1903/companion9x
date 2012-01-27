@@ -252,8 +252,13 @@ void ModelEdit::tabModelEditSetup()
         ui->DSM_Type->setCurrentIndex(0);
         break;
       case DSM2:
+         if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+          ui->pxxRxNum->setValue(1);
+        }
+         else {
+           ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+        }
         ui->numChannelsSB->setValue(8);
-        ui->pxxRxNum->setValue(1);
         ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
         break;
       default:
@@ -1137,9 +1142,16 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->label_ppmFrameLength->hide();
         ui->ppmFrameLengthDSB->hide();
         ui->ppmFrameLengthDSB->setEnabled(false);
-        ui->label_PXX->hide();
-        ui->pxxRxNum->hide();
-        ui->pxxRxNum->setEnabled(false);
+        if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+          ui->label_PXX->hide();
+          ui->pxxRxNum->hide();
+          ui->pxxRxNum->setEnabled(false);
+        }
+        else {
+          ui->label_PXX->show();
+          ui->pxxRxNum->show();
+          ui->pxxRxNum->setEnabled(true);         
+        }
         ui->DSM_Type->setEnabled(true);
         ui->label_DSM->show();
         ui->DSM_Type->show();
