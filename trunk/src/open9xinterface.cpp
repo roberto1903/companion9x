@@ -18,6 +18,7 @@
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 #include "open9xsimulator.h"
+#include "open9xv4simulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -29,8 +30,9 @@
 #define FILE_MODEL(n) (1+n)
 #define FILE_TMP      (1+16)
 
-Open9xInterface::Open9xInterface():
-efile(new EFile())
+Open9xInterface::Open9xInterface(int size):
+efile(new EFile()),
+size(size)
 {
 }
 
@@ -41,11 +43,14 @@ Open9xInterface::~Open9xInterface()
 
 const char * Open9xInterface::getName()
 {
-  return "Open9x";
+  if (size == 2048)
+    return "Open9x";
+  else
+    return "Open9x v4";
 }
 
 const int Open9xInterface::getEEpromSize() {
-    return EESIZE_STOCK;
+    return size;
 }
 
 template <class T>
@@ -78,18 +83,17 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 
 bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  std::cout << "trying open9x import... ";
+  std::cout << "trying open9x " << this->size << " import... ";
 
-  if (size != EESIZE_STOCK) {
+  if (size != this->size) {
     std::cout << "wrong size\n";
     return false;
   }
 
   efile->EeFsInit(eeprom, size);
-    
   efile->openRd(FILE_GENERAL);
+  
   uint8_t version;
-
   if (efile->readRlc2(&version, 1) != 1) {
     std::cout << "no\n";
     return false;
@@ -142,7 +146,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsInit(eeprom, EESIZE_STOCK, true);
+  efile->EeFsInit(eeprom, size, true);
 
   Open9xGeneral open9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneral));
@@ -162,7 +166,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
     }
   }
 
-  return EESIZE_STOCK;
+  return size;
 }
 
 int Open9xInterface::getSize(ModelData &model)
@@ -238,5 +242,8 @@ int Open9xInterface::hasProtocol(Protocol proto)
 
 SimulatorInterface * Open9xInterface::getSimulator()
 {
-  return new Open9xSimulator(this);
+  if (size == 2048)
+    return new Open9xSimulator(this);
+  else
+    return new Open9xV4Simulator(this);
 }
