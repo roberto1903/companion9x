@@ -24,7 +24,7 @@ class Open9xInterface : public EEPROMInterface
 {
   public:
 
-    Open9xInterface();
+    Open9xInterface(int size);
 
     virtual ~Open9xInterface();
 
@@ -55,6 +55,8 @@ class Open9xInterface : public EEPROMInterface
     bool loadGeneral(GeneralSettings &settings);
 
     EFile *efile;
+
+    int size;
 
 };
 

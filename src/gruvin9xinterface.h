@@ -23,8 +23,6 @@ class EFile;
 class Gruvin9xInterface : public EEPROMInterface
 {
 
-  friend class Gruvin9xSimulator;
-
   public:
 
     Gruvin9xInterface(int size);
