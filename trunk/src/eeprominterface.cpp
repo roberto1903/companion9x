@@ -157,8 +157,8 @@ void RegisterFirmwares()
   open9x->add_option(new FirmwareInfo("open9x-stock-heli-templates-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-heli-templates-en.hex", OPEN9X_STAMP));
   default_firmware = new FirmwareInfo("open9x-stock-heli-templates-speaker-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-heli-templates-speaker-en.hex", OPEN9X_STAMP);
   open9x->add_option(default_firmware);
-  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-frsky-stock-en.hex", OPEN9X_STAMP));
-  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-speaker-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-frsky-stock-speaker-en.hex", OPEN9X_STAMP));
+  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-en.hex", OPEN9X_STAMP));
+  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-speaker-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-speaker-en.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-templates-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-templates-en.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-templates-speaker-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-templates-speaker-en.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-heli-en", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-heli-en.hex", OPEN9X_STAMP));
@@ -174,8 +174,8 @@ void RegisterFirmwares()
   open9x->add_option(new FirmwareInfo("open9x-stock-heli-speaker-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-heli-speaker-fr.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-heli-templates-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-heli-templates-fr.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-heli-templates-speaker-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-heli-templates-speaker-fr.hex", OPEN9X_STAMP));
-  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-frsky-stock-fr.hex", OPEN9X_STAMP));
-  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-speaker-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-frsky-stock-speaker-fr.hex", OPEN9X_STAMP));
+  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-fr.hex", OPEN9X_STAMP));
+  open9x->add_option(new FirmwareInfo("open9x-stock-frsky-speaker-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-speaker-fr.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-templates-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-templates-fr.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-templates-speaker-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-templates-speaker-fr.hex", OPEN9X_STAMP));
   open9x->add_option(new FirmwareInfo("open9x-stock-frsky-heli-fr", new Open9xInterface(EESIZE_STOCK), OPEN9X_BIN_URL "open9x-stock-frsky-heli-fr.hex", OPEN9X_STAMP));
