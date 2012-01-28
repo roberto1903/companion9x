@@ -165,7 +165,7 @@ void avrOutputDialog::doFinished(int code=0)
         if(code)
         {
             QMessageBox::critical(this, "companion9x", tr("AVRDUDE did not finish correctly"));
-            reject();
+            // reject();
         }
         else
         {

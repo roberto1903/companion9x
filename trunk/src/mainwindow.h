@@ -62,6 +62,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     friend class preferencesDialog;
+    friend class MdiChild; // TODO GetAvrdudeArgs could be external to this class
 
     Q_OBJECT
 
