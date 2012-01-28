@@ -24,7 +24,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -648,8 +648,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>244</width>
-              <height>177</height>
+              <width>248</width>
+              <height>180</height>
              </rect>
             </property>
             <attribute name="label">
@@ -902,7 +902,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>287</height>
+              <height>292</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1305,7 +1305,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>275</height>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1676,7 +1676,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>275</height>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2047,7 +2047,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>275</height>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2453,8 +2453,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>284</width>
-            <height>444</height>
+            <width>293</width>
+            <height>455</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3702,8 +3702,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>495</height>
+            <width>780</width>
+            <height>556</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8616,8 +8616,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>140</width>
-            <height>284</height>
+            <width>149</width>
+            <height>343</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

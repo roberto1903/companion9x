@@ -45,6 +45,7 @@
 #include "hexinterface.h"
 #include "er9xinterface.h"
 #include "gruvin9xinterface.h"
+#include "mainwindow.h"
 #include "modeledit.h"
 #include "generaledit.h"
 #include "avroutputdialog.h"
@@ -446,12 +447,7 @@ void MdiChild::burnTo()  // write to Tx
     if (ret == QMessageBox::Yes)
     {
         burnConfigDialog bcd;
-        QString avrdudeLoc = bcd.getAVRDUDE();
         QString tempDir    = QDir::tempPath();
-        QString programmer = bcd.getProgrammer();
-        QStringList args   = bcd.getAVRArgs();
-        if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
-
         QString tempFile = tempDir + "/temp.hex";
         saveFile(tempFile, false);
         if(!QFileInfo(tempFile).exists())
@@ -461,10 +457,7 @@ void MdiChild::burnTo()  // write to Tx
         }
         QString str = "eeprom:w:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
 
-        QStringList arguments;
-        arguments << "-c" << programmer << "-p" << "m64" << args << "-U" << str;
-
-        avrOutputDialog *ad = new avrOutputDialog(this, avrdudeLoc, arguments, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), ((MainWindow *)this->parent())->GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
         ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
         ad->show();
     }
