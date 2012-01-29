@@ -1017,6 +1017,7 @@ void MainWindow::createToolBars()
     fileToolBar->addAction(saveAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(simulateAct);
+    fileToolBar->addAction(preferencesAct);
     fileToolBar->addAction(printAct);
 
     editToolBar = addToolBar(tr("Edit"));
@@ -1037,7 +1038,6 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
-    helpToolBar->addAction(preferencesAct);
     helpToolBar->addAction(aboutAct);
     helpToolBar->addAction(checkForUpdatesAct);
 }
