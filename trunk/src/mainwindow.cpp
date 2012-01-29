@@ -1037,6 +1037,7 @@ void MainWindow::createToolBars()
     burnToolBar->addAction(burnConfigAct);
 
     helpToolBar = addToolBar(tr("Help"));
+    helpToolBar->addAction(preferencesAct);
     helpToolBar->addAction(aboutAct);
     helpToolBar->addAction(checkForUpdatesAct);
 }
