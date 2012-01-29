@@ -14,7 +14,17 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
         setWindowTitle(tr("AVRDUDE - ") + wTitle);
     QFile exec;
     winTitle=wTitle;
-
+    
+#ifdef __APPLE__
+    QFont newFont("Courier", 13);
+    ui->plainTextEdit->setFont(newFont);
+    ui->plainTextEdit->setAttribute(Qt::WA_MacNormalSize);
+#endif
+#if defined WIN32 || !defined __GNUC__
+    QFont newFont("Courier", 9);
+    ui->plainTextEdit->setFont(newFont);
+#endif
+    
     cmdLine = prog;
     if (!(exec.exists(prog))) {
       QMessageBox::critical(this, "companion9x", tr("AVRDUDE executable not found"));
