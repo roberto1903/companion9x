@@ -23,7 +23,13 @@ burnConfigDialog::~burnConfigDialog()
 void burnConfigDialog::getSettings()
 {
     QSettings settings("companion9x", "companion9x");
+#if defined WIN32 || !defined __GNUC__
     avrLoc = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
+#elif defined __APPLE__
+    avrLoc = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
+#else
+    avrLoc = settings.value("avrdude_location", "/usr/bin/avrdude").toString();
+#endif
     QString str = settings.value("avr_arguments").toString();
     avrArgs = str.split(" ", QString::SkipEmptyParts);
     avrProgrammer =  settings.value("programmer", QString("usbasp")).toString();
