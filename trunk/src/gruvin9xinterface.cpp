@@ -254,7 +254,7 @@ int Gruvin9xInterface::getCapability(const Capability capability)
     case Simulation:
       return true;
     case Telemetry:
-      return 1;      
+      return TM_HASTELEMETRY|TM_HASWSHH;      
     default:
       return false;
   }

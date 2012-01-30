@@ -232,7 +232,7 @@ int Er9xInterface::getCapability(const Capability capability)
     case BLonStickMove:
       return 1;
     case Telemetry:
-      return 4;
+      return TM_HASTELEMETRY|TM_HASWSHH;
     default:
       return 0;
   }
