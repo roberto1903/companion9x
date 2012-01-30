@@ -21,6 +21,17 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="6" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Simulate</string>
+     </property>
+     <property name="icon">
+      <iconset resource="companion9x.qrc">
+       <normaloff>:/images/simulate.png</normaloff>:/images/simulate.png</iconset>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -648,8 +659,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>248</width>
-              <height>180</height>
+              <width>260</width>
+              <height>177</height>
              </rect>
             </property>
             <attribute name="label">
@@ -901,8 +912,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>292</height>
+              <width>302</width>
+              <height>290</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1304,8 +1315,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1675,8 +1686,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2046,8 +2057,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>286</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2453,8 +2464,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>293</width>
-            <height>455</height>
+            <width>307</width>
+            <height>462</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3702,8 +3713,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>780</width>
-            <height>556</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8616,8 +8627,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>149</width>
-            <height>343</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -9011,15 +9022,15 @@
       <attribute name="title">
        <string>Telemetry</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string>A1</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QGridLayout" name="gridLayout_9">
+           <layout class="QGridLayout" name="gridLayout_9" columnstretch="0,1,0,1" columnminimumwidth="80,0,80,0">
             <item row="0" column="0">
              <widget class="QLabel" name="label_916">
               <property name="sizePolicy">
@@ -9056,7 +9067,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Ratio</string>
+               <string>Max Value</string>
               </property>
              </widget>
             </item>
@@ -9264,19 +9275,33 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="a1CalibLabel">
+              <property name="text">
+               <string>Calibration</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QSpinBox" name="a1CalibSB">
+              <property name="maximum">
+               <number>15</number>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
           <string>A2</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <layout class="QGridLayout" name="gridLayout_10">
+           <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,1,0,1" rowminimumheight="0,0,0,0" columnminimumwidth="80,0,80,0">
             <item row="0" column="0">
              <widget class="QLabel" name="label_920">
               <property name="sizePolicy">
@@ -9313,7 +9338,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Ratio</string>
+               <string>Max Value</string>
               </property>
              </widget>
             </item>
@@ -9521,12 +9546,60 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="a2CalibLabel">
+              <property name="text">
+               <string>Calibration</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QSpinBox" name="a2CalibSB">
+              <property name="maximum">
+               <number>15</number>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Serial Protocol</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1" columnminimumwidth="80,0">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Protocol</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="frskyProtoCB">
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>FrSky Sensor Hub</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -9551,17 +9624,6 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Simulate</string>
-     </property>
-     <property name="icon">
-      <iconset resource="companion9x.qrc">
-       <normaloff>:/images/simulate.png</normaloff>:/images/simulate.png</iconset>
-     </property>
     </widget>
    </item>
   </layout>

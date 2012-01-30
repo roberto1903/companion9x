@@ -231,6 +231,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case BLonStickMove:
       return 1;
+    case Telemetry:
+      return 4;
     default:
       return 0;
   }

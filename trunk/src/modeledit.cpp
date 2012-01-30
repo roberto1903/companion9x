@@ -33,39 +33,45 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
     g_model(radioData.models[id]),
     g_eeGeneral(radioData.generalSettings)
 {
-    ui->setupUi(this);
+  ui->setupUi(this);
 
-    setupMixerListWidget();
-    setupExposListWidget();
+  setupMixerListWidget();
+  setupExposListWidget();
 
-    QSettings settings("companion9x", "companion9x");
-    ui->tabWidget->setCurrentIndex(settings.value("modelEditTab", 0).toInt());
+  QSettings settings("companion9x", "companion9x");
+  ui->tabWidget->setCurrentIndex(settings.value("modelEditTab", 0).toInt());
 
-    QRegExp rx(CHAR_FOR_NAMES_REGEX);
-    ui->modelNameLE->setValidator(new QRegExpValidator(rx, this));
-    ui->phase0Name->setValidator(new QRegExpValidator(rx, this));
-    ui->phase1Name->setValidator(new QRegExpValidator(rx, this));
-    ui->phase2Name->setValidator(new QRegExpValidator(rx, this));
-    ui->phase3Name->setValidator(new QRegExpValidator(rx, this));
-    ui->phase4Name->setValidator(new QRegExpValidator(rx, this));
+  QRegExp rx(CHAR_FOR_NAMES_REGEX);
+  ui->modelNameLE->setValidator(new QRegExpValidator(rx, this));
+  ui->phase0Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase1Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase2Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase3Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase4Name->setValidator(new QRegExpValidator(rx, this));
 
-    tabModelEditSetup();
-    tabPhases();
-    tabExpos();
-    tabMixes();
-    tabLimits();
-    tabCurves();
-    tabCustomSwitches();
-    tabSafetySwitches();
-    tabFunctionSwitches();
-    tabTemplates();
-    tabHeli();
+  tabModelEditSetup();
+  tabPhases();
+  tabExpos();
+  tabMixes();
+  tabLimits();
+  tabCurves();
+  tabCustomSwitches();
+  tabSafetySwitches();
+  tabFunctionSwitches();
+  tabTemplates();
+  tabHeli();
+  if (GetEepromInterface()->getCapability(Telemetry) > 0) {
     tabTelemetry();
+  }
+  else {
+    ui->tabTelemetry->setDisabled(true);
+    ui->tabWidget->removeTab(10);
+  }
+  ui->tabWidget->setCurrentIndex(0);
+  ui->curvePreview->setMinimumWidth(260);
+  ui->curvePreview->setMinimumHeight(260);
 
-    ui->curvePreview->setMinimumWidth(260);
-    ui->curvePreview->setMinimumHeight(260);
-
-    resizeEvent();  // draws the curves and Expo
+  resizeEvent(); // draws the curves and Expo
 }
 
 ModelEdit::~ModelEdit()
@@ -979,6 +985,9 @@ void ModelEdit::functionSwitchesEdited()
 void ModelEdit::tabTelemetry()
 {
   //FrSky settings
+  if (!(GetEepromInterface()->getCapability(Telemetry)&0x04)) {
+        ui->frskyProtoCB->addItem(tr("Winged Shadow How High"));
+  }
   ui->a1RatioSB->setValue(g_model.frsky.channels[0].ratio);
   ui->a11LevelCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].level);
   ui->a11GreaterCB->setCurrentIndex(g_model.frsky.channels[0].alarms[0].greater);
@@ -993,19 +1002,27 @@ void ModelEdit::tabTelemetry()
   ui->a22LevelCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].level);
   ui->a22GreaterCB->setCurrentIndex(g_model.frsky.channels[1].alarms[1].greater);
   ui->a22ValueSB->setValue(g_model.frsky.channels[1].alarms[1].value);
+  if (!(GetEepromInterface()->getCapability(Telemetry)&0x02)) {
+    ui->a1CalibSB->hide();
+    ui->a2CalibSB->hide();
+    ui->a1CalibLabel->hide();
+    ui->a2CalibLabel->hide();
+  }
+  ui->a1CalibSB->setValue(g_model.frsky.channels[0].offset);
+  ui->a2CalibSB->setValue(g_model.frsky.channels[1].offset);
+  ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
 }
 
-void ModelEdit::tabTemplates()
-{
-    ui->templateList->clear();
-    ui->templateList->addItem("Simple 4-CH");
-    ui->templateList->addItem("T-Cut");
-    ui->templateList->addItem("Sticky T-Cut");
-    ui->templateList->addItem("V-Tail");
-    ui->templateList->addItem("Elevon\\Delta");
-    ui->templateList->addItem("Heli Setup");
-    ui->templateList->addItem("Heli Gyro Setup");
-    ui->templateList->addItem("Servo Test");
+void ModelEdit::tabTemplates() {
+  ui->templateList->clear();
+  ui->templateList->addItem("Simple 4-CH");
+  ui->templateList->addItem("T-Cut");
+  ui->templateList->addItem("Sticky T-Cut");
+  ui->templateList->addItem("V-Tail");
+  ui->templateList->addItem("Elevon\\Delta");
+  ui->templateList->addItem("Heli Setup");
+  ui->templateList->addItem("Heli Gyro Setup");
+  ui->templateList->addItem("Servo Test");
 }
 
 void ModelEdit::on_modelNameLE_editingFinished()
@@ -1229,9 +1246,21 @@ void ModelEdit::on_a1RatioSB_editingFinished()
     updateSettings();
 }
 
+void ModelEdit::on_a1CalibSB_editingFinished()
+{
+    g_model.frsky.channels[0].offset = ui->a1CalibSB->value();
+    updateSettings();
+}
+
 void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
 {
     g_model.frsky.channels[0].alarms[0].level = index;
+    updateSettings();
+}
+
+void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
+{
+    g_model.frsky.usrProto=index;
     updateSettings();
 }
 
@@ -1268,6 +1297,12 @@ void ModelEdit::on_a12ValueSB_editingFinished()
 void ModelEdit::on_a2RatioSB_editingFinished()
 {
     g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
+    updateSettings();
+}
+
+void ModelEdit::on_a2CalibSB_editingFinished()
+{
+    g_model.frsky.channels[1].offset = ui->a2CalibSB->value();
     updateSettings();
 }
 

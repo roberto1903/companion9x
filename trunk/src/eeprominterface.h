@@ -406,6 +406,7 @@ class FrSkyChannelData {
     FrSkyChannelData() { clear(); }
     uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
     uint8_t   type;                 // future use: 0=volts, 1=ml...
+    uint8_t   offset;
     FrSkyAlarmData alarms[2];
 
     void clear() { memset(this, 0, sizeof(FrSkyChannelData)); }
@@ -415,6 +416,7 @@ class FrSkyData {
   public:
     FrSkyData() { clear(); }
     FrSkyChannelData channels[2];
+    uint8_t usrProto;
 
     void clear() { memset(this, 0, sizeof(FrSkyData)); }
 };
@@ -549,6 +551,7 @@ enum Capability {
  gsSwitchMask,
  BLonStickMove,
  DSM2Indexes,
+ Telemetry,
 };
 
 class SimulatorInterface;
