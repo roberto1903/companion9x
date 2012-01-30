@@ -195,6 +195,7 @@ private slots:
     void on_thrTrimChkB_toggled(bool checked);
     void on_ppmDelaySB_editingFinished();
     void on_a1RatioSB_editingFinished();
+    void on_a1CalibSB_editingFinished();
     void on_a11LevelCB_currentIndexChanged(int index);
     void on_a11GreaterCB_currentIndexChanged(int index);
     void on_a11ValueSB_editingFinished();
@@ -202,12 +203,14 @@ private slots:
     void on_a12GreaterCB_currentIndexChanged(int index);
     void on_a12ValueSB_editingFinished();
     void on_a2RatioSB_editingFinished();
+    void on_a2CalibSB_editingFinished();
     void on_a21LevelCB_currentIndexChanged(int index);
     void on_a21GreaterCB_currentIndexChanged(int index);
     void on_a21ValueSB_editingFinished();
     void on_a22LevelCB_currentIndexChanged(int index);
     void on_a22GreaterCB_currentIndexChanged(int index);
     void on_a22ValueSB_editingFinished();
+    void on_frskyProtoCB_currentIndexChanged(int index);
     void on_numChannelsSB_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);

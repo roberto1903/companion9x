@@ -253,6 +253,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return true;
+    case Telemetry:
+      return 1;      
     default:
       return false;
   }

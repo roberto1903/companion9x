@@ -421,6 +421,7 @@ t_Open9xFrSkyChannelData::t_Open9xFrSkyChannelData(FrSkyChannelData &c9x)
   alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
   alarms_greater = (c9x.alarms[1].greater << 1) + c9x.alarms[0].greater;
   type = c9x.type;
+  offset = c9x.offset;
 }
 
 t_Open9xFrSkyChannelData::operator FrSkyChannelData ()
@@ -434,6 +435,7 @@ t_Open9xFrSkyChannelData::operator FrSkyChannelData ()
   c9x.alarms[1].level =  (alarms_level >> 2) & 3;
   c9x.alarms[1].greater = (alarms_greater >> 1) & 1;
   c9x.type = type;
+  c9x.offset=offset;
   return c9x;
 }
 
@@ -451,6 +453,7 @@ t_Open9xFrSkyData_v202::operator FrSkyData ()
   FrSkyData c9x;
   c9x.channels[0] = channels[0];
   c9x.channels[1] = channels[1];
+  c9x.usrProto=usrProto;
   // TODO usrProto
   return c9x;
 }
@@ -460,6 +463,7 @@ t_Open9xFrSkyData_v202::t_Open9xFrSkyData_v202(FrSkyData &c9x)
   memset(this, 0, sizeof(t_Open9xFrSkyData_v202));
   channels[0] = c9x.channels[0];
   channels[1] = c9x.channels[1];
+  usrProto=c9x.usrProto;
   // TODO usrProto
 }
 

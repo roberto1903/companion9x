@@ -304,7 +304,7 @@ t_Er9xFrSkyData::t_Er9xFrSkyData(FrSkyData &c9x)
 {
   memset(this, 0, sizeof(t_Er9xFrSkyData));
   channels[0] = c9x.channels[0];
-  channels[1] = c9x.channels[1];
+  channels[1] = c9x.channels[1]; 
 }
 
 t_Er9xFrSkyData::operator FrSkyData ()
@@ -450,9 +450,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
-
+    
     frsky = c9x.frsky;
-
+    FrSkyUsrProto = c9x.frsky.usrProto;
   }
 }
 
@@ -565,7 +565,7 @@ t_Er9xModelData::operator ModelData ()
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;
-
+  c9x.frsky.usrProto=FrSkyUsrProto;
   return c9x;
 }
 
