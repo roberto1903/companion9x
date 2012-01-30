@@ -222,7 +222,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case DSM2Indexes:
       return 1;
     case Telemetry:
-      return 7;
+      return TM_HASTELEMETRY|TM_HASOFFSET|TM_HASWSHH;
     default:
       return 0;
   }
