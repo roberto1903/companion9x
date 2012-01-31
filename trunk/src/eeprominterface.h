@@ -33,6 +33,8 @@
 #define EESIZE_STOCK   2048
 #define EESIZE_V4      4096
 
+template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
+
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
   {1, 3, 2, 4},
@@ -366,6 +368,7 @@ class FuncSwData { // Function Switches data
     FuncSwData() { clear(); }
     int     swtch;
     AssignFunc func;
+    unsigned int param;
 
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
 };
@@ -572,7 +575,7 @@ class EEPROMInterface
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData) = 0;
+    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0) = 0;
 
     virtual int getSize(ModelData &) = 0;
     
@@ -707,6 +710,14 @@ class FirmwareInfo {
         return QString(id).mid(strlen(parent->id)+1).split("-", QString::SkipEmptyParts);
       else
         return QStringList();
+    }
+
+    virtual unsigned int getEepromVersion(unsigned int revision) {
+      return 0;
+    }
+
+    int saveEEPROM(uint8_t *eeprom, RadioData &radioData, unsigned int revision=0) {
+      return eepromInterface->save(eeprom, radioData, getEepromVersion(revision));
     }
 
     FirmwareInfo *parent;

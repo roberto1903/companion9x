@@ -45,7 +45,7 @@ PACK(typedef struct t_Open9xFrSkyRSSIAlarm {
   int8_t        value:6;
 }) Open9xFrSkyRSSIAlarm;
 
-PACK(typedef struct t_Open9xGeneral_v201 {
+PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -79,12 +79,10 @@ PACK(typedef struct t_Open9xGeneral_v201 {
   Open9xFrSkyRSSIAlarm frskyRssiAlarms[2];
 
   operator GeneralSettings();
-  t_Open9xGeneral_v201() { memset(this, 0, sizeof(t_Open9xGeneral_v201)); }
-  t_Open9xGeneral_v201(GeneralSettings&);
+  t_Open9xGeneralData_v201() { memset(this, 0, sizeof(t_Open9xGeneralData_v201)); }
+  t_Open9xGeneralData_v201(GeneralSettings&, int version);
 
-}) Open9xGeneral_v201;
-
-typedef Open9xGeneral_v201 Open9xGeneral;
+}) Open9xGeneralData_v201;
 
 // eeprom modelspec
 
@@ -159,17 +157,28 @@ PACK(typedef struct t_Open9xSafetySwData { // Safety Switches data
 
 }) Open9xSafetySwData;
 
-PACK(typedef struct t_Open9xFuncSwData { // Function Switches data
+PACK(typedef struct t_Open9xFuncSwData_v201 { // Function Switches data
   int8_t  swtch; // input
   uint8_t func;
 
   operator FuncSwData();
-  t_Open9xFuncSwData() { memset(this, 0, sizeof(t_Open9xFuncSwData)); }
-  t_Open9xFuncSwData(FuncSwData&);
+  t_Open9xFuncSwData_v201() { memset(this, 0, sizeof(t_Open9xFuncSwData_v201)); }
+  t_Open9xFuncSwData_v201(FuncSwData&);
 
-}) Open9xFuncSwData;
+}) Open9xFuncSwData_v201;
 
-PACK(typedef struct t_Open9xFrSkyChannelData {
+PACK(typedef struct t_Open9xFuncSwData_v203 { // Function Switches data
+  int8_t  swtch; // input
+  uint8_t func;
+  uint8_t param;
+
+  operator FuncSwData();
+  t_Open9xFuncSwData_v203() { memset(this, 0, sizeof(t_Open9xFuncSwData_v203)); }
+  t_Open9xFuncSwData_v203(FuncSwData&);
+
+}) Open9xFuncSwData_v203;
+
+PACK(typedef struct t_Open9xFrSkyChannelData_v201 {
   uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   type:4;             // channel unit (0=volts, ...)
   int8_t    offset:4;           // calibration offset. Signed 0.1V steps. EG. -4 to substract 0.4V
@@ -181,13 +190,30 @@ PACK(typedef struct t_Open9xFrSkyChannelData {
   uint8_t   barMax;             // ditto for max display (would usually = ratio)
 
   operator FrSkyChannelData();
-  t_Open9xFrSkyChannelData();
-  t_Open9xFrSkyChannelData(FrSkyChannelData&);
+  t_Open9xFrSkyChannelData_v201() { memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v201)); }
+  t_Open9xFrSkyChannelData_v201(FrSkyChannelData&);
 
-}) Open9xFrSkyChannelData;
+}) Open9xFrSkyChannelData_v201;
+
+PACK(typedef struct t_Open9xFrSkyChannelData_v203 {
+  uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   type;               // channel unit (0=volts, ...)
+  uint8_t   alarms_value[2];    // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   alarms_level:4;
+  uint8_t   alarms_greater:2;   // 0=LT(<), 1=GT(>)
+  uint8_t   spare:2;
+  uint8_t   barMin:4;           // minimum for bar display
+  uint8_t   barMax:4;           // ditto for max display (would usually = ratio)
+  int8_t    offset;             // calibration offset. Signed 0.1V steps. EG. -4 to substract 0.4V
+
+  operator FrSkyChannelData();
+  t_Open9xFrSkyChannelData_v203() { memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v203)); }
+  t_Open9xFrSkyChannelData_v203(FrSkyChannelData&);
+
+}) Open9xFrSkyChannelData_v203;
 
 PACK(typedef struct t_Open9xFrSkyData_v201 {
-	Open9xFrSkyChannelData channels[2];
+	Open9xFrSkyChannelData_v201 channels[2];
 
 	operator FrSkyData();
 	t_Open9xFrSkyData_v201() { memset(this, 0, sizeof(t_Open9xFrSkyData_v201)); }
@@ -195,7 +221,7 @@ PACK(typedef struct t_Open9xFrSkyData_v201 {
 }) Open9xFrSkyData_v201;
 
 PACK(typedef struct t_Open9xFrSkyData_v202 {
-	Open9xFrSkyChannelData channels[2];
+	Open9xFrSkyChannelData_v201 channels[2];
 	uint8_t usrProto:2;  // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
 	uint8_t spare:6;
 
@@ -204,6 +230,17 @@ PACK(typedef struct t_Open9xFrSkyData_v202 {
 	t_Open9xFrSkyData_v202(FrSkyData&);
 
 }) Open9xFrSkyData_v202;
+
+PACK(typedef struct t_Open9xFrSkyData_v203 {
+        Open9xFrSkyChannelData_v203 channels[2];
+        uint8_t usrProto:2;  // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+        uint8_t spare:6;
+
+        operator FrSkyData();
+        t_Open9xFrSkyData_v203() { memset(this, 0, sizeof(t_Open9xFrSkyData_v203)); }
+        t_Open9xFrSkyData_v203(FrSkyData&);
+
+}) Open9xFrSkyData_v203;
 
 PACK(typedef struct t_Open9xSwashRingData { // Swash Ring data
   uint8_t   invertELE:1;
@@ -286,7 +323,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[NUM_CSW];
   Open9xSafetySwData  safetySw[NUM_CHNOUT];
-  Open9xFuncSwData    funcSw[NUM_FSW];
+  Open9xFuncSwData_v201 funcSw[NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
   Open9xFrSkyData_v201 frsky;
@@ -319,7 +356,7 @@ PACK(typedef struct t_Open9xModelData_v202 {
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[NUM_CSW];
   Open9xSafetySwData  safetySw[NUM_CHNOUT];
-  Open9xFuncSwData    funcSw[NUM_FSW];
+  Open9xFuncSwData_v201 funcSw[NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
   Open9xFrSkyData_v202 frsky;
@@ -333,7 +370,46 @@ PACK(typedef struct t_Open9xModelData_v202 {
 
 }) Open9xModelData_v202;
 
-typedef Open9xModelData_v202 Open9xModelData;
+PACK(typedef struct t_Open9xModelData_v203 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timer1;
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   spare1:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xTimerData_v202 timer2;
+  Open9xMixData   mixData[MAX_MIXERS];
+  Open9xLimitData limitData[NUM_CHNOUT];
+  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  int8_t    curves5[MAX_CURVE5][5];
+  int8_t    curves9[MAX_CURVE9][9];
+  Open9xCustomSwData  customSw[NUM_CSW];
+  Open9xSafetySwData  safetySw[NUM_CHNOUT];
+  Open9xFuncSwData_v203 funcSw[NUM_FSW];
+  Open9xSwashRingData swashR;
+  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xFrSkyData_v202 frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+
+  operator ModelData();
+  t_Open9xModelData_v203() { memset(this, 0, sizeof(t_Open9xModelData_v203)); }
+  t_Open9xModelData_v203(ModelData&);
+
+}) Open9xModelData_v203;
+
+#define LAST_OPEN9X_EEPROM_VER 202
+typedef Open9xModelData_v202   Open9xModelData;
+typedef Open9xGeneralData_v201 Open9xGeneralData;
+
 
 #endif
 /*eof*/

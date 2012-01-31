@@ -34,7 +34,7 @@ class Open9xInterface : public EEPROMInterface
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData);
+    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0);
 
     virtual int getSize(ModelData &);
 
@@ -50,6 +50,9 @@ class Open9xInterface : public EEPROMInterface
 
     template <class T>
     void loadModel(ModelData &model, unsigned int stickMode=0);
+
+    template <class T>
+    bool saveModel(unsigned int index, ModelData &model);
 
     template <class T>
     bool loadGeneral(GeneralSettings &settings);
