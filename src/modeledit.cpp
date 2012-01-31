@@ -1015,9 +1015,9 @@ void ModelEdit::tabTelemetry()
     ui->a1CalibSB->setSingleStep(1);
     ui->a1CalibSB->setValue(g_model.frsky.channels[0].offset);
   }
-  ui->a1RatioSB->setValue(a1ratio);
   a11value=a1ratio*g_model.frsky.channels[0].alarms[0].value/255;
   a12value=a1ratio*g_model.frsky.channels[0].alarms[1].value/255;
+  ui->a1RatioSB->setValue(a1ratio);
   ui->a11ValueSB->setValue(a11value);
   ui->a12ValueSB->setValue(a12value);
 
@@ -1042,9 +1042,9 @@ void ModelEdit::tabTelemetry()
     ui->a2CalibSB->setSingleStep(1);
     ui->a2CalibSB->setValue(g_model.frsky.channels[1].offset);
   }
-  ui->a2RatioSB->setValue(a2ratio);
   a21value=a2ratio*g_model.frsky.channels[1].alarms[0].value/255;
   a22value=a2ratio*g_model.frsky.channels[1].alarms[1].value/255;
+  ui->a2RatioSB->setValue(a2ratio);
   ui->a21ValueSB->setValue(a21value);
   ui->a22ValueSB->setValue(a22value);
 
@@ -1331,9 +1331,9 @@ void ModelEdit::on_a1UnitCB_currentIndexChanged(int index) {
     ui->a1CalibSB->setSingleStep(1);
     ui->a1CalibSB->setValue(g_model.frsky.channels[0].offset);
   }
-  ui->a1RatioSB->setValue(a1ratio);
   a11value=a1ratio*g_model.frsky.channels[0].alarms[0].value/255;
   a12value=a1ratio*g_model.frsky.channels[0].alarms[1].value/255;
+  ui->a1RatioSB->setValue(a1ratio);
   ui->a11ValueSB->setValue(a11value);
   ui->a12ValueSB->setValue(a12value);
 }
@@ -1505,9 +1505,9 @@ void ModelEdit::on_a2UnitCB_currentIndexChanged(int index) {
     ui->a2CalibSB->setSingleStep(1);
     ui->a2CalibSB->setValue(g_model.frsky.channels[1].offset);
   }
-  ui->a2RatioSB->setValue(a2ratio);
   a21value=a2ratio*g_model.frsky.channels[1].alarms[0].value/255;
   a22value=a2ratio*g_model.frsky.channels[1].alarms[1].value/255;
+  ui->a2RatioSB->setValue(a2ratio);
   ui->a21ValueSB->setValue(a21value);
   ui->a22ValueSB->setValue(a22value);
 }
