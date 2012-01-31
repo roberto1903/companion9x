@@ -81,6 +81,17 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
   return false;
 }
 
+template <class T>
+bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
+{
+  T open9xModel(model);
+  int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
+  if(sz != sizeof(T)) {
+    return false;
+  }
+  return true;
+}
+
 bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying open9x " << this->size << " import... ";
@@ -118,7 +129,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
   efile->openRd(FILE_GENERAL);
   if (1/*version == 201 || version == 202*/) {
-    if (!loadGeneral<Open9xGeneral_v201>(radioData.generalSettings)) {
+    if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
       std::cout << "ko\n";
       return false;
     }
@@ -142,27 +153,31 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData)
+int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
 
   efile->EeFsInit(eeprom, size, true);
 
-  Open9xGeneral open9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneral));
-  if(sz != sizeof(Open9xGeneral)) {
+  Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
+  if(sz != sizeof(Open9xGeneralData)) {
     return 0;
   }
-  efile->swap(FILE_GENERAL, FILE_TMP);
 
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
-      Open9xModelData open9xModel(radioData.models[i]);
-      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
-      if(sz != sizeof(Open9xModelData)) {
-        return 0;
+      int result;
+      switch(version) {
+        case 202:
+          result = saveModel<Open9xModelData_v202>(i, radioData.models[i]);
+          break;
+        case 203:
+          result = saveModel<Open9xModelData_v203>(i, radioData.models[i]);
+          break;
       }
-      efile->swap(FILE_MODEL(i), FILE_TMP);
+      if (!result)
+        return false;
     }
   }
 
@@ -190,8 +205,8 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   uint8_t tmp[EESIZE_V4];
   efile->EeFsInit(tmp, EESIZE_V4, true);
 
-  Open9xGeneral open9xGeneral(settings);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneral));
+  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_EEPROM_VER);
+  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
   if(sz != sizeof(open9xGeneral)) {
     return -1;
   }

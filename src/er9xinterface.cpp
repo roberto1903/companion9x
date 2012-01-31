@@ -137,7 +137,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData)
+int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
 
