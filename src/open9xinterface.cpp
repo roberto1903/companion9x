@@ -157,6 +157,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 {
   EEPROMWarnings.clear();
 
+  if (!version)
+    version = LAST_OPEN9X_EEPROM_VER;
+
   efile->EeFsInit(eeprom, size, true);
 
   Open9xGeneralData open9xGeneral(radioData.generalSettings, version);

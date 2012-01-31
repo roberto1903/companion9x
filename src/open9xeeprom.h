@@ -169,8 +169,8 @@ PACK(typedef struct t_Open9xFuncSwData_v201 { // Function Switches data
 
 PACK(typedef struct t_Open9xFuncSwData_v203 { // Function Switches data
   int8_t  swtch; // input
-  uint8_t func;
-  uint8_t param;
+  uint8_t func:4;
+  uint8_t param:4;
 
   operator FuncSwData();
   t_Open9xFuncSwData_v203() { memset(this, 0, sizeof(t_Open9xFuncSwData_v203)); }
