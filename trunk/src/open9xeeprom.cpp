@@ -223,13 +223,7 @@ t_Open9xLimitData::operator LimitData ()
   return c9x;
 }
 
-
-t_Open9xMixData::t_Open9xMixData()
-{
-  memset(this, 0, sizeof(t_Open9xMixData));
-}
-
-t_Open9xMixData::t_Open9xMixData(MixData &c9x)
+t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
@@ -247,7 +241,7 @@ t_Open9xMixData::t_Open9xMixData(MixData &c9x)
   sOffset = c9x.sOffset;
 }
 
-t_Open9xMixData::operator MixData ()
+t_Open9xMixData_v201::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
@@ -267,6 +261,43 @@ t_Open9xMixData::operator MixData ()
   return c9x;
 }
 
+t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
+{
+  destCh = c9x.destCh;
+  mixWarn = c9x.mixWarn;
+  srcRaw = c9x.srcRaw;
+  weight = c9x.weight;
+  swtch = c9x.swtch;
+  curve = c9x.curve;
+  delayUp = c9x.delayUp;
+  delayDown = c9x.delayDown;
+  speedUp = c9x.speedUp;
+  speedDown = c9x.speedDown;
+  carryTrim = c9x.carryTrim;
+  mltpx = (MltpxValue)c9x.mltpx;
+  phase = c9x.phase;
+  sOffset = c9x.sOffset;
+}
+
+t_Open9xMixData_v203::operator MixData ()
+{
+  MixData c9x;
+  c9x.destCh = destCh;
+  c9x.srcRaw = RawSource(srcRaw);
+  c9x.weight = weight;
+  c9x.swtch = swtch;
+  c9x.curve = curve;
+  c9x.delayUp = delayUp;
+  c9x.delayDown = delayDown;
+  c9x.speedUp = speedUp;
+  c9x.speedDown = speedDown;
+  c9x.carryTrim = carryTrim;
+  c9x.mltpx = (MltpxValue)mltpx;
+  c9x.mixWarn = mixWarn;
+  c9x.phase = phase;
+  c9x.sOffset = sOffset;
+  return c9x;
+}
 
 t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &c9x)
 {
