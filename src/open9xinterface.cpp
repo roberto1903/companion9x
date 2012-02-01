@@ -122,6 +122,10 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       // ppmFrameLength added
       // thrTraceSrc added
       break;
+    case 203:
+      // mixers changed (for the trims use for change the offset of a mix)
+      // telemetry offset raised to -127 +127
+      // function switches now have a param on 4 bits
     default:
       std::cout << "not open9x\n";
       return false;
