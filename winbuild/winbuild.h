@@ -21,4 +21,6 @@
 #define FORCEINLINE inline
 #define NOINLINE
 
+#define round(x) floor(x+0.5)
+
 #endif
