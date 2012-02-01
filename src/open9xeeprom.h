@@ -114,7 +114,7 @@ PACK(typedef struct t_Open9xLimitData {
 
 }) Open9xLimitData;
 
-PACK(typedef struct t_Open9xMixData {
+PACK(typedef struct t_Open9xMixData_v201 {
   uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
   uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
@@ -131,10 +131,32 @@ PACK(typedef struct t_Open9xMixData {
   int8_t  sOffset;
 
   operator MixData();
-  t_Open9xMixData();
-  t_Open9xMixData(MixData&);
+  t_Open9xMixData_v201() { memset(this, 0, sizeof(t_Open9xMixData_v201)); }
+  t_Open9xMixData_v201(MixData&);
 
-}) Open9xMixData;
+}) Open9xMixData_v201;
+
+PACK(typedef struct t_Open9xMixData_v203 {
+  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t mixWarn:3;         // mixer warning
+  uint8_t srcRaw;            //
+  int8_t  weight;
+  int8_t  swtch;
+  uint8_t curve;
+  uint8_t delayUp:4;
+  uint8_t delayDown:4;
+  uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
+  uint8_t speedDown:4;       // 0 nichts
+  uint8_t carryTrim:2;
+  uint8_t mltpx:2;           // multiplex method: 0 means +=, 1 means *=, 2 means :=
+  int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
+  int8_t  sOffset;
+
+  operator MixData();
+  t_Open9xMixData_v203() { memset(this, 0, sizeof(t_Open9xMixData_v203)); }
+  t_Open9xMixData_v203(MixData&);
+
+}) Open9xMixData_v203;
 
 PACK(typedef struct t_Open9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
@@ -316,7 +338,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v201 timer2;
-  Open9xMixData   mixData[MAX_MIXERS];
+  Open9xMixData_v201 mixData[MAX_MIXERS];
   Open9xLimitData limitData[NUM_CHNOUT];
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
@@ -349,7 +371,7 @@ PACK(typedef struct t_Open9xModelData_v202 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
-  Open9xMixData   mixData[MAX_MIXERS];
+  Open9xMixData_v201 mixData[MAX_MIXERS];
   Open9xLimitData limitData[NUM_CHNOUT];
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
@@ -385,7 +407,7 @@ PACK(typedef struct t_Open9xModelData_v203 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
-  Open9xMixData   mixData[MAX_MIXERS];
+  Open9xMixData_v203 mixData[MAX_MIXERS];
   Open9xLimitData limitData[NUM_CHNOUT];
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
