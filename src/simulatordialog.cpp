@@ -298,13 +298,13 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
     }
     else {
       ui->tabWidget->removeTab(0);
-      radioData.generalSettings.currModel = model_idx;
-      windowName = tr("Simulating ") + radioData.models[model_idx].name;
+      g_radioData.generalSettings.currModel = model_idx;
+      windowName = tr("Simulating ") + g_radioData.models[model_idx].name;
     }
 
     setWindowTitle(windowName);
 
-    if (radioData.generalSettings.stickMode & 1)
+    if (g_radioData.generalSettings.stickMode & 1)
     {
         nodeLeft->setCenteringY(false);   //mode 1,3 -> THR on left
         ui->holdLeftY->setChecked(true);
@@ -320,7 +320,7 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
     beepVal = 0;
     beepShow = 0;
 
-    simulator->start(radioData, model_idx<0);
+    simulator->start(g_radioData, model_idx<0);
 
     setupTimer();
 }
