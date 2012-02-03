@@ -18,7 +18,7 @@
   * ~~Splash window should be visible at least 2-3 seconds!~~
   * ~~Phase names visible on simulation~~
   * Add a what's new information to be displayed while prompting for updates
-  * Beeps not handled yet
+  * ~~Beeps not handled yet~~
   * ~~Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS)~~
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
   * In simulator: highlight real channels to differentiate them from virtual ones
@@ -33,11 +33,7 @@
   * ~~Er9x export (one TODO remaining) / simulation~~
   * ~~Th9x import / export / simulation~~
 
-= Help / translations =
-  * All tooltips. A lot of work here!
-  * Translations in all languages. Perhaps propose something really simple and intuitive, using Google Documents
-
 = Multi platforms =
-  * Mac packaging - Icon and DMG build working - do we need a installer ?
+  * ~~Mac packaging~~
   * Debian / Ubuntu packaging
   * RedHat / Suse packaging
