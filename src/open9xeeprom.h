@@ -255,8 +255,7 @@ PACK(typedef struct t_Open9xFrSkyData_v202 {
 
 PACK(typedef struct t_Open9xFrSkyData_v203 {
         Open9xFrSkyChannelData_v203 channels[2];
-        uint8_t usrProto:2;  // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
-        uint8_t spare:6;
+        uint8_t usrProto;  // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
 
         operator FrSkyData();
         t_Open9xFrSkyData_v203() { memset(this, 0, sizeof(t_Open9xFrSkyData_v203)); }
