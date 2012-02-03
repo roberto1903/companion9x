@@ -72,7 +72,7 @@ void burnDialog::on_FlashLoadButton_clicked()
     ui->SVNField->setText(flash.getSvn());
     ui->ModField->setText(flash.getBuild());
     ui->BurnFlashButton->setEnabled(true);
-    ui->BurnFlashButton->setText(tr("Burn"));
+    ui->BurnFlashButton->setText(tr("Burn to TX"));
     if (flash.hasSplash()) {
       ui->SplashFrame->show();
       ui->ImageLoadButton->setEnabled(true);
