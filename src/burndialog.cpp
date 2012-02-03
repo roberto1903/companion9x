@@ -6,21 +6,24 @@
 #include "splashlibrary.h"
 #include "flashinterface.h"
 
-burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE) : QDialog(parent), ui(new Ui::burnDialog) {
-  hexType = Type;
+burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE):
+  QDialog(parent),
+  ui(new Ui::burnDialog),
+  hexfileName(fileName),
+  backup(backupEE),
+  hexType(Type)
+{
   ui->setupUi(this);
   ui->SplashFrame->hide();
   ui->FramFWInfo->hide();
   ui->EEbackupCB->hide();
-  hexfileName = fileName;
-  backup=backupEE;
-  
+  ui->EEbackupCB->setCheckState(*backup ? Qt::Checked : Qt::Unchecked);
   if (Type == 2) {
     ui->EEpromCB->hide();
-    this->setWindowTitle("Write firmware to TX");
+    this->setWindowTitle(tr("Write firmware to TX"));
   }
   else {
-    this->setWindowTitle("Write models to TX");
+    this->setWindowTitle(tr("Write models to TX"));
   }
   if (!hexfileName->isEmpty()) {
     ui->FWFileName->setText(*hexfileName);
@@ -35,7 +38,8 @@ burnDialog::~burnDialog() {
   delete ui;
 }
 
-void burnDialog::on_FlashLoadButton_clicked() {
+void burnDialog::on_FlashLoadButton_clicked()
+{
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->ImageLoadButton->setDisabled(true);
@@ -54,7 +58,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
   ui->BurnFlashButton->setDisabled(true);
   ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
-  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
+  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
   if (fileName.isEmpty()) {
     return;
   }
@@ -68,6 +72,7 @@ void burnDialog::on_FlashLoadButton_clicked() {
     ui->SVNField->setText(flash.getSvn());
     ui->ModField->setText(flash.getBuild());
     ui->BurnFlashButton->setEnabled(true);
+    ui->BurnFlashButton->setText(tr("Burn"));
     if (flash.hasSplash()) {
       ui->SplashFrame->show();
       ui->ImageLoadButton->setEnabled(true);
@@ -111,14 +116,15 @@ void burnDialog::on_FlashLoadButton_clicked() {
   }
   else {
     QMessageBox::critical(this, tr("Warning"), tr("%1 doesn't seem to be a firmware").arg(fileName));
-    ui->BurnFlashButton->setText("Burn anyway !");
+    ui->BurnFlashButton->setText(tr("Burn anyway !"));
     ui->BurnFlashButton->setEnabled(true);
   }
   QTimer::singleShot(0, this, SLOT(shrink()));
-  settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+  settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
 }
 
-void burnDialog::on_ImageLoadButton_clicked() {
+void burnDialog::on_ImageLoadButton_clicked()
+{
   QString supportedImageFormats;
   for (int formatIndex = 0; formatIndex < QImageReader::supportedImageFormats().count(); formatIndex++) {
     supportedImageFormats += QLatin1String(" *.") + QImageReader::supportedImageFormats()[formatIndex];
@@ -126,9 +132,10 @@ void burnDialog::on_ImageLoadButton_clicked() {
 
   QSettings settings("companion9x", "companion9x");
   QString fileName = QFileDialog::getOpenFileName(this,
-          tr("Open Image to load"), settings.value("lastDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
+          tr("Open Image to load"), settings.value("lastImagesDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
 
   if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
     QImage image(fileName);
     if (image.isNull()) {
       QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
@@ -144,7 +151,8 @@ void burnDialog::on_ImageLoadButton_clicked() {
   }
 }
 
-void burnDialog::on_libraryButton_clicked() {
+void burnDialog::on_libraryButton_clicked()
+{
   QString fileName;
   splashLibrary *ld = new splashLibrary(this,&fileName);
   ld->exec();
@@ -164,7 +172,8 @@ void burnDialog::on_libraryButton_clicked() {
   }
 }
 
-void burnDialog::on_BurnFlashButton_clicked() {
+void burnDialog::on_BurnFlashButton_clicked()
+{
   if (hexType==2) {
     QString fileName=ui->FWFileName->text();
     if (!fileName.isEmpty()) {
@@ -179,7 +188,7 @@ void burnDialog::on_BurnFlashButton_clicked() {
             hexfileName->clear();
             hexfileName->append(tempFile);
             QSettings settings("companion9x", "companion9x");
-            settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+            settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
           }
           else {
             hexfileName->clear();
@@ -257,11 +266,13 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked) {
   }
 }
 
-void burnDialog::shrink() {
+void burnDialog::shrink()
+{
     resize(0,0);
 }
 
-void burnDialog::on_EEbackupCB_clicked() {
+void burnDialog::on_EEbackupCB_clicked()
+{
   if (ui->EEbackupCB->isChecked()) {
     *backup=true;
   }

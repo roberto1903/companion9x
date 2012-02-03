@@ -336,15 +336,18 @@ void preferencesDialog::on_fw_dnld_clicked()
   firmwareChanged(true);
 }
 
-void preferencesDialog::on_libraryPathButton_clicked() {
+void preferencesDialog::on_libraryPathButton_clicked()
+{
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library dir"), settings.value("lastDir").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library dir"), settings.value("lastImagesDir").toString());
   if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
     ui->libraryPath->setText(fileName);
   }
 }
 
-void preferencesDialog::on_splashLibraryButton_clicked() {
+void preferencesDialog::on_splashLibraryButton_clicked()
+{
   QString fileName;
   splashLibrary *ld = new splashLibrary(this,&fileName);
   ld->exec();
@@ -360,7 +363,8 @@ void preferencesDialog::on_splashLibraryButton_clicked() {
   }  
 }
 
-void preferencesDialog::on_SplashSelect_clicked() {
+void preferencesDialog::on_SplashSelect_clicked()
+{
   QString supportedImageFormats;
   for (int formatIndex = 0; formatIndex < QImageReader::supportedImageFormats().count(); formatIndex++) {
     supportedImageFormats += QLatin1String(" *.") + QImageReader::supportedImageFormats()[formatIndex];
@@ -368,9 +372,10 @@ void preferencesDialog::on_SplashSelect_clicked() {
 
   QSettings settings("companion9x", "companion9x");
   QString fileName = QFileDialog::getOpenFileName(this,
-          tr("Open Image to load"), settings.value("lastDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
+          tr("Open Image to load"), settings.value("lastImagesDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
 
   if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
     QImage image(fileName);
     if (image.isNull()) {
       QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));

@@ -54,5 +54,10 @@ void getTrims(int16_t values[4])
   }
 }
 
+void eeprom_RESV_mismatch(void)
+{
+  assert(!"Should never been called. Only needed by VC++ (debug mode)");
+}
+
 }
 

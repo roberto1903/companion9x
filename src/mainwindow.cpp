@@ -53,7 +53,7 @@
 #include "contributorsdialog.h"
 #include "customizesplashdialog.h"
 #include "burndialog.h"
-
+#include "hexinterface.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 
@@ -197,20 +197,22 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
             QSettings settings("companion9x", "companion9x");
 
             if (ret == QMessageBox::Yes) {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
-                if (fileName.isEmpty()) return;
-//                settings.setValue("lastDir",QFileInfo(fileName)s.dir().absolutePath());
-
-                downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
-                installer_fileName = fileName;
-                connect(dd, SIGNAL(accepted()), this, SLOT(updateDownloaded()));
-                dd->show();
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
+                if (!fileName.isEmpty()) {
+                  settings.setValue("lastUpdatesDir", QFileInfo(fileName).dir().absolutePath());
+                  downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
+                  installer_fileName = fileName;
+                  connect(dd, SIGNAL(accepted()), this, SLOT(updateDownloaded()));
+                  dd->show();
+                }
             }
-        } else  {
+        }
+        else  {
             if (showcheckForUpdatesResult && check1done && check2done)
                 QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
         }
-    } else {
+    }
+    else {
         if(check1done && check2done)
            QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
     }
@@ -232,11 +234,11 @@ void MainWindow::downloadLatestFW(FirmwareInfo * firmware)
     QSettings settings("companion9x", "companion9x");
     tmp = firmware->url;
     ext = tmp.mid(tmp.lastIndexOf("."));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + firmware->id + ext);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + firmware->id + ext);
     if (!fileName.isEmpty()) {
       downloadedFW = firmware->id;
       downloadedFWFilename = fileName;
-      settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+      settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
       downloadDialog * dd = new downloadDialog(this, firmware->url, fileName);
       connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
       dd->exec();
@@ -331,9 +333,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 downloadedFW = fwToUpdate->id;
                 QString tmp=fwToUpdate->url;
                 QString ext=tmp.mid(tmp.lastIndexOf("."));
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" + fwToUpdate->id + ext, tr(HEX_FILES_FILTER));
+                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate->id + ext, tr(HEX_FILES_FILTER));
                 if (!fileName.isEmpty()) {
-                    settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+                    settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
                     downloadDialog * dd = new downloadDialog(this, fwToUpdate->url, fileName);
                     currentFWrev_temp = NewFwRev;
                     connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
@@ -372,10 +374,10 @@ void MainWindow::newFile()
 void MainWindow::open()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Open"),settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+        settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 
         QMdiSubWindow *existing = findMdiChild(fileName);
         if (existing) {
@@ -411,7 +413,7 @@ void MainWindow::openRecentFile()
     if (action) 
     {
         QString fileName=action->data().toString();
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+        // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 
         QMdiSubWindow *existing = findMdiChild(fileName);
         if (existing) {
@@ -549,10 +551,10 @@ void MainWindow::burnFrom()
 void MainWindow::burnExtenalToEEPROM()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+        settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 
         int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
@@ -568,49 +570,110 @@ void MainWindow::burnExtenalToEEPROM()
     }
 }
 
+bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
+{
+  FlashInterface flash(flashFile);
+  if (!flash.isValid())
+    return false;
+
+  QString fwSvn = flash.getSvn();
+  QStringList tags = fwSvn.split("-r", QString::SkipEmptyParts);
+  int revision = tags.back().toInt();
+  if (!revision)
+    return false;
+
+  FirmwareInfo *firmware = NULL;
+  if (tags.at(0) == "open9x")
+    firmware = GetFirmware(flash.getSize() < 64000 ? "open9x-stock" : "open9x-v4");
+  else if (tags.at(0) == "gruvin9x" && tags.at(1) == "frsky")
+    firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
+  else if (tags.at(0) == "gruvin9x" && tags.at(1) == "trunk")
+    firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
+  /* else... others */
+  if (!firmware)
+    return false;
+
+  uint8_t eeprom[EESIZE_V4];
+  int eeprom_size;
+
+  {
+    QFile file(backupFile);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+      return false;
+    QTextStream inputStream(&file);
+    eeprom_size = HexInterface(inputStream).load(eeprom);
+    if (!eeprom_size)
+      return false;
+  }
+
+  RadioData radioData;
+  if (!LoadEeprom(radioData, eeprom, eeprom_size))
+    return false;
+
+  if (!firmware->saveEEPROM(eeprom, radioData, revision))
+    return false;
+
+  QFile file(restoreFile);
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    return false;
+
+  QTextStream outputStream(&file);
+  if (!HexInterface(outputStream).save(eeprom, eeprom_size))
+    return false;
+
+  file.close();
+  return true;
+}
+
 void MainWindow::burnToFlash(QString fileToFlash)
 {
   QSettings settings("companion9x", "companion9x");
   QString fileName;
-  bool backup=false;
+  bool backup = settings.value("backupOnFlash", false).toBool();
   if(!fileToFlash.isEmpty())
     fileName = fileToFlash;
-  burnDialog *cd = new burnDialog(this,2,&fileName,&backup);
+  burnDialog *cd = new burnDialog(this, 2, &fileName, &backup);
   cd->exec();
 
   if (!fileName.isEmpty()) {
+    settings.setValue("backupOnFlash", backup);
     if (backup) {
       QString tempDir    = QDir::tempPath();
-      QString tempFile = tempDir + "/backup.hex";
-      QString str = "eeprom:r:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Backup EEPROM From Tx"),AVR_DIALOG_CLOSE_IF_SUCCESSFUL); //, AVR_DIALOG_KEEP_OPEN);
+      QString backupFile = tempDir + "/backup.hex";
+      QString str = "eeprom:r:" + backupFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Backup EEPROM From Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
       int res = ad->exec();
-      if(QFileInfo(tempFile).exists() && res) {
+      if (QFileInfo(backupFile).exists() && res) {
         sleep(1);
-        QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+        QString str = "flash:w:" + fileName;
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Write Flash To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
         ad->setWindowIcon(QIcon(":/images/write_flash.png"));
         int res = ad->exec();
         if (res) {
+          QString restoreFile = tempDir + "/restore.hex";
+          if (!convertEEPROM(backupFile, restoreFile, fileName)) {
+            QMessageBox::warning(this, tr("Conversion failed"), tr("Cannot convert EEProm for this firmware, original EEProm file will be used"));
+            restoreFile = backupFile;
+          }
           sleep(1);
-          QString str = "eeprom:w:" + tempFile +":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Restore EEPROM To Tx",AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+          QString str = "eeprom:w:" + restoreFile +":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Restore EEPROM To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
           ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
           res=ad->exec();
           if (!res) {
-            QMessageBox::warning(this, tr("Restore failed"),tr("Cannot restore EEProm to TX, original EEProm file can be found at: %1").arg(tempFile));
+            QMessageBox::warning(this, tr("Restore failed"), tr("Cannot restore EEProm to TX, original EEProm file can be found at: %1").arg(backupFile));
           }
         }
         else {
-          QMessageBox::warning(this, tr("Flash failed"),tr("Cannot flash the TX, original EEProm file can be found at: %1").arg(tempFile));
+          QMessageBox::warning(this, tr("Flash failed"), tr("Cannot flash the TX, original EEProm file can be found at: %1").arg(backupFile));
         }
       }
       else {
-        QMessageBox::warning(this, tr("Backup failed"),tr("Cannot backup existing EEProm from TX, Flash process aborted"));
+        QMessageBox::warning(this, tr("Backup failed"), tr("Cannot backup existing EEProm from TX, Flash process aborted"));
       }
     }
     else {
@@ -619,7 +682,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
       else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
       else str += ":a";
 
-      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write Flash To Tx", AVR_DIALOG_SHOW_DONE);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Write Flash To Tx"), AVR_DIALOG_SHOW_DONE);
       ad->setWindowIcon(QIcon(":/images/write_flash.png"));
       ad->show();
     }
@@ -630,17 +693,17 @@ void MainWindow::burnToFlash(QString fileToFlash)
 void MainWindow::burnExtenalFromEEPROM()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getSaveFileName(this,tr("Read EEPROM memory to File"),settings.value("lastDir").toString(),tr(EXTERNAL_EEPROM_FILES_FILTER));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Read EEPROM memory to File"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+        settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
 
         QString str = "eeprom:r:" + fileName;
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";
 
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Read EEPROM From Tx");
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Read EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->show();
     }
@@ -650,12 +713,12 @@ void MainWindow::burnExtenalFromEEPROM()
 void MainWindow::burnFromFlash()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getSaveFileName(this,tr("Read Flash to File"),settings.value("lastDir").toString(),tr(FLASH_FILES_FILTER));
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Read Flash to File"), settings.value("lastFlashDir").toString(),tr(FLASH_FILES_FILTER));
     if (!fileName.isEmpty())
     {
-        settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+        settings.setValue("lastFlashDir",QFileInfo(fileName).dir().absolutePath());
 
-        QString str = "flash:r:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+        QString str = "flash:r:" + fileName;
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
         else str += ":a";

@@ -729,6 +729,7 @@ class FirmwareInfo {
     QList<FirmwareInfo *> options;
 };
 
+FirmwareInfo * GetFirmware(QString id);
 FirmwareInfo * GetCurrentFirmware();
 EEPROMInterface * GetEepromInterface();
 

@@ -85,6 +85,11 @@ QString FlashInterface::getBuild(void)
   return build;
 }
 
+int FlashInterface::getSize()
+{
+  return flash_size;
+}
+
 void FlashInterface::SeekVer(void)
 {
   int i, start = -1, end = -1;

@@ -42,6 +42,7 @@ public:
   QString getDate();
   QString getTime();
   QString getSvn();
+  int getSize();
   QString getBuild();
   QImage getSplash();
   bool setSplash(QImage newsplash);
