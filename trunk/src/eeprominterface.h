@@ -50,7 +50,7 @@ const uint8_t modn12x3[4][4]= {
 
 #define NUM_CHNOUT      16 // number of real output channels CH1-CH8
 #define NUM_CSW         12 // number of custom switches
-#define NUM_FSW         12 // number of functions assigned to switches
+#define NUM_FSW         16 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -351,15 +351,16 @@ class SafetySwData { // Custom Switches data
 };
 
 enum AssignFunc {
-  FuncNone = 0,
-  FuncTrainer = 1,
-  FuncTrainerRUD = 2,
-  FuncTrainerELE = 3,
-  FuncTrainerTHR = 4,
-  FuncTrainerAIL = 5,
-  FuncInstantTrim = 6,
-  FuncTrims2Offsets = 7,
-  FuncViewTelemetry = 8,
+  FuncSafetyCh1 = 0,
+  FuncSafetyCh16 = FuncSafetyCh1+15,
+  FuncTrainer,
+  FuncTrainerRUD,
+  FuncTrainerELE,
+  FuncTrainerTHR,
+  FuncTrainerAIL,
+  FuncInstantTrim,
+  FuncTrims2Offsets,
+  FuncViewTelemetry,
   FuncCount
 };
 

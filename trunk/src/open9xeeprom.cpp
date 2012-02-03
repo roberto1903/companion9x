@@ -318,14 +318,14 @@ Open9xCustomSwData::operator CustomSwData ()
 t_Open9xFuncSwData_v201::t_Open9xFuncSwData_v201(FuncSwData &c9x)
 {
   swtch = c9x.swtch;
-  func = c9x.func;
+  func = c9x.func - NUM_CHNOUT;
 }
 
 t_Open9xFuncSwData_v201::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = swtch;
-  c9x.func = (AssignFunc)func;
+  c9x.func = (AssignFunc)(func+NUM_CHNOUT);
   return c9x;
 }
 
@@ -607,9 +607,9 @@ t_Open9xModelData_v201::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<12; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
+  for (int i=0; i<12; i++)
     c9x.funcSw[i] = funcSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -671,9 +671,9 @@ t_Open9xModelData_v202::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<12; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
+  for (int i=0; i<12; i++)
     c9x.funcSw[i] = funcSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -734,8 +734,10 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
+    for (int i=0; i<12; i++)
       customSw[i] = c9x.customSw[i];
+    for (int i=0; i<12; i++)
+      funcSw[i] = c9x.funcSw[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
@@ -813,12 +815,10 @@ t_Open9xModelData_v203::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<O9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
+  for (int i=0; i<O9X_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
-    c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
   c9x.ppmFrameLength = ppmFrameLength;
@@ -876,10 +876,22 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
+    for (int i=0; i<O9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
-      safetySw[i] = c9x.safetySw[i];
+    int count = 0;
+    for (int i=0; i<O9X_NUM_FSW; i++) {
+      if (c9x.funcSw[i].swtch)
+        funcSw[count++] = c9x.funcSw[i];
+    }
+    for (int i=0; i<NUM_CHNOUT; i++) {
+      if (c9x.safetySw[i].swtch) {
+        funcSw[count].func = i;
+        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].param = c9x.safetySw[i].val;
+        count++;
+      }
+    }
+
     swashR = c9x.swashRingData;
     for (int i=0; i<MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];

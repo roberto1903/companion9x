@@ -236,7 +236,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case Timers:
       return 2;
     case FuncSwitches:
-      return 12;
+      return O9X_NUM_FSW;
     case Outputs:
       return 16;
     case ExtraChannels:

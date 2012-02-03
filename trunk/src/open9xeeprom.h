@@ -191,8 +191,8 @@ PACK(typedef struct t_Open9xFuncSwData_v201 { // Function Switches data
 
 PACK(typedef struct t_Open9xFuncSwData_v203 { // Function Switches data
   int8_t  swtch; // input
-  uint8_t func:4;
-  uint8_t param:4;
+  uint8_t func;
+  uint8_t param;
 
   operator FuncSwData();
   t_Open9xFuncSwData_v203() { memset(this, 0, sizeof(t_Open9xFuncSwData_v203)); }
@@ -319,8 +319,8 @@ PACK(typedef struct t_Open9xTimerData_v202 {
 #define MAX_CURVE9 8
 
 #define NUM_CHNOUT   16 // number of real output channels CH1-CH16
-#define NUM_CSW      12 // number of custom switches
-#define NUM_FSW      12 // number of functions assigned to switches
+#define O9X_NUM_CSW      12 // number of custom switches
+#define O9X_NUM_FSW      16 // number of functions assigned to switches
 
 PACK(typedef struct t_Open9xModelData_v201 {
   char      name[10];             // 10 must be first for eeLoadModelName
@@ -343,9 +343,9 @@ PACK(typedef struct t_Open9xModelData_v201 {
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Open9xCustomSwData  customSw[NUM_CSW];
+  Open9xCustomSwData  customSw[O9X_NUM_CSW];
   Open9xSafetySwData  safetySw[NUM_CHNOUT];
-  Open9xFuncSwData_v201 funcSw[NUM_FSW];
+  Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
   Open9xFrSkyData_v201 frsky;
@@ -376,9 +376,9 @@ PACK(typedef struct t_Open9xModelData_v202 {
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Open9xCustomSwData  customSw[NUM_CSW];
+  Open9xCustomSwData  customSw[O9X_NUM_CSW];
   Open9xSafetySwData  safetySw[NUM_CHNOUT];
-  Open9xFuncSwData_v201 funcSw[NUM_FSW];
+  Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
   Open9xFrSkyData_v202 frsky;
@@ -412,9 +412,8 @@ PACK(typedef struct t_Open9xModelData_v203 {
   Open9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Open9xCustomSwData  customSw[NUM_CSW];
-  Open9xSafetySwData  safetySw[NUM_CHNOUT];
-  Open9xFuncSwData_v203 funcSw[NUM_FSW];
+  Open9xCustomSwData  customSw[O9X_NUM_CSW];
+  Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
   Open9xFrSkyData_v202 frsky;

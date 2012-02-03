@@ -311,8 +311,8 @@ PACK(typedef struct t_Gruvin9xTimerData {
 #define MAX_CURVE9 8
 
 #define NUM_CHNOUT   16 // number of real output channels CH1-CH16
-#define NUM_CSW      12 // number of custom switches
-#define NUM_FSW      12 // number of functions assigned to switches
+#define G9X_NUM_CSW      12 // number of custom switches
+#define G9X_NUM_FSW      12 // number of functions assigned to switches
 
 // TODO
 PACK(typedef struct t_Gruvin9xModelData_v102 {
@@ -336,7 +336,7 @@ PACK(typedef struct t_Gruvin9xModelData_v102 {
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Gruvin9xCustomSwData  customSw[NUM_CSW];
+  Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
@@ -368,7 +368,7 @@ PACK(typedef struct t_Gruvin9xModelData_v103 {
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Gruvin9xCustomSwData  customSw[NUM_CSW];
+  Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
@@ -400,9 +400,9 @@ PACK(typedef struct t_Gruvin9xModelData_v105 {
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Gruvin9xCustomSwData  customSw[NUM_CSW];
+  Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
-  Gruvin9xFuncSwData    funcSw[NUM_FSW];
+  Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   int16_t   subtrim[NUM_STICKS];
@@ -434,9 +434,9 @@ PACK(typedef struct t_Gruvin9xModelData_v106 {
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Gruvin9xCustomSwData  customSw[NUM_CSW];
+  Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
-  Gruvin9xFuncSwData    funcSw[NUM_FSW];
+  Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v106 phaseData[MAX_PHASES];
   Gruvin9xFrSkyData frsky;
