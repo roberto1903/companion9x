@@ -589,6 +589,8 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
   else if (tags.at(0) == "gruvin9x" && tags.at(1) == "trunk")
     firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
+  else if (tags.at(0) == "er9x")
+    firmware = GetFirmware("er9x");
   /* else... others */
   if (!firmware)
     return false;
