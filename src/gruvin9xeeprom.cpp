@@ -303,14 +303,14 @@ Gruvin9xCustomSwData::operator CustomSwData ()
 t_Gruvin9xFuncSwData::t_Gruvin9xFuncSwData(FuncSwData &c9x)
 {
   swtch = c9x.swtch;
-  func = c9x.func;
+  func = c9x.func - NUM_CHNOUT;
 }
 
 Gruvin9xFuncSwData::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = swtch;
-  c9x.func = (AssignFunc)func;
+  c9x.func = (AssignFunc)(func + NUM_CHNOUT);
   return c9x;
 }
 
@@ -522,7 +522,7 @@ t_Gruvin9xModelData_v102::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -583,7 +583,7 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -661,9 +661,9 @@ t_Gruvin9xModelData_v105::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
+  for (int i=0; i<G9X_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -735,9 +735,9 @@ t_Gruvin9xModelData_v106::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_FSW; i++)
+  for (int i=0; i<G9X_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
@@ -805,9 +805,9 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
+    for (int i=0; i<G9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
-    for (int i=0; i<NUM_FSW; i++)
+    for (int i=0; i<G9X_NUM_FSW; i++)
       funcSw[i] = c9x.funcSw[i];
     for (int i=0; i<NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
