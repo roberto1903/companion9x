@@ -18,7 +18,8 @@ customizeSplashDialog::~customizeSplashDialog() {
   delete ui;
 }
 
-void customizeSplashDialog::on_FlashLoadButton_clicked() {
+void customizeSplashDialog::on_FlashLoadButton_clicked()
+{
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->ImageLoadButton->setDisabled(true);
@@ -29,7 +30,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
   ui->imageLabel->clear();
   ui->HowToLabel->clear();
   ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
-  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"));
+  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), tr("HEX files (*.hex);;"));
   if (fileName.isEmpty()) {
     ui->FWFileName->clear();
     ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
@@ -48,7 +49,7 @@ void customizeSplashDialog::on_FlashLoadButton_clicked() {
     QMessageBox::information(this, tr("Error"), tr("Could not find bitmap to replace in file"));
     return;
   }
-  settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+  settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
 }
 
 void customizeSplashDialog::on_ImageLoadButton_clicked() {
@@ -59,9 +60,10 @@ void customizeSplashDialog::on_ImageLoadButton_clicked() {
 
   QSettings settings("companion9x", "companion9x");
   QString fileName = QFileDialog::getOpenFileName(this,
-          tr("Open Image to load"), settings.value("lastDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
+          tr("Open Image to load"), settings.value("lastImagesDir").toString(), tr("Images (%1)").arg(supportedImageFormats));
 
   if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
     QImage image(fileName);
     if (image.isNull()) {
       QMessageBox::critical(this, tr("Error"), tr("Cannot load %1.").arg(fileName));
@@ -94,11 +96,12 @@ void customizeSplashDialog::on_libraryButton_clicked() {
   }
 }
 
-void customizeSplashDialog::on_SaveFlashButton_clicked() {
+void customizeSplashDialog::on_SaveFlashButton_clicked()
+{
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->HowToLabel->clear();
-  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastDir").toString(), tr("HEX files (*.hex);;"), 0, QFileDialog::DontConfirmOverwrite);
+  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastFlashDir").toString(), tr("HEX files (*.hex);;"), 0, QFileDialog::DontConfirmOverwrite);
   if (fileName.isEmpty()) {
     return;
   }
@@ -107,7 +110,7 @@ void customizeSplashDialog::on_SaveFlashButton_clicked() {
     QMessageBox::critical(this, tr("Error"), tr("Error reading file %1").arg(fileName));
     return;
   }
-  settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+  settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
   QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
   flash.setSplash(image);
   if (flash.saveFlash(fileName) > 0) {
@@ -118,24 +121,24 @@ void customizeSplashDialog::on_SaveFlashButton_clicked() {
     ui->HowToLabel->setStyleSheet("background:rgb(255.0.0);");
     ui->HowToLabel->append("<center>" + tr("Firmware not saved.") + "</center>");
   }
-
 }
 
-void customizeSplashDialog::on_InvertColorButton_clicked() {
+void customizeSplashDialog::on_InvertColorButton_clicked()
+{
   QImage image = ui->imageLabel->pixmap()->toImage();
   image.invertPixels();
   ui->imageLabel->setPixmap(QPixmap::fromImage(image));
 }
 
-void customizeSplashDialog::on_SaveImageButton_clicked() {
+void customizeSplashDialog::on_SaveImageButton_clicked()
+{
   QString fileName;
   QSettings settings("companion9x", "companion9x");
 
-  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastDir").toString(), tr("PNG images (*.png);;"), 0, QFileDialog::DontConfirmOverwrite);
-  if (fileName.isEmpty()) {
-    return;
+  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastImagesDir").toString(), tr("PNG images (*.png);;"), 0, QFileDialog::DontConfirmOverwrite);
+  if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
+    QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono);
+    image.save(fileName, "PNG");
   }
-  QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono);
-  image.save(fileName, "PNG");
-
 }

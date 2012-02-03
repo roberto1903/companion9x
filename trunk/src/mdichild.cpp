@@ -274,11 +274,11 @@ bool MdiChild::save()
 bool MdiChild::saveAs()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),settings.value("lastDir").toString() + "/" +curFile,tr(EEPROM_FILES_FILTER));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile,tr(EEPROM_FILES_FILTER));
     if (fileName.isEmpty())
         return false;
 
-    settings.setValue("lastDir",QFileInfo(fileName).dir().absolutePath());
+    settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
     return saveFile(fileName);
 }
 
@@ -355,13 +355,12 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     }
 
     file.close();
-    if(setCurrent) setCurrentFile(fileName);
 
-    if (!EEPROMWarnings.isEmpty()) {
-      QMessageBox::warning(this,
+    // TODO if (!EEPROMWarnings.isEmpty())
+/*      QMessageBox::warning(this,
           tr("Warning"),
-          tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
-    }
+          tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));*/
+
 
     return true;
 }

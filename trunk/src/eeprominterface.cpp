@@ -131,7 +131,7 @@ class Open9xFirmware: public FirmwareInfo
     }
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (0/*revision == 0 || revision >= 170*/)
+      if (revision == 0 || revision >= 184)
         return 203;
       else
         return 202;
@@ -223,21 +223,25 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
   return false;
 }
 
+FirmwareInfo * GetFirmware(QString id)
+{
+  foreach(FirmwareInfo * firmware, firmwares) {
+    if (firmware->id == id)
+      return firmware;
+    foreach(FirmwareInfo * option, firmware->options) {
+      if (option->id == id)
+        return option;
+    }
+  }
+  return NULL;
+}
+
 FirmwareInfo * GetCurrentFirmware()
 {
   QSettings settings("companion9x", "companion9x");
   QVariant firmware_id = settings.value("firmware", default_firmware->id);
-
-  foreach(FirmwareInfo * firmware, firmwares) {
-    if (firmware->id == firmware_id)
-      return firmware;
-    foreach(FirmwareInfo * option, firmware->options) {
-      if (option->id == firmware_id)
-        return option;
-    }
-  }
-
-  return default_firmware;
+  FirmwareInfo *firmware = GetFirmware(firmware_id.toString());
+  return firmware ? firmware : default_firmware;
 }
 
 EEPROMInterface *GetEepromInterface()

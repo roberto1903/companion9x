@@ -128,6 +128,8 @@ private:
     QString GetAvrdudeLocation();
     QStringList GetAvrdudeArguments(const QString &cmd);
 
+    bool convertEEPROM(QString backupFile, QString restoreFile, QString flashFile);
+
     QMdiArea *mdiArea;
     QSignalMapper *windowMapper;
 
