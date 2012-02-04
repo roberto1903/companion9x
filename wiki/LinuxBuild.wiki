@@ -11,8 +11,14 @@ You will need ...
  * [http://www.codesynthesis.com/projects/xsd xsdcxx]
  * [http://www.libsdl.org/ SDL] (v1.2)
 
+On Ubuntu:
 {{{
 sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
+}}}
+
+On Fedora:
+{{{
+sudo yum install qt qt-devel cmake patch xsd svn
 }}}
 
 = Building companion9x =
