@@ -355,8 +355,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     }
 
     file.close();
-    curFile=fileName;
-    setWindowTitle(userFriendlyCurrentFile() +" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
+    if(setCurrent) setCurrentFile(fileName);
 
     // TODO if (!EEPROMWarnings.isEmpty())
 /*      QMessageBox::warning(this,
