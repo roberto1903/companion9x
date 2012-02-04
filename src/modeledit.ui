@@ -659,8 +659,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>804</width>
-              <height>398</height>
+              <width>260</width>
+              <height>177</height>
              </rect>
             </property>
             <attribute name="label">
@@ -912,8 +912,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>287</height>
+              <width>302</width>
+              <height>290</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1315,8 +1315,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>275</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1686,8 +1686,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>275</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2057,8 +2057,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>306</width>
-              <height>275</height>
+              <width>302</width>
+              <height>278</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2464,8 +2464,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>524</height>
+            <width>307</width>
+            <height>462</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3713,8 +3713,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>495</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8627,8 +8627,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>524</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -9059,7 +9059,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_917">
+             <widget class="QLabel" name="label_A1Max">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -9200,7 +9200,7 @@
             <item row="1" column="2">
              <widget class="QLabel" name="a1CalibLabel">
               <property name="text">
-               <string>Calibration</string>
+               <string>Min Value</string>
               </property>
              </widget>
             </item>
@@ -9220,13 +9220,13 @@
             <item row="1" column="3">
              <widget class="QDoubleSpinBox" name="a1CalibSB">
               <property name="decimals">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="minimum">
-               <double>-0.800000000000000</double>
+               <double>-12.800000000000001</double>
               </property>
               <property name="maximum">
-               <double>0.700000000000000</double>
+               <double>12.699999999999999</double>
               </property>
               <property name="singleStep">
                <double>0.100000000000000</double>
@@ -9312,7 +9312,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_921">
+             <widget class="QLabel" name="label_A2Max">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -9453,7 +9453,7 @@
             <item row="1" column="2">
              <widget class="QLabel" name="a2CalibLabel">
               <property name="text">
-               <string>Calibration</string>
+               <string>Min Value</string>
               </property>
              </widget>
             </item>
@@ -9473,7 +9473,7 @@
             <item row="1" column="3">
              <widget class="QDoubleSpinBox" name="a2CalibSB">
               <property name="decimals">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="minimum">
                <double>-0.800000000000000</double>
@@ -9593,7 +9593,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>offsetDSB_1</tabstop>
   <tabstop>minSB_1</tabstop>
   <tabstop>maxSB_1</tabstop>
   <tabstop>chInvCB_1</tabstop>
@@ -9840,6 +9839,7 @@
   <tabstop>cswitchFunc_12</tabstop>
   <tabstop>a1UnitCB</tabstop>
   <tabstop>a1RatioSB</tabstop>
+  <tabstop>a1CalibSB</tabstop>
   <tabstop>a11LevelCB</tabstop>
   <tabstop>a11GreaterCB</tabstop>
   <tabstop>a11ValueSB</tabstop>
@@ -9848,6 +9848,7 @@
   <tabstop>a12ValueSB</tabstop>
   <tabstop>a2UnitCB</tabstop>
   <tabstop>a2RatioSB</tabstop>
+  <tabstop>a2CalibSB</tabstop>
   <tabstop>a21LevelCB</tabstop>
   <tabstop>a21GreaterCB</tabstop>
   <tabstop>a21ValueSB</tabstop>
@@ -9855,6 +9856,115 @@
   <tabstop>a22GreaterCB</tabstop>
   <tabstop>a22ValueSB</tabstop>
   <tabstop>templateList</tabstop>
+  <tabstop>timer1ValTE</tabstop>
+  <tabstop>timer1DirCB</tabstop>
+  <tabstop>timer1ModeCB</tabstop>
+  <tabstop>timer2ValTE</tabstop>
+  <tabstop>timer2DirCB</tabstop>
+  <tabstop>timer2ModeCB</tabstop>
+  <tabstop>extendedTrimsChkB</tabstop>
+  <tabstop>TrainerChkB</tabstop>
+  <tabstop>T2ThrTrgChkB</tabstop>
+  <tabstop>ppmFrameLengthDSB</tabstop>
+  <tabstop>DSM_Type</tabstop>
+  <tabstop>pxxRxNum</tabstop>
+  <tabstop>phase0Name</tabstop>
+  <tabstop>phase0FadeIn</tabstop>
+  <tabstop>phase0FadeOut</tabstop>
+  <tabstop>phase0Trim2Slider</tabstop>
+  <tabstop>phase0Trim3Slider</tabstop>
+  <tabstop>phase0Trim4Slider</tabstop>
+  <tabstop>phase0Trim1Slider</tabstop>
+  <tabstop>phase0Trim1</tabstop>
+  <tabstop>phase0Trim2</tabstop>
+  <tabstop>phase0Trim4</tabstop>
+  <tabstop>phase0Trim3</tabstop>
+  <tabstop>phase1Name</tabstop>
+  <tabstop>phase1Switch</tabstop>
+  <tabstop>phase1FadeIn</tabstop>
+  <tabstop>phase1FadeOut</tabstop>
+  <tabstop>phase1Trim2Slider</tabstop>
+  <tabstop>phase1Trim3Slider</tabstop>
+  <tabstop>phase1Trim4Slider</tabstop>
+  <tabstop>phase1Trim1Slider</tabstop>
+  <tabstop>phase1Trim2Use</tabstop>
+  <tabstop>phase1Trim2Value</tabstop>
+  <tabstop>phase1Trim1Use</tabstop>
+  <tabstop>phase1Trim1Value</tabstop>
+  <tabstop>phase1Trim3Use</tabstop>
+  <tabstop>phase1Trim3Value</tabstop>
+  <tabstop>phase1Trim4Use</tabstop>
+  <tabstop>phase1Trim4Value</tabstop>
+  <tabstop>phase2Name</tabstop>
+  <tabstop>phase2Switch</tabstop>
+  <tabstop>phase2FadeIn</tabstop>
+  <tabstop>phase2FadeOut</tabstop>
+  <tabstop>phase2Trim2Slider</tabstop>
+  <tabstop>phase2Trim3Slider</tabstop>
+  <tabstop>phase2Trim4Slider</tabstop>
+  <tabstop>phase2Trim1Slider</tabstop>
+  <tabstop>phase2Trim2Use</tabstop>
+  <tabstop>phase2Trim2Value</tabstop>
+  <tabstop>phase2Trim1Use</tabstop>
+  <tabstop>phase2Trim1Value</tabstop>
+  <tabstop>phase2Trim3Use</tabstop>
+  <tabstop>phase2Trim3Value</tabstop>
+  <tabstop>phase2Trim4Use</tabstop>
+  <tabstop>phase2Trim4Value</tabstop>
+  <tabstop>phase3Name</tabstop>
+  <tabstop>phase3Switch</tabstop>
+  <tabstop>phase3FadeIn</tabstop>
+  <tabstop>phase3FadeOut</tabstop>
+  <tabstop>phase3Trim2Slider</tabstop>
+  <tabstop>phase3Trim3Slider</tabstop>
+  <tabstop>phase3Trim4Slider</tabstop>
+  <tabstop>phase3Trim1Slider</tabstop>
+  <tabstop>phase3Trim2Use</tabstop>
+  <tabstop>phase3Trim2Value</tabstop>
+  <tabstop>phase3Trim1Use</tabstop>
+  <tabstop>phase3Trim1Value</tabstop>
+  <tabstop>phase3Trim3Use</tabstop>
+  <tabstop>phase3Trim3Value</tabstop>
+  <tabstop>phase3Trim4Use</tabstop>
+  <tabstop>phase3Trim4Value</tabstop>
+  <tabstop>phase4Name</tabstop>
+  <tabstop>phase4Switch</tabstop>
+  <tabstop>phase4FadeIn</tabstop>
+  <tabstop>phase4FadeOut</tabstop>
+  <tabstop>phase4Trim2Slider</tabstop>
+  <tabstop>phase4Trim3Slider</tabstop>
+  <tabstop>phase4Trim4Slider</tabstop>
+  <tabstop>phase4Trim1Slider</tabstop>
+  <tabstop>phase4Trim2Use</tabstop>
+  <tabstop>phase4Trim2Value</tabstop>
+  <tabstop>phase4Trim1Use</tabstop>
+  <tabstop>phase4Trim1Value</tabstop>
+  <tabstop>phase4Trim3Use</tabstop>
+  <tabstop>phase4Trim3Value</tabstop>
+  <tabstop>phase4Trim4Use</tabstop>
+  <tabstop>phase4Trim4Value</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>plotCB_1</tabstop>
+  <tabstop>plotCB_2</tabstop>
+  <tabstop>plotCB_3</tabstop>
+  <tabstop>plotCB_4</tabstop>
+  <tabstop>plotCB_5</tabstop>
+  <tabstop>plotCB_6</tabstop>
+  <tabstop>plotCB_7</tabstop>
+  <tabstop>plotCB_8</tabstop>
+  <tabstop>plotCB_9</tabstop>
+  <tabstop>plotCB_10</tabstop>
+  <tabstop>plotCB_11</tabstop>
+  <tabstop>plotCB_12</tabstop>
+  <tabstop>plotCB_13</tabstop>
+  <tabstop>plotCB_14</tabstop>
+  <tabstop>plotCB_15</tabstop>
+  <tabstop>plotCB_16</tabstop>
+  <tabstop>clearMixesPB</tabstop>
+  <tabstop>scrollArea_5</tabstop>
+  <tabstop>offsetDSB_1</tabstop>
+  <tabstop>frskyProtoCB</tabstop>
  </tabstops>
  <resources>
   <include location="companion9x.qrc"/>
