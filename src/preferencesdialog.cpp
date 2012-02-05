@@ -108,13 +108,17 @@ void preferencesDialog::firmwareChanged(bool state)
 {
   if (updateLock)
     return;
-
+  QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
   FirmwareInfo * fw = getFirmware(state);
   QString stamp;
   stamp.append(fw->stamp);
   ui->fw_dnld->setEnabled(fw->url);
   populateFirmwareOptions(fw);
-
+  if (cb) {
+    if (cb->isChecked()!=state) {
+      cb->setChecked(state);
+    }
+  }
   QSettings settings("companion9x", "companion9x");
   settings.beginGroup("FwRevisions");
   int fwrev = settings.value(fw->id, -1).toInt();
