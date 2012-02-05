@@ -77,6 +77,8 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
   Open9xFrSkyRSSIAlarm frskyRssiAlarms[2];
+  uint8_t   speakerPitch;
+  uint8_t   hapticStrength;
 
   operator GeneralSettings();
   t_Open9xGeneralData_v201() { memset(this, 0, sizeof(t_Open9xGeneralData_v201)); }

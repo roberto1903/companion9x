@@ -130,6 +130,8 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
   // TODO frskyRssiAlarms[2];
+  speakerPitch = c9x.speakerPitch;
+  hapticStrength = c9x.hapticStrength;
 }
 
 Open9xGeneralData_v201::operator GeneralSettings ()
@@ -167,6 +169,8 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   // TODO frskyRssiAlarms[2];
+  result.speakerPitch = speakerPitch;
+  result.hapticStrength = hapticStrength;
   return result;
 }
 
