@@ -40,10 +40,13 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     
     if (!GetEepromInterface()->getCapability(SoundMod)) {
       ui->soundModeCB->setDisabled(true);
-      ui->speakerPitchSB->setDisabled(true);
       ui->label_soundMode->hide();
-      ui->label_speakerPitch->hide();
       ui->soundModeCB->hide();
+    }
+
+    if (!GetEepromInterface()->getCapability(SoundPitch)) {
+      ui->speakerPitchSB->setDisabled(true);
+      ui->label_speakerPitch->hide();
       ui->speakerPitchSB->hide();
     }
     

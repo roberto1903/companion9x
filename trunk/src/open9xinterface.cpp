@@ -239,7 +239,7 @@ int Open9xInterface::getCapability(const Capability capability)
       return O9X_NUM_FSW;
     case Outputs:
       return 16;
-    case SoundMod:
+    case SoundPitch:
       return 1;
     case Haptic:
       return 1;
