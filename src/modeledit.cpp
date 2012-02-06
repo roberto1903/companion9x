@@ -56,7 +56,15 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   tabLimits();
   tabCurves();
   tabCustomSwitches();
-  tabSafetySwitches();
+  int telTab=10;
+  if (GetEepromInterface()->getCapability(FSSwitch) ) {
+    ui->tabSafetySwitches->setDisabled(true);
+    ui->tabWidget->removeTab(8);
+    telTab=9;
+  } 
+  else {
+    tabSafetySwitches();
+  }
   tabFunctionSwitches();
   tabTemplates();
   tabHeli();
@@ -65,8 +73,9 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   }
   else {
     ui->tabTelemetry->setDisabled(true);
-    ui->tabWidget->removeTab(10);
+    ui->tabWidget->removeTab(telTab);
   }
+
   ui->tabWidget->setCurrentIndex(0);
   ui->curvePreview->setMinimumWidth(260);
   ui->curvePreview->setMinimumHeight(260);
