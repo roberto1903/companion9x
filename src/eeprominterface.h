@@ -547,6 +547,7 @@ enum Capability {
  ExtendedTrims,
  Simulation,
  SoundMod,
+ SoundPitch,
  Haptic,
  BandgapMeasure,
  PotScrolling,

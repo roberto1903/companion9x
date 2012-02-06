@@ -213,6 +213,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case SoundMod:
       return 1;
+    case SoundPitch:
+      return 1;
     case Haptic:
       return 1;
     case OwnerName:
