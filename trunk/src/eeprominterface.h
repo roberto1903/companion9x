@@ -560,6 +560,7 @@ enum Capability {
  BLonStickMove,
  DSM2Indexes,
  Telemetry,
+ FSSwitch,
 };
 
 class SimulatorInterface;
