@@ -659,8 +659,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>804</width>
-              <height>386</height>
+              <width>244</width>
+              <height>177</height>
              </rect>
             </property>
             <attribute name="label">
@@ -912,8 +912,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>290</height>
+              <width>306</width>
+              <height>287</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1315,8 +1315,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1686,8 +1686,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2057,8 +2057,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2464,8 +2464,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>522</height>
+            <width>284</width>
+            <height>444</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3713,8 +3713,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>493</height>
+            <width>682</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8627,8 +8627,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>522</height>
+            <width>140</width>
+            <height>284</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -8820,7 +8820,7 @@
       <attribute name="title">
        <string>Function switches</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_fswitches" columnstretch="0,1,1">
+      <layout class="QGridLayout" name="gridLayout_fswitches" columnstretch="0,1,1,1" columnminimumwidth="0,0,0,0">
        <item row="13" column="0">
         <widget class="QLabel" name="label_4">
          <property name="frameShape">
@@ -9065,6 +9065,19 @@
          </property>
          <property name="text">
           <string>FSwitch16</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="fswFuncLabel_4">
+         <property name="frameShape">
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>Param</string>
          </property>
         </widget>
        </item>

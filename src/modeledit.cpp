@@ -878,7 +878,15 @@ void ModelEdit::tabFunctionSwitches()
         connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
         ui->gridLayout_fswitches->addWidget(fswtchFunc[i],i+1,2);
         populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
-
+        
+        fswtchParam[i] = new QSpinBox(this);
+        fswtchParam[i]->setMaximum(125);
+        fswtchParam[i]->setMinimum(-125);
+        fswtchParam[i]->setAccelerated(true);
+        connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+        ui->gridLayout_fswitches->addWidget(fswtchParam[i],i+1,3);
+        fswtchParam[i]->setValue(g_model.funcSw[i].param);
+        
         if (!GetEepromInterface()->getCapability(FuncSwitches)) {
           fswtchFunc[i]->setDisabled(true);
           if (i != 0) {
@@ -985,6 +993,7 @@ void ModelEdit::functionSwitchesEdited()
     for(int i=0; i<NUM_FSW; i++) {
       g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
+      g_model.funcSw[i].param = fswtchParam[i]->value();
     }
 
     updateSettings();
