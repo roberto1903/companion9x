@@ -56,10 +56,15 @@
 #include "hexinterface.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
-
+#ifdef __APPLE__
+#define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x-macosx.stamp"
+#define C9X_INSTALLER "/Companion9x_Mac_V_%1.dmg"
+#define C9X_URL   "http://companion9x.googlecode.com/files/Companion9x_Mac_V_%1.dmg"
+#else
 #define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x.stamp"
 #define C9X_INSTALLER "/companion9xInstall_v%1.exe"
 #define C9X_URL   "http://companion9x.googlecode.com/files/companion9xInstall_v%1.exe"
+#endif
 
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
@@ -149,7 +154,7 @@ void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
         }
     }
     
-#if defined WIN32 || !defined __GNUC__
+#if defined __APPLE__ || defined WIN32 || !defined __GNUC__
     if (checkCompanion9x || ignoreSettings)
     {
         manager2 = new QNetworkAccessManager(this);
