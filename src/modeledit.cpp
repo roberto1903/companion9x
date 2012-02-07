@@ -886,6 +886,13 @@ void ModelEdit::tabFunctionSwitches()
         connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
         ui->gridLayout_fswitches->addWidget(fswtchParam[i],i+1,3);
         fswtchParam[i]->setValue(g_model.funcSw[i].param);
+        if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
+          fswtchParam[i]->hide();
+        }
+        if ( fswtchFunc[i]->currentIndex()>15) {
+          fswtchParam[i]->hide();
+        }
+
         
         if (!GetEepromInterface()->getCapability(FuncSwitches)) {
           fswtchFunc[i]->setDisabled(true);
@@ -994,6 +1001,11 @@ void ModelEdit::functionSwitchesEdited()
       g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = fswtchParam[i]->value();
+      if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
+        fswtchParam[i]->hide();
+      } else {
+        fswtchParam[i]->show();
+      }
     }
 
     updateSettings();
