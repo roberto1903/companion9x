@@ -9705,7 +9705,11 @@
            <widget class="QComboBox" name="telBarCB_1"/>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="telMinSB_1"/>
+           <widget class="QSpinBox" name="telMinSB_1">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_53">
@@ -9731,13 +9735,24 @@
            </widget>
           </item>
           <item row="1" column="3">
-           <widget class="QSpinBox" name="telMaxSB_1"/>
+           <widget class="QSpinBox" name="telMaxSB_1">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
           </item>
           <item row="2" column="0">
            <widget class="QComboBox" name="telBarCB_2"/>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="telMinSB_2"/>
+           <widget class="QSpinBox" name="telMinSB_2">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="label_58">
@@ -9763,13 +9778,24 @@
            </widget>
           </item>
           <item row="2" column="3">
-           <widget class="QSpinBox" name="telMaxSB_2"/>
+           <widget class="QSpinBox" name="telMaxSB_2">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QComboBox" name="telBarCB_3"/>
           </item>
           <item row="3" column="1">
-           <widget class="QSpinBox" name="telMinSB_3"/>
+           <widget class="QSpinBox" name="telMinSB_3">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
            <widget class="QLabel" name="label_59">
@@ -9795,13 +9821,24 @@
            </widget>
           </item>
           <item row="3" column="3">
-           <widget class="QSpinBox" name="telMaxSB_3"/>
+           <widget class="QSpinBox" name="telMaxSB_3">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QComboBox" name="telBarCB_4"/>
           </item>
           <item row="4" column="1">
-           <widget class="QSpinBox" name="telMinSB_4"/>
+           <widget class="QSpinBox" name="telMinSB_4">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
           </item>
           <item row="4" column="2">
            <widget class="QLabel" name="label_60">
@@ -9827,7 +9864,14 @@
            </widget>
           </item>
           <item row="4" column="3">
-           <widget class="QSpinBox" name="telMaxSB_4"/>
+           <widget class="QSpinBox" name="telMaxSB_4">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
           </item>
          </layout>
          <zorder>label_53</zorder>
