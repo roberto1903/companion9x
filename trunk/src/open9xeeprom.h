@@ -236,6 +236,21 @@ PACK(typedef struct t_Open9xFrSkyChannelData_v203 {
 
 }) Open9xFrSkyChannelData_v203;
 
+PACK(typedef struct t_Open9xFrSkyChannelData_v204 {
+  uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   type;               // channel unit (0=volts, ...)
+  uint8_t   alarms_value[2];    // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   alarms_level:4;
+  uint8_t   alarms_greater:2;   // 0=LT(<), 1=GT(>)
+  uint8_t   multiplier:2;
+  int8_t    offset;             // calibration offset. Signed 0.1V steps. EG. -4 to substract 0.4V
+
+  operator FrSkyChannelData();
+  t_Open9xFrSkyChannelData_v204() { memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v204)); }
+  t_Open9xFrSkyChannelData_v204(FrSkyChannelData&);
+
+}) Open9xFrSkyChannelData_v204;
+
 PACK(typedef struct t_Open9xFrSkyData_v201 {
 	Open9xFrSkyChannelData_v201 channels[2];
 
@@ -264,6 +279,29 @@ PACK(typedef struct t_Open9xFrSkyData_v203 {
         t_Open9xFrSkyData_v203(FrSkyData&);
 
 }) Open9xFrSkyData_v203;
+
+PACK(typedef struct t_Open9xFrSkyBarData_v204 {
+  uint16_t   source:4;
+  uint16_t   barMin:6;           // minimum for bar display
+  uint16_t   barMax:6;           // ditto for max display (would usually = ratio)
+
+  operator FrSkyBarData();
+  t_Open9xFrSkyBarData_v204() { memset(this, 0, sizeof(t_Open9xFrSkyBarData_v204)); }
+  t_Open9xFrSkyBarData_v204(FrSkyBarData&);
+
+}) Open9xFrSkyBarData_v204;
+
+PACK(typedef struct t_Open9xFrSkyData_v204 {
+  Open9xFrSkyChannelData_v204 channels[2];
+  uint16_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint16_t imperial:1;
+  uint16_t spare:4;
+  Open9xFrSkyBarData_v204 bars[4];
+
+  operator FrSkyData();
+  t_Open9xFrSkyData_v204() { memset(this, 0, sizeof(t_Open9xFrSkyData_v204)); }
+  t_Open9xFrSkyData_v204(FrSkyData&);
+}) Open9xFrSkyData_v204;
 
 PACK(typedef struct t_Open9xSwashRingData { // Swash Ring data
   uint8_t   invertELE:1;
@@ -427,6 +465,41 @@ PACK(typedef struct t_Open9xModelData_v203 {
   t_Open9xModelData_v203(ModelData&);
 
 }) Open9xModelData_v203;
+
+PACK(typedef struct t_Open9xModelData_v204 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timer1;
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   spare1:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xTimerData_v202 timer2;
+  Open9xMixData_v203 mixData[MAX_MIXERS];
+  Open9xLimitData limitData[NUM_CHNOUT];
+  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  int8_t    curves5[MAX_CURVE5][5];
+  int8_t    curves9[MAX_CURVE9][9];
+  Open9xCustomSwData  customSw[O9X_NUM_CSW];
+  Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xSwashRingData swashR;
+  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xFrSkyData_v204 frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+
+  operator ModelData();
+  t_Open9xModelData_v204() { memset(this, 0, sizeof(t_Open9xModelData_v204)); }
+  t_Open9xModelData_v204(ModelData&);
+
+}) Open9xModelData_v204;
 
 #define LAST_OPEN9X_EEPROM_VER 203
 typedef Open9xModelData_v203   Open9xModelData;

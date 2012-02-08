@@ -516,6 +516,35 @@ t_Open9xFrSkyChannelData_v203::operator FrSkyChannelData ()
   return c9x;
 }
 
+t_Open9xFrSkyChannelData_v204::t_Open9xFrSkyChannelData_v204(FrSkyChannelData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v204));
+  ratio = c9x.ratio;
+  type = c9x.type;
+  alarms_value[0] = c9x.alarms[0].value;
+  alarms_value[1] = c9x.alarms[1].value;
+  alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
+  alarms_greater = (c9x.alarms[1].greater << 1) + c9x.alarms[0].greater;
+  // TODO multiplier = c9x.multiplier;
+  offset = c9x.offset;
+}
+
+t_Open9xFrSkyChannelData_v204::operator FrSkyChannelData ()
+{
+  FrSkyChannelData c9x;
+  c9x.ratio = ratio;
+  c9x.type = type;
+  c9x.alarms[0].value = alarms_value[0];
+  c9x.alarms[0].level =  alarms_level & 3;
+  c9x.alarms[0].greater = alarms_greater & 1;
+  c9x.alarms[1].value = alarms_value[1];
+  c9x.alarms[1].level =  (alarms_level >> 2) & 3;
+  c9x.alarms[1].greater = (alarms_greater >> 1) & 1;
+  // TODO c9x.multiplier = multiplier;
+  c9x.offset = offset;
+  return c9x;
+}
+
 t_Open9xFrSkyData_v201::operator FrSkyData ()
 {
   FrSkyData c9x;
@@ -556,6 +585,46 @@ t_Open9xFrSkyData_v203::t_Open9xFrSkyData_v203(FrSkyData &c9x)
   channels[0] = c9x.channels[0];
   channels[1] = c9x.channels[1];
   usrProto = c9x.usrProto;
+}
+
+t_Open9xFrSkyBarData_v204::operator FrSkyBarData ()
+{
+  FrSkyBarData c9x;
+  c9x.source = source;
+  c9x.barMin = barMin;
+  c9x.barMax = barMax;
+  return c9x;
+}
+
+t_Open9xFrSkyBarData_v204::t_Open9xFrSkyBarData_v204(FrSkyBarData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xFrSkyBarData_v204));
+  source = c9x.source;
+  barMin = c9x.barMin;
+  barMax = c9x.barMax;
+}
+
+t_Open9xFrSkyData_v204::operator FrSkyData ()
+{
+  FrSkyData c9x;
+  c9x.channels[0] = channels[0];
+  c9x.channels[1] = channels[1];
+  c9x.usrProto = usrProto;
+  c9x.imperial = imperial;
+  for (int i=0; i<4; i++)
+    c9x.bars[i] = bars[i];
+  return c9x;
+}
+
+t_Open9xFrSkyData_v204::t_Open9xFrSkyData_v204(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xFrSkyData_v204));
+  channels[0] = c9x.channels[0];
+  channels[1] = c9x.channels[1];
+  usrProto = c9x.usrProto;
+  imperial = c9x.imperial;
+  for (int i=0; i<4; i++)
+    bars[i] = c9x.bars[i];
 }
 
 t_Open9xModelData_v201::operator ModelData ()
@@ -919,3 +988,154 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
   }
 }
 
+t_Open9xModelData_v204::operator ModelData ()
+{
+  ModelData c9x;
+  c9x.used = true;
+  getEEPROMZString(c9x.name, name, sizeof(name));
+  c9x.timers[0] = timer1;
+  c9x.timers[1] = timer2;
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = PPM16;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
+  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.thrTrim = thrTrim;
+  c9x.trimInc = trimInc;
+  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.beepANACenter = beepANACenter;
+  c9x.pulsePol = pulsePol;
+  c9x.extendedLimits = extendedLimits;
+  c9x.extendedTrims = extendedTrims;
+  for (int i=0; i<MAX_PHASES; i++) {
+    c9x.phaseData[i] = phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (c9x.phaseData[i].trim[j] > 500) {
+        c9x.phaseData[i].trimRef[j] = c9x.phaseData[i].trim[j] - 501;
+        if (c9x.phaseData[i].trimRef[j] >= i)
+          c9x.phaseData[i].trimRef[j] += 1;
+        c9x.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<MAX_MIXERS; i++)
+    c9x.mixData[i] = mixData[i];
+  for (int i=0; i<NUM_CHNOUT; i++)
+    c9x.limitData[i] = limitData[i];
+  for (int i=0; i<G9X_MAX_EXPOS; i++)
+    c9x.expoData[i] = expoData[i];
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      c9x.curves5[i][j] = curves5[i][j];
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      c9x.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<O9X_NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];
+  for (int i=0; i<O9X_NUM_FSW; i++)
+    c9x.funcSw[i] = funcSw[i];
+  c9x.swashRingData = swashR;
+  c9x.frsky = frsky;
+  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.thrTraceSrc = thrTraceSrc;
+  c9x.modelId = modelId;
+  return c9x;
+}
+
+t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
+{
+  if (c9x.used) {
+    setEEPROMZString(name, c9x.name, sizeof(name));
+    timer1 = c9x.timers[0];
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PXX:
+        protocol = 1;
+        break;
+      case DSM2:
+        protocol = 2;
+        break;
+      case PPM16:
+        protocol = 3;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
+    thrTrim = c9x.thrTrim;
+    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    trimInc = c9x.trimInc;
+    spare1 = 0;
+    pulsePol = c9x.pulsePol;
+    extendedLimits = c9x.extendedLimits;
+    extendedTrims = c9x.extendedTrims;
+    spare2 = 0;
+    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    beepANACenter = c9x.beepANACenter;
+    timer2 = c9x.timers[1];
+    for (int i=0; i<MAX_MIXERS; i++)
+      mixData[i] = c9x.mixData[i];
+    for (int i=0; i<NUM_CHNOUT; i++)
+      limitData[i] = c9x.limitData[i];
+    for (int i=0; i<G9X_MAX_EXPOS; i++)
+      expoData[i] = c9x.expoData[i];
+    if (c9x.expoData[G9X_MAX_EXPOS].mode)
+      EEPROMWarnings += QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
+    for (int i=0; i<MAX_CURVE5; i++)
+      for (int j=0; j<5; j++)
+        curves5[i][j] = c9x.curves5[i][j];
+    for (int i=0; i<MAX_CURVE9; i++)
+      for (int j=0; j<9; j++)
+        curves9[i][j] = c9x.curves9[i][j];
+    for (int i=0; i<O9X_NUM_CSW; i++)
+      customSw[i] = c9x.customSw[i];
+    int count = 0;
+    for (int i=0; i<O9X_NUM_FSW; i++) {
+      if (c9x.funcSw[i].swtch)
+        funcSw[count++] = c9x.funcSw[i];
+    }
+    for (int i=0; i<NUM_CHNOUT; i++) {
+      if (c9x.safetySw[i].swtch) {
+        funcSw[count].func = i;
+        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].param = c9x.safetySw[i].val;
+        count++;
+      }
+    }
+
+    swashR = c9x.swashRingData;
+    for (int i=0; i<MAX_PHASES; i++) {
+      PhaseData phase = c9x.phaseData[i];
+      for (int j=0; j<NUM_STICKS; j++) {
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
+        }
+        else {
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
+        }
+      }
+      phaseData[i] = phase;
+    }
+    frsky = c9x.frsky;
+    ppmFrameLength = c9x.ppmFrameLength;
+    thrTraceSrc = c9x.thrTraceSrc;
+    modelId = c9x.modelId;
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xModelData_v204));
+  }
+}
