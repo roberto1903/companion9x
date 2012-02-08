@@ -1019,7 +1019,7 @@ void ModelEdit::tabTelemetry()
   const char *  StdTelBar[]={"---","A1","A2"};
   const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell"};
   telemetryLock=true;
-  FrSky settings
+  //frsky Settings
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
   }
