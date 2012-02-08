@@ -1016,8 +1016,10 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
+  const char *  StdTelBar[]={"---","A1","A2"};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell"};
   telemetryLock=true;
-  //FrSky settings
+  FrSky settings
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
   }
@@ -1078,6 +1080,26 @@ void ModelEdit::tabTelemetry()
     ui->label_A2Max->setText(tr("Range"));
   }
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
+  for(int i=0; i<3;i++) {
+    ui->telBarCB_1->addItem(StdTelBar[i]);
+    ui->telBarCB_2->addItem(StdTelBar[i]);
+    ui->telBarCB_3->addItem(StdTelBar[i]);
+    ui->telBarCB_4->addItem(StdTelBar[i]);
+  }
+  if (g_model.frsky.usrProto!=0) {
+    ui->telBarCB_1->addItem("Alt");
+    ui->telBarCB_2->addItem("Alt");
+    ui->telBarCB_3->addItem("Alt");
+    ui->telBarCB_4->addItem("Alt");    
+  }
+  if (g_model.frsky.usrProto==1) {
+    for(int i=0; i<6;i++) {
+      ui->telBarCB_1->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_2->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_3->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_4->addItem(FrSkyTelBar[i]);
+    }
+  }
   telemetryLock=false;
 }
 
@@ -1513,7 +1535,98 @@ void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
 
 void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
 {
+  if (telemetryLock) return;
+  const char *  StdTelBar[]={"---","A1","A2"};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell"};
+  int b1=ui->telBarCB_1->currentIndex();
+  int b2=ui->telBarCB_2->currentIndex();
+  int b3=ui->telBarCB_3->currentIndex();
+  int b4=ui->telBarCB_4->currentIndex();
+  telemetryLock=true;
   g_model.frsky.usrProto=index;
+  ui->telBarCB_1->clear();
+  ui->telBarCB_1->clear();
+  ui->telBarCB_1->clear();
+  ui->telBarCB_1->clear();
+  for(int i=0; i<3;i++) {
+    ui->telBarCB_1->addItem(StdTelBar[i]);
+    ui->telBarCB_2->addItem(StdTelBar[i]);
+    ui->telBarCB_3->addItem(StdTelBar[i]);
+    ui->telBarCB_4->addItem(StdTelBar[i]);
+  }
+  if (index!=0) {
+    ui->telBarCB_1->addItem("Alt");
+    ui->telBarCB_2->addItem("Alt");
+    ui->telBarCB_3->addItem("Alt");
+    ui->telBarCB_4->addItem("Alt");
+  }
+  if (index==1) {
+    for(int i=0; i<6;i++) {
+      ui->telBarCB_1->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_2->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_3->addItem(FrSkyTelBar[i]);
+      ui->telBarCB_4->addItem(FrSkyTelBar[i]);
+    }
+  }
+  telemetryLock=false;
+  if (index==0) {
+    if (b1>2) {
+      ui->telBarCB_1->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_1->setCurrentIndex(b1);
+    }
+    if (b2>2) {
+      ui->telBarCB_2->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_2->setCurrentIndex(b2);
+    }
+    if (b3>2) {
+      ui->telBarCB_3->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_3->setCurrentIndex(b3);
+    }
+    if (b4>2) {
+      ui->telBarCB_4->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_4->setCurrentIndex(b4);
+    }
+  } 
+  else if (index==2) {
+    if (b1>3) {
+      ui->telBarCB_1->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_1->setCurrentIndex(b1);
+    }
+    if (b2>3) {
+      ui->telBarCB_2->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_2->setCurrentIndex(b2);
+    }
+    if (b3>3) {
+      ui->telBarCB_3->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_3->setCurrentIndex(b3);
+    }
+    if (b4>3) {
+      ui->telBarCB_4->setCurrentIndex(0);
+    }
+    else {
+      ui->telBarCB_4->setCurrentIndex(b4);
+    }
+  }
+  else {
+      ui->telBarCB_1->setCurrentIndex(b1);
+      ui->telBarCB_2->setCurrentIndex(b2);
+      ui->telBarCB_3->setCurrentIndex(b3);
+      ui->telBarCB_4->setCurrentIndex(b4);    
+  }
   updateSettings();
 }
 
@@ -1746,6 +1859,62 @@ void ModelEdit::on_a22ValueSB_editingFinished()
     g_model.frsky.channels[1].alarms[1].value = round((a22value-((a2calib*a2ratio)/255))/a2ratio*255);
   }
   updateA2Fields();
+  updateSettings();
+}
+
+void ModelEdit::on_telBarCB_1_currentIndexChanged(int index) {
+  if (telemetryLock) return;
+  g_model.frsky.bars[0].source=index;
+  if (index==0) {
+    telemetryLock=true;
+    g_model.frsky.bars[0].barMin=0;
+    g_model.frsky.bars[0].barMax=0;
+    ui->telMinSB_1->setValue(0);
+    ui->telMaxSB_1->setValue(0);
+    telemetryLock=false;
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_telBarCB_2_currentIndexChanged(int index) {
+  if (telemetryLock) return;
+  g_model.frsky.bars[1].source=index;
+  if (index==0) {
+    telemetryLock=true;
+    g_model.frsky.bars[1].barMin=0;
+    g_model.frsky.bars[1].barMax=0;
+    ui->telMinSB_2->setValue(0);
+    ui->telMaxSB_2->setValue(0);
+    telemetryLock=false;
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_telBarCB_3_currentIndexChanged(int index) {
+  if (telemetryLock) return;
+  g_model.frsky.bars[2].source=index;
+  if (index==0) {
+    telemetryLock=true;
+    g_model.frsky.bars[2].barMin=0;
+    g_model.frsky.bars[2].barMax=0;
+    ui->telMinSB_3->setValue(0);
+    ui->telMaxSB_3->setValue(0);
+    telemetryLock=false;
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_telBarCB_4_currentIndexChanged(int index) {
+  if (telemetryLock) return;
+  g_model.frsky.bars[3].source=index;
+  if (index==0) {
+    telemetryLock=true;
+    g_model.frsky.bars[3].barMin=0;
+    g_model.frsky.bars[3].barMax=0;
+    ui->telMinSB_3->setValue(0);
+    ui->telMaxSB_3->setValue(0);
+    telemetryLock=false;
+  }
   updateSettings();
 }
 

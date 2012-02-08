@@ -217,6 +217,10 @@ private slots:
     void on_a22GreaterCB_currentIndexChanged(int index);
     void on_a22ValueSB_editingFinished();
     void on_frskyProtoCB_currentIndexChanged(int index);
+    void on_telBarCB_1_currentIndexChanged(int index);
+    void on_telBarCB_2_currentIndexChanged(int index);
+    void on_telBarCB_3_currentIndexChanged(int index);
+    void on_telBarCB_4_currentIndexChanged(int index);
     void on_numChannelsSB_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);

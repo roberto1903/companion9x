@@ -255,6 +255,10 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASOFFSET|TM_HASWSHH;
+    case TelemetryBars:
+      return 1;
+    case TelemetryUnits:
+      return 1;
     default:
       return 0;
   }
