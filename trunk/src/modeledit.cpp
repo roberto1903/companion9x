@@ -1018,6 +1018,12 @@ void ModelEdit::tabTelemetry()
   float a2ratio;
   telemetryLock=true;
   //FrSky settings
+  if (!GetEepromInterface()->getCapability(TelemetryBars)) {
+    ui->groupBox_4->hide();
+  }
+  if (!GetEepromInterface()->getCapability(TelemetryUnits)) {
+    ui->frskyUnitsCB->setDisabled(true);
+  }
   if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
     ui->frskyProtoCB->addItem(tr("Winged Shadow How High"));
   }
@@ -2292,6 +2298,7 @@ void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
   }
 }
 #include <iostream>
+#include <QtGui/qwidget.h>
 void ModelEdit::pasteExpoMimeData(const QMimeData * mimeData, int destIdx)
 {
   if (mimeData->hasFormat("application/x-companion9x-expo")) {
