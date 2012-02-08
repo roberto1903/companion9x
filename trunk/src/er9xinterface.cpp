@@ -235,6 +235,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASWSHH;
+    case TelemetryUnits:
+      return 1;
     default:
       return 0;
   }
