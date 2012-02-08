@@ -127,6 +127,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       // telemetry offset raised to -127 +127
       // function switches now have a param on 4 bits
       break;
+    case 204:
+      // telemetry changes (bars)
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
@@ -150,6 +153,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     }
     else if (version == 203) {
       loadModel<Open9xModelData_v203>(radioData.models[i], 0 /*no more stick mode messed*/);
+    }
+    else if (version == 204) {
+      loadModel<Open9xModelData_v204>(radioData.models[i], 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -185,6 +191,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
           break;
         case 203:
           result = saveModel<Open9xModelData_v203>(i, radioData.models[i]);
+          break;
+        case 204:
+          result = saveModel<Open9xModelData_v204>(i, radioData.models[i]);
           break;
       }
       if (!result)
