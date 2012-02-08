@@ -1564,9 +1564,9 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   telemetryLock=true;
   g_model.frsky.usrProto=index;
   ui->telBarCB_1->clear();
-  ui->telBarCB_1->clear();
-  ui->telBarCB_1->clear();
-  ui->telBarCB_1->clear();
+  ui->telBarCB_2->clear();
+  ui->telBarCB_3->clear();
+  ui->telBarCB_4->clear();
   for(int i=0; i<3;i++) {
     ui->telBarCB_1->addItem(StdTelBar[i]);
     ui->telBarCB_2->addItem(StdTelBar[i]);
@@ -1899,12 +1899,10 @@ void ModelEdit::on_telBarCB_2_currentIndexChanged(int index) {
   if (telemetryLock) return;
   g_model.frsky.bars[1].source=index;
   if (index==0) {
-    telemetryLock=true;
     g_model.frsky.bars[1].barMin=0;
     g_model.frsky.bars[1].barMax=0;
     ui->telMinSB_2->setValue(0);
     ui->telMaxSB_2->setValue(0);
-    telemetryLock=false;
   }
   updateSettings();
 }
@@ -1913,12 +1911,10 @@ void ModelEdit::on_telBarCB_3_currentIndexChanged(int index) {
   if (telemetryLock) return;
   g_model.frsky.bars[2].source=index;
   if (index==0) {
-    telemetryLock=true;
     g_model.frsky.bars[2].barMin=0;
     g_model.frsky.bars[2].barMax=0;
     ui->telMinSB_3->setValue(0);
     ui->telMaxSB_3->setValue(0);
-    telemetryLock=false;
   }
   updateSettings();
 }
@@ -1927,12 +1923,10 @@ void ModelEdit::on_telBarCB_4_currentIndexChanged(int index) {
   if (telemetryLock) return;
   g_model.frsky.bars[3].source=index;
   if (index==0) {
-    telemetryLock=true;
     g_model.frsky.bars[3].barMin=0;
     g_model.frsky.bars[3].barMax=0;
     ui->telMinSB_3->setValue(0);
     ui->telMaxSB_3->setValue(0);
-    telemetryLock=false;
   }
   updateSettings();
 }
