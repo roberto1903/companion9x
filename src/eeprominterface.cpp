@@ -131,7 +131,9 @@ class Open9xFirmware: public FirmwareInfo
     }
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (revision == 0 || revision >= 184)
+      if (revision == 0 || revision >= 203)
+        return 204;
+      else if (revision >= 184)
         return 203;
       else
         return 202;
