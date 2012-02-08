@@ -1080,6 +1080,7 @@ void ModelEdit::tabTelemetry()
     ui->label_A2Max->setText(tr("Range"));
   }
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
+  ui->frskyProtoCB->setCurrentIndex(g_model.frsky.imperial);
   for(int i=0; i<3;i++) {
     ui->telBarCB_1->addItem(StdTelBar[i]);
     ui->telBarCB_2->addItem(StdTelBar[i]);
@@ -1100,6 +1101,18 @@ void ModelEdit::tabTelemetry()
       ui->telBarCB_4->addItem(FrSkyTelBar[i]);
     }
   }
+  ui->telBarCB_1->setCurrentIndex(g_model.frsky.bars[0].source);
+  ui->telBarCB_2->setCurrentIndex(g_model.frsky.bars[1].source);
+  ui->telBarCB_3->setCurrentIndex(g_model.frsky.bars[2].source);
+  ui->telBarCB_4->setCurrentIndex(g_model.frsky.bars[3].source);
+  ui->telMinSB_1->setValue((g_model.frsky.bars[0].barMin*100)/63);
+  ui->telMinSB_2->setValue((g_model.frsky.bars[1].barMin*100)/63);
+  ui->telMinSB_3->setValue((g_model.frsky.bars[2].barMin*100)/63);
+  ui->telMinSB_4->setValue((g_model.frsky.bars[3].barMin*100)/63);
+  ui->telMaxSB_1->setValue((g_model.frsky.bars[0].barMax*100)/63);
+  ui->telMaxSB_2->setValue((g_model.frsky.bars[1].barMax*100)/63);
+  ui->telMaxSB_3->setValue((g_model.frsky.bars[2].barMax*100)/63);
+  ui->telMaxSB_4->setValue((g_model.frsky.bars[3].barMax*100)/63);
   telemetryLock=false;
 }
 
@@ -1533,6 +1546,12 @@ void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
   updateSettings();
 }
 
+void ModelEdit::on_frskyUnitsCB_currentIndexChanged(int index)
+{
+  g_model.frsky.imperial=index;
+  updateSettings();
+}
+
 void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
 {
   if (telemetryLock) return;
@@ -1915,6 +1934,106 @@ void ModelEdit::on_telBarCB_4_currentIndexChanged(int index) {
     ui->telMaxSB_3->setValue(0);
     telemetryLock=false;
   }
+  updateSettings();
+}
+
+void ModelEdit::on_telMinSB_1_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[0].barMin=round((ui->telMinSB_1->value()*63)/100);
+  ui->telMinSB_1->setValue((g_model.frsky.bars[0].barMin*100)/63);
+  if (ui->telMaxSB_1->value()<ui->telMinSB_1->value()) {
+    g_model.frsky.bars[0].barMax=g_model.frsky.bars[0].barMin+1;
+    ui->telMaxSB_1->setValue((g_model.frsky.bars[0].barMax*100)/63);
+  }
+  ui->telMaxSB_1->setMinimum(((g_model.frsky.bars[0].barMin+1)*100)/63);
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMinSB_2_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[1].barMin=round((ui->telMinSB_2->value()*63)/100);
+  ui->telMinSB_2->setValue((g_model.frsky.bars[1].barMin*100)/63);
+  if (ui->telMaxSB_2->value()<ui->telMinSB_2->value()) {
+    g_model.frsky.bars[1].barMax=g_model.frsky.bars[1].barMin+1;
+    ui->telMaxSB_2->setValue((g_model.frsky.bars[1].barMax*100)/63);
+  }
+  ui->telMaxSB_2->setMinimum(((g_model.frsky.bars[1].barMin+1)*100)/63);
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMinSB_3_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[2].barMin=round((ui->telMinSB_3->value()*63)/100);
+  ui->telMinSB_3->setValue((g_model.frsky.bars[2].barMin*100)/63);
+  if (ui->telMaxSB_3->value()<ui->telMinSB_3->value()) {
+    g_model.frsky.bars[2].barMax=g_model.frsky.bars[2].barMin+1;
+    ui->telMaxSB_3->setValue((g_model.frsky.bars[2].barMax*100)/63);
+  }
+  ui->telMaxSB_3->setMinimum(((g_model.frsky.bars[2].barMin+1)*100)/63); 
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMinSB_4_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[3].barMin=round((ui->telMinSB_4->value()*63)/100);
+  ui->telMinSB_4->setValue((g_model.frsky.bars[3].barMin*100)/63);
+  if (ui->telMaxSB_4->value()<ui->telMinSB_4->value()) {
+    g_model.frsky.bars[3].barMax=g_model.frsky.bars[3].barMin+1;
+    ui->telMaxSB_4->setValue((g_model.frsky.bars[3].barMax*100)/63);
+  }
+  ui->telMaxSB_4->setMinimum(((g_model.frsky.bars[3].barMin+1)*100)/63);  
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMaxSB_1_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[0].barMax=round((ui->telMaxSB_1->value()*63)/100);
+  ui->telMaxSB_1->setValue((g_model.frsky.bars[0].barMax*100)/63);
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMaxSB_2_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[1].barMax=round((ui->telMaxSB_2->value()*63)/100);
+  ui->telMaxSB_2->setValue((g_model.frsky.bars[1].barMax*100)/63);
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMaxSB_3_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[2].barMax=round((ui->telMaxSB_3->value()*63)/100);
+  ui->telMaxSB_3->setValue((g_model.frsky.bars[2].barMax*100)/63);
+  telemetryLock=false;
+  updateSettings();
+}
+
+void ModelEdit::on_telMaxSB_4_editingFinished()
+{
+  if (telemetryLock) return;
+  telemetryLock=true;
+  g_model.frsky.bars[3].barMax=round((ui->telMaxSB_4->value()*63)/100);
+  ui->telMaxSB_4->setValue((g_model.frsky.bars[3].barMax*100)/63);
+  telemetryLock=false;
   updateSettings();
 }
 
