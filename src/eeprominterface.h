@@ -419,12 +419,23 @@ class FrSkyChannelData {
     void clear() { memset(this, 0, sizeof(FrSkyChannelData)); }
 };
 
+class FrSkyBarData {
+  public:
+    FrSkyBarData() { clear(); }
+    uint16_t   source;
+    uint16_t   barMin;           // minimum for bar display
+    uint16_t   barMax;           // ditto for max display (would usually = ratio)
+    void clear() { memset(this, 0, sizeof(FrSkyBarData)); }
+};
+
 class FrSkyData {
   public:
     FrSkyData() { clear(); }
     FrSkyChannelData channels[2];
     uint8_t usrProto;
-
+    uint8_t imperial;
+    FrSkyBarData bars[4];
+    
     void clear() { memset(this, 0, sizeof(FrSkyData)); }
 };
 
@@ -560,6 +571,8 @@ enum Capability {
  BLonStickMove,
  DSM2Indexes,
  Telemetry,
+ TelemetryUnits,
+ TelemetryBars,
  FSSwitch,
 };
 
