@@ -202,7 +202,11 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
             QSettings settings("companion9x", "companion9x");
 
             if (ret == QMessageBox::Yes) {
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
+#if defined __APPLE__          
+              QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version));
+#else            
+              QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
+#
                 if (!fileName.isEmpty()) {
                   settings.setValue("lastUpdatesDir", QFileInfo(fileName).dir().absolutePath());
                   downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
