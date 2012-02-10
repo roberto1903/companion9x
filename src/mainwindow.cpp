@@ -58,8 +58,8 @@
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 #ifdef __APPLE__
 #define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x-macosx.stamp"
-#define C9X_INSTALLER "/Companion9xMacUpdate.%1.pkg"
-#define C9X_URL   "http://companion9x.googlecode.com/files/Companion9xMacUpdate.%1.pkg"
+#define C9X_INSTALLER "/Companion9xMacUpdate.%1.pkg.zip"
+#define C9X_URL   "http://companion9x.googlecode.com/files/Companion9xMacUpdate.%1.pkg.zip"
 #else
 #define C9X_STAMP "http://companion9x.googlecode.com/svn/trunk/companion9x.stamp"
 #define C9X_INSTALLER "/companion9xInstall_v%1.exe"
@@ -206,7 +206,7 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
               QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version));
 #else            
               QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastUpdatesDir").toString() + QString(C9X_INSTALLER).arg(version), tr("Executable (*.exe)"));
-#
+#endif
                 if (!fileName.isEmpty()) {
                   settings.setValue("lastUpdatesDir", QFileInfo(fileName).dir().absolutePath());
                   downloadDialog * dd = new downloadDialog(this, QString(C9X_URL).arg(version), fileName);
