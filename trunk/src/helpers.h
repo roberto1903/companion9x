@@ -24,6 +24,7 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, int stickMode=1, int value=0);
+void populateCSSourceCB(QComboBox *b, int stickMode=1, int value=0);
 void populateCSWCB(QComboBox *b, int value);
 QString getSourceStr(int idx);
 QString getTimerMode(int tm);

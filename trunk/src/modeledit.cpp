@@ -774,7 +774,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
+        populateCSSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
         cswitchOffset[i]->setValue(g_model.customSw[i].v2);
         break;
     case CS_VBOOL:
@@ -788,8 +788,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
-        populateSourceCB(cswitchSource2[i],g_eeGeneral.stickMode,g_model.customSw[i].v2);
+        populateCSSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
+        populateCSSourceCB(cswitchSource2[i],g_eeGeneral.stickMode,g_model.customSw[i].v2);
         break;
     default:
         break;
