@@ -26,3 +26,5 @@ You have to set the location of AVRDude under Burn>Configure
 Thats it have fun
 
 Groot
+
+Autoupdate should work from 0.42 onwards, it will download, just run the installer and you have the new ver
