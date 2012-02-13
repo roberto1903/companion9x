@@ -27,7 +27,7 @@ namespace Gruvin9xStable {
 #include "../gruvin9x-stable/lcd.cpp"
 #include "../gruvin9x-stable/drivers.cpp"
 #include "../gruvin9x-stable/simpgmspace.cpp"
-#include "../gruvin9x/templates.cpp"
+#include "../gruvin9x-stable/templates.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
