@@ -38,7 +38,6 @@ GeneralSettings::GeneralSettings()
   memset(this, 0, sizeof(GeneralSettings));
   contrast  = 25;
   vBatWarn  = 90;
-  stickMode =  1;
   for (int i=0; i<7; ++i) {
     calibMid[i]     = 0x200;
     calibSpanNeg[i] = 0x180;
