@@ -128,7 +128,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.disableMemoryWarning = disableMemoryWarning;
   result.beeperVal = beeperVal;
   result.disableAlarmWarning = disableAlarmWarning;
-  result.stickMode = std::max((uint8_t)1, std::min(stickMode, (uint8_t)4));
+  result.stickMode = std::max((uint8_t)0, std::min(stickMode, (uint8_t)3));
   result.inactivityTimer = inactivityTimer + 10;
   result.throttleReversed = throttleReversed;
   result.minuteBeep = minuteBeep;
