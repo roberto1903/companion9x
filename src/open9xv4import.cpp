@@ -5,6 +5,11 @@
 #define NAVIGATION_RE1
 #define HELI
 #define TEMPLATES
+#define SPLASH
+#define FRSKY
+#define FRSKY_HUB
+#define WS_HOW_HIGH
+#define DECIMALS_DISPLAYED
 
 #undef min
 #undef max
@@ -35,6 +40,7 @@ namespace Open9xV4 {
 #include "../open9x/templates.cpp"
 #include "../open9x/o9xstrings.cpp"
 #include "../open9x/beeper.cpp"
+#include "../open9x/frsky.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
 
