@@ -634,18 +634,25 @@ void printDialog::printFrSky()
 {
     int tc=0;
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append("<tr><td colspan=9><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
-    str.append("<tr><td colspan=3 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
-    str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Ratio")+"</b></td>");
+    str.append("<tr><td colspan=10><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
+    str.append("<tr><td colspan=4 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
+    str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Scale")+"</b></td><td align=\"center\"><b>"+tr("Offset")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
     str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
     FrSkyData *fd=&g_model->frsky;
     for (int i=0; i<2; i++) {
         if (fd->channels[i].ratio!=0) {
             tc++;
-            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><font color=green>"+FrSkyUnits(fd->channels[i].type)+"</font></td><td align=\"center\"><font color=green>"+QString::number(fd->channels[i].ratio,10)+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[0].level)+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+((fd->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;")+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(fd->channels[i].alarms[0].value,10)+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[1].level)+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+((fd->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;")+"</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(fd->channels[i].alarms[1].value,10)+"</font></td></tr>");
+            float ratio=(fd->channels[i].ratio/(fd->channels[i].type==0 ?10.0:1));
+            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><font color=green>"+FrSkyUnits(fd->channels[i].type)+"</font></td><td align=\"center\"><font color=green>"+QString::number(ratio,10,(fd->channels[i].type==0 ? 1:0))+"</font></td><td align=\"center\"><font color=green>"+QString::number((fd->channels[i].offset*ratio)/255,10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[0].level)+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>");
+            str.append((fd->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
+            str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[0].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[1].level)+"</font></td>");
+            str.append("<td width=\"40\" align=\"center\"><font color=green>");
+            str.append((fd->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
+            str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[1].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td></tr>");
         }
     }
     str.append("</table>");
