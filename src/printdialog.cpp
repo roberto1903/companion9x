@@ -113,6 +113,21 @@ QString printDialog::FrSkyAtype(int alarm) {
     }
  }
 
+QString printDialog::FrSkyBlades(int blades) {
+    switch(blades) {
+        case 1:
+            return "3";
+            break;
+        case 2:
+            return "4";
+            break;
+        default:
+            return "2";
+            break;
+    }
+ }
+
+
 QString printDialog::FrSkyUnits(int units) {
     switch(units) {
         case 1:
@@ -124,6 +139,34 @@ QString printDialog::FrSkyUnits(int units) {
     }
  }
 
+QString printDialog::FrSkyProtocol(int protocol) {
+    switch(protocol) {
+        case 2:
+            if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
+                 return tr("Winged Shoadow How High");
+            } else {
+                 return tr("Winged Shoadow How High (not supported)");
+            }
+            break;
+        case 1:
+            return tr("FrSky Sensor Hub");
+            break;
+        default:
+            return tr("None");
+            break;
+    }
+ }
+
+QString printDialog::FrSkyMeasure(int units) {
+    switch(units) {
+        case 1:
+            return tr("Imperial");
+            break;
+        default:
+            return tr("Metric");;
+            break;
+    }
+ }
 
 QString printDialog::getProtocol()
 {
@@ -632,32 +675,49 @@ void printDialog::printFSwitches()
 
 void printDialog::printFrSky()
 {
-    int tc=0;
-    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append("<tr><td colspan=10><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
-    str.append("<tr><td colspan=4 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
-    str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Scale")+"</b></td><td align=\"center\"><b>"+tr("Offset")+"</b></td>");
-    str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
-    str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
-    FrSkyData *fd=&g_model->frsky;
-    for (int i=0; i<2; i++) {
-        if (fd->channels[i].ratio!=0) {
-            tc++;
-            float ratio=(fd->channels[i].ratio/(fd->channels[i].type==0 ?10.0:1));
-            str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><font color=green>"+FrSkyUnits(fd->channels[i].type)+"</font></td><td align=\"center\"><font color=green>"+QString::number(ratio,10,(fd->channels[i].type==0 ? 1:0))+"</font></td><td align=\"center\"><font color=green>"+QString::number((fd->channels[i].offset*ratio)/255,10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[0].level)+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>");
-            str.append((fd->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
-            str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[0].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[1].level)+"</font></td>");
-            str.append("<td width=\"40\" align=\"center\"><font color=green>");
-            str.append((fd->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
-            str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[1].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td></tr>");
-        }
+  int tc=0;
+  const char *  TelBar[]={"---","A1","A2","RPM","Fuel","Temp1","Temp2","Speed","Cell"};
+
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+  str.append("<tr><td colspan=10><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
+  str.append("<tr><td colspan=4 align=\"center\">&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("Alarm 2")+"</b></td></tr>");
+  str.append("<tr><td align=\"center\"><b>"+tr("Analog")+"</b></td><td align=\"center\"><b>"+tr("Unit")+"</b></td><td align=\"center\"><b>"+tr("Scale")+"</b></td><td align=\"center\"><b>"+tr("Offset")+"</b></td>");
+  str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+  str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+  FrSkyData *fd=&g_model->frsky;
+  for (int i=0; i<2; i++) {
+    if (fd->channels[i].ratio!=0) {
+      tc++;
+      float ratio=(fd->channels[i].ratio/(fd->channels[i].type==0 ?10.0:1));
+      str.append("<tr><td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td><td align=\"center\"><font color=green>"+FrSkyUnits(fd->channels[i].type)+"</font></td><td align=\"center\"><font color=green>"+QString::number(ratio,10,(fd->channels[i].type==0 ? 1:0))+"</font></td><td align=\"center\"><font color=green>"+QString::number((fd->channels[i].offset*ratio)/255,10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
+      str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[0].level)+"</font></td>");
+      str.append("<td width=\"40\" align=\"center\"><font color=green>");
+      str.append((fd->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
+      str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[0].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td>");
+      str.append("<td width=\"40\" align=\"center\"><font color=green>"+FrSkyAtype(fd->channels[i].alarms[1].level)+"</font></td>");
+      str.append("<td width=\"40\" align=\"center\"><font color=green>");
+      str.append((fd->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
+      str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[1].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td></tr>");
     }
-    str.append("</table>");
-    if (tc>0)
-        te->append(str);    
+  }
+  str.append("<tr><td colspan=10 align=\"Left\">&nbsp;</td></tr>");
+  str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("Frsky serial protocol")+"</b></td><td colspan=8 align=\"left\">"+FrSkyProtocol(fd->usrProto)+"</td></tr>");
+  str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("System of units")+"</b></td><td colspan=8 align=\"left\">"+FrSkyMeasure(fd->imperial)+"</td></tr>");
+  str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("Propeller blades")+"</b></td><td colspan=8 align=\"left\">"+FrSkyBlades(fd->blades)+"</td></tr>");
+  str.append("<tr><td colspan=10 align=\"Left\">&nbsp;</td></tr></table>");
+  str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=10 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
+  str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td>");
+  str.append("<td colspan=2 align=\"Left\">&nbsp;</td>");
+  str.append("<td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+  for (int i=0; i<2; i++) {
+    str.append("<tr><td  align=\"Center\"><b>"+QString::number(i*2,10)+"</b></td><td  align=\"Center\"><b>"+TelBar[fd->bars[i*2].source]+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i*2].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i*2].barMax*100)/51,10)+"</b></td>");
+    str.append("<td colspan=2 align=\"Left\">&nbsp;</td>");
+    str.append("<td  align=\"Center\"><b>"+QString::number(i*2+1,10)+"</b></td><td  align=\"Center\"><b>"+TelBar[fd->bars[i*2].source]+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i*2+1].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i*2+1].barMin*100)/51,10)+"</b></td></tr>");
+
+  }
+  str.append("</table>");
+  if (tc>0)
+      te->append(str);    
 }
 
 void printDialog::on_printButton_clicked()

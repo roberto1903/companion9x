@@ -46,6 +46,9 @@ private:
     QString getTrimInc();
     QString FrSkyAtype(int alarm);
     QString FrSkyUnits(int units);
+    QString FrSkyProtocol(int protocol);
+    QString FrSkyMeasure(int units);
+    QString FrSkyBlades(int blades);
     
     QTextEdit * te;
     QString curvefile5;

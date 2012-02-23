@@ -1080,7 +1080,8 @@ void ModelEdit::tabTelemetry()
     ui->label_A2Max->setText(tr("Range"));
   }
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
-  ui->frskyProtoCB->setCurrentIndex(g_model.frsky.imperial);
+  ui->frskyUnitsCB->setCurrentIndex(g_model.frsky.imperial);
+  ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
   for(int i=0; i<3;i++) {
     ui->telBarCB_1->addItem(StdTelBar[i]);
     ui->telBarCB_2->addItem(StdTelBar[i]);
@@ -1549,6 +1550,12 @@ void ModelEdit::on_a11LevelCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyUnitsCB_currentIndexChanged(int index)
 {
   g_model.frsky.imperial=index;
+  updateSettings();
+}
+
+void ModelEdit::on_frskyBladesCB_currentIndexChanged(int index)
+{
+  g_model.frsky.blades=index;
   updateSettings();
 }
 
