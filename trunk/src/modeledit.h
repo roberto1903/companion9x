@@ -218,6 +218,7 @@ private slots:
     void on_a22ValueSB_editingFinished();
     void on_frskyProtoCB_currentIndexChanged(int index);
     void on_frskyUnitsCB_currentIndexChanged(int index);
+    void on_frskyBladesCB_currentIndexChanged(int index);
     void on_telBarCB_1_currentIndexChanged(int index);
     void on_telBarCB_2_currentIndexChanged(int index);
     void on_telBarCB_3_currentIndexChanged(int index);

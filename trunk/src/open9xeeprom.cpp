@@ -611,6 +611,7 @@ t_Open9xFrSkyData_v204::operator FrSkyData ()
   c9x.channels[1] = channels[1];
   c9x.usrProto = usrProto;
   c9x.imperial = imperial;
+  c9x.blades = blades;
   for (int i=0; i<4; i++)
     c9x.bars[i] = bars[i];
   return c9x;
@@ -623,6 +624,7 @@ t_Open9xFrSkyData_v204::t_Open9xFrSkyData_v204(FrSkyData &c9x)
   channels[1] = c9x.channels[1];
   usrProto = c9x.usrProto;
   imperial = c9x.imperial;
+  blades = c9x.blades;
   for (int i=0; i<4; i++)
     bars[i] = c9x.bars[i];
 }

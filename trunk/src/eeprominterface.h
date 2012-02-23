@@ -434,6 +434,7 @@ class FrSkyData {
     FrSkyChannelData channels[2];
     uint8_t usrProto;
     uint8_t imperial;
+    uint8_t blades;
     FrSkyBarData bars[4];
     
     void clear() { memset(this, 0, sizeof(FrSkyData)); }
@@ -572,6 +573,7 @@ enum Capability {
  DSM2Indexes,
  Telemetry,
  TelemetryUnits,
+ TelemetryBlades,
  TelemetryBars,
  FSSwitch,
 };

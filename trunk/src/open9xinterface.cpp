@@ -268,6 +268,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case TelemetryUnits:
       return 1;
+    case TelemetryBlades:
+      return 1;
     default:
       return 0;
   }
