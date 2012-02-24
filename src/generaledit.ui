@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>596</width>
-    <height>697</height>
+    <width>572</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,82 @@ These will be relevant for all models in the same EEPROM.</string>
        <string>Setup</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="22" column="3">
+        <widget class="QLabel" name="label_telalarms">
+         <property name="text">
+          <string>Telemetry Alarm Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="22" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QComboBox" name="swtchWarnCB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>Off</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Switches Up</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Switches Down</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="swtchWarnChkB">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="17" column="3">
+        <widget class="QLabel" name="label_hideOwnerName">
+         <property name="text">
+          <string>Show Owner Name on Splash</string>
+         </property>
+        </widget>
+       </item>
+       <item row="21" column="3">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Memory Startup Warning</string>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="1">
+        <widget class="QCheckBox" name="thrrevChkB">
+         <property name="whatsThis">
+          <string>Reverse throttle operation.
+If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
+
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item row="22" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
@@ -52,13 +128,6 @@ These will be relevant for all models in the same EEPROM.</string>
         <widget class="QCheckBox" name="telalarmsChkB">
          <property name="text">
           <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="22" column="3">
-        <widget class="QLabel" name="label_telalarms">
-         <property name="text">
-          <string>Telemetry Alarm Enable</string>
          </property>
         </widget>
        </item>
@@ -248,16 +317,34 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="16" column="1">
-        <widget class="QCheckBox" name="thrrevChkB">
-         <property name="whatsThis">
-          <string>Reverse throttle operation.
-If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
-
-</string>
-         </property>
+       <item row="5" column="1" colspan="4">
+        <widget class="QComboBox" name="hapticmodeCB">
+         <item>
+          <property name="text">
+           <string>Quiet</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Only Alarms</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>No Keys</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="16" column="0">
+        <widget class="QLabel" name="label_7">
          <property name="text">
-          <string/>
+          <string>Reverse Throttle Operation</string>
          </property>
         </widget>
        </item>
@@ -347,13 +434,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="checked">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="17" column="3">
-        <widget class="QLabel" name="label_hideOwnerName">
-         <property name="text">
-          <string>Show Owner Name on Splash</string>
          </property>
         </widget>
        </item>
@@ -545,20 +625,6 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="16" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Reverse Throttle Operation</string>
-         </property>
-        </widget>
-       </item>
-       <item row="16" column="3">
-        <widget class="QLabel" name="label_29">
-         <property name="text">
-          <string>Show Splash Screen on Startup</string>
-         </property>
-        </widget>
-       </item>
        <item row="16" column="4">
         <widget class="QCheckBox" name="splashScreenChkB">
          <property name="maximumSize">
@@ -635,19 +701,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="19" column="1" colspan="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>5</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="20" column="4">
         <widget class="QCheckBox" name="alarmwarnChkB">
          <property name="maximumSize">
@@ -702,26 +755,6 @@ p, li { white-space: pre-wrap; }
           <bool>false</bool>
          </property>
         </widget>
-       </item>
-       <item row="21" column="3">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>Memory Startup Warning</string>
-         </property>
-        </widget>
-       </item>
-       <item row="28" column="2" colspan="3">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>334</width>
-           <height>6</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="21" column="4">
         <widget class="QCheckBox" name="memwarnChkB">
@@ -818,19 +851,6 @@ p, li { white-space: pre-wrap; }
           <string>Channel Order (For Templates)</string>
          </property>
         </widget>
-       </item>
-       <item row="25" column="1" colspan="2">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>5</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="26" column="1" colspan="4">
         <widget class="QComboBox" name="channelorderCB">
@@ -1067,68 +1087,6 @@ Mode 4:
          </item>
         </widget>
        </item>
-       <item row="20" column="3">
-        <widget class="QLabel" name="label_27">
-         <property name="text">
-          <string>Alarm Warning</string>
-         </property>
-        </widget>
-       </item>
-       <item row="22" column="1" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QComboBox" name="swtchWarnCB">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <item>
-            <property name="text">
-             <string>Off</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Switches Up</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Switches Down</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="swtchWarnChkB">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_hapticmode">
          <property name="text">
@@ -1136,29 +1094,64 @@ Mode 4:
          </property>
         </widget>
        </item>
-       <item row="5" column="1" colspan="4">
-        <widget class="QComboBox" name="hapticmodeCB">
-         <item>
-          <property name="text">
-           <string>Quiet</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Only Alarms</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>No Keys</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>All</string>
-          </property>
-         </item>
+       <item row="20" column="3">
+        <widget class="QLabel" name="label_27">
+         <property name="text">
+          <string>Alarm Warning</string>
+         </property>
         </widget>
+       </item>
+       <item row="16" column="3">
+        <widget class="QLabel" name="label_29">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Show Splash Screen on Startup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="19" column="1" colspan="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="28" column="1" colspan="4">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>334</width>
+           <height>6</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="25" column="1">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
