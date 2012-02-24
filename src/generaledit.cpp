@@ -37,7 +37,11 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->hideNameOnSplashChkB->hide();
       ui->label_hideOwnerName->hide();      
     }
-    
+    if (GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
+        ui->tabWidget->removeTab(2);
+    }
+    ui->tabWidget->setCurrentIndex(0);
+
     if (!GetEepromInterface()->getCapability(SoundMod)) {
       ui->soundModeCB->setDisabled(true);
       ui->label_soundMode->hide();
@@ -55,6 +59,18 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->hapticStrengthSB->hide();
       ui->label_hapticStrengthSB->hide();
     } 
+
+    if (!GetEepromInterface()->getCapability(HapticMode)) {
+      ui->hapticmodeCB->setDisabled(true);
+      ui->hapticmodeCB->hide();
+      ui->label_hapticmode->hide();
+    } 
+
+    if (!GetEepromInterface()->getCapability(Beeperlen)) {
+      ui->beeperlenCB->setDisabled(true);
+      ui->beeperlenCB->hide();
+      ui->label_beeperlen->hide();
+    }   
     
     if (!GetEepromInterface()->getCapability(BandgapMeasure)) {
       ui->BandGapEnableChkB->setDisabled(true);
@@ -116,9 +132,16 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swtchWarnCB->hide();
       setSwitchDefPos();
     }
+    if (!GetEepromInterface()->getCapability(TelemetryAlarm)) {
+      ui->telalarmsChkB->hide();
+      ui->label_telalarms->hide();
+    }
+    ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
+    ui->beeperlenCB->setCurrentIndex(g_eeGeneral.beeperLength+2);
     ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
     ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
+    ui->hapticmodeCB->setCurrentIndex(g_eeGeneral.hapticMode+2);
     ui->PotScrollEnableChkB->setChecked(!g_eeGeneral.disablePotScroll);
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
     
@@ -248,6 +271,13 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
     updateSettings();
 }
 
+void GeneralEdit::on_beeperlenCB_currentIndexChanged(int index)
+{
+    g_eeGeneral.beeperLength = index-2;
+    updateSettings();
+}
+
+
 void GeneralEdit::on_backlightautoSB_editingFinished()
 {
     int i = ui->backlightautoSB->value()/5;
@@ -329,6 +359,13 @@ void GeneralEdit::on_beeperCB_currentIndexChanged(int index)
     g_eeGeneral.beeperVal = index;
     updateSettings();
 }
+
+void GeneralEdit::on_hapticmodeCB_currentIndexChanged(int index)
+{
+    g_eeGeneral.hapticMode = index-2;
+    updateSettings();
+}
+
 
 void GeneralEdit::on_channelorderCB_currentIndexChanged(int index)
 {
@@ -693,6 +730,13 @@ void GeneralEdit::on_swTHRChkB_stateChanged(int )
     getGeneralSwitchDefPos(1,ui->swTHRChkB->isChecked());
     updateSettings();
 }
+
+void GeneralEdit::on_telalarmsChkB_stateChanged(int )
+{
+    g_eeGeneral.enableTelemetryAlarm=ui->telalarmsChkB->isChecked();
+    updateSettings();
+}
+
 void GeneralEdit::on_swRUDChkB_stateChanged(int )
 {
     if(switchDefPosEditLock) return;

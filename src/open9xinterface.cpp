@@ -252,6 +252,10 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case Haptic:
       return 1;
+    case HapticMode:
+      return 1;
+    case Beeperlen:
+      return 1;
     case ExtraChannels:
       return 8;
     case ExtendedTrims:
@@ -269,6 +273,10 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryUnits:
       return 1;
     case TelemetryBlades:
+      return 1;
+    case TelemetryRSSIModel:
+      return 1;
+    case TelemetryAlarm:
       return 1;
     default:
       return 0;

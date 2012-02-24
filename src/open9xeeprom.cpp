@@ -124,12 +124,12 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   flashBeep = c9x.flashBeep;
   disableSplashScreen = c9x.disableSplashScreen;
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
-  spare = 0;
+  hapticMode=c9x.hapticMode;
   filterInput = c9x.filterInput;
   lightAutoOff = c9x.lightAutoOff;
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
-  // TODO frskyRssiAlarms[2];
+  beeperLength=c9x.beeperLength;
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
 }
@@ -164,11 +164,12 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.flashBeep = flashBeep;
   result.disableSplashScreen = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
+  result.hapticMode=hapticMode;
   result.filterInput = filterInput;
   result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
-  // TODO frskyRssiAlarms[2];
+  result.beeperLength=beeperLength;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
   return result;
