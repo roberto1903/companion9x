@@ -143,9 +143,9 @@ QString printDialog::FrSkyProtocol(int protocol) {
     switch(protocol) {
         case 2:
             if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
-                 return tr("Winged Shoadow How High");
+                 return tr("Winged Shadow How High");
             } else {
-                 return tr("Winged Shoadow How High (not supported)");
+                 return tr("Winged Shadow How High (not supported)");
             }
             break;
         case 1:
