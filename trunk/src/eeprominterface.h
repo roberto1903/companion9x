@@ -232,6 +232,7 @@ class GeneralSettings {
     uint8_t   beeperVal; // TODO enum
     bool      disableAlarmWarning;
     bool      enableTelemetryAlarm;
+    int8_t    hapticMode;
     uint8_t   stickMode; // TODO enum
     int8_t    inactivityTimer;
     bool      throttleReversed;
@@ -252,6 +253,7 @@ class GeneralSettings {
     uint8_t   lightOnStickMove;
     char      ownerName[10+1];
     uint8_t   switchWarningStates;
+    int8_t    beeperLength;
 };
 
 class ExpoData {
@@ -560,7 +562,9 @@ enum Capability {
  Simulation,
  SoundMod,
  SoundPitch,
+ Beeperlen,
  Haptic,
+ HapticMode,
  BandgapMeasure,
  PotScrolling,
  TrainerSwitch,
@@ -575,6 +579,8 @@ enum Capability {
  TelemetryUnits,
  TelemetryBlades,
  TelemetryBars,
+ TelemetryRSSIModel,
+ TelemetryAlarm,
  FSSwitch,
 };
 

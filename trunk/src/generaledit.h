@@ -36,6 +36,8 @@ private slots:
     void on_speakerPitchSB_editingFinished();
     void on_hapticStrengthSB_editingFinished();
     void on_soundModeCB_currentIndexChanged(int index);
+    void on_beeperlenCB_currentIndexChanged(int index);
+    void on_hapticmodeCB_currentIndexChanged(int index);
     void on_PPM_MultiplierDSB_editingFinished();
     void on_splashScreenChkB_stateChanged(int );
     void on_hideNameOnSplashChkB_stateChanged(int);
@@ -99,6 +101,7 @@ private slots:
     void on_memwarnChkB_stateChanged(int );
     void on_swtchWarnCB_currentIndexChanged(int index);
     void on_swtchWarnChkB_stateChanged(int );
+    void on_telalarmsChkB_stateChanged(int );
     void on_thrwarnChkB_stateChanged(int );
     void on_inputfilterCB_currentIndexChanged(int index);
     void on_thrrevChkB_stateChanged(int );
