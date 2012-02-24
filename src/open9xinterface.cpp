@@ -266,6 +266,12 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case FSSwitch:
       return 1;
+    case HasTTrace:
+      return 1;
+    case NoTimerDirs:
+      return 1;
+    case NoThrExpo:
+      return 1;
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASOFFSET|TM_HASWSHH;
     case TelemetryBars:

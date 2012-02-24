@@ -133,6 +133,7 @@ private slots:
     void on_ppmFrameLengthDSB_editingFinished();
     void on_DSM_Type_currentIndexChanged(int index);
     void on_pxxRxNum_editingFinished();
+    void on_ttraceCB_currentIndexChanged(int index);
     void on_extendedLimitsChkB_toggled(bool checked);
     void on_extendedTrimsChkB_toggled(bool checked);
     void resetCurve();
