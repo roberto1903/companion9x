@@ -198,6 +198,18 @@ void ModelEdit::tabModelEditSetup()
     int sec = g_model.timers[0].val%60;
     ui->timer1ValTE->setTime(QTime(0,min,sec));
     ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
+    if (GetEepromInterface()->getCapability(NoTimerDirs)) {
+      ui->timer1DirCB->hide();
+      ui->timer2DirCB->hide();
+    }
+    if (GetEepromInterface()->getCapability(NoThrExpo)) {
+      ui->label_thrExpo->hide();
+      ui->thrExpoChkB->hide();
+    }
+    if (!GetEepromInterface()->getCapability(HasTTrace)) {
+      ui->label_ttrace->hide();
+      ui->ttraceCB->hide();
+    }
     
     int index=0;
     int selindex;
@@ -240,6 +252,9 @@ void ModelEdit::tabModelEditSetup()
     //pulse polarity
     ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
 
+    //throttle trace
+    ui->ttraceCB->setCurrentIndex(g_model.thrTraceSrc);
+    
     //protocol channels ppm delay (disable if needed)
     ui->ppmDelaySB->setValue(g_model.ppmDelay);
     ui->ppmDelaySB->setEnabled(!g_model.protocol);
@@ -1319,6 +1334,12 @@ void ModelEdit::on_trimIncCB_currentIndexChanged(int index)
 void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 {
     g_model.pulsePol = index;
+    updateSettings();
+}
+
+void ModelEdit::on_ttraceCB_currentIndexChanged(int index)
+{
+    g_model.thrTraceSrc = index;
     updateSettings();
 }
 
