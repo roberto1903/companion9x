@@ -410,6 +410,14 @@ class FrSkyAlarmData {
     void clear() { memset(this, 0, sizeof(FrSkyAlarmData)); }
 };
 
+class FrSkyRSSIAlarm {
+  public:
+    FrSkyRSSIAlarm() { clear(); }
+    uint8_t       level;
+    int8_t        value;
+    void clear() { memset(this, 0, sizeof(FrSkyRSSIAlarm)); }
+};
+
 class FrSkyChannelData {
   public:
     FrSkyChannelData() { clear(); }
@@ -538,7 +546,7 @@ class ModelData {
     
     /* FrSky */    
     FrSkyData frsky;
-
+    FrSkyRSSIAlarm frskyRssiAlarms[2];
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
