@@ -129,6 +129,7 @@ private:
     QStringList GetAvrdudeArguments(const QString &cmd);
 
     bool convertEEPROM(QString backupFile, QString restoreFile, QString flashFile);
+    bool isValidEEPROM(QString eepromfile);
 
     QMdiArea *mdiArea;
     QSignalMapper *windowMapper;
