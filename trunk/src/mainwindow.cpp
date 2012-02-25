@@ -567,7 +567,10 @@ void MainWindow::burnExtenalToEEPROM()
 
         int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
-
+        if (!isValidEEPROM(fileName)) 
+          ret = QMessageBox::question(this, "companion9x", tr("The file %1\nhas not been recognized as a valid EEPROM\nBurn anyway ?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+          if(ret!=QMessageBox::Yes) return;
+          
         QString str = "eeprom:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
         if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
         else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
@@ -577,6 +580,24 @@ void MainWindow::burnExtenalToEEPROM()
         ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
         ad->show();
     }
+}
+
+bool MainWindow::isValidEEPROM(QString eepromfile)
+{
+  uint8_t eeprom[EESIZE_V4];
+  int eeprom_size;
+  QFile file(eepromfile);
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    return false;
+  QTextStream inputStream(&file);
+  eeprom_size = HexInterface(inputStream).load(eeprom);
+  if (!eeprom_size) 
+    return false;
+
+  RadioData radioData;
+  if (!LoadEeprom(radioData, eeprom, eeprom_size))
+    return false;
+  return true;
 }
 
 bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
