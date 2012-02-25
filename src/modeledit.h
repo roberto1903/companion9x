@@ -220,6 +220,10 @@ private slots:
     void on_frskyProtoCB_currentIndexChanged(int index);
     void on_frskyUnitsCB_currentIndexChanged(int index);
     void on_frskyBladesCB_currentIndexChanged(int index);
+    void on_rssiAlarm1CB_currentIndexChanged(int index);
+    void on_rssiAlarm2CB_currentIndexChanged(int index);
+    void on_rssiAlarm1SB_editingFinished();
+    void on_rssiAlarm2SB_editingFinished();
     void on_telBarCB_1_currentIndexChanged(int index);
     void on_telBarCB_2_currentIndexChanged(int index);
     void on_telBarCB_3_currentIndexChanged(int index);
