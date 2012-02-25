@@ -43,6 +43,7 @@ PACK(typedef struct t_Open9xTrainerData_v201 {
 PACK(typedef struct t_Open9xFrSkyRSSIAlarm {
   uint8_t       level:2;
   int8_t        value:6;
+  // TODO....
 }) Open9xFrSkyRSSIAlarm;
 
 PACK(typedef struct t_Open9xGeneralData_v201 {
@@ -497,6 +498,7 @@ PACK(typedef struct t_Open9xModelData_v204 {
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
+  Open9xFrSkyRSSIAlarm frskyRssiAlarms[2];
 
   operator ModelData();
   t_Open9xModelData_v204() { memset(this, 0, sizeof(t_Open9xModelData_v204)); }
