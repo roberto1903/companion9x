@@ -1526,19 +1526,6 @@ QPushButton:checked {
        </item>
        <item row="1" column="0">
         <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>CH1</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QSlider" name="chnout_1">
            <property name="enabled">
@@ -1591,6 +1578,22 @@ border-radius: 4px;
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBelow</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_ch01">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>CH1</string>
            </property>
           </widget>
          </item>
@@ -1694,7 +1697,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="0" column="5">
-          <widget class="QLabel" name="label_12">
+          <widget class="QLabel" name="label_ch09">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -1707,7 +1710,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="label_ch02">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -1874,7 +1877,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QLabel" name="label_13">
+          <widget class="QLabel" name="label_ch10">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -1887,7 +1890,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="label_ch03">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2054,7 +2057,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QLabel" name="label_14">
+          <widget class="QLabel" name="label_ch11">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2067,7 +2070,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="label_ch04">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2234,7 +2237,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="3" column="5">
-          <widget class="QLabel" name="label_15">
+          <widget class="QLabel" name="label_ch12">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2247,7 +2250,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QLabel" name="label_8">
+          <widget class="QLabel" name="label_ch05">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2408,7 +2411,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="4" column="5">
-          <widget class="QLabel" name="label_16">
+          <widget class="QLabel" name="label_ch13">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2421,7 +2424,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QLabel" name="label_9">
+          <widget class="QLabel" name="label_ch06">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2430,61 +2433,6 @@ border-radius: 4px;
            </property>
            <property name="text">
             <string>CH6</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QSlider" name="chnout_6">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>18</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QSlider::sub-page:horizontal:disabled {
-border-color: #999;
-}
-
-QSlider::add-page:horizontal:disabled {
-border-color: #999;
-}
-
-QSlider::handle:horizontal:disabled {
-background: #0000CC;
-border: 1px solid #aaa;
-border-radius: 4px;
-}</string>
-           </property>
-           <property name="minimum">
-            <number>-1024</number>
-           </property>
-           <property name="maximum">
-            <number>1024</number>
-           </property>
-           <property name="pageStep">
-            <number>128</number>
-           </property>
-           <property name="tracking">
-            <bool>false</bool>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="invertedAppearance">
-            <bool>false</bool>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBelow</enum>
            </property>
           </widget>
          </item>
@@ -2588,7 +2536,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="5" column="5">
-          <widget class="QLabel" name="label_17">
+          <widget class="QLabel" name="label_ch14">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2601,7 +2549,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QLabel" name="label_10">
+          <widget class="QLabel" name="label_ch07">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2768,7 +2716,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="6" column="5">
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="label_ch15">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2781,7 +2729,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QLabel" name="label_11">
+          <widget class="QLabel" name="label_ch08">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2948,7 +2896,7 @@ border-radius: 4px;
           </widget>
          </item>
          <item row="7" column="5">
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="label_ch16">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -2957,6 +2905,61 @@ border-radius: 4px;
            </property>
            <property name="text">
             <string>CH16</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QSlider" name="chnout_6">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>18</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider::sub-page:horizontal:disabled {
+border-color: #999;
+}
+
+QSlider::add-page:horizontal:disabled {
+border-color: #999;
+}
+
+QSlider::handle:horizontal:disabled {
+background: #0000CC;
+border: 1px solid #aaa;
+border-radius: 4px;
+}</string>
+           </property>
+           <property name="minimum">
+            <number>-1024</number>
+           </property>
+           <property name="maximum">
+            <number>1024</number>
+           </property>
+           <property name="pageStep">
+            <number>128</number>
+           </property>
+           <property name="tracking">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksBelow</enum>
            </property>
           </widget>
          </item>
