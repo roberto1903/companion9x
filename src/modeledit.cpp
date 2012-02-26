@@ -1041,7 +1041,7 @@ void ModelEdit::tabTelemetry()
   ui->rssiAlarm1SB->setValue(g_model.frskyRssiAlarms[0].value+50);
   ui->rssiAlarm2SB->setValue(g_model.frskyRssiAlarms[1].value+50);
   ui->rssiAlarm1CB->setCurrentIndex(g_model.frskyRssiAlarms[0].level);
-  ui->rssiAlarm1CB->setCurrentIndex(g_model.frskyRssiAlarms[1].level);
+  ui->rssiAlarm2CB->setCurrentIndex(g_model.frskyRssiAlarms[1].level);
   
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
