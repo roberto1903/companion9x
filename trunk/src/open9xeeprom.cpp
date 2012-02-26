@@ -796,7 +796,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
         break;
       default:
         protocol = 0;
-        EEPROMWarnings += QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
         // TODO more explicit warning for each protocol
         break;
     }
@@ -818,7 +818,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
     if (c9x.expoData[G9X_MAX_EXPOS].mode)
-      EEPROMWarnings += QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
@@ -938,7 +938,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
         break;
       default:
         protocol = 0;
-        EEPROMWarnings += QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
         // TODO more explicit warning for each protocol
         break;
     }
@@ -960,7 +960,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
     if (c9x.expoData[G9X_MAX_EXPOS].mode)
-      EEPROMWarnings += QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
@@ -1092,7 +1092,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
         break;
       default:
         protocol = 0;
-        EEPROMWarnings += QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
         // TODO more explicit warning for each protocol
         break;
     }
@@ -1114,7 +1114,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
     if (c9x.expoData[G9X_MAX_EXPOS].mode)
-      EEPROMWarnings += QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
