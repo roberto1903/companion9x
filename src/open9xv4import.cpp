@@ -10,6 +10,8 @@
 #define FRSKY_HUB
 #define WS_HOW_HIGH
 #define DECIMALS_DISPLAYED
+#define SPEAKER
+#define HAPTIC
 
 #undef min
 #undef max
