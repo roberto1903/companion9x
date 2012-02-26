@@ -63,7 +63,7 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   view;      //index of subview in main scrren
   uint8_t   disableThrottleWarning:1;
   int8_t    switchWarning:2; // -1=down, 0=off, 1=up
-  int8_t   beeperVal:2;
+  int8_t    beeperMode:2;
   uint8_t   spare:1;
   uint8_t   disableMemoryWarning:1;
   uint8_t   disableAlarmWarning:1;
@@ -75,7 +75,7 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   flashBeep:1;
   uint8_t   disableSplashScreen:1;
   uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
-  int8_t     hapticMode:2;
+  int8_t    hapticMode:2;
   uint8_t   filterInput;
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array

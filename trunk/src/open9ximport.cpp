@@ -7,6 +7,8 @@
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
+#define SPEAKER
+#define HAPTIC
 
 #undef min
 #undef max

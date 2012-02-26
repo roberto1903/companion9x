@@ -112,7 +112,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
-  beeperVal = c9x.beeperVal;
+  beeperMode = c9x.beeperVal-2;
   switchWarning = c9x.switchWarning;
   disableMemoryWarning = c9x.disableMemoryWarning;
   disableAlarmWarning = c9x.disableAlarmWarning;
@@ -153,7 +153,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = switchWarning;
-  result.beeperVal = beeperVal;
+  result.beeperVal = beeperVal+2;
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = stickMode;
