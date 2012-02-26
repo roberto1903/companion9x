@@ -336,4 +336,4 @@ ADD_CUSTOM_TARGET( stamp
 
 ADD_CUSTOM_TARGET( translations
                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                   COMMAND lupdate ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )
+                   COMMAND lupdate-qt4 ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )

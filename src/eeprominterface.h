@@ -412,10 +412,10 @@ class FrSkyAlarmData {
 
 class FrSkyRSSIAlarm {
   public:
-    FrSkyRSSIAlarm() { clear(); }
-    uint8_t       level;
-    int8_t        value;
-    void clear() { memset(this, 0, sizeof(FrSkyRSSIAlarm)); }
+    FrSkyRSSIAlarm() { clear(0); }
+    unsigned int  level;
+    int           value;
+    void clear(unsigned int level) { this->level = level; value = 50;}
 };
 
 class FrSkyChannelData {
@@ -446,8 +446,9 @@ class FrSkyData {
     uint8_t imperial;
     uint8_t blades;
     FrSkyBarData bars[4];
+    FrSkyRSSIAlarm rssiAlarms[2];
     
-    void clear() { memset(this, 0, sizeof(FrSkyData)); }
+    void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2); rssiAlarms[1].clear(3); }
 };
 
 enum TimerMode {
@@ -546,7 +547,7 @@ class ModelData {
     
     /* FrSky */    
     FrSkyData frsky;
-    FrSkyRSSIAlarm frskyRssiAlarms[2];
+
     void clear();
     bool isempty();
     void setDefault(uint8_t id);

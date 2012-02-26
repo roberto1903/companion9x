@@ -1038,10 +1038,10 @@ void ModelEdit::tabTelemetry()
   if (!GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
     ui->RSSIGB->hide();
   }
-  ui->rssiAlarm1SB->setValue(g_model.frskyRssiAlarms[0].value+50);
-  ui->rssiAlarm2SB->setValue(g_model.frskyRssiAlarms[1].value+50);
-  ui->rssiAlarm1CB->setCurrentIndex(g_model.frskyRssiAlarms[0].level);
-  ui->rssiAlarm2CB->setCurrentIndex(g_model.frskyRssiAlarms[1].level);
+  ui->rssiAlarm1SB->setValue(g_model.frsky.rssiAlarms[0].value);
+  ui->rssiAlarm2SB->setValue(g_model.frsky.rssiAlarms[1].value);
+  ui->rssiAlarm1CB->setCurrentIndex(g_model.frsky.rssiAlarms[0].level);
+  ui->rssiAlarm2CB->setCurrentIndex(g_model.frsky.rssiAlarms[1].level);
   
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
@@ -1919,25 +1919,25 @@ void ModelEdit::on_a22ValueSB_editingFinished()
 
 void ModelEdit::on_rssiAlarm1CB_currentIndexChanged(int index) {
   if (telemetryLock) return;
-  g_model.frskyRssiAlarms[0].level=index;
+  g_model.frsky.rssiAlarms[0].level=index;
   updateSettings();
 }
 
 void ModelEdit::on_rssiAlarm2CB_currentIndexChanged(int index) {
   if (telemetryLock) return;
-  g_model.frskyRssiAlarms[1].level=index;
+  g_model.frsky.rssiAlarms[1].level=index;
   updateSettings();
 }
 
 void ModelEdit::on_rssiAlarm1SB_editingFinished() {
   if (telemetryLock) return;
-  g_model.frskyRssiAlarms[0].value=(ui->rssiAlarm1SB->value()-50);
+  g_model.frsky.rssiAlarms[0].value=(ui->rssiAlarm1SB->value()-50);
   updateSettings();  
 }
 
 void ModelEdit::on_rssiAlarm2SB_editingFinished() {
   if (telemetryLock) return;
-  g_model.frskyRssiAlarms[1].value=(ui->rssiAlarm2SB->value()-50);
+  g_model.frsky.rssiAlarms[1].value=(ui->rssiAlarm2SB->value());
   updateSettings();    
 }
 

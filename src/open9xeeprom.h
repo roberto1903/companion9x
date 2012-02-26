@@ -43,10 +43,9 @@ PACK(typedef struct t_Open9xTrainerData_v201 {
 PACK(typedef struct t_Open9xFrSkyRSSIAlarm {
   uint8_t       level:2;
   int8_t        value:6;
-  operator FrSkyRSSIAlarm();
+  FrSkyRSSIAlarm get(int index);
   t_Open9xFrSkyRSSIAlarm() { memset(this, 0, sizeof(t_Open9xFrSkyRSSIAlarm)); }
-  t_Open9xFrSkyRSSIAlarm(FrSkyRSSIAlarm&);
-  // TODO...
+  t_Open9xFrSkyRSSIAlarm(int index, FrSkyRSSIAlarm&);
 }) Open9xFrSkyRSSIAlarm;
 
 PACK(typedef struct t_Open9xGeneralData_v201 {
