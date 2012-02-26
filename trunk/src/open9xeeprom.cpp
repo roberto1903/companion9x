@@ -463,19 +463,19 @@ t_Open9xTimerData_v202::t_Open9xTimerData_v202(TimerData &c9x)
   val = c9x.val;
 }
 
-t_Open9xFrSkyRSSIAlarm::operator FrSkyRSSIAlarm ()
+FrSkyRSSIAlarm t_Open9xFrSkyRSSIAlarm::get(int index)
 {
   FrSkyRSSIAlarm c9x;
-  c9x.level=level;
-  c9x.value=value;
+  c9x.level = (2+index+level) % 4;
+  c9x.value = value + 50;
   return c9x;
 }
 
-t_Open9xFrSkyRSSIAlarm::t_Open9xFrSkyRSSIAlarm(FrSkyRSSIAlarm &c9x)
+t_Open9xFrSkyRSSIAlarm::t_Open9xFrSkyRSSIAlarm(int index, FrSkyRSSIAlarm &c9x)
 {
   memset(this, 0, sizeof(t_Open9xFrSkyRSSIAlarm));
-  level=c9x.level;
-  value=c9x.value;
+  level = (2+c9x.level-index) % 4;
+  value = c9x.value - 50;
 }
 
 t_Open9xFrSkyChannelData_v201::t_Open9xFrSkyChannelData_v201(FrSkyChannelData &c9x)
@@ -1064,11 +1064,11 @@ t_Open9xModelData_v204::operator ModelData ()
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
+  c9x.frsky.rssiAlarms[0] = frskyRssiAlarms[0].get(0);
+  c9x.frsky.rssiAlarms[1] = frskyRssiAlarms[1].get(1);
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
-  c9x.frskyRssiAlarms[0]=frskyRssiAlarms[0];
-  c9x.frskyRssiAlarms[1]=frskyRssiAlarms[1];
   return c9x;
 }
 
@@ -1154,8 +1154,8 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
-    frskyRssiAlarms[0]=c9x.frskyRssiAlarms[0];
-    frskyRssiAlarms[1]=c9x.frskyRssiAlarms[1];
+    frskyRssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.frsky.rssiAlarms[0]);
+    frskyRssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.frsky.rssiAlarms[1]);
   }
   else {
     memset(this, 0, sizeof(t_Open9xModelData_v204));

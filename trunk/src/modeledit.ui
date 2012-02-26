@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>10</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -770,8 +770,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>804</width>
-              <height>377</height>
+              <width>798</width>
+              <height>363</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1023,8 +1023,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>290</height>
+              <width>306</width>
+              <height>292</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1426,8 +1426,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1797,8 +1797,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2168,8 +2168,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>302</width>
-              <height>278</height>
+              <width>306</width>
+              <height>286</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2575,8 +2575,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>513</height>
+            <width>796</width>
+            <height>496</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3824,8 +3824,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>484</height>
+            <width>780</width>
+            <height>556</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8738,8 +8738,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>810</width>
-            <height>513</height>
+            <width>796</width>
+            <height>496</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -9718,64 +9718,10 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>GroupBox</string>
+          <string>RSSI</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_914">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>RSSI Alarm 1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_917">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>RSSI Alarm 2</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
-           <widget class="QSpinBox" name="rssiAlarm1SB">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="suffix">
-             <string/>
-            </property>
-            <property name="minimum">
-             <number>20</number>
-            </property>
-            <property name="maximum">
-             <number>80</number>
-            </property>
-            <property name="singleStep">
-             <number>1</number>
-            </property>
-            <property name="value">
-             <number>50</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
            <widget class="QComboBox" name="rssiAlarm1CB">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -9806,34 +9752,6 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="rssiAlarm2SB">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="suffix">
-             <string/>
-            </property>
-            <property name="minimum">
-             <number>20</number>
-            </property>
-            <property name="maximum">
-             <number>80</number>
-            </property>
-            <property name="singleStep">
-             <number>1</number>
-            </property>
-            <property name="value">
-             <number>50</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
            <widget class="QComboBox" name="rssiAlarm2CB">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -9863,13 +9781,135 @@
             </item>
            </widget>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_914">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Alarm 1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_917">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Alarm 2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QSpinBox" name="rssiAlarm1SB">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="suffix">
+             <string/>
+            </property>
+            <property name="minimum">
+             <number>20</number>
+            </property>
+            <property name="maximum">
+             <number>80</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="value">
+             <number>50</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="rssiAlarm2SB">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="suffix">
+             <string/>
+            </property>
+            <property name="minimum">
+             <number>20</number>
+            </property>
+            <property name="maximum">
+             <number>80</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="value">
+             <number>50</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QComboBox" name="RSSIalarmOp1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>&lt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>&gt;</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QComboBox" name="RSSIalarmOp1_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>&lt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>&gt;</string>
+             </property>
+            </item>
+           </widget>
+          </item>
          </layout>
-         <zorder>label_914</zorder>
-         <zorder>label_917</zorder>
-         <zorder>rssiAlarm1SB</zorder>
-         <zorder>rssiAlarm1CB</zorder>
-         <zorder>rssiAlarm2SB</zorder>
-         <zorder>rssiAlarm2CB</zorder>
         </widget>
        </item>
        <item row="2" column="0">
