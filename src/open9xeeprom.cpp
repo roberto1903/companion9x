@@ -153,7 +153,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = switchWarning;
-  result.beeperVal = beeperVal+2;
+  result.beeperVal = beeperMode+2;
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = stickMode;
