@@ -82,7 +82,14 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   disableThrottleWarning = c9x.disableThrottleWarning;
   disableSwitchWarning = (c9x.switchWarning != -1);
   disableMemoryWarning = c9x.disableMemoryWarning;
-  beeperVal = c9x.beeperVal;
+
+  if (c9x.beeperMode == e_quiet)
+    beeperVal = 0;
+  else if (c9x.beeperMode < e_all)
+    beeperVal = 1;
+  else
+    beeperVal = c9x.beeperLength + 4;
+
   disableAlarmWarning = c9x.disableAlarmWarning;
   stickMode = c9x.stickMode;
   inactivityTimer = c9x.inactivityTimer - 10;
@@ -126,7 +133,20 @@ Er9xGeneral::operator GeneralSettings ()
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = disableSwitchWarning ? 0 : -1;
   result.disableMemoryWarning = disableMemoryWarning;
-  result.beeperVal = beeperVal;
+
+  switch (beeperVal) {
+    case 0:
+      result.beeperMode = e_quiet;
+      break;
+    case 1:
+      result.beeperMode = e_no_keys;
+      break;
+    default:
+      result.beeperMode = e_all;
+      result.beeperLength = beeperVal - 4;
+      break;
+  }
+
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = std::max((uint8_t)0, std::min(stickMode, (uint8_t)3));
   result.inactivityTimer = inactivityTimer + 10;

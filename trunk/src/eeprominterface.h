@@ -212,6 +212,13 @@ class TrainerData {
     void clear() { memset(this, 0, sizeof(TrainerData)); }
 };
 
+enum BeeperMode {
+  e_quiet = -2,
+  e_alarms_only = -1,
+  e_no_keys = 0,
+  e_all = 1
+};
+
 class GeneralSettings {
   public:
     GeneralSettings();
@@ -229,10 +236,10 @@ class GeneralSettings {
     bool      disableThrottleWarning;
     int8_t    switchWarning; // -1=down, 0=off, 1=up
     bool      disableMemoryWarning;
-    uint8_t   beeperVal; // TODO enum
+    BeeperMode beeperMode;
     bool      disableAlarmWarning;
     bool      enableTelemetryAlarm;
-    int8_t    hapticMode;
+    BeeperMode hapticMode;
     uint8_t   stickMode; // TODO enum
     int8_t    inactivityTimer;
     bool      throttleReversed;

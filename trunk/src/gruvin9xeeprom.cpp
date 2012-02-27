@@ -84,7 +84,20 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = switchWarning;
-  result.beeperVal = beeperVal;
+
+  switch (beeperVal) {
+    case 0:
+      result.beeperMode = e_quiet;
+      break;
+    case 1:
+      result.beeperMode = e_no_keys;
+      break;
+    default:
+      result.beeperMode = e_all;
+      result.beeperLength = beeperVal - 4;
+      break;
+  }
+
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = stickMode;
@@ -128,7 +141,12 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
-  beeperVal = c9x.beeperVal;
+  if (c9x.beeperMode == e_quiet)
+    beeperVal = 0;
+  else if (c9x.beeperMode < e_all)
+    beeperVal = 1;
+  else
+    beeperVal = std::min(4, c9x.beeperLength + 4);
   switchWarning = c9x.switchWarning;
   disableMemoryWarning = c9x.disableMemoryWarning;
   disableAlarmWarning = c9x.disableAlarmWarning;
@@ -167,7 +185,7 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = switchWarning;
-  result.beeperVal = beeperVal;
+  result.beeperMode = (BeeperMode)beeperVal;
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
   result.stickMode = stickMode;

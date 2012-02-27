@@ -82,7 +82,16 @@ t_Th9xGeneral::t_Th9xGeneral(GeneralSettings &c9x)
   disableThrottleWarning = c9x.disableThrottleWarning;
   disableSwitchWarning = (c9x.switchWarning != -1);
   disableMemoryWarning = c9x.disableMemoryWarning;
-  beeperVal = c9x.beeperVal;
+
+  if (c9x.beeperMode == e_quiet)
+    beeperVal = 0;
+  else if (c9x.beeperMode < e_all)
+    beeperVal = 1;
+  else if (c9x.beeperLength < 2)
+    beeperVal = 2;
+  else
+    beeperVal = 3;
+
   view = c9x.view;
   stickMode = c9x.stickMode;
   // naviMode
@@ -108,7 +117,20 @@ Th9xGeneral::operator GeneralSettings ()
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = disableSwitchWarning ? 0 : -1;
   result.disableMemoryWarning = disableMemoryWarning;
-  result.beeperVal = beeperVal;
+  switch (beeperVal) {
+    case 0:
+      result.beeperMode = e_quiet;
+      break;
+    case 1:
+      result.beeperMode = e_no_keys;
+      break;
+    case 2:
+      result.beeperMode = e_all;
+      break;
+    case 3:
+      result.beeperMode = e_all;
+      result.beeperLength = 2;
+  }
   result.stickMode = stickMode;
   result.inactivityTimer = inactivityMin;
   result.throttleReversed = thr0pos;

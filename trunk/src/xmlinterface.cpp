@@ -101,7 +101,7 @@ bool XmlInterface::save(RadioData &radioData)
       ws.push_back(warning("silent", false));
     if (!ws.empty())
       gs.warnings(warns);
-    gs.beeper(settings.beeperVal);
+    gs.beeper(settings.beeperMode);
     sticks stks(settings.stickMode);
     if (settings.throttleReversed)
       stks.throttle_reverse(true);
