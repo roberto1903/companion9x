@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>10</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -770,8 +770,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>798</width>
-              <height>363</height>
+              <width>804</width>
+              <height>389</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1024,7 +1024,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>292</height>
+              <height>287</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1427,7 +1427,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1798,7 +1798,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2169,7 +2169,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2575,8 +2575,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>796</width>
-            <height>496</height>
+            <width>810</width>
+            <height>515</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3824,8 +3824,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>780</width>
-            <height>556</height>
+            <width>810</width>
+            <height>486</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8738,8 +8738,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>796</width>
-            <height>496</height>
+            <width>810</width>
+            <height>515</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -9203,8 +9203,17 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QGroupBox" name="groupBox">
+           <property name="autoFillBackground">
+            <bool>true</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="title">
             <string>A1</string>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
@@ -9720,7 +9729,7 @@
          <property name="title">
           <string>RSSI</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_4">
+         <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,1,0,1">
           <item row="0" column="1">
            <widget class="QComboBox" name="rssiAlarm1CB">
             <property name="sizePolicy">
@@ -9789,8 +9798,17 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
-             <string>Alarm 1</string>
+             <string>TX Alarm</string>
             </property>
            </widget>
           </item>
@@ -9802,8 +9820,14 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Alarm 2</string>
+             <string>RX Alarm</string>
             </property>
            </widget>
           </item>
@@ -10005,46 +10029,6 @@
           <string>Telemetry Gauges</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_32" columnstretch="0,0,1,0">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_265">
-            <property name="text">
-             <string>Source</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_266">
-            <property name="text">
-             <string>Min</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_268">
-            <property name="text">
-             <string>Max</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QComboBox" name="telBarCB_1"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="telMinSB_1">
-            <property name="maximum">
-             <number>98</number>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_53">
             <property name="autoFillBackground">
@@ -10065,26 +10049,6 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="telMaxSB_1">
-            <property name="minimum">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QComboBox" name="telBarCB_2"/>
-          </item>
-          <item row="2" column="1">
-           <widget class="QSpinBox" name="telMinSB_2">
-            <property name="maximum">
-             <number>98</number>
             </property>
            </widget>
           </item>
@@ -10111,26 +10075,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
-           <widget class="QSpinBox" name="telMaxSB_2">
-            <property name="minimum">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QComboBox" name="telBarCB_3"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QSpinBox" name="telMinSB_3">
-            <property name="maximum">
-             <number>98</number>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="2">
            <widget class="QLabel" name="label_59">
             <property name="autoFillBackground">
@@ -10151,26 +10095,6 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QSpinBox" name="telMaxSB_3">
-            <property name="minimum">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QComboBox" name="telBarCB_4"/>
-          </item>
-          <item row="4" column="1">
-           <widget class="QSpinBox" name="telMinSB_4">
-            <property name="maximum">
-             <number>98</number>
             </property>
            </widget>
           </item>
@@ -10197,6 +10121,76 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="telBarCB_1"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QComboBox" name="telBarCB_2"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QComboBox" name="telBarCB_3"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QComboBox" name="telBarCB_4"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="telMinSB_1">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="telMinSB_2">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="telMinSB_3">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSpinBox" name="telMinSB_4">
+            <property name="maximum">
+             <number>98</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="telMaxSB_1">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QSpinBox" name="telMaxSB_2">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QSpinBox" name="telMaxSB_3">
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="3">
            <widget class="QSpinBox" name="telMaxSB_4">
             <property name="minimum">
@@ -10204,6 +10198,26 @@
             </property>
             <property name="maximum">
              <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_265">
+            <property name="text">
+             <string>Source</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_266">
+            <property name="text">
+             <string>Min</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -10217,27 +10231,17 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_268">
+            <property name="text">
+             <string>Max</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
          </layout>
-         <zorder>label_53</zorder>
-         <zorder>label_58</zorder>
-         <zorder>label_59</zorder>
-         <zorder>label_60</zorder>
-         <zorder>telBarCB_1</zorder>
-         <zorder>telBarCB_2</zorder>
-         <zorder>telBarCB_3</zorder>
-         <zorder>telBarCB_4</zorder>
-         <zorder>telMinSB_1</zorder>
-         <zorder>telMinSB_2</zorder>
-         <zorder>telMinSB_3</zorder>
-         <zorder>telMinSB_4</zorder>
-         <zorder>telMaxSB_1</zorder>
-         <zorder>telMaxSB_2</zorder>
-         <zorder>telMaxSB_3</zorder>
-         <zorder>telMaxSB_4</zorder>
-         <zorder>label_265</zorder>
-         <zorder>label_266</zorder>
-         <zorder>label_267</zorder>
-         <zorder>label_268</zorder>
         </widget>
        </item>
        <item row="4" column="0">
