@@ -66,12 +66,6 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->label_hapticmode->hide();
     } 
 
-    if (!GetEepromInterface()->getCapability(Beeperlen)) {
-      ui->beeperlenCB->setDisabled(true);
-      ui->beeperlenCB->hide();
-      ui->label_beeperlen->hide();
-    }   
-    
     if (!GetEepromInterface()->getCapability(BandgapMeasure)) {
       ui->BandGapEnableChkB->setDisabled(true);
       ui->BandGapEnableChkB->hide();
@@ -159,7 +153,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
     ui->enableTelemetryAlarmChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
-    ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperVal);
+    ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperMode+2);
     ui->channelorderCB->setCurrentIndex(g_eeGeneral.templateSetup);
     ui->stickmodeCB->setCurrentIndex(g_eeGeneral.stickMode);
 
@@ -356,13 +350,13 @@ void GeneralEdit::on_enableTelemetryAlarmChkB_stateChanged(int )
 
 void GeneralEdit::on_beeperCB_currentIndexChanged(int index)
 {
-    g_eeGeneral.beeperVal = index;
+    g_eeGeneral.beeperMode = (BeeperMode)(index-2);
     updateSettings();
 }
 
 void GeneralEdit::on_hapticmodeCB_currentIndexChanged(int index)
 {
-    g_eeGeneral.hapticMode = index-2;
+    g_eeGeneral.hapticMode = (BeeperMode)(index-2);
     updateSettings();
 }
 

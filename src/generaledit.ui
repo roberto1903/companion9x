@@ -41,6 +41,13 @@ These will be relevant for all models in the same EEPROM.</string>
        <string>Setup</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_hapticStrengthSB">
+         <property name="text">
+          <string>Haptic Strength (spkr only)</string>
+         </property>
+        </widget>
+       </item>
        <item row="22" column="3">
         <widget class="QLabel" name="label_telalarms">
          <property name="text">
@@ -148,83 +155,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>Beeper Mode</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="4">
-        <widget class="QComboBox" name="beeperCB">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Quiet</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>No Keys</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Normal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Long</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Extra Long</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_soundMode">
-         <property name="text">
-          <string>Sound Mode</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="4">
-        <widget class="QComboBox" name="soundModeCB">
-         <item>
-          <property name="text">
-           <string>Beeper</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>PiSpkr</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>PcmWav</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_speakerPitch">
          <property name="text">
@@ -232,8 +162,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </property>
         </widget>
        </item>
-       <item row="4" column="1" colspan="4">
-        <widget class="QSpinBox" name="speakerPitchSB">
+       <item row="14" column="1" colspan="4">
+        <widget class="QSpinBox" name="inactimerSB">
          <property name="toolTip">
           <string/>
          </property>
@@ -241,28 +171,13 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
           <string/>
          </property>
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</string>
          </property>
-         <property name="minimum">
-          <number>1</number>
+         <property name="suffix">
+          <string> min</string>
          </property>
          <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="value">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_hapticStrengthSB">
-         <property name="text">
-          <string>Haptic Strength (spkr only)</string>
+          <number>120</number>
          </property>
         </widget>
        </item>
@@ -554,25 +469,6 @@ This value will be added to the measured battery voltage.  Use this value to cal
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>Inactivity Timer</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="1" colspan="4">
-        <widget class="QSpinBox" name="inactimerSB">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</string>
-         </property>
-         <property name="suffix">
-          <string> min</string>
-         </property>
-         <property name="maximum">
-          <number>120</number>
          </property>
         </widget>
        </item>
@@ -1058,35 +954,6 @@ Mode 4:
          </property>
         </widget>
        </item>
-       <item row="3" column="1" colspan="4">
-        <widget class="QComboBox" name="beeperlenCB">
-         <item>
-          <property name="text">
-           <string>X-Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Normal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Long</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>X-Long</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_hapticmode">
          <property name="text">
@@ -1152,6 +1019,134 @@ Mode 4:
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="4" column="1" colspan="4">
+        <widget class="QSpinBox" name="speakerPitchSB">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Beeper Mode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="4">
+        <widget class="QComboBox" name="beeperlenCB">
+         <item>
+          <property name="text">
+           <string>X-Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Normal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Long</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X-Long</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_soundMode">
+         <property name="text">
+          <string>Sound Mode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="4">
+        <widget class="QComboBox" name="soundModeCB">
+         <item>
+          <property name="text">
+           <string>Beeper</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiSpkr</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PcmWav</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="4">
+        <widget class="QComboBox" name="beeperCB">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="whatsThis">
+          <string>Beeper volume
+
+0 - Quiet.  No beeps at all.
+1 - No Keys.  Normal beeps but menu keys do not beep.
+2 - Normal.
+3 - Loud.
+4 - Extra loud.</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Quiet</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Alarms Only</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>No Keys</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </item>
+        </widget>
        </item>
       </layout>
      </widget>
