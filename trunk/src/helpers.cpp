@@ -109,13 +109,13 @@ QString getSourceStr(int idx) {
     case 0:
       return QObject::tr("----");
     case 1:
-      return QObject::tr("RUD");
+      return QObject::tr("Rud");
     case 2:
-      return QObject::tr("ELE");
+      return QObject::tr("Ele");
     case 3:
-      return QObject::tr("THR");
+      return QObject::tr("Thr");
     case 4:
-      return QObject::tr("AIL");
+      return QObject::tr("Ail");
     case 5:
       return QObject::tr("P1");
     case 6:
@@ -125,81 +125,84 @@ QString getSourceStr(int idx) {
     case 8:
       return QObject::tr("MAX");
     case 9:
-      return QObject::tr("FULL");
-    case 10:
-      return QObject::tr("CYC1");
-    case 11:
-      return QObject::tr("CYC2");
-    case 12:
-      return QObject::tr("CYC3");
-    case 13:
-      return QObject::tr("PPM1");
-    case 14:
-      return QObject::tr("PPM2");
-    case 15:
-      return QObject::tr("PPM3");
-    case 16:
-      return QObject::tr("PPM4");
-    case 17:
-      return QObject::tr("PPM5");
-    case 18:
-      return QObject::tr("PPM6");
+      return QObject::tr("3POS");
     case 19:
-      return QObject::tr("PPM7");
+      return QObject::tr("CYC1");
     case 20:
-      return QObject::tr("PPM8");
+      return QObject::tr("CYC2");
     case 21:
-      return QObject::tr("CH1");
+      return QObject::tr("CYC3");
     case 22:
-      return QObject::tr("CH2");
+      return QObject::tr("PPM1");
     case 23:
-      return QObject::tr("CH3");
+      return QObject::tr("PPM2");
     case 24:
-      return QObject::tr("CH4");
+      return QObject::tr("PPM3");
     case 25:
-      return QObject::tr("CH5");
+      return QObject::tr("PPM4");
     case 26:
-      return QObject::tr("CH6");
+      return QObject::tr("PPM5");
     case 27:
-      return QObject::tr("CH7");
+      return QObject::tr("PPM6");
     case 28:
-      return QObject::tr("CH8");
+      return QObject::tr("PPM7");
     case 29:
-      return QObject::tr("CH9");
+      return QObject::tr("PPM8");
     case 30:
-      return QObject::tr("CH10");
+      return QObject::tr("CH1");
     case 31:
-      return QObject::tr("CH11");
+      return QObject::tr("CH2");
     case 32:
-      return QObject::tr("CH12");
+      return QObject::tr("CH3");
     case 33:
-      return QObject::tr("CH13");
+      return QObject::tr("CH4");
     case 34:
-      return QObject::tr("CH14");
+      return QObject::tr("CH5");
     case 35:
-      return QObject::tr("CH15");
+      return QObject::tr("CH6");
     case 36:
-      return QObject::tr("CH16");
+      return QObject::tr("CH7");
     case 37:
-      return QObject::tr("A1");
+      return QObject::tr("CH8");
     case 38:
-      return QObject::tr("A2");
+      return QObject::tr("CH9");
     case 39:
-      return QObject::tr("ALT");
+      return QObject::tr("CH10");
     case 40:
-      return QObject::tr("RPM");
+      return QObject::tr("CH11");
     case 41:
-      return QObject::tr("FUEL");
+      return QObject::tr("CH12");
     case 42:
-      return QObject::tr("T1");
+      return QObject::tr("CH13");
     case 43:
-      return QObject::tr("T2");
+      return QObject::tr("CH14");
     case 44:
-      return QObject::tr("SPEED");
+      return QObject::tr("CH15");
     case 45:
+      return QObject::tr("CH16");
+    case 46:
+      return QObject::tr("A1");
+    case 47:
+      return QObject::tr("A2");
+    case 48:
+      return QObject::tr("ALT");
+    case 49:
+      return QObject::tr("RPM");
+    case 50:
+      return QObject::tr("FUEL");
+    case 51:
+      return QObject::tr("T1");
+    case 52:
+      return QObject::tr("T2");
+    case 53:
+      return QObject::tr("SPEED");
+    case 54:
       return QObject::tr("CELL");
     default:
-      return "";
+      if (idx >= SRC_STHR && idx <= SRC_SWC)
+        return getSWName(idx - SRC_STHR + 1);
+      else
+        return "";
   }
 }
 

@@ -267,9 +267,20 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
-  srcRaw = c9x.srcRaw;
+
+  if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
+    srcRaw = SRC_3POS; // FULL
+    swtch = c9x.srcRaw - SRC_STHR + 1;
+  }
+  else {
+    swtch = c9x.swtch;
+    if (c9x.srcRaw > SRC_SWC)
+      srcRaw = c9x.srcRaw - 9 /* all switches */;
+    else
+      srcRaw = c9x.srcRaw;
+  }
+
   weight = c9x.weight;
-  swtch = c9x.swtch;
   curve = c9x.curve;
   delayUp = c9x.delayUp;
   delayDown = c9x.delayDown;
@@ -285,9 +296,20 @@ t_Gruvin9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.srcRaw = RawSource(srcRaw);
+
+  if (srcRaw == SRC_3POS) {
+    c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
+    c9x.swtch = 0;
+  }
+  else {
+    c9x.swtch = swtch;
+    if (srcRaw >= SRC_STHR)
+      c9x.srcRaw = RawSource(srcRaw-9);
+    else
+      c9x.srcRaw = RawSource(srcRaw);
+  }
+
   c9x.weight = weight;
-  c9x.swtch = swtch;
   c9x.curve = curve;
   c9x.delayUp = delayUp;
   c9x.delayDown = delayDown;

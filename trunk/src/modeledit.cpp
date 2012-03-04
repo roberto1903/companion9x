@@ -3233,7 +3233,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
         md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
         // gyro gain
-        md=setDest(6);  md->srcRaw=SRC_FULL; md->weight=30; md->swtch=-DSW_GEA;
+        md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
 
         // collective
         md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
@@ -3268,7 +3268,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     if(idx==j++)
     {
         md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
-        md=setDest(16); md->srcRaw=SRC_FULL; md->weight= 110; md->swtch=DSW_SW1;
+        md=setDest(16); md->srcRaw=SRC_SW1; md->weight= 110;
         md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
         md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
 

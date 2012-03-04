@@ -65,6 +65,7 @@ const uint8_t modn12x3[4][4]= {
 
 #define TRIM_ON  0
 #define TRIM_OFF 1
+#define TRIM_OFFSET 2
 
 #define DR_HIGH   0
 #define DR_MID    1
@@ -304,7 +305,21 @@ enum RawSource {
   SRC_P2,
   SRC_P3,
   SRC_MAX,
-  SRC_FULL,
+  SRC_3POS,
+  SRC_STHR,
+  SRC_SRUD,
+  SRC_SELE,
+  SRC_ID0,
+  SRC_ID1,
+  SRC_ID2,
+  SRC_SAIL,
+  SRC_GEA,
+  SRC_TRN,
+  SRC_SW1,
+  SRC_SW9=SRC_SW1+8,
+  SRC_SWA,
+  SRC_SWB,
+  SRC_SWC,
   SRC_CYC1,
   SRC_CYC2,
   SRC_CYC3,
@@ -323,9 +338,10 @@ class MixData {
     MixData() { clear(); }
     uint8_t destCh;            //        1..NUM_CHNOUT
     RawSource srcRaw;
-    int8_t  weight;
+    int     weight;
+    int     differential;
     int8_t  swtch;
-    uint8_t curve;             //0=symmetrisch 1=no neg 2=no pos
+    int     curve;             //0=symmetrisch
     uint8_t delayUp;
     uint8_t delayDown;
     uint8_t speedUp;           // Servogeschwindigkeit aus Tabelle (10ms Cycle)
