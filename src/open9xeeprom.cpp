@@ -240,7 +240,7 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
   else {
     swtch = c9x.swtch;
     if (c9x.srcRaw > SRC_SWC)
-      srcRaw = c9x.srcRaw - 9 /* all switches */;
+      srcRaw = c9x.srcRaw - 21 /* all switches */;
     else
       srcRaw = c9x.srcRaw;
   }
@@ -269,7 +269,7 @@ t_Open9xMixData_v201::operator MixData ()
   else {
     c9x.swtch = swtch;
     if (srcRaw >= SRC_STHR)
-      c9x.srcRaw = RawSource(srcRaw-9);
+      c9x.srcRaw = RawSource(srcRaw + 21);
     else
       c9x.srcRaw = RawSource(srcRaw);
   }
@@ -300,7 +300,7 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
   else {
     swtch = c9x.swtch;
     if (c9x.srcRaw > SRC_SWC)
-      srcRaw = c9x.srcRaw - 9 /* all switches */;
+      srcRaw = c9x.srcRaw - 21 /* all switches */;
     else
       srcRaw = c9x.srcRaw;
   }
@@ -329,7 +329,7 @@ t_Open9xMixData_v203::operator MixData ()
   else {
     c9x.swtch = swtch;
     if (srcRaw >= SRC_STHR)
-      c9x.srcRaw = RawSource(srcRaw-9);
+      c9x.srcRaw = RawSource(srcRaw + 21);
     else
       c9x.srcRaw = RawSource(srcRaw);
   }
