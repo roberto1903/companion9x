@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>218</width>
-    <height>371</height>
+    <height>377</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -93,45 +93,35 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Include Trim</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="trimChkB">
-       <property name="whatsThis">
-        <string>If checked - will add the trim from the source (if available)</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="label_6">
        <property name="text">
         <string>Curve</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <widget class="QComboBox" name="curvesCB">
        <property name="whatsThis">
         <string>The curve used by the mix</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="label_10">
        <property name="text">
         <string>Phase</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="7" column="1">
       <widget class="QComboBox" name="phasesCB">
        <property name="whatsThis">
         <string>Switch used by the mix.
@@ -139,14 +129,14 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="8" column="0">
       <widget class="QLabel" name="label_7">
        <property name="text">
         <string>Switch</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="8" column="1">
       <widget class="QComboBox" name="switchesCB">
        <property name="whatsThis">
         <string>Switch used by the mix.
@@ -154,14 +144,14 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="9" column="0">
       <widget class="QLabel" name="label_8">
        <property name="text">
         <string>Warning</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="1">
+     <item row="9" column="1">
       <widget class="QComboBox" name="warningCB">
        <property name="whatsThis">
         <string>Mixer warning.
@@ -189,14 +179,14 @@ Setting this value will cause a beep to be emmitted when this value is active.</
        </item>
       </widget>
      </item>
-     <item row="9" column="0">
+     <item row="10" column="0">
       <widget class="QLabel" name="label_9">
        <property name="text">
         <string>Multiplex</string>
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
+     <item row="10" column="1">
       <widget class="QComboBox" name="mltpxCB">
        <property name="whatsThis">
         <string>Multiplexer
@@ -224,14 +214,14 @@ This determines how mixer values are added.
        </item>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="label_FMtrim">
        <property name="text">
         <string>Enable FM Trim</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <widget class="QCheckBox" name="FMtrimChkB">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -239,6 +229,25 @@ This determines how mixer values are added.
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="trimCB">
+       <item>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Offset</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

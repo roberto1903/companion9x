@@ -15,7 +15,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
-    ui->trimChkB->setChecked(md->carryTrim==0);
+    ui->trimCB->setCurrentIndex(md->carryTrim);
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
@@ -45,7 +45,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->sourceCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
-    connect(ui->trimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
+    connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -81,7 +81,7 @@ void MixerDialog::valuesChanged()
     md->srcRaw    = RawSource(ui->sourceCB->currentIndex()+1);
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
-    md->carryTrim = ui->trimChkB->checkState() ? 0 : 1;
+    md->carryTrim = ui->trimCB->currentIndex();
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     md->curve     = ui->curvesCB->currentIndex();
     md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
