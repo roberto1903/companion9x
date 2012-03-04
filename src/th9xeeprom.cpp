@@ -208,7 +208,7 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
     srcRaw = c9x.srcRaw - 1;
   else if (c9x.srcRaw == SRC_MAX)
     srcRaw = 10;
-  else if (c9x.srcRaw == SRC_FULL)
+  else if (c9x.srcRaw == SRC_SWC)
     srcRaw = 0; // TODO
   else if (c9x.srcRaw <= SRC_CYC3)
     srcRaw = 0; // TODO

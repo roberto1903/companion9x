@@ -124,13 +124,20 @@ const char * OPEN9X_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x
 class Open9xFirmware: public FirmwareInfo
 {
   public:
+    Open9xFirmware(const char * id, const QString & name, EEPROMInterface * eepromInterface):
+      FirmwareInfo(id, name, eepromInterface)
+    {
+    }
+
     Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, const char * url):
       FirmwareInfo(id, eepromInterface, url, OPEN9X_STAMP)
     {
     }
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (revision == 0 || revision >= 217)
+      if (revision == 0 || revision >= 321)
+        return 205;
+      else if (revision >= 217)
         return 204;
       else if (revision >= 184)
         return 203;
@@ -162,10 +169,10 @@ void RegisterFirmwares()
   firmwares.push_back(new FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4)));
 
-  firmwares.push_back(new FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(EESIZE_STOCK)));
   FirmwareInfo * open9x = firmwares.last();
 #include "open9x-stock-binaries.cpp"
-  firmwares.push_back(new FirmwareInfo("open9x-v4", QObject::tr("open9x for v4 board"), new Open9xInterface(EESIZE_V4)));
+  firmwares.push_back(new Open9xFirmware("open9x-v4", QObject::tr("open9x for v4 board"), new Open9xInterface(EESIZE_V4)));
   open9x = firmwares.last();
 #include "open9x-v4-binaries.cpp"
 
