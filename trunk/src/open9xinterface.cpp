@@ -294,6 +294,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case TelemetryAlarm:
       return 1;
+    case DiffMixers:
+      return 1;
     default:
       return 0;
   }

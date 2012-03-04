@@ -523,6 +523,7 @@ void ModelEdit::tabMixes()
         } else {
                 if(md->sOffset) str += " " + tr("Offset") + QString("(%1%)").arg(md->sOffset);
         }
+        if(md->differential) str += " " + tr("Diff") + QString("(%1)").arg(md->differential);;
         if(md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);

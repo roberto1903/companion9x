@@ -15,6 +15,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
+    ui->DiffMixSB->setValue(md->differential);
     ui->trimCB->setCurrentIndex(md->carryTrim);
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
     if (md->enableFmTrim==1) {
@@ -27,6 +28,10 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         ui->FMtrimChkB->hide();
         ui->label_FMtrim->hide();
         ui->label_4->setText(tr("Offset"));
+    }
+    if (!GetEepromInterface()->getCapability(DiffMixers)) {
+        ui->DiffMIXlabel->hide();
+        ui->DiffMixSB->hide();
     }
     populateCurvesCB(ui->curvesCB,md->curve);
     populatePhasesCB(ui->phasesCB,md->phase);
@@ -45,6 +50,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->sourceCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->DiffMixSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -92,6 +98,7 @@ void MixerDialog::valuesChanged()
     md->delayUp   = ui->delayUpSB->value();
     md->speedDown = ui->slowDownSB->value();
     md->speedUp   = ui->slowUpSB->value();
+    md->differential=ui->DiffMixSB->value();
     if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
     } else {

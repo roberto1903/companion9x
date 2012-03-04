@@ -617,6 +617,7 @@ enum Capability {
  TelemetryRSSIModel,
  TelemetryAlarm,
  FSSwitch,
+ DiffMixers,
 };
 
 class SimulatorInterface;
