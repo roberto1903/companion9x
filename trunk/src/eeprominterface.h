@@ -592,6 +592,7 @@ enum Capability {
  ExtraChannels,
  ExtraInputs,
  ExtendedTrims,
+ HasNegCurves,
  Simulation,
  SoundMod,
  SoundPitch,

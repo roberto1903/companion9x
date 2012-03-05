@@ -268,6 +268,10 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case ExtraChannels:
       return 8;
+    case ExtraInputs:
+      return 1;
+    case HasNegCurves:
+      return 1;
     case ExtendedTrims:
       return 500;
     case Simulation:
