@@ -144,6 +144,11 @@ enum EnumKeys {
 
 #define SW_BASE      SW_ThrCt
 #define SW_BASE_DIAG SW_ThrCt
+
+#define MAX_PSWITCH   (SW_Trainer-SW_ThrCt+1)  // 9 physical switches
+#define MAX_SWITCH    (MAX_PSWITCH+NUM_CSW)
+#define SWITCH_ON     (1+MAX_SWITCH)
+#define SWITCH_OFF    (-SWITCH_ON)
 #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
 #define PHASES_STR     "!FP4!FP3!FP2!FP1!FP0----FP0 FP1 FP2 FP3 FP4 "
@@ -186,14 +191,17 @@ enum EnumKeys {
 #define NUM_CAL_PPM     4
 #define NUM_PPM         8
 
-#define NUM_TELEMETRY 2
-#define TELEMETRY_CHANNELS "AD1 AD2 "
-#define TM_HASTELEMETRY 0x01
-#define TM_HASOFFSET        0x02
-#define TM_HASWSHH           0x04
+#define MAX_TIMERS      2
 
-///number of real output channels (CH1-CH8) plus virtual output channels X1-X4
-#define NUM_XCHNOUT (NUM_CHNOUT) //(NUM_CHNOUT)//+NUM_VIRT)
+#define NUM_TELEMETRY   9
+#define TELEMETRY_CHANNELS  "AD1 AD2 "
+#define TM_HASTELEMETRY     0x01
+#define TM_HASOFFSET        0x02
+#define TM_HASWSHH          0x04
+
+#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+1/*MAX*/+1/*ID3*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT)
+#define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
+#define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
 
 class TrainerMix {
   public:
@@ -330,7 +338,7 @@ enum RawSource {
   SRC_CH13,
   SRC_CH14,
   SRC_CH15,
-  SRC_CH16
+  SRC_CH16,
 };
 
 class MixData {

@@ -104,134 +104,46 @@ QString getTimerMode(int tm) {
 
 }
 
-QString getSourceStr(int idx) {
-  switch (idx) {
-    case 0:
-      return QObject::tr("----");
-    case 1:
-      return QObject::tr("Rud");
-    case 2:
-      return QObject::tr("Ele");
-    case 3:
-      return QObject::tr("Thr");
-    case 4:
-      return QObject::tr("Ail");
-    case 5:
-      return QObject::tr("P1");
-    case 6:
-      return QObject::tr("P2");
-    case 7:
-      return QObject::tr("P3");
-    case 8:
-      return QObject::tr("MAX");
-    case 9:
-      return QObject::tr("3POS");
-    case 31:
-      return QObject::tr("CYC1");
-    case 32:
-      return QObject::tr("CYC2");
-    case 33:
-      return QObject::tr("CYC3");
-    case 34:
-      return QObject::tr("PPM1");
-    case 35:
-      return QObject::tr("PPM2");
-    case 36:
-      return QObject::tr("PPM3");
-    case 37:
-      return QObject::tr("PPM4");
-    case 38:
-      return QObject::tr("PPM5");
-    case 39:
-      return QObject::tr("PPM6");
-    case 40:
-      return QObject::tr("PPM7");
-    case 41:
-      return QObject::tr("PPM8");
-    case 42:
-      return QObject::tr("CH1");
-    case 43:
-      return QObject::tr("CH2");
-    case 44:
-      return QObject::tr("CH3");
-    case 45:
-      return QObject::tr("CH4");
-    case 46:
-      return QObject::tr("CH5");
-    case 47:
-      return QObject::tr("CH6");
-    case 48:
-      return QObject::tr("CH7");
-    case 49:
-      return QObject::tr("CH8");
-    case 50:
-      return QObject::tr("CH9");
-    case 51:
-      return QObject::tr("CH10");
-    case 52:
-      return QObject::tr("CH11");
-    case 53:
-      return QObject::tr("CH12");
-    case 54:
-      return QObject::tr("CH13");
-    case 55:
-      return QObject::tr("CH14");
-    case 56:
-      return QObject::tr("CH15");
-    case 57:
-      return QObject::tr("CH16");
-    case 58:
-      return QObject::tr("A1");
-    case 59:
-      return QObject::tr("A2");
-    case 60:
-      return QObject::tr("ALT");
-    case 61:
-      return QObject::tr("RPM");
-    case 62:
-      return QObject::tr("FUEL");
-    case 63:
-      return QObject::tr("T1");
-    case 64:
-      return QObject::tr("T2");
-    case 65:
-      return QObject::tr("SPEED");
-    case 66:
-      return QObject::tr("CELL");
-    default:
-      if (idx >= SRC_STHR && idx <= SRC_SWC)
-        return getSWName(idx - SRC_STHR + 1);
-      else
-        return "";
-  }
+QString getSourceStr(int idx)
+{
+  QString sorces1[] = { QObject::tr("----"),
+                        QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
+                        QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3"),
+                        QObject::tr("MAX"),
+                        QObject::tr("3POS") };
+  QString sorces2[] = { QObject::tr("CYC1"), QObject::tr("CYC2"), QObject::tr("CYC3"),
+                        QObject::tr("PPM1"), QObject::tr("PPM2"), QObject::tr("PPM3"), QObject::tr("PPM4"), QObject::tr("PPM5"), QObject::tr("PPM6"), QObject::tr("PPM7"), QObject::tr("PPM8"),
+                        QObject::tr("CH1"), QObject::tr("CH2"), QObject::tr("CH3"), QObject::tr("CH4"), QObject::tr("CH5"), QObject::tr("CH6"), QObject::tr("CH7"), QObject::tr("CH8"),
+                        QObject::tr("CH9"), QObject::tr("CH10"), QObject::tr("CH11"), QObject::tr("CH12"), QObject::tr("CH13"), QObject::tr("CH14"), QObject::tr("CH15"), QObject::tr("CH16"),
+                        QObject::tr("Timer1"), QObject::tr("Timer2"),
+                        QObject::tr("A1"), QObject::tr("A2"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("CELL") };
+
+  if (idx < SRC_STHR)
+    return sorces1[idx];
+  else if (idx <= SRC_SWC)
+    return getSWName(idx - SRC_STHR + 1);
+  else
+    return sorces2[idx-SRC_SWC-1];
 }
 
-void populateSourceCB(QComboBox *b, int stickMode, int value) {
+void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
+{
   b->clear();
-  for (int i = 0; i < 58; i++) b->addItem(getSourceStr(i));
+  for (int i=0, count=0; i<=NUM_XCHNMIX+MAX_TIMERS+NUM_TELEMETRY && count<=sourcesCount; i++) {
+    if (switches || i<SRC_STHR || i>SRC_SWC) {
+      b->addItem(getSourceStr(i));
+      count++;
+    }
+  }
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
 
-  for (int i = 0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
+  for (int i=0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
     // Get the index of the value to disable
-    QModelIndex index = b->model()->index(SRC_CH16 - i, 0);
-
-    // This is the effective 'disable' flag
-    QVariant v(0);
-
-    //the magic
-    b->model()->setData(index, v, Qt::UserRole - 1);
-  }
-}
-
-void populateCSSourceCB(QComboBox *b, int stickMode, int value) {
-  b->clear();
-  for (int i = 0; i < 67; i++) b->addItem(getSourceStr(i));
-  b->setCurrentIndex(value);
-  b->setMaxVisibleItems(10);
-  for (int i = 0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
-    // Get the index of the value to disable
-    QModelIndex index = b->model()->index(SRC_CH16 - i, 0);
+    int idx = SRC_CH16 - i;
+    if (!switches)
+      idx -= SRC_SWC - SRC_STHR + 1;
+    QModelIndex index = b->model()->index(idx, 0);
 
     // This is the effective 'disable' flag
     QVariant v(0);
