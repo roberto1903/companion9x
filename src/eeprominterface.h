@@ -590,6 +590,7 @@ enum Capability {
  FuncSwitches,
  Outputs,
  ExtraChannels,
+ ExtraInputs,
  ExtendedTrims,
  Simulation,
  SoundMod,

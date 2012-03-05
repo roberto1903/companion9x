@@ -56,9 +56,9 @@ void populatePhasesCB(QComboBox *b, int value) {
 
 void populateCurvesCB(QComboBox *b, int value) {
   b->clear();
-  for (int i = 0; i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
+  for (int i = -(MAX_CURVE5+MAX_CURVE9); i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
     b->addItem(getCurveStr(i));
-  b->setCurrentIndex(value);
+  b->setCurrentIndex(value+(MAX_CURVE5+MAX_CURVE9));
   b->setMaxVisibleItems(10);
 }
 
@@ -257,8 +257,8 @@ QString getSignedStr(int value) {
 }
 
 QString getCurveStr(int curve) {
-  QString crvStr = "---x>0x<0|x|f>0f<0|f|c1 c2 c3 c4 c5 c6 c7 c8 c9 c10c11c12c13c14c15c16";
-  return crvStr.mid(curve * 3, 3).remove(' ').replace("c", QObject::tr("Curve") + " ");
+  QString crvStr = "!c16!c15!c14!c13!c12!c11!c10!c9 !c8 !c7 !c6 !c5 !c4 !c3 !c2 !c1 ----x>0 x<0 |x| f>0 f<0 |f| c1  c2  c3  c4  c5  c6  c7  c8  c9  c10 c11 c12 c13 c14 c15 c16 ";
+  return crvStr.mid((curve+16) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
 }
 
 QString image2qstring(QImage image) {
