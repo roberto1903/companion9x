@@ -89,7 +89,7 @@ void MixerDialog::valuesChanged()
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimCB->currentIndex();
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
-    md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9);
+    md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves);
     md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
     md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
     md->mixWarn   = ui->warningCB->currentIndex();
