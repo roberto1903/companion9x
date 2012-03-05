@@ -234,9 +234,16 @@ t_Er9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
+  c9x.weight = weight;
 
   if (srcRaw == SRC_3POS) {
-    c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
+    if (swtch < 0) {
+      c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
+      c9x.weight = -weight;
+    }
+    else {
+      c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
+    }
     c9x.swtch = 0;
   }
   else {
@@ -247,7 +254,6 @@ t_Er9xMixData::operator MixData ()
       c9x.srcRaw = RawSource(srcRaw);
   }
 
-  c9x.weight = weight;
   c9x.curve = curve;
   c9x.delayUp = delayUp;
   c9x.delayDown = delayDown;
