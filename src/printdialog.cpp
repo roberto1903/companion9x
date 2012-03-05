@@ -371,33 +371,33 @@ void printDialog::printMixes()
 void printDialog::printLimits()
 {
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1><h2>").arg(NUM_XCHNOUT+1)+tr("Limits")+"</h2></td></tr>");
+    str.append(QString("<tr><td colspan=%1><h2>").arg(NUM_CHNOUT+1)+tr("Limits")+"</h2></td></tr>");
     str.append("<tr><td>&nbsp;</td>");
-    for(int i=0; i<NUM_XCHNOUT; i++)
+    for(int i=0; i<NUM_CHNOUT; i++)
     {
         str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
-    for(int i=0; i<NUM_XCHNOUT; i++)
+    for(int i=0; i<NUM_CHNOUT; i++)
     {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Min")+"</b></td>");
-    for(int i=0; i<NUM_XCHNOUT; i++)
+    for(int i=0; i<NUM_CHNOUT; i++)
     {
         str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Max")+"</b></td>");
-    for(int i=0; i<NUM_XCHNOUT; i++)
+    for(int i=0; i<NUM_CHNOUT; i++)
     {
         str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
-    for(int i=0; i<NUM_XCHNOUT; i++)
+    for(int i=0; i<NUM_CHNOUT; i++)
     {
         str.append(doTR(QString(g_model->limitData[i].revert ? tr("INV") : tr("NOR")),"green"));
     }

@@ -11,7 +11,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->setupUi(this);
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-    populateSourceCB(ui->sourceCB, stickMode, md->srcRaw);
+    populateSourceCB(ui->sourceCB, md->srcRaw, NUM_XCHNMIX, true);
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);

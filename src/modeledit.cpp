@@ -538,7 +538,7 @@ void ModelEdit::tabMixes()
         MixerlistWidget->addItem(itm);//(str);
     }
 
-    while(curDest<NUM_XCHNOUT)
+    while(curDest<NUM_CHNOUT)
     {
         curDest++;
         QString str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
@@ -575,7 +575,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB,g_eeGeneral.stickMode,g_model.swashRingData.collectiveSource);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, NUM_XCHNRAW, false);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
@@ -790,7 +790,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateCSSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
+        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
         cswitchOffset[i]->setValue(g_model.customSw[i].v2);
         break;
     case CS_VBOOL:
@@ -804,8 +804,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateCSSourceCB(cswitchSource1[i],g_eeGeneral.stickMode,g_model.customSw[i].v1);
-        populateCSSourceCB(cswitchSource2[i],g_eeGeneral.stickMode,g_model.customSw[i].v2);
+        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
+        populateSourceCB(cswitchSource2[i], g_model.customSw[i].v2, NUM_XCHNCSW, false);
         break;
     default:
         break;
