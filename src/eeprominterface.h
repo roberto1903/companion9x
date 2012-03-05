@@ -393,7 +393,9 @@ enum AssignFunc {
   FuncTrainerAIL,
   FuncInstantTrim,
   FuncTrims2Offsets,
-  FuncViewTelemetry,
+  FuncPlaySound,
+  FuncPlaySomo,
+  FuncLogs,
   FuncCount
 };
 
