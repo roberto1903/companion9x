@@ -26,15 +26,15 @@ void populateSwitchCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
-#define FSWITCH_STR  "Trainer       ""Trainer RUD   ""Trainer ELE   ""Trainer THR   ""Trainer AIL   ""Instant Trim  ""Trims2Offsets ""Telemetry View"
-#define FSW_LEN_FUNC 14
-
 QString getFuncName(unsigned int val)
 {
   if (val < NUM_CHNOUT)
-    return QObject::tr("Safety") + " " + getSourceStr(42+val);
-  else
-    return QString(FSWITCH_STR).mid((val-NUM_CHNOUT)*FSW_LEN_FUNC, FSW_LEN_FUNC);
+    return QObject::tr("Safety") + " " + getSourceStr(SRC_CH1+val);
+  else {
+    QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
+                          QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
+    return strings[val-NUM_CHNOUT];
+  }
 }
 
 void populateFuncCB(QComboBox *b, unsigned int value) {
