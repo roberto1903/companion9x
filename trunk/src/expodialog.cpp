@@ -51,6 +51,6 @@ void ExpoDialog::valuesChanged()
     ed->weight = ui->weightSB->value();
     ed->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
     ed->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
-    ed->curve  = ui->curvesCB->currentIndex();
+    ed->curve  = ui->curvesCB->currentIndex() - (MAX_CURVE5+MAX_CURVE9);
     ed->mode   = ui->modeCB->currentIndex() + 1;
 }

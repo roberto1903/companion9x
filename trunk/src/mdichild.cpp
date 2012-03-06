@@ -357,12 +357,6 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     file.close();
     if(setCurrent) setCurrentFile(fileName);
 
-    // TODO if (!EEPROMWarnings.isEmpty())
-/*      QMessageBox::warning(this,
-          tr("Warning"),
-          tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));*/
-
-
     return true;
 }
 
