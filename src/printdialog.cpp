@@ -545,9 +545,15 @@ void printDialog::printSwitches()
             switch CS_STATE(g_model->customSw[i].func)
             {
             case CS_VOFS:
-                tstr = g_model->customSw[i].v1 ?
-                       getSourceStr(g_model->customSw[i].v1) :
-                       "0";
+                if (g_model->customSw[i].v1) {
+                  if (g_model->customSw[i].v1<=SRC_3POS) {
+                    tstr+=getSourceStr(g_model->customSw[i].v1);
+                  } else {
+                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
+                  }
+                } else {
+                  tstr+="0";
+                }
                 tstr.remove(" ");
                 if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_ANEG)
                     tstr = "|" + tstr + "|";
