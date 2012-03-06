@@ -576,9 +576,15 @@ void printDialog::printSwitches()
                 tstr += getSWName(g_model->customSw[i].v2);
                 break;
             case CS_VCOMP:
-                tstr = g_model->customSw[i].v1 ?
-                       getSourceStr(g_model->customSw[i].v1) :
-                       "0";
+                if (g_model->customSw[i].v1) {
+                  if (g_model->customSw[i].v1<=SRC_3POS) {
+                    tstr+=getSourceStr(g_model->customSw[i].v1);
+                  } else {
+                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
+                  }
+                } else {
+                  tstr+="0";
+                }
                 switch (g_model->customSw[i].func)
                 {
                 case CS_EQUAL:
@@ -602,9 +608,16 @@ void printDialog::printSwitches()
                 default:
                     break;
                 }
-                tstr += g_model->customSw[i].v2 ?
-                        getSourceStr(g_model->customSw[i].v2) :
-                        "0";
+                if (g_model->customSw[i].v2) {
+                  if (g_model->customSw[i].v2<=SRC_3POS) {
+                    tstr+=getSourceStr(g_model->customSw[i].v2);
+                  } else {
+                    tstr+=getSourceStr(g_model->customSw[i].v2+SRC_SWC-SRC_3POS);
+                  }
+                } else {
+                  tstr+="0";
+                }
+                
                 break;
             default:
                 break;
