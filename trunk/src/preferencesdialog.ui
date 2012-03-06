@@ -820,6 +820,44 @@ Mode 4:
   <zorder>label_6</zorder>
   <zorder>langCombo</zorder>
  </widget>
+ <tabstops>
+  <tabstop>locale_QB</tabstop>
+  <tabstop>startupCheck_companion9x</tabstop>
+  <tabstop>startupCheck_fw</tabstop>
+  <tabstop>showSplash</tabstop>
+  <tabstop>splashincludeCB</tabstop>
+  <tabstop>InvertPixels</tabstop>
+  <tabstop>clearImageButton</tabstop>
+  <tabstop>SplashFileName</tabstop>
+  <tabstop>splashLibraryButton</tabstop>
+  <tabstop>SplashSelect</tabstop>
+  <tabstop>libraryPath</tabstop>
+  <tabstop>libraryPathButton</tabstop>
+  <tabstop>historySize</tabstop>
+  <tabstop>downloadVerCB</tabstop>
+  <tabstop>fw_dnld</tabstop>
+  <tabstop>langCombo</tabstop>
+  <tabstop>optionCheckBox_1</tabstop>
+  <tabstop>optionCheckBox_2</tabstop>
+  <tabstop>optionCheckBox_3</tabstop>
+  <tabstop>optionCheckBox_4</tabstop>
+  <tabstop>optionCheckBox_5</tabstop>
+  <tabstop>optionCheckBox_6</tabstop>
+  <tabstop>optionCheckBox_7</tabstop>
+  <tabstop>optionCheckBox_8</tabstop>
+  <tabstop>optionCheckBox_9</tabstop>
+  <tabstop>optionCheckBox_10</tabstop>
+  <tabstop>optionCheckBox_11</tabstop>
+  <tabstop>optionCheckBox_12</tabstop>
+  <tabstop>checkFWUpdates</tabstop>
+  <tabstop>channelorderCB</tabstop>
+  <tabstop>stickmodeCB</tabstop>
+  <tabstop>backLightColor</tabstop>
+  <tabstop>joystickChkB</tabstop>
+  <tabstop>joystickCB</tabstop>
+  <tabstop>joystickcalButton</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="companion9x.qrc"/>
  </resources>
