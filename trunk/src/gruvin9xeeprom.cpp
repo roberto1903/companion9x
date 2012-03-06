@@ -306,7 +306,7 @@ t_Gruvin9xMixData::operator MixData ()
     else {
       c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
     }
-    c9x.swtch = 0;
+    c9x.swtch = (mltplx == MLTPX_REP ? swtch : 0);
   }
   else {
     c9x.swtch = swtch;
