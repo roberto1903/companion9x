@@ -184,7 +184,14 @@ t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
-  curve = c9x.curve;
+  // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+
+  if (c9x.curve >=0 && c9x.curve <= 10)
+    curve = c9x.curve;
+  else if (c9x.curve >= 15 && c9x.curve <= 19)
+    curve = c9x.curve - 4;
+  else
+    EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
   swtch = c9x.swtch;
   phase = abs(c9x.phase);
   negPhase = (c9x.phase < 0);
@@ -197,7 +204,12 @@ t_Open9xExpoData::operator ExpoData ()
   ExpoData c9x;
   c9x.mode = mode;
   c9x.chn = chn;
-  c9x.curve = curve;
+
+  if (curve <= 10)
+    c9x.curve = curve;
+  else
+    c9x.curve = curve + 4;
+
   c9x.swtch = swtch;
   c9x.phase = (negPhase ? -phase : +phase);
   c9x.weight = weight;

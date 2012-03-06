@@ -20,6 +20,7 @@
 #include "open9xsimulator.h"
 #include "open9xv4simulator.h"
 #include "file.h"
+#include <QMessageBox>
 
 #define FILE_TYP_GENERAL 1
 #define FILE_TYP_MODEL   2
@@ -210,6 +211,11 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         return false;
     }
   }
+
+  if (!EEPROMWarnings.isEmpty())
+    QMessageBox::warning(NULL,
+        QObject::tr("Warning"),
+        QObject::tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
 
   return size;
 }
