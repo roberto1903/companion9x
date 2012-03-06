@@ -578,6 +578,17 @@ m2560 for v4.1 boards</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>avrdude_location</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>avrdude_programmer</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>avrdude_mcu</tabstop>
+  <tabstop>avrdude_port</tabstop>
+  <tabstop>avrArgs</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="companion9x.qrc"/>
  </resources>

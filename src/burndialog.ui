@@ -450,6 +450,24 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>FWFileName</tabstop>
+  <tabstop>FlashLoadButton</tabstop>
+  <tabstop>VersionField</tabstop>
+  <tabstop>DateField</tabstop>
+  <tabstop>SVNField</tabstop>
+  <tabstop>ModField</tabstop>
+  <tabstop>PatchFWCB</tabstop>
+  <tabstop>PreferredImageCB</tabstop>
+  <tabstop>ImageFileName</tabstop>
+  <tabstop>ImageLoadButton</tabstop>
+  <tabstop>libraryButton</tabstop>
+  <tabstop>InvertColorButton</tabstop>
+  <tabstop>EEbackupCB</tabstop>
+  <tabstop>EEpromCB</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>BurnFlashButton</tabstop>
+ </tabstops>
  <resources>
   <include location="companion9x.qrc"/>
  </resources>
