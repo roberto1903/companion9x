@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
+    <width>563</width>
     <height>724</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
 These will be relevant for all models in the same EEPROM.</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabSetup">
       <attribute name="title">
@@ -2357,6 +2357,96 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>ownerNameLE</tabstop>
+  <tabstop>beeperCB</tabstop>
+  <tabstop>soundModeCB</tabstop>
+  <tabstop>beeperlenCB</tabstop>
+  <tabstop>speakerPitchSB</tabstop>
+  <tabstop>hapticmodeCB</tabstop>
+  <tabstop>hapticStrengthSB</tabstop>
+  <tabstop>contrastSB</tabstop>
+  <tabstop>inputfilterCB</tabstop>
+  <tabstop>battwarningDSB</tabstop>
+  <tabstop>battcalibDSB</tabstop>
+  <tabstop>backlightswCB</tabstop>
+  <tabstop>blOnStickMoveSB</tabstop>
+  <tabstop>backlightautoSB</tabstop>
+  <tabstop>inactimerSB</tabstop>
+  <tabstop>beepMinuteChkB</tabstop>
+  <tabstop>beepCountDownChkB</tabstop>
+  <tabstop>beepFlashChkB</tabstop>
+  <tabstop>thrrevChkB</tabstop>
+  <tabstop>splashScreenChkB</tabstop>
+  <tabstop>PotScrollEnableChkB</tabstop>
+  <tabstop>hideNameOnSplashChkB</tabstop>
+  <tabstop>BandGapEnableChkB</tabstop>
+  <tabstop>thrwarnChkB</tabstop>
+  <tabstop>alarmwarnChkB</tabstop>
+  <tabstop>memwarnChkB</tabstop>
+  <tabstop>swtchWarnCB</tabstop>
+  <tabstop>swtchWarnChkB</tabstop>
+  <tabstop>telalarmsChkB</tabstop>
+  <tabstop>swTHRChkB</tabstop>
+  <tabstop>swRUDChkB</tabstop>
+  <tabstop>swELEChkB</tabstop>
+  <tabstop>swAILChkB</tabstop>
+  <tabstop>swGEAChkB</tabstop>
+  <tabstop>swID0ChkB</tabstop>
+  <tabstop>swID1ChkB</tabstop>
+  <tabstop>swID2ChkB</tabstop>
+  <tabstop>channelorderCB</tabstop>
+  <tabstop>stickmodeCB</tabstop>
+  <tabstop>trnMode_1</tabstop>
+  <tabstop>trnChn_1</tabstop>
+  <tabstop>trnWeight_1</tabstop>
+  <tabstop>swtchCB_1</tabstop>
+  <tabstop>trnMode_2</tabstop>
+  <tabstop>trnChn_2</tabstop>
+  <tabstop>trnWeight_2</tabstop>
+  <tabstop>swtchCB_2</tabstop>
+  <tabstop>trnMode_3</tabstop>
+  <tabstop>trnChn_3</tabstop>
+  <tabstop>trnWeight_3</tabstop>
+  <tabstop>swtchCB_3</tabstop>
+  <tabstop>trnMode_4</tabstop>
+  <tabstop>trnChn_4</tabstop>
+  <tabstop>trnWeight_4</tabstop>
+  <tabstop>swtchCB_4</tabstop>
+  <tabstop>rssiAlarm1SB</tabstop>
+  <tabstop>rssiAlarm1CB</tabstop>
+  <tabstop>rssiAlarm2SB</tabstop>
+  <tabstop>rssiAlarm2CB</tabstop>
+  <tabstop>enableTelemetryAlarmChkB</tabstop>
+  <tabstop>ana1Neg</tabstop>
+  <tabstop>ana1Mid</tabstop>
+  <tabstop>ana1Pos</tabstop>
+  <tabstop>ana2Neg</tabstop>
+  <tabstop>ana2Mid</tabstop>
+  <tabstop>ana2Pos</tabstop>
+  <tabstop>ana3Neg</tabstop>
+  <tabstop>ana3Mid</tabstop>
+  <tabstop>ana3Pos</tabstop>
+  <tabstop>ana4Neg</tabstop>
+  <tabstop>ana4Mid</tabstop>
+  <tabstop>ana4Pos</tabstop>
+  <tabstop>ana5Neg</tabstop>
+  <tabstop>ana5Mid</tabstop>
+  <tabstop>ana5Pos</tabstop>
+  <tabstop>ana6Neg</tabstop>
+  <tabstop>ana6Mid</tabstop>
+  <tabstop>ana6Pos</tabstop>
+  <tabstop>ana7Neg</tabstop>
+  <tabstop>ana7Mid</tabstop>
+  <tabstop>ana7Pos</tabstop>
+  <tabstop>battCalib</tabstop>
+  <tabstop>PPM1</tabstop>
+  <tabstop>PPM2</tabstop>
+  <tabstop>PPM3</tabstop>
+  <tabstop>PPM4</tabstop>
+  <tabstop>PPM_MultiplierDSB</tabstop>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
  <resources>
   <include location="companion9x.qrc"/>
  </resources>
