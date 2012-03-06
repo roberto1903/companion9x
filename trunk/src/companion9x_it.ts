@@ -505,12 +505,6 @@ Mode 4:
         <translation>Lungo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="197"/>
-        <source>Contrast</source>
-        <oldsource>Extra Long</oldsource>
-        <translation type="unfinished">Lunghissimo</translation>
-    </message>
-    <message>
         <location filename="generaledit.ui" line="231"/>
         <source>Input Filter</source>
         <translation>Filtro ingressi</translation>
@@ -712,7 +706,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="1136"/>
         <source>Alarms Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo allarmi</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1187"/>
@@ -1012,7 +1006,9 @@ Volete scaricarla ora ?</translation>
         <source>The file %1
 has not been recognized as a valid EEPROM
 Burn anyway ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file %1
+non è stato riconosciuto come una EEProm valida
+Scriverlo ugualmente ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="677"/>
@@ -1712,12 +1708,12 @@ Se vuoto la miscelazione è sempre attiva.</translation>
     <message>
         <location filename="mixerdialog.ui" line="107"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Si</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="112"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="186"/>
@@ -1801,7 +1797,7 @@ Determina come il valore viene aggiunto alla miscelazione.
     <message>
         <location filename="mixerdialog.ui" line="256"/>
         <source>Differential</source>
-        <translation type="unfinished"></translation>
+        <translation>Differenziale</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="274"/>
@@ -2828,7 +2824,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="9730"/>
         <source>RSSI</source>
-        <translation type="unfinished"></translation>
+        <translation>RSSI</translation>
     </message>
     <message>
         <source>Alarm 1</source>
@@ -2907,12 +2903,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="9811"/>
         <source>TX Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Allarme TX</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="9830"/>
         <source>RX Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Allarme RX</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="10071"/>
@@ -3191,7 +3187,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.cpp" line="526"/>
         <source>Diff</source>
-        <translation type="unfinished"></translation>
+        <translation>Diff</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3065"/>
@@ -3613,7 +3609,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="118"/>
         <source>Timer2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tempo2</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="119"/>
@@ -3673,7 +3669,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="open9xeeprom.cpp" line="194"/>
         <source>Open9x doesn&apos;t allow Curve%1 in expos</source>
-        <translation type="unfinished"></translation>
+        <translation>Open9x non consente la Curva %1 negli esponenziali</translation>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="943"/>
@@ -5302,7 +5298,7 @@ Mode 4:
     <message>
         <location filename="printdialog.cpp" line="350"/>
         <source>Diff</source>
-        <translation type="unfinished"></translation>
+        <translation>Diff</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="704"/>
