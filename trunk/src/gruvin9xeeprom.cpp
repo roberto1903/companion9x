@@ -213,7 +213,12 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
-  curve = c9x.curve;
+  if (c9x.curve<0) {
+      EEPROMWarnings += ::QObject::tr("Gruvin9x doesn't allow negative Curves in expos") + "\n";
+      curve=0;
+  } else {
+          curve = c9x.curve;
+  }
   swtch = c9x.swtch;
   phase = abs(c9x.phase);
   negPhase = (c9x.phase < 0);
