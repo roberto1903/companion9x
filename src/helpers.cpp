@@ -62,6 +62,14 @@ void populateCurvesCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
+void populatePosCurvesCB(QComboBox *b, int value) {
+  b->clear();
+  for (int i = 0; i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
+    b->addItem(getCurveStr(i));
+  b->setCurrentIndex(value);
+  b->setMaxVisibleItems(10);
+}
+
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem("Own trim");
   for (unsigned int i = 0; i < MAX_PHASES; i++) {

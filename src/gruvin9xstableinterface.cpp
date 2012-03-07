@@ -128,6 +128,8 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return true;
+    case HasExpoCurves:
+      return true;
     case Telemetry:
       return TM_HASTELEMETRY;      
     default:

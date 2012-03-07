@@ -603,6 +603,7 @@ enum Capability {
  ExtraInputs,
  ExtendedTrims,
  HasNegCurves,
+ HasExpoCurves,
  Simulation,
  SoundMod,
  SoundPitch,

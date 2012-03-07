@@ -191,11 +191,7 @@ t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)
   else if (c9x.curve >= 15 && c9x.curve <= 19)
     curve = c9x.curve - 4;
   else
-    if (c9x.curve<0) {
-      EEPROMWarnings += ::QObject::tr("Open9x doesn't allow negative Curves in expos") + "\n";
-    } else {
-        EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
-    }
+    EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
   swtch = c9x.swtch;
   phase = abs(c9x.phase);
   negPhase = (c9x.phase < 0);
