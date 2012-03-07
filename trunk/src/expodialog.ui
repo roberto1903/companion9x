@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label_phases">
        <property name="text">
         <string>Phase</string>
        </property>
@@ -125,7 +125,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="label_curves">
        <property name="text">
         <string>Curve</string>
        </property>

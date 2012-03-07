@@ -253,6 +253,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return true;
+    case HasExpoCurves:
+      return true;           
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASWSHH;      
     default:
