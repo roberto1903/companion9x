@@ -278,12 +278,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="197"/>
-        <source>Contrast</source>
-        <oldsource>Extra Long</oldsource>
-        <translation type="unfinished">Contraste</translation>
-    </message>
-    <message>
         <location filename="generaledit.ui" line="231"/>
         <source>Input Filter</source>
         <translation>Filtro de Entrada</translation>
@@ -3581,12 +3575,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="69"/>
+        <location filename="helpers.cpp" line="103"/>
         <source>Flight phase %1 trim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="109"/>
+        <location filename="helpers.cpp" line="143"/>
         <source>----</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3607,242 +3601,242 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">AIL</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="111"/>
+        <location filename="helpers.cpp" line="145"/>
         <source>P1</source>
         <translation type="unfinished">P1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="111"/>
+        <location filename="helpers.cpp" line="145"/>
         <source>P2</source>
         <translation type="unfinished">P2</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="111"/>
+        <location filename="helpers.cpp" line="145"/>
         <source>P3</source>
         <translation type="unfinished">P3</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="112"/>
+        <location filename="helpers.cpp" line="146"/>
         <source>MAX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="110"/>
+        <location filename="helpers.cpp" line="144"/>
         <source>Rud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="110"/>
+        <location filename="helpers.cpp" line="144"/>
         <source>Ele</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="110"/>
+        <location filename="helpers.cpp" line="144"/>
         <source>Thr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="110"/>
+        <location filename="helpers.cpp" line="144"/>
         <source>Ail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="113"/>
+        <location filename="helpers.cpp" line="147"/>
         <source>3POS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="114"/>
+        <location filename="helpers.cpp" line="148"/>
         <source>CYC1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="114"/>
+        <location filename="helpers.cpp" line="148"/>
         <source>CYC2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="114"/>
+        <location filename="helpers.cpp" line="148"/>
         <source>CYC3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="115"/>
+        <location filename="helpers.cpp" line="149"/>
         <source>PPM8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH1</source>
         <translation type="unfinished">CH1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH2</source>
         <translation type="unfinished">CH2</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH3</source>
         <translation type="unfinished">CH3</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH4</source>
         <translation type="unfinished">CH4</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH5</source>
         <translation type="unfinished">CH5</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH6</source>
         <translation type="unfinished">CH6</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH7</source>
         <translation type="unfinished">CH7</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="116"/>
+        <location filename="helpers.cpp" line="150"/>
         <source>CH8</source>
         <translation type="unfinished">CH8</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH9</source>
         <translation type="unfinished">CH9</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH10</source>
         <translation type="unfinished">CH10</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH11</source>
         <translation type="unfinished">CH11</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH12</source>
         <translation type="unfinished">CH12</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH13</source>
         <translation type="unfinished">CH13</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH14</source>
         <translation type="unfinished">CH14</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH15</source>
         <translation type="unfinished">CH15</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="117"/>
+        <location filename="helpers.cpp" line="151"/>
         <source>CH16</source>
         <translation type="unfinished">CH16</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="118"/>
+        <location filename="helpers.cpp" line="152"/>
         <source>Timer1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="118"/>
+        <location filename="helpers.cpp" line="152"/>
         <source>Timer2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>A1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>A2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>ALT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>RPM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>FUEL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>T1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>T2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>SPEED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="119"/>
+        <location filename="helpers.cpp" line="153"/>
         <source>CELL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="173"/>
+        <location filename="helpers.cpp" line="207"/>
         <source>Curve</source>
         <translation type="unfinished">Curva</translation>
     </message>
@@ -3852,23 +3846,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="194"/>
+        <location filename="open9xeeprom.cpp" line="195"/>
         <source>Open9x doesn&apos;t allow Curve%1 in expos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="943"/>
-        <location filename="open9xeeprom.cpp" line="1085"/>
-        <location filename="open9xeeprom.cpp" line="1239"/>
-        <location filename="open9xeeprom.cpp" line="1394"/>
+        <location filename="open9xeeprom.cpp" line="944"/>
+        <location filename="open9xeeprom.cpp" line="1086"/>
+        <location filename="open9xeeprom.cpp" line="1240"/>
+        <location filename="open9xeeprom.cpp" line="1399"/>
         <source>Open9x doesn&apos;t accept this protocol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="965"/>
-        <location filename="open9xeeprom.cpp" line="1107"/>
-        <location filename="open9xeeprom.cpp" line="1261"/>
-        <location filename="open9xeeprom.cpp" line="1415"/>
+        <location filename="open9xeeprom.cpp" line="966"/>
+        <location filename="open9xeeprom.cpp" line="1108"/>
+        <location filename="open9xeeprom.cpp" line="1262"/>
+        <location filename="open9xeeprom.cpp" line="1420"/>
         <source>open9x only accepts %1 expos</source>
         <oldsource>Gruvin9x firmware only accepts %1 expos</oldsource>
         <translation type="unfinished"></translation>
@@ -4307,7 +4301,7 @@ m2560 for v4.1 boards</source>
     </message>
     <message>
         <location filename="burndialog.cpp" line="118"/>
-        <source>%1 doesn&apos;t seem to be a firmware</source>
+        <source>%1 is not a known firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
