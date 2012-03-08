@@ -321,10 +321,10 @@ PACK(typedef struct t_Open9xFrSkyBarData_v204 {
 
 PACK(typedef struct t_Open9xFrSkyData_v204 {
   Open9xFrSkyChannelData_v204 channels[2];
-  uint16_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
-  uint16_t imperial:1;
-  uint16_t blades:2;
-  uint16_t spare:2;
+  uint8_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t imperial:1;
+  uint8_t blades:2;
+  uint8_t spare:2;
   Open9xFrSkyBarData_v204 bars[4];
 
   operator FrSkyData();
@@ -334,10 +334,10 @@ PACK(typedef struct t_Open9xFrSkyData_v204 {
 
 PACK(typedef struct t_Open9xFrSkyData_v205 {
   Open9xFrSkyChannelData_v204 channels[2];
-  uint16_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
-  uint16_t imperial:1;
-  uint16_t blades:2;
-  uint16_t spare:2;
+  uint8_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t imperial:1;
+  uint8_t blades:2;
+  uint8_t spare:2;
   Open9xFrSkyBarData_v204 bars[4];
   Open9xFrSkyRSSIAlarm rssiAlarms[2];
 
