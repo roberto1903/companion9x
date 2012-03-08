@@ -280,6 +280,9 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case HasExpoCurves:
       return true;
+    case ExpoCurve5:
+    case ExpoCurve9:
+      return 4;
     case ExtendedTrims:
       return 500;
     case Simulation:

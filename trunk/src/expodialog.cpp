@@ -15,7 +15,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     ui->weightSB->setValue(ed->weight);
     populatePhasesCB(ui->phasesCB, ed->phase);
     populateSwitchCB(ui->switchesCB,ed->swtch);
-    populatePosCurvesCB(ui->curvesCB,ed->curve); // TODO capacity for er9x
+    populateExpoCurvesCB(ui->curvesCB,ed->curve); // TODO capacity for er9x
     ui->modeCB->setCurrentIndex(ed->mode-1);
     if (!GetEepromInterface()->getCapability(HasExpoCurves)) {
         ui->label_curves->hide();
