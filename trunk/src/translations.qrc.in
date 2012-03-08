@@ -6,5 +6,6 @@
         <file>companion9x_it.qm</file>
         <file>companion9x_pt.qm</file>
         <file>companion9x_ru.qm</file>
+        <file>companion9x_sv.qm</file>
     </qresource>
 </RCC>
