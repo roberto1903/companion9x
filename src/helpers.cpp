@@ -62,12 +62,38 @@ void populateCurvesCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
-void populatePosCurvesCB(QComboBox *b, int value) {
+void populateExpoCurvesCB(QComboBox *b, int value) {
   b->clear();
   for (int i = 0; i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
     b->addItem(getCurveStr(i));
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
+  if (GetEepromInterface()->getCapability(ExpoCurve5)) {
+    int curve5=GetEepromInterface()->getCapability(ExpoCurve5);
+    for (int i=CURVE_BASE+curve5; i < CURVE_BASE + MAX_CURVE5; i++) {
+      // Get the index of the value to disable
+      QModelIndex index = b->model()->index(i, 0);
+
+      // This is the effective 'disable' flag
+      QVariant v(0);
+
+      //the magic
+      b->model()->setData(index, v, Qt::UserRole - 1);
+    }
+  }
+  if (GetEepromInterface()->getCapability(ExpoCurve9)) {
+    int curve9=GetEepromInterface()->getCapability(ExpoCurve9);
+    for (int i=CURVE_BASE+MAX_CURVE5+curve9; i < CURVE_BASE + MAX_CURVE5+ MAX_CURVE9; i++) {
+      // Get the index of the value to disable
+      QModelIndex index = b->model()->index(i, 0);
+
+      // This is the effective 'disable' flag
+      QVariant v(0);
+
+      //the magic
+      b->model()->setData(index, v, Qt::UserRole - 1);
+    }
+  }
 }
 
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {

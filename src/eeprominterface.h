@@ -604,6 +604,8 @@ enum Capability {
  ExtendedTrims,
  HasNegCurves,
  HasExpoCurves,
+ ExpoCurve5,
+ ExpoCurve9,
  Simulation,
  SoundMod,
  SoundPitch,
