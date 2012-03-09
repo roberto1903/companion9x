@@ -1,35 +1,195 @@
-#summary Building companion9x for Windows with Visual Studio
- 
-= Building companion9X on Visual Studio for Windows =
+#summary Building companion9x on Windows via Visual Studio 10/2010
+
+= Introduction =
 
 Starting with version 0.20, companion9x is compiled under Visual C++ Express 2010
 
-= Prerequisites =
+This is a walk though describing how to build companion9x on a Windows XP box, should work on Windows 7 to.
 
-You will need ...
- * [http://msdn.microsoft.com/fr-fr/express/aa975050.aspx Visual C++ 2010 Express] 
- * [http://qt.nokia.com/downloads/ Qt source zip] (v4.7.4)
- * [http://xerces.apache.org/xerces-c/download.cgi Xerces vc10 version]
- * [http://www.codesynthesis.com/download/xsd/3.3/windows/i686/xsd-3.3.0-i686-windows.zip xsd]
- * [http://mir2.ovh.net/ftp.apache.org/dist//xerces/c/3/binaries/xerces-c-3.1.1-x86-windows-vc-10.0.zip xerces]
- * [ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-8-0-release.exe pthreads-w32]
- * [http://msinttypes.googlecode.com/files/msinttypes-r26.zip msinttypes]
+All software was installed in paths with no spaces. I tried installing in paths with spaces but it created no end of problems. It is not needed for all packages but it is much safer this way.
+
+I also don't like software that installs in the C:\ root directory so I put everything in C:\Programs\
+
+The only exceptions to this where Visual Studio and Qt. These exceptions were made to remain the same as Bertrand and therefore stop problems with the installer creator failing to find files.
 
 
-= Random notes for Cam before I forget them =
+= Useful tools =
 
-I have put the pthread directory under C:\Programs. Could be better somewhere else? Also I have put the two files of inttypes inside C:\Programs\pthreads\pthreads.2 (yes, I am lazy, I know)
+This software is very handy for editing your PATH environmental variable:
 
-And (horrible) I put the 2 dlls for pthreads and xerces inside my companion9x/vsbuild directory (I have one source dir and 3 build dirs: msysbuild, vsbuild and lbuild for linux)
+http://www.redfernplace.com/software-projects/patheditor/
 
-The command for CMake (inside the Visual Studio 2010 console): 
-cmake ../src -G "Visual Studio 10" 
+Or this for all environmental variables:
 
-= Links =
-http://code.google.com/p/sigil/wiki/BuildingFromSource
+http://sourceforge.net/projects/env-man/
 
-http://www.siteduzero.com/tutoriel-3-36553-utiliser-qt-avec-visual-studio-2010.html (french!)
+If you don't want to use either of these tools (and I really recommend you do) then you can edit environmental variables by
+  * Right clicking on My Computer
+  * Select Properties
+  * Click the Advanced tab on the window that pops up
+  * Click the Environment Variables button
+  * You will find PATH in the System Variables list
+
+This file <a href="http://companion9x.googlecode.com/svn/wiki/doshere.reg">doshere.reg</a> gives you the ability to right click on a file or folder and have a DOS prompt pop up already CDed to that location. Just download it and double click it to add it to the registry. WARNING only tested on XP.
 
 
+= Get the needed tools =
+
+== Visual Studio 2010 C++ ==
+
+http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express
+
+From the above page you download a web installer. 
+Run vc-web.exe
+
+*Installer choices*
+  * <b><font color=red>To be confirmed</font></b>
+
+== CMake ==
+
+http://www.cmake.org/cmake/resources/software.html
+
+Run cmake-x.x.x-win32-x86.exe
+(x.x.x represents version number, get the latest)
+
+*Installer choices*
+  * Add CMake to the system PATH for all users
+  * Install path C:\Programs\CMake
+
+Check it has added the following to the PATH environmental variable 
+
+C:\Programs\CMake\bin
+
+== Nokia Qt ==
+
+http://qt.nokia.com/downloads/windows-cpp
+
+Get the Qt Libraries for Visual Studio 2010 not the SDK
+
+Run qt-win-opensource-4.8.0-vs2010.exe
+
+*Installer choices*
+  * Install path c:\Qt\4.8.0-vc <b><font color=red>(Note to self CHECK)</font></b>
+
+Add the following to the PATH environmental variable
+
+C:\Qt\4.8.0-vc\bin
+
+== TortoiseSVN ==
+
+http://tortoisesvn.net/downloads.html
+
+Run TortoiseSVN-x.x.x.xxxxx-win32-svn-x.x.x.msi
+(x.x.x represents version number, get the latest)
+
+*Installer choices*
+  * Install "command line client tools"
+  * Install path c:\Programs\TortiseSVN
+
+Add the following to the PATH environmental variable
+
+C:\Programs\TortiseSVN\bin
+
+== NSIS ==
+
+http://nsis.sourceforge.net/Download
+
+Run nsis-x.xx-setup.exe 
+(x.xx represents version number, get the latest)
+
+*Installer choices*
+  * Install path c:\Programs\NSIS
+
+Add the following to the PATH environmental variable
+
+C:\Programs\NSIS\bin
+
+== Xerces == 
+
+http://xerces.apache.org/mirrors.cgi#binary
+
+You want V3.1.1 for Visual Studio 10
+
+Unzip the contents of the zip to "C:\Programs\"
+
+Rename the folder "xerces-c-3.1.1" to "xerces-vc" so you have
+"C:\Programs\xerces-vc\"
+
+== !CodeSynthesis XSD ==
+
+http://www.codesynthesis.com/download/xsd/3.3/windows/i686/xsd-3.3.0-i686-windows.zip
+
+Unzip xsd-3.3.0-i686-windows.zip to "C:\Programs\"
+
+Rename the "folder xsd-3.3.0-i686-windows" to "xsd-3.3.0" so you have "C:\Programs\xsd-3.3.0\"
+
+== PThreads ==
+
+ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-8-0-release.exe
+
+Run pthreads-w32-2-8-0-release.exe
+
+Set extraction directory to "C:\Programs\pthreads\"
+
+== MSinttypes ==
+
+http://msinttypes.googlecode.com/files/msinttypes-r26.zip
+
+Unzip the contents to "C:\Programs\msinttypes\"
+
+== Patch ==
+
+http://gnuwin32.sourceforge.net/packages/patch.htm
+
+Get the "Complete package, except sources"
+
+*Installer choices*
+  * Install directory C:\Programs\patch\
+  * Full installation
+  * Start Menu folder - you decide
+  * Additional tasks - you decide
+
+Add the following to the PATH environmental variable
+
+C:\Programs\patch\bin
+
+== LibSDL ==
+
+http://www.libsdl.org/download-1.2.php
+
+Direct link
+http://www.libsdl.org/release/SDL-1.2.14-win32.zip
+
+Unzip SDL-1.2.14-win32.zip to "C:\Programs\SDL-1.2.14\"
+
+<b><font color=red>The build is currently tied to installation in:
+C:\Programs\SDL-1.2.14\" so even if you download a newer version it must be installed in this directory (Bertand can we change FindSdl.cmake to look in "C:\Programs\SDL\" instead ? ) </font></b>
+
+= Get companion9x via SVN =
+
+In a path somewhere with no spaces in it create yourself a directory called companion9x. 
+
+Right click on this directory and select SVNCheckout in the menu.
+
+In the dialog box that pops up set the *URL of repository:* to http://companion9x.googlecode.com/svn/
+Leave the other options as is.
+Click OK.
+
+Some files will download.
 
 
+= Building =
+
+Open a command prompt in the directory trunk/src
+
+Type the following at the console:
+
+<code language="xml">
+mkdir ../build
+cd ../build
+cmake -G "Visual Studio 10" ../src </code>
+
+
+Now navigate with explorer to the build directory you just created and double click on the ALL_BUILD.vcxproj file.
+
+To be continued after tea ......
