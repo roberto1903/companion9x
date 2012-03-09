@@ -167,7 +167,7 @@ Unzip SDL-x.x.xx-win32.zip to "C:\Programs\SDL-1.2.14\"
 Navigate to "C:\Programs\SDL-1.2.14\lib\x86" or if you have a 64bit system "C:\Programs\SDL-1.2.14\lib\x64". Select all the files in this directory, copy them, go one directory level up, paste them.
 
 <b><font color=red>The build is currently tied to installation in:
-C:\Programs\SDL-1.2.14\" so even if you download a newer version it must be installed in this directory (Bertand can we change FindSdl.cmake to look in "C:\Programs\SDL\" instead ? ) </font></b>
+C:\Programs\SDL-1.2.14\" so even if you download a newer version it must be installed in this directory (Bertand can we change !FindSdl.cmake to look in "C:\Programs\SDL\" instead ? ) </font></b>
 
 = Get companion9x via SVN =
 
@@ -246,7 +246,13 @@ Once you have decided which way to build you have to build it. In the "Solution 
 http://companion9x.googlecode.com/svn/wiki/vc_build-all_build.jpg
 
 ===Useful tips=== 
-  * If Visual Studio seems to freeze then disable your virus checker and try again. Very bad I know.
+  * If Visual Studio seems to freeze then disable your virus checker and try again. Very bad I know, complain to Microsoft ! That said I don't like virus checkers either, necessary evil.
   * Crtl+Break will abort a build
 
-To be continued after it finishes compiling  ......
+Once it has finished copy the following files to the build/Release/ or build/Debug/ directories to run companion9x.exe in place.
+
+C:\Programs\xerces-vc\bin\xerces-c_3_1.dll
+C:\Programs\pthreads\Pre-built.2\lib\pthreadVC2.dll
+C:\Programs\SDL-1.2.14\lib\SDL.dll
+
+Or if you want right click on "installer" in the Visual Studio Solution Explorer and click build and it will generate the installer exe. *Remeber you must already have the release build built for this to work*
