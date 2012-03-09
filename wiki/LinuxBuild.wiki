@@ -5,6 +5,7 @@
 = Prerequisites =
 
 You will need ...
+ * g++
  * [http://qt.nokia.com/ Qt] (v4.7.4)
  * [http://www.cmake.org cmake]
  * [http://xerces.apache.org/ Apache Xerces-C++] (v2.8.0)
@@ -13,7 +14,7 @@ You will need ...
 
 On Ubuntu:
 {{{
-sudo apt-get install libqtcore4 libqt4-dev qt4-qmake cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
+sudo apt-get install libqtcore4 libqt4-dev qt4-qmake g++ cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
 }}}
 
 On Fedora:
