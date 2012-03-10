@@ -1,4 +1,4 @@
-Copyright © 2011 Bertrand Songis
+Copyright © 2011-2012 Bertrand Songis
 
 companion9x is based on code named eePe by author - Erez Raviv <erezraviv@gmail.com> 
 
