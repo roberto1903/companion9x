@@ -117,7 +117,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   switchWarning = c9x.switchWarning;
   disableMemoryWarning = c9x.disableMemoryWarning;
   disableAlarmWarning = c9x.disableAlarmWarning;
-  stickMode = c9x.stickMode;
+  stickMode = (c9x.stickMode & 0x3);
   inactivityTimer = c9x.inactivityTimer;
   throttleReversed = c9x.throttleReversed;
   minuteBeep = c9x.minuteBeep;
@@ -157,7 +157,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.beeperMode = (BeeperMode)beeperMode;
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
-  result.stickMode = stickMode;
+  result.stickMode = (stickMode & 0x3);
   result.inactivityTimer = inactivityTimer;
   result.throttleReversed = throttleReversed;
   result.minuteBeep = minuteBeep;
