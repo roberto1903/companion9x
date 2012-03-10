@@ -12,9 +12,10 @@ You will need ...
  * [http://www.codesynthesis.com/projects/xsd xsdcxx]
  * [http://www.libsdl.org/ SDL] (v1.2)
 
-On Ubuntu:
+On Ubuntu 11.04, 11.10:
 {{{
-sudo apt-get install libqtcore4 libqt4-dev qt4-qmake g++ cmake libxerces libxerces-c-dev xsdcxx libsdl1.2-dev
+sudo apt-get install subversion gcc-avr avr-libc avrdude build-essential ruby libqtcore4 libqt4-dev qt4-qmake g++ cmake libxerces-c-dev xsdcxx libsdl1.2-dev
+
 }}}
 
 On Fedora:
@@ -70,3 +71,17 @@ in /etc/environment
 
 In companion9x you will have two joysticks, choose the first one.
 If you experience calibration problems have a look to the jscal utility.
+
+
+calibrating:
+{{{
+jscal -c /dev/input/js0
+}}}
+directory for storing:
+{{{
+mkdir /var/lib/joystick
+}}}
+store the calibration:
+{{{
+jscal-store /dev/input/js0
+}}}
