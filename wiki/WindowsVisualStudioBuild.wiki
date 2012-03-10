@@ -44,7 +44,8 @@ Run vc-web.exe
 
 *Installer choices*
   * Install path C:\Program Files\Microsoft Visual Studio 10.0
-  * <b><font color=red>Others to be confirmed</font></b>
+  * Install Microsoft Silverlight - You can decide (not needed for comanpion9x)
+  * Install Microsoft SQL Server - You can decide (not needed for comanpion9x)
 
 == CMake ==
 
@@ -71,8 +72,7 @@ Run qt-win-opensource-4.8.0-vs2010.exe
 
 *Installer choices*
   * Install path c:\Qt\4.8.0-vc 
-  * <b><font color=red>Others to be confirmed</font></b>
-
+  * File Associations - You can decide (not needed for comanpion9x)
 Add the following to the PATH environmental variable
 
 C:\Qt\4.8.0-vc\bin
@@ -148,8 +148,8 @@ Get the "Complete package, except sources"
 *Installer choices*
   * Install directory C:\Programs\patch\
   * Full installation
-  * Start Menu folder - you decide
-  * Additional tasks - you decide
+  * Start Menu folder - You can decide (not needed for comanpion9x)
+  * Additional tasks - You can decide (not needed for comanpion9x)
 
 Add the following to the PATH environmental variable
 
