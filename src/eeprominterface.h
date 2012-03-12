@@ -250,6 +250,7 @@ class GeneralSettings {
     bool      enableTelemetryAlarm;
     BeeperMode hapticMode;
     uint8_t   stickMode; // TODO enum
+    int8_t    timezone;
     int8_t    inactivityTimer;
     bool      throttleReversed;
     bool      minuteBeep;
@@ -631,6 +632,7 @@ enum Capability {
  TelemetryBars,
  TelemetryRSSIModel,
  TelemetryAlarm,
+ TelemetryTimeshift,
  FSSwitch,
  DiffMixers,
 };
