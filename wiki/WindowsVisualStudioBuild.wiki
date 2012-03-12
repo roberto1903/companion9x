@@ -125,6 +125,11 @@ Unzip xsd-3.3.0-i686-windows.zip to "C:\Programs\"
 
 Rename the "folder xsd-3.3.0-i686-windows" to "xsd-3.3.0" so you have "C:\Programs\xsd-3.3.0\"
 
+Navigate to "C:\Programs\xsd-3.3.0\bin" 
+Make a copy of xsd.exe and call it xsd-cxx.exe
+
+<b><font color=red>Bertand can we change !FindXsd.cmake so this renaming isn't needed ?</font></b>
+
 == PThreads ==
 
 ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-8-0-release.exe
@@ -189,14 +194,14 @@ Open a command prompt in the directory trunk/src
 Type the following at the console:
 
 <code language="xml">
-mkdir ../build
-cd ../build
-cmake -G "Visual Studio 10" ../src </code>
+mkdir ..\build
+cd ..\build
+cmake -G "Visual Studio 10" ..\src </code>
 
 You should see something like:
 
 <code language="xml">
-Z>cmake ../src -G "Visual Studio 10"
+Z>cmake -G "Visual Studio 10" ..\src
 -- Check for working C compiler using: Visual Studio 10
 -- Check for working C compiler using: Visual Studio 10 -- works
 -- Detecting C compiler ABI info
@@ -208,7 +213,7 @@ Z>cmake ../src -G "Visual Studio 10"
 -- Looking for XercesC
 --   found xerces-c: C:/Programs/xerces-vc/lib/xerces-c_3.lib
 -- Looking for Xsd
--- C:/MinGW/xsd-3.3.0-i686-windows/bin/xsd-cxx.exe
+-- C:/Programs/xsd-3.3.0/bin/xsd-cxx.exe
 XSD Include Path: C:/Programs/xsd-3.3.0/libxsd
 -- Looking for SDL
 -- Looking for include files CMAKE_HAVE_PTHREAD_H
@@ -229,7 +234,7 @@ svn: E170001: Could not initialize the SASL library
 -- Found Qt4: C:/Qt/4.8.0-vc/bin/qmake.exe (found version "4.8.0")
 -- Configuring done
 -- Generating done
--- Build files have been written to: Z:/yourbuilddir/companion9x/trunk/build </code>
+-- Build files have been written to: Z:/yourbuilddir/companion9x/build/trunk/build </code>
 
 If you get errors due to missing files (which you won't if you have followed the above) then after you have corrected the error and before you re-run CMake it is best to delete build/CMakeCache.txt
 
