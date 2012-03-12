@@ -64,10 +64,12 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   disableThrottleWarning:1;
   int8_t    switchWarning:2; // -1=down, 0=off, 1=up
   int8_t    beeperMode:2;
-  uint8_t   spare:1;
+  uint8_t   spare1:1;
   uint8_t   disableMemoryWarning:1;
   uint8_t   disableAlarmWarning:1;
-  uint8_t   stickMode;
+  uint8_t   stickMode:2;
+  int8_t    timezone:5;
+  uint8_t   spare:1;
   uint8_t   inactivityTimer;
   uint8_t   throttleReversed:1;
   uint8_t   minuteBeep:1;

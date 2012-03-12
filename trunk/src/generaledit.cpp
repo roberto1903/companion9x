@@ -37,6 +37,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->hideNameOnSplashChkB->hide();
       ui->label_hideOwnerName->hide();      
     }
+    if (!GetEepromInterface()->getCapability(TelemetryTimeshift)) {
+      ui->label_timezone->hide();
+      ui->timezoneSB->hide();
+      ui->timezoneSB->setDisabled(true);
+    }
+    ui->timezoneSB->setValue(g_eeGeneral.timezone);
     if (GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
         ui->tabWidget->removeTab(2);
     }
@@ -267,22 +273,29 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 
 void GeneralEdit::on_beeperlenCB_currentIndexChanged(int index)
 {
-    g_eeGeneral.beeperLength = index-2;
-    updateSettings();
+  g_eeGeneral.beeperLength = index-2;
+  updateSettings();
 }
 
 
 void GeneralEdit::on_backlightautoSB_editingFinished()
 {
-    int i = ui->backlightautoSB->value()/5;
-    if((i*5)!=ui->backlightautoSB->value())
-        ui->backlightautoSB->setValue(i*5);
-    else
-    {
-        g_eeGeneral.lightAutoOff = i;
-        updateSettings();
-    }
+  int i = ui->backlightautoSB->value()/5;
+  if((i*5)!=ui->backlightautoSB->value())
+    ui->backlightautoSB->setValue(i*5);
+  else
+  {
+    g_eeGeneral.lightAutoOff = i;
+    updateSettings();
+  }
 }
+
+void GeneralEdit::on_timezoneSB_editingFinished()
+{
+  g_eeGeneral.timezone = ui->timezoneSB->value();
+  updateSettings();
+}
+
 
 void GeneralEdit::on_blOnStickMoveSB_editingFinished()
 {
