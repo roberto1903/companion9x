@@ -228,9 +228,8 @@ PACK(typedef struct t_Er9xModelData {
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Er9xCustomSwData   customSw[NUM_CSW];
-  uint8_t   a1voltRatio;  //FrSky
-  uint8_t   a2voltRatio;  //FrSky
-  uint8_t   res3;
+  uint8_t   frSkyVoltThreshold ;
+  uint8_t   res3[2];
   Er9xSafetySwData  safetySw[NUM_CHNOUT];
   Er9xFrSkyData frsky;
   operator ModelData();
