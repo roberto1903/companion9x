@@ -1029,7 +1029,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="692"/>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
-        <translation>Non posso convertire la eeprom per quasto firmware, verrà usata la EEProm originale</translation>
+        <translation>Non posso convertire la eeprom per questo firmware, verrà usata la EEProm originale</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="697"/>

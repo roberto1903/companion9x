@@ -1,3 +1,4 @@
+#define HELI
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSTD
