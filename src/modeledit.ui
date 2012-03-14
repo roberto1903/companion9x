@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -770,8 +770,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>248</width>
-              <height>180</height>
+              <width>244</width>
+              <height>177</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1024,7 +1024,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>292</height>
+              <height>287</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1427,7 +1427,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1798,7 +1798,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2169,7 +2169,7 @@
               <x>0</x>
               <y>0</y>
               <width>306</width>
-              <height>286</height>
+              <height>275</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2575,8 +2575,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>293</width>
-            <height>455</height>
+            <width>810</width>
+            <height>515</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -2600,6 +2600,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -2670,6 +2673,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="2" column="2">
@@ -2738,6 +2744,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -2808,6 +2817,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="4" column="2">
@@ -2876,6 +2888,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -2946,6 +2961,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="6" column="2">
@@ -3014,6 +3032,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -3084,6 +3105,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="8" column="2">
@@ -3152,6 +3176,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -3222,6 +3249,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="10" column="2">
@@ -3290,6 +3320,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -3360,6 +3393,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="12" column="2">
@@ -3428,6 +3464,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -3498,6 +3537,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="14" column="2">
@@ -3567,6 +3609,9 @@
              <property name="minimum">
               <double>-100.000000000000000</double>
              </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="15" column="2">
@@ -3635,6 +3680,9 @@
              </property>
              <property name="minimum">
               <double>-100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
              </property>
             </widget>
            </item>
@@ -3824,8 +3872,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>679</width>
-            <height>556</height>
+            <width>682</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8738,8 +8786,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>149</width>
-            <height>343</height>
+            <width>140</width>
+            <height>284</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

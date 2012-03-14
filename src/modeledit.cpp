@@ -600,7 +600,7 @@ void ModelEdit::tabLimits()
 {
   foreach(QDoubleSpinBox *sb, findChildren<QDoubleSpinBox *>(QRegExp("offsetDSB_[0-9]+"))) {
     int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-    sb->setValue(g_model.limitData[sbn].offset/10);
+    sb->setValue(g_model.limitData[sbn].offset/10.0);
     connect(sb, SIGNAL(editingFinished()), this, SLOT(limitOffsetEdited()));
   }
 
@@ -720,7 +720,7 @@ void ModelEdit::limitOffsetEdited()
 {
   QDoubleSpinBox *dsb = qobject_cast<QDoubleSpinBox*>(sender());
   int limitId=dsb->objectName().mid(dsb->objectName().lastIndexOf("_")+1).toInt()-1;
-  g_model.limitData[limitId].offset = dsb->value()*10;
+  g_model.limitData[limitId].offset = round(dsb->value()*10);
   updateSettings(); 
 }
 
