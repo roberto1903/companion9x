@@ -1326,6 +1326,9 @@ t_Open9xModelData_v205::operator ModelData ()
     case 3:
       c9x.protocol = PPM16;
       break;
+    case 4:
+      c9x.protocol = FAAST;
+      break;
     default:
       c9x.protocol = PPM;
       break;
@@ -1395,6 +1398,9 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
         break;
       case PPM16:
         protocol = 3;
+        break;
+      case FAAST:
+        protocol = 4;
         break;
       default:
         protocol = 0;
