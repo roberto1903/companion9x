@@ -301,6 +301,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return TM_HASTELEMETRY|TM_HASOFFSET|TM_HASWSHH;
     case TelemetryBars:
       return 1;
+    case TelemetryCSFields:
+      return 1;
     case TelemetryUnits:
       return 1;
     case TelemetryBlades:
@@ -325,6 +327,7 @@ int Open9xInterface::hasProtocol(Protocol proto)
     case DSM2:
     case PXX:
     case PPM16:
+    case FAAST:
       return 1;
     default:
       return 0;
