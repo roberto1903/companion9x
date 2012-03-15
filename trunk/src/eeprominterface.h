@@ -479,6 +479,7 @@ class FrSkyData {
     uint8_t usrProto;
     uint8_t imperial;
     uint8_t blades;
+    uint8_t csField[8];
     FrSkyBarData bars[4];
     FrSkyRSSIAlarm rssiAlarms[2];
     
@@ -526,7 +527,8 @@ enum Protocol {
   CTP1009,
   PXX,
   DSM2,
-  PPM16
+  PPM16,
+  FAAST        
 };
 
 typedef struct proto
@@ -544,6 +546,7 @@ const t_protocol prot_list[]= {
   {DSM2, "DSM2"},
   {PXX, "FRSky PXX"},
   {PPM16, "PPM16"},
+  {FAAST, "FAAST"},
 };
 
 
@@ -630,6 +633,7 @@ enum Capability {
  TelemetryUnits,
  TelemetryBlades,
  TelemetryBars,
+ TelemetryCSFields,
  TelemetryRSSIModel,
  TelemetryAlarm,
  TelemetryTimeshift,

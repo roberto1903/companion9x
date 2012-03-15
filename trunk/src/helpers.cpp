@@ -3,7 +3,7 @@
 #include "eeprominterface.h"
 
 #define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
-
+#define TELEMETRY_SRC "----""A1  ""A2  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Cell""Dist""AccX""AccY""AccZ""TMR1""TMR2""ACC ""Time"
 QString getPhaseName(int val) {
   if (!val) return "---";
   return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
@@ -25,6 +25,15 @@ void populateSwitchCB(QComboBox *b, int value) {
   b->setCurrentIndex(value + MAX_DRSWITCH);
   b->setMaxVisibleItems(10);
 }
+
+void populatecsFieldCB(QComboBox *b, int value) {
+  b->clear();
+  for (int i = 0; i < 18; i++)
+    b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
+  b->setCurrentIndex(value);
+  b->setMaxVisibleItems(10);
+}
+
 
 QString getFuncName(unsigned int val)
 {

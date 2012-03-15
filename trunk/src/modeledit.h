@@ -236,6 +236,7 @@ private slots:
     void on_telMaxSB_2_editingFinished();
     void on_telMaxSB_3_editingFinished();
     void on_telMaxSB_4_editingFinished();
+    void customFieldEdited();
     void on_numChannelsSB_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);

@@ -940,6 +940,18 @@ void ModelEdit::tabSafetySwitches()
         connect(safetySwitchValue[i],SIGNAL(editingFinished()),this,SLOT(safetySwitchesEdited()));
     }
 }
+void ModelEdit::customFieldEdited() {
+  if (telemetryLock) return;
+  g_model.frsky.csField[0]=ui->telemetryCSF1_CB->currentIndex();
+  g_model.frsky.csField[1]=ui->telemetryCSF2_CB->currentIndex();
+  g_model.frsky.csField[2]=ui->telemetryCSF3_CB->currentIndex();
+  g_model.frsky.csField[3]=ui->telemetryCSF4_CB->currentIndex();
+  g_model.frsky.csField[4]=ui->telemetryCSF5_CB->currentIndex();
+  g_model.frsky.csField[5]=ui->telemetryCSF6_CB->currentIndex();
+  g_model.frsky.csField[6]=ui->telemetryCSF7_CB->currentIndex();
+  g_model.frsky.csField[7]=ui->telemetryCSF8_CB->currentIndex();
+  updateSettings();
+}
 
 void ModelEdit::customSwitchesEdited()
 {
@@ -1034,6 +1046,7 @@ void ModelEdit::tabTelemetry()
   float a2ratio;
   const char *  StdTelBar[]={"---","A1","A2"};
   const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell"};
+  QComboBox* csf[8] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB };
   telemetryLock=true;
   //frsky Settings
   if (!GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
@@ -1046,6 +1059,14 @@ void ModelEdit::tabTelemetry()
   
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
+  }
+  if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    ui->groupBox_5->hide();
+  } else {
+    for (int i=0; i<8; i++) {
+      populatecsFieldCB(csf[i], g_model.frsky.csField[i]);
+      connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
+    }
   }
   if (!GetEepromInterface()->getCapability(TelemetryUnits)) {
     ui->frskyUnitsCB->setDisabled(true);
