@@ -3087,200 +3087,190 @@ MixData* ModelEdit::setDest(uint8_t dch)
 
 void ModelEdit::clearExpos(bool ask)
 {
-    if(ask)
-    {
-        int res = QMessageBox::question(this,tr("Clear Expos?"),tr("Really clear all the expos?"),QMessageBox::Yes | QMessageBox::No);
-        if(res!=QMessageBox::Yes) return;
-    }
-    memset(g_model.expoData,0,sizeof(g_model.expoData)); //clear all expos
-    updateSettings();
-    tabExpos();
+  if(ask) {
+    int res = QMessageBox::question(this,tr("Clear Expos?"),tr("Really clear all the expos?"),QMessageBox::Yes | QMessageBox::No);
+    if(res!=QMessageBox::Yes) return;
+  }
+  memset(g_model.expoData,0,sizeof(g_model.expoData)); //clear all expos
+  updateSettings();
+  tabExpos();
 }
 
 void ModelEdit::clearMixes(bool ask)
 {
-    if(ask)
-    {
-        int res = QMessageBox::question(this,tr("Clear Mixes?"),tr("Really clear all the mixes?"),QMessageBox::Yes | QMessageBox::No);
-        if(res!=QMessageBox::Yes) return;
-    }
-    memset(g_model.mixData,0,sizeof(g_model.mixData)); //clear all mixes
-    updateSettings();
-    tabMixes();
+  if(ask) {
+    int res = QMessageBox::question(this,tr("Clear Mixes?"),tr("Really clear all the mixes?"),QMessageBox::Yes | QMessageBox::No);
+    if(res!=QMessageBox::Yes) return;
+  }
+  memset(g_model.mixData,0,sizeof(g_model.mixData)); //clear all mixes
+  updateSettings();
+  tabMixes();
 }
 
 void ModelEdit::clearCurves(bool ask)
 {
-    if(ask)
-    {
-        int res = QMessageBox::question(this,tr("Clear Curves?"),tr("Really clear all the curves?"),QMessageBox::Yes | QMessageBox::No);
-        if(res!=QMessageBox::Yes) return;
-    }
-    memset(g_model.curves5,0,sizeof(g_model.curves5)); //clear all curves
-    memset(g_model.curves9,0,sizeof(g_model.curves9)); //clear all curves
-    updateSettings();
-    updateCurvesTab();
-    resizeEvent();
+  if(ask) {
+    int res = QMessageBox::question(this,tr("Clear Curves?"),tr("Really clear all the curves?"),QMessageBox::Yes | QMessageBox::No);
+    if(res!=QMessageBox::Yes) return;
+  }
+  memset(g_model.curves5,0,sizeof(g_model.curves5)); //clear all curves
+  memset(g_model.curves9,0,sizeof(g_model.curves9)); //clear all curves
+  updateSettings();
+  updateCurvesTab();
+  resizeEvent();
 }
 
 void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 {
-    if(c<MAX_CURVE5) //5 pt curve
-        for(uint8_t i=0; i<5; i++) g_model.curves5[c][i] = ar[i];
-    else  //9 pt curve
-        for(uint8_t i=0; i<9; i++) g_model.curves9[c-MAX_CURVE5][i] = ar[i];
+  if(c<MAX_CURVE5) //5 pt curve
+    for(uint8_t i=0; i<5; i++) g_model.curves5[c][i] = ar[i];
+  else  //9 pt curve
+    for(uint8_t i=0; i<9; i++) g_model.curves9[c-MAX_CURVE5][i] = ar[i];
 }
 
 void ModelEdit::setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2)
 {
-    g_model.customSw[idx-1].func = func;
-    g_model.customSw[idx-1].v1   = v1;
-    g_model.customSw[idx-1].v2   = v2;
+  g_model.customSw[idx-1].func = func;
+  g_model.customSw[idx-1].v1   = v1;
+  g_model.customSw[idx-1].v2   = v2;
 }
 
 void ModelEdit::applyTemplate(uint8_t idx)
 {
-    int8_t heli_ar1[] = {-100, -20, 30, 70, 90};
-    int8_t heli_ar2[] = {80, 70, 60, 70, 100};
-    int8_t heli_ar3[] = {100, 90, 80, 90, 100};
-    int8_t heli_ar4[] = {-30,  -15, 0, 50, 100};
-    int8_t heli_ar5[] = {-100, -50, 0, 50, 100};
+  int8_t heli_ar1[] = {-100, -20, 30, 70, 90};
+  int8_t heli_ar2[] = {80, 70, 60, 70, 100};
+  int8_t heli_ar3[] = {100, 90, 80, 90, 100};
+  int8_t heli_ar4[] = {-30,  -15, 0, 50, 100};
+  int8_t heli_ar5[] = {-100, -50, 0, 50, 100};
 
 
-    MixData *md = &g_model.mixData[0];
+  MixData *md = &g_model.mixData[0];
 
-    //CC(STK)   -> vSTK
-    //ICC(vSTK) -> STK
+  //CC(STK)   -> vSTK
+  //ICC(vSTK) -> STK
 #define ICC(x) icc[(x)-1]
-    uint8_t icc[4] = {0};
-    for(uint8_t i=1; i<=4; i++) //generate inverse array
-        for(uint8_t j=1; j<=4; j++) if(CC(i)==j) icc[j-1]=i;
+  uint8_t icc[4] = {0};
+  for(uint8_t i=1; i<=4; i++) //generate inverse array
+    for(uint8_t j=1; j<=4; j++) if(CC(i)==j) icc[j-1]=i;
 
 
-    uint8_t j = 0;
+  uint8_t j = 0;
 
 
-    //Simple 4-Ch
-    if(idx==j++)
-    {
-      if (md->destCh)
-        clearMixes();
-      md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
-      md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight=100;
-      md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-      md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
-    }
+  //Simple 4-Ch
+  if(idx==j++) {
+    if (md->destCh)
+      clearMixes();
+    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight=100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
+  }
 
-    //T-Cut
-    if(idx==j++)
-    {
-        md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
-    }
+  //T-Cut
+  if(idx==j++) {
+      md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+  }
 
-    //sticky t-cut
-    if(idx==j++)
-    {
-        md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
-        md=setDest(14);            md->srcRaw=SRC_CH14; md->weight= 100;
-        md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
-        md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+  //sticky t-cut
+  if(idx==j++) {
+    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=SRC_CH14; md->weight= 100;
+    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+    setSwitch(0xB,CS_VNEG, STK_THR, -99);
+    setSwitch(0xC,CS_VPOS, SRC_CH14, 0);
+    updateSwitchesTab();
+  }
 
-        setSwitch(0xB,CS_VNEG, STK_THR, -99);
-        setSwitch(0xC,CS_VPOS, SRC_CH14, 0);
+  //V-Tail
+  if(idx==j++) {
+    clearMixes();
+    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight= 100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_ELE;  md->weight=-100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_RUD;  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
+  }
 
-        updateSwitchesTab();
-    }
-
-    //V-Tail
-    if(idx==j++)
-    {
-        clearMixes();
-        md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight= 100;
-        md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_ELE;  md->weight=-100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_RUD;  md->weight= 100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
-    }
-
-    //Elevon\\Delta
-    if(idx==j++)
-    {
-        clearMixes();
-        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
-        md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_AIL;  md->weight= 100;
-        md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_ELE;  md->weight= 100;
-        md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=-100;
-    }
+  //Elevon\\Delta
+  if(idx==j++) {
+    clearMixes();
+    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_AIL;  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_ELE;  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=-100;
+  }
 
 
-    //Heli Setup
-    if(idx==j++)
-    {
-        clearMixes();  //This time we want a clean slate
-        clearCurves();
+  //Heli Setup
+  if(idx==j++)  {
+    clearMixes();  //This time we want a clean slate
+    clearCurves();
 
-        // Set up Mixes
-        // 3 cyclic channels
-        md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
-        md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
-        md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
+    // Set up Mixes
+    // 3 cyclic channels
+    md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
+    md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
+    md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
 
-        // rudder
-        md=setDest(4);  md->srcRaw=SRC_RUD;   md->weight=100;
+    // rudder
+    md=setDest(4);  md->srcRaw=SRC_RUD;   md->weight=100;
 
-        // throttle
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
-        md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
+    // throttle
+    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
-        // gyro gain
-        md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
+    // gyro gain
+    md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
 
-        // collective
-        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
-        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
-        md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
+    // collective
+    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-        g_model.swashRingData.type = SWASH_TYPE_120;
-        g_model.swashRingData.collectiveSource = CH(11);
+    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.collectiveSource = CH(11);
 
-        // set up Curves
-        setCurve(CURVE5(1),heli_ar1);
-        setCurve(CURVE5(2),heli_ar2);
-        setCurve(CURVE5(3),heli_ar3);
-        setCurve(CURVE5(4),heli_ar4);
-        setCurve(CURVE5(5),heli_ar5);
-        setCurve(CURVE5(6),heli_ar5);
+    // set up Curves
+    setCurve(CURVE5(1),heli_ar1);
+    setCurve(CURVE5(2),heli_ar2);
+    setCurve(CURVE5(3),heli_ar3);
+    setCurve(CURVE5(4),heli_ar4);
+    setCurve(CURVE5(5),heli_ar5);
+    setCurve(CURVE5(6),heli_ar5);
 
-        // make sure curves are redrawn
-        updateHeliTab();
-        updateCurvesTab();
-        resizeEvent();
-    }
+    // make sure curves are redrawn
+    updateHeliTab();
+    updateCurvesTab();
+    resizeEvent();
+  }
 
-    //Gyro Gain
-    if(idx==j++)
-    {
-        md=setDest(6);  md->srcRaw=SRC_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
-        md=setDest(6);  md->srcRaw=SRC_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
-    }
+  //Gyro Gain
+  if(idx==j++) {
+    md=setDest(6);  md->srcRaw=SRC_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
+    md=setDest(6);  md->srcRaw=SRC_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
+  }
 
-    //Servo Test
-    if(idx==j++)
-    {
-        md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
-        md=setDest(16); md->srcRaw=SRC_SW1; md->weight= 110;
-        md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
-        md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
+  //Servo Test
+  if(idx==j++) {
+    md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
+    md=setDest(16); md->srcRaw=SRC_SW1; md->weight= 110;
+    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
+    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
 
-        setSwitch(1,CS_LESS,CH(15), CH(16));
-        setSwitch(2,CS_VPOS,CH(15), 105);
-        setSwitch(3,CS_VNEG,CH(15),-105);
+    setSwitch(1,CS_LESS,CH(15), CH(16));
+    setSwitch(2,CS_VPOS,CH(15), 105);
+    setSwitch(3,CS_VNEG,CH(15),-105);
 
-        // redraw switches tab
-        updateSwitchesTab();
-    }
-
+    // redraw switches tab
+    updateSwitchesTab();
+  }
 }
 
 void ModelEdit::ControlCurveSignal(bool flag)
