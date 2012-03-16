@@ -3,12 +3,11 @@
 #include "eeprominterface.h"
 
 #define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
-#define TELEMETRY_SRC "----""A1  ""A2  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Cell""Dist""AccX""AccY""AccZ""TMR1""TMR2""ACC ""Time"
+#define TELEMETRY_SRC "----""A1  ""A2  ""Alt ""Rpm ""Fuel""t1  ""t2  ""Spd ""Dist""Cell""RSTx""RSRx""AccX""AccY""AccZ""HDG ""a1  ""a2  ""ALT ""RPM ""T1  ""T2  ""SPD ""DIST""TMR1""TMR2""ACC ""Time"
 QString getPhaseName(int val) {
   if (!val) return "---";
   return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
 }
-
 QString getSWName(int val) {
 
   if (!val) return "---";
@@ -18,7 +17,8 @@ QString getSWName(int val) {
   return QString(val < 0 ? "!" : "") + QString(SWITCHES_STR).mid((abs(val) - 1)*3, 3);
 }
 
-void populateSwitchCB(QComboBox *b, int value) {
+void populateSwitchCB(QComboBox *b, int value)
+{
   b->clear();
   for (int i = -MAX_DRSWITCH; i <= MAX_DRSWITCH; i++)
     b->addItem(getSWName(i));
@@ -26,9 +26,10 @@ void populateSwitchCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
-void populatecsFieldCB(QComboBox *b, int value) {
+void populatecsFieldCB(QComboBox *b, int value, bool last=false)
+{
   b->clear();
-  for (int i = 0; i < 18; i++)
+  for (int i = 0; i < 29-(last ? 2 :0); i++)
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);

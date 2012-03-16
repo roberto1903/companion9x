@@ -22,7 +22,7 @@ void populateFuncCB(QComboBox *b, unsigned int value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
-void populatecsFieldCB(QComboBox *b, int value);
+void populatecsFieldCB(QComboBox *b, int value, bool last);
 void populateExpoCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches);
