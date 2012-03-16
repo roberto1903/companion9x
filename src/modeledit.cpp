@@ -1064,7 +1064,7 @@ void ModelEdit::tabTelemetry()
     ui->groupBox_5->hide();
   } else {
     for (int i=0; i<8; i++) {
-      populatecsFieldCB(csf[i], g_model.frsky.csField[i]);
+      populatecsFieldCB(csf[i], g_model.frsky.csField[i], (i<6));
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }
   }
