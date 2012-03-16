@@ -1373,13 +1373,17 @@ t_Open9xModelData_v205::operator ModelData ()
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
+  for (int i=0; i<8; i++) {
+    c9x.frsky.csField[i]=( (i&0x01==0x01) ? ((frskyLines[i/2]&0xF0)>>3) : ((frskyLines[i/2]&0x0F)<<1))+ ((frskyLinesXtra&(0x01<<i))>>i);
+  }
+
   return c9x;
 }
 
 t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
 {
-  if (sizeof(*this) != 734) {
-    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(734));
+  if (sizeof(*this) != 739) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(739));
   }
 
   if (c9x.used) {
@@ -1465,6 +1469,12 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
+    frskyLinesXtra=0;
+    for (int i=0; i<8; i++) {
+      if ((i&0x01)==0) frskyLines[i/2]=0;
+      frskyLines[i/2]+=((i&0x01==0x01) ? ((c9x.frsky.csField[i]>>1)&0x0F)<<4 :((c9x.frsky.csField[i]>>1)&0x0F));
+      frskyLinesXtra|=(c9x.frsky.csField[i]&0x01)<<i;
+    }
   }
   else {
     memset(this, 0, sizeof(t_Open9xModelData_v205));

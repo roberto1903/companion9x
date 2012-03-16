@@ -575,6 +575,8 @@ PACK(typedef struct t_Open9xModelData_v205 {
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
+  uint8_t   frskyLines[4];
+  uint8_t   frskyLinesXtra;
 
   operator ModelData();
   t_Open9xModelData_v205() { memset(this, 0, sizeof(t_Open9xModelData_v205)); }
