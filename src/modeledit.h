@@ -29,6 +29,7 @@ private:
     QSpinBox* spn9[MAX_CURVE9][9];
     QSpinBox* minSB[4];
     QSpinBox* maxSB[4];
+    QComboBox* csf[8];
     MixersList *ExposlistWidget;
 
     MixersList *MixerlistWidget;
