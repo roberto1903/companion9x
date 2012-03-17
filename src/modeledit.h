@@ -27,7 +27,8 @@ private:
 
     QSpinBox* spn5[MAX_CURVE5][5];
     QSpinBox* spn9[MAX_CURVE9][9];
-
+    QSpinBox* minSB[4];
+    QSpinBox* maxSB[4];
     MixersList *ExposlistWidget;
 
     MixersList *MixerlistWidget;
@@ -224,18 +225,9 @@ private slots:
     void on_rssiAlarm2CB_currentIndexChanged(int index);
     void on_rssiAlarm1SB_editingFinished();
     void on_rssiAlarm2SB_editingFinished();
-    void on_telBarCB_1_currentIndexChanged(int index);
-    void on_telBarCB_2_currentIndexChanged(int index);
-    void on_telBarCB_3_currentIndexChanged(int index);
-    void on_telBarCB_4_currentIndexChanged(int index);
-    void on_telMinSB_1_editingFinished();
-    void on_telMinSB_2_editingFinished();
-    void on_telMinSB_3_editingFinished();
-    void on_telMinSB_4_editingFinished();
-    void on_telMaxSB_1_editingFinished();
-    void on_telMaxSB_2_editingFinished();
-    void on_telMaxSB_3_editingFinished();
-    void on_telMaxSB_4_editingFinished();
+    void telBarCBcurrentIndexChanged(int index);
+    void telMaxSBeditingFinished();
+    void telMinSBeditingFinished();
     void customFieldEdited();
     void on_numChannelsSB_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
