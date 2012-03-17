@@ -1050,9 +1050,11 @@ void ModelEdit::tabTelemetry()
   QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   QSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
   QSpinBox* maxsb[4] = { ui->telMaxSB_1,  ui->telMaxSB_2,  ui->telMaxSB_3,  ui->telMaxSB_4};
+  QComboBox* tmp[8] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB };
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
-  
+  memcpy(csf, tmp, sizeof(csf));
+    
   QComboBox* csf[8] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB };
   telemetryLock=true;
   //frsky Settings
@@ -1071,7 +1073,7 @@ void ModelEdit::tabTelemetry()
     ui->groupBox_5->hide();
   } else {
     for (int i=0; i<8; i++) {
-      populatecsFieldCB(csf[i], g_model.frsky.csField[i], (i<6));
+      populatecsFieldCB(csf[i], g_model.frsky.csField[i], (i<6),g_model.frsky.usrProto);
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }
   }
@@ -1652,6 +1654,16 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
       ui->telBarCB_4->addItem(FrSkyTelBar[i]);
     }
   }
+  if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    ui->groupBox_5->hide();
+  } else {
+    for (int i=0; i<8; i++) {
+      csf[i]->clear();
+      populatecsFieldCB(csf[i], g_model.frsky.csField[i], (i<6),g_model.frsky.usrProto);
+    }
+  }
+  
+  
   telemetryLock=false;
   if (index==0) {
     if (b1>2) {

@@ -4,6 +4,7 @@
 
 #define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
 #define TELEMETRY_SRC "----""A1  ""A2  ""Alt ""Rpm ""Fuel""t1  ""t2  ""Spd ""Dist""Cell""RSTx""RSRx""AccX""AccY""AccZ""HDG ""a1  ""a2  ""ALT ""RPM ""T1  ""T2  ""SPD ""DIST""TMR1""TMR2""ACC ""Time"
+
 QString getPhaseName(int val) {
   if (!val) return "---";
   return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
@@ -26,12 +27,21 @@ void populateSwitchCB(QComboBox *b, int value)
   b->setMaxVisibleItems(10);
 }
 
-void populatecsFieldCB(QComboBox *b, int value, bool last=false)
+void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
+  int telem_hub[]={0,0,0,2,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,2,1,1,1,1,1,0,0,1,1};
   b->clear();
-  for (int i = 0; i < 29-(last ? 2 :0); i++)
+  for (int i = 0; i < 29-(last ? 2 :0); i++) {
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
-  b->setCurrentIndex(value);
+    if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);
+    }
+  }
+  if ((telem_hub[value]==0 || ((telem_hub[value]>=hubproto) && hubproto!=0))) {
+        b->setCurrentIndex(value);
+  }
   b->setMaxVisibleItems(10);
 }
 
