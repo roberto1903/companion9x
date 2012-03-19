@@ -170,7 +170,7 @@ QString getSourceStr(int idx)
                         QObject::tr("CH1"), QObject::tr("CH2"), QObject::tr("CH3"), QObject::tr("CH4"), QObject::tr("CH5"), QObject::tr("CH6"), QObject::tr("CH7"), QObject::tr("CH8"),
                         QObject::tr("CH9"), QObject::tr("CH10"), QObject::tr("CH11"), QObject::tr("CH12"), QObject::tr("CH13"), QObject::tr("CH14"), QObject::tr("CH15"), QObject::tr("CH16"),
                         QObject::tr("Timer1"), QObject::tr("Timer2"),
-                        QObject::tr("A1"), QObject::tr("A2"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("CELL") };
+                        QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("DIST"), QObject::tr("CELL") };
 
   if (idx < SRC_STHR)
     return sorces1[idx];
