@@ -1386,8 +1386,8 @@ t_Open9xModelData_v205::operator ModelData ()
 
 t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
 {
-  if (sizeof(*this) != 739) {
-    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(739));
+  if (sizeof(*this) != 740) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(740));
   }
 
   if (c9x.used) {

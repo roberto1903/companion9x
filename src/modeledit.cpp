@@ -1044,8 +1044,8 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
-  const char *  StdTelBar[]={"---","A1","A2"};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell","Dist"};
+  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX"};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","Cell"};
   
   QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   QSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
@@ -1136,7 +1136,7 @@ void ModelEdit::tabTelemetry()
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
   ui->frskyUnitsCB->setCurrentIndex(g_model.frsky.imperial);
   ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
-  for(int i=0; i<3;i++) {
+  for(int i=0; i<7;i++) {
     for (int j=0;j<4;j++) {
       barsCB[j]->addItem(StdTelBar[i]);
     }
@@ -1622,8 +1622,8 @@ void ModelEdit::on_frskyBladesCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
 {
   if (telemetryLock) return;
-  const char *  StdTelBar[]={"---","A1","A2"};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Cell"};
+  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX"};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","Cell"};
   int b1=ui->telBarCB_1->currentIndex();
   int b2=ui->telBarCB_2->currentIndex();
   int b3=ui->telBarCB_3->currentIndex();
@@ -1634,7 +1634,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   ui->telBarCB_2->clear();
   ui->telBarCB_3->clear();
   ui->telBarCB_4->clear();
-  for(int i=0; i<3;i++) {
+  for(int i=0; i<7;i++) {
     ui->telBarCB_1->addItem(StdTelBar[i]);
     ui->telBarCB_2->addItem(StdTelBar[i]);
     ui->telBarCB_3->addItem(StdTelBar[i]);
@@ -1647,7 +1647,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
     ui->telBarCB_4->addItem("Alt");
   }
   if (index==1) {
-    for(int i=0; i<6;i++) {
+    for(int i=0; i<7;i++) {
       ui->telBarCB_1->addItem(FrSkyTelBar[i]);
       ui->telBarCB_2->addItem(FrSkyTelBar[i]);
       ui->telBarCB_3->addItem(FrSkyTelBar[i]);
