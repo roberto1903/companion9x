@@ -1,6 +1,7 @@
 #include "burnconfigdialog.h"
 #include "ui_burnconfigdialog.h"
 #include "avroutputdialog.h"
+#include "eeprominterface.h"
 #include <QtGui>
 
 burnConfigDialog::burnConfigDialog(QWidget *parent) :
@@ -195,12 +196,17 @@ void burnConfigDialog::restFuses(bool eeProtect)
     {
         QStringList args   = avrArgs;
         if(!avrPort.isEmpty()) args << "-P" << avrPort;
-
-        QString erStr = eeProtect ? "hfuse:w:0x81:m" : "hfuse:w:0x89:m";
         QStringList str;
-        str << "-U" << "lfuse:w:0x0E:m" << "-U" << erStr << "-U" << "efuse:w:0xFF:m";
-        //use hfuse = 0x81 to prevent eeprom being erased with every flashing
-
+        if (avrMCU=="m2560") {
+          QString erStr = eeProtect ? "hfuse:w:0x11:m" : "hfuse:w:0x19:m";
+          str << "-U" << "lfuse:w:0xD7:m" << "-U" << erStr << "-U" << "efuse:w:0xFC:m";
+          //use hfuse = 0x81 to prevent eeprom being erased with every flashing          
+        }
+        else {  
+          QString erStr = eeProtect ? "hfuse:w:0x81:m" : "hfuse:w:0x89:m";
+          str << "-U" << "lfuse:w:0x0E:m" << "-U" << erStr << "-U" << "efuse:w:0xFF:m";
+          //use hfuse = 0x81 to prevent eeprom being erased with every flashing
+        }
         QStringList arguments;
         arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << "-u" << str;
 
