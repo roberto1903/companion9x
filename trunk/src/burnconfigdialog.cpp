@@ -190,7 +190,7 @@ void burnConfigDialog::restFuses(bool eeProtect)
     QMessageBox::StandardButton ret = QMessageBox::No;
 
     ret = QMessageBox::warning(this, tr("companion9x"),
-                               tr("<b><u>WARNING!</u></b><br>This will reset the fuses to the factory settings.<br>Writing fuses can mess up your radio.<br>Do this only if you are sure they are wrong!<br>Are you sure you want to continue?"),
+                               tr("<b><u>WARNING!</u></b><br>This will reset the fuses of  %1 to the factory settings.<br>Writing fuses can mess up your radio.<br>Do this only if you are sure they are wrong!<br>Are you sure you want to continue?").arg(avrMCU),
                                QMessageBox::Yes | QMessageBox::No);
     if (ret == QMessageBox::Yes)
     {
@@ -198,6 +198,7 @@ void burnConfigDialog::restFuses(bool eeProtect)
         if(!avrPort.isEmpty()) args << "-P" << avrPort;
         QStringList str;
         if (avrMCU=="m2560") {
+          args << "-B8";
           QString erStr = eeProtect ? "hfuse:w:0x11:m" : "hfuse:w:0x19:m";
           str << "-U" << "lfuse:w:0xD7:m" << "-U" << erStr << "-U" << "efuse:w:0xFC:m";
           //use hfuse = 0x81 to prevent eeprom being erased with every flashing          
