@@ -24,9 +24,10 @@
 
 namespace Open9xV4 {
 #include "../open9x/board_gruvin9x.cpp"
+#include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
-#include "../open9x/gtime.cpp"
-#include "../open9x/rtc.cpp"
+#include "../open9x/gruvin9x/gtime.cpp"
+#include "../open9x/gruvin9x/rtc.cpp"
 #include "../open9x/pulses.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
@@ -34,8 +35,6 @@ namespace Open9xV4 {
 #include "../open9x/general_menus.cpp"
 #include "../open9x/main_views.cpp"
 #include "../open9x/statistics_views.cpp"
-#include "../open9x/pers.cpp"
-#include "../open9x/file.cpp"
 #include "../open9x/lcd.cpp"
 #include "../open9x/drivers.cpp"
 #include "../open9x/simpgmspace.cpp"
