@@ -21,7 +21,7 @@
 #include <exception>
 
 namespace Open9x {
-
+#include "../open9x/board_stock.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses.cpp"
 #include "../open9x/stamp.cpp"

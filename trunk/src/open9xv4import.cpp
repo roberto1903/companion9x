@@ -23,7 +23,7 @@
 #include <exception>
 
 namespace Open9xV4 {
-
+#include "../open9x/board_gruvin9x.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/gtime.cpp"
 #include "../open9x/rtc.cpp"
