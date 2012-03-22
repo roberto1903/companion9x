@@ -4,6 +4,7 @@
 #define PCBSTD
 #define SPLASH
 #define DECIMALS_DISPLAYED
+#define HELI
 #define TEMPLATES
 #define FRSKY
 #define FRSKY_HUB
