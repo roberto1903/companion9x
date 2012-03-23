@@ -4,24 +4,8 @@
 <context>
     <name>ExpoDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>Weight</source>
-        <translation>Vikt</translation>
-    </message>
-    <message>
-        <source>The value of the weight</source>
-        <translation>Viktnings-värde</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation>Fas</translation>
     </message>
     <message>
         <source>Phase used by the expo.</source>
@@ -34,8 +18,8 @@
     <message>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
-        <translation type="unfinished">Brytare som används av expo.
-Om värdet är blankt så är expo påslaget hela tiden.</translation>
+        <translation>Brytare som används av expo.
+Om fältet lämnas tomt så är expo påslaget hela tiden.</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -76,6 +60,18 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expovärde&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Vikt</translation>
+    </message>
+    <message>
+        <source>The value of the weight</source>
+        <translation>Viktningsvärde</translation>
+    </message>
+    <message>
+        <source>Phase</source>
+        <translation>Fas</translation>
     </message>
 </context>
 <context>
@@ -406,10 +402,6 @@ Mode 4:
         <translation>Lång</translation>
     </message>
     <message>
-        <source>Extra Long</source>
-        <translation type="obsolete">ExtraLång</translation>
-    </message>
-    <message>
         <source>Input Filter</source>
         <translation>Filtrering av ingång</translation>
     </message>
@@ -626,40 +618,8 @@ Mode 4:
         <translation>Batteri</translation>
     </message>
     <message>
-        <source>ANALOG 1</source>
-        <translation type="obsolete">ANALOG 1</translation>
-    </message>
-    <message>
-        <source>ANALOG 2</source>
-        <translation type="obsolete">ANALOG 2</translation>
-    </message>
-    <message>
-        <source>ANALOG 3</source>
-        <translation type="obsolete">ANALOG 3</translation>
-    </message>
-    <message>
-        <source>ANALOG 4</source>
-        <translation type="obsolete">ANALOG 4</translation>
-    </message>
-    <message>
-        <source>ANALOG 5</source>
-        <translation type="obsolete">ANALOG 5</translation>
-    </message>
-    <message>
-        <source>ANALOG 6</source>
-        <translation type="obsolete">ANALOG 6</translation>
-    </message>
-    <message>
-        <source>ANALOG 7</source>
-        <translation type="obsolete">ANALOG 7</translation>
-    </message>
-    <message>
         <source>v</source>
         <translation>v</translation>
-    </message>
-    <message>
-        <source>PPM In</source>
-        <translation type="obsolete">PPM In</translation>
     </message>
     <message>
         <source>PPM Multiplier</source>
@@ -709,32 +669,20 @@ Mode 4:
         <source>POT 3</source>
         <translation>POT 3</translation>
     </message>
+    <message>
+        <source>Timeshift from UTC</source>
+        <translation>Tidsdifferens till UTC</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>eePe - EEPROM Editor</source>
-        <translation type="obsolete">eePe EEPROM Editor</translation>
-    </message>
     <message>
         <source>File loaded</source>
         <translation>Filen har laddats</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
-        <source>A new version of ER9x is available&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version des ER9X ist vorhanden. Möchtest Du diese herunterladen ?</translation>
-    </message>
-    <message>
         <source>Save As</source>
         <translation>Spara Som</translation>
-    </message>
-    <message>
-        <source>EEPROM hex files (*.hex);;EEPROM bin files (*.bin)</source>
-        <translation type="obsolete">EEPROM hex Datei (*.hex);;EEPROM bin Datei (*.bin)</translation>
     </message>
     <message>
         <source>No updates available at this time.</source>
@@ -743,14 +691,6 @@ Mode 4:
     <message>
         <source>Unable to check for updates.</source>
         <translation>Det gick inte att söka efter uppdateringar.</translation>
-    </message>
-    <message>
-        <source>A new version of eePe is available&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von eePe ist vorhanden. Möchtest Du diese herunterladen ?</translation>
-    </message>
-    <message>
-        <source>A new version of ER9x (%2) is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von ER9x(%2) ist vorhanden(r%1)&lt;br&gt;Möchtest Du diese herunterladen ?</translation>
     </message>
     <message>
         <source>Executable (*.exe)</source>
@@ -771,10 +711,6 @@ Vill du ladda ned den nya versionen nu ?</translation>
         <translation>Öppna</translation>
     </message>
     <message>
-        <source>EEPROM files (*.bin *.hex);;BIN files (*.bin);;HEX files (*.hex)</source>
-        <translation type="obsolete">EEPROM Dateien (*.bin *.hex);;BIN Dateien (*.bin);;HEX Dateien (*.hex)</translation>
-    </message>
-    <message>
         <source>File saved</source>
         <translation>Filen sparades</translation>
     </message>
@@ -787,28 +723,12 @@ Vill du ladda ned den nya versionen nu ?</translation>
         <translation>Välj fil att skriva till EEPROM-minnet</translation>
     </message>
     <message>
-        <source>FLASH files (*.bin *.hex);;BIN files (*.bin);;HEX files (*.hex)</source>
-        <translation type="obsolete">FLASH Dateien (*.bin *.hex);;BIN Dateien (*.bin);;HEX Dateien (*.hex)</translation>
-    </message>
-    <message>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Skriv %1 till EEPROM-minnet?</translation>
     </message>
     <message>
-        <source>Choose file to write to flash memory</source>
-        <translation type="obsolete">Wähle Datei zum Schreiben in den Flashspeicher</translation>
-    </message>
-    <message>
-        <source>Write %1 to flash memory?</source>
-        <translation type="obsolete">Schreibe %1 in den Flashspeicher ?</translation>
-    </message>
-    <message>
         <source>Read EEPROM memory to File</source>
         <translation>Läs EEPROM-minnet till en fil</translation>
-    </message>
-    <message>
-        <source>HEX files (*.hex);;BIN files (*.bin);;FLASH files (*.bin *.hex)</source>
-        <translation type="obsolete">HEX Dateien (*.hex);;BIN Dateien (*.bin);;FLASH Dateien (*.bin *.hex)</translation>
     </message>
     <message>
         <source>Read Flash to File</source>
@@ -819,17 +739,8 @@ Vill du ladda ned den nya versionen nu ?</translation>
         <translation>Copyright</translation>
     </message>
     <message>
-        <source>If you&apos;ve found this program and/or the er9x firmware useful please support by</source>
-        <oldsource>If you&apos;ve found this program and/or the Firmware useful please support by</oldsource>
-        <translation type="obsolete">Wenn Du dieses Programm und/oder die Firmware nützlich findest dann unterstütze uns durch</translation>
-    </message>
-    <message>
         <source>donating</source>
         <translation>bidra</translation>
-    </message>
-    <message>
-        <source>About eePe</source>
-        <translation type="obsolete">Über eePe</translation>
     </message>
     <message>
         <source>&amp;%1 %2</source>
@@ -882,10 +793,6 @@ Vill du ladda ned den nya versionen nu ?</translation>
     <message>
         <source>&amp;Check for updates...</source>
         <translation>Sök efter uppdateringar...</translation>
-    </message>
-    <message>
-        <source>Check for new version of eePe/er9x</source>
-        <translation type="obsolete">Überprüfe auf eine neue Version von eePe/er9x</translation>
     </message>
     <message>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
@@ -1065,7 +972,7 @@ Vill du starta bränningen trots detta ?</translation>
     </message>
     <message>
         <source>Read Flash memory</source>
-        <translation type="unfinished">Läs flashminnet</translation>
+        <translation>Läs flashminnet</translation>
     </message>
     <message>
         <source>Read flash memory to transmitter</source>
@@ -1180,14 +1087,6 @@ Vill du starta bränningen trots detta ?</translation>
         <translation>Senaste filer</translation>
     </message>
     <message>
-        <source>&amp;Contributors</source>
-        <translation type="obsolete">&amp;Mitwirkende</translation>
-    </message>
-    <message>
-        <source>List er9x/eePe Contributors</source>
-        <translation type="obsolete">Zeige die er9x/eePe Mitwirkende</translation>
-    </message>
-    <message>
         <source>Switch layout Left/Right</source>
         <translation>Byt layout Höger/Vänster</translation>
     </message>
@@ -1210,10 +1109,6 @@ Vill du starta bränningen trots detta ?</translation>
     <message>
         <source>Ignore this version (r%1)?</source>
         <translation>Ladda inte ned versionen (r%1)?</translation>
-    </message>
-    <message>
-        <source>A new version of eePe is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von eePe ist vorhanden /r%1)&lt;br&gt;Möchtest Du diese herunterladen ?</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -1259,70 +1154,22 @@ Vill du starta bränningen trots detta ?</translation>
 <context>
     <name>MdiChild</name>
     <message>
-        <source>General Settings</source>
-        <translation type="obsolete">Generelle Einstellungen</translation>
-    </message>
-    <message>
-        <source>Delete Selected Models?</source>
-        <translation type="obsolete">Gewähltes Modell löschen ?</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fel</translation>
-    </message>
-    <message>
-        <source>Unable set data!</source>
-        <translation type="obsolete">Kann die Daten nicht setzen !</translation>
-    </message>
-    <message>
-        <source>Unable set model!</source>
-        <translation type="obsolete">Kann das Modell nicht anlegen !</translation>
     </message>
     <message>
         <source>Editing model %1: </source>
         <translation>Redigera modell %1: </translation>
     </message>
     <message>
-        <source>Unable to read settings!</source>
-        <translation type="obsolete">Kann die Einstellungen nicht lesen !</translation>
-    </message>
-    <message>
-        <source>document%1.eepe</source>
-        <oldsource>document%1.hex</oldsource>
-        <translation type="obsolete">Dokument%1.hex</translation>
-    </message>
-    <message>
         <source>Unable to find file %1!</source>
         <translation>Kan inte hitta filen %1 !</translation>
-    </message>
-    <message>
-        <source>Cannot read file %1:
-%2.</source>
-        <translation type="obsolete">Kann die Datei %1:
-%2 nicht lesen.</translation>
-    </message>
-    <message>
-        <source>Error reading file %1!</source>
-        <translation type="obsolete">Fehler beim Lesen der Datei %1 !</translation>
     </message>
     <message>
         <source>Error reading file %1:
 %2.</source>
         <translation>Fel vid inläsning från filen %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>Error loading file %1:
-%2.</source>
-        <oldsource>File wrong size - %1</oldsource>
-        <translation type="obsolete">Fehler beim Lesen der datei %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Error reading file:
-File wrong size - %1</source>
-        <translation type="obsolete">Fehler beim Lesen der Datei:
-Dateigröße falsch - %1</translation>
     </message>
     <message>
         <source>Error opening file %1:
@@ -1335,38 +1182,16 @@ Dateigröße falsch - %1</translation>
         <translation>Spara som</translation>
     </message>
     <message>
-        <source>EEPROM hex files (*.hex);;EEPROM bin files (*.bin)</source>
-        <translation type="obsolete">EEPROM hex Datei (*.hex);;EEPROM bin Datei (*.bin)</translation>
-    </message>
-    <message>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Filen %1 kunde inte skrivas:
 %2.</translation>
     </message>
     <message>
-        <source>:20%1000</source>
-        <translation type="obsolete">:20%1000</translation>
-    </message>
-    <message>
-        <source>%1</source>
-        <translation type="obsolete">%1</translation>
-    </message>
-    <message>
         <source>Error writing file %1:
 %2.</source>
         <translation>Fel vid skrivning av filen  %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePee</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; has been modified.
-Do you want to save your changes?</source>
-        <translation type="obsolete">&apos;%1&apos; wurde geändert.
-Möchtest Du die Änderungen speichern ?</translation>
     </message>
     <message>
         <source>free bytes</source>
@@ -1379,10 +1204,6 @@ Möchtest Du die Änderungen speichern ?</translation>
     <message>
         <source>Invalid binary EEPROM File %1</source>
         <translation>Ogiltig binär EEPROM-fil %1</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Warnung</translation>
     </message>
     <message>
         <source>companion9x</source>
@@ -1402,66 +1223,6 @@ Vill du spara förändringarna?</translation>
     <message>
         <source>Cannot write temporary file!</source>
         <translation>En temporär fil kunde inte skrivas!</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Löschen</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Kopieren</translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
-        <translation type="obsolete">Ctrl+C</translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation type="obsolete">&amp;Ausschneiden</translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
-        <translation type="obsolete">Ctrl+X</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">&amp;Einfügen</translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation type="obsolete">Ctrl+V</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">D&amp;uplizieren</translation>
-    </message>
-    <message>
-        <source>Ctrl+U</source>
-        <translation type="obsolete">Ctrl+U</translation>
-    </message>
-    <message>
-        <source>&amp;Simulate</source>
-        <translation type="obsolete">&amp;Simulieren</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
-        <source>&amp;Write To Tx</source>
-        <translation type="obsolete">&amp;Schreibe in den Sender</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+W</source>
-        <translation type="obsolete">Ctrl+Alt+W</translation>
     </message>
 </context>
 <context>
@@ -1505,11 +1266,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Include Trim</source>
         <translation>Inkludera trim</translation>
-    </message>
-    <message>
-        <source>If checked - will add the trim from the source (if available)</source>
-        <translatorcomment>??</translatorcomment>
-        <translation type="obsolete">Lägg till trim från källan (om källa har angets)</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1900,10 +1656,6 @@ p, li { white-space: pre-wrap; }
         <translation>A2</translation>
     </message>
     <message>
-        <source>Alarm 1</source>
-        <translation type="obsolete">Alarm 1</translation>
-    </message>
-    <message>
         <source>Serial Protocol</source>
         <translation>Serieprotokoll</translation>
     </message>
@@ -1988,24 +1740,12 @@ p, li { white-space: pre-wrap; }
         <translation>Modellnamn</translation>
     </message>
     <message>
-        <source>Timer Mode</source>
-        <translation type="obsolete">Modus Stoppuhr</translation>
-    </message>
-    <message>
-        <source>Timer Direction</source>
-        <translation type="obsolete">Richtung Stoppuhr</translation>
-    </message>
-    <message>
         <source>Count Down</source>
         <translation>Nedräkning</translation>
     </message>
     <message>
         <source>Count Up</source>
         <translation>Uppräkning</translation>
-    </message>
-    <message>
-        <source>Timer Value</source>
-        <translation type="obsolete">Einstellung Stoppuhr</translation>
     </message>
     <message>
         <source>mm:ss</source>
@@ -2042,10 +1782,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Throttle Expo</source>
         <translation>Expo Gas</translation>
-    </message>
-    <message>
-        <source>instaTrim Switch</source>
-        <translation type="obsolete">instaTrim Schalter</translation>
     </message>
     <message>
         <source>Center beep</source>
@@ -2104,10 +1840,6 @@ p, li { white-space: pre-wrap; }
         <translation> kn</translation>
     </message>
     <message>
-        <source>ppm Delay</source>
-        <translation type="obsolete">ppm Verzögerung</translation>
-    </message>
-    <message>
         <source> usec</source>
         <translation> usec</translation>
     </message>
@@ -2162,66 +1894,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Invert Collective</source>
         <translation>Invertera Kollektiv</translation>
-    </message>
-    <message>
-        <source>Expo/Dr</source>
-        <translation type="obsolete">Expo/Dir</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="obsolete">HOCH</translation>
-    </message>
-    <message>
-        <source>MID</source>
-        <translation type="obsolete">MITTE</translation>
-    </message>
-    <message>
-        <source>LOW</source>
-        <translation type="obsolete">NIEDRIG</translation>
-    </message>
-    <message>
-        <source>Expo
-Left</source>
-        <translation type="obsolete">Expo links</translation>
-    </message>
-    <message>
-        <source>D/R
-Left</source>
-        <translation type="obsolete">D/R links</translation>
-    </message>
-    <message>
-        <source>D/R
-Right</source>
-        <translation type="obsolete">D/R rechts</translation>
-    </message>
-    <message>
-        <source>Expo
-Right</source>
-        <translation type="obsolete">Expo rechts</translation>
-    </message>
-    <message>
-        <source>Switch1</source>
-        <translation type="obsolete">Schalter1</translation>
-    </message>
-    <message>
-        <source>Switch2</source>
-        <translation type="obsolete">Schalter2</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation type="obsolete">Seitenruder</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation type="obsolete">Querruder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation type="obsolete">Gas</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation type="obsolete">Höhenruder</translation>
     </message>
     <message>
         <source>Mixes</source>
@@ -2385,10 +2057,6 @@ Right</source>
         <translation>Nollställ alla kurvor</translation>
     </message>
     <message>
-        <source>Switches</source>
-        <translation type="obsolete">Schalter</translation>
-    </message>
-    <message>
         <source>CSwitch1</source>
         <translation>Funktionsbrytare1</translation>
     </message>
@@ -2468,44 +2136,8 @@ Right</source>
         <translation>Värde</translation>
     </message>
     <message>
-        <source>Trims</source>
-        <translation type="obsolete">Trimmer</translation>
-    </message>
-    <message>
-        <source>STICK 1</source>
-        <translation type="obsolete">KNÜPPEL 1</translation>
-    </message>
-    <message>
-        <source>STICK 2</source>
-        <translation type="obsolete">KNÜPPEL 2</translation>
-    </message>
-    <message>
-        <source>STICK 4</source>
-        <translation type="obsolete">KNÜPPEL 4</translation>
-    </message>
-    <message>
-        <source>STICK 3</source>
-        <translation type="obsolete">KNÜPPEL 3</translation>
-    </message>
-    <message>
         <source>CH%1%2</source>
         <translation>KN%1%2</translation>
-    </message>
-    <message>
-        <source> Switch(</source>
-        <translation type="obsolete">Schalter(</translation>
-    </message>
-    <message>
-        <source> noTrim</source>
-        <translation type="obsolete">kein Trimmer</translation>
-    </message>
-    <message>
-        <source> Offset(%1%)</source>
-        <translation type="obsolete"> Offset(%1%)</translation>
-    </message>
-    <message>
-        <source> Curve(%1)</source>
-        <translation type="obsolete">Kurve(%1)</translation>
     </message>
     <message>
         <source> Delay(u%1:d%2)</source>
@@ -2518,10 +2150,6 @@ Right</source>
     <message>
         <source> Warn(%1)</source>
         <translation> Varn(%1)</translation>
-    </message>
-    <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Kurve %1</translation>
     </message>
     <message>
         <source>Expo</source>
@@ -2685,10 +2313,6 @@ Right</source>
         <translation>Vill du verkligen ta bort alla kurvor ?</translation>
     </message>
     <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">D&amp;uplizieren</translation>
-    </message>
-    <message>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
@@ -2735,6 +2359,10 @@ Right</source>
     <message>
         <source>RX Alarm</source>
         <translation>Mottag.larm</translation>
+    </message>
+    <message>
+        <source>Custom Telemetry View</source>
+        <translation>Egna inställning av telemetriskärmen</translation>
     </message>
 </context>
 <context>
@@ -2832,22 +2460,6 @@ Right</source>
         <translation>Flygfas %1 trim</translation>
     </message>
     <message>
-        <source>RUD</source>
-        <translation type="obsolete">SID</translation>
-    </message>
-    <message>
-        <source>ELE</source>
-        <translation type="obsolete">HJD</translation>
-    </message>
-    <message>
-        <source>THR</source>
-        <translation type="obsolete">GAS</translation>
-    </message>
-    <message>
-        <source>AIL</source>
-        <translation type="obsolete">SKE</translation>
-    </message>
-    <message>
         <source>P1</source>
         <translation>P1</translation>
     </message>
@@ -2862,10 +2474,6 @@ Right</source>
     <message>
         <source>MAX</source>
         <translation>MAX</translation>
-    </message>
-    <message>
-        <source>FULL</source>
-        <translation type="obsolete">FULL</translation>
     </message>
     <message>
         <source>CYC1</source>
@@ -3045,14 +2653,6 @@ Right</source>
         <translation>open9x för v4-processorkort</translation>
     </message>
     <message>
-        <source>er9x - JETI</source>
-        <translation type="obsolete">er9x - JETI</translation>
-    </message>
-    <message>
-        <source>er9x - FrSky</source>
-        <translation type="obsolete">er9x - FrSky</translation>
-    </message>
-    <message>
         <source>gruvin9x stable for stock board</source>
         <translation>gruvin9x (stabil byggning) för ursprungligt processorkort</translation>
     </message>
@@ -3156,6 +2756,18 @@ Right</source>
         <source>EEPROM saved with these warnings:</source>
         <translation>EEPROM sparades, men med dessa varningar:</translation>
     </message>
+    <message>
+        <source>TX</source>
+        <translation>TX</translation>
+    </message>
+    <message>
+        <source>RX</source>
+        <translation>RX</translation>
+    </message>
+    <message>
+        <source>DIST</source>
+        <translation>AVST</translation>
+    </message>
 </context>
 <context>
     <name>avrOutputDialog</name>
@@ -3166,10 +2778,6 @@ Right</source>
     <message>
         <source>Show Details</source>
         <translation>Visa Detaljer</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="obsolete">Textlabel</translation>
     </message>
     <message>
         <source>AVRDUDE result</source>
@@ -3315,14 +2923,6 @@ OBS. Fyll enbart i detta fällt om du är säker på vad du gör. Ingen kontroll
         <translation>companion9x</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
-        <translation>&lt;b&gt;&lt;u&gt;VARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Detta återställer säkringarna till fabriksinställning.&lt;br&gt;Att skriva till  säkringarna kan få alvarliga konsekvenser för din radio.&lt;br&gt;Utför denna åtgärd enbart om du är säker på att säkringarna står fel!&lt;br&gt;Är du säker på att du vill fortsätta?</translation>
-    </message>
-    <message>
         <source>mcu (not used for V4)</source>
         <translation>MCU (ej för V4-kort)</translation>
     </message>
@@ -3353,6 +2953,10 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>m2560</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
+        <translation>&lt;b&gt;&lt;u&gt;VARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Detta åerställer säkringarna för %1 till deras ursprungliga värden.&lt;br&gt;Att ändra dessa värden kan skapa allvarliga problem med din radio.&lt;br&gt;Ändra säkringarna  bara om du är helt säker på att de har fel värde!&lt;br&gt;Är du säker på att du vill fortsätta?</translation>
     </message>
 </context>
 <context>
@@ -3442,10 +3046,6 @@ m2560 för v4.1-kort</translation>
         <translation>Varning</translation>
     </message>
     <message>
-        <source>%1 doesn&apos;t seem to be a firmware</source>
-        <translation>%1 verkar inte vara en firmware-file</translation>
-    </message>
-    <message>
         <source>Burn anyway !</source>
         <translation>Starta bränningen!</translation>
     </message>
@@ -3476,6 +3076,10 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>No firmware selected</source>
         <translation>Ingen firmware har valts</translation>
+    </message>
+    <message>
+        <source>%1 is not a known firmware</source>
+        <translation>%1 är inte en fimware-fil</translation>
     </message>
 </context>
 <context>
@@ -3613,13 +3217,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>donatorsDialog</name>
-    <message>
-        <source>List of Contributors</source>
-        <translation type="obsolete">Liste der Mitwirkenden</translation>
-    </message>
-</context>
-<context>
     <name>downloadDialog</name>
     <message>
         <source>Downloading: </source>
@@ -3632,10 +3229,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>companion9x</source>
         <translation>companion9x</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
     </message>
     <message>
         <source>Download failed: %1.</source>
@@ -3918,32 +3511,8 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
         <translation>Språk (kräver omstart)</translation>
     </message>
     <message>
-        <source>er9x</source>
-        <translation type="obsolete">er9x</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
         <source>Show Splash Screen</source>
         <translation>Visa bild vid start av sändare</translation>
-    </message>
-    <message>
-        <source>Version to download</source>
-        <translation type="obsolete">Version zum Herunterladen</translation>
-    </message>
-    <message>
-        <source>er9x - JETI</source>
-        <translation type="obsolete">er9x - JETI</translation>
-    </message>
-    <message>
-        <source>er9x - FrSky</source>
-        <translation type="obsolete">er9x - FrSky</translation>
-    </message>
-    <message>
-        <source>er9x - Ardupilot</source>
-        <translation type="obsolete">er9x - Ardupilot</translation>
     </message>
     <message>
         <source>Recent History Size</source>
@@ -4198,24 +3767,8 @@ Mode 4:
         <translation>%1:%2, </translation>
     </message>
     <message>
-        <source>: %1 Channels, %3msec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %3msec Verzögerung</translation>
-    </message>
-    <message>
-        <source>&lt;a name=1&gt;&lt;/a&gt;&lt;h1&gt;ER9x Model: %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">ER9x Modell: %1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;General Model Settings&lt;/h2&gt;&lt;br&gt;</source>
-        <translation type="obsolete">Generelle Modelleinstellungen</translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Namn</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="obsolete">Stoppuhr</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -4354,88 +3907,12 @@ Mode 4:
         <translation>Trimmar</translation>
     </message>
     <message>
-        <source>Trim Switch</source>
-        <translation type="obsolete">Trimmerschalter</translation>
-    </message>
-    <message>
         <source>Trim Increment</source>
         <translation>Trimmer-steg</translation>
     </message>
     <message>
         <source>Center Beep</source>
         <translation>Centrumpip</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Expo/Dr Settings&lt;/h2&gt;</source>
-        <translation type="obsolete">Expo/Dr Einstellungen</translation>
-    </message>
-    <message>
-        <source>Switch 1:</source>
-        <translation type="obsolete">Schalter 1:</translation>
-    </message>
-    <message>
-        <source>Switch 2:</source>
-        <translation type="obsolete">Schalter 2:</translation>
-    </message>
-    <message>
-        <source>Expo Left</source>
-        <translation type="obsolete">Expo links</translation>
-    </message>
-    <message>
-        <source>D/R Left</source>
-        <translation type="obsolete">D/R links</translation>
-    </message>
-    <message>
-        <source>D/R Right</source>
-        <translation type="obsolete">D/R rechts</translation>
-    </message>
-    <message>
-        <source>Expo Right</source>
-        <translation type="obsolete">Expo rechts</translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="obsolete">HOCH</translation>
-    </message>
-    <message>
-        <source>Mid</source>
-        <translation type="obsolete">Mitte</translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="obsolete">Niedrig</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Mixers&lt;/h2&gt;&lt;br&gt;</source>
-        <translation type="obsolete">Mischer</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;CH%1&lt;/b&gt;</source>
-        <translation type="obsolete">CH%1</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation type="obsolete">%1%</translation>
-    </message>
-    <message>
-        <source> +%1%</source>
-        <translation type="obsolete"> +%1%</translation>
-    </message>
-    <message>
-        <source> Switch(</source>
-        <translation type="obsolete">Schalter(</translation>
-    </message>
-    <message>
-        <source> noTrim</source>
-        <translation type="obsolete">kein Trimmer</translation>
-    </message>
-    <message>
-        <source> Offset(%1%)</source>
-        <translation type="obsolete"> Offset(%1%)</translation>
-    </message>
-    <message>
-        <source> Curve(%1)</source>
-        <translation type="obsolete">Kurve(%1)</translation>
     </message>
     <message>
         <source> Delay(u%1:d%2)</source>
@@ -4446,40 +3923,8 @@ Mode 4:
         <translation> Tröghet(u%1:d%2)</translation>
     </message>
     <message>
-        <source> Warn(%1)</source>
-        <translation type="obsolete">Warnung(%1)</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Limits&lt;/h2&gt;</source>
-        <translation type="obsolete">Grenzen</translation>
-    </message>
-    <message>
-        <source>CH%1</source>
-        <translation type="obsolete">CH%1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Curves&lt;/h2&gt;</source>
-        <translation type="obsolete">Kurven</translation>
-    </message>
-    <message>
-        <source>5-point Curves</source>
-        <translation type="obsolete">5-Punkt-Kurven</translation>
-    </message>
-    <message>
         <source>pt %1</source>
         <translation>pt %1</translation>
-    </message>
-    <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Kurve %1</translation>
-    </message>
-    <message>
-        <source>9-point Curves</source>
-        <translation type="obsolete">9-Punkt-Kurve</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Custom Switches&lt;/h2&gt;</source>
-        <translation type="obsolete">Spezifische Schalter</translation>
     </message>
     <message>
         <source>Source</source>
@@ -4492,14 +3937,6 @@ Mode 4:
     <message>
         <source>Function</source>
         <translation>Funktion</translation>
-    </message>
-    <message>
-        <source>SW%1</source>
-        <translation type="obsolete">SW%1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Safety Switches&lt;/h2&gt;</source>
-        <translation type="obsolete">&lt;h2&gt;Sicherheitsschalter&lt;/h2&gt;</translation>
     </message>
     <message>
         <source>Switch</source>
@@ -4679,7 +4116,7 @@ Mode 4:
     </message>
     <message>
         <source>FSW</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>A%1</source>
