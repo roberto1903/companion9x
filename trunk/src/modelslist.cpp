@@ -450,6 +450,7 @@ void ModelsListWidget::duplicate()
             ((MdiChild *)parent())->setModified();
             break;
           }
+          i++;
         }
     }
 }
