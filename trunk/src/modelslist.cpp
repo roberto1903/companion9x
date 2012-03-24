@@ -452,6 +452,9 @@ void ModelsListWidget::duplicate()
           }
           i++;
         }
+        if (i==MAX_MODELS) {
+          QMessageBox::warning(this, "companion9x", tr("No free slot available, cannot duplicate"), QMessageBox::Ok);
+        }
     }
 }
 
