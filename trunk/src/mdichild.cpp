@@ -186,11 +186,23 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
                                .arg(file.errorString()));
           return false;
       }
-
+        
+      QDomDocument doc(ER9X_EEPROM_FILE_TYPE);
+      bool xmlOK = doc.setContent(&file);
+      if(xmlOK) {
+        if (LoadEepromXml(radioData, doc)){
+          ui->modelsList->refreshList();
+          if(resetCurrentFile) setCurrentFile(fileName);
+          return true;
+        }
+      }
+      file.reset();
+      
       QTextStream inputStream(&file);
 
       if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
         QString hline = inputStream.readLine();
+        qDebug() << hline;
         if (hline!=EEPE_EEPROM_FILE_HEADER) {
           file.close();
           return false;

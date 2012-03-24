@@ -48,6 +48,11 @@ const int Th9xInterface::getEEpromSize() {
   return EESIZE_STOCK;
 }
 
+bool Th9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  return false;
+}
+
 bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying th9x import... ";

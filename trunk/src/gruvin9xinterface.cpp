@@ -83,6 +83,12 @@ bool Gruvin9xInterface::loadGeneral(GeneralSettings &settings, int version)
   return false;
 }
 
+bool Gruvin9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  return false;
+}
+
+
 bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying gruvin9x " << this->size << " import... ";

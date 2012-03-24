@@ -22,6 +22,7 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
+#include <QtXml>
 #include <iostream>
 
 #if __GNUC__
@@ -655,6 +656,8 @@ class EEPROMInterface
     virtual const char * getName() = 0;
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
+    
+    virtual bool loadxml(RadioData &radioData, QDomDocument &doc) = 0;
 
     virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0) = 0;
 
@@ -749,6 +752,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
 void RegisterFirmwares();
 
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
+bool LoadEepromXml(RadioData &radioData, QDomDocument &doc);
 
 class FirmwareInfo {
   public:

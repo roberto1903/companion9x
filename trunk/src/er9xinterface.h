@@ -15,9 +15,9 @@
  */
 #ifndef er9x_interface_h
 #define er9x_interface_h
-
+#include <QtXml>
 #include "eeprominterface.h"
-
+#include "er9xeeprom.h"
 class EFile;
 
 class Er9xInterface : public EEPROMInterface
@@ -33,6 +33,8 @@ class Er9xInterface : public EEPROMInterface
     virtual const int  getEEpromSize();
 
     virtual bool load(RadioData &, uint8_t * eeprom, int size);
+    
+    virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
     virtual int save(uint8_t * eeprom, RadioData & radioData, uint8_t version=0);
 
@@ -45,10 +47,25 @@ class Er9xInterface : public EEPROMInterface
     virtual int hasProtocol(Protocol proto);
 
     virtual SimulatorInterface * getSimulator();
-
+    
   protected:
 
     EFile *efile;
+
+  private:
+    void appendTextElement(QDomDocument * qdoc, QDomElement * pe, QString name, QString value);
+    
+    void appendNumberElement(QDomDocument * qdoc, QDomElement * pe,QString name, int value, bool forceZeroWrite = false);
+    
+    void appendCDATAElement(QDomDocument * qdoc, QDomElement * pe,QString name, const char * data, int size);
+    
+    QDomElement getGeneralDataXML(QDomDocument * qdoc, Er9xGeneral * tgen);   //parse out data to XML format
+    
+    QDomElement getModelDataXML(QDomDocument * qdoc, Er9xModelData * tmod, int modelNum, int mdver); //parse out data to XML format
+    
+    bool loadGeneralDataXML(QDomDocument * qdoc, Er9xGeneral * tgen); // get data from XML
+    
+    bool loadModelDataXML(QDomDocument * qdoc, Er9xModelData * tmod, int modelNum = -1); // get data from XML
 
 };
 

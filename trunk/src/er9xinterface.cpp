@@ -77,6 +77,27 @@ inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)
   model.swashCollectiveSource = applyStickMode(model.swashCollectiveSource, mode);
 }
 
+bool Er9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  Er9xGeneral er9xGeneral;
+  memset(&er9xGeneral,0,sizeof(er9xGeneral));
+  if(!loadGeneralDataXML(&doc, &er9xGeneral)) {
+    return false;
+  } else {
+    radioData.generalSettings=er9xGeneral;
+  }
+  for(int i=0; i<MAX_MODELS; i++)
+  {
+    Er9xModelData er9xModel;
+    memset(&er9xModel,0,sizeof(er9xModel));
+    if(loadModelDataXML(&doc, &er9xModel, i)) {
+      applyStickModeToModel(er9xModel, radioData.generalSettings.stickMode+1);
+      radioData.models[i] = er9xModel;
+    }
+  }
+  return true;
+}
+
 bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying er9x import... ";
@@ -258,4 +279,115 @@ int Er9xInterface::hasProtocol(Protocol prot)
 SimulatorInterface * Er9xInterface::getSimulator()
 {
   return new Er9xSimulator(this);
+}
+
+
+
+void Er9xInterface::appendTextElement(QDomDocument * qdoc, QDomElement * pe, QString name, QString value)
+{
+    QDomElement e = qdoc->createElement(name);
+    QDomText t = qdoc->createTextNode(name);
+    t.setNodeValue(value);
+    e.appendChild(t);
+    pe->appendChild(e);
+}
+
+void Er9xInterface::appendNumberElement(QDomDocument * qdoc, QDomElement * pe,QString name, int value, bool forceZeroWrite)
+{
+  if(value || forceZeroWrite) {
+    QDomElement e = qdoc->createElement(name);
+    QDomText t = qdoc->createTextNode(name);
+    t.setNodeValue(QString("%1").arg(value));
+    e.appendChild(t);
+    pe->appendChild(e);
+  }
+}
+
+void Er9xInterface::appendCDATAElement(QDomDocument * qdoc, QDomElement * pe,QString name, const char * data, int size)
+{
+  QDomElement e = qdoc->createElement(name);
+  QDomCDATASection t = qdoc->createCDATASection(name);
+  t.setData(QByteArray(data, size).toBase64());
+  e.appendChild(t);
+  pe->appendChild(e);
+}
+
+QDomElement Er9xInterface::getGeneralDataXML(QDomDocument * qdoc, Er9xGeneral * tgen)
+{
+  QDomElement gd = qdoc->createElement("GENERAL_DATA");
+  appendNumberElement(qdoc, &gd, "Version", tgen->myVers, true); // have to write value here
+  appendTextElement(qdoc, &gd, "Owner", QString::fromAscii(tgen->ownerName,sizeof(tgen->ownerName)).trimmed());
+  appendCDATAElement(qdoc, &gd, "Data", (const char *)tgen,sizeof(Er9xGeneral));
+  return gd;
+}
+
+QDomElement Er9xInterface::getModelDataXML(QDomDocument * qdoc, Er9xModelData * tmod, int modelNum, int mdver)
+{
+  QDomElement md = qdoc->createElement("MODEL_DATA");
+  md.setAttribute("number", modelNum);
+  appendNumberElement(qdoc, &md, "Version", mdver, true); // have to write value here
+  appendTextElement(qdoc, &md, "Name", QString::fromAscii(tmod->name,sizeof(tmod->name)).trimmed());
+  appendCDATAElement(qdoc, &md, "Data", (const char *)tmod,sizeof(Er9xModelData));
+  return md;
+}
+
+bool Er9xInterface::loadGeneralDataXML(QDomDocument * qdoc, Er9xGeneral * tgen)
+{
+  //look for "GENERAL_DATA" tag
+  QDomElement gde = qdoc->elementsByTagName("GENERAL_DATA").at(0).toElement();
+
+  if(gde.isNull()) // couldn't find
+    return false;
+
+  //load cdata into tgen
+  QDomNode n = gde.elementsByTagName("Data").at(0).firstChild();// get all children in Data
+  while (!n.isNull()) {
+    if (n.isCDATASection()) {
+      QString ds = n.toCDATASection().data();
+      QByteArray ba = QByteArray::fromBase64(ds.toAscii());
+      const char * data = ba.data();
+      memcpy(tgen, data, sizeof(Er9xGeneral));
+      break;
+    }
+    n = n.nextSibling();
+  }
+  //check version?
+  return true;
+}
+
+bool Er9xInterface::loadModelDataXML(QDomDocument * qdoc, Er9xModelData * tmod, int modelNum)
+{
+  //look for MODEL_DATA with modelNum attribute.
+  //if modelNum = -1 then just pick the first one
+  QDomNodeList ndl = qdoc->elementsByTagName("MODEL_DATA");
+
+  //cycle through nodes to find correct model number
+  QDomNode k = ndl.at(0);
+  if(modelNum>=0) {
+    while(!k.isNull()) {
+      int a = k.toElement().attribute("number").toInt();
+      if(a==modelNum)
+        break;
+      k = k.nextSibling();
+    }
+  }
+
+  if(k.isNull()) // couldn't find
+    return false;
+
+
+  //load cdata into tgen
+  QDomNode n = k.toElement().elementsByTagName("Data").at(0).firstChild();// get all children in Data
+  while (!n.isNull()) {
+    if (n.isCDATASection()) {
+      QString ds = n.toCDATASection().data();
+      QByteArray ba = QByteArray::fromBase64(ds.toAscii());
+      const char * data = ba.data();
+      memcpy(tmod, data, sizeof(Er9xModelData));
+      break;
+    }
+    n = n.nextSibling();
+  }
+  //check version?
+  return true;
 }
