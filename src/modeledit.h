@@ -27,8 +27,8 @@ private:
 
     QSpinBox* spn5[MAX_CURVE5][5];
     QSpinBox* spn9[MAX_CURVE9][9];
-    QSpinBox* minSB[4];
-    QSpinBox* maxSB[4];
+    QDoubleSpinBox* minSB[4];
+    QDoubleSpinBox* maxSB[4];
     QComboBox* csf[8];
     MixersList *ExposlistWidget;
 
@@ -59,7 +59,9 @@ private:
 
     void setupExposListWidget();
     void setupMixerListWidget();
-
+    float getBarValue(int barId, int Value);
+    float getBarStep(int barId);
+    
     void updateSettings();
     void tabModelEditSetup();
     void tabPhases();

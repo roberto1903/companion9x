@@ -10189,74 +10189,6 @@
             <item row="4" column="0">
              <widget class="QComboBox" name="telBarCB_4"/>
             </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="telMinSB_1">
-              <property name="maximum">
-               <number>98</number>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="telMinSB_2">
-              <property name="maximum">
-               <number>98</number>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QSpinBox" name="telMinSB_3">
-              <property name="maximum">
-               <number>98</number>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QSpinBox" name="telMinSB_4">
-              <property name="maximum">
-               <number>98</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QSpinBox" name="telMaxSB_1">
-              <property name="minimum">
-               <number>2</number>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
-             <widget class="QSpinBox" name="telMaxSB_2">
-              <property name="minimum">
-               <number>2</number>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QSpinBox" name="telMaxSB_3">
-              <property name="minimum">
-               <number>2</number>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QSpinBox" name="telMaxSB_4">
-              <property name="minimum">
-               <number>2</number>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_265">
               <property name="text">
@@ -10294,6 +10226,62 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="telMinSB_1">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QDoubleSpinBox" name="telMaxSB_4">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QDoubleSpinBox" name="telMaxSB_3">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QDoubleSpinBox" name="telMaxSB_2">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QDoubleSpinBox" name="telMaxSB_1">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QDoubleSpinBox" name="telMinSB_4">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="telMinSB_3">
+              <property name="decimals">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="telMinSB_2">
+              <property name="decimals">
+               <number>0</number>
               </property>
              </widget>
             </item>
