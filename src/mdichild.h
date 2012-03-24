@@ -54,6 +54,7 @@
 namespace Ui {
 class mdiChild;
 }
+#define ER9X_EEPROM_FILE_TYPE        "ER9X_EEPROM_FILE"
 
 #define EEPE_EEPROM_FILE_HEADER  "EEPE EEPROM FILE"
 #define EEPE_MODEL_FILE_HEADER   "EEPE MODEL FILE"

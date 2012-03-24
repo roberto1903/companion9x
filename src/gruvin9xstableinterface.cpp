@@ -48,6 +48,11 @@ const int Gruvin9xStableInterface::getEEpromSize() {
     return EESIZE_STOCK;
 }
 
+bool Gruvin9xStableInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  return false;
+}
+
 bool Gruvin9xStableInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   return false;

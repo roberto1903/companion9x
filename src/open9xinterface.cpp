@@ -94,6 +94,11 @@ bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
   return true;
 }
 
+bool Open9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  return false;
+}
+
 bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying open9x " << this->size << " import... ";

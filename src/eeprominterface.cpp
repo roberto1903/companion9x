@@ -191,6 +191,16 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
   return false;
 }
 
+bool LoadEepromXml(RadioData &radioData, QDomDocument &doc)
+{
+  foreach(EEPROMInterface *eepromInterface, eepromInterfaces) {
+    if (eepromInterface->loadxml(radioData, doc))
+      return true;
+  }
+
+  return false;
+}
+
 FirmwareInfo * GetFirmware(QString id)
 {
   foreach(FirmwareInfo * firmware, firmwares) {
