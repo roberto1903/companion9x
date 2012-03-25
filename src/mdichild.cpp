@@ -202,7 +202,6 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
       if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
         QString hline = inputStream.readLine();
-        qDebug() << hline;
         if (hline!=EEPE_EEPROM_FILE_HEADER) {
           file.close();
           return false;
