@@ -114,6 +114,7 @@ Section "companion9x" SecDummy
   File "@QT_BINARY_DIR@\QtCore4.dll"
   File "@QT_BINARY_DIR@\QtGui4.dll"
   File "@QT_BINARY_DIR@\QtNetwork4.dll"
+  File "@QT_BINARY_DIR@\QtXml4.dll"
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.exe"
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.conf"
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\libusb0.dll"
