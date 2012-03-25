@@ -51,6 +51,11 @@ bool XmlInterface::load(RadioData &radioData)
   }
 }
 
+bool XmlInterface::loadxml(RadioData &radioData, QDomDocument &doc)
+{
+  return false;
+}
+
 // TODO a retirer
 #define TMR_NUM_OPTION  (TMR_VAROFS+2*MAX_DRSWITCH-3)
 

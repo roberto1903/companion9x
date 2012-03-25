@@ -27,6 +27,8 @@ class XmlInterface
     XmlInterface(QTextStream & stream);
 
     bool load(RadioData &);
+    
+    virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
     bool save(RadioData &radioData);
 
