@@ -85,6 +85,7 @@ bool Er9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
     return false;
   } else {
     radioData.generalSettings=er9xGeneral;
+    std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
   }
   for(int i=0; i<MAX_MODELS; i++)
   {
@@ -95,6 +96,7 @@ bool Er9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
       radioData.models[i] = er9xModel;
     }
   }
+  std::cout << "ok\n";
   return true;
 }
 
