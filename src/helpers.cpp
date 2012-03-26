@@ -3,7 +3,7 @@
 #include "eeprominterface.h"
 
 #define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
-#define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dst ""Cell""AccX""AccY""AccZ""HDG ""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""ACC ""Time"
+#define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""Cell""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""ACC ""Time"
 
 QString getPhaseName(int val) {
   if (!val) return "---";
@@ -29,9 +29,9 @@ void populateSwitchCB(QComboBox *b, int value)
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
-  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,0,0,2,2,1,1,1,1,1,1,1};
+  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,0,0,2,2,1,1,1,1,1,1,1};
   b->clear();
-  for (int i = 0; i < 29-(last ? 2 :0); i++) {
+  for (int i = 0; i < 31-(last ? 2 :0); i++) {
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);

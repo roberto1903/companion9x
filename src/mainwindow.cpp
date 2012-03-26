@@ -54,6 +54,7 @@
 #include "customizesplashdialog.h"
 #include "burndialog.h"
 #include "hexinterface.h"
+#include "warnings.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 #ifdef __APPLE__
@@ -99,7 +100,7 @@ MainWindow::MainWindow()
     
     // give time to the main windows to open before starting updates, delay 1s
     QTimer::singleShot(1000, this, SLOT(doAutoUpdates()));
-    
+    QTimer::singleShot(1000, this, SLOT(displayWarnings()));
     QStringList strl = QApplication::arguments();
     QString str;
     if(strl.count()>1) str = strl[1];
@@ -123,6 +124,20 @@ MainWindow::MainWindow()
             }
         }
     }
+}
+
+void MainWindow::displayWarnings()
+{
+  QSettings settings("companion9x", "companion9x");
+  int warnId=settings.value("warningId", 0 ).toInt();
+  if (warnId<WARNING_ID) {
+    QMessageBox::warning(this, "companion9x", WARNING);
+    int res = QMessageBox::question(this, "companion9x",tr("Display previous warning again at startup ?"),QMessageBox::Yes | QMessageBox::No);
+    if (res == QMessageBox::No) {
+      settings.setValue("warningId", WARNING_ID);
+    }
+  }
+  
 }
 
 void MainWindow::doAutoUpdates()

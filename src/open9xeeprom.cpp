@@ -382,7 +382,7 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
     mixWarn = c9x.mixWarn;
     srcRaw = c9x.srcRaw;
     weight = c9x.weight;
-    differential = c9x.differential;
+    differential = c9x.differential/2;
     swtch = c9x.swtch;
     curve = c9x.curve;
     delayUp = c9x.delayUp;
@@ -406,7 +406,7 @@ t_Open9xMixData_v205::operator MixData ()
     c9x.destCh = destCh+1;
     c9x.srcRaw = RawSource(srcRaw);
     c9x.weight = weight;
-    c9x.differential = differential;
+    c9x.differential = differential*2;
     c9x.swtch = swtch;
     c9x.curve = curve;
     c9x.delayUp = delayUp;
