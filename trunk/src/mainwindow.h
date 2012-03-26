@@ -78,6 +78,7 @@ public slots:
 private slots:
     void checkForUpdates(bool ignoreSettings=true, FirmwareInfo * fw = NULL);
     void checkForUpdateFinished(QNetworkReply * reply);
+    void displayWarnings();
     void doAutoUpdates();
     void doUpdates();
     void updateDownloaded();

@@ -259,8 +259,14 @@ This determines how mixer values are added.
      </item>
      <item row="4" column="1">
       <widget class="QSpinBox" name="DiffMixSB">
+       <property name="minimum">
+        <number>-100</number>
+       </property>
        <property name="maximum">
         <number>100</number>
+       </property>
+       <property name="singleStep">
+        <number>2</number>
        </property>
       </widget>
      </item>

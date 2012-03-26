@@ -36,7 +36,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="pushButton">
        <property name="whatsThis">
-        <string>Use this button to browse and look for the AVRDUDE.EXE executable file.</string>
+        <string>Use this button to browse and look for the AVRDUDE executable file.</string>
        </property>
        <property name="text">
         <string>Browse...</string>
