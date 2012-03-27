@@ -41,8 +41,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->label_timezone->hide();
       ui->timezoneSB->hide();
       ui->timezoneSB->setDisabled(true);
+      ui->gpsFormatCB->hide();
+      ui->gpsFormatLabel->hide();
     }
+    ui->gpsFormatCB->setCurrentIndex(g_eeGeneral.gpsFormat);
     ui->timezoneSB->setValue(g_eeGeneral.timezone);
+    
     if (GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
         ui->tabWidget->removeTab(2);
     }
@@ -274,6 +278,12 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 void GeneralEdit::on_beeperlenCB_currentIndexChanged(int index)
 {
   g_eeGeneral.beeperLength = index-2;
+  updateSettings();
+}
+
+void GeneralEdit::on_gpsFormatCB_currentIndexChanged(int index)
+{
+  g_eeGeneral.gpsFormat = index;
   updateSettings();
 }
 

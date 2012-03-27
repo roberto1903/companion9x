@@ -85,7 +85,8 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   spare2[2];
   int8_t    beeperLength:3;
   uint8_t   hapticStrength:3;
-  uint8_t   spare3:2;
+  uint8_t   gpsFormat:1;
+  uint8_t   spare3:1;
   uint8_t   speakerPitch;
   operator GeneralSettings();
   t_Open9xGeneralData_v201() { memset(this, 0, sizeof(t_Open9xGeneralData_v201)); }

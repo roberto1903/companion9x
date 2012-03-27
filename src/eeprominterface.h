@@ -272,6 +272,7 @@ class GeneralSettings {
     char      ownerName[10+1];
     uint8_t   switchWarningStates;
     int8_t    beeperLength;
+    int8_t    gpsFormat;
 };
 
 class ExpoData {

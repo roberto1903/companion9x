@@ -34,7 +34,7 @@
 These will be relevant for all models in the same EEPROM.</string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabSetup">
       <attribute name="title">
@@ -1167,6 +1167,31 @@ p, li { white-space: pre-wrap; }
           <number>0</number>
          </property>
         </widget>
+       </item>
+       <item row="24" column="3" colspan="2">
+        <layout class="QHBoxLayout" name="gpsFormatLayout">
+         <item>
+          <widget class="QLabel" name="gpsFormatLabel">
+           <property name="text">
+            <string>GPS Coordinates</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="gpsFormatCB">
+           <item>
+            <property name="text">
+             <string>hh° (N/S) mm' ss''.dd</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>NMEA</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -2378,7 +2403,6 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>ownerNameLE</tabstop>
   <tabstop>beeperCB</tabstop>
   <tabstop>soundModeCB</tabstop>
