@@ -109,6 +109,14 @@ float ModelEdit::getBarValue(int barId, int Value)
     case 4:
       return ((ui->a2RatioSB->value()*Value/51.0)+ui->a2CalibSB->value());
       break;
+    case 5:
+    case 6:
+      if (Value>20) {
+        return 100;
+      } else {
+        return (5*Value);
+      }
+      break;
     case 7:
       return (20*Value);
       break;
@@ -151,6 +159,10 @@ float ModelEdit::getBarStep(int barId)
     case 4:
       return (ui->a2RatioSB->value()/51);
       break;
+    case 5:
+    case 6:
+      return 5;
+      break;  
     case 7:
       return 20;
       break;
