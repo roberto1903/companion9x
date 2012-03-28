@@ -215,21 +215,6 @@ return true;
 return lcd_buf;
 #endif
 
-#ifdef SETTRIM_IMPORT
-#undef SETTRIM_IMPORT
-uint8_t phase = getTrimFlightPhase(idx, getFlightPhase());
-setTrimValue(phase, idx, value);
-#endif
-
-#ifdef GETTRIMS_IMPORT
-#undef GETTRIMS_IMPORT
-uint8_t phase = getFlightPhase();
-trims.extended = hasExtendedTrims();
-for (uint8_t idx=0; idx<4; idx++) {
-  trims.values[idx] = getTrimValue(getTrimFlightPhase(idx, phase), idx);
-}
-#endif
-
 #ifdef GETERROR_IMPORT
 #undef GETERROR_IMPORT
 return main_thread_error;

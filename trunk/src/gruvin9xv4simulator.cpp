@@ -78,14 +78,17 @@ void Gruvin9xV4Simulator::setValues(TxInputs &inputs)
 
 void Gruvin9xV4Simulator::setTrim(unsigned int idx, int value)
 {
-#define SETTRIM_IMPORT
-#include "simulatorimport.h"
+  uint8_t phase = getTrimFlightPhase(idx, getFlightPhase());
+  setTrimValue(phase, idx, value);
 }
 
 void Gruvin9xV4Simulator::getTrims(Trims & trims)
 {
-#define GETTRIMS_IMPORT
-#include "simulatorimport.h"
+  uint8_t phase = getFlightPhase();
+  trims.extended = hasExtendedTrims();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.values[idx] = getTrimValue(getTrimFlightPhase(idx, phase), idx);
+  }
 }
 
 void Gruvin9xV4Simulator::wheelEvent(uint8_t steps)

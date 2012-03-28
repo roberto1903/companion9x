@@ -85,8 +85,11 @@ void Gruvin9xSimulator::setTrim(unsigned int idx, int value)
 
 void Gruvin9xSimulator::getTrims(Trims & trims)
 {
-#define GETTRIMS_IMPORT
-#include "simulatorimport.h"
+  uint8_t phase = getFlightPhase();
+  trims.extended = hasExtendedTrims();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.values[idx] = getTrimValue(getTrimFlightPhase(idx, phase), idx);
+  }
 }
 
 unsigned int Gruvin9xSimulator::getPhase()

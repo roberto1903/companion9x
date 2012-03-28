@@ -22,6 +22,7 @@
 namespace Open9xV4 {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+uint8_t getStickMode();
 }
 
 using namespace Open9xV4;
@@ -78,14 +79,25 @@ void Open9xV4Simulator::setValues(TxInputs &inputs)
 
 void Open9xV4Simulator::setTrim(unsigned int idx, int value)
 {
-#define SETTRIM_IMPORT
-#include "simulatorimport.h"
+  idx = modn12x3[getStickMode()][idx] - 1;
+  uint8_t phase = getTrimFlightPhase(getFlightPhase(), idx);
+  setTrimValue(phase, idx, value);
 }
 
 void Open9xV4Simulator::getTrims(Trims & trims)
 {
-#define GETTRIMS_IMPORT
-#include "simulatorimport.h"
+  uint8_t phase = getFlightPhase();
+  trims.extended = hasExtendedTrims();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.values[idx] = getTrimValue(getTrimFlightPhase(phase, idx), idx);
+  }
+
+  for (int i=0; i<2; i++) {
+    uint8_t idx = modn12x3[getStickMode()][i] - 1;
+    int16_t tmp = trims.values[i];
+    trims.values[i] = trims.values[idx];
+    trims.values[idx] = tmp;
+  }
 }
 
 void Open9xV4Simulator::wheelEvent(uint8_t steps)
