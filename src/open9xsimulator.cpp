@@ -84,15 +84,19 @@ void Open9xSimulator::setValues(TxInputs &inputs)
 
 void Open9xSimulator::setTrim(unsigned int idx, int value)
 {
-idx = modn12x3[getStickMode()][idx] - 1;
-#define SETTRIM_IMPORT
-#include "simulatorimport.h"
+  idx = modn12x3[getStickMode()][idx] - 1;
+  uint8_t phase = getTrimFlightPhase(getFlightPhase(), idx);
+  setTrimValue(phase, idx, value);
 }
 
 void Open9xSimulator::getTrims(Trims & trims)
 {
-#define GETTRIMS_IMPORT
-#include "simulatorimport.h"
+  uint8_t phase = getFlightPhase();
+  trims.extended = hasExtendedTrims();
+  for (uint8_t idx=0; idx<4; idx++) {
+    trims.values[idx] = getTrimValue(getTrimFlightPhase(phase, idx), idx);
+  }
+
   for (int i=0; i<2; i++) {
     uint8_t idx = modn12x3[getStickMode()][i] - 1;
     int16_t tmp = trims.values[i];
