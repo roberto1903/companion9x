@@ -28,7 +28,7 @@ namespace Open9xV4 {
 #include "../open9x/open9x.cpp"
 #include "../open9x/gruvin9x/gtime.cpp"
 #include "../open9x/gruvin9x/rtc.cpp"
-#include "../open9x/pulses.cpp"
+#include "../open9x/pulses_avr.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
 #include "../open9x/model_menus.cpp"
