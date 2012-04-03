@@ -25,7 +25,7 @@ namespace Open9x {
 #include "../open9x/board_stock.cpp"
 #include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
-#include "../open9x/pulses.cpp"
+#include "../open9x/pulses_avr.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
 #include "../open9x/model_menus.cpp"
