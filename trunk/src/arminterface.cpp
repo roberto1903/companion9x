@@ -107,7 +107,7 @@ int armapplet()
     if (h_handle != 0)
     {
       // Read DBGU Chip ID
-      // BSS pAT91BootDLL->AT91Boot_Read_Int(h_handle, &uValue, 0xFFFFF240, NULL);
+      pAT91BootDLL->AT91Boot_Read_Int(h_handle, &uValue, 0xFFFFF240, NULL); // BSS it cores there
 
       // Assume Target is a SAM7S256 (SAM7S-EK)
       // Otherwise, modify that part by yourself, it will be a good training! ;-)
