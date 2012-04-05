@@ -300,7 +300,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
     int fileType = getFileType(fileName);
 
-    uint8_t eeprom[EESIZE_GRUVIN9X];
+    uint8_t *eeprom = (uint8_t*)malloc(GetEepromInterface()->getEEpromSize());
     int eeprom_size = 0;
 
     if (fileType != FILE_TYPE_XML) {
@@ -366,6 +366,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
       return false;
     }
 
+    free(eeprom); // TODO free in all cases ...
     file.close();
     if(setCurrent) setCurrentFile(fileName);
 
@@ -455,16 +456,15 @@ void MdiChild::burnTo()  // write to Tx
   {
     burnConfigDialog bcd;
     QString tempDir    = QDir::tempPath();
-    QString tempFile = tempDir + "/temp.hex";
+    QString tempFile = tempDir + "/temp.bin";
     saveFile(tempFile, false);
     if(!QFileInfo(tempFile).exists())
     {
       QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
       return;
     }
-    QString str = "eeprom:w:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-
-    avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), ((MainWindow *)this->parent())->GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+    QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
+    avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
     ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
     ad->show();
   }

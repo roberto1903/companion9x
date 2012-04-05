@@ -77,7 +77,7 @@ class EFile
   EeFs    *eeFs;
 
   void eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size);
-  void eeWriteBlockCmp(void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size);
+  void eeprom_write_block(void *pointer_ram, unsigned int pointer_eeprom, size_t size);
 
   uint8_t EeFsRead(uint8_t blk,uint8_t ofs);
   void EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val);

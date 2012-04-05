@@ -35,7 +35,11 @@ void EFile::EeFsInit(uint8_t *eeprom, int size, bool format)
   this->eeprom = eeprom;
   this->eeprom_size = size;
 
-  if (this->eeprom_size != EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_ERSKY9X) {
+    if (format)
+      memset(eeprom, 0, size);
+  }
+  else {
     eeFs = (EeFs *)eeprom;
 
     if (format) {
@@ -57,9 +61,9 @@ void EFile::eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, s
   memcpy(pointer_ram, &eeprom[pointer_eeprom], size);
 }
 
-void EFile::eeWriteBlockCmp(void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size)
+void EFile::eeprom_write_block(void *pointer_ram, unsigned int pointer_eeprom, size_t size)
 {
-  memcpy(&eeprom[i_pointer_eeprom],i_pointer_ram,size);
+  memcpy(&eeprom[pointer_eeprom], pointer_ram, size);
 }
 
 uint8_t EFile::EeFsRead(uint8_t blk,uint8_t ofs)
@@ -71,7 +75,7 @@ uint8_t EFile::EeFsRead(uint8_t blk,uint8_t ofs)
 
 void EFile::EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val)
 {
-  eeWriteBlockCmp(&val, (uint16_t)(blk*BS+ofs), 1);
+  eeprom_write_block(&val, (uint16_t)(blk*BS+ofs), 1);
 }
 
 uint8_t EFile::EeFsGetLink(uint8_t blk)
@@ -92,17 +96,17 @@ uint8_t EFile::EeFsGetDat(uint8_t blk,uint8_t ofs)
 void EFile::EeFsSetDat(uint8_t blk, uint8_t ofs, uint8_t *buf, uint8_t len)
 {
   //EeFsWrite( blk,ofs+1,val);
-  eeWriteBlockCmp(buf, (uint16_t)(blk*BS+ofs+1), len);
+  eeprom_write_block(buf, (uint16_t)(blk*BS+ofs+1), len);
 }
 
 void EFile::EeFsFlushFreelist()
 {
-  // eeWriteBlockCmp(&eeFs->freeList, eeFs->freeList, sizeof(eeFs->freeList));
+  // eeprom_write_block(&eeFs->freeList, eeFs->freeList, sizeof(eeFs->freeList));
 }
 
 void EFile::EeFsFlush()
 {
-  // eeWriteBlockCmp(eeFs, 0, sizeof(eeFs));
+  // eeprom_write_block(eeFs, 0, sizeof(eeFs));
 }
 
 uint16_t EFile::EeFsGetFree()
@@ -368,53 +372,66 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t 
  */
 uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t i_len)
 {
-  create(i_fileId, typ);
-  bool    run0   = buf[0] == 0;
-  uint8_t cnt    = 1;
-  uint8_t cnt0   = 0;
-  uint16_t i     = 0;
-  if (i_len==0) goto close;
+  if (this->eeprom_size == EESIZE_ERSKY9X) {
+    openRd(i_fileId);
+    eeprom_write_block(buf, (m_fileId << 12) + m_pos, i_len);
+    t_eeprom_header header;
+    header.sequence_no = 1;
+    header.data_size = i_len;
+    header.flags = 0;
+    header.hcsum = byte_checksum((uint8_t *) &header, 7);
+    eeprom_write_block(&header, (m_fileId << 12), sizeof(header));
+    return i_len;
+  }
+  else {
+    create(i_fileId, typ);
+    bool    run0   = buf[0] == 0;
+    uint8_t cnt    = 1;
+    uint8_t cnt0   = 0;
+    uint16_t i     = 0;
+    if (i_len==0) goto close;
 
-  //RLE compression:
-  //rb = read byte
-  //if (rb | 0x80) write rb & 0x7F zeros
-  //else write rb bytes
-  for (i=1; 1; i++) { // !! laeuft ein byte zu weit !!
-    bool cur0 = buf[i] == 0;
-    if (cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)|| i==i_len){
-      if (run0){
-        assert(cnt0==0);
-        if (cnt<8 && i!=i_len)
-          cnt0 = cnt; //aufbew fuer spaeter
-        else {
-          if (write1(cnt|0x40)!=1)                goto error;//-cnt&0x3f
-        }
-      }
-      else {
-        if (cnt0) {
-          if (write1(0x80 | (cnt0<<4) | cnt)!=1)  goto error;//-cnt0xx-cnt
-          cnt0 = 0;
+    //RLE compression:
+    //rb = read byte
+    //if (rb | 0x80) write rb & 0x7F zeros
+    //else write rb bytes
+    for (i=1; 1; i++) { // !! laeuft ein byte zu weit !!
+      bool cur0 = buf[i] == 0;
+      if (cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)|| i==i_len){
+        if (run0){
+          assert(cnt0==0);
+          if (cnt<8 && i!=i_len)
+            cnt0 = cnt; //aufbew fuer spaeter
+          else {
+            if (write1(cnt|0x40)!=1)                goto error;//-cnt&0x3f
+          }
         }
         else {
-          if (write1(cnt)!=1)                    goto error;//-cnt
+          if (cnt0) {
+            if (write1(0x80 | (cnt0<<4) | cnt)!=1)  goto error;//-cnt0xx-cnt
+            cnt0 = 0;
+          }
+          else {
+            if (write1(cnt)!=1)                    goto error;//-cnt
+          }
+          uint8_t ret = write(&buf[i-cnt], cnt);
+          if (ret != cnt) { cnt-=ret;                goto error;}//-cnt
         }
-        uint8_t ret = write(&buf[i-cnt], cnt);
-        if (ret != cnt) { cnt-=ret;                goto error;}//-cnt
+        cnt=0;
+        if (i==i_len) break;
+        run0 = cur0;
       }
-      cnt=0;
-      if (i==i_len) break;
-      run0 = cur0;
+      cnt++;
     }
-    cnt++;
-  }
-  if (0) {
-    error:
-    i-=cnt+cnt0;
-  }
+    if (0) {
+      error:
+      i-=cnt+cnt0;
+    }
 
-  close:
-  closeTrunc();
-  return i;
+    close:
+    closeTrunc();
+    return i;
+  }
 }
 
 

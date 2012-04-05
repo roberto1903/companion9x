@@ -55,7 +55,7 @@ void Open9xARMSimulator::start(RadioData &radioData, bool tests)
 {
 /*  g_rotenc[0] = 0;
   g_rotenc[1] = 0;*/
-  open9xInterface->save(&eeprom[0], radioData);
+  open9xInterface->save(Open9xARM::eeprom, radioData);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }

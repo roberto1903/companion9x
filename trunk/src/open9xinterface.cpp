@@ -102,20 +102,13 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
   return false;
 }
 
-extern void writeArmEepromData(int index, uint8_t *data, int size);
-
 template <class T>
 bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
 {
   T open9xModel(model);
-  if (board == BOARD_ERSKY9X) {
-    writeArmEepromData(1+index, (uint8_t *)&open9xModel, sizeof(T));
-  }
-  else {
-    int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
-    if(sz != sizeof(T)) {
-      return false;
-    }
+  int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
+  if(sz != sizeof(T)) {
+    return false;
   }
   return true;
 }
@@ -130,7 +123,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << "trying " << getName() << " import... ";
 
   if (size != getEEpromSize()) {
-    std::cout << "wrong size" << size << " " << getEEpromSize() << "\n";
+    std::cout << "wrong size (" << size << ")\n";
     return false;
   }
 
@@ -207,10 +200,6 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-extern void writeArmEepromData(int index, uint8_t *data, int size);
-extern void initArmEeprom();
-void endArmEeprom(unsigned char *eeprom);
-
 int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
@@ -219,22 +208,12 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
     version = (board == BOARD_GRUVIN9X ? LAST_OPEN9X_GRUVIN9X_EEPROM_VER : LAST_OPEN9X_STOCK_EEPROM_VER);
   }
 
-  if (board == BOARD_ERSKY9X) {
-    initArmEeprom();
-  }
-  else {
-    efile->EeFsInit(eeprom, getEEpromSize(), true);
-  }
+  efile->EeFsInit(eeprom, getEEpromSize(), true);
 
   Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
-  if (board == BOARD_ERSKY9X) {
-    writeArmEepromData(0, (uint8_t *)&open9xGeneral, sizeof(open9xGeneral));
-  }
-  else {
-    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
-    if(sz != sizeof(Open9xGeneralData)) {
-      return 0;
-    }
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
+  if(sz != sizeof(Open9xGeneralData)) {
+    return 0;
   }
 
   for (int i=0; i<MAX_MODELS; i++) {
@@ -263,10 +242,6 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
     }
   }
 
-  if (board == BOARD_ERSKY9X) {
-    endArmEeprom(eeprom);
-  }
-
   if (!EEPROMWarnings.isEmpty())
     QMessageBox::warning(NULL,
         QObject::tr("Warning"),
@@ -277,6 +252,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
 int Open9xInterface::getSize(ModelData &model)
 {
+  if (board == BOARD_ERSKY9X)
+    return 0;
+
   if (model.isempty())
     return 0;
 
@@ -293,6 +271,9 @@ int Open9xInterface::getSize(ModelData &model)
 
 int Open9xInterface::getSize(GeneralSettings &settings)
 {
+  if (board == BOARD_ERSKY9X)
+    return 0;
+
   uint8_t tmp[EESIZE_GRUVIN9X];
   efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
 
