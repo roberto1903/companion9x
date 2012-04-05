@@ -130,6 +130,8 @@ private:
     QStringList GetAvrdudeArguments(const QString &cmd);
     QStringList GetReceiveEEpromCommand(const QString &filename);
     QStringList GetSendEEpromCommand(const QString &filename);
+    QStringList GetSendFlashCommand(const QString &filename);
+
 
     bool convertEEPROM(QString backupFile, QString restoreFile, QString flashFile);
     bool isValidEEPROM(QString eepromfile);

@@ -580,7 +580,11 @@ QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
     return result;
   }
   else {
-    return GetAvrdudeArguments(QString("eeprom:r:" + filename + ":i")); // writing eeprom -> MEM:OPR:FILE:FTYPE"
+    QString str = "eeprom:r:" + filename;
+    if(QFileInfo(filename).suffix().toUpper()=="HEX") str += ":i";
+    else if(QFileInfo(filename).suffix().toUpper()=="BIN") str += ":r";
+    else str += ":a";
+    return GetAvrdudeArguments(str);
   }
 }
 
@@ -612,6 +616,41 @@ QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
   }
   else {
     return GetAvrdudeArguments(QString("eeprom:w:" + filename + ":r")); // writing eeprom -> MEM:OPR:FILE:FTYPE"
+  }
+}
+
+QStringList MainWindow::GetSendFlashCommand(const QString &filename)
+{
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
+    QStringList result;
+
+    QString tclFilename = QDir::tempPath() + "/temp.tcl";
+    if (QFile::exists(tclFilename)) {
+      unlink(tclFilename.toAscii());
+    }
+    QFile tclFile(tclFilename);
+    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+      QMessageBox::warning(this, tr("Error"),
+          tr("Cannot write file %1:\n%2.")
+          .arg(tclFilename)
+          .arg(tclFile.errorString()));
+      return result;
+    }
+
+    QTextStream outputStream(&tclFile);
+    outputStream << "send_file {Flash} \"" << filename << "\" 0x400000 0\n";
+    outputStream << "FLASH::ScriptGPNMV 2\n";
+
+    burnConfigDialog bcd;
+    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
+    return result;
+  }
+  else {
+    QString str = "flash:w:" + filename;
+    if(QFileInfo(filename).suffix().toUpper()=="HEX") str += ":i";
+    else if(QFileInfo(filename).suffix().toUpper()=="BIN") str += ":r";
+    else str += ":a";
+    return GetAvrdudeArguments(str);
   }
 }
 
@@ -757,29 +796,26 @@ void MainWindow::burnToFlash(QString fileToFlash)
     settings.setValue("backupOnFlash", backup);
     if (backup) {
       QString tempDir    = QDir::tempPath();
-      QString backupFile = tempDir + "/backup.hex";
-      QString str = "eeprom:r:" + backupFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Backup EEPROM From Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+      QString backupFile = tempDir + "/backup.bin";
+      QStringList str = GetReceiveEEpromCommand(backupFile);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
       int res = ad->exec();
       if (QFileInfo(backupFile).exists() && res) {
         sleep(1);
-        QString str = "flash:w:" + fileName;
-        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-        else str += ":a";
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Write Flash To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+        QStringList str = GetSendFlashCommand(fileName);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Write Flash To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
         ad->setWindowIcon(QIcon(":/images/write_flash.png"));
         int res = ad->exec();
         if (res) {
-          QString restoreFile = tempDir + "/restore.hex";
+          QString restoreFile = tempDir + "/restore.bin";
           if (!convertEEPROM(backupFile, restoreFile, fileName)) {
             QMessageBox::warning(this, tr("Conversion failed"), tr("Cannot convert EEProm for this firmware, original EEProm file will be used"));
             restoreFile = backupFile;
           }
           sleep(1);
-          QString str = "eeprom:w:" + restoreFile +":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Restore EEPROM To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
+          QStringList str = GetSendEEpromCommand(restoreFile);
+          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Restore EEPROM To Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
           ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
           res=ad->exec();
           if (!res) {
@@ -795,12 +831,8 @@ void MainWindow::burnToFlash(QString fileToFlash)
       }
     }
     else {
-      QString str = "flash:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-      if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-      else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-      else str += ":a";
-
-      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Write Flash To Tx"), AVR_DIALOG_SHOW_DONE);
+      QStringList str = GetSendFlashCommand(fileName);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Write Flash To Tx"), AVR_DIALOG_SHOW_DONE);
       ad->setWindowIcon(QIcon(":/images/write_flash.png"));
       ad->show();
     }
