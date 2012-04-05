@@ -21,10 +21,13 @@ public:
     ~burnConfigDialog();
 
     QString getAVRDUDE() {return avrLoc;}
+    QString getSAMBA() {return sambaLoc;}
     QStringList getAVRArgs() {return avrArgs;}
     QString getProgrammer() {return avrProgrammer;}
     QString getMCU() {return avrMCU;}
+    QString getArmMCU() {return armMCU;}
     QString getPort() {return avrPort;}
+    QString getSambaPort() {return sambaPort;}
 
     void listProgrammers();
     void restFuses(bool eeProtect);
@@ -36,10 +39,13 @@ private:
     void populateProgrammers();
 
     QString avrLoc;
+    QString sambaLoc;
     QStringList avrArgs;
     QString avrProgrammer;
     QString avrMCU;
+    QString armMCU;
     QString avrPort;
+    QString sambaPort;
 
 private slots:
     void on_avrArgs_editingFinished();
@@ -50,6 +56,9 @@ private slots:
     void on_avrdude_programmer_currentIndexChanged(QString );
     void on_avrdude_mcu_currentIndexChanged(QString );
     void on_avrdude_port_currentIndexChanged(QString );
+    void on_samba_location_editingFinished();
+    void on_samba_port_editingFinished();
+    void on_arm_mcu_currentIndexChanged(QString );
 
     void getSettings();
     void putSettings();

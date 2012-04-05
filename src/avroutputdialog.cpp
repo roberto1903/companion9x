@@ -1,17 +1,19 @@
 #include "avroutputdialog.h"
 #include "ui_avroutputdialog.h"
 #include <QtGui>
+#include "eeprominterface.h"
 
 avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour, bool displayDetails) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
-    ui(new Ui::avrOutputDialog)
+    ui(new Ui::avrOutputDialog),
+    hasErrors(false)
 {
     ui->setupUi(this);
 
     if(wTitle.isEmpty())
-        setWindowTitle(tr("AVRDUDE result"));
+        setWindowTitle(getProgrammer() + tr(" result"));
     else
-        setWindowTitle(tr("AVRDUDE - ") + wTitle);
+        setWindowTitle(getProgrammer() + " - " + wTitle);
     QFile exec;
     winTitle=wTitle;
     
@@ -27,10 +29,11 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     
     cmdLine = prog;
     if (!(exec.exists(prog))) {
-      QMessageBox::critical(this, "companion9x", tr("AVRDUDE executable not found"));
-      closeOpt=AVR_DIALOG_FORCE_CLOSE;
+      QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" executable not found"));
+      closeOpt = AVR_DIALOG_FORCE_CLOSE;
       QTimer::singleShot(0, this, SLOT(forceClose()));
-    } else {
+    }
+    else {
       foreach(QString str, arg) cmdLine.append(" " + str);
       closeOpt = closeBehaviour;
 
@@ -80,7 +83,7 @@ void avrOutputDialog::addText(const QString &text)
     int val = ui->plainTextEdit->verticalScrollBar()->maximum();
     ui->plainTextEdit->insertPlainText(text);
     if(val!=ui->plainTextEdit->verticalScrollBar()->maximum())
-        ui->plainTextEdit->verticalScrollBar()->setValue(ui->plainTextEdit->verticalScrollBar()->maximum());
+      ui->plainTextEdit->verticalScrollBar()->setValue(ui->plainTextEdit->verticalScrollBar()->maximum());
 }
 
 
@@ -88,6 +91,9 @@ void avrOutputDialog::doAddTextStdOut()
 {
     QByteArray data = process->readAllStandardOutput();
     QString text = QString(data);
+
+    addText(text);
+
     //addText("\n=====\n" + text + "\n=====\n");
 
     if(text.contains(":010000")) //contains fuse info
@@ -103,8 +109,21 @@ void avrOutputDialog::doAddTextStdOut()
         }
     }
 
+    if (text.contains("-E-")) {
+      hasErrors = true;
+    }
+
 }
 
+QString avrOutputDialog::getProgrammer()
+{
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
+    return "SAM-BA";
+  }
+  else {
+    return "AVRDUDE";
+  }
+}
 
 void avrOutputDialog::doAddTextStdErr()
 {
@@ -113,6 +132,7 @@ void avrOutputDialog::doAddTextStdErr()
     QString avrphase;
     QByteArray data = process->readAllStandardError();
     QString text = QString(data);
+
     currLine.append(text);
     if (currLine.contains("#")) {
         avrphase=currLine.left(1).toLower();
@@ -120,9 +140,9 @@ void avrOutputDialog::doAddTextStdErr()
             ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #ff0000; text-align:center;}:");
             phase=1;
             if(winTitle.isEmpty())
-                setWindowTitle(tr("AVRDUDE - ")+tr("Writing"));
+                setWindowTitle(getProgrammer() + " - " + tr("Writing"));
             else
-                setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Writing"));
+                setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Writing"));
             pbvalue=currLine.count("#")*2;
             ui->progressBar->setValue(pbvalue);
         }
@@ -130,16 +150,16 @@ void avrOutputDialog::doAddTextStdErr()
             if (phase==0) {
                 ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #00ff00; text-align:center;}:");
                 if(winTitle.isEmpty())
-                    setWindowTitle(tr("AVRDUDE - ")+tr("Reading"));
+                    setWindowTitle(getProgrammer() + " - " + tr("Reading"));
                 else
-                    setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Reading"));
+                    setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Reading"));
             } else {
                 ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #0000ff; text-align:center;}:");
                 phase=2;
                 if(winTitle.isEmpty())
-                    setWindowTitle(tr("AVRDUDE - ")+tr("Verifying"));
+                    setWindowTitle(getProgrammer() + " - " + tr("Verifying"));
                 else
-                    setWindowTitle(tr("AVRDUDE - ") + winTitle + " - " + tr("Verifying"));
+                    setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Verifying"));
             }
             pbvalue=currLine.count("#")*2;
             ui->progressBar->setValue(pbvalue);
@@ -157,11 +177,16 @@ void avrOutputDialog::doAddTextStdErr()
 void avrOutputDialog::doFinished(int code=0)
 {
     addText("\n" HLINE_SEPARATOR);
-    if(code) {
-        ui->checkBox->setChecked(true);
-        addText("\n" + tr("AVRDUDE done - exit code %1").arg(code));
-    } else {
-        addText("\n" + tr("AVRDUDE done - SUCCESSFUL"));
+    if (code) {
+      ui->checkBox->setChecked(true);
+      addText("\n" + getProgrammer() + tr(" done - exit code %1").arg(code));
+    }
+    else if (hasErrors) {
+      ui->checkBox->setChecked(true);
+      addText("\n" + getProgrammer() + tr(" done with errors"));
+    }
+    else {
+      addText("\n" + getProgrammer() + tr(" done - SUCCESSFUL"));
     }
     addText("\n" HLINE_SEPARATOR "\n");
 
@@ -169,20 +194,29 @@ void avrOutputDialog::doFinished(int code=0)
 
     switch(closeOpt)
     {
-    case (AVR_DIALOG_CLOSE_IF_SUCCESSFUL): if(!code) accept();break;
-    case (AVR_DIALOG_FORCE_CLOSE): if(code) reject(); else accept(); break;
-    case (AVR_DIALOG_SHOW_DONE):
-        if(code)
-        {
-            QMessageBox::critical(this, "companion9x", tr("AVRDUDE did not finish correctly"));
+      case AVR_DIALOG_CLOSE_IF_SUCCESSFUL:
+        if (!hasErrors && !code) accept();
+        break;
+
+      case AVR_DIALOG_FORCE_CLOSE:
+        if (hasErrors || code)
+          reject();
+        else
+          accept();
+        break;
+
+      case AVR_DIALOG_SHOW_DONE:
+        if (hasErrors || code) {
+            QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" did not finish correctly"));
             // reject();
         }
         else
         {
-            QMessageBox::information(this, "companion9x", tr("AVRDUDE finished correctly"));
+            QMessageBox::information(this, "companion9x", getProgrammer() + tr(" finished correctly"));
             accept();
         }
         break;
+
     default: //AVR_DIALOG_KEEP_OPEN
         break;
     }
@@ -193,7 +227,7 @@ void avrOutputDialog::doFinished(int code=0)
 void avrOutputDialog::doProcessStarted()
 {
     addText(HLINE_SEPARATOR "\n");
-    addText(tr("Started AVRDUDE") + "\n");
+    addText(tr("Started ") + getProgrammer() + "\n");
     addText(cmdLine);
     addText("\n" HLINE_SEPARATOR "\n");
 }

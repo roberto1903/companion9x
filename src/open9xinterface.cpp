@@ -17,8 +17,10 @@
 #include <iostream>
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
+#include "open9xv4eeprom.h"
 #include "open9xsimulator.h"
 #include "open9xv4simulator.h"
+#include "open9xarmsimulator.h"
 #include "file.h"
 #include <QMessageBox>
 
@@ -31,9 +33,9 @@
 #define FILE_MODEL(n) (1+n)
 #define FILE_TMP      (1+16)
 
-Open9xInterface::Open9xInterface(int size):
+Open9xInterface::Open9xInterface(BoardEnum board):
 efile(new EFile()),
-size(size)
+board(board)
 {
 }
 
@@ -44,21 +46,37 @@ Open9xInterface::~Open9xInterface()
 
 const char * Open9xInterface::getName()
 {
-  if (size == 2048)
-    return "Open9x";
-  else
-    return "Open9x v4";
+  switch (board) {
+    case BOARD_STOCK:
+      return "Open9x";
+    case BOARD_GRUVIN9X:
+      return "Open9x for gruvin9x board";
+    case BOARD_ERSKY9X:
+      return "Open9x for ersky9x board";
+    default:
+      return "Open9x for an unknown boad";
+  }
 }
 
 const int Open9xInterface::getEEpromSize()
 {
-    return size;
+  switch (board) {
+    case BOARD_STOCK:
+      return EESIZE_STOCK;
+    case BOARD_GRUVIN9X:
+      return EESIZE_GRUVIN9X;
+    case BOARD_ERSKY9X:
+      return EESIZE_ERSKY9X;
+    default:
+      return 0;
+  }
 }
 
 template <class T>
-void Open9xInterface::loadModel(ModelData &model, unsigned int stickMode)
+void Open9xInterface::loadModel(ModelData &model, uint8_t index, unsigned int stickMode)
 {
   T _model;
+  efile->openRd(FILE_MODEL(index));
   if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
     model = _model;
     if (stickMode) {
@@ -74,6 +92,7 @@ template <class T>
 bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 {
   T _settings;
+  efile->openRd(FILE_GENERAL);
   if (efile->readRlc2((uint8_t*)&_settings, sizeof(T))) {
     settings = _settings;
     return true;
@@ -83,13 +102,20 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
   return false;
 }
 
+extern void writeArmEepromData(int index, uint8_t *data, int size);
+
 template <class T>
 bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
 {
   T open9xModel(model);
-  int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
-  if(sz != sizeof(T)) {
-    return false;
+  if (board == BOARD_ERSKY9X) {
+    writeArmEepromData(1+index, (uint8_t *)&open9xModel, sizeof(T));
+  }
+  else {
+    int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
+    if(sz != sizeof(T)) {
+      return false;
+    }
   }
   return true;
 }
@@ -101,10 +127,10 @@ bool Open9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
 
 bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  std::cout << "trying open9x " << this->size << " import... ";
+  std::cout << "trying " << getName() << " import... ";
 
-  if (size != this->size) {
-    std::cout << "wrong size\n";
+  if (size != getEEpromSize()) {
+    std::cout << "wrong size" << size << " " << getEEpromSize() << "\n";
     return false;
   }
 
@@ -145,7 +171,6 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       return false;
   }
 
-  efile->openRd(FILE_GENERAL);
   if (1/*version == 201 || version == 202*/) {
     if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
       std::cout << "ko\n";
@@ -154,21 +179,23 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   
   for (int i=0; i<MAX_MODELS; i++) {
-    efile->openRd(FILE_MODEL(i));
     if (version == 201) {
-      loadModel<Open9xModelData_v201>(radioData.models[i], radioData.generalSettings.stickMode+1);
+      loadModel<Open9xModelData_v201>(radioData.models[i], i, radioData.generalSettings.stickMode+1);
     }
     else if (version == 202) {
-      loadModel<Open9xModelData_v202>(radioData.models[i], 0 /*no more stick mode messed*/);
+      loadModel<Open9xModelData_v202>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else if (version == 203) {
-      loadModel<Open9xModelData_v203>(radioData.models[i], 0 /*no more stick mode messed*/);
+      loadModel<Open9xModelData_v203>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else if (version == 204) {
-      loadModel<Open9xModelData_v204>(radioData.models[i], 0 /*no more stick mode messed*/);
+      loadModel<Open9xModelData_v204>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else if (version == 205) {
-      loadModel<Open9xModelData_v205>(radioData.models[i], 0 /*no more stick mode messed*/);
+      loadModel<Open9xModelData_v205>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_GRUVIN9X && version == 206) {
+      loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -180,19 +207,34 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
+extern void writeArmEepromData(int index, uint8_t *data, int size);
+extern void initArmEeprom();
+void endArmEeprom(unsigned char *eeprom);
+
 int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
 
-  if (!version)
-    version = LAST_OPEN9X_EEPROM_VER;
+  if (!version) {
+    version = (board == BOARD_GRUVIN9X ? LAST_OPEN9X_GRUVIN9X_EEPROM_VER : LAST_OPEN9X_STOCK_EEPROM_VER);
+  }
 
-  efile->EeFsInit(eeprom, size, true);
+  if (board == BOARD_ERSKY9X) {
+    initArmEeprom();
+  }
+  else {
+    efile->EeFsInit(eeprom, getEEpromSize(), true);
+  }
 
   Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
-  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
-  if(sz != sizeof(Open9xGeneralData)) {
-    return 0;
+  if (board == BOARD_ERSKY9X) {
+    writeArmEepromData(0, (uint8_t *)&open9xGeneral, sizeof(open9xGeneral));
+  }
+  else {
+    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
+    if(sz != sizeof(Open9xGeneralData)) {
+      return 0;
+    }
   }
 
   for (int i=0; i<MAX_MODELS; i++) {
@@ -211,10 +253,18 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         case 205:
           result = saveModel<Open9xModelData_v205>(i, radioData.models[i]);
           break;
+        case 206:
+          // Now only for V4
+          result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
+          break;
       }
       if (!result)
         return false;
     }
+  }
+
+  if (board == BOARD_ERSKY9X) {
+    endArmEeprom(eeprom);
   }
 
   if (!EEPROMWarnings.isEmpty())
@@ -222,7 +272,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         QObject::tr("Warning"),
         QObject::tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
 
-  return size;
+  return getEEpromSize();
 }
 
 int Open9xInterface::getSize(ModelData &model)
@@ -230,8 +280,8 @@ int Open9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_V4];
-  efile->EeFsInit(tmp, EESIZE_V4, true);
+  uint8_t tmp[EESIZE_GRUVIN9X];
+  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
 
   Open9xModelData open9xModel(model);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
@@ -243,10 +293,10 @@ int Open9xInterface::getSize(ModelData &model)
 
 int Open9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_V4];
-  efile->EeFsInit(tmp, EESIZE_V4, true);
+  uint8_t tmp[EESIZE_GRUVIN9X];
+  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
 
-  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_EEPROM_VER);
+  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
   if(sz != sizeof(open9xGeneral)) {
     return -1;
@@ -341,8 +391,14 @@ int Open9xInterface::hasProtocol(Protocol proto)
 
 SimulatorInterface * Open9xInterface::getSimulator()
 {
-  if (size == 2048)
-    return new Open9xSimulator(this);
-  else
-    return new Open9xV4Simulator(this);
+  switch (board) {
+    case BOARD_STOCK:
+      return new Open9xSimulator(this);
+    case BOARD_GRUVIN9X:
+      return new Open9xV4Simulator(this);
+    case BOARD_ERSKY9X:
+      return new Open9xARMSimulator(this);
+    default:
+      return NULL;
+  }
 }

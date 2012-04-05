@@ -31,11 +31,17 @@
 #include "../winbuild/winbuild.h"
 #endif
 
-#define EESIZE_STOCK   2048
-#define EESIZE_V4      4096
+#define EESIZE_STOCK    2048
+#define EESIZE_GRUVIN9X 4096
+#define EESIZE_ERSKY9X  (128*4096)
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
 
+enum BoardEnum {
+  BOARD_STOCK,
+  BOARD_GRUVIN9X,
+  BOARD_ERSKY9X
+};
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
   {1, 3, 2, 4},
@@ -158,6 +164,7 @@ enum EnumKeys {
 #define CSW_NUM_FUNC 14
 #define CSW_LEN_FUNC 7
 
+// TODO enum here!
 #define CS_OFF       0
 #define CS_VPOS      1  //v>offset
 #define CS_VNEG      2  //v<offset
@@ -187,20 +194,21 @@ enum EnumKeys {
 #define SWASH_TYPE_140   3
 #define SWASH_TYPE_90    4
 
-#define NUM_STICKS      4
-#define NUM_POTS        3
-#define NUM_CAL_PPM     4
-#define NUM_PPM         8
+#define NUM_STICKS          4
+#define NUM_POTS            3
+#define NUM_ROTARY_ENCODERS 2
+#define NUM_CAL_PPM         4
+#define NUM_PPM             8
 
-#define MAX_TIMERS      2
+#define MAX_TIMERS          2
 
-#define NUM_TELEMETRY   12
+#define NUM_TELEMETRY       12
 #define TELEMETRY_CHANNELS  "AD1 AD2 "
 #define TM_HASTELEMETRY     0x01
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
 
-#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+1/*MAX*/+1/*ID3*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT)
+#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT)
 #define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
 #define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
 
@@ -315,6 +323,8 @@ enum RawSource {
   SRC_P1,
   SRC_P2,
   SRC_P3,
+  SRC_REA,
+  SRC_REB,
   SRC_MAX,
   SRC_3POS,
   SRC_STHR,
@@ -421,6 +431,7 @@ class PhaseData {
     char name[6+1];
     unsigned int fadeIn;
     unsigned int fadeOut;
+    int rotaryEncoders[2];
     void clear() { memset(this, 0, sizeof(PhaseData)); for (int i=0; i<NUM_STICKS; i++) trimRef[i] = -1; }
 };
 

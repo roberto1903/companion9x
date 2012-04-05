@@ -25,27 +25,40 @@ void burnConfigDialog::getSettings()
 {
     QSettings settings("companion9x", "companion9x");
 #if defined WIN32 || !defined __GNUC__
-    avrLoc = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
+    avrLoc   = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
+    sambaLoc = settings.value("samba_location", QFileInfo("sam-ba.exe").absoluteFilePath()).toString();
 #elif defined __APPLE__
-    avrLoc = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
+    avrLoc   = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
+    sambaLoc = settings.value("samba_location", "/usr/local/bin/sam-ba").toString();
 #else
-    avrLoc = settings.value("avrdude_location", "/usr/bin/avrdude").toString();
+    avrLoc   = settings.value("avrdude_location", "/usr/bin/avrdude").toString();
+    sambaLoc = settings.value("samba_location", "/usr/bin/sam-ba").toString();
 #endif
     QString str = settings.value("avr_arguments").toString();
     avrArgs = str.split(" ", QString::SkipEmptyParts);
+
     avrProgrammer =  settings.value("programmer", QString("usbasp")).toString();
-    avrMCU =  settings.value("mcu", QString("m64")).toString();
-    avrPort =  settings.value("avr_port", "").toString();
+
+    avrMCU = settings.value("mcu", QString("m64")).toString();
+    armMCU = settings.value("arm_mcu", QString("at91sam3s4-9x")).toString();
+
+    avrPort   = settings.value("avr_port", "").toString();
+    sambaPort = settings.value("samba_port", "\\USBserial\\COM23").toString();
 
     ui->avrdude_location->setText(getAVRDUDE());
     ui->avrArgs->setText(getAVRArgs().join(" "));
 
+    ui->samba_location->setText(getSAMBA());
+    ui->samba_port->setText(getSambaPort());
+
     int idx1 = ui->avrdude_programmer->findText(getProgrammer());
     int idx2 = ui->avrdude_port->findText(getPort());
     int idx3 = ui->avrdude_mcu->findText(getMCU());
+    int idx4 = ui->arm_mcu->findText(getArmMCU());
     if(idx1>=0) ui->avrdude_programmer->setCurrentIndex(idx1);
     if(idx2>=0) ui->avrdude_port->setCurrentIndex(idx2);
     if(idx3>=0) ui->avrdude_mcu->setCurrentIndex(idx3);
+    if(idx4>=0) ui->arm_mcu->setCurrentIndex(idx4);
 }
 
 void burnConfigDialog::putSettings()
@@ -64,6 +77,9 @@ void burnConfigDialog::putSettings()
     settings.setValue("mcu", avrMCU);
     settings.setValue("avr_port", avrPort);
     settings.setValue("avr_arguments", avrArgs.join(" "));
+    settings.setValue("samba_location", sambaLoc);
+    settings.setValue("samba_port", sambaPort);
+    settings.setValue("arm_mcu", armMCU);
 }
 
 void burnConfigDialog::populateProgrammers()
@@ -122,6 +138,21 @@ void burnConfigDialog::on_avrArgs_editingFinished()
 void burnConfigDialog::on_avrdude_port_currentIndexChanged(QString )
 {
     avrPort = ui->avrdude_port->currentText();
+}
+
+void burnConfigDialog::on_samba_location_editingFinished()
+{
+    sambaLoc = ui->samba_location->text();
+}
+
+void burnConfigDialog::on_samba_port_editingFinished()
+{
+    sambaPort = ui->samba_port->text();
+}
+
+void burnConfigDialog::on_arm_mcu_currentIndexChanged(QString )
+{
+    armMCU = ui->arm_mcu->currentText();
 }
 
 void burnConfigDialog::on_pushButton_clicked()

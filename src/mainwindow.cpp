@@ -523,7 +523,10 @@ void MainWindow::print()
 QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
-  return bcd.getAVRDUDE();
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X)
+    return bcd.getSAMBA();
+  else
+    return bcd.getAVRDUDE();
 }
 
 QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
@@ -538,7 +541,7 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
   if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
 
   arguments << "-c" << programmer << "-p";
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_V4)
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_GRUVIN9X)
     arguments << "m2560";
   else
     arguments << mcu;
@@ -549,17 +552,53 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
   return arguments;
 }
 
+QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
+{
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
+    QStringList result;
+
+    QString tclFilename = QDir::tempPath() + "/temp.tcl";
+    if (QFile::exists(tclFilename)) {
+      unlink(tclFilename.toAscii());
+    }
+    QFile tclFile(tclFilename);
+    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+      QMessageBox::warning(this, tr("Error"),
+          tr("Cannot write file %1:\n%2.")
+          .arg(tclFilename)
+          .arg(tclFile.errorString()));
+      return result;
+    }
+
+    QTextStream outputStream(&tclFile);
+    outputStream << "SERIALFLASH::Init 0\n";
+    outputStream << "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n";
+    outputStream << "receive_file {SerialFlash AT25} \"" << filename << "\" 0x0 0x80000 0\n";
+
+    burnConfigDialog bcd;
+    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
+    return result;
+  }
+  else {
+    return GetAvrdudeArguments(QString("eeprom:r:" + filename + ":i")); // writing eeprom -> MEM:OPR:FILE:FTYPE"
+  }
+}
+
 void MainWindow::burnFrom()
 {
-    QString tempDir    = QDir::tempPath();
-    QFile tempEEprom;
-    QString tempFile = tempDir + "/temp.hex";
-    if (tempEEprom.exists(tempFile)) {
+    QString tempDir = QDir::tempPath();
+    QString tempFile;
+    if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) // TODO BOARD_...
+      tempFile = tempDir + "/temp.bin";
+    else
+      tempFile = tempDir + "/temp.hex";
+    if (QFile::exists(tempFile)) {
       unlink(tempFile.toAscii());
     }
-    QString str = "eeprom:r:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
 
-    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+    QStringList str = GetReceiveEEpromCommand(tempFile);
+
+    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
     ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
     int res = ad->exec();
 
@@ -567,7 +606,7 @@ void MainWindow::burnFrom()
     {
         MdiChild *child = createMdiChild();
         child->newFile();
-        child->loadFile(tempFile,false);
+        child->loadFile(tempFile, false);
         child->show();
     }
 }
@@ -599,7 +638,7 @@ void MainWindow::burnExtenalToEEPROM()
 
 bool MainWindow::isValidEEPROM(QString eepromfile)
 {
-  uint8_t eeprom[EESIZE_V4];
+  uint8_t eeprom[EESIZE_GRUVIN9X];
   int eeprom_size;
   QFile file(eepromfile);
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -641,7 +680,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!firmware)
     return false;
 
-  uint8_t eeprom[EESIZE_V4];
+  uint8_t eeprom[EESIZE_GRUVIN9X];
   int eeprom_size;
 
   {

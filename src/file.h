@@ -51,15 +51,24 @@ PACK(struct EeFs{
 #define EEPROM_HEADER_SIZE 64
 #define FIRSTBLK           (EEPROM_HEADER_SIZE/BS)
 
+struct t_eeprom_header
+{
+        uint32_t sequence_no ;          // sequence # to decide which block is most recent
+        uint16_t data_size ;                    // # bytes in data area
+        uint8_t flags ;
+        uint8_t hcsum ;
+} ;
+
 class EFile
 {
   uint8_t  m_fileId;    //index of file in directory = filename
-  uint16_t m_pos;       //over all filepos
+  unsigned int m_pos;       //over all filepos
   uint8_t  m_currBlk;   //current block.id
   uint8_t  m_ofs;       //offset inside of the current block
   uint8_t  m_zeroes;    //control byte for run length decoder
   uint8_t  m_bRlc;      //control byte for run length decoder
   uint8_t  m_err;       //error reasons
+  uint16_t m_size;
   //uint16_t m_stopTime10ms; //maximum point of time for writing
 
 
@@ -67,7 +76,7 @@ class EFile
   int eeprom_size;
   EeFs    *eeFs;
 
-  void eeprom_read_block (void *pointer_ram, uint16_t pointer_eeprom, size_t size);
+  void eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size);
   void eeWriteBlockCmp(void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size);
 
   uint8_t EeFsRead(uint8_t blk,uint8_t ofs);
@@ -131,6 +140,11 @@ public:
   {
     return readRlc12(buf, i_len, true);
   }
+
+  uint8_t byte_checksum( uint8_t *p, uint32_t size );
+  uint32_t ee32_check_header( struct t_eeprom_header *hptr );
+  uint32_t get_current_block_number( uint32_t block_no, uint16_t *p_size);
+
 
 };
 

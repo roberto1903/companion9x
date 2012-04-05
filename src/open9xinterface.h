@@ -24,7 +24,7 @@ class Open9xInterface : public EEPROMInterface
 {
   public:
 
-    Open9xInterface(int size);
+    Open9xInterface(BoardEnum board);
 
     virtual ~Open9xInterface();
 
@@ -51,7 +51,7 @@ class Open9xInterface : public EEPROMInterface
   protected:
 
     template <class T>
-    void loadModel(ModelData &model, unsigned int stickMode=0);
+    void loadModel(ModelData &model, uint8_t index, unsigned int stickMode=0);
 
     template <class T>
     bool saveModel(unsigned int index, ModelData &model);
@@ -61,7 +61,7 @@ class Open9xInterface : public EEPROMInterface
 
     EFile *efile;
 
-    int size;
+    BoardEnum board;
 
 };
 

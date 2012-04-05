@@ -60,7 +60,7 @@ extern uint8_t portb, portc;
 #define OUT_C_LIGHT   0
 #define OUT_B_LIGHT   7
 
-extern uint8_t eeprom[2048]; // TODO size 4096
+extern uint8_t eeprom[];
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
 extern int16_t g_chans512[NUM_CHNOUT];
 
@@ -156,7 +156,10 @@ switch (inputs.sId0) {
 
 // keyboad
 pinb &= ~ 0x7e;
-#ifdef PCBV4
+#if defined(PCBARM)
+bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
+setKeys(keys);
+#elif defined(PCBV4)
 pinl &= ~ 0x3f; // for v4
 if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); pinl |= (1<<INP_P_KEY_MEN); }
 if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); pinl |= (1<<INP_P_KEY_EXT); }

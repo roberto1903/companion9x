@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>531</width>
-    <height>206</height>
+    <height>295</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,19 @@
     <normaloff>:/images/configure.png</normaloff>:/images/configure.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="2">
@@ -548,6 +561,95 @@ m2560 for v4.1 boards</string>
        </item>
       </widget>
      </item>
+     <item row="8" column="2">
+      <widget class="QComboBox" name="arm_mcu">
+       <property name="toolTip">
+        <string>CPU of your TX</string>
+       </property>
+       <property name="whatsThis">
+        <string>CPU present on your 9x radio
+Should be m64 for stock radios
+m2560 for v4.1 boards</string>
+       </property>
+       <property name="insertPolicy">
+        <enum>QComboBox::InsertAlphabetically</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>at91sam3s4-9x</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>SAM-BA Location</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLineEdit" name="samba_location">
+       <property name="toolTip">
+        <string>Location of AVRDUDE executable</string>
+       </property>
+       <property name="whatsThis">
+        <string>The location of the AVRDUDE executable.</string>
+       </property>
+       <property name="text">
+        <string notr="true">sam-ba.exe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>ARM MCU</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Port</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="samba_port">
+       <property name="toolTip">
+        <string>Location of AVRDUDE executable</string>
+       </property>
+       <property name="whatsThis">
+        <string>The location of the AVRDUDE executable.</string>
+       </property>
+       <property name="text">
+        <string notr="true">\USBserial\COM23</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="1" column="0">
@@ -562,19 +664,6 @@ m2560 for v4.1 boards</string>
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-     <property name="centerButtons">
-      <bool>false</bool>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

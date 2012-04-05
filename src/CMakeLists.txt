@@ -93,8 +93,12 @@ SET( companion9x_SRCS
      open9xinterface.cpp
      open9xsimulator.cpp  
      open9ximport.cpp
+     open9xv4eeprom.cpp
      open9xv4simulator.cpp
-     open9xv4import.cpp  
+     open9xv4import.cpp
+     open9xarmsimulator.cpp
+     open9xarmimport.cpp
+     # ersky9ximport.cpp
      node.cpp
      edge.cpp
      helpers.cpp

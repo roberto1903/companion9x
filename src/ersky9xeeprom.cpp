@@ -1,22 +1,22 @@
 #include <algorithm>
-#include "er9xeeprom.h"
+#include "ersky9xeeprom.h"
 #include <QObject>
 
-t_Er9xTrainerMix::t_Er9xTrainerMix()
+t_Ersky9xTrainerMix::t_Ersky9xTrainerMix()
 {
-  memset(this, 0, sizeof(t_Er9xTrainerMix));
+  memset(this, 0, sizeof(t_Ersky9xTrainerMix));
 }
 
-t_Er9xTrainerMix::t_Er9xTrainerMix(TrainerMix &c9x)
+t_Ersky9xTrainerMix::t_Ersky9xTrainerMix(TrainerMix &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xTrainerMix));
+  memset(this, 0, sizeof(t_Ersky9xTrainerMix));
   srcChn = c9x.src;
   swtch = c9x.swtch;
   studWeight = (8 * c9x.weight) / 25;
   mode = c9x.mode;
 }
 
-t_Er9xTrainerMix::operator TrainerMix()
+t_Ersky9xTrainerMix::operator TrainerMix()
 {
   TrainerMix c9x;
   c9x.src = srcChn;
@@ -26,21 +26,21 @@ t_Er9xTrainerMix::operator TrainerMix()
   return c9x;
 }
 
-t_Er9xTrainerData::t_Er9xTrainerData()
+t_Ersky9xTrainerData::t_Ersky9xTrainerData()
 {
-  memset(this, 0, sizeof(t_Er9xTrainerData));
+  memset(this, 0, sizeof(t_Ersky9xTrainerData));
 }
 
-t_Er9xTrainerData::t_Er9xTrainerData(TrainerData &c9x)
+t_Ersky9xTrainerData::t_Ersky9xTrainerData(TrainerData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xTrainerData));
+  memset(this, 0, sizeof(t_Ersky9xTrainerData));
   for (int i=0; i<NUM_STICKS; i++) {
     calib[i] = c9x.calib[i];
     mix[i] = c9x.mix[i];
   }
 }
 
-t_Er9xTrainerData::operator TrainerData ()
+t_Ersky9xTrainerData::operator TrainerData ()
 {
   TrainerData c9x;
   for (int i=0; i<NUM_STICKS; i++) {
@@ -50,14 +50,14 @@ t_Er9xTrainerData::operator TrainerData ()
   return c9x;
 }
 
-t_Er9xGeneral::t_Er9xGeneral()
+t_Ersky9xGeneral::t_Ersky9xGeneral()
 {
-  memset(this, 0, sizeof(t_Er9xGeneral));
+  memset(this, 0, sizeof(t_Ersky9xGeneral));
 }
 
-t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
+t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xGeneral));
+  memset(this, 0, sizeof(t_Ersky9xGeneral));
 
   myVers = MDVERS;
 
@@ -113,7 +113,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   
 }
 
-Er9xGeneral::operator GeneralSettings ()
+Ersky9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
 
@@ -170,21 +170,21 @@ Er9xGeneral::operator GeneralSettings ()
   return result;
 }
 
-t_Er9xLimitData::t_Er9xLimitData()
+t_Ersky9xLimitData::t_Ersky9xLimitData()
 {
-  memset(this, 0, sizeof(t_Er9xLimitData));
+  memset(this, 0, sizeof(t_Ersky9xLimitData));
 }
 
-t_Er9xLimitData::t_Er9xLimitData(LimitData &c9x)
+t_Ersky9xLimitData::t_Ersky9xLimitData(LimitData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xLimitData));
+  memset(this, 0, sizeof(t_Ersky9xLimitData));
   min = c9x.min+100;
   max = c9x.max-100;
   revert = c9x.revert;
   offset = c9x.offset;
 }
 
-t_Er9xLimitData::operator LimitData ()
+t_Ersky9xLimitData::operator LimitData ()
 {
   LimitData c9x;
   c9x.min = min-100;
@@ -195,21 +195,21 @@ t_Er9xLimitData::operator LimitData ()
 }
 
 
-t_Er9xMixData::t_Er9xMixData()
+t_Ersky9xMixData::t_Ersky9xMixData()
 {
-  memset(this, 0, sizeof(t_Er9xMixData));
+  memset(this, 0, sizeof(t_Ersky9xMixData));
 }
 
-t_Er9xMixData::t_Er9xMixData(MixData &c9x)
+t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xMixData));
+  memset(this, 0, sizeof(t_Ersky9xMixData));
   destCh = c9x.destCh;
 
   if (c9x.srcRaw < SRC_REA) {
     srcRaw = c9x.srcRaw;
   }
   else if (c9x.srcRaw <= SRC_REB) {
-    EEPROMWarnings += ::QObject::tr("Er9x doesn't have Rotary Encoders") + "\n";
+    EEPROMWarnings += ::QObject::tr("Ersky9x doesn't have Rotary Encoders") + "\n";
     srcRaw = c9x.srcRaw - 2;
   }
   else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
@@ -237,7 +237,7 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   sOffset = c9x.sOffset;
 }
 
-t_Er9xMixData::operator MixData ()
+t_Ersky9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
@@ -277,12 +277,12 @@ t_Er9xMixData::operator MixData ()
 }
 
 
-t_Er9xCustomSwData::t_Er9xCustomSwData()
+t_Ersky9xCustomSwData::t_Ersky9xCustomSwData()
 {
-  memset(this, 0, sizeof(t_Er9xCustomSwData));
+  memset(this, 0, sizeof(t_Ersky9xCustomSwData));
 }
 
-t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
+t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
 {
   func = c9x.func;
   v1 = c9x.v1;
@@ -294,7 +294,7 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
     else if (c9x.v1 > SRC_REB)
       v1 = c9x.v1 - 2;
     else {
-      EEPROMWarnings += ::QObject::tr("er9x doesn't have Rotary Encoders") + "\n";
+      EEPROMWarnings += ::QObject::tr("ersky9x doesn't have Rotary Encoders") + "\n";
       v1 = c9x.v1 - 2;
     }
   }
@@ -305,13 +305,13 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
     else if (c9x.v1 > SRC_REB)
       v2 = c9x.v2 - 2;
     else {
-      EEPROMWarnings += ::QObject::tr("er9x doesn't have Rotary Encoders") + "\n";
+      EEPROMWarnings += ::QObject::tr("ersky9x doesn't have Rotary Encoders") + "\n";
       v2 = c9x.v2 - 2;
     }
   }
 }
 
-Er9xCustomSwData::operator CustomSwData ()
+Ersky9xCustomSwData::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
@@ -332,19 +332,19 @@ Er9xCustomSwData::operator CustomSwData ()
 }
 
 
-t_Er9xSafetySwData::t_Er9xSafetySwData()
+t_Ersky9xSafetySwData::t_Ersky9xSafetySwData()
 {
-  memset(this, 0, sizeof(t_Er9xSafetySwData));
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData));
 }
 
-t_Er9xSafetySwData::t_Er9xSafetySwData(SafetySwData &c9x)
+t_Ersky9xSafetySwData::t_Ersky9xSafetySwData(SafetySwData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xSafetySwData));
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData));
   swtch = c9x.swtch;
   val = c9x.val;
 }
 
-t_Er9xSafetySwData::operator SafetySwData ()
+t_Ersky9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData c9x;
   c9x.swtch = swtch;
@@ -353,14 +353,14 @@ t_Er9xSafetySwData::operator SafetySwData ()
 }
 
 
-t_Er9xFrSkyChannelData::t_Er9xFrSkyChannelData()
+t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData()
 {
-  memset(this, 0, sizeof(t_Er9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData));
 }
 
-t_Er9xFrSkyChannelData::t_Er9xFrSkyChannelData(FrSkyChannelData &c9x)
+t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData(FrSkyChannelData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData));
   ratio = c9x.ratio;
   alarms_value[0] = c9x.alarms[0].value;
   alarms_value[1] = c9x.alarms[1].value;
@@ -369,7 +369,7 @@ t_Er9xFrSkyChannelData::t_Er9xFrSkyChannelData(FrSkyChannelData &c9x)
   type = c9x.type;
 }
 
-t_Er9xFrSkyChannelData::operator FrSkyChannelData ()
+t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
 {
   FrSkyChannelData c9x;
   c9x.ratio = ratio;
@@ -384,19 +384,19 @@ t_Er9xFrSkyChannelData::operator FrSkyChannelData ()
 }
 
 
-t_Er9xFrSkyData::t_Er9xFrSkyData()
+t_Ersky9xFrSkyData::t_Ersky9xFrSkyData()
 {
-  memset(this, 0, sizeof(t_Er9xFrSkyData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData));
 }
 
-t_Er9xFrSkyData::t_Er9xFrSkyData(FrSkyData &c9x)
+t_Ersky9xFrSkyData::t_Ersky9xFrSkyData(FrSkyData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xFrSkyData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData));
   channels[0] = c9x.channels[0];
   channels[1] = c9x.channels[1]; 
 }
 
-t_Er9xFrSkyData::operator FrSkyData ()
+t_Ersky9xFrSkyData::operator FrSkyData ()
 {
   FrSkyData c9x;
   c9x.channels[0] = channels[0];
@@ -404,9 +404,9 @@ t_Er9xFrSkyData::operator FrSkyData ()
   return c9x;
 }
 
-t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
+t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
 {
-  memset(this, 0, sizeof(t_Er9xModelData));
+  memset(this, 0, sizeof(t_Ersky9xModelData));
 
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
@@ -433,7 +433,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
         break;
       default:
         protocol = 0;
-        EEPROMWarnings += QObject::tr("Er9x doesn't accept this protocol") + "\n";
+        EEPROMWarnings += QObject::tr("Ersky9x doesn't accept this protocol") + "\n";
         // TODO more explicit warning for each protocol
         break;
     }
@@ -546,7 +546,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
   }
 }
 
-t_Er9xModelData::operator ModelData ()
+t_Ersky9xModelData::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;

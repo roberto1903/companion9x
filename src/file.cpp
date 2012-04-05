@@ -21,6 +21,7 @@
 #include "file.h"
 #include <assert.h>
 #include <algorithm>
+#include "eeprominterface.h"
 
 EFile::EFile():
 eeprom(NULL),
@@ -33,24 +34,27 @@ void EFile::EeFsInit(uint8_t *eeprom, int size, bool format)
 {
   this->eeprom = eeprom;
   this->eeprom_size = size;
-  eeFs = (EeFs *)eeprom;
 
-  if (format) {
-    memset(eeprom, 0, size);
-    eeFs->version  = EEFS_VERS;
-    eeFs->mySize   = sizeof(EeFs);
-    eeFs->freeList = 0;
-    eeFs->bs       = BS;
-    for (int i=FIRSTBLK; i<std::min(eeprom_size/BS, 255)-1; i++) EeFsSetLink(i, i+1);
-    EeFsSetLink(std::min(eeprom_size/BS, 255)-1, 0);
-    eeFs->freeList = FIRSTBLK;
-    EeFsFlush();
+  if (this->eeprom_size != EESIZE_ERSKY9X) {
+    eeFs = (EeFs *)eeprom;
+
+    if (format) {
+      memset(eeprom, 0, size);
+      eeFs->version  = EEFS_VERS;
+      eeFs->mySize   = sizeof(EeFs);
+      eeFs->freeList = 0;
+      eeFs->bs       = BS;
+      for (int i=FIRSTBLK; i<std::min(eeprom_size/BS, 255)-1; i++) EeFsSetLink(i, i+1);
+      EeFsSetLink(std::min(eeprom_size/BS, 255)-1, 0);
+      eeFs->freeList = FIRSTBLK;
+      EeFsFlush();
+    }
   }
 }
 
-void EFile::eeprom_read_block (void *pointer_ram, uint16_t pointer_eeprom, size_t size)
+void EFile::eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size)
 {
-  memcpy(pointer_ram,&eeprom[pointer_eeprom],size);
+  memcpy(pointer_ram, &eeprom[pointer_eeprom], size);
 }
 
 void EFile::eeWriteBlockCmp(void *i_pointer_ram, uint16_t i_pointer_eeprom, size_t size)
@@ -174,14 +178,21 @@ uint16_t EFile::size(uint8_t id)
 
 uint8_t EFile::openRd(uint8_t i_fileId)
 {
-  m_fileId = i_fileId;
-  m_pos      = 0;
-  m_currBlk  = eeFs->files[m_fileId].startBlk;
-  m_ofs      = 0;
-  m_zeroes   = 0;
-  m_bRlc     = 0;
-  m_err      = ERR_NONE;       //error reasons
-  return eeFs->files[m_fileId].typ;
+  if (this->eeprom_size == EESIZE_ERSKY9X) {
+    m_fileId = get_current_block_number(i_fileId * 2, &m_size);
+    m_pos = sizeof(t_eeprom_header);
+    return 1;
+  }
+  else {
+    m_fileId = i_fileId;
+    m_pos      = 0;
+    m_currBlk  = eeFs->files[m_fileId].startBlk;
+    m_ofs      = 0;
+    m_zeroes   = 0;
+    m_bRlc     = 0;
+    m_err      = ERR_NONE;       //error reasons
+    return eeFs->files[m_fileId].typ;
+  }
 }
 
 uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
@@ -203,44 +214,54 @@ uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
 }
 
 // G: Read runlength (RLE) compressed bytes into buf.
-uint16_t EFile::readRlc12(uint8_t*buf, uint16_t i_len, bool rlc2)
+uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
 {
-  uint16_t i=0;
-  for( ; 1; ) {
-    uint8_t l = std::min<uint16_t>(m_zeroes, i_len-i);
-    memset(&buf[i],0,l);
-    i        += l;
-    m_zeroes -= l;
-    if(m_zeroes) break;
-
-    l=std::min<uint16_t>(m_bRlc, i_len-i);
-    uint8_t lr = read(&buf[i], l);
-    i        += lr ;
-    m_bRlc   -= lr;
-    if(m_bRlc) break;
-
-    if (read(&m_bRlc,1)!=1) break; //read how many bytes to read
-
-    assert(m_bRlc & 0x7f);
-    if (rlc2) {
-      if(m_bRlc&0x80){ // if contains high byte
-        m_zeroes  =(m_bRlc>>4) & 0x7;
-        m_bRlc    = m_bRlc & 0x0f;
-      }
-      else if(m_bRlc&0x40){
-        m_zeroes  = m_bRlc & 0x3f;
-        m_bRlc    = 0;
-      }
-      //else   m_bRlc
+  if (this->eeprom_size == EESIZE_ERSKY9X) {
+    int len = std::min((int)i_len, (int)m_size + (int)sizeof(t_eeprom_header) - (int)m_pos);
+    if (len > 0) {
+      eeprom_read_block(buf, (m_fileId << 12) + m_pos, len);
+      m_pos += len;
     }
-    else {
-      if(m_bRlc&0x80){ // if contains high byte
-        m_zeroes  = m_bRlc & 0x7f;
-        m_bRlc    = 0;
-      }
-    }
+    return len;
   }
-  return i;
+  else {
+    uint16_t i=0;
+    for( ; 1; ) {
+      uint8_t l = std::min<uint16_t>(m_zeroes, i_len-i);
+      memset(&buf[i],0,l);
+      i        += l;
+      m_zeroes -= l;
+      if(m_zeroes) break;
+
+      l=std::min<uint16_t>(m_bRlc, i_len-i);
+      uint8_t lr = read(&buf[i], l);
+      i        += lr ;
+      m_bRlc   -= lr;
+      if(m_bRlc) break;
+
+      if (read(&m_bRlc,1)!=1) break; //read how many bytes to read
+
+      assert(m_bRlc & 0x7f);
+      if (rlc2) {
+        if(m_bRlc&0x80){ // if contains high byte
+          m_zeroes  =(m_bRlc>>4) & 0x7;
+          m_bRlc    = m_bRlc & 0x0f;
+        }
+        else if(m_bRlc&0x40){
+          m_zeroes  = m_bRlc & 0x3f;
+          m_bRlc    = 0;
+        }
+        //else   m_bRlc
+      }
+      else {
+        if(m_bRlc&0x80){ // if contains high byte
+          m_zeroes  = m_bRlc & 0x7f;
+          m_bRlc    = 0;
+        }
+      }
+    }
+    return i;
+  }
 }
 
 uint8_t EFile::write1(uint8_t b)
@@ -396,3 +417,90 @@ uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t 
   return i;
 }
 
+
+uint8_t EFile::byte_checksum( uint8_t *p, uint32_t size )
+{
+        uint32_t csum ;
+
+        csum = 0 ;
+        while( size )
+        {
+                csum += *p++ ;
+                size -= 1 ;
+        }
+        return csum ;
+}
+
+uint32_t EFile::ee32_check_header( struct t_eeprom_header *hptr )
+{
+        uint8_t csum ;
+
+        csum = byte_checksum( ( uint8_t *) hptr, 7 ) ;
+        if ( csum == hptr->hcsum )
+        {
+                return 1 ;
+        }
+        return 0 ;
+}
+
+// Pass in an even block number, this and the next block will be checked
+// to see which is the most recent, the block_no of the most recent
+// is returned, with the corresponding data size if required
+// and the sequence number if required
+uint32_t EFile::get_current_block_number( uint32_t block_no, uint16_t *p_size)
+{
+  struct t_eeprom_header b0 ;
+  struct t_eeprom_header b1 ;
+//  uint32_t sequence_no ;
+  uint16_t size ;
+
+  eeprom_read_block( ( uint8_t *)&b0, block_no << 12, sizeof(b0) ) ;          // Sequence # 0
+  eeprom_read_block( ( uint8_t *)&b1, (block_no+1) << 12, sizeof(b1) ) ;      // Sequence # 1
+
+  if ( ee32_check_header( &b0 ) == 0 )
+  {
+    b0.sequence_no = 0 ;
+    b0.data_size = 0 ;
+    b0.flags = 0 ;
+  }
+
+  size = b0.data_size ;
+  // sequence_no = b0.sequence_no ;
+  if ( ee32_check_header( &b0 ) == 0 )
+  {
+    if ( ee32_check_header( &b1 ) != 0 )
+    {
+      size = b1.data_size ;
+      // sequence_no = b1.sequence_no ;
+      block_no += 1 ;
+    }
+    else
+    {
+      size = 0 ;
+      // sequence_no = 1 ;
+    }
+  }
+  else
+  {
+    if ( ee32_check_header( &b1 ) != 0 )
+    {
+      if ( b1.sequence_no > b0.sequence_no )
+      {
+        size = b1.data_size ;
+        // sequence_no = b1.sequence_no ;
+        block_no += 1 ;
+      }
+    }
+  }
+
+  if ( size == 0xFFFF )
+  {
+    size = 0 ;
+  }
+  if ( p_size )
+  {
+    *p_size = size ;
+  }
+
+  return block_no ;
+}

@@ -150,8 +150,8 @@ int Th9xInterface::getSize(ModelData &model)
 
 int Th9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_V4];
-  efile->EeFsInit(tmp, EESIZE_V4, true);
+  uint8_t tmp[EESIZE_STOCK];
+  efile->EeFsInit(tmp, EESIZE_STOCK, true);
 
   Th9xGeneral th9xGeneral(settings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
