@@ -161,7 +161,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
     QFile file(fileName);
 
     if (!file.exists()) {
-      QMessageBox::critical(this, tr("Error"),tr("Unable to find file %1!").arg(fileName));
+      QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
       return false;
     }
 
@@ -208,7 +208,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
         }
       }
 
-      uint8_t eeprom[EESIZE_V4];
+      uint8_t eeprom[EESIZE_GRUVIN9X];
       int eeprom_size = HexInterface(inputStream).load(eeprom);
       if (!eeprom_size) {
         QMessageBox::critical(this, tr("Error"),
@@ -243,7 +243,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
           return false;
       }
 
-      uint8_t eeprom[EESIZE_V4];
+      uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
       long result = file.read((char*)eeprom, eeprom_size);
       file.close();
 
@@ -266,6 +266,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
       ui->modelsList->refreshList();
       if(resetCurrentFile) setCurrentFile(fileName);
 
+      free(eeprom);
       return true;
     }
 
@@ -299,7 +300,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
     int fileType = getFileType(fileName);
 
-    uint8_t eeprom[EESIZE_V4];
+    uint8_t eeprom[EESIZE_GRUVIN9X];
     int eeprom_size = 0;
 
     if (fileType != FILE_TYPE_XML) {
@@ -442,30 +443,31 @@ int MdiChild::getFileType(const QString &fullFileName)
   return 0;
 }
 
+
 void MdiChild::burnTo()  // write to Tx
 {
 
-    QMessageBox::StandardButton ret = QMessageBox::question(this, tr("companion9x"),
-                 tr("Write %1 to EEPROM memory?").arg(strippedName(curFile)),
-                 QMessageBox::Yes | QMessageBox::No);
+  QMessageBox::StandardButton ret = QMessageBox::question(this, tr("companion9x"),
+      tr("Write %1 to EEPROM memory?").arg(strippedName(curFile)),
+      QMessageBox::Yes | QMessageBox::No);
 
-    if (ret == QMessageBox::Yes)
+  if (ret == QMessageBox::Yes)
+  {
+    burnConfigDialog bcd;
+    QString tempDir    = QDir::tempPath();
+    QString tempFile = tempDir + "/temp.hex";
+    saveFile(tempFile, false);
+    if(!QFileInfo(tempFile).exists())
     {
-        burnConfigDialog bcd;
-        QString tempDir    = QDir::tempPath();
-        QString tempFile = tempDir + "/temp.hex";
-        saveFile(tempFile, false);
-        if(!QFileInfo(tempFile).exists())
-        {
-            QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
-            return;
-        }
-        QString str = "eeprom:w:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-
-        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), ((MainWindow *)this->parent())->GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
-        ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
-        ad->show();
+      QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
+      return;
     }
+    QString str = "eeprom:w:" + tempFile + ":i"; // writing eeprom -> MEM:OPR:FILE:FTYPE"
+
+    avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), ((MainWindow *)this->parent())->GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+    ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
+    ad->show();
+  }
 }
 
 void MdiChild::simulate()

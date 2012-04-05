@@ -585,7 +585,7 @@ PACK(typedef struct t_Open9xModelData_v205 {
 
 }) Open9xModelData_v205;
 
-#define LAST_OPEN9X_EEPROM_VER 205
+#define LAST_OPEN9X_STOCK_EEPROM_VER 205
 typedef Open9xModelData_v205   Open9xModelData;
 typedef Open9xGeneralData_v201 Open9xGeneralData;
 

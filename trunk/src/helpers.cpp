@@ -163,6 +163,7 @@ QString getSourceStr(int idx)
   QString sorces1[] = { QObject::tr("----"),
                         QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
                         QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3"),
+                        QObject::tr("REA"), QObject::tr("REB"),
                         QObject::tr("MAX"),
                         QObject::tr("3POS") };
   QString sorces2[] = { QObject::tr("CYC1"), QObject::tr("CYC2"), QObject::tr("CYC3"),

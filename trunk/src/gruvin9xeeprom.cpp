@@ -268,16 +268,23 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
 
-  if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
-    srcRaw = SRC_3POS; // FULL
+  if (c9x.srcRaw < SRC_REA) {
+    srcRaw = c9x.srcRaw;
+  }
+  else if (c9x.srcRaw <= SRC_REB) {
+    EEPROMWarnings += ::QObject::tr("Gruvin9x on this board doesn't have Rotary Encoders") + "\n";
+    srcRaw = c9x.srcRaw - 2;
+  }
+  else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
+    srcRaw = 9; // FULL
     swtch = c9x.srcRaw - SRC_STHR + 1;
   }
   else {
     swtch = c9x.swtch;
     if (c9x.srcRaw > SRC_SWC)
-      srcRaw = c9x.srcRaw - 21 /* all switches */;
+      srcRaw = c9x.srcRaw - 2 - 21 /* all switches */;
     else
-      srcRaw = c9x.srcRaw;
+      srcRaw = c9x.srcRaw - 2;
   }
 
   weight = c9x.weight;
@@ -298,7 +305,7 @@ t_Gruvin9xMixData::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
 
-  if (srcRaw == SRC_3POS) {
+  if (srcRaw == 9/*FULL*/) {
     if (swtch < 0) {
       c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
       c9x.weight = -weight;
@@ -310,10 +317,12 @@ t_Gruvin9xMixData::operator MixData ()
   }
   else {
     c9x.swtch = swtch;
-    if (srcRaw >= SRC_STHR)
-      c9x.srcRaw = RawSource(srcRaw + 21);
-    else
+    if (srcRaw < SRC_REA)
       c9x.srcRaw = RawSource(srcRaw);
+    else if (srcRaw >= SRC_STHR)
+      c9x.srcRaw = RawSource(srcRaw + 2 + 21);
+    else
+      c9x.srcRaw = RawSource(srcRaw + 2);
   }
 
   c9x.curve = curve;
@@ -332,17 +341,50 @@ t_Gruvin9xMixData::operator MixData ()
 
 t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
 {
+  func = c9x.func;
   v1 = c9x.v1;
   v2 = c9x.v2;
-  func = c9x.func;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    if (c9x.v1 < SRC_REA)
+      v1 = c9x.v1;
+    else if (c9x.v1 > SRC_REB)
+      v1 = c9x.v1 - 2;
+    else {
+      EEPROMWarnings += ::QObject::tr("gruvin9x doesn't have Rotary Encoders") + "\n";
+      v1 = c9x.v1 - 2;
+    }
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    if (c9x.v2 < SRC_REA)
+      v2 = c9x.v2;
+    else if (c9x.v1 > SRC_REB)
+      v2 = c9x.v2 - 2;
+    else {
+      EEPROMWarnings += ::QObject::tr("gruvin9x doesn't have Rotary Encoders") + "\n";
+      v2 = c9x.v2 - 2;
+    }
+  }
 }
 
 Gruvin9xCustomSwData::operator CustomSwData ()
 {
   CustomSwData c9x;
+  c9x.func = func;
   c9x.v1 = v1;
   c9x.v2 = v2;
-  c9x.func = func;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    if (v1 >= SRC_REA)
+      c9x.v1 = v1 + 2;
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    if (v2 >= SRC_REA)
+      c9x.v2 = v2 + 2;
+  }
+
   return c9x;
 }
 

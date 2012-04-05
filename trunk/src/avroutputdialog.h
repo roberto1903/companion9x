@@ -37,6 +37,7 @@ protected slots:
     void forceClose();
 
 private:
+    QString getProgrammer();
     Ui::avrOutputDialog *ui;
 
     QProcess *process;
@@ -49,6 +50,7 @@ private:
     QString currLine;
     int phase;
     QString winTitle;
+    bool hasErrors;
     
 };
 

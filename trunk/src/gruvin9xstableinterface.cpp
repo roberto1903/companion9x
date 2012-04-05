@@ -90,8 +90,8 @@ int Gruvin9xStableInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_V4];
-  efile->EeFsInit(tmp, EESIZE_V4, true);
+  uint8_t tmp[EESIZE_GRUVIN9X];
+  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
 
   Gruvin9xModelData gruvin9xModel(model);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
@@ -103,8 +103,8 @@ int Gruvin9xStableInterface::getSize(ModelData &model)
 
 int Gruvin9xStableInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_V4];
-  efile->EeFsInit(tmp, EESIZE_V4, true);
+  uint8_t tmp[EESIZE_GRUVIN9X];
+  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
 
   Gruvin9xGeneral gruvin9xGeneral(settings);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));

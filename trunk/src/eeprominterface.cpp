@@ -108,9 +108,10 @@ void RegisterEepromInterfaces()
   eepromInterfaces.push_back(new Th9xInterface());
   eepromInterfaces.push_back(new Er9xInterface());
   eepromInterfaces.push_back(new Gruvin9xInterface(EESIZE_STOCK));
-  eepromInterfaces.push_back(new Gruvin9xInterface(EESIZE_V4));
-  eepromInterfaces.push_back(new Open9xInterface(EESIZE_STOCK));
-  eepromInterfaces.push_back(new Open9xInterface(EESIZE_V4));
+  eepromInterfaces.push_back(new Gruvin9xInterface(EESIZE_GRUVIN9X));
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_ERSKY9X));
 }
 
 QList<FirmwareInfo *> firmwares;
@@ -166,15 +167,16 @@ void RegisterFirmwares()
   gruvin9x->add_option(new FirmwareInfo("gruvin9x-stable-stock-frsky-speaker", new Gruvin9xInterface(EESIZE_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-speaker.hex",ER9X_STAMP));
 
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-stock", QObject::tr("gruvin9x trunk for stock board"), new Gruvin9xInterface(EESIZE_STOCK)));
-  firmwares.push_back(new FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(EESIZE_V4), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
-  firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_V4)));
+  firmwares.push_back(new FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(EESIZE_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
+  firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(EESIZE_GRUVIN9X)));
 
-  firmwares.push_back(new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(EESIZE_STOCK)));
+  firmwares.push_back(new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK)));
   FirmwareInfo * open9x = firmwares.last();
 #include "open9x-stock-binaries.cpp"
-  firmwares.push_back(new Open9xFirmware("open9x-v4", QObject::tr("open9x for v4 board"), new Open9xInterface(EESIZE_V4)));
+  firmwares.push_back(new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X)));
   open9x = firmwares.last();
 #include "open9x-v4-binaries.cpp"
+  firmwares.push_back(new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X)));
 
   default_firmware = GetFirmware("open9x-stock-heli-templates-en");
 

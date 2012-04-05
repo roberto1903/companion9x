@@ -128,6 +128,7 @@ private:
     QMdiSubWindow *findMdiChild(const QString &fileName);
     QString GetAvrdudeLocation();
     QStringList GetAvrdudeArguments(const QString &cmd);
+    QStringList GetReceiveEEpromCommand(const QString &filename);
 
     bool convertEEPROM(QString backupFile, QString restoreFile, QString flashFile);
     bool isValidEEPROM(QString eepromfile);
@@ -149,8 +150,6 @@ private:
     int NewFwRev;
     bool check1done;
     bool check2done;
-
-    
     
     QNetworkAccessManager *manager1;
     QNetworkAccessManager *manager2;
