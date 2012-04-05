@@ -48,6 +48,7 @@ private:
     QString sambaPort;
 
 private slots:
+    void shrink();
     void on_avrArgs_editingFinished();
     void on_pushButton_4_clicked();
     void on_pushButton_3_clicked();
