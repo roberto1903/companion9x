@@ -20,7 +20,7 @@ sudo apt-get install subversion gcc-avr avr-libc avrdude build-essential ruby li
 
 On Fedora:
 {{{
-sudo yum install qt qt-devel cmake patch xsd svn
+sudo yum install qt qt-devel cmake patch xsd svn gcc-c++ sdl-devel
 }}}
 
 = Building companion9x =
