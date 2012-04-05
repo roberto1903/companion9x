@@ -13,6 +13,29 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
 
     getSettings();
     populateProgrammers();
+    if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) {
+      ui->avrArgs->hide();
+      ui->avrdude_location->hide();
+      ui->avrdude_mcu->hide();
+      ui->avrdude_port->hide();
+      ui->avrdude_programmer->hide();
+      ui->label_av1->hide();
+      ui->label_av2->hide();
+      ui->label_av3->hide();
+      ui->label_av4->hide();
+      ui->label_av5->hide();
+      ui->pushButton->hide();
+      ui->pushButton_3->hide();
+      ui->pushButton_4->hide();
+    } else {
+      ui->label_sb1->hide();
+      ui->label_sb2->hide();
+      ui->label_sb3->hide();
+      ui->arm_mcu->hide();
+      ui->samba_location->hide();
+      ui->samba_port->hide();
+    }
+    QTimer::singleShot(0, this, SLOT(shrink()));
     connect(this,SIGNAL(accepted()),this,SLOT(putSettings()));
 }
 
@@ -249,6 +272,10 @@ void burnConfigDialog::restFuses(bool eeProtect)
 
 }
 
+void burnConfigDialog::shrink()
+{
+    resize(0,0);
+}
 
 
 
