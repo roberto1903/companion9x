@@ -84,26 +84,3 @@ void setKeys(bool *keys)
 }
 
 }
-
-void initArmEeprom()
-{
-  Open9xARM::StartEepromThread(NULL);
-  Open9xARM::eeprom_init();
-}
-
-void writeArmEepromData(int index, unsigned char *data, int size)
-{
-  Open9xARM::Eeprom32_source_address = data ;               // Get data from here
-  Open9xARM::Eeprom32_data_size = size ;                        // This much
-  Open9xARM::Eeprom32_file_index = index ;                                         // This file system entry
-  Open9xARM::Eeprom32_process_state = E32_BLANKCHECK ;
-  Open9xARM::eeWaitFinished();
-}
-
-void endArmEeprom(unsigned char *eeprom)
-{
-  Open9xARM::StopEepromThread();
-  Open9xARM::memcpy(eeprom, Open9xARM::eeprom, 128*4048);
-}
-
-

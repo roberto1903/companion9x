@@ -584,6 +584,37 @@ QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
   }
 }
 
+QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
+{
+  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
+    QStringList result;
+
+    QString tclFilename = QDir::tempPath() + "/temp.tcl";
+    if (QFile::exists(tclFilename)) {
+      unlink(tclFilename.toAscii());
+    }
+    QFile tclFile(tclFilename);
+    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+      QMessageBox::warning(this, tr("Error"),
+          tr("Cannot write file %1:\n%2.")
+          .arg(tclFilename)
+          .arg(tclFile.errorString()));
+      return result;
+    }
+
+    QTextStream outputStream(&tclFile);
+    outputStream << "SERIALFLASH::Init 0\n";
+    outputStream << "send_file {SerialFlash AT25} \"" << filename << "\" 0x0 0\n";
+
+    burnConfigDialog bcd;
+    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
+    return result;
+  }
+  else {
+    return GetAvrdudeArguments(QString("eeprom:w:" + filename + ":r")); // writing eeprom -> MEM:OPR:FILE:FTYPE"
+  }
+}
+
 void MainWindow::burnFrom()
 {
     QString tempDir = QDir::tempPath();
