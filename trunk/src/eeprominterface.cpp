@@ -136,7 +136,15 @@ class Open9xFirmware: public FirmwareInfo
     }
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (revision == 0 || revision >= 321)
+      if (this->eepromInterface->getEEpromSize() == EESIZE_GRUVIN9X) {
+        if (revision == 0 || revision >= 469)
+          return 206;
+      }
+      else {
+        if (revision == 0/* || revision >= */)
+          return 205;
+      }
+      if (revision >= 321)
         return 205;
       else if (revision >= 217)
         return 204;
