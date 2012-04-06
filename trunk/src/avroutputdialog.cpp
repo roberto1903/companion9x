@@ -94,6 +94,16 @@ void avrOutputDialog::doAddTextStdOut()
 
     addText(text);
 
+    if (text.contains("Complete ")) {
+      int start = text.indexOf("Complete ");
+      int end = text.indexOf("%");
+      if (start > 0) {
+        start += 9;
+        int value = text.mid(start, end-start).toInt();
+        ui->progressBar->setValue(value);
+      }
+    }
+
     //addText("\n=====\n" + text + "\n=====\n");
 
     if(text.contains(":010000")) //contains fuse info
