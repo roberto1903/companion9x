@@ -667,6 +667,8 @@ class EEPROMInterface
 
     virtual const char * getName() = 0;
 
+    virtual BoardEnum getBoard() = 0;
+
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc) = 0;

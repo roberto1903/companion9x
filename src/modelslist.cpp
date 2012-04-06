@@ -272,8 +272,11 @@ void ModelsListWidget::refreshList()
        QString item = QString().sprintf("%02d: ", i+1);
        
        if (!radioData->models[i].isempty()) {
-         item += QString().sprintf("%10s", radioData->models[i].name);
-         if (eepromInterface) {
+         if (eepromInterface && eepromInterface->getBoard() == BOARD_ERSKY9X) {
+           item += radioData->models[i].name;
+         }
+         else {
+           item += QString().sprintf("%10s", radioData->models[i].name);
            msize = eepromInterface->getSize(radioData->models[i]);
            item += QString().sprintf("%5d", msize);
            availableEEpromSize -= msize;
@@ -287,7 +290,9 @@ void ModelsListWidget::refreshList()
         this->item(radioData->generalSettings.currModel+1)->setFont(f);
     }
 
-    ((MdiChild*)parent())->setEEpromAvail(availableEEpromSize);
+    if (eepromInterface && eepromInterface->getBoard() != BOARD_ERSKY9X) {
+      ((MdiChild*)parent())->setEEpromAvail(availableEEpromSize);
+    }
 }
 
 void ModelsListWidget::cut()

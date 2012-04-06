@@ -208,7 +208,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
     version = (board == BOARD_GRUVIN9X ? LAST_OPEN9X_GRUVIN9X_EEPROM_VER : LAST_OPEN9X_STOCK_EEPROM_VER);
   }
 
-  efile->EeFsInit(eeprom, getEEpromSize(), true);
+  int size = getEEpromSize();
+
+  efile->EeFsInit(eeprom, size, true);
 
   Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
@@ -247,7 +249,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         QObject::tr("Warning"),
         QObject::tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
 
-  return getEEpromSize();
+  return size;
 }
 
 int Open9xInterface::getSize(ModelData &model)

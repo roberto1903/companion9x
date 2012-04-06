@@ -1,6 +1,6 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.52" )
+SET( C9X_VERSION "0.53" )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -248,7 +248,9 @@ IF( WIN32 )
 ENDIF( )
 
 ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ./er9x && cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ./er9x && patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
+  COMMAND cmake -E remove_directory ${PROJECT_BINARY_DIR}/er9x
+  COMMAND cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ${PROJECT_BINARY_DIR}/er9x
+  COMMAND patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
   DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch

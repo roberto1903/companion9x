@@ -529,7 +529,7 @@ QString MainWindow::GetAvrdudeLocation()
     return bcd.getAVRDUDE();
 }
 
-QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
+QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &filename)
 {
   QStringList arguments;
 
@@ -547,118 +547,80 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd)
     arguments << mcu;
 
   arguments << args;
-  arguments << "-U" << cmd;
+
+  QString fullcmd = cmd + filename;
+  if(QFileInfo(filename).suffix().toUpper()=="HEX") fullcmd += ":i";
+  else if(QFileInfo(filename).suffix().toUpper()=="BIN") fullcmd += ":r";
+  else fullcmd += ":a";
+
+  arguments << "-U" << fullcmd;
 
   return arguments;
 }
 
-QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
+QStringList MainWindow::GetSambaArguments(const QString &tcl)
 {
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
-    QStringList result;
+  QStringList result;
 
-    QString tclFilename = QDir::tempPath() + "/temp.tcl";
-    if (QFile::exists(tclFilename)) {
-      unlink(tclFilename.toAscii());
-    }
-    QFile tclFile(tclFilename);
-    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-      QMessageBox::warning(this, tr("Error"),
-          tr("Cannot write file %1:\n%2.")
-          .arg(tclFilename)
-          .arg(tclFile.errorString()));
-      return result;
-    }
-
-    QTextStream outputStream(&tclFile);
-    outputStream << "SERIALFLASH::Init 0\n";
-    outputStream << "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n";
-    outputStream << "receive_file {SerialFlash AT25} \"" << filename << "\" 0x0 0x80000 0\n";
-
-    burnConfigDialog bcd;
-    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
+  QString tclFilename = QDir::tempPath() + "/temp.tcl";
+  if (QFile::exists(tclFilename)) {
+    unlink(tclFilename.toAscii());
+  }
+  QFile tclFile(tclFilename);
+  if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    QMessageBox::warning(this, tr("Error"),
+        tr("Cannot write file %1:\n%2.")
+        .arg(tclFilename)
+        .arg(tclFile.errorString()));
     return result;
   }
-  else {
-    QString str = "eeprom:r:" + filename;
-    if(QFileInfo(filename).suffix().toUpper()=="HEX") str += ":i";
-    else if(QFileInfo(filename).suffix().toUpper()=="BIN") str += ":r";
-    else str += ":a";
-    return GetAvrdudeArguments(str);
-  }
+
+  QTextStream outputStream(&tclFile);
+  outputStream << tcl;
+
+  burnConfigDialog bcd;
+  result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
+  return result;
+
+}
+
+QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
+{
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n" + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
+  else
+    return GetAvrdudeArguments("eeprom:r:", filename);
 }
 
 QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
-    QStringList result;
-
-    QString tclFilename = QDir::tempPath() + "/temp.tcl";
-    if (QFile::exists(tclFilename)) {
-      unlink(tclFilename.toAscii());
-    }
-    QFile tclFile(tclFilename);
-    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-      QMessageBox::warning(this, tr("Error"),
-          tr("Cannot write file %1:\n%2.")
-          .arg(tclFilename)
-          .arg(tclFile.errorString()));
-      return result;
-    }
-
-    QTextStream outputStream(&tclFile);
-    outputStream << "SERIALFLASH::Init 0\n";
-    outputStream << "send_file {SerialFlash AT25} \"" << filename << "\" 0x0 0\n";
-
-    burnConfigDialog bcd;
-    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
-    return result;
-  }
-  else {
-    return GetAvrdudeArguments(QString("eeprom:w:" + filename + ":r")); // writing eeprom -> MEM:OPR:FILE:FTYPE"
-  }
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
+  else
+    return GetAvrdudeArguments("eeprom:w:", filename);
 }
 
 QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
-    QStringList result;
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+    return GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
+  else
+    return GetAvrdudeArguments("flash:w:", filename);
+}
 
-    QString tclFilename = QDir::tempPath() + "/temp.tcl";
-    if (QFile::exists(tclFilename)) {
-      unlink(tclFilename.toAscii());
-    }
-    QFile tclFile(tclFilename);
-    if (!tclFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-      QMessageBox::warning(this, tr("Error"),
-          tr("Cannot write file %1:\n%2.")
-          .arg(tclFilename)
-          .arg(tclFile.errorString()));
-      return result;
-    }
-
-    QTextStream outputStream(&tclFile);
-    outputStream << "send_file {Flash} \"" << filename << "\" 0x400000 0\n";
-    outputStream << "FLASH::ScriptGPNMV 2\n";
-
-    burnConfigDialog bcd;
-    result << bcd.getSambaPort() << bcd.getArmMCU() << tclFilename ;
-    return result;
-  }
-  else {
-    QString str = "flash:w:" + filename;
-    if(QFileInfo(filename).suffix().toUpper()=="HEX") str += ":i";
-    else if(QFileInfo(filename).suffix().toUpper()=="BIN") str += ":r";
-    else str += ":a";
-    return GetAvrdudeArguments(str);
-  }
+QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
+{
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+    return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x20000 0\n");
+  else
+    return GetAvrdudeArguments("flash:r:", filename);
 }
 
 void MainWindow::burnFrom()
 {
     QString tempDir = QDir::tempPath();
     QString tempFile;
-    if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) // TODO BOARD_...
+    if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
       tempFile = tempDir + "/temp.bin";
     else
       tempFile = tempDir + "/temp.hex";
@@ -667,7 +629,6 @@ void MainWindow::burnFrom()
     }
 
     QStringList str = GetReceiveEEpromCommand(tempFile);
-
     avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
     ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
     int res = ad->exec();
@@ -694,13 +655,9 @@ void MainWindow::burnExtenalToEEPROM()
         if (!isValidEEPROM(fileName)) 
           ret = QMessageBox::question(this, "companion9x", tr("The file %1\nhas not been recognized as a valid EEPROM\nBurn anyway ?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
           if(ret!=QMessageBox::Yes) return;
-          
-        QString str = "eeprom:w:" + fileName; // writing eeprom -> MEM:OPR:FILE:FTYPE"
-        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-        else str += ":a";
 
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+        QStringList str = GetSendEEpromCommand(fileName);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
         ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
         ad->show();
     }
@@ -839,7 +796,6 @@ void MainWindow::burnToFlash(QString fileToFlash)
   }
 }
 
-
 void MainWindow::burnExtenalFromEEPROM()
 {
     QSettings settings("companion9x", "companion9x");
@@ -847,17 +803,11 @@ void MainWindow::burnExtenalFromEEPROM()
     if (!fileName.isEmpty())
     {
         settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-
-        QString str = "eeprom:r:" + fileName;
-        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-        else str += ":a";
-
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), tr("Read EEPROM From Tx"));
+        QStringList str = GetReceiveEEpromCommand(fileName);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->show();
     }
-
 }
 
 void MainWindow::burnFromFlash()
@@ -867,13 +817,8 @@ void MainWindow::burnFromFlash()
     if (!fileName.isEmpty())
     {
         settings.setValue("lastFlashDir",QFileInfo(fileName).dir().absolutePath());
-
-        QString str = "flash:r:" + fileName;
-        if(QFileInfo(fileName).suffix().toUpper()=="HEX") str += ":i";
-        else if(QFileInfo(fileName).suffix().toUpper()=="BIN") str += ":r";
-        else str += ":a";
-
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), GetAvrdudeArguments(str), "Read Flash From Tx");
+        QStringList str = GetReceiveFlashCommand(fileName);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
         ad->setWindowIcon(QIcon(":/images/read_flash.png"));
         ad->show();
     }

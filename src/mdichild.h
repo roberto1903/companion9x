@@ -59,16 +59,6 @@ class mdiChild;
 #define EEPE_EEPROM_FILE_HEADER  "EEPE EEPROM FILE"
 #define EEPE_MODEL_FILE_HEADER   "EEPE MODEL FILE"
 
-#define XML_FILES_FILTER     "XML files (*.xml);;"
-#define HEX_FILES_FILTER     "HEX files (*.hex);;"
-#define BIN_FILES_FILTER     "BIN files (*.bin);;"
-#define EEPE_FILES_FILTER    "EEPE EEPROM files (*.eepe);;"
-#define EEPM_FILES_FILTER    "EEPE MODEL files (*.eepm);;"
-// #define EEPROM_FILES_FILTER  "EEPE files (*.xml *.eepe *.eepm *.bin *.hex);;" XML_FILES_FILTER EEPE_FILES_FILTER EEPM_FILES_FILTER BIN_FILES_FILTER HEX_FILES_FILTER
-#define EEPROM_FILES_FILTER  "EEPE files (*.eepe *.bin *.hex);;" EEPE_FILES_FILTER BIN_FILES_FILTER HEX_FILES_FILTER
-#define FLASH_FILES_FILTER   "FLASH files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
-#define EXTERNAL_EEPROM_FILES_FILTER   "EEPROM files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
-
 class MdiChild : public QWidget
 {
     friend class ModelsListWidget;
@@ -113,6 +103,7 @@ public slots:
     void simulate();
     void print();
     void setModified();
+    void updateTitle();
 
 private:
     bool maybeSave();

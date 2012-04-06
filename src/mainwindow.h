@@ -127,9 +127,11 @@ private:
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     QString GetAvrdudeLocation();
-    QStringList GetAvrdudeArguments(const QString &cmd);
+    QStringList GetAvrdudeArguments(const QString &cmd, const QString &filename);
+    QStringList GetSambaArguments(const QString &tcl);
     QStringList GetReceiveEEpromCommand(const QString &filename);
     QStringList GetSendEEpromCommand(const QString &filename);
+    QStringList GetReceiveFlashCommand(const QString &filename);
     QStringList GetSendFlashCommand(const QString &filename);
 
 

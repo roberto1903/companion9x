@@ -58,7 +58,7 @@ void burnDialog::on_FlashLoadButton_clicked()
   ui->BurnFlashButton->setDisabled(true);
   ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
-  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), tr("iHEX (*.hex);;BIN Files (*.bin)"));
+  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
   if (fileName.isEmpty()) {
     return;
   }
