@@ -15,6 +15,7 @@
  */
 
 #include <iostream>
+#include <QMessageBox>
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 #include "open9xv4eeprom.h"
@@ -22,7 +23,6 @@
 #include "open9xv4simulator.h"
 #include "open9xarmsimulator.h"
 #include "file.h"
-#include <QMessageBox>
 
 #define FILE_TYP_GENERAL 1
 #define FILE_TYP_MODEL   2

@@ -193,25 +193,35 @@ PACK(typedef struct t_Ersky9xFrSkyData {
   t_Ersky9xFrSkyData(FrSkyData&);
 }) Ersky9xFrSkyData;
 
+PACK(typedef struct t_Ersky9xTimerMode {
+    uint8_t   tmrModeA:7 ;          // timer trigger source -> off, abs, stk, stk%, cx%
+    uint8_t   tmrDir:1 ;                                                // Timer direction
+    int8_t    tmrModeB ;            // timer trigger source -> !sw, none, sw, m_sw
+    uint16_t  tmrVal ;
+}) Ersky9xTimerMode;
+
 PACK(typedef struct t_Ersky9xModelData {
   char      name[10];             // 10 must be first for eeLoadModelName
-  uint8_t   mdVers;
-  int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
-  uint8_t   tmrDir:1;    //0=>Count Down, 1=>Count Up
-  uint8_t   traineron:1;  // 0 disable trainer, 1 allow trainer
-  uint8_t   t2throttle:1 ;  // Start timer2 using throttle
-  uint8_t   FrSkyUsrProto:2 ;  // Protocol in FrSky User Data, 0=FrSky Hub, 1=WS HowHigh
-  uint8_t   FrSkyImperial:1 ;  // Convert FrSky values to imperial units
+  uint8_t   reserved_spare;               //used to be MDVERS - now depreciated
+  int8_t    spare21;          // was timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  //    uint8_t   sparex:1;     // was tmrDir, now use tmrVal>0 => count down
+  uint8_t   sparex:1;                         // was tmrDir, now use tmrVal>0 => count down
+  //    uint8_t   tmrDir:1;     // was tmrDir, now use tmrVal>0 => count down
+  uint8_t   traineron:1;                // 0 disable trainer, 1 allow trainer
+  uint8_t   spare22:1 ;                         // Start timer2 using throttle
+  uint8_t   FrSkyUsrProto:1 ; // Protocol in FrSky User Data, 0=FrSky Hub, 1=WS HowHigh
+  uint8_t   FrSkyGpsAlt:1 ;             // Use Gps Altitude as main altitude reading
+  uint8_t   FrSkyImperial:1 ; // Convert FrSky values to imperial units
   uint8_t   FrSkyAltAlarm:2;
-  uint16_t  tmrVal;
+  uint16_t  spare_u16 ;                         // Was timerval
   uint8_t   protocol;
   int8_t    ppmNCH;
-  int8_t    thrTrim:4;            // Enable Throttle Trim
-  int8_t    thrExpo:4;            // Enable Throttle Expo
-  int8_t    trimInc;              // Trim Increments
+  int8_t    thrTrim:4;        // Enable Throttle Trim
+  int8_t    thrExpo:4;        // Enable Throttle Expo
+  int8_t    trimInc;          // Trim Increments
   int8_t    ppmDelay;
   int8_t    trimSw;
-  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  uint8_t   beepANACenter;    // 1<<0->A1.. 1<<6->A7
   uint8_t   pulsePol:1;
   uint8_t   extendedLimits:1;
   uint8_t   swashInvertELE:1;
@@ -220,7 +230,7 @@ PACK(typedef struct t_Ersky9xModelData {
   uint8_t   swashType:3;
   uint8_t   swashCollectiveSource;
   uint8_t   swashRingValue;
-  int8_t    ppmFrameLength;
+  int8_t    ppmFrameLength;   //0=22.5  (10msec-30msec) 0.5msec increments
   Ersky9xMixData   mixData[MAX_MIXERS];
   Ersky9xLimitData limitData[NUM_CHNOUT];
   Ersky9xExpoData  expoData[4];
@@ -232,6 +242,7 @@ PACK(typedef struct t_Ersky9xModelData {
   uint8_t   res3[2];
   Ersky9xSafetySwData  safetySw[NUM_CHNOUT];
   Ersky9xFrSkyData frsky;
+  Ersky9xTimerMode timer[2] ;
   operator ModelData();
   t_Ersky9xModelData() { memset(this, 0, sizeof(t_Ersky9xModelData)); }
   t_Ersky9xModelData(ModelData&);

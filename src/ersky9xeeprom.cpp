@@ -410,14 +410,19 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
-    mdVers = MDVERS;
-    tmrMode = c9x.timers[0].mode;
-    if (tmrMode > TMRMODE_THR_REL)
-      tmrMode--;
-    if (tmrMode < -TMRMODE_THR_REL)
-      tmrMode++;
-    tmrDir = c9x.timers[0].dir;
-    tmrVal = c9x.timers[0].val;
+    reserved_spare = 0;
+    spare21 = 0;
+    sparex = 0;
+    spare22 = 0;
+    for (int i=0; i<2; i++) {
+      timer[i].tmrModeA = c9x.timers[i].mode;
+      if (timer[i].tmrModeA > TMRMODE_THR_REL)
+        timer[i].tmrModeA--;
+      if (timer[i].tmrModeA < -TMRMODE_THR_REL)
+        timer[i].tmrModeA++;
+      timer[i].tmrDir = c9x.timers[i].dir;
+      timer[i].tmrVal = c9x.timers[i].val;
+    }
     switch(c9x.protocol) {
       case PPM:
         protocol = 0;
@@ -438,7 +443,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
         break;
     }
     traineron = c9x.traineron;
-    t2throttle = c9x.t2throttle;
+    // t2throttle = c9x.t2throttle;
     ppmFrameLength = c9x.ppmFrameLength;
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     thrTrim = c9x.thrTrim;
@@ -551,15 +556,17 @@ t_Ersky9xModelData::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
-  c9x.timers[0].mode = TimerMode(tmrMode);
-  if (tmrMode > TMRMODE_THR_REL)
-    c9x.timers[0].mode = TimerMode(tmrMode+1);
-  else if (tmrMode < -TMRMODE_THR_REL)
-    c9x.timers[0].mode = TimerMode(tmrMode-1);
-  else
-    c9x.timers[0].mode = TimerMode(tmrMode);
-  c9x.timers[0].dir = tmrDir;
-  c9x.timers[0].val = tmrVal;
+  for (int i=0; i<2; i++) {
+    c9x.timers[i].mode = TimerMode(timer[i].tmrModeA);
+    if (timer[i].tmrModeA > TMRMODE_THR_REL)
+      c9x.timers[i].mode = TimerMode(timer[i].tmrModeA+1);
+    else if (timer[i].tmrModeA < -TMRMODE_THR_REL)
+      c9x.timers[i].mode = TimerMode(timer[i].tmrModeA-1);
+    else
+      c9x.timers[i].mode = TimerMode(timer[i].tmrModeA);
+    c9x.timers[i].dir = timer[i].tmrDir;
+    c9x.timers[i].val = timer[i].tmrVal;
+  }
   switch(protocol) {
     case 1:
       c9x.protocol = PXX;
@@ -575,7 +582,7 @@ t_Ersky9xModelData::operator ModelData ()
       break;
   }
   c9x.traineron= traineron;
-  c9x.t2throttle =  t2throttle;
+  // c9x.t2throttle =  t2throttle;
   c9x.ppmFrameLength=ppmFrameLength;
   c9x.ppmNCH = 8 + 2 * ppmNCH;
   c9x.thrTrim = thrTrim;
@@ -595,14 +602,8 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.swashRingData.type = swashType;
   c9x.swashRingData.collectiveSource = swashCollectiveSource;
   c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<MAX_MIXERS; i++) {
+  for (int i=0; i<MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-    if (mdVers == 6) {
-      if (c9x.mixData[i].srcRaw > SRC_3POS) {
-        c9x.mixData[i].srcRaw = RawSource(c9x.mixData[i].srcRaw + 3); /* because of [CYC1:CYC3] inserted after MIX_FULL */
-      }
-    }
-  }
   for (int i=0; i<NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
 

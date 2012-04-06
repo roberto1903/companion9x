@@ -3060,9 +3060,16 @@ void ModelEdit::moveExpoDown()
 
 void ModelEdit::launchSimulation()
 {
-  simulatorDialog sd(this);
-  sd.loadParams(radioData, id_model);
-  sd.exec();
+  if (GetEepromInterface()->getSimulator()) {
+    simulatorDialog sd(this);
+    sd.loadParams(radioData, id_model);
+    sd.exec();
+  }
+  else {
+    QMessageBox::warning(NULL,
+        QObject::tr("Warning"),
+        QObject::tr("Simulator for this firmware is not yet available"));
+  }
 }
 
 void ModelEdit::on_pushButton_clicked()

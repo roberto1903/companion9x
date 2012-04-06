@@ -15,6 +15,7 @@
  */
 
 #include <iostream>
+#include <QMessageBox>
 #include "ersky9xinterface.h"
 #include "ersky9xeeprom.h"
 #include "ersky9xsimulator.h"
@@ -44,8 +45,9 @@ const char * Ersky9xInterface::getName()
   return "Ersky9x";
 }
 
-const int Ersky9xInterface::getEEpromSize() {
-    return EESIZE_STOCK;
+const int Ersky9xInterface::getEEpromSize()
+{
+    return EESIZE_ERSKY9X;
 }
 
 inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
@@ -72,6 +74,7 @@ inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
         // no break
       case CS_VOFS:
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
     }
   }
   model.swashCollectiveSource = applyStickMode(model.swashCollectiveSource, mode);
@@ -83,7 +86,8 @@ bool Ersky9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
   memset(&ersky9xGeneral,0,sizeof(ersky9xGeneral));
   if(!loadGeneralDataXML(&doc, &ersky9xGeneral)) {
     return false;
-  } else {
+  }
+  else {
     radioData.generalSettings=ersky9xGeneral;
     std::cout << "version " << (unsigned int)ersky9xGeneral.myVers << " ";
   }
@@ -104,7 +108,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying ersky9x import... ";
 
-  if (size != EESIZE_STOCK) {
+  if (size != EESIZE_ERSKY9X) {
     std::cout << "wrong size\n";
     return false;
   }
@@ -114,7 +118,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   efile->openRd(FILE_GENERAL);
   Ersky9xGeneral ersky9xGeneral;
 
-  if (efile->readRlc1((uint8_t*)&ersky9xGeneral, 1) != 1) {
+  if (efile->readRlc2((uint8_t*)&ersky9xGeneral, 1) != 1) {
     std::cout << "no\n";
     return false;
   }
@@ -122,14 +126,6 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << "version " << (unsigned int)ersky9xGeneral.myVers << " ";
 
   switch(ersky9xGeneral.myVers) {
-    case 3:
-      std::cout << "(old gruvin9x) ";
-    case 4:
-//    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
     case 10:
       break;
     default:
@@ -138,7 +134,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
 
   efile->openRd(FILE_GENERAL);
-  if (!efile->readRlc1((uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral))) {
+  if (!efile->readRlc2((uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral))) {
     std::cout << "ko\n";
     return false;
   }
@@ -147,7 +143,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   for (int i=0; i<MAX_MODELS; i++) {
     Ersky9xModelData ersky9xModel;
     efile->openRd(FILE_MODEL(i));
-    if (!efile->readRlc1((uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData))) {
+    if (!efile->readRlc2((uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData))) {
       radioData.models[i].clear();
     }
     else {
@@ -164,57 +160,41 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t versio
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsInit(eeprom, EESIZE_STOCK, true);
+  efile->EeFsInit(eeprom, EESIZE_ERSKY9X, true);
 
   Ersky9xGeneral ersky9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));
   if(sz != sizeof(Ersky9xGeneral)) {
     return 0;
   }
-  efile->swap(FILE_GENERAL, FILE_TMP);
 
   for (int i=0; i<MAX_MODELS; i++) {
     if (!radioData.models[i].isempty()) {
       Ersky9xModelData ersky9xModel(radioData.models[i]);
       applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
-      sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData));
+      sz = efile->writeRlc2(FILE_MODEL(i), FILE_TYP_MODEL, (uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData));
       if(sz != sizeof(Ersky9xModelData)) {
         return 0;
       }
-      efile->swap(FILE_MODEL(i), FILE_TMP);
     }
   }
 
-  return EESIZE_STOCK;
+  if (!EEPROMWarnings.isEmpty())
+    QMessageBox::warning(NULL,
+        QObject::tr("Warning"),
+        QObject::tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
+
+  return EESIZE_ERSKY9X;
 }
 
 int Ersky9xInterface::getSize(ModelData &model)
 {
-  if (model.isempty())
-    return 0;
-
-  uint8_t tmp[EESIZE_STOCK];
-  efile->EeFsInit(tmp, EESIZE_STOCK, true);
-
-  Ersky9xModelData ersky9xModel(model);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData));
-  if(sz != sizeof(Ersky9xModelData)) {
-     return -1;
-  }
-  return efile->size(FILE_TMP);
+  return 0;
 }
 
 int Ersky9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_STOCK];
-  efile->EeFsInit(tmp, EESIZE_STOCK, true);
-  
-  Ersky9xGeneral ersky9xGeneral(settings);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));
-  if(sz != sizeof(Ersky9xGeneral)) {
-    return -1;
-  }
-  return efile->size(FILE_TMP);
+  return 0;
 }
 
 int Ersky9xInterface::getCapability(const Capability capability)
@@ -280,7 +260,7 @@ int Ersky9xInterface::hasProtocol(Protocol prot)
 
 SimulatorInterface * Ersky9xInterface::getSimulator()
 {
-  return new Ersky9xSimulator(this);
+  return NULL;
 }
 
 
