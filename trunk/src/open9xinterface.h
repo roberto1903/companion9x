@@ -30,6 +30,8 @@ class Open9xInterface : public EEPROMInterface
 
     virtual const char * getName();
     
+    virtual BoardEnum getBoard() { return board; }
+
     virtual const int getEEpromSize();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);

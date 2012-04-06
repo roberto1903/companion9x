@@ -30,6 +30,8 @@ class Gruvin9xStableInterface : public EEPROMInterface
 
     virtual const char * getName();
     
+    virtual BoardEnum getBoard() { return BOARD_STOCK; }
+
     virtual const int  getEEpromSize();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);

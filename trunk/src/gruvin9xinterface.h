@@ -25,12 +25,14 @@ class Gruvin9xInterface : public EEPROMInterface
 
   public:
 
-    Gruvin9xInterface(int size);
+    Gruvin9xInterface(BoardEnum board);
 
     virtual ~Gruvin9xInterface();
 
     virtual const char * getName();
     
+    virtual BoardEnum getBoard() { return board; }
+
     virtual const int  getEEpromSize();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
@@ -59,7 +61,7 @@ class Gruvin9xInterface : public EEPROMInterface
 
     EFile *efile;
 
-    int size;
+    BoardEnum board;
 
 };
 

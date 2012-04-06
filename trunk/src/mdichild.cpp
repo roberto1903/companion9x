@@ -52,6 +52,7 @@
 #include "burnconfigdialog.h"
 #include "simulatordialog.h"
 #include "printdialog.h"
+#include "burndialog.h"
 
 MdiChild::MdiChild():
   QWidget(),
@@ -74,7 +75,7 @@ void MdiChild::eepromInterfaceChanged()
 {
   ui->modelsList->refreshList();
   ui->SimulateTxButton->setEnabled(GetEepromInterface()->getCapability(Simulation));
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
+  updateTitle();
 }
 
 void MdiChild::cut()
@@ -102,11 +103,19 @@ bool MdiChild::hasSelection()
     return ui->modelsList->hasSelection();
 }
 
+void MdiChild::updateTitle()
+{
+  QString title = userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(")");
+  if (GetEepromInterface()->getBoard() != BOARD_ERSKY9X)
+    title += QString(" - %1 ").arg(EEPromAvail) + tr("free bytes");
+  setWindowTitle(title);
+}
+
 void MdiChild::setModified()
 {
   ui->modelsList->refreshList();
   fileChanged = true;
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
+  updateTitle();
   documentWasModified();
 }
 
@@ -159,8 +168,7 @@ void MdiChild::newFile()
 
   isUntitled = true;
   curFile = QString("document%1.eepe").arg(sequenceNumber++);
-  setWindowTitle(curFile + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
-
+  updateTitle();
 }
 
 bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
@@ -250,7 +258,8 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
           return false;
       }
 
-      uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+      uint8_t *eeprom = (uint8_t *)malloc(EESIZE_ERSKY9X);
+      memset(eeprom, 0, EESIZE_ERSKY9X);
       long result = file.read((char*)eeprom, eeprom_size);
       file.close();
 
@@ -262,6 +271,8 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
           return false;
       }
+
+      eeprom_size = EESIZE_ERSKY9X;
 
       if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
         QMessageBox::critical(this, tr("Error"),
@@ -293,7 +304,7 @@ bool MdiChild::save()
 bool MdiChild::saveAs()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile,tr(EEPROM_FILES_FILTER));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(EEPROM_FILES_FILTER));
     if (fileName.isEmpty())
         return false;
 
@@ -423,8 +434,7 @@ void MdiChild::setCurrentFile(const QString &fileName)
   isUntitled = false;
   fileChanged = false;
   setWindowModified(false);
-  setWindowTitle(userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(") - %1 ").arg(EEPromAvail)+tr("free bytes"));
- 
+  updateTitle();
   QSettings settings("companion9x", "companion9x");
   int MaxRecentFiles =settings.value("history_size",10).toInt();
   QStringList files = settings.value("recentFileList").toStringList();

@@ -30,9 +30,9 @@
 #define FILE_MODEL(n) (1+n)
 #define FILE_TMP      (1+16)
 
-Gruvin9xInterface::Gruvin9xInterface(int size):
+Gruvin9xInterface::Gruvin9xInterface(BoardEnum board):
 efile(new EFile()),
-size(size)
+board(board)
 {
 }
 
@@ -43,14 +43,18 @@ Gruvin9xInterface::~Gruvin9xInterface()
 
 const char * Gruvin9xInterface::getName()
 {
-  if (size == 2048)
+  if (board == BOARD_STOCK)
     return "Gruvin9x";
   else
     return "Gruvin9x v4";
 }
 
-const int Gruvin9xInterface::getEEpromSize() {
-    return size;
+const int Gruvin9xInterface::getEEpromSize()
+{
+  if (board == BOARD_STOCK)
+    return EESIZE_STOCK;
+  else
+    return EESIZE_GRUVIN9X;
 }
 
 template <class T>
@@ -91,9 +95,9 @@ bool Gruvin9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
 
 bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  std::cout << "trying gruvin9x " << this->size << " import... ";
+  std::cout << "trying " << getName() << " import... ";
 
-  if (size != this->size) {
+  if (size != this->getEEpromSize()) {
     std::cout << "wrong size\n";
     return false;
   }
@@ -182,6 +186,8 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
+
+  int size = getEEpromSize();
 
   efile->EeFsInit(eeprom, size, true);
 
@@ -285,7 +291,7 @@ int Gruvin9xInterface::hasProtocol(Protocol proto)
 
 SimulatorInterface * Gruvin9xInterface::getSimulator()
 {
-  if (size == 2048)
+  if (board == BOARD_STOCK)
     return new Gruvin9xSimulator(this);
   else
     return new Gruvin9xV4Simulator(this);
