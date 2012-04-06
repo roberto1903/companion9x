@@ -17,8 +17,7 @@
 #include "ersky9xsimulator.h"
 #include "ersky9xinterface.h"
 
-#define FRSKY
-#define FRSKY_HUB
+#define REVB
 
 namespace Ersky9x {
 #define NAMESPACE_IMPORT

@@ -6,6 +6,7 @@
 #include "gruvin9xinterface.h"
 #include "gruvin9xstableinterface.h"
 #include "open9xinterface.h"
+#include "ersky9xinterface.h"
 #include "qsettings.h"
 
 QString EEPROMWarnings;
@@ -187,6 +188,8 @@ void RegisterFirmwares()
   firmwares.push_back(new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X)));
   open9x = firmwares.last();
 #include "open9x-arm-binaries.cpp"
+
+  firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface()));
 
   default_firmware = GetFirmware("open9x-stock-heli-templates-en");
 

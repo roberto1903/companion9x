@@ -112,9 +112,16 @@ void MdiChild::setModified()
 
 void MdiChild::on_SimulateTxButton_clicked()
 {
-  simulatorDialog sd(this);
-  sd.loadParams(radioData);
-  sd.exec();
+  if (GetEepromInterface()->getSimulator()) {
+    simulatorDialog sd(this);
+    sd.loadParams(radioData);
+    sd.exec();
+  }
+  else {
+    QMessageBox::warning(NULL,
+        QObject::tr("Warning"),
+        QObject::tr("Simulator for this firmware is not yet available"));
+  }
 }
 
 void MdiChild::OpenEditWindow()
