@@ -185,6 +185,8 @@ void RegisterFirmwares()
   open9x = firmwares.last();
 #include "open9x-v4-binaries.cpp"
   firmwares.push_back(new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X)));
+  open9x = firmwares.last();
+#include "open9x-arm-binaries.cpp"
 
   default_firmware = GetFirmware("open9x-stock-heli-templates-en");
 
