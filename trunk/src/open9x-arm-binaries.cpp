@@ -1,0 +1,12 @@
+open9x->add_option(new Open9xFirmware("open9x-arm-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-en.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-fr.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-se.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-templates-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-templates-en.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-templates-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-templates-fr.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-templates-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-templates-se.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-en.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-fr.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-se.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-en.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-fr.bin"));
+open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-se.bin"));
