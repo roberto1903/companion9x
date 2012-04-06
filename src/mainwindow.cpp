@@ -739,7 +739,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   FirmwareInfo *firmware = NULL;
 
   if (tags.at(0) == "open9x")
-    firmware = GetFirmware(flash.getSize() < 64000 ? "open9x-stock" : "open9x-v4");
+    firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 64000 ? "open9x-stock" : "open9x-v4"));
   else if (tags.at(0) == "gruvin9x" && tags.at(1) == "frsky")
     firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
   else if (tags.at(0) == "gruvin9x" && tags.at(1) == "trunk")
@@ -750,18 +750,17 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!firmware)
     return false;
 
-  uint8_t eeprom[EESIZE_GRUVIN9X];
-  int eeprom_size;
+  QFile file(backupFile);
+  int eeprom_size = file.size();
+  if (!eeprom_size)
+    return false;
 
-  {
-    QFile file(backupFile);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-      return false;
-    QTextStream inputStream(&file);
-    eeprom_size = HexInterface(inputStream).load(eeprom);
-    if (!eeprom_size)
-      return false;
-  }
+  if (!file.open(QIODevice::ReadOnly))
+    return false;
+
+  uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+  long result = file.read((char*)eeprom, eeprom_size);
+  file.close();
 
   RadioData radioData;
   if (!LoadEeprom(radioData, eeprom, eeprom_size))
@@ -770,15 +769,16 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!firmware->saveEEPROM(eeprom, radioData, revision))
     return false;
 
-  QFile file(restoreFile);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+  QFile file2(restoreFile);
+  if (!file2.open(QIODevice::WriteOnly))
     return false;
 
-  QTextStream outputStream(&file);
-  if (!HexInterface(outputStream).save(eeprom, eeprom_size))
+  result = file2.write((char*)eeprom, eeprom_size);
+  file2.close();
+  if (result != eeprom_size)
     return false;
 
-  file.close();
+  free(eeprom);
   return true;
 }
 
