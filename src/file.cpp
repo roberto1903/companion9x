@@ -37,7 +37,7 @@ void EFile::EeFsInit(uint8_t *eeprom, int size, bool format)
 
   if (this->eeprom_size == EESIZE_ERSKY9X) {
     if (format)
-      memset(eeprom, 0, size);
+      memset(eeprom, 0xFF, size);
   }
   else {
     eeFs = (EeFs *)eeprom;
