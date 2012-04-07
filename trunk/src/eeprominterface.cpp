@@ -123,6 +123,7 @@ FirmwareInfo * default_firmware = NULL;
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * OPEN9X_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x.txt";
+const char * OPEN9X_ARM_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x-arm.txt";
 
 class Open9xFirmware: public FirmwareInfo
 {
@@ -132,8 +133,8 @@ class Open9xFirmware: public FirmwareInfo
     {
     }
 
-    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, const char * url):
-      FirmwareInfo(id, eepromInterface, url, OPEN9X_STAMP)
+    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, const char * url, const char * stamp):
+      FirmwareInfo(id, eepromInterface, url, stamp)
     {
     }
 
