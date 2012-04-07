@@ -1,6 +1,12 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define FRSKY
+#define FRSKY_HUB
+#define WS_HOW_HIGH
+#define TEMPLATES
+#define HELI
+#define HAPTIC
+#define AUDIO
 
 #undef min
 #undef max
