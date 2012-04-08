@@ -122,6 +122,7 @@ FirmwareInfo * default_firmware = NULL;
 #define OPEN9X_BIN_URL "http://open9x.googlecode.com/svn/trunk/binaries/"
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
+const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
 const char * OPEN9X_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x.txt";
 const char * OPEN9X_ARM_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x-arm.txt";
 
@@ -191,7 +192,7 @@ void RegisterFirmwares()
   open9x = firmwares.last();
 #include "open9x-arm-binaries.cpp"
 
-  firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface()));
+  firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
 
   default_firmware = GetFirmware("open9x-stock-heli-templates-en");
 
