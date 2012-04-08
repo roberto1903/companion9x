@@ -30,6 +30,14 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->FWFileName->hide();
     ui->FlashLoadButton->hide();   
     hexfileName->clear();
+  } else if (Type==2) {
+    QSettings settings("companion9x", "companion9x");
+    QString FileName;
+    FileName=settings.value("lastFw").toString();
+    QFile file(FileName);
+    if (file.exists()) {
+      checkFw(FileName);
+    }
   }
   resize(0, 0);
 }
@@ -59,9 +67,15 @@ void burnDialog::on_FlashLoadButton_clicked()
   ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
+  checkFw(fileName);
+}
+
+void burnDialog::checkFw(QString fileName)
+{
   if (fileName.isEmpty()) {
     return;
   }
+  QSettings settings("companion9x", "companion9x");
   ui->EEbackupCB->show();
   ui->FWFileName->setText(fileName);
   FlashInterface flash(fileName);
@@ -118,7 +132,7 @@ void burnDialog::on_FlashLoadButton_clicked()
     QMessageBox::warning(this, tr("Warning"), tr("%1 is not a known firmware").arg(fileName));
     ui->BurnFlashButton->setText(tr("Burn anyway !"));
     ui->BurnFlashButton->setEnabled(true);
-  }
+  }  
   QTimer::singleShot(0, this, SLOT(shrink()));
   settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
 }
@@ -189,6 +203,7 @@ void burnDialog::on_BurnFlashButton_clicked()
             hexfileName->append(tempFile);
             QSettings settings("companion9x", "companion9x");
             settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
+            settings.setValue("lastFw", fileName);
           }
           else {
             hexfileName->clear();
