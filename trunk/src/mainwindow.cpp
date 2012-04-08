@@ -271,23 +271,30 @@ void MainWindow::downloadLatestFW(FirmwareInfo * firmware)
 
 void MainWindow::reply1Accepted()
 {
-    QSettings settings("companion9x", "companion9x");
-    settings.beginGroup("FwRevisions");
-    if (downloadedFWFilename.isEmpty()) {
-        if (!(downloadedFW.isEmpty())) {
-                currentFWrev = currentFWrev_temp;
-                settings.setValue(downloadedFW, currentFWrev);
-        }
-    } else {
-        FlashInterface flash(downloadedFWFilename);
-        QString rev=flash.getSvn();
-        int pos=rev.lastIndexOf("-r");
-        if (pos>0) {
-                currentFWrev=rev.mid(pos+2).toInt();
-                settings.setValue(downloadedFW, currentFWrev);
-        }
+  QSettings settings("companion9x", "companion9x");
+  bool autoflash=settings.value("burnFirmware", true).toBool();
+  settings.beginGroup("FwRevisions");
+  if (downloadedFWFilename.isEmpty()) {
+    if (!(downloadedFW.isEmpty())) {
+      currentFWrev = currentFWrev_temp;
+      settings.setValue(downloadedFW, currentFWrev);
     }
-    settings.endGroup();
+  } else {
+    FlashInterface flash(downloadedFWFilename);
+    QString rev=flash.getSvn();
+    int pos=rev.lastIndexOf("-r");
+    if (pos>0) {
+      currentFWrev=rev.mid(pos+2).toInt();
+      settings.setValue(downloadedFW, currentFWrev);
+      if (autoflash) {
+        int ret = QMessageBox::question(this, "companion9x", tr("Do you want to flash the firmware now ?"), QMessageBox::Yes | QMessageBox::No);
+        if (ret == QMessageBox::Yes) {
+          burnToFlash(downloadedFWFilename);
+        }
+      }
+    }
+  }
+  settings.endGroup();
 }
 
 void MainWindow::reply1Finished(QNetworkReply * reply)
