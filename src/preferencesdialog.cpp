@@ -156,6 +156,7 @@ void preferencesDialog::writeValues()
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
+  settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
   FirmwareInfo * firmware = getFirmware();
   settings.setValue("firmware", firmware->id);
 
@@ -242,6 +243,7 @@ void preferencesDialog::initSettings()
   ui->historySize->setValue(settings.value("history_size", 10).toInt());
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
+  ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
         ui->libraryPath->setText(Path);

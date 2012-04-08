@@ -27,6 +27,7 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
   }
   if (!hexfileName->isEmpty()) {
     ui->FWFileName->setText(*hexfileName);
+    checkFw(*hexfileName);
     ui->FWFileName->hide();
     ui->FlashLoadButton->hide();   
     hexfileName->clear();
