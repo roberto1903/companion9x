@@ -3,9 +3,16 @@
 #include <QtGui>
 #include "eeprominterface.h"
 
+#if !__GNUC__
+#include <Windows.h>
+#include <WinBase.h>
+#include <tlhelp32.h>
+#endif
+
 avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour, bool displayDetails) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::avrOutputDialog),
+    kill_timer(NULL),
     hasErrors(false)
 {
     ui->setupUi(this);
@@ -54,8 +61,57 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
       connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
       connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
       connect(process,SIGNAL(finished(int)),this,SLOT(doFinished(int)));
+
+#if !__GNUC__
+      kill_timer = new QTimer(this);
+      connect(kill_timer, SIGNAL(timeout()), this, SLOT(killTimerElapsed()));
+      kill_timer->start(2000);
+#endif
+
       process->start(prog,arg);
    }
+}
+
+# if !__GNUC__
+BOOL KillProcessByName(char *szProcessToKill){
+        HANDLE hProcessSnap;
+        HANDLE hProcess;
+        PROCESSENTRY32 pe32;
+        DWORD dwPriorityClass;
+
+        hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  // Takes a snapshot of all the processes
+
+        if(hProcessSnap == INVALID_HANDLE_VALUE){
+                return( FALSE );
+        }
+
+        pe32.dwSize = sizeof(PROCESSENTRY32);
+
+        if(!Process32First(hProcessSnap, &pe32)){
+                CloseHandle(hProcessSnap);
+                return( FALSE );
+        }
+
+        do{
+                if(!strcmp(pe32.szExeFile,szProcessToKill)){    //  checks if process at current position has the name of to be killed app
+                        hProcess = OpenProcess(PROCESS_TERMINATE,0, pe32.th32ProcessID);  // gets handle to process
+                        TerminateProcess(hProcess,0);   // Terminate process by handle
+                        CloseHandle(hProcess);  // close the handle
+                }
+        }while(Process32Next(hProcessSnap,&pe32));  // gets next member of snapshot
+
+        CloseHandle(hProcessSnap);  // closes the snapshot handle
+        return( TRUE );
+}
+#endif
+
+void avrOutputDialog::killTimerElapsed()
+{
+  delete kill_timer;
+  kill_timer = NULL;
+# if !__GNUC__
+  KillProcessByName("tasklist.exe");
+#endif
 }
 
 avrOutputDialog::~avrOutputDialog()
@@ -89,6 +145,13 @@ void avrOutputDialog::addText(const QString &text)
 
 void avrOutputDialog::doAddTextStdOut()
 {
+#if !__GNUC__
+  if (kill_timer) {
+    delete kill_timer;
+    kill_timer = NULL;
+  }
+#endif
+
     QByteArray data = process->readAllStandardOutput();
     QString text = QString(data);
 
@@ -127,7 +190,7 @@ void avrOutputDialog::doAddTextStdOut()
 
 QString avrOutputDialog::getProgrammer()
 {
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) { // TODO BOARD_...
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X) {
     return "SAM-BA";
   }
   else {

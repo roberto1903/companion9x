@@ -35,12 +35,14 @@ protected slots:
     void on_checkBox_toggled(bool checked);
     void shrink();
     void forceClose();
+    void killTimerElapsed();
 
 private:
     QString getProgrammer();
     Ui::avrOutputDialog *ui;
 
     QProcess *process;
+    QTimer *kill_timer;
     QString cmdLine;
     int closeOpt;
     quint8 lfuse;
