@@ -257,9 +257,8 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
                                .arg(file.errorString()));
           return false;
       }
-
-      uint8_t *eeprom = (uint8_t *)malloc(EESIZE_ERSKY9X);
-      memset(eeprom, 0, EESIZE_ERSKY9X);
+      uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+      memset(eeprom, 0, eeprom_size);
       long result = file.read((char*)eeprom, eeprom_size);
       file.close();
 
@@ -271,8 +270,6 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
           return false;
       }
-
-      eeprom_size = EESIZE_ERSKY9X;
 
       if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
         QMessageBox::critical(this, tr("Error"),
