@@ -269,10 +269,12 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
   mixWarn = c9x.mixWarn;
 
   if (c9x.srcRaw < SRC_REA) {
+    swtch = c9x.swtch;
     srcRaw = c9x.srcRaw;
   }
   else if (c9x.srcRaw <= SRC_REB) {
     EEPROMWarnings += ::QObject::tr("Gruvin9x on this board doesn't have Rotary Encoders") + "\n";
+    swtch = c9x.swtch;
     srcRaw = c9x.srcRaw - 2;
   }
   else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
