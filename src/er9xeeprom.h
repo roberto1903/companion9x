@@ -20,7 +20,6 @@
 #include "eeprominterface.h"
 
 //eeprom data
-#define MAX_MODELS  16
 #define MAX_MIXERS  32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8

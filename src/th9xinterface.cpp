@@ -96,7 +96,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   radioData.generalSettings = th9xGeneral;
   
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     Th9xModelData th9xModel;
     efile->openRd(FILE_MODEL(i));
     if (!efile->readRlc2((uint8_t*)&th9xModel, sizeof(Th9xModelData))) {
@@ -124,7 +124,7 @@ int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
   }
   efile->swap(FILE_GENERAL, FILE_TMP);
 
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       Th9xModelData th9xModel(radioData.models[i]);
       sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));

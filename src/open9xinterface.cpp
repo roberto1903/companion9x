@@ -179,7 +179,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     }
   }
   
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (version == 201) {
       loadModel<Open9xModelData_v201>(radioData.models[i], i, radioData.generalSettings.stickMode+1);
     }
@@ -226,7 +226,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
     return 0;
   }
 
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       int result;
       switch(version) {

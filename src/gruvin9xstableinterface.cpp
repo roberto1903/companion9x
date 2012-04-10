@@ -77,7 +77,7 @@ int Gruvin9xStableInterface::save(uint8_t *eeprom, RadioData &radioData)
   }
   efile->swap(FILE_GENERAL, FILE_TMP);
 
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       Gruvin9xModelData gruvin9xModel(radioData.models[i]);
       sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));

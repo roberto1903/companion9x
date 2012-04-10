@@ -96,7 +96,7 @@ bool Ersky9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
     radioData.generalSettings=ersky9xGeneral;
     std::cout << "version " << (unsigned int)ersky9xGeneral.myVers << " ";
   }
-  for(int i=0; i<MAX_MODELS; i++)
+  for(int i=0; i<getMaxModels(); i++)
   {
     Ersky9xModelData ersky9xModel;
     memset(&ersky9xModel,0,sizeof(ersky9xModel));
@@ -145,7 +145,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   radioData.generalSettings = ersky9xGeneral;
   
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     Ersky9xModelData ersky9xModel;
     efile->openRd(FILE_MODEL(i));
     if (!efile->readRlc2((uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData))) {
@@ -173,7 +173,7 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t versio
     return 0;
   }
 
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       Ersky9xModelData ersky9xModel(radioData.models[i]);
       applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
