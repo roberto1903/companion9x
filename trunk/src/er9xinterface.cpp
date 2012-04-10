@@ -44,8 +44,14 @@ const char * Er9xInterface::getName()
   return "Er9x";
 }
 
-const int Er9xInterface::getEEpromSize() {
-    return EESIZE_STOCK;
+const int Er9xInterface::getEEpromSize()
+{
+  return EESIZE_STOCK;
+}
+
+const int Er9xInterface::getMaxModels()
+{
+  return 16;
 }
 
 inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)

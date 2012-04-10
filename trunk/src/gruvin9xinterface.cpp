@@ -57,6 +57,11 @@ const int Gruvin9xInterface::getEEpromSize()
     return EESIZE_GRUVIN9X;
 }
 
+const int Gruvin9xInterface::getMaxModels()
+{
+  return 16;
+}
+
 template <class T>
 void Gruvin9xInterface::loadModel(ModelData &model, unsigned int stickMode, int version)
 {

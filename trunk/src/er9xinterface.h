@@ -32,7 +32,9 @@ class Er9xInterface : public EEPROMInterface
     
     virtual BoardEnum getBoard() { return BOARD_STOCK; }
 
-    virtual const int  getEEpromSize();
+    virtual const int getEEpromSize();
+
+    virtual const int getMaxModels();
 
     virtual bool load(RadioData &, uint8_t * eeprom, int size);
     

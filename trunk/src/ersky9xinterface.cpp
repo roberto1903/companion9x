@@ -50,6 +50,11 @@ const int Ersky9xInterface::getEEpromSize()
     return EESIZE_ERSKY9X;
 }
 
+const int Ersky9xInterface::getMaxModels()
+{
+  return 16;
+}
+
 inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
 {
   for (int i=0; i<2; i++) {

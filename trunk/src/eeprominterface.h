@@ -687,6 +687,8 @@ class EEPROMInterface
 
     virtual const int getEEpromSize() = 0;
 
+    virtual const int getMaxModels() = 0;
+
 };
 
 extern QString EEPROMWarnings;

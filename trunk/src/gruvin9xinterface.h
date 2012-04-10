@@ -35,6 +35,8 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual const int  getEEpromSize();
 
+    virtual const int getMaxModels();
+
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
