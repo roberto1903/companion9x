@@ -252,10 +252,12 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
 
   if (c9x.srcRaw < SRC_REA) {
     srcRaw = c9x.srcRaw;
+    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw <= SRC_REB) {
     EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
     srcRaw = c9x.srcRaw - 2;
+    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
     srcRaw = 9; // FULL
@@ -327,10 +329,12 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
 
   if (c9x.srcRaw < SRC_REA) {
     srcRaw = c9x.srcRaw;
+    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw <= SRC_REB) {
     EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
     srcRaw = c9x.srcRaw - 2;
+    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
     srcRaw = 9; // FULL

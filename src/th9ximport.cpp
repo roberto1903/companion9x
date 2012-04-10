@@ -32,9 +32,9 @@ char g_title[80] = "";
 uint16_t anaIn(uint8_t chan)
 {
   if (chan == 7)
-    return 1500;
+    return 750;
   else
-    return g_anas[chan];
+    return 512 + g_anas[chan];
 }
 
 bool hasExtendedTrims()
