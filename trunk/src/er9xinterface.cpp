@@ -93,7 +93,7 @@ bool Er9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
     radioData.generalSettings=er9xGeneral;
     std::cout << "version " << (unsigned int)er9xGeneral.myVers << " ";
   }
-  for(int i=0; i<MAX_MODELS; i++)
+  for(int i=0; i<getMaxModels(); i++)
   {
     Er9xModelData er9xModel;
     memset(&er9xModel,0,sizeof(er9xModel));
@@ -150,7 +150,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   radioData.generalSettings = er9xGeneral;
   
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     Er9xModelData er9xModel;
     efile->openRd(FILE_MODEL(i));
     if (!efile->readRlc1((uint8_t*)&er9xModel, sizeof(Er9xModelData))) {
@@ -179,7 +179,7 @@ int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
   }
   efile->swap(FILE_GENERAL, FILE_TMP);
 
-  for (int i=0; i<MAX_MODELS; i++) {
+  for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       Er9xModelData er9xModel(radioData.models[i]);
       applyStickModeToModel(er9xModel, radioData.generalSettings.stickMode+1);

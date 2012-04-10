@@ -31,7 +31,7 @@ class XmlInterface
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
     bool save(RadioData &radioData);
-
+    const int getMaxModels();
   protected:
 
     QTextStream & stream;

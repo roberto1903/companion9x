@@ -48,7 +48,7 @@ const uint8_t modn12x3[4][4]= {
   {4, 2, 3, 1},
   {4, 3, 2, 1} };
 
-#define MAX_MODELS  16
+#define C9XMAX_MODELS  60
 #define MAX_PHASES  5
 #define MAX_MIXERS  32
 #define MAX_EXPOS   24
@@ -607,7 +607,7 @@ class ModelData {
 class RadioData {
   public:   
     GeneralSettings generalSettings;
-    ModelData models[MAX_MODELS];    
+    ModelData models[C9XMAX_MODELS];    
 };
 
 enum Capability {

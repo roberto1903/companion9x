@@ -56,6 +56,11 @@ bool XmlInterface::loadxml(RadioData &radioData, QDomDocument &doc)
   return false;
 }
 
+const int XmlInterface::getMaxModels()
+{
+  return 60;
+}
+
 // TODO a retirer
 #define TMR_NUM_OPTION  (TMR_VAROFS+2*MAX_DRSWITCH-3)
 
@@ -135,7 +140,7 @@ bool XmlInterface::save(RadioData &radioData)
 
     models xml_models;
     models::model_sequence & model_sequence (xml_models.model());
-    for (int i=0; i<MAX_MODELS; i++) {
+    for (int i=0; i<getMaxModels(); i++) {
       ModelData m = radioData.models[i];
       if (m.used) {
         model xm(m.name);

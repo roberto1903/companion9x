@@ -30,7 +30,6 @@
 
 #define EEFS_VERS  4
 
-#define MAX_MODELS 16
 #define MAXFILES   20
 
 PACK(struct DirEnt{

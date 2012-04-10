@@ -51,7 +51,7 @@ public:
   }
   bool general_settings;
   uint8_t models_count;
-  uint8_t models[MAX_MODELS];
+  uint8_t models[C9XMAX_MODELS];
 };
 
 ModelsListWidget::ModelsListWidget(QWidget *parent):
@@ -165,14 +165,14 @@ void ModelsListWidget::mouseMoveEvent(QMouseEvent *event)
 void ModelsListWidget::saveSelection()
 {
   currentSelection.current_item = currentItem();
-  for (int i=0; i<MAX_MODELS+1; ++i)
+  for (int i=0; i<GetEepromInterface()->getMaxModels()+1; ++i)
     currentSelection.selected[i] = item(i)->isSelected();
 }
 
 void ModelsListWidget::restoreSelection()
 {
   setCurrentItem(currentSelection.current_item);
-  for (int i=0; i<MAX_MODELS+1; ++i)
+  for (int i=0; i<GetEepromInterface()->getMaxModels()+1; ++i)
     item(i)->setSelected(currentSelection.selected[i]);
 }
 
@@ -203,7 +203,7 @@ void ModelsListWidget::dragMoveEvent(QDragMoveEvent *event)
          if (row >= 0) {
            if (header->general_settings)
              item(0)->setSelected(true);
-           for (int i=row, end=std::min(MAX_MODELS+1, row+header->models_count); i<end; i++)
+           for (int i=row, end=std::min(GetEepromInterface()->getMaxModels()+1, row+header->models_count); i<end; i++)
              item(i)->setSelected(true);
          }
     }
@@ -228,7 +228,7 @@ void ModelsListWidget::dropEvent(QDropEvent *event)
         DragDropHeader *header = (DragDropHeader *)gmData.data();
         if (header->general_settings)
           item(0)->setSelected(true);
-        for (int i=row, end=std::min(MAX_MODELS+1, row+header->models_count); i<end; i++)
+        for (int i=row, end=std::min(GetEepromInterface()->getMaxModels()+1, row+header->models_count); i<end; i++)
           item(i)->setSelected(true);
     }
     event->acceptProposedAction();
@@ -267,7 +267,7 @@ void ModelsListWidget::refreshList()
     int availableEEpromSize = eepromInterface->getEEpromSize();
     availableEEpromSize -= eepromInterface->getSize(radioData->generalSettings);
     
-    for(uint8_t i=0; i<MAX_MODELS; i++)
+    for(uint8_t i=0; i<GetEepromInterface()->getMaxModels(); i++)
     {
        QString item = QString().sprintf("%02d: ", i+1);
        
@@ -284,7 +284,7 @@ void ModelsListWidget::refreshList()
        }
        addItem(item);
     }
-    if (radioData->generalSettings.currModel < MAX_MODELS) {
+    if (radioData->generalSettings.currModel < GetEepromInterface()->getMaxModels()) {
         QFont f = QFont("Courier New", 12);
         f.setBold(true);
         this->item(radioData->generalSettings.currModel+1)->setFont(f);
@@ -379,7 +379,7 @@ void ModelsListWidget::doPaste(QByteArray *gmData, int index)
   int ret,modified=0;
   if(!id) id++;
 
-  while((i<gmData->size()) && (id<=MAX_MODELS)) {
+  while((i<gmData->size()) && (id<=GetEepromInterface()->getMaxModels())) {
     char c = *gData;
     i++;
     gData++;
@@ -446,10 +446,10 @@ void ModelsListWidget::paste()
 void ModelsListWidget::duplicate()
 {
     int i = this->currentRow();
-    if(i && i<MAX_MODELS)
+    if(i && i<GetEepromInterface()->getMaxModels())
     {
         ModelData *model = &radioData->models[i-1];
-        while(i<MAX_MODELS) {
+        while(i<GetEepromInterface()->getMaxModels()) {
           if (radioData->models[i].isempty()) {
             radioData->models[i] = *model;
             ((MdiChild *)parent())->setModified();
@@ -457,7 +457,7 @@ void ModelsListWidget::duplicate()
           }
           i++;
         }
-        if (i==MAX_MODELS) {
+        if (i==GetEepromInterface()->getMaxModels()) {
           QMessageBox::warning(this, "companion9x", tr("No free slot available, cannot duplicate"), QMessageBox::Ok);
         }
     }

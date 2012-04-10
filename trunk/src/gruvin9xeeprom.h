@@ -303,7 +303,6 @@ PACK(typedef struct t_Gruvin9xTimerData {
   t_Gruvin9xTimerData(TimerData &eepe);
 }) Gruvin9xTimerData;
 
-#define MAX_MODELS 16
 #define MAX_PHASES 5
 #define MAX_MIXERS 32
 #define G9X_MAX_EXPOS  14
