@@ -44,8 +44,14 @@ const char * Th9xInterface::getName()
   return "Th9x";
 }
 
-const int Th9xInterface::getEEpromSize() {
+const int Th9xInterface::getEEpromSize()
+{
   return EESIZE_STOCK;
+}
+
+const int Th9xInterface::getMaxModels()
+{
+  return 16;
 }
 
 bool Th9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)

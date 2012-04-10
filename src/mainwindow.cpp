@@ -530,7 +530,7 @@ void MainWindow::print()
 QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
     return bcd.getSAMBA();
   else
     return bcd.getAVRDUDE();
@@ -548,7 +548,7 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &f
   if(!bcd.getPort().isEmpty()) args << "-P" << bcd.getPort();
 
   arguments << "-c" << programmer << "-p";
-  if (GetEepromInterface()->getEEpromSize() == EESIZE_GRUVIN9X)
+  if (GetEepromInterface()->getBoard() == BOARD_GRUVIN9X)
     arguments << "m2560";
   else
     arguments << mcu;

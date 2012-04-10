@@ -44,8 +44,14 @@ const char * Gruvin9xStableInterface::getName()
   return "Gruvin9x stable";
 }
 
-const int Gruvin9xStableInterface::getEEpromSize() {
+const int Gruvin9xStableInterface::getEEpromSize()
+{
     return EESIZE_STOCK;
+}
+
+const int Gruvin9xStableInterface::getMaxModels()
+{
+  return 16;
 }
 
 bool Gruvin9xStableInterface::loadxml(RadioData &radioData, QDomDocument &doc)

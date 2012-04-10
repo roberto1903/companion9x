@@ -72,6 +72,14 @@ const int Open9xInterface::getEEpromSize()
   }
 }
 
+const int Open9xInterface::getMaxModels()
+{
+  if (board == BOARD_ERSKY9X)
+    return 60;
+  else
+    return 16;
+}
+
 template <class T>
 void Open9xInterface::loadModel(ModelData &model, uint8_t index, unsigned int stickMode)
 {
