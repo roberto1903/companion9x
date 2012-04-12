@@ -387,7 +387,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="54"/>
-        <source>Telemetry Alarm Enable</source>
+        <source>Telemetry NO DATA Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

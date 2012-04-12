@@ -463,7 +463,7 @@ Mode 4:
         <translation type="unfinished">Mode</translation>
     </message>
     <message>
-        <source>Telemetry Alarm Enable</source>
+        <source>Telemetry NO DATA Alarm</source>
         <translation type="unfinished">Slå på telemetrilarm</translation>
     </message>
     <message>
