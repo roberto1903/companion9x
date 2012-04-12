@@ -122,6 +122,8 @@ private:
     void readSettings();
     void writeSettings();
     void updateRecentFileActions();
+    int getFileType(const QString &fullFileName);
+    
     QString strippedName(const QString &fullFileName);
 
     MdiChild *activeMdiChild();
