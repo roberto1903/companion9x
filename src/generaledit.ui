@@ -51,7 +51,7 @@ These will be relevant for all models in the same EEPROM.</string>
        <item row="23" column="3">
         <widget class="QLabel" name="label_telalarms">
          <property name="text">
-          <string>Telemetry Alarm Enable</string>
+          <string>Telemetry NO DATA Alarm</string>
          </property>
         </widget>
        </item>

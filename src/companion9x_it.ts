@@ -624,7 +624,7 @@ Mode 4:
     </message>
     <message>
         <location filename="generaledit.ui" line="54"/>
-        <source>Telemetry Alarm Enable</source>
+        <source>Telemetry NO DATA Alarm</source>
         <translation>Allame mancanza telemetria</translation>
     </message>
     <message>

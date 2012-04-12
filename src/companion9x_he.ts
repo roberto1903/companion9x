@@ -288,7 +288,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
     </message>
     <message>
         <location filename="generaledit.ui" line="54"/>
-        <source>Telemetry Alarm Enable</source>
+        <source>Telemetry NO DATA Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
