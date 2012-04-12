@@ -670,22 +670,52 @@ void MainWindow::burnExtenalToEEPROM()
     }
 }
 
+int MainWindow::getFileType(const QString &fullFileName)
+{
+  if(QFileInfo(fullFileName).suffix().toUpper()=="HEX")  return FILE_TYPE_HEX;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="BIN")  return FILE_TYPE_BIN;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPM") return FILE_TYPE_EEPM;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPE") return FILE_TYPE_EEPE;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="XML") return FILE_TYPE_XML;
+  return 0;
+}
+
 bool MainWindow::isValidEEPROM(QString eepromfile)
 {
-  uint8_t eeprom[EESIZE_GRUVIN9X];
+  
   int eeprom_size;
   QFile file(eepromfile);
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    return false;
-  QTextStream inputStream(&file);
-  eeprom_size = HexInterface(inputStream).load(eeprom);
-  if (!eeprom_size) 
-    return false;
-
-  RadioData radioData;
-  if (!LoadEeprom(radioData, eeprom, eeprom_size))
-    return false;
-  return true;
+  int fileType = getFileType(eepromfile);
+  if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) {
+    uint8_t eeprom[EESIZE_GRUVIN9X];
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+      return false;
+    QTextStream inputStream(&file);
+    eeprom_size = HexInterface(inputStream).load(eeprom);
+    if (!eeprom_size) 
+      return false;
+    file.close();
+    RadioData radioData;
+    if (!LoadEeprom(radioData, eeprom, eeprom_size))
+      return false;
+    return true;
+  } else if (fileType==FILE_TYPE_BIN) { //read binary
+    if (!file.open(QFile::ReadOnly))
+      return false;
+    eeprom_size = file.size();
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+    memset(eeprom, 0, eeprom_size);
+    long result = file.read((char*)eeprom, eeprom_size);
+    file.close();
+    if (result != eeprom_size) {
+      return false;
+    }
+    RadioData radioData;
+    if (!LoadEeprom(radioData, eeprom, eeprom_size))
+      return false;
+    return true;
+  }
+  return false;
 }
 
 bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
