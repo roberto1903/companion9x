@@ -686,9 +686,10 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
   QFile file(eepromfile);
   int fileType = getFileType(eepromfile);
   if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) {
-    uint8_t eeprom[EESIZE_GRUVIN9X];
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
       return false;
+    eeprom_size = file.size();
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
     QTextStream inputStream(&file);
     eeprom_size = HexInterface(inputStream).load(eeprom);
     if (!eeprom_size) 
