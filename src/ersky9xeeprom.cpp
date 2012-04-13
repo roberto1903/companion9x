@@ -210,7 +210,7 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
     srcRaw = c9x.srcRaw;
   }
   else if (c9x.srcRaw <= SRC_REB) {
-    EEPROMWarnings += ::QObject::tr("Ersky9x doesn't have Rotary Encoders") + "\n";
+    EEPROMWarnings += ::QObject::tr("ersky9x doesn't have Rotary Encoders") + "\n";
     swtch = c9x.swtch;
     srcRaw = c9x.srcRaw - 2;
   }

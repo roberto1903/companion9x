@@ -681,8 +681,7 @@ int MainWindow::getFileType(const QString &fullFileName)
 }
 
 bool MainWindow::isValidEEPROM(QString eepromfile)
-{
-  
+{  
   int eeprom_size;
   QFile file(eepromfile);
   int fileType = getFileType(eepromfile);

@@ -36,6 +36,8 @@ private:
     void printSafetySwitches();
     void printFSwitches();
     void printFrSky();
+    QString getFrSkyBarSrc(int index);
+    QString getFrSkySrc(int index);
     
     QString fv(const QString name, const QString value);
     QString getModelName();

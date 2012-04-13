@@ -2,9 +2,6 @@
 #include "helpers.h"
 #include "eeprominterface.h"
 
-#define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
-#define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""Cell""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""ACC ""Time"
-
 QString getPhaseName(int val) {
   if (!val) return "---";
   return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
