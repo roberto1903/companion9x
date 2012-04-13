@@ -140,6 +140,13 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->telalarmsChkB->hide();
       ui->label_telalarms->hide();
     }
+    if (!GetEepromInterface()->getCapability(HapticLength)) {
+      ui->label_HL->hide();
+      ui->hapticLengthCB->hide();
+    } else {
+      ui->hapticLengthCB->setCurrentIndex(g_eeGeneral.hapticLength+2);
+    }
+    
     ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
     ui->beeperlenCB->setCurrentIndex(g_eeGeneral.beeperLength+2);
@@ -278,6 +285,12 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 void GeneralEdit::on_beeperlenCB_currentIndexChanged(int index)
 {
   g_eeGeneral.beeperLength = index-2;
+  updateSettings();
+}
+
+void GeneralEdit::on_hapticLengthCB_currentIndexChanged(int index)
+{
+  g_eeGeneral.hapticLength = index-2;
   updateSettings();
 }
 
