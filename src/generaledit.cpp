@@ -582,13 +582,13 @@ void GeneralEdit::on_ana4Pos_editingFinished()
 
 void GeneralEdit::on_ana5Pos_editingFinished()
 {
-    g_eeGeneral.calibSpanNeg[4] = ui->ana5Pos->value();
+    g_eeGeneral.calibSpanPos[4] = ui->ana5Pos->value();
     updateSettings();
 }
 
 void GeneralEdit::on_ana6Pos_editingFinished()
 {
-    g_eeGeneral.calibSpanNeg[5] = ui->ana6Pos->value();
+    g_eeGeneral.calibSpanPos[5] = ui->ana6Pos->value();
     updateSettings();
 }
 
