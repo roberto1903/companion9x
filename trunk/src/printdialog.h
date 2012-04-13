@@ -38,6 +38,7 @@ private:
     void printFrSky();
     QString getFrSkyBarSrc(int index);
     QString getFrSkySrc(int index);
+    float getBarValue(int barId, int Value, FrSkyData *fd);
     
     QString fv(const QString name, const QString value);
     QString getModelName();

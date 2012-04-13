@@ -701,6 +701,67 @@ QString  printDialog::getFrSkySrc(int index) {
   return QString(TELEMETRY_SRC).mid((abs(index))*4, 4);
 }
 
+float printDialog::getBarValue(int barId, int Value, FrSkyData *fd) 
+{
+  switch (barId) {
+    case 1:
+    case 2:
+      return (15*Value);
+      break;
+    case 3:
+      if (fd->channels[0].type==0) {
+        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset)/10;
+      }
+      else {
+        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset);
+      }
+      break;
+    case 4:
+      if (fd->channels[1].type==0) {
+        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset)/10;
+      }
+      else {
+        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset);
+      }
+       
+      // return ((ui->a2RatioSB->value()*Value/51.0)+ui->a2CalibSB->value());
+      break;
+    case 5:
+    case 6:
+      if (Value>20) {
+        return 100;
+      } else {
+        return (5*Value);
+      }
+      break;
+    case 7:
+      return (20*Value);
+      break;
+    case 8:
+      if (Value>50) {
+        return 12500;
+      } else {
+        return (250*Value);
+      }
+      break;
+    case 10:
+    case 11:
+      return ((5*Value)-30);
+      break;
+    case 12:
+      return (10*Value);
+      break;
+    case 13:
+      return (40*Value);
+      break;
+    case 14:
+      return (Value/10.0);
+      break;
+    default:
+      return ((100*Value)/51);
+      break;
+  }
+}
 
 void printDialog::printFrSky()
 {
@@ -741,7 +802,7 @@ void printDialog::printFrSky()
       for (int i=0; i<4; i++) {
         if (fd->bars[i].source!=0)
           tc++;
-        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMax*100)/51,10)+"</b></td></tr>");
+        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->bars[i].source,fd->bars[i].barMin,fd))+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->bars[i].source,(51-fd->bars[i].barMax),fd))+"</b></td></tr>");
       }
       str.append("</table></td>");
     }
