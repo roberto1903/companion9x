@@ -741,7 +741,7 @@ void printDialog::printFrSky()
       for (int i=0; i<4; i++) {
         if (fd->bars[i].source!=0)
           tc++;
-        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMax*100)/51,10)+"</b></td></tr>");
+        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMax*100)/51,10)+"</b></td></tr>");
       }
       str.append("</table></td>");
     }
