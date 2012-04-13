@@ -272,6 +272,7 @@ class GeneralSettings {
     uint8_t   lightAutoOff;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
+    int8_t hapticLength;
     bool        hideNameOnSplash;
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;
@@ -628,6 +629,7 @@ enum Capability {
  SoundPitch,
  Beeperlen,
  Haptic,
+ HapticLength,
  HapticMode,
  BandgapMeasure,
  PotScrolling,

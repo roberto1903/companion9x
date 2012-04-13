@@ -82,7 +82,8 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
-  uint8_t   spare2[2];
+  int8_t hapticLength;
+  uint8_t   spare2;
   int8_t    beeperLength:3;
   uint8_t   hapticStrength:3;
   uint8_t   gpsFormat:1;

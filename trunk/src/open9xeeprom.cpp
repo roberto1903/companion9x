@@ -134,6 +134,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   beeperLength=c9x.beeperLength;
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
+  hapticLength=c9x.hapticLength;
   gpsFormat =  c9x.gpsFormat;
 }
 
@@ -176,6 +177,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.beeperLength=beeperLength;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
+  result.hapticLength=hapticLength;
   result.gpsFormat = gpsFormat;
   return result;
 }
