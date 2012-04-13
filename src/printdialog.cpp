@@ -733,23 +733,29 @@ void printDialog::printFrSky()
   str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("System of units")+"</b></td><td colspan=8 align=\"left\">"+FrSkyMeasure(fd->imperial)+"</td></tr>");
   str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("Propeller blades")+"</b></td><td colspan=8 align=\"left\">"+FrSkyBlades(fd->blades)+"</td></tr>");
   str.append("<tr><td colspan=10 align=\"Left\">&nbsp;</td></tr></table>");
-  str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td width=\"50%\">");
-  str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
-  str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
-  for (int i=0; i<4; i++) {
-    if (fd->bars[i].source!=0)
-      tc++;
-    str.append("<tr><td  align=\"Center\"><b>"+QString::number(i,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMax*100)/51,10)+"</b></td></tr>");
+  if (GetEepromInterface()->getCapability(TelemetryBars) || (GetEepromInterface()->getCapability(TelemetryCSFields))) {
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr>");
+    if (GetEepromInterface()->getCapability(TelemetryBars)) {
+      str.append("<td width=\"50%\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
+      str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+      for (int i=0; i<4; i++) {
+        if (fd->bars[i].source!=0)
+          tc++;
+        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMin*100)/51,10)+"</b></td><td  align=\"Right\"><b>"+QString::number((fd->bars[i].barMax*100)/51,10)+"</b></td></tr>");
+      }
+      str.append("</table></td>");
+    }
+    if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
+      str.append("<td width=\"50%\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+      for (int i=0; i<4; i++) {
+        if ((fd->csField[i*2] !=0) || (fd->csField[i*2+1]!=0))
+          tc++;
+        str.append("<tr><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2])+"</b></td><td  align=\"Center\"width=\"10%\">&nbsp;</td><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2+1])+"</b></td></tr>");
+      }
+      str.append("</table></td>");
+    }
+    str.append("</tr></table>");
   }
-  str.append("</table></td>");
-  str.append("<td width=\"50%\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
-  for (int i=0; i<4; i++) {
-    if ((fd->csField[i*2] !=0) || (fd->csField[i*2+1]!=0))
-      tc++;
-    str.append("<tr><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2])+"</b></td><td  align=\"Center\"width=\"10%\">&nbsp;</td><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2+1])+"</b></td></tr>");
-  }
-  str.append("</table></td></tr>");
-  str.append("</table>");
   if (tc>0)
       te->append(str);    
 }
