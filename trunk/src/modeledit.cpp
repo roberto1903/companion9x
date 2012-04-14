@@ -3287,7 +3287,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
     md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
     setSwitch(0xB,CS_VNEG, STK_THR, -99);
-    setSwitch(0xC,CS_VPOS, SRC_CH14, 0);
+    setSwitch(0xC,CS_VPOS, CH(14), 0);
     updateSwitchesTab();
   }
 
