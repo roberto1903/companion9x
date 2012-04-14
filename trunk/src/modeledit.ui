@@ -770,8 +770,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>801</width>
-              <height>377</height>
+              <width>260</width>
+              <height>177</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2575,8 +2575,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>307</width>
+            <height>462</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -3872,8 +3872,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>484</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -8786,8 +8786,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -9856,7 +9856,7 @@
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>TX Alarm</string>
+             <string>Alarm 1</string>
             </property>
            </widget>
           </item>
@@ -9875,7 +9875,7 @@
              </size>
             </property>
             <property name="text">
-             <string>RX Alarm</string>
+             <string>Alarm 2</string>
             </property>
            </widget>
           </item>
