@@ -789,11 +789,18 @@ void printDialog::printFrSky()
       str.append("</font></td><td width=\"40\" align=\"center\"><font color=green>"+QString::number(ratio*(fd->channels[i].alarms[1].value/255.0+fd->channels[i].offset/255.0),10,(fd->channels[i].type==0 ? 1:0))+"</font></td></tr>");
     }
   }
-  str.append("<tr><td colspan=10 align=\"Left\">&nbsp;</td></tr>");
+  str.append("<tr><td colspan=10 align=\"Left\" height=\"4px\"></td></tr>");
+  str.append("<tr><td colspan=4 align=\"center\" rowspan=2>&nbsp;</td><td colspan=3 align=\"center\"><b>"+tr("TX Alarm")+"</b></td><td colspan=3 align=\"center\"><b>"+tr("RX Alarm")+"</b></td></tr>");
+  str.append("<tr><td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+  str.append("<td width=\"40\" align=\"center\"><b>"+tr("Type")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Condition")+"</b></td><td width=\"40\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+  str.append("<tr><td align=\"Left\" colspan=4><b>"+tr("RSSI Alarm")+"</b></td>");
+  str.append("<td width=\"40\" align=\"center\"><b>"+FrSkyUnits(fd->rssiAlarms[0].level)+"</b></td><td width=\"40\" align=\"center\"><b>&lt;</b></td><td width=\"40\" align=\"center\"><b>"+QString::number(fd->rssiAlarms[0].value,10)+"</b></td>");
+  str.append("<td width=\"40\" align=\"center\"><b>"+FrSkyUnits(fd->rssiAlarms[1].level)+"</b></td><td width=\"40\" align=\"center\"><b>&lt;</b></td><td width=\"40\" align=\"center\"><b>"+QString::number(fd->rssiAlarms[1].value,10)+"</b></td></tr>");
+  str.append("<tr><td colspan=10 align=\"Left\" height=\"4px\"></td></tr>");
   str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("Frsky serial protocol")+"</b></td><td colspan=8 align=\"left\">"+FrSkyProtocol(fd->usrProto)+"</td></tr>");
   str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("System of units")+"</b></td><td colspan=8 align=\"left\">"+FrSkyMeasure(fd->imperial)+"</td></tr>");
   str.append("<tr><td colspan=2 align=\"Left\"><b>"+tr("Propeller blades")+"</b></td><td colspan=8 align=\"left\">"+FrSkyBlades(fd->blades)+"</td></tr>");
-  str.append("<tr><td colspan=10 align=\"Left\">&nbsp;</td></tr></table>");
+  str.append("<tr><td colspan=10 align=\"Left\" height=\"4px\"></td></tr></table>");
   if (GetEepromInterface()->getCapability(TelemetryBars) || (GetEepromInterface()->getCapability(TelemetryCSFields))) {
     str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr>");
     if (GetEepromInterface()->getCapability(TelemetryBars)) {
