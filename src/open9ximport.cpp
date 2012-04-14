@@ -3,6 +3,7 @@
 #define SIMU_EXCEPTIONS
 #define PCBSTD
 #define SPLASH
+#define FLIGHT_PHASES
 #define DECIMALS_DISPLAYED
 #define HELI
 #define TEMPLATES
