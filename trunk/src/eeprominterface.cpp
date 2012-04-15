@@ -141,7 +141,9 @@ class Open9xFirmware: public FirmwareInfo
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
       if (this->eepromInterface->getBoard() == BOARD_GRUVIN9X) {
-        if (revision == 0 || revision >= 469)
+        if (revision == 0 || revision >= 547)
+          return 207;
+        else if (revision >= 469)
           return 206;
       }
       else {
