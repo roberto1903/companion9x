@@ -68,7 +68,7 @@ int Gruvin9xStableInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsInit(eeprom, EESIZE_STOCK, true);
+  efile->EeFsCreate(eeprom, EESIZE_STOCK, 4);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
@@ -97,7 +97,7 @@ int Gruvin9xStableInterface::getSize(ModelData &model)
     return 0;
 
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 4);
 
   Gruvin9xModelData gruvin9xModel(model);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
@@ -110,7 +110,7 @@ int Gruvin9xStableInterface::getSize(ModelData &model)
 int Gruvin9xStableInterface::getSize(GeneralSettings &settings)
 {
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 4);
 
   Gruvin9xGeneral gruvin9xGeneral(settings);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));

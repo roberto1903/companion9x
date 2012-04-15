@@ -76,6 +76,8 @@ const int Open9xInterface::getMaxModels()
 {
   if (board == BOARD_ERSKY9X)
     return 60;
+  else if (board == BOARD_GRUVIN9X)
+    return 30;
   else
     return 16;
 }
@@ -135,7 +137,11 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     return false;
   }
 
-  efile->EeFsInit(eeprom, size);
+  if (!efile->EeFsOpen(eeprom, size)) {
+    std::cout << "wrong file system\n";
+    return false;
+  }
+
   efile->openRd(FILE_GENERAL);
   
   uint8_t version;
@@ -218,7 +224,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   int size = getEEpromSize();
 
-  efile->EeFsInit(eeprom, size, true);
+  efile->EeFsCreate(eeprom, size, (board==BOARD_GRUVIN9X && version >= 207) ? 5 : 4);
 
   Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
@@ -243,6 +249,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
           result = saveModel<Open9xModelData_v205>(i, radioData.models[i]);
           break;
         case 206:
+        case 207:
           // Now only for V4
           result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
           break;
@@ -269,7 +276,7 @@ int Open9xInterface::getSize(ModelData &model)
     return 0;
 
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
 
   Open9xModelData open9xModel(model);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
@@ -285,7 +292,7 @@ int Open9xInterface::getSize(GeneralSettings &settings)
     return 0;
 
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsInit(tmp, EESIZE_GRUVIN9X, true);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
 
   Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
