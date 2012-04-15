@@ -118,7 +118,10 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     return false;
   }
 
-  efile->EeFsInit(eeprom, size);
+  if (!efile->EeFsOpen(eeprom, size)) {
+    std::cout << "wrong file system\n";
+    return false;
+  }
     
   efile->openRd(FILE_GENERAL);
   Ersky9xGeneral ersky9xGeneral;
@@ -165,7 +168,7 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t versio
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsInit(eeprom, EESIZE_ERSKY9X, true);
+  efile->EeFsCreate(eeprom, EESIZE_ERSKY9X, 0/*version*/);
 
   Ersky9xGeneral ersky9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));

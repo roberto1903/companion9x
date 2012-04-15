@@ -28,9 +28,7 @@
 #define ERR_FULL 1
 #define ERR_TMO  2
 
-#define EEFS_VERS  4
-
-#define MAXFILES   20
+#define BS                 16
 
 PACK(struct DirEnt{
   uint8_t  startBlk;
@@ -43,20 +41,16 @@ PACK(struct EeFs{
   uint8_t  mySize;
   uint8_t  freeList;
   uint8_t  bs;
-  DirEnt   files[MAXFILES];
+  DirEnt   files[36];
 });
-
-#define BS                 16
-#define EEPROM_HEADER_SIZE 64
-#define FIRSTBLK           (EEPROM_HEADER_SIZE/BS)
 
 struct t_eeprom_header
 {
-        uint32_t sequence_no ;          // sequence # to decide which block is most recent
-        uint16_t data_size ;                    // # bytes in data area
-        uint8_t flags ;
-        uint8_t hcsum ;
-} ;
+  uint32_t sequence_no ;          // sequence # to decide which block is most recent
+  uint16_t data_size ;                    // # bytes in data area
+  uint8_t flags ;
+  uint8_t hcsum ;
+};
 
 class EFile
 {
@@ -72,8 +66,13 @@ class EFile
 
 
   uint8_t *eeprom;
-  int eeprom_size;
+  int     eeprom_size;
   EeFs    *eeFs;
+  uint8_t eeFsVersion;
+  uint8_t eeFsSize;
+  uint8_t eeFsFirstBlock;
+  uint8_t eeFsBlocksOffset;
+  uint8_t eeFsBlocksMax;
 
   void eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size);
   void eeprom_write_block(void *pointer_ram, unsigned int pointer_eeprom, size_t size);
@@ -84,18 +83,17 @@ class EFile
   void EeFsSetLink(uint8_t blk,uint8_t val);
   uint8_t EeFsGetDat(uint8_t blk,uint8_t ofs);
   void EeFsSetDat(uint8_t blk,uint8_t ofs,uint8_t*buf,uint8_t len);
-  void EeFsFlushFreelist();
-  void EeFsFlush();
   uint16_t EeFsGetFree();
   void EeFsFree(uint8_t blk);///free one or more blocks
   uint8_t EeFsAlloc(); ///alloc one block from freelist
-  bool EeFsOpen();
 
 public:
 
   EFile();
 
-  void EeFsInit(uint8_t *eeprom, int size, bool format=false);
+  void EeFsCreate(uint8_t *eeprom, int size, uint8_t version);
+
+  bool EeFsOpen(uint8_t *eeprom, int size);
 
   ///remove contents of given file
   void rm(uint8_t i_fileId);

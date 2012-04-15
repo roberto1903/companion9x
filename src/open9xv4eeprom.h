@@ -102,7 +102,7 @@ PACK(typedef struct t_Open9xV4ModelData_v206 {
 
 }) Open9xV4ModelData_v206;
 
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 206
+#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 207
 typedef Open9xV4ModelData_v206   Open9xV4ModelData;
 typedef Open9xGeneralData_v201 Open9xV4GeneralData;
 
