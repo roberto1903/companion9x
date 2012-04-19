@@ -105,6 +105,7 @@ private slots:
     void contributors();
     void customizeSplash();
     void about();
+    void compare();
     void print();
     void preferences();
     void updateMenus();
@@ -179,6 +180,7 @@ private:
     QAction *preferencesAct;
     QAction *checkForUpdatesAct;
     QAction *contributorsAct;
+    QAction *compareAct;
     QAction *customizeSplashAct;
     QAction *cutAct;
     QAction *copyAct;

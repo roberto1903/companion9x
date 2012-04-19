@@ -45,6 +45,7 @@
 #include "mdichild.h"
 #include "burnconfigdialog.h"
 #include "avroutputdialog.h"
+#include "comparedialog.h"
 #include "preferencesdialog.h"
 #include "flashinterface.h"
 #include "fusesdialog.h"
@@ -880,6 +881,12 @@ void MainWindow::burnFuses()
     fd->exec();
 }
 
+void MainWindow::compare()
+{
+    compareDialog *fd = new compareDialog(this);
+    fd->show();
+}
+
 void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
@@ -1001,6 +1008,10 @@ void MainWindow::createActions()
     contributorsAct->setStatusTip(tr("Show companion9x contributors list"));
     connect(contributorsAct, SIGNAL(triggered()), this, SLOT(contributors()));
 
+    compareAct = new QAction(QIcon(":/images/compare.png"), tr("Compare..."), this);
+    compareAct->setStatusTip(tr("Compare models"));
+    connect(compareAct, SIGNAL(triggered()), this, SLOT(compare()));
+    
     customizeSplashAct = new QAction(QIcon(":/images/customize.png"), tr("Customize your &TX..."), this);
     customizeSplashAct->setStatusTip(tr("Customize the splash screen of your TX"));
     connect(customizeSplashAct, SIGNAL(triggered()), this, SLOT(customizeSplash()));
@@ -1148,6 +1159,7 @@ void MainWindow::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(simulateAct);
     fileMenu->addAction(printAct);
+    fileMenu->addAction(compareAct);
     fileMenu->addSeparator();
     fileMenu->addAction(preferencesAct);
     fileMenu->addAction(switchLayoutDirectionAct);
