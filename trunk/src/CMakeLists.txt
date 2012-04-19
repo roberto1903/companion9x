@@ -112,6 +112,7 @@ SET( companion9x_SRCS
      avroutputdialog.cpp
      preferencesdialog.cpp
      burnconfigdialog.cpp
+     comparedialog.cpp
      contributorsdialog.cpp
      customizesplashdialog.cpp
      burndialog.cpp
@@ -130,6 +131,7 @@ SET( companion9x_MOC_HDRS
      avroutputdialog.h
      preferencesdialog.h
      burnconfigdialog.h
+     comparedialog.h
      printdialog.h
      fusesdialog.h
      mixerdialog.h
@@ -155,6 +157,7 @@ SET( companion9x_MOC_HDRS
 SET( companion9x_UIS
      mdichild.ui
      avroutputdialog.ui
+     comparedialog.ui
      fusesdialog.ui
      expodialog.ui
      mixerdialog.ui
