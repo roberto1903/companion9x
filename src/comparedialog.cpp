@@ -24,31 +24,18 @@ compareDialog::compareDialog(QWidget *parent, GeneralSettings *gg) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::compareDialog)
 {
-    ui->setupUi(this);
-    g_eeGeneral = gg;
-    eepromInterface = GetEepromInterface();
-    te = ui->textEdit;
-    this->setAcceptDrops(true);
-    model1=0;
-    model2=0;
-    g_model1=(ModelData *)malloc(sizeof(ModelData));
-    g_model2=(ModelData *)malloc(sizeof(ModelData));
+  ui->setupUi(this);
+  g_eeGeneral = gg;
+  eepromInterface = GetEepromInterface();
+  te = ui->textEdit;
+  this->setAcceptDrops(true);
+  model1=0;
+  model2=0;
+  g_model1=(ModelData *)malloc(sizeof(ModelData));
+  g_model2=(ModelData *)malloc(sizeof(ModelData));
     //setDragDropOverwriteMode(true);
     //setDropIndicatorShown(true);
 /*
-    setWindowTitle(tr("Setup for: ") + g_model->name);
-    ui->textEdit->clear();
-    
-    curvefile5=QString("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name);
-    curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name);
-    printSetup();
-    printExpo();
-    printMixes();
-    printLimits();
-    printCurves();
-    printSwitches();
-    printSafetySwitches();
-    printFSwitches();
     printFrSky();
 */    
     te->scrollToAnchor("1");
@@ -56,15 +43,11 @@ compareDialog::compareDialog(QWidget *parent, GeneralSettings *gg) :
 
 void compareDialog::dragMoveEvent(QDragMoveEvent *event)
 {
-
-    if (event->mimeData()->hasFormat("application/x-companion9x")) 
-    {   
-        event->acceptProposedAction();
-    }
-    else
-    {
-        event->ignore();
-    }
+  if (event->mimeData()->hasFormat("application/x-companion9x")) {   
+    event->acceptProposedAction();
+  } else {
+    event->ignore();
+  }
 }
 
 void compareDialog::dragEnterEvent(QDragEnterEvent *event)
@@ -89,6 +72,7 @@ void compareDialog::printDiff()
   if (GetEepromInterface()->getCapability(Phases)) {
     printPhases();
   }
+  printExpos();
   printMixers();
   printLimits();
   printCurves();
@@ -100,91 +84,88 @@ void compareDialog::printDiff()
 
 void compareDialog::dropEvent(QDropEvent *event)
 {
-    QLabel *child = qobject_cast<QLabel*>(childAt(event->pos()));
-    // qDebug() << "Successfull drag'n'drop. Old label " << child->objectName().toAscii().data() << " deleted.";
-    const QMimeData  *mimeData = event->mimeData();
-    
-    if (child) {
-      if (child->objectName().contains("label_1")) {        
-        if(mimeData->hasFormat("application/x-companion9x")) {
-          QByteArray gmData = mimeData->data("application/x-companion9x");
-          DragDropHeader *header = (DragDropHeader *)gmData.data();
-          if (!header->general_settings) {
-            char *gData = gmData.data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
-            char c = *gData;
-            gData++;
-            if(c=='M') {
-              memcpy(g_model1,(ModelData *)gData,sizeof(ModelData));
-              ui->label_1->setText(g_model1->name);
-              model1=1;
-            }
+  QLabel *child = qobject_cast<QLabel*>(childAt(event->pos()));
+  // qDebug() << "Successfull drag'n'drop. Old label " << child->objectName().toAscii().data() << " deleted.";
+  const QMimeData  *mimeData = event->mimeData();
+  if (child) {
+    if (child->objectName().contains("label_1")) {        
+      if(mimeData->hasFormat("application/x-companion9x")) {
+        QByteArray gmData = mimeData->data("application/x-companion9x");
+        DragDropHeader *header = (DragDropHeader *)gmData.data();
+        if (!header->general_settings) {
+          char *gData = gmData.data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
+          char c = *gData;
+          gData++;
+          if(c=='M') {
+            memcpy(g_model1,(ModelData *)gData,sizeof(ModelData));
+            ui->label_1->setText(g_model1->name);
+            model1=1;
           }
-        }          
-      }
-      else if (child->objectName().contains("label_2")) {
-        if(mimeData->hasFormat("application/x-companion9x")) {
-          QByteArray gmData = mimeData->data("application/x-companion9x");
-          DragDropHeader *header = (DragDropHeader *)gmData.data();
-          if (!header->general_settings) {
-            char *gData = gmData.data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
-            char c = *gData;
-            gData++;
-            if(c=='M') {
-              memcpy(g_model2,(ModelData *)gData,sizeof(ModelData));
-              ui->label_2->setText(g_model2->name);
-              model2=1;
-            }
+        }
+      }          
+    }
+    else if (child->objectName().contains("label_2")) {
+      if(mimeData->hasFormat("application/x-companion9x")) {
+        QByteArray gmData = mimeData->data("application/x-companion9x");
+        DragDropHeader *header = (DragDropHeader *)gmData.data();
+        if (!header->general_settings) {
+          char *gData = gmData.data()+sizeof(DragDropHeader);//new char[gmData.size() + 1];
+          char c = *gData;
+          gData++;
+          if(c=='M') {
+            memcpy(g_model2,(ModelData *)gData,sizeof(ModelData));
+            ui->label_2->setText(g_model2->name);
+            model2=1;
           }
-        }                  
-      }
-    }  else {
-      return;
+        }
+      }                  
     }
-    event->accept();
-    if ((model1==1) & (model2==1)) {
-      printDiff();
-    }
-    
-
+  }  else {
+    return;
+  }
+  event->accept();
+  if ((model1==1) & (model2==1)) {
+    printDiff();
+  }
 }
 
 void compareDialog::closeEvent(QCloseEvent *event) 
 {
-    QByteArray ba = curvefile5.toLatin1();
-    char *name = ba.data(); 
-    unlink(name);
-    ba = curvefile9.toLatin1();
-    name = ba.data(); 
-    unlink(name);    
+  QByteArray ba = curvefile5.toLatin1();
+  char *name = ba.data(); 
+  unlink(name);
+  ba = curvefile9.toLatin1();
+  name = ba.data(); 
+  unlink(name);    
 }
 
 compareDialog::~compareDialog()
 {
-    delete ui;
+  delete ui;
 }
 
 QString compareDialog::doTC(const QString s, const QString color="", bool bold=false)
 {
-    QString str = s;
-    if(bold) str = "<b>" + str + "</b>";
-    if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
-    return "<td align=center>" + str + "</td>";
+  QString str = s;
+  if(bold) str = "<b>" + str + "</b>";
+  if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
+  return "<td align=center>" + str + "</td>";
 }
 
 QString compareDialog::doTR(const QString s, const QString color="", bool bold=false)
 {
-    QString str = s;
-    if(bold) str = "<b>" + str + "</b>";
-    if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
-    return "<td align=right>" + str + "</td>";
+  QString str = s;
+  if(bold) str = "<b>" + str + "</b>";
+  if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
+  return "<td align=right>" + str + "</td>";
 }
 
 QString compareDialog::doTL(const QString s, const QString color="", bool bold=false)
 {
-    QString str = s;
-    if(bold) str = "<b>" + str + "</b>";
-    if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
-    return "<td align=left>" + str + "</td>";
+  QString str = s;
+  if(bold) str = "<b>" + str + "</b>";
+  if(!color.isEmpty()) str = "<font color=" + color + ">" + str + "</font>";
+  return "<td align=left>" + str + "</td>";
 }
 
 QString compareDialog::getColor1(QString string1, QString string2)
@@ -249,94 +230,104 @@ QString compareDialog::getTimer2(ModelData * g_model)
 
 QString compareDialog::getProtocol(ModelData * g_model)
 {
-    QString str;
-    str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
+  QString str;
+  str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
 
-    if(!g_model->protocol) //ppm protocol
-        str.append(tr(": %1 Channels, %2msec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
+  if(!g_model->protocol) //ppm protocol
+    str.append(tr(": %1 Channels, %2msec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
 
-    return str;
+  return str;
 }
 
 QString compareDialog::getCenterBeep(ModelData * g_model)
 {
-    //RETA123
-    QStringList strl;
-
-    if(g_model->beepANACenter & 0x01) strl << tr("Rudder");
-    if(g_model->beepANACenter & 0x02) strl << tr("Elevator");
-    if(g_model->beepANACenter & 0x04) strl << tr("Throttle");
-    if(g_model->beepANACenter & 0x08) strl << tr("Aileron");
-    if(g_model->beepANACenter & 0x10) strl << "P1";
-    if(g_model->beepANACenter & 0x20) strl << "P2";
-    if(g_model->beepANACenter & 0x40) strl << "P3";
-
-    return strl.join(", ");
-
+  //RETA123
+  QStringList strl;
+  if(g_model->beepANACenter & 0x01) strl << tr("Rudder");
+  if(g_model->beepANACenter & 0x02) strl << tr("Elevator");
+  if(g_model->beepANACenter & 0x04) strl << tr("Throttle");
+  if(g_model->beepANACenter & 0x08) strl << tr("Aileron");
+  if(g_model->beepANACenter & 0x10) strl << "P1";
+  if(g_model->beepANACenter & 0x20) strl << "P2";
+  if(g_model->beepANACenter & 0x40) strl << "P3";
+  return strl.join(", ");
 }
 
 QString compareDialog::getTrimInc(ModelData * g_model)
 {
-    switch (g_model->trimInc)
-    {
-    case (1): return tr("Extra Fine"); break;
-    case (2): return tr("Fine"); break;
-    case (3): return tr("Medium"); break;
-    case (4): return tr("Coarse"); break;
-    default: return tr("Exponential"); break;
-    }
+  switch (g_model->trimInc) {
+    case (1):
+      return tr("Extra Fine");
+      break;
+    case (2):
+      return tr("Fine");
+      break;
+    case (3):
+      return tr("Medium");
+      break;
+    case (4):
+      return tr("Coarse");
+      break;
+    default:
+      return tr("Exponential");
+      break;
+  }
 }
 
 QString compareDialog::cSwitchString(CustomSwData * customSw)
 {
-  QString tstr="";
-  if(customSw->func) {
+  QString tstr = "";
+  if (customSw->func) {
     switch CS_STATE(customSw->func) {
       case CS_VOFS:
         if (customSw->v1) {
-          if (customSw->v1<=SRC_3POS) {
-            tstr+=getSourceStr(customSw->v1);
-          } else {
-            tstr+=getSourceStr(customSw->v1+SRC_SWC-SRC_3POS);
+          if (customSw->v1 <= SRC_3POS) {
+            tstr += getSourceStr(customSw->v1);
           }
-        } else {
-          tstr+="0";
+          else {
+            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
+          }
+        }
+        else {
+          tstr += "0";
         }
         tstr.remove(" ");
-        if(customSw->func==CS_APOS || customSw->func==CS_ANEG)
-            tstr = "|" + tstr + "|";
-        if(customSw->func==CS_APOS || customSw->func==CS_VPOS)
-            tstr += " &gt; ";
-        if(customSw->func==CS_ANEG || customSw->func==CS_VNEG)
-            tstr += " &lt; ";
+        if (customSw->func == CS_APOS || customSw->func == CS_ANEG)
+          tstr = "|" + tstr + "|";
+        if (customSw->func == CS_APOS || customSw->func == CS_VPOS)
+          tstr += " &gt; ";
+        if (customSw->func == CS_ANEG || customSw->func == CS_VNEG)
+          tstr += " &lt; ";
         tstr += QString::number(customSw->v2);
         break;
       case CS_VBOOL:
         tstr = getSWName(customSw->v1);
         switch (customSw->func) {
           case CS_AND:
-              tstr += " AND ";
-              break;
+            tstr += " AND ";
+            break;
           case CS_OR:
-              tstr += " OR ";
-              break;
+            tstr += " OR ";
+            break;
           case CS_XOR:
-              tstr += " XOR ";
-              break;
+            tstr += " XOR ";
+            break;
           default:
-              break;
+            break;
         }
         tstr += getSWName(customSw->v2);
         break;
       case CS_VCOMP:
         if (customSw->v1) {
-          if (customSw->v1<=SRC_3POS) {
-            tstr+=getSourceStr(customSw->v1);
-          } else {
-            tstr+=getSourceStr(customSw->v1+SRC_SWC-SRC_3POS);
+          if (customSw->v1 <= SRC_3POS) {
+            tstr += getSourceStr(customSw->v1);
           }
-        } else {
-          tstr+="0";
+          else {
+            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
+          }
+        }
+        else {
+          tstr += "0";
         }
         switch (customSw->func) {
           case CS_EQUAL:
@@ -361,20 +352,42 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
             break;
         }
         if (customSw->v2) {
-          if (customSw->v2<=SRC_3POS) {
-            tstr+=getSourceStr(customSw->v2);
-          } else {
-            tstr+=getSourceStr(customSw->v2+SRC_SWC-SRC_3POS);
+          if (customSw->v2 <= SRC_3POS) {
+            tstr += getSourceStr(customSw->v2);
           }
-        } else {
-          tstr+="0";
+          else {
+            tstr += getSourceStr(customSw->v2 + SRC_SWC - SRC_3POS);
+          }
+        }
+        else {
+          tstr += "0";
         }
         break;
       default:
-          break;
+        break;
     }
   }
   return tstr;
+}
+
+bool compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo)
+{
+  for (int i=0; i< MAX_EXPOS; i++) {
+    if (memcmp(&expo,&ExpoArray[i],sizeof(ExpoData))==0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool compareDialog::ChannelHasExpo(ExpoData * expoArray, uint8_t destCh)
+{
+  for (int i=0; i< MAX_EXPOS; i++) {
+    if ((expoArray[i].chn==destCh)&&(expoArray[i].mode!=0)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 bool compareDialog::ModelHasMix(MixData * mixArray, MixData mix)
@@ -397,130 +410,135 @@ bool compareDialog::ChannelHasMix(MixData * mixArray, uint8_t destCh)
   return false;
 }
 
-QString compareDialog::FrSkyAtype(int alarm) {
-    switch(alarm) {
-        case 1:
-            return tr("Yellow");
-            break;
-        case 2:
-            return tr("Orange");
-            break;
-        case 3:
-            return tr("Red");
-            break;
-        default:
-            return "----";
-            break;
-    }
+QString compareDialog::FrSkyAtype(int alarm)
+{
+  switch (alarm) {
+    case 1:
+      return tr("Yellow");
+      break;
+    case 2:
+      return tr("Orange");
+      break;
+    case 3:
+      return tr("Red");
+      break;
+    default:
+      return "----";
+      break;
+  }
+}
+
+QString compareDialog::FrSkyBlades(int blades)
+{
+  switch (blades) {
+    case 1:
+      return "3";
+      break;
+    case 2:
+      return "4";
+      break;
+    default:
+      return "2";
+      break;
+  }
+}
+
+
+QString compareDialog::FrSkyUnits(int units)
+{
+  switch(units) {
+    case 1:
+      return tr("---");
+      break;
+    default:
+      return "V";
+      break;
+  }
  }
 
-QString compareDialog::FrSkyBlades(int blades) {
-    switch(blades) {
-        case 1:
-            return "3";
-            break;
-        case 2:
-            return "4";
-            break;
-        default:
-            return "2";
-            break;
-    }
+QString compareDialog::FrSkyProtocol(int protocol)
+{
+  switch(protocol) {
+    case 2:
+      if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
+        return tr("Winged Shadow How High");
+      } else {
+        return tr("Winged Shadow How High (not supported)");
+      }
+      break;
+    case 1:
+      return tr("FrSky Sensor Hub");
+      break;
+    default:
+      return tr("None");
+      break;
+  }
  }
 
-
-QString compareDialog::FrSkyUnits(int units) {
-    switch(units) {
-        case 1:
-            return tr("---");
-            break;
-        default:
-            return "V";
-            break;
-    }
- }
-
-QString compareDialog::FrSkyProtocol(int protocol) {
-    switch(protocol) {
-        case 2:
-            if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
-                 return tr("Winged Shadow How High");
-            } else {
-                 return tr("Winged Shadow How High (not supported)");
-            }
-            break;
-        case 1:
-            return tr("FrSky Sensor Hub");
-            break;
-        default:
-            return tr("None");
-            break;
-    }
- }
-
-QString compareDialog::FrSkyMeasure(int units) {
-    switch(units) {
-        case 1:
-            return tr("Imperial");
-            break;
-        default:
-            return tr("Metric");;
-            break;
-    }
+QString compareDialog::FrSkyMeasure(int units)
+{
+  switch(units) {
+    case 1:
+      return tr("Imperial");
+      break;
+    default:
+      return tr("Metric");;
+      break;
+  }
  }
 
 void compareDialog::printSetup()
 {
-    QString color;
-    QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append("<tr><td colspan=2><h2>"+tr("General Model Settings")+"</h2></td></tr>");
-    str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3 width=\"50%\">");
-    color=getColor1(g_model1->name,g_model2->name);
-    str.append(fv(tr("Name"), g_model1->name, color));
-    color=getColor1(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
-    str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model1)).arg(color));
-    color=getColor1(getTimer1(g_model1),getTimer1(g_model2));
-    str.append(fv(tr("Timer1"), getTimer1(g_model1),color));  //value, mode, count up/down
-    color=getColor1(getTimer2(g_model1),getTimer2(g_model2));
-    str.append(fv(tr("Timer2"), getTimer2(g_model1),color));  //value, mode, count up/down
-    color=getColor1(getProtocol(g_model1),getProtocol(g_model2));
-    str.append(fv(tr("Protocol"), getProtocol(g_model1), color)); //proto, numch, delay,
-    color=getColor1(g_model1->pulsePol,g_model2->pulsePol);
-    str.append(fv(tr("Pulse Polarity"), g_model1->pulsePol ? "NEG" : "POS", color));
-    color=getColor1(g_model1->thrTrim,g_model2->thrTrim);
-    str.append(fv(tr("Throttle Trim"), g_model1->thrTrim ? tr("Enabled") : tr("Disabled"), color));
-    color=getColor1(g_model1->thrExpo,g_model2->thrExpo);
-    str.append(fv(tr("Throttle Expo"), g_model1->thrExpo ? tr("Enabled") : tr("Disabled"),color));
-    // TODO    str.append(fv(tr("Trim Switch"), getSWName(g_model->trimSw)));
-    color=getColor1(getTrimInc(g_model1),getTrimInc(g_model2));
-    str.append(fv(tr("Trim Increment"), getTrimInc(g_model1),color));
-    color=getColor1(getCenterBeep(g_model1),getCenterBeep(g_model2));
-    str.append(fv(tr("Center Beep"), getCenterBeep(g_model1),color)); // specify which channels beep
-    str.append("</table></td>");
-    str.append("<td><table border=0 cellspacing=0 cellpadding=3 width=\"50%\">");
-    color=getColor2(g_model1->name,g_model2->name);
-    str.append(fv(tr("Name"), g_model2->name, color));
-    color=getColor2(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
-    str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model2)).arg(color));
-    color=getColor2(getTimer1(g_model1),getTimer1(g_model2));
-    str.append(fv(tr("Timer1"), getTimer1(g_model2),color));  //value, mode, count up/down
-    color=getColor2(getTimer2(g_model1),getTimer2(g_model2));
-    str.append(fv(tr("Timer2"), getTimer2(g_model2),color));  //value, mode, count up/down
-    color=getColor2(getProtocol(g_model1),getProtocol(g_model2));
-    str.append(fv(tr("Protocol"), getProtocol(g_model2), color)); //proto, numch, delay,
-    color=getColor2(g_model1->pulsePol,g_model2->pulsePol);
-    str.append(fv(tr("Pulse Polarity"), g_model2->pulsePol ? "NEG" : "POS", color));
-    color=getColor2(g_model1->thrTrim,g_model2->thrTrim);
-    str.append(fv(tr("Throttle Trim"), g_model2->thrTrim ? tr("Enabled") : tr("Disabled"), color));
-    color=getColor2(g_model1->thrExpo,g_model2->thrExpo);
-    str.append(fv(tr("Throttle Expo"), g_model2->thrExpo ? tr("Enabled") : tr("Disabled"),color));
-    // TODO    str.append(fv(tr("Trim Switch"), getSWName(g_model->trimSw)));
-    color=getColor2(getTrimInc(g_model1),getTrimInc(g_model2));
-    str.append(fv(tr("Trim Increment"), getTrimInc(g_model2),color));
-    color=getColor2(getCenterBeep(g_model1),getCenterBeep(g_model2));
-    str.append(fv(tr("Center Beep"), getCenterBeep(g_model2),color)); // specify which channels beep
-    str.append("</td></tr></table></td></tr></table>");
-    te->append(str);
+  QString color;
+  QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+  str.append("<tr><td colspan=2><h2>"+tr("General Model Settings")+"</h2></td></tr>");
+  str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3 width=\"50%\">");
+  color=getColor1(g_model1->name,g_model2->name);
+  str.append(fv(tr("Name"), g_model1->name, color));
+  color=getColor1(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
+  str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model1)).arg(color));
+  color=getColor1(getTimer1(g_model1),getTimer1(g_model2));
+  str.append(fv(tr("Timer1"), getTimer1(g_model1),color));  //value, mode, count up/down
+  color=getColor1(getTimer2(g_model1),getTimer2(g_model2));
+  str.append(fv(tr("Timer2"), getTimer2(g_model1),color));  //value, mode, count up/down
+  color=getColor1(getProtocol(g_model1),getProtocol(g_model2));
+  str.append(fv(tr("Protocol"), getProtocol(g_model1), color)); //proto, numch, delay,
+  color=getColor1(g_model1->pulsePol,g_model2->pulsePol);
+  str.append(fv(tr("Pulse Polarity"), g_model1->pulsePol ? "NEG" : "POS", color));
+  color=getColor1(g_model1->thrTrim,g_model2->thrTrim);
+  str.append(fv(tr("Throttle Trim"), g_model1->thrTrim ? tr("Enabled") : tr("Disabled"), color));
+  color=getColor1(g_model1->thrExpo,g_model2->thrExpo);
+  str.append(fv(tr("Throttle Expo"), g_model1->thrExpo ? tr("Enabled") : tr("Disabled"),color));
+  // TODO    str.append(fv(tr("Trim Switch"), getSWName(g_model->trimSw)));
+  color=getColor1(getTrimInc(g_model1),getTrimInc(g_model2));
+  str.append(fv(tr("Trim Increment"), getTrimInc(g_model1),color));
+  color=getColor1(getCenterBeep(g_model1),getCenterBeep(g_model2));
+  str.append(fv(tr("Center Beep"), getCenterBeep(g_model1),color)); // specify which channels beep
+  str.append("</table></td>");
+  str.append("<td><table border=0 cellspacing=0 cellpadding=3 width=\"50%\">");
+  color=getColor2(g_model1->name,g_model2->name);
+  str.append(fv(tr("Name"), g_model2->name, color));
+  color=getColor2(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
+  str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model2)).arg(color));
+  color=getColor2(getTimer1(g_model1),getTimer1(g_model2));
+  str.append(fv(tr("Timer1"), getTimer1(g_model2),color));  //value, mode, count up/down
+  color=getColor2(getTimer2(g_model1),getTimer2(g_model2));
+  str.append(fv(tr("Timer2"), getTimer2(g_model2),color));  //value, mode, count up/down
+  color=getColor2(getProtocol(g_model1),getProtocol(g_model2));
+  str.append(fv(tr("Protocol"), getProtocol(g_model2), color)); //proto, numch, delay,
+  color=getColor2(g_model1->pulsePol,g_model2->pulsePol);
+  str.append(fv(tr("Pulse Polarity"), g_model2->pulsePol ? "NEG" : "POS", color));
+  color=getColor2(g_model1->thrTrim,g_model2->thrTrim);
+  str.append(fv(tr("Throttle Trim"), g_model2->thrTrim ? tr("Enabled") : tr("Disabled"), color));
+  color=getColor2(g_model1->thrExpo,g_model2->thrExpo);
+  str.append(fv(tr("Throttle Expo"), g_model2->thrExpo ? tr("Enabled") : tr("Disabled"),color));
+  // TODO    str.append(fv(tr("Trim Switch"), getSWName(g_model->trimSw)));
+  color=getColor2(getTrimInc(g_model1),getTrimInc(g_model2));
+  str.append(fv(tr("Trim Increment"), getTrimInc(g_model2),color));
+  color=getColor2(getCenterBeep(g_model1),getCenterBeep(g_model2));
+  str.append(fv(tr("Center Beep"), getCenterBeep(g_model2),color)); // specify which channels beep
+  str.append("</td></tr></table></td></tr></table>");
+  te->append(str);
 }
 
 void compareDialog::printPhases()
@@ -640,13 +658,101 @@ void compareDialog::printLimits()
   te->append(str);
 }
 
+void compareDialog::printExpos()
+{
+  QString color;
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
+  str.append(tr("Expo/Dr Settings"));
+  str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
+  for(uint8_t i=0; i<NUM_CHNOUT; i++) {
+    if (ChannelHasExpo(g_model1->expoData, i) || ChannelHasExpo(g_model2->expoData, i)) {
+      str.append("<tr>");
+      str.append("<td width=\"45%\">");
+      str.append("<table border=0 cellspacing=0 cellpadding=0>");
+      for (int j=0; j<MAX_EXPOS; j++) {
+        if (g_model1->expoData[j].chn==i){
+          if (ModelHasExpo(g_model2->expoData, g_model1->expoData[j])) {
+            color="grey";
+          } else {
+            color="green";
+          }
+          ExpoData *ed=&g_model1->expoData[j];
+          if(ed->mode==0)
+            continue;
+          str.append("<tr><td><font size=+1 face='Courier New' color=\""+color+"\">");
+          switch(ed->mode) {
+            case (1): 
+              str += "&lt;-&nbsp;";
+              break;
+            case (2): 
+              str += "-&gt;&nbsp;";
+              break;
+            default:
+              str += "&nbsp;&nbsp;&nbsp;";
+              break;
+          };
+
+          str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
+          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+          if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
+          if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+          if (ed->curve) {
+            str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
+          }
+          str += "</font></td></tr>";
+        }
+      }
+      str.append("</table></td>");
+      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getSourceStr(i+1)+"</b></td>");
+      str.append("<td width=\"45%\">");
+      str.append("<table border=0 cellspacing=0 cellpadding=0>");
+      for (int j=0; j<MAX_EXPOS; j++) {
+        if (g_model2->expoData[j].chn==i){
+          if (ModelHasExpo(g_model1->expoData, g_model2->expoData[j])) {
+            color="grey";
+          } else {
+            color="green";
+          }
+          ExpoData *ed=&g_model2->expoData[j];
+          if(ed->mode==0)
+            continue;
+          str.append("<tr><td><font size=+1 face='Courier New' color=\""+color+"\">");
+          switch(ed->mode) {
+            case (1): 
+              str += "&lt;-&nbsp;";
+              break;
+            case (2): 
+              str += "-&gt;&nbsp;";
+              break;
+            default:
+              str += "&nbsp;&nbsp;&nbsp;";
+              break;
+          }
+
+          str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
+          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+          if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
+          if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+          if (ed->curve) {
+            str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
+          }
+          str += "</font></td></tr>";
+        }
+      }
+      str.append("</table></td></tr>");
+    }
+  }
+  str.append("</table></td></tr></table>");
+  te->append(str);
+}
+
 void compareDialog::printMixers()
 {
   QString color;
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Mixers"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
-  for(uint8_t i=1; i<NUM_CHNOUT; i++) {
+  for(uint8_t i=1; i<=NUM_CHNOUT; i++) {
     if (ChannelHasMix(g_model1->mixData, i) || ChannelHasMix(g_model2->mixData, i)) {
       str.append("<tr>");
       str.append("<td width=\"45%\">");
