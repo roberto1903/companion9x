@@ -974,6 +974,7 @@ void compareDialog::on_printFileButton_clicked()
     QString filename = QFileDialog::getSaveFileName(this,tr("Select PDF output file"),QString(),"Pdf File(*.pdf)"); 
     printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
     printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOrientation(QPrinter::Landscape);
     printer.setColorMode(QPrinter::Color);
     if(!filename.isEmpty()) { 
         if(QFileInfo(filename).suffix().isEmpty()) 
