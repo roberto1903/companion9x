@@ -89,6 +89,7 @@ void compareDialog::printDiff()
   if (GetEepromInterface()->getCapability(Phases)) {
     printPhases();
   }
+  printMixers();
   printLimits();
   printCurves();
   printSwitches();
@@ -376,6 +377,26 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
   return tstr;
 }
 
+bool compareDialog::ModelHasMix(MixData * mixArray, MixData mix)
+{
+  for (int i=0; i< MAX_MIXERS; i++) {
+    if (memcmp(&mix,&mixArray[i],sizeof(MixData))==0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool compareDialog::ChannelHasMix(MixData * mixArray, uint8_t destCh)
+{
+  for (int i=0; i< MAX_MIXERS; i++) {
+    if (mixArray[i].destCh==destCh) {
+      return true;
+    }
+  }
+  return false;
+}
+
 QString compareDialog::FrSkyAtype(int alarm) {
     switch(alarm) {
         case 1:
@@ -460,7 +481,7 @@ void compareDialog::printSetup()
     str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model1)).arg(color));
     color=getColor1(getTimer1(g_model1),getTimer1(g_model2));
     str.append(fv(tr("Timer1"), getTimer1(g_model1),color));  //value, mode, count up/down
-    color=getColor1(getTimer2(g_model1),getTimer1(g_model2));
+    color=getColor1(getTimer2(g_model1),getTimer2(g_model2));
     str.append(fv(tr("Timer2"), getTimer2(g_model1),color));  //value, mode, count up/down
     color=getColor1(getProtocol(g_model1),getProtocol(g_model2));
     str.append(fv(tr("Protocol"), getProtocol(g_model1), color)); //proto, numch, delay,
@@ -483,7 +504,7 @@ void compareDialog::printSetup()
     str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model2)).arg(color));
     color=getColor2(getTimer1(g_model1),getTimer1(g_model2));
     str.append(fv(tr("Timer1"), getTimer1(g_model2),color));  //value, mode, count up/down
-    color=getColor2(getTimer2(g_model1),getTimer1(g_model2));
+    color=getColor2(getTimer2(g_model1),getTimer2(g_model2));
     str.append(fv(tr("Timer2"), getTimer2(g_model2),color));  //value, mode, count up/down
     color=getColor2(getProtocol(g_model1),getProtocol(g_model2));
     str.append(fv(tr("Protocol"), getProtocol(g_model2), color)); //proto, numch, delay,
@@ -614,6 +635,123 @@ void compareDialog::printLimits()
     color=getColor2(g_model1->limitData[i].revert,g_model2->limitData[i].revert);
     str.append(doTR(QString(g_model2->limitData[i].revert ? tr("INV") : tr("NOR")),color));
     str.append("</tr>");
+  }
+  str.append("</table></td></tr></table>");
+  te->append(str);
+}
+
+void compareDialog::printMixers()
+{
+  QString color;
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
+  str.append(tr("Mixers"));
+  str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
+  for(uint8_t i=1; i<NUM_CHNOUT; i++) {
+    if (ChannelHasMix(g_model1->mixData, i) || ChannelHasMix(g_model2->mixData, i)) {
+      str.append("<tr>");
+      str.append("<td width=\"45%\">");
+      str.append("<table border=0 cellspacing=0 cellpadding=0>");
+      for (int j=0; j<MAX_MIXERS; j++) {
+        if (g_model1->mixData[j].destCh==i) {
+          if (ModelHasMix(g_model2->mixData, g_model1->mixData[j])) {
+            color="grey";
+          } else {
+            color="green";
+          }
+          MixData *md = &g_model1->mixData[j];
+          str.append("<tr><td><font  face='Courier New' color=\""+color+"\">");
+          switch(md->mltpx) {
+            case (1):
+              str += "&nbsp;*";
+              break;
+            case (2):
+              str += "&nbsp;R";
+              break;
+            default:
+              str += "&nbsp;&nbsp;";
+              break;
+          };
+          str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
+          str += getSourceStr(md->srcRaw);
+          if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+          if (md->carryTrim) str += " " + tr("noTrim");
+          if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
+                  if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
+          } else {
+                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+          }
+          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(md->differential);
+          if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
+          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
+          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
+          if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
+          if (md->phase!=0) {
+              PhaseData *pd = &g_model1->phaseData[abs(md->phase)-1];
+              if (md->phase<0) 
+              {
+                  str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
+              } else 
+              {
+                  str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
+              }
+          }
+          str.append("</font></td></tr>");
+        }
+      }
+      str.append("</table></td>");
+      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+tr("CH")+QString("%1</b></td>").arg(i,2,10,QChar('0')));
+      str.append("<td width=\"45%\">");
+      str.append("<table border=0 cellspacing=0 cellpadding=0>");
+      for (int j=0; j<MAX_MIXERS; j++) {
+        if (g_model2->mixData[j].destCh==i) {
+          if (ModelHasMix(g_model1->mixData, g_model2->mixData[j])) {
+            color="grey";
+          } else {
+            color="red";
+          }
+          MixData *md = &g_model2->mixData[j];
+          str.append("<tr><td><font  face='Courier New' color=\""+color+"\">");
+          switch(md->mltpx) {
+            case (1):
+              str += "&nbsp;*";
+              break;
+            case (2):
+              str += "&nbsp;R";
+              break;
+            default:
+              str += "&nbsp;&nbsp;";
+              break;
+          };
+          str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
+          str += getSourceStr(md->srcRaw);
+          if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+          if (md->carryTrim) str += " " + tr("noTrim");
+          if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
+                  if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
+          } else {
+                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+          }
+          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(md->differential);
+          if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
+          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
+          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
+          if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
+          if (md->phase!=0) {
+              PhaseData *pd = &g_model1->phaseData[abs(md->phase)-1];
+              if (md->phase<0) 
+              {
+                  str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
+              } else 
+              {
+                  str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
+              }
+          }
+          str.append("</font></td></tr>");
+        }
+      }
+      str.append("</table></td>");
+      str.append("</tr>");
+    }
   }
   str.append("</table></td></tr></table>");
   te->append(str);
