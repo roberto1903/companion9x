@@ -711,7 +711,7 @@ void compareDialog::printExpos()
           if (ModelHasExpo(g_model1->expoData, g_model2->expoData[j])) {
             color="grey";
           } else {
-            color="green";
+            color="red";
           }
           ExpoData *ed=&g_model2->expoData[j];
           if(ed->mode==0)
