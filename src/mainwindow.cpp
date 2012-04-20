@@ -921,6 +921,7 @@ void MainWindow::updateMenus()
     copyAct->setEnabled(hasSelection);
     simulateAct->setEnabled(hasSelection);
     printAct->setEnabled(hasSelection);
+    compareAct->setEnabled(activeMdiChild());
     updateRecentFileActions();
 }
 
@@ -1010,6 +1011,7 @@ void MainWindow::createActions()
 
     compareAct = new QAction(QIcon(":/images/compare.png"), tr("Compare..."), this);
     compareAct->setStatusTip(tr("Compare models"));
+    compareAct->setEnabled(false);
     connect(compareAct, SIGNAL(triggered()), this, SLOT(compare()));
     
     customizeSplashAct = new QAction(QIcon(":/images/customize.png"), tr("Customize your &TX..."), this);
@@ -1226,6 +1228,7 @@ void MainWindow::createToolBars()
     fileToolBar->addAction(simulateAct);
     fileToolBar->addAction(preferencesAct);
     fileToolBar->addAction(printAct);
+    fileToolBar->addAction(compareAct);
 
     editToolBar = addToolBar(tr("Edit"));
     editToolBar->addAction(cutAct);

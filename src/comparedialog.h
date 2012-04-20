@@ -42,6 +42,7 @@ private:
     QString getColor2(QString string1, QString string2);
     QString getColor1(int num1, int num2);
     QString getColor2(int num1, int num2);
+    QString cSwitchString(CustomSwData * customSw);
     QString FrSkyAtype(int alarm);
     QString FrSkyUnits(int units);
     QString FrSkyProtocol(int protocol);
@@ -65,6 +66,11 @@ protected:
     void printDiff();
     void printSetup();
     void printPhases();
+    void printLimits();
+    void printCurves();
+    void printSwitches();
+    void printSafetySwitches();
+    void printFSwitches();
 };
 
 #endif // COMPAREDIALOG_H
