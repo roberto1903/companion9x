@@ -119,12 +119,13 @@ void RegisterEepromInterfaces()
 QList<FirmwareInfo *> firmwares;
 FirmwareInfo * default_firmware = NULL;
 
-#define OPEN9X_BIN_URL "http://open9x.googlecode.com/svn/trunk/binaries/"
+#define OPEN9X_BIN_URL "http://open9x.freehosting.com/binaries/"
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
-const char * OPEN9X_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x.txt";
-const char * OPEN9X_ARM_STAMP = "http://open9x.googlecode.com/svn/trunk/stamp-open9x-arm.txt";
+const char * OPEN9X_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
+const char * OPEN9X_V4_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-v4.txt";
+const char * OPEN9X_ARM_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-arm.txt";
 
 class Open9xFirmware: public FirmwareInfo
 {
