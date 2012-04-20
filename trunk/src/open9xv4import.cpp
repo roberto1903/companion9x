@@ -2,7 +2,7 @@
 #define SIMU_EXCEPTIONS
 #define PCBV3
 #define PCBV4
-#define NAVIGATION_RE1
+#define ROTARY_ENCODERS
 #define HELI
 #define TEMPLATES
 #define SPLASH
