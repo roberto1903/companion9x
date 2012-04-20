@@ -43,6 +43,8 @@ private:
     QString getColor1(int num1, int num2);
     QString getColor2(int num1, int num2);
     QString cSwitchString(CustomSwData * customSw);
+    bool ModelHasExpo(ExpoData * ExpoArray, ExpoData expo);
+    bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);
     bool ModelHasMix(MixData * mixArray, MixData mix);
     bool ChannelHasMix(MixData * mixArray, uint8_t destCh);
     QString FrSkyAtype(int alarm);
@@ -69,6 +71,7 @@ protected:
     void printSetup();
     void printPhases();
     void printLimits();
+    void printExpos();
     void printMixers();
     void printCurves();
     void printSwitches();
