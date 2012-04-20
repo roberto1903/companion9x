@@ -117,6 +117,7 @@ void avrOutputDialog::killTimerElapsed()
 avrOutputDialog::~avrOutputDialog()
 {
     delete ui;
+    delete kill_timer;
 }
 
 void avrOutputDialog::runAgain(QString prog, QStringList arg, int closeBehaviour)
@@ -145,19 +146,18 @@ void avrOutputDialog::addText(const QString &text)
 
 void avrOutputDialog::doAddTextStdOut()
 {
-#if !__GNUC__
-  if (kill_timer) {
-    delete kill_timer;
-    kill_timer = NULL;
-  }
-#endif
-
     QByteArray data = process->readAllStandardOutput();
     QString text = QString(data);
 
     addText(text);
 
     if (text.contains("Complete ")) {
+#if !__GNUC__
+      if (kill_timer) {
+        delete kill_timer;
+        kill_timer = NULL;
+      }
+#endif
       int start = text.indexOf("Complete ");
       int end = text.indexOf("%");
       if (start > 0) {
