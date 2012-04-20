@@ -621,7 +621,7 @@ void compareDialog::printPhases()
 void compareDialog::printLimits()
 {
   QString color;
-  QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\">";
   str.append("<tr><td colspan=2><h2>"+tr("Limits")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
   str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
