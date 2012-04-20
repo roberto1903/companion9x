@@ -679,7 +679,7 @@ void compareDialog::printExpos()
           ExpoData *ed=&g_model1->expoData[j];
           if(ed->mode==0)
             continue;
-          str.append("<tr><td><font size=+1 face='Courier New' color=\""+color+"\">");
+          str.append("<tr><td><font face='Courier New' color=\""+color+"\">");
           switch(ed->mode) {
             case (1): 
               str += "&lt;-&nbsp;";
@@ -716,7 +716,7 @@ void compareDialog::printExpos()
           ExpoData *ed=&g_model2->expoData[j];
           if(ed->mode==0)
             continue;
-          str.append("<tr><td><font size=+1 face='Courier New' color=\""+color+"\">");
+          str.append("<tr><td><font face='Courier New' color=\""+color+"\">");
           switch(ed->mode) {
             case (1): 
               str += "&lt;-&nbsp;";
