@@ -173,6 +173,10 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 205:
       // mixer changes (differential, negative curves)...
       break;
+    case 206:
+    case 207:
+      // TODO the comment
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
