@@ -208,6 +208,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     else if (board == BOARD_GRUVIN9X && version == 206) {
       loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
+    else if (board == BOARD_GRUVIN9X && version == 207) {
+      loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
     else {
       std::cout << "ko\n";
       return false;
