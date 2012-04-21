@@ -2087,7 +2087,7 @@ void ModelEdit::on_rssiAlarm2CB_currentIndexChanged(int index) {
 
 void ModelEdit::on_rssiAlarm1SB_editingFinished() {
   if (telemetryLock) return;
-  g_model.frsky.rssiAlarms[0].value=(ui->rssiAlarm1SB->value()-50);
+  g_model.frsky.rssiAlarms[0].value=(ui->rssiAlarm1SB->value());
   updateSettings();  
 }
 
