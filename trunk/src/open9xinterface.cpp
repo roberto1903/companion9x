@@ -173,7 +173,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 205:
       // mixer changes (differential, negative curves)...
       break;
-    case 206:
+    // case 206:
     case 207:
       // TODO the comment
       break;
@@ -205,11 +205,8 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     else if (version == 205) {
       loadModel<Open9xModelData_v205>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
-    else if (board == BOARD_GRUVIN9X && version == 206) {
-      loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
     else if (board == BOARD_GRUVIN9X && version == 207) {
-      loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
