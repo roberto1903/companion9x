@@ -79,6 +79,7 @@ void compareDialog::printDiff()
   printSwitches();
   printSafetySwitches();
   printFSwitches();
+  printFrSky();
   te->scrollToAnchor("1");
 }
 
@@ -486,6 +487,72 @@ QString compareDialog::FrSkyMeasure(int units)
       break;
   }
  }
+
+QString  compareDialog::getFrSkySrc(int index) {
+  return QString(TELEMETRY_SRC).mid((abs(index))*4, 4);
+}
+
+float compareDialog::getBarValue(int barId, int Value, FrSkyData *fd) 
+{
+  switch (barId) {
+    case 1:
+    case 2:
+      return (15*Value);
+      break;
+    case 3:
+      if (fd->channels[0].type==0) {
+        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset)/10;
+      }
+      else {
+        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset);
+      }
+      break;
+    case 4:
+      if (fd->channels[1].type==0) {
+        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset)/10;
+      }
+      else {
+        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset);
+      }
+       
+      // return ((ui->a2RatioSB->value()*Value/51.0)+ui->a2CalibSB->value());
+      break;
+    case 5:
+    case 6:
+      if (Value>20) {
+        return 100;
+      } else {
+        return (5*Value);
+      }
+      break;
+    case 7:
+      return (20*Value);
+      break;
+    case 8:
+      if (Value>50) {
+        return 12500;
+      } else {
+        return (250*Value);
+      }
+      break;
+    case 10:
+    case 11:
+      return ((5*Value)-30);
+      break;
+    case 12:
+      return (10*Value);
+      break;
+    case 13:
+      return (40*Value);
+      break;
+    case 14:
+      return (Value/10.0);
+      break;
+    default:
+      return ((100*Value)/51);
+      break;
+  }
+}
 
 void compareDialog::printSetup()
 {
@@ -1020,7 +1087,7 @@ void compareDialog::printSafetySwitches()
   QString color1;
   QString color2;
   int sc=0;
-  QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+  QString str = "<table border=1 cellspacing=0 cellpadding=3  style=\"page-break-before:always;\" width=\"100%\">";
   str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr>");
   str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
@@ -1061,6 +1128,200 @@ void compareDialog::printSafetySwitches()
   str.append("<br>");
   if (sc!=0)
       te->append(str);
+}
+
+void compareDialog::printFrSky()
+{
+  QString color;
+  float value1,value2;
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+  str.append("<tr><td colspan=2><h2>"+tr("Telemetry Settings")+"</h2></td></tr>");
+  str.append("<tr><td width=\"50%\">");
+  str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+  FrSkyData *fd1=&g_model1->frsky;
+  FrSkyData *fd2=&g_model2->frsky;
+  str.append("<tr><td align=\"center\" width=\"22%\"><b>"+tr("Analog")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Unit")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Scale")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Offset")+"</b></td></tr>");
+  for (int i=0; i<2; i++) {
+    str.append("<tr>");
+    float ratio=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
+    color=getColor1(fd1->channels[i].type,fd2->channels[i].type);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyUnits(fd1->channels[i].type)+"</font></td>");
+    color=getColor1(fd1->channels[i].ratio,fd2->channels[i].ratio);
+    str.append("<td align=\"center\"><font color="+color+">"+QString::number(ratio,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td>");
+    color=getColor1(fd1->channels[i].offset*fd1->channels[i].ratio,fd2->channels[i].offset*fd2->channels[i].ratio);
+    str.append("<td align=\"center\"><font color="+color+">"+QString::number((fd1->channels[i].offset*ratio)/255,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td>");
+    str.append("</tr>");
+  }
+  str.append("</table><br>");
+  str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+  str.append("<tr><td></td><td colspan=\"3\" align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=\"3\" align=\"center\"><b>"+tr("Alarm 2")+"</b></td>");
+  str.append("<tr><td width=\"22%\"></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Type")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Condition")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Type")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Condition")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+  for (int i=0; i<2; i++) {
+    float ratio1=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    float ratio2=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    str.append("<tr>");
+    str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
+    color=getColor1(fd1->channels[i].alarms[0].level,fd2->channels[i].alarms[0].level);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->channels[i].alarms[0].level)+"</font></td>");
+    color=getColor1(fd1->channels[i].alarms[0].greater,fd2->channels[i].alarms[0].greater);
+    str.append("<td align=\"center\"><font color="+color+">");
+    str.append((fd1->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
+    value1=ratio1*(fd1->channels[i].alarms[0].value/255.0+fd1->channels[i].offset/255.0);
+    value2=ratio2*(fd2->channels[i].alarms[0].value/255.0+fd2->channels[i].offset/255.0);
+    color=getColor1(value1,value2);
+    str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value1,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td>");
+    color=getColor1(fd1->channels[i].alarms[1].level,fd2->channels[i].alarms[1].level);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->channels[i].alarms[1].level)+"</font></td>");
+    color=getColor1(fd1->channels[i].alarms[1].greater,fd2->channels[i].alarms[1].greater);
+    str.append("<td align=\"center\"><font color="+color+">");
+    str.append((fd1->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
+    value1=ratio1*(fd1->channels[i].alarms[1].value/255.0+fd1->channels[i].offset/255.0);
+    value2=ratio2*(fd2->channels[i].alarms[1].value/255.0+fd2->channels[i].offset/255.0);
+    color=getColor1(value1,value2);
+    str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value1,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td></tr>");
+  }
+  str.append("<tr><td align=\"center\"><b>"+tr("RSSI Alarm")+"</b></td>");
+  color=getColor1(fd1->rssiAlarms[0].level,fd2->rssiAlarms[0].level);
+  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->rssiAlarms[0].level)+"</td>");
+  str.append("<td align=\"center\">&lt;</td>");
+  color=getColor1(fd1->rssiAlarms[0].value,fd2->rssiAlarms[0].value);
+  str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd1->rssiAlarms[0].value,10)+"</td>");
+  color=getColor1(fd1->rssiAlarms[1].level,fd2->rssiAlarms[1].level);
+  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->rssiAlarms[1].level)+"</td>");
+  str.append("<td align=\"center\">&lt;</td>");
+  color=getColor1(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
+  str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd1->rssiAlarms[1].value,10)+"</td>");
+  str.append("</table>");
+  if (GetEepromInterface()->getCapability(TelemetryBars)) {
+    str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
+    str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+    for (int i=0; i<4; i++) {
+      str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
+      color=getColor1(fd1->bars[i].source,fd2->bars[i].source);
+      str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd1->bars[i].source)+"</font></td>");
+      value1=getBarValue(fd1->bars[i].source,fd1->bars[i].barMin,fd1);
+      value2=getBarValue(fd2->bars[i].source,fd2->bars[i].barMin,fd2);
+      color=getColor1(value1,value2);
+      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td>");
+      value1=getBarValue(fd1->bars[i].source,fd1->bars[i].barMax,fd1);
+      value2=getBarValue(fd2->bars[i].source,fd2->bars[i].barMax,fd2);
+      color=getColor1(value1,value2);
+      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td></tr>");
+    }
+    str.append("</table>");
+  }
+  if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+    for (int i=0; i<4; i++) {
+      color=getColor1(fd1->csField[i*2],fd2->csField[i*2]);
+      str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->csField[i*2])+"</font></td>");
+      str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
+      color=getColor1(fd1->csField[i*2+1],fd2->csField[i*2+1]);
+      str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->csField[i*2+1])+"</font></td></tr>");
+    }
+    str.append("</table>");
+  }
+
+  
+  str.append("</td><td width=\"50%\">");
+  str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+  str.append("<tr><td align=\"center\" width=\"22%\"><b>"+tr("Analog")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Unit")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Scale")+"</b></td><td align=\"center\" width=\"26%\"><b>"+tr("Offset")+"</b></td></tr>");
+  for (int i=0; i<2; i++) {
+    str.append("<tr>");
+    float ratio=(fd2->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
+    color=getColor2(fd1->channels[i].type,fd2->channels[i].type);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyUnits(fd2->channels[i].type)+"</font></td>");
+    color=getColor2(fd1->channels[i].ratio,fd2->channels[i].ratio);
+    str.append("<td align=\"center\"><font color="+color+">"+QString::number(ratio,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td>");
+    color=getColor2(fd1->channels[i].offset*fd1->channels[i].ratio,fd2->channels[i].offset*fd2->channels[i].ratio);
+    str.append("<td align=\"center\"><font color="+color+">"+QString::number((fd2->channels[i].offset*ratio)/255,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td>");
+    str.append("</tr>");
+  }
+  str.append("</table><br>");
+  str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+  str.append("<tr><td></td><td colspan=\"3\" align=\"center\"><b>"+tr("Alarm 1")+"</b></td><td colspan=\"3\" align=\"center\"><b>"+tr("Alarm 2")+"</b></td>");
+  str.append("<tr><td width=\"22%\"></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Type")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Condition")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Value")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Type")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Condition")+"</b></td>");
+  str.append("<td width=\"13%\" align=\"center\"><b>"+tr("Value")+"</b></td></tr>");
+  for (int i=0; i<2; i++) {
+    float ratio1=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    float ratio2=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
+    str.append("<tr>");
+    str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
+    color=getColor2(fd1->channels[i].alarms[0].level,fd2->channels[i].alarms[0].level);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->channels[i].alarms[0].level)+"</font></td>");
+    color=getColor2(fd1->channels[i].alarms[0].greater,fd2->channels[i].alarms[0].greater);
+    str.append("<td align=\"center\"><font color="+color+">");
+    str.append((fd2->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
+    value1=ratio1*(fd1->channels[i].alarms[0].value/255.0+fd1->channels[i].offset/255.0);
+    value2=ratio2*(fd2->channels[i].alarms[0].value/255.0+fd2->channels[i].offset/255.0);
+    color=getColor2(value1,value2);
+    str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value2,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td>");
+    color=getColor2(fd1->channels[i].alarms[1].level,fd2->channels[i].alarms[1].level);
+    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->channels[i].alarms[1].level)+"</font></td>");
+    color=getColor2(fd1->channels[i].alarms[1].greater,fd2->channels[i].alarms[1].greater);
+    str.append("<td align=\"center\"><font color="+color+">");
+    str.append((fd2->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
+    value1=ratio1*(fd1->channels[i].alarms[1].value/255.0+fd1->channels[i].offset/255.0);
+    value2=ratio2*(fd2->channels[i].alarms[1].value/255.0+fd2->channels[i].offset/255.0);
+    color=getColor2(value1,value2);
+    str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value2,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td></tr>");
+  }
+  str.append("<tr><td align=\"Center\"><b>"+tr("RSSI Alarm")+"</b></td>");
+  color=getColor2(fd1->rssiAlarms[0].level,fd2->rssiAlarms[0].level);
+  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->rssiAlarms[0].level)+"</td>");
+  str.append("<td align=\"center\">&lt;</td>");
+  color=getColor2(fd1->rssiAlarms[0].value,fd2->rssiAlarms[0].value);
+  str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[0].value,10)+"</td>");
+  color=getColor2(fd1->rssiAlarms[1].level,fd2->rssiAlarms[1].level);
+  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->rssiAlarms[1].level)+"</td>");
+  str.append("<td align=\"center\">&lt;</td>");
+  color=getColor2(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
+  str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[1].value,10)+"</td>");
+  str.append("</table><br>");
+  if (GetEepromInterface()->getCapability(TelemetryBars)) {
+    str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
+    str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+    for (int i=0; i<4; i++) {
+      str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
+      color=getColor2(fd1->bars[i].source,fd2->bars[i].source);
+      str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd2->bars[i].source)+"</font></td>");
+      value1=getBarValue(fd1->bars[i].source,fd1->bars[i].barMin,fd1);
+      value2=getBarValue(fd2->bars[i].source,fd2->bars[i].barMin,fd2);
+      color=getColor2(value1,value2);
+      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td>");
+      value1=getBarValue(fd1->bars[i].source,fd1->bars[i].barMax,fd1);
+      value2=getBarValue(fd2->bars[i].source,fd2->bars[i].barMax,fd2);
+      color=getColor2(value1,value2);
+      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td></tr>");
+    }
+    str.append("</table>");
+  }
+  if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+    for (int i=0; i<4; i++) {
+      color=getColor2(fd1->csField[i*2],fd2->csField[i*2]);
+      str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->csField[i*2])+"</font></td>");
+      str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
+      color=getColor2(fd1->csField[i*2+1],fd2->csField[i*2+1]);
+      str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->csField[i*2+1])+"</font></td></tr>");
+    }
+    str.append("</table>");
+  }
+  str.append("</td></tr></table>");
+  te->append(str);
 }
 
 void compareDialog::on_printButton_clicked()

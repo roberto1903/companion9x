@@ -52,6 +52,8 @@ private:
     QString FrSkyProtocol(int protocol);
     QString FrSkyMeasure(int units);
     QString FrSkyBlades(int blades);
+    QString getFrSkySrc(int index);
+    float getBarValue(int barId, int Value, FrSkyData *fd);
     
     QTextEdit * te;
     QString curvefile5;
@@ -77,6 +79,7 @@ protected:
     void printSwitches();
     void printSafetySwitches();
     void printFSwitches();
+    void printFrSky();
 };
 
 #endif // COMPAREDIALOG_H
