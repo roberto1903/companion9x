@@ -136,8 +136,13 @@ void FlashInterface::SeekSvn(void)
 
 void FlashInterface::SeekDate(void) 
 {
-  int i, start = -1, end = -1;
-  start = flash.indexOf(QString(DATE_MARK));
+  int i, start = -1, end = -1, startsvn=0;
+  startsvn = flash.indexOf(QString(SVN_MARK));
+  if (startsvn>0) {
+    start = flash.indexOf(QString(DATE_MARK),startsvn);
+  } else {
+    start = flash.indexOf(QString(DATE_MARK));
+  }
   if (start > 0) {
     start += QString(DATE_MARK).length();
     for (i = start; i < (start + 20); i++) {
@@ -157,8 +162,13 @@ void FlashInterface::SeekDate(void)
 
 void FlashInterface::SeekTime(void)
 {
-  int i, start = -1, end = -1;
-  start = flash.indexOf(QString(TIME_MARK));
+  int i, start = -1, end = -1, startsvn=0;
+  startsvn = flash.indexOf(QString(SVN_MARK));
+  if (startsvn>0) {
+    start = flash.indexOf(QString(TIME_MARK),startsvn);
+  } else {
+    start = flash.indexOf(QString(TIME_MARK));
+  }
   if (start > 0) {
     start += QString(TIME_MARK).length();
     for (i = start; i < (start + 20); i++) {
