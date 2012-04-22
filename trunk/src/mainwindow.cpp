@@ -170,7 +170,6 @@ void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
         }
     }
     
-#if defined __APPLE__ || defined WIN32 || !defined __GNUC__
     if (checkCompanion9x || ignoreSettings)
     {
         manager2 = new QNetworkAccessManager(this);
@@ -180,7 +179,6 @@ void MainWindow::checkForUpdates(bool ignoreSettings, FirmwareInfo * fw)
         manager2->get(request);
         check2done = false;
     }
-#endif
 
     if(downloadDialog_forWait!=0)
         downloadDialog_forWait = 0;
@@ -208,9 +206,11 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
             return;
         }
-
-        if (version != C9X_VERSION) {
-            showcheckForUpdatesResult = false; // update is available - do not show dialog
+        double vnum=version.toDouble();
+        double c9xver=(QString(C9X_VERSION).toDouble());
+        if (c9xver< vnum) {
+#if defined __APPLE__ || defined WIN32 || !defined __GNUC__
+          showcheckForUpdatesResult = false; // update is available - do not show dialog
             int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (version %1)<br>"
                                                                 "Would you like to download it?").arg(version) ,
                                             QMessageBox::Yes | QMessageBox::No);
@@ -231,7 +231,10 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
                   dd->show();
                 }
             }
-        }
+#else
+            QMessageBox::warning(this, tr("New release available"), tr("A new relase of companion is available prese check the repository"));
+#endif            
+        }   
         else  {
             if (showcheckForUpdatesResult && check1done && check2done)
                 QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
