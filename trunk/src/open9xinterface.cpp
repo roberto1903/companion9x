@@ -404,3 +404,7 @@ SimulatorInterface * Open9xInterface::getSimulator()
       return NULL;
   }
 }
+
+const char * OPEN9X_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
+const char * OPEN9X_V4_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-v4.txt";
+const char * OPEN9X_ARM_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-arm.txt";

@@ -832,6 +832,41 @@ class FirmwareInfo {
     QList<FirmwareInfo *> options;
 };
 
+class Open9xFirmware: public FirmwareInfo
+{
+  public:
+    Open9xFirmware(const char * id, const QString & name, EEPROMInterface * eepromInterface):
+      FirmwareInfo(id, name, eepromInterface)
+    {
+    }
+
+    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, const char * url, const char * stamp):
+      FirmwareInfo(id, eepromInterface, url, stamp)
+    {
+    }
+
+    virtual unsigned int getEepromVersion(unsigned int revision) {
+      if (this->eepromInterface->getBoard() == BOARD_GRUVIN9X) {
+        if (revision == 0 || revision >= 547)
+          return 207;
+        else if (revision >= 469)
+          return 206;
+      }
+      else {
+        if (revision == 0/* || revision >= */)
+          return 205;
+      }
+      if (revision >= 321)
+        return 205;
+      else if (revision >= 217)
+        return 204;
+      else if (revision >= 184)
+        return 203;
+      else
+        return 202;
+    }
+};
+
 FirmwareInfo * GetFirmware(QString id);
 FirmwareInfo * GetCurrentFirmware();
 EEPROMInterface * GetEepromInterface();
