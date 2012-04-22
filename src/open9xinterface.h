@@ -69,4 +69,14 @@ class Open9xInterface : public EEPROMInterface
 
 };
 
+#define OPEN9X_BIN_URL "http://open9x.freehosting.com/binaries/"
+
+extern const char * OPEN9X_STAMP;
+extern const char * OPEN9X_V4_STAMP;
+extern const char * OPEN9X_ARM_STAMP;
+
+void include_open9x_stock_binaries(FirmwareInfo * open9x);
+void include_open9x_v4_binaries(FirmwareInfo * open9x);
+void include_open9x_arm_binaries(FirmwareInfo * open9x);
+
 #endif

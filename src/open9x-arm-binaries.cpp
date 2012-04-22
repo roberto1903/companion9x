@@ -1,3 +1,5 @@
+#include "open9xinterface.h"
+void include_open9x_arm_binaries(FirmwareInfo * open9x) {
 open9x->add_option(new Open9xFirmware("open9x-arm-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-en.bin", OPEN9X_ARM_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-arm-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-fr.bin", OPEN9X_ARM_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-arm-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-se.bin", OPEN9X_ARM_STAMP));
@@ -22,3 +24,4 @@ open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-se", new Open9x
 open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-imperial-en", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-imperial-en.bin", OPEN9X_ARM_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-imperial-fr", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-imperial-fr.bin", OPEN9X_ARM_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-arm-heli-templates-imperial-se", new Open9xInterface(BOARD_ERSKY9X), OPEN9X_BIN_URL "open9x-arm-heli-templates-imperial-se.bin", OPEN9X_ARM_STAMP));
+}

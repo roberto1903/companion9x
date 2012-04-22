@@ -1,3 +1,6 @@
+#include "open9xinterface.h"
+
+void include_open9x_stock_binaries(FirmwareInfo * open9x) {
 open9x->add_option(new Open9xFirmware("open9x-stock-en", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-en.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-stock-imperial-en", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-imperial-en.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-stock-ppmca-en", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-ppmca-en.hex", OPEN9X_STAMP));
@@ -3829,3 +3832,4 @@ open9x->add_option(new Open9xFirmware("open9x-stock-nmea-heli-templates-audio-ha
 open9x->add_option(new Open9xFirmware("open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-imperial-se", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-imperial-se.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-ppmca-se", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-ppmca-se.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-ppmca-imperial-se", new Open9xInterface(BOARD_STOCK), OPEN9X_BIN_URL "open9x-stock-nmea-heli-templates-audio-haptic-DSM2-potscroll-ppmca-imperial-se.hex", OPEN9X_STAMP));
+}

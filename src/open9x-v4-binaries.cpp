@@ -1,3 +1,5 @@
+#include "open9xinterface.h"
+void include_open9x_v4_binaries(FirmwareInfo * open9x) {
 open9x->add_option(new Open9xFirmware("open9x-v4-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-en.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-v4-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-imperial-en.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-en.hex", OPEN9X_STAMP));
@@ -190,3 +192,4 @@ open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-se",
 open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-imperial-se.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-se.hex", OPEN9X_STAMP));
 open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
+}
