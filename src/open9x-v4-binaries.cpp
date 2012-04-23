@@ -1,195 +1,195 @@
-#include "open9xinterface.h"
-void include_open9x_v4_binaries(FirmwareInfo * open9x) {
-open9x->add_option(new Open9xFirmware("open9x-v4-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-en", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-en.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-fr", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-fr.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-sdcard-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-sdcard-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-templates-sdcard-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-templates-sdcard-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-sdcard-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-sdcard-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-ppmca-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-imperial-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-se.hex", OPEN9X_STAMP));
-open9x->add_option(new Open9xFirmware("open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-se", new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_BIN_URL "open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-se.hex", OPEN9X_STAMP));
-}
+const char *open9x_v4_binaries[] = {
+"open9x-v4-en",
+"open9x-v4-imperial-en",
+"open9x-v4-ppmca-en",
+"open9x-v4-ppmca-imperial-en",
+"open9x-v4-SOMO-en",
+"open9x-v4-SOMO-imperial-en",
+"open9x-v4-SOMO-ppmca-en",
+"open9x-v4-SOMO-ppmca-imperial-en",
+"open9x-v4-sdcard-en",
+"open9x-v4-sdcard-imperial-en",
+"open9x-v4-sdcard-ppmca-en",
+"open9x-v4-sdcard-ppmca-imperial-en",
+"open9x-v4-sdcard-SOMO-en",
+"open9x-v4-sdcard-SOMO-imperial-en",
+"open9x-v4-sdcard-SOMO-ppmca-en",
+"open9x-v4-sdcard-SOMO-ppmca-imperial-en",
+"open9x-v4-templates-en",
+"open9x-v4-templates-imperial-en",
+"open9x-v4-templates-ppmca-en",
+"open9x-v4-templates-ppmca-imperial-en",
+"open9x-v4-templates-SOMO-en",
+"open9x-v4-templates-SOMO-imperial-en",
+"open9x-v4-templates-SOMO-ppmca-en",
+"open9x-v4-templates-SOMO-ppmca-imperial-en",
+"open9x-v4-templates-sdcard-en",
+"open9x-v4-templates-sdcard-imperial-en",
+"open9x-v4-templates-sdcard-ppmca-en",
+"open9x-v4-templates-sdcard-ppmca-imperial-en",
+"open9x-v4-templates-sdcard-SOMO-en",
+"open9x-v4-templates-sdcard-SOMO-imperial-en",
+"open9x-v4-templates-sdcard-SOMO-ppmca-en",
+"open9x-v4-templates-sdcard-SOMO-ppmca-imperial-en",
+"open9x-v4-heli-en",
+"open9x-v4-heli-imperial-en",
+"open9x-v4-heli-ppmca-en",
+"open9x-v4-heli-ppmca-imperial-en",
+"open9x-v4-heli-SOMO-en",
+"open9x-v4-heli-SOMO-imperial-en",
+"open9x-v4-heli-SOMO-ppmca-en",
+"open9x-v4-heli-SOMO-ppmca-imperial-en",
+"open9x-v4-heli-sdcard-en",
+"open9x-v4-heli-sdcard-imperial-en",
+"open9x-v4-heli-sdcard-ppmca-en",
+"open9x-v4-heli-sdcard-ppmca-imperial-en",
+"open9x-v4-heli-sdcard-SOMO-en",
+"open9x-v4-heli-sdcard-SOMO-imperial-en",
+"open9x-v4-heli-sdcard-SOMO-ppmca-en",
+"open9x-v4-heli-sdcard-SOMO-ppmca-imperial-en",
+"open9x-v4-heli-templates-en",
+"open9x-v4-heli-templates-imperial-en",
+"open9x-v4-heli-templates-ppmca-en",
+"open9x-v4-heli-templates-ppmca-imperial-en",
+"open9x-v4-heli-templates-SOMO-en",
+"open9x-v4-heli-templates-SOMO-imperial-en",
+"open9x-v4-heli-templates-SOMO-ppmca-en",
+"open9x-v4-heli-templates-SOMO-ppmca-imperial-en",
+"open9x-v4-heli-templates-sdcard-en",
+"open9x-v4-heli-templates-sdcard-imperial-en",
+"open9x-v4-heli-templates-sdcard-ppmca-en",
+"open9x-v4-heli-templates-sdcard-ppmca-imperial-en",
+"open9x-v4-heli-templates-sdcard-SOMO-en",
+"open9x-v4-heli-templates-sdcard-SOMO-imperial-en",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-en",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-en",
+"open9x-v4-fr",
+"open9x-v4-imperial-fr",
+"open9x-v4-ppmca-fr",
+"open9x-v4-ppmca-imperial-fr",
+"open9x-v4-SOMO-fr",
+"open9x-v4-SOMO-imperial-fr",
+"open9x-v4-SOMO-ppmca-fr",
+"open9x-v4-SOMO-ppmca-imperial-fr",
+"open9x-v4-sdcard-fr",
+"open9x-v4-sdcard-imperial-fr",
+"open9x-v4-sdcard-ppmca-fr",
+"open9x-v4-sdcard-ppmca-imperial-fr",
+"open9x-v4-sdcard-SOMO-fr",
+"open9x-v4-sdcard-SOMO-imperial-fr",
+"open9x-v4-sdcard-SOMO-ppmca-fr",
+"open9x-v4-sdcard-SOMO-ppmca-imperial-fr",
+"open9x-v4-templates-fr",
+"open9x-v4-templates-imperial-fr",
+"open9x-v4-templates-ppmca-fr",
+"open9x-v4-templates-ppmca-imperial-fr",
+"open9x-v4-templates-SOMO-fr",
+"open9x-v4-templates-SOMO-imperial-fr",
+"open9x-v4-templates-SOMO-ppmca-fr",
+"open9x-v4-templates-SOMO-ppmca-imperial-fr",
+"open9x-v4-templates-sdcard-fr",
+"open9x-v4-templates-sdcard-imperial-fr",
+"open9x-v4-templates-sdcard-ppmca-fr",
+"open9x-v4-templates-sdcard-ppmca-imperial-fr",
+"open9x-v4-templates-sdcard-SOMO-fr",
+"open9x-v4-templates-sdcard-SOMO-imperial-fr",
+"open9x-v4-templates-sdcard-SOMO-ppmca-fr",
+"open9x-v4-templates-sdcard-SOMO-ppmca-imperial-fr",
+"open9x-v4-heli-fr",
+"open9x-v4-heli-imperial-fr",
+"open9x-v4-heli-ppmca-fr",
+"open9x-v4-heli-ppmca-imperial-fr",
+"open9x-v4-heli-SOMO-fr",
+"open9x-v4-heli-SOMO-imperial-fr",
+"open9x-v4-heli-SOMO-ppmca-fr",
+"open9x-v4-heli-SOMO-ppmca-imperial-fr",
+"open9x-v4-heli-sdcard-fr",
+"open9x-v4-heli-sdcard-imperial-fr",
+"open9x-v4-heli-sdcard-ppmca-fr",
+"open9x-v4-heli-sdcard-ppmca-imperial-fr",
+"open9x-v4-heli-sdcard-SOMO-fr",
+"open9x-v4-heli-sdcard-SOMO-imperial-fr",
+"open9x-v4-heli-sdcard-SOMO-ppmca-fr",
+"open9x-v4-heli-sdcard-SOMO-ppmca-imperial-fr",
+"open9x-v4-heli-templates-fr",
+"open9x-v4-heli-templates-imperial-fr",
+"open9x-v4-heli-templates-ppmca-fr",
+"open9x-v4-heli-templates-ppmca-imperial-fr",
+"open9x-v4-heli-templates-SOMO-fr",
+"open9x-v4-heli-templates-SOMO-imperial-fr",
+"open9x-v4-heli-templates-SOMO-ppmca-fr",
+"open9x-v4-heli-templates-SOMO-ppmca-imperial-fr",
+"open9x-v4-heli-templates-sdcard-fr",
+"open9x-v4-heli-templates-sdcard-imperial-fr",
+"open9x-v4-heli-templates-sdcard-ppmca-fr",
+"open9x-v4-heli-templates-sdcard-ppmca-imperial-fr",
+"open9x-v4-heli-templates-sdcard-SOMO-fr",
+"open9x-v4-heli-templates-sdcard-SOMO-imperial-fr",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-fr",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-fr",
+"open9x-v4-se",
+"open9x-v4-imperial-se",
+"open9x-v4-ppmca-se",
+"open9x-v4-ppmca-imperial-se",
+"open9x-v4-SOMO-se",
+"open9x-v4-SOMO-imperial-se",
+"open9x-v4-SOMO-ppmca-se",
+"open9x-v4-SOMO-ppmca-imperial-se",
+"open9x-v4-sdcard-se",
+"open9x-v4-sdcard-imperial-se",
+"open9x-v4-sdcard-ppmca-se",
+"open9x-v4-sdcard-ppmca-imperial-se",
+"open9x-v4-sdcard-SOMO-se",
+"open9x-v4-sdcard-SOMO-imperial-se",
+"open9x-v4-sdcard-SOMO-ppmca-se",
+"open9x-v4-sdcard-SOMO-ppmca-imperial-se",
+"open9x-v4-templates-se",
+"open9x-v4-templates-imperial-se",
+"open9x-v4-templates-ppmca-se",
+"open9x-v4-templates-ppmca-imperial-se",
+"open9x-v4-templates-SOMO-se",
+"open9x-v4-templates-SOMO-imperial-se",
+"open9x-v4-templates-SOMO-ppmca-se",
+"open9x-v4-templates-SOMO-ppmca-imperial-se",
+"open9x-v4-templates-sdcard-se",
+"open9x-v4-templates-sdcard-imperial-se",
+"open9x-v4-templates-sdcard-ppmca-se",
+"open9x-v4-templates-sdcard-ppmca-imperial-se",
+"open9x-v4-templates-sdcard-SOMO-se",
+"open9x-v4-templates-sdcard-SOMO-imperial-se",
+"open9x-v4-templates-sdcard-SOMO-ppmca-se",
+"open9x-v4-templates-sdcard-SOMO-ppmca-imperial-se",
+"open9x-v4-heli-se",
+"open9x-v4-heli-imperial-se",
+"open9x-v4-heli-ppmca-se",
+"open9x-v4-heli-ppmca-imperial-se",
+"open9x-v4-heli-SOMO-se",
+"open9x-v4-heli-SOMO-imperial-se",
+"open9x-v4-heli-SOMO-ppmca-se",
+"open9x-v4-heli-SOMO-ppmca-imperial-se",
+"open9x-v4-heli-sdcard-se",
+"open9x-v4-heli-sdcard-imperial-se",
+"open9x-v4-heli-sdcard-ppmca-se",
+"open9x-v4-heli-sdcard-ppmca-imperial-se",
+"open9x-v4-heli-sdcard-SOMO-se",
+"open9x-v4-heli-sdcard-SOMO-imperial-se",
+"open9x-v4-heli-sdcard-SOMO-ppmca-se",
+"open9x-v4-heli-sdcard-SOMO-ppmca-imperial-se",
+"open9x-v4-heli-templates-se",
+"open9x-v4-heli-templates-imperial-se",
+"open9x-v4-heli-templates-ppmca-se",
+"open9x-v4-heli-templates-ppmca-imperial-se",
+"open9x-v4-heli-templates-SOMO-se",
+"open9x-v4-heli-templates-SOMO-imperial-se",
+"open9x-v4-heli-templates-SOMO-ppmca-se",
+"open9x-v4-heli-templates-SOMO-ppmca-imperial-se",
+"open9x-v4-heli-templates-sdcard-se",
+"open9x-v4-heli-templates-sdcard-imperial-se",
+"open9x-v4-heli-templates-sdcard-ppmca-se",
+"open9x-v4-heli-templates-sdcard-ppmca-imperial-se",
+"open9x-v4-heli-templates-sdcard-SOMO-se",
+"open9x-v4-heli-templates-sdcard-SOMO-imperial-se",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-se",
+"open9x-v4-heli-templates-sdcard-SOMO-ppmca-imperial-se",
+0
+};

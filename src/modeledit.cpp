@@ -520,7 +520,7 @@ void ModelEdit::tabExpos()
         while(curDest<md->chn-1)
         {
             curDest++;
-            str = getSourceStr(curDest+1).toAscii();
+            str = getStickStr(curDest);
             qba.clear();
             qba.append((quint8)-curDest-1);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -530,7 +530,7 @@ void ModelEdit::tabExpos()
 
         if(curDest!=md->chn)
         {
-            str = getSourceStr(md->chn+1).toAscii();
+            str = getStickStr(md->chn);
             curDest = md->chn;
         }
         else {
@@ -561,7 +561,7 @@ void ModelEdit::tabExpos()
     while(curDest<NUM_STICKS-1)
     {
         curDest++;
-        QString str = getSourceStr(curDest+1);
+        QString str = getStickStr(curDest);
         qba.clear();
         qba.append((quint8)-curDest-1);
         QListWidgetItem *itm = new QListWidgetItem(str);
@@ -614,7 +614,7 @@ void ModelEdit::tabMixes()
         };
 
         str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
-        str += getSourceStr(md->srcRaw);
+        str += md->srcRaw.toString();
         if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
         if(md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
         if(md->carryTrim) str += " " + tr("noTrim");
@@ -3264,7 +3264,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   uint8_t j = 0;
 
-
+#warning TODO
+#if 0
   //Simple 4-Ch
   if(idx==j++) {
     if (md->destCh)
@@ -3379,6 +3380,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     // redraw switches tab
     updateSwitchesTab();
   }
+#endif
 }
 
 void ModelEdit::ControlCurveSignal(bool flag)

@@ -70,9 +70,9 @@ inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
       model.expoData[stick] = tmp;
     }
   }
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
-  for (int i=0; i<NUM_CSW; i++) {
+  for (int i=0; i<ERSKY9X_NUM_CSW; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);

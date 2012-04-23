@@ -205,25 +205,32 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Er9xMixData));
   destCh = c9x.destCh;
 
-  if (c9x.srcRaw < SRC_REA) {
+  if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     swtch = c9x.swtch;
-    srcRaw = c9x.srcRaw;
+    srcRaw = 0;
   }
-  else if (c9x.srcRaw <= SRC_REB) {
+  else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+    swtch = c9x.swtch;
+    srcRaw = c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
     EEPROMWarnings += ::QObject::tr("er9x doesn't have Rotary Encoders") + "\n";
     swtch = c9x.swtch;
-    srcRaw = c9x.srcRaw - 2;
+    srcRaw = c9x.srcRaw.index + 4; // use pots instead
   }
-  else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
+  else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw - SRC_STHR + 1;
+    swtch = c9x.srcRaw.index+1;
   }
   else {
     swtch = c9x.swtch;
+#warning TODO
+#if 0
     if (c9x.srcRaw > SRC_SWC)
       srcRaw = c9x.srcRaw - 2 - 21 /* all switches */;
     else
       srcRaw = c9x.srcRaw - 2;
+#endif
   }
 
   weight = c9x.weight;
@@ -245,13 +252,18 @@ t_Er9xMixData::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
 
+#warning "TODO"
+#if 0
   if (srcRaw == 9/*FULL*/) {
-    if (swtch < 0) {
-      c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
+    if (swtch == 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (swtch < 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
       c9x.weight = -weight;
     }
     else {
-      c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
     }
     c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
   }
@@ -264,6 +276,7 @@ t_Er9xMixData::operator MixData ()
     else
       c9x.srcRaw = RawSource(srcRaw + 2);
   }
+#endif
 
   c9x.curve = curve;
   c9x.delayUp = delayUp;
@@ -290,6 +303,8 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
   v1 = c9x.v1;
   v2 = c9x.v2;
 
+#warning "TODO"
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (c9x.v1 < SRC_REA)
       v1 = c9x.v1;
@@ -311,6 +326,7 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
       v2 = c9x.v2 - 2;
     }
   }
+#endif
 }
 
 Er9xCustomSwData::operator CustomSwData ()
@@ -320,6 +336,8 @@ Er9xCustomSwData::operator CustomSwData ()
   c9x.v1 = v1;
   c9x.v2 = v2;
 
+#warning "TODO"
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (v1 >= SRC_REA)
       c9x.v1 = v1 + 2;
@@ -329,6 +347,7 @@ Er9xCustomSwData::operator CustomSwData ()
     if (v2 >= SRC_REA)
       c9x.v2 = v2 + 2;
   }
+#endif
 
   return c9x;
 }
@@ -458,9 +477,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     swashType = c9x.swashRingData.type;
     swashCollectiveSource = c9x.swashRingData.collectiveSource;
     swashRingValue = c9x.swashRingData.value;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<ER9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<ER9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
 
     // expoData
@@ -536,10 +555,10 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
+    for (int i=0; i<ER9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
 
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<ER9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     
     frsky = c9x.frsky;
@@ -597,7 +616,9 @@ t_Er9xModelData::operator ModelData ()
   c9x.swashRingData.type = swashType;
   c9x.swashRingData.collectiveSource = swashCollectiveSource;
   c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<MAX_MIXERS; i++) {
+#warning TODO
+#if 0
+  for (int i=0; i<ER9X_MAX_MIXERS; i++) {
     c9x.mixData[i] = mixData[i];
     if (mdVers == 6) {
       if (c9x.mixData[i].srcRaw > SRC_3POS) {
@@ -605,7 +626,8 @@ t_Er9xModelData::operator ModelData ()
       }
     }
   }
-  for (int i=0; i<NUM_CHNOUT; i++)
+#endif
+  for (int i=0; i<ER9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
 
   // expoData
@@ -650,10 +672,10 @@ t_Er9xModelData::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<ER9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
 
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<ER9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;

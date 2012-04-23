@@ -254,6 +254,7 @@ uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
     return len;
   }
   else {
+    qDebug() << "ICI";
     uint16_t i=0;
     for( ; 1; ) {
       uint8_t l = std::min<uint16_t>(m_zeroes, i_len-i);

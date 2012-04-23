@@ -272,8 +272,8 @@ class GeneralSettings {
     uint8_t   lightAutoOff;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
-    int8_t hapticLength;
-    bool        hideNameOnSplash;
+    int8_t    hapticLength;
+    bool      hideNameOnSplash;
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;
     uint8_t   speakerMode;
@@ -315,44 +315,38 @@ enum MltpxValue {
   MLTPX_REP=2
 };
 
-enum RawSource {
-  SRC_NONE,
-  SRC_RUD,
-  SRC_ELE,
-  SRC_THR,
-  SRC_AIL,
-  SRC_P1,
-  SRC_P2,
-  SRC_P3,
-  SRC_REA,
-  SRC_REB,
-  SRC_MAX,
-  SRC_3POS,
-  SRC_STHR,
-  SRC_SRUD,
-  SRC_SELE,
-  SRC_ID0,
-  SRC_ID1,
-  SRC_ID2,
-  SRC_SAIL,
-  SRC_GEA,
-  SRC_TRN,
-  SRC_SW1,
-  SRC_SW9=SRC_SW1+8,
-  SRC_SWA,
-  SRC_SWB,
-  SRC_SWC,
-  SRC_CYC1,
-  SRC_CYC2,
-  SRC_CYC3,
-  SRC_PPM1,
-  SRC_PPM8 = SRC_PPM1+7,
-  SRC_CH1,
-  SRC_CH12 = SRC_CH1+11,
-  SRC_CH13,
-  SRC_CH14,
-  SRC_CH15,
-  SRC_CH16,
+enum RawSourceType {
+  SOURCE_TYPE_NONE,
+  SOURCE_TYPE_STICK, // and POTS
+  SOURCE_TYPE_ROTARY_ENCODER,
+  SOURCE_TYPE_MAX,
+  SOURCE_TYPE_3POS,
+  SOURCE_TYPE_SWITCH,
+  SOURCE_TYPE_CYC,
+  SOURCE_TYPE_PPM,
+  SOURCE_TYPE_CH,
+  SOURCE_TYPE_TIMER,
+  SOURCE_TYPE_TELEMETRY
+};
+
+class RawSource {
+  public:
+    RawSource():
+      type(SOURCE_TYPE_NONE),
+      index(0)
+    {
+    }
+
+    RawSource(RawSourceType type, int index=0):
+      type(type),
+      index(index)
+    {
+    }
+
+    QString toString();
+
+    RawSourceType type;
+    int index;
 };
 
 class MixData {
@@ -749,8 +743,11 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   }
 
   // mixers
-  for (int i=0; i<MAX_MIXERS; i++)
-    model.mixData[i].srcRaw = (RawSource)applyStickMode(model.mixData[i].srcRaw, mode);
+  for (int i=0; i<MAX_MIXERS; i++) {
+    if (model.mixData[i].srcRaw.type == SOURCE_TYPE_STICK) {
+      model.mixData[i].srcRaw.index = applyStickMode(model.mixData[i].srcRaw.index + 1, mode) - 1;
+    }
+  }
 
   // virtual switches
   for (int i=0; i<NUM_CSW; i++) {
@@ -760,6 +757,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
         // no break
       case CS_VOFS:
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
     }
   }
 
@@ -778,12 +776,11 @@ class FirmwareInfo {
       parent(NULL),
       id(NULL),
       eepromInterface(NULL),
-      url(NULL),
       stamp(NULL)
     {
     }
 
-    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const char * url = NULL, const char * stamp = NULL):
+    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(name),
@@ -793,7 +790,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface, const char * url, const char * stamp = NULL):
+    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(QString::null),
@@ -827,44 +824,9 @@ class FirmwareInfo {
     const char * id;
     QString name;
     EEPROMInterface * eepromInterface;
-    const char * url;
+    QString url;
     const char * stamp;
     QList<FirmwareInfo *> options;
-};
-
-class Open9xFirmware: public FirmwareInfo
-{
-  public:
-    Open9xFirmware(const char * id, const QString & name, EEPROMInterface * eepromInterface):
-      FirmwareInfo(id, name, eepromInterface)
-    {
-    }
-
-    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, const char * url, const char * stamp):
-      FirmwareInfo(id, eepromInterface, url, stamp)
-    {
-    }
-
-    virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (this->eepromInterface->getBoard() == BOARD_GRUVIN9X) {
-        if (revision == 0 || revision >= 547)
-          return 207;
-        else if (revision >= 469)
-          return 206;
-      }
-      else {
-        if (revision == 0/* || revision >= */)
-          return 205;
-      }
-      if (revision >= 321)
-        return 205;
-      else if (revision >= 217)
-        return 204;
-      else if (revision >= 184)
-        return 203;
-      else
-        return 202;
-    }
 };
 
 FirmwareInfo * GetFirmware(QString id);

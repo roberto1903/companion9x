@@ -31,9 +31,8 @@
 
 #define MDVERS      6
 
-#define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
-#define NUM_CSW         12 //number of custom switches
-#define NUM_STICKSnPOTS 7  //number of sticks and pots
+#define TH9X_NUM_CSW         12 //number of custom switches
+#define NUM_STICKSnPOTS      7  //number of sticks and pots
 
 PACK(typedef struct t_Th9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8

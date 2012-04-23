@@ -268,6 +268,8 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
 
+#warning TODO
+#if 0
   if (c9x.srcRaw < SRC_REA) {
     swtch = c9x.swtch;
     srcRaw = c9x.srcRaw;
@@ -288,6 +290,7 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
     else
       srcRaw = c9x.srcRaw - 2;
   }
+#endif
 
   weight = c9x.weight;
   curve = c9x.curve;
@@ -307,6 +310,8 @@ t_Gruvin9xMixData::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
 
+#warning TODO
+#if 0
   if (srcRaw == 9/*FULL*/) {
     if (swtch < 0) {
       c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
@@ -326,6 +331,7 @@ t_Gruvin9xMixData::operator MixData ()
     else
       c9x.srcRaw = RawSource(srcRaw + 2);
   }
+#endif
 
   c9x.curve = curve;
   c9x.delayUp = delayUp;
@@ -347,6 +353,8 @@ t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
   v1 = c9x.v1;
   v2 = c9x.v2;
 
+#warning TODO
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (c9x.v1 < SRC_REA)
       v1 = c9x.v1;
@@ -368,6 +376,7 @@ t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
       v2 = c9x.v2 - 2;
     }
   }
+#endif
 }
 
 Gruvin9xCustomSwData::operator CustomSwData ()
@@ -377,6 +386,8 @@ Gruvin9xCustomSwData::operator CustomSwData ()
   c9x.v1 = v1;
   c9x.v2 = v2;
 
+#warning TODO
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (v1 >= SRC_REA)
       c9x.v1 = v1 + 2;
@@ -386,6 +397,7 @@ Gruvin9xCustomSwData::operator CustomSwData ()
     if (v2 >= SRC_REA)
       c9x.v2 = v2 + 2;
   }
+#endif
 
   return c9x;
 }
@@ -393,14 +405,14 @@ Gruvin9xCustomSwData::operator CustomSwData ()
 t_Gruvin9xFuncSwData::t_Gruvin9xFuncSwData(FuncSwData &c9x)
 {
   swtch = c9x.swtch;
-  func = c9x.func - NUM_CHNOUT;
+  func = c9x.func - G9X_NUM_CHNOUT;
 }
 
 Gruvin9xFuncSwData::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = swtch;
-  c9x.func = (AssignFunc)(func + NUM_CHNOUT);
+  c9x.func = (AssignFunc)(func + G9X_NUM_CHNOUT);
   return c9x;
 }
 
@@ -600,9 +612,9 @@ t_Gruvin9xModelData_v102::operator ModelData ()
   c9x.extendedLimits = extendedLimits;
   for (int i=0; i<MAX_PHASES; i++)
     c9x.phaseData[i] = phaseData[i];
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
@@ -614,7 +626,7 @@ t_Gruvin9xModelData_v102::operator ModelData ()
       c9x.curves9[i][j] = curves9[i][j];
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
@@ -661,9 +673,9 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   c9x.extendedLimits = extendedLimits;
   for (int i=0; i<MAX_PHASES; i++)
     c9x.phaseData[i] = phaseData[i];
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
@@ -675,7 +687,7 @@ t_Gruvin9xModelData_v103::operator ModelData ()
       c9x.curves9[i][j] = curves9[i][j];
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
@@ -739,9 +751,9 @@ t_Gruvin9xModelData_v105::operator ModelData ()
       }
     }
   }
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
@@ -755,7 +767,7 @@ t_Gruvin9xModelData_v105::operator ModelData ()
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
@@ -813,9 +825,9 @@ t_Gruvin9xModelData_v106::operator ModelData ()
       }
     }
   }
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
@@ -829,7 +841,7 @@ t_Gruvin9xModelData_v106::operator ModelData ()
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<G9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
@@ -881,9 +893,9 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
     timer2 = c9x.timers[1];
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<G9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<G9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
     for (int i=0; i<G9X_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
@@ -899,7 +911,7 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     for (int i=0; i<G9X_NUM_FSW; i++)
       funcSw[i] = c9x.funcSw[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<G9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
     for (int i=0; i<MAX_PHASES; i++) {

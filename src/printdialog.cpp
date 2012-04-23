@@ -239,7 +239,7 @@ void printDialog::printSetup()
         str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
         str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
         for (i=0; i<4; i++) {
-          str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+          str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
         }
         str.append("</tr>");
         for (i=0; i<MAX_PHASES; i++) {
@@ -277,7 +277,7 @@ void printDialog::printExpo()
         str.append("<tr><td><font size=+1 face='Courier New'>");
         if(lastCHN!=ed->chn) {
             lastCHN=ed->chn;
-            str.append("<b>"+getSourceStr(ed->chn+1)+"</b>");
+            str.append("<b>"+getStickStr(ed->chn)+"</b>");
         }
         else
             str.append("<b>&nbsp;</b>");
@@ -339,7 +339,7 @@ void printDialog::printMixes()
         default:  str += "&nbsp;&nbsp;"; break;
         };
         str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-        str += getSourceStr(md->srcRaw);
+        str += md->srcRaw.toString();
         if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
         if (md->carryTrim) str += " " + tr("noTrim");
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
@@ -498,7 +498,7 @@ void printDialog::printCurves()
         c+=b;
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
-        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1+MAX_CURVE5));
+        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
         count=0;
         for(int j=0; j<9; j++)
         {
@@ -546,12 +546,18 @@ void printDialog::printSwitches()
             {
             case CS_VOFS:
                 if (g_model->customSw[i].v1) {
+#warning TODO could be g_model->customSw[i].v1.toString()
+#if 0
+
                   if (g_model->customSw[i].v1<=SRC_3POS) {
                     tstr+=getSourceStr(g_model->customSw[i].v1);
-                  } else {
+                  }
+                  else {
                     tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
                   }
-                } else {
+#endif
+                }
+                else {
                   tstr+="0";
                 }
                 tstr.remove(" ");
@@ -583,11 +589,15 @@ void printDialog::printSwitches()
                 break;
             case CS_VCOMP:
                 if (g_model->customSw[i].v1) {
+#warning TODO
+#if 0
                   if (g_model->customSw[i].v1<=SRC_3POS) {
                     tstr+=getSourceStr(g_model->customSw[i].v1);
-                  } else {
+                  }
+                  else {
                     tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
                   }
+#endif
                 } else {
                   tstr+="0";
                 }
@@ -615,11 +625,15 @@ void printDialog::printSwitches()
                     break;
                 }
                 if (g_model->customSw[i].v2) {
+#warning TODO
+#if 0
                   if (g_model->customSw[i].v2<=SRC_3POS) {
                     tstr+=getSourceStr(g_model->customSw[i].v2);
-                  } else {
+                  }
+                  else {
                     tstr+=getSourceStr(g_model->customSw[i].v2+SRC_SWC-SRC_3POS);
                   }
+#endif
                 } else {
                   tstr+="0";
                 }

@@ -10,7 +10,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
 {
     ui->setupUi(this);
 
-    setWindowTitle(tr("DEST -> %1").arg(getSourceStr(ed->chn+1)));
+    setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
     ui->expoSB->setValue(ed->expo);
     ui->weightSB->setValue(ed->weight);
     populatePhasesCB(ui->phasesCB, ed->phase);

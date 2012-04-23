@@ -19,6 +19,7 @@
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 #include "open9xv4eeprom.h"
+#include "open9xarmeeprom.h"
 #include "open9xsimulator.h"
 #include "open9xv4simulator.h"
 #include "open9xarmsimulator.h"
@@ -175,7 +176,11 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       break;
     // case 206:
     case 207:
-      // TODO the comment
+      // V4: Rotary Encoders position in FlightPhases
+      break;
+    case 208:
+      // Trim value in 16bits
+      // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
       break;
     default:
       std::cout << "not open9x\n";
@@ -206,7 +211,15 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       loadModel<Open9xModelData_v205>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_GRUVIN9X && version == 207) {
-      loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
+#if 0
+    else if (board == BOARD_GRUVIN9X && version == 208) {
+      loadModel<Open9xV4ModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
+#endif
+    else if (board == BOARD_ERSKY9X && version == 208) {
+      loadModel<Open9xArmModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -238,7 +251,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
-      int result;
+      int result = 0;
       switch(version) {
         case 202:
           result = saveModel<Open9xModelData_v202>(i, radioData.models[i]);
@@ -252,10 +265,17 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         case 205:
           result = saveModel<Open9xModelData_v205>(i, radioData.models[i]);
           break;
-        case 206:
         case 207:
-          // Now only for V4
-          result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v207>(i, radioData.models[i]);
+          break;
+        case 208:
+#if 0
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v208>(i, radioData.models[i]);
+#endif
+          if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
           break;
       }
       if (!result)
@@ -405,6 +425,25 @@ SimulatorInterface * Open9xInterface::getSimulator()
   }
 }
 
-const char * OPEN9X_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
+#define OPEN9X_BIN_URL "http://open9x.freehosting.com/binaries/"
+
+const char * OPEN9X_STOCK_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
 const char * OPEN9X_V4_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-arm.txt";
+
+void Open9xFirmware::addOptions(const char *binaries[])
+{
+  for (int i=0; binaries[i]; i++) {
+    switch (eepromInterface->getBoard()) {
+      case BOARD_STOCK:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_STOCK_STAMP));
+        break;
+      case BOARD_GRUVIN9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_V4_STAMP));
+        break;
+      case BOARD_ERSKY9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".bin", OPEN9X_ARM_STAMP));
+        break;
+    }
+  }
+}

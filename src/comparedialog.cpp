@@ -282,12 +282,15 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
     switch CS_STATE(customSw->func) {
       case CS_VOFS:
         if (customSw->v1) {
+#warning TODO
+#if 0
           if (customSw->v1 <= SRC_3POS) {
             tstr += getSourceStr(customSw->v1);
           }
           else {
             tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
           }
+#endif
         }
         else {
           tstr += "0";
@@ -319,6 +322,9 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
         tstr += getSWName(customSw->v2);
         break;
       case CS_VCOMP:
+#warning TODO
+#if 0
+
         if (customSw->v1) {
           if (customSw->v1 <= SRC_3POS) {
             tstr += getSourceStr(customSw->v1);
@@ -330,6 +336,7 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
         else {
           tstr += "0";
         }
+#endif
         switch (customSw->func) {
           case CS_EQUAL:
             tstr += " = ";
@@ -352,6 +359,9 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           default:
             break;
         }
+#warning TODO
+#if 0
+
         if (customSw->v2) {
           if (customSw->v2 <= SRC_3POS) {
             tstr += getSourceStr(customSw->v2);
@@ -363,6 +373,7 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
         else {
           tstr += "0";
         }
+#endif
         break;
       default:
         break;
@@ -620,7 +631,7 @@ void compareDialog::printPhases()
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
-    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
   for (i=0; i<MAX_PHASES; i++) {
@@ -654,7 +665,7 @@ void compareDialog::printPhases()
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
-    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
   for (i=0; i<MAX_PHASES; i++) {
@@ -770,7 +781,7 @@ void compareDialog::printExpos()
         }
       }
       str.append("</table></td>");
-      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getSourceStr(i+1)+"</b></td>");
+      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getStickStr(i)+"</b></td>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
       for (int j=0; j<MAX_EXPOS; j++) {
@@ -845,7 +856,7 @@ void compareDialog::printMixers()
               break;
           };
           str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-          str += getSourceStr(md->srcRaw);
+          str += md->srcRaw.toString();
           if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
@@ -896,7 +907,7 @@ void compareDialog::printMixers()
               break;
           };
           str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-          str += getSourceStr(md->srcRaw);
+          str += md->srcRaw.toString();
           if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
@@ -996,7 +1007,7 @@ void compareDialog::printCurves()
       color=getColor1(g_model2->curves9[i][j],g_model2->curves9[i][j]);
       str.append(doTR(QString::number(g_model1->curves5[i][j]),color));
     }
-    str.append(QString("<td width=\"10%\" align=\"center\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1+MAX_CURVE5));
+    str.append(QString("<td width=\"10%\" align=\"center\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
     for(int j=0; j<9; j++) { 
       color=getColor1(g_model2->curves9[i][j],g_model2->curves9[i][j]);
       str.append(doTR(QString::number(g_model2->curves9[i][j]),color));

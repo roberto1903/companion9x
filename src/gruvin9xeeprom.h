@@ -304,12 +304,12 @@ PACK(typedef struct t_Gruvin9xTimerData {
 }) Gruvin9xTimerData;
 
 #define MAX_PHASES 5
-#define MAX_MIXERS 32
+#define G9X_MAX_MIXERS 32
 #define G9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
 #define MAX_CURVE9 8
 
-#define NUM_CHNOUT   16 // number of real output channels CH1-CH16
+#define G9X_NUM_CHNOUT   16 // number of real output channels CH1-CH16
 #define G9X_NUM_CSW      12 // number of custom switches
 #define G9X_NUM_FSW      12 // number of functions assigned to switches
 
@@ -330,13 +330,13 @@ PACK(typedef struct t_Gruvin9xModelData_v102 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Gruvin9xTimerData timer2;
-  Gruvin9xMixData   mixData[MAX_MIXERS];
-  Gruvin9xLimitData limitData[NUM_CHNOUT];
+  Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
+  Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
-  Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
+  Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   Gruvin9xFrSkyData frsky;
@@ -362,13 +362,13 @@ PACK(typedef struct t_Gruvin9xModelData_v103 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Gruvin9xTimerData timer2;
-  Gruvin9xMixData   mixData[MAX_MIXERS];
-  Gruvin9xLimitData limitData[NUM_CHNOUT];
+  Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
+  Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
-  Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
+  Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
   Gruvin9xFrSkyData frsky;
@@ -394,13 +394,13 @@ PACK(typedef struct t_Gruvin9xModelData_v105 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Gruvin9xTimerData timer2;
-  Gruvin9xMixData   mixData[MAX_MIXERS];
-  Gruvin9xLimitData limitData[NUM_CHNOUT];
+  Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
+  Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
-  Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
+  Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
@@ -428,13 +428,13 @@ PACK(typedef struct t_Gruvin9xModelData_v106 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Gruvin9xTimerData timer2;
-  Gruvin9xMixData   mixData[MAX_MIXERS];
-  Gruvin9xLimitData limitData[NUM_CHNOUT];
+  Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
+  Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
-  Gruvin9xSafetySwData  safetySw[NUM_CHNOUT];
+  Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
   Gruvin9xPhaseData_v106 phaseData[MAX_PHASES];

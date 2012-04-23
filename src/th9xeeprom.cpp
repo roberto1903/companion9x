@@ -202,20 +202,15 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Th9xMixData));
   destCh = c9x.destCh;
   mixMode = c9x.mltpx;
-  if (c9x.srcRaw == 0)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_P3)
-    srcRaw = c9x.srcRaw - 1;
-  else if (c9x.srcRaw == SRC_MAX)
+#warning TODO TESTS
+  if (c9x.srcRaw.type == SOURCE_TYPE_STICK)
+    srcRaw = c9x.srcRaw.index;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX)
     srcRaw = 10;
-  else if (c9x.srcRaw == SRC_SWC)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_CYC3)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_PPM8)
-    srcRaw = 24 + c9x.srcRaw - SRC_PPM1;
-  else if (c9x.srcRaw <= SRC_CH12)
-    srcRaw = 12 + c9x.srcRaw - SRC_CH1;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_PPM)
+    srcRaw = 24 + c9x.srcRaw.index;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CH)
+    srcRaw = 12 + c9x.srcRaw.index;
   else
     srcRaw = 0; // TODO
   switchMode = 1;
@@ -231,18 +226,19 @@ t_Th9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
+#warning TODO TESTS
   if (srcRaw < 7)
-    c9x.srcRaw = RawSource(srcRaw + 1);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw);
   else if (srcRaw < 10)
-    c9x.srcRaw = RawSource(0); // TODO
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE); // TODO
   else if (srcRaw == 10)
-    c9x.srcRaw = SRC_MAX;
+    c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
   else if (srcRaw == 11)
-    c9x.srcRaw = RawSource(0); // TODO CUR
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE); // TODO CUR
   else if (srcRaw < 24)
-    c9x.srcRaw = RawSource(SRC_CH1 + 12 - srcRaw);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-12);
   else /* always true if (srcRaw < 32) */
-    c9x.srcRaw = RawSource(SRC_PPM1 + 24 - srcRaw);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-24);
   c9x.weight = weight;
   c9x.swtch = swtch;
   c9x.curve = curve;
@@ -332,7 +328,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (int i=0; i<TH9X_MAX_CURVES9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    /*for (int i=0; i<NUM_CSW; i++)
+    /*for (int i=0; i<TH9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];*/
   }
 }
@@ -391,7 +387,7 @@ t_Th9xModelData::operator ModelData ()
   for (int i=0; i<TH9X_MAX_CURVES9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  /*for (int i=0; i<NUM_CSW; i++)
+  /*for (int i=0; i<TH9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];*/
 
   return c9x;

@@ -6,9 +6,16 @@ QString getPhaseName(int val) {
   if (!val) return "---";
   return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
 }
+
+QString getStickStr(int index)
+{
+  return RawSource(SOURCE_TYPE_STICK, index).toString();
+}
+
 QString getSWName(int val) {
 
   if (!val) return "---";
+#warning will not work ...
   if (val == MAX_DRSWITCH) return "ON";
   if (val == -MAX_DRSWITCH) return "OFF";
 
@@ -46,7 +53,11 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 QString getFuncName(unsigned int val)
 {
   if (val < NUM_CHNOUT)
-    return QObject::tr("Safety") + " " + getSourceStr(SRC_CH1+val);
+    return QObject::tr("Safety");
+#warning TODO
+#if 0
+  + " " + getSourceStr(SRC_CH1+val);
+#endif
   else {
     QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
                           QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
@@ -155,41 +166,23 @@ QString getTimerMode(int tm) {
 
 }
 
-QString getSourceStr(int idx)
-{
-  QString sorces1[] = { QObject::tr("----"),
-                        QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
-                        QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3"),
-                        QObject::tr("REA"), QObject::tr("REB"),
-                        QObject::tr("MAX"),
-                        QObject::tr("3POS") };
-  QString sorces2[] = { QObject::tr("CYC1"), QObject::tr("CYC2"), QObject::tr("CYC3"),
-                        QObject::tr("PPM1"), QObject::tr("PPM2"), QObject::tr("PPM3"), QObject::tr("PPM4"), QObject::tr("PPM5"), QObject::tr("PPM6"), QObject::tr("PPM7"), QObject::tr("PPM8"),
-                        QObject::tr("CH1"), QObject::tr("CH2"), QObject::tr("CH3"), QObject::tr("CH4"), QObject::tr("CH5"), QObject::tr("CH6"), QObject::tr("CH7"), QObject::tr("CH8"),
-                        QObject::tr("CH9"), QObject::tr("CH10"), QObject::tr("CH11"), QObject::tr("CH12"), QObject::tr("CH13"), QObject::tr("CH14"), QObject::tr("CH15"), QObject::tr("CH16"),
-                        QObject::tr("Timer1"), QObject::tr("Timer2"),
-                        QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("DIST"), QObject::tr("CELL") };
-
-  if (idx < SRC_STHR)
-    return sorces1[idx];
-  else if (idx <= SRC_SWC)
-    return getSWName(idx - SRC_STHR + 1);
-  else
-    return sorces2[idx-SRC_SWC-1];
-}
-
 void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
 {
   b->clear();
+#warning TODO
+#if 0
   for (int i=0, count=0; i<=NUM_XCHNMIX+MAX_TIMERS+NUM_TELEMETRY && count<=sourcesCount; i++) {
     if (switches || i<SRC_STHR || i>SRC_SWC) {
       b->addItem(getSourceStr(i));
       count++;
     }
   }
+#endif
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
 
+#warning TODO
+#if 0
   for (int i=0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
     // Get the index of the value to disable
     int idx = SRC_CH16 - i;
@@ -203,6 +196,7 @@ void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
     //the magic
     b->model()->setData(index, v, Qt::UserRole - 1);
   }
+#endif
 }
 
 QString getCSWFunc(int val) {

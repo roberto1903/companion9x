@@ -99,6 +99,7 @@ SET( companion9x_SRCS
      open9xv4eeprom.cpp
      open9xv4simulator.cpp
      open9xv4import.cpp
+     open9xarmeeprom.cpp
      open9xarmsimulator.cpp
      open9xarmimport.cpp
      ersky9xeeprom.cpp

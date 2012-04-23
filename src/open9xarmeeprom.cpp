@@ -1,17 +1,53 @@
 #include <stdlib.h>
 #include <algorithm>
-#include "open9xv4eeprom.h"
+#include "open9xarmeeprom.h"
 #include <QObject>
 #include <QMessageBox>
 
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
-t_Open9xV4PhaseData_v207::operator PhaseData ()
+t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
+{
+  mode = c9x.mode;
+  chn = c9x.chn;
+  // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+
+  if (c9x.curve >=0 && c9x.curve <= 10)
+    curve = c9x.curve;
+  else if (c9x.curve >= 15 && c9x.curve <= 19)
+    curve = c9x.curve - 4;
+  else
+    EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
+  swtch = c9x.swtch;
+  phase = c9x.phase;
+  weight = c9x.weight;
+  expo = c9x.expo;
+}
+
+t_Open9xArmExpoData_v208::operator ExpoData ()
+{
+  ExpoData c9x;
+  c9x.mode = mode;
+  c9x.chn = chn;
+
+  if (curve <= 10)
+    c9x.curve = curve;
+  else
+    c9x.curve = curve + 4;
+
+  c9x.swtch = swtch;
+  c9x.phase = phase;
+  c9x.weight = weight;
+  c9x.expo = expo;
+  return c9x;
+}
+
+t_Open9xArmPhaseData_v208::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
-    c9x.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
+    c9x.trim[i] = trim[i];
   c9x.swtch = swtch;
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
@@ -21,13 +57,10 @@ t_Open9xV4PhaseData_v207::operator PhaseData ()
   return c9x;
 }
 
-t_Open9xV4PhaseData_v207::t_Open9xV4PhaseData_v207(PhaseData &c9x)
+t_Open9xArmPhaseData_v208::t_Open9xArmPhaseData_v208(PhaseData &c9x)
 {
-  trim_ext = 0;
-  for (int i=0; i<NUM_STICKS; i++) {
-    trim[i] = (int8_t)(c9x.trim[i] >> 2);
-    trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((c9x.trim[i] & 0x03) << (2*i)));
-  }
+  for (int i=0; i<NUM_STICKS; i++)
+    trim[i] = c9x.trim[i];
   swtch = c9x.swtch;
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
@@ -37,7 +70,7 @@ t_Open9xV4PhaseData_v207::t_Open9xV4PhaseData_v207(PhaseData &c9x)
 }
 
 
-t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
+t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
 {
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
@@ -60,11 +93,11 @@ t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
     sOffset = c9x.sOffset;
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4MixData_v207));
+    memset(this, 0, sizeof(t_Open9xArmMixData_v208));
   }
 }
 
-t_Open9xV4MixData_v207::operator MixData ()
+t_Open9xArmMixData_v208::operator MixData ()
 {
   MixData c9x;
 #warning TODO
@@ -90,23 +123,7 @@ t_Open9xV4MixData_v207::operator MixData ()
   return c9x;
 }
 
-t_Open9xV4CustomSwData_v207::t_Open9xV4CustomSwData_v207(CustomSwData &c9x)
-{
-  v1 = c9x.v1;
-  v2 = c9x.v2;
-  func = c9x.func;
-}
-
-Open9xV4CustomSwData_v207::operator CustomSwData ()
-{
-  CustomSwData c9x;
-  c9x.v1 = v1;
-  c9x.v2 = v2;
-  c9x.func = func;
-  return c9x;
-}
-
-t_Open9xV4ModelData_v207::operator ModelData ()
+t_Open9xArmModelData_v208::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -149,11 +166,11 @@ t_Open9xV4ModelData_v207::operator ModelData ()
       }
     }
   }
-  for (int i=0; i<O9X_MAX_MIXERS; i++)
+  for (int i=0; i<O9X_ARM_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<O9X_NUM_CHNOUT; i++)
+  for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
-  for (int i=0; i<O9X_MAX_EXPOS; i++)
+  for (int i=0; i<O9X_ARM_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
@@ -161,9 +178,9 @@ t_Open9xV4ModelData_v207::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<O9X_NUM_CSW; i++)
+  for (int i=0; i<O9X_ARM_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  for (int i=0; i<O9X_NUM_FSW; i++)
+  for (int i=0; i<O9X_ARM_NUM_FSW; i++)
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
@@ -182,7 +199,7 @@ t_Open9xV4ModelData_v207::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE 761
-t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
+t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE));
@@ -224,28 +241,28 @@ t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<O9X_MAX_MIXERS; i++)
+    for (int i=0; i<MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<O9X_NUM_CHNOUT; i++)
+    for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
-    for (int i=0; i<O9X_MAX_EXPOS; i++)
+    for (int i=0; i<O9X_ARM_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
-    if (c9x.expoData[O9X_MAX_EXPOS].mode)
-      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(O9X_MAX_EXPOS) + "\n";
+    if (c9x.expoData[O9X_ARM_MAX_EXPOS].mode)
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(O9X_ARM_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<O9X_NUM_CSW; i++)
+    for (int i=0; i<O9X_ARM_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
     int count = 0;
-    for (int i=0; i<O9X_NUM_FSW; i++) {
+    for (int i=0; i<O9X_ARM_NUM_FSW; i++) {
       if (c9x.funcSw[i].swtch)
         funcSw[count++] = c9x.funcSw[i];
     }
-    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+    for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch) {
         funcSw[count].func = i;
         funcSw[count].swtch = c9x.safetySw[i].swtch;
@@ -282,6 +299,6 @@ t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
     }
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4ModelData_v207));
+    memset(this, 0, sizeof(t_Open9xArmModelData_v208));
   }
 }

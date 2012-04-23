@@ -108,7 +108,7 @@ PACK(typedef struct t_Open9xExpoData {
   int8_t  expo;
 
   operator ExpoData();
-  t_Open9xExpoData();
+  t_Open9xExpoData() { memset(this, 0, sizeof(t_Open9xExpoData)); }
   t_Open9xExpoData(ExpoData&);
 
 }) Open9xExpoData;
@@ -397,15 +397,13 @@ PACK(typedef struct t_Open9xTimerData_v202 {
   t_Open9xTimerData_v202(TimerData &eepe);
 }) Open9xTimerData_v202;
 
-#define MAX_MODELS 16
 #define MAX_TIMERS 2
 #define MAX_PHASES 5
-#define MAX_MIXERS 32
-#define G9X_MAX_EXPOS  14
+#define O9X_MAX_MIXERS 32
+#define O9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
 #define MAX_CURVE9 8
-
-#define NUM_CHNOUT   16 // number of real output channels CH1-CH16
+#define O9X_NUM_CHNOUT   16 // number of real output channels CH1-CH16
 #define O9X_NUM_CSW      12 // number of custom switches
 #define O9X_NUM_FSW      16 // number of functions assigned to switches
 
@@ -425,13 +423,13 @@ PACK(typedef struct t_Open9xModelData_v201 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v201 timer2;
-  Open9xMixData_v201 mixData[MAX_MIXERS];
-  Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  Open9xMixData_v201 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
-  Open9xSafetySwData  safetySw[NUM_CHNOUT];
+  Open9xSafetySwData  safetySw[O9X_NUM_CHNOUT];
   Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
@@ -458,13 +456,13 @@ PACK(typedef struct t_Open9xModelData_v202 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
-  Open9xMixData_v201 mixData[MAX_MIXERS];
-  Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  Open9xMixData_v201 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
-  Open9xSafetySwData  safetySw[NUM_CHNOUT];
+  Open9xSafetySwData  safetySw[O9X_NUM_CHNOUT];
   Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
   Open9xPhaseData_v201 phaseData[MAX_PHASES];
@@ -494,9 +492,9 @@ PACK(typedef struct t_Open9xModelData_v203 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
-  Open9xMixData_v203 mixData[MAX_MIXERS];
-  Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  Open9xMixData_v203 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
@@ -529,9 +527,9 @@ PACK(typedef struct t_Open9xModelData_v204 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
-  Open9xMixData_v203 mixData[MAX_MIXERS];
-  Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  Open9xMixData_v203 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
@@ -564,9 +562,9 @@ PACK(typedef struct t_Open9xModelData_v205 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xMixData_v205 mixData[MAX_MIXERS];
-  Open9xLimitData limitData[NUM_CHNOUT];
-  Open9xExpoData  expoData[G9X_MAX_EXPOS];
+  Open9xMixData_v205 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xCustomSwData  customSw[O9X_NUM_CSW];

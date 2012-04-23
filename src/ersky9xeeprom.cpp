@@ -205,6 +205,8 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Ersky9xMixData));
   destCh = c9x.destCh;
 
+#warning TODO
+#if 0
   if (c9x.srcRaw < SRC_REA) {
     swtch = c9x.swtch;
     srcRaw = c9x.srcRaw;
@@ -225,6 +227,7 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
     else
       srcRaw = c9x.srcRaw - 2;
   }
+#endif
 
   weight = c9x.weight;
   curve = c9x.curve;
@@ -245,6 +248,8 @@ t_Ersky9xMixData::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
 
+#warning TODO
+#if 0
   if (srcRaw == 9/*FULL*/) {
     if (swtch < 0) {
       c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
@@ -264,6 +269,7 @@ t_Ersky9xMixData::operator MixData ()
     else
       c9x.srcRaw = RawSource(srcRaw + 2);
   }
+#endif
 
   c9x.curve = curve;
   c9x.delayUp = delayUp;
@@ -290,6 +296,8 @@ t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
   v1 = c9x.v1;
   v2 = c9x.v2;
 
+#warning TODO
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (c9x.v1 < SRC_REA)
       v1 = c9x.v1;
@@ -311,6 +319,7 @@ t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
       v2 = c9x.v2 - 2;
     }
   }
+#endif
 }
 
 Ersky9xCustomSwData::operator CustomSwData ()
@@ -320,6 +329,8 @@ Ersky9xCustomSwData::operator CustomSwData ()
   c9x.v1 = v1;
   c9x.v2 = v2;
 
+#warning TODO
+#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     if (v1 >= SRC_REA)
       c9x.v1 = v1 + 2;
@@ -329,6 +340,7 @@ Ersky9xCustomSwData::operator CustomSwData ()
     if (v2 >= SRC_REA)
       c9x.v2 = v2 + 2;
   }
+#endif
 
   return c9x;
 }
@@ -463,9 +475,9 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     swashType = c9x.swashRingData.type;
     swashCollectiveSource = c9x.swashRingData.collectiveSource;
     swashRingValue = c9x.swashRingData.value;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
 
     // expoData
@@ -541,10 +553,10 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<NUM_CSW; i++)
+    for (int i=0; i<ERSKY9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
 
-    for (int i=0; i<NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     
     frsky = c9x.frsky;
@@ -604,9 +616,9 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.swashRingData.type = swashType;
   c9x.swashRingData.collectiveSource = swashCollectiveSource;
   c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
 
   // expoData
@@ -651,10 +663,10 @@ t_Ersky9xModelData::operator ModelData ()
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<ERSKY9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
 
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;
