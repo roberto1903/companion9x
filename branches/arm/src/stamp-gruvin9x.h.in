@@ -1,0 +1,7 @@
+// Automatically generated file (CMake) - do not edit
+#define DATE_STR  "@DATE@"
+#define TIME_STR  "@TIME@"
+#define TAG_VERS  c9x
+#define SVN_VERS  "@FIRMWARE@-r@G9X_WC_REVISION@"
+#define MOD_VERS "FH"
+#define BUILD_NUM 1
