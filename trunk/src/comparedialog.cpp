@@ -996,7 +996,7 @@ void compareDialog::printCurves()
       color=getColor1(g_model2->curves9[i][j],g_model2->curves9[i][j]);
       str.append(doTR(QString::number(g_model1->curves5[i][j]),color));
     }
-    str.append(QString("<td width=\"10%\" align=\"center\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
+    str.append(QString("<td width=\"10%\" align=\"center\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1+MAX_CURVE5));
     for(int j=0; j<9; j++) { 
       color=getColor1(g_model2->curves9[i][j],g_model2->curves9[i][j]);
       str.append(doTR(QString::number(g_model2->curves9[i][j]),color));
