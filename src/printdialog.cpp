@@ -498,7 +498,7 @@ void printDialog::printCurves()
         c+=b;
         sprintf(buffer,"%06x",c);
         str.append("<tr>");
-        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1));
+        str.append(QString("<td width=\"70\"><font color=#%1><b>").arg(buffer)+tr("Curve")+QString(" %1</b></font></td>").arg(i+1+MAX_CURVE5));
         count=0;
         for(int j=0; j<9; j++)
         {
