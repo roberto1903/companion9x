@@ -465,9 +465,25 @@ void ModelEdit::tabPhases()
   displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider);
   displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider);
   displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider);
+  displayOnePhase(5, ui->phase5Name, ui->phase5Switch, ui->phase5FadeIn, ui->phase5FadeOut, ui->phase5Trim1Use, ui->phase5Trim1Value, ui->phase5Trim1Label, ui->phase5Trim1Slider, ui->phase5Trim2Use, ui->phase5Trim2Value, ui->phase5Trim2Label, ui->phase5Trim2Slider, ui->phase5Trim3Use, ui->phase5Trim3Value, ui->phase5Trim3Label, ui->phase5Trim3Slider, ui->phase5Trim4Use, ui->phase5Trim4Value, ui->phase5Trim4Label, ui->phase5Trim4Slider);
+  displayOnePhase(6, ui->phase6Name, ui->phase6Switch, ui->phase6FadeIn, ui->phase6FadeOut, ui->phase6Trim1Use, ui->phase6Trim1Value, ui->phase6Trim1Label, ui->phase6Trim1Slider, ui->phase6Trim2Use, ui->phase6Trim2Value, ui->phase6Trim2Label, ui->phase6Trim2Slider, ui->phase6Trim3Use, ui->phase6Trim3Value, ui->phase6Trim3Label, ui->phase6Trim3Slider, ui->phase6Trim4Use, ui->phase6Trim4Value, ui->phase6Trim4Label, ui->phase6Trim4Slider);
+  displayOnePhase(7, ui->phase7Name, ui->phase7Switch, ui->phase7FadeIn, ui->phase7FadeOut, ui->phase7Trim1Use, ui->phase7Trim1Value, ui->phase7Trim1Label, ui->phase7Trim1Slider, ui->phase7Trim2Use, ui->phase7Trim2Value, ui->phase7Trim2Label, ui->phase7Trim2Slider, ui->phase7Trim3Use, ui->phase7Trim3Value, ui->phase7Trim3Label, ui->phase7Trim3Slider, ui->phase7Trim4Use, ui->phase7Trim4Value, ui->phase7Trim4Label, ui->phase7Trim4Slider);
+  displayOnePhase(8, ui->phase8Name, ui->phase8Switch, ui->phase8FadeIn, ui->phase8FadeOut, ui->phase8Trim1Use, ui->phase8Trim1Value, ui->phase8Trim1Label, ui->phase8Trim1Slider, ui->phase8Trim2Use, ui->phase8Trim2Value, ui->phase8Trim2Label, ui->phase8Trim2Slider, ui->phase8Trim3Use, ui->phase8Trim3Value, ui->phase8Trim3Label, ui->phase8Trim3Slider, ui->phase8Trim4Use, ui->phase8Trim4Value, ui->phase8Trim4Label, ui->phase8Trim4Slider);
 
   int phases = GetEepromInterface()->getCapability(Phases);
-  if (phases < 4)
+  if (phases < 8)
+    ui->phase8->setDisabled(true);
+    ui->phases->removeTab(8);
+  if (phases < 7)
+    ui->phase7->setDisabled(true);
+    ui->phases->removeTab(7);
+  if (phases < 6)
+    ui->phase6->setDisabled(true);
+    ui->phases->removeTab(6);
+  if (phases < 5)
+    ui->phase5->setDisabled(true);
+    ui->phases->removeTab(5);
+  if (phases < 4)  
     ui->phase4->setDisabled(true);
   if (phases < 3)
     ui->phase3->setDisabled(true);
@@ -498,6 +514,18 @@ void ModelEdit::on_phases_currentChanged(int index)
       break;
     case 4:
       displayOnePhase(4, NULL, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
+      break;
+    case 5:
+      displayOnePhase(5, NULL, NULL, NULL, NULL, NULL, ui->phase5Trim1Value, NULL, ui->phase5Trim1Slider, NULL, ui->phase5Trim2Value, NULL, ui->phase5Trim2Slider, NULL, ui->phase5Trim3Value, NULL, ui->phase5Trim3Slider, NULL, ui->phase5Trim4Value, NULL, ui->phase5Trim4Slider);
+      break;
+    case 6:
+      displayOnePhase(6, NULL, NULL, NULL, NULL, NULL, ui->phase6Trim1Value, NULL, ui->phase6Trim1Slider, NULL, ui->phase6Trim2Value, NULL, ui->phase6Trim2Slider, NULL, ui->phase6Trim3Value, NULL, ui->phase6Trim3Slider, NULL, ui->phase6Trim4Value, NULL, ui->phase6Trim4Slider);
+      break;
+    case 7:
+      displayOnePhase(7, NULL, NULL, NULL, NULL, NULL, ui->phase7Trim1Value, NULL, ui->phase7Trim1Slider, NULL, ui->phase7Trim2Value, NULL, ui->phase7Trim2Slider, NULL, ui->phase7Trim3Value, NULL, ui->phase7Trim3Slider, NULL, ui->phase7Trim4Value, NULL, ui->phase7Trim4Slider);
+      break;
+    case 8:
+      displayOnePhase(8, NULL, NULL, NULL, NULL, NULL, ui->phase8Trim1Value, NULL, ui->phase8Trim1Slider, NULL, ui->phase8Trim2Value, NULL, ui->phase8Trim2Slider, NULL, ui->phase8Trim3Value, NULL, ui->phase8Trim3Slider, NULL, ui->phase8Trim4Value, NULL, ui->phase8Trim4Slider);
       break;
   }
   phasesLock = false;
