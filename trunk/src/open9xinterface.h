@@ -69,14 +69,42 @@ class Open9xInterface : public EEPROMInterface
 
 };
 
-#define OPEN9X_BIN_URL "http://open9x.freehosting.com/binaries/"
+class Open9xFirmware: public FirmwareInfo
+{
+  public:
+    Open9xFirmware(const char * id, const QString & name, EEPROMInterface * eepromInterface):
+      FirmwareInfo(id, name, eepromInterface)
+    {
+    }
 
-extern const char * OPEN9X_STAMP;
-extern const char * OPEN9X_V4_STAMP;
-extern const char * OPEN9X_ARM_STAMP;
+    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, QString url, const char * stamp):
+      FirmwareInfo(id, eepromInterface, url, stamp)
+    {
+    }
 
-void include_open9x_stock_binaries(FirmwareInfo * open9x);
-void include_open9x_v4_binaries(FirmwareInfo * open9x);
-void include_open9x_arm_binaries(FirmwareInfo * open9x);
+    virtual unsigned int getEepromVersion(unsigned int revision) {
+      if (this->eepromInterface->getBoard() == BOARD_GRUVIN9X) {
+        if (revision == 0 || revision >= 547)
+          return 207;
+        else if (revision >= 469)
+          return 206;
+      }
+      else {
+        if (revision == 0/* || revision >= */)
+          return 205;
+      }
+      if (revision >= 321)
+        return 205;
+      else if (revision >= 217)
+        return 204;
+      else if (revision >= 184)
+        return 203;
+      else
+        return 202;
+    }
+
+    virtual void addOptions(const char *binaries[]);
+
+};
 
 #endif
