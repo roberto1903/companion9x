@@ -70,7 +70,6 @@ PACK(typedef struct t_Open9xArmPhaseData_v208 {
   char name[6];
   uint8_t fadeIn:4;
   uint8_t fadeOut:4;
-  int16_t rotaryEncoders[2];
   operator PhaseData();
   t_Open9xArmPhaseData_v208() { memset(this, 0, sizeof(t_Open9xArmPhaseData_v208)); }
   t_Open9xArmPhaseData_v208(PhaseData &eepe);
