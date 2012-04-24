@@ -1452,20 +1452,36 @@ void ModelEdit::on_phase1Name_editingFinished() { on_phaseName_editingFinished(1
 void ModelEdit::on_phase2Name_editingFinished() { on_phaseName_editingFinished(2, ui->phase2Name); }
 void ModelEdit::on_phase3Name_editingFinished() { on_phaseName_editingFinished(3, ui->phase3Name); }
 void ModelEdit::on_phase4Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase4Name); }
+void ModelEdit::on_phase5Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase5Name); }
+void ModelEdit::on_phase6Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase6Name); }
+void ModelEdit::on_phase7Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase7Name); }
+void ModelEdit::on_phase8Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase8Name); }
 void ModelEdit::on_phase1Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(1, index); }
 void ModelEdit::on_phase2Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(2, index); }
 void ModelEdit::on_phase3Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(3, index); }
 void ModelEdit::on_phase4Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(4, index); }
+void ModelEdit::on_phase5Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(5, index); }
+void ModelEdit::on_phase6Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(6, index); }
+void ModelEdit::on_phase7Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(7, index); }
+void ModelEdit::on_phase8Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(8, index); }
 void ModelEdit::on_phase0FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(0, value); }
-void ModelEdit::on_phase0FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(0, value); }
 void ModelEdit::on_phase1FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(1, value); }
-void ModelEdit::on_phase1FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(1, value); }
 void ModelEdit::on_phase2FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(2, value); }
-void ModelEdit::on_phase2FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(2, value); }
 void ModelEdit::on_phase3FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(3, value); }
-void ModelEdit::on_phase3FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(3, value); }
 void ModelEdit::on_phase4FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(4, value); }
+void ModelEdit::on_phase5FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(5, value); }
+void ModelEdit::on_phase6FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(6, value); }
+void ModelEdit::on_phase7FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(7, value); }
+void ModelEdit::on_phase8FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(8, value); }
+void ModelEdit::on_phase0FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(0, value); }
+void ModelEdit::on_phase1FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(1, value); }
+void ModelEdit::on_phase2FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(2, value); }
+void ModelEdit::on_phase3FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(3, value); }
 void ModelEdit::on_phase4FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(4, value); }
+void ModelEdit::on_phase5FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(5, value); }
+void ModelEdit::on_phase6FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(6, value); }
+void ModelEdit::on_phase7FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(7, value); }
+void ModelEdit::on_phase8FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(8, value); }
 
 void ModelEdit::on_timer1ModeCB_currentIndexChanged(int index)
 {
@@ -2341,6 +2357,22 @@ void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { on_phaseTrimU
 void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 2, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); }
 void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 3, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); }
 void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 4, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); }
+void ModelEdit::on_phase5Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 1, index, ui->phase5Trim1Value, ui->phase5Trim1Slider); }
+void ModelEdit::on_phase5Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 2, index, ui->phase5Trim2Value, ui->phase5Trim2Slider); }
+void ModelEdit::on_phase5Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 3, index, ui->phase5Trim3Value, ui->phase5Trim3Slider); }
+void ModelEdit::on_phase5Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 4, index, ui->phase5Trim4Value, ui->phase5Trim4Slider); }
+void ModelEdit::on_phase6Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 1, index, ui->phase6Trim1Value, ui->phase6Trim1Slider); }
+void ModelEdit::on_phase6Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 2, index, ui->phase6Trim2Value, ui->phase6Trim2Slider); }
+void ModelEdit::on_phase6Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 3, index, ui->phase6Trim3Value, ui->phase6Trim3Slider); }
+void ModelEdit::on_phase6Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 4, index, ui->phase6Trim4Value, ui->phase6Trim4Slider); }
+void ModelEdit::on_phase7Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 1, index, ui->phase7Trim1Value, ui->phase7Trim1Slider); }
+void ModelEdit::on_phase7Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 2, index, ui->phase7Trim2Value, ui->phase7Trim2Slider); }
+void ModelEdit::on_phase7Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 3, index, ui->phase7Trim3Value, ui->phase7Trim3Slider); }
+void ModelEdit::on_phase7Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 4, index, ui->phase7Trim4Value, ui->phase7Trim4Slider); }
+void ModelEdit::on_phase8Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 1, index, ui->phase8Trim1Value, ui->phase8Trim1Slider); }
+void ModelEdit::on_phase8Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 2, index, ui->phase8Trim2Value, ui->phase8Trim2Slider); }
+void ModelEdit::on_phase8Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 3, index, ui->phase8Trim3Value, ui->phase8Trim3Slider); }
+void ModelEdit::on_phase8Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 4, index, ui->phase8Trim4Value, ui->phase8Trim4Slider); }
 
 void ModelEdit::on_phase0Trim1_valueChanged(int value) { on_phaseTrim_valueChanged(0, 1, value); }
 void ModelEdit::on_phase0Trim2_valueChanged(int value) { on_phaseTrim_valueChanged(0, 2, value); }
@@ -2363,6 +2395,22 @@ void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { on_phaseTrim_value
 void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 2, value); }
 void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 3, value); }
 void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 4, value); }
+void ModelEdit::on_phase5Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 1, value); }
+void ModelEdit::on_phase5Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 2, value); }
+void ModelEdit::on_phase5Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 3, value); }
+void ModelEdit::on_phase5Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 4, value); }
+void ModelEdit::on_phase6Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 1, value); }
+void ModelEdit::on_phase6Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 2, value); }
+void ModelEdit::on_phase6Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 3, value); }
+void ModelEdit::on_phase6Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 4, value); }
+void ModelEdit::on_phase7Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 1, value); }
+void ModelEdit::on_phase7Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 2, value); }
+void ModelEdit::on_phase7Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 3, value); }
+void ModelEdit::on_phase7Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 4, value); }
+void ModelEdit::on_phase8Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 1, value); }
+void ModelEdit::on_phase8Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 2, value); }
+void ModelEdit::on_phase8Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 3, value); }
+void ModelEdit::on_phase8Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 4, value); }
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
