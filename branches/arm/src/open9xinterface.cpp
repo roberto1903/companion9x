@@ -346,7 +346,10 @@ int Open9xInterface::getCapability(const Capability capability)
     case Timers:
       return 2;
     case FuncSwitches:
-      return O9X_NUM_FSW;
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_FSW; 
+      else
+        return O9X_NUM_FSW;
     case CustomSwitches:
       if (board == BOARD_ERSKY9X)
         return O9X_ARM_NUM_CSW;
