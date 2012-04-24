@@ -122,6 +122,10 @@ FirmwareInfo * default_firmware = NULL;
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
 
+extern const char *open9x_stock_binaries[];
+extern const char *open9x_v4_binaries[];
+extern const char *open9x_arm_binaries[];
+
 void RegisterFirmwares()
 {
   firmwares.push_back(new FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/th9x.bin","http://th9x.googlecode.com/svn/trunk/src/stamp-th9x.h"));
@@ -145,15 +149,17 @@ void RegisterFirmwares()
   firmwares.push_back(new FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X)));
 
-  firmwares.push_back(new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK)));
-  FirmwareInfo * open9x = firmwares.last();
-  include_open9x_stock_binaries(open9x);
-  firmwares.push_back(new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X)));
-  open9x = firmwares.last();
-  include_open9x_v4_binaries(open9x);
-  firmwares.push_back(new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X)));
-  open9x = firmwares.last();
-  include_open9x_arm_binaries(open9x);
+  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK));
+  open9x->addOptions(open9x_stock_binaries);
+  firmwares.push_back(open9x);
+
+  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X));
+  open9x->addOptions(open9x_v4_binaries);
+  firmwares.push_back(open9x);
+
+  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X));
+  open9x->addOptions(open9x_arm_binaries);
+  firmwares.push_back(open9x);
 
   firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
 

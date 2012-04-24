@@ -175,7 +175,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       break;
     // case 206:
     case 207:
-      // TODO the comment
+      // V4: Rotary Encoders position in FlightPhases
       break;
     default:
       std::cout << "not open9x\n";
@@ -238,7 +238,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
-      int result;
+      int result = 0;
       switch(version) {
         case 202:
           result = saveModel<Open9xModelData_v202>(i, radioData.models[i]);
@@ -252,10 +252,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         case 205:
           result = saveModel<Open9xModelData_v205>(i, radioData.models[i]);
           break;
-        case 206:
         case 207:
-          // Now only for V4
-          result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
           break;
       }
       if (!result)
@@ -405,6 +404,25 @@ SimulatorInterface * Open9xInterface::getSimulator()
   }
 }
 
-const char * OPEN9X_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
+#define OPEN9X_BIN_URL "http://open9x.freehosting.com/binaries/"
+
+const char * OPEN9X_STOCK_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x.txt";
 const char * OPEN9X_V4_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://open9x.freehosting.com/binaries/stamp-open9x-arm.txt";
+
+void Open9xFirmware::addOptions(const char *binaries[])
+{
+  for (int i=0; binaries[i]; i++) {
+    switch (eepromInterface->getBoard()) {
+      case BOARD_STOCK:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_STOCK_STAMP));
+        break;
+      case BOARD_GRUVIN9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_V4_STAMP));
+        break;
+      case BOARD_ERSKY9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".bin", OPEN9X_ARM_STAMP));
+        break;
+    }
+  }
+}

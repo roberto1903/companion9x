@@ -84,7 +84,7 @@ FirmwareInfo * preferencesDialog::getFirmware(bool state)
             if (ok) return firmware_option;
           }
         }
-        if (firmware->url)
+        if (!firmware->url.isNull())
           return firmware;
         else
           return firmware->options.at(0);
@@ -112,7 +112,7 @@ void preferencesDialog::firmwareChanged(bool state)
   FirmwareInfo * fw = getFirmware(state);
   QString stamp;
   stamp.append(fw->stamp);
-  ui->fw_dnld->setEnabled(fw->url);
+  ui->fw_dnld->setEnabled(!fw->url.isNull());
   populateFirmwareOptions(fw);
   if (cb) {
     if (cb->isChecked()!=state) {
@@ -337,7 +337,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 {
   MainWindow * mw = (MainWindow *)this->parent();
   FirmwareInfo *fw = getFirmware();
-  if (fw->url)
+  if (!fw->url.isNull())
     mw->downloadLatestFW(fw);
   firmwareChanged(true);
 }
