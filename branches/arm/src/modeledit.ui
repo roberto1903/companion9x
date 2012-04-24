@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>9</number>
+      <number>7</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -4059,8 +4059,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>307</width>
-            <height>462</height>
+            <width>807</width>
+            <height>513</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -5356,8 +5356,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>702</width>
-            <height>468</height>
+            <width>807</width>
+            <height>484</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -10038,7 +10038,7 @@
              </widget>
             </item>
             <item row="15" column="0">
-             <widget class="QLabel" name="label_115">
+             <widget class="QLabel" name="cswlabel_15">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10067,7 +10067,7 @@
              </widget>
             </item>
             <item row="13" column="0">
-             <widget class="QLabel" name="label_113">
+             <widget class="QLabel" name="cswlabel_13">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10124,7 +10124,7 @@
              </widget>
             </item>
             <item row="6" column="0">
-             <widget class="QLabel" name="label_35">
+             <widget class="QLabel" name="cswlabel_6">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10143,7 +10143,7 @@
              </widget>
             </item>
             <item row="9" column="0">
-             <widget class="QLabel" name="label_99">
+             <widget class="QLabel" name="cswlabel_9">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10162,7 +10162,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_30">
+             <widget class="QLabel" name="cswlabel_1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10191,7 +10191,7 @@
              </widget>
             </item>
             <item row="8" column="0">
-             <widget class="QLabel" name="label_82">
+             <widget class="QLabel" name="cswlabel_8">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10220,7 +10220,7 @@
              </widget>
             </item>
             <item row="7" column="0">
-             <widget class="QLabel" name="label_81">
+             <widget class="QLabel" name="cswlabel_7">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10259,7 +10259,7 @@
              </widget>
             </item>
             <item row="10" column="0">
-             <widget class="QLabel" name="label_100">
+             <widget class="QLabel" name="cswlabel_10">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10288,7 +10288,7 @@
              </widget>
             </item>
             <item row="11" column="0">
-             <widget class="QLabel" name="label_101">
+             <widget class="QLabel" name="cswlabel_11">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10317,7 +10317,7 @@
              </widget>
             </item>
             <item row="12" column="0">
-             <widget class="QLabel" name="label_102">
+             <widget class="QLabel" name="cswlabel_12">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10366,7 +10366,7 @@
              </widget>
             </item>
             <item row="5" column="0">
-             <widget class="QLabel" name="label_34">
+             <widget class="QLabel" name="cswlabel_5">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10414,25 +10414,6 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_33">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <property name="text">
-               <string>CSwitch4</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QLabel" name="cswFuncLabel">
               <property name="sizePolicy">
@@ -10453,7 +10434,7 @@
              </widget>
             </item>
             <item row="3" column="0">
-             <widget class="QLabel" name="label_32">
+             <widget class="QLabel" name="cswlabel_3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10472,7 +10453,7 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label_31">
+             <widget class="QLabel" name="cswlabel_2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10491,7 +10472,7 @@
              </widget>
             </item>
             <item row="14" column="0">
-             <widget class="QLabel" name="label_114">
+             <widget class="QLabel" name="cswlabel_14">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10510,7 +10491,7 @@
              </widget>
             </item>
             <item row="16" column="0">
-             <widget class="QLabel" name="label_119">
+             <widget class="QLabel" name="cswlabel_16">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10535,6 +10516,25 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="cswlabel_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="text">
+               <string>CSwitch4</string>
               </property>
              </widget>
             </item>
@@ -10595,7 +10595,7 @@
              </widget>
             </item>
             <item row="13" column="0">
-             <widget class="QLabel" name="label_116">
+             <widget class="QLabel" name="cswlabel_29">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10662,7 +10662,7 @@
              </widget>
             </item>
             <item row="6" column="0">
-             <widget class="QLabel" name="label_62">
+             <widget class="QLabel" name="cswlabel_22">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10681,7 +10681,7 @@
              </widget>
             </item>
             <item row="9" column="0">
-             <widget class="QLabel" name="label_104">
+             <widget class="QLabel" name="cswlabel_25">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10700,7 +10700,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_63">
+             <widget class="QLabel" name="cswlabel_17">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10729,7 +10729,7 @@
              </widget>
             </item>
             <item row="8" column="0">
-             <widget class="QLabel" name="label_105">
+             <widget class="QLabel" name="cswlabel_24">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10748,7 +10748,7 @@
              </widget>
             </item>
             <item row="7" column="0">
-             <widget class="QLabel" name="label_109">
+             <widget class="QLabel" name="cswlabel_23">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10787,7 +10787,7 @@
              </widget>
             </item>
             <item row="10" column="0">
-             <widget class="QLabel" name="label_110">
+             <widget class="QLabel" name="cswlabel_26">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10816,7 +10816,7 @@
              </widget>
             </item>
             <item row="11" column="0">
-             <widget class="QLabel" name="label_111">
+             <widget class="QLabel" name="cswlabel_27">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10845,7 +10845,7 @@
              </widget>
             </item>
             <item row="12" column="0">
-             <widget class="QLabel" name="label_112">
+             <widget class="QLabel" name="cswlabel_28">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10894,7 +10894,7 @@
              </widget>
             </item>
             <item row="5" column="0">
-             <widget class="QLabel" name="label_64">
+             <widget class="QLabel" name="cswlabel_21">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10933,7 +10933,7 @@
              </widget>
             </item>
             <item row="4" column="0">
-             <widget class="QLabel" name="label_65">
+             <widget class="QLabel" name="cswlabel_20">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10971,7 +10971,7 @@
              </widget>
             </item>
             <item row="3" column="0">
-             <widget class="QLabel" name="label_67">
+             <widget class="QLabel" name="cswlabel_19">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -10990,7 +10990,7 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label_68">
+             <widget class="QLabel" name="cswlabel_18">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -11009,7 +11009,7 @@
              </widget>
             </item>
             <item row="14" column="0">
-             <widget class="QLabel" name="label_117">
+             <widget class="QLabel" name="cswlabel_30">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -11028,7 +11028,7 @@
              </widget>
             </item>
             <item row="15" column="0">
-             <widget class="QLabel" name="label_118">
+             <widget class="QLabel" name="cswlabel_31">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -11047,7 +11047,7 @@
              </widget>
             </item>
             <item row="16" column="0">
-             <widget class="QLabel" name="label_120">
+             <widget class="QLabel" name="cswlabel_32">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
@@ -11120,8 +11120,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>807</width>
+            <height>513</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

@@ -30,6 +30,7 @@ private:
     QDoubleSpinBox* minSB[4];
     QDoubleSpinBox* maxSB[4];
     QComboBox* csf[8];
+    QComboBox* csw[NUM_CSW];
     MixersList *ExposlistWidget;
 
     MixersList *MixerlistWidget;

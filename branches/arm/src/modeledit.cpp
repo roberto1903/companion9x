@@ -943,32 +943,40 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
 void ModelEdit::updateSwitchesTab()
 {
     switchEditLock = true;
-
-    populateCSWCB(ui->cswitchFunc_1, g_model.customSw[0].func);
-    populateCSWCB(ui->cswitchFunc_2, g_model.customSw[1].func);
-    populateCSWCB(ui->cswitchFunc_3, g_model.customSw[2].func);
-    populateCSWCB(ui->cswitchFunc_4, g_model.customSw[3].func);
-    populateCSWCB(ui->cswitchFunc_5, g_model.customSw[4].func);
-    populateCSWCB(ui->cswitchFunc_6, g_model.customSw[5].func);
-    populateCSWCB(ui->cswitchFunc_7, g_model.customSw[6].func);
-    populateCSWCB(ui->cswitchFunc_8, g_model.customSw[7].func);
-    populateCSWCB(ui->cswitchFunc_9, g_model.customSw[8].func);
-    populateCSWCB(ui->cswitchFunc_10,g_model.customSw[9].func);
-    populateCSWCB(ui->cswitchFunc_11,g_model.customSw[10].func);
-    populateCSWCB(ui->cswitchFunc_12,g_model.customSw[11].func);
-
-    for(int i=0; i<NUM_CSW; i++)
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for (int i=0; i< num_csw; i++) {
+      populateCSWCB(csw[i], g_model.customSw[i].func);
       setSwitchWidgetVisibility(i);
+    }
 
     switchEditLock = false;
 }
 
 void ModelEdit::tabCustomSwitches()
 {
-    switchEditLock = true;
 
-    for(int i=0; i<std::min(16,NUM_CSW); i++)
-    {
+    switchEditLock = true;
+    QComboBox* tmpcsw[NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
+      ui->cswitchFunc_5, ui->cswitchFunc_5, ui->cswitchFunc_7, ui->cswitchFunc_8,
+      ui->cswitchFunc_9, ui->cswitchFunc_10, ui->cswitchFunc_11, ui->cswitchFunc_12,
+      ui->cswitchFunc_13, ui->cswitchFunc_14, ui->cswitchFunc_15, ui->cswitchFunc_16,
+      ui->cswitchFunc_16, ui->cswitchFunc_18, ui->cswitchFunc_19, ui->cswitchFunc_20,
+      ui->cswitchFunc_21, ui->cswitchFunc_22, ui->cswitchFunc_23, ui->cswitchFunc_24,
+      ui->cswitchFunc_25, ui->cswitchFunc_26, ui->cswitchFunc_27, ui->cswitchFunc_28,
+      ui->cswitchFunc_29, ui->cswitchFunc_30, ui->cswitchFunc_31, ui->cswitchFunc_32 };
+    QLabel* cswlabel[NUM_CSW] = { ui->cswlabel_1, ui->cswlabel_2, ui->cswlabel_3, ui->cswlabel_4,
+      ui->cswlabel_5, ui->cswlabel_6, ui->cswlabel_7, ui->cswlabel_8,
+      ui->cswlabel_9, ui->cswlabel_10, ui->cswlabel_11, ui->cswlabel_12,
+      ui->cswlabel_13, ui->cswlabel_14, ui->cswlabel_15, ui->cswlabel_16,
+      ui->cswlabel_17, ui->cswlabel_18, ui->cswlabel_19, ui->cswlabel_20,
+      ui->cswlabel_21, ui->cswlabel_22, ui->cswlabel_23, ui->cswlabel_24, 
+      ui->cswlabel_25, ui->cswlabel_26, ui->cswlabel_27, ui->cswlabel_28, 
+      ui->cswlabel_29, ui->cswlabel_30, ui->cswlabel_31, ui->cswlabel_32};
+    
+    memcpy(csw, tmpcsw, sizeof(csw));
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for(int i=0; i<16; i++) {
+      if (i<num_csw) {
         cswitchSource1[i] = new QComboBox(this);
         connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchSource1[i],i+1,2);
@@ -986,10 +994,14 @@ void ModelEdit::tabCustomSwitches()
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
+      } else {
+        csw[i]->hide();
+        cswlabel[i]->hide();
+      }
     }
-    if (NUM_CSW>16) {
-      for(int i=16; i<NUM_CSW; i++)
-      {
+    if (num_csw>16) {
+      for(int i=16; i<32; i++) {
+        if (i<=num_csw) {
           cswitchSource1[i] = new QComboBox(this);
           connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchSource1[i],i-15,2);
@@ -1007,25 +1019,19 @@ void ModelEdit::tabCustomSwitches()
           connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
           cswitchOffset[i]->setVisible(false);
+        } else {
+          csw[i]->hide();
+          cswlabel[i]->hide();
+        }
       }
     } else {
       ui->cswitchGB2->hide();
     }
     updateSwitchesTab();
-
     //connects
-    connect(ui->cswitchFunc_1,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_2,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_3,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_4,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_5,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_6,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_7,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_8,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_9,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_10,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_11,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_12,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    for (int i=0; i<num_csw; i++) {
+      connect(csw[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    }
 
     switchEditLock = false;
 }
@@ -1033,8 +1039,8 @@ void ModelEdit::tabCustomSwitches()
 void ModelEdit::tabFunctionSwitches()
 {
     switchEditLock = true;
-
-    for(int i=0; i<std::min(16,NUM_FSW); i++) {
+    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+    for(int i=0; i<std::min(16,num_fsw); i++) {
         fswtchSwtch[i] = new QComboBox(this);
         connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
         ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
@@ -1067,8 +1073,8 @@ void ModelEdit::tabFunctionSwitches()
 //          }
 //        }
     }
-    if (NUM_FSW>16) {
-      for(int i=16; i<NUM_FSW; i++) {
+    if (num_fsw>16) {
+      for(int i=16; i<num_fsw; i++) {
           fswtchSwtch[i] = new QComboBox(this);
           connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
           ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
@@ -1145,38 +1151,13 @@ void ModelEdit::customSwitchesEdited()
     switchEditLock = true;
 
     bool chAr[NUM_CSW];
-
-    chAr[0]  = (CS_STATE(g_model.customSw[0].func)) !=(CS_STATE(ui->cswitchFunc_1->currentIndex()));
-    chAr[1]  = (CS_STATE(g_model.customSw[1].func)) !=(CS_STATE(ui->cswitchFunc_2->currentIndex()));
-    chAr[2]  = (CS_STATE(g_model.customSw[2].func)) !=(CS_STATE(ui->cswitchFunc_3->currentIndex()));
-    chAr[3]  = (CS_STATE(g_model.customSw[3].func)) !=(CS_STATE(ui->cswitchFunc_4->currentIndex()));
-    chAr[4]  = (CS_STATE(g_model.customSw[4].func)) !=(CS_STATE(ui->cswitchFunc_5->currentIndex()));
-    chAr[5]  = (CS_STATE(g_model.customSw[5].func)) !=(CS_STATE(ui->cswitchFunc_6->currentIndex()));
-    chAr[6]  = (CS_STATE(g_model.customSw[6].func)) !=(CS_STATE(ui->cswitchFunc_7->currentIndex()));
-    chAr[7]  = (CS_STATE(g_model.customSw[7].func)) !=(CS_STATE(ui->cswitchFunc_8->currentIndex()));
-    chAr[8]  = (CS_STATE(g_model.customSw[8].func)) !=(CS_STATE(ui->cswitchFunc_9->currentIndex()));
-    chAr[9]  = (CS_STATE(g_model.customSw[9].func)) !=(CS_STATE(ui->cswitchFunc_10->currentIndex()));
-    chAr[10] = (CS_STATE(g_model.customSw[10].func))!=(CS_STATE(ui->cswitchFunc_11->currentIndex()));
-    chAr[11] = (CS_STATE(g_model.customSw[11].func))!=(CS_STATE(ui->cswitchFunc_12->currentIndex()));
-
-    g_model.customSw[0].func  = ui->cswitchFunc_1->currentIndex();
-    g_model.customSw[1].func  = ui->cswitchFunc_2->currentIndex();
-    g_model.customSw[2].func  = ui->cswitchFunc_3->currentIndex();
-    g_model.customSw[3].func  = ui->cswitchFunc_4->currentIndex();
-    g_model.customSw[4].func  = ui->cswitchFunc_5->currentIndex();
-    g_model.customSw[5].func  = ui->cswitchFunc_6->currentIndex();
-    g_model.customSw[6].func  = ui->cswitchFunc_7->currentIndex();
-    g_model.customSw[7].func  = ui->cswitchFunc_8->currentIndex();
-    g_model.customSw[8].func  = ui->cswitchFunc_9->currentIndex();
-    g_model.customSw[9].func  = ui->cswitchFunc_10->currentIndex();
-    g_model.customSw[10].func = ui->cswitchFunc_11->currentIndex();
-    g_model.customSw[11].func = ui->cswitchFunc_12->currentIndex();
-
-
-    for(int i=0; i<NUM_CSW; i++)
-    {
-        if(chAr[i])
-        {
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for (int i=0; i<num_csw;i++) {
+        chAr[i]  = (CS_STATE(g_model.customSw[i].func)) !=(CS_STATE(csw[i]->currentIndex()));
+        g_model.customSw[i].func  = csw[i]->currentIndex();
+    }
+    for(int i=0; i<num_csw; i++) {
+        if(chAr[i]) {
             g_model.customSw[i].val1 = 0;
             g_model.customSw[i].val2 = 0;
             setSwitchWidgetVisibility(i);
@@ -1210,8 +1191,8 @@ void ModelEdit::functionSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
-
-    for(int i=0; i<NUM_FSW; i++) {
+    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+    for(int i=0; i<num_fsw; i++) {
       g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
