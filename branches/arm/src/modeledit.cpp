@@ -967,16 +967,16 @@ void ModelEdit::tabCustomSwitches()
 {
     switchEditLock = true;
 
-    for(int i=0; i<NUM_CSW; i++)
+    for(int i=0; i<std::min(16,NUM_CSW); i++)
     {
         cswitchSource1[i] = new QComboBox(this);
         connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchSource1[i],i+1,2);
+        ui->gridLayout_21->addWidget(cswitchSource1[i],i+1,2);
         cswitchSource1[i]->setVisible(false);
 
         cswitchSource2[i] = new QComboBox(this);
         connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchSource2[i],i+1,3);
+        ui->gridLayout_21->addWidget(cswitchSource2[i],i+1,3);
         cswitchSource2[i]->setVisible(false);
 
         cswitchOffset[i] = new QSpinBox(this);
@@ -984,10 +984,33 @@ void ModelEdit::tabCustomSwitches()
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchOffset[i],i+1,3);
+        ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
     }
+    if (NUM_CSW>16) {
+      for(int i=16; i<NUM_CSW; i++)
+      {
+          cswitchSource1[i] = new QComboBox(this);
+          connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchSource1[i],i-15,2);
+          cswitchSource1[i]->setVisible(false);
 
+          cswitchSource2[i] = new QComboBox(this);
+          connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchSource2[i],i-15,3);
+          cswitchSource2[i]->setVisible(false);
+
+          cswitchOffset[i] = new QSpinBox(this);
+          cswitchOffset[i]->setMaximum(125);
+          cswitchOffset[i]->setMinimum(-125);
+          cswitchOffset[i]->setAccelerated(true);
+          connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
+          cswitchOffset[i]->setVisible(false);
+      }
+    } else {
+      ui->cswitchGB2->hide();
+    }
     updateSwitchesTab();
 
     //connects
@@ -1011,7 +1034,7 @@ void ModelEdit::tabFunctionSwitches()
 {
     switchEditLock = true;
 
-    for(int i=0; i<NUM_FSW; i++)
+    for(int i=0; i<std::min(16,NUM_FSW); i++)
     {
         fswtchSwtch[i] = new QComboBox(this);
         connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
