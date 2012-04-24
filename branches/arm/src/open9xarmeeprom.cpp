@@ -75,10 +75,31 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-#warning TODO
-#if 0
-    srcRaw = c9x.srcRaw;
-#endif
+    if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+      srcRaw = 0;
+      swtch = 0;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+      srcRaw = 1 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 8;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 9;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
+      srcRaw = 10 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+      srcRaw = 10+9+O9X_ARM_NUM_CSW + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+      srcRaw = 10+9+O9X_ARM_NUM_CSW+NUM_CYC + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+      srcRaw = 10+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM + c9x.srcRaw.index;
+    }
     weight = c9x.weight;
     differential = c9x.differential/2;
     swtch = c9x.swtch;
@@ -100,11 +121,32 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
 t_Open9xArmMixData_v208::operator MixData ()
 {
   MixData c9x;
-#warning TODO
-#if 0
   if (srcRaw) {
     c9x.destCh = destCh+1;
-    c9x.srcRaw = RawSource(srcRaw);
+    if (srcRaw == 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+    }
+    else if (srcRaw <= 7) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+    }
+    else if (srcRaw == 8) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (srcRaw == 9) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
+    }
+    else if (srcRaw <= 9+9+O9X_ARM_NUM_CSW) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-10);
+    }
+    else if (srcRaw <= 9+9+O9X_ARM_NUM_CSW+NUM_CYC) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10-9-O9X_ARM_NUM_CSW);
+    }
+    else if (srcRaw <= 9+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-10-9-O9X_ARM_NUM_CSW-NUM_CYC);
+    }
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-10-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
+    }
     c9x.weight = weight;
     c9x.differential = differential*2;
     c9x.swtch = swtch;
@@ -119,7 +161,6 @@ t_Open9xArmMixData_v208::operator MixData ()
     c9x.phase = phase;
     c9x.sOffset = sOffset;
   }
-#endif
   return c9x;
 }
 
@@ -155,7 +196,7 @@ t_Open9xArmModelData_v208::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -198,7 +239,7 @@ t_Open9xArmModelData_v208::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE 761
+#define MODEL_DATA_SIZE 1916
 t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE) {
@@ -272,7 +313,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
     }
 
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {

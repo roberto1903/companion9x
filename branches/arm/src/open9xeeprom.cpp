@@ -252,12 +252,16 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
     swtch = 0;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
-    srcRaw = c9x.srcRaw.index;
+    srcRaw = 1 + c9x.srcRaw.index;
     swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
-    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-    srcRaw = c9x.srcRaw.index + 4; // use pots instead
+    EEPROMWarnings += ::QObject::tr("open9x on this board doesn't have Rotary Encoders") + "\n";
+    srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+    swtch = c9x.swtch;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+    srcRaw = 8; // MAX
     swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
@@ -348,12 +352,16 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
     swtch = 0;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
-    srcRaw = c9x.srcRaw.index;
+    srcRaw = 1 + c9x.srcRaw.index;
     swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
-    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-    srcRaw = c9x.srcRaw.index + 4; // use pots instead
+    EEPROMWarnings += ::QObject::tr("open9x on this board doesn't have Rotary Encoders") + "\n";
+    srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+    swtch = c9x.swtch;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+    srcRaw = 8; // MAX
     swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
@@ -438,35 +446,38 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
+    swtch = c9x.swtch;
+
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
       swtch = 0;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
-      srcRaw = c9x.srcRaw.index;
-      swtch = c9x.swtch;
+      srcRaw = 1 + c9x.srcRaw.index;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
       EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-      srcRaw = c9x.srcRaw.index + 4; // use pots instead
-      swtch = c9x.swtch;
+      srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 8; // MAX
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 9;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 9; // FULL
-      swtch = c9x.srcRaw.index+1;
-    }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-      swtch = c9x.swtch;
       srcRaw = 10 + c9x.srcRaw.index;
     }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+      srcRaw = 31 + c9x.srcRaw.index;
+    }
     else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-      swtch = c9x.swtch;
-      srcRaw = 13 + c9x.srcRaw.index;
+      srcRaw = 34 + c9x.srcRaw.index;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-      swtch = c9x.swtch;
-      srcRaw = 21 + c9x.srcRaw.index;
+      srcRaw = 42 + c9x.srcRaw.index;
     }
+
     weight = c9x.weight;
     differential = c9x.differential/2;
     swtch = c9x.swtch;
@@ -501,23 +512,19 @@ t_Open9xMixData_v205::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
     else if (srcRaw == 9) {
-      if (swtch < 0) {
-        c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
-        c9x.weight = -weight;
-      }
-      else {
-        c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
-      }
-      c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
-    else if (srcRaw <= 12) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
+    else if (srcRaw <= 30) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-10);
     }
-    else if (srcRaw <= 20) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-13);
+    else if (srcRaw <= 33) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-31);
+    }
+    else if (srcRaw <= 41) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-34);
     }
     else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-21);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-42);
     }
     c9x.weight = weight;
     c9x.differential = differential*2;
@@ -536,57 +543,92 @@ t_Open9xMixData_v205::operator MixData ()
   return c9x;
 }
 
+int8_t open9xFromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 21+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 37+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 39+source.index;
+  return v1;
+}
+
+RawSource open9xToSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 36) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 38) {
+    return RawSource(SOURCE_TYPE_TIMER, value-37);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+  }
+}
+
 t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &c9x)
 {
   func = c9x.func;
-  v1 = c9x.v1;
-  v2 = c9x.v2;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
 
-#warning TODO
-#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    if (c9x.v1 < SRC_REA)
-      v1 = c9x.v1;
-    else if (c9x.v1 > SRC_REB)
-      v1 = c9x.v1 - 2;
-    else {
-      EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-      v1 = c9x.v1 - 2;
-    }
+    v1 = open9xFromSource(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    if (c9x.v2 < SRC_REA)
-      v2 = c9x.v2;
-    else if (c9x.v1 > SRC_REB)
-      v2 = c9x.v2 - 2;
-    else {
-      EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-      v2 = c9x.v2 - 2;
-    }
+    v2 = open9xFromSource(RawSource(c9x.val2));
   }
-#endif
 }
 
 Open9xCustomSwData::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
-  c9x.v1 = v1;
-  c9x.v2 = v2;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
 
-#warning TODO
-#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    if (v1 >= SRC_REA)
-      c9x.v1 = v1 + 2;
+    c9x.val1 = open9xToSource(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    if (v2 >= SRC_REA)
-      c9x.v2 = v2 + 2;
+    c9x.val2 = open9xToSource(v2).toValue();
   }
-#endif
 
   return c9x;
 }
@@ -646,7 +688,7 @@ t_Open9xSwashRingData::t_Open9xSwashRingData(SwashRingData &c9x)
   invertAIL = c9x.invertAIL;
   invertCOL = c9x.invertCOL;
   type = c9x.type;
-  collectiveSource = c9x.collectiveSource;
+  collectiveSource = open9xFromSource(c9x.collectiveSource);
   value = c9x.value;
 }
 
@@ -657,7 +699,7 @@ t_Open9xSwashRingData::operator SwashRingData ()
   c9x.invertAIL = invertAIL;
   c9x.invertCOL = invertCOL;
   c9x.type = type;
-  c9x.collectiveSource = collectiveSource;
+  c9x.collectiveSource = open9xToSource(collectiveSource);
   c9x.value = value;
   return c9x;
 }
@@ -975,7 +1017,7 @@ t_Open9xModelData_v201::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -1039,7 +1081,7 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -1132,7 +1174,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {
@@ -1183,7 +1225,7 @@ t_Open9xModelData_v203::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -1284,7 +1326,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     }
 
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {
@@ -1335,7 +1377,7 @@ t_Open9xModelData_v204::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -1438,7 +1480,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     }
 
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {
@@ -1494,7 +1536,7 @@ t_Open9xModelData_v205::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -1537,10 +1579,11 @@ t_Open9xModelData_v205::operator ModelData ()
   return c9x;
 }
 
+#define MODEL_DATA_SIZE_205 756
 t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
 {
-  if (sizeof(*this) != 740) {
-    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(740));
+  if (sizeof(*this) != MODEL_DATA_SIZE_205) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_205));
   }
 
   if (c9x.used) {
@@ -1610,7 +1653,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     }
 
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {

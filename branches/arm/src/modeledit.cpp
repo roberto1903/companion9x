@@ -703,7 +703,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, NUM_XCHNRAW, false);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, false);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
@@ -914,28 +914,28 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
 {
     switch CS_STATE(g_model.customSw[i].func)
     {
-    case CS_VOFS:
+      case CS_VOFS:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
-        cswitchOffset[i]->setValue(g_model.customSw[i].v2);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
+        cswitchOffset[i]->setValue(g_model.customSw[i].val2);
         break;
-    case CS_VBOOL:
+      case CS_VBOOL:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSwitchCB(cswitchSource1[i],g_model.customSw[i].v1);
-        populateSwitchCB(cswitchSource2[i],g_model.customSw[i].v2);
+        populateSwitchCB(cswitchSource1[i], g_model.customSw[i].val1);
+        populateSwitchCB(cswitchSource2[i], g_model.customSw[i].val2);
         break;
-    case CS_VCOMP:
+      case CS_VCOMP:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
-        populateSourceCB(cswitchSource2[i], g_model.customSw[i].v2, NUM_XCHNCSW, false);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
+        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), false);
         break;
-    default:
+      default:
         break;
     }
 }
@@ -1119,26 +1119,26 @@ void ModelEdit::customSwitchesEdited()
     {
         if(chAr[i])
         {
-            g_model.customSw[i].v1 = 0;
-            g_model.customSw[i].v2 = 0;
+            g_model.customSw[i].val1 = 0;
+            g_model.customSw[i].val2 = 0;
             setSwitchWidgetVisibility(i);
         }
 
         switch(CS_STATE(g_model.customSw[i].func))
         {
-        case (CS_VOFS):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex();
-            g_model.customSw[i].v2 = cswitchOffset[i]->value();
+          case (CS_VOFS):
+            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+            g_model.customSw[i].val2 = cswitchOffset[i]->value();
             break;
-        case (CS_VBOOL):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
-            g_model.customSw[i].v2 = cswitchSource2[i]->currentIndex() - MAX_DRSWITCH;
+          case (CS_VBOOL):
+            g_model.customSw[i].val1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
+            g_model.customSw[i].val2 = cswitchSource2[i]->currentIndex() - MAX_DRSWITCH;
             break;
-        case (CS_VCOMP):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex();
-            g_model.customSw[i].v2 = cswitchSource2[i]->currentIndex();
+          case (CS_VCOMP):
+            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+            g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
             break;
-        default:
+          default:
             break;
         }
     }
@@ -3315,8 +3315,8 @@ void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 void ModelEdit::setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2)
 {
   g_model.customSw[idx-1].func = func;
-  g_model.customSw[idx-1].v1   = v1;
-  g_model.customSw[idx-1].v2   = v2;
+  g_model.customSw[idx-1].val1   = v1;
+  g_model.customSw[idx-1].val2   = v2;
 }
 
 void ModelEdit::applyTemplate(uint8_t idx)
@@ -3340,54 +3340,55 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   uint8_t j = 0;
 
-#warning TODO
-#if 0
   //Simple 4-Ch
   if(idx==j++) {
     if (md->destCh)
       clearMixes();
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight=100;
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100;
   }
 
   //T-Cut
   if(idx==j++) {
-      md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+      md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
   }
 
   //sticky t-cut
   if(idx==j++) {
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
-    md=setDest(14);            md->srcRaw=SRC_CH14; md->weight= 100;
-    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
-    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
-    setSwitch(0xB,CS_VNEG, STK_THR, -99);
-    setSwitch(0xC,CS_VPOS, CH(14), 0);
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_CH, 13); md->weight= 100;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+#warning TODO
+#if 0
+    setSwitch(0xB, CS_VNEG, STK_THR, -99);
+    setSwitch(0xC, CS_VPOS, CH(14), 0);
+#endif
     updateSwitchesTab();
   }
 
   //V-Tail
   if(idx==j++) {
     clearMixes();
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight= 100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_ELE;  md->weight=-100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_RUD;  md->weight= 100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight= 100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
   }
 
   //Elevon\\Delta
   if(idx==j++) {
     clearMixes();
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_AIL;  md->weight= 100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_ELE;  md->weight= 100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=-100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100;
   }
 
 
@@ -3398,29 +3399,32 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
     // Set up Mixes
     // 3 cyclic channels
-    md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
-    md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
-    md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100;
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100;
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100;
 
     // rudder
-    md=setDest(4);  md->srcRaw=SRC_RUD;   md->weight=100;
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);   md->weight=100;
 
     // throttle
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
     // gyro gain
+#warning TODO
+#if 0
     md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
+#endif
 
     // collective
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
     g_model.swashRingData.type = SWASH_TYPE_120;
-    g_model.swashRingData.collectiveSource = CH(11);
+    g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
     setCurve(CURVE5(1),heli_ar1);
@@ -3438,25 +3442,26 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   //Gyro Gain
   if(idx==j++) {
-    md=setDest(6);  md->srcRaw=SRC_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
-    md=setDest(6);  md->srcRaw=SRC_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
   }
 
   //Servo Test
   if(idx==j++) {
-    md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
-    md=setDest(16); md->srcRaw=SRC_SW1; md->weight= 110;
-    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
-    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
-
+    md=setDest(15); md->srcRaw=RawSource(SOURCE_TYPE_CH, 15);   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 9); md->weight= 110;
+#warning TODO
+#if 0
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
     setSwitch(1,CS_LESS,CH(15), CH(16));
     setSwitch(2,CS_VPOS,CH(15), 105);
     setSwitch(3,CS_VNEG,CH(15),-105);
+#endif
 
     // redraw switches tab
     updateSwitchesTab();
   }
-#endif
 }
 
 void ModelEdit::ControlCurveSignal(bool flag)

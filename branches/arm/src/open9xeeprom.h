@@ -200,7 +200,8 @@ PACK(typedef struct t_Open9xCustomSwData { // Custom Switches data
   operator CustomSwData();
   t_Open9xCustomSwData() { memset(this, 0, sizeof(t_Open9xCustomSwData)); }
   t_Open9xCustomSwData(CustomSwData&);
-
+  int8_t fromSource(RawSource source);
+  RawSource toSource(int8_t value);
 }) Open9xCustomSwData;
 
 PACK(typedef struct t_Open9xSafetySwData { // Safety Switches data
@@ -398,7 +399,7 @@ PACK(typedef struct t_Open9xTimerData_v202 {
 }) Open9xTimerData_v202;
 
 #define MAX_TIMERS 2
-#define MAX_PHASES 5
+#define O9X_MAX_PHASES 5
 #define O9X_MAX_MIXERS 32
 #define O9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
@@ -432,7 +433,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   Open9xSafetySwData  safetySw[O9X_NUM_CHNOUT];
   Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
-  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v201 frsky;
 
   operator ModelData();
@@ -465,7 +466,7 @@ PACK(typedef struct t_Open9xModelData_v202 {
   Open9xSafetySwData  safetySw[O9X_NUM_CHNOUT];
   Open9xFuncSwData_v201 funcSw[12];
   Open9xSwashRingData swashR;
-  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v202 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -500,7 +501,7 @@ PACK(typedef struct t_Open9xModelData_v203 {
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
-  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v202 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -535,7 +536,7 @@ PACK(typedef struct t_Open9xModelData_v204 {
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
-  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v204 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -570,13 +571,14 @@ PACK(typedef struct t_Open9xModelData_v205 {
   Open9xCustomSwData  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
-  Open9xPhaseData_v201 phaseData[MAX_PHASES];
+  Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v205 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
   uint8_t   frskyLines[4];
   uint16_t  frskyLinesXtra;
+  int8_t    servoCenter[O9X_NUM_CHNOUT];
 
   operator ModelData();
   t_Open9xModelData_v205() { memset(this, 0, sizeof(t_Open9xModelData_v205)); }

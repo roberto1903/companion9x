@@ -303,7 +303,7 @@ PACK(typedef struct t_Gruvin9xTimerData {
   t_Gruvin9xTimerData(TimerData &eepe);
 }) Gruvin9xTimerData;
 
-#define MAX_PHASES 5
+#define G9X_MAX_PHASES 5
 #define G9X_MAX_MIXERS 32
 #define G9X_MAX_EXPOS  14
 #define MAX_CURVE5 8
@@ -338,7 +338,7 @@ PACK(typedef struct t_Gruvin9xModelData_v102 {
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[G9X_MAX_PHASES];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();
@@ -370,7 +370,7 @@ PACK(typedef struct t_Gruvin9xModelData_v103 {
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[G9X_MAX_PHASES];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();
@@ -403,7 +403,7 @@ PACK(typedef struct t_Gruvin9xModelData_v105 {
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData_v102 phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v102 phaseData[G9X_MAX_PHASES];
   int16_t   subtrim[NUM_STICKS];
   Gruvin9xFrSkyData frsky;
 
@@ -437,7 +437,7 @@ PACK(typedef struct t_Gruvin9xModelData_v106 {
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
   Gruvin9xSwashRingData swashR;
-  Gruvin9xPhaseData_v106 phaseData[MAX_PHASES];
+  Gruvin9xPhaseData_v106 phaseData[G9X_MAX_PHASES];
   Gruvin9xFrSkyData frsky;
 
   operator ModelData();

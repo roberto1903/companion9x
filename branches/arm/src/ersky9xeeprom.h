@@ -159,8 +159,9 @@ PACK(typedef struct t_Ersky9xCustomSwData { // Custom Switches data
   uint8_t func;
 
   operator CustomSwData();
-  t_Ersky9xCustomSwData();
+  t_Ersky9xCustomSwData() { memset(this, 0, sizeof(t_Ersky9xCustomSwData)); }
   t_Ersky9xCustomSwData(CustomSwData&);
+
 }) Ersky9xCustomSwData;
 
 PACK(typedef struct t_Ersky9xSafetySwData { // Custom Switches data

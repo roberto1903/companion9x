@@ -49,15 +49,15 @@ const uint8_t modn12x3[4][4]= {
   {4, 3, 2, 1} };
 
 #define C9XMAX_MODELS  60
-#define MAX_PHASES  5
-#define MAX_MIXERS  32
-#define MAX_EXPOS   24
+#define MAX_PHASES  9
+#define MAX_MIXERS  64
+#define MAX_EXPOS   32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
-#define NUM_CHNOUT      16 // number of real output channels CH1-CH8
-#define NUM_CSW         12 // number of custom switches
-#define NUM_FSW         16 // number of functions assigned to switches
+#define NUM_CHNOUT      32 // number of real output channels CH1-CH8
+#define NUM_CSW         32 // number of custom switches
+#define NUM_FSW         32 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -199,6 +199,7 @@ enum EnumKeys {
 #define NUM_ROTARY_ENCODERS 2
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
+#define NUM_CYC             3
 
 #define MAX_TIMERS          2
 
@@ -208,7 +209,7 @@ enum EnumKeys {
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
 
-#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT)
+#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+NUM_CYC+NUM_PPM+NUM_CHNOUT)
 #define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
 #define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
 
@@ -337,13 +338,25 @@ class RawSource {
     {
     }
 
+    RawSource(unsigned int value):
+      type(RawSourceType(value/256)),
+      index(value%256)
+    {
+    }
+
     RawSource(RawSourceType type, int index=0):
       type(type),
       index(index)
     {
     }
 
+    unsigned int toValue();
+
     QString toString();
+
+    bool operator== ( const RawSource& other) {
+      return (this->type == other.type) && (this->index == other.index);
+    }
 
     RawSourceType type;
     int index;
@@ -375,8 +388,8 @@ class MixData {
 class CustomSwData { // Custom Switches data
   public:
     CustomSwData() { clear(); }
-    int8_t  v1; //input
-    int8_t  v2; //offset
+    int  val1; //input
+    int  val2; //offset
     uint8_t func;
 
     void clear() { memset(this, 0, sizeof(CustomSwData)); }
@@ -437,7 +450,7 @@ class SwashRingData { // Swash Ring data
     bool      invertAIL;
     bool      invertCOL;
     uint8_t   type;
-    uint8_t   collectiveSource;
+    RawSource collectiveSource;
     uint8_t   value;
     void clear() { memset(this, 0, sizeof(SwashRingData)); }
 };
@@ -564,7 +577,7 @@ class ModelData {
     bool      used;
     char      name[10+1];
     TimerData timers[2];
-    Protocol protocol;
+    Protocol  protocol;
     int       ppmNCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
@@ -610,6 +623,8 @@ enum Capability {
  Phases,
  Timers,
  FuncSwitches,
+ CustomSwitches,
+ RotaryEncoders,
  Outputs,
  ExtraChannels,
  ExtraInputs,
@@ -751,18 +766,26 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
 
   // virtual switches
   for (int i=0; i<NUM_CSW; i++) {
+    RawSource source;
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
-        model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
+        source = RawSource(model.customSw[i].val2);
+        if (source.type == SOURCE_TYPE_STICK)
+          source.index = applyStickMode(source.index + 1, mode) - 1;
+        model.customSw[i].val2 = source.toValue();
         // no break
       case CS_VOFS:
-        model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        source = RawSource(model.customSw[i].val1);
+        if (source.type == SOURCE_TYPE_STICK)
+          source.index = applyStickMode(source.index + 1, mode) - 1;
+        model.customSw[i].val1 = source.toValue();
         break;
     }
   }
 
   // heli
-  model.swashRingData.collectiveSource = applyStickMode(model.swashRingData.collectiveSource, mode);
+  if (model.swashRingData.collectiveSource.type == SOURCE_TYPE_STICK)
+    model.swashRingData.collectiveSource.index = applyStickMode(model.swashRingData.collectiveSource.index + 1, mode) - 1;
 }
 
 void RegisterFirmwares();

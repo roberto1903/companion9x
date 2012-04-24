@@ -255,6 +255,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case FuncSwitches:
       return 0;
+    case CustomSwitches:
+      return 12;
     case Outputs:
       return 16;
     case ExtraChannels:

@@ -11,10 +11,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->setupUi(this);
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-#warning TODO
-#if 0
-    populateSourceCB(ui->sourceCB, md->srcRaw, NUM_XCHNMIX, true);
-#endif
+    populateSourceCB(ui->sourceCB, md->srcRaw, true);
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
@@ -87,10 +84,7 @@ void MixerDialog::changeEvent(QEvent *e)
 
 void MixerDialog::valuesChanged()
 {
-#warning TODO
-#if 0
-    md->srcRaw    = RawSource(ui->sourceCB->currentIndex()+1);
-#endif
+    md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimCB->currentIndex();
