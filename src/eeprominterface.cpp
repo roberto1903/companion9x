@@ -35,6 +35,12 @@ void getEEPROMString(char *dst, const char *src, int size)
 }
 
 QString getSWName(int val);
+
+unsigned int RawSource::toValue()
+{
+  return type * 256 + index;
+}
+
 QString RawSource::toString()
 {
   QString sticks[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
@@ -124,7 +130,7 @@ bool ModelData::isempty()
 
 void ModelData::setDefault(uint8_t id)
 {
-  clear();  
+  clear();
   used = true;
   sprintf(name, "MODEL%02d", id+1);
 }
@@ -143,12 +149,11 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
 QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
-  eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Th9xInterface());
   eepromInterfaces.push_back(new Er9xInterface());
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
-
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_ERSKY9X));
   eepromInterfaces.push_back(new Ersky9xInterface());

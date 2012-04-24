@@ -53,11 +53,7 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 QString getFuncName(unsigned int val)
 {
   if (val < NUM_CHNOUT)
-    return QObject::tr("Safety");
-#warning TODO
-#if 0
-  + " " + getSourceStr(SRC_CH1+val);
-#endif
+    return QObject::tr("Safety %1").arg(RawSource(SOURCE_TYPE_CH, val).toString());
   else {
     QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
                           QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
@@ -166,23 +162,62 @@ QString getTimerMode(int tm) {
 
 }
 
-void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
+// TODO instead of bool switches, we could have a unsigned int flags (SWITCHES / NONE)
+void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
 {
+  RawSource item;
+
   b->clear();
-#warning TODO
-#if 0
-  for (int i=0, count=0; i<=NUM_XCHNMIX+MAX_TIMERS+NUM_TELEMETRY && count<=sourcesCount; i++) {
-    if (switches || i<SRC_STHR || i>SRC_SWC) {
-      b->addItem(getSourceStr(i));
-      count++;
+
+  item = RawSource(SOURCE_TYPE_NONE);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  for (int i=0; i<7; i++) {
+    item = RawSource(SOURCE_TYPE_STICK, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  item = RawSource(SOURCE_TYPE_MAX);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  item = RawSource(SOURCE_TYPE_3POS);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  if (switches) {
+    for (int i=0; i<9+GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
     }
   }
-#endif
-  b->setCurrentIndex(value);
+
+  for (int i=0; i<NUM_CYC; i++) {
+    item = RawSource(SOURCE_TYPE_CYC, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<NUM_PPM; i++) {
+    item = RawSource(SOURCE_TYPE_PPM, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+    item = RawSource(SOURCE_TYPE_CH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+
   b->setMaxVisibleItems(10);
 
-#warning TODO
-#if 0
+  /*
   for (int i=0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
     // Get the index of the value to disable
     int idx = SRC_CH16 - i;
@@ -196,10 +231,11 @@ void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
     //the magic
     b->model()->setData(index, v, Qt::UserRole - 1);
   }
-#endif
+  */
 }
 
-QString getCSWFunc(int val) {
+QString getCSWFunc(int val)
+{
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
 }
 

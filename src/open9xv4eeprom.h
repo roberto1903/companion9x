@@ -32,6 +32,18 @@ PACK(typedef struct t_Open9xV4PhaseData_v207 {
   t_Open9xV4PhaseData_v207(PhaseData &eepe);
 }) Open9xV4PhaseData_v207;
 
+PACK(typedef struct t_Open9xV4PhaseData_v208 {
+  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
+  int8_t swtch;       // swtch of phase[0] is not used
+  char name[6];
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+  int16_t rotaryEncoders[2];
+  operator PhaseData();
+  t_Open9xV4PhaseData_v208() { memset(this, 0, sizeof(t_Open9xV4PhaseData_v208)); }
+  t_Open9xV4PhaseData_v208(PhaseData &eepe);
+}) Open9xV4PhaseData_v208;
+
 PACK(typedef struct t_Open9xV4MixData_v207 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
@@ -63,6 +75,8 @@ PACK(typedef struct t_Open9xV4CustomSwData_v207 { // Custom Switches data
   operator CustomSwData();
   t_Open9xV4CustomSwData_v207() { memset(this, 0, sizeof(t_Open9xV4CustomSwData_v207)); }
   t_Open9xV4CustomSwData_v207(CustomSwData&);
+  int8_t fromSource(RawSource source);
+  RawSource toSource(int8_t value);
 
 }) Open9xV4CustomSwData_v207;
 
@@ -88,7 +102,7 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
-  Open9xV4PhaseData_v207 phaseData[MAX_PHASES];
+  Open9xV4PhaseData_v207 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v205 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -102,8 +116,45 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
 
 }) Open9xV4ModelData_v207;
 
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 207
-typedef Open9xV4ModelData_v207   Open9xV4ModelData;
+PACK(typedef struct t_Open9xV4ModelData_v208 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timers[MAX_TIMERS];
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   spare1:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  int8_t    curves5[MAX_CURVE5][5];
+  int8_t    curves9[MAX_CURVE9][9];
+  Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
+  Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xSwashRingData swashR;
+  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xFrSkyData_v205 frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+  uint8_t   frskyLines[4];
+  uint16_t  frskyLinesXtra;
+  int8_t    servoCenter[O9X_NUM_CHNOUT];
+
+  operator ModelData();
+  t_Open9xV4ModelData_v208() { memset(this, 0, sizeof(t_Open9xV4ModelData_v208)); }
+  t_Open9xV4ModelData_v208(ModelData&);
+
+}) Open9xV4ModelData_v208;
+
+#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 208
+typedef Open9xV4ModelData_v208   Open9xV4ModelData;
 typedef Open9xGeneralData_v201 Open9xV4GeneralData;
 
 #endif

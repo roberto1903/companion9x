@@ -19,6 +19,7 @@
 
 #include "open9xeeprom.h"
 
+#define O9X_ARM_MAX_PHASES  9
 #define O9X_ARM_MAX_MIXERS  64
 #define O9X_ARM_MAX_EXPOS   32
 #define O9X_ARM_NUM_CHNOUT  32 // number of real output channels CH1-CH16
@@ -97,13 +98,14 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
   Open9xCustomSwData  customSw[O9X_ARM_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_ARM_NUM_FSW];
   Open9xSwashRingData swashR;
-  Open9xArmPhaseData_v208 phaseData[MAX_PHASES];
+  Open9xArmPhaseData_v208 phaseData[O9X_ARM_MAX_PHASES];
   Open9xFrSkyData_v205 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
   uint8_t   frskyLines[4];
   uint16_t  frskyLinesXtra;
+  int8_t    servoCenter[O9X_ARM_NUM_CHNOUT];
 
   operator ModelData();
   t_Open9xArmModelData_v208() { memset(this, 0, sizeof(t_Open9xArmModelData_v208)); }

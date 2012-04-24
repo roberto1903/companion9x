@@ -2,6 +2,7 @@
 #define HELPERS_H
 
 #include <QtGui>
+#include "eeprominterface.h"
 
 #define TMR_NUM_OPTION  (TMR_VAROFS+2*MAX_DRSWITCH-3)
 
@@ -28,7 +29,7 @@ void populateCurvesCB(QComboBox *b, int value);
 void populatecsFieldCB(QComboBox *b, int value, bool last, int hubproto);
 void populateExpoCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value);
-void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches);
+void populateSourceCB(QComboBox *b, const RawSource &source, bool switches);
 void populateCSWCB(QComboBox *b, int value);
 QString getTimerMode(int tm);
 QString getPhaseName(int val);

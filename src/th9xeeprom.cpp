@@ -202,7 +202,6 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Th9xMixData));
   destCh = c9x.destCh;
   mixMode = c9x.mltpx;
-#warning TODO TESTS
   if (c9x.srcRaw.type == SOURCE_TYPE_STICK)
     srcRaw = c9x.srcRaw.index;
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX)
@@ -226,7 +225,6 @@ t_Th9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-#warning TODO TESTS
   if (srcRaw < 7)
     c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw);
   else if (srcRaw < 10)
@@ -249,30 +247,95 @@ t_Th9xMixData::operator MixData ()
 }
 
 
-t_Th9xCustomSwData::t_Th9xCustomSwData()
-{
-  memset(this, 0, sizeof(t_Th9xCustomSwData));
-}
-
 t_Th9xCustomSwData::t_Th9xCustomSwData(CustomSwData &c9x)
 {
-  // TODO !
-  memset(this, 0, sizeof(t_Th9xCustomSwData));
-  val1 = c9x.v1;
-  val2 = c9x.v2;
   opCmp = c9x.func;
+  val1 = c9x.val1;
+  val2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    val1 = fromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    val2 = fromSource(RawSource(c9x.val2));
+  }
 }
 
-Th9xCustomSwData::operator CustomSwData ()
+t_Th9xCustomSwData::operator CustomSwData ()
 {
-  // TODO !
   CustomSwData c9x;
-  c9x.v1 = val1;
-  c9x.v2 = val2;
   c9x.func = opCmp;
+  c9x.val1 = val1;
+  c9x.val2 = val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = toSource(val1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = toSource(val2).toValue();
+  }
+
   return c9x;
 }
 
+int8_t t_Th9xCustomSwData::fromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("th9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 21+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 37+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 39+source.index;
+  return v1;
+}
+
+RawSource t_Th9xCustomSwData::toSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 36) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 38) {
+    return RawSource(SOURCE_TYPE_TIMER, value-37);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+  }
+}
 
 t_Th9xModelData::t_Th9xModelData()
 {

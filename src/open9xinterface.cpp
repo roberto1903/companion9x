@@ -236,7 +236,17 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
   EEPROMWarnings.clear();
 
   if (!version) {
-    version = (board == BOARD_GRUVIN9X ? LAST_OPEN9X_GRUVIN9X_EEPROM_VER : LAST_OPEN9X_STOCK_EEPROM_VER);
+    switch(board) {
+      case BOARD_ERSKY9X:
+        version = LAST_OPEN9X_ARM_EEPROM_VER;
+        break;
+      case BOARD_GRUVIN9X:
+        version = LAST_OPEN9X_GRUVIN9X_EEPROM_VER;
+        break;
+      case BOARD_STOCK:
+        version = LAST_OPEN9X_STOCK_EEPROM_VER;
+        break;
+    }
   }
 
   int size = getEEpromSize();
@@ -270,11 +280,9 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
             result = saveModel<Open9xV4ModelData_v207>(i, radioData.models[i]);
           break;
         case 208:
-#if 0
           if (board == BOARD_GRUVIN9X)
             result = saveModel<Open9xV4ModelData_v208>(i, radioData.models[i]);
-#endif
-          if (board == BOARD_ERSKY9X)
+          else if (board == BOARD_ERSKY9X)
             result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
           break;
       }
@@ -339,8 +347,21 @@ int Open9xInterface::getCapability(const Capability capability)
       return 2;
     case FuncSwitches:
       return O9X_NUM_FSW;
+    case CustomSwitches:
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_CSW;
+      else
+        return O9X_NUM_CSW;
+    case RotaryEncoders:
+      if (board == BOARD_GRUVIN9X)
+        return 2;
+      else
+        return 0;
     case Outputs:
-      return 16;
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_CHNOUT;
+      else
+        return O9X_NUM_CHNOUT;
     case SoundPitch:
       return 1;
     case Haptic:

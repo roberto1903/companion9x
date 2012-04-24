@@ -281,20 +281,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
   if (customSw->func) {
     switch CS_STATE(customSw->func) {
       case CS_VOFS:
-        if (customSw->v1) {
-#warning TODO
-#if 0
-          if (customSw->v1 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v1);
-          }
-          else {
-            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
-          }
-#endif
-        }
-        else {
+        if (customSw->val1)
+          tstr += RawSource(customSw->val1).toString();
+        else
           tstr += "0";
-        }
         tstr.remove(" ");
         if (customSw->func == CS_APOS || customSw->func == CS_ANEG)
           tstr = "|" + tstr + "|";
@@ -302,10 +292,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           tstr += " &gt; ";
         if (customSw->func == CS_ANEG || customSw->func == CS_VNEG)
           tstr += " &lt; ";
-        tstr += QString::number(customSw->v2);
+        tstr += QString::number(customSw->val2);
         break;
       case CS_VBOOL:
-        tstr = getSWName(customSw->v1);
+        tstr = getSWName(customSw->val1);
         switch (customSw->func) {
           case CS_AND:
             tstr += " AND ";
@@ -319,24 +309,13 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           default:
             break;
         }
-        tstr += getSWName(customSw->v2);
+        tstr += getSWName(customSw->val2);
         break;
       case CS_VCOMP:
-#warning TODO
-#if 0
-
-        if (customSw->v1) {
-          if (customSw->v1 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v1);
-          }
-          else {
-            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
-          }
-        }
-        else {
+        if (customSw->val1)
+          tstr += RawSource(customSw->val1).toString();
+        else
           tstr += "0";
-        }
-#endif
         switch (customSw->func) {
           case CS_EQUAL:
             tstr += " = ";
@@ -359,21 +338,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           default:
             break;
         }
-#warning TODO
-#if 0
-
-        if (customSw->v2) {
-          if (customSw->v2 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v2);
-          }
-          else {
-            tstr += getSourceStr(customSw->v2 + SRC_SWC - SRC_3POS);
-          }
-        }
-        else {
+        if (customSw->val2)
+          tstr += RawSource(customSw->val2).toString();
+        else
           tstr += "0";
-        }
-#endif
         break;
       default:
         break;

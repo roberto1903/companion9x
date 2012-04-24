@@ -545,21 +545,10 @@ void printDialog::printSwitches()
             switch CS_STATE(g_model->customSw[i].func)
             {
             case CS_VOFS:
-                if (g_model->customSw[i].v1) {
-#warning TODO could be g_model->customSw[i].v1.toString()
-#if 0
-
-                  if (g_model->customSw[i].v1<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v1);
-                  }
-                  else {
-                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
-                  }
-#endif
-                }
-                else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val1)
+                  tstr += RawSource(g_model->customSw[i].val1).toString();
+                else
+                  tstr += "0";
                 tstr.remove(" ");
                 if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_ANEG)
                     tstr = "|" + tstr + "|";
@@ -567,76 +556,58 @@ void printDialog::printSwitches()
                     tstr += " &gt; ";
                 if(g_model->customSw[i].func==CS_ANEG || g_model->customSw[i].func==CS_VNEG)
                     tstr += " &lt; ";
-                tstr += QString::number(g_model->customSw[i].v2);
+                tstr += QString::number(g_model->customSw[i].val2);
                 break;
             case CS_VBOOL:
-                tstr = getSWName(g_model->customSw[i].v1);
+                tstr = getSWName(g_model->customSw[i].val1);
                 switch (g_model->customSw[i].func)
                 {
-                case CS_AND:
+                  case CS_AND:
                     tstr += " AND ";
                     break;
-                case CS_OR:
+                  case CS_OR:
                     tstr += " OR ";
                     break;
-                case CS_XOR:
+                  case CS_XOR:
                     tstr += " XOR ";
                     break;
-                default:
+                  default:
                     break;
                 }
-                tstr += getSWName(g_model->customSw[i].v2);
+                tstr += getSWName(g_model->customSw[i].val2);
                 break;
             case CS_VCOMP:
-                if (g_model->customSw[i].v1) {
-#warning TODO
-#if 0
-                  if (g_model->customSw[i].v1<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v1);
-                  }
-                  else {
-                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
-                  }
-#endif
-                } else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val1)
+                  tstr += RawSource(g_model->customSw[i].val1).toString();
+                else
+                  tstr += "0";
                 switch (g_model->customSw[i].func)
                 {
-                case CS_EQUAL:
+                  case CS_EQUAL:
                     tstr += " = ";
                     break;
-                case CS_NEQUAL:
+                  case CS_NEQUAL:
                     tstr += " != ";
                     break;
-                case CS_GREATER:
+                  case CS_GREATER:
                     tstr += " &gt; ";
                     break;
-                case CS_LESS:
+                  case CS_LESS:
                     tstr += " &lt; ";
                     break;
-                case CS_EGREATER:
+                  case CS_EGREATER:
                     tstr += " &gt;= ";
                     break;
-                case CS_ELESS:
+                  case CS_ELESS:
                     tstr += " &lt;= ";
                     break;
-                default:
+                  default:
                     break;
                 }
-                if (g_model->customSw[i].v2) {
-#warning TODO
-#if 0
-                  if (g_model->customSw[i].v2<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v2);
-                  }
-                  else {
-                    tstr+=getSourceStr(g_model->customSw[i].v2+SRC_SWC-SRC_3POS);
-                  }
-#endif
-                } else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val2)
+                  tstr += RawSource(g_model->customSw[i].val2).toString();
+                else
+                  tstr += "0";
                 
                 break;
             default:

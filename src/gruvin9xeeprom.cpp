@@ -268,29 +268,39 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
 
-#warning TODO
-#if 0
-  if (c9x.srcRaw < SRC_REA) {
-    swtch = c9x.swtch;
-    srcRaw = c9x.srcRaw;
+  if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+    srcRaw = 0;
+    swtch = 0;
   }
-  else if (c9x.srcRaw <= SRC_REB) {
-    EEPROMWarnings += ::QObject::tr("Gruvin9x on this board doesn't have Rotary Encoders") + "\n";
+  else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+    srcRaw = 1 + c9x.srcRaw.index;
     swtch = c9x.swtch;
-    srcRaw = c9x.srcRaw - 2;
   }
-  else if (c9x.srcRaw >= SRC_STHR && c9x.srcRaw <= SRC_SWC) {
+  else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+    srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+    swtch = c9x.swtch;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+    srcRaw = 8; // MAX
+    swtch = c9x.swtch;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw - SRC_STHR + 1;
+    swtch = c9x.srcRaw.index+1;
   }
-  else {
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
     swtch = c9x.swtch;
-    if (c9x.srcRaw > SRC_SWC)
-      srcRaw = c9x.srcRaw - 2 - 21 /* all switches */;
-    else
-      srcRaw = c9x.srcRaw - 2;
+    srcRaw = 10 + c9x.srcRaw.index;
   }
-#endif
+  else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+    swtch = c9x.swtch;
+    srcRaw = 13 + c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+    swtch = c9x.swtch;
+    srcRaw = 21 + c9x.srcRaw.index;
+  }
 
   weight = c9x.weight;
   curve = c9x.curve;
@@ -310,28 +320,34 @@ t_Gruvin9xMixData::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
 
-#warning TODO
-#if 0
-  if (srcRaw == 9/*FULL*/) {
+  if (srcRaw == 0) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (srcRaw <= 7) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+  }
+  else if (srcRaw == 8) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SRC_STHR - swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
       c9x.weight = -weight;
     }
     else {
-      c9x.srcRaw = RawSource(SRC_STHR + swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
     }
     c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
   }
-  else {
-    c9x.swtch = swtch;
-    if (srcRaw < SRC_REA)
-      c9x.srcRaw = RawSource(srcRaw);
-    else if (srcRaw >= SRC_STHR)
-      c9x.srcRaw = RawSource(srcRaw + 2 + 21);
-    else
-      c9x.srcRaw = RawSource(srcRaw + 2);
+  else if (srcRaw <= 12) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
   }
-#endif
+  else if (srcRaw <= 20) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-13);
+  }
+  else {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-21);
+  }
 
   c9x.curve = curve;
   c9x.delayUp = delayUp;
@@ -347,57 +363,92 @@ t_Gruvin9xMixData::operator MixData ()
 }
 
 
+int8_t gruvin9xFromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("gruvin9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 0;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 21+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 37+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 39+source.index;
+  return v1;
+}
+
+RawSource gruvin9xToSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 36) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 38) {
+    return RawSource(SOURCE_TYPE_TIMER, value-37);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+  }
+}
+
 t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
 {
   func = c9x.func;
-  v1 = c9x.v1;
-  v2 = c9x.v2;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
 
-#warning TODO
-#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    if (c9x.v1 < SRC_REA)
-      v1 = c9x.v1;
-    else if (c9x.v1 > SRC_REB)
-      v1 = c9x.v1 - 2;
-    else {
-      EEPROMWarnings += ::QObject::tr("gruvin9x doesn't have Rotary Encoders") + "\n";
-      v1 = c9x.v1 - 2;
-    }
+    v1 = gruvin9xFromSource(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    if (c9x.v2 < SRC_REA)
-      v2 = c9x.v2;
-    else if (c9x.v1 > SRC_REB)
-      v2 = c9x.v2 - 2;
-    else {
-      EEPROMWarnings += ::QObject::tr("gruvin9x doesn't have Rotary Encoders") + "\n";
-      v2 = c9x.v2 - 2;
-    }
+    v2 = gruvin9xFromSource(RawSource(c9x.val2));
   }
-#endif
 }
 
 Gruvin9xCustomSwData::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
-  c9x.v1 = v1;
-  c9x.v2 = v2;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
 
-#warning TODO
-#if 0
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    if (v1 >= SRC_REA)
-      c9x.v1 = v1 + 2;
+    c9x.val1 = gruvin9xToSource(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    if (v2 >= SRC_REA)
-      c9x.v2 = v2 + 2;
+    c9x.val2 = gruvin9xToSource(v2).toValue();
   }
-#endif
 
   return c9x;
 }
@@ -441,7 +492,7 @@ t_Gruvin9xSwashRingData::t_Gruvin9xSwashRingData(SwashRingData &c9x)
   invertAIL = c9x.invertAIL;
   invertCOL = c9x.invertCOL;
   type = c9x.type;
-  collectiveSource = c9x.collectiveSource;
+  collectiveSource = gruvin9xFromSource(c9x.collectiveSource);
   value = c9x.value;
 }
 
@@ -452,7 +503,7 @@ t_Gruvin9xSwashRingData::operator SwashRingData ()
   c9x.invertAIL = invertAIL;
   c9x.invertCOL = invertCOL;
   c9x.type = type;
-  c9x.collectiveSource = collectiveSource;
+  c9x.collectiveSource = gruvin9xToSource(collectiveSource);
   c9x.value = value;
   return c9x;
 }
@@ -610,7 +661,7 @@ t_Gruvin9xModelData_v102::operator ModelData ()
   c9x.beepANACenter = beepANACenter;
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
-  for (int i=0; i<MAX_PHASES; i++)
+  for (int i=0; i<G9X_MAX_PHASES; i++)
     c9x.phaseData[i] = phaseData[i];
   for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
@@ -671,7 +722,7 @@ t_Gruvin9xModelData_v103::operator ModelData ()
   c9x.beepANACenter = beepANACenter;
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
-  for (int i=0; i<MAX_PHASES; i++)
+  for (int i=0; i<G9X_MAX_PHASES; i++)
     c9x.phaseData[i] = phaseData[i];
   for (int i=0; i<G9X_MAX_MIXERS; i++)
     c9x.mixData[i] = mixData[i];
@@ -733,7 +784,7 @@ t_Gruvin9xModelData_v105::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<G9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (phaseData[i].trim[j] > 125) {
@@ -814,7 +865,7 @@ t_Gruvin9xModelData_v106::operator ModelData ()
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
-  for (int i=0; i<MAX_PHASES; i++) {
+  for (int i=0; i<G9X_MAX_PHASES; i++) {
     c9x.phaseData[i] = phaseData[i];
     for (int j=0; j<NUM_STICKS; j++) {
       if (c9x.phaseData[i].trim[j] > 500) {
@@ -914,7 +965,7 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
     for (int i=0; i<G9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
     swashR = c9x.swashRingData;
-    for (int i=0; i<MAX_PHASES; i++) {
+    for (int i=0; i<G9X_MAX_PHASES; i++) {
       PhaseData phase = c9x.phaseData[i];
       for (int j=0; j<NUM_STICKS; j++) {
         if (phase.trimRef[j] >= 0) {
