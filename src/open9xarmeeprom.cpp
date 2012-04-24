@@ -52,8 +52,6 @@ t_Open9xArmPhaseData_v208::operator PhaseData ()
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
-  for (int i=0; i<2; i++)
-    c9x.rotaryEncoders[i] = rotaryEncoders[i];
   return c9x;
 }
 
@@ -65,8 +63,6 @@ t_Open9xArmPhaseData_v208::t_Open9xArmPhaseData_v208(PhaseData &c9x)
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
-  for (int i=0; i<2; i++)
-    rotaryEncoders[i] = c9x.rotaryEncoders[i];
 }
 
 
