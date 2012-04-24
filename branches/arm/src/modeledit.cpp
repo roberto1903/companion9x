@@ -1034,16 +1034,15 @@ void ModelEdit::tabFunctionSwitches()
 {
     switchEditLock = true;
 
-    for(int i=0; i<std::min(16,NUM_FSW); i++)
-    {
+    for(int i=0; i<std::min(16,NUM_FSW); i++) {
         fswtchSwtch[i] = new QComboBox(this);
         connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchSwtch[i],i+1,1);
+        ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
         populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
 
         fswtchFunc[i] = new QComboBox(this);
         connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchFunc[i],i+1,2);
+        ui->fswitchlayout1->addWidget(fswtchFunc[i],i+1,2);
         populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
         
         fswtchParam[i] = new QSpinBox(this);
@@ -1051,7 +1050,7 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParam[i]->setMinimum(-125);
         fswtchParam[i]->setAccelerated(true);
         connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchParam[i],i+1,3);
+        ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
         fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
         if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
           fswtchParam[i]->hide();
@@ -1068,7 +1067,43 @@ void ModelEdit::tabFunctionSwitches()
 //          }
 //        }
     }
+    if (NUM_FSW>16) {
+      for(int i=16; i<NUM_FSW; i++) {
+          fswtchSwtch[i] = new QComboBox(this);
+          connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
+          populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
 
+          fswtchFunc[i] = new QComboBox(this);
+          connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchFunc[i],i-15,2);
+          populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+
+          fswtchParam[i] = new QSpinBox(this);
+          fswtchParam[i]->setMaximum(125);
+          fswtchParam[i]->setMinimum(-125);
+          fswtchParam[i]->setAccelerated(true);
+          connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
+          fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+          if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
+            fswtchParam[i]->hide();
+          }
+          if ( fswtchFunc[i]->currentIndex()>15) {
+            fswtchParam[i]->hide();
+          }
+
+
+  //        if (!GetEepromInterface()->getCapability(FuncSwitches)) {
+  //          fswtchFunc[i]->setDisabled(true);
+  //          if (i != 0) {
+  //            fswtchSwtch[i]->setDisabled(true);
+  //          }
+  //        }
+      } 
+    } else {
+      ui->FSwitchGB2->hide();
+    }
     switchEditLock = false;
 }
 
