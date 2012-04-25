@@ -232,7 +232,7 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
                 }
             }
 #else
-            QMessageBox::warning(this, tr("New release available"), tr("A new relase of companion is available prese check the repository"));
+            QMessageBox::warning(this, tr("New release available"), tr("A new release of companion is available please check the repository"));
 #endif            
         }   
         else  {
