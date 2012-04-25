@@ -34,9 +34,9 @@ void getEEPROMString(char *dst, const char *src, int size)
   }
 }
 
-unsigned int RawSource::toValue()
+int RawSource::toValue()
 {
-  return type * 65536 + index;
+  return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
 }
 
 QString RawSource::toString()
@@ -75,9 +75,9 @@ QString RawSource::toString()
   }
 }
 
-unsigned int RawSwitch::toValue()
+int RawSwitch::toValue()
 {
-  return type * 256 + index;
+  return index >= 0 ? (type * 256 + index) : -(type * 256 - index);
 }
 
 QString RawSwitch::toString()

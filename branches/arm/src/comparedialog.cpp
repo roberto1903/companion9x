@@ -1046,17 +1046,16 @@ void compareDialog::printSafetySwitches()
         color2="grey";
       }
       str.append("<tr>");
-      if (g_model1->safetySw[i].swtch) {
-#warning TODO
-        // TODO str.append(doTC(g_model1->safetySw[i].swtch.toString(),color1));
+      if (g_model1->safetySw[i].swtch.type) {
+        str.append(doTC(g_model1->safetySw[i].swtch.toString(),color1));
         str.append(doTC(QString::number(g_model1->safetySw[i].val),color1));
-      } else {
+      }
+      else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-      if (g_model2->safetySw[i].swtch) {
-#warning TODO
-        // TODO str.append(doTC(getSWName(g_model2->safetySw[i].swtch),color2));
+      if (g_model2->safetySw[i].swtch.type) {
+        str.append(doTC(g_model2->safetySw[i].swtch.toString(),color2));
         str.append(doTC(QString::number(g_model2->safetySw[i].val),color2));
       } else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");

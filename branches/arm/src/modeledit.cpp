@@ -516,25 +516,25 @@ void ModelEdit::tabPhases()
   memcpy(phasesTrimValues,tmpspinbox,sizeof(phasesTrimValues));
   
   int phases = GetEepromInterface()->getCapability(FlightPhases);
-  if (phases < 8)
+  if (phases < 9)
     ui->phase8->setDisabled(true);
     ui->phases->removeTab(8);
-  if (phases < 7)
+  if (phases < 8)
     ui->phase7->setDisabled(true);
     ui->phases->removeTab(7);
-  if (phases < 6)
+  if (phases < 7)
     ui->phase6->setDisabled(true);
     ui->phases->removeTab(6);
-  if (phases < 5)
+  if (phases < 6)
     ui->phase5->setDisabled(true);
     ui->phases->removeTab(5);
-  if (phases < 4)  
+  if (phases < 5)
     ui->phase4->setDisabled(true);
-  if (phases < 3)
+  if (phases < 4)
     ui->phase3->setDisabled(true);
-  if (phases < 2)
+  if (phases < 3)
     ui->phase2->setDisabled(true);
-  if (phases < 1) {
+  if (phases < 2) {
     ui->phase1->setDisabled(true);
     ui->phase0Name->setDisabled(true);
     ui->phase0FadeIn->setDisabled(true);
@@ -656,10 +656,10 @@ void ModelEdit::tabMixes()
     MixerlistWidget->clear();
     int curDest = 0;
     int i;
-    for(i=0; i<MAX_MIXERS; i++)
+    for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
-        if((md->destCh==0) || (md->destCh>NUM_CHNOUT)) break;
+        if((md->destCh==0) || (md->destCh>GetEepromInterface()->getCapability(Outputs))) break;
         QString str = "";
         while(curDest<(md->destCh-1))
         {
@@ -711,7 +711,7 @@ void ModelEdit::tabMixes()
         MixerlistWidget->addItem(itm);//(str);
     }
 
-    while(curDest<NUM_CHNOUT)
+    while(curDest<GetEepromInterface()->getCapability(Outputs))
     {
         curDest++;
         QString str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
@@ -1106,20 +1106,10 @@ void ModelEdit::tabFunctionSwitches()
         connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
         ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
         fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-        if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
+        int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+        if (index==0) {
           fswtchParam[i]->hide();
         }
-        if ( fswtchFunc[i]->currentIndex()>15) {
-          fswtchParam[i]->hide();
-        }
-
-        
-//        if (!GetEepromInterface()->getCapability(FuncSwitches)) {
-//          fswtchFunc[i]->setDisabled(true);
-//          if (i != 0) {
-//            fswtchSwtch[i]->setDisabled(true);
-//          }
-//        }
     }
     if (num_fsw>16) {
       for(int i=16; i<num_fsw; i++) {
@@ -1140,20 +1130,11 @@ void ModelEdit::tabFunctionSwitches()
           connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
           ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
           fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-          if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
+
+          int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+          if (index==0) {
             fswtchParam[i]->hide();
           }
-          if ( fswtchFunc[i]->currentIndex()>15) {
-            fswtchParam[i]->hide();
-          }
-
-
-  //        if (!GetEepromInterface()->getCapability(FuncSwitches)) {
-  //          fswtchFunc[i]->setDisabled(true);
-  //          if (i != 0) {
-  //            fswtchSwtch[i]->setDisabled(true);
-  //          }
-  //        }
       } 
     } else {
       ui->FSwitchGB2->hide();
@@ -1241,7 +1222,7 @@ void ModelEdit::functionSwitchesEdited()
     switchEditLock = true;
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<num_fsw; i++) {
-      g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
+      g_model.funcSw[i].swtch = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
       if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
@@ -1522,7 +1503,7 @@ void ModelEdit::phaseSwitch_currentIndexChanged()
 {
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int phase = comboBox->objectName().mid(5,1).toInt();
-  g_model.phaseData[phase].swtch = comboBox->currentIndex() - MAX_DRSWITCH;
+  g_model.phaseData[phase].swtch = comboBox->itemData(comboBox->currentIndex()).toInt();
   updateSettings();
 }
 
@@ -2528,14 +2509,14 @@ void ModelEdit::drawCurve()
 
 bool ModelEdit::gm_insertMix(int idx)
 {
-  if (idx<0 || idx>=MAX_MIXERS || g_model.mixData[MAX_MIXERS-1].destCh > 0) {
+  if (idx<0 || idx>=GetEepromInterface()->getCapability(Mixes) || g_model.mixData[GetEepromInterface()->getCapability(Mixes)-1].destCh > 0) {
     QMessageBox::information(this, "companion9x", tr("Not enough available mixers!"));
     return false;
   }
 
   int i = g_model.mixData[idx].destCh;
   memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
-      (MAX_MIXERS-(idx+1))*sizeof(MixData) );
+      (GetEepromInterface()->getCapability(Mixes)-(idx+1))*sizeof(MixData) );
   memset(&g_model.mixData[idx],0,sizeof(MixData));
   g_model.mixData[idx].destCh = i;
   g_model.mixData[idx].weight = 100;
@@ -2545,13 +2526,13 @@ bool ModelEdit::gm_insertMix(int idx)
 void ModelEdit::gm_deleteMix(int index)
 {
   memmove(&g_model.mixData[index],&g_model.mixData[index+1],
-            (MAX_MIXERS-(index+1))*sizeof(MixData));
-  memset(&g_model.mixData[MAX_MIXERS-1],0,sizeof(MixData));
+            (GetEepromInterface()->getCapability(Mixes)-(index+1))*sizeof(MixData));
+  memset(&g_model.mixData[GetEepromInterface()->getCapability(Mixes)-1],0,sizeof(MixData));
 }
 
 void ModelEdit::gm_openMix(int index)
 {
-    if(index<0 || index>=MAX_MIXERS) return;
+    if(index<0 || index>=GetEepromInterface()->getCapability(Mixes)) return;
 
     MixData mixd(g_model.mixData[index]);
     updateSettings();
@@ -2569,8 +2550,8 @@ void ModelEdit::gm_openMix(int index)
 int ModelEdit::getMixerIndex(int dch)
 {
     int i = 0;
-    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<MAX_MIXERS)) i++;
-    if(i==MAX_MIXERS) return -1;
+    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<GetEepromInterface()->getCapability(Mixes))) i++;
+    if(i==GetEepromInterface()->getCapability(Mixes)) return -1;
     return i;
 }
 
@@ -2671,7 +2652,7 @@ QList<int> ModelEdit::createMixListFromSelected()
     foreach(QListWidgetItem *item, MixerlistWidget->selectedItems())
     {
         int idx= item->data(Qt::UserRole).toByteArray().at(0);
-        if(idx>=0 && idx<MAX_MIXERS) list << idx;
+        if(idx>=0 && idx<GetEepromInterface()->getCapability(Mixes)) list << idx;
     }
     return list;
 }
@@ -2818,7 +2799,7 @@ void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
     int i = 0;
     while(i<mxData.size()) {
       idx++;
-      if(idx==MAX_MIXERS) break;
+      if(idx==GetEepromInterface()->getCapability(Mixes)) break;
 
       if (!gm_insertMix(idx))
         break;
@@ -3051,16 +3032,16 @@ void ModelEdit::expolistWidget_KeyPress(QKeyEvent *event)
 
 int ModelEdit::gm_moveMix(int idx, bool dir) //true=inc=down false=dec=up
 {
-    if(idx>MAX_MIXERS || (idx==0 && !dir) || (idx==MAX_MIXERS && dir)) return idx;
+    if(idx>GetEepromInterface()->getCapability(Mixes) || (idx==0 && !dir) || (idx==GetEepromInterface()->getCapability(Mixes) && dir)) return idx;
 
     int tdx = dir ? idx+1 : idx-1;
     MixData &src=g_model.mixData[idx];
     MixData &tgt=g_model.mixData[tdx];
 
-    if((src.destCh==0) || (src.destCh>NUM_CHNOUT) || (tgt.destCh>NUM_CHNOUT)) return idx;
+    if((src.destCh==0) || (src.destCh>GetEepromInterface()->getCapability(Outputs)) || (tgt.destCh>GetEepromInterface()->getCapability(Outputs))) return idx;
 
     if(tgt.destCh!=src.destCh) {
-        if ((dir)  && (src.destCh<NUM_CHNOUT)) src.destCh++;
+        if ((dir)  && (src.destCh<GetEepromInterface()->getCapability(Outputs))) src.destCh++;
         if ((!dir) && (src.destCh>0))          src.destCh--;
         return idx;
     }
@@ -3249,7 +3230,7 @@ void ModelEdit::safetySwitchesEdited()
 {
     for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
-        g_model.safetySw[i].swtch = safetySwitchSwtch[i]->currentIndex()-MAX_DRSWITCH;
+        g_model.safetySw[i].swtch = safetySwitchSwtch[i]->itemData(safetySwitchSwtch[i]->currentIndex()).toInt();
         g_model.safetySw[i].val   = safetySwitchValue[i]->value();
     }
     updateSettings();
@@ -3274,11 +3255,11 @@ void ModelEdit::on_templateList_doubleClicked(QModelIndex index)
 MixData* ModelEdit::setDest(uint8_t dch)
 {
     uint8_t i = 0;
-    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<MAX_MIXERS)) i++;
-    if(i==MAX_MIXERS) return &g_model.mixData[0];
+    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<GetEepromInterface()->getCapability(Mixes))) i++;
+    if(i==GetEepromInterface()->getCapability(Mixes)) return &g_model.mixData[0];
 
     memmove(&g_model.mixData[i+1],&g_model.mixData[i],
-            (MAX_MIXERS-(i+1))*sizeof(MixData) );
+            (GetEepromInterface()->getCapability(Mixes)-(i+1))*sizeof(MixData) );
     memset(&g_model.mixData[i],0,sizeof(MixData));
     g_model.mixData[i].destCh = dch;
     return &g_model.mixData[i];

@@ -55,11 +55,11 @@ void populatePhasesCB(QComboBox *b, int value)
 {
   for (int i=-GetEepromInterface()->getCapability(FlightPhases); i<=GetEepromInterface()->getCapability(FlightPhases); i++) {
     if (i < 0)
-      b->addItem(QObject::tr("!Phase %1").arg(-i));
+      b->addItem(QObject::tr("!Phase %1").arg(-i-1), i);
     else if (i > 0)
-      b->addItem(QObject::tr("Phase %1").arg(-i));
+      b->addItem(QObject::tr("Phase %1").arg(i-1), i);
     else
-      b->addItem(QObject::tr("----"));
+      b->addItem(QObject::tr("----"), 0);
   }
   b->setCurrentIndex(value + GetEepromInterface()->getCapability(FlightPhases));
 }
@@ -109,14 +109,15 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem("Own trim");
   unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
-  for (unsigned int i = 0; i < num_phases; i++) {
+  for (unsigned int i = 0; i < num_phases-1; i++) {
     if (i != phase) {
       b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
     }
   }
 }
 
-void populateTimerSwitchCB(QComboBox *b, int value = 0) {
+void populateTimerSwitchCB(QComboBox *b, int value)
+{
   b->clear();
   for (int i = -TMR_NUM_OPTION; i <= TMR_NUM_OPTION; i++)
     b->addItem(getTimerMode(i));
@@ -135,27 +136,58 @@ QString getTimerMode(int tm) {
     return s;
   }
 
-#warning TODO
-#if 0
-  if (abs(tm)<(TMR_VAROFS + MAX_DRSWITCH - 1)) {
-    s = str.mid((abs(tm) - TMR_VAROFS)*3, 3);
+  if (abs(tm)<TMR_VAROFS + 9) {
+    s = RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
 
-  s = "m" + str.mid((abs(tm)-(TMR_VAROFS + MAX_DRSWITCH - 1))*3, 3);
-  if (tm < 0) s.prepend("!");
-#endif
-  return s;
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9) {
+    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches) + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
+
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches)- 9 + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
+
+  return "---";
 
 }
 
-void populateSwitchCB(QComboBox *b, const RawSwitch & value)
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
 {
   RawSwitch item;
 
   b->clear();
+
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_ON);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  if (attr & POPULATE_MSWITCHES) {
+    for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=-9; i<0; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+  }
 
   for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
     item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
@@ -185,7 +217,25 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value)
     if (item == value) b->setCurrentIndex(b->count()-1);
   }
 
-#warning TODO ON/OFF
+  if (attr & POPULATE_MSWITCHES) {
+    for (int i=1; i<=9; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+
+    for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+  }
+
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_ON);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
 
   b->setMaxVisibleItems(10);
 }

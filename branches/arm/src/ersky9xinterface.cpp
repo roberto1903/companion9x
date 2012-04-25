@@ -208,6 +208,8 @@ int Ersky9xInterface::getSize(GeneralSettings &settings)
 int Ersky9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case Mixes:
+      return ERSKY9X_MAX_MIXERS;
     case MixFmTrim:
       return 1;      
     case PPMExtCtrl:

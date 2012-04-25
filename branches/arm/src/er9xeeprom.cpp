@@ -420,14 +420,14 @@ t_Er9xSafetySwData::t_Er9xSafetySwData()
 t_Er9xSafetySwData::t_Er9xSafetySwData(SafetySwData &c9x)
 {
   memset(this, 0, sizeof(t_Er9xSafetySwData));
-  swtch = c9x.swtch;
+  swtch = er9xFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
 t_Er9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = er9xToSwitch(swtch);
   c9x.val = val;
   return c9x;
 }

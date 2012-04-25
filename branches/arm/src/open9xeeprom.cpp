@@ -687,14 +687,14 @@ t_Open9xFuncSwData_v203::operator FuncSwData ()
 
 t_Open9xSafetySwData::t_Open9xSafetySwData(SafetySwData &c9x)
 {
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
 t_Open9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   c9x.val = val;
   return c9x;
 }
@@ -1339,9 +1339,9 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
-      if (c9x.safetySw[i].swtch) {
+      if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -1493,9 +1493,9 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
-      if (c9x.safetySw[i].swtch) {
+      if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -1666,9 +1666,9 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
-      if (c9x.safetySw[i].swtch) {
+      if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }

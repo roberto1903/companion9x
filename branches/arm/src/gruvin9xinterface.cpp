@@ -260,8 +260,10 @@ int Gruvin9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
+    case Mixes:
+      return G9X_MAX_MIXERS;
     case FlightPhases:
-      return 4;
+      return G9X_MAX_PHASES;
     case Timers:
       return 2;
     case FuncSwitches:
