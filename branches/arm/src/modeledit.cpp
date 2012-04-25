@@ -794,6 +794,9 @@ void ModelEdit::tabLimits()
     cb->setCurrentIndex((g_model.limitData[cbn].revert) ? 1 : 0);
     connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(limitInvEdited()));
   }
+  if (GetEepromInterface()->getCapability(Outputs)<17) {
+    ui->limitGB2->hide();
+  }
   setLimitMinMax();
 }
 
