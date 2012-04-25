@@ -1045,7 +1045,7 @@ void compareDialog::printFSwitches()
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-      if (g_model2->funcSw[i].swtch|=0) {
+      if (g_model2->funcSw[i].swtch!=0) {
         str.append(doTC(getSWName(g_model2->funcSw[i].swtch),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
       } else {
@@ -1093,7 +1093,7 @@ void compareDialog::printSafetySwitches()
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-      if (g_model2->safetySw[i].swtch|=0) {
+      if (g_model2->safetySw[i].swtch!=0) {
         str.append(doTC(getSWName(g_model2->safetySw[i].swtch),color2));
         str.append(doTC(QString::number(g_model2->safetySw[i].val),color2));
       } else {
