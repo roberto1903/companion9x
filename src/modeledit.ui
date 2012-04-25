@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>7</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -905,7 +905,7 @@
                   </spacer>
                  </item>
                  <item row="4" column="1">
-                  <widget class="QSpinBox" name="phase0Trim1">
+                  <widget class="QSpinBox" name="phase0Trim1Value">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -934,7 +934,7 @@
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QSpinBox" name="phase0Trim2">
+                  <widget class="QSpinBox" name="phase0Trim2Value">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -1006,7 +1006,7 @@
                   </widget>
                  </item>
                  <item row="4" column="1">
-                  <widget class="QSpinBox" name="phase0Trim4">
+                  <widget class="QSpinBox" name="phase0Trim4Value">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -1035,7 +1035,7 @@
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QSpinBox" name="phase0Trim3">
+                  <widget class="QSpinBox" name="phase0Trim3Value">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                      <horstretch>1</horstretch>
@@ -4059,8 +4059,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>307</width>
+            <height>462</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,1,1,1,1">
@@ -5356,8 +5356,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>484</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -11120,8 +11120,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -13342,10 +13342,10 @@
   <tabstop>phase0Trim3Slider</tabstop>
   <tabstop>phase0Trim4Slider</tabstop>
   <tabstop>phase0Trim1Slider</tabstop>
-  <tabstop>phase0Trim1</tabstop>
-  <tabstop>phase0Trim2</tabstop>
-  <tabstop>phase0Trim4</tabstop>
-  <tabstop>phase0Trim3</tabstop>
+  <tabstop>phase0Trim1Value</tabstop>
+  <tabstop>phase0Trim2Value</tabstop>
+  <tabstop>phase0Trim4Value</tabstop>
+  <tabstop>phase0Trim3Value</tabstop>
   <tabstop>phase2Name</tabstop>
   <tabstop>phase2Switch</tabstop>
   <tabstop>phase2FadeIn</tabstop>
