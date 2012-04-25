@@ -57,6 +57,8 @@ private:
     
     QSpinBox  * safetySwitchValue[NUM_CHNOUT];
     QComboBox * safetySwitchSwtch[NUM_CHNOUT];
+    QSlider * phasesTrimSliders[9][4];
+    QSpinBox * phasesTrimValues[9][4];
 
     void setupExposListWidget();
     void setupMixerListWidget();
@@ -149,6 +151,9 @@ private slots:
     void phaseSwitch_currentIndexChanged();
     void phaseFadeIn_editingFinished();
     void phaseFadeOut_editingFinished();
+    void phaseTrimUse_currentIndexChanged();
+    void phaseTrim_valueChanged();
+    void phaseTrimSlider_valueChanged();
     
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
     void pasteMixerMimeData(const QMimeData * mimeData, int destIdx);
@@ -250,76 +255,6 @@ private slots:
     void on_timer2ModeCB_currentIndexChanged(int index);
     void on_timer2ValTE_editingFinished();
     void on_modelNameLE_editingFinished();
-
-    void on_phase0Trim1Value_valueChanged(int value);
-    void on_phase0Trim2Value_valueChanged(int value);
-    void on_phase0Trim3Value_valueChanged(int value);
-    void on_phase0Trim4Value_valueChanged(int value);
-    void on_phase1Trim1Value_valueChanged(int value);
-    void on_phase1Trim2Value_valueChanged(int value);
-    void on_phase1Trim3Value_valueChanged(int value);
-    void on_phase1Trim4Value_valueChanged(int value);
-    void on_phase2Trim1Value_valueChanged(int value);
-    void on_phase2Trim2Value_valueChanged(int value);
-    void on_phase2Trim3Value_valueChanged(int value);
-    void on_phase2Trim4Value_valueChanged(int value);
-    void on_phase3Trim1Value_valueChanged(int value);
-    void on_phase3Trim2Value_valueChanged(int value);
-    void on_phase3Trim3Value_valueChanged(int value);
-    void on_phase3Trim4Value_valueChanged(int value);
-    void on_phase4Trim1Value_valueChanged(int value);
-    void on_phase4Trim2Value_valueChanged(int value);
-    void on_phase4Trim3Value_valueChanged(int value);
-    void on_phase4Trim4Value_valueChanged(int value);
-    void on_phase5Trim1Value_valueChanged(int value);
-    void on_phase5Trim2Value_valueChanged(int value);
-    void on_phase5Trim3Value_valueChanged(int value);
-    void on_phase5Trim4Value_valueChanged(int value);
-    void on_phase6Trim1Value_valueChanged(int value);
-    void on_phase6Trim2Value_valueChanged(int value);
-    void on_phase6Trim3Value_valueChanged(int value);
-    void on_phase6Trim4Value_valueChanged(int value);
-    void on_phase7Trim1Value_valueChanged(int value);
-    void on_phase7Trim2Value_valueChanged(int value);
-    void on_phase7Trim3Value_valueChanged(int value);
-    void on_phase7Trim4Value_valueChanged(int value);
-    void on_phase8Trim1Value_valueChanged(int value);
-    void on_phase8Trim2Value_valueChanged(int value);
-    void on_phase8Trim3Value_valueChanged(int value);
-    void on_phase8Trim4Value_valueChanged(int value);
-
-    void on_phase1Trim1Use_currentIndexChanged(int index);
-    void on_phase1Trim2Use_currentIndexChanged(int index);
-    void on_phase1Trim3Use_currentIndexChanged(int index);
-    void on_phase1Trim4Use_currentIndexChanged(int index);
-    void on_phase2Trim1Use_currentIndexChanged(int index);
-    void on_phase2Trim2Use_currentIndexChanged(int index);
-    void on_phase2Trim3Use_currentIndexChanged(int index);
-    void on_phase2Trim4Use_currentIndexChanged(int index);
-    void on_phase3Trim1Use_currentIndexChanged(int index);
-    void on_phase3Trim2Use_currentIndexChanged(int index);
-    void on_phase3Trim3Use_currentIndexChanged(int index);
-    void on_phase3Trim4Use_currentIndexChanged(int index);
-    void on_phase4Trim1Use_currentIndexChanged(int index);
-    void on_phase4Trim2Use_currentIndexChanged(int index);
-    void on_phase4Trim3Use_currentIndexChanged(int index);
-    void on_phase4Trim4Use_currentIndexChanged(int index);
-    void on_phase5Trim1Use_currentIndexChanged(int index);
-    void on_phase5Trim2Use_currentIndexChanged(int index);
-    void on_phase5Trim3Use_currentIndexChanged(int index);
-    void on_phase5Trim4Use_currentIndexChanged(int index);
-    void on_phase6Trim1Use_currentIndexChanged(int index);
-    void on_phase6Trim2Use_currentIndexChanged(int index);
-    void on_phase6Trim3Use_currentIndexChanged(int index);
-    void on_phase6Trim4Use_currentIndexChanged(int index);
-    void on_phase7Trim1Use_currentIndexChanged(int index);
-    void on_phase7Trim2Use_currentIndexChanged(int index);
-    void on_phase7Trim3Use_currentIndexChanged(int index);
-    void on_phase7Trim4Use_currentIndexChanged(int index);
-    void on_phase8Trim1Use_currentIndexChanged(int index);
-    void on_phase8Trim2Use_currentIndexChanged(int index);
-    void on_phase8Trim3Use_currentIndexChanged(int index);
-    void on_phase8Trim4Use_currentIndexChanged(int index);
 
     void on_phases_currentChanged(int index);
     void on_tabWidget_currentChanged(int index);

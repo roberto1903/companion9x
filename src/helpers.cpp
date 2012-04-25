@@ -122,7 +122,8 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
 
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem("Own trim");
-  for (unsigned int i = 0; i < MAX_PHASES; i++) {
+  int num_phases=GetEepromInterface()->getCapability(Phases);
+  for (int i = 0; i < num_phases; i++) {
     if (i != phase) {
       b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
     }
