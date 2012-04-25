@@ -107,8 +107,7 @@ MainWindow::MainWindow()
     if(strl.count()>1) str = strl[1];
     if(!str.isEmpty())
     {
-//        MdiChild tch;
-        int fileType = MdiChild::getFileType(str);
+        int fileType = getFileType(str);
 
         if(fileType==FILE_TYPE_HEX)
         {
