@@ -48,6 +48,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   ui->phase2Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase3Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase4Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase5Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase6Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase7Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase8Name->setValidator(new QRegExpValidator(rx, this));
 
   tabModelEditSetup();
   tabPhases();
@@ -540,7 +544,7 @@ void ModelEdit::tabPhases()
     ui->phase0FadeIn->setDisabled(true);
     ui->phase0FadeOut->setDisabled(true);
   }
-
+  ui->phases->setCurrentIndex(0);
   phasesLock = false;
 }
 
@@ -794,6 +798,20 @@ void ModelEdit::tabLimits()
     cb->setCurrentIndex((g_model.limitData[cbn].revert) ? 1 : 0);
     connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(limitInvEdited()));
   }
+  if (GetEepromInterface()->getCapability(PPMCenter)) {
+    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("ppmcenter_[0-9]+"))) {
+      int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+      sb->setValue(g_model.servoCenter[sbn]+1500);
+      connect(sb, SIGNAL(editingFinished()), this, SLOT(ppmcenterEdited()));
+    }
+  } else {
+    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("ppmcenter_[0-9]+"))) {
+      sb->hide();
+    }
+    ui->ppmc_label1->hide();
+    ui->ppmc_label2->hide();
+  }
+
   if (GetEepromInterface()->getCapability(Outputs)<17) {
     ui->limitGB2->hide();
   }
@@ -918,6 +936,14 @@ void ModelEdit::limitInvEdited()
   QComboBox *cb = qobject_cast<QComboBox*>(sender());
   int limitId=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
   g_model.limitData[limitId].revert = cb->currentIndex();
+  updateSettings();
+}
+
+void ModelEdit::ppmcenterEdited()
+{
+  QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+  int limitId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+  g_model.servoCenter[limitId] = sb->value()-1500;
   updateSettings();
 }
 

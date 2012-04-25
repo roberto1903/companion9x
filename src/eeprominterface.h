@@ -399,7 +399,7 @@ class LimitData {
     int     max;
     bool    revert;
     int16_t  offset;
-
+    
     void clear() { min = -100; max = +100; revert = false; offset = 0; }
 };
 
@@ -653,7 +653,7 @@ class ModelData {
     
     /* FrSky */    
     FrSkyData frsky;
-
+    int8_t servoCenter[NUM_CHNOUT];
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
@@ -712,6 +712,7 @@ enum Capability {
  TelemetryTimeshift,
  FSSwitch,
  DiffMixers,
+ PPMCenter,
 };
 
 class SimulatorInterface;

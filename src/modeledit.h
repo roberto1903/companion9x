@@ -196,6 +196,7 @@ private slots:
     void limitOffsetEdited();
     void limitEdited();
     void limitInvEdited();
+    void ppmcenterEdited();
     void customSwitchesEdited();
     void safetySwitchesEdited();
     void functionSwitchesEdited();
