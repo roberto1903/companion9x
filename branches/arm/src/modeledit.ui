@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -763,7 +763,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>6</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -4059,8 +4059,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -4075,7 +4075,7 @@
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_27" columnstretch="0,1,1,1,0">
+             <layout class="QGridLayout" name="gridLayout_27" columnstretch="0,1,1,1,0,0">
               <item row="11" column="0">
                <widget class="QLabel" name="label_24">
                 <property name="text">
@@ -4949,8 +4949,38 @@
                 </property>
                </widget>
               </item>
+              <item row="4" column="3">
+               <widget class="QSpinBox" name="maxSB_4">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
               <item row="3" column="4">
                <widget class="QComboBox" name="chInvCB_3">
+                <item>
+                 <property name="text">
+                  <string>NOR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>INV</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="4" column="4">
+               <widget class="QComboBox" name="chInvCB_4">
                 <item>
                  <property name="text">
                   <string>NOR</string>
@@ -4968,36 +4998,6 @@
                 <property name="text">
                  <string notr="true">CH4</string>
                 </property>
-               </widget>
-              </item>
-              <item row="4" column="3">
-               <widget class="QSpinBox" name="maxSB_4">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="4">
-               <widget class="QComboBox" name="chInvCB_4">
-                <item>
-                 <property name="text">
-                  <string>NOR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>INV</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item row="0" column="0">
@@ -5080,6 +5080,22 @@
                 </item>
                </widget>
               </item>
+              <item row="15" column="3">
+               <widget class="QSpinBox" name="maxSB_15">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
               <item row="16" column="1">
                <widget class="QDoubleSpinBox" name="offsetDSB_16">
                 <property name="alignment">
@@ -5115,22 +5131,6 @@
                 </property>
                </widget>
               </item>
-              <item row="15" column="3">
-               <widget class="QSpinBox" name="maxSB_15">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
               <item row="15" column="4">
                <widget class="QComboBox" name="chInvCB_15">
                 <item>
@@ -5149,6 +5149,22 @@
                <widget class="QLabel" name="label_29">
                 <property name="text">
                  <string notr="true">CH16</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QSpinBox" name="minSB_4">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -5173,22 +5189,6 @@
               </item>
               <item row="8" column="2">
                <widget class="QSpinBox" name="minSB_8">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QSpinBox" name="minSB_4">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
@@ -5273,6 +5273,22 @@
                 </property>
                </widget>
               </item>
+              <item row="10" column="3">
+               <widget class="QSpinBox" name="maxSB_10">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
               <item row="10" column="1">
                <widget class="QDoubleSpinBox" name="offsetDSB_10">
                 <property name="alignment">
@@ -5294,22 +5310,6 @@
               </item>
               <item row="10" column="2">
                <widget class="QSpinBox" name="minSB_10">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="3">
-               <widget class="QSpinBox" name="maxSB_10">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
@@ -5351,6 +5351,281 @@
                 </property>
                </spacer>
               </item>
+              <item row="1" column="5">
+               <widget class="QSpinBox" name="ppmcenter_1">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLabel" name="ppmc_label1">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <property name="text">
+                 <string>PPM Center</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>3</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="5">
+               <widget class="QSpinBox" name="ppmcenter_2">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="5">
+               <widget class="QSpinBox" name="ppmcenter_3">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="5">
+               <widget class="QSpinBox" name="ppmcenter_4">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="5">
+               <widget class="QSpinBox" name="ppmcenter_5">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="5">
+               <widget class="QSpinBox" name="ppmcenter_6">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="5">
+               <widget class="QSpinBox" name="ppmcenter_7">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="5">
+               <widget class="QSpinBox" name="ppmcenter_8">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="5">
+               <widget class="QSpinBox" name="ppmcenter_9">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="5">
+               <widget class="QSpinBox" name="ppmcenter_10">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="5">
+               <widget class="QSpinBox" name="ppmcenter_11">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="5">
+               <widget class="QSpinBox" name="ppmcenter_12">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="5">
+               <widget class="QSpinBox" name="ppmcenter_13">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="5">
+               <widget class="QSpinBox" name="ppmcenter_14">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="5">
+               <widget class="QSpinBox" name="ppmcenter_15">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="16" column="5">
+               <widget class="QSpinBox" name="ppmcenter_16">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
@@ -5365,7 +5640,26 @@
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_28" columnminimumwidth="0,1,1,1,0">
+             <layout class="QGridLayout" name="gridLayout_28" columnminimumwidth="0,1,1,1,0,0">
+              <item row="2" column="1">
+               <widget class="QDoubleSpinBox" name="offsetDSB_18">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-100.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.100000000000000</double>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_99">
                 <property name="frameShape">
@@ -5552,25 +5846,6 @@
                <widget class="QLabel" name="label_68">
                 <property name="text">
                  <string notr="true">CH18</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QDoubleSpinBox" name="offsetDSB_18">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="decimals">
-                 <number>1</number>
-                </property>
-                <property name="minimum">
-                 <double>-100.000000000000000</double>
-                </property>
-                <property name="singleStep">
-                 <double>0.100000000000000</double>
                 </property>
                </widget>
               </item>
@@ -6275,6 +6550,22 @@
                 </property>
                </widget>
               </item>
+              <item row="12" column="3">
+               <widget class="QSpinBox" name="maxSB_28">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
               <item row="12" column="1">
                <widget class="QDoubleSpinBox" name="offsetDSB_28">
                 <property name="alignment">
@@ -6310,22 +6601,6 @@
                 </property>
                </widget>
               </item>
-              <item row="12" column="3">
-               <widget class="QSpinBox" name="maxSB_28">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
               <item row="12" column="4">
                <widget class="QComboBox" name="chInvCB_28">
                 <item>
@@ -6344,6 +6619,22 @@
                <widget class="QLabel" name="label_109">
                 <property name="text">
                  <string notr="true">CH29</string>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="3">
+               <widget class="QSpinBox" name="maxSB_29">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -6382,22 +6673,6 @@
                 </property>
                </widget>
               </item>
-              <item row="13" column="3">
-               <widget class="QSpinBox" name="maxSB_29">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
               <item row="13" column="4">
                <widget class="QComboBox" name="chInvCB_29">
                 <item>
@@ -6416,6 +6691,22 @@
                <widget class="QLabel" name="label_102">
                 <property name="text">
                  <string notr="true">CH30</string>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="3">
+               <widget class="QSpinBox" name="maxSB_30">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -6454,22 +6745,6 @@
                 </property>
                </widget>
               </item>
-              <item row="14" column="3">
-               <widget class="QSpinBox" name="maxSB_30">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
               <item row="14" column="4">
                <widget class="QComboBox" name="chInvCB_30">
                 <item>
@@ -6488,6 +6763,22 @@
                <widget class="QLabel" name="label_33">
                 <property name="text">
                  <string notr="true">CH31</string>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="3">
+               <widget class="QSpinBox" name="maxSB_31">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -6526,22 +6817,6 @@
                 </property>
                </widget>
               </item>
-              <item row="15" column="3">
-               <widget class="QSpinBox" name="maxSB_31">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
               <item row="15" column="4">
                <widget class="QComboBox" name="chInvCB_31">
                 <item>
@@ -6560,6 +6835,22 @@
                <widget class="QLabel" name="label_31">
                 <property name="text">
                  <string notr="true">CH32</string>
+                </property>
+               </widget>
+              </item>
+              <item row="16" column="3">
+               <widget class="QSpinBox" name="maxSB_32">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -6598,21 +6889,18 @@
                 </property>
                </widget>
               </item>
-              <item row="16" column="3">
-               <widget class="QSpinBox" name="maxSB_32">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <item row="17" column="2">
+               <spacer name="verticalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
                 </property>
-                <property name="accelerated">
-                 <bool>true</bool>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>30</height>
+                 </size>
                 </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
+               </spacer>
               </item>
               <item row="16" column="4">
                <widget class="QComboBox" name="chInvCB_32">
@@ -6628,18 +6916,280 @@
                 </item>
                </widget>
               </item>
-              <item row="17" column="2">
-               <spacer name="verticalSpacer_17">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+              <item row="0" column="5">
+               <widget class="QLabel" name="ppmc_label2">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>30</height>
-                 </size>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
                 </property>
-               </spacer>
+                <property name="text">
+                 <string>PPM Center</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>3</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="5">
+               <widget class="QSpinBox" name="ppmcenter_17">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="5">
+               <widget class="QSpinBox" name="ppmcenter_18">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="5">
+               <widget class="QSpinBox" name="ppmcenter_19">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="5">
+               <widget class="QSpinBox" name="ppmcenter_20">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="5">
+               <widget class="QSpinBox" name="ppmcenter_21">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="5">
+               <widget class="QSpinBox" name="ppmcenter_22">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="5">
+               <widget class="QSpinBox" name="ppmcenter_23">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="5">
+               <widget class="QSpinBox" name="ppmcenter_24">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="5">
+               <widget class="QSpinBox" name="ppmcenter_25">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="5">
+               <widget class="QSpinBox" name="ppmcenter_26">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="5">
+               <widget class="QSpinBox" name="ppmcenter_27">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="5">
+               <widget class="QSpinBox" name="ppmcenter_28">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="5">
+               <widget class="QSpinBox" name="ppmcenter_29">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="5">
+               <widget class="QSpinBox" name="ppmcenter_30">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="5">
+               <widget class="QSpinBox" name="ppmcenter_31">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
+              </item>
+              <item row="16" column="5">
+               <widget class="QSpinBox" name="ppmcenter_32">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1375</number>
+                </property>
+                <property name="maximum">
+                 <number>1625</number>
+                </property>
+                <property name="value">
+                 <number>1500</number>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -6674,8 +7224,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>484</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12438,8 +12988,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>807</width>
-            <height>513</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
