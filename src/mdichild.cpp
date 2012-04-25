@@ -449,17 +449,6 @@ QString MdiChild::strippedName(const QString &fullFileName)
   return QFileInfo(fullFileName).fileName();
 }
 
-int MdiChild::getFileType(const QString &fullFileName)
-{
-  if(QFileInfo(fullFileName).suffix().toUpper()=="HEX")  return FILE_TYPE_HEX;
-  if(QFileInfo(fullFileName).suffix().toUpper()=="BIN")  return FILE_TYPE_BIN;
-  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPM") return FILE_TYPE_EEPM;
-  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPE") return FILE_TYPE_EEPE;
-  if(QFileInfo(fullFileName).suffix().toUpper()=="XML") return FILE_TYPE_XML;
-  return 0;
-}
-
-
 void MdiChild::burnTo()  // write to Tx
 {
 
