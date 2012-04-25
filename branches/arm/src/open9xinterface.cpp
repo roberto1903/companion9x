@@ -341,8 +341,11 @@ int Open9xInterface::getCapability(const Capability capability)
       return 0;
     case PPMExtCtrl:
       return 1;      
-    case Phases:
-      return 4;
+    case FlightPhases:
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_MAX_PHASES-1;
+      else
+        return O9X_MAX_PHASES-1;
     case Timers:
       return 2;
     case FuncSwitches:

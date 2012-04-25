@@ -144,6 +144,28 @@ t_Th9xExpoData::t_Th9xExpoData()
   memset(this, 0, sizeof(t_Th9xExpoData));
 }
 
+int8_t th9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 -sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch th9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
 {
   memset(this, 0, sizeof(t_Th9xLimitData));
@@ -151,7 +173,7 @@ t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
   mode3 = c9x.mode;
   weight6 = c9x.weight;
   chn = c9x.chn;
-  drSw = c9x.swtch;
+  drSw = th9xFromSwitch(c9x.swtch);
   curve = c9x.curve;
 }
 
@@ -162,7 +184,7 @@ t_Th9xExpoData::operator ExpoData ()
   c9x.mode = mode3;
   c9x.weight = weight6;
   c9x.chn = chn;
-  c9x.swtch = drSw;
+  c9x.swtch = th9xToSwitch(drSw);
   c9x.curve = curve;
   return c9x;
 }
@@ -215,7 +237,7 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
   switchMode = 1;
   curveNeg = 0;
   weight = c9x.weight;
-  swtch = c9x.swtch;
+  swtch = th9xFromSwitch(c9x.swtch);
   curve = c9x.curve;
   speedUp = c9x.speedUp;
   speedDown = c9x.speedDown;
@@ -238,7 +260,7 @@ t_Th9xMixData::operator MixData ()
   else /* always true if (srcRaw < 32) */
     c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-24);
   c9x.weight = weight;
-  c9x.swtch = swtch;
+  c9x.swtch = th9xToSwitch(swtch);
   c9x.curve = curve;
   c9x.speedUp = speedUp;
   c9x.speedDown = speedDown;

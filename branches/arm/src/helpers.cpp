@@ -1,34 +1,15 @@
 #include <QtGui>
 #include "helpers.h"
-#include "eeprominterface.h"
 
-QString getPhaseName(int val) {
+QString getPhaseName(int val)
+{
   if (!val) return "---";
-  return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
+  return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
 }
 
 QString getStickStr(int index)
 {
   return RawSource(SOURCE_TYPE_STICK, index).toString();
-}
-
-QString getSWName(int val) {
-
-  if (!val) return "---";
-#warning will not work ...
-  if (val == MAX_DRSWITCH) return "ON";
-  if (val == -MAX_DRSWITCH) return "OFF";
-
-  return QString(val < 0 ? "!" : "") + QString(SWITCHES_STR).mid((abs(val) - 1)*3, 3);
-}
-
-void populateSwitchCB(QComboBox *b, int value)
-{
-  b->clear();
-  for (int i = -MAX_DRSWITCH; i <= MAX_DRSWITCH; i++)
-    b->addItem(getSWName(i));
-  b->setCurrentIndex(value + MAX_DRSWITCH);
-  b->setMaxVisibleItems(10);
 }
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
@@ -52,12 +33,13 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 
 QString getFuncName(unsigned int val)
 {
-  if (val < NUM_CHNOUT)
+  if (val < NUM_SAFETY_CHNOUT) {
     return QObject::tr("Safety %1").arg(RawSource(SOURCE_TYPE_CH, val).toString());
+  }
   else {
     QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
                           QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
-    return strings[val-NUM_CHNOUT];
+    return strings[val-NUM_SAFETY_CHNOUT];
   }
 }
 
@@ -69,13 +51,17 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
   b->setMaxVisibleItems(10);
 }
 
-void populatePhasesCB(QComboBox *b, int value) {
-  QString str = PHASES_STR;
-  b->clear();
-  for (int i = 0; i < (str.length() / 4); i++) b->addItem(str.mid(i * 4, 4).replace("FP", "Phase "));
-  b->setCurrentIndex(value + MAX_PHASES);
-  if (!GetEepromInterface()->getCapability(Phases))
-    b->setDisabled(true);
+void populatePhasesCB(QComboBox *b, int value)
+{
+  for (int i=-GetEepromInterface()->getCapability(FlightPhases); i<=GetEepromInterface()->getCapability(FlightPhases); i++) {
+    if (i < 0)
+      b->addItem(QObject::tr("!Phase %1").arg(-i));
+    else if (i > 0)
+      b->addItem(QObject::tr("Phase %1").arg(-i));
+    else
+      b->addItem(QObject::tr("----"));
+  }
+  b->setCurrentIndex(value + GetEepromInterface()->getCapability(FlightPhases));
 }
 
 void populateCurvesCB(QComboBox *b, int value) {
@@ -122,7 +108,7 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
 
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem("Own trim");
-  unsigned int num_phases=GetEepromInterface()->getCapability(Phases);
+  unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
   for (unsigned int i = 0; i < num_phases; i++) {
     if (i != phase) {
       b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
@@ -140,7 +126,6 @@ void populateTimerSwitchCB(QComboBox *b, int value = 0) {
 
 QString getTimerMode(int tm) {
 
-  QString str = SWITCHES_STR;
   QString stt = "OFFABSRUsRU%ELsEL%THsTH%THtALsAL%P1 P1%P2 P2%P3 P3%";
 
   QString s;
@@ -150,6 +135,8 @@ QString getTimerMode(int tm) {
     return s;
   }
 
+#warning TODO
+#if 0
   if (abs(tm)<(TMR_VAROFS + MAX_DRSWITCH - 1)) {
     s = str.mid((abs(tm) - TMR_VAROFS)*3, 3);
     if (tm < 0) s.prepend("!");
@@ -159,8 +146,48 @@ QString getTimerMode(int tm) {
 
   s = "m" + str.mid((abs(tm)-(TMR_VAROFS + MAX_DRSWITCH - 1))*3, 3);
   if (tm < 0) s.prepend("!");
+#endif
   return s;
 
+}
+
+void populateSwitchCB(QComboBox *b, const RawSwitch & value)
+{
+  RawSwitch item;
+
+  b->clear();
+
+  for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
+    item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  for (int i=-9; i<0; i++) {
+    item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  item = RawSwitch(SWITCH_TYPE_NONE);
+  b->addItem(item.toString(), item.toValue());
+  if (item == value) b->setCurrentIndex(b->count()-1);
+
+  for (int i=1; i<=9; i++) {
+    item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+    item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+#warning TODO ON/OFF
+
+  b->setMaxVisibleItems(10);
 }
 
 // TODO instead of bool switches, we could have a unsigned int flags (SWITCHES / NONE)
@@ -193,8 +220,13 @@ void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
   if (item == source) b->setCurrentIndex(b->count()-1);
 
   if (switches) {
-    for (int i=0; i<9+GetEepromInterface()->getCapability(CustomSwitches); i++) {
-      item = RawSource(SOURCE_TYPE_SWITCH, i);
+    for (int i=1; i<=9; i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue());
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
