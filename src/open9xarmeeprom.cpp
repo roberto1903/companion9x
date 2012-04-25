@@ -322,9 +322,9 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++) {
-      if (c9x.safetySw[i].swtch) {
+      if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = c9x.safetySw[i].swtch;
+        funcSw[count].swtch = open9xArmFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }

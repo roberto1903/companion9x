@@ -90,8 +90,8 @@ void MixerDialog::valuesChanged()
     md->carryTrim = ui->trimCB->currentIndex();
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves);
-    md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
-    md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+    md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();
     md->delayDown = ui->delayDownSB->value();

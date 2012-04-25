@@ -236,9 +236,9 @@ class RawSource {
     {
     }
 
-    RawSource(unsigned int value):
-      type(RawSourceType(value/65536)),
-      index(value%65536)
+    RawSource(int value):
+      type(RawSourceType(abs(value)/65536)),
+      index(value >= 0 ? abs(value)%65536 : -(abs(value)%65536))
     {
     }
 
@@ -248,7 +248,7 @@ class RawSource {
     {
     }
 
-    unsigned int toValue();
+    int toValue();
 
     QString toString();
 
@@ -264,6 +264,8 @@ enum RawSwitchType {
   SWITCH_TYPE_NONE,
   SWITCH_TYPE_SWITCH,
   SWITCH_TYPE_VIRTUAL,
+  SWITCH_TYPE_MOMENT_SWITCH,
+  SWITCH_TYPE_MOMENT_VIRTUAL,
   SWITCH_TYPE_ON,
   SWITCH_TYPE_OFF,
 };
@@ -276,9 +278,9 @@ class RawSwitch {
     {
     }
 
-    RawSwitch(unsigned int value):
-      type(RawSwitchType(value/256)),
-      index(value%256)
+    RawSwitch(int value):
+      type(RawSwitchType(abs(value)/256)),
+      index(value >= 0 ? abs(value)%256 : -(abs(value)%256))
     {
     }
 
@@ -288,7 +290,7 @@ class RawSwitch {
     {
     }
 
-    unsigned int toValue();
+    int toValue();
 
     QString toString();
 
@@ -444,8 +446,8 @@ class CustomSwData { // Custom Switches data
 class SafetySwData { // Custom Switches data
   public:
     SafetySwData() { clear(); }
-    int8_t  swtch;
-    int8_t  val;
+    RawSwitch  swtch;
+    int8_t     val;
 
     void clear() { memset(this, 0, sizeof(SafetySwData)); }
 };
@@ -667,6 +669,7 @@ class RadioData {
 enum Capability {
  OwnerName,
  FlightPhases,
+ Mixes,
  Timers,
  FuncSwitches,
  CustomSwitches,

@@ -488,14 +488,14 @@ Gruvin9xFuncSwData::operator FuncSwData ()
 
 t_Gruvin9xSafetySwData::t_Gruvin9xSafetySwData(SafetySwData &c9x)
 {
-  swtch = c9x.swtch;
+  swtch = gruvin9xFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
 t_Gruvin9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   c9x.val = val;
   return c9x;
 }

@@ -173,6 +173,8 @@ int Th9xInterface::getSize(GeneralSettings &settings)
 int Th9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case Mixes:
+      return TH9X_MAX_MIXERS;
     case OwnerName:
       return 0;
     case Timers:

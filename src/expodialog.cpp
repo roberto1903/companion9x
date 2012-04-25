@@ -57,8 +57,8 @@ void ExpoDialog::valuesChanged()
 {
     ed->expo   = ui->expoSB->value();
     ed->weight = ui->weightSB->value();
-    ed->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
-    ed->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+    ed->swtch  = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     ed->curve  = ui->curvesCB->currentIndex();
     ed->mode   = ui->modeCB->currentIndex() + 1;
 }

@@ -4,7 +4,7 @@
 #include <QtGui>
 #include "eeprominterface.h"
 
-#define TMR_NUM_OPTION  (TMR_VAROFS+2*MAX_DRSWITCH-3)
+#define TMR_NUM_OPTION  (TMR_VAROFS+2*9+2*GetEepromInterface()->getCapability(CustomSwitches)-1)
 
 //convert from mode 1 to mode g_eeGeneral.stickMode
 //NOTICE!  =>  1..4 -> 1..4
@@ -20,7 +20,9 @@
 
 #define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""ACC ""Time"
 
-void populateSwitchCB(QComboBox *b, const RawSwitch & value);
+#define POPULATE_ONOFF      1
+#define POPULATE_MSWITCHES  2
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0);
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);

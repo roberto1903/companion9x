@@ -126,7 +126,9 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
     case OwnerName:
       return 0;
     case FlightPhases:
-      return 4;
+      return G9X_MAX_PHASES;
+    case Mixes:
+      return G9X_MAX_MIXERS;
     case Timers:
       return 2;
     case FuncSwitches:

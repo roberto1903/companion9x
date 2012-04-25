@@ -636,11 +636,10 @@ void printDialog::printSafetySwitches()
     str.append("</tr>");
     for(int i=0; i<NUM_CHNOUT; i++)
     {
-        if (g_model->safetySw[i].swtch!=0) {
+        if (g_model->safetySw[i].swtch.type) {
            str.append("<tr>");
            str.append(doTC(tr("CH")+QString("%1").arg(i+1),"",true));
-#warning TODO
-           // TODO str.append(doTC(getSWName(g_model->safetySw[i].swtch),"green"));
+           str.append(doTC(g_model->safetySw[i].swtch.toString(),"green"));
            str.append(doTC(QString::number(g_model->safetySw[i].val),"green"));
            str.append("</tr>");
            sc++;

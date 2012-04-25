@@ -229,6 +229,8 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case Mixes:
+      return ER9X_MAX_MIXERS;
     case MixFmTrim:
       return 1;      
     case PPMExtCtrl:
