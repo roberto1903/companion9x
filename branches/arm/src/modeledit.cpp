@@ -957,10 +957,10 @@ void ModelEdit::tabCustomSwitches()
 
     switchEditLock = true;
     QComboBox* tmpcsw[NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
-      ui->cswitchFunc_5, ui->cswitchFunc_5, ui->cswitchFunc_7, ui->cswitchFunc_8,
+      ui->cswitchFunc_5, ui->cswitchFunc_6, ui->cswitchFunc_7, ui->cswitchFunc_8,
       ui->cswitchFunc_9, ui->cswitchFunc_10, ui->cswitchFunc_11, ui->cswitchFunc_12,
       ui->cswitchFunc_13, ui->cswitchFunc_14, ui->cswitchFunc_15, ui->cswitchFunc_16,
-      ui->cswitchFunc_16, ui->cswitchFunc_18, ui->cswitchFunc_19, ui->cswitchFunc_20,
+      ui->cswitchFunc_17, ui->cswitchFunc_18, ui->cswitchFunc_19, ui->cswitchFunc_20,
       ui->cswitchFunc_21, ui->cswitchFunc_22, ui->cswitchFunc_23, ui->cswitchFunc_24,
       ui->cswitchFunc_25, ui->cswitchFunc_26, ui->cswitchFunc_27, ui->cswitchFunc_28,
       ui->cswitchFunc_29, ui->cswitchFunc_30, ui->cswitchFunc_31, ui->cswitchFunc_32 };
