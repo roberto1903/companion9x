@@ -460,9 +460,21 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
     connect(name, SIGNAL(editingFinished()), this, SLOT(phaseName_editingFinished()));
     if (sw!=NULL) {
       connect(sw,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseSwitch_currentIndexChanged()));
+      connect(trim1Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim2Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim3Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim4Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
     }
     connect(fadeIn,SIGNAL(editingFinished()),this,SLOT(phaseFadeIn_editingFinished()));
     connect(fadeOut,SIGNAL(editingFinished()),this,SLOT(phaseFadeOut_editingFinished()));
+    connect(trim1,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim2,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim3,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim4,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim1Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim2Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim3Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim4Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
   }
 }
 
@@ -478,7 +490,31 @@ void ModelEdit::tabPhases()
   displayOnePhase(6, ui->phase6Name, ui->phase6Switch, ui->phase6FadeIn, ui->phase6FadeOut, ui->phase6Trim1Use, ui->phase6Trim1Value, ui->phase6Trim1Label, ui->phase6Trim1Slider, ui->phase6Trim2Use, ui->phase6Trim2Value, ui->phase6Trim2Label, ui->phase6Trim2Slider, ui->phase6Trim3Use, ui->phase6Trim3Value, ui->phase6Trim3Label, ui->phase6Trim3Slider, ui->phase6Trim4Use, ui->phase6Trim4Value, ui->phase6Trim4Label, ui->phase6Trim4Slider, true);
   displayOnePhase(7, ui->phase7Name, ui->phase7Switch, ui->phase7FadeIn, ui->phase7FadeOut, ui->phase7Trim1Use, ui->phase7Trim1Value, ui->phase7Trim1Label, ui->phase7Trim1Slider, ui->phase7Trim2Use, ui->phase7Trim2Value, ui->phase7Trim2Label, ui->phase7Trim2Slider, ui->phase7Trim3Use, ui->phase7Trim3Value, ui->phase7Trim3Label, ui->phase7Trim3Slider, ui->phase7Trim4Use, ui->phase7Trim4Value, ui->phase7Trim4Label, ui->phase7Trim4Slider, true);
   displayOnePhase(8, ui->phase8Name, ui->phase8Switch, ui->phase8FadeIn, ui->phase8FadeOut, ui->phase8Trim1Use, ui->phase8Trim1Value, ui->phase8Trim1Label, ui->phase8Trim1Slider, ui->phase8Trim2Use, ui->phase8Trim2Value, ui->phase8Trim2Label, ui->phase8Trim2Slider, ui->phase8Trim3Use, ui->phase8Trim3Value, ui->phase8Trim3Label, ui->phase8Trim3Slider, ui->phase8Trim4Use, ui->phase8Trim4Value, ui->phase8Trim4Label, ui->phase8Trim4Slider, true);
-
+  QSlider * tmpsliders[9][4]={
+    {ui->phase0Trim1Slider,ui->phase0Trim2Slider,ui->phase0Trim3Slider,ui->phase0Trim4Slider},
+    {ui->phase1Trim1Slider,ui->phase1Trim2Slider,ui->phase1Trim3Slider,ui->phase1Trim4Slider},
+    {ui->phase2Trim1Slider,ui->phase2Trim2Slider,ui->phase2Trim3Slider,ui->phase2Trim4Slider},
+    {ui->phase3Trim1Slider,ui->phase3Trim2Slider,ui->phase3Trim3Slider,ui->phase3Trim4Slider},
+    {ui->phase4Trim1Slider,ui->phase4Trim2Slider,ui->phase4Trim3Slider,ui->phase4Trim4Slider},
+    {ui->phase5Trim1Slider,ui->phase5Trim2Slider,ui->phase5Trim3Slider,ui->phase5Trim4Slider},
+    {ui->phase6Trim1Slider,ui->phase6Trim2Slider,ui->phase6Trim3Slider,ui->phase6Trim4Slider},
+    {ui->phase7Trim1Slider,ui->phase7Trim2Slider,ui->phase7Trim3Slider,ui->phase7Trim4Slider},
+    {ui->phase8Trim1Slider,ui->phase8Trim2Slider,ui->phase8Trim3Slider,ui->phase8Trim4Slider}
+  };
+  QSpinBox * tmpspinbox[9][4]={
+    {ui->phase0Trim1Value,ui->phase0Trim2Value,ui->phase0Trim3Value,ui->phase0Trim4Value},
+    {ui->phase1Trim1Value,ui->phase1Trim2Value,ui->phase1Trim3Value,ui->phase1Trim4Value},
+    {ui->phase2Trim1Value,ui->phase2Trim2Value,ui->phase2Trim3Value,ui->phase2Trim4Value},
+    {ui->phase3Trim1Value,ui->phase3Trim2Value,ui->phase3Trim3Value,ui->phase3Trim4Value},
+    {ui->phase4Trim1Value,ui->phase4Trim2Value,ui->phase4Trim3Value,ui->phase4Trim4Value},
+    {ui->phase5Trim1Value,ui->phase5Trim2Value,ui->phase5Trim3Value,ui->phase5Trim4Value},
+    {ui->phase6Trim1Value,ui->phase6Trim2Value,ui->phase6Trim3Value,ui->phase6Trim4Value},
+    {ui->phase7Trim1Value,ui->phase7Trim2Value,ui->phase7Trim3Value,ui->phase7Trim4Value},
+    {ui->phase8Trim1Value,ui->phase8Trim2Value,ui->phase8Trim3Value,ui->phase8Trim4Value}
+  };
+  memcpy(phasesTrimSliders,tmpsliders,sizeof(phasesTrimSliders));
+  memcpy(phasesTrimValues,tmpspinbox,sizeof(phasesTrimValues));
+  
   int phases = GetEepromInterface()->getCapability(Phases);
   if (phases < 8)
     ui->phase8->setDisabled(true);
@@ -2332,12 +2368,16 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
     updateSettings();
 }
 
-void ModelEdit::on_phaseTrimUse_currentIndexChanged(unsigned int phase, unsigned int stick, int index, QSpinBox *trim, QSlider *slider)
+void ModelEdit::phaseTrimUse_currentIndexChanged()
 {
   if (phasesLock) return;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  int trim = comboBox->objectName().mid(10,1).toInt();
 
-  int chn = CONVERT_MODE(stick)-1;
-
+  int chn = CONVERT_MODE(trim)-1;
+  int index=comboBox->currentIndex();
+  
   if (index == 0) {
     g_model.phaseData[phase].trim[chn] = g_model.phaseData[g_model.getTrimFlightPhase(chn, phase)].trim[chn];
     g_model.phaseData[phase].trimRef[chn] = -1;
@@ -2348,89 +2388,41 @@ void ModelEdit::on_phaseTrimUse_currentIndexChanged(unsigned int phase, unsigned
   }
 
   phasesLock = true;
-  displayOnePhaseOneTrim(phase, chn, NULL, trim, slider);
+  displayOnePhaseOneTrim(phase, chn, NULL, phasesTrimValues[phase][trim-1], phasesTrimSliders[phase][trim-1]);
   phasesLock = false;
   updateSettings();
 }
 
-void ModelEdit::on_phaseTrim_valueChanged(unsigned int phase, unsigned int stick, int value)
+void ModelEdit::phaseTrim_valueChanged()
 {
   if (phasesLock) return;
-  int chn = CONVERT_MODE(stick)-1;
-  g_model.phaseData[phase].trim[chn] = value;
+  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  int phase = spinBox->objectName().mid(5,1).toInt();
+  int trim = spinBox->objectName().mid(10,1).toInt();
+  
+  int chn = CONVERT_MODE(trim)-1;
+  g_model.phaseData[phase].trim[chn] = spinBox->value();
+  phasesLock=true;
+  phasesTrimSliders[phase][trim-1]->setValue(spinBox->value());
+  phasesLock=false;
   updateSettings();
 }
 
-void ModelEdit::on_phase1Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 1, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); }
-void ModelEdit::on_phase1Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 2, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); }
-void ModelEdit::on_phase1Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 3, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); }
-void ModelEdit::on_phase1Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 4, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); }
-void ModelEdit::on_phase2Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 1, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); }
-void ModelEdit::on_phase2Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 2, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); }
-void ModelEdit::on_phase2Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 3, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); }
-void ModelEdit::on_phase2Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 4, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); }
-void ModelEdit::on_phase3Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 1, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); }
-void ModelEdit::on_phase3Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 2, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); }
-void ModelEdit::on_phase3Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 3, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); }
-void ModelEdit::on_phase3Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 4, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); }
-void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 1, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); }
-void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 2, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); }
-void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 3, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); }
-void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 4, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); }
-void ModelEdit::on_phase5Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 1, index, ui->phase5Trim1Value, ui->phase5Trim1Slider); }
-void ModelEdit::on_phase5Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 2, index, ui->phase5Trim2Value, ui->phase5Trim2Slider); }
-void ModelEdit::on_phase5Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 3, index, ui->phase5Trim3Value, ui->phase5Trim3Slider); }
-void ModelEdit::on_phase5Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(5, 4, index, ui->phase5Trim4Value, ui->phase5Trim4Slider); }
-void ModelEdit::on_phase6Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 1, index, ui->phase6Trim1Value, ui->phase6Trim1Slider); }
-void ModelEdit::on_phase6Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 2, index, ui->phase6Trim2Value, ui->phase6Trim2Slider); }
-void ModelEdit::on_phase6Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 3, index, ui->phase6Trim3Value, ui->phase6Trim3Slider); }
-void ModelEdit::on_phase6Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(6, 4, index, ui->phase6Trim4Value, ui->phase6Trim4Slider); }
-void ModelEdit::on_phase7Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 1, index, ui->phase7Trim1Value, ui->phase7Trim1Slider); }
-void ModelEdit::on_phase7Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 2, index, ui->phase7Trim2Value, ui->phase7Trim2Slider); }
-void ModelEdit::on_phase7Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 3, index, ui->phase7Trim3Value, ui->phase7Trim3Slider); }
-void ModelEdit::on_phase7Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(7, 4, index, ui->phase7Trim4Value, ui->phase7Trim4Slider); }
-void ModelEdit::on_phase8Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 1, index, ui->phase8Trim1Value, ui->phase8Trim1Slider); }
-void ModelEdit::on_phase8Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 2, index, ui->phase8Trim2Value, ui->phase8Trim2Slider); }
-void ModelEdit::on_phase8Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 3, index, ui->phase8Trim3Value, ui->phase8Trim3Slider); }
-void ModelEdit::on_phase8Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(8, 4, index, ui->phase8Trim4Value, ui->phase8Trim4Slider); }
+void ModelEdit::phaseTrimSlider_valueChanged()
+{
+  if (phasesLock) return;
+  QSlider *slider = qobject_cast<QSlider*>(sender());
+  int phase = slider->objectName().mid(5,1).toInt();
+  int trim = slider->objectName().mid(10,1).toInt();
+  
+  int chn = CONVERT_MODE(trim)-1;
+  g_model.phaseData[phase].trim[chn] = slider->value();
+  phasesLock=true;
+  phasesTrimValues[phase][trim-1]->setValue(slider->value());
+  phasesLock=false;
+  updateSettings();
+}
 
-void ModelEdit::on_phase0Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(0, 1, value); }
-void ModelEdit::on_phase0Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(0, 2, value); }
-void ModelEdit::on_phase0Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(0, 3, value); }
-void ModelEdit::on_phase0Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(0, 4, value); }
-
-void ModelEdit::on_phase1Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 1, value); }
-void ModelEdit::on_phase1Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 2, value); }
-void ModelEdit::on_phase1Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 3, value); }
-void ModelEdit::on_phase1Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 4, value); }
-void ModelEdit::on_phase2Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 1, value); }
-void ModelEdit::on_phase2Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 2, value); }
-void ModelEdit::on_phase2Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 3, value); }
-void ModelEdit::on_phase2Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 4, value); }
-void ModelEdit::on_phase3Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 1, value); }
-void ModelEdit::on_phase3Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 2, value); }
-void ModelEdit::on_phase3Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 3, value); }
-void ModelEdit::on_phase3Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 4, value); }
-void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 1, value); }
-void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 2, value); }
-void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 3, value); }
-void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 4, value); }
-void ModelEdit::on_phase5Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 1, value); }
-void ModelEdit::on_phase5Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 2, value); }
-void ModelEdit::on_phase5Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 3, value); }
-void ModelEdit::on_phase5Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(5, 4, value); }
-void ModelEdit::on_phase6Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 1, value); }
-void ModelEdit::on_phase6Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 2, value); }
-void ModelEdit::on_phase6Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 3, value); }
-void ModelEdit::on_phase6Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(6, 4, value); }
-void ModelEdit::on_phase7Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 1, value); }
-void ModelEdit::on_phase7Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 2, value); }
-void ModelEdit::on_phase7Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 3, value); }
-void ModelEdit::on_phase7Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(7, 4, value); }
-void ModelEdit::on_phase8Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 1, value); }
-void ModelEdit::on_phase8Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 2, value); }
-void ModelEdit::on_phase8Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 3, value); }
-void ModelEdit::on_phase8Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(8, 4, value); }
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
