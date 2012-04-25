@@ -515,7 +515,7 @@ void ModelEdit::tabPhases()
   memcpy(phasesTrimSliders,tmpsliders,sizeof(phasesTrimSliders));
   memcpy(phasesTrimValues,tmpspinbox,sizeof(phasesTrimValues));
   
-  int phases = GetEepromInterface()->getCapability(Phases);
+  int phases = GetEepromInterface()->getCapability(FlightPhases);
   if (phases < 8)
     ui->phase8->setDisabled(true);
     ui->phases->removeTab(8);
@@ -620,7 +620,7 @@ void ModelEdit::tabExpos()
         str += tr("Weight") + QString("(%1%)").arg(md->weight).rightJustified(6, ' ');
         str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
         if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
-        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
 
         qba.clear();
@@ -689,7 +689,7 @@ void ModelEdit::tabMixes()
         str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
         str += md->srcRaw.toString();
         if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
-        if(md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim) str += " " + tr("noTrim");
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){
             if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
@@ -1163,7 +1163,7 @@ void ModelEdit::tabFunctionSwitches()
 
 void ModelEdit::tabSafetySwitches()
 {
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
         safetySwitchSwtch[i] = new QComboBox(this);
         populateSwitchCB(safetySwitchSwtch[i],g_model.safetySw[i].swtch);
@@ -3247,7 +3247,7 @@ void ModelEdit::setLimitMinMax()
 
 void ModelEdit::safetySwitchesEdited()
 {
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
         g_model.safetySw[i].swtch = safetySwitchSwtch[i]->currentIndex()-MAX_DRSWITCH;
         g_model.safetySw[i].val   = safetySwitchValue[i]->value();
@@ -3376,11 +3376,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_CH, 13); md->weight= 100;
     md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
     md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
-#warning TODO
-#if 0
-    setSwitch(0xB, CS_VNEG, STK_THR, -99);
-    setSwitch(0xC, CS_VPOS, CH(14), 0);
-#endif
+    setSwitch(0xB, CS_VNEG, RawSource(SOURCE_TYPE_STICK, 2).toValue(), -99);
+    setSwitch(0xC, CS_VPOS, RawSource(SOURCE_TYPE_CH, 13).toValue(), 0);
     updateSwitchesTab();
   }
 
@@ -3419,7 +3416,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100;
 
     // rudder
-    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);   md->weight=100;
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100;
 
     // throttle
     md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
@@ -3428,10 +3425,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
     // gyro gain
-#warning TODO
-#if 0
-    md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
-#endif
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 7); md->weight=30;
 
     // collective
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
@@ -3465,14 +3459,11 @@ void ModelEdit::applyTemplate(uint8_t idx)
   if(idx==j++) {
     md=setDest(15); md->srcRaw=RawSource(SOURCE_TYPE_CH, 15);   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 9); md->weight= 110;
-#warning TODO
-#if 0
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
-    setSwitch(1,CS_LESS,CH(15), CH(16));
-    setSwitch(2,CS_VPOS,CH(15), 105);
-    setSwitch(3,CS_VNEG,CH(15),-105);
-#endif
+    setSwitch(1, CS_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
+    setSwitch(2, CS_VPOS, RawSource(SOURCE_TYPE_CH, 14).toValue(), 105);
+    setSwitch(3, CS_VNEG, RawSource(SOURCE_TYPE_CH, 14).toValue(), -105);
 
     // redraw switches tab
     updateSwitchesTab();

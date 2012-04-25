@@ -21,7 +21,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         ui->label_curves->hide();
         ui->curvesCB->hide();
     }
-    if (!GetEepromInterface()->getCapability(Phases)) {
+    if (!GetEepromInterface()->getCapability(FlightPhases)) {
         ui->label_phases->hide();
         ui->phasesCB->hide();
     }

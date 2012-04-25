@@ -212,7 +212,7 @@ void printDialog::printSetup()
 {
     int i,k;
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg(GetEepromInterface()->getCapability(Phases) ? 2 : 1));
+    str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg(GetEepromInterface()->getCapability(FlightPhases) ? 2 : 1));
     str.append(g_model->name);
     str.append("&nbsp;(");
     str.append(eepromInterface->getName());
@@ -231,7 +231,7 @@ void printDialog::printSetup()
     str.append(fv(tr("Trim Increment"), getTrimInc()));
     str.append(fv(tr("Center Beep"), getCenterBeep())); // specify which channels beep
     str.append("</td></tr></table></td>");
-    if (GetEepromInterface()->getCapability(Phases)) {
+    if (GetEepromInterface()->getCapability(FlightPhases)) {
         str.append("<td width=\"380\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=8><h2>");
         str.append(tr("Flight Phases Settings"));
         str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
@@ -252,7 +252,7 @@ void printDialog::printSetup()
                     str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->trimRef[k]));
                 }
             }
-            str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(getSWName(pd->swtch)));
+            str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->swtch.toString()));
             str.append("</tr>");
         }
         str.append("</table></td>");
@@ -299,7 +299,7 @@ void printDialog::printExpo()
         str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
         str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
         if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
-        if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+        if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
         if (ed->curve) {
           str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
         }
@@ -340,7 +340,7 @@ void printDialog::printMixes()
         };
         str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
         str += md->srcRaw.toString();
-        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->carryTrim) str += " " + tr("noTrim");
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                 if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
@@ -559,7 +559,7 @@ void printDialog::printSwitches()
                 tstr += QString::number(g_model->customSw[i].val2);
                 break;
             case CS_VBOOL:
-                tstr = getSWName(g_model->customSw[i].val1);
+                tstr = RawSwitch(g_model->customSw[i].val1).toString();
                 switch (g_model->customSw[i].func)
                 {
                   case CS_AND:
@@ -574,7 +574,7 @@ void printDialog::printSwitches()
                   default:
                     break;
                 }
-                tstr += getSWName(g_model->customSw[i].val2);
+                tstr = RawSwitch(g_model->customSw[i].val2).toString();
                 break;
             case CS_VCOMP:
                 if (g_model->customSw[i].val1)
@@ -639,7 +639,8 @@ void printDialog::printSafetySwitches()
         if (g_model->safetySw[i].swtch!=0) {
            str.append("<tr>");
            str.append(doTC(tr("CH")+QString("%1").arg(i+1),"",true));
-           str.append(doTC(getSWName(g_model->safetySw[i].swtch),"green"));
+#warning TODO
+           // TODO str.append(doTC(getSWName(g_model->safetySw[i].swtch),"green"));
            str.append(doTC(QString::number(g_model->safetySw[i].val),"green"));
            str.append("</tr>");
            sc++;
@@ -666,7 +667,7 @@ void printDialog::printFSwitches()
         if (g_model->funcSw[i].swtch!=0) {
            str.append("<tr>");
            str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-           str.append(doTC(getSWName(g_model->funcSw[i].swtch),"green"));
+           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
            str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
            str.append("</tr>");
            sc++;

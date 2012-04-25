@@ -34,11 +34,9 @@ void getEEPROMString(char *dst, const char *src, int size)
   }
 }
 
-QString getSWName(int val);
-
 unsigned int RawSource::toValue()
 {
-  return type * 256 + index;
+  return type * 65536 + index;
 }
 
 QString RawSource::toString()
@@ -61,7 +59,7 @@ QString RawSource::toString()
     case SOURCE_TYPE_3POS:
       return QObject::tr("3POS");
     case SOURCE_TYPE_SWITCH:
-      return getSWName(index+1);
+      return RawSwitch(index).toString();
     case SOURCE_TYPE_CYC:
       return QObject::tr("CYC%1").arg(index+1);
     case SOURCE_TYPE_PPM:
@@ -72,6 +70,40 @@ QString RawSource::toString()
       return QObject::tr("Timer%1").arg(index+1);
     case SOURCE_TYPE_TELEMETRY:
       return telemetry[index];
+    default:
+      return QObject::tr("----");
+  }
+}
+
+unsigned int RawSwitch::toValue()
+{
+  return type * 256 + index;
+}
+
+QString RawSwitch::toString()
+{
+  QString switches[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
+                         QObject::tr("ID0"), QObject::tr("ID1"), QObject::tr("ID2"),
+                         QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
+                       };
+
+  switch(type) {
+    case SWITCH_TYPE_SWITCH:
+      // TODO assert(index != 0);
+      return index > 0 ? switches[index-1] : QString("!") + switches[-index-1];
+    case SWITCH_TYPE_VIRTUAL:
+    {
+      QString neg = QString("");
+      if (index < 0) { neg = QString("!"); index = -index; }
+      if (index < 10)
+        return neg+QObject::tr("SW%1").arg(index);
+      else
+        return neg+QObject::tr("SW%1").arg(QChar('A'+index-10));
+    }
+    case SWITCH_TYPE_ON:
+      return QObject::tr("ON");
+    case SWITCH_TYPE_OFF:
+      return QObject::tr("OFF");
     default:
       return QObject::tr("----");
   }

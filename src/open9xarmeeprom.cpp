@@ -7,6 +7,28 @@
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
+int8_t open9xArmFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch open9xArmToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
 {
   mode = c9x.mode;
@@ -19,7 +41,7 @@ t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
     curve = c9x.curve - 4;
   else
     EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
-  swtch = c9x.swtch;
+  swtch = open9xArmFromSwitch(c9x.swtch);
   phase = c9x.phase;
   weight = c9x.weight;
   expo = c9x.expo;
@@ -36,7 +58,7 @@ t_Open9xArmExpoData_v208::operator ExpoData ()
   else
     c9x.curve = curve + 4;
 
-  c9x.swtch = swtch;
+  c9x.swtch = open9xArmToSwitch(swtch);
   c9x.phase = phase;
   c9x.weight = weight;
   c9x.expo = expo;
@@ -48,7 +70,7 @@ t_Open9xArmPhaseData_v208::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = trim[i];
-  c9x.swtch = swtch;
+  c9x.swtch = open9xArmToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -59,7 +81,7 @@ t_Open9xArmPhaseData_v208::t_Open9xArmPhaseData_v208(PhaseData &c9x)
 {
   for (int i=0; i<NUM_STICKS; i++)
     trim[i] = c9x.trim[i];
-  swtch = c9x.swtch;
+  swtch = open9xArmFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -71,6 +93,7 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
+    swtch = open9xArmFromSwitch(c9x.swtch);
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
       swtch = 0;
@@ -98,7 +121,6 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
     }
     weight = c9x.weight;
     differential = c9x.differential/2;
-    swtch = c9x.swtch;
     curve = c9x.curve;
     delayUp = c9x.delayUp;
     delayDown = c9x.delayDown;
@@ -145,7 +167,7 @@ t_Open9xArmMixData_v208::operator MixData ()
     }
     c9x.weight = weight;
     c9x.differential = differential*2;
-    c9x.swtch = swtch;
+    c9x.swtch = open9xArmToSwitch(swtch);
     c9x.curve = curve;
     c9x.delayUp = delayUp;
     c9x.delayDown = delayDown;
@@ -296,7 +318,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_ARM_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++) {

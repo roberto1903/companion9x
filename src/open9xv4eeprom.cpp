@@ -7,12 +7,15 @@
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
+extern int8_t open9xFromSwitch(const RawSwitch & sw);
+extern RawSwitch open9xToSwitch(int8_t sw);
+
 t_Open9xV4PhaseData_v207::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -28,7 +31,7 @@ t_Open9xV4PhaseData_v207::t_Open9xV4PhaseData_v207(PhaseData &c9x)
     trim[i] = (int8_t)(c9x.trim[i] >> 2);
     trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((c9x.trim[i] & 0x03) << (2*i)));
   }
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -41,7 +44,7 @@ t_Open9xV4PhaseData_v208::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = trim[i];
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -54,7 +57,7 @@ t_Open9xV4PhaseData_v208::t_Open9xV4PhaseData_v208(PhaseData &c9x)
 {
   for (int i=0; i<NUM_STICKS; i++)
     trim[i] = c9x.trim[i];
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -67,7 +70,7 @@ t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-    swtch = c9x.swtch;
+    swtch = open9xFromSwitch(c9x.swtch);
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
       swtch = 0;
@@ -389,7 +392,7 @@ t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -570,7 +573,7 @@ t_Open9xV4ModelData_v208::t_Open9xV4ModelData_v208(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {

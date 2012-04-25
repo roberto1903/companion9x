@@ -18,10 +18,9 @@
 #define CURVE5(x) ((x)-1)
 #define CURVE9(x) (MAX_CURVE5+(x)-1)
 
-#define SWITCHES_STR "THR""RUD""ELE""ID0""ID1""ID2""AIL""GEA""TRN""SW1""SW2""SW3""SW4""SW5""SW6""SW7""SW8""SW9""SWA""SWB""SWC"
 #define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""ACC ""Time"
 
-void populateSwitchCB(QComboBox *b, int value);
+void populateSwitchCB(QComboBox *b, const RawSwitch & value);
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
@@ -34,7 +33,6 @@ void populateCSWCB(QComboBox *b, int value);
 QString getTimerMode(int tm);
 QString getPhaseName(int val);
 QString getStickStr(int index);
-QString getSWName(int val);
 QString getCSWFunc(int val);
 QString getFuncName(unsigned int val);
 QString getSignedStr(int value);

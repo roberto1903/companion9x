@@ -125,7 +125,7 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
-    case Phases:
+    case FlightPhases:
       return 4;
     case Timers:
       return 2;

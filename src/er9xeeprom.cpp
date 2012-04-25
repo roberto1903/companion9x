@@ -194,6 +194,27 @@ t_Er9xLimitData::operator LimitData ()
   return c9x;
 }
 
+int8_t er9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch er9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
 
 t_Er9xMixData::t_Er9xMixData()
 {
@@ -204,6 +225,7 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
 {
   memset(this, 0, sizeof(t_Er9xMixData));
   destCh = c9x.destCh;
+  swtch = er9xFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -211,31 +233,25 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
     srcRaw = 1 + c9x.srcRaw.index;
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
     EEPROMWarnings += ::QObject::tr("er9x doesn't have Rotary Encoders") + "\n";
     srcRaw = 5 + c9x.srcRaw.index; // use pots instead
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw.index+1;
+    swtch = er9xFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-    swtch = c9x.swtch;
     srcRaw = 10 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-    swtch = c9x.swtch;
     srcRaw = 13 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-    swtch = c9x.swtch;
     srcRaw = 21 + c9x.srcRaw.index;
   }
 
@@ -257,6 +273,7 @@ t_Er9xMixData::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
+  c9x.swtch = er9xToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -269,13 +286,17 @@ t_Er9xMixData::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -c9x.swtch.toValue());
       c9x.weight = -weight;
     }
-    else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
+    else if (swtch > 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
     }
-    c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    if (mltpx != MLTPX_REP)
+      c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -505,7 +526,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     trimInc = c9x.trimInc;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     for (unsigned int i=0; i<NUM_FSW; i++)
-      if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch) trimSw = c9x.funcSw[i].swtch;
+      if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
     beepANACenter = c9x.beepANACenter;
     pulsePol = c9x.pulsePol;
     extendedLimits = c9x.extendedLimits;
@@ -525,11 +546,11 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
       // first we find the switches
       for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
         if (c9x.expoData[e].chn == i) {
-          if (c9x.expoData[e].swtch) {
+          if (c9x.expoData[e].swtch.type!=SWITCH_TYPE_NONE) {
             if (!expoData[i].drSw1)
-              expoData[i].drSw1 = -c9x.expoData[e].swtch;
-            else if (c9x.expoData[e].swtch != -expoData[i].drSw1 && !expoData[i].drSw2) {
-              expoData[i].drSw2 = -c9x.expoData[e].swtch;
+              expoData[i].drSw1 = -er9xFromSwitch(c9x.expoData[e].swtch);
+            else if (er9xFromSwitch(c9x.expoData[e].swtch) != -expoData[i].drSw1 && !expoData[i].drSw2) {
+              expoData[i].drSw2 = -er9xFromSwitch(c9x.expoData[e].swtch);
             }
           }
         }
@@ -572,7 +593,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
         for (int mode=0; mode<2; mode++) {
           for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
             if (c9x.expoData[e].chn == i && !c9x.expoData[e].phase) {
-              if (!c9x.expoData[e].swtch || c9x.expoData[e].swtch == swtch1 || c9x.expoData[e].swtch == swtch2) {
+              if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xFromSwitch(swtch1) || c9x.expoData[e].swtch == er9xFromSwitch(swtch2)) {
                 if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
                   expoData[i].expo[pos][0][mode] = c9x.expoData[e].expo;
                   expoData[i].expo[pos][1][mode] = c9x.expoData[e].weight - 100;

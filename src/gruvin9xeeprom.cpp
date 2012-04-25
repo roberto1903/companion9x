@@ -209,12 +209,34 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData()
   memset(this, 0, sizeof(t_Gruvin9xExpoData));
 }
 
+int8_t gruvin9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch gruvin9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
   curve = c9x.curve;
-  swtch = c9x.swtch;
+  swtch = gruvin9xFromSwitch(c9x.swtch);
   phase = abs(c9x.phase);
   negPhase = (c9x.phase < 0);
   weight = c9x.weight;
@@ -227,7 +249,7 @@ t_Gruvin9xExpoData::operator ExpoData ()
   c9x.mode = mode;
   c9x.chn = chn;
   c9x.curve = curve;
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   c9x.phase = (negPhase ? -phase : +phase);
   c9x.weight = weight;
   c9x.expo = expo;
@@ -267,6 +289,7 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
+  swtch = gruvin9xFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -274,31 +297,25 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
     srcRaw = 1 + c9x.srcRaw.index;
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
     EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
     srcRaw = 5 + c9x.srcRaw.index; // use pots instead
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
     swtch = c9x.srcRaw.index+1;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-    swtch = c9x.swtch;
     srcRaw = 10 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-    swtch = c9x.swtch;
     srcRaw = 13 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-    swtch = c9x.swtch;
     srcRaw = 21 + c9x.srcRaw.index;
   }
 
@@ -319,6 +336,7 @@ t_Gruvin9xMixData::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
+  c9x.swtch = gruvin9xToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -337,7 +355,8 @@ t_Gruvin9xMixData::operator MixData ()
     else {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
     }
-    c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+    if (mltpx != MLTPX_REP)
+      c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -455,14 +474,14 @@ Gruvin9xCustomSwData::operator CustomSwData ()
 
 t_Gruvin9xFuncSwData::t_Gruvin9xFuncSwData(FuncSwData &c9x)
 {
-  swtch = c9x.swtch;
+  swtch = gruvin9xFromSwitch(c9x.swtch);
   func = c9x.func - G9X_NUM_CHNOUT;
 }
 
 Gruvin9xFuncSwData::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   c9x.func = (AssignFunc)(func + G9X_NUM_CHNOUT);
   return c9x;
 }
@@ -513,7 +532,7 @@ t_Gruvin9xPhaseData_v102::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = trim[i];
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -525,7 +544,7 @@ t_Gruvin9xPhaseData_v106::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -539,7 +558,7 @@ t_Gruvin9xPhaseData_v106::t_Gruvin9xPhaseData_v106(PhaseData &c9x)
     trim[i] = (int8_t)(c9x.trim[i] >> 2);
     trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((c9x.trim[i] & 0x03) << (2*i)));
   }
-  swtch = c9x.swtch;
+  swtch = gruvin9xFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;

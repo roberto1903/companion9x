@@ -55,9 +55,10 @@ const uint8_t modn12x3[4][4]= {
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
-#define NUM_CHNOUT      32 // number of real output channels CH1-CH8
-#define NUM_CSW         32 // number of custom switches
-#define NUM_FSW         32 // number of functions assigned to switches
+#define NUM_SAFETY_CHNOUT 16
+#define NUM_CHNOUT        32 // number of real output channels CH1-CH8
+#define NUM_CSW           32 // number of custom switches
+#define NUM_FSW           32 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -158,7 +159,6 @@ enum EnumKeys {
 #define SWITCH_OFF    (-SWITCH_ON)
 #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
-#define PHASES_STR     "!FP4!FP3!FP2!FP1!FP0----FP0 FP1 FP2 FP3 FP4 "
 #define CURVE_BASE   7
 #define CSWITCH_STR  "----   v>ofs  v<ofs  |v|>ofs|v|<ofsAND    OR     XOR    ""v1==v2 ""v1!=v2 ""v1>v2  ""v1<v2  ""v1>=v2 ""v1<=v2 "
 #define CSW_NUM_FUNC 14
@@ -212,6 +212,97 @@ enum EnumKeys {
 #define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+NUM_CYC+NUM_PPM+NUM_CHNOUT)
 #define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
 #define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
+
+
+enum RawSourceType {
+  SOURCE_TYPE_NONE,
+  SOURCE_TYPE_STICK, // and POTS
+  SOURCE_TYPE_ROTARY_ENCODER,
+  SOURCE_TYPE_MAX,
+  SOURCE_TYPE_3POS,
+  SOURCE_TYPE_SWITCH,
+  SOURCE_TYPE_CYC,
+  SOURCE_TYPE_PPM,
+  SOURCE_TYPE_CH,
+  SOURCE_TYPE_TIMER,
+  SOURCE_TYPE_TELEMETRY
+};
+
+class RawSource {
+  public:
+    RawSource():
+      type(SOURCE_TYPE_NONE),
+      index(0)
+    {
+    }
+
+    RawSource(unsigned int value):
+      type(RawSourceType(value/65536)),
+      index(value%65536)
+    {
+    }
+
+    RawSource(RawSourceType type, int index=0):
+      type(type),
+      index(index)
+    {
+    }
+
+    unsigned int toValue();
+
+    QString toString();
+
+    bool operator== ( const RawSource& other) {
+      return (this->type == other.type) && (this->index == other.index);
+    }
+
+    RawSourceType type;
+    int index;
+};
+
+enum RawSwitchType {
+  SWITCH_TYPE_NONE,
+  SWITCH_TYPE_SWITCH,
+  SWITCH_TYPE_VIRTUAL,
+  SWITCH_TYPE_ON,
+  SWITCH_TYPE_OFF,
+};
+
+class RawSwitch {
+  public:
+    RawSwitch():
+      type(SWITCH_TYPE_NONE),
+      index(0)
+    {
+    }
+
+    RawSwitch(unsigned int value):
+      type(RawSwitchType(value/256)),
+      index(value%256)
+    {
+    }
+
+    RawSwitch(RawSwitchType type, int index=0):
+      type(type),
+      index(index)
+    {
+    }
+
+    unsigned int toValue();
+
+    QString toString();
+
+    bool operator== ( const RawSwitch& other) {
+      return (this->type == other.type) && (this->index == other.index);
+    }
+
+    bool operator!= ( const RawSwitch& other) {
+      return (this->type != other.type) || (this->index != other.index);
+    }
+
+    RawSwitchType type;
+    int index;
+};
 
 class TrainerMix {
   public:
@@ -291,7 +382,7 @@ class ExpoData {
     uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
     uint8_t chn;
     int8_t  curve;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
-    int8_t  swtch;
+    RawSwitch swtch;
     int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
     uint8_t weight;
     int8_t  expo;
@@ -316,51 +407,6 @@ enum MltpxValue {
   MLTPX_REP=2
 };
 
-enum RawSourceType {
-  SOURCE_TYPE_NONE,
-  SOURCE_TYPE_STICK, // and POTS
-  SOURCE_TYPE_ROTARY_ENCODER,
-  SOURCE_TYPE_MAX,
-  SOURCE_TYPE_3POS,
-  SOURCE_TYPE_SWITCH,
-  SOURCE_TYPE_CYC,
-  SOURCE_TYPE_PPM,
-  SOURCE_TYPE_CH,
-  SOURCE_TYPE_TIMER,
-  SOURCE_TYPE_TELEMETRY
-};
-
-class RawSource {
-  public:
-    RawSource():
-      type(SOURCE_TYPE_NONE),
-      index(0)
-    {
-    }
-
-    RawSource(unsigned int value):
-      type(RawSourceType(value/256)),
-      index(value%256)
-    {
-    }
-
-    RawSource(RawSourceType type, int index=0):
-      type(type),
-      index(index)
-    {
-    }
-
-    unsigned int toValue();
-
-    QString toString();
-
-    bool operator== ( const RawSource& other) {
-      return (this->type == other.type) && (this->index == other.index);
-    }
-
-    RawSourceType type;
-    int index;
-};
 
 class MixData {
   public:
@@ -369,7 +415,7 @@ class MixData {
     RawSource srcRaw;
     int     weight;
     int     differential;
-    int8_t  swtch;
+    RawSwitch swtch;
     int     curve;             //0=symmetrisch
     uint8_t delayUp;
     uint8_t delayDown;
@@ -423,8 +469,8 @@ enum AssignFunc {
 class FuncSwData { // Function Switches data
   public:
     FuncSwData() { clear(); }
-    int     swtch;
-    AssignFunc func;
+    RawSwitch    swtch;
+    AssignFunc   func;
     unsigned int param;
 
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
@@ -435,7 +481,7 @@ class PhaseData {
     PhaseData() { clear(); }
     int trimRef[NUM_STICKS]; //
     int trim[NUM_STICKS];
-    int swtch;
+    RawSwitch swtch;
     char name[6+1];
     unsigned int fadeIn;
     unsigned int fadeOut;
@@ -620,7 +666,7 @@ class RadioData {
 
 enum Capability {
  OwnerName,
- Phases,
+ FlightPhases,
  Timers,
  FuncSwitches,
  CustomSwitches,

@@ -182,6 +182,28 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   return result;
 }
 
+int8_t open9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch open9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
@@ -194,7 +216,7 @@ t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)
     curve = c9x.curve - 4;
   else
     EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   phase = abs(c9x.phase);
   negPhase = (c9x.phase < 0);
   weight = c9x.weight;
@@ -212,7 +234,7 @@ t_Open9xExpoData::operator ExpoData ()
   else
     c9x.curve = curve + 4;
 
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   c9x.phase = (negPhase ? -phase : +phase);
   c9x.weight = weight;
   c9x.expo = expo;
@@ -246,6 +268,7 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
+  swtch = open9xFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -253,31 +276,25 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
     srcRaw = 1 + c9x.srcRaw.index;
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
     EEPROMWarnings += ::QObject::tr("open9x on this board doesn't have Rotary Encoders") + "\n";
     srcRaw = 5 + c9x.srcRaw.index; // use pots instead
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw.index+1;
+    swtch = open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-    swtch = c9x.swtch;
     srcRaw = 10 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-    swtch = c9x.swtch;
     srcRaw = 13 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-    swtch = c9x.swtch;
     srcRaw = 21 + c9x.srcRaw.index;
   }
 
@@ -299,6 +316,7 @@ t_Open9xMixData_v201::operator MixData ()
   c9x.destCh = destCh;
   c9x.weight = weight;
   c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -311,13 +329,17 @@ t_Open9xMixData_v201::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -c9x.swtch.toValue());
       c9x.weight = -weight;
     }
-    else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
+    else if (swtch > 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
     }
-    c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    if (mltpx != MLTPX_REP)
+      c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -346,6 +368,7 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
+  swtch = open9xFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -353,31 +376,25 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
     srcRaw = 1 + c9x.srcRaw.index;
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
     EEPROMWarnings += ::QObject::tr("open9x on this board doesn't have Rotary Encoders") + "\n";
     srcRaw = 5 + c9x.srcRaw.index; // use pots instead
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
-    swtch = c9x.swtch;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw.index+1;
+    swtch = open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-    swtch = c9x.swtch;
     srcRaw = 10 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-    swtch = c9x.swtch;
     srcRaw = 13 + c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-    swtch = c9x.swtch;
     srcRaw = 21 + c9x.srcRaw.index;
   }
 
@@ -398,6 +415,7 @@ t_Open9xMixData_v203::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
+  c9x.swtch = open9xToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -410,13 +428,17 @@ t_Open9xMixData_v203::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -c9x.swtch.toValue());
       c9x.weight = -weight;
     }
-    else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
+    else if (swtch > 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
     }
-    c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    if (mltpx != MLTPX_REP)
+      c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -446,7 +468,7 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-    swtch = c9x.swtch;
+    swtch = open9xFromSwitch(c9x.swtch);
 
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
@@ -480,7 +502,6 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
 
     weight = c9x.weight;
     differential = c9x.differential/2;
-    swtch = c9x.swtch;
     curve = c9x.curve;
     delayUp = c9x.delayUp;
     delayDown = c9x.delayDown;
@@ -502,6 +523,8 @@ t_Open9xMixData_v205::operator MixData ()
 
   if (srcRaw) {
     c9x.destCh = destCh+1;
+    c9x.swtch = open9xToSwitch(swtch);
+
     if (srcRaw == 0) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
     }
@@ -528,7 +551,6 @@ t_Open9xMixData_v205::operator MixData ()
     }
     c9x.weight = weight;
     c9x.differential = differential*2;
-    c9x.swtch = swtch;
     c9x.curve = curve;
     c9x.delayUp = delayUp;
     c9x.delayDown = delayDown;
@@ -635,21 +657,21 @@ Open9xCustomSwData::operator CustomSwData ()
 
 t_Open9xFuncSwData_v201::t_Open9xFuncSwData_v201(FuncSwData &c9x)
 {
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   func = c9x.func - O9X_NUM_CHNOUT;
 }
 
 t_Open9xFuncSwData_v201::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   c9x.func = (AssignFunc)(func+O9X_NUM_CHNOUT);
   return c9x;
 }
 
 t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 {
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   func = (c9x.func >= FuncTrims2Offsets ? c9x.func - 1 : c9x.func);
   param = c9x.param;
 }
@@ -657,7 +679,7 @@ t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 t_Open9xFuncSwData_v203::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   c9x.func = (AssignFunc)(func >= FuncTrims2Offsets ? func+1 : func);
   c9x.param = param;
   return c9x;
@@ -709,7 +731,7 @@ t_Open9xPhaseData_v201::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
-  c9x.swtch = swtch;
+  c9x.swtch = open9xToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -723,7 +745,7 @@ t_Open9xPhaseData_v201::t_Open9xPhaseData_v201(PhaseData &c9x)
     trim[i] = (int8_t)(c9x.trim[i] >> 2);
     trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((c9x.trim[i] & 0x03) << (2*i)));
   }
-  swtch = c9x.swtch;
+  swtch = open9xFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -1313,7 +1335,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -1467,7 +1489,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -1640,7 +1662,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
       customSw[i] = c9x.customSw[i];
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
-      if (c9x.funcSw[i].swtch)
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
         funcSw[count++] = c9x.funcSw[i];
     }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
