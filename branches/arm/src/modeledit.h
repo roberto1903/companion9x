@@ -117,14 +117,13 @@ private:
     void setCurve(uint8_t c, int8_t ar[]);
     void setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2);
 
-    void on_phaseName_editingFinished(unsigned int phase, QLineEdit *edit);
     void on_phaseSwitch_currentIndexChanged(unsigned int phase, int index);
     void on_phaseFadeIn_valueChanged(unsigned int phase, int value);
     void on_phaseFadeOut_valueChanged(unsigned int phase, int value);
     void on_phaseTrim_valueChanged(unsigned int phase, unsigned int stick, int value);
     void on_phaseTrimUse_currentIndexChanged(unsigned int phase, unsigned int stick, int index, QSpinBox *trim, QSlider *slider);
     void displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int trim_idx, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider);
-    void displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider);
+    void displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider, bool doConnect);
     void incSubtrim(uint8_t idx, int16_t inc);
 
 signals:
@@ -145,7 +144,12 @@ private slots:
     void resetCurve();
     void editCurve();
     void plotCurve(bool checked);
-
+//phases slots
+    void phaseName_editingFinished();
+    void phaseSwitch_currentIndexChanged();
+    void phaseFadeIn_editingFinished();
+    void phaseFadeOut_editingFinished();
+    
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
     void pasteMixerMimeData(const QMimeData * mimeData, int destIdx);
 
@@ -247,49 +251,10 @@ private slots:
     void on_timer2ValTE_editingFinished();
     void on_modelNameLE_editingFinished();
 
-    void on_phase0Name_editingFinished();
-    void on_phase1Name_editingFinished();
-    void on_phase2Name_editingFinished();
-    void on_phase3Name_editingFinished();
-    void on_phase4Name_editingFinished();
-    void on_phase5Name_editingFinished();
-    void on_phase6Name_editingFinished();
-    void on_phase7Name_editingFinished();
-    void on_phase8Name_editingFinished();
-
-    void on_phase1Switch_currentIndexChanged(int index);
-    void on_phase2Switch_currentIndexChanged(int index);
-    void on_phase3Switch_currentIndexChanged(int index);
-    void on_phase4Switch_currentIndexChanged(int index);
-    void on_phase5Switch_currentIndexChanged(int index);
-    void on_phase6Switch_currentIndexChanged(int index);
-    void on_phase7Switch_currentIndexChanged(int index);
-    void on_phase8Switch_currentIndexChanged(int index);
-
-    void on_phase0FadeIn_valueChanged(int value);
-    void on_phase1FadeIn_valueChanged(int value);
-    void on_phase2FadeIn_valueChanged(int value);
-    void on_phase3FadeIn_valueChanged(int value);
-    void on_phase4FadeIn_valueChanged(int value);
-    void on_phase5FadeIn_valueChanged(int value);
-    void on_phase6FadeIn_valueChanged(int value);
-    void on_phase7FadeIn_valueChanged(int value);
-    void on_phase8FadeIn_valueChanged(int value);
-    
-    void on_phase0FadeOut_valueChanged(int value);
-    void on_phase1FadeOut_valueChanged(int value);
-    void on_phase2FadeOut_valueChanged(int value);
-    void on_phase3FadeOut_valueChanged(int value);
-    void on_phase4FadeOut_valueChanged(int value);
-    void on_phase5FadeOut_valueChanged(int value);
-    void on_phase6FadeOut_valueChanged(int value);
-    void on_phase7FadeOut_valueChanged(int value);
-    void on_phase8FadeOut_valueChanged(int value);
-
-    void on_phase0Trim1_valueChanged(int value);
-    void on_phase0Trim2_valueChanged(int value);
-    void on_phase0Trim3_valueChanged(int value);
-    void on_phase0Trim4_valueChanged(int value);
+    void on_phase0Trim1Value_valueChanged(int value);
+    void on_phase0Trim2Value_valueChanged(int value);
+    void on_phase0Trim3Value_valueChanged(int value);
+    void on_phase0Trim4Value_valueChanged(int value);
     void on_phase1Trim1Value_valueChanged(int value);
     void on_phase1Trim2Value_valueChanged(int value);
     void on_phase1Trim3Value_valueChanged(int value);
