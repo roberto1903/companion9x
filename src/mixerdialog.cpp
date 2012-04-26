@@ -11,7 +11,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->setupUi(this);
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-    populateSourceCB(ui->sourceCB, md->srcRaw, NUM_XCHNMIX, true);
+    populateSourceCB(ui->sourceCB, md->srcRaw, true);
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
@@ -84,14 +84,14 @@ void MixerDialog::changeEvent(QEvent *e)
 
 void MixerDialog::valuesChanged()
 {
-    md->srcRaw    = RawSource(ui->sourceCB->currentIndex()+1);
+    md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = ui->trimCB->currentIndex();
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves);
-    md->phase     = ui->phasesCB->currentIndex()-MAX_PHASES;
-    md->swtch     = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+    md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();
     md->delayDown = ui->delayDownSB->value();

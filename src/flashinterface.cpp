@@ -18,6 +18,16 @@
 #include "splash.h"
 #include "flashinterface.h"
 
+int getFileType(const QString &fullFileName)
+{
+  if(QFileInfo(fullFileName).suffix().toUpper()=="HEX")  return FILE_TYPE_HEX;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="BIN")  return FILE_TYPE_BIN;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPM") return FILE_TYPE_EEPM;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="EEPE") return FILE_TYPE_EEPE;
+  if(QFileInfo(fullFileName).suffix().toUpper()=="XML") return FILE_TYPE_XML;
+  return 0;
+}
+
 FlashInterface::FlashInterface(QString fileName)
 {
   uint8_t temp[MAX_FSIZE];
@@ -366,13 +376,24 @@ uint FlashInterface::saveFlash(QString fileName)
   memcpy(&binflash, flash.constData(), flash_size);
   QFile file(fileName);
   
-  if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) { //reading HEX TEXT file
-    return -1;
-  }
-  else {
+  int fileType = getFileType(fileName);
+
+  if (fileType == FILE_TYPE_HEX) {
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) { //reading HEX TEXT file
+      return -1;
+    }
     QTextStream outputStream(&file);
     HexInterface hex=HexInterface(outputStream);
-    hex.save(binflash,flash_size);
-    return flash_size;
+    hex.save(binflash, flash_size);
   }
+  else {
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate)) { //reading HEX TEXT file
+      return -1;
+    }
+    file.write((char*)binflash, flash_size);
+  }
+
+  file.close();
+
+  return flash_size;
 }

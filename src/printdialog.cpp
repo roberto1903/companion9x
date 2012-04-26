@@ -212,7 +212,7 @@ void printDialog::printSetup()
 {
     int i,k;
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg(GetEepromInterface()->getCapability(Phases) ? 2 : 1));
+    str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg(GetEepromInterface()->getCapability(FlightPhases) ? 2 : 1));
     str.append(g_model->name);
     str.append("&nbsp;(");
     str.append(eepromInterface->getName());
@@ -231,7 +231,7 @@ void printDialog::printSetup()
     str.append(fv(tr("Trim Increment"), getTrimInc()));
     str.append(fv(tr("Center Beep"), getCenterBeep())); // specify which channels beep
     str.append("</td></tr></table></td>");
-    if (GetEepromInterface()->getCapability(Phases)) {
+    if (GetEepromInterface()->getCapability(FlightPhases)) {
         str.append("<td width=\"380\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=8><h2>");
         str.append(tr("Flight Phases Settings"));
         str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
@@ -239,7 +239,7 @@ void printDialog::printSetup()
         str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
         str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
         for (i=0; i<4; i++) {
-          str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+          str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
         }
         str.append("</tr>");
         for (i=0; i<MAX_PHASES; i++) {
@@ -252,7 +252,7 @@ void printDialog::printSetup()
                     str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->trimRef[k]));
                 }
             }
-            str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(getSWName(pd->swtch)));
+            str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->swtch.toString()));
             str.append("</tr>");
         }
         str.append("</table></td>");
@@ -277,7 +277,7 @@ void printDialog::printExpo()
         str.append("<tr><td><font size=+1 face='Courier New'>");
         if(lastCHN!=ed->chn) {
             lastCHN=ed->chn;
-            str.append("<b>"+getSourceStr(ed->chn+1)+"</b>");
+            str.append("<b>"+getStickStr(ed->chn)+"</b>");
         }
         else
             str.append("<b>&nbsp;</b>");
@@ -299,7 +299,7 @@ void printDialog::printExpo()
         str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
         str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
         if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
-        if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+        if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
         if (ed->curve) {
           str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
         }
@@ -339,8 +339,8 @@ void printDialog::printMixes()
         default:  str += "&nbsp;&nbsp;"; break;
         };
         str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-        str += getSourceStr(md->srcRaw);
-        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        str += md->srcRaw.toString();
+        if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->carryTrim) str += " " + tr("noTrim");
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                 if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
@@ -545,15 +545,10 @@ void printDialog::printSwitches()
             switch CS_STATE(g_model->customSw[i].func)
             {
             case CS_VOFS:
-                if (g_model->customSw[i].v1) {
-                  if (g_model->customSw[i].v1<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v1);
-                  } else {
-                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
-                  }
-                } else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val1)
+                  tstr += RawSource(g_model->customSw[i].val1).toString();
+                else
+                  tstr += "0";
                 tstr.remove(" ");
                 if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_ANEG)
                     tstr = "|" + tstr + "|";
@@ -561,68 +556,58 @@ void printDialog::printSwitches()
                     tstr += " &gt; ";
                 if(g_model->customSw[i].func==CS_ANEG || g_model->customSw[i].func==CS_VNEG)
                     tstr += " &lt; ";
-                tstr += QString::number(g_model->customSw[i].v2);
+                tstr += QString::number(g_model->customSw[i].val2);
                 break;
             case CS_VBOOL:
-                tstr = getSWName(g_model->customSw[i].v1);
+                tstr = RawSwitch(g_model->customSw[i].val1).toString();
                 switch (g_model->customSw[i].func)
                 {
-                case CS_AND:
+                  case CS_AND:
                     tstr += " AND ";
                     break;
-                case CS_OR:
+                  case CS_OR:
                     tstr += " OR ";
                     break;
-                case CS_XOR:
+                  case CS_XOR:
                     tstr += " XOR ";
                     break;
-                default:
+                  default:
                     break;
                 }
-                tstr += getSWName(g_model->customSw[i].v2);
+                tstr = RawSwitch(g_model->customSw[i].val2).toString();
                 break;
             case CS_VCOMP:
-                if (g_model->customSw[i].v1) {
-                  if (g_model->customSw[i].v1<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v1);
-                  } else {
-                    tstr+=getSourceStr(g_model->customSw[i].v1+SRC_SWC-SRC_3POS);
-                  }
-                } else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val1)
+                  tstr += RawSource(g_model->customSw[i].val1).toString();
+                else
+                  tstr += "0";
                 switch (g_model->customSw[i].func)
                 {
-                case CS_EQUAL:
+                  case CS_EQUAL:
                     tstr += " = ";
                     break;
-                case CS_NEQUAL:
+                  case CS_NEQUAL:
                     tstr += " != ";
                     break;
-                case CS_GREATER:
+                  case CS_GREATER:
                     tstr += " &gt; ";
                     break;
-                case CS_LESS:
+                  case CS_LESS:
                     tstr += " &lt; ";
                     break;
-                case CS_EGREATER:
+                  case CS_EGREATER:
                     tstr += " &gt;= ";
                     break;
-                case CS_ELESS:
+                  case CS_ELESS:
                     tstr += " &lt;= ";
                     break;
-                default:
+                  default:
                     break;
                 }
-                if (g_model->customSw[i].v2) {
-                  if (g_model->customSw[i].v2<=SRC_3POS) {
-                    tstr+=getSourceStr(g_model->customSw[i].v2);
-                  } else {
-                    tstr+=getSourceStr(g_model->customSw[i].v2+SRC_SWC-SRC_3POS);
-                  }
-                } else {
-                  tstr+="0";
-                }
+                if (g_model->customSw[i].val2)
+                  tstr += RawSource(g_model->customSw[i].val2).toString();
+                else
+                  tstr += "0";
                 
                 break;
             default:
@@ -651,10 +636,10 @@ void printDialog::printSafetySwitches()
     str.append("</tr>");
     for(int i=0; i<NUM_CHNOUT; i++)
     {
-        if (g_model->safetySw[i].swtch!=0) {
+        if (g_model->safetySw[i].swtch.type) {
            str.append("<tr>");
            str.append(doTC(tr("CH")+QString("%1").arg(i+1),"",true));
-           str.append(doTC(getSWName(g_model->safetySw[i].swtch),"green"));
+           str.append(doTC(g_model->safetySw[i].swtch.toString(),"green"));
            str.append(doTC(QString::number(g_model->safetySw[i].val),"green"));
            str.append("</tr>");
            sc++;
@@ -681,7 +666,7 @@ void printDialog::printFSwitches()
         if (g_model->funcSw[i].swtch!=0) {
            str.append("<tr>");
            str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-           str.append(doTC(getSWName(g_model->funcSw[i].swtch),"green"));
+           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
            str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
            str.append("</tr>");
            sc++;

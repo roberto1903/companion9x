@@ -24,16 +24,14 @@
 #define TH9X_MAX_EXPOS    15
 #define TH9X_MAX_MIXERS   25
 #define TH9X_MAX_SWITCHES 16
-#define TH9X_MAX_SWITCHES 16
 #define TH9X_MAX_CURVES3  3
 #define TH9X_MAX_CURVES5  2
 #define TH9X_MAX_CURVES9  2
 
 #define MDVERS      6
 
-#define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
-#define NUM_CSW         12 //number of custom switches
-#define NUM_STICKSnPOTS 7  //number of sticks and pots
+#define TH9X_NUM_CSW         12 //number of custom switches
+#define NUM_STICKSnPOTS      7  //number of sticks and pots
 
 PACK(typedef struct t_Th9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
@@ -156,8 +154,10 @@ PACK(typedef struct t_Th9xCustomSwData {
   int8_t val2;
 
   operator CustomSwData();
-  t_Th9xCustomSwData();
+  t_Th9xCustomSwData() { memset(this, 0, sizeof(t_Th9xCustomSwData)); }
   t_Th9xCustomSwData(CustomSwData &);
+  int8_t fromSource(RawSource source);
+  RawSource toSource(int8_t value);
 }) Th9xCustomSwData;
 
 PACK(typedef struct t_Th9xTrimData {

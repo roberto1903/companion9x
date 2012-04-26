@@ -69,7 +69,7 @@ void compareDialog::printDiff()
 {
   te->clear();
   printSetup();
-  if (GetEepromInterface()->getCapability(Phases)) {
+  if (GetEepromInterface()->getCapability(FlightPhases)) {
     printPhases();
   }
   printExpos();
@@ -169,47 +169,6 @@ QString compareDialog::doTL(const QString s, const QString color="", bool bold=f
   return "<td align=left>" + str + "</td>";
 }
 
-QString compareDialog::getColor1(QString string1, QString string2)
-{
-  if (string1!=string2) {
-    return "green";
-  }
-  else {
-    return "grey";
-  }
-}
-
-QString compareDialog::getColor2(QString string1, QString string2)
-{
-  if (string1!=string2) {
-    return "red";
-  }
-  else {
-    return "grey";
-  }
-}
-
-QString compareDialog::getColor1(int num1, int num2)
-{
-  if (num1!=num2) {
-    return "green";
-  }
-  else {
-    return "grey";
-  }
-}
-
-QString compareDialog::getColor2(int num1, int num2)
-{
-  if (num1!=num2) {
-    return "red";
-  }
-  else {
-    return "grey";
-  }
-}
-
-
 QString compareDialog::fv(const QString name, const QString value, const QString color="green")
 {
     return "<b>" + name + ": </b><font color=" +color + ">" + value + "</font><br>";
@@ -281,17 +240,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
   if (customSw->func) {
     switch CS_STATE(customSw->func) {
       case CS_VOFS:
-        if (customSw->v1) {
-          if (customSw->v1 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v1);
-          }
-          else {
-            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
-          }
-        }
-        else {
+        if (customSw->val1)
+          tstr += RawSource(customSw->val1).toString();
+        else
           tstr += "0";
-        }
         tstr.remove(" ");
         if (customSw->func == CS_APOS || customSw->func == CS_ANEG)
           tstr = "|" + tstr + "|";
@@ -299,10 +251,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           tstr += " &gt; ";
         if (customSw->func == CS_ANEG || customSw->func == CS_VNEG)
           tstr += " &lt; ";
-        tstr += QString::number(customSw->v2);
+        tstr += QString::number(customSw->val2);
         break;
       case CS_VBOOL:
-        tstr = getSWName(customSw->v1);
+        tstr = RawSwitch(customSw->val1).toString();
         switch (customSw->func) {
           case CS_AND:
             tstr += " AND ";
@@ -316,20 +268,13 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           default:
             break;
         }
-        tstr += getSWName(customSw->v2);
+        tstr += RawSwitch(customSw->val2).toString();
         break;
       case CS_VCOMP:
-        if (customSw->v1) {
-          if (customSw->v1 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v1);
-          }
-          else {
-            tstr += getSourceStr(customSw->v1 + SRC_SWC - SRC_3POS);
-          }
-        }
-        else {
+        if (customSw->val1)
+          tstr += RawSource(customSw->val1).toString();
+        else
           tstr += "0";
-        }
         switch (customSw->func) {
           case CS_EQUAL:
             tstr += " = ";
@@ -352,17 +297,10 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
           default:
             break;
         }
-        if (customSw->v2) {
-          if (customSw->v2 <= SRC_3POS) {
-            tstr += getSourceStr(customSw->v2);
-          }
-          else {
-            tstr += getSourceStr(customSw->v2 + SRC_SWC - SRC_3POS);
-          }
-        }
-        else {
+        if (customSw->val2)
+          tstr += RawSource(customSw->val2).toString();
+        else
           tstr += "0";
-        }
         break;
       default:
         break;
@@ -620,7 +558,7 @@ void compareDialog::printPhases()
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
-    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
   for (i=0; i<MAX_PHASES; i++) {
@@ -643,7 +581,7 @@ void compareDialog::printPhases()
       }
     }
     color=getColor1(pd1->swtch,pd2->swtch);
-    str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(getSWName(pd1->swtch)).arg(color));
+    str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->swtch.toString()).arg(color));
     str.append("</tr>");
   }
   str.append("</table></td>");
@@ -654,7 +592,7 @@ void compareDialog::printPhases()
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
-    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getSourceStr(i+1)));
+    str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
   for (i=0; i<MAX_PHASES; i++) {
@@ -677,7 +615,7 @@ void compareDialog::printPhases()
       }
     }
     color=getColor2(pd1->swtch,pd2->swtch);
-    str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(getSWName(pd2->swtch)).arg(color));
+    str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->swtch.toString()).arg(color));
     str.append("</tr>");
   }
   str.append("</table></td>");
@@ -762,7 +700,7 @@ void compareDialog::printExpos()
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
           if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
-          if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+          if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
           }
@@ -770,7 +708,7 @@ void compareDialog::printExpos()
         }
       }
       str.append("</table></td>");
-      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getSourceStr(i+1)+"</b></td>");
+      str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getStickStr(i)+"</b></td>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
       for (int j=0; j<MAX_EXPOS; j++) {
@@ -799,7 +737,7 @@ void compareDialog::printExpos()
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
           if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
-          if (ed->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(ed->swtch));
+          if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
           }
@@ -845,8 +783,8 @@ void compareDialog::printMixers()
               break;
           };
           str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-          str += getSourceStr(md->srcRaw);
-          if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+          str += md->srcRaw.toString();
+          if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                   if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
@@ -896,8 +834,8 @@ void compareDialog::printMixers()
               break;
           };
           str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
-          str += getSourceStr(md->srcRaw);
-          if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+          str += md->srcRaw.toString();
+          if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                   if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
@@ -1050,8 +988,8 @@ void compareDialog::printFSwitches()
   str.append("</tr>");
   for(int i=0; i<NUM_FSW; i++)
   {
-    if ((g_model1->funcSw[i].swtch!=0)||(g_model2->funcSw[i].swtch!=0)) {
-      if ((g_model1->funcSw[i].swtch!=g_model2->funcSw[i].swtch)||(g_model1->funcSw[i].func!=g_model2->funcSw[i].func)) {
+    if (g_model1->funcSw[i].swtch.type || g_model2->funcSw[i].swtch.type) {
+      if ((g_model1->funcSw[i].swtch != g_model2->funcSw[i].swtch) || (g_model1->funcSw[i].func!=g_model2->funcSw[i].func)) {
         color1="green";
         color2="red";
       } else {
@@ -1059,17 +997,18 @@ void compareDialog::printFSwitches()
         color2="grey";
       }
       str.append("<tr>");
-      if (g_model1->funcSw[i].swtch|=0) {
-        str.append(doTC(getSWName(g_model1->funcSw[i].swtch),color1));
+      if (g_model1->funcSw[i].swtch.type) {
+        str.append(doTC(g_model1->funcSw[i].swtch.toString(),color1));
         str.append(doTC(getFuncName(g_model1->funcSw[i].func),color1));
       } else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-      if (g_model2->funcSw[i].swtch|=0) {
-        str.append(doTC(getSWName(g_model2->funcSw[i].swtch),color2));
+      if (g_model2->funcSw[i].swtch.type) {
+        str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
-      } else {
+      }
+      else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append("</tr>");
@@ -1107,15 +1046,16 @@ void compareDialog::printSafetySwitches()
         color2="grey";
       }
       str.append("<tr>");
-      if (g_model1->safetySw[i].swtch|=0) {
-        str.append(doTC(getSWName(g_model1->safetySw[i].swtch),color1));
+      if (g_model1->safetySw[i].swtch.type) {
+        str.append(doTC(g_model1->safetySw[i].swtch.toString(),color1));
         str.append(doTC(QString::number(g_model1->safetySw[i].val),color1));
-      } else {
+      }
+      else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
       str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
-      if (g_model2->safetySw[i].swtch|=0) {
-        str.append(doTC(getSWName(g_model2->safetySw[i].swtch),color2));
+      if (g_model2->safetySw[i].swtch.type) {
+        str.append(doTC(g_model2->safetySw[i].swtch.toString(),color2));
         str.append(doTC(QString::number(g_model2->safetySw[i].val),color2));
       } else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");

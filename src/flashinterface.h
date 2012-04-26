@@ -34,6 +34,14 @@
 #define BLD_MARK "BLD:"
 #define MOD_MARK "MOD:"
 
+#define FILE_TYPE_BIN  1
+#define FILE_TYPE_HEX  2
+#define FILE_TYPE_EEPE 3
+#define FILE_TYPE_EEPM 4
+#define FILE_TYPE_XML  5
+
+int getFileType(const QString &fullFileName);
+
 class FlashInterface
 {
 public:

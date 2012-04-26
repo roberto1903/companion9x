@@ -20,14 +20,14 @@
 #include "eeprominterface.h"
 
 //eeprom data
-#define MAX_MIXERS  32
+#define ER9X_MAX_MIXERS  32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
 #define MDVERS      10
 
-#define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
-#define NUM_CSW         12 //number of custom switches
+#define ER9X_NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
+#define ER9X_NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
 PACK(typedef struct t_Er9xTrainerMix {
@@ -159,7 +159,7 @@ PACK(typedef struct t_Er9xCustomSwData { // Custom Switches data
   uint8_t func;
 
   operator CustomSwData();
-  t_Er9xCustomSwData();
+  t_Er9xCustomSwData() { memset(this, 0, sizeof(t_Er9xCustomSwData)); }
   t_Er9xCustomSwData(CustomSwData&);
 }) Er9xCustomSwData;
 
@@ -220,16 +220,16 @@ PACK(typedef struct t_Er9xModelData {
   uint8_t   swashCollectiveSource;
   uint8_t   swashRingValue;
   int8_t    ppmFrameLength;
-  Er9xMixData   mixData[MAX_MIXERS];
-  Er9xLimitData limitData[NUM_CHNOUT];
+  Er9xMixData   mixData[ER9X_MAX_MIXERS];
+  Er9xLimitData limitData[ER9X_NUM_CHNOUT];
   Er9xExpoData  expoData[4];
   int8_t    trim[4];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Er9xCustomSwData   customSw[NUM_CSW];
+  Er9xCustomSwData   customSw[ER9X_NUM_CSW];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   res3[2];
-  Er9xSafetySwData  safetySw[NUM_CHNOUT];
+  Er9xSafetySwData  safetySw[ER9X_NUM_CHNOUT];
   Er9xFrSkyData frsky;
   operator ModelData();
   t_Er9xModelData() { memset(this, 0, sizeof(t_Er9xModelData)); }

@@ -42,12 +42,6 @@
 #ifndef MDICHILD_H
 #define MDICHILD_H
 
-#define FILE_TYPE_BIN  1
-#define FILE_TYPE_HEX  2
-#define FILE_TYPE_EEPE 3
-#define FILE_TYPE_EEPM 4
-#define FILE_TYPE_XML  5
-
 #include <QtGui>
 #include "eeprominterface.h"
 
@@ -78,7 +72,6 @@ public:
     QString currentFile() { return curFile; }
     // void keyPressEvent(QKeyEvent *event);
     bool hasPasteData();
-    static int getFileType(const QString &fullFileName);
     void viableModelSelected(bool viable);
     void eepromInterfaceChanged();
     void setEEpromAvail(int eavail);

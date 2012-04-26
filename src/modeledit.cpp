@@ -48,6 +48,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   ui->phase2Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase3Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase4Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase5Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase6Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase7Name->setValidator(new QRegExpValidator(rx, this));
+  ui->phase8Name->setValidator(new QRegExpValidator(rx, this));
 
   tabModelEditSetup();
   tabPhases();
@@ -435,7 +439,7 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn,
     trimSlider->setInvertedAppearance(true);
 }
 
-void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider)
+void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QSpinBox *fadeIn, QSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider,bool doConnect=false)
 {
   PhaseData *phase = &g_model.phaseData[phase_idx];
   if (name) name->setText(phase->name);
@@ -455,31 +459,92 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
     trim3Label->setText(labels[CONVERT_MODE(3)-1]);
     trim4Label->setText(labels[CONVERT_MODE(4)-1]);
   }
+  // the connects
+  if (doConnect) {
+    connect(name, SIGNAL(editingFinished()), this, SLOT(phaseName_editingFinished()));
+    if (sw!=NULL) {
+      connect(sw,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseSwitch_currentIndexChanged()));
+      connect(trim1Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim2Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim3Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+      connect(trim4Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
+    }
+    connect(fadeIn,SIGNAL(editingFinished()),this,SLOT(phaseFadeIn_editingFinished()));
+    connect(fadeOut,SIGNAL(editingFinished()),this,SLOT(phaseFadeOut_editingFinished()));
+    connect(trim1,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim2,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim3,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim4,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
+    connect(trim1Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim2Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim3Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    connect(trim4Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+  }
 }
 
 void ModelEdit::tabPhases()
 {
   phasesLock = true;
-  displayOnePhase(0, ui->phase0Name, NULL,             ui->phase0FadeIn, ui->phase0FadeOut, NULL,               ui->phase0Trim1,      ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,               ui->phase0Trim2,      ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,               ui->phase0Trim3,      ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,               ui->phase0Trim4,      ui->phase0Trim4Label, ui->phase0Trim4Slider);
-  displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider);
-  displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider);
-  displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider);
-  displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider);
-
-  int phases = GetEepromInterface()->getCapability(Phases);
-  if (phases < 4)
+  displayOnePhase(0, ui->phase0Name, NULL,                   ui->phase0FadeIn, ui->phase0FadeOut, NULL,                      ui->phase0Trim1Value, ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,                       ui->phase0Trim2Value, ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,                       ui->phase0Trim3Value, ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,                       ui->phase0Trim4Value, ui->phase0Trim4Label, ui->phase0Trim4Slider, true);
+  displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider, true);
+  displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider, true);
+  displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider, true);
+  displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider, true);
+  displayOnePhase(5, ui->phase5Name, ui->phase5Switch, ui->phase5FadeIn, ui->phase5FadeOut, ui->phase5Trim1Use, ui->phase5Trim1Value, ui->phase5Trim1Label, ui->phase5Trim1Slider, ui->phase5Trim2Use, ui->phase5Trim2Value, ui->phase5Trim2Label, ui->phase5Trim2Slider, ui->phase5Trim3Use, ui->phase5Trim3Value, ui->phase5Trim3Label, ui->phase5Trim3Slider, ui->phase5Trim4Use, ui->phase5Trim4Value, ui->phase5Trim4Label, ui->phase5Trim4Slider, true);
+  displayOnePhase(6, ui->phase6Name, ui->phase6Switch, ui->phase6FadeIn, ui->phase6FadeOut, ui->phase6Trim1Use, ui->phase6Trim1Value, ui->phase6Trim1Label, ui->phase6Trim1Slider, ui->phase6Trim2Use, ui->phase6Trim2Value, ui->phase6Trim2Label, ui->phase6Trim2Slider, ui->phase6Trim3Use, ui->phase6Trim3Value, ui->phase6Trim3Label, ui->phase6Trim3Slider, ui->phase6Trim4Use, ui->phase6Trim4Value, ui->phase6Trim4Label, ui->phase6Trim4Slider, true);
+  displayOnePhase(7, ui->phase7Name, ui->phase7Switch, ui->phase7FadeIn, ui->phase7FadeOut, ui->phase7Trim1Use, ui->phase7Trim1Value, ui->phase7Trim1Label, ui->phase7Trim1Slider, ui->phase7Trim2Use, ui->phase7Trim2Value, ui->phase7Trim2Label, ui->phase7Trim2Slider, ui->phase7Trim3Use, ui->phase7Trim3Value, ui->phase7Trim3Label, ui->phase7Trim3Slider, ui->phase7Trim4Use, ui->phase7Trim4Value, ui->phase7Trim4Label, ui->phase7Trim4Slider, true);
+  displayOnePhase(8, ui->phase8Name, ui->phase8Switch, ui->phase8FadeIn, ui->phase8FadeOut, ui->phase8Trim1Use, ui->phase8Trim1Value, ui->phase8Trim1Label, ui->phase8Trim1Slider, ui->phase8Trim2Use, ui->phase8Trim2Value, ui->phase8Trim2Label, ui->phase8Trim2Slider, ui->phase8Trim3Use, ui->phase8Trim3Value, ui->phase8Trim3Label, ui->phase8Trim3Slider, ui->phase8Trim4Use, ui->phase8Trim4Value, ui->phase8Trim4Label, ui->phase8Trim4Slider, true);
+  QSlider * tmpsliders[9][4]={
+    {ui->phase0Trim1Slider,ui->phase0Trim2Slider,ui->phase0Trim3Slider,ui->phase0Trim4Slider},
+    {ui->phase1Trim1Slider,ui->phase1Trim2Slider,ui->phase1Trim3Slider,ui->phase1Trim4Slider},
+    {ui->phase2Trim1Slider,ui->phase2Trim2Slider,ui->phase2Trim3Slider,ui->phase2Trim4Slider},
+    {ui->phase3Trim1Slider,ui->phase3Trim2Slider,ui->phase3Trim3Slider,ui->phase3Trim4Slider},
+    {ui->phase4Trim1Slider,ui->phase4Trim2Slider,ui->phase4Trim3Slider,ui->phase4Trim4Slider},
+    {ui->phase5Trim1Slider,ui->phase5Trim2Slider,ui->phase5Trim3Slider,ui->phase5Trim4Slider},
+    {ui->phase6Trim1Slider,ui->phase6Trim2Slider,ui->phase6Trim3Slider,ui->phase6Trim4Slider},
+    {ui->phase7Trim1Slider,ui->phase7Trim2Slider,ui->phase7Trim3Slider,ui->phase7Trim4Slider},
+    {ui->phase8Trim1Slider,ui->phase8Trim2Slider,ui->phase8Trim3Slider,ui->phase8Trim4Slider}
+  };
+  QSpinBox * tmpspinbox[9][4]={
+    {ui->phase0Trim1Value,ui->phase0Trim2Value,ui->phase0Trim3Value,ui->phase0Trim4Value},
+    {ui->phase1Trim1Value,ui->phase1Trim2Value,ui->phase1Trim3Value,ui->phase1Trim4Value},
+    {ui->phase2Trim1Value,ui->phase2Trim2Value,ui->phase2Trim3Value,ui->phase2Trim4Value},
+    {ui->phase3Trim1Value,ui->phase3Trim2Value,ui->phase3Trim3Value,ui->phase3Trim4Value},
+    {ui->phase4Trim1Value,ui->phase4Trim2Value,ui->phase4Trim3Value,ui->phase4Trim4Value},
+    {ui->phase5Trim1Value,ui->phase5Trim2Value,ui->phase5Trim3Value,ui->phase5Trim4Value},
+    {ui->phase6Trim1Value,ui->phase6Trim2Value,ui->phase6Trim3Value,ui->phase6Trim4Value},
+    {ui->phase7Trim1Value,ui->phase7Trim2Value,ui->phase7Trim3Value,ui->phase7Trim4Value},
+    {ui->phase8Trim1Value,ui->phase8Trim2Value,ui->phase8Trim3Value,ui->phase8Trim4Value}
+  };
+  memcpy(phasesTrimSliders,tmpsliders,sizeof(phasesTrimSliders));
+  memcpy(phasesTrimValues,tmpspinbox,sizeof(phasesTrimValues));
+  
+  int phases = GetEepromInterface()->getCapability(FlightPhases);
+  if (phases < 9)
+    ui->phase8->setDisabled(true);
+    ui->phases->removeTab(8);
+  if (phases < 8)
+    ui->phase7->setDisabled(true);
+    ui->phases->removeTab(7);
+  if (phases < 7)
+    ui->phase6->setDisabled(true);
+    ui->phases->removeTab(6);
+  if (phases < 6)
+    ui->phase5->setDisabled(true);
+    ui->phases->removeTab(5);
+  if (phases < 5)
     ui->phase4->setDisabled(true);
-  if (phases < 3)
+  if (phases < 4)
     ui->phase3->setDisabled(true);
-  if (phases < 2)
+  if (phases < 3)
     ui->phase2->setDisabled(true);
-  if (phases < 1) {
+  if (phases < 2) {
     ui->phase1->setDisabled(true);
     ui->phase0Name->setDisabled(true);
     ui->phase0FadeIn->setDisabled(true);
     ui->phase0FadeOut->setDisabled(true);
   }
-
+  ui->phases->setCurrentIndex(0);
   phasesLock = false;
 }
 
@@ -498,6 +563,18 @@ void ModelEdit::on_phases_currentChanged(int index)
       break;
     case 4:
       displayOnePhase(4, NULL, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
+      break;
+    case 5:
+      displayOnePhase(5, NULL, NULL, NULL, NULL, NULL, ui->phase5Trim1Value, NULL, ui->phase5Trim1Slider, NULL, ui->phase5Trim2Value, NULL, ui->phase5Trim2Slider, NULL, ui->phase5Trim3Value, NULL, ui->phase5Trim3Slider, NULL, ui->phase5Trim4Value, NULL, ui->phase5Trim4Slider);
+      break;
+    case 6:
+      displayOnePhase(6, NULL, NULL, NULL, NULL, NULL, ui->phase6Trim1Value, NULL, ui->phase6Trim1Slider, NULL, ui->phase6Trim2Value, NULL, ui->phase6Trim2Slider, NULL, ui->phase6Trim3Value, NULL, ui->phase6Trim3Slider, NULL, ui->phase6Trim4Value, NULL, ui->phase6Trim4Slider);
+      break;
+    case 7:
+      displayOnePhase(7, NULL, NULL, NULL, NULL, NULL, ui->phase7Trim1Value, NULL, ui->phase7Trim1Slider, NULL, ui->phase7Trim2Value, NULL, ui->phase7Trim2Slider, NULL, ui->phase7Trim3Value, NULL, ui->phase7Trim3Slider, NULL, ui->phase7Trim4Value, NULL, ui->phase7Trim4Slider);
+      break;
+    case 8:
+      displayOnePhase(8, NULL, NULL, NULL, NULL, NULL, ui->phase8Trim1Value, NULL, ui->phase8Trim1Slider, NULL, ui->phase8Trim2Value, NULL, ui->phase8Trim2Slider, NULL, ui->phase8Trim3Value, NULL, ui->phase8Trim3Slider, NULL, ui->phase8Trim4Value, NULL, ui->phase8Trim4Slider);
       break;
   }
   phasesLock = false;
@@ -520,7 +597,7 @@ void ModelEdit::tabExpos()
         while(curDest<md->chn-1)
         {
             curDest++;
-            str = getSourceStr(curDest+1).toAscii();
+            str = getStickStr(curDest);
             qba.clear();
             qba.append((quint8)-curDest-1);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -530,7 +607,7 @@ void ModelEdit::tabExpos()
 
         if(curDest!=md->chn)
         {
-            str = getSourceStr(md->chn+1).toAscii();
+            str = getStickStr(md->chn);
             curDest = md->chn;
         }
         else {
@@ -547,7 +624,7 @@ void ModelEdit::tabExpos()
         str += tr("Weight") + QString("(%1%)").arg(md->weight).rightJustified(6, ' ');
         str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
         if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
-        if (md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
 
         qba.clear();
@@ -561,7 +638,7 @@ void ModelEdit::tabExpos()
     while(curDest<NUM_STICKS-1)
     {
         curDest++;
-        QString str = getSourceStr(curDest+1);
+        QString str = getStickStr(curDest);
         qba.clear();
         qba.append((quint8)-curDest-1);
         QListWidgetItem *itm = new QListWidgetItem(str);
@@ -583,10 +660,10 @@ void ModelEdit::tabMixes()
     MixerlistWidget->clear();
     int curDest = 0;
     int i;
-    for(i=0; i<MAX_MIXERS; i++)
+    for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
-        if((md->destCh==0) || (md->destCh>NUM_CHNOUT)) break;
+        if((md->destCh==0) || (md->destCh>GetEepromInterface()->getCapability(Outputs))) break;
         QString str = "";
         while(curDest<(md->destCh-1))
         {
@@ -614,9 +691,9 @@ void ModelEdit::tabMixes()
         };
 
         str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
-        str += getSourceStr(md->srcRaw);
+        str += md->srcRaw.toString();
         if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
-        if(md->swtch) str += " " + tr("Switch") + QString("(%1)").arg(getSWName(md->swtch));
+        if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim) str += " " + tr("noTrim");
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){
             if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
@@ -638,7 +715,7 @@ void ModelEdit::tabMixes()
         MixerlistWidget->addItem(itm);//(str);
     }
 
-    while(curDest<NUM_CHNOUT)
+    while(curDest<GetEepromInterface()->getCapability(Outputs))
     {
         curDest++;
         QString str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
@@ -675,7 +752,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, NUM_XCHNRAW, false);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, false);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
@@ -720,6 +797,23 @@ void ModelEdit::tabLimits()
     int cbn=cb->objectName().mid(cb->objectName().lastIndexOf("_")+1).toInt()-1;
     cb->setCurrentIndex((g_model.limitData[cbn].revert) ? 1 : 0);
     connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(limitInvEdited()));
+  }
+  if (GetEepromInterface()->getCapability(PPMCenter)) {
+    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("ppmcenter_[0-9]+"))) {
+      int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+      sb->setValue(g_model.servoCenter[sbn]+1500);
+      connect(sb, SIGNAL(editingFinished()), this, SLOT(ppmcenterEdited()));
+    }
+  } else {
+    foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("ppmcenter_[0-9]+"))) {
+      sb->hide();
+    }
+    ui->ppmc_label1->hide();
+    ui->ppmc_label2->hide();
+  }
+
+  if (GetEepromInterface()->getCapability(Outputs)<17) {
+    ui->limitGB2->hide();
   }
   setLimitMinMax();
 }
@@ -845,6 +939,14 @@ void ModelEdit::limitInvEdited()
   updateSettings();
 }
 
+void ModelEdit::ppmcenterEdited()
+{
+  QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+  int limitId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+  g_model.servoCenter[limitId] = sb->value()-1500;
+  updateSettings();
+}
+
 void ModelEdit::setCurrentCurve(int curveId)
 {
   currentCurve = curveId;
@@ -886,28 +988,28 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
 {
     switch CS_STATE(g_model.customSw[i].func)
     {
-    case CS_VOFS:
+      case CS_VOFS:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
-        cswitchOffset[i]->setValue(g_model.customSw[i].v2);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
+        cswitchOffset[i]->setValue(g_model.customSw[i].val2);
         break;
-    case CS_VBOOL:
+      case CS_VBOOL:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSwitchCB(cswitchSource1[i],g_model.customSw[i].v1);
-        populateSwitchCB(cswitchSource2[i],g_model.customSw[i].v2);
+        populateSwitchCB(cswitchSource1[i], g_model.customSw[i].val1);
+        populateSwitchCB(cswitchSource2[i], g_model.customSw[i].val2);
         break;
-    case CS_VCOMP:
+      case CS_VCOMP:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i], g_model.customSw[i].v1, NUM_XCHNCSW, false);
-        populateSourceCB(cswitchSource2[i], g_model.customSw[i].v2, NUM_XCHNCSW, false);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
+        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), false);
         break;
-    default:
+      default:
         break;
     }
 }
@@ -915,40 +1017,48 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
 void ModelEdit::updateSwitchesTab()
 {
     switchEditLock = true;
-
-    populateCSWCB(ui->cswitchFunc_1, g_model.customSw[0].func);
-    populateCSWCB(ui->cswitchFunc_2, g_model.customSw[1].func);
-    populateCSWCB(ui->cswitchFunc_3, g_model.customSw[2].func);
-    populateCSWCB(ui->cswitchFunc_4, g_model.customSw[3].func);
-    populateCSWCB(ui->cswitchFunc_5, g_model.customSw[4].func);
-    populateCSWCB(ui->cswitchFunc_6, g_model.customSw[5].func);
-    populateCSWCB(ui->cswitchFunc_7, g_model.customSw[6].func);
-    populateCSWCB(ui->cswitchFunc_8, g_model.customSw[7].func);
-    populateCSWCB(ui->cswitchFunc_9, g_model.customSw[8].func);
-    populateCSWCB(ui->cswitchFunc_10,g_model.customSw[9].func);
-    populateCSWCB(ui->cswitchFunc_11,g_model.customSw[10].func);
-    populateCSWCB(ui->cswitchFunc_12,g_model.customSw[11].func);
-
-    for(int i=0; i<NUM_CSW; i++)
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for (int i=0; i< num_csw; i++) {
+      populateCSWCB(csw[i], g_model.customSw[i].func);
       setSwitchWidgetVisibility(i);
+    }
 
     switchEditLock = false;
 }
 
 void ModelEdit::tabCustomSwitches()
 {
-    switchEditLock = true;
 
-    for(int i=0; i<NUM_CSW; i++)
-    {
+    switchEditLock = true;
+    QComboBox* tmpcsw[NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
+      ui->cswitchFunc_5, ui->cswitchFunc_6, ui->cswitchFunc_7, ui->cswitchFunc_8,
+      ui->cswitchFunc_9, ui->cswitchFunc_10, ui->cswitchFunc_11, ui->cswitchFunc_12,
+      ui->cswitchFunc_13, ui->cswitchFunc_14, ui->cswitchFunc_15, ui->cswitchFunc_16,
+      ui->cswitchFunc_17, ui->cswitchFunc_18, ui->cswitchFunc_19, ui->cswitchFunc_20,
+      ui->cswitchFunc_21, ui->cswitchFunc_22, ui->cswitchFunc_23, ui->cswitchFunc_24,
+      ui->cswitchFunc_25, ui->cswitchFunc_26, ui->cswitchFunc_27, ui->cswitchFunc_28,
+      ui->cswitchFunc_29, ui->cswitchFunc_30, ui->cswitchFunc_31, ui->cswitchFunc_32 };
+    QLabel* cswlabel[NUM_CSW] = { ui->cswlabel_1, ui->cswlabel_2, ui->cswlabel_3, ui->cswlabel_4,
+      ui->cswlabel_5, ui->cswlabel_6, ui->cswlabel_7, ui->cswlabel_8,
+      ui->cswlabel_9, ui->cswlabel_10, ui->cswlabel_11, ui->cswlabel_12,
+      ui->cswlabel_13, ui->cswlabel_14, ui->cswlabel_15, ui->cswlabel_16,
+      ui->cswlabel_17, ui->cswlabel_18, ui->cswlabel_19, ui->cswlabel_20,
+      ui->cswlabel_21, ui->cswlabel_22, ui->cswlabel_23, ui->cswlabel_24, 
+      ui->cswlabel_25, ui->cswlabel_26, ui->cswlabel_27, ui->cswlabel_28, 
+      ui->cswlabel_29, ui->cswlabel_30, ui->cswlabel_31, ui->cswlabel_32};
+    
+    memcpy(csw, tmpcsw, sizeof(csw));
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for(int i=0; i<16; i++) {
+      if (i<num_csw) {
         cswitchSource1[i] = new QComboBox(this);
         connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchSource1[i],i+1,2);
+        ui->gridLayout_21->addWidget(cswitchSource1[i],i+1,2);
         cswitchSource1[i]->setVisible(false);
 
         cswitchSource2[i] = new QComboBox(this);
         connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchSource2[i],i+1,3);
+        ui->gridLayout_21->addWidget(cswitchSource2[i],i+1,3);
         cswitchSource2[i]->setVisible(false);
 
         cswitchOffset[i] = new QSpinBox(this);
@@ -956,25 +1066,46 @@ void ModelEdit::tabCustomSwitches()
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
-        ui->gridLayout_8->addWidget(cswitchOffset[i],i+1,3);
+        ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
+      } else {
+        csw[i]->hide();
+        cswlabel[i]->hide();
+      }
     }
+    if (num_csw>16) {
+      for(int i=16; i<32; i++) {
+        if (i<=num_csw) {
+          cswitchSource1[i] = new QComboBox(this);
+          connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchSource1[i],i-15,2);
+          cswitchSource1[i]->setVisible(false);
 
+          cswitchSource2[i] = new QComboBox(this);
+          connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchSource2[i],i-15,3);
+          cswitchSource2[i]->setVisible(false);
+
+          cswitchOffset[i] = new QSpinBox(this);
+          cswitchOffset[i]->setMaximum(125);
+          cswitchOffset[i]->setMinimum(-125);
+          cswitchOffset[i]->setAccelerated(true);
+          connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
+          cswitchOffset[i]->setVisible(false);
+        } else {
+          csw[i]->hide();
+          cswlabel[i]->hide();
+        }
+      }
+    } else {
+      ui->cswitchGB2->hide();
+    }
     updateSwitchesTab();
-
     //connects
-    connect(ui->cswitchFunc_1,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_2,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_3,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_4,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_5,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_6,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_7,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_8,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_9,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_10,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_11,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
-    connect(ui->cswitchFunc_12,SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    for (int i=0; i<num_csw; i++) {
+      connect(csw[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
+    }
 
     switchEditLock = false;
 }
@@ -982,17 +1113,16 @@ void ModelEdit::tabCustomSwitches()
 void ModelEdit::tabFunctionSwitches()
 {
     switchEditLock = true;
-
-    for(int i=0; i<NUM_FSW; i++)
-    {
+    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+    for(int i=0; i<std::min(16,num_fsw); i++) {
         fswtchSwtch[i] = new QComboBox(this);
         connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchSwtch[i],i+1,1);
+        ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
         populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
 
         fswtchFunc[i] = new QComboBox(this);
         connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchFunc[i],i+1,2);
+        ui->fswitchlayout1->addWidget(fswtchFunc[i],i+1,2);
         populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
         
         fswtchParam[i] = new QSpinBox(this);
@@ -1000,30 +1130,47 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParam[i]->setMinimum(-125);
         fswtchParam[i]->setAccelerated(true);
         connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-        ui->gridLayout_fswitches->addWidget(fswtchParam[i],i+1,3);
+        ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
         fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-        if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH) {
+        int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+        if (index==0) {
           fswtchParam[i]->hide();
         }
-        if ( fswtchFunc[i]->currentIndex()>15) {
-          fswtchParam[i]->hide();
-        }
-
-        
-//        if (!GetEepromInterface()->getCapability(FuncSwitches)) {
-//          fswtchFunc[i]->setDisabled(true);
-//          if (i != 0) {
-//            fswtchSwtch[i]->setDisabled(true);
-//          }
-//        }
     }
+    if (num_fsw>16) {
+      for(int i=16; i<num_fsw; i++) {
+          fswtchSwtch[i] = new QComboBox(this);
+          connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
+          populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
 
+          fswtchFunc[i] = new QComboBox(this);
+          connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchFunc[i],i-15,2);
+          populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+
+          fswtchParam[i] = new QSpinBox(this);
+          fswtchParam[i]->setMaximum(125);
+          fswtchParam[i]->setMinimum(-125);
+          fswtchParam[i]->setAccelerated(true);
+          connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+          ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
+          fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+
+          int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+          if (index==0) {
+            fswtchParam[i]->hide();
+          }
+      } 
+    } else {
+      ui->FSwitchGB2->hide();
+    }
     switchEditLock = false;
 }
 
 void ModelEdit::tabSafetySwitches()
 {
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
         safetySwitchSwtch[i] = new QComboBox(this);
         populateSwitchCB(safetySwitchSwtch[i],g_model.safetySw[i].swtch);
@@ -1059,58 +1206,33 @@ void ModelEdit::customSwitchesEdited()
     switchEditLock = true;
 
     bool chAr[NUM_CSW];
-
-    chAr[0]  = (CS_STATE(g_model.customSw[0].func)) !=(CS_STATE(ui->cswitchFunc_1->currentIndex()));
-    chAr[1]  = (CS_STATE(g_model.customSw[1].func)) !=(CS_STATE(ui->cswitchFunc_2->currentIndex()));
-    chAr[2]  = (CS_STATE(g_model.customSw[2].func)) !=(CS_STATE(ui->cswitchFunc_3->currentIndex()));
-    chAr[3]  = (CS_STATE(g_model.customSw[3].func)) !=(CS_STATE(ui->cswitchFunc_4->currentIndex()));
-    chAr[4]  = (CS_STATE(g_model.customSw[4].func)) !=(CS_STATE(ui->cswitchFunc_5->currentIndex()));
-    chAr[5]  = (CS_STATE(g_model.customSw[5].func)) !=(CS_STATE(ui->cswitchFunc_6->currentIndex()));
-    chAr[6]  = (CS_STATE(g_model.customSw[6].func)) !=(CS_STATE(ui->cswitchFunc_7->currentIndex()));
-    chAr[7]  = (CS_STATE(g_model.customSw[7].func)) !=(CS_STATE(ui->cswitchFunc_8->currentIndex()));
-    chAr[8]  = (CS_STATE(g_model.customSw[8].func)) !=(CS_STATE(ui->cswitchFunc_9->currentIndex()));
-    chAr[9]  = (CS_STATE(g_model.customSw[9].func)) !=(CS_STATE(ui->cswitchFunc_10->currentIndex()));
-    chAr[10] = (CS_STATE(g_model.customSw[10].func))!=(CS_STATE(ui->cswitchFunc_11->currentIndex()));
-    chAr[11] = (CS_STATE(g_model.customSw[11].func))!=(CS_STATE(ui->cswitchFunc_12->currentIndex()));
-
-    g_model.customSw[0].func  = ui->cswitchFunc_1->currentIndex();
-    g_model.customSw[1].func  = ui->cswitchFunc_2->currentIndex();
-    g_model.customSw[2].func  = ui->cswitchFunc_3->currentIndex();
-    g_model.customSw[3].func  = ui->cswitchFunc_4->currentIndex();
-    g_model.customSw[4].func  = ui->cswitchFunc_5->currentIndex();
-    g_model.customSw[5].func  = ui->cswitchFunc_6->currentIndex();
-    g_model.customSw[6].func  = ui->cswitchFunc_7->currentIndex();
-    g_model.customSw[7].func  = ui->cswitchFunc_8->currentIndex();
-    g_model.customSw[8].func  = ui->cswitchFunc_9->currentIndex();
-    g_model.customSw[9].func  = ui->cswitchFunc_10->currentIndex();
-    g_model.customSw[10].func = ui->cswitchFunc_11->currentIndex();
-    g_model.customSw[11].func = ui->cswitchFunc_12->currentIndex();
-
-
-    for(int i=0; i<NUM_CSW; i++)
-    {
-        if(chAr[i])
-        {
-            g_model.customSw[i].v1 = 0;
-            g_model.customSw[i].v2 = 0;
+    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
+    for (int i=0; i<num_csw;i++) {
+        chAr[i]  = (CS_STATE(g_model.customSw[i].func)) !=(CS_STATE(csw[i]->currentIndex()));
+        g_model.customSw[i].func  = csw[i]->currentIndex();
+    }
+    for(int i=0; i<num_csw; i++) {
+        if(chAr[i]) {
+            g_model.customSw[i].val1 = 0;
+            g_model.customSw[i].val2 = 0;
             setSwitchWidgetVisibility(i);
         }
 
         switch(CS_STATE(g_model.customSw[i].func))
         {
-        case (CS_VOFS):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex();
-            g_model.customSw[i].v2 = cswitchOffset[i]->value();
+          case (CS_VOFS):
+            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+            g_model.customSw[i].val2 = cswitchOffset[i]->value();
             break;
-        case (CS_VBOOL):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
-            g_model.customSw[i].v2 = cswitchSource2[i]->currentIndex() - MAX_DRSWITCH;
+          case (CS_VBOOL):
+            g_model.customSw[i].val1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
+            g_model.customSw[i].val2 = cswitchSource2[i]->currentIndex() - MAX_DRSWITCH;
             break;
-        case (CS_VCOMP):
-            g_model.customSw[i].v1 = cswitchSource1[i]->currentIndex();
-            g_model.customSw[i].v2 = cswitchSource2[i]->currentIndex();
+          case (CS_VCOMP):
+            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+            g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
             break;
-        default:
+          default:
             break;
         }
     }
@@ -1124,9 +1246,9 @@ void ModelEdit::functionSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
-
-    for(int i=0; i<NUM_FSW; i++) {
-      g_model.funcSw[i].swtch = fswtchSwtch[i]->currentIndex() - MAX_DRSWITCH;
+    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+    for(int i=0; i<num_fsw; i++) {
+      g_model.funcSw[i].swtch = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
       if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
@@ -1395,49 +1517,37 @@ void ModelEdit::on_modelNameLE_editingFinished()
     updateSettings();
 }
 
-void ModelEdit::on_phaseName_editingFinished(unsigned int phase, QLineEdit *edit)
+void ModelEdit::phaseName_editingFinished()
 {
-  strncpy(g_model.phaseData[phase].name, edit->text().toAscii(), 6);
+  QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
+  int phase = lineEdit->objectName().mid(5,1).toInt();
+  strncpy(g_model.phaseData[phase].name, lineEdit->text().toAscii(), 6);
   updateSettings();
 }
 
-void ModelEdit::on_phaseSwitch_currentIndexChanged(unsigned int phase, int index)
+void ModelEdit::phaseSwitch_currentIndexChanged()
 {
-  g_model.phaseData[phase].swtch = (int)index - MAX_DRSWITCH;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  g_model.phaseData[phase].swtch = comboBox->itemData(comboBox->currentIndex()).toInt();
   updateSettings();
 }
 
-void ModelEdit::on_phaseFadeIn_valueChanged(unsigned int phase, int value)
+void ModelEdit::phaseFadeIn_editingFinished()
 {
-  g_model.phaseData[phase].fadeIn = value;
+  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  int phase = spinBox->objectName().mid(5,1).toInt();
+  g_model.phaseData[phase].fadeIn = spinBox->value();
   updateSettings();
 }
 
-void ModelEdit::on_phaseFadeOut_valueChanged(unsigned int phase, int value)
+void ModelEdit::phaseFadeOut_editingFinished()
 {
-  g_model.phaseData[phase].fadeOut = value;
+  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  int phase = spinBox->objectName().mid(5,1).toInt();
+  g_model.phaseData[phase].fadeOut = spinBox->value();
   updateSettings();
 }
-
-void ModelEdit::on_phase0Name_editingFinished() { on_phaseName_editingFinished(0, ui->phase0Name); }
-void ModelEdit::on_phase1Name_editingFinished() { on_phaseName_editingFinished(1, ui->phase1Name); }
-void ModelEdit::on_phase2Name_editingFinished() { on_phaseName_editingFinished(2, ui->phase2Name); }
-void ModelEdit::on_phase3Name_editingFinished() { on_phaseName_editingFinished(3, ui->phase3Name); }
-void ModelEdit::on_phase4Name_editingFinished() { on_phaseName_editingFinished(4, ui->phase4Name); }
-void ModelEdit::on_phase1Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(1, index); }
-void ModelEdit::on_phase2Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(2, index); }
-void ModelEdit::on_phase3Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(3, index); }
-void ModelEdit::on_phase4Switch_currentIndexChanged(int index) { on_phaseSwitch_currentIndexChanged(4, index); }
-void ModelEdit::on_phase0FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(0, value); }
-void ModelEdit::on_phase0FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(0, value); }
-void ModelEdit::on_phase1FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(1, value); }
-void ModelEdit::on_phase1FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(1, value); }
-void ModelEdit::on_phase2FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(2, value); }
-void ModelEdit::on_phase2FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(2, value); }
-void ModelEdit::on_phase3FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(3, value); }
-void ModelEdit::on_phase3FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(3, value); }
-void ModelEdit::on_phase4FadeIn_valueChanged(int value) { on_phaseFadeIn_valueChanged(4, value); }
-void ModelEdit::on_phase4FadeOut_valueChanged(int value) { on_phaseFadeOut_valueChanged(4, value); }
 
 void ModelEdit::on_timer1ModeCB_currentIndexChanged(int index)
 {
@@ -2268,12 +2378,16 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
     updateSettings();
 }
 
-void ModelEdit::on_phaseTrimUse_currentIndexChanged(unsigned int phase, unsigned int stick, int index, QSpinBox *trim, QSlider *slider)
+void ModelEdit::phaseTrimUse_currentIndexChanged()
 {
   if (phasesLock) return;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  int trim = comboBox->objectName().mid(10,1).toInt();
 
-  int chn = CONVERT_MODE(stick)-1;
-
+  int chn = CONVERT_MODE(trim)-1;
+  int index=comboBox->currentIndex();
+  
   if (index == 0) {
     g_model.phaseData[phase].trim[chn] = g_model.phaseData[g_model.getTrimFlightPhase(chn, phase)].trim[chn];
     g_model.phaseData[phase].trimRef[chn] = -1;
@@ -2284,57 +2398,41 @@ void ModelEdit::on_phaseTrimUse_currentIndexChanged(unsigned int phase, unsigned
   }
 
   phasesLock = true;
-  displayOnePhaseOneTrim(phase, chn, NULL, trim, slider);
+  displayOnePhaseOneTrim(phase, chn, NULL, phasesTrimValues[phase][trim-1], phasesTrimSliders[phase][trim-1]);
   phasesLock = false;
   updateSettings();
 }
 
-void ModelEdit::on_phaseTrim_valueChanged(unsigned int phase, unsigned int stick, int value)
+void ModelEdit::phaseTrim_valueChanged()
 {
   if (phasesLock) return;
-  int chn = CONVERT_MODE(stick)-1;
-  g_model.phaseData[phase].trim[chn] = value;
+  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  int phase = spinBox->objectName().mid(5,1).toInt();
+  int trim = spinBox->objectName().mid(10,1).toInt();
+  
+  int chn = CONVERT_MODE(trim)-1;
+  g_model.phaseData[phase].trim[chn] = spinBox->value();
+  phasesLock=true;
+  phasesTrimSliders[phase][trim-1]->setValue(spinBox->value());
+  phasesLock=false;
   updateSettings();
 }
 
-void ModelEdit::on_phase1Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 1, index, ui->phase1Trim1Value, ui->phase1Trim1Slider); }
-void ModelEdit::on_phase1Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 2, index, ui->phase1Trim2Value, ui->phase1Trim2Slider); }
-void ModelEdit::on_phase1Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 3, index, ui->phase1Trim3Value, ui->phase1Trim3Slider); }
-void ModelEdit::on_phase1Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(1, 4, index, ui->phase1Trim4Value, ui->phase1Trim4Slider); }
-void ModelEdit::on_phase2Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 1, index, ui->phase2Trim1Value, ui->phase2Trim1Slider); }
-void ModelEdit::on_phase2Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 2, index, ui->phase2Trim2Value, ui->phase2Trim2Slider); }
-void ModelEdit::on_phase2Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 3, index, ui->phase2Trim3Value, ui->phase2Trim3Slider); }
-void ModelEdit::on_phase2Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(2, 4, index, ui->phase2Trim4Value, ui->phase2Trim4Slider); }
-void ModelEdit::on_phase3Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 1, index, ui->phase3Trim1Value, ui->phase3Trim1Slider); }
-void ModelEdit::on_phase3Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 2, index, ui->phase3Trim2Value, ui->phase3Trim2Slider); }
-void ModelEdit::on_phase3Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 3, index, ui->phase3Trim3Value, ui->phase3Trim3Slider); }
-void ModelEdit::on_phase3Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(3, 4, index, ui->phase3Trim4Value, ui->phase3Trim4Slider); }
-void ModelEdit::on_phase4Trim1Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 1, index, ui->phase4Trim1Value, ui->phase4Trim1Slider); }
-void ModelEdit::on_phase4Trim2Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 2, index, ui->phase4Trim2Value, ui->phase4Trim2Slider); }
-void ModelEdit::on_phase4Trim3Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 3, index, ui->phase4Trim3Value, ui->phase4Trim3Slider); }
-void ModelEdit::on_phase4Trim4Use_currentIndexChanged(int index) { on_phaseTrimUse_currentIndexChanged(4, 4, index, ui->phase4Trim4Value, ui->phase4Trim4Slider); }
+void ModelEdit::phaseTrimSlider_valueChanged()
+{
+  if (phasesLock) return;
+  QSlider *slider = qobject_cast<QSlider*>(sender());
+  int phase = slider->objectName().mid(5,1).toInt();
+  int trim = slider->objectName().mid(10,1).toInt();
+  
+  int chn = CONVERT_MODE(trim)-1;
+  g_model.phaseData[phase].trim[chn] = slider->value();
+  phasesLock=true;
+  phasesTrimValues[phase][trim-1]->setValue(slider->value());
+  phasesLock=false;
+  updateSettings();
+}
 
-void ModelEdit::on_phase0Trim1_valueChanged(int value) { on_phaseTrim_valueChanged(0, 1, value); }
-void ModelEdit::on_phase0Trim2_valueChanged(int value) { on_phaseTrim_valueChanged(0, 2, value); }
-void ModelEdit::on_phase0Trim3_valueChanged(int value) { on_phaseTrim_valueChanged(0, 3, value); }
-void ModelEdit::on_phase0Trim4_valueChanged(int value) { on_phaseTrim_valueChanged(0, 4, value); }
-
-void ModelEdit::on_phase1Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 1, value); }
-void ModelEdit::on_phase1Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 2, value); }
-void ModelEdit::on_phase1Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 3, value); }
-void ModelEdit::on_phase1Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(1, 4, value); }
-void ModelEdit::on_phase2Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 1, value); }
-void ModelEdit::on_phase2Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 2, value); }
-void ModelEdit::on_phase2Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 3, value); }
-void ModelEdit::on_phase2Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(2, 4, value); }
-void ModelEdit::on_phase3Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 1, value); }
-void ModelEdit::on_phase3Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 2, value); }
-void ModelEdit::on_phase3Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 3, value); }
-void ModelEdit::on_phase3Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(3, 4, value); }
-void ModelEdit::on_phase4Trim1Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 1, value); }
-void ModelEdit::on_phase4Trim2Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 2, value); }
-void ModelEdit::on_phase4Trim3Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 3, value); }
-void ModelEdit::on_phase4Trim4Value_valueChanged(int value) { on_phaseTrim_valueChanged(4, 4, value); }
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
@@ -2437,14 +2535,14 @@ void ModelEdit::drawCurve()
 
 bool ModelEdit::gm_insertMix(int idx)
 {
-  if (idx<0 || idx>=MAX_MIXERS || g_model.mixData[MAX_MIXERS-1].destCh > 0) {
+  if (idx<0 || idx>=GetEepromInterface()->getCapability(Mixes) || g_model.mixData[GetEepromInterface()->getCapability(Mixes)-1].destCh > 0) {
     QMessageBox::information(this, "companion9x", tr("Not enough available mixers!"));
     return false;
   }
 
   int i = g_model.mixData[idx].destCh;
   memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
-      (MAX_MIXERS-(idx+1))*sizeof(MixData) );
+      (GetEepromInterface()->getCapability(Mixes)-(idx+1))*sizeof(MixData) );
   memset(&g_model.mixData[idx],0,sizeof(MixData));
   g_model.mixData[idx].destCh = i;
   g_model.mixData[idx].weight = 100;
@@ -2454,13 +2552,13 @@ bool ModelEdit::gm_insertMix(int idx)
 void ModelEdit::gm_deleteMix(int index)
 {
   memmove(&g_model.mixData[index],&g_model.mixData[index+1],
-            (MAX_MIXERS-(index+1))*sizeof(MixData));
-  memset(&g_model.mixData[MAX_MIXERS-1],0,sizeof(MixData));
+            (GetEepromInterface()->getCapability(Mixes)-(index+1))*sizeof(MixData));
+  memset(&g_model.mixData[GetEepromInterface()->getCapability(Mixes)-1],0,sizeof(MixData));
 }
 
 void ModelEdit::gm_openMix(int index)
 {
-    if(index<0 || index>=MAX_MIXERS) return;
+    if(index<0 || index>=GetEepromInterface()->getCapability(Mixes)) return;
 
     MixData mixd(g_model.mixData[index]);
     updateSettings();
@@ -2478,8 +2576,8 @@ void ModelEdit::gm_openMix(int index)
 int ModelEdit::getMixerIndex(int dch)
 {
     int i = 0;
-    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<MAX_MIXERS)) i++;
-    if(i==MAX_MIXERS) return -1;
+    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<GetEepromInterface()->getCapability(Mixes))) i++;
+    if(i==GetEepromInterface()->getCapability(Mixes)) return -1;
     return i;
 }
 
@@ -2580,7 +2678,7 @@ QList<int> ModelEdit::createMixListFromSelected()
     foreach(QListWidgetItem *item, MixerlistWidget->selectedItems())
     {
         int idx= item->data(Qt::UserRole).toByteArray().at(0);
-        if(idx>=0 && idx<MAX_MIXERS) list << idx;
+        if(idx>=0 && idx<GetEepromInterface()->getCapability(Mixes)) list << idx;
     }
     return list;
 }
@@ -2727,7 +2825,7 @@ void ModelEdit::pasteMixerMimeData(const QMimeData * mimeData, int destIdx)
     int i = 0;
     while(i<mxData.size()) {
       idx++;
-      if(idx==MAX_MIXERS) break;
+      if(idx==GetEepromInterface()->getCapability(Mixes)) break;
 
       if (!gm_insertMix(idx))
         break;
@@ -2960,16 +3058,16 @@ void ModelEdit::expolistWidget_KeyPress(QKeyEvent *event)
 
 int ModelEdit::gm_moveMix(int idx, bool dir) //true=inc=down false=dec=up
 {
-    if(idx>MAX_MIXERS || (idx==0 && !dir) || (idx==MAX_MIXERS && dir)) return idx;
+    if(idx>GetEepromInterface()->getCapability(Mixes) || (idx==0 && !dir) || (idx==GetEepromInterface()->getCapability(Mixes) && dir)) return idx;
 
     int tdx = dir ? idx+1 : idx-1;
     MixData &src=g_model.mixData[idx];
     MixData &tgt=g_model.mixData[tdx];
 
-    if((src.destCh==0) || (src.destCh>NUM_CHNOUT) || (tgt.destCh>NUM_CHNOUT)) return idx;
+    if((src.destCh==0) || (src.destCh>GetEepromInterface()->getCapability(Outputs)) || (tgt.destCh>GetEepromInterface()->getCapability(Outputs))) return idx;
 
     if(tgt.destCh!=src.destCh) {
-        if ((dir)  && (src.destCh<NUM_CHNOUT)) src.destCh++;
+        if ((dir)  && (src.destCh<GetEepromInterface()->getCapability(Outputs))) src.destCh++;
         if ((!dir) && (src.destCh>0))          src.destCh--;
         return idx;
     }
@@ -3156,9 +3254,9 @@ void ModelEdit::setLimitMinMax()
 
 void ModelEdit::safetySwitchesEdited()
 {
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
-        g_model.safetySw[i].swtch = safetySwitchSwtch[i]->currentIndex()-MAX_DRSWITCH;
+        g_model.safetySw[i].swtch = safetySwitchSwtch[i]->itemData(safetySwitchSwtch[i]->currentIndex()).toInt();
         g_model.safetySw[i].val   = safetySwitchValue[i]->value();
     }
     updateSettings();
@@ -3183,11 +3281,11 @@ void ModelEdit::on_templateList_doubleClicked(QModelIndex index)
 MixData* ModelEdit::setDest(uint8_t dch)
 {
     uint8_t i = 0;
-    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<MAX_MIXERS)) i++;
-    if(i==MAX_MIXERS) return &g_model.mixData[0];
+    while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<GetEepromInterface()->getCapability(Mixes))) i++;
+    if(i==GetEepromInterface()->getCapability(Mixes)) return &g_model.mixData[0];
 
     memmove(&g_model.mixData[i+1],&g_model.mixData[i],
-            (MAX_MIXERS-(i+1))*sizeof(MixData) );
+            (GetEepromInterface()->getCapability(Mixes)-(i+1))*sizeof(MixData) );
     memset(&g_model.mixData[i],0,sizeof(MixData));
     g_model.mixData[i].destCh = dch;
     return &g_model.mixData[i];
@@ -3239,8 +3337,8 @@ void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 void ModelEdit::setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2)
 {
   g_model.customSw[idx-1].func = func;
-  g_model.customSw[idx-1].v1   = v1;
-  g_model.customSw[idx-1].v2   = v2;
+  g_model.customSw[idx-1].val1   = v1;
+  g_model.customSw[idx-1].val2   = v2;
 }
 
 void ModelEdit::applyTemplate(uint8_t idx)
@@ -3264,53 +3362,52 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   uint8_t j = 0;
 
-
   //Simple 4-Ch
   if(idx==j++) {
     if (md->destCh)
       clearMixes();
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight=100;
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100;
   }
 
   //T-Cut
   if(idx==j++) {
-      md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+      md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
   }
 
   //sticky t-cut
   if(idx==j++) {
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
-    md=setDest(14);            md->srcRaw=SRC_CH14; md->weight= 100;
-    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
-    md=setDest(14);            md->srcRaw=SRC_MAX;  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
-    setSwitch(0xB,CS_VNEG, STK_THR, -99);
-    setSwitch(0xC,CS_VPOS, CH(14), 0);
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_SWC;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_CH, 13); md->weight= 100;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=DSW_SWB;  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 100;  md->swtch=DSW_THR;  md->mltpx=MLTPX_REP;
+    setSwitch(0xB, CS_VNEG, RawSource(SOURCE_TYPE_STICK, 2).toValue(), -99);
+    setSwitch(0xC, CS_VPOS, RawSource(SOURCE_TYPE_CH, 13).toValue(), 0);
     updateSwitchesTab();
   }
 
   //V-Tail
   if(idx==j++) {
     clearMixes();
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight= 100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_ELE;  md->weight=-100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_RUD;  md->weight= 100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight= 100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
   }
 
   //Elevon\\Delta
   if(idx==j++) {
     clearMixes();
-    md=setDest(ICC(STK_THR));  md->srcRaw=SRC_THR;  md->weight=100;
-    md=setDest(ICC(STK_RUD));  md->srcRaw=SRC_RUD;  md->weight=100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_ELE;  md->weight= 100;
-    md=setDest(ICC(STK_ELE));  md->srcRaw=SRC_AIL;  md->weight= 100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_ELE;  md->weight= 100;
-    md=setDest(ICC(STK_AIL));  md->srcRaw=SRC_AIL;  md->weight=-100;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100;
+    md=setDest(ICC(STK_RUD));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
+    md=setDest(ICC(STK_ELE));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100;
+    md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100;
   }
 
 
@@ -3321,29 +3418,29 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
     // Set up Mixes
     // 3 cyclic channels
-    md=setDest(1);  md->srcRaw=SRC_CYC1;  md->weight= 100;
-    md=setDest(2);  md->srcRaw=SRC_CYC2;  md->weight= 100;
-    md=setDest(3);  md->srcRaw=SRC_CYC3;  md->weight= 100;
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100;
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100;
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100;
 
     // rudder
-    md=setDest(4);  md->srcRaw=SRC_RUD;   md->weight=100;
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100;
 
     // throttle
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_THR;  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
-    md=setDest(5);  md->srcRaw=SRC_MAX;  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID0; md->curve=CV(1); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID1; md->curve=CV(2); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=DSW_ID2; md->curve=CV(3); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=DSW_THR; md->mltpx=MLTPX_REP;
 
     // gyro gain
-    md=setDest(6);  md->srcRaw=SRC_GEA; md->weight=30;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 7); md->weight=30;
 
     // collective
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
-    md=setDest(11); md->srcRaw=SRC_THR;  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID0; md->curve=CV(4); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID1; md->curve=CV(5); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch= DSW_ID2; md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
     g_model.swashRingData.type = SWASH_TYPE_120;
-    g_model.swashRingData.collectiveSource = CH(11);
+    g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
     setCurve(CURVE5(1),heli_ar1);
@@ -3361,20 +3458,19 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   //Gyro Gain
   if(idx==j++) {
-    md=setDest(6);  md->srcRaw=SRC_P2; md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
-    md=setDest(6);  md->srcRaw=SRC_P2; md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=-DSW_GEA; md->sOffset=100;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch= DSW_GEA; md->sOffset=100;
   }
 
   //Servo Test
   if(idx==j++) {
-    md=setDest(15); md->srcRaw=SRC_CH16;   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
-    md=setDest(16); md->srcRaw=SRC_SW1; md->weight= 110;
-    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
-    md=setDest(16); md->srcRaw=SRC_MAX;  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
-
-    setSwitch(1,CS_LESS,CH(15), CH(16));
-    setSwitch(2,CS_VPOS,CH(15), 105);
-    setSwitch(3,CS_VNEG,CH(15),-105);
+    md=setDest(15); md->srcRaw=RawSource(SOURCE_TYPE_CH, 15);   md->weight= 100; md->speedUp = 8; md->speedDown = 8;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 9); md->weight= 110;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=DSW_SW2; md->mltpx=MLTPX_REP;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=DSW_SW3; md->mltpx=MLTPX_REP;
+    setSwitch(1, CS_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
+    setSwitch(2, CS_VPOS, RawSource(SOURCE_TYPE_CH, 14).toValue(), 105);
+    setSwitch(3, CS_VNEG, RawSource(SOURCE_TYPE_CH, 14).toValue(), -105);
 
     // redraw switches tab
     updateSwitchesTab();

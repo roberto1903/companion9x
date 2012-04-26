@@ -1,27 +1,15 @@
 #include <QtGui>
 #include "helpers.h"
-#include "eeprominterface.h"
 
-QString getPhaseName(int val) {
-  if (!val) return "---";
-  return QString(val < 0 ? "!" : "") + QString("FP%1").arg(abs(val) - 1);
-}
-QString getSWName(int val) {
-
-  if (!val) return "---";
-  if (val == MAX_DRSWITCH) return "ON";
-  if (val == -MAX_DRSWITCH) return "OFF";
-
-  return QString(val < 0 ? "!" : "") + QString(SWITCHES_STR).mid((abs(val) - 1)*3, 3);
-}
-
-void populateSwitchCB(QComboBox *b, int value)
+QString getPhaseName(int val)
 {
-  b->clear();
-  for (int i = -MAX_DRSWITCH; i <= MAX_DRSWITCH; i++)
-    b->addItem(getSWName(i));
-  b->setCurrentIndex(value + MAX_DRSWITCH);
-  b->setMaxVisibleItems(10);
+  if (!val) return "---";
+  return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+}
+
+QString getStickStr(int index)
+{
+  return RawSource(SOURCE_TYPE_STICK, index).toString();
 }
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
@@ -45,12 +33,13 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 
 QString getFuncName(unsigned int val)
 {
-  if (val < NUM_CHNOUT)
-    return QObject::tr("Safety") + " " + getSourceStr(SRC_CH1+val);
+  if (val < NUM_SAFETY_CHNOUT) {
+    return QObject::tr("Safety %1").arg(RawSource(SOURCE_TYPE_CH, val).toString());
+  }
   else {
     QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
                           QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
-    return strings[val-NUM_CHNOUT];
+    return strings[val-NUM_SAFETY_CHNOUT];
   }
 }
 
@@ -62,13 +51,17 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
   b->setMaxVisibleItems(10);
 }
 
-void populatePhasesCB(QComboBox *b, int value) {
-  QString str = PHASES_STR;
-  b->clear();
-  for (int i = 0; i < (str.length() / 4); i++) b->addItem(str.mid(i * 4, 4).replace("FP", "Phase "));
-  b->setCurrentIndex(value + MAX_PHASES);
-  if (!GetEepromInterface()->getCapability(Phases))
-    b->setDisabled(true);
+void populatePhasesCB(QComboBox *b, int value)
+{
+  for (int i=-GetEepromInterface()->getCapability(FlightPhases); i<=GetEepromInterface()->getCapability(FlightPhases); i++) {
+    if (i < 0)
+      b->addItem(QObject::tr("!Phase %1").arg(-i-1), i);
+    else if (i > 0)
+      b->addItem(QObject::tr("Phase %1").arg(i-1), i);
+    else
+      b->addItem(QObject::tr("----"), 0);
+  }
+  b->setCurrentIndex(value + GetEepromInterface()->getCapability(FlightPhases));
 }
 
 void populateCurvesCB(QComboBox *b, int value) {
@@ -115,14 +108,18 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
 
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem("Own trim");
-  for (unsigned int i = 0; i < MAX_PHASES; i++) {
-    if (i != phase) {
-      b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
+  unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
+  if (num_phases>0) {
+    for (unsigned int i = 0; i < num_phases-1; i++) {
+      if (i != phase) {
+        b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
+      }
     }
   }
 }
 
-void populateTimerSwitchCB(QComboBox *b, int value = 0) {
+void populateTimerSwitchCB(QComboBox *b, int value)
+{
   b->clear();
   for (int i = -TMR_NUM_OPTION; i <= TMR_NUM_OPTION; i++)
     b->addItem(getTimerMode(i));
@@ -132,7 +129,6 @@ void populateTimerSwitchCB(QComboBox *b, int value = 0) {
 
 QString getTimerMode(int tm) {
 
-  QString str = SWITCHES_STR;
   QString stt = "OFFABSRUsRU%ELsEL%THsTH%THtALsAL%P1 P1%P2 P2%P3 P3%";
 
   QString s;
@@ -142,54 +138,171 @@ QString getTimerMode(int tm) {
     return s;
   }
 
-  if (abs(tm)<(TMR_VAROFS + MAX_DRSWITCH - 1)) {
-    s = str.mid((abs(tm) - TMR_VAROFS)*3, 3);
+  if (abs(tm)<TMR_VAROFS + 9) {
+    s = RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
 
-  s = "m" + str.mid((abs(tm)-(TMR_VAROFS + MAX_DRSWITCH - 1))*3, 3);
-  if (tm < 0) s.prepend("!");
-  return s;
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9) {
+    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches) + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
+
+  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches)- 9 + 1).toString();
+    if (tm < 0) s.prepend("!");
+    return s;
+  }
+
+  return "---";
 
 }
 
-QString getSourceStr(int idx)
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
 {
-  QString sorces1[] = { QObject::tr("----"),
-                        QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
-                        QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3"),
-                        QObject::tr("REA"), QObject::tr("REB"),
-                        QObject::tr("MAX"),
-                        QObject::tr("3POS") };
-  QString sorces2[] = { QObject::tr("CYC1"), QObject::tr("CYC2"), QObject::tr("CYC3"),
-                        QObject::tr("PPM1"), QObject::tr("PPM2"), QObject::tr("PPM3"), QObject::tr("PPM4"), QObject::tr("PPM5"), QObject::tr("PPM6"), QObject::tr("PPM7"), QObject::tr("PPM8"),
-                        QObject::tr("CH1"), QObject::tr("CH2"), QObject::tr("CH3"), QObject::tr("CH4"), QObject::tr("CH5"), QObject::tr("CH6"), QObject::tr("CH7"), QObject::tr("CH8"),
-                        QObject::tr("CH9"), QObject::tr("CH10"), QObject::tr("CH11"), QObject::tr("CH12"), QObject::tr("CH13"), QObject::tr("CH14"), QObject::tr("CH15"), QObject::tr("CH16"),
-                        QObject::tr("Timer1"), QObject::tr("Timer2"),
-                        QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("DIST"), QObject::tr("CELL") };
+  RawSwitch item;
 
-  if (idx < SRC_STHR)
-    return sorces1[idx];
-  else if (idx <= SRC_SWC)
-    return getSWName(idx - SRC_STHR + 1);
-  else
-    return sorces2[idx-SRC_SWC-1];
-}
-
-void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
-{
   b->clear();
-  for (int i=0, count=0; i<=NUM_XCHNMIX+MAX_TIMERS+NUM_TELEMETRY && count<=sourcesCount; i++) {
-    if (switches || i<SRC_STHR || i>SRC_SWC) {
-      b->addItem(getSourceStr(i));
-      count++;
+
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_ON);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  if (attr & POPULATE_MSWITCHES) {
+    for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=-9; i<0; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
     }
   }
-  b->setCurrentIndex(value);
+
+  for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
+    item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  for (int i=-9; i<0; i++) {
+    item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  item = RawSwitch(SWITCH_TYPE_NONE);
+  b->addItem(item.toString(), item.toValue());
+  if (item == value) b->setCurrentIndex(b->count()-1);
+
+  for (int i=1; i<=9; i++) {
+    item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+    item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  if (attr & POPULATE_MSWITCHES) {
+    for (int i=1; i<=9; i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+
+    for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+  }
+
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_ON);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
+  b->setMaxVisibleItems(10);
+}
+
+// TODO instead of bool switches, we could have a unsigned int flags (SWITCHES / NONE)
+void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
+{
+  RawSource item;
+
+  b->clear();
+
+  item = RawSource(SOURCE_TYPE_NONE);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  for (int i=0; i<7; i++) {
+    item = RawSource(SOURCE_TYPE_STICK, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  item = RawSource(SOURCE_TYPE_MAX);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  item = RawSource(SOURCE_TYPE_3POS);
+  b->addItem(item.toString(), item.toValue());
+  if (item == source) b->setCurrentIndex(b->count()-1);
+
+  if (switches) {
+    for (int i=1; i<=9; i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue());
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
+  }
+
+  for (int i=0; i<NUM_CYC; i++) {
+    item = RawSource(SOURCE_TYPE_CYC, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<NUM_PPM; i++) {
+    item = RawSource(SOURCE_TYPE_PPM, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+    item = RawSource(SOURCE_TYPE_CH, i);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+
   b->setMaxVisibleItems(10);
 
+  /*
   for (int i=0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
     // Get the index of the value to disable
     int idx = SRC_CH16 - i;
@@ -203,9 +316,11 @@ void populateSourceCB(QComboBox *b, int value, int sourcesCount, bool switches)
     //the magic
     b->model()->setData(index, v, Qt::UserRole - 1);
   }
+  */
 }
 
-QString getCSWFunc(int val) {
+QString getCSWFunc(int val)
+{
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
 }
 
