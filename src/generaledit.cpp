@@ -160,6 +160,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
     ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
     ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
+    ui->backlightswCB->setCurrentIndex(g_eeGeneral.lightSw+MAX_DRSWITCH);
     ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
