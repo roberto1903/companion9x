@@ -144,6 +144,28 @@ t_Th9xExpoData::t_Th9xExpoData()
   memset(this, 0, sizeof(t_Th9xExpoData));
 }
 
+int8_t th9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 -sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch th9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
 {
   memset(this, 0, sizeof(t_Th9xLimitData));
@@ -151,7 +173,7 @@ t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
   mode3 = c9x.mode;
   weight6 = c9x.weight;
   chn = c9x.chn;
-  drSw = c9x.swtch;
+  drSw = th9xFromSwitch(c9x.swtch);
   curve = c9x.curve;
 }
 
@@ -162,7 +184,7 @@ t_Th9xExpoData::operator ExpoData ()
   c9x.mode = mode3;
   c9x.weight = weight6;
   c9x.chn = chn;
-  c9x.swtch = drSw;
+  c9x.swtch = th9xToSwitch(drSw);
   c9x.curve = curve;
   return c9x;
 }
@@ -202,26 +224,20 @@ t_Th9xMixData::t_Th9xMixData(MixData &c9x)
   memset(this, 0, sizeof(t_Th9xMixData));
   destCh = c9x.destCh;
   mixMode = c9x.mltpx;
-  if (c9x.srcRaw == 0)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_P3)
-    srcRaw = c9x.srcRaw - 1;
-  else if (c9x.srcRaw == SRC_MAX)
+  if (c9x.srcRaw.type == SOURCE_TYPE_STICK)
+    srcRaw = c9x.srcRaw.index;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX)
     srcRaw = 10;
-  else if (c9x.srcRaw == SRC_SWC)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_CYC3)
-    srcRaw = 0; // TODO
-  else if (c9x.srcRaw <= SRC_PPM8)
-    srcRaw = 24 + c9x.srcRaw - SRC_PPM1;
-  else if (c9x.srcRaw <= SRC_CH12)
-    srcRaw = 12 + c9x.srcRaw - SRC_CH1;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_PPM)
+    srcRaw = 24 + c9x.srcRaw.index;
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CH)
+    srcRaw = 12 + c9x.srcRaw.index;
   else
     srcRaw = 0; // TODO
   switchMode = 1;
   curveNeg = 0;
   weight = c9x.weight;
-  swtch = c9x.swtch;
+  swtch = th9xFromSwitch(c9x.swtch);
   curve = c9x.curve;
   speedUp = c9x.speedUp;
   speedDown = c9x.speedDown;
@@ -232,19 +248,19 @@ t_Th9xMixData::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   if (srcRaw < 7)
-    c9x.srcRaw = RawSource(srcRaw + 1);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw);
   else if (srcRaw < 10)
-    c9x.srcRaw = RawSource(0); // TODO
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE); // TODO
   else if (srcRaw == 10)
-    c9x.srcRaw = SRC_MAX;
+    c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
   else if (srcRaw == 11)
-    c9x.srcRaw = RawSource(0); // TODO CUR
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE); // TODO CUR
   else if (srcRaw < 24)
-    c9x.srcRaw = RawSource(SRC_CH1 + 12 - srcRaw);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-12);
   else /* always true if (srcRaw < 32) */
-    c9x.srcRaw = RawSource(SRC_PPM1 + 24 - srcRaw);
+    c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-24);
   c9x.weight = weight;
-  c9x.swtch = swtch;
+  c9x.swtch = th9xToSwitch(swtch);
   c9x.curve = curve;
   c9x.speedUp = speedUp;
   c9x.speedDown = speedDown;
@@ -253,30 +269,95 @@ t_Th9xMixData::operator MixData ()
 }
 
 
-t_Th9xCustomSwData::t_Th9xCustomSwData()
-{
-  memset(this, 0, sizeof(t_Th9xCustomSwData));
-}
-
 t_Th9xCustomSwData::t_Th9xCustomSwData(CustomSwData &c9x)
 {
-  // TODO !
-  memset(this, 0, sizeof(t_Th9xCustomSwData));
-  val1 = c9x.v1;
-  val2 = c9x.v2;
   opCmp = c9x.func;
+  val1 = c9x.val1;
+  val2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    val1 = fromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    val2 = fromSource(RawSource(c9x.val2));
+  }
 }
 
-Th9xCustomSwData::operator CustomSwData ()
+t_Th9xCustomSwData::operator CustomSwData ()
 {
-  // TODO !
   CustomSwData c9x;
-  c9x.v1 = val1;
-  c9x.v2 = val2;
   c9x.func = opCmp;
+  c9x.val1 = val1;
+  c9x.val2 = val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = toSource(val1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = toSource(val2).toValue();
+  }
+
   return c9x;
 }
 
+int8_t t_Th9xCustomSwData::fromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("th9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 21+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 37+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 39+source.index;
+  return v1;
+}
+
+RawSource t_Th9xCustomSwData::toSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 36) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 38) {
+    return RawSource(SOURCE_TYPE_TIMER, value-37);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+  }
+}
 
 t_Th9xModelData::t_Th9xModelData()
 {
@@ -332,7 +413,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (int i=0; i<TH9X_MAX_CURVES9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    /*for (int i=0; i<NUM_CSW; i++)
+    /*for (int i=0; i<TH9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];*/
   }
 }
@@ -391,7 +472,7 @@ t_Th9xModelData::operator ModelData ()
   for (int i=0; i<TH9X_MAX_CURVES9; i++)
     for (int j=0; j<9; j++)
       c9x.curves9[i][j] = curves9[i][j];
-  /*for (int i=0; i<NUM_CSW; i++)
+  /*for (int i=0; i<TH9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];*/
 
   return c9x;

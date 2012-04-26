@@ -196,7 +196,11 @@ void burnDialog::on_BurnFlashButton_clicked()
         QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
         if (!image.isNull()) {
           QString tempDir    = QDir::tempPath();
-          QString tempFile = tempDir + "/flash.hex";
+          QString tempFile;
+          if (getFileType(fileName) == FILE_TYPE_HEX)
+            tempFile = tempDir + "/flash.hex";
+          else
+            tempFile = tempDir + "/flash.bin";
           FlashInterface flash(fileName);
           flash.setSplash(image);
           if (flash.saveFlash(tempFile) > 0) {

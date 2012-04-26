@@ -49,15 +49,16 @@ const uint8_t modn12x3[4][4]= {
   {4, 3, 2, 1} };
 
 #define C9XMAX_MODELS  60
-#define MAX_PHASES  5
-#define MAX_MIXERS  32
-#define MAX_EXPOS   24
+#define MAX_PHASES  9
+#define MAX_MIXERS  64
+#define MAX_EXPOS   32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
-#define NUM_CHNOUT      16 // number of real output channels CH1-CH8
-#define NUM_CSW         12 // number of custom switches
-#define NUM_FSW         16 // number of functions assigned to switches
+#define NUM_SAFETY_CHNOUT 16
+#define NUM_CHNOUT        32 // number of real output channels CH1-CH8
+#define NUM_CSW           32 // number of custom switches
+#define NUM_FSW           32 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -158,7 +159,6 @@ enum EnumKeys {
 #define SWITCH_OFF    (-SWITCH_ON)
 #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
-#define PHASES_STR     "!FP4!FP3!FP2!FP1!FP0----FP0 FP1 FP2 FP3 FP4 "
 #define CURVE_BASE   7
 #define CSWITCH_STR  "----   v>ofs  v<ofs  |v|>ofs|v|<ofsAND    OR     XOR    ""v1==v2 ""v1!=v2 ""v1>v2  ""v1<v2  ""v1>=v2 ""v1<=v2 "
 #define CSW_NUM_FUNC 14
@@ -199,6 +199,7 @@ enum EnumKeys {
 #define NUM_ROTARY_ENCODERS 2
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
+#define NUM_CYC             3
 
 #define MAX_TIMERS          2
 
@@ -208,9 +209,102 @@ enum EnumKeys {
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
 
-#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+3/*CYC1-CYC3*/+NUM_PPM+NUM_CHNOUT)
+#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+NUM_CYC+NUM_PPM+NUM_CHNOUT)
 #define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
 #define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
+
+
+enum RawSourceType {
+  SOURCE_TYPE_NONE,
+  SOURCE_TYPE_STICK, // and POTS
+  SOURCE_TYPE_ROTARY_ENCODER,
+  SOURCE_TYPE_MAX,
+  SOURCE_TYPE_3POS,
+  SOURCE_TYPE_SWITCH,
+  SOURCE_TYPE_CYC,
+  SOURCE_TYPE_PPM,
+  SOURCE_TYPE_CH,
+  SOURCE_TYPE_TIMER,
+  SOURCE_TYPE_TELEMETRY
+};
+
+class RawSource {
+  public:
+    RawSource():
+      type(SOURCE_TYPE_NONE),
+      index(0)
+    {
+    }
+
+    RawSource(int value):
+      type(RawSourceType(abs(value)/65536)),
+      index(value >= 0 ? abs(value)%65536 : -(abs(value)%65536))
+    {
+    }
+
+    RawSource(RawSourceType type, int index=0):
+      type(type),
+      index(index)
+    {
+    }
+
+    int toValue();
+
+    QString toString();
+
+    bool operator== ( const RawSource& other) {
+      return (this->type == other.type) && (this->index == other.index);
+    }
+
+    RawSourceType type;
+    int index;
+};
+
+enum RawSwitchType {
+  SWITCH_TYPE_NONE,
+  SWITCH_TYPE_SWITCH,
+  SWITCH_TYPE_VIRTUAL,
+  SWITCH_TYPE_MOMENT_SWITCH,
+  SWITCH_TYPE_MOMENT_VIRTUAL,
+  SWITCH_TYPE_ON,
+  SWITCH_TYPE_OFF,
+};
+
+class RawSwitch {
+  public:
+    RawSwitch():
+      type(SWITCH_TYPE_NONE),
+      index(0)
+    {
+    }
+
+    RawSwitch(int value):
+      type(RawSwitchType(abs(value)/256)),
+      index(value >= 0 ? abs(value)%256 : -(abs(value)%256))
+    {
+    }
+
+    RawSwitch(RawSwitchType type, int index=0):
+      type(type),
+      index(index)
+    {
+    }
+
+    int toValue();
+
+    QString toString();
+
+    bool operator== ( const RawSwitch& other) {
+      return (this->type == other.type) && (this->index == other.index);
+    }
+
+    bool operator!= ( const RawSwitch& other) {
+      return (this->type != other.type) || (this->index != other.index);
+    }
+
+    RawSwitchType type;
+    int index;
+};
 
 class TrainerMix {
   public:
@@ -290,7 +384,7 @@ class ExpoData {
     uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
     uint8_t chn;
     int8_t  curve;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
-    int8_t  swtch;
+    RawSwitch swtch;
     int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
     uint8_t weight;
     int8_t  expo;
@@ -305,7 +399,7 @@ class LimitData {
     int     max;
     bool    revert;
     int16_t  offset;
-
+    
     void clear() { min = -100; max = +100; revert = false; offset = 0; }
 };
 
@@ -315,45 +409,6 @@ enum MltpxValue {
   MLTPX_REP=2
 };
 
-enum RawSource {
-  SRC_NONE,
-  SRC_RUD,
-  SRC_ELE,
-  SRC_THR,
-  SRC_AIL,
-  SRC_P1,
-  SRC_P2,
-  SRC_P3,
-  SRC_REA,
-  SRC_REB,
-  SRC_MAX,
-  SRC_3POS,
-  SRC_STHR,
-  SRC_SRUD,
-  SRC_SELE,
-  SRC_ID0,
-  SRC_ID1,
-  SRC_ID2,
-  SRC_SAIL,
-  SRC_GEA,
-  SRC_TRN,
-  SRC_SW1,
-  SRC_SW9=SRC_SW1+8,
-  SRC_SWA,
-  SRC_SWB,
-  SRC_SWC,
-  SRC_CYC1,
-  SRC_CYC2,
-  SRC_CYC3,
-  SRC_PPM1,
-  SRC_PPM8 = SRC_PPM1+7,
-  SRC_CH1,
-  SRC_CH12 = SRC_CH1+11,
-  SRC_CH13,
-  SRC_CH14,
-  SRC_CH15,
-  SRC_CH16,
-};
 
 class MixData {
   public:
@@ -362,7 +417,7 @@ class MixData {
     RawSource srcRaw;
     int     weight;
     int     differential;
-    int8_t  swtch;
+    RawSwitch swtch;
     int     curve;             //0=symmetrisch
     uint8_t delayUp;
     uint8_t delayDown;
@@ -381,8 +436,8 @@ class MixData {
 class CustomSwData { // Custom Switches data
   public:
     CustomSwData() { clear(); }
-    int8_t  v1; //input
-    int8_t  v2; //offset
+    int  val1; //input
+    int  val2; //offset
     uint8_t func;
 
     void clear() { memset(this, 0, sizeof(CustomSwData)); }
@@ -391,8 +446,8 @@ class CustomSwData { // Custom Switches data
 class SafetySwData { // Custom Switches data
   public:
     SafetySwData() { clear(); }
-    int8_t  swtch;
-    int8_t  val;
+    RawSwitch  swtch;
+    int8_t     val;
 
     void clear() { memset(this, 0, sizeof(SafetySwData)); }
 };
@@ -416,8 +471,8 @@ enum AssignFunc {
 class FuncSwData { // Function Switches data
   public:
     FuncSwData() { clear(); }
-    int     swtch;
-    AssignFunc func;
+    RawSwitch    swtch;
+    AssignFunc   func;
     unsigned int param;
 
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
@@ -428,7 +483,7 @@ class PhaseData {
     PhaseData() { clear(); }
     int trimRef[NUM_STICKS]; //
     int trim[NUM_STICKS];
-    int swtch;
+    RawSwitch swtch;
     char name[6+1];
     unsigned int fadeIn;
     unsigned int fadeOut;
@@ -443,7 +498,7 @@ class SwashRingData { // Swash Ring data
     bool      invertAIL;
     bool      invertCOL;
     uint8_t   type;
-    uint8_t   collectiveSource;
+    RawSource collectiveSource;
     uint8_t   value;
     void clear() { memset(this, 0, sizeof(SwashRingData)); }
 };
@@ -570,7 +625,7 @@ class ModelData {
     bool      used;
     char      name[10+1];
     TimerData timers[2];
-    Protocol protocol;
+    Protocol  protocol;
     int       ppmNCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
@@ -598,7 +653,7 @@ class ModelData {
     
     /* FrSky */    
     FrSkyData frsky;
-
+    int8_t servoCenter[NUM_CHNOUT];
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
@@ -613,9 +668,12 @@ class RadioData {
 
 enum Capability {
  OwnerName,
- Phases,
+ FlightPhases,
+ Mixes,
  Timers,
  FuncSwitches,
+ CustomSwitches,
+ RotaryEncoders,
  Outputs,
  ExtraChannels,
  ExtraInputs,
@@ -654,6 +712,7 @@ enum Capability {
  TelemetryTimeshift,
  FSSwitch,
  DiffMixers,
+ PPMCenter,
 };
 
 class SimulatorInterface;
@@ -749,23 +808,35 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   }
 
   // mixers
-  for (int i=0; i<MAX_MIXERS; i++)
-    model.mixData[i].srcRaw = (RawSource)applyStickMode(model.mixData[i].srcRaw, mode);
+  for (int i=0; i<MAX_MIXERS; i++) {
+    if (model.mixData[i].srcRaw.type == SOURCE_TYPE_STICK) {
+      model.mixData[i].srcRaw.index = applyStickMode(model.mixData[i].srcRaw.index + 1, mode) - 1;
+    }
+  }
 
   // virtual switches
   for (int i=0; i<NUM_CSW; i++) {
+    RawSource source;
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
-        model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
+        source = RawSource(model.customSw[i].val2);
+        if (source.type == SOURCE_TYPE_STICK)
+          source.index = applyStickMode(source.index + 1, mode) - 1;
+        model.customSw[i].val2 = source.toValue();
         // no break
       case CS_VOFS:
-        model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        source = RawSource(model.customSw[i].val1);
+        if (source.type == SOURCE_TYPE_STICK)
+          source.index = applyStickMode(source.index + 1, mode) - 1;
+        model.customSw[i].val1 = source.toValue();
+        break;
         break;
     }
   }
 
   // heli
-  model.swashRingData.collectiveSource = applyStickMode(model.swashRingData.collectiveSource, mode);
+  if (model.swashRingData.collectiveSource.type == SOURCE_TYPE_STICK)
+    model.swashRingData.collectiveSource.index = applyStickMode(model.swashRingData.collectiveSource.index + 1, mode) - 1;
 }
 
 void RegisterFirmwares();

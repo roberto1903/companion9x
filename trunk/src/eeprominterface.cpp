@@ -34,6 +34,81 @@ void getEEPROMString(char *dst, const char *src, int size)
   }
 }
 
+int RawSource::toValue()
+{
+  return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
+}
+
+QString RawSource::toString()
+{
+  QString sticks[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
+                       QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
+                     };
+
+  QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
+
+  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("DIST"), QObject::tr("CELL") };
+
+  switch(type) {
+    case SOURCE_TYPE_STICK:
+      return sticks[index];
+    case SOURCE_TYPE_ROTARY_ENCODER:
+      return rotary[index];
+    case SOURCE_TYPE_MAX:
+      return QObject::tr("MAX");
+    case SOURCE_TYPE_3POS:
+      return QObject::tr("3POS");
+    case SOURCE_TYPE_SWITCH:
+      return RawSwitch(index).toString();
+    case SOURCE_TYPE_CYC:
+      return QObject::tr("CYC%1").arg(index+1);
+    case SOURCE_TYPE_PPM:
+      return QObject::tr("PPM%1").arg(index+1);
+    case SOURCE_TYPE_CH:
+      return QObject::tr("CH%1").arg(index+1);
+    case SOURCE_TYPE_TIMER:
+      return QObject::tr("Timer%1").arg(index+1);
+    case SOURCE_TYPE_TELEMETRY:
+      return telemetry[index];
+    default:
+      return QObject::tr("----");
+  }
+}
+
+int RawSwitch::toValue()
+{
+  return index >= 0 ? (type * 256 + index) : -(type * 256 - index);
+}
+
+QString RawSwitch::toString()
+{
+  QString switches[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
+                         QObject::tr("ID0"), QObject::tr("ID1"), QObject::tr("ID2"),
+                         QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
+                       };
+
+  switch(type) {
+    case SWITCH_TYPE_SWITCH:
+      // TODO assert(index != 0);
+      return index > 0 ? switches[index-1] : QString("!") + switches[-index-1];
+    case SWITCH_TYPE_VIRTUAL:
+    {
+      QString neg = QString("");
+      if (index < 0) { neg = QString("!"); index = -index; }
+      if (index < 10)
+        return neg+QObject::tr("SW%1").arg(index);
+      else
+        return neg+QObject::tr("SW%1").arg(QChar('A'+index-10));
+    }
+    case SWITCH_TYPE_ON:
+      return QObject::tr("ON");
+    case SWITCH_TYPE_OFF:
+      return QObject::tr("OFF");
+    default:
+      return QObject::tr("----");
+  }
+}
+
 GeneralSettings::GeneralSettings()
 {
   memset(this, 0, sizeof(GeneralSettings));
@@ -67,7 +142,7 @@ void ModelData::clear()
     mixData[i].clear();
   for(int i=0; i<4; i++){
     mixData[i].destCh = i+1;
-    mixData[i].srcRaw = (RawSource)(i+1);
+    mixData[i].srcRaw = RawSource(SOURCE_TYPE_STICK, i);
     mixData[i].weight = 100;
   }
   for (int i=0; i<NUM_CHNOUT; i++)
@@ -87,7 +162,7 @@ bool ModelData::isempty()
 
 void ModelData::setDefault(uint8_t id)
 {
-  clear();  
+  clear();
   used = true;
   sprintf(name, "MODEL%02d", id+1);
 }

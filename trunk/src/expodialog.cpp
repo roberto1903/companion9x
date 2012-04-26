@@ -10,7 +10,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
 {
     ui->setupUi(this);
 
-    setWindowTitle(tr("DEST -> %1").arg(getSourceStr(ed->chn+1)));
+    setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
     ui->expoSB->setValue(ed->expo);
     ui->weightSB->setValue(ed->weight);
     populatePhasesCB(ui->phasesCB, ed->phase);
@@ -21,7 +21,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         ui->label_curves->hide();
         ui->curvesCB->hide();
     }
-    if (!GetEepromInterface()->getCapability(Phases)) {
+    if (!GetEepromInterface()->getCapability(FlightPhases)) {
         ui->label_phases->hide();
         ui->phasesCB->hide();
     }
@@ -57,8 +57,8 @@ void ExpoDialog::valuesChanged()
 {
     ed->expo   = ui->expoSB->value();
     ed->weight = ui->weightSB->value();
-    ed->phase  = ui->phasesCB->currentIndex()-MAX_PHASES;
-    ed->swtch  = ui->switchesCB->currentIndex()-MAX_DRSWITCH;
+    ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+    ed->swtch  = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     ed->curve  = ui->curvesCB->currentIndex();
     ed->mode   = ui->modeCB->currentIndex() + 1;
 }

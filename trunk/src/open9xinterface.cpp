@@ -19,6 +19,7 @@
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 #include "open9xv4eeprom.h"
+#include "open9xarmeeprom.h"
 #include "open9xsimulator.h"
 #include "open9xv4simulator.h"
 #include "open9xarmsimulator.h"
@@ -177,6 +178,10 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 207:
       // V4: Rotary Encoders position in FlightPhases
       break;
+    case 208:
+      // Trim value in 16bits
+      // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
@@ -206,7 +211,13 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       loadModel<Open9xModelData_v205>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_GRUVIN9X && version == 207) {
-      loadModel<Open9xV4ModelData_v206>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_GRUVIN9X && version == 208) {
+      loadModel<Open9xV4ModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_ERSKY9X && version == 208) {
+      loadModel<Open9xArmModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -223,7 +234,17 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
   EEPROMWarnings.clear();
 
   if (!version) {
-    version = (board == BOARD_GRUVIN9X ? LAST_OPEN9X_GRUVIN9X_EEPROM_VER : LAST_OPEN9X_STOCK_EEPROM_VER);
+    switch(board) {
+      case BOARD_ERSKY9X:
+        version = LAST_OPEN9X_ARM_EEPROM_VER;
+        break;
+      case BOARD_GRUVIN9X:
+        version = LAST_OPEN9X_GRUVIN9X_EEPROM_VER;
+        break;
+      case BOARD_STOCK:
+        version = LAST_OPEN9X_STOCK_EEPROM_VER;
+        break;
+    }
   }
 
   int size = getEEpromSize();
@@ -254,7 +275,13 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
           break;
         case 207:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v206>(i, radioData.models[i]);
+            result = saveModel<Open9xV4ModelData_v207>(i, radioData.models[i]);
+          break;
+        case 208:
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v208>(i, radioData.models[i]);
+          else if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
           break;
       }
       if (!result)
@@ -312,14 +339,38 @@ int Open9xInterface::getCapability(const Capability capability)
       return 0;
     case PPMExtCtrl:
       return 1;      
-    case Phases:
-      return 4;
+    case FlightPhases:
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_MAX_PHASES;
+      else
+        return O9X_MAX_PHASES;
+    case Mixes:
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_MAX_MIXERS;
+      else
+        return O9X_MAX_MIXERS;
     case Timers:
       return 2;
     case FuncSwitches:
-      return O9X_NUM_FSW;
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_FSW; 
+      else
+        return O9X_NUM_FSW;
+    case CustomSwitches:
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_CSW;
+      else
+        return O9X_NUM_CSW;
+    case RotaryEncoders:
+      if (board == BOARD_GRUVIN9X)
+        return 2;
+      else
+        return 0;
     case Outputs:
-      return 16;
+      if (board == BOARD_ERSKY9X)
+        return O9X_ARM_NUM_CHNOUT;
+      else
+        return O9X_NUM_CHNOUT;
     case SoundPitch:
       return 1;
     case Haptic:
@@ -370,6 +421,8 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryTimeshift:
       return 1;
     case DiffMixers:
+      return 1;
+    case PPMCenter:
       return 1;
     default:
       return 0;

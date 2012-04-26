@@ -1,6 +1,6 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.62" )
+SET( C9X_VERSION "0.63" )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -99,6 +99,7 @@ SET( companion9x_SRCS
      open9xv4eeprom.cpp
      open9xv4simulator.cpp
      open9xv4import.cpp
+     open9xarmeeprom.cpp
      open9xarmsimulator.cpp
      open9xarmimport.cpp
      ersky9xeeprom.cpp

@@ -122,14 +122,14 @@ QRectF Edge::boundingRect() const
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-  if (!source || !dest)
-    return;
+    if (!source || !dest)
+        return;
 
-  QLineF line(sourcePoint, destPoint);
-  if (qFuzzyCompare(line.length(), qreal(0.)))
-    return;
+    QLineF line(sourcePoint, destPoint);
+    if (qFuzzyCompare(line.length(), qreal(0.)))
+        return;
 
-  // Draw the line itself
-  painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-  painter->drawLine(line);
+    // Draw the line itself
+    painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->drawLine(line);
 }

@@ -1,6 +1,5 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
-#define PCBV3
 #define PCBV4
 #define ROTARY_ENCODERS
 #define HELI

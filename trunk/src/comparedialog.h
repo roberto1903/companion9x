@@ -38,10 +38,18 @@ private:
     QString getProtocol(ModelData * g_model);
     QString getCenterBeep(ModelData * g_model);
     QString getTrimInc(ModelData * g_model);
-    QString getColor1(QString string1, QString string2);
-    QString getColor2(QString string1, QString string2);
-    QString getColor1(int num1, int num2);
-    QString getColor2(int num1, int num2);
+    template<class T> QString getColor1(T val1, T val2) {
+      if (val1!=val2)
+        return "green";
+      else
+        return "grey";
+    }
+    template<class T> QString getColor2(T val1, T val2) {
+      if (val1!=val2)
+        return "red";
+      else
+        return "grey";
+    }
     QString cSwitchString(CustomSwData * customSw);
     bool ModelHasExpo(ExpoData * ExpoArray, ExpoData expo);
     bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);

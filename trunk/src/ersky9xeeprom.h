@@ -20,14 +20,14 @@
 #include "eeprominterface.h"
 
 //eeprom data
-#define MAX_MIXERS  32
+#define ERSKY9X_MAX_MIXERS  32
 #define MAX_CURVE5  8
 #define MAX_CURVE9  8
 
 #define MDVERS      10
 
-#define NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
-#define NUM_CSW         12 //number of custom switches
+#define ERSKY9X_NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
+#define ERSKY9X_NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
 PACK(typedef struct t_Ersky9xTrainerMix {
@@ -159,8 +159,9 @@ PACK(typedef struct t_Ersky9xCustomSwData { // Custom Switches data
   uint8_t func;
 
   operator CustomSwData();
-  t_Ersky9xCustomSwData();
+  t_Ersky9xCustomSwData() { memset(this, 0, sizeof(t_Ersky9xCustomSwData)); }
   t_Ersky9xCustomSwData(CustomSwData&);
+
 }) Ersky9xCustomSwData;
 
 PACK(typedef struct t_Ersky9xSafetySwData { // Custom Switches data
@@ -230,16 +231,16 @@ PACK(typedef struct t_Ersky9xModelData {
   uint8_t   swashCollectiveSource;
   uint8_t   swashRingValue;
   int8_t    ppmFrameLength;   //0=22.5  (10msec-30msec) 0.5msec increments
-  Ersky9xMixData   mixData[MAX_MIXERS];
-  Ersky9xLimitData limitData[NUM_CHNOUT];
+  Ersky9xMixData   mixData[ERSKY9X_MAX_MIXERS];
+  Ersky9xLimitData limitData[ERSKY9X_NUM_CHNOUT];
   Ersky9xExpoData  expoData[4];
   int8_t    trim[4];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Ersky9xCustomSwData   customSw[NUM_CSW];
+  Ersky9xCustomSwData   customSw[ERSKY9X_NUM_CSW];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   res3[2];
-  Ersky9xSafetySwData  safetySw[NUM_CHNOUT];
+  Ersky9xSafetySwData  safetySw[ERSKY9X_NUM_CHNOUT];
   Ersky9xFrSkyData frsky;
   Ersky9xTimerMode timer[2] ;
   operator ModelData();
