@@ -180,6 +180,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       break;
     case 208:
       // Trim value in 16bits
+      // FrSky A1/A2 offset on 12bits
       // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
       break;
     default:
@@ -213,11 +214,16 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     else if (board == BOARD_GRUVIN9X && version == 207) {
       loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
-    else if (board == BOARD_GRUVIN9X && version == 208) {
-      loadModel<Open9xV4ModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (board == BOARD_ERSKY9X && version == 208) {
-      loadModel<Open9xArmModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    else if (version == 208) {
+      if (board == BOARD_GRUVIN9X) {
+        loadModel<Open9xV4ModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else if (board == BOARD_ERSKY9X) {
+        loadModel<Open9xArmModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else {
+        loadModel<Open9xModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
     }
     else {
       std::cout << "ko\n";
