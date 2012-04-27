@@ -139,7 +139,7 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
-  Open9xFrSkyData_v205 frsky;
+  Open9xFrSkyData_v208 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
