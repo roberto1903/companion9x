@@ -288,6 +288,8 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
             result = saveModel<Open9xV4ModelData_v208>(i, radioData.models[i]);
           else if (board == BOARD_ERSKY9X)
             result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
+          else
+            result = saveModel<Open9xModelData_v208>(i, radioData.models[i]);
           break;
       }
       if (!result)

@@ -225,7 +225,6 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 
       uint8_t eeprom[EESIZE_GRUVIN9X];
       int eeprom_size = HexInterface(inputStream).load(eeprom);
-      qDebug() << eeprom_size;
       if (!eeprom_size) {
         QMessageBox::critical(this, tr("Error"),
             tr("Invalid EEPROM File %1")
