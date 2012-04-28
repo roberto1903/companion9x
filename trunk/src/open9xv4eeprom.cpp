@@ -236,6 +236,11 @@ t_Open9xV4CustomSwData_v207::t_Open9xV4CustomSwData_v207(CustomSwData &c9x)
   if (c9x.func >= CS_EQUAL) {
     v2 = fromSource(RawSource(c9x.val2));
   }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = open9xFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xFromSwitch(RawSwitch(c9x.val2));
+  }
 }
 
 Open9xV4CustomSwData_v207::operator CustomSwData ()
@@ -251,6 +256,11 @@ Open9xV4CustomSwData_v207::operator CustomSwData ()
 
   if (c9x.func >= CS_EQUAL) {
     c9x.val2 = toSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = open9xToSwitch(v1).toValue();
+    c9x.val2 = open9xToSwitch(v2).toValue();
   }
 
   return c9x;

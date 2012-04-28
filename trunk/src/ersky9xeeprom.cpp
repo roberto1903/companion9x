@@ -370,6 +370,11 @@ t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
   if (c9x.func >= CS_EQUAL) {
     v2 = ersky9xFromSource(RawSource(c9x.val2));
   }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = er9xFromSwitch(RawSwitch(c9x.val1));
+    v2 = er9xFromSwitch(RawSwitch(c9x.val2));
+  }
 }
 
 Ersky9xCustomSwData::operator CustomSwData ()
@@ -385,6 +390,11 @@ Ersky9xCustomSwData::operator CustomSwData ()
 
   if (c9x.func >= CS_EQUAL) {
     c9x.val2 = ersky9xToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = er9xToSwitch(v1).toValue();
+    c9x.val2 = er9xToSwitch(v2).toValue();
   }
 
   return c9x;

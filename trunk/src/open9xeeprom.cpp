@@ -635,6 +635,11 @@ t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &c9x)
   if (c9x.func >= CS_EQUAL) {
     v2 = open9xFromSource(RawSource(c9x.val2));
   }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = open9xFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xFromSwitch(RawSwitch(c9x.val2));
+  }
 }
 
 Open9xCustomSwData::operator CustomSwData ()
@@ -650,6 +655,11 @@ Open9xCustomSwData::operator CustomSwData ()
 
   if (c9x.func >= CS_EQUAL) {
     c9x.val2 = open9xToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = open9xToSwitch(v1).toValue();
+    c9x.val2 = open9xToSwitch(v2).toValue();
   }
 
   return c9x;
@@ -1841,7 +1851,7 @@ t_Open9xModelData_v208::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_208 756
+#define MODEL_DATA_SIZE_208 758
 t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_208) {
@@ -1898,8 +1908,9 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
-    for (int i=0; i<O9X_NUM_CSW; i++)
+    for (int i=0; i<O9X_NUM_CSW; i++) {
       customSw[i] = c9x.customSw[i];
+    }
     int count = 0;
     for (int i=0; i<O9X_NUM_FSW; i++) {
       if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
