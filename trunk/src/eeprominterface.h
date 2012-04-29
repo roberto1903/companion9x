@@ -354,6 +354,7 @@ class GeneralSettings {
     BeeperMode hapticMode;
     uint8_t   stickMode; // TODO enum
     int8_t    timezone;
+    bool      optrexDisplay;
     int8_t    inactivityTimer;
     bool      throttleReversed;
     bool      minuteBeep;

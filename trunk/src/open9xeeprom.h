@@ -69,7 +69,7 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   disableAlarmWarning:1;
   uint8_t   stickMode:2;
   int8_t    timezone:5;
-  uint8_t   spare:1;
+  uint8_t   optrexDisplay:1;
   uint8_t   inactivityTimer;
   uint8_t   throttleReversed:1;
   uint8_t   minuteBeep:1;
@@ -82,7 +82,7 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
-  int8_t hapticLength;
+  int8_t    hapticLength;
   uint8_t   spare2;
   int8_t    beeperLength:3;
   uint8_t   hapticStrength:3;
