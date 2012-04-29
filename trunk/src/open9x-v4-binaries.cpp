@@ -1,4 +1,4 @@
-const char *open9x_arm_binaries[] = {
+const char *open9x_v4_binaries[] = {
 "open9x-v4-en",
 "open9x-v4-imperial-en",
 "open9x-v4-ppmca-en",
