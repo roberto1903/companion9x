@@ -1613,7 +1613,7 @@ t_Open9xModelData_v205::operator ModelData ()
       c9x.protocol = PPM16;
       break;
     case 4:
-      c9x.protocol = FAAST;
+      c9x.protocol = PPM;
       break;
     default:
       c9x.protocol = PPM;
@@ -1693,9 +1693,6 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
         break;
       case PPM16:
         protocol = 3;
-        break;
-      case FAAST:
-        protocol = 4;
         break;
       default:
         protocol = 0;
@@ -1785,16 +1782,16 @@ t_Open9xModelData_v208::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX;
-      break;
-    case 2:
-      c9x.protocol = DSM2;
-      break;
-    case 3:
       c9x.protocol = PPM16;
       break;
+    case 2:
+      c9x.protocol = PPMSIM;
+      break;
+    case 3:
+      c9x.protocol = PXX;
+      break;
     case 4:
-      c9x.protocol = FAAST;
+      c9x.protocol = DSM2;
       break;
     default:
       c9x.protocol = PPM;
@@ -1866,16 +1863,16 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
       case PPM:
         protocol = 0;
         break;
-      case PXX:
+      case PPM16:
         protocol = 1;
         break;
-      case DSM2:
+      case PPMSIM:
         protocol = 2;
         break;
-      case PPM16:
+      case PXX:
         protocol = 3;
         break;
-      case FAAST:
+      case DSM2:
         protocol = 4;
         break;
       default:

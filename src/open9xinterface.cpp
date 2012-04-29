@@ -444,7 +444,7 @@ int Open9xInterface::hasProtocol(Protocol proto)
     case DSM2:
     case PXX:
     case PPM16:
-    case FAAST:
+    case PPMSIM:
       return 1;
     default:
       return 0;
