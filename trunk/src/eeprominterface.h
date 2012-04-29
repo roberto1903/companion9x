@@ -597,7 +597,7 @@ enum Protocol {
   PXX,
   DSM2,
   PPM16,
-  FAAST        
+  PPMSIM
 };
 
 typedef struct proto
@@ -615,7 +615,7 @@ const t_protocol prot_list[]= {
   {DSM2, "DSM2"},
   {PXX, "FRSky PXX"},
   {PPM16, "PPM16"},
-  {FAAST, "FAAST"},
+  {PPMSIM, "PPMsim"},
 };
 
 
