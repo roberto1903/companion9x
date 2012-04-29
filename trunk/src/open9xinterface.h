@@ -83,15 +83,23 @@ class Open9xFirmware: public FirmwareInfo
     }
 
     virtual unsigned int getEepromVersion(unsigned int revision) {
-      if (this->eepromInterface->getBoard() == BOARD_GRUVIN9X) {
-        if (revision == 0 || revision >= 547)
-          return 207;
-        else if (revision >= 469)
-          return 206;
-      }
-      else {
-        if (revision == 0/* || revision >= */)
-          return 205;
+      switch(this->eepromInterface->getBoard()) {
+        case BOARD_ERSKY9X:
+          if (revision == 0)
+            return 208;
+          if (revision >= 641)
+            return 208;
+          break;
+        case BOARD_GRUVIN9X:
+          if (revision == 0)
+            return 208;
+          if (revision >= 641)
+            return 208;
+          if (revision >= 547)
+            return 207;
+          break;
+        default:
+          break;
       }
       if (revision >= 321)
         return 205;
