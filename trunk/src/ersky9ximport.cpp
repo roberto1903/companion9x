@@ -1,5 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
+#define PCBARM
+#define STAMP
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
@@ -19,7 +21,7 @@
 
 namespace Ersky9x {
 
-#include "../ersky9x/simpgmspace.h"
+//#include "../ersky9x/simpgmspace.h"
 #include "../ersky9x/ersky9x.cpp"
 #include "../ersky9x/stamp.cpp"
 #include "../ersky9x/menus.cpp"
@@ -31,8 +33,9 @@ namespace Ersky9x {
 #include "../ersky9x/templates.cpp"
 #include "../ersky9x/frsky.cpp"
 #include "../ersky9x/audio.cpp"
+#include "../ersky9x/sound.cpp"
 
-uint8_t pxxFlag = 0;
+//uint8_t pxxFlag = 0;
 int16_t g_anas[7];
 
 uint16_t anaIn(uint8_t chan)
