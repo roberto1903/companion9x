@@ -502,6 +502,9 @@ t_Open9xV4ModelData_v208::operator ModelData ()
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
+  c9x.frsky.varioSource = varioSource;
+  c9x.frsky.varioSpeedUpMin = varioSpeedUpMin;
+  c9x.frsky.varioSpeedDownMin = varioSpeedDownMin;
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
@@ -603,6 +606,9 @@ t_Open9xV4ModelData_v208::t_Open9xV4ModelData_v208(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
+    varioSource = c9x.frsky.varioSource;
+    varioSpeedUpMin = c9x.frsky.varioSpeedUpMin;
+    varioSpeedDownMin = c9x.frsky.varioSpeedDownMin;
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;

@@ -552,7 +552,10 @@ class FrSkyData {
     uint8_t csField[8];
     FrSkyBarData bars[4];
     FrSkyRSSIAlarm rssiAlarms[2];
-    
+    uint8_t varioSource;
+    uint8_t varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
+    uint8_t varioSpeedDownMin;
+
     void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2); rssiAlarms[1].clear(3); }
 };
 
@@ -655,6 +658,7 @@ class ModelData {
     /* FrSky */    
     FrSkyData frsky;
     int8_t servoCenter[NUM_CHNOUT];
+
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
