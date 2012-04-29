@@ -1,4 +1,4 @@
-const char *open9x_arm_binaries[] = {
+const char *open9x_stock_binaries[] = {
 "open9x-stock-en",
 "open9x-stock-imperial-en",
 "open9x-stock-ppmca-en",
