@@ -94,7 +94,7 @@ MainWindow::MainWindow()
 
     readSettings();
 
-    setWindowTitle(tr("companion9x - EEPROM Editor"));
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
     QNetworkProxyFactory::setUseSystemConfiguration(true);
@@ -469,6 +469,8 @@ void MainWindow::preferences()
 {
     preferencesDialog *pd = new preferencesDialog(this);
     pd->exec();
+
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
 
     foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
