@@ -318,8 +318,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     if(i>0)
     {
         bool cres;
-        int k = qba.indexOf("-r",i);
-        int rev = QString::fromAscii(qba.mid(k+2,3)).toInt(&cres);
+        int k = qba.indexOf("-r", i);
+        int l = qba.indexOf('"', k);
+        int rev = QString::fromAscii(qba.mid(k+2, l-k-2)).toInt(&cres);
 
         if(!cres)
         {

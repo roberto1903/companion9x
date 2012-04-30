@@ -108,6 +108,7 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
   setEEPROMString(ownerName, c9x.ownerName, sizeof(ownerName));
+  optrexDisplay = c9x.optrexDisplay;
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
   lightOnStickMove = c9x.lightOnStickMove;
@@ -165,6 +166,7 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   getEEPROMString(result.ownerName, ownerName, sizeof(ownerName));
+  result.optrexDisplay = optrexDisplay;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
   result.lightOnStickMove = lightOnStickMove;

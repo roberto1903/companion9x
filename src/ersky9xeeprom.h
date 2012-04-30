@@ -85,12 +85,12 @@ PACK(typedef struct t_Ersky9xGeneral {
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
-  //uint8_t   respre[2]; //mike please check these are correct
   uint8_t   FRSkyYellow:4;
   uint8_t   FRSkyOrange:4;
   uint8_t   FRSkyRed:4;  //mike please check these are correct
   uint8_t   hideNameOnSplash:1;
-  uint8_t   spare:3; 
+  uint8_t   optrexDisplay:1;
+  uint8_t   spare:2;
   uint8_t   speakerPitch;
   uint8_t   hapticStrength;
   uint8_t   speakerMode;
