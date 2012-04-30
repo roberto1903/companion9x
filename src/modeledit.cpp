@@ -752,7 +752,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, false);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, 0);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
@@ -992,7 +992,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TELEMETRY);
         cswitchOffset[i]->setValue(g_model.customSw[i].val2);
         break;
       case CS_VBOOL:
@@ -1006,8 +1006,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), false);
-        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), false);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TELEMETRY);
+        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_TELEMETRY);
         break;
       default:
         break;

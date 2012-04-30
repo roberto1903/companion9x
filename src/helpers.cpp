@@ -242,8 +242,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
   b->setMaxVisibleItems(10);
 }
 
-// TODO instead of bool switches, we could have a unsigned int flags (SWITCHES / NONE)
-void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
+void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
 {
   RawSource item;
 
@@ -271,7 +270,7 @@ void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
   b->addItem(item.toString(), item.toValue());
   if (item == source) b->setCurrentIndex(b->count()-1);
 
-  if (switches) {
+  if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=9; i++) {
       item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
       b->addItem(item.toString(), item.toValue());
@@ -289,34 +288,33 @@ void populateSourceCB(QComboBox *b, const RawSource &source, bool switches)
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
+
   for (int i=0; i<NUM_PPM; i++) {
     item = RawSource(SOURCE_TYPE_PPM, i);
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
+
   for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     item = RawSource(SOURCE_TYPE_CH, i);
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
 
-  b->setMaxVisibleItems(10);
-
-  /*
-  for (int i=0; i < 8 - GetEepromInterface()->getCapability(ExtraChannels); i++) {
-    // Get the index of the value to disable
-    int idx = SRC_CH16 - i;
-    if (!switches)
-      idx -= SRC_SWC - SRC_STHR + 1;
-    QModelIndex index = b->model()->index(idx, 0);
-
-    // This is the effective 'disable' flag
-    QVariant v(0);
-
-    //the magic
-    b->model()->setData(index, v, Qt::UserRole - 1);
+  if (flags & POPULATE_TELEMETRY) {
+    for (int i=0; i<MAX_TIMERS; i++) {
+      item = RawSource(SOURCE_TYPE_TIMER, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=0; i<NUM_TELEMETRY; i++) {
+      item = RawSource(SOURCE_TYPE_TELEMETRY, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
   }
-  */
+
+  b->setMaxVisibleItems(10);
 }
 
 QString getCSWFunc(int val)

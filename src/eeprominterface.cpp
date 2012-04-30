@@ -47,7 +47,7 @@ QString RawSource::toString()
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("ALT"), QObject::tr("RPM"), QObject::tr("FUEL"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("SPEED"), QObject::tr("DIST"), QObject::tr("CELL") };
+  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell") };
 
   switch(type) {
     case SOURCE_TYPE_STICK:
@@ -181,14 +181,14 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
 QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
-  eepromInterfaces.push_back(new Th9xInterface());
-  eepromInterfaces.push_back(new Er9xInterface());
-  eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
-  eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_ERSKY9X));
+  eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
+  eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Ersky9xInterface());
+  eepromInterfaces.push_back(new Th9xInterface());
+  eepromInterfaces.push_back(new Er9xInterface());
 }
 
 QList<FirmwareInfo *> firmwares;

@@ -200,8 +200,6 @@ PACK(typedef struct t_Open9xCustomSwData { // Custom Switches data
   operator CustomSwData();
   t_Open9xCustomSwData() { memset(this, 0, sizeof(t_Open9xCustomSwData)); }
   t_Open9xCustomSwData(CustomSwData&);
-  int8_t fromSource(RawSource source);
-  RawSource toSource(int8_t value);
 }) Open9xCustomSwData;
 
 PACK(typedef struct t_Open9xSafetySwData { // Safety Switches data

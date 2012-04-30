@@ -29,6 +29,63 @@ RawSwitch open9xArmToSwitch(int8_t sw)
     return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
 }
 
+int8_t open9xArmFromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 21+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 53+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 55+source.index;
+  return v1;
+}
+
+RawSource open9xArmToSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 52) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 54) {
+    return RawSource(SOURCE_TYPE_TIMER, value-53);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-55);
+  }
+}
+
 t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
 {
   mode = c9x.mode;
@@ -181,6 +238,50 @@ t_Open9xArmMixData_v208::operator MixData ()
   }
   return c9x;
 }
+
+t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
+{
+  func = c9x.func;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    v1 = open9xArmFromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    v2 = open9xArmFromSource(RawSource(c9x.val2));
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
+  }
+}
+
+t_Open9xArmCustomSwData_v208::operator CustomSwData ()
+{
+  CustomSwData c9x;
+  c9x.func = func;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = open9xArmToSource(v1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = open9xArmToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = open9xArmToSwitch(v1).toValue();
+    c9x.val2 = open9xArmToSwitch(v2).toValue();
+  }
+
+  return c9x;
+}
+
 
 t_Open9xArmModelData_v208::operator ModelData ()
 {
