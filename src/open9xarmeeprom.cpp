@@ -309,8 +309,6 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
       limitData[i] = c9x.limitData[i];
     for (int i=0; i<O9X_ARM_MAX_EXPOS; i++)
       expoData[i] = c9x.expoData[i];
-    if (c9x.expoData[O9X_ARM_MAX_EXPOS].mode)
-      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(O9X_ARM_MAX_EXPOS) + "\n";
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
