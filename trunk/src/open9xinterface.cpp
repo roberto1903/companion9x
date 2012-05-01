@@ -467,7 +467,7 @@ SimulatorInterface * Open9xInterface::getSimulator()
 
 #define OPEN9X_BIN_URL "http://85.18.253.250/getfw.php?fw="
 
-const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x.txt";
+const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-stock.txt";
 const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
 
