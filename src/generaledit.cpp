@@ -25,8 +25,9 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
 
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
-
+    switchDefPosEditLock=true;
     populateSwitchCB(ui->backlightswCB,g_eeGeneral.lightSw);
+
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
     if (!GetEepromInterface()->getCapability(OwnerName)) {
@@ -160,7 +161,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
     ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
     ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
-    ui->backlightswCB->setCurrentIndex(g_eeGeneral.lightSw+MAX_DRSWITCH);
+    ui->backlightswCB->setCurrentIndex(g_eeGeneral.lightSw+MAX_DRSWITCH/2);
     ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
@@ -223,6 +224,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->PPM3->setValue(g_eeGeneral.trainer.calib[2]);
     ui->PPM4->setValue(g_eeGeneral.trainer.calib[3]);
     ui->PPM_MultiplierDSB->setValue((qreal)(g_eeGeneral.PPM_Multiplier+10)/10);
+    switchDefPosEditLock=false;
     QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
@@ -279,8 +281,10 @@ void GeneralEdit::on_battcalibDSB_editingFinished()
 
 void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 {
-    g_eeGeneral.lightSw = index-MAX_DRSWITCH;
-    updateSettings();
+  if (switchDefPosEditLock)
+    return;
+  g_eeGeneral.lightSw = index-(MAX_DRSWITCH/2);
+  updateSettings();
 }
 
 void GeneralEdit::on_beeperlenCB_currentIndexChanged(int index)
