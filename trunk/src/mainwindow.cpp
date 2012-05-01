@@ -274,6 +274,7 @@ void MainWindow::downloadLatestFW(FirmwareInfo * firmware)
 
 void MainWindow::reply1Accepted()
 {
+  QString errormsg;
   QSettings settings("companion9x", "companion9x");
   bool autoflash=settings.value("burnFirmware", true).toBool();
   settings.beginGroup("FwRevisions");
@@ -283,6 +284,31 @@ void MainWindow::reply1Accepted()
       settings.setValue(downloadedFW, currentFWrev);
     }
   } else {
+     QFile file(downloadedFWFilename);
+    file.reset();
+    QTextStream inputStream(&file);
+    QString hline = inputStream.readLine();
+    if (hline.compare(QString("ERROR:"))) {
+      int errnum=hline.mid(7).toInt();
+      switch(errnum) {
+        case 1:
+          errormsg=tr("Firmware does not fit in flash, due to selected firmware options");
+          break;
+        case 2:
+          errormsg=tr("Compilation server termporary failure, try later");
+          break;
+        case 3:
+          errormsg=tr("Compilation server too busy, try later");
+          break;
+        default:
+          errormsg=tr("Unknown server failure, try later");
+          break;          
+      }
+      file.close();
+      QMessageBox::critical(this, tr("Error"), errormsg);
+      settings.endGroup();
+      return;
+    }
     FlashInterface flash(downloadedFWFilename);
     QString rev=flash.getSvn();
     int pos=rev.lastIndexOf("-r");

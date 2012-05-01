@@ -111,7 +111,7 @@ class Open9xFirmware: public FirmwareInfo
         return 202;
     }
 
-    virtual void addOptions(const char *binaries[]);
+    virtual void addOptions();
 
 };
 
