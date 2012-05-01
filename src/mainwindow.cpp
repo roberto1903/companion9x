@@ -284,12 +284,20 @@ void MainWindow::reply1Accepted()
       settings.setValue(downloadedFW, currentFWrev);
     }
   } else {
-     QFile file(downloadedFWFilename);
+    QFile file(downloadedFWFilename);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+    QMessageBox::critical(this, tr("Error"),
+                            tr("Error opening file %1:\n%2.")
+                            .arg(downloadedFWFilename)
+                            .arg(file.errorString()));
+      return;
+    }
     file.reset();
     QTextStream inputStream(&file);
     QString hline = inputStream.readLine();
-    if (hline.compare(QString("ERROR:"))) {
-      int errnum=hline.mid(7).toInt();
+    qDebug() << hline;
+    if (hline.startsWith("ERROR:")) {
+      int errnum=hline.mid(6).toInt();
       switch(errnum) {
         case 1:
           errormsg=tr("Firmware does not fit in flash, due to selected firmware options");
