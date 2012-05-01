@@ -773,11 +773,11 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   FirmwareInfo *firmware = NULL;
 
   if (tags.at(0) == "open9x")
-    firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 64000 ? "open9x-stock" : "open9x-v4"));
+    firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 65536 ? "open9x-stock" : "open9x-v4"));
   else if (tags.at(0) == "gruvin9x" && tags.at(1) == "frsky")
-    firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
+    firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
   else if (tags.at(0) == "gruvin9x" && tags.at(1) == "trunk")
-    firmware = GetFirmware(flash.getSize() < 64000 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
+    firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
   else if (tags.at(0) == "er9x")
     firmware = GetFirmware("er9x");
   /* else... others */
