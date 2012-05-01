@@ -99,6 +99,10 @@ class Open9xFirmware: public FirmwareInfo
             return 207;
           break;
         default:
+          if (revision == 0)
+            return 208;
+          if (revision >= 641)
+            return 208;
           break;
       }
       if (revision >= 321)
