@@ -470,72 +470,20 @@ SimulatorInterface * Open9xInterface::getSimulator()
 const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x.txt";
 const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
-#define ARMOPT 5
-#define V4OPT 8
-#define STOCKOPT 10
-const char * open9x_arm_options[]={"","","-heli","-templates","-imperial"};
-const char * open9x_v4_options[]={"","","-heli","-templates","-sdcard","-SOMO","-ppmca","-imperial"};
-const char * open9x_stock_options[]={"","","-heli","-templates","-audio","-haptic","-DSM2","-potscroll","-ppmca","-imperial"};
-const char * open9x_stock_ext[]={"","-frsky","-jeti","-ardupilot","-nmea"};
-const char * open9x_languages[]={"-en","-fr","-se"};
 
-//heli-templates-audio-haptic-DSM2-potscroll-ppmca-imperial
-void Open9xFirmware::addOptions()
+void Open9xFirmware::addOptions(const char *binaries[])
 {
-  char mod [1024];
-  char option [1024];
-  char binary [1024];
-  switch (eepromInterface->getBoard()) {
-    case BOARD_STOCK:
-      for (int e=0; e<5; e++) {
-        strcpy(mod,"open9x-stock");
-        strcat(mod,open9x_stock_ext[e]);
-        for (int i=0; i<STOCKOPT-1; i++) {
-          strcpy(option, mod);
-          strcat(option,open9x_stock_options[i]);
-          for (int j=i+1; j<STOCKOPT; j++) {
-            strcat(option,open9x_stock_options[j]);
-            for(int k=0; k<3;k++) {
-              strcpy(binary, option);
-              strcat(binary,open9x_languages[k]);
-              printf("%s\n",binary);
-              add_option(new Open9xFirmware(binary, eepromInterface, QString(OPEN9X_BIN_URL) + binary + ".BIN", OPEN9X_ARM_STAMP));
-            }
-          }
-        }
-      }
-      break;
-    case BOARD_GRUVIN9X:
-      strcpy(mod,"open9x-v4");
-      for (int i=0; i<V4OPT-1; i++) {
-        strcpy(option, mod);
-        strcat(option,open9x_v4_options[i]);
-        for (int j=i+1; j<V4OPT; j++) {
-          strcat(option,open9x_v4_options[j]);
-          for(int k=0; k<3;k++) {
-            strcpy(binary, option);
-            strcat(binary,open9x_languages[k]);
-            printf("%s\n",binary);
-            add_option(new Open9xFirmware(binary, eepromInterface, QString(OPEN9X_BIN_URL) + binary + ".hex", OPEN9X_V4_STAMP));
-          }
-        }
-      }
-      break;
-    case BOARD_ERSKY9X:
-      strcpy(mod,"open9x-arm");
-      for (int i=0; i<ARMOPT-1; i++) {
-        strcpy(option, mod);
-        strcat(option,open9x_arm_options[i]);
-        for (int j=i+1; j<ARMOPT; j++) {
-          strcat(option,open9x_arm_options[j]);
-          for(int k=0; k<3;k++) {
-            strcpy(binary, option);
-            strcat(binary,open9x_languages[k]);
-            printf("%s\n",binary);
-            add_option(new Open9xFirmware(binary, eepromInterface, QString(OPEN9X_BIN_URL) + binary + ".hex", OPEN9X_V4_STAMP));
-          }
-        }
-      }
-      break;
+  for (int i=0; binaries[i]; i++) {
+    switch (eepromInterface->getBoard()) {
+      case BOARD_STOCK:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_STOCK_STAMP));
+        break;
+      case BOARD_GRUVIN9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_V4_STAMP));
+        break;
+      case BOARD_ERSKY9X:
+        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".bin", OPEN9X_ARM_STAMP));
+        break;
+    }
   }
 }
