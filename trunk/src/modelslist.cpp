@@ -273,10 +273,22 @@ void ModelsListWidget::refreshList()
        
        if (!radioData->models[i].isempty()) {
          if (eepromInterface && eepromInterface->getBoard() == BOARD_ERSKY9X) {
-           item += radioData->models[i].name;
+           if (radioData->models[i].name[0]==0) {
+             QString modelname="Model";
+             modelname.append(QString().sprintf("%02d", i+1));
+             item += modelname;
+           } else {
+             item += radioData->models[i].name;
+           }
          }
          else {
-           item += QString().sprintf("%10s", radioData->models[i].name);
+           char modelname[11];
+           if (radioData->models[i].name[0]==0) {
+             sprintf(modelname, "Model%02d", i+1);
+           } else {
+             sprintf(modelname,"%10s",radioData->models[i].name);
+           }
+           item += QString().sprintf("%10s", modelname);
            msize = eepromInterface->getSize(radioData->models[i]);
            item += QString().sprintf("%5d", msize);
            availableEEpromSize -= msize;
