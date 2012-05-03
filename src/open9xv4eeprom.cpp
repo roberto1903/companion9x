@@ -88,7 +88,7 @@ t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
       srcRaw = 11;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 12 + c9x.srcRaw.index;
+      srcRaw = 11 + open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
       srcRaw = 33 + c9x.srcRaw.index;
@@ -137,7 +137,7 @@ t_Open9xV4MixData_v207::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
     else if (srcRaw <= 32) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-12);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(srcRaw-11).toValue());
     }
     else if (srcRaw <= 35) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-33);
