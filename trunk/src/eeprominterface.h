@@ -203,7 +203,7 @@ enum EnumKeys {
 
 #define MAX_TIMERS          2
 
-#define NUM_TELEMETRY       12
+#define NUM_TELEMETRY       13
 #define TELEMETRY_CHANNELS  "AD1 AD2 "
 #define TM_HASTELEMETRY     0x01
 #define TM_HASOFFSET        0x02

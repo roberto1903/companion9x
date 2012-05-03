@@ -40,7 +40,7 @@ namespace Open9xV4 {
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/templates.cpp"
 #include "../open9x/o9xstrings.cpp"
-#include "../open9x/audio.cpp"
+#include "../open9x/stock/audio.cpp"
 #include "../open9x/frsky.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
