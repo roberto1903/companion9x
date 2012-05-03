@@ -278,6 +278,16 @@ void FlashInterface::SeekSplash(void)
     }
   }
   if (start==-1) {
+    splash.clear();
+    splash.append(ersky9x_splash, sizeof(ersky9x_splash));
+    start = flash.indexOf(splash);
+    if (start>0) {
+      splash_offset=start;
+      splash_type=4;
+      splash_size=sizeof(ersky9x_splash);
+    }
+  }
+  if (start==-1) {
     start=0;
     splash.clear();
     splash.append(O9X_SPS);
