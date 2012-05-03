@@ -644,8 +644,8 @@ PACK(typedef struct t_Open9xModelData_v208 {
   uint16_t  frskyLinesXtra;
   int8_t    servoCenter[O9X_NUM_CHNOUT];
 
-  uint8_t varioSource:4;
-  uint8_t varioSpeedUpMin:4;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t varioSource:3;
+  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
   uint8_t varioSpeedDownMin;
 
   operator ModelData();
