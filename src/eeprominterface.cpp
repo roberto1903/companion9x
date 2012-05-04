@@ -85,18 +85,8 @@ double RawSource::getMin(ModelData Model)
           return -125;
       }
       break;
-    case SOURCE_TYPE_STICK:
-    case SOURCE_TYPE_ROTARY_ENCODER:
-    case SOURCE_TYPE_MAX:
-    case SOURCE_TYPE_3POS:
-    case SOURCE_TYPE_SWITCH:
-      return -100;
-      break;
-    case SOURCE_TYPE_CH:
-      return (Model.extendedLimits ? -125 :-100);
-      break;
     default:
-      return -125;
+      return (Model.extendedLimits ? -125 :-100);
   }
 }
 
@@ -136,18 +126,8 @@ double RawSource::getMax(ModelData Model)
           return 125;
       }
       break;
-    case SOURCE_TYPE_STICK:
-    case SOURCE_TYPE_ROTARY_ENCODER:
-    case SOURCE_TYPE_MAX:
-    case SOURCE_TYPE_3POS:
-    case SOURCE_TYPE_SWITCH:
-      return 100;
-      break;      
-    case SOURCE_TYPE_CH:
-      return (Model.extendedLimits ? 125 :100);
-      break;
     default:
-      return 125;
+      return (Model.extendedLimits ? 125 :100);
   }
 }
 
