@@ -29,12 +29,21 @@ int8_t open9xArmFromSwitch(const RawSwitch & sw)
 
 RawSwitch open9xArmToSwitch(int8_t sw)
 {
-  if (sw == 0)
+  uint8_t swa = abs(sw);
+  if (swa == 0)
     return RawSwitch(SWITCH_TYPE_NONE);
-  else if (sw <= 9)
+  else if (swa <= 9)
     return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else
+  else if (swa <= 9+32)
     return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+  else if (sw == 42)
+    return RawSwitch(SWITCH_TYPE_ON);
+  else if (sw == -42)
+    return RawSwitch(SWITCH_TYPE_OFF);
+  else if (swa <= 42+9)
+    return RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, sw > 0 ? sw-42 : sw+42);
+  else
+    return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-42-9 : sw+42+9);
 }
 
 int8_t open9xArmFromSource(RawSource source)
