@@ -137,27 +137,27 @@ QString getTimerMode(int tm) {
     if (tm<-1) s.prepend("!");
     return s;
   }
-
-  if (abs(tm)<TMR_VAROFS + 9) {
-    s = RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS + 1).toString();
+  int tma=abs(tm);
+  if (tma<TMR_VAROFS + 9) {
+    s = RawSwitch(SWITCH_TYPE_SWITCH, tma - TMR_VAROFS + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
-    s = RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 + 1).toString();
+  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMR_VAROFS - 9 + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9) {
-    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches) + 1).toString();
+  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9) {
+    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, tma - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches) + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (abs(tm)<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
-    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, abs(tm) - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches)- 9 + 1).toString();
+  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches)- 9 + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }

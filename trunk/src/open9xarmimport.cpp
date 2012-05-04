@@ -42,7 +42,7 @@ namespace Open9xARM {
 #include "../open9x/o9xstrings.cpp"
 #include "../open9x/frsky.cpp"
 #include "../open9x/ersky9x/audio.cpp"
-#include "../open9x/ersky9x/sound.cpp"
+#include "../open9x/ersky9x/sound_driver.cpp"
 #include "../open9x/haptic.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];
