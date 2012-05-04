@@ -116,13 +116,13 @@ double RawSource::getOffset()
     switch (index) {
       case 2:
       case 3:
-        return 100;
+        return 0;
       case 4:
         return 512;
       case 5:
         return 6400;
       case 6:
-        return 100;
+        return 0;
       case 7:
       case 8:
         return 98;
@@ -141,20 +141,33 @@ double RawSource::getOffset()
   return 0;
 }
 
+int RawSource::getRawOffset()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 2:
+      case 3:
+      case 6:
+        return 128;        
+      default:
+        return 0;
+    }
+  }
+  return 0;
+}
+
 double RawSource::getStep()
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
-      case 1:
-      case 2:
       case 3:
-        return 100.0/128;
+        return 1;
       case 4:
         return 4;
       case 5:
         return 50;
       case 6:
-        return 100.0/128;
+        return 1;
       case 7:
       case 8:
         return 1;
