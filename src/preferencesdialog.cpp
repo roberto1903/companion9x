@@ -157,8 +157,8 @@ void preferencesDialog::writeValues()
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
-  FirmwareInfo * firmware = getFirmware();
-  settings.setValue("firmware", firmware->id);
+  current_firmware = getFirmware();
+  settings.setValue("firmware", current_firmware->id);
 
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());

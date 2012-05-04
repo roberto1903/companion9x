@@ -916,8 +916,18 @@ class FirmwareInfo {
 };
 
 FirmwareInfo * GetFirmware(QString id);
-FirmwareInfo * GetCurrentFirmware();
-EEPROMInterface * GetEepromInterface();
+
+extern FirmwareInfo * default_firmware;
+extern FirmwareInfo * current_firmware;
+inline FirmwareInfo * GetCurrentFirmware()
+{
+  return current_firmware;
+}
+
+inline EEPROMInterface * GetEepromInterface()
+{
+  return GetCurrentFirmware()->eepromInterface;
+}
 
 extern QList<FirmwareInfo *> firmwares;
 extern FirmwareInfo * default_firmware;
