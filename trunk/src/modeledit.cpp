@@ -994,11 +994,11 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
         populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);
-        cswitchOffset[i]->setDecimals(source.getDecimals());
-        cswitchOffset[i]->setMinimum(source.getMin());
-        cswitchOffset[i]->setMaximum(source.getMax());
-        cswitchOffset[i]->setSingleStep(source.getStep());
-        cswitchOffset[i]->setValue(source.getStep()*(g_model.customSw[i].val2+source.getRawOffset())+source.getOffset());
+        cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
+        cswitchOffset[i]->setMinimum(source.getMin(g_model));
+        cswitchOffset[i]->setMaximum(source.getMax(g_model));
+        cswitchOffset[i]->setSingleStep(source.getStep(g_model));
+        cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
         break;
       case CS_VBOOL:
         cswitchSource1[i]->setVisible(true);
@@ -1231,11 +1231,11 @@ void ModelEdit::customSwitchesEdited()
             if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset())/source.getStep())-source.getRawOffset();
+              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
               setSwitchWidgetVisibility(i);
             } else {
               source=RawSource(g_model.customSw[i].val1);
-              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset())/source.getStep())-source.getRawOffset();
+              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
             }
             break;
           case (CS_VBOOL):
