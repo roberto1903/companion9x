@@ -986,14 +986,19 @@ void ModelEdit::curvePointEdited()
 
 void ModelEdit::setSwitchWidgetVisibility(int i)
 {
+    RawSource source=RawSource(g_model.customSw[i].val1);
     switch CS_STATE(g_model.customSw[i].func)
     {
       case CS_VOFS:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TELEMETRY);
-        cswitchOffset[i]->setValue(g_model.customSw[i].val2);
+        populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);
+        cswitchOffset[i]->setDecimals(source.getDecimals());
+        cswitchOffset[i]->setMinimum(source.getMin());
+        cswitchOffset[i]->setMaximum(source.getMax());
+        cswitchOffset[i]->setSingleStep(source.getStep());
+        cswitchOffset[i]->setValue(source.getStep()*g_model.customSw[i].val2+source.getOffset());
         break;
       case CS_VBOOL:
         cswitchSource1[i]->setVisible(true);
@@ -1061,10 +1066,11 @@ void ModelEdit::tabCustomSwitches()
         ui->gridLayout_21->addWidget(cswitchSource2[i],i+1,3);
         cswitchSource2[i]->setVisible(false);
 
-        cswitchOffset[i] = new QSpinBox(this);
+        cswitchOffset[i] = new QDoubleSpinBox(this);
         cswitchOffset[i]->setMaximum(125);
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
+        cswitchOffset[i]->setDecimals(0);
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
@@ -1086,10 +1092,11 @@ void ModelEdit::tabCustomSwitches()
           ui->gridLayout_22->addWidget(cswitchSource2[i],i-15,3);
           cswitchSource2[i]->setVisible(false);
 
-          cswitchOffset[i] = new QSpinBox(this);
+          cswitchOffset[i] = new QDoubleSpinBox(this);
           cswitchOffset[i]->setMaximum(125);
           cswitchOffset[i]->setMinimum(-125);
           cswitchOffset[i]->setAccelerated(true);
+          cswitchOffset[i]->setDecimals(0);
           connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
           cswitchOffset[i]->setVisible(false);
@@ -1217,12 +1224,19 @@ void ModelEdit::customSwitchesEdited()
             g_model.customSw[i].val2 = 0;
             setSwitchWidgetVisibility(i);
         }
-
+        RawSource source;
         switch(CS_STATE(g_model.customSw[i].func))
         {
           case (CS_VOFS):
-            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-            g_model.customSw[i].val2 = cswitchOffset[i]->value();
+            if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
+              source=RawSource(g_model.customSw[i].val1);
+              g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+              g_model.customSw[i].val2 = (cswitchOffset[i]->value()-source.getOffset())/source.getStep();
+              setSwitchWidgetVisibility(i);
+            } else {
+              source=RawSource(g_model.customSw[i].val1);
+              g_model.customSw[i].val2 = (cswitchOffset[i]->value()-source.getOffset())/source.getStep();
+            }
             break;
           case (CS_VBOOL):
             g_model.customSw[i].val1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
