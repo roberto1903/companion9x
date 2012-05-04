@@ -39,6 +39,140 @@ int RawSource::toValue()
   return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
 }
 
+int RawSource::getDecimals()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 0:
+      case 1:
+      case 12:
+        return 2;
+      default:
+        return 0;
+    }
+  }
+  return 0;
+}
+
+double RawSource::getMin()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:    
+        return 0;
+      case 7:
+      case 8:
+        return -30;
+      case 9:
+      case 10:
+      case 11:
+      case 12:
+        return 0;
+      default:
+        return -125;
+    }
+  }
+  return -125;
+}
+
+double RawSource::getMax()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 2:
+      case 3:
+        return 100;
+      case 4:
+        return 1020;
+      case 5:
+        return 12750;
+      case 6:
+        return 100;        
+      case 7:
+      case 8:
+        return 225;
+      case 9:
+        return 944;
+      case 10:
+        return 2040;
+      case 11:
+        return 1020;
+      case 12:
+        return 5.1;
+      default:
+        return 125;
+    }
+  }
+  return 125;
+}
+
+double RawSource::getOffset()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 2:
+      case 3:
+        return 100;
+      case 4:
+        return 512;
+      case 5:
+        return 6400;
+      case 6:
+        return 100;
+      case 7:
+      case 8:
+        return 98;
+      case 9:
+        return 474;
+      case 10:
+        return 1024;
+      case 11:
+        return 512;
+      case 12:
+        return 2.56;
+      default:
+        return 0;
+    }
+  }
+  return 0;
+}
+
+double RawSource::getStep()
+{
+  if(type==SOURCE_TYPE_TELEMETRY) {
+    switch (index) {
+      case 1:
+      case 2:
+      case 3:
+        return 100.0/128;
+      case 4:
+        return 4;
+      case 5:
+        return 50;
+      case 6:
+        return 100.0/128;
+      case 7:
+      case 8:
+        return 1;
+      case 9:
+        return 4;
+      case 10:
+        return 8;
+      case 11:
+        return 4;
+      case 12:
+        return 0.02;
+      default:
+        return 1;
+    }
+  }
+  return 1;
+}
+
 QString RawSource::toString()
 {
   QString sticks[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),

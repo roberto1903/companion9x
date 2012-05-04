@@ -213,7 +213,6 @@ enum EnumKeys {
 #define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
 #define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
 
-
 enum RawSourceType {
   SOURCE_TYPE_NONE,
   SOURCE_TYPE_STICK, // and POTS
@@ -251,7 +250,13 @@ class RawSource {
     int toValue();
 
     QString toString();
-
+    
+    int getDecimals();
+    double getMin();
+    double getMax();
+    double getStep();
+    double getOffset();
+    
     bool operator== ( const RawSource& other) {
       return (this->type == other.type) && (this->index == other.index);
     }
