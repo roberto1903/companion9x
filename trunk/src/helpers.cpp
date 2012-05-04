@@ -172,12 +172,6 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
 
   b->clear();
 
-  if (attr & POPULATE_ONOFF) {
-    item = RawSwitch(SWITCH_TYPE_ON);
-    b->addItem(item.toString(), item.toValue());
-    if (item == value) b->setCurrentIndex(b->count()-1);
-  }
-
   if (attr & POPULATE_MSWITCHES) {
     for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
       item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
@@ -189,6 +183,12 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
       b->addItem(item.toString(), item.toValue());
       if (item == value) b->setCurrentIndex(b->count()-1);
     }
+  }
+
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_OFF);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
   }
 
   for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
@@ -219,6 +219,12 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
     if (item == value) b->setCurrentIndex(b->count()-1);
   }
 
+  if (attr & POPULATE_ONOFF) {
+    item = RawSwitch(SWITCH_TYPE_ON);
+    b->addItem(item.toString(), item.toValue());
+    if (item == value) b->setCurrentIndex(b->count()-1);
+  }
+
   if (attr & POPULATE_MSWITCHES) {
     for (int i=1; i<=9; i++) {
       item = RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, i);
@@ -231,12 +237,6 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
       b->addItem(item.toString(), item.toValue());
       if (item == value) b->setCurrentIndex(b->count()-1);
     }
-  }
-
-  if (attr & POPULATE_ONOFF) {
-    item = RawSwitch(SWITCH_TYPE_ON);
-    b->addItem(item.toString(), item.toValue());
-    if (item == value) b->setCurrentIndex(b->count()-1);
   }
 
   b->setMaxVisibleItems(10);
