@@ -377,6 +377,7 @@ void RegisterEepromInterfaces()
 
 QList<FirmwareInfo *> firmwares;
 FirmwareInfo * default_firmware = NULL;
+FirmwareInfo * current_firmware = NULL;
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
@@ -460,18 +461,6 @@ FirmwareInfo * GetFirmware(QString id)
   return NULL;
 }
 
-FirmwareInfo * GetCurrentFirmware()
-{
-  QSettings settings("companion9x", "companion9x");
-  QVariant firmware_id = settings.value("firmware", default_firmware->id);
-  FirmwareInfo *firmware = GetFirmware(firmware_id.toString());
-  return firmware ? firmware : default_firmware;
-}
-
-EEPROMInterface *GetEepromInterface()
-{
-  return GetCurrentFirmware()->eepromInterface;
-}
 
 
 

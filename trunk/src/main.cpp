@@ -80,6 +80,10 @@ int main(int argc, char *argv[])
 
     RegisterFirmwares();
 
+    QVariant firmware_id = settings.value("firmware", default_firmware->id);
+    FirmwareInfo *firmware = GetFirmware(firmware_id.toString());
+    current_firmware = firmware ? firmware : default_firmware;
+
     if(showSplash)
     {
         splash->show();
