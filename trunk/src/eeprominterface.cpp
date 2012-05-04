@@ -304,6 +304,18 @@ QString RawSwitch::toString()
       return QObject::tr("ON");
     case SWITCH_TYPE_OFF:
       return QObject::tr("OFF");
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      // TODO assert(index != 0);
+      return index > 0 ? QString("m") + switches[index-1] : QString("!m") + switches[-index-1];
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+    {
+      QString neg = QString("m");
+      if (index < 0) { neg = QString("!m"); index = -index; }
+      if (index < 10)
+        return neg+QObject::tr("SW%1").arg(index);
+      else
+        return neg+QObject::tr("SW%1").arg(QChar('A'+index-10));
+    }
     default:
       return QObject::tr("----");
   }
