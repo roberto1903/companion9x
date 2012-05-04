@@ -1233,15 +1233,13 @@ void ModelEdit::customSwitchesEdited()
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
               g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
               setSwitchWidgetVisibility(i);
-            } else {
+            }
+            else {
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
             }
             break;
           case (CS_VBOOL):
-            g_model.customSw[i].val1 = cswitchSource1[i]->currentIndex() - MAX_DRSWITCH;
-            g_model.customSw[i].val2 = cswitchSource2[i]->currentIndex() - MAX_DRSWITCH;
-            break;
           case (CS_VCOMP):
             g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
             g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
