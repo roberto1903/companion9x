@@ -31,10 +31,11 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->FWFileName->hide();
     ui->FlashLoadButton->hide();   
     hexfileName->clear();
-  } else if (Type==2) {
+  }
+  else if (Type==2) {
     QSettings settings("companion9x", "companion9x");
     QString FileName;
-    FileName=settings.value("lastFw").toString();
+    FileName = settings.value("lastFw").toString();
     QFile file(FileName);
     if (file.exists()) {
       checkFw(FileName);
@@ -192,6 +193,9 @@ void burnDialog::on_BurnFlashButton_clicked()
   if (hexType==2) {
     QString fileName=ui->FWFileName->text();
     if (!fileName.isEmpty()) {
+      QSettings settings("companion9x", "companion9x");
+      settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
+      settings.setValue("lastFw", fileName);
       if (ui->PatchFWCB->isChecked()) {
         QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
         if (!image.isNull()) {
@@ -206,9 +210,6 @@ void burnDialog::on_BurnFlashButton_clicked()
           if (flash.saveFlash(tempFile) > 0) {
             hexfileName->clear();
             hexfileName->append(tempFile);
-            QSettings settings("companion9x", "companion9x");
-            settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
-            settings.setValue("lastFw", fileName);
           }
           else {
             hexfileName->clear();
