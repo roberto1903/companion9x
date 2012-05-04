@@ -58,6 +58,8 @@ int RawSource::getDecimals(const ModelData & Model)
 double RawSource::getMin(const ModelData & Model)
 {
   switch (type) {
+    case SOURCE_TYPE_TIMER:
+      return 0;
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
         case 0:
@@ -93,6 +95,8 @@ double RawSource::getMin(const ModelData & Model)
 double RawSource::getMax(const ModelData & Model)
 {
   switch (type) {
+    case SOURCE_TYPE_TIMER:
+      return 765;
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
         case 0:
@@ -171,56 +175,68 @@ double RawSource::getOffset(const ModelData & Model)
 
 int RawSource::getRawOffset(const ModelData & Model)
 {
-  if(type==SOURCE_TYPE_TELEMETRY) {
-    switch (index) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 6:
-        return 128;        
-      default:
-        return 0;
-    }
+  switch (type) {
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 6:
+          return 128;        
+        default:
+          return 0;
+      }
+      break;
+   case SOURCE_TYPE_TIMER:
+      return 128;
+      break;
+   default:
+      return 0;
   }
-  return 0;
 }
 
 double RawSource::getStep(const ModelData & Model)
 {
-  if(type==SOURCE_TYPE_TELEMETRY) {
-    switch (index) {
-      case 0:
-      case 1:
-        if (Model.frsky.channels[index].type==0) {
-          return (Model.frsky.channels[index].ratio/2550.0);
-        } else {
-          return (Model.frsky.channels[index].ratio/255.0);
-        }
-      case 3:
-        return 1;
-      case 4:
-        return 4;
-      case 5:
-        return 50;
-      case 6:
-        return 1;
-      case 7:
-      case 8:
-        return 1;
-      case 9:
-        return 4;
-      case 10:
-        return 8;
-      case 11:
-        return 4;
-      case 12:
-        return 0.02;
-      default:
-        return 1;
-    }
+  switch (type) {
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 0:
+        case 1:
+          if (Model.frsky.channels[index].type==0) {
+            return (Model.frsky.channels[index].ratio/2550.0);
+          } else {
+            return (Model.frsky.channels[index].ratio/255.0);
+          }
+        case 3:
+          return 1;
+        case 4:
+          return 4;
+        case 5:
+          return 50;
+        case 6:
+          return 1;
+        case 7:
+        case 8:
+          return 1;
+        case 9:
+          return 4;
+        case 10:
+          return 8;
+        case 11:
+          return 4;
+        case 12:
+          return 0.02;
+        default:
+          return 1;
+      }
+      break;
+    case SOURCE_TYPE_TIMER:
+      return 3;
+      break;
+   default:
+      return 1;
   }
-  return 1;
 }
 
 QString RawSource::toString()
