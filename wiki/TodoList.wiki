@@ -1,6 +1,9 @@
 #summary TODO list
 
 = General =
+  * Add a what's new information to be displayed while prompting for updates
+  * Add what's new for firmware updates
+  * Support for higher voltages in telemetry screen and in custom switches
   * ~~Display somewhere the current firmware chosen, so that it is always visible~~
   * ~~Display the available size on the EEPROM~~
   * ~~Current model displayed in bold in the MDI child windows~~
@@ -17,14 +20,13 @@
   * ~~Change the icon which comes from eePe (a graphist is welcome!!)~~
   * ~~Splash window should be visible at least 2-3 seconds!~~
   * ~~Phase names visible on simulation~~
-  * Add a what's new information to be displayed while prompting for updates
   * ~~Beeps not handled yet~~
   * ~~Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS)~~
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
   * In simulator: highlight real channels to differentiate them from virtual ones
 
 = Ideas from eePe =
-  * Diff feature to compare two models
+  * ~~Diff feature to compare two models~~
   * Solid bars for simulators instead of standard sliders (perhaps only css)
 
 = Import / export =
