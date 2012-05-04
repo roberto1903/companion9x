@@ -39,7 +39,7 @@ int RawSource::toValue()
   return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
 }
 
-int RawSource::getDecimals(ModelData Model)
+int RawSource::getDecimals(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
@@ -55,7 +55,7 @@ int RawSource::getDecimals(ModelData Model)
   return 0;
 }
 
-double RawSource::getMin(ModelData Model)
+double RawSource::getMin(const ModelData & Model)
 {
   switch (type) {
     case SOURCE_TYPE_TELEMETRY:
@@ -90,7 +90,7 @@ double RawSource::getMin(ModelData Model)
   }
 }
 
-double RawSource::getMax(ModelData Model)
+double RawSource::getMax(const ModelData & Model)
 {
   switch (type) {
     case SOURCE_TYPE_TELEMETRY:
@@ -131,7 +131,7 @@ double RawSource::getMax(ModelData Model)
   }
 }
 
-double RawSource::getOffset(ModelData Model)
+double RawSource::getOffset(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
@@ -169,7 +169,7 @@ double RawSource::getOffset(ModelData Model)
   return 0;
 }
 
-int RawSource::getRawOffset(ModelData Model)
+int RawSource::getRawOffset(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
@@ -186,7 +186,7 @@ int RawSource::getRawOffset(ModelData Model)
   return 0;
 }
 
-double RawSource::getStep(ModelData Model)
+double RawSource::getStep(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
