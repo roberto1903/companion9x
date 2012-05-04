@@ -14,6 +14,14 @@ int8_t open9xArmFromSwitch(const RawSwitch & sw)
       return sw.index;
     case SWITCH_TYPE_VIRTUAL:
       return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    case SWITCH_TYPE_ON:
+      return 42;
+    case SWITCH_TYPE_OFF:
+      return -42;
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      return sw.index > 0 ? (42 + sw.index) : (-42 + sw.index);
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+      return sw.index > 0 ? (51 + sw.index) : (-51 + sw.index);
     default:
       return 0;
   }
@@ -279,6 +287,23 @@ t_Open9xArmCustomSwData_v208::operator CustomSwData ()
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }
 
+  return c9x;
+}
+
+
+t_Open9xFuncSwData_v208::t_Open9xFuncSwData_v208(FuncSwData &c9x)
+{
+  swtch = open9xArmFromSwitch(c9x.swtch);
+  func = (c9x.func >= FuncTrims2Offsets ? c9x.func - 1 : c9x.func);
+  param = c9x.param;
+}
+
+t_Open9xFuncSwData_v208::operator FuncSwData ()
+{
+  FuncSwData c9x;
+  c9x.swtch = open9xArmToSwitch(swtch);
+  c9x.func = (AssignFunc)(func >= FuncTrims2Offsets ? func+1 : func);
+  c9x.param = param;
   return c9x;
 }
 

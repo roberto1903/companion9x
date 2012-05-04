@@ -191,6 +191,14 @@ int8_t open9xFromSwitch(const RawSwitch & sw)
       return sw.index;
     case SWITCH_TYPE_VIRTUAL:
       return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    case SWITCH_TYPE_ON:
+      return 22;
+    case SWITCH_TYPE_OFF:
+      return -22;
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      return sw.index > 0 ? (22 + sw.index) : (-22 + sw.index);
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+      return sw.index > 0 ? (31 + sw.index) : (-31 + sw.index);
     default:
       return 0;
   }
