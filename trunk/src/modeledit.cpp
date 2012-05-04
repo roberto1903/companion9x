@@ -998,7 +998,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchOffset[i]->setMinimum(source.getMin());
         cswitchOffset[i]->setMaximum(source.getMax());
         cswitchOffset[i]->setSingleStep(source.getStep());
-        cswitchOffset[i]->setValue(source.getStep()*g_model.customSw[i].val2+source.getOffset());
+        cswitchOffset[i]->setValue(source.getStep()*(g_model.customSw[i].val2+source.getRawOffset())+source.getOffset());
         break;
       case CS_VBOOL:
         cswitchSource1[i]->setVisible(true);
@@ -1231,11 +1231,11 @@ void ModelEdit::customSwitchesEdited()
             if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-              g_model.customSw[i].val2 = (cswitchOffset[i]->value()-source.getOffset())/source.getStep();
+              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset())/source.getStep())-source.getRawOffset();
               setSwitchWidgetVisibility(i);
             } else {
               source=RawSource(g_model.customSw[i].val1);
-              g_model.customSw[i].val2 = (cswitchOffset[i]->value()-source.getOffset())/source.getStep();
+              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset())/source.getStep())-source.getRawOffset();
             }
             break;
           case (CS_VBOOL):

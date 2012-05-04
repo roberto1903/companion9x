@@ -256,6 +256,7 @@ class RawSource {
     double getMax();
     double getStep();
     double getOffset();
+    int getRawOffset();
     
     bool operator== ( const RawSource& other) {
       return (this->type == other.type) && (this->index == other.index);
