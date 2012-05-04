@@ -39,12 +39,13 @@ int RawSource::toValue()
   return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
 }
 
-int RawSource::getDecimals()
+int RawSource::getDecimals(ModelData Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
       case 0:
       case 1:
+        return (Model.frsky.channels[index].type==0 ? 2: 0);
       case 12:
         return 2;
       default:
@@ -54,66 +55,113 @@ int RawSource::getDecimals()
   return 0;
 }
 
-double RawSource::getMin()
+double RawSource::getMin(ModelData Model)
 {
-  if(type==SOURCE_TYPE_TELEMETRY) {
-    switch (index) {
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-      case 6:    
-        return 0;
-      case 7:
-      case 8:
-        return -30;
-      case 9:
-      case 10:
-      case 11:
-      case 12:
-        return 0;
-      default:
-        return -125;
-    }
+  switch (type) {
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 0:
+        case 1:
+          if (Model.frsky.channels[index].type==0) {
+            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
+          } else {
+            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+          }
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:    
+          return 0;
+        case 7:
+        case 8:
+          return -30;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+          return 0;
+        default:
+          return -125;
+      }
+      break;
+    case SOURCE_TYPE_STICK:
+    case SOURCE_TYPE_ROTARY_ENCODER:
+    case SOURCE_TYPE_MAX:
+    case SOURCE_TYPE_3POS:
+    case SOURCE_TYPE_SWITCH:
+      return -100;
+      break;
+    case SOURCE_TYPE_CH:
+      return (Model.extendedLimits ? -125 :-100);
+      break;
+    default:
+      return -125;
   }
-  return -125;
 }
 
-double RawSource::getMax()
+double RawSource::getMax(ModelData Model)
 {
-  if(type==SOURCE_TYPE_TELEMETRY) {
-    switch (index) {
-      case 2:
-      case 3:
-        return 100;
-      case 4:
-        return 1020;
-      case 5:
-        return 12750;
-      case 6:
-        return 100;        
-      case 7:
-      case 8:
-        return 225;
-      case 9:
-        return 944;
-      case 10:
-        return 2040;
-      case 11:
-        return 1020;
-      case 12:
-        return 5.1;
-      default:
-        return 125;
-    }
+  switch (type) {
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 0:
+        case 1:
+          if (Model.frsky.channels[index].type==0) {
+            return (Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0)/10;
+          } else {
+            return Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+          }
+        case 2:
+        case 3:
+          return 100;
+        case 4:
+          return 1020;
+        case 5:
+          return 12750;
+        case 6:
+          return 100;        
+        case 7:
+        case 8:
+          return 225;
+        case 9:
+          return 944;
+        case 10:
+          return 2040;
+        case 11:
+          return 1020;
+        case 12:
+          return 5.1;
+        default:
+          return 125;
+      }
+      break;
+    case SOURCE_TYPE_STICK:
+    case SOURCE_TYPE_ROTARY_ENCODER:
+    case SOURCE_TYPE_MAX:
+    case SOURCE_TYPE_3POS:
+    case SOURCE_TYPE_SWITCH:
+      return 100;
+      break;      
+    case SOURCE_TYPE_CH:
+      return (Model.extendedLimits ? 125 :100);
+      break;
+    default:
+      return 125;
   }
-  return 125;
 }
 
-double RawSource::getOffset()
+double RawSource::getOffset(ModelData Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
+      case 0:
+      case 1:
+        if (Model.frsky.channels[index].type==0) {
+          return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
+        } else {
+          return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+        }
       case 2:
       case 3:
         return 0;
@@ -141,10 +189,12 @@ double RawSource::getOffset()
   return 0;
 }
 
-int RawSource::getRawOffset()
+int RawSource::getRawOffset(ModelData Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
+      case 0:
+      case 1:
       case 2:
       case 3:
       case 6:
@@ -156,10 +206,17 @@ int RawSource::getRawOffset()
   return 0;
 }
 
-double RawSource::getStep()
+double RawSource::getStep(ModelData Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
+      case 0:
+      case 1:
+        if (Model.frsky.channels[index].type==0) {
+          return (Model.frsky.channels[index].ratio/2550.0);
+        } else {
+          return (Model.frsky.channels[index].ratio/255.0);
+        }
       case 3:
         return 1;
       case 4:

@@ -226,6 +226,7 @@ enum RawSourceType {
   SOURCE_TYPE_TIMER,
   SOURCE_TYPE_TELEMETRY
 };
+class ModelData;
 
 class RawSource {
   public:
@@ -251,12 +252,12 @@ class RawSource {
 
     QString toString();
     
-    int getDecimals();
-    double getMin();
-    double getMax();
-    double getStep();
-    double getOffset();
-    int getRawOffset();
+    int getDecimals(ModelData Model);
+    double getMin(ModelData Model);
+    double getMax(ModelData Model);
+    double getStep(ModelData Model);
+    double getOffset(ModelData Model);
+    int getRawOffset(ModelData Model);
     
     bool operator== ( const RawSource& other) {
       return (this->type == other.type) && (this->index == other.index);
