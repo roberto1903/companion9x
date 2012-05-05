@@ -205,11 +205,13 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
         ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
     }
   }
-  if (ui->langCombo->count())
+  if (ui->langCombo->count()) {
     ui->langCombo->show();
-  else
+    ui->langLabel->show();
+  } else {
     ui->langCombo->hide();
-
+    ui->langLabel->hide();
+  }
   int index = 0;
   for (; index<options.size() && index<optionsCheckBoxes.size(); index++) {
     QCheckBox *cb = optionsCheckBoxes.at(index);
