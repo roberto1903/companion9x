@@ -741,25 +741,25 @@ void GeneralEdit::on_BandGapEnableChkB_stateChanged(int )
 
 void GeneralEdit::on_swtchCB_1_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[0].swtch = ui->swtchCB_1->currentIndex()-MAX_DRSWITCH;
+    g_eeGeneral.trainer.mix[0].swtch = ui->swtchCB_1->itemData(ui->swtchCB_1->currentIndex()).toInt();
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_2_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[1].swtch = ui->swtchCB_2->currentIndex()-MAX_DRSWITCH;
+    g_eeGeneral.trainer.mix[1].swtch = ui->swtchCB_2->itemData(ui->swtchCB_2->currentIndex()).toInt();
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_3_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[2].swtch = ui->swtchCB_3->currentIndex()-MAX_DRSWITCH;
+    g_eeGeneral.trainer.mix[2].swtch = ui->swtchCB_3->itemData(ui->swtchCB_3->currentIndex()).toInt();
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_4_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[3].swtch = ui->swtchCB_4->currentIndex()-MAX_DRSWITCH;
+    g_eeGeneral.trainer.mix[3].swtch = ui->swtchCB_4->itemData(ui->swtchCB_4->currentIndex()).toInt();
     updateSettings();
 }
 
