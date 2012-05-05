@@ -45,6 +45,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->gpsFormatCB->hide();
       ui->gpsFormatLabel->hide();
     }
+    if (!GetEepromInterface()->getCapability(OptrexDisplay)) {
+      ui->label_displayType->hide();
+      ui->displayTypeCB->setDisabled(true);
+      ui->displayTypeCB->hide();
+    }
+
     ui->gpsFormatCB->setCurrentIndex(g_eeGeneral.gpsFormat);
     ui->timezoneSB->setValue(g_eeGeneral.timezone);
     
@@ -392,6 +398,12 @@ void GeneralEdit::on_enableTelemetryAlarmChkB_stateChanged(int )
 void GeneralEdit::on_beeperCB_currentIndexChanged(int index)
 {
     g_eeGeneral.beeperMode = (BeeperMode)(index-2);
+    updateSettings();
+}
+
+void GeneralEdit::on_displayTypeCB_currentIndexChanged(int index)
+{
+    g_eeGeneral.optrexDisplay = index;
     updateSettings();
 }
 

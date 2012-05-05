@@ -709,6 +709,7 @@ enum Capability {
  HasTTrace,
  NoTimerDirs,
  NoThrExpo,
+ OptrexDisplay,
  PPMExtCtrl,
  MixFmTrim,
  gsSwitchMask,

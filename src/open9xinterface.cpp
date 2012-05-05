@@ -432,6 +432,12 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case PPMCenter:
       return 1;
+    case OptrexDisplay:
+      if  (BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
     default:
       return 0;
   }

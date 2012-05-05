@@ -252,6 +252,8 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return TM_HASTELEMETRY|TM_HASWSHH;
     case TelemetryUnits:
       return 1;
+    case OptrexDisplay:
+      return 1;
     default:
       return 0;
   }
