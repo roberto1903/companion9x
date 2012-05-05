@@ -1078,13 +1078,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
-        <widget class="QLabel" name="label_blOnStickMove">
-         <property name="text">
-          <string>Backlight On Stick Move</string>
-         </property>
-        </widget>
-       </item>
        <item row="14" column="3">
         <widget class="QLabel" name="label_5">
          <property name="text">
@@ -1107,19 +1100,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="currentIndex">
           <number>-1</number>
-         </property>
-        </widget>
-       </item>
-       <item row="15" column="1">
-        <widget class="QSpinBox" name="blOnStickMoveSB">
-         <property name="suffix">
-          <string> sec</string>
-         </property>
-         <property name="maximum">
-          <number>600</number>
-         </property>
-         <property name="singleStep">
-          <number>5</number>
          </property>
         </widget>
        </item>
@@ -1235,14 +1215,34 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="15" column="4">
+        <widget class="QSpinBox" name="blOnStickMoveSB">
+         <property name="suffix">
+          <string> sec</string>
+         </property>
+         <property name="maximum">
+          <number>600</number>
+         </property>
+         <property name="singleStep">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
        <item row="15" column="3">
+        <widget class="QLabel" name="label_blOnStickMove">
+         <property name="text">
+          <string>Backlight On Stick Move</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0">
         <widget class="QLabel" name="label_displayType">
          <property name="text">
           <string>LCD Display Type</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="4">
+       <item row="15" column="1">
         <widget class="QComboBox" name="displayTypeCB">
          <item>
           <property name="text">
@@ -2474,7 +2474,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>inputfilterCB</tabstop>
   <tabstop>battwarningDSB</tabstop>
   <tabstop>backlightswCB</tabstop>
-  <tabstop>blOnStickMoveSB</tabstop>
   <tabstop>inactimerSB</tabstop>
   <tabstop>beepMinuteChkB</tabstop>
   <tabstop>beepCountDownChkB</tabstop>
