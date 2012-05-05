@@ -321,6 +321,39 @@ void FlashInterface::SeekSplash(void)
     }
   }
   if (start==-1) {
+    start=0;
+    splash.clear();
+    splash.append(ERSKY9X_SPS);
+    splash.append('\0');
+    spe.clear();
+    spe.append(ERSKY9X_SPE);
+    spe.append('\0');   
+    int diff=0;
+    int end=0;
+    while (start>=0) {
+      start = flash.indexOf(splash,start+1);
+      if (start>0) {
+        end=flash.indexOf(spe,start+1);
+        if (end>0) {
+          diff=end-start;
+          while (diff<1031 && end>0) {
+            end=flash.indexOf(spe,end+1);
+            diff=end-start;
+          }
+          if (end>0) {
+            diff=end-start;
+            if (diff==1031) {
+              splash_offset=start+ERSKY9X_OFFSET;
+              splash_type=4;
+              splash_size=sizeof(ersky9x_splash);
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+  if (start==-1) {
     splash.clear();
     splash.append(ERSPLASH_MARKER);
     splash.append('\0');
