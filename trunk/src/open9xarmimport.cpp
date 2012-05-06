@@ -13,6 +13,9 @@
 #define DECIMALS_DISPLAYED
 #define AUDIO
 #define HAPTIC
+#define PXX
+#define DSM2
+#define DSM2_PPM
 
 #undef min
 #undef max
