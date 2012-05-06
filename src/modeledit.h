@@ -117,7 +117,7 @@ private:
     void applyTemplate(uint8_t idx);
     MixData* setDest(uint8_t dch);
     void setCurve(uint8_t c, int8_t ar[]);
-    void setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2);
+    void setSwitch(unsigned int idx, unsigned int func, int v1, int v2);
 
     void on_phaseSwitch_currentIndexChanged(unsigned int phase, int index);
     void on_phaseFadeIn_valueChanged(unsigned int phase, int value);
