@@ -3346,7 +3346,7 @@ void ModelEdit::setCurve(uint8_t c, int8_t ar[])
     for(uint8_t i=0; i<9; i++) g_model.curves9[c-MAX_CURVE5][i] = ar[i];
 }
 
-void ModelEdit::setSwitch(uint8_t idx, uint8_t func, int8_t v1, int8_t v2)
+void ModelEdit::setSwitch(unsigned int idx, unsigned int func, int v1, int v2)
 {
   g_model.customSw[idx-1].func = func;
   g_model.customSw[idx-1].val1   = v1;
