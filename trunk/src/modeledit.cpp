@@ -3391,9 +3391,9 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
   //sticky t-cut
   if(idx==j++) {
-    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_SWC);  md->mltpx=MLTPX_REP;
+    md=setDest(ICC(STK_THR));  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 10);  md->mltpx=MLTPX_REP;
     md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_CH, 13); md->weight= 100; md->swtch=RawSwitch();
-    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_SWB);  md->mltpx=MLTPX_REP;
+    md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 11);  md->mltpx=MLTPX_REP;
     md=setDest(14);            md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 100;  md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR);  md->mltpx=MLTPX_REP;
     setSwitch(0xB, CS_VNEG, RawSource(SOURCE_TYPE_STICK, 2).toValue(), -99);
     setSwitch(0xC, CS_VPOS, RawSource(SOURCE_TYPE_CH, 13).toValue(), 0);
@@ -3477,9 +3477,9 @@ void ModelEdit::applyTemplate(uint8_t idx)
   //Servo Test
   if(idx==j++) {
     md=setDest(15); md->srcRaw=RawSource(SOURCE_TYPE_CH, 15);   md->weight= 100; md->speedUp = 8; md->speedDown = 8; md->swtch=RawSwitch();
-    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, 9); md->weight= 110; md->swtch=RawSwitch();
-    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_SW2); md->mltpx=MLTPX_REP;
-    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_SW3); md->mltpx=MLTPX_REP;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, 1).toValue()); md->weight= 110; md->swtch=RawSwitch();
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 2); md->mltpx=MLTPX_REP;
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 3); md->mltpx=MLTPX_REP;
     setSwitch(1, CS_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
     setSwitch(2, CS_VPOS, RawSource(SOURCE_TYPE_CH, 14).toValue(), 105);
     setSwitch(3, CS_VNEG, RawSource(SOURCE_TYPE_CH, 14).toValue(), -105);
