@@ -446,9 +446,9 @@ void preferencesDialog::on_joystickcalButton_clicked() {
 void preferencesDialog::on_checkFWUpdates_clicked()
 {
     QString fwId;
-    FirmwareInfo * fw = getFirmware(fwId);
+    getFirmware(fwId);
     MainWindow * mw = (MainWindow *)this->parent();
-    mw->checkForUpdates(true, fw);
+    mw->checkForUpdates(true, fwId);
     firmwareChanged();
 }
 
