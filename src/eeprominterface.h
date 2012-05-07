@@ -861,13 +861,17 @@ class FirmwareInfo {
   public:
     FirmwareInfo():
       parent(NULL),
-      id(NULL),
+      id(QString::null),
       eepromInterface(NULL),
       stamp(NULL)
     {
     }
 
-    FirmwareInfo(const char * id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL):
+    virtual ~FirmwareInfo()
+    {
+    }
+
+    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(name),
@@ -877,7 +881,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const char * id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL):
+    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL):
       parent(NULL),
       id(id),
       name(QString::null),
@@ -894,7 +898,7 @@ class FirmwareInfo {
 
     QStringList get_options() {
       if (parent)
-        return QString(id).mid(strlen(parent->id)+1).split("-", QString::SkipEmptyParts);
+        return id.mid(parent->id.length()+1).split("-", QString::SkipEmptyParts);
       else
         return QStringList();
     }
@@ -908,7 +912,7 @@ class FirmwareInfo {
     }
 
     FirmwareInfo *parent;
-    const char * id;
+    QString id;
     QString name;
     EEPROMInterface * eepromInterface;
     QString url;

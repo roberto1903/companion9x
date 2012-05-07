@@ -72,12 +72,12 @@ class Open9xInterface : public EEPROMInterface
 class Open9xFirmware: public FirmwareInfo
 {
   public:
-    Open9xFirmware(const char * id, const QString & name, EEPROMInterface * eepromInterface):
+    Open9xFirmware(const QString & id, const QString & name, EEPROMInterface * eepromInterface):
       FirmwareInfo(id, name, eepromInterface)
     {
     }
 
-    Open9xFirmware(const char * id, EEPROMInterface * eepromInterface, QString url, const char * stamp):
+    Open9xFirmware(const QString & id, EEPROMInterface * eepromInterface, QString url, const char * stamp):
       FirmwareInfo(id, eepromInterface, url, stamp)
     {
     }
@@ -115,7 +115,11 @@ class Open9xFirmware: public FirmwareInfo
         return 202;
     }
 
-    virtual void addOptions(const char *binaries[]);
+    virtual void addLanguage(const char *lang);
+
+    virtual void addOption(const char *option);
+
+    virtual void addOptions(const char *options[]);
 
 };
 

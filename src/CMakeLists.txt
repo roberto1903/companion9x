@@ -63,9 +63,6 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
 
 SET( companion9x_SRCS
      eeprominterface.cpp
-     open9x-stock-binaries.cpp
-     open9x-v4-binaries.cpp
-     open9x-arm-binaries.cpp
      hexinterface.cpp
      flashinterface.cpp
      file.cpp

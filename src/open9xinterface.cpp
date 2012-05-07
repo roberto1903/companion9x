@@ -477,19 +477,45 @@ const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-st
 const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
 
-void Open9xFirmware::addOptions(const char *binaries[])
+void Open9xFirmware::addOption(const char *option)
 {
-  for (int i=0; binaries[i]; i++) {
-    switch (eepromInterface->getBoard()) {
-      case BOARD_STOCK:
-        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_STOCK_STAMP));
-        break;
-      case BOARD_GRUVIN9X:
-        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".hex", OPEN9X_V4_STAMP));
-        break;
-      case BOARD_ERSKY9X:
-        add_option(new Open9xFirmware(binaries[i], eepromInterface, QString(OPEN9X_BIN_URL) + binaries[i] + ".bin", OPEN9X_ARM_STAMP));
-        break;
+  const char *options[] = { option, NULL };
+  addOptions(options);
+}
+
+void Open9xFirmware::addLanguage(const char *lang)
+{
+  QString id = this->id + "-" + lang;
+  switch (eepromInterface->getBoard()) {
+    case BOARD_STOCK:
+      add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".hex", OPEN9X_STOCK_STAMP));
+      break;
+    case BOARD_GRUVIN9X:
+      add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".hex", OPEN9X_V4_STAMP));
+      break;
+    case BOARD_ERSKY9X:
+      add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".bin", OPEN9X_ARM_STAMP));
+      break;
+  }
+}
+
+void Open9xFirmware::addOptions(const char *options[])
+{
+  foreach(FirmwareInfo * fw, this->options) {
+    for (int i=0; options[i]; i++) {
+      QString id = fw->id.mid(0, fw->id.length()-2) + QString(options[i]) + "-" + fw->id.mid(fw->id.length()-2, 2);
+      // qDebug() << id;
+      switch (eepromInterface->getBoard()) {
+        case BOARD_STOCK:
+          add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".hex", OPEN9X_STOCK_STAMP));
+          break;
+        case BOARD_GRUVIN9X:
+          add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".hex", OPEN9X_V4_STAMP));
+          break;
+        case BOARD_ERSKY9X:
+          add_option(new Open9xFirmware(id, eepromInterface, QString(OPEN9X_BIN_URL) + id + ".bin", OPEN9X_ARM_STAMP));
+          break;
+      }
     }
   }
 }
