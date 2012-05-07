@@ -455,6 +455,9 @@ void RegisterFirmwares()
   firmwares.push_back(open9x);
 
   open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X));
+  open9x->addLanguage("en");
+  open9x->addLanguage("fr");
+  open9x->addLanguage("se");
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
@@ -467,6 +470,9 @@ void RegisterFirmwares()
   firmwares.push_back(open9x);
 
   open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X));
+  open9x->addLanguage("en");
+  open9x->addLanguage("fr");
+  open9x->addLanguage("se");
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
