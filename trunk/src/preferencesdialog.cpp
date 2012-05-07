@@ -20,7 +20,7 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
   foreach(QCheckBox *cb, findChildren<QCheckBox *>(QRegExp("optionCheckBox_[0-9]+"))) {
     optionsCheckBoxes.push_back(cb);
-    connect(cb, SIGNAL(toggled(bool)), this, SLOT(firmwareChanged(bool)));
+    connect(cb, SIGNAL(toggled(bool)), this, SLOT(firmwareOptionChanged(bool)));
   }
 
   populateLocale();
@@ -52,73 +52,78 @@ void preferencesDialog::baseFirmwareChanged()
       break;
     }
   }
-  firmwareChanged(false);
+  firmwareChanged();
 }
 
-FirmwareInfo * preferencesDialog::getFirmware(bool state)
+FirmwareInfo * preferencesDialog::getFirmware(QString & fwId)
 {
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
 
   foreach(FirmwareInfo * firmware, firmwares) {
     if (firmware->id == selected_firmware) {
-      QStringList options;
+      QString id = firmware->id;
       foreach(QCheckBox *cb, optionsCheckBoxes) {
         if (cb->isChecked()) {
-          options.append(cb->text());
+          id += QString("-") + cb->text();
         }
       }
       if (ui->langCombo->count())
-        options.append(ui->langCombo->currentText());
+        id += QString("-") + ui->langCombo->currentText();
 
-      if (options.size()) {
-        foreach(FirmwareInfo * firmware_option, firmware->options) {
-          if (state || options.size() == firmware_option->get_options().size()) {
-            bool ok = true;
-            foreach(QString option, options) {
-              if ((option.size() == 2 && !QString(firmware_option->id).endsWith(option)) ||
-                  (option.size() > 2 && !QString(firmware_option->id).contains(option))) {
-                ok = false;
-                break;
-              }
-            }
-            if (ok) return firmware_option;
-          }
-        }
-        if (!firmware->url.isNull())
-          return firmware;
-        else
-          return firmware->options.at(0);
-      }
-      else {
-        return firmware;
-      }
+      fwId = id;
+      return firmware;
     }
   }
 
   // Should never occur...
+  fwId = default_firmware_id;
   return default_firmware;
 }
 
 void preferencesDialog::firmwareLangChanged()
 {
-  firmwareChanged(false);
+  firmwareChanged();
 }
 
-void preferencesDialog::firmwareChanged(bool state)
+void preferencesDialog::firmwareOptionChanged(bool state)
+{
+  QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
+  if (cb && state) {
+    QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
+    foreach(FirmwareInfo * firmware, firmwares) {
+      if (firmware->id == selected_firmware) {
+        foreach(QList<const char *> opts, firmware->opts) {
+          foreach(const char *opt, opts) {
+            if (cb->text() == opt) {
+              foreach(const char *other, opts) {
+                if (other != opt) {
+                  foreach(QCheckBox *ocb, optionsCheckBoxes) {
+                    if (ocb->text() == other)
+                      ocb->setChecked(false);
+                  }
+                }
+              }
+              return firmwareChanged();
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+void preferencesDialog::firmwareChanged()
 {
   if (updateLock)
     return;
-  QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
-  FirmwareInfo * fw = getFirmware(state);
+
+  QString fwId;
+  FirmwareInfo * fw = getFirmware(fwId);
   QString stamp;
   stamp.append(fw->stamp);
-  ui->fw_dnld->setEnabled(!fw->url.isNull());
-  populateFirmwareOptions(fw);
-  if (cb) {
-    if (cb->isChecked()!=state) {
-      cb->setChecked(state);
-    }
-  }
+  ui->fw_dnld->setEnabled(!fw->getUrl(fwId).isNull());
+  // populateFirmwareOptions(fw);
+
   QSettings settings("companion9x", "companion9x");
   settings.beginGroup("FwRevisions");
   int fwrev = settings.value(fw->id, -1).toInt();
@@ -157,8 +162,8 @@ void preferencesDialog::writeValues()
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
-  current_firmware = getFirmware();
-  settings.setValue("firmware", current_firmware->id);
+  current_firmware = getFirmware(current_firmware_id);
+  settings.setValue("firmware", current_firmware_id);
 
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
@@ -184,43 +189,36 @@ void preferencesDialog::writeValues()
 
 void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
 {
-  QString firmware_id = QString(firmware->id);
   const FirmwareInfo * parent = firmware->parent ? firmware->parent : firmware;
-
-  QStringList options;
-  foreach(FirmwareInfo * option, parent->options) {
-    options.append(option->get_options());
-  }
-
-  options.removeDuplicates();
 
   updateLock = true;
 
   ui->langCombo->clear();
-  for (int i=0; i<options.size(); i++) {
-    if (options.at(i).size() == 2) {
-      QString option = options.takeAt(i--);
-      ui->langCombo->addItem(option);
-      if (firmware_id.endsWith(option))
-        ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
-    }
+  foreach(const char *lang, parent->languages) {
+    ui->langCombo->addItem(lang);
+    if (current_firmware_id.endsWith(lang))
+      ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
   }
   if (ui->langCombo->count()) {
     ui->langCombo->show();
     ui->langLabel->show();
-  } else {
+  }
+  else {
     ui->langCombo->hide();
     ui->langLabel->hide();
   }
-  int index = 0;
-  for (; index<options.size() && index<optionsCheckBoxes.size(); index++) {
-    QCheckBox *cb = optionsCheckBoxes.at(index);
-    cb->show();
-    QString option = options.at(index);
-    cb->setText(option);
-    cb->setCheckState(firmware_id.contains(option) ? Qt::Checked : Qt::Unchecked);
-  }
 
+  int index = 0;
+  foreach(QList<const char *> opts, parent->opts) {
+    foreach(const char * opt, opts) {
+      QCheckBox *cb = optionsCheckBoxes.at(index++);
+      if (cb) {
+        cb->show();
+        cb->setText(opt);
+        cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
+      }
+    }
+  }
   for (; index<optionsCheckBoxes.size(); index++) {
     QCheckBox *cb = optionsCheckBoxes.at(index);
     cb->hide();
@@ -257,19 +255,12 @@ void preferencesDialog::initSettings()
 
   foreach(FirmwareInfo * firmware, firmwares) {
     ui->downloadVerCB->addItem(firmware->name, firmware->id);
-    if (firmware->id == current_firmware->id) {
+    if (current_firmware == firmware) {
       ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
-      baseFirmwareChanged();
-    }
-    else {
-      foreach(FirmwareInfo * option, firmware->options) {
-        if (option->id == current_firmware->id) {
-          ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
-          populateFirmwareOptions(option);
-        }
-      }
     }
   }
+
+  baseFirmwareChanged();
 
   QString ImageStr = settings.value("SplashImage", "").toString();
   if (!ImageStr.isEmpty()) {
@@ -314,7 +305,7 @@ void preferencesDialog::initSettings()
     ui->joystickcalButton->setDisabled(true);
   }
 #endif  
-  firmwareChanged(true);
+  firmwareChanged();
 }
 
 void preferencesDialog::populateLocale()
@@ -338,10 +329,11 @@ void preferencesDialog::populateLocale()
 void preferencesDialog::on_fw_dnld_clicked()
 {
   MainWindow * mw = (MainWindow *)this->parent();
-  FirmwareInfo *fw = getFirmware();
-  if (!fw->url.isNull())
-    mw->downloadLatestFW(fw);
-  firmwareChanged(true);
+  QString fwId;
+  FirmwareInfo *fw = getFirmware(fwId);
+  if (!fw->getUrl(fwId).isNull())
+    mw->downloadLatestFW(fw, fwId);
+  firmwareChanged();
 }
 
 void preferencesDialog::on_libraryPathButton_clicked()
@@ -445,10 +437,11 @@ void preferencesDialog::on_joystickcalButton_clicked() {
 
 void preferencesDialog::on_checkFWUpdates_clicked()
 {
-    FirmwareInfo * fw = getFirmware();
+    QString fwId;
+    FirmwareInfo * fw = getFirmware(fwId);
     MainWindow * mw = (MainWindow *)this->parent();
     mw->checkForUpdates(true, fw);
-    firmwareChanged(true);
+    firmwareChanged();
 }
 
 void preferencesDialog::shrink()

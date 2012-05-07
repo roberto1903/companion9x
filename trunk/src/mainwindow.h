@@ -73,7 +73,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 public slots:
-    void downloadLatestFW(FirmwareInfo * force_firmware = NULL);
+    void downloadLatestFW(FirmwareInfo *firmware, const QString & firmwareId);
     
 private slots:
     void checkForUpdates(bool ignoreSettings=true, FirmwareInfo * fw = NULL);

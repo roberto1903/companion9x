@@ -27,7 +27,7 @@ private:
 
     void populateLocale();
     void populateFirmwareOptions(const FirmwareInfo *);
-    FirmwareInfo * getFirmware(bool state=true);
+    FirmwareInfo * getFirmware(QString &fwId);
     void initSettings();
 
 private slots:
@@ -35,7 +35,8 @@ private slots:
     void writeValues();
     void firmwareLangChanged();
     void baseFirmwareChanged();
-    void firmwareChanged(bool state=false);
+    void firmwareOptionChanged(bool state);
+    void firmwareChanged();
     void on_fw_dnld_clicked();
     void on_SplashSelect_clicked();
     void on_InvertPixels_clicked();

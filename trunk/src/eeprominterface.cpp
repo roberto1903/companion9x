@@ -404,36 +404,38 @@ void RegisterEepromInterfaces()
 }
 
 QList<FirmwareInfo *> firmwares;
+QString default_firmware_id;
 FirmwareInfo * default_firmware = NULL;
+QString current_firmware_id;
 FirmwareInfo * current_firmware = NULL;
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
 
+#define OPEN9X_PREFIX_URL "http://85.18.253.250/getfw.php?fw="
+const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-stock.txt";
+const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
+const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
+
 void RegisterFirmwares()
 {
-  firmwares.push_back(new FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/th9x.bin","http://th9x.googlecode.com/svn/trunk/src/stamp-th9x.h"));
+  firmwares.push_back(new FirmwareInfo("th9x", QObject::tr("th9x"), new Th9xInterface(), "http://th9x.googlecode.com/svn/trunk/%1.bin", "http://th9x.googlecode.com/svn/trunk/src/stamp-th9x.h"));
 
-  firmwares.push_back(new FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x.hex", ER9X_STAMP));
+  firmwares.push_back(new FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/%1.hex", ER9X_STAMP));
   FirmwareInfo * er9x = firmwares.last();
-  er9x->add_option(new FirmwareInfo("er9x-noht", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-noht.hex", ER9X_STAMP));
-  er9x->add_option(new FirmwareInfo("er9x-jeti", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-jeti.hex", ER9X_STAMP));
-  er9x->add_option(new FirmwareInfo("er9x-ardupilot", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-ardupilot.hex", ER9X_STAMP));
-  er9x->add_option(new FirmwareInfo("er9x-frsky", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky.hex", ER9X_STAMP));
-  er9x->add_option(new FirmwareInfo("er9x-frsky-noht", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-frsky-noht.hex", ER9X_STAMP));
-  er9x->add_option(new FirmwareInfo("er9x-nmea", new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/er9x-nmea.hex", ER9X_STAMP));
+  const char *er9x_options[] = {"frsky", "jeti", "ardupilot", "nmea", NULL};
+  er9x->addOptions(er9x_options);
+  er9x->addOption("noht");
 
-  firmwares.push_back(new FirmwareInfo("gruvin9x-stable-stock", QObject::tr("gruvin9x stable for stock board"), new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-stock.hex"));
-  FirmwareInfo * gruvin9x = firmwares.last();
-  gruvin9x->add_option(new FirmwareInfo("gruvin9x-stable-stock-speaker", new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-std-speaker.hex",ER9X_STAMP));
-  gruvin9x->add_option(new FirmwareInfo("gruvin9x-stable-stock-frsky", new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-nospeaker.hex",ER9X_STAMP));
-  gruvin9x->add_option(new FirmwareInfo("gruvin9x-stable-stock-frsky-speaker", new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x-frsky-speaker.hex",ER9X_STAMP));
-
+  FirmwareInfo * gruvin9x = new FirmwareInfo("gruvin9x-stock", QObject::tr("gruvin9x stable for stock board"), new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/%1.hex");
+  firmwares.push_back(gruvin9x);
+  gruvin9x->addOption("frsky");
+  gruvin9x->addOption("speaker");
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-stock", QObject::tr("gruvin9x trunk for stock board"), new Gruvin9xInterface(BOARD_STOCK)));
-  firmwares.push_back(new FirmwareInfo("gruvin9x-stable-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
+  firmwares.push_back(new FirmwareInfo("gruvin9x-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X)));
 
-  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK));
+  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
@@ -454,7 +456,7 @@ void RegisterFirmwares()
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
 
-  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X));
+  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
@@ -469,7 +471,7 @@ void RegisterFirmwares()
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
 
-  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X));
+  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_STOCK_STAMP);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
@@ -482,7 +484,8 @@ void RegisterFirmwares()
 
   firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
 
-  default_firmware = GetFirmware("open9x-stock-heli-templates-en");
+  default_firmware_id = "open9x-stock-heli-templates-en";
+  default_firmware = GetFirmware(default_firmware_id);
 
   RegisterEepromInterfaces();
 }
@@ -510,15 +513,32 @@ bool LoadEepromXml(RadioData &radioData, QDomDocument &doc)
 FirmwareInfo * GetFirmware(QString id)
 {
   foreach(FirmwareInfo * firmware, firmwares) {
-    if (firmware->id == id)
+    if (id.contains(firmware->id))
       return firmware;
-    foreach(FirmwareInfo * option, firmware->options) {
-      if (option->id == id)
-        return option;
-    }
   }
   return NULL;
 }
+
+void FirmwareInfo::addOption(const char *option)
+{
+  const char *options[] = { option, NULL };
+  addOptions(options);
+}
+
+void FirmwareInfo::addLanguage(const char *lang)
+{
+  languages.push_back(lang);
+}
+
+void FirmwareInfo::addOptions(const char *options[])
+{
+  QList<const char *> opts;
+  for (int i=0; options[i]; i++) {
+    opts.push_back(options[i]);
+  }
+  this->opts.push_back(opts);
+}
+
 
 
 
