@@ -80,15 +80,17 @@ int main(int argc, char *argv[])
 
     RegisterFirmwares();
 
-    QVariant firmware_id = settings.value("firmware", default_firmware->id);
-    FirmwareInfo *firmware = GetFirmware(firmware_id.toString());
-    current_firmware = firmware ? firmware : default_firmware;
+    current_firmware_id = settings.value("firmware", default_firmware_id).toString();
+    current_firmware = GetFirmware(current_firmware_id);
+    if (!current_firmware) {
+      current_firmware = default_firmware;
+      current_firmware_id = default_firmware_id;
+    }
 
-    if(showSplash)
-    {
-        splash->show();
-        splash->showMessage(QObject::tr(""));
-        sleep(SPLASH_TIME);
+    if(showSplash) {
+      splash->show();
+      splash->showMessage(QObject::tr(""));
+      sleep(SPLASH_TIME);
     }
     MainWindow mainWin;
     mainWin.show();

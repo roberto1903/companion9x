@@ -891,10 +891,11 @@ class FirmwareInfo {
     {
     }
 
-    void add_option(FirmwareInfo * option) {
-      option->parent = this;
-      options.push_back(option);
-    }
+    virtual void addLanguage(const char *lang);
+
+    virtual void addOption(const char *option);
+
+    virtual void addOptions(const char *options[]);
 
     QStringList get_options() {
       if (parent)
@@ -911,18 +912,28 @@ class FirmwareInfo {
       return eepromInterface->save(eeprom, radioData, getEepromVersion(revision));
     }
 
+    virtual QString getUrl(const QString &fwId) {
+      if (url.contains("%1"))
+        return url.arg(fwId);
+      else
+        return url;
+    }
+
+    QList<const char *> languages;
+    QList< QList<const char*> > opts;
     FirmwareInfo *parent;
     QString id;
     QString name;
     EEPROMInterface * eepromInterface;
     QString url;
     const char * stamp;
-    QList<FirmwareInfo *> options;
 };
 
 FirmwareInfo * GetFirmware(QString id);
 
+extern QString default_firmware_id;
 extern FirmwareInfo * default_firmware;
+extern QString current_firmware_id;
 extern FirmwareInfo * current_firmware;
 inline FirmwareInfo * GetCurrentFirmware()
 {

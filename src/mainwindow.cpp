@@ -255,18 +255,18 @@ void MainWindow::updateDownloaded()
     }
 }
 
-void MainWindow::downloadLatestFW(FirmwareInfo * firmware)
+void MainWindow::downloadLatestFW(FirmwareInfo * firmware, const QString & firmwareId)
 {
-    QString tmp, ext;
+    QString url, ext;
     QSettings settings("companion9x", "companion9x");
-    tmp = firmware->url;
-    ext = tmp.mid(tmp.lastIndexOf("."));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + firmware->id + ext);
+    url = firmware->getUrl(firmwareId);
+    ext = url.mid(url.lastIndexOf("."));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + firmwareId + ext);
     if (!fileName.isEmpty()) {
-      downloadedFW = firmware->id;
+      downloadedFW = firmwareId;
       downloadedFWFilename = fileName;
       settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
-      downloadDialog * dd = new downloadDialog(this, firmware->url, fileName);
+      downloadDialog * dd = new downloadDialog(this, url, fileName);
       connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
       dd->exec();
     }
