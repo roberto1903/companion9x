@@ -76,7 +76,7 @@ public slots:
     void downloadLatestFW(FirmwareInfo *firmware, const QString & firmwareId);
     
 private slots:
-    void checkForUpdates(bool ignoreSettings=true, FirmwareInfo * fw = NULL);
+    void checkForUpdates(bool ignoreSettings, QString & fwId);
     void checkForUpdateFinished(QNetworkReply * reply);
     void displayWarnings();
     void doAutoUpdates();
@@ -206,7 +206,7 @@ private:
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
     QAction *recentFileActs[MAX_RECENT];
-    FirmwareInfo *fwToUpdate;
+    QString fwToUpdate;
 };
 
 #endif
