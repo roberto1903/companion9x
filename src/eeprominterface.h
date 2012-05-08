@@ -384,6 +384,9 @@ class GeneralSettings {
     uint8_t   switchWarningStates;
     int8_t    beeperLength;
     int8_t    gpsFormat;
+    uint8_t   speakerVolume;
+    uint8_t   backlightBright;
+    int8_t    currentCalib;
 };
 
 class ExpoData {

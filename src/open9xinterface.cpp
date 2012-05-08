@@ -188,7 +188,13 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       return false;
   }
 
-  if (1/*version == 201 || version == 202*/) {
+  if (version == 208 && board == BOARD_ERSKY9X) {
+    if (!loadGeneral<Open9xGeneralData_v208>(radioData.generalSettings)) {
+      std::cout << "ko\n";
+      return false;
+    }
+  }
+  else {
     if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
       std::cout << "ko\n";
       return false;
@@ -257,10 +263,19 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   efile->EeFsCreate(eeprom, size, (board==BOARD_GRUVIN9X && version >= 207) ? 5 : 4);
 
-  Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
-  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
-  if(sz != sizeof(Open9xGeneralData)) {
-    return 0;
+  if (board == BOARD_ERSKY9X) {
+    Open9xArmGeneralData open9xGeneral(radioData.generalSettings, version);
+    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xArmGeneralData));
+    if(sz != sizeof(Open9xArmGeneralData)) {
+      return 0;
+    }
+  }
+  else {
+    Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
+    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
+    if(sz != sizeof(Open9xGeneralData)) {
+      return 0;
+    }
   }
 
   for (int i=0; i<getMaxModels(); i++) {

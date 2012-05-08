@@ -26,6 +26,58 @@
 #define O9X_ARM_NUM_CSW     32 // number of custom switches
 #define O9X_ARM_NUM_FSW     32 // number of functions assigned to switches
 
+PACK(typedef struct t_Open9xGeneralData_v208 {
+  uint8_t   myVers;
+  int16_t   calibMid[7];
+  int16_t   calibSpanNeg[7];
+  int16_t   calibSpanPos[7];
+  uint16_t  chkSum;
+  uint8_t   currModel; //0..15
+  uint8_t   contrast;
+  uint8_t   vBatWarn;
+  int8_t    vBatCalib;
+  int8_t    lightSw;
+  Open9xTrainerData_v201 trainer;
+  uint8_t   view;      //index of subview in main scrren
+  uint8_t   disableThrottleWarning:1;
+  int8_t    switchWarning:2; // -1=down, 0=off, 1=up
+  int8_t    beeperMode:2;
+  uint8_t   spare1:1;
+  uint8_t   disableMemoryWarning:1;
+  uint8_t   disableAlarmWarning:1;
+  uint8_t   stickMode:2;
+  int8_t    timezone:5;
+  uint8_t   optrexDisplay:1;
+  uint8_t   inactivityTimer;
+  uint8_t   throttleReversed:1;
+  uint8_t   minuteBeep:1;
+  uint8_t   preBeep:1;
+  uint8_t   flashBeep:1;
+  uint8_t   disableSplashScreen:1;
+  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  int8_t    hapticMode:2;
+  uint8_t   filterInput;
+  uint8_t   lightAutoOff;
+  uint8_t   templateSetup;  //RETA order according to chout_ar array
+  int8_t    PPM_Multiplier;
+  int8_t    hapticLength;
+  uint8_t   reNavigation;
+  int8_t    beeperLength:3;
+  uint8_t   hapticStrength:3;
+  uint8_t   gpsFormat:1;
+  uint8_t   unexpectedShutdown:1;
+  uint8_t   speakerPitch;
+
+  uint8_t   speakerVolume;
+  uint8_t   backlightBright;
+  int8_t    currentCalib;
+
+  operator GeneralSettings();
+  t_Open9xGeneralData_v208() { memset(this, 0, sizeof(t_Open9xGeneralData_v208)); }
+  t_Open9xGeneralData_v208(GeneralSettings&, int version);
+
+}) Open9xGeneralData_v208;
+
 PACK(typedef struct t_Open9xArmExpoData_v208 {
   uint8_t mode;           // 0=end, 1=pos, 2=neg, 3=both
   uint8_t chn;
@@ -140,6 +192,6 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
 #define LAST_OPEN9X_ARM_EEPROM_VER 208
 
 typedef Open9xArmModelData_v208   Open9xArmModelData;
-typedef Open9xGeneralData_v201    Open9xArmGeneralData;
+typedef Open9xGeneralData_v208    Open9xArmGeneralData;
 
 #endif

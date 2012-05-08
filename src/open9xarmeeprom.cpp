@@ -103,6 +103,111 @@ RawSource open9xArmToSource(int8_t value)
   }
 }
 
+t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int version)
+{
+  memset(this, 0, sizeof(t_Open9xGeneralData_v208));
+
+  myVers = version;
+
+  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+    calibMid[i] = c9x.calibMid[i];
+    calibSpanNeg[i] = c9x.calibSpanNeg[i];
+    calibSpanPos[i] = c9x.calibSpanPos[i];
+  }
+
+  uint16_t sum = 0;
+  for (int i=0; i<12; i++)
+    sum += calibMid[i];
+  chkSum = sum;
+
+  currModel = c9x.currModel;
+  contrast = c9x.contrast;
+  vBatWarn = c9x.vBatWarn;
+  vBatCalib = c9x.vBatCalib;
+  lightSw = c9x.lightSw;
+  trainer = c9x.trainer;
+  view = c9x.view;
+  disableThrottleWarning = c9x.disableThrottleWarning;
+  beeperMode = c9x.beeperMode;
+  switchWarning = c9x.switchWarning;
+  disableMemoryWarning = c9x.disableMemoryWarning;
+  disableAlarmWarning = c9x.disableAlarmWarning;
+  stickMode = (c9x.stickMode & 0x3);
+  timezone = c9x.timezone;
+  optrexDisplay = c9x.optrexDisplay;
+  inactivityTimer = c9x.inactivityTimer;
+  throttleReversed = c9x.throttleReversed;
+  minuteBeep = c9x.minuteBeep;
+  preBeep = c9x.preBeep;
+  flashBeep = c9x.flashBeep;
+  disableSplashScreen = c9x.disableSplashScreen;
+  enableTelemetryAlarm = c9x.enableTelemetryAlarm;
+  hapticMode=c9x.hapticMode;
+  filterInput = c9x.filterInput;
+  lightAutoOff = c9x.lightAutoOff;
+  templateSetup = c9x.templateSetup;
+  PPM_Multiplier = c9x.PPM_Multiplier;
+  beeperLength=c9x.beeperLength;
+  speakerPitch = c9x.speakerPitch;
+  hapticStrength = c9x.hapticStrength;
+  hapticLength=c9x.hapticLength;
+  gpsFormat =  c9x.gpsFormat;
+
+  speakerVolume = c9x.speakerVolume;
+  backlightBright = c9x.backlightBright;
+  currentCalib = c9x.currentCalib;
+}
+
+Open9xGeneralData_v208::operator GeneralSettings ()
+{
+  GeneralSettings result;
+
+  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+    result.calibMid[i] = calibMid[i];
+    result.calibSpanNeg[i] = calibSpanNeg[i];
+    result.calibSpanPos[i] = calibSpanPos[i];
+  }
+
+  result.currModel = currModel;
+  result.contrast = contrast;
+  result.vBatWarn = vBatWarn;
+  result.vBatCalib = vBatCalib;
+  result.lightSw = lightSw;
+  result.trainer = trainer;
+  result.view = view;
+  result.disableThrottleWarning = disableThrottleWarning;
+  result.switchWarning = switchWarning;
+  result.beeperMode = (BeeperMode)beeperMode;
+  result.disableMemoryWarning = disableMemoryWarning;
+  result.disableAlarmWarning = disableAlarmWarning;
+  result.stickMode = (stickMode & 0x3);
+  result.timezone = timezone;
+  result.optrexDisplay = optrexDisplay;
+  result.inactivityTimer = inactivityTimer;
+  result.throttleReversed = throttleReversed;
+  result.minuteBeep = minuteBeep;
+  result.preBeep = preBeep;
+  result.flashBeep = flashBeep;
+  result.disableSplashScreen = disableSplashScreen;
+  result.enableTelemetryAlarm = enableTelemetryAlarm;
+  result.hapticMode = (BeeperMode)hapticMode;
+  result.filterInput = filterInput;
+  result.lightAutoOff = lightAutoOff;
+  result.templateSetup = templateSetup;
+  result.PPM_Multiplier = PPM_Multiplier;
+  result.beeperLength=beeperLength;
+  result.speakerPitch = speakerPitch;
+  result.hapticStrength = hapticStrength;
+  result.hapticLength=hapticLength;
+  result.gpsFormat = gpsFormat;
+
+  result.speakerVolume = speakerVolume;
+  result.backlightBright = backlightBright;
+  result.currentCalib = currentCalib;
+
+  return result;
+}
+
 t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
 {
   mode = c9x.mode;
@@ -391,6 +496,9 @@ t_Open9xArmModelData_v208::operator ModelData ()
       c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
+  for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+    c9x.servoCenter[i] = servoCenter[i];
+  }
 
   return c9x;
 }
@@ -495,6 +603,9 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
+    }
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      servoCenter[i] = c9x.servoCenter[i];
     }
   }
   else {
