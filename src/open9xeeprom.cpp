@@ -1867,6 +1867,9 @@ t_Open9xModelData_v208::operator ModelData ()
       c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
+  for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+    c9x.servoCenter[i] = servoCenter[i];
+  }
 
   return c9x;
 }
@@ -1974,6 +1977,10 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
+    }
+
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      servoCenter[i] = c9x.servoCenter[i];
     }
   }
   else {
