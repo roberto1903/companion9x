@@ -118,6 +118,7 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       }
     }
   }
+  return firmwareChanged();
 }
 
 void preferencesDialog::firmwareChanged()
