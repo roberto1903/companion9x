@@ -1013,7 +1013,7 @@ Mode 4:
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
-        <translation>Il firmware %1 son sembra mai essere stato scaricato.
+        <translation>Il firmware %1 non sembra mai essere stato scaricato.
 E&apos; disponibile la versione %2.
 Volete scaricarla adesso ?</translation>
     </message>
