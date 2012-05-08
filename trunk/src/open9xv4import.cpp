@@ -12,6 +12,7 @@
 #define DECIMALS_DISPLAYED
 #define AUDIO
 #define HAPTIC
+#define AUTOSWITCH
 
 #undef min
 #undef max

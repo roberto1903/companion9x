@@ -16,7 +16,7 @@
 #define PXX
 #define DSM2
 #define DSM2_PPM
-
+#define AUTOSWITCH
 #undef min
 #undef max
 

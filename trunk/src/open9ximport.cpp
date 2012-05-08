@@ -11,6 +11,7 @@
 #define FRSKY_HUB
 #define WS_HOW_HIGH
 #define HAPTIC
+#define AUTOSWITCH
 
 #undef min
 #undef max
