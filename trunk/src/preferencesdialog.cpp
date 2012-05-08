@@ -216,7 +216,8 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
     ui->langCombo->hide();
     ui->langLabel->hide();
   }
-
+  
+  
   int index = 0;
   foreach(QList<const char *> opts, parent->opts) {
     foreach(const char * opt, opts) {
@@ -224,6 +225,7 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
       if (cb) {
         cb->show();
         cb->setText(opt);
+        cb->setToolTip(getTooltip(opt));
         cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
       }
     }
@@ -315,6 +317,63 @@ void preferencesDialog::initSettings()
   }
 #endif  
   firmwareChanged();
+}
+
+QString preferencesDialog::getTooltip(const char * opt) {
+const char * options[]={
+        "frsky",
+        "jeti",
+        "ardupilot",
+        "nmea", 
+        "heli",
+        "templates",
+        "nosplash",
+        "nofp",
+        "audio",
+        "haptic",
+        "PXX",
+        "DSM2",
+        "sdcard",
+        "SOMO",
+        "ppmca",
+        "potscroll",
+        "autoswitch",
+        "pgbar",
+        "imperial",
+        "speaker",
+        "noht",
+        NULL };
+  
+  QString tooltip[]={
+        tr("Support for frsky telemetry mod"),
+        tr("Support for jeti telemetry mod"),
+        tr("Sopport for receiving ardupilot data"),
+        tr("Sopport for receiving NMEA data"), 
+        tr("Enable heli menu and cyclic mix support"),
+        tr("Enable template menu"),
+        tr("No splash screen"),
+        tr("No flight phases"),
+        tr("Support for radio modiefied with regular speaker"),
+        tr("Used if you have modified your radio with haptic mode"),
+        tr("Support of frsky PXX protocol"),
+        tr("Support for DSM2 modules"),
+        tr("Sopport for SD memory card"),
+        tr("Support for sound module"),
+        tr("PPM center adjustment in limits"),
+        tr("Pots use in menus navigation"),
+        tr("In model setup menus automatically set switch by moving some of them"),
+        tr("EEprom write Progress bar"),
+        tr("Imperial units"),
+        tr("Support for radio modiefied with regular speaker"),
+        tr("Disable heli and templates menus"),
+        tr("") };
+  int i;
+  for (i=0; options[i]; i++) {
+    if (strcmp(options[i],opt)==0) {
+      break;
+    }
+  }
+  return tooltip[i];
 }
 
 void preferencesDialog::populateLocale()

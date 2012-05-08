@@ -29,6 +29,7 @@ private:
     void populateFirmwareOptions(const FirmwareInfo *);
     FirmwareInfo * getFirmware(QString &fwId);
     void initSettings();
+    QString getTooltip(const char * opt);
 
 private slots:
     void shrink();
