@@ -134,7 +134,7 @@ void preferencesDialog::firmwareChanged()
 
   QSettings settings("companion9x", "companion9x");
   settings.beginGroup("FwRevisions");
-  int fwrev = settings.value(fw->id, -1).toInt();
+  int fwrev = settings.value(fwId, -1).toInt();
   settings.endGroup();
   if (fwrev != -1) {
     ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
