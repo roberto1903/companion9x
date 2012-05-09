@@ -152,7 +152,7 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
   }
 }
 
-int Gruvin9xStableInterface::hasProtocol(Protocol proto)
+int Gruvin9xStableInterface::isAvailable(Protocol proto)
 {
   switch (proto) {
     case PPM:

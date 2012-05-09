@@ -194,7 +194,7 @@ int Th9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Th9xInterface::hasProtocol(Protocol proto)
+int Th9xInterface::isAvailable(Protocol proto)
 {
   switch (proto) {
     case PPM:

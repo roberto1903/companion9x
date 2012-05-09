@@ -740,6 +740,14 @@ enum Capability {
  HasBrightness,
 };
 
+enum UseContext {
+  DefaultContext,
+  TimerContext,
+  FlightPhaseContext,
+  MixerContext,
+  ExpoContext,
+};
+
 class SimulatorInterface;
 class EEPROMInterface
 {
@@ -767,7 +775,11 @@ class EEPROMInterface
     
     virtual int getCapability(const Capability) = 0;
     
-    virtual int hasProtocol(Protocol proto) = 0;
+    virtual int isAvailable(Protocol proto) = 0;
+
+    virtual bool isAvailable(const RawSwitch & swtch, UseContext context) { return true; }
+
+    virtual bool isAvailable(const RawSource & source, UseContext context) { return true; }
 
     virtual SimulatorInterface * getSimulator() = 0;
 
