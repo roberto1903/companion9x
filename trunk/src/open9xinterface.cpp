@@ -448,7 +448,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case PPMCenter:
       return 1;
     case OptrexDisplay:
-      if  (BOARD_ERSKY9X) {
+      if  (board==BOARD_ERSKY9X) {
         return 1;
       } else {
         return 0;
@@ -456,19 +456,19 @@ int Open9xInterface::getCapability(const Capability capability)
     case HasVario:
       return 1;
     case HasCurrentCalibration:
-      if  (BOARD_ERSKY9X) {
+      if  (board==BOARD_ERSKY9X) {
         return 1;
       } else {
         return 0;
       }
     case HasVolume:
-      if  (BOARD_ERSKY9X) {
+      if  (board==BOARD_ERSKY9X) {
         return 1;
       } else {
         return 0;
       }
     case HasBrightness:
-      if  (BOARD_ERSKY9X) {
+      if  (board==BOARD_ERSKY9X) {
         return 1;
       } else {
         return 0;
