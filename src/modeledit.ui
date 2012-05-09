@@ -14860,7 +14860,7 @@
        </item>
        <item row="3" column="0" colspan="3">
         <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1">
-         <item alignment="Qt::AlignTop">
+         <item>
           <widget class="QGroupBox" name="groupBox_7">
            <property name="title">
             <string>Serial Protocol</string>
@@ -14959,7 +14959,7 @@
            </layout>
           </widget>
          </item>
-         <item alignment="Qt::AlignTop">
+         <item>
           <widget class="QGroupBox" name="altimetryGB">
            <property name="title">
             <string>Altimetry / Vario</string>
