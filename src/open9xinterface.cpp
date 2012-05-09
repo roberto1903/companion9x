@@ -453,6 +453,26 @@ int Open9xInterface::getCapability(const Capability capability)
       } else {
         return 0;
       }
+    case HasVario:
+      return 1;
+    case HasCurrentCalibration:
+      if  (BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
+    case HasVolume:
+      if  (BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
+    case HasBrightness:
+      if  (BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
     default:
       return 0;
   }

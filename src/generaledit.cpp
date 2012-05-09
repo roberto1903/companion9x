@@ -45,14 +45,29 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->gpsFormatCB->hide();
       ui->gpsFormatLabel->hide();
     }
+    ui->gpsFormatCB->setCurrentIndex(g_eeGeneral.gpsFormat);
+    ui->timezoneSB->setValue(g_eeGeneral.timezone);
+    
     if (!GetEepromInterface()->getCapability(OptrexDisplay)) {
       ui->label_displayType->hide();
       ui->displayTypeCB->setDisabled(true);
       ui->displayTypeCB->hide();
     }
-
-    ui->gpsFormatCB->setCurrentIndex(g_eeGeneral.gpsFormat);
-    ui->timezoneSB->setValue(g_eeGeneral.timezone);
+    if (!GetEepromInterface()->getCapability(HasVolume)) {
+      ui->volume_SB->hide();
+      ui->volume_SB->setDisabled(true);
+      ui->label_volume->hide();
+    }
+    if (!GetEepromInterface()->getCapability(HasBrightness)) {
+      ui->BLBright_SB->hide();
+      ui->BLBright_SB->setDisabled(true);
+      ui->label_BLBright->hide();
+    }
+    if (!GetEepromInterface()->getCapability(HasCurrentCalibration)) {
+      ui->CurrentCalib_SB->hide();
+      ui->CurrentCalib_SB->setDisabled(true);
+      ui->label_CurrentCalib->hide();
+    }
     
     if (GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
         ui->tabWidget->removeTab(2);
@@ -156,16 +171,18 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     
     ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
+    ui->volume_SB->setValue(g_eeGeneral.speakerVolume);
     ui->beeperlenCB->setCurrentIndex(g_eeGeneral.beeperLength+2);
     ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
     ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
     ui->hapticmodeCB->setCurrentIndex(g_eeGeneral.hapticMode+2);
     ui->PotScrollEnableChkB->setChecked(!g_eeGeneral.disablePotScroll);
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
-    
+    ui->BLBright_SB->setValue(100-g_eeGeneral.backlightBright);
     ui->contrastSB->setValue(g_eeGeneral.contrast);
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
     ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
+    ui->CurrentCalib_SB->setValue((double)g_eeGeneral.currentCalib);
     ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
     ui->backlightswCB->setCurrentIndex(g_eeGeneral.lightSw+MAX_DRSWITCH/2);
     ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
@@ -632,6 +649,24 @@ void GeneralEdit::on_battCalib_editingFinished()
 {
     g_eeGeneral.vBatCalib = ui->battCalib->value()*10;
     ui->battcalibDSB->setValue(ui->battCalib->value());
+    updateSettings();
+}
+
+void GeneralEdit::on_volume_SB_editingFinished()
+{
+    g_eeGeneral.speakerVolume = ui->volume_SB->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_BLBright_SB_editingFinished()
+{
+    g_eeGeneral.backlightBright = 100 - ui->BLBright_SB->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_CurrentCalib_SB_editingFinished()
+{
+    g_eeGeneral.currentCalib = ui->CurrentCalib_SB->value();
     updateSettings();
 }
 

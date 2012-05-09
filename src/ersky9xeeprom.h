@@ -98,7 +98,13 @@ PACK(typedef struct t_Ersky9xGeneral {
 
   char      ownerName[10];
   uint8_t switchWarningStates;
-
+  uint8_t volume ;
+  uint8_t bright ; // backlight
+  uint8_t res[1];
+  uint8_t mAh_alarm ;
+  uint16_t mAh_used ;
+  uint16_t run_time ;
+  int8_t current_calib ;
   operator GeneralSettings();
   t_Ersky9xGeneral();
   t_Ersky9xGeneral(GeneralSettings&);

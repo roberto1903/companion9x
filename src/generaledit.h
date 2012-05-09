@@ -38,6 +38,7 @@ private slots:
     void on_hapticStrengthSB_editingFinished();
     void on_soundModeCB_currentIndexChanged(int index);
     void on_beeperlenCB_currentIndexChanged(int index);
+    void on_volume_SB_editingFinished();
     void on_hapticmodeCB_currentIndexChanged(int index);
     void on_hapticLengthCB_currentIndexChanged(int index);
     void on_PPM_MultiplierDSB_editingFinished();
@@ -50,6 +51,7 @@ private slots:
     void on_gpsFormatCB_currentIndexChanged(int index);
     void on_tabWidget_currentChanged(int index);
     void on_displayTypeCB_currentIndexChanged(int index);
+    void on_BLBright_SB_editingFinished();
     
     void on_trnMode_1_currentIndexChanged(int index);
     void on_trnChn_1_currentIndexChanged(int index);
@@ -69,6 +71,7 @@ private slots:
     void on_trnWeight_4_editingFinished();
 
     void on_battCalib_editingFinished();
+    void on_CurrentCalib_SB_editingFinished();
 
     void on_ana1Neg_editingFinished();
     void on_ana2Neg_editingFinished();

@@ -559,6 +559,7 @@ class FrSkyData {
     uint8_t usrProto;
     uint8_t imperial;
     uint8_t blades;
+    uint8_t FrSkyGpsAlt;
     uint8_t csField[8];
     FrSkyBarData bars[4];
     FrSkyRSSIAlarm rssiAlarms[2];
@@ -664,6 +665,7 @@ class ModelData {
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
     uint8_t   modelId;
+    int8_t tmrModeB;
     
     /* FrSky */    
     FrSkyData frsky;
@@ -686,6 +688,8 @@ enum Capability {
  FlightPhases,
  Mixes,
  Timers,
+ NoTimer2,
+ TimerTriggerB,
  FuncSwitches,
  CustomSwitches,
  RotaryEncoders,
@@ -726,9 +730,14 @@ enum Capability {
  TelemetryRSSIModel,
  TelemetryAlarm,
  TelemetryTimeshift,
+ HasAltitudeSel,
+ HasVario,
  FSSwitch,
  DiffMixers,
  PPMCenter,
+ HasCurrentCalibration,
+ HasVolume,
+ HasBrightness,
 };
 
 class SimulatorInterface;

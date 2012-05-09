@@ -310,9 +310,17 @@ void ModelEdit::tabModelEditSetup()
       ui->label_thrExpo->hide();
       ui->thrExpoChkB->hide();
     }
+    
     if (!GetEepromInterface()->getCapability(HasTTrace)) {
       ui->label_ttrace->hide();
       ui->ttraceCB->hide();
+    }
+
+    if (!GetEepromInterface()->getCapability(TimerTriggerB)) {
+      ui->triggerB_CB->hide();
+      ui->triggerB_label->hide();
+    } else {
+      populateTimerSwitchCB(ui->triggerB_CB,g_model.tmrModeB);
     }
     
     int index=0;
@@ -333,11 +341,19 @@ void ModelEdit::tabModelEditSetup()
     protocolEditLock=false;  
     ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
     //timer2 mode direction value
-    populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
-    min = g_model.timers[1].val/60;
-    sec = g_model.timers[1].val%60;
-    ui->timer2ValTE->setTime(QTime(0,min,sec));
-    ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
+    if (GetEepromInterface()->getCapability(NoTimer2)) {
+      ui->timer2DirCB->hide();
+      ui->timer2ValTE->hide();
+      ui->timer2DirCB->hide();
+      ui->timer2ModeCB->hide();
+      ui->label_timer2->hide();
+    } else {
+      populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
+      min = g_model.timers[1].val/60;
+      sec = g_model.timers[1].val%60;
+      ui->timer2ValTE->setTime(QTime(0,min,sec));
+      ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
+    }
 
     //trim inc, thro trim, thro expo, instatrim
     ui->trimIncCB->setCurrentIndex(g_model.trimInc);
@@ -1303,6 +1319,34 @@ void ModelEdit::tabTelemetry()
   if (!GetEepromInterface()->getCapability(TelemetryBars)) {
     ui->groupBox_4->hide();
   }
+  if (!GetEepromInterface()->getCapability(HasAltitudeSel)) {
+    ui->AltitudeGPS_CB->hide();
+  } else {
+    ui->AltitudeGPS_CB->setChecked(g_model.frsky.FrSkyGpsAlt);
+  }
+  if (!GetEepromInterface()->getCapability(HasVario)) {
+    ui->VarioHS->invalidate();
+    ui->varioLimitMax_DSB->hide();
+    ui->varioLimitMinOff_ChkB->hide();
+    ui->varioLimitMin_DSB->hide();
+    ui->varioLimit_label->hide();
+    ui->varioSourceCB->hide();
+    ui->varioSource_label->hide();
+  } else {
+    ui->varioLimitMax_DSB->setValue((g_model.frsky.varioSpeedUpMin/10.0)-1);
+    if (g_model.frsky.varioSpeedDownMin==0) {
+      ui->varioLimitMinOff_ChkB->setChecked(true);
+      ui->varioLimitMin_DSB->setValue(-10);
+      ui->varioLimitMin_DSB->setDisabled(true);
+    } else {
+      ui->varioLimitMinOff_ChkB->setChecked(false);
+      ui->varioLimitMin_DSB->setValue((g_model.frsky.varioSpeedDownMin/10.0)-10);
+    }
+    ui->varioSourceCB->setCurrentIndex(g_model.frsky.varioSource);
+  }
+  if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
+    ui->altimetryGB->hide();
+  }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
   } else {
@@ -1576,6 +1620,12 @@ void ModelEdit::on_timer1DirCB_currentIndexChanged(int index)
 void ModelEdit::on_timer1ValTE_editingFinished()
 {
     g_model.timers[0].val = ui->timer1ValTE->time().minute()*60 + ui->timer1ValTE->time().second();
+    updateSettings();
+}
+
+void ModelEdit::on_triggerB_CB_currentIndexChanged(int index)
+{
+    g_model.tmrModeB = TimerMode(index-TMR_NUM_OPTION);
     updateSettings();
 }
 
@@ -2216,6 +2266,50 @@ void ModelEdit::on_rssiAlarm1SB_editingFinished() {
 void ModelEdit::on_rssiAlarm2SB_editingFinished() {
   if (telemetryLock) return;
   g_model.frsky.rssiAlarms[1].value=(ui->rssiAlarm2SB->value());
+  updateSettings();    
+}
+
+void ModelEdit::on_AltitudeGPS_CB_toggled(bool checked)
+{
+  if (telemetryLock) return;
+  g_model.frsky.FrSkyGpsAlt = checked;
+  updateSettings();
+  //AltitudeGPS_CB
+}
+
+void ModelEdit::on_varioSourceCB_currentIndexChanged(int index)
+{
+  if (telemetryLock) return;
+  g_model.frsky.varioSource = index;
+  updateSettings();
+}
+
+void ModelEdit::on_varioLimitMin_DSB_editingFinished()
+{
+  if (telemetryLock) return;
+  g_model.frsky.varioSpeedDownMin= ((ui->varioLimitMin_DSB->value()+10)*10)+1;
+  updateSettings();    
+}
+
+void ModelEdit::on_varioLimitMinOff_ChkB_toggled(bool checked)
+{
+  if (telemetryLock) return;
+  g_model.frsky.varioSpeedDownMin = checked;
+  if (!checked) {
+    telemetryLock=true;
+    ui->varioLimitMin_DSB->setValue(-10);
+    ui->varioLimitMin_DSB->setEnabled(true);
+    telemetryLock=false;
+  } else {
+    ui->varioLimitMin_DSB->setDisabled(true);
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_varioLimitMax_DSB_editingFinished()
+{
+  if (telemetryLock) return;
+  g_model.frsky.varioSpeedUpMin= (ui->varioLimitMax_DSB->value()+1)*10;
   updateSettings();    
 }
 
