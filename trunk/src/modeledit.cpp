@@ -328,7 +328,7 @@ void ModelEdit::tabModelEditSetup()
     protocolEditLock=true; 
     ui->protocolCB->clear();
     for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
-      if (GetEepromInterface()->hasProtocol(prot_list[i].prot_num)) {
+      if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
         ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
         if (g_model.protocol==prot_list[i].prot_num) {
           selindex=index;

@@ -478,7 +478,7 @@ int Open9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Open9xInterface::hasProtocol(Protocol proto)
+int Open9xInterface::isAvailable(Protocol proto)
 {
   switch (proto) {
     case PPM:

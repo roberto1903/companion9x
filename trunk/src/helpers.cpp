@@ -166,7 +166,7 @@ QString getTimerMode(int tm) {
 
 }
 
-void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr, UseContext context)
 {
   RawSwitch item;
 
@@ -187,30 +187,40 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr)
 
   if (attr & POPULATE_ONOFF) {
     item = RawSwitch(SWITCH_TYPE_OFF);
-    b->addItem(item.toString(), item.toValue());
-    if (item == value) b->setCurrentIndex(b->count()-1);
+    if (GetEepromInterface()->isAvailable(item, context)) {
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
     item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == value) b->setCurrentIndex(b->count()-1);
+    if (GetEepromInterface()->isAvailable(item, context)) {
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   for (int i=-9; i<0; i++) {
     item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+    if (GetEepromInterface()->isAvailable(item, context)) {
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+  }
+
+  item = RawSwitch(SWITCH_TYPE_NONE);
+  if (GetEepromInterface()->isAvailable(item, context)) {
     b->addItem(item.toString(), item.toValue());
     if (item == value) b->setCurrentIndex(b->count()-1);
   }
 
-  item = RawSwitch(SWITCH_TYPE_NONE);
-  b->addItem(item.toString(), item.toValue());
-  if (item == value) b->setCurrentIndex(b->count()-1);
-
   for (int i=1; i<=9; i++) {
     item = RawSwitch(SWITCH_TYPE_SWITCH, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == value) b->setCurrentIndex(b->count()-1);
+    if (GetEepromInterface()->isAvailable(item, context)) {
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
