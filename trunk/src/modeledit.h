@@ -240,6 +240,11 @@ private slots:
     void on_rssiAlarm2CB_currentIndexChanged(int index);
     void on_rssiAlarm1SB_editingFinished();
     void on_rssiAlarm2SB_editingFinished();
+    void on_AltitudeGPS_CB_toggled(bool checked);
+    void on_varioSourceCB_currentIndexChanged(int index);
+    void on_varioLimitMin_DSB_editingFinished();
+    void on_varioLimitMinOff_ChkB_toggled(bool checked);
+    void on_varioLimitMax_DSB_editingFinished();
     void telBarCBcurrentIndexChanged(int index);
     void telMaxSBeditingFinished();
     void telMinSBeditingFinished();
@@ -252,6 +257,7 @@ private slots:
     void on_timer1DirCB_currentIndexChanged(int index);
     void on_timer1ModeCB_currentIndexChanged(int index);
     void on_timer1ValTE_editingFinished();
+    void on_triggerB_CB_currentIndexChanged(int index);
     void on_timer2DirCB_currentIndexChanged(int index);
     void on_timer2ModeCB_currentIndexChanged(int index);
     void on_timer2ValTE_editingFinished();

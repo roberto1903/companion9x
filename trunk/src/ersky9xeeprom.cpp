@@ -114,7 +114,9 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   lightOnStickMove = c9x.lightOnStickMove;
   speakerMode = c9x.speakerMode;
   switchWarningStates =c9x.switchWarningStates;
-  
+  volume = c9x.speakerVolume;
+  bright = c9x.backlightBright;
+  current_calib = c9x.currentCalib;
 }
 
 Ersky9xGeneral::operator GeneralSettings ()
@@ -171,7 +173,10 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.hapticStrength = hapticStrength;
   result.lightOnStickMove = lightOnStickMove;
   result.speakerMode = speakerMode;
-  result.switchWarningStates =switchWarningStates;
+  result.switchWarningStates = switchWarningStates;
+  result.speakerVolume = volume;
+  result.backlightBright = bright ;
+  result.currentCalib = current_calib;
   return result;
 }
 
@@ -619,6 +624,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     frsky = c9x.frsky;
     FrSkyUsrProto = c9x.frsky.usrProto;
     FrSkyImperial = c9x.frsky.imperial;
+    FrSkyGpsAlt=c9x.frsky.FrSkyGpsAlt;
   }
 }
 
@@ -729,6 +735,7 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.frsky = frsky;
   c9x.frsky.usrProto=FrSkyUsrProto;
   c9x.frsky.imperial=FrSkyImperial;
+  c9x.frsky.FrSkyGpsAlt=FrSkyGpsAlt;
   return c9x;
 }
 

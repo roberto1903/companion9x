@@ -254,6 +254,18 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return 1;
     case OptrexDisplay:
       return 1;
+    case NoTimer2:
+      return 1;
+    case TimerTriggerB:
+      return 1;
+    case HasAltitudeSel:
+      return 1;
+    case HasCurrentCalibration:
+      return 1;
+    case HasVolume:
+      return 1;
+    case HasBrightness:
+      return 1;
     default:
       return 0;
   }

@@ -630,10 +630,11 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 
     for (int i=0; i<ER9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
-    
+    tmrModeB = c9x.tmrModeB;
     frsky = c9x.frsky;
     FrSkyUsrProto = c9x.frsky.usrProto;
     FrSkyImperial = c9x.frsky.imperial;
+    FrSkyGpsAlt = c9x.frsky.FrSkyGpsAlt;
   }
 }
 
@@ -744,13 +745,14 @@ t_Er9xModelData::operator ModelData ()
       c9x.curves9[i][j] = curves9[i][j];
   for (int i=0; i<ER9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-
+  c9x.tmrModeB=tmrModeB;
   for (int i=0; i<ER9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;
   c9x.frsky.usrProto=FrSkyUsrProto;
   c9x.frsky.imperial=FrSkyImperial;
+  c9x.frsky.FrSkyGpsAlt=FrSkyGpsAlt;
   return c9x;
 }
 
