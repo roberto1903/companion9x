@@ -257,10 +257,11 @@ private slots:
     void on_timer1DirCB_currentIndexChanged(int index);
     void on_timer1ModeCB_currentIndexChanged(int index);
     void on_timer1ValTE_editingFinished();
-    void on_triggerB_CB_currentIndexChanged(int index);
+    void on_timer1ModeBCB_currentIndexChanged(int index);
     void on_timer2DirCB_currentIndexChanged(int index);
     void on_timer2ModeCB_currentIndexChanged(int index);
     void on_timer2ValTE_editingFinished();
+    void on_timer2ModeBCB_currentIndexChanged(int index);
     void on_modelNameLE_editingFinished();
 
     void on_phases_currentChanged(int index);

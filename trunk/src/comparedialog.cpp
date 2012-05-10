@@ -561,7 +561,7 @@ void compareDialog::printPhases()
     str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
-  for (i=0; i<MAX_PHASES; i++) {
+  for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
     PhaseData *pd1=&g_model1->phaseData[i];
     PhaseData *pd2=&g_model2->phaseData[i];
     str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
@@ -595,7 +595,7 @@ void compareDialog::printPhases()
     str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
   }
   str.append("</tr>");
-  for (i=0; i<MAX_PHASES; i++) {
+  for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
     PhaseData *pd1=&g_model1->phaseData[i];
     PhaseData *pd2=&g_model2->phaseData[i];
     str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
@@ -630,7 +630,7 @@ void compareDialog::printLimits()
   str.append("<tr><td colspan=2><h2>"+tr("Limits")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
   str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
-  for(int i=0; i<NUM_CHNOUT; i++) {
+  for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     str.append("<tr>");
     str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
     color=getColor1(g_model1->limitData[i].offset,g_model2->limitData[i].offset);
@@ -669,7 +669,7 @@ void compareDialog::printExpos()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Expo/Dr Settings"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
-  for(uint8_t i=0; i<NUM_CHNOUT; i++) {
+  for(uint8_t i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     if (ChannelHasExpo(g_model1->expoData, i) || ChannelHasExpo(g_model2->expoData, i)) {
       str.append("<tr>");
       str.append("<td width=\"45%\">");
@@ -757,12 +757,12 @@ void compareDialog::printMixers()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Mixers"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
-  for(uint8_t i=1; i<=NUM_CHNOUT; i++) {
+  for(uint8_t i=1; i<=GetEepromInterface()->getCapability(Outputs); i++) {
     if (ChannelHasMix(g_model1->mixData, i) || ChannelHasMix(g_model2->mixData, i)) {
       str.append("<tr>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
-      for (int j=0; j<MAX_MIXERS; j++) {
+      for (int j=0; j<GetEepromInterface()->getCapability(Mixes); j++) {
         if (g_model1->mixData[j].destCh==i) {
           if (ModelHasMix(g_model2->mixData, g_model1->mixData[j])) {
             color="grey";
@@ -813,7 +813,7 @@ void compareDialog::printMixers()
       str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+tr("CH")+QString("%1</b></td>").arg(i,2,10,QChar('0')));
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
-      for (int j=0; j<MAX_MIXERS; j++) {
+      for (int j=0; j<GetEepromInterface()->getCapability(Mixes); j++) {
         if (g_model2->mixData[j].destCh==i) {
           if (ModelHasMix(g_model1->mixData, g_model2->mixData[j])) {
             color="grey";
@@ -952,7 +952,7 @@ void compareDialog::printSwitches()
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
-    for(int i=0; i<NUM_CSW; i++) {
+    for(int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
       
       QString sw1=cSwitchString(&g_model1->customSw[i]);
       QString sw2=cSwitchString(&g_model2->customSw[i]);
@@ -986,7 +986,7 @@ void compareDialog::printFSwitches()
   str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
   str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
   str.append("</tr>");
-  for(int i=0; i<NUM_FSW; i++)
+  for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
   {
     if (g_model1->funcSw[i].swtch.type || g_model2->funcSw[i].swtch.type) {
       if ((g_model1->funcSw[i].swtch != g_model2->funcSw[i].swtch) || (g_model1->funcSw[i].func!=g_model2->funcSw[i].func)) {
@@ -1035,7 +1035,7 @@ void compareDialog::printSafetySwitches()
   str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
   str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
   str.append("</tr>");
-  for(int i=0; i<NUM_CHNOUT; i++)
+  for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
   {
     if ((g_model1->safetySw[i].swtch!=0)||(g_model2->safetySw[i].swtch!=0)) {
       if ((g_model1->safetySw[i].swtch!=g_model2->safetySw[i].swtch)||(g_model1->safetySw[i].val!=g_model2->safetySw[i].val)) {
