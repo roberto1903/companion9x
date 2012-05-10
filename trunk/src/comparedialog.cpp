@@ -1037,7 +1037,7 @@ void compareDialog::printSafetySwitches()
   str.append("</tr>");
   for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
   {
-    if ((g_model1->safetySw[i].swtch!=0)||(g_model2->safetySw[i].swtch!=0)) {
+    if ((g_model1->safetySw[i].swtch.type!=SWITCH_TYPE_NONE)||(g_model2->safetySw[i].swtch.type!=SWITCH_TYPE_NONE)) {
       if ((g_model1->safetySw[i].swtch!=g_model2->safetySw[i].swtch)||(g_model1->safetySw[i].val!=g_model2->safetySw[i].val)) {
         color1="green";
         color2="red";

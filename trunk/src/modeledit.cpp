@@ -1025,8 +1025,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSwitchCB(cswitchSource1[i], g_model.customSw[i].val1);
-        populateSwitchCB(cswitchSource2[i], g_model.customSw[i].val2);
+        populateSwitchCB(cswitchSource1[i], RawSwitch(g_model.customSw[i].val1));
+        populateSwitchCB(cswitchSource2[i], RawSwitch(g_model.customSw[i].val2));
         break;
       case CS_VCOMP:
         cswitchSource1[i]->setVisible(true);
@@ -1281,7 +1281,7 @@ void ModelEdit::functionSwitchesEdited()
     switchEditLock = true;
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<num_fsw; i++) {
-      g_model.funcSw[i].swtch = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+      g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
       if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
@@ -1590,7 +1590,7 @@ void ModelEdit::phaseSwitch_currentIndexChanged()
 {
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int phase = comboBox->objectName().mid(5,1).toInt();
-  g_model.phaseData[phase].swtch = comboBox->itemData(comboBox->currentIndex()).toInt();
+  g_model.phaseData[phase].swtch = RawSwitch(comboBox->itemData(comboBox->currentIndex()).toInt());
   updateSettings();
 }
 
@@ -3373,7 +3373,7 @@ void ModelEdit::safetySwitchesEdited()
 {
     for(int i=0; i<NUM_SAFETY_CHNOUT; i++)
     {
-        g_model.safetySw[i].swtch = safetySwitchSwtch[i]->itemData(safetySwitchSwtch[i]->currentIndex()).toInt();
+        g_model.safetySw[i].swtch = RawSwitch(safetySwitchSwtch[i]->itemData(safetySwitchSwtch[i]->currentIndex()).toInt());
         g_model.safetySw[i].val   = safetySwitchValue[i]->value();
     }
     updateSettings();
