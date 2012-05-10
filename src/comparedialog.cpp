@@ -577,7 +577,7 @@ void compareDialog::printPhases()
         str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->trim[k]).arg(color));
       } else {
         color=getColor1(pd1->trimRef[k],pd2->trimRef[k]);
-        str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>"+tr("FP")+QString("%1</font></td>").arg(pd1->trimRef[k]).arg(color));
+        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(pd1->trimRef[k]));
       }
     }
     color=getColor1(pd1->swtch,pd2->swtch);
@@ -611,7 +611,7 @@ void compareDialog::printPhases()
         str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->trim[k]).arg(color));
       } else {
         color=getColor2(pd1->trimRef[k],pd2->trimRef[k]);
-        str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>"+tr("FP")+QString("%1</font></td>").arg(pd2->trimRef[k]).arg(color));
+        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(pd2->trimRef[k]));
       }
     }
     color=getColor2(pd1->swtch,pd2->swtch);
@@ -646,7 +646,7 @@ void compareDialog::printLimits()
   str.append("</table></td>");
   str.append("<td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
   str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
-  for(int i=0; i<NUM_CHNOUT; i++) {
+  for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     str.append("<tr>");
     str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
     color=getColor2(g_model1->limitData[i].offset,g_model2->limitData[i].offset);
