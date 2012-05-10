@@ -150,7 +150,7 @@ t_Open9xV4MixData_v207::operator MixData ()
     }
     c9x.weight = weight;
     c9x.differential = differential*2;
-    c9x.swtch = swtch;
+    c9x.swtch = open9xToSwitch(swtch);
     c9x.curve = curve;
     c9x.delayUp = delayUp;
     c9x.delayDown = delayDown;

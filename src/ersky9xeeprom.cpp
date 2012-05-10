@@ -281,7 +281,7 @@ t_Ersky9xMixData::operator MixData ()
     else {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
     }
-    c9x.swtch = (mltpx == MLTPX_REP ? swtch : 0);
+    c9x.swtch = er9xToSwitch(mltpx == MLTPX_REP ? swtch : 0);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -594,7 +594,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
         for (int mode=0; mode<2; mode++) {
           for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
             if (c9x.expoData[e].chn == i && !c9x.expoData[e].phase) {
-              if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xFromSwitch(swtch1) || c9x.expoData[e].swtch == er9xFromSwitch(swtch2)) {
+              if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xToSwitch(swtch1) || c9x.expoData[e].swtch == er9xToSwitch(swtch2)) {
                 if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
                   expoData[i].expo[pos][0][mode] = c9x.expoData[e].expo;
                   expoData[i].expo[pos][1][mode] = c9x.expoData[e].weight - 100;
@@ -668,7 +668,7 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.ppmDelay = 300 + 50 * ppmDelay;
   c9x.funcSw[0].func = FuncTrims2Offsets;
   if (trimSw) {
-    c9x.funcSw[0].swtch = trimSw;
+    c9x.funcSw[0].swtch = er9xToSwitch(trimSw);
   }
   c9x.beepANACenter = beepANACenter;
   c9x.pulsePol = pulsePol;
@@ -693,11 +693,11 @@ t_Ersky9xModelData::operator ModelData ()
       if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
         break;
       if (expoData[ch].drSw1 && !expoData[ch].drSw2) {
-        c9x.expoData[e].swtch = (dr == 0 ? expoData[ch].drSw1 : 0);
+        c9x.expoData[e].swtch = er9xToSwitch(dr == 0 ? expoData[ch].drSw1 : 0);
         pos = dr == 0 ? 1 : 0;
       }
       else {
-        c9x.expoData[e].swtch = (dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
+        c9x.expoData[e].swtch = er9xToSwitch(dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
       }
       c9x.expoData[e].chn = ch;
       c9x.expoData[e].expo = expoData[ch].expo[pos][0][0];

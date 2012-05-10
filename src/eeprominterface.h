@@ -285,7 +285,7 @@ class RawSwitch {
     {
     }
 
-    RawSwitch(int value):
+    explicit RawSwitch(int value):
       type(RawSwitchType(abs(value)/256)),
       index(value >= 0 ? abs(value)%256 : -(abs(value)%256))
     {

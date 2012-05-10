@@ -334,7 +334,6 @@ t_Open9xMixData_v201::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
-  c9x.swtch = swtch;
   c9x.swtch = open9xToSwitch(swtch);
 
   if (srcRaw == 0) {

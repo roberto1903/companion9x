@@ -26,7 +26,8 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
-    populateSwitchCB(ui->backlightswCB,g_eeGeneral.lightSw);
+#warning TODO
+    // populateSwitchCB(ui->backlightswCB, g_eeGeneral.lightSw);
 
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
@@ -120,11 +121,14 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swtchCB_2->hide();
       ui->swtchCB_3->hide();
       ui->swtchCB_4->hide();
-    } else {
-      populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
+    }
+    else {
+#warning TODO
+      /*populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
       populateSwitchCB(ui->swtchCB_2,g_eeGeneral.trainer.mix[1].swtch);
       populateSwitchCB(ui->swtchCB_3,g_eeGeneral.trainer.mix[2].swtch);
       populateSwitchCB(ui->swtchCB_4,g_eeGeneral.trainer.mix[3].swtch);
+      */
     }
     if (!GetEepromInterface()->getCapability(BLonStickMove)) {
       ui->blOnStickMoveSB->setDisabled(true);
