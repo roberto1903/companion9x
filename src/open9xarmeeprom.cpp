@@ -124,7 +124,7 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = open9xArmFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -172,7 +172,7 @@ Open9xGeneralData_v208::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = open9xArmToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;

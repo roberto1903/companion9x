@@ -8,6 +8,28 @@
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
+RawSwitch gruvin9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
+int8_t gruvin9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
 t_Gruvin9xTrainerMix_v103::operator TrainerMix()
 {
   TrainerMix c9x;
@@ -79,7 +101,7 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = gruvin9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -137,7 +159,7 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = gruvin9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -180,7 +202,7 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = gruvin9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -207,28 +229,6 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
 t_Gruvin9xExpoData::t_Gruvin9xExpoData()
 {
   memset(this, 0, sizeof(t_Gruvin9xExpoData));
-}
-
-int8_t gruvin9xFromSwitch(const RawSwitch & sw)
-{
-  switch (sw.type) {
-    case SWITCH_TYPE_SWITCH:
-      return sw.index;
-    case SWITCH_TYPE_VIRTUAL:
-      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
-    default:
-      return 0;
-  }
-}
-
-RawSwitch gruvin9xToSwitch(int8_t sw)
-{
-  if (sw == 0)
-    return RawSwitch(SWITCH_TYPE_NONE);
-  else if (sw <= 9)
-    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else
-    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
 }
 
 t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)

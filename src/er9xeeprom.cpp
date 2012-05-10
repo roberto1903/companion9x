@@ -2,6 +2,28 @@
 #include "er9xeeprom.h"
 #include <QObject>
 
+int8_t er9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch er9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Er9xTrainerMix::t_Er9xTrainerMix()
 {
   memset(this, 0, sizeof(t_Er9xTrainerMix));
@@ -76,7 +98,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = er9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -127,7 +149,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = er9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;
@@ -192,28 +214,6 @@ t_Er9xLimitData::operator LimitData ()
   c9x.revert = revert;
   c9x.offset = offset;
   return c9x;
-}
-
-int8_t er9xFromSwitch(const RawSwitch & sw)
-{
-  switch (sw.type) {
-    case SWITCH_TYPE_SWITCH:
-      return sw.index;
-    case SWITCH_TYPE_VIRTUAL:
-      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
-    default:
-      return 0;
-  }
-}
-
-RawSwitch er9xToSwitch(int8_t sw)
-{
-  if (sw == 0)
-    return RawSwitch(SWITCH_TYPE_NONE);
-  else if (sw <= 9)
-    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else
-    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
 }
 
 t_Er9xMixData::t_Er9xMixData()

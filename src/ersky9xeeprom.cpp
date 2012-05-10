@@ -79,7 +79,7 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = er9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -133,7 +133,7 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = er9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;

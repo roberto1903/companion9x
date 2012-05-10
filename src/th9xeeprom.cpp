@@ -1,6 +1,28 @@
 #include <algorithm>
 #include "th9xeeprom.h"
 
+int8_t th9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 -sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch th9xToSwitch(int8_t sw)
+{
+  if (sw == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (sw <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+}
+
 t_Th9xTrainerMix::t_Th9xTrainerMix()
 {
   memset(this, 0, sizeof(t_Th9xTrainerMix));
@@ -74,7 +96,7 @@ t_Th9xGeneral::t_Th9xGeneral(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = th9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   adcFilt = c9x.filterInput;
   // keySpeed
@@ -111,7 +133,7 @@ Th9xGeneral::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = th9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -142,28 +164,6 @@ Th9xGeneral::operator GeneralSettings ()
 t_Th9xExpoData::t_Th9xExpoData()
 {
   memset(this, 0, sizeof(t_Th9xExpoData));
-}
-
-int8_t th9xFromSwitch(const RawSwitch & sw)
-{
-  switch (sw.type) {
-    case SWITCH_TYPE_SWITCH:
-      return sw.index;
-    case SWITCH_TYPE_VIRTUAL:
-      return sw.index > 0 ? (9 + sw.index) : (-9 -sw.index);
-    default:
-      return 0;
-  }
-}
-
-RawSwitch th9xToSwitch(int8_t sw)
-{
-  if (sw == 0)
-    return RawSwitch(SWITCH_TYPE_NONE);
-  else if (sw <= 9)
-    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else
-    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
 }
 
 t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
