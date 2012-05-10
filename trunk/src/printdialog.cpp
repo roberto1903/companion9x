@@ -242,7 +242,7 @@ void printDialog::printSetup()
           str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
         }
         str.append("</tr>");
-        for (i=0; i<MAX_PHASES; i++) {
+        for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
             PhaseData *pd=&g_model->phaseData[i];
             str.append("<tr><td><b>"+tr("FP")+QString("%1</b> <font size=+1 face='Courier New' color=green>%2</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%3</font></td><td width=\"30\" align=\"right\"><font size=+1 face='Courier New' color=green>%4</font></td>").arg(i).arg(pd->name).arg(pd->fadeIn).arg(pd->fadeOut));
             for (k=0; k<4; k++) {
@@ -318,7 +318,7 @@ void printDialog::printMixes()
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
     int lastCHN = -1;
-    for(int i=0; i<MAX_MIXERS; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model->mixData[i];
         if(!md->destCh) break;
@@ -371,21 +371,21 @@ void printDialog::printMixes()
 void printDialog::printLimits()
 {
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1><h2>").arg(NUM_CHNOUT+1)+tr("Limits")+"</h2></td></tr>");
+    str.append(QString("<tr><td colspan=%1><h2>").arg(GetEepromInterface()->getCapability(Outputs)+1)+tr("Limits")+"</h2></td></tr>");
     str.append("<tr><td>&nbsp;</td>");
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
     {
         str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
     {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
     }
     str.append("</tr>");
     str.append("<tr><td><b>"+tr("Min")+"</b></td>");
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
     {
         str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
     }
@@ -535,7 +535,7 @@ void printDialog::printSwitches()
     str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
-    for(int i=0; i<NUM_CSW; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++)
     {
         if(g_model->customSw[i].func)
         {
@@ -634,7 +634,7 @@ void printDialog::printSafetySwitches()
     str.append(doTC(tr("Switch"), "", true));
     str.append(doTL(tr("Value"), "", true));
     str.append("</tr>");
-    for(int i=0; i<NUM_CHNOUT; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
     {
         if (g_model->safetySw[i].swtch.type) {
            str.append("<tr>");
@@ -661,7 +661,7 @@ void printDialog::printFSwitches()
     str.append(doTC(tr("Switch"), "", true));
     str.append(doTL(tr("Function"), "", true));
     str.append("</tr>");
-    for(int i=0; i<NUM_FSW; i++)
+    for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
     {
         if (g_model->funcSw[i].swtch!=0) {
            str.append("<tr>");
