@@ -317,10 +317,13 @@ void ModelEdit::tabModelEditSetup()
     }
 
     if (!GetEepromInterface()->getCapability(TimerTriggerB)) {
-      ui->triggerB_CB->hide();
-      ui->triggerB_label->hide();
+      ui->timer1ModeBCB->hide();
+      ui->timer1ModeB_label->hide();
+      ui->timer2ModeBCB->hide();
+      ui->timer2ModeB_label->hide();
     } else {
-      populateTimerSwitchCB(ui->triggerB_CB,g_model.tmrModeB);
+      populateTimerSwitchCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
+      populateTimerSwitchCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
     }
     
     int index=0;
@@ -346,6 +349,8 @@ void ModelEdit::tabModelEditSetup()
       ui->timer2ValTE->hide();
       ui->timer2DirCB->hide();
       ui->timer2ModeCB->hide();
+      ui->timer2ModeBCB->hide();
+      ui->timer2ModeB_label->hide();
       ui->label_timer2->hide();
     } else {
       populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
@@ -1623,9 +1628,9 @@ void ModelEdit::on_timer1ValTE_editingFinished()
     updateSettings();
 }
 
-void ModelEdit::on_triggerB_CB_currentIndexChanged(int index)
+void ModelEdit::on_timer1ModeBCB_currentIndexChanged(int index)
 {
-    g_model.tmrModeB = TimerMode(index-TMR_NUM_OPTION);
+    g_model.timers[0].modeB = TimerMode(index-TMR_NUM_OPTION);
     updateSettings();
 }
 
@@ -1644,6 +1649,12 @@ void ModelEdit::on_timer2DirCB_currentIndexChanged(int index)
 void ModelEdit::on_timer2ValTE_editingFinished()
 {
     g_model.timers[1].val = ui->timer2ValTE->time().minute()*60 + ui->timer2ValTE->time().second();
+    updateSettings();
+}
+
+void ModelEdit::on_timer2ModeBCB_currentIndexChanged(int index)
+{
+    g_model.timers[1].modeB = TimerMode(index-TMR_NUM_OPTION);
     updateSettings();
 }
 

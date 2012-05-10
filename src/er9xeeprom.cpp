@@ -507,6 +507,9 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
       tmrMode--;
     if (tmrMode < -TMRMODE_THR_REL)
       tmrMode++;
+    tmrModeB = c9x.timers[0].modeB;
+    if (tmrModeB > TMRMODE_THR_REL)
+      tmrModeB--;
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
     switch(c9x.protocol) {
@@ -630,7 +633,6 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 
     for (int i=0; i<ER9X_NUM_CHNOUT; i++)
       safetySw[i] = c9x.safetySw[i];
-    tmrModeB = c9x.tmrModeB;
     frsky = c9x.frsky;
     FrSkyUsrProto = c9x.frsky.usrProto;
     FrSkyImperial = c9x.frsky.imperial;
@@ -652,7 +654,14 @@ t_Er9xModelData::operator ModelData ()
     c9x.timers[0].mode = TimerMode(tmrMode);
   c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
-  switch(protocol) {
+  if (tmrModeB > TMRMODE_THR_REL)
+    c9x.timers[0].modeB = TimerMode(tmrModeB+1);
+  else if (tmrModeB < -TMRMODE_THR_REL)
+    c9x.timers[0].modeB = TimerMode(tmrModeB-1);
+  else
+    c9x.timers[0].modeB = TimerMode(tmrModeB);
+
+    switch(protocol) {
     case 1:
       c9x.protocol = PXX;
       break;
@@ -745,7 +754,6 @@ t_Er9xModelData::operator ModelData ()
       c9x.curves9[i][j] = curves9[i][j];
   for (int i=0; i<ER9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
-  c9x.tmrModeB=tmrModeB;
   for (int i=0; i<ER9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
 

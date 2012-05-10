@@ -597,6 +597,7 @@ class TimerData {
   public:
     TimerData() { clear(); }
     TimerMode mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+    TimerMode modeB;
     bool      dir;    // 0=>Count Down, 1=>Count Up
     uint16_t  val;
     bool      persistent;
@@ -665,7 +666,7 @@ class ModelData {
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
     uint8_t   modelId;
-    int8_t tmrModeB;
+    // int8_t tmrModeB;
     
     /* FrSky */    
     FrSkyData frsky;
