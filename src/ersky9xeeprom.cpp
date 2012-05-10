@@ -496,6 +496,13 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
         timer[i].tmrModeA--;
       if (timer[i].tmrModeA < -TMRMODE_THR_REL)
         timer[i].tmrModeA++;
+#warning TODO To be checked
+      timer[i].tmrModeB = c9x.timers[i].modeB;
+      if (timer[i].tmrModeB > TMRMODE_THR_REL)
+        timer[i].tmrModeB--;
+      if (timer[i].tmrModeB < -TMRMODE_THR_REL)
+        timer[i].tmrModeB++;
+
       timer[i].tmrDir = c9x.timers[i].dir;
       timer[i].tmrVal = c9x.timers[i].val;
     }
@@ -641,6 +648,15 @@ t_Ersky9xModelData::operator ModelData ()
       c9x.timers[i].mode = TimerMode(timer[i].tmrModeA-1);
     else
       c9x.timers[i].mode = TimerMode(timer[i].tmrModeA);
+#warning TODO To be checked    
+    c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB);
+    if (timer[i].tmrModeB > TMRMODE_THR_REL)
+      c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB+1);
+    else if (timer[i].tmrModeB < -TMRMODE_THR_REL)
+      c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB-1);
+    else
+      c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB);
+
     c9x.timers[i].dir = timer[i].tmrDir;
     c9x.timers[i].val = timer[i].tmrVal;
   }
