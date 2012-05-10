@@ -42,7 +42,7 @@ QString getFuncName(unsigned int val)
                             QObject::tr("Instant Trim"), QObject::tr("Trims2Offsets"), QObject::tr("Play Sound"), QObject::tr("Play Somo"), QObject::tr("Start Logs") };
       return strings[val-NUM_SAFETY_CHNOUT];
     } else {
-      return QString("---");
+      return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
     }
   }
 }
