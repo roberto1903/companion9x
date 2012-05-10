@@ -52,6 +52,45 @@ void getEEPROMZString(char *dst, const char *src, int size)
   }
 }
 
+int8_t open9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    case SWITCH_TYPE_ON:
+      return 22;
+    case SWITCH_TYPE_OFF:
+      return -22;
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      return sw.index > 0 ? (22 + sw.index) : (-22 + sw.index);
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+      return sw.index > 0 ? (31 + sw.index) : (-31 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch open9xToSwitch(int8_t sw)
+{
+  uint8_t swa = abs(sw);
+  if (swa == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (swa <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else if (swa <= 21)
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+  else if (sw == 22)
+    return RawSwitch(SWITCH_TYPE_ON);
+  else if (sw == -22)
+    return RawSwitch(SWITCH_TYPE_OFF);
+  else if (swa <= 22+9)
+    return RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, sw > 0 ? sw-22 : sw+22);
+  else
+    return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-22-9 : sw+22+9);
+}
+
 t_Open9xTrainerMix_v201::operator TrainerMix()
 {
   TrainerMix c9x;
@@ -109,7 +148,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = c9x.lightSw;
+  lightSw = open9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -153,7 +192,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = lightSw;
+  result.lightSw = open9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -182,45 +221,6 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.hapticLength=hapticLength;
   result.gpsFormat = gpsFormat;
   return result;
-}
-
-int8_t open9xFromSwitch(const RawSwitch & sw)
-{
-  switch (sw.type) {
-    case SWITCH_TYPE_SWITCH:
-      return sw.index;
-    case SWITCH_TYPE_VIRTUAL:
-      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
-    case SWITCH_TYPE_ON:
-      return 22;
-    case SWITCH_TYPE_OFF:
-      return -22;
-    case SWITCH_TYPE_MOMENT_SWITCH:
-      return sw.index > 0 ? (22 + sw.index) : (-22 + sw.index);
-    case SWITCH_TYPE_MOMENT_VIRTUAL:
-      return sw.index > 0 ? (31 + sw.index) : (-31 + sw.index);
-    default:
-      return 0;
-  }
-}
-
-RawSwitch open9xToSwitch(int8_t sw)
-{
-  uint8_t swa = abs(sw);
-  if (swa == 0)
-    return RawSwitch(SWITCH_TYPE_NONE);
-  else if (swa <= 9)
-    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else if (swa <= 21)
-    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
-  else if (sw == 22)
-    return RawSwitch(SWITCH_TYPE_ON);
-  else if (sw == -22)
-    return RawSwitch(SWITCH_TYPE_OFF);
-  else if (swa <= 22+9)
-    return RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, sw > 0 ? sw-22 : sw+22);
-  else
-    return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-22-9 : sw+22+9);
 }
 
 t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)

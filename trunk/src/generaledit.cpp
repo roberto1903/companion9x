@@ -26,8 +26,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
-#warning TODO
-    // populateSwitchCB(ui->backlightswCB, g_eeGeneral.lightSw);
+    populateSwitchCB(ui->backlightswCB, g_eeGeneral.lightSw);
 
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
@@ -188,7 +187,6 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
     ui->CurrentCalib_SB->setValue((double)g_eeGeneral.currentCalib);
     ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
-    ui->backlightswCB->setCurrentIndex(g_eeGeneral.lightSw+MAX_DRSWITCH/2);
     ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
@@ -310,7 +308,7 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 {
   if (switchDefPosEditLock)
     return;
-  g_eeGeneral.lightSw = ui->backlightswCB->itemData(ui->backlightswCB->currentIndex()).toInt();
+  g_eeGeneral.lightSw = RawSwitch(ui->backlightswCB->itemData(ui->backlightswCB->currentIndex()).toInt());
   updateSettings();
 }
 

@@ -349,7 +349,7 @@ class GeneralSettings {
     uint8_t   contrast;
     uint8_t   vBatWarn;
     int8_t    vBatCalib;
-    int8_t    lightSw; // TODO Switch enum
+    RawSwitch lightSw;
     TrainerData trainer;
     uint8_t   view;    // main screen view // TODO enum
     bool      disableThrottleWarning;

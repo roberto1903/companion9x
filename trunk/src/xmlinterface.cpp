@@ -89,10 +89,11 @@ bool XmlInterface::save(RadioData &radioData)
     // TODO BSS settings.currModel;
     gs.contrast(settings.contrast);
     gs.battery(battery(settings.vBatCalib, settings.vBatWarn));
-    if (settings.lightSw < 0)
+/*    if (settings.lightSw < 0)
       gs.light_switch(Switch::value(settings.lightSw+MAX_DRSWITCH));
     else if (settings.lightSw > 0)
       gs.light_switch(Switch::value(settings.lightSw+MAX_DRSWITCH-1));
+      */
     gs.ppm_input_calibration(ppm_input_calibration(settings.PPM_Multiplier,
                                                    PPMCalibration(settings.trainer.calib[0]),
                                                    PPMCalibration(settings.trainer.calib[1]),
