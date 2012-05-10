@@ -689,7 +689,6 @@ enum Capability {
  FlightPhases,
  Mixes,
  Timers,
- NoTimer2,
  TimerTriggerB,
  FuncSwitches,
  CustomSwitches,

@@ -233,7 +233,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case OwnerName:
       return 10;
     case Timers:
-      return 1;
+      return 2;
     case FuncSwitches:
       return 0;
     case CustomSwitches:
@@ -253,8 +253,6 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case TelemetryUnits:
       return 1;
     case OptrexDisplay:
-      return 1;
-    case NoTimer2:
       return 1;
     case TimerTriggerB:
       return 1;

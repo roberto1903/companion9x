@@ -344,7 +344,7 @@ void ModelEdit::tabModelEditSetup()
     protocolEditLock=false;  
     ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
     //timer2 mode direction value
-    if (GetEepromInterface()->getCapability(NoTimer2)) {
+    if (GetEepromInterface()->getCapability(Timers)<2) {
       ui->timer2DirCB->hide();
       ui->timer2ValTE->hide();
       ui->timer2DirCB->hide();
