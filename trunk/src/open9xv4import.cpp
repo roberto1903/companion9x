@@ -9,6 +9,7 @@
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
+#define VARIO
 #define DECIMALS_DISPLAYED
 #define AUDIO
 #define HAPTIC
