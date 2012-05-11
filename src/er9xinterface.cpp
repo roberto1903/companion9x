@@ -232,7 +232,7 @@ int Er9xInterface::getCapability(const Capability capability)
     case Mixes:
       return ER9X_MAX_MIXERS;
     case MixFmTrim:
-      return 1;      
+      return 1;
     case PPMExtCtrl:
       return 1;
     case ModelTrainerEnable:
@@ -276,7 +276,9 @@ int Er9xInterface::getCapability(const Capability capability)
     case TimerTriggerB:
       return 1;
     case HasAltitudeSel:
-      return 1;           
+      return 1;
+    case InstantTrimSW:
+      return 1;
     default:
       return 0;
   }

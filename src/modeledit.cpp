@@ -61,15 +61,24 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   tabCurves();
   tabCustomSwitches();
   int telTab=10;
+  int fswTab=9;
   if (GetEepromInterface()->getCapability(FSSwitch) ) {
     ui->tabSafetySwitches->setDisabled(true);
     ui->tabWidget->removeTab(8);
-    telTab=9;
+    telTab--;
+    fswTab--;
   } 
   else {
     tabSafetySwitches();
   }
-  tabFunctionSwitches();
+  if (GetEepromInterface()->getCapability(FuncSwitches)==0 ) {
+    ui->tabFunctionSwitches->setDisabled(true);
+    ui->tabWidget->removeTab(fswTab);
+    telTab--;
+  } 
+  else {
+    tabFunctionSwitches();
+  }
   tabTemplates();
   tabHeli();
   if (GetEepromInterface()->getCapability(Telemetry) | TM_HASTELEMETRY) {
@@ -302,6 +311,26 @@ void ModelEdit::tabModelEditSetup()
     int sec = g_model.timers[0].val%60;
     ui->timer1ValTE->setTime(QTime(0,min,sec));
     ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
+
+    if (!GetEepromInterface()->getCapability(InstantTrimSW)) {
+      ui->instantTrim_label->hide();
+      ui->instantTrim_CB->setDisabled(true);
+      ui->instantTrim_CB->hide();
+    } else {
+      switchEditLock=true;
+      int found=false;
+      for (int i=0; i< NUM_FSW; i++) {
+        if (g_model.funcSw[i].func==FuncInstantTrim) {
+          populateSwitchCB(ui->instantTrim_CB,g_model.funcSw[i].swtch,POPULATE_MSWITCHES & POPULATE_ONOFF);
+          found=true;
+          break;
+        }
+      }
+      if (found==false) {
+        populateSwitchCB(ui->instantTrim_CB,RawSwitch(),POPULATE_MSWITCHES & POPULATE_ONOFF);
+      }
+      switchEditLock=false;
+    }
     if (GetEepromInterface()->getCapability(NoTimerDirs)) {
       ui->timer1DirCB->hide();
       ui->timer2DirCB->hide();
@@ -1776,6 +1805,28 @@ void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
 {
   if(protocolEditLock) return;
   g_model.ppmNCH = (index*2)+8;
+  updateSettings();
+}
+
+void ModelEdit::on_instantTrim_CB_currentIndexChanged(int index)
+{
+  if(switchEditLock) return;
+  bool found=false;
+  for (int i=0; i< NUM_FSW; i++) {
+    if (g_model.funcSw[i].func==FuncInstantTrim) {
+      g_model.funcSw[i].swtch = RawSwitch(ui->instantTrim_CB->itemData(ui->instantTrim_CB->currentIndex()).toInt());
+      found=true;
+    }
+  }
+  if (found==false) {
+    for (int i=0; i< NUM_FSW; i++) {
+      if (g_model.funcSw[i].swtch==RawSwitch()) {
+        g_model.funcSw[i].swtch = RawSwitch(ui->instantTrim_CB->itemData(ui->instantTrim_CB->currentIndex()).toInt());
+        g_model.funcSw[i].func = FuncInstantTrim;
+        break;
+      }
+    }
+  }
   updateSettings();
 }
 
