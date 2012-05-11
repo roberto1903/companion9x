@@ -33,7 +33,7 @@ t_Er9xTrainerMix::t_Er9xTrainerMix(TrainerMix &c9x)
 {
   memset(this, 0, sizeof(t_Er9xTrainerMix));
   srcChn = c9x.src;
-  swtch = c9x.swtch;
+  swtch = er9xFromSwitch(c9x.swtch);
   studWeight = (8 * c9x.weight) / 25;
   mode = c9x.mode;
 }
@@ -42,7 +42,7 @@ t_Er9xTrainerMix::operator TrainerMix()
 {
   TrainerMix c9x;
   c9x.src = srcChn;
-  c9x.swtch = swtch;
+  c9x.swtch = er9xToSwitch(swtch);
   c9x.weight = (25 * studWeight) / 8;
   c9x.mode = mode;
   return c9x;

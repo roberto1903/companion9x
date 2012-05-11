@@ -34,7 +34,7 @@ t_Gruvin9xTrainerMix_v103::operator TrainerMix()
 {
   TrainerMix c9x;
   c9x.src = srcChn;
-  c9x.swtch = swtch;
+  c9x.swtch = gruvin9xToSwitch(swtch);
   c9x.weight = (25 * studWeight) / 8;
   c9x.mode = mode;
   return c9x;

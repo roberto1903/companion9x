@@ -697,19 +697,77 @@ t_Open9xFuncSwData_v201::operator FuncSwData ()
   return c9x;
 }
 
+enum Functions {
+  FUNC_SAFETY_CH1,
+  FUNC_SAFETY_CH16=FUNC_SAFETY_CH1+15,
+  FUNC_TRAINER,
+  FUNC_TRAINER_RUD,
+  FUNC_TRAINER_ELE,
+  FUNC_TRAINER_THR,
+  FUNC_TRAINER_AIL,
+  FUNC_INSTANT_TRIM,
+  FUNC_PLAY_SOUND,
+  FUNC_HAPTIC,
+#if defined(PCBV4)
+  FUNC_PLAY_SOMO,
+#endif
+  FUNC_RESET,
+  FUNC_VARIO,
+#if defined(PCBV4)
+  FUNC_LOGS,
+#endif
+#if defined(DEBUG)
+  FUNC_TEST, // should remain the last before MAX as not added in companion9x
+#endif
+  FUNC_MAX
+};
+
 t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 {
   swtch = open9xFromSwitch(c9x.swtch);
-  func = c9x.func;
   param = c9x.param;
+  if (c9x.func <= FuncSafetyCh16)
+    func = c9x.func;
+  else if (c9x.func <= FuncTrainerAIL)
+    func = 16 + c9x.func - FuncTrainer;
+  else if (c9x.func == FuncInstantTrim)
+    func = 21;
+  else if (c9x.func == FuncPlaySound)
+    func = 22;
+  else if (c9x.func == FuncPlayHaptic)
+    func = 23;
+  else if (c9x.func == FuncReset)
+    func = 24;
+  else if (c9x.func == FuncVario)
+    func = 25;
+  else {
+    swtch = 0;
+    func = 0;
+    param = 0;
+  }
 }
 
 t_Open9xFuncSwData_v203::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
-  c9x.func = (AssignFunc)(func);
   c9x.param = param;
+  if (func < 16)
+    c9x.func = (AssignFunc)(func);
+  else if (func <= 20)
+    c9x.func = (AssignFunc)(func);
+  else if (func == 21)
+    c9x.func = FuncInstantTrim;
+  else if (func == 22)
+    c9x.func = FuncPlaySound;
+  else if (func == 23)
+    c9x.func = FuncPlayHaptic;
+  else if (func == 24)
+    c9x.func = FuncReset;
+  else if (func == 25)
+    c9x.func = FuncVario;
+  else
+    c9x.clear();
   return c9x;
 }
 
