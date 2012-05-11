@@ -473,6 +473,8 @@ int Open9xInterface::getCapability(const Capability capability)
       } else {
         return 0;
       }
+    case PerModelThrottleWarning:
+      return 1;
     default:
       return 0;
   }

@@ -449,6 +449,7 @@ t_Open9xArmModelData_v208::operator ModelData ()
   c9x.ppmNCH = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
+  c9x.disableThrottleWarning=disableThrottleWarning;
   c9x.ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
   c9x.pulsePol = pulsePol;
@@ -539,7 +540,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
     thrTrim = c9x.thrTrim;
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     trimInc = c9x.trimInc;
-    spare1 = 0;
+    disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
