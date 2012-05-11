@@ -1968,8 +1968,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     thrTrim = c9x.thrTrim;
     ppmNCH = (c9x.ppmNCH - 8) / 2;
     trimInc = c9x.trimInc;
-    spare1 = 0;
-    disableThrottleWarning=c9x.disableThrottleWarning:
+    disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
