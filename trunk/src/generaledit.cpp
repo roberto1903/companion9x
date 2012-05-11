@@ -122,12 +122,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swtchCB_4->hide();
     }
     else {
-#warning TODO
-      /*populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
+      populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
       populateSwitchCB(ui->swtchCB_2,g_eeGeneral.trainer.mix[1].swtch);
       populateSwitchCB(ui->swtchCB_3,g_eeGeneral.trainer.mix[2].swtch);
       populateSwitchCB(ui->swtchCB_4,g_eeGeneral.trainer.mix[3].swtch);
-      */
     }
     if (!GetEepromInterface()->getCapability(BLonStickMove)) {
       ui->blOnStickMoveSB->setDisabled(true);
@@ -778,25 +776,25 @@ void GeneralEdit::on_BandGapEnableChkB_stateChanged(int )
 
 void GeneralEdit::on_swtchCB_1_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[0].swtch = ui->swtchCB_1->itemData(ui->swtchCB_1->currentIndex()).toInt();
+    g_eeGeneral.trainer.mix[0].swtch = RawSwitch(ui->swtchCB_1->itemData(ui->swtchCB_1->currentIndex()).toInt());
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_2_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[1].swtch = ui->swtchCB_2->itemData(ui->swtchCB_2->currentIndex()).toInt();
+    g_eeGeneral.trainer.mix[1].swtch = RawSwitch(ui->swtchCB_2->itemData(ui->swtchCB_2->currentIndex()).toInt());
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_3_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[2].swtch = ui->swtchCB_3->itemData(ui->swtchCB_3->currentIndex()).toInt();
+    g_eeGeneral.trainer.mix[2].swtch = RawSwitch(ui->swtchCB_3->itemData(ui->swtchCB_3->currentIndex()).toInt());
     updateSettings();
 }
 
 void GeneralEdit::on_swtchCB_4_currentIndexChanged(int index)
 {
-    g_eeGeneral.trainer.mix[3].swtch = ui->swtchCB_4->itemData(ui->swtchCB_4->currentIndex()).toInt();
+    g_eeGeneral.trainer.mix[3].swtch = RawSwitch(ui->swtchCB_4->itemData(ui->swtchCB_4->currentIndex()).toInt());
     updateSettings();
 }
 

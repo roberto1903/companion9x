@@ -266,6 +266,65 @@ Open9xV4CustomSwData_v207::operator CustomSwData ()
   return c9x;
 }
 
+
+t_Open9xV4FuncSwData_v203::t_Open9xV4FuncSwData_v203(FuncSwData &c9x)
+{
+  swtch = open9xFromSwitch(c9x.swtch);
+  param = c9x.param;
+  if (c9x.func <= FuncSafetyCh16)
+    func = c9x.func;
+  else if (c9x.func <= FuncTrainerAIL)
+    func = 16 + c9x.func - FuncTrainer;
+  else if (c9x.func == FuncInstantTrim)
+    func = 21;
+  else if (c9x.func == FuncPlaySound)
+    func = 22;
+  else if (c9x.func == FuncPlayHaptic)
+    func = 23;
+  else if (c9x.func == FuncPlaySomo)
+    func = 24;
+  else if (c9x.func == FuncReset)
+    func = 25;
+  else if (c9x.func == FuncVario)
+    func = 26;
+  else if (c9x.func == FuncLogs)
+    func = 27;
+  else {
+    swtch = 0;
+    func = 0;
+    param = 0;
+  }
+}
+
+t_Open9xV4FuncSwData_v203::operator FuncSwData ()
+{
+  FuncSwData c9x;
+  c9x.swtch = open9xToSwitch(swtch);
+  c9x.param = param;
+  if (func < 16)
+    c9x.func = (AssignFunc)(func);
+  else if (func <= 20)
+    c9x.func = (AssignFunc)(func);
+  else if (func == 21)
+    c9x.func = FuncInstantTrim;
+  else if (func == 22)
+    c9x.func = FuncPlaySound;
+  else if (func == 23)
+    c9x.func = FuncPlayHaptic;
+  else if (func == 24)
+    c9x.func = FuncPlaySomo;
+  else if (func == 25)
+    c9x.func = FuncReset;
+  else if (func == 26)
+    c9x.func = FuncVario;
+  else if (func == 27)
+    c9x.func = FuncLogs;
+  else
+    c9x.clear();
+  return c9x;
+}
+
+
 t_Open9xV4ModelData_v207::operator ModelData ()
 {
   ModelData c9x;

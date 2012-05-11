@@ -80,6 +80,17 @@ PACK(typedef struct t_Open9xV4CustomSwData_v207 { // Custom Switches data
 
 }) Open9xV4CustomSwData_v207;
 
+PACK(typedef struct t_Open9xV4FuncSwData_v203 { // Function Switches data
+  int8_t  swtch; // input
+  uint8_t func;
+  uint8_t param;
+
+  operator FuncSwData();
+  t_Open9xV4FuncSwData_v203() { memset(this, 0, sizeof(t_Open9xV4FuncSwData_v203)); }
+  t_Open9xV4FuncSwData_v203(FuncSwData&);
+
+}) Open9xV4FuncSwData_v203;
+
 PACK(typedef struct t_Open9xV4ModelData_v207 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
@@ -136,7 +147,7 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
-  Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData swashR;
   Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v208 frsky;

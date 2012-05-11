@@ -317,7 +317,7 @@ class TrainerMix {
   public:
     TrainerMix() { clear(); }
     unsigned int src; // 0-7 = ch1-8
-    int swtch;
+    RawSwitch swtch;
     int weight;
     unsigned int mode;   // off, add-mode, subst-mode
     void clear() { memset(this, 0, sizeof(TrainerMix)); }
