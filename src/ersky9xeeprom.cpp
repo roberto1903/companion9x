@@ -496,7 +496,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
         timer[i].tmrModeA--;
       if (timer[i].tmrModeA < -TMRMODE_THR_REL)
         timer[i].tmrModeA++;
-#warning TODO To be checked
+// #warning TODO To be checked
       timer[i].tmrModeB = c9x.timers[i].modeB;
       if (timer[i].tmrModeB > TMRMODE_THR_REL)
         timer[i].tmrModeB--;
@@ -651,7 +651,7 @@ t_Ersky9xModelData::operator ModelData ()
       c9x.timers[i].mode = TimerMode(timer[i].tmrModeA-1);
     else
       c9x.timers[i].mode = TimerMode(timer[i].tmrModeA);
-#warning TODO To be checked    
+// #warning TODO To be checked
     c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB);
     if (timer[i].tmrModeB > TMRMODE_THR_REL)
       c9x.timers[i].modeB = TimerMode(timer[i].tmrModeB+1);
