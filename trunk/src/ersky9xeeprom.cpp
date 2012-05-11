@@ -534,7 +534,10 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     trimInc = c9x.trimInc;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     for (unsigned int i=0; i<NUM_FSW; i++)
-      if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
+      if (c9x.funcSw[i].func == FuncInstantTrim && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) {
+        trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
+        break;
+      }
     beepANACenter = c9x.beepANACenter;
     pulsePol = c9x.pulsePol;
     extendedLimits = c9x.extendedLimits;
@@ -682,7 +685,7 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
   c9x.ppmDelay = 300 + 50 * ppmDelay;
-  c9x.funcSw[0].func = FuncTrims2Offsets;
+  c9x.funcSw[0].func = FuncInstantTrim;
   if (trimSw) {
     c9x.funcSw[0].swtch = er9xToSwitch(trimSw);
   }

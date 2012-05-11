@@ -472,9 +472,11 @@ enum AssignFunc {
   FuncTrainerTHR,
   FuncTrainerAIL,
   FuncInstantTrim,
-  FuncTrims2Offsets,
   FuncPlaySound,
+  FuncPlayHaptic,
   FuncPlaySomo,
+  FuncReset,
+  FuncVario,
   FuncLogs,
   FuncCount
 };
@@ -691,6 +693,7 @@ enum Capability {
  Timers,
  TimerTriggerB,
  FuncSwitches,
+ InstantTrimSW,
  CustomSwitches,
  RotaryEncoders,
  Outputs,

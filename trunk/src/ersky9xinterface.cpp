@@ -264,6 +264,8 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return 1;
     case HasBrightness:
       return 1;
+    case InstantTrimSW:
+      return 1;      
     default:
       return 0;
   }
