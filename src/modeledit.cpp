@@ -344,7 +344,15 @@ void ModelEdit::tabModelEditSetup()
       ui->label_ttrace->hide();
       ui->ttraceCB->hide();
     }
-
+    if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
+      ui->thrwarnChkB->setDisabled(true);
+      ui->thrwarnChkB->hide();
+      ui->thrwarnLabel->hide();
+    } else {
+      switchEditLock=true;
+      ui->thrwarnChkB->setChecked(g_model.disableThrottleWarning);
+      switchEditLock=false;
+    }
     if (!GetEepromInterface()->getCapability(TimerTriggerB)) {
       ui->timer1ModeBCB->hide();
       ui->timer1ModeB_label->hide();
@@ -3396,6 +3404,11 @@ void ModelEdit::on_extendedLimitsChkB_toggled(bool checked)
 {
     g_model.extendedLimits = checked;
     setLimitMinMax();
+    updateSettings();
+}
+void ModelEdit::on_thrwarnChkB_toggled(bool checked)
+{
+    g_model.disableThrottleWarning = checked;
     updateSettings();
 }
 
