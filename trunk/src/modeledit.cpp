@@ -81,7 +81,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   }
   tabTemplates();
   tabHeli();
-  if (GetEepromInterface()->getCapability(Telemetry) | TM_HASTELEMETRY) {
+  if (GetEepromInterface()->getCapability(Telemetry) & TM_HASTELEMETRY) {
     tabTelemetry();
   }
   else {
