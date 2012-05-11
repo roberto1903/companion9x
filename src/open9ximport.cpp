@@ -10,6 +10,7 @@
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
+#define VARIO
 #define HAPTIC
 #define AUTOSWITCH
 
