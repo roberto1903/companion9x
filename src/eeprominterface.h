@@ -648,6 +648,7 @@ class ModelData {
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
     int       trimInc;            // Trim Increments
+    uint8_t   disableThrottleWarning;
     int       ppmDelay;
     uint8_t   beepANACenter;      // 1<<0->A1.. 1<<6->A7
     bool      pulsePol;           // false = positive
@@ -741,6 +742,7 @@ enum Capability {
  HasCurrentCalibration,
  HasVolume,
  HasBrightness,
+ PerModelThrottleWarning,
 };
 
 enum UseContext {
