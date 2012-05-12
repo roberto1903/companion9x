@@ -551,6 +551,7 @@ void MainWindow::preferences()
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
       mdiChild->eepromInterfaceChanged();
     }
+    updateProfilesActions();
 }
 
 void MainWindow::contributors()
@@ -1299,11 +1300,10 @@ QMenu *MainWindow::createRecentFileMenu()
 
 QMenu *MainWindow::createProfilesMenu()
  {
-    QMenu *profilesMenu = new QMenu(this);
-    for ( int i = 0; i < MAX_PROFILES; ++i)
-      if (profileActs[i]->isVisible())
-        profilesMenu->addAction(profileActs[i]);
-     return profilesMenu;
+  QMenu *profilesMenu = new QMenu(this);
+  for ( int i = 0; i < MAX_PROFILES; ++i)
+    profilesMenu->addAction(profileActs[i]);
+  return profilesMenu;
  }
 
 void MainWindow::createToolBars()
