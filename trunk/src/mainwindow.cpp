@@ -1330,12 +1330,14 @@ void MainWindow::createToolBars()
     recentToolButton->setPopupMode(QToolButton::InstantPopup);
     recentToolButton->setMenu(createRecentFileMenu());
     recentToolButton->setIcon(QIcon(":/images/recentdocument.png"));
+    recentToolButton->setToolTip(tr("Recent Files"));
     fileToolBar->addWidget(recentToolButton);
 
     profileButton = new QToolButton;
     profileButton->setPopupMode(QToolButton::InstantPopup);
     profileButton->setMenu(createProfilesMenu());
     profileButton->setIcon(QIcon(":/images/profiles.png"));
+    profileButton->setToolTip(tr("Firmware Profiles"));
     fileToolBar->addWidget(profileButton);
 
     bool notfound=true;
@@ -1469,7 +1471,7 @@ void MainWindow::updateRecentFileActions()
     for ( j = numRecentFiles; j < MaxRecentFiles; ++j)
         recentFileActs[j]->setVisible(false);
  
-    separatorAct->setVisible(numRecentFiles > 0);
+    // separatorAct->setVisible(numRecentFiles > 0);
 }
 
 void MainWindow::updateProfilesActions()
@@ -1482,7 +1484,8 @@ void MainWindow::updateProfilesActions()
       settings.beginGroup(profile);
       QString name=settings.value("Name","").toString();
       if (!name.isEmpty()) {
-        profileActs[i]->setText(name);
+        QString text = tr("&%1 %2").arg(i + 1).arg(name);
+        profileActs[i]->setText(text);
         profileActs[i]->setData(i+1);
         profileActs[i]->setVisible(true);
       } else {
