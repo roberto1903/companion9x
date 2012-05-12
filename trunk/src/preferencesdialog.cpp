@@ -441,13 +441,31 @@ void preferencesDialog::on_splashLibraryButton_clicked()
 
 void preferencesDialog::on_ProfSlot_SB_valueChanged()
 {
-      QSettings settings("companion9x", "companion9x");
-      settings.beginGroup("Profiles");
-      QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
-      settings.beginGroup(profile);
-      ui->ProfName_LE->setText(settings.value("Name","").toString());
-      settings.endGroup();
-      settings.endGroup();
+  QSettings settings("companion9x", "companion9x");
+  settings.beginGroup("Profiles");
+  QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
+  settings.beginGroup(profile);
+  QString name=settings.value("Name","").toString();
+  ui->ProfName_LE->setText(name);
+/*  if (!(name.isEmpty())) {
+    QString firmwarename=settings.value("firmware","").toString();
+    FirmwareInfo * fw = getFirmware(firmwarename);
+    int i=0;
+    foreach(FirmwareInfo * firmware, firmwares) {
+      if (fw == firmware) {
+        qDebug() << fw->id;
+        qDebug() << firmware->id;
+        qDebug() << i;
+        ui->downloadVerCB->setCurrentIndex(i);
+        break;
+      }
+      i++;
+    }
+    baseFirmwareChanged();
+    populateFirmwareOptions(fw);
+  }*/
+  settings.endGroup();
+  settings.endGroup();
 }
 
 void preferencesDialog::on_ProfSave_PB_clicked()
