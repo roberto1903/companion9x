@@ -1087,7 +1087,7 @@ void MainWindow::createActions()
     saveAct->setStatusTip(tr("Save the document to disk"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
-    saveAsAct = new QAction(tr("Save &As..."), this);
+    saveAsAct = new QAction(QIcon(":/images/saveas.png"), tr("Save &As..."), this);
     saveAsAct->setShortcuts(QKeySequence::SaveAs);
     saveAsAct->setStatusTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
@@ -1250,6 +1250,7 @@ void MainWindow::createMenus()
 
 {
     QMenu *recentFileMenu=new QMenu(tr("Recent Files"));
+    QMenu *profilesMenu=new QMenu(tr("Firmware Profiles"));
     
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
@@ -1257,6 +1258,7 @@ void MainWindow::createMenus()
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addMenu(recentFileMenu);
+    recentFileMenu->setIcon(QIcon(":/images/recentdocument.png"));
     for ( int i = 0; i < MaxRecentFiles; ++i)
         recentFileMenu->addAction(recentFileActs[i]);
     fileMenu->addSeparator();
@@ -1265,6 +1267,11 @@ void MainWindow::createMenus()
     fileMenu->addAction(compareAct);
     fileMenu->addSeparator();
     fileMenu->addAction(preferencesAct);
+    fileMenu->addMenu(profilesMenu);
+    
+    profilesMenu->setIcon(QIcon(":/images/profiles.png"));
+    for ( int i = 0; i < MAX_PROFILES; ++i)
+        profilesMenu->addAction(profileActs[i]);
     fileMenu->addAction(switchLayoutDirectionAct);
     fileMenu->addAction(exitAct);
 
