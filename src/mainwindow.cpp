@@ -529,7 +529,7 @@ void MainWindow::loadProfile()
       settings.setValue("burnFirmware", burnfw);
       settings.setValue("firmware", firmware);
       settings.setValue("profileId", profnum);
-#warning TODO reload firmware      
+      current_firmware = GetFirmware(firmware);
       setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
       // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
       foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
