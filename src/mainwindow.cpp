@@ -551,7 +551,7 @@ void MainWindow::preferences()
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
       mdiChild->eepromInterfaceChanged();
     }
-    updateProfilesActions();
+    updateMenus();
 }
 
 void MainWindow::contributors()
@@ -995,7 +995,7 @@ void MainWindow::updateMenus()
     previousAct->setEnabled(hasMdiChild);
     burnToAct->setEnabled(hasMdiChild);
     separatorAct->setVisible(hasMdiChild);
-
+    
     bool hasSelection = (activeMdiChild() &&
                          activeMdiChild()->hasSelection());
     cutAct->setEnabled(hasSelection);
@@ -1004,6 +1004,20 @@ void MainWindow::updateMenus()
     printAct->setEnabled(hasSelection);
     compareAct->setEnabled(activeMdiChild());
     updateRecentFileActions();
+    updateProfilesActions();
+    bool notfound=true;
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("Profiles");
+    for (int i=0; i<MAX_PROFILES; i++) {
+      QString profile=QString("profile%1").arg(i+1);
+      settings.beginGroup(profile);
+      QString name=settings.value("Name","").toString();
+      if (!name.isEmpty()) {
+        notfound=false;
+      }
+      settings.endGroup();
+    }
+    profileButton->setDisabled(notfound);
 }
 
 void MainWindow::updateWindowMenu()
@@ -1318,11 +1332,25 @@ void MainWindow::createToolBars()
     recentToolButton->setIcon(QIcon(":/images/recentdocument.png"));
     fileToolBar->addWidget(recentToolButton);
 
-    QToolButton * profileButton = new QToolButton;
+    profileButton = new QToolButton;
     profileButton->setPopupMode(QToolButton::InstantPopup);
     profileButton->setMenu(createProfilesMenu());
     profileButton->setIcon(QIcon(":/images/profiles.png"));
     fileToolBar->addWidget(profileButton);
+
+    bool notfound=true;
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("Profiles");
+    for (int i=0; i<MAX_PROFILES; i++) {
+      QString profile=QString("profile%1").arg(i+1);
+      settings.beginGroup(profile);
+      QString name=settings.value("Name","").toString();
+      if (!name.isEmpty()) {
+        notfound=false;
+      }
+      settings.endGroup();
+    }
+    profileButton->setDisabled(notfound);
     
     fileToolBar->addAction(saveAct);
     fileToolBar->addSeparator();
