@@ -48,6 +48,7 @@
 #include "eeprominterface.h"
 
 #define MAX_RECENT  15
+#define MAX_PROFILES  10
 #define SPLASH_TIME 5
 
 class MdiChild;
@@ -90,6 +91,7 @@ private slots:
     void saveAs();
     void cut();
     void openRecentFile();
+    void loadProfile();
     void copy();
     void paste();
     void burnTo();
@@ -114,6 +116,7 @@ private slots:
     void switchLayoutDirection();
     void setActiveSubWindow(QWidget *window);
     QMenu * createRecentFileMenu();
+    QMenu * createProfilesMenu();
 
 private:
     void createActions();
@@ -123,6 +126,7 @@ private:
     void readSettings();
     void writeSettings();
     void updateRecentFileActions();
+    void updateProfilesActions();
     int getFileType(const QString &fullFileName);
     
     QString strippedName(const QString &fullFileName);
@@ -206,6 +210,7 @@ private:
     QAction *printAct;
     QAction *switchLayoutDirectionAct;
     QAction *recentFileActs[MAX_RECENT];
+    QAction *profileActs[MAX_PROFILES];
     QString fwToUpdate;
 };
 
