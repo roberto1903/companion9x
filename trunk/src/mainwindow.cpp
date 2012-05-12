@@ -503,6 +503,41 @@ void MainWindow::openRecentFile()
     }
 }
 
+void MainWindow::loadProfile()
+ {
+  QSettings settings("companion9x", "companion9x");
+  QAction *action = qobject_cast<QAction *>(sender());
+  int chord,defmod, burnfw;
+  QString firmware;
+  
+  if (action) 
+  {
+    int profnum=action->data().toInt();
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("Profiles");
+    QString profile=QString("profile%1").arg(profnum);
+    settings.beginGroup(profile);
+    chord=settings.value("default_channel_order", 0).toInt();
+    defmod=settings.value("default_mode", 0).toInt();
+    burnfw=settings.value("burnFirmware", 0).toInt();
+    firmware=settings.value("firmware", "").toString();
+    settings.endGroup();
+    settings.endGroup();
+    if (!firmware.isEmpty()) {
+      settings.setValue("default_channel_order", chord);
+      settings.setValue("default_mode", defmod);
+      settings.setValue("burnFirmware", burnfw);
+      settings.setValue("firmware", firmware);
+      settings.setValue("profileId", profnum);
+      // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+      foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
+        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+        mdiChild->eepromInterfaceChanged();
+      }
+    }
+  }
+}
+
 void MainWindow::preferences()
 {
     preferencesDialog *pd = new preferencesDialog(this);
@@ -1182,10 +1217,16 @@ void MainWindow::createActions()
     for (int i = 0; i < MaxRecentFiles; ++i)  {
         recentFileActs[i] = new QAction(this);
         recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], SIGNAL(triggered()),
-                this, SLOT(openRecentFile()));
+        connect(recentFileActs[i], SIGNAL(triggered()), this, SLOT(openRecentFile()));
     }
     updateRecentFileActions();
+
+    for (int i=0; i<MAX_PROFILES; i++) {
+      profileActs[i] = new QAction(this);
+      profileActs[i]->setVisible(false);
+      connect(profileActs[i], SIGNAL(triggered()), this, SLOT(loadProfile()));
+    }
+    updateProfilesActions();
 }
 
 void MainWindow::createMenus()
@@ -1254,6 +1295,15 @@ QMenu *MainWindow::createRecentFileMenu()
      return recentFileMenu;
  }
 
+QMenu *MainWindow::createProfilesMenu()
+ {
+    QMenu *profilesMenu = new QMenu(this);
+    for ( int i = 0; i < MAX_PROFILES; ++i)
+      if (profileActs[i]->isVisible())
+        profilesMenu->addAction(profileActs[i]);
+     return profilesMenu;
+ }
+
 void MainWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
@@ -1265,6 +1315,12 @@ void MainWindow::createToolBars()
     recentToolButton->setMenu(createRecentFileMenu());
     recentToolButton->setIcon(QIcon(":/images/recentdocument.png"));
     fileToolBar->addWidget(recentToolButton);
+
+    QToolButton * profileButton = new QToolButton;
+    profileButton->setPopupMode(QToolButton::InstantPopup);
+    profileButton->setMenu(createProfilesMenu());
+    profileButton->setIcon(QIcon(":/images/profiles.png"));
+    fileToolBar->addWidget(profileButton);
     
     fileToolBar->addAction(saveAct);
     fileToolBar->addSeparator();
@@ -1385,7 +1441,29 @@ void MainWindow::updateRecentFileActions()
  
     separatorAct->setVisible(numRecentFiles > 0);
 }
- 
+
+void MainWindow::updateProfilesActions()
+ {
+    int i;
+    QSettings settings("companion9x", "companion9x");
+    settings.beginGroup("Profiles");
+    for (i=0; i<MAX_PROFILES; i++) {
+      QString profile=QString("profile%1").arg(i+1);
+      settings.beginGroup(profile);
+      QString name=settings.value("Name","").toString();
+      if (!name.isEmpty()) {
+        profileActs[i]->setText(name);
+        profileActs[i]->setData(i+1);
+        profileActs[i]->setVisible(true);
+      } else {
+        profileActs[i]->setVisible(false);
+      }
+      settings.endGroup();
+    }
+   //  separatorAct->setVisible(numRecentFiles > 0);
+}
+
+
 QString MainWindow::strippedName(const QString &fullFileName)
  {
     return QFileInfo(fullFileName).fileName();

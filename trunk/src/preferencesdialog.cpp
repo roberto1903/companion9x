@@ -173,7 +173,7 @@ void preferencesDialog::writeValues()
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
   current_firmware = getFirmware(current_firmware_id);
   settings.setValue("firmware", current_firmware_id);
-
+  settings.setValue("profileId", ui->ProfSlot_SB->value());
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
@@ -255,6 +255,8 @@ void preferencesDialog::initSettings()
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
   ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
+  ui->ProfSlot_SB->setValue(settings.value("profileId", 1).toInt());
+  on_ProfSlot_SB_valueChanged();
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
         ui->libraryPath->setText(Path);
@@ -272,7 +274,7 @@ void preferencesDialog::initSettings()
   }
 
   baseFirmwareChanged();
-
+  ui->ProfSlot_SB->setValue(settings.value("profileId", 1).toInt());
   QString ImageStr = settings.value("SplashImage", "").toString();
   if (!ImageStr.isEmpty()) {
     QImage Image = qstring2image(ImageStr);
@@ -399,8 +401,14 @@ void preferencesDialog::on_fw_dnld_clicked()
   MainWindow * mw = (MainWindow *)this->parent();
   QString fwId;
   FirmwareInfo *fw = getFirmware(fwId);
-  if (!fw->getUrl(fwId).isNull())
+  if (!fw->getUrl(fwId).isNull()) {
+    if (ui->burnFirmware->isChecked()) {
+      QSettings settings("companion9x", "companion9x");
+      current_firmware = getFirmware(current_firmware_id);
+      settings.setValue("firmware", current_firmware_id);
+    }
     mw->downloadLatestFW(fw, fwId);
+  }
   firmwareChanged();
 }
 
@@ -429,6 +437,33 @@ void preferencesDialog::on_splashLibraryButton_clicked()
     ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
     ui->InvertPixels->setEnabled(true);
   }  
+}
+
+void preferencesDialog::on_ProfSlot_SB_valueChanged()
+{
+      QSettings settings("companion9x", "companion9x");
+      settings.beginGroup("Profiles");
+      QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
+      settings.beginGroup(profile);
+      ui->ProfName_LE->setText(settings.value("Name","").toString());
+      settings.endGroup();
+      settings.endGroup();
+}
+
+void preferencesDialog::on_ProfSave_PB_clicked()
+{
+      QSettings settings("companion9x", "companion9x");
+      settings.beginGroup("Profiles");
+      QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
+      settings.beginGroup(profile);
+      settings.setValue("Name",ui->ProfName_LE->text());
+      settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
+      settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
+      settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
+      current_firmware = getFirmware(current_firmware_id);
+      settings.setValue("firmware", current_firmware_id);
+      settings.endGroup();
+      settings.endGroup();
 }
 
 void preferencesDialog::on_SplashSelect_clicked()
@@ -507,6 +542,11 @@ void preferencesDialog::on_checkFWUpdates_clicked()
 {
     QString fwId;
     getFirmware(fwId);
+    if (ui->burnFirmware->isChecked()) {
+      QSettings settings("companion9x", "companion9x");
+      current_firmware = getFirmware(current_firmware_id);
+      settings.setValue("firmware", current_firmware_id);
+    }
     MainWindow * mw = (MainWindow *)this->parent();
     mw->checkForUpdates(true, fwId);
     firmwareChanged();

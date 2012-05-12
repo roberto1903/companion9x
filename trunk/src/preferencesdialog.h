@@ -45,6 +45,8 @@ private slots:
     void on_libraryPathButton_clicked();
     void on_splashLibraryButton_clicked();
     void on_checkFWUpdates_clicked();
+    void on_ProfSlot_SB_valueChanged();
+    void on_ProfSave_PB_clicked();
 #ifdef JOYSTICKS
     void on_joystickChkB_clicked();
     void on_joystickcalButton_clicked();
