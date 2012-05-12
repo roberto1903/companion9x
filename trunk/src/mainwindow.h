@@ -42,6 +42,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtGui>
 #include <QMainWindow>
 #include <QDateTime>
 #include "downloaddialog.h"
@@ -212,6 +213,7 @@ private:
     QAction *recentFileActs[MAX_RECENT];
     QAction *profileActs[MAX_PROFILES];
     QString fwToUpdate;
+    QToolButton * profileButton;
 };
 
 #endif
