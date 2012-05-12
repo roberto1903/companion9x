@@ -508,7 +508,6 @@ void MainWindow::loadProfile()
   QSettings settings("companion9x", "companion9x");
   QAction *action = qobject_cast<QAction *>(sender());
   int chord,defmod, burnfw;
-  QString firmware;
   
   if (action) 
   {
@@ -520,16 +519,16 @@ void MainWindow::loadProfile()
     chord=settings.value("default_channel_order", 0).toInt();
     defmod=settings.value("default_mode", 0).toInt();
     burnfw=settings.value("burnFirmware", 0).toInt();
-    firmware=settings.value("firmware", "").toString();
+    current_firmware_id=settings.value("firmware", default_firmware_id).toString();
     settings.endGroup();
     settings.endGroup();
-    if (!firmware.isEmpty()) {
+    /*if (!firmware.isEmpty())*/ {
       settings.setValue("default_channel_order", chord);
       settings.setValue("default_mode", defmod);
       settings.setValue("burnFirmware", burnfw);
-      settings.setValue("firmware", firmware);
+      settings.setValue("firmware", current_firmware_id);
       settings.setValue("profileId", profnum);
-      current_firmware = GetFirmware(firmware);
+      current_firmware = GetFirmware(current_firmware_id);
       current_firmware_id = firmware;
       setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
       // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
