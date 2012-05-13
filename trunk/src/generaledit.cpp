@@ -949,6 +949,7 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
     settings.setValue("currentCalib",g_eeGeneral.currentCalib);
     settings.setValue("PPM_Multiplier",g_eeGeneral.PPM_Multiplier);
+    settings.setValue("LcdType",(g_eeGeneral.optrexDisplay ? 1:0));
   }
   settings.endGroup();
   settings.endGroup();
