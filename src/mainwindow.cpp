@@ -522,20 +522,17 @@ void MainWindow::loadProfile()
     current_firmware_id=settings.value("firmware", default_firmware_id).toString();
     settings.endGroup();
     settings.endGroup();
-    /*if (!firmware.isEmpty())*/ {
-      settings.setValue("default_channel_order", chord);
-      settings.setValue("default_mode", defmod);
-      settings.setValue("burnFirmware", burnfw);
-      settings.setValue("firmware", current_firmware_id);
-      settings.setValue("profileId", profnum);
-      current_firmware = GetFirmware(current_firmware_id);
-      current_firmware_id = firmware;
-      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
-      // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-      foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-        mdiChild->eepromInterfaceChanged();
-      }
+    settings.setValue("default_channel_order", chord);
+    settings.setValue("default_mode", defmod);
+    settings.setValue("burnFirmware", burnfw);
+    settings.setValue("firmware", current_firmware_id);
+    settings.setValue("profileId", profnum);
+    current_firmware = GetFirmware(current_firmware_id);
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+    foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
+      MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+      mdiChild->eepromInterfaceChanged();
     }
   }
 }

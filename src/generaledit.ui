@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>722</width>
-    <height>607</height>
+    <height>589</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -2504,7 +2504,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="15" column="3" rowspan="2">
+       <item row="14" column="3" rowspan="3">
         <widget class="QPushButton" name="calstore_PB">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -2514,6 +2514,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="text">
           <string>Store calibration
+and hw related settings
 in current profile</string>
          </property>
         </widget>

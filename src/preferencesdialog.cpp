@@ -447,7 +447,7 @@ void preferencesDialog::on_ProfSlot_SB_valueChanged()
   QString name=settings.value("Name","").toString();
   ui->ProfName_LE->setText(name);
 /*  if (!(name.isEmpty())) {
-    QString firmwarename=settings.value("firmware","").toString();
+    QString firmwarename=settings.value("firmware", default_firmware_id).toString();
     FirmwareInfo * fw = getFirmware(firmwarename);
     int i=0;
     foreach(FirmwareInfo * firmware, firmwares) {
