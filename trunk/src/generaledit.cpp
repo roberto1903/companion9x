@@ -949,8 +949,26 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
     settings.setValue("currentCalib",g_eeGeneral.currentCalib);
     settings.setValue("PPM_Multiplier",g_eeGeneral.PPM_Multiplier);
+    settings.setValue("GSStickMode",g_eeGeneral.stickMode);
+/*  TODO: better divided or all together  ?
     settings.setValue("LcdType",(g_eeGeneral.optrexDisplay ? 1:0));
+    settings.setValue("Contrast",g_eeGeneral.contrast);
+    settings.setValue("Brightness",g_eeGeneral.backlightBright);
+    settings.setValue("BeeperMode",g_eeGeneral.beeperMode);
+    settings.setValue("BeeperLength",g_eeGeneral.beeperLength);
+    settings.setValue("HapticMode",g_eeGeneral.hapticMode);
+    settings.setValue("HapticStrength",g_eeGeneral.hapticStrength);
+    settings.setValue("HapticLength",g_eeGeneral.hapticLength);
+    settings.setValue("speakerMode",g_eeGeneral.speakerMode);
+    settings.setValue("speakerPitch",g_eeGeneral.speakerPitch);
+    settings.setValue("speakerVolume",g_eeGeneral.speakerVolume);
+ */
+    settings.setValue("Display",QString("%1%2%3").arg((g_eeGeneral.optrexDisplay ? 1:0), 2, 16, QChar('0')).arg(g_eeGeneral.contrast, 2, 16, QChar('0')).arg(g_eeGeneral.backlightBright, 2, 16, QChar('0')));
+    settings.setValue("Beeper",QString("%1%2").arg(g_eeGeneral.beeperMode, 2, 16, QChar('0')).arg(g_eeGeneral.beeperLength, 2, 16, QChar('0')));
+    settings.setValue("Haptic",QString("%1%2%3").arg(g_eeGeneral.hapticMode, 2, 16, QChar('0')).arg(g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg(g_eeGeneral.hapticLength, 2, 16, QChar('0')));
+    settings.setValue("Speaker",QString("%1%2%3").arg(g_eeGeneral.speakerMode, 2, 16, QChar('0')).arg(g_eeGeneral.speakerPitch, 2, 16, QChar('0')).arg(g_eeGeneral.speakerVolume, 2, 16, QChar('0')));
   }
+
   settings.endGroup();
   settings.endGroup();
 }
