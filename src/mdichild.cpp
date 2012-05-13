@@ -321,19 +321,13 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     if (fileType != FILE_TYPE_XML) {
       eeprom_size = GetEepromInterface()->save(eeprom, radioData);
       if (!eeprom_size) {
-        QMessageBox::warning(this, tr("Error"),
-                               tr("Cannot write file %1:\n%2.")
-                               .arg(fileName)
-                               .arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
         return false;
       }
     }
 
     if (!file.open(fileType == FILE_TYPE_BIN ? QIODevice::WriteOnly : (QIODevice::WriteOnly | QIODevice::Text))) {
-      QMessageBox::warning(this, tr("Error"),
-          tr("Cannot write file %1:\n%2.")
-          .arg(fileName)
-          .arg(file.errorString()));
+      QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
       return false;
     }
 
@@ -341,10 +335,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
     if (fileType==FILE_TYPE_XML) {
       if (!XmlInterface(outputStream).save(radioData)) {
-        QMessageBox::warning(this, tr("Error"),
-            tr("Cannot write file %1:\n%2.")
-            .arg(fileName)
-            .arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
         file.close();
         return false;
       }
@@ -354,10 +345,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
         outputStream << EEPE_EEPROM_FILE_HEADER << "\n";
 
       if (!HexInterface(outputStream).save(eeprom, eeprom_size)) {
-          QMessageBox::warning(this, tr("Error"),
-                               tr("Cannot write file %1:\n%2.")
-                               .arg(fileName)
-                               .arg(file.errorString()));
+          QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
           file.close();
           return false;
       }
@@ -366,18 +354,12 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     {
       long result = file.write((char*)eeprom, eeprom_size);
       if(result!=eeprom_size) {
-        QMessageBox::warning(this, tr("Error"),
-            tr("Error writing file %1:\n%2.")
-            .arg(fileName)
-            .arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(fileName).arg(file.errorString()));
         return false;
       }
     }
     else {
-      QMessageBox::warning(this, tr("Error"),
-                                 tr("Error writing file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg("Unknown format"));
+      QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(fileName).arg("Unknown format"));
       return false;
     }
 
@@ -450,22 +432,36 @@ QString MdiChild::strippedName(const QString &fullFileName)
 
 void MdiChild::burnTo()  // write to Tx
 {
-
-  QMessageBox::StandardButton ret = QMessageBox::question(this, tr("companion9x"),
-      tr("Write %1 to EEPROM memory?").arg(strippedName(curFile)),
-      QMessageBox::Yes | QMessageBox::No);
-
-  if (ret == QMessageBox::Yes)
-  {
-    burnConfigDialog bcd;
-    QString tempDir    = QDir::tempPath();
-    QString tempFile = tempDir + "/temp.bin";
-    saveFile(tempFile, false);
-    if(!QFileInfo(tempFile).exists())
-    {
-      QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
+  QSettings settings("companion9x", "companion9x");
+  int profileid=settings.value("profileId", 1).toInt();
+  settings.beginGroup("Profiles");
+  QString profile=QString("profile%1").arg(profileid);
+  settings.beginGroup(profile);
+  QString stickCal=settings.value("StickPotCalib","").toString();
+  settings.endGroup();
+  settings.endGroup();
+  if (stickCal.isEmpty()) {
+    QMessageBox::StandardButton ret = QMessageBox::question(this,
+            tr("companion9x"), tr("Write %1 to EEPROM memory?").arg(strippedName(curFile)),
+            QMessageBox::Yes | QMessageBox::No);
+    if (ret == QMessageBox::No) {
       return;
     }
+  }
+  burnConfigDialog bcd;
+  QString tempDir    = QDir::tempPath();
+  QString tempFile = tempDir + "/temp.bin";
+  saveFile(tempFile, false);
+  if(!QFileInfo(tempFile).exists()) {
+    QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
+    return;
+  }
+  if (!stickCal.isEmpty()) {
+    bool backup=false;
+    burnDialog *cd = new burnDialog(this, 1, &tempFile, &backup);
+    cd->exec();
+  }
+  if (!tempFile.isEmpty()) {
     QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
     avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
     ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));

@@ -32,6 +32,20 @@
   <layout class="QGridLayout" name="gridLayout_7">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_4">
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="patchcalib_CB">
+       <property name="text">
+        <string>Patch calibration setting from profile</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QCheckBox" name="patchhw_CB">
+       <property name="text">
+        <string>Patch HW setting from profile</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QFrame" name="FramFWInfo">
        <property name="sizePolicy">
@@ -335,7 +349,7 @@
        </layout>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="7" column="0">
       <widget class="QCheckBox" name="EEpromCB">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -358,6 +372,22 @@
        </property>
        <property name="tristate">
         <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="profile_label">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Current Profile</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
