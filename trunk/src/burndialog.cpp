@@ -2,9 +2,12 @@
 #include "ui_burndialog.h"
 
 #include <QtGui>
+#include "eeprominterface.h"
 #include "helpers.h"
 #include "splashlibrary.h"
 #include "flashinterface.h"
+#include "hexinterface.h"
+
 
 burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE):
   QDialog(parent),
@@ -20,14 +23,47 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
   ui->EEbackupCB->setCheckState(*backup ? Qt::Checked : Qt::Unchecked);
   if (Type == 2) {
     ui->EEpromCB->hide();
+    ui->profile_label->hide();
+    ui->patchcalib_CB->hide();
+    ui->patchhw_CB->hide();
     this->setWindowTitle(tr("Write firmware to TX"));
-  }
-  else {
+  } else {
+    ui->EEpromCB->hide();
+    ui->ImageLoadButton->setDisabled(true);
+    ui->libraryButton->setDisabled(true);
+    ui->InvertColorButton->setDisabled(true);
+    ui->BurnFlashButton->setDisabled(true);
+    ui->ImageFileName->clear();
+    ui->FwImage->clear();
+    ui->FWFileName->clear();
+    ui->VersionField->clear();
+    ui->DateField->clear();
+    ui->SVNField->clear();
+    ui->ModField->clear();
+    ui->FramFWInfo->hide();
+    ui->SplashFrame->hide();
+    ui->BurnFlashButton->setDisabled(true);
+    ui->EEbackupCB->hide();
     this->setWindowTitle(tr("Write models to TX"));
+    QSettings settings("companion9x", "companion9x");
+    int profileid=settings.value("profileId", 1).toInt();
+    settings.beginGroup("Profiles");
+    QString profile=QString("profile%1").arg(profileid);
+    settings.beginGroup(profile);
+    QString Name=settings.value("Name","").toString();
+    settings.endGroup();
+    settings.endGroup();
+    ui->profile_label->setText(tr("Current profile")+QString(": ")+Name);
   }
   if (!hexfileName->isEmpty()) {
     ui->FWFileName->setText(*hexfileName);
-    checkFw(*hexfileName);
+    if (Type==2) {
+      checkFw(*hexfileName);
+    } else {
+      if (checkeEprom(*hexfileName)) {
+        ui->BurnFlashButton->setEnabled(true);
+      }
+    }
     ui->FWFileName->hide();
     ui->FlashLoadButton->hide();   
     hexfileName->clear();
@@ -69,7 +105,13 @@ void burnDialog::on_FlashLoadButton_clicked()
   ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
-  checkFw(fileName);
+  if (hexType==2) {
+    checkFw(fileName);
+  } else {
+    if (checkeEprom(fileName)) {
+      ui->BurnFlashButton->setEnabled(true);
+    }
+  }
 }
 
 void burnDialog::checkFw(QString fileName)
@@ -137,6 +179,82 @@ void burnDialog::checkFw(QString fileName)
   }  
   QTimer::singleShot(0, this, SLOT(shrink()));
   settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
+}
+
+bool burnDialog::checkeEprom(QString fileName)
+{
+  if (fileName.isEmpty()) {
+    return false;
+  }
+  QFile file(fileName);
+  if (!file.exists()) {
+    QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
+    return false;
+  }
+  int fileType = getFileType(fileName);
+  if (fileType==FILE_TYPE_XML) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+      QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+      return false;
+    }
+    QTextStream inputStream(&file);
+    XmlInterface(inputStream).load(radioData);
+  }
+  else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return false;
+    }        
+    QDomDocument doc(ER9X_EEPROM_FILE_TYPE);
+    bool xmlOK = doc.setContent(&file);
+    if(xmlOK) {
+      if (!LoadEepromXml(radioData, doc)){
+        return false;
+      }
+    }
+    file.reset();
+      
+    QTextStream inputStream(&file);
+    if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
+      QString hline = inputStream.readLine();
+      if (hline!=EEPE_EEPROM_FILE_HEADER) {
+        file.close();
+        return false;
+      }
+    }
+    uint8_t eeprom[EESIZE_GRUVIN9X];
+    int eeprom_size = HexInterface(inputStream).load(eeprom);
+    if (!eeprom_size) {
+      QMessageBox::critical(this, tr("Error"), tr("Invalid EEPROM File %1").arg(fileName));
+      file.close();
+      return false;
+    }
+    file.close();
+    if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid EEPROM File %1").arg(fileName));
+      return false;
+    }
+  }
+  else if (fileType==FILE_TYPE_BIN) { //read binary
+    int eeprom_size = file.size();
+    if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return false;
+    }
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+    memset(eeprom, 0, eeprom_size);
+    long result = file.read((char*)eeprom, eeprom_size);
+    file.close();
+    if (result != eeprom_size) {
+        QMessageBox::critical(this, tr("Error"),tr("Error reading file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return false;
+    }
+    if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid binary EEPROM File %1").arg(fileName));
+      return false;
+    }
+  }
+  return true;
 }
 
 void burnDialog::on_ImageLoadButton_clicked()
@@ -229,6 +347,135 @@ void burnDialog::on_BurnFlashButton_clicked()
     else {
       QMessageBox::critical(this, tr("Warning"), tr("No firmware selected"));
       hexfileName->clear();     
+    }
+  }
+  if (hexType==1) {
+    QSettings settings("companion9x", "companion9x");
+    int profileid=settings.value("profileId", 1).toInt();
+    settings.beginGroup("Profiles");
+    QString profile=QString("profile%1").arg(profileid);
+    settings.beginGroup(profile);
+    QString calib=settings.value("StickPotCalib","").toString();
+    QString trainercalib=settings.value("TrainerCalib","").toString();
+    int8_t vBatCalib=(int8_t)settings.value("VbatCalib", radioData.generalSettings.vBatCalib).toInt();
+    int8_t currentCalib=(int8_t)settings.value("currentCalib", radioData.generalSettings.currentCalib).toInt();
+    int8_t PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", radioData.generalSettings.PPM_Multiplier).toInt();
+    uint8_t GSStickMode=(uint8_t)settings.value("GSStickMode", radioData.generalSettings.stickMode).toUInt();
+    QString DisplaySet=settings.value("Display","").toString();
+    QString BeeperSet=settings.value("Beeper","").toString();
+    QString HapticSet=settings.value("Haptic","").toString();
+    QString SpeakerSet=settings.value("Speaker","").toString();
+    settings.endGroup();
+    settings.endGroup();
+    bool patch=false;
+    if (ui->patchcalib_CB->isChecked()) {
+      if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==8)) {
+        QString Byte;
+        int16_t byte16;
+        int8_t byte8;
+        bool ok;
+        for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
+          Byte=calib.mid(i*12,4);
+          byte16=Byte.toInt(&ok,16);
+          if (ok)
+            radioData.generalSettings.calibMid[i]=byte16;
+          Byte=calib.mid(4+i*12,4);
+          byte16=Byte.toInt(&ok,16);
+          if (ok)
+            radioData.generalSettings.calibSpanNeg[i]=byte16;
+          Byte=calib.mid(8+i*12,4);
+          byte16=Byte.toInt(&ok,16);
+          if (ok)
+            radioData.generalSettings.calibSpanPos[i]=byte16;
+        }
+        for (int i=0; i<4; i++) {
+          Byte=trainercalib.mid(i*4,4);
+          byte8=Byte.toInt(&ok,16);
+          if (ok)
+            radioData.generalSettings.trainer.calib[i]=byte8;
+        }
+        radioData.generalSettings.currentCalib=currentCalib;
+        radioData.generalSettings.vBatCalib=vBatCalib;
+        radioData.generalSettings.PPM_Multiplier=PPM_Multiplier;
+        patch=true;
+      } else {
+        QMessageBox::critical(this, tr("Warning"), tr("Wrong radio calibration data in profile, eeprom not patched"));
+      }
+    }
+    if (ui->patchhw_CB->isChecked()) {
+      if ((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6)) {
+        radioData.generalSettings.stickMode=GSStickMode;
+        uint8_t byte8u;
+        int8_t byte8;
+        bool ok;
+        byte8=(int8_t)DisplaySet.mid(0,2).toInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.optrexDisplay=(byte8==1 ? true : false);
+        byte8u=(uint8_t)DisplaySet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.contrast=byte8u;
+        byte8u=(uint8_t)DisplaySet.mid(4,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.backlightBright=byte8u;
+        byte8u=(uint8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.beeperMode=(BeeperMode)byte8u;
+        byte8=(int8_t)DisplaySet.mid(2,2).toInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.beeperLength=byte8;
+        byte8u=(uint8_t)HapticSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.hapticMode=(BeeperMode)byte8u;
+        byte8u=(uint8_t)HapticSet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.hapticStrength=byte8u;
+        byte8=(int8_t)HapticSet.mid(4,2).toInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.hapticLength=byte8;
+        byte8u=(uint8_t)SpeakerSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.speakerMode=byte8u;
+        byte8u=(uint8_t)SpeakerSet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.speakerPitch=byte8u;
+        byte8u=(uint8_t)SpeakerSet.mid(4,2).toUInt(&ok,16);
+        if (ok)
+          radioData.generalSettings.speakerVolume=byte8u;
+        patch=true;
+      } else {
+        QMessageBox::critical(this, tr("Warning"), tr("Wrong radio setting data in profile, eeprom not patched"));
+      }
+    
+      QString fileName;
+      if (patch) {
+        QString tempDir    = QDir::tempPath();
+        fileName = tempDir + "/temp.bin";
+        QFile file(fileName);
+
+        uint8_t *eeprom = (uint8_t*)malloc(GetEepromInterface()->getEEpromSize());
+        int eeprom_size = 0;
+
+        eeprom_size = GetEepromInterface()->save(eeprom, radioData);
+        if (!eeprom_size) {
+          QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+          hexfileName->clear();
+        }
+
+        if (!file.open(QIODevice::WriteOnly)) {
+          QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+          hexfileName->clear();
+        }
+
+        QTextStream outputStream(&file);
+
+        long result = file.write((char*)eeprom, eeprom_size);
+        if(result!=eeprom_size) {
+          QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(fileName).arg(file.errorString()));
+          hexfileName->clear();
+        }
+        hexfileName->clear();
+        hexfileName->append(fileName);
+      }
     }
   }
   this->close();

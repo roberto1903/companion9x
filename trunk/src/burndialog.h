@@ -3,7 +3,9 @@
 
 #include <QtGui>
 #include <QDialog>
+#include "eeprominterface.h"
 #include "flashinterface.h"
+#include "xmlinterface.h"
 
 #define XML_FILES_FILTER     "XML files (*.xml);;"
 #define HEX_FILES_FILTER     "HEX files (*.hex);;"
@@ -14,6 +16,9 @@
 #define EEPROM_FILES_FILTER  "EEPE files (*.eepe *.bin *.hex);;" EEPE_FILES_FILTER BIN_FILES_FILTER HEX_FILES_FILTER
 #define FLASH_FILES_FILTER   "FLASH files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
 #define EXTERNAL_EEPROM_FILES_FILTER   "EEPROM files (*.bin *.hex);;" BIN_FILES_FILTER HEX_FILES_FILTER
+#define ER9X_EEPROM_FILE_TYPE        "ER9X_EEPROM_FILE"
+#define EEPE_EEPROM_FILE_HEADER  "EEPE EEPROM FILE"
+#define EEPE_MODEL_FILE_HEADER   "EEPE MODEL FILE"
 
 
 namespace Ui
@@ -39,6 +44,7 @@ private slots:
   void on_EEbackupCB_clicked();
   void on_PreferredImageCB_toggled(bool checked);
   void checkFw(QString fileName);
+  bool checkeEprom(QString fileName);
   void shrink();
 
 private:
@@ -46,6 +52,7 @@ private:
   QString * hexfileName;
   bool * backup;
   int hexType;
+  RadioData radioData;
 };
 
 #endif // BURNDIALOG_H

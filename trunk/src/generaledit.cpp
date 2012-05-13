@@ -946,7 +946,7 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("StickPotCalib",calib);
     calib.clear();
     for (int i=0; i< 4; i++) {
-      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 2, 16, QChar('0')));
     }
     settings.setValue("TrainerCalib",calib);
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
