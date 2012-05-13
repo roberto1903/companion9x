@@ -922,6 +922,9 @@ void GeneralEdit::on_calstore_PB_clicked()
   QString name=settings.value("Name","").toString();
   if (name.isEmpty()) {
     ui->calstore_PB->setDisabled(true);
+    settings.endGroup();
+    settings.endGroup();
+    return;
   } else {
     QString calib=settings.value("StickPotCalib","").toString();
     if (!(calib.isEmpty())) {
@@ -967,10 +970,10 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("Beeper",QString("%1%2").arg(g_eeGeneral.beeperMode, 2, 16, QChar('0')).arg(g_eeGeneral.beeperLength, 2, 16, QChar('0')));
     settings.setValue("Haptic",QString("%1%2%3").arg(g_eeGeneral.hapticMode, 2, 16, QChar('0')).arg(g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg(g_eeGeneral.hapticLength, 2, 16, QChar('0')));
     settings.setValue("Speaker",QString("%1%2%3").arg(g_eeGeneral.speakerMode, 2, 16, QChar('0')).arg(g_eeGeneral.speakerPitch, 2, 16, QChar('0')).arg(g_eeGeneral.speakerVolume, 2, 16, QChar('0')));
+    settings.endGroup();
+    settings.endGroup();
+    QMessageBox::information(this, "companion9x", tr("Calibration and HW parameters saved."));
   }
-
-  settings.endGroup();
-  settings.endGroup();
 }
 
 void GeneralEdit::shrink() {
