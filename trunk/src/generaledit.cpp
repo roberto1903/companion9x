@@ -10,7 +10,6 @@
 #define BIT_BEEP_VAL     ( 0x38 ) // >>3
 #define BEEP_VAL_SHIFT   3
 
-
 GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GeneralEdit),
@@ -22,7 +21,17 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
 
     QSettings settings("companion9x", "companion9x");
     ui->tabWidget->setCurrentIndex(settings.value("generalEditTab", 0).toInt());
-
+    int profile_id=settings.value("profileId", 0).toInt();
+    settings.beginGroup("Profiles");
+    QString profile=QString("profile%1").arg(profile_id);
+    settings.beginGroup(profile);
+    QString name=settings.value("Name","").toString();
+    if (name.isEmpty()) {
+      ui->calstore_PB->setDisabled(true);
+    }
+    settings.endGroup();
+    settings.endGroup();
+    
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
@@ -901,6 +910,48 @@ void GeneralEdit::on_swGEAChkB_stateChanged(int )
     if(switchDefPosEditLock) return;
     getGeneralSwitchDefPos(8,ui->swGEAChkB->isChecked());
     updateSettings();
+}
+
+void GeneralEdit::on_calstore_PB_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  int profile_id=settings.value("profileId", 0).toInt();
+  settings.beginGroup("Profiles");
+  QString profile=QString("profile%1").arg(profile_id);
+  settings.beginGroup(profile);
+  QString name=settings.value("Name","").toString();
+  if (name.isEmpty()) {
+    ui->calstore_PB->setDisabled(true);
+  } else {
+    QString calib=settings.value("StickPotCalib","").toString();
+    if (!(calib.isEmpty())) {
+      int ret = QMessageBox::question(this, "companion9x", 
+                      tr("Do you want to store calibration in %1 profile<br>Overwriting existing calibrationt?").arg(name) ,
+                      QMessageBox::Yes | QMessageBox::No);
+      if (ret == QMessageBox::No) {
+        settings.endGroup();
+        settings.endGroup();
+        return;
+      }
+    }
+    calib.clear();
+    for (int i=0; i< (NUM_STICKS+NUM_POTS); i++) {
+      calib.append(QString("%1").arg(g_eeGeneral.calibMid[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg(g_eeGeneral.calibSpanNeg[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg(g_eeGeneral.calibSpanPos[i], 4, 16, QChar('0')));
+    }
+    settings.setValue("StickPotCalib",calib);
+    calib.clear();
+    for (int i=0; i< 4; i++) {
+      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 4, 16, QChar('0')));
+    }
+    settings.setValue("TrainerCalib",calib);
+    settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
+    settings.setValue("currentCalib",g_eeGeneral.currentCalib);
+    settings.setValue("PPM_Multiplier",g_eeGeneral.PPM_Multiplier);
+  }
+  settings.endGroup();
+  settings.endGroup();
 }
 
 void GeneralEdit::shrink() {

@@ -128,6 +128,7 @@ private slots:
     void on_swID2ChkB_stateChanged(int );
     void on_swAILChkB_stateChanged(int );
     void on_swGEAChkB_stateChanged(int );
+    void on_calstore_PB_clicked();
     void shrink();
 };
 
