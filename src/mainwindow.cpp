@@ -731,11 +731,12 @@ void MainWindow::burnFrom()
 void MainWindow::burnExtenalToEEPROM()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
-    if (!fileName.isEmpty())
-    {
+    QString fileName;
+    bool backup = false;
+    burnDialog *cd = new burnDialog(this, 1, &fileName, &backup);
+    cd->exec();
+    if (!fileName.isEmpty()) {
         settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-
         int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
         if(ret!=QMessageBox::Yes) return;
         if (!isValidEEPROM(fileName)) 

@@ -28,6 +28,11 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->patchhw_CB->hide();
     this->setWindowTitle(tr("Write firmware to TX"));
   } else {
+    ui->FlashLoadButton->setText(tr("Load eEprom"));
+    ui->EEpromCB->hide();
+    ui->profile_label->hide();
+    ui->patchcalib_CB->hide();
+    ui->patchhw_CB->hide();
     ui->EEpromCB->hide();
     ui->ImageLoadButton->setDisabled(true);
     ui->libraryButton->setDisabled(true);
@@ -104,12 +109,17 @@ void burnDialog::on_FlashLoadButton_clicked()
   ui->BurnFlashButton->setDisabled(true);
   ui->EEbackupCB->hide();
   QTimer::singleShot(0, this, SLOT(shrink()));
-  fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
   if (hexType==2) {
+    fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
     checkFw(fileName);
   } else {
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (checkeEprom(fileName)) {
       ui->BurnFlashButton->setEnabled(true);
+      ui->profile_label->show();
+      ui->patchcalib_CB->show();
+      ui->patchhw_CB->show();
+      QTimer::singleShot(0, this, SLOT(shrink()));
     }
   }
 }
@@ -254,6 +264,7 @@ bool burnDialog::checkeEprom(QString fileName)
       return false;
     }
   }
+  ui->FWFileName->setText(fileName);
   return true;
 }
 
