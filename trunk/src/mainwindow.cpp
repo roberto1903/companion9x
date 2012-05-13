@@ -1329,21 +1329,22 @@ void MainWindow::createToolBars()
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
-
     QToolButton * recentToolButton = new QToolButton;
     recentToolButton->setPopupMode(QToolButton::InstantPopup);
     recentToolButton->setMenu(createRecentFileMenu());
     recentToolButton->setIcon(QIcon(":/images/recentdocument.png"));
     recentToolButton->setToolTip(tr("Recent Files"));
     fileToolBar->addWidget(recentToolButton);
+    fileToolBar->addAction(saveAct);
 
+    fileToolBar->addSeparator();
+    fileToolBar->addAction(preferencesAct);
     profileButton = new QToolButton;
     profileButton->setPopupMode(QToolButton::InstantPopup);
     profileButton->setMenu(createProfilesMenu());
     profileButton->setIcon(QIcon(":/images/profiles.png"));
     profileButton->setToolTip(tr("Firmware Profiles"));
     fileToolBar->addWidget(profileButton);
-
     bool notfound=true;
     QSettings settings("companion9x", "companion9x");
     settings.beginGroup("Profiles");
@@ -1357,11 +1358,8 @@ void MainWindow::createToolBars()
       settings.endGroup();
     }
     profileButton->setDisabled(notfound);
-    
-    fileToolBar->addAction(saveAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(simulateAct);
-    fileToolBar->addAction(preferencesAct);
     fileToolBar->addAction(printAct);
     fileToolBar->addAction(compareAct);
 

@@ -469,18 +469,31 @@ void preferencesDialog::on_ProfSlot_SB_valueChanged()
 
 void preferencesDialog::on_ProfSave_PB_clicked()
 {
-      QSettings settings("companion9x", "companion9x");
-      settings.beginGroup("Profiles");
-      QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
+  QSettings settings("companion9x", "companion9x");
+  settings.beginGroup("Profiles");
+  QString profile=QString("profile%1").arg(ui->ProfSlot_SB->value());
+  QString name=ui->ProfName_LE->text();
+  if (name.isEmpty()) {
+    int ret = QMessageBox::question(this, "companion9x", 
+                tr("Profile name is empty, profile slot %1 will we deleted.<br>Are you sure ?").arg(ui->ProfSlot_SB->value()) ,
+                QMessageBox::Yes | QMessageBox::No);
+    if (ret==QMessageBox::Yes) {
+      settings.remove(profile);
+    } else {
       settings.beginGroup(profile);
-      settings.setValue("Name",ui->ProfName_LE->text());
-      settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
-      settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
-      settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
-      current_firmware = getFirmware(current_firmware_id);
-      settings.setValue("firmware", current_firmware_id);
-      settings.endGroup();
-      settings.endGroup();
+      ui->ProfName_LE->setText(settings.value("Name","").toString());
+    }
+  } else {
+    settings.beginGroup(profile);
+    settings.setValue("Name",name);
+    settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
+    settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
+    settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
+    current_firmware = getFirmware(current_firmware_id);
+    settings.setValue("firmware", current_firmware_id);
+    settings.endGroup();
+    settings.endGroup();
+  }
 }
 
 void preferencesDialog::on_SplashSelect_clicked()
