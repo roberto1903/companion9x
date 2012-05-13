@@ -255,8 +255,6 @@ void preferencesDialog::initSettings()
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
   ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
-  ui->ProfSlot_SB->setValue(settings.value("profileId", 1).toInt());
-  on_ProfSlot_SB_valueChanged();
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
         ui->libraryPath->setText(Path);
@@ -275,6 +273,7 @@ void preferencesDialog::initSettings()
 
   baseFirmwareChanged();
   ui->ProfSlot_SB->setValue(settings.value("profileId", 1).toInt());
+  on_ProfSlot_SB_valueChanged();
   QString ImageStr = settings.value("SplashImage", "").toString();
   if (!ImageStr.isEmpty()) {
     QImage Image = qstring2image(ImageStr);

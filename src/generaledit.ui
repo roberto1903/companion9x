@@ -2504,6 +2504,20 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="15" column="3" rowspan="2">
+        <widget class="QPushButton" name="calstore_PB">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Store calibration
+in current profile</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
