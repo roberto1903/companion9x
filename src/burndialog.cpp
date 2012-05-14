@@ -387,21 +387,21 @@ void burnDialog::on_BurnFlashButton_clicked()
         bool ok;
         for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
           Byte=calib.mid(i*12,4);
-          byte16=Byte.toInt(&ok,16);
+          byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)
             radioData.generalSettings.calibMid[i]=byte16;
           Byte=calib.mid(4+i*12,4);
-          byte16=Byte.toInt(&ok,16);
+          byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)
             radioData.generalSettings.calibSpanNeg[i]=byte16;
           Byte=calib.mid(8+i*12,4);
-          byte16=Byte.toInt(&ok,16);
+          byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)
             radioData.generalSettings.calibSpanPos[i]=byte16;
         }
         for (int i=0; i<4; i++) {
           Byte=trainercalib.mid(i*4,4);
-          byte16=Byte.toInt(&ok,16);
+          byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)
             radioData.generalSettings.trainer.calib[i]=byte16;
         }

@@ -962,21 +962,21 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       bool ok;
       for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
         Byte=calib.mid(i*12,4);
-        byte16=Byte.toInt(&ok,16);
+        byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
           g_eeGeneral.calibMid[i]=byte16;
         Byte=calib.mid(4+i*12,4);
-        byte16=Byte.toInt(&ok,16);
+        byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
           g_eeGeneral.calibSpanNeg[i]=byte16;
         Byte=calib.mid(8+i*12,4);
-        byte16=Byte.toInt(&ok,16);
+        byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
           g_eeGeneral.calibSpanPos[i]=byte16;
       }
       for (int i=0; i<4; i++) {
         Byte=trainercalib.mid(i*4,4);
-        byte16=Byte.toInt(&ok,16);
+        byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
           g_eeGeneral.trainer.calib[i]=byte16;
       }
@@ -1000,15 +1000,15 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       byte8u=(uint8_t)DisplaySet.mid(4,2).toUInt(&ok,16);
       if (ok)
         g_eeGeneral.backlightBright=byte8u;
-      byte8u=(uint8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
+      byte8=(int8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
       if (ok)
-        g_eeGeneral.beeperMode=(BeeperMode)byte8u;
+        g_eeGeneral.beeperMode=(BeeperMode)byte8;
       byte8=(int8_t)BeeperSet.mid(2,2).toInt(&ok,16);
       if (ok)
         g_eeGeneral.beeperLength=byte8;
-      byte8u=(uint8_t)HapticSet.mid(0,2).toUInt(&ok,16);
+      byte8=(int8_t)HapticSet.mid(0,2).toUInt(&ok,16);
       if (ok)
-        g_eeGeneral.hapticMode=(BeeperMode)byte8u;
+        g_eeGeneral.hapticMode=(BeeperMode)byte8;
       byte8u=(uint8_t)HapticSet.mid(2,2).toUInt(&ok,16);
       if (ok)
         g_eeGeneral.hapticStrength=byte8u;
@@ -1056,14 +1056,14 @@ void GeneralEdit::on_calstore_PB_clicked()
     }
     calib.clear();
     for (int i=0; i< (NUM_STICKS+NUM_POTS); i++) {
-      calib.append(QString("%1").arg(g_eeGeneral.calibMid[i], 4, 16, QChar('0')));
-      calib.append(QString("%1").arg(g_eeGeneral.calibSpanNeg[i], 4, 16, QChar('0')));
-      calib.append(QString("%1").arg(g_eeGeneral.calibSpanPos[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibMid[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanNeg[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanPos[i], 4, 16, QChar('0')));
     }
     settings.setValue("StickPotCalib",calib);
     calib.clear();
     for (int i=0; i< 4; i++) {
-      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 4, 16, QChar('0')));
+      calib.append(QString("%1").arg((uint16_t)g_eeGeneral.trainer.calib[i], 4, 16, QChar('0')));
     }
     settings.setValue("TrainerCalib",calib);
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
@@ -1083,10 +1083,10 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("speakerPitch",g_eeGeneral.speakerPitch);
     settings.setValue("speakerVolume",g_eeGeneral.speakerVolume);
  */
-    settings.setValue("Display",QString("%1%2%3").arg((g_eeGeneral.optrexDisplay ? 1:0), 2, 16, QChar('0')).arg(g_eeGeneral.contrast, 2, 16, QChar('0')).arg(g_eeGeneral.backlightBright, 2, 16, QChar('0')));
-    settings.setValue("Beeper",QString("%1%2").arg(g_eeGeneral.beeperMode, 2, 16, QChar('0')).arg(g_eeGeneral.beeperLength, 2, 16, QChar('0')));
-    settings.setValue("Haptic",QString("%1%2%3").arg(g_eeGeneral.hapticMode, 2, 16, QChar('0')).arg(g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg(g_eeGeneral.hapticLength, 2, 16, QChar('0')));
-    settings.setValue("Speaker",QString("%1%2%3").arg(g_eeGeneral.speakerMode, 2, 16, QChar('0')).arg(g_eeGeneral.speakerPitch, 2, 16, QChar('0')).arg(g_eeGeneral.speakerVolume, 2, 16, QChar('0')));
+    settings.setValue("Display",QString("%1%2%3").arg((g_eeGeneral.optrexDisplay ? 1:0), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.contrast, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.backlightBright, 2, 16, QChar('0')));
+    settings.setValue("Beeper",QString("%1%2").arg(((uint8_t)g_eeGeneral.beeperMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.beeperLength, 2, 16, QChar('0')));
+    settings.setValue("Haptic",QString("%1%2%3").arg(((uint8_t)g_eeGeneral.hapticMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticLength, 2, 16, QChar('0')));
+    settings.setValue("Speaker",QString("%1%2%3").arg((uint8_t)g_eeGeneral.speakerMode, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.speakerPitch, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.speakerVolume, 2, 16, QChar('0')));
     settings.endGroup();
     settings.endGroup();
     QMessageBox::information(this, "companion9x", tr("Calibration and HW parameters saved."));
