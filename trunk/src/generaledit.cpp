@@ -3,6 +3,7 @@
 #include "helpers.h"
 #include <QtGui>
 
+#define MAX_PROFILES  10
 #define BIT_WARN_THR     ( 0x01 )
 #define BIT_WARN_SW      ( 0x02 )
 #define BIT_WARN_MEM     ( 0x04 )
@@ -30,6 +31,19 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->calstore_PB->setDisabled(true);
     }
     settings.endGroup();
+    ui->profile_CB->clear();
+    for ( int i = 0; i < MAX_PROFILES; ++i) {
+      QString profile=QString("profile%1").arg(i+1);
+      settings.beginGroup(profile);
+      QString name=settings.value("Name","").toString();
+      if (!name.isEmpty()) {
+        ui->profile_CB->addItem(name, i);
+        if ((i+1)==profile_id) {
+          ui->profile_CB->setCurrentIndex(ui->profile_CB->count()-1);
+        }
+      }
+      settings.endGroup();
+    }
     settings.endGroup();
     
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
@@ -915,7 +929,7 @@ void GeneralEdit::on_swGEAChkB_stateChanged(int )
 void GeneralEdit::on_calstore_PB_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  int profile_id=settings.value("profileId", 0).toInt();
+  int profile_id=ui->profile_CB->itemData(ui->profile_CB->currentIndex()).toInt();
   settings.beginGroup("Profiles");
   QString profile=QString("profile%1").arg(profile_id);
   settings.beginGroup(profile);
