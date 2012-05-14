@@ -192,28 +192,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->telalarmsChkB->hide();
       ui->label_telalarms->hide();
     }
-    if (!GetEepromInterface()->getCapability(HapticLength)) {
-      ui->label_HL->hide();
-      ui->hapticLengthCB->hide();
-    } else {
-      ui->hapticLengthCB->setCurrentIndex(g_eeGeneral.hapticLength+2);
-    }
     
     ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
-    ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
-    ui->volume_SB->setValue(g_eeGeneral.speakerVolume);
-    ui->beeperlenCB->setCurrentIndex(g_eeGeneral.beeperLength+2);
-    ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
-    ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
-    ui->hapticmodeCB->setCurrentIndex(g_eeGeneral.hapticMode+2);
     ui->PotScrollEnableChkB->setChecked(!g_eeGeneral.disablePotScroll);
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
-    ui->BLBright_SB->setValue(100-g_eeGeneral.backlightBright);
     ui->contrastSB->setValue(g_eeGeneral.contrast);
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
-    ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
-    ui->CurrentCalib_SB->setValue((double)g_eeGeneral.currentCalib);
-    ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
     ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
@@ -224,9 +208,6 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->memwarnChkB->setChecked(!g_eeGeneral.disableMemoryWarning);   //Default is zero=checked
     ui->alarmwarnChkB->setChecked(!g_eeGeneral.disableAlarmWarning);//Default is zero=checked
     ui->enableTelemetryAlarmChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
-    ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperMode+2);
-    ui->channelorderCB->setCurrentIndex(g_eeGeneral.templateSetup);
-    ui->stickmodeCB->setCurrentIndex(g_eeGeneral.stickMode);
 
     ui->beepMinuteChkB->setChecked(g_eeGeneral.minuteBeep);
     ui->beepCountDownChkB->setChecked(g_eeGeneral.preBeep);
@@ -246,6 +227,37 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->trnMode_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].mode);
     ui->trnChn_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].src);
     ui->trnWeight_4->setValue(g_eeGeneral.trainer.mix[3].weight);
+    setValues();
+    switchDefPosEditLock=false;
+    QTimer::singleShot(0, this, SLOT(shrink()));
+}
+
+GeneralEdit::~GeneralEdit()
+{
+    delete ui;
+}
+
+void GeneralEdit::setValues()
+{
+    ui->beeperCB->setCurrentIndex(g_eeGeneral.beeperMode+2);
+    ui->channelorderCB->setCurrentIndex(g_eeGeneral.templateSetup);
+    ui->stickmodeCB->setCurrentIndex(g_eeGeneral.stickMode);
+    if (!GetEepromInterface()->getCapability(HapticLength)) {
+      ui->label_HL->hide();
+      ui->hapticLengthCB->hide();
+    } else {
+      ui->hapticLengthCB->setCurrentIndex(g_eeGeneral.hapticLength+2);
+    }
+    ui->BLBright_SB->setValue(100-g_eeGeneral.backlightBright);
+    ui->soundModeCB->setCurrentIndex(g_eeGeneral.speakerMode);
+    ui->volume_SB->setValue(g_eeGeneral.speakerVolume);
+    ui->beeperlenCB->setCurrentIndex(g_eeGeneral.beeperLength+2);
+    ui->speakerPitchSB->setValue(g_eeGeneral.speakerPitch);
+    ui->hapticStrengthSB->setValue(g_eeGeneral.hapticStrength);
+    ui->hapticmodeCB->setCurrentIndex(g_eeGeneral.hapticMode+2);
+    ui->battcalibDSB->setValue((double)g_eeGeneral.vBatCalib/10);
+    ui->CurrentCalib_SB->setValue((double)g_eeGeneral.currentCalib);
+    ui->battCalib->setValue((double)g_eeGeneral.vBatCalib/10);
 
     ui->ana1Neg->setValue(g_eeGeneral.calibSpanNeg[0]);
     ui->ana2Neg->setValue(g_eeGeneral.calibSpanNeg[1]);
@@ -274,15 +286,8 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->PPM1->setValue(g_eeGeneral.trainer.calib[0]);
     ui->PPM2->setValue(g_eeGeneral.trainer.calib[1]);
     ui->PPM3->setValue(g_eeGeneral.trainer.calib[2]);
-    ui->PPM4->setValue(g_eeGeneral.trainer.calib[3]);
+    ui->PPM4->setValue(g_eeGeneral.trainer.calib[3]);  
     ui->PPM_MultiplierDSB->setValue((qreal)(g_eeGeneral.PPM_Multiplier+10)/10);
-    switchDefPosEditLock=false;
-    QTimer::singleShot(0, this, SLOT(shrink()));
-}
-
-GeneralEdit::~GeneralEdit()
-{
-    delete ui;
 }
 
 void GeneralEdit::setSwitchDefPos()
@@ -924,6 +929,104 @@ void GeneralEdit::on_swGEAChkB_stateChanged(int )
     if(switchDefPosEditLock) return;
     getGeneralSwitchDefPos(8,ui->swGEAChkB->isChecked());
     updateSettings();
+}
+
+void GeneralEdit::on_calretrieve_PB_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  int profile_id=ui->profile_CB->itemData(ui->profile_CB->currentIndex()).toInt();
+  settings.beginGroup("Profiles");
+  QString profile=QString("profile%1").arg(profile_id);
+  settings.beginGroup(profile);
+  QString calib=settings.value("StickPotCalib","").toString();
+  if (calib.isEmpty()) {
+    settings.endGroup();
+    settings.endGroup();
+    return;
+  } else {
+    QString trainercalib=settings.value("TrainerCalib","").toString();
+    int8_t vBatCalib=(int8_t)settings.value("VbatCalib", g_eeGeneral.vBatCalib).toInt();
+    int8_t currentCalib=(int8_t)settings.value("currentCalib", g_eeGeneral.currentCalib).toInt();
+    int8_t PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", g_eeGeneral.PPM_Multiplier).toInt();
+    uint8_t GSStickMode=(uint8_t)settings.value("GSStickMode", g_eeGeneral.stickMode).toUInt();
+    QString DisplaySet=settings.value("Display","").toString();
+    QString BeeperSet=settings.value("Beeper","").toString();
+    QString HapticSet=settings.value("Haptic","").toString();
+    QString SpeakerSet=settings.value("Speaker","").toString();
+    settings.endGroup();
+    settings.endGroup();
+    if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==8)) {
+      QString Byte;
+      int16_t byte16;
+      int8_t byte8;
+      bool ok;
+      for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
+        Byte=calib.mid(i*12,4);
+        byte16=Byte.toInt(&ok,16);
+        if (ok)
+          g_eeGeneral.calibMid[i]=byte16;
+        Byte=calib.mid(4+i*12,4);
+        byte16=Byte.toInt(&ok,16);
+        if (ok)
+          g_eeGeneral.calibSpanNeg[i]=byte16;
+        Byte=calib.mid(8+i*12,4);
+        byte16=Byte.toInt(&ok,16);
+        if (ok)
+          g_eeGeneral.calibSpanPos[i]=byte16;
+      }
+      for (int i=0; i<4; i++) {
+        Byte=trainercalib.mid(i*4,4);
+        byte8=Byte.toInt(&ok,16);
+        if (ok)
+          g_eeGeneral.trainer.calib[i]=byte8;
+      }
+      g_eeGeneral.currentCalib=currentCalib;
+      g_eeGeneral.vBatCalib=vBatCalib;
+      g_eeGeneral.PPM_Multiplier=PPM_Multiplier;
+    } else {
+      QMessageBox::critical(this, tr("Warning"), tr("Wrong radio calibration data in profile, eeprom not patched"));
+    }
+    if ((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6)) {
+      g_eeGeneral.stickMode=GSStickMode;
+      uint8_t byte8u;
+      int8_t byte8;
+      bool ok;
+      byte8=(int8_t)DisplaySet.mid(0,2).toInt(&ok,16);
+      if (ok)
+        g_eeGeneral.optrexDisplay=(byte8==1 ? true : false);
+      byte8u=(uint8_t)DisplaySet.mid(2,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.contrast=byte8u;
+      byte8u=(uint8_t)DisplaySet.mid(4,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.backlightBright=byte8u;
+      byte8u=(uint8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.beeperMode=(BeeperMode)byte8u;
+      byte8=(int8_t)DisplaySet.mid(2,2).toInt(&ok,16);
+      if (ok)
+        g_eeGeneral.beeperLength=byte8;
+      byte8u=(uint8_t)HapticSet.mid(0,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.hapticMode=(BeeperMode)byte8u;
+      byte8u=(uint8_t)HapticSet.mid(2,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.hapticStrength=byte8u;
+      byte8=(int8_t)HapticSet.mid(4,2).toInt(&ok,16);
+      if (ok)
+        g_eeGeneral.hapticLength=byte8;
+      byte8u=(uint8_t)SpeakerSet.mid(0,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.speakerMode=byte8u;
+      byte8u=(uint8_t)SpeakerSet.mid(2,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.speakerPitch=byte8u;
+      byte8u=(uint8_t)SpeakerSet.mid(4,2).toUInt(&ok,16);
+      if (ok)
+        g_eeGeneral.speakerVolume=byte8u;
+    } 
+  }
+  setValues();
 }
 
 void GeneralEdit::on_calstore_PB_clicked()
