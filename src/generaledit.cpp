@@ -1003,7 +1003,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       byte8u=(uint8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
       if (ok)
         g_eeGeneral.beeperMode=(BeeperMode)byte8u;
-      byte8=(int8_t)DisplaySet.mid(2,2).toInt(&ok,16);
+      byte8=(int8_t)BeeperSet.mid(2,2).toInt(&ok,16);
       if (ok)
         g_eeGeneral.beeperLength=byte8;
       byte8u=(uint8_t)HapticSet.mid(0,2).toUInt(&ok,16);

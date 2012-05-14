@@ -425,30 +425,39 @@ void burnDialog::on_BurnFlashButton_clicked()
         byte8u=(uint8_t)DisplaySet.mid(2,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.contrast=byte8u;
+
         byte8u=(uint8_t)DisplaySet.mid(4,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.backlightBright=byte8u;
+
         byte8u=(uint8_t)BeeperSet.mid(0,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.beeperMode=(BeeperMode)byte8u;
-        byte8=(int8_t)DisplaySet.mid(2,2).toInt(&ok,16);
+
+        byte8=(int8_t)BeeperSet.mid(2,2).toInt(&ok,16);
         if (ok)
           radioData.generalSettings.beeperLength=byte8;
+
         byte8u=(uint8_t)HapticSet.mid(0,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.hapticMode=(BeeperMode)byte8u;
+
         byte8u=(uint8_t)HapticSet.mid(2,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.hapticStrength=byte8u;
+
         byte8=(int8_t)HapticSet.mid(4,2).toInt(&ok,16);
         if (ok)
           radioData.generalSettings.hapticLength=byte8;
+
         byte8u=(uint8_t)SpeakerSet.mid(0,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.speakerMode=byte8u;
+
         byte8u=(uint8_t)SpeakerSet.mid(2,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.speakerPitch=byte8u;
+
         byte8u=(uint8_t)SpeakerSet.mid(4,2).toUInt(&ok,16);
         if (ok)
           radioData.generalSettings.speakerVolume=byte8u;
