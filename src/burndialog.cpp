@@ -403,7 +403,7 @@ void burnDialog::on_BurnFlashButton_clicked()
           Byte=trainercalib.mid(i*4,4);
           byte16=Byte.toInt(&ok,16);
           if (ok)
-            radioData.generalSettings.trainer.calib[i]=byte8;
+            radioData.generalSettings.trainer.calib[i]=byte16;
         }
         radioData.generalSettings.currentCalib=currentCalib;
         radioData.generalSettings.vBatCalib=vBatCalib;
