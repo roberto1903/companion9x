@@ -955,7 +955,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     QString SpeakerSet=settings.value("Speaker","").toString();
     settings.endGroup();
     settings.endGroup();
-    if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==8)) {
+    if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
       QString Byte;
       int16_t byte16;
       int8_t byte8;
@@ -976,7 +976,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       }
       for (int i=0; i<4; i++) {
         Byte=trainercalib.mid(i*4,4);
-        byte8=Byte.toInt(&ok,16);
+        byte16=Byte.toInt(&ok,16);
         if (ok)
           g_eeGeneral.trainer.calib[i]=byte8;
       }
@@ -1063,7 +1063,7 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("StickPotCalib",calib);
     calib.clear();
     for (int i=0; i< 4; i++) {
-      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 2, 16, QChar('0')));
+      calib.append(QString("%1").arg(g_eeGeneral.trainer.calib[i], 4, 16, QChar('0')));
     }
     settings.setValue("TrainerCalib",calib);
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
