@@ -978,7 +978,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
         Byte=trainercalib.mid(i*4,4);
         byte16=Byte.toInt(&ok,16);
         if (ok)
-          g_eeGeneral.trainer.calib[i]=byte8;
+          g_eeGeneral.trainer.calib[i]=byte16;
       }
       g_eeGeneral.currentCalib=currentCalib;
       g_eeGeneral.vBatCalib=vBatCalib;
