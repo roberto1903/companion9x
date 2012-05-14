@@ -380,7 +380,7 @@ void burnDialog::on_BurnFlashButton_clicked()
     settings.endGroup();
     bool patch=false;
     if (ui->patchcalib_CB->isChecked()) {
-      if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==8)) {
+      if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
         QString Byte;
         int16_t byte16;
         int8_t byte8;
@@ -401,7 +401,7 @@ void burnDialog::on_BurnFlashButton_clicked()
         }
         for (int i=0; i<4; i++) {
           Byte=trainercalib.mid(i*4,4);
-          byte8=Byte.toInt(&ok,16);
+          byte16=Byte.toInt(&ok,16);
           if (ok)
             radioData.generalSettings.trainer.calib[i]=byte8;
         }
