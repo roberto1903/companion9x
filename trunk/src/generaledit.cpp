@@ -37,7 +37,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       settings.beginGroup(profile);
       QString name=settings.value("Name","").toString();
       if (!name.isEmpty()) {
-        ui->profile_CB->addItem(name, i);
+        ui->profile_CB->addItem(name, i+1);
         if ((i+1)==profile_id) {
           ui->profile_CB->setCurrentIndex(ui->profile_CB->count()-1);
         }
