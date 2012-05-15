@@ -383,7 +383,6 @@ void burnDialog::on_BurnFlashButton_clicked()
       if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
         QString Byte;
         int16_t byte16;
-        int8_t byte8;
         bool ok;
         for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
           Byte=calib.mid(i*12,4);
