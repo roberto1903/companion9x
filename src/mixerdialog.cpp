@@ -11,12 +11,15 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->setupUi(this);
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-    populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES);
+    if (GetEepromInterface()->getCapability(ExtraTrims)) {
+      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES);
+    } else {
+      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_TRIMS,  POPULATE_SWITCHES);
+    }
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
     ui->offsetSB->setValue(md->sOffset);
     ui->DiffMixSB->setValue(md->differential);
-    ui->trimCB->setCurrentIndex(md->carryTrim);
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
@@ -29,6 +32,13 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         ui->label_FMtrim->hide();
         ui->label_4->setText(tr("Offset"));
     }
+    if (GetEepromInterface()->getCapability(ExtraTrims)) {
+      ui->trimCB->addItem(tr("Rud"),1);
+      ui->trimCB->addItem(tr("Ele"),2);
+      ui->trimCB->addItem(tr("Thr"),3);
+      ui->trimCB->addItem(tr("Ale"),4);      
+    }
+    ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
         ui->DiffMIXlabel->hide();
         ui->DiffMixSB->hide();
@@ -87,7 +97,7 @@ void MixerDialog::valuesChanged()
     md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
-    md->carryTrim = ui->trimCB->currentIndex();
+    md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves);
     md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();

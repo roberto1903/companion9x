@@ -435,7 +435,7 @@ class MixData {
     uint8_t delayDown;
     uint8_t speedUp;           // Servogeschwindigkeit aus Tabelle (10ms Cycle)
     uint8_t speedDown;         // 0 nichts
-    uint8_t carryTrim;
+    int8_t carryTrim;
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
     uint8_t mixWarn;           // mixer warning
     uint8_t enableFmTrim;
@@ -701,6 +701,7 @@ enum Capability {
  Outputs,
  ExtraChannels,
  ExtraInputs,
+ ExtraTrims,
  ExtendedTrims,
  HasNegCurves,
  HasExpoCurves,

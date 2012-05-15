@@ -104,17 +104,12 @@ p, li { white-space: pre-wrap; }
       <widget class="QComboBox" name="trimCB">
        <item>
         <property name="text">
-         <string>Yes</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>No</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Offset</string>
+         <string>Yes</string>
         </property>
        </item>
       </widget>

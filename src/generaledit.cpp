@@ -958,7 +958,6 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
       QString Byte;
       int16_t byte16;
-      int8_t byte8;
       bool ok;
       for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
         Byte=calib.mid(i*12,4);
@@ -984,7 +983,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       g_eeGeneral.vBatCalib=vBatCalib;
       g_eeGeneral.PPM_Multiplier=PPM_Multiplier;
     } else {
-      QMessageBox::critical(this, tr("Warning"), tr("Wrong radio calibration data in profile, eeprom not patched"));
+      QMessageBox::critical(this, tr("Warning"), tr("Wrong data in profile, radio calibration was not retrieved"));
     }
     if ((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6)) {
       g_eeGeneral.stickMode=GSStickMode;
@@ -1024,7 +1023,9 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       byte8u=(uint8_t)SpeakerSet.mid(4,2).toUInt(&ok,16);
       if (ok)
         g_eeGeneral.speakerVolume=byte8u;
-    } 
+    } else {
+      QMessageBox::critical(this, tr("Warning"), tr("Wrong data in profile, hw related parameters were not retrieved"));
+    }
   }
   setValues();
 }
@@ -1046,7 +1047,7 @@ void GeneralEdit::on_calstore_PB_clicked()
     QString calib=settings.value("StickPotCalib","").toString();
     if (!(calib.isEmpty())) {
       int ret = QMessageBox::question(this, "companion9x", 
-                      tr("Do you want to store calibration in %1 profile<br>Overwriting existing calibrationt?").arg(name) ,
+                      tr("Do you want to store calibration in %1 profile<br>overwriting existing calibration?").arg(name) ,
                       QMessageBox::Yes | QMessageBox::No);
       if (ret == QMessageBox::No) {
         settings.endGroup();

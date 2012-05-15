@@ -1171,7 +1171,7 @@ p, li { white-space: pre-wrap; }
        <item row="15" column="4">
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Backlight Auto On/OFF after</string>
+          <string>Backlight  Auto OFF after</string>
          </property>
         </widget>
        </item>

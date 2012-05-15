@@ -245,6 +245,8 @@ QString RawSource::toString()
                        QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
                      };
 
+  QString trims[] = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("Trma")};
+
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
   QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell") };
@@ -252,6 +254,8 @@ QString RawSource::toString()
   switch(type) {
     case SOURCE_TYPE_STICK:
       return sticks[index];
+    case SOURCE_TYPE_TRIM:
+      return trims[index];
     case SOURCE_TYPE_ROTARY_ENCODER:
       return rotary[index];
     case SOURCE_TYPE_MAX:
