@@ -12,9 +12,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
 
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     if (GetEepromInterface()->getCapability(ExtraTrims)) {
-      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES);
-    } else {
       populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_TRIMS,  POPULATE_SWITCHES);
+    } else {
+      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES);
     }
     ui->sourceCB->removeItem(0);
     ui->weightSB->setValue(md->weight);
