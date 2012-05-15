@@ -752,7 +752,11 @@ void ModelEdit::tabMixes()
         str += md->srcRaw.toString();
         if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
-        if(md->carryTrim) str += " " + RawSource(SOURCE_TYPE_TRIM, -(md->carryTrim)).toString();
+        if(md->carryTrim>0) {
+          str += " " +tr("No Trim");
+        } else if (md->carryTrim<0) {
+          str += " " + RawSource(SOURCE_TYPE_TRIM, (-(md->carryTrim)-1)).toString();
+        }
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){
             if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
         } else {
