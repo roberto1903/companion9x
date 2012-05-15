@@ -583,7 +583,115 @@ t_Open9xMixData_v205::operator MixData ()
   return c9x;
 }
 
-int8_t open9xFromSource(RawSource source)
+t_Open9xMixData_v209::t_Open9xMixData_v209(MixData &c9x)
+{
+  if (c9x.destCh) {
+    destCh = c9x.destCh-1;
+    mixWarn = c9x.mixWarn;
+    swtch = open9xFromSwitch(c9x.swtch);
+
+    if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+      srcRaw = 0;
+      swtch = 0;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+      srcRaw = 1 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
+      EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+      srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
+      srcRaw = 8 + c9x.srcRaw.index; // use pots instead
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 12; // MAX
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 13;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
+      srcRaw = 13 + open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+      srcRaw = 35 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+      srcRaw = 38 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+      srcRaw = 46 + c9x.srcRaw.index;
+    }
+
+    weight = c9x.weight;
+    differential = c9x.differential/2;
+    curve = c9x.curve;
+    delayUp = c9x.delayUp;
+    delayDown = c9x.delayDown;
+    speedUp = c9x.speedUp;
+    speedDown = c9x.speedDown;
+    carryTrim = c9x.carryTrim;
+    mltpx = (MltpxValue)c9x.mltpx;
+    phase = c9x.phase;
+    sOffset = c9x.sOffset;
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xMixData_v209));
+  }
+}
+
+t_Open9xMixData_v209::operator MixData ()
+{
+  MixData c9x;
+
+  if (srcRaw) {
+    c9x.destCh = destCh+1;
+    c9x.swtch = open9xToSwitch(swtch);
+
+    if (srcRaw == 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+    }
+    else if (srcRaw <= 7) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+    }
+    else if (srcRaw <= 11) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-8);
+    }
+    else if (srcRaw == 12) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (srcRaw == 13) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
+    }
+    else if (srcRaw <= 34) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(srcRaw-13).toValue());
+    }
+    else if (srcRaw <= 37) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-35);
+    }
+    else if (srcRaw <= 45) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-38);
+    }
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-46);
+    }
+    c9x.weight = weight;
+    c9x.differential = differential*2;
+    c9x.curve = curve;
+    c9x.delayUp = delayUp;
+    c9x.delayDown = delayDown;
+    c9x.speedUp = speedUp;
+    c9x.speedDown = speedDown;
+    c9x.carryTrim = carryTrim;
+    c9x.mltpx = (MltpxValue)mltpx;
+    c9x.mixWarn = mixWarn;
+    c9x.phase = phase;
+    c9x.sOffset = sOffset;
+  }
+  return c9x;
+}
+
+int8_t open9x208FromSource(RawSource source)
 {
   int v1 = 0;
   if (source.type == SOURCE_TYPE_STICK)
@@ -609,7 +717,7 @@ int8_t open9xFromSource(RawSource source)
   return v1;
 }
 
-RawSource open9xToSource(int8_t value)
+RawSource open9x208ToSource(int8_t value)
 {
   if (value == 0) {
     return RawSource(SOURCE_TYPE_NONE);
@@ -640,18 +748,80 @@ RawSource open9xToSource(int8_t value)
   }
 }
 
-t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &c9x)
+int8_t open9x209FromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_TRIM)
+    v1 = 8+source.index;
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 12;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 13;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 14+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 17+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 25+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 41+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 43+source.index;
+  return v1;
+}
+
+RawSource open9x209ToSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value <= 11) {
+    return RawSource(SOURCE_TYPE_TRIM, value - 8);
+  }
+  else if (value == 12) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 13) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 16) {
+    return RawSource(SOURCE_TYPE_CYC, value-14);
+  }
+  else if (value <= 24) {
+    return RawSource(SOURCE_TYPE_PPM, value-17);
+  }
+  else if (value <= 40) {
+    return RawSource(SOURCE_TYPE_CH, value-25);
+  }
+  else if (value <= 42) {
+    return RawSource(SOURCE_TYPE_TIMER, value-41);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-43);
+  }
+}
+
+t_Open9xCustomSwData_v208::t_Open9xCustomSwData_v208(CustomSwData &c9x)
 {
   func = c9x.func;
   v1 = c9x.val1;
   v2 = c9x.val2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    v1 = open9xFromSource(RawSource(c9x.val1));
+    v1 = open9x208FromSource(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    v2 = open9xFromSource(RawSource(c9x.val2));
+    v2 = open9x208FromSource(RawSource(c9x.val2));
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
@@ -660,7 +830,7 @@ t_Open9xCustomSwData::t_Open9xCustomSwData(CustomSwData &c9x)
   }
 }
 
-Open9xCustomSwData::operator CustomSwData ()
+Open9xCustomSwData_v208::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
@@ -668,11 +838,54 @@ Open9xCustomSwData::operator CustomSwData ()
   c9x.val2 = v2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    c9x.val1 = open9xToSource(v1).toValue();
+    c9x.val1 = open9x208ToSource(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    c9x.val2 = open9xToSource(v2).toValue();
+    c9x.val2 = open9x208ToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = open9xToSwitch(v1).toValue();
+    c9x.val2 = open9xToSwitch(v2).toValue();
+  }
+
+  return c9x;
+}
+
+t_Open9xCustomSwData_v209::t_Open9xCustomSwData_v209(CustomSwData &c9x)
+{
+  func = c9x.func;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    v1 = open9x209FromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    v2 = open9x209FromSource(RawSource(c9x.val2));
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = open9xFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xFromSwitch(RawSwitch(c9x.val2));
+  }
+}
+
+Open9xCustomSwData_v209::operator CustomSwData ()
+{
+  CustomSwData c9x;
+  c9x.func = func;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = open9x209ToSource(v1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = open9x209ToSource(v2).toValue();
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
@@ -785,29 +998,46 @@ t_Open9xSafetySwData::operator SafetySwData ()
   return c9x;
 }
 
-t_Open9xSwashRingData::t_Open9xSwashRingData()
-{
-  memset(this, 0, sizeof(t_Open9xSwashRingData));
-}
-
-t_Open9xSwashRingData::t_Open9xSwashRingData(SwashRingData &c9x)
+t_Open9xSwashRingData_v208::t_Open9xSwashRingData_v208(SwashRingData &c9x)
 {
   invertELE = c9x.invertELE;
   invertAIL = c9x.invertAIL;
   invertCOL = c9x.invertCOL;
   type = c9x.type;
-  collectiveSource = open9xFromSource(c9x.collectiveSource);
+  collectiveSource = open9x208FromSource(c9x.collectiveSource);
   value = c9x.value;
 }
 
-t_Open9xSwashRingData::operator SwashRingData ()
+t_Open9xSwashRingData_v208::operator SwashRingData ()
 {
   SwashRingData c9x;
   c9x.invertELE = invertELE;
   c9x.invertAIL = invertAIL;
   c9x.invertCOL = invertCOL;
   c9x.type = type;
-  c9x.collectiveSource = open9xToSource(collectiveSource);
+  c9x.collectiveSource = open9x208ToSource(collectiveSource);
+  c9x.value = value;
+  return c9x;
+}
+
+t_Open9xSwashRingData_v209::t_Open9xSwashRingData_v209(SwashRingData &c9x)
+{
+  invertELE = c9x.invertELE;
+  invertAIL = c9x.invertAIL;
+  invertCOL = c9x.invertCOL;
+  type = c9x.type;
+  collectiveSource = open9x209FromSource(c9x.collectiveSource);
+  value = c9x.value;
+}
+
+t_Open9xSwashRingData_v209::operator SwashRingData ()
+{
+  SwashRingData c9x;
+  c9x.invertELE = invertELE;
+  c9x.invertAIL = invertAIL;
+  c9x.invertCOL = invertCOL;
+  c9x.type = type;
+  c9x.collectiveSource = open9x209ToSource(collectiveSource);
   c9x.value = value;
   return c9x;
 }
@@ -2043,5 +2273,203 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
   }
   else {
     memset(this, 0, sizeof(t_Open9xModelData_v208));
+  }
+}
+
+
+t_Open9xModelData_v209::operator ModelData ()
+{
+  ModelData c9x;
+  c9x.used = true;
+  getEEPROMZString(c9x.name, name, sizeof(name));
+  for (int i=0; i<MAX_TIMERS; i++)
+    c9x.timers[i] = timers[i];
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PPM16;
+      break;
+    case 2:
+      c9x.protocol = PPMSIM;
+      break;
+    case 3:
+      c9x.protocol = PXX;
+      break;
+    case 4:
+      c9x.protocol = DSM2;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
+  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.thrTrim = thrTrim;
+  c9x.disableThrottleWarning=disableThrottleWarning;
+  c9x.trimInc = trimInc;
+  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.beepANACenter = beepANACenter;
+  c9x.pulsePol = pulsePol;
+  c9x.extendedLimits = extendedLimits;
+  c9x.extendedTrims = extendedTrims;
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
+    c9x.phaseData[i] = phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (c9x.phaseData[i].trim[j] > 500) {
+        c9x.phaseData[i].trimRef[j] = c9x.phaseData[i].trim[j] - 501;
+        if (c9x.phaseData[i].trimRef[j] >= i)
+          c9x.phaseData[i].trimRef[j] += 1;
+        c9x.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<O9X_MAX_MIXERS; i++)
+    c9x.mixData[i] = mixData[i];
+  for (int i=0; i<O9X_NUM_CHNOUT; i++)
+    c9x.limitData[i] = limitData[i];
+  for (int i=0; i<O9X_MAX_EXPOS; i++)
+    c9x.expoData[i] = expoData[i];
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      c9x.curves5[i][j] = curves5[i][j];
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      c9x.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<O9X_NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];
+  for (int i=0; i<O9X_NUM_FSW; i++)
+    c9x.funcSw[i] = funcSw[i];
+  c9x.swashRingData = swashR;
+  c9x.frsky = frsky;
+  c9x.frsky.varioSource = varioSource;
+  c9x.frsky.varioSpeedUpMin = varioSpeedUpMin;
+  c9x.frsky.varioSpeedDownMin = varioSpeedDownMin;
+
+  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.thrTraceSrc = thrTraceSrc;
+  c9x.modelId = modelId;
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      uint8_t i = 2*line + col;
+      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+    }
+  }
+  for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+    c9x.servoCenter[i] = servoCenter[i];
+  }
+
+  return c9x;
+}
+
+#define MODEL_DATA_SIZE_209 758
+t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
+{
+  if (sizeof(*this) != MODEL_DATA_SIZE_209) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_209));
+  }
+
+  if (c9x.used) {
+    setEEPROMZString(name, c9x.name, sizeof(name));
+    for (int i=0; i<MAX_TIMERS; i++)
+      timers[i] = c9x.timers[i];
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PPM16:
+        protocol = 1;
+        break;
+      case PPMSIM:
+        protocol = 2;
+        break;
+      case PXX:
+        protocol = 3;
+        break;
+      case DSM2:
+        protocol = 4;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
+    thrTrim = c9x.thrTrim;
+    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    trimInc = c9x.trimInc;
+    disableThrottleWarning=c9x.disableThrottleWarning;
+    pulsePol = c9x.pulsePol;
+    extendedLimits = c9x.extendedLimits;
+    extendedTrims = c9x.extendedTrims;
+    spare2 = 0;
+    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    beepANACenter = c9x.beepANACenter;
+    for (int i=0; i<O9X_MAX_MIXERS; i++)
+      mixData[i] = c9x.mixData[i];
+    for (int i=0; i<O9X_NUM_CHNOUT; i++)
+      limitData[i] = c9x.limitData[i];
+    for (int i=0; i<O9X_MAX_EXPOS; i++)
+      expoData[i] = c9x.expoData[i];
+    if (c9x.expoData[O9X_MAX_EXPOS].mode)
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(O9X_MAX_EXPOS) + "\n";
+    for (int i=0; i<MAX_CURVE5; i++)
+      for (int j=0; j<5; j++)
+        curves5[i][j] = c9x.curves5[i][j];
+    for (int i=0; i<MAX_CURVE9; i++)
+      for (int j=0; j<9; j++)
+        curves9[i][j] = c9x.curves9[i][j];
+    for (int i=0; i<O9X_NUM_CSW; i++) {
+      customSw[i] = c9x.customSw[i];
+    }
+    int count = 0;
+    for (int i=0; i<O9X_NUM_FSW; i++) {
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
+        funcSw[count++] = c9x.funcSw[i];
+    }
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      if (c9x.safetySw[i].swtch.type) {
+        funcSw[count].func = i;
+        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].param = c9x.safetySw[i].val;
+        count++;
+      }
+    }
+
+    swashR = c9x.swashRingData;
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
+      PhaseData phase = c9x.phaseData[i];
+      for (int j=0; j<NUM_STICKS; j++) {
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
+        }
+        else {
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
+        }
+      }
+      phaseData[i] = phase;
+    }
+    frsky = c9x.frsky;
+    varioSource = c9x.frsky.varioSource;
+    varioSpeedUpMin = c9x.frsky.varioSpeedUpMin;
+    varioSpeedDownMin = c9x.frsky.varioSpeedDownMin;
+
+    ppmFrameLength = c9x.ppmFrameLength;
+    thrTraceSrc = c9x.thrTraceSrc;
+    modelId = c9x.modelId;
+    frskyLinesXtra=0;
+    for (int j=0; j<4; j++) {
+      frskyLines[j] = 0;
+      for (int k=0; k<2; k++) {
+        int value = c9x.frsky.csField[2*j+k];
+        frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
+        frskyLinesXtra |= (value / 16) << (4*j+2*k);
+      }
+    }
+
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      servoCenter[i] = c9x.servoCenter[i];
+    }
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xModelData_v209));
   }
 }

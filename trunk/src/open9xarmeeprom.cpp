@@ -46,7 +46,7 @@ RawSwitch open9xArmToSwitch(int8_t sw)
     return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-42-9 : sw+42+9);
 }
 
-int8_t open9xArmFromSource(RawSource source)
+int8_t open9xArm208FromSource(RawSource source)
 {
   int v1 = 0;
   if (source.type == SOURCE_TYPE_STICK)
@@ -72,7 +72,7 @@ int8_t open9xArmFromSource(RawSource source)
   return v1;
 }
 
-RawSource open9xArmToSource(int8_t value)
+RawSource open9xArm208ToSource(int8_t value)
 {
   if (value == 0) {
     return RawSource(SOURCE_TYPE_NONE);
@@ -100,6 +100,68 @@ RawSource open9xArmToSource(int8_t value)
   }
   else {
     return RawSource(SOURCE_TYPE_TELEMETRY, value-55);
+  }
+}
+
+int8_t open9xArm209FromSource(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_TRIM)
+    v1 = 8 + source.index;
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 12;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 13;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 14+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 17+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 25+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 57+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 59+source.index;
+  return v1;
+}
+
+RawSource open9xArm209ToSource(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value <= 11) {
+    return RawSource(SOURCE_TYPE_TRIM, value - 8);
+  }
+  else if (value == 12) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 13) {
+    return RawSource(SOURCE_TYPE_3POS);
+  }
+  else if (value <= 16) {
+    return RawSource(SOURCE_TYPE_CYC, value-14);
+  }
+  else if (value <= 24) {
+    return RawSource(SOURCE_TYPE_PPM, value-17);
+  }
+  else if (value <= 56) {
+    return RawSource(SOURCE_TYPE_CH, value-25);
+  }
+  else if (value <= 58) {
+    return RawSource(SOURCE_TYPE_TIMER, value-57);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-59);
   }
 }
 
@@ -266,7 +328,6 @@ t_Open9xArmPhaseData_v208::t_Open9xArmPhaseData_v208(PhaseData &c9x)
   fadeOut = c9x.fadeOut;
 }
 
-
 t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
 {
   if (c9x.destCh) {
@@ -361,6 +422,106 @@ t_Open9xArmMixData_v208::operator MixData ()
   return c9x;
 }
 
+t_Open9xArmMixData_v209::t_Open9xArmMixData_v209(MixData &c9x)
+{
+  if (c9x.destCh) {
+    destCh = c9x.destCh-1;
+    mixWarn = c9x.mixWarn;
+    swtch = open9xArmFromSwitch(c9x.swtch);
+    if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+      srcRaw = 0;
+      swtch = 0;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+      srcRaw = 1 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 8;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
+      srcRaw = 9 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 13;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
+      srcRaw = 13 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM + c9x.srcRaw.index;
+    }
+    weight = c9x.weight;
+    differential = c9x.differential/2;
+    curve = c9x.curve;
+    delayUp = c9x.delayUp;
+    delayDown = c9x.delayDown;
+    speedUp = c9x.speedUp;
+    speedDown = c9x.speedDown;
+    carryTrim = c9x.carryTrim;
+    mltpx = (MltpxValue)c9x.mltpx;
+    phase = c9x.phase;
+    sOffset = c9x.sOffset;
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xArmMixData_v209));
+  }
+}
+
+t_Open9xArmMixData_v209::operator MixData ()
+{
+  MixData c9x;
+  if (srcRaw) {
+    c9x.destCh = destCh+1;
+    if (srcRaw == 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+    }
+    else if (srcRaw <= 7) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+    }
+    else if (srcRaw <= 11) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-8);
+    }
+    else if (srcRaw == 12) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (srcRaw == 13) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-13).toValue());
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-14-9-O9X_ARM_NUM_CSW);
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC);
+    }
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
+    }
+    c9x.weight = weight;
+    c9x.differential = differential*2;
+    c9x.swtch = open9xArmToSwitch(swtch);
+    c9x.curve = curve;
+    c9x.delayUp = delayUp;
+    c9x.delayDown = delayDown;
+    c9x.speedUp = speedUp;
+    c9x.speedDown = speedDown;
+    c9x.carryTrim = carryTrim;
+    c9x.mltpx = (MltpxValue)mltpx;
+    c9x.mixWarn = mixWarn;
+    c9x.phase = phase;
+    c9x.sOffset = sOffset;
+  }
+  return c9x;
+}
+
 t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
 {
   func = c9x.func;
@@ -368,11 +529,11 @@ t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
   v2 = c9x.val2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    v1 = open9xArmFromSource(RawSource(c9x.val1));
+    v1 = open9xArm208FromSource(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    v2 = open9xArmFromSource(RawSource(c9x.val2));
+    v2 = open9xArm208FromSource(RawSource(c9x.val2));
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
@@ -389,11 +550,11 @@ t_Open9xArmCustomSwData_v208::operator CustomSwData ()
   c9x.val2 = v2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    c9x.val1 = open9xArmToSource(v1).toValue();
+    c9x.val1 = open9xArm208ToSource(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    c9x.val2 = open9xArmToSource(v2).toValue();
+    c9x.val2 = open9xArm208ToSource(v2).toValue();
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
@@ -404,6 +565,48 @@ t_Open9xArmCustomSwData_v208::operator CustomSwData ()
   return c9x;
 }
 
+t_Open9xArmCustomSwData_v209::t_Open9xArmCustomSwData_v209(CustomSwData &c9x)
+{
+  func = c9x.func;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    v1 = open9xArm209FromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    v2 = open9xArm209FromSource(RawSource(c9x.val2));
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
+  }
+}
+
+t_Open9xArmCustomSwData_v209::operator CustomSwData ()
+{
+  CustomSwData c9x;
+  c9x.func = func;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = open9xArm209ToSource(v1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = open9xArm209ToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+    c9x.val1 = open9xArmToSwitch(v1).toValue();
+    c9x.val2 = open9xArmToSwitch(v2).toValue();
+  }
+
+  return c9x;
+}
 
 t_Open9xFuncSwData_v208::t_Open9xFuncSwData_v208(FuncSwData &c9x)
 {
@@ -421,6 +624,49 @@ t_Open9xFuncSwData_v208::operator FuncSwData ()
   return c9x;
 }
 
+t_Open9xArmSwashRingData_v208::t_Open9xArmSwashRingData_v208(SwashRingData &c9x)
+{
+  invertELE = c9x.invertELE;
+  invertAIL = c9x.invertAIL;
+  invertCOL = c9x.invertCOL;
+  type = c9x.type;
+  collectiveSource = open9xArm208FromSource(c9x.collectiveSource);
+  value = c9x.value;
+}
+
+t_Open9xArmSwashRingData_v208::operator SwashRingData ()
+{
+  SwashRingData c9x;
+  c9x.invertELE = invertELE;
+  c9x.invertAIL = invertAIL;
+  c9x.invertCOL = invertCOL;
+  c9x.type = type;
+  c9x.collectiveSource = open9xArm208ToSource(collectiveSource);
+  c9x.value = value;
+  return c9x;
+}
+
+t_Open9xArmSwashRingData_v209::t_Open9xArmSwashRingData_v209(SwashRingData &c9x)
+{
+  invertELE = c9x.invertELE;
+  invertAIL = c9x.invertAIL;
+  invertCOL = c9x.invertCOL;
+  type = c9x.type;
+  collectiveSource = open9xArm209FromSource(c9x.collectiveSource);
+  value = c9x.value;
+}
+
+t_Open9xArmSwashRingData_v209::operator SwashRingData ()
+{
+  SwashRingData c9x;
+  c9x.invertELE = invertELE;
+  c9x.invertAIL = invertAIL;
+  c9x.invertCOL = invertCOL;
+  c9x.type = type;
+  c9x.collectiveSource = open9xArm209ToSource(collectiveSource);
+  c9x.value = value;
+  return c9x;
+}
 
 t_Open9xArmModelData_v208::operator ModelData ()
 {
@@ -504,11 +750,11 @@ t_Open9xArmModelData_v208::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE 1882
+#define MODEL_DATA_SIZE_208 1882
 t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
 {
-  if (sizeof(*this) != MODEL_DATA_SIZE) {
-    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE));
+  if (sizeof(*this) != MODEL_DATA_SIZE_208) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_208));
   }
 
   if (c9x.used) {
@@ -611,5 +857,197 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
   }
   else {
     memset(this, 0, sizeof(t_Open9xArmModelData_v208));
+  }
+}
+
+t_Open9xArmModelData_v209::operator ModelData ()
+{
+  ModelData c9x;
+  c9x.used = true;
+  getEEPROMZString(c9x.name, name, sizeof(name));
+  for (int i=0; i<MAX_TIMERS; i++)
+    c9x.timers[i] = timers[i];
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PPM16;
+      break;
+    case 2:
+      c9x.protocol = PPMSIM;
+      break;
+    case 3:
+      c9x.protocol = PXX;
+      break;
+    case 4:
+      c9x.protocol = DSM2;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
+  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.thrTrim = thrTrim;
+  c9x.trimInc = trimInc;
+  c9x.disableThrottleWarning=disableThrottleWarning;
+  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.beepANACenter = beepANACenter;
+  c9x.pulsePol = pulsePol;
+  c9x.extendedLimits = extendedLimits;
+  c9x.extendedTrims = extendedTrims;
+  for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+    c9x.phaseData[i] = phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (c9x.phaseData[i].trim[j] > 500) {
+        c9x.phaseData[i].trimRef[j] = c9x.phaseData[i].trim[j] - 501;
+        if (c9x.phaseData[i].trimRef[j] >= i)
+          c9x.phaseData[i].trimRef[j] += 1;
+        c9x.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<O9X_ARM_MAX_MIXERS; i++)
+    c9x.mixData[i] = mixData[i];
+  for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
+    c9x.limitData[i] = limitData[i];
+  for (int i=0; i<O9X_ARM_MAX_EXPOS; i++)
+    c9x.expoData[i] = expoData[i];
+  for (int i=0; i<MAX_CURVE5; i++)
+    for (int j=0; j<5; j++)
+      c9x.curves5[i][j] = curves5[i][j];
+  for (int i=0; i<MAX_CURVE9; i++)
+    for (int j=0; j<9; j++)
+      c9x.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<O9X_ARM_NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];
+  for (int i=0; i<O9X_ARM_NUM_FSW; i++)
+    c9x.funcSw[i] = funcSw[i];
+  c9x.swashRingData = swashR;
+  c9x.frsky = frsky;
+  c9x.frsky.varioSource = varioSource;
+  c9x.frsky.varioSpeedUpMin = varioSpeedUpMin;
+  c9x.frsky.varioSpeedDownMin = varioSpeedDownMin;
+  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.thrTraceSrc = thrTraceSrc;
+  c9x.modelId = modelId;
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      uint8_t i = 2*line + col;
+      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+    }
+  }
+  for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+    c9x.servoCenter[i] = servoCenter[i];
+  }
+
+  return c9x;
+}
+
+#define MODEL_DATA_SIZE_209 1882
+t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
+{
+  if (sizeof(*this) != MODEL_DATA_SIZE_209) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_209));
+  }
+
+  if (c9x.used) {
+    setEEPROMZString(name, c9x.name, sizeof(name));
+    for (int i=0; i<MAX_TIMERS; i++)
+      timers[i] = c9x.timers[i];
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PPM16:
+        protocol = 1;
+        break;
+      case PPMSIM:
+        protocol = 2;
+        break;
+      case PXX:
+        protocol = 3;
+        break;
+      case DSM2:
+        protocol = 4;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
+    thrTrim = c9x.thrTrim;
+    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    trimInc = c9x.trimInc;
+    disableThrottleWarning=c9x.disableThrottleWarning;
+    pulsePol = c9x.pulsePol;
+    extendedLimits = c9x.extendedLimits;
+    extendedTrims = c9x.extendedTrims;
+    spare2 = 0;
+    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    beepANACenter = c9x.beepANACenter;
+    for (int i=0; i<MAX_MIXERS; i++)
+      mixData[i] = c9x.mixData[i];
+    for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
+      limitData[i] = c9x.limitData[i];
+    for (int i=0; i<O9X_ARM_MAX_EXPOS; i++)
+      expoData[i] = c9x.expoData[i];
+    for (int i=0; i<MAX_CURVE5; i++)
+      for (int j=0; j<5; j++)
+        curves5[i][j] = c9x.curves5[i][j];
+    for (int i=0; i<MAX_CURVE9; i++)
+      for (int j=0; j<9; j++)
+        curves9[i][j] = c9x.curves9[i][j];
+    for (int i=0; i<O9X_ARM_NUM_CSW; i++)
+      customSw[i] = c9x.customSw[i];
+    int count = 0;
+    for (int i=0; i<O9X_ARM_NUM_FSW; i++) {
+      if (c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
+        funcSw[count++] = c9x.funcSw[i];
+    }
+    for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++) {
+      if (c9x.safetySw[i].swtch.type) {
+        funcSw[count].func = i;
+        funcSw[count].swtch = open9xArmFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].param = c9x.safetySw[i].val;
+        count++;
+      }
+    }
+
+    swashR = c9x.swashRingData;
+    for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+      PhaseData phase = c9x.phaseData[i];
+      for (int j=0; j<NUM_STICKS; j++) {
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
+        }
+        else {
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
+        }
+      }
+      phaseData[i] = phase;
+    }
+    frsky = c9x.frsky;
+    varioSource = c9x.frsky.varioSource;
+    varioSpeedUpMin = c9x.frsky.varioSpeedUpMin;
+    varioSpeedDownMin = c9x.frsky.varioSpeedDownMin;
+
+    ppmFrameLength = c9x.ppmFrameLength;
+    thrTraceSrc = c9x.thrTraceSrc;
+    modelId = c9x.modelId;
+    frskyLinesXtra=0;
+    for (int j=0; j<4; j++) {
+      frskyLines[j] = 0;
+      for (int k=0; k<2; k++) {
+        int value = c9x.frsky.csField[2*j+k];
+        frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
+        frskyLinesXtra |= (value / 16) << (4*j+2*k);
+      }
+    }
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      servoCenter[i] = c9x.servoCenter[i];
+    }
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xArmModelData_v209));
   }
 }
