@@ -243,6 +243,10 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
     srcRaw = 21 + c9x.srcRaw.index;
   }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
+    EEPROMWarnings += ::QObject::tr("ersky9x doesn't have trims as source") + "\n";
+    srcRaw = 0; // use pots instead
+  }
 
   weight = c9x.weight;
   curve = c9x.curve;
@@ -250,7 +254,12 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
   delayDown = c9x.delayDown;
   speedUp = c9x.speedUp;
   speedDown = c9x.speedDown;
-  carryTrim = c9x.carryTrim;
+  if (c9x.carryTrim<0) {
+    EEPROMWarnings += ::QObject::tr("er9x doesn't have swappable trims") + "\n";
+    carryTrim=1;
+  } else {
+    carryTrim = c9x.carryTrim;
+  }
   mltpx = (MltpxValue)c9x.mltpx;
   mixWarn = c9x.mixWarn;
   enableFmTrim=c9x.enableFmTrim;
