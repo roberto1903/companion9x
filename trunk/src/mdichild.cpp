@@ -301,7 +301,12 @@ bool MdiChild::save()
 bool MdiChild::saveAs()
 {
     QSettings settings("companion9x", "companion9x");
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(EEPROM_FILES_FILTER));
+    QString fileName;
+    if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(BIN_FILES_FILTER));
+    } else {
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(EEPROM_FILES_FILTER));
+    }
     if (fileName.isEmpty())
         return false;
 
