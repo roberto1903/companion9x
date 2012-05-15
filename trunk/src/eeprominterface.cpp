@@ -245,7 +245,7 @@ QString RawSource::toString()
                        QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
                      };
 
-  QString trims[] = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("Trma")};
+  QString trims[] = { QObject::tr("No Trim"), QObject::tr("Default"), QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
@@ -255,7 +255,7 @@ QString RawSource::toString()
     case SOURCE_TYPE_STICK:
       return sticks[index];
     case SOURCE_TYPE_TRIM:
-      return trims[index];
+      return trims[index+1];
     case SOURCE_TYPE_ROTARY_ENCODER:
       return rotary[index];
     case SOURCE_TYPE_MAX:
