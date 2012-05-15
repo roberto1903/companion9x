@@ -183,12 +183,16 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       // FrSky A1/A2 offset on 12bits
       // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
       break;
+    case 209:
+      // Add TrmR, TrmE, TrmT, TrmA as Mix sources
+      // Trims are now OFF / ON / Rud / Ele / Thr / Ail
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
   }
 
-  if (version == 208 && board == BOARD_ERSKY9X) {
+  if (version >= 208 && board == BOARD_ERSKY9X) {
     if (!loadGeneral<Open9xGeneralData_v208>(radioData.generalSettings)) {
       std::cout << "ko\n";
       return false;
@@ -229,6 +233,17 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       }
       else {
         loadModel<Open9xModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+    }
+    else if (version == 209) {
+      if (board == BOARD_GRUVIN9X) {
+        loadModel<Open9xV4ModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else if (board == BOARD_ERSKY9X) {
+        loadModel<Open9xArmModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else {
+        loadModel<Open9xModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
       }
     }
     else {
@@ -305,6 +320,14 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
             result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
           else
             result = saveModel<Open9xModelData_v208>(i, radioData.models[i]);
+          break;
+        case 209:
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v209>(i, radioData.models[i]);
+          else if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v209>(i, radioData.models[i]);
+          else
+            result = saveModel<Open9xModelData_v209>(i, radioData.models[i]);
           break;
       }
       if (!result)
