@@ -438,6 +438,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 4;
     case ExtendedTrims:
       return 500;
+    case ExtraTrims:
+      return 1;
     case Simulation:
       return 1;
     case DSM2Indexes:
