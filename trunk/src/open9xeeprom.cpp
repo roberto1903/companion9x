@@ -938,25 +938,29 @@ enum Functions {
 t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 {
   swtch = open9xFromSwitch(c9x.swtch);
-  param = c9x.param;
-  if (c9x.func <= FuncSafetyCh16)
+  if (c9x.func <= FuncSafetyCh16) {
+    param = ((c9x.param>>1)<<1);
+    param |=(c9x.enabled & 0x01);
     func = c9x.func;
-  else if (c9x.func <= FuncTrainerAIL)
-    func = 16 + c9x.func - FuncTrainer;
-  else if (c9x.func == FuncInstantTrim)
-    func = 21;
-  else if (c9x.func == FuncPlaySound)
-    func = 22;
-  else if (c9x.func == FuncPlayHaptic)
-    func = 23;
-  else if (c9x.func == FuncReset)
-    func = 24;
-  else if (c9x.func == FuncVario)
-    func = 25;
-  else {
-    swtch = 0;
-    func = 0;
-    param = 0;
+  } else {
+    param = c9x.param;;
+    if (c9x.func <= FuncTrainerAIL)
+      func = 16 + c9x.func - FuncTrainer;
+    else if (c9x.func == FuncInstantTrim)
+      func = 21;
+    else if (c9x.func == FuncPlaySound)
+      func = 22;
+    else if (c9x.func == FuncPlayHaptic)
+      func = 23;
+    else if (c9x.func == FuncReset)
+      func = 24;
+    else if (c9x.func == FuncVario)
+      func = 25;
+    else {
+      swtch = 0;
+      func = 0;
+      param = 0;
+    }
   }
 }
 
@@ -964,24 +968,28 @@ t_Open9xFuncSwData_v203::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
-  c9x.param = param;
-  if (func < 16)
+  if (func < 16) {
+    c9x.enabled=param & 0x01;
+    c9x.param = (param>>1)<<1;
     c9x.func = (AssignFunc)(func);
-  else if (func <= 20)
-    c9x.func = (AssignFunc)(func);
-  else if (func == 21)
-    c9x.func = FuncInstantTrim;
-  else if (func == 22)
-    c9x.func = FuncPlaySound;
-  else if (func == 23)
-    c9x.func = FuncPlayHaptic;
-  else if (func == 24)
-    c9x.func = FuncReset;
-  else if (func == 25)
-    c9x.func = FuncVario;
-  else
-    c9x.clear();
-  return c9x;
+  } else {
+    c9x.param = param;
+    if (func <= 20)
+      c9x.func = (AssignFunc)(func);
+    else if (func == 21)
+      c9x.func = FuncInstantTrim;
+    else if (func == 22)
+      c9x.func = FuncPlaySound;
+    else if (func == 23)
+      c9x.func = FuncPlayHaptic;
+    else if (func == 24)
+      c9x.func = FuncReset;
+    else if (func == 25)
+      c9x.func = FuncVario;
+    else
+      c9x.clear();
+  }
+  return c9x; 
 }
 
 t_Open9xSafetySwData::t_Open9xSafetySwData(SafetySwData &c9x)

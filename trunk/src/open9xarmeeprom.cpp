@@ -611,8 +611,13 @@ t_Open9xArmCustomSwData_v209::operator CustomSwData ()
 t_Open9xFuncSwData_v208::t_Open9xFuncSwData_v208(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
-  func = c9x.func;
-  param = c9x.param;
+  if (c9x.func <= FuncSafetyCh16) {
+    param = ((c9x.param>>1)<<1);
+    param |=(c9x.enabled & 0x01);
+  } else {
+    param = c9x.param;
+  }
+  func = c9x.func;  
 }
 
 t_Open9xFuncSwData_v208::operator FuncSwData ()
@@ -620,7 +625,12 @@ t_Open9xFuncSwData_v208::operator FuncSwData ()
   FuncSwData c9x;
   c9x.swtch = open9xArmToSwitch(swtch);
   c9x.func = (AssignFunc)(func);
-  c9x.param = param;
+  if (c9x.func <= FuncSafetyCh16) {
+    c9x.enabled=param & 0x01;
+    c9x.param = (param>>1)<<1;
+  } else {
+    c9x.param = param;
+  }
   return c9x;
 }
 
