@@ -16,6 +16,8 @@
 #define BC_BIT_P1  (0x10)
 #define BC_BIT_P2  (0x20)
 #define BC_BIT_P3  (0x40)
+#define BC_BIT_REA  (0x80)
+#define BC_BIT_REB  (0x100)
 
 #define RUD  (1)
 #define ELE  (2)
@@ -344,6 +346,10 @@ void ModelEdit::tabModelEditSetup()
       ui->label_ttrace->hide();
       ui->ttraceCB->hide();
     }
+    if (GetEepromInterface()->getCapability(RotaryEncoders)==0) {
+      ui->bcREaChkB->hide();
+      ui->bcREaChkB->hide();
+    }
     if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
       ui->thrwarnChkB->setDisabled(true);
       ui->thrwarnChkB->hide();
@@ -410,6 +416,8 @@ void ModelEdit::tabModelEditSetup()
     ui->bcP1ChkB->setChecked(g_model.beepANACenter & BC_BIT_P1);
     ui->bcP2ChkB->setChecked(g_model.beepANACenter & BC_BIT_P2);
     ui->bcP3ChkB->setChecked(g_model.beepANACenter & BC_BIT_P3);
+    ui->bcREaChkB->setChecked(g_model.beepANACenter & BC_BIT_REA);
+    ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
 
     //pulse polarity
     ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
@@ -2555,6 +2563,24 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
         g_model.beepANACenter |= BC_BIT_P3;
     else
         g_model.beepANACenter &= ~BC_BIT_P3;
+    updateSettings();
+}
+
+void ModelEdit::on_bcREaChkB_toggled(bool checked)
+{
+    if(checked)
+        g_model.beepANACenter |= BC_BIT_REA;
+    else
+        g_model.beepANACenter &= ~BC_BIT_REA;
+    updateSettings();
+}
+
+void ModelEdit::on_bcREbChkB_toggled(bool checked)
+{
+    if(checked)
+        g_model.beepANACenter |= BC_BIT_REB;
+    else
+        g_model.beepANACenter &= ~BC_BIT_REB;
     updateSettings();
 }
 

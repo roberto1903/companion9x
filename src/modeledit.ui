@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>845</width>
-    <height>635</height>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -392,6 +392,13 @@
        </item>
        <item row="9" column="1">
         <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="7">
+          <widget class="QCheckBox" name="bcREaChkB">
+           <property name="text">
+            <string>REa</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QCheckBox" name="bcRUDChkB">
            <property name="text">
@@ -441,6 +448,13 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="8">
+          <widget class="QCheckBox" name="bcREbChkB">
+           <property name="text">
+            <string>REb</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item row="10" column="0">
@@ -464,52 +478,52 @@
          </item>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="12" column="0">
         <widget class="QLabel" name="instantTrim_label">
          <property name="text">
           <string>Instant Trim</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
+       <item row="12" column="1">
         <widget class="QComboBox" name="instantTrim_CB"/>
        </item>
-       <item row="12" column="0">
+       <item row="13" column="0">
         <widget class="QLabel" name="label_55">
          <property name="text">
           <string>Extended Limits</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
+       <item row="13" column="1">
         <widget class="QCheckBox" name="extendedLimitsChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="14" column="0">
         <widget class="QLabel" name="label_57">
          <property name="text">
           <string>Extended Trims</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="1">
+       <item row="14" column="1">
         <widget class="QCheckBox" name="extendedTrimsChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="16" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Protocol</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="1">
+       <item row="16" column="1">
         <widget class="QComboBox" name="protocolCB">
          <item>
           <property name="text">
@@ -538,14 +552,14 @@
          </item>
         </widget>
        </item>
-       <item row="17" column="0">
+       <item row="18" column="0">
         <widget class="QLabel" name="label_ppmFrameLength">
          <property name="text">
           <string>PPM Frame Length</string>
          </property>
         </widget>
        </item>
-       <item row="17" column="1">
+       <item row="18" column="1">
         <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB">
          <property name="suffix">
           <string> mSec</string>
@@ -567,14 +581,14 @@
          </property>
         </widget>
        </item>
-       <item row="18" column="0">
+       <item row="19" column="0">
         <widget class="QLabel" name="label_PPMCH">
          <property name="text">
           <string>Channels</string>
          </property>
         </widget>
        </item>
-       <item row="18" column="1">
+       <item row="19" column="1">
         <widget class="QSpinBox" name="numChannelsSB">
          <property name="suffix">
           <string>ch</string>
@@ -593,14 +607,14 @@
          </property>
         </widget>
        </item>
-       <item row="19" column="0">
+       <item row="20" column="0">
         <widget class="QLabel" name="label_PPM">
          <property name="text">
           <string>PPM delay</string>
          </property>
         </widget>
        </item>
-       <item row="19" column="1">
+       <item row="20" column="1">
         <widget class="QSpinBox" name="ppmDelaySB">
          <property name="suffix">
           <string> usec</string>
@@ -619,14 +633,14 @@
          </property>
         </widget>
        </item>
-       <item row="20" column="0">
+       <item row="21" column="0">
         <widget class="QLabel" name="label_DSM">
          <property name="text">
           <string>DSM Type</string>
          </property>
         </widget>
        </item>
-       <item row="20" column="1">
+       <item row="21" column="1">
         <widget class="QComboBox" name="DSM_Type">
          <item>
           <property name="text">
@@ -645,14 +659,14 @@
          </item>
         </widget>
        </item>
-       <item row="21" column="0">
+       <item row="22" column="0">
         <widget class="QLabel" name="label_PXX">
          <property name="text">
           <string>RX Number</string>
          </property>
         </widget>
        </item>
-       <item row="21" column="1">
+       <item row="22" column="1">
         <widget class="QSpinBox" name="pxxRxNum">
          <property name="suffix">
           <string/>
@@ -671,27 +685,27 @@
          </property>
         </widget>
        </item>
-       <item row="22" column="0">
+       <item row="23" column="0">
         <widget class="QLabel" name="label_Trainer">
          <property name="text">
           <string>Trainer</string>
          </property>
         </widget>
        </item>
-       <item row="22" column="1">
+       <item row="23" column="1">
         <widget class="QCheckBox" name="TrainerChkB"/>
        </item>
-       <item row="24" column="0">
+       <item row="25" column="0">
         <widget class="QLabel" name="T2ThrTrg">
          <property name="text">
           <string>Throttle2Trig</string>
          </property>
         </widget>
        </item>
-       <item row="24" column="1">
+       <item row="25" column="1">
         <widget class="QCheckBox" name="T2ThrTrgChkB"/>
        </item>
-       <item row="25" column="0">
+       <item row="26" column="0">
         <spacer name="verticalSpacer_4">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -703,6 +717,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="11" column="1">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -4136,8 +4157,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>797</width>
-            <height>557</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7301,8 +7322,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>797</width>
-            <height>528</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13065,8 +13086,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>797</width>
-            <height>557</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

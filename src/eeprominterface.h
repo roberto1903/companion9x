@@ -651,7 +651,7 @@ class ModelData {
     int       trimInc;            // Trim Increments
     uint8_t   disableThrottleWarning;
     int       ppmDelay;
-    uint8_t   beepANACenter;      // 1<<0->A1.. 1<<6->A7
+    uint16_t   beepANACenter;      // 1<<0->A1.. 1<<6->A7
     bool      pulsePol;           // false = positive
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
