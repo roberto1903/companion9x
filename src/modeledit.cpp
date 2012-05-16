@@ -1352,7 +1352,7 @@ void ModelEdit::functionSwitchesEdited()
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
       g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
-      if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
+      if (fswtchFunc[i]->currentIndex()>15 || g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
         fswtchParam[i]->hide();
         fswtchEnable[i]->hide();
       } else {
