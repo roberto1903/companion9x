@@ -461,9 +461,9 @@ void MdiChild::burnTo()  // write to Tx
     QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
     return;
   }
-  if (!stickCal.isEmpty()) {
+  if (!stickCal.isEmpty() && !tempFile.isEmpty()) {
     bool backup=false;
-    burnDialog *cd = new burnDialog(this, 1, &tempFile, &backup);
+    burnDialog *cd = new burnDialog(this, 1, &tempFile, &backup,strippedName(curFile));
     cd->exec();
   }
   if (!tempFile.isEmpty()) {

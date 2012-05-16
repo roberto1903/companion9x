@@ -31,7 +31,7 @@ class burnDialog : public QDialog
   Q_OBJECT
 
 public:
-  explicit burnDialog(QWidget *parent = 0, int Type = 2, QString * fileName = NULL, bool * backupEE=NULL);
+  explicit burnDialog(QWidget *parent = 0, int Type = 2, QString * fileName = NULL, bool * backupEE=NULL, QString docname="");
   ~burnDialog();
 
 private slots:
