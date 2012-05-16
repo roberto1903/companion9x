@@ -488,7 +488,7 @@ class FuncSwData { // Function Switches data
     RawSwitch    swtch;
     AssignFunc   func;
     unsigned int param;
-
+    uint8_t enabled;
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
 };
 

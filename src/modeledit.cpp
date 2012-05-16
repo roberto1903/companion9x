@@ -1063,7 +1063,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        if (!GetEepromInterface()->getCapability(ExtraTrims)) {
+        if (GetEepromInterface()->getCapability(ExtraTrims)) {
           populateSourceCB(cswitchSource1[i], source , POPULATE_TRIMS | POPULATE_TELEMETRY);
         } else {
           populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);          
@@ -1085,7 +1085,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        if (!GetEepromInterface()->getCapability(ExtraTrims)) {
+        if (GetEepromInterface()->getCapability(ExtraTrims)) {
           populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TRIMS | POPULATE_TELEMETRY);
           populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_TRIMS | POPULATE_TELEMETRY);
         } else {
@@ -1221,7 +1221,7 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
         fswtchEnable[i]->setText(tr("ON"));
         ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
-        fswtchEnable[i]->setChecked(g_model.funcSw[i].param & 100);
+        fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
         connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
         int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
         if (index==0) {
@@ -1351,11 +1351,7 @@ void ModelEdit::functionSwitchesEdited()
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
-      if (fswtchEnable[i]->isChecked()) {
-        g_model.funcSw[i].param |= 0x100;
-      } else {
-        g_model.funcSw[i].param &= 0xFF;
-      }
+      g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
       if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
         fswtchParam[i]->hide();
         fswtchEnable[i]->hide();
