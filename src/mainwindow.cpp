@@ -806,7 +806,10 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
 
   QString fwSvn = flash.getSvn();
   QStringList tags = fwSvn.split("-r", QString::SkipEmptyParts);
-  int revision = tags.back().toInt();
+  fwSvn = tags.back();
+  if (fwSvn.endsWith('M'))
+    fwSvn = fwSvn.mid(0, fwSvn.size()-1);
+  int revision = fwSvn.toInt();
   if (!revision)
     return false;
 
