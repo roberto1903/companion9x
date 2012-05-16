@@ -1202,6 +1202,7 @@ void ModelEdit::tabFunctionSwitches()
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<std::min(16,num_fsw); i++) {
         fswtchSwtch[i] = new QComboBox(this);
+        fswtchEnable[i] = new QCheckBox(this);
         connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
         ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
         populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
@@ -1218,14 +1219,20 @@ void ModelEdit::tabFunctionSwitches()
         connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
         ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
         fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+        fswtchEnable[i]->setText(tr("ON"));
+        ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
+        fswtchEnable[i]->setChecked(g_model.funcSw[i].param & 100);
+        connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
         int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
         if (index==0) {
           fswtchParam[i]->hide();
+          fswtchEnable[i]->hide();
         }
     }
     if (num_fsw>16) {
       for(int i=16; i<num_fsw; i++) {
           fswtchSwtch[i] = new QComboBox(this);
+          fswtchEnable[i] = new QCheckBox(this);
           connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
           ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
           populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
@@ -1242,10 +1249,12 @@ void ModelEdit::tabFunctionSwitches()
           connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
           ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
           fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-
+          fswtchEnable[i]->setText(tr("ON"));
+          ui->fswitchlayout2->addWidget(fswtchEnable[i],i+1,4);
           int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
           if (index==0) {
             fswtchParam[i]->hide();
+            fswtchEnable[i]->hide();
           }
       } 
     } else {
@@ -1342,10 +1351,17 @@ void ModelEdit::functionSwitchesEdited()
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
+      if (fswtchEnable[i]->isChecked()) {
+        g_model.funcSw[i].param |= 0x100;
+      } else {
+        g_model.funcSw[i].param &= 0xFF;
+      }
       if (fswtchSwtch[i]->currentIndex()==MAX_DRSWITCH || fswtchFunc[i]->currentIndex()>15) {
         fswtchParam[i]->hide();
+        fswtchEnable[i]->hide();
       } else {
         fswtchParam[i]->show();
+        fswtchEnable[i]->show();
       }
     }
 
