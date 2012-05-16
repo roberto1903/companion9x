@@ -213,6 +213,8 @@ private slots:
     void on_bcP1ChkB_toggled(bool checked);
     void on_bcP2ChkB_toggled(bool checked);
     void on_bcP3ChkB_toggled(bool checked);
+    void on_bcREaChkB_toggled(bool checked);
+    void on_bcREbChkB_toggled(bool checked);
 
     void on_thrExpoChkB_toggled(bool checked);
     void on_thrTrimChkB_toggled(bool checked);

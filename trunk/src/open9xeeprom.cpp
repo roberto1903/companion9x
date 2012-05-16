@@ -1474,7 +1474,7 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.ppmDelay = 300 + 50 * ppmDelay;
-  c9x.beepANACenter = beepANACenter;
+  c9x.beepANACenter = beepANACenter,
   c9x.pulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
@@ -1548,7 +1548,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -1690,7 +1690,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -1844,7 +1844,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -2015,7 +2015,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_NUM_CHNOUT; i++)
@@ -2204,7 +2204,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_NUM_CHNOUT; i++)
@@ -2402,7 +2402,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_NUM_CHNOUT; i++)
