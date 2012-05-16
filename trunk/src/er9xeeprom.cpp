@@ -553,7 +553,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
         trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
         break;
       }
-    beepANACenter = c9x.beepANACenter;
+    beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     pulsePol = c9x.pulsePol;
     extendedLimits = c9x.extendedLimits;
     swashInvertELE = c9x.swashRingData.invertELE;
