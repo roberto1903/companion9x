@@ -9,7 +9,7 @@
 #include "hexinterface.h"
 
 
-burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE):
+burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE, QString DocName):
   QDialog(parent),
   ui(new Ui::burnDialog),
   hexfileName(fileName),
@@ -49,7 +49,11 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->SplashFrame->hide();
     ui->BurnFlashButton->setDisabled(true);
     ui->EEbackupCB->hide();
-    this->setWindowTitle(tr("Write models to TX"));
+    if (DocName.isEmpty()) {
+        this->setWindowTitle(tr("Write models to TX"));
+    } else {
+        this->setWindowTitle(tr("Write %1 to TX").arg(DocName));
+    }
     QSettings settings("companion9x", "companion9x");
     int profileid=settings.value("profileId", 1).toInt();
     settings.beginGroup("Profiles");
@@ -494,7 +498,13 @@ void burnDialog::on_BurnFlashButton_clicked()
         }
         hexfileName->clear();
         hexfileName->append(fileName);
+      } else {
+        hexfileName->clear();
+        hexfileName->append(ui->FWFileName->text());        
       }
+    } else {
+      hexfileName->clear();
+      hexfileName->append(ui->FWFileName->text());        
     }
   }
   this->close();
