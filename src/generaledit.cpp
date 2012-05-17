@@ -1028,6 +1028,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     }
   }
   setValues();
+  updateSettings();
 }
 
 void GeneralEdit::on_calstore_PB_clicked()
