@@ -348,7 +348,7 @@ void ModelEdit::tabModelEditSetup()
     }
     if (GetEepromInterface()->getCapability(RotaryEncoders)==0) {
       ui->bcREaChkB->hide();
-      ui->bcREaChkB->hide();
+      ui->bcREbChkB->hide();
     }
     if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
       ui->thrwarnChkB->setDisabled(true);
