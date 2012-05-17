@@ -536,7 +536,7 @@ t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
     v2 = open9xArm208FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
@@ -557,7 +557,7 @@ t_Open9xArmCustomSwData_v208::operator CustomSwData ()
     c9x.val2 = open9xArm208ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     c9x.val1 = open9xArmToSwitch(v1).toValue();
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }
@@ -579,7 +579,7 @@ t_Open9xArmCustomSwData_v209::t_Open9xArmCustomSwData_v209(CustomSwData &c9x)
     v2 = open9xArm209FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
@@ -600,7 +600,7 @@ t_Open9xArmCustomSwData_v209::operator CustomSwData ()
     c9x.val2 = open9xArm209ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     c9x.val1 = open9xArmToSwitch(v1).toValue();
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }

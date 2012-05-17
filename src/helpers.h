@@ -33,7 +33,7 @@ void populateTimerSwitchCB(QComboBox *b, int value);
 
 #define POPULATE_SWITCHES  1
 #define POPULATE_TELEMETRY 2
-#define POPULATE_TRIMS  4
+#define POPULATE_TRIMS     4
 
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags);
 void populateCSWCB(QComboBox *b, int value);

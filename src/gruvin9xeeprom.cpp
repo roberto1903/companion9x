@@ -462,7 +462,7 @@ t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
     v2 = gruvin9xFromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     v1 = gruvin9xFromSwitch(RawSwitch(c9x.val1));
     v2 = gruvin9xFromSwitch(RawSwitch(c9x.val2));
   }
@@ -483,7 +483,7 @@ Gruvin9xCustomSwData::operator CustomSwData ()
     c9x.val2 = gruvin9xToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_NEQUAL) {
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
     c9x.val1 = gruvin9xToSwitch(v1).toValue();
     c9x.val2 = gruvin9xToSwitch(v2).toValue();
   }
