@@ -443,6 +443,7 @@ void RegisterFirmwares()
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
+  open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
   const char *ext_options[] = {"frsky", "jeti", "ardupilot", "nmea", NULL};
@@ -466,6 +467,7 @@ void RegisterFirmwares()
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
+  open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
   open9x->addOption("heli");
@@ -483,6 +485,7 @@ void RegisterFirmwares()
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
+  open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
   open9x->addOption("heli");
