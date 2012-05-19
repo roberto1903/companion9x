@@ -465,7 +465,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryRSSIModel:
       return 1;
     case TelemetryAlarm:
-      return 1;
+      return 0;
     case TelemetryTimeshift:
       return 1;
     case TelemetryMaxMultiplier:
@@ -501,6 +501,8 @@ int Open9xInterface::getCapability(const Capability capability)
         return 0;
       }
     case PerModelThrottleWarning:
+      return 1;
+    case pmSwitchMask:
       return 1;
     default:
       return 0;

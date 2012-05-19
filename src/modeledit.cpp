@@ -305,175 +305,209 @@ void ModelEdit::on_tabWidget_currentChanged(int index)
 
 void ModelEdit::tabModelEditSetup()
 {
-    //name
-    ui->modelNameLE->setText(g_model.name);
+  //name
+  QLabel * pmsl[] = {ui->swwarn_label, ui->swwarn0_label,ui->swwarn1_label,ui->swwarn2_label,ui->swwarn3_label,
+                            ui->swwarn4_label,ui->swwarn5_label,ui->swwarn6_label, NULL};
+  QCheckBox * pmchkb[] = {ui->swwarn1_ChkB,ui->swwarn2_ChkB,ui->swwarn3_ChkB,ui->swwarn5_ChkB,ui->swwarn6_ChkB, NULL};
+  
+  ui->modelNameLE->setText(g_model.name);
 
-    //timer1 mode direction value
-    populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode);
-    int min = g_model.timers[0].val/60;
-    int sec = g_model.timers[0].val%60;
-    ui->timer1ValTE->setTime(QTime(0,min,sec));
-    ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
-
-    if (!GetEepromInterface()->getCapability(InstantTrimSW)) {
-      ui->instantTrim_label->hide();
-      ui->instantTrim_CB->setDisabled(true);
-      ui->instantTrim_CB->hide();
-    } else {
-      switchEditLock=true;
-      int found=false;
-      for (int i=0; i< NUM_FSW; i++) {
-        if (g_model.funcSw[i].func==FuncInstantTrim) {
-          populateSwitchCB(ui->instantTrim_CB,g_model.funcSw[i].swtch,POPULATE_MSWITCHES & POPULATE_ONOFF);
-          found=true;
-          break;
-        }
-      }
-      if (found==false) {
-        populateSwitchCB(ui->instantTrim_CB,RawSwitch(),POPULATE_MSWITCHES & POPULATE_ONOFF);
-      }
-      switchEditLock=false;
+  //timer1 mode direction value
+  populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode);
+  int min = g_model.timers[0].val/60;
+  int sec = g_model.timers[0].val%60;
+  ui->timer1ValTE->setTime(QTime(0,min,sec));
+  ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
+  if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
+    for (int i=0; pmsl[i]; i++) {
+      pmsl[i]->hide();
     }
-    if (GetEepromInterface()->getCapability(NoTimerDirs)) {
-      ui->timer1DirCB->hide();
-      ui->timer2DirCB->hide();
+    for (int i=0; pmchkb[i]; i++) {
+      pmchkb[i]->hide();
     }
-    if (GetEepromInterface()->getCapability(NoThrExpo)) {
-      ui->label_thrExpo->hide();
-      ui->thrExpoChkB->hide();
+    ui->swwarn0_line->hide();
+    ui->swwarn0_line->hide();
+    ui->swwarn0_CB->hide();
+    ui->swwarn4_CB->hide();
+    ui->swwarn_line0->hide();
+    ui->swwarn_line1->hide();
+    ui->swwarn_line2->hide();
+    ui->swwarn_line3->hide();
+    ui->swwarn_line4->hide();
+    ui->swwarn_line5->hide();
+  } else {
+    ui->swwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
+    ui->swwarn1_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 1));
+    ui->swwarn2_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 2));
+    ui->swwarn3_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 3));
+    ui->swwarn4_CB->setCurrentIndex((g_model.switchWarningStates & 0x30)>>4);
+    ui->swwarn5_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 6));
+    ui->swwarn6_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 7));
+    for (int i=0; pmchkb[i]; i++) {
+      connect(pmchkb[i], SIGNAL(stateChanged(int)),this,SLOT(startupSwitchEdited()));
     }
-    
-    if (!GetEepromInterface()->getCapability(HasTTrace)) {
-      ui->label_ttrace->hide();
-      ui->ttraceCB->hide();
-    }
-    if (GetEepromInterface()->getCapability(RotaryEncoders)==0) {
-      ui->bcREaChkB->hide();
-      ui->bcREbChkB->hide();
-    }
-    if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
-      ui->thrwarnChkB->setDisabled(true);
-      ui->thrwarnChkB->hide();
-      ui->thrwarnLabel->hide();
-    } else {
-      switchEditLock=true;
-      ui->thrwarnChkB->setChecked(g_model.disableThrottleWarning);
-      switchEditLock=false;
-    }
-    if (!GetEepromInterface()->getCapability(TimerTriggerB)) {
-      ui->timer1ModeBCB->hide();
-      ui->timer1ModeB_label->hide();
-      ui->timer2ModeBCB->hide();
-      ui->timer2ModeB_label->hide();
-    } else {
-      populateTimerSwitchCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
-      populateTimerSwitchCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
-    }
-    
-    int index=0;
-    int selindex;
-    protocolEditLock=true; 
-    ui->protocolCB->clear();
-    for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
-      if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
-        ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
-        if (g_model.protocol==prot_list[i].prot_num) {
-          selindex=index;
-        }
-        index++;
+    connect(ui->swwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
+    connect(ui->swwarn4_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
+  }
+  if (!GetEepromInterface()->getCapability(InstantTrimSW)) {
+    ui->instantTrim_label->hide();
+    ui->instantTrim_CB->setDisabled(true);
+    ui->instantTrim_CB->hide();
+  } else {
+    switchEditLock=true;
+    int found=false;
+    for (int i=0; i< NUM_FSW; i++) {
+      if (g_model.funcSw[i].func==FuncInstantTrim) {
+        populateSwitchCB(ui->instantTrim_CB,g_model.funcSw[i].swtch,POPULATE_MSWITCHES & POPULATE_ONOFF);
+        found=true;
+        break;
       }
     }
-
-
-    protocolEditLock=false;  
-    ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
-    //timer2 mode direction value
-    if (GetEepromInterface()->getCapability(Timers)<2) {
-      ui->timer2DirCB->hide();
-      ui->timer2ValTE->hide();
-      ui->timer2DirCB->hide();
-      ui->timer2ModeCB->hide();
-      ui->timer2ModeBCB->hide();
-      ui->timer2ModeB_label->hide();
-      ui->label_timer2->hide();
-    } else {
-      populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
-      min = g_model.timers[1].val/60;
-      sec = g_model.timers[1].val%60;
-      ui->timer2ValTE->setTime(QTime(0,min,sec));
-      ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
+    if (found==false) {
+      populateSwitchCB(ui->instantTrim_CB,RawSwitch(),POPULATE_MSWITCHES & POPULATE_ONOFF);
     }
+    switchEditLock=false;
+  }
+  if (GetEepromInterface()->getCapability(NoTimerDirs)) {
+    ui->timer1DirCB->hide();
+    ui->timer2DirCB->hide();
+  }
+  if (GetEepromInterface()->getCapability(NoThrExpo)) {
+    ui->label_thrExpo->hide();
+    ui->thrExpoChkB->hide();
+  }
 
-    //trim inc, thro trim, thro expo, instatrim
-    ui->trimIncCB->setCurrentIndex(g_model.trimInc);
-    ui->thrExpoChkB->setChecked(g_model.thrExpo);
-    ui->thrTrimChkB->setChecked(g_model.thrTrim);
+  if (!GetEepromInterface()->getCapability(HasTTrace)) {
+    ui->label_ttrace->hide();
+    ui->ttraceCB->hide();
+  }
+  if (GetEepromInterface()->getCapability(RotaryEncoders)==0) {
+    ui->bcREaChkB->hide();
+    ui->bcREbChkB->hide();
+  }
+  if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
+    ui->thrwarnChkB->setDisabled(true);
+    ui->thrwarnChkB->hide();
+    ui->thrwarnLabel->hide();
+  } else {
+    switchEditLock=true;
+    ui->thrwarnChkB->setChecked(g_model.disableThrottleWarning);
+    switchEditLock=false;
+  }
+  if (!GetEepromInterface()->getCapability(TimerTriggerB)) {
+    ui->timer1ModeBCB->hide();
+    ui->timer1ModeB_label->hide();
+    ui->timer2ModeBCB->hide();
+    ui->timer2ModeB_label->hide();
+  } else {
+    populateTimerSwitchCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
+    populateTimerSwitchCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
+  }
 
-    //center beep
-    ui->bcRUDChkB->setChecked(g_model.beepANACenter & BC_BIT_RUD);
-    ui->bcELEChkB->setChecked(g_model.beepANACenter & BC_BIT_ELE);
-    ui->bcTHRChkB->setChecked(g_model.beepANACenter & BC_BIT_THR);
-    ui->bcAILChkB->setChecked(g_model.beepANACenter & BC_BIT_AIL);
-    ui->bcP1ChkB->setChecked(g_model.beepANACenter & BC_BIT_P1);
-    ui->bcP2ChkB->setChecked(g_model.beepANACenter & BC_BIT_P2);
-    ui->bcP3ChkB->setChecked(g_model.beepANACenter & BC_BIT_P3);
-    ui->bcREaChkB->setChecked(g_model.beepANACenter & BC_BIT_REA);
-    ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
+  int index=0;
+  int selindex;
+  protocolEditLock=true; 
+  ui->protocolCB->clear();
+  for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
+    if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
+      ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
+      if (g_model.protocol==prot_list[i].prot_num) {
+        selindex=index;
+      }
+      index++;
+    }
+  }
 
-    //pulse polarity
-    ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
 
-    //throttle trace
-    ui->ttraceCB->setCurrentIndex(g_model.thrTraceSrc);
-    
-    //protocol channels ppm delay (disable if needed)
-    ui->ppmDelaySB->setValue(g_model.ppmDelay);
-    ui->ppmDelaySB->setEnabled(!g_model.protocol);
-    ui->numChannelsSB->setEnabled(!g_model.protocol);
-    ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
-    ui->TrainerChkB->setChecked(g_model.traineron);
-    if (!GetEepromInterface()->getCapability(ModelTrainerEnable)) {
-        ui->label_Trainer->hide();
-        ui->TrainerChkB->hide();
-    }
-    ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
-    if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
-      ui->T2ThrTrg->hide();
-      ui->T2ThrTrgChkB->hide();
-    }
-    ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
-    if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
-      ui->ppmFrameLengthDSB->hide();
-      ui->label_ppmFrameLength->hide();
-    }
-    switch (g_model.protocol) {
-      case PXX:
-        ui->pxxRxNum->setMinimum(1);
-        ui->numChannelsSB->setValue(8);
-        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
-        ui->DSM_Type->setCurrentIndex(0);
-        break;
-      case DSM2:
-         if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
-          ui->pxxRxNum->setValue(1);
-        }
-         else {
-           ui->pxxRxNum->setMinimum(0);
-           ui->pxxRxNum->setValue((g_model.modelId));
-        }
-        ui->numChannelsSB->setValue(8);
-        ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
-        break;
-      default:
-        ui->label_DSM->hide();
-        ui->DSM_Type->hide();
-        ui->DSM_Type->setEnabled(false);
-        ui->label_PXX->hide();
-        ui->pxxRxNum->hide();
-        ui->pxxRxNum->setEnabled(false);
-        ui->numChannelsSB->setValue(g_model.ppmNCH);
-        break;
-    }
+  protocolEditLock=false;  
+  ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
+  //timer2 mode direction value
+  if (GetEepromInterface()->getCapability(Timers)<2) {
+    ui->timer2DirCB->hide();
+    ui->timer2ValTE->hide();
+    ui->timer2DirCB->hide();
+    ui->timer2ModeCB->hide();
+    ui->timer2ModeBCB->hide();
+    ui->timer2ModeB_label->hide();
+    ui->label_timer2->hide();
+  } else {
+    populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
+    min = g_model.timers[1].val/60;
+    sec = g_model.timers[1].val%60;
+    ui->timer2ValTE->setTime(QTime(0,min,sec));
+    ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
+  }
+
+  //trim inc, thro trim, thro expo, instatrim
+  ui->trimIncCB->setCurrentIndex(g_model.trimInc);
+  ui->thrExpoChkB->setChecked(g_model.thrExpo);
+  ui->thrTrimChkB->setChecked(g_model.thrTrim);
+
+  //center beep
+  ui->bcRUDChkB->setChecked(g_model.beepANACenter & BC_BIT_RUD);
+  ui->bcELEChkB->setChecked(g_model.beepANACenter & BC_BIT_ELE);
+  ui->bcTHRChkB->setChecked(g_model.beepANACenter & BC_BIT_THR);
+  ui->bcAILChkB->setChecked(g_model.beepANACenter & BC_BIT_AIL);
+  ui->bcP1ChkB->setChecked(g_model.beepANACenter & BC_BIT_P1);
+  ui->bcP2ChkB->setChecked(g_model.beepANACenter & BC_BIT_P2);
+  ui->bcP3ChkB->setChecked(g_model.beepANACenter & BC_BIT_P3);
+  ui->bcREaChkB->setChecked(g_model.beepANACenter & BC_BIT_REA);
+  ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
+
+  //pulse polarity
+  ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
+
+  //throttle trace
+  ui->ttraceCB->setCurrentIndex(g_model.thrTraceSrc);
+
+  //protocol channels ppm delay (disable if needed)
+  ui->ppmDelaySB->setValue(g_model.ppmDelay);
+  ui->ppmDelaySB->setEnabled(!g_model.protocol);
+  ui->numChannelsSB->setEnabled(!g_model.protocol);
+  ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
+  ui->TrainerChkB->setChecked(g_model.traineron);
+  if (!GetEepromInterface()->getCapability(ModelTrainerEnable)) {
+      ui->label_Trainer->hide();
+      ui->TrainerChkB->hide();
+  }
+  ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
+  if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
+    ui->T2ThrTrg->hide();
+    ui->T2ThrTrgChkB->hide();
+  }
+  ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
+  if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
+    ui->ppmFrameLengthDSB->hide();
+    ui->label_ppmFrameLength->hide();
+  }
+  switch (g_model.protocol) {
+    case PXX:
+      ui->pxxRxNum->setMinimum(1);
+      ui->numChannelsSB->setValue(8);
+      ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+      ui->DSM_Type->setCurrentIndex(0);
+      break;
+    case DSM2:
+        if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+        ui->pxxRxNum->setValue(1);
+      }
+        else {
+          ui->pxxRxNum->setMinimum(0);
+          ui->pxxRxNum->setValue((g_model.modelId));
+      }
+      ui->numChannelsSB->setValue(8);
+      ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
+      break;
+    default:
+      ui->label_DSM->hide();
+      ui->DSM_Type->hide();
+      ui->DSM_Type->setEnabled(false);
+      ui->label_PXX->hide();
+      ui->pxxRxNum->hide();
+      ui->pxxRxNum->setEnabled(false);
+      ui->numChannelsSB->setValue(g_model.ppmNCH);
+      break;
+  }
 }
 
 void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)
@@ -1018,6 +1052,20 @@ void ModelEdit::ppmcenterEdited()
   updateSettings();
 }
 
+void ModelEdit::startupSwitchEdited()
+{
+  uint8_t i= 0;
+  i|=(uint8_t)ui->swwarn0_CB->currentIndex();
+  i|=(ui->swwarn1_ChkB->isChecked() ? 0 : 1)<<1;
+  i|=(ui->swwarn2_ChkB->isChecked() ? 0 : 1)<<2;
+  i|=(ui->swwarn3_ChkB->isChecked() ? 0 : 1)<<3;
+  i|=((uint8_t)ui->swwarn4_CB->currentIndex() &0x03)<<4;
+  i|=(ui->swwarn5_ChkB->isChecked() ? 0 : 1)<<6;
+  i|=(ui->swwarn6_ChkB->isChecked() ? 0 : 1)<<7;
+  g_model.switchWarningStates=i;
+  updateSettings();
+}
+
 void ModelEdit::setCurrentCurve(int curveId)
 {
   currentCurve = curveId;
@@ -1236,6 +1284,13 @@ void ModelEdit::tabFunctionSwitches()
       fswtchParam[i]->hide();
       fswtchParamT[i]->hide();
       fswtchEnable[i]->hide();
+    } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
+      if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
+        fswtchParamT[i]->hide();
+      } else {
+        fswtchParam[i]->hide();
+      }
+      fswtchEnable[i]->hide();
     }
   }
   if (num_fsw>16) {
@@ -1267,10 +1322,16 @@ void ModelEdit::tabFunctionSwitches()
       ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
       populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
       connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-
       if (index==0) {
         fswtchParam[i]->hide();
         fswtchParamT[i]->hide();
+        fswtchEnable[i]->hide();
+      } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
+        if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
+          fswtchParamT[i]->hide();
+        } else {
+          fswtchParam[i]->hide();
+        }
         fswtchEnable[i]->hide();
       }
     } 
