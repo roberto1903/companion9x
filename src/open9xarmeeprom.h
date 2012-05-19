@@ -284,6 +284,7 @@ PACK(typedef struct t_Open9xArmModelData_v209 {
   uint8_t varioSource:3;
   uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
   uint8_t varioSpeedDownMin;
+  uint8_t switchWarningStates;
 
   operator ModelData();
   t_Open9xArmModelData_v209() { memset(this, 0, sizeof(t_Open9xArmModelData_v209)); }

@@ -2354,6 +2354,7 @@ t_Open9xModelData_v209::operator ModelData ()
   c9x.frsky.varioSource = varioSource;
   c9x.frsky.varioSpeedUpMin = varioSpeedUpMin;
   c9x.frsky.varioSpeedDownMin = varioSpeedDownMin;
+  c9x.switchWarningStates = switchWarningStates;
 
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
@@ -2463,6 +2464,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     varioSource = c9x.frsky.varioSource;
     varioSpeedUpMin = c9x.frsky.varioSpeedUpMin;
     varioSpeedDownMin = c9x.frsky.varioSpeedDownMin;
+    switchWarningStates = c9x.switchWarningStates;
 
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
