@@ -55,6 +55,27 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
   b->setMaxVisibleItems(10);
 }
 
+void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
+  QStringList qs;
+  b->clear();
+  uint extfunc=function - NUM_SAFETY_CHNOUT;
+  if (extfunc==6) {
+    qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
+    qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+  } else if (extfunc==7) { 
+    qs << "0" << "1" << "2" << "3";
+  } else if (extfunc==9) { 
+    qs.append( QObject::tr("Timer1"));
+    qs.append( QObject::tr("Timer2"));
+    qs.append( QObject::tr("All"));
+    qs.append( QObject::tr("Telemetry"));
+  } else {
+    b->hide();
+  }
+  b->addItems(qs);
+  b->setCurrentIndex(value); 
+}
+
 void populatePhasesCB(QComboBox *b, int value)
 {
   for (int i=-GetEepromInterface()->getCapability(FlightPhases); i<=GetEepromInterface()->getCapability(FlightPhases); i++) {

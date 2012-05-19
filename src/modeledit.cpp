@@ -1198,69 +1198,85 @@ void ModelEdit::tabCustomSwitches()
 
 void ModelEdit::tabFunctionSwitches()
 {
-    switchEditLock = true;
-    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
-    for(int i=0; i<std::min(16,num_fsw); i++) {
-        fswtchSwtch[i] = new QComboBox(this);
-        fswtchEnable[i] = new QCheckBox(this);
-        connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
-        populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
+  switchEditLock = true;
+  int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+  for(int i=0; i<std::min(16,num_fsw); i++) {
+    fswtchSwtch[i] = new QComboBox(this);
+    connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
+    populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
 
-        fswtchFunc[i] = new QComboBox(this);
-        connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-        ui->fswitchlayout1->addWidget(fswtchFunc[i],i+1,2);
-        populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
-        
-        fswtchParam[i] = new QSpinBox(this);
-        fswtchParam[i]->setMaximum(125);
-        fswtchParam[i]->setMinimum(-125);
-        fswtchParam[i]->setAccelerated(true);
-        connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-        ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
-        fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-        fswtchEnable[i]->setText(tr("ON"));
-        ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
-        fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
-        connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
-        int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
-        if (index==0) {
-          fswtchParam[i]->hide();
-          fswtchEnable[i]->hide();
-        }
+    fswtchFunc[i] = new QComboBox(this);
+    connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    ui->fswitchlayout1->addWidget(fswtchFunc[i],i+1,2);
+    populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+
+    fswtchParam[i] = new QSpinBox(this);
+    fswtchParam[i]->setMaximum(125);
+    fswtchParam[i]->setMinimum(-125);
+    fswtchParam[i]->setAccelerated(true);
+    connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+    ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
+
+    fswtchEnable[i] = new QCheckBox(this);
+    fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+    fswtchEnable[i]->setText(tr("ON"));
+    ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
+    fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
+    connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
+
+    fswtchParamT[i] = new QComboBox(this);
+    ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
+    populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
+    connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+
+    int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+    if (index==0) {
+      fswtchParam[i]->hide();
+      fswtchParamT[i]->hide();
+      fswtchEnable[i]->hide();
     }
-    if (num_fsw>16) {
-      for(int i=16; i<num_fsw; i++) {
-          fswtchSwtch[i] = new QComboBox(this);
-          fswtchEnable[i] = new QCheckBox(this);
-          connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-          ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
-          populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
+  }
+  if (num_fsw>16) {
+    for(int i=16; i<num_fsw; i++) {
+      fswtchSwtch[i] = new QComboBox(this);
+      connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+      ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
+      populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
 
-          fswtchFunc[i] = new QComboBox(this);
-          connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-          ui->fswitchlayout2->addWidget(fswtchFunc[i],i-15,2);
-          populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+      fswtchFunc[i] = new QComboBox(this);
+      connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+      ui->fswitchlayout2->addWidget(fswtchFunc[i],i-15,2);
+      populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
-          fswtchParam[i] = new QSpinBox(this);
-          fswtchParam[i]->setMaximum(125);
-          fswtchParam[i]->setMinimum(-125);
-          fswtchParam[i]->setAccelerated(true);
-          connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-          ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
-          fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-          fswtchEnable[i]->setText(tr("ON"));
-          ui->fswitchlayout2->addWidget(fswtchEnable[i],i+1,4);
-          int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
-          if (index==0) {
-            fswtchParam[i]->hide();
-            fswtchEnable[i]->hide();
-          }
-      } 
-    } else {
-      ui->FSwitchGB2->hide();
-    }
-    switchEditLock = false;
+      fswtchParam[i] = new QSpinBox(this);
+      fswtchParam[i]->setMaximum(125);
+      fswtchParam[i]->setMinimum(-125);
+      fswtchParam[i]->setAccelerated(true);
+      connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+      ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
+      fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+
+      fswtchEnable[i] = new QCheckBox(this);
+      fswtchEnable[i]->setText(tr("ON"));
+      ui->fswitchlayout2->addWidget(fswtchEnable[i],i+1,4);
+      int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
+
+      fswtchParamT[i] = new QComboBox(this);
+      ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
+      populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
+      connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+
+      if (index==0) {
+        fswtchParam[i]->hide();
+        fswtchParamT[i]->hide();
+        fswtchEnable[i]->hide();
+      }
+    } 
+  } else {
+    ui->FSwitchGB2->hide();
+  }
+  switchEditLock = false;
 }
 
 void ModelEdit::tabSafetySwitches()
@@ -1350,14 +1366,34 @@ void ModelEdit::functionSwitchesEdited()
     for(int i=0; i<num_fsw; i++) {
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
-      g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
       g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
-      if (fswtchFunc[i]->currentIndex()>15 || g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
+      int index=fswtchFunc[i]->currentIndex();
+      if (g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
         fswtchParam[i]->hide();
+        fswtchParamT[i]->hide();
         fswtchEnable[i]->hide();
+      } else  if (index>15) {
+        if (index==(NUM_SAFETY_CHNOUT+6)||index==(NUM_SAFETY_CHNOUT+7)||index==(NUM_SAFETY_CHNOUT+9)) {
+          fswtchParam[i]->hide();
+          if (fswtchParamT[i]->currentIndex()>=0) {
+            g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+          } else {
+            g_model.funcSw[i].param = 0;
+          }
+          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+          fswtchParamT[i]->show();
+          fswtchEnable[i]->hide();
+        } else {
+          g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
+          fswtchParam[i]->hide();
+          fswtchParamT[i]->hide();
+          fswtchEnable[i]->hide();
+        }
       } else {
+        g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
         fswtchParam[i]->show();
         fswtchEnable[i]->show();
+        fswtchParamT[i]->hide();
       }
     }
 
@@ -1415,7 +1451,7 @@ void ModelEdit::tabTelemetry()
       ui->varioLimitMin_DSB->setDisabled(true);
     } else {
       ui->varioLimitMinOff_ChkB->setChecked(false);
-      ui->varioLimitMin_DSB->setValue((g_model.frsky.varioSpeedDownMin/10.0)-10);
+      ui->varioLimitMin_DSB->setValue((g_model.frsky.varioSpeedDownMin/10.0)-10.1);
     }
     ui->varioSourceCB->setCurrentIndex(g_model.frsky.varioSource);
   }
@@ -2452,7 +2488,7 @@ void ModelEdit::on_varioSourceCB_currentIndexChanged(int index)
 void ModelEdit::on_varioLimitMin_DSB_editingFinished()
 {
   if (telemetryLock) return;
-  g_model.frsky.varioSpeedDownMin= ((ui->varioLimitMin_DSB->value()+10)*10)+1;
+  g_model.frsky.varioSpeedDownMin= round((ui->varioLimitMin_DSB->value()+10)*10)+1;
   updateSettings();    
 }
 
