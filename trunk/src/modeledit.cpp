@@ -2563,9 +2563,9 @@ void ModelEdit::telMaxSBeditingFinished()
   int maxId = spinBox->objectName().right(1).toInt() - 1;
   telemetryLock=true;
   if (g_model.frsky.bars[maxId].source==3) {
-        g_model.frsky.bars[maxId].barMin=(51-round((spinBox->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.bars[maxId].source)));
+        g_model.frsky.bars[maxId].barMax=(51-round((spinBox->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.bars[maxId].source)));
   } else if (g_model.frsky.bars[maxId].source==4) {
-        g_model.frsky.bars[maxId].barMin=(51-round((spinBox->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.bars[maxId].source)));
+        g_model.frsky.bars[maxId].barMax=(51-round((spinBox->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.bars[maxId].source)));
   } else {
         g_model.frsky.bars[maxId].barMax=(51-round(spinBox->value()/getBarStep(g_model.frsky.bars[maxId].source) ));
   }
