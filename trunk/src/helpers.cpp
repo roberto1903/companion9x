@@ -406,3 +406,20 @@ QImage qstring2image(QString imagestr) {
   }
   return Image;
 }
+
+int findmult(float value, float base) {
+  int vvalue=value*10;
+  int vbase=base*10;
+  vvalue--;
+  int mult=0;
+  if ((vvalue/vbase)>=1) {
+    mult=1;
+  }
+  if ((vvalue/vbase)>=2) {
+    mult=2;
+  }
+  if ((vvalue/vbase)>=4) {
+    mult=3;
+  }
+  return mult;
+}

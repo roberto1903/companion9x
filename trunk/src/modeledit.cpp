@@ -1440,29 +1440,29 @@ void ModelEdit::tabTelemetry()
     ui->frskyProtoCB->addItem(tr("Winged Shadow How High (not supported)"));
   }
   ui->a1UnitCB->setCurrentIndex(g_model.frsky.channels[0].type);
-  if (g_model.frsky.channels[0].type==0) {
-    a1ratio=g_model.frsky.channels[0].ratio/10.0;
+  if (g_model.frsky.channels[0].type==0 || g_model.frsky.channels[0].type==1 || g_model.frsky.channels[0].type==2) {
+    a1ratio=(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier)/10.0;
     ui->a1RatioSB->setDecimals(1);
-    ui->a1RatioSB->setMaximum(25.5);
+    ui->a1RatioSB->setMaximum(25.5*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
   }
   else {
-    a1ratio=g_model.frsky.channels[0].ratio;
+    a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
     ui->a1RatioSB->setDecimals(0);
-    ui->a1RatioSB->setMaximum(255);
+    ui->a1RatioSB->setMaximum(255*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
   }
   ui->a1RatioSB->setValue(a1ratio);
 
   updateA1Fields();
   
-  if (g_model.frsky.channels[1].type==0) {
-    a2ratio=g_model.frsky.channels[1].ratio/10.0;
+  if (g_model.frsky.channels[1].type==0 || g_model.frsky.channels[1].type==1 || g_model.frsky.channels[1].type==2) {
+    a2ratio=(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier)/10.0;
     ui->a2RatioSB->setDecimals(1);
-    ui->a2RatioSB->setMaximum(25.5);
+    ui->a2RatioSB->setMaximum(25.5*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
   }
   else {
-    a2ratio=g_model.frsky.channels[1].ratio;
+    a2ratio=g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier;
     ui->a2RatioSB->setDecimals(0);
-    ui->a2RatioSB->setMaximum(255);
+    ui->a2RatioSB->setMaximum(255*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
   }
   ui->a2RatioSB->setValue(a2ratio);
   updateA2Fields();
@@ -1550,8 +1550,8 @@ void ModelEdit::updateA1Fields() {
     return;
   }
 
-  if (g_model.frsky.channels[0].type==0) {
-    a1ratio=g_model.frsky.channels[0].ratio/10.0;
+  if (g_model.frsky.channels[0].type==0 || g_model.frsky.channels[0].type==1 || g_model.frsky.channels[0].type==2) {
+    a1ratio=(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier)/10.0;
     ui->a11ValueSB->setDecimals(2);
     ui->a11ValueSB->setSingleStep(a1ratio/255.0);
     ui->a12ValueSB->setDecimals(2);
@@ -1562,7 +1562,7 @@ void ModelEdit::updateA1Fields() {
     ui->a12ValueSB->setMaximum(a1ratio+(g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/2550.0);
   }
   else {
-    a1ratio=g_model.frsky.channels[0].ratio;
+    a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
     ui->a11ValueSB->setDecimals(2);
     ui->a11ValueSB->setSingleStep(a1ratio/255.0);
     ui->a12ValueSB->setDecimals(2);
@@ -1578,7 +1578,7 @@ void ModelEdit::updateA1Fields() {
   ui->a1CalibSB->setSingleStep(a1ratio/255.0);
   ui->a1CalibSB->setValue((g_model.frsky.channels[0].offset*a1ratio)/255);
   a11value=a1ratio*(g_model.frsky.channels[0].alarms[0].value/255.0+g_model.frsky.channels[0].offset/255.0);
-  a12value=a1ratio*(g_model.frsky.channels[0].alarms[1].value/255.0+g_model.frsky.channels[0].offset/255.0);
+  a12value=a1ratio*(g_model.frsky.channels[0].alarms[1].value/255.0+g_model.frsky.channels[0].offset/255.0);;
   ui->a11ValueSB->setValue(a11value);
   ui->a12ValueSB->setValue(a12value);
 }
@@ -1888,37 +1888,68 @@ void ModelEdit::on_pxxRxNum_editingFinished()
 void ModelEdit::on_a1UnitCB_currentIndexChanged(int index) {
   float a1ratio;
   g_model.frsky.channels[0].type=index;
-  if (g_model.frsky.channels[0].type==0) {
-    ui->a1RatioSB->setDecimals(1);
-    ui->a1RatioSB->setMaximum(25.5);
-    a1ratio=g_model.frsky.channels[0].ratio/10.0;
-  }
-  else {
-    ui->a1RatioSB->setDecimals(0);
-    ui->a1RatioSB->setMaximum(255);
-    a1ratio=g_model.frsky.channels[0].ratio;
+  switch (index) {
+    case 0:
+    case 1:
+    case 2:
+      ui->a1RatioSB->setDecimals(1);
+      ui->a1RatioSB->setMaximum(25.5*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
+      a1ratio=(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier)/10.0;
+      break;
+    default:
+      ui->a1RatioSB->setDecimals(0);
+      ui->a1RatioSB->setMaximum(255*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
+      a1ratio=(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier);
+      break;
   }
   ui->a1RatioSB->setValue(a1ratio);
   updateA1Fields();
   updateSettings();
 }
 
+void ModelEdit::on_a1RatioSB_valueChanged()
+{
+  if (telemetryLock) return;
+  if (g_model.frsky.channels[0].type==0 || g_model.frsky.channels[0].type==1 || g_model.frsky.channels[0].type==2) {
+    g_model.frsky.channels[0].multiplier = findmult(ui->a1RatioSB->value(), 25.5);
+    float singlestep =(1<<g_model.frsky.channels[0].multiplier)/10.0;
+    telemetryLock=true;
+    ui->a1RatioSB->setSingleStep(singlestep);
+    ui->a1RatioSB->setValue(round(ui->a1RatioSB->value()/singlestep)*singlestep);
+    telemetryLock=false;
+  } else {
+    g_model.frsky.channels[0].multiplier = findmult(ui->a1RatioSB->value(), 255);
+    float singlestep =(1<<g_model.frsky.channels[0].multiplier);
+    telemetryLock=true;
+    ui->a1RatioSB->setSingleStep(singlestep);
+    ui->a1RatioSB->setValue(round(ui->a1RatioSB->value()/singlestep)*singlestep);
+    telemetryLock=false;
+  }  
+}
+
 void ModelEdit::on_a1RatioSB_editingFinished()
 {
   float a1ratio, a1calib, a11value,a12value;
   if (telemetryLock) return;
-  if (g_model.frsky.channels[0].type==0) {
-    g_model.frsky.channels[0].ratio = round(ui->a1RatioSB->value()*10);
-  }
-  else {
-    g_model.frsky.channels[0].ratio = ui->a1RatioSB->value();
+  if (g_model.frsky.channels[0].type==0 || g_model.frsky.channels[0].type==1 || g_model.frsky.channels[0].type==2) {
+    g_model.frsky.channels[0].multiplier = findmult(ui->a1RatioSB->value(), 25.5);
+    ui->a1CalibSB->setSingleStep((1<<g_model.frsky.channels[0].multiplier)/10.0);
+    ui->a11ValueSB->setSingleStep((1<<g_model.frsky.channels[0].multiplier)/10.0);
+    ui->a12ValueSB->setSingleStep((1<<g_model.frsky.channels[0].multiplier)/10.0);
+    g_model.frsky.channels[0].ratio = ((int)(round(ui->a1RatioSB->value()*10))/pow(2,g_model.frsky.channels[0].multiplier));
+  }  else {
+    g_model.frsky.channels[0].multiplier = findmult(ui->a1RatioSB->value(), 255);
+    ui->a1CalibSB->setSingleStep(1<<g_model.frsky.channels[0].multiplier);
+    ui->a11ValueSB->setSingleStep(1<<g_model.frsky.channels[0].multiplier);
+    ui->a12ValueSB->setSingleStep(1<<g_model.frsky.channels[0].multiplier);
+    g_model.frsky.channels[0].ratio = (ui->a1RatioSB->value()/pow(2,g_model.frsky.channels[0].multiplier));
   }
   ui->a1CalibSB->setMaximum((ui->a1RatioSB->value()*127)/255);
   ui->a1CalibSB->setMinimum((ui->a1RatioSB->value()*-128)/255);
   ui->a11ValueSB->setMaximum(ui->a1RatioSB->value());
   ui->a12ValueSB->setMaximum(ui->a1RatioSB->value());
   repaint();
-  a1ratio=g_model.frsky.channels[0].ratio;
+  a1ratio=g_model.frsky.channels[0].ratio * pow(2,g_model.frsky.channels[0].multiplier);
   a1calib=ui->a1CalibSB->value();
   a11value=ui->a11ValueSB->value();
   a12value=ui->a12ValueSB->value();
@@ -1943,8 +1974,8 @@ void ModelEdit::on_a1RatioSB_editingFinished()
       g_model.frsky.channels[0].offset=round(a1calib*255/a1ratio);
     }
   }
-  g_model.frsky.channels[0].alarms[0].value=round((a11value*255-g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/g_model.frsky.channels[0].ratio);
-  g_model.frsky.channels[0].alarms[1].value=round((a12value*255-g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/g_model.frsky.channels[0].ratio); 
+  g_model.frsky.channels[0].alarms[0].value=round((a11value*255-g_model.frsky.channels[0].offset*(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier))/(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier));
+  g_model.frsky.channels[0].alarms[1].value=round((a12value*255-g_model.frsky.channels[0].offset*(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier))/(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier)); 
   updateA1Fields();
   telBarUpdate();
   updateSettings();
@@ -1953,11 +1984,11 @@ void ModelEdit::on_a1RatioSB_editingFinished()
 void ModelEdit::on_a1CalibSB_editingFinished()
 {
   float a1ratio,a1calib,a11value,a12value;
-  if (g_model.frsky.channels[0].type==0) {
-    a1ratio=g_model.frsky.channels[0].ratio/10.0;
+  if (g_model.frsky.channels[0].type==0 || g_model.frsky.channels[0].type==1 || g_model.frsky.channels[0].type==2) {
+    a1ratio=(g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier)/10.0;
   }
   else {
-    a1ratio=g_model.frsky.channels[0].ratio;
+    a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
   }
   if (a1ratio!=0) {
     g_model.frsky.channels[0].offset = round((255*ui->a1CalibSB->value()/a1ratio));
@@ -2123,7 +2154,7 @@ void ModelEdit::on_a11GreaterCB_currentIndexChanged(int index)
 void ModelEdit::on_a11ValueSB_editingFinished()
 {
   float a1ratio, a1calib, a11value;
-  a1ratio=g_model.frsky.channels[0].ratio;
+  a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
   a1calib=g_model.frsky.channels[0].offset;
   a11value=ui->a11ValueSB->value();
   if (g_model.frsky.channels[0].type==0) {
@@ -2157,7 +2188,7 @@ void ModelEdit::on_a12GreaterCB_currentIndexChanged(int index)
 void ModelEdit::on_a12ValueSB_editingFinished()
 {
   float a1ratio, a1calib, a12value;
-  a1ratio=g_model.frsky.channels[0].ratio;
+  a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
   a1calib=g_model.frsky.channels[0].offset;
   a12value=ui->a12ValueSB->value();
   if (g_model.frsky.channels[0].type==0) {
@@ -2179,41 +2210,72 @@ void ModelEdit::on_a12ValueSB_editingFinished()
 void ModelEdit::on_a2UnitCB_currentIndexChanged(int index) {
   float a2ratio;
   g_model.frsky.channels[1].type=index;
-  if (g_model.frsky.channels[1].type==0) {
-    ui->a2RatioSB->setDecimals(1);
-    ui->a2RatioSB->setMaximum(25.5);
-    a2ratio=g_model.frsky.channels[1].ratio/10.0;
-  }
-  else {
-    ui->a2RatioSB->setDecimals(0);
-    ui->a2RatioSB->setMaximum(255);
-    a2ratio=g_model.frsky.channels[1].ratio;
+  switch (index) {
+    case 0:
+    case 1:
+    case 2:
+      ui->a2RatioSB->setDecimals(1);
+      ui->a2RatioSB->setMaximum(25.5*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
+      a2ratio=(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier)/10.0;
+      break;
+    default:
+      ui->a2RatioSB->setDecimals(0);
+      ui->a2RatioSB->setMaximum(255*GetEepromInterface()->getCapability(TelemetryMaxMultiplier));
+      a2ratio=g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier;
+      break;
   }
   ui->a2RatioSB->setValue(a2ratio);
   updateA2Fields();
   updateSettings();
 }
 
+void ModelEdit::on_a2RatioSB_valueChanged()
+{
+  if (telemetryLock) return;
+  if (g_model.frsky.channels[1].type==0 || g_model.frsky.channels[1].type==1 || g_model.frsky.channels[1].type==2) {
+    g_model.frsky.channels[1].multiplier = findmult(ui->a2RatioSB->value(), 25.5);
+    float singlestep =(1<<g_model.frsky.channels[1].multiplier)/10.0;
+    telemetryLock=true;
+    ui->a2RatioSB->setSingleStep(singlestep);
+    ui->a2RatioSB->setValue(round(ui->a2RatioSB->value()/singlestep)*singlestep);
+    telemetryLock=false;
+  } else {
+    g_model.frsky.channels[1].multiplier = findmult(ui->a2RatioSB->value(), 255);
+    float singlestep =(1<<g_model.frsky.channels[1].multiplier);
+    telemetryLock=true;
+    ui->a2RatioSB->setSingleStep(singlestep);
+    ui->a2RatioSB->setValue(round(ui->a2RatioSB->value()/singlestep)*singlestep);
+    telemetryLock=false;
+  }  
+}
+
 void ModelEdit::on_a2RatioSB_editingFinished()
 {
-float a2ratio, a2calib, a21value,a22value;
+  float a2ratio, a2calib, a21value,a22value;
   if (telemetryLock) return;
-  if (g_model.frsky.channels[1].type==0) {
-    g_model.frsky.channels[1].ratio = round(ui->a2RatioSB->value()*10);
-  }
-  else {
-    g_model.frsky.channels[1].ratio = ui->a2RatioSB->value();
+  if (g_model.frsky.channels[1].type==0 || g_model.frsky.channels[1].type==1 || g_model.frsky.channels[1].type==2) {
+    g_model.frsky.channels[1].multiplier = findmult(ui->a2RatioSB->value(), 25.5);
+    ui->a2CalibSB->setSingleStep((1<<g_model.frsky.channels[1].multiplier)/10.0);
+    ui->a21ValueSB->setSingleStep((1<<g_model.frsky.channels[1].multiplier)/10.0);
+    ui->a22ValueSB->setSingleStep((1<<g_model.frsky.channels[1].multiplier)/10.0);
+    g_model.frsky.channels[1].ratio = ((round(ui->a2RatioSB->value()*10))/pow(2,g_model.frsky.channels[1].multiplier));
+  }  else {
+    g_model.frsky.channels[1].multiplier = findmult(ui->a2RatioSB->value(), 255);
+    ui->a2CalibSB->setSingleStep(1<<g_model.frsky.channels[1].multiplier);
+    ui->a21ValueSB->setSingleStep(1<<g_model.frsky.channels[1].multiplier);
+    ui->a22ValueSB->setSingleStep(1<<g_model.frsky.channels[1].multiplier);
+    g_model.frsky.channels[1].ratio = (ui->a2RatioSB->value()/pow(2,g_model.frsky.channels[1].multiplier));
   }
   ui->a2CalibSB->setMaximum((ui->a2RatioSB->value()*127)/255);
   ui->a2CalibSB->setMinimum((ui->a2RatioSB->value()*-128)/255);
   ui->a21ValueSB->setMaximum(ui->a2RatioSB->value());
   ui->a22ValueSB->setMaximum(ui->a2RatioSB->value());
   repaint();
-  a2ratio=g_model.frsky.channels[1].ratio;
+  a2ratio=g_model.frsky.channels[1].ratio * pow(2,g_model.frsky.channels[1].multiplier);
   a2calib=ui->a2CalibSB->value();
   a21value=ui->a21ValueSB->value();
   a22value=ui->a22ValueSB->value();
-  if (g_model.frsky.channels[1].type==0) {
+  if (g_model.frsky.channels[1].type==0 || g_model.frsky.channels[1].type==1 || g_model.frsky.channels[1].type==2) {
     a2calib*=10;
     a21value*=10;
     a22value*=10; 
@@ -2234,8 +2296,8 @@ float a2ratio, a2calib, a21value,a22value;
       g_model.frsky.channels[1].offset=round(a2calib*255/a2ratio);
     }
   }
-  g_model.frsky.channels[1].alarms[0].value=round((a21value*255-g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/g_model.frsky.channels[1].ratio);
-  g_model.frsky.channels[1].alarms[1].value=round((a22value*255-g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/g_model.frsky.channels[1].ratio); 
+  g_model.frsky.channels[1].alarms[0].value=round((a21value*255-g_model.frsky.channels[1].offset*(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier))/(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier));
+  g_model.frsky.channels[1].alarms[1].value=round((a22value*255-g_model.frsky.channels[1].offset*(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier))/(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier)); 
   updateA2Fields();
   telBarUpdate();
   updateSettings();
@@ -2244,14 +2306,14 @@ float a2ratio, a2calib, a21value,a22value;
 void ModelEdit::on_a2CalibSB_editingFinished()
 {
   float a2ratio,a2calib,a21value,a22value;
-  if (g_model.frsky.channels[1].type==0) {
-    a2ratio=g_model.frsky.channels[1].ratio/10.0;
+  if (g_model.frsky.channels[1].type==0 || g_model.frsky.channels[1].type==1 || g_model.frsky.channels[1].type==2) {
+    a2ratio=(g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier)/10.0;
   }
   else {
-    a2ratio=g_model.frsky.channels[1].ratio;
+    a2ratio=g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier;
   }
   if (a2ratio!=0) {
-    g_model.frsky.channels[1].offset = round(((255*ui->a2CalibSB->value())/a2ratio));
+    g_model.frsky.channels[1].offset = round((255*ui->a2CalibSB->value()/a2ratio));
     a2calib=a2ratio*g_model.frsky.channels[1].offset/255.0;
     a21value=ui->a21ValueSB->value();
     a22value=ui->a22ValueSB->value();
@@ -2295,7 +2357,7 @@ void ModelEdit::on_a21GreaterCB_currentIndexChanged(int index)
 void ModelEdit::on_a21ValueSB_editingFinished()
 {
   float a2ratio, a2calib, a21value;
-  a2ratio=g_model.frsky.channels[1].ratio;
+  a2ratio=g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier;
   a2calib=g_model.frsky.channels[1].offset;
   a21value=ui->a21ValueSB->value();
   if (g_model.frsky.channels[1].type==0) {
@@ -2329,7 +2391,7 @@ void ModelEdit::on_a22GreaterCB_currentIndexChanged(int index)
 void ModelEdit::on_a22ValueSB_editingFinished()
 {
   float a2ratio, a2calib, a22value;
-  a2ratio=g_model.frsky.channels[1].ratio;
+  a2ratio=g_model.frsky.channels[1].ratio<<g_model.frsky.channels[1].multiplier;
   a2calib=g_model.frsky.channels[1].offset;
   a22value=ui->a22ValueSB->value();
   if (g_model.frsky.channels[1].type==0) {

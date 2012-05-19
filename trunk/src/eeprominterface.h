@@ -541,6 +541,7 @@ class FrSkyChannelData {
     uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
     uint8_t   type;                 // future use: 0=volts, 1=ml...
     int8_t   offset;
+    uint8_t   multiplier;
     FrSkyAlarmData alarms[2];
 
     void clear() { memset(this, 0, sizeof(FrSkyChannelData)); }
@@ -736,6 +737,7 @@ enum Capability {
  TelemetryRSSIModel,
  TelemetryAlarm,
  TelemetryTimeshift,
+ TelemetryMaxMultiplier,
  HasAltitudeSel,
  HasVario,
  FSSwitch,
