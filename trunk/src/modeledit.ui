@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>845</width>
-    <height>660</height>
+    <height>672</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
    <item row="1" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>10</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -4157,8 +4157,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>815</width>
-            <height>582</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7322,8 +7322,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>815</width>
-            <height>553</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13086,8 +13086,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>815</width>
-            <height>582</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14467,7 +14467,7 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Speed (m/s)</string>
+                  <string>Speed (m/s or ft/s)</string>
                  </property>
                 </item>
                 <item>
@@ -14477,12 +14477,12 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Speed (km/h)</string>
+                  <string>Speed (km/h or miles/h)</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Meters (m)</string>
+                  <string>Meters (m or ft)</string>
                  </property>
                 </item>
                 <item>
@@ -14968,7 +14968,7 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Speed (m/s)</string>
+                  <string>Speed (m/s or ft/s)</string>
                  </property>
                 </item>
                 <item>
@@ -14978,12 +14978,12 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Speed (km/h)</string>
+                  <string>Speed (km/h or miles/h)</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Meters (m)</string>
+                  <string>Meters (m or ft)</string>
                  </property>
                 </item>
                 <item>
