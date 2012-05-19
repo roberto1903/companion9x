@@ -265,7 +265,9 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case HasBrightness:
       return 1;
     case InstantTrimSW:
-      return 1;      
+      return 1;
+    case TelemetryMaxMultiplier:
+      return 2;
     default:
       return 0;
   }

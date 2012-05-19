@@ -468,6 +468,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case TelemetryTimeshift:
       return 1;
+    case TelemetryMaxMultiplier:
+      return 8;      
     case DiffMixers:
       return 1;
     case PPMCenter:

@@ -223,6 +223,7 @@ private slots:
     void on_a1UnitCB_currentIndexChanged(int index);
     void on_a2UnitCB_currentIndexChanged(int index);
     void on_a1RatioSB_editingFinished();
+    void on_a1RatioSB_valueChanged();
     void on_a1CalibSB_editingFinished();
     void on_a11LevelCB_currentIndexChanged(int index);
     void on_a11GreaterCB_currentIndexChanged(int index);
@@ -231,6 +232,7 @@ private slots:
     void on_a12GreaterCB_currentIndexChanged(int index);
     void on_a12ValueSB_editingFinished();
     void on_a2RatioSB_editingFinished();
+    void on_a2RatioSB_valueChanged();
     void on_a2CalibSB_editingFinished();
     void on_a21LevelCB_currentIndexChanged(int index);
     void on_a21GreaterCB_currentIndexChanged(int index);

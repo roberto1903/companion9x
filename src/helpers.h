@@ -46,5 +46,5 @@ QString getSignedStr(int value);
 QString getCurveStr(int curve);
 QString image2qstring(QImage image);
 QImage qstring2image(QString imagestr);
-
+int findmult(float value, float base);
 #endif // HELPERS_H

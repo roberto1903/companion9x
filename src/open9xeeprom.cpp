@@ -1196,6 +1196,7 @@ t_Open9xFrSkyChannelData_v204::t_Open9xFrSkyChannelData_v204(FrSkyChannelData &c
   memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v204));
   ratio = c9x.ratio;
   type = c9x.type;
+  multiplier = c9x.multiplier;
   alarms_value[0] = c9x.alarms[0].value;
   alarms_value[1] = c9x.alarms[1].value;
   alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
@@ -1209,6 +1210,7 @@ t_Open9xFrSkyChannelData_v204::operator FrSkyChannelData ()
   FrSkyChannelData c9x;
   c9x.ratio = ratio;
   c9x.type = type;
+  c9x.multiplier = multiplier;
   c9x.alarms[0].value = alarms_value[0];
   c9x.alarms[0].level =  alarms_level & 3;
   c9x.alarms[0].greater = alarms_greater & 1;
@@ -1225,6 +1227,7 @@ t_Open9xFrSkyChannelData_v208::t_Open9xFrSkyChannelData_v208(FrSkyChannelData &c
   memset(this, 0, sizeof(t_Open9xFrSkyChannelData_v208));
   ratio = c9x.ratio;
   type = c9x.type;
+  multiplier = c9x.multiplier;
   alarms_value[0] = c9x.alarms[0].value;
   alarms_value[1] = c9x.alarms[1].value;
   alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
@@ -1238,6 +1241,7 @@ t_Open9xFrSkyChannelData_v208::operator FrSkyChannelData ()
   FrSkyChannelData c9x;
   c9x.ratio = ratio;
   c9x.type = type;
+  c9x.multiplier = multiplier;
   c9x.alarms[0].value = alarms_value[0];
   c9x.alarms[0].level =  alarms_level & 3;
   c9x.alarms[0].greater = alarms_greater & 1;

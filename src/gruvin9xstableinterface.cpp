@@ -146,7 +146,9 @@ int Gruvin9xStableInterface::getCapability(const Capability capability)
     case HasExpoCurves:
       return true;
     case Telemetry:
-      return TM_HASTELEMETRY;      
+      return TM_HASTELEMETRY;
+    case TelemetryMaxMultiplier:
+      return 1;
     default:
       return false;
   }

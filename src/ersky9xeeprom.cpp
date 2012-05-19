@@ -451,7 +451,19 @@ t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData(FrSkyChannelData &c9x)
   alarms_value[1] = c9x.alarms[1].value;
   alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
   alarms_greater = (c9x.alarms[1].greater << 1) + c9x.alarms[0].greater;
-  type = c9x.type;
+  if (c9x.type==0) {
+    if (c9x.multiplier==0) {
+      type = 0;
+    } else if (c9x.multiplier==1) {
+      type = 2;
+    } else {
+      EEPROMWarnings += ::QObject::tr("er9x does not support this range for A1/A2") + "\n";
+    }      
+  } else if (c9x.type==1 || c9x.type==3) {
+    type=c9x.type;
+  } else {
+    EEPROMWarnings += ::QObject::tr("er9x does not support this telemetry units") + "\n";
+  }
 }
 
 t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
@@ -464,7 +476,12 @@ t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
   c9x.alarms[1].value = alarms_value[1];
   c9x.alarms[1].level =  (alarms_level >> 2) & 3;
   c9x.alarms[1].greater = (alarms_greater >> 1) & 1;
-  c9x.type = type;
+  if (type==2) {
+    c9x.type = 0;
+    c9x.multiplier=1;
+  } else {
+    c9x.type = type;
+  }
   return c9x;
 }
 
