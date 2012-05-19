@@ -276,7 +276,7 @@ private slots:
     void on_tabWidget_currentChanged(int index);
     void on_templateList_doubleClicked(QModelIndex index);
     void ControlCurveSignal(bool flag);
-    
+    void shrink();
 };
 
 #endif // MODELEDIT_H
