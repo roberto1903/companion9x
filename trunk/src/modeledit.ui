@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>636</height>
+    <height>682</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -265,42 +265,13 @@
         </widget>
        </item>
        <item row="7" column="0">
-        <widget class="QLabel" name="thrwarnLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Disable Throttle Warning</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1">
-        <widget class="QCheckBox" name="thrwarnChkB">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
         <widget class="QLabel" name="label_ttrace">
          <property name="text">
           <string>Throttle Trace</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
+       <item row="7" column="1">
         <widget class="QComboBox" name="ttraceCB">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -411,13 +382,264 @@
         </widget>
        </item>
        <item row="9" column="0">
+        <widget class="QLabel" name="thrwarnLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Disable Throttle Warning</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QCheckBox" name="thrwarnChkB">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="swwarn_label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Switch startup  Warning</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <layout class="QGridLayout" name="gridLayout_34">
+         <item row="0" column="9" rowspan="2">
+          <widget class="Line" name="swwarn_line4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="2">
+          <widget class="Line" name="swwarn_line0">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7" rowspan="2">
+          <widget class="Line" name="swwarn_line3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="12">
+          <widget class="QLabel" name="swwarn6_label">
+           <property name="text">
+            <string>GEA</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="swwarn1_label">
+           <property name="text">
+            <string>THR</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="10">
+          <widget class="QLabel" name="swwarn5_label">
+           <property name="text">
+            <string>AIL</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="8">
+          <widget class="QLabel" name="swwarn4_label">
+           <property name="text">
+            <string>3POS</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QLabel" name="swwarn3_label">
+           <property name="text">
+            <string>ELE</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="swwarn0_label">
+           <property name="text">
+            <string>State</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="swwarn2_label">
+           <property name="text">
+            <string>RUD</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2" alignment="Qt::AlignHCenter">
+          <widget class="QCheckBox" name="swwarn1_ChkB">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QComboBox" name="swwarn0_CB">
+           <item>
+            <property name="text">
+             <string>ON</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>OFF</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="4" alignment="Qt::AlignHCenter">
+          <widget class="QCheckBox" name="swwarn2_ChkB">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6" alignment="Qt::AlignHCenter">
+          <widget class="QCheckBox" name="swwarn3_ChkB">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="10" alignment="Qt::AlignHCenter">
+          <widget class="QCheckBox" name="swwarn5_ChkB">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="12" alignment="Qt::AlignHCenter">
+          <widget class="QCheckBox" name="swwarn6_ChkB">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="8">
+          <widget class="QComboBox" name="swwarn4_CB">
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <item>
+            <property name="text">
+             <string>ID0</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ID1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ID2</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="11" rowspan="2">
+          <widget class="Line" name="swwarn_line5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" rowspan="2">
+          <widget class="Line" name="swwarn_line1">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5" rowspan="2">
+          <widget class="Line" name="swwarn_line2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="15" column="1">
+        <widget class="Line" name="swwarn1_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="0">
         <widget class="QLabel" name="label_12">
          <property name="text">
           <string>Center beep</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="16" column="1">
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="7">
           <widget class="QCheckBox" name="bcREaChkB">
@@ -484,54 +706,14 @@
          </item>
         </layout>
        </item>
-       <item row="10" column="0">
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>Pulse Shift (polarity)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="1">
-        <widget class="QComboBox" name="pulsePolCB">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <item>
-          <property name="text">
-           <string>Positive</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Negative</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="11" column="1">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="0">
+       <item row="17" column="0">
         <widget class="QLabel" name="instantTrim_label">
          <property name="text">
           <string>Instant Trim</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
+       <item row="17" column="1">
         <widget class="QComboBox" name="instantTrim_CB">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -541,140 +723,43 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="18" column="0">
         <widget class="QLabel" name="label_55">
          <property name="text">
           <string>Extended Limits</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="1">
+       <item row="18" column="1">
         <widget class="QCheckBox" name="extendedLimitsChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="19" column="0">
         <widget class="QLabel" name="label_57">
          <property name="text">
           <string>Extended Trims</string>
          </property>
         </widget>
        </item>
-       <item row="14" column="1">
+       <item row="19" column="1">
         <widget class="QCheckBox" name="extendedTrimsChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="16" column="0">
+       <item row="21" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Protocol</string>
          </property>
         </widget>
        </item>
-       <item row="18" column="0">
-        <widget class="QLabel" name="label_DSM">
-         <property name="text">
-          <string>DSM Type</string>
-         </property>
-        </widget>
-       </item>
-       <item row="18" column="1">
-        <widget class="QComboBox" name="DSM_Type">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <item>
-          <property name="text">
-           <string>LP4/LP5</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DSM2only</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DSM2/DSMX</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="19" column="0">
-        <widget class="QLabel" name="label_PXX">
-         <property name="text">
-          <string>RX Number</string>
-         </property>
-        </widget>
-       </item>
-       <item row="19" column="1">
-        <widget class="QSpinBox" name="pxxRxNum">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="suffix">
-          <string/>
-         </property>
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>125</number>
-         </property>
-         <property name="singleStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item row="20" column="0">
-        <widget class="QLabel" name="label_Trainer">
-         <property name="text">
-          <string>Trainer</string>
-         </property>
-        </widget>
-       </item>
-       <item row="20" column="1">
-        <widget class="QCheckBox" name="TrainerChkB"/>
-       </item>
-       <item row="22" column="0">
-        <widget class="QLabel" name="T2ThrTrg">
-         <property name="text">
-          <string>Throttle2Trig</string>
-         </property>
-        </widget>
-       </item>
-       <item row="22" column="1">
-        <widget class="QCheckBox" name="T2ThrTrgChkB"/>
-       </item>
-       <item row="23" column="0">
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="16" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1,0,1,0,1,0">
+       <item row="21" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1,0,1,0,1,0,0">
          <item>
           <widget class="QComboBox" name="protocolCB">
            <item>
@@ -794,7 +879,154 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
+       </item>
+       <item row="22" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Pulse Shift (polarity)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="22" column="1">
+        <widget class="QComboBox" name="pulsePolCB">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>Positive</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Negative</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="23" column="0">
+        <widget class="QLabel" name="label_DSM">
+         <property name="text">
+          <string>DSM Type</string>
+         </property>
+        </widget>
+       </item>
+       <item row="23" column="1">
+        <widget class="QComboBox" name="DSM_Type">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>LP4/LP5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DSM2only</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DSM2/DSMX</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="24" column="0">
+        <widget class="QLabel" name="label_PXX">
+         <property name="text">
+          <string>RX Number</string>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="1">
+        <widget class="QSpinBox" name="pxxRxNum">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>125</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="0">
+        <widget class="QLabel" name="label_Trainer">
+         <property name="text">
+          <string>Trainer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="1">
+        <widget class="QCheckBox" name="TrainerChkB"/>
+       </item>
+       <item row="27" column="0">
+        <widget class="QLabel" name="T2ThrTrg">
+         <property name="text">
+          <string>Throttle2Trig</string>
+         </property>
+        </widget>
+       </item>
+       <item row="27" column="1">
+        <widget class="QCheckBox" name="T2ThrTrgChkB"/>
+       </item>
+       <item row="28" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="10" column="1">
+        <widget class="Line" name="swwarn0_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -4227,8 +4459,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
-            <height>556</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7392,8 +7624,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
-            <height>527</height>
+            <width>702</width>
+            <height>468</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13174,8 +13406,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
-            <height>556</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -15493,7 +15725,6 @@
   <tabstop>bcP1ChkB</tabstop>
   <tabstop>bcP2ChkB</tabstop>
   <tabstop>bcP3ChkB</tabstop>
-  <tabstop>pulsePolCB</tabstop>
   <tabstop>curveEdit_1</tabstop>
   <tabstop>curvePt1_1</tabstop>
   <tabstop>curvePt2_1</tabstop>

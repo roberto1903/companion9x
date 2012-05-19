@@ -66,6 +66,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->thrwarnChkB->hide();
       ui->thrwarnLabel->hide();
     }
+    if (GetEepromInterface()->getCapability(pmSwitchMask)) {
+      ui->swwarn_label->hide();
+      ui->swtchWarnCB->hide();
+      ui->swtchWarnChkB->hide();
+      layout()->removeItem(ui->swwarn_layout);
+    }
     
     if (!GetEepromInterface()->getCapability(TelemetryTimeshift)) {
       ui->label_timezone->hide();
@@ -182,6 +188,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swID1ChkB->hide();
       ui->swID2ChkB->hide();
       ui->swtchWarnChkB->hide();
+      this->layout()->removeItem(ui->switchMaskLayout);
     }
     else {
       ui->swtchWarnCB->setDisabled(true);

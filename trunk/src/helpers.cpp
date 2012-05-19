@@ -443,3 +443,11 @@ int findmult(float value, float base) {
   }
   return mult;
 }
+
+bool checkbit(int value, int bit) {
+  if ((value & (1<<bit))==(1<<bit)) {
+    return true;
+  } else {
+    return false;
+  }
+}

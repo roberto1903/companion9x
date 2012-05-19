@@ -672,7 +672,7 @@ class ModelData {
     int8_t   t2throttle;  // Start timer2 using throttle
     uint8_t   modelId;
     // int8_t tmrModeB;
-    
+    uint8_t switchWarningStates;
     /* FrSky */    
     FrSkyData frsky;
     int8_t servoCenter[NUM_CHNOUT];
@@ -727,6 +727,7 @@ enum Capability {
  PPMExtCtrl,
  MixFmTrim,
  gsSwitchMask,
+ pmSwitchMask,
  BLonStickMove,
  DSM2Indexes,
  Telemetry,

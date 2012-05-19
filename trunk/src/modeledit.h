@@ -204,6 +204,7 @@ private slots:
     void customSwitchesEdited();
     void safetySwitchesEdited();
     void functionSwitchesEdited();
+    void startupSwitchEdited();
     void exposEdited();
     void mixesEdited();
     void heliEdited();

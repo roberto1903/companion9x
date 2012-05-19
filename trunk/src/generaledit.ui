@@ -429,7 +429,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="28" column="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QHBoxLayout" name="swwarn_layout">
          <item>
           <widget class="QComboBox" name="swtchWarnCB">
            <property name="sizePolicy">
@@ -467,19 +467,6 @@ p, li { white-space: pre-wrap; }
             <string/>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </item>
@@ -1117,7 +1104,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="28" column="0">
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="swwarn_label">
          <property name="text">
           <string>Switch Startup Warning</string>
          </property>
