@@ -1373,7 +1373,7 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamT[i]->hide();
         fswtchEnable[i]->hide();
       } else  if (index>15) {
-        if (index==(NUM_SAFETY_CHNOUT+6)||index==(NUM_SAFETY_CHNOUT+7)||index==(NUM_SAFETY_CHNOUT+9)) {
+        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset) {
           fswtchParam[i]->hide();
           if (fswtchParamT[i]->currentIndex()>=0) {
             g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();

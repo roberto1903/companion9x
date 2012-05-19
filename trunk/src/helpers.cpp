@@ -58,13 +58,12 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
   QStringList qs;
   b->clear();
-  uint extfunc=function - NUM_SAFETY_CHNOUT;
-  if (extfunc==6) {
+  if (function==FuncPlaySound) {
     qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
-  } else if (extfunc==7) { 
+  } else if (function==FuncPlayHaptic) { 
     qs << "0" << "1" << "2" << "3";
-  } else if (extfunc==9) { 
+  } else if (function==FuncReset) { 
     qs.append( QObject::tr("Timer1"));
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
