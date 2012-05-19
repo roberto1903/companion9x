@@ -96,6 +96,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   ui->curvePreview->setMinimumHeight(260);
 
   resizeEvent(); // draws the curves and Expo
+  QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 ModelEdit::~ModelEdit()
@@ -3814,5 +3815,6 @@ void ModelEdit::ControlCurveSignal(bool flag)
   }
 }
 
-
-
+void ModelEdit::shrink() {
+    resize(0,0);
+}
