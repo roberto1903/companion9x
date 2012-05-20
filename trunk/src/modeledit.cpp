@@ -8,6 +8,7 @@
 #include "simulatordialog.h"
 #include <assert.h>
 #include <QtGui>
+#include <QApplication>
 
 #define BC_BIT_RUD (0x01)
 #define BC_BIT_ELE (0x02)
@@ -3892,5 +3893,11 @@ void ModelEdit::ControlCurveSignal(bool flag)
 }
 
 void ModelEdit::shrink() {
+  QApplication a(int argc, int argv);
+  const int height = QApplication::desktop()->height();
+  if (height < 625) {
     resize(0,0);
+  } else {
+    resize(0,625);
+  }
 }
