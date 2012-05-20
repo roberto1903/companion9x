@@ -1765,8 +1765,11 @@ void ModelEdit::tabTemplates() {
   ui->templateList->addItem("V-Tail");
   ui->templateList->addItem("Elevon\\Delta");
   ui->templateList->addItem("Heli Setup");
-  ui->templateList->addItem("Heli Gyro Setup");
-  ui->templateList->addItem("Futaba's style Heli Setup with gyro control");
+  ui->templateList->addItem("Heli Setup with gyro gain control");
+  ui->templateList->addItem("Gyro gain control");
+  ui->templateList->addItem("Heli Setup (Futaba's channel assignment style)");
+  ui->templateList->addItem("Heli Setup with gyro gain control (Futaba's channel assignment style)");
+  ui->templateList->addItem("Gyro gain control (Futaba's channel assignment style)");
   ui->templateList->addItem("Servo Test");
 }
 
@@ -3832,8 +3835,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(ICC(STK_AIL));  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100; md->swtch=RawSwitch();
   }
 
-
-  //Heli Setup
+  //Heli Setup  
   if(idx==j++)  {
     clearMixes();  //This time we want a clean slate
     clearCurves();
@@ -3854,7 +3856,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
 
     // gyro gain
-    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, DSW_GEA).toValue()); md->weight=30; md->swtch=RawSwitch();
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
 
     // collective
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(4); md->carryTrim=TRIM_OFF;
@@ -3878,12 +3881,119 @@ void ModelEdit::applyTemplate(uint8_t idx)
     resizeEvent();
   }
 
-  //Gyro Gain
-  if(idx==j++) {
+  //Heli Setup  gyro gain control
+  if(idx==j++)  {
+    clearMixes();  //This time we want a clean slate
+    clearCurves();
+
+    // Set up Mixes
+    // 3 cyclic channels
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
+
+    // rudder
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+
+    // throttle
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
+
+    // gyro gain
     md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
     md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;
+
+    // collective
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(4); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
+
+    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
+
+    // set up Curves
+    setCurve(CURVE5(1),heli_ar1);
+    setCurve(CURVE5(2),heli_ar2);
+    setCurve(CURVE5(3),heli_ar3);
+    setCurve(CURVE5(4),heli_ar4);
+    setCurve(CURVE5(5),heli_ar5);
+    setCurve(CURVE5(6),heli_ar5);
+
+    // make sure curves are redrawn
+    updateHeliTab();
+    updateCurvesTab();
+    resizeEvent();
   }
 
+  // gyro gain control 
+  if(idx==j++)  {
+    int res = QMessageBox::question(this,tr("Clear Mixes?"),tr("Really clear existing mixes on CH6?"),QMessageBox::Yes | QMessageBox::No);
+    if(res!=QMessageBox::Yes) return;
+    // first clear mix on ch6
+    bool found=true;
+    while (found) {
+      found=false;
+      for (int i=0; i< GetEepromInterface()->getCapability(Mixes); i++) {
+        if (g_model.mixData[i].destCh==6) {
+          gm_deleteMix(i);
+          found=true;
+          break;
+        }
+      }
+    }
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;    
+  }
+  
+  //Heli Setup  futaba style
+  if(idx==j++)  {
+    clearMixes();  //This time we want a clean slate
+    clearCurves();
+
+    // Set up Mixes
+    // 3 cyclic channels
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
+
+    // rudder
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+
+    // throttle
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
+
+    // gyro gain
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+    
+    // collective
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(4); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
+    md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
+
+    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
+
+    // set up Curves
+    setCurve(CURVE5(1),heli_ar1);
+    setCurve(CURVE5(2),heli_ar2);
+    setCurve(CURVE5(3),heli_ar3);
+    setCurve(CURVE5(4),heli_ar4);
+    setCurve(CURVE5(5),heli_ar5);
+    setCurve(CURVE5(6),heli_ar5);
+
+    // make sure curves are redrawn
+    updateHeliTab();
+    updateCurvesTab();
+    resizeEvent();
+  }
+
+  // Heli setup futaba style with gyro gain control
   if(idx==j++)  {
     clearMixes();  //This time we want a clean slate
     clearCurves();
@@ -3927,6 +4037,26 @@ void ModelEdit::applyTemplate(uint8_t idx)
     updateHeliTab();
     updateCurvesTab();
     resizeEvent();
+  }
+
+  // gyro gain control  futaba style
+  if(idx==j++)  {
+    int res = QMessageBox::question(this,tr("Clear Mixes?"),tr("Really clear existing mixes on CH5?"),QMessageBox::Yes | QMessageBox::No);
+    if(res!=QMessageBox::Yes) return;
+    // first clear mix on ch6
+    bool found=true;
+    while (found) {
+      found=false;
+      for (int i=0; i< GetEepromInterface()->getCapability(Mixes); i++) {
+        if (g_model.mixData[i].destCh==5) {
+          gm_deleteMix(i);
+          found=true;
+          break;
+        }
+      }
+    }
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
+    md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;    
   }
   
   //Servo Test
