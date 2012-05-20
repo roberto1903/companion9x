@@ -278,6 +278,7 @@ private slots:
     void on_templateList_doubleClicked(QModelIndex index);
     void ControlCurveSignal(bool flag);
     void shrink();
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // MODELEDIT_H
