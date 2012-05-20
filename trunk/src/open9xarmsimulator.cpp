@@ -18,8 +18,12 @@
 #include "open9xinterface.h"
 
 #define PCBARM
+#define REVB
+
 
 namespace Open9xARM {
+#include "../open9x/ersky9x/AT91SAM3S4.h"
+#include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
 uint8_t getStickMode();

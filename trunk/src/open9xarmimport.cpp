@@ -1,7 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBARM
-#define REVA
+#define REVB
 // #define NAVIGATION_RE1
 #define HELI
 #define TEMPLATES
@@ -71,22 +71,25 @@ uint8_t getStickMode()
 
 void setKeys(bool *keys)
 {
-  Open9xARM::Pioc.PIO_PDSR = 0xFDFFFFFF;
-  Open9xARM::Piob.PIO_PDSR = 0xFFFFFFFF;
-  Open9xARM::Pioa.PIO_PDSR = 0xFFFFFFFF;
+  Open9xARM::Piob.PIO_PDSR |= 0x20;
+  Open9xARM::Pioc.PIO_PDSR |= (0x01000000 | (0x04 >> 1) | (0x20 >> 1) | (0x40 >> 1) | (0x10 >> 1));
+
+  Open9xARM::Pioa.PIO_PDSR |= (0x00800000 | 0x01000000 | 0x00000002 | 0x00000001);
+  Open9xARM::Piob.PIO_PDSR |= (0x00000010);
+  Open9xARM::Pioc.PIO_PDSR |= (0x10000000 | 0x00000400 | 0x00000200);
 
   if (keys[0])
-    Open9xARM::Piob.PIO_PDSR &= ~0x40;
+    Open9xARM::Piob.PIO_PDSR &= ~0x20;
   if (keys[1])
-    Open9xARM::Pioa.PIO_PDSR &= ~0x80000000;
+    Open9xARM::Pioc.PIO_PDSR &= ~0x01000000;
   if (keys[2])
-    Open9xARM::Pioc.PIO_PDSR &= ~(0x08 >> 1);
+    Open9xARM::Pioc.PIO_PDSR &= ~(0x04 >> 1);
   if (keys[3])
     Open9xARM::Pioc.PIO_PDSR &= ~(0x20 >> 1);
   if (keys[4])
-    Open9xARM::Pioc.PIO_PDSR &= ~(0x10 >> 1);
-  if (keys[5])
     Open9xARM::Pioc.PIO_PDSR &= ~(0x40 >> 1);
+  if (keys[5])
+    Open9xARM::Pioc.PIO_PDSR &= ~(0x10 >> 1);
 }
 
 }
