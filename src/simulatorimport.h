@@ -48,8 +48,8 @@ extern uint8_t portb, portc;
 #define INP_P_KEY_UP  1
 #define INP_P_KEY_DWN 0
 
-#define INP_B_Trainer 5
 #define INP_B_KEY_LFT 6
+#define INP_B_Trainer 5
 #define INP_B_KEY_RGT 5
 #define INP_B_KEY_UP  4
 #define INP_B_KEY_DWN 3
@@ -106,15 +106,22 @@ pinj = 0;
 pinl = 0;
 #endif
 
+#if defined(PCBARM)
+if (inputs.sThr) PIOC->PIO_PDSR |= (1<<20); else PIOC->PIO_PDSR &= ~(1<<20);
+if (inputs.sRud) PIOA->PIO_PDSR |= (1<<15); else PIOA->PIO_PDSR &= ~(1<<15);
+if (inputs.sEle) PIOC->PIO_PDSR |= (1<<31); else PIOC->PIO_PDSR &= ~(1<<31);
+if (inputs.sAil) PIOA->PIO_PDSR |= (1<<2); else PIOA->PIO_PDSR &= ~(1<<2);
+if (inputs.sGea) PIOC->PIO_PDSR |= (1<<16); else PIOC->PIO_PDSR &= ~(1<<16);
+if (inputs.sTrn) PIOC->PIO_PDSR |= (1<<8); else PIOC->PIO_PDSR &= ~(1<<8);
+#elif defined(PCBV4)
 if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
-
-#ifdef PCBV4
 if (inputs.sEle) pinc &= ~(1<<INP_C_ElevDR); else pinc |= (1<<INP_C_ElevDR);
 if (inputs.sThr) ping &= ~(1<<INP_G_ThrCt); else ping |= (1<<INP_G_ThrCt);
 if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
 if (inputs.sGea) ping &= ~(1<<INP_G_Gear); else ping |= (1<<INP_G_Gear);
 if (inputs.sTrn) pinb &= ~(1<<INP_B_Trainer); else pinb |= (1<<INP_B_Trainer);
 #else
+if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
 if (inputs.sEle) pine &= ~(1<<INP_E_ElevDR); else pine |= (1<<INP_E_ElevDR);
 #if defined(JETI) || defined(FRSKY)
   if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
@@ -129,45 +136,56 @@ if (inputs.sTrn) pine &= ~(1<<INP_E_Trainer); else pine |= (1<<INP_E_Trainer);
 
 switch (inputs.sId0) {
   case 2:
+#if defined(PCBARM)
+    PIOC->PIO_PDSR &= ~0x00000800;
+    PIOC->PIO_PDSR |= 0x00004000;
+#elif defined(PCBV4)
     ping &= ~(1<<INP_G_ID1);
-#ifdef PCBV4
     pinb |= (1<<INP_B_ID2);
 #else
+    ping &= ~(1<<INP_G_ID1);
     pine |= (1<<INP_E_ID2);
 #endif
     break;
   case 1:
+#if defined(PCBARM)
+    PIOC->PIO_PDSR |= 0x00004800;
+#elif defined(PCBV4)
     ping &= ~(1<<INP_G_ID1);
-#ifdef PCBV4
     pinb &= ~(1<<INP_B_ID2);
 #else
+    ping &= ~(1<<INP_G_ID1);
     pine &= ~(1<<INP_E_ID2);
 #endif
     break;
   case 0:
+#if defined(PCBARM)
+    PIOC->PIO_PDSR &= ~0x00004000;
+    PIOC->PIO_PDSR |= 0x00000800;
+#elif defined(PCBV4)
     ping |=  (1<<INP_G_ID1);
-#ifdef PCBV4
-    ping |=  (1<<INP_G_ID1);
+    pinb &= ~(1<<INP_B_ID2);
 #else
+    ping |=  (1<<INP_G_ID1);
     pine &= ~(1<<INP_E_ID2);
 #endif
     break;
 }
 
 // keyboad
-pinb &= ~ 0x7e;
 #if defined(PCBARM)
 bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
 setKeys(keys);
 #elif defined(PCBV4)
-pinl &= ~ 0x3f; // for v4
-if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); pinl |= (1<<INP_P_KEY_MEN); }
-if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); pinl |= (1<<INP_P_KEY_EXT); }
-if (inputs.up) { pinb |= (1<<INP_B_KEY_UP); pinl |= (1<<INP_P_KEY_UP); }
-if (inputs.down) { pinb |= (1<<INP_B_KEY_DWN); pinl |= (1<<INP_P_KEY_DWN); }
-if (inputs.left) { pinb |= (1<<INP_B_KEY_LFT); pinl |= (1<<INP_P_KEY_LFT); }
-if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); pinl |= (1<<INP_P_KEY_RGT); }
+pinl &= ~ ((1<<INP_P_KEY_MEN) | (1<<INP_P_KEY_EXT) | (1<<INP_P_KEY_UP) | (1<<INP_P_KEY_DWN) | (1<<INP_P_KEY_LFT) | (1<<INP_P_KEY_RGT)); // for v4
+if (inputs.menu) { pinl |= (1<<INP_P_KEY_MEN);}
+if (inputs.exit) { pinl |= (1<<INP_P_KEY_EXT); }
+if (inputs.up) { pinl |= (1<<INP_P_KEY_UP); }
+if (inputs.down) { pinl |= (1<<INP_P_KEY_DWN); }
+if (inputs.left) { pinl |= (1<<INP_P_KEY_LFT); }
+if (inputs.right) { pinl |= (1<<INP_P_KEY_RGT); }
 #else
+pinb &= ~ 0x7e;
 if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); }
 if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); }
 if (inputs.up) { pinb |= (1<<INP_B_KEY_UP); }
