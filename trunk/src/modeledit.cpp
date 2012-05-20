@@ -1265,6 +1265,8 @@ void ModelEdit::tabFunctionSwitches()
 {
   switchEditLock = true;
   int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+  ui->fsw_en1->hide();
+  ui->fsw_en2->hide();
   for(int i=0; i<std::min(16,num_fsw); i++) {
     fswtchSwtch[i] = new QComboBox(this);
     connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
@@ -1307,6 +1309,11 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParam[i]->hide();
       }
       fswtchEnable[i]->hide();
+    } else {
+      ui->fsw_en1->show();
+      if (num_fsw>16) {
+        ui->fsw_en2->show();
+      }
     }
   }
   if (num_fsw>16) {
@@ -1440,6 +1447,8 @@ void ModelEdit::functionSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
+    ui->fsw_en1->hide();
+    ui->fsw_en2->hide();
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<num_fsw; i++) {
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
@@ -1472,6 +1481,10 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParam[i]->show();
         fswtchEnable[i]->show();
         fswtchParamT[i]->hide();
+        ui->fsw_en1->show();
+        if (num_fsw>16) {
+          ui->fsw_en2->show();
+        }
       }
     }
 
@@ -3893,11 +3906,26 @@ void ModelEdit::ControlCurveSignal(bool flag)
 }
 
 void ModelEdit::shrink() {
-  QApplication a(int argc, int argv);
   const int height = QApplication::desktop()->height();
-  if (height < 625) {
-    resize(0,0);
+  QSettings settings("companion9x", "companion9x");
+  QPoint pos = settings.value("mepos", QPoint(200, 200)).toPoint();
+  QSize size = settings.value("mesize", QSize(800, 625)).toSize();
+  if (size.height() < height) {
+      move(pos);
+      resize(size);    
   } else {
-    resize(0,625);
+    if (height < 625) {
+      resize(0,0);
+    } else {
+      resize(0,625);
+    }
   }
+}
+
+void ModelEdit::closeEvent(QCloseEvent *event)
+{
+    QSettings settings("companion9x", "companion9x");
+    settings.setValue("mepos", pos());
+    settings.setValue("mesize", size());
+    event->accept();
 }

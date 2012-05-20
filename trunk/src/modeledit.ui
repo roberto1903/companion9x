@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>682</height>
+    <height>647</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -407,6 +407,13 @@
         <widget class="QCheckBox" name="thrwarnChkB">
          <property name="text">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="Line" name="swwarn0_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -1009,24 +1016,17 @@
         <widget class="QCheckBox" name="T2ThrTrgChkB"/>
        </item>
        <item row="28" column="0">
-        <spacer name="verticalSpacer_4">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>5</height>
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="10" column="1">
-        <widget class="Line" name="swwarn0_line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -4460,7 +4460,7 @@
             <x>0</x>
             <y>0</y>
             <width>823</width>
-            <height>602</height>
+            <height>567</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7625,7 +7625,7 @@
             <x>0</x>
             <y>0</y>
             <width>823</width>
-            <height>573</height>
+            <height>538</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -7634,7 +7634,7 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0">
+          <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0,0">
            <item row="4" column="5">
             <widget class="QSpinBox" name="curvePt4_5">
              <property name="alignment">
@@ -8530,38 +8530,6 @@
              </property>
             </widget>
            </item>
-           <item row="10" column="8">
-            <widget class="QSpinBox" name="curvePt7_11">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="6">
-            <widget class="QSpinBox" name="curvePt5_11">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
            <item row="10" column="9">
             <widget class="QSpinBox" name="curvePt8_11">
              <property name="alignment">
@@ -8578,8 +8546,40 @@
              </property>
             </widget>
            </item>
+           <item row="10" column="8">
+            <widget class="QSpinBox" name="curvePt7_11">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
            <item row="10" column="7">
             <widget class="QSpinBox" name="curvePt6_11">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="6">
+            <widget class="QSpinBox" name="curvePt5_11">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -8626,13 +8626,6 @@
              </property>
             </widget>
            </item>
-           <item row="11" column="0">
-            <widget class="QPushButton" name="curveEdit_12">
-             <property name="text">
-              <string>Curve 12</string>
-             </property>
-            </widget>
-           </item>
            <item row="11" column="4">
             <widget class="QSpinBox" name="curvePt3_12">
              <property name="alignment">
@@ -8649,19 +8642,10 @@
              </property>
             </widget>
            </item>
-           <item row="11" column="5">
-            <widget class="QSpinBox" name="curvePt4_12">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
+           <item row="11" column="0">
+            <widget class="QPushButton" name="curveEdit_12">
+             <property name="text">
+              <string>Curve 12</string>
              </property>
             </widget>
            </item>
@@ -8683,6 +8667,22 @@
            </item>
            <item row="11" column="6">
             <widget class="QSpinBox" name="curvePt5_12">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="5">
+            <widget class="QSpinBox" name="curvePt4_12">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -8761,13 +8761,6 @@
              </property>
             </widget>
            </item>
-           <item row="12" column="0">
-            <widget class="QPushButton" name="curveEdit_13">
-             <property name="text">
-              <string>Curve 13</string>
-             </property>
-            </widget>
-           </item>
            <item row="12" column="4">
             <widget class="QSpinBox" name="curvePt3_13">
              <property name="alignment">
@@ -8784,19 +8777,10 @@
              </property>
             </widget>
            </item>
-           <item row="12" column="2">
-            <widget class="QSpinBox" name="curvePt1_13">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
+           <item row="12" column="0">
+            <widget class="QPushButton" name="curveEdit_13">
+             <property name="text">
+              <string>Curve 13</string>
              </property>
             </widget>
            </item>
@@ -8818,6 +8802,22 @@
            </item>
            <item row="12" column="3">
             <widget class="QSpinBox" name="curvePt2_13">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="2">
+            <widget class="QSpinBox" name="curvePt1_13">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -8928,13 +8928,6 @@
              </property>
             </widget>
            </item>
-           <item row="13" column="0">
-            <widget class="QPushButton" name="curveEdit_14">
-             <property name="text">
-              <string>Curve 14</string>
-             </property>
-            </widget>
-           </item>
            <item row="13" column="4">
             <widget class="QSpinBox" name="curvePt3_14">
              <property name="alignment">
@@ -8951,19 +8944,10 @@
              </property>
             </widget>
            </item>
-           <item row="13" column="5">
-            <widget class="QSpinBox" name="curvePt4_14">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
+           <item row="13" column="0">
+            <widget class="QPushButton" name="curveEdit_14">
+             <property name="text">
+              <string>Curve 14</string>
              </property>
             </widget>
            </item>
@@ -8985,6 +8969,22 @@
            </item>
            <item row="13" column="6">
             <widget class="QSpinBox" name="curvePt5_14">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="5">
+            <widget class="QSpinBox" name="curvePt4_14">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -9079,13 +9079,6 @@
              </property>
             </widget>
            </item>
-           <item row="14" column="0">
-            <widget class="QPushButton" name="curveEdit_15">
-             <property name="text">
-              <string>Curve 15</string>
-             </property>
-            </widget>
-           </item>
            <item row="14" column="5">
             <widget class="QSpinBox" name="curvePt4_15">
              <property name="alignment">
@@ -9102,19 +9095,10 @@
              </property>
             </widget>
            </item>
-           <item row="14" column="3">
-            <widget class="QSpinBox" name="curvePt2_15">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
+           <item row="14" column="0">
+            <widget class="QPushButton" name="curveEdit_15">
+             <property name="text">
+              <string>Curve 15</string>
              </property>
             </widget>
            </item>
@@ -9136,6 +9120,22 @@
            </item>
            <item row="14" column="4">
             <widget class="QSpinBox" name="curvePt3_15">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="3">
+            <widget class="QSpinBox" name="curvePt2_15">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -9198,6 +9198,22 @@
              </property>
             </widget>
            </item>
+           <item row="15" column="2">
+            <widget class="QSpinBox" name="curvePt1_16">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
            <item row="14" column="10">
             <widget class="QSpinBox" name="curvePt9_15">
              <property name="alignment">
@@ -9214,8 +9230,8 @@
              </property>
             </widget>
            </item>
-           <item row="15" column="2">
-            <widget class="QSpinBox" name="curvePt1_16">
+           <item row="15" column="4">
+            <widget class="QSpinBox" name="curvePt3_16">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -9237,38 +9253,6 @@
              </property>
             </widget>
            </item>
-           <item row="15" column="4">
-            <widget class="QSpinBox" name="curvePt3_16">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
-           <item row="15" column="5">
-            <widget class="QSpinBox" name="curvePt4_16">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="accelerated">
-              <bool>true</bool>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
            <item row="15" column="3">
             <widget class="QSpinBox" name="curvePt2_16">
              <property name="alignment">
@@ -9287,6 +9271,22 @@
            </item>
            <item row="15" column="6">
             <widget class="QSpinBox" name="curvePt5_16">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="accelerated">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="5">
+            <widget class="QSpinBox" name="curvePt4_16">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -9501,23 +9501,6 @@
              </property>
             </widget>
            </item>
-           <item row="12" column="11">
-            <widget class="QPushButton" name="resetCurve_13">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="companion9x.qrc">
-               <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
-             </property>
-            </widget>
-           </item>
            <item row="11" column="11">
             <widget class="QPushButton" name="resetCurve_12">
              <property name="minimumSize">
@@ -9535,8 +9518,8 @@
              </property>
             </widget>
            </item>
-           <item row="14" column="11">
-            <widget class="QPushButton" name="resetCurve_15">
+           <item row="12" column="11">
+            <widget class="QPushButton" name="resetCurve_13">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -9554,6 +9537,23 @@
            </item>
            <item row="13" column="11">
             <widget class="QPushButton" name="resetCurve_14">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="companion9x.qrc">
+               <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="11">
+            <widget class="QPushButton" name="resetCurve_15">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -9633,9 +9633,6 @@
               <number>100</number>
              </property>
             </widget>
-           </item>
-           <item row="0" column="7" rowspan="8" colspan="4">
-            <widget class="QGraphicsView" name="curvePreview"/>
            </item>
            <item row="1" column="3">
             <widget class="QSpinBox" name="curvePt2_2">
@@ -12261,6 +12258,9 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="7" rowspan="8" colspan="4">
+            <widget class="QGraphicsView" name="curvePreview"/>
+           </item>
           </layout>
          </widget>
         </widget>
@@ -13407,7 +13407,7 @@
             <x>0</x>
             <y>0</y>
             <width>823</width>
-            <height>602</height>
+            <height>567</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -13613,7 +13613,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_24">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1">
+           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -13873,6 +13873,19 @@
               </property>
              </widget>
             </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="fsw_en1">
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="text">
+               <string>Enable</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item row="1" column="0">
@@ -13904,7 +13917,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_23">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1">
+           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -14161,6 +14174,19 @@
               </property>
               <property name="text">
                <string>FSwitch32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="fsw_en2">
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="text">
+               <string>Enable</string>
               </property>
              </widget>
             </item>
@@ -15506,7 +15532,7 @@
               <item row="1" column="1">
                <widget class="QComboBox" name="telemetryCSF2_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15516,7 +15542,7 @@
               <item row="2" column="0">
                <widget class="QComboBox" name="telemetryCSF3_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15526,7 +15552,7 @@
               <item row="2" column="1">
                <widget class="QComboBox" name="telemetryCSF4_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15536,7 +15562,7 @@
               <item row="3" column="0">
                <widget class="QComboBox" name="telemetryCSF5_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15546,7 +15572,7 @@
               <item row="3" column="1">
                <widget class="QComboBox" name="telemetryCSF6_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15556,7 +15582,7 @@
               <item row="4" column="1">
                <widget class="QComboBox" name="telemetryCSF8_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15566,7 +15592,7 @@
               <item row="4" column="0">
                <widget class="QComboBox" name="telemetryCSF7_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15576,7 +15602,7 @@
               <item row="1" column="0">
                <widget class="QComboBox" name="telemetryCSF1_CB">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -15698,7 +15724,6 @@
   <tabstop>curvePt7_16</tabstop>
   <tabstop>curvePt8_16</tabstop>
   <tabstop>curvePt9_16</tabstop>
-  <tabstop>curvePreview</tabstop>
   <tabstop>curvePt1_9</tabstop>
   <tabstop>curvePt2_9</tabstop>
   <tabstop>curvePt3_9</tabstop>
@@ -15887,7 +15912,6 @@
   <tabstop>phase4Trim4Use</tabstop>
   <tabstop>phase4Trim4Value</tabstop>
   <tabstop>scrollArea</tabstop>
-  <tabstop>scrollArea_2</tabstop>
   <tabstop>plotCB_1</tabstop>
   <tabstop>plotCB_2</tabstop>
   <tabstop>plotCB_3</tabstop>
