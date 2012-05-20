@@ -2530,6 +2530,11 @@ p, li { white-space: pre-wrap; }
         <translation>CH16</translation>
     </message>
     <message>
+        <location filename="modeledit.ui" line="502"/>
+        <source>Check</source>
+        <translation>Controllo</translation>
+    </message>
+    <message>
         <location filename="modeledit.ui" line="1158"/>
         <source>Flight Phase 0 (Default)</source>
         <translation>Fase di volo 0 (Predefinita)</translation>
@@ -2957,15 +2962,14 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="502"/>
         <source>State</source>
-        <translation>Stato
+        <translation type="obsolete">Stato
 </translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="533"/>
-        <location filename="modeledit.cpp" line="1272"/>
-        <location filename="modeledit.cpp" line="1317"/>
+        <location filename="modeledit.cpp" line="1287"/>
+        <location filename="modeledit.cpp" line="1332"/>
         <source>ON</source>
         <translation>Acceso</translation>
     </message>
@@ -3601,16 +3605,16 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.cpp" line="216"/>
         <location filename="modeledit.cpp" line="249"/>
-        <location filename="modeledit.cpp" line="3384"/>
-        <location filename="modeledit.cpp" line="3408"/>
+        <location filename="modeledit.cpp" line="3399"/>
+        <location filename="modeledit.cpp" line="3423"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Up</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="219"/>
         <location filename="modeledit.cpp" line="252"/>
-        <location filename="modeledit.cpp" line="3385"/>
-        <location filename="modeledit.cpp" line="3409"/>
+        <location filename="modeledit.cpp" line="3400"/>
+        <location filename="modeledit.cpp" line="3424"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Down</translation>
     </message>
@@ -3690,143 +3694,143 @@ p, li { white-space: pre-wrap; }
         <translation> Avviso(%1)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1535"/>
+        <location filename="modeledit.cpp" line="1550"/>
         <source>Winged Shadow How High</source>
         <translation>Winged Shadow How High</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1538"/>
+        <location filename="modeledit.cpp" line="1553"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (non supportato)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1584"/>
-        <location filename="modeledit.cpp" line="1585"/>
+        <location filename="modeledit.cpp" line="1599"/>
+        <location filename="modeledit.cpp" line="1600"/>
         <source>Range</source>
         <translation>Intervallo</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2871"/>
+        <location filename="modeledit.cpp" line="2886"/>
         <source>Editing curve %1</source>
         <translation>Modifica curva %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2926"/>
+        <location filename="modeledit.cpp" line="2941"/>
         <source>Not enough available mixers!</source>
         <translation>Non ci sono più miscelazioni disponibili!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2974"/>
+        <location filename="modeledit.cpp" line="2989"/>
         <source>Not enough available expos!</source>
         <translation>Non ci sono più esponenziali disponibili!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3111"/>
+        <location filename="modeledit.cpp" line="3126"/>
         <source>Delete Selected Mixes?</source>
         <translation>Cancellare le miscelazioni selezionate ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3150"/>
+        <location filename="modeledit.cpp" line="3165"/>
         <source>Delete Selected Expos?</source>
         <translation>Cancellare le impostazioni dell&apos;esponenziale selezionate ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3375"/>
-        <location filename="modeledit.cpp" line="3399"/>
+        <location filename="modeledit.cpp" line="3390"/>
+        <location filename="modeledit.cpp" line="3414"/>
         <source>&amp;Add</source>
         <translation>&amp;Aggiungi</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3375"/>
-        <location filename="modeledit.cpp" line="3399"/>
+        <location filename="modeledit.cpp" line="3390"/>
+        <location filename="modeledit.cpp" line="3414"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3376"/>
-        <location filename="modeledit.cpp" line="3400"/>
+        <location filename="modeledit.cpp" line="3391"/>
+        <location filename="modeledit.cpp" line="3415"/>
         <source>&amp;Edit</source>
         <translation>&amp;Modifica</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3376"/>
-        <location filename="modeledit.cpp" line="3400"/>
+        <location filename="modeledit.cpp" line="3391"/>
+        <location filename="modeledit.cpp" line="3415"/>
         <source>Enter</source>
         <translation>Invio</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3378"/>
-        <location filename="modeledit.cpp" line="3402"/>
+        <location filename="modeledit.cpp" line="3393"/>
+        <location filename="modeledit.cpp" line="3417"/>
         <source>&amp;Delete</source>
         <translation>&amp;Elimina</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3378"/>
-        <location filename="modeledit.cpp" line="3402"/>
+        <location filename="modeledit.cpp" line="3393"/>
+        <location filename="modeledit.cpp" line="3417"/>
         <source>Delete</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3379"/>
-        <location filename="modeledit.cpp" line="3403"/>
+        <location filename="modeledit.cpp" line="3394"/>
+        <location filename="modeledit.cpp" line="3418"/>
         <source>&amp;Copy</source>
         <translation>Co&amp;pia</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3379"/>
-        <location filename="modeledit.cpp" line="3403"/>
+        <location filename="modeledit.cpp" line="3394"/>
+        <location filename="modeledit.cpp" line="3418"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3380"/>
-        <location filename="modeledit.cpp" line="3404"/>
+        <location filename="modeledit.cpp" line="3395"/>
+        <location filename="modeledit.cpp" line="3419"/>
         <source>&amp;Cut</source>
         <translation>&amp;Taglia</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3380"/>
-        <location filename="modeledit.cpp" line="3404"/>
+        <location filename="modeledit.cpp" line="3395"/>
+        <location filename="modeledit.cpp" line="3419"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3381"/>
-        <location filename="modeledit.cpp" line="3405"/>
+        <location filename="modeledit.cpp" line="3396"/>
+        <location filename="modeledit.cpp" line="3420"/>
         <source>&amp;Paste</source>
         <translation>&amp;Incolla</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3381"/>
-        <location filename="modeledit.cpp" line="3405"/>
+        <location filename="modeledit.cpp" line="3396"/>
+        <location filename="modeledit.cpp" line="3420"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3382"/>
-        <location filename="modeledit.cpp" line="3406"/>
+        <location filename="modeledit.cpp" line="3397"/>
+        <location filename="modeledit.cpp" line="3421"/>
         <source>Du&amp;plicate</source>
         <translation>Dup&amp;lica</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3382"/>
-        <location filename="modeledit.cpp" line="3406"/>
+        <location filename="modeledit.cpp" line="3397"/>
+        <location filename="modeledit.cpp" line="3421"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="214"/>
         <location filename="modeledit.cpp" line="247"/>
-        <location filename="modeledit.cpp" line="3384"/>
-        <location filename="modeledit.cpp" line="3408"/>
+        <location filename="modeledit.cpp" line="3399"/>
+        <location filename="modeledit.cpp" line="3423"/>
         <source>Move Up</source>
         <translation>Muovi in Su</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="217"/>
         <location filename="modeledit.cpp" line="250"/>
-        <location filename="modeledit.cpp" line="3385"/>
-        <location filename="modeledit.cpp" line="3409"/>
+        <location filename="modeledit.cpp" line="3400"/>
+        <location filename="modeledit.cpp" line="3424"/>
         <source>Move Down</source>
         <translation>Muovi in Giù</translation>
     </message>
@@ -3862,42 +3866,42 @@ p, li { white-space: pre-wrap; }
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3663"/>
+        <location filename="modeledit.cpp" line="3678"/>
         <source>Apply Template?</source>
         <translation>Applicare il modelo ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3663"/>
+        <location filename="modeledit.cpp" line="3678"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Applicare il modello &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3689"/>
+        <location filename="modeledit.cpp" line="3704"/>
         <source>Clear Expos?</source>
         <translation>Cancellare gli esponenziali ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3689"/>
+        <location filename="modeledit.cpp" line="3704"/>
         <source>Really clear all the expos?</source>
         <translation>Sicuri di voler cancellare gli esponenziali ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3700"/>
+        <location filename="modeledit.cpp" line="3715"/>
         <source>Clear Mixes?</source>
         <translation>Cancellare le miscelazioni ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3700"/>
+        <location filename="modeledit.cpp" line="3715"/>
         <source>Really clear all the mixes?</source>
         <translation>Sicuri di voler cancellare le miscelazioni ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3711"/>
+        <location filename="modeledit.cpp" line="3726"/>
         <source>Clear Curves?</source>
         <translation>Cancellare le curve ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3711"/>
+        <location filename="modeledit.cpp" line="3726"/>
         <source>Really clear all the curves?</source>
         <translation>Sicuri di voler cancellare le curve ?</translation>
     </message>
@@ -4296,22 +4300,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="67"/>
         <source>Timer1</source>
-        <translation type="unfinished">Tempo1</translation>
+        <translation>Tempo1</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="68"/>
         <source>Timer2</source>
-        <translation type="unfinished">Tempo2</translation>
+        <translation>Tempo2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="252"/>
         <source>A1</source>
-        <translation type="unfinished">A1</translation>
+        <translation>A1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="252"/>
         <source>A2</source>
-        <translation type="unfinished">A2</translation>
+        <translation>A2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="252"/>
@@ -4349,17 +4353,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="gruvin9xeeprom.cpp" line="322"/>
         <source>gruvin9x doesn&apos;t have trims as source</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruvin9x non accetta i trim come sorgenti</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="333"/>
         <source>gruvin9x doesn&apos;t have swappable trims</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruvin9x non accetta l&apos;incroco dei trim</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="400"/>
         <source>gruvin9x on this board doesn&apos;t have Rotary Encoders</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruvin9x su questa piastra non ha gli Encoder Rotativi</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="992"/>
@@ -4385,16 +4389,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="open9xarmeeprom.cpp" line="792"/>
-        <location filename="open9xarmeeprom.cpp" line="984"/>
+        <location filename="open9xarmeeprom.cpp" line="985"/>
         <location filename="open9xeeprom.cpp" line="1550"/>
         <location filename="open9xeeprom.cpp" line="1692"/>
         <location filename="open9xeeprom.cpp" line="1846"/>
         <location filename="open9xeeprom.cpp" line="2017"/>
         <location filename="open9xeeprom.cpp" line="2206"/>
-        <location filename="open9xeeprom.cpp" line="2404"/>
+        <location filename="open9xeeprom.cpp" line="2405"/>
         <location filename="open9xv4eeprom.cpp" line="688"/>
         <location filename="open9xv4eeprom.cpp" line="876"/>
-        <location filename="open9xv4eeprom.cpp" line="1069"/>
+        <location filename="open9xv4eeprom.cpp" line="1070"/>
         <source>Open9x doesn&apos;t accept this protocol</source>
         <translation>Open9x non accetta questo protocollo</translation>
     </message>
@@ -4402,7 +4406,7 @@ p, li { white-space: pre-wrap; }
         <location filename="open9xeeprom.cpp" line="300"/>
         <location filename="open9xeeprom.cpp" line="399"/>
         <source>open9x on this board doesn&apos;t have Rotary Encoders</source>
-        <translation type="unfinished"></translation>
+        <translation>Open9x su questa piastra non ha gli Encoder Rotativi</translation>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="1572"/>
@@ -4410,10 +4414,10 @@ p, li { white-space: pre-wrap; }
         <location filename="open9xeeprom.cpp" line="1868"/>
         <location filename="open9xeeprom.cpp" line="2038"/>
         <location filename="open9xeeprom.cpp" line="2227"/>
-        <location filename="open9xeeprom.cpp" line="2425"/>
+        <location filename="open9xeeprom.cpp" line="2426"/>
         <location filename="open9xv4eeprom.cpp" line="709"/>
         <location filename="open9xv4eeprom.cpp" line="897"/>
-        <location filename="open9xv4eeprom.cpp" line="1090"/>
+        <location filename="open9xv4eeprom.cpp" line="1091"/>
         <source>open9x only accepts %1 expos</source>
         <oldsource>Gruvin9x firmware only accepts %1 expos</oldsource>
         <translation>open9x accetta solamente %1 esponenziali</translation>
@@ -4556,36 +4560,36 @@ p, li { white-space: pre-wrap; }
         <location filename="er9xeeprom.cpp" line="238"/>
         <source>er9x doesn&apos;t have Rotary Encoders</source>
         <oldsource>Er9x doesn&apos;t have Rotary Encoders</oldsource>
-        <translation type="unfinished">er9x non ha gli Encoder Rotativi</translation>
+        <translation>er9x non ha gli Encoder Rotativi</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="258"/>
         <source>er9x doesn&apos;t have trims as source</source>
-        <translation type="unfinished"></translation>
+        <translation>er9x non accetta i trim come sorgenti</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="269"/>
         <location filename="ersky9xeeprom.cpp" line="258"/>
         <source>er9x doesn&apos;t have swappable trims</source>
-        <translation type="unfinished"></translation>
+        <translation>er9x non accetta l&apos;incroco dei trim</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="339"/>
         <location filename="ersky9xeeprom.cpp" line="325"/>
         <source>er9x on this board doesn&apos;t have Rotary Encoders</source>
-        <translation type="unfinished"></translation>
+        <translation>er9x su questa piastra non ha gli Encoder Rotativi</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="475"/>
         <location filename="ersky9xeeprom.cpp" line="460"/>
         <source>er9x does not support this range for A1/A2</source>
-        <translation type="unfinished"></translation>
+        <translation>er9x non accetta il voltaggio di fondo scala settato per A1/A2</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="480"/>
         <location filename="ersky9xeeprom.cpp" line="465"/>
         <source>er9x does not support this telemetry units</source>
-        <translation type="unfinished"></translation>
+        <translation>er9x non supporta l&apos;unità di telemetria scelta per A1/A2</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="556"/>
@@ -4596,7 +4600,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="ersky9xinterface.cpp" line="192"/>
         <location filename="mdichild.cpp" line="131"/>
-        <location filename="modeledit.cpp" line="3555"/>
+        <location filename="modeledit.cpp" line="3570"/>
         <location filename="open9xinterface.cpp" line="340"/>
         <source>Warning</source>
         <translation>Avviso</translation>
@@ -4611,12 +4615,12 @@ p, li { white-space: pre-wrap; }
         <location filename="ersky9xeeprom.cpp" line="227"/>
         <source>ersky9x doesn&apos;t have Rotary Encoders</source>
         <oldsource>Ersky9x doesn&apos;t have Rotary Encoders</oldsource>
-        <translation type="unfinished">ersky9x non ha gli Encoder Rotativi</translation>
+        <translation>ersky9x non ha gli Encoder Rotativi</translation>
     </message>
     <message>
         <location filename="ersky9xeeprom.cpp" line="247"/>
         <source>ersky9x doesn&apos;t have trims as source</source>
-        <translation type="unfinished"></translation>
+        <translation>ersky9x non accetta i trim come sorgenti</translation>
     </message>
     <message>
         <location filename="ersky9xeeprom.cpp" line="550"/>
@@ -4625,14 +4629,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mdichild.cpp" line="132"/>
-        <location filename="modeledit.cpp" line="3556"/>
+        <location filename="modeledit.cpp" line="3571"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation>Il simulatore per questo firmware non è ancora disponibile</translation>
     </message>
     <message>
         <location filename="th9xeeprom.cpp" line="321"/>
         <source>th9x on this board doesn&apos;t have Rotary Encoders</source>
-        <translation type="unfinished"></translation>
+        <translation>th9x non ha gli Encoder Rotativi</translation>
     </message>
 </context>
 <context>
