@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
+    <width>841</width>
     <height>647</height>
    </rect>
   </property>
@@ -4459,8 +4459,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
-            <height>567</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7624,7 +7624,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
+            <width>811</width>
             <height>538</height>
            </rect>
           </property>
@@ -7634,7 +7634,7 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0,0">
+          <layout class="QGridLayout" name="gridLayout_7" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0">
            <item row="4" column="5">
             <widget class="QSpinBox" name="curvePt4_5">
              <property name="alignment">
@@ -13406,8 +13406,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>823</width>
-            <height>567</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14490,55 +14490,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QComboBox" name="a1UnitCB">
-                  <item>
-                   <property name="text">
-                    <string>Volts (V)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Amps (A)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Speed (m/s or ft/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Raw (-)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Speed (km/h or miles/h)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Meters (m or ft)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Temp (°)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Fuel (%)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>mAmps (mA)</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_A1Max">
                   <property name="sizePolicy">
@@ -14750,6 +14701,55 @@
                   <property name="maximum">
                    <double>255.000000000000000</double>
                   </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" colspan="2">
+                 <widget class="QComboBox" name="a1UnitCB">
+                  <item>
+                   <property name="text">
+                    <string>Volts (V)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Amps (A)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Speed (m/s or ft/s)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Raw (-)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Speed (km/h or miles/h)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Meters (m or ft)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Temp (°)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Fuel (%)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>mAmps (mA)</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                </layout>
@@ -14991,7 +14991,7 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
+                <item row="0" column="1" colspan="2">
                  <widget class="QComboBox" name="a2UnitCB">
                   <item>
                    <property name="text">
