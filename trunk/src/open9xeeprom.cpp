@@ -2373,7 +2373,7 @@ t_Open9xModelData_v209::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_209 758
+#define MODEL_DATA_SIZE_209 759
 t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_209) {
