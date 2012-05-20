@@ -337,12 +337,12 @@ void ModelEdit::tabModelEditSetup()
     ui->swwarn_line5->hide();
   } else {
     ui->swwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
-    ui->swwarn1_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 1));
-    ui->swwarn2_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 2));
-    ui->swwarn3_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 3));
+    ui->swwarn1_ChkB->setChecked(checkbit(g_model.switchWarningStates, 1));
+    ui->swwarn2_ChkB->setChecked(checkbit(g_model.switchWarningStates, 2));
+    ui->swwarn3_ChkB->setChecked(checkbit(g_model.switchWarningStates, 3));
     ui->swwarn4_CB->setCurrentIndex((g_model.switchWarningStates & 0x30)>>4);
-    ui->swwarn5_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 6));
-    ui->swwarn6_ChkB->setChecked(!checkbit(g_model.switchWarningStates, 7));
+    ui->swwarn5_ChkB->setChecked(checkbit(g_model.switchWarningStates, 6));
+    ui->swwarn6_ChkB->setChecked(checkbit(g_model.switchWarningStates, 7));
     for (int i=0; pmchkb[i]; i++) {
       connect(pmchkb[i], SIGNAL(stateChanged(int)),this,SLOT(startupSwitchEdited()));
     }
@@ -1056,12 +1056,12 @@ void ModelEdit::startupSwitchEdited()
 {
   uint8_t i= 0;
   i|=(uint8_t)ui->swwarn0_CB->currentIndex();
-  i|=(ui->swwarn1_ChkB->isChecked() ? 0 : 1)<<1;
-  i|=(ui->swwarn2_ChkB->isChecked() ? 0 : 1)<<2;
-  i|=(ui->swwarn3_ChkB->isChecked() ? 0 : 1)<<3;
-  i|=((uint8_t)ui->swwarn4_CB->currentIndex() &0x03)<<4;
-  i|=(ui->swwarn5_ChkB->isChecked() ? 0 : 1)<<6;
-  i|=(ui->swwarn6_ChkB->isChecked() ? 0 : 1)<<7;
+  i|=(ui->swwarn1_ChkB->isChecked() ? 1 : 0)<<1;
+  i|=(ui->swwarn2_ChkB->isChecked() ? 1 : 0)<<2;
+  i|=(ui->swwarn3_ChkB->isChecked() ? 1 : 0)<<3;
+  i|=((uint8_t)ui->swwarn4_CB->currentIndex() & 0x03)<<4;
+  i|=(ui->swwarn5_ChkB->isChecked() ? 1 : 0)<<6;
+  i|=(ui->swwarn6_ChkB->isChecked() ? 1 : 0)<<7;
   g_model.switchWarningStates=i;
   updateSettings();
 }
