@@ -1056,12 +1056,27 @@ void ModelEdit::startupSwitchEdited()
 {
   uint8_t i= 0;
   i|=(uint8_t)ui->swwarn0_CB->currentIndex();
-  i|=(ui->swwarn1_ChkB->isChecked() ? 1 : 0)<<1;
-  i|=(ui->swwarn2_ChkB->isChecked() ? 1 : 0)<<2;
-  i|=(ui->swwarn3_ChkB->isChecked() ? 1 : 0)<<3;
-  i|=((uint8_t)ui->swwarn4_CB->currentIndex() & 0x03)<<4;
-  i|=(ui->swwarn5_ChkB->isChecked() ? 1 : 0)<<6;
-  i|=(ui->swwarn6_ChkB->isChecked() ? 1 : 0)<<7;
+  if (i==1) {
+    ui->swwarn1_ChkB->setDisabled(true) ;
+    ui->swwarn2_ChkB->setDisabled(true) ;
+    ui->swwarn3_ChkB->setDisabled(true) ;
+    ui->swwarn4_CB->setDisabled(true) ;
+    ui->swwarn5_ChkB->setDisabled(true) ;
+    ui->swwarn6_ChkB->setDisabled(true) ;
+  } else {
+    ui->swwarn1_ChkB->setEnabled(true) ;
+    ui->swwarn2_ChkB->setEnabled(true) ;
+    ui->swwarn3_ChkB->setEnabled(true) ;
+    ui->swwarn4_CB->setEnabled(true) ;
+    ui->swwarn5_ChkB->setEnabled(true) ;
+    ui->swwarn6_ChkB->setEnabled(true) ;
+    i|=(ui->swwarn1_ChkB->isChecked() ? 1 : 0)<<1;
+    i|=(ui->swwarn2_ChkB->isChecked() ? 1 : 0)<<2;
+    i|=(ui->swwarn3_ChkB->isChecked() ? 1 : 0)<<3;
+    i|=((uint8_t)ui->swwarn4_CB->currentIndex() & 0x03)<<4;
+    i|=(ui->swwarn5_ChkB->isChecked() ? 1 : 0)<<6;
+    i|=(ui->swwarn6_ChkB->isChecked() ? 1 : 0)<<7;
+  }
   g_model.switchWarningStates=i;
   updateSettings();
 }
