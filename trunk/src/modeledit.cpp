@@ -1309,6 +1309,7 @@ void ModelEdit::tabFunctionSwitches()
     } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
       if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
         fswtchParamT[i]->hide();
+        fswtchParam[i]->hide();
       } else {
         fswtchParam[i]->hide();
       }
@@ -1361,6 +1362,7 @@ void ModelEdit::tabFunctionSwitches()
       } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
         if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
           fswtchParamT[i]->hide();
+          fswtchParam[i]->hide();
         } else {
           fswtchParam[i]->hide();
         }
