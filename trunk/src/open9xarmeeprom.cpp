@@ -960,6 +960,8 @@ t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_209));
   }
 
+  memset(this, 0, sizeof(t_Open9xArmModelData_v209));
+
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<MAX_TIMERS; i++)
@@ -1058,8 +1060,5 @@ t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       servoCenter[i] = c9x.servoCenter[i];
     }
-  }
-  else {
-    memset(this, 0, sizeof(t_Open9xArmModelData_v209));
   }
 }
