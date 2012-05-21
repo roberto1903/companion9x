@@ -50,7 +50,7 @@ private:
     QDoubleSpinBox  * cswitchOffset[NUM_CSW];
     QComboBox * cswitchSource1[NUM_CSW];
     QComboBox * cswitchSource2[NUM_CSW];
-
+    QLabel * fswLabel[NUM_FSW];
     QComboBox * fswtchSwtch[NUM_FSW];
     QComboBox * fswtchFunc[NUM_FSW];
     QSpinBox * fswtchParam[NUM_FSW];
