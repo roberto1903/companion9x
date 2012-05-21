@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -810,50 +810,10 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="12">
-          <widget class="QLabel" name="swwarn6_label">
-           <property name="text">
-            <string>GEA</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="swwarn1_label">
-           <property name="text">
-            <string>THR</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="10">
-          <widget class="QLabel" name="swwarn5_label">
-           <property name="text">
-            <string>AIL</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="8">
           <widget class="QLabel" name="swwarn4_label">
            <property name="text">
             <string>3POS</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLabel" name="swwarn3_label">
-           <property name="text">
-            <string>ELE</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -870,23 +830,13 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="swwarn2_label">
-           <property name="text">
-            <string>RUD</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2" alignment="Qt::AlignHCenter">
+         <item row="1" column="2">
           <widget class="QCheckBox" name="swwarn1_ChkB">
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>THR</string>
            </property>
           </widget>
          </item>
@@ -904,43 +854,43 @@
            </item>
           </widget>
          </item>
-         <item row="1" column="4" alignment="Qt::AlignHCenter">
+         <item row="1" column="4">
           <widget class="QCheckBox" name="swwarn2_ChkB">
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>RUD</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="6" alignment="Qt::AlignHCenter">
+         <item row="1" column="6">
           <widget class="QCheckBox" name="swwarn3_ChkB">
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>ELE</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="10" alignment="Qt::AlignHCenter">
+         <item row="1" column="10">
           <widget class="QCheckBox" name="swwarn5_ChkB">
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>AIL</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="12" alignment="Qt::AlignHCenter">
+         <item row="1" column="12">
           <widget class="QCheckBox" name="swwarn6_ChkB">
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>GEA</string>
            </property>
           </widget>
          </item>
@@ -4552,7 +4502,7 @@
             <x>0</x>
             <y>0</y>
             <width>797</width>
-            <height>537</height>
+            <height>539</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7717,7 +7667,7 @@
             <x>0</x>
             <y>0</y>
             <width>797</width>
-            <height>508</height>
+            <height>510</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13506,7 +13456,7 @@
             <x>0</x>
             <y>0</y>
             <width>797</width>
-            <height>537</height>
+            <height>539</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

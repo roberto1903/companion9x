@@ -307,8 +307,7 @@ void ModelEdit::on_tabWidget_currentChanged(int index)
 void ModelEdit::tabModelEditSetup()
 {
   //name
-  QLabel * pmsl[] = {ui->swwarn_label, ui->swwarn0_label,ui->swwarn1_label,ui->swwarn2_label,ui->swwarn3_label,
-                            ui->swwarn4_label,ui->swwarn5_label,ui->swwarn6_label, NULL};
+  QLabel * pmsl[] = {ui->swwarn_label, ui->swwarn0_label, ui->swwarn4_label, NULL};
   QCheckBox * pmchkb[] = {ui->swwarn1_ChkB,ui->swwarn2_ChkB,ui->swwarn3_ChkB,ui->swwarn5_ChkB,ui->swwarn6_ChkB, NULL};
   
   ui->modelNameLE->setText(g_model.name);
