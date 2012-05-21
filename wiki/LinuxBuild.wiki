@@ -12,15 +12,33 @@ You will need ...
  * [http://www.codesynthesis.com/projects/xsd xsdcxx]
  * [http://www.libsdl.org/ SDL] (v1.2)
 
-On Ubuntu 11.04, 11.10:
+== On Ubuntu 11.04, 11.10, 12.04: ==
 {{{
-sudo apt-get install subversion gcc-avr avr-libc avrdude build-essential ruby libqtcore4 libqt4-dev qt4-qmake g++ cmake libxerces-c-dev xsdcxx libsdl1.2-dev
-
+sudo apt-get install subversion gcc-avr avr-libc avrdude build-essential ruby libqtcore4 libqt4-dev qt4-qmake g++ cmake libxerces-c-dev xsdcxx libsdl1.2-dev libusb-1.0-0
 }}}
-
-On Fedora:
+== On Fedora: ==
 {{{
 sudo yum install qt qt-devel cmake patch xsd svn gcc-c++ sdl-devel
+}}}
+== UsbASP ==
+You need enable AVRDUDE to run without "sudo".
+Plug in the programmer and run
+{{{
+lsusb | grep libusb
+}}}
+You should get a line like this:
+{{{
+Bus 003 Device 002: ID 16c0:05dc VOTI shared ID for use with libusb
+}}}
+Notice the two numbers after ID XXXX:YYYY
+
+In next command replace XXXX and YYYY with the numbers.
+{{{
+sudo echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="XXXX", ATTR{idProduct}=="YYYY", GROUP="adm", MODE="0666"' > /etc/udev/rules.d/10-usbasp.rules
+}}}
+Then execute:
+{{{ 
+sudo restart udev
 }}}
 
 = Building companion9x =
