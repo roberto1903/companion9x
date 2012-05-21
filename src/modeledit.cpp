@@ -93,10 +93,9 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   }
 
   ui->tabWidget->setCurrentIndex(0);
-  ui->curvePreview->setMinimumWidth(260);
-  ui->curvePreview->setMinimumHeight(260);
-
-  resizeEvent(); // draws the curves and Expo
+  ui->curvePreview->setMinimumWidth(240);
+  ui->curvePreview->setMinimumHeight(240);
+  resizeEvent();
   QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
@@ -302,6 +301,7 @@ void ModelEdit::on_tabWidget_currentChanged(int index)
 {
     QSettings settings("companion9x", "companion9x");
     settings.setValue("modelEditTab",index);//ui->tabWidget->currentIndex());
+    resizeEvent();
 }
 
 void ModelEdit::tabModelEditSetup()
@@ -1268,6 +1268,11 @@ void ModelEdit::tabFunctionSwitches()
   ui->fsw_en1->hide();
   ui->fsw_en2->hide();
   for(int i=0; i<std::min(16,num_fsw); i++) {
+    fswLabel[i] = new QLabel(this);
+    fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    fswLabel[i]->setText(tr("FSW%1").arg(i+1));
+    ui->fswitchlayout1->addWidget(fswLabel[i],i+1,0);
+    
     fswtchSwtch[i] = new QComboBox(this);
     connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
@@ -1318,6 +1323,11 @@ void ModelEdit::tabFunctionSwitches()
   }
   if (num_fsw>16) {
     for(int i=16; i<num_fsw; i++) {
+      fswLabel[i] = new QLabel(this);
+      fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
+      fswLabel[i]->setText(tr("FSW%1").arg(i+1));
+      ui->fswitchlayout2->addWidget(fswLabel[i],i-15,0);
+    
       fswtchSwtch[i] = new QComboBox(this);
       connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
       ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
@@ -4096,6 +4106,7 @@ void ModelEdit::shrink() {
       resize(0,625);
     }
   }
+  ui->curvePreview->repaint();
 }
 
 void ModelEdit::closeEvent(QCloseEvent *event)
@@ -4105,3 +4116,4 @@ void ModelEdit::closeEvent(QCloseEvent *event)
     settings.setValue("mesize", size());
     event->accept();
 }
+
