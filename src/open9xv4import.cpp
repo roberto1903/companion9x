@@ -14,6 +14,7 @@
 #define AUDIO
 #define HAPTIC
 #define AUTOSWITCH
+#define SDCARD
 
 #undef min
 #undef max
@@ -30,6 +31,9 @@ namespace Open9xV4 {
 #include "../open9x/open9x.cpp"
 #include "../open9x/gruvin9x/gtime.cpp"
 #include "../open9x/gruvin9x/rtc.cpp"
+#include "../open9x/gruvin9x/ff.cpp"
+#include "../open9x/gruvin9x/diskio.cpp"
+#include "../open9x/gruvin9x/logs.cpp"
 #include "../open9x/pulses_avr.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
