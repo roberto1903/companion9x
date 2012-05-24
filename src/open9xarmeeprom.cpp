@@ -223,7 +223,9 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
 Open9xGeneralData_v208::operator GeneralSettings ()
 {
   GeneralSettings result;
-
+  
+  result.myVers = myVers;
+  
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];

@@ -138,7 +138,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
 Er9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
-
+  result.myVers = myVers;
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];

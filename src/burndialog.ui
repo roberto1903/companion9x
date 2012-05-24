@@ -34,6 +34,9 @@
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="5" column="0">
       <widget class="QCheckBox" name="patchcalib_CB">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modify calibration parameters using settings from current profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Patch calibration setting from profile</string>
        </property>
@@ -41,6 +44,9 @@
      </item>
      <item row="6" column="0">
       <widget class="QCheckBox" name="patchhw_CB">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modify HW parameters using settings from current profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Patch HW setting from profile</string>
        </property>

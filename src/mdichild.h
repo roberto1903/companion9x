@@ -104,6 +104,7 @@ private:
     QString strippedName(const QString &fullFileName);
     void saveSelection();
     void restoreSelection();
+    int getEpromVersion(QString fileName);
 
     Ui::mdiChild *ui;
 
