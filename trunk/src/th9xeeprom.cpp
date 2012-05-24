@@ -122,7 +122,9 @@ t_Th9xGeneral::t_Th9xGeneral(GeneralSettings &c9x)
 Th9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
-
+  
+  result.myVers = myVers;
+  
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];

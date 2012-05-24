@@ -29,7 +29,6 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     this->setWindowTitle(tr("Write firmware to TX"));
   } else {
     ui->FlashLoadButton->setText(tr("Load eEprom"));
-    ui->EEpromCB->hide();
     ui->profile_label->hide();
     ui->patchcalib_CB->hide();
     ui->patchhw_CB->hide();
@@ -70,6 +69,32 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
       checkFw(*hexfileName);
     } else {
       if (checkeEprom(*hexfileName)) {
+        QSettings settings("companion9x", "companion9x");
+        int profileid=settings.value("profileId", 1).toInt();
+        settings.beginGroup("Profiles");
+        QString profile=QString("profile%1").arg(profileid);
+        settings.beginGroup(profile);
+        QString Name=settings.value("Name","").toString();
+        QString calib=settings.value("StickPotCalib","").toString();
+        QString trainercalib=settings.value("TrainerCalib","").toString();
+        QString DisplaySet=settings.value("Display","").toString();
+        QString BeeperSet=settings.value("Beeper","").toString();
+        QString HapticSet=settings.value("Haptic","").toString();
+        QString SpeakerSet=settings.value("Speaker","").toString();
+        settings.endGroup();
+        settings.endGroup();
+        if (!Name.isEmpty()) {
+          ui->patchcalib_CB->show();
+          ui->patchhw_CB->show();
+          if (!((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16))) {
+            ui->patchcalib_CB->setDisabled(true);
+          }
+          if (!((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6))) {
+            ui->patchhw_CB->setDisabled(true);
+          }
+        } else {
+          ui->profile_label->hide();
+        }
         ui->EEpromCB->show();
         ui->BurnFlashButton->setEnabled(true);
       }

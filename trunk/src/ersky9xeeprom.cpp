@@ -122,7 +122,9 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
 Ersky9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
-
+  
+  result.myVers = myVers;
+  
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];

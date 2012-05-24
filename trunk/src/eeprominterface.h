@@ -342,7 +342,7 @@ enum BeeperMode {
 class GeneralSettings {
   public:
     GeneralSettings();
-  
+    uint8_t   myVers;
     int16_t   calibMid[NUM_STICKS+NUM_POTS];
     int16_t   calibSpanNeg[NUM_STICKS+NUM_POTS];
     int16_t   calibSpanPos[NUM_STICKS+NUM_POTS];

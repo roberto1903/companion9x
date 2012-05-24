@@ -468,9 +468,9 @@ void MdiChild::burnTo()  // write to Tx
   }
   if (!tempFile.isEmpty()) {
     if (backup) {
+      int oldrev=getEpromVersion(tempFile);
       QString tempFlash=tempDir + "/flash.hex";
       QStringList str = ((MainWindow *)this->parent())->GetReceiveFlashCommand(tempFlash);
-      qDebug() << str;
       avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Read Flash From Tx");
       ad->setWindowIcon(QIcon(":/images/read_flash.png"));
       ad->exec();
@@ -478,6 +478,13 @@ void MdiChild::burnTo()  // write to Tx
       if (!((MainWindow *)this->parent())->convertEEPROM(tempFile, restoreFile, tempFlash)) {
         QMessageBox::critical(this,tr("Error"), tr("Cannot check eeprom compatibility!"));
       } else {
+        int rev=getEpromVersion(restoreFile);
+        if ((rev/100)!=(oldrev/100)) {
+          QMessageBox::warning(this,tr("Warning"), tr("Firmware in radio is of a different family of eeprom written, check file and preferences!"));
+        }
+        if (rev<oldrev) {
+          QMessageBox::warning(this,tr("Warning"), tr("Firmware in flash is outdated, please upgrade!"));
+        }
         tempFile=restoreFile;
       }
       QByteArray ba = tempFlash.toLatin1();
@@ -516,3 +523,79 @@ void MdiChild::setEEpromAvail(int eavail)
   EEPromAvail=eavail;
 }
 
+int MdiChild::getEpromVersion(QString fileName)
+{
+  RadioData testData;
+  if (fileName.isEmpty()) {
+    return -1;
+  }
+  QFile file(fileName);
+  if (!file.exists()) {
+    QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
+    return -1;
+  }
+  int fileType = getFileType(fileName);
+  if (fileType==FILE_TYPE_XML) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+      QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+      return -1;
+    }
+    QTextStream inputStream(&file);
+    XmlInterface(inputStream).load(testData);
+  }
+  else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }        
+    QDomDocument doc(ER9X_EEPROM_FILE_TYPE);
+    bool xmlOK = doc.setContent(&file);
+    if(xmlOK) {
+      if (!LoadEepromXml(testData, doc)){
+        return -1;
+      }
+    }
+    file.reset();
+      
+    QTextStream inputStream(&file);
+    if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
+      QString hline = inputStream.readLine();
+      if (hline!=EEPE_EEPROM_FILE_HEADER) {
+        file.close();
+        return -1;
+      }
+    }
+    uint8_t eeprom[EESIZE_GRUVIN9X];
+    int eeprom_size = HexInterface(inputStream).load(eeprom);
+    if (!eeprom_size) {
+      QMessageBox::critical(this, tr("Error"), tr("Invalid EEPROM File %1").arg(fileName));
+      file.close();
+      return -1;
+    }
+    file.close();
+    if (!LoadEeprom(testData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid EEPROM File %1").arg(fileName));
+      return -1;
+    }
+  }
+  else if (fileType==FILE_TYPE_BIN) { //read binary
+    int eeprom_size = file.size();
+    if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+    memset(eeprom, 0, eeprom_size);
+    long result = file.read((char*)eeprom, eeprom_size);
+    file.close();
+    if (result != eeprom_size) {
+        QMessageBox::critical(this, tr("Error"),tr("Error reading file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }
+    if (!LoadEeprom(testData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid binary EEPROM File %1").arg(fileName));
+      return -1;
+    }
+  }
+  return testData.generalSettings.myVers;
+}
