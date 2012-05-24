@@ -70,6 +70,7 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
       checkFw(*hexfileName);
     } else {
       if (checkeEprom(*hexfileName)) {
+        ui->EEpromCB->show();
         ui->BurnFlashButton->setEnabled(true);
       }
     }
@@ -123,6 +124,7 @@ void burnDialog::on_FlashLoadButton_clicked()
       ui->profile_label->show();
       ui->patchcalib_CB->show();
       ui->patchhw_CB->show();
+      ui->EEpromCB->show();
       QTimer::singleShot(0, this, SLOT(shrink()));
     }
   }
@@ -510,18 +512,31 @@ void burnDialog::on_BurnFlashButton_clicked()
   this->close();
 }
 
-void burnDialog::on_cancelButton_clicked() {
+void burnDialog::on_cancelButton_clicked()
+{
   hexfileName->clear();     
   this->close();  
 }
 
-void burnDialog::on_InvertColorButton_clicked() {
+void burnDialog::on_InvertColorButton_clicked()
+{
     QImage image = ui->imageLabel->pixmap()->toImage();
     image.invertPixels();
     ui->imageLabel->setPixmap(QPixmap::fromImage(image));
 }
 
-void burnDialog::on_PreferredImageCB_toggled(bool checked) {
+void burnDialog::on_EEpromCB_toggled(bool checked)
+{
+  if (ui->EEpromCB->isChecked()) {
+    *backup=true;
+  }
+  else {
+    *backup=false;
+  }
+}
+
+void burnDialog::on_PreferredImageCB_toggled(bool checked)
+{
   QString tmpFileName;
   if (checked) {
     QSettings settings("companion9x", "companion9x");

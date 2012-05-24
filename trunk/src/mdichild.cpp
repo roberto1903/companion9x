@@ -461,12 +461,29 @@ void MdiChild::burnTo()  // write to Tx
     QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
     return;
   }
+  bool backup=false;
   if (!stickCal.isEmpty() && !tempFile.isEmpty()) {
-    bool backup=false;
     burnDialog *cd = new burnDialog(this, 1, &tempFile, &backup,strippedName(curFile));
     cd->exec();
   }
   if (!tempFile.isEmpty()) {
+    if (backup) {
+      QString tempFlash=tempDir + "/flash.hex";
+      QStringList str = ((MainWindow *)this->parent())->GetReceiveFlashCommand(tempFlash);
+      qDebug() << str;
+      avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Read Flash From Tx");
+      ad->setWindowIcon(QIcon(":/images/read_flash.png"));
+      ad->exec();
+      QString restoreFile = tempDir + "/compat.bin";
+      if (!((MainWindow *)this->parent())->convertEEPROM(tempFile, restoreFile, tempFlash)) {
+        QMessageBox::critical(this,tr("Error"), tr("Cannot check eeprom compatibility!"));
+      } else {
+        tempFile=restoreFile;
+      }
+      QByteArray ba = tempFlash.toLatin1();
+      char *name = ba.data(); 
+      unlink(name);
+    }
     QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
     avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
     ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
