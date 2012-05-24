@@ -43,6 +43,7 @@ private slots:
   void on_InvertColorButton_clicked();
   void on_EEbackupCB_clicked();
   void on_PreferredImageCB_toggled(bool checked);
+  void on_EEpromCB_toggled(bool checked);
   void checkFw(QString fileName);
   bool checkeEprom(QString fileName);
   void shrink();
