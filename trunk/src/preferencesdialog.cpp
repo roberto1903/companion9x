@@ -259,6 +259,10 @@ void preferencesDialog::initSettings()
   if (QDir(Path).exists()) {
         ui->libraryPath->setText(Path);
   }
+  Path=settings.value("backupPath", "").toString();
+  if (QDir(Path).exists()) {
+        ui->backupPath->setText(Path);
+  }
   ui->splashincludeCB->setCurrentIndex(settings.value("embedded_splashes", 0).toInt());
   FirmwareInfo * current_firmware = GetCurrentFirmware();
 
@@ -418,6 +422,16 @@ void preferencesDialog::on_libraryPathButton_clicked()
   if (!fileName.isEmpty()) {
     settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
     ui->libraryPath->setText(fileName);
+  }
+}
+
+void preferencesDialog::on_backupPathButton_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select eeprom your backup"), settings.value("backupDir").toString());
+  if (!fileName.isEmpty()) {
+    settings.setValue("backupDir", QFileInfo(fileName).dir().absolutePath());
+    ui->backupPath->setText(fileName);
   }
 }
 
