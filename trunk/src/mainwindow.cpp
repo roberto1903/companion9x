@@ -874,6 +874,23 @@ void MainWindow::burnToFlash(QString fileToFlash)
     if (backup) {
       QString tempDir    = QDir::tempPath();
       QString backupFile = tempDir + "/backup.bin";
+      bool backupEnable=settings.value("backupEnable", true).toBool();
+      QString backupPath=settings.value("backupPath", "").toString();
+      if (!backupPath.isEmpty()) {
+        if (!QDir(backupPath).exists()) {
+          if (backupEnable) {
+            QMessageBox::warning(this, tr("Backup is impossible"), tr("The backup dir set in preferences does not exist"));
+          }
+          backupEnable=false;
+        }
+      } else {
+        backupEnable=false;
+      }
+      if (backupEnable) {
+        QDateTime datetime;
+        QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
+      }
+      
       QStringList str = GetReceiveEEpromCommand(backupFile);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
@@ -906,8 +923,24 @@ void MainWindow::burnToFlash(QString fileToFlash)
       else {
         QMessageBox::warning(this, tr("Backup failed"), tr("Cannot backup existing EEProm from TX, Flash process aborted"));
       }
-    }
-    else {
+    } else {
+      bool backupEnable=settings.value("backupEnable", true).toBool();
+      QString backupPath=settings.value("backupPath", "").toString();
+      if (!QDir(backupPath).exists()) {
+        if (backupEnable) {
+          QMessageBox::warning(this, tr("Backup is impossible"), tr("The backup dir set in preferences does not exist"));
+        }
+        backupEnable=false;
+      }
+      if (backupEnable) {
+        QDateTime datetime;
+        QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
+        QStringList str = GetReceiveEEpromCommand(backupFile);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+        ad->exec();
+      }
+
       QStringList str = GetSendFlashCommand(fileName);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Write Flash To Tx"), AVR_DIALOG_SHOW_DONE);
       ad->setWindowIcon(QIcon(":/images/write_flash.png"));

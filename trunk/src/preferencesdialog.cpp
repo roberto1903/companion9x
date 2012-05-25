@@ -194,6 +194,7 @@ void preferencesDialog::writeValues()
     settings.remove("js_support");
     settings.remove("js_ctrl");
   }
+  settings.setValue("backupEnable", ui->backupEnable->isChecked());
 }
 
 void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
@@ -257,11 +258,19 @@ void preferencesDialog::initSettings()
   ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
-        ui->libraryPath->setText(Path);
+    ui->libraryPath->setText(Path);
   }
   Path=settings.value("backupPath", "").toString();
-  if (QDir(Path).exists()) {
-        ui->backupPath->setText(Path);
+  if (!Path.isEmpty()) {
+    if (QDir(Path).exists()) {
+      ui->backupPath->setText(Path);
+      ui->backupEnable->setEnabled(true);
+      ui->backupEnable->setChecked(settings.value("backupEnable", true).toBool());
+    } else {
+      ui->backupEnable->setDisabled(true);
+    }
+  } else {
+      ui->backupEnable->setDisabled(true);
   }
   ui->splashincludeCB->setCurrentIndex(settings.value("embedded_splashes", 0).toInt());
   FirmwareInfo * current_firmware = GetCurrentFirmware();
@@ -420,7 +429,7 @@ void preferencesDialog::on_libraryPathButton_clicked()
   QSettings settings("companion9x", "companion9x");
   QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library dir"), settings.value("lastImagesDir").toString());
   if (!fileName.isEmpty()) {
-    settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
+    settings.setValue("lastImagesDir", fileName);
     ui->libraryPath->setText(fileName);
   }
 }
@@ -428,11 +437,12 @@ void preferencesDialog::on_libraryPathButton_clicked()
 void preferencesDialog::on_backupPathButton_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select eeprom your backup"), settings.value("backupDir").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select eeprom your backup"), settings.value("backupPath").toString());
   if (!fileName.isEmpty()) {
-    settings.setValue("backupDir", QFileInfo(fileName).dir().absolutePath());
+    settings.setValue("backupPath", fileName);
     ui->backupPath->setText(fileName);
   }
+  ui->backupEnable->setEnabled(true);
 }
 
 void preferencesDialog::on_splashLibraryButton_clicked()
