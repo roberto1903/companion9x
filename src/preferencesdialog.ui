@@ -29,11 +29,11 @@
    <iconset resource="companion9x.qrc">
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0,0,0,0,0,0">
+  <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0,0,0,0">
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
-   <item row="1" column="6" rowspan="4">
+   <item row="1" column="4" rowspan="4">
     <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
      <item row="1" column="0" colspan="2">
       <widget class="QLabel" name="imageLabel">
@@ -108,20 +108,7 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_9">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Personal splash library</string>
-     </property>
-    </widget>
-   </item>
-   <item row="22" column="1" colspan="6">
+   <item row="22" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QCheckBox" name="joystickChkB">
@@ -149,68 +136,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Check for updates on startup</string>
-     </property>
-    </widget>
-   </item>
-   <item row="18" column="1" colspan="4">
-    <widget class="QComboBox" name="stickmodeCB">
-     <property name="whatsThis">
-      <string>Mode selection:
-
-Mode 1:
-  Left stick:  Elevator, Rudder
-  Right stick:  Throttle, Aileron
-
-Mode 2:
-  Left stick:  Throttle, Rudder
-  Right stick:  Elevator, Aileron
-
-Mode 3:
-  Left stick:  Elevator, Aileron
-  Right stick:  Throttle, Rudder
-
-Mode 4:
-  Left stick:  Throttle, Aileron
-  Right stick:  Elevator, Rudder
-
-</string>
-     </property>
-     <property name="currentIndex">
-      <number>1</number>
-     </property>
-     <item>
-      <property name="text">
-       <string>Mode 1 (RUD ELE THR AIL)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 2 (RUD THR ELE AIL)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 3 (AIL ELE THR RUD)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mode 4 (AIL THR ELE RUD)</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="4" column="1" colspan="5">
+   <item row="4" column="1" colspan="3">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="1">
       <widget class="QPushButton" name="c">
@@ -231,7 +157,7 @@ Mode 4:
      </item>
     </layout>
    </item>
-   <item row="12" column="1" colspan="6">
+   <item row="12" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QLabel" name="FwInfo">
@@ -255,167 +181,7 @@ Mode 4:
      </item>
     </layout>
    </item>
-   <item row="18" column="5">
-    <widget class="QLabel" name="label_13">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Default Channel Order</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="18" column="6">
-    <widget class="QComboBox" name="channelorderCB">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="whatsThis">
-      <string>Channel order
-
-This is used by the templated to determine which channel goes to what number output.</string>
-     </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <item>
-      <property name="text">
-       <string notr="true">R E T A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">R E A T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">R T E A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">R T A E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">R A E T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">R A T E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E R T A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E R A T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E T R A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E T A R</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E A R T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">E A T R</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T R E A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T R A E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T E R A</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T E A R</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T A R E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">T A E R</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A R E T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A R T E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A E R T</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A E T R</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A T R E</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">A T E R</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="6">
+   <item row="6" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLineEdit" name="SplashFileName">
@@ -453,7 +219,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="9" column="1" colspan="6">
+   <item row="9" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,0,0,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
@@ -496,33 +262,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="18" column="0">
-    <widget class="QLabel" name="label_14">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Default Stick Mode</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Firmware</string>
-     </property>
-    </widget>
-   </item>
-   <item row="24" column="0" colspan="7">
+   <item row="24" column="0" colspan="5">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <spacer name="horizontalSpacer_3">
@@ -565,7 +305,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="11" column="1" colspan="6">
+   <item row="11" column="1" colspan="4">
     <layout class="QGridLayout" name="gridLayout" columnstretch="1,1,1,1">
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
@@ -730,20 +470,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_8">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Custom TX splash screen</string>
-     </property>
-    </widget>
-   </item>
-   <item row="13" column="1" colspan="6">
+   <item row="13" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,0">
      <item>
       <widget class="QLabel" name="label_12">
@@ -770,55 +497,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="3" column="1">
-    <widget class="QSpinBox" name="historySize">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-       <horstretch>40</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximum">
-      <number>15</number>
-     </property>
-     <property name="value">
-      <number>10</number>
-     </property>
-    </widget>
-   </item>
-   <item row="22" column="0">
-    <widget class="QLabel" name="label_11">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Joystick</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="6">
-    <widget class="QComboBox" name="locale_QB"/>
-   </item>
-   <item row="3" column="4">
-    <widget class="QLabel" name="label_10">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Splash library behaviour</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0" colspan="7">
+   <item row="7" column="0" colspan="5">
     <spacer name="verticalSpacer_3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -834,93 +513,7 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </spacer>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Language (requires restart)</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="startupCheck_companion9x">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QComboBox" name="splashincludeCB">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <item>
-      <property name="text">
-       <string>Include companion splashes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Only user defined splashes</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Show Splash Screen</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="showSplash">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Recent History Size</string>
-     </property>
-    </widget>
-   </item>
-   <item row="19" column="0">
-    <widget class="QLabel" name="label_15">
-     <property name="text">
-      <string>Profile slot</string>
-     </property>
-    </widget>
-   </item>
-   <item row="19" column="1" colspan="6">
+   <item row="19" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_9">
      <item>
       <widget class="QSpinBox" name="ProfSlot_SB">
@@ -954,7 +547,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="2" column="4">
+   <item row="2" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
       <widget class="QLabel" name="label_3">
@@ -1000,7 +593,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="1" column="4">
+   <item row="1" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <widget class="QLabel" name="label_7">
@@ -1024,7 +617,7 @@ This is used by the templated to determine which channel goes to what number out
      </item>
     </layout>
    </item>
-   <item row="21" column="0" colspan="7">
+   <item row="21" column="0" colspan="5">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -1040,6 +633,413 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </spacer>
    </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Check for updates on startup</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Language (requires restart)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Custom TX splash screen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="4">
+    <widget class="QComboBox" name="channelorderCB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="whatsThis">
+      <string>Channel order
+
+This is used by the templated to determine which channel goes to what number output.</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string notr="true">R E T A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">R E A T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">R T E A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">R T A E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">R A E T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">R A T E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E R T A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E R A T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E T R A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E T A R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E A R T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">E A T R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T R E A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T R A E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T E R A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T E A R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T A R E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">T A E R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A R E T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A R T E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A E R T</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A E T R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A T R E</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">A T E R</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="4">
+    <widget class="QComboBox" name="locale_QB"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Firmware</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="0">
+    <widget class="QLabel" name="label_14">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Default Stick Mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="3">
+    <widget class="QLabel" name="label_13">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Default Channel Order</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="startupCheck_companion9x">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Show Splash Screen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="showSplash">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Personal splash library</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1" colspan="2">
+    <widget class="QComboBox" name="stickmodeCB">
+     <property name="whatsThis">
+      <string>Mode selection:
+
+Mode 1:
+  Left stick:  Elevator, Rudder
+  Right stick:  Throttle, Aileron
+
+Mode 2:
+  Left stick:  Throttle, Rudder
+  Right stick:  Elevator, Aileron
+
+Mode 3:
+  Left stick:  Elevator, Aileron
+  Right stick:  Throttle, Rudder
+
+Mode 4:
+  Left stick:  Throttle, Aileron
+  Right stick:  Elevator, Rudder
+
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>Mode 1 (RUD ELE THR AIL)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 2 (RUD THR ELE AIL)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 3 (AIL ELE THR RUD)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mode 4 (AIL THR ELE RUD)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="22" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Joystick</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QComboBox" name="splashincludeCB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <item>
+      <property name="text">
+       <string>Include companion splashes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Only user defined splashes</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLabel" name="label_10">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Splash library behaviour</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QSpinBox" name="historySize">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>40</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximum">
+      <number>15</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Recent History Size</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="0">
+    <widget class="QLabel" name="label_15">
+     <property name="text">
+      <string>Profile slot</string>
+     </property>
+    </widget>
+   </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_17">
      <property name="text">
@@ -1047,15 +1047,26 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </widget>
    </item>
-   <item row="8" column="1" colspan="5">
-    <widget class="QLineEdit" name="backupPath"/>
-   </item>
-   <item row="8" column="6">
-    <widget class="QPushButton" name="backupPathButton">
-     <property name="text">
-      <string>Open Folder</string>
-     </property>
-    </widget>
+   <item row="8" column="1" colspan="4">
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QLineEdit" name="backupPath"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="backupPathButton">
+       <property name="text">
+        <string>Open Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="backupEnable">
+       <property name="text">
+        <string>auto backup before write</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
   <zorder>label_2</zorder>
@@ -1078,8 +1089,7 @@ This is used by the templated to determine which channel goes to what number out
   <zorder>label_5</zorder>
   <zorder>label_15</zorder>
   <zorder>label_17</zorder>
-  <zorder>backupPath</zorder>
-  <zorder>backupPathButton</zorder>
+  <zorder>layoutWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>locale_QB</tabstop>
