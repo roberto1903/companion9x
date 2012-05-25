@@ -43,6 +43,7 @@ private slots:
     void on_InvertPixels_clicked();
     void on_clearImageButton_clicked();
     void on_libraryPathButton_clicked();
+    void on_backupPathButton_clicked();
     void on_splashLibraryButton_clicked();
     void on_checkFWUpdates_clicked();
     void on_ProfSlot_SB_valueChanged();

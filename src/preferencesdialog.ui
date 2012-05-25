@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>530</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -213,7 +213,7 @@ Mode 4:
    <item row="4" column="1" colspan="5">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="1">
-      <widget class="QPushButton" name="libraryPathButton">
+      <widget class="QPushButton" name="c">
        <property name="text">
         <string>Open Folder</string>
        </property>
@@ -1040,6 +1040,23 @@ This is used by the templated to determine which channel goes to what number out
      </property>
     </spacer>
    </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_17">
+     <property name="text">
+      <string>eEprom backup folder</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="5">
+    <widget class="QLineEdit" name="backupPath"/>
+   </item>
+   <item row="8" column="6">
+    <widget class="QPushButton" name="backupPathButton">
+     <property name="text">
+      <string>Open Folder</string>
+     </property>
+    </widget>
+   </item>
   </layout>
   <zorder>label_2</zorder>
   <zorder>label</zorder>
@@ -1060,6 +1077,9 @@ This is used by the templated to determine which channel goes to what number out
   <zorder>historySize</zorder>
   <zorder>label_5</zorder>
   <zorder>label_15</zorder>
+  <zorder>label_17</zorder>
+  <zorder>backupPath</zorder>
+  <zorder>backupPathButton</zorder>
  </widget>
  <tabstops>
   <tabstop>locale_QB</tabstop>
@@ -1069,7 +1089,7 @@ This is used by the templated to determine which channel goes to what number out
   <tabstop>splashLibraryButton</tabstop>
   <tabstop>SplashSelect</tabstop>
   <tabstop>libraryPath</tabstop>
-  <tabstop>libraryPathButton</tabstop>
+  <tabstop>c</tabstop>
   <tabstop>downloadVerCB</tabstop>
   <tabstop>fw_dnld</tabstop>
   <tabstop>optionCheckBox_1</tabstop>
