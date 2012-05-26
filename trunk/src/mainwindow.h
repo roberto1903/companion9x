@@ -141,6 +141,7 @@ private:
     QStringList GetSendEEpromCommand(const QString &filename);
     QStringList GetReceiveFlashCommand(const QString &filename);
     QStringList GetSendFlashCommand(const QString &filename);
+    int getEpromVersion(QString fileName);
 
 
     bool convertEEPROM(QString backupFile, QString restoreFile, QString flashFile);
