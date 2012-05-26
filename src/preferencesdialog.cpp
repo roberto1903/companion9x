@@ -427,7 +427,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 void preferencesDialog::on_libraryPathButton_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library dir"), settings.value("lastImagesDir").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library folder"), settings.value("lastImagesDir").toString());
   if (!fileName.isEmpty()) {
     settings.setValue("lastImagesDir", fileName);
     ui->libraryPath->setText(fileName);
@@ -437,7 +437,7 @@ void preferencesDialog::on_libraryPathButton_clicked()
 void preferencesDialog::on_backupPathButton_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select eeprom your backup"), settings.value("backupPath").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your eeprom backup folder"), settings.value("backupPath").toString());
   if (!fileName.isEmpty()) {
     settings.setValue("backupPath", fileName);
     ui->backupPath->setText(fileName);

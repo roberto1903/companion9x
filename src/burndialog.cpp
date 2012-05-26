@@ -84,6 +84,7 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
         settings.endGroup();
         settings.endGroup();
         if (!Name.isEmpty()) {
+          ui->profile_label->show();
           ui->patchcalib_CB->show();
           ui->patchhw_CB->show();
           if (!((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16))) {

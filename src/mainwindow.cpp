@@ -728,26 +728,81 @@ void MainWindow::burnFrom()
     }
 }
 
-void MainWindow::burnExtenalToEEPROM()
-{
-    QSettings settings("companion9x", "companion9x");
-    QString fileName;
-    bool backup = false;
-    burnDialog *cd = new burnDialog(this, 1, &fileName, &backup);
-    cd->exec();
-    if (!fileName.isEmpty()) {
-        settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-        int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
-        if(ret!=QMessageBox::Yes) return;
-        if (!isValidEEPROM(fileName)) 
-          ret = QMessageBox::question(this, "companion9x", tr("The file %1\nhas not been recognized as a valid EEPROM\nBurn anyway ?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
-          if(ret!=QMessageBox::Yes) return;
-
-        QStringList str = GetSendEEpromCommand(fileName);
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
-        ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
-        ad->show();
+void MainWindow::burnExtenalToEEPROM() {
+  QSettings settings("companion9x", "companion9x");
+  QString fileName;
+  bool backup = false;
+  burnDialog *cd = new burnDialog(this, 1, &fileName, &backup);
+  cd->exec();
+  if (!fileName.isEmpty()) {
+    settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+    int ret = QMessageBox::question(this, "companion9x", tr("Write %1 to EEPROM memory?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+    if (ret != QMessageBox::Yes) return;
+    if (!isValidEEPROM(fileName))
+      ret = QMessageBox::question(this, "companion9x", tr("The file %1\nhas not been recognized as a valid EEPROM\nBurn anyway ?").arg(QFileInfo(fileName).fileName()), QMessageBox::Yes | QMessageBox::No);
+    if (ret != QMessageBox::Yes) return;
+    bool backupEnable = settings.value("backupEnable", true).toBool();
+    QString backupPath = settings.value("backupPath", "").toString();
+    if (!backupPath.isEmpty()) {
+      if (!QDir(backupPath).exists()) {
+        if (backupEnable) {
+          QMessageBox::warning(this, tr("Backup is impossible"), tr("The backup dir set in preferences does not exist"));
+        }
+        backupEnable = false;
+      }
+    } else {
+      backupEnable = false;
     }
+    if (backup) {
+      if (backupEnable) {
+        QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss") + ".bin";
+        qDebug() << backupFile;
+        QStringList str = GetReceiveEEpromCommand(backupFile);
+        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+        ad->exec();
+      }
+      int oldrev = getEpromVersion(fileName);
+      QString tempDir = QDir::tempPath();
+      QString tempFlash = tempDir + "/flash.hex";
+      QStringList str = GetReceiveFlashCommand(tempFlash);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
+      ad->setWindowIcon(QIcon(":/images/read_flash.png"));
+      ad->exec();
+      QString restoreFile = tempDir + "/compat.bin";
+      if (!convertEEPROM(fileName, restoreFile, tempFlash)) {
+       int ret = QMessageBox::question(this, "Error", tr("Cannot check eeprom compatibility! Continue anyway?") ,
+                                            QMessageBox::Yes | QMessageBox::No);
+       if (ret==QMessageBox::No)
+         return;
+      } else {
+        int rev = getEpromVersion(restoreFile);
+        if ((rev / 100) != (oldrev / 100)) {
+          QMessageBox::warning(this, tr("Warning"), tr("Firmware in radio is of a different family of eeprom written, check file and preferences!"));
+        }
+        if (rev < oldrev) {
+          QMessageBox::warning(this, tr("Warning"), tr("Firmware in flash is outdated, please upgrade!"));
+        }
+        fileName = restoreFile;
+      }
+      QByteArray ba = tempFlash.toLatin1();
+      char *name = ba.data();
+      unlink(name);
+    } else {
+      if (backupEnable) {
+        QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss") + ".bin";
+        qDebug() << backupFile;
+        QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
+        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+        ad->exec();
+      }
+    }
+    QStringList str = GetSendEEpromCommand(fileName);
+    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+    ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
+    ad->exec();
+  }
 }
 
 int MainWindow::getFileType(const QString &fullFileName)
@@ -1539,4 +1594,81 @@ void MainWindow::updateProfilesActions()
 QString MainWindow::strippedName(const QString &fullFileName)
  {
     return QFileInfo(fullFileName).fileName();
+}
+
+int MainWindow::getEpromVersion(QString fileName)
+{
+  RadioData testData;
+  if (fileName.isEmpty()) {
+    return -1;
+  }
+  QFile file(fileName);
+  if (!file.exists()) {
+    QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
+    return -1;
+  }
+  int fileType = getFileType(fileName);
+  if (fileType==FILE_TYPE_XML) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+      QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+      return -1;
+    }
+    QTextStream inputStream(&file);
+    XmlInterface(inputStream).load(testData);
+  }
+  else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }        
+    QDomDocument doc(ER9X_EEPROM_FILE_TYPE);
+    bool xmlOK = doc.setContent(&file);
+    if(xmlOK) {
+      if (!LoadEepromXml(testData, doc)){
+        return -1;
+      }
+    }
+    file.reset();
+      
+    QTextStream inputStream(&file);
+    if (fileType==FILE_TYPE_EEPE) {  // read EEPE file header
+      QString hline = inputStream.readLine();
+      if (hline!=EEPE_EEPROM_FILE_HEADER) {
+        file.close();
+        return -1;
+      }
+    }
+    uint8_t eeprom[EESIZE_GRUVIN9X];
+    int eeprom_size = HexInterface(inputStream).load(eeprom);
+    if (!eeprom_size) {
+      QMessageBox::critical(this, tr("Error"), tr("Invalid EEPROM File %1").arg(fileName));
+      file.close();
+      return -1;
+    }
+    file.close();
+    if (!LoadEeprom(testData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid EEPROM File %1").arg(fileName));
+      return -1;
+    }
+  }
+  else if (fileType==FILE_TYPE_BIN) { //read binary
+    int eeprom_size = file.size();
+    if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
+        QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+    memset(eeprom, 0, eeprom_size);
+    long result = file.read((char*)eeprom, eeprom_size);
+    file.close();
+    if (result != eeprom_size) {
+        QMessageBox::critical(this, tr("Error"),tr("Error reading file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        return -1;
+    }
+    if (!LoadEeprom(testData, eeprom, eeprom_size)) {
+      QMessageBox::critical(this, tr("Error"),tr("Invalid binary EEPROM File %1").arg(fileName));
+      return -1;
+    }
+  }
+  return testData.generalSettings.myVers;
 }

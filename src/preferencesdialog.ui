@@ -1089,7 +1089,6 @@ Mode 4:
   <zorder>label_5</zorder>
   <zorder>label_15</zorder>
   <zorder>label_17</zorder>
-  <zorder>layoutWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>locale_QB</tabstop>
