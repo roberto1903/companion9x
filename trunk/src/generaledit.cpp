@@ -956,6 +956,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     int8_t currentCalib=(int8_t)settings.value("currentCalib", g_eeGeneral.currentCalib).toInt();
     int8_t PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", g_eeGeneral.PPM_Multiplier).toInt();
     uint8_t GSStickMode=(uint8_t)settings.value("GSStickMode", g_eeGeneral.stickMode).toUInt();
+    uint8_t vBatWarn=(uint8_t)settings.value("vBatWarn",g_eeGeneral.vBatWarn).toUInt();
     QString DisplaySet=settings.value("Display","").toString();
     QString BeeperSet=settings.value("Beeper","").toString();
     QString HapticSet=settings.value("Haptic","").toString();
@@ -988,6 +989,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       }
       g_eeGeneral.currentCalib=currentCalib;
       g_eeGeneral.vBatCalib=vBatCalib;
+      g_eeGeneral.vBatCalib=vBatWarn;
       g_eeGeneral.PPM_Multiplier=PPM_Multiplier;
     } else {
       QMessageBox::critical(this, tr("Warning"), tr("Wrong data in profile, radio calibration was not retrieved"));
@@ -1077,21 +1079,9 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("TrainerCalib",calib);
     settings.setValue("VbatCalib",g_eeGeneral.vBatCalib);
     settings.setValue("currentCalib",g_eeGeneral.currentCalib);
+    settings.setValue("vBatWarn",g_eeGeneral.vBatWarn);
     settings.setValue("PPM_Multiplier",g_eeGeneral.PPM_Multiplier);
     settings.setValue("GSStickMode",g_eeGeneral.stickMode);
-/*  TODO: better divided or all together  ?
-    settings.setValue("LcdType",(g_eeGeneral.optrexDisplay ? 1:0));
-    settings.setValue("Contrast",g_eeGeneral.contrast);
-    settings.setValue("Brightness",g_eeGeneral.backlightBright);
-    settings.setValue("BeeperMode",g_eeGeneral.beeperMode);
-    settings.setValue("BeeperLength",g_eeGeneral.beeperLength);
-    settings.setValue("HapticMode",g_eeGeneral.hapticMode);
-    settings.setValue("HapticStrength",g_eeGeneral.hapticStrength);
-    settings.setValue("HapticLength",g_eeGeneral.hapticLength);
-    settings.setValue("speakerMode",g_eeGeneral.speakerMode);
-    settings.setValue("speakerPitch",g_eeGeneral.speakerPitch);
-    settings.setValue("speakerVolume",g_eeGeneral.speakerVolume);
- */
     settings.setValue("Display",QString("%1%2%3").arg((g_eeGeneral.optrexDisplay ? 1:0), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.contrast, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.backlightBright, 2, 16, QChar('0')));
     settings.setValue("Beeper",QString("%1%2").arg(((uint8_t)g_eeGeneral.beeperMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.beeperLength, 2, 16, QChar('0')));
     settings.setValue("Haptic",QString("%1%2%3").arg(((uint8_t)g_eeGeneral.hapticMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticLength, 2, 16, QChar('0')));

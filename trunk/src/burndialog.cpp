@@ -404,6 +404,8 @@ void burnDialog::on_BurnFlashButton_clicked()
     int8_t currentCalib=(int8_t)settings.value("currentCalib", radioData.generalSettings.currentCalib).toInt();
     int8_t PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", radioData.generalSettings.PPM_Multiplier).toInt();
     uint8_t GSStickMode=(uint8_t)settings.value("GSStickMode", radioData.generalSettings.stickMode).toUInt();
+    uint8_t vBatWarn=(uint8_t)settings.value("vBatWarn",radioData.generalSettings.vBatWarn).toUInt();
+    
     QString DisplaySet=settings.value("Display","").toString();
     QString BeeperSet=settings.value("Beeper","").toString();
     QString HapticSet=settings.value("Haptic","").toString();
@@ -446,6 +448,7 @@ void burnDialog::on_BurnFlashButton_clicked()
     }
     if (ui->patchhw_CB->isChecked()) {
       if ((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6)) {
+        radioData.generalSettings.vBatWarn=vBatWarn;
         radioData.generalSettings.stickMode=GSStickMode;
         uint8_t byte8u;
         int8_t byte8;
