@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>557</height>
+    <height>559</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -139,7 +139,7 @@
    <item row="4" column="1" colspan="3">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="1">
-      <widget class="QPushButton" name="c">
+      <widget class="QPushButton" name="libraryPathButton">
        <property name="text">
         <string>Open Folder</string>
        </property>
@@ -1069,26 +1069,6 @@ Mode 4:
     </layout>
    </item>
   </layout>
-  <zorder>label_2</zorder>
-  <zorder>label</zorder>
-  <zorder>label_8</zorder>
-  <zorder>channelorderCB</zorder>
-  <zorder>locale_QB</zorder>
-  <zorder>label_6</zorder>
-  <zorder>label_14</zorder>
-  <zorder>label_13</zorder>
-  <zorder>startupCheck_companion9x</zorder>
-  <zorder>label_4</zorder>
-  <zorder>showSplash</zorder>
-  <zorder>label_9</zorder>
-  <zorder>stickmodeCB</zorder>
-  <zorder>label_11</zorder>
-  <zorder>splashincludeCB</zorder>
-  <zorder>label_10</zorder>
-  <zorder>historySize</zorder>
-  <zorder>label_5</zorder>
-  <zorder>label_15</zorder>
-  <zorder>label_17</zorder>
  </widget>
  <tabstops>
   <tabstop>locale_QB</tabstop>
@@ -1098,7 +1078,7 @@ Mode 4:
   <tabstop>splashLibraryButton</tabstop>
   <tabstop>SplashSelect</tabstop>
   <tabstop>libraryPath</tabstop>
-  <tabstop>c</tabstop>
+  <tabstop>libraryPathButton</tabstop>
   <tabstop>downloadVerCB</tabstop>
   <tabstop>fw_dnld</tabstop>
   <tabstop>optionCheckBox_1</tabstop>
