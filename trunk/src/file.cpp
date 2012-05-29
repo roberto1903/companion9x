@@ -245,6 +245,8 @@ uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
 // G: Read runlength (RLE) compressed bytes into buf.
 uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
 {
+  memset(buf, 0, i_len);
+
   if (this->eeprom_size == EESIZE_ERSKY9X) {
     int len = std::min((int)i_len, (int)m_size + (int)sizeof(t_eeprom_header) - (int)m_pos);
     if (len > 0) {
