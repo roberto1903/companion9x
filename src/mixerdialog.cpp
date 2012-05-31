@@ -36,7 +36,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       ui->trimCB->addItem(tr("Rud"),1);
       ui->trimCB->addItem(tr("Ele"),2);
       ui->trimCB->addItem(tr("Thr"),3);
-      ui->trimCB->addItem(tr("Ale"),4);      
+      ui->trimCB->addItem(tr("Ail"),4);      
     }
     ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
