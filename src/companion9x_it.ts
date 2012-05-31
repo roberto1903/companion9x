@@ -8,12 +8,12 @@
         <translation type="obsolete">Dialogo</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="74"/>
+        <location filename="expodialog.ui" line="169"/>
         <source>Expo</source>
         <translation>Esponenziale</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="81"/>
+        <location filename="expodialog.ui" line="94"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -26,64 +26,64 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Valore esponenziale&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="51"/>
+        <location filename="expodialog.ui" line="65"/>
         <source>Weight</source>
         <translation>Peso</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="58"/>
+        <location filename="expodialog.ui" line="153"/>
         <source>The value of the weight</source>
         <translation>Valore della corsa</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="101"/>
+        <location filename="expodialog.ui" line="114"/>
         <source>Phase</source>
         <translation>Fase</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="108"/>
+        <location filename="expodialog.ui" line="36"/>
         <source>Phase used by the expo.</source>
         <translation>Fase utilizzata per gli esponenziali.</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="115"/>
+        <location filename="expodialog.ui" line="176"/>
         <source>Switch</source>
         <translation>Interruttore</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="122"/>
+        <location filename="expodialog.ui" line="43"/>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <translation>Interruttore utilizzato per attivare l&apos;esponenziale.
 Se vuoto l&apos;esponenziale è sempre attivo nella fase scelta (o in tutte).</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="130"/>
+        <location filename="expodialog.ui" line="51"/>
         <source>Curve</source>
         <translation>Curva</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="137"/>
+        <location filename="expodialog.ui" line="140"/>
         <source>The curve used by the expo</source>
         <translation>Curva utilizzata per l&apos;esponenziale</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="144"/>
+        <location filename="expodialog.ui" line="58"/>
         <source>Mode</source>
         <translation>Modo</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="152"/>
+        <location filename="expodialog.ui" line="122"/>
         <source>NEG</source>
         <translation>NEG</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="157"/>
+        <location filename="expodialog.ui" line="127"/>
         <source>POS</source>
         <translation>POS</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="162"/>
+        <location filename="expodialog.ui" line="132"/>
         <source>ALL</source>
         <translation>TUTTI</translation>
     </message>
@@ -555,7 +555,7 @@ Mode 4:
     </message>
     <message>
         <location filename="generaledit.ui" line="1394"/>
-        <location filename="generaledit.ui" line="2439"/>
+        <location filename="generaledit.ui" line="2451"/>
         <source>PPM 1</source>
         <translation>PPM 1</translation>
     </message>
@@ -798,19 +798,19 @@ Mode 4:
     </message>
     <message>
         <location filename="generaledit.ui" line="1496"/>
-        <location filename="generaledit.ui" line="2522"/>
+        <location filename="generaledit.ui" line="2534"/>
         <source>PPM 2</source>
         <translation>PPM 2</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1637"/>
-        <location filename="generaledit.ui" line="2529"/>
+        <location filename="generaledit.ui" line="2541"/>
         <source>PPM 3</source>
         <translation>PPM 3</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1681"/>
-        <location filename="generaledit.ui" line="2536"/>
+        <location filename="generaledit.ui" line="2548"/>
         <source>PPM 4</source>
         <translation>PPM 4</translation>
     </message>
@@ -864,98 +864,110 @@ Mode 4:
         <translation>Calibrazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2019"/>
         <source>Negative</source>
-        <translation>Negativo</translation>
+        <translation type="obsolete">Negativo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2026"/>
         <source>Mid</source>
-        <translation>Medio</translation>
+        <translation type="obsolete">Medio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2033"/>
         <source>Positive</source>
-        <translation>Positivo</translation>
+        <translation type="obsolete">Positivo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2040"/>
+        <location filename="generaledit.ui" line="2056"/>
         <source>STICK 1</source>
         <translation>STICK 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2089"/>
+        <location filename="generaledit.ui" line="2105"/>
         <source>STICK 2</source>
         <translation>STICK 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2135"/>
+        <location filename="generaledit.ui" line="2006"/>
         <source>STICK 3</source>
         <translation>STICK 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2181"/>
+        <location filename="generaledit.ui" line="2026"/>
+        <source>Negative span</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2036"/>
+        <source>Mid value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2046"/>
+        <source>Positive span</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2190"/>
         <source>STICK 4</source>
         <translation>STICK 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2230"/>
+        <location filename="generaledit.ui" line="2239"/>
         <source>POT 1</source>
         <translation>POT 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2263"/>
+        <location filename="generaledit.ui" line="2272"/>
         <source>POT 2</source>
         <translation>POT 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2309"/>
+        <location filename="generaledit.ui" line="2318"/>
         <source>POT 3</source>
         <translation>POT 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2355"/>
+        <location filename="generaledit.ui" line="2364"/>
         <source>Battery</source>
         <translation>Batteria</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2365"/>
+        <location filename="generaledit.ui" line="2374"/>
         <source>v</source>
         <translation>v</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2384"/>
+        <location filename="generaledit.ui" line="2393"/>
         <source>PPM Multiplier</source>
         <translation>Moltiplicatore PPM</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2543"/>
+        <location filename="generaledit.ui" line="2578"/>
         <source>Current</source>
         <translation>Corrente</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="993"/>
-        <location filename="generaledit.cpp" line="1034"/>
+        <location filename="generaledit.cpp" line="995"/>
+        <location filename="generaledit.cpp" line="1036"/>
         <source>Warning</source>
         <translation>Avviso</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="993"/>
+        <location filename="generaledit.cpp" line="995"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Dati errati nel profilo, la calibrazione della radio non è stata ripristinata</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1034"/>
+        <location filename="generaledit.cpp" line="1036"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Dati errati nel profilo, i settaggi HW della radio non sono stati ripristinati</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1058"/>
+        <location filename="generaledit.cpp" line="1060"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Volete salvare la calibrazione e i settaggi nel profilo %1&lt;br&gt;sovrascrivendo i settaggi esistenti ?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1101"/>
+        <location filename="generaledit.cpp" line="1091"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Dati di calibrazione e settaggi HW salvati.</translation>
     </message>
@@ -5172,8 +5184,8 @@ m2560 per le schede v4.1</translation>
         <location filename="burndialog.cpp" line="377"/>
         <location filename="burndialog.cpp" line="382"/>
         <location filename="burndialog.cpp" line="391"/>
-        <location filename="burndialog.cpp" line="444"/>
-        <location filename="burndialog.cpp" line="497"/>
+        <location filename="burndialog.cpp" line="446"/>
+        <location filename="burndialog.cpp" line="500"/>
         <source>Warning</source>
         <translation>Avviso</translation>
     </message>
@@ -5212,9 +5224,9 @@ m2560 per le schede v4.1</translation>
         <location filename="burndialog.cpp" line="295"/>
         <location filename="burndialog.cpp" line="318"/>
         <location filename="burndialog.cpp" line="339"/>
-        <location filename="burndialog.cpp" line="511"/>
-        <location filename="burndialog.cpp" line="516"/>
-        <location filename="burndialog.cpp" line="524"/>
+        <location filename="burndialog.cpp" line="514"/>
+        <location filename="burndialog.cpp" line="519"/>
+        <location filename="burndialog.cpp" line="527"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
@@ -5292,25 +5304,25 @@ m2560 per le schede v4.1</translation>
         <translation>Nessun firmware selezionato</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="444"/>
+        <location filename="burndialog.cpp" line="446"/>
         <source>Wrong radio calibration data in profile, eeprom not patched</source>
         <translation>Dati errati nel profilo, la calibrazione della radio non è stata sostituita</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="497"/>
+        <location filename="burndialog.cpp" line="500"/>
         <source>Wrong radio setting data in profile, eeprom not patched</source>
         <translation>Dati errati nel profilo, i settaggi HW della radio non sono stati sostituiti</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="511"/>
-        <location filename="burndialog.cpp" line="516"/>
+        <location filename="burndialog.cpp" line="514"/>
+        <location filename="burndialog.cpp" line="519"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Non posso scrivere il file %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="524"/>
+        <location filename="burndialog.cpp" line="527"/>
         <source>Error writing file %1:
 %2.</source>
         <translation>Errore durante la scrittura del file %1:
@@ -6958,6 +6970,11 @@ Mode 4:
         <location filename="preferencesdialog.cpp" line="382"/>
         <source>Disable heli and templates menus</source>
         <translation>Disabilita supporto elicotteri e modelli</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.cpp" line="383"/>
+        <source>No graphical check boxes and sliders</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="430"/>

@@ -4792,6 +4792,10 @@ Mode 4:
         <source>Profile name is empty, profile slot %1 will we deleted.&lt;br&gt;Are you sure ?</source>
         <translation>Profilnamn sknas. Profilplats %1 kommer att tas bort.&lt;br&gt; Är du säker?</translation>
     </message>
+    <message>
+        <source>No graphical check boxes and sliders</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>printDialog</name>

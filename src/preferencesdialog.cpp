@@ -380,7 +380,7 @@ const char * options[]={
         tr("Imperial units"),
         tr("Support for radio modified with regular speaker"),
         tr("Disable heli and templates menus"),
-        tr("") };
+        tr("No graphical check boxes and sliders") };
   int i;
   for (i=0; options[i]; i++) {
     if (strcmp(options[i],opt)==0) {
