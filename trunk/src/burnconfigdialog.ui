@@ -573,11 +573,6 @@ m2560 for v4.1 boards</string>
        </item>
        <item>
         <property name="text">
-         <string>m328p</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>m2560</string>
         </property>
        </item>
