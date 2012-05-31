@@ -46,7 +46,12 @@ const char * Gruvin9xStableInterface::getName()
 
 const int Gruvin9xStableInterface::getEEpromSize()
 {
-    return EESIZE_STOCK;
+  QSettings settings("companion9x", "companion9x");
+  QString avrMCU = settings.value("mcu", QString("m64")).toString();
+  if (avrMCU==QString("m128")) {
+    return EESIZE_STOCK*2;
+  }
+  return EESIZE_STOCK;
 }
 
 const int Gruvin9xStableInterface::getMaxModels()
@@ -68,7 +73,7 @@ int Gruvin9xStableInterface::save(uint8_t *eeprom, RadioData &radioData)
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, EESIZE_STOCK, 4);
+  efile->EeFsCreate(eeprom, getEEpromSize(), 4);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
@@ -88,7 +93,7 @@ int Gruvin9xStableInterface::save(uint8_t *eeprom, RadioData &radioData)
     }
   }
 
-  return EESIZE_STOCK;
+  return getEEpromSize();
 }
 
 int Gruvin9xStableInterface::getSize(ModelData &model)

@@ -61,8 +61,13 @@ const char * Open9xInterface::getName()
 
 const int Open9xInterface::getEEpromSize()
 {
+  QSettings settings("companion9x", "companion9x");
+  QString avrMCU = settings.value("mcu", QString("m64")).toString();
   switch (board) {
     case BOARD_STOCK:
+      if (avrMCU==QString("m128")) {
+        return EESIZE_STOCK*2;
+      }
       return EESIZE_STOCK;
     case BOARD_GRUVIN9X:
       return EESIZE_GRUVIN9X;
