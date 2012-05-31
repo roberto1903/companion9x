@@ -46,6 +46,11 @@ const char * Er9xInterface::getName()
 
 const int Er9xInterface::getEEpromSize()
 {
+  QSettings settings("companion9x", "companion9x");
+  QString avrMCU = settings.value("mcu", QString("m64")).toString();
+  if (avrMCU==QString("m128")) {
+    return EESIZE_STOCK*2;
+  }
   return EESIZE_STOCK;
 }
 
@@ -110,7 +115,7 @@ bool Er9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying er9x import... ";
 
-  if (size != EESIZE_STOCK) {
+  if (size != getEEpromSize()) {
     std::cout << "wrong size\n";
     return false;
   }
@@ -173,7 +178,7 @@ int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, EESIZE_STOCK, 4);
+  efile->EeFsCreate(eeprom, getEEpromSize(), 4);
 
   Er9xGeneral er9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
@@ -194,7 +199,7 @@ int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
     }
   }
 
-  return EESIZE_STOCK;
+  return getEEpromSize();
 }
 
 int Er9xInterface::getSize(ModelData &model)
@@ -202,8 +207,8 @@ int Er9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_STOCK];
-  efile->EeFsCreate(tmp, EESIZE_STOCK, 4);
+  uint8_t tmp[getEEpromSize()];
+  efile->EeFsCreate(tmp, getEEpromSize(), 4);
 
   Er9xModelData er9xModel(model);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
@@ -215,8 +220,8 @@ int Er9xInterface::getSize(ModelData &model)
 
 int Er9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_STOCK];
-  efile->EeFsCreate(tmp, EESIZE_STOCK, 4);
+  uint8_t tmp[getEEpromSize()];
+  efile->EeFsCreate(tmp, getEEpromSize(), 4);
   
   Er9xGeneral er9xGeneral(settings);
   int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
