@@ -73,7 +73,8 @@
 #define sleep(x) Sleep(x*1000)
 #endif
 
-MainWindow::MainWindow()
+MainWindow::MainWindow():
+downloadDialog_forWait(NULL)
 {
     mdiArea = new QMdiArea;
     mdiArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -181,21 +182,22 @@ void MainWindow::checkForUpdates(bool ignoreSettings, QString & fwId)
         check2done = false;
     }
 
-    if(downloadDialog_forWait!=0)
-        downloadDialog_forWait = 0;
-
-    if(ignoreSettings)
-    {
+    if(ignoreSettings) {
         downloadDialog_forWait = new downloadDialog(this, tr("Checking for updates"));
         downloadDialog_forWait->show();
+    }
+    else {
+      downloadDialog_forWait = NULL; // TODO needed?
     }
 }
 
 void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
 {
     check2done = true;
-    if(check1done && check2done && downloadDialog_forWait)
+    if(check1done && check2done && downloadDialog_forWait) {
         downloadDialog_forWait->close();
+        // TODO delete downloadDialog_forWait?
+    }
 
     QByteArray qba = reply->readAll();
     int i = qba.indexOf("C9X_VERSION");
@@ -343,8 +345,10 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     bool download = false;
     bool ignore = false;
         
-    if(check1done && check2done && downloadDialog_forWait)
+    if(check1done && check2done && downloadDialog_forWait) {
         downloadDialog_forWait->close();
+        // TODO delete downloadDialog_forWait?
+    }
     
     QSettings settings("companion9x", "companion9x");
 
