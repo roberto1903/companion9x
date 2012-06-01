@@ -33,6 +33,7 @@
 
 #define EESIZE_STOCK    2048
 #define EESIZE_GRUVIN9X 4096
+#define EESIZE_AVRMAX   EESIZE_GRUVIN9X
 #define EESIZE_ERSKY9X  (128*4096)
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
