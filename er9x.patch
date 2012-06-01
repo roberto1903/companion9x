@@ -391,8 +391,8 @@ diff -Naur ../er9x/audio.h ./er9x/audio.h
 +
 +#endif // audio_h
 diff -Naur ../er9x/drivers.cpp ./er9x/drivers.cpp
---- ../er9x/drivers.cpp	2012-06-01 16:42:27.168307500 +0200
-+++ ./er9x/drivers.cpp	2012-06-01 18:54:12.986875000 +0200
+--- er9x/drivers.cpp	2012-06-01 16:42:27.168307500 +0200
++++ er9x/drivers.cpp	2012-06-01 18:54:12.986875000 +0200
 @@ -17,9 +17,9 @@
  
  #include "er9x.h"
@@ -405,8 +405,8 @@ diff -Naur ../er9x/drivers.cpp ./er9x/drivers.cpp
  static inline void __attribute__ ((always_inline))
  eeprom_write_byte_cmp (uint8_t dat, uint16_t pointer_eeprom)
 diff -Naur ../er9x/er9x.cpp ./er9x/er9x.cpp
---- ../er9x/er9x.cpp	2012-06-01 16:42:27.183932600 +0200
-+++ ./er9x/er9x.cpp	2012-06-01 18:54:13.018125000 +0200
+--- er9x/er9x.cpp	2012-06-01 16:42:27.183932600 +0200
++++ er9x/er9x.cpp	2012-06-01 18:54:13.018125000 +0200
 @@ -450,7 +450,11 @@
  
  void clearKeyEvents()
@@ -528,8 +528,8 @@ diff -Naur ../er9x/er9x.cpp ./er9x/er9x.cpp
 -
 +#endif
 diff -Naur ../er9x/er9x.h ./er9x/er9x.h
---- ../er9x/er9x.h	2012-06-01 16:42:27.152682400 +0200
-+++ ./er9x/er9x.h	2012-06-01 18:54:13.065000000 +0200
+--- er9x/er9x.h	2012-06-01 16:42:27.152682400 +0200
++++ er9x/er9x.h	2012-06-01 18:54:13.065000000 +0200
 @@ -24,8 +24,15 @@
  ///opt/cross/avr/include/avr/pgmspace.h
  #include <stddef.h>
@@ -563,8 +563,8 @@ diff -Naur ../er9x/er9x.h ./er9x/er9x.h
  #define APM __attribute__(( section(".progmem.data") ))
  #undef PSTR
 diff -Naur ../er9x/file.h ./er9x/file.h
---- ../er9x/file.h	2012-06-01 16:42:27.168307500 +0200
-+++ ./er9x/file.h	2012-06-01 18:54:13.096250000 +0200
+--- er9x/file.h	2012-06-01 16:42:27.168307500 +0200
++++ er9x/file.h	2012-06-01 18:54:13.096250000 +0200
 @@ -75,7 +75,7 @@
    ///read from opened file and decode rlc-coded data
    uint16_t readRlc(uint8_t*buf,uint16_t i_len);
@@ -575,8 +575,8 @@ diff -Naur ../er9x/file.h ./er9x/file.h
  
  #endif
 diff -Naur ../er9x/frsky.cpp ./er9x/frsky.cpp
---- ../er9x/frsky.cpp	2012-06-01 16:42:27.199557700 +0200
-+++ ./er9x/frsky.cpp	2012-06-01 18:54:13.127500000 +0200
+--- er9x/frsky.cpp	2012-06-01 16:42:27.199557700 +0200
++++ er9x/frsky.cpp	2012-06-01 18:54:13.127500000 +0200
 @@ -327,6 +327,7 @@
     a second buffer to receive data while one buffer is being processed (slowly).
  */
@@ -639,9 +639,9 @@ diff -Naur ../er9x/frsky.cpp ./er9x/frsky.cpp
  }
  
  struct FrSky_Q_t FrSky_Queue ;
-diff -Naur ../er9x/menus.cpp ./er9x/menus.cpp
---- ../er9x/menus.cpp	2012-06-01 16:42:27.137057300 +0200
-+++ ./er9x/menus.cpp	2012-06-01 18:54:13.158750000 +0200
+diff -Naur er9x/menus.cpp er9x/menus.cpp
+--- er9x/menus.cpp	2012-06-01 16:42:27.137057300 +0200
++++ er9x/menus.cpp	2012-06-01 18:54:13.158750000 +0200
 @@ -1143,7 +1143,7 @@
  
          //write mix names here
@@ -652,8 +652,8 @@ diff -Naur ../er9x/menus.cpp ./er9x/menus.cpp
      }
  
 diff -Naur ../er9x/menus.h ./er9x/menus.h
---- ../er9x/menus.h	2012-06-01 16:42:27.183932600 +0200
-+++ ./er9x/menus.h	2012-06-01 18:54:13.221250000 +0200
+--- er9x/menus.h	2012-06-01 16:42:27.183932600 +0200
++++ er9x/menus.h	2012-06-01 18:54:13.221250000 +0200
 @@ -77,10 +77,10 @@
  //#define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
  #define TITLE(str)   TITLEP(PSTR(str))
@@ -681,8 +681,8 @@ diff -Naur ../er9x/menus.h ./er9x/menus.h
  
  #define SIMPLE_SUBMENU_NOTITLE(lines_count) \
 diff -Naur ../er9x/myeeprom.h ./er9x/myeeprom.h
---- ../er9x/myeeprom.h	2012-06-01 16:42:27.152682400 +0200
-+++ ./er9x/myeeprom.h	2012-06-01 18:54:13.236875000 +0200
+--- er9x/myeeprom.h	2012-06-01 16:42:27.152682400 +0200
++++ er9x/myeeprom.h	2012-06-01 18:54:13.236875000 +0200
 @@ -44,6 +44,9 @@
  //#define GENERAL_MYVER_r365 4
  //#define GENERAL_MYVER      5
@@ -694,8 +694,8 @@ diff -Naur ../er9x/myeeprom.h ./er9x/myeeprom.h
  // eeprom ver <9 => mdvers == 1
  // eeprom ver >9 => mdvers ==2
 diff -Naur ../er9x/pers.cpp ./er9x/pers.cpp
---- ../er9x/pers.cpp	2012-06-01 16:42:27.168307500 +0200
-+++ ./er9x/pers.cpp	2012-06-01 18:54:13.268125000 +0200
+--- er9x/pers.cpp	2012-06-01 16:42:27.168307500 +0200
++++ er9x/pers.cpp	2012-06-01 18:54:13.268125000 +0200
 @@ -161,7 +161,7 @@
    while((l=theFile.read(buf,15)))
    {
@@ -724,8 +724,8 @@ diff -Naur ../er9x/pers.cpp ./er9x/pers.cpp
          if ( msk & EE_TRIM )
          {
 diff -Naur ../er9x/simpgmspace.cpp ./er9x/simpgmspace.cpp
---- ../er9x/simpgmspace.cpp	1970-01-01 01:00:00.000000000 +0100
-+++ ./er9x/simpgmspace.cpp	2012-06-01 18:54:13.283750000 +0200
+--- er9x/simpgmspace.cpp	1970-01-01 01:00:00.000000000 +0100
++++ er9x/simpgmspace.cpp	2012-06-01 18:54:13.283750000 +0200
 @@ -0,0 +1,142 @@
 +/*
 + * Authors (alphabetical order)
@@ -870,8 +870,8 @@ diff -Naur ../er9x/simpgmspace.cpp ./er9x/simpgmspace.cpp
 +}
 +#endif
 diff -Naur ../er9x/simpgmspace.h ./er9x/simpgmspace.h
---- ../er9x/simpgmspace.h	2012-06-01 16:42:27.199557700 +0200
-+++ ./er9x/simpgmspace.h	2012-06-01 18:54:13.283750000 +0200
+--- er9x/simpgmspace.h	2012-06-01 16:42:27.199557700 +0200
++++ er9x/simpgmspace.h	2012-06-01 18:54:13.283750000 +0200
 @@ -1,7 +1,12 @@
  /*
 - * Author - Erez Raviv <erezraviv@gmail.com>
