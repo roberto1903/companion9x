@@ -356,7 +356,7 @@ bool Ersky9xInterface::loadGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * 
       QString ds = n.toCDATASection().data();
       QByteArray ba = QByteArray::fromBase64(ds.toAscii());
       const char * data = ba.data();
-      memcpy(tgen, data, std::min((unsigned int)ba.size(), sizeof(Ersky9xGeneral)));
+      memcpy(tgen, data, std::min((unsigned int)ba.size(), (unsigned int)sizeof(Ersky9xGeneral)));
       break;
     }
     n = n.nextSibling();
@@ -393,7 +393,7 @@ bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData * 
       QString ds = n.toCDATASection().data();
       QByteArray ba = QByteArray::fromBase64(ds.toAscii());
       const char * data = ba.data();
-      memcpy(tmod, data, std::min((unsigned int)ba.size(), sizeof(Ersky9xModelData)));
+      memcpy(tmod, data, std::min((unsigned int)ba.size(), (unsigned int)sizeof(Ersky9xModelData)));
       break;
     }
     n = n.nextSibling();
