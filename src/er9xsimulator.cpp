@@ -17,6 +17,8 @@
 #include "er9xsimulator.h"
 #include "er9xinterface.h"
 
+#define SIMU
+#define SIMU_EXCEPTIONS
 #define FRSKY
 #define FRSKY_HUB
 
@@ -25,6 +27,8 @@ namespace Er9x {
 #include "simulatorimport.h"
 extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);
+#include "./er9x/simpgmspace.h"
+#include "./er9x/audio.h"
 }
 
 using namespace Er9x;
@@ -36,6 +40,8 @@ Er9xSimulator::Er9xSimulator(Er9xInterface * er9xInterface):
 
 bool Er9xSimulator::timer10ms()
 {
+  AUDIO_DRIVER();  // the tone generator
+  AUDIO_HEARTBEAT();  // the queue processing
 #define TIMER10MS_IMPORT
 #include "simulatorimport.h"
 }
@@ -67,6 +73,7 @@ void Er9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
+  outputs.beep = audio.toneTimeLeft;
 }
 
 void Er9xSimulator::setValues(TxInputs &inputs)
