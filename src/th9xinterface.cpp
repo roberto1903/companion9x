@@ -151,7 +151,7 @@ int Th9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[getEEpromSize()];
+  uint8_t tmp[EESIZE_AVRMAX];
   efile->EeFsCreate(tmp, getEEpromSize(), 4);
 
   Th9xModelData th9xModel(model);
@@ -164,7 +164,7 @@ int Th9xInterface::getSize(ModelData &model)
 
 int Th9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[getEEpromSize()];
+  uint8_t tmp[EESIZE_AVRMAX];
   efile->EeFsCreate(tmp, getEEpromSize(), 4);
 
   Th9xGeneral th9xGeneral(settings);

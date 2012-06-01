@@ -207,7 +207,7 @@ int Er9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[getEEpromSize()];
+  uint8_t tmp[EESIZE_AVRMAX];
   efile->EeFsCreate(tmp, getEEpromSize(), 4);
 
   Er9xModelData er9xModel(model);
@@ -220,7 +220,7 @@ int Er9xInterface::getSize(ModelData &model)
 
 int Er9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[getEEpromSize()];
+  uint8_t tmp[EESIZE_AVRMAX];
   efile->EeFsCreate(tmp, getEEpromSize(), 4);
   
   Er9xGeneral er9xGeneral(settings);
