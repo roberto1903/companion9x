@@ -293,7 +293,6 @@ QString RawSwitch::toString()
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
-      // TODO assert(index != 0);
       return index > 0 ? switches[index-1] : QString("!") + switches[-index-1];
     case SWITCH_TYPE_VIRTUAL:
     {

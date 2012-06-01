@@ -364,7 +364,7 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t 
   //else write rb bytes
   for (i=0; i<=i_len; i++)
   {
-    bool nst0 = buf[i] == 0;                   
+    bool nst0 = (buf[i] == 0);
     if (nst0 && !state0 && buf[i+1]!=0) nst0 = false ;
     if (nst0 != state0 || cnt>=0x7f || i==i_len) {
       if (state0) {
@@ -424,7 +424,7 @@ uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t 
     //else write rb bytes
     for (i=1; 1; i++) { // !! laeuft ein byte zu weit !!
       bool cur0 = buf[i] == 0;
-      if (cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)|| i==i_len){
+      if (i==i_len || cur0 != run0 || cnt==0x3f || (cnt0 && cnt==0xf)) {
         if (run0){
           assert(cnt0==0);
           if (cnt<8 && i!=i_len)

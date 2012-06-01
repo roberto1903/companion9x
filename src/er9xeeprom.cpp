@@ -9,6 +9,14 @@ int8_t er9xFromSwitch(const RawSwitch & sw)
       return sw.index;
     case SWITCH_TYPE_VIRTUAL:
       return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    case SWITCH_TYPE_ON:
+      return 22;
+    case SWITCH_TYPE_OFF:
+      return -22;
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      return sw.index > 0 ? (22 + sw.index) : (-22 + sw.index);
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+      return sw.index > 0 ? (31 + sw.index) : (-31 + sw.index);
     default:
       return 0;
   }
@@ -16,12 +24,21 @@ int8_t er9xFromSwitch(const RawSwitch & sw)
 
 RawSwitch er9xToSwitch(int8_t sw)
 {
-  if (sw == 0)
+  uint8_t swa = abs(sw);
+  if (swa == 0)
     return RawSwitch(SWITCH_TYPE_NONE);
-  else if (sw <= 9)
+  else if (swa <= 9)
     return RawSwitch(SWITCH_TYPE_SWITCH, sw);
-  else
+  else if (swa <= 21)
     return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+  else if (sw == 22)
+    return RawSwitch(SWITCH_TYPE_ON);
+  else if (sw == -22)
+    return RawSwitch(SWITCH_TYPE_OFF);
+  else if (swa <= 22+9)
+    return RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, sw > 0 ? sw-22 : sw+22);
+  else
+    return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-22-9 : sw+22+9);
 }
 
 t_Er9xTrainerMix::t_Er9xTrainerMix()

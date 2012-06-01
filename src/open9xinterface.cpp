@@ -376,7 +376,8 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
 
   Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
+  memset(&open9xGeneral, 0, sizeof(Open9xGeneralData));
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
   if(sz != sizeof(open9xGeneral)) {
     return -1;
   }
