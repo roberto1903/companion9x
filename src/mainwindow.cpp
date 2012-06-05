@@ -998,6 +998,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
+        sleep(1);
       }
 
       QStringList str = GetSendFlashCommand(fileName);
