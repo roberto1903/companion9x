@@ -54,6 +54,11 @@
 #include "printdialog.h"
 #include "burndialog.h"
 
+#if defined WIN32 || !defined __GNUC__
+#include <windows.h>
+#define sleep(x) Sleep(x*1000)
+#endif
+
 MdiChild::MdiChild():
   QWidget(),
   ui(new Ui::mdiChild),
@@ -477,6 +482,7 @@ void MdiChild::burnTo()  // write to Tx
         avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
+        sleep(1);
       }
       int oldrev=((MainWindow *)this->parent())->getEpromVersion(tempFile);
       QString tempFlash=tempDir + "/flash.hex";
@@ -484,6 +490,7 @@ void MdiChild::burnTo()  // write to Tx
       avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Read Flash From Tx");
       ad->setWindowIcon(QIcon(":/images/read_flash.png"));
       ad->exec();
+      sleep(1);
       QString restoreFile = tempDir + "/compat.bin";
       if (!((MainWindow *)this->parent())->convertEEPROM(tempFile, restoreFile, tempFlash)) {
        int ret = QMessageBox::question(this, "Error", tr("Cannot check eeprom compatibility! Continue anyway?") ,
@@ -511,6 +518,7 @@ void MdiChild::burnTo()  // write to Tx
         avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
+        sleep(1);
       }
     }
     QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
