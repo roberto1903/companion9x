@@ -45,7 +45,7 @@ namespace Open9xV4 {
 #include "../open9x/drivers.cpp"
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/templates.cpp"
-#include "../open9x/o9xstrings.cpp"
+#include "../open9x/translations.cpp"
 #include "../open9x/stock/audio.cpp"
 #include "../open9x/frsky.cpp"
 #include "../open9x/haptic.cpp"
