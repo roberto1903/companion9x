@@ -495,14 +495,16 @@ t_Open9xV4FuncSwData_v203::t_Open9xV4FuncSwData_v203(FuncSwData &c9x)
       func = 22;
     else if (c9x.func == FuncPlayHaptic)
       func = 23;
-    else if (c9x.func == FuncPlaySomo)
-      func = 24;
     else if (c9x.func == FuncReset)
-      func = 25;
+      func = 24;
     else if (c9x.func == FuncVario)
+      func = 25;
+    else if (c9x.func == FuncPlayPrompt)
       func = 26;
-    else if (c9x.func == FuncLogs)
+    else if (c9x.func == FuncPlayValue)
       func = 27;
+    else if (c9x.func == FuncLogs)
+      func = 28;
     else {
       swtch = 0;
       func = 0;
@@ -530,12 +532,14 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
     else if (func == 23)
       c9x.func = FuncPlayHaptic;
     else if (func == 24)
-      c9x.func = FuncPlaySomo;
-    else if (func == 25)
       c9x.func = FuncReset;
-    else if (func == 26)
+    else if (func == 25)
       c9x.func = FuncVario;
+    else if (func == 26)
+      c9x.func = FuncPlayPrompt;
     else if (func == 27)
+      c9x.func = FuncPlayValue;
+    else if (func == 28)
       c9x.func = FuncLogs;
     else
       c9x.clear();
