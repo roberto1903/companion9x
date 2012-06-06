@@ -765,6 +765,7 @@ void MainWindow::burnExtenalToEEPROM() {
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
+        sleep(1);
       }
       int oldrev = getEpromVersion(fileName);
       QString tempDir = QDir::tempPath();
@@ -773,6 +774,7 @@ void MainWindow::burnExtenalToEEPROM() {
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
       ad->setWindowIcon(QIcon(":/images/read_flash.png"));
       ad->exec();
+      sleep(1);
       QString restoreFile = tempDir + "/compat.bin";
       if (!convertEEPROM(fileName, restoreFile, tempFlash)) {
        int ret = QMessageBox::question(this, "Error", tr("Cannot check eeprom compatibility! Continue anyway?") ,
@@ -800,6 +802,7 @@ void MainWindow::burnExtenalToEEPROM() {
         avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
+        sleep(1);
       }
     }
     QStringList str = GetSendEEpromCommand(fileName);
