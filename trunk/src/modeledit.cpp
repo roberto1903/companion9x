@@ -349,6 +349,10 @@ void ModelEdit::tabModelEditSetup()
     connect(ui->swwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
     connect(ui->swwarn4_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
   }
+  int ppmmax=GetEepromInterface()->getCapability(PPMFrameLength);
+  if (ppmmax>0) {
+    ui->ppmFrameLengthDSB->setMaximum(ppmmax);
+  }
   if (!GetEepromInterface()->getCapability(InstantTrimSW)) {
     ui->instantTrim_label->hide();
     ui->instantTrim_CB->setDisabled(true);

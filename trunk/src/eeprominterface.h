@@ -727,6 +727,7 @@ enum Capability {
  NoThrExpo,
  OptrexDisplay,
  PPMExtCtrl,
+ PPMFrameLength,
  MixFmTrim,
  gsSwitchMask,
  pmSwitchMask,
