@@ -390,7 +390,9 @@ int Open9xInterface::getCapability(const Capability capability)
     case OwnerName:
       return 0;
     case PPMExtCtrl:
-      return 1;      
+      return 1;
+    case PPMFrameLength:
+      return 40;
     case FlightPhases:
       if (board == BOARD_ERSKY9X)
         return O9X_ARM_MAX_PHASES;
