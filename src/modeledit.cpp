@@ -134,6 +134,7 @@ float ModelEdit::getBarValue(int barId, int Value)
       }
       break;
     case 7:
+    case 14:
       return (20*Value);
       break;
     case 8:
@@ -153,7 +154,7 @@ float ModelEdit::getBarValue(int barId, int Value)
     case 13:
       return (40*Value);
       break;
-    case 14:
+    case 15:
       return (Value/10.0);
       break;
     default:
@@ -180,6 +181,7 @@ float ModelEdit::getBarStep(int barId)
       return 5;
       break;  
     case 7:
+    case 14:
       return 20;
       break;
     case 8:
@@ -195,7 +197,7 @@ float ModelEdit::getBarStep(int barId)
     case 13:
       return 40;
       break;
-    case 14:
+    case 15:
       return 0.1;
       break;
     default:
@@ -1511,8 +1513,8 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
-  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX"};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","Cell"};
+  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX",NULL};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell",NULL};
   
   QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   QDoubleSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
@@ -1631,7 +1633,7 @@ void ModelEdit::tabTelemetry()
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
   ui->frskyUnitsCB->setCurrentIndex(g_model.frsky.imperial);
   ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
-  for(int i=0; i<7;i++) {
+  for(int i=0; StdTelBar[i];i++) {
     for (int j=0;j<4;j++) {
       barsCB[j]->addItem(StdTelBar[i]);
     }
@@ -1642,7 +1644,7 @@ void ModelEdit::tabTelemetry()
     }
   }
   if (g_model.frsky.usrProto==1) {
-    for(int i=0; i<7;i++) {
+    for(int i=0; FrSkyTelBar[i];i++) {
       for (int j=0;j<4;j++) {
         barsCB[j]->addItem(FrSkyTelBar[i]);
       }
@@ -2187,8 +2189,8 @@ void ModelEdit::on_frskyBladesCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
 {
   if (telemetryLock) return;
-  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX"};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","Cell"};
+  const char *  StdTelBar[]={"---","Tmr1","Tmr2","A1","A2","TX","RX",NULL};
+  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell",NULL};
   int b1=ui->telBarCB_1->currentIndex();
   int b2=ui->telBarCB_2->currentIndex();
   int b3=ui->telBarCB_3->currentIndex();
@@ -2199,7 +2201,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   ui->telBarCB_2->clear();
   ui->telBarCB_3->clear();
   ui->telBarCB_4->clear();
-  for(int i=0; i<7;i++) {
+  for(int i=0; StdTelBar[i];i++) {
     ui->telBarCB_1->addItem(StdTelBar[i]);
     ui->telBarCB_2->addItem(StdTelBar[i]);
     ui->telBarCB_3->addItem(StdTelBar[i]);
@@ -2212,7 +2214,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
     ui->telBarCB_4->addItem("Alt");
   }
   if (index==1) {
-    for(int i=0; i<7;i++) {
+    for(int i=0; FrSkyTelBar[i];i++) {
       ui->telBarCB_1->addItem(FrSkyTelBar[i]);
       ui->telBarCB_2->addItem(FrSkyTelBar[i]);
       ui->telBarCB_3->addItem(FrSkyTelBar[i]);
