@@ -102,7 +102,8 @@ SET( companion9x_SRCS
      open9xarmimport.cpp
      ersky9xeeprom.cpp
      ersky9xinterface.cpp
-     # ersky9ximport.cpp
+     ersky9ximport.cpp
+     ersky9xsimulator.cpp
      node.cpp
      edge.cpp
      helpers.cpp

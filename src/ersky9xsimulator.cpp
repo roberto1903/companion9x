@@ -17,13 +17,17 @@
 #include "ersky9xsimulator.h"
 #include "ersky9xinterface.h"
 
+#define PCBARM
 #define REVB
 
 namespace Ersky9x {
+#include "../ersky9x/AT91SAM3S4.h"
+#include "../ersky9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
 extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);
+void setKeys(bool *keys);
 }
 
 using namespace Ersky9x;
@@ -53,13 +57,15 @@ bool Ersky9xSimulator::lcdChanged(bool & lightEnable)
 
 void Ersky9xSimulator::start(RadioData &radioData, bool tests)
 {
-  ersky9xInterface->save(&eeprom[0], radioData);
+  ersky9xInterface->save(Ersky9x::eeprom, radioData);
+  StartEepromThread(NULL);
   StartMainThread(tests);
 }
 
 void Ersky9xSimulator::stop()
 {
   StopMainThread();
+  StopEepromThread();
 }
 
 void Ersky9xSimulator::getValues(TxOutputs &outputs)

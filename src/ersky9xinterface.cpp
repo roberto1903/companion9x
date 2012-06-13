@@ -288,7 +288,7 @@ int Ersky9xInterface::isAvailable(Protocol prot)
 
 SimulatorInterface * Ersky9xInterface::getSimulator()
 {
-  return NULL;
+  return new Ersky9xSimulator(this);
 }
 
 
