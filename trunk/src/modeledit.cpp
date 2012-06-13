@@ -1788,6 +1788,7 @@ void ModelEdit::tabTemplates() {
   ui->templateList->addItem("Heli Setup with gyro gain control (Futaba's channel assignment style)");
   ui->templateList->addItem("Gyro gain control (Futaba's channel assignment style)");
   ui->templateList->addItem("Servo Test");
+  ui->templateList->addItem("MultiCopter");
 }
 
 void ModelEdit::on_modelNameLE_editingFinished()
@@ -4089,6 +4090,17 @@ void ModelEdit::applyTemplate(uint8_t idx)
     // redraw switches tab
     updateSwitchesTab();
   }
+  
+  //MultiCopter
+  if(idx==j++) {
+    if (md->destCh)
+      clearMixes();
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=50; md->swtch=RawSwitch(); //CH1 AIL
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-50; md->swtch=RawSwitch(); //CH2 ELE
+    md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(); //CH3 THR
+    md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch(); //CH4 RUD
+  }
+
 }
 
 void ModelEdit::ControlCurveSignal(bool flag)
