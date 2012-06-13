@@ -212,7 +212,9 @@ for (int i=0; i<12; i++)
 #ifdef LCDCHANGED_IMPORT
 #undef LCDCHANGED_IMPORT
 if (lcd_refresh) {
-#ifdef PCBV4
+#if defined(PCBARM)
+  lightEnable = (PWM->PWM_CH_NUM[0].PWM_CDTY != 100);
+#elif defined(PCBV4)
   lightEnable = (portc & (1<<OUT_C_LIGHT));
 #else
   lightEnable = (portb & (1<<OUT_B_LIGHT));
