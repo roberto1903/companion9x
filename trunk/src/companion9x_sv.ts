@@ -348,19 +348,19 @@ Mode 4:
     </message>
     <message>
         <source>Mode 1 (RUD ELE THR AIL)</source>
-        <translation>Mode 1 (ROD HJD GAS SKE)</translation>
+        <translation>Mode 1 (ROD HÖJ GAS SKE)</translation>
     </message>
     <message>
         <source>Mode 2 (RUD THR ELE AIL)</source>
-        <translation>Mode 2 (ROD GAS HJD SKE)</translation>
+        <translation>Mode 2 (ROD GAS HÖJ SKE)</translation>
     </message>
     <message>
         <source>Mode 3 (AIL ELE THR RUD)</source>
-        <translation>Mode 3 (SKE HJD GAS ROD)</translation>
+        <translation>Mode 3 (SKE HÖJ GAS ROD)</translation>
     </message>
     <message>
         <source>Mode 4 (AIL THR ELE RUD)</source>
-        <translation>Mode 4 (SKE GAS HJD ROD)</translation>
+        <translation>Mode 4 (SKE GAS HÖJ ROD)</translation>
     </message>
     <message>
         <source>Beeper Mode</source>
@@ -488,7 +488,7 @@ Mode 4:
     </message>
     <message>
         <source>ELE</source>
-        <translation>HJD</translation>
+        <translation>HÖJ</translation>
     </message>
     <message>
         <source>AIL</source>
@@ -1608,14 +1608,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ele</source>
-        <translation>Hjd</translation>
+        <translation>Höj</translation>
     </message>
     <message>
         <source>Thr</source>
         <translation>Gas</translation>
     </message>
     <message>
-        <source>Ale</source>
+        <source>Ail</source>
         <translation>Ske</translation>
     </message>
 </context>
@@ -1931,7 +1931,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ELE</source>
-        <translation>HJD</translation>
+        <translation>HÖJ</translation>
     </message>
     <message>
         <source>THR</source>
@@ -2912,7 +2912,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Trainer ELE</source>
-        <translation>Trainder HJD</translation>
+        <translation>Trainder HÖJ</translation>
     </message>
     <message>
         <source>Trainer THR</source>
@@ -2931,10 +2931,6 @@ p, li { white-space: pre-wrap; }
         <translation>Spela ljud</translation>
     </message>
     <message>
-        <source>Play Somo</source>
-        <translation>Spela SOMO</translation>
-    </message>
-    <message>
         <source>Start Logs</source>
         <translation>Starta loggning</translation>
     </message>
@@ -2948,7 +2944,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ele</source>
-        <translation>Hjd</translation>
+        <translation>Höj</translation>
     </message>
     <message>
         <source>Thr</source>
@@ -3032,7 +3028,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Alt</source>
-        <translation>Hjd</translation>
+        <translation>Höj</translation>
     </message>
     <message>
         <source>Rpm</source>
@@ -3052,7 +3048,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>GPS Alt</source>
-        <translation>GPS Hjd</translation>
+        <translation>GPS Höj</translation>
     </message>
     <message>
         <source>Cell</source>
@@ -3084,7 +3080,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ELE</source>
-        <translation>HJD</translation>
+        <translation>HÖJ</translation>
     </message>
     <message>
         <source>ID0</source>
@@ -3217,6 +3213,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Telemetry</source>
         <translation>Telemetri</translation>
+    </message>
+    <message>
+        <source>Play Prompt</source>
+        <translation>Spela Meddelande</translation>
+    </message>
+    <message>
+        <source>Play Value</source>
+        <translation>Spela Värde</translation>
     </message>
 </context>
 <context>
@@ -3399,10 +3403,6 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>m128</source>
         <translation>m128</translation>
-    </message>
-    <message>
-        <source>m328p</source>
-        <translation>m328p</translation>
     </message>
     <message>
         <source>m2560</source>
@@ -4529,19 +4529,19 @@ Mode 4:
     </message>
     <message>
         <source>Mode 1 (RUD ELE THR AIL)</source>
-        <translation>Mode 1 (ROD HJD GAS SKE)</translation>
+        <translation>Mode 1 (ROD HÖJ GAS SKE)</translation>
     </message>
     <message>
         <source>Mode 2 (RUD THR ELE AIL)</source>
-        <translation>Mode 2 (ROD GAS HJD SKE)</translation>
+        <translation>Mode 2 (ROD GAS HÖJ SKE)</translation>
     </message>
     <message>
         <source>Mode 3 (AIL ELE THR RUD)</source>
-        <translation>Mode 3 (SKE HJD GAS ROD)</translation>
+        <translation>Mode 3 (SKE HÖJ GAS ROD)</translation>
     </message>
     <message>
         <source>Mode 4 (AIL THR ELE RUD)</source>
-        <translation>Mode 4 (SKE GAS HJD ROD)</translation>
+        <translation>Mode 4 (SKE GAS HÖJ ROD)</translation>
     </message>
     <message>
         <source>Firmware</source>
@@ -4794,7 +4794,7 @@ Mode 4:
     </message>
     <message>
         <source>No graphical check boxes and sliders</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd inte grafiska kontroller</translation>
     </message>
 </context>
 <context>
@@ -5229,7 +5229,7 @@ Mode 4:
     </message>
     <message>
         <source>ELE</source>
-        <translation>HJD</translation>
+        <translation>HÖJ</translation>
     </message>
     <message>
         <source>AIL</source>
