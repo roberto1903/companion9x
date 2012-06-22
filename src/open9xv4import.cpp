@@ -14,6 +14,7 @@
 #define AUDIO
 #define HAPTIC
 #define AUTOSWITCH
+#define GRAPHICS
 
 #undef min
 #undef max
