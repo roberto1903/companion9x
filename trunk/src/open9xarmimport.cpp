@@ -18,6 +18,7 @@
 #define DSM2
 #define DSM2_PPM
 #define AUTOSWITCH
+#define GRAPHICS
 #undef min
 #undef max
 

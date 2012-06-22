@@ -13,6 +13,7 @@
 #define VARIO
 #define HAPTIC
 #define AUTOSWITCH
+#define GRAPHICS
 
 #undef min
 #undef max
