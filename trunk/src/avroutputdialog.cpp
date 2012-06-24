@@ -285,6 +285,7 @@ void avrOutputDialog::doFinished(int code=0)
         }
         else
         {
+            ui->progressBar->setValue(100);
             QMessageBox::information(this, "companion9x", getProgrammer() + tr(" finished correctly"));
             accept();
         }
