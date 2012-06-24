@@ -1094,7 +1094,7 @@ t_Open9xTimerData_v202::operator TimerData ()
 {
   TimerData c9x;
   if (mode < 0)
-    c9x.mode = TimerMode(mode-1-TMR_VAROFS);
+    c9x.mode = TimerMode(mode+1-TMR_VAROFS);
   else if (mode <= 1)
     c9x.mode = TimerMode(mode);
   else if (mode <= 4)
