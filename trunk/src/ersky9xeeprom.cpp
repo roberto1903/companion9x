@@ -234,7 +234,7 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = c9x.srcRaw.index+1;
+    swtch = c9x.srcRaw.index;
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
     srcRaw = 10 + c9x.srcRaw.index;
@@ -286,11 +286,11 @@ t_Ersky9xMixData::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, -swtch).toValue());
       c9x.weight = -weight;
     }
     else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch - 1);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, swtch).toValue());
     }
     c9x.swtch = er9xToSwitch(mltpx == MLTPX_REP ? swtch : 0);
   }
