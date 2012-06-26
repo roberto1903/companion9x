@@ -541,7 +541,7 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn,
   trimSlider->setRange(-trimsMax, +trimsMax);
   trimVal->setRange(-trimsMax, +trimsMax);
   trimVal->setValue(trim);
-
+  trimSlider->setValue(trim);
   if (chn == 2 && g_eeGeneral.throttleReversed)
     trimSlider->setInvertedAppearance(true);
 }
