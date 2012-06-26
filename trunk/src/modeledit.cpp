@@ -1633,6 +1633,7 @@ void ModelEdit::tabTelemetry()
   ui->frskyProtoCB->setCurrentIndex(g_model.frsky.usrProto);
   ui->frskyUnitsCB->setCurrentIndex(g_model.frsky.imperial);
   ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
+  ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
   for(int i=0; StdTelBar[i];i++) {
     for (int j=0;j<4;j++) {
       barsCB[j]->addItem(StdTelBar[i]);
@@ -2184,6 +2185,12 @@ void ModelEdit::on_frskyUnitsCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyBladesCB_currentIndexChanged(int index)
 {
   g_model.frsky.blades=index;
+  updateSettings();
+}
+
+void ModelEdit::on_frskyCurrentCB_currentIndexChanged(int index)
+{
+  g_model.frsky.currentSource=index;
   updateSettings();
 }
 

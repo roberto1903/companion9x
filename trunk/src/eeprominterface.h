@@ -565,6 +565,7 @@ class FrSkyData {
     uint8_t usrProto;
     uint8_t imperial;
     uint8_t blades;
+    uint8_t currentSource;
     uint8_t FrSkyGpsAlt;
     uint8_t csField[8];
     FrSkyBarData bars[4];

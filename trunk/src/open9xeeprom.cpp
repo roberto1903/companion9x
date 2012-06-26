@@ -1375,6 +1375,7 @@ t_Open9xFrSkyData_v208::operator FrSkyData ()
   c9x.usrProto = usrProto;
   c9x.imperial = imperial;
   c9x.blades = blades;
+  c9x.currentSource=currentSource;
   for (int i=0; i<4; i++)
     c9x.bars[i] = bars[i];
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
@@ -1390,6 +1391,7 @@ t_Open9xFrSkyData_v208::t_Open9xFrSkyData_v208(FrSkyData &c9x)
   usrProto = c9x.usrProto;
   imperial = c9x.imperial;
   blades = c9x.blades;
+  currentSource=c9x.currentSource;
   for (int i=0; i<4; i++)
     bars[i] = c9x.bars[i];
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
