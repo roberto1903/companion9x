@@ -402,7 +402,7 @@ PACK(typedef struct t_Open9xFrSkyData_v208 {
   uint8_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
   uint8_t imperial:1;
   uint8_t blades:2;
-  uint8_t spare:2;
+  uint8_t currentSource:2;
   Open9xFrSkyBarData_v204 bars[4];
   Open9xFrSkyRSSIAlarm rssiAlarms[2];
 

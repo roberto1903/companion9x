@@ -245,6 +245,7 @@ private slots:
     void on_frskyProtoCB_currentIndexChanged(int index);
     void on_frskyUnitsCB_currentIndexChanged(int index);
     void on_frskyBladesCB_currentIndexChanged(int index);
+    void on_frskyCurrentCB_currentIndexChanged(int index);
     void on_rssiAlarm1CB_currentIndexChanged(int index);
     void on_rssiAlarm2CB_currentIndexChanged(int index);
     void on_rssiAlarm1SB_editingFinished();
