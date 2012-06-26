@@ -14,7 +14,7 @@ QString getStickStr(int index)
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
-  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,2,2,1,1,1,1,1,1,1,1};
+  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1,1,1};
   b->clear();
   for (int i = 0; i < 35-(last ? 2 :0); i++) {
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
