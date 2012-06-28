@@ -399,8 +399,8 @@ PACK(typedef struct t_Open9xFrSkyData_v205 {
 
 PACK(typedef struct t_Open9xFrSkyData_v208 {
   Open9xFrSkyChannelData_v208 channels[2];
-  uint8_t usrProto:3;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
-  uint8_t imperial:1;
+  uint8_t usrProto:2;            // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t voltsSource:2;
   uint8_t blades:2;
   uint8_t currentSource:2;
   Open9xFrSkyBarData_v204 bars[4];
