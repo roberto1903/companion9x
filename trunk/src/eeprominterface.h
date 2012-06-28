@@ -442,6 +442,7 @@ class MixData {
     uint8_t enableFmTrim;
     int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
     int8_t  sOffset;
+    char name[10];
 
     void clear() { memset(this, 0, sizeof(MixData)); }
 };
@@ -565,6 +566,7 @@ class FrSkyData {
     uint8_t usrProto;
     uint8_t imperial;
     uint8_t blades;
+    uint8_t voltsSource;
     uint8_t currentSource;
     uint8_t FrSkyGpsAlt;
     uint8_t csField[8];

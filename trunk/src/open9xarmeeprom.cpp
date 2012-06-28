@@ -524,6 +524,108 @@ t_Open9xArmMixData_v209::operator MixData ()
   return c9x;
 }
 
+t_Open9xArmMixData_v210::t_Open9xArmMixData_v210(MixData &c9x)
+{
+  if (c9x.destCh) {
+    destCh = c9x.destCh-1;
+    mixWarn = c9x.mixWarn;
+    swtch = open9xArmFromSwitch(c9x.swtch);
+    if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+      srcRaw = 0;
+      swtch = 0;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+      srcRaw = 1 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 8;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
+      srcRaw = 9 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 13;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
+      srcRaw = 13 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM + c9x.srcRaw.index;
+    }
+    weight = c9x.weight;
+    differential = c9x.differential/2;
+    curve = c9x.curve;
+    delayUp = c9x.delayUp;
+    delayDown = c9x.delayDown;
+    speedUp = c9x.speedUp;
+    speedDown = c9x.speedDown;
+    carryTrim = c9x.carryTrim;
+    mltpx = (MltpxValue)c9x.mltpx;
+    phase = c9x.phase;
+    sOffset = c9x.sOffset;
+    setEEPROMZString(name, c9x.name, sizeof(name));
+  }
+  else {
+    memset(this, 0, sizeof(t_Open9xArmMixData_v210));
+  }
+}
+
+t_Open9xArmMixData_v210::operator MixData ()
+{
+  MixData c9x;
+  if (srcRaw) {
+    c9x.destCh = destCh+1;
+    if (srcRaw == 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+    }
+    else if (srcRaw <= 7) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+    }
+    else if (srcRaw <= 11) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-8);
+    }
+    else if (srcRaw == 12) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (srcRaw == 13) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-13).toValue());
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-14-9-O9X_ARM_NUM_CSW);
+    }
+    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC);
+    }
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
+    }
+    c9x.weight = weight;
+    c9x.differential = differential*2;
+    c9x.swtch = open9xArmToSwitch(swtch);
+    c9x.curve = curve;
+    c9x.delayUp = delayUp;
+    c9x.delayDown = delayDown;
+    c9x.speedUp = speedUp;
+    c9x.speedDown = speedDown;
+    c9x.carryTrim = carryTrim;
+    c9x.mltpx = (MltpxValue)mltpx;
+    c9x.mixWarn = mixWarn;
+    c9x.phase = phase;
+    c9x.sOffset = sOffset;
+    getEEPROMZString(c9x.name, name, sizeof(name));
+  }
+  return c9x;
+}
+
 t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
 {
   func = c9x.func;
@@ -610,7 +712,7 @@ t_Open9xArmCustomSwData_v209::operator CustomSwData ()
   return c9x;
 }
 
-t_Open9xFuncSwData_v208::t_Open9xFuncSwData_v208(FuncSwData &c9x)
+t_Open9xArmFuncSwData_v208::t_Open9xArmFuncSwData_v208(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
   if (c9x.func <= FuncSafetyCh16) {
@@ -622,7 +724,7 @@ t_Open9xFuncSwData_v208::t_Open9xFuncSwData_v208(FuncSwData &c9x)
   func = c9x.func;  
 }
 
-t_Open9xFuncSwData_v208::operator FuncSwData ()
+t_Open9xArmFuncSwData_v208::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xArmToSwitch(swtch);
@@ -632,6 +734,34 @@ t_Open9xFuncSwData_v208::operator FuncSwData ()
     c9x.param = (param>>1)<<1;
   } else {
     c9x.param = param;
+  }
+  return c9x;
+}
+
+t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
+{
+  swtch = open9xArmFromSwitch(c9x.swtch);
+  if (c9x.func <= FuncSafetyCh16) {
+    param.value = ((c9x.param>>1)<<1);
+    param.value |=(c9x.enabled & 0x01);
+  }
+  else {
+    param.value = c9x.param;
+  }
+  func = c9x.func;
+}
+
+t_Open9xArmFuncSwData_v210::operator FuncSwData ()
+{
+  FuncSwData c9x;
+  c9x.swtch = open9xArmToSwitch(swtch);
+  c9x.func = (AssignFunc)(func);
+  if (c9x.func <= FuncSafetyCh16) {
+    c9x.enabled = param.value & 0x01;
+    c9x.param = (param.value>>1)<<1;
+  }
+  else {
+    c9x.param = param.value;
   }
   return c9x;
 }
@@ -678,6 +808,54 @@ t_Open9xArmSwashRingData_v209::operator SwashRingData ()
   c9x.collectiveSource = open9xArm209ToSource(collectiveSource);
   c9x.value = value;
   return c9x;
+}
+
+t_Open9xArmFrSkyBarData_v210::operator FrSkyBarData ()
+{
+  FrSkyBarData c9x;
+  c9x.source = source;
+  c9x.barMin = barMin;
+  c9x.barMax = barMax;
+  return c9x;
+}
+
+t_Open9xArmFrSkyBarData_v210::t_Open9xArmFrSkyBarData_v210(FrSkyBarData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xArmFrSkyBarData_v210));
+  source = c9x.source;
+  barMin = c9x.barMin;
+  barMax = c9x.barMax;
+}
+
+t_Open9xArmFrSkyData_v210::operator FrSkyData ()
+{
+  FrSkyData c9x;
+  c9x.channels[0] = channels[0];
+  c9x.channels[1] = channels[1];
+  c9x.usrProto = usrProto;
+  c9x.voltsSource = voltsSource;
+  c9x.blades = blades;
+  c9x.currentSource=currentSource;
+  for (int i=0; i<4; i++)
+    c9x.bars[i] = bars[i];
+  c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
+  c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
+  return c9x;
+}
+
+t_Open9xArmFrSkyData_v210::t_Open9xArmFrSkyData_v210(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xArmFrSkyData_v210));
+  channels[0] = c9x.channels[0];
+  channels[1] = c9x.channels[1];
+  usrProto = c9x.usrProto;
+  voltsSource = c9x.voltsSource;
+  blades = c9x.blades;
+  currentSource=c9x.currentSource;
+  for (int i=0; i<4; i++)
+    bars[i] = c9x.bars[i];
+  rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
+  rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
 }
 
 t_Open9xArmModelData_v208::operator ModelData ()
