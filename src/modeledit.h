@@ -29,7 +29,7 @@ private:
     QSpinBox* spn9[MAX_CURVE9][9];
     QDoubleSpinBox* minSB[4];
     QDoubleSpinBox* maxSB[4];
-    QComboBox* csf[8];
+    QComboBox* csf[16];
     QComboBox* csw[NUM_CSW];
     MixersList *ExposlistWidget;
 
@@ -246,6 +246,7 @@ private slots:
     void on_frskyUnitsCB_currentIndexChanged(int index);
     void on_frskyBladesCB_currentIndexChanged(int index);
     void on_frskyCurrentCB_currentIndexChanged(int index);
+    void on_frskyVoltCB_currentIndexChanged(int index);
     void on_rssiAlarm1CB_currentIndexChanged(int index);
     void on_rssiAlarm2CB_currentIndexChanged(int index);
     void on_rssiAlarm1SB_editingFinished();

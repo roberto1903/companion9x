@@ -401,6 +401,7 @@ class ExpoData {
     int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
     uint8_t weight;
     int8_t  expo;
+    char name[6];
 
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
@@ -553,9 +554,9 @@ class FrSkyChannelData {
 class FrSkyBarData {
   public:
     FrSkyBarData() { clear(); }
-    uint16_t   source;
-    uint16_t   barMin;           // minimum for bar display
-    uint16_t   barMax;           // ditto for max display (would usually = ratio)
+    uint8_t   source;
+    uint8_t   barMin;           // minimum for bar display
+    uint8_t   barMax;           // ditto for max display (would usually = ratio)
     void clear() { memset(this, 0, sizeof(FrSkyBarData)); }
 };
 
@@ -569,7 +570,7 @@ class FrSkyData {
     uint8_t voltsSource;
     uint8_t currentSource;
     uint8_t FrSkyGpsAlt;
-    uint8_t csField[8];
+    uint8_t csField[16];
     FrSkyBarData bars[4];
     FrSkyRSSIAlarm rssiAlarms[2];
     uint8_t varioSource;
