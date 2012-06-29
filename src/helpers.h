@@ -18,7 +18,7 @@
 #define CURVE5(x) ((x)-1)
 #define CURVE9(x) (MAX_CURVE5+(x)-1)
 
-#define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""Curr""Cnsp""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""Cur+""ACC ""Time"
+#define TELEMETRY_SRC "----""TMR1""TMR2""A1  ""A2  ""Tx  ""Rx  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""Volt""Curr""Cnsp""Powr""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""Cur+""ACC ""Time"
 
 #define POPULATE_ONOFF      1
 #define POPULATE_MSWITCHES  2
