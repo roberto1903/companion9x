@@ -1519,12 +1519,14 @@ void ModelEdit::tabTelemetry()
   QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   QDoubleSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
   QDoubleSpinBox* maxsb[4] = { ui->telMaxSB_1,  ui->telMaxSB_2,  ui->telMaxSB_3,  ui->telMaxSB_4};
-  QComboBox* tmp[8] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB };
+  QComboBox* tmp[16] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
+                                       ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB};
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
   memcpy(csf, tmp, sizeof(csf));
     
-  QComboBox* csf[8] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB };
+  QComboBox* csf[16] =  {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
+                                     ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB};
   telemetryLock=true;
   //frsky Settings
   if (!GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
@@ -1566,13 +1568,16 @@ void ModelEdit::tabTelemetry()
   if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
     ui->altimetryGB->hide();
   }
-  if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
+  if (GetEepromInterface()->getCapability(TelemetryCSFields)==0) {
     ui->groupBox_5->hide();
   } else {
-    for (int i=0; i<8; i++) {
-      populatecsFieldCB(csf[i], g_model.frsky.csField[i], (i<6),g_model.frsky.usrProto);
-      connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
+    if (GetEepromInterface()->getCapability(TelemetryCSFields)==8) {
+      ui->tabCsView->removeTab(1);
     }
+    for (int i=0; i<16; i++) {
+      populatecsFieldCB(csf[i], g_model.frsky.csField[i], ((i % 8)<6),g_model.frsky.usrProto);
+      connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
+    }   
   }
   if (!GetEepromInterface()->getCapability(TelemetryUnits)) {
     ui->frskyUnitsCB->setDisabled(true);
@@ -1634,6 +1639,7 @@ void ModelEdit::tabTelemetry()
   ui->frskyUnitsCB->setCurrentIndex(g_model.frsky.imperial);
   ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
   ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
+  ui->frskyVoltCB->setCurrentIndex(g_model.frsky.voltsSource);
   for(int i=0; StdTelBar[i];i++) {
     for (int j=0;j<4;j++) {
       barsCB[j]->addItem(StdTelBar[i]);
@@ -2191,6 +2197,12 @@ void ModelEdit::on_frskyBladesCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyCurrentCB_currentIndexChanged(int index)
 {
   g_model.frsky.currentSource=index;
+  updateSettings();
+}
+
+void ModelEdit::on_frskyVoltCB_currentIndexChanged(int index)
+{
+  g_model.frsky.voltsSource=index;
   updateSettings();
 }
 
