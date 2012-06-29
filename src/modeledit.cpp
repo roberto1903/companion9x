@@ -733,7 +733,13 @@ void ModelEdit::tabExpos()
         if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
         if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
-
+        if (GetEepromInterface()->getCapability(HasExpoNames)) {
+          QString ExpoName;
+          ExpoName.append(md->name);
+          if (!ExpoName.isEmpty()) {
+            str+=QString("(%1)").arg(ExpoName);
+          }
+        }
         qba.clear();
         qba.append((quint8)i);
         qba.append((const char*)md, sizeof(ExpoData));
@@ -816,8 +822,13 @@ void ModelEdit::tabMixes()
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
         if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
         if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
-        
-
+        if (GetEepromInterface()->getCapability(HasMixerNames)) {
+          QString MixerName;
+          MixerName.append(md->name);
+          if (!MixerName.isEmpty()) {
+            str+=QString("(%1)").arg(MixerName);
+          }
+        }
         qba.clear();
         qba.append((quint8)i);
         qba.append((const char*)md, sizeof(MixData));

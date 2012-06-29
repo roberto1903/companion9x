@@ -401,7 +401,7 @@ class ExpoData {
     int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
     uint8_t weight;
     int8_t  expo;
-    char name[6];
+    char name[10];
 
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
@@ -728,6 +728,8 @@ enum Capability {
  ModelTrainerEnable,
  Timer2ThrTrig,
  HasTTrace,
+ HasExpoNames,
+ HasMixerNames,
  NoTimerDirs,
  NoThrExpo,
  OptrexDisplay,
