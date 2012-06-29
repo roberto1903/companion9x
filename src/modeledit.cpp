@@ -1324,7 +1324,7 @@ void ModelEdit::tabFunctionSwitches()
       fswtchParamT[i]->hide();
       fswtchEnable[i]->hide();
     } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
-      if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
+      if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset  || g_model.funcSw[i].func==FuncVolume)) {
         fswtchParamT[i]->hide();
         fswtchParam[i]->hide();
       } else {
@@ -1377,7 +1377,7 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParamT[i]->hide();
         fswtchEnable[i]->hide();
       } else if (g_model.funcSw[i].func>=FuncSafetyCh16) {
-        if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset)) {
+        if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset || g_model.funcSw[i].func==FuncVolume)) {
           fswtchParamT[i]->hide();
           fswtchParam[i]->hide();
         } else {
@@ -1488,7 +1488,7 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamT[i]->hide();
         fswtchEnable[i]->hide();
       } else  if (index>15) {
-        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset) {
+        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume) {
           fswtchParam[i]->hide();
           if (fswtchParamT[i]->currentIndex()>=0) {
             g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
