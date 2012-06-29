@@ -93,6 +93,23 @@ PACK(typedef struct t_Open9xArmExpoData_v208 {
 
 }) Open9xArmExpoData_v208;
 
+PACK(typedef struct t_Open9xArmExpoData_v210 {
+  uint8_t mode;           // 0=end, 1=pos, 2=neg, 3=both
+  uint8_t chn;
+  int8_t  curve;          // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+  int8_t  swtch;
+  int8_t  phase;          // if negPhase is 0: 0=normal, 5=FP4    if negPhase is 1: 5=!FP4
+  uint8_t weight;
+  int8_t  expo;
+  char    name[6];
+  uint8_t spare[4];
+
+  operator ExpoData();
+  t_Open9xArmExpoData_v210() { memset(this, 0, sizeof(t_Open9xArmExpoData_v210)); }
+  t_Open9xArmExpoData_v210(ExpoData&);
+
+}) Open9xArmExpoData_v210;
+
 PACK(typedef struct t_Open9xArmMixData_v208 {
   uint8_t destCh;          // 0, 1..NUM_CHNOUT
   int8_t  phase;           // -5=!FP4, 0=normal, 5=FP4
@@ -211,7 +228,7 @@ PACK(typedef struct t_Open9xArmFuncSwData_v210 { // Function Switches data
   uint8_t func;
   union {
     uint32_t value;
-    char     name[5];
+    char     name[6];
   } param;
 
   operator FuncSwData();
@@ -249,9 +266,9 @@ PACK(typedef struct t_Open9xArmSwashRingData_v209 { // Swash Ring data
 }) Open9xArmSwashRingData_v209;
 
 PACK(typedef struct t_Open9xArmFrSkyBarData_v210 {
-  uint16_t   source;
-  uint16_t   barMin;           // minimum for bar display
-  uint16_t   barMax;           // ditto for max display (would usually = ratio)
+  uint8_t   source;
+  uint8_t   barMin;           // minimum for bar display
+  uint8_t   barMax;           // ditto for max display (would usually = ratio)
 
   operator FrSkyBarData();
   t_Open9xArmFrSkyBarData_v210() { memset(this, 0, sizeof(t_Open9xArmFrSkyBarData_v210)); }
@@ -375,7 +392,7 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
-  Open9xArmExpoData_v208  expoData[O9X_ARM_MAX_EXPOS];
+  Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
   Open9xArmCustomSwData_v209 customSw[O9X_ARM_NUM_CSW];
@@ -399,9 +416,9 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
 
 }) Open9xArmModelData_v210;
 
-#define LAST_OPEN9X_ARM_EEPROM_VER 209
+#define LAST_OPEN9X_ARM_EEPROM_VER 210
 
-typedef Open9xArmModelData_v209   Open9xArmModelData;
+typedef Open9xArmModelData_v210   Open9xArmModelData;
 typedef Open9xGeneralData_v208    Open9xArmGeneralData;
 
 #endif

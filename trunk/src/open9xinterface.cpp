@@ -192,6 +192,10 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       // Add TrmR, TrmE, TrmT, TrmA as Mix sources
       // Trims are now OFF / ON / Rud / Ele / Thr / Ail
       break;
+    case 210:
+      // Add names in Mixes / Expos
+      // Add a new telemetry screen
+      // Add support for Play Track <filename>
     default:
       std::cout << "not open9x\n";
       return false;
@@ -250,6 +254,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       else {
         loadModel<Open9xModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
       }
+    }
+    else if (version == 210 && board == BOARD_ERSKY9X) {
+      loadModel<Open9xArmModelData_v210>(radioData.models[i], i, 0 /*no more stick mode messed*/);
     }
     else {
       std::cout << "ko\n";
@@ -333,6 +340,10 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
             result = saveModel<Open9xArmModelData_v209>(i, radioData.models[i]);
           else
             result = saveModel<Open9xModelData_v209>(i, radioData.models[i]);
+          break;
+        case 210:
+          if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v210>(i, radioData.models[i]);
           break;
       }
       if (!result)

@@ -483,6 +483,7 @@ enum AssignFunc {
   FuncPlayPrompt,
   FuncPlayValue,
   FuncLogs,
+  FuncVolume,
   FuncCount
 };
 

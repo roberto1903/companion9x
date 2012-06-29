@@ -16,7 +16,7 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
   int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1,1,1};
   b->clear();
-  for (int i = 0; i < 35-(last ? 2 :0); i++) {
+  for (int i = 0; i < 37-(last ? 2 :0); i++) {
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);
@@ -39,7 +39,7 @@ QString getFuncName(unsigned int val)
   else {
     if (val< FuncCount) {
       QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"), QObject::tr("Instant Trim"),
-                                    QObject::tr("Play Sound"), QObject::tr("Play Haptic"), QObject::tr("Reset"), QObject::tr("Vario"), QObject::tr("Play Prompt"), QObject::tr("Play Value"), QObject::tr("Start Logs") };
+                                    QObject::tr("Play Sound"), QObject::tr("Play Haptic"), QObject::tr("Reset"), QObject::tr("Vario"), QObject::tr("Play Prompt"), QObject::tr("Play Value"), QObject::tr("Start Logs"), QObject::tr("Volume") };
       return strings[val-NUM_SAFETY_CHNOUT];
     } else {
       return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
