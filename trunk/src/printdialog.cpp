@@ -303,6 +303,13 @@ void printDialog::printExpo()
         if (ed->curve) {
           str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
         }
+        if (GetEepromInterface()->getCapability(HasExpoNames)) {
+          QString ExpoName;
+          ExpoName.append(ed->name);
+          if (!ExpoName.isEmpty()) {
+            str+=QString(" (%1)").arg(ExpoName);
+          }
+        }
         str += "</font></td></tr>";
     }
     str += "</table></td></tr></table><br>";
@@ -362,6 +369,13 @@ void printDialog::printMixes()
                 str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
             }
         }
+        if (GetEepromInterface()->getCapability(HasMixerNames)) {
+          QString MixerName;
+          MixerName.append(md->name);
+          if (!MixerName.isEmpty()) {
+            str+=QString(" (%1)").arg(MixerName);
+          }
+        }
         str.append("</font></td></tr>");
     }
     str.append("</table></td></tr></table><br>");
@@ -371,35 +385,85 @@ void printDialog::printMixes()
 void printDialog::printLimits()
 {
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-    str.append(QString("<tr><td colspan=%1><h2>").arg(GetEepromInterface()->getCapability(Outputs)+1)+tr("Limits")+"</h2></td></tr>");
+    int numcol;
+    numcol=(GetEepromInterface()->getCapability(Outputs)+1)>17 ? 17:GetEepromInterface()->getCapability(Outputs)+1;
+    str.append(QString("<tr><td colspan=%1><h2>").arg(numcol)+tr("Limits")+"</h2></td></tr>");
     str.append("<tr><td>&nbsp;</td>");
-    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
-    {
-        str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
-    }
-    str.append("</tr>");
-    str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
-    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
-    {
-        str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
-    }
-    str.append("</tr>");
-    str.append("<tr><td><b>"+tr("Min")+"</b></td>");
-    for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
-    {
-        str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
-    }
-    str.append("</tr>");
-    str.append("<tr><td><b>"+tr("Max")+"</b></td>");
-    for(int i=0; i<NUM_CHNOUT; i++)
-    {
-        str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
-    }
-    str.append("</tr>");
-    str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
-    for(int i=0; i<NUM_CHNOUT; i++)
-    {
-        str.append(doTR(QString(g_model->limitData[i].revert ? tr("INV") : tr("NOR")),"green"));
+    if (GetEepromInterface()->getCapability(Outputs)<17) {
+      for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
+      for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Min")+"</b></td>");
+      for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Max")+"</b></td>");
+      for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
+      for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString(g_model->limitData[i].revert ? tr("INV") : tr("NOR")),"green"));
+      }
+    } else {
+      for(int i=0; i<16; i++) {
+          str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
+      for(int i=0; i<16; i++) {
+          str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Min")+"</b></td>");
+      for(int i=0; i<16; i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Max")+"</b></td>");
+      for(int i=0; i<16; i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
+      for(int i=0; i<16; i++) {
+          str.append(doTR(QString(g_model->limitData[i].revert ? tr("INV") : tr("NOR")),"green"));
+      }
+      str.append("</tr>");
+      str.append(QString("<tr><td colspan=%1>&nbsp;").arg(numcol)+"</td></tr>");
+      str.append("<tr><td>&nbsp;</td>");
+      for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
+      for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Min")+"</b></td>");
+      for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].min),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Max")+"</b></td>");
+      for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString::number(g_model->limitData[i].max),"green"));
+      }
+      str.append("</tr>");
+      str.append("<tr><td><b>"+tr("Invert")+"</b></td>");
+      for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(QString(g_model->limitData[i].revert ? tr("INV") : tr("NOR")),"green"));
+      }
+
     }
     str.append("</tr>");
     str.append("</table>");
@@ -660,6 +724,8 @@ void printDialog::printFSwitches()
     str.append("<td width=\"60\">&nbsp;</td>");
     str.append(doTC(tr("Switch"), "", true));
     str.append(doTL(tr("Function"), "", true));
+    str.append(doTL(tr("Parameter"), "", true));
+    str.append(doTL(tr("Enabled"), "", true));
     str.append("</tr>");
     for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
     {
@@ -668,6 +734,12 @@ void printDialog::printFSwitches()
            str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
            str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
            str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
+           str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param),"green"));
+           if (g_model->funcSw[i].func<=FuncSafetyCh16) {
+             str.append(doTC((g_model->funcSw[i].enabled ? "ON" : "OFF"),"green"));
+           } else {
+             str.append(doTC( "---","green"));
+           }
            str.append("</tr>");
            sc++;
         }

@@ -24,6 +24,7 @@
 #define POPULATE_MSWITCHES  2
 void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0, UseContext context=DefaultContext);
 void populateFuncCB(QComboBox *b, unsigned int value);
+QString FuncParam(uint function, unsigned int value);
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);

@@ -55,6 +55,55 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
   b->setMaxVisibleItems(10);
 }
 
+QString FuncParam(uint function, unsigned int value) {
+  QStringList qs;
+  if (function==FuncPlaySound) {
+    qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
+    qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+  } else if (function==FuncPlayHaptic) { 
+    qs << "0" << "1" << "2" << "3";
+  } else if (function==FuncReset) { 
+    qs.append( QObject::tr("Timer1"));
+    qs.append( QObject::tr("Timer2"));
+    qs.append( QObject::tr("All"));
+    qs.append( QObject::tr("Telemetry"));
+  } else if (function==FuncVolume) {
+    RawSource item;
+    for (int i=0; i<7; i++) {
+      item = RawSource(SOURCE_TYPE_STICK, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      qs.append(item.toString());
+    }
+    item = RawSource(SOURCE_TYPE_MAX);
+    qs.append(item.toString());
+
+    item = RawSource(SOURCE_TYPE_3POS);
+    qs.append(item.toString());
+
+    for (int i=0; i<NUM_CYC; i++) {
+      item = RawSource(SOURCE_TYPE_CYC, i);
+      qs.append(item.toString());
+    }
+
+    for (int i=0; i<NUM_PPM; i++) {
+      item = RawSource(SOURCE_TYPE_PPM, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+      item = RawSource(SOURCE_TYPE_CH, i);
+      qs.append(item.toString());
+    }    
+  }
+  return qs.at(value);
+}
+
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
   QStringList qs;
   b->clear();
@@ -68,6 +117,57 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
+  } else if (function==FuncVolume) {
+    unsigned int count=0;
+    RawSource item;
+    for (int i=0; i<7; i++) {
+      item = RawSource(SOURCE_TYPE_STICK, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    item = RawSource(SOURCE_TYPE_MAX);
+    b->addItem(item.toString(), item.toValue());
+    if (count==value) b->setCurrentIndex(b->count()-1);
+    count++;
+
+    item = RawSource(SOURCE_TYPE_3POS);
+    b->addItem(item.toString(), item.toValue());
+    if (count==value) b->setCurrentIndex(b->count()-1);
+    count++;
+
+    for (int i=0; i<NUM_CYC; i++) {
+      item = RawSource(SOURCE_TYPE_CYC, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+
+    for (int i=0; i<NUM_PPM; i++) {
+      item = RawSource(SOURCE_TYPE_PPM, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+
+    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+      item = RawSource(SOURCE_TYPE_CH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }    
   } else {
     b->hide();
   }
