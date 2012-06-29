@@ -43,6 +43,11 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         ui->DiffMIXlabel->hide();
         ui->DiffMixSB->hide();
     }
+    if (!GetEepromInterface()->getCapability(HasMixerNames)) {
+        ui->label_name->hide();
+        ui->mixerName->hide();
+    }
+    ui->mixerName->setText(md->name);
     populateCurvesCB(ui->curvesCB,md->curve);
     populatePhasesCB(ui->phasesCB,md->phase);
     populateSwitchCB(ui->switchesCB,md->swtch);
@@ -56,7 +61,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     QTimer::singleShot(0, this, SLOT(shrink()));
 
     valuesChanged();
-
+    connect(ui->mixerName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->sourceCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
@@ -114,6 +119,11 @@ void MixerDialog::valuesChanged()
     } else {
         ui->label_4->setText(tr("Offset"));
     }
+    int i=0;
+    for (i=0; i<ui->mixerName->text().toAscii().length(); i++) {
+      md->name[i]=ui->mixerName->text().toAscii().at(i);
+    }
+    md->name[i]=0;
 }
 
 void MixerDialog::shrink() {

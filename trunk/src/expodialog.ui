@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>178</width>
-    <height>237</height>
+    <height>263</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,59 +30,14 @@
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="1" colspan="3">
-    <widget class="QComboBox" name="phasesCB">
-     <property name="whatsThis">
-      <string>Phase used by the expo.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="3">
-    <widget class="QComboBox" name="switchesCB">
-     <property name="whatsThis">
-      <string>Switch used by the expo.
-If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_curves">
-     <property name="text">
-      <string>Curve</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_9">
-     <property name="text">
-      <string>Mode</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Weight</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="3">
+   <item row="2" column="1" colspan="3">
     <widget class="QSpinBox" name="expoSB">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -108,40 +63,29 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_phases">
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_9">
      <property name="text">
-      <string>Phase</string>
+      <string>Mode</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1" colspan="3">
-    <widget class="QComboBox" name="modeCB">
-     <item>
-      <property name="text">
-       <string>NEG</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>POS</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>ALL</string>
-      </property>
-     </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_curves">
+     <property name="text">
+      <string>Curve</string>
+     </property>
     </widget>
    </item>
    <item row="4" column="1" colspan="3">
-    <widget class="QComboBox" name="curvesCB">
+    <widget class="QComboBox" name="switchesCB">
      <property name="whatsThis">
-      <string>The curve used by the expo</string>
+      <string>Switch used by the expo.
+If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" colspan="3">
+   <item row="1" column="1" colspan="3">
     <widget class="QSpinBox" name="weightSB">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -163,7 +107,14 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="3" column="1" colspan="3">
+    <widget class="QComboBox" name="phasesCB">
+     <property name="whatsThis">
+      <string>Phase used by the expo.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Expo</string>
@@ -171,13 +122,55 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="3" column="0">
+    <widget class="QLabel" name="label_phases">
+     <property name="text">
+      <string>Phase</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
     <widget class="QLabel" name="label_7">
      <property name="text">
       <string>Switch</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="4">
+   <item row="9" column="0" colspan="4">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1" colspan="3">
+    <widget class="QComboBox" name="modeCB">
+     <item>
+      <property name="text">
+       <string>NEG</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>POS</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ALL</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="4">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -189,6 +182,27 @@ p, li { white-space: pre-wrap; }
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="5" column="1" colspan="3">
+    <widget class="QComboBox" name="curvesCB">
+     <property name="whatsThis">
+      <string>The curve used by the expo</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_name">
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QLineEdit" name="expoName">
+     <property name="maxLength">
+      <number>6</number>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

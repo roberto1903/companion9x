@@ -467,6 +467,18 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case HasTTrace:
       return 1;
+    case HasMixerNames:
+      if  (board==BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
+    case HasExpoNames:
+      if  (board==BOARD_ERSKY9X) {
+        return 1;
+      } else {
+        return 0;
+      }
     case NoTimerDirs:
       return 1;
     case NoThrExpo:
