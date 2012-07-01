@@ -779,13 +779,15 @@ t_Open9xArmFuncSwData_v208::operator FuncSwData ()
 t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
+  uint32_t value;
   if (c9x.func <= FuncSafetyCh16) {
-    param.value = ((c9x.param>>1)<<1);
-    param.value |=(c9x.enabled & 0x01);
+    value = ((c9x.param>>1)<<1);
+    value |=(c9x.enabled & 0x01);
   }
   else {
-    param.value = c9x.param;
+    value = c9x.param;
   }
+  *((uint32_t *)param) = value;
   func = c9x.func;
 }
 
@@ -794,12 +796,13 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
   FuncSwData c9x;
   c9x.swtch = open9xArmToSwitch(swtch);
   c9x.func = (AssignFunc)(func);
+  uint32_t value = *((uint32_t *)param);
   if (c9x.func <= FuncSafetyCh16) {
-    c9x.enabled = param.value & 0x01;
-    c9x.param = (param.value>>1)<<1;
+    c9x.enabled = value & 0x01;
+    c9x.param = (value>>1)<<1;
   }
   else {
-    c9x.param = param.value;
+    c9x.param = value;
   }
   return c9x;
 }
@@ -1365,7 +1368,7 @@ t_Open9xArmModelData_v210::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_210 3085
+#define MODEL_DATA_SIZE_210 3021
 t_Open9xArmModelData_v210::t_Open9xArmModelData_v210(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_210) {
@@ -1433,7 +1436,7 @@ t_Open9xArmModelData_v210::t_Open9xArmModelData_v210(ModelData &c9x)
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
         funcSw[count].swtch = open9xArmFromSwitch(c9x.safetySw[i].swtch);
-        funcSw[count].param.value = c9x.safetySw[i].val;
+        *((uint32_t *)funcSw[count].param) = c9x.safetySw[i].val;
         count++;
       }
     }
