@@ -989,7 +989,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       }
       g_eeGeneral.currentCalib=currentCalib;
       g_eeGeneral.vBatCalib=vBatCalib;
-      g_eeGeneral.vBatCalib=vBatWarn;
+      g_eeGeneral.vBatWarn=vBatWarn;
       g_eeGeneral.PPM_Multiplier=PPM_Multiplier;
     } else {
       QMessageBox::critical(this, tr("Warning"), tr("Wrong data in profile, radio calibration was not retrieved"));
