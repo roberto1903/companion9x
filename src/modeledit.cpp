@@ -820,7 +820,10 @@ void ModelEdit::tabMixes()
         if(md->differential) str += " " + tr("Diff") + QString("(%1)").arg(md->differential);;
         if(md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         if(md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
-        if(md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
+        if(md->speedDown || md->speedUp) { 
+          int scale=GetEepromInterface()->getCapability(SlowScale)+1;  
+          str += tr(" Slow(u%1:d%2)").arg((double)md->speedUp/scale).arg((double)md->speedDown/scale);
+        }
         if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
         if (GetEepromInterface()->getCapability(HasMixerNames)) {
           QString MixerName;

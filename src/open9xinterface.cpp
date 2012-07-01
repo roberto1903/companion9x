@@ -539,6 +539,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case pmSwitchMask:
       return 1;
+    case SlowScale:
+      return 1;
     default:
       return 0;
   }

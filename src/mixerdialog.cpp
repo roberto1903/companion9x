@@ -53,11 +53,17 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     populateSwitchCB(ui->switchesCB,md->swtch);
     ui->warningCB->setCurrentIndex(md->mixWarn);
     ui->mltpxCB->setCurrentIndex(md->mltpx);
-
+    int scale=GetEepromInterface()->getCapability(SlowScale)+1;  
+    ui->slowDownSB->setMaximum(15.0/scale);
+    ui->slowDownSB->setSingleStep(1.0/scale);
+    ui->slowDownSB->setDecimals(scale-1);
+    ui->slowDownSB->setValue(md->speedDown/scale);
+    ui->slowUpSB->setMaximum(15.0/scale);
+    ui->slowUpSB->setSingleStep(1.0/scale);
+    ui->slowUpSB->setDecimals(scale-1);
+    ui->slowUpSB->setValue(md->speedUp/scale);
     ui->delayDownSB->setValue(md->delayDown);
     ui->delayUpSB->setValue(md->delayUp);
-    ui->slowDownSB->setValue(md->speedDown);
-    ui->slowUpSB->setValue(md->speedUp);
     QTimer::singleShot(0, this, SLOT(shrink()));
 
     valuesChanged();
@@ -75,8 +81,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->mltpxCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->delayDownSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->delayUpSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->slowDownSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->slowUpSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->slowDownSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->slowUpSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
 }
 
 MixerDialog::~MixerDialog()
@@ -111,8 +117,9 @@ void MixerDialog::valuesChanged()
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();
     md->delayDown = ui->delayDownSB->value();
     md->delayUp   = ui->delayUpSB->value();
-    md->speedDown = ui->slowDownSB->value();
-    md->speedUp   = ui->slowUpSB->value();
+    int scale=GetEepromInterface()->getCapability(SlowScale)+1;  
+    md->speedDown = round(ui->slowDownSB->value()*scale);
+    md->speedUp   = round(ui->slowUpSB->value()*scale);
     md->differential=ui->DiffMixSB->value();
     if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
