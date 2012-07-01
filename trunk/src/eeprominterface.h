@@ -758,6 +758,7 @@ enum Capability {
  HasVolume,
  HasBrightness,
  PerModelThrottleWarning,
+ SlowScale,
 };
 
 enum UseContext {
