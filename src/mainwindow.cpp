@@ -99,6 +99,7 @@ downloadDialog_forWait(NULL)
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
     QNetworkProxyFactory::setUseSystemConfiguration(true);
+    setAcceptDrops(true);
     
     // give time to the main windows to open before starting updates, delay 1s
     QTimer::singleShot(1000, this, SLOT(doAutoUpdates()));
@@ -125,6 +126,7 @@ downloadDialog_forWait(NULL)
             }
         }
     }
+    
 }
 
 void MainWindow::displayWarnings()
@@ -210,7 +212,13 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
             return;
         }
         double vnum=version.toDouble();
-        double c9xver=(QString(C9X_VERSION).toDouble());
+        QString c9xversion=QString(C9X_VERSION);
+        int i;
+        for (i=0; i<c9xversion.length();i++) {
+          if (!(c9xversion.at(i).isDigit() || c9xversion.at(i).isPunct()))
+            break;
+        }
+        double c9xver=(c9xversion.left(i).toDouble());
         if (c9xver< vnum) {
 #if defined __APPLE__ || defined WIN32 || !defined __GNUC__
           showcheckForUpdatesResult = false; // update is available - do not show dialog
@@ -1679,4 +1687,36 @@ int MainWindow::getEpromVersion(QString fileName)
     }
   }
   return testData.generalSettings.myVers;
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat("text/uri-list"))
+        event->acceptProposedAction();
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    QList<QUrl> urls = event->mimeData()->urls();
+    if (urls.isEmpty())
+        return;
+
+    QString fileName = urls.first().toLocalFile();
+    if (fileName.isEmpty())
+        return;
+    QSettings settings("companion9x", "companion9x");
+    settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
+
+    QMdiSubWindow *existing = findMdiChild(fileName);
+    if (existing) {
+        mdiArea->setActiveSubWindow(existing);
+        return;
+    }
+
+    MdiChild *child = createMdiChild();
+    if (child->loadFile(fileName))
+    {
+        statusBar()->showMessage(tr("File loaded"), 2000);
+        child->show();
+    }
 }
