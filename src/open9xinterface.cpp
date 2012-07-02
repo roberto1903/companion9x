@@ -196,6 +196,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
       // Add names in Mixes / Expos
       // Add a new telemetry screen
       // Add support for Play Track <filename>
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
