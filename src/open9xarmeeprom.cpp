@@ -750,6 +750,49 @@ t_Open9xArmCustomSwData_v209::operator CustomSwData ()
   return c9x;
 }
 
+t_Open9xArmCustomSwData_v210::t_Open9xArmCustomSwData_v210(CustomSwData &c9x)
+{
+  func = c9x.func;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    v1 = open9xArm209FromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    v2 = open9xArm209FromSource(RawSource(c9x.val2));
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+    v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
+  }
+}
+
+t_Open9xArmCustomSwData_v210::operator CustomSwData ()
+{
+  CustomSwData c9x;
+  c9x.func = func;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = open9xArm209ToSource(v1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = open9xArm209ToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+    c9x.val1 = open9xArmToSwitch(v1).toValue();
+    c9x.val2 = open9xArmToSwitch(v2).toValue();
+  }
+
+  return c9x;
+}
+
 t_Open9xArmFuncSwData_v208::t_Open9xArmFuncSwData_v208(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
@@ -1368,7 +1411,7 @@ t_Open9xArmModelData_v210::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_210 3021
+#define MODEL_DATA_SIZE_210 3085
 t_Open9xArmModelData_v210::t_Open9xArmModelData_v210(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_210) {

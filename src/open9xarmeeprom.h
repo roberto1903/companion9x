@@ -212,6 +212,18 @@ PACK(typedef struct t_Open9xArmCustomSwData_v209 { // Custom Switches data
   t_Open9xArmCustomSwData_v209(CustomSwData&);
 }) Open9xArmCustomSwData_v209;
 
+PACK(typedef struct t_Open9xArmCustomSwData_v210 { // Custom Switches data
+  int8_t  v1; //input
+  int8_t  v2; //offset
+  uint8_t func;
+  uint8_t delay;
+  uint8_t duration;
+
+  operator CustomSwData();
+  t_Open9xArmCustomSwData_v210() { memset(this, 0, sizeof(t_Open9xArmCustomSwData_v210)); }
+  t_Open9xArmCustomSwData_v210(CustomSwData&);
+}) Open9xArmCustomSwData_v210;
+
 PACK(typedef struct t_Open9xArmFuncSwData_v208 { // Function Switches data
   int8_t  swtch; // input
   uint8_t func;
@@ -392,7 +404,7 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
   Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
   int8_t    curves5[MAX_CURVE5][5];
   int8_t    curves9[MAX_CURVE9][9];
-  Open9xArmCustomSwData_v209 customSw[O9X_ARM_NUM_CSW];
+  Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v210 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v209 swashR;
   Open9xArmPhaseData_v208 phaseData[O9X_ARM_MAX_PHASES];
