@@ -258,43 +258,52 @@ void ModelsListWidget::refreshList()
 {
     clear();
     int msize;
+    div_t divresult;
     QString name = radioData->generalSettings.ownerName;
     if(!name.isEmpty())
         name.prepend(" - ");
     addItem(tr("General Settings") + name);
 
     EEPROMInterface *eepromInterface = GetEepromInterface();
-    int availableEEpromSize = eepromInterface->getEEpromSize();
-    availableEEpromSize -= eepromInterface->getSize(radioData->generalSettings);
+    int availableEEpromSize = eepromInterface->getEEpromSize()-64; //let's consider fat
+    divresult=div(eepromInterface->getSize(radioData->generalSettings),15);
+    divresult.quot+=(divresult.rem!=0 ? 1:0);
+    availableEEpromSize -= divresult.quot*16;
     
     for(uint8_t i=0; i<GetEepromInterface()->getMaxModels(); i++)
     {
-       QString item = QString().sprintf("%02d: ", i+1);
+      QString item = QString().sprintf("%02d: ", i+1);
        
-       if (!radioData->models[i].isempty()) {
-         if (eepromInterface && eepromInterface->getBoard() == BOARD_ERSKY9X) {
-           if (radioData->models[i].name[0]==0) {
-             QString modelname="Model";
-             modelname.append(QString().sprintf("%02d", i+1));
-             item += modelname;
-           } else {
-             item += radioData->models[i].name;
-           }
-         }
-         else {
-           char modelname[11];
-           if (radioData->models[i].name[0]==0) {
-             sprintf(modelname, "Model%02d", i+1);
-           } else {
-             sprintf(modelname,"%10s",radioData->models[i].name);
-           }
-           item += QString().sprintf("%10s", modelname);
-           msize = eepromInterface->getSize(radioData->models[i]);
-           item += QString().sprintf("%5d", msize);
-           availableEEpromSize -= msize;
-         }
+      if (!radioData->models[i].isempty()) {
+        if (eepromInterface && eepromInterface->getBoard() == BOARD_ERSKY9X) {
+          if (radioData->models[i].name[0]==0) {
+            QString modelname="Model";
+            modelname.append(QString().sprintf("%02d", i+1));
+            item += modelname;
+          } else {
+            item += radioData->models[i].name;
+          }
+        }
+        else {
+          char modelname[11];
+          if (radioData->models[i].name[0]==0) {
+            sprintf(modelname, "Model%02d", i+1);
+          } else {
+            sprintf(modelname,"%10s",radioData->models[i].name);
+          }
+          item += QString().sprintf("%10s", modelname);
+          msize = eepromInterface->getSize(radioData->models[i]);
+          item += QString().sprintf("%5d", msize);
+          divresult=div(msize,15);
+          divresult.quot+=(divresult.rem!=0 ? 1:0);
+          availableEEpromSize -= divresult.quot*16;
+
+          if (i==radioData->generalSettings.currModel) {
+            availableEEpromSize -= divresult.quot*16;
+          }
+        }
        }
-       addItem(item);
+      addItem(item);
     }
     if (radioData->generalSettings.currModel < GetEepromInterface()->getMaxModels()) {
         QFont f = QFont("Courier New", 12);
@@ -303,7 +312,7 @@ void ModelsListWidget::refreshList()
     }
 
     if (eepromInterface && eepromInterface->getBoard() != BOARD_ERSKY9X) {
-      ((MdiChild*)parent())->setEEpromAvail(availableEEpromSize);
+      ((MdiChild*)parent())->setEEpromAvail((availableEEpromSize/16)*15);
     }
 }
 
