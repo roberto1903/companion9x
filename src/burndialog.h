@@ -54,6 +54,7 @@ private:
   bool * backup;
   int hexType;
   RadioData radioData;
+  bool burnraw;
 };
 
 #endif // BURNDIALOG_H

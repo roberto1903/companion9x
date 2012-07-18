@@ -68,6 +68,7 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     if (Type==2) {
       checkFw(*hexfileName);
     } else {
+      burnraw=false;
       if (checkeEprom(*hexfileName)) {
         QSettings settings("companion9x", "companion9x");
         int profileid=settings.value("profileId", 1).toInt();
@@ -146,11 +147,20 @@ void burnDialog::on_FlashLoadButton_clicked()
   } else {
     QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (checkeEprom(fileName)) {
-      ui->BurnFlashButton->setEnabled(true);
-      ui->profile_label->show();
-      ui->patchcalib_CB->show();
-      ui->patchhw_CB->show();
-      ui->EEpromCB->show();
+      if (burnraw==false) {
+        ui->BurnFlashButton->setEnabled(true);
+        ui->profile_label->show();
+        ui->patchcalib_CB->show();
+        ui->patchhw_CB->show();
+        ui->EEpromCB->show();
+      } else {
+        ui->BurnFlashButton->setEnabled(true);
+        ui->profile_label->hide();
+        ui->patchcalib_CB->setChecked(false);
+        ui->patchhw_CB->setChecked(false);
+        ui->patchhw_CB->hide();
+        ui->patchcalib_CB->hide();        
+      }
       QTimer::singleShot(0, this, SLOT(shrink()));
     }
   }
@@ -233,6 +243,7 @@ bool burnDialog::checkeEprom(QString fileName)
     QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
     return false;
   }
+  burnraw=false;
   int fileType = getFileType(fileName);
   if (fileType==FILE_TYPE_XML) {
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
@@ -267,14 +278,23 @@ bool burnDialog::checkeEprom(QString fileName)
     uint8_t eeprom[EESIZE_GRUVIN9X];
     int eeprom_size = HexInterface(inputStream).load(eeprom);
     if (!eeprom_size) {
-      QMessageBox::critical(this, tr("Error"), tr("Invalid EEPROM File %1").arg(fileName));
-      file.close();
-      return false;
+      int res = QMessageBox::question(this, "companion9x",tr("Invalid binary EEPROM File %1, Proceed anyway ?").arg(fileName),QMessageBox::Yes | QMessageBox::No);
+      if (res == QMessageBox::No) {
+        return false;
+      }
+      burnraw=true;
+      ui->FWFileName->setText(fileName);
+      return true;
     }
     file.close();
     if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
-      QMessageBox::critical(this, tr("Error"),tr("Invalid EEPROM File %1").arg(fileName));
-      return false;
+      int res = QMessageBox::question(this, "companion9x",tr("Invalid binary EEPROM File %1, Proceed anyway ?").arg(fileName),QMessageBox::Yes | QMessageBox::No);
+      if (res == QMessageBox::No) {
+        return false;
+      }
+      burnraw=true;
+      ui->FWFileName->setText(fileName);
+      return true;
     }
   }
   else if (fileType==FILE_TYPE_BIN) { //read binary
@@ -292,8 +312,11 @@ bool burnDialog::checkeEprom(QString fileName)
         return false;
     }
     if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
-      QMessageBox::critical(this, tr("Error"),tr("Invalid binary EEPROM File %1").arg(fileName));
-      return false;
+      int res = QMessageBox::question(this, "companion9x",tr("Invalid binary EEPROM File %1, Proceed anyway ?").arg(fileName),QMessageBox::Yes | QMessageBox::No);
+      if (res == QMessageBox::No) {
+        return false;
+      }
+      burnraw=true;
     }
   }
   ui->FWFileName->setText(fileName);
