@@ -19,7 +19,7 @@
 
 #define PCBARM
 #define REVB
-
+#define SDCARD
 
 namespace Open9xARM {
 #include "../open9x/ersky9x/AT91SAM3S4.h"

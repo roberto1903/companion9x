@@ -1375,6 +1375,16 @@ void ModelEdit::tabFunctionSwitches()
     populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
     connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
+    fswtchParamArmT[i] = new QLineEdit(this);
+    fswtchParamArmT[i]->setMaxLength(6);
+    ui->fswitchlayout1->addWidget(fswtchParamArmT[i],i+1,3);
+    if (g_model.funcSw[i].func==FuncPlayPrompt) {
+      fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
+    } else {
+      fswtchParamArmT[i]->hide();
+    }
+    connect(fswtchParamArmT[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+    
     int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
     if (index==0) {
       fswtchParam[i]->hide();
@@ -1384,7 +1394,11 @@ void ModelEdit::tabFunctionSwitches()
       if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset  || g_model.funcSw[i].func==FuncVolume)) {
         fswtchParamT[i]->hide();
         fswtchParam[i]->hide();
+      } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
+        fswtchParamT[i]->hide();
+        fswtchParam[i]->hide();
       } else {
+        fswtchParamArmT[i]->hide();
         fswtchParam[i]->hide();
       }
       fswtchEnable[i]->hide();
@@ -1429,6 +1443,17 @@ void ModelEdit::tabFunctionSwitches()
       ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
       populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
       connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+
+      fswtchParamArmT[i] = new QLineEdit(this);
+      fswtchParamArmT[i]->setMaxLength(6);
+      ui->fswitchlayout2->addWidget(fswtchParamArmT[i],i+1,3);
+      if (g_model.funcSw[i].func==FuncPlayPrompt) {
+        fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
+      } else {
+        fswtchParamArmT[i]->hide();
+      }
+      connect(fswtchParamArmT[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+
       if (index==0) {
         fswtchParam[i]->hide();
         fswtchParamT[i]->hide();
@@ -1437,7 +1462,11 @@ void ModelEdit::tabFunctionSwitches()
         if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset || g_model.funcSw[i].func==FuncVolume)) {
           fswtchParamT[i]->hide();
           fswtchParam[i]->hide();
+        } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
+          fswtchParamT[i]->hide();
+          fswtchParam[i]->hide();
         } else {
+          fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
         }
         fswtchEnable[i]->hide();
@@ -1499,8 +1528,8 @@ void ModelEdit::customSwitchesEdited()
             setSwitchWidgetVisibility(i);
         }
         if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
-          g_model.customSw[i].delay= cswitchDelay[i]->value()*2;
-          g_model.customSw[i].duration= cswitchDuration[i]->value()*2;
+          g_model.customSw[i].delay= round(cswitchDelay[i]->value()*2);
+          g_model.customSw[i].duration= round(cswitchDuration[i]->value()*2);
         }
         RawSource source;
         switch(CS_STATE(g_model.customSw[i].func))
@@ -1547,10 +1576,12 @@ void ModelEdit::functionSwitchesEdited()
       if (g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
         fswtchParam[i]->hide();
         fswtchParamT[i]->hide();
+        fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
       } else  if (index>15) {
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume) {
           fswtchParam[i]->hide();
+          fswtchParamArmT[i]->hide();
           if (fswtchParamT[i]->currentIndex()>=0) {
             g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
           } else {
@@ -1559,6 +1590,16 @@ void ModelEdit::functionSwitchesEdited()
           populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
           fswtchParamT[i]->show();
           fswtchEnable[i]->hide();
+        } else if (index==FuncPlayPrompt) {
+          fswtchParam[i]->hide();
+          fswtchParamT[i]->hide();
+          fswtchParamArmT[i]->show();
+          for (int j=0; j<6; j++) {
+            g_model.funcSw[i].paramarm[j]=0;
+          }
+          for (int j=0; j<fswtchParamArmT[i]->text().length(); j++) {
+            g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->text().toAscii().at(j);
+          }
         } else {
           g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
           fswtchParam[i]->hide();
