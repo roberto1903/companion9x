@@ -831,9 +831,13 @@ t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
     value |=(c9x.enabled & 0x01);
   }
   else {
-    value = c9x.param;
+    if (c9x.func != FuncPlayPrompt) {
+     value = c9x.param;
+     *((uint32_t *)param) = value;
+    } else {
+     memcpy(c9x.paramarm,param, sizeof(param));
+    }
   }
-  *((uint32_t *)param) = value;
   func = c9x.func;
 }
 
@@ -848,7 +852,11 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
     c9x.param = (value>>1)<<1;
   }
   else {
-    c9x.param = value;
+    if (c9x.func != FuncPlayPrompt) {
+     c9x.param = value;
+    } else {
+     memcpy(c9x.paramarm,param, sizeof(c9x.paramarm));
+    }
   }
   return c9x;
 }
