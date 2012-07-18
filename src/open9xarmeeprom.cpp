@@ -835,7 +835,7 @@ t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
      value = c9x.param;
      *((uint32_t *)param) = value;
     } else {
-     memcpy(c9x.paramarm,param, sizeof(param));
+     memcpy(param,c9x.paramarm, sizeof(param));
     }
   }
   func = c9x.func;
