@@ -454,7 +454,8 @@ class CustomSwData { // Custom Switches data
     int  val1; //input
     int  val2; //offset
     uint8_t func;
-
+    uint8_t delay;
+    uint8_t duration;
     void clear() { memset(this, 0, sizeof(CustomSwData)); }
 };
 
@@ -705,6 +706,7 @@ enum Capability {
  FuncSwitches,
  InstantTrimSW,
  CustomSwitches,
+ CustomSwitchesExt,
  RotaryEncoders,
  Outputs,
  ExtraChannels,

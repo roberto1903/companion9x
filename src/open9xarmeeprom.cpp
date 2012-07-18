@@ -755,7 +755,8 @@ t_Open9xArmCustomSwData_v210::t_Open9xArmCustomSwData_v210(CustomSwData &c9x)
   func = c9x.func;
   v1 = c9x.val1;
   v2 = c9x.val2;
-
+  delay = c9x.delay;
+  duration = c9x.duration;
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     v1 = open9xArm209FromSource(RawSource(c9x.val1));
   }
@@ -776,7 +777,9 @@ t_Open9xArmCustomSwData_v210::operator CustomSwData ()
   c9x.func = func;
   c9x.val1 = v1;
   c9x.val2 = v2;
-
+  c9x.delay = delay;
+  c9x.duration = duration;
+  
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     c9x.val1 = open9xArm209ToSource(v1).toValue();
   }
