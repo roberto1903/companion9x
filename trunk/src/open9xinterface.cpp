@@ -427,6 +427,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_NUM_CSW;
       else
         return O9X_NUM_CSW;
+    case CustomSwitchesExt:
+      if (board == BOARD_ERSKY9X)
+        return true;
+      else
+        return false;
     case RotaryEncoders:
       if (board == BOARD_GRUVIN9X)
         return 2;

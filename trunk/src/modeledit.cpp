@@ -1180,6 +1180,12 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
       default:
         break;
     }
+    if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+      cswitchDuration[i]->setVisible(true);
+      cswitchDuration[i]->setValue(g_model.customSw[i].duration/2);
+      cswitchDelay[i]->setVisible(true);
+      cswitchDelay[i]->setValue(g_model.customSw[i].delay/2);
+    }
 }
 
 void ModelEdit::updateSwitchesTab()
@@ -1237,6 +1243,30 @@ void ModelEdit::tabCustomSwitches()
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
+        if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+          cswitchDuration[i] = new QDoubleSpinBox(this);
+          cswitchDuration[i]->setSingleStep(0.5);
+          cswitchDuration[i]->setMaximum(50);
+          cswitchDuration[i]->setMinimum(0);
+          cswitchDuration[i]->setAccelerated(true);
+          cswitchDuration[i]->setDecimals(1);
+          connect(cswitchDuration[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_21->addWidget(cswitchDuration[i],i+1,4);
+          cswitchDuration[i]->setVisible(false);
+
+          cswitchDelay[i] = new QDoubleSpinBox(this);
+          cswitchDelay[i]->setSingleStep(0.5);
+          cswitchDelay[i]->setMaximum(50);
+          cswitchDelay[i]->setMinimum(0);
+          cswitchDelay[i]->setAccelerated(true);
+          cswitchDelay[i]->setDecimals(1);
+          connect(cswitchDelay[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_21->addWidget(cswitchDelay[i],i+1,5);
+          cswitchDelay[i]->setVisible(false);
+        } else {
+          ui->cswCol3->hide();
+          ui->cswCol4->hide();
+        }
       } else {
         csw[i]->hide();
         cswlabel[i]->hide();
@@ -1263,6 +1293,30 @@ void ModelEdit::tabCustomSwitches()
           connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
           cswitchOffset[i]->setVisible(false);
+          if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+            cswitchDuration[i] = new QDoubleSpinBox(this);
+            cswitchDuration[i]->setSingleStep(0.5);
+            cswitchDuration[i]->setMaximum(50);
+            cswitchDuration[i]->setMinimum(0);
+            cswitchDuration[i]->setAccelerated(true);
+            cswitchDuration[i]->setDecimals(1);
+            connect(cswitchDuration[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+            ui->gridLayout_22->addWidget(cswitchDuration[i],i-15,4);
+            cswitchDuration[i]->setVisible(false);
+
+            cswitchDelay[i] = new QDoubleSpinBox(this);
+            cswitchDelay[i]->setSingleStep(0.5);
+            cswitchDelay[i]->setMaximum(50);
+            cswitchDelay[i]->setMinimum(0);
+            cswitchDelay[i]->setAccelerated(true);
+            cswitchDelay[i]->setDecimals(1);
+            connect(cswitchDelay[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+            ui->gridLayout_22->addWidget(cswitchDelay[i],i-15,5);
+            cswitchDelay[i]->setVisible(false);
+          } else {
+            ui->cswCol3_2->hide();
+            ui->cswCol4_2->hide();
+          }
         } else {
           csw[i]->hide();
           cswlabel[i]->hide();
@@ -1443,6 +1497,10 @@ void ModelEdit::customSwitchesEdited()
             g_model.customSw[i].val1 = 0;
             g_model.customSw[i].val2 = 0;
             setSwitchWidgetVisibility(i);
+        }
+        if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+          g_model.customSw[i].delay= cswitchDelay[i]->value()*2;
+          g_model.customSw[i].duration= cswitchDuration[i]->value()*2;
         }
         RawSource source;
         switch(CS_STATE(g_model.customSw[i].func))
