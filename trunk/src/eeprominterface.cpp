@@ -459,6 +459,7 @@ void RegisterFirmwares()
   open9x->addOption("potscroll");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
+  open9x->addOption("nobold");
   open9x->addOption("pgbar");
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
@@ -478,6 +479,7 @@ void RegisterFirmwares()
   open9x->addOption("ppmca");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
+  open9x->addOption("nobold");
   open9x->addOption("pgbar");
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
@@ -494,6 +496,7 @@ void RegisterFirmwares()
   open9x->addOption("nofp");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
+  open9x->addOption("nobold");
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
 
