@@ -96,7 +96,7 @@ t_Th9xGeneral::t_Th9xGeneral(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = th9xFromSwitch(c9x.lightSw);
+  // lightSw = th9xFromSwitch(c9x.lightSw);
   trainer = c9x.trainer;
   adcFilt = c9x.filterInput;
   // keySpeed
@@ -135,7 +135,7 @@ Th9xGeneral::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = th9xToSwitch(lightSw);
+  // result.lightSw = th9xToSwitch(lightSw);
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;

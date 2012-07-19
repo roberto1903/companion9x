@@ -351,7 +351,7 @@ class GeneralSettings {
     uint8_t   contrast;
     uint8_t   vBatWarn;
     int8_t    vBatCalib;
-    RawSwitch lightSw;
+    uint8_t   backlightMode;
     TrainerData trainer;
     uint8_t   view;    // main screen view // TODO enum
     bool      disableThrottleWarning;
@@ -373,7 +373,7 @@ class GeneralSettings {
     bool      disableBG;
     bool      disableSplashScreen;
     uint8_t   filterInput; // TODO enum
-    uint8_t   lightAutoOff;
+    uint8_t   backlightDelay;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
     int8_t    hapticLength;
@@ -381,7 +381,7 @@ class GeneralSettings {
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;
     uint8_t   speakerMode;
-    uint8_t   lightOnStickMove;
+    uint8_t   lightOnStickMove; /* er9x / ersky9x only */
     char      ownerName[10+1];
     uint8_t   switchWarningStates;
     int8_t    beeperLength;

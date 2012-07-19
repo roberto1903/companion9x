@@ -36,7 +36,7 @@ PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   contrast;
   uint8_t   vBatWarn;
   int8_t    vBatCalib;
-  int8_t    lightSw;
+  int8_t    backlightMode;
   Open9xTrainerData_v201 trainer;
   uint8_t   view;      //index of subview in main scrren
   uint8_t   disableThrottleWarning:1;
@@ -57,7 +57,7 @@ PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
   int8_t    hapticMode:2;
   uint8_t   filterInput;
-  uint8_t   lightAutoOff;
+  uint8_t   backlightDelay;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
   int8_t    hapticLength;

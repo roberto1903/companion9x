@@ -186,7 +186,7 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = open9xArmFromSwitch(c9x.lightSw);
+  backlightMode = c9x.backlightMode;
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -204,15 +204,15 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
   flashBeep = c9x.flashBeep;
   disableSplashScreen = c9x.disableSplashScreen;
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
-  hapticMode=c9x.hapticMode;
+  hapticMode = c9x.hapticMode;
   filterInput = c9x.filterInput;
-  lightAutoOff = c9x.lightAutoOff;
+  backlightDelay = c9x.backlightDelay;
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
-  beeperLength=c9x.beeperLength;
+  beeperLength = c9x.beeperLength;
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
-  hapticLength=c9x.hapticLength;
+  hapticLength = c9x.hapticLength;
   gpsFormat =  c9x.gpsFormat;
 
   speakerVolume = c9x.speakerVolume;
@@ -236,7 +236,7 @@ Open9xGeneralData_v208::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = open9xArmToSwitch(lightSw);
+  result.backlightMode = backlightMode;
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -256,7 +256,7 @@ Open9xGeneralData_v208::operator GeneralSettings ()
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
+  result.backlightDelay = backlightDelay;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   result.beeperLength=beeperLength;

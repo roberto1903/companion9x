@@ -290,6 +290,18 @@ QString getTimerMode(int tm) {
 
 }
 
+void populateBacklightCB(QComboBox *b, const uint8_t value)
+{
+  QString strings[] = { QObject::tr("OFF"), QObject::tr("Keys"), QObject::tr("Sticks"), QObject::tr("Keys + Sticks"), QObject::tr("ON"), NULL };
+
+  b->clear();
+
+  for (int i=0; !strings[i].isNull(); i++) {
+    b->addItem(strings[i], 0);
+    if (value == i) b->setCurrentIndex(b->count()-1);
+  }
+}
+
 void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr, UseContext context)
 {
   RawSwitch item;

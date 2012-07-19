@@ -148,7 +148,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = open9xFromSwitch(c9x.lightSw);
+  backlightMode = c9x.backlightMode;
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -168,7 +168,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
   hapticMode=c9x.hapticMode;
   filterInput = c9x.filterInput;
-  lightAutoOff = c9x.lightAutoOff;
+  backlightDelay = c9x.backlightDelay;
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
   beeperLength=c9x.beeperLength;
@@ -192,7 +192,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = open9xToSwitch(lightSw);
+  result.backlightMode = backlightMode;
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -212,13 +212,13 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
+  result.backlightDelay = backlightDelay;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   result.beeperLength=beeperLength;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
-  result.hapticLength=hapticLength;
+  result.hapticLength = hapticLength;
   result.gpsFormat = gpsFormat;
   return result;
 }
