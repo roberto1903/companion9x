@@ -39,7 +39,7 @@ QString getFuncName(unsigned int val)
   else {
     if (val< FuncCount) {
       QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"), QObject::tr("Instant Trim"),
-                                    QObject::tr("Play Sound"), QObject::tr("Play Haptic"), QObject::tr("Reset"), QObject::tr("Vario"), QObject::tr("Play Prompt"), QObject::tr("Play Value"), QObject::tr("Start Logs"), QObject::tr("Volume") };
+                                    QObject::tr("Play Sound"), QObject::tr("Play Haptic"), QObject::tr("Reset"), QObject::tr("Vario"), QObject::tr("Play Prompt"), QObject::tr("Play Value"), QObject::tr("Start Logs"), QObject::tr("Volume"), QObject::tr("Backlight") };
       return strings[val-NUM_SAFETY_CHNOUT];
     } else {
       return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)

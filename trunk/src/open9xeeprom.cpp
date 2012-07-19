@@ -929,6 +929,7 @@ enum Functions {
 #if defined(PCBV4)
   FUNC_LOGS,
 #endif
+  FUNC_BACKLIGHT,
 #if defined(DEBUG)
   FUNC_TEST, // should remain the last before MAX as not added in companion9x
 #endif
@@ -956,6 +957,8 @@ t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
       func = 24;
     else if (c9x.func == FuncVario)
       func = 25;
+    else if (c9x.func == FuncBacklight)
+      func = 26;    
     else {
       swtch = 0;
       func = 0;
@@ -986,6 +989,8 @@ t_Open9xFuncSwData_v203::operator FuncSwData ()
       c9x.func = FuncReset;
     else if (func == 25)
       c9x.func = FuncVario;
+    else if (func == 26)
+      c9x.func = FuncBacklight;
     else
       c9x.clear();
   }

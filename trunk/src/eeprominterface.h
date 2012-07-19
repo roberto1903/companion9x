@@ -485,6 +485,7 @@ enum AssignFunc {
   FuncPlayValue,
   FuncLogs,
   FuncVolume,
+  FuncBacklight,
   FuncCount
 };
 
