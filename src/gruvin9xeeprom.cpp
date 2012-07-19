@@ -101,7 +101,16 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = gruvin9xToSwitch(lightSw);
+
+  result.backlightMode = 0;
+  if (lightSw == 22) {
+    result.backlightMode = 4;
+  }
+  else if (lightAutoOff) {
+    result.backlightMode |= 1;
+    result.backlightDelay = lightAutoOff;
+  }
+
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -131,7 +140,6 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
   result.disableSplashScreen = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   // TODO frskyRssiAlarms[2];
@@ -159,7 +167,12 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = gruvin9xFromSwitch(c9x.lightSw);
+
+  if (c9x.backlightMode == 4)
+    lightSw = 22;
+  if (c9x.backlightMode & 1)
+    lightAutoOff = c9x.backlightDelay;
+
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -182,7 +195,6 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
   spare = 0;
   filterInput = c9x.filterInput;
-  lightAutoOff = c9x.lightAutoOff;
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
   // TODO frskyRssiAlarms[2];
@@ -202,7 +214,16 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = gruvin9xToSwitch(lightSw);
+
+  result.backlightMode = 0;
+  if (lightSw == 22) {
+    result.backlightMode = 4;
+  }
+  else if (lightAutoOff) {
+    result.backlightMode |= 1;
+    result.backlightDelay = lightAutoOff;
+  }
+
   result.trainer = trainer;
   result.view = view;
   result.disableThrottleWarning = disableThrottleWarning;
@@ -219,7 +240,6 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   result.disableSplashScreen = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   // TODO frskyRssiAlarms[2];

@@ -49,8 +49,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QRegExp rx(CHAR_FOR_NAMES_REGEX);
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
-    populateSwitchCB(ui->backlightswCB, g_eeGeneral.lightSw);
-
+    populateBacklightCB(ui->backlightswCB, g_eeGeneral.backlightMode);
 
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
     if (!GetEepromInterface()->getCapability(OwnerName)) {
@@ -205,7 +204,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
     ui->contrastSB->setValue(g_eeGeneral.contrast);
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
-    ui->backlightautoSB->setValue(g_eeGeneral.lightAutoOff*5);
+    ui->backlightautoSB->setValue(g_eeGeneral.backlightDelay*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
     ui->inputfilterCB->setCurrentIndex(g_eeGeneral.filterInput);
@@ -347,7 +346,7 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 {
   if (switchDefPosEditLock)
     return;
-  g_eeGeneral.lightSw = RawSwitch(ui->backlightswCB->itemData(ui->backlightswCB->currentIndex()).toInt());
+  g_eeGeneral.backlightMode = ui->backlightswCB->currentIndex();
   updateSettings();
 }
 
@@ -377,7 +376,7 @@ void GeneralEdit::on_backlightautoSB_editingFinished()
     ui->backlightautoSB->setValue(i*5);
   else
   {
-    g_eeGeneral.lightAutoOff = i;
+    g_eeGeneral.backlightDelay = i;
     updateSettings();
   }
 }

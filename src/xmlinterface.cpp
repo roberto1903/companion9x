@@ -132,8 +132,8 @@ bool XmlInterface::save(RadioData &radioData)
       gs.splash_screen(false);
     if (settings.filterInput)
       gs.filter_input(filter_input::value(settings.filterInput));
-    if (settings.lightAutoOff)
-      gs.light_auto_off_timer(settings.lightAutoOff);
+    /* TODO if (settings.backlightDelay)
+      gs.light_auto_off_timer(settings.lightAutoOff); */
     gs.default_channel_order(settings.templateSetup);
     if (strlen(settings.ownerName))
       gs.owner_name(settings.ownerName);

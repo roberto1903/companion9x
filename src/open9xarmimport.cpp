@@ -19,6 +19,8 @@
 #define DSM2_PPM
 #define AUTOSWITCH
 #define GRAPHICS
+#define SDCARD
+
 #undef min
 #undef max
 
@@ -29,7 +31,6 @@
 #include <exception>
 
 namespace Open9xARM {
-
 #include "../open9x/board_ersky9x.cpp"
 #include "../open9x/eeprom_arm.cpp"
 #include "../open9x/open9x.cpp"

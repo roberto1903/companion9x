@@ -79,7 +79,14 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  lightSw = er9xFromSwitch(c9x.lightSw);
+
+  if (c9x.backlightMode == 4)
+    lightSw = 22;
+  if (c9x.backlightMode & 1)
+    lightAutoOff = c9x.backlightDelay;
+  if (c9x.backlightMode & 2)
+    lightOnStickMove = c9x.backlightDelay;
+
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -104,14 +111,12 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   disablePotScroll=(c9x.disablePotScroll ? 1 : 0);
   disableBG=(c9x.disableBG ? 1 :0);
   filterInput = c9x.filterInput;
-  lightAutoOff = c9x.lightAutoOff;
   templateSetup = c9x.templateSetup;
   PPM_Multiplier = c9x.PPM_Multiplier;
   setEEPROMString(ownerName, c9x.ownerName, sizeof(ownerName));
   optrexDisplay = c9x.optrexDisplay;
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
-  lightOnStickMove = c9x.lightOnStickMove;
   speakerMode = c9x.speakerMode;
   switchWarningStates =c9x.switchWarningStates;
   volume = c9x.speakerVolume;
@@ -135,7 +140,20 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.contrast = contrast;
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
-  result.lightSw = er9xToSwitch(lightSw);
+
+  result.backlightMode = 0;
+  if (lightSw == 22) {
+    result.backlightMode = 4;
+  }
+  else if (lightAutoOff) {
+    result.backlightMode |= 1;
+    result.backlightDelay = lightAutoOff;
+  }
+  else if (lightOnStickMove) {
+    result.backlightMode |= 2;
+    result.backlightDelay = lightOnStickMove;
+  }
+
   result.trainer = trainer;
   result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;
@@ -166,14 +184,12 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.disablePotScroll=(disablePotScroll==1);
   result.disableBG=(disableBG==1);
   result.filterInput = filterInput;
-  result.lightAutoOff = lightAutoOff;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
   getEEPROMString(result.ownerName, ownerName, sizeof(ownerName));
   result.optrexDisplay = optrexDisplay;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
-  result.lightOnStickMove = lightOnStickMove;
   result.speakerMode = speakerMode;
   result.switchWarningStates = switchWarningStates;
   result.speakerVolume = volume;
