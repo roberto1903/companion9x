@@ -849,7 +849,7 @@ Index: er9x/simpgmspace.cpp
 +  try {
 +#endif
 +    g_menuStack[0] = menuProc0;
-+    // g_menuStack[1] = menuProcModelSelect;
++    g_menuStack[1] = menuProcModelSelect;
 +
 +    eeReadAll(); //load general setup and selected model
 +
