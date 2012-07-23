@@ -42,6 +42,7 @@ namespace Open9xARM {
 #include "../open9x/main_views.cpp"
 #include "../open9x/statistics_views.cpp"
 #include "../open9x/lcd.cpp"
+#include "../open9x/logs.cpp"
 #include "../open9x/drivers.cpp"
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/templates.cpp"
@@ -49,6 +50,7 @@ namespace Open9xARM {
 #include "../open9x/frsky.cpp"
 #include "../open9x/ersky9x/audio.cpp"
 #include "../open9x/ersky9x/sound_driver.cpp"
+#include "../open9x/ersky9x/sdcard_driver.cpp"
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
