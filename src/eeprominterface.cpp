@@ -297,11 +297,15 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_VIRTUAL:
     {
       QString neg = QString("");
-      if (index < 0) { neg = QString("!"); index = -index; }
-      if (index < 10)
-        return neg+QObject::tr("SW%1").arg(index);
+      int ind=index;
+      if (index < 0) { 
+        neg = QString("!"); 
+        ind = -index;
+      }
+      if (ind < 10)
+        return neg+QObject::tr("CSW%1").arg(ind);
       else
-        return neg+QObject::tr("SW%1").arg(QChar('A'+index-10));
+        return neg+QObject::tr("CSW%1").arg(QChar('A'+ind-10));
     }
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
@@ -313,11 +317,15 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_MOMENT_VIRTUAL:
     {
       QString neg = QString("m");
-      if (index < 0) { neg = QString("!m"); index = -index; }
-      if (index < 10)
-        return neg+QObject::tr("SW%1").arg(index);
+      int ind=index;
+      if (index < 0) {
+        neg = QString("!m"); 
+        ind = -index;
+      }
+      if (ind < 10)
+        return neg+QObject::tr("CSW%1").arg(ind);
       else
-        return neg+QObject::tr("SW%1").arg(QChar('A'+index-10));
+        return neg+QObject::tr("CSW%1").arg(QChar('A'+ind-10));
     }
     default:
       return QObject::tr("----");
