@@ -356,7 +356,7 @@ const char * options[]={
         "imperial",
         "speaker",
         "noht",
-	 	"nographics",
+        "nographics",
         "nobold",
         NULL };
   
@@ -382,7 +382,7 @@ const char * options[]={
         tr("Imperial units"),
         tr("Support for radio modified with regular speaker"),
         tr("Disable heli and templates menus"),
-		tr("No graphical check boxes and sliders"),
+        tr("No graphical check boxes and sliders"),
         tr("Don't use bold font for highlighting active items"),
         tr("") };
   int i;
