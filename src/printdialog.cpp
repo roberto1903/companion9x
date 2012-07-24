@@ -604,7 +604,7 @@ void printDialog::printSwitches()
         if(g_model->customSw[i].func)
         {
             str.append("<tr>");
-            str.append("<td width=\"60\" align=\"center\"><b>"+tr("SW")+QString("%1</b></td>").arg(i+1));
+            str.append("<td width=\"60\" align=\"center\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
             QString tstr;
             switch CS_STATE(g_model->customSw[i].func)
             {
