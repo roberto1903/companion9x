@@ -13,6 +13,7 @@
 #define VARIO
 #define DECIMALS_DISPLAYED
 #define AUDIO
+#define VOICE
 #define HAPTIC
 #define PXX
 #define DSM2
