@@ -303,9 +303,9 @@ QString RawSwitch::toString()
         ind = -index;
       }
       if (ind < 10)
-        return neg+QObject::tr("CSW%1").arg(ind);
+        return neg+QObject::tr("CS%1").arg(ind);
       else
-        return neg+QObject::tr("CSW%1").arg(QChar('A'+ind-10));
+        return neg+QObject::tr("CS%1").arg(QChar('A'+ind-10));
     }
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
@@ -323,9 +323,9 @@ QString RawSwitch::toString()
         ind = -index;
       }
       if (ind < 10)
-        return neg+QObject::tr("CSW%1").arg(ind);
+        return neg+QObject::tr("CS%1").arg(ind);
       else
-        return neg+QObject::tr("CSW%1").arg(QChar('A'+ind-10));
+        return neg+QObject::tr("CS%1").arg(QChar('A'+ind-10));
     }
     default:
       return QObject::tr("----");
