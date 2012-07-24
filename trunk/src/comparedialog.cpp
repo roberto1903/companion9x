@@ -960,7 +960,7 @@ void compareDialog::printSwitches()
         str.append("<tr>");
         color=getColor1(sw1,sw2);
         str.append(QString("<td  width=\"45%\"><font color=%1>").arg(color)+sw1+"</font></td>");
-        str.append("<td align=\"center\" width=\"10%\"><b>"+tr("SW")+QString("%1</b></td>").arg(i+1));
+        str.append("<td align=\"center\" width=\"10%\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
         color=getColor2(sw1,sw2);
         str.append(QString("<td  width=\"45%\"><font color=%1>").arg(color)+sw2+"</font></td>");
         str.append("</tr>");
