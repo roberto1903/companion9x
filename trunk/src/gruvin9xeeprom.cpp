@@ -727,12 +727,24 @@ t_Gruvin9xModelData_v102::operator ModelData ()
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+
+  for (int i=0; i<G9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<G9X_MAX_CURVE9; i++) {
+    c9x.curves[G9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[G9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_CHNOUT; i++)
@@ -788,12 +800,24 @@ t_Gruvin9xModelData_v103::operator ModelData ()
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+
+  for (int i=0; i<G9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<G9X_MAX_CURVE9; i++) {
+    c9x.curves[G9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[G9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_CHNOUT; i++)
@@ -866,12 +890,24 @@ t_Gruvin9xModelData_v105::operator ModelData ()
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+
+  for (int i=0; i<G9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<G9X_MAX_CURVE9; i++) {
+    c9x.curves[G9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[G9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_FSW; i++)
@@ -940,12 +976,24 @@ t_Gruvin9xModelData_v106::operator ModelData ()
     c9x.limitData[i] = limitData[i];
   for (int i=0; i<G9X_MAX_EXPOS; i++)
     c9x.expoData[i] = expoData[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+
+  for (int i=0; i<G9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<G9X_MAX_CURVE9; i++) {
+    c9x.curves[G9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[G9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[G9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
   for (int i=0; i<G9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
   for (int i=0; i<G9X_NUM_FSW; i++)
@@ -1010,12 +1058,12 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
       expoData[i] = c9x.expoData[i];
     if (c9x.expoData[G9X_MAX_EXPOS].mode)
       EEPROMWarnings += QObject::tr("gruvin9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
-    for (int i=0; i<MAX_CURVE5; i++)
+    /* TODO for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
-        curves9[i][j] = c9x.curves9[i][j];
+        curves9[i][j] = c9x.curves9[i][j]; */
     for (int i=0; i<G9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
     for (int i=0; i<G9X_NUM_FSW; i++)

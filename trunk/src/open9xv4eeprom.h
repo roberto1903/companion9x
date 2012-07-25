@@ -172,8 +172,8 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
   Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v208 swashR;
@@ -208,8 +208,8 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
   Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v208 swashR;
@@ -249,8 +249,8 @@ PACK(typedef struct t_Open9xV4ModelData_v209 {
   Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
   Open9xLimitData limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
   Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v209 swashR;
@@ -274,8 +274,51 @@ PACK(typedef struct t_Open9xV4ModelData_v209 {
 
 }) Open9xV4ModelData_v209;
 
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 209
-typedef Open9xV4ModelData_v209   Open9xV4ModelData;
+PACK(typedef struct t_Open9xV4ModelData_v210 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timers[MAX_TIMERS];
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   disableThrottleWarning:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  int8_t    curves[O9X_MAX_CURVES];
+  int8_t    points[O9X_NUM_POINTS];
+  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xV4SwashRingData_v209 swashR;
+  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xFrSkyData_v208 frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+  uint8_t   frskyLines[4];
+  uint16_t  frskyLinesXtra;
+  int8_t    servoCenter[O9X_NUM_CHNOUT];
+
+  uint8_t varioSource:3;
+  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t varioSpeedDownMin;
+  uint8_t switchWarningStates;
+
+  operator ModelData();
+  t_Open9xV4ModelData_v210() { memset(this, 0, sizeof(t_Open9xV4ModelData_v210)); }
+  t_Open9xV4ModelData_v210(ModelData&);
+
+}) Open9xV4ModelData_v210;
+
+#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 210
+
+typedef Open9xV4ModelData_v210 Open9xV4ModelData;
 typedef Open9xGeneralData_v201 Open9xV4GeneralData;
 
 #endif

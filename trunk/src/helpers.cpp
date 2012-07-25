@@ -190,18 +190,19 @@ void populatePhasesCB(QComboBox *b, int value)
 
 void populateCurvesCB(QComboBox *b, int value) {
   b->clear();
-  for (int i = -(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
+  for (int i = -(MAX_CURVES)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + MAX_CURVES; i++)
     b->addItem(getCurveStr(i));
-  b->setCurrentIndex(value+(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves));
+  b->setCurrentIndex(value+MAX_CURVES*GetEepromInterface()->getCapability(HasNegCurves));
   b->setMaxVisibleItems(10);
 }
 
 void populateExpoCurvesCB(QComboBox *b, int value) {
   b->clear();
-  for (int i = 0; i < CURVE_BASE + MAX_CURVE5 + MAX_CURVE9; i++)
+  for (int i = 0; i < CURVE_BASE + MAX_CURVES; i++)
     b->addItem(getCurveStr(i));
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
+  /* TODO
   if (GetEepromInterface()->getCapability(ExpoCurve5)) {
     int curve5=GetEepromInterface()->getCapability(ExpoCurve5);
     for (int i=CURVE_BASE+curve5; i < CURVE_BASE + MAX_CURVE5; i++) {
@@ -228,6 +229,7 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
       b->model()->setData(index, v, Qt::UserRole - 1);
     }
   }
+  */
 }
 
 void populateTrimUseCB(QComboBox *b, unsigned int phase) {
@@ -488,7 +490,7 @@ QString getSignedStr(int value) {
 
 QString getCurveStr(int curve) {
   QString crvStr = "!c16!c15!c14!c13!c12!c11!c10!c9 !c8 !c7 !c6 !c5 !c4 !c3 !c2 !c1 ----x>0 x<0 |x| f>0 f<0 |f| c1  c2  c3  c4  c5  c6  c7  c8  c9  c10 c11 c12 c13 c14 c15 c16 ";
-  return crvStr.mid((curve+(MAX_CURVE5+MAX_CURVE9)) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
+  return crvStr.mid((curve+MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
 }
 
 QString image2qstring(QImage image) {

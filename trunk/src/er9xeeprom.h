@@ -21,8 +21,8 @@
 
 //eeprom data
 #define ER9X_MAX_MIXERS  32
-#define MAX_CURVE5  8
-#define MAX_CURVE9  8
+#define ER9X_MAX_CURVE5  8
+#define ER9X_MAX_CURVE9  8
 
 #define MDVERS      10
 
@@ -225,8 +225,8 @@ PACK(typedef struct t_Er9xModelData {
   Er9xLimitData limitData[ER9X_NUM_CHNOUT];
   Er9xExpoData  expoData[4];
   int8_t    trim[4];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[ER9X_MAX_CURVE5][5];
+  int8_t    curves9[ER9X_MAX_CURVE9][9];
   Er9xCustomSwData   customSw[ER9X_NUM_CSW];
   uint8_t   frSkyVoltThreshold ;
   int8_t   tmrModeB;

@@ -53,8 +53,8 @@ const uint8_t modn12x3[4][4]= {
 #define MAX_PHASES  9
 #define MAX_MIXERS  64
 #define MAX_EXPOS   32
-#define MAX_CURVE5  8
-#define MAX_CURVE9  8
+#define MAX_CURVES  16
+#define MAX_POINTS  17
 
 #define NUM_SAFETY_CHNOUT 16
 #define NUM_CHNOUT        32 // number of real output channels CH1-CH8
@@ -406,6 +406,22 @@ class ExpoData {
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
 
+class CurvePoint {
+  public:
+    int8_t x;
+    int8_t y;
+};
+
+class CurveData {
+  public:
+    CurveData() { clear(); }
+    bool custom;         // 0=end, 1=pos, 2=neg, 3=both
+    uint8_t count;
+    CurvePoint points[MAX_POINTS];
+
+    void clear() { memset(this, 0, sizeof(CurveData)); count = 5; }
+};
+
 class LimitData {
   public:
     LimitData() { clear(); }
@@ -670,8 +686,7 @@ class ModelData {
     MixData   mixData[MAX_MIXERS];
     LimitData limitData[NUM_CHNOUT];
     ExpoData  expoData[MAX_EXPOS];
-    int8_t    curves5[MAX_CURVE5][5];
-    int8_t    curves9[MAX_CURVE9][9];
+    CurveData curves[MAX_CURVES];
     CustomSwData  customSw[NUM_CSW];
     FuncSwData    funcSw[NUM_FSW];
     SafetySwData  safetySw[NUM_CHNOUT];

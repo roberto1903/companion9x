@@ -90,6 +90,8 @@ inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)
 
 bool Er9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
 {
+  std::cout << "trying er9x xml import... ";
+
   Er9xGeneral er9xGeneral;
   memset(&er9xGeneral,0,sizeof(er9xGeneral));
   if(!loadGeneralDataXML(&doc, &er9xGeneral)) {

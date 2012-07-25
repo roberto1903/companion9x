@@ -419,12 +419,13 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<NUM_STICKS; i++)
       trimData[i].itrim = std::max(-30, std::min(30, c9x.phaseData[0].trim[i]));
-    for (int i=0; i<TH9X_MAX_CURVES5; i++)
+/*    for (int i=0; i<TH9X_MAX_CURVES5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
     for (int i=0; i<TH9X_MAX_CURVES9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
+*/
     /*for (int i=0; i<TH9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];*/
   }
@@ -478,12 +479,22 @@ t_Th9xModelData::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_STICKS; i++)
     c9x.phaseData[0].trim[i] = trimData[i].itrim;
-  for (int i=0; i<TH9X_MAX_CURVES5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<TH9X_MAX_CURVES9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+  for (int i=0; i<TH9X_MAX_CURVES5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j=0; j<5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50*i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<TH9X_MAX_CURVES9; i++) {
+    c9x.curves[TH9X_MAX_CURVES5+i].custom = false;
+    c9x.curves[TH9X_MAX_CURVES5+i].count = 5;
+    for (int j=0; j<9; j++) {
+      c9x.curves[TH9X_MAX_CURVES5+i].points[j].x = -100 + 50*i;
+      c9x.curves[TH9X_MAX_CURVES5+i].points[j].y = curves9[i][j];
+    }
+  }
   /*for (int i=0; i<TH9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];*/
 
