@@ -2,7 +2,6 @@
 #define HELPERS_H
 
 #include <QtGui>
-#include <unistd.h>
 #include "eeprominterface.h"
 
 #define TMR_NUM_OPTION  (TMR_VAROFS+2*9+2*GetEepromInterface()->getCapability(CustomSwitches)-1)

@@ -25,8 +25,8 @@ public:
 private:
     Ui::ModelEdit *ui;
 
-    QSpinBox* spn5[MAX_CURVE5][5];
-    QSpinBox* spn9[MAX_CURVE9][9];
+    QSpinBox* spn5[8/*MAX_CURVE5*/][5];
+    QSpinBox* spn9[8/*MAX_CURVE9*/][9];
     QDoubleSpinBox* minSB[4];
     QDoubleSpinBox* maxSB[4];
     QComboBox* csf[16];

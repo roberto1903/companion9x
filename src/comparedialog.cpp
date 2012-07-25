@@ -870,6 +870,7 @@ void compareDialog::printMixers()
 
 void compareDialog::printCurves()
 {
+#if 0
   int i,r,g,b,c;
   char buffer [16];
   QString color;
@@ -892,6 +893,7 @@ void compareDialog::printCurves()
   for(i=0; i<5; i++) 
     str.append(doTC(tr("pt %1").arg(i+1), "", true));
   str.append("</tr>");
+
   for(i=0; i<MAX_CURVE5; i++) {
     qplot_color[i]->getRgb(&r,&g,&b);
     c=r;
@@ -943,6 +945,7 @@ void compareDialog::printCurves()
   }
   str.append("</table></td></tr></table>");
   te->append(str);
+#endif
 }
 
 void compareDialog::printSwitches()

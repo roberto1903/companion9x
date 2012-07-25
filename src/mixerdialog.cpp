@@ -110,7 +110,7 @@ void MixerDialog::valuesChanged()
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
-    md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVE5+MAX_CURVE9)*GetEepromInterface()->getCapability(HasNegCurves);
+// TODO here we need to introduce a new capacity!!!    md->curve     = ui->curvesCB->currentIndex()-(MAX_CURVES)*GetEepromInterface()->getCapability(HasNegCurves);
     md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();

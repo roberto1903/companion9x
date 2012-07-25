@@ -951,12 +951,14 @@ void ModelEdit::updateCurvesTab()
     ChkB->setChecked(plot_curve[ChkBn]);
   }
 
+#if 0
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
       spn5[i][j]->setValue(g_model.curves5[i][j]);
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       spn9[i][j]->setValue(g_model.curves9[i][j]);
+#endif
 
   ControlCurveSignal(false);
 }
@@ -964,6 +966,7 @@ void ModelEdit::updateCurvesTab()
 
 void ModelEdit::tabCurves()
 {
+#if 0
   QSpinBox* tmp5[MAX_CURVE5][5] = {
         { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
       , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
@@ -1033,6 +1036,7 @@ void ModelEdit::tabCurves()
   foreach(QCheckBox *ChkB, findChildren<QCheckBox *>(QRegExp("plotCB_[0-9]+"))) {
     connect(ChkB, SIGNAL(toggled(bool)), this, SLOT(plotCurve(bool)));
   }
+#endif
 }
 
 void ModelEdit::limitOffsetEdited()
@@ -1103,6 +1107,7 @@ void ModelEdit::startupSwitchEdited()
 
 void ModelEdit::setCurrentCurve(int curveId)
 {
+#if 0
   currentCurve = curveId;
   QString ss = "QSpinBox { background-color:rgb(255, 255, 127);}";
 
@@ -1112,10 +1117,12 @@ void ModelEdit::setCurrentCurve(int curveId)
   for (int i=0; i<MAX_CURVE9; i++)
     for (int j=0; j<9; j++)
       spn9[i][j]->setStyleSheet(curveId == i+MAX_CURVE5 ? ss : "");
+#endif
 }
 
 void ModelEdit::curvePointEdited()
 {
+#if 0
   QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
   int curveId = spinBox->objectName().right(1).toInt() - 1;
   if (spinBox->objectName().right(2).left(1).toInt() == 1)
@@ -1135,6 +1142,7 @@ void ModelEdit::curvePointEdited()
     drawCurve();
 
   updateSettings();
+#endif
 }
 
 
@@ -3006,14 +3014,18 @@ void ModelEdit::phaseTrimSlider_valueChanged()
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
+#if 0
   if (currentCurve < MAX_CURVE5)
     return spn5[currentCurve][i];
   else
     return spn9[currentCurve - MAX_CURVE5][i];
+#endif
+  return NULL;
 }
 
 void ModelEdit::drawCurve()
 {
+#if 0
     int k,i;
     QColor * plot_color[16];
 
@@ -3100,6 +3112,7 @@ void ModelEdit::drawCurve()
             scene->addItem(nodex);
             if(i>0) scene->addItem(new Edge(nodel, nodex));
         }
+#endif
 }
 
 
@@ -3747,6 +3760,7 @@ void ModelEdit::on_pushButton_clicked()
 
 void ModelEdit::resetCurve()
 {
+#if 0
   QPushButton *button = (QPushButton *)sender();
   int btn=button->objectName().mid(button->objectName().lastIndexOf("_")+1).toInt()-1;
   if (btn<MAX_CURVE5) {
@@ -3758,6 +3772,7 @@ void ModelEdit::resetCurve()
   updateCurvesTab();
   updateSettings();
   drawCurve();
+#endif
 }
 
 void ModelEdit::editCurve()
@@ -3894,8 +3909,10 @@ void ModelEdit::clearCurves(bool ask)
     int res = QMessageBox::question(this,tr("Clear Curves?"),tr("Really clear all the curves?"),QMessageBox::Yes | QMessageBox::No);
     if(res!=QMessageBox::Yes) return;
   }
+#if 0
   memset(g_model.curves5,0,sizeof(g_model.curves5)); //clear all curves
   memset(g_model.curves9,0,sizeof(g_model.curves9)); //clear all curves
+#endif
   updateSettings();
   updateCurvesTab();
   resizeEvent();
@@ -3903,10 +3920,12 @@ void ModelEdit::clearCurves(bool ask)
 
 void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 {
+#if 0
   if(c<MAX_CURVE5) //5 pt curve
     for(uint8_t i=0; i<5; i++) g_model.curves5[c][i] = ar[i];
   else  //9 pt curve
     for(uint8_t i=0; i<9; i++) g_model.curves9[c-MAX_CURVE5][i] = ar[i];
+#endif
 }
 
 void ModelEdit::setSwitch(unsigned int idx, unsigned int func, int v1, int v2)

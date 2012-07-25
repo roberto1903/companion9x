@@ -25,6 +25,8 @@
 #define O9X_ARM_NUM_CHNOUT  32 // number of real output channels CH1-CH16
 #define O9X_ARM_NUM_CSW     32 // number of custom switches
 #define O9X_ARM_NUM_FSW     32 // number of functions assigned to switches
+#define O9X_ARM_MAX_CURVES  16
+#define O9X_ARM_NUM_POINTS  256
 
 PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   myVers;
@@ -71,6 +73,8 @@ PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   speakerVolume;
   uint8_t   backlightBright;
   int8_t    currentCalib;
+
+  uint8_t   variants;
 
   operator GeneralSettings();
   t_Open9xGeneralData_v208() { memset(this, 0, sizeof(t_Open9xGeneralData_v208)); }
@@ -319,8 +323,8 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
   Open9xArmMixData_v208 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v208  expoData[O9X_ARM_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xArmCustomSwData_v208 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v208 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v208 swashR;
@@ -360,8 +364,8 @@ PACK(typedef struct t_Open9xArmModelData_v209 {
   Open9xArmMixData_v209 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v208  expoData[O9X_ARM_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xArmCustomSwData_v209 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v208 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v209 swashR;
@@ -402,8 +406,8 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
   Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[O9X_209_MAX_CURVE5][5];
+  int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v210 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v209 swashR;
@@ -425,9 +429,49 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
 
 }) Open9xArmModelData_v210;
 
-#define LAST_OPEN9X_ARM_EEPROM_VER 210
+PACK(typedef struct t_Open9xArmModelData_v211 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timers[MAX_TIMERS];
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   disableThrottleWarning:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare2:1;
+  int8_t    ppmDelay;
+  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
+  Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
+  int8_t    curves[O9X_ARM_MAX_CURVES];
+  int8_t    points[O9X_ARM_NUM_POINTS];
+  Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
+  Open9xArmFuncSwData_v210 funcSw[O9X_ARM_NUM_FSW];
+  Open9xArmSwashRingData_v209 swashR;
+  Open9xArmPhaseData_v208 phaseData[O9X_ARM_MAX_PHASES];
+  Open9xArmFrSkyData_v210 frsky;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+  int8_t    servoCenter[O9X_ARM_NUM_CHNOUT];
 
-typedef Open9xArmModelData_v210   Open9xArmModelData;
+  uint8_t varioSource:3;
+  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t varioSpeedDownMin;
+  uint8_t switchWarningStates;
+
+  operator ModelData();
+  t_Open9xArmModelData_v211() { memset(this, 0, sizeof(t_Open9xArmModelData_v211)); }
+  t_Open9xArmModelData_v211(ModelData&);
+
+}) Open9xArmModelData_v211;
+
+#define LAST_OPEN9X_ARM_EEPROM_VER 211
+
+typedef Open9xArmModelData_v211   Open9xArmModelData;
 typedef Open9xGeneralData_v208    Open9xArmGeneralData;
 
 #endif

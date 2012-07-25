@@ -306,8 +306,8 @@ PACK(typedef struct t_Gruvin9xTimerData {
 #define G9X_MAX_PHASES 5
 #define G9X_MAX_MIXERS 32
 #define G9X_MAX_EXPOS  14
-#define MAX_CURVE5 8
-#define MAX_CURVE9 8
+#define G9X_MAX_CURVE5 8
+#define G9X_MAX_CURVE9 8
 
 #define G9X_NUM_CHNOUT   16 // number of real output channels CH1-CH16
 #define G9X_NUM_CSW      12 // number of custom switches
@@ -333,8 +333,8 @@ PACK(typedef struct t_Gruvin9xModelData_v102 {
   Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
   Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[G9X_MAX_CURVE5][5];
+  int8_t    curves9[G9X_MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
@@ -365,8 +365,8 @@ PACK(typedef struct t_Gruvin9xModelData_v103 {
   Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
   Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[G9X_MAX_CURVE5][5];
+  int8_t    curves9[G9X_MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xSwashRingData swashR;
@@ -397,8 +397,8 @@ PACK(typedef struct t_Gruvin9xModelData_v105 {
   Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
   Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[G9X_MAX_CURVE5][5];
+  int8_t    curves9[G9X_MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];
@@ -431,8 +431,8 @@ PACK(typedef struct t_Gruvin9xModelData_v106 {
   Gruvin9xMixData   mixData[G9X_MAX_MIXERS];
   Gruvin9xLimitData limitData[G9X_NUM_CHNOUT];
   Gruvin9xExpoData  expoData[G9X_MAX_EXPOS];
-  int8_t    curves5[MAX_CURVE5][5];
-  int8_t    curves9[MAX_CURVE9][9];
+  int8_t    curves5[G9X_MAX_CURVE5][5];
+  int8_t    curves9[G9X_MAX_CURVE9][9];
   Gruvin9xCustomSwData  customSw[G9X_NUM_CSW];
   Gruvin9xSafetySwData  safetySw[G9X_NUM_CHNOUT];
   Gruvin9xFuncSwData    funcSw[G9X_NUM_FSW];

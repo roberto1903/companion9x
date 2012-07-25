@@ -45,7 +45,6 @@
 #include <QtGui>
 #include <QMainWindow>
 #include <QDateTime>
-#include <unistd.h>
 #include "downloaddialog.h"
 #include "eeprominterface.h"
 

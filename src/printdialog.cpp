@@ -473,6 +473,7 @@ void printDialog::printLimits()
 
 void printDialog::printCurves()
 {
+#if 0
     int i,r,g,b,c,count;
     char buffer [16];
     QPen pen(Qt::black, 2, Qt::SolidLine);
@@ -590,6 +591,7 @@ void printDialog::printCurves()
     qi.save(curvefile9, "png",100);     
     
     te->append(str);
+#endif
 }
 
 void printDialog::printSwitches()

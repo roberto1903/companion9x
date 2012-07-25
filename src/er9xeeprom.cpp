@@ -686,12 +686,16 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 
     for (int i=0; i<NUM_STICKS; i++)
       trim[i] = std::max(-125, std::min(125, c9x.phaseData[0].trim[i]));
+
+    /* TODO
     for (int i=0; i<MAX_CURVE5; i++)
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves5[i][j];
     for (int i=0; i<MAX_CURVE9; i++)
       for (int j=0; j<9; j++)
         curves9[i][j] = c9x.curves9[i][j];
+        */
+
     for (int i=0; i<ER9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
 
@@ -810,14 +814,27 @@ t_Er9xModelData::operator ModelData ()
 
   for (int i=0; i<NUM_STICKS; i++)
     c9x.phaseData[0].trim[i] = trim[i];
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      c9x.curves5[i][j] = curves5[i][j];
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      c9x.curves9[i][j] = curves9[i][j];
+
+  for (int i=0; i<ER9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<ER9X_MAX_CURVE9; i++) {
+    c9x.curves[ER9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[ER9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[ER9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[ER9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
   for (int i=0; i<ER9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
+
   for (int i=0; i<ER9X_NUM_CHNOUT; i++)
     c9x.safetySw[i] = safetySw[i];
 
