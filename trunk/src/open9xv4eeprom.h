@@ -127,6 +127,18 @@ PACK(typedef struct t_Open9xV4FuncSwData_v203 { // Function Switches data
 
 }) Open9xV4FuncSwData_v203;
 
+PACK(typedef struct t_Open9xV4FuncSwData_v210 { // Function Switches data
+  int8_t  swtch; // input
+  uint8_t func:5;
+  uint8_t delay:3;
+  uint8_t param;
+
+  operator FuncSwData();
+  t_Open9xV4FuncSwData_v210() { memset(this, 0, sizeof(t_Open9xV4FuncSwData_v210)); }
+  t_Open9xV4FuncSwData_v210(FuncSwData&);
+
+}) Open9xV4FuncSwData_v210;
+
 PACK(typedef struct t_Open9xV4SwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
@@ -294,7 +306,7 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v209 swashR;
   Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v208 frsky;
