@@ -21,6 +21,7 @@
 #define AUTOSWITCH
 #define GRAPHICS
 #define SDCARD
+#define CURVES
 #define XCURVES
 
 #undef min

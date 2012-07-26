@@ -14,6 +14,7 @@
 #define HAPTIC
 #define AUTOSWITCH
 #define GRAPHICS
+#define CURVES
 #define XCURVES
 
 #undef min

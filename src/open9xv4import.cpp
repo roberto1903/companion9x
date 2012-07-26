@@ -15,6 +15,8 @@
 #define HAPTIC
 #define AUTOSWITCH
 #define GRAPHICS
+#define CURVES
+#define SCURVES
 
 #undef min
 #undef max

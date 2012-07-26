@@ -26,7 +26,7 @@
 #define O9X_ARM_NUM_CSW     32 // number of custom switches
 #define O9X_ARM_NUM_FSW     32 // number of functions assigned to switches
 #define O9X_ARM_MAX_CURVES  16
-#define O9X_ARM_NUM_POINTS  256
+#define O9X_ARM_NUM_POINTS  512
 
 PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   myVers;
@@ -250,6 +250,19 @@ PACK(typedef struct t_Open9xArmFuncSwData_v210 { // Function Switches data
 
 }) Open9xArmFuncSwData_v210;
 
+PACK(typedef struct t_Open9xArmFuncSwData_v211 { // Function Switches data
+  int8_t  swtch; // input
+  uint8_t func;
+  char    param[6];
+  uint8_t delay;
+  uint8_t spare;
+
+  operator FuncSwData();
+  t_Open9xArmFuncSwData_v211() { memset(this, 0, sizeof(t_Open9xArmFuncSwData_v211)); }
+  t_Open9xArmFuncSwData_v211(FuncSwData&);
+
+}) Open9xArmFuncSwData_v211;
+
 PACK(typedef struct t_Open9xArmSwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
@@ -446,10 +459,10 @@ PACK(typedef struct t_Open9xArmModelData_v211 {
   Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
-  int8_t    curves[O9X_ARM_MAX_CURVES];
+  int16_t   curves[O9X_ARM_MAX_CURVES];
   int8_t    points[O9X_ARM_NUM_POINTS];
   Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
-  Open9xArmFuncSwData_v210 funcSw[O9X_ARM_NUM_FSW];
+  Open9xArmFuncSwData_v211 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v209 swashR;
   Open9xArmPhaseData_v208 phaseData[O9X_ARM_MAX_PHASES];
   Open9xArmFrSkyData_v210 frsky;

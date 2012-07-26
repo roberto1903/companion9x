@@ -861,6 +861,46 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
   return c9x;
 }
 
+t_Open9xArmFuncSwData_v211::t_Open9xArmFuncSwData_v211(FuncSwData &c9x)
+{
+  swtch = open9xArmFromSwitch(c9x.swtch);
+  uint32_t value;
+  if (c9x.func <= FuncSafetyCh16) {
+    value = ((c9x.param>>1)<<1);
+    value |=(c9x.enabled & 0x01);
+  }
+  else {
+    if (c9x.func != FuncPlayPrompt) {
+     value = c9x.param;
+     *((uint32_t *)param) = value;
+    } else {
+     memcpy(param,c9x.paramarm, sizeof(param));
+    }
+  }
+  func = c9x.func;
+}
+
+t_Open9xArmFuncSwData_v211::operator FuncSwData ()
+{
+  FuncSwData c9x;
+  c9x.swtch = open9xArmToSwitch(swtch);
+  c9x.func = (AssignFunc)(func);
+  uint32_t value = *((uint32_t *)param);
+  if (c9x.func <= FuncSafetyCh16) {
+    c9x.enabled = value & 0x01;
+    c9x.param = (value>>1)<<1;
+  }
+  else {
+    if (c9x.func != FuncPlayPrompt) {
+      c9x.param = value;
+    }
+    else {
+      memcpy(c9x.paramarm, param, sizeof(c9x.paramarm));
+    }
+  }
+  return c9x;
+}
+
 t_Open9xArmSwashRingData_v208::t_Open9xArmSwashRingData_v208(SwashRingData &c9x)
 {
   invertELE = c9x.invertELE;
@@ -1641,7 +1681,7 @@ t_Open9xArmModelData_v211::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_211 3245
+#define MODEL_DATA_SIZE_211 3581
 t_Open9xArmModelData_v211::t_Open9xArmModelData_v211(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_211) {
