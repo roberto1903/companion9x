@@ -309,18 +309,16 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
   Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v209 swashR;
   Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
-  Open9xFrSkyData_v208 frsky;
+
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
-  uint8_t   frskyLines[4];
-  uint16_t  frskyLinesXtra;
+
   int8_t    servoCenter[O9X_NUM_CHNOUT];
 
-  uint8_t varioSource:3;
-  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
-  uint8_t varioSpeedDownMin;
   uint8_t switchWarningStates;
+
+  Open9xFrSkyData_v210 frsky;
 
   operator ModelData();
   t_Open9xV4ModelData_v210() { memset(this, 0, sizeof(t_Open9xV4ModelData_v210)); }

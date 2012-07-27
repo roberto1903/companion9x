@@ -16,6 +16,7 @@
 #define GRAPHICS
 #define CURVES
 #define XCURVES
+#define BOLD
 
 #undef min
 #undef max

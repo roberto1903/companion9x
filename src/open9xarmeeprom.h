@@ -318,6 +318,24 @@ PACK(typedef struct t_Open9xArmFrSkyData_v210 {
   t_Open9xArmFrSkyData_v210(FrSkyData&);
 }) Open9xArmFrSkyData_v210;
 
+PACK(typedef struct t_Open9xArmFrSkyData_v211 {
+  Open9xFrSkyChannelData_v208 channels[2];
+  Open9xFrSkyRSSIAlarm rssiAlarms[2];
+  uint8_t usrProto; // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t voltsSource;
+  uint8_t blades;   // How many blades for RPMs, 0=2 blades, 1=3 blades
+  uint8_t currentSource;
+  Open9xArmFrSkyBarData_v210 bars[4];
+  uint8_t lines[4*2*2];
+  uint8_t varioSource;
+  uint8_t varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t varioSpeedDownMin;
+  uint8_t spare[4];
+
+  operator FrSkyData();
+  t_Open9xArmFrSkyData_v211() { memset(this, 0, sizeof(t_Open9xArmFrSkyData_v211)); }
+  t_Open9xArmFrSkyData_v211(FrSkyData&);
+}) Open9xArmFrSkyData_v211;
 
 PACK(typedef struct t_Open9xArmModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
@@ -465,16 +483,16 @@ PACK(typedef struct t_Open9xArmModelData_v211 {
   Open9xArmFuncSwData_v211 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v209 swashR;
   Open9xArmPhaseData_v208 phaseData[O9X_ARM_MAX_PHASES];
-  Open9xArmFrSkyData_v210 frsky;
+
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
+
   int8_t    servoCenter[O9X_ARM_NUM_CHNOUT];
 
-  uint8_t varioSource:3;
-  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
-  uint8_t varioSpeedDownMin;
   uint8_t switchWarningStates;
+
+  Open9xArmFrSkyData_v211 frsky;
 
   operator ModelData();
   t_Open9xArmModelData_v211() { memset(this, 0, sizeof(t_Open9xArmModelData_v211)); }
