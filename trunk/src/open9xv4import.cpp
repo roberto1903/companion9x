@@ -17,6 +17,7 @@
 #define GRAPHICS
 #define CURVES
 #define SCURVES
+#define BOLD
 
 #undef min
 #undef max

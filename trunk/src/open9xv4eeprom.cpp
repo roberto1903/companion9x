@@ -1326,20 +1326,10 @@ t_Open9xV4ModelData_v210::operator ModelData ()
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
-  c9x.frsky.varioSource = varioSource;
-  c9x.frsky.varioSpeedUpMin = varioSpeedUpMin;
-  c9x.frsky.varioSpeedDownMin = varioSpeedDownMin;
   c9x.switchWarningStates = switchWarningStates;
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
-  for (int line=0; line<4; line++) {
-    for (int col=0; col<2; col++) {
-      uint8_t i = 2*line + col;
-      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
-    }
-  }
   for (int i=0; i<O9X_NUM_CHNOUT; i++) {
     c9x.servoCenter[i] = servoCenter[i];
   }
@@ -1347,7 +1337,7 @@ t_Open9xV4ModelData_v210::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_210 795
+#define MODEL_DATA_SIZE_210 796
 t_Open9xV4ModelData_v210::t_Open9xV4ModelData_v210(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_210) {
@@ -1450,22 +1440,10 @@ t_Open9xV4ModelData_v210::t_Open9xV4ModelData_v210(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
-    varioSource = c9x.frsky.varioSource;
-    varioSpeedUpMin = c9x.frsky.varioSpeedUpMin;
-    varioSpeedDownMin = c9x.frsky.varioSpeedDownMin;
     switchWarningStates = c9x.switchWarningStates;
     ppmFrameLength = c9x.ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
-    frskyLinesXtra=0;
-    for (int j=0; j<4; j++) {
-      frskyLines[j] = 0;
-      for (int k=0; k<2; k++) {
-        int value = c9x.frsky.csField[2*j+k];
-        frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
-        frskyLinesXtra |= (value / 16) << (4*j+2*k);
-      }
-    }
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       servoCenter[i] = c9x.servoCenter[i];
     }

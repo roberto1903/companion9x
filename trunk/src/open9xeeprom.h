@@ -456,6 +456,27 @@ PACK(typedef struct t_Open9xFrSkyData_v208 {
   t_Open9xFrSkyData_v208(FrSkyData&);
 }) Open9xFrSkyData_v208;
 
+PACK(typedef struct t_Open9xFrSkyData_v210 {
+  Open9xFrSkyChannelData_v208 channels[2];
+  uint8_t usrProto:2; // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t blades:2;   // How many blades for RPMs, 0=2 blades, 1=3 blades
+  uint8_t spare1:4;
+  uint8_t voltsSource:3;
+  uint8_t currentSource:3;
+  uint8_t spare2:2;
+  Open9xFrSkyBarData_v204 bars[4];
+  Open9xFrSkyRSSIAlarm rssiAlarms[2];
+  uint8_t   lines[4];
+  uint16_t  linesXtra;
+  uint8_t   varioSource:3;
+  uint8_t   varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t   varioSpeedDownMin;
+
+  operator FrSkyData();
+  t_Open9xFrSkyData_v210() { memset(this, 0, sizeof(t_Open9xFrSkyData_v210)); }
+  t_Open9xFrSkyData_v210(FrSkyData&);
+}) Open9xFrSkyData_v210;
+
 PACK(typedef struct t_Open9xSwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
@@ -813,18 +834,16 @@ PACK(typedef struct t_Open9xModelData_v210 {
   Open9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData_v209 swashR;
   Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
-  Open9xFrSkyData_v208 frsky;
+
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
-  uint8_t   frskyLines[4];
-  uint16_t  frskyLinesXtra;
+
   int8_t    servoCenter[O9X_NUM_CHNOUT];
 
-  uint8_t varioSource:3;
-  uint8_t varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
-  uint8_t varioSpeedDownMin;
   uint8_t switchWarningStates;
+
+  Open9xFrSkyData_v210 frsky;
 
   operator ModelData();
   t_Open9xModelData_v210() { memset(this, 0, sizeof(t_Open9xModelData_v210)); }

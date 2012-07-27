@@ -23,6 +23,7 @@
 #define SDCARD
 #define CURVES
 #define XCURVES
+#define BOLD
 
 #undef min
 #undef max
