@@ -461,7 +461,9 @@ void RegisterFirmwares()
   open9x->addOption("templates");
   open9x->addOption("nosplash");
   open9x->addOption("nofp");
+  open9x->addOption("nocurves");
   open9x->addOption("audio");
+  open9x->addOption("voice");
   open9x->addOption("haptic");
   open9x->addOption("PXX");
   open9x->addOption("DSM2");
@@ -484,6 +486,7 @@ void RegisterFirmwares()
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
+  open9x->addOption("nocurves");
   open9x->addOption("sdcard");
   open9x->addOption("SOMO");
   open9x->addOption("ppmca");
@@ -504,6 +507,7 @@ void RegisterFirmwares()
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
+  open9x->addOption("nocurves");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
   open9x->addOption("nobold");
