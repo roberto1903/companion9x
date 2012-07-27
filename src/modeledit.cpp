@@ -966,32 +966,55 @@ void ModelEdit::updateCurvesTab()
 
 void ModelEdit::tabCurves()
 {
-#if 0
-  QSpinBox* tmp5[MAX_CURVE5][5] = {
-        { ui->curvePt1_1, ui->curvePt2_1, ui->curvePt3_1, ui->curvePt4_1, ui->curvePt5_1 }
-      , { ui->curvePt1_2, ui->curvePt2_2, ui->curvePt3_2, ui->curvePt4_2, ui->curvePt5_2 }
-      , { ui->curvePt1_3, ui->curvePt2_3, ui->curvePt3_3, ui->curvePt4_3, ui->curvePt5_3 }
-      , { ui->curvePt1_4, ui->curvePt2_4, ui->curvePt3_4, ui->curvePt4_4, ui->curvePt5_4 }
-      , { ui->curvePt1_5, ui->curvePt2_5, ui->curvePt3_5, ui->curvePt4_5, ui->curvePt5_5 }
-      , { ui->curvePt1_6, ui->curvePt2_6, ui->curvePt3_6, ui->curvePt4_6, ui->curvePt5_6 }
-      , { ui->curvePt1_7, ui->curvePt2_7, ui->curvePt3_7, ui->curvePt4_7, ui->curvePt5_7 }
-      , { ui->curvePt1_8, ui->curvePt2_8, ui->curvePt3_8, ui->curvePt4_8, ui->curvePt5_8 }
-  };
 
-  QSpinBox* tmp9[MAX_CURVE9][9] = {
-        { ui->curvePt1_9,  ui->curvePt2_9,  ui->curvePt3_9,  ui->curvePt4_9,  ui->curvePt5_9,  ui->curvePt6_9,  ui->curvePt7_9,  ui->curvePt8_9,  ui->curvePt9_9 }
-      , { ui->curvePt1_10, ui->curvePt2_10, ui->curvePt3_10, ui->curvePt4_10, ui->curvePt5_10, ui->curvePt6_10, ui->curvePt7_10, ui->curvePt8_10, ui->curvePt9_10 }
-      , { ui->curvePt1_11, ui->curvePt2_11, ui->curvePt3_11, ui->curvePt4_11, ui->curvePt5_11, ui->curvePt6_11, ui->curvePt7_11, ui->curvePt8_11, ui->curvePt9_11 }
-      , { ui->curvePt1_12, ui->curvePt2_12, ui->curvePt3_12, ui->curvePt4_12, ui->curvePt5_12, ui->curvePt6_12, ui->curvePt7_12, ui->curvePt8_12, ui->curvePt9_12 }
-      , { ui->curvePt1_13, ui->curvePt2_13, ui->curvePt3_13, ui->curvePt4_13, ui->curvePt5_13, ui->curvePt6_13, ui->curvePt7_13, ui->curvePt8_13, ui->curvePt9_13 }
-      , { ui->curvePt1_14, ui->curvePt2_14, ui->curvePt3_14, ui->curvePt4_14, ui->curvePt5_14, ui->curvePt6_14, ui->curvePt7_14, ui->curvePt8_14, ui->curvePt9_14 }
-      , { ui->curvePt1_15, ui->curvePt2_15, ui->curvePt3_15, ui->curvePt4_15, ui->curvePt5_15, ui->curvePt6_15, ui->curvePt7_15, ui->curvePt8_15, ui->curvePt9_15 }
-      , { ui->curvePt1_16, ui->curvePt2_16, ui->curvePt3_16, ui->curvePt4_16, ui->curvePt5_16, ui->curvePt6_16, ui->curvePt7_16, ui->curvePt8_16, ui->curvePt9_16 }
-  };
+  QSpinBox* tmpy[17] = {
+    ui->curvePt01_y, ui->curvePt02_y, ui->curvePt03_y, ui->curvePt04_y, ui->curvePt05_y,
+    ui->curvePt06_y, ui->curvePt07_y, ui->curvePt08_y, ui->curvePt09_y, ui->curvePt10_y,
+    ui->curvePt11_y, ui->curvePt12_y, ui->curvePt13_y, ui->curvePt14_y, ui->curvePt15_y,
+    ui->curvePt16_y, ui->curvePt17_y };
+  QSpinBox* tmpx[17] = {
+    ui->curvePt01_x, ui->curvePt02_x, ui->curvePt03_x, ui->curvePt04_x, ui->curvePt05_x,
+    ui->curvePt06_x, ui->curvePt07_x, ui->curvePt08_x, ui->curvePt09_x, ui->curvePt10_x,
+    ui->curvePt11_x, ui->curvePt12_x, ui->curvePt13_x, ui->curvePt14_x, ui->curvePt15_x,
+    ui->curvePt16_x, ui->curvePt17_x };
 
-  memcpy(spn5, tmp5, sizeof(spn5));
-  memcpy(spn9, tmp9, sizeof(spn9));
+  QPushButton * editb[16]= {
+    ui->curveEdit_1,ui->curveEdit_2,ui->curveEdit_3,ui->curveEdit_4,
+    ui->curveEdit_5,ui->curveEdit_6,ui->curveEdit_7,ui->curveEdit_8,
+    ui->curveEdit_9,ui->curveEdit_10,ui->curveEdit_11,ui->curveEdit_12,
+    ui->curveEdit_13,ui->curveEdit_14,ui->curveEdit_15,ui->curveEdit_16 };
 
+  QPushButton * resetb[16]= {
+    ui->resetCurve_1,ui->resetCurve_2,ui->resetCurve_3,ui->resetCurve_4,
+    ui->resetCurve_5,ui->resetCurve_6,ui->resetCurve_7,ui->resetCurve_8,
+    ui->resetCurve_9,ui->resetCurve_10,ui->resetCurve_11,ui->resetCurve_12,
+    ui->resetCurve_13,ui->resetCurve_14,ui->resetCurve_15,ui->resetCurve_16 };
+
+  QCheckBox * plotcb[16]= {
+    ui->plotCB_1,ui->plotCB_2,ui->plotCB_3,ui->plotCB_4,
+    ui->plotCB_5,ui->plotCB_6,ui->plotCB_7,ui->plotCB_8,
+    ui->plotCB_9,ui->plotCB_10,ui->plotCB_11,ui->plotCB_12,
+    ui->plotCB_13,ui->plotCB_14,ui->plotCB_15,ui->plotCB_16 };
+  
+  memcpy(spny, tmpy, sizeof(spny));
+  memcpy(spnx, tmpx, sizeof(spnx));
+  if (!GetEepromInterface()->getCapability(CustomCurves)){
+    ui->curvetype_CB->setDisabled(true);
+  } else {
+    ui->curvetype_CB->setEnabled(true);
+  }
+  int numcurves=GetEepromInterface()->getCapability(NumCurves);
+  if (numcurves==0) {
+    numcurves=16;
+  }
+  
+  for (int i=numcurves; i<16;i++) {
+    editb[i]->hide();
+    resetb[i]->hide();
+    plotcb[i]->hide();
+  }
+  
+  
   for (int i=0; i<16;i++) {
     plot_curve[i]=FALSE;
   }
@@ -1036,7 +1059,7 @@ void ModelEdit::tabCurves()
   foreach(QCheckBox *ChkB, findChildren<QCheckBox *>(QRegExp("plotCB_[0-9]+"))) {
     connect(ChkB, SIGNAL(toggled(bool)), this, SLOT(plotCurve(bool)));
   }
-#endif
+  setCurrentCurve(currentCurve);
 }
 
 void ModelEdit::limitOffsetEdited()
@@ -1107,10 +1130,39 @@ void ModelEdit::startupSwitchEdited()
 
 void ModelEdit::setCurrentCurve(int curveId)
 {
-#if 0
   currentCurve = curveId;
+  curvesLock=true;
   QString ss = "QSpinBox { background-color:rgb(255, 255, 127);}";
-
+  for (int i=0; i<g_model.curves[currentCurve].count;i++) {
+    spny[i]->show();
+    spny[i]->setValue(g_model.curves[currentCurve].points[i].y);
+    if (!g_model.curves[currentCurve].custom) {
+      spnx[i]->hide();
+    } else {
+      spnx[i]->show();
+      spnx[i]->setValue(g_model.curves[currentCurve].points[i].x);
+    }
+  }
+  for (int i=g_model.curves[currentCurve].count; i<17;i++) {
+    spny[i]->hide();
+    spnx[i]->hide();
+  }
+  int index=0;
+  if (g_model.curves[currentCurve].count==3) {
+    index=0;
+  } else if (g_model.curves[currentCurve].count==5) {
+    index=2;
+  } else if (g_model.curves[currentCurve].count==9) {
+    index=4;
+  }  else if (g_model.curves[currentCurve].count==17) {
+    index=6;
+  }
+  if (g_model.curves[currentCurve].custom) {
+    index++;
+  }
+  ui->curvetype_CB->setCurrentIndex(index);
+  curvesLock=false;
+#if 0
   for (int i=0; i<MAX_CURVE5; i++)
     for (int j=0; j<5; j++)
       spn5[i][j]->setStyleSheet(curveId == i ? ss : "");
@@ -1122,27 +1174,24 @@ void ModelEdit::setCurrentCurve(int curveId)
 
 void ModelEdit::curvePointEdited()
 {
-#if 0
-  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
-  int curveId = spinBox->objectName().right(1).toInt() - 1;
-  if (spinBox->objectName().right(2).left(1).toInt() == 1)
-  {
-      curveId += 10;
+  if (curvesLock) {
+    return;
   }
-  setCurrentCurve(curveId);
-
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      g_model.curves5[i][j] = spn5[i][j]->value();
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      g_model.curves9[i][j] = spn9[i][j]->value();
-
+  for (int i=1; i< g_model.curves[currentCurve].count-1; i++) {
+    if (g_model.curves[currentCurve].points[i].x>(100-g_model.curves[currentCurve].count+i)) {
+      g_model.curves[currentCurve].points[i].x=(100-g_model.curves[currentCurve].count+i);
+    }
+    if (g_model.curves[currentCurve].points[i].x<=g_model.curves[currentCurve].points[i-1].x) {
+      spnx[i]->setValue(spnx[i-1]->value()+1);
+    }
+  }
+  for (int i=0; i< 17; i++) {
+    g_model.curves[currentCurve].points[i].x=spnx[i]->value();
+    g_model.curves[currentCurve].points[i].y=spny[i]->value();
+  }
   if (redrawCurve)
     drawCurve();
-
   updateSettings();
-#endif
 }
 
 
@@ -3014,6 +3063,8 @@ void ModelEdit::phaseTrimSlider_valueChanged()
 
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
+  return spny[i];
+
 #if 0
   if (currentCurve < MAX_CURVE5)
     return spn5[currentCurve][i];
@@ -3023,9 +3074,14 @@ QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to t
   return NULL;
 }
 
+QSpinBox *ModelEdit::getNodeSBX(int i)   // get the SpinBox that corresponds to the selected node
+{
+  return spnx[i];
+  return NULL;
+}
+
 void ModelEdit::drawCurve()
 {
-#if 0
     int k,i;
     QColor * plot_color[16];
 
@@ -3068,51 +3124,46 @@ void ModelEdit::drawCurve()
 
     scene->addLine(centerX,GFX_MARGIN,centerX,height+GFX_MARGIN);
     scene->addLine(GFX_MARGIN,centerY,width+GFX_MARGIN,centerY);
-
     pen.setWidth(2);
     pen.setStyle(Qt::SolidLine);
-    for(k=0; k<8; k++) {
-        pen.setColor(*plot_color[k]);
-        if ((currentCurve!=k) && (plot_curve[k])) {
-           for(i=0; i<4; i++) {
-                scene->addLine(GFX_MARGIN + i*width/(5-1),centerY - (qreal)g_model.curves5[k][i]*height/200,GFX_MARGIN + (i+1)*width/(5-1),centerY - (qreal)g_model.curves5[k][i+1]*height/200,pen);
-           }
-        }
+    int numcurves=GetEepromInterface()->getCapability(NumCurves);
+    if (numcurves==0) {
+      numcurves=16;
     }
-    for(k=0; k<8; k++) {
-        pen.setColor(*plot_color[k+8]);
-        if ((currentCurve!=(k+8)) && (plot_curve[k+8])) {
-           for(i=0; i<8; i++) {
-                scene->addLine(GFX_MARGIN + i*width/(9-1),centerY - (qreal)g_model.curves9[k][i]*height/200,GFX_MARGIN + (i+1)*width/(9-1),centerY - (qreal)g_model.curves9[k][i+1]*height/200,pen);
-           }
+    
+    for(k=0; k<numcurves; k++) {
+      pen.setColor(*plot_color[k]);
+      if ((currentCurve!=k) && (plot_curve[k])) {
+        int numpoints=g_model.curves[k].count;
+        for(i=0; i<(numpoints-1); i++) {
+          if (!g_model.curves[k].custom) {
+            scene->addLine(GFX_MARGIN + i*width/(numpoints-1),centerY - (qreal)g_model.curves[k].points[i].y*height/200,GFX_MARGIN + (i+1)*width/(numpoints-1),centerY - (qreal)g_model.curves[k].points[i+1].y*height/200,pen);
+          } else {
+            scene->addLine(centerX + (qreal)g_model.curves[k].points[i].x*width/200,centerY - (qreal)g_model.curves[k].points[i].y*height/200,centerX + (qreal)g_model.curves[k].points[i+1].x*width/200,centerY - (qreal)g_model.curves[k].points[i+1].y*height/200,pen);
+          }
         }
+      }
     }
+    int numpoints=g_model.curves[currentCurve].count;
 
-    if (currentCurve<MAX_CURVE5)
-        for(int i=0; i<5; i++)
-        {
-            nodel = nodex;
-            nodex = new Node(getNodeSB(i));
-            nodex->setColor(*plot_color[currentCurve]);
-            nodex->setFixedX(true);
-
-            nodex->setPos(GFX_MARGIN + i*width/(5-1),centerY - (qreal)g_model.curves5[currentCurve][i]*height/200);
-            scene->addItem(nodex);
-            if(i>0) scene->addItem(new Edge(nodel, nodex));
+    for(int i=0; i<numpoints; i++) {
+      nodel = nodex;
+      nodex = new Node(getNodeSB(i),getNodeSBX(i));
+      nodex->setColor(*plot_color[currentCurve]);
+      if (!g_model.curves[currentCurve].custom) {
+        nodex->setFixedX(true);
+        nodex->setPos(GFX_MARGIN + i*width/(numpoints-1),centerY - (qreal)g_model.curves[currentCurve].points[i].y*height/200);
+      } else {
+        if (i>0 && i<(numpoints-1)) {
+          nodex->setFixedX(false);
+        } else {
+          nodex->setFixedX(true);
         }
-    else
-        for(int i=0; i<9; i++)
-        {
-            nodel = nodex;
-            nodex = new Node(getNodeSB(i));
-            nodex->setColor(*plot_color[currentCurve]);
-            nodex->setFixedX(true);
-
-            nodex->setPos(GFX_MARGIN + i*width/(9-1),centerY - (qreal)g_model.curves9[currentCurve-8][i]*height/200);
-            scene->addItem(nodex);
-            if(i>0) scene->addItem(new Edge(nodel, nodex));
-        }
-#endif
+        nodex->setPos(centerX + (qreal)g_model.curves[currentCurve].points[i].x*width/200,centerY - (qreal)g_model.curves[currentCurve].points[i].y*height/200);
+      }
+      scene->addItem(nodex);
+      if(i>0) scene->addItem(new Edge(nodel, nodex));
+    }
 }
 
 
@@ -4279,11 +4330,50 @@ void ModelEdit::shrink() {
   ui->curvePreview->repaint();
 }
 
+void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
+  if (curvesLock)
+    return;
+  int numpoint[]={3,3,5,5,9,9,17,17};
+  bool custom[]={false,true,false,true,false,true,false,true};
+  int currpoints=g_model.curves[currentCurve].count;
+  bool currcustom=g_model.curves[currentCurve].custom;
+  curvesLock=true;
+  if (numpoint[index]==currpoints) {
+    for (int i=0; i< currpoints; i++) {
+      spnx[i]->setValue(-100+((200*i)/(currpoints-1)));
+    }
+    for (int i=currpoints; i< 17; i++) {
+      spnx[i]->setValue(0);
+      spny[i]->setValue(0);
+    }
+  } else if (numpoint[index]>currpoints) {
+    int currintervals=currpoints-1;
+    int diffpoints=numpoint[index]-currpoints;
+    int skip=diffpoints/currintervals;
+    for (int i=0; i< currpoints; i++) {
+      spnx[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].x);
+      spny[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].y);
+      
+    }    
+  }
+  curvesLock=false;
+  for (int i=0; i< 17; i++) {
+    g_model.curves[currentCurve].points[i].x=spnx[i]->value();
+    g_model.curves[currentCurve].points[i].y=spny[i]->value();
+  }
+  g_model.curves[currentCurve].count=numpoint[index];
+  g_model.curves[currentCurve].custom=custom[index];
+  setCurrentCurve(currentCurve);
+  if (redrawCurve)
+    drawCurve();
+  updateSettings();
+}
+
 void ModelEdit::closeEvent(QCloseEvent *event)
 {
-    QSettings settings("companion9x", "companion9x");
-    settings.setValue("mepos", pos());
-    settings.setValue("mesize", size());
-    event->accept();
+  QSettings settings("companion9x", "companion9x");
+  settings.setValue("mepos", pos());
+  settings.setValue("mesize", size());
+  event->accept();
 }
 

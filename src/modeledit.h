@@ -25,8 +25,8 @@ public:
 private:
     Ui::ModelEdit *ui;
 
-    QSpinBox* spn5[8/*MAX_CURVE5*/][5];
-    QSpinBox* spn9[8/*MAX_CURVE9*/][9];
+    QSpinBox* spny[17];
+    QSpinBox* spnx[17];
     QDoubleSpinBox* minSB[4];
     QDoubleSpinBox* maxSB[4];
     QComboBox* csf[16];
@@ -44,6 +44,7 @@ private:
     bool heliEditLock;
     bool phasesLock;
     bool telemetryLock;
+    bool curvesLock;
 
     bool plot_curve[16];
 
@@ -100,6 +101,7 @@ private:
     void setCurrentCurve(int curveId);
 
     QSpinBox *getNodeSB(int i);
+    QSpinBox *getNodeSBX(int i);
 
     int getExpoIndex(int dch);
     bool gm_insertExpo(int idx);
@@ -284,6 +286,7 @@ private slots:
     void ControlCurveSignal(bool flag);
     void shrink();
     void closeEvent(QCloseEvent *event);
+    void on_curvetype_CB_currentIndexChanged(int index);
 };
 
 #endif // MODELEDIT_H
