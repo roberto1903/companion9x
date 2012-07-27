@@ -4368,7 +4368,7 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
       spny[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].y);
       if (i>0) {
           int diffx=spnx[i+(skip*i)]->value()-spnx[(i-1)+(skip*(i-1))]->value();
-          int diffy=spnx[i+(skip*i)]->value()-spny[(i-1)+(skip*(i-1))]->value();
+          int diffy=spny[i+(skip*i)]->value()-spny[(i-1)+(skip*(i-1))]->value();
           for (int j=1; j<= skip; j++) {
               spny[(i-1)+skip*(i-1)+j]->setValue(spny[(i-1)+(skip*(i-1))]->value()+((diffy*j)/(skip+1)));
               spnx[(i-1)+skip*(i-1)+j]->setValue(spnx[(i-1)+(skip*(i-1))]->value()+((diffx*j)/(skip+1)));
