@@ -1136,8 +1136,14 @@ void ModelEdit::setCurrentCurve(int curveId)
   for (int i=0; i<g_model.curves[currentCurve].count;i++) {
     spny[i]->show();
     spny[i]->setValue(g_model.curves[currentCurve].points[i].y);
-    if (!g_model.curves[currentCurve].custom) {
+    if (!g_model.curves[currentCurve].custom || i==0 || i==(g_model.curves[currentCurve].count-1)) {
       spnx[i]->hide();
+      if (i==0) {
+          spnx[i]->setValue(-100);
+      }
+      if (i==(g_model.curves[currentCurve].count-1)) {
+          spnx[i]->setValue(100);
+      }
     } else {
       spnx[i]->show();
       spnx[i]->setValue(g_model.curves[currentCurve].points[i].x);
@@ -1162,14 +1168,6 @@ void ModelEdit::setCurrentCurve(int curveId)
   }
   ui->curvetype_CB->setCurrentIndex(index);
   curvesLock=false;
-#if 0
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      spn5[i][j]->setStyleSheet(curveId == i ? ss : "");
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      spn9[i][j]->setStyleSheet(curveId == i+MAX_CURVE5 ? ss : "");
-#endif
 }
 
 void ModelEdit::curvePointEdited()
@@ -3156,6 +3154,8 @@ void ModelEdit::drawCurve()
       } else {
         if (i>0 && i<(numpoints-1)) {
           nodex->setFixedX(false);
+          nodex->setMinX(g_model.curves[currentCurve].points[i-1].x+1);
+          nodex->setMaxX(g_model.curves[currentCurve].points[i+1].x+1);
         } else {
           nodex->setFixedX(true);
         }
