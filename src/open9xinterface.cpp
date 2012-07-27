@@ -464,6 +464,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_NUM_CHNOUT;
       else
         return O9X_NUM_CHNOUT;
+    case NumCurvePoints:
+      if (board == BOARD_ERSKY9X)
+        return 512;
+      else
+        return 104;
     case SoundPitch:
       return 1;
     case Haptic:
