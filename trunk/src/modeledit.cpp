@@ -4342,11 +4342,35 @@ void ModelEdit::shrink() {
 void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
   if (curvesLock)
     return;
+  int numcurves=GetEepromInterface()->getCapability(NumCurves);
+  if (numcurves==0) {
+    numcurves=16;
+  }
   int numpoint[]={3,3,5,5,9,9,17,17};
   bool custom[]={false,true,false,true,false,true,false,true};
   int currpoints=g_model.curves[currentCurve].count;
   bool currcustom=g_model.curves[currentCurve].custom;
   curvesLock=true;
+  int totalpoints=0;
+  for (int i=0; i< numcurves; i++) {
+    if (i!=currentCurve) {
+      totalpoints+=g_model.curves[i].count;
+      if (g_model.curves[i].custom) {
+        totalpoints+=g_model.curves[i].count-2;
+      }
+    }
+  }
+  totalpoints+=numpoint[index];
+  if (currcustom) {
+    totalpoints+=numpoint[index]-2;
+  }
+  int fwpoints=GetEepromInterface()->getCapability(NumCurvePoints);
+  if (fwpoints!=0) {
+   if (fwpoints<totalpoints) {
+     QMessageBox::warning(this, "companion9x", tr("Not enought points free in eeprom to store the curve."));
+     return;
+   }
+  }
   if (numpoint[index]==currpoints) {
     for (int i=0; i< currpoints; i++) {
       spnx[i]->setMinimum(-100);
