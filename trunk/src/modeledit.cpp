@@ -1019,6 +1019,7 @@ void ModelEdit::tabCurves()
     plot_curve[i]=FALSE;
   }
   redrawCurve=true;
+  drawing=false;
   ui->curveEdit_1->setStyleSheet("background-color: #00007f; color: white;");
   ui->curveEdit_2->setStyleSheet("background-color: #007f00; color: white;");
   ui->curveEdit_3->setStyleSheet("background-color: #7f0000; color: white;");
@@ -3083,6 +3084,9 @@ QSpinBox *ModelEdit::getNodeSBX(int i)   // get the SpinBox that corresponds to 
 
 void ModelEdit::drawCurve()
 {
+    if (drawing)
+        return;
+    drawing=true;
     int k,i;
     QColor * plot_color[16];
 
@@ -3169,6 +3173,7 @@ void ModelEdit::drawCurve()
       scene->addItem(nodex);
       if(i>0) scene->addItem(new Edge(nodel, nodex));
     }
+    drawing=false;
 }
 
 
@@ -4345,9 +4350,13 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
   curvesLock=true;
   if (numpoint[index]==currpoints) {
     for (int i=0; i< currpoints; i++) {
+      spnx[i]->setMinimum(-100);
+      spnx[i]->setMaximum(100);        
       spnx[i]->setValue(-100+((200*i)/(currpoints-1)));
     }
     for (int i=currpoints; i< 17; i++) {
+      spnx[i]->setMinimum(-100);
+      spnx[i]->setMaximum(100);
       spnx[i]->setValue(0);
       spny[i]->setValue(0);
     }
@@ -4355,6 +4364,8 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
     for (int i=0; i< 17; i++) {
       g_model.curves[currentCurve].points[i].x=spnx[i]->value();
       g_model.curves[currentCurve].points[i].y=spny[i]->value();
+      spnx[i]->setMinimum(-100);
+      spnx[i]->setMaximum(100);
     }
     int currintervals=currpoints-1;
     int diffpoints=numpoint[index]-currpoints;
@@ -4380,6 +4391,8 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
     int diffpoints=currpoints-numpoint[index];
     int skip=diffpoints/intervals;
     for (int i=0; i< numpoint[index]; i++) {
+      spnx[i]->setMinimum(-100);
+      spnx[i]->setMaximum(100);
       if (custom[index]) {
         spnx[i]->setValue(spnx[i+skip*i]->value());
       } else {

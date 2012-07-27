@@ -22,7 +22,7 @@ public:
     void applyBaseTemplate();
     bool redrawCurve;
     void drawCurve();
-    
+    bool drawing;
 private:
     Ui::ModelEdit *ui;
 
