@@ -495,6 +495,14 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case HasTTrace:
       return 1;
+    case CustomCurves:
+      return 1;
+    case NumCurves:
+      if  (board==BOARD_ERSKY9X) {
+        return 16;
+      } else {
+        return 8;
+      }
     case HasMixerNames:
       if  (board==BOARD_ERSKY9X) {
         return 1;

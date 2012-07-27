@@ -56,7 +56,7 @@ class Node : public QGraphicsItem
 {
 
 public:
-    Node(QSpinBox *sb = 0);
+    Node(QSpinBox *sb = 0, QSpinBox *sbx = 0);
 
     void addEdge(Edge *edge);
     QList<Edge *> edges() const;
@@ -95,6 +95,7 @@ private:
     bool fixedY;
     int  ballSize;
     QSpinBox *qsb;
+    QSpinBox *qsbx;
     QList<Edge *> edgeList;
     QPointF newPos;
     QColor nodecolor;

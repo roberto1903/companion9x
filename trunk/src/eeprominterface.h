@@ -734,6 +734,8 @@ enum Capability {
  HasExpoCurves,
  ExpoCurve5,
  ExpoCurve9,
+ CustomCurves,
+ NumCurves,
  Simulation,
  SoundMod,
  SoundPitch,

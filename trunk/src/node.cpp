@@ -48,7 +48,7 @@
 #include "node.h"
 #include "modeledit.h"
 
-Node::Node(QSpinBox *sb)
+Node::Node(QSpinBox *sb,QSpinBox *sbx)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
@@ -56,6 +56,7 @@ Node::Node(QSpinBox *sb)
     setZValue(-1);
     nodecolor = QColor(Qt::yellow);
     qsb = sb;
+    qsbx = sbx;
     bPressed  = false;
     centerX   = true;
     centerY   = true;
@@ -190,6 +191,10 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
                ModelEdit* modeledit = qobject_cast<ModelEdit*>(qsb->parent()->parent()->parent()->parent()->parent()->parent()->parent());
                modeledit->redrawCurve = false;
                qsb->setValue(100+(rect.top()-y())*200/rect.height());
+               if (qsbx && !getFixedX()) {
+                 qDebug() << x();
+                 qsbx->setValue(-100+(x()-rect.left())*200/rect.width());
+               }
                modeledit->redrawCurve = true;
              }
              return newPos;
