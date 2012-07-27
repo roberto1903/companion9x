@@ -551,8 +551,20 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   PhaseData *phase = &g_model.phaseData[phase_idx];
   if (name) name->setText(phase->name);
   if (sw) populateSwitchCB(sw, phase->swtch);
-  if (fadeIn) fadeIn->setValue(phase->fadeIn);
-  if (fadeOut) fadeOut->setValue(phase->fadeOut);
+
+  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+  if (fadeIn) {
+    fadeIn->setMaximum(15.0/scale);
+    fadeIn->setSingleStep(1.0/scale);
+    fadeIn->setDecimals(scale-1);
+    fadeIn->setValue((double)phase->fadeIn/scale);
+  }
+  if (fadeOut) {
+    fadeOut->setMaximum(15.0/scale);
+    fadeOut->setSingleStep(1.0/scale);
+    fadeOut->setDecimals(scale-1);
+    fadeOut->setValue((double)phase->fadeOut/scale);
+  }
 
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(1)-1, trim1Use, trim1, trim1Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(2)-1, trim2Use, trim2, trim2Slider);
@@ -1984,17 +1996,19 @@ void ModelEdit::phaseSwitch_currentIndexChanged()
 
 void ModelEdit::phaseFadeIn_editingFinished()
 {
-  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
   int phase = spinBox->objectName().mid(5,1).toInt();
-  g_model.phaseData[phase].fadeIn = spinBox->value();
+  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+  g_model.phaseData[phase].fadeIn = round(spinBox->value()*scale);
   updateSettings();
 }
 
 void ModelEdit::phaseFadeOut_editingFinished()
 {
-  QSpinBox *spinBox = qobject_cast<QSpinBox*>(sender());
+  QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
   int phase = spinBox->objectName().mid(5,1).toInt();
-  g_model.phaseData[phase].fadeOut = spinBox->value();
+  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+  g_model.phaseData[phase].fadeOut = round(spinBox->value()*scale);
   updateSettings();
 }
 
