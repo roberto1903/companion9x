@@ -3079,7 +3079,6 @@ QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to t
 QSpinBox *ModelEdit::getNodeSBX(int i)   // get the SpinBox that corresponds to the selected node
 {
   return spnx[i];
-  return NULL;
 }
 
 void ModelEdit::drawCurve()
