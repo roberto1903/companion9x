@@ -1147,6 +1147,8 @@ void ModelEdit::setCurrentCurve(int curveId)
     } else {
       spnx[i]->show();
       spnx[i]->setValue(g_model.curves[currentCurve].points[i].x);
+      spnx[i]->setMaximum(g_model.curves[currentCurve].points[i+1].x-1);
+      spnx[i]->setMinimum(g_model.curves[currentCurve].points[i-1].x+1);
     }
   }
   for (int i=g_model.curves[currentCurve].count; i<17;i++) {
@@ -1175,7 +1177,7 @@ void ModelEdit::curvePointEdited()
   if (curvesLock) {
     return;
   }
-  for (int i=1; i< g_model.curves[currentCurve].count-1; i++) {
+/*  for (int i=1; i< g_model.curves[currentCurve].count-1; i++) {
     if (g_model.curves[currentCurve].points[i].x>(100-g_model.curves[currentCurve].count+i)) {
       g_model.curves[currentCurve].points[i].x=(100-g_model.curves[currentCurve].count+i);
     }
@@ -1183,6 +1185,7 @@ void ModelEdit::curvePointEdited()
       spnx[i]->setValue(spnx[i-1]->value()+1);
     }
   }
+*/ 
   for (int i=0; i< 17; i++) {
     g_model.curves[currentCurve].points[i].x=spnx[i]->value();
     g_model.curves[currentCurve].points[i].y=spny[i]->value();
@@ -3155,7 +3158,9 @@ void ModelEdit::drawCurve()
         if (i>0 && i<(numpoints-1)) {
           nodex->setFixedX(false);
           nodex->setMinX(g_model.curves[currentCurve].points[i-1].x+1);
-          nodex->setMaxX(g_model.curves[currentCurve].points[i+1].x+1);
+          nodex->setMaxX(g_model.curves[currentCurve].points[i+1].x-1);
+          spnx[i]->setMaximum(g_model.curves[currentCurve].points[i+1].x-1);
+          spnx[i]->setMinimum(g_model.curves[currentCurve].points[i-1].x+1);
         } else {
           nodex->setFixedX(true);
         }
