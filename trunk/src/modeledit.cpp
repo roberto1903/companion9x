@@ -4347,14 +4347,45 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
       spny[i]->setValue(0);
     }
   } else if (numpoint[index]>currpoints) {
+    for (int i=0; i< 17; i++) {
+      g_model.curves[currentCurve].points[i].x=spnx[i]->value();
+      g_model.curves[currentCurve].points[i].y=spny[i]->value();
+    }
     int currintervals=currpoints-1;
     int diffpoints=numpoint[index]-currpoints;
     int skip=diffpoints/currintervals;
     for (int i=0; i< currpoints; i++) {
-      spnx[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].x);
+      if (custom[index]) {
+        spnx[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].x);
+      } else {
+        spnx[i+(skip*i)]->setValue(-100+(200*i)/currintervals);
+      }
       spny[i+(skip*i)]->setValue(g_model.curves[currentCurve].points[i].y);
-      
+      if (i>0) {
+          int diffx=spnx[i+(skip*i)]->value()-spnx[(i-1)+(skip*(i-1))]->value();
+          int diffy=spnx[i+(skip*i)]->value()-spny[(i-1)+(skip*(i-1))]->value();
+          for (int j=1; j<= skip; j++) {
+              spny[(i-1)+skip*(i-1)+j]->setValue(spny[(i-1)+(skip*(i-1))]->value()+((diffy*j)/(skip+1)));
+              spnx[(i-1)+skip*(i-1)+j]->setValue(spnx[(i-1)+(skip*(i-1))]->value()+((diffx*j)/(skip+1)));
+          }
+      }
     }    
+  } else {
+    int intervals=numpoint[index]-1;
+    int diffpoints=currpoints-numpoint[index];
+    int skip=diffpoints/intervals;
+    for (int i=0; i< numpoint[index]; i++) {
+      if (custom[index]) {
+        spnx[i]->setValue(spnx[i+skip*i]->value());
+      } else {
+        spnx[i]->setValue(-100+(200*i)/intervals);
+      }
+      spny[i]->setValue(spny[i+skip*i]->value());
+    }
+    for (int i=numpoint[index]; i< 17; i++) {
+      spnx[i]->setValue(0);
+      spny[i]->setValue(0);
+    }
   }
   curvesLock=false;
   for (int i=0; i< 17; i++) {
