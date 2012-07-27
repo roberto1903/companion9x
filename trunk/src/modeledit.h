@@ -21,7 +21,8 @@ public:
 
     void applyBaseTemplate();
     bool redrawCurve;
-
+    void drawCurve();
+    
 private:
     Ui::ModelEdit *ui;
 
@@ -96,7 +97,7 @@ private:
     void launchSimulation();
     void resizeEvent(QResizeEvent *event  = 0);
 
-    void drawCurve();
+
     int currentCurve;
     void setCurrentCurve(int curveId);
 

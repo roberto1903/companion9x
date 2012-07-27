@@ -78,6 +78,8 @@ public:
     void setFixedY(bool val) {fixedY = val;}
     bool getFixedX() {return fixedX;}
     bool getFixedY() {return fixedY;}
+    void setMinX(int val) {minX = val;};
+    void setMaxX(int val) {maxX = val;};
     void setColor(QColor color);
     
 protected:
@@ -94,6 +96,8 @@ private:
     bool fixedX;
     bool fixedY;
     int  ballSize;
+    int minX;
+    int maxX;
     QSpinBox *qsb;
     QSpinBox *qsbx;
     QList<Edge *> edgeList;

@@ -63,6 +63,9 @@ Node::Node(QSpinBox *sb,QSpinBox *sbx)
     fixedX    = false;
     fixedY    = false;
     ballSize = DEFAULT_BALL_SIZE;
+    minX=-100;
+    maxX=100;
+
 }
 
 void Node::addEdge(Edge *edge)
@@ -192,7 +195,12 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
                modeledit->redrawCurve = false;
                qsb->setValue(100+(rect.top()-y())*200/rect.height());
                if (qsbx && !getFixedX()) {
-                 qDebug() << x();
+                 if (((minX+100)*rect.width()/200+rect.left())>=x()) {
+                   newPos.setX(((minX+100)*rect.width()/200+rect.left()));
+                 }
+                 if (((maxX+100)*rect.width()/200+rect.left())<=x()) {
+                   newPos.setX(((maxX+100)*rect.width()/200+rect.left()));
+                 }
                  qsbx->setValue(-100+(x()-rect.left())*200/rect.width());
                }
                modeledit->redrawCurve = true;
@@ -224,10 +232,17 @@ void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
     bPressed = false;
-    if(scene())
-    {
-        if(qsb) qsb->clearFocus();
-        //need to tell SB that it needs to write the value
+    if(scene()) {
+      if(qsb) {
+        qsb->clearFocus();
+        ModelEdit* modeledit = qobject_cast<ModelEdit*>(qsb->parent()->parent()->parent()->parent()->parent()->parent()->parent());
+        QGraphicsItem::mouseReleaseEvent(event);
+        modeledit->drawCurve();
+      } else {
+        QGraphicsItem::mouseReleaseEvent(event);
+      }
+      //need to tell SB that it needs to write the value
+    } else {
+      QGraphicsItem::mouseReleaseEvent(event);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
 }
