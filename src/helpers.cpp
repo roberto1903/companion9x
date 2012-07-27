@@ -190,9 +190,13 @@ void populatePhasesCB(QComboBox *b, int value)
 
 void populateCurvesCB(QComboBox *b, int value) {
   b->clear();
-  for (int i = -(MAX_CURVES)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + MAX_CURVES; i++)
+  int numcurves=GetEepromInterface()->getCapability(NumCurves);
+  if (numcurves==0) {
+    numcurves=16;
+  }
+  for (int i = -(numcurves)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + numcurves; i++)
     b->addItem(getCurveStr(i));
-  b->setCurrentIndex(value+MAX_CURVES*GetEepromInterface()->getCapability(HasNegCurves));
+  b->setCurrentIndex(value+numcurves*GetEepromInterface()->getCapability(HasNegCurves));
   b->setMaxVisibleItems(10);
 }
 

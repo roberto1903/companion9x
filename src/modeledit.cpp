@@ -3813,7 +3813,7 @@ void ModelEdit::resetCurve()
   QPushButton *button = (QPushButton *)sender();
   int btn=button->objectName().mid(button->objectName().lastIndexOf("_")+1).toInt()-1;
   if (btn!=currentCurve) {
-    int res = QMessageBox::question(this, "companion9x",tr("Are you sure you want to delete curve %1 ?").arg(btn),QMessageBox::Yes | QMessageBox::No);
+    int res = QMessageBox::question(this, "companion9x",tr("Are you sure you want to delete curve %1 ?").arg(btn+1),QMessageBox::Yes | QMessageBox::No);
     if (res == QMessageBox::No) {
       return;
     }
