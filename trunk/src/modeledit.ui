@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -769,7 +769,7 @@
           <number>0</number>
          </property>
          <property name="verticalSpacing">
-          <number>-1</number>
+          <number>6</number>
          </property>
          <item row="0" column="9" rowspan="2">
           <widget class="Line" name="swwarn_line4">
@@ -1193,7 +1193,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>0</number>
+            <number>8</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -1231,22 +1231,16 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QSpinBox" name="phase0FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase0FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase0FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase0FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -1602,22 +1596,16 @@
                 <widget class="QComboBox" name="phase1Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase1FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase1FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase1FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase1FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -1965,22 +1953,16 @@
                 <widget class="QComboBox" name="phase2Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase2FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase2FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase2FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase2FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -2328,22 +2310,16 @@
                 <widget class="QComboBox" name="phase3Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase3FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase3FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase3FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase3FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -2691,22 +2667,16 @@
                 <widget class="QComboBox" name="phase4Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase4FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase4FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase4FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase4FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -3054,22 +3024,16 @@
                 <widget class="QComboBox" name="phase5Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase5FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase5FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase5FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase5FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -3417,22 +3381,16 @@
                 <widget class="QComboBox" name="phase6Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase6FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase6FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase6FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase6FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -3780,22 +3738,16 @@
                 <widget class="QComboBox" name="phase7Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase7FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase7FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase7FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase7FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -4143,22 +4095,16 @@
                 <widget class="QComboBox" name="phase8Switch"/>
                </item>
                <item row="2" column="2">
-                <widget class="QSpinBox" name="phase8FadeIn">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase8FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase8FadeOut">
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>15</number>
+                <widget class="QDoubleSpinBox" name="phase8FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -4501,8 +4447,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>581</height>
+            <width>846</width>
+            <height>564</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7666,8 +7612,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>552</height>
+            <width>830</width>
+            <height>582</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12584,8 +12530,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>581</height>
+            <width>846</width>
+            <height>564</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14006,7 +13952,7 @@
              <number>1</number>
             </property>
             <property name="verticalSpacing">
-             <number>-1</number>
+             <number>6</number>
             </property>
             <item row="0" column="1">
              <widget class="QComboBox" name="rssiAlarm1CB">
