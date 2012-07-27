@@ -195,13 +195,11 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
                modeledit->redrawCurve = false;
                qsb->setValue(100+(rect.top()-y())*200/rect.height());
                if (qsbx && !getFixedX()) {
-                 if (((minX+100)*rect.width()/200+rect.left())>=x()) {
-                   newPos.setX(((minX+101)*rect.width()/200+rect.left()));
-                 }
-                 if (((maxX+100)*rect.width()/200+rect.left())<=x()) {
-                   newPos.setX(((maxX+99)*rect.width()/200+rect.left()));
-                 }
-                 qsbx->setValue(-100+(x()-rect.left())*200/rect.width());
+                 int newX = -100 + ( (newPos.x()-rect.left()) * 200) / rect.width();
+                 if (newX < minX) newX = minX;
+                 if (newX > maxX) newX = maxX;
+                 newPos.setX(((newX+100)*rect.width()/200+rect.left()));
+                 qsbx->setValue(newX);
                }
                modeledit->redrawCurve = true;
              }
