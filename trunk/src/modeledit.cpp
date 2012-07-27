@@ -950,16 +950,6 @@ void ModelEdit::updateCurvesTab()
     int ChkBn=ChkB->objectName().mid(ChkB->objectName().lastIndexOf("_")+1).toInt()-1;
     ChkB->setChecked(plot_curve[ChkBn]);
   }
-
-#if 0
-  for (int i=0; i<MAX_CURVE5; i++)
-    for (int j=0; j<5; j++)
-      spn5[i][j]->setValue(g_model.curves5[i][j]);
-  for (int i=0; i<MAX_CURVE9; i++)
-    for (int j=0; j<9; j++)
-      spn9[i][j]->setValue(g_model.curves9[i][j]);
-#endif
-
   ControlCurveSignal(false);
 }
 
@@ -3820,19 +3810,32 @@ void ModelEdit::on_pushButton_clicked()
 
 void ModelEdit::resetCurve()
 {
-#if 0
   QPushButton *button = (QPushButton *)sender();
   int btn=button->objectName().mid(button->objectName().lastIndexOf("_")+1).toInt()-1;
-  if (btn<MAX_CURVE5) {
-    memset(&g_model.curves5[btn],0,sizeof(g_model.curves5[0]));
+  if (btn!=currentCurve) {
+    int res = QMessageBox::question(this, "companion9x",tr("Are you sure you want to delete curve %1 ?").arg(btn),QMessageBox::Yes | QMessageBox::No);
+    if (res == QMessageBox::No) {
+      return;
+    }
   }
-  else {
-    memset(&g_model.curves9[btn-MAX_CURVE5],0,sizeof(g_model.curves9[0]));
+  g_model.curves[btn].count=5;
+  g_model.curves[btn].custom=false;
+  curvesLock=true;
+  for (int i=0; i<17; i++) {
+    g_model.curves[btn].points[i].x=0;
+    g_model.curves[btn].points[i].y=0;
+    spnx[i]->setMinimum(-100);
+    spnx[i]->setMaximum(100);
+    spnx[i]->setValue(0);
+    spny[i]->setValue(0);
   }
+  curvesLock=false;
   updateCurvesTab();
+  if (btn==currentCurve) {
+    ui->curvetype_CB->setCurrentIndex(2);
+  }
   updateSettings();
   drawCurve();
-#endif
 }
 
 void ModelEdit::editCurve()
@@ -3969,13 +3972,24 @@ void ModelEdit::clearCurves(bool ask)
     int res = QMessageBox::question(this,tr("Clear Curves?"),tr("Really clear all the curves?"),QMessageBox::Yes | QMessageBox::No);
     if(res!=QMessageBox::Yes) return;
   }
-#if 0
-  memset(g_model.curves5,0,sizeof(g_model.curves5)); //clear all curves
-  memset(g_model.curves9,0,sizeof(g_model.curves9)); //clear all curves
-#endif
-  updateSettings();
-  updateCurvesTab();
-  resizeEvent();
+  curvesLock=true;
+  for (int j=0; j<16; j++) {
+    g_model.curves[j].count=5;
+    g_model.curves[j].custom=false;
+    for (int i=0; i<17; i++) {
+      g_model.curves[j].points[i].x=0;
+      g_model.curves[j].points[i].y=0;
+    }
+  }
+  for (int i=0; i<17; i++) {
+    spnx[i]->setMinimum(-100);
+    spnx[i]->setMaximum(100);
+    spnx[i]->setValue(0);
+    spny[i]->setValue(0);
+  }
+  currentCurve=0;
+  curvesLock=false;
+  ui->curvetype_CB->setCurrentIndex(2);
 }
 
 void ModelEdit::setCurve(uint8_t c, int8_t ar[])
@@ -4370,6 +4384,14 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
      QMessageBox::warning(this, "companion9x", tr("Not enought points free in eeprom to store the curve."));
      return;
    }
+  }
+  // let's be sure that for standard curves X values are set correctly.
+  if (!currcustom) {
+    for (int i=0; i< currpoints; i++) {
+      spnx[i]->setMinimum(-100);
+      spnx[i]->setMaximum(100);        
+      spnx[i]->setValue(-100+((200*i)/(currpoints-1)));
+    }    
   }
   if (numpoint[index]==currpoints) {
     for (int i=0; i< currpoints; i++) {
