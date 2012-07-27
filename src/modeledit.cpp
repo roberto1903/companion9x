@@ -3990,6 +3990,8 @@ void ModelEdit::clearCurves(bool ask)
   currentCurve=0;
   curvesLock=false;
   ui->curvetype_CB->setCurrentIndex(2);
+  updateSettings();
+  drawCurve();
 }
 
 void ModelEdit::setCurve(uint8_t c, int8_t ar[])
