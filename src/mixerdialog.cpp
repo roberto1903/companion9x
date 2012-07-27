@@ -62,8 +62,14 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->slowUpSB->setSingleStep(1.0/scale);
     ui->slowUpSB->setDecimals(scale-1);
     ui->slowUpSB->setValue(md->speedUp/scale);
-    ui->delayDownSB->setValue(md->delayDown);
-    ui->delayUpSB->setValue(md->delayUp);
+    ui->delayDownSB->setMaximum(15.0/scale);
+    ui->delayDownSB->setSingleStep(1.0/scale);
+    ui->delayDownSB->setDecimals(scale-1);
+    ui->delayDownSB->setValue(md->delayDown/scale);
+    ui->delayUpSB->setMaximum(15.0/scale);
+    ui->delayUpSB->setSingleStep(1.0/scale);
+    ui->delayUpSB->setDecimals(scale-1);
+    ui->delayUpSB->setValue(md->delayUp/scale);
     QTimer::singleShot(0, this, SLOT(shrink()));
 
     valuesChanged();
@@ -79,8 +85,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->warningCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->mltpxCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->delayDownSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->delayUpSB,SIGNAL(valueChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->delayDownSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->delayUpSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->slowDownSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->slowUpSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
 }
@@ -119,9 +125,9 @@ void MixerDialog::valuesChanged()
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();
-    md->delayDown = ui->delayDownSB->value();
-    md->delayUp   = ui->delayUpSB->value();
-    int scale=GetEepromInterface()->getCapability(SlowScale)+1;  
+    int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+    md->delayDown = round(ui->delayDownSB->value()*scale);
+    md->delayUp   = round(ui->delayUpSB->value()*scale);
     md->speedDown = round(ui->slowDownSB->value()*scale);
     md->speedUp   = round(ui->slowUpSB->value()*scale);
     md->differential=ui->DiffMixSB->value();
