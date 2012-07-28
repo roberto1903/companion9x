@@ -3070,14 +3070,6 @@ void ModelEdit::phaseTrimSlider_valueChanged()
 QSpinBox *ModelEdit::getNodeSB(int i)   // get the SpinBox that corresponds to the selected node
 {
   return spny[i];
-
-#if 0
-  if (currentCurve < MAX_CURVE5)
-    return spn5[currentCurve][i];
-  else
-    return spn9[currentCurve - MAX_CURVE5][i];
-#endif
-  return NULL;
 }
 
 QSpinBox *ModelEdit::getNodeSBX(int i)   // get the SpinBox that corresponds to the selected node
