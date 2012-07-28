@@ -4015,12 +4015,38 @@ void ModelEdit::clearCurves(bool ask)
 
 void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 {
-#if 0
-  if(c<MAX_CURVE5) //5 pt curve
-    for(uint8_t i=0; i<5; i++) g_model.curves5[c][i] = ar[i];
-  else  //9 pt curve
-    for(uint8_t i=0; i<9; i++) g_model.curves9[c-MAX_CURVE5][i] = ar[i];
-#endif
+    int len=sizeof(ar)/sizeof(int8_t);
+    if (GetEepromInterface()->getCapability(CustomCurves)) {
+      if (GetEepromInterface()->getCapability(NumCurves)<c) {
+        if (len<9) {
+          g_model.curves[c].count=5;
+          g_model.curves[c].custom=false;
+          for (int i=0; i< 5; i++) {
+            g_model.curves[c].points[i].y=ar[i];
+          }
+        } else {
+          g_model.curves[c].count=5;
+          g_model.curves[c].custom=false;
+          for (int i=0; i< 5; i++) {
+            g_model.curves[c].points[i].y=ar[i];
+          }
+        }
+      }
+    } else {
+      if (len<9) {
+        g_model.curves[c].count=5;
+        g_model.curves[c].custom=false;
+        for (int i=0; i< 5; i++) {
+          g_model.curves[c].points[i].y=ar[i];
+        }
+      } else {
+        g_model.curves[c+8].count=5;
+        g_model.curves[c+8].custom=false;
+        for (int i=0; i< 5; i++) {
+          g_model.curves[c+8].points[i].y=ar[i];
+        }
+      }
+    }
 }
 
 void ModelEdit::setSwitch(unsigned int idx, unsigned int func, int v1, int v2)
