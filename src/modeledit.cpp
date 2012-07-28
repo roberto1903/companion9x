@@ -3183,7 +3183,7 @@ bool ModelEdit::gm_insertMix(int idx)
   memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
       (GetEepromInterface()->getCapability(Mixes)-(idx+1))*sizeof(MixData) );
   memset(&g_model.mixData[idx],0,sizeof(MixData));
-  g_model.mixData[idx].srcRaw = RawSource(SOURCE_TYPE_STICK, 0);
+  g_model.mixData[idx].srcRaw = RawSource(SOURCE_TYPE_NONE);
   g_model.mixData[idx].destCh = i;
   g_model.mixData[idx].weight = 100;
   return true;
@@ -3205,11 +3205,17 @@ void ModelEdit::gm_openMix(int index)
     tabMixes();
 
     MixerDialog *g = new MixerDialog(this, &mixd, g_eeGeneral.stickMode);
-    if(g->exec())
-    {
-        g_model.mixData[index] = mixd;
-        updateSettings();
-        tabMixes();
+    if(g->exec()) {
+      g_model.mixData[index] = mixd;
+      updateSettings();
+      tabMixes();
+    } else {
+      if (mixInserted) {
+        gm_deleteMix(index);
+      }
+      mixInserted=false;
+      updateSettings();
+      tabMixes();
     }
 }
 
@@ -3279,6 +3285,9 @@ void ModelEdit::mixerlistWidget_doubleClicked(QModelIndex index)
         if (!gm_insertMix(idx))
           return;
         g_model.mixData[idx].destCh = i;
+        mixInserted=true;
+    } else {
+      mixInserted=false;
     }
     gm_openMix(idx);
 }
@@ -3553,7 +3562,11 @@ void ModelEdit::mixerOpen()
         if (!gm_insertMix(idx))
           return;
         g_model.mixData[idx].destCh = i;
+        mixInserted=true;
+    } else {
+      mixInserted=false;
     }
+    
     gm_openMix(idx);
 }
 
