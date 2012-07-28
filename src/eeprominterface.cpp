@@ -309,6 +309,8 @@ QString RawSwitch::toString()
     }
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
+    case SWITCH_TYPE_ONM:
+      return QObject::tr("mON");
     case SWITCH_TYPE_OFF:
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
