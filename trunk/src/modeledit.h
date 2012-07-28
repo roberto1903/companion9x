@@ -23,6 +23,7 @@ public:
     bool redrawCurve;
     void drawCurve();
     bool drawing;
+    bool mixInserted;
 private:
     Ui::ModelEdit *ui;
 
