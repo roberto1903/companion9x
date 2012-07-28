@@ -44,7 +44,7 @@
 
 #include <QtGui>
 
-#define DEFAULT_BALL_SIZE 14
+#define DEFAULT_BALL_SIZE 10
 #define BALL_HEIGHT 2
 
 class Edge;
