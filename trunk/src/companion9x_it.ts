@@ -893,17 +893,17 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="2026"/>
         <source>Negative span</source>
-        <translation type="unfinished"></translation>
+        <translation>Corsa negativa</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2036"/>
         <source>Mid value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore intermedio</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2046"/>
         <source>Positive span</source>
-        <translation type="unfinished"></translation>
+        <translation>Corsa positiva</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="2190"/>
@@ -6974,7 +6974,7 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.cpp" line="383"/>
         <source>No graphical check boxes and sliders</source>
-        <translation type="unfinished"></translation>
+        <translation>Disabilita grafica per caselle di spunta e cursori </translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="430"/>
