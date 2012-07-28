@@ -126,9 +126,7 @@ Unzip xsd-3.3.0-i686-windows.zip to "C:\Programs\"
 Rename the "folder xsd-3.3.0-i686-windows" to "xsd-3.3.0" so you have "C:\Programs\xsd-3.3.0\"
 
 Navigate to "C:\Programs\xsd-3.3.0\bin" 
-Make a copy of xsd.exe and call it xsd-cxx.exe
-
-<b><font color=red>Bertand can we change !FindXsd.cmake so this renaming isn't needed ?</font></b>
+Make a copy of xsd.exe and call it xsd-cxx.exe (because there is another program named xsd.exe (Microsoft) on the system.
 
 == PThreads ==
 
@@ -166,13 +164,10 @@ http://www.libsdl.org/download-1.2.php
 
 Download the Win32 Visual C++ Development Libraries
 
-Unzip SDL-x.x.xx-win32.zip to "C:\Programs\SDL-1.2.14\"
+Unzip SDL-x.x.xx-win32.zip to "C:\Programs\SDL\"
 (x.x.xx represents version number, get the latest)
 
-Navigate to "C:\Programs\SDL-1.2.14\lib\x86" or if you have a 64bit system "C:\Programs\SDL-1.2.14\lib\x64". Select all the files in this directory, copy them, go one directory level up, paste them.
-
-<b><font color=red>The build is currently tied to installation in:
-C:\Programs\SDL-1.2.14\" so even if you download a newer version it must be installed in this directory (Bertand can we change !FindSdl.cmake to look in "C:\Programs\SDL\" instead ? ) </font></b>
+Navigate to "C:\Programs\SDL\lib\x86" or if you have a 64bit system "C:\Programs\SDL\lib\x64". Select all the files in this directory, copy them, go one directory level up, paste them.
 
 = Get companion9x via SVN =
 
