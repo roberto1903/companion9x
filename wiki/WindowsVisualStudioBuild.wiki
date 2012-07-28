@@ -214,7 +214,7 @@ XSD Include Path: C:/Programs/xsd-3.3.0/libxsd
 -- Looking for include files CMAKE_HAVE_PTHREAD_H
 -- Looking for include files CMAKE_HAVE_PTHREAD_H - not found.
 -- Found Threads: TRUE
-SDL Include Path: C:/Programs/SDL-1.2.14/include
+SDL Include Path: C:/Programs/SDL/include
 svn: E200029: Couldn't perform atomic initialization
 svn: E170001: Could not initialize the SASL library
 -- Found Subversion: C:/Programs/TortoiseSVN/bin/svn.exe
@@ -255,4 +255,4 @@ C:\Programs\xerces-vc\bin\xerces-c_3_1.dll
 C:\Programs\pthreads\Pre-built.2\lib\pthreadVC2.dll
 C:\Programs\SDL-1.2.14\lib\SDL.dll
 
-Or if you want right click on "installer" in the Visual Studio Solution Explorer and click build and it will generate the installer exe. *Remeber you must already have the release build built for this to work*
+Or if you want right click on "installer" in the Visual Studio Solution Explorer and click build and it will generate the installer exe. *Remember you must already have the release build built for this to work*
