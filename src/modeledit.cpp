@@ -4388,10 +4388,25 @@ void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
   }
   int fwpoints=GetEepromInterface()->getCapability(NumCurvePoints);
   if (fwpoints!=0) {
-   if (fwpoints<totalpoints) {
-     QMessageBox::warning(this, "companion9x", tr("Not enought points free in eeprom to store the curve."));
-     return;
-   }
+    if (fwpoints<totalpoints) {
+      QMessageBox::warning(this, "companion9x", tr("Not enought points free in eeprom to store the curve."));
+      int oldindex=0;
+      if (currpoints==3) {
+        oldindex=0;
+      } else if (currpoints==5) {
+        oldindex=2;
+      } else if (currpoints==9) {
+        oldindex=4;
+      }  else if (currpoints==17) {
+        oldindex=6;
+      }
+      if (currcustom) {
+        index++;
+      }
+      ui->curvetype_CB->setCurrentIndex(oldindex);
+      curvesLock=false;
+      return;
+    }
   }
   // let's be sure that for standard curves X values are set correctly.
   if (!currcustom) {
