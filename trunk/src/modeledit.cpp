@@ -4017,7 +4017,7 @@ void ModelEdit::setCurve(uint8_t c, int8_t ar[])
 {
     int len=sizeof(ar)/sizeof(int8_t);
     if (GetEepromInterface()->getCapability(CustomCurves)) {
-      if (GetEepromInterface()->getCapability(NumCurves)<c) {
+      if (GetEepromInterface()->getCapability(NumCurves)>c) {
         if (len<9) {
           g_model.curves[c].count=5;
           g_model.curves[c].custom=false;
