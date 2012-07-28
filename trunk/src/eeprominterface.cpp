@@ -374,8 +374,14 @@ void ModelData::clear()
     expoData[i].clear();
   for (int i=0; i<NUM_CSW; i++)
     customSw[i].clear();
-  for (int i=0; i<MAX_CURVES; i++)
-    curves[i].clear();
+  bool custom = GetEepromInterface()->getCapability(CustomCurves);
+  for (int i=0; i<MAX_CURVES; i++) {
+    if (!custom && i>=8)
+      curves[i].clear(9);
+    else
+      curves[i].clear(5);
+  }
+
   swashRingData.clear();
   frsky.clear();
 }
