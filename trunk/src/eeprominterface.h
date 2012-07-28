@@ -277,6 +277,7 @@ enum RawSwitchType {
   SWITCH_TYPE_MOMENT_VIRTUAL,
   SWITCH_TYPE_ON,
   SWITCH_TYPE_OFF,
+  SWITCH_TYPE_ONM,
 };
 
 class RawSwitch {
