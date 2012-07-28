@@ -49,7 +49,7 @@ FIND_PATH(SDL_INCLUDE_DIR SDL.h
   /opt/csw/include 
   /opt/include/SDL
   /opt/include
-  C:/Programs/SDL-1.2.14/include
+  C:/Programs/SDL/include
   )
 # I'm not sure if I should do a special casing for Apple. It is 
 # unlikely that other Unix systems will find the framework path.
@@ -93,7 +93,7 @@ ELSE(${SDL_INCLUDE_DIR} MATCHES ".framework")
     /opt/local/lib
     /opt/csw/lib
     /opt/lib
-    C:/Programs/SDL-1.2.14/lib
+    C:/Programs/SDL/lib
     )
   # Non-OS X framework versions expect you to also dynamically link to 
   # SDLmain. This is mainly for Windows and OS X. Other platforms 
@@ -109,7 +109,7 @@ ELSE(${SDL_INCLUDE_DIR} MATCHES ".framework")
     /opt/local/lib
     /opt/csw/lib
     /opt/lib
-    C:/Programs/SDL-1.2.14/lib
+    C:/Programs/SDL/lib
     )
 ENDIF(${SDL_INCLUDE_DIR} MATCHES ".framework")
 
