@@ -22,6 +22,7 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
       ui->optionCheckBox_6,ui->optionCheckBox_7,ui->optionCheckBox_8,ui->optionCheckBox_9,ui->optionCheckBox_10,
       ui->optionCheckBox_11,ui->optionCheckBox_12,ui->optionCheckBox_13,ui->optionCheckBox_14,ui->optionCheckBox_15,
       ui->optionCheckBox_16,ui->optionCheckBox_17,ui->optionCheckBox_18,ui->optionCheckBox_19,ui->optionCheckBox_20,
+      ui->optionCheckBox_21,ui->optionCheckBox_22,ui->optionCheckBox_23,ui->optionCheckBox_24,
       NULL };
 
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
@@ -217,17 +218,21 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
     ui->langCombo->hide();
     ui->langLabel->hide();
   }
-  
-  
+
   int index = 0;
   foreach(QList<const char *> opts, parent->opts) {
     foreach(const char * opt, opts) {
-      QCheckBox *cb = optionsCheckBoxes.at(index++);
-      if (cb) {
-        cb->show();
-        cb->setText(opt);
-        cb->setToolTip(getTooltip(opt));
-        cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
+      if (index >= optionsCheckBoxes.size()) {
+        qDebug() << "This firmware needs more options checkboxes!";
+      }
+      else {
+        QCheckBox *cb = optionsCheckBoxes.at(index++);
+        if (cb) {
+          cb->show();
+          cb->setText(opt);
+          cb->setToolTip(getTooltip(opt));
+          cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
+        }
       }
     }
   }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>559</height>
+    <height>579</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -310,6 +310,34 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
      </property>
+     <item row="0" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_4">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_14">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_11">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_16">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QCheckBox" name="optionCheckBox_3">
        <property name="sizePolicy">
@@ -318,6 +346,27 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_12">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_10">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_15">
        <property name="text">
         <string>CheckBox</string>
        </property>
@@ -336,6 +385,76 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_19">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_6">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_17">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_13">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_5">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_9">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_8">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_18">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_7">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_20">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QCheckBox" name="optionCheckBox_2">
        <property name="sizePolicy">
@@ -349,120 +468,29 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="optionCheckBox_13">
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_22">
        <property name="text">
         <string>CheckBox</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="2">
-      <widget class="QCheckBox" name="optionCheckBox_15">
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_21">
        <property name="text">
         <string>CheckBox</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="optionCheckBox_14">
+     <item row="5" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_23">
        <property name="text">
         <string>CheckBox</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
-      <widget class="QCheckBox" name="optionCheckBox_4">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="optionCheckBox_5">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="optionCheckBox_6">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QCheckBox" name="optionCheckBox_7">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QCheckBox" name="optionCheckBox_8">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="optionCheckBox_9">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QCheckBox" name="optionCheckBox_10">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QCheckBox" name="optionCheckBox_11">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="optionCheckBox_12">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QCheckBox" name="optionCheckBox_16">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="optionCheckBox_17">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="optionCheckBox_18">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QCheckBox" name="optionCheckBox_19">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <widget class="QCheckBox" name="optionCheckBox_20">
+     <item row="5" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_24">
        <property name="text">
         <string>CheckBox</string>
        </property>
