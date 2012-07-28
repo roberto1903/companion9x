@@ -1312,7 +1312,7 @@ t_Open9xV4ModelData_v210::operator ModelData ()
     if (crvinfo.custom) {
       c9x.curves[i].points[0].x = -100;
       for (int j=1; j<crvinfo.points-1; j++)
-        c9x.curves[i].points[j].x = crvinfo.crv[j-1];
+        c9x.curves[i].points[j].x = crvinfo.crv[crvinfo.points+j-1];
       c9x.curves[i].points[crvinfo.points-1].x = +100;
     }
     else {
