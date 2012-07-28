@@ -394,6 +394,13 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
       if (item == value) b->setCurrentIndex(b->count()-1);
     }
   }
+  if (attr & POPULATE_MSWITCHES) {
+    if (attr & POPULATE_ONOFF) {
+      item = RawSwitch(SWITCH_TYPE_ONM);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+  }
 
   b->setMaxVisibleItems(10);
 }
