@@ -3183,6 +3183,7 @@ bool ModelEdit::gm_insertMix(int idx)
   memmove(&g_model.mixData[idx+1],&g_model.mixData[idx],
       (GetEepromInterface()->getCapability(Mixes)-(idx+1))*sizeof(MixData) );
   memset(&g_model.mixData[idx],0,sizeof(MixData));
+  g_model.mixData[idx].srcRaw = RawSource(SOURCE_TYPE_STICK, 0);
   g_model.mixData[idx].destCh = i;
   g_model.mixData[idx].weight = 100;
   return true;
@@ -3272,8 +3273,7 @@ int ModelEdit::getExpoIndex(int dch)
 void ModelEdit::mixerlistWidget_doubleClicked(QModelIndex index)
 {
     int idx= MixerlistWidget->item(index.row())->data(Qt::UserRole).toByteArray().at(0);
-    if(idx<0)
-    {
+    if (idx<0) {
         int i = -idx;
         idx = getMixerIndex(i); //get mixer index to insert
         if (!gm_insertMix(idx))
