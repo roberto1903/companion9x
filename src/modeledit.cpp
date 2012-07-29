@@ -1957,19 +1957,19 @@ void ModelEdit::updateA2Fields() {
 
 void ModelEdit::tabTemplates() {
   ui->templateList->clear();
-  ui->templateList->addItem("Simple 4-CH");
-  ui->templateList->addItem("T-Cut");
-  ui->templateList->addItem("Sticky T-Cut");
-  ui->templateList->addItem("V-Tail");
-  ui->templateList->addItem("Elevon\\Delta");
-  ui->templateList->addItem("Heli Setup");
-  ui->templateList->addItem("Heli Setup with gyro gain control");
-  ui->templateList->addItem("Gyro gain control");
-  ui->templateList->addItem("Heli Setup (Futaba's channel assignment style)");
-  ui->templateList->addItem("Heli Setup with gyro gain control (Futaba's channel assignment style)");
-  ui->templateList->addItem("Gyro gain control (Futaba's channel assignment style)");
-  ui->templateList->addItem("Servo Test");
-  ui->templateList->addItem("MultiCopter");
+  ui->templateList->addItem(tr("Simple 4-CH"));
+  ui->templateList->addItem(tr("T-Cut"));
+  ui->templateList->addItem(tr("Sticky T-Cut"));
+  ui->templateList->addItem(tr("V-Tail"));
+  ui->templateList->addItem(tr("Elevon\\Delta"));
+  ui->templateList->addItem(tr("Heli Setup"));
+  ui->templateList->addItem(tr("Heli Setup with gyro gain control"));
+  ui->templateList->addItem(tr("Gyro gain control"));
+  ui->templateList->addItem(tr("Heli Setup (Futaba's channel assignment style)"));
+  ui->templateList->addItem(tr("Heli Setup with gyro gain control (Futaba's channel assignment style)"));
+  ui->templateList->addItem(tr("Gyro gain control (Futaba's channel assignment style)"));
+  ui->templateList->addItem(tr("Servo Test"));
+  ui->templateList->addItem(tr("MultiCopter"));
 }
 
 void ModelEdit::on_modelNameLE_editingFinished()
