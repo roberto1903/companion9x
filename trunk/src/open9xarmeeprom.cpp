@@ -871,6 +871,8 @@ t_Open9xArmFuncSwData_v211::t_Open9xArmFuncSwData_v211(FuncSwData &c9x)
   uint32_t value;
   if (c9x.func <= FuncSafetyCh16) {
     value = (c9x.param);
+    memset(param,0,6);
+    param[0]=(uint8_t)c9x.param&0xFF;
     delay=(c9x.enabled & 0x01);
   }
   else {
@@ -892,7 +894,7 @@ t_Open9xArmFuncSwData_v211::operator FuncSwData ()
   uint32_t value = *((uint32_t *)param);
   if (c9x.func <= FuncSafetyCh16) {
     c9x.enabled = delay & 0x01;
-    c9x.param = value;
+    c9x.param = (unsigned int)param[0];
   }
   else {
     if (c9x.func != FuncPlayPrompt) {
