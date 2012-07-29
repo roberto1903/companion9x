@@ -4676,6 +4676,16 @@ Droite</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="42"/>
+        <source>Play Prompt</source>
+        <translation>Lire annonce</translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="42"/>
+        <source>Play Value</source>
+        <translation>Lire valeur</translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="42"/>
         <source>Backlight</source>
         <translation>Rétroéclairage</translation>
     </message>
