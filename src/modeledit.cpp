@@ -1639,6 +1639,7 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamT[i]->hide();
         fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
+        fswtchEnable[i]->setChecked(false);
       } else  if (index>15) {
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume) {
           fswtchParam[i]->hide();
@@ -1654,6 +1655,8 @@ void ModelEdit::functionSwitchesEdited()
         } else if (index==FuncPlayPrompt) {
           fswtchParam[i]->hide();
           fswtchParamT[i]->hide();
+          fswtchEnable[i]->hide();
+          fswtchEnable[i]->setChecked(false);
           fswtchParamArmT[i]->show();
           for (int j=0; j<6; j++) {
             g_model.funcSw[i].paramarm[j]=0;
@@ -1666,6 +1669,7 @@ void ModelEdit::functionSwitchesEdited()
           fswtchParam[i]->hide();
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
+          fswtchEnable[i]->setChecked(false);
         }
       } else {
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
