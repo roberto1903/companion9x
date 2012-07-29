@@ -1425,7 +1425,7 @@ Burn anyway ?</source>
     <message>
         <location filename="mainwindow.cpp" line="1259"/>
         <source>Write flash memory to transmitter</source>
-        <translation type="unfinished">Écrire dans la mémoire Flash de l&apos;émetteur</translation>
+        <translation>Écrire dans la mémoire Flash de l&apos;émetteur</translation>
     </message>
     <message>
         <source>&amp;Contributors</source>
@@ -2510,7 +2510,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="839"/>
         <location filename="modeledit.cpp" line="574"/>
         <source>THR</source>
-        <translation>THR</translation>
+        <translation>GAZ</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3640"/>
@@ -3467,7 +3467,7 @@ Droite</translation>
         <location filename="modeledit.ui" line="13057"/>
         <location filename="modeledit.ui" line="13107"/>
         <source>NONE</source>
-        <translation>AUCUNE</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13062"/>
@@ -3659,8 +3659,9 @@ Droite</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1077"/>
+        <location filename="modeledit.cpp" line="1965"/>
         <source>Heli Setup</source>
-        <translation>Réglages hélico</translation>
+        <translation>Hélicoptère</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1164"/>
@@ -4359,6 +4360,66 @@ Droite</translation>
         <translation>Plage</translation>
     </message>
     <message>
+        <location filename="modeledit.cpp" line="1960"/>
+        <source>Simple 4-CH</source>
+        <translation>4 Canaux simple</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1961"/>
+        <source>T-Cut</source>
+        <translation>Coupure de gaz</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1962"/>
+        <source>Sticky T-Cut</source>
+        <translation>Coupure de gaz avec maintien (nécessite la remise à 0 du manche pour déverrouiller)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1963"/>
+        <source>V-Tail</source>
+        <translation>Stabilisateur en V</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1964"/>
+        <source>Elevon\Delta</source>
+        <translation>Elevon, aile delta</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1966"/>
+        <source>Heli Setup with gyro gain control</source>
+        <translation>Hélicoptère avec contrôle du gain du gyro</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1967"/>
+        <source>Gyro gain control</source>
+        <translation>Contrôle du gain du gyro pour hélicoptères</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1968"/>
+        <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
+        <translation>Hélicoptère (assignation des canaux style Futaba)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1969"/>
+        <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
+        <translation>Hélicoptère avec contrôle du gain du gyro (assignation des canaux style Futaba)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1970"/>
+        <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
+        <translation>Contrôle du gain du gyro pour hélicoptères (assignation des canaux style Futaba)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1971"/>
+        <source>Servo Test</source>
+        <translation>Test de servos (CH15)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="1972"/>
+        <source>MultiCopter</source>
+        <translation>Multicoptère</translation>
+    </message>
+    <message>
         <location filename="modeledit.cpp" line="3178"/>
         <source>Not enough available mixers!</source>
         <translation>Plus de mixages disponibles !</translation>
@@ -4415,7 +4476,8 @@ Droite</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="4431"/>
-        <source>Not enought points free in eeprom to store the curve.</source>
+        <source>Not enough free points in eeprom to store the curve.</source>
+        <oldsource>Not enought points free in eeprom to store the curve.</oldsource>
         <translation>Pas assez de points libres dans l&apos;eeprom pour enregistrer la courbe.</translation>
     </message>
 </context>
@@ -4600,7 +4662,7 @@ Droite</translation>
     <message>
         <location filename="helpers.cpp" line="42"/>
         <source>Reset</source>
-        <translation></translation>
+        <translation>Remise à zéro</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="42"/>
@@ -4621,7 +4683,7 @@ Droite</translation>
         <location filename="helpers.cpp" line="68"/>
         <location filename="helpers.cpp" line="118"/>
         <source>All</source>
-        <translation type="unfinished">Toutes</translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="69"/>
@@ -4638,6 +4700,11 @@ Droite</translation>
         <location filename="helpers.cpp" line="184"/>
         <source>Phase %1</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="244"/>
+        <source>Own trim</source>
+        <translation>Trim indépendant</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="249"/>
@@ -5289,6 +5356,13 @@ Droite</translation>
         <location filename="th9xeeprom.cpp" line="323"/>
         <source>th9x on this board doesn&apos;t have Rotary Encoders</source>
         <translation>th9x ne supporte pas d&apos;encodeurs rotatifs sur cette carte</translation>
+    </message>
+    <message>
+        <location filename="warnings.h" line="5"/>
+        <source>Warning!
+Handling of slow up an down in open9x mix has been changed, please check your settings!</source>
+        <translation>Attention!
+La gestion des fondus de phase, des ralentis et des délais dans open9x a changé, vérifiez vos réglages!</translation>
     </message>
 </context>
 <context>
