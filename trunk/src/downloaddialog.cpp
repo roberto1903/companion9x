@@ -1,6 +1,7 @@
 #include "downloaddialog.h"
 #include "ui_downloaddialog.h"
 #include <QMessageBox>
+#include <QtGui>
 
 downloadDialog::downloadDialog(QWidget *parent, QString src, QString tgt) :
     QDialog(parent),
@@ -23,20 +24,19 @@ downloadDialog::downloadDialog(QWidget *parent, QString src, QString tgt) :
         QMessageBox::critical(this, "companion9x",
                               tr("Unable to save the file %1: %2.")
                               .arg(tgt).arg(file->errorString()));
-        delete file;
-        file = 0;
-        this->close();
+        QTimer::singleShot(0, this, SLOT(fileError()));
+    } else {
+
+        reply = qnam.get(QNetworkRequest(QUrl(src)));
+        connect(reply, SIGNAL(finished()),
+                this, SLOT(httpFinished()));
+        connect(reply, SIGNAL(readyRead()),
+                this, SLOT(httpReadyRead()));
+        connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
+                this, SLOT(updateDataReadProgress(qint64,qint64)));
+    
     }
-
-    reply = qnam.get(QNetworkRequest(QUrl(src)));
-    connect(reply, SIGNAL(finished()),
-            this, SLOT(httpFinished()));
-    connect(reply, SIGNAL(readyRead()),
-            this, SLOT(httpReadyRead()));
-    connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
-            this, SLOT(updateDataReadProgress(qint64,qint64)));
 }
-
 downloadDialog::~downloadDialog()
 {
     delete ui;
@@ -78,4 +78,11 @@ void downloadDialog::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
 {
     ui->progressBar->setMaximum(totalBytes);
     ui->progressBar->setValue(bytesRead);
+}
+
+void downloadDialog::fileError()
+{
+    delete file;
+    file = 0;
+    reject();
 }
