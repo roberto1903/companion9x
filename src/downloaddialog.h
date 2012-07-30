@@ -21,6 +21,7 @@ public:
     ~downloadDialog();
 
 private slots:
+    void fileError();
     void httpFinished();
     void httpReadyRead();
     void updateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
