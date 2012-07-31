@@ -60,13 +60,16 @@ QString FuncParam(uint function, unsigned int value) {
   if (function==FuncPlaySound) {
     qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+    return qs.at(value);
   } else if (function==FuncPlayHaptic) { 
     qs << "0" << "1" << "2" << "3";
+    return qs.at(value);
   } else if (function==FuncReset) { 
     qs.append( QObject::tr("Timer1"));
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
+    return qs.at(value);
   } else if (function==FuncVolume) {
     RawSource item;
     for (int i=0; i<7; i++) {
@@ -99,9 +102,10 @@ QString FuncParam(uint function, unsigned int value) {
     for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
       item = RawSource(SOURCE_TYPE_CH, i);
       qs.append(item.toString());
-    }    
+    }
+    return qs.at(value);
   }
-  return qs.at(value);
+  return "";
 }
 
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
