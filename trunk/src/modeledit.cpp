@@ -6,6 +6,7 @@
 #include "expodialog.h"
 #include "mixerdialog.h"
 #include "simulatordialog.h"
+#include "modelconfigdialog.h"
 #include <assert.h>
 #include <QtGui>
 #include <QApplication>
@@ -1974,6 +1975,7 @@ void ModelEdit::tabTemplates() {
   ui->templateList->addItem(tr("Gyro gain control (Futaba's channel assignment style)"));
   ui->templateList->addItem(tr("Servo Test"));
   ui->templateList->addItem(tr("MultiCopter"));
+  ui->templateList->addItem(tr("Use Model Config Wizard"));
 }
 
 void ModelEdit::on_modelNameLE_editingFinished()
@@ -3943,14 +3945,16 @@ void ModelEdit::safetySwitchesEdited()
 void ModelEdit::on_templateList_doubleClicked(QModelIndex index)
 {
     QString text = ui->templateList->item(index.row())->text();
-
-    int res = QMessageBox::question(this,tr("Apply Template?"),tr("Apply template \"%1\"?").arg(text),QMessageBox::Yes | QMessageBox::No);
-    if(res!=QMessageBox::Yes) return;
-
-    applyTemplate(index.row());
-    updateSettings();
-    tabMixes();
-
+    if (index.row()==13) {
+      modelConfigDialog mcw;
+      mcw.exec();
+    } else {
+      int res = QMessageBox::question(this,tr("Apply Template?"),tr("Apply template \"%1\"?").arg(text),QMessageBox::Yes | QMessageBox::No);
+      if(res!=QMessageBox::Yes) return;
+      applyTemplate(index.row());
+      updateSettings();
+      tabMixes();
+   }
 }
 
 
