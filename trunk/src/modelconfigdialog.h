@@ -18,11 +18,16 @@ public:
 private:
     Ui::modelConfigDialog *ui;
     bool wingsLock;
+    bool tailLock;
+    int ModelType;
 
 
 private slots:
-    void wingConfigChanged();
-    void on_tailType_CB_currentIndexChanged(int index);
+    void ConfigChanged();
+    void tailConfigChanged();
+    void on_planeButton_clicked();
+    void on_heliButton_clicked();
+    void formSetup();
     void shrink();
 };
 

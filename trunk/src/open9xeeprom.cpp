@@ -1007,7 +1007,7 @@ t_Open9xFuncSwData_v210::t_Open9xFuncSwData_v210(FuncSwData &c9x)
   param = c9x.param;
   if (c9x.func <= FuncSafetyCh16) {
     delay = c9x.enabled;
-    func = c9x.func;
+    func = (uint8_t)c9x.func;
   }
   else if (c9x.func <= FuncTrainerAIL)
     func = 16 + c9x.func - FuncTrainer;
