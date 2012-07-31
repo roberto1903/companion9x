@@ -363,6 +363,8 @@ const char * options[]={
         "noht",
         "nographics",
         "nobold",
+        "voice",
+        "nocurves",
         NULL };
   
   QString tooltip[]={
@@ -389,6 +391,8 @@ const char * options[]={
         tr("Disable heli and templates menus"),
         tr("No graphical check boxes and sliders"),
         tr("Don't use bold font for highlighting active items"),
+        tr("Used if you have modified your radio with voice mode"),
+        tr("Disable curves menus"),
         tr("") };
   int i;
   for (i=0; options[i]; i++) {
