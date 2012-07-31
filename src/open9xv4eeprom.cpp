@@ -552,7 +552,7 @@ t_Open9xV4FuncSwData_v210::t_Open9xV4FuncSwData_v210(FuncSwData &c9x)
   swtch = open9xFromSwitch(c9x.swtch);
   param = c9x.param;
   if (c9x.func <= FuncSafetyCh16) {
-    func = c9x.func;
+    func = (uint8_t)c9x.func;
     delay = c9x.enabled;
   }
   else if (c9x.func <= FuncTrainerAIL)
