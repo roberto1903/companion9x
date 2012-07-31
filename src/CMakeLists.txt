@@ -1,8 +1,8 @@
 PROJECT( companion9x )
 
-SET( C9X_VERSION "0.95" )
 SET( C9X_VERSION_MAJOR "0" )
 SET( C9X_VERSION_MINOR "95" )
+SET( C9X_VERSION ${C9X_VERSION_MAJOR}.${C9X_VERSION_MINOR} )
 
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
@@ -130,6 +130,7 @@ SET( companion9x_SRCS
      splashlibrary.cpp
      mainwindow.cpp
      main.cpp
+     modelconfigdialog.cpp
 )
 
 SET( companion9x_MOC_HDRS
@@ -157,6 +158,7 @@ SET( companion9x_MOC_HDRS
      mdichild.h
      mainwindow.h
      myslider.h
+     modelconfigdialog.h
 )
      
 SET( companion9x_UIS
@@ -177,6 +179,7 @@ SET( companion9x_UIS
      customizesplashdialog.ui
      splashlibrary.ui
      burndialog.ui
+     modelconfigdialog.ui
 )
 
 IF ( SDL_FOUND )
