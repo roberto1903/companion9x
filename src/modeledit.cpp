@@ -1667,6 +1667,7 @@ void ModelEdit::functionSwitchesEdited()
           }
         } else {
           g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
+          fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
@@ -1677,6 +1678,7 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParam[i]->show();
         fswtchEnable[i]->show();
         fswtchParamT[i]->hide();
+        fswtchParamArmT[i]->hide();
         ui->fsw_en1->show();
         if (num_fsw>16) {
           ui->fsw_en2->show();
