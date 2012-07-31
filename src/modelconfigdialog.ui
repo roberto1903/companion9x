@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>731</width>
     <height>410</height>
    </rect>
   </property>
@@ -304,7 +304,7 @@
      </item>
      <item>
       <property name="text">
-       <string>2 Servos Elevetor / 1 Servo Sudder</string>
+       <string>2 Servos Elevator / 1 Servo Rudder</string>
       </property>
      </item>
     </widget>
