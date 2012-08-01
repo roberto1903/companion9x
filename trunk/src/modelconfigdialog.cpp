@@ -174,6 +174,7 @@ void modelConfigDialog::on_planeButton_clicked()
     ui->ailType_Label->show();
     ui->ailType_CB->show();
     ui->ailType_CB->setCurrentIndex(0);
+    ui->tailLabel->show();
     ui->tailType_Label->show();
     ui->tailType_CB->show();
     ui->tailType_CB->setCurrentIndex(0);
@@ -220,6 +221,7 @@ void modelConfigDialog::on_heliButton_clicked()
     ui->spoilersLabel->hide();
     ui->spoilersType_CB->setCurrentIndex(0);
     ui->spoilersType_CB->hide();
+    ui->tailLabel->show();
     ui->spLabel->show();
     ui->sp_Label->show();
     ui->swashType_CB->setCurrentIndex(0);
@@ -269,6 +271,7 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->ailType_Label->show();
     ui->ailType_CB->show();
     ui->ailType_CB->setCurrentIndex(0);
+    ui->tailLabel->show();
     ui->tailType_Label->show();
     ui->tailType_CB->show();
     ui->tailType_CB->setCurrentIndex(0);
@@ -312,6 +315,7 @@ void modelConfigDialog::on_deltaButton_clicked()
     ui->ailType_Label->hide();
     ui->ailType_CB->hide();
     ui->ailType_CB->setCurrentIndex(0);
+    ui->tailLabel->hide();
     ui->tailType_Label->hide();
     ui->tailType_CB->hide();
     ui->tailType_CB->setCurrentIndex(0);
