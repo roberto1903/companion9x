@@ -11,6 +11,8 @@ modelConfigDialog::modelConfigDialog(QWidget *parent) :
     connect(ui->flapsType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->spoilersType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->swashType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
+    connect(ui->engine_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
+    connect(ui->rudder_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->tailType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
     connect(ui->gyro_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
     formSetup();
@@ -123,6 +125,16 @@ void modelConfigDialog::ConfigChanged()
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
         break;
+      case 3:
+        imgname.append(QString("dt%1t2e%2f%3r.png").arg(ui->engine_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->rudder_CB->currentIndex()));
+        image.load(imgname);
+        ui->wingImg->setPixmap(QPixmap::fromImage(image));
+        imgname.clear();
+        imgname.append(QString(":/images/mcw/db%1t2e%2f%3r.png").arg(ui->engine_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->rudder_CB->currentIndex()));
+        image.load(imgname);
+        ui->tailImg->setPixmap(QPixmap::fromImage(image));
+        break;
+        
       default:
         ui->wingImg->clear();
         break;
@@ -139,6 +151,12 @@ void modelConfigDialog::on_planeButton_clicked()
     ModelType=0;
     wingsLock=true;
     tailLock=true;
+    ui->engine_Label->hide();
+    ui->engine_CB->setCurrentIndex(0);
+    ui->engine_CB->hide();
+    ui->rudder_Label->hide();
+    ui->rudder_CB->setCurrentIndex(0);
+    ui->rudder_CB->hide();
     ui->spoilersLabel->hide();
     ui->spoilersType_CB->setCurrentIndex(0);
     ui->spoilersType_CB->hide();
@@ -166,6 +184,7 @@ void modelConfigDialog::on_planeButton_clicked()
     ui->planeButton->setDisabled(true);
     ui->heliButton->setEnabled(true);
     ui->gliderButton->setEnabled(true);
+    ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
     ConfigChanged();
@@ -181,6 +200,12 @@ void modelConfigDialog::on_heliButton_clicked()
     ModelType=1;
     wingsLock=true;
     tailLock=true;
+    ui->engine_Label->hide();
+    ui->engine_CB->setCurrentIndex(0);
+    ui->engine_CB->hide();
+    ui->rudder_Label->hide();
+    ui->rudder_CB->setCurrentIndex(0);
+    ui->rudder_CB->hide();
     ui->wingLabel->hide();
     ui->ailType_Label->hide();
     ui->ailType_CB->hide();
@@ -205,10 +230,10 @@ void modelConfigDialog::on_heliButton_clicked()
     ui->chStyle_CB->show();
     ui->chStyle_CB->setCurrentIndex(0);
     ui->chassign_Label->show();
-
     ui->planeButton->setEnabled(true);
     ui->heliButton->setDisabled(true);
     ui->gliderButton->setEnabled(true);
+    ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
     ConfigChanged();
@@ -224,6 +249,12 @@ void modelConfigDialog::on_gliderButton_clicked()
     ModelType=2;
     wingsLock=true;
     tailLock=true;
+    ui->engine_Label->hide();
+    ui->engine_CB->setCurrentIndex(0);
+    ui->engine_CB->hide();
+    ui->rudder_Label->hide();
+    ui->rudder_CB->setCurrentIndex(0);
+    ui->rudder_CB->hide();
     ui->spLabel->hide();
     ui->sp_Label->hide();
     ui->swashType_CB->setCurrentIndex(0);
@@ -252,6 +283,7 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->planeButton->setEnabled(true);
     ui->heliButton->setEnabled(true);
     ui->gliderButton->setDisabled(true);
+    ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
     ConfigChanged();
@@ -267,7 +299,7 @@ void modelConfigDialog::on_deltaButton_clicked()
     ModelType=3;
     wingsLock=true;
     tailLock=true;
-/*    ui->spLabel->hide();
+    ui->spLabel->hide();
     ui->sp_Label->hide();
     ui->swashType_CB->setCurrentIndex(0);
     ui->swashType_CB->hide();
@@ -277,29 +309,33 @@ void modelConfigDialog::on_deltaButton_clicked()
     ui->chStyle_CB->hide();
     ui->chStyle_CB->setCurrentIndex(0);
     ui->chassign_Label->hide();
-    ui->wingLabel->show();
-    ui->ailType_Label->show();
-    ui->ailType_CB->show();
+    ui->ailType_Label->hide();
+    ui->ailType_CB->hide();
     ui->ailType_CB->setCurrentIndex(0);
-    ui->tailType_Label->show();
-    ui->tailType_CB->show();
+    ui->tailType_Label->hide();
+    ui->tailType_CB->hide();
     ui->tailType_CB->setCurrentIndex(0);
+    ui->spoilersLabel->hide();
+    ui->spoilersType_CB->setCurrentIndex(0);
+    ui->spoilersType_CB->hide();
+    ui->engine_Label->show();
+    ui->engine_CB->setCurrentIndex(0);
+    ui->engine_CB->show();
+    ui->rudder_Label->show();
+    ui->rudder_CB->setCurrentIndex(0);
+    ui->rudder_CB->show();
+    ui->wingLabel->show();
     ui->flapsType_Label->show();
     ui->flapsType_CB->show();
     ui->flapsType_CB->setCurrentIndex(0);
-    ui->flapsType_CB->setDisabled(true);
-    ui->spoilersLabel->show();
-    ui->spoilersType_CB->setCurrentIndex(0);
-    ui->spoilersType_CB->setDisabled(true);
-    ui->spoilersType_CB->show();
+    ui->flapsType_CB->setEnabled(true);
     ui->planeButton->setEnabled(true);
     ui->heliButton->setEnabled(true);
-    ui->gliderButton->setDisabled(true); */
+    ui->gliderButton->setEnabled(true);
+    ui->deltaButton->setDisabled(true);
     wingsLock=false;
     tailLock=false;
     ConfigChanged();
-    tailConfigChanged();
-    QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 
