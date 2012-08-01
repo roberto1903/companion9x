@@ -477,6 +477,7 @@ void RegisterFirmwares()
   open9x->addOption("DSM2");
   open9x->addOption("ppmca");
   open9x->addOption("potscroll");
+  open9x->addOption("sp22");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
   open9x->addOption("nobold");
@@ -496,7 +497,7 @@ void RegisterFirmwares()
   open9x->addOption("nofp");
   open9x->addOption("nocurves");
   open9x->addOption("sdcard");
-  open9x->addOption("SOMO");
+  open9x->addOption("voice");
   open9x->addOption("ppmca");
   open9x->addOption("autoswitch");
   open9x->addOption("nographics");
