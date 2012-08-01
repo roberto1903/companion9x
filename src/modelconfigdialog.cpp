@@ -53,10 +53,10 @@ void modelConfigDialog::tailConfigChanged()
                 image.load(":/images/mcw/htailng.png");
                 break;
             case 1:
-                image.load(":/images/mcw/hatilg.png");
+                image.load(":/images/mcw/htailg.png");
                 break;
             case 2:
-                image.load(":/images/mcw/hatilg.png");
+                image.load(":/images/mcw/htailg.png");
                 break;
         }
         break;
