@@ -123,6 +123,9 @@ void modelConfigDialog::ConfigChanged()
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
         break;
+      default:
+        ui->wingImg->clear();
+        break;
     }
     wingsLock=false;
 }
@@ -132,20 +135,10 @@ void modelConfigDialog::on_planeButton_clicked()
     ui->planeButton->setStyleSheet("background-color: #007f00; color: white;");
     ui->heliButton->setStyleSheet("");
     ui->gliderButton->setStyleSheet("");
+    ui->deltaButton->setStyleSheet("");
     ModelType=0;
     wingsLock=true;
     tailLock=true;
-    ui->wingLabel->show();
-    ui->ailType_Label->show();
-    ui->ailType_CB->show();
-    ui->ailType_CB->setCurrentIndex(0);
-    ui->tailType_Label->show();
-    ui->tailType_CB->show();
-    ui->tailType_CB->setCurrentIndex(0);
-    ui->flapsType_Label->show();
-    ui->flapsType_CB->show();
-    ui->flapsType_CB->setCurrentIndex(0);
-    ui->flapsType_CB->setDisabled(true);
     ui->spoilersLabel->hide();
     ui->spoilersType_CB->setCurrentIndex(0);
     ui->spoilersType_CB->hide();
@@ -159,6 +152,17 @@ void modelConfigDialog::on_planeButton_clicked()
     ui->chStyle_CB->hide();
     ui->chStyle_CB->setCurrentIndex(0);
     ui->chassign_Label->hide();
+    ui->wingLabel->show();
+    ui->ailType_Label->show();
+    ui->ailType_CB->show();
+    ui->ailType_CB->setCurrentIndex(0);
+    ui->tailType_Label->show();
+    ui->tailType_CB->show();
+    ui->tailType_CB->setCurrentIndex(0);
+    ui->flapsType_Label->show();
+    ui->flapsType_CB->show();
+    ui->flapsType_CB->setCurrentIndex(0);
+    ui->flapsType_CB->setDisabled(true);
     ui->planeButton->setDisabled(true);
     ui->heliButton->setEnabled(true);
     ui->gliderButton->setEnabled(true);
@@ -173,6 +177,7 @@ void modelConfigDialog::on_heliButton_clicked()
     ui->planeButton->setStyleSheet("");
     ui->heliButton->setStyleSheet("background-color: #007f00; color: white;");
     ui->gliderButton->setStyleSheet("");
+    ui->deltaButton->setStyleSheet("");
     ModelType=1;
     wingsLock=true;
     tailLock=true;
@@ -215,9 +220,20 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->planeButton->setStyleSheet("");
     ui->heliButton->setStyleSheet("");
     ui->gliderButton->setStyleSheet("background-color: #007f00; color: white;");
+    ui->deltaButton->setStyleSheet("");
     ModelType=2;
     wingsLock=true;
     tailLock=true;
+    ui->spLabel->hide();
+    ui->sp_Label->hide();
+    ui->swashType_CB->setCurrentIndex(0);
+    ui->swashType_CB->hide();
+    ui->gyroType_Label->hide();
+    ui->gyro_CB->setCurrentIndex(0);
+    ui->gyro_CB->hide();
+    ui->chStyle_CB->hide();
+    ui->chStyle_CB->setCurrentIndex(0);
+    ui->chassign_Label->hide();
     ui->wingLabel->show();
     ui->ailType_Label->show();
     ui->ailType_CB->show();
@@ -233,7 +249,25 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->spoilersType_CB->setCurrentIndex(0);
     ui->spoilersType_CB->setDisabled(true);
     ui->spoilersType_CB->show();
-    ui->spLabel->hide();
+    ui->planeButton->setEnabled(true);
+    ui->heliButton->setEnabled(true);
+    ui->gliderButton->setDisabled(true);
+    wingsLock=false;
+    tailLock=false;
+    ConfigChanged();
+    tailConfigChanged();
+}
+
+void modelConfigDialog::on_deltaButton_clicked()
+{
+    ui->planeButton->setStyleSheet("");
+    ui->heliButton->setStyleSheet("");
+    ui->gliderButton->setStyleSheet("");
+    ui->deltaButton->setStyleSheet("background-color: #007f00; color: white;");
+    ModelType=3;
+    wingsLock=true;
+    tailLock=true;
+/*    ui->spLabel->hide();
     ui->sp_Label->hide();
     ui->swashType_CB->setCurrentIndex(0);
     ui->swashType_CB->hide();
@@ -243,13 +277,29 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->chStyle_CB->hide();
     ui->chStyle_CB->setCurrentIndex(0);
     ui->chassign_Label->hide();
+    ui->wingLabel->show();
+    ui->ailType_Label->show();
+    ui->ailType_CB->show();
+    ui->ailType_CB->setCurrentIndex(0);
+    ui->tailType_Label->show();
+    ui->tailType_CB->show();
+    ui->tailType_CB->setCurrentIndex(0);
+    ui->flapsType_Label->show();
+    ui->flapsType_CB->show();
+    ui->flapsType_CB->setCurrentIndex(0);
+    ui->flapsType_CB->setDisabled(true);
+    ui->spoilersLabel->show();
+    ui->spoilersType_CB->setCurrentIndex(0);
+    ui->spoilersType_CB->setDisabled(true);
+    ui->spoilersType_CB->show();
     ui->planeButton->setEnabled(true);
     ui->heliButton->setEnabled(true);
-    ui->gliderButton->setDisabled(true);
+    ui->gliderButton->setDisabled(true); */
     wingsLock=false;
     tailLock=false;
     ConfigChanged();
     tailConfigChanged();
+    QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 

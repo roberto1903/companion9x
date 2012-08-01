@@ -28,6 +28,7 @@ private slots:
     void on_planeButton_clicked();
     void on_heliButton_clicked();
     void on_gliderButton_clicked();
+    void on_deltaButton_clicked();
     void formSetup();
     void shrink();
 };
