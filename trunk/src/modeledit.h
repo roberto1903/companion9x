@@ -124,6 +124,7 @@ private:
     void setSelectedByMixList(QList<int> list);
 
     void applyTemplate(uint8_t idx);
+    void applyNumericTemplate(uint32_t tpl);
     MixData* setDest(uint8_t dch);
     void setCurve(uint8_t c, int8_t ar[]);
     void setSwitch(unsigned int idx, unsigned int func, int v1, int v2);
