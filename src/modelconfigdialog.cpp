@@ -1,12 +1,22 @@
 #include "modelconfigdialog.h"
 #include "ui_modelconfigdialog.h"
+#include "helpers.h"
+#include "eeprominterface.h"
 #include <QtGui>
 
-modelConfigDialog::modelConfigDialog(QWidget *parent) :
+modelConfigDialog::modelConfigDialog(RadioData &radioData, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::modelConfigDialog)
+    ui(new Ui::modelConfigDialog),
+    radioData(radioData),
+    g_eeGeneral(radioData.generalSettings)
 {
     ui->setupUi(this);
+    ruddercolor << "#ffd100" << "#ffff00";
+    throttlecolor << "#e40000";
+    aileroncolor << "#0000ff" << "#00ffff";
+    elevatorcolor << "#827f00" << "#ffff00";
+    flapscolor << "#007f00" << "#00ff00";
+    airbrakecolor << "#9b0099" << "#ff00fc";
     connect(ui->ailType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));    
     connect(ui->flapsType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->spoilersType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
@@ -24,6 +34,150 @@ modelConfigDialog::~modelConfigDialog()
     delete ui;
 }
 
+void modelConfigDialog::rxUpdate()
+{
+    QLabel * channel[] = {ui->CH_1,ui->CH_2,ui->CH_3,ui->CH_4,ui->CH_5,ui->CH_6,ui->CH_7,ui->CH_8,ui->CH_9,NULL};
+    for (int i=0; channel[i]; i++)  {
+      channel[i]->setStyleSheet("");
+    }
+    for (int i=0; i<9 ; i++) {
+      rx[i]=false;
+    }
+
+    #define ICC(x) icc[(x)-1]
+    uint8_t icc[4] = {0};
+    for(uint8_t i=1; i<=4; i++) //generate inverse array
+      for(uint8_t j=1; j<=4; j++) if(CC(i)==j) icc[j-1]=i;
+    uint8_t stick;
+    uint8_t freeCH=4;
+    switch (ModelType) {
+      case 0:
+        stick=ICC(STK_THR);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(throttlecolor.at(0)));
+        rx[stick-1]=true;
+        stick=ICC(STK_RUD);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
+        if (ailerons>0) {
+          stick=ICC(STK_AIL);
+          channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
+          rx[stick-1]=true;
+        }
+        stick=ICC(STK_ELE);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(0)));
+        if (ailerons>1) {
+          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
+          rx[freeCH]=true;
+          freeCH++;
+        }
+        if (elevators>1) {
+          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
+          rx[freeCH]=true;
+          freeCH++;
+        }
+        for (uint8_t i=0; i< flaps; i++) {
+          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+          rx[freeCH]=true;
+          freeCH++;
+        }
+        break;
+      case 2:
+        if (ailerons>0) {
+          stick=ICC(STK_AIL);
+          channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
+          rx[stick-1]=true;
+        }
+        stick=ICC(STK_ELE);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(0)));
+        rx[stick-1]=true;
+        stick=ICC(STK_RUD);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
+        rx[stick-1]=true;
+        if (ailerons>1) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+        if (elevators>1) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+        if (rudders>1) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }      
+        for (uint8_t i=0; i< flaps; i++) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+        for (uint8_t i=0; i< spoilers; i++) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(airbrakecolor.at(i)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+        break;
+      case 3:
+        if (throttle>0) {
+          stick=ICC(STK_THR);
+          channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(throttlecolor.at(0)));
+          rx[stick-1]=true;
+        }
+        stick=ICC(STK_AIL);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
+        rx[stick-1]=true;
+        stick=ICC(STK_ELE);
+        channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(0)));
+        rx[stick-1]=true;
+        if (rudders>0) {
+          stick=ICC(STK_RUD);
+          channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
+          rx[stick-1]=true;
+          if (rudders>1) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
+                rx[j]=true;
+                break;
+              }
+            }
+          }
+        }
+        for (uint8_t i=0; i< flaps; i++) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+        break;
+
+    }
+}
+
 void modelConfigDialog::tailConfigChanged()
 {
     if (tailLock)
@@ -37,16 +191,24 @@ void modelConfigDialog::tailConfigChanged()
         switch (index) {
             case 0:
                 image.load(":/images/mcw/atailv.png");
+                rudders=1;
+                elevators=1;
                 break;
             case 1:
+                rudders=1;
+                elevators=1;
                 image.load(":/images/mcw/at1e1r.png");
                 break;
             case 2:
+                rudders=1;
+                elevators=2;
                 image.load(":/images/mcw/at2e1r.png");
                 break;
         }
         break;
       case 1:
+        elevators=1;
+        rudders=1;
         index=ui->gyro_CB->currentIndex();
         switch (index) {
             case 0:
@@ -64,12 +226,18 @@ void modelConfigDialog::tailConfigChanged()
         index=ui->tailType_CB->currentIndex();
         switch (index) {
             case 0:
+                elevators=1;
+                rudders=1;
                 image.load(":/images/mcw/gtailv.png");
                 break;
             case 1:
+                elevators=1;
+                rudders=1;
                 image.load(":/images/mcw/gt1e1r.png");
                 break;
             case 2:
+                elevators=2;
+                rudders=1;
                 image.load(":/images/mcw/gt2e1r.png");
                 break;
         }
@@ -77,6 +245,7 @@ void modelConfigDialog::tailConfigChanged()
     }
     ui->tailImg->setPixmap(QPixmap::fromImage(image));
     tailLock=false;
+    rxUpdate();
 }
 
 void modelConfigDialog::ConfigChanged()
@@ -96,6 +265,9 @@ void modelConfigDialog::ConfigChanged()
         } else {
             ui->flapsType_CB->setEnabled(true);
         }
+        ailerons=ui->ailType_CB->currentIndex();
+        flaps=ui->flapsType_CB->currentIndex();
+        throttle=1;
         imgname.append(QString("aw%1a%2f.png").arg(ui->ailType_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
@@ -104,6 +276,8 @@ void modelConfigDialog::ConfigChanged()
         wimages.clear();
         wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png";
         index=ui->swashType_CB->currentIndex();
+        ailerons=2;
+        throttle=1;
         imgname.append(wimages.at(index));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
@@ -121,11 +295,19 @@ void modelConfigDialog::ConfigChanged()
         } else {
             ui->spoilersType_CB->setEnabled(true);
         }
+        ailerons=ui->ailType_CB->currentIndex();
+        flaps=ui->flapsType_CB->currentIndex();
+        spoilers=ui->spoilersType_CB->currentIndex();
+        throttle=0;
         imgname.append(QString("gw%1a%2f%3s.png").arg(ui->ailType_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->spoilersType_CB->currentIndex()));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
         break;
       case 3:
+        ailerons=ui->ailType_CB->currentIndex();
+        flaps=ui->flapsType_CB->currentIndex();
+        rudders=ui->rudder_CB->currentIndex();
+        throttle=ui->engine_CB->currentIndex();
         imgname.append(QString("dt%1t2e%2f%3r.png").arg(ui->engine_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->rudder_CB->currentIndex()));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
@@ -134,12 +316,12 @@ void modelConfigDialog::ConfigChanged()
         image.load(imgname);
         ui->tailImg->setPixmap(QPixmap::fromImage(image));
         break;
-        
       default:
         ui->wingImg->clear();
         break;
     }
     wingsLock=false;
+    rxUpdate();
 }
 
 void modelConfigDialog::on_planeButton_clicked()
@@ -188,6 +370,7 @@ void modelConfigDialog::on_planeButton_clicked()
     ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
+    resetControls();
     ConfigChanged();
     tailConfigChanged();
 }
@@ -238,6 +421,7 @@ void modelConfigDialog::on_heliButton_clicked()
     ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
+    resetControls();
     ConfigChanged();
     tailConfigChanged();
 }
@@ -289,6 +473,7 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->deltaButton->setEnabled(true);
     wingsLock=false;
     tailLock=false;
+    resetControls();
     ConfigChanged();
     tailConfigChanged();
 }
@@ -339,6 +524,7 @@ void modelConfigDialog::on_deltaButton_clicked()
     ui->deltaButton->setDisabled(true);
     wingsLock=false;
     tailLock=false;
+    resetControls();
     ConfigChanged();
 }
 
@@ -346,6 +532,15 @@ void modelConfigDialog::on_deltaButton_clicked()
 void modelConfigDialog::formSetup()
 {
     on_planeButton_clicked();
+}
+
+void modelConfigDialog::resetControls() {
+  ailerons=0;
+  rudders=0;
+  throttle=0;
+  elevators=0;
+  spoilers=0;
+  flaps=0;
 }
 
 

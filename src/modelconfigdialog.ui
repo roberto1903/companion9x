@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>759</width>
-    <height>503</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -249,11 +249,6 @@
      <item>
       <property name="text">
        <string>2 Servos</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string/>
       </property>
      </item>
     </widget>
@@ -660,7 +655,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel</set>
        </property>
        <property name="centerButtons">
         <bool>false</bool>
