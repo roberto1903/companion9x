@@ -4397,6 +4397,11 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
   }
   updateHeliTab();
   updateCurvesTab();
+  if (modeltype==1) {
+    ui->tabWidget->setCurrentIndex(1);
+  } else {
+    ui->tabWidget->setCurrentIndex(4);
+  }
   resizeEvent();
 }
 
