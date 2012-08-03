@@ -3948,8 +3948,8 @@ void ModelEdit::on_templateList_doubleClicked(QModelIndex index)
 {
     QString text = ui->templateList->item(index.row())->text();
     if (index.row()==13) {
-      modelConfigDialog mcw;
-      mcw.exec();
+      modelConfigDialog *mcw = new modelConfigDialog(radioData, this);
+      mcw->exec();
     } else {
       int res = QMessageBox::question(this,tr("Apply Template?"),tr("Apply template \"%1\"?").arg(text),QMessageBox::Yes | QMessageBox::No);
       if(res!=QMessageBox::Yes) return;
