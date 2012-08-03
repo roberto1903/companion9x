@@ -17,6 +17,7 @@ modelConfigDialog::modelConfigDialog(RadioData &radioData, QWidget *parent) :
     elevatorcolor << "#827f00" << "#ffff00";
     flapscolor << "#007f00" << "#00ff00";
     airbrakecolor << "#9b0099" << "#ff00fc";
+    helicolor << "#00ff00" << "#0000ff" << "#00ffff" << "#ffff00" << "#e40000" << "#ffa400";
     connect(ui->ailType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));    
     connect(ui->flapsType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->spoilersType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
@@ -25,6 +26,7 @@ modelConfigDialog::modelConfigDialog(RadioData &radioData, QWidget *parent) :
     connect(ui->rudder_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     connect(ui->tailType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
     connect(ui->gyro_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
+    connect(ui->chStyle_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     formSetup();
     QTimer::singleShot(0, this, SLOT(shrink()));
 }
@@ -51,7 +53,7 @@ void modelConfigDialog::rxUpdate()
     uint8_t stick;
     uint8_t freeCH=4;
     switch (ModelType) {
-      case 0:
+      case 0: //AIRPLANE
         stick=ICC(STK_THR);
         channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(throttlecolor.at(0)));
         rx[stick-1]=true;
@@ -80,7 +82,31 @@ void modelConfigDialog::rxUpdate()
           freeCH++;
         }
         break;
-      case 2:
+      case 1:  //HELI
+        switch (ui->chStyle_CB->currentIndex()) {
+            case 0:
+              channel[0]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(0))); //ELE CYC1
+              channel[1]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(1))); //AIL  CYC2
+              channel[2]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(2))); //PITCH CYC3
+              channel[3]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(3))); //RUD
+              channel[4]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(4))); //THR
+              if (ui->gyro_CB->currentIndex()>0) {
+                channel[5]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(5))); //GYRO
+              }
+              break;
+            case 1:
+              channel[0]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(1))); //AIL CYC2
+              channel[1]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(0))); //ELE CYC1
+              channel[2]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(4))); //THR 
+              channel[3]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(3))); //RUD
+              if (ui->gyro_CB->currentIndex()>0) {
+                channel[4]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(5))); //GYRO
+              }
+              channel[5]->setStyleSheet(QString("background-color: %1;").arg(helicolor.at(2))); //PIT CYC3
+              break;
+        }
+        break;     
+      case 2: //GLIDER
         if (ailerons>0) {
           stick=ICC(STK_AIL);
           channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
@@ -138,7 +164,7 @@ void modelConfigDialog::rxUpdate()
           }
         }
         break;
-      case 3:
+      case 3: //DELTA WING
         if (throttle>0) {
           stick=ICC(STK_THR);
           channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(throttlecolor.at(0)));

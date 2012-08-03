@@ -28,6 +28,7 @@ private:
     QStringList throttlecolor;
     QStringList flapscolor;
     QStringList airbrakecolor;
+    QStringList helicolor;
     bool rx[9];
     unsigned int ailerons;
     unsigned int rudders;

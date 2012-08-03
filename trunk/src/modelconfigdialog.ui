@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>759</width>
-    <height>520</height>
+    <width>762</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -161,8 +161,21 @@
        <height>0</height>
       </size>
      </property>
-     <property name="text">
+     <property name="toolTip">
       <string>Airplane</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="companion9x.qrc">
+       <normaloff>:/images/mcw/aicon.png</normaloff>:/images/mcw/aicon.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>29</height>
+      </size>
      </property>
     </widget>
    </item>
@@ -180,8 +193,21 @@
        <height>0</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Helicopter</string>
+     </property>
      <property name="text">
-      <string>Heli</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="companion9x.qrc">
+       <normaloff>:/images/mcw/hicon.png</normaloff>:/images/mcw/hicon.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>29</height>
+      </size>
      </property>
     </widget>
    </item>
@@ -193,8 +219,21 @@
        <height>0</height>
       </size>
      </property>
-     <property name="text">
+     <property name="toolTip">
       <string>Glider</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="companion9x.qrc">
+       <normaloff>:/images/mcw/gicon.png</normaloff>:/images/mcw/gicon.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>29</height>
+      </size>
      </property>
     </widget>
    </item>
@@ -672,8 +711,21 @@
        <height>0</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Delta wing</string>
+     </property>
      <property name="text">
-      <string>Delta</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="companion9x.qrc">
+       <normaloff>:/images/mcw/dicon.png</normaloff>:/images/mcw/dicon.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>29</height>
+      </size>
      </property>
     </widget>
    </item>
