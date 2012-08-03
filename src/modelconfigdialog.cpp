@@ -580,6 +580,8 @@ void modelConfigDialog::shrink()
 void modelConfigDialog::doAction(QAbstractButton *button)
 {
     if (button->text() == tr("Apply")) {
+      int res = QMessageBox::question(this,tr("Apply configuration ?"),tr("Apply configuration deleting existing model ?"),QMessageBox::Yes | QMessageBox::No);
+      if(res==QMessageBox::Yes) {
         uint32_t tmp=0;
         tmp=ModelType;
         tmp <<=2;
@@ -601,6 +603,7 @@ void modelConfigDialog::doAction(QAbstractButton *button)
         tmp <<=2;
         tmp |= ui->chStyle_CB->currentIndex();
         *result=tmp;
+      }
     }
     this->close();
 }
