@@ -12,7 +12,7 @@ namespace Ui {
 class modelConfigDialog : public QDialog {
     Q_OBJECT
 public:
-    modelConfigDialog(RadioData &radioData, QWidget *parent = 0);
+    modelConfigDialog(RadioData &radioData, uint32_t * result, QWidget *parent = 0);
     ~modelConfigDialog();
 
 private:
@@ -21,6 +21,7 @@ private:
     bool tailLock;
     int ModelType;
     RadioData &radioData;
+    uint32_t * result;
     GeneralSettings g_eeGeneral;
     QStringList ruddercolor;
     QStringList aileroncolor;
@@ -50,6 +51,7 @@ private slots:
     void on_deltaButton_clicked();
     void formSetup();
     void shrink();
+    void doAction(QAbstractButton *button);
 };
 
 #endif // MODELCONFIGDIALOG_H

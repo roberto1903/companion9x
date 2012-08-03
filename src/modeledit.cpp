@@ -3948,8 +3948,14 @@ void ModelEdit::on_templateList_doubleClicked(QModelIndex index)
 {
     QString text = ui->templateList->item(index.row())->text();
     if (index.row()==13) {
-      modelConfigDialog *mcw = new modelConfigDialog(radioData, this);
+      uint32_t result=0;
+      modelConfigDialog *mcw = new modelConfigDialog(radioData, &result, this);
       mcw->exec();
+      if (result>0) {
+        applyNumericTemplate(result);
+        updateSettings();
+        tabMixes();
+      }
     } else {
       int res = QMessageBox::question(this,tr("Apply Template?"),tr("Apply template \"%1\"?").arg(text),QMessageBox::Yes | QMessageBox::No);
       if(res!=QMessageBox::Yes) return;
@@ -4064,6 +4070,334 @@ void ModelEdit::setSwitch(unsigned int idx, unsigned int func, int v1, int v2)
   g_model.customSw[idx-1].func = func;
   g_model.customSw[idx-1].val1   = v1;
   g_model.customSw[idx-1].val2   = v2;
+}
+
+void ModelEdit::applyNumericTemplate(uint32_t tpl)
+{
+  clearCurves(false);
+  clearExpos(false);
+  clearMixes(false);
+  int8_t heli_ar1[] = {-100, -20, 30, 70, 90};
+  int8_t heli_ar2[] = {80, 70, 60, 70, 100};
+  int8_t heli_ar3[] = {100, 90, 80, 90, 100};
+  int8_t heli_ar4[] = {-30,  -15, 0, 50, 100};
+  int8_t heli_ar5[] = {-100, -50, 0, 50, 100};
+  bool rx[9];
+  for (int i=0; i<9 ; i++) {
+    rx[i]=false;
+  }
+
+  MixData *md = &g_model.mixData[0];
+
+  uint8_t chstyle=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t gyro=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t tailtype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t swashtype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t ruddertype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t spoilertype=(tpl & 0x3);
+  tpl>>=2;
+  uint8_t flaptype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t ailerontype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t enginetype=(tpl & 0x03);
+  tpl>>=2;
+  uint8_t modeltype=(tpl & 0x03);
+
+#define ICC(x) icc[(x)-1]
+  uint8_t icc[4] = {0};
+  for(uint8_t i=1; i<=4; i++) //generate inverse array
+    for(uint8_t j=1; j<=4; j++) if(CC(i)==j) icc[j-1]=i;
+
+  int ailerons;
+  int flaps;
+  int throttle;
+  int spoilers;
+  int elevators;
+  int rudders;
+  int sign;
+  uint8_t rxch;
+  switch (modeltype) {
+    case 0:
+      ailerons=ailerontype;
+      flaps=flaptype;
+      throttle=1;
+      switch (tailtype) {
+        case 0:
+          rudders=1;
+          elevators=1;
+          break;
+        case 1:
+          rudders=1;
+          elevators=1;
+          break;
+        case 2:
+          rudders=1;
+          elevators=2;
+          break;
+      }
+      rxch=ICC(STK_RUD);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+      if (tailtype==0) {
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+      }
+      rx[rxch-1]=true;
+      rxch=ICC(STK_ELE);
+      if (tailtype==0) {
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+      }
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();
+      rx[rxch-1]=true;
+      rxch=ICC(STK_THR);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();
+      rx[rxch-1]=true;
+      if (ailerons>0) {
+        rxch=ICC(STK_AIL);
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+        rx[rxch-1]=true;
+      }
+      if (ailerons>1) {
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }
+      if (elevators>1) {
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }
+      if (flaps>0) {
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+      }
+      sign=-1;
+      for (uint8_t i=0; i< flaps; i++) {
+        sign*=-1;
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }      
+      break;
+    case 1:
+      setCurve(CURVE5(1),heli_ar1);
+      setCurve(CURVE5(2),heli_ar2);
+      setCurve(CURVE5(3),heli_ar3);
+      setCurve(CURVE5(4),heli_ar4);
+      setCurve(CURVE5(5),heli_ar5);
+      setCurve(CURVE5(6),heli_ar5);
+      switch (swashtype) {
+        case 0:
+          g_model.swashRingData.type = SWASH_TYPE_90;
+          break;
+        case 1:
+          g_model.swashRingData.type = SWASH_TYPE_120;
+          break;
+        case 2:
+          g_model.swashRingData.type = SWASH_TYPE_120X;
+          break;
+        case 3:
+          g_model.swashRingData.type = SWASH_TYPE_140;
+          break;
+      }
+      g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
+
+      if (chstyle==0) {
+        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+        md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
+        md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
+        switch (gyro) {
+          case 1:
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+            break;
+          case 2:
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;
+            break;
+        }
+      } else {
+        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
+        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
+        switch (gyro) {
+          case 1:
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+            break;
+          case 2:
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;
+            break;
+        }     
+      }
+      // collective
+      md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(4); md->carryTrim=TRIM_OFF;
+      md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
+      md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
+      break;
+    case 2:
+      ailerons=ailerontype;
+      flaps=flaptype;
+      spoilers=spoilertype;
+      throttle=0;
+      switch (tailtype) {
+        case 0:
+          rudders=1;
+          elevators=1;
+          break;
+        case 1:
+          rudders=1;
+          elevators=1;
+          break;
+        case 2:
+          rudders=1;
+          elevators=2;
+          break;
+      }
+      rxch=ICC(STK_RUD);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+      if (tailtype==0) {
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+      }
+      rx[rxch-1]=true;
+      rxch=ICC(STK_ELE);
+      if (tailtype==0) {
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();
+      }
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();
+      rx[rxch-1]=true;
+      if (ailerons>0) {
+        rxch=ICC(STK_AIL);
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+        rx[rxch-1]=true;
+      }
+      if (ailerons>1) {
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }
+      if (elevators>1) {
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }
+      if (flaps>0) {
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+      }
+      sign=-1;
+      for (uint8_t i=0; i< flaps; i++) {
+        sign*=-1;
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }      
+      if (spoilers>0) {
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+      }
+      sign=-1;
+      for (uint8_t i=0; i< spoilers; i++) {
+        sign*=-1;
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }
+      break;
+    case 3:
+      flaps=flaptype;
+      throttle=enginetype;
+      rudders=ruddertype;
+      if (throttle==1) {
+       rxch=ICC(STK_THR);
+       md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();
+       rx[rxch-1]=true;
+      }
+      rxch=ICC(STK_ELE);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100; md->swtch=RawSwitch();
+      rx[rxch-1]=true;
+      rxch=ICC(STK_AIL);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100; md->swtch=RawSwitch();
+      rx[rxch-1]=true;
+      if (rudders>0) {
+        rxch=ICC(STK_RUD);
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+        rx[rxch-1]=true;
+        if (rudders>1) {
+          for (int j=0; j<9 ; j++) {
+            if (!rx[j]) {
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();
+              rx[j]=true;
+              break;
+            }
+          }
+        }
+      }
+      if (flaps>0) {
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+      }
+      sign=-1;
+      for (uint8_t i=0; i< flaps; i++) {
+        sign*=-1;
+        for (int j=0; j<9 ; j++) {
+          if (!rx[j]) {
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            rx[j]=true;
+            break;
+          }
+        }
+      }      
+      break;
+  }
+  updateHeliTab();
+  updateCurvesTab();
+  resizeEvent();
 }
 
 void ModelEdit::applyTemplate(uint8_t idx)
@@ -4254,8 +4588,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
     // Set up Mixes
     // 3 cyclic channels
-    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
-    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
     md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
 
     // rudder
@@ -4300,8 +4634,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
 
     // Set up Mixes
     // 3 cyclic channels
-    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
-    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
+    md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
     md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
 
     // rudder

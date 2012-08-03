@@ -4,10 +4,11 @@
 #include "eeprominterface.h"
 #include <QtGui>
 
-modelConfigDialog::modelConfigDialog(RadioData &radioData, QWidget *parent) :
+modelConfigDialog::modelConfigDialog(RadioData &radioData, uint32_t * result, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::modelConfigDialog),
     radioData(radioData),
+    result(result),
     g_eeGeneral(radioData.generalSettings)
 {
     ui->setupUi(this);
@@ -29,6 +30,7 @@ modelConfigDialog::modelConfigDialog(RadioData &radioData, QWidget *parent) :
     connect(ui->chStyle_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
     formSetup();
     QTimer::singleShot(0, this, SLOT(shrink()));
+    connect(ui->buttonBox,SIGNAL(clicked(QAbstractButton*)), this, SLOT(doAction(QAbstractButton*)));
 }
 
 modelConfigDialog::~modelConfigDialog()
@@ -573,4 +575,32 @@ void modelConfigDialog::resetControls() {
 void modelConfigDialog::shrink()
 {
     resize(0,0);
+}
+
+void modelConfigDialog::doAction(QAbstractButton *button)
+{
+    if (button->text() == tr("Apply")) {
+        uint32_t tmp=0;
+        tmp=ModelType;
+        tmp <<=2;
+        tmp |= ui->engine_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->ailType_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->flapsType_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->spoilersType_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->rudder_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->swashType_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->tailType_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->gyro_CB->currentIndex();
+        tmp <<=2;
+        tmp |= ui->chStyle_CB->currentIndex();
+        *result=tmp;
+    }
+    this->close();
 }
