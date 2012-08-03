@@ -4825,22 +4825,22 @@ Droite</translation>
     <message>
         <location filename="eeprominterface.cpp" line="248"/>
         <source>TrmR</source>
-        <translation></translation>
+        <translation>TrmD</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="248"/>
         <source>TrmE</source>
-        <translation></translation>
+        <translation>TrmP</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="248"/>
         <source>TrmT</source>
-        <translation></translation>
+        <translation>TrmG</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="248"/>
         <source>TrmA</source>
-        <translation></translation>
+        <translation>TrmA</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="250"/>
