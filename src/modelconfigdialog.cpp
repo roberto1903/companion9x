@@ -579,7 +579,7 @@ void modelConfigDialog::shrink()
 
 void modelConfigDialog::doAction(QAbstractButton *button)
 {
-    if (button->text() == tr("Apply")) {
+    if ( ui->buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole) {
       int res = QMessageBox::question(this,tr("Apply configuration ?"),tr("Apply configuration deleting existing model ?"),QMessageBox::Yes | QMessageBox::No);
       if(res==QMessageBox::Yes) {
         uint32_t tmp=0;
