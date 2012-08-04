@@ -4142,29 +4142,29 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
           break;
       }
       rxch=ICC(STK_RUD);
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
       if (tailtype==0) {
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
       }
       rx[rxch-1]=true;
       rxch=ICC(STK_ELE);
       if (tailtype==0) {
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
       }
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
       rx[rxch-1]=true;
       rxch=ICC(STK_THR);
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("THR").toAscii().data(),6);
       rx[rxch-1]=true;
       if (ailerons>0) {
         rxch=ICC(STK_AIL);
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
         rx[rxch-1]=true;
       }
       if (ailerons>1) {
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL2").toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4180,15 +4180,15 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4219,41 +4219,41 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
       g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
       if (chstyle==0) {
-        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
         switch (gyro) {
           case 1:
-            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
-            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);strncpy(md->name, tr("GYRO").toAscii().data(),6);
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);strncpy(md->name, tr("GYRO").toAscii().data(),6);
             break;
           case 2:
-            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
-            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;strncpy(md->name, tr("GYRO").toAscii().data(),6);
+            md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;strncpy(md->name, tr("GYRO").toAscii().data(),6);
             break;
         }
       } else {
-        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();
-        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();
+        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+        md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(3); md->carryTrim=TRIM_OFF;
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR); md->mltpx=MLTPX_REP;
         switch (gyro) {
           case 1:
-            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
-            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);strncpy(md->name, tr("GYRO").toAscii().data(),6);
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-30; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);strncpy(md->name, tr("GYRO").toAscii().data(),6);
             break;
           case 2:
-            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;
-            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight= 50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA); md->sOffset=100;strncpy(md->name, tr("GYRO").toAscii().data(),6);
+            md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=-50; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA); md->sOffset=100;strncpy(md->name, tr("GYRO").toAscii().data(),6);
             break;
         }     
       }
@@ -4282,26 +4282,26 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
           break;
       }
       rxch=ICC(STK_RUD);
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
       if (tailtype==0) {
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
       }
       rx[rxch-1]=true;
       rxch=ICC(STK_ELE);
       if (tailtype==0) {
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
       }
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
       rx[rxch-1]=true;
       if (ailerons>0) {
         rxch=ICC(STK_AIL);
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
         rx[rxch-1]=true;
       }
       if (ailerons>1) {
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL2").toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4310,37 +4310,37 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
       if (elevators>1) {
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE2").toAscii().data(),6);
             rx[j]=true;
             break;
           }
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
             rx[j]=true;
             break;
           }
         }
       }      
       if (spoilers>0) {
-            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);
-            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6);
       }
       sign=-1;
       for (uint8_t i=0; i< spoilers; i++) {
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(j).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4353,25 +4353,25 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
       rudders=ruddertype;
       if (throttle==1) {
        rxch=ICC(STK_THR);
-       md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();
+       md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("THR").toAscii().data(),6);
        rx[rxch-1]=true;
       }
       rxch=ICC(STK_ELE);
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
       rx[rxch-1]=true;
       rxch=ICC(STK_AIL);
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();
-      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100; md->swtch=RawSwitch();
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+      md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
       rx[rxch-1]=true;
       if (rudders>0) {
         rxch=ICC(STK_RUD);
-        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();
+        md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
         rx[rxch-1]=true;
         if (rudders>1) {
           for (int j=0; j<9 ; j++) {
             if (!rx[j]) {
-              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD2").toAscii().data(),6);
               rx[j]=true;
               break;
             }
@@ -4379,15 +4379,15 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
             rx[j]=true;
             break;
           }

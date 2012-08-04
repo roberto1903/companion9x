@@ -317,7 +317,7 @@ void modelConfigDialog::ConfigChanged()
         } else {
             ui->flapsType_CB->setEnabled(true);
         }
-        if (ui->flapsType_CB->currentIndex()==0) {
+        if (ui->ailType_CB->currentIndex()==0) {
             ui->spoilersType_CB->setCurrentIndex(0);
             ui->spoilersType_CB->setDisabled(true);
         } else {
