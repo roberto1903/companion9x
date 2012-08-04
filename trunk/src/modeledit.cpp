@@ -28,11 +28,12 @@
 
 #define GFX_MARGIN 16
 
-ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
+ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget *parent) :
     QDialog(parent),
     redrawCurve(true),
+    openWizard(openWizard),
     ui(new Ui::ModelEdit),
-    radioData(radioData),
+    radioData(radioData),   
     id_model(id),
     g_model(radioData.models[id]),
     g_eeGeneral(radioData.generalSettings)
@@ -98,6 +99,9 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent) :
   ui->curvePreview->setMinimumHeight(240);
   resizeEvent();
   QTimer::singleShot(0, this, SLOT(shrink()));
+  if (openWizard) {
+    QTimer::singleShot(1, this, SLOT(wizard()));
+  }
 }
 
 ModelEdit::~ModelEdit()
@@ -4173,7 +4177,7 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
       if (elevators>1) {
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();;strncpy(md->name, tr("ELE2").toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4188,7 +4192,7 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4325,7 +4329,7 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4340,7 +4344,7 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(j).toAscii().data(),6);
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(i+1).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4387,7 +4391,7 @@ void ModelEdit::applyNumericTemplate(uint32_t tpl)
         sign*=-1;
         for (int j=0; j<9 ; j++) {
           if (!rx[j]) {
-            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(j).toAscii().data(),6);
+            md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
             rx[j]=true;
             break;
           }
@@ -4882,3 +4886,14 @@ void ModelEdit::closeEvent(QCloseEvent *event)
   event->accept();
 }
 
+void ModelEdit::wizard()
+{
+    uint32_t result=0xf000;
+    modelConfigDialog *mcw = new modelConfigDialog(radioData, &result, this);
+    mcw->exec();
+    if (result!=0xf000) {
+      applyNumericTemplate(result);
+      updateSettings();
+      tabMixes();
+    }
+}
