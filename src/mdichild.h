@@ -87,7 +87,7 @@ private slots:
     void on_SimulateTxButton_clicked();
 
 public slots:
-    void OpenEditWindow();
+    void OpenEditWindow(bool wizard);
 
     void cut();
     void copy();

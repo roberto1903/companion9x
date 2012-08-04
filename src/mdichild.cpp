@@ -138,7 +138,7 @@ void MdiChild::on_SimulateTxButton_clicked()
   }
 }
 
-void MdiChild::OpenEditWindow()
+void MdiChild::OpenEditWindow(bool wizard=false)
 {
   int row = ui->modelsList->currentRow();
 
@@ -153,7 +153,7 @@ void MdiChild::OpenEditWindow()
       setModified();
     }
 
-    ModelEdit *t = new ModelEdit(radioData, (row - 1), this);
+    ModelEdit *t = new ModelEdit(radioData, (row - 1), wizard, this);
     if (isNew) t->applyBaseTemplate();
     t->setWindowTitle(tr("Editing model %1: ").arg(row) + model.name);
     connect(t, SIGNAL(modelValuesChanged()), this, SLOT(setModified()));

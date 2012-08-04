@@ -16,7 +16,7 @@ class ModelEdit : public QDialog
     Q_OBJECT
 
 public:
-    explicit ModelEdit(RadioData &radioData, uint8_t id, QWidget *parent = 0);
+    explicit ModelEdit(RadioData &radioData, uint8_t id , bool openWizard =false, QWidget *parent = 0);
     ~ModelEdit();
 
     void applyBaseTemplate();
@@ -24,6 +24,7 @@ public:
     void drawCurve();
     bool drawing;
     bool mixInserted;
+    bool openWizard;
 private:
     Ui::ModelEdit *ui;
 
@@ -288,6 +289,7 @@ private slots:
     void on_templateList_doubleClicked(QModelIndex index);
     void ControlCurveSignal(bool flag);
     void shrink();
+    void wizard();
     void closeEvent(QCloseEvent *event);
     void on_curvetype_CB_currentIndexChanged(int index);
 };
