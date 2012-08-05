@@ -4,7 +4,7 @@
 #include "eeprominterface.h"
 #include <QtGui>
 
-modelConfigDialog::modelConfigDialog(RadioData &radioData, uint32_t * result, QWidget *parent) :
+modelConfigDialog::modelConfigDialog(RadioData &radioData, uint64_t * result, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::modelConfigDialog),
     radioData(radioData),
@@ -12,6 +12,7 @@ modelConfigDialog::modelConfigDialog(RadioData &radioData, uint32_t * result, QW
     g_eeGeneral(radioData.generalSettings)
 {
     ui->setupUi(this);
+    rxLock=false;
     ruddercolor << "#ffd100" << "#ffff00";
     throttlecolor << "#e40000";
     aileroncolor << "#0000ff" << "#00ffff";
@@ -28,6 +29,14 @@ modelConfigDialog::modelConfigDialog(RadioData &radioData, uint32_t * result, QW
     connect(ui->tailType_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
     connect(ui->gyro_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(tailConfigChanged()));
     connect(ui->chStyle_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(ConfigChanged()));
+    connect(ui->asail2_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asele2_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asrud2_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asfla1_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asfla2_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asspo1_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->asspo2_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(rxUpdate()));
+    connect(ui->as_CB,SIGNAL(clicked()),this,SLOT(rxUpdate()));
     formSetup();
     QTimer::singleShot(0, this, SLOT(shrink()));
     connect(ui->buttonBox,SIGNAL(clicked(QAbstractButton*)), this, SLOT(doAction(QAbstractButton*)));
@@ -47,13 +56,48 @@ void modelConfigDialog::rxUpdate()
     for (int i=0; i<9 ; i++) {
       rx[i]=false;
     }
-
+    int index;
+    if (ui->as_CB->isChecked()) {
+      if ((ModelType==0) ||  (ModelType==2)) {
+        index=ui->asail2_CB->currentIndex();
+        if (ailerons>1 && index>0) {
+          rx[index-1]=true;
+        }
+        index=ui->asele2_CB->currentIndex();
+        if (elevators>1 && index>0) {
+          rx[index-1]=true;
+        }
+      }
+      if (ModelType==3) {
+        index=ui->asrud2_CB->currentIndex();
+        if (rudders>1 && index>0) {
+          rx[index-1]=true;
+        }
+      }
+      index=ui->asfla1_CB->currentIndex();
+      if (flaps>0 && index>0) {
+        rx[index-1]=true;
+      }
+      index=ui->asfla2_CB->currentIndex();
+      if (flaps>1 && index>0) {
+        rx[index-1]=true;
+      }
+      if ((ModelType==0) ||  (ModelType==2)) {
+        index=ui->asspo1_CB->currentIndex();
+        if (spoilers>0 && index>0) {
+          rx[index-1]=true;
+        }
+        index=ui->asspo2_CB->currentIndex();
+        if (spoilers>1 && index>0) {
+          rx[index-1]=true;
+        }
+      }
+    }
     #define ICC(x) icc[(x)-1]
     uint8_t icc[4] = {0};
     for(uint8_t i=1; i<=4; i++) //generate inverse array
       for(uint8_t j=1; j<=4; j++) if(CC(i)==j) icc[j-1]=i;
     uint8_t stick;
-    uint8_t freeCH=4;
     switch (ModelType) {
       case 0: //AIRPLANE
         stick=ICC(STK_THR);
@@ -61,6 +105,7 @@ void modelConfigDialog::rxUpdate()
         rx[stick-1]=true;
         stick=ICC(STK_RUD);
         channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
+        rx[stick-1]=true;
         if (ailerons>0) {
           stick=ICC(STK_AIL);
           channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
@@ -68,20 +113,58 @@ void modelConfigDialog::rxUpdate()
         }
         stick=ICC(STK_ELE);
         channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(0)));
+        rx[stick-1]=true;
         if (ailerons>1) {
-          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
-          rx[freeCH]=true;
-          freeCH++;
+          index=ui->asail2_CB->currentIndex();
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
+                rx[j]=true;
+                break;
+              }
+            }  
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
+          }
         }
         if (elevators>1) {
-          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
-          rx[freeCH]=true;
-          freeCH++;
+          index=ui->asele2_CB->currentIndex();
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
+                rx[j]=true;
+                break;
+              }
+            }
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
+          }
         }
         for (uint8_t i=0; i< flaps; i++) {
-          channel[freeCH]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
-          rx[freeCH]=true;
-          freeCH++;
+          if (i==0) {
+            index=ui->asfla1_CB->currentIndex();
+          } else {
+            index=ui->asfla2_CB->currentIndex();
+          }
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+                rx[j]=true;
+                break;
+              }
+            };
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+          }
         }
         break;
       case 1:  //HELI
@@ -121,48 +204,75 @@ void modelConfigDialog::rxUpdate()
         channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
         rx[stick-1]=true;
         if (ailerons>1) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
-              rx[j]=true;
-              break;
-            }
+          index=ui->asail2_CB->currentIndex();
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
+                rx[j]=true;
+                break;
+              }
+            }  
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
           }
         }
         if (elevators>1) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
-              rx[j]=true;
-              break;
+          index=ui->asele2_CB->currentIndex();
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
+                rx[j]=true;
+                break;
+              }
             }
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
           }
         }
-        if (rudders>1) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
-              rx[j]=true;
-              break;
-            }
-          }
-        }      
         for (uint8_t i=0; i< flaps; i++) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
-              rx[j]=true;
-              break;
-            }
+          if (i==0) {
+            index=ui->asfla1_CB->currentIndex();
+          } else {
+            index=ui->asfla2_CB->currentIndex();
+          }
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+                rx[j]=true;
+                break;
+              }
+            };
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
           }
         }
         for (uint8_t i=0; i< spoilers; i++) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(airbrakecolor.at(i)));
-              rx[j]=true;
-              break;
-            }
+          if (i==0) {
+            index=ui->asspo1_CB->currentIndex();
+          } else {
+            index=ui->asspo2_CB->currentIndex();
+          }
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(airbrakecolor.at(i)));
+                rx[j]=true;
+                break;
+              }
+            };
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(airbrakecolor.at(i)));
           }
         }
         break;
@@ -182,7 +292,12 @@ void modelConfigDialog::rxUpdate()
           stick=ICC(STK_RUD);
           channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(0)));
           rx[stick-1]=true;
-          if (rudders>1) {
+        }
+        if (rudders>1) {
+          index=ui->asrud2_CB->currentIndex();
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
             for (int j=0; j<9 ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
@@ -190,20 +305,33 @@ void modelConfigDialog::rxUpdate()
                 break;
               }
             }
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
           }
         }
         for (uint8_t i=0; i< flaps; i++) {
-          for (int j=0; j<9 ; j++) {
-            if (!rx[j]) {
-              channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
-              rx[j]=true;
-              break;
-            }
+          if (i==0) {
+            index=ui->asfla1_CB->currentIndex();
+          } else {
+            index=ui->asfla2_CB->currentIndex();
+          }
+          if (!ui->as_CB->isChecked())
+            index=0;
+          if (index==0) {
+            for (int j=0; j<9 ; j++) {
+              if (!rx[j]) {
+                channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
+                rx[j]=true;
+                break;
+              }
+            };
+          } else {
+            channel[index-1]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
           }
         }
         break;
-
     }
+    asUpdate();
 }
 
 void modelConfigDialog::tailConfigChanged()
@@ -218,14 +346,14 @@ void modelConfigDialog::tailConfigChanged()
         index=ui->tailType_CB->currentIndex();
         switch (index) {
             case 0:
-                image.load(":/images/mcw/atailv.png");
                 rudders=1;
                 elevators=1;
+                image.load(":/images/mcw/at1e1r.png");
                 break;
             case 1:
                 rudders=1;
                 elevators=1;
-                image.load(":/images/mcw/at1e1r.png");
+                image.load(":/images/mcw/atailv.png");
                 break;
             case 2:
                 rudders=1;
@@ -256,12 +384,12 @@ void modelConfigDialog::tailConfigChanged()
             case 0:
                 elevators=1;
                 rudders=1;
-                image.load(":/images/mcw/gtailv.png");
+                image.load(":/images/mcw/gt1e1r.png");
                 break;
             case 1:
                 elevators=1;
                 rudders=1;
-                image.load(":/images/mcw/gt1e1r.png");
+                image.load(":/images/mcw/gtailv.png");
                 break;
             case 2:
                 elevators=2;
@@ -582,7 +710,7 @@ void modelConfigDialog::doAction(QAbstractButton *button)
     if ( ui->buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole) {
       int res = QMessageBox::question(this,tr("Apply configuration ?"),tr("Apply configuration deleting existing model ?"),QMessageBox::Yes | QMessageBox::No);
       if(res==QMessageBox::Yes) {
-        uint32_t tmp=0;
+        uint64_t tmp=0;
         tmp=ModelType;
         tmp <<=2;
         tmp |= ui->engine_CB->currentIndex();
@@ -602,8 +730,179 @@ void modelConfigDialog::doAction(QAbstractButton *button)
         tmp |= ui->gyro_CB->currentIndex();
         tmp <<=2;
         tmp |= ui->chStyle_CB->currentIndex();
+        if (ui->as_CB->isChecked()) {
+          tmp <<=4;
+          tmp |= ui->asail2_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asele2_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asrud2_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asfla1_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asfla2_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asspo1_CB->currentIndex();
+          tmp <<=4;
+          tmp |= ui->asspo2_CB->currentIndex();
+        } else {
+          tmp <<=28;
+        }
         *result=tmp;
       }
     }
     this->close();
+}
+
+void modelConfigDialog::asUpdate()
+{
+  if (rxLock==true)
+    return;
+  rxLock=true;
+  QVariant v(1 | 32);
+  int i;
+  //disable default channels used
+  for (i=0; i<4; i++ ) {
+    if (rx[i]) {
+      ui->asail2_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i+1,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i+1,false, Qt::UserRole - 1);
+    } else {
+      ui->asail2_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asele2_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asrud2_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asfla1_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asfla2_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asspo1_CB->setItemData(i+1,v, Qt::UserRole-1);
+      ui->asspo2_CB->setItemData(i+1,v, Qt::UserRole-1);
+    }
+  }
+  for (i=4; i<9; i++ ) {
+    ui->asail2_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asele2_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asrud2_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asfla1_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asfla2_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asspo1_CB->setItemData(i+1,v, Qt::UserRole-1);
+    ui->asspo2_CB->setItemData(i+1,v, Qt::UserRole-1);
+  }
+
+  i=ui->asail2_CB->currentIndex();
+  if (i>0) {
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asrud2_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asele2_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asfla1_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asfla2_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asspo1_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo2_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+  i=ui->asspo2_CB->currentIndex();
+  if (i>0) {
+      ui->asail2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asele2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asrud2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla1_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asfla2_CB->setItemData(i,false, Qt::UserRole - 1);
+      ui->asspo1_CB->setItemData(i,false, Qt::UserRole - 1);
+  }
+
+  if (ailerons>1 && ui->as_CB->isChecked()) {
+    ui->asail2_label->show();
+    ui->asail2_CB->show();
+  } else {
+    ui->asail2_label->hide();
+    ui->asail2_CB->hide();
+  }
+  if (elevators>1 && ui->as_CB->isChecked()) {
+    ui->asele2_label->show();
+    ui->asele2_CB->show();
+  } else {
+    ui->asele2_label->hide();
+    ui->asele2_CB->hide();
+  }
+  if (rudders>1 && ui->as_CB->isChecked()) {
+    ui->asrud2_label->show();
+    ui->asrud2_CB->show();
+  } else {
+    ui->asrud2_label->hide();
+    ui->asrud2_CB->hide();
+  }
+  if (flaps>0 && ui->as_CB->isChecked()) {
+    ui->asfla1_label->show();
+    ui->asfla1_CB->show();
+  } else {
+    ui->asfla1_label->hide();
+    ui->asfla1_CB->hide();
+  }
+  if (flaps>1 && ui->as_CB->isChecked()) {
+    ui->asfla2_label->show();
+    ui->asfla2_CB->show();
+  } else {
+    ui->asfla2_label->hide();
+    ui->asfla2_CB->hide();
+  }
+  if (spoilers>0 && ui->as_CB->isChecked()) {
+    ui->asspo1_label->show();
+    ui->asspo1_CB->show();
+  } else {
+    ui->asspo1_label->hide();
+    ui->asspo1_CB->hide();
+  }
+  if (spoilers>1 && ui->as_CB->isChecked()) {
+    ui->asspo2_label->show();
+    ui->asspo2_CB->show();
+  } else {
+    ui->asspo2_label->hide();
+    ui->asspo2_CB->hide();
+  }
+  rxLock=false;
 }
