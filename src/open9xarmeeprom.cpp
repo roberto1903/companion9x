@@ -579,11 +579,11 @@ t_Open9xArmMixData_v210::t_Open9xArmMixData_v210(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
       srcRaw = 1 + c9x.srcRaw.index;
     }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
-      srcRaw = 8;
-    }
     else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
-      srcRaw = 9 + c9x.srcRaw.index;
+      srcRaw = 8 + c9x.srcRaw.index;
+    }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+      srcRaw = 12;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 13;
