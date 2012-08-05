@@ -432,7 +432,7 @@ void modelConfigDialog::ConfigChanged()
         wimages.clear();
         wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png";
         index=ui->swashType_CB->currentIndex();
-        ailerons=2;
+        ailerons=1;
         throttle=1;
         imgname.append(wimages.at(index));
         image.load(imgname);
