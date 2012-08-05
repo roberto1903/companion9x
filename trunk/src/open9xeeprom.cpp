@@ -152,7 +152,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  backlightMode = c9x.backlightMode;
+  backlightMode = (c9x.backlightMode > 4 ? 3 : c9x.backlightMode);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
@@ -219,7 +219,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.backlightDelay = backlightDelay;
   result.templateSetup = templateSetup;
   result.PPM_Multiplier = PPM_Multiplier;
-  result.beeperLength=beeperLength;
+  result.beeperLength = beeperLength;
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
   result.hapticLength = hapticLength;

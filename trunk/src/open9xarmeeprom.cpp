@@ -190,7 +190,7 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
   contrast = c9x.contrast;
   vBatWarn = c9x.vBatWarn;
   vBatCalib = c9x.vBatCalib;
-  backlightMode = c9x.backlightMode;
+  backlightMode = (c9x.backlightMode > 4 ? 3 : c9x.backlightMode);
   trainer = c9x.trainer;
   view = c9x.view;
   disableThrottleWarning = c9x.disableThrottleWarning;
