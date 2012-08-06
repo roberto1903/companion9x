@@ -4086,8 +4086,8 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
   int8_t heli_ar3[] = {100, 90, 80, 90, 100};
   int8_t heli_ar4[] = {-30,  -15, 0, 50, 100};
   int8_t heli_ar5[] = {-100, -50, 0, 50, 100};
-  bool rx[9];
-  for (int i=0; i<9 ; i++) {
+  bool rx[10];
+  for (int i=0; i<10 ; i++) {
     rx[i]=false;
   }
 
@@ -4189,7 +4189,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       }
       if (ailerons>1) {
         if (ail2ch==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
               md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL2").toAscii().data(),6);
               rx[j]=true;
@@ -4202,7 +4202,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       }
       if (elevators>1) {
         if (ele2ch==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
               md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();;strncpy(md->name, tr("ELE2").toAscii().data(),6);
               rx[j]=true;
@@ -4214,8 +4214,8 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6); md->speedUp=4; md->speedDown=4;
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6); md->speedUp=4; md->speedDown=4;
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
@@ -4227,15 +4227,15 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
           index=fla2ch;
         }
         if (index==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
-              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
               rx[j]=true;
               break;
             }
           }
         } else {
-          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
         }
       }      
       break;
@@ -4310,7 +4310,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       ailerons=ailerontype;
       flaps=flaptype;
       spoilers=spoilertype;
-      throttle=0;
+      throttle=enginetype;
       switch (tailtype) {
         case 0:
         case 1:
@@ -4321,6 +4321,11 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
           rudders=1;
           elevators=2;
           break;
+      }
+      if (throttle==1) {
+       rxch=ICC(STK_THR);
+       md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("THR").toAscii().data(),6);
+       rx[rxch-1]=true;
       }
       rxch=ICC(STK_RUD);
       md=setDest(rxch);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
@@ -4360,7 +4365,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       }
       if (ailerons>1) {
         if (ail2ch==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
               md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL2").toAscii().data(),6);
               rx[j]=true;
@@ -4373,7 +4378,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       }
       if (elevators>1) {
         if (ele2ch==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
               md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE2").toAscii().data(),6);
               rx[j]=true;
@@ -4385,8 +4390,8 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);md->speedUp=4; md->speedDown=4; 
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);md->speedUp=4; md->speedDown=4; 
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
@@ -4398,20 +4403,20 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
           index=fla2ch;
         }
         if (index==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
-              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
               rx[j]=true;
               break;
             }
           }
         } else {
-          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
         }
       }      
       if (spoilers>0) {
-            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6);
-            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6);
+            md=setDest(12);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6); md->speedUp=4;;md->speedDown=4;
+            md=setDest(12);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_GEA);strncpy(md->name, tr("SPOIL").toAscii().data(),6);md->speedUp=4;md->speedDown=4;
       }
       sign=-1;
       for (uint8_t i=0; i< spoilers; i++) {
@@ -4423,15 +4428,15 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
           index=spo2ch;
         }
         if (index==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
-              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(i+1).toAscii().data(),6);
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 11); md->weight=100*sign;  md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(i+1).toAscii().data(),6);
               rx[j]=true;
               break;
             }
           }
         } else {
-          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(i+1).toAscii().data(),6);
+          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 11);  md->weight=100*sign;  md->sOffset=0; md->swtch=RawSwitch();strncpy(md->name, tr("SPOIL%1").arg(i+1).toAscii().data(),6);
         }
       }
       break;
@@ -4468,7 +4473,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       }
       if (rudders>1) {
         if (rud2ch==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
               md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=-100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD2").toAscii().data(),6);
               rx[j]=true;
@@ -4480,8 +4485,8 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
         }
       }
       if (flaps>0) {
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
-            md=setDest(10);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6);
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,-DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6); md->sOffset=0; md->speedUp=4;
+            md=setDest(11);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 5); md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_AIL);strncpy(md->name, tr("FLAPS").toAscii().data(),6); md->sOffset=0; md->speedUp=4;
       }
       sign=-1;
       for (uint8_t i=0; i< flaps; i++) {
@@ -4493,15 +4498,15 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
           index=fla2ch;
         }
         if (index==0) {
-          for (int j=0; j<9 ; j++) {
+          for (int j=0; j<10 ; j++) {
             if (!rx[j]) {
-              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+              md=setDest(j+1);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
               rx[j]=true;
               break;
             }
           }
         } else {
-          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 9);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
+          md=setDest(index);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight=100*sign; md->sOffset=0; md->speedUp=4; md->speedDown=4; md->swtch=RawSwitch();strncpy(md->name, tr("FLAP%1").arg(i+1).toAscii().data(),6);
         }
       }      
       break;
