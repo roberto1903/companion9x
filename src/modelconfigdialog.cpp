@@ -3,7 +3,7 @@
 #include "helpers.h"
 #include "eeprominterface.h"
 #include <QtGui>
-
+#define NUM_CH 10
 modelConfigDialog::modelConfigDialog(RadioData &radioData, uint64_t * result, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::modelConfigDialog),
@@ -49,11 +49,11 @@ modelConfigDialog::~modelConfigDialog()
 
 void modelConfigDialog::rxUpdate()
 {
-    QLabel * channel[] = {ui->CH_1,ui->CH_2,ui->CH_3,ui->CH_4,ui->CH_5,ui->CH_6,ui->CH_7,ui->CH_8,ui->CH_9,NULL};
+    QLabel * channel[] = {ui->CH_1,ui->CH_2,ui->CH_3,ui->CH_4,ui->CH_5,ui->CH_6,ui->CH_7,ui->CH_8,ui->CH_9,ui->CH_10,NULL};
     for (int i=0; channel[i]; i++)  {
       channel[i]->setStyleSheet("");
     }
-    for (int i=0; i<9 ; i++) {
+    for (int i=0; i<NUM_CH ; i++) {
       rx[i]=false;
     }
     int index;
@@ -119,7 +119,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
                 rx[j]=true;
@@ -135,7 +135,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
                 rx[j]=true;
@@ -155,7 +155,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
                 rx[j]=true;
@@ -192,6 +192,11 @@ void modelConfigDialog::rxUpdate()
         }
         break;     
       case 2: //GLIDER
+        if (throttle>0) {
+          stick=ICC(STK_THR);
+          channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(throttlecolor.at(0)));
+          rx[stick-1]=true;
+        }
         if (ailerons>0) {
           stick=ICC(STK_AIL);
           channel[stick-1]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(0)));
@@ -208,7 +213,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(aileroncolor.at(1)));
                 rx[j]=true;
@@ -224,7 +229,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(elevatorcolor.at(1)));
                 rx[j]=true;
@@ -244,7 +249,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
                 rx[j]=true;
@@ -264,7 +269,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(airbrakecolor.at(i)));
                 rx[j]=true;
@@ -298,7 +303,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(ruddercolor.at(1)));
                 rx[j]=true;
@@ -318,7 +323,7 @@ void modelConfigDialog::rxUpdate()
           if (!ui->as_CB->isChecked())
             index=0;
           if (index==0) {
-            for (int j=0; j<9 ; j++) {
+            for (int j=0; j<NUM_CH ; j++) {
               if (!rx[j]) {
                 channel[j]->setStyleSheet(QString("background-color: %1;").arg(flapscolor.at(i)));
                 rx[j]=true;
@@ -454,8 +459,8 @@ void modelConfigDialog::ConfigChanged()
         ailerons=ui->ailType_CB->currentIndex();
         flaps=ui->flapsType_CB->currentIndex();
         spoilers=ui->spoilersType_CB->currentIndex();
-        throttle=0;
-        imgname.append(QString("gw%1a%2f%3s.png").arg(ui->ailType_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->spoilersType_CB->currentIndex()));
+        throttle=ui->engine_CB->currentIndex();
+        imgname.append(QString("gw%1t%2a%3f%4s.png").arg(ui->engine_CB->currentIndex()).arg(ui->ailType_CB->currentIndex()).arg(ui->flapsType_CB->currentIndex()).arg(ui->spoilersType_CB->currentIndex()));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
         break;
@@ -591,9 +596,6 @@ void modelConfigDialog::on_gliderButton_clicked()
     ModelType=2;
     wingsLock=true;
     tailLock=true;
-    ui->engine_Label->hide();
-    ui->engine_CB->setCurrentIndex(0);
-    ui->engine_CB->hide();
     ui->rudder_Label->hide();
     ui->rudder_CB->setCurrentIndex(0);
     ui->rudder_CB->hide();
@@ -608,6 +610,9 @@ void modelConfigDialog::on_gliderButton_clicked()
     ui->chStyle_CB->setCurrentIndex(0);
     ui->chassign_Label->hide();
     ui->wingLabel->show();
+    ui->engine_Label->show();
+    ui->engine_CB->setCurrentIndex(0);
+    ui->engine_CB->show();
     ui->ailType_Label->show();
     ui->ailType_CB->show();
     ui->ailType_CB->setCurrentIndex(0);
@@ -781,7 +786,7 @@ void modelConfigDialog::asUpdate()
       ui->asspo2_CB->setItemData(i+1,v, Qt::UserRole-1);
     }
   }
-  for (i=4; i<9; i++ ) {
+  for (i=4; i<NUM_CH; i++ ) {
     ui->asail2_CB->setItemData(i+1,v, Qt::UserRole-1);
     ui->asele2_CB->setItemData(i+1,v, Qt::UserRole-1);
     ui->asrud2_CB->setItemData(i+1,v, Qt::UserRole-1);

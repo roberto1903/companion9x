@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>773</width>
-    <height>572</height>
+    <height>554</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -507,7 +507,7 @@
     </widget>
    </item>
    <item row="14" column="2">
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,1">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0">
      <property name="spacing">
       <number>3</number>
      </property>
@@ -655,7 +655,7 @@
        </property>
       </widget>
      </item>
-     <item row="10" column="0">
+     <item row="11" column="0">
       <spacer name="verticalSpacer_2">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -667,6 +667,22 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="CH_10">
+       <property name="frameShape">
+        <enum>QFrame::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="text">
+        <string>10</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -782,6 +798,11 @@
          <string>CH09</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="1" column="0">
@@ -863,6 +884,11 @@
          <string>CH09</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="3" column="1">
@@ -915,6 +941,11 @@
        <item>
         <property name="text">
          <string>CH09</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
         </property>
        </item>
       </widget>
@@ -971,6 +1002,11 @@
          <string>CH09</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="4" column="3">
@@ -1023,6 +1059,11 @@
        <item>
         <property name="text">
          <string>CH09</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
         </property>
        </item>
       </widget>
@@ -1079,6 +1120,11 @@
          <string>CH09</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="6" column="3">
@@ -1131,6 +1177,11 @@
        <item>
         <property name="text">
          <string>CH09</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH10</string>
         </property>
        </item>
       </widget>
