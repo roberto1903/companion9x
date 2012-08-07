@@ -297,6 +297,13 @@ TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${QT_LIBRARIES} ${QT_QTMAIN_LIBRARY} ${XE
 
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${QT_BINARY_DIR} )
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    INSTALL( FILES companion9x.desktop DESTINATION share/applications )
+    INSTALL( FILES companion9x.png DESTINATION share/icons )
+    # Linux specific code
+    SET(OperatingSystem "Linux")
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+
 IF( WIN32 )
   IF( MSVC )
     SET( NSI_IN_FILE companion9x-vs.nsi.in )  
