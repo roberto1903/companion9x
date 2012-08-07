@@ -1485,7 +1485,7 @@ void ModelEdit::tabFunctionSwitches()
       fswtchSwtch[i] = new QComboBox(this);
       connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
       ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
-      populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch);
+      populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
 
       fswtchFunc[i] = new QComboBox(this);
       connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
