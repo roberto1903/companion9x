@@ -48,6 +48,10 @@ int RawSource::getDecimals(const ModelData & Model)
         return (Model.frsky.channels[index].type==0 ? 2: 0);
       case 12:
         return 2;
+      case 13:
+      case 14:
+      case 15:
+        return 1;
       default:
         return 0;
     }
@@ -82,6 +86,11 @@ double RawSource::getMin(const ModelData & Model)
         case 10:
         case 11:
         case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
           return 0;
         default:
           return -125;
@@ -126,6 +135,15 @@ double RawSource::getMax(const ModelData & Model)
           return 1020;
         case 12:
           return 5.1;
+        case 13:
+        case 14:
+          return 25.5;
+        case 15:
+          return 127.5;
+        case 16:
+          return 5100;
+        case 17:
+          return 1275;
         default:
           return 125;
       }
@@ -227,6 +245,15 @@ double RawSource::getStep(const ModelData & Model)
           return 4;
         case 12:
           return 0.02;
+        case 13:
+        case 14:
+          return 0.1;
+        case 15:
+          return 0.5;
+        case 16:
+          return 20;
+        case 17:
+          return 5;
         default:
           return 1;
       }
@@ -249,7 +276,7 @@ QString RawSource::toString()
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell") };
+  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"), QObject::tr("Cnsp"), QObject::tr("Powr")   }; 
 
   switch(type) {
     case SOURCE_TYPE_STICK:
