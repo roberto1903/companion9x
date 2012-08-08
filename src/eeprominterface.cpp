@@ -201,6 +201,11 @@ int RawSource::getRawOffset(const ModelData & Model)
         case 2:
         case 3:
         case 6:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
           return 128;        
         default:
           return 0;
