@@ -16,7 +16,7 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
   int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1,1,1};
   b->clear();
-  for (int i = 0; i < 37-(last ? 2 :0); i++) {
+  for (int i = 0; i < 38-(last ? 2 :0); i++) {
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);
@@ -171,7 +171,65 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       b->addItem(item.toString(), item.toValue());
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
-    }    
+    }
+  } else if (function==FuncPlayValue) {
+    unsigned int count=0;
+    RawSource item;
+    for (int i=0; i<7; i++) {
+      item = RawSource(SOURCE_TYPE_STICK, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    item = RawSource(SOURCE_TYPE_MAX);
+    b->addItem(item.toString(), item.toValue());
+    if (count==value) b->setCurrentIndex(b->count()-1);
+    count++;
+
+    item = RawSource(SOURCE_TYPE_3POS);
+    b->addItem(item.toString(), item.toValue());
+    if (count==value) b->setCurrentIndex(b->count()-1);
+    count++;
+
+    for (int i=0; i<NUM_CYC; i++) {
+      item = RawSource(SOURCE_TYPE_CYC, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+
+    for (int i=0; i<NUM_PPM; i++) {
+      item = RawSource(SOURCE_TYPE_PPM, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+
+    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+      item = RawSource(SOURCE_TYPE_CH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+
+    for (int i = 1; i < 36; i++) {
+      b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
+    
   } else {
     b->hide();
   }
