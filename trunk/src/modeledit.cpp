@@ -1845,7 +1845,7 @@ void ModelEdit::tabTelemetry()
 
   for (int j=0;j<4;j++) {
     barsCB[j]->setCurrentIndex(g_model.frsky.bars[j].source);
-    if (g_model.frsky.bars[j].source==3 || g_model.frsky.bars[j].source==4 || g_model.frsky.bars[j].source==14) {
+    if (g_model.frsky.bars[j].source==3 || g_model.frsky.bars[j].source==4 || g_model.frsky.bars[j].source==15) {
       minsb[j]->setDecimals(1);
       maxsb[j]->setDecimals(1);
     } else {
@@ -2870,7 +2870,7 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index) {
     minSB[barId]->setEnabled(true);
     maxSB[barId]->setEnabled(true);    
   }
-  if (index==3 || index==4 || index==14) {
+  if (index==3 || index==4 || index==15) {
     minSB[barId]->setDecimals(1);
     maxSB[barId]->setDecimals(1);
   } else {
