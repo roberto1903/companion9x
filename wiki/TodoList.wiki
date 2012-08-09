@@ -24,6 +24,8 @@
   * ~~Use the Tx as an input for moving the sticks (use joystick interface USB/SMARTPROPOPLUS)~~
   * UNDO command for cut & paste ~~alternatively a confirm dialog for potentially destructive actions.... (paste on non empty model, delete)~~
   * In simulator: highlight real channels to differentiate them from virtual ones
+  * In Model config Wizard drag-drop of wing surfaces to channels
+  * Print or save Wizard config screen
 
 = Ideas from eePe =
   * ~~Diff feature to compare two models~~
@@ -37,5 +39,5 @@
 
 = Multi platforms =
   * ~~Mac packaging~~
-  * Debian / Ubuntu packaging
+  * ~~Debian / Ubuntu packaging~~
   * RedHat / Suse packaging
