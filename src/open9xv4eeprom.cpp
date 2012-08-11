@@ -234,7 +234,7 @@ t_Open9xV4MixData_v209::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_ROTARY_ENCODER, srcRaw-8);
     }
     else if (srcRaw <= 13) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-10);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-10);
     }
     else if (srcRaw == 14) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
