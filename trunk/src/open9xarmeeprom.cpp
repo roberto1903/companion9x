@@ -529,7 +529,7 @@ t_Open9xArmMixData_v209::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
     }
     else if (srcRaw <= 11) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-8);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-8);
     }
     else if (srcRaw == 12) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
@@ -630,7 +630,7 @@ t_Open9xArmMixData_v210::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
     }
     else if (srcRaw <= 11) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-8);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-8);
     }
     else if (srcRaw == 12) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
