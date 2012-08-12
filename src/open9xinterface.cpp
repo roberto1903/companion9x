@@ -457,6 +457,8 @@ int Open9xInterface::getCapability(const Capability capability)
     case RotaryEncoders:
       if (board == BOARD_GRUVIN9X)
         return 2;
+      else if (board == BOARD_ERSKY9X)
+        return 1;
       else
         return 0;
     case Outputs:

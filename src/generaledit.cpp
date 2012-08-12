@@ -198,7 +198,14 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->telalarmsChkB->hide();
       ui->label_telalarms->hide();
     }
-    
+    int renumber=GetEepromInterface()->getCapability(RotaryEncoders);
+    if (renumber==0) {
+      ui->re_label->hide();
+      ui->re_CB->hide();
+    } else {
+      populateRotEncCB(ui->re_CB, g_eeGeneral.reNavigation, renumber);
+    }
+
     ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->PotScrollEnableChkB->setChecked(!g_eeGeneral.disablePotScroll);
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
@@ -341,6 +348,13 @@ void GeneralEdit::on_battcalibDSB_editingFinished()
     ui->battCalib->setValue(ui->battcalibDSB->value());
     updateSettings();
 }
+
+void GeneralEdit::on_re_CB_currentIndexChanged(int index)
+{
+  g_eeGeneral.reNavigation = ui->re_CB->currentIndex();
+  updateSettings();
+}
+
 
 void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 {

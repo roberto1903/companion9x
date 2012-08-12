@@ -378,6 +378,7 @@ class GeneralSettings {
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
     int8_t    hapticLength;
+    uint8_t   reNavigation;
     bool      hideNameOnSplash;
     uint8_t   speakerPitch;
     uint8_t   hapticStrength;

@@ -12,6 +12,17 @@ QString getStickStr(int index)
   return RawSource(SOURCE_TYPE_STICK, index).toString();
 }
 
+void populateRotEncCB(QComboBox *b, int value, int renumber)
+{
+  QString strings[] = { QObject::tr("No"), QObject::tr("RotEnc A"), QObject::tr("Rot Enc B"), QObject::tr("Rot Enc C"), QObject::tr("Rot Enc D"), QObject::tr("Rot Enc E")};
+  
+  b->clear();
+  for (int i=0; i<= renumber; i++) {
+    b->addItem(strings[i]);
+  }
+  b->setCurrentIndex(value);
+}
+
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
   int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1,1,1};

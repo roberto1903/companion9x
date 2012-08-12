@@ -217,6 +217,7 @@ t_Open9xGeneralData_v208::t_Open9xGeneralData_v208(GeneralSettings &c9x, int ver
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
   hapticLength = c9x.hapticLength;
+  reNavigation=c9x.reNavigation;
   gpsFormat =  c9x.gpsFormat;
 
   speakerVolume = c9x.speakerVolume;
@@ -267,6 +268,7 @@ Open9xGeneralData_v208::operator GeneralSettings ()
   result.speakerPitch = speakerPitch;
   result.hapticStrength = hapticStrength;
   result.hapticLength=hapticLength;
+  result.reNavigation=reNavigation;
   result.gpsFormat = gpsFormat;
 
   result.speakerVolume = speakerVolume;
