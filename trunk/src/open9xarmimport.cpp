@@ -3,6 +3,7 @@
 #define PCBARM
 #define REVB
 // #define NAVIGATION_RE1
+#define ROTARY_ENCODERS 1
 #define HELI
 #define TEMPLATES
 #define SPLASH
