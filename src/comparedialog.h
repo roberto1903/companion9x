@@ -50,10 +50,22 @@ private:
       else
         return "grey";
     }
+    QString getColor1(char * val1, char * val2) {
+      if (strcmp(val1,val2)!=0)
+        return "green";
+      else
+        return "grey";
+    }
+    QString getColor2(char * val1, char * val2) {
+      if (strcmp(val1,val2)!=0)
+        return "red";
+      else
+        return "grey";
+    }
     QString cSwitchString(CustomSwData * customSw);
-    bool ModelHasExpo(ExpoData * ExpoArray, ExpoData expo);
+    int ModelHasExpo(ExpoData * ExpoArray, ExpoData expo);
     bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);
-    bool ModelHasMix(MixData * mixArray, MixData mix);
+    int ModelHasMix(MixData * mixArray, MixData mix);
     bool ChannelHasMix(MixData * mixArray, uint8_t destCh);
     QString FrSkyAtype(int alarm);
     QString FrSkyUnits(int units);

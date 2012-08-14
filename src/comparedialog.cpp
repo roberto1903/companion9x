@@ -309,14 +309,14 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
   return tstr;
 }
 
-bool compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo)
+int compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo)
 {
   for (int i=0; i< MAX_EXPOS; i++) {
     if (memcmp(&expo,&ExpoArray[i],sizeof(ExpoData))==0) {
-      return true;
+      return i;
     }
   }
-  return false;
+  return -1;
 }
 
 bool compareDialog::ChannelHasExpo(ExpoData * expoArray, uint8_t destCh)
@@ -329,14 +329,14 @@ bool compareDialog::ChannelHasExpo(ExpoData * expoArray, uint8_t destCh)
   return false;
 }
 
-bool compareDialog::ModelHasMix(MixData * mixArray, MixData mix)
+int compareDialog::ModelHasMix(MixData * mixArray, MixData mix)
 {
   for (int i=0; i< MAX_MIXERS; i++) {
     if (memcmp(&mix,&mixArray[i],sizeof(MixData))==0) {
-      return true;
+      return i;
     }
   }
-  return false;
+  return -1;
 }
 
 bool compareDialog::ChannelHasMix(MixData * mixArray, uint8_t destCh)
@@ -666,6 +666,9 @@ void compareDialog::printLimits()
 void compareDialog::printExpos()
 {
   QString color;
+  bool expoused[MAX_EXPOS]={false};
+  bool expoused2[MAX_EXPOS]={false};
+
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Expo/Dr Settings"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
@@ -674,10 +677,16 @@ void compareDialog::printExpos()
       str.append("<tr>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
-      for (int j=0; j<MAX_EXPOS; j++) {
+      for (int j=0; j<MAX_EXPOS; j++) {    
         if (g_model1->expoData[j].chn==i){
-          if (ModelHasExpo(g_model2->expoData, g_model1->expoData[j])) {
-            color="grey";
+          int expo=ModelHasExpo(g_model2->expoData, g_model1->expoData[j]);
+          if (expo>-1) {
+            if (expoused[expo]==false) {
+              color="grey";
+              expoused[expo]=true;
+            } else {
+              color="green";
+            }    
           } else {
             color="green";
           }
@@ -713,8 +722,14 @@ void compareDialog::printExpos()
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
       for (int j=0; j<MAX_EXPOS; j++) {
         if (g_model2->expoData[j].chn==i){
-          if (ModelHasExpo(g_model1->expoData, g_model2->expoData[j])) {
-            color="grey";
+          int expo=ModelHasExpo(g_model1->expoData, g_model2->expoData[j]);
+          if (expo>-1) {
+            if (expoused2[expo]==false) {
+              color="grey";
+              expoused2[expo]=true;
+            } else {
+              color="red";
+            }    
           } else {
             color="red";
           }
@@ -757,6 +772,8 @@ void compareDialog::printMixers()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Mixers"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
+  bool mixused[64]={false};
+  bool mixused2[64]={false};
   for(uint8_t i=1; i<=GetEepromInterface()->getCapability(Outputs); i++) {
     if (ChannelHasMix(g_model1->mixData, i) || ChannelHasMix(g_model2->mixData, i)) {
       str.append("<tr>");
@@ -764,8 +781,14 @@ void compareDialog::printMixers()
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
       for (int j=0; j<GetEepromInterface()->getCapability(Mixes); j++) {
         if (g_model1->mixData[j].destCh==i) {
-          if (ModelHasMix(g_model2->mixData, g_model1->mixData[j])) {
-            color="grey";
+          int mix=ModelHasMix(g_model2->mixData, g_model1->mixData[j]);
+          if (mix>-1) {
+            if (mixused[mix]==false) {
+              color="grey";
+              mixused[mix]=true;
+            } else {
+              color="green";
+            }    
           } else {
             color="green";
           }
@@ -815,8 +838,14 @@ void compareDialog::printMixers()
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
       for (int j=0; j<GetEepromInterface()->getCapability(Mixes); j++) {
         if (g_model2->mixData[j].destCh==i) {
-          if (ModelHasMix(g_model1->mixData, g_model2->mixData[j])) {
-            color="grey";
+          int mix=ModelHasMix(g_model1->mixData, g_model2->mixData[j]);
+          if (mix>-1) {
+            if (mixused2[mix]==false) {
+              color="grey";
+              mixused2[mix]=true;
+            } else {
+              color="red";
+            }    
           } else {
             color="red";
           }
