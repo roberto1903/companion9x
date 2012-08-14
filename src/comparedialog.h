@@ -63,9 +63,9 @@ private:
         return "grey";
     }
     QString cSwitchString(CustomSwData * customSw);
-    int ModelHasExpo(ExpoData * ExpoArray, ExpoData expo);
+    int ModelHasExpo(ExpoData * ExpoArray, ExpoData expo, bool * expoused);
     bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);
-    int ModelHasMix(MixData * mixArray, MixData mix);
+    int ModelHasMix(MixData * mixArray, MixData mix, bool * mixused);
     bool ChannelHasMix(MixData * mixArray, uint8_t destCh);
     QString FrSkyAtype(int alarm);
     QString FrSkyUnits(int units);
