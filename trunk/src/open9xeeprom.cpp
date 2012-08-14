@@ -1023,8 +1023,12 @@ t_Open9xFuncSwData_v210::t_Open9xFuncSwData_v210(FuncSwData &c9x)
     func = 24;
   else if (c9x.func == FuncVario)
     func = 25;
-  else if (c9x.func == FuncBacklight)
+  else if (c9x.func == FuncPlayPrompt)
     func = 26;
+  else if (c9x.func == FuncPlayValue)
+    func = 27;
+  else if (c9x.func == FuncBacklight)
+    func = 28;
   else {
     swtch = 0;
     func = 0;
@@ -1056,6 +1060,10 @@ t_Open9xFuncSwData_v210::operator FuncSwData ()
     else if (func == 25)
       c9x.func = FuncVario;
     else if (func == 26)
+      c9x.func = FuncPlayPrompt;
+    else if (func == 27)
+      c9x.func = FuncPlayValue;
+    else if (func == 28)
       c9x.func = FuncBacklight;
     else
       c9x.clear();
