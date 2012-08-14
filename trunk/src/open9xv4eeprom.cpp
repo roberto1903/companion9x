@@ -541,6 +541,8 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
       c9x.func = FuncPlayValue;
     else if (func == 28)
       c9x.func = FuncLogs;
+    else if (func == 29)
+      c9x.func = FuncBacklight;
     else
       c9x.clear();
   }
@@ -573,6 +575,8 @@ t_Open9xV4FuncSwData_v210::t_Open9xV4FuncSwData_v210(FuncSwData &c9x)
     func = 27;
   else if (c9x.func == FuncLogs)
     func = 28;
+  else if (c9x.func == FuncBacklight)
+    func = 29;
   else {
     swtch = 0;
     func = 0;
