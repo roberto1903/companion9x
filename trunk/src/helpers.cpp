@@ -198,11 +198,14 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
-    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
+    // ugly fix for ersky9x board still not supporting REa as source
+    if(GetEepromInterface()->getCapability(RotaryEncoders)>1) {
+      for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+        item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+        b->addItem(item.toString(), item.toValue());
+        if (count==value) b->setCurrentIndex(b->count()-1);
+        count++;
+      }
     }
     item = RawSource(SOURCE_TYPE_MAX);
     b->addItem(item.toString(), item.toValue());
