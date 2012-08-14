@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>10</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -765,11 +765,11 @@
        </item>
        <item row="9" column="2" colspan="6">
         <layout class="QGridLayout" name="gridLayout_34">
-         <property name="topMargin">
-          <number>0</number>
-         </property>
          <property name="verticalSpacing">
           <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
          </property>
          <item row="0" column="9" rowspan="2">
           <widget class="Line" name="swwarn_line4">
@@ -4447,8 +4447,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>846</width>
-            <height>564</height>
+            <width>792</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7612,8 +7612,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>830</width>
-            <height>582</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12530,8 +12530,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>846</width>
-            <height>564</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -13059,17 +13059,17 @@
                   </item>
                   <item>
                    <property name="text">
-                    <string>HUB</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
                     <string>A1</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
                     <string>A2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>FAS</string>
                    </property>
                   </item>
                  </widget>
@@ -13104,22 +13104,22 @@
                   </property>
                   <item>
                    <property name="text">
-                    <string>NONE</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>HUB</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
                     <string>A1</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
                     <string>A2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>FAS</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>CEL</string>
                    </property>
                   </item>
                  </widget>
