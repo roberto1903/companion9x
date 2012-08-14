@@ -60,8 +60,19 @@ QString getFuncName(unsigned int val)
 
 void populateFuncCB(QComboBox *b, unsigned int value) {
   b->clear();
-  for (unsigned int i = 0; i < FuncCount; i++)
+  for (unsigned int i = 0; i < FuncCount; i++) {
     b->addItem(getFuncName(i));
+    if ((i==FuncVolume) && !GetEepromInterface()->getCapability(HasVolume)) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);      
+    }
+    if ((i==FuncLogs) && !GetEepromInterface()->getCapability(HasSDLogs)) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);      
+    }
+  }
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
 }

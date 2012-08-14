@@ -783,6 +783,7 @@ enum Capability {
  HasBrightness,
  PerModelThrottleWarning,
  SlowScale,
+ HasSDLogs,
 };
 
 enum UseContext {
