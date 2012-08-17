@@ -747,7 +747,7 @@ void ModelEdit::tabExpos()
 
         str += tr("Weight") + QString("(%1%)").arg(md->weight).rightJustified(6, ' ');
         str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
-        if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+        if (md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase, g_model.phaseData[abs(md->phase)-1].name));
         if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         if (GetEepromInterface()->getCapability(HasExpoNames)) {
@@ -826,8 +826,19 @@ void ModelEdit::tabMixes()
           if(md->phases) {
             if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
               int mask=1;
-              int first=1;
-              str += " " + tr("Phase") + QString(" (");
+              int first=0;
+              for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                if (!(md->phases & mask)) {
+                  first++;
+                }
+              }
+              if (first>1) {
+                str += " " + tr("Phases") + QString("(");
+              } else {
+                str += " " + tr("Phase") + QString("(");
+              }
+              mask=1;
+              first=1;
               for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
                 if (!(md->phases & mask)) {
                   if (!first) {

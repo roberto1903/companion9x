@@ -708,7 +708,10 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-          if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
+          if (ed->phase) {
+            PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
+            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
+          }
           if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
@@ -751,7 +754,10 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-          if (ed->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase));
+          if (ed->phase) {
+            PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
+            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
+          }
           if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
@@ -823,8 +829,19 @@ void compareDialog::printMixers()
             if(md->phases) {
               if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
-                int first=1;
-                str += " " + tr("FPs") + QString(" (");
+                int first=0;
+                for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                  if (!(md->phases & mask)) {
+                    first++;
+                  }
+                }
+                if (first>1) {
+                  str += " " + tr("Phases") + QString("(");
+                } else {
+                  str += " " + tr("Phase") + QString("(");
+                }
+                mask=1;
+                first=1;
                 for (int j=0; j<GetEepromInterface()->getCapability(FlightPhases);j++) {
                   if (!(md->phases & mask)) {
                     PhaseData *pd = &g_model1->phaseData[j];
@@ -903,8 +920,19 @@ void compareDialog::printMixers()
             if(md->phases) {
               if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
-                int first=1;
-                str += " " + tr("FPs") + QString(" (");
+                int first=0;
+                for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                  if (!(md->phases & mask)) {
+                    first++;
+                  }
+                }
+                if (first>1) {
+                  str += " " + tr("Phases") + QString("(");
+                } else {
+                  str += " " + tr("Phase") + QString("(");
+                }
+                mask=1;
+                first=1;
                 for (int j=0; j<GetEepromInterface()->getCapability(FlightPhases);j++) {
                   if (!(md->phases & mask)) {
                     PhaseData *pd = &g_model2->phaseData[j];
