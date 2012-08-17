@@ -3333,11 +3333,17 @@ void ModelEdit::gm_openExpo(int index)
     tabExpos();
 
     ExpoDialog *g = new ExpoDialog(this, &mixd, g_eeGeneral.stickMode);
-    if(g->exec())
-    {
-        g_model.expoData[index] = mixd;
-        updateSettings();
-        tabExpos();
+    if(g->exec())  {
+      g_model.expoData[index] = mixd;
+      updateSettings();
+      tabExpos();
+    } else {
+      if (expoInserted) {
+        gm_deleteExpo(index);
+      }
+      expoInserted=false;
+      updateSettings();
+      tabExpos();
     }
 }
 
@@ -3647,20 +3653,17 @@ void ModelEdit::mixerAdd()
 {
     int index = MixerlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
 
-    if(index<0)  // if empty then return relavent index
-    {
-        int i = -index;
-        index = getMixerIndex(i); //get mixer index to insert
-        if (!gm_insertMix(index))
-          return;
-        g_model.mixData[index].destCh = i;
-    }
-    else
-    {
-        index++;
-        if (!gm_insertMix(index))
-          return;
-        g_model.mixData[index].destCh = g_model.mixData[index-1].destCh;
+    if(index<0) {  // if empty then return relavent index
+      int i = -index;
+      index = getMixerIndex(i); //get mixer index to insert
+      if (!gm_insertMix(index))
+        return;
+      g_model.mixData[index].destCh = i;
+    } else {
+      index++;
+      if (!gm_insertMix(index))
+        return;
+      g_model.mixData[index].destCh = g_model.mixData[index-1].destCh;
     }
 
     gm_openMix(index);
@@ -3679,6 +3682,9 @@ void ModelEdit::expoOpen(QListWidgetItem *item)
       if (!gm_insertExpo(idx))
         return;
       g_model.expoData[idx].chn = ch;
+      expoInserted=true;
+  } else {
+      expoInserted=false;
   }
   gm_openExpo(idx);
 }
@@ -3689,8 +3695,7 @@ void ModelEdit::expoAdd()
 
   if(index<0) {  // if empty then return relevant index
     expoOpen();
-  }
-  else {
+  }  else {
     index++;
     if (!gm_insertExpo(index))
       return;
