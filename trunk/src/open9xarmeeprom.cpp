@@ -528,6 +528,8 @@ t_Open9xArmMixData_v208::operator MixData ()
     c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
+    } else if (phase==0) {
+      c9x.phases=0;
     } else {
       c9x.phases=511;
       c9x.phases &= ~(1 << (phase -1));
@@ -672,6 +674,8 @@ t_Open9xArmMixData_v209::operator MixData ()
     c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
+    } else if (phase==0) {
+      c9x.phases=0;
     } else {
       c9x.phases=511;
       c9x.phases &= ~(1 << (phase -1));
@@ -817,6 +821,8 @@ t_Open9xArmMixData_v210::operator MixData ()
     c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
+    } else if (phase==0) {
+      c9x.phases=0;
     } else {
       c9x.phases=511;
       c9x.phases &= ~(1 << (phase -1));
