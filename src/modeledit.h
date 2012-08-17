@@ -207,6 +207,7 @@ private slots:
 
     void curvePointEdited();
     void limitOffsetEdited();
+    void limitSymEdited();
     void limitEdited();
     void limitInvEdited();
     void ppmcenterEdited();

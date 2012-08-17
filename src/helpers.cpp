@@ -281,8 +281,13 @@ void populateCurvesCB(QComboBox *b, int value) {
   if (numcurves==0) {
     numcurves=16;
   }
-  for (int i = -(numcurves)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + numcurves; i++)
-    b->addItem(getCurveStr(i));
+  for (int i = -(numcurves)*GetEepromInterface()->getCapability(HasNegCurves); i < CURVE_BASE + numcurves; i++) {
+    if ((i==0) && GetEepromInterface()->getCapability(DiffMixers)) {
+      b->addItem(QObject::tr("Diff"));
+    } else {
+      b->addItem(getCurveStr(i));
+    }
+  }
   b->setCurrentIndex(value+numcurves*GetEepromInterface()->getCapability(HasNegCurves));
   b->setMaxVisibleItems(10);
 }

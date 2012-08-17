@@ -431,7 +431,8 @@ class LimitData {
     int     max;
     bool    revert;
     int16_t  offset;
-    
+    int8_t  ppmCenter;
+    bool symetrical;
     void clear() { min = -100; max = +100; revert = false; offset = 0; }
 };
 
@@ -456,10 +457,12 @@ class MixData {
     uint8_t speedUp;           // Servogeschwindigkeit aus Tabelle (10ms Cycle)
     uint8_t speedDown;         // 0 nichts
     int8_t carryTrim;
+    uint8_t noExpo;
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
     uint8_t mixWarn;           // mixer warning
     uint8_t enableFmTrim;
     int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
+    int16_t  phases;             // -5=!FP4, 0=normal, 5=FP4
     int8_t  sOffset;
     char name[10];
 
@@ -702,8 +705,6 @@ class ModelData {
     uint8_t switchWarningStates;
     /* FrSky */    
     FrSkyData frsky;
-    int8_t servoCenter[NUM_CHNOUT];
-
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
@@ -719,6 +720,7 @@ class RadioData {
 enum Capability {
  OwnerName,
  FlightPhases,
+ MixFlightPhases,
  Mixes,
  Timers,
  TimerTriggerB,
@@ -778,6 +780,7 @@ enum Capability {
  FSSwitch,
  DiffMixers,
  PPMCenter,
+ SYMLimits,
  HasCurrentCalibration,
  HasVolume,
  HasBrightness,

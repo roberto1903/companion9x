@@ -943,7 +943,7 @@ void ModelEdit::tabLimits()
   if (GetEepromInterface()->getCapability(PPMCenter)) {
     foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("ppmcenter_[0-9]+"))) {
       int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-      sb->setValue(g_model.servoCenter[sbn]+1500);
+      sb->setValue(g_model.limitData[sbn].ppmCenter+1500);
       connect(sb, SIGNAL(editingFinished()), this, SLOT(ppmcenterEdited()));
     }
   } else {
@@ -952,6 +952,20 @@ void ModelEdit::tabLimits()
     }
     ui->ppmc_label1->hide();
     ui->ppmc_label2->hide();
+  }
+
+  if (GetEepromInterface()->getCapability(SYMLimits)) {
+    foreach(QCheckBox *ckb, findChildren<QCheckBox *>(QRegExp("symckb_[0-9]+"))) {
+      int ckbn=ckb->objectName().mid(ckb->objectName().lastIndexOf("_")+1).toInt()-1;
+      ckb->setChecked(g_model.limitData[ckbn].symetrical);
+      connect(ckb, SIGNAL(toggled(bool)), this, SLOT(limitSymEdited()));
+    }
+  } else {
+    foreach(QCheckBox *ckb, findChildren<QCheckBox *>(QRegExp("symckb_[0-9]+"))) {
+      ckb->hide();
+    }
+    ui->label_sym01->hide();
+    ui->label_sym02->hide();
   }
 
   if (GetEepromInterface()->getCapability(Outputs)<17) {
@@ -1070,6 +1084,15 @@ void ModelEdit::tabCurves()
   setCurrentCurve(currentCurve);
 }
 
+void ModelEdit::limitSymEdited()
+{
+  QCheckBox *ckb = qobject_cast<QCheckBox*>(sender());
+  int limitId=ckb->objectName().mid(ckb->objectName().lastIndexOf("_")+1).toInt()-1;
+  g_model.limitData[limitId].symetrical = (ckb->checkState() ? 1 : 0);
+  updateSettings(); 
+}
+
+
 void ModelEdit::limitOffsetEdited()
 {
   QDoubleSpinBox *dsb = qobject_cast<QDoubleSpinBox*>(sender());
@@ -1103,7 +1126,7 @@ void ModelEdit::ppmcenterEdited()
 {
   QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
   int limitId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
-  g_model.servoCenter[limitId] = sb->value()-1500;
+  g_model.limitData[limitId].ppmCenter = sb->value()-1500;
   updateSettings();
 }
 
