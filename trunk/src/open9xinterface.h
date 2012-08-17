@@ -82,7 +82,9 @@ class Open9xFirmware: public FirmwareInfo
       switch(this->eepromInterface->getBoard()) {
         case BOARD_ERSKY9X:
           if (revision == 0)
-            return 211;
+            return 212;
+          if (revision >= 1217)
+            return 212;
           if (revision >= 1174)
             return 211;
           if (revision >= 1031)
@@ -94,7 +96,9 @@ class Open9xFirmware: public FirmwareInfo
           break;
         case BOARD_GRUVIN9X:
           if (revision == 0)
-            return 210;
+            return 211;
+          if (revision >= 1217)
+            return 211;
           if (revision >= 1174)
             return 210;
           if (revision >= 791)
@@ -106,7 +110,9 @@ class Open9xFirmware: public FirmwareInfo
           break;
         default:
           if (revision == 0)
-            return 210;
+            return 211;
+          if (revision >= 1217)
+            return 211;
           if (revision >= 1174)
             return 210;
           if (revision >= 791)
