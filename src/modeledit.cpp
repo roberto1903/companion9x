@@ -824,12 +824,22 @@ void ModelEdit::tabMixes()
         str += md->srcRaw.toString();
         if (GetEepromInterface()->getCapability(MixFlightPhases)) {
           if(md->phases) {
-            int mask=1;
-            for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
-              if (!(md->phases & mask)) {
-                str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(i+1));
+            if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+              int mask=1;
+              int first=1;
+              str += " " + tr("Phase") + QString(" (");
+              for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                if (!(md->phases & mask)) {
+                  if (!first) {
+                    str += QString(", ")+ QString("%1").arg(getPhaseName(i+1));
+                  } else {
+                    str += QString("%1").arg(getPhaseName(i+1));
+                    first=0;
+                  }
+                }
+                mask <<=1;
               }
-              mask <<=1;
+              str += QString(")");
             }
           }
         } else {
