@@ -822,7 +822,21 @@ void ModelEdit::tabMixes()
 
         str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
         str += md->srcRaw.toString();
-        if(md->phase) str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+        if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+          if(md->phases) {
+            int mask=1;
+            for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+              if (!(md->phases & mask)) {
+                str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(i+1));
+              }
+              mask <<=1;
+            }
+          }
+        } else {
+          if(md->phase) {
+            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+          }
+        }
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim>0) {
           str += " " +tr("No Trim");
