@@ -333,7 +333,7 @@ void printDialog::printMixes()
         str.append("<b>"+tr("CH")+QString("%1</b>").arg(lastCHN,2,10,QChar('0')));
       }
       else
-        str.append("&nbsp;");
+      str.append("&nbsp;");
       str.append("</font></td>");
       str.append("<td><font size=+1 face='Courier New' color=green>");
       switch(md->mltpx) {
@@ -355,12 +355,37 @@ void printDialog::printMixes()
       if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
       if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
       if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
-      if (md->phase!=0) {
-        PhaseData *pd = &g_model->phaseData[abs(md->phase)-1];
-        if (md->phase<0) {
-          str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
-        } else {
-          str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
+      if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+        if(md->phases) {
+          if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+            int mask=1;
+            int first=1;
+            str += " " + tr("Phase") + QString(" (");
+            for (int j=0; j<GetEepromInterface()->getCapability(FlightPhases);j++) {
+              if (!(md->phases & mask)) {
+                PhaseData *pd = &g_model->phaseData[j];
+                if (!first) {
+                  str += QString(", ")+ QString("%1").arg(getPhaseName(j+1, pd->name));
+                } else {
+                  str += QString("%1").arg(getPhaseName(j+1,pd->name));
+                  first=0;
+                }
+              }
+              mask <<=1;
+            }
+            str += QString(")");
+          } else {
+            str += tr("DISABLED")+QString(" !!!");
+          }
+        }
+      } else {
+        if (md->phase!=0) {
+          PhaseData *pd = &g_model->phaseData[abs(md->phase)-1];
+          if (md->phase<0) {
+            str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
+          } else {
+            str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
+          }
         }
       }
       if (GetEepromInterface()->getCapability(HasMixerNames)) {

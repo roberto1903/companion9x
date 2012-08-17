@@ -840,6 +840,8 @@ void ModelEdit::tabMixes()
                 mask <<=1;
               }
               str += QString(")");
+            } else {
+              str += tr("DISABLED")+QString(" !!!");
             }
           }
         } else {
