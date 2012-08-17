@@ -4463,7 +4463,7 @@
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_27" columnstretch="0,1,1,1,0,0,0">
+             <layout class="QGridLayout" name="gridLayout_27" columnstretch="0,1,0,1,1,0,0">
               <item row="13" column="1">
                <widget class="QDoubleSpinBox" name="offsetDSB_13">
                 <property name="alignment">
@@ -6162,7 +6162,7 @@
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_28" columnstretch="0,1,1,1,0,0,0" columnminimumwidth="0,0,0,0,0,0,0">
+             <layout class="QGridLayout" name="gridLayout_28" columnstretch="0,1,0,1,1,0,0" columnminimumwidth="0,0,0,0,0,0,0">
               <item row="5" column="5">
                <widget class="QComboBox" name="chInvCB_21">
                 <item>
@@ -7880,8 +7880,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>552</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12798,8 +12798,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>581</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

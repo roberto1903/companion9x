@@ -25,6 +25,9 @@
 #define CURVES
 #define XCURVES
 #define BOLD_FONT
+#define PPM_CENTER_ADJUSTABLE
+#define PPM_LIMITS_SYMETRICAL
+
 
 #undef min
 #undef max
