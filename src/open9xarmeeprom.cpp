@@ -439,7 +439,45 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
     speedDown = c9x.speedDown;
     carryTrim = c9x.carryTrim;
     mltpx = (MltpxValue)c9x.mltpx;
-    phase = c9x.phase;
+    int zeros=0;
+    int ones=0;
+    int phtemp=c9x.phases;
+    for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+      if (phtemp & 1) {
+        ones++;
+      } else {
+        zeros++;
+      }
+      phtemp >>=1;
+    }
+    if (zeros==O9X_ARM_MAX_PHASES || zeros==0) {
+      phase=0;
+    } else if (zeros==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if ((phtemp & 1)==0) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=ph+1;
+    } else if (ones==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if (phtemp & 1) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=-(ph+1);
+    } else {
+      phase=0;
+      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+    }
     sOffset = c9x.sOffset;
   }
   else {
@@ -542,7 +580,45 @@ t_Open9xArmMixData_v209::t_Open9xArmMixData_v209(MixData &c9x)
     speedDown = c9x.speedDown;
     carryTrim = c9x.carryTrim;
     mltpx = (MltpxValue)c9x.mltpx;
-    phase = c9x.phase;
+    int zeros=0;
+    int ones=0;
+    int phtemp=c9x.phases;
+    for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+      if (phtemp & 1) {
+        ones++;
+      } else {
+        zeros++;
+      }
+      phtemp >>=1;
+    }
+    if (zeros==O9X_ARM_MAX_PHASES || zeros==0) {
+      phase=0;
+    } else if (zeros==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if ((phtemp & 1)==0) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=ph+1;
+    } else if (ones==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if (phtemp & 1) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=-(ph+1);
+    } else {
+      phase=0;
+      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+    }
     sOffset = c9x.sOffset;
   }
   else {
@@ -648,7 +724,45 @@ t_Open9xArmMixData_v210::t_Open9xArmMixData_v210(MixData &c9x)
     speedDown = c9x.speedDown;
     carryTrim = c9x.carryTrim;
     mltpx = (MltpxValue)c9x.mltpx;
-    phase = c9x.phase;
+    int zeros=0;
+    int ones=0;
+    int phtemp=c9x.phases;
+    for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+      if (phtemp & 1) {
+        ones++;
+      } else {
+        zeros++;
+      }
+      phtemp >>=1;
+    }
+    if (zeros==O9X_ARM_MAX_PHASES || zeros==0) {
+      phase=0;
+    } else if (zeros==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if ((phtemp & 1)==0) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=ph+1;
+    } else if (ones==1) {
+      int phtemp=c9x.phases;
+      int ph=0;
+      for (int i=0; i<O9X_ARM_MAX_PHASES; i++) {
+        if (phtemp & 1) {
+          ph=i;
+          break;
+        }
+        phtemp >>=1;
+      }
+      phase=-(ph+1);
+    } else {
+      phase=0;
+      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+    }
     sOffset = c9x.sOffset;
     setEEPROMZString(name, c9x.name, sizeof(name));
   }
