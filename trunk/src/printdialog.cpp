@@ -367,6 +367,7 @@ void printDialog::printMixes()
               if (!(md->phases & mask)) {
                 first++;
               }
+              mask <<=1;
             }
             if (first>1) {
               str += " " + tr("Phases") + QString("(");
