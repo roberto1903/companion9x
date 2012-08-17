@@ -488,6 +488,12 @@ t_Open9xArmMixData_v208::operator MixData ()
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
     c9x.phase = phase;
+    if (phase<0) {
+      c9x.phases= 1 << (-phase -1);
+    } else {
+      c9x.phases=511;
+      c9x.phases &= ~(1 << (phase -1));
+    }    
     c9x.sOffset = sOffset;
   }
   return c9x;
@@ -588,6 +594,12 @@ t_Open9xArmMixData_v209::operator MixData ()
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
     c9x.phase = phase;
+    if (phase<0) {
+      c9x.phases= 1 << (-phase -1);
+    } else {
+      c9x.phases=511;
+      c9x.phases &= ~(1 << (phase -1));
+    }    
     c9x.sOffset = sOffset;
   }
   return c9x;
@@ -689,6 +701,12 @@ t_Open9xArmMixData_v210::operator MixData ()
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
     c9x.phase = phase;
+    if (phase<0) {
+      c9x.phases= 1 << (-phase -1);
+    } else {
+      c9x.phases=511;
+      c9x.phases &= ~(1 << (phase -1));
+    }
     c9x.sOffset = sOffset;
     getEEPROMZString(c9x.name, name, sizeof(name));
   }
