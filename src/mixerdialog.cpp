@@ -61,9 +61,16 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       if (GetEepromInterface()->getCapability(MixFlightPhases)) {
         ui->label_phase->hide();
         ui->phasesCB->hide();
+        int mask=1;
+        for (int i=0; i<9 ; i++) {
+          if ((md->phases & mask)==0) {
+            cb_fp[i]->setChecked(true);
+          }
+          mask <<= 1;
+        }
         for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
           lb_fp[i]->hide();
-          cb_fp[i]->hide();          
+          cb_fp[i]->hide();
         }
       } else {
         for (int i=0; i<9; i++) {
@@ -141,6 +148,7 @@ void MixerDialog::changeEvent(QEvent *e)
 
 void MixerDialog::valuesChanged()
 {
+    QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
@@ -175,6 +183,14 @@ void MixerDialog::valuesChanged()
       md->name[i]=ui->mixerName->text().toAscii().at(i);
     }
     md->name[i]=0;
+    md->phases=0;
+    for (int i=8; i>=0 ; i--) {
+      if (!cb_fp[i]->checkState()) {
+        md->phases+=1;
+      }
+      md->phases<<=1;
+    }
+    md->phases>>=1;
 }
 
 void MixerDialog::shrink() {
