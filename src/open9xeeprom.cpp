@@ -411,6 +411,12 @@ t_Open9xMixData_v201::operator MixData ()
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
   c9x.phase = phase;
+  if (phase<0) {
+    c9x.phases= 1 << (-phase -1);
+  } else {
+    c9x.phases=63;
+    c9x.phases &= ~(1 << (phase -1));
+  }  
   c9x.sOffset = sOffset;
   return c9x;
 }
@@ -510,6 +516,12 @@ t_Open9xMixData_v203::operator MixData ()
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
   c9x.phase = phase;
+  if (phase<0) {
+    c9x.phases= 1 << (-phase -1);
+  } else {
+    c9x.phases=63;
+    c9x.phases &= ~(1 << (phase -1));
+  } 
   c9x.sOffset = sOffset;
   return c9x;
 }
@@ -611,6 +623,12 @@ t_Open9xMixData_v205::operator MixData ()
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
     c9x.phase = phase;
+    if (phase<0) {
+      c9x.phases= 1 << (-phase -1);
+    } else {
+      c9x.phases=63;
+      c9x.phases &= ~(1 << (phase -1));
+    }
     c9x.sOffset = sOffset;
   }
   return c9x;
@@ -719,6 +737,12 @@ t_Open9xMixData_v209::operator MixData ()
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
     c9x.phase = phase;
+    if (phase<0) {
+      c9x.phases= 1 << (-phase -1);
+    } else {
+      c9x.phases=63;
+      c9x.phases &= ~(1 << (phase -1));
+    }
     c9x.sOffset = sOffset;
   }
   return c9x;
