@@ -1,10 +1,20 @@
 #include <QtGui>
 #include "helpers.h"
 
-QString getPhaseName(int val)
+QString getPhaseName(int val, char * phasename)
 {
   if (!val) return "---";
-  return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+  if (!phasename) {
+    return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+  } else {
+    QString phaseName;
+    phaseName.append(phasename);
+    if (phaseName.isEmpty()) {
+      return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+    } else {
+      return phaseName;
+    }
+  }
 }
 
 QString getStickStr(int index)

@@ -41,7 +41,7 @@ void populateTimerSwitchCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags);
 void populateCSWCB(QComboBox *b, int value);
 QString getTimerMode(int tm);
-QString getPhaseName(int val);
+QString getPhaseName(int val, char * phasename=NULL);
 QString getStickStr(int index);
 QString getCSWFunc(int val);
 QString getFuncName(unsigned int val);

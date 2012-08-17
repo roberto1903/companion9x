@@ -831,9 +831,9 @@ void ModelEdit::tabMixes()
               for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
                 if (!(md->phases & mask)) {
                   if (!first) {
-                    str += QString(", ")+ QString("%1").arg(getPhaseName(i+1));
+                    str += QString(", ")+ QString("%1").arg(getPhaseName(i+1, g_model.phaseData[i].name));
                   } else {
-                    str += QString("%1").arg(getPhaseName(i+1));
+                    str += QString("%1").arg(getPhaseName(i+1,g_model.phaseData[i].name));
                     first=0;
                   }
                 }
@@ -844,7 +844,7 @@ void ModelEdit::tabMixes()
           }
         } else {
           if(md->phase) {
-            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase));
+            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
           }
         }
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
