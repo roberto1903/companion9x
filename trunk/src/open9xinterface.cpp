@@ -270,8 +270,21 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
         loadModel<Open9xModelData_v210>(radioData.models[i], i, 0 /*no more stick mode messed*/);
       }
     }
-    else if (version == 211 && board == BOARD_ERSKY9X) {
-      loadModel<Open9xArmModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+    else if (version == 211) {
+      if (board == BOARD_GRUVIN9X) {
+        loadModel<Open9xV4ModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else if (board == BOARD_ERSKY9X) {
+        loadModel<Open9xArmModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+      else {
+        loadModel<Open9xModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
+    }
+    else if (version == 212) {
+      if (board == BOARD_ERSKY9X) {
+        loadModel<Open9xArmModelData_v212>(radioData.models[i], i, 0 /*no more stick mode messed*/);
+      }
     }
     else {
       std::cout << "ko\n";
@@ -365,8 +378,16 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
             result = saveModel<Open9xModelData_v210>(i, radioData.models[i]);
           break;
         case 211:
-          if (board == BOARD_ERSKY9X)
+          if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v211>(i, radioData.models[i]);
+          else if (board == BOARD_ERSKY9X)
             result = saveModel<Open9xArmModelData_v211>(i, radioData.models[i]);
+          else
+            result = saveModel<Open9xModelData_v211>(i, radioData.models[i]);
+          break;
+        case 212:
+          if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
           break;
       }
       if (!result)
@@ -432,6 +453,8 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_MAX_PHASES;
       else
         return O9X_MAX_PHASES;
+    case MixFlightPhases:
+      return 1;
     case Mixes:
       if (board == BOARD_ERSKY9X)
         return O9X_ARM_MAX_MIXERS;
@@ -551,6 +574,8 @@ int Open9xInterface::getCapability(const Capability capability)
     case DiffMixers:
       return 1;
     case PPMCenter:
+      return 1;
+    case SYMLimits:
       return 1;
     case OptrexDisplay:
       if  (board==BOARD_ERSKY9X) {

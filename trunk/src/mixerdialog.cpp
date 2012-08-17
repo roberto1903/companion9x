@@ -9,7 +9,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     md(mixdata)
 {
     ui->setupUi(this);
-
+    QLabel * lb_fp[] = {ui->lb_FP0,ui->lb_FP1,ui->lb_FP2,ui->lb_FP3,ui->lb_FP4,ui->lb_FP5,ui->lb_FP6,ui->lb_FP7,ui->lb_FP8 };
+    QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     if (GetEepromInterface()->getCapability(ExtraTrims)) {
       populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_TRIMS | POPULATE_SWITCHES);
@@ -21,6 +22,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->offsetSB->setValue(md->sOffset);
     ui->DiffMixSB->setValue(md->differential);
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
+    ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
     }
@@ -40,16 +42,40 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     }
     ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
-        ui->DiffMIXlabel->hide();
         ui->DiffMixSB->hide();
+        ui->label_curve->setText(tr("Curve"));
     }
     if (!GetEepromInterface()->getCapability(HasMixerNames)) {
         ui->label_name->hide();
         ui->mixerName->hide();
     }
+    if (!GetEepromInterface()->getCapability(FlightPhases)) {
+      ui->label_phase->hide();
+      ui->phasesCB->hide();
+      ui->label_phases->hide();
+      for (int i=0; i<9; i++) {
+        lb_fp[i]->hide();
+        cb_fp[i]->hide();
+      }
+    } else {
+      if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+        ui->label_phase->hide();
+        ui->phasesCB->hide();
+        for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
+          lb_fp[i]->hide();
+          cb_fp[i]->hide();          
+        }
+      } else {
+        for (int i=0; i<9; i++) {
+          lb_fp[i]->hide();
+          cb_fp[i]->hide();
+        }
+        ui->label_phases->hide();
+        populatePhasesCB(ui->phasesCB,md->phase);
+      }
+    }
     ui->mixerName->setText(md->name);
     populateCurvesCB(ui->curvesCB,md->curve);
-    populatePhasesCB(ui->phasesCB,md->phase);
     populateSwitchCB(ui->switchesCB,md->swtch);
     ui->warningCB->setCurrentIndex(md->mixWarn);
     ui->mltpxCB->setCurrentIndex(md->mltpx);
@@ -79,6 +105,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->DiffMixSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->MixDR_CB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -89,6 +116,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->delayUpSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->slowDownSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->slowUpSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    for (int i=0; i<9; i++) {
+      connect(cb_fp[i],SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
+    }
 }
 
 MixerDialog::~MixerDialog()
@@ -115,10 +145,14 @@ void MixerDialog::valuesChanged()
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
+    md->noExpo = ui->MixDR_CB->checkState() ? 1 : 0;
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     int numcurves=GetEepromInterface()->getCapability(NumCurves);
     if (numcurves==0) {
       numcurves=16;
+    }
+    if (GetEepromInterface()->getCapability(DiffMixers) && (ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves))==0){
+      ui->DiffMixSB->show();
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
     md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();

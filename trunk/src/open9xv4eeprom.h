@@ -90,6 +90,31 @@ PACK(typedef struct t_Open9xV4MixData_v209 {
 
 }) Open9xV4MixData_v209;
 
+PACK(typedef struct t_Open9xV4MixData_v211 {
+  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t curveMode:1;       // O=curve, 1=differential
+  uint8_t noExpo:1;
+  uint8_t spare:2;
+  int8_t  weight;
+  int8_t  swtch:6;
+  uint8_t mltpx:2;           // multiplex method: 0 means +=, 1 means *=, 2 means :=
+  uint8_t phases:5;
+  int8_t  carryTrim:3;
+  uint8_t srcRaw:6;
+  uint8_t mixWarn:2;         // mixer warning
+  uint8_t delayUp:4;
+  uint8_t delayDown:4;
+  uint8_t speedUp:4;
+  uint8_t speedDown:4;
+  int8_t  curveParam;
+  int8_t  sOffset;
+
+ operator MixData();
+  t_Open9xV4MixData_v211() { memset(this, 0, sizeof(t_Open9xV4MixData_v211)); }
+  t_Open9xV4MixData_v211(MixData&);
+
+}) Open9xV4MixData_v211;
+
 PACK(typedef struct t_Open9xV4CustomSwData_v207 { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
@@ -326,9 +351,46 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
 
 }) Open9xV4ModelData_v210;
 
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 210
+PACK(typedef struct t_Open9xV4ModelData_v211 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xTimerData_v202 timers[MAX_TIMERS];
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   disableThrottleWarning:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare1:1;
+  int8_t    ppmDelay;
+  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xV4MixData_v211 mixData[O9X_MAX_MIXERS];
+  Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
+  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  int8_t    curves[O9X_MAX_CURVES];
+  int8_t    points[O9X_NUM_POINTS];
+  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
+  Open9xV4SwashRingData_v209 swashR;
+  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
 
-typedef Open9xV4ModelData_v210 Open9xV4ModelData;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+  uint8_t switchWarningStates;
+
+  Open9xFrSkyData_v210 frsky;
+
+  operator ModelData();
+  t_Open9xV4ModelData_v211() { memset(this, 0, sizeof(t_Open9xV4ModelData_v211)); }
+  t_Open9xV4ModelData_v211(ModelData&);
+
+}) Open9xV4ModelData_v211;
+
+#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 211
+
+typedef Open9xV4ModelData_v211 Open9xV4ModelData;
 typedef Open9xGeneralData_v201 Open9xV4GeneralData;
 
 #endif
