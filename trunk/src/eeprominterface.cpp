@@ -43,8 +43,8 @@ int RawSource::getDecimals(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
-      case 0:
-      case 1:
+      case 2:
+      case 3:
         return (Model.frsky.channels[index].type==0 ? 2: 0);
       case 12:
         return 2;
@@ -66,15 +66,15 @@ double RawSource::getMin(const ModelData & Model)
       return 0;
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
-        case 0:
-        case 1:
+        case 2:
+        case 3:
           if (Model.frsky.channels[index].type==0) {
             return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
           } else {
             return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
           }
-        case 2:
-        case 3:
+        case 0:
+        case 1:
         case 4:
         case 5:
         case 6:    
@@ -110,14 +110,14 @@ double RawSource::getMax(const ModelData & Model)
       switch (index) {
         case 0:
         case 1:
+          return 100;
+        case 2:
+        case 3:
           if (Model.frsky.channels[index].type==0) {
             return (Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0)/10;
           } else {
             return Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
           }
-        case 2:
-        case 3:
-          return 100;
         case 4:
           return 1020;
         case 5:
@@ -226,13 +226,14 @@ double RawSource::getStep(const ModelData & Model)
       switch (index) {
         case 0:
         case 1:
+          return 1;
+        case 2:
+        case 3:
           if (Model.frsky.channels[index].type==0) {
             return (Model.frsky.channels[index].ratio/2550.0);
           } else {
             return (Model.frsky.channels[index].ratio/255.0);
           }
-        case 3:
-          return 1;
         case 4:
           return 4;
         case 5:
