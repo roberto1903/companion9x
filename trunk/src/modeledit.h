@@ -24,6 +24,7 @@ public:
     void drawCurve();
     bool drawing;
     bool mixInserted;
+    bool expoInserted;
     bool openWizard;
 private:
     Ui::ModelEdit *ui;
