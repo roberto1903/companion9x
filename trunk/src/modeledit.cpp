@@ -644,18 +644,22 @@ void ModelEdit::tabPhases()
   memcpy(phasesTrimValues,tmpspinbox,sizeof(phasesTrimValues));
   
   int phases = GetEepromInterface()->getCapability(FlightPhases);
-  if (phases < 9)
+  if (phases < 9) {
     ui->phase8->setDisabled(true);
     ui->phases->removeTab(8);
-  if (phases < 8)
+  }
+  if (phases < 8) {
     ui->phase7->setDisabled(true);
     ui->phases->removeTab(7);
-  if (phases < 7)
+  }
+  if (phases < 7) {
     ui->phase6->setDisabled(true);
     ui->phases->removeTab(6);
-  if (phases < 6)
+  }
+  if (phases < 6) {
     ui->phase5->setDisabled(true);
     ui->phases->removeTab(5);
+  }
   if (phases < 5)
     ui->phase4->setDisabled(true);
   if (phases < 4)
