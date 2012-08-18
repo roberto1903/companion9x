@@ -346,7 +346,7 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   b->addItem(QObject::tr("Own trim"));
   unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
   if (num_phases>0) {
-    for (unsigned int i = 0; i < num_phases-1; i++) {
+    for (unsigned int i = 0; i < num_phases; i++) {
       if (i != phase) {
         b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
       }
