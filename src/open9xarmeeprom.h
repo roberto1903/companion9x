@@ -390,7 +390,7 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v208 mixData[O9X_ARM_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v208  expoData[O9X_ARM_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -431,7 +431,7 @@ PACK(typedef struct t_Open9xArmModelData_v209 {
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v209 mixData[O9X_ARM_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v208  expoData[O9X_ARM_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -473,7 +473,7 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -513,7 +513,7 @@ PACK(typedef struct t_Open9xArmModelData_v211 {
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v210 mixData[O9X_ARM_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_ARM_NUM_CHNOUT];
   Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
   int16_t   curves[O9X_ARM_MAX_CURVES];
   int8_t    points[O9X_ARM_NUM_POINTS];
