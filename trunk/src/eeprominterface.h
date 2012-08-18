@@ -255,6 +255,8 @@ class RawSource {
     QString toString();
     
     int getDecimals(const ModelData & Model);
+    double getCsMin(const ModelData & Model);
+    double getCsMax(const ModelData & Model);
     double getMin(const ModelData & Model);
     double getMax(const ModelData & Model);
     double getStep(const ModelData & Model);

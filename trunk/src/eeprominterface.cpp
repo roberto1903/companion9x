@@ -152,6 +152,99 @@ double RawSource::getMax(const ModelData & Model)
       return (Model.extendedLimits ? 125 :100);
   }
 }
+double RawSource::getCsMin(const ModelData & Model)
+{
+  switch (type) {
+    case SOURCE_TYPE_TIMER:
+      return 0;
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 2:
+        case 3:
+          if (Model.frsky.channels[index].type==0) {
+            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
+          } else {
+            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+          }
+        case 0:
+        case 1:
+        case 4:
+        case 5:
+        case 6:    
+          return 0;
+        case 7:
+        case 8:
+          return -30;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+          return 0;
+        default:
+          return -125;
+      }
+      break;
+    default:
+      return -125;
+  }
+}
+
+double RawSource::getCsMax(const ModelData & Model)
+{
+  switch (type) {
+    case SOURCE_TYPE_TIMER:
+      return 765;
+    case SOURCE_TYPE_TELEMETRY:
+      switch (index) {
+        case 0:
+        case 1:
+          return 100;
+        case 2:
+        case 3:
+          if (Model.frsky.channels[index].type==0) {
+            return (Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0)/10;
+          } else {
+            return Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+          }
+        case 4:
+          return 1020;
+        case 5:
+          return 12750;
+        case 6:
+          return 100;        
+        case 7:
+        case 8:
+          return 225;
+        case 9:
+          return 944;
+        case 10:
+          return 2040;
+        case 11:
+          return 1020;
+        case 12:
+          return 5.1;
+        case 13:
+        case 14:
+          return 25.5;
+        case 15:
+          return 127.5;
+        case 16:
+          return 5100;
+        case 17:
+          return 1275;
+        default:
+          return 125;
+      }
+      break;
+    default:
+      return 125;
+  }
+}
 
 double RawSource::getOffset(const ModelData & Model)
 {
