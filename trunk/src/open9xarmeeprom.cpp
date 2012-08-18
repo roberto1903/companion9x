@@ -924,7 +924,7 @@ t_Open9xArmMixData_v212::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
     }
     c9x.weight = weight;
-    if (curveMode==1) {
+    if (curveMode==0) {
       c9x.differential = curveParam;
       c9x.curve=0;
     } else {

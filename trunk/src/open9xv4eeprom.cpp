@@ -460,7 +460,7 @@ t_Open9xV4MixData_v211::operator MixData ()
     }
     c9x.weight = weight;
     c9x.swtch = open9xToSwitch(swtch);
-    if (curveMode==1) {
+    if (curveMode==0) {
       c9x.differential = curveParam;
       c9x.curve=0;
     } else {

@@ -1007,7 +1007,7 @@ t_Open9xMixData_v211::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-46);
     }
     c9x.weight = weight;
-    if (curveMode==1) {
+    if (curveMode==0) {
       c9x.differential = curveParam;
       c9x.curve=0;
     } else {
