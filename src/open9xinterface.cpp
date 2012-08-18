@@ -200,6 +200,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     case 211:
       // Curves big change
       break;
+    case 212:
+      // Big changes in mixers / limitse
+      break;
     default:
       std::cout << "not open9x\n";
       return false;
