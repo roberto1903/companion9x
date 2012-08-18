@@ -26,6 +26,7 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->profile_label->hide();
     ui->patchcalib_CB->hide();
     ui->patchhw_CB->hide();
+    ui->InvertColorButton->setDisabled(true);
     this->setWindowTitle(tr("Write firmware to TX"));
   } else {
     ui->FlashLoadButton->setText(tr("Load eEprom"));
@@ -572,9 +573,11 @@ void burnDialog::on_cancelButton_clicked()
 
 void burnDialog::on_InvertColorButton_clicked()
 {
+  if (ui->imageLabel->pixmap()) {
     QImage image = ui->imageLabel->pixmap()->toImage();
     image.invertPixels();
     ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+  }
 }
 
 void burnDialog::on_EEpromCB_toggled(bool checked)
