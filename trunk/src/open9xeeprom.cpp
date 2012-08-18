@@ -266,12 +266,7 @@ t_Open9xExpoData::operator ExpoData ()
   return c9x;
 }
 
-t_Open9xLimitData::t_Open9xLimitData()
-{
-  memset(this, 0, sizeof(t_Open9xLimitData));
-}
-
-t_Open9xLimitData::t_Open9xLimitData(LimitData &c9x)
+t_Open9xLimitData_v201::t_Open9xLimitData_v201(LimitData &c9x)
 {
   min = c9x.min+100;
   max = c9x.max-100;
@@ -279,7 +274,7 @@ t_Open9xLimitData::t_Open9xLimitData(LimitData &c9x)
   offset = c9x.offset;
 }
 
-t_Open9xLimitData::operator LimitData ()
+t_Open9xLimitData_v201::operator LimitData ()
 {
   LimitData c9x;
   c9x.min = min-100;
@@ -287,11 +282,6 @@ t_Open9xLimitData::operator LimitData ()
   c9x.revert = revert;
   c9x.offset = offset;
   return c9x;
-}
-
-t_Open9xLimitData_v211::t_Open9xLimitData_v211()
-{
-  memset(this, 0, sizeof(t_Open9xLimitData_v211));
 }
 
 t_Open9xLimitData_v211::t_Open9xLimitData_v211(LimitData &c9x)

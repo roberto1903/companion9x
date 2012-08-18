@@ -146,28 +146,28 @@ PACK(typedef struct t_Open9xExpoData {
 
 }) Open9xExpoData;
 
-PACK(typedef struct t_Open9xLimitData {
+PACK(typedef struct t_Open9xLimitData_v201 {
   int8_t  min;
   int8_t  max;
   bool    revert;
   int16_t  offset;
 
   operator LimitData();
-  t_Open9xLimitData();
-  t_Open9xLimitData(LimitData&);
+  t_Open9xLimitData_v201() { memset(this, 0, sizeof(t_Open9xLimitData_v201)); }
+  t_Open9xLimitData_v201(LimitData&);
 
-}) Open9xLimitData;
+}) Open9xLimitData_v201;
 
 PACK(typedef struct t_Open9xLimitData_v211 {
   int8_t  min;
   int8_t  max;
   int8_t  ppmCenter;
   int16_t offset:14;
-  uint8_t symetrical:1;
-  uint8_t revert:1;
+  uint16_t symetrical:1;
+  uint16_t revert:1;
 
   operator LimitData();
-  t_Open9xLimitData_v211();
+  t_Open9xLimitData_v211() { memset(this, 0, sizeof(t_Open9xLimitData_v211)); }
   t_Open9xLimitData_v211(LimitData&);
 
 }) Open9xLimitData_v211;
@@ -606,7 +606,7 @@ PACK(typedef struct t_Open9xModelData_v201 {
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v201 timer2;
   Open9xMixData_v201 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -639,7 +639,7 @@ PACK(typedef struct t_Open9xModelData_v202 {
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
   Open9xMixData_v201 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -675,7 +675,7 @@ PACK(typedef struct t_Open9xModelData_v203 {
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
   Open9xMixData_v203 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -710,7 +710,7 @@ PACK(typedef struct t_Open9xModelData_v204 {
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xTimerData_v202 timer2;
   Open9xMixData_v203 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -745,7 +745,7 @@ PACK(typedef struct t_Open9xModelData_v205 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xMixData_v205 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -782,7 +782,7 @@ PACK(typedef struct t_Open9xModelData_v208 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xMixData_v205 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -823,7 +823,7 @@ PACK(typedef struct t_Open9xModelData_v209 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xMixData_v209 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
@@ -865,7 +865,7 @@ PACK(typedef struct t_Open9xModelData_v210 {
   int8_t    ppmDelay;
   uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xMixData_v209 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData limitData[O9X_NUM_CHNOUT];
+  Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
