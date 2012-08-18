@@ -950,10 +950,10 @@ t_Open9xMixData_v211::t_Open9xMixData_v211(MixData &c9x)
 
     weight = c9x.weight;
     if (c9x.curve==0) {
-      curveMode=1;
+      curveMode=0;
       curveParam=c9x.differential;
     } else {
-      curveMode=0;
+      curveMode=1;
       curveParam = c9x.curve;
     }
     delayUp = c9x.delayUp;
