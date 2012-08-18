@@ -1280,8 +1280,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
           populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);          
         }
         cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
-        cswitchOffset[i]->setMinimum(source.getMin(g_model));
-        cswitchOffset[i]->setMaximum(source.getMax(g_model));
+        cswitchOffset[i]->setMinimum(source.getCsMin(g_model));
+        cswitchOffset[i]->setMaximum(source.getCsMax(g_model));
         cswitchOffset[i]->setSingleStep(source.getStep(g_model));
         cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
         break;
