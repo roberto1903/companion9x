@@ -1469,8 +1469,6 @@ void ModelEdit::tabFunctionSwitches()
 {
   switchEditLock = true;
   int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
-  ui->fsw_en1->hide();
-  ui->fsw_en2->hide();
   for(int i=0; i<std::min(16,num_fsw); i++) {
     fswLabel[i] = new QLabel(this);
     fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -1532,11 +1530,8 @@ void ModelEdit::tabFunctionSwitches()
         fswtchParamArmT[i]->hide();
         fswtchParam[i]->hide();
       }
-      fswtchEnable[i]->hide();
-    } else {
-      ui->fsw_en1->show();
-      if (num_fsw>16) {
-        ui->fsw_en2->show();
+      if (g_model.funcSw[i].func>=FuncInstantTrim) {
+        fswtchEnable[i]->hide();
       }
     }
   }
@@ -1600,9 +1595,11 @@ void ModelEdit::tabFunctionSwitches()
           fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
         }
-        fswtchEnable[i]->hide();
+        if (g_model.funcSw[i].func>=FuncInstantTrim) {
+          fswtchEnable[i]->hide();
+        }
       }
-    } 
+    }
   } else {
     ui->FSwitchGB2->hide();
   }
@@ -1696,8 +1693,6 @@ void ModelEdit::functionSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
-    ui->fsw_en1->hide();
-    ui->fsw_en2->hide();
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<num_fsw; i++) {
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
@@ -1710,7 +1705,7 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
         fswtchEnable[i]->setChecked(false);
-      } else  if (index>15) {
+      } else  if (index>FuncSafetyCh16) {
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue) {
           fswtchParam[i]->hide();
           fswtchParamArmT[i]->hide();
@@ -1739,8 +1734,12 @@ void ModelEdit::functionSwitchesEdited()
           fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
           fswtchParamT[i]->hide();
-          fswtchEnable[i]->hide();
-          fswtchEnable[i]->setChecked(false);
+          if (index>FuncInstantTrim) {
+            fswtchEnable[i]->hide();
+            fswtchEnable[i]->setChecked(false);
+          } else {
+            fswtchEnable[i]->show();
+          }
         }
       } else {
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
@@ -1748,10 +1747,6 @@ void ModelEdit::functionSwitchesEdited()
         fswtchEnable[i]->show();
         fswtchParamT[i]->hide();
         fswtchParamArmT[i]->hide();
-        ui->fsw_en1->show();
-        if (num_fsw>16) {
-          ui->fsw_en2->show();
-        }
       }
     }
 
