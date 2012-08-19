@@ -45,7 +45,7 @@ int RawSource::getDecimals(const ModelData & Model)
     switch (index) {
       case 2:
       case 3:
-        return (Model.frsky.channels[index].type==0 ? 2: 0);
+        return (Model.frsky.channels[index-2].type==0 ? 2: 0);
       case 12:
         return 2;
       case 13:
@@ -68,10 +68,10 @@ double RawSource::getMin(const ModelData & Model)
       switch (index) {
         case 2:
         case 3:
-          if (Model.frsky.channels[index].type==0) {
-            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
+          if (Model.frsky.channels[index-2].type==0) {
+            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
           } else {
-            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case 0:
         case 1:
@@ -113,10 +113,10 @@ double RawSource::getMax(const ModelData & Model)
           return 100;
         case 2:
         case 3:
-          if (Model.frsky.channels[index].type==0) {
-            return (Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0)/10;
+          if (Model.frsky.channels[index-2].type==0) {
+            return (Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0)/10;
           } else {
-            return Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+            return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case 4:
           return 1020;
@@ -161,10 +161,10 @@ double RawSource::getCsMin(const ModelData & Model)
       switch (index) {
         case 2:
         case 3:
-          if (Model.frsky.channels[index].type==0) {
-            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
+          if (Model.frsky.channels[index-2].type==0) {
+            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
           } else {
-            return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case 0:
         case 1:
@@ -206,10 +206,10 @@ double RawSource::getCsMax(const ModelData & Model)
           return 100;
         case 2:
         case 3:
-          if (Model.frsky.channels[index].type==0) {
-            return (Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0)/10;
+          if (Model.frsky.channels[index-2].type==0) {
+            return (Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0)/10;
           } else {
-            return Model.frsky.channels[index].ratio-(Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
+            return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case 4:
           return 1020;
@@ -250,15 +250,15 @@ double RawSource::getOffset(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
-      case 0:
-      case 1:
-        if (Model.frsky.channels[index].type==0) {
-          return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/2550.0;
-        } else {
-          return (Model.frsky.channels[index].offset*Model.frsky.channels[index].ratio)/255.0;
-        }
       case 2:
       case 3:
+        if (Model.frsky.channels[index-2].type==0) {
+          return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
+        } else {
+          return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
+        }
+      case 0:
+      case 1:
         return 0;
       case 4:
         return 512;
@@ -322,10 +322,10 @@ double RawSource::getStep(const ModelData & Model)
           return 1;
         case 2:
         case 3:
-          if (Model.frsky.channels[index].type==0) {
-            return (Model.frsky.channels[index].ratio/2550.0);
+          if (Model.frsky.channels[index-2].type==0) {
+            return (Model.frsky.channels[index-2].ratio/2550.0);
           } else {
-            return (Model.frsky.channels[index].ratio/255.0);
+            return (Model.frsky.channels[index-2].ratio/255.0);
           }
         case 4:
           return 4;
@@ -375,7 +375,7 @@ QString RawSource::toString()
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString telemetry[] = { QObject::tr("A1"), QObject::tr("A2"), QObject::tr("TX"), QObject::tr("RX"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"), QObject::tr("Cnsp"), QObject::tr("Powr")   }; 
+  QString telemetry[] = { QObject::tr("TX"), QObject::tr("RX"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"), QObject::tr("Cnsp"), QObject::tr("Powr")   }; 
 
   switch(type) {
     case SOURCE_TYPE_STICK:
