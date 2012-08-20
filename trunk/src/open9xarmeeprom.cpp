@@ -1108,7 +1108,7 @@ t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
   uint32_t value;
-  if (c9x.func <= FuncSafetyCh16) {
+  if (c9x.func <= FuncInstantTrim) {
     value = ((c9x.param>>1)<<1);
     value |=(c9x.enabled & 0x01);
   }
@@ -1129,7 +1129,7 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
   c9x.swtch = open9xArmToSwitch(swtch);
   c9x.func = (AssignFunc)(func);
   uint32_t value = *((uint32_t *)param);
-  if (c9x.func <= FuncSafetyCh16) {
+  if (c9x.func <= FuncInstantTrim) {
     c9x.enabled = value & 0x01;
     c9x.param = (value>>1)<<1;
   }
@@ -1147,7 +1147,7 @@ t_Open9xArmFuncSwData_v211::t_Open9xArmFuncSwData_v211(FuncSwData &c9x)
 {
   swtch = open9xArmFromSwitch(c9x.swtch);
   uint32_t value;
-  if (c9x.func <= FuncSafetyCh16) {
+  if (c9x.func <= FuncInstantTrim) {
      value = c9x.param;
      *((uint32_t *)param) = value;
     delay=(c9x.enabled & 0x01);
@@ -1169,7 +1169,7 @@ t_Open9xArmFuncSwData_v211::operator FuncSwData ()
   c9x.swtch = open9xArmToSwitch(swtch);
   c9x.func = (AssignFunc)(func);
   uint32_t value = *((uint32_t *)param);
-  if (c9x.func <= FuncSafetyCh16) {
+  if (c9x.func <= FuncInstantTrim) {
     c9x.enabled = delay & 0x01;
     c9x.param = value;
   }
