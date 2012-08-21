@@ -793,12 +793,11 @@ t_Open9xV4FuncSwData_v210::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
+  c9x.param = param;
   if (func < 22) {
     c9x.func = (AssignFunc)(func);
     c9x.enabled = delay;
-    c9x.param = param;
   } else {
-    c9x.param = param;
     if (func == 22)
       c9x.func = FuncPlaySound;
     else if (func == 23)
