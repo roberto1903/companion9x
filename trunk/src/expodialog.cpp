@@ -9,6 +9,8 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     ed(expoData)
 {
     ui->setupUi(this);
+    QLabel * lb_fp[] = {ui->lb_FP0,ui->lb_FP1,ui->lb_FP2,ui->lb_FP3,ui->lb_FP4,ui->lb_FP5,ui->lb_FP6,ui->lb_FP7,ui->lb_FP8 };
+    QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
     setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
     ui->expoSB->setValue(ed->expo);
@@ -24,6 +26,29 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
         ui->label_phases->hide();
         ui->phasesCB->hide();
+    } else {
+      if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
+        ui->label_phases->hide();
+        ui->phasesCB->hide();
+        int mask=1;
+        for (int i=0; i<9 ; i++) {
+          if ((ed->phase & mask)==0) {
+            cb_fp[i]->setChecked(true);
+          }
+          mask <<= 1;
+        }
+        for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
+          lb_fp[i]->hide();
+          cb_fp[i]->hide();
+        }
+      } else {
+        for (int i=0; i<9; i++) {
+          lb_fp[i]->hide();
+          cb_fp[i]->hide();
+        }
+        ui->label_phases->hide();
+        populatePhasesCB(ui->phasesCB,ed->phase);
+      }
     }
     if (!GetEepromInterface()->getCapability(HasExpoNames)) {
         ui->label_name->hide();
@@ -38,6 +63,10 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->modeCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    for (int i=0; i<9; i++) {
+      connect(cb_fp[i],SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
+    }
+    QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 ExpoDialog::~ExpoDialog()
@@ -70,4 +99,8 @@ void ExpoDialog::valuesChanged()
       ed->name[i]=ui->expoName->text().toAscii().at(i);
     }
     ed->name[i]=0;
+}
+
+void ExpoDialog::shrink() {
+    resize(0,0);
 }

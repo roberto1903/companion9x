@@ -738,6 +738,7 @@ enum Capability {
  ExtendedTrims,
  HasNegCurves,
  HasExpoCurves,
+ ExpoFlightPhases,
  ExpoCurve5,
  ExpoCurve9,
  CustomCurves,

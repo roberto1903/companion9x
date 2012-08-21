@@ -456,6 +456,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_MAX_PHASES;
       else
         return O9X_MAX_PHASES;
+    case ExpoFlightPhases:
     case MixFlightPhases:
       return 1;
     case Mixes:
