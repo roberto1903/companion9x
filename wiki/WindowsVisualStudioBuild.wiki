@@ -64,9 +64,9 @@ C:\Programs\CMake\bin
 
 == Nokia Qt ==
 
-http://qt.nokia.com/downloads/windows-cpp
+http://get.qt.nokia.com/qt/source/qt-win-opensource-4.8.0-vs2010.exe
 
-Get the Qt Libraries for Visual Studio 2010 not the SDK
+This is the Qt Libraries for Visual Studio 2010 (not the SDK)
 
 Run qt-win-opensource-4.8.0-vs2010.exe
 
