@@ -1440,16 +1440,17 @@ t_Open9xFuncSwData_v210::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
+  c9x.param = param;
   if (func < 22) {
     c9x.enabled = delay;
-    c9x.param = param;
     c9x.func = (AssignFunc)(func);
   }
   else {
     if (func == 22)
       c9x.func = FuncPlaySound;
-    else if (func == 23)
+    else if (func == 23) {
       c9x.func = FuncPlayHaptic;
+    }
     else if (func == 24)
       c9x.func = FuncReset;
     else if (func == 25)
