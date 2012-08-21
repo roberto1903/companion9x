@@ -114,6 +114,22 @@ PACK(typedef struct t_Open9xArmExpoData_v210 {
 
 }) Open9xArmExpoData_v210;
 
+PACK(typedef struct t_Open9xArmExpoData_v212 {
+  uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
+  uint8_t chn;
+  int8_t  swtch;
+  uint16_t phases;
+  int8_t  weight;
+  uint8_t curveMode;
+  char    name[6];
+  int8_t  curveParam;
+
+  operator ExpoData();
+  t_Open9xArmExpoData_v212() { memset(this, 0, sizeof(t_Open9xArmExpoData_v212)); }
+  t_Open9xArmExpoData_v212(ExpoData&);
+
+}) Open9xArmExpoData_v212;
+
 PACK(typedef struct t_Open9xArmMixData_v208 {
   uint8_t destCh;          // 0, 1..NUM_CHNOUT
   int8_t  phase;           // -5=!FP4, 0=normal, 5=FP4
@@ -554,7 +570,7 @@ PACK(typedef struct t_Open9xArmModelData_v212 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xArmMixData_v212 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_ARM_NUM_CHNOUT];
-  Open9xArmExpoData_v210  expoData[O9X_ARM_MAX_EXPOS];
+  Open9xArmExpoData_v212  expoData[O9X_ARM_MAX_EXPOS];
   int16_t   curves[O9X_ARM_MAX_CURVES];
   int8_t    points[O9X_ARM_NUM_POINTS];
   Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];

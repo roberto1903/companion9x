@@ -255,10 +255,50 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
-  curve = c9x.curve;
+  curve = c9x.curveParam;
   swtch = gruvin9xFromSwitch(c9x.swtch);
-  phase = abs(c9x.phase);
-  negPhase = (c9x.phase < 0);
+  int zeros=0;
+  int ones=0;
+  int phtemp=c9x.phases;
+  for (int i=0; i<G9X_MAX_PHASES; i++) {
+    if (phtemp & 1) {
+      ones++;
+    } else {
+      zeros++;
+    }
+    phtemp >>=1;
+  }
+  if (zeros==G9X_MAX_PHASES || zeros==0) {
+    phase=0;
+    negPhase=0;
+  } else if (zeros==1) {
+    int phtemp=c9x.phases;
+    int ph=0;
+    for (int i=0; i<G9X_MAX_PHASES; i++) {
+      if ((phtemp & 1)==0) {
+        ph=i;
+        break;
+      }
+      phtemp >>=1;
+    }
+    phase=ph+1;
+    negPhase=0;
+  } else if (ones==1) {
+    int phtemp=c9x.phases;
+    int ph=0;
+    for (int i=0; i<G9X_MAX_PHASES; i++) {
+      if (phtemp & 1) {
+        ph=i;
+        break;
+      }
+      phtemp >>=1;
+    }
+    phase=(ph+1);
+    negPhase=1;
+  } else {
+    phase=0;
+    EEPROMWarnings += ::QObject::tr("Phases settings on expos not exported") + "\n";
+  }
   weight = c9x.weight;
   expo = c9x.expo;
 }
@@ -268,9 +308,17 @@ t_Gruvin9xExpoData::operator ExpoData ()
   ExpoData c9x;
   c9x.mode = mode;
   c9x.chn = chn;
-  c9x.curve = curve;
+  c9x.curveParam = curve;
+  c9x.curveMode=1;
   c9x.swtch = gruvin9xToSwitch(swtch);
-  c9x.phase = (negPhase ? -phase : +phase);
+  if (negPhase) {
+    c9x.phases= 1 << (phase -1);
+  } else if (phase==0) {
+    c9x.phases=0;
+  } else {
+    c9x.phases=63;
+    c9x.phases &= ~(1 << (phase -1));
+  }  
   c9x.weight = weight;
   c9x.expo = expo;
   return c9x;

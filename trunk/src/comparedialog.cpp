@@ -708,14 +708,14 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-          if (ed->phase) {
+/*          if (ed->phase) {
             PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
             str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
-          }
+          } 
           if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          }
+          }*/
           str += "</font></td></tr>";
         }
       }
@@ -754,14 +754,14 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-          if (ed->phase) {
+/*          if (ed->phase) {
             PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
             str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
           }
           if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curve) {
             str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          }
+          }*/
           str += "</font></td></tr>";
         }
       }

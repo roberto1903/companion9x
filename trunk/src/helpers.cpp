@@ -308,7 +308,12 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
   if (numcurves==0) {
     numcurves=16;
   }
-  for (int i = 0; i < CURVE_BASE + numcurves; i++)
+  if (GetEepromInterface()->getCapability(ExpoIsCurve)) {
+      b->addItem(QObject::tr("Expo"));
+  } else {
+      b->addItem(getCurveStr(0));
+  }
+  for (int i = 1; i < CURVE_BASE + numcurves; i++)    
     b->addItem(getCurveStr(i));
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
