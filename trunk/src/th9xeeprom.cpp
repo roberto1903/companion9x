@@ -176,7 +176,10 @@ t_Th9xExpoData::t_Th9xExpoData(ExpoData &c9x)
   weight6 = c9x.weight;
   chn = c9x.chn;
   drSw = th9xFromSwitch(c9x.swtch);
-  curve = c9x.curveParam;
+  if (c9x.curveMode==1)
+    curve = c9x.curveParam;
+  else
+    curve = 0;
 }
 
 t_Th9xExpoData::operator ExpoData ()
@@ -187,16 +190,12 @@ t_Th9xExpoData::operator ExpoData ()
   c9x.weight = weight6;
   c9x.chn = chn;
   c9x.swtch = th9xToSwitch(drSw);
-  if (exp5!=0 && curve!=0) {
-    EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported") + "\n";
+  if (curve) {
+    c9x.curveMode=1;
+    c9x.curveParam = curve;    
   } else {
-    if (exp5!=0) {
-        c9x.curveMode=0;
-        c9x.curveParam=exp5;
-    } else {
-        c9x.curveMode=1;
-        c9x.curveParam = curve;
-    }
+    c9x.curveMode = 0;
+    c9x.curveParam = exp5;
   }
   return c9x;
 }

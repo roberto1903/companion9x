@@ -255,7 +255,11 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
-  curve = c9x.curveParam;
+  if (c9x.curveMode==1) {
+    curve = c9x.curveParam;
+  } else {
+    curve=0;
+  }
   swtch = gruvin9xFromSwitch(c9x.swtch);
   int zeros=0;
   int ones=0;

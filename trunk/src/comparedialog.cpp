@@ -708,14 +708,56 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-/*          if (ed->phase) {
-            PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
-            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
-          } 
-          if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
-          if (ed->curve) {
-            str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          }*/
+          if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+            if(ed->phases) {
+              if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+                int mask=1;
+                int first=0;
+                for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                  if (!(ed->phases & mask)) {
+                    first++;
+                  }
+                  mask <<=1;
+                }
+                if (first>1) {
+                  str += " " + tr("Phases") + QString("(");
+                } else {
+                  str += " " + tr("Phase") + QString("(");
+                }
+                mask=1;
+                first=1;
+                for (int j=0; j<GetEepromInterface()->getCapability(FlightPhases);j++) {
+                  if (!(ed->phases & mask)) {
+                    PhaseData *pd = &g_model1->phaseData[j];
+                    if (!first) {
+                      str += QString(", ")+ QString("%1").arg(getPhaseName(j+1, pd->name));
+                    } else {
+                      str += QString("%1").arg(getPhaseName(j+1,pd->name));
+                      first=0;
+                    }
+                  }
+                  mask <<=1;
+                }
+                str += QString(")");
+              } else {
+                str += tr("DISABLED")+QString(" !!!");
+              }
+            }
+          } else {
+            if (ed->phase!=0) {
+              PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
+              if (ed->phase<0) {
+                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(ed->phase+1)).arg(pd->name);
+              } else {
+                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
+              }
+            }
+          }
+          if (ed->swtch.type)
+            str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
+          if (ed->curveMode)
+            if (ed->curveParam) 
+                str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curveParam).replace("<", "&lt;").replace(">", "&gt;"));
           str += "</font></td></tr>";
         }
       }
@@ -754,14 +796,56 @@ void compareDialog::printExpos()
 
           str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
           str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
-/*          if (ed->phase) {
-            PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
-            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(ed->phase, pd->name));
+          if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+            if(ed->phases) {
+              if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+                int mask=1;
+                int first=0;
+                for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+                  if (!(ed->phases & mask)) {
+                    first++;
+                  }
+                  mask <<=1;
+                }
+                if (first>1) {
+                  str += " " + tr("Phases") + QString("(");
+                } else {
+                  str += " " + tr("Phase") + QString("(");
+                }
+                mask=1;
+                first=1;
+                for (int j=0; j<GetEepromInterface()->getCapability(FlightPhases);j++) {
+                  if (!(ed->phases & mask)) {
+                    PhaseData *pd = &g_model2->phaseData[j];
+                    if (!first) {
+                      str += QString(", ")+ QString("%1").arg(getPhaseName(j+1, pd->name));
+                    } else {
+                      str += QString("%1").arg(getPhaseName(j+1,pd->name));
+                      first=0;
+                    }
+                  }
+                  mask <<=1;
+                }
+                str += QString(")");
+              } else {
+                str += tr("DISABLED")+QString(" !!!");
+              }
+            }
+          } else {
+            if (ed->phase!=0) {
+              PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
+              if (ed->phase<0) {
+                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(ed->phase+1)).arg(pd->name);
+              } else {
+                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
+              }
+            }
           }
-          if (ed->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
-          if (ed->curve) {
-            str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          }*/
+          if (ed->swtch.type)
+            str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
+          if (ed->curveMode)
+            if (ed->curveParam) 
+                str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(ed->curveParam).replace("<", "&lt;").replace(">", "&gt;"));
           str += "</font></td></tr>";
         }
       }
