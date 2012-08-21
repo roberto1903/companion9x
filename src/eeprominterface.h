@@ -400,13 +400,14 @@ class ExpoData {
     ExpoData() { clear(); }
     uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
     uint8_t chn;
-    int8_t  curve;        // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
     RawSwitch swtch;
-    int8_t  phase;        // -5=!FP4, 0=normal, 5=FP4
+    int16_t  phases;        // -5=!FP4, 0=normal, 5=FP4
     uint8_t weight;
     int8_t  expo;
-    char name[10];
-
+    int8_t phase;
+    char name[6];
+    uint8_t curveMode;
+    int8_t  curveParam;
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
 
@@ -739,6 +740,7 @@ enum Capability {
  HasNegCurves,
  HasExpoCurves,
  ExpoFlightPhases,
+ ExpoIsCurve,
  ExpoCurve5,
  ExpoCurve9,
  CustomCurves,

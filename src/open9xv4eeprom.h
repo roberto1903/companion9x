@@ -208,7 +208,7 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
@@ -244,7 +244,7 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
@@ -285,7 +285,7 @@ PACK(typedef struct t_Open9xV4ModelData_v209 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
@@ -327,7 +327,7 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
@@ -367,7 +367,7 @@ PACK(typedef struct t_Open9xV4ModelData_v211 {
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xV4MixData_v211 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData  expoData[O9X_MAX_EXPOS];
+  Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];

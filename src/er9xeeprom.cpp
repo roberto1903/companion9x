@@ -670,7 +670,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
         }
         for (int mode=0; mode<2; mode++) {
           for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
-            if (c9x.expoData[e].chn == i && !c9x.expoData[e].phase) {
+            if (c9x.expoData[e].chn == i && !c9x.expoData[e].phases) {
               if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xToSwitch(swtch1) || c9x.expoData[e].swtch == er9xToSwitch(swtch2)) {
                 if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
                   expoData[i].expo[pos][0][mode] = c9x.expoData[e].expo;

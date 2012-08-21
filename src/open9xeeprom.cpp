@@ -229,40 +229,123 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   return result;
 }
 
-t_Open9xExpoData::t_Open9xExpoData(ExpoData &c9x)
+t_Open9xExpoData_v201::t_Open9xExpoData_v201(ExpoData &c9x)
+{
+  mode = c9x.mode;
+  chn = c9x.chn;
+  // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+  if (c9x.curveMode==1) {
+    if (c9x.curveParam >=0 && c9x.curveParam <= 10)
+      curve = c9x.curveParam;
+    else if (c9x.curveParam >= 15 && c9x.curveParam <= 19)
+      curve = c9x.curveParam - 4;
+    else
+      EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curveParam-6) + "\n";
+  } else {
+      curve=0;
+      expo=c9x.curveParam;
+  }
+  swtch = open9xFromSwitch(c9x.swtch);
+  int zeros=0;
+  int ones=0;
+  int phtemp=c9x.phases;
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
+    if (phtemp & 1) {
+      ones++;
+    } else {
+      zeros++;
+    }
+    phtemp >>=1;
+  }
+  if (zeros==O9X_MAX_PHASES || zeros==0) {
+    phase=0;
+    negPhase=0;
+  } else if (zeros==1) {
+    int phtemp=c9x.phases;
+    int ph=0;
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
+      if ((phtemp & 1)==0) {
+        ph=i;
+        break;
+      }
+      phtemp >>=1;
+    }
+    phase=ph+1;
+    negPhase=0;
+  } else if (ones==1) {
+    int phtemp=c9x.phases;
+    int ph=0;
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
+      if (phtemp & 1) {
+        ph=i;
+        break;
+      }
+      phtemp >>=1;
+    }
+    phase=(ph+1);
+    negPhase=1;
+  } else {
+    phase=0;
+    EEPROMWarnings += ::QObject::tr("Phases settings on expos not exported") + "\n";
+  }
+  weight = c9x.weight;
+}
+
+t_Open9xExpoData_v201::operator ExpoData ()
+{
+  ExpoData c9x;
+  c9x.mode = mode;
+  c9x.chn = chn;
+  if (expo!=0 && curve!=0) {
+    EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported") + "\n";
+  } else {
+    if (expo!=0) {
+        c9x.curveMode=0;
+        c9x.curveParam=expo;
+    } else {
+        c9x.curveMode=1;
+        if (curve <= 10)
+          c9x.curveParam = curve;
+        else
+          c9x.curveParam = curve + 4;
+    }
+  }
+  c9x.swtch = open9xToSwitch(swtch);
+  if (negPhase) {
+    c9x.phases= 1 << (phase -1);
+  } else if (phase==0) {
+    c9x.phases=0;
+  } else {
+    c9x.phases=63;
+    c9x.phases &= ~(1 << (phase -1));
+  }  
+  c9x.weight = weight;
+  return c9x;
+}
+
+t_Open9xExpoData_v211::t_Open9xExpoData_v211(ExpoData &c9x)
 {
   mode = c9x.mode;
   chn = c9x.chn;
   // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
 
-  if (c9x.curve >=0 && c9x.curve <= 10)
-    curve = c9x.curve;
-  else if (c9x.curve >= 15 && c9x.curve <= 19)
-    curve = c9x.curve - 4;
-  else
-    EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curve-6) + "\n";
   swtch = open9xFromSwitch(c9x.swtch);
-  phase = abs(c9x.phase);
-  negPhase = (c9x.phase < 0);
+  phases = c9x.phases;
   weight = c9x.weight;
-  expo = c9x.expo;
+  curveMode=c9x.curveMode;
+  curveParam=c9x.curveParam;
 }
 
-t_Open9xExpoData::operator ExpoData ()
+t_Open9xExpoData_v211::operator ExpoData ()
 {
   ExpoData c9x;
   c9x.mode = mode;
   c9x.chn = chn;
-
-  if (curve <= 10)
-    c9x.curve = curve;
-  else
-    c9x.curve = curve + 4;
-
+  c9x.curveMode=curveMode;
+  c9x.curveParam=curveParam;
   c9x.swtch = open9xToSwitch(swtch);
-  c9x.phase = (negPhase ? -phase : +phase);
+  c9x.phases = phases;
   c9x.weight = weight;
-  c9x.expo = expo;
   return c9x;
 }
 
@@ -348,7 +431,7 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
   speedDown = c9x.speedDown;
   carryTrim = c9x.carryTrim;
   mltpx = (MltpxValue)c9x.mltpx;
-    int zeros=0;
+  int zeros=0;
   int ones=0;
   int phtemp=c9x.phases;
   for (int i=0; i<O9X_MAX_PHASES; i++) {

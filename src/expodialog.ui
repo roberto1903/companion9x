@@ -74,7 +74,7 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="label_expo">
      <property name="text">
       <string>Expo</string>
      </property>
@@ -107,7 +107,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="label_phases">
+    <widget class="QLabel" name="label_phase">
      <property name="text">
       <string>Phase</string>
      </property>
@@ -121,7 +121,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_phases">
      <property name="text">
       <string>Phases</string>
      </property>
@@ -345,7 +345,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="ExpoSB">
+      <widget class="QSpinBox" name="ExpoCurveSB">
        <property name="minimum">
         <number>-100</number>
        </property>
@@ -353,7 +353,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
         <number>100</number>
        </property>
        <property name="singleStep">
-        <number>2</number>
+        <number>1</number>
        </property>
       </widget>
      </item>

@@ -15,24 +15,36 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
     ui->expoSB->setValue(ed->expo);
     ui->weightSB->setValue(ed->weight);
-    populatePhasesCB(ui->phasesCB, ed->phase);
     populateSwitchCB(ui->switchesCB,ed->swtch);
-    populateExpoCurvesCB(ui->curvesCB,ed->curve); // TODO capacity for er9x
+    if (ed->curveMode==0) {
+        populateExpoCurvesCB(ui->curvesCB,0); // TODO capacity for er9x
+        ui->ExpoCurveSB->setValue(ed->curveParam);
+    } else {
+        populateExpoCurvesCB(ui->curvesCB,ed->curveParam); // TODO capacity for er9x
+    }
     ui->modeCB->setCurrentIndex(ed->mode-1);
     if (!GetEepromInterface()->getCapability(HasExpoCurves)) {
         ui->label_curves->hide();
         ui->curvesCB->hide();
+        ed->curveMode=1;
+    }
+    if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
+        ui->ExpoCurveSB->hide();
+        ui->label_curves->setText(tr("Curve"));
+    } else {
+        ui->label_expo->hide();
+        ui->expoSB->hide();
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
         ui->label_phases->hide();
         ui->phasesCB->hide();
     } else {
       if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
-        ui->label_phases->hide();
+        ui->label_phase->hide();
         ui->phasesCB->hide();
         int mask=1;
         for (int i=0; i<9 ; i++) {
-          if ((ed->phase & mask)==0) {
+          if ((ed->phases & mask)==0) {
             cb_fp[i]->setChecked(true);
           }
           mask <<= 1;
@@ -88,17 +100,45 @@ void ExpoDialog::changeEvent(QEvent *e)
 
 void ExpoDialog::valuesChanged()
 {
-    ed->expo   = ui->expoSB->value();
+    QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
+    if (ui->curvesCB->currentIndex()==0)  {
+        if (GetEepromInterface()->getCapability(ExpoIsCurve)) {
+          ed->curveMode=0;
+          ui->ExpoCurveSB->show();
+          ed->curveParam=ui->ExpoCurveSB->value();
+          ed->expo=ui->ExpoCurveSB->value();
+        } else {
+          ui->ExpoCurveSB->hide();
+          ed->curveMode=0;
+          ed->curveParam=ui->expoSB->value();  
+          ed->expo = ui->expoSB->value();
+        }
+    } else {
+        if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
+          ed->curveMode=1;
+          ed->curveParam=ui->curvesCB->currentIndex();
+        }
+        ui->ExpoCurveSB->hide();
+    }
+    
     ed->weight = ui->weightSB->value();
     ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
     ed->swtch  = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
-    ed->curve  = ui->curvesCB->currentIndex();
     ed->mode   = ui->modeCB->currentIndex() + 1;
     int i=0;
     for (i=0; i<ui->expoName->text().toAscii().length(); i++) {
       ed->name[i]=ui->expoName->text().toAscii().at(i);
     }
     ed->name[i]=0;
+    ed->phases=0;
+    for (int i=8; i>=0 ; i--) {
+      if (!cb_fp[i]->checkState()) {
+        ed->phases+=1;
+      }
+      ed->phases<<=1;
+    }
+    ed->phases>>=1;
+
 }
 
 void ExpoDialog::shrink() {
