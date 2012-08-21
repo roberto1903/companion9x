@@ -243,7 +243,7 @@ t_Open9xExpoData_v201::t_Open9xExpoData_v201(ExpoData &c9x)
       EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curveParam-6) + "\n";
   } else {
       curve=0;
-      expo=c9x.curveParam;
+      expo=c9x.expo;
   }
   swtch = open9xFromSwitch(c9x.swtch);
   int zeros=0;
@@ -297,9 +297,10 @@ t_Open9xExpoData_v201::operator ExpoData ()
   c9x.mode = mode;
   c9x.chn = chn;
   if (expo!=0 && curve!=0) {
-    EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported") + "\n";
+    EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported in open9x") + "\n";
   } else {
     if (expo!=0) {
+        c9x.expo=expo;
         c9x.curveMode=0;
         c9x.curveParam=expo;
     } else {

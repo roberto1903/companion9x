@@ -70,6 +70,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     valuesChanged();
     connect(ui->expoName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->expoSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->ExpoCurveSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -117,12 +118,12 @@ void ExpoDialog::valuesChanged()
         if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
           ed->curveMode=1;
           ed->curveParam=ui->curvesCB->currentIndex();
+          ed->expo = ui->expoSB->value();
         }
         ui->ExpoCurveSB->hide();
     }
     
     ed->weight = ui->weightSB->value();
-    ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
     ed->swtch  = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     ed->mode   = ui->modeCB->currentIndex() + 1;
     int i=0;
@@ -138,7 +139,53 @@ void ExpoDialog::valuesChanged()
       ed->phases<<=1;
     }
     ed->phases>>=1;
-
+    if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
+      int zeros=0;
+      int ones=0;
+      int phtemp=ed->phases;
+      int ph=0;
+      for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
+        if (phtemp & 1) {
+          ones++;
+        } else {
+          zeros++;
+        }
+        phtemp >>=1;
+      }
+      if (zeros==GetEepromInterface()->getCapability(FlightPhases) || zeros==0) {
+        ed->phase=0;
+      } else if (zeros==1) {
+        phtemp=ed->phases;
+        for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
+          if ((phtemp & 1)==0) {
+            ph=i;
+            break;
+          }
+          phtemp >>=1;
+        }
+        ed->phase=ph+1;
+      } else if (ones==1) {
+        phtemp=ed->phases;
+        for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
+          if (phtemp & 1) {
+            ph=i;
+            break;
+          }
+          phtemp >>=1;
+        }
+        ed->phase=-(ph+1);      
+      }
+    } else {
+      ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+      if (ed->phase <0 ) {
+        ed->phases= 1 << (ed->phase -1);
+      } else if (ed->phase==0) {
+        ed->phases=0;
+      } else {
+        ed->phases=( 2<< GetEepromInterface()->getCapability(FlightPhases))-1;
+        ed->phases &= ~(1 << (ed->phase -1));
+      }
+    }  
 }
 
 void ExpoDialog::shrink() {
