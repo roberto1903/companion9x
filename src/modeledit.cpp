@@ -1632,17 +1632,17 @@ void ModelEdit::tabFunctionSwitches()
 
       fswtchEnable[i] = new QCheckBox(this);
       fswtchEnable[i]->setText(tr("ON"));
-      ui->fswitchlayout2->addWidget(fswtchEnable[i],i+1,4);
+      ui->fswitchlayout2->addWidget(fswtchEnable[i],i-15,4);
       int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
 
       fswtchParamT[i] = new QComboBox(this);
-      ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
+      ui->fswitchlayout2->addWidget(fswtchParamT[i],i-15,3);
       populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
       connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
       fswtchParamArmT[i] = new QLineEdit(this);
       fswtchParamArmT[i]->setMaxLength(6);
-      ui->fswitchlayout2->addWidget(fswtchParamArmT[i],i+1,3);
+      ui->fswitchlayout2->addWidget(fswtchParamArmT[i],i-15,3);
       if (g_model.funcSw[i].func==FuncPlayPrompt) {
         fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
       } else {
