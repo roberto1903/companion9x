@@ -180,6 +180,12 @@ int Th9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case Mixes:
       return TH9X_MAX_MIXERS;
+    case NumCurves3:
+      return TH9X_MAX_CURVES3;
+    case NumCurves5:
+      return TH9X_MAX_CURVES5;      
+    case NumCurves9:
+      return TH9X_MAX_CURVES9;
     case OwnerName:
       return 0;
     case Timers:

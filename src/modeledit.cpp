@@ -1106,14 +1106,37 @@ void ModelEdit::tabCurves()
   
   memcpy(spny, tmpy, sizeof(spny));
   memcpy(spnx, tmpx, sizeof(spnx));
-  if (!GetEepromInterface()->getCapability(CustomCurves)){
-    ui->curvetype_CB->setDisabled(true);
-  } else {
-    ui->curvetype_CB->setEnabled(true);
-  }
   int numcurves=GetEepromInterface()->getCapability(NumCurves);
   if (numcurves==0) {
     numcurves=16;
+  }
+  
+  if (!GetEepromInterface()->getCapability(CustomCurves)){
+    ui->curvetype_CB->setDisabled(true);
+    int count=0;
+    for (int i=0; i< GetEepromInterface()->getCapability(NumCurves3); i++) {
+        g_model.curves[count].count=3;
+        g_model.curves[count].custom=false;
+        count++;
+    }
+    for (int i=0; i< GetEepromInterface()->getCapability(NumCurves5); i++) {
+        g_model.curves[count].count=5;
+        g_model.curves[count].custom=false;
+        count++;
+    }
+    for (int i=0; i< GetEepromInterface()->getCapability(NumCurves9); i++) {
+        g_model.curves[count].count=5;
+        g_model.curves[count].custom=false;
+        count++;
+    }
+    for (int i=count; i< 16; i++) {
+        editb[i]->hide();
+        plotcb[i]->hide();
+        resetb[i]->hide();
+    }
+    
+  } else {
+    ui->curvetype_CB->setEnabled(true);
   }
   
   for (int i=numcurves; i<16;i++) {
@@ -4126,12 +4149,52 @@ void ModelEdit::clearCurves(bool ask)
     if(res!=QMessageBox::Yes) return;
   }
   curvesLock=true;
-  for (int j=0; j<16; j++) {
-    g_model.curves[j].count=5;
-    g_model.curves[j].custom=false;
-    for (int i=0; i<17; i++) {
-      g_model.curves[j].points[i].x=0;
-      g_model.curves[j].points[i].y=0;
+  if (!GetEepromInterface()->getCapability(CustomCurves)){
+    ui->curvetype_CB->setDisabled(true);
+    int count=0;
+    for (int j=0; j< GetEepromInterface()->getCapability(NumCurves3); j++) {
+        g_model.curves[count].count=3;
+        g_model.curves[count].custom=false;
+        for (int i=0; i<17; i++) {
+          g_model.curves[count].points[i].x=0;
+          g_model.curves[count].points[i].y=0;
+        }
+        count++;
+    }
+    for (int j=0; j< GetEepromInterface()->getCapability(NumCurves5); j++) {
+        g_model.curves[count].count=5;
+        g_model.curves[count].custom=false;
+        for (int i=0; i<17; i++) {
+          g_model.curves[count].points[i].x=0;
+          g_model.curves[count].points[i].y=0;
+        }
+        count++;
+    }
+    for (int j=0; j< GetEepromInterface()->getCapability(NumCurves9); j++) {
+        g_model.curves[count].count=5;
+        g_model.curves[count].custom=false;
+        for (int i=0; i<17; i++) {
+          g_model.curves[count].points[i].x=0;
+          g_model.curves[count].points[i].y=0;
+        }
+        count++;
+    }
+    for (int j=count; j<16; j++) {
+        g_model.curves[j].count=5;
+        g_model.curves[j].custom=false;
+        for (int i=0; i<17; i++) {
+          g_model.curves[j].points[i].x=0;
+          g_model.curves[j].points[i].y=0;
+        }
+    }
+  } else {
+    for (int j=0; j<16; j++) {
+        g_model.curves[j].count=5;
+        g_model.curves[j].custom=false;
+        for (int i=0; i<17; i++) {
+          g_model.curves[j].points[i].x=0;
+          g_model.curves[j].points[i].y=0;
+        }
     }
   }
   for (int i=0; i<17; i++) {
@@ -4142,7 +4205,11 @@ void ModelEdit::clearCurves(bool ask)
   }
   currentCurve=0;
   curvesLock=false;
-  ui->curvetype_CB->setCurrentIndex(2);
+  if (GetEepromInterface()->getCapability(NumCurves3)>0) {
+    ui->curvetype_CB->setCurrentIndex(0);
+  } else {
+    ui->curvetype_CB->setCurrentIndex(2);  
+  }
   updateSettings();
   drawCurve();
 }

@@ -1110,12 +1110,24 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
       expoData[i] = c9x.expoData[i];
     if (c9x.expoData[G9X_MAX_EXPOS].mode)
       EEPROMWarnings += QObject::tr("gruvin9x only accepts %1 expos").arg(G9X_MAX_EXPOS) + "\n";
-    /* TODO for (int i=0; i<MAX_CURVE5; i++)
-      for (int j=0; j<5; j++)
-        curves5[i][j] = c9x.curves5[i][j];
-    for (int i=0; i<MAX_CURVE9; i++)
-      for (int j=0; j<9; j++)
-        curves9[i][j] = c9x.curves9[i][j]; */
+    for (int i=0; i<G9X_MAX_CURVE5; i++)
+      if  (c9x.curves[i].count==5) {
+        if  (c9x.curves[i].custom)
+          EEPROMWarnings += QObject::tr("gruvin9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1) + "\n";    
+        for (int j=0; j<5; j++)
+            curves5[i][j] = c9x.curves[i].points[j].y;
+      } else {
+        EEPROMWarnings += QObject::tr("gruvin9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i].count).arg(i+1) + "\n";
+      }   
+    for (int i=0; i<G9X_MAX_CURVE9; i++)
+      if  (c9x.curves[i+G9X_MAX_CURVE5].count==9) {
+        if  (c9x.curves[i+G9X_MAX_CURVE5].custom)
+          EEPROMWarnings += QObject::tr("gruvin9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+G9X_MAX_CURVE5) + "\n";    
+        for (int j=0; j<9; j++)
+            curves9[i][j] = c9x.curves[i+G9X_MAX_CURVE5].points[j].y;
+      } else {
+        EEPROMWarnings += QObject::tr("gruvin9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+G9X_MAX_CURVE5].count).arg(i+1+G9X_MAX_CURVE5) + "\n";
+      }   
     for (int i=0; i<G9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
     for (int i=0; i<G9X_NUM_FSW; i++)

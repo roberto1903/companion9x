@@ -212,6 +212,10 @@ int Ersky9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case Mixes:
       return ERSKY9X_MAX_MIXERS;
+    case NumCurves5:
+      return ERSKY9X_MAX_CURVE5;
+    case NumCurves9:
+      return ERSKY9X_MAX_CURVE9;
     case MixFmTrim:
       return 1;      
     case PPMExtCtrl:

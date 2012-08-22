@@ -428,13 +428,34 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<NUM_STICKS; i++)
       trimData[i].itrim = std::max(-30, std::min(30, c9x.phaseData[0].trim[i]));
-/*    for (int i=0; i<TH9X_MAX_CURVES5; i++)
+    for (int i=0; i<TH9X_MAX_CURVES3; i++)
+      if  (c9x.curves[i].count==3) {
+        if  (c9x.curves[i].custom)
+          EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1) + "\n";    
+        for (int j=0; j<3; j++)
+          curves3[i][j] = c9x.curves[i].points[j].y;
+    } else {
+        EEPROMWarnings += QObject::tr("th9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i].count).arg(i+1) + "\n";
+    }   
+    for (int i=0; i<TH9X_MAX_CURVES5; i++)
+     if  (c9x.curves[i+TH9X_MAX_CURVES3].count==5) {
+      if  (c9x.curves[i+TH9X_MAX_CURVES3].custom)
+        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+TH9X_MAX_CURVES3) + "\n";    
       for (int j=0; j<5; j++)
-        curves5[i][j] = c9x.curves5[i][j];
+        curves5[i][j] = c9x.curves[i+TH9X_MAX_CURVES3].points[j].y;
+     } else {
+       EEPROMWarnings += QObject::tr("th9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+TH9X_MAX_CURVES3].count).arg(i+1+TH9X_MAX_CURVES3) + "\n";
+     }   
     for (int i=0; i<TH9X_MAX_CURVES9; i++)
+     if  (c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].count==9) {
+      if  (c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].custom)
+        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5) + "\n";    
       for (int j=0; j<9; j++)
-        curves9[i][j] = c9x.curves9[i][j];
-*/
+        curves5[i][j] = c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].points[j].y;
+     } else {
+       EEPROMWarnings += QObject::tr("th9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].count).arg(i+1+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5) + "\n";
+     }   
+
     /*for (int i=0; i<TH9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];*/
   }
@@ -488,20 +509,28 @@ t_Th9xModelData::operator ModelData ()
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<NUM_STICKS; i++)
     c9x.phaseData[0].trim[i] = trimData[i].itrim;
-  for (int i=0; i<TH9X_MAX_CURVES5; i++) {
+  for (int i=0; i<TH9X_MAX_CURVES3; i++) {
     c9x.curves[i].custom = false;
-    c9x.curves[i].count = 5;
+    c9x.curves[i].count = 3;
+    for (int j=0; j<3; j++) {
+      c9x.curves[i].points[j].x = -100 + 100*i;
+      c9x.curves[i].points[j].y = curves3[i][j];
+    }
+  }
+  for (int i=0; i<TH9X_MAX_CURVES5; i++) {
+    c9x.curves[i+TH9X_MAX_CURVES3].custom = false;
+    c9x.curves[i+TH9X_MAX_CURVES3].count = 5;
     for (int j=0; j<5; j++) {
-      c9x.curves[i].points[j].x = -100 + 50*i;
-      c9x.curves[i].points[j].y = curves5[i][j];
+      c9x.curves[i+TH9X_MAX_CURVES3].points[j].x = -100 + 50*i;
+      c9x.curves[i+TH9X_MAX_CURVES3].points[j].y = curves5[i][j];
     }
   }
   for (int i=0; i<TH9X_MAX_CURVES9; i++) {
-    c9x.curves[TH9X_MAX_CURVES5+i].custom = false;
-    c9x.curves[TH9X_MAX_CURVES5+i].count = 5;
+    c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].custom = false;
+    c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].count = 5;
     for (int j=0; j<9; j++) {
-      c9x.curves[TH9X_MAX_CURVES5+i].points[j].x = -100 + 50*i;
-      c9x.curves[TH9X_MAX_CURVES5+i].points[j].y = curves9[i][j];
+      c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].points[j].x = -100 + 50*i;
+      c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].points[j].y = curves9[i][j];
     }
   }
   /*for (int i=0; i<TH9X_NUM_CSW; i++)

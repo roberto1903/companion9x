@@ -238,6 +238,10 @@ int Er9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case Mixes:
       return ER9X_MAX_MIXERS;
+    case NumCurves5:
+      return ER9X_MAX_CURVE5;
+    case NumCurves9:
+      return ER9X_MAX_CURVE5;      
     case MixFmTrim:
       return 1;
     case PPMExtCtrl:
