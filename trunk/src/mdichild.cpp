@@ -296,14 +296,14 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 bool MdiChild::save()
 {
   if (isUntitled) {
-      return saveAs();
+      return saveAs(true);
   }
   else {
       return saveFile(curFile);
   }
 }
 
-bool MdiChild::saveAs()
+bool MdiChild::saveAs(bool isNew)
 {
     QSettings settings("companion9x", "companion9x");
     QString fileName;
@@ -317,7 +317,10 @@ bool MdiChild::saveAs()
         return false;
 
     settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
-    return saveFile(fileName);
+    if (isNew)
+      return saveFile(fileName);
+    else 
+      return saveFile(fileName,true);
 }
 
 bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
