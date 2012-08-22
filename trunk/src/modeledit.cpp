@@ -1738,7 +1738,11 @@ void ModelEdit::customSwitchesEdited()
             if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+              RawSource newSource = RawSource(g_model.customSw[i].val1);
+              if (newSource.type == SOURCE_TYPE_TIMER || newSource.type == SOURCE_TYPE_TELEMETRY)
+                g_model.customSw[i].val2 = -128;
+              else
+                g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
               setSwitchWidgetVisibility(i);
             }
             else {

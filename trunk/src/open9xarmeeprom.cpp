@@ -1053,26 +1053,29 @@ t_Open9xArmMixData_v212::t_Open9xArmMixData_v212(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
       srcRaw = 1 + c9x.srcRaw.index;
     }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
+      srcRaw = 8;
+    }
     else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
-      srcRaw = 8 + c9x.srcRaw.index;
+      srcRaw = 9 + c9x.srcRaw.index;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
-      srcRaw = 12;
-    }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 13;
     }
+    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+      srcRaw = 14;
+    }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 13 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
+      srcRaw = 14 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
-      srcRaw = 14+9+O9X_ARM_NUM_CSW + c9x.srcRaw.index;
+      srcRaw = 15+9+O9X_ARM_NUM_CSW + c9x.srcRaw.index;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
-      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC + c9x.srcRaw.index;
+      srcRaw = 15+9+O9X_ARM_NUM_CSW+NUM_CYC + c9x.srcRaw.index;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
-      srcRaw = 14+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM + c9x.srcRaw.index;
+      srcRaw = 15+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM + c9x.srcRaw.index;
     }
     weight = c9x.weight;
     if (c9x.curve==0) {
@@ -1109,26 +1112,29 @@ t_Open9xArmMixData_v212::operator MixData ()
     else if (srcRaw <= 7) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
     }
-    else if (srcRaw <= 11) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-8);
+    else if (srcRaw <= 8) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_ROTARY_ENCODER, srcRaw-8);
     }
-    else if (srcRaw == 12) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    else if (srcRaw <= 12) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_TRIM, srcRaw-9);
     }
     else if (srcRaw == 13) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    else if (srcRaw == 14) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
-    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-13).toValue());
+    else if (srcRaw <= 14+9+O9X_ARM_NUM_CSW) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-14).toValue());
     }
-    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-14-9-O9X_ARM_NUM_CSW);
+    else if (srcRaw <= 14+9+O9X_ARM_NUM_CSW+NUM_CYC) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-15-9-O9X_ARM_NUM_CSW);
     }
-    else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC);
+    else if (srcRaw <= 14+9+O9X_ARM_NUM_CSW+NUM_CYC+NUM_PPM) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-15-9-O9X_ARM_NUM_CSW-NUM_CYC);
     }
     else {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-14-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
+      c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-15-9-O9X_ARM_NUM_CSW-NUM_CYC-NUM_PPM);
     }
     c9x.weight = weight;
     if (curveMode==0) {
