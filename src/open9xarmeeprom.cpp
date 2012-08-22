@@ -1232,6 +1232,9 @@ t_Open9xArmFuncSwData_v208::t_Open9xArmFuncSwData_v208(FuncSwData &c9x)
     param |=(c9x.enabled & 0x01);
   } else {
     param = c9x.param;
+    if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && param > 7) {
+      param-=-2;
+    }
   }
   func = c9x.func;  
 }
@@ -1245,6 +1248,9 @@ t_Open9xArmFuncSwData_v208::operator FuncSwData ()
     c9x.enabled=param & 0x01;
     c9x.param = (param>>1)<<1;
   } else {
+    if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && param > 7) {
+      param+=2;
+    } 
     c9x.param = param;
   }
   return c9x;
@@ -1261,6 +1267,9 @@ t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
   else {
     if (c9x.func != FuncPlayPrompt) {
      value = c9x.param;
+     if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
+       value-=2;
+     }
      *((uint32_t *)param) = value;
     } else {
      memcpy(param,c9x.paramarm, sizeof(param));
@@ -1281,7 +1290,10 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
   }
   else {
     if (c9x.func != FuncPlayPrompt) {
-     c9x.param = value;
+      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
+        value+=2;
+      } 
+      c9x.param = value;
     } else {
      memcpy(c9x.paramarm,param, sizeof(c9x.paramarm));
     }
@@ -1301,6 +1313,9 @@ t_Open9xArmFuncSwData_v211::t_Open9xArmFuncSwData_v211(FuncSwData &c9x)
   else {
     if (c9x.func != FuncPlayPrompt) {
      value = c9x.param;
+     if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
+       value--;
+     }
      *((uint32_t *)param) = value;
     } else {
      memcpy(param,c9x.paramarm, sizeof(param));
@@ -1322,6 +1337,9 @@ t_Open9xArmFuncSwData_v211::operator FuncSwData ()
   else {
     if (c9x.func != FuncPlayPrompt) {
       c9x.param = value;
+      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
+        c9x.param++;
+      } 
     }
     else {
       memcpy(c9x.paramarm, param, sizeof(c9x.paramarm));
@@ -2346,7 +2364,7 @@ t_Open9xArmModelData_v212::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_212 3251
+#define MODEL_DATA_SIZE_212 3155
 t_Open9xArmModelData_v212::t_Open9xArmModelData_v212(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_212) {

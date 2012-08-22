@@ -108,12 +108,12 @@ QString FuncParam(uint function, unsigned int value) {
       item = RawSource(SOURCE_TYPE_STICK, i);
       qs.append(item.toString());
     }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
+    for (int i=0; i<2; i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
       qs.append(item.toString());
     }
-    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
       qs.append(item.toString());
     }
     item = RawSource(SOURCE_TYPE_MAX);
@@ -136,7 +136,45 @@ QString FuncParam(uint function, unsigned int value) {
       qs.append(item.toString());
     }
     return qs.at(value);
+  } else if (function==FuncPlayValue) {
+    RawSource item;
+    for (int i=0; i<7; i++) {
+      item = RawSource(SOURCE_TYPE_STICK, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<2; i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
+      qs.append(item.toString());
+    }
+    item = RawSource(SOURCE_TYPE_MAX);
+    qs.append(item.toString());
+
+    item = RawSource(SOURCE_TYPE_3POS);
+    qs.append(item.toString());
+
+    for (int i=0; i<NUM_CYC; i++) {
+      item = RawSource(SOURCE_TYPE_CYC, i);
+      qs.append(item.toString());
+    }
+
+    for (int i=0; i<NUM_PPM; i++) {
+      item = RawSource(SOURCE_TYPE_PPM, i);
+      qs.append(item.toString());
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+      item = RawSource(SOURCE_TYPE_CH, i);
+      qs.append(item.toString());
+    } 
+    for (int i = 1; i < 36; i++) {
+      qs.append(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
+    }
+    return qs.at(value);
   }
+
   return "";
 }
 
@@ -162,14 +200,19 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
+    for (int i=0; i<2; i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
       b->addItem(item.toString(), item.toValue());
+      if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
+        QModelIndex index = b->model()->index(count, 0);
+        QVariant v(0);
+        b->model()->setData(index, v, Qt::UserRole - 1);        
+      }
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
-    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    for (int i=0; i<4; i++) {
+      item = RawSource(SOURCE_TYPE_TRIM, i);
       b->addItem(item.toString(), item.toValue());
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
@@ -213,20 +256,22 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
+    for (int i=0; i<2; i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      b->addItem(item.toString(), item.toValue());
+      if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
+        QModelIndex index = b->model()->index(count, 0);
+        QVariant v(0);
+        b->model()->setData(index, v, Qt::UserRole - 1);
+      }
+      if (count==value) b->setCurrentIndex(b->count()-1);
+      count++;
+    }
     for (int i=0; i<4; i++) {
       item = RawSource(SOURCE_TYPE_TRIM, i);
       b->addItem(item.toString(), item.toValue());
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
-    }
-    // ugly fix for ersky9x board still not supporting REa as source
-    if(GetEepromInterface()->getCapability(RotaryEncoders)>1) {
-      for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
-        item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-        b->addItem(item.toString(), item.toValue());
-        if (count==value) b->setCurrentIndex(b->count()-1);
-        count++;
-      }
     }
     item = RawSource(SOURCE_TYPE_MAX);
     b->addItem(item.toString(), item.toValue());
