@@ -250,6 +250,9 @@ double RawSource::getOffset(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
+      case 0:
+      case 1:
+        return 0;
       case 2:
       case 3:
         if (Model.frsky.channels[index-2].type==0) {
@@ -257,9 +260,6 @@ double RawSource::getOffset(const ModelData & Model)
         } else {
           return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
         }
-      case 0:
-      case 1:
-        return 0;
       case 4:
         return 512;
       case 5:
