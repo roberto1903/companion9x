@@ -322,9 +322,14 @@ bool MdiChild::saveAs()
 
 bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 {
-    QFile file(fileName);
+    QString myFile;
+    myFile=fileName;
+    if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
+      myFile.replace(".eepe",".bin");
+    }
+    QFile file(myFile);
 
-    int fileType = getFileType(fileName);
+    int fileType = getFileType(myFile);
 
     uint8_t *eeprom = (uint8_t*)malloc(GetEepromInterface()->getEEpromSize());
     int eeprom_size = 0;
@@ -332,13 +337,13 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     if (fileType != FILE_TYPE_XML) {
       eeprom_size = GetEepromInterface()->save(eeprom, radioData);
       if (!eeprom_size) {
-        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(myFile).arg(file.errorString()));
         return false;
       }
     }
 
     if (!file.open(fileType == FILE_TYPE_BIN ? QIODevice::WriteOnly : (QIODevice::WriteOnly | QIODevice::Text))) {
-      QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+      QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(myFile).arg(file.errorString()));
       return false;
     }
 
@@ -346,7 +351,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 
     if (fileType==FILE_TYPE_XML) {
       if (!XmlInterface(outputStream).save(radioData)) {
-        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(myFile).arg(file.errorString()));
         file.close();
         return false;
       }
@@ -356,7 +361,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
         outputStream << EEPE_EEPROM_FILE_HEADER << "\n";
 
       if (!HexInterface(outputStream).save(eeprom, eeprom_size)) {
-          QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
+          QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(myFile).arg(file.errorString()));
           file.close();
           return false;
       }
@@ -365,18 +370,18 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     {
       long result = file.write((char*)eeprom, eeprom_size);
       if(result!=eeprom_size) {
-        QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(myFile).arg(file.errorString()));
         return false;
       }
     }
     else {
-      QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(fileName).arg("Unknown format"));
+      QMessageBox::warning(this, tr("Error"),tr("Error writing file %1:\n%2.").arg(myFile).arg("Unknown format"));
       return false;
     }
 
     free(eeprom); // TODO free in all cases ...
     file.close();
-    if(setCurrent) setCurrentFile(fileName);
+    if(setCurrent) setCurrentFile(myFile);
 
     return true;
 }
