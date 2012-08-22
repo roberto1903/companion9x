@@ -1125,7 +1125,7 @@ void ModelEdit::tabCurves()
         count++;
     }
     for (int i=0; i< GetEepromInterface()->getCapability(NumCurves9); i++) {
-        g_model.curves[count].count=5;
+        g_model.curves[count].count=9;
         g_model.curves[count].custom=false;
         count++;
     }
@@ -4171,7 +4171,7 @@ void ModelEdit::clearCurves(bool ask)
         count++;
     }
     for (int j=0; j< GetEepromInterface()->getCapability(NumCurves9); j++) {
-        g_model.curves[count].count=5;
+        g_model.curves[count].count=9;
         g_model.curves[count].custom=false;
         for (int i=0; i<17; i++) {
           g_model.curves[count].points[i].x=0;
