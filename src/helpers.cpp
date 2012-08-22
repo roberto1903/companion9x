@@ -572,17 +572,23 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
+  for (int i=0; i<2; i++) {
+    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    b->addItem(item.toString(), item.toValue());
+    if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
+      QModelIndex index = b->model()->index(8+i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);        
+    }
+    if (item == source)
+      b->setCurrentIndex(b->count()-1);
+  }
   if (flags & POPULATE_TRIMS) {
     for (int i=0; i<4; i++) {
       item = RawSource(SOURCE_TYPE_TRIM, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
-  }
-  for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
-    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == source) b->setCurrentIndex(b->count()-1);
   }
   item = RawSource(SOURCE_TYPE_MAX);
   b->addItem(item.toString(), item.toValue());
