@@ -1172,11 +1172,15 @@ void compareDialog::printFSwitches()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
   str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr>");
-  str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
+  str.append("<td width=\"19%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Param")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Enable")+"</b></td>");
   str.append("<td width=\"10%\">&nbsp;</td>");
-  str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
+  str.append("<td width=\"19%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Param")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Enable")+"</b></td>");
   str.append("</tr>");
   for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
   {
@@ -1192,6 +1196,12 @@ void compareDialog::printFSwitches()
       if (g_model1->funcSw[i].swtch.type) {
         str.append(doTC(g_model1->funcSw[i].swtch.toString(),color1));
         str.append(doTC(getFuncName(g_model1->funcSw[i].func),color1));
+        str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param),color1));        
+        if (g_model1->funcSw[i].func<=FuncInstantTrim) {
+          str.append(doTC((g_model1->funcSw[i].enabled ? "ON" : "OFF"),color1));
+        } else {
+          str.append(doTC( "---",color1));
+        }
       } else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
@@ -1199,6 +1209,12 @@ void compareDialog::printFSwitches()
       if (g_model2->funcSw[i].swtch.type) {
         str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
+        str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param),color2));        
+        if (g_model2->funcSw[i].func<=FuncInstantTrim) {
+          str.append(doTC((g_model2->funcSw[i].enabled ? "ON" : "OFF"),color2));
+        } else {
+          str.append(doTC( "---",color2));
+        }
       }
       else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");

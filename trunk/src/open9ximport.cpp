@@ -17,6 +17,7 @@
 #define CURVES
 #define XCURVES
 #define BOLD_FONT
+#define VOICE
 #define PPM_CENTER_ADJUSTABLE YES
 #define PPM_LIMITS_SYMETRICAL YES
 
@@ -47,7 +48,9 @@ namespace Open9x {
 #include "../open9x/frsky.cpp"
 #include "../open9x/templates.cpp"
 #include "../open9x/translations.cpp"
+#include "../open9x/stock/voice.cpp"
 #include "../open9x/beeper.cpp"
+#include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];

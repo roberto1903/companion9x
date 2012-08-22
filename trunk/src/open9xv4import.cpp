@@ -18,6 +18,7 @@
 #define CURVES
 #define SCURVES
 #define BOLD_FONT
+#define VOICE
 
 #undef min
 #undef max
@@ -30,6 +31,7 @@
 
 namespace Open9xV4 {
 #include "../open9x/board_gruvin9x.cpp"
+
 #include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_avr.cpp"
@@ -45,7 +47,9 @@ namespace Open9xV4 {
 #include "../open9x/templates.cpp"
 #include "../open9x/translations.cpp"
 #include "../open9x/stock/audio.cpp"
+#include "../open9x/gruvin9x/somo14d.cpp"
 #include "../open9x/frsky.cpp"
+#include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
 int16_t g_anas[NUM_STICKS+NUM_POTS];

@@ -907,7 +907,7 @@ void printDialog::printFSwitches()
           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
           str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
           str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param),"green"));
-          if (g_model->funcSw[i].func<=FuncSafetyCh16) {
+          if (g_model->funcSw[i].func<=FuncInstantTrim) {
             str.append(doTC((g_model->funcSw[i].enabled ? "ON" : "OFF"),"green"));
           } else {
             str.append(doTC( "---","green"));
