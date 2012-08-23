@@ -576,7 +576,7 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(3)-1, trim3Use, trim3, trim3Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(4)-1, trim4Use, trim4, trim4Slider);
 
-  QString labels[] = { tr("RUD"), tr("ELE"), tr("THR"), tr("AIL") };
+  QString labels[] = { tr("Rud"), tr("Ele"), tr("Thr"), tr("Ail") };
   if (trim1Label) {
     trim1Label->setText(labels[CONVERT_MODE(1)-1]);
     trim2Label->setText(labels[CONVERT_MODE(2)-1]);
