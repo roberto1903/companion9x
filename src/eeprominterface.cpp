@@ -608,6 +608,7 @@ void RegisterFirmwares()
   open9x->addOption("potscroll");
   open9x->addOption("sp22");
   open9x->addOption("autoswitch");
+  open9x->addOption("dblkeys");
   open9x->addOption("nographics");
   open9x->addOption("nobold");
   open9x->addOption("pgbar");
@@ -629,6 +630,7 @@ void RegisterFirmwares()
   open9x->addOption("voice");
   open9x->addOption("ppmca");
   open9x->addOption("autoswitch");
+  open9x->addOption("dblkeys");
   open9x->addOption("nographics");
   open9x->addOption("nobold");
   open9x->addOption("pgbar");
@@ -647,6 +649,7 @@ void RegisterFirmwares()
   open9x->addOption("nofp");
   open9x->addOption("nocurves");
   open9x->addOption("autoswitch");
+  open9x->addOption("dblkeys");
   open9x->addOption("nographics");
   open9x->addOption("nobold");
   open9x->addOption("imperial");
