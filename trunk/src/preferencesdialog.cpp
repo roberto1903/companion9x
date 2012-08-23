@@ -357,6 +357,7 @@ const char * options[]={
         "ppmca",
         "potscroll",
         "autoswitch",
+        "dblkeys"
         "pgbar",
         "imperial",
         "speaker",
@@ -385,6 +386,7 @@ const char * options[]={
         tr("PPM center adjustment in limits"),
         tr("Pots use in menus navigation"),
         tr("In model setup menus automatically set switch by moving some of them"),
+        tr("Enable resetting values by pressing up and down at the same time"),
         tr("EEprom write Progress bar"),
         tr("Imperial units"),
         tr("Support for radio modified with regular speaker"),
