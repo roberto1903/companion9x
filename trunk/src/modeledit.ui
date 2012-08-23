@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -1193,7 +1193,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>8</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -1319,11 +1319,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14c">
+                <layout class="QGridLayout" name="gridLayout_14c" columnminimumwidth="80,0">
                  <item row="4" column="0">
                   <widget class="QLabel" name="phase0Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1366,6 +1369,9 @@
                   <widget class="QLabel" name="phase0Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1433,11 +1439,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15c">
+                <layout class="QGridLayout" name="gridLayout_15c" columnminimumwidth="80,0">
                  <item row="4" column="0">
                   <widget class="QLabel" name="phase0Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1467,6 +1476,9 @@
                   <widget class="QLabel" name="phase0Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1672,11 +1684,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14e_2" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14e_2" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase1Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1684,6 +1699,9 @@
                   <widget class="QLabel" name="phase1Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1788,11 +1806,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15e_2" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15e_2" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase1Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1800,6 +1821,9 @@
                   <widget class="QLabel" name="phase1Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2029,11 +2053,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14e" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14e" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase2Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2041,6 +2068,9 @@
                   <widget class="QLabel" name="phase2Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2145,11 +2175,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15e" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15e" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase2Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2157,6 +2190,9 @@
                   <widget class="QLabel" name="phase2Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2386,11 +2422,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14a" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14a" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase3Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2398,6 +2437,9 @@
                   <widget class="QLabel" name="phase3Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2502,11 +2544,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15a" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15a" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase3Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2514,6 +2559,9 @@
                   <widget class="QLabel" name="phase3Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2743,11 +2791,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14b" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14b" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase4Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2755,6 +2806,9 @@
                   <widget class="QLabel" name="phase4Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2859,11 +2913,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15b" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15b" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase4Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2871,6 +2928,9 @@
                   <widget class="QLabel" name="phase4Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3100,11 +3160,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14b_3" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14b_3" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase5Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3112,6 +3175,9 @@
                   <widget class="QLabel" name="phase5Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3216,11 +3282,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15b_3" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15b_3" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase5Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3228,6 +3297,9 @@
                   <widget class="QLabel" name="phase5Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3457,11 +3529,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14b_4" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14b_4" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase6Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3469,6 +3544,9 @@
                   <widget class="QLabel" name="phase6Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3573,11 +3651,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15b_4" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15b_4" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase6Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3585,6 +3666,9 @@
                   <widget class="QLabel" name="phase6Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3814,11 +3898,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14b_5" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14b_5" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase7Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3826,6 +3913,9 @@
                   <widget class="QLabel" name="phase7Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3930,11 +4020,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15b_5" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15b_5" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase7Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -3942,6 +4035,9 @@
                   <widget class="QLabel" name="phase7Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -4171,11 +4267,14 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <layout class="QGridLayout" name="gridLayout_14b_6" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_14b_6" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase8Trim1Label">
                    <property name="text">
                     <string>trim1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -4183,6 +4282,9 @@
                   <widget class="QLabel" name="phase8Trim2Label">
                    <property name="text">
                     <string>trim2</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -4287,11 +4389,14 @@
                 </layout>
                </item>
                <item row="0" column="2">
-                <layout class="QGridLayout" name="gridLayout_15b_6" columnstretch="0,1">
+                <layout class="QGridLayout" name="gridLayout_15b_6" columnstretch="0,1" columnminimumwidth="80,0">
                  <item row="1" column="0">
                   <widget class="QLabel" name="phase8Trim4Label">
                    <property name="text">
                     <string>trim4</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -4299,6 +4404,9 @@
                   <widget class="QLabel" name="phase8Trim3Label">
                    <property name="text">
                     <string>trim3</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -7880,8 +7988,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>860</width>
+            <height>552</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12798,8 +12906,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>860</width>
+            <height>581</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

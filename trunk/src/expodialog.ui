@@ -339,8 +339,11 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="curvesCB">
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="whatsThis">
-        <string>The curve used by the mix</string>
+        <string>The curve used by the expo</string>
        </property>
       </widget>
      </item>
