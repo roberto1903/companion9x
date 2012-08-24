@@ -672,6 +672,20 @@ void ModelEdit::tabPhases()
     ui->phase0FadeIn->setDisabled(true);
     ui->phase0FadeOut->setDisabled(true);
   }
+  for (int i=0; i < phases; i++) {
+    QString PhaseName=g_model.phaseData[i].name;
+    QString TabName;
+    if (i==0) { 
+      TabName.append(QObject::tr("Flight Phase 0 (Default)"));
+    } else {
+      TabName.append(QObject::tr("FP %1").arg(i));
+    }
+    if (!PhaseName.isEmpty()) {
+      TabName.append(" - ");
+      TabName.append(PhaseName);
+    }
+    ui->phases->setTabText(i,TabName);
+  }
   ui->phases->setCurrentIndex(0);
   phasesLock = false;
 }
@@ -2130,6 +2144,19 @@ void ModelEdit::phaseName_editingFinished()
 {
   QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
   int phase = lineEdit->objectName().mid(5,1).toInt();
+  QString PhaseName=lineEdit->text();
+  QString TabName;
+  if (phase==0) { 
+    TabName.append(QObject::tr("Flight Phase 0 (Default)"));
+  } else {
+    TabName.append(QObject::tr("FP %1").arg(phase));
+  }
+  
+  if (!PhaseName.isEmpty()) {
+    TabName.append(" - ");
+    TabName.append(PhaseName);
+  }
+  ui->phases->setTabText(phase,TabName);  
   strncpy(g_model.phaseData[phase].name, lineEdit->text().toAscii(), 6);
   updateSettings();
 }
