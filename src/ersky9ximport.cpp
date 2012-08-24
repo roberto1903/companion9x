@@ -35,6 +35,7 @@ namespace Ersky9x {
 #include "../ersky9x/frsky.cpp"
 #include "../ersky9x/audio.cpp"
 #include "../ersky9x/sound.cpp"
+#include "../ersky9x/diskio.cpp"
 
 //uint8_t pxxFlag = 0;
 int16_t g_anas[7];
