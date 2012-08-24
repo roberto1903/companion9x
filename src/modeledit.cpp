@@ -681,8 +681,9 @@ void ModelEdit::tabPhases()
       TabName.append(QObject::tr("FP %1").arg(i));
     }
     if (!PhaseName.isEmpty()) {
-      TabName.append(" - ");
+      TabName.append(" (");
       TabName.append(PhaseName);
+      TabName.append(")");
     }
     ui->phases->setTabText(i,TabName);
   }
@@ -2153,8 +2154,9 @@ void ModelEdit::phaseName_editingFinished()
   }
   
   if (!PhaseName.isEmpty()) {
-    TabName.append(" - ");
+    TabName.append(" (");
     TabName.append(PhaseName);
+    TabName.append(")");
   }
   ui->phases->setTabText(phase,TabName);  
   strncpy(g_model.phaseData[phase].name, lineEdit->text().toAscii(), 6);
