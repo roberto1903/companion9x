@@ -4273,7 +4273,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="27"/>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="27"/>
@@ -4308,32 +4308,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Trainer</source>
-        <translation type="unfinished">Maestro/Allievo</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Trainer RUD</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Trainer ELE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Trainer THR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Trainer AIL</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="62"/>
         <source>Instant Trim</source>
-        <translation type="unfinished">Trim Istantanei</translation>
+        <translation>Trim Istantanei</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="63"/>
@@ -4384,13 +4384,13 @@ p, li { white-space: pre-wrap; }
         <location filename="helpers.cpp" line="102"/>
         <location filename="helpers.cpp" line="192"/>
         <source>All</source>
-        <translation type="unfinished">Tutti</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="103"/>
         <location filename="helpers.cpp" line="193"/>
         <source>Telemetry</source>
-        <translation type="unfinished">Telemetria</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="324"/>
@@ -4405,12 +4405,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="helpers.cpp" line="341"/>
         <source>Diff</source>
-        <translation type="unfinished">Diff</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="357"/>
         <source>Expo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="396"/>
@@ -4442,52 +4442,52 @@ p, li { white-space: pre-wrap; }
         <location filename="eeprominterface.cpp" line="462"/>
         <location filename="helpers.cpp" line="328"/>
         <source>----</source>
-        <translation type="unfinished">----</translation>
+        <translation>----</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="418"/>
         <source>RUD</source>
-        <translation type="unfinished">RUD</translation>
+        <translation>RUD</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="418"/>
         <source>ELE</source>
-        <translation type="unfinished">ELE</translation>
+        <translation>ELE</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="418"/>
         <source>THR</source>
-        <translation type="unfinished">THR</translation>
+        <translation>THR</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="420"/>
         <source>AIL</source>
-        <translation type="unfinished">AIL</translation>
+        <translation>AIL</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="371"/>
         <source>P1</source>
-        <translation type="unfinished">P1</translation>
+        <translation>P1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="371"/>
         <source>P2</source>
-        <translation type="unfinished">P2</translation>
+        <translation>P2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="371"/>
         <source>P3</source>
-        <translation type="unfinished">P3</translation>
+        <translation>P3</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="376"/>
         <source>REa</source>
-        <translation type="unfinished">REa</translation>
+        <translation>REa</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="376"/>
         <source>REb</source>
-        <translation type="unfinished">REb</translation>
+        <translation>REb</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="378"/>
@@ -4502,7 +4502,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="378"/>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="379"/>
@@ -4517,7 +4517,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="379"/>
         <source>GPS Alt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="379"/>
@@ -4532,22 +4532,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="370"/>
         <source>Rud</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="370"/>
         <source>Ele</source>
-        <translation type="unfinished">Elevatore</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="370"/>
         <source>Thr</source>
-        <translation type="unfinished">Motore</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="370"/>
         <source>Ail</source>
-        <translation type="unfinished">Alettoni</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="393"/>
@@ -4558,13 +4558,13 @@ p, li { white-space: pre-wrap; }
         <location filename="helpers.cpp" line="100"/>
         <location filename="helpers.cpp" line="190"/>
         <source>Timer1</source>
-        <translation>Tempo1</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="101"/>
         <location filename="helpers.cpp" line="191"/>
         <source>Timer2</source>
-        <translation>Tempo2</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="378"/>
@@ -4784,12 +4784,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="374"/>
         <source>TrmR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="374"/>
         <source>TrmE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="374"/>
@@ -4799,7 +4799,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="374"/>
         <source>TrmA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="379"/>
@@ -4844,7 +4844,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="380"/>
         <source>HDG </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="380"/>
@@ -4854,12 +4854,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="380"/>
         <source>A1-</source>
-        <translation type="unfinished">A1-</translation>
+        <translation>A1-</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="381"/>
         <source>A2-</source>
-        <translation type="unfinished">A2-</translation>
+        <translation>A2-</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="381"/>
@@ -4909,7 +4909,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="382"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="397"/>
@@ -4929,32 +4929,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="eeprominterface.cpp" line="403"/>
         <source>Timer%1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="419"/>
         <source>ID0</source>
-        <translation type="unfinished">ID0</translation>
+        <translation>ID0</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="419"/>
         <source>ID1</source>
-        <translation type="unfinished">ID1</translation>
+        <translation>ID1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="419"/>
         <source>ID2</source>
-        <translation type="unfinished">ID2</translation>
+        <translation>ID2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="420"/>
         <source>GEA</source>
-        <translation type="unfinished">GEA</translation>
+        <translation>GEA</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="420"/>
         <source>TRN</source>
-        <translation type="unfinished">TRN</translation>
+        <translation>TRN</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="435"/>
@@ -4968,7 +4968,7 @@ p, li { white-space: pre-wrap; }
         <location filename="eeprominterface.cpp" line="440"/>
         <location filename="helpers.cpp" line="457"/>
         <source>ON</source>
-        <translation type="unfinished">Acceso</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="442"/>
@@ -4979,7 +4979,7 @@ p, li { white-space: pre-wrap; }
         <location filename="eeprominterface.cpp" line="444"/>
         <location filename="helpers.cpp" line="457"/>
         <source>OFF</source>
-        <translation type="unfinished">Spento</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="586"/>
@@ -7073,7 +7073,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1080"/>
         <location filename="modelconfigdialog.ui" line="1139"/>
         <source>CH01</source>
-        <translation type="unfinished">CH01</translation>
+        <translation>CH01</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="763"/>
@@ -7084,7 +7084,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1085"/>
         <location filename="modelconfigdialog.ui" line="1144"/>
         <source>CH02</source>
-        <translation type="unfinished">CH02</translation>
+        <translation>CH02</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="768"/>
@@ -7095,7 +7095,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1090"/>
         <location filename="modelconfigdialog.ui" line="1149"/>
         <source>CH03</source>
-        <translation type="unfinished">CH03</translation>
+        <translation>CH03</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="773"/>
@@ -7106,7 +7106,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1095"/>
         <location filename="modelconfigdialog.ui" line="1154"/>
         <source>CH04</source>
-        <translation type="unfinished">CH04</translation>
+        <translation>CH04</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="778"/>
@@ -7117,7 +7117,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1100"/>
         <location filename="modelconfigdialog.ui" line="1159"/>
         <source>CH05</source>
-        <translation type="unfinished">CH05</translation>
+        <translation>CH05</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="783"/>
@@ -7128,7 +7128,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1105"/>
         <location filename="modelconfigdialog.ui" line="1164"/>
         <source>CH06</source>
-        <translation type="unfinished">CH06</translation>
+        <translation>CH06</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="788"/>
@@ -7139,7 +7139,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1110"/>
         <location filename="modelconfigdialog.ui" line="1169"/>
         <source>CH07</source>
-        <translation type="unfinished">CH07</translation>
+        <translation>CH07</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="793"/>
@@ -7150,7 +7150,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1115"/>
         <location filename="modelconfigdialog.ui" line="1174"/>
         <source>CH08</source>
-        <translation type="unfinished">CH08</translation>
+        <translation>CH08</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="798"/>
@@ -7161,7 +7161,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1120"/>
         <location filename="modelconfigdialog.ui" line="1179"/>
         <source>CH09</source>
-        <translation type="unfinished">CH09</translation>
+        <translation>CH09</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="803"/>
@@ -7172,7 +7172,7 @@ Premere annulla per cancellare l&apos;operazione</translation>
         <location filename="modelconfigdialog.ui" line="1125"/>
         <location filename="modelconfigdialog.ui" line="1184"/>
         <source>CH10</source>
-        <translation type="unfinished">CH10</translation>
+        <translation>CH10</translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="811"/>
