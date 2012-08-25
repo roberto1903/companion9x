@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <algorithm>
+#include "helpers.h"
 #include "open9xeeprom.h"
 #include <QObject>
 #include <QMessageBox>

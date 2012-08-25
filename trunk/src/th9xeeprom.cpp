@@ -1,4 +1,5 @@
 #include <algorithm>
+#include "helpers.h"
 #include "th9xeeprom.h"
 
 int8_t th9xFromSwitch(const RawSwitch & sw)

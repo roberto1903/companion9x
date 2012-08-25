@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "er9xeeprom.h"
+#include "helpers.h"
 #include <QObject>
 
 int8_t er9xFromSwitch(const RawSwitch & sw)
