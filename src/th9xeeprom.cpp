@@ -298,6 +298,13 @@ t_Th9xCustomSwData::t_Th9xCustomSwData(CustomSwData &c9x)
     val1 = th9xFromSwitch(RawSwitch(c9x.val1));
     val2 = th9xFromSwitch(RawSwitch(c9x.val2));
   }
+
+  if (opCmp>TH9X_MAX_CSFUNC ) {
+    EEPROMWarnings += ::QObject::tr("th9x does not support Custom Switch function %1").arg(getFuncName(opCmp)) + "\n";
+    opCmp=0;
+    val1=0;
+    val2=0;
+  }    
 }
 
 t_Th9xCustomSwData::operator CustomSwData ()

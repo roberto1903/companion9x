@@ -27,6 +27,8 @@
 #define O9X_ARM_NUM_FSW     32 // number of functions assigned to switches
 #define O9X_ARM_MAX_CURVES  16
 #define O9X_ARM_NUM_POINTS  512
+#define O9X_ARM_MAX_CSFUNCOLD 13
+#define O9X_ARM_MAX_CSFUNC 15
 
 PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   myVers;

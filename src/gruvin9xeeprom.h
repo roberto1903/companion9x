@@ -18,6 +18,7 @@
 
 #include <inttypes.h>
 #include "eeprominterface.h"
+#define GR9X_MAX_CSFUNC 13
 
 PACK(typedef struct t_Gruvin9xTrainerMix_v103 {
   uint8_t srcChn:3; //0-7 = ch1-8

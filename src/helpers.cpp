@@ -652,7 +652,14 @@ QString getCSWFunc(int val)
 
 void populateCSWCB(QComboBox *b, int value) {
   b->clear();
-  for (int i = 0; i < CSW_NUM_FUNC; i++) b->addItem(getCSWFunc(i));
+  for (int i = 0; i < CSW_NUM_FUNC; i++) {
+    b->addItem(getCSWFunc(i));
+    if (i>GetEepromInterface()->getCapability(CSFunc)) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);
+    }
+  }
   b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
 }

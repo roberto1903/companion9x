@@ -409,6 +409,13 @@ t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
     v1 = er9xFromSwitch(RawSwitch(c9x.val1));
     v2 = er9xFromSwitch(RawSwitch(c9x.val2));
   }
+
+  if (func>ERSKY9X_MAX_CSFUNC ) {
+    EEPROMWarnings += ::QObject::tr("ersky9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }
 }
 
 Ersky9xCustomSwData::operator CustomSwData ()

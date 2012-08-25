@@ -161,9 +161,9 @@ enum EnumKeys {
 #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
 #define CURVE_BASE   7
-#define CSWITCH_STR  "----   v>ofs  v<ofs  |v|>ofs|v|<ofsAND    OR     XOR    ""v1==v2 ""v1!=v2 ""v1>v2  ""v1<v2  ""v1>=v2 ""v1<=v2 "
-#define CSW_NUM_FUNC 14
-#define CSW_LEN_FUNC 7
+#define CSWITCH_STR  "----    v>ofs   v<ofs   |v|>ofs |v|<ofs AND     OR      XOR     ""v1==v2  ""v1!=v2  ""v1>v2   ""v1<v2   ""v1>=v2  ""v1<=v2  ""d>=ofs  ""|d|>=ofs"
+#define CSW_NUM_FUNC 16
+#define CSW_LEN_FUNC 8
 
 // TODO enum here!
 #define CS_OFF       0
@@ -180,12 +180,14 @@ enum EnumKeys {
 #define CS_LESS      11
 #define CS_EGREATER  12
 #define CS_ELESS     13
-#define CS_MAXF      13  //max function
+#define CS_DPOS      14  //v>offset
+#define CS_DAPOS    15  //|v|>offset
+#define CS_MAXF      15  //max function
 
 #define CS_VOFS       0
 #define CS_VBOOL      1
 #define CS_VCOMP      2
-#define CS_STATE(x)   ((x)<CS_AND ? CS_VOFS : ((x)<CS_EQUAL ? CS_VBOOL : CS_VCOMP))
+#define CS_STATE(x)   (((x)<CS_AND || (x)>CS_ELESS) ? CS_VOFS : ((x)<CS_EQUAL ? CS_VBOOL : CS_VCOMP))
 
 #define CHAR_FOR_NAMES " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-."
 #define CHAR_FOR_NAMES_REGEX "[ A-Za-z0-9_.-,]*"
@@ -795,6 +797,7 @@ enum Capability {
  PerModelThrottleWarning,
  SlowScale,
  HasSDLogs,
+ CSFunc,
 };
 
 enum UseContext {

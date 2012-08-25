@@ -427,7 +427,7 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
   func = c9x.func;
   v1 = c9x.val1;
   v2 = c9x.val2;
-
+  
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     v1 = er9xFromSource(RawSource(c9x.val1));
   }
@@ -440,7 +440,13 @@ t_Er9xCustomSwData::t_Er9xCustomSwData(CustomSwData &c9x)
     v1 = er9xFromSwitch(RawSwitch(c9x.val1));
     v2 = er9xFromSwitch(RawSwitch(c9x.val2));
   }
-
+  
+  if (func>ER9X_MAX_CSFUNC ) {
+    EEPROMWarnings += ::QObject::tr("er9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }
 }
 
 Er9xCustomSwData::operator CustomSwData ()
@@ -449,7 +455,7 @@ Er9xCustomSwData::operator CustomSwData ()
   c9x.func = func;
   c9x.val1 = v1;
   c9x.val2 = v2;
-
+  
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
     c9x.val1 = er9xToSource(v1).toValue();
   }
