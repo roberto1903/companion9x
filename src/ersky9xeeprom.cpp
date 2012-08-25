@@ -1,4 +1,5 @@
 #include <algorithm>
+#include "helpers.h"
 #include "ersky9xeeprom.h"
 #include <QObject>
 
