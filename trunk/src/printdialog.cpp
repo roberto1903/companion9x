@@ -813,7 +813,7 @@ void printDialog::printSwitches()
             default:
               break;
           }
-          tstr = RawSwitch(g_model->customSw[i].val2).toString();
+          tstr += RawSwitch(g_model->customSw[i].val2).toString();
           break;
         case CS_VCOMP:
           if (g_model->customSw[i].val1)
