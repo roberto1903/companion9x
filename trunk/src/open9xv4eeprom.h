@@ -17,6 +17,9 @@
 #ifndef open9xv4eeprom_h
 #define open9xv4eeprom_h
 
+#define O9X_V4_MAX_CSFUNCOLD 13
+#define O9X_V4_MAX_CSFUNC 15
+
 #include "open9xeeprom.h"
 
 PACK(typedef struct t_Open9xV4PhaseData_v207 {

@@ -1177,6 +1177,13 @@ t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
+  
+  if (func>O9X_ARM_MAX_CSFUNCOLD ) {
+    EEPROMWarnings += ::QObject::tr("This version of open9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }    
 }
 
 t_Open9xArmCustomSwData_v208::operator CustomSwData ()
@@ -1220,6 +1227,13 @@ t_Open9xArmCustomSwData_v209::t_Open9xArmCustomSwData_v209(CustomSwData &c9x)
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
+  
+  if (func>O9X_ARM_MAX_CSFUNCOLD ) {
+    EEPROMWarnings += ::QObject::tr("This version of open9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }    
 }
 
 t_Open9xArmCustomSwData_v209::operator CustomSwData ()

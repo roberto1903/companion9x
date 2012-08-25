@@ -1238,6 +1238,13 @@ t_Open9xCustomSwData_v208::t_Open9xCustomSwData_v208(CustomSwData &c9x)
     v1 = open9xFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xFromSwitch(RawSwitch(c9x.val2));
   }
+
+  if (func>O9X_MAX_CSFUNCOLD ) {
+    EEPROMWarnings += ::QObject::tr("This version of open9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }
 }
 
 Open9xCustomSwData_v208::operator CustomSwData ()

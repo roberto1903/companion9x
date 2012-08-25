@@ -27,6 +27,7 @@
 #define TH9X_MAX_CURVES3  3
 #define TH9X_MAX_CURVES5  2
 #define TH9X_MAX_CURVES9  2
+#define TH9X_MAX_CSFUNC 13
 
 #define MDVERS      6
 

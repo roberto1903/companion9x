@@ -23,6 +23,7 @@
 #define ER9X_MAX_MIXERS  32
 #define ER9X_MAX_CURVE5  8
 #define ER9X_MAX_CURVE9  8
+#define ER9X_MAX_CSFUNC  13
 
 #define MDVERS      10
 

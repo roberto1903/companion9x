@@ -538,6 +538,13 @@ t_Gruvin9xCustomSwData::t_Gruvin9xCustomSwData(CustomSwData &c9x)
     v1 = gruvin9xFromSwitch(RawSwitch(c9x.val1));
     v2 = gruvin9xFromSwitch(RawSwitch(c9x.val2));
   }
+
+  if (func>GR9X_MAX_CSFUNC ) {
+    EEPROMWarnings += ::QObject::tr("gruvin9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }  
 }
 
 Gruvin9xCustomSwData::operator CustomSwData ()
