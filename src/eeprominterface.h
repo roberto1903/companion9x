@@ -180,8 +180,8 @@ enum EnumKeys {
 #define CS_LESS      11
 #define CS_EGREATER  12
 #define CS_ELESS     13
-#define CS_DPOS      14  //v>offset
-#define CS_DAPOS    15  //|v|>offset
+#define CS_DPOS      14  //d>offset
+#define CS_DAPOS     15  //|d|>offset
 #define CS_MAXF      15  //max function
 
 #define CS_VOFS       0
