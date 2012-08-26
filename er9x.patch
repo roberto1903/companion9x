@@ -1,319 +1,89 @@
-Index: er9x/frsky.cpp
+Index: er9x/audio.h
 ===================================================================
---- er9x/frsky.cpp	(revision 762)
-+++ er9x/frsky.cpp	(working copy)
-@@ -327,6 +327,7 @@
-    a second buffer to receive data while one buffer is being processed (slowly).
- */
+--- er9x/audio.h	(revision 771)
++++ er9x/audio.h	(working copy)
+@@ -102,7 +102,11 @@
+ 
+ inline void driver() {
+   if (toneTimeLeft > 0) {	
+-					switch ((g_eeGeneral.speakerMode & 1)){					
++#ifndef SIMU
++					switch ((g_eeGeneral.speakerMode & 1)){
++#else
++					switch(0) {
++#endif
+ 								case 0:
+ 						        	//stock beeper. simply turn port on for x time!
+ 							        if (toneTimeLeft > 0){
+Index: er9x/er9x.cpp
+===================================================================
+--- er9x/er9x.cpp	(revision 771)
++++ er9x/er9x.cpp	(working copy)
+@@ -36,8 +36,11 @@
+ static void checkTHR( void );
+ ///   Pr�ft beim Einschalten ob alle Switches 'off' sind.
+ static void checkSwitches( void );
++
++#ifndef SIMU
+ static void checkQuickSelect( void ); // Quick model select on startup
+ static void getADC_osmp( void ) ;
++#endif
+ 
+ EEGeneral  g_eeGeneral;
+ ModelData  g_model;
+@@ -521,7 +524,6 @@
+ 
+ }
+ 
+-
+ //#define CS_EQUAL     8
+ //#define CS_NEQUAL    9
+ //#define CS_GREATER   10
+@@ -790,6 +792,7 @@
+ 		lcd_putcAtt(FW*2+i*2*FW-i-2, y, g_model.name[i],DBLSIZE);
+ }
  
 +#ifndef SIMU
- ISR(USART0_RX_vect)
+ static void checkQuickSelect()
  {
-   uint8_t stat;
-@@ -424,12 +425,15 @@
- 	cli() ;
-   UCSR0B |= (1 << RXCIE0); // enable Interrupt
- }
-+#endif
- 
- /*
-    USART0 (transmit) Data Register Emtpy ISR
-    Usef to transmit FrSky data packets, which are buffered in frskyTXBuffer. 
- */
- uint8_t frskyTxISRIndex = 0;
-+
-+#ifndef SIMU
- ISR(USART0_UDRE_vect)
- {
-   if (frskyTxBufferCount > 0) 
-@@ -439,6 +443,7 @@
-   } else
-     UCSR0B &= ~(1 << UDRIE0); // disable UDRE0 interrupt
- }
-+#endif
- 
- /******************************************/
- 
-@@ -643,6 +648,9 @@
- 
- #undef BAUD
- #define BAUD 9600
-+
-+#ifndef SIMU
-+
- #include <util/setbaud.h>
- 
-   UBRR0H = UBRRH_VALUE;
-@@ -656,6 +664,8 @@
-   
-   while (UCSR0A & (1 << RXC0)) UDR0; // flush receive buffer
- 
-+#endif
-+
-   // These should be running right from power up on a FrSky enabled '9X.
-   FRSKY_EnableTXD(); // enable FrSky-Telemetry reception
-   FRSKY_EnableRXD(); // enable FrSky-Telemetry reception
-@@ -781,8 +791,10 @@
- 	FrskyBattCells = 0 ;
-   FrskyAlarmSendState |= 0x0F ;
- 	
-+#ifndef SIMU
-   Frsky_current[0].Amp_hour_boundary = 360000L/ g_model.frsky.channels[0].ratio ;
- 	Frsky_current[1].Amp_hour_boundary = 360000L/ g_model.frsky.channels[1].ratio ;
-+#endif
- }
- 
- struct FrSky_Q_t FrSky_Queue ;
-Index: er9x/simpgmspace.h
-===================================================================
---- er9x/simpgmspace.h	(revision 762)
-+++ er9x/simpgmspace.h	(working copy)
-@@ -1,7 +1,12 @@
- /*
-- * Author - Erez Raviv <erezraviv@gmail.com>
-+ * Authors (alphabetical order)
-+ * - Bertrand Songis <bsongis@gmail.com>
-+ * - Bryan J. Rentoul (Gruvin) <gruvin@gmail.com>
-  *
-- * Based on th9x -> http://code.google.com/p/th9x/
-+ * gruvin9x is based on code named er9x by
-+ * Author - Erez Raviv <erezraviv@gmail.com>, which is in turn
-+ * was based on the original (and ongoing) project by Thomas Husterer,
-+ * th9x -- http://code.google.com/p/th9x/
-  *
-  * This program is free software; you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License version 2 as
-@@ -14,10 +19,57 @@
-  *
-  */
- 
-+#ifndef simpgmspace_h
-+#define simpgmspace_h
-+
-+#ifndef __GNUC__
-+#include <windows.h>
-+#define sleep(x) Sleep(x)
-+#else
-+#include <unistd.h>
-+#define sleep(x) usleep(1000*x)
-+#endif
-+
-+#ifdef SIMU_EXCEPTIONS
-+extern char * main_thread_error;
-+#include <stdlib.h>
-+#include <stdio.h>
-+#include <string.h>
-+#include <signal.h>
-+#if defined(WIN32) || !defined(__GNUC__)
-+#define write_backtrace(output)
-+#else
-+#include <execinfo.h>
-+inline void write_backtrace(char *output)
-+{
-+
-+  void *buf[16];
-+  char **s;
-+  int n = backtrace(buf,16);
-+  s = backtrace_symbols(buf, n);
-+  if (s) {
-+    for(int i=0; i<n; i++)
-+      sprintf(output+strlen(output), "%02i: %s\n",i,s[i]);
-+  }
-+}
-+#endif
-+void sig(int sgn);
-+#define assert(x) do { if (!(x)) { main_thread_error = (char *)malloc(2048); sprintf(main_thread_error, "Assert failed, %s:%d: %s\n", __FILE__, __LINE__, #x); write_backtrace(main_thread_error); throw std::exception(); } } while(0)
-+#else
- #include <assert.h>
-+#endif
-+
- #include <inttypes.h>
- #include <stdio.h>
-+#include <pthread.h>
-+#include <semaphore.h>
- 
-+#undef min
-+#undef max
-+
-+#define APM
-+#define PGM_P prog_char *
-+
- typedef unsigned char prog_uchar;
- typedef const char prog_char;
- typedef const uint16_t prog_uint16_t;
-@@ -25,41 +77,114 @@
- typedef const int16_t prog_int16_t;
- typedef const int8_t prog_int8_t;
- 
-+extern sem_t eeprom_write_sem;
- 
-+#define loop_until_bit_is_set( port, bitnum) \
-+  while ( 0/*! ( (port) & (1 << (bitnum)) )*/ ) ;
- 
- #define PROGMEM
- #define pgm_read_byte(address_short) (*(uint8_t*)(address_short))
- #define pgm_read_word(address_short) (*(uint16_t*)(address_short))
--#define pgm_read_adr(address_short) (*(int*)(address_short))
-+#define pgm_read_adr(address_short) *address_short
- #define pgm_read_stringP(adr) ((adr))
- #define PSTR(adr) adr
- #define _delay_us(a)
- #define cli()
- #define sei()
- #define strcpy_P strcpy
-+#define strncpy_P strncpy
- #define memcpy_P memcpy
- 
- #define PORTA dummyport
- #define PORTB portb
--#define PORTC dummyport
-+#define PORTC portc
-+#define PORTD dummyport
-+#define PORTE dummyport
-+#define PORTF dummyport
- #define PORTG dummyport
--#define DDRA   dummyport
--#define DDRB   dummyport
--#define DDRC   dummyport
-+#define PORTH porth
-+#define DDRA  dummyport
-+#define DDRB  dummyport
-+#define DDRC  dummyport
-+#define DDRD  dummyport
-+#define DDRE  dummyport
-+#define DDRF  dummyport
-+#define DDRG  dummyport
- #define PINB  ~pinb
-+#define PINC  ~pinc
- #define PIND  ~pind
- #define PINE  ~pine
- #define PING  ~ping
-+#define PINH  ~pinh
-+#define PINJ  ~pinj
-+#define PINL  ~pinl
- #define EEMEM
- 
--extern unsigned char pinb,pind,pine,ping,portb;
--extern unsigned char dummyport;
--//extern uint16_t anaIn(uint8_t chan);
--//void eeprom_write_block (const void *pointer_ram,
--//                    void *pointer_eeprom,
--//                         size_t size);
-+#define UCSR0B dummyport
-+#define UDRIE0 dummyport
-+#define TXEN0 dummyport
-+#define RXEN0 dummyport
-+#define DDE0 dummyport
-+#define PORTE0 dummyport
-+#define RXCIE0 dummyport
-+#define OCR0A dummyport
-+#define OCR4A dummyport
-+#define OCR1B dummyport16
-+#define TCCR1A dummyport
-+#define COM1B0 dummyport
-+
-+#define SPDR dummyport
-+#define SPSR dummyport
-+#define SPIF dummyport
-+#define SPCR dummyport
-+
-+#define TIMSK  dummyport
-+#define TIMSK1 dummyport
-+
-+#define UDR0 dummyport
-+#define OCIE1A dummyport
-+
-+#define OUT_B_LIGHT   7
-+#define INP_E_ElevDR  2
-+#define INP_E_Trainer 5
-+#define INP_E_Gear    4
-+#define INP_C_ThrCt   6
-+#define INP_C_AileDR  7
-+#define INP_E_ID2     6
-+
-+#define INP_B_KEY_LFT 6
-+#define INP_B_KEY_RGT 5
-+#define INP_B_KEY_UP  4
-+#define INP_B_KEY_DWN 3
-+#define INP_B_KEY_EXT 2
-+#define INP_B_KEY_MEN 1
-+
-+#define INP_P_SPARE6    7
-+#define INP_P_SPARE5    6
-+#define INP_P_KEY_EXT   5
-+#define INP_P_KEY_MEN   4
-+#define INP_P_KEY_LFT   3
-+#define INP_P_KEY_RGT   2
-+#define INP_P_KEY_UP    1
-+#define INP_P_KEY_DWN   0
-+
-+extern volatile unsigned char pinb,pinc,pind,pine,ping,pinh,pinj,pinl;
-+extern uint8_t portb, portc, porth, dummyport;
-+extern uint16_t dummyport16;
-+extern uint8_t main_thread_running;
-+
-+extern void setSwitch(int8_t swtch);
-+
-+void StartMainThread(bool tests=true);
-+void StartEepromThread(const char *filename="eeprom.bin");
-+
-+extern const char *eepromFile;
- void eeprom_read_block (void *pointer_ram,
-                    const void *pointer_eeprom,
-                         size_t size);
-+
-+#undef offsetof
- #define offsetof(st, m) ((size_t) ( (char *)&((st *)(0))->m - (char *)0 ))
- #define wdt_reset()
-+
-+#endif
-Index: er9x/menus.cpp
-===================================================================
---- er9x/menus.cpp	(revision 762)
-+++ er9x/menus.cpp	(working copy)
-@@ -1143,7 +1143,7 @@
- 
-         //write mix names here
-         lcd_outdezNAtt(3*FW, y, k+1, (sub==k ? INVERS : 0) + LEADING0,2);
--        lcd_putsAtt(  4*FW, y, (const prog_char*)pgm_read_word(&n_Templates[k]), (s_noHi ? 0 : (sub==k ? INVERS  : 0)));
-+        lcd_putsAtt(  4*FW, y, n_Templates[k], (s_noHi ? 0 : (sub==k ? INVERS  : 0)));
-         y+=FH;
+     uint8_t i = keyDown(); //check for keystate
+@@ -816,6 +819,7 @@
+         clearKeyEvents(); // wait for user to release key
      }
+ }
++#endif
  
-Index: er9x/pers.cpp
-===================================================================
---- er9x/pers.cpp	(revision 762)
-+++ er9x/pers.cpp	(working copy)
-@@ -161,7 +161,7 @@
-   while((l=theFile.read(buf,15)))
-   {
-     theFile2.write(buf,l);
--//    if(theFile.errno()==ERR_TMO)
-+//    if(theFile.write_errno()==ERR_TMO)
- //    {
- //        //wait for 10ms and try again
- //        uint16_t tgtime = get_tmr10ms() + 100;
-@@ -249,7 +249,7 @@
-     {
-       EFile::swap(FILE_GENERAL,FILE_TMP);
-     }else{
--      if(theWriteFile.errno()==ERR_TMO){
-+      if(theWriteFile.write_errno()==ERR_TMO){
-         s_eeDirtyMsk |= EE_GENERAL; //try again
-         s_eeDirtyTime10ms = get_tmr10ms() - WRITE_DELAY_10MS;
-     		if(heartbeat == 0x3)
-@@ -270,7 +270,7 @@
-     {
-       EFile::swap(FILE_MODEL(g_eeGeneral.currModel),FILE_TMP);
-     }else{
--      if(theWriteFile.errno()==ERR_TMO){
-+      if(theWriteFile.write_errno()==ERR_TMO){
-         s_eeDirtyMsk |= EE_MODEL; //try again
-         if ( msk & EE_TRIM )
-         {
+ MenuFuncP g_menuStack[5];
+ 
+@@ -1583,7 +1587,6 @@
+ {
+     g_tmr16KHz++;
+ }
+-#endif
+ 
+ static uint16_t getTmr16KHz()
+ {
+@@ -1594,7 +1597,6 @@
+     }
+ }
+ 
+-
+ // Clocks every 64 uS
+ ISR(TIMER0_COMP_vect, ISR_NOBLOCK) //10ms timer
+ { 
+@@ -2197,8 +2199,8 @@
+ 		}
+ 	}
+ }
++#endif
+ 
+-
+ int16_t calc1000toRESX(int16_t x)  // improve calc time by Pat MacKenzie
+ {
+     int16_t y = x>>5;
 Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 762)
+--- er9x/er9x.h	(revision 771)
 +++ er9x/er9x.h	(working copy)
 @@ -24,8 +24,15 @@
  ///opt/cross/avr/include/avr/pgmspace.h
@@ -347,9 +117,88 @@ Index: er9x/er9x.h
  #ifdef __cplusplus
  #define APM __attribute__(( section(".progmem.data") ))
  #undef PSTR
+@@ -795,7 +794,11 @@
+ NOINLINE void resetTimer1(void) ;
+ 
+ // Fiddle to force compiler to use a pointer
++#ifndef SIMU
+ #define FORCE_INDIRECT(ptr) __asm__ __volatile__ ("" : "=e" (ptr) : "0" (ptr))
++#else
++#define FORCE_INDIRECT(ptr)
++#endif
+ 
+ extern uint8_t telemItemValid( uint8_t index ) ;
+ extern uint8_t Main_running ;
+Index: er9x/frsky.cpp
+===================================================================
+--- er9x/frsky.cpp	(revision 771)
++++ er9x/frsky.cpp	(working copy)
+@@ -483,22 +483,23 @@
+   } else
+     UCSR0B &= ~(1 << UDRIE0); // disable UDRE0 interrupt
+ }
+-#endif
+ 
+ /******************************************/
+ 
++
+ static void frskyTransmitBuffer()
+ {
+   frskyTxISRIndex = 0;
+   UCSR0B |= (1 << UDRIE0); // enable  UDRE0 interrupt
+ }
++#endif
+ 
+ 
+ uint8_t FrskyAlarmSendState = 0 ;
+ uint8_t FrskyDelay = 0 ;
+ //uint8_t FrskyRSSIsend = 0 ;
+ 
+-
++#ifndef SIMU
+ static void FRSKY10mspoll(void)
+ {
+   if (FrskyDelay)
+@@ -556,6 +557,7 @@
+     frskyTransmitBuffer(); 
+   }
+ }
++#endif
+ 
+ //  uint8_t i = 0;
+ 
+@@ -809,13 +811,12 @@
+ 		}
+ 	}
+   if (frskyUsrStreaming > 0) frskyUsrStreaming--;
+-#endif
+-	
++
+   if ( FrskyAlarmSendState )
+   {
+     FRSKY10mspoll() ;
+   }
+-
++#endif
+ 	for( uint8_t i = 0 ; i < 2 ; i += 1 )
+ 	{
+   	if ( g_model.frsky.channels[i].type == 3 )		// Current (A)
+Index: er9x/menus.cpp
+===================================================================
+--- er9x/menus.cpp	(revision 771)
++++ er9x/menus.cpp	(working copy)
+@@ -1432,7 +1432,7 @@
+ 
+         //write mix names here
+         lcd_outdezNAtt(3*FW, y, k+1, (sub==k ? INVERS : 0) + LEADING0,2);
+-        lcd_putsAtt(  4*FW, y, (const prog_char*)pgm_read_word(&n_Templates[k]), (s_noHi ? 0 : (sub==k ? INVERS  : 0)));
++        lcd_putsAtt(  4*FW, y, n_Templates[k], (s_noHi ? 0 : (sub==k ? INVERS  : 0)));
+         y+=FH;
+     }
+ 
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 762)
+--- er9x/myeeprom.h	(revision 771)
 +++ er9x/myeeprom.h	(working copy)
 @@ -44,6 +44,9 @@
  //#define GENERAL_MYVER_r365 4
@@ -361,475 +210,14 @@ Index: er9x/myeeprom.h
  
  // eeprom ver <9 => mdvers == 1
  // eeprom ver >9 => mdvers ==2
-Index: er9x/audio.h
-===================================================================
---- er9x/audio.h	(revision 762)
-+++ er9x/audio.h	(working copy)
-@@ -1,192 +1,196 @@
--/*
-- * Author - Rob Thomson & Bertrand Songis
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- * GNU General Public License for more details.
-- *
-- */
--
--#ifndef audio_h
--#define audio_h
--
--#define HAPTIC_OFF  PORTG &= ~(1<<2)
--#define HAPTIC_ON   PORTG |=  (1<<2)
--
--//audio
--#define AUDIO_QUEUE_LENGTH (8)  //8 seems to suit most alerts
--#define AUDIO_QUEUE_FREESLOTS (3)  //free before we insert new sounds
--#define BEEP_DEFAULT_FREQ  (70)
--#define BEEP_OFFSET        (10)
--#define BEEP_KEY_UP_FREQ   (BEEP_DEFAULT_FREQ+5)
--#define BEEP_KEY_DOWN_FREQ (BEEP_DEFAULT_FREQ-5)
--
--
--/* the audio selection menu in the system config page */
--
--// a line similar to this 
--// "Warn1 ""Warn2 ""Warn3 ""Warn1 ""Cheap ""Ring  ""SciFi "....
--// is needed in menu.cpp for the audo selection.
--// these are directly related to the order of the audio items below.
--
--
--/* make sure the defines below always go in numeric order */
--#define AU_WARNING1 (0)
--#define AU_WARNING2 (1)
--#define AU_CHEEP (2)
--#define AU_RING (3)
--#define AU_SCIFI (4)
--#define AU_ROBOT (5)
--#define AU_CHIRP (6)
--#define AU_TADA (7)
--#define AU_CRICKET (8)
--#define AU_SIREN (9)
--#define AU_ALARMC (10)
--#define AU_RATATA (11)
--#define AU_TICK (12)
--#define AU_HAPTIC1 (13)
--#define AU_HAPTIC2 (14)
--#define AU_HAPTIC3 (15)
--// end of audio menu alerts.  
--// not sure why but no more than 16 can be added?
--// believe this is a menu size limitation
--#define AU_INACTIVITY (16)
--#define AU_TX_BATTERY_LOW (17)
--#define AU_ERROR (18)
--#define AU_KEYPAD_UP (19)
--#define AU_KEYPAD_DOWN (20)
--#define AU_TRIM_MOVE (21)
--#define AU_TRIM_MIDDLE (22)
--#define AU_MENUS (23)
--#define AU_POT_STICK_MIDDLE (24)
--#define AU_TIMER_30 (25)
--#define AU_TIMER_20 (26)
--#define AU_TIMER_10 (27)
--#define AU_TIMER_LT3 (28)
--#define AU_WARNING3 (29)
--#define AU_MIX_WARNING_1 (30)
--#define AU_MIX_WARNING_2 (31)
--#define AU_MIX_WARNING_3 (32)
--
--#define BEEP_QUIET (0)
--#define BEEP_NOKEYS (1)
--#define BEEP_XSHORT (2)
--#define BEEP_SHORT (3)
--#define BEEP_NORMAL (4)
--#define BEEP_LONG (5)
--#define BEEP_XLONG (6)
--
--class audioQueue
--{
--  public:
--
--    audioQueue();
--
--    // only difference between these two functions is that one does the
--    // interupt queue (Now) and the other queues for playing ASAP.
--    void playNow(uint8_t tFreq, uint8_t tLen, uint8_t tPause, uint8_t tRepeat=0, uint8_t tHaptic=0, int8_t tFreqIncr=0);
--
--    void playASAP(uint8_t tFreq, uint8_t tLen, uint8_t tPause, uint8_t tRepeat=0, uint8_t tHaptic=0, int8_t tFreqIncr=0);
--
--    bool busy();
--
--    void event(uint8_t e,uint8_t f=BEEP_DEFAULT_FREQ);
--
--
--
--
--inline void driver() {
--  if (toneTimeLeft > 0) {	
--					switch (g_eeGeneral.speakerMode){					
--								case 0:
--						        	//stock beeper. simply turn port on for x time!
--							        if (toneTimeLeft > 0){
--							            PORTE |=  (1<<OUT_E_BUZZER); // speaker output 'high'
--							        } 	
--							        break;	
--							  case 1:
--									    static uint8_t toneCounter;
--									    toneCounter += toneFreq;
--									    if ((toneCounter & 0x80) == 0x80) {
--									      PORTE |= (1 << OUT_E_BUZZER);
--									    } else {
--									      PORTE &= ~(1 << OUT_E_BUZZER);
--									    }							  	
--											break;						  	
--					}		
--	} else {
--			PORTE &=  ~(1<<OUT_E_BUZZER); // speaker output 'low'
--	}								  	     
--}	
--
--    // heartbeat is responsibile for issueing the audio tones and general square waves
--    // it is essentially the life of the class.
--    void heartbeat();
--
--    bool freeslots();
--
--    //inline bool empty() {
--    //  return (t_queueRidx == t_queueWidx);
--    //}
--
--  protected:
--    void aqinit(); // To stop constructor being compiled twice
--    inline uint8_t getToneLength(uint8_t tLen);
--
--  private:
--
--    uint8_t t_queueRidx;
--    uint8_t t_queueWidx;
--
--    uint8_t toneFreq;
--    int8_t toneFreqIncr;
--    uint8_t toneTimeLeft;
--    uint8_t tonePause;
--
--    // queue arrays
--    uint8_t queueToneFreq[AUDIO_QUEUE_LENGTH];
--    int8_t queueToneFreqIncr[AUDIO_QUEUE_LENGTH];
--    uint8_t queueToneLength[AUDIO_QUEUE_LENGTH];
--    uint8_t queueTonePause[AUDIO_QUEUE_LENGTH];
--    uint8_t queueToneRepeat[AUDIO_QUEUE_LENGTH];
--
--	  uint8_t toneHaptic;
--	  uint8_t hapticTick;
--	  uint8_t queueToneHaptic[AUDIO_QUEUE_LENGTH];
--	 // uint8_t toneCounter;
--
--};
--
--//wrapper function - dirty but results in a space saving!!!
--extern audioQueue audio;
--
--void audioDefevent(uint8_t e);
--
--#define AUDIO_KEYPAD_UP()   audioDefevent(AU_KEYPAD_UP)
--#define AUDIO_KEYPAD_DOWN() audioDefevent(AU_KEYPAD_DOWN)
--#define AUDIO_MENUS()       audioDefevent(AU_MENUS)
--#define AUDIO_WARNING1()    audioDefevent(AU_WARNING1)
--#define AUDIO_WARNING2()    audioDefevent(AU_WARNING2)
--#define AUDIO_ERROR()       audioDefevent(AU_ERROR)
--
--#define IS_AUDIO_BUSY()     audio.busy()
--
--#define AUDIO_TIMER_30()    audioDefevent(AU_TIMER_30)
--#define AUDIO_TIMER_20()    audioDefevent(AU_TIMER_20)
--#define AUDIO_TIMER_10()    audioDefevent(AU_TIMER_10)
--#define AUDIO_TIMER_LT3()   audioDefevent(AU_TIMER_LT3)
--#define AUDIO_MINUTE_BEEP() audioDefevent(AU_WARNING1)
--#define AUDIO_INACTIVITY()  audioDefevent(AU_INACTIVITY)
--#define AUDIO_MIX_WARNING_1() audioDefevent(AU_MIX_WARNING_1)
--#define AUDIO_MIX_WARNING_3() audioDefevent(AU_MIX_WARNING_3)
--
--
--#define AUDIO_DRIVER()      audio.driver()
--#define AUDIO_HEARTBEAT()   audio.heartbeat()
--
--#endif // audio_h
-+/*
-+ * Author - Rob Thomson & Bertrand Songis
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ */
-+
-+#ifndef audio_h
-+#define audio_h
-+
-+#define HAPTIC_OFF  PORTG &= ~(1<<2)
-+#define HAPTIC_ON   PORTG |=  (1<<2)
-+
-+//audio
-+#define AUDIO_QUEUE_LENGTH (8)  //8 seems to suit most alerts
-+#define AUDIO_QUEUE_FREESLOTS (3)  //free before we insert new sounds
-+#define BEEP_DEFAULT_FREQ  (70)
-+#define BEEP_OFFSET        (10)
-+#define BEEP_KEY_UP_FREQ   (BEEP_DEFAULT_FREQ+5)
-+#define BEEP_KEY_DOWN_FREQ (BEEP_DEFAULT_FREQ-5)
-+
-+
-+/* the audio selection menu in the system config page */
-+
-+// a line similar to this 
-+// "Warn1 ""Warn2 ""Warn3 ""Warn1 ""Cheap ""Ring  ""SciFi "....
-+// is needed in menu.cpp for the audo selection.
-+// these are directly related to the order of the audio items below.
-+
-+
-+/* make sure the defines below always go in numeric order */
-+#define AU_WARNING1 (0)
-+#define AU_WARNING2 (1)
-+#define AU_CHEEP (2)
-+#define AU_RING (3)
-+#define AU_SCIFI (4)
-+#define AU_ROBOT (5)
-+#define AU_CHIRP (6)
-+#define AU_TADA (7)
-+#define AU_CRICKET (8)
-+#define AU_SIREN (9)
-+#define AU_ALARMC (10)
-+#define AU_RATATA (11)
-+#define AU_TICK (12)
-+#define AU_HAPTIC1 (13)
-+#define AU_HAPTIC2 (14)
-+#define AU_HAPTIC3 (15)
-+// end of audio menu alerts.  
-+// not sure why but no more than 16 can be added?
-+// believe this is a menu size limitation
-+#define AU_INACTIVITY (16)
-+#define AU_TX_BATTERY_LOW (17)
-+#define AU_ERROR (18)
-+#define AU_KEYPAD_UP (19)
-+#define AU_KEYPAD_DOWN (20)
-+#define AU_TRIM_MOVE (21)
-+#define AU_TRIM_MIDDLE (22)
-+#define AU_MENUS (23)
-+#define AU_POT_STICK_MIDDLE (24)
-+#define AU_TIMER_30 (25)
-+#define AU_TIMER_20 (26)
-+#define AU_TIMER_10 (27)
-+#define AU_TIMER_LT3 (28)
-+#define AU_WARNING3 (29)
-+#define AU_MIX_WARNING_1 (30)
-+#define AU_MIX_WARNING_2 (31)
-+#define AU_MIX_WARNING_3 (32)
-+
-+#define BEEP_QUIET (0)
-+#define BEEP_NOKEYS (1)
-+#define BEEP_XSHORT (2)
-+#define BEEP_SHORT (3)
-+#define BEEP_NORMAL (4)
-+#define BEEP_LONG (5)
-+#define BEEP_XLONG (6)
-+
-+class audioQueue
-+{
-+  public:
-+
-+    audioQueue();
-+
-+    // only difference between these two functions is that one does the
-+    // interupt queue (Now) and the other queues for playing ASAP.
-+    void playNow(uint8_t tFreq, uint8_t tLen, uint8_t tPause, uint8_t tRepeat=0, uint8_t tHaptic=0, int8_t tFreqIncr=0);
-+
-+    void playASAP(uint8_t tFreq, uint8_t tLen, uint8_t tPause, uint8_t tRepeat=0, uint8_t tHaptic=0, int8_t tFreqIncr=0);
-+
-+    bool busy();
-+
-+    void event(uint8_t e,uint8_t f=BEEP_DEFAULT_FREQ);
-+
-+
-+
-+
-+inline void driver() {
-+  if (toneTimeLeft > 0) {	
-+#ifdef SIMU
-+      PORTE |=  (1<<OUT_E_BUZZER); // speaker output 'high'
-+#else
-+					switch (g_eeGeneral.speakerMode){					
-+								case 0:
-+						        	//stock beeper. simply turn port on for x time!
-+							        if (toneTimeLeft > 0){
-+							            PORTE |=  (1<<OUT_E_BUZZER); // speaker output 'high'
-+							        } 	
-+							        break;	
-+							  case 1:
-+									    static uint8_t toneCounter;
-+									    toneCounter += toneFreq;
-+									    if ((toneCounter & 0x80) == 0x80) {
-+									      PORTE |= (1 << OUT_E_BUZZER);
-+									    } else {
-+									      PORTE &= ~(1 << OUT_E_BUZZER);
-+									    }							  	
-+											break;						  	
-+					}
-+#endif		
-+	} else {
-+			PORTE &=  ~(1<<OUT_E_BUZZER); // speaker output 'low'
-+	}								  	     
-+}	
-+
-+    // heartbeat is responsibile for issueing the audio tones and general square waves
-+    // it is essentially the life of the class.
-+    void heartbeat();
-+
-+    bool freeslots();
-+
-+    //inline bool empty() {
-+    //  return (t_queueRidx == t_queueWidx);
-+    //}
-+
-+  protected:
-+    void aqinit(); // To stop constructor being compiled twice
-+    inline uint8_t getToneLength(uint8_t tLen);
-+
-+  public:
-+
-+    uint8_t t_queueRidx;
-+    uint8_t t_queueWidx;
-+
-+    uint8_t toneFreq;
-+    int8_t toneFreqIncr;
-+    uint8_t toneTimeLeft;
-+    uint8_t tonePause;
-+
-+    // queue arrays
-+    uint8_t queueToneFreq[AUDIO_QUEUE_LENGTH];
-+    int8_t queueToneFreqIncr[AUDIO_QUEUE_LENGTH];
-+    uint8_t queueToneLength[AUDIO_QUEUE_LENGTH];
-+    uint8_t queueTonePause[AUDIO_QUEUE_LENGTH];
-+    uint8_t queueToneRepeat[AUDIO_QUEUE_LENGTH];
-+
-+	  uint8_t toneHaptic;
-+	  uint8_t hapticTick;
-+	  uint8_t queueToneHaptic[AUDIO_QUEUE_LENGTH];
-+	 // uint8_t toneCounter;
-+
-+};
-+
-+//wrapper function - dirty but results in a space saving!!!
-+extern audioQueue audio;
-+
-+void audioDefevent(uint8_t e);
-+
-+#define AUDIO_KEYPAD_UP()   audioDefevent(AU_KEYPAD_UP)
-+#define AUDIO_KEYPAD_DOWN() audioDefevent(AU_KEYPAD_DOWN)
-+#define AUDIO_MENUS()       audioDefevent(AU_MENUS)
-+#define AUDIO_WARNING1()    audioDefevent(AU_WARNING1)
-+#define AUDIO_WARNING2()    audioDefevent(AU_WARNING2)
-+#define AUDIO_ERROR()       audioDefevent(AU_ERROR)
-+
-+#define IS_AUDIO_BUSY()     audio.busy()
-+
-+#define AUDIO_TIMER_30()    audioDefevent(AU_TIMER_30)
-+#define AUDIO_TIMER_20()    audioDefevent(AU_TIMER_20)
-+#define AUDIO_TIMER_10()    audioDefevent(AU_TIMER_10)
-+#define AUDIO_TIMER_LT3()   audioDefevent(AU_TIMER_LT3)
-+#define AUDIO_MINUTE_BEEP() audioDefevent(AU_WARNING1)
-+#define AUDIO_INACTIVITY()  audioDefevent(AU_INACTIVITY)
-+#define AUDIO_MIX_WARNING_1() audioDefevent(AU_MIX_WARNING_1)
-+#define AUDIO_MIX_WARNING_3() audioDefevent(AU_MIX_WARNING_3)
-+
-+
-+#define AUDIO_DRIVER()      audio.driver()
-+#define AUDIO_HEARTBEAT()   audio.heartbeat()
-+
-+#endif // audio_h
 Index: er9x/simpgmspace.cpp
 ===================================================================
---- er9x/simpgmspace.cpp	(revision 0)
+--- er9x/simpgmspace.cpp	(revision 771)
 +++ er9x/simpgmspace.cpp	(working copy)
-@@ -0,0 +1,142 @@
-+/*
-+ * Authors (alphabetical order)
-+ * - Bertrand Songis <bsongis@gmail.com>
-+ * - Bryan J. Rentoul (Gruvin) <gruvin@gmail.com>
-+ *
-+ * gruvin9x is based on code named er9x by
-+ * Author - Erez Raviv <erezraviv@gmail.com>, which is in turn
-+ * was based on the original (and ongoing) project by Thomas Husterer,
-+ * th9x -- http://code.google.com/p/th9x/
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ */
-+
-+
-+#include <ctype.h>
-+#include "simpgmspace.h"
-+#include "lcd.h"
-+#include "er9x.h"
-+#include "menus.h"
-+
-+volatile uint8_t pinb=0, pinc=0xff, pind, pine=0xff, ping=0xff, pinh=0xff, pinj=0xff, pinl=0;
-+uint8_t portb, portc, porth=0, dummyport;
-+uint16_t dummyport16;
-+
-+uint8_t heartbeat;
-+
-+void setSwitch(int8_t swtch)
-+{
-+  switch (swtch) {
-+    case DSW_ID0:
-+      ping |=  (1<<INP_G_ID1);  pine &= ~(1<<INP_E_ID2);
-+      break;
-+    case DSW_ID1:
-+      ping &= ~(1<<INP_G_ID1);  pine &= ~(1<<INP_E_ID2);
-+      break;
-+    case DSW_ID2:
-+      ping &= ~(1<<INP_G_ID1);  pine |=  (1<<INP_E_ID2);
-+    default:
-+      break;
-+  }
-+}
-+
-+uint8_t eeprom[EESIZE];
-+
-+void eeWriteBlockCmp(const void *i_pointer_ram, uint16_t pointer_eeprom, size_t size)
-+{
-+#if 0
-+  printf(" eeWriteBlockCmp(%d %d)", size, (int)pointer_eeprom);
-+  for(uint8_t i=0; i<size; i++)
-+    printf(" %02X", ((const char*)i_pointer_ram)[i]);
-+  printf("\n");fflush(stdout);
-+#endif
-+
-+  memcpy(&eeprom[pointer_eeprom], i_pointer_ram, size);
-+}
-+
-+void eeprom_read_block (void *pointer_ram,
-+    const void *pointer_eeprom,
-+    size_t size)
-+{
-+  memcpy(pointer_ram, &eeprom[(uint64_t)pointer_eeprom], size);
-+}
-+
+@@ -123,6 +123,14 @@
+   pthread_join(main_thread_pid, NULL);
+ }
+ 
 +void sig(int sgn)
 +{
 +  main_thread_error = (char *)malloc(2048);
@@ -838,255 +226,49 @@ Index: er9x/simpgmspace.cpp
 +  throw std::exception();
 +}
 +
-+uint8_t main_thread_running = 0;
-+char * main_thread_error = NULL;
-+void *main_thread(void *)
-+{
-+#ifdef SIMU_EXCEPTIONS
-+  signal(SIGFPE, sig);
-+  signal(SIGSEGV, sig);
-+
-+  try {
-+#endif
-+    g_menuStack[0] = menuProc0;
-+    g_menuStack[1] = menuProcModelSelect;
-+
-+    eeReadAll(); //load general setup and selected model
-+
-+    if (main_thread_running == 1) {
-+      doSplash();
-+      checkMem();
-+      checkTHR();
-+      checkSwitches();
-+      checkAlarm();
-+      checkWarnings();
-+    }
-+
-+    while (main_thread_running) {
-+      perMain();
-+      sleep(1/*ms*/);
-+    }
-+#ifdef SIMU_EXCEPTIONS
-+  }
-+  catch (...) {
-+    main_thread_running = 0;
-+  }
-+#endif
-+  return NULL;
-+}
-+
-+pthread_t main_thread_pid;
-+void StartMainThread(bool tests)
-+{
-+  frskyStreaming = 1;
-+  frskyUsrStreaming = 1;
-+
-+  main_thread_running = (tests ? 1 : 2);
-+  pthread_create(&main_thread_pid, NULL, &main_thread, NULL);
-+}
-+
-+void StopMainThread()
-+{
-+  main_thread_running = 0;
-+  pthread_join(main_thread_pid, NULL);
-+}
-+
-+#if 0
-+static void EeFsDump(){
-+  for(int i=0; i<EESIZE; i++)
-+  {
-+    printf("%02x ",eeprom[i]);
-+    if(i%16 == 15) puts("");
-+  }
-+  puts("");
-+}
-+#endif
-
-Property changes on: er9x/simpgmspace.cpp
-___________________________________________________________________
-Added: svn:executable
-## -0,0 +1 ##
-+*
-\ No newline at end of property
-Index: er9x/drivers.cpp
+ #if 0
+ static void EeFsDump(){
+   for(int i=0; i<EESIZE; i++)
+Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/drivers.cpp	(revision 762)
-+++ er9x/drivers.cpp	(working copy)
-@@ -17,9 +17,9 @@
- 
- #include "er9x.h"
- 
-+#ifndef SIMU
- #include "avr/interrupt.h"
- 
--#ifndef SIMU
- ///opt/cross/avr/include/avr/eeprom.h
- static inline void __attribute__ ((always_inline))
- eeprom_write_byte_cmp (uint8_t dat, uint16_t pointer_eeprom)
-Index: er9x/file.h
-===================================================================
---- er9x/file.h	(revision 762)
-+++ er9x/file.h	(working copy)
-@@ -75,7 +75,7 @@
-   ///read from opened file and decode rlc-coded data
-   uint16_t readRlc(uint8_t*buf,uint16_t i_len);
-   ///deliver current errno, this is reset in open
--  uint8_t errno(){return m_err;}
-+  uint8_t write_errno(){return m_err;}
- };
- 
+--- er9x/simpgmspace.h	(revision 771)
++++ er9x/simpgmspace.h	(working copy)
+@@ -1,7 +1,12 @@
+ /*
+- * Author - Erez Raviv <erezraviv@gmail.com>
++ * Authors (alphabetical order)
++ * - Bertrand Songis <bsongis@gmail.com>
++ * - Bryan J. Rentoul (Gruvin) <gruvin@gmail.com>
+  *
+- * Based on th9x -> http://code.google.com/p/th9x/
++ * gruvin9x is based on code named er9x by
++ * Author - Erez Raviv <erezraviv@gmail.com>, which is in turn
++ * was based on the original (and ongoing) project by Thomas Husterer,
++ * th9x -- http://code.google.com/p/th9x/
+  *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License version 2 as
+@@ -48,13 +53,7 @@
+   }
+ }
  #endif
-Index: er9x/er9x.cpp
-===================================================================
---- er9x/er9x.cpp	(revision 762)
-+++ er9x/er9x.cpp	(working copy)
-@@ -450,7 +450,11 @@
+-void sig(int sgn)
+-{
+-  main_thread_error = (char *)malloc(2048);
+-  sprintf(main_thread_error,"Signal %d caught\n", sgn);
+-  write_backtrace(main_thread_error);
+-  throw std::exception();
+-}
++void sig(int sgn);
+ #define assert(x) do { if (!(x)) { main_thread_error = (char *)malloc(2048); sprintf(main_thread_error, "Assert failed, %s:%d: %s\n", __FILE__, __LINE__, #x); write_backtrace(main_thread_error); throw std::exception(); } } while(0)
+ #else
+ #include <assert.h>
+@@ -140,6 +139,8 @@
+ #define SPIF dummyport
+ #define SPCR dummyport
  
- void clearKeyEvents()
- {
--    while(keyDown());  // loop until all keys are up
-+#ifdef SIMU
-+    while (keyDown() && main_thread_running) sleep(1/*ms*/);
-+#else
-+    while (keyDown());  // loop until all keys are up
-+#endif
-     putEvent(0);
- }
- 
-@@ -476,6 +480,10 @@
-     if(!g_eeGeneral.disableSplashScreen)
-     {
- 
-+#ifdef SIMU
-+    if (!main_thread_running) return;
-+    sleep(1/*ms*/);
-+#endif
- 
-         check_backlight() ;
- 
-@@ -489,8 +497,10 @@
- 
-         clearKeyEvents();
- 
-+#ifndef SIMU
-         for(uint8_t i=0; i<32; i++)
-             getADC_filt(); // init ADC array
-+#endif
- 
-         uint16_t inacSum = stickMoveValue();
-         //        for(uint8_t i=0; i<4; i++)
-@@ -499,7 +509,12 @@
-         uint16_t tgtime = get_tmr10ms() + SPLASH_TIMEOUT;  
-         while(tgtime != get_tmr10ms())
-         {
-+#ifdef SIMU
-+            if (!main_thread_running) return;
-+            sleep(1/*ms*/);
-+#else
-             getADC_filt();
-+#endif
-             uint16_t tsum = stickMoveValue();
-             //            for(uint8_t i=0; i<4; i++)
-             //               tsum += anaIn(i)/INAC_DEVISOR;
-@@ -542,7 +557,10 @@
- 
-     int16_t lowLim = THRCHK_DEADBAND + g_eeGeneral.calibMid[thrchn] - g_eeGeneral.calibSpanNeg[thrchn];// + g_eeGeneral.calibSpanNeg[thrchn]/8;
- 
-+#ifndef SIMU
-     getADC_single();   // if thr is down - do not display warning at all
-+#endif
++#define TCNT0 0
 +
-     int16_t v      = anaIn(thrchn);
-     if((v<=lowLim) || (keyDown()))
-     {
-@@ -555,7 +573,12 @@
-     //loop until all switches are reset
-     while (1)
-     {
-+#ifdef SIMU
-+      if (!main_thread_running) return;
-+      sleep(1/*ms*/);
-+#else
-         getADC_single();
-+#endif
-         int16_t v      = anaIn(thrchn);
-         if((v<=lowLim) || (keyDown()))
-         {
-@@ -727,6 +750,10 @@
-     clearKeyEvents();
-     while(1)
-     {
-+#ifdef SIMU
-+    if (!main_thread_running) return;
-+    sleep(1/*ms*/);
-+#endif
-         if(keyDown())
-         {
-             return;  //wait for key release
-@@ -1086,7 +1113,10 @@
- int16_t g_ppmIns[8];
- uint8_t ppmInState = 0; //0=unsync 1..8= wait for value i-1
+ #define TIMSK  dummyport
+ #define TIMSK1 dummyport
  
-+#ifndef SIMU
- #include <avr/interrupt.h>
-+#endif
-+
- //#include <avr/wdt.h>
- 
- //class AutoLock
-@@ -1106,6 +1136,7 @@
- //#define STARTADCONV (ADCSRA  = (1<<ADEN) | (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2) | (1<<ADSC) | (1 << ADIE))
- int16_t BandGap = 240 ;
- 
-+#ifndef SIMU
- static uint16_t s_anaFilt[8];
- uint16_t anaIn(uint8_t chan)
- {
-@@ -1221,9 +1252,11 @@
- //  getADC_osmp,
- //  getADC_filt
- //  };
-+#endif
- 
- volatile uint8_t g_tmr16KHz;
- 
-+#ifndef SIMU
- ISR(TIMER0_OVF_vect, ISR_NOBLOCK) //continuous timer 16ms (16MHz/1024)
- {
-     g_tmr16KHz++;
-@@ -1613,4 +1646,4 @@
-     }
- }
- 
--
-+#endif
-Index: er9x/menus.h
-===================================================================
---- er9x/menus.h	(revision 762)
-+++ er9x/menus.h	(working copy)
-@@ -77,10 +77,10 @@
- //#define TITLEP(pstr) lcd_putsAtt(0,0,pstr,INVERS)
- #define TITLE(str)   TITLEP(PSTR(str))
- 
--#define MENU(title, tab, menu, lines_count, lines...) \
-+#define MENU(title, tab, menu, lines_count, ...) \
- TITLE(title); \
- static MState2 mstate2; \
--const static prog_uint8_t APM mstate_tab[] = lines; \
-+const static prog_uint8_t APM mstate_tab[] = __VA_ARGS__; \
- mstate2.check(event,menu,tab,DIM(tab),mstate_tab,DIM(mstate_tab)-1,lines_count-1)
- 
- #define SIMPLE_MENU(title, tab, menu, lines_count) \
-@@ -88,10 +88,10 @@
- static MState2 mstate2; \
- mstate2.check_simple(event,menu,tab,DIM(tab),lines_count-1)
- 
--#define SUBMENU(title, lines_count, lines...) \
-+#define SUBMENU(title, lines_count, ...) \
- TITLE(title); \
- static MState2 mstate2; \
--const static prog_uint8_t APM mstate_tab[] = lines; \
-+const static prog_uint8_t APM mstate_tab[] = __VA_ARGS__; \
- mstate2.check(event,0,NULL,0,mstate_tab,DIM(mstate_tab)-1,lines_count-1)
- 
- #define SIMPLE_SUBMENU_NOTITLE(lines_count) \

@@ -73,7 +73,7 @@ void Er9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
-  outputs.beep = audio.toneTimeLeft;
+  outputs.beep = audio.busy();
 }
 
 void Er9xSimulator::setValues(TxInputs &inputs)

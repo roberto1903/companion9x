@@ -250,8 +250,9 @@ FOREACH( FIRMWARE ${FIRMWARES} )
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-open9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-open9x.h @ONLY)
 ENDFOREACH( FIRMWARE )
 
+SET( PATCH_FLAGS "--binary" )
+
 IF( WIN32 )
-  SET( PATCH_FLAGS "--binary" )
   SET( companion9x_SRCS ${companion9x_SRCS} icon.rc )
   IF ( NOT MSVC )
     SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
