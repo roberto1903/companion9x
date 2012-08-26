@@ -259,14 +259,29 @@ IF( WIN32 )
   ENDIF( )
 ENDIF( )
 
-ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ${PROJECT_BINARY_DIR}/er9x
-  COMMAND cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ${PROJECT_BINARY_DIR}/er9x
-  COMMAND patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
-  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
-  DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
-)
+IF ( WIN32 )
+  ADD_CUSTOM_COMMAND(
+    COMMAND cmake -E remove_directory ${PROJECT_BINARY_DIR}/er9x
+    COMMAND cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ${PROJECT_BINARY_DIR}/er9x
+    COMMAND patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+    OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
+    DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
+  )
+ELSE ()
+  ADD_CUSTOM_COMMAND(
+    COMMAND cmake -E remove_directory ${PROJECT_BINARY_DIR}/er9x
+    COMMAND cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ${PROJECT_BINARY_DIR}/er9x
+    COMMAND cp ${PROJECT_SOURCE_DIR}/../er9x.patch ${PROJECT_BINARY_DIR}/er9x.patch
+    COMMAND dos2unix ${PROJECT_BINARY_DIR}/er9x.patch
+    COMMAND dos2unix ${PROJECT_BINARY_DIR}/er9x/simpgmspace.cpp
+    COMMAND dos2unix ${PROJECT_BINARY_DIR}/er9x/audio.h
+    COMMAND patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_BINARY_DIR}/er9x.patch
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+    OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
+    DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
+  )
+ENDIF ()
 
 FIND_PACKAGE( Qt4 REQUIRED )
 SET( QT_USE_QTNETWORK True )
