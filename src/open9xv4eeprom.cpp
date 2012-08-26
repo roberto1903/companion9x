@@ -662,7 +662,7 @@ t_Open9xV4CustomSwData_v209::t_Open9xV4CustomSwData_v209(CustomSwData &c9x)
     v1 = open9xV4209FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_EQUAL  && c9x.func <= CS_ELESS) {
     v2 = open9xV4209FromSource(RawSource(c9x.val2));
   }
 
