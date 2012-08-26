@@ -55,7 +55,19 @@ Index: er9x/er9x.cpp
  
  MenuFuncP g_menuStack[5];
  
-@@ -1583,7 +1587,6 @@
+@@ -1245,9 +1249,11 @@
+ 			PORTA_LCD_DAT = VoiceLatch ;			// Latch data set
+ 			PORTB |= (1<<OUT_B_LIGHT) ;				// Drive high,pullup enabled
+ 			DDRB &= ~(1<<OUT_B_LIGHT) ;				// Change to input
++#ifndef SIMU
+ 			asm(" nop") ;
+ 			asm(" nop") ;
+ 			asm(" nop") ;											// delay to allow input to settle
++#endif			
+ 			busy = PINB & 0x80 ;
+ 			DDRB |= (1<<OUT_B_LIGHT) ;				// Change to output
+ 			// The next bit guarantees the backlight output gets clocked out
+@@ -1583,7 +1589,6 @@
  {
      g_tmr16KHz++;
  }
@@ -63,7 +75,7 @@ Index: er9x/er9x.cpp
  
  static uint16_t getTmr16KHz()
  {
-@@ -1594,7 +1597,6 @@
+@@ -1594,7 +1599,6 @@
      }
  }
  
@@ -71,17 +83,15 @@ Index: er9x/er9x.cpp
  // Clocks every 64 uS
  ISR(TIMER0_COMP_vect, ISR_NOBLOCK) //10ms timer
  { 
-@@ -2197,8 +2199,8 @@
+@@ -2197,7 +2201,7 @@
  		}
  	}
  }
+-
 +#endif
  
--
  int16_t calc1000toRESX(int16_t x)  // improve calc time by Pat MacKenzie
  {
-     int16_t y = x>>5;
-Index: er9x/er9x.h
 ===================================================================
 --- er9x/er9x.h	(revision 771)
 +++ er9x/er9x.h	(working copy)
