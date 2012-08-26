@@ -357,7 +357,7 @@ const char * options[]={
         "ppmca",
         "potscroll",
         "autoswitch",
-        "dblkeys"
+        "dblkeys",
         "pgbar",
         "imperial",
         "speaker",
