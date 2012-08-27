@@ -1,25 +1,24 @@
 Index: er9x/audio.h
 ===================================================================
---- er9x/audio.h	(revision 771)
+--- er9x/audio.h	(revision 772)
 +++ er9x/audio.h	(working copy)
 @@ -102,7 +102,11 @@
  
  inline void driver() {
    if (toneTimeLeft > 0) {	
--					switch ((g_eeGeneral.speakerMode & 1)){					
-+#ifndef SIMU
-+					switch ((g_eeGeneral.speakerMode & 1)){
++#ifdef SIMU
++switch(0) {
 +#else
-+					switch(0) {
+ 					switch ((g_eeGeneral.speakerMode & 1)){					 
 +#endif
  								case 0:
  						        	//stock beeper. simply turn port on for x time!
  							        if (toneTimeLeft > 0){
 Index: er9x/er9x.cpp
 ===================================================================
---- er9x/er9x.cpp	(revision 771)
+--- er9x/er9x.cpp	(revision 772)
 +++ er9x/er9x.cpp	(working copy)
-@@ -36,8 +36,11 @@
+@@ -37,8 +37,11 @@
  static void checkTHR( void );
  ///   Pr�ft beim Einschalten ob alle Switches 'off' sind.
  static void checkSwitches( void );
@@ -31,7 +30,7 @@ Index: er9x/er9x.cpp
  
  EEGeneral  g_eeGeneral;
  ModelData  g_model;
-@@ -521,7 +524,6 @@
+@@ -528,7 +531,6 @@
  
  }
  
@@ -39,7 +38,7 @@ Index: er9x/er9x.cpp
  //#define CS_EQUAL     8
  //#define CS_NEQUAL    9
  //#define CS_GREATER   10
-@@ -790,6 +792,7 @@
+@@ -796,6 +798,7 @@
  		lcd_putcAtt(FW*2+i*2*FW-i-2, y, g_model.name[i],DBLSIZE);
  }
  
@@ -47,7 +46,7 @@ Index: er9x/er9x.cpp
  static void checkQuickSelect()
  {
      uint8_t i = keyDown(); //check for keystate
-@@ -816,6 +819,7 @@
+@@ -829,6 +832,7 @@
          clearKeyEvents(); // wait for user to release key
      }
  }
@@ -55,7 +54,7 @@ Index: er9x/er9x.cpp
  
  MenuFuncP g_menuStack[5];
  
-@@ -1245,9 +1249,11 @@
+@@ -1263,9 +1267,11 @@
  			PORTA_LCD_DAT = VoiceLatch ;			// Latch data set
  			PORTB |= (1<<OUT_B_LIGHT) ;				// Drive high,pullup enabled
  			DDRB &= ~(1<<OUT_B_LIGHT) ;				// Change to input
@@ -67,7 +66,7 @@ Index: er9x/er9x.cpp
  			busy = PINB & 0x80 ;
  			DDRB |= (1<<OUT_B_LIGHT) ;				// Change to output
  			// The next bit guarantees the backlight output gets clocked out
-@@ -1583,7 +1589,6 @@
+@@ -1632,7 +1638,6 @@
  {
      g_tmr16KHz++;
  }
@@ -75,7 +74,7 @@ Index: er9x/er9x.cpp
  
  static uint16_t getTmr16KHz()
  {
-@@ -1594,7 +1599,6 @@
+@@ -1643,7 +1648,6 @@
      }
  }
  
@@ -83,17 +82,19 @@ Index: er9x/er9x.cpp
  // Clocks every 64 uS
  ISR(TIMER0_COMP_vect, ISR_NOBLOCK) //10ms timer
  { 
-@@ -2197,7 +2201,7 @@
+@@ -2249,8 +2253,8 @@
  		}
  	}
  }
--
 +#endif
  
+-
  int16_t calc1000toRESX(int16_t x)  // improve calc time by Pat MacKenzie
  {
+     int16_t y = x>>5;
+Index: er9x/er9x.h
 ===================================================================
---- er9x/er9x.h	(revision 771)
+--- er9x/er9x.h	(revision 772)
 +++ er9x/er9x.h	(working copy)
 @@ -24,8 +24,15 @@
  ///opt/cross/avr/include/avr/pgmspace.h
@@ -127,7 +128,7 @@ Index: er9x/er9x.cpp
  #ifdef __cplusplus
  #define APM __attribute__(( section(".progmem.data") ))
  #undef PSTR
-@@ -795,7 +794,11 @@
+@@ -797,7 +796,11 @@
  NOINLINE void resetTimer1(void) ;
  
  // Fiddle to force compiler to use a pointer
@@ -141,9 +142,9 @@ Index: er9x/er9x.cpp
  extern uint8_t Main_running ;
 Index: er9x/frsky.cpp
 ===================================================================
---- er9x/frsky.cpp	(revision 771)
+--- er9x/frsky.cpp	(revision 772)
 +++ er9x/frsky.cpp	(working copy)
-@@ -483,22 +483,23 @@
+@@ -486,22 +486,23 @@
    } else
      UCSR0B &= ~(1 << UDRIE0); // disable UDRE0 interrupt
  }
@@ -169,7 +170,7 @@ Index: er9x/frsky.cpp
  static void FRSKY10mspoll(void)
  {
    if (FrskyDelay)
-@@ -556,6 +557,7 @@
+@@ -559,6 +560,7 @@
      frskyTransmitBuffer(); 
    }
  }
@@ -177,27 +178,28 @@ Index: er9x/frsky.cpp
  
  //  uint8_t i = 0;
  
-@@ -809,13 +811,12 @@
+@@ -869,13 +871,15 @@
  		}
  	}
    if (frskyUsrStreaming > 0) frskyUsrStreaming--;
 -#endif
--	
 +
+ 	
    if ( FrskyAlarmSendState )
    {
      FRSKY10mspoll() ;
    }
--
+ 
 +#endif
- 	for( uint8_t i = 0 ; i < 2 ; i += 1 )
- 	{
-   	if ( g_model.frsky.channels[i].type == 3 )		// Current (A)
++
+   if ( g_model.frsky.channels[0].type == 3 )		// Current (A)
+ 		current_check( 0 ) ;
+   if ( g_model.frsky.channels[1].type == 3 )		// Current (A)
 Index: er9x/menus.cpp
 ===================================================================
---- er9x/menus.cpp	(revision 771)
+--- er9x/menus.cpp	(revision 772)
 +++ er9x/menus.cpp	(working copy)
-@@ -1432,7 +1432,7 @@
+@@ -1487,7 +1487,7 @@
  
          //write mix names here
          lcd_outdezNAtt(3*FW, y, k+1, (sub==k ? INVERS : 0) + LEADING0,2);
@@ -208,7 +210,7 @@ Index: er9x/menus.cpp
  
 Index: er9x/myeeprom.h
 ===================================================================
---- er9x/myeeprom.h	(revision 771)
+--- er9x/myeeprom.h	(revision 772)
 +++ er9x/myeeprom.h	(working copy)
 @@ -44,6 +44,9 @@
  //#define GENERAL_MYVER_r365 4
@@ -222,12 +224,13 @@ Index: er9x/myeeprom.h
  // eeprom ver >9 => mdvers ==2
 Index: er9x/simpgmspace.cpp
 ===================================================================
---- er9x/simpgmspace.cpp	(revision 771)
+--- er9x/simpgmspace.cpp	(revision 772)
 +++ er9x/simpgmspace.cpp	(working copy)
-@@ -123,6 +123,14 @@
-   pthread_join(main_thread_pid, NULL);
+@@ -133,3 +133,12 @@
+   puts("");
  }
- 
+ #endif
++
 +void sig(int sgn)
 +{
 +  main_thread_error = (char *)malloc(2048);
@@ -236,12 +239,9 @@ Index: er9x/simpgmspace.cpp
 +  throw std::exception();
 +}
 +
- #if 0
- static void EeFsDump(){
-   for(int i=0; i<EESIZE; i++)
 Index: er9x/simpgmspace.h
 ===================================================================
---- er9x/simpgmspace.h	(revision 771)
+--- er9x/simpgmspace.h	(revision 772)
 +++ er9x/simpgmspace.h	(working copy)
 @@ -1,7 +1,12 @@
  /*
