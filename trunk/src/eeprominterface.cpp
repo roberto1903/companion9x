@@ -585,13 +585,17 @@ void RegisterFirmwares()
   firmwares.push_back(new FirmwareInfo("gruvin9x-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X)));
 
-  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP);
+  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP, false);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
   open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
   const char *ext_options[] = {"frsky", "jeti", "ardupilot", "nmea", NULL};
   open9x->addOptions(ext_options);
   open9x->addOption("heli");
@@ -615,13 +619,17 @@ void RegisterFirmwares()
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
 
-  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP);
+  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP, false);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
   open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
@@ -637,13 +645,17 @@ void RegisterFirmwares()
   open9x->addOption("imperial");
   firmwares.push_back(open9x);
 
-  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_STOCK_STAMP);
+  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_STOCK_STAMP, true);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
   open9x->addLanguage("de");
   open9x->addLanguage("it");
   open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
   open9x->addOption("heli");
   open9x->addOption("templates");
   open9x->addOption("nofp");
@@ -702,6 +714,12 @@ void FirmwareInfo::addLanguage(const char *lang)
 {
   languages.push_back(lang);
 }
+
+void FirmwareInfo::addTTSLanguage(const char *lang)
+{
+  ttslanguages.push_back(lang);
+}
+
 
 void FirmwareInfo::addOptions(const char *options[])
 {

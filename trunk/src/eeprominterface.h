@@ -947,7 +947,8 @@ class FirmwareInfo {
       parent(NULL),
       id(QString::null),
       eepromInterface(NULL),
-      stamp(NULL)
+      stamp(NULL),
+      voice(false)
     {
     }
 
@@ -955,27 +956,31 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL):
+    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL, bool voice = false):
       parent(NULL),
       id(id),
       name(name),
       eepromInterface(eepromInterface),
       url(url),
-      stamp(stamp)
+      stamp(stamp),
+      voice(voice)
     {
     }
 
-    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL):
+    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL, bool voice=false):
       parent(NULL),
       id(id),
       name(QString::null),
       eepromInterface(eepromInterface),
       url(url),
-      stamp(stamp)
+      stamp(stamp),
+      voice(voice)
     {
     }
 
     virtual void addLanguage(const char *lang);
+
+    virtual void addTTSLanguage(const char *lang);
 
     virtual void addOption(const char *option);
 
@@ -1004,6 +1009,7 @@ class FirmwareInfo {
     }
 
     QList<const char *> languages;
+    QList<const char *> ttslanguages;
     QList< QList<const char*> > opts;
     FirmwareInfo *parent;
     QString id;
@@ -1011,6 +1017,7 @@ class FirmwareInfo {
     EEPROMInterface * eepromInterface;
     QString url;
     const char * stamp;
+    bool voice;
 };
 
 FirmwareInfo * GetFirmware(QString id);
