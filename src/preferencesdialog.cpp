@@ -26,6 +26,7 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
       NULL };
 
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
+  connect(ui->voiceCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
 
   for (int i=0; OptionCheckBox[i]; i++) {
     optionsCheckBoxes.push_back(OptionCheckBox[i]);
@@ -57,6 +58,13 @@ void preferencesDialog::baseFirmwareChanged()
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
   foreach(FirmwareInfo * firmware, firmwares) {
     if (firmware->id == selected_firmware) {
+      if (firmware->voice) {
+        ui->voiceLabel->show();
+        ui->voiceCombo->show();
+      } else {
+        ui->voiceLabel->hide();
+        ui->voiceCombo->hide();        
+      }
       populateFirmwareOptions(firmware);
       break;
     }
@@ -67,15 +75,19 @@ void preferencesDialog::baseFirmwareChanged()
 FirmwareInfo * preferencesDialog::getFirmware(QString & fwId)
 {
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
-
+  bool voice;
   foreach(FirmwareInfo * firmware, firmwares) {
     if (firmware->id == selected_firmware) {
       QString id = firmware->id;
       foreach(QCheckBox *cb, optionsCheckBoxes) {
         if (cb->isChecked()) {
+          if (cb->text()=="voice" && cb->isChecked())
+            voice=true;
           id += QString("-") + cb->text();
         }
       }
+      if (ui->voiceCombo->count() && (voice || firmware->voice))
+        id += QString("-tts") + ui->voiceCombo->currentText();
       if (ui->langCombo->count())
         id += QString("-") + ui->langCombo->currentText();
 
@@ -96,6 +108,7 @@ void preferencesDialog::firmwareLangChanged()
 
 void preferencesDialog::firmwareOptionChanged(bool state)
 {
+  QCheckBox * voice=NULL;
   QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
   if (cb && state) {
     QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
@@ -111,14 +124,44 @@ void preferencesDialog::firmwareOptionChanged(bool state)
                       ocb->setChecked(false);
                   }
                 }
+                if (cb->text() == "voice") {
+                  voice=cb;
+                }
               }
+              if (voice) {
+                if (voice->isChecked()) {
+                  ui->voiceCombo->show();
+                  ui->voiceLabel->show();
+                  ui->voice_dnld->show();
+                } else {
+                  ui->voiceCombo->hide();
+                  ui->voiceLabel->hide();
+                  ui->voice_dnld->hide();
+                }
+              }
+              
               return firmwareChanged();
             }
           }
         }
       }
     }
+  } else if (cb->text()=="voice" && !state) {
+    ui->voiceCombo->hide();
+    ui->voiceLabel->hide();
+    ui->voice_dnld->hide();
   }
+  if (voice) {
+    if (voice->isChecked()) {
+      ui->voiceCombo->show();
+      ui->voiceLabel->show();
+      ui->voice_dnld->show();
+    } else {
+      ui->voiceCombo->hide();
+      ui->voiceLabel->hide();
+      ui->voice_dnld->hide();
+    }
+  }  
   return firmwareChanged();
 }
 
@@ -210,6 +253,13 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
     if (current_firmware_id.endsWith(lang))
       ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
   }
+  ui->voiceCombo->clear();
+  foreach(const char *lang, parent->ttslanguages) {
+    ui->voiceCombo->addItem(lang);
+    if (current_firmware_id.contains(QString("-tts%1").arg(lang)))
+      ui->voiceCombo->setCurrentIndex(ui->voiceCombo->count() - 1);
+  }
+
   if (ui->langCombo->count()) {
     ui->langCombo->show();
     ui->langLabel->show();
