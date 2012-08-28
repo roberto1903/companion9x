@@ -119,6 +119,10 @@ void ExpoDialog::valuesChanged()
           ed->curveMode=1;
           ed->curveParam=ui->curvesCB->currentIndex();
           ed->expo = ui->expoSB->value();
+        } else {
+          ed->curveMode=1;
+          ed->curveParam=ui->curvesCB->currentIndex();
+          ed->expo = 0;
         }
         ui->ExpoCurveSB->hide();
     }
