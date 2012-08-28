@@ -1569,14 +1569,23 @@ void ModelEdit::tabFunctionSwitches()
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
     fswtchParam[i] = new QSpinBox(this);
-    fswtchParam[i]->setMaximum(125);
-    fswtchParam[i]->setMinimum(-125);
+    if (g_model.funcSw[i].func==FuncPlayPrompt) {
+      fswtchParam[i]->setMinimum(256);      
+      fswtchParam[i]->setMaximum(511);
+    } else { 
+      fswtchParam[i]->setMinimum(-125);
+      fswtchParam[i]->setMaximum(125);
+    } 
     fswtchParam[i]->setAccelerated(true);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
     ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
 
     fswtchEnable[i] = new QCheckBox(this);
-    fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+    if (g_model.funcSw[i].func==FuncPlayPrompt && GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+      fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
+    } else {
+      fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+    }
     fswtchEnable[i]->setText(tr("ON"));
     ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
     fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
@@ -1590,7 +1599,7 @@ void ModelEdit::tabFunctionSwitches()
     fswtchParamArmT[i] = new QLineEdit(this);
     fswtchParamArmT[i]->setMaxLength(6);
     ui->fswitchlayout1->addWidget(fswtchParamArmT[i],i+1,3);
-    if (g_model.funcSw[i].func==FuncPlayPrompt) {
+    if (g_model.funcSw[i].func==FuncPlayPrompt && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
       fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
     } else {
       fswtchParamArmT[i]->hide();
@@ -1605,10 +1614,14 @@ void ModelEdit::tabFunctionSwitches()
     } else if (g_model.funcSw[i].func>FuncSafetyCh16) {
       if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset  || g_model.funcSw[i].func==FuncVolume || g_model.funcSw[i].func==FuncPlayValue)) {
         fswtchParamT[i]->hide();
-        fswtchParam[i]->hide();
+        if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+          fswtchParam[i]->hide();
+        }
       } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
+        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+          fswtchParamArmT[i]->hide();
+        }
         fswtchParamT[i]->hide();
-        fswtchParam[i]->hide();
       } else {
         fswtchParamArmT[i]->hide();
         fswtchParam[i]->hide();
@@ -1638,12 +1651,21 @@ void ModelEdit::tabFunctionSwitches()
       populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
       fswtchParam[i] = new QSpinBox(this);
-      fswtchParam[i]->setMaximum(125);
-      fswtchParam[i]->setMinimum(-125);
+      if (g_model.funcSw[i].func==FuncPlayPrompt) {
+        fswtchParam[i]->setMinimum(256);      
+        fswtchParam[i]->setMaximum(511);
+      } else { 
+        fswtchParam[i]->setMinimum(-125);
+        fswtchParam[i]->setMaximum(125);
+      } 
       fswtchParam[i]->setAccelerated(true);
       connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
       ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
-      fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+      if (g_model.funcSw[i].func==FuncPlayPrompt && GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+        fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
+      } else {
+        fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
+      }
 
       fswtchEnable[i] = new QCheckBox(this);
       fswtchEnable[i]->setText(tr("ON"));
@@ -1672,10 +1694,16 @@ void ModelEdit::tabFunctionSwitches()
       } else if (g_model.funcSw[i].func>FuncSafetyCh16) {
         if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset || g_model.funcSw[i].func==FuncVolume || g_model.funcSw[i].func==FuncPlayValue)) {
           fswtchParamT[i]->hide();
-          fswtchParam[i]->hide();
+          if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+            fswtchParam[i]->hide();
+          }
         } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
           fswtchParamT[i]->hide();
-          fswtchParam[i]->hide();
+          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+            fswtchParamArmT[i]->hide();
+          } else {
+            fswtchParam[i]->hide();            
+          }
         } else {
           fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
@@ -1809,16 +1837,23 @@ void ModelEdit::functionSwitchesEdited()
           fswtchParamT[i]->show();
           fswtchEnable[i]->hide();
         } else if (index==FuncPlayPrompt) {
-          fswtchParam[i]->hide();
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
           fswtchEnable[i]->setChecked(false);
-          fswtchParamArmT[i]->show();
-          for (int j=0; j<6; j++) {
-            g_model.funcSw[i].paramarm[j]=0;
-          }
-          for (int j=0; j<fswtchParamArmT[i]->text().length(); j++) {
-            g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->text().toAscii().at(j);
+          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+            fswtchParam[i]->show();
+            fswtchParam[i]->setMinimum(256);
+            fswtchParam[i]->setMaximum(512);
+            g_model.funcSw[i].param=fswtchParam[i]->value()-256;
+          } else {
+            fswtchParam[i]->hide();
+            fswtchParamArmT[i]->show();
+            for (int j=0; j<6; j++) {
+              g_model.funcSw[i].paramarm[j]=0;
+            }
+            for (int j=0; j<fswtchParamArmT[i]->text().length(); j++) {
+              g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->text().toAscii().at(j);
+            }
           }
         } else {
           g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
@@ -1833,6 +1868,8 @@ void ModelEdit::functionSwitchesEdited()
           }
         }
       } else {
+        fswtchParam[i]->setMinimum(-128);
+        fswtchParam[i]->setMaximum(127);
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
         fswtchParam[i]->show();
         fswtchEnable[i]->show();

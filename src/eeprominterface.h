@@ -730,6 +730,7 @@ enum Capability {
  Timers,
  TimerTriggerB,
  FuncSwitches,
+ VoicesAsNumbers,
  InstantTrimSW,
  CustomSwitches,
  CustomSwitchesExt,
