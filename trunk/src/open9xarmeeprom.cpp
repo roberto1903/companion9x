@@ -494,7 +494,7 @@ t_Open9xArmExpoData_v210::t_Open9xArmExpoData_v210(ExpoData &c9x)
   }
   weight = c9x.weight;
   expo = c9x.expo;
-  setEEPROMZString(name, c9x.name, sizeof(c9x.name));
+  setEEPROMZString(name, c9x.name, sizeof(name));
 }
 
 t_Open9xArmExpoData_v210::operator ExpoData ()
@@ -542,7 +542,7 @@ t_Open9xArmExpoData_v212::t_Open9xArmExpoData_v212(ExpoData &c9x)
   swtch = open9xArmFromSwitch(c9x.swtch);
   phases=c9x.phases;
   weight = c9x.weight;
-  setEEPROMZString(name, c9x.name, sizeof(c9x.name));
+  setEEPROMZString(name, c9x.name, sizeof(name));
 }
 
 t_Open9xArmExpoData_v212::operator ExpoData ()

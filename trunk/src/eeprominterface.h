@@ -407,9 +407,9 @@ class ExpoData {
     uint8_t weight;
     int8_t  expo;
     int8_t phase;
-    char name[6];
     uint8_t curveMode;
     int8_t  curveParam;
+    char name[6+1];
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
 
