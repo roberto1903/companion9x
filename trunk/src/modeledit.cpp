@@ -1843,7 +1843,7 @@ void ModelEdit::functionSwitchesEdited()
           if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
             fswtchParam[i]->show();
             fswtchParam[i]->setMinimum(256);
-            fswtchParam[i]->setMaximum(512);
+            fswtchParam[i]->setMaximum(511);
             g_model.funcSw[i].param=fswtchParam[i]->value()-256;
           } else {
             fswtchParam[i]->hide();
@@ -1868,8 +1868,8 @@ void ModelEdit::functionSwitchesEdited()
           }
         }
       } else {
-        fswtchParam[i]->setMinimum(-128);
-        fswtchParam[i]->setMaximum(127);
+      fswtchParam[i]->setMinimum(-125);
+      fswtchParam[i]->setMaximum(125);
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
         fswtchParam[i]->show();
         fswtchEnable[i]->show();
