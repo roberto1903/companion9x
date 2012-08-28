@@ -499,6 +499,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return 512;
       else
         return 104;
+    case VoicesAsNumbers:
+      if (board == BOARD_ERSKY9X)
+        return 0;
+      else
+        return 1;
     case SoundPitch:
       return 1;
     case Haptic:
