@@ -273,7 +273,12 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QComboBox" name="voiceCombo"/>
+      <widget class="QComboBox" name="voiceCombo">
+       <property name="toolTip">
+        <string>Set language of voice.
+May be different from firmware language</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLabel" name="voiceLabel">
