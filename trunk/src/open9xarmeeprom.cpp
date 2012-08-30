@@ -345,6 +345,8 @@ t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
   mode = c9x.mode;
   chn = c9x.chn;
   // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+  curve = 0;
+  expo = 0;
   if (c9x.curveMode==1) {
     if (c9x.curveParam >=0 && c9x.curveParam <= 10)
       curve = c9x.curveParam;
@@ -352,9 +354,9 @@ t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
       curve = c9x.curveParam - 4;
     else
       EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curveParam-6) + "\n";
-  } else {
-      curve=0;
-      expo=c9x.curveParam;
+  }
+  else {
+    expo=c9x.curveParam;
   }
 
   swtch = open9xArmFromSwitch(c9x.swtch);
@@ -410,8 +412,9 @@ t_Open9xArmExpoData_v208::operator ExpoData ()
 
   if (expo!=0 && curve!=0) {
     EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported") + "\n";
-  } else {
-    if (expo!=0) {
+  }
+  else {
+    if (curve == 0) {
         c9x.curveMode=0;
         c9x.curveParam=expo;
     } else {
@@ -440,6 +443,8 @@ t_Open9xArmExpoData_v210::t_Open9xArmExpoData_v210(ExpoData &c9x)
   mode = c9x.mode;
   chn = c9x.chn;
   // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
+  curve = 0;
+  expo = 0;
   if (c9x.curveMode==1) {
     if (c9x.curveParam >=0 && c9x.curveParam <= 10)
       curve = c9x.curveParam;
@@ -447,8 +452,8 @@ t_Open9xArmExpoData_v210::t_Open9xArmExpoData_v210(ExpoData &c9x)
       curve = c9x.curveParam - 4;
     else
       EEPROMWarnings += ::QObject::tr("Open9x doesn't allow Curve%1 in expos").arg(c9x.curveParam-6) + "\n";
-  } else {
-      curve=0;
+  }
+  else {
       expo=c9x.curveParam;
   }
 
@@ -505,16 +510,18 @@ t_Open9xArmExpoData_v210::operator ExpoData ()
 
   if (expo!=0 && curve!=0) {
     EEPROMWarnings += ::QObject::tr("Simultaneous usage of expo and curves is no longer supported") + "\n";
-  } else {
-    if (expo!=0) {
-        c9x.curveMode=0;
-        c9x.curveParam=expo;
-    } else {
-        c9x.curveMode=1;
-        if (curve <= 10)
-          c9x.curveParam = curve;
-        else
-          c9x.curveParam = curve + 4;
+  }
+  else {
+    if (curve == 0) {
+      c9x.curveMode=0;
+      c9x.curveParam=expo;
+    }
+    else {
+      c9x.curveMode=1;
+      if (curve <= 10)
+        c9x.curveParam = curve;
+      else
+        c9x.curveParam = curve + 4;
     }
   }
   c9x.swtch = open9xArmToSwitch(swtch);

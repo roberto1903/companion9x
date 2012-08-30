@@ -438,7 +438,7 @@ class LimitData {
     int16_t  offset;
     int8_t  ppmCenter;
     bool symetrical;
-    void clear() { min = -100; max = +100; revert = false; offset = 0; }
+    void clear() { min = -100; max = +100; revert = false; offset = 0; ppmCenter = 0; symetrical = 0; }
 };
 
 enum MltpxValue {
