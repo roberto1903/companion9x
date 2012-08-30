@@ -249,12 +249,12 @@
          </property>
          <item>
           <property name="text">
-           <string>Positive</string>
+           <string>Negative</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Negative</string>
+           <string>Positive</string>
           </property>
          </item>
         </widget>
