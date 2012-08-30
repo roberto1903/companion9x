@@ -62,9 +62,14 @@ void preferencesDialog::baseFirmwareChanged()
       if (firmware->voice) {
         ui->voiceLabel->show();
         ui->voiceCombo->show();
+        ui->voice_dnld->show();
+        ui->voiceLabel->setEnabled(true);
+        ui->voiceCombo->setEnabled(true);
+        ui->voice_dnld->setEnabled(true);
       } else {
         ui->voiceLabel->hide();
-        ui->voiceCombo->hide();        
+        ui->voiceCombo->hide();
+        ui->voice_dnld->hide();        
       }
       populateFirmwareOptions(firmware);
       break;
@@ -131,13 +136,13 @@ void preferencesDialog::firmwareOptionChanged(bool state)
               }
               if (voice) {
                 if (voice->isChecked()) {
-                  ui->voiceCombo->show();
-                  ui->voiceLabel->show();
-                  ui->voice_dnld->show();
+                  ui->voiceLabel->setEnabled(true);
+                  ui->voiceCombo->setEnabled(true);
+                  ui->voice_dnld->setEnabled(true);
                 } else {
-                  ui->voiceCombo->hide();
-                  ui->voiceLabel->hide();
-                  ui->voice_dnld->hide();
+                  ui->voiceLabel->setDisabled(true);
+                  ui->voiceCombo->setDisabled(true);
+                  ui->voice_dnld->setDisabled(true);
                 }
               }
               
@@ -148,19 +153,19 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       }
     }
   } else if (cb->text()=="voice" && !state) {
-    ui->voiceCombo->hide();
-    ui->voiceLabel->hide();
-    ui->voice_dnld->hide();
+    ui->voiceLabel->setDisabled(true);
+    ui->voiceCombo->setDisabled(true);
+    ui->voice_dnld->setDisabled(true);
   }
   if (voice) {
     if (voice->isChecked()) {
-      ui->voiceCombo->show();
-      ui->voiceLabel->show();
-      ui->voice_dnld->show();
+      ui->voiceLabel->setEnabled(true);
+      ui->voiceCombo->setEnabled(true);
+      ui->voice_dnld->setEnabled(true);
     } else {
-      ui->voiceCombo->hide();
-      ui->voiceLabel->hide();
-      ui->voice_dnld->hide();
+      ui->voiceLabel->setDisabled(true);
+      ui->voiceCombo->setDisabled(true);
+      ui->voice_dnld->setDisabled(true);
     }
   }  
   return firmwareChanged();
@@ -283,6 +288,20 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
           cb->setText(opt);
           cb->setToolTip(getTooltip(opt));
           cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
+          if (opt==QString("voice")) {
+            ui->voiceLabel->show();
+            ui->voiceCombo->show();
+            ui->voice_dnld->show();
+            if (current_firmware_id.contains(opt)) {
+              ui->voiceLabel->setEnabled(true);
+              ui->voiceCombo->setEnabled(true);
+              ui->voice_dnld->setEnabled(true);
+            } else {
+              ui->voiceLabel->setDisabled(true);
+              ui->voiceCombo->setDisabled(true);
+              ui->voice_dnld->setDisabled(true);
+            }
+          }
         }
       }
     }
