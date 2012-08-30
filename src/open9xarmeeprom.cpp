@@ -175,9 +175,8 @@ int8_t open9xArm210FromSource(RawSource source)
   int v1 = 0;
   if (source.type == SOURCE_TYPE_STICK)
     v1 = 1+source.index;
-  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
-    v1 = 8+source.index;
-  }
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER)
+    v1 = 8;
   else if (source.type == SOURCE_TYPE_TRIM)
     v1 = 9 + source.index;
   else if (source.type == SOURCE_TYPE_MAX)
@@ -202,8 +201,11 @@ RawSource open9xArm210ToSource(int8_t value)
   if (value == 0) {
     return RawSource(SOURCE_TYPE_NONE);
   }
-  else if (value == 7) {
-    return RawSource(SOURCE_TYPE_ROTARY_ENCODER, value - 1);
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_ROTARY_ENCODER, value - 8);
   }
   else if (value <= 12) {
     return RawSource(SOURCE_TYPE_TRIM, value - 9);
@@ -1302,7 +1304,7 @@ t_Open9xArmCustomSwData_v210::operator CustomSwData ()
     c9x.val1 = open9xArm210ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
     c9x.val2 = open9xArm210ToSource(v2).toValue();
   }
 
