@@ -39,6 +39,7 @@ private slots:
     void firmwareOptionChanged(bool state);
     void firmwareChanged();
     void on_fw_dnld_clicked();
+    void on_voice_dnld_clicked();
     void on_SplashSelect_clicked();
     void on_InvertPixels_clicked();
     void on_clearImageButton_clicked();

@@ -8,6 +8,7 @@
 #include "joystick.h"
 #include "joystickdialog.h"
 #endif
+#include <QDesktopServices>
 #include <QtGui>
 
 preferencesDialog::preferencesDialog(QWidget *parent) :
@@ -487,6 +488,15 @@ void preferencesDialog::on_fw_dnld_clicked()
     mw->downloadLatestFW(fw, fwId);
   }
   firmwareChanged();
+}
+
+void preferencesDialog::on_voice_dnld_clicked()
+{
+  QString url="http://85.18.253.250/voices/";
+  QString fwId;
+  FirmwareInfo *fw = getFirmware(fwId);
+  url.append(QString("%1/%2/").arg(fw->id).arg(ui->voiceCombo->currentText()));
+  QDesktopServices::openUrl(url);
 }
 
 void preferencesDialog::on_libraryPathButton_clicked()
