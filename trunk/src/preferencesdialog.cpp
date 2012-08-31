@@ -116,9 +116,10 @@ void preferencesDialog::firmwareOptionChanged(bool state)
 {
   QCheckBox * voice=NULL;
   QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
+  FirmwareInfo * firmware;
   if (cb && state) {
     QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
-    foreach(FirmwareInfo * firmware, firmwares) {
+    foreach(firmware, firmwares) {
       if (firmware->id == selected_firmware) {
         foreach(QList<const char *> opts, firmware->opts) {
           foreach(const char *opt, opts) {
@@ -157,7 +158,7 @@ void preferencesDialog::firmwareOptionChanged(bool state)
     ui->voiceCombo->setDisabled(true);
     ui->voice_dnld->setDisabled(true);
   }
-  if (voice) {
+  if (voice ) {
     if (voice->isChecked()) {
       ui->voiceLabel->setEnabled(true);
       ui->voiceCombo->setEnabled(true);
@@ -167,7 +168,15 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       ui->voiceCombo->setDisabled(true);
       ui->voice_dnld->setDisabled(true);
     }
-  }  
+  }  else if (firmware->voice) {
+      ui->voiceLabel->setEnabled(true);
+      ui->voiceCombo->setEnabled(true);
+      ui->voice_dnld->setEnabled(true);    
+  } else {
+      ui->voiceLabel->setDisabled(true);
+      ui->voiceCombo->setDisabled(true);
+      ui->voice_dnld->setDisabled(true);    
+  }
   return firmwareChanged();
 }
 
