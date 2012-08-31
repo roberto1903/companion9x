@@ -4747,9 +4747,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="305"/>
-        <location filename="open9xarmeeprom.cpp" line="398"/>
-        <location filename="open9xarmeeprom.cpp" line="493"/>
-        <location filename="open9xeeprom.cpp" line="290"/>
+        <location filename="open9xarmeeprom.cpp" line="400"/>
+        <location filename="open9xarmeeprom.cpp" line="498"/>
+        <location filename="open9xeeprom.cpp" line="301"/>
         <source>Phases settings on expos not exported</source>
         <translation>Nastavení fází v expech nebylo exportováno</translation>
     </message>
@@ -4757,11 +4757,11 @@ p, li { white-space: pre-wrap; }
         <location filename="gruvin9xeeprom.cpp" line="375"/>
         <location filename="open9xarmeeprom.cpp" line="60"/>
         <location filename="open9xarmeeprom.cpp" line="117"/>
-        <location filename="open9xeeprom.cpp" line="699"/>
-        <location filename="open9xeeprom.cpp" line="847"/>
-        <location filename="open9xeeprom.cpp" line="1001"/>
-        <location filename="open9xeeprom.cpp" line="1111"/>
-        <location filename="open9xeeprom.cpp" line="1168"/>
+        <location filename="open9xeeprom.cpp" line="713"/>
+        <location filename="open9xeeprom.cpp" line="861"/>
+        <location filename="open9xeeprom.cpp" line="1015"/>
+        <location filename="open9xeeprom.cpp" line="1126"/>
+        <location filename="open9xeeprom.cpp" line="1183"/>
         <source>Open9x on this board doesn&apos;t have Rotary Encoders</source>
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
@@ -4914,6 +4914,11 @@ p, li { white-space: pre-wrap; }
         <translation>Podsvětlení</translation>
     </message>
     <message>
+        <location filename="helpers.cpp" line="63"/>
+        <source>Play Track</source>
+        <translation>Hrát stopu</translation>
+    </message>
+    <message>
         <location filename="helpers.cpp" line="100"/>
         <location filename="helpers.cpp" line="190"/>
         <source>Timer1</source>
@@ -4994,53 +4999,53 @@ p, li { white-space: pre-wrap; }
         <translation>Simulátor pro tuto verzi firmware zatím není dostupný</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="354"/>
-        <location filename="open9xarmeeprom.cpp" line="449"/>
-        <location filename="open9xeeprom.cpp" line="244"/>
+        <location filename="open9xarmeeprom.cpp" line="356"/>
+        <location filename="open9xarmeeprom.cpp" line="454"/>
+        <location filename="open9xeeprom.cpp" line="255"/>
         <source>Open9x doesn&apos;t allow Curve%1 in expos</source>
         <translation>v Open9x nelze použít Křivku CV%1 v expech</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="412"/>
-        <location filename="open9xarmeeprom.cpp" line="507"/>
+        <location filename="open9xarmeeprom.cpp" line="414"/>
+        <location filename="open9xarmeeprom.cpp" line="512"/>
         <source>Simultaneous usage of expo and curves is no longer supported</source>
         <translation>Současné použití expa a křivek již není podporováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="687"/>
-        <location filename="open9xarmeeprom.cpp" line="830"/>
-        <location filename="open9xarmeeprom.cpp" line="976"/>
-        <location filename="open9xeeprom.cpp" line="473"/>
-        <location filename="open9xeeprom.cpp" line="618"/>
-        <location filename="open9xeeprom.cpp" line="767"/>
-        <location filename="open9xeeprom.cpp" line="918"/>
+        <location filename="open9xarmeeprom.cpp" line="694"/>
+        <location filename="open9xarmeeprom.cpp" line="837"/>
+        <location filename="open9xarmeeprom.cpp" line="983"/>
+        <location filename="open9xeeprom.cpp" line="487"/>
+        <location filename="open9xeeprom.cpp" line="632"/>
+        <location filename="open9xeeprom.cpp" line="781"/>
+        <location filename="open9xeeprom.cpp" line="932"/>
         <location filename="open9xv4eeprom.cpp" line="149"/>
         <location filename="open9xv4eeprom.cpp" line="298"/>
         <source>Phases settings on mixers not exported</source>
         <translation>Nastavení fází v mixech nebylo exportováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1183"/>
-        <location filename="open9xarmeeprom.cpp" line="1233"/>
-        <location filename="open9xeeprom.cpp" line="1244"/>
+        <location filename="open9xarmeeprom.cpp" line="1190"/>
+        <location filename="open9xarmeeprom.cpp" line="1240"/>
+        <location filename="open9xeeprom.cpp" line="1259"/>
         <location filename="open9xv4eeprom.cpp" line="625"/>
         <source>This version of open9x does not support Custom Switch function %1</source>
         <translation>Tato verze Open9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1700"/>
-        <location filename="open9xarmeeprom.cpp" line="1905"/>
-        <location filename="open9xarmeeprom.cpp" line="2102"/>
-        <location filename="open9xarmeeprom.cpp" line="2288"/>
-        <location filename="open9xarmeeprom.cpp" line="2481"/>
-        <location filename="open9xeeprom.cpp" line="2118"/>
-        <location filename="open9xeeprom.cpp" line="2274"/>
-        <location filename="open9xeeprom.cpp" line="2442"/>
-        <location filename="open9xeeprom.cpp" line="2627"/>
-        <location filename="open9xeeprom.cpp" line="2828"/>
-        <location filename="open9xeeprom.cpp" line="3041"/>
-        <location filename="open9xeeprom.cpp" line="3243"/>
-        <location filename="open9xeeprom.cpp" line="3443"/>
+        <location filename="open9xarmeeprom.cpp" line="1707"/>
+        <location filename="open9xarmeeprom.cpp" line="1912"/>
+        <location filename="open9xarmeeprom.cpp" line="2109"/>
+        <location filename="open9xarmeeprom.cpp" line="2295"/>
+        <location filename="open9xarmeeprom.cpp" line="2488"/>
+        <location filename="open9xeeprom.cpp" line="2133"/>
+        <location filename="open9xeeprom.cpp" line="2289"/>
+        <location filename="open9xeeprom.cpp" line="2457"/>
+        <location filename="open9xeeprom.cpp" line="2642"/>
+        <location filename="open9xeeprom.cpp" line="2843"/>
+        <location filename="open9xeeprom.cpp" line="3056"/>
+        <location filename="open9xeeprom.cpp" line="3258"/>
+        <location filename="open9xeeprom.cpp" line="3459"/>
         <location filename="open9xv4eeprom.cpp" line="983"/>
         <location filename="open9xv4eeprom.cpp" line="1181"/>
         <location filename="open9xv4eeprom.cpp" line="1387"/>
@@ -5050,35 +5055,35 @@ p, li { white-space: pre-wrap; }
         <translation>Open9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="2314"/>
-        <location filename="open9xarmeeprom.cpp" line="2507"/>
-        <location filename="open9xeeprom.cpp" line="3271"/>
-        <location filename="open9xeeprom.cpp" line="3471"/>
+        <location filename="open9xarmeeprom.cpp" line="2321"/>
+        <location filename="open9xarmeeprom.cpp" line="2514"/>
+        <location filename="open9xeeprom.cpp" line="3286"/>
+        <location filename="open9xeeprom.cpp" line="3487"/>
         <location filename="open9xv4eeprom.cpp" line="1611"/>
         <location filename="open9xv4eeprom.cpp" line="1804"/>
         <source>open9x only accepts %1 points in all curves</source>
         <translation>Open9x podporuje pouze %1 bodů ve všech křivkách</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="301"/>
+        <location filename="open9xeeprom.cpp" line="312"/>
         <source>Simultaneous usage of expo and curves is no longer supported in open9x</source>
         <translation>Současné použití expa a křivek již není v Open9x podporováno</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="408"/>
-        <location filename="open9xeeprom.cpp" line="553"/>
+        <location filename="open9xeeprom.cpp" line="422"/>
+        <location filename="open9xeeprom.cpp" line="567"/>
         <source>open9x on this board doesn&apos;t have Rotary Encoders</source>
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="2140"/>
-        <location filename="open9xeeprom.cpp" line="2296"/>
-        <location filename="open9xeeprom.cpp" line="2464"/>
-        <location filename="open9xeeprom.cpp" line="2648"/>
-        <location filename="open9xeeprom.cpp" line="2849"/>
-        <location filename="open9xeeprom.cpp" line="3062"/>
-        <location filename="open9xeeprom.cpp" line="3264"/>
-        <location filename="open9xeeprom.cpp" line="3464"/>
+        <location filename="open9xeeprom.cpp" line="2155"/>
+        <location filename="open9xeeprom.cpp" line="2311"/>
+        <location filename="open9xeeprom.cpp" line="2479"/>
+        <location filename="open9xeeprom.cpp" line="2663"/>
+        <location filename="open9xeeprom.cpp" line="2864"/>
+        <location filename="open9xeeprom.cpp" line="3077"/>
+        <location filename="open9xeeprom.cpp" line="3279"/>
+        <location filename="open9xeeprom.cpp" line="3480"/>
         <location filename="open9xv4eeprom.cpp" line="1004"/>
         <location filename="open9xv4eeprom.cpp" line="1202"/>
         <location filename="open9xv4eeprom.cpp" line="1408"/>
@@ -5485,7 +5490,7 @@ m2560 pro V4 desky</translation>
     <message>
         <location filename="burndialog.ui" line="332"/>
         <source>Use image in settings</source>
-        <translation>Aktivovat logo v nastavení rádia</translation>
+        <translation>Logo nastavené v předvolbách</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="367"/>
@@ -7279,7 +7284,7 @@ Tlačítkem Zrušit přerušíte kalibraci.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="153"/>
-        <location filename="preferencesdialog.ui" line="1108"/>
+        <location filename="preferencesdialog.ui" line="1113"/>
         <source>Open Folder</source>
         <translation>Vybrat složku</translation>
     </message>
@@ -7305,110 +7310,117 @@ Tlačítkem Zrušit přerušíte kalibraci.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="271"/>
-        <location filename="preferencesdialog.ui" line="294"/>
+        <location filename="preferencesdialog.ui" line="299"/>
         <source>Download</source>
         <translation>Stáhnout</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="281"/>
+        <location filename="preferencesdialog.ui" line="278"/>
+        <source>Set language of voice.
+May be different from firmware language</source>
+        <translation>Vyberte jazykovou verzi hlasu tts(voice).
+Může být jiná než verze firmwaru</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="286"/>
         <source>Voice</source>
         <translation>Hlas tts</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="351"/>
-        <location filename="preferencesdialog.ui" line="358"/>
-        <location filename="preferencesdialog.ui" line="365"/>
-        <location filename="preferencesdialog.ui" line="372"/>
-        <location filename="preferencesdialog.ui" line="385"/>
-        <location filename="preferencesdialog.ui" line="392"/>
-        <location filename="preferencesdialog.ui" line="399"/>
-        <location filename="preferencesdialog.ui" line="406"/>
-        <location filename="preferencesdialog.ui" line="419"/>
-        <location filename="preferencesdialog.ui" line="426"/>
-        <location filename="preferencesdialog.ui" line="433"/>
-        <location filename="preferencesdialog.ui" line="440"/>
-        <location filename="preferencesdialog.ui" line="447"/>
-        <location filename="preferencesdialog.ui" line="454"/>
-        <location filename="preferencesdialog.ui" line="461"/>
-        <location filename="preferencesdialog.ui" line="468"/>
-        <location filename="preferencesdialog.ui" line="475"/>
-        <location filename="preferencesdialog.ui" line="482"/>
-        <location filename="preferencesdialog.ui" line="489"/>
-        <location filename="preferencesdialog.ui" line="502"/>
-        <location filename="preferencesdialog.ui" line="509"/>
-        <location filename="preferencesdialog.ui" line="516"/>
-        <location filename="preferencesdialog.ui" line="523"/>
-        <location filename="preferencesdialog.ui" line="530"/>
+        <location filename="preferencesdialog.ui" line="356"/>
+        <location filename="preferencesdialog.ui" line="363"/>
+        <location filename="preferencesdialog.ui" line="370"/>
+        <location filename="preferencesdialog.ui" line="377"/>
+        <location filename="preferencesdialog.ui" line="390"/>
+        <location filename="preferencesdialog.ui" line="397"/>
+        <location filename="preferencesdialog.ui" line="404"/>
+        <location filename="preferencesdialog.ui" line="411"/>
+        <location filename="preferencesdialog.ui" line="424"/>
+        <location filename="preferencesdialog.ui" line="431"/>
+        <location filename="preferencesdialog.ui" line="438"/>
+        <location filename="preferencesdialog.ui" line="445"/>
+        <location filename="preferencesdialog.ui" line="452"/>
+        <location filename="preferencesdialog.ui" line="459"/>
+        <location filename="preferencesdialog.ui" line="466"/>
+        <location filename="preferencesdialog.ui" line="473"/>
+        <location filename="preferencesdialog.ui" line="480"/>
+        <location filename="preferencesdialog.ui" line="487"/>
+        <location filename="preferencesdialog.ui" line="494"/>
+        <location filename="preferencesdialog.ui" line="507"/>
+        <location filename="preferencesdialog.ui" line="514"/>
+        <location filename="preferencesdialog.ui" line="521"/>
+        <location filename="preferencesdialog.ui" line="528"/>
+        <location filename="preferencesdialog.ui" line="535"/>
         <source>CheckBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="547"/>
+        <location filename="preferencesdialog.ui" line="552"/>
         <source>Ask for flashing after Download</source>
         <translation>Zeptat se na flešování hned po stažení firmwaru </translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="594"/>
+        <location filename="preferencesdialog.ui" line="599"/>
         <source>Profile Name</source>
         <translation>Název profilu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="607"/>
+        <location filename="preferencesdialog.ui" line="612"/>
         <source>Save Profile</source>
         <translation>Uložit profil</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="624"/>
+        <location filename="preferencesdialog.ui" line="629"/>
         <source>BackLight Color</source>
         <translation>Barva podsvětlení </translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="635"/>
+        <location filename="preferencesdialog.ui" line="640"/>
         <source>Blue</source>
         <translation>Modrá</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="640"/>
+        <location filename="preferencesdialog.ui" line="645"/>
         <source>Green</source>
         <translation>Zelená</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="645"/>
+        <location filename="preferencesdialog.ui" line="650"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="650"/>
+        <location filename="preferencesdialog.ui" line="655"/>
         <source>Orange</source>
         <translation>Oranžová</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="655"/>
+        <location filename="preferencesdialog.ui" line="660"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="667"/>
+        <location filename="preferencesdialog.ui" line="672"/>
         <source>Check selected Fw updates</source>
         <translation>Kontrolovat aktualizace vybraného firmwaru </translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="695"/>
+        <location filename="preferencesdialog.ui" line="700"/>
         <source>Check for updates on startup</source>
         <translation>Kontrolovat aktualizace při spuštění</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="708"/>
+        <location filename="preferencesdialog.ui" line="713"/>
         <source>Language (requires restart)</source>
         <translation>Jazyk companion (vyžaduje restart)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="721"/>
+        <location filename="preferencesdialog.ui" line="726"/>
         <source>Custom TX splash screen</source>
         <translation>Vlastní úvodní logo</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="740"/>
+        <location filename="preferencesdialog.ui" line="745"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -7418,32 +7430,32 @@ Toto je použito šablonami k určení
 který kanál patří ke kterému výstupu.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="881"/>
+        <location filename="preferencesdialog.ui" line="886"/>
         <source>Firmware</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="894"/>
+        <location filename="preferencesdialog.ui" line="899"/>
         <source>Default Stick Mode</source>
         <translation>Výchozí mód vysílačky</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="907"/>
+        <location filename="preferencesdialog.ui" line="912"/>
         <source>Default Channel Order</source>
         <translation>Výchozí pořadí kanálů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="933"/>
+        <location filename="preferencesdialog.ui" line="938"/>
         <source>Show Splash Screen</source>
         <translation>Zobrazit úvodní logo</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="956"/>
+        <location filename="preferencesdialog.ui" line="961"/>
         <source>Personal splash library</source>
         <translation>Vlastní knihovna s logy</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="963"/>
+        <location filename="preferencesdialog.ui" line="968"/>
         <source>Mode selection:
 
 Mode 1:
@@ -7484,137 +7496,137 @@ Mode 4:
 </translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="988"/>
+        <location filename="preferencesdialog.ui" line="993"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mode 1 (Směr.Výšk.Plyn.Křid)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="993"/>
+        <location filename="preferencesdialog.ui" line="998"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mode 2 (Směr.Plyn.Výšk.Křid)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="998"/>
+        <location filename="preferencesdialog.ui" line="1003"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mode 3 (Křid.Výšk.Plyn.Směr)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1003"/>
+        <location filename="preferencesdialog.ui" line="1008"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mode 4 (Křid.Plyn.Výšk.Směr)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1017"/>
+        <location filename="preferencesdialog.ui" line="1022"/>
         <source>Joystick</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1031"/>
+        <location filename="preferencesdialog.ui" line="1036"/>
         <source>Include companion splashes</source>
         <translation>Zahrnout i výchozí loga</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1036"/>
+        <location filename="preferencesdialog.ui" line="1041"/>
         <source>Only user defined splashes</source>
         <translation>Jen vlastní loga</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1050"/>
+        <location filename="preferencesdialog.ui" line="1055"/>
         <source>Splash library behaviour</source>
         <translation>Chování knihovny s logy</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1082"/>
+        <location filename="preferencesdialog.ui" line="1087"/>
         <source>Recent History Size</source>
         <translation>Počet položek nedávné historie</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1089"/>
+        <location filename="preferencesdialog.ui" line="1094"/>
         <source>Profile slot</source>
         <translation>Slot profilu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1096"/>
+        <location filename="preferencesdialog.ui" line="1101"/>
         <source>eEprom backup folder</source>
         <translation>Složka pro zálohy EEprom</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1115"/>
+        <location filename="preferencesdialog.ui" line="1120"/>
         <source>auto backup before write</source>
         <translation>zálohovat před zápisem</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="186"/>
+        <location filename="preferencesdialog.cpp" line="191"/>
         <source>Last downloaded release: %1</source>
         <translation>Naposledy stažené vydání: %1</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="195"/>
+        <location filename="preferencesdialog.cpp" line="200"/>
         <source>The selected firmware has never been downloaded by companion9x.</source>
         <translation>Zvolený firmware ještě nebyl stažen pomocí companion9x.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="199"/>
+        <location filename="preferencesdialog.cpp" line="204"/>
         <source>The selected firmware cannot be downloaded by companion9x.</source>
         <translation>Companion9x nemůže stáhnout zvolený firmware.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="355"/>
+        <location filename="preferencesdialog.cpp" line="374"/>
         <source>Image stored in settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="366"/>
-        <location filename="preferencesdialog.cpp" line="638"/>
+        <location filename="preferencesdialog.cpp" line="385"/>
+        <location filename="preferencesdialog.cpp" line="657"/>
         <source>No joysticks found</source>
         <translation>Joystick nenalezen</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="423"/>
+        <location filename="preferencesdialog.cpp" line="442"/>
         <source>Support for frsky telemetry mod</source>
         <translation>Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
 (je potřeba upravit HW, bez této úpravy nebudou fungovat dva přepínače!
 a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="424"/>
+        <location filename="preferencesdialog.cpp" line="443"/>
         <source>Support for jeti telemetry mod</source>
         <translation>Podpora telemetrie JETI</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="425"/>
+        <location filename="preferencesdialog.cpp" line="444"/>
         <source>Support for receiving ardupilot data</source>
         <translation>telemetrie - podpora pro příjem ardupilot dat</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="426"/>
+        <location filename="preferencesdialog.cpp" line="445"/>
         <source>Support for receiving NMEA data</source>
         <translation>telemetrie - podpora pro příjem NMEA dat</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="427"/>
+        <location filename="preferencesdialog.cpp" line="446"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky atd.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="428"/>
+        <location filename="preferencesdialog.cpp" line="447"/>
         <source>Enable template menu</source>
         <translation>Přidá menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="429"/>
+        <location filename="preferencesdialog.cpp" line="448"/>
         <source>No splash screen</source>
         <translation>Bez úvodního loga</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="430"/>
+        <location filename="preferencesdialog.cpp" line="449"/>
         <source>No flight phases</source>
         <translation>Bez letových režimů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="431"/>
-        <location filename="preferencesdialog.cpp" line="443"/>
+        <location filename="preferencesdialog.cpp" line="450"/>
+        <location filename="preferencesdialog.cpp" line="462"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Vylepšený zvukový výstup,
 funkční i s origo pípákem,
@@ -7622,53 +7634,53 @@ ale doporučuje se provést
 instalaci reproduktoru</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="432"/>
+        <location filename="preferencesdialog.cpp" line="451"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Výstrahy pomocí vibračního motoru
 (je třeba osadit)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="433"/>
+        <location filename="preferencesdialog.cpp" line="452"/>
         <source>Support of frsky PXX protocol</source>
         <translation>Frsky PXX protokol,
 zatim ve zkušební verzi</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="434"/>
+        <location filename="preferencesdialog.cpp" line="453"/>
         <source>Support for DSM2 modules</source>
         <translation>Podpora DSM2 protokolu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="435"/>
+        <location filename="preferencesdialog.cpp" line="454"/>
         <source>Support for SD memory card</source>
         <translation>Podpora paměťové karty SD</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="436"/>
+        <location filename="preferencesdialog.cpp" line="455"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Podpora pro SmartieParts 2.2 desku
 (programátor/podsvícení)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="437"/>
+        <location filename="preferencesdialog.cpp" line="456"/>
         <source>PPM center adjustment in limits</source>
         <translation>Možnost nastavovat střed serva šířkou pulzu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="438"/>
+        <location filename="preferencesdialog.cpp" line="457"/>
         <source>Pots use in menus navigation</source>
         <translation>Moznost zadávat hodnoty
 a pohybovat se v menu
 pomocí potenciometrů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="439"/>
+        <location filename="preferencesdialog.cpp" line="458"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Výběr spínače v mixu atd.
 se provádí jeho sepnutím</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="440"/>
+        <location filename="preferencesdialog.cpp" line="459"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
 (+) a (-) invertuje hodnotu
@@ -7677,78 +7689,78 @@ se provádí jeho sepnutím</translation>
 (UP) a (DN) vastaví výchozí hodnotu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="441"/>
+        <location filename="preferencesdialog.cpp" line="460"/>
         <source>EEprom write Progress bar</source>
         <translation>Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="442"/>
+        <location filename="preferencesdialog.cpp" line="461"/>
         <source>Imperial units</source>
         <translation>Imerialní jednotky pro telemetrii
 (stopy, palce, míle atd.)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="444"/>
+        <location filename="preferencesdialog.cpp" line="463"/>
         <source>Disable heli and templates menus</source>
         <translation>bez menu heli a jednoduchých šablon modelu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="445"/>
+        <location filename="preferencesdialog.cpp" line="464"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="446"/>
+        <location filename="preferencesdialog.cpp" line="465"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Aktivní mixy, spínače atd.
 nebudou zobrazovány tučným pismem</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="447"/>
+        <location filename="preferencesdialog.cpp" line="466"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Hlasový výstup pro telemetrii,
 nutno zastavět hlasový modul</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="448"/>
+        <location filename="preferencesdialog.cpp" line="467"/>
         <source>Disable curves menus</source>
         <translation>Bez uživatelsky definovatelných křivek</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="505"/>
+        <location filename="preferencesdialog.cpp" line="524"/>
         <source>Select your library folder</source>
         <translation>Vyber složku s knihovnou</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="515"/>
+        <location filename="preferencesdialog.cpp" line="534"/>
         <source>Select your eeprom backup folder</source>
         <translation>Vyber složku pro zálohování eeprom</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="531"/>
-        <location filename="preferencesdialog.cpp" line="613"/>
+        <location filename="preferencesdialog.cpp" line="550"/>
+        <location filename="preferencesdialog.cpp" line="632"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="531"/>
-        <location filename="preferencesdialog.cpp" line="613"/>
+        <location filename="preferencesdialog.cpp" line="550"/>
+        <location filename="preferencesdialog.cpp" line="632"/>
         <source>Cannot load %1.</source>
         <translation>Nemohu načíst %1.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="577"/>
+        <location filename="preferencesdialog.cpp" line="596"/>
         <source>Profile name is empty, profile slot %1 will we deleted.&lt;br&gt;Are you sure ?</source>
         <translation>Název profilu je prázdný, slot %1 bude odstraněn.&lt;br&gt;Souhlasíte ?</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="607"/>
+        <location filename="preferencesdialog.cpp" line="626"/>
         <source>Open Image to load</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="607"/>
+        <location filename="preferencesdialog.cpp" line="626"/>
         <source>Images (%1)</source>
         <translation>obrázky (%1)</translation>
     </message>
