@@ -609,6 +609,7 @@ void RegisterFirmwares()
   open9x->addOption("PXX");
   open9x->addOption("DSM2");
   open9x->addOption("ppmca");
+  open9x->addOption("symlimits");
   open9x->addOption("potscroll");
   open9x->addOption("sp22");
   open9x->addOption("autoswitch");
@@ -637,6 +638,7 @@ void RegisterFirmwares()
   open9x->addOption("sdcard");
   open9x->addOption("voice");
   open9x->addOption("ppmca");
+  open9x->addOption("symlimits");
   open9x->addOption("autoswitch");
   open9x->addOption("dblkeys");
   open9x->addOption("nographics");
@@ -660,6 +662,7 @@ void RegisterFirmwares()
   open9x->addOption("templates");
   open9x->addOption("nofp");
   open9x->addOption("nocurves");
+  open9x->addOption("symlimits");
   open9x->addOption("autoswitch");
   open9x->addOption("dblkeys");
   open9x->addOption("nographics");
