@@ -1484,6 +1484,28 @@ t_Open9xArmSwashRingData_v209::operator SwashRingData ()
   return c9x;
 }
 
+t_Open9xArmSwashRingData_v210::t_Open9xArmSwashRingData_v210(SwashRingData &c9x)
+{
+  invertELE = c9x.invertELE;
+  invertAIL = c9x.invertAIL;
+  invertCOL = c9x.invertCOL;
+  type = c9x.type;
+  collectiveSource = open9xArm210FromSource(c9x.collectiveSource);
+  value = c9x.value;
+}
+
+t_Open9xArmSwashRingData_v210::operator SwashRingData ()
+{
+  SwashRingData c9x;
+  c9x.invertELE = invertELE;
+  c9x.invertAIL = invertAIL;
+  c9x.invertCOL = invertCOL;
+  c9x.type = type;
+  c9x.collectiveSource = open9xArm210ToSource(collectiveSource);
+  c9x.value = value;
+  return c9x;
+}
+
 t_Open9xArmFrSkyBarData_v210::operator FrSkyBarData ()
 {
   FrSkyBarData c9x;

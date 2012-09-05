@@ -347,6 +347,21 @@ PACK(typedef struct t_Open9xArmSwashRingData_v209 { // Swash Ring data
 
 }) Open9xArmSwashRingData_v209;
 
+PACK(typedef struct t_Open9xArmSwashRingData_v210 { // Swash Ring data
+  uint8_t   invertELE:1;
+  uint8_t   invertAIL:1;
+  uint8_t   invertCOL:1;
+  uint8_t   type:5;
+  uint8_t   collectiveSource;
+  uint8_t   value;
+
+  operator SwashRingData();
+  t_Open9xArmSwashRingData_v210() { memset(this, 0, sizeof(t_Open9xArmSwashRingData_v210)); }
+  t_Open9xArmSwashRingData_v210(SwashRingData&);
+
+}) Open9xArmSwashRingData_v210;
+
+
 PACK(typedef struct t_Open9xArmFrSkyBarData_v210 {
   uint8_t   source;
   uint8_t   barMin;           // minimum for bar display
@@ -577,7 +592,7 @@ PACK(typedef struct t_Open9xArmModelData_v212 {
   int8_t    points[O9X_ARM_NUM_POINTS];
   Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v211 funcSw[O9X_ARM_NUM_FSW];
-  Open9xArmSwashRingData_v209 swashR;
+  Open9xArmSwashRingData_v210 swashR;
   Open9xArmPhaseData_v212 phaseData[O9X_ARM_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
