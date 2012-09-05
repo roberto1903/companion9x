@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -260,7 +260,7 @@
         </widget>
        </item>
        <item row="17" column="0" colspan="2">
-        <widget class="QLabel" name="label_13">
+        <widget class="QLabel" name="label_pulsePol">
          <property name="text">
           <string>Pulse Shift (polarity)</string>
          </property>
@@ -4556,7 +4556,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>566</height>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7988,8 +7988,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>552</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12906,8 +12906,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>581</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

@@ -1396,9 +1396,9 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
     }
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
       cswitchDuration[i]->setVisible(true);
-      cswitchDuration[i]->setValue(g_model.customSw[i].duration/2);
+      cswitchDuration[i]->setValue(g_model.customSw[i].duration/2.0);
       cswitchDelay[i]->setVisible(true);
-      cswitchDelay[i]->setValue(g_model.customSw[i].delay/2);
+      cswitchDelay[i]->setValue(g_model.customSw[i].delay/2.0);
     }
 }
 
@@ -1771,8 +1771,8 @@ void ModelEdit::customSwitchesEdited()
             setSwitchWidgetVisibility(i);
         }
         if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
-          g_model.customSw[i].delay= round(cswitchDelay[i]->value()*2);
-          g_model.customSw[i].duration= round(cswitchDuration[i]->value()*2);
+          g_model.customSw[i].duration= (uint8_t)round(cswitchDuration[i]->value()*2);
+          g_model.customSw[i].delay= (uint8_t)round(cswitchDelay[i]->value()*2);
         }
         RawSource source;
         switch(CS_STATE(g_model.customSw[i].func))
@@ -2308,6 +2308,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->ppmDelaySB->hide();
         ui->ppmDelaySB->setEnabled(false);
         ui->label_PPMCH->hide();
+        ui->label_pulsePol->hide();
+        ui->pulsePolCB->hide();
         ui->numChannelsSB->hide();
         ui->numChannelsSB->setEnabled(false);
         ui->label_ppmFrameLength->hide();
@@ -2323,6 +2325,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
         break;
       case DSM2:
+        ui->label_pulsePol->hide();
+        ui->pulsePolCB->hide();
         ui->label_PPM->hide();
         ui->ppmDelaySB->hide();
         ui->ppmDelaySB->setEnabled(false);
@@ -2349,6 +2353,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->DSM_Type->show();
         break;
       default:
+        ui->label_pulsePol->show();
+        ui->pulsePolCB->show();
         ui->label_DSM->hide();
         ui->DSM_Type->hide();
         ui->DSM_Type->setEnabled(false);
