@@ -1009,7 +1009,7 @@ void ModelEdit::heliEdited()
 {
     if(heliEditLock) return;
     g_model.swashRingData.type  = ui->swashTypeCB->currentIndex();
-    g_model.swashRingData.collectiveSource = ui->swashCollectiveCB->currentIndex();
+    g_model.swashRingData.collectiveSource = ui->swashCollectiveCB->itemData(ui->swashCollectiveCB->currentIndex()).toInt();
     g_model.swashRingData.value = ui->swashRingValSB->value();
     g_model.swashRingData.invertELE = ui->swashInvertELE->isChecked();
     g_model.swashRingData.invertAIL = ui->swashInvertAIL->isChecked();
