@@ -311,10 +311,10 @@ bool MdiChild::saveAs(bool isNew)
     if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
       curFile.replace(".eepe",".bin");
       QFileInfo fi(curFile);      
-      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.baseName(), tr(BIN_FILES_FILTER));
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(BIN_FILES_FILTER));
     } else {
       QFileInfo fi(curFile);
-      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.baseName(), tr(EEPROM_FILES_FILTER));
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(EEPROM_FILES_FILTER));
     }
     if (fileName.isEmpty())
         return false;
