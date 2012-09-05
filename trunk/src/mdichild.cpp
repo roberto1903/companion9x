@@ -53,6 +53,7 @@
 #include "simulatordialog.h"
 #include "printdialog.h"
 #include "burndialog.h"
+#include <QFileInfo>
 
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
@@ -309,9 +310,11 @@ bool MdiChild::saveAs(bool isNew)
     QString fileName;
     if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
       curFile.replace(".eepe",".bin");
-      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(BIN_FILES_FILTER));
+      QFileInfo fi(curFile);      
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.baseName(), tr(BIN_FILES_FILTER));
     } else {
-      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +curFile, tr(EEPROM_FILES_FILTER));
+      QFileInfo fi(curFile);
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.baseName(), tr(EEPROM_FILES_FILTER));
     }
     if (fileName.isEmpty())
         return false;
