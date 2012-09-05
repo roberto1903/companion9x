@@ -41,6 +41,7 @@
 
 #include <QtGui>
 #include <QNetworkProxyFactory>
+#include <QFileInfo>
 #include "mainwindow.h"
 #include "mdichild.h"
 #include "burnconfigdialog.h"
@@ -289,6 +290,7 @@ void MainWindow::reply1Accepted()
   QString errormsg;
   QSettings settings("companion9x", "companion9x");
   bool autoflash=settings.value("burnFirmware", true).toBool();
+  bool addversion=settings.value("rename_firmware_files", false).toBool();
   settings.beginGroup("FwRevisions");
   if (downloadedFWFilename.isEmpty()) {
     if (!(downloadedFW.isEmpty())) {
@@ -334,6 +336,16 @@ void MainWindow::reply1Accepted()
     int pos=rev.lastIndexOf("-r");
     if (pos>0) {
       currentFWrev=rev.mid(pos+2).toInt();
+      if (addversion) {
+        QFileInfo fi(downloadedFWFilename);
+        QString path=fi.path();
+        path.append(fi.completeBaseName());
+        path.append(rev);
+        path.append(fi.suffix());
+        QDir qd;
+        qd.rename(downloadedFWFilename,path);
+        downloadedFWFilename=path;
+      }
       settings.setValue(downloadedFW, currentFWrev);
       if (autoflash) {
         int ret = QMessageBox::question(this, "companion9x", tr("Do you want to flash the firmware now ?"), QMessageBox::Yes | QMessageBox::No);
@@ -417,7 +429,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 downloadedFW = fwToUpdate;
                 QString url = GetFirmware(fwToUpdate)->getUrl(fwToUpdate);
                 QString ext = url.mid(url.lastIndexOf("."));
-                QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
+                bool addversion=settings.value("rename_firmware_files", false).toBool();
+                QString fileName;
+                if (addversion) {
+                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + QString("-r%1").arg(NewFwRev) + ext, tr(HEX_FILES_FILTER));
+                } else {
+                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
+                }
                 if (!fileName.isEmpty()) {
                     settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
                     downloadDialog * dd = new downloadDialog(this, url, fileName);
@@ -520,6 +538,7 @@ void MainWindow::loadProfile()
   QSettings settings("companion9x", "companion9x");
   QAction *action = qobject_cast<QAction *>(sender());
   int chord,defmod, burnfw;
+  bool renfw;
   
   if (action) 
   {
@@ -531,12 +550,14 @@ void MainWindow::loadProfile()
     chord=settings.value("default_channel_order", 0).toInt();
     defmod=settings.value("default_mode", 0).toInt();
     burnfw=settings.value("burnFirmware", 0).toInt();
+    renfw=settings.value("rename_firmware_files", false).toBool();
     current_firmware_id=settings.value("firmware", default_firmware_id).toString();
     settings.endGroup();
     settings.endGroup();
     settings.setValue("default_channel_order", chord);
     settings.setValue("default_mode", defmod);
     settings.setValue("burnFirmware", burnfw);
+    settings.setValue("rename_firmware_files", renfw);
     settings.setValue("firmware", current_firmware_id);
     settings.setValue("profileId", profnum);
     current_firmware = GetFirmware(current_firmware_id);
