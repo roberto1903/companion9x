@@ -81,7 +81,7 @@ void preferencesDialog::baseFirmwareChanged()
 FirmwareInfo * preferencesDialog::getFirmware(QString & fwId)
 {
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
-  bool voice;
+  bool voice=false;
   foreach(FirmwareInfo * firmware, firmwares) {
     if (firmware->id == selected_firmware) {
       QString id = firmware->id;
@@ -223,10 +223,12 @@ void preferencesDialog::writeValues()
     settings.setValue("locale", ui->locale_QB->itemData(ui->locale_QB->currentIndex()));
   else
     settings.remove("locale");
+  
   settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
   settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
   settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
+  settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
@@ -335,6 +337,7 @@ void preferencesDialog::initSettings()
   ui->channelorderCB->setCurrentIndex(settings.value("default_channel_order", 0).toInt());
   ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
   ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
+  ui->renameFirmware->setChecked(settings.value("rename_firmware_files", false).toBool());
   ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
   ui->historySize->setValue(settings.value("history_size", 10).toInt());
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
@@ -618,6 +621,7 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
+    settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
     current_firmware = getFirmware(current_firmware_id);
     settings.setValue("firmware", current_firmware_id);
     settings.endGroup();
