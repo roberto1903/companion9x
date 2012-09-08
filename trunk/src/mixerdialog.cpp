@@ -90,19 +90,19 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->slowDownSB->setMaximum(15.0/scale);
     ui->slowDownSB->setSingleStep(1.0/scale);
     ui->slowDownSB->setDecimals(scale-1);
-    ui->slowDownSB->setValue(md->speedDown/scale);
+    ui->slowDownSB->setValue((float)md->speedDown/scale);
     ui->slowUpSB->setMaximum(15.0/scale);
     ui->slowUpSB->setSingleStep(1.0/scale);
     ui->slowUpSB->setDecimals(scale-1);
-    ui->slowUpSB->setValue(md->speedUp/scale);
+    ui->slowUpSB->setValue((float)md->speedUp/scale);
     ui->delayDownSB->setMaximum(15.0/scale);
     ui->delayDownSB->setSingleStep(1.0/scale);
     ui->delayDownSB->setDecimals(scale-1);
-    ui->delayDownSB->setValue(md->delayDown/scale);
+    ui->delayDownSB->setValue((float)md->delayDown/scale);
     ui->delayUpSB->setMaximum(15.0/scale);
     ui->delayUpSB->setSingleStep(1.0/scale);
     ui->delayUpSB->setDecimals(scale-1);
-    ui->delayUpSB->setValue(md->delayUp/scale);
+    ui->delayUpSB->setValue((float)md->delayUp/scale);
     QTimer::singleShot(0, this, SLOT(shrink()));
 
     valuesChanged();
