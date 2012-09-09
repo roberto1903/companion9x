@@ -637,6 +637,9 @@ void RegisterFirmwares()
   open9x->addOption("nocurves");
   open9x->addOption("sdcard");
   open9x->addOption("voice");
+  open9x->addOption("PXX");
+  open9x->addOption("DSM2");
+  open9x->addOption("DSM2PPM");
   open9x->addOption("ppmca");
   open9x->addOption("symlimits");
   open9x->addOption("autoswitch");

@@ -30,6 +30,9 @@ private:
     FirmwareInfo * getFirmware(QString &fwId);
     void initSettings();
     QString getTooltip(const char * opt);
+    QCheckBox * dsm2;
+    QCheckBox * dsm2ppm;
+
 
 private slots:
     void shrink();
