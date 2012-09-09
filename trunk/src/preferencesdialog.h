@@ -49,6 +49,8 @@ private slots:
     void on_checkFWUpdates_clicked();
     void on_ProfSlot_SB_valueChanged();
     void on_ProfSave_PB_clicked();
+    void on_export_PB_clicked();
+    void on_import_PB_clicked();
 #ifdef JOYSTICKS
     void on_joystickChkB_clicked();
     void on_joystickcalButton_clicked();

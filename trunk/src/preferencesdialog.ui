@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>587</height>
+    <height>614</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -592,8 +592,22 @@ May be different from firmware language</string>
     </spacer>
    </item>
    <item row="20" column="1" colspan="4">
-    <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <item>
+    <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,0,1,0,0">
+     <item row="1" column="4">
+      <widget class="QPushButton" name="export_PB">
+       <property name="text">
+        <string>Export Profile</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="ProfSave_PB">
+       <property name="text">
+        <string>Save Profile</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
       <widget class="QSpinBox" name="ProfSlot_SB">
        <property name="minimum">
         <number>1</number>
@@ -603,23 +617,23 @@ May be different from firmware language</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="import_PB">
+       <property name="text">
+        <string>Import Profile</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2" colspan="2">
+      <widget class="QLineEdit" name="ProfName_LE"/>
+     </item>
+     <item row="0" column="1">
       <widget class="QLabel" name="label_16">
        <property name="text">
         <string>Profile Name</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="ProfName_LE"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ProfSave_PB">
-       <property name="text">
-        <string>Save Profile</string>
        </property>
       </widget>
      </item>
