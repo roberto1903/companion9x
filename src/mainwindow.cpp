@@ -294,6 +294,38 @@ void MainWindow::reply1Accepted()
   settings.beginGroup("FwRevisions");
   if (downloadedFWFilename.isEmpty()) {
     if (!(downloadedFW.isEmpty())) {
+      QFile file(downloadedFW);
+      if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
+      QMessageBox::critical(this, tr("Error"),
+                              tr("Error opening file %1:\n%2.")
+                              .arg(downloadedFW)
+                              .arg(file.errorString()));
+        return;
+      }
+      file.reset();
+      QTextStream inputStream(&file);
+      QString hline = inputStream.readLine();
+      if (hline.startsWith("ERROR:")) {
+        int errnum=hline.mid(6).toInt();
+        switch(errnum) {
+          case 1:
+            errormsg=tr("Firmware does not longer fit in flash, due to selected firmware options");
+            break;
+          case 2:
+            errormsg=tr("Compilation server termporary failure, try later");
+            break;
+          case 3:
+            errormsg=tr("Compilation server too busy, try later");
+            break;
+          default:
+            errormsg=tr("Unknown server failure, try later");
+            break;          
+        }
+        file.close();
+        QMessageBox::critical(this, tr("Error"), errormsg);
+        settings.endGroup();
+        return;
+      }
       currentFWrev = currentFWrev_temp;
       settings.setValue(downloadedFW, currentFWrev);
     }
@@ -309,7 +341,6 @@ void MainWindow::reply1Accepted()
     file.reset();
     QTextStream inputStream(&file);
     QString hline = inputStream.readLine();
-    qDebug() << hline;
     if (hline.startsWith("ERROR:")) {
       int errnum=hline.mid(6).toInt();
       switch(errnum) {
@@ -437,11 +468,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                   fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
                 }
                 if (!fileName.isEmpty()) {
+                    downloadedFW = fileName;
                     settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
                     downloadDialog * dd = new downloadDialog(this, url, fileName);
                     currentFWrev_temp = NewFwRev;
                     connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
                     dd->exec();
+                    downloadedFW = fwToUpdate;
                 }
             }
         }
