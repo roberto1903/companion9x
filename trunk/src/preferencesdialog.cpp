@@ -26,6 +26,9 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
       ui->optionCheckBox_21,ui->optionCheckBox_22,ui->optionCheckBox_23,ui->optionCheckBox_24,
       NULL };
 
+  dsm2=NULL;
+  dsm2ppm=NULL;
+  
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
   connect(ui->voiceCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
 
@@ -133,6 +136,20 @@ void preferencesDialog::firmwareOptionChanged(bool state)
                 }
                 if (cb->text() == "voice") {
                   voice=cb;
+                }
+                if (cb->text() == "DSM2" && cb->isChecked()) {
+                  if (dsm2ppm) {
+                    if (dsm2ppm->isChecked()) {
+                      dsm2ppm->setChecked(false);
+                    }
+                  }
+                }
+                if (cb->text() == "DSM2PPM" && cb->isChecked()) {
+                  if (dsm2) {
+                    if (dsm2->isChecked()) {
+                      dsm2->setChecked(false);
+                    }
+                  }
                 }
               }
               if (voice) {
@@ -299,6 +316,13 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
           cb->setText(opt);
           cb->setToolTip(getTooltip(opt));
           cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
+          if (opt==QString("DSM2")) {
+            dsm2=cb;
+          }
+          if (opt==QString("DSM2PPM")) {
+            dsm2ppm=cb;
+          }
+            
           if (opt==QString("voice")) {
             ui->voiceLabel->show();
             ui->voiceCombo->show();
@@ -434,6 +458,7 @@ const char * options[]={
         "haptic",
         "PXX",
         "DSM2",
+        "DSM2PPM",
         "sdcard",
         "sp22",
         "ppmca",
@@ -464,6 +489,7 @@ const char * options[]={
         tr("Used if you have modified your radio with haptic mode"),
         tr("Support of frsky PXX protocol"),
         tr("Support for DSM2 modules"),
+        tr("Support for DSM2 modules using ppm instead of true serial"),
         tr("Support for SD memory card"),
         tr("SmartieParts 2.2 Backlight support"),
         tr("PPM center adjustment in limits"),
