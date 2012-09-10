@@ -369,10 +369,13 @@ void MainWindow::reply1Accepted()
       currentFWrev=rev.mid(pos+2).toInt();
       if (addversion) {
         QFileInfo fi(downloadedFWFilename);
-        QString path=fi.path();
+        QString path=fi.path()+"/";
         path.append(fi.completeBaseName());
-        path.append(rev);
+        path.append(rev.mid(pos));
+        path.append(".");
         path.append(fi.suffix());
+        qDebug() << downloadedFWFilename;
+        qDebug() << path;
         QDir qd;
         qd.rename(downloadedFWFilename,path);
         downloadedFWFilename=path;
@@ -412,7 +415,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         int k = qba.indexOf("-r", i);
         int l = qba.indexOf('"', k);
         int rev = QString::fromAscii(qba.mid(k+2, l-k-2)).toInt(&cres);
-
+        QString newrev=qba.mid(k);
         if(!cres)
         {
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
@@ -463,7 +466,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 bool addversion=settings.value("rename_firmware_files", false).toBool();
                 QString fileName;
                 if (addversion) {
-                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + QString("-r%1").arg(NewFwRev) + ext, tr(HEX_FILES_FILTER));
+                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + newrev + ext, tr(HEX_FILES_FILTER));
                 } else {
                   fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
                 }
