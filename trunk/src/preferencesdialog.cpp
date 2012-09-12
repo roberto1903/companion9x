@@ -28,6 +28,7 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
 
   dsm2=NULL;
   dsm2ppm=NULL;
+  voice=NULL;
   
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
   connect(ui->voiceCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
@@ -60,6 +61,7 @@ preferencesDialog::~preferencesDialog()
 void preferencesDialog::baseFirmwareChanged()
 {
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
+  voice=NULL;
   foreach(FirmwareInfo * firmware, firmwares) {
     if (firmware->id == selected_firmware) {
       if (firmware->voice) {
@@ -117,7 +119,6 @@ void preferencesDialog::firmwareLangChanged()
 
 void preferencesDialog::firmwareOptionChanged(bool state)
 {
-  QCheckBox * voice=NULL;
   QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
   FirmwareInfo * firmware;
   if (cb && state) {
@@ -133,9 +134,6 @@ void preferencesDialog::firmwareOptionChanged(bool state)
                     if (ocb->text() == other)
                       ocb->setChecked(false);
                   }
-                }
-                if (cb->text() == "voice") {
-                  voice=cb;
                 }
                 if (cb->text() == "DSM2" && cb->isChecked()) {
                   if (dsm2ppm) {
@@ -324,10 +322,11 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
           }
             
           if (opt==QString("voice")) {
+            voice=cb;
             ui->voiceLabel->show();
             ui->voiceCombo->show();
             ui->voice_dnld->show();
-            if (current_firmware_id.contains(opt)) {
+            if (current_firmware_id.contains(opt) ||firmware->voice) {
               ui->voiceLabel->setEnabled(true);
               ui->voiceCombo->setEnabled(true);
               ui->voice_dnld->setEnabled(true);
