@@ -72,6 +72,11 @@
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
+
+bool winRenameFile(const QString& aOldName, const QString& aNewName)
+{
+   return MoveFile((LPWSTR)aOldName.utf16(), (LPWSTR)aNewName.utf16());
+} // winRenameFile
 #endif
 
 MainWindow::MainWindow():
@@ -369,15 +374,18 @@ void MainWindow::reply1Accepted()
       currentFWrev=rev.mid(pos+2).toInt();
       if (addversion) {
         QFileInfo fi(downloadedFWFilename);
-        QString path=fi.path()+"/";
+        QString path=fi.path()+QDir::separator ();
         path.append(fi.completeBaseName());
         path.append(rev.mid(pos));
         path.append(".");
         path.append(fi.suffix());
-        qDebug() << downloadedFWFilename;
-        qDebug() << path;
         QDir qd;
+#if defined WIN32 || !defined __GNUC__
+        winRenameFile(downloadedFWFilename,path);
+#else
         qd.rename(downloadedFWFilename,path);
+#endif        
+        
         downloadedFWFilename=path;
       }
       settings.setValue(downloadedFW, currentFWrev);
