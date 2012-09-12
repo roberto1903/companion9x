@@ -32,6 +32,7 @@ private:
     QString getTooltip(const char * opt);
     QCheckBox * dsm2;
     QCheckBox * dsm2ppm;
+    QCheckBox * voice;
 
 
 private slots:
