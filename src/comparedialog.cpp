@@ -33,6 +33,7 @@ compareDialog::compareDialog(QWidget *parent, GeneralSettings *gg) :
   model2=0;
   g_model1=(ModelData *)malloc(sizeof(ModelData));
   g_model2=(ModelData *)malloc(sizeof(ModelData));
+  modeltemp=(ModelData *)malloc(sizeof(ModelData));
     //setDragDropOverwriteMode(true);
     //setDropIndicatorShown(true);
 /*
@@ -98,9 +99,18 @@ void compareDialog::dropEvent(QDropEvent *event)
           char c = *gData;
           gData++;
           if(c=='M') {
-            memcpy(g_model1,(ModelData *)gData,sizeof(ModelData));
-            ui->label_1->setText(g_model1->name);
-            model1=1;
+            memcpy(modeltemp,(ModelData *)gData,sizeof(ModelData));
+            if (modeltemp->used) {
+              memcpy(g_model1,(ModelData *)gData,sizeof(ModelData));
+              QString name;
+              name.append(g_model1->name);
+              if (!name.isEmpty()) {
+                ui->label_1->setText(name);
+              } else {
+                ui->label_1->setText(tr("No name"));
+              }
+              model1=1;
+            }
           }
         }
       }          
@@ -114,9 +124,18 @@ void compareDialog::dropEvent(QDropEvent *event)
           char c = *gData;
           gData++;
           if(c=='M') {
-            memcpy(g_model2,(ModelData *)gData,sizeof(ModelData));
-            ui->label_2->setText(g_model2->name);
-            model2=1;
+            memcpy(modeltemp,(ModelData *)gData,sizeof(ModelData));
+            if (modeltemp->used) {
+              memcpy(g_model2,(ModelData *)gData,sizeof(ModelData));
+              QString name;
+              name.append(g_model2->name);
+              if (!name.isEmpty()) {
+                ui->label_2->setText(name);
+              } else {
+                ui->label_2->setText(tr("No name"));
+              }
+              model2=1;
+            }
           }
         }
       }                  
