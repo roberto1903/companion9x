@@ -90,7 +90,7 @@ void populateFuncCB(QComboBox *b, unsigned int value) {
 QString FuncParam(uint function, unsigned int value) {
   QStringList qs;
   if (function==FuncPlaySound) {
-    qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
+    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
     return qs.at(value);
   } else if (function==FuncPlayHaptic) { 
@@ -182,7 +182,7 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
   QStringList qs;
   b->clear();
   if (function==FuncPlaySound) {
-    qs <<"Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
+    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
   } else if (function==FuncPlayHaptic) { 
     qs << "0" << "1" << "2" << "3";
