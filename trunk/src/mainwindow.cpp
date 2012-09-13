@@ -326,6 +326,7 @@ void MainWindow::reply1Accepted()
         settings.endGroup();
         return;
       }
+      file.close();
       currentFWrev = currentFWrev_temp;
       settings.setValue(downloadedFW, currentFWrev);
     }
@@ -362,6 +363,7 @@ void MainWindow::reply1Accepted()
       settings.endGroup();
       return;
     }
+    file.close();
     FlashInterface flash(downloadedFWFilename);
     QString rev=flash.getSvn();
     int pos=rev.lastIndexOf("-r");
@@ -375,12 +377,7 @@ void MainWindow::reply1Accepted()
         path.append(".");
         path.append(fi.suffix());
         QDir qd;
-#if defined WIN32 || !defined __GNUC__
-        MoveFileA(downloadedFWFilename.toStdString().c_str(),path.c_str());        
-#else
         qd.rename(downloadedFWFilename,path);
-#endif        
-        
         downloadedFWFilename=path;
       }
       settings.setValue(downloadedFW, currentFWrev);
