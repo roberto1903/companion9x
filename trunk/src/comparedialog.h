@@ -22,6 +22,7 @@ public:
     
     ModelData * g_model1;
     ModelData * g_model2;
+    ModelData * modeltemp;
     int model1;
     int model2;
     GeneralSettings *g_eeGeneral;
