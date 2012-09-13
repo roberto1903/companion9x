@@ -72,11 +72,6 @@
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
-
-bool winRenameFile(const QString& aOldName, const QString& aNewName)
-{
-   return MoveFile((LPWSTR)aOldName.utf16(), (LPWSTR)aNewName.utf16());
-} // winRenameFile
 #endif
 
 MainWindow::MainWindow():
@@ -381,7 +376,7 @@ void MainWindow::reply1Accepted()
         path.append(fi.suffix());
         QDir qd;
 #if defined WIN32 || !defined __GNUC__
-        winRenameFile(downloadedFWFilename,path);
+        MoveFileA(downloadedFWFilename.toStdString().c_str(),path.c_str());        
 #else
         qd.rename(downloadedFWFilename,path);
 #endif        
