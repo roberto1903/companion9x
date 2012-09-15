@@ -931,6 +931,9 @@ void ModelEdit::tabMixes()
         } else if (md->carryTrim<0) {
           str += " " + RawSource(SOURCE_TYPE_TRIM, (-(md->carryTrim)-1)).toString();
         }
+        if(md->noExpo) {
+          str += " " +tr("No DR/Expo");
+        } 
         if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){
             if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
         } else {
