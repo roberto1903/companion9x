@@ -27,6 +27,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=
 void populateFuncCB(QComboBox *b, unsigned int value);
 QString FuncParam(uint function, unsigned int value);
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value);
+void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
