@@ -153,7 +153,7 @@ void MixerDialog::valuesChanged()
     md->weight    = ui->weightSB->value();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
-    md->noExpo = ui->MixDR_CB->checkState() ? 1 : 0;
+    md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     int numcurves=GetEepromInterface()->getCapability(NumCurves);
     if (numcurves==0) {
