@@ -62,7 +62,7 @@ private:
     QComboBox * fswtchFunc[NUM_FSW];
     QSpinBox * fswtchParam[NUM_FSW];
     QComboBox * fswtchParamT[NUM_FSW];
-    QLineEdit * fswtchParamArmT[NUM_FSW];
+    QComboBox * fswtchParamArmT[NUM_FSW];
     QCheckBox * fswtchEnable[NUM_FSW];
     
     QSpinBox  * safetySwitchValue[NUM_CHNOUT];

@@ -1599,15 +1599,17 @@ void ModelEdit::tabFunctionSwitches()
     populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
     connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
-    fswtchParamArmT[i] = new QLineEdit(this);
-    fswtchParamArmT[i]->setMaxLength(6);
+    fswtchParamArmT[i] = new QComboBox(this);
+    fswtchParamArmT[i]->setEditable(true);
     ui->fswitchlayout1->addWidget(fswtchParamArmT[i],i+1,3);
     if (g_model.funcSw[i].func==FuncPlayPrompt && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
+      populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,g_model.funcSw[i].paramarm);
     } else {
+      populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,NULL);
       fswtchParamArmT[i]->hide();
     }
-    connect(fswtchParamArmT[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+    connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(functionSwitchesEdited()));
     
     int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
     if (index==0) {
@@ -1680,15 +1682,17 @@ void ModelEdit::tabFunctionSwitches()
       populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
       connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
-      fswtchParamArmT[i] = new QLineEdit(this);
-      fswtchParamArmT[i]->setMaxLength(6);
+      fswtchParamArmT[i] = new QComboBox(this);
+      fswtchParamArmT[i]->setEditable(true);
       ui->fswitchlayout2->addWidget(fswtchParamArmT[i],i-15,3);
       if (g_model.funcSw[i].func==FuncPlayPrompt) {
-        fswtchParamArmT[i]->setText(g_model.funcSw[i].paramarm);
+        populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,g_model.funcSw[i].paramarm);
       } else {
+        populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,NULL);
         fswtchParamArmT[i]->hide();
       }
-      connect(fswtchParamArmT[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+      connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+      connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(functionSwitchesEdited()));
 
       if (index==0) {
         fswtchParam[i]->hide();
@@ -1854,8 +1858,10 @@ void ModelEdit::functionSwitchesEdited()
             for (int j=0; j<6; j++) {
               g_model.funcSw[i].paramarm[j]=0;
             }
-            for (int j=0; j<fswtchParamArmT[i]->text().length(); j++) {
-              g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->text().toAscii().at(j);
+            if (fswtchParamArmT[i]->currentText()!="----") {
+              for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
+                g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
+              }
             }
           }
         } else {

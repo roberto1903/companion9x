@@ -4556,7 +4556,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>480</height>
+            <height>566</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -7988,8 +7988,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>860</width>
+            <height>552</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12906,8 +12906,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>860</width>
+            <height>581</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

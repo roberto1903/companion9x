@@ -29,7 +29,7 @@
    <iconset resource="companion9x.qrc">
     <normaloff>:/images/preferences.png</normaloff>:/images/preferences.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,1,1,1,0">
+  <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0,0,0,0">
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
@@ -241,76 +241,15 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="1" colspan="4">
-    <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,0,0,0">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMaximumSize</enum>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="startupCheck_companion9x">
+     <property name="text">
+      <string/>
      </property>
-     <item row="0" column="0">
-      <widget class="QComboBox" name="downloadVerCB"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="langLabel">
-       <property name="text">
-        <string>Language</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QComboBox" name="langCombo">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="fw_dnld">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Download</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QComboBox" name="voiceCombo">
-       <property name="toolTip">
-        <string>Set language of voice.
-May be different from firmware language</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="voiceLabel">
-       <property name="text">
-        <string>Voice</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QPushButton" name="voice_dnld">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Download</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="25" column="0" colspan="5">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -898,19 +837,6 @@ This is used by the templated to determine which channel goes to what number out
    <item row="0" column="1" colspan="4">
     <widget class="QComboBox" name="locale_QB"/>
    </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Firmware</string>
-     </property>
-    </widget>
-   </item>
    <item row="19" column="0">
     <widget class="QLabel" name="label_14">
      <property name="sizePolicy">
@@ -937,16 +863,6 @@ This is used by the templated to determine which channel goes to what number out
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="startupCheck_companion9x">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -1172,6 +1088,127 @@ Mode 4:
       <widget class="QCheckBox" name="renameFirmware">
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="1" colspan="4">
+    <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,0,0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item row="1" column="2">
+      <widget class="QLabel" name="voiceLabel">
+       <property name="text">
+        <string>Voice</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QPushButton" name="voice_dnld">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Download</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QComboBox" name="voiceCombo">
+       <property name="toolTip">
+        <string>Set language of voice.
+May be different from firmware language</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QComboBox" name="langCombo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="langLabel">
+       <property name="text">
+        <string>Language</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="fw_dnld">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Download</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLineEdit" name="voicePath">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="voicePathButton">
+       <property name="text">
+        <string>Open Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QComboBox" name="downloadVerCB"/>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="0">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Firmware</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="voicePathLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Sound samples dir</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>

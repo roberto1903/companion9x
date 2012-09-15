@@ -68,13 +68,21 @@ void preferencesDialog::baseFirmwareChanged()
         ui->voiceLabel->show();
         ui->voiceCombo->show();
         ui->voice_dnld->show();
+        ui->voicePathButton->show();
+        ui->voicePath->show();
+        ui->voicePathLabel->show();
         ui->voiceLabel->setEnabled(true);
         ui->voiceCombo->setEnabled(true);
         ui->voice_dnld->setEnabled(true);
+        ui->voicePathButton->setEnabled(true);
+        ui->voicePath->setEnabled(true);
       } else {
         ui->voiceLabel->hide();
         ui->voiceCombo->hide();
         ui->voice_dnld->hide();        
+        ui->voicePathButton->hide();
+        ui->voicePath->hide();
+        ui->voicePathLabel->hide();
       }
       populateFirmwareOptions(firmware);
       break;
@@ -155,10 +163,14 @@ void preferencesDialog::firmwareOptionChanged(bool state)
                   ui->voiceLabel->setEnabled(true);
                   ui->voiceCombo->setEnabled(true);
                   ui->voice_dnld->setEnabled(true);
+                  ui->voicePathButton->setEnabled(true);
+                  ui->voicePath->setEnabled(true);
                 } else {
                   ui->voiceLabel->setDisabled(true);
                   ui->voiceCombo->setDisabled(true);
                   ui->voice_dnld->setDisabled(true);
+                  ui->voicePathButton->setDisabled(true);
+                  ui->voicePath->setDisabled(true);
                 }
               }
               
@@ -172,6 +184,8 @@ void preferencesDialog::firmwareOptionChanged(bool state)
     ui->voiceLabel->setDisabled(true);
     ui->voiceCombo->setDisabled(true);
     ui->voice_dnld->setDisabled(true);
+    ui->voicePathButton->setEnabled(true);
+    ui->voicePath->setEnabled(true);
   }
   if (voice ) {
     if (voice->isChecked()) {
@@ -182,15 +196,21 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       ui->voiceLabel->setDisabled(true);
       ui->voiceCombo->setDisabled(true);
       ui->voice_dnld->setDisabled(true);
+      ui->voicePathButton->setDisabled(true);
+      ui->voicePath->setDisabled(true);
     }
   }  else if (firmware->voice) {
       ui->voiceLabel->setEnabled(true);
       ui->voiceCombo->setEnabled(true);
       ui->voice_dnld->setEnabled(true);    
+      ui->voicePathButton->setEnabled(true);
+      ui->voicePath->setEnabled(true);
   } else {
       ui->voiceLabel->setDisabled(true);
       ui->voiceCombo->setDisabled(true);
       ui->voice_dnld->setDisabled(true);    
+      ui->voicePathButton->setDisabled(true);
+      ui->voicePath->setDisabled(true);
   }
   return firmwareChanged();
 }
@@ -252,6 +272,7 @@ void preferencesDialog::writeValues()
   settings.setValue("profileId", ui->ProfSlot_SB->value());
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
+  settings.setValue("soundPath", ui->voicePath->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
   if (!ui->SplashFileName->text().isEmpty()) {
     QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
@@ -326,14 +347,21 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
             ui->voiceLabel->show();
             ui->voiceCombo->show();
             ui->voice_dnld->show();
+            ui->voicePathButton->show();
+            ui->voicePath->show();
+            ui->voicePathLabel->show();
             if (current_firmware_id.contains(opt) ||firmware->voice) {
               ui->voiceLabel->setEnabled(true);
               ui->voiceCombo->setEnabled(true);
               ui->voice_dnld->setEnabled(true);
+              ui->voicePathButton->setEnabled(true);
+              ui->voicePath->setEnabled(true);
             } else {
               ui->voiceLabel->setDisabled(true);
               ui->voiceCombo->setDisabled(true);
               ui->voice_dnld->setDisabled(true);
+              ui->voicePathButton->setDisabled(true);
+              ui->voicePath->setDisabled(true);
             }
           }
         }
@@ -369,6 +397,10 @@ void preferencesDialog::initSettings()
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
     ui->libraryPath->setText(Path);
+  }
+  Path=settings.value("soundPath", "").toString();
+  if (QDir(Path).exists()) {
+    ui->voicePath->setText(Path);
   }
   Path=settings.value("backupPath", "").toString();
   if (!Path.isEmpty()) {
@@ -595,6 +627,15 @@ void preferencesDialog::on_splashLibraryButton_clicked()
   }  
 }
 
+void preferencesDialog::on_voicePathButton_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your sound sample folder"), settings.value("soundPath").toString());
+  if (!fileName.isEmpty()) {
+    ui->voicePath->setText(fileName);
+  }
+}
+
 void preferencesDialog::on_ProfSlot_SB_valueChanged()
 {
   QSettings settings("companion9x", "companion9x");
@@ -647,6 +688,7 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
     settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
+    settings.setValue("soundPath", ui->voicePath->text());
     current_firmware = getFirmware(current_firmware_id);
     settings.setValue("firmware", current_firmware_id);
     settings.endGroup();
