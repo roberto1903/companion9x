@@ -675,7 +675,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     for (int i=0; i<ERSKY9X_MAX_CURVE5; i++)
       if  (c9x.curves[i].count==5) {
         if  (c9x.curves[i].custom)
-          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1) + "\n";    
+          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1) + "\n";    
         for (int j=0; j<5; j++)
             curves5[i][j] = c9x.curves[i].points[j].y;
       } else {
@@ -684,7 +684,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     for (int i=0; i<ERSKY9X_MAX_CURVE9; i++)
       if  (c9x.curves[i+ERSKY9X_MAX_CURVE5].count==9) {
         if  (c9x.curves[i+ERSKY9X_MAX_CURVE5].custom)
-          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";    
+          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";    
         for (int j=0; j<9; j++)
             curves9[i][j] = c9x.curves[i+ERSKY9X_MAX_CURVE5].points[j].y;
       } else {

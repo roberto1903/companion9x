@@ -439,7 +439,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (int i=0; i<TH9X_MAX_CURVES3; i++)
       if  (c9x.curves[i].count==3) {
         if  (c9x.curves[i].custom)
-          EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1) + "\n";    
+          EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1) + "\n";    
         for (int j=0; j<3; j++)
           curves3[i][j] = c9x.curves[i].points[j].y;
     } else {
@@ -448,7 +448,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (int i=0; i<TH9X_MAX_CURVES5; i++)
      if  (c9x.curves[i+TH9X_MAX_CURVES3].count==5) {
       if  (c9x.curves[i+TH9X_MAX_CURVES3].custom)
-        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+TH9X_MAX_CURVES3) + "\n";    
+        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1+TH9X_MAX_CURVES3) + "\n";    
       for (int j=0; j<5; j++)
         curves5[i][j] = c9x.curves[i+TH9X_MAX_CURVES3].points[j].y;
      } else {
@@ -457,7 +457,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     for (int i=0; i<TH9X_MAX_CURVES9; i++)
      if  (c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].count==9) {
       if  (c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].custom)
-        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been imported as fixed point ").arg(i+1+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5) + "\n";    
+        EEPROMWarnings += QObject::tr("th9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5) + "\n";    
       for (int j=0; j<9; j++)
         curves5[i][j] = c9x.curves[i+TH9X_MAX_CURVES3+TH9X_MAX_CURVES5].points[j].y;
      } else {
