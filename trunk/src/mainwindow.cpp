@@ -277,6 +277,7 @@ void MainWindow::downloadLatestFW(FirmwareInfo * firmware, const QString & firmw
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + firmwareId + ext);
     if (!fileName.isEmpty()) {
       downloadedFW = firmwareId;
+      needRename=true;
       downloadedFWFilename = fileName;
       settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
       downloadDialog * dd = new downloadDialog(this, url, fileName);
@@ -369,7 +370,7 @@ void MainWindow::reply1Accepted()
     int pos=rev.lastIndexOf("-r");
     if (pos>0) {
       currentFWrev=rev.mid(pos+2).toInt();
-      if (addversion) {
+      if (addversion && needRename) {
         QFileInfo fi(downloadedFWFilename);
         QString path=fi.path()+QDir::separator ();
         path.append(fi.completeBaseName());
@@ -466,12 +467,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 downloadedFW = fwToUpdate;
                 QString url = GetFirmware(fwToUpdate)->getUrl(fwToUpdate);
                 QString ext = url.mid(url.lastIndexOf("."));
+                needRename=false;
                 bool addversion=settings.value("rename_firmware_files", false).toBool();
                 QString fileName;
                 if (addversion) {
-                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + newrev + ext, tr(HEX_FILES_FILTER));
+                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + newrev + ext);
                 } else {
-                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
+                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext);
                 }
                 if (!fileName.isEmpty()) {
                     downloadedFWFilename = fileName;
