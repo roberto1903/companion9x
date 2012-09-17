@@ -160,6 +160,7 @@ private:
 
     bool checkCompanion9x;
     bool checkFW;
+    bool needRename;
     bool showcheckForUpdatesResult;
     int MaxRecentFiles;
     int currentFWrev;
