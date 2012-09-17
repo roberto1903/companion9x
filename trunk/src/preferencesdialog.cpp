@@ -180,12 +180,14 @@ void preferencesDialog::firmwareOptionChanged(bool state)
         }
       }
     }
-  } else if (cb->text()=="voice" && !state) {
-    ui->voiceLabel->setDisabled(true);
-    ui->voiceCombo->setDisabled(true);
-    ui->voice_dnld->setDisabled(true);
-    ui->voicePathButton->setEnabled(true);
-    ui->voicePath->setEnabled(true);
+  } else if (cb && !state) {
+    if (cb->text()=="voice") {
+      ui->voiceLabel->setDisabled(true);
+      ui->voiceCombo->setDisabled(true);
+      ui->voice_dnld->setDisabled(true);
+      ui->voicePathButton->setEnabled(true);
+      ui->voicePath->setEnabled(true);
+    }
   }
   if (voice ) {
     if (voice->isChecked()) {
@@ -207,12 +209,6 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       ui->voicePathButton->setEnabled(true);
       ui->voicePath->setEnabled(true);
     }
-  } else {
-      ui->voiceLabel->setDisabled(true);
-      ui->voiceCombo->setDisabled(true);
-      ui->voice_dnld->setDisabled(true);    
-      ui->voicePathButton->setDisabled(true);
-      ui->voicePath->setDisabled(true);
   }
   return firmwareChanged();
 }
