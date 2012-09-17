@@ -377,6 +377,7 @@ void MainWindow::reply1Accepted()
         path.append(".");
         path.append(fi.suffix());
         QDir qd;
+        qd.remove(path);
         qd.rename(downloadedFWFilename,path);
         downloadedFWFilename=path;
       }
@@ -415,7 +416,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         int k = qba.indexOf("-r", i);
         int l = qba.indexOf('"', k);
         int rev = QString::fromAscii(qba.mid(k+2, l-k-2)).toInt(&cres);
-        QString newrev=qba.mid(k);
+        QString newrev=qba.mid(k).replace('"', "").trimmed();
+        
+        qDebug() << newrev;
         if(!cres)
         {
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
@@ -471,7 +474,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                   fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext, tr(HEX_FILES_FILTER));
                 }
                 if (!fileName.isEmpty()) {
-                    downloadedFW = fileName;
+                    downloadedFWFilename = fileName;
                     settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
                     downloadDialog * dd = new downloadDialog(this, url, fileName);
                     currentFWrev_temp = NewFwRev;
