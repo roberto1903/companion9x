@@ -22,7 +22,7 @@
 #define SDCARD
 
 namespace Open9xARM {
-#include "../open9x/ersky9x/AT91SAM3S4.h"
+#include "../open9x/ersky9x/libraries/board/at91sam3s4/AT91SAM3S4.h"
 #include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
