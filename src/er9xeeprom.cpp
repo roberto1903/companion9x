@@ -277,6 +277,9 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
   }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    srcRaw = 37; // MAX
+  }  
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
     swtch = er9xFromSwitch(RawSwitch(c9x.srcRaw.index));
@@ -342,6 +345,9 @@ t_Er9xMixData::operator MixData ()
     }
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
+  }
+  else if (srcRaw == 37) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
   }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
