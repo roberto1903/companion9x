@@ -87,7 +87,6 @@ void compareDialog::printDiff()
 void compareDialog::dropEvent(QDropEvent *event)
 {
   QLabel *child = qobject_cast<QLabel*>(childAt(event->pos()));
-  // qDebug() << "Successfull drag'n'drop. Old label " << child->objectName().toAscii().data() << " deleted.";
   const QMimeData  *mimeData = event->mimeData();
   if (child) {
     if (child->objectName().contains("label_1")) {        

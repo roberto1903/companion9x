@@ -29,6 +29,10 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     else {
         ui->label_4->setText(tr("Offset"));
     }
+    if (!GetEepromInterface()->getCapability(MixesWithoutExpo)) {
+      ui->MixDR_CB->hide();
+      ui->label_MixDR->hide();
+    }
     if (!GetEepromInterface()->getCapability(MixFmTrim)) {
         ui->FMtrimChkB->hide();
         ui->label_FMtrim->hide();

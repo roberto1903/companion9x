@@ -143,6 +143,19 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
+   <item row="8" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="4" column="1">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
@@ -321,19 +334,6 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
       <string>Curve/Exponential</string>
      </property>
     </widget>
-   </item>
-   <item row="8" column="0" colspan="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item row="6" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
