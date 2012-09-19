@@ -489,7 +489,6 @@ void MdiChild::burnTo()  // write to Tx
     if (backup) {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss")+".bin";
-        qDebug() <<  backupFile;
         QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
         avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
@@ -525,7 +524,6 @@ void MdiChild::burnTo()  // write to Tx
     } else {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
-        qDebug() <<  backupFile;
         QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
         avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));

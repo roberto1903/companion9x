@@ -501,7 +501,7 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="453"/>
         <source>Beeper Mode</source>
-        <translation>Modalità audio</translation>
+        <translation>Modalità suono beeper</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="384"/>

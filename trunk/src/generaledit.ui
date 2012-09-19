@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>656</width>
-    <height>661</height>
+    <height>688</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -813,12 +813,17 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </item>
          <item>
           <property name="text">
-           <string>PiSpkr</string>
+           <string>Speaker</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>PcmWav</string>
+           <string>BeeperVoice</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SpeakerVoice</string>
           </property>
          </item>
         </widget>
