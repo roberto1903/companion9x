@@ -130,7 +130,7 @@ private:
     MixData* setDest(uint8_t dch);
     void setCurve(uint8_t c, int8_t ar[]);
     void setSwitch(unsigned int idx, unsigned int func, int v1, int v2);
-
+    void on_modelVoice_SB_editingFinished();
     void on_phaseSwitch_currentIndexChanged(unsigned int phase, int index);
     void on_phaseFadeIn_valueChanged(unsigned int phase, int value);
     void on_phaseFadeOut_valueChanged(unsigned int phase, int value);

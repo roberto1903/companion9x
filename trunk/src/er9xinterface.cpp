@@ -294,6 +294,10 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case TelemetryMaxMultiplier:
       return 2;
+    case ModelVoice:
+      return 1;
+    case VoicesAsNumbers:
+      return 1;
     default:
       return 0;
   }

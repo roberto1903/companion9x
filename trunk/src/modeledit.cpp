@@ -325,6 +325,13 @@ void ModelEdit::tabModelEditSetup()
   int sec = g_model.timers[0].val%60;
   ui->timer1ValTE->setTime(QTime(0,min,sec));
   ui->timer1DirCB->setCurrentIndex(g_model.timers[0].dir);
+  if (!GetEepromInterface()->getCapability(ModelVoice)) {
+    ui->modelVoice_SB->hide();
+    ui->modelVoice_label->hide();
+  } else {
+    ui->modelVoice_SB->setValue(g_model.modelVoice+260);
+  }
+
   if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
     for (int i=0; pmsl[i]; i++) {
       pmsl[i]->hide();
@@ -519,6 +526,11 @@ void ModelEdit::tabModelEditSetup()
       ui->numChannelsSB->setValue(g_model.ppmNCH);
       break;
   }
+}
+
+void ModelEdit::on_modelVoice_SB_editingFinished() {
+  g_model.modelVoice=ui->modelVoice_SB->value()-260;
+  updateSettings();
 }
 
 void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn, QComboBox *trimUse, QSpinBox *trimVal, QSlider *trimSlider)

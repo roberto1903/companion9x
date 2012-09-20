@@ -98,14 +98,16 @@ PACK(typedef struct t_Ersky9xGeneral {
   uint8_t   lightOnStickMove;
 
   char      ownerName[10];
-  uint8_t switchWarningStates;
-  uint8_t volume ;
-  uint8_t bright ; // backlight
-  uint8_t res[1];
-  uint8_t mAh_alarm ;
+  uint8_t   switchWarningStates;
+  uint8_t	 volume ;
+  uint8_t   bright ;			// backlight
+  uint8_t   stickGain;
+  uint8_t	 mAh_alarm ;
   uint16_t mAh_used ;
   uint16_t run_time ;
-  int8_t current_calib ;
+  int8_t	 current_calib ;
+  uint8_t	 bt_baudrate ;
+  uint8_t	 rotaryDivisor ;
   operator GeneralSettings();
   t_Ersky9xGeneral();
   t_Ersky9xGeneral(GeneralSettings&);

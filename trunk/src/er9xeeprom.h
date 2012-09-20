@@ -195,7 +195,7 @@ PACK(typedef struct t_Er9xFrSkyData {
 
 PACK(typedef struct t_Er9xModelData {
   char      name[10];             // 10 must be first for eeLoadModelName
-  uint8_t   mdVers;
+  uint8_t   modelVoice ;		// Index to model name voice (260+value)
   int8_t    tmrMode;              // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
   uint8_t   tmrDir:1;    //0=>Count Down, 1=>Count Up
   uint8_t   traineron:1;  // 0 disable trainer, 1 allow trainer
