@@ -680,6 +680,7 @@ class ModelData {
     ModelData();
     bool      used;
     char      name[10+1];
+    uint8_t   modelVoice;
     TimerData timers[2];
     Protocol  protocol;
     int       ppmNCH;
@@ -732,6 +733,7 @@ enum Capability {
  TimerTriggerB,
  FuncSwitches,
  VoicesAsNumbers,
+ ModelVoice,
  InstantTrimSW,
  CustomSwitches,
  CustomSwitchesExt,

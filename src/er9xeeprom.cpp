@@ -575,7 +575,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
-    mdVers = MDVERS;
+    modelVoice=c9x.modelVoice;
     tmrMode = c9x.timers[0].mode;
     if (tmrMode > TMRMODE_THR_REL)
       tmrMode--;
@@ -735,6 +735,7 @@ t_Er9xModelData::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
+  c9x.modelVoice = modelVoice;
   getEEPROMString(c9x.name, name, sizeof(name));
   c9x.timers[0].mode = TimerMode(tmrMode);
   if (tmrMode > TMRMODE_THR_REL)
@@ -790,11 +791,6 @@ t_Er9xModelData::operator ModelData ()
 
   for (int i=0; i<ER9X_MAX_MIXERS; i++) {
     Er9xMixData mix = mixData[i];
-    if (mdVers == 6) {
-      if (mix.srcRaw > 9) {
-        mix.srcRaw += 3; /* because of [CYC1:CYC3] inserted after MIX_FULL */
-      }
-    }
     c9x.mixData[i] = mix;
   }
 
