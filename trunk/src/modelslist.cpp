@@ -85,6 +85,7 @@ void ModelsListWidget::ShowContextMenu(const QPoint& pos)
 
     QMenu contextMenu;
     contextMenu.addAction(QIcon(":/images/edit.png"), tr("&Edit"),this,SLOT(OpenEditWindow()));
+    contextMenu.addAction(QIcon(":/images/open.png"), tr("&Restore from backup"),this,SLOT(LoadBackup()));    
     contextMenu.addAction(QIcon(":/images/wizard.png"), tr("&Model Wizard"),this,SLOT(OpenWizard()));
     contextMenu.addSeparator();
     contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(confirmDelete()),tr("Delete"));
@@ -109,6 +110,11 @@ void ModelsListWidget::OpenEditWindow()
 void ModelsListWidget::OpenWizard()
 {
   ((MdiChild *)parent())->OpenEditWindow(true);
+}
+
+void ModelsListWidget::LoadBackup()
+{
+  ((MdiChild *)parent())->loadBackup();
 }
 
 void ModelsListWidget::simulate()

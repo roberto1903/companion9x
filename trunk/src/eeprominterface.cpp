@@ -691,6 +691,17 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
   return false;
 }
 
+bool LoadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+{
+  foreach(EEPROMInterface *eepromInterface, eepromInterfaces) {
+    if (eepromInterface->loadBackup(radioData, eeprom, index))
+      return true;
+  }
+
+  return false;
+}
+
+
 bool LoadEepromXml(RadioData &radioData, QDomDocument &doc)
 {
   foreach(EEPROMInterface *eepromInterface, eepromInterfaces) {

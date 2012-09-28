@@ -562,3 +562,52 @@ void MdiChild::setEEpromAvail(int eavail)
 {
   EEPromAvail=eavail;
 }
+
+bool MdiChild::loadBackup()
+{
+    QSettings settings("companion9x", "companion9x");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
+    if (fileName.isEmpty())
+      return false;
+    QFile file(fileName);
+
+    if (!file.exists()) {
+      QMessageBox::critical(this, tr("Error"), tr("Unable to find file %1!").arg(fileName));
+      return false;
+    }
+    if(ui->modelsList->currentRow()<1) return false;
+    int index=ui->modelsList->currentRow()-1;
+
+    int eeprom_size = file.size();
+    if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Error opening file %1:\n%2.")
+                              .arg(fileName)
+                              .arg(file.errorString()));
+        return false;
+    }
+    uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
+    memset(eeprom, 0, eeprom_size);
+    long result = file.read((char*)eeprom, eeprom_size);
+    file.close();
+
+    if (result != eeprom_size) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Error reading file %1:\n%2.")
+                              .arg(fileName)
+                              .arg(file.errorString()));
+
+        return false;
+    }
+
+    if (!LoadBackup(radioData, eeprom, index)) {
+      QMessageBox::critical(this, tr("Error"),
+          tr("Invalid binary backup File %1")
+          .arg(fileName));
+      return false;
+    }
+
+    ui->modelsList->refreshList();
+    free(eeprom);
+    return true;
+}

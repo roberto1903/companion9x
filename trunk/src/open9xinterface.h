@@ -37,6 +37,8 @@ class Open9xInterface : public EEPROMInterface
     virtual const int getMaxModels();
 
     virtual bool load(RadioData &, uint8_t *eeprom, int size);
+
+    virtual bool loadBackup(RadioData &, uint8_t *eeprom, int index);
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
@@ -56,6 +58,9 @@ class Open9xInterface : public EEPROMInterface
 
     template <class T>
     void loadModel(ModelData &model, uint8_t index, unsigned int stickMode=0);
+
+    template <class T>
+    void loadModelFromBackup(ModelData &model, uint8_t * eeprom, unsigned int stickMode=0);
 
     template <class T>
     bool saveModel(unsigned int index, ModelData &model);

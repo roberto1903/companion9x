@@ -828,6 +828,8 @@ class EEPROMInterface
     virtual BoardEnum getBoard() = 0;
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
+
+    virtual bool loadBackup(RadioData &radioData, uint8_t *eeprom, int index) = 0;
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc) = 0;
 
@@ -942,6 +944,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
 
 void RegisterFirmwares();
 
+bool LoadBackup(RadioData &radioData, uint8_t *eeprom, int index);
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 bool LoadEepromXml(RadioData &radioData, QDomDocument &doc);
 

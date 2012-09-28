@@ -105,6 +105,22 @@ void Open9xInterface::loadModel(ModelData &model, uint8_t index, unsigned int st
 }
 
 template <class T>
+void Open9xInterface::loadModelFromBackup(ModelData &model, uint8_t * eeprom, unsigned int stickMode)
+{
+  T _model;
+  if (memcpy((uint8_t*)&_model,eeprom+1, sizeof(T))) {
+    model = _model;
+    if (stickMode) {
+      applyStickModeToModel(model, stickMode);
+    }
+  }
+  else {
+    model.clear();
+  }
+}
+
+
+template <class T>
 bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 {
   T _settings;
@@ -661,3 +677,85 @@ SimulatorInterface * Open9xInterface::getSimulator()
   }
 }
 
+bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+{
+  std::cout << "trying " << getName() << " import... ";
+
+  uint8_t version=eeprom[0];
+
+  std::cout << "version " << (unsigned int)version << " ";
+
+  switch(version) {
+    case 201:
+      // first version
+      break;
+    case 202:
+      // channel order is now always RUD - ELE - THR - AIL
+      // changes in timers
+      // ppmFrameLength added
+      // thrTraceSrc added
+      break;
+    case 203:
+      // mixers changed (for the trims use for change the offset of a mix)
+      // telemetry offset raised to -127 +127
+      // function switches now have a param on 4 bits
+      break;
+    case 204:
+      // telemetry changes (bars)
+      break;
+    case 205:
+      // mixer changes (differential, negative curves)...
+      break;
+    // case 206:
+    case 207:
+      // V4: Rotary Encoders position in FlightPhases
+      break;
+    case 208:
+      // Trim value in 16bits
+      // FrSky A1/A2 offset on 12bits
+      // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
+      break;
+    case 209:
+      // Add TrmR, TrmE, TrmT, TrmA as Mix sources
+      // Trims are now OFF / ON / Rud / Ele / Thr / Ail
+      break;
+    case 210:
+      // Add names in Mixes / Expos
+      // Add a new telemetry screen
+      // Add support for Play Track <filename>
+      break;
+    case 211:
+      // Curves big change
+      break;
+    case 212:
+      // Big changes in mixers / limitse
+      break;
+    default:
+      std::cout << "not open9x\n";
+      return false;
+  }
+
+  
+  if (version == 208) {
+      loadModelFromBackup<Open9xArmModelData_v208>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 209) {
+      loadModelFromBackup<Open9xArmModelData_v209>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 210) {
+      loadModelFromBackup<Open9xArmModelData_v210>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 211) {
+      loadModelFromBackup<Open9xArmModelData_v211>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 212) {
+      loadModelFromBackup<Open9xArmModelData_v212>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+  }
+  else {
+    std::cout << "ko\n";
+    return false;
+  }
+
+  std::cout << "ok\n";
+  return true;
+}
