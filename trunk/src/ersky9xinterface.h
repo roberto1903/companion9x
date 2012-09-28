@@ -38,7 +38,7 @@ class Ersky9xInterface : public EEPROMInterface
 
     virtual bool load(RadioData &, uint8_t * eeprom, int size);
 
-    virtual bool loadBackup(RadioData &, uint8_t * eeprom, int index);
+    virtual bool loadBackup(RadioData &, uint8_t * eeprom, int esize, int index);
 
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 

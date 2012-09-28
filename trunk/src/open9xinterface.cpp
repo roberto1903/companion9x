@@ -34,6 +34,13 @@
 #define FILE_MODEL(n) (1+n)
 #define FILE_TMP      (1+16)
 
+template <typename T, size_t N>
+inline
+size_t SizeOfArray( T(&)[ N ] )
+{
+  return N;
+}
+
 Open9xInterface::Open9xInterface(BoardEnum board):
 efile(new EFile()),
 board(board)
@@ -108,7 +115,18 @@ template <class T>
 void Open9xInterface::loadModelFromBackup(ModelData &model, uint8_t * eeprom, unsigned int stickMode)
 {
   T _model;
-  if (memcpy((uint8_t*)&_model,eeprom+1, sizeof(T))) {
+  uint16_t size=eeprom[7];
+  size<<=8;
+  size+=eeprom[6];
+  if (size<sizeof(T)) {
+    std::cout << "wrong model size in backup ";
+    model.clear();
+    return;
+  }
+  if (size>sizeof(T))
+    std::cout << "wrong model size in backup ";
+
+  if (memcpy((uint8_t*)&_model,eeprom+8, sizeof(T))) {
     model = _model;
     if (stickMode) {
       applyStickModeToModel(model, stickMode);
@@ -677,12 +695,36 @@ SimulatorInterface * Open9xInterface::getSimulator()
   }
 }
 
-bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+template<typename T, size_t SIZE>
+size_t getSizeA(T (&)[SIZE]) {
+    return SIZE;
+}
+
+bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
 {
+  char signature[10];
+  if (esize<8) {
+    return false;
+  }
+  uint16_t size=0;
+  memcpy((char *)signature,eeprom,3);
+  signature[3]=0;
+  if (strcmp(signature,"g9x")!=0) {
+    return false;
+  }
+
+  
   std::cout << "trying " << getName() << " import... ";
 
-  uint8_t version=eeprom[0];
-
+  uint8_t board=eeprom[3];
+  if (board>47) {
+    board-=48;
+  }
+  uint8_t version=eeprom[4];
+  uint8_t bcktype=eeprom[5];
+  size=eeprom[7];
+  size<<=8;
+  size+=eeprom[7];
   std::cout << "version " << (unsigned int)version << " ";
 
   switch(version) {
@@ -735,25 +777,20 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int inde
       return false;
   }
 
-  
-  if (version == 208) {
-      loadModelFromBackup<Open9xArmModelData_v208>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-  }
-  else if (version == 209) {
-      loadModelFromBackup<Open9xArmModelData_v209>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-  }
-  else if (version == 210) {
-      loadModelFromBackup<Open9xArmModelData_v210>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-  }
-  else if (version == 211) {
-      loadModelFromBackup<Open9xArmModelData_v211>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-  }
-  else if (version == 212) {
-      loadModelFromBackup<Open9xArmModelData_v212>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-  }
-  else {
-    std::cout << "ko\n";
-    return false;
+  if (bcktype=='M') {
+    if (version == 211 && (board == BOARD_GRUVIN9X)) {
+        loadModelFromBackup<Open9xV4ModelData_v211>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+    }
+    else if (version == 212 && (board == BOARD_ERSKY9X)) {
+        loadModelFromBackup<Open9xArmModelData_v212>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
+    }
+    else {
+      std::cout << "ko\n";
+      return false;
+    }
+  } else {
+      std::cout << "backup type not supported\n";
+      return false;    
   }
 
   std::cout << "ok\n";

@@ -166,7 +166,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-bool Ersky9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+bool Ersky9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
 {
   return false;
 }
