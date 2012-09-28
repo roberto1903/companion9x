@@ -119,7 +119,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-bool Th9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+bool Th9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
 {
   return false;
 }
