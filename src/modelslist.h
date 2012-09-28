@@ -82,6 +82,7 @@ public slots:
     void paste();
     void print();
     void OpenEditWindow();
+    void LoadBackup();
     void OpenWizard();
     void simulate();
     void duplicate();

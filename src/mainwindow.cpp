@@ -682,6 +682,12 @@ void MainWindow::print()
         activeMdiChild()->print();
 }
 
+void MainWindow::loadBackup()
+{
+  if (activeMdiChild())
+    activeMdiChild()->loadBackup();
+}
+
 QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
@@ -1169,6 +1175,7 @@ void MainWindow::updateMenus()
     copyAct->setEnabled(hasSelection);
     simulateAct->setEnabled(hasSelection);
     printAct->setEnabled(hasSelection);
+    loadbackupAct->setEnabled(hasMdiChild);
     compareAct->setEnabled(activeMdiChild());
     updateRecentFileActions();
     updateProfilesActions();
@@ -1248,6 +1255,10 @@ void MainWindow::createActions()
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+
+    loadbackupAct = new QAction(QIcon(":/images/open.png"), tr("&loadBackup..."), this);
+    loadbackupAct->setStatusTip(tr("Load backup from file"));
+    connect(loadbackupAct, SIGNAL(triggered()), this, SLOT(loadBackup()));
 
     saveAct = new QAction(QIcon(":/images/save.png"), tr("&Save"), this);
     saveAct->setShortcuts(QKeySequence::Save);

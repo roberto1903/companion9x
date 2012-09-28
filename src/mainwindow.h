@@ -113,6 +113,7 @@ private slots:
     void about();
     void compare();
     void print();
+    void loadBackup();
     void preferences();
     void updateMenus();
     void updateWindowMenu();
@@ -214,6 +215,7 @@ private:
     QAction *separatorAct;
     QAction *aboutAct;
     QAction *printAct;
+    QAction *loadbackupAct;
     QAction *switchLayoutDirectionAct;
     QAction *recentFileActs[MAX_RECENT];
     QAction *profileActs[MAX_PROFILES];

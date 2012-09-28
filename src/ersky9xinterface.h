@@ -37,7 +37,9 @@ class Ersky9xInterface : public EEPROMInterface
     virtual const int getMaxModels();
 
     virtual bool load(RadioData &, uint8_t * eeprom, int size);
-    
+
+    virtual bool loadBackup(RadioData &, uint8_t * eeprom, int index);
+
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
     virtual int save(uint8_t * eeprom, RadioData & radioData, uint8_t version=0);

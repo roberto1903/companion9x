@@ -166,6 +166,11 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
+bool Ersky9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+{
+  return false;
+}
+
 int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
 {
   EEPROMWarnings.clear();

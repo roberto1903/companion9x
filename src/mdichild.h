@@ -64,6 +64,7 @@ public:
 
     void newFile();
     bool loadFile(const QString &fileName, bool resetCurrentFile=true);
+    bool loadBackup();
     bool save();
     bool saveAs(bool isNew=false);
     bool saveFile(const QString &fileName, bool setCurrent=true);
