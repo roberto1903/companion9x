@@ -419,7 +419,6 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         int rev = QString::fromAscii(qba.mid(k+2, l-k-2)).toInt(&cres);
         QString newrev=qba.mid(k).replace('"', "").trimmed();
         
-        qDebug() << newrev;
         if(!cres)
         {
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
