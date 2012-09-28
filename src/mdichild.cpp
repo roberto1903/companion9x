@@ -600,7 +600,7 @@ bool MdiChild::loadBackup()
         return false;
     }
 
-    if (!LoadBackup(radioData, eeprom, index)) {
+    if (!LoadBackup(radioData, eeprom, eeprom_size, index)) {
       QMessageBox::critical(this, tr("Error"),
           tr("Invalid binary backup File %1")
           .arg(fileName));

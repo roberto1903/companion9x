@@ -198,7 +198,7 @@ bool Gruvin9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-bool Gruvin9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+bool Gruvin9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
 {
   return false;
 }

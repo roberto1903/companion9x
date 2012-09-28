@@ -691,10 +691,10 @@ bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size)
   return false;
 }
 
-bool LoadBackup(RadioData &radioData, uint8_t *eeprom, int index)
+bool LoadBackup(RadioData &radioData, uint8_t *eeprom, int size, int index)
 {
   foreach(EEPROMInterface *eepromInterface, eepromInterfaces) {
-    if (eepromInterface->loadBackup(radioData, eeprom, index))
+    if (eepromInterface->loadBackup(radioData, eeprom, size, index))
       return true;
   }
 
