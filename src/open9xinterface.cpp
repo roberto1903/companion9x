@@ -62,7 +62,7 @@ const char * Open9xInterface::getName()
     case BOARD_ERSKY9X:
       return "Open9x for ersky9x board";
     default:
-      return "Open9x for an unknown boad";
+      return "Open9x for an unknown board";
   }
 }
 
@@ -96,47 +96,105 @@ const int Open9xInterface::getMaxModels()
 }
 
 template <class T>
-void Open9xInterface::loadModel(ModelData &model, uint8_t index, unsigned int stickMode)
+bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsigned int stickMode)
 {
   T _model;
-  efile->openRd(FILE_MODEL(index));
-  if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
-    model = _model;
-    if (stickMode) {
-      applyStickModeToModel(model, stickMode);
+
+  if (!data) {
+    // load from EEPROM
+    efile->openRd(FILE_MODEL(index));
+    if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
+      model = _model;
+      if (stickMode) {
+        applyStickModeToModel(model, stickMode);
+      }
+    }
+    else {
+      model.clear();
     }
   }
   else {
-    model.clear();
+    // load from SD Backup, size is stored in index
+    memcpy((uint8_t*)&_model, data, std::min(sizeof(T), (unsigned int)index));
+    model = _model;
   }
+
+  return true;
 }
 
-template <class T>
-void Open9xInterface::loadModelFromBackup(ModelData &model, uint8_t * eeprom, unsigned int stickMode)
+bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data, int index, unsigned int stickMode)
 {
-  T _model;
-  uint16_t size=eeprom[7];
-  size<<=8;
-  size+=eeprom[6];
-  if (size<sizeof(T)) {
-    std::cout << "wrong model size in backup ";
-    model.clear();
-    return;
+  if (version == 201) {
+    return loadModel<Open9xModelData_v201>(model, data, index, stickMode);
   }
-  if (size>sizeof(T))
-    std::cout << "wrong model size in backup ";
-
-  if (memcpy((uint8_t*)&_model,eeprom+8, sizeof(T))) {
-    model = _model;
-    if (stickMode) {
-      applyStickModeToModel(model, stickMode);
+  else if (version == 202) {
+    return loadModel<Open9xModelData_v202>(model, data, index, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 203) {
+    return loadModel<Open9xModelData_v203>(model, data, index, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 204) {
+    return loadModel<Open9xModelData_v204>(model, data, index, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 205) {
+    return loadModel<Open9xModelData_v205>(model, data, index, 0 /*no more stick mode messed*/);
+  }
+  else if (board == BOARD_GRUVIN9X && version == 207) {
+    return loadModel<Open9xV4ModelData_v207>(model, data, index, 0 /*no more stick mode messed*/);
+  }
+  else if (version == 208) {
+    if (board == BOARD_GRUVIN9X) {
+      return loadModel<Open9xV4ModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else {
+      return loadModel<Open9xModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
     }
   }
-  else {
-    model.clear();
+  else if (version == 209) {
+    if (board == BOARD_GRUVIN9X) {
+      return loadModel<Open9xV4ModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else {
+      return loadModel<Open9xModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
+    }
   }
-}
+  else if (version == 210) {
+    if (board == BOARD_GRUVIN9X) {
+      return loadModel<Open9xV4ModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else {
+      return loadModel<Open9xModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+  }
+  else if (version == 211) {
+    if (board == BOARD_GRUVIN9X) {
+      return loadModel<Open9xV4ModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+    else {
+      return loadModel<Open9xModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+  }
+  else if (version == 212) {
+    if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v212>(model, data, index, 0 /*no more stick mode messed*/);
+    }
+  }
 
+  std::cout << "ko\n";
+  return false;
+}
 
 template <class T>
 bool Open9xInterface::loadGeneral(GeneralSettings &settings)
@@ -192,54 +250,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 
   std::cout << "version " << (unsigned int)version << " ";
 
-  switch(version) {
-    case 201:
-      // first version
-      break;
-    case 202:
-      // channel order is now always RUD - ELE - THR - AIL
-      // changes in timers
-      // ppmFrameLength added
-      // thrTraceSrc added
-      break;
-    case 203:
-      // mixers changed (for the trims use for change the offset of a mix)
-      // telemetry offset raised to -127 +127
-      // function switches now have a param on 4 bits
-      break;
-    case 204:
-      // telemetry changes (bars)
-      break;
-    case 205:
-      // mixer changes (differential, negative curves)...
-      break;
-    // case 206:
-    case 207:
-      // V4: Rotary Encoders position in FlightPhases
-      break;
-    case 208:
-      // Trim value in 16bits
-      // FrSky A1/A2 offset on 12bits
-      // ARM: More Mixers / Expos / CSW / FSW / CHNOUT
-      break;
-    case 209:
-      // Add TrmR, TrmE, TrmT, TrmA as Mix sources
-      // Trims are now OFF / ON / Rud / Ele / Thr / Ail
-      break;
-    case 210:
-      // Add names in Mixes / Expos
-      // Add a new telemetry screen
-      // Add support for Play Track <filename>
-      break;
-    case 211:
-      // Curves big change
-      break;
-    case 212:
-      // Big changes in mixers / limitse
-      break;
-    default:
-      std::cout << "not open9x\n";
-      return false;
+  if (!checkVersion(version)) {
+    std::cout << "not open9x\n";
+    return false;
   }
 
   if (version >= 208 && board == BOARD_ERSKY9X) {
@@ -256,74 +269,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   
   for (int i=0; i<getMaxModels(); i++) {
-    if (version == 201) {
-      loadModel<Open9xModelData_v201>(radioData.models[i], i, radioData.generalSettings.stickMode+1);
-    }
-    else if (version == 202) {
-      loadModel<Open9xModelData_v202>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (version == 203) {
-      loadModel<Open9xModelData_v203>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (version == 204) {
-      loadModel<Open9xModelData_v204>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (version == 205) {
-      loadModel<Open9xModelData_v205>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (board == BOARD_GRUVIN9X && version == 207) {
-      loadModel<Open9xV4ModelData_v207>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-    }
-    else if (version == 208) {
-      if (board == BOARD_GRUVIN9X) {
-        loadModel<Open9xV4ModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else if (board == BOARD_ERSKY9X) {
-        loadModel<Open9xArmModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else {
-        loadModel<Open9xModelData_v208>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-    }
-    else if (version == 209) {
-      if (board == BOARD_GRUVIN9X) {
-        loadModel<Open9xV4ModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else if (board == BOARD_ERSKY9X) {
-        loadModel<Open9xArmModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else {
-        loadModel<Open9xModelData_v209>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-    }
-    else if (version == 210) {
-      if (board == BOARD_GRUVIN9X) {
-        loadModel<Open9xV4ModelData_v210>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else if (board == BOARD_ERSKY9X) {
-        loadModel<Open9xArmModelData_v210>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else {
-        loadModel<Open9xModelData_v210>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-    }
-    else if (version == 211) {
-      if (board == BOARD_GRUVIN9X) {
-        loadModel<Open9xV4ModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else if (board == BOARD_ERSKY9X) {
-        loadModel<Open9xArmModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-      else {
-        loadModel<Open9xModelData_v211>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-    }
-    else if (version == 212) {
-      if (board == BOARD_ERSKY9X) {
-        loadModel<Open9xArmModelData_v212>(radioData.models[i], i, 0 /*no more stick mode messed*/);
-      }
-    }
-    else {
+    if (!loadModel(version, radioData.models[i], NULL, i, radioData.generalSettings.stickMode+1)) {
       std::cout << "ko\n";
       return false;
     }
@@ -700,33 +646,8 @@ size_t getSizeA(T (&)[SIZE]) {
     return SIZE;
 }
 
-bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
+bool Open9xInterface::checkVersion(uint8_t version)
 {
-  char signature[10];
-  if (esize<8) {
-    return false;
-  }
-  uint16_t size=0;
-  memcpy((char *)signature,eeprom,3);
-  signature[3]=0;
-  if (strcmp(signature,"g9x")!=0) {
-    return false;
-  }
-
-  
-  std::cout << "trying " << getName() << " import... ";
-
-  uint8_t board=eeprom[3];
-  if (board>47) {
-    board-=48;
-  }
-  uint8_t version=eeprom[4];
-  uint8_t bcktype=eeprom[5];
-  size=eeprom[7];
-  size<<=8;
-  size+=eeprom[7];
-  std::cout << "version " << (unsigned int)version << " ";
-
   switch(version) {
     case 201:
       // first version
@@ -773,24 +694,41 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
       // Big changes in mixers / limitse
       break;
     default:
-      std::cout << "not open9x\n";
       return false;
   }
 
+  return true;
+}
+
+bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
+{
+  std::cout << "trying " << getName() << " backup import... ";
+
+  if (esize < 8 || memcmp(eeprom, "o9x", 3) != 0 || eeprom[3] != 0x30+board) {
+    std::cout << "no\n";
+    return false;
+  }
+
+  uint8_t version = eeprom[4];
+  uint8_t bcktype = eeprom[5];
+  uint16_t size = ((uint16_t)eeprom[7] << 8) + eeprom[6];
+
+  std::cout << "version " << (unsigned int)version << " ";
+
+  if (!checkVersion(version)) {
+    std::cout << "not open9x\n";
+    return false;
+  }
+
   if (bcktype=='M') {
-    if (version == 211 && (board == BOARD_GRUVIN9X)) {
-        loadModelFromBackup<Open9xV4ModelData_v211>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-    }
-    else if (version == 212 && (board == BOARD_ERSKY9X)) {
-        loadModelFromBackup<Open9xArmModelData_v212>(radioData.models[index], eeprom, 0 /*no more stick mode messed*/);
-    }
-    else {
+    if (!loadModel(version, radioData.models[index], &eeprom[8], size)) {
       std::cout << "ko\n";
       return false;
     }
-  } else {
-      std::cout << "backup type not supported\n";
-      return false;    
+  }
+  else {
+    std::cout << "backup type not supported\n";
+    return false;
   }
 
   std::cout << "ok\n";
