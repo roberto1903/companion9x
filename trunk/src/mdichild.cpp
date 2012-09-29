@@ -277,7 +277,7 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
           return false;
       }
 
-      if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+      if (!LoadEeprom(radioData, eeprom, eeprom_size) && !LoadBackup(radioData, eeprom, eeprom_size, 0)) {
         QMessageBox::critical(this, tr("Error"),
             tr("Invalid binary EEPROM File %1")
             .arg(fileName));

@@ -43,6 +43,7 @@ enum BoardEnum {
   BOARD_GRUVIN9X,
   BOARD_ERSKY9X
 };
+
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
   {1, 3, 2, 4},
