@@ -117,7 +117,7 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
     // load from SD Backup, size is stored in index
     if ((unsigned int)index < sizeof(T))
       return false;
-    memcpy((uint8_t*)&_model, data, std::min(sizeof(T), (unsigned int)index));
+    memcpy((uint8_t*)&_model, data, sizeof(T));
     model = _model;
   }
 
@@ -719,6 +719,11 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
 
   if (!checkVersion(version)) {
     std::cout << "not open9x\n";
+    return false;
+  }
+
+  if (size > esize-8) {
+    std::cout << "wrong size\n";
     return false;
   }
 
