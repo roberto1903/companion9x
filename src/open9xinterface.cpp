@@ -115,6 +115,8 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
   }
   else {
     // load from SD Backup, size is stored in index
+    if ((unsigned int)index < sizeof(T))
+      return false;
     memcpy((uint8_t*)&_model, data, std::min(sizeof(T), (unsigned int)index));
     model = _model;
   }
