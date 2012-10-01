@@ -601,7 +601,8 @@ PACK(typedef struct t_Open9xArmModelData_v212 {
   uint8_t switchWarningStates;
 
   Open9xArmFrSkyData_v211 frsky;
-
+  Open9xTimerDataExtra timersXtra[MAX_TIMERS];
+  
   operator ModelData();
   t_Open9xArmModelData_v212() { memset(this, 0, sizeof(t_Open9xArmModelData_v212)); }
   t_Open9xArmModelData_v212(ModelData&);

@@ -594,6 +594,12 @@ PACK(typedef struct t_Open9xTimerData_v202 {
   t_Open9xTimerData_v202(TimerData &eepe);
 }) Open9xTimerData_v202;
 
+PACK(typedef struct t_Open9xTimerDataExtra {
+  uint16_t remanent:1;
+  uint16_t value:15;
+  t_Open9xTimerDataExtra() { memset(this, 0, sizeof(t_Open9xTimerDataExtra)); }
+}) Open9xTimerDataExtra;
+
 #define MAX_TIMERS     2
 #define O9X_MAX_PHASES 5
 #define O9X_MAX_MIXERS 32

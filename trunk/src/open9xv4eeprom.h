@@ -384,6 +384,7 @@ PACK(typedef struct t_Open9xV4ModelData_v211 {
   uint8_t switchWarningStates;
 
   Open9xFrSkyData_v210 frsky;
+  Open9xTimerDataExtra timersXtra[MAX_TIMERS];
 
   operator ModelData();
   t_Open9xV4ModelData_v211() { memset(this, 0, sizeof(t_Open9xV4ModelData_v211)); }

@@ -455,6 +455,13 @@ void ModelEdit::tabModelEditSetup()
     ui->timer2ValTE->setTime(QTime(0,min,sec));
     ui->timer2DirCB->setCurrentIndex(g_model.timers[1].dir);
   }
+  if (!GetEepromInterface()->getCapability(PermTimers)) {
+    ui->timer1Perm->hide();
+    ui->timer2Perm->hide();
+  } else {
+    ui->timer1Perm->setChecked(g_model.timers[0].persistent);
+    ui->timer2Perm->setChecked(g_model.timers[1].persistent);
+  }
 
   //trim inc, thro trim, thro expo, instatrim
   ui->trimIncCB->setCurrentIndex(g_model.trimInc);
@@ -530,6 +537,18 @@ void ModelEdit::tabModelEditSetup()
 
 void ModelEdit::on_modelVoice_SB_editingFinished() {
   g_model.modelVoice=ui->modelVoice_SB->value()-260;
+  updateSettings();
+}
+
+void ModelEdit::on_timer1Perm_toggled(bool checked)
+{
+  g_model.timers[0].persistent=checked;
+  updateSettings();
+}
+
+void ModelEdit::on_timer2Perm_toggled(bool checked)
+{
+  g_model.timers[1].persistent=checked;
   updateSettings();
 }
 

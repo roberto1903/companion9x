@@ -157,6 +157,8 @@ private slots:
     void on_extendedLimitsChkB_toggled(bool checked);
     void on_extendedTrimsChkB_toggled(bool checked);
     void on_thrwarnChkB_toggled(bool checked);
+    void on_timer1Perm_toggled(bool checked);
+    void on_timer2Perm_toggled(bool checked);
     void resetCurve();
     void editCurve();
     void plotCurve(bool checked);

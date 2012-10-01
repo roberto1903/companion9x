@@ -471,6 +471,13 @@ int Open9xInterface::getCapability(const Capability capability)
         return 1;
       else
         return 0;
+    case PermTimers:
+      if (board == BOARD_GRUVIN9X)
+        return 1;
+      else if (board == BOARD_ERSKY9X)
+        return 1;
+      else
+        return 0;
     case Outputs:
       if (board == BOARD_ERSKY9X)
         return O9X_ARM_NUM_CHNOUT;
