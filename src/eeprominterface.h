@@ -732,6 +732,7 @@ enum Capability {
  MixesWithoutExpo,
  Timers,
  TimerTriggerB,
+ PermTimers,
  FuncSwitches,
  VoicesAsNumbers,
  ModelVoice,
