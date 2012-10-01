@@ -958,7 +958,7 @@
         </layout>
        </item>
        <item row="1" column="2" colspan="6">
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1,0">
          <item>
           <widget class="QTimeEdit" name="timer1ValTE">
            <property name="accelerated">
@@ -1005,10 +1005,17 @@
          <item>
           <widget class="QComboBox" name="timer1ModeBCB"/>
          </item>
+         <item>
+          <widget class="QCheckBox" name="timer1Perm">
+           <property name="text">
+            <string>Permanent</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item row="2" column="2" colspan="6">
-        <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1">
+        <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1,0">
          <item>
           <widget class="QTimeEdit" name="timer2ValTE">
            <property name="accelerated">
@@ -1054,6 +1061,13 @@
          </item>
          <item>
           <widget class="QComboBox" name="timer2ModeBCB"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer2Perm">
+           <property name="text">
+            <string>Permanent</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -4594,8 +4608,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>583</height>
+            <width>864</width>
+            <height>566</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -8028,7 +8042,7 @@
             <x>0</x>
             <y>0</y>
             <width>860</width>
-            <height>554</height>
+            <height>552</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12946,7 +12960,7 @@
             <x>0</x>
             <y>0</y>
             <width>860</width>
-            <height>583</height>
+            <height>581</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

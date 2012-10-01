@@ -445,8 +445,11 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase) {
 void populateTimerSwitchCB(QComboBox *b, int value)
 {
   b->clear();
-  for (int i = -TMR_NUM_OPTION; i <= TMR_NUM_OPTION; i++)
-    b->addItem(getTimerMode(i));
+  for (int i = -TMR_NUM_OPTION; i <= TMR_NUM_OPTION; i++) {
+    QString timerMode=getTimerMode(i);
+    if (!timerMode.isEmpty())
+      b->addItem(getTimerMode(i));
+  }
   b->setCurrentIndex(value + TMR_NUM_OPTION);
   b->setMaxVisibleItems(10);
 }
@@ -457,6 +460,8 @@ QString getTimerMode(int tm) {
 
   QString s;
   if (abs(tm) < TMR_VAROFS) {
+    if (tm==-1)
+      return QString("");
     s = stt.mid(abs(tm)*3, 3);
     if (tm<-1) s.prepend("!");
     return s;

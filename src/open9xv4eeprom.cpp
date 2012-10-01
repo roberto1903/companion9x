@@ -1667,8 +1667,11 @@ t_Open9xV4ModelData_v211::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<MAX_TIMERS; i++) {
     c9x.timers[i] = timers[i];
+    c9x.timers[i].persistent = timersXtra[i].remanent;
+    c9x.timers[i].val = timersXtra[i].value;
+  }
   switch(protocol) {
     case 1:
       c9x.protocol = PPM16;
@@ -1753,8 +1756,11 @@ t_Open9xV4ModelData_v211::t_Open9xV4ModelData_v211(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<MAX_TIMERS; i++) {
       timers[i] = c9x.timers[i];
+      timersXtra[i].value=c9x.timers[i].val;
+      timersXtra[i].remanent=c9x.timers[i].persistent;
+    }
     switch(c9x.protocol) {
       case PPM:
         protocol = 0;
