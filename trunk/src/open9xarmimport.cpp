@@ -1,8 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
-#define PCBARM
+#define PCBSKY9X
 #define REVB
-// #define NAVIGATION_RE1
 #define ROTARY_ENCODERS 1
 #define HELI
 #define TEMPLATES
@@ -39,7 +38,7 @@
 #include <exception>
 
 namespace Open9xARM {
-#include "../open9x/board_ersky9x.cpp"
+#include "../open9x/board_sky9x.cpp"
 #include "../open9x/eeprom_arm.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_arm.cpp"
@@ -56,9 +55,9 @@ namespace Open9xARM {
 #include "../open9x/templates.cpp"
 #include "../open9x/translations.cpp"
 #include "../open9x/frsky.cpp"
-#include "../open9x/ersky9x/audio.cpp"
-#include "../open9x/ersky9x/sound_driver.cpp"
-#include "../open9x/ersky9x/sdcard_driver.cpp"
+#include "../open9x/sky9x/audio.cpp"
+#include "../open9x/sky9x/sound_driver.cpp"
+#include "../open9x/sky9x/sdcard_driver.cpp"
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 

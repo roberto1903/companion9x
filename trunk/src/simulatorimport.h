@@ -64,7 +64,7 @@ extern uint8_t eeprom[];
 extern int16_t g_anas[NUM_STICKS+NUM_POTS];
 extern int16_t g_chans512[NUM_CHNOUT];
 
-#ifdef PCBV4
+#if defined(PCBGRUVIN9X)
 extern volatile uint8_t g_rotenc[2];
 #endif
 
@@ -101,19 +101,19 @@ for (int i=0; i<4; i++)
 for (int i=0; i<3; i++)
   g_anas[4+i] = inputs.pots[i];
 
-#ifdef PCBV4
+#ifdef PCBGRUVIN9X
 pinj = 0;
 pinl = 0;
 #endif
 
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
 if (inputs.sThr) PIOC->PIO_PDSR |= (1<<20); else PIOC->PIO_PDSR &= ~(1<<20);
 if (inputs.sRud) PIOA->PIO_PDSR |= (1<<15); else PIOA->PIO_PDSR &= ~(1<<15);
 if (inputs.sEle) PIOC->PIO_PDSR |= (1<<31); else PIOC->PIO_PDSR &= ~(1<<31);
 if (inputs.sAil) PIOA->PIO_PDSR |= (1<<2); else PIOA->PIO_PDSR &= ~(1<<2);
 if (inputs.sGea) PIOC->PIO_PDSR |= (1<<16); else PIOC->PIO_PDSR &= ~(1<<16);
 if (inputs.sTrn) PIOC->PIO_PDSR |= (1<<8); else PIOC->PIO_PDSR &= ~(1<<8);
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
 if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
 if (inputs.sEle) pinc &= ~(1<<INP_C_ElevDR); else pinc |= (1<<INP_C_ElevDR);
 if (inputs.sThr) ping &= ~(1<<INP_G_ThrCt); else ping |= (1<<INP_G_ThrCt);
@@ -136,10 +136,10 @@ if (inputs.sTrn) pine &= ~(1<<INP_E_Trainer); else pine |= (1<<INP_E_Trainer);
 
 switch (inputs.sId0) {
   case 2:
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
     PIOC->PIO_PDSR &= ~0x00000800;
     PIOC->PIO_PDSR |= 0x00004000;
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
     ping &= ~(1<<INP_G_ID1);
     pinb |= (1<<INP_B_ID2);
 #else
@@ -148,9 +148,9 @@ switch (inputs.sId0) {
 #endif
     break;
   case 1:
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
     PIOC->PIO_PDSR |= 0x00004800;
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
     ping &= ~(1<<INP_G_ID1);
     pinb &= ~(1<<INP_B_ID2);
 #else
@@ -159,10 +159,10 @@ switch (inputs.sId0) {
 #endif
     break;
   case 0:
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
     PIOC->PIO_PDSR &= ~0x00004000;
     PIOC->PIO_PDSR |= 0x00000800;
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
     ping |=  (1<<INP_G_ID1);
     pinb &= ~(1<<INP_B_ID2);
 #else
@@ -173,10 +173,10 @@ switch (inputs.sId0) {
 }
 
 // keyboad
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
 bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
 setKeys(keys);
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
 pinl &= ~ ((1<<INP_P_KEY_MEN) | (1<<INP_P_KEY_EXT) | (1<<INP_P_KEY_UP) | (1<<INP_P_KEY_DWN) | (1<<INP_P_KEY_LFT) | (1<<INP_P_KEY_RGT)); // for v4
 if (inputs.menu) { pinl |= (1<<INP_P_KEY_MEN);}
 if (inputs.exit) { pinl |= (1<<INP_P_KEY_EXT); }
@@ -194,7 +194,7 @@ if (inputs.left) { pinb |= (1<<INP_B_KEY_LFT); }
 if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); }
 #endif
 
-#ifdef PCBV4
+#ifdef PCBGRUVIN9X
 // rotary encoders
 pind = 0;
 if (inputs.re1) pind |= 0x20;
@@ -212,9 +212,9 @@ for (int i=0; i<12; i++)
 #ifdef LCDCHANGED_IMPORT
 #undef LCDCHANGED_IMPORT
 if (lcd_refresh) {
-#if defined(PCBARM)
+#if defined(PCBSKY9X)
   lightEnable = (PWM->PWM_CH_NUM[0].PWM_CDTY != 100);
-#elif defined(PCBV4)
+#elif defined(PCBGRUVIN9X)
   lightEnable = (portc & (1<<OUT_C_LIGHT));
 #else
   lightEnable = (portb & (1<<OUT_B_LIGHT));

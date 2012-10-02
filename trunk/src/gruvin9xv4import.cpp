@@ -2,6 +2,7 @@
 #define SIMU_EXCEPTIONS
 #define PCBV3
 #define PCBV4
+#define PCBGRUVIN9X
 #define NAVIGATION_RE1
 #define HELI
 #define TEMPLATES

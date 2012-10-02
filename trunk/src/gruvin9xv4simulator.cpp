@@ -18,6 +18,7 @@
 #include "gruvin9xinterface.h"
 
 #define PCBV4
+#define PCBGRUVIN9X
 
 namespace Gruvin9xV4 {
 #define NAMESPACE_IMPORT

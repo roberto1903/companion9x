@@ -17,12 +17,12 @@
 #include "open9xarmsimulator.h"
 #include "open9xinterface.h"
 
-#define PCBARM
+#define PCBSKY9X
 #define REVB
 #define SDCARD
 
 namespace Open9xARM {
-#include "../open9x/ersky9x/AT91SAM3S4.h"
+#include "../open9x/sky9x/AT91SAM3S4.h"
 #include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
