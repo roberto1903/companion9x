@@ -17,7 +17,7 @@
 #include "open9xv4simulator.h"
 #include "open9xinterface.h"
 
-#define PCBV4
+#define PCBGRUVIN9X
 
 namespace Open9xV4 {
 #define NAMESPACE_IMPORT
