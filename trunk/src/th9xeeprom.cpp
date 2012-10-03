@@ -400,21 +400,15 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
     mdVers = MDVERS;
-    switch ((int)c9x.timers[0].mode) {
-      case TMRMODE_ABS:
-      case -TMRMODE_ABS:
-        tmrMode = 1;
-        break;
-      case TMRMODE_THR:
-        tmrMode = 2;
-        break;
-      case TMRMODE_THR_REL:
-        tmrMode = 3;
-        break;
-      default:
-        tmrMode = 0;
-        break;
-    }
+    if (c9x.timers[0].mode == TMRMODE_ABS)
+      tmrMode = 1;
+    if (c9x.timers[0].mode == TMRMODE_THs)
+      tmrMode = 2;
+    if (c9x.timers[0].mode == TMRMODE_THp)
+      tmrMode = 3;
+    else
+      tmrMode = 0;
+
     // TODO tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
     //protocol = c9x.protocol;
@@ -479,10 +473,10 @@ t_Th9xModelData::operator ModelData ()
       c9x.timers[0].mode = TMRMODE_ABS;
       break;
     case 2:
-      c9x.timers[0].mode = TMRMODE_THR;
+      c9x.timers[0].mode = TMRMODE_THs;
       break;
     case 3:
-      c9x.timers[0].mode = TMRMODE_THR_REL;
+      c9x.timers[0].mode = TMRMODE_THp;
       break;
     default:
       c9x.timers[0].mode = TMRMODE_OFF;

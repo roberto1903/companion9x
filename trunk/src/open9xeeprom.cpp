@@ -1582,12 +1582,7 @@ t_Open9xPhaseData_v201::t_Open9xPhaseData_v201(PhaseData &c9x)
 t_Open9xTimerData_v201::operator TimerData ()
 {
   TimerData c9x;
-  if (mode > TMRMODE_THR_REL)
-    c9x.mode = TimerMode(mode+1);
-  else if (mode < -TMRMODE_THR_REL)
-    c9x.mode = TimerMode(mode-1);
-  else
-    c9x.mode = TimerMode(mode);
+  c9x.mode = TMRMODE_OFF;
   c9x.val = val;
   c9x.persistent = persistent;
   c9x.dir = dir;
@@ -1597,14 +1592,18 @@ t_Open9xTimerData_v201::operator TimerData ()
 t_Open9xTimerData_v202::operator TimerData ()
 {
   TimerData c9x;
-  if (mode < 0)
-    c9x.mode = TimerMode(mode+1-TMR_VAROFS);
-  else if (mode <= 1)
+
+  if (mode <= -22)
+    c9x.mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(mode+22));
+  else if (mode <= -1)
+    c9x.mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
+  else if (mode < 5)
     c9x.mode = TimerMode(mode);
-  else if (mode <= 4)
-    c9x.mode = TimerMode(TMRMODE_THR+mode-2);
+  else if (mode < 5+21)
+    c9x.mode = TimerMode(TMRMODE_FIRST_SWITCH+(mode-5));
   else
-    c9x.mode = TimerMode(TMR_VAROFS+mode-5);
+    c9x.mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(mode-5-21));
+
   c9x.val = val;
   c9x.persistent = false;
   c9x.dir = (val == 0);
@@ -1613,17 +1612,20 @@ t_Open9xTimerData_v202::operator TimerData ()
 
 t_Open9xTimerData_v202::t_Open9xTimerData_v202(TimerData &c9x)
 {
-  if (abs(c9x.mode) == TMRMODE_ABS)
-    mode = 1;
-  else if (c9x.mode >= TMRMODE_THR && c9x.mode <= TMRMODE_THR_TRG)
-    mode = 2+c9x.mode-TMRMODE_THR;
-  else if (c9x.mode >= TMR_VAROFS)
-    mode = 5+c9x.mode-TMR_VAROFS;
-  else if (c9x.mode <= -TMR_VAROFS)
-    mode = c9x.mode+TMR_VAROFS-1;
+  val = c9x.val;
+
+  if (c9x.mode >= TMRMODE_OFF && c9x.mode <= TMRMODE_THt)
+    mode = 0+c9x.mode-TMRMODE_OFF;
+  else if (c9x.mode >= TMRMODE_FIRST_MOMENT_SWITCH)
+    mode = 26+c9x.mode-TMRMODE_FIRST_MOMENT_SWITCH;
+  else if (c9x.mode >= TMRMODE_FIRST_SWITCH)
+    mode = 5+c9x.mode-TMRMODE_FIRST_SWITCH;
+  else if (c9x.mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
+    mode = -22+c9x.mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
+  else if (c9x.mode <= TMRMODE_FIRST_NEG_SWITCH)
+    mode = -1+c9x.mode-TMRMODE_FIRST_NEG_SWITCH;
   else
     mode = 0;
-  val = c9x.val;
 }
 
 FrSkyRSSIAlarm t_Open9xFrSkyRSSIAlarm::get(int index)

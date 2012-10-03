@@ -1,6 +1,6 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
-#define PCBARM
+#define PCBSKY9X
 #define STAMP
 #define FRSKY
 #define FRSKY_HUB

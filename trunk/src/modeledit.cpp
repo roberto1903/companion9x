@@ -2268,7 +2268,7 @@ void ModelEdit::phaseFadeOut_editingFinished()
 
 void ModelEdit::on_timer1ModeCB_currentIndexChanged(int index)
 {
-    g_model.timers[0].mode = TimerMode(index-TMR_NUM_OPTION);
+    g_model.timers[0].mode = TimerMode(ui->timer1ModeCB->itemData(index).toInt());
     updateSettings();
 }
 
@@ -2286,13 +2286,13 @@ void ModelEdit::on_timer1ValTE_editingFinished()
 
 void ModelEdit::on_timer1ModeBCB_currentIndexChanged(int index)
 {
-    g_model.timers[0].modeB = TimerMode(index-TMR_NUM_OPTION);
+    g_model.timers[0].modeB = TimerMode(ui->timer1ModeBCB->itemData(index).toInt());
     updateSettings();
 }
 
 void ModelEdit::on_timer2ModeCB_currentIndexChanged(int index)
 {
-    g_model.timers[1].mode = TimerMode(index-TMR_NUM_OPTION);
+    g_model.timers[1].mode = TimerMode(ui->timer2ModeCB->itemData(index).toInt());
     updateSettings();
 }
 
@@ -2310,7 +2310,7 @@ void ModelEdit::on_timer2ValTE_editingFinished()
 
 void ModelEdit::on_timer2ModeBCB_currentIndexChanged(int index)
 {
-    g_model.timers[1].modeB = TimerMode(index-TMR_NUM_OPTION);
+    g_model.timers[1].modeB = TimerMode(ui->timer2ModeBCB->itemData(index).toInt());
     updateSettings();
 }
 

@@ -84,6 +84,15 @@ PACK(typedef struct t_Open9xGeneralData_v208 {
 
 }) Open9xGeneralData_v208;
 
+PACK(typedef struct t_Open9xArmTimerData_v202 {
+  int8_t     mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  uint16_t   val;
+
+  operator TimerData();
+  t_Open9xArmTimerData_v202() { memset(this, 0, sizeof(t_Open9xArmTimerData_v202)); }
+  t_Open9xArmTimerData_v202(TimerData &eepe);
+}) Open9xArmTimerData_v202;
+
 PACK(typedef struct t_Open9xArmExpoData_v208 {
   uint8_t mode;           // 0=end, 1=pos, 2=neg, 3=both
   uint8_t chn;
@@ -410,7 +419,7 @@ PACK(typedef struct t_Open9xArmFrSkyData_v211 {
 
 PACK(typedef struct t_Open9xArmModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -451,7 +460,7 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
 
 PACK(typedef struct t_Open9xArmModelData_v209 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -493,7 +502,7 @@ PACK(typedef struct t_Open9xArmModelData_v209 {
 
 PACK(typedef struct t_Open9xArmModelData_v210 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -533,7 +542,7 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
 
 PACK(typedef struct t_Open9xArmModelData_v211 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -573,7 +582,7 @@ PACK(typedef struct t_Open9xArmModelData_v211 {
 
 PACK(typedef struct t_Open9xArmModelData_v212 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;

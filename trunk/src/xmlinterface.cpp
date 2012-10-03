@@ -148,10 +148,10 @@ bool XmlInterface::save(RadioData &radioData)
         model::timer_sequence & timer_sequence (xm.timer());
         for (int i=0; i<2; i++) {
           TimerData & t = m.timers[i];
-          if (t.mode) {
+          /* TODO if (t.mode) {
             timer xt(TimerSwitch::value(t.mode+TMR_NUM_OPTION), direction::value(t.dir), timer::value_type(t.val/3600, (t.val%3600)/60, t.val%60));
             timer_sequence.push_back(xt);
-          }
+          } */
         }
         if (m.protocol != PPM || m.ppmNCH != 8 || m.ppmDelay != 300 || m.pulsePol != 0) {
           modulation mod;
