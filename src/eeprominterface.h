@@ -612,32 +612,23 @@ class FrSkyData {
 };
 
 enum TimerMode {
-  TMRMODE_NEGATIVE=-128, /* avoid warnings */
   TMRMODE_OFF=0,
   TMRMODE_ABS,
-  TMRMODE_RUD,
-  TMRMODE_RUD_REL,
-  TMRMODE_ELE,
-  TMRMODE_ELE_REL,
-  TMRMODE_THR,
-  TMRMODE_THR_REL,
-  TMRMODE_THR_TRG,
-  TMRMODE_AIL,
-  TMRMODE_AIL_REL,
-  TMRMODE_P1,
-  TMRMODE_P1_REL,
-  TMRMODE_P2,
-  TMRMODE_P2_REL,
-  TMRMODE_P3,
-  TMRMODE_P3_REL,
-  TMR_VAROFS
+  TMRMODE_THs,
+  TMRMODE_THp,
+  TMRMODE_THt,
+  TMRMODE_FIRST_SWITCH,
+  TMRMODE_FIRST_MOMENT_SWITCH = TMRMODE_FIRST_SWITCH+64,
+
+  TMRMODE_FIRST_NEG_SWITCH=-TMRMODE_FIRST_SWITCH,
+  TMRMODE_FIRST_NEG_MOMENT_SWITCH=-TMRMODE_FIRST_MOMENT_SWITCH,
    /* sw/!sw, !m_sw/!m_sw */
 };
 
 class TimerData {
   public:
     TimerData() { clear(); }
-    TimerMode mode;   // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+    TimerMode mode;   // timer trigger source -> off, abs, THs, TH%, THt, sw/!sw, !m_sw/!m_sw
     TimerMode modeB;
     bool      dir;    // 0=>Count Down, 1=>Count Up
     uint16_t  val;

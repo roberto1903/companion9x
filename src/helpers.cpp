@@ -445,54 +445,54 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase) {
 void populateTimerSwitchCB(QComboBox *b, int value)
 {
   b->clear();
-  for (int i = -TMR_NUM_OPTION; i <= TMR_NUM_OPTION; i++) {
-    QString timerMode=getTimerMode(i);
-    if (!timerMode.isEmpty())
-      b->addItem(getTimerMode(i));
+  for (int i=-128; i<128; i++) {
+    QString timerMode = getTimerMode(i);
+    if (!timerMode.isEmpty()) {
+      b->addItem(getTimerMode(i), i);
+      if (i==value)
+        b->setCurrentIndex(b->count()-1);
+    }
   }
-  b->setCurrentIndex(value + TMR_NUM_OPTION);
   b->setMaxVisibleItems(10);
 }
 
 QString getTimerMode(int tm) {
 
-  QString stt = "OFFABSRUsRU%ELsEL%THsTH%THtALsAL%P1 P1%P2 P2%P3 P3%";
+  QString stt = "OFFABSTHsTH%THt";
 
   QString s;
-  if (abs(tm) < TMR_VAROFS) {
-    if (tm==-1)
-      return QString("");
-    s = stt.mid(abs(tm)*3, 3);
-    if (tm<-1) s.prepend("!");
-    return s;
+
+  if (tm >= 0 && tm <= TMRMODE_THt) {
+    return stt.mid(abs(tm)*3, 3);
   }
-  int tma=abs(tm);
-  if (tma<TMR_VAROFS + 9) {
-    s = RawSwitch(SWITCH_TYPE_SWITCH, tma - TMR_VAROFS + 1).toString();
+
+  int tma = abs(tm);
+
+  if (tma >= TMRMODE_FIRST_SWITCH && tma < TMRMODE_FIRST_SWITCH + 9) {
+    s = RawSwitch(SWITCH_TYPE_SWITCH, tma - TMRMODE_FIRST_SWITCH + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
-    s = RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMR_VAROFS - 9 + 1).toString();
+  if (tma >= TMRMODE_FIRST_SWITCH + 9 && tma < TMRMODE_FIRST_SWITCH + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMRMODE_FIRST_SWITCH - 9 + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9) {
-    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, tma - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches) + 1).toString();
+  if (tma >= TMRMODE_FIRST_MOMENT_SWITCH && tma < TMRMODE_FIRST_MOMENT_SWITCH + 9) {
+    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, tma - TMRMODE_FIRST_MOMENT_SWITCH + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  if (tma<TMR_VAROFS + 9 + GetEepromInterface()->getCapability(CustomSwitches) + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
-    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMR_VAROFS - 9 - GetEepromInterface()->getCapability(CustomSwitches)- 9 + 1).toString();
+  if (tma >= TMRMODE_FIRST_MOMENT_SWITCH + 9 && tma < TMRMODE_FIRST_MOMENT_SWITCH + 9 + GetEepromInterface()->getCapability(CustomSwitches)) {
+    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMRMODE_FIRST_MOMENT_SWITCH - 9 + 1).toString();
     if (tm < 0) s.prepend("!");
     return s;
   }
 
-  return "---";
-
+  return "";
 }
 
 void populateBacklightCB(QComboBox *b, const uint8_t value)

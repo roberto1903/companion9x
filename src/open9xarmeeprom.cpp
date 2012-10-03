@@ -342,6 +342,45 @@ Open9xGeneralData_v208::operator GeneralSettings ()
   return result;
 }
 
+t_Open9xArmTimerData_v202::operator TimerData ()
+{
+  TimerData c9x;
+
+  if (mode <= -42)
+    c9x.mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(mode+22));
+  else if (mode <= -1)
+    c9x.mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
+  else if (mode < 5)
+    c9x.mode = TimerMode(mode);
+  else if (mode < 5+41)
+    c9x.mode = TimerMode(TMRMODE_FIRST_SWITCH+(mode-5));
+  else
+    c9x.mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(mode-5-21));
+
+  c9x.val = val;
+  c9x.persistent = false;
+  c9x.dir = (val == 0);
+  return c9x;
+}
+
+t_Open9xArmTimerData_v202::t_Open9xArmTimerData_v202(TimerData &c9x)
+{
+  val = c9x.val;
+
+  if (c9x.mode >= TMRMODE_OFF && c9x.mode <= TMRMODE_THt)
+    mode = 0+c9x.mode-TMRMODE_OFF;
+  else if (c9x.mode >= TMRMODE_FIRST_MOMENT_SWITCH)
+    mode = 46+c9x.mode-TMRMODE_FIRST_MOMENT_SWITCH;
+  else if (c9x.mode >= TMRMODE_FIRST_SWITCH)
+    mode = 5+c9x.mode-TMRMODE_FIRST_SWITCH;
+  else if (c9x.mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
+    mode = -42+c9x.mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
+  else if (c9x.mode <= TMRMODE_FIRST_NEG_SWITCH)
+    mode = -1+c9x.mode-TMRMODE_FIRST_NEG_SWITCH;
+  else
+    mode = 0;
+}
+
 t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
 {
   mode = c9x.mode;

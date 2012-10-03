@@ -17,7 +17,7 @@
 #include "ersky9xsimulator.h"
 #include "ersky9xinterface.h"
 
-#define PCBARM
+#define PCBSKY9X
 #define REVB
 
 namespace Ersky9x {

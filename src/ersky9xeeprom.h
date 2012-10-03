@@ -19,6 +19,11 @@
 #include <inttypes.h>
 #include "eeprominterface.h"
 
+extern TimerMode getEr9xTimerMode(int mode);
+extern TimerMode getEr9xTimerModeB(int mode);
+extern int setEr9xTimerMode(TimerMode mode);
+extern int setEr9xTimerModeB(TimerMode mode);
+
 //eeprom data
 #define ERSKY9X_MAX_MIXERS  32
 #define ERSKY9X_MAX_CURVE5  8

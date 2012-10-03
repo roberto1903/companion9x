@@ -569,6 +569,58 @@ t_Er9xFrSkyData::operator FrSkyData ()
   return c9x;
 }
 
+int setEr9xTimerMode(TimerMode mode)
+{
+  if (mode == TMRMODE_OFF || mode == TMRMODE_ABS)
+    return mode;
+  else if (mode == TMRMODE_THs || mode == TMRMODE_THp)
+    return mode + 4;
+  else if (mode >= TMRMODE_FIRST_MOMENT_SWITCH)
+    return 37+mode-TMRMODE_FIRST_MOMENT_SWITCH;
+  else if (mode >= TMRMODE_FIRST_SWITCH)
+    return 16+mode-TMRMODE_FIRST_SWITCH;
+  else if (mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
+    return -37+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
+  else if (mode <= TMRMODE_FIRST_NEG_SWITCH)
+    return -16+mode-TMRMODE_FIRST_NEG_SWITCH;
+  else
+    return 0;
+}
+
+TimerMode getEr9xTimerMode(int mode)
+{
+  if (mode <= -33)
+    return TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(mode+33));
+  else if (mode <= -1)
+    return TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
+  else if (mode < 16)
+    return TimerMode(mode);
+  else if (mode < 16+21)
+    return TimerMode(TMRMODE_FIRST_SWITCH+(mode-16));
+  else
+    return TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(mode-16-21));
+}
+
+int setEr9xTimerModeB(TimerMode mode)
+{
+  if (mode >= TMRMODE_FIRST_SWITCH && mode < TMRMODE_FIRST_SWITCH+9+12)
+    return 1+mode-TMRMODE_FIRST_SWITCH;
+  else if (mode <= TMRMODE_FIRST_NEG_SWITCH && mode > TMRMODE_FIRST_NEG_SWITCH-9-12)
+    return -1+mode-TMRMODE_FIRST_NEG_SWITCH;
+  else
+    return 0;
+}
+
+TimerMode getEr9xTimerModeB(int mode)
+{
+  if (mode >= 1 && mode < 1+9+12)
+    return TimerMode(TMRMODE_FIRST_SWITCH+mode-1);
+  else if (mode <= -1 && mode > -1-9-12)
+    return TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
+  else
+    return TimerMode(TMRMODE_OFF);
+}
+      
 t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 {
   memset(this, 0, sizeof(t_Er9xModelData));
@@ -576,14 +628,8 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
     modelVoice=c9x.modelVoice;
-    tmrMode = c9x.timers[0].mode;
-    if (tmrMode > TMRMODE_THR_REL)
-      tmrMode--;
-    if (tmrMode < -TMRMODE_THR_REL)
-      tmrMode++;
-    tmrModeB = c9x.timers[0].modeB;
-    if (tmrModeB > TMRMODE_THR_REL)
-      tmrModeB--;
+    tmrMode = setEr9xTimerMode(c9x.timers[0].mode);
+    tmrModeB = setEr9xTimerModeB(c9x.timers[0].modeB);
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
     switch(c9x.protocol) {
@@ -737,21 +783,10 @@ t_Er9xModelData::operator ModelData ()
   c9x.used = true;
   c9x.modelVoice = modelVoice;
   getEEPROMString(c9x.name, name, sizeof(name));
-  c9x.timers[0].mode = TimerMode(tmrMode);
-  if (tmrMode > TMRMODE_THR_REL)
-    c9x.timers[0].mode = TimerMode(tmrMode+1);
-  else if (tmrMode < -TMRMODE_THR_REL)
-    c9x.timers[0].mode = TimerMode(tmrMode-1);
-  else
-    c9x.timers[0].mode = TimerMode(tmrMode);
+  c9x.timers[0].mode = getEr9xTimerMode(tmrMode);
   c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
-  if (tmrModeB > TMRMODE_THR_REL)
-    c9x.timers[0].modeB = TimerMode(tmrModeB+1);
-  else if (tmrModeB < -TMRMODE_THR_REL)
-    c9x.timers[0].modeB = TimerMode(tmrModeB-1);
-  else
-    c9x.timers[0].modeB = TimerMode(tmrModeB);
+  c9x.timers[0].modeB = getEr9xTimerModeB(tmrModeB);
 
     switch(protocol) {
     case 1:
