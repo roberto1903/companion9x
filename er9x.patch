@@ -226,6 +226,15 @@ Index: er9x/simpgmspace.cpp
 ===================================================================
 --- er9x/simpgmspace.cpp	(revision 772)
 +++ er9x/simpgmspace.cpp	(working copy)
+@@ -81,7 +81,7 @@
+   try {
+ #endif
+     g_menuStack[0] = menuProc0;
+-    // g_menuStack[1] = menuProcModelSelect;
++    g_menuStack[1] = menuProcModelSelect;
+ 
+     eeReadAll(); //load general setup and selected model
+ 
 @@ -133,3 +133,12 @@
    puts("");
  }
