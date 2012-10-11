@@ -307,7 +307,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="293"/>
         <source>Count Down to Zero</source>
-        <translation>Odpočet 30s,20s ...</translation>
+        <translation>Odpočet do nuly</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="300"/>
@@ -1133,7 +1133,7 @@ který kanál patří ke kterému výstupu.</translation>
     <message>
         <location filename="mainwindow.cpp" line="387"/>
         <source>Do you want to flash the firmware now ?</source>
-        <translation>Chcete flešnout firmware nyní ?</translation>
+        <translation>Chcete nyní zapsat firmware do rádia ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="436"/>
@@ -1544,7 +1544,7 @@ Chcete ji přesto naprogramovat?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1342"/>
         <source>Read Flash memory</source>
-        <translation>Načíst paměť Flash z rádia</translation>
+        <translation>Načíst paměť FLASH z rádia</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1343"/>
@@ -2675,7 +2675,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="1092"/>
         <source>Model Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuková stopa</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1130"/>
@@ -4747,21 +4747,21 @@ p, li { white-space: pre-wrap; }
         <translation>er9x nepodporuje tyto telemetrické jednotky</translation>
     </message>
     <message>
-        <location filename="er9xeeprom.cpp" line="604"/>
-        <location filename="gruvin9xeeprom.cpp" line="1098"/>
+        <location filename="er9xeeprom.cpp" line="650"/>
+        <location filename="gruvin9xeeprom.cpp" line="1092"/>
         <source>Er9x doesn&apos;t accept this protocol</source>
         <translation>Er9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="er9xeeprom.cpp" line="706"/>
-        <location filename="er9xeeprom.cpp" line="715"/>
+        <location filename="er9xeeprom.cpp" line="752"/>
+        <location filename="er9xeeprom.cpp" line="761"/>
         <source>Er9x doesn&apos;t support custom curves as curve%1, curve as been exported as fixed point </source>
         <oldsource>Er9x doesn&apos;t support custom curves as curve%1, curve as been imported as fixed point </oldsource>
         <translation>Er9x nepodporuje křivky s vlastními body jako křivka%1, tato křivka byla exportována jako křivka s pevnými body</translation>
     </message>
     <message>
-        <location filename="er9xeeprom.cpp" line="710"/>
-        <location filename="er9xeeprom.cpp" line="719"/>
+        <location filename="er9xeeprom.cpp" line="756"/>
+        <location filename="er9xeeprom.cpp" line="765"/>
         <source>Er9x doesn&apos;t support curve with %1 point as curve%2 </source>
         <translation>Er9x nepodporuje křivku s %1 body jako má křivka%2</translation>
     </message>
@@ -4781,20 +4781,20 @@ p, li { white-space: pre-wrap; }
         <translation>ersky9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="ersky9xeeprom.cpp" line="586"/>
+        <location filename="ersky9xeeprom.cpp" line="576"/>
         <source>Ersky9x doesn&apos;t accept this protocol</source>
         <translation>Ersky9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="ersky9xeeprom.cpp" line="688"/>
-        <location filename="ersky9xeeprom.cpp" line="697"/>
+        <location filename="ersky9xeeprom.cpp" line="678"/>
+        <location filename="ersky9xeeprom.cpp" line="687"/>
         <source>ErSky9x doesn&apos;t support custom curves as curve%1, curve as been exported as fixed point </source>
         <oldsource>ErSky9x doesn&apos;t support custom curves as curve%1, curve as been imported as fixed point </oldsource>
         <translation>ErSky9x nepodporuje křivky s vlastními body jako křivka%1, tato křivka byla exportována jako křivka s pevnými body</translation>
     </message>
     <message>
-        <location filename="ersky9xeeprom.cpp" line="692"/>
-        <location filename="ersky9xeeprom.cpp" line="701"/>
+        <location filename="ersky9xeeprom.cpp" line="682"/>
+        <location filename="ersky9xeeprom.cpp" line="691"/>
         <source>ErSky9x doesn&apos;t support curve with %1 point as curve%2 </source>
         <translation>ErSky9x nepodporuje křivku s %1 body jako má křivka%2</translation>
     </message>
@@ -4814,8 +4814,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="305"/>
-        <location filename="open9xarmeeprom.cpp" line="402"/>
-        <location filename="open9xarmeeprom.cpp" line="500"/>
+        <location filename="open9xarmeeprom.cpp" line="441"/>
+        <location filename="open9xarmeeprom.cpp" line="539"/>
         <location filename="open9xeeprom.cpp" line="301"/>
         <source>Phases settings on expos not exported</source>
         <translation>Nastavení fází v expech nebylo exportováno</translation>
@@ -4853,20 +4853,20 @@ p, li { white-space: pre-wrap; }
         <translation>gruvin9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="gruvin9xeeprom.cpp" line="1120"/>
+        <location filename="gruvin9xeeprom.cpp" line="1114"/>
         <source>gruvin9x only accepts %1 expos</source>
         <translation>v gruvin9x lze použít jen %1 exp</translation>
     </message>
     <message>
-        <location filename="gruvin9xeeprom.cpp" line="1124"/>
-        <location filename="gruvin9xeeprom.cpp" line="1133"/>
+        <location filename="gruvin9xeeprom.cpp" line="1118"/>
+        <location filename="gruvin9xeeprom.cpp" line="1127"/>
         <source>gruvin9x doesn&apos;t support custom curves as curve%1, curve as been exported as fixed point </source>
         <oldsource>gruvin9x doesn&apos;t support custom curves as curve%1, curve as been imported as fixed point </oldsource>
         <translation>gruvin9x nepodporuje křivky s vlastními body jako křivka%1, tato křivka byla exportována jako křivka s pevnými body</translation>
     </message>
     <message>
-        <location filename="gruvin9xeeprom.cpp" line="1128"/>
-        <location filename="gruvin9xeeprom.cpp" line="1137"/>
+        <location filename="gruvin9xeeprom.cpp" line="1122"/>
+        <location filename="gruvin9xeeprom.cpp" line="1131"/>
         <source>gruvin9x doesn&apos;t support curve with %1 point as curve%2 </source>
         <translation>gruvin9x nepodporuje křivku s %1 body jako má křivka%2</translation>
     </message>
@@ -5067,22 +5067,22 @@ p, li { white-space: pre-wrap; }
         <translation>Simulátor pro tuto verzi firmware zatím není dostupný</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="358"/>
-        <location filename="open9xarmeeprom.cpp" line="456"/>
+        <location filename="open9xarmeeprom.cpp" line="397"/>
+        <location filename="open9xarmeeprom.cpp" line="495"/>
         <location filename="open9xeeprom.cpp" line="255"/>
         <source>Open9x doesn&apos;t allow Curve%1 in expos</source>
         <translation>v Open9x nelze použít Křivku CV%1 v expech</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="416"/>
-        <location filename="open9xarmeeprom.cpp" line="514"/>
+        <location filename="open9xarmeeprom.cpp" line="455"/>
+        <location filename="open9xarmeeprom.cpp" line="553"/>
         <source>Simultaneous usage of expo and curves is no longer supported</source>
         <translation>Současné použití expa a křivek již není podporováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="696"/>
-        <location filename="open9xarmeeprom.cpp" line="839"/>
-        <location filename="open9xarmeeprom.cpp" line="985"/>
+        <location filename="open9xarmeeprom.cpp" line="735"/>
+        <location filename="open9xarmeeprom.cpp" line="878"/>
+        <location filename="open9xarmeeprom.cpp" line="1024"/>
         <location filename="open9xeeprom.cpp" line="487"/>
         <location filename="open9xeeprom.cpp" line="632"/>
         <location filename="open9xeeprom.cpp" line="781"/>
@@ -5093,27 +5093,27 @@ p, li { white-space: pre-wrap; }
         <translation>Nastavení fází v mixech nebylo exportováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1192"/>
-        <location filename="open9xarmeeprom.cpp" line="1242"/>
+        <location filename="open9xarmeeprom.cpp" line="1231"/>
+        <location filename="open9xarmeeprom.cpp" line="1281"/>
         <location filename="open9xeeprom.cpp" line="1259"/>
         <location filename="open9xv4eeprom.cpp" line="625"/>
         <source>This version of open9x does not support Custom Switch function %1</source>
         <translation>Tato verze Open9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1731"/>
-        <location filename="open9xarmeeprom.cpp" line="1936"/>
-        <location filename="open9xarmeeprom.cpp" line="2133"/>
-        <location filename="open9xarmeeprom.cpp" line="2319"/>
-        <location filename="open9xarmeeprom.cpp" line="2518"/>
-        <location filename="open9xeeprom.cpp" line="2133"/>
-        <location filename="open9xeeprom.cpp" line="2289"/>
-        <location filename="open9xeeprom.cpp" line="2457"/>
-        <location filename="open9xeeprom.cpp" line="2642"/>
-        <location filename="open9xeeprom.cpp" line="2843"/>
-        <location filename="open9xeeprom.cpp" line="3056"/>
-        <location filename="open9xeeprom.cpp" line="3258"/>
-        <location filename="open9xeeprom.cpp" line="3459"/>
+        <location filename="open9xarmeeprom.cpp" line="1770"/>
+        <location filename="open9xarmeeprom.cpp" line="1975"/>
+        <location filename="open9xarmeeprom.cpp" line="2172"/>
+        <location filename="open9xarmeeprom.cpp" line="2358"/>
+        <location filename="open9xarmeeprom.cpp" line="2557"/>
+        <location filename="open9xeeprom.cpp" line="2135"/>
+        <location filename="open9xeeprom.cpp" line="2291"/>
+        <location filename="open9xeeprom.cpp" line="2459"/>
+        <location filename="open9xeeprom.cpp" line="2644"/>
+        <location filename="open9xeeprom.cpp" line="2845"/>
+        <location filename="open9xeeprom.cpp" line="3058"/>
+        <location filename="open9xeeprom.cpp" line="3260"/>
+        <location filename="open9xeeprom.cpp" line="3461"/>
         <location filename="open9xv4eeprom.cpp" line="983"/>
         <location filename="open9xv4eeprom.cpp" line="1181"/>
         <location filename="open9xv4eeprom.cpp" line="1387"/>
@@ -5123,10 +5123,10 @@ p, li { white-space: pre-wrap; }
         <translation>Open9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="2345"/>
-        <location filename="open9xarmeeprom.cpp" line="2544"/>
-        <location filename="open9xeeprom.cpp" line="3286"/>
-        <location filename="open9xeeprom.cpp" line="3487"/>
+        <location filename="open9xarmeeprom.cpp" line="2384"/>
+        <location filename="open9xarmeeprom.cpp" line="2583"/>
+        <location filename="open9xeeprom.cpp" line="3288"/>
+        <location filename="open9xeeprom.cpp" line="3489"/>
         <location filename="open9xv4eeprom.cpp" line="1611"/>
         <location filename="open9xv4eeprom.cpp" line="1810"/>
         <source>open9x only accepts %1 points in all curves</source>
@@ -5144,14 +5144,14 @@ p, li { white-space: pre-wrap; }
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="2155"/>
-        <location filename="open9xeeprom.cpp" line="2311"/>
-        <location filename="open9xeeprom.cpp" line="2479"/>
-        <location filename="open9xeeprom.cpp" line="2663"/>
-        <location filename="open9xeeprom.cpp" line="2864"/>
-        <location filename="open9xeeprom.cpp" line="3077"/>
-        <location filename="open9xeeprom.cpp" line="3279"/>
-        <location filename="open9xeeprom.cpp" line="3480"/>
+        <location filename="open9xeeprom.cpp" line="2157"/>
+        <location filename="open9xeeprom.cpp" line="2313"/>
+        <location filename="open9xeeprom.cpp" line="2481"/>
+        <location filename="open9xeeprom.cpp" line="2665"/>
+        <location filename="open9xeeprom.cpp" line="2866"/>
+        <location filename="open9xeeprom.cpp" line="3079"/>
+        <location filename="open9xeeprom.cpp" line="3281"/>
+        <location filename="open9xeeprom.cpp" line="3482"/>
         <location filename="open9xv4eeprom.cpp" line="1004"/>
         <location filename="open9xv4eeprom.cpp" line="1202"/>
         <location filename="open9xv4eeprom.cpp" line="1408"/>
@@ -5171,17 +5171,17 @@ p, li { white-space: pre-wrap; }
         <translation>v th9x na této desce nelze použít rotační enkodéry</translation>
     </message>
     <message>
-        <location filename="th9xeeprom.cpp" line="442"/>
-        <location filename="th9xeeprom.cpp" line="451"/>
-        <location filename="th9xeeprom.cpp" line="460"/>
+        <location filename="th9xeeprom.cpp" line="436"/>
+        <location filename="th9xeeprom.cpp" line="445"/>
+        <location filename="th9xeeprom.cpp" line="454"/>
         <source>th9x doesn&apos;t support custom curves as curve%1, curve as been exported as fixed point </source>
         <oldsource>th9x doesn&apos;t support custom curves as curve%1, curve as been imported as fixed point </oldsource>
         <translation>th9x nepodporuje křivky s vlastními body jako křivka%1, tato křivka byla exportována jako křivka s pevnými body</translation>
     </message>
     <message>
-        <location filename="th9xeeprom.cpp" line="446"/>
-        <location filename="th9xeeprom.cpp" line="455"/>
-        <location filename="th9xeeprom.cpp" line="464"/>
+        <location filename="th9xeeprom.cpp" line="440"/>
+        <location filename="th9xeeprom.cpp" line="449"/>
+        <location filename="th9xeeprom.cpp" line="458"/>
         <source>th9x doesn&apos;t support curve with %1 point as curve%2 </source>
         <translation>th9x nepodporuje křivku s %1 body jako má křivka%2</translation>
     </message>
@@ -7441,7 +7441,7 @@ Může být jiná než verze firmwaru</translation>
     <message>
         <location filename="preferencesdialog.ui" line="501"/>
         <source>Ask for flashing after Download</source>
-        <translation>Zeptat se na flešování hned po stažení firmwaru </translation>
+        <translation type="unfinished">Po stažení firmwaru se zeptat, zda ho hned zapsat do rádia </translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="538"/>
@@ -7723,7 +7723,7 @@ a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
         <source>No splash screen</source>
         <translation>Bez úvodního loga
 Firmware nebude obsahovat žádné logo, ani podporu pro něj.
-Toto se hodí pokud je potřeba ušetřit místo ve Flash pro jiné funkce</translation>
+Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkce</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="516"/>
