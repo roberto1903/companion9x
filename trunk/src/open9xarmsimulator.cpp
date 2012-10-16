@@ -20,6 +20,7 @@
 #define PCBSKY9X
 #define REVB
 #define SDCARD
+#define ROTARY_ENCODERS 1
 
 namespace Open9xARM {
 #include "../open9x/sky9x/AT91SAM3S4.h"
@@ -57,8 +58,7 @@ bool Open9xARMSimulator::lcdChanged(bool & lightEnable)
 
 void Open9xARMSimulator::start(RadioData &radioData, bool tests)
 {
-/*  g_rotenc[0] = 0;
-  g_rotenc[1] = 0;*/
+  g_rotenc[0] = 0;
   open9xInterface->save(Open9xARM::eeprom, radioData);
   StartEepromThread(NULL);
   StartMainThread(tests);
@@ -107,7 +107,7 @@ void Open9xARMSimulator::getTrims(Trims & trims)
 
 void Open9xARMSimulator::wheelEvent(uint8_t steps)
 {
-//  g_rotenc[0] += steps;
+  g_rotenc[0] += steps*4;
 }
 
 unsigned int Open9xARMSimulator::getPhase()

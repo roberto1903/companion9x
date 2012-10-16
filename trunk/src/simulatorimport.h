@@ -68,6 +68,10 @@ extern int16_t g_chans512[NUM_CHNOUT];
 extern volatile uint8_t g_rotenc[2];
 #endif
 
+#if defined(PCBSKY9X)
+extern volatile uint32_t g_rotenc[1];
+#endif
+
 extern uint8_t lcd_buf[128*64/8];
 extern bool lcd_refresh;
 
@@ -172,7 +176,7 @@ switch (inputs.sId0) {
     break;
 }
 
-// keyboad
+// keyboard
 #if defined(PCBSKY9X)
 bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
 setKeys(keys);
@@ -198,6 +202,11 @@ if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); }
 // rotary encoders
 pind = 0;
 if (inputs.re1) pind |= 0x20;
+#endif
+
+#ifdef PCBSKY9X
+PIOB->PIO_PDSR |= 0x40;
+if (inputs.re1) PIOB->PIO_PDSR &= ~0x40;
 #endif
 #endif
 

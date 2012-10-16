@@ -18,6 +18,8 @@
 #define PXX
 #define DSM2
 #define DSM2_PPM
+#define GVARS
+#define DBLKEYS
 #define AUTOSWITCH
 #define GRAPHICS
 #define SDCARD
