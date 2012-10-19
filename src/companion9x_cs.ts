@@ -4658,52 +4658,247 @@ p, li { white-space: pre-wrap; }
         <translation>VYPNUTO</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="572"/>
+        <location filename="eeprominterface.cpp" line="567"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="574"/>
+        <location filename="eeprominterface.cpp" line="569"/>
         <source>er9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="580"/>
+        <location filename="eeprominterface.cpp" line="576"/>
         <source>gruvin9x stable for stock board</source>
         <translation>gruvin9x(stabilní vydání) pro originál 9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="584"/>
+        <location filename="eeprominterface.cpp" line="580"/>
         <source>gruvin9x trunk for stock board</source>
         <translation>gruvin9x(pracovní verze) pro originál 9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="585"/>
+        <location filename="eeprominterface.cpp" line="581"/>
         <source>gruvin9x stable for v4 board</source>
         <translation>gruvin9x(stabilní vydání) pro v4 desku</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="586"/>
+        <location filename="eeprominterface.cpp" line="582"/>
         <source>gruvin9x trunk for v4 board</source>
         <translation>gruvin9x(pracovní verze) pro v4 desku</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="588"/>
+        <location filename="open9xinterface.cpp" line="777"/>
         <source>open9x for stock board</source>
         <translation>open9x pro originál 9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="623"/>
+        <location filename="open9xinterface.cpp" line="789"/>
+        <source>Support for frsky telemetry mod</source>
+        <translation type="unfinished">Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
+(je potřeba upravit HW, bez této úpravy nebudou fungovat dva přepínače!
+a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="789"/>
+        <source>Support for jeti telemetry mod</source>
+        <translation type="unfinished">Podpora telemetrie JETI</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="789"/>
+        <source>Support for receiving ardupilot data</source>
+        <translation type="unfinished">telemetrie - podpora pro příjem ardupilot dat</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="789"/>
+        <source>Support for receiving NMEA data</source>
+        <translation type="unfinished">telemetrie - podpora pro příjem NMEA dat</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="791"/>
+        <location filename="open9xinterface.cpp" line="826"/>
+        <source>Enable heli menu and cyclic mix support</source>
+        <translation type="unfinished">Funkce pro heli, nastavení typu mechaniky</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="792"/>
+        <location filename="open9xinterface.cpp" line="827"/>
+        <location filename="open9xinterface.cpp" line="859"/>
+        <source>Enable TEMPLATES menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="793"/>
+        <source>No splash screen</source>
+        <translation type="unfinished">Bez úvodního loga
+Firmware nebude obsahovat žádné logo, ani podporu pro něj.
+Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkce</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="794"/>
+        <location filename="open9xinterface.cpp" line="828"/>
+        <location filename="open9xinterface.cpp" line="860"/>
+        <source>No flight phases</source>
+        <translation type="unfinished">Bez letových režimů</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="795"/>
+        <location filename="open9xinterface.cpp" line="829"/>
+        <location filename="open9xinterface.cpp" line="861"/>
+        <source>Disable curves menus</source>
+        <translation type="unfinished">Bez uživatelsky definovatelných křivek</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="796"/>
+        <source>Support for radio modified with regular speaker</source>
+        <translation type="unfinished">Vylepšený zvukový výstup,
+funkční i s origo pípákem,
+ale doporučuje se provést
+instalaci reproduktoru</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="797"/>
+        <location filename="open9xinterface.cpp" line="831"/>
+        <source>Used if you have modified your radio with voice mode</source>
+        <translation type="unfinished">Hlasový výstup pro telemetrii,
+nutno zastavět hlasový modul</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="798"/>
+        <source>Used if you have modified your radio with haptic mode</source>
+        <translation type="unfinished">Výstrahy pomocí vibračního motoru
+(je třeba osadit)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="799"/>
+        <location filename="open9xinterface.cpp" line="832"/>
+        <source>Support of FrSky PXX protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="800"/>
+        <location filename="open9xinterface.cpp" line="833"/>
+        <source>Support for DSM2 modules</source>
+        <translation type="unfinished">Podpora DSM2 modulů</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="801"/>
+        <location filename="open9xinterface.cpp" line="835"/>
+        <source>PPM center adjustment in limits</source>
+        <translation type="unfinished">Možnost nastavovat střed serva šířkou pulzu</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="802"/>
+        <location filename="open9xinterface.cpp" line="836"/>
+        <location filename="open9xinterface.cpp" line="862"/>
+        <source>Symetrical Limits</source>
+        <translation type="unfinished">Symetrické limity
+Přidá možnost volby mezi
+-klasickými limity s označením ^
+(nastavené limity jsou rovny hodnotě -100% a 100% kde průběh od středu daného subtrimem je lineární až do limitu)
+-symetrickými limity s označením =
+(Průběhy kanálů budou symetrické od středu daného subtrimem na obě strany,
+nastavené limity tedy nemusí být rovny hodnotě -100% a 100%, ale budou pouze maximem výchylky)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="803"/>
+        <source>Pots use in menus navigation</source>
+        <translation type="unfinished">Moznost zadávat hodnoty
+a pohybovat se v menu
+pomocí potenciometrů</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="804"/>
+        <source>SmartieParts 2.2 Backlight support</source>
+        <translation type="unfinished">Podpora pro SmartieParts 2.2 desku
+(programátor/podsvícení)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="805"/>
+        <location filename="open9xinterface.cpp" line="837"/>
+        <location filename="open9xinterface.cpp" line="863"/>
+        <source>In model setup menus automatically set switch by moving some of them</source>
+        <translation type="unfinished">Výběr spínače v mixu atd.
+se provádí jeho sepnutím</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="806"/>
+        <location filename="open9xinterface.cpp" line="838"/>
+        <location filename="open9xinterface.cpp" line="864"/>
+        <source>Enable resetting values by pressing up and down at the same time</source>
+        <translation type="unfinished">Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
+(+) a (-) invertuje hodnotu
+(+)a (UP) nastaví max. hodnotu
+(-) a (DN) nastaví min. hodnotu
+(UP) a (DN) vastaví výchozí hodnotu</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="807"/>
+        <location filename="open9xinterface.cpp" line="839"/>
+        <location filename="open9xinterface.cpp" line="865"/>
+        <source>No graphical check boxes and sliders</source>
+        <translation type="unfinished">Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="808"/>
+        <location filename="open9xinterface.cpp" line="840"/>
+        <location filename="open9xinterface.cpp" line="866"/>
+        <source>Don&apos;t use bold font for highlighting active items</source>
+        <translation type="unfinished">Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
+Pokud není tato volby vybrána,
+budou právě aktivní mixy, spínače a vlastní spínače
+zobrazovány tučným pismem. Neaktivní mixy/spínače budou
+zobrazeny normálním písmem</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="809"/>
+        <location filename="open9xinterface.cpp" line="841"/>
+        <source>EEprom write Progress bar</source>
+        <translation type="unfinished">Progresbar zobrazující zápis do EEPROM
+(tj. ukládání nastavení)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="810"/>
+        <location filename="open9xinterface.cpp" line="842"/>
+        <location filename="open9xinterface.cpp" line="867"/>
+        <source>Imperial units</source>
+        <translation type="unfinished">Imerialní jednotky pro telemetrii
+(stopy, palce, míle atd.)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="811"/>
+        <location filename="open9xinterface.cpp" line="843"/>
+        <location filename="open9xinterface.cpp" line="868"/>
+        <source>Global variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="814"/>
         <source>open9x for gruvin9x board</source>
         <translation>open9x pro gruvin9x desku</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="653"/>
+        <location filename="open9xinterface.cpp" line="830"/>
+        <source>Support for SD memory card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="834"/>
+        <source>Support for DSM2 modules using ppm instead of true serial</source>
+        <translation type="unfinished">Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="846"/>
         <source>open9x for ersky9x board</source>
         <translation>open9x pro ersky9x desku</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="676"/>
+        <location filename="open9xinterface.cpp" line="858"/>
+        <source>Enable HELI menu and cyclic mix support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="586"/>
         <source>ersky9x</source>
         <translation></translation>
     </message>
@@ -4802,21 +4997,21 @@ p, li { white-space: pre-wrap; }
         <location filename="ersky9xinterface.cpp" line="199"/>
         <location filename="mdichild.cpp" line="137"/>
         <location filename="modeledit.cpp" line="4085"/>
-        <location filename="open9xinterface.cpp" line="385"/>
+        <location filename="open9xinterface.cpp" line="403"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
         <location filename="ersky9xinterface.cpp" line="200"/>
-        <location filename="open9xinterface.cpp" line="386"/>
+        <location filename="open9xinterface.cpp" line="404"/>
         <source>EEPROM saved with these warnings:</source>
         <translation>EEPROM uložena s těmito varováními:</translation>
     </message>
     <message>
         <location filename="gruvin9xeeprom.cpp" line="305"/>
-        <location filename="open9xarmeeprom.cpp" line="441"/>
-        <location filename="open9xarmeeprom.cpp" line="539"/>
-        <location filename="open9xeeprom.cpp" line="301"/>
+        <location filename="open9xarmeeprom.cpp" line="551"/>
+        <location filename="open9xarmeeprom.cpp" line="649"/>
+        <location filename="open9xeeprom.cpp" line="400"/>
         <source>Phases settings on expos not exported</source>
         <translation>Nastavení fází v expech nebylo exportováno</translation>
     </message>
@@ -4824,11 +5019,11 @@ p, li { white-space: pre-wrap; }
         <location filename="gruvin9xeeprom.cpp" line="375"/>
         <location filename="open9xarmeeprom.cpp" line="60"/>
         <location filename="open9xarmeeprom.cpp" line="117"/>
-        <location filename="open9xeeprom.cpp" line="713"/>
-        <location filename="open9xeeprom.cpp" line="861"/>
-        <location filename="open9xeeprom.cpp" line="1015"/>
-        <location filename="open9xeeprom.cpp" line="1126"/>
-        <location filename="open9xeeprom.cpp" line="1183"/>
+        <location filename="open9xeeprom.cpp" line="812"/>
+        <location filename="open9xeeprom.cpp" line="960"/>
+        <location filename="open9xeeprom.cpp" line="1114"/>
+        <location filename="open9xeeprom.cpp" line="1225"/>
+        <location filename="open9xeeprom.cpp" line="1282"/>
         <source>Open9x on this board doesn&apos;t have Rotary Encoders</source>
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
@@ -5067,53 +5262,54 @@ p, li { white-space: pre-wrap; }
         <translation>Simulátor pro tuto verzi firmware zatím není dostupný</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="397"/>
-        <location filename="open9xarmeeprom.cpp" line="495"/>
-        <location filename="open9xeeprom.cpp" line="255"/>
+        <location filename="open9xarmeeprom.cpp" line="507"/>
+        <location filename="open9xarmeeprom.cpp" line="605"/>
+        <location filename="open9xeeprom.cpp" line="354"/>
         <source>Open9x doesn&apos;t allow Curve%1 in expos</source>
         <translation>v Open9x nelze použít Křivku CV%1 v expech</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="455"/>
-        <location filename="open9xarmeeprom.cpp" line="553"/>
+        <location filename="open9xarmeeprom.cpp" line="565"/>
+        <location filename="open9xarmeeprom.cpp" line="663"/>
         <source>Simultaneous usage of expo and curves is no longer supported</source>
         <translation>Současné použití expa a křivek již není podporováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="735"/>
-        <location filename="open9xarmeeprom.cpp" line="878"/>
-        <location filename="open9xarmeeprom.cpp" line="1024"/>
-        <location filename="open9xeeprom.cpp" line="487"/>
-        <location filename="open9xeeprom.cpp" line="632"/>
-        <location filename="open9xeeprom.cpp" line="781"/>
-        <location filename="open9xeeprom.cpp" line="932"/>
+        <location filename="open9xarmeeprom.cpp" line="845"/>
+        <location filename="open9xarmeeprom.cpp" line="988"/>
+        <location filename="open9xarmeeprom.cpp" line="1134"/>
+        <location filename="open9xeeprom.cpp" line="586"/>
+        <location filename="open9xeeprom.cpp" line="731"/>
+        <location filename="open9xeeprom.cpp" line="880"/>
+        <location filename="open9xeeprom.cpp" line="1031"/>
         <location filename="open9xv4eeprom.cpp" line="149"/>
         <location filename="open9xv4eeprom.cpp" line="298"/>
         <source>Phases settings on mixers not exported</source>
         <translation>Nastavení fází v mixech nebylo exportováno</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1231"/>
-        <location filename="open9xarmeeprom.cpp" line="1281"/>
-        <location filename="open9xeeprom.cpp" line="1259"/>
+        <location filename="open9xarmeeprom.cpp" line="1341"/>
+        <location filename="open9xarmeeprom.cpp" line="1391"/>
+        <location filename="open9xeeprom.cpp" line="1358"/>
         <location filename="open9xv4eeprom.cpp" line="625"/>
         <source>This version of open9x does not support Custom Switch function %1</source>
         <translation>Tato verze Open9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="1770"/>
-        <location filename="open9xarmeeprom.cpp" line="1975"/>
-        <location filename="open9xarmeeprom.cpp" line="2172"/>
-        <location filename="open9xarmeeprom.cpp" line="2358"/>
-        <location filename="open9xarmeeprom.cpp" line="2557"/>
-        <location filename="open9xeeprom.cpp" line="2135"/>
-        <location filename="open9xeeprom.cpp" line="2291"/>
-        <location filename="open9xeeprom.cpp" line="2459"/>
-        <location filename="open9xeeprom.cpp" line="2644"/>
-        <location filename="open9xeeprom.cpp" line="2845"/>
-        <location filename="open9xeeprom.cpp" line="3058"/>
-        <location filename="open9xeeprom.cpp" line="3260"/>
-        <location filename="open9xeeprom.cpp" line="3461"/>
+        <location filename="open9xarmeeprom.cpp" line="1880"/>
+        <location filename="open9xarmeeprom.cpp" line="2085"/>
+        <location filename="open9xarmeeprom.cpp" line="2282"/>
+        <location filename="open9xarmeeprom.cpp" line="2468"/>
+        <location filename="open9xarmeeprom.cpp" line="2667"/>
+        <location filename="open9xeeprom.cpp" line="2310"/>
+        <location filename="open9xeeprom.cpp" line="2466"/>
+        <location filename="open9xeeprom.cpp" line="2634"/>
+        <location filename="open9xeeprom.cpp" line="2820"/>
+        <location filename="open9xeeprom.cpp" line="3022"/>
+        <location filename="open9xeeprom.cpp" line="3236"/>
+        <location filename="open9xeeprom.cpp" line="3438"/>
+        <location filename="open9xeeprom.cpp" line="3639"/>
+        <location filename="open9xeeprom.cpp" line="3751"/>
         <location filename="open9xv4eeprom.cpp" line="983"/>
         <location filename="open9xv4eeprom.cpp" line="1181"/>
         <location filename="open9xv4eeprom.cpp" line="1387"/>
@@ -5123,35 +5319,37 @@ p, li { white-space: pre-wrap; }
         <translation>Open9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="open9xarmeeprom.cpp" line="2384"/>
-        <location filename="open9xarmeeprom.cpp" line="2583"/>
-        <location filename="open9xeeprom.cpp" line="3288"/>
-        <location filename="open9xeeprom.cpp" line="3489"/>
+        <location filename="open9xarmeeprom.cpp" line="2494"/>
+        <location filename="open9xarmeeprom.cpp" line="2693"/>
+        <location filename="open9xeeprom.cpp" line="3466"/>
+        <location filename="open9xeeprom.cpp" line="3667"/>
+        <location filename="open9xeeprom.cpp" line="3778"/>
         <location filename="open9xv4eeprom.cpp" line="1611"/>
         <location filename="open9xv4eeprom.cpp" line="1810"/>
         <source>open9x only accepts %1 points in all curves</source>
         <translation>Open9x podporuje pouze %1 bodů ve všech křivkách</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="312"/>
+        <location filename="open9xeeprom.cpp" line="411"/>
         <source>Simultaneous usage of expo and curves is no longer supported in open9x</source>
         <translation>Současné použití expa a křivek již není v Open9x podporováno</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="422"/>
-        <location filename="open9xeeprom.cpp" line="567"/>
+        <location filename="open9xeeprom.cpp" line="521"/>
+        <location filename="open9xeeprom.cpp" line="666"/>
         <source>open9x on this board doesn&apos;t have Rotary Encoders</source>
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="2157"/>
-        <location filename="open9xeeprom.cpp" line="2313"/>
-        <location filename="open9xeeprom.cpp" line="2481"/>
-        <location filename="open9xeeprom.cpp" line="2665"/>
-        <location filename="open9xeeprom.cpp" line="2866"/>
-        <location filename="open9xeeprom.cpp" line="3079"/>
-        <location filename="open9xeeprom.cpp" line="3281"/>
-        <location filename="open9xeeprom.cpp" line="3482"/>
+        <location filename="open9xeeprom.cpp" line="2332"/>
+        <location filename="open9xeeprom.cpp" line="2488"/>
+        <location filename="open9xeeprom.cpp" line="2656"/>
+        <location filename="open9xeeprom.cpp" line="2841"/>
+        <location filename="open9xeeprom.cpp" line="3043"/>
+        <location filename="open9xeeprom.cpp" line="3257"/>
+        <location filename="open9xeeprom.cpp" line="3459"/>
+        <location filename="open9xeeprom.cpp" line="3660"/>
+        <location filename="open9xeeprom.cpp" line="3771"/>
         <location filename="open9xv4eeprom.cpp" line="1004"/>
         <location filename="open9xv4eeprom.cpp" line="1202"/>
         <location filename="open9xv4eeprom.cpp" line="1408"/>
@@ -7681,106 +7879,90 @@ Mode 4:
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="450"/>
-        <location filename="preferencesdialog.cpp" line="786"/>
+        <location filename="preferencesdialog.cpp" line="715"/>
         <source>No joysticks found</source>
         <translation>Joystick nenalezen</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="509"/>
         <source>Support for frsky telemetry mod</source>
-        <translation>Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
+        <translation type="obsolete">Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
 (je potřeba upravit HW, bez této úpravy nebudou fungovat dva přepínače!
 a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="510"/>
         <source>Support for jeti telemetry mod</source>
-        <translation>Podpora telemetrie JETI</translation>
+        <translation type="obsolete">Podpora telemetrie JETI</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="511"/>
         <source>Support for receiving ardupilot data</source>
-        <translation>telemetrie - podpora pro příjem ardupilot dat</translation>
+        <translation type="obsolete">telemetrie - podpora pro příjem ardupilot dat</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="512"/>
         <source>Support for receiving NMEA data</source>
-        <translation>telemetrie - podpora pro příjem NMEA dat</translation>
+        <translation type="obsolete">telemetrie - podpora pro příjem NMEA dat</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="513"/>
         <source>Enable heli menu and cyclic mix support</source>
-        <translation>Funkce pro heli, nastavení typu mechaniky</translation>
+        <translation type="obsolete">Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="514"/>
         <source>Enable template menu</source>
-        <translation>Přidá menu s jednoduchými
+        <translation type="obsolete">Přidá menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="515"/>
         <source>No splash screen</source>
-        <translation>Bez úvodního loga
+        <translation type="obsolete">Bez úvodního loga
 Firmware nebude obsahovat žádné logo, ani podporu pro něj.
 Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkce</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="516"/>
         <source>No flight phases</source>
-        <translation>Bez letových režimů</translation>
+        <translation type="obsolete">Bez letových režimů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="517"/>
-        <location filename="preferencesdialog.cpp" line="531"/>
         <source>Support for radio modified with regular speaker</source>
-        <translation>Vylepšený zvukový výstup,
+        <translation type="obsolete">Vylepšený zvukový výstup,
 funkční i s origo pípákem,
 ale doporučuje se provést
 instalaci reproduktoru</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="518"/>
         <source>Used if you have modified your radio with haptic mode</source>
-        <translation>Výstrahy pomocí vibračního motoru
+        <translation type="obsolete">Výstrahy pomocí vibračního motoru
 (je třeba osadit)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="519"/>
         <source>Support of frsky PXX protocol</source>
-        <translation>Frsky PXX protokol,
+        <translation type="obsolete">Frsky PXX protokol,
 zatim ve zkušební verzi</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="520"/>
         <source>Support for DSM2 modules</source>
-        <translation>Podpora DSM2 modulů</translation>
+        <translation type="obsolete">Podpora DSM2 modulů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="521"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
-        <translation>Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
+        <translation type="obsolete">Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="522"/>
-        <source>Support for SD memory card</source>
-        <translation>Podpora paměťové karty SD</translation>
+        <source>Select your library folder</source>
+        <oldsource>Support for SD memory card</oldsource>
+        <translation type="unfinished">Podpora paměťové karty SD</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="523"/>
         <source>SmartieParts 2.2 Backlight support</source>
-        <translation>Podpora pro SmartieParts 2.2 desku
+        <translation type="obsolete">Podpora pro SmartieParts 2.2 desku
 (programátor/podsvícení)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="524"/>
         <source>PPM center adjustment in limits</source>
-        <translation>Možnost nastavovat střed serva šířkou pulzu</translation>
+        <translation type="obsolete">Možnost nastavovat střed serva šířkou pulzu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="525"/>
         <source>Symetrical Limits</source>
-        <translation>Symetrické limity
+        <translation type="obsolete">Symetrické limity
 Přidá možnost volby mezi
 -klasickými limity s označením ^
 (nastavené limity jsou rovny hodnotě -100% a 100% kde průběh od středu daného subtrimem je lineární až do limitu)
@@ -7789,123 +7971,113 @@ Přidá možnost volby mezi
 nastavené limity tedy nemusí být rovny hodnotě -100% a 100%, ale budou pouze maximem výchylky)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="526"/>
         <source>Pots use in menus navigation</source>
-        <translation>Moznost zadávat hodnoty
+        <translation type="obsolete">Moznost zadávat hodnoty
 a pohybovat se v menu
 pomocí potenciometrů</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="527"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
-        <translation>Výběr spínače v mixu atd.
+        <translation type="obsolete">Výběr spínače v mixu atd.
 se provádí jeho sepnutím</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="528"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
-        <translation>Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
+        <translation type="obsolete">Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
 (+) a (-) invertuje hodnotu
 (+)a (UP) nastaví max. hodnotu
 (-) a (DN) nastaví min. hodnotu
 (UP) a (DN) vastaví výchozí hodnotu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="529"/>
         <source>EEprom write Progress bar</source>
-        <translation>Progresbar zobrazující zápis do EEPROM
+        <translation type="obsolete">Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="530"/>
         <source>Imperial units</source>
-        <translation>Imerialní jednotky pro telemetrii
+        <translation type="obsolete">Imerialní jednotky pro telemetrii
 (stopy, palce, míle atd.)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="532"/>
         <source>Disable heli and templates menus</source>
-        <translation>bez menu heli a jednoduchých šablon modelu</translation>
+        <translation type="obsolete">bez menu heli a jednoduchých šablon modelu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="533"/>
         <source>No graphical check boxes and sliders</source>
-        <translation>Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
+        <translation type="obsolete">Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="534"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
-        <translation>Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
+        <translation type="obsolete">Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
 Pokud není tato volby vybrána,
 budou právě aktivní mixy, spínače a vlastní spínače
 zobrazovány tučným pismem. Neaktivní mixy/spínače budou
 zobrazeny normálním písmem</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="535"/>
         <source>Used if you have modified your radio with voice mode</source>
-        <translation>Hlasový výstup pro telemetrii,
+        <translation type="obsolete">Hlasový výstup pro telemetrii,
 nutno zastavět hlasový modul</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="536"/>
         <source>Disable curves menus</source>
-        <translation>Bez uživatelsky definovatelných křivek</translation>
+        <translation type="obsolete">Bez uživatelsky definovatelných křivek</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="593"/>
+        <location filename="preferencesdialog.cpp" line="522"/>
         <source>Select your library folder</source>
         <translation>Vyber složku s knihovnou</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="603"/>
+        <location filename="preferencesdialog.cpp" line="532"/>
         <source>Select your eeprom backup folder</source>
         <translation>Vyber složku pro zálohování eeprom</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="619"/>
-        <location filename="preferencesdialog.cpp" line="761"/>
+        <location filename="preferencesdialog.cpp" line="548"/>
+        <location filename="preferencesdialog.cpp" line="690"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="619"/>
-        <location filename="preferencesdialog.cpp" line="761"/>
+        <location filename="preferencesdialog.cpp" line="548"/>
+        <location filename="preferencesdialog.cpp" line="690"/>
         <source>Cannot load %1.</source>
         <translation>Nemohu načíst %1.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="631"/>
+        <location filename="preferencesdialog.cpp" line="560"/>
         <source>Select your sound sample folder</source>
         <translation>Vyberte složku pro zvuková data</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="674"/>
+        <location filename="preferencesdialog.cpp" line="603"/>
         <source>Profile name is empty, profile slot %1 will we deleted.&lt;br&gt;Are you sure ?</source>
         <translation>Název profilu je prázdný, slot %1 bude odstraněn.&lt;br&gt;Souhlasíte ?</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="703"/>
+        <location filename="preferencesdialog.cpp" line="632"/>
         <source>Export profile As</source>
         <translation>Exportovat profil jako</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="725"/>
+        <location filename="preferencesdialog.cpp" line="654"/>
         <source>Profile slot is not empty, profile slot %1 will we overwritten.&lt;br&gt;Are you sure ?</source>
         <translation>Slot profilu není prázdný, slot %1 bude přepsán.&lt;br&gt;Jste si jist ?</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="731"/>
+        <location filename="preferencesdialog.cpp" line="660"/>
         <source>Open Profile to import</source>
         <translation>Zvolte profil k importu</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="755"/>
+        <location filename="preferencesdialog.cpp" line="684"/>
         <source>Open Image to load</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="755"/>
+        <location filename="preferencesdialog.cpp" line="684"/>
         <source>Images (%1)</source>
         <translation>obrázky (%1)</translation>
     </message>

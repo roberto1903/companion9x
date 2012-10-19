@@ -27,11 +27,8 @@ private:
 
     void populateLocale();
     void populateFirmwareOptions(const FirmwareInfo *);
-    FirmwareInfo * getFirmware(QString &fwId);
+    FirmwareVariant getFirmwareVariant();
     void initSettings();
-    QString getTooltip(const char * opt);
-    QCheckBox * dsm2;
-    QCheckBox * dsm2ppm;
     QCheckBox * voice;
 
 

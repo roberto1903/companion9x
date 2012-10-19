@@ -35,7 +35,7 @@
 #define DATE_MARK "DATE:"
 #define TIME_MARK "TIME:"
 #define BLD_MARK "BLD:"
-#define MOD_MARK "MOD:"
+#define VAR_MARK "EEPR:"
 
 #define FILE_TYPE_BIN  1
 #define FILE_TYPE_HEX  2
@@ -49,7 +49,6 @@ class FlashInterface
 {
 public:
   FlashInterface(QString filename);
-  QString getVers();
   QString getDate();
   QString getTime();
   QString getSvn();
@@ -70,7 +69,6 @@ private:
   void SeekBuild();
   void SeekSplash();
   QString filename;
-  QString version;
   QString date;
   QString time;
   QString svn;

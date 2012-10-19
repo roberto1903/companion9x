@@ -350,6 +350,7 @@ class GeneralSettings {
   public:
     GeneralSettings();
     uint8_t   myVers;
+    uint32_t  variant;
     int16_t   calibMid[NUM_STICKS+NUM_POTS];
     int16_t   calibSpanNeg[NUM_STICKS+NUM_POTS];
     int16_t   calibSpanPos[NUM_STICKS+NUM_POTS];
@@ -405,11 +406,11 @@ class ExpoData {
     uint8_t chn;
     RawSwitch swtch;
     int16_t  phases;        // -5=!FP4, 0=normal, 5=FP4
-    uint8_t weight;
-    int8_t  expo;
+    int  weight;
+    int  expo;
     int8_t phase;
     uint8_t curveMode;
-    int8_t  curveParam;
+    int  curveParam;
     char name[6+1];
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
@@ -469,8 +470,8 @@ class MixData {
     uint8_t enableFmTrim;
     int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
     int16_t  phases;             // -5=!FP4, 0=normal, 5=FP4
-    int8_t  sOffset;
-    char name[10];
+    int    sOffset;
+    char   name[10];
 
     void clear() { memset(this, 0, sizeof(MixData)); }
 };
@@ -537,6 +538,7 @@ class PhaseData {
     unsigned int fadeIn;
     unsigned int fadeOut;
     int rotaryEncoders[2];
+    int gvars[5];
     void clear() { memset(this, 0, sizeof(PhaseData)); for (int i=0; i<NUM_STICKS; i++) trimRef[i] = -1; }
 };
 
@@ -582,13 +584,25 @@ class FrSkyChannelData {
     void clear() { memset(this, 0, sizeof(FrSkyChannelData)); }
 };
 
-class FrSkyBarData {
+struct FrSkyBarData {
+  uint8_t   source;
+  uint8_t   barMin;           // minimum for bar display
+  uint8_t   barMax;           // ditto for max display (would usually = ratio)
+};
+
+class FrSkyScreenData {
   public:
-    FrSkyBarData() { clear(); }
-    uint8_t   source;
-    uint8_t   barMin;           // minimum for bar display
-    uint8_t   barMax;           // ditto for max display (would usually = ratio)
-    void clear() { memset(this, 0, sizeof(FrSkyBarData)); }
+    FrSkyScreenData() { clear(); }
+
+    typedef union {
+      FrSkyBarData bars[4];
+      uint8_t cells[8];
+    } FrSkyScreenBody;
+
+    uint8_t type;
+    FrSkyScreenBody body;
+
+    void clear() { memset(this, 0, sizeof(FrSkyScreenData)); }
 };
 
 class FrSkyData {
@@ -601,8 +615,7 @@ class FrSkyData {
     uint8_t voltsSource;
     uint8_t currentSource;
     uint8_t FrSkyGpsAlt;
-    uint8_t csField[16];
-    FrSkyBarData bars[4];
+    FrSkyScreenData screens[3];
     FrSkyRSSIAlarm rssiAlarms[2];
     uint8_t varioSource;
     uint8_t varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
@@ -681,7 +694,7 @@ class ModelData {
     int       trimInc;            // Trim Increments
     uint8_t   disableThrottleWarning;
     int       ppmDelay;
-    uint16_t   beepANACenter;      // 1<<0->A1.. 1<<6->A7
+    uint16_t  beepANACenter;      // 1<<0->A1.. 1<<6->A7
     bool      pulsePol;           // false = positive
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
@@ -707,6 +720,11 @@ class ModelData {
     bool isempty();
     void setDefault(uint8_t id);
     unsigned int getTrimFlightPhase(uint8_t idx, int8_t phase);
+
+    ModelData removeGlobalVars();
+
+  protected:
+    void removeGlobalVar(int & var);
 };
 
 class RadioData {
@@ -826,7 +844,7 @@ class EEPROMInterface
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc) = 0;
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0) = 0;
+    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0, uint32_t variant=0xffffffff) = 0;
 
     virtual int getSize(ModelData &) = 0;
     
@@ -941,6 +959,12 @@ bool LoadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index);
 bool LoadEeprom(RadioData &radioData, uint8_t *eeprom, int size);
 bool LoadEepromXml(RadioData &radioData, QDomDocument &doc);
 
+struct Option {
+  const char * name;
+  QString tooltip;
+  uint32_t variant;
+};
+
 class FirmwareInfo {
   public:
     FirmwareInfo():
@@ -948,7 +972,8 @@ class FirmwareInfo {
       id(QString::null),
       eepromInterface(NULL),
       stamp(NULL),
-      voice(false)
+      voice(false),
+      variantBase(0)
     {
     }
 
@@ -963,7 +988,8 @@ class FirmwareInfo {
       eepromInterface(eepromInterface),
       url(url),
       stamp(stamp),
-      voice(voice)
+      voice(voice),
+      variantBase(0)
     {
     }
 
@@ -974,17 +1000,24 @@ class FirmwareInfo {
       eepromInterface(eepromInterface),
       url(url),
       stamp(stamp),
-      voice(voice)
+      voice(voice),
+      variantBase(0)
     {
     }
+
+    void setVariantBase(unsigned int variant) {
+      this->variantBase = variant;
+    }
+
+    unsigned int getVariant(const QString & id);
 
     virtual void addLanguage(const char *lang);
 
     virtual void addTTSLanguage(const char *lang);
 
-    virtual void addOption(const char *option);
+    virtual void addOption(const char *option, QString tooltip="", uint32_t variant=0);
 
-    virtual void addOptions(const char *options[]);
+    virtual void addOptions(Option options[]);
 
     QStringList get_options() {
       if (parent)
@@ -993,12 +1026,8 @@ class FirmwareInfo {
         return QStringList();
     }
 
-    virtual unsigned int getEepromVersion(unsigned int revision) {
-      return 0;
-    }
-
-    int saveEEPROM(uint8_t *eeprom, RadioData &radioData, unsigned int revision=0) {
-      return eepromInterface->save(eeprom, radioData, getEepromVersion(revision));
+    int saveEEPROM(uint8_t *eeprom, RadioData &radioData, unsigned int version=0, unsigned int variant=0) {
+      return eepromInterface->save(eeprom, radioData, version, variant);
     }
 
     virtual QString getUrl(const QString &fwId) {
@@ -1010,7 +1039,7 @@ class FirmwareInfo {
 
     QList<const char *> languages;
     QList<const char *> ttslanguages;
-    QList< QList<const char*> > opts;
+    QList< QList<Option> > opts;
     FirmwareInfo *parent;
     QString id;
     QString name;
@@ -1018,17 +1047,29 @@ class FirmwareInfo {
     QString url;
     const char * stamp;
     bool voice;
+    unsigned int variantBase;
 };
 
-FirmwareInfo * GetFirmware(QString id);
+struct FirmwareVariant {
+  QString id;
+  FirmwareInfo *firmware;
+  unsigned int variant;
+};
 
-extern QString default_firmware_id;
-extern FirmwareInfo * default_firmware;
-extern QString current_firmware_id;
-extern FirmwareInfo * current_firmware;
+extern QList<FirmwareInfo *> firmwares;
+extern FirmwareVariant default_firmware_variant;
+extern FirmwareVariant current_firmware_variant;
+
+FirmwareVariant GetFirmwareVariant(QString id);
+
+inline FirmwareInfo * GetFirmware(QString id)
+{
+  return GetFirmwareVariant(id).firmware;
+}
+
 inline FirmwareInfo * GetCurrentFirmware()
 {
-  return current_firmware;
+  return current_firmware_variant.firmware;
 }
 
 inline EEPROMInterface * GetEepromInterface()
@@ -1036,7 +1077,9 @@ inline EEPROMInterface * GetEepromInterface()
   return GetCurrentFirmware()->eepromInterface;
 }
 
-extern QList<FirmwareInfo *> firmwares;
-extern FirmwareInfo * default_firmware;
+inline unsigned int GetCurrentFirmwareVariant()
+{
+  return current_firmware_variant.variant;
+}
 
 #endif

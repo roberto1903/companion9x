@@ -239,6 +239,108 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   return result;
 }
 
+t_Open9xGeneralData_v212::t_Open9xGeneralData_v212(GeneralSettings &c9x, unsigned int version, unsigned int variant)
+{
+  memset(this, 0, sizeof(t_Open9xGeneralData_v212));
+
+  myVers = version;
+  this->variant = (variant & ALL_VARIANTS);
+
+  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+    calibMid[i] = c9x.calibMid[i];
+    calibSpanNeg[i] = c9x.calibSpanNeg[i];
+    calibSpanPos[i] = c9x.calibSpanPos[i];
+  }
+
+  uint16_t sum = 0;
+  for (int i=0; i<12; i++)
+    sum += calibMid[i];
+  chkSum = sum;
+
+  currModel = c9x.currModel;
+  contrast = c9x.contrast;
+  vBatWarn = c9x.vBatWarn;
+  vBatCalib = c9x.vBatCalib;
+  backlightMode = (c9x.backlightMode > 4 ? 3 : c9x.backlightMode);
+  trainer = c9x.trainer;
+  view = c9x.view;
+  disableThrottleWarning = c9x.disableThrottleWarning;
+  beeperMode = c9x.beeperMode;
+  switchWarning = c9x.switchWarning;
+  disableMemoryWarning = c9x.disableMemoryWarning;
+  disableAlarmWarning = c9x.disableAlarmWarning;
+  stickMode = (c9x.stickMode & 0x3);
+  timezone = c9x.timezone;
+  optrexDisplay = c9x.optrexDisplay;
+  inactivityTimer = c9x.inactivityTimer;
+  throttleReversed = c9x.throttleReversed;
+  minuteBeep = c9x.minuteBeep;
+  preBeep = c9x.preBeep;
+  flashBeep = c9x.flashBeep;
+  disableSplashScreen = c9x.disableSplashScreen;
+  enableTelemetryAlarm = c9x.enableTelemetryAlarm;
+  hapticMode=c9x.hapticMode;
+  filterInput = c9x.filterInput;
+  backlightDelay = c9x.backlightDelay;
+  templateSetup = c9x.templateSetup;
+  PPM_Multiplier = c9x.PPM_Multiplier;
+  beeperLength=c9x.beeperLength;
+  speakerPitch = c9x.speakerPitch;
+  hapticStrength = c9x.hapticStrength;
+  hapticLength=c9x.hapticLength;
+  reNavigation=c9x.reNavigation;
+  gpsFormat =  c9x.gpsFormat;
+}
+
+Open9xGeneralData_v212::operator GeneralSettings ()
+{
+  GeneralSettings result;
+
+  result.myVers = myVers;
+  result.variant = variant;
+
+  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+    result.calibMid[i] = calibMid[i];
+    result.calibSpanNeg[i] = calibSpanNeg[i];
+    result.calibSpanPos[i] = calibSpanPos[i];
+  }
+
+  result.currModel = currModel;
+  result.contrast = contrast;
+  result.vBatWarn = vBatWarn;
+  result.vBatCalib = vBatCalib;
+  result.backlightMode = backlightMode;
+  result.trainer = trainer;
+  result.view = view;
+  result.disableThrottleWarning = disableThrottleWarning;
+  result.switchWarning = switchWarning;
+  result.beeperMode = (BeeperMode)beeperMode;
+  result.disableMemoryWarning = disableMemoryWarning;
+  result.disableAlarmWarning = disableAlarmWarning;
+  result.stickMode = (stickMode & 0x3);
+  result.timezone = timezone;
+  result.optrexDisplay = optrexDisplay;
+  result.inactivityTimer = inactivityTimer;
+  result.throttleReversed = throttleReversed;
+  result.minuteBeep = minuteBeep;
+  result.preBeep = preBeep;
+  result.flashBeep = flashBeep;
+  result.disableSplashScreen = disableSplashScreen;
+  result.enableTelemetryAlarm = enableTelemetryAlarm;
+  result.hapticMode = (BeeperMode)hapticMode;
+  result.filterInput = filterInput;
+  result.backlightDelay = backlightDelay;
+  result.templateSetup = templateSetup;
+  result.PPM_Multiplier = PPM_Multiplier;
+  result.beeperLength = beeperLength;
+  result.speakerPitch = speakerPitch;
+  result.hapticStrength = hapticStrength;
+  result.hapticLength = hapticLength;
+  result.reNavigation=reNavigation;
+  result.gpsFormat = gpsFormat;
+  return result;
+}
+
 t_Open9xExpoData_v201::t_Open9xExpoData_v201(ExpoData &c9x)
 {
   mode = c9x.mode;
@@ -1826,8 +1928,9 @@ t_Open9xFrSkyData_v204::operator FrSkyData ()
   c9x.usrProto = usrProto;
   c9x.imperial = imperial;
   c9x.blades = blades;
+  c9x.screens[0].type = 1;
   for (int i=0; i<4; i++)
-    c9x.bars[i] = bars[i];
+    c9x.screens[0].body.bars[i] = bars[i];
   return c9x;
 }
 
@@ -1840,7 +1943,7 @@ t_Open9xFrSkyData_v204::t_Open9xFrSkyData_v204(FrSkyData &c9x)
   imperial = c9x.imperial;
   blades = c9x.blades;
   for (int i=0; i<4; i++)
-    bars[i] = c9x.bars[i];
+    bars[i] = c9x.screens[0].body.bars[i];
 }
 
 t_Open9xFrSkyData_v205::operator FrSkyData ()
@@ -1851,8 +1954,9 @@ t_Open9xFrSkyData_v205::operator FrSkyData ()
   c9x.usrProto = usrProto;
   c9x.imperial = imperial;
   c9x.blades = blades;
+  c9x.screens[0].type = 1;
   for (int i=0; i<4; i++)
-    c9x.bars[i] = bars[i];
+    c9x.screens[0].body.bars[i] = bars[i];
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
   c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
   return c9x;
@@ -1867,7 +1971,7 @@ t_Open9xFrSkyData_v205::t_Open9xFrSkyData_v205(FrSkyData &c9x)
   imperial = c9x.imperial;
   blades = c9x.blades;
   for (int i=0; i<4; i++)
-    bars[i] = c9x.bars[i];
+    bars[i] = c9x.screens[0].body.bars[i];
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
   rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
 }
@@ -1882,8 +1986,9 @@ t_Open9xFrSkyData_v208::operator FrSkyData ()
   c9x.voltsSource = voltsSource;
   c9x.blades = blades;
   c9x.currentSource=currentSource;
+  c9x.screens[0].type = 1;
   for (int i=0; i<4; i++)
-    c9x.bars[i] = bars[i];
+    c9x.screens[0].body.bars[i] = bars[i];
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
   c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
   return c9x;
@@ -1899,7 +2004,7 @@ t_Open9xFrSkyData_v208::t_Open9xFrSkyData_v208(FrSkyData &c9x)
   blades = c9x.blades;
   currentSource=c9x.currentSource;
   for (int i=0; i<4; i++)
-    bars[i] = c9x.bars[i];
+    bars[i] = c9x.screens[0].body.bars[i];
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
   rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
 }
@@ -1913,13 +2018,15 @@ t_Open9xFrSkyData_v210::operator FrSkyData ()
   c9x.voltsSource = voltsSource;
   c9x.blades = blades;
   c9x.currentSource=currentSource;
+  c9x.screens[0].type = 1;
   for (int i=0; i<4; i++)
-    c9x.bars[i] = bars[i];
+    c9x.screens[0].body.bars[i] = bars[i];
+  c9x.screens[1].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
       uint8_t i = 2*line + col;
-      c9x.csField[i] = (col==0 ? (lines[line] & 0x0f) : ((lines[line] & 0xf0) / 16));
-      c9x.csField[i] += (((linesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.screens[1].body.cells[i] = (col==0 ? (lines[line] & 0x0f) : ((lines[line] & 0xf0) / 16));
+      c9x.screens[1].body.cells[i] += (((linesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
@@ -1940,16 +2047,87 @@ t_Open9xFrSkyData_v210::t_Open9xFrSkyData_v210(FrSkyData &c9x)
   blades = c9x.blades;
   currentSource=c9x.currentSource;
   for (int i=0; i<4; i++)
-    bars[i] = c9x.bars[i];
+    bars[i] = c9x.screens[0].body.bars[i];
   linesXtra=0;
   for (int j=0; j<4; j++) {
     lines[j] = 0;
     for (int k=0; k<2; k++) {
-      int value = c9x.csField[2*j+k];
+      int value = c9x.screens[1].body.cells[2*j+k];
       lines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
       linesXtra |= (value / 16) << (4*j+2*k);
     }
   }
+  rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
+  rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
+  varioSource = c9x.varioSource;
+  varioSpeedUpMin = c9x.varioSpeedUpMin;
+  varioSpeedDownMin = c9x.varioSpeedDownMin;
+}
+
+t_Open9xFrSkyData_v212::operator FrSkyData ()
+{
+  FrSkyData c9x;
+  c9x.channels[0] = channels[0];
+  c9x.channels[1] = channels[1];
+  c9x.usrProto = usrProto;
+  c9x.voltsSource = voltsSource;
+  c9x.blades = blades;
+  c9x.currentSource=currentSource;
+
+  for (uint8_t scr=0; scr<2; scr++) {
+    c9x.screens[scr].type = (screensType & (1 << scr)) ? 1 : 0;
+    if (c9x.screens[scr].type) {
+      for (int i=0; i<4; i++) {
+        c9x.screens[scr].body.bars[i].source = screens[scr].bars[i].source;
+        c9x.screens[scr].body.bars[i].barMin = screens[scr].bars[i].barMin;
+        c9x.screens[scr].body.bars[i].barMax = screens[scr].bars[i].barMax;
+      }
+    }
+    else {
+      for (int line=0; line<4; line++) {
+        for (int col=0; col<2; col++) {
+          c9x.screens[scr].body.cells[2*line+col] = screens[scr].lines[line].sources[col];
+        }
+      }
+    }
+  }
+
+  c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
+  c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
+  c9x.varioSource = varioSource;
+  c9x.varioSpeedUpMin = varioSpeedUpMin;
+  c9x.varioSpeedDownMin = varioSpeedDownMin;
+  return c9x;
+}
+
+t_Open9xFrSkyData_v212::t_Open9xFrSkyData_v212(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Open9xFrSkyData_v212));
+  channels[0] = c9x.channels[0];
+  channels[1] = c9x.channels[1];
+  usrProto = c9x.usrProto;
+  voltsSource = c9x.voltsSource;
+  blades = c9x.blades;
+  currentSource=c9x.currentSource;
+
+  for (uint8_t scr=0; scr<2; scr++) {
+    screensType |= (c9x.screens[scr].type << scr);
+    if (c9x.screens[scr].type) {
+      for (int i=0; i<4; i++) {
+        screens[scr].bars[i].source = c9x.screens[scr].body.bars[i].source;
+        screens[scr].bars[i].barMin = c9x.screens[scr].body.bars[i].barMin;
+        screens[scr].bars[i].barMax = c9x.screens[scr].body.bars[i].barMax;
+      }
+    }
+    else {
+      for (int line=0; line<4; line++) {
+        for (int col=0; col<2; col++) {
+          screens[scr].lines[line].sources[col] = c9x.screens[scr].body.cells[2*line+col];
+        }
+      }
+    }
+  }
+
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
   rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
   varioSource = c9x.varioSource;
@@ -2604,11 +2782,12 @@ t_Open9xModelData_v205::operator ModelData ()
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
+  c9x.frsky.screens[1].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
       uint8_t i = 2*line + col;
-      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.frsky.screens[1].body.cells[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.screens[1].body.cells[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
 
@@ -2706,7 +2885,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     for (int j=0; j<4; j++) {
       frskyLines[j] = 0;
       for (int k=0; k<2; k++) {
-        int value = c9x.frsky.csField[2*j+k];
+        int value = c9x.frsky.screens[1].body.cells[2*j+k];
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
@@ -2799,11 +2978,12 @@ t_Open9xModelData_v208::operator ModelData ()
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
+  c9x.frsky.screens[1].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
       uint8_t i = 2*line + col;
-      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.frsky.screens[1].body.cells[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.screens[1].body.cells[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
   for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -2912,7 +3092,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     for (int j=0; j<4; j++) {
       frskyLines[j] = 0;
       for (int k=0; k<2; k++) {
-        int value = c9x.frsky.csField[2*j+k];
+        int value = c9x.frsky.screens[1].body.cells[2*j+k];
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
@@ -3010,11 +3190,12 @@ t_Open9xModelData_v209::operator ModelData ()
   c9x.ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
+  c9x.frsky.screens[1].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
       uint8_t i = 2*line + col;
-      c9x.frsky.csField[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.csField[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.frsky.screens[1].body.cells[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.screens[1].body.cells[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
   for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -3126,7 +3307,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     for (int j=0; j<4; j++) {
       frskyLines[j] = 0;
       for (int k=0; k<2; k++) {
-        int value = c9x.frsky.csField[2*j+k];
+        int value = c9x.frsky.screens[1].body.cells[2*j+k];
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
@@ -3538,5 +3719,241 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
   }
-  
+}
+
+int Open9xModelData_v212::importVariant(unsigned int variant, const uint8_t *data)
+{
+  CommonData * commonData = (CommonData *)data;
+
+  data += sizeof(CommonData);
+
+  modelData.used = true;
+  getEEPROMZString(modelData.name, commonData->name, sizeof(commonData->name));
+  for (int i=0; i<MAX_TIMERS; i++)
+    modelData.timers[i] = commonData->timers[i];
+  switch(commonData->protocol) {
+    case 1:
+      modelData.protocol = PPM16;
+      break;
+    case 2:
+      modelData.protocol = PPMSIM;
+      break;
+    case 3:
+      modelData.protocol = PXX;
+      break;
+    case 4:
+      modelData.protocol = DSM2;
+      break;
+    default:
+      modelData.protocol = PPM;
+      break;
+  }
+  modelData.ppmNCH = 8 + (2 * commonData->ppmNCH);
+  modelData.thrTrim = commonData->thrTrim;
+  modelData.disableThrottleWarning = commonData->disableThrottleWarning;
+  modelData.trimInc = commonData->trimInc;
+  modelData.ppmDelay = 300 + 50 * commonData->ppmDelay;
+  modelData.beepANACenter = commonData->beepANACenter;
+  modelData.pulsePol = commonData->pulsePol;
+  modelData.extendedLimits = commonData->extendedLimits;
+  modelData.extendedTrims = commonData->extendedTrims;
+  for (int i=0; i<O9X_MAX_PHASES; i++) {
+    modelData.phaseData[i] = commonData->phaseData[i];
+    for (int j=0; j<NUM_STICKS; j++) {
+      if (modelData.phaseData[i].trim[j] > 500) {
+        modelData.phaseData[i].trimRef[j] = modelData.phaseData[i].trim[j] - 501;
+        if (modelData.phaseData[i].trimRef[j] >= i)
+          modelData.phaseData[i].trimRef[j] += 1;
+        modelData.phaseData[i].trim[j] = 0;
+      }
+    }
+  }
+  for (int i=0; i<O9X_MAX_MIXERS; i++)
+    modelData.mixData[i] = commonData->mixData[i];
+  for (int i=0; i<O9X_NUM_CHNOUT; i++)
+    modelData.limitData[i] = commonData->limitData[i];
+  for (int i=0; i<O9X_MAX_EXPOS; i++)
+    modelData.expoData[i] = commonData->expoData[i];
+
+  for (int i=0; i<O9X_MAX_CURVES; i++) {
+    CurveInfo crvinfo = curveinfo(commonData, i);
+    modelData.curves[i].custom = crvinfo.custom;
+    modelData.curves[i].count = crvinfo.points;
+    for (int j=0; j<crvinfo.points; j++)
+      modelData.curves[i].points[j].y = crvinfo.crv[j];
+    if (crvinfo.custom) {
+      modelData.curves[i].points[0].x = -100;
+      for (int j=1; j<crvinfo.points-1; j++)
+        modelData.curves[i].points[j].x = crvinfo.crv[crvinfo.points+j-1];
+      modelData.curves[i].points[crvinfo.points-1].x = +100;
+    }
+    else {
+      for (int j=0; j<crvinfo.points; j++)
+        modelData.curves[i].points[j].x = -100 + (200*i) / (crvinfo.points-1);
+    }
+  }
+
+  for (int i=0; i<O9X_NUM_CSW; i++)
+    modelData.customSw[i] = commonData->customSw[i];
+  for (int i=0; i<O9X_NUM_FSW; i++)
+    modelData.funcSw[i] = commonData->funcSw[i];
+  modelData.swashRingData = commonData->swashR;
+
+  modelData.ppmFrameLength = commonData->ppmFrameLength;
+  modelData.thrTraceSrc = commonData->thrTraceSrc;
+  modelData.modelId = commonData->modelId;
+  modelData.switchWarningStates = commonData->switchWarningStates;
+
+  if (variant & GVARS_VARIANT) {
+    int8_t *gvars = (int8_t*) data;
+    data += 5;
+    for (uint8_t i=0; i<5; i++) {
+      modelData.phaseData[0].gvars[i] = gvars[i];
+    }
+  }
+
+  if (variant & FRSKY_VARIANT) {
+    Open9xFrSkyData_v212 * frsky = (Open9xFrSkyData_v212 *) data;
+    data += sizeof(Open9xFrSkyData_v212);
+    modelData.frsky = *frsky;
+  }
+
+  return 0;
+}
+
+int Open9xModelData_v212::exportVariant(unsigned int variant, QByteArray & output)
+{
+  /* TODO if (sizeof(*this) != MODEL_DATA_SIZE_211) {
+    QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_211));
+  } */
+
+  ModelData modelData;
+
+  if (variant & GVARS_VARIANT) {
+    modelData = this->modelData;
+  }
+  else {
+    modelData = this->modelData.removeGlobalVars();
+  }
+
+  CommonData commonData;
+
+  memset(&commonData, 0, sizeof(commonData));
+
+  if (modelData.used) {
+    setEEPROMZString(commonData.name, modelData.name, sizeof(commonData.name));
+    for (int i=0; i<MAX_TIMERS; i++)
+      commonData.timers[i] = modelData.timers[i];
+    switch(modelData.protocol) {
+      case PPM:
+        commonData.protocol = 0;
+        break;
+      case PPM16:
+        commonData.protocol = 1;
+        break;
+      case PPMSIM:
+        commonData.protocol = 2;
+        break;
+      case PXX:
+        commonData.protocol = 3;
+        break;
+      case DSM2:
+        commonData.protocol = 4;
+        break;
+      default:
+        commonData.protocol = 0;
+        EEPROMWarnings += ::QObject::tr("Open9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
+    commonData.thrTrim = modelData.thrTrim;
+    commonData.ppmNCH = (modelData.ppmNCH - 8) / 2;
+    commonData.trimInc = modelData.trimInc;
+    commonData.disableThrottleWarning=modelData.disableThrottleWarning;
+    commonData.pulsePol = modelData.pulsePol;
+    commonData.extendedLimits = modelData.extendedLimits;
+    commonData.extendedTrims = modelData.extendedTrims;
+    commonData.ppmDelay = (modelData.ppmDelay - 300) / 50;
+    commonData.beepANACenter = (uint8_t)(modelData.beepANACenter & 0x7F);
+    for (int i=0; i<O9X_MAX_MIXERS; i++)
+      commonData.mixData[i] = modelData.mixData[i];
+    for (int i=0; i<O9X_NUM_CHNOUT; i++)
+      commonData.limitData[i] = modelData.limitData[i];
+    for (int i=0; i<O9X_MAX_EXPOS; i++)
+      commonData.expoData[i] = modelData.expoData[i];
+    if (modelData.expoData[O9X_MAX_EXPOS].mode)
+      EEPROMWarnings += ::QObject::tr("open9x only accepts %1 expos").arg(O9X_MAX_EXPOS) + "\n";
+
+    int8_t * cur = &commonData.points[0];
+    int offset = 0;
+    for (int i=0; i<O9X_MAX_CURVES; i++) {
+      offset += (modelData.curves[i].custom ? modelData.curves[i].count * 2 - 2 : modelData.curves[i].count) - 5;
+      if (offset > O9X_NUM_POINTS - 5 * O9X_MAX_CURVES) {
+        EEPROMWarnings += ::QObject::tr("open9x only accepts %1 points in all curves").arg(O9X_NUM_POINTS) + "\n";
+        break;
+      }
+      commonData.curves[i] = offset;
+      for (int j=0; j<modelData.curves[i].count; j++) {
+        *cur++ = modelData.curves[i].points[j].y;
+      }
+      if (modelData.curves[i].custom) {
+        for (int j=1; j<modelData.curves[i].count-1; j++) {
+          *cur++ = modelData.curves[i].points[j].x;
+        }
+      }
+    }
+
+    for (int i=0; i<O9X_NUM_CSW; i++) {
+      commonData.customSw[i] = modelData.customSw[i];
+    }
+    int count = 0;
+    for (int i=0; i<O9X_NUM_FSW; i++) {
+      if (modelData.funcSw[i].swtch.type != SWITCH_TYPE_NONE)
+        commonData.funcSw[count++] = modelData.funcSw[i];
+    }
+    for (int i=0; i<O9X_NUM_CHNOUT; i++) {
+      if (modelData.safetySw[i].swtch.type) {
+        commonData.funcSw[count].func = i;
+        commonData.funcSw[count].swtch = open9xFromSwitch(modelData.safetySw[i].swtch);
+        commonData.funcSw[count].param = modelData.safetySw[i].val;
+        count++;
+      }
+    }
+
+    commonData.swashR = modelData.swashRingData;
+    for (int i=0; i<O9X_MAX_PHASES; i++) {
+      PhaseData phase = modelData.phaseData[i];
+      for (int j=0; j<NUM_STICKS; j++) {
+        if (phase.trimRef[j] >= 0) {
+          phase.trim[j] = 501 + phase.trimRef[j] - (phase.trimRef[j] >= i ? 1 : 0);
+        }
+        else {
+          phase.trim[j] = std::max(-500, std::min(500, phase.trim[j]));
+        }
+      }
+      commonData.phaseData[i] = phase;
+    }
+
+    commonData.switchWarningStates = modelData.switchWarningStates;
+    commonData.ppmFrameLength = modelData.ppmFrameLength;
+    commonData.thrTraceSrc = modelData.thrTraceSrc;
+    commonData.modelId = modelData.modelId;
+
+    output.append((char *)&commonData, sizeof(commonData));
+
+    if (variant & GVARS_VARIANT) {
+      int8_t gvars[5] = {0};
+      for (uint8_t i=0; i<5; i++) {
+        gvars[i] = modelData.phaseData[0].gvars[i];
+      }
+      output.append((char *)gvars, sizeof(gvars));
+    }
+
+    if (variant & FRSKY_VARIANT) {
+      Open9xFrSkyData_v212 frsky = modelData.frsky;
+      output.append((char *)&frsky, sizeof(frsky));
+    }
+  }
+
+  return 0;
 }

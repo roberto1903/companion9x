@@ -15,12 +15,12 @@
 #define AUTOSWITCH
 #define GRAPHICS
 #define CURVES
+#define GVARS
 #define XCURVES
 #define BOLD_FONT
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE YES
 #define PPM_LIMITS_SYMETRICAL YES
-
 
 #undef min
 #undef max

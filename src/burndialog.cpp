@@ -41,7 +41,6 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->ImageFileName->clear();
     ui->FwImage->clear();
     ui->FWFileName->clear();
-    ui->VersionField->clear();
     ui->DateField->clear();
     ui->SVNField->clear();
     ui->ModField->clear();
@@ -133,7 +132,6 @@ void burnDialog::on_FlashLoadButton_clicked()
   ui->ImageFileName->clear();
   ui->FwImage->clear();
   ui->FWFileName->clear();
-  ui->VersionField->clear();
   ui->DateField->clear();
   ui->SVNField->clear();
   ui->ModField->clear();
@@ -145,7 +143,8 @@ void burnDialog::on_FlashLoadButton_clicked()
   if (hexType==2) {
     fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
     checkFw(fileName);
-  } else {
+  }
+  else {
     QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (checkeEprom(fileName)) {
       if (burnraw==false) {
@@ -178,7 +177,6 @@ void burnDialog::checkFw(QString fileName)
   FlashInterface flash(fileName);
   if (flash.isValid()) {
     ui->FramFWInfo->show();
-    ui->VersionField->setText(flash.getVers());
     ui->DateField->setText(flash.getDate() + " " + flash.getTime());
     ui->SVNField->setText(flash.getSvn());
     ui->ModField->setText(flash.getBuild());
