@@ -30,7 +30,7 @@
 #define O9X_ARM_MAX_CSFUNCOLD 13
 #define O9X_ARM_MAX_CSFUNC 15
 
-PACK(typedef struct t_Open9xGeneralData_v208 {
+PACK(typedef struct t_Open9xArmGeneralData_v208 {
   uint8_t   myVers;
   int16_t   calibMid[7];
   int16_t   calibSpanNeg[7];
@@ -76,13 +76,66 @@ PACK(typedef struct t_Open9xGeneralData_v208 {
   uint8_t   backlightBright;
   int8_t    currentCalib;
 
-  uint8_t   variants;
+  uint8_t   variant;
 
   operator GeneralSettings();
-  t_Open9xGeneralData_v208() { memset(this, 0, sizeof(t_Open9xGeneralData_v208)); }
-  t_Open9xGeneralData_v208(GeneralSettings&, int version);
+  t_Open9xArmGeneralData_v208() { memset(this, 0, sizeof(t_Open9xArmGeneralData_v208)); }
+  t_Open9xArmGeneralData_v208(GeneralSettings&, int version);
 
-}) Open9xGeneralData_v208;
+}) Open9xArmGeneralData_v208;
+
+PACK(typedef struct t_Open9xArmGeneralData_v213 {
+  uint8_t   myVers;
+  uint16_t  variant;
+  int16_t   calibMid[7];
+  int16_t   calibSpanNeg[7];
+  int16_t   calibSpanPos[7];
+  uint16_t  chkSum;
+  uint8_t   currModel; //0..15
+  uint8_t   contrast;
+  uint8_t   vBatWarn;
+  int8_t    vBatCalib;
+  int8_t    backlightMode;
+  Open9xTrainerData_v201 trainer;
+  uint8_t   view;      //index of subview in main scrren
+  uint8_t   disableThrottleWarning:1;
+  int8_t    switchWarning:2; // -1=down, 0=off, 1=up
+  int8_t    beeperMode:2;
+  uint8_t   spare1:1;
+  uint8_t   disableMemoryWarning:1;
+  uint8_t   disableAlarmWarning:1;
+  uint8_t   stickMode:2;
+  int8_t    timezone:5;
+  uint8_t   optrexDisplay:1;
+  uint8_t   inactivityTimer;
+  uint8_t   throttleReversed:1;
+  uint8_t   minuteBeep:1;
+  uint8_t   preBeep:1;
+  uint8_t   flashBeep:1;
+  uint8_t   disableSplashScreen:1;
+  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  int8_t    hapticMode:2;
+  uint8_t   filterInput;
+  uint8_t   backlightDelay;
+  uint8_t   templateSetup;  //RETA order according to chout_ar array
+  int8_t    PPM_Multiplier;
+  int8_t    hapticLength;
+  uint8_t   reNavigation;
+  int8_t    beeperLength:3;
+  uint8_t   hapticStrength:3;
+  uint8_t   gpsFormat:1;
+  uint8_t   unexpectedShutdown:1;
+  uint8_t   speakerPitch;
+
+  uint8_t   speakerVolume;
+  uint8_t   backlightBright;
+  int8_t    currentCalib;
+
+  operator GeneralSettings();
+  t_Open9xArmGeneralData_v213() { memset(this, 0, sizeof(t_Open9xArmGeneralData_v213)); }
+  t_Open9xArmGeneralData_v213(GeneralSettings&, unsigned int version, unsigned int variant);
+
+}) Open9xArmGeneralData_v213;
 
 PACK(typedef struct t_Open9xArmTimerData_v202 {
   int8_t     mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
@@ -92,6 +145,17 @@ PACK(typedef struct t_Open9xArmTimerData_v202 {
   t_Open9xArmTimerData_v202() { memset(this, 0, sizeof(t_Open9xArmTimerData_v202)); }
   t_Open9xArmTimerData_v202(TimerData &eepe);
 }) Open9xArmTimerData_v202;
+
+PACK(typedef struct t_Open9xArmTimerData_v213 {
+  int8_t     mode;            // timer trigger source -> off, abs, stk, stk%, sw/!sw, !m_sw/!m_sw
+  uint16_t   start;
+  uint16_t   remanent:1;
+  uint16_t   value:15;
+
+  operator TimerData();
+  t_Open9xArmTimerData_v213() { memset(this, 0, sizeof(t_Open9xArmTimerData_v213)); }
+  t_Open9xArmTimerData_v213(TimerData &eepe);
+}) Open9xArmTimerData_v213;
 
 PACK(typedef struct t_Open9xArmExpoData_v208 {
   uint8_t mode;           // 0=end, 1=pos, 2=neg, 3=both
@@ -375,11 +439,6 @@ PACK(typedef struct t_Open9xArmFrSkyBarData_v210 {
   uint8_t   source;
   uint8_t   barMin;           // minimum for bar display
   uint8_t   barMax;           // ditto for max display (would usually = ratio)
-
-  operator FrSkyBarData();
-  t_Open9xArmFrSkyBarData_v210() { memset(this, 0, sizeof(t_Open9xArmFrSkyBarData_v210)); }
-  t_Open9xArmFrSkyBarData_v210(FrSkyBarData&);
-
 }) Open9xArmFrSkyBarData_v210;
 
 PACK(typedef struct t_Open9xArmFrSkyData_v210 {
@@ -416,6 +475,31 @@ PACK(typedef struct t_Open9xArmFrSkyData_v211 {
   t_Open9xArmFrSkyData_v211() { memset(this, 0, sizeof(t_Open9xArmFrSkyData_v211)); }
   t_Open9xArmFrSkyData_v211(FrSkyData&);
 }) Open9xArmFrSkyData_v211;
+
+//typedef FrSkyScreenDataLines
+typedef union {
+  Open9xArmFrSkyBarData_v210  bars[4];
+  FrSkyLineData_v212          lines[4];
+} Open9xArmFrSkyScreenData_v213;
+
+PACK(typedef struct t_Open9xArmFrSkyData_v213 {
+  Open9xFrSkyChannelData_v208 channels[2];
+  Open9xFrSkyRSSIAlarm rssiAlarms[2];
+  uint8_t usrProto; // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t voltsSource;
+  uint8_t blades;   // How many blades for RPMs, 0=2 blades, 1=3 blades
+  uint8_t currentSource;
+  uint8_t screensType;
+  Open9xArmFrSkyScreenData_v213 screens[3];
+  uint8_t varioSource;
+  uint8_t varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t varioSpeedDownMin;
+  uint8_t spare[4];
+
+  operator FrSkyData();
+  t_Open9xArmFrSkyData_v213() { memset(this, 0, sizeof(t_Open9xArmFrSkyData_v213)); }
+  t_Open9xArmFrSkyData_v213(FrSkyData&);
+}) Open9xArmFrSkyData_v213;
 
 PACK(typedef struct t_Open9xArmModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
@@ -618,9 +702,48 @@ PACK(typedef struct t_Open9xArmModelData_v212 {
 
 }) Open9xArmModelData_v212;
 
-#define LAST_OPEN9X_ARM_EEPROM_VER 212
+PACK(typedef struct t_Open9xArmModelData_v213 {
+  char      name[10];             // 10 must be first for eeLoadModelName
+  Open9xArmTimerData_v213 timers[MAX_TIMERS];
+  uint8_t   protocol:3;
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  int8_t    ppmNCH:4;
+  uint8_t   trimInc:3;            // Trim Increments
+  uint8_t   disableThrottleWarning:1;
+  uint8_t   pulsePol:1;
+  uint8_t   extendedLimits:1;
+  uint8_t   extendedTrims:1;
+  uint8_t   spare1:1;
+  int8_t    ppmDelay;
+  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  Open9xArmMixData_v212 mixData[O9X_ARM_MAX_MIXERS];
+  Open9xLimitData_v211 limitData[O9X_ARM_NUM_CHNOUT];
+  Open9xArmExpoData_v212  expoData[O9X_ARM_MAX_EXPOS];
+  int16_t   curves[O9X_ARM_MAX_CURVES];
+  int8_t    points[O9X_ARM_NUM_POINTS];
+  Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
+  Open9xArmFuncSwData_v211 funcSw[O9X_ARM_NUM_FSW];
+  Open9xArmSwashRingData_v210 swashR;
+  Open9xArmPhaseData_v212 phaseData[O9X_ARM_MAX_PHASES];
 
-typedef Open9xArmModelData_v212   Open9xArmModelData;
-typedef Open9xGeneralData_v208    Open9xArmGeneralData;
+  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
+  uint8_t   thrTraceSrc;
+  uint8_t   modelId;
+  uint8_t   switchWarningStates;
+
+  int8_t    gvars[O9X_MAX_GVARS];
+
+  Open9xArmFrSkyData_v213 frsky;
+
+  operator ModelData();
+  t_Open9xArmModelData_v213() { memset(this, 0, sizeof(t_Open9xArmModelData_v213)); }
+  t_Open9xArmModelData_v213(ModelData&);
+
+}) Open9xArmModelData_v213;
+
+#define LAST_OPEN9X_ARM_EEPROM_VER 213
+
+typedef Open9xArmModelData_v213   Open9xArmModelData;
+typedef Open9xArmGeneralData_v213 Open9xArmGeneralData;
 
 #endif

@@ -190,7 +190,7 @@
    <item row="6" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <property name="spacing">
-      <number>-1</number>
+      <number>6</number>
      </property>
      <item>
       <widget class="QLineEdit" name="SplashFileName">
@@ -301,6 +301,13 @@
      </property>
      <item row="0" column="3">
       <widget class="QCheckBox" name="optionCheckBox_4">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_22">
        <property name="text">
         <string>CheckBox</string>
        </property>
@@ -457,13 +464,6 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <widget class="QCheckBox" name="optionCheckBox_22">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
      <item row="5" column="0">
       <widget class="QCheckBox" name="optionCheckBox_21">
        <property name="text">
@@ -480,6 +480,34 @@
      </item>
      <item row="5" column="3">
       <widget class="QCheckBox" name="optionCheckBox_24">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QCheckBox" name="optionCheckBox_25">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QCheckBox" name="optionCheckBox_26">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QCheckBox" name="optionCheckBox_27">
+       <property name="text">
+        <string>CheckBox</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="QCheckBox" name="optionCheckBox_28">
        <property name="text">
         <string>CheckBox</string>
        </property>

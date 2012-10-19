@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>422</height>
+    <height>456</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -67,20 +67,6 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QLabel" name="versionLabel">
-          <property name="text">
-           <string>Version:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="VersionField">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="2" rowspan="3">
          <widget class="QLabel" name="FwImage">
           <property name="sizePolicy">
@@ -115,7 +101,14 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="DateField">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
          <widget class="QLabel" name="dateLabel">
           <property name="text">
            <string>Date &amp; Time</string>
@@ -123,13 +116,13 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="DateField">
+         <widget class="QLineEdit" name="SVNField">
           <property name="readOnly">
            <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="svnLabel">
           <property name="text">
            <string>SVN</string>
@@ -137,23 +130,16 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="SVNField">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="buildLabel">
-          <property name="text">
-           <string>MOD/Build</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
          <widget class="QLineEdit" name="ModField">
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="buildLabel">
+          <property name="text">
+           <string>Variant</string>
           </property>
          </widget>
         </item>
@@ -492,10 +478,6 @@
  <tabstops>
   <tabstop>FWFileName</tabstop>
   <tabstop>FlashLoadButton</tabstop>
-  <tabstop>VersionField</tabstop>
-  <tabstop>DateField</tabstop>
-  <tabstop>SVNField</tabstop>
-  <tabstop>ModField</tabstop>
   <tabstop>PatchFWCB</tabstop>
   <tabstop>PreferredImageCB</tabstop>
   <tabstop>ImageFileName</tabstop>

@@ -75,14 +75,14 @@ class EFile
   uint8_t eeFsBlocksMax;
 
   void eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size);
-  void eeprom_write_block(void *pointer_ram, unsigned int pointer_eeprom, size_t size);
+  void eeprom_write_block(const void *pointer_ram, unsigned int pointer_eeprom, size_t size);
 
   uint8_t EeFsRead(uint8_t blk,uint8_t ofs);
   void EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val);
   uint8_t EeFsGetLink(uint8_t blk);
   void EeFsSetLink(uint8_t blk,uint8_t val);
   uint8_t EeFsGetDat(uint8_t blk,uint8_t ofs);
-  void EeFsSetDat(uint8_t blk,uint8_t ofs,uint8_t*buf,uint8_t len);
+  void EeFsSetDat(uint8_t blk,uint8_t ofs, const uint8_t*buf,uint8_t len);
   uint16_t EeFsGetFree();
   void EeFsFree(uint8_t blk);///free one or more blocks
   uint8_t EeFsAlloc(); ///alloc one block from freelist
@@ -118,12 +118,12 @@ public:
   ///open file, write to file and close it. 
   ///If file existed before, then contents is overwritten. 
   ///If file was larger before, then unused blocks are freed
-  uint16_t writeRlc1(uint8_t i_fileId, uint8_t typ,uint8_t*buf,uint16_t i_len);
-  uint16_t writeRlc2(uint8_t i_fileId, uint8_t typ,uint8_t*buf,uint16_t i_len);
+  uint16_t writeRlc1(uint8_t i_fileId, uint8_t typ,const uint8_t*buf,uint16_t i_len);
+  uint16_t writeRlc2(uint8_t i_fileId, uint8_t typ,const uint8_t*buf,uint16_t i_len);
 
-  uint8_t read(uint8_t*buf,uint16_t i_len);
+  uint8_t read(uint8_t*buf, uint16_t i_len);
   uint8_t write1(uint8_t b);
-  uint8_t write(uint8_t*buf,uint8_t i_len);
+  uint8_t write(const uint8_t*buf, uint8_t i_len);
 
   ///return size of compressed file without block overhead
   uint16_t size(uint8_t id);

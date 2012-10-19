@@ -124,7 +124,33 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
   return true;
 }
 
-bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data, int index, unsigned int stickMode)
+template <class T>
+bool Open9xInterface::loadModelVariant(ModelData &model, uint8_t *data, int index, unsigned int variant)
+{
+  T _model(model);
+
+  uint8_t modelData[sizeof(model)];
+
+  if (!data) {
+    // load from EEPROM
+    efile->openRd(FILE_MODEL(index));
+    if (efile->readRlc2(modelData, sizeof(modelData))) {
+      _model.importVariant(variant, modelData);
+    }
+    else {
+      model.clear();
+    }
+  }
+  else {
+    // load from SD Backup, size is stored in index
+    // TODO will not work with SD backups from gruvin9x board!!!
+    _model.importVariant(variant, data);
+  }
+
+  return true;
+}
+
+bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data, int index, unsigned int variant, unsigned int stickMode)
 {
   if (version == 201) {
     return loadModel<Open9xModelData_v201>(model, data, index, stickMode);
@@ -190,7 +216,18 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
   }
   else if (version == 212) {
     if (board == BOARD_ERSKY9X) {
-      return loadModel<Open9xArmModelData_v212>(model, data, index, 0 /*no more stick mode messed*/);
+      return loadModel<Open9xArmModelData_v212>(model, data, index);
+    }
+    else if (board == BOARD_GRUVIN9X) {
+      return loadModel<Open9xV4ModelData_v212>(model, data, index);
+    }
+    else {
+      return loadModelVariant<Open9xModelData_v212>(model, data, index, variant);
+    }
+  }
+  else if (version == 213) {
+    if (board == BOARD_ERSKY9X) {
+      return loadModel<Open9xArmModelData_v213>(model, data, index);
     }
   }
 
@@ -223,6 +260,19 @@ bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
   return true;
 }
 
+template <class T>
+bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uint32_t variant)
+{
+  T open9xModel(model);
+  QByteArray eeprom;
+  open9xModel.exportVariant(variant, eeprom);
+  int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
+  if(sz != eeprom.size()) {
+    return false;
+  }
+  return true;
+}
+
 bool Open9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
 {
   return false;
@@ -230,15 +280,15 @@ bool Open9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
 
 bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
-  std::cout << "trying " << getName() << " import... ";
+  std::cout << "trying " << getName() << " import...";
 
   if (size != getEEpromSize()) {
-    std::cout << "wrong size (" << size << ")\n";
+    std::cout << " wrong size (" << size << ")\n";
     return false;
   }
 
   if (!efile->EeFsOpen(eeprom, size)) {
-    std::cout << "wrong file system\n";
+    std::cout << " wrong file system\n";
     return false;
   }
 
@@ -246,42 +296,66 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   
   uint8_t version;
   if (efile->readRlc2(&version, 1) != 1) {
-    std::cout << "no\n";
+    std::cout << " no\n";
     return false;
   }
 
-  std::cout << "version " << (unsigned int)version << " ";
+  std::cout << " version " << (unsigned int)version;
 
   if (!checkVersion(version)) {
-    std::cout << "not open9x\n";
+    std::cout << " not open9x\n";
     return false;
   }
 
-  if (version >= 208 && board == BOARD_ERSKY9X) {
-    if (!loadGeneral<Open9xGeneralData_v208>(radioData.generalSettings)) {
-      std::cout << "ko\n";
-      return false;
+  if (board == BOARD_ERSKY9X) {
+    if (version >= 213) {
+      if (!loadGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings)) {
+        std::cout << " ko\n";
+        return false;
+      }
+    }
+    else if (version >= 208) {
+      if (!loadGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings)) {
+        std::cout << " ko\n";
+        return false;
+      }
+    }
+    else {
+      if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
+        std::cout << " ko\n";
+        return false;
+      }
     }
   }
   else {
-    if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
-      std::cout << "ko\n";
-      return false;
+    if (version >= 212) {
+      if (!loadGeneral<Open9xGeneralData_v212>(radioData.generalSettings)) {
+        std::cout << " ko\n";
+        return false;
+      }
+    }
+    else {
+      if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
+        std::cout << " ko\n";
+        return false;
+      }
     }
   }
   
+  std::cout << " variant " << radioData.generalSettings.variant;
+
   for (int i=0; i<getMaxModels(); i++) {
-    if (!loadModel(version, radioData.models[i], NULL, i, radioData.generalSettings.stickMode+1)) {
-      std::cout << "ko\n";
+    if (!loadModel(version, radioData.models[i], NULL, i, radioData.generalSettings.variant, radioData.generalSettings.stickMode+1)) {
+      std::cout << " ko\n";
       return false;
     }
   }
 
-  std::cout << "ok\n";
+  std::cout << " ok\n";
   return true;
 }
 
-int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
+int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version, uint32_t variant)
 {
   EEPROMWarnings.clear();
 
@@ -304,14 +378,14 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
   efile->EeFsCreate(eeprom, size, (board==BOARD_GRUVIN9X && version >= 207) ? 5 : 4);
 
   if (board == BOARD_ERSKY9X) {
-    Open9xArmGeneralData open9xGeneral(radioData.generalSettings, version);
+    Open9xArmGeneralData open9xGeneral(radioData.generalSettings, version, variant);
     int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xArmGeneralData));
     if(sz != sizeof(Open9xArmGeneralData)) {
       return 0;
     }
   }
   else {
-    Open9xGeneralData open9xGeneral(radioData.generalSettings, version);
+    Open9xGeneralData open9xGeneral(radioData.generalSettings, version, variant);
     int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
     if(sz != sizeof(Open9xGeneralData)) {
       return 0;
@@ -373,6 +447,14 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
         case 212:
           if (board == BOARD_ERSKY9X)
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
+          else if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xV4ModelData_v212>(i, radioData.models[i]);
+          else
+            result = saveModelVariant<Open9xModelData_v212>(i, radioData.models[i], variant);
+          break;
+        case 213:
+          if (board == BOARD_ERSKY9X)
+            result = saveModel<Open9xArmModelData_v213>(i, radioData.models[i]);
           break;
       }
       if (!result)
@@ -400,9 +482,11 @@ int Open9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
 
   Open9xModelData open9xModel(model);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(Open9xModelData));
-  if(sz != sizeof(Open9xModelData)) {
-     return -1;
+  QByteArray eeprom;
+  open9xModel.exportVariant(GetCurrentFirmwareVariant(), eeprom);
+  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
+  if(sz != eeprom.size()) {
+    return -1;
   }
   return efile->size(FILE_TMP);
 }
@@ -415,7 +499,7 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   uint8_t tmp[EESIZE_GRUVIN9X];
   efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
 
-  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER);
+  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER, GetCurrentFirmwareVariant());
   memset(&open9xGeneral, 0, sizeof(Open9xGeneralData));
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
   if(sz != sizeof(open9xGeneral)) {
@@ -702,6 +786,9 @@ bool Open9xInterface::checkVersion(uint8_t version)
     case 212:
       // Big changes in mixers / limitse
       break;
+    case 213:
+      // GVARS / Variants introduction
+      break;
     default:
       return false;
   }
@@ -721,6 +808,7 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
   uint8_t version = eeprom[4];
   uint8_t bcktype = eeprom[5];
   uint16_t size = ((uint16_t)eeprom[7] << 8) + eeprom[6];
+  uint16_t variant = ((uint16_t)eeprom[9] << 8) + eeprom[8];
 
   std::cout << "version " << (unsigned int)version << " ";
 
@@ -735,7 +823,7 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
   }
 
   if (bcktype=='M') {
-    if (!loadModel(version, radioData.models[index], &eeprom[8], size)) {
+    if (!loadModel(version, radioData.models[index], &eeprom[8], size, variant)) {
       std::cout << "ko\n";
       return false;
     }
@@ -747,4 +835,106 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
 
   std::cout << "ok\n";
   return true;
+}
+
+#define OPEN9X_PREFIX_URL "http://85.18.253.250/getfw.php?fw="
+const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-stock.txt";
+const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
+const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
+
+void RegisterOpen9xFirmwares()
+{
+  FirmwareInfo * open9x = new FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP, false);
+  open9x->addLanguage("en");
+  open9x->addLanguage("fr");
+  open9x->addLanguage("se");
+  open9x->addLanguage("de");
+  open9x->addLanguage("it");
+  open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
+
+  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
+  open9x->addOptions(ext_options);
+  open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
+  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
+  open9x->addOption("nosplash", QObject::tr("No splash screen"));
+  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
+  open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
+  open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
+  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
+  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
+  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
+  open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
+  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
+  open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
+  firmwares.push_back(open9x);
+
+  open9x = new FirmwareInfo("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP, false);
+  open9x->setVariantBase(FRSKY_VARIANT);
+  open9x->addLanguage("en");
+  open9x->addLanguage("fr");
+  open9x->addLanguage("se");
+  open9x->addLanguage("de");
+  open9x->addLanguage("it");
+  open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
+  open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
+  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
+  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("sdcard", QObject::tr("Support for SD memory card"));
+  open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
+  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  Option dsm2_options[] = { { "DSM2", QObject::tr("Support for DSM2 modules"), 0 }, { "DSM2PPM", QObject::tr("Support for DSM2 modules using ppm instead of true serial"), 0 }, { NULL } };
+  open9x->addOptions(dsm2_options);
+  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
+  open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
+  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
+  open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
+  firmwares.push_back(open9x);
+
+  open9x = new FirmwareInfo("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_ARM_STAMP, true);
+  open9x->setVariantBase(FRSKY_VARIANT);
+  open9x->addLanguage("en");
+  open9x->addLanguage("fr");
+  open9x->addLanguage("se");
+  open9x->addLanguage("de");
+  open9x->addLanguage("it");
+  open9x->addLanguage("cz");
+  open9x->addTTSLanguage("en");
+  open9x->addTTSLanguage("fr");
+  open9x->addTTSLanguage("it");
+  open9x->addTTSLanguage("cz");
+  open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
+  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
+  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
+  open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
+  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
+  firmwares.push_back(open9x);
 }

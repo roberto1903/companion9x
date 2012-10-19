@@ -103,7 +103,7 @@ void EFile::eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, s
   memcpy(pointer_ram, &eeprom[pointer_eeprom], size);
 }
 
-void EFile::eeprom_write_block(void *pointer_ram, unsigned int pointer_eeprom, size_t size)
+void EFile::eeprom_write_block(const void *pointer_ram, unsigned int pointer_eeprom, size_t size)
 {
   memcpy(&eeprom[pointer_eeprom], pointer_ram, size);
 }
@@ -135,7 +135,7 @@ uint8_t EFile::EeFsGetDat(uint8_t blk,uint8_t ofs)
   return EeFsRead(blk,ofs+1);
 }
 
-void EFile::EeFsSetDat(uint8_t blk, uint8_t ofs, uint8_t *buf, uint8_t len)
+void EFile::EeFsSetDat(uint8_t blk, uint8_t ofs, const uint8_t *buf, uint8_t len)
 {
   eeprom_write_block(buf, (uint16_t)(blk*BS+ofs+1+eeFsBlocksOffset), len);
 }
@@ -300,7 +300,7 @@ uint8_t EFile::write1(uint8_t b)
   return write(&b, 1);
 }
 
-uint8_t EFile::write(uint8_t *buf, uint8_t i_len)
+uint8_t EFile::write(const uint8_t *buf, uint8_t i_len)
 {
   uint8_t len = i_len;
   if (!m_currBlk && m_pos==0)
@@ -351,7 +351,7 @@ void EFile::closeTrunc()
   if(fri) EeFsFree( fri );  //chain in
 }
 
-uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t i_len)
+uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uint16_t i_len)
 {
   create(i_fileId, typ);
   bool state0 = true;
@@ -397,7 +397,7 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t 
 /*
  * Write runlength (RLE) compressed bytes
  */
-uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, uint8_t *buf, uint16_t i_len)
+uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uint16_t i_len)
 {
   if (this->eeprom_size == EESIZE_ERSKY9X) {
     openRd(i_fileId);

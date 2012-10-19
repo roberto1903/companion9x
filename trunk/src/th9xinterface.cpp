@@ -124,7 +124,7 @@ bool Th9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize,
   return false;
 }
 
-int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version)
+int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version, uint32_t variant)
 {
   EEPROMWarnings.clear();
 

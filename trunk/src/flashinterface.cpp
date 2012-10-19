@@ -31,12 +31,11 @@ int getFileType(const QString &fullFileName)
 FlashInterface::FlashInterface(QString fileName)
 {
   uint8_t temp[MAX_FSIZE];
-  version = "";
   date = "";
   time = "";
   svn = "";
   build = "";
-  isValidFlag=true;
+  isValidFlag = true;
   QFile file(fileName);
   flash_size=0;
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
@@ -58,21 +57,16 @@ FlashInterface::FlashInterface(QString fileName)
       flash = QByteArray::fromRawData((const char *) temp, flash_size);
     }
     if (flash_size > 0) {
-      SeekVer();
       SeekSvn();
       SeekDate();
       SeekTime();
       SeekBuild();
       SeekSplash();
-    } else {
-      isValidFlag=false;
+    }
+    else {
+      isValidFlag = false;
     }
   }
-}
-
-QString FlashInterface::getVers(void)
-{
-  return version;
 }
 
 QString FlashInterface::getDate(void)
@@ -98,29 +92,6 @@ QString FlashInterface::getBuild(void)
 int FlashInterface::getSize()
 {
   return flash_size;
-}
-
-void FlashInterface::SeekVer(void)
-{
-  int i, start = -1, end = -1;
-  start = flash.indexOf(QString(VERS_MARK));
-  if (start > 0) {
-    start += QString(VERS_MARK).length();
-    for (i = start; i < (start + 20); i++) {
-      if (flash.at(i) == 0) {
-        end = i;
-        break;
-      }
-    }
-    if (end > 0) {
-      version = QString(flash.mid(start, (end - start))).trimmed();
-    }
-    else {
-      version = QString("");
-    }
-  } else {
-    isValidFlag=false;
-  }
 }
 
 void FlashInterface::SeekSvn(void) 
@@ -216,9 +187,9 @@ void FlashInterface::SeekBuild(void)
     }
   }
   else {
-    start = flash.indexOf(QString(MOD_MARK));
+    start = flash.indexOf(QString(VAR_MARK));
     if (start > 0) {
-      start += QString(MOD_MARK).length();
+      start += QString(VAR_MARK).length();
       for (i = start; i < (start + 20); i++) {
         if (flash.at(i) == 0) {
           end = i;

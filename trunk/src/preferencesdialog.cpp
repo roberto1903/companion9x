@@ -19,15 +19,16 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
   ui->setupUi(this);
 
 
-  QCheckBox * OptionCheckBox[]= { ui->optionCheckBox_1,ui->optionCheckBox_2,ui->optionCheckBox_3,ui->optionCheckBox_4,ui->optionCheckBox_5,
-      ui->optionCheckBox_6,ui->optionCheckBox_7,ui->optionCheckBox_8,ui->optionCheckBox_9,ui->optionCheckBox_10,
-      ui->optionCheckBox_11,ui->optionCheckBox_12,ui->optionCheckBox_13,ui->optionCheckBox_14,ui->optionCheckBox_15,
-      ui->optionCheckBox_16,ui->optionCheckBox_17,ui->optionCheckBox_18,ui->optionCheckBox_19,ui->optionCheckBox_20,
+  QCheckBox * OptionCheckBox[]= {
+      ui->optionCheckBox_1,ui->optionCheckBox_2,ui->optionCheckBox_3,ui->optionCheckBox_4,
+      ui->optionCheckBox_5,ui->optionCheckBox_6,ui->optionCheckBox_7,ui->optionCheckBox_8,
+      ui->optionCheckBox_9,ui->optionCheckBox_10,ui->optionCheckBox_11,ui->optionCheckBox_12,
+      ui->optionCheckBox_13,ui->optionCheckBox_14,ui->optionCheckBox_15,ui->optionCheckBox_16,
+      ui->optionCheckBox_17,ui->optionCheckBox_18,ui->optionCheckBox_19,ui->optionCheckBox_20,
       ui->optionCheckBox_21,ui->optionCheckBox_22,ui->optionCheckBox_23,ui->optionCheckBox_24,
+      ui->optionCheckBox_25,ui->optionCheckBox_26,ui->optionCheckBox_27,ui->optionCheckBox_28,
       NULL };
 
-  dsm2=NULL;
-  dsm2ppm=NULL;
   voice=NULL;
   
   connect(ui->langCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(firmwareLangChanged()));
@@ -91,7 +92,7 @@ void preferencesDialog::baseFirmwareChanged()
   firmwareChanged();
 }
 
-FirmwareInfo * preferencesDialog::getFirmware(QString & fwId)
+FirmwareVariant preferencesDialog::getFirmwareVariant()
 {
   QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
   bool voice=false;
@@ -110,14 +111,12 @@ FirmwareInfo * preferencesDialog::getFirmware(QString & fwId)
       if (ui->langCombo->count())
         id += QString("-") + ui->langCombo->currentText();
 
-      fwId = id;
-      return firmware;
+      return GetFirmwareVariant(id);
     }
   }
 
   // Should never occur...
-  fwId = default_firmware_id;
-  return default_firmware;
+  return default_firmware_variant;
 }
 
 void preferencesDialog::firmwareLangChanged()
@@ -133,28 +132,14 @@ void preferencesDialog::firmwareOptionChanged(bool state)
     QVariant selected_firmware = ui->downloadVerCB->itemData(ui->downloadVerCB->currentIndex());
     foreach(firmware, firmwares) {
       if (firmware->id == selected_firmware) {
-        foreach(QList<const char *> opts, firmware->opts) {
-          foreach(const char *opt, opts) {
-            if (cb->text() == opt) {
-              foreach(const char *other, opts) {
-                if (other != opt) {
+        foreach(QList<Option> opts, firmware->opts) {
+          foreach(Option opt, opts) {
+            if (cb->text() == opt.name) {
+              foreach(Option other, opts) {
+                if (other.name != opt.name) {
                   foreach(QCheckBox *ocb, optionsCheckBoxes) {
-                    if (ocb->text() == other)
+                    if (ocb->text() == other.name)
                       ocb->setChecked(false);
-                  }
-                }
-                if (cb->text() == "DSM2" && cb->isChecked()) {
-                  if (dsm2ppm) {
-                    if (dsm2ppm->isChecked()) {
-                      dsm2ppm->setChecked(false);
-                    }
-                  }
-                }
-                if (cb->text() == "DSM2PPM" && cb->isChecked()) {
-                  if (dsm2) {
-                    if (dsm2->isChecked()) {
-                      dsm2->setChecked(false);
-                    }
                   }
                 }
               }
@@ -218,16 +203,14 @@ void preferencesDialog::firmwareChanged()
   if (updateLock)
     return;
 
-  QString fwId;
-  FirmwareInfo * fw = getFirmware(fwId);
+  FirmwareVariant variant = getFirmwareVariant();
   QString stamp;
-  stamp.append(fw->stamp);
-  ui->fw_dnld->setEnabled(!fw->getUrl(fwId).isNull());
-  // populateFirmwareOptions(fw);
+  stamp.append(variant.firmware->stamp);
+  ui->fw_dnld->setEnabled(!variant.firmware->getUrl(variant.id).isNull());
 
   QSettings settings("companion9x", "companion9x");
   settings.beginGroup("FwRevisions");
-  int fwrev = settings.value(fwId, -1).toInt();
+  int fwrev = settings.value(variant.id, -1).toInt();
   settings.endGroup();
   if (fwrev != -1) {
     ui->FwInfo->setText(tr("Last downloaded release: %1").arg(fwrev));
@@ -265,8 +248,8 @@ void preferencesDialog::writeValues()
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
-  current_firmware = getFirmware(current_firmware_id);
-  settings.setValue("firmware", current_firmware_id);
+  current_firmware_variant = getFirmwareVariant();
+  settings.setValue("firmware", current_firmware_variant.id);
   settings.setValue("profileId", ui->ProfSlot_SB->value());
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
@@ -276,7 +259,8 @@ void preferencesDialog::writeValues()
     QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
     settings.setValue("SplashImage", image2qstring(Image));
     settings.setValue("SplashFileName", ui->SplashFileName->text());
-  } else {
+  }
+  else {
     settings.setValue("SplashFileName", "");
     settings.setValue("SplashImage", "");
   }
@@ -301,13 +285,13 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
   ui->langCombo->clear();
   foreach(const char *lang, parent->languages) {
     ui->langCombo->addItem(lang);
-    if (current_firmware_id.endsWith(lang))
+    if (current_firmware_variant.id.endsWith(lang))
       ui->langCombo->setCurrentIndex(ui->langCombo->count() - 1);
   }
   ui->voiceCombo->clear();
   foreach(const char *lang, parent->ttslanguages) {
     ui->voiceCombo->addItem(lang);
-    if (current_firmware_id.contains(QString("-tts%1").arg(lang)))
+    if (current_firmware_variant.id.contains(QString("-tts%1").arg(lang)))
       ui->voiceCombo->setCurrentIndex(ui->voiceCombo->count() - 1);
   }
 
@@ -321,8 +305,8 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
   }
 
   int index = 0;
-  foreach(QList<const char *> opts, parent->opts) {
-    foreach(const char * opt, opts) {
+  foreach(QList<Option> opts, parent->opts) {
+    foreach(Option opt, opts) {
       if (index >= optionsCheckBoxes.size()) {
         qDebug() << "This firmware needs more options checkboxes!";
       }
@@ -330,17 +314,11 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
         QCheckBox *cb = optionsCheckBoxes.at(index++);
         if (cb) {
           cb->show();
-          cb->setText(opt);
-          cb->setToolTip(getTooltip(opt));
-          cb->setCheckState(current_firmware_id.contains(opt) ? Qt::Checked : Qt::Unchecked);
-          if (opt==QString("DSM2")) {
-            dsm2=cb;
-          }
-          if (opt==QString("DSM2PPM")) {
-            dsm2ppm=cb;
-          }
+          cb->setText(opt.name);
+          cb->setToolTip(opt.tooltip);
+          cb->setCheckState(current_firmware_variant.id.contains(opt.name) ? Qt::Checked : Qt::Unchecked);
             
-          if (opt==QString("voice")) {
+          if (opt.name==QString("voice")) {
             voice=cb;
             ui->voiceLabel->show();
             ui->voiceCombo->show();
@@ -348,7 +326,7 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
             ui->voicePathButton->show();
             ui->voicePath->show();
             ui->voicePathLabel->show();
-            if (current_firmware_id.contains(opt) ||firmware->voice) {
+            if (current_firmware_variant.id.contains(opt.name) ||firmware->voice) {
               ui->voiceLabel->setEnabled(true);
               ui->voiceCombo->setEnabled(true);
               ui->voice_dnld->setEnabled(true);
@@ -473,77 +451,6 @@ void preferencesDialog::initSettings()
   firmwareChanged();
 }
 
-QString preferencesDialog::getTooltip(const char * opt) {
-const char * options[]={
-        "frsky",
-        "jeti",
-        "ardupilot",
-        "nmea", 
-        "heli",
-        "templates",
-        "nosplash",
-        "nofp",
-        "audio",
-        "haptic",
-        "PXX",
-        "DSM2",
-        "DSM2PPM",
-        "sdcard",
-        "sp22",
-        "ppmca",
-        "symlimits",
-        "potscroll",
-        "autoswitch",
-        "dblkeys",
-        "pgbar",
-        "imperial",
-        "speaker",
-        "noht",
-        "nographics",
-        "nobold",
-        "voice",
-        "nocurves",
-        NULL };
-  
-  QString tooltip[]={
-        tr("Support for frsky telemetry mod"),
-        tr("Support for jeti telemetry mod"),
-        tr("Support for receiving ardupilot data"),
-        tr("Support for receiving NMEA data"), 
-        tr("Enable heli menu and cyclic mix support"),
-        tr("Enable template menu"),
-        tr("No splash screen"),
-        tr("No flight phases"),
-        tr("Support for radio modified with regular speaker"),
-        tr("Used if you have modified your radio with haptic mode"),
-        tr("Support of frsky PXX protocol"),
-        tr("Support for DSM2 modules"),
-        tr("Support for DSM2 modules using ppm instead of true serial"),
-        tr("Support for SD memory card"),
-        tr("SmartieParts 2.2 Backlight support"),
-        tr("PPM center adjustment in limits"),
-        tr("Symetrical Limits"),
-        tr("Pots use in menus navigation"),
-        tr("In model setup menus automatically set switch by moving some of them"),
-        tr("Enable resetting values by pressing up and down at the same time"),
-        tr("EEprom write Progress bar"),
-        tr("Imperial units"),
-        tr("Support for radio modified with regular speaker"),
-        tr("Disable heli and templates menus"),
-        tr("No graphical check boxes and sliders"),
-        tr("Don't use bold font for highlighting active items"),
-        tr("Used if you have modified your radio with voice mode"),
-        tr("Disable curves menus"),
-        tr("") };
-  int i;
-  for (i=0; options[i]; i++) {
-    if (strcmp(options[i],opt)==0) {
-      break;
-    }
-  }
-  return tooltip[i];
-}
-
 void preferencesDialog::populateLocale()
 {
   ui->locale_QB->clear();
@@ -565,15 +472,14 @@ void preferencesDialog::populateLocale()
 void preferencesDialog::on_fw_dnld_clicked()
 {
   MainWindow * mw = (MainWindow *)this->parent();
-  QString fwId;
-  FirmwareInfo *fw = getFirmware(fwId);
-  if (!fw->getUrl(fwId).isNull()) {
+  FirmwareVariant variant = getFirmwareVariant();
+  if (!variant.firmware->getUrl(variant.id).isNull()) {
     if (ui->burnFirmware->isChecked()) {
       QSettings settings("companion9x", "companion9x");
-      current_firmware = getFirmware(current_firmware_id);
-      settings.setValue("firmware", current_firmware_id);
+      current_firmware_variant = getFirmwareVariant();
+      settings.setValue("firmware", current_firmware_variant.id);
     }
-    mw->downloadLatestFW(fw, fwId);
+    mw->downloadLatestFW(current_firmware_variant.firmware, current_firmware_variant.id);
   }
   firmwareChanged();
 }
@@ -581,9 +487,8 @@ void preferencesDialog::on_fw_dnld_clicked()
 void preferencesDialog::on_voice_dnld_clicked()
 {
   QString url="http://85.18.253.250/voices/";
-  QString fwId;
-  FirmwareInfo *fw = getFirmware(fwId);
-  url.append(QString("%1/%2/").arg(fw->id).arg(ui->voiceCombo->currentText()));
+  FirmwareVariant variant = getFirmwareVariant();
+  url.append(QString("%1/%2/").arg(variant.firmware->id).arg(ui->voiceCombo->currentText()));
   QDesktopServices::openUrl(url);
 }
 
@@ -687,8 +592,8 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
     settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
     settings.setValue("soundPath", ui->voicePath->text());
-    current_firmware = getFirmware(current_firmware_id);
-    settings.setValue("firmware", current_firmware_id);
+    current_firmware_variant = getFirmwareVariant();
+    settings.setValue("firmware", current_firmware_variant.id);
     settings.endGroup();
     settings.endGroup();
   }
@@ -817,15 +722,14 @@ void preferencesDialog::on_joystickcalButton_clicked() {
 
 void preferencesDialog::on_checkFWUpdates_clicked()
 {
-    QString fwId;
-    getFirmware(fwId);
+    FirmwareVariant variant = getFirmwareVariant();
     if (ui->burnFirmware->isChecked()) {
       QSettings settings("companion9x", "companion9x");
-      current_firmware = getFirmware(current_firmware_id);
-      settings.setValue("firmware", current_firmware_id);
+      current_firmware_variant = variant;
+      settings.setValue("firmware", variant.id);
     }
     MainWindow * mw = (MainWindow *)this->parent();
-    mw->checkForUpdates(true, fwId);
+    mw->checkForUpdates(true, variant.id);
     firmwareChanged();
 }
 

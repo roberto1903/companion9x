@@ -146,12 +146,12 @@ void MainWindow::displayWarnings()
 
 void MainWindow::doAutoUpdates()
 {
-  checkForUpdates(false, current_firmware_id);
+  checkForUpdates(false, current_firmware_variant.id);
 }
 
 void MainWindow::doUpdates()
 {
-  checkForUpdates(true, current_firmware_id);
+  checkForUpdates(true, current_firmware_variant.id);
 }
 
 void MainWindow::checkForUpdates(bool ignoreSettings, QString & fwId)
@@ -331,7 +331,8 @@ void MainWindow::reply1Accepted()
       currentFWrev = currentFWrev_temp;
       settings.setValue(downloadedFW, currentFWrev);
     }
-  } else {
+  }
+  else {
     QFile file(downloadedFWFilename);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
     QMessageBox::critical(this, tr("Error"),
@@ -592,17 +593,18 @@ void MainWindow::loadProfile()
     burnfw=settings.value("burnFirmware", 0).toInt();
     QString soundPath=settings.value("soundPath", "").toString();
     renfw=settings.value("rename_firmware_files", false).toBool();
-    current_firmware_id=settings.value("firmware", default_firmware_id).toString();
+    QString firmware_id=settings.value("firmware", default_firmware_variant.id).toString();
     settings.endGroup();
+    // TODO question for Romolo: why do we set them again?
     settings.endGroup();
     settings.setValue("default_channel_order", chord);
     settings.setValue("default_mode", defmod);
     settings.setValue("burnFirmware", burnfw);
     settings.setValue("rename_firmware_files", renfw);
     settings.setValue("soundPath", soundPath);
-    settings.setValue("firmware", current_firmware_id);
+    settings.setValue("firmware", firmware_id);
     settings.setValue("profileId", profnum);
-    current_firmware = GetFirmware(current_firmware_id);
+    current_firmware_variant = GetFirmwareVariant(firmware_id);
     setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
     // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
     foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
@@ -942,23 +944,24 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     return false;
 
   QString fwSvn = flash.getSvn();
-  QStringList tags = fwSvn.split("-r", QString::SkipEmptyParts);
-  fwSvn = tags.back();
-  if (fwSvn.endsWith('M'))
-    fwSvn = fwSvn.mid(0, fwSvn.size()-1);
-  int revision = fwSvn.toInt();
-  if (!revision)
-    return false;
+  QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
 
   FirmwareInfo *firmware = NULL;
+  unsigned int version = 0;
+  unsigned int variant = 0;
 
-  if (tags.at(0) == "open9x")
+  if (svnTags.at(0) == "open9x") {
     firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 65536 ? "open9x-stock" : "open9x-v4"));
-  else if (tags.at(0) == "gruvin9x" && tags.at(1) == "frsky")
+    QString fwBuild = flash.getBuild();
+    QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
+    version = buildTags.at(0).toInt();
+    variant = buildTags.at(1).toInt();
+  }
+  else if (svnTags.at(0) == "gruvin9x" && svnTags.at(1) == "frsky")
     firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
-  else if (tags.at(0) == "gruvin9x" && tags.at(1) == "trunk")
+  else if (svnTags.at(0) == "gruvin9x" && svnTags.at(1) == "trunk")
     firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
-  else if (tags.at(0) == "er9x")
+  else if (svnTags.at(0) == "er9x")
     firmware = GetFirmware("er9x");
   /* else... others */
   if (!firmware)
@@ -980,7 +983,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!LoadEeprom(radioData, eeprom, eeprom_size))
     return false;
 
-  if (!firmware->saveEEPROM(eeprom, radioData, revision))
+  if (!firmware->saveEEPROM(eeprom, radioData, version, variant))
     return false;
 
   QFile file2(restoreFile);

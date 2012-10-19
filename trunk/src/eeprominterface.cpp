@@ -540,6 +540,38 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
   return 0;
 }
 
+void ModelData::removeGlobalVar(int & var)
+{
+  if (var == 126)
+    var = phaseData[0].gvars[0];
+  else if (var == 127)
+    var = phaseData[0].gvars[1];
+  else if (var == -128)
+    var = phaseData[0].gvars[2];
+  else if (var == -127)
+    var = phaseData[0].gvars[3];
+  else if (var == -126)
+    var = phaseData[0].gvars[4];
+}
+
+ModelData ModelData::removeGlobalVars()
+{
+  ModelData result = *this;
+
+  for (int i=0; i<MAX_MIXERS; i++) {
+    removeGlobalVar(mixData[i].weight);
+    removeGlobalVar(mixData[i].differential);
+    removeGlobalVar(mixData[i].sOffset);
+  }
+
+  for (int i=0; i<MAX_EXPOS; i++) {
+    removeGlobalVar(expoData[i].weight);
+    removeGlobalVar(expoData[i].expo);
+  }
+
+  return result;
+}
+
 QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
@@ -554,18 +586,11 @@ void RegisterEepromInterfaces()
 }
 
 QList<FirmwareInfo *> firmwares;
-QString default_firmware_id;
-FirmwareInfo * default_firmware = NULL;
-QString current_firmware_id;
-FirmwareInfo * current_firmware = NULL;
+FirmwareVariant default_firmware_variant;
+FirmwareVariant current_firmware_variant;
 
 const char * ER9X_STAMP = "http://er9x.googlecode.com/svn/trunk/src/stamp-er9x.h";
 const char * ERSKY9X_STAMP = "http://ersky9x.googlecode.com/svn/trunk/src/stamp-ersky9x.h";
-
-#define OPEN9X_PREFIX_URL "http://85.18.253.250/getfw.php?fw="
-const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-stock.txt";
-const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
-const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
 
 void RegisterFirmwares()
 {
@@ -573,7 +598,8 @@ void RegisterFirmwares()
 
   firmwares.push_back(new FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/%1.hex", ER9X_STAMP));
   FirmwareInfo * er9x = firmwares.last();
-  const char *er9x_options[] = {"frsky", "jeti", "ardupilot", "nmea", NULL};
+
+  Option er9x_options[] = { { "frsky", "", 0 }, { "jeti", "", 0 }, { "ardupilot", "", 0 }, { "nmea", "", 0 }, { NULL } };
   er9x->addOptions(er9x_options);
   er9x->addOption("noht");
 
@@ -585,98 +611,11 @@ void RegisterFirmwares()
   firmwares.push_back(new FirmwareInfo("gruvin9x-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
   firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X)));
 
-  Open9xFirmware * open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP, false);
-  open9x->addLanguage("en");
-  open9x->addLanguage("fr");
-  open9x->addLanguage("se");
-  open9x->addLanguage("de");
-  open9x->addLanguage("it");
-  open9x->addLanguage("cz");
-  open9x->addTTSLanguage("en");
-  open9x->addTTSLanguage("fr");
-  open9x->addTTSLanguage("it");
-  open9x->addTTSLanguage("cz");
-  const char *ext_options[] = {"frsky", "jeti", "ardupilot", "nmea", NULL};
-  open9x->addOptions(ext_options);
-  open9x->addOption("heli");
-  open9x->addOption("templates");
-  open9x->addOption("nosplash");
-  open9x->addOption("nofp");
-  open9x->addOption("nocurves");
-  open9x->addOption("audio");
-  open9x->addOption("voice");
-  open9x->addOption("haptic");
-  open9x->addOption("PXX");
-  open9x->addOption("DSM2");
-  open9x->addOption("ppmca");
-  open9x->addOption("symlimits");
-  open9x->addOption("potscroll");
-  open9x->addOption("sp22");
-  open9x->addOption("autoswitch");
-  open9x->addOption("dblkeys");
-  open9x->addOption("nographics");
-  open9x->addOption("nobold");
-  open9x->addOption("pgbar");
-  open9x->addOption("imperial");
-  firmwares.push_back(open9x);
-
-  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP, false);
-  open9x->addLanguage("en");
-  open9x->addLanguage("fr");
-  open9x->addLanguage("se");
-  open9x->addLanguage("de");
-  open9x->addLanguage("it");
-  open9x->addLanguage("cz");
-  open9x->addTTSLanguage("en");
-  open9x->addTTSLanguage("fr");
-  open9x->addTTSLanguage("it");
-  open9x->addTTSLanguage("cz");
-  open9x->addOption("heli");
-  open9x->addOption("templates");
-  open9x->addOption("nofp");
-  open9x->addOption("nocurves");
-  open9x->addOption("sdcard");
-  open9x->addOption("voice");
-  open9x->addOption("PXX");
-  open9x->addOption("DSM2");
-  open9x->addOption("DSM2PPM");
-  open9x->addOption("ppmca");
-  open9x->addOption("symlimits");
-  open9x->addOption("autoswitch");
-  open9x->addOption("dblkeys");
-  open9x->addOption("nographics");
-  open9x->addOption("nobold");
-  open9x->addOption("pgbar");
-  open9x->addOption("imperial");
-  firmwares.push_back(open9x);
-
-  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_STOCK_STAMP, true);
-  open9x->addLanguage("en");
-  open9x->addLanguage("fr");
-  open9x->addLanguage("se");
-  open9x->addLanguage("de");
-  open9x->addLanguage("it");
-  open9x->addLanguage("cz");
-  open9x->addTTSLanguage("en");
-  open9x->addTTSLanguage("fr");
-  open9x->addTTSLanguage("it");
-  open9x->addTTSLanguage("cz");
-  open9x->addOption("heli");
-  open9x->addOption("templates");
-  open9x->addOption("nofp");
-  open9x->addOption("nocurves");
-  open9x->addOption("symlimits");
-  open9x->addOption("autoswitch");
-  open9x->addOption("dblkeys");
-  open9x->addOption("nographics");
-  open9x->addOption("nobold");
-  open9x->addOption("imperial");
-  firmwares.push_back(open9x);
+  RegisterOpen9xFirmwares();
 
   firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
 
-  default_firmware_id = "open9x-stock-heli-templates-en";
-  default_firmware = GetFirmware(default_firmware_id);
+  default_firmware_variant = GetFirmwareVariant("open9x-stock-heli-templates-en");
 
   RegisterEepromInterfaces();
 }
@@ -712,19 +651,43 @@ bool LoadEepromXml(RadioData &radioData, QDomDocument &doc)
   return false;
 }
 
-FirmwareInfo * GetFirmware(QString id)
+
+FirmwareVariant GetFirmwareVariant(QString id)
 {
+  FirmwareVariant result;
+
   foreach(FirmwareInfo * firmware, firmwares) {
-    if (id.contains(firmware->id))
-      return firmware;
+    if (id.contains(firmware->id)) {
+      result.id = id;
+      result.firmware = firmware;
+      result.variant = firmware->getVariant(id);
+      return result;
+    }
   }
-  return NULL;
+
+  return default_firmware_variant;
 }
 
-void FirmwareInfo::addOption(const char *option)
+void FirmwareInfo::addOption(const char *option, QString tooltip, uint32_t variant)
 {
-  const char *options[] = { option, NULL };
+  Option options[] = { { option, tooltip, variant }, { NULL } };
   addOptions(options);
+}
+
+unsigned int FirmwareInfo::getVariant(const QString & variantId)
+{
+  unsigned int variant = variantBase;
+  QStringList options = variantId.mid(id.length()+1).split("-", QString::SkipEmptyParts);
+  foreach(QString option, options) {
+    foreach(QList<Option> group, opts) {
+      foreach(Option opt, group) {
+        if (opt.name == option) {
+          variant += opt.variant;
+        }
+      }
+    }
+  }
+  return variant;
 }
 
 void FirmwareInfo::addLanguage(const char *lang)
@@ -737,11 +700,10 @@ void FirmwareInfo::addTTSLanguage(const char *lang)
   ttslanguages.push_back(lang);
 }
 
-
-void FirmwareInfo::addOptions(const char *options[])
+void FirmwareInfo::addOptions(Option options[])
 {
-  QList<const char *> opts;
-  for (int i=0; options[i]; i++) {
+  QList<Option> opts;
+  for (int i=0; options[i].name; i++) {
     opts.push_back(options[i]);
   }
   this->opts.push_back(opts);

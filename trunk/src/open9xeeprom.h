@@ -16,11 +16,18 @@
 #ifndef open9xeeprom_h
 #define open9xeeprom_h
 
+#define GVARS_VARIANT 0x0001
+#define FRSKY_VARIANT 0x0002
+
+#define ALL_VARIANTS  (GVARS_VARIANT+FRSKY_VARIANT)
+#define SIMU_VARIANTS (GVARS_VARIANT+FRSKY_VARIANT)
+
 #define O9X_MAX_CSFUNCOLD 13
 #define O9X_MAX_CSFUNC 15
 
 #include <inttypes.h>
 #include "eeprominterface.h"
+#include <qbytearray.h>
 
 struct CurveInfo {
   int8_t *crv;
@@ -123,13 +130,62 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
   uint8_t   gpsFormat:1;
   uint8_t   spare3:1;
   uint8_t   speakerPitch;
-  uint8_t   variants;
+  uint8_t   variant;
 
   operator GeneralSettings();
   t_Open9xGeneralData_v201() { memset(this, 0, sizeof(t_Open9xGeneralData_v201)); }
   t_Open9xGeneralData_v201(GeneralSettings&, int version);
 
 }) Open9xGeneralData_v201;
+
+PACK(typedef struct t_Open9xGeneralData_v212 {
+  uint8_t   myVers;
+  uint16_t  variant;
+  int16_t   calibMid[7];
+  int16_t   calibSpanNeg[7];
+  int16_t   calibSpanPos[7];
+  uint16_t  chkSum;
+  uint8_t   currModel; //0..15
+  uint8_t   contrast;
+  uint8_t   vBatWarn;
+  int8_t    vBatCalib;
+  int8_t    backlightMode;
+  Open9xTrainerData_v201 trainer;
+  uint8_t   view;      //index of subview in main scrren
+  uint8_t   disableThrottleWarning:1;
+  int8_t    switchWarning:2; // -1=down, 0=off, 1=up
+  int8_t    beeperMode:2;
+  uint8_t   spare1:1;
+  uint8_t   disableMemoryWarning:1;
+  uint8_t   disableAlarmWarning:1;
+  uint8_t   stickMode:2;
+  int8_t    timezone:5;
+  uint8_t   optrexDisplay:1;
+  uint8_t   inactivityTimer;
+  uint8_t   throttleReversed:1;
+  uint8_t   minuteBeep:1;
+  uint8_t   preBeep:1;
+  uint8_t   flashBeep:1;
+  uint8_t   disableSplashScreen:1;
+  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  int8_t    hapticMode:2;
+  uint8_t   filterInput;
+  uint8_t   backlightDelay;
+  uint8_t   templateSetup;  //RETA order according to chout_ar array
+  int8_t    PPM_Multiplier;
+  int8_t    hapticLength;
+  uint8_t   reNavigation; // TODO not needed on stock board
+  int8_t    beeperLength:3;
+  uint8_t   hapticStrength:3;
+  uint8_t   gpsFormat:1;
+  uint8_t   spare3:1;
+  uint8_t   speakerPitch;
+
+  operator GeneralSettings();
+  t_Open9xGeneralData_v212() { memset(this, 0, sizeof(t_Open9xGeneralData_v212)); }
+  t_Open9xGeneralData_v212(GeneralSettings&, unsigned int version, unsigned int variant);
+
+}) Open9xGeneralData_v212;
 
 // eeprom modelspec
 
@@ -534,6 +590,41 @@ PACK(typedef struct t_Open9xFrSkyData_v210 {
   t_Open9xFrSkyData_v210(FrSkyData&);
 }) Open9xFrSkyData_v210;
 
+PACK(typedef struct t_Open9xFrSkyBarData_v212 {
+  uint16_t   source:6;
+  uint16_t   barMin:5;           // minimum for bar display
+  uint16_t   barMax:5;           // ditto for max display (would usually = ratio)
+}) FrSkyBarData_v212;
+
+PACK(typedef struct {
+  uint8_t    sources[2];
+}) FrSkyLineData_v212;
+
+//typedef FrSkyScreenDataLines
+typedef union {
+  FrSkyBarData_v212  bars[4];
+  FrSkyLineData_v212 lines[4];
+} Open9xFrSkyScreenData_v212;
+
+PACK(typedef struct t_Open9xFrSkyData_v212 {
+  Open9xFrSkyChannelData_v208 channels[2];
+  uint8_t usrProto:2; // Protocol in FrSky user data, 0=None, 1=FrSky hub, 2=WS HowHigh
+  uint8_t blades:2;   // How many blades for RPMs, 0=2 blades, 1=3 blades
+  uint8_t spare1:4;
+  uint8_t voltsSource:3;
+  uint8_t currentSource:3;
+  uint8_t screensType:2;
+  Open9xFrSkyRSSIAlarm rssiAlarms[2];
+  Open9xFrSkyScreenData_v212 screens[2];
+  uint8_t   varioSource:3;
+  uint8_t   varioSpeedUpMin:5;    // if increment in 0.2m/s = 3.0m/s max
+  uint8_t   varioSpeedDownMin;
+
+  operator FrSkyData();
+  t_Open9xFrSkyData_v212() { memset(this, 0, sizeof(t_Open9xFrSkyData_v212)); }
+  t_Open9xFrSkyData_v212(FrSkyData&);
+}) Open9xFrSkyData_v212;
+
 PACK(typedef struct t_Open9xSwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
@@ -609,6 +700,7 @@ PACK(typedef struct t_Open9xTimerDataExtra {
 #define O9X_NUM_FSW    16 // number of functions assigned to switches
 #define O9X_MAX_CURVES 8
 #define O9X_NUM_POINTS (112-O9X_MAX_CURVES)
+#define O9X_MAX_GVARS  5
 
 #define O9X_209_MAX_CURVE5 8
 #define O9X_209_MAX_CURVE9 8
@@ -952,9 +1044,55 @@ PACK(typedef struct t_Open9xModelData_v211 {
 
 }) Open9xModelData_v211;
 
-#define LAST_OPEN9X_STOCK_EEPROM_VER 211
-typedef Open9xModelData_v211   Open9xModelData;
-typedef Open9xGeneralData_v201 Open9xGeneralData;
+class Open9xModelData_v212 {
+  public:
+    Open9xModelData_v212(ModelData & modelData):
+      modelData(modelData)
+    {
+    }
+
+    int importVariant(unsigned int variant, const uint8_t *data);
+    int exportVariant(unsigned int variant, QByteArray & output);
+
+  protected:
+
+    PACK(typedef struct {
+      char      name[10]; // must be first for eeLoadModelName
+      Open9xTimerData_v202 timers[MAX_TIMERS];
+      uint8_t   protocol:3;
+      uint8_t   thrTrim:1;            // Enable Throttle Trim
+      int8_t    ppmNCH:4;
+      uint8_t   trimInc:3;            // Trim Increments
+      uint8_t   disableThrottleWarning:1;
+      uint8_t   pulsePol:1;
+      uint8_t   extendedLimits:1;
+      uint8_t   extendedTrims:1;
+      uint8_t   spare1:1;
+      int8_t    ppmDelay;
+      uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
+      Open9xMixData_v211   mixData[O9X_MAX_MIXERS];
+      Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
+      Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];
+      int8_t    curves[O9X_MAX_CURVES];
+      int8_t    points[O9X_NUM_POINTS];
+      Open9xCustomSwData_v209  customSw[O9X_NUM_CSW];
+      Open9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
+      Open9xSwashRingData_v209 swashR;
+      Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
+
+      int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5ms increments
+      uint8_t   thrTraceSrc;
+      uint8_t   modelId;
+
+      uint8_t   switchWarningStates;
+    }) CommonData;
+
+    ModelData & modelData;
+};
+
+#define LAST_OPEN9X_STOCK_EEPROM_VER 212
+typedef Open9xModelData_v212   Open9xModelData;
+typedef Open9xGeneralData_v212 Open9xGeneralData;
 
 
 #endif

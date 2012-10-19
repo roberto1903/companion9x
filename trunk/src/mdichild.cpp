@@ -341,7 +341,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
     int eeprom_size = 0;
 
     if (fileType != FILE_TYPE_XML) {
-      eeprom_size = GetEepromInterface()->save(eeprom, radioData);
+      eeprom_size = GetEepromInterface()->save(eeprom, radioData, 0/*last version*/, GetCurrentFirmwareVariant());
       if (!eeprom_size) {
         QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(myFile).arg(file.errorString()));
         return false;

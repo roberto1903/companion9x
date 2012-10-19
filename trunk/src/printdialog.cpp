@@ -1036,18 +1036,18 @@ void printDialog::printFrSky()
       str.append("<td width=\"50%\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
       str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
       for (int i=0; i<4; i++) {
-        if (fd->bars[i].source!=0)
+        if (fd->screens[0].body.bars[i].source!=0)
           tc++;
-        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->bars[i].source,fd->bars[i].barMin,fd))+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->bars[i].source,(51-fd->bars[i].barMax),fd))+"</b></td></tr>");
+        str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->screens[0].body.bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->screens[0].body.bars[i].source, fd->screens[0].body.bars[i].barMin,fd))+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->screens[0].body.bars[i].source,(51-fd->screens[0].body.bars[i].barMax),fd))+"</b></td></tr>");
       }
       str.append("</table></td>");
     }
     if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
       str.append("<td width=\"50%\"><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
       for (int i=0; i<4; i++) {
-        if ((fd->csField[i*2] !=0) || (fd->csField[i*2+1]!=0))
+        if ((fd->screens[1].body.cells[i*2] !=0) || (fd->screens[1].body.cells[i*2+1]!=0))
           tc++;
-        str.append("<tr><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2])+"</b></td><td  align=\"Center\"width=\"10%\">&nbsp;</td><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->csField[i*2+1])+"</b></td></tr>");
+        str.append("<tr><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->screens[1].body.cells[i*2])+"</b></td><td  align=\"Center\"width=\"10%\">&nbsp;</td><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->screens[1].body.cells[i*2+1])+"</b></td></tr>");
       }
       str.append("</table></td>");
     }
