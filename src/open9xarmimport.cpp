@@ -29,6 +29,8 @@
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
 
+#define VARIANT 3
+
 #undef min
 #undef max
 
