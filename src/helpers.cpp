@@ -442,6 +442,19 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   }
 }
 
+void populateGvarUseCB(QComboBox *b, unsigned int phase) {
+  b->addItem(QObject::tr("Own value"));
+  unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
+  if (num_phases>0) {
+    for (unsigned int i = 0; i < num_phases; i++) {
+      if (i != phase) {
+        b->addItem(QObject::tr("Flight phase %1 value").arg(i));
+      }
+    }
+  }
+}
+
+
 void populateTimerSwitchCB(QComboBox *b, int value)
 {
   b->clear();

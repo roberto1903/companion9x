@@ -582,7 +582,18 @@ void ModelEdit::displayOnePhaseOneTrim(unsigned int phase_idx, unsigned int chn,
     trimSlider->setInvertedAppearance(true);
 }
 
-void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QDoubleSpinBox *fadeIn, QDoubleSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider,bool doConnect=false)
+void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QDoubleSpinBox *fadeIn, QDoubleSpinBox *fadeOut, 
+                                                      QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, 
+                                                      QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, 
+                                                      QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, 
+                                                      QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider, 
+                                                      QLabel *gv1Label, QComboBox *gv1Use,QSpinBox *gv1Value,
+                                                      QLabel *gv2Label, QComboBox *gv2Use,QSpinBox *gv2Value,
+                                                      QLabel *gv3Label, QComboBox *gv3Use,QSpinBox *gv3Value,
+                                                      QLabel *gv4Label, QComboBox *gv4Use,QSpinBox *gv4Value,
+                                                      QLabel *gv5Label, QComboBox *gv5Use,QSpinBox *gv5Value,
+                                                      QLabel *re1Label, QComboBox *re1Use,QSpinBox *re1Value,
+                                                      QLabel *re2Label, QComboBox *re2Use,QSpinBox *re2Value,bool doConnect=false)
 {
   PhaseData *phase = &g_model.phaseData[phase_idx];
   if (name) name->setText(phase->name);
@@ -606,7 +617,28 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(2)-1, trim2Use, trim2, trim2Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(3)-1, trim3Use, trim3, trim3Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(4)-1, trim4Use, trim4, trim4Slider);
-
+  
+  if (gv1Use) populateGvarUseCB(gv1Use, phase_idx);
+  if (gv2Use) populateGvarUseCB(gv2Use, phase_idx);
+  if (gv3Use) populateGvarUseCB(gv3Use, phase_idx);
+  if (gv4Use) populateGvarUseCB(gv4Use, phase_idx);
+  if (gv5Use) populateGvarUseCB(gv5Use, phase_idx);
+  if (re1Use) populateGvarUseCB(re1Use, phase_idx);
+  if (re2Use) populateGvarUseCB(re2Use, phase_idx);
+  if (GetEepromInterface()->getCapability(RotaryEncoders)<2) {
+    if (re2Label)
+      re2Label->hide();
+    if (re2Use)
+      re2Use->hide();
+    re2Value->hide();
+  }
+  if (GetEepromInterface()->getCapability(RotaryEncoders)<1) {
+    if (re1Label)
+      re1Label->hide();
+    if (re1Use)
+      re1Use->hide();
+    re1Value->hide();
+  }
   QString labels[] = { tr("Rud"), tr("Ele"), tr("Thr"), tr("Ail") };
   if (trim1Label) {
     trim1Label->setText(labels[CONVERT_MODE(1)-1]);
@@ -640,15 +672,16 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
 void ModelEdit::tabPhases()
 {
   phasesLock = true;
-  displayOnePhase(0, ui->phase0Name, NULL,                   ui->phase0FadeIn, ui->phase0FadeOut, NULL,                      ui->phase0Trim1Value, ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,                       ui->phase0Trim2Value, ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,                       ui->phase0Trim3Value, ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,                       ui->phase0Trim4Value, ui->phase0Trim4Label, ui->phase0Trim4Slider, true);
-  displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider, true);
-  displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider, true);
-  displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider, true);
-  displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider, true);
-  displayOnePhase(5, ui->phase5Name, ui->phase5Switch, ui->phase5FadeIn, ui->phase5FadeOut, ui->phase5Trim1Use, ui->phase5Trim1Value, ui->phase5Trim1Label, ui->phase5Trim1Slider, ui->phase5Trim2Use, ui->phase5Trim2Value, ui->phase5Trim2Label, ui->phase5Trim2Slider, ui->phase5Trim3Use, ui->phase5Trim3Value, ui->phase5Trim3Label, ui->phase5Trim3Slider, ui->phase5Trim4Use, ui->phase5Trim4Value, ui->phase5Trim4Label, ui->phase5Trim4Slider, true);
-  displayOnePhase(6, ui->phase6Name, ui->phase6Switch, ui->phase6FadeIn, ui->phase6FadeOut, ui->phase6Trim1Use, ui->phase6Trim1Value, ui->phase6Trim1Label, ui->phase6Trim1Slider, ui->phase6Trim2Use, ui->phase6Trim2Value, ui->phase6Trim2Label, ui->phase6Trim2Slider, ui->phase6Trim3Use, ui->phase6Trim3Value, ui->phase6Trim3Label, ui->phase6Trim3Slider, ui->phase6Trim4Use, ui->phase6Trim4Value, ui->phase6Trim4Label, ui->phase6Trim4Slider, true);
-  displayOnePhase(7, ui->phase7Name, ui->phase7Switch, ui->phase7FadeIn, ui->phase7FadeOut, ui->phase7Trim1Use, ui->phase7Trim1Value, ui->phase7Trim1Label, ui->phase7Trim1Slider, ui->phase7Trim2Use, ui->phase7Trim2Value, ui->phase7Trim2Label, ui->phase7Trim2Slider, ui->phase7Trim3Use, ui->phase7Trim3Value, ui->phase7Trim3Label, ui->phase7Trim3Slider, ui->phase7Trim4Use, ui->phase7Trim4Value, ui->phase7Trim4Label, ui->phase7Trim4Slider, true);
-  displayOnePhase(8, ui->phase8Name, ui->phase8Switch, ui->phase8FadeIn, ui->phase8FadeOut, ui->phase8Trim1Use, ui->phase8Trim1Value, ui->phase8Trim1Label, ui->phase8Trim1Slider, ui->phase8Trim2Use, ui->phase8Trim2Value, ui->phase8Trim2Label, ui->phase8Trim2Slider, ui->phase8Trim3Use, ui->phase8Trim3Value, ui->phase8Trim3Label, ui->phase8Trim3Slider, ui->phase8Trim4Use, ui->phase8Trim4Value, ui->phase8Trim4Label, ui->phase8Trim4Slider, true);
+  displayOnePhase(0, ui->phase0Name, NULL,                   ui->phase0FadeIn, ui->phase0FadeOut, NULL,                      ui->phase0Trim1Value, ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,                       ui->phase0Trim2Value, ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,                       ui->phase0Trim3Value, ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,                       ui->phase0Trim4Value, ui->phase0Trim4Label, ui->phase0Trim4Slider, ui->phase0GV1_Label, NULL                    , ui->phase0GV1Value, ui->phase0GV2_Label, NULL                    , ui->phase0GV2Value, ui->phase0GV3_Label, NULL                    , ui->phase0GV3Value, ui->phase0GV4_Label, NULL                    , ui->phase0GV4Value, ui->phase0GV5_Label, NULL                    , ui->phase0GV5Value,ui->phase0REA_Label,NULL, ui->phase0REAValue,ui->phase0REB_Label, NULL, ui->phase0REBValue, true);
+  displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider, ui->phase1GV1_Label, ui->phase1GV1Use, ui->phase1GV1Value, ui->phase1GV2_Label, ui->phase1GV2Use, ui->phase1GV2Value, ui->phase1GV3_Label, ui->phase1GV3Use, ui->phase1GV3Value, ui->phase1GV4_Label, ui->phase1GV4Use, ui->phase1GV4Value, ui->phase1GV5_Label, ui->phase1GV5Use, ui->phase1GV5Value,ui->phase1REA_Label, ui->phase1REAUse, ui->phase1REAValue,ui->phase1REB_Label, ui->phase1REBUse, ui->phase1REBValue, true);
+  displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider, ui->phase2GV1_Label, ui->phase2GV1Use, ui->phase2GV1Value, ui->phase2GV2_Label, ui->phase2GV2Use, ui->phase2GV2Value, ui->phase2GV3_Label, ui->phase2GV3Use, ui->phase2GV3Value, ui->phase2GV4_Label, ui->phase2GV4Use, ui->phase2GV4Value, ui->phase2GV5_Label, ui->phase2GV5Use, ui->phase2GV5Value,ui->phase2REA_Label, ui->phase2REAUse, ui->phase2REAValue,ui->phase2REB_Label, ui->phase2REBUse, ui->phase2REBValue, true);
+  displayOnePhase(3, ui->phase3Name, ui->phase3Switch, ui->phase3FadeIn, ui->phase3FadeOut, ui->phase3Trim1Use, ui->phase3Trim1Value, ui->phase3Trim1Label, ui->phase3Trim1Slider, ui->phase3Trim2Use, ui->phase3Trim2Value, ui->phase3Trim2Label, ui->phase3Trim2Slider, ui->phase3Trim3Use, ui->phase3Trim3Value, ui->phase3Trim3Label, ui->phase3Trim3Slider, ui->phase3Trim4Use, ui->phase3Trim4Value, ui->phase3Trim4Label, ui->phase3Trim4Slider, ui->phase3GV1_Label, ui->phase3GV1Use, ui->phase3GV1Value, ui->phase3GV2_Label, ui->phase3GV2Use, ui->phase3GV2Value, ui->phase3GV3_Label, ui->phase3GV3Use, ui->phase3GV3Value, ui->phase3GV4_Label, ui->phase3GV4Use, ui->phase3GV4Value, ui->phase3GV5_Label, ui->phase3GV5Use, ui->phase3GV5Value,ui->phase3REA_Label, ui->phase3REAUse, ui->phase3REAValue,ui->phase3REB_Label, ui->phase3REBUse, ui->phase3REBValue, true);
+  displayOnePhase(4, ui->phase4Name, ui->phase4Switch, ui->phase4FadeIn, ui->phase4FadeOut, ui->phase4Trim1Use, ui->phase4Trim1Value, ui->phase4Trim1Label, ui->phase4Trim1Slider, ui->phase4Trim2Use, ui->phase4Trim2Value, ui->phase4Trim2Label, ui->phase4Trim2Slider, ui->phase4Trim3Use, ui->phase4Trim3Value, ui->phase4Trim3Label, ui->phase4Trim3Slider, ui->phase4Trim4Use, ui->phase4Trim4Value, ui->phase4Trim4Label, ui->phase4Trim4Slider, ui->phase4GV1_Label, ui->phase4GV1Use, ui->phase4GV1Value, ui->phase4GV2_Label, ui->phase4GV2Use, ui->phase4GV2Value, ui->phase4GV3_Label, ui->phase4GV3Use, ui->phase4GV3Value, ui->phase4GV4_Label, ui->phase4GV4Use, ui->phase4GV4Value, ui->phase4GV5_Label, ui->phase4GV5Use, ui->phase4GV5Value,ui->phase4REA_Label, ui->phase4REAUse, ui->phase4REAValue,ui->phase4REB_Label, ui->phase4REBUse, ui->phase4REBValue, true);
+  displayOnePhase(5, ui->phase5Name, ui->phase5Switch, ui->phase5FadeIn, ui->phase5FadeOut, ui->phase5Trim1Use, ui->phase5Trim1Value, ui->phase5Trim1Label, ui->phase5Trim1Slider, ui->phase5Trim2Use, ui->phase5Trim2Value, ui->phase5Trim2Label, ui->phase5Trim2Slider, ui->phase5Trim3Use, ui->phase5Trim3Value, ui->phase5Trim3Label, ui->phase5Trim3Slider, ui->phase5Trim4Use, ui->phase5Trim4Value, ui->phase5Trim4Label, ui->phase5Trim4Slider, ui->phase5GV1_Label, ui->phase5GV1Use, ui->phase5GV1Value, ui->phase5GV2_Label, ui->phase5GV2Use, ui->phase5GV2Value, ui->phase5GV3_Label, ui->phase5GV3Use, ui->phase5GV3Value, ui->phase5GV4_Label, ui->phase5GV4Use, ui->phase5GV4Value, ui->phase5GV5_Label, ui->phase5GV5Use, ui->phase5GV5Value,ui->phase5REA_Label, ui->phase5REAUse, ui->phase5REAValue,ui->phase5REB_Label, ui->phase5REBUse, ui->phase5REBValue, true);
+  displayOnePhase(6, ui->phase6Name, ui->phase6Switch, ui->phase6FadeIn, ui->phase6FadeOut, ui->phase6Trim1Use, ui->phase6Trim1Value, ui->phase6Trim1Label, ui->phase6Trim1Slider, ui->phase6Trim2Use, ui->phase6Trim2Value, ui->phase6Trim2Label, ui->phase6Trim2Slider, ui->phase6Trim3Use, ui->phase6Trim3Value, ui->phase6Trim3Label, ui->phase6Trim3Slider, ui->phase6Trim4Use, ui->phase6Trim4Value, ui->phase6Trim4Label, ui->phase6Trim4Slider, ui->phase6GV1_Label, ui->phase6GV1Use, ui->phase6GV1Value, ui->phase6GV2_Label, ui->phase6GV2Use, ui->phase6GV2Value, ui->phase6GV3_Label, ui->phase6GV3Use, ui->phase6GV3Value, ui->phase6GV4_Label, ui->phase6GV4Use, ui->phase6GV4Value, ui->phase6GV5_Label, ui->phase6GV5Use, ui->phase6GV5Value,ui->phase6REA_Label, ui->phase6REAUse, ui->phase6REAValue,ui->phase6REB_Label, ui->phase6REBUse, ui->phase6REBValue, true);
+  displayOnePhase(7, ui->phase7Name, ui->phase7Switch, ui->phase7FadeIn, ui->phase7FadeOut, ui->phase7Trim1Use, ui->phase7Trim1Value, ui->phase7Trim1Label, ui->phase7Trim1Slider, ui->phase7Trim2Use, ui->phase7Trim2Value, ui->phase7Trim2Label, ui->phase7Trim2Slider, ui->phase7Trim3Use, ui->phase7Trim3Value, ui->phase7Trim3Label, ui->phase7Trim3Slider, ui->phase7Trim4Use, ui->phase7Trim4Value, ui->phase7Trim4Label, ui->phase7Trim4Slider, ui->phase7GV1_Label, ui->phase7GV1Use, ui->phase7GV1Value, ui->phase7GV2_Label, ui->phase7GV2Use, ui->phase7GV2Value, ui->phase7GV3_Label, ui->phase7GV3Use, ui->phase7GV3Value, ui->phase7GV4_Label, ui->phase7GV4Use, ui->phase7GV4Value, ui->phase7GV5_Label, ui->phase7GV5Use, ui->phase7GV5Value,ui->phase7REA_Label, ui->phase7REAUse, ui->phase7REAValue,ui->phase7REB_Label, ui->phase7REBUse, ui->phase7REBValue, true);
+  displayOnePhase(8, ui->phase8Name, ui->phase8Switch, ui->phase8FadeIn, ui->phase8FadeOut, ui->phase8Trim1Use, ui->phase8Trim1Value, ui->phase8Trim1Label, ui->phase8Trim1Slider, ui->phase8Trim2Use, ui->phase8Trim2Value, ui->phase8Trim2Label, ui->phase8Trim2Slider, ui->phase8Trim3Use, ui->phase8Trim3Value, ui->phase8Trim3Label, ui->phase8Trim3Slider, ui->phase8Trim4Use, ui->phase8Trim4Value, ui->phase8Trim4Label, ui->phase8Trim4Slider, ui->phase8GV1_Label, ui->phase8GV1Use, ui->phase8GV1Value, ui->phase8GV2_Label, ui->phase8GV2Use, ui->phase8GV2Value, ui->phase8GV3_Label, ui->phase8GV3Use, ui->phase8GV3Value, ui->phase8GV4_Label, ui->phase8GV4Use, ui->phase8GV4Value, ui->phase8GV5_Label, ui->phase8GV5Use, ui->phase8GV5Value,ui->phase8REA_Label, ui->phase8REAUse, ui->phase8REAValue,ui->phase8REB_Label, ui->phase8REBUse, ui->phase8REBValue, true);
+  
   QSlider * tmpsliders[9][4]={
     {ui->phase0Trim1Slider,ui->phase0Trim2Slider,ui->phase0Trim3Slider,ui->phase0Trim4Slider},
     {ui->phase1Trim1Slider,ui->phase1Trim2Slider,ui->phase1Trim3Slider,ui->phase1Trim4Slider},
@@ -727,28 +760,28 @@ void ModelEdit::on_phases_currentChanged(int index)
   phasesLock = true;
   switch(index) {
     case 1:
-      displayOnePhase(1, NULL, NULL, NULL, NULL, NULL, ui->phase1Trim1Value, NULL, ui->phase1Trim1Slider, NULL, ui->phase1Trim2Value, NULL, ui->phase1Trim2Slider, NULL, ui->phase1Trim3Value, NULL, ui->phase1Trim3Slider, NULL, ui->phase1Trim4Value, NULL, ui->phase1Trim4Slider);
+      displayOnePhase(1, NULL, NULL, NULL, NULL, NULL, ui->phase1Trim1Value, NULL, ui->phase1Trim1Slider, NULL, ui->phase1Trim2Value, NULL, ui->phase1Trim2Slider, NULL, ui->phase1Trim3Value, NULL, ui->phase1Trim3Slider, NULL, ui->phase1Trim4Value, NULL, ui->phase1Trim4Slider, NULL, NULL, ui->phase1GV1Value, NULL, NULL, ui->phase1GV2Value, NULL, NULL, ui->phase1GV3Value, NULL, NULL, ui->phase1GV4Value, NULL, NULL, ui->phase1GV5Value,NULL,NULL, ui->phase1REAValue,NULL,NULL, ui->phase1REBValue);
       break;
     case 2:
-      displayOnePhase(2, NULL, NULL, NULL, NULL, NULL, ui->phase2Trim1Value, NULL, ui->phase2Trim1Slider, NULL, ui->phase2Trim2Value, NULL, ui->phase2Trim2Slider, NULL, ui->phase2Trim3Value, NULL, ui->phase2Trim3Slider, NULL, ui->phase2Trim4Value, NULL, ui->phase2Trim4Slider);
+      displayOnePhase(2, NULL, NULL, NULL, NULL, NULL, ui->phase2Trim1Value, NULL, ui->phase2Trim1Slider, NULL, ui->phase2Trim2Value, NULL, ui->phase2Trim2Slider, NULL, ui->phase2Trim3Value, NULL, ui->phase2Trim3Slider, NULL, ui->phase2Trim4Value, NULL, ui->phase2Trim4Slider, NULL, NULL, ui->phase2GV1Value, NULL, NULL, ui->phase2GV2Value, NULL, NULL, ui->phase2GV3Value, NULL, NULL, ui->phase2GV4Value, NULL, NULL, ui->phase2GV5Value,NULL,NULL, ui->phase2REAValue,NULL,NULL, ui->phase2REBValue);
       break;
     case 3:
-      displayOnePhase(3, NULL, NULL, NULL, NULL, NULL, ui->phase3Trim1Value, NULL, ui->phase3Trim1Slider, NULL, ui->phase3Trim2Value, NULL, ui->phase3Trim2Slider, NULL, ui->phase3Trim3Value, NULL, ui->phase3Trim3Slider, NULL, ui->phase3Trim4Value, NULL, ui->phase3Trim4Slider);
+      displayOnePhase(3, NULL, NULL, NULL, NULL, NULL, ui->phase3Trim1Value, NULL, ui->phase3Trim1Slider, NULL, ui->phase3Trim2Value, NULL, ui->phase3Trim2Slider, NULL, ui->phase3Trim3Value, NULL, ui->phase3Trim3Slider, NULL, ui->phase3Trim4Value, NULL, ui->phase3Trim4Slider, NULL, NULL, ui->phase3GV1Value, NULL, NULL, ui->phase3GV2Value, NULL, NULL, ui->phase3GV3Value, NULL, NULL, ui->phase3GV4Value, NULL, NULL, ui->phase3GV5Value,NULL,NULL, ui->phase3REAValue,NULL,NULL, ui->phase3REBValue);
       break;
     case 4:
-      displayOnePhase(4, NULL, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider);
+      displayOnePhase(4, NULL, NULL, NULL, NULL, NULL, ui->phase4Trim1Value, NULL, ui->phase4Trim1Slider, NULL, ui->phase4Trim2Value, NULL, ui->phase4Trim2Slider, NULL, ui->phase4Trim3Value, NULL, ui->phase4Trim3Slider, NULL, ui->phase4Trim4Value, NULL, ui->phase4Trim4Slider, NULL, NULL, ui->phase4GV1Value, NULL, NULL, ui->phase4GV2Value, NULL, NULL, ui->phase4GV3Value, NULL, NULL, ui->phase4GV4Value, NULL, NULL, ui->phase4GV5Value,NULL,NULL, ui->phase4REAValue,NULL,NULL, ui->phase4REBValue);
       break;
     case 5:
-      displayOnePhase(5, NULL, NULL, NULL, NULL, NULL, ui->phase5Trim1Value, NULL, ui->phase5Trim1Slider, NULL, ui->phase5Trim2Value, NULL, ui->phase5Trim2Slider, NULL, ui->phase5Trim3Value, NULL, ui->phase5Trim3Slider, NULL, ui->phase5Trim4Value, NULL, ui->phase5Trim4Slider);
+      displayOnePhase(5, NULL, NULL, NULL, NULL, NULL, ui->phase5Trim1Value, NULL, ui->phase5Trim1Slider, NULL, ui->phase5Trim2Value, NULL, ui->phase5Trim2Slider, NULL, ui->phase5Trim3Value, NULL, ui->phase5Trim3Slider, NULL, ui->phase5Trim4Value, NULL, ui->phase5Trim4Slider, NULL, NULL, ui->phase5GV1Value, NULL, NULL, ui->phase5GV2Value, NULL, NULL, ui->phase5GV3Value, NULL, NULL, ui->phase5GV4Value, NULL, NULL, ui->phase5GV5Value,NULL,NULL, ui->phase5REAValue,NULL,NULL, ui->phase5REBValue);
       break;
     case 6:
-      displayOnePhase(6, NULL, NULL, NULL, NULL, NULL, ui->phase6Trim1Value, NULL, ui->phase6Trim1Slider, NULL, ui->phase6Trim2Value, NULL, ui->phase6Trim2Slider, NULL, ui->phase6Trim3Value, NULL, ui->phase6Trim3Slider, NULL, ui->phase6Trim4Value, NULL, ui->phase6Trim4Slider);
+      displayOnePhase(6, NULL, NULL, NULL, NULL, NULL, ui->phase6Trim1Value, NULL, ui->phase6Trim1Slider, NULL, ui->phase6Trim2Value, NULL, ui->phase6Trim2Slider, NULL, ui->phase6Trim3Value, NULL, ui->phase6Trim3Slider, NULL, ui->phase6Trim4Value, NULL, ui->phase6Trim4Slider, NULL, NULL, ui->phase6GV1Value, NULL, NULL, ui->phase6GV2Value, NULL, NULL, ui->phase6GV3Value, NULL, NULL, ui->phase6GV4Value, NULL, NULL, ui->phase6GV5Value,NULL,NULL, ui->phase6REAValue,NULL,NULL, ui->phase6REBValue);
       break;
     case 7:
-      displayOnePhase(7, NULL, NULL, NULL, NULL, NULL, ui->phase7Trim1Value, NULL, ui->phase7Trim1Slider, NULL, ui->phase7Trim2Value, NULL, ui->phase7Trim2Slider, NULL, ui->phase7Trim3Value, NULL, ui->phase7Trim3Slider, NULL, ui->phase7Trim4Value, NULL, ui->phase7Trim4Slider);
+      displayOnePhase(7, NULL, NULL, NULL, NULL, NULL, ui->phase7Trim1Value, NULL, ui->phase7Trim1Slider, NULL, ui->phase7Trim2Value, NULL, ui->phase7Trim2Slider, NULL, ui->phase7Trim3Value, NULL, ui->phase7Trim3Slider, NULL, ui->phase7Trim4Value, NULL, ui->phase7Trim4Slider, NULL, NULL, ui->phase7GV1Value, NULL, NULL, ui->phase7GV2Value, NULL, NULL, ui->phase7GV3Value, NULL, NULL, ui->phase7GV4Value, NULL, NULL, ui->phase7GV5Value,NULL,NULL, ui->phase7REAValue,NULL,NULL, ui->phase7REBValue);
       break;
     case 8:
-      displayOnePhase(8, NULL, NULL, NULL, NULL, NULL, ui->phase8Trim1Value, NULL, ui->phase8Trim1Slider, NULL, ui->phase8Trim2Value, NULL, ui->phase8Trim2Slider, NULL, ui->phase8Trim3Value, NULL, ui->phase8Trim3Slider, NULL, ui->phase8Trim4Value, NULL, ui->phase8Trim4Slider);
+      displayOnePhase(8, NULL, NULL, NULL, NULL, NULL, ui->phase8Trim1Value, NULL, ui->phase8Trim1Slider, NULL, ui->phase8Trim2Value, NULL, ui->phase8Trim2Slider, NULL, ui->phase8Trim3Value, NULL, ui->phase8Trim3Slider, NULL, ui->phase8Trim4Value, NULL, ui->phase8Trim4Slider, NULL, NULL, ui->phase8GV1Value, NULL, NULL, ui->phase8GV2Value, NULL, NULL, ui->phase8GV3Value, NULL, NULL, ui->phase8GV4Value, NULL, NULL, ui->phase8GV5Value,NULL,NULL, ui->phase8REAValue,NULL,NULL, ui->phase8REBValue);
       break;
   }
   phasesLock = false;

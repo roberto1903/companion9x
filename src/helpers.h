@@ -30,6 +30,7 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value);
 void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
+void populateGvarUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
 void populatecsFieldCB(QComboBox *b, int value, bool last, int hubproto);
 void populateExpoCurvesCB(QComboBox *b, int value);
