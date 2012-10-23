@@ -41,10 +41,14 @@ size_t SizeOfArray( T(&)[ N ] )
   return N;
 }
 
+QStringList o9xservers;
+
 Open9xInterface::Open9xInterface(BoardEnum board):
 efile(new EFile()),
 board(board)
 {
+  o9xservers.clear();
+  o9xservers << "85.18.253.250" << "open9x.9xforums.com";
 }
 
 Open9xInterface::~Open9xInterface()
@@ -842,9 +846,59 @@ const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-st
 const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
 const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
 
+QString geturl( int board) {
+    QString url="http://";
+    QSettings settings("companion9x", "companion9x");
+    int server = settings.value("fwserver",0).toInt();
+    if (server >=o9xservers.count()) {
+      server=0;
+      settings.setValue("fwserver",server);
+    }
+    url.append(o9xservers.at(server));
+    switch(board) {
+      case BOARD_STOCK:
+      case BOARD_GRUVIN9X:
+        url.append("//getfw.php?fw=%1.hex");
+        break;
+      case BOARD_ERSKY9X:
+        url.append("//getfw.php?fw=%1.bin");
+        break;
+      default:
+        url.clear();
+    }
+    return url;
+}
+
+
+QString getstamp( int board) {
+    QString url="http://";
+    QSettings settings("companion9x", "companion9x");
+    int server = settings.value("fwserver",0).toInt();
+    if (server >=o9xservers.count()) {
+      server=0;
+      settings.setValue("fwserver",server);
+    }
+    url.append(o9xservers.at(server));
+    url.append("/binaries/stamp-open9x-");
+    switch(board) {
+      case BOARD_STOCK:
+        url.append("stock.txt");
+        break;
+      case BOARD_GRUVIN9X:
+        url.append("v4.txt");
+        break;
+      case BOARD_ERSKY9X:
+        url.append("arm.txt");
+        break;
+      default:
+        url.clear();
+    }
+    return url;
+}
+
 void RegisterOpen9xFirmwares()
 {
-  FirmwareInfo * open9x = new FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_STOCK_STAMP, false);
+  FirmwareInfo * open9x = new FirmwareInfo("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
   open9x->addLanguage("se");
@@ -881,7 +935,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 
-  open9x = new FirmwareInfo("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), OPEN9X_PREFIX_URL "%1.hex", OPEN9X_V4_STAMP, false);
+  open9x = new FirmwareInfo("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), geturl(BOARD_GRUVIN9X), getstamp(BOARD_GRUVIN9X), false);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
@@ -913,7 +967,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 
-  open9x = new FirmwareInfo("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), OPEN9X_PREFIX_URL "%1.bin", OPEN9X_ARM_STAMP, true);
+  open9x = new FirmwareInfo("open9x-arm", QObject::tr("open9x for ersky9x board"), new Open9xInterface(BOARD_ERSKY9X), geturl(BOARD_ERSKY9X), getstamp(BOARD_ERSKY9X), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addLanguage("en");
   open9x->addLanguage("fr");
