@@ -20,6 +20,8 @@
 #define BOLD_FONT
 #define VOICE
 
+#define VARIANT 3
+
 #undef min
 #undef max
 
