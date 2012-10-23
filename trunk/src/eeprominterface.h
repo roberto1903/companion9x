@@ -971,7 +971,6 @@ class FirmwareInfo {
       parent(NULL),
       id(QString::null),
       eepromInterface(NULL),
-      stamp(NULL),
       voice(false),
       variantBase(0)
     {
@@ -981,7 +980,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const char * stamp = NULL, bool voice = false):
+    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), bool voice = false):
       parent(NULL),
       id(id),
       name(name),
@@ -993,7 +992,7 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const char * stamp = NULL, bool voice=false):
+    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const QString & stamp = QString(), bool voice=false):
       parent(NULL),
       id(id),
       name(QString::null),
@@ -1045,7 +1044,7 @@ class FirmwareInfo {
     QString name;
     EEPROMInterface * eepromInterface;
     QString url;
-    const char * stamp;
+    QString stamp;
     bool voice;
     unsigned int variantBase;
 };

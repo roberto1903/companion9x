@@ -161,9 +161,9 @@ void MainWindow::checkForUpdates(bool ignoreSettings, QString & fwId)
     check2done = true;
     QSettings settings("companion9x", "companion9x");
     fwToUpdate = fwId;
-    const char * stamp = GetFirmware(fwToUpdate)->stamp;
+    QString stamp = GetFirmware(fwToUpdate)->stamp;
 
-    if (stamp) {
+    if (!stamp.isEmpty()) {
         if (checkFW || ignoreSettings) {
             manager1 = new QNetworkAccessManager(this);
             connect(manager1, SIGNAL(finished(QNetworkReply*)), this, SLOT(reply1Finished(QNetworkReply*)));
@@ -423,6 +423,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
         if(!cres)
         {
             QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
+            int server = settings.value("fwserver",0).toInt();
+            server++;
+            settings.setValue("fwserver",server);
             return;
         }
         
