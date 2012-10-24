@@ -58,6 +58,19 @@ PACK(typedef struct t_Open9xV4PhaseData_v208 {
   t_Open9xV4PhaseData_v208(PhaseData &eepe);
 }) Open9xV4PhaseData_v208;
 
+PACK(typedef struct t_Open9xV4PhaseData_v212 {
+  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
+  int8_t swtch;       // swtch of phase[0] is not used
+  char name[6];
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+  int16_t rotaryEncoders[2];
+  int16_t gvars[O9X_MAX_GVARS];
+  operator PhaseData();
+  t_Open9xV4PhaseData_v212() { memset(this, 0, sizeof(t_Open9xV4PhaseData_v212)); }
+  t_Open9xV4PhaseData_v212(PhaseData &eepe);
+}) Open9xV4PhaseData_v212;
+
 PACK(typedef struct t_Open9xV4MixData_v207 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
@@ -425,14 +438,14 @@ PACK(typedef struct t_Open9xV4ModelData_v212 {
   Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
   Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
   Open9xV4SwashRingData_v209 swashR;
-  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xV4PhaseData_v212 phaseData[O9X_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
   uint8_t   switchWarningStates;
 
-  int8_t    gvars[O9X_MAX_GVARS];
+  char      gvars_names[O9X_MAX_GVARS][6];
 
   Open9xFrSkyData_v212 frsky;
 

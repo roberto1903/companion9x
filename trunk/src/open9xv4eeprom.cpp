@@ -107,6 +107,36 @@ t_Open9xV4PhaseData_v208::t_Open9xV4PhaseData_v208(PhaseData &c9x)
     rotaryEncoders[i] = c9x.rotaryEncoders[i];
 }
 
+t_Open9xV4PhaseData_v212::operator PhaseData ()
+{
+  PhaseData c9x;
+  for (int i=0; i<NUM_STICKS; i++)
+    c9x.trim[i] = trim[i];
+  c9x.swtch = open9xToSwitch(swtch);
+  getEEPROMZString(c9x.name, name, sizeof(name));
+  c9x.fadeIn = fadeIn;
+  c9x.fadeOut = fadeOut;
+  for (int i=0; i<2; i++)
+    c9x.rotaryEncoders[i] = rotaryEncoders[i];
+  for (int i=0; i<O9X_MAX_GVARS; i++)
+    c9x.gvars[i] = gvars[i];
+  return c9x;
+}
+
+t_Open9xV4PhaseData_v212::t_Open9xV4PhaseData_v212(PhaseData &c9x)
+{
+  for (int i=0; i<NUM_STICKS; i++)
+    trim[i] = c9x.trim[i];
+  swtch = open9xFromSwitch(c9x.swtch);
+  setEEPROMZString(name, c9x.name, sizeof(name));
+  fadeIn = c9x.fadeIn;
+  fadeOut = c9x.fadeOut;
+  for (int i=0; i<2; i++)
+    rotaryEncoders[i] = c9x.rotaryEncoders[i];
+  for (int i=0; i<O9X_MAX_GVARS; i++)
+    gvars[i] = c9x.gvars[i];
+}
+
 t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
 {
   if (c9x.destCh) {
@@ -1979,7 +2009,7 @@ t_Open9xV4ModelData_v212::operator ModelData ()
   c9x.switchWarningStates = switchWarningStates;
 
   for (int i=0; i<O9X_MAX_GVARS; i++)
-    c9x.phaseData[0].gvars[i] = gvars[i];
+    getEEPROMZString(c9x.gvars_names[i], gvars_names[i], 6);
 
   c9x.frsky = frsky;
 
@@ -2096,7 +2126,7 @@ t_Open9xV4ModelData_v212::t_Open9xV4ModelData_v212(ModelData &c9x)
     switchWarningStates = c9x.switchWarningStates;
 
     for (int i=0; i<O9X_MAX_GVARS; i++)
-      gvars[i] = c9x.phaseData[0].gvars[i];
+      setEEPROMZString(gvars_names[i], c9x.gvars_names[i], 6);
 
     frsky = c9x.frsky;
 

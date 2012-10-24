@@ -131,6 +131,14 @@ PACK(typedef struct t_Open9xArmGeneralData_v213 {
   uint8_t   backlightBright;
   int8_t    currentCalib;
 
+  int8_t   temperatureWarn;
+  uint8_t  mAhWarn;
+  uint16_t mAhUsed;
+  uint32_t globalTimer;
+  int8_t   temperatureCalib;
+  uint8_t  btBaudrate;
+
+
   operator GeneralSettings();
   t_Open9xArmGeneralData_v213() { memset(this, 0, sizeof(t_Open9xArmGeneralData_v213)); }
   t_Open9xArmGeneralData_v213(GeneralSettings&, unsigned int version, unsigned int variant);
@@ -302,6 +310,32 @@ PACK(typedef struct t_Open9xArmMixData_v212 {
 
 }) Open9xArmMixData_v212;
 
+PACK(typedef struct t_Open9xArmMixData_v213 {
+  uint8_t  destCh;
+  uint16_t phases;
+  uint8_t curveMode:1;       // O=curve, 1=differential
+  uint8_t noExpo:1;
+  int8_t  carryTrim:3;
+  uint8_t mltpx:2;           // multiplex method: 0 means +=, 1 means *=, 2 means :=
+  uint8_t spare:1;
+  int16_t weight;
+  int8_t  swtch;
+  int8_t  curveParam;
+  uint8_t mixWarn;         // mixer warning
+  uint8_t delayUp;
+  uint8_t delayDown;
+  uint8_t speedUp;
+  uint8_t speedDown;
+  uint8_t srcRaw;
+  int8_t  sOffset;
+  char    name[6];
+
+ operator MixData();
+  t_Open9xArmMixData_v213() { memset(this, 0, sizeof(t_Open9xArmMixData_v213)); }
+  t_Open9xArmMixData_v213(MixData&);
+
+}) Open9xArmMixData_v213;
+
 PACK(typedef struct t_Open9xArmPhaseData_v208 {
   int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t swtch;       // swtch of phase[0] is not used
@@ -324,6 +358,19 @@ PACK(typedef struct t_Open9xArmPhaseData_v212 {
   t_Open9xArmPhaseData_v212() { memset(this, 0, sizeof(t_Open9xArmPhaseData_v212)); }
   t_Open9xArmPhaseData_v212(PhaseData &eepe);
 }) Open9xArmPhaseData_v212;
+
+PACK(typedef struct t_Open9xArmPhaseData_v213 {
+  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
+  int8_t swtch;       // swtch of phase[0] is not used
+  char name[6];
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+  int16_t rotaryEncoders[1];
+  int16_t gvars[O9X_MAX_GVARS];
+  operator PhaseData();
+  t_Open9xArmPhaseData_v213() { memset(this, 0, sizeof(t_Open9xArmPhaseData_v213)); }
+  t_Open9xArmPhaseData_v213(PhaseData &eepe);
+}) Open9xArmPhaseData_v213;
 
 PACK(typedef struct t_Open9xArmCustomSwData_v208 { // Custom Switches data
   int8_t  v1; //input
@@ -716,22 +763,22 @@ PACK(typedef struct t_Open9xArmModelData_v213 {
   uint8_t   spare1:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xArmMixData_v212 mixData[O9X_ARM_MAX_MIXERS];
+  Open9xArmMixData_v213 mixData[O9X_ARM_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_ARM_NUM_CHNOUT];
-  Open9xArmExpoData_v212  expoData[O9X_ARM_MAX_EXPOS];
+  Open9xArmExpoData_v212 expoData[O9X_ARM_MAX_EXPOS];
   int16_t   curves[O9X_ARM_MAX_CURVES];
   int8_t    points[O9X_ARM_NUM_POINTS];
   Open9xArmCustomSwData_v210 customSw[O9X_ARM_NUM_CSW];
   Open9xArmFuncSwData_v211 funcSw[O9X_ARM_NUM_FSW];
   Open9xArmSwashRingData_v210 swashR;
-  Open9xArmPhaseData_v212 phaseData[O9X_ARM_MAX_PHASES];
+  Open9xArmPhaseData_v213 phaseData[O9X_ARM_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
   uint8_t   modelId;
   uint8_t   switchWarningStates;
 
-  int8_t    gvars[O9X_MAX_GVARS];
+  char      gvars_names[O9X_MAX_GVARS][6];
 
   Open9xArmFrSkyData_v213 frsky;
 

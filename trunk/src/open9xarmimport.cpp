@@ -43,6 +43,7 @@
 namespace Open9xARM {
 #include "../open9x/board_sky9x.cpp"
 #include "../open9x/eeprom_arm.cpp"
+#include "../open9x/eeprom_conversions.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_arm.cpp"
 #include "../open9x/stamp.cpp"

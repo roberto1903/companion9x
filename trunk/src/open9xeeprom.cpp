@@ -3805,9 +3805,9 @@ int Open9xModelData_v212::importVariant(unsigned int variant, const uint8_t *dat
   modelData.switchWarningStates = commonData->switchWarningStates;
 
   if (variant & GVARS_VARIANT) {
-    int8_t *gvars = (int8_t*) data;
-    data += 5;
-    for (uint8_t i=0; i<5; i++) {
+    int16_t *gvars = (int16_t*) data;
+    data += O9X_MAX_GVARS * sizeof(int16_t);
+    for (uint8_t i=0; i<O9X_MAX_GVARS; i++) {
       modelData.phaseData[0].gvars[i] = gvars[i];
     }
   }
@@ -3942,8 +3942,8 @@ int Open9xModelData_v212::exportVariant(unsigned int variant, QByteArray & outpu
     output.append((char *)&commonData, sizeof(commonData));
 
     if (variant & GVARS_VARIANT) {
-      int8_t gvars[5] = {0};
-      for (uint8_t i=0; i<5; i++) {
+      int16_t gvars[O9X_MAX_GVARS] = {0};
+      for (uint8_t i=0; i<O9X_MAX_GVARS; i++) {
         gvars[i] = modelData.phaseData[0].gvars[i];
       }
       output.append((char *)gvars, sizeof(gvars));
