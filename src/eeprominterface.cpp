@@ -540,6 +540,8 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
   return 0;
 }
 
+#define GVAR_MAX 1024
+
 void ModelData::removeGlobalVar(int & var)
 {
   if (var == 126)

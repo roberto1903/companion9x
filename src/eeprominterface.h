@@ -56,6 +56,7 @@ const uint8_t modn12x3[4][4]= {
 #define MAX_EXPOS   32
 #define MAX_CURVES  16
 #define MAX_POINTS  17
+#define MAX_GVARS   5
 
 #define NUM_SAFETY_CHNOUT 16
 #define NUM_CHNOUT        32 // number of real output channels CH1-CH8
@@ -714,6 +715,7 @@ class ModelData {
     uint8_t   modelId;
     // int8_t tmrModeB;
     uint8_t switchWarningStates;
+    char     gvars_names[MAX_GVARS][6+1];
     /* FrSky */    
     FrSkyData frsky;
     void clear();
