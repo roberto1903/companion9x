@@ -909,6 +909,7 @@ void RegisterOpen9xFirmwares()
   open9x->addTTSLanguage("fr");
   open9x->addTTSLanguage("it");
   open9x->addTTSLanguage("cz");
+  open9x->addTTSLanguage("sk");
 
   Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
   open9x->addOptions(ext_options);
@@ -947,6 +948,7 @@ void RegisterOpen9xFirmwares()
   open9x->addTTSLanguage("fr");
   open9x->addTTSLanguage("it");
   open9x->addTTSLanguage("cz");
+  open9x->addTTSLanguage("sk");
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
@@ -979,6 +981,7 @@ void RegisterOpen9xFirmwares()
   open9x->addTTSLanguage("fr");
   open9x->addTTSLanguage("it");
   open9x->addTTSLanguage("cz");
+  open9x->addTTSLanguage("sk");
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
