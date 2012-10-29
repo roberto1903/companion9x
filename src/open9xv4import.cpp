@@ -20,7 +20,7 @@
 #define BOLD_FONT
 #define VOICE
 
-#define VARIANT 3
+#define EEPROM_VARIANT 3
 
 #undef min
 #undef max

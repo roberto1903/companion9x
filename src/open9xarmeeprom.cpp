@@ -367,9 +367,7 @@ t_Open9xArmGeneralData_v213::t_Open9xArmGeneralData_v213(GeneralSettings &c9x, u
   backlightMode = (c9x.backlightMode > 4 ? 3 : c9x.backlightMode);
   trainer = c9x.trainer;
   view = c9x.view;
-  disableThrottleWarning = c9x.disableThrottleWarning;
   beeperMode = c9x.beeperMode;
-  switchWarning = c9x.switchWarning;
   disableMemoryWarning = c9x.disableMemoryWarning;
   disableAlarmWarning = c9x.disableAlarmWarning;
   stickMode = (c9x.stickMode & 0x3);
@@ -380,8 +378,7 @@ t_Open9xArmGeneralData_v213::t_Open9xArmGeneralData_v213(GeneralSettings &c9x, u
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  disableSplashScreen = c9x.disableSplashScreen;
-  enableTelemetryAlarm = c9x.enableTelemetryAlarm;
+  splashMode = c9x.disableSplashScreen;
   hapticMode = c9x.hapticMode;
   filterInput = c9x.filterInput;
   backlightDelay = c9x.backlightDelay;
@@ -418,8 +415,6 @@ Open9xArmGeneralData_v213::operator GeneralSettings ()
   result.backlightMode = backlightMode;
   result.trainer = trainer;
   result.view = view;
-  result.disableThrottleWarning = disableThrottleWarning;
-  result.switchWarning = switchWarning;
   result.beeperMode = (BeeperMode)beeperMode;
   result.disableMemoryWarning = disableMemoryWarning;
   result.disableAlarmWarning = disableAlarmWarning;
@@ -431,8 +426,7 @@ Open9xArmGeneralData_v213::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
-  result.enableTelemetryAlarm = enableTelemetryAlarm;
+  result.disableSplashScreen = splashMode;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
   result.backlightDelay = backlightDelay;
@@ -444,7 +438,6 @@ Open9xArmGeneralData_v213::operator GeneralSettings ()
   result.hapticLength=hapticLength;
   result.reNavigation=reNavigation;
   result.gpsFormat = gpsFormat;
-
   result.speakerVolume = speakerVolume;
   result.backlightBright = backlightBright;
   result.currentCalib = currentCalib;

@@ -23,8 +23,6 @@
 #define PPM_CENTER_ADJUSTABLE YES
 #define PPM_LIMITS_SYMETRICAL YES
 
-#define VARIANT 3
-
 #undef min
 #undef max
 
@@ -33,6 +31,8 @@
 #endif
 
 #include <exception>
+
+#define EEPROM_VARIANT 3
 
 namespace Open9x {
 #include "../open9x/board_stock.cpp"

@@ -98,22 +98,19 @@ PACK(typedef struct t_Open9xArmGeneralData_v213 {
   int8_t    backlightMode;
   Open9xTrainerData_v201 trainer;
   uint8_t   view;      //index of subview in main scrren
-  uint8_t   disableThrottleWarning:1;
-  int8_t    switchWarning:2; // -1=down, 0=off, 1=up
+  uint8_t   spare1:3;
   int8_t    beeperMode:2;
-  uint8_t   spare1:1;
+  uint8_t   flashBeep:1;
   uint8_t   disableMemoryWarning:1;
   uint8_t   disableAlarmWarning:1;
   uint8_t   stickMode:2;
   int8_t    timezone:5;
-  uint8_t   optrexDisplay:1;
+  uint8_t   spare2:1;
   uint8_t   inactivityTimer;
   uint8_t   throttleReversed:1;
   uint8_t   minuteBeep:1;
   uint8_t   preBeep:1;
-  uint8_t   flashBeep:1;
-  uint8_t   disableSplashScreen:1;
-  uint8_t   enableTelemetryAlarm:1;   // 0=no, 1=yes (Sound alarm when there's no telem. data coming in)
+  uint8_t   splashMode:3;
   int8_t    hapticMode:2;
   uint8_t   filterInput;
   uint8_t   backlightDelay;
@@ -137,7 +134,7 @@ PACK(typedef struct t_Open9xArmGeneralData_v213 {
   uint32_t globalTimer;
   int8_t   temperatureCalib;
   uint8_t  btBaudrate;
-
+  uint8_t  optrexDisplay;
 
   operator GeneralSettings();
   t_Open9xArmGeneralData_v213() { memset(this, 0, sizeof(t_Open9xArmGeneralData_v213)); }
