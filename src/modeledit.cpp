@@ -28,6 +28,17 @@
 
 #define GFX_MARGIN 16
 
+QString getGVarString(int8_t val, bool sign=false)
+{
+  if (val >= -125 && val <= +125)
+    if (sign)
+      return QString("(%1%)").arg(getSignedStr(val));
+    else
+      return QString("(%1%)").arg(val);
+  else
+    return QObject::tr("(GV%1)").arg((uint8_t)val-125);
+}
+
 ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget *parent) :
     QDialog(parent),
     redrawCurve(true),
@@ -828,7 +839,7 @@ void ModelEdit::tabExpos()
           default:  str += "   "; break;
         };
 
-        str += tr("Weight") + QString("(%1%)").arg(md->weight).rightJustified(6, ' ');
+        str += tr("Weight") + getGVarString(md->weight).rightJustified(6, ' ');
         if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
           if (md->expo!=0)
             str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
@@ -948,7 +959,7 @@ void ModelEdit::tabMixes()
         default:  str += "  "; break;
         };
 
-        str += " " + QString("%1%").arg(getSignedStr(md->weight)).rightJustified(5, ' ');
+        str += " " + getGVarString(md->weight, true).rightJustified(5, ' ');
         str += md->srcRaw.toString();
         if (GetEepromInterface()->getCapability(MixFlightPhases)) {
           if(md->phases) {

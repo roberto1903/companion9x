@@ -68,7 +68,8 @@ QString getFuncName(unsigned int val)
   }
 }
 
-void populateFuncCB(QComboBox *b, unsigned int value) {
+void populateFuncCB(QComboBox *b, unsigned int value)
+{
   b->clear();
   for (unsigned int i = 0; i < FuncCount; i++) {
     b->addItem(getFuncName(i));
@@ -613,6 +614,21 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->setMaxVisibleItems(10);
 }
 
+void populateGVarCB(QComboBox *b, int value, int min, int max)
+{
+  b->clear();
+  for (int i=min; i<=max; i++)
+    b->addItem(QString::number(i, 10), i);
+  if (value >= min && value <= max)
+    b->setCurrentIndex(value-min);
+  for (int i=1; i<=5; i++) {
+    int8_t gval = (int8_t)(125+i);
+    b->addItem(QString("GV%1").arg(i), gval);
+    if (value == gval)
+      b->setCurrentIndex(b->count()-1);
+  }
+}
+
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
 {
   RawSource item;
@@ -720,7 +736,8 @@ void populateCSWCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
-QString getSignedStr(int value) {
+QString getSignedStr(int value)
+{
   return value > 0 ? QString("+%1").arg(value) : QString("%1").arg(value);
 }
 
