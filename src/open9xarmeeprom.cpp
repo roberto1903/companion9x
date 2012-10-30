@@ -3080,7 +3080,7 @@ t_Open9xArmModelData_v213::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_213 3159
+#define MODEL_DATA_SIZE_213 3352
 t_Open9xArmModelData_v213::t_Open9xArmModelData_v213(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_213) {
