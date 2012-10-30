@@ -30,7 +30,7 @@ class Ersky9xInterface : public EEPROMInterface
 
     virtual const char * getName();
     
-    virtual BoardEnum getBoard() { return BOARD_ERSKY9X; }
+    virtual BoardEnum getBoard() { return BOARD_SKY9X; }
 
     virtual const int  getEEpromSize();
 

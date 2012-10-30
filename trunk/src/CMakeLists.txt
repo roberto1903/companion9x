@@ -96,6 +96,9 @@ SET( companion9x_SRCS
      open9xinterface.cpp
      open9xsimulator.cpp  
      open9ximport.cpp
+     open9xM128eeprom.cpp
+     open9xM128simulator.cpp
+     open9xM128import.cpp
      open9xv4eeprom.cpp
      open9xv4simulator.cpp
      open9xv4import.cpp

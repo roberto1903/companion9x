@@ -32,16 +32,18 @@
 #endif
 
 #define EESIZE_STOCK    2048
+#define EESIZE_M128     4096
 #define EESIZE_GRUVIN9X 4096
 #define EESIZE_AVRMAX   EESIZE_GRUVIN9X
-#define EESIZE_ERSKY9X  (128*4096)
+#define EESIZE_SKY9X    (128*4096)
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
 
 enum BoardEnum {
   BOARD_STOCK,
+  BOARD_M128,
   BOARD_GRUVIN9X,
-  BOARD_ERSKY9X
+  BOARD_SKY9X
 };
 
 const uint8_t modn12x3[4][4]= {

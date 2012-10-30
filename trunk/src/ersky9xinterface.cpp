@@ -47,7 +47,7 @@ const char * Ersky9xInterface::getName()
 
 const int Ersky9xInterface::getEEpromSize()
 {
-    return EESIZE_ERSKY9X;
+    return EESIZE_SKY9X;
 }
 
 const int Ersky9xInterface::getMaxModels()
@@ -115,7 +115,7 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying ersky9x import... ";
 
-  if (size != EESIZE_ERSKY9X) {
+  if (size != EESIZE_SKY9X) {
     std::cout << "wrong size\n";
     return false;
   }
@@ -175,7 +175,7 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t versio
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, EESIZE_ERSKY9X, 0/*version*/);
+  efile->EeFsCreate(eeprom, EESIZE_SKY9X, 0/*version*/);
 
   Ersky9xGeneral ersky9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));
@@ -199,7 +199,7 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t versio
         QObject::tr("Warning"),
         QObject::tr("EEPROM saved with these warnings:") + "\n- " + EEPROMWarnings.remove(EEPROMWarnings.length()-1, 1).replace("\n", "\n- "));
 
-  return EESIZE_ERSKY9X;
+  return EESIZE_SKY9X;
 }
 
 int Ersky9xInterface::getSize(ModelData &model)

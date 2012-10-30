@@ -13,7 +13,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
 
     getSettings();
     populateProgrammers();
-    if (GetEepromInterface()->getEEpromSize() == EESIZE_ERSKY9X) {
+    if (GetEepromInterface()->getEEpromSize() == EESIZE_SKY9X) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_mcu->hide();
