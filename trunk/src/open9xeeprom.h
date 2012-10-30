@@ -421,6 +421,18 @@ PACK(typedef struct t_Open9xFuncSwData_v210 { // Function Switches data
 
 }) Open9xFuncSwData_v210;
 
+PACK(typedef struct t_Open9xFuncSwData_v212 { // Function Switches data
+  int8_t  swtch; // input
+  uint8_t func:7;
+  uint8_t active:1;
+  uint8_t param;
+
+  operator FuncSwData();
+  t_Open9xFuncSwData_v212() { memset(this, 0, sizeof(t_Open9xFuncSwData_v212)); }
+  t_Open9xFuncSwData_v212(FuncSwData&);
+
+}) Open9xFuncSwData_v212;
+
 PACK(typedef struct t_Open9xFrSkyChannelData_v201 {
   uint8_t   ratio;              // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   type:4;             // channel unit (0=volts, ...)
@@ -1073,7 +1085,7 @@ class Open9xModelData_v212 {
       int8_t    curves[O9X_MAX_CURVES];
       int8_t    points[O9X_NUM_POINTS];
       Open9xCustomSwData_v209  customSw[O9X_NUM_CSW];
-      Open9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
+      Open9xFuncSwData_v212 funcSw[O9X_NUM_FSW];
       Open9xSwashRingData_v209 swashR;
       Open9xPhaseData_v201 phaseData[O9X_MAX_PHASES];
 
