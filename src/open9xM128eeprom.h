@@ -52,7 +52,7 @@ PACK(typedef struct t_Open9xM128ModelData_v212 {
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
   Open9xCustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
+  Open9xFuncSwData_v212 funcSw[O9X_NUM_FSW];
   Open9xSwashRingData_v209 swashR;
   Open9xM128PhaseData_v212 phaseData[O9X_MAX_PHASES];
 
