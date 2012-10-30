@@ -695,7 +695,7 @@ void MainWindow::loadBackup()
 QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
     return bcd.getSAMBA();
   else
     return bcd.getAVRDUDE();
@@ -715,6 +715,8 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &f
   arguments << "-c" << programmer << "-p";
   if (GetEepromInterface()->getBoard() == BOARD_GRUVIN9X)
     arguments << "m2560";
+  else if (GetEepromInterface()->getBoard() == BOARD_M128)
+      arguments << "m128";
   else
     arguments << mcu;
 
@@ -758,7 +760,7 @@ QStringList MainWindow::GetSambaArguments(const QString &tcl)
 
 QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
     return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n" + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
   else
     return GetAvrdudeArguments("eeprom:r:", filename);
@@ -766,7 +768,7 @@ QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
 
 QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
     return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
   else
     return GetAvrdudeArguments("eeprom:w:", filename);
@@ -774,7 +776,7 @@ QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 
 QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
     return GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
   else
     return GetAvrdudeArguments("flash:w:", filename);
@@ -782,7 +784,7 @@ QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 
 QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
     return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x20000 0\n");
   else
     return GetAvrdudeArguments("flash:r:", filename);
@@ -792,7 +794,7 @@ void MainWindow::burnFrom()
 {
     QString tempDir = QDir::tempPath();
     QString tempFile;
-    if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X)
+    if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
       tempFile = tempDir + "/temp.bin";
     else
       tempFile = tempDir + "/temp.hex";

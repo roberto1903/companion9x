@@ -35,7 +35,7 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, uint8_t version)
   this->eeprom = eeprom;
   this->eeprom_size = size;
 
-  if (this->eeprom_size == EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_SKY9X) {
     memset(eeprom, 0xFF, size);
   }
   else {
@@ -72,7 +72,7 @@ bool EFile::EeFsOpen(uint8_t *eeprom, int size)
   this->eeprom = eeprom;
   this->eeprom_size = size;
 
-  if (this->eeprom_size == EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_SKY9X) {
     return 1;
   }
   else {
@@ -207,7 +207,7 @@ uint16_t EFile::size(uint8_t id)
 
 uint8_t EFile::openRd(uint8_t i_fileId)
 {
-  if (this->eeprom_size == EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_SKY9X) {
     m_fileId = get_current_block_number(i_fileId * 2, &m_size);
     m_pos = sizeof(t_eeprom_header);
     return 1;
@@ -247,7 +247,7 @@ uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
 {
   memset(buf, 0, i_len);
 
-  if (this->eeprom_size == EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_SKY9X) {
     int len = std::min((int)i_len, (int)m_size + (int)sizeof(t_eeprom_header) - (int)m_pos);
     if (len > 0) {
       eeprom_read_block(buf, (m_fileId << 12) + m_pos, len);
@@ -399,7 +399,7 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uin
  */
 uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uint16_t i_len)
 {
-  if (this->eeprom_size == EESIZE_ERSKY9X) {
+  if (this->eeprom_size == EESIZE_SKY9X) {
     openRd(i_fileId);
     eeprom_write_block(buf, (m_fileId << 12) + m_pos, i_len);
     t_eeprom_header header;

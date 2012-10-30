@@ -112,7 +112,7 @@ bool MdiChild::hasSelection()
 void MdiChild::updateTitle()
 {
   QString title = userFriendlyCurrentFile() + "[*]"+" ("+GetEepromInterface()->getName()+QString(")");
-  if (GetEepromInterface()->getBoard() != BOARD_ERSKY9X)
+  if (GetEepromInterface()->getBoard() != BOARD_SKY9X)
     title += QString(" - %1 ").arg(EEPromAvail) + tr("free bytes");
   setWindowTitle(title);
 }
@@ -308,7 +308,7 @@ bool MdiChild::saveAs(bool isNew)
 {
     QSettings settings("companion9x", "companion9x");
     QString fileName;
-    if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
+    if (GetEepromInterface()->getEEpromSize()==EESIZE_SKY9X) {
       curFile.replace(".eepe",".bin");
       QFileInfo fi(curFile);      
       fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(BIN_FILES_FILTER));
@@ -330,7 +330,7 @@ bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 {
     QString myFile;
     myFile=fileName;
-    if (GetEepromInterface()->getEEpromSize()==EESIZE_ERSKY9X) {
+    if (GetEepromInterface()->getEEpromSize()==EESIZE_SKY9X) {
       myFile.replace(".eepe",".bin");
     }
     QFile file(myFile);

@@ -190,7 +190,7 @@ void avrOutputDialog::doAddTextStdOut()
 
 QString avrOutputDialog::getProgrammer()
 {
-  if (GetEepromInterface()->getBoard() == BOARD_ERSKY9X) {
+  if (GetEepromInterface()->getBoard() == BOARD_SKY9X) {
     return "SAM-BA";
   }
   else {
