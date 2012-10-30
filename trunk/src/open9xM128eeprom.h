@@ -45,7 +45,7 @@ PACK(typedef struct t_Open9xM128ModelData_v212 {
   uint8_t   extendedTrims:1;
   uint8_t   spare1:1;
   int8_t    ppmDelay;
-  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
+  uint8_t   beepANACenter;        // 1<<0->A1.. 1<<6->A7
   Open9xMixData_v211 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];

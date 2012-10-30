@@ -76,8 +76,6 @@ const char * Open9xInterface::getName()
 
 const int Open9xInterface::getEEpromSize()
 {
-  QSettings settings("companion9x", "companion9x");
-  QString avrMCU = settings.value("mcu", QString("m64")).toString();
   switch (board) {
     case BOARD_STOCK:
       return EESIZE_STOCK;
@@ -97,7 +95,7 @@ const int Open9xInterface::getMaxModels()
   if (board == BOARD_SKY9X)
     return 60;
   else if (board == BOARD_M128)
-    return 60;
+    return 30;
   else if (board == BOARD_GRUVIN9X)
     return 30;
   else
@@ -900,7 +898,7 @@ QString getstamp( int board) {
         url.append("stock.txt");
         break;
       case BOARD_M128:
-        url.append("m128.txt");
+        url.append("stock128.txt");
         break;
       case BOARD_GRUVIN9X:
         url.append("v4.txt");
@@ -966,7 +964,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* Stock board with M128 chip */
-  open9x = new Open9xFirmware("open9x-m128", QObject::tr("open9x for M128 / stock board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
+  open9x = new Open9xFirmware("open9x-stock128", QObject::tr("open9x for M128 / stock board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
