@@ -1015,17 +1015,6 @@ void RegisterOpen9xFirmwares()
   /* Sky9x board */
   open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
   open9x->setVariantBase(FRSKY_VARIANT);
-  open9x->addLanguage("en");
-  open9x->addLanguage("fr");
-  open9x->addLanguage("se");
-  open9x->addLanguage("de");
-  open9x->addLanguage("it");
-  open9x->addLanguage("cz");
-  open9x->addTTSLanguage("en");
-  open9x->addTTSLanguage("fr");
-  open9x->addTTSLanguage("it");
-  open9x->addTTSLanguage("cz");
-  open9x->addTTSLanguage("sk");
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
