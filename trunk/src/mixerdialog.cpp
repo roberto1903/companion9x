@@ -12,13 +12,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     QLabel * lb_fp[] = {ui->lb_FP0,ui->lb_FP1,ui->lb_FP2,ui->lb_FP3,ui->lb_FP4,ui->lb_FP5,ui->lb_FP6,ui->lb_FP7,ui->lb_FP8 };
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-    if (GetEepromInterface()->getCapability(ExtraTrims)) {
-      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_TRIMS | POPULATE_SWITCHES);
-    } else {
-      populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES);
-    }
+    populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0));
     ui->sourceCB->removeItem(0);
-    ui->weightSB->setValue(md->weight);
+    populateGVarCB(ui->weightSB, md->weight, -125, +125);
     ui->offsetSB->setValue(md->sOffset);
     ui->DiffMixSB->setValue(md->differential);
     ui->FMtrimChkB->setChecked(md->enableFmTrim);
@@ -112,7 +108,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     valuesChanged();
     connect(ui->mixerName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->sourceCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->weightSB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->DiffMixSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -154,7 +150,7 @@ void MixerDialog::valuesChanged()
 {
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
-    md->weight    = ui->weightSB->value();
+    md->weight    = ui->weightSB->itemData(ui->weightSB->currentIndex()).toInt();
     md->sOffset   = ui->offsetSB->value();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
