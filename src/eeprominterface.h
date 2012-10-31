@@ -517,6 +517,13 @@ enum AssignFunc {
   FuncLogs,
   FuncVolume,
   FuncBacklight,
+  FuncBackgroundMusic,
+  FuncBackgroundMusicPause,
+  FuncAdjustGV1,
+  FuncAdjustGV2,
+  FuncAdjustGV3,
+  FuncAdjustGV4,
+  FuncAdjustGV5,
   FuncCount
 };
 

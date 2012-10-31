@@ -13,13 +13,14 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
     setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
-    ui->expoSB->setValue(ed->expo);
-    ui->weightSB->setValue(ed->weight);
+    populateGVarCB(ui->expoCB, ed->expo, -100, +100);
+    populateGVarCB(ui->weightCB, ed->weight, 0, +100);
     populateSwitchCB(ui->switchesCB,ed->swtch);
     if (ed->curveMode==0) {
         populateExpoCurvesCB(ui->curvesCB,0); // TODO capacity for er9x
-        ui->ExpoCurveSB->setValue(ed->curveParam);
-    } else {
+        populateGVarCB(ui->expoCurveCB, ed->curveParam, -100, +100);
+    }
+    else {
         populateExpoCurvesCB(ui->curvesCB,ed->curveParam); // TODO capacity for er9x
     }
     ui->modeCB->setCurrentIndex(ed->mode-1);
@@ -29,11 +30,11 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         ed->curveMode=1;
     }
     if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
-        ui->ExpoCurveSB->hide();
+        ui->expoCurveCB->hide();
         ui->label_curves->setText(tr("Curve"));
     } else {
         ui->label_expo->hide();
-        ui->expoSB->hide();
+        ui->expoCB->hide();
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
         ui->label_phase->hide();
@@ -74,9 +75,9 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     ui->expoName->setText(ed->name);
     valuesChanged();
     connect(ui->expoName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
-    connect(ui->expoSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
-    connect(ui->ExpoCurveSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
-    connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->expoCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->expoCurveCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->weightCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -109,30 +110,33 @@ void ExpoDialog::valuesChanged()
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     if (ui->curvesCB->currentIndex()==0)  {
         if (GetEepromInterface()->getCapability(ExpoIsCurve)) {
-          ed->curveMode=0;
-          ui->ExpoCurveSB->show();
-          ed->curveParam=ui->ExpoCurveSB->value();
-          ed->expo=ui->ExpoCurveSB->value();
-        } else {
-          ui->ExpoCurveSB->hide();
-          ed->curveMode=0;
-          ed->curveParam=ui->expoSB->value();  
-          ed->expo = ui->expoSB->value();
+          ed->curveMode = 0;
+          ui->expoCurveCB->show();
+          ed->curveParam = ui->expoCurveCB->itemData(ui->expoCurveCB->currentIndex()).toInt();
+          ed->expo = ed->curveParam;
         }
-    } else {
+        else {
+          ui->expoCurveCB->hide();
+          ed->curveMode = 0;
+          ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
+          ed->curveParam = ed->expo;
+        }
+    }
+    else {
         if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
-          ed->curveMode=1;
-          ed->curveParam=ui->curvesCB->currentIndex();
-          ed->expo = ui->expoSB->value();
-        } else {
-          ed->curveMode=1;
-          ed->curveParam=ui->curvesCB->currentIndex();
+          ed->curveMode = 1;
+          ed->curveParam = ui->curvesCB->currentIndex();
+          ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
+        }
+        else {
+          ed->curveMode = 1;
+          ed->curveParam = ui->curvesCB->currentIndex();
           ed->expo = 0;
         }
-        ui->ExpoCurveSB->hide();
+        ui->expoCurveCB->hide();
     }
     
-    ed->weight = ui->weightSB->value();
+    ed->weight = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
     ed->swtch  = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     ed->mode   = ui->modeCB->currentIndex() + 1;
     int i=0;
@@ -156,14 +160,16 @@ void ExpoDialog::valuesChanged()
       for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
         if (phtemp & 1) {
           ones++;
-        } else {
+        }
+        else {
           zeros++;
         }
         phtemp >>=1;
       }
       if (zeros==GetEepromInterface()->getCapability(FlightPhases) || zeros==0) {
         ed->phase=0;
-      } else if (zeros==1) {
+      }
+      else if (zeros==1) {
         phtemp=ed->phases;
         for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
           if ((phtemp & 1)==0) {
@@ -173,7 +179,8 @@ void ExpoDialog::valuesChanged()
           phtemp >>=1;
         }
         ed->phase=ph+1;
-      } else if (ones==1) {
+      }
+      else if (ones==1) {
         phtemp=ed->phases;
         for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
           if (phtemp & 1) {
@@ -184,19 +191,23 @@ void ExpoDialog::valuesChanged()
         }
         ed->phase=-(ph+1);      
       }
-    } else {
+    }
+    else {
       ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
       if (ed->phase <0 ) {
         ed->phases= 1 << (ed->phase -1);
-      } else if (ed->phase==0) {
+      }
+      else if (ed->phase==0) {
         ed->phases=0;
-      } else {
+      }
+      else {
         ed->phases=( 2<< GetEepromInterface()->getCapability(FlightPhases))-1;
         ed->phases &= ~(1 << (ed->phase -1));
       }
     }  
 }
 
-void ExpoDialog::shrink() {
+void ExpoDialog::shrink()
+{
     resize(0,0);
 }

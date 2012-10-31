@@ -60,10 +60,29 @@ QString getFuncName(unsigned int val)
   }
   else {
     if (val< FuncCount) {
-      QString strings[] = { QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"), QObject::tr("Instant Trim"),
-                                    QObject::tr("Play Sound"), QObject::tr("Play Haptic"), QObject::tr("Reset"), QObject::tr("Vario"), QObject::tr("Play Track"), QObject::tr("Play Value"), QObject::tr("Start Logs"), QObject::tr("Volume"), QObject::tr("Backlight") };
+      QString strings[] = {
+          QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
+          QObject::tr("Instant Trim"),
+          QObject::tr("Play Sound"),
+          QObject::tr("Play Haptic"),
+          QObject::tr("Reset"),
+          QObject::tr("Vario"),
+          QObject::tr("Play Track"),
+          QObject::tr("Play Value"),
+          QObject::tr("Start Logs"),
+          QObject::tr("Volume"),
+          QObject::tr("Backlight"),
+          QObject::tr("Background Music"),
+          QObject::tr("Background Music Pause"),
+          QObject::tr("Adjust GV1"),
+          QObject::tr("Adjust GV2"),
+          QObject::tr("Adjust GV3"),
+          QObject::tr("Adjust GV4"),
+          QObject::tr("Adjust GV5"),
+      };
       return strings[val-NUM_SAFETY_CHNOUT];
-    } else {
+    }
+    else {
       return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
     }
   }
@@ -74,10 +93,12 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->clear();
   for (unsigned int i = 0; i < FuncCount; i++) {
     b->addItem(getFuncName(i));
-    if ((i==FuncVolume) && !GetEepromInterface()->getCapability(HasVolume)) {
-      QModelIndex index = b->model()->index(i, 0);
-      QVariant v(0);
-      b->model()->setData(index, v, Qt::UserRole - 1);      
+    if (!GetEepromInterface()->getCapability(HasVolume)) {
+      if (i==FuncVolume || i==FuncBackgroundMusic || i==FuncBackgroundMusicPause) {
+        QModelIndex index = b->model()->index(i, 0);
+        QVariant v(0);
+        b->model()->setData(index, v, Qt::UserRole - 1);
+      }
     }
     if ((i==FuncLogs) && !GetEepromInterface()->getCapability(HasSDLogs)) {
       QModelIndex index = b->model()->index(i, 0);
@@ -89,22 +110,26 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
-QString FuncParam(uint function, unsigned int value) {
+QString FuncParam(uint function, unsigned int value)
+{
   QStringList qs;
   if (function==FuncPlaySound) {
     qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
     return qs.at(value);
-  } else if (function==FuncPlayHaptic) { 
+  }
+  else if (function==FuncPlayHaptic) {
     qs << "0" << "1" << "2" << "3";
     return qs.at(value);
-  } else if (function==FuncReset) { 
+  }
+  else if (function==FuncReset) {
     qs.append( QObject::tr("Timer1"));
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
     return qs.at(value);
-  } else if (function==FuncVolume) {
+  }
+  else if (function==FuncVolume || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
     RawSource item;
     for (int i=0; i<7; i++) {
       item = RawSource(SOURCE_TYPE_STICK, i);
@@ -138,7 +163,8 @@ QString FuncParam(uint function, unsigned int value) {
       qs.append(item.toString());
     }
     return qs.at(value);
-  } else if (function==FuncPlayValue) {
+  }
+  else if (function==FuncPlayValue) {
     RawSource item;
     for (int i=0; i<7; i++) {
       item = RawSource(SOURCE_TYPE_STICK, i);
@@ -180,13 +206,14 @@ QString FuncParam(uint function, unsigned int value) {
   return "";
 }
 
-void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value) {
+void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value)
+{
   QStringList qs;
   b->clear();
   b->addItem("----");
   int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
   for(int i=0; i<num_fsw; i++) {
-    if (g_model->funcSw[i].func==FuncPlayPrompt && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+    if ((g_model->funcSw[i].func==FuncPlayPrompt || g_model->funcSw[i].func==FuncBackgroundMusic) && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
       QString temp=g_model->funcSw[i].paramarm;
       if (!temp.isEmpty()) {
         if (!qs.contains(temp)) {
@@ -218,20 +245,24 @@ void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value) {
   }
 }
 
-void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
+void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
+{
   QStringList qs;
   b->clear();
   if (function==FuncPlaySound) {
     qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
-  } else if (function==FuncPlayHaptic) { 
+  }
+  else if (function==FuncPlayHaptic) {
     qs << "0" << "1" << "2" << "3";
-  } else if (function==FuncReset) { 
+  }
+  else if (function==FuncReset) {
     qs.append( QObject::tr("Timer1"));
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
-  } else if (function==FuncVolume) {
+  }
+  else if (function==FuncVolume || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
     unsigned int count=0;
     RawSource item;
     for (int i=0; i<7; i++) {
@@ -287,7 +318,8 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
-  } else if (function==FuncPlayValue) {
+  }
+  else if (function==FuncPlayValue) {
     unsigned int count=0;
     RawSource item;
     for (int i=0; i<7; i++) {
@@ -350,7 +382,8 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value) {
       count++;
     }
     
-  } else {
+  }
+  else {
     b->hide();
   }
   b->addItems(qs);
