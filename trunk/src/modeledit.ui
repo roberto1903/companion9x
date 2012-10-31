@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>890</width>
-    <height>693</height>
+    <height>723</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -765,11 +765,11 @@
        </item>
        <item row="9" column="2" colspan="6">
         <layout class="QGridLayout" name="gridLayout_34">
-         <property name="verticalSpacing">
-          <number>6</number>
-         </property>
          <property name="topMargin">
           <number>0</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>6</number>
          </property>
          <item row="0" column="9" rowspan="2">
           <widget class="Line" name="swwarn_line4">
@@ -6091,8 +6091,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>792</width>
-            <height>462</height>
+            <width>846</width>
+            <height>626</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9524,8 +9524,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>713</width>
-            <height>494</height>
+            <width>846</width>
+            <height>592</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14442,8 +14442,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>140</width>
-            <height>284</height>
+            <width>846</width>
+            <height>626</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14631,9 +14631,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabFunctionSwitches">
+     <widget class="QWidget" name="tabCustomFunctions">
       <attribute name="title">
-       <string>Function switches</string>
+       <string>Custom Functions</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_fswitches" columnstretch="0,0,0,0,0">
        <item row="1" column="3">

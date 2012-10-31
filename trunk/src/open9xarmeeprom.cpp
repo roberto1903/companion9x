@@ -1655,7 +1655,7 @@ t_Open9xArmFuncSwData_v208::t_Open9xArmFuncSwData_v208(FuncSwData &c9x)
   } else {
     param = c9x.param;
     if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && param > 7) {
-      param-=-2;
+      param -= -2;
     }
   }
   func = c9x.func;  
@@ -1669,7 +1669,8 @@ t_Open9xArmFuncSwData_v208::operator FuncSwData ()
   if (c9x.func <= FuncSafetyCh16) {
     c9x.enabled=param & 0x01;
     c9x.param = (param>>1)<<1;
-  } else {
+  }
+  else {
     if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && param > 7) {
       param+=2;
     } 
@@ -1687,14 +1688,15 @@ t_Open9xArmFuncSwData_v210::t_Open9xArmFuncSwData_v210(FuncSwData &c9x)
     value |=(c9x.enabled & 0x01);
   }
   else {
-    if (c9x.func != FuncPlayPrompt) {
+    if (c9x.func == FuncPlayPrompt || c9x.func == FuncBackgroundMusic) {
+      memcpy(param, c9x.paramarm, sizeof(param));
+    }
+    else {
      value = c9x.param;
      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
        value-=2;
      }
      *((uint32_t *)param) = value;
-    } else {
-     memcpy(param,c9x.paramarm, sizeof(param));
     }
   }
   func = c9x.func;
@@ -1711,13 +1713,14 @@ t_Open9xArmFuncSwData_v210::operator FuncSwData ()
     c9x.param = (value>>1)<<1;
   }
   else {
-    if (c9x.func != FuncPlayPrompt) {
+    if (c9x.func == FuncPlayPrompt || c9x.func == FuncBackgroundMusic) {
+      memcpy(c9x.paramarm, param, sizeof(c9x.paramarm));
+    }
+    else {
       if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
         value+=2;
       } 
       c9x.param = value;
-    } else {
-     memcpy(c9x.paramarm,param, sizeof(c9x.paramarm));
     }
   }
   return c9x;
@@ -1733,14 +1736,15 @@ t_Open9xArmFuncSwData_v211::t_Open9xArmFuncSwData_v211(FuncSwData &c9x)
     delay=(c9x.enabled & 0x01);
   }
   else {
-    if (c9x.func != FuncPlayPrompt) {
-     value = c9x.param;
-     if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
-       value--;
-     }
-     *((uint32_t *)param) = value;
-    } else {
-     memcpy(param,c9x.paramarm, sizeof(param));
+    if (c9x.func == FuncPlayPrompt || c9x.func == FuncBackgroundMusic) {
+      memcpy(param, c9x.paramarm, sizeof(param));
+    }
+    else {
+      value = c9x.param;
+      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume || (c9x.func >= FuncAdjustGV1 && c9x.func <= FuncAdjustGV5)) && value > 7) {
+        value--;
+      }
+      *((uint32_t *)param) = value;
     }
   }
   func = c9x.func;
@@ -1757,14 +1761,14 @@ t_Open9xArmFuncSwData_v211::operator FuncSwData ()
     c9x.param = value;
   }
   else {
-    if (c9x.func != FuncPlayPrompt) {
-      c9x.param = value;
-      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume) && value > 7) {
-        c9x.param++;
-      } 
+    if (c9x.func == FuncPlayPrompt || c9x.func == FuncBackgroundMusic) {
+      memcpy(c9x.paramarm, param, sizeof(c9x.paramarm));
     }
     else {
-      memcpy(c9x.paramarm, param, sizeof(c9x.paramarm));
+      c9x.param = value;
+      if ((c9x.func == FuncPlayValue || c9x.func == FuncVolume || (c9x.func >= FuncAdjustGV1 && c9x.func <= FuncAdjustGV5)) && value > 7) {
+        c9x.param++;
+      } 
     }
   }
   return c9x;

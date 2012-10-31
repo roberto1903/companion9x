@@ -86,7 +86,7 @@ private:
     void tabCurves();
     void tabCustomSwitches();
     void tabSafetySwitches();
-    void tabFunctionSwitches();
+    void tabCustomFunctions();
     void tabTelemetry();
     void tabTemplates();
     void updateCurvesTab();

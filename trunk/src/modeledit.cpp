@@ -88,12 +88,12 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     tabSafetySwitches();
   }
   if (GetEepromInterface()->getCapability(FuncSwitches)==0 ) {
-    ui->tabFunctionSwitches->setDisabled(true);
+    ui->tabCustomFunctions->setDisabled(true);
     ui->tabWidget->removeTab(fswTab);
     telTab--;
   } 
   else {
-    tabFunctionSwitches();
+    tabCustomFunctions();
   }
   tabTemplates();
   tabHeli();
@@ -842,10 +842,10 @@ void ModelEdit::tabExpos()
         str += tr("Weight") + getGVarString(md->weight).rightJustified(6, ' ');
         if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
           if (md->expo!=0)
-            str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->expo)).rightJustified(7, ' ');
+            str += " " + tr("Expo") + getGVarString(md->expo, true).rightJustified(7, ' ');
         } else {
           if (md->curveMode==0 && md->curveParam!=0)  
-            str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(md->curveParam)).rightJustified(7, ' ');
+            str += " " + tr("Expo") + getGVarString(md->curveParam, true).rightJustified(7, ' ');
         }
         if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
           if(md->phases) {
@@ -995,7 +995,8 @@ void ModelEdit::tabMixes()
               str += tr("DISABLED")+QString(" !!!");
             }
           }
-        } else {
+        }
+        else {
           if(md->phase) {
             str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
           }
@@ -1003,25 +1004,27 @@ void ModelEdit::tabMixes()
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim>0) {
           str += " " +tr("No Trim");
-        } else if (md->carryTrim<0) {
+        }
+        else if (md->carryTrim<0) {
           str += " " + RawSource(SOURCE_TYPE_TRIM, (-(md->carryTrim)-1)).toString();
         }
         if(md->noExpo) {
           str += " " +tr("No DR/Expo");
         } 
-        if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){
-            if(md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
-        } else {
-                if(md->sOffset) str += " " + tr("Offset") + QString("(%1%)").arg(md->sOffset);
+        if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
+          if (md->sOffset) str += " " + tr("FMTrim") + QString("(%1%)").arg(md->sOffset);
         }
-        if(md->differential) str += " " + tr("Diff") + QString("(%1)").arg(md->differential);;
-        if(md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
+        else {
+          if (md->sOffset) str += " " + tr("Offset") + getGVarString(md->sOffset);
+        }
+        if (md->differential) str += " " + tr("Diff") + getGVarString(md->differential);
+        if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
         int scale=GetEepromInterface()->getCapability(SlowScale)+1;
-        if(md->delayDown || md->delayUp)
+        if (md->delayDown || md->delayUp)
           str += tr(" Delay(u%1:d%2)").arg((double)md->delayUp/scale).arg((double)md->delayDown/scale);
-        if(md->speedDown || md->speedUp)
+        if (md->speedDown || md->speedUp)
           str += tr(" Slow(u%1:d%2)").arg((double)md->speedUp/scale).arg((double)md->speedDown/scale);
-        if(md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
+        if (md->mixWarn)  str += tr(" Warn(%1)").arg(md->mixWarn);
         if (GetEepromInterface()->getCapability(HasMixerNames)) {
           QString MixerName;
           MixerName.append(md->name);
@@ -1494,7 +1497,6 @@ void ModelEdit::updateSwitchesTab()
 
 void ModelEdit::tabCustomSwitches()
 {
-
     switchEditLock = true;
     QComboBox* tmpcsw[NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
       ui->cswitchFunc_5, ui->cswitchFunc_6, ui->cswitchFunc_7, ui->cswitchFunc_8,
@@ -1626,60 +1628,64 @@ void ModelEdit::tabCustomSwitches()
     switchEditLock = false;
 }
 
-void ModelEdit::tabFunctionSwitches()
+void ModelEdit::tabCustomFunctions()
 {
   switchEditLock = true;
   int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
-  for(int i=0; i<std::min(16,num_fsw); i++) {
+  for(int i=0; i<num_fsw; i++) {
+    AssignFunc func = g_model.funcSw[i].func;
+    QGridLayout *layout = i >= 16 ? ui->fswitchlayout2 : ui->fswitchlayout1;
+
     fswLabel[i] = new QLabel(this);
     fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
     fswLabel[i]->setText(tr("FSW%1").arg(i+1));
-    ui->fswitchlayout1->addWidget(fswLabel[i],i+1,0);
-    
+    layout->addWidget(fswLabel[i],(i%16)+1,0);
+
     fswtchSwtch[i] = new QComboBox(this);
     connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-    ui->fswitchlayout1->addWidget(fswtchSwtch[i],i+1,1);
+    layout->addWidget(fswtchSwtch[i],(i%16)+1,1);
     populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
 
     fswtchFunc[i] = new QComboBox(this);
     connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-    ui->fswitchlayout1->addWidget(fswtchFunc[i],i+1,2);
+    layout->addWidget(fswtchFunc[i],(i%16)+1,2);
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
     fswtchParam[i] = new QSpinBox(this);
-    if (g_model.funcSw[i].func==FuncPlayPrompt) {
+    if (func==FuncPlayPrompt) {
       fswtchParam[i]->setMinimum(256);      
       fswtchParam[i]->setMaximum(511);
-    } else { 
+    }
+    else {
       fswtchParam[i]->setMinimum(-125);
       fswtchParam[i]->setMaximum(125);
     } 
     fswtchParam[i]->setAccelerated(true);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-    ui->fswitchlayout1->addWidget(fswtchParam[i],i+1,3);
+    layout->addWidget(fswtchParam[i],(i%16)+1,3);
 
     fswtchEnable[i] = new QCheckBox(this);
-    if (g_model.funcSw[i].func==FuncPlayPrompt && GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+    if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && GetEepromInterface()->getCapability(VoicesAsNumbers))
       fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
-    } else {
+    else
       fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-    }
     fswtchEnable[i]->setText(tr("ON"));
-    ui->fswitchlayout1->addWidget(fswtchEnable[i],i+1,4);
+    layout->addWidget(fswtchEnable[i],(i%16)+1,4);
     fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
     connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
 
     fswtchParamT[i] = new QComboBox(this);
-    ui->fswitchlayout1->addWidget(fswtchParamT[i],i+1,3);
-    populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
+    layout->addWidget(fswtchParamT[i],(i%16)+1,3);
+    populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param);
     connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
     fswtchParamArmT[i] = new QComboBox(this);
     fswtchParamArmT[i]->setEditable(true);
-    ui->fswitchlayout1->addWidget(fswtchParamArmT[i],i+1,3);
-    if (g_model.funcSw[i].func==FuncPlayPrompt && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+    layout->addWidget(fswtchParamArmT[i],(i%16)+1,3);
+    if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
       populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,g_model.funcSw[i].paramarm);
-    } else {
+    }
+    else {
       populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,NULL);
       fswtchParamArmT[i]->hide();
     }
@@ -1691,115 +1697,35 @@ void ModelEdit::tabFunctionSwitches()
       fswtchParam[i]->hide();
       fswtchParamT[i]->hide();
       fswtchEnable[i]->hide();
-    } else if (g_model.funcSw[i].func>FuncSafetyCh16) {
-      if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset  || g_model.funcSw[i].func==FuncVolume || g_model.funcSw[i].func==FuncPlayValue)) {
+    }
+    else if (func>FuncSafetyCh16) {
+      if (func==FuncPlayPrompt || func==FuncBackgroundMusic) {
+        if (GetEepromInterface()->getCapability(VoicesAsNumbers))
+          fswtchParamArmT[i]->hide();
+        fswtchParamT[i]->hide();
+      }
+      else if (!(func==FuncPlaySound || func==FuncPlayHaptic || func==FuncReset  || func==FuncVolume || func==FuncPlayValue || (func>=FuncAdjustGV1 && func<=FuncAdjustGV5))) {
         fswtchParamT[i]->hide();
         if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
           fswtchParam[i]->hide();
         }
-      } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
-        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-          fswtchParamArmT[i]->hide();
-        }
-        fswtchParamT[i]->hide();
-      } else {
+      }
+      else {
         fswtchParamArmT[i]->hide();
         fswtchParam[i]->hide();
       }
-      if (g_model.funcSw[i].func>FuncInstantTrim) {
+
+      if (func>FuncInstantTrim)
         fswtchEnable[i]->hide();
-      } else {
+      else
         fswtchEnable[i]->show();
-      }
     }
   }
-  if (num_fsw>16) {
-    for(int i=16; i<num_fsw; i++) {
-      fswLabel[i] = new QLabel(this);
-      fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
-      fswLabel[i]->setText(tr("FSW%1").arg(i+1));
-      ui->fswitchlayout2->addWidget(fswLabel[i],i-15,0);
-    
-      fswtchSwtch[i] = new QComboBox(this);
-      connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-      ui->fswitchlayout2->addWidget(fswtchSwtch[i],i-15,1);
-      populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
 
-      fswtchFunc[i] = new QComboBox(this);
-      connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-      ui->fswitchlayout2->addWidget(fswtchFunc[i],i-15,2);
-      populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
-
-      fswtchParam[i] = new QSpinBox(this);
-      if (g_model.funcSw[i].func==FuncPlayPrompt) {
-        fswtchParam[i]->setMinimum(256);      
-        fswtchParam[i]->setMaximum(511);
-      } else { 
-        fswtchParam[i]->setMinimum(-125);
-        fswtchParam[i]->setMaximum(125);
-      } 
-      fswtchParam[i]->setAccelerated(true);
-      connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-      ui->fswitchlayout2->addWidget(fswtchParam[i],i-15,3);
-      if (g_model.funcSw[i].func==FuncPlayPrompt && GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-        fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
-      } else {
-        fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-      }
-
-      fswtchEnable[i] = new QCheckBox(this);
-      fswtchEnable[i]->setText(tr("ON"));
-      ui->fswitchlayout2->addWidget(fswtchEnable[i],i-15,4);
-      int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
-
-      fswtchParamT[i] = new QComboBox(this);
-      ui->fswitchlayout2->addWidget(fswtchParamT[i],i-15,3);
-      populateFuncParamCB(fswtchParamT[i],g_model.funcSw[i].func,g_model.funcSw[i].param);
-      connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-
-      fswtchParamArmT[i] = new QComboBox(this);
-      fswtchParamArmT[i]->setEditable(true);
-      ui->fswitchlayout2->addWidget(fswtchParamArmT[i],i-15,3);
-      if (g_model.funcSw[i].func==FuncPlayPrompt) {
-        populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,g_model.funcSw[i].paramarm);
-      } else {
-        populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,NULL);
-        fswtchParamArmT[i]->hide();
-      }
-      connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-      connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(functionSwitchesEdited()));
-
-      if (index==0) {
-        fswtchParam[i]->hide();
-        fswtchParamT[i]->hide();
-        fswtchEnable[i]->hide();
-      } else if (g_model.funcSw[i].func>FuncSafetyCh16) {
-        if (!(g_model.funcSw[i].func==FuncPlaySound || g_model.funcSw[i].func==FuncPlayHaptic || g_model.funcSw[i].func==FuncReset || g_model.funcSw[i].func==FuncVolume || g_model.funcSw[i].func==FuncPlayValue)) {
-          fswtchParamT[i]->hide();
-          if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-            fswtchParam[i]->hide();
-          }
-        } else if (g_model.funcSw[i].func==FuncPlayPrompt) {
-          fswtchParamT[i]->hide();
-          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-            fswtchParamArmT[i]->hide();
-          } else {
-            fswtchParam[i]->hide();            
-          }
-        } else {
-          fswtchParamArmT[i]->hide();
-          fswtchParam[i]->hide();
-        }
-        if (g_model.funcSw[i].func>FuncInstantTrim) {
-          fswtchEnable[i]->hide();
-        } else {
-          fswtchEnable[i]->show();
-        }
-      }
-    }
-  } else {
+  if (num_fsw <= 16) {
     ui->FSwitchGB2->hide();
   }
+
   switchEditLock = false;
 }
 
@@ -1906,19 +1832,22 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
         fswtchEnable[i]->setChecked(false);
-      } else  if (index>FuncSafetyCh16) {
-        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue) {
+      }
+      else if (index>FuncSafetyCh16) {
+        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue || (index>=FuncAdjustGV1 && index<=FuncAdjustGV5)) {
           fswtchParam[i]->hide();
           fswtchParamArmT[i]->hide();
           if (fswtchParamT[i]->currentIndex()>=0) {
             g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-          } else {
+          }
+          else {
             g_model.funcSw[i].param = 0;
           }
           populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
           fswtchParamT[i]->show();
           fswtchEnable[i]->hide();
-        } else if (index==FuncPlayPrompt) {
+        }
+        else if (index==FuncPlayPrompt || index==FuncBackgroundMusic) {
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
           fswtchEnable[i]->setChecked(false);
@@ -1927,7 +1856,8 @@ void ModelEdit::functionSwitchesEdited()
             fswtchParam[i]->setMinimum(256);
             fswtchParam[i]->setMaximum(511);
             g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-          } else {
+          }
+          else {
             fswtchParam[i]->hide();
             fswtchParamArmT[i]->show();
             for (int j=0; j<6; j++) {
@@ -1939,7 +1869,8 @@ void ModelEdit::functionSwitchesEdited()
               }
             }
           }
-        } else {
+        }
+        else {
           g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
           fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
@@ -1947,11 +1878,13 @@ void ModelEdit::functionSwitchesEdited()
           if (index>FuncInstantTrim) {
             fswtchEnable[i]->hide();
             fswtchEnable[i]->setChecked(false);
-          } else {
+          }
+          else {
             fswtchEnable[i]->show();
           }
         }
-      } else {
+      }
+      else {
       fswtchParam[i]->setMinimum(-125);
       fswtchParam[i]->setMaximum(125);
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();

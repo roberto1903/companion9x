@@ -14,10 +14,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0));
     ui->sourceCB->removeItem(0);
-    populateGVarCB(ui->weightSB, md->weight, -125, +125);
-    ui->offsetSB->setValue(md->sOffset);
-    ui->DiffMixSB->setValue(md->differential);
-    ui->FMtrimChkB->setChecked(md->enableFmTrim);
+    populateGVarCB(ui->weightCB, md->weight, -125, +125);
+    populateGVarCB(ui->offsetCB, md->sOffset, -125, +125);
+    populateGVarCB(ui->differentialCB, md->differential, -100, +100);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
@@ -42,7 +41,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     }
     ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
-        ui->DiffMixSB->hide();
+        ui->differentialCB->hide();
         ui->label_curve->setText(tr("Curve"));
     }
     if (!GetEepromInterface()->getCapability(HasMixerNames)) {
@@ -108,9 +107,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     valuesChanged();
     connect(ui->mixerName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
     connect(ui->sourceCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->weightSB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
-    connect(ui->DiffMixSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->weightCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->offsetCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->differentialCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->MixDR_CB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
@@ -150,8 +149,8 @@ void MixerDialog::valuesChanged()
 {
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
-    md->weight    = ui->weightSB->itemData(ui->weightSB->currentIndex()).toInt();
-    md->sOffset   = ui->offsetSB->value();
+    md->weight    = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
+    md->sOffset    = ui->offsetCB->itemData(ui->offsetCB->currentIndex()).toInt();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
@@ -160,7 +159,7 @@ void MixerDialog::valuesChanged()
       numcurves=16;
     }
     if (GetEepromInterface()->getCapability(DiffMixers) && (ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves))==0){
-      ui->DiffMixSB->show();
+      ui->differentialCB->show();
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
     md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
@@ -172,7 +171,7 @@ void MixerDialog::valuesChanged()
     md->delayUp   = round(ui->delayUpSB->value()*scale);
     md->speedDown = round(ui->slowDownSB->value()*scale);
     md->speedUp   = round(ui->slowUpSB->value()*scale);
-    md->differential=ui->DiffMixSB->value();
+    md->differential = ui->differentialCB->itemData(ui->differentialCB->currentIndex()).toInt();
     if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
     } else {
