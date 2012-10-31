@@ -657,7 +657,7 @@ void populateGVarCB(QComboBox *b, int value, int min, int max)
     b->setCurrentIndex(value-min);
   for (int i=1; i<=5; i++) {
     int8_t gval = (int8_t)(125+i);
-    b->addItem(QString("GV%1").arg(i), gval);
+    b->addItem(QObject::tr("GV%1").arg(i), gval);
     if (value == gval)
       b->setCurrentIndex(b->count()-1);
   }
