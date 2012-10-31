@@ -1380,9 +1380,9 @@ void ModelEdit::setCurrentCurve(int curveId)
       }
     } else {
       spnx[i]->show();
-      spnx[i]->setValue(g_model.curves[currentCurve].points[i].x);
       spnx[i]->setMaximum(g_model.curves[currentCurve].points[i+1].x-1);
       spnx[i]->setMinimum(g_model.curves[currentCurve].points[i-1].x+1);
+      spnx[i]->setValue(g_model.curves[currentCurve].points[i].x);
     }
   }
   for (int i=g_model.curves[currentCurve].count; i<17;i++) {
@@ -3383,9 +3383,11 @@ QSpinBox *ModelEdit::getNodeSBX(int i)   // get the SpinBox that corresponds to 
 
 void ModelEdit::drawCurve()
 {
+    
     if (drawing)
         return;
     drawing=true;
+    curvesLock=true;
     int k,i;
     QColor * plot_color[16];
 
@@ -3472,6 +3474,7 @@ void ModelEdit::drawCurve()
       scene->addItem(nodex);
       if(i>0) scene->addItem(new Edge(nodel, nodex));
     }
+    curvesLock=false;
     drawing=false;
 }
 
