@@ -661,7 +661,7 @@ FirmwareVariant GetFirmwareVariant(QString id)
 
   foreach(FirmwareInfo * firmware, firmwares) {
     
-    if (id.contains(firmware->id+"-")) {
+    if (id.contains(firmware->id+"-") || (!id.contains("-") && id.contains(firmware->id))) {
       result.id = id;
       result.firmware = firmware;
       result.variant = firmware->getVariant(id);
