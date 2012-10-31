@@ -254,7 +254,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case Outputs:
       return 16;
     case ExtraChannels:
-      return 8;
+      return 0;
     case Simulation:
       return 1;
     case gsSwitchMask:

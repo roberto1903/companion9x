@@ -599,7 +599,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case Beeperlen:
       return 1;
     case ExtraChannels:
-      return 8;
+      return 0;
     case ExtraInputs:
       return 1;
     case HasNegCurves:
