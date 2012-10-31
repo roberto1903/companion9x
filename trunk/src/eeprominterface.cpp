@@ -398,7 +398,10 @@ QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
     case SOURCE_TYPE_PPM:
       return QObject::tr("PPM%1").arg(index+1);
     case SOURCE_TYPE_CH:
-      return QObject::tr("CH%1").arg(index+1);
+      if (index < GetEepromInterface()->getCapability(Outputs))
+        return QObject::tr("CH%1%2").arg((index+1)/10).arg((index+1)%10);
+      else
+        return QObject::tr("X%1").arg(index-GetEepromInterface()->getCapability(Outputs)+1);
     case SOURCE_TYPE_TIMER:
       return QObject::tr("Timer%1").arg(index+1);
     case SOURCE_TYPE_TELEMETRY:

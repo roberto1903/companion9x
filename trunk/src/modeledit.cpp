@@ -932,12 +932,15 @@ void ModelEdit::tabMixes()
     for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
-        if((md->destCh==0) || (md->destCh>GetEepromInterface()->getCapability(Outputs))) break;
+        if((md->destCh==0) || (md->destCh>GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels))) break;
         QString str = "";
         while(curDest<(md->destCh-1))
         {
             curDest++;
-            str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
+            if (curDest > GetEepromInterface()->getCapability(Outputs))
+              str = tr("X%1  ").arg(curDest-GetEepromInterface()->getCapability(Outputs));
+            else
+              str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
             qba.clear();
             qba.append((quint8)-curDest);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -945,7 +948,10 @@ void ModelEdit::tabMixes()
             MixerlistWidget->addItem(itm);
         }
 
-        str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
+        if (md->destCh > GetEepromInterface()->getCapability(Outputs))
+          str = tr("X%1  ").arg(md->destCh-GetEepromInterface()->getCapability(Outputs));
+        else
+          str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
 
         if (curDest != md->destCh)
           curDest = md->destCh;
@@ -1040,10 +1046,15 @@ void ModelEdit::tabMixes()
         MixerlistWidget->addItem(itm);//(str);
     }
 
-    while(curDest<GetEepromInterface()->getCapability(Outputs))
+    while(curDest<GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels))
     {
         curDest++;
-        QString str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
+        QString str;
+
+        if (curDest > GetEepromInterface()->getCapability(Outputs))
+          str = tr("X%1  ").arg(curDest-GetEepromInterface()->getCapability(Outputs));
+        else
+          str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
 
         qba.clear();
         qba.append((quint8)-curDest);
