@@ -2476,7 +2476,7 @@ Enregistrer les changements ?</translation>
         <translation>Délai</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="45"/>
+        <location filename="mixerdialog.cpp" line="49"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
@@ -2572,9 +2572,9 @@ Si activée, signale par des bips que le mixage est actif.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="105"/>
-        <location filename="mixerdialog.cpp" line="25"/>
-        <location filename="mixerdialog.cpp" line="34"/>
-        <location filename="mixerdialog.cpp" line="178"/>
+        <location filename="mixerdialog.cpp" line="29"/>
+        <location filename="mixerdialog.cpp" line="38"/>
+        <location filename="mixerdialog.cpp" line="182"/>
         <location filename="ui_mixerdialog.h" line="440"/>
         <source>Offset</source>
         <translation>Décalage</translation>
@@ -2692,33 +2692,38 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Si Ralentissement est différent de 0, la vitesse du mixage sera la valeur spécifiée -&amp;gt; La valeur représente le nombre de secondes nécessaires à la course -100/100.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="14"/>
+        <location filename="mixerdialog.cpp" line="16"/>
+        <source>DEST -&gt; X%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mixerdialog.cpp" line="18"/>
         <source>DEST -&gt; CH%1%2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="22"/>
-        <location filename="mixerdialog.cpp" line="176"/>
+        <location filename="mixerdialog.cpp" line="26"/>
+        <location filename="mixerdialog.cpp" line="180"/>
         <source>FM Trim Value</source>
         <translation>Trim de phase de vol</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="37"/>
+        <location filename="mixerdialog.cpp" line="41"/>
         <source>Rud</source>
         <translation>Dir</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="38"/>
+        <location filename="mixerdialog.cpp" line="42"/>
         <source>Ele</source>
         <translation>Prf</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="39"/>
+        <location filename="mixerdialog.cpp" line="43"/>
         <source>Thr</source>
         <translation>Gaz</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="40"/>
+        <location filename="mixerdialog.cpp" line="44"/>
         <source>Ail</source>
         <oldsource>Ale</oldsource>
         <translation>Ail</translation>
@@ -2835,12 +2840,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="732"/>
         <location filename="modeledit.ui" line="883"/>
-        <location filename="modeledit.cpp" line="4464"/>
-        <location filename="modeledit.cpp" line="4544"/>
-        <location filename="modeledit.cpp" line="4562"/>
-        <location filename="modeledit.cpp" line="4640"/>
-        <location filename="modeledit.cpp" line="4734"/>
-        <location filename="modeledit.cpp" line="4735"/>
+        <location filename="modeledit.cpp" line="4475"/>
+        <location filename="modeledit.cpp" line="4555"/>
+        <location filename="modeledit.cpp" line="4573"/>
+        <location filename="modeledit.cpp" line="4651"/>
+        <location filename="modeledit.cpp" line="4745"/>
+        <location filename="modeledit.cpp" line="4746"/>
         <location filename="ui_modeledit.h" line="10306"/>
         <location filename="ui_modeledit.h" line="10321"/>
         <source>AIL</source>
@@ -2849,14 +2854,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="718"/>
         <location filename="modeledit.ui" line="873"/>
-        <location filename="modeledit.cpp" line="4438"/>
-        <location filename="modeledit.cpp" line="4445"/>
-        <location filename="modeledit.cpp" line="4543"/>
-        <location filename="modeledit.cpp" line="4563"/>
-        <location filename="modeledit.cpp" line="4615"/>
-        <location filename="modeledit.cpp" line="4617"/>
-        <location filename="modeledit.cpp" line="4730"/>
-        <location filename="modeledit.cpp" line="4731"/>
+        <location filename="modeledit.cpp" line="4449"/>
+        <location filename="modeledit.cpp" line="4456"/>
+        <location filename="modeledit.cpp" line="4554"/>
+        <location filename="modeledit.cpp" line="4574"/>
+        <location filename="modeledit.cpp" line="4626"/>
+        <location filename="modeledit.cpp" line="4628"/>
+        <location filename="modeledit.cpp" line="4741"/>
+        <location filename="modeledit.cpp" line="4742"/>
         <location filename="ui_modeledit.h" line="10304"/>
         <location filename="ui_modeledit.h" line="10320"/>
         <source>ELE</source>
@@ -3029,13 +3034,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="711"/>
         <location filename="modeledit.ui" line="863"/>
-        <location filename="modeledit.cpp" line="4436"/>
-        <location filename="modeledit.cpp" line="4443"/>
-        <location filename="modeledit.cpp" line="4546"/>
-        <location filename="modeledit.cpp" line="4565"/>
-        <location filename="modeledit.cpp" line="4608"/>
-        <location filename="modeledit.cpp" line="4610"/>
-        <location filename="modeledit.cpp" line="4739"/>
+        <location filename="modeledit.cpp" line="4447"/>
+        <location filename="modeledit.cpp" line="4454"/>
+        <location filename="modeledit.cpp" line="4557"/>
+        <location filename="modeledit.cpp" line="4576"/>
+        <location filename="modeledit.cpp" line="4619"/>
+        <location filename="modeledit.cpp" line="4621"/>
+        <location filename="modeledit.cpp" line="4750"/>
         <location filename="ui_modeledit.h" line="10303"/>
         <location filename="ui_modeledit.h" line="10319"/>
         <source>RUD</source>
@@ -3045,9 +3050,9 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="486"/>
         <location filename="modeledit.ui" line="725"/>
         <location filename="modeledit.ui" line="839"/>
-        <location filename="modeledit.cpp" line="4448"/>
-        <location filename="modeledit.cpp" line="4604"/>
-        <location filename="modeledit.cpp" line="4726"/>
+        <location filename="modeledit.cpp" line="4459"/>
+        <location filename="modeledit.cpp" line="4615"/>
+        <location filename="modeledit.cpp" line="4737"/>
         <location filename="ui_modeledit.h" line="10270"/>
         <location filename="ui_modeledit.h" line="10305"/>
         <location filename="ui_modeledit.h" line="10313"/>
@@ -3055,14 +3060,14 @@ p, li { white-space: pre-wrap; }
         <translation>GAZ</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3885"/>
-        <location filename="modeledit.cpp" line="3909"/>
+        <location filename="modeledit.cpp" line="3896"/>
+        <location filename="modeledit.cpp" line="3920"/>
         <source>&amp;Add</source>
         <translation>&amp;Ajouter</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3890"/>
-        <location filename="modeledit.cpp" line="3914"/>
+        <location filename="modeledit.cpp" line="3901"/>
+        <location filename="modeledit.cpp" line="3925"/>
         <source>&amp;Cut</source>
         <translation>C&amp;ouper</translation>
     </message>
@@ -3083,14 +3088,14 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3889"/>
-        <location filename="modeledit.cpp" line="3913"/>
+        <location filename="modeledit.cpp" line="3900"/>
+        <location filename="modeledit.cpp" line="3924"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3886"/>
-        <location filename="modeledit.cpp" line="3910"/>
+        <location filename="modeledit.cpp" line="3897"/>
+        <location filename="modeledit.cpp" line="3921"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edition</translation>
     </message>
@@ -3101,8 +3106,8 @@ p, li { white-space: pre-wrap; }
         <translation>Simulation</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3886"/>
-        <location filename="modeledit.cpp" line="3910"/>
+        <location filename="modeledit.cpp" line="3897"/>
+        <location filename="modeledit.cpp" line="3921"/>
         <source>Enter</source>
         <translation>Entrée</translation>
     </message>
@@ -3133,13 +3138,13 @@ p, li { white-space: pre-wrap; }
         <translation>Incrément trims</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1026"/>
+        <location filename="modeledit.cpp" line="1032"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Ralentissement(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3891"/>
-        <location filename="modeledit.cpp" line="3915"/>
+        <location filename="modeledit.cpp" line="3902"/>
+        <location filename="modeledit.cpp" line="3926"/>
         <source>&amp;Paste</source>
         <translation>&amp;Coller</translation>
     </message>
@@ -3168,7 +3173,7 @@ Left</source>
 Gauche</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1024"/>
+        <location filename="modeledit.cpp" line="1030"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Délai(u%1:d%2)</translation>
     </message>
@@ -3179,8 +3184,8 @@ Gauche</translation>
         <translation>Grossier</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3888"/>
-        <location filename="modeledit.cpp" line="3912"/>
+        <location filename="modeledit.cpp" line="3899"/>
+        <location filename="modeledit.cpp" line="3923"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -3227,7 +3232,7 @@ Gauche</translation>
     <message>
         <location filename="modeledit.ui" line="7085"/>
         <location filename="modeledit.ui" line="7884"/>
-        <location filename="modeledit.cpp" line="1018"/>
+        <location filename="modeledit.cpp" line="1024"/>
         <location filename="ui_modeledit.h" line="10578"/>
         <location filename="ui_modeledit.h" line="10622"/>
         <source>Offset</source>
@@ -3318,7 +3323,7 @@ Gauche</translation>
         <translation>Expo des gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1027"/>
+        <location filename="modeledit.cpp" line="1033"/>
         <source> Warn(%1)</source>
         <translation> Alerte(%1)</translation>
     </message>
@@ -3345,8 +3350,8 @@ Gauche</translation>
         <translation>Voie</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3888"/>
-        <location filename="modeledit.cpp" line="3912"/>
+        <location filename="modeledit.cpp" line="3899"/>
+        <location filename="modeledit.cpp" line="3923"/>
         <source>&amp;Delete</source>
         <translation>&amp;Supprimer</translation>
     </message>
@@ -3453,7 +3458,7 @@ Gauche</translation>
         <translation>Interrupteur personnalisé IP6</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3618"/>
+        <location filename="modeledit.cpp" line="3629"/>
         <source>Delete Selected Mixes?</source>
         <translation>Supprimer mixages sélectionnés ?</translation>
     </message>
@@ -3614,7 +3619,7 @@ Droite</translation>
         <location filename="modeledit.ui" line="14665"/>
         <location filename="modeledit.ui" line="14787"/>
         <location filename="modeledit.cpp" line="889"/>
-        <location filename="modeledit.cpp" line="1004"/>
+        <location filename="modeledit.cpp" line="1010"/>
         <location filename="ui_modeledit.h" line="10383"/>
         <location filename="ui_modeledit.h" line="10399"/>
         <location filename="ui_modeledit.h" line="10415"/>
@@ -3636,40 +3641,40 @@ Droite</translation>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3892"/>
-        <location filename="modeledit.cpp" line="3916"/>
+        <location filename="modeledit.cpp" line="3903"/>
+        <location filename="modeledit.cpp" line="3927"/>
         <source>Du&amp;plicate</source>
         <translation>Du&amp;pliquer</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="232"/>
         <location filename="modeledit.cpp" line="265"/>
-        <location filename="modeledit.cpp" line="3894"/>
-        <location filename="modeledit.cpp" line="3918"/>
+        <location filename="modeledit.cpp" line="3905"/>
+        <location filename="modeledit.cpp" line="3929"/>
         <source>Move Up</source>
         <translation>Monter</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="234"/>
         <location filename="modeledit.cpp" line="267"/>
-        <location filename="modeledit.cpp" line="3894"/>
-        <location filename="modeledit.cpp" line="3918"/>
+        <location filename="modeledit.cpp" line="3905"/>
+        <location filename="modeledit.cpp" line="3929"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Haut</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="235"/>
         <location filename="modeledit.cpp" line="268"/>
-        <location filename="modeledit.cpp" line="3895"/>
-        <location filename="modeledit.cpp" line="3919"/>
+        <location filename="modeledit.cpp" line="3906"/>
+        <location filename="modeledit.cpp" line="3930"/>
         <source>Move Down</source>
         <translation>Descendre</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="237"/>
         <location filename="modeledit.cpp" line="270"/>
-        <location filename="modeledit.cpp" line="3895"/>
-        <location filename="modeledit.cpp" line="3919"/>
+        <location filename="modeledit.cpp" line="3906"/>
+        <location filename="modeledit.cpp" line="3930"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Bas</translation>
     </message>
@@ -4524,34 +4529,34 @@ Droite</translation>
         <translation>Gabarits</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4197"/>
+        <location filename="modeledit.cpp" line="4208"/>
         <source>Apply Template?</source>
         <translation>Appliquer le gabarit ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4197"/>
+        <location filename="modeledit.cpp" line="4208"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Appliquer le gabarit &quot;%1&quot; ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4233"/>
-        <location filename="modeledit.cpp" line="4964"/>
-        <location filename="modeledit.cpp" line="5076"/>
+        <location filename="modeledit.cpp" line="4244"/>
+        <location filename="modeledit.cpp" line="4975"/>
+        <location filename="modeledit.cpp" line="5087"/>
         <source>Clear Mixes?</source>
         <translation>Effacer les mixages ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4233"/>
+        <location filename="modeledit.cpp" line="4244"/>
         <source>Really clear all the mixes?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer tous les mixages ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4244"/>
+        <location filename="modeledit.cpp" line="4255"/>
         <source>Clear Curves?</source>
         <translation>Effacer les courbes ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4244"/>
+        <location filename="modeledit.cpp" line="4255"/>
         <source>Really clear all the curves?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les courbes ?</translation>
     </message>
@@ -4563,7 +4568,7 @@ Droite</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1130"/>
-        <location filename="modeledit.cpp" line="2181"/>
+        <location filename="modeledit.cpp" line="2192"/>
         <location filename="ui_modeledit.h" line="10364"/>
         <source>Heli Setup</source>
         <translation>Hélicoptère</translation>
@@ -4661,7 +4666,7 @@ Droite</translation>
     <message>
         <location filename="modeledit.ui" line="1241"/>
         <location filename="modeledit.cpp" line="862"/>
-        <location filename="modeledit.cpp" line="976"/>
+        <location filename="modeledit.cpp" line="982"/>
         <location filename="ui_modeledit.h" line="10508"/>
         <source>Phases</source>
         <translation>Phases</translation>
@@ -4956,7 +4961,7 @@ Droite</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="847"/>
-        <location filename="modeledit.cpp" line="1672"/>
+        <location filename="modeledit.cpp" line="1683"/>
         <location filename="ui_modeledit.h" line="10316"/>
         <source>ON</source>
         <translation></translation>
@@ -5344,22 +5349,22 @@ Droite</translation>
         <translation type="obsolete"> Phase(</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3361"/>
+        <location filename="modeledit.cpp" line="3372"/>
         <source>Editing curve %1</source>
         <translation>Édition de la courbe %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3657"/>
+        <location filename="modeledit.cpp" line="3668"/>
         <source>Delete Selected Expos?</source>
         <translation>Supprimer les expos sélectionnés ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4222"/>
+        <location filename="modeledit.cpp" line="4233"/>
         <source>Clear Expos?</source>
         <translation>Effacer les expos ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4222"/>
+        <location filename="modeledit.cpp" line="4233"/>
         <source>Really clear all the expos?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
     </message>
@@ -5400,21 +5405,21 @@ Droite</translation>
     <message>
         <location filename="modeledit.cpp" line="864"/>
         <location filename="modeledit.cpp" line="886"/>
-        <location filename="modeledit.cpp" line="978"/>
-        <location filename="modeledit.cpp" line="1001"/>
+        <location filename="modeledit.cpp" line="984"/>
+        <location filename="modeledit.cpp" line="1007"/>
         <source>Phase</source>
         <translation>Phase</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="891"/>
-        <location filename="modeledit.cpp" line="1021"/>
+        <location filename="modeledit.cpp" line="1027"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="940"/>
-        <location filename="modeledit.cpp" line="948"/>
-        <location filename="modeledit.cpp" line="1046"/>
+        <location filename="modeledit.cpp" line="943"/>
+        <location filename="modeledit.cpp" line="954"/>
+        <location filename="modeledit.cpp" line="1057"/>
         <source>CH%1%2</source>
         <translation>VOIE%1%2</translation>
     </message>
@@ -5423,207 +5428,207 @@ Droite</translation>
         <translation type="obsolete">Pas de trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1006"/>
+        <location filename="modeledit.cpp" line="1012"/>
         <source>No Trim</source>
         <translation>Pas de Trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1012"/>
+        <location filename="modeledit.cpp" line="1018"/>
         <source>No DR/Expo</source>
         <translation>Pas d&apos;expo/DR</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1015"/>
+        <location filename="modeledit.cpp" line="1021"/>
         <source>FMTrim</source>
         <translation>Trims des phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1020"/>
+        <location filename="modeledit.cpp" line="1026"/>
         <source>Diff</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1641"/>
+        <location filename="modeledit.cpp" line="1652"/>
         <source>FSW%1</source>
         <translation>FP%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1976"/>
+        <location filename="modeledit.cpp" line="1987"/>
         <source>Winged Shadow How High</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1979"/>
+        <location filename="modeledit.cpp" line="1990"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (non supporté)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2025"/>
-        <location filename="modeledit.cpp" line="2026"/>
+        <location filename="modeledit.cpp" line="2036"/>
+        <location filename="modeledit.cpp" line="2037"/>
         <source>Range</source>
         <translation>Plage</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2176"/>
+        <location filename="modeledit.cpp" line="2187"/>
         <source>Simple 4-CH</source>
         <translation>4 Canaux simple</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2177"/>
+        <location filename="modeledit.cpp" line="2188"/>
         <source>T-Cut</source>
         <translation>Coupure de gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2178"/>
+        <location filename="modeledit.cpp" line="2189"/>
         <source>Sticky T-Cut</source>
         <translation>Coupure de gaz avec maintien (nécessite la remise à 0 du manche pour déverrouiller)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2179"/>
+        <location filename="modeledit.cpp" line="2190"/>
         <source>V-Tail</source>
         <translation>Stabilisateur en V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2180"/>
+        <location filename="modeledit.cpp" line="2191"/>
         <source>Elevon\Delta</source>
         <translation>Elevon, aile delta</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2182"/>
+        <location filename="modeledit.cpp" line="2193"/>
         <source>Heli Setup with gyro gain control</source>
         <translation>Hélicoptère avec contrôle du gain du gyro</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2183"/>
+        <location filename="modeledit.cpp" line="2194"/>
         <source>Gyro gain control</source>
         <translation>Contrôle du gain du gyro pour hélicoptères</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2184"/>
+        <location filename="modeledit.cpp" line="2195"/>
         <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
         <translation>Hélicoptère (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2185"/>
+        <location filename="modeledit.cpp" line="2196"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Hélicoptère avec contrôle du gain du gyro (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2186"/>
+        <location filename="modeledit.cpp" line="2197"/>
         <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Contrôle du gain du gyro pour hélicoptères (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2187"/>
+        <location filename="modeledit.cpp" line="2198"/>
         <source>Servo Test</source>
         <translation>Test de servos (CH15)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2188"/>
+        <location filename="modeledit.cpp" line="2199"/>
         <source>MultiCopter</source>
         <translation>Multicoptère</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2189"/>
+        <location filename="modeledit.cpp" line="2200"/>
         <source>Use Model Config Wizard</source>
         <translation>Utiliser l&apos;assistant de configuration de modèle (BETA - POUR COMMENTAIRES!)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3418"/>
+        <location filename="modeledit.cpp" line="3429"/>
         <source>Not enough available mixers!</source>
         <translation>Plus de mixages disponibles !</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3473"/>
+        <location filename="modeledit.cpp" line="3484"/>
         <source>Not enough available expos!</source>
         <translation>Plus d&apos;expos disponibles !</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3885"/>
-        <location filename="modeledit.cpp" line="3909"/>
+        <location filename="modeledit.cpp" line="3896"/>
+        <location filename="modeledit.cpp" line="3920"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3889"/>
-        <location filename="modeledit.cpp" line="3913"/>
+        <location filename="modeledit.cpp" line="3900"/>
+        <location filename="modeledit.cpp" line="3924"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3890"/>
-        <location filename="modeledit.cpp" line="3914"/>
+        <location filename="modeledit.cpp" line="3901"/>
+        <location filename="modeledit.cpp" line="3925"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3891"/>
-        <location filename="modeledit.cpp" line="3915"/>
+        <location filename="modeledit.cpp" line="3902"/>
+        <location filename="modeledit.cpp" line="3926"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3892"/>
-        <location filename="modeledit.cpp" line="3916"/>
+        <location filename="modeledit.cpp" line="3903"/>
+        <location filename="modeledit.cpp" line="3927"/>
         <source>Ctrl+U</source>
         <translation>Ctlf+U</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4080"/>
+        <location filename="modeledit.cpp" line="4091"/>
         <source>Are you sure you want to delete curve %1 ?</source>
         <translation>Etes-vous sûr de vouloir effacer la courbe %1?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4471"/>
-        <location filename="modeledit.cpp" line="4477"/>
-        <location filename="modeledit.cpp" line="4647"/>
-        <location filename="modeledit.cpp" line="4653"/>
+        <location filename="modeledit.cpp" line="4482"/>
+        <location filename="modeledit.cpp" line="4488"/>
+        <location filename="modeledit.cpp" line="4658"/>
+        <location filename="modeledit.cpp" line="4664"/>
         <source>AIL2</source>
         <translation>AIL2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4494"/>
-        <location filename="modeledit.cpp" line="4495"/>
-        <location filename="modeledit.cpp" line="4670"/>
-        <location filename="modeledit.cpp" line="4671"/>
-        <location filename="modeledit.cpp" line="4765"/>
-        <location filename="modeledit.cpp" line="4766"/>
+        <location filename="modeledit.cpp" line="4505"/>
+        <location filename="modeledit.cpp" line="4506"/>
+        <location filename="modeledit.cpp" line="4681"/>
+        <location filename="modeledit.cpp" line="4682"/>
+        <location filename="modeledit.cpp" line="4776"/>
+        <location filename="modeledit.cpp" line="4777"/>
         <source>FLAPS</source>
         <translation>VOLETS</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4509"/>
-        <location filename="modeledit.cpp" line="4515"/>
-        <location filename="modeledit.cpp" line="4685"/>
-        <location filename="modeledit.cpp" line="4691"/>
-        <location filename="modeledit.cpp" line="4780"/>
-        <location filename="modeledit.cpp" line="4786"/>
+        <location filename="modeledit.cpp" line="4520"/>
+        <location filename="modeledit.cpp" line="4526"/>
+        <location filename="modeledit.cpp" line="4696"/>
+        <location filename="modeledit.cpp" line="4702"/>
+        <location filename="modeledit.cpp" line="4791"/>
+        <location filename="modeledit.cpp" line="4797"/>
         <source>FLAP%1</source>
         <translation>VOLET%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4545"/>
-        <location filename="modeledit.cpp" line="4564"/>
+        <location filename="modeledit.cpp" line="4556"/>
+        <location filename="modeledit.cpp" line="4575"/>
         <source>PITCH</source>
         <translation>PAS</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4553"/>
-        <location filename="modeledit.cpp" line="4554"/>
-        <location filename="modeledit.cpp" line="4557"/>
-        <location filename="modeledit.cpp" line="4558"/>
-        <location filename="modeledit.cpp" line="4572"/>
-        <location filename="modeledit.cpp" line="4573"/>
-        <location filename="modeledit.cpp" line="4576"/>
-        <location filename="modeledit.cpp" line="4577"/>
+        <location filename="modeledit.cpp" line="4564"/>
+        <location filename="modeledit.cpp" line="4565"/>
+        <location filename="modeledit.cpp" line="4568"/>
+        <location filename="modeledit.cpp" line="4569"/>
+        <location filename="modeledit.cpp" line="4583"/>
+        <location filename="modeledit.cpp" line="4584"/>
+        <location filename="modeledit.cpp" line="4587"/>
+        <location filename="modeledit.cpp" line="4588"/>
         <source>GYRO</source>
         <translation>GYRO</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4484"/>
-        <location filename="modeledit.cpp" line="4490"/>
-        <location filename="modeledit.cpp" line="4660"/>
-        <location filename="modeledit.cpp" line="4666"/>
+        <location filename="modeledit.cpp" line="4495"/>
+        <location filename="modeledit.cpp" line="4501"/>
+        <location filename="modeledit.cpp" line="4671"/>
+        <location filename="modeledit.cpp" line="4677"/>
         <source>ELE2</source>
         <translation>PROF2</translation>
     </message>
@@ -5649,40 +5654,47 @@ Droite</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="881"/>
-        <location filename="modeledit.cpp" line="995"/>
+        <location filename="modeledit.cpp" line="1001"/>
         <source>DISABLED</source>
         <translation>DESACTIVE</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4695"/>
-        <location filename="modeledit.cpp" line="4696"/>
+        <location filename="modeledit.cpp" line="941"/>
+        <location filename="modeledit.cpp" line="952"/>
+        <location filename="modeledit.cpp" line="1055"/>
+        <source>X%1  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="modeledit.cpp" line="4706"/>
+        <location filename="modeledit.cpp" line="4707"/>
         <source>SPOIL</source>
         <translation>SPOIL</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4710"/>
-        <location filename="modeledit.cpp" line="4716"/>
+        <location filename="modeledit.cpp" line="4721"/>
+        <location filename="modeledit.cpp" line="4727"/>
         <source>SPOIL%1</source>
         <translation>SPOIL%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4755"/>
-        <location filename="modeledit.cpp" line="4761"/>
+        <location filename="modeledit.cpp" line="4766"/>
+        <location filename="modeledit.cpp" line="4772"/>
         <source>RUD2</source>
         <translation>DIR2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4964"/>
+        <location filename="modeledit.cpp" line="4975"/>
         <source>Really clear existing mixes on CH6?</source>
         <translation>Voulez-vous vraiment effacer tous les mixages du canal 6?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5076"/>
+        <location filename="modeledit.cpp" line="5087"/>
         <source>Really clear existing mixes on CH5?</source>
         <translation>Voulez-vous vraiment effacer tous les mixages du canal 5?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5173"/>
+        <location filename="modeledit.cpp" line="5184"/>
         <source>Not enough free points in eeprom to store the curve.</source>
         <oldsource>Not enought points free in eeprom to store the curve.</oldsource>
         <translation>Pas assez de points libres dans l&apos;eeprom pour enregistrer la courbe.</translation>
@@ -6040,44 +6052,49 @@ Droite</translation>
         <translation>Touches + manches</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="407"/>
-        <location filename="eeprominterface.cpp" line="462"/>
+        <location filename="helpers.cpp" line="660"/>
+        <source>GV%1</source>
+        <translation type="unfinished">VG%1</translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="410"/>
+        <location filename="eeprominterface.cpp" line="465"/>
         <location filename="helpers.cpp" line="401"/>
         <source>----</source>
         <translation>----</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="418"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>RUD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="418"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>ELE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="418"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>THR</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="419"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="419"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="419"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="420"/>
+        <location filename="eeprominterface.cpp" line="423"/>
         <source>AIL</source>
         <translation></translation>
     </message>
@@ -6326,30 +6343,39 @@ Droite</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="401"/>
-        <source>CH%1</source>
-        <translation>VOIE%1</translation>
+        <location filename="eeprominterface.cpp" line="402"/>
+        <source>CH%1%2</source>
+        <translation type="unfinished">VOIE%1%2</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="403"/>
+        <location filename="eeprominterface.cpp" line="404"/>
+        <source>X%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CH%1</source>
+        <translation type="obsolete">VOIE%1</translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="406"/>
         <source>Timer%1</source>
         <translation>Chrono%1</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="420"/>
+        <location filename="eeprominterface.cpp" line="423"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="420"/>
+        <location filename="eeprominterface.cpp" line="423"/>
         <source>TRN</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="435"/>
-        <location filename="eeprominterface.cpp" line="437"/>
-        <location filename="eeprominterface.cpp" line="457"/>
-        <location filename="eeprominterface.cpp" line="459"/>
+        <location filename="eeprominterface.cpp" line="438"/>
+        <location filename="eeprominterface.cpp" line="440"/>
+        <location filename="eeprominterface.cpp" line="460"/>
+        <location filename="eeprominterface.cpp" line="462"/>
         <source>CS%1</source>
         <translation>SW%1</translation>
     </message>
@@ -6358,18 +6384,18 @@ Droite</translation>
         <translation type="obsolete">INTER%1</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="440"/>
+        <location filename="eeprominterface.cpp" line="443"/>
         <location filename="helpers.cpp" line="548"/>
         <source>ON</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="442"/>
+        <location filename="eeprominterface.cpp" line="445"/>
         <source>mON</source>
         <translation>mON</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="444"/>
+        <location filename="eeprominterface.cpp" line="447"/>
         <location filename="helpers.cpp" line="548"/>
         <source>OFF</source>
         <translation></translation>
@@ -6581,7 +6607,7 @@ Droite</translation>
         <translation>Activer le menu hélico et les mixages CCPM</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="619"/>
+        <location filename="eeprominterface.cpp" line="622"/>
         <source>ersky9x</source>
         <translation></translation>
     </message>
@@ -6907,12 +6933,12 @@ Droite</translation>
         <translation>open9x accepte jusqu&apos;à %1 expos</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="600"/>
+        <location filename="eeprominterface.cpp" line="603"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="602"/>
+        <location filename="eeprominterface.cpp" line="605"/>
         <source>er9x</source>
         <translation>er9x</translation>
     </message>
@@ -6929,7 +6955,7 @@ Droite</translation>
         <translation type="obsolete">er9x - FrSky, sans les menus hélicos et templates</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="609"/>
+        <location filename="eeprominterface.cpp" line="612"/>
         <source>gruvin9x stable for stock board</source>
         <translation>gruvin9x stable pour carte d&apos;origine</translation>
     </message>
@@ -6946,12 +6972,12 @@ Droite</translation>
         <translation type="obsolete">gruvin9x stable pour la carte d&apos;origine - FrSky, speaker</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="614"/>
+        <location filename="eeprominterface.cpp" line="617"/>
         <source>gruvin9x stable for v4 board</source>
         <translation>gruvin9x stable pour carte v4</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="613"/>
+        <location filename="eeprominterface.cpp" line="616"/>
         <source>gruvin9x trunk for stock board</source>
         <translation>gruvin9x trunk pour carte d&apos;origine</translation>
     </message>
@@ -6968,7 +6994,7 @@ Droite</translation>
         <translation type="obsolete">gruvin9x trunk pour la carte d&apos;origine - FrSky, speaker</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="615"/>
+        <location filename="eeprominterface.cpp" line="618"/>
         <source>gruvin9x trunk for v4 board</source>
         <translation>gruvin9x trunk pour carte v4</translation>
     </message>
@@ -7041,7 +7067,7 @@ Droite</translation>
     <message>
         <location filename="ersky9xinterface.cpp" line="199"/>
         <location filename="mdichild.cpp" line="137"/>
-        <location filename="modeledit.cpp" line="4065"/>
+        <location filename="modeledit.cpp" line="4076"/>
         <location filename="open9xinterface.cpp" line="482"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
@@ -7087,7 +7113,7 @@ Droite</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="138"/>
-        <location filename="modeledit.cpp" line="4066"/>
+        <location filename="modeledit.cpp" line="4077"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation>Le simulateur n&apos;est pas encore disponible pour ce firmware</translation>
     </message>
@@ -7137,13 +7163,13 @@ Les réglages d&apos;expo ont changé, veuillez vérifier avant de voler!</trans
     </message>
     <message>
         <location filename="modeledit.cpp" line="754"/>
-        <location filename="modeledit.cpp" line="2205"/>
+        <location filename="modeledit.cpp" line="2216"/>
         <source>Flight Phase 0 (Default)</source>
         <translation>Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="756"/>
-        <location filename="modeledit.cpp" line="2207"/>
+        <location filename="modeledit.cpp" line="2218"/>
         <source>FP %1</source>
         <translation>PV %1</translation>
     </message>
