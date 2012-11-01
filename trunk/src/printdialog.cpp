@@ -2,6 +2,7 @@
 #include "ui_printdialog.h"
 #include "helpers.h"
 #include "eeprominterface.h"
+#include <unistd.h>
 #include <QtGui>
 #include <QImage>
 #include <QColor>
