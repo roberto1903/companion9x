@@ -653,9 +653,9 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case TelemetryCSFields:
       if  (board==BOARD_SKY9X) {
-        return 16;
+        return 24;
       } else {
-        return 8;
+        return 16;
       }
     case TelemetryUnits:
       return 1;
@@ -852,11 +852,6 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
   return true;
 }
 
-#define OPEN9X_PREFIX_URL "http://85.18.253.250/getfw.php?fw="
-const char * OPEN9X_STOCK_STAMP = "http://85.18.253.250/binaries/stamp-open9x-stock.txt";
-const char * OPEN9X_V4_STAMP = "http://85.18.253.250/binaries/stamp-open9x-v4.txt";
-const char * OPEN9X_ARM_STAMP = "http://85.18.253.250/binaries/stamp-open9x-arm.txt";
-
 QString geturl( int board) {
     QString url="http://";
     QSettings settings("companion9x", "companion9x");
@@ -870,10 +865,10 @@ QString geturl( int board) {
       case BOARD_STOCK:
       case BOARD_M128:
       case BOARD_GRUVIN9X:
-        url.append("//getfw.php?fw=%1.hex");
+        url.append("/getfw.php?fw=%1.hex");
         break;
       case BOARD_SKY9X:
-        url.append("//getfw.php?fw=%1.bin");
+        url.append("/getfw.php?fw=%1.bin");
         break;
       default:
         url.clear();
