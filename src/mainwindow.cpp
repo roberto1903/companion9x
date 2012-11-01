@@ -72,6 +72,8 @@
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
+#else
+#include <unistd.h>
 #endif
 
 MainWindow::MainWindow():
