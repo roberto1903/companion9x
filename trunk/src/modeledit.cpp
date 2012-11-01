@@ -1978,7 +1978,8 @@ void ModelEdit::tabTelemetry()
       ui->tabCsView->removeTab(2);
     }
     for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
-      populatecsFieldCB(csf[i], g_model.frsky.screens[1].body.cells[i], ((i % 8)<6),g_model.frsky.usrProto);
+      int screen=i/8;
+      populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6),g_model.frsky.usrProto);
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
   }
