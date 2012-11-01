@@ -31,8 +31,9 @@ private:
 
     QSpinBox* spny[17];
     QSpinBox* spnx[17];
-    QDoubleSpinBox* minSB[4];
-    QDoubleSpinBox* maxSB[4];
+    QComboBox* barsCB[12];
+    QDoubleSpinBox* minSB[12];
+    QDoubleSpinBox* maxSB[12];
     QComboBox* csf[24];
     QComboBox* csw[NUM_CSW];
     MixersList *ExposlistWidget;
@@ -271,6 +272,7 @@ private slots:
     void on_varioLimitMinOff_ChkB_toggled(bool checked);
     void on_varioLimitMax_DSB_editingFinished();
     void telBarCBcurrentIndexChanged(int index);
+    void ScreenTypeCBcurrentIndexChanged(int index);
     void telMaxSBeditingFinished();
     void telMinSBeditingFinished();
     void customFieldEdited();

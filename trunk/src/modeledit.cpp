@@ -1912,13 +1912,19 @@ void ModelEdit::tabTelemetry()
   float a2ratio;
   const char *  StdTelBar[]={"---","Tmr1","Tmr2","TX","RX","A1","A2",NULL};
   const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell",NULL};
-  
-  QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
-  QDoubleSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
-  QDoubleSpinBox* maxsb[4] = { ui->telMaxSB_1,  ui->telMaxSB_2,  ui->telMaxSB_3,  ui->telMaxSB_4};
-  QComboBox* tmp[24] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
-                                       ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB,
-                                       ui->telemetryCSF17_CB, ui->telemetryCSF18_CB, ui->telemetryCSF19_CB, ui->telemetryCSF20_CB, ui->telemetryCSF21_CB, ui->telemetryCSF22_CB, ui->telemetryCSF23_CB, ui->telemetryCSF24_CB};
+  QComboBox* barscb[12] = { ui->telBarCS1B1_CB, ui->telBarCS1B2_CB,  ui->telBarCS1B3_CB,  ui->telBarCS1B4_CB,
+                                             ui->telBarCS2B1_CB, ui->telBarCS2B2_CB,  ui->telBarCS2B3_CB,  ui->telBarCS2B4_CB,
+                                             ui->telBarCS3B1_CB, ui->telBarCS3B2_CB,  ui->telBarCS3B3_CB,  ui->telBarCS3B4_CB};
+  QDoubleSpinBox* minsb[12] = { ui->telMinCS1SB1,  ui->telMinCS1SB2,  ui->telMinCS1SB3,  ui->telMinCS1SB4,
+                                               ui->telMinCS2SB1,  ui->telMinCS2SB2,  ui->telMinCS2SB3,  ui->telMinCS2SB4,
+                                               ui->telMinCS3SB1,  ui->telMinCS3SB2,  ui->telMinCS3SB3,  ui->telMinCS3SB4};
+  QDoubleSpinBox* maxsb[12] = { ui->telMaxCS1SB1,  ui->telMaxCS1SB2,  ui->telMaxCS1SB3,  ui->telMaxCS1SB4,
+                                               ui->telMaxCS2SB1,  ui->telMaxCS2SB2,  ui->telMaxCS2SB3,  ui->telMaxCS2SB4,
+                                               ui->telMaxCS3SB1,  ui->telMaxCS3SB2,  ui->telMaxCS3SB3,  ui->telMaxCS3SB4};
+  QComboBox* tmp[24] = { ui->telemetryCS1F1_CB, ui->telemetryCS1F2_CB, ui->telemetryCS1F3_CB, ui->telemetryCS1F4_CB, ui->telemetryCS1F5_CB, ui->telemetryCS1F6_CB, ui->telemetryCS1F7_CB, ui->telemetryCS1F8_CB,
+                                        ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB,
+                                        ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB};
+  memcpy(barsCB, barscb, sizeof(barsCB));
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
   memcpy(csf, tmp, sizeof(csf));
@@ -1927,6 +1933,34 @@ void ModelEdit::tabTelemetry()
 //                                     ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB,
 //                                     ui->telemetryCSF17_CB, ui->telemetryCSF18_CB, ui->telemetryCSF19_CB, ui->telemetryCSF20_CB, ui->telemetryCSF21_CB, ui->telemetryCSF22_CB, ui->telemetryCSF23_CB, ui->telemetryCSF24_CB};
   telemetryLock=true;
+  ui->telemetryCSType1->setCurrentIndex(g_model.frsky.screens[0].type);
+  ui->telemetryCSType2->setCurrentIndex(g_model.frsky.screens[1].type);
+  ui->telemetryCSType3->setCurrentIndex(g_model.frsky.screens[2].type);
+  if (g_model.frsky.screens[0].type==0) {
+    ui->CS1Bars->hide();
+    ui->CS1Nums->show();    
+  } else{
+    ui->CS1Bars->show();
+    ui->CS1Nums->hide();
+  }
+  if (g_model.frsky.screens[1].type==0) {
+    ui->CS2Bars->hide();
+    ui->CS2Nums->show();    
+  } else{
+    ui->CS2Bars->show();
+    ui->CS2Nums->hide();
+  }
+  if (g_model.frsky.screens[2].type==0) {
+    ui->CS3Bars->hide();
+    ui->CS3Nums->show();    
+  } else{
+    ui->CS3Bars->show();
+    ui->CS3Nums->hide();
+  }
+  connect(ui->telemetryCSType1,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
+  connect(ui->telemetryCSType2,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
+  connect(ui->telemetryCSType3,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
+
   //frsky Settings
   if (!GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
     ui->RSSIGB->hide();
@@ -1936,9 +1970,6 @@ void ModelEdit::tabTelemetry()
   ui->rssiAlarm1CB->setCurrentIndex(g_model.frsky.rssiAlarms[0].level);
   ui->rssiAlarm2CB->setCurrentIndex(g_model.frsky.rssiAlarms[1].level);
   
-  if (!GetEepromInterface()->getCapability(TelemetryBars)) {
-    ui->groupBox_4->hide();
-  }
   if (!GetEepromInterface()->getCapability(HasAltitudeSel)) {
     ui->AltitudeGPS_CB->hide();
   } else {
@@ -2638,104 +2669,56 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   if (telemetryLock) return;
   const char *  StdTelBar[]={"---","Tmr1","Tmr2","TX","RX","A1","A2",NULL};
   const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell",NULL};
-  int b1=ui->telBarCB_1->currentIndex();
-  int b2=ui->telBarCB_2->currentIndex();
-  int b3=ui->telBarCB_3->currentIndex();
-  int b4=ui->telBarCB_4->currentIndex();
+  int bindex[12];
   telemetryLock=true;
-  g_model.frsky.usrProto=index;
-  ui->telBarCB_1->clear();
-  ui->telBarCB_2->clear();
-  ui->telBarCB_3->clear();
-  ui->telBarCB_4->clear();
-  for(int i=0; StdTelBar[i];i++) {
-    ui->telBarCB_1->addItem(StdTelBar[i]);
-    ui->telBarCB_2->addItem(StdTelBar[i]);
-    ui->telBarCB_3->addItem(StdTelBar[i]);
-    ui->telBarCB_4->addItem(StdTelBar[i]);
-  }
-  if (index!=0) {
-    ui->telBarCB_1->addItem("Alt");
-    ui->telBarCB_2->addItem("Alt");
-    ui->telBarCB_3->addItem("Alt");
-    ui->telBarCB_4->addItem("Alt");
-  }
-  if (index==1) {
-    for(int i=0; FrSkyTelBar[i];i++) {
-      ui->telBarCB_1->addItem(FrSkyTelBar[i]);
-      ui->telBarCB_2->addItem(FrSkyTelBar[i]);
-      ui->telBarCB_3->addItem(FrSkyTelBar[i]);
-      ui->telBarCB_4->addItem(FrSkyTelBar[i]);
+  for (int i=0; i<12; i++) {
+    bindex[i]=barsCB[i]->currentIndex();
+    g_model.frsky.usrProto=index;
+    barsCB[i]->clear();
+    for(int j=0; StdTelBar[j];j++) {
+      barsCB[i]->addItem(StdTelBar[j]);
+    }
+    if (index!=0) {
+      barsCB[i]->addItem("Alt");
+    }
+    if (index==1) {
+      for(int j=0; FrSkyTelBar[j];j++) {
+        barsCB[i]->addItem(FrSkyTelBar[j]);
+      }
     }
   }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
   } else {
-    for (int i=0; i<8; i++) {
-      csf[i]->clear();
-      populatecsFieldCB(csf[i], g_model.frsky.screens[1].body.cells[i], (i<6),g_model.frsky.usrProto);
+    for (int j=0; j<24; j++) {
+      int screen=j/8;
+      csf[j]->clear();
+      populatecsFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6),g_model.frsky.usrProto);
     }
   }
-  
-  
   telemetryLock=false;
   if (index==0) {
-    if (b1>2) {
-      ui->telBarCB_1->setCurrentIndex(0);
+    for (int i=0; i<12; i++) {
+      if (bindex[i]>2) {
+        barsCB[i]->setCurrentIndex(0);
+      }
+      else {
+        barsCB[i]->setCurrentIndex(bindex[i]);
+      }
     }
-    else {
-      ui->telBarCB_1->setCurrentIndex(b1);
+  } else if (index==2) {
+    for (int i=0; i<12; i++) {
+      if (bindex[i]>3) {
+        barsCB[i]->setCurrentIndex(0);
+      }
+      else {
+        barsCB[i]->setCurrentIndex(bindex[i]);
+      }
     }
-    if (b2>2) {
-      ui->telBarCB_2->setCurrentIndex(0);
+  } else {
+    for (int i=0; i<12; i++) {
+      barsCB[i]->setCurrentIndex(bindex[i]);
     }
-    else {
-      ui->telBarCB_2->setCurrentIndex(b2);
-    }
-    if (b3>2) {
-      ui->telBarCB_3->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_3->setCurrentIndex(b3);
-    }
-    if (b4>2) {
-      ui->telBarCB_4->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_4->setCurrentIndex(b4);
-    }
-  } 
-  else if (index==2) {
-    if (b1>3) {
-      ui->telBarCB_1->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_1->setCurrentIndex(b1);
-    }
-    if (b2>3) {
-      ui->telBarCB_2->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_2->setCurrentIndex(b2);
-    }
-    if (b3>3) {
-      ui->telBarCB_3->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_3->setCurrentIndex(b3);
-    }
-    if (b4>3) {
-      ui->telBarCB_4->setCurrentIndex(0);
-    }
-    else {
-      ui->telBarCB_4->setCurrentIndex(b4);
-    }
-  }
-  else {
-      ui->telBarCB_1->setCurrentIndex(b1);
-      ui->telBarCB_2->setCurrentIndex(b2);
-      ui->telBarCB_3->setCurrentIndex(b3);
-      ui->telBarCB_4->setCurrentIndex(b4);    
   }
   updateSettings();
 }
@@ -3076,9 +3059,8 @@ void ModelEdit::on_varioLimitMax_DSB_editingFinished()
 void ModelEdit::telBarUpdate() 
 {
   int index;
-  QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   telemetryLock=true;
-  for (int i=0; i<4; i++) {
+  for (int i=0; i<12; i++) {
     index=barsCB[i]->currentIndex();
     if (index==5 || index==6) {
       minSB[i]->setMinimum(getBarValue(index,0));
@@ -3092,6 +3074,37 @@ void ModelEdit::telBarUpdate()
     }
   }
   telemetryLock=false;
+}
+
+void ModelEdit::ScreenTypeCBcurrentIndexChanged(int index) {
+  if (telemetryLock) return;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int screen = comboBox->objectName().right(1).toInt() -1;
+  telemetryLock=true;
+  g_model.frsky.screens[screen].type=index;
+  if (g_model.frsky.screens[0].type==0) {
+    ui->CS1Bars->hide();
+    ui->CS1Nums->show();    
+  } else{
+    ui->CS1Bars->show();
+    ui->CS1Nums->hide();
+  }
+  if (g_model.frsky.screens[1].type==0) {
+    ui->CS2Bars->hide();
+    ui->CS2Nums->show();    
+  } else{
+    ui->CS2Bars->show();
+    ui->CS2Nums->hide();
+  }
+  if (g_model.frsky.screens[2].type==0) {
+    ui->CS3Bars->hide();
+    ui->CS3Nums->show();    
+  } else{
+    ui->CS3Bars->show();
+    ui->CS3Nums->hide();
+  }
+  telemetryLock=false;
+  updateSettings();
 }
 
 void ModelEdit::telBarCBcurrentIndexChanged(int index) {
