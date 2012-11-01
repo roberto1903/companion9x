@@ -1761,14 +1761,10 @@ void ModelEdit::tabSafetySwitches()
 }
 void ModelEdit::customFieldEdited() {
   if (telemetryLock) return;
-  g_model.frsky.screens[1].body.cells[0]=ui->telemetryCSF1_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[1]=ui->telemetryCSF2_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[2]=ui->telemetryCSF3_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[3]=ui->telemetryCSF4_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[4]=ui->telemetryCSF5_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[5]=ui->telemetryCSF6_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[6]=ui->telemetryCSF7_CB->currentIndex();
-  g_model.frsky.screens[1].body.cells[7]=ui->telemetryCSF8_CB->currentIndex();
+  for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
+    int screen=i/8;
+    g_model.frsky.screens[screen].body.cells[i % 8]=csf[i]->currentIndex();
+  }
   updateSettings();
 }
 
@@ -1920,14 +1916,16 @@ void ModelEdit::tabTelemetry()
   QComboBox* barsCB[4] = { ui->telBarCB_1, ui->telBarCB_2,  ui->telBarCB_3,  ui->telBarCB_4};
   QDoubleSpinBox* minsb[4] = { ui->telMinSB_1,  ui->telMinSB_2,  ui->telMinSB_3,  ui->telMinSB_4};
   QDoubleSpinBox* maxsb[4] = { ui->telMaxSB_1,  ui->telMaxSB_2,  ui->telMaxSB_3,  ui->telMaxSB_4};
-  QComboBox* tmp[16] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
-                                       ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB};
+  QComboBox* tmp[24] = {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
+                                       ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB,
+                                       ui->telemetryCSF17_CB, ui->telemetryCSF18_CB, ui->telemetryCSF19_CB, ui->telemetryCSF20_CB, ui->telemetryCSF21_CB, ui->telemetryCSF22_CB, ui->telemetryCSF23_CB, ui->telemetryCSF24_CB};
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
   memcpy(csf, tmp, sizeof(csf));
     
-  QComboBox* csf[16] =  {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
-                                     ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB};
+//  QComboBox* csf[24] =  {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
+//                                     ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB,
+//                                     ui->telemetryCSF17_CB, ui->telemetryCSF18_CB, ui->telemetryCSF19_CB, ui->telemetryCSF20_CB, ui->telemetryCSF21_CB, ui->telemetryCSF22_CB, ui->telemetryCSF23_CB, ui->telemetryCSF24_CB};
   telemetryLock=true;
   //frsky Settings
   if (!GetEepromInterface()->getCapability(TelemetryRSSIModel) ) {
@@ -1974,8 +1972,12 @@ void ModelEdit::tabTelemetry()
   } else {
     if (GetEepromInterface()->getCapability(TelemetryCSFields)==8) {
       ui->tabCsView->removeTab(1);
+      ui->tabCsView->removeTab(2);
     }
-    for (int i=0; i<16; i++) {
+    if (GetEepromInterface()->getCapability(TelemetryCSFields)==16) {
+      ui->tabCsView->removeTab(2);
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
       populatecsFieldCB(csf[i], g_model.frsky.screens[1].body.cells[i], ((i % 8)<6),g_model.frsky.usrProto);
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
