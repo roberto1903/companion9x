@@ -2012,7 +2012,11 @@ void ModelEdit::tabTelemetry()
     }
     for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
       int screen=i/8;
-      populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6),g_model.frsky.usrProto);
+      if (g_model.frsky.screens[screen].type==0)  {
+        populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6),g_model.frsky.usrProto);
+      } else {
+        populatecsFieldCB(csf[i], 0, ((i % 8)<6),g_model.frsky.usrProto);
+      }
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
   }
@@ -2078,18 +2082,18 @@ void ModelEdit::tabTelemetry()
   ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
   ui->frskyVoltCB->setCurrentIndex(g_model.frsky.voltsSource);
   for(int i=0; StdTelBar[i];i++) {
-    for (int j=0;j<4;j++) {
+    for (int j=0;j<12;j++) {
       barsCB[j]->addItem(StdTelBar[i]);
     }
   }
   if (g_model.frsky.usrProto!=0) {
-    for (int j=0;j<4;j++) {
+    for (int j=0;j<12;j++) {
       barsCB[j]->addItem("Alt");
     }
   }
   if (g_model.frsky.usrProto==1) {
     for(int i=0; FrSkyTelBar[i];i++) {
-      for (int j=0;j<4;j++) {
+      for (int j=0;j<12;j++) {
         barsCB[j]->addItem(FrSkyTelBar[i]);
       }
     }
@@ -2097,26 +2101,28 @@ void ModelEdit::tabTelemetry()
 
   for (int j=0;j<12;j++) {
     int screen=j/4;
-    barsCB[j]->setCurrentIndex(g_model.frsky.screens[screen].body.bars[j].source);
-    if (g_model.frsky.screens[screen].body.bars[j%4].source==5 || g_model.frsky.screens[screen].body.bars[j%4].source==6 || g_model.frsky.screens[screen].body.bars[j%4].source==15) {
-      minsb[j]->setDecimals(1);
-      maxsb[j]->setDecimals(1);
-    } else {
-      minsb[j]->setDecimals(0);
-      maxsb[j]->setDecimals(0);
+    if (g_model.frsky.screens[screen].type==1) {
+      barsCB[j]->setCurrentIndex(g_model.frsky.screens[screen].body.bars[j].source);
+      if (g_model.frsky.screens[screen].body.bars[j%4].source==5 || g_model.frsky.screens[screen].body.bars[j%4].source==6 || g_model.frsky.screens[screen].body.bars[j%4].source==15) {
+        minsb[j]->setDecimals(1);
+        maxsb[j]->setDecimals(1);
+      } else {
+        minsb[j]->setDecimals(0);
+        maxsb[j]->setDecimals(0);
+      }
+      if (g_model.frsky.screens[screen].body.bars[j%4].source==0) {
+        minsb[j]->setDisabled(true);
+        maxsb[j]->setDisabled(true);
+      }
+      minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
+      minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,51));
+      minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
+      minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,g_model.frsky.screens[screen].body.bars[j%4].barMin));
+      maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
+      maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,51));
+      maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
+      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,(51-g_model.frsky.screens[screen].body.bars[j%4].barMax)));
     }
-    if (g_model.frsky.screens[screen].body.bars[j%4].source==0) {
-      minsb[j]->setDisabled(true);
-      maxsb[j]->setDisabled(true);
-    }
-    minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
-    minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,51));
-    minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-    minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,g_model.frsky.screens[screen].body.bars[j%4].barMin));
-    maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
-    maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,51));
-    maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-    maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,(51-g_model.frsky.screens[screen].body.bars[j%4].barMax)));
     connect(barsCB[j],SIGNAL(currentIndexChanged(int)),this,SLOT(telBarCBcurrentIndexChanged(int)));
     connect(maxSB[j],SIGNAL(editingFinished()),this,SLOT(telMaxSBeditingFinished()));
     connect(minSB[j],SIGNAL(editingFinished()),this,SLOT(telMinSBeditingFinished()));
