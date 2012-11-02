@@ -1437,7 +1437,7 @@ t_Open9xArmMixData_v213::t_Open9xArmMixData_v213(MixData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
   }
   else {
-    memset(this, 0, sizeof(t_Open9xArmMixData_v210));
+    memset(this, 0, sizeof(t_Open9xArmMixData_v213));
   }
 }
 

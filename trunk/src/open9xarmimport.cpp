@@ -62,6 +62,7 @@ namespace Open9xARM {
 #include "../open9x/sky9x/audio.cpp"
 #include "../open9x/sky9x/sound_driver.cpp"
 #include "../open9x/sky9x/sdcard_driver.cpp"
+#include "../open9x/sky9x/haptic_driver.cpp"
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
