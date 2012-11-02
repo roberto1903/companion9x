@@ -455,63 +455,91 @@ QString  compareDialog::getFrSkySrc(int index) {
 float compareDialog::getBarValue(int barId, int Value, FrSkyData *fd) 
 {
   switch (barId) {
-    case 1:
-    case 2:
-      return (15*Value);
+    case TELEM_TM1:
+    case TELEM_TM2:
+      return (3*Value);
       break;
-    case 3:
-      if (fd->channels[0].type==0) {
-        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset)/10;
-      }
-      else {
-        return ((fd->channels[0].ratio*Value/51.0)+fd->channels[0].offset);
-      }
-      break;
-    case 4:
-      if (fd->channels[1].type==0) {
-        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset)/10;
-      }
-      else {
-        return ((fd->channels[1].ratio*Value/51.0)+fd->channels[1].offset);
-      }
-       
-      // return ((ui->a2RatioSB->value()*Value/51.0)+ui->a2CalibSB->value());
-      break;
-    case 5:
-    case 6:
-      if (Value>20) {
+    case TELEM_RSSI_TX:
+    case TELEM_RSSI_RX:
+    case TELEM_FUEL:
+      if (Value>100) {
         return 100;
       } else {
-        return (5*Value);
+        return Value;
       }
       break;
-    case 7:
-      return (20*Value);
-      break;
-    case 8:
-      if (Value>50) {
-        return 12500;
+    case TELEM_A1:
+    case TELEM_MIN_A1:
+      if (fd->channels[0].type==0) {
+        return ((fd->channels[0].ratio*Value/255.0)+fd->channels[0].offset)/10;
       } else {
-        return (250*Value);
+        return ((fd->channels[0].ratio*Value/255.0)+fd->channels[0].offset);
       }
       break;
-    case 10:
-    case 11:
-      return ((5*Value)-30);
+    case TELEM_A2:
+    case TELEM_MIN_A2:
+      if (fd->channels[1].type==0) {
+        return ((fd->channels[1].ratio*Value/255.0)+fd->channels[1].offset)/10;
+      } else {
+        return ((fd->channels[1].ratio*Value/255.0)+fd->channels[1].offset);
+      }
       break;
-    case 12:
-      return (10*Value);
+    case TELEM_ALT:
+    case TELEM_GPSALT:
+    case TELEM_MAX_ALT:
+    case TELEM_MIN_ALT:
+      return (8*Value)-510;
       break;
-    case 13:
-      return (40*Value);
+    case TELEM_RPM:
+    case TELEM_MAX_RPM:
+      return Value * 50;
       break;
-    case 14:
-      return (Value/10.0);
+    case TELEM_T1:
+    case TELEM_T2:
+    case TELEM_MAX_T1:
+    case TELEM_MAX_T2:
+      return  Value - 30.0;
+      break;
+    case TELEM_CELL:
+      return  Value*2.0/100;
+      break;
+    case TELEM_CELLS_SUM:
+    case TELEM_VFAS:
+      return  Value/10.0;
+      break;      
+    case TELEM_HDG:
+      if (Value>359) {
+        return 359;
+      } else {
+        return  Value * 2;
+      }
+      break;
+    case TELEM_DIST:
+    case TELEM_MAX_DIST:
+      return  Value * 8;
+      break;
+    case TELEM_MAX_CURRENT:
+    case TELEM_CURRENT:
+      return  Value/2.0;
+      break;
+    case TELEM_POWER:
+      return  Value*5;
+      break;
+    case TELEM_CONSUMPTION:
+      return  Value * 20;
+      break;
+    case TELEM_SPEED:
+    case TELEM_MAX_SPEED:
+      if (fd->imperial==1) {
+        return Value;
+      } else {
+        return Value*1.852;
+      }
       break;
     default:
-      return ((100*Value)/51);
+      return  Value;
       break;
-  }
+  }  
 }
 
 void compareDialog::printSetup()
@@ -1369,36 +1397,44 @@ void compareDialog::printFrSky()
   color=getColor1(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd1->rssiAlarms[1].value,10)+"</td>");
   str.append("</table>");
-  if (GetEepromInterface()->getCapability(TelemetryBars)) {
-    str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
-    str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
-    for (int i=0; i<4; i++) {
-      str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
-      color=getColor1(fd1->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].source);
-      str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd1->screens[0].body.bars[i].source)+"</font></td>");
-      value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMin,fd1);
-      value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMin,fd2);
-      color=getColor1(value1,value2);
-      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td>");
-      value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMax,fd1);
-      value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMax,fd2);
-      color=getColor1(value1,value2);
-      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td></tr>");
+  if (GetEepromInterface()->getCapability(TelemetryBars) || GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/8; j++) {
+      color=getColor1(fd1->screens[0].type,fd2->screens[0].type);
+      if (fd1->screens[j].type==0) {
+        str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b><font color="+color+">"+tr("Custom Telemetry View")+"</font></b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+        for (int i=0; i<4; i++) {
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor1(fd1->screens[1].body.cells[i*2],fd2->screens[1].body.cells[i*2]);
+          str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->screens[1].body.cells[i*2])+"</font></td>");
+          str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor1(fd1->screens[1].body.cells[i*2+1],fd2->screens[1].body.cells[i*2+1]);
+          str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->screens[1].body.cells[i*2+1])+"</font></td></tr>");
+        }
+        str.append("</table>");        
+      } else {
+        str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b><font color="+color+">"+tr("Telemetry Bars")+"</font></b></td></tr>");
+        str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+        for (int i=0; i<4; i++) {
+          str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor1(fd1->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].source);
+          str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd1->screens[0].body.bars[i].source)+"</font></td>");
+          value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMin,fd1);
+          value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMin,fd2);
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor1(value1,value2);
+          str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td>");
+          value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMax,fd1);
+          value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMax,fd2);
+          if (fd1->screens[0].type==fd2->screens[0].type)
+           color=getColor1(value1,value2);
+          str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value1)+"</td></tr>");
+        }
+        str.append("</table>");
+      }
     }
-    str.append("</table>");
   }
-  if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
-    str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
-    for (int i=0; i<4; i++) {
-      color=getColor1(fd1->screens[1].body.cells[i*2],fd2->screens[1].body.cells[i*2]);
-      str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->screens[1].body.cells[i*2])+"</font></td>");
-      str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
-      color=getColor1(fd1->screens[1].body.cells[i*2+1],fd2->screens[1].body.cells[i*2+1]);
-      str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd1->screens[1].body.cells[i*2+1])+"</font></td></tr>");
-    }
-    str.append("</table>");
-  }
-
   
   str.append("</td><td width=\"50%\">");
   str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
@@ -1461,34 +1497,44 @@ void compareDialog::printFrSky()
   color=getColor2(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[1].value,10)+"</td>");
   str.append("</table><br>");
-  if (GetEepromInterface()->getCapability(TelemetryBars)) {
-    str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b>"+tr("Telemetry Bars")+"</b></td></tr>");
-    str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
-    for (int i=0; i<4; i++) {
-      str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
-      color=getColor2(fd1->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].source);
-      str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd2->screens[0].body.bars[i].source)+"</font></td>");
-      value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMin,fd1);
-      value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMin,fd2);
-      color=getColor2(value1,value2);
-      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td>");
-      value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMax,fd1);
-      value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMax,fd2);
-      color=getColor2(value1,value2);
-      str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td></tr>");
+
+    if (GetEepromInterface()->getCapability(TelemetryBars) || GetEepromInterface()->getCapability(TelemetryCSFields)) {
+    for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/8; j++) {
+      color=getColor1(fd1->screens[0].type,fd2->screens[0].type);
+      if (fd1->screens[j].type==0) {
+        str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+        for (int i=0; i<4; i++) {
+          if (fd1->screens[0].type==fd2->screens[0].type)
+           color=getColor2(fd1->screens[1].body.cells[i*2],fd2->screens[1].body.cells[i*2]);
+          str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->screens[1].body.cells[i*2])+"</font></td>");
+          str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor2(fd1->screens[1].body.cells[i*2+1],fd2->screens[1].body.cells[i*2+1]);
+          str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->screens[1].body.cells[i*2+1])+"</font></td></tr>");
+        }
+        str.append("</table>");
+      } else {
+        str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b><font color="+color+">"+tr("Telemetry Bars")+"</b></td></tr>");
+        str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
+        for (int i=0; i<4; i++) {
+          str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor2(fd1->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].source);
+          str.append("<td  align=\"Center\"><font color="+color+">"+getFrSkySrc(fd2->screens[0].body.bars[i].source)+"</font></td>");
+          value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMin,fd1);
+          value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMin,fd2);
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor2(value1,value2);
+          str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td>");
+          value1=getBarValue(fd1->screens[0].body.bars[i].source,fd1->screens[0].body.bars[i].barMax,fd1);
+          value2=getBarValue(fd2->screens[0].body.bars[i].source,fd2->screens[0].body.bars[i].barMax,fd2);
+          if (fd1->screens[0].type==fd2->screens[0].type)
+            color=getColor2(value1,value2);
+          str.append("<td  align=\"Right\"><font color="+color+">"+QString::number(value2)+"</font></td></tr>");
+        }
+        str.append("</table>");
+      }
     }
-    str.append("</table>");
-  }
-  if (GetEepromInterface()->getCapability(TelemetryCSFields)) {
-    str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
-    for (int i=0; i<4; i++) {
-      color=getColor2(fd1->screens[1].body.cells[i*2],fd2->screens[1].body.cells[i*2]);
-      str.append("<tr><td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->screens[1].body.cells[i*2])+"</font></td>");
-      str.append("<td  align=\"Center\"width=\"10%\">&nbsp;</td>");
-      color=getColor2(fd1->screens[1].body.cells[i*2+1],fd2->screens[1].body.cells[i*2+1]);
-      str.append("<td  align=\"Center\" width=\"45%\"><font color="+color+">"+getFrSkySrc(fd2->screens[1].body.cells[i*2+1])+"</font></td></tr>");
-    }
-    str.append("</table>");
   }
   str.append("</td></tr></table>");
   te->append(str);
