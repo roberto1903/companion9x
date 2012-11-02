@@ -199,7 +199,7 @@ ModelEdit::~ModelEdit()
  33) Spd+ 0 255 (ILG???)
  34) Dst+ 0 255 (v ????)
  35) Cur+ 0 25.5 (A)
- 
+ 1.852
  */
 float ModelEdit::getBarValue(int barId, int Value) 
 {
@@ -269,6 +269,14 @@ float ModelEdit::getBarValue(int barId, int Value)
     case TELEM_CONSUMPTION:
       return  Value * 20;
       break;
+    case TELEM_SPEED:
+    case TELEM_MAX_SPEED:
+      if (g_model.frsky.imperial==1) {
+        return Value;
+      } else {
+        return Value*1.852;
+      }
+      break;
     default:
       return  Value;
       break;
@@ -323,6 +331,14 @@ float ModelEdit::getBarStep(int barId)
       break;
     case TELEM_CONSUMPTION:
       return  20;
+      break;
+    case TELEM_SPEED:
+    case TELEM_MAX_SPEED:
+      if (g_model.frsky.imperial==1) {
+        return 1;
+      } else {
+        return 1.852;
+      }
       break;
     default:
       return  1;
@@ -2039,9 +2055,6 @@ void ModelEdit::tabTelemetry()
   memcpy(minSB, minsb, sizeof(minSB));
   memcpy(csf, tmp, sizeof(csf));
     
-//  QComboBox* csf[24] =  {ui->telemetryCSF1_CB, ui->telemetryCSF2_CB, ui->telemetryCSF3_CB, ui->telemetryCSF4_CB, ui->telemetryCSF5_CB, ui->telemetryCSF6_CB, ui->telemetryCSF7_CB, ui->telemetryCSF8_CB,
-//                                     ui->telemetryCSF9_CB, ui->telemetryCSF10_CB, ui->telemetryCSF11_CB, ui->telemetryCSF12_CB, ui->telemetryCSF13_CB, ui->telemetryCSF14_CB, ui->telemetryCSF15_CB, ui->telemetryCSF16_CB,
-//                                     ui->telemetryCSF17_CB, ui->telemetryCSF18_CB, ui->telemetryCSF19_CB, ui->telemetryCSF20_CB, ui->telemetryCSF21_CB, ui->telemetryCSF22_CB, ui->telemetryCSF23_CB, ui->telemetryCSF24_CB};
   telemetryLock=true;
   ui->telemetryCSType1->setCurrentIndex(g_model.frsky.screens[0].type);
   ui->telemetryCSType2->setCurrentIndex(g_model.frsky.screens[1].type);
@@ -3193,7 +3206,7 @@ void ModelEdit::telBarUpdate()
   for (int i=0; i<12; i++) {
     int screen=i/4;
     index=barsCB[i]->currentIndex();
-    if (index==5 || index==6) {
+    if (index==TELEM_A1 || index==TELEM_A1 || index==TELEM_MIN_A1 || index==TELEM_MIN_A2) {
       minSB[i]->setMinimum(getBarValue(index,0));
       minSB[i]->setMaximum(getBarValue(index,255));
       minSB[i]->setSingleStep(getBarStep(index));
@@ -3295,9 +3308,9 @@ void ModelEdit::telMinSBeditingFinished()
   int barId = spinBox->objectName().right(1).toInt() - 1;
   int minId = barId+screenId*4;
   telemetryLock=true;
-  if (g_model.frsky.screens[screenId].body.bars[barId].source==5) {
+  if (g_model.frsky.screens[screenId].body.bars[barId].source==TELEM_A1 || g_model.frsky.screens[screenId].body.bars[barId].source==TELEM_MIN_A1) {
         g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
-  } else if (g_model.frsky.screens[screenId].body.bars[minId].source==6) {
+  } else if (g_model.frsky.screens[screenId].body.bars[minId].source==TELEM_A2 || g_model.frsky.screens[screenId].body.bars[minId].source==TELEM_MIN_A2) {
         g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
   } else {
         g_model.frsky.screens[screenId].body.bars[barId].barMin=round(minSB[minId]->value()/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
@@ -3326,7 +3339,7 @@ void ModelEdit::telMaxSBeditingFinished()
   } else {
         g_model.frsky.screens[screenId].body.bars[barId].barMax=(255-round(spinBox->value()/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source) ));
   }
-  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,(51-g_model.frsky.screens[screenId].body.bars[barId].barMax)));
+  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,(255-g_model.frsky.screens[screenId].body.bars[barId].barMax)));
   telemetryLock=false;
   updateSettings();
 }
