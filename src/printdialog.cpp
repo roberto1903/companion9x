@@ -7,7 +7,7 @@
 #include <QColor>
 #include <QPainter>
 
-#if !defined WIN32 
+#if !defined WIN32 && defined __GNUC__
 #include <unistd.h>
 #endif
 
