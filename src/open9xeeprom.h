@@ -600,9 +600,9 @@ PACK(typedef struct t_Open9xFrSkyData_v210 {
 }) Open9xFrSkyData_v210;
 
 PACK(typedef struct t_Open9xFrSkyBarData_v212 {
-  uint16_t   source:6;
-  uint16_t   barMin:5;           // minimum for bar display
-  uint16_t   barMax:5;           // ditto for max display (would usually = ratio)
+  uint8_t   source;
+  uint8_t   barMin;           // minimum for bar display
+  uint8_t   barMax;           // ditto for max display (would usually = ratio)
 }) FrSkyBarData_v212;
 
 PACK(typedef struct {

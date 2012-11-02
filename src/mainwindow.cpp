@@ -718,7 +718,7 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &f
   if (GetEepromInterface()->getBoard() == BOARD_GRUVIN9X)
     arguments << "m2560";
   else if (GetEepromInterface()->getBoard() == BOARD_M128)
-      arguments << "m128";
+    arguments << "m128";
   else
     arguments << mcu;
 
