@@ -2,11 +2,14 @@
 #include "ui_comparedialog.h"
 #include "helpers.h"
 #include "eeprominterface.h"
-#include <unistd.h>
 #include <QtGui>
 #include <QImage>
 #include <QColor>
 #include <QPainter>
+
+#if !defined WIN32 
+#include <unistd.h>
+#endif
 
 #define ISIZE 200 // curve image size
 class DragDropHeader {
