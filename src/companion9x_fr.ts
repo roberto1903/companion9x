@@ -3425,37 +3425,37 @@ Gauche</translation>
         <location filename="modeledit.ui" line="13438"/>
         <location filename="ui_modeledit.h" line="10790"/>
         <source>CSwitch1</source>
-        <translation>Interrupteur personnalisé IP1</translation>
+        <translation>Inter Pers 1</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13729"/>
         <location filename="ui_modeledit.h" line="10799"/>
         <source>CSwitch2</source>
-        <translation>Interrupteur personnalisé IP2</translation>
+        <translation>Inter Pers 2</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13710"/>
         <location filename="ui_modeledit.h" line="10798"/>
         <source>CSwitch3</source>
-        <translation>Interrupteur personnalisé IP3</translation>
+        <translation>Inter Pers 3</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13796"/>
         <location filename="ui_modeledit.h" line="10802"/>
         <source>CSwitch4</source>
-        <translation>Interrupteur personnalisé IP4</translation>
+        <translation>Inter Pers 4</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13642"/>
         <location filename="ui_modeledit.h" line="10796"/>
         <source>CSwitch5</source>
-        <translation>Interrupteur personnalisé IP5</translation>
+        <translation>Inter Pers 5</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13400"/>
         <location filename="ui_modeledit.h" line="10788"/>
         <source>CSwitch6</source>
-        <translation>Interrupteur personnalisé IP6</translation>
+        <translation>Inter Pers 6</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="3629"/>
@@ -3682,31 +3682,31 @@ Droite</translation>
         <location filename="modeledit.ui" line="13496"/>
         <location filename="ui_modeledit.h" line="10792"/>
         <source>CSwitch7</source>
-        <translation>Interrupteur personnalisé IP7</translation>
+        <translation>Inter Pers 7</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13467"/>
         <location filename="ui_modeledit.h" line="10791"/>
         <source>CSwitch8</source>
-        <translation>Interrupteur personnalisé IP8</translation>
+        <translation>Inter Pers 8</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13419"/>
         <location filename="ui_modeledit.h" line="10789"/>
         <source>CSwitch9</source>
-        <translation>Interrupteur personnalisé IP9</translation>
+        <translation>Inter Pers 9</translation>
     </message>
     <message>
         <source>CSwitch10</source>
-        <translation type="obsolete">Interrupteur personnalisé SW10</translation>
+        <translation type="obsolete">Inter Pers 10</translation>
     </message>
     <message>
         <source>CSwitch11</source>
-        <translation type="obsolete">Interrupteur personnalisé SW11</translation>
+        <translation type="obsolete">Inter Pers 11</translation>
     </message>
     <message>
         <source>CSwitch12</source>
-        <translation type="obsolete">Interrupteur personnalisé SW12</translation>
+        <translation type="obsolete">Inter Pers 12</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1136"/>
@@ -4036,25 +4036,25 @@ Droite</translation>
         <location filename="modeledit.ui" line="13314"/>
         <location filename="ui_modeledit.h" line="10784"/>
         <source>CSwitchF</source>
-        <translation>Interrupteur personnalisé IPF</translation>
+        <translation>Inter Pers F</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13343"/>
         <location filename="ui_modeledit.h" line="10785"/>
         <source>CSwitchD</source>
-        <translation>Interrupteur personnalisé IPD</translation>
+        <translation>Inter Pers D</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13748"/>
         <location filename="ui_modeledit.h" line="10800"/>
         <source>CSwitchE</source>
-        <translation>Interrupteur personnalisé IPE</translation>
+        <translation>Inter Pers E</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13767"/>
         <location filename="ui_modeledit.h" line="10801"/>
         <source>CSwitchG</source>
-        <translation>Interrupteur personnalisé IPG</translation>
+        <translation>Inter Pers G</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13815"/>
@@ -4068,97 +4068,97 @@ Droite</translation>
         <location filename="modeledit.ui" line="13896"/>
         <location filename="ui_modeledit.h" line="10805"/>
         <source>CSwitchT</source>
-        <translation>Interrupteur personnalisé IPT</translation>
+        <translation>Inter Pers T</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13973"/>
         <location filename="ui_modeledit.h" line="10808"/>
         <source>CSwitchM</source>
-        <translation>Interrupteur personnalisé IPM</translation>
+        <translation>Inter Pers M</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13992"/>
         <location filename="ui_modeledit.h" line="10809"/>
         <source>CSwitchP</source>
-        <translation>Interrupteur personnalisé IPP</translation>
+        <translation>Inter Pers P</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14011"/>
         <location filename="ui_modeledit.h" line="10810"/>
         <source>CSwitchH</source>
-        <translation>Interrupteur personnalisé IPH</translation>
+        <translation>Inter Pers H</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14040"/>
         <location filename="ui_modeledit.h" line="10811"/>
         <source>CSwitchO</source>
-        <translation>Interrupteur personnalisé IPO</translation>
+        <translation>Inter Pers O</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14059"/>
         <location filename="ui_modeledit.h" line="10812"/>
         <source>CSwitchN</source>
-        <translation>Interrupteur personnalisé IPN</translation>
+        <translation>Inter Pers N</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14088"/>
         <location filename="ui_modeledit.h" line="10813"/>
         <source>CSwitchQ</source>
-        <translation>Interrupteur personnalisé IPQ</translation>
+        <translation>Inter Pers Q</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14117"/>
         <location filename="ui_modeledit.h" line="10814"/>
         <source>CSwitchR</source>
-        <translation>Interrupteur personnalisé IPR</translation>
+        <translation>Inter Pers R</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14146"/>
         <location filename="ui_modeledit.h" line="10815"/>
         <source>CSwitchS</source>
-        <translation>Interrupteur personnalisé IPS</translation>
+        <translation>Inter Pers S</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14195"/>
         <location filename="ui_modeledit.h" line="10816"/>
         <source>CSwitchL</source>
-        <translation>Interrupteur personnalisé IPL</translation>
+        <translation>Inter Pers L</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14234"/>
         <location filename="ui_modeledit.h" line="10817"/>
         <source>CSwitchK</source>
-        <translation>Interrupteur personnalisé IPK</translation>
+        <translation>Inter Pers K</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14272"/>
         <location filename="ui_modeledit.h" line="10819"/>
         <source>CSwitchJ</source>
-        <translation>Interrupteur personnalisé IPJ</translation>
+        <translation>Inter Pers J</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14291"/>
         <location filename="ui_modeledit.h" line="10820"/>
         <source>CSwitchI</source>
-        <translation>Interrupteur personnalisé IPI</translation>
+        <translation>Inter Pers I</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14310"/>
         <location filename="ui_modeledit.h" line="10821"/>
         <source>CSwitchU</source>
-        <translation>Interrupteur personnalisé IPU</translation>
+        <translation>Inter Pers U</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14329"/>
         <location filename="ui_modeledit.h" line="10822"/>
         <source>CSwitchV</source>
-        <translation>Interrupteur personnalisé IPV</translation>
+        <translation>Inter Pers V</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14348"/>
         <location filename="ui_modeledit.h" line="10823"/>
         <source>CSwitchW</source>
-        <translation>Interrupteur personnalisé IPW</translation>
+        <translation>Inter Pers W</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="14984"/>
@@ -4601,19 +4601,19 @@ Droite</translation>
         <location filename="modeledit.ui" line="13535"/>
         <location filename="ui_modeledit.h" line="10793"/>
         <source>CSwitchA</source>
-        <translation>Interrupteur personnalisé IPA</translation>
+        <translation>Inter Pers A</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13564"/>
         <location filename="ui_modeledit.h" line="10794"/>
         <source>CSwitchB</source>
-        <translation>Interrupteur personnalisé IPB</translation>
+        <translation>Inter Pers B</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="13593"/>
         <location filename="ui_modeledit.h" line="10795"/>
         <source>CSwitchC</source>
-        <translation>Interrupteur personnalisé IPC</translation>
+        <translation>Inter Pers C</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="456"/>
