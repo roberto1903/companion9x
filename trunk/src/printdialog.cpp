@@ -299,15 +299,24 @@ void printDialog::printExpo()
           break;
       };
 
-      str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
+      str += tr("Weight") + QString("%1").arg(getGVarString(ed->weight,true)).rightJustified(6, ' ');
       if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
-        if (ed->expo!=0)
-          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+        if (ed->expo!=0) {
+          if (ed->expo<126) {
+            str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
+          } else {
+            str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
+          }
+        }
       } else {
-        if (ed->curveMode==0 && ed->curveParam!=0)  
-          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->curveParam)).rightJustified(7, ' ');
-      }      
-      str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+        if (ed->curveMode==0 && ed->curveParam!=0) {
+          if (ed->curveParam<126) {
+            str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->curveParam)).rightJustified(7, ' ');
+          } else {
+            str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->curveParam)).rightJustified(7, ' ');
+          }
+        }
+      }   
       if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
         if(ed->phases) {
           if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
@@ -397,16 +406,16 @@ void printDialog::printMixes()
         case (2): str += "&nbsp;R"; break;
         default:  str += "&nbsp;&nbsp;"; break;
       };
-      str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
+      str += QString(" %1").arg(getGVarString(md->weight, true)).rightJustified(6, ' ');
       str += md->srcRaw.toString();
       if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
       if (md->carryTrim) str += " " + tr("noTrim");
       if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
-        if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
+        if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" %1").arg(getGVarString(md->sOffset));
       } else {
-        if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+        if (md->sOffset)  str += " "+ tr("Offset") + QString(" %1").arg(getGVarString(md->sOffset));           
       }
-      if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(md->differential);
+      if (md->differential)  str += " "+ tr("Diff") + QString(" %1").arg(getGVarString(md->differential));
       if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
       if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
       if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
