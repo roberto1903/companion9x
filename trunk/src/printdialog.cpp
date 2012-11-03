@@ -287,10 +287,13 @@ QString printDialog::printPhases()
       }
       if (gvars==1) {
         for (int k=0; k<5; k++) {
-          if (pd->gvars[k]==<1025) {
+          if (pd->gvars[k]<=1024) {
             str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>%1").arg(pd->gvars[k])+"</font></td>");
-          } else {
-            str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(pd->gvars[k]-1025));
+          }
+          else {
+            int num = pd->gvars[k] - 1025;
+            if (num>=i) num++;
+            str.append("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>"+tr("FP")+QString("%1</font></td>").arg(num));
           }
         }
       }
