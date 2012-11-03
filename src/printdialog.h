@@ -28,6 +28,7 @@ private:
     Ui::printDialog *ui;
 
     void printSetup();
+    QString printPhases();
     void printExpo();
     void printMixes();
     void printLimits();

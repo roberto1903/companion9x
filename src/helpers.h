@@ -40,6 +40,9 @@ void populateTimerSwitchCB(QComboBox *b, int value);
 #define POPULATE_TELEMETRY 2
 #define POPULATE_TRIMS     4
 
+#define GVARS_VARIANT 0x0001
+#define FRSKY_VARIANT 0x0002
+
 void populateGVarCB(QComboBox *b, int value, int min, int max);
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags);
 void populateCSWCB(QComboBox *b, int value);
