@@ -1980,20 +1980,20 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
-  const char *  StdTelBar[]={"---","Tmr1","Tmr2","TX","RX","A1","A2",NULL};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell","Cels","Vfas","Curr","Cnsp","Powr","AccX","AccY","AccZ","Hdg","VSpd","A1-","A2-","Alt-","Alt+","Rpm+","T1+","T2+","Spd+","Dst+","Cur+",NULL};
+  const char * StdTelBar[]={"---","Tmr1","Tmr2","Tx","Rx","A1","A2",NULL};
+  const char * FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell","Cels","Vfas","Curr","Cnsp","Powr","AccX","AccY","AccZ","Hdg","VSpd","A1-","A2-","Alt-","Alt+","Rpm+","T1+","T2+","Spd+","Dst+","Cur+",NULL};
   QComboBox* barscb[12] = { ui->telBarCS1B1_CB, ui->telBarCS1B2_CB,  ui->telBarCS1B3_CB,  ui->telBarCS1B4_CB,
-                                             ui->telBarCS2B1_CB, ui->telBarCS2B2_CB,  ui->telBarCS2B3_CB,  ui->telBarCS2B4_CB,
-                                             ui->telBarCS3B1_CB, ui->telBarCS3B2_CB,  ui->telBarCS3B3_CB,  ui->telBarCS3B4_CB};
+                            ui->telBarCS2B1_CB, ui->telBarCS2B2_CB,  ui->telBarCS2B3_CB,  ui->telBarCS2B4_CB,
+                            ui->telBarCS3B1_CB, ui->telBarCS3B2_CB,  ui->telBarCS3B3_CB,  ui->telBarCS3B4_CB};
   QDoubleSpinBox* minsb[12] = { ui->telMinCS1SB1,  ui->telMinCS1SB2,  ui->telMinCS1SB3,  ui->telMinCS1SB4,
-                                               ui->telMinCS2SB1,  ui->telMinCS2SB2,  ui->telMinCS2SB3,  ui->telMinCS2SB4,
-                                               ui->telMinCS3SB1,  ui->telMinCS3SB2,  ui->telMinCS3SB3,  ui->telMinCS3SB4};
+                                ui->telMinCS2SB1,  ui->telMinCS2SB2,  ui->telMinCS2SB3,  ui->telMinCS2SB4,
+                                ui->telMinCS3SB1,  ui->telMinCS3SB2,  ui->telMinCS3SB3,  ui->telMinCS3SB4};
   QDoubleSpinBox* maxsb[12] = { ui->telMaxCS1SB1,  ui->telMaxCS1SB2,  ui->telMaxCS1SB3,  ui->telMaxCS1SB4,
-                                               ui->telMaxCS2SB1,  ui->telMaxCS2SB2,  ui->telMaxCS2SB3,  ui->telMaxCS2SB4,
-                                               ui->telMaxCS3SB1,  ui->telMaxCS3SB2,  ui->telMaxCS3SB3,  ui->telMaxCS3SB4};
+                                ui->telMaxCS2SB1,  ui->telMaxCS2SB2,  ui->telMaxCS2SB3,  ui->telMaxCS2SB4,
+                                ui->telMaxCS3SB1,  ui->telMaxCS3SB2,  ui->telMaxCS3SB3,  ui->telMaxCS3SB4};
   QComboBox* tmp[24] = { ui->telemetryCS1F1_CB, ui->telemetryCS1F2_CB, ui->telemetryCS1F3_CB, ui->telemetryCS1F4_CB, ui->telemetryCS1F5_CB, ui->telemetryCS1F6_CB, ui->telemetryCS1F7_CB, ui->telemetryCS1F8_CB,
-                                        ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB,
-                                        ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB};
+                         ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB,
+                         ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB};
   memcpy(barsCB, barscb, sizeof(barsCB));
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
