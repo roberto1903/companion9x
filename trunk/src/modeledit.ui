@@ -1768,19 +1768,39 @@
                 </spacer>
                </item>
                <item row="0" column="1">
-                <widget class="QLineEdit" name="phase0GV1Name"/>
+                <widget class="QLineEdit" name="phase0GV1Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QLineEdit" name="phase0GV2Name"/>
+                <widget class="QLineEdit" name="phase0GV2Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QLineEdit" name="phase0GV3Name"/>
+                <widget class="QLineEdit" name="phase0GV3Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QLineEdit" name="phase0GV4Name"/>
+                <widget class="QLineEdit" name="phase0GV4Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QLineEdit" name="phase0GV5Name"/>
+                <widget class="QLineEdit" name="phase0GV5Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -6092,7 +6112,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>480</height>
+            <height>605</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9524,8 +9544,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>860</width>
+            <height>591</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14442,8 +14462,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>860</width>
+            <height>620</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

@@ -602,7 +602,7 @@ void compareDialog::printPhases()
   int i,k;
   QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
   str.append("<tr><td colspan=2><h2>"+tr("Flight Phases Settings")+"</h2></td></tr>");
-  str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
+  str.append("<tr><td  width=\"50%\"><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
   str.append("<tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
   str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
@@ -634,9 +634,66 @@ void compareDialog::printPhases()
     str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->swtch.toString()).arg(color));
     str.append("</tr>");
   }
-  str.append("</table></td>");
+  str.append("</table>");
+  int gvars=0;
+  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    gvars=1;
+  if (gvars==1 || GetEepromInterface()->getCapability(RotaryEncoders)) {
+    str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+    str.append("<tr><td style=\"border-style:none;\">&nbsp;</td>");
+    if (gvars==1) {
+      str.append("<td colspan=5 align=center><b>"+tr("Gvars")+"</td>");
+    }
+    if (GetEepromInterface()->getCapability(RotaryEncoders)) {
+      str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
+    }
+    str.append("</tr><tr><td align=center><b>"+tr("Phase name")+"</b></td>");
+    if (gvars==1) {
+      for (i=0; i<5; i++) {
+        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i).arg(g_model1->gvars_names[i-1]));
+      }
+    }
+    for (i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      str.append(QString("<td align=\"center\"><b>RE%1</b></td>").arg((i==0 ? 'A': 'B')));
+    }
+    str.append("</tr>");
+    for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
+      PhaseData *pd1=&g_model1->phaseData[i];
+      PhaseData *pd2=&g_model2->phaseData[i];
+      str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+      color=getColor1(pd1->name,pd2->name);
+      str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->name).arg(color));
+      if (gvars==1) {
+        for (k=0; k<5; k++) {
+          color=getColor1(pd1->gvars[k],pd2->gvars[k]);
+          if (pd1->gvars[k]<=1024) {
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%2>%1").arg(pd1->gvars[k]).arg(color)+"</font></td>");
+          }
+          else {
+            int num = pd1->gvars[k] - 1025;
+            if (num>=i) num++;
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+          }
+        }
+      }
+      for (k=0; k<GetEepromInterface()->getCapability(RotaryEncoders); k++) {
+        color=getColor1(pd1->rotaryEncoders[k],pd2->rotaryEncoders[k]);
+        if (pd1->rotaryEncoders[k]<=1024) {
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%2>%1").arg(pd1->rotaryEncoders[k]).arg(color)+"</font></td>");
+        }
+        else {
+          int num = pd1->rotaryEncoders[k] - 1025;
+          if (num>=i) num++;
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+        }
+      }
+      str.append("</tr>");
+    }
+    str.append("</table>");
+  }
+  str.append("</td>");
 
-  str.append("<td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
+  str.append("<td  width=\"50%\"><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
   str.append("<tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
   str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
   str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
@@ -668,8 +725,61 @@ void compareDialog::printPhases()
     str.append(QString("<td align=center><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->swtch.toString()).arg(color));
     str.append("</tr>");
   }
-  str.append("</table></td>");
-  str.append("</tr></table>");
+  str.append("</table>");
+  if (gvars==1 || GetEepromInterface()->getCapability(RotaryEncoders)) {
+    str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
+    str.append("<tr><td style=\"border-style:none;\">&nbsp;</td>");
+    if (gvars==1) {
+      str.append("<td colspan=5 align=center><b>"+tr("Gvars")+"</td>");
+    }
+    if (GetEepromInterface()->getCapability(RotaryEncoders)) {
+      str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
+    }
+    str.append("</tr><tr><td align=center ><b>"+tr("Phase name")+"</b></td>");
+    if (gvars==1) {
+      for (i=0; i<5; i++) {
+        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i).arg(g_model2->gvars_names[i-1]));
+      }
+    }
+    for (i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      str.append(QString("<td align=\"center\"><b>RE%1</b></td>").arg((i==0 ? 'A': 'B')));
+    }
+    str.append("</tr>");
+    for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
+      PhaseData *pd1=&g_model1->phaseData[i];
+      PhaseData *pd2=&g_model2->phaseData[i];
+      str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+      color=getColor1(pd1->name,pd2->name);
+      str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->name).arg(color));
+      if (gvars==1) {
+        for (k=0; k<5; k++) {
+          color=getColor1(pd1->gvars[k],pd2->gvars[k]);
+          if (pd2->gvars[k]<=1024) {
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%2>%1").arg(pd2->gvars[k]).arg(color)+"</font></td>");
+          }
+          else {
+            int num = pd2->gvars[k] - 1025;
+            if (num>=i) num++;
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+          }
+        }
+      }
+      for (k=0; k<GetEepromInterface()->getCapability(RotaryEncoders); k++) {
+        color=getColor1(pd1->rotaryEncoders[k],pd2->rotaryEncoders[k]);
+        if (pd2->rotaryEncoders[k]<=1024) {
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%2>%1").arg(pd2->rotaryEncoders[k]).arg(color)+"</font></td>");
+        }
+        else {
+          int num = pd2->rotaryEncoders[k] - 1025;
+          if (num>=i) num++;
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+        }
+      }
+      str.append("</tr>");
+    }
+    str.append("</table>");
+  }  
+  str.append("</td></tr></table>");
   te->append(str);
 }
 
@@ -756,8 +866,8 @@ void compareDialog::printExpos()
               break;
           };
 
-          str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
-          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+          str += tr("Weight") + QString("%1").arg(getGVarString(ed->weight)).rightJustified(6, ' ');
+          str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(ed->phases) {
               if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
@@ -844,8 +954,8 @@ void compareDialog::printExpos()
               break;
           }
 
-          str += tr("Weight") + QString("(%1%)").arg(ed->weight).rightJustified(6, ' ');
-          str += " " + tr("Expo") + QString("(%1%)").arg(getSignedStr(ed->expo)).rightJustified(7, ' ');
+          str += tr("Weight") + QString("%1").arg(getGVarString(ed->weight)).rightJustified(6, ' ');
+          str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(ed->phases) {
               if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
@@ -945,16 +1055,16 @@ void compareDialog::printMixers()
               str += "&nbsp;&nbsp;";
               break;
           };
-          str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
+          str += QString(" %1").arg(getGVarString(md->weight)).rightJustified(6, ' ');
           str += md->srcRaw.toString();
           if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
                   if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
           } else {
-                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(getGVarString(md->sOffset));           
           }
-          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(md->differential);
+          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(getGVarString(md->differential));
           if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
           if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
           if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
@@ -1037,16 +1147,16 @@ void compareDialog::printMixers()
               str += "&nbsp;&nbsp;";
               break;
           };
-          str += QString(" %1%").arg(getSignedStr(md->weight)).rightJustified(6, ' ');
+          str += QString(" %1").arg(getGVarString(md->weight)).rightJustified(6, ' ');
           str += md->srcRaw.toString();
           if (md->swtch.type) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
           if (md->carryTrim) str += " " + tr("noTrim");
           if(GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1){ 
-                  if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(md->sOffset);
+                  if (md->sOffset)  str += " "+ tr("FMTrim") + QString(" (%1%)").arg(getGVarString(md->sOffset));
           } else {
-                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(md->sOffset);           
+                  if (md->sOffset)  str += " "+ tr("Offset") + QString(" (%1%)").arg(getGVarString(md->sOffset));
           }
-          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(md->differential);
+          if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(getGVarString(md->differential));
           if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
           if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp).arg(md->delayDown);
           if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp).arg(md->speedDown);
