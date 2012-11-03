@@ -647,7 +647,6 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
 
   b->setMaxVisibleItems(10);
 }
-#define GVARS_VARIANT 0x0001
 
 void populateGVarCB(QComboBox *b, int value, int min, int max)
 {
