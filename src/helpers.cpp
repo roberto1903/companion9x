@@ -647,9 +647,13 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
 
   b->setMaxVisibleItems(10);
 }
+#define GVARS_VARIANT 0x0001
 
 void populateGVarCB(QComboBox *b, int value, int min, int max)
 {
+  int gvars=0;
+  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    gvars=1;
   b->clear();
   for (int i=min; i<=max; i++)
     b->addItem(QString::number(i, 10), i);
@@ -658,6 +662,11 @@ void populateGVarCB(QComboBox *b, int value, int min, int max)
   for (int i=1; i<=5; i++) {
     int8_t gval = (int8_t)(125+i);
     b->addItem(QObject::tr("GV%1").arg(i), gval);
+    if (gvars==0) {
+      QModelIndex index = b->model()->index(b->count()-1, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);        
+    }
     if (value == gval)
       b->setCurrentIndex(b->count()-1);
   }
@@ -778,6 +787,17 @@ QString getSignedStr(int value)
 QString getCurveStr(int curve) {
   QString crvStr = "!c16!c15!c14!c13!c12!c11!c10!c9 !c8 !c7 !c6 !c5 !c4 !c3 !c2 !c1 ----x>0 x<0 |x| f>0 f<0 |f| c1  c2  c3  c4  c5  c6  c7  c8  c9  c10 c11 c12 c13 c14 c15 c16 ";
   return crvStr.mid((curve+MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
+}
+
+QString getGVarString(int8_t val, bool sign)
+{
+  if (val >= -125 && val <= +125)
+    if (sign)
+      return QString("(%1%)").arg(getSignedStr(val));
+    else
+      return QString("(%1%)").arg(val);
+  else
+    return QObject::tr("(GV%1)").arg((uint8_t)val-125);
 }
 
 QString image2qstring(QImage image) {

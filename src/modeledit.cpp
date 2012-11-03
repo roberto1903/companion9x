@@ -28,17 +28,6 @@
 
 #define GFX_MARGIN 16
 
-QString getGVarString(int8_t val, bool sign=false)
-{
-  if (val >= -125 && val <= +125)
-    if (sign)
-      return QString("(%1%)").arg(getSignedStr(val));
-    else
-      return QString("(%1%)").arg(val);
-  else
-    return QObject::tr("(GV%1)").arg((uint8_t)val-125);
-}
-
 ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget *parent) :
     QDialog(parent),
     redrawCurve(true),

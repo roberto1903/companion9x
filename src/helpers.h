@@ -50,6 +50,7 @@ QString getCSWFunc(int val);
 QString getFuncName(unsigned int val);
 QString getSignedStr(int value);
 QString getCurveStr(int curve);
+QString getGVarString(int8_t val, bool sign=false);
 QString image2qstring(QImage image);
 QImage qstring2image(QString imagestr);
 int findmult(float value, float base);
