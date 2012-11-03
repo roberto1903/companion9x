@@ -271,7 +271,7 @@ QString printDialog::printPhases()
     }
     if (gvars==1) {
       for (int i=1; i<6; i++) {
-        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b></td>").arg(i));
+        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i).arg(g_model->gvars_names[i-1]));
       }      
     }
     str.append("</tr>");
