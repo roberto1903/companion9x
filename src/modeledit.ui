@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>10</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -1246,7 +1246,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>2</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -1660,7 +1660,7 @@
                 </widget>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase0REAValue">
+                <widget class="QSpinBox" name="phase0RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -1694,7 +1694,7 @@
                 </widget>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase0REBValue">
+                <widget class="QSpinBox" name="phase0RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -2196,10 +2196,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase1REAUse"/>
+                <widget class="QComboBox" name="phase1RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase1REAValue">
+                <widget class="QSpinBox" name="phase1RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -2236,10 +2236,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase1REBUse"/>
+                <widget class="QComboBox" name="phase1RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase1REBValue">
+                <widget class="QSpinBox" name="phase1RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -2729,10 +2729,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase2REAUse"/>
+                <widget class="QComboBox" name="phase2RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase2REAValue">
+                <widget class="QSpinBox" name="phase2RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -2769,10 +2769,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase2REBUse"/>
+                <widget class="QComboBox" name="phase2RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase2REBValue">
+                <widget class="QSpinBox" name="phase2RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -3269,10 +3269,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase3REAUse"/>
+                <widget class="QComboBox" name="phase3RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase3REAValue">
+                <widget class="QSpinBox" name="phase3RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -3309,10 +3309,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase3REBUse"/>
+                <widget class="QComboBox" name="phase3RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase3REBValue">
+                <widget class="QSpinBox" name="phase3RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -3802,10 +3802,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase4REAUse"/>
+                <widget class="QComboBox" name="phase4RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase4REAValue">
+                <widget class="QSpinBox" name="phase4RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -3842,10 +3842,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase4REBUse"/>
+                <widget class="QComboBox" name="phase4RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase4REBValue">
+                <widget class="QSpinBox" name="phase4RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -4328,10 +4328,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase5REAUse"/>
+                <widget class="QComboBox" name="phase5RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase5REAValue">
+                <widget class="QSpinBox" name="phase5RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -4368,10 +4368,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase5REBUse"/>
+                <widget class="QComboBox" name="phase5RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase5REBValue">
+                <widget class="QSpinBox" name="phase5RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -4861,10 +4861,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase6REAUse"/>
+                <widget class="QComboBox" name="phase6RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase6REAValue">
+                <widget class="QSpinBox" name="phase6RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -4901,10 +4901,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase6REBUse"/>
+                <widget class="QComboBox" name="phase6RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase6REBValue">
+                <widget class="QSpinBox" name="phase6RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -5394,10 +5394,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase7REAUse"/>
+                <widget class="QComboBox" name="phase7RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase7REAValue">
+                <widget class="QSpinBox" name="phase7RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -5434,10 +5434,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase7REBUse"/>
+                <widget class="QComboBox" name="phase7RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase7REBValue">
+                <widget class="QSpinBox" name="phase7RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -5927,10 +5927,10 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QComboBox" name="phase8REAUse"/>
+                <widget class="QComboBox" name="phase8RE1Use"/>
                </item>
                <item row="0" column="6">
-                <widget class="QSpinBox" name="phase8REAValue">
+                <widget class="QSpinBox" name="phase8RE1Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
@@ -5967,10 +5967,10 @@
                 </widget>
                </item>
                <item row="1" column="5">
-                <widget class="QComboBox" name="phase8REBUse"/>
+                <widget class="QComboBox" name="phase8RE2Use"/>
                </item>
                <item row="1" column="6">
-                <widget class="QSpinBox" name="phase8REBValue">
+                <widget class="QSpinBox" name="phase8RE2Value">
                  <property name="minimum">
                   <number>-100</number>
                  </property>
