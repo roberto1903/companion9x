@@ -172,6 +172,8 @@ private slots:
     void phaseTrimUse_currentIndexChanged();
     void phaseTrim_valueChanged();
     void phaseTrimSlider_valueChanged();
+    void phaseGVUse_currentIndexChanged();
+    void phaseREUse_currentIndexChanged();
     
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
     void pasteMixerMimeData(const QMimeData * mimeData, int destIdx);
