@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -1246,7 +1246,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>5</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -6092,7 +6092,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>605</height>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9524,8 +9524,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>591</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14442,8 +14442,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>620</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
