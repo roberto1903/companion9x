@@ -31,6 +31,8 @@ private:
 
     QSpinBox* spny[17];
     QSpinBox* spnx[17];
+    QSpinBox* gvarsSB[9][5];
+    QSpinBox* reSB[9][2];
     QComboBox* barsCB[12];
     QDoubleSpinBox* minSB[12];
     QDoubleSpinBox* maxSB[12];
@@ -172,7 +174,9 @@ private slots:
     void phaseTrimUse_currentIndexChanged();
     void phaseTrim_valueChanged();
     void phaseTrimSlider_valueChanged();
+    void phaseGVValue_editingFinished();
     void phaseGVUse_currentIndexChanged();
+    void phaseREValue_editingFinished();
     void phaseREUse_currentIndexChanged();
     
     void mimeMixerDropped(int index, const QMimeData *data, Qt::DropAction action);
