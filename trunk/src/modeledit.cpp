@@ -697,13 +697,48 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(3)-1, trim3Use, trim3, trim3Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(4)-1, trim4Use, trim4, trim4Slider);
   
-  if (gv1Use) populateGvarUseCB(gv1Use, phase_idx);
-  if (gv2Use) populateGvarUseCB(gv2Use, phase_idx);
-  if (gv3Use) populateGvarUseCB(gv3Use, phase_idx);
-  if (gv4Use) populateGvarUseCB(gv4Use, phase_idx);
-  if (gv5Use) populateGvarUseCB(gv5Use, phase_idx);
-  if (re1Use) populateGvarUseCB(re1Use, phase_idx);
-  if (re2Use) populateGvarUseCB(re2Use, phase_idx);
+  if (gv1Use) { 
+    populateGvarUseCB(gv1Use, phase_idx);
+    if (phase->gvars[0]>1024) {
+      gv1Use->setCurrentIndex(phase->gvars[0]-1024);
+    }
+  }
+  if (gv2Use) {
+    populateGvarUseCB(gv2Use, phase_idx);
+    if (phase->gvars[1]>1024) {
+      gv2Use->setCurrentIndex(phase->gvars[1]-1024);
+    }    
+  }
+  if (gv3Use) {
+    populateGvarUseCB(gv3Use, phase_idx);
+    if (phase->gvars[2]>1024) {
+      gv3Use->setCurrentIndex(phase->gvars[2]-1024);
+    }    
+  }
+  if (gv4Use) {
+    populateGvarUseCB(gv4Use, phase_idx);
+    if (phase->gvars[3]>1024) {
+      gv4Use->setCurrentIndex(phase->gvars[3]-1024);
+    }    
+  }
+  if (gv5Use) {
+    populateGvarUseCB(gv5Use, phase_idx);
+    if (phase->gvars[4]>1024) {
+      gv5Use->setCurrentIndex(phase->gvars[4]-1024);
+    }    
+  }
+  if (re1Use) {
+    populateGvarUseCB(re1Use, phase_idx);
+    if (phase->rotaryEncoders[0]>1024) {
+      re1Use->setCurrentIndex(phase->rotaryEncoders[0]-1024);
+    }    
+  }
+  if (re2Use) {
+    populateGvarUseCB(re2Use, phase_idx);
+    if (phase->rotaryEncoders[0]>1024) {
+      re1Use->setCurrentIndex(phase->rotaryEncoders[0]-1024);
+    }    
+  }
   if (GetEepromInterface()->getCapability(RotaryEncoders)<2) {
     if (re2Label)
       re2Label->hide();
@@ -735,6 +770,14 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
       connect(trim3Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
       connect(trim4Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseTrimUse_currentIndexChanged()));
     }
+   if (gv1Use) connect(gv1Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseGVUse_currentIndexChanged()));
+   if (gv2Use) connect(gv2Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseGVUse_currentIndexChanged()));
+   if (gv3Use) connect(gv3Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseGVUse_currentIndexChanged()));
+   if (gv4Use) connect(gv4Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseGVUse_currentIndexChanged()));
+   if (gv5Use) connect(gv5Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseGVUse_currentIndexChanged()));
+   if (re1Use) connect(re1Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseREUse_currentIndexChanged()));
+   if (re2Use) connect(re2Use,SIGNAL(currentIndexChanged(int)),this,SLOT(phaseREUse_currentIndexChanged()));
+    
     connect(fadeIn,SIGNAL(editingFinished()),this,SLOT(phaseFadeIn_editingFinished()));
     connect(fadeOut,SIGNAL(editingFinished()),this,SLOT(phaseFadeOut_editingFinished()));
     connect(trim1,SIGNAL(valueChanged(int)),this,SLOT(phaseTrim_valueChanged()));
@@ -745,6 +788,7 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
     connect(trim2Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
     connect(trim3Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
     connect(trim4Slider,SIGNAL(valueChanged(int)),this,SLOT(phaseTrimSlider_valueChanged()));
+    
   }
 }
 
@@ -3379,6 +3423,44 @@ void ModelEdit::on_bcREbChkB_toggled(bool checked)
     else
         g_model.beepANACenter &= ~BC_BIT_REB;
     updateSettings();
+}
+
+void ModelEdit::phaseGVUse_currentIndexChanged()
+{
+  if (phasesLock) return;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  int gvar = comboBox->objectName().mid(8,1).toInt()-1;
+  int index=comboBox->currentIndex();
+  if (index == 0) {
+    int value=g_model.phaseData[phase].gvars[gvar];
+    if (value>1024) {
+      value=0;
+    }
+    g_model.phaseData[phase].gvars[gvar]=value;
+  } else {
+    g_model.phaseData[phase].gvars[gvar]=1025+(index>=phase ? 1 : 0);
+  }
+  updateSettings();
+}
+
+void ModelEdit::phaseREUse_currentIndexChanged()
+{
+  if (phasesLock) return;
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  int re = comboBox->objectName().mid(8,1).toInt()-1;
+  int index=comboBox->currentIndex();
+  if (index == 0) {
+    int value=g_model.phaseData[phase].rotaryEncoders[re];
+    if (value>1024) {
+      value=0;
+    }
+    g_model.phaseData[phase].rotaryEncoders[re]=value;
+  } else {
+    g_model.phaseData[phase].rotaryEncoders[re]=1025+(index>=phase ? 1 : 0);
+  }
+  updateSettings();
 }
 
 void ModelEdit::phaseTrimUse_currentIndexChanged()
