@@ -3599,6 +3599,7 @@ void ModelEdit::GVName_editingFinished()
 void ModelEdit::phaseGVUse_currentIndexChanged()
 {
   if (phasesLock) return;
+  phasesLock=true;
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int phase = comboBox->objectName().mid(5,1).toInt();
   int gvar = comboBox->objectName().mid(8,1).toInt()-1;
@@ -3612,11 +3613,12 @@ void ModelEdit::phaseGVUse_currentIndexChanged()
     gvarsSB[phase][gvar]->setEnabled(true);
     g_model.phaseData[phase].gvars[gvar]=value;
   } else {
-    g_model.phaseData[phase].gvars[gvar]=1025+(index>phase ? 1 : 0);
+    g_model.phaseData[phase].gvars[gvar]=1024+index;
     int value=gvarsSB[index+(index>phase ?0 :-1)][gvar]->value();
     gvarsSB[phase][gvar]->setValue(value);
     gvarsSB[phase][gvar]->setDisabled(true);
   }
+  phasesLock=false;
   updateSettings();
 }
 
@@ -3633,6 +3635,7 @@ void ModelEdit::phaseREValue_editingFinished()
 void ModelEdit::phaseREUse_currentIndexChanged()
 {
   if (phasesLock) return;
+  phasesLock=true;
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int phase = comboBox->objectName().mid(5,1).toInt();
   int re = comboBox->objectName().mid(8,1).toInt()-1;
@@ -3646,11 +3649,12 @@ void ModelEdit::phaseREUse_currentIndexChanged()
     reSB[phase][re]->setEnabled(true);
     g_model.phaseData[phase].rotaryEncoders[re]=value;
   } else {
-    g_model.phaseData[phase].rotaryEncoders[re]=1025+(index>phase ? 1 : 0);
+    g_model.phaseData[phase].rotaryEncoders[re]=1024+index;
     int value=reSB[index+(index>phase ?0 :-1)][re]->value();
     reSB[phase][re]->setValue(value);
-    reSB[phase][re]->setDisabled(true);
+    reSB[phase][re]->setDisabled(true)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ;
   }
+  phasesLock=false;
   updateSettings();
 }
 
