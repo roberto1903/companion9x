@@ -537,10 +537,16 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_MAX_PHASES;
       else
         return O9X_MAX_PHASES;
-    case ExpoIsCurve:      
+    case Gvars:    
+    case ExpoIsCurve:
     case ExpoFlightPhases:
     case MixFlightPhases:
       return 1;
+    case GvarsFlightPhases:
+      if (board == BOARD_STOCK)
+        return 0;
+      else
+        return 1;    
     case Mixes:
       if (board == BOARD_SKY9X)
         return O9X_ARM_MAX_MIXERS;

@@ -806,6 +806,8 @@ enum Capability {
  TelemetryUnits,
  TelemetryBlades,
  TelemetryBars,
+ Gvars,
+ GvarsFlightPhases,
  TelemetryCSFields,
  TelemetryRSSIModel,
  TelemetryAlarm,
