@@ -2409,10 +2409,6 @@ void ModelEdit::tabTelemetry()
           minsb[j]->setDecimals(0);
           maxsb[j]->setDecimals(0);
       }
-      if (g_model.frsky.screens[screen].body.bars[j%4].source==0) {
-        minsb[j]->setDisabled(true);
-        maxsb[j]->setDisabled(true);
-      }
       minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
       minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,255));
       minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
@@ -2420,7 +2416,11 @@ void ModelEdit::tabTelemetry()
       maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
       maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,255));
       maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,(255-g_model.frsky.screens[screen].body.bars[j%4].barMax)));
+      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,(255-g_model.frsky.screens[screen].body.bars[j%4].barMax)));      
+    }
+    if (g_model.frsky.screens[screen].body.bars[j%4].source==0 || g_model.frsky.screens[screen].type==0) {
+      minsb[j]->setDisabled(true);
+      maxsb[j]->setDisabled(true);
     }
     connect(barsCB[j],SIGNAL(currentIndexChanged(int)),this,SLOT(telBarCBcurrentIndexChanged(int)));
     connect(maxSB[j],SIGNAL(editingFinished()),this,SLOT(telMaxSBeditingFinished()));
@@ -3469,7 +3469,7 @@ void ModelEdit::telMinSBeditingFinished()
 {
   if (telemetryLock) return;
   QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
-  int screenId = spinBox->objectName().mid(9,1).toInt() - 1;
+  int screenId = spinBox->objectName().mid(8,1).toInt() - 1;
   int barId = spinBox->objectName().right(1).toInt() - 1;
   int minId = barId+screenId*4;
   telemetryLock=true;

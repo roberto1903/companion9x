@@ -36,9 +36,10 @@ void populateRotEncCB(QComboBox *b, int value, int renumber)
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
-  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1,1,1};
+  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1};
   b->clear();
   for (int i = 0; i < 38-(last ? 2 :0); i++) {
+    qDebug() << QString(TELEMETRY_SRC).mid((abs(i))*4, 4)<< i << telem_hub[i];
     b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);
