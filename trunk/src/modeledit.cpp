@@ -932,11 +932,46 @@ void ModelEdit::tabPhases()
   memcpy(reSB, tmp2, sizeof(reSB));
   
   phasesLock = true;
-  ui->phase0GV1Name->setText(g_model.gvars_names[0]);
-  ui->phase0GV2Name->setText(g_model.gvars_names[1]);
-  ui->phase0GV3Name->setText(g_model.gvars_names[2]);
-  ui->phase0GV4Name->setText(g_model.gvars_names[3]);
-  ui->phase0GV5Name->setText(g_model.gvars_names[4]);
+  int gvars=0;
+  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    gvars=1;
+
+  if (!GetEepromInterface()->getCapability(RotaryEncoders)) {
+    ui->phase0reGB->hide();
+    ui->phase1reGB->hide();
+    ui->phase2reGB->hide();
+    ui->phase3reGB->hide();
+    ui->phase4reGB->hide();
+    ui->phase5reGB->hide();
+    ui->phase6reGB->hide();
+    ui->phase7reGB->hide();
+    ui->phase8reGB->hide();
+  }
+  if (!GetEepromInterface()->getCapability(GvarsFlightPhases) || gvars==0) {
+    if (!GetEepromInterface()->getCapability(Gvars) || gvars==0) {
+      ui->phase0gvGB->hide();
+    }
+    ui->phase1gvGB->hide();
+    ui->phase2gvGB->hide();
+    ui->phase3gvGB->hide();
+    ui->phase4gvGB->hide();
+    ui->phase5gvGB->hide();
+    ui->phase6gvGB->hide();
+    ui->phase7gvGB->hide();
+    ui->phase8gvGB->hide();
+  }
+  if (GetEepromInterface()->getCapability(Gvars) &&  gvars==1) {
+    ui->phase0GV1Name->setText(g_model.gvars_names[0]);
+    ui->phase0GV2Name->setText(g_model.gvars_names[1]);
+    ui->phase0GV3Name->setText(g_model.gvars_names[2]);
+    ui->phase0GV4Name->setText(g_model.gvars_names[3]);
+    ui->phase0GV5Name->setText(g_model.gvars_names[4]);
+    connect(ui->phase0GV1Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+    connect(ui->phase0GV2Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+    connect(ui->phase0GV3Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+    connect(ui->phase0GV4Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+    connect(ui->phase0GV5Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+  }
   displayOnePhase(0, ui->phase0Name, NULL,                   ui->phase0FadeIn, ui->phase0FadeOut, NULL,                      ui->phase0Trim1Value, ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,                       ui->phase0Trim2Value, ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,                       ui->phase0Trim3Value, ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,                       ui->phase0Trim4Value, ui->phase0Trim4Label, ui->phase0Trim4Slider, ui->phase0GV1_Label, NULL                    , ui->phase0GV1Value, ui->phase0GV2_Label, NULL                    , ui->phase0GV2Value, ui->phase0GV3_Label, NULL                    , ui->phase0GV3Value, ui->phase0GV4_Label, NULL                    , ui->phase0GV4Value, ui->phase0GV5_Label, NULL                    , ui->phase0GV5Value,ui->phase0REA_Label,NULL, ui->phase0RE1Value,ui->phase0REB_Label, NULL, ui->phase0RE2Value, true);
   displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider, ui->phase1GV1_Label, ui->phase1GV1Use, ui->phase1GV1Value, ui->phase1GV2_Label, ui->phase1GV2Use, ui->phase1GV2Value, ui->phase1GV3_Label, ui->phase1GV3Use, ui->phase1GV3Value, ui->phase1GV4_Label, ui->phase1GV4Use, ui->phase1GV4Value, ui->phase1GV5_Label, ui->phase1GV5Use, ui->phase1GV5Value,ui->phase1REA_Label, ui->phase1RE1Use, ui->phase1RE1Value,ui->phase1REB_Label, ui->phase1RE2Use, ui->phase1RE2Value, true);
   displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider, ui->phase2GV1_Label, ui->phase2GV1Use, ui->phase2GV1Value, ui->phase2GV2_Label, ui->phase2GV2Use, ui->phase2GV2Value, ui->phase2GV3_Label, ui->phase2GV3Use, ui->phase2GV3Value, ui->phase2GV4_Label, ui->phase2GV4Use, ui->phase2GV4Value, ui->phase2GV5_Label, ui->phase2GV5Use, ui->phase2GV5Value,ui->phase2REA_Label, ui->phase2RE1Use, ui->phase2RE1Value,ui->phase2REB_Label, ui->phase2RE2Use, ui->phase2RE2Value, true);
@@ -1017,11 +1052,6 @@ void ModelEdit::tabPhases()
     ui->phases->setTabText(i,TabName);
   }
   ui->phases->setCurrentIndex(0);
-  connect(ui->phase0GV1Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
-  connect(ui->phase0GV2Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
-  connect(ui->phase0GV3Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
-  connect(ui->phase0GV4Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
-  connect(ui->phase0GV5Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
   phasesLock = false;
 }
 
@@ -3587,12 +3617,9 @@ void ModelEdit::GVName_editingFinished()
   if (phasesLock) return;
   QLineEdit *lineedit = qobject_cast<QLineEdit*>(sender());
   int gvar = lineedit->objectName().mid(8,1).toInt()-1;
-  for (int i=0; i<6; i++ ) {
-    if (i<lineedit->text().length())
-      g_model.gvars_names[gvar][i]=lineedit->text().at(i).toAscii();
-    else
-      g_model.gvars_names[gvar][i]=0;
-  }
+  memset(&g_model.gvars_names[gvar],0,sizeof(g_model.gvars_names[gvar]));
+  const char * le=lineedit->text().toAscii();
+  strncpy(g_model.gvars_names[gvar], le, sizeof(g_model.gvars_names[gvar])-1);
   updateSettings();
 }
 

@@ -279,6 +279,31 @@
          </property>
         </widget>
        </item>
+       <item row="21" column="2">
+        <widget class="QComboBox" name="DSM_Type">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>LP4/LP5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DSM2only</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DSM2/DSMX</string>
+          </property>
+         </item>
+        </widget>
+       </item>
        <item row="4" column="2">
         <widget class="QCheckBox" name="thrTrimChkB">
          <property name="text">
@@ -473,6 +498,13 @@
          </property>
         </widget>
        </item>
+       <item row="8" column="2" colspan="5">
+        <widget class="Line" name="swwarn0_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
        <item row="6" column="2">
         <widget class="QComboBox" name="ttraceCB">
          <property name="sizePolicy">
@@ -590,13 +622,6 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="2" colspan="5">
-        <widget class="Line" name="swwarn0_line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item row="14" column="0" colspan="2">
         <widget class="QLabel" name="label_57">
          <property name="text">
@@ -605,31 +630,6 @@
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
-        </widget>
-       </item>
-       <item row="21" column="2">
-        <widget class="QComboBox" name="DSM_Type">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <item>
-          <property name="text">
-           <string>LP4/LP5</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DSM2only</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DSM2/DSMX</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="22" column="2">
@@ -1246,7 +1246,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>0</number>
+            <number>8</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -1621,185 +1621,171 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_46" columnstretch="1,1,0,0,1,1,0">
+              <layout class="QGridLayout" name="gridLayout_46" columnstretch="1,1">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase0GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase0gvGB">
+                 <layout class="QGridLayout" name="gridLayout_47" columnstretch="1,0,0">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase0GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="phase0GV1Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase0GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase0GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="phase0GV2Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase0GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase0GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QLineEdit" name="phase0GV3Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase0GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase0GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QLineEdit" name="phase0GV4Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase0GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase0GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QLineEdit" name="phase0GV5Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase0GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase0GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_14">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase0REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase0RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase0GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase0GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase0REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase0RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase0GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase0GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase0GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase0GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase0GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase0GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="5">
-                <spacer name="horizontalSpacer_15">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item row="0" column="1">
-                <widget class="QLineEdit" name="phase0GV1Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="phase0GV2Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLineEdit" name="phase0GV3Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="phase0GV4Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QLineEdit" name="phase0GV5Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
+                <widget class="QGroupBox" name="phase0reGB">
+                 <layout class="QGridLayout" name="gridLayout_48">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase0REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QSpinBox" name="phase0RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QSpinBox" name="phase0RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase0REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -2174,158 +2160,157 @@
               </layout>
              </item>
              <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_38" columnstretch="1,1,0,0,1,1,0">
+              <layout class="QGridLayout" name="gridLayout_38">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase1GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase1gvGB">
+                 <layout class="QGridLayout" name="gridLayout_49">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase1GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase1GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase1GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase1GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase1GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase1GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase1GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase1GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase1GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase1GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase1GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase1GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase1GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase1GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase1GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QComboBox" name="phase1GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase1GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase1REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase1RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase1RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase1GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase1GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase1GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase1REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase1RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase1RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase1GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase1GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase1GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase1GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase1GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase1GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase1GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase1GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase1GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
+                <widget class="QGroupBox" name="phase1reGB">
+                 <layout class="QGridLayout" name="gridLayout_50">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase1REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase1RE1Use"/>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase1REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase1RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase1RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase1RE2Use"/>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -2714,158 +2699,157 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_39" columnstretch="1,1,0,0,1,1,0">
-               <item row="0" column="1">
-                <widget class="QComboBox" name="phase2GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase2GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase2REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase2RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase2RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase2GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase2GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase2GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase2REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase2RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase2RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase2GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase2GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase2GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase2GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase2GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase2GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase2GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase2GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase2GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
+              <layout class="QGridLayout" name="gridLayout_39">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase2GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase2gvGB">
+                 <layout class="QGridLayout" name="gridLayout_51">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase2GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase2GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase2GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase2GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase2GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase2GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase2GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase2GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase2GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase2GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase2GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase2GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase2GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase2GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase2GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="phase2reGB">
+                 <layout class="QGridLayout" name="gridLayout_52">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase2REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase2RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase2RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase2REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase2RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase2RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -3247,158 +3231,157 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_40" columnstretch="1,1,0,0,1,1,0">
+              <layout class="QGridLayout" name="gridLayout_40">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase3GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase3gvGB">
+                 <layout class="QGridLayout" name="gridLayout_53">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase3GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase3GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase3GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase3GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase3GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase3GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase3GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase3GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase3GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase3GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase3GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase3GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase3GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase3GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase3GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QComboBox" name="phase3GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase3GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase3REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase3RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase3RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase3GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase3GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase3GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase3REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase3RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase3RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase3GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase3GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase3GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase3GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase3GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase3GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase3GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase3GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase3GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
+                <widget class="QGroupBox" name="phase3reGB">
+                 <layout class="QGridLayout" name="gridLayout_54">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase3REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase3RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase3RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase3REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase3RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase3RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -3780,158 +3763,157 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_41" columnstretch="1,1,0,0,1,1,0">
+              <layout class="QGridLayout" name="gridLayout_41">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase4GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase4gvGB">
+                 <layout class="QGridLayout" name="gridLayout_55">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase4GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase4GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase4GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase4GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase4GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase4GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase4GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase4GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase4GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase4GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase4GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase4GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase4GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase4GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase4GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QComboBox" name="phase4GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase4GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase4REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase4RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase4RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase4GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase4GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase4GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase4REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase4RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase4RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase4GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase4GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase4GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase4GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase4GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase4GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase4GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase4GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase4GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
+                <widget class="QGroupBox" name="phase4reGB">
+                 <layout class="QGridLayout" name="gridLayout_56">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase4REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase4RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase4RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase4REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase4RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase4RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -3943,62 +3925,6 @@
              <string>FP 5</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_12">
-             <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_11e_3">
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="phase5Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_5">
-                 <property name="text">
-                  <string>Phase Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_3">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_3">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_37b_6">
-                 <property name="text">
-                  <string>Switch</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QComboBox" name="phase5Switch"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase5FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase5FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_12b_3">
                <item row="0" column="0">
@@ -4305,158 +4231,57 @@
                </item>
               </layout>
              </item>
-             <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_42" columnstretch="1,1,0,0,1,1,0">
-               <item row="0" column="0">
-                <widget class="QLabel" name="phase5GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="phase5GV1Use"/>
-               </item>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_11e_3">
                <item row="0" column="2">
-                <widget class="QSpinBox" name="phase5GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                <widget class="QLineEdit" name="phase5Name">
+                 <property name="maxLength">
+                  <number>6</number>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase5REA_Label">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_37b_5">
                  <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase5RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase5RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase5GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase5GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase5GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase5REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase5RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase5RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                  <string>Phase Name</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="phase5GV3_Label">
+                <widget class="QLabel" name="label_38b_3">
                  <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase5GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase5GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                  <string>Fade In</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="phase5GV4_Label">
+                <widget class="QLabel" name="label_39b_3">
                  <property name="text">
-                  <string>GVAR4</string>
+                  <string>Fade Out</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase5GV4Use"/>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37b_6">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QComboBox" name="phase5Switch"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="QDoubleSpinBox" name="phase5FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase5GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase5GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase5GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase5GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                <widget class="QDoubleSpinBox" name="phase5FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -4469,6 +4294,162 @@
                </property>
               </widget>
              </item>
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_42">
+               <item row="0" column="0">
+                <widget class="QGroupBox" name="phase5gvGB">
+                 <layout class="QGridLayout" name="gridLayout_57">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase5GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase5GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase5GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase5GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase5GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase5GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase5GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase5GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase5GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase5GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase5GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase5GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase5GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase5GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase5GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="phase5reGB">
+                 <layout class="QGridLayout" name="gridLayout_58">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase5REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase5RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase5RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase5REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase5RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase5RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="phase6">
@@ -4476,62 +4457,6 @@
              <string>FP 6</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_13">
-             <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_11e_4">
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="phase6Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_7">
-                 <property name="text">
-                  <string>Phase Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_4">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_4">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_37b_8">
-                 <property name="text">
-                  <string>Switch</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QComboBox" name="phase6Switch"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase6FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase6FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_12b_4">
                <item row="0" column="0">
@@ -4838,159 +4763,214 @@
                </item>
               </layout>
              </item>
-             <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_43" columnstretch="1,1,0,0,1,1,0">
-               <item row="0" column="0">
-                <widget class="QLabel" name="phase6GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="phase6GV1Use"/>
-               </item>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_11e_4">
                <item row="0" column="2">
-                <widget class="QSpinBox" name="phase6GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                <widget class="QLineEdit" name="phase6Name">
+                 <property name="maxLength">
+                  <number>6</number>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase6REA_Label">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_37b_7">
                  <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase6RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase6RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase6GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase6GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase6GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase6REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase6RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase6RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                  <string>Phase Name</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="phase6GV3_Label">
+                <widget class="QLabel" name="label_38b_4">
                  <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase6GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase6GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                  <string>Fade In</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QLabel" name="phase6GV4_Label">
+                <widget class="QLabel" name="label_39b_4">
                  <property name="text">
-                  <string>GVAR4</string>
+                  <string>Fade Out</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase6GV4Use"/>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37b_8">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QComboBox" name="phase6Switch"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="QDoubleSpinBox" name="phase6FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QSpinBox" name="phase6GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
+                <widget class="QDoubleSpinBox" name="phase6FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase6GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
+              </layout>
+             </item>
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_43">
+               <item row="0" column="0">
+                <widget class="QGroupBox" name="phase6gvGB">
+                 <layout class="QGridLayout" name="gridLayout_59">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase6GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase6GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase6GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase6GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase6GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase6GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase6GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase6GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase6GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase6GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase6GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase6GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase6GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase6GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase6GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase6GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase6GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="phase6reGB">
+                 <layout class="QGridLayout" name="gridLayout_60">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase6REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase6RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase6RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase6REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase6RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase6RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -5009,6 +4989,13 @@
              <string>FP 7</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_14">
+             <item row="2" column="0">
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_5">
                <item row="0" column="2">
@@ -5372,168 +5359,160 @@
               </layout>
              </item>
              <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_44" columnstretch="1,1,0,0,1,1,0">
+              <layout class="QGridLayout" name="gridLayout_44">
                <item row="0" column="0">
-                <widget class="QLabel" name="phase7GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
+                <widget class="QGroupBox" name="phase7gvGB">
+                 <layout class="QGridLayout" name="gridLayout_61">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase7GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase7GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase7GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase7GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase7GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase7GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase7GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase7GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase7GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase7GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase7GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase7GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase7GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase7GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase7GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QComboBox" name="phase7GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase7GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase7REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase7RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase7RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase7GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase7GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase7GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase7REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase7RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase7RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase7GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase7GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase7GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase7GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase7GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase7GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase7GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase7GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase7GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
+                <widget class="QGroupBox" name="phase7reGB">
+                 <layout class="QGridLayout" name="gridLayout_62">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase7REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase7RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase7RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase7REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase7RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase7RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
-             </item>
-             <item row="2" column="0">
-              <widget class="Line" name="line_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -5542,62 +5521,6 @@
              <string>FP 8</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_15">
-             <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_11e_6">
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="phase8Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_11">
-                 <property name="text">
-                  <string>Phase Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_6">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_6">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_37b_12">
-                 <property name="text">
-                  <string>Switch</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QComboBox" name="phase8Switch"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase8FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase8FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_12b_6">
                <item row="0" column="0">
@@ -5904,169 +5827,224 @@
                </item>
               </layout>
              </item>
-             <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_45" columnstretch="1,1,0,0,1,1,0">
-               <item row="0" column="0">
-                <widget class="QLabel" name="phase8GV1_Label">
-                 <property name="text">
-                  <string>GVAR1</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="phase8GV1Use"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="phase8GV1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="5">
-                <spacer name="horizontalSpacer_13">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>138</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="phase8REA_Label">
-                 <property name="text">
-                  <string>Rotary encoder A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QComboBox" name="phase8RE1Use"/>
-               </item>
-               <item row="0" column="6">
-                <widget class="QSpinBox" name="phase8RE1Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="phase8GV2_Label">
-                 <property name="text">
-                  <string>GVAR2</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="phase8GV2Use"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="phase8GV2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="phase8REB_Label">
-                 <property name="text">
-                  <string>Rotary encoder B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QComboBox" name="phase8RE2Use"/>
-               </item>
-               <item row="1" column="6">
-                <widget class="QSpinBox" name="phase8RE2Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="phase8GV3_Label">
-                 <property name="text">
-                  <string>GVAR3</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="phase8GV3Use"/>
-               </item>
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="phase8GV3Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="phase8GV4_Label">
-                 <property name="text">
-                  <string>GVAR4</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="phase8GV4Use"/>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="phase8GV4Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="phase8GV5_Label">
-                 <property name="text">
-                  <string>GVAR5</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QComboBox" name="phase8GV5Use"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="phase8GV5Value">
-                 <property name="minimum">
-                  <number>-100</number>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="2" column="0">
               <widget class="Line" name="line_9">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
               </widget>
+             </item>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_11e_6">
+               <item row="0" column="2">
+                <widget class="QLineEdit" name="phase8Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_37b_11">
+                 <property name="text">
+                  <string>Phase Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_38b_6">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_39b_6">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_37b_12">
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QComboBox" name="phase8Switch"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="QDoubleSpinBox" name="phase8FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QDoubleSpinBox" name="phase8FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_45">
+               <item row="0" column="0">
+                <widget class="QGroupBox" name="phase8gvGB">
+                 <layout class="QGridLayout" name="gridLayout_63">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase8GV1_Label">
+                    <property name="text">
+                     <string>GVAR1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase8GV1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase8GV1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase8GV2_Label">
+                    <property name="text">
+                     <string>GVAR2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase8GV2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase8GV2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="phase8GV3_Label">
+                    <property name="text">
+                     <string>GVAR3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="phase8GV3Use"/>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QSpinBox" name="phase8GV3Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="phase8GV4_Label">
+                    <property name="text">
+                     <string>GVAR4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="phase8GV4Use"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QSpinBox" name="phase8GV4Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="phase8GV5_Label">
+                    <property name="text">
+                     <string>GVAR5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="phase8GV5Use"/>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QSpinBox" name="phase8GV5Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="phase8reGB">
+                 <layout class="QGridLayout" name="gridLayout_64">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="phase8REB_Label">
+                    <property name="text">
+                     <string>Rotary encoder B</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="phase8RE2Use"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QSpinBox" name="phase8RE2Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="phase8RE1Use"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QSpinBox" name="phase8RE1Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="phase8REA_Label">
+                    <property name="text">
+                     <string>Rotary encoder A</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
