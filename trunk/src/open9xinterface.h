@@ -81,6 +81,78 @@ class Open9xInterface : public EEPROMInterface
 
 };
 
+class Open9xFirmware: public FirmwareInfo {
+  public:
+    Open9xFirmware(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), bool voice = false):
+      FirmwareInfo(id, name, eepromInterface, url, stamp, voice)
+    {
+      addLanguage("en");
+      addLanguage("fr");
+      addLanguage("se");
+      addLanguage("de");
+      addLanguage("it");
+      addLanguage("cz");
+      addTTSLanguage("en");
+      addTTSLanguage("fr");
+      addTTSLanguage("it");
+      addTTSLanguage("cz");
+      addTTSLanguage("sk");
+    }
+    
+    virtual unsigned int getEepromVersion(unsigned int revision) {
+      switch(this->eepromInterface->getBoard()) {
+        case BOARD_SKY9X:
+          if (revision == 0)
+            return 212;
+          if (revision >= 1217)
+            return 212;
+          if (revision >= 1174)
+            return 211;
+          if (revision >= 1031)
+            return 210;
+          if (revision >= 791)
+            return 209;
+          if (revision >= 641)
+            return 208;
+          break;
+        case BOARD_GRUVIN9X:
+          if (revision == 0)
+            return 211;
+          if (revision >= 1217)
+            return 211;
+          if (revision >= 1174)
+            return 210;
+          if (revision >= 791)
+            return 209;
+          if (revision >= 641)
+            return 208;
+          if (revision >= 547)
+            return 207;
+          break;
+        default:
+          if (revision == 0)
+            return 211;
+          if (revision >= 1217)
+            return 211;
+          if (revision >= 1174)
+            return 210;
+          if (revision >= 791)
+            return 209;
+          if (revision >= 641)
+            return 208;
+          break;
+      }
+      if (revision >= 321)
+        return 205;
+      else if (revision >= 217)
+        return 204;
+      else if (revision >= 184)
+        return 203;
+      else
+        return 202;
+    }
+};
+
 void RegisterOpen9xFirmwares();
 
 #endif

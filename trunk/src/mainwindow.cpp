@@ -57,6 +57,7 @@
 #include "burndialog.h"
 #include "hexinterface.h"
 #include "warnings.h"
+#include "open9xinterface.h"
 
 #define DONATE_STR "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUZ48K4SEXDP2"
 #ifdef __APPLE__
@@ -952,6 +953,12 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
 
   QString fwSvn = flash.getSvn();
   QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
+  fwSvn = svnTags.back();
+  if (fwSvn.endsWith('M'))
+    fwSvn = fwSvn.mid(0, fwSvn.size()-1);
+  int revision = fwSvn.toInt();
+  if (!revision)
+    return false;
 
   FirmwareInfo *firmware = NULL;
   unsigned int version = 0;
@@ -959,10 +966,15 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
 
   if (svnTags.at(0) == "open9x") {
     firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 65536 ? "open9x-stock" : "open9x-v4"));
-    QString fwBuild = flash.getBuild();
-    QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
-    version = buildTags.at(0).toInt();
-    variant = buildTags.at(1).toInt();
+    if (revision > 1464) {
+      QString fwBuild = flash.getBuild();
+      QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
+      version = buildTags.at(0).toInt();
+      variant = buildTags.at(1).toInt();
+    }
+    else {
+      version = ((Open9xFirmware *)firmware)->getEepromVersion(revision);
+    }
   }
   else if (svnTags.at(0) == "gruvin9x" && svnTags.at(1) == "frsky")
     firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
