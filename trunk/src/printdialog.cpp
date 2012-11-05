@@ -446,14 +446,14 @@ void printDialog::printMixes()
     int lastCHN = -1;
     for(int i=0; i<GetEepromInterface()->getCapability(Mixes); i++) {
       MixData *md = &g_model->mixData[i];
-      if(!md->destCh) break;
+      if(!md->destCh || md->destCh>GetEepromInterface()->getCapability(Outputs) ) break;
       str.append("<tr><td><font size=+1 face='Courier New'>");
       if(lastCHN!=md->destCh) {
         lastCHN=md->destCh;
         str.append("<b>"+tr("CH")+QString("%1</b>").arg(lastCHN,2,10,QChar('0')));
+      } else {
+        str.append("&nbsp;");
       }
-      else
-      str.append("&nbsp;");
       str.append("</font></td>");
       str.append("<td><font size=+1 face='Courier New' color=green>");
       switch(md->mltpx) {
