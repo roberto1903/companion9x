@@ -914,25 +914,6 @@ QString getstamp( int board) {
     return url;
 }
 
-class Open9xFirmware: public FirmwareInfo {
-  public:
-    Open9xFirmware(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), bool voice = false):
-      FirmwareInfo(id, name, eepromInterface, url, stamp, voice)
-    {
-      addLanguage("en");
-      addLanguage("fr");
-      addLanguage("se");
-      addLanguage("de");
-      addLanguage("it");
-      addLanguage("cz");
-      addTTSLanguage("en");
-      addTTSLanguage("fr");
-      addTTSLanguage("it");
-      addTTSLanguage("cz");
-      addTTSLanguage("sk");
-    }
-};
-
 void RegisterOpen9xFirmwares()
 {
   Open9xFirmware * open9x;
