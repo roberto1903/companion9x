@@ -81,6 +81,7 @@ void compareDialog::printDiff()
   printMixers();
   printLimits();
   printCurves();
+  printGvars();
   printSwitches();
   printSafetySwitches();
   printFSwitches();
@@ -821,6 +822,50 @@ void compareDialog::printLimits()
   }
   str.append("</table></td></tr></table>");
   te->append(str);
+}
+
+void compareDialog::printGvars()
+{
+  QString color;
+  int gvars=0;
+  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    gvars=1;
+  if (!GetEepromInterface()->getCapability(GvarsFlightPhases) && (gvars==1 && GetEepromInterface()->getCapability(Gvars))) {
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+    str.append("<tr><td colspan=2><h2>"+tr("Global Variables")+"</h2></td></tr>");
+    str.append("<tr><td width=50%>");
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=100>");
+    PhaseData *pd1=&g_model1->phaseData[0];
+    PhaseData *pd2=&g_model2->phaseData[0];
+    int width=100/MAX_GVARS;
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {        
+      str.append(QString("<td width=\"%1%\" align=\"center\"><b>").arg(width)+tr("GV")+QString("%1</b></td>").arg(i+1));
+    }
+    str.append("</tr>");
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {
+      color=getColor1(pd1->gvars[i],pd2->gvars[i]);
+      str.append(QString("<td width=\"%1%\" align=\"center\"><font color=%2>").arg(width).arg(color)+QString("%1</font></td>").arg(pd1->gvars[i]));
+    }
+    str.append("</tr>");
+    str.append("</table></td><td width=50%>");
+    str.append("<table border=1 cellspacing=0 cellpadding=3 width=100>");
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {        
+      str.append(QString("<td width=\"%1%\" align=\"center\"><b>").arg(width)+tr("GV")+QString("%1</b></td>").arg(i+1));
+    }
+    str.append("</tr>");
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {
+      color=getColor2(pd1->gvars[i],pd2->gvars[i]);
+      str.append(QString("<td width=\"%1%\" align=\"center\"><font color=%2>").arg(width).arg(color)+QString("%1</font></td>").arg(pd2->gvars[i]));
+    }
+    str.append("</tr>");
+    str.append("</table></td>");
+    str.append("</tr></table>");
+    te->append(str);
+  }
 }
 
 void compareDialog::printExpos()

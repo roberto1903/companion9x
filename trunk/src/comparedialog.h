@@ -97,6 +97,7 @@ protected:
     void printExpos();
     void printMixers();
     void printCurves();
+    void printGvars();
     void printSwitches();
     void printSafetySwitches();
     void printFSwitches();

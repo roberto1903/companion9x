@@ -33,6 +33,7 @@ private:
     void printMixes();
     void printLimits();
     void printCurves();
+    void printGvars();
     void printSwitches();
     void printSafetySwitches();
     void printFSwitches();
