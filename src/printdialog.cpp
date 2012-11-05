@@ -31,13 +31,13 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
     curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name);
     printSetup();
     if (GetCurrentFirmwareVariant() & GVARS_VARIANT) {
-      te->append(printPhases());
-      te->append("<br>");
+      te->append(printPhases()+"<br>");
     }
     printExpo();
     printMixes();
     printLimits();
     printCurves();
+    printGvars();
     printSwitches();
     printSafetySwitches();
     printFSwitches();
@@ -913,6 +913,33 @@ void printDialog::printSwitches()
       te->append(str);
 }
 
+void printDialog::printGvars()
+{
+  int gvars=0;
+  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    gvars=1;
+  if (!GetEepromInterface()->getCapability(GvarsFlightPhases) && (gvars==1 && GetEepromInterface()->getCapability(Gvars))) {
+    QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
+    str.append("<tr><td><h2>"+tr("Global Variables")+"</h2></td></tr>");
+    str.append("<tr><td><table border=1 cellspacing=0 cellpadding=3 width=100>");
+    PhaseData *pd=&g_model->phaseData[0];
+    int width=100/MAX_GVARS;
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {        
+        str.append(QString("<td width=\"%1%\" align=\"center\"><b>").arg(width)+tr("GV")+QString("%1</b></td>").arg(i+1));
+    }
+    str.append("</tr>");
+    str.append("<tr>");
+    for(int i=0; i<MAX_GVARS; i++) {        
+        str.append(QString("<td width=\"%1%\" align=\"center\"><font color=green>").arg(width)+QString("%1</font></td>").arg(pd->gvars[i]));
+    }
+    str.append("</tr>");
+    str.append("</table></td></tr></table>");
+    str.append("<br>");
+    te->append(str);
+  }
+}
+
 void printDialog::printSafetySwitches()
 {
     int sc=0;
@@ -1128,7 +1155,7 @@ void printDialog::printFrSky()
             tc++;
           str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td><td  align=\"Center\"><b>"+getFrSkyBarSrc(fd->screens[j].body.bars[i].source)+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->screens[j].body.bars[i].source, fd->screens[j].body.bars[i].barMin,fd))+"</b></td><td  align=\"Right\"><b>"+QString::number(getBarValue(fd->screens[j].body.bars[i].source,(255-fd->screens[j].body.bars[i].barMax),fd))+"</b></td></tr>");
         }
-        str.append("</table><br/>");
+        str.append("</table>");
       }
     }
   }
