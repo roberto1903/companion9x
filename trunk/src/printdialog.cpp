@@ -253,26 +253,32 @@ void printDialog::printSetup()
 QString printDialog::printPhases()
 {      
     int gvars=0;
-    if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) && GetEepromInterface()->getCapability(GvarsFlightPhases))
       gvars=1;
     QString str="";
-    str.append(QString("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=%1><h2>").arg(gvars==0 ? 8 : 13));
+    str.append(QString("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=%1><h2>").arg(gvars==0 ? 8+GetEepromInterface()->getCapability(RotaryEncoders) : 8+MAX_GVARS+GetEepromInterface()->getCapability(RotaryEncoders)));
     str.append(tr("Flight Phases Settings"));
     str.append("</h2></td></tr><tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
     str.append(tr("Fades")+"</b></td>");
-    str.append("<td colspan=4 align=center><b>"+tr("Trims"));
+    str.append("<td colspan=4 align=center><b>"+tr("Trims")+"</b></td>");
     if (gvars) {
-      str.append("<td colspan=5 align=center><b>"+tr("Gvars"));
+      str.append(QString("<td colspan=%1 align=center><b>").arg(MAX_GVARS)+tr("Gvars")+"</b></td>");
     }
-    str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
+    if (GetEepromInterface()->getCapability(RotaryEncoders)) {
+      str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot.Enc.")+"</b></td>");
+    }
+    str.append("<td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"90\"><b>"+tr("Phase name"));
     str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
     for (int i=0; i<4; i++) {
       str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
     }
     if (gvars==1) {
-      for (int i=1; i<6; i++) {
-        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i).arg(g_model->gvars_names[i-1]));
+      for (int i=0; i<MAX_GVARS; i++) {
+        str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i+1).arg(g_model->gvars_names[i]));
       }      
+    }
+    for (int i=0; i<GetEepromInterface()->getCapability(RotaryEncoders); i++) {
+      str.append(QString("<td align=\"center\"><b>RE%1</b></td>").arg((i==0 ? 'A': 'B')));
     }
     str.append("</tr>");
     for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
@@ -286,7 +292,7 @@ QString printDialog::printPhases()
         }
       }
       if (gvars==1) {
-        for (int k=0; k<5; k++) {
+        for (int k=0; k<MAX_GVARS; k++) {
           if (pd->gvars[k]<=1024) {
             str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=green>%1").arg(pd->gvars[k])+"</font></td>");
           }
@@ -297,6 +303,16 @@ QString printDialog::printPhases()
           }
         }
       }
+      for (int k=0; k<GetEepromInterface()->getCapability(RotaryEncoders); k++) {
+        if (pd->rotaryEncoders[k]<=1024) {
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=green>%1").arg(pd->rotaryEncoders[k])+"</font></td>");
+        }
+        else {
+          int num = pd->rotaryEncoders[k] - 1025;
+          if (num>=i) num++;
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=green>")+tr("FP")+QString("%1</font></td>").arg(num));
+        }
+      }      
       str.append(QString("<td align=center><font size=+1 face='Courier New' color=green>%1</font></td>").arg(pd->swtch.toString()));
       str.append("</tr>");
     }
