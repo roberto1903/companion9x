@@ -134,7 +134,7 @@ PACK(typedef struct t_Open9xGeneralData_v201 {
 
   operator GeneralSettings();
   t_Open9xGeneralData_v201() { memset(this, 0, sizeof(t_Open9xGeneralData_v201)); }
-  t_Open9xGeneralData_v201(GeneralSettings&, int version);
+  t_Open9xGeneralData_v201(GeneralSettings&, unsigned int version, unsigned int variant);
 
 }) Open9xGeneralData_v201;
 

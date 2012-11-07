@@ -819,7 +819,8 @@ void MainWindow::burnFrom()
     }
 }
 
-void MainWindow::burnExtenalToEEPROM() {
+void MainWindow::burnExtenalToEEPROM()
+{
   QSettings settings("companion9x", "companion9x");
   QString fileName;
   bool backup = false;
@@ -841,7 +842,8 @@ void MainWindow::burnExtenalToEEPROM() {
         }
         backupEnable = false;
       }
-    } else {
+    }
+    else {
       backupEnable = false;
     }
     if (backup) {
@@ -867,12 +869,13 @@ void MainWindow::burnExtenalToEEPROM() {
                                             QMessageBox::Yes | QMessageBox::No);
        if (ret==QMessageBox::No)
          return;
-      } else {
+      }
+      else {
         int rev = getEpromVersion(restoreFile);
         if ((rev / 100) != (oldrev / 100)) {
           QMessageBox::warning(this, tr("Warning"), tr("Firmware in radio is of a different family of eeprom written, check file and preferences!"));
         }
-        if (rev < oldrev) {
+        else if (rev < oldrev) {
           QMessageBox::warning(this, tr("Warning"), tr("Firmware in flash is outdated, please upgrade!"));
         }
         fileName = restoreFile;
@@ -880,7 +883,8 @@ void MainWindow::burnExtenalToEEPROM() {
       QByteArray ba = tempFlash.toLatin1();
       char *name = ba.data();
       unlink(name);
-    } else {
+    }
+    else {
       if (backupEnable) {
         QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss") + ".bin";
         QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);

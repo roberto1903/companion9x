@@ -141,7 +141,7 @@ t_Open9xTrainerData_v201::t_Open9xTrainerData_v201(TrainerData &c9x)
   }
 }
 
-t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, int version)
+t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, unsigned int version, unsigned int variant)
 {
   memset(this, 0, sizeof(t_Open9xGeneralData_v201));
 

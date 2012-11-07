@@ -75,6 +75,9 @@ class Open9xInterface : public EEPROMInterface
     template <class T>
     bool loadGeneral(GeneralSettings &settings);
 
+    template <class T>
+    bool saveGeneral(GeneralSettings &settings, uint32_t version, uint32_t variant);
+
     EFile *efile;
 
     BoardEnum board;
