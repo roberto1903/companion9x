@@ -124,7 +124,7 @@ t_Open9xM128ModelData_v212::operator ModelData ()
   return c9x;
 }
 
-#define MODEL_DATA_SIZE_M128_212 841
+#define MODEL_DATA_SIZE_M128_212 849
 t_Open9xM128ModelData_v212::t_Open9xM128ModelData_v212(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_M128_212) {
