@@ -2076,17 +2076,25 @@ t_Open9xFrSkyData_v210::operator FrSkyData ()
   c9x.voltsSource = voltsSource;
   c9x.blades = blades;
   c9x.currentSource=currentSource;
+
+  int lines_screen_index = 0;
   c9x.screens[0].type = 1;
-  for (int i=0; i<4; i++)
-    c9x.screens[0].body.bars[i] = bars[i];
-  c9x.screens[1].type = 0;
+  for (int i=0; i<4; i++) {
+    if (bars[i].source) {
+      c9x.screens[0].body.bars[i] = bars[i];
+      lines_screen_index = 1;
+    }
+  }
+
+  c9x.screens[lines_screen_index].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
       uint8_t i = 2*line + col;
-      c9x.screens[1].body.cells[i] = (col==0 ? (lines[line] & 0x0f) : ((lines[line] & 0xf0) / 16));
-      c9x.screens[1].body.cells[i] += (((linesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.screens[lines_screen_index].body.cells[i] = (col==0 ? (lines[line] & 0x0f) : ((lines[line] & 0xf0) / 16));
+      c9x.screens[lines_screen_index].body.cells[i] += (((linesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
+
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
   c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
   c9x.varioSource = varioSource;
@@ -2104,15 +2112,22 @@ t_Open9xFrSkyData_v210::t_Open9xFrSkyData_v210(FrSkyData &c9x)
   voltsSource = c9x.voltsSource;
   blades = c9x.blades;
   currentSource=c9x.currentSource;
-  for (int i=0; i<4; i++)
-    bars[i] = c9x.screens[0].body.bars[i];
-  linesXtra=0;
-  for (int j=0; j<4; j++) {
-    lines[j] = 0;
-    for (int k=0; k<2; k++) {
-      int value = c9x.screens[1].body.cells[2*j+k];
-      lines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
-      linesXtra |= (value / 16) << (4*j+2*k);
+
+  for (int scr=0; scr<2; scr++) {
+    if (c9x.screens[scr].type == 1) {
+      for (int i=0; i<4; i++)
+        bars[i] = c9x.screens[scr].body.bars[i];
+    }
+    else {
+      linesXtra=0;
+      for (int j=0; j<4; j++) {
+        lines[j] = 0;
+        for (int k=0; k<2; k++) {
+          int value = c9x.screens[scr].body.cells[2*j+k];
+          lines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
+          linesXtra |= (value / 16) << (4*j+2*k);
+        }
+      }
     }
   }
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
