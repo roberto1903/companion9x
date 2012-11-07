@@ -260,14 +260,19 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 }
 
 template <class T>
+bool Open9xInterface::saveGeneral(GeneralSettings &settings, uint32_t version, uint32_t variant)
+{
+  T open9xSettings(settings, version, variant);
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xSettings, sizeof(T));
+  return (sz == sizeof(T));
+}
+
+template <class T>
 bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
 {
   T open9xModel(model);
   int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (uint8_t*)&open9xModel, sizeof(T));
-  if(sz != sizeof(T)) {
-    return false;
-  }
-  return true;
+  return (sz == sizeof(T));
 }
 
 template <class T>
@@ -390,24 +395,27 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   efile->EeFsCreate(eeprom, size, ((board==BOARD_GRUVIN9X || board==BOARD_M128) && version >= 207) ? 5 : 4);
 
+  int result = 0;
+
   if (board == BOARD_SKY9X) {
-    Open9xArmGeneralData open9xGeneral(radioData.generalSettings, version, variant);
-    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xArmGeneralData));
-    if(sz != sizeof(Open9xArmGeneralData)) {
-      return 0;
-    }
+    if (version < 213)
+      result = saveGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings, version, variant);
+    else
+      result = saveGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings, version, variant);
   }
   else {
-    Open9xGeneralData open9xGeneral(radioData.generalSettings, version, variant);
-    int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
-    if(sz != sizeof(Open9xGeneralData)) {
-      return 0;
-    }
+    if (version < 212)
+      result = saveGeneral<Open9xGeneralData_v201>(radioData.generalSettings, version, variant);
+    else
+      result = saveGeneral<Open9xGeneralData_v212>(radioData.generalSettings, version, variant);
   }
+  
+  if (!result)
+    return 0;
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
-      int result = 0;
+      result = 0;
       switch(version) {
         case 202:
           result = saveModel<Open9xModelData_v202>(i, radioData.models[i]);

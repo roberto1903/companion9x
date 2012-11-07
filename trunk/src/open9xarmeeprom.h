@@ -80,7 +80,7 @@ PACK(typedef struct t_Open9xArmGeneralData_v208 {
 
   operator GeneralSettings();
   t_Open9xArmGeneralData_v208() { memset(this, 0, sizeof(t_Open9xArmGeneralData_v208)); }
-  t_Open9xArmGeneralData_v208(GeneralSettings&, int version);
+  t_Open9xArmGeneralData_v208(GeneralSettings&, unsigned int version, unsigned int variant);
 
 }) Open9xArmGeneralData_v208;
 

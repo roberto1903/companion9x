@@ -233,7 +233,7 @@ RawSource open9xArm210ToSource(int8_t value)
   }
 }
 
-t_Open9xArmGeneralData_v208::t_Open9xArmGeneralData_v208(GeneralSettings &c9x, int version)
+t_Open9xArmGeneralData_v208::t_Open9xArmGeneralData_v208(GeneralSettings &c9x, unsigned int version, unsigned int variant)
 {
   memset(this, 0, sizeof(t_Open9xArmGeneralData_v208));
 
