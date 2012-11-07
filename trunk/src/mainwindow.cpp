@@ -973,8 +973,10 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     if (revision > 1464) {
       QString fwBuild = flash.getBuild();
       QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
-      version = buildTags.at(0).toInt();
-      variant = buildTags.at(1).toInt();
+      if (buildTags.size() >= 1)
+        version = buildTags.at(0).toInt();
+      if (buildTags.size() >= 2)
+        variant = buildTags.at(1).toInt();
     }
     else {
       version = ((Open9xFirmware *)firmware)->getEepromVersion(revision);
