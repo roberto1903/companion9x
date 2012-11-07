@@ -605,7 +605,7 @@ void RegisterFirmwares()
   firmwares.push_back(new FirmwareInfo("er9x", QObject::tr("er9x"), new Er9xInterface(), "http://er9x.googlecode.com/svn/trunk/%1.hex", ER9X_STAMP));
   FirmwareInfo * er9x = firmwares.last();
 
-  Option er9x_options[] = { { "frsky", "", 0 }, { "jeti", "", 0 }, { "ardupilot", "", 0 }, { "nmea", "", 0 }, { NULL } };
+  Option er9x_options[] = { { "noht", "", 0 }, { "frsky", "", 0 }, { "frsky-noht", "", 0 }, { "jeti", "", 0 }, { "ardupilot", "", 0 }, { "nmea", "", 0 }, { NULL } };
   er9x->addOptions(er9x_options);
   er9x->addOption("noht");
 
