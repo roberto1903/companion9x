@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>531</width>
-    <height>275</height>
+    <height>323</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -503,17 +503,17 @@ Please only use this if you know what you are doing.  There are no error checks 
        </item>
        <item>
         <property name="text">
-         <string>avrdoper</string>
+         <string notr="true">avrdoper</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>/dev/ttyUSB0</string>
+         <string notr="true">/dev/ttyUSB0</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>/dev/ttyUSB1</string>
+         <string notr="true">/dev/ttyUSB1</string>
         </property>
        </item>
       </widget>
@@ -563,17 +563,17 @@ m2560 for v4.1 boards</string>
        </property>
        <item>
         <property name="text">
-         <string>m64</string>
+         <string notr="true">m64</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>m128</string>
+         <string notr="true">m128</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>m2560</string>
+         <string notr="true">m2560</string>
         </property>
        </item>
       </widget>
@@ -593,7 +593,7 @@ m2560 for v4.1 boards</string>
        </property>
        <item>
         <property name="text">
-         <string>at91sam3s4-9x</string>
+         <string notr="true">at91sam3s4-9x</string>
         </property>
        </item>
       </widget>
