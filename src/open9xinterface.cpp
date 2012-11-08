@@ -941,6 +941,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
@@ -951,7 +952,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
-  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 
   /* Stock board with M128 chip */
@@ -968,6 +968,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
@@ -977,7 +978,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
-  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 
   /* Gruvin9x board */
@@ -993,6 +993,7 @@ void RegisterOpen9xFirmwares()
   Option dsm2_options[] = { { "DSM2", QObject::tr("Support for DSM2 modules"), 0 }, { "DSM2PPM", QObject::tr("Support for DSM2 modules using ppm instead of true serial"), 0 }, { NULL } };
   open9x->addOptions(dsm2_options);
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
@@ -1000,7 +1001,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
-  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 
   /* Sky9x board */
@@ -1010,12 +1010,12 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
-  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   firmwares.push_back(open9x);
 }
