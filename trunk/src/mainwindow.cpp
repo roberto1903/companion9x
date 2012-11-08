@@ -951,6 +951,7 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
 
 bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
 {
+  FirmwareInfo *firmware = GetCurrentFirmware();
   FlashInterface flash(flashFile);
   if (!flash.isValid())
     return false;
@@ -964,12 +965,10 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!revision)
     return false;
 
-  FirmwareInfo *firmware = NULL;
   unsigned int version = 0;
   unsigned int variant = 0;
 
   if (svnTags.at(0) == "open9x") {
-    firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 65536 ? "open9x-stock" : "open9x-v4"));
     if (revision > 1464) {
       QString fwBuild = flash.getBuild();
       if (fwBuild.contains("-")) {
@@ -980,22 +979,13 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
           variant = buildTags.at(1).toInt();
       }
       else {
-        version = fwBuild.toInt();
+        version = fwBuild.toInt(); // TODO changer le nom de la variable
       }
     }
     else {
       version = ((Open9xFirmware *)firmware)->getEepromVersion(revision);
     }
   }
-  else if (svnTags.at(0) == "gruvin9x" && svnTags.at(1) == "frsky")
-    firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-stable-stock" : "gruvin9x-stable-v4");
-  else if (svnTags.at(0) == "gruvin9x" && svnTags.at(1) == "trunk")
-    firmware = GetFirmware(flash.getSize() < 65536 ? "gruvin9x-trunk-stock" : "gruvin9x-trunk-v4");
-  else if (svnTags.at(0) == "er9x")
-    firmware = GetFirmware("er9x");
-  /* else... others */
-  if (!firmware)
-    return false;
 
   QFile file(backupFile);
   int eeprom_size = file.size();
