@@ -972,11 +972,16 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     firmware = GetFirmware(QFileInfo(flashFile).suffix().toUpper()=="BIN" ? "open9x-arm" : (flash.getSize() < 65536 ? "open9x-stock" : "open9x-v4"));
     if (revision > 1464) {
       QString fwBuild = flash.getBuild();
-      QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
-      if (buildTags.size() >= 1)
-        version = buildTags.at(0).toInt();
-      if (buildTags.size() >= 2)
-        variant = buildTags.at(1).toInt();
+      if (fwBuild.contains("-")) {
+        QStringList buildTags = fwBuild.split("-", QString::SkipEmptyParts);
+        if (buildTags.size() >= 1)
+          version = buildTags.at(0).toInt();
+        if (buildTags.size() >= 2)
+          variant = buildTags.at(1).toInt();
+      }
+      else {
+        version = fwBuild.toInt();
+      }
     }
     else {
       version = ((Open9xFirmware *)firmware)->getEepromVersion(revision);
