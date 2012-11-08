@@ -68,7 +68,7 @@ const char * Open9xInterface::getName()
     case BOARD_GRUVIN9X:
       return "Open9x for gruvin9x board";
     case BOARD_SKY9X:
-      return "Open9x for ersky9x board";
+      return "Open9x for sky9x board";
     default:
       return "Open9x for an unknown board";
   }
