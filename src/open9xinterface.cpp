@@ -948,6 +948,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
