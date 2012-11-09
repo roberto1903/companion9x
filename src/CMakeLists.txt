@@ -71,8 +71,6 @@ SET( companion9x_SRCS
      xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx
      ${PROJECT_SOURCE_DIR}/../open9x/stamp-open9x.h
-     ${PROJECT_SOURCE_DIR}/../gruvin9x/stamp-gruvin9x.h
-     ${PROJECT_SOURCE_DIR}/../gruvin9x-stable/stamp-gruvin9x.h
      ${PROJECT_SOURCE_DIR}/../th9x/stamp-th9x.h
      ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
      th9xeeprom.cpp
@@ -84,14 +82,7 @@ SET( companion9x_SRCS
      er9xsimulator.cpp
      er9ximport.cpp
      gruvin9xeeprom.cpp
-     gruvin9xstableinterface.cpp
-     gruvin9xstablesimulator.cpp
-     gruvin9xstableimport.cpp
      gruvin9xinterface.cpp  
-     gruvin9xsimulator.cpp
-     gruvin9ximport.cpp
-     gruvin9xv4simulator.cpp
-     gruvin9xv4import.cpp  
      open9xeeprom.cpp
      open9xinterface.cpp
      open9xsimulator.cpp  
@@ -241,12 +232,6 @@ NOW(TIME)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
 
-SET( FIRMWARES gruvin9x-stable gruvin9x )
-FOREACH( FIRMWARE ${FIRMWARES} )
-  Subversion_WC_INFO( ${PROJECT_SOURCE_DIR}/../${FIRMWARE} G9X )
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-gruvin9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-gruvin9x.h @ONLY)
-ENDFOREACH( FIRMWARE )
-
 SET( FIRMWARES open9x )
 FOREACH( FIRMWARE ${FIRMWARES} )
   Subversion_WC_INFO( ${PROJECT_SOURCE_DIR}/../${FIRMWARE} G9X )
@@ -371,7 +356,7 @@ ADD_CUSTOM_TARGET( translations
                    COMMAND lupdate-qt4 ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )
 
 SET(CPACK_PACKAGE_NAME "COMPANION9X")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "EEPROM Editor for open9x / gruvin9x / er9x / th9x open source 9X firmwares")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "EEPROM Editor for open9x / er9x / th9x open source 9X firmwares")
 string(TOLOWER "${CPACK_PACKAGE_NAME}" CPACK_PACKAGE_NAME_LOWERCASE)
 find_program(DPKG_PROGRAM dpkg DOC "dpkg program of Debian-based systems")
 if(DPKG_PROGRAM)
