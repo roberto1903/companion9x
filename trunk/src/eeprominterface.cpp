@@ -4,7 +4,6 @@
 #include "er9xinterface.h"
 #include "th9xinterface.h"
 #include "gruvin9xinterface.h"
-#include "gruvin9xstableinterface.h"
 #include "open9xinterface.h"
 #include "ersky9xinterface.h"
 #include "qsettings.h"
@@ -608,14 +607,6 @@ void RegisterFirmwares()
   Option er9x_options[] = { { "noht", "", 0 }, { "frsky", "", 0 }, { "frsky-noht", "", 0 }, { "jeti", "", 0 }, { "ardupilot", "", 0 }, { "nmea", "", 0 }, { NULL } };
   er9x->addOptions(er9x_options);
   er9x->addOption("noht");
-
-  FirmwareInfo * gruvin9x = new FirmwareInfo("gruvin9x-stock", QObject::tr("gruvin9x stable for stock board"), new Gruvin9xInterface(BOARD_STOCK), "http://gruvin9x.googlecode.com/svn/branches/frsky/%1.hex");
-  firmwares.push_back(gruvin9x);
-  gruvin9x->addOption("frsky");
-  gruvin9x->addOption("speaker");
-  firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-stock", QObject::tr("gruvin9x trunk for stock board"), new Gruvin9xInterface(BOARD_STOCK)));
-  firmwares.push_back(new FirmwareInfo("gruvin9x-v4", QObject::tr("gruvin9x stable for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X), "http://gruvin9x.googlecode.com/svn/branches/frsky/gruvin9x.hex"));
-  firmwares.push_back(new FirmwareInfo("gruvin9x-trunk-v4", QObject::tr("gruvin9x trunk for v4 board"), new Gruvin9xInterface(BOARD_GRUVIN9X)));
 
   RegisterOpen9xFirmwares();
 

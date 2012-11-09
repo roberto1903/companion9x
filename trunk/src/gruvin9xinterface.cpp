@@ -17,8 +17,6 @@
 #include <iostream>
 #include "gruvin9xinterface.h"
 #include "gruvin9xeeprom.h"
-#include "gruvin9xsimulator.h"
-#include "gruvin9xv4simulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -323,8 +321,5 @@ int Gruvin9xInterface::isAvailable(Protocol proto)
 
 SimulatorInterface * Gruvin9xInterface::getSimulator()
 {
-  if (board == BOARD_STOCK)
-    return new Gruvin9xSimulator(this);
-  else
-    return new Gruvin9xV4Simulator(this);
+  return NULL;
 }
