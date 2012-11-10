@@ -110,7 +110,10 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
   if (!data) {
     // load from EEPROM
     efile->openRd(FILE_MODEL(index));
-    if (efile->readRlc2((uint8_t*)&_model, sizeof(T))) {
+    int sz = efile->readRlc2((uint8_t*)&_model, sizeof(T));
+    if (sz) {
+      if (sz < (int)sizeof(T))
+        return false;
       model = _model;
       if (stickMode) {
         applyStickModeToModel(model, stickMode);

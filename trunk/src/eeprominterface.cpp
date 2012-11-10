@@ -580,8 +580,8 @@ QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
   eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
-  eepromInterfaces.push_back(new Open9xInterface(BOARD_M128));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_M128));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_SKY9X));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
