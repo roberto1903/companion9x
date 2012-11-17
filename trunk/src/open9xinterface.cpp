@@ -106,15 +106,16 @@ template <class T>
 bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsigned int stickMode)
 {
   T _model;
-
+  
   if (!data) {
     // load from EEPROM
     efile->openRd(FILE_MODEL(index));
     int sz = efile->readRlc2((uint8_t*)&_model, sizeof(T));
     if (sz) {
-      if (sz < (int)sizeof(T))
-        return false;
       model = _model;
+      if (sz < (int)sizeof(T)) {
+        std::cout <<model.name << ", " << sz << ", " << (int)sizeof(T) <<"\n";
+      }
       if (stickMode) {
         applyStickModeToModel(model, stickMode);
       }
@@ -361,14 +362,12 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   }
   
   std::cout << " variant " << radioData.generalSettings.variant;
-
   for (int i=0; i<getMaxModels(); i++) {
     if (!loadModel(version, radioData.models[i], NULL, i, radioData.generalSettings.variant, radioData.generalSettings.stickMode+1)) {
-      std::cout << " ko\n";
-      return false;
+//      std::cout << " ko\n";
+//      return false;
     }
   }
-
   std::cout << " ok\n";
   return true;
 }
