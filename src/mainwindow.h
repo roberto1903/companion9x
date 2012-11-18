@@ -96,6 +96,7 @@ private slots:
     void cut();
     void openRecentFile();
     void loadProfile();
+    void logFile();
     void copy();
     void paste();
     void burnTo();
@@ -216,6 +217,7 @@ private:
     QAction *aboutAct;
     QAction *printAct;
     QAction *loadbackupAct;
+    QAction *logsAct;
     QAction *switchLayoutDirectionAct;
     QAction *recentFileActs[MAX_RECENT];
     QAction *profileActs[MAX_PROFILES];
