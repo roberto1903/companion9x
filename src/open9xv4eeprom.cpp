@@ -793,6 +793,10 @@ t_Open9xV4FuncSwData_v203::t_Open9xV4FuncSwData_v203(FuncSwData &c9x)
       func = 27;
     else if (c9x.func == FuncLogs)
       func = 28;
+    else if (c9x.func == FuncBacklight)
+      func = 29;
+    else if (c9x.func >= FuncAdjustGV1 && c9x.func <= FuncAdjustGV5)
+      func = 30 + c9x.func - FuncAdjustGV1;
     else {
       swtch = 0;
       func = 0;
@@ -809,7 +813,8 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
     c9x.func = (AssignFunc)(func);
     c9x.enabled=param & 0x01;
     c9x.param = (param>>1)<<1;
-  } else {
+  }
+  else {
     c9x.param = param;
     if (func <= 20)
       c9x.func = (AssignFunc)(func);
@@ -831,6 +836,8 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
       c9x.func = FuncLogs;
     else if (func == 29)
       c9x.func = FuncBacklight;
+    else if (func >= 30 && func <= 34)
+      c9x.func = FuncAdjustGV1 + func - 30;
     else
       c9x.clear();
   }

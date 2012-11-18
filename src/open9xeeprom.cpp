@@ -1613,8 +1613,11 @@ t_Open9xFuncSwData_v212::t_Open9xFuncSwData_v212(FuncSwData &c9x)
     if (c9x.param > 7) {
        param -= 2;
     }
-  } else if (c9x.func == FuncBacklight)
+  }
+  else if (c9x.func == FuncBacklight)
     func = 28;
+  else if (c9x.func >= FuncAdjustGV1 && c9x.func <= FuncAdjustGV5)
+    func = 29 + c9x.func - FuncAdjustGV1;
   else {
     swtch = 0;
     func = 0;
@@ -1634,9 +1637,8 @@ t_Open9xFuncSwData_v212::operator FuncSwData ()
   else {
     if (func == 22)
       c9x.func = FuncPlaySound;
-    else if (func == 23) {
+    else if (func == 23)
       c9x.func = FuncPlayHaptic;
-    }
     else if (func == 24)
       c9x.func = FuncReset;
     else if (func == 25)
@@ -1648,8 +1650,11 @@ t_Open9xFuncSwData_v212::operator FuncSwData ()
       if (param > 7) {
         c9x.param += 2;
       }
-    } else if (func == 28)
+    }
+    else if (func == 28)
       c9x.func = FuncBacklight;
+    else if (func >= 29 && func <= 33)
+      c9x.func = FuncAdjustGV1 + func - 29;
     else
       c9x.clear();
   }
