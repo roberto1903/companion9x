@@ -47,6 +47,7 @@
 #include "burnconfigdialog.h"
 #include "avroutputdialog.h"
 #include "comparedialog.h"
+#include "logsdialog.h"
 #include "preferencesdialog.h"
 #include "flashinterface.h"
 #include "fusesdialog.h"
@@ -1163,6 +1164,12 @@ void MainWindow::compare()
     fd->show();
 }
 
+void MainWindow::logFile()
+{
+    logsDialog *fd = new logsDialog(this);
+    fd->show();
+}
+
 void MainWindow::about()
 {
     QString aboutStr = "<center><img src=\":/images/companion9x-title.png\"><br>";
@@ -1277,7 +1284,7 @@ void MainWindow::createActions()
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
-
+    
     loadbackupAct = new QAction(QIcon(":/images/open.png"), tr("&loadBackup..."), this);
     loadbackupAct->setStatusTip(tr("Load backup from file"));
     connect(loadbackupAct, SIGNAL(triggered()), this, SLOT(loadBackup()));
@@ -1292,6 +1299,11 @@ void MainWindow::createActions()
     saveAsAct->setStatusTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
+    logsAct = new QAction(QIcon(":/images/logs.png"), tr("Lo&gs"), this);
+    logsAct->setShortcuts(QKeySequence::New);
+    logsAct->setStatusTip(tr("Open log file"));
+    connect(logsAct, SIGNAL(triggered()), this, SLOT(logFile()));
+    
     preferencesAct = new QAction(QIcon(":/images/preferences.png"), tr("&Preferences..."), this);
     preferencesAct->setStatusTip(tr("Edit general preferences"));
     connect(preferencesAct, SIGNAL(triggered()), this, SLOT(preferences()));
@@ -1462,6 +1474,8 @@ void MainWindow::createMenus()
     for ( int i = 0; i < MaxRecentFiles; ++i)
         recentFileMenu->addAction(recentFileActs[i]);
     fileMenu->addSeparator();
+    fileMenu->addAction(logsAct);
+    fileMenu->addSeparator();
     fileMenu->addAction(simulateAct);
     fileMenu->addAction(printAct);
     fileMenu->addAction(compareAct);
@@ -1539,7 +1553,7 @@ void MainWindow::createToolBars()
     recentToolButton->setToolTip(tr("Recent Files"));
     fileToolBar->addWidget(recentToolButton);
     fileToolBar->addAction(saveAct);
-
+    fileToolBar->addAction(logsAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(preferencesAct);
     profileButton = new QToolButton;

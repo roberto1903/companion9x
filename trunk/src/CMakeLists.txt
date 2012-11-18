@@ -119,12 +119,14 @@ SET( companion9x_SRCS
      fusesdialog.cpp
      expodialog.cpp
      mixerdialog.cpp
+     logsdialog.cpp
      downloaddialog.cpp
      simulatordialog.cpp
      splashlibrary.cpp
      mainwindow.cpp
      main.cpp
      modelconfigdialog.cpp
+     qcustomplot.cpp
 )
 
 SET( companion9x_MOC_HDRS
@@ -135,6 +137,7 @@ SET( companion9x_MOC_HDRS
      printdialog.h
      fusesdialog.h
      mixerdialog.h
+     logsdialog.h
      expodialog.h
      contributorsdialog.h
      customizesplashdialog.h
@@ -153,6 +156,7 @@ SET( companion9x_MOC_HDRS
      mainwindow.h
      myslider.h
      modelconfigdialog.h
+     qcustomplot.h
 )
      
 SET( companion9x_UIS
@@ -161,6 +165,7 @@ SET( companion9x_UIS
      comparedialog.ui
      fusesdialog.ui
      expodialog.ui
+     logsdialog.ui
      mixerdialog.ui
      preferencesdialog.ui
      simulatordialog.ui
