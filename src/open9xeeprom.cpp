@@ -1632,7 +1632,7 @@ t_Open9xFuncSwData_v212::operator FuncSwData ()
   c9x.param = param;
   if (func < 22) {
     c9x.enabled = active;
-    c9x.func = (AssignFunc)(func);
+    c9x.func = AssignFunc(func);
   }
   else {
     if (func == 22)
@@ -1654,7 +1654,7 @@ t_Open9xFuncSwData_v212::operator FuncSwData ()
     else if (func == 28)
       c9x.func = FuncBacklight;
     else if (func >= 29 && func <= 33)
-      c9x.func = FuncAdjustGV1 + func - 29;
+      c9x.func = AssignFunc(FuncAdjustGV1 + func - 29);
     else
       c9x.clear();
   }

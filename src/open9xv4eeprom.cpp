@@ -837,7 +837,7 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
     else if (func == 29)
       c9x.func = FuncBacklight;
     else if (func >= 30 && func <= 34)
-      c9x.func = FuncAdjustGV1 + func - 30;
+      c9x.func = AssignFunc(FuncAdjustGV1 + func - 30);
     else
       c9x.clear();
   }

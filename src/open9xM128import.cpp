@@ -16,7 +16,8 @@
 #define AUTOSWITCH
 #define GRAPHICS
 #define CURVES
-#define SCURVES
+#define XCURVES
+#define GVARS
 #define BOLD_FONT
 #define VOICE
 
