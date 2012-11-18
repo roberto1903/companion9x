@@ -18,13 +18,13 @@
 #define PXX
 #define DSM2
 #define DSM2_PPM
-#define GVARS
 #define DBLKEYS
 #define AUTOSWITCH
 #define GRAPHICS
 #define SDCARD
 #define CURVES
 #define XCURVES
+#define GVARS
 #define BOLD_FONT
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL

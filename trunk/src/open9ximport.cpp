@@ -16,8 +16,8 @@
 #define AUTOSWITCH
 #define GRAPHICS
 #define CURVES
-#define GVARS
 #define XCURVES
+#define GVARS
 #define BOLD_FONT
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE YES
