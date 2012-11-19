@@ -28,12 +28,14 @@ private slots:
   void addRandomGraph();
   void removeSelectedGraph();
   void removeAllGraphs();
-  void contextMenuRequest(QPoint pos);
   void moveLegend();
-  void graphClicked(QCPAbstractPlottable *plottable);
+  // void graphClicked(QCPAbstractPlottable *plottable);
+  void on_fileOpen_BT_clicked();
   
 private:
+  QList<QStringList> csvlog;
   Ui::logsDialog *ui;
+  void cvsFileParse();
 };
 
 #endif // LOGSDIALOG_H

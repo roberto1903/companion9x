@@ -1300,7 +1300,7 @@ void MainWindow::createActions()
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
     logsAct = new QAction(QIcon(":/images/logs.png"), tr("Lo&gs"), this);
-    logsAct->setShortcuts(QKeySequence::New);
+    logsAct->setShortcut(tr("Ctrl+G"));
     logsAct->setStatusTip(tr("Open log file"));
     connect(logsAct, SIGNAL(triggered()), this, SLOT(logFile()));
     

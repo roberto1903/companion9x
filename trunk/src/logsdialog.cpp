@@ -5,6 +5,7 @@ logsDialog::logsDialog(QWidget *parent) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::logsDialog)
 {
+  csvlog.clear();
   srand(QDateTime::currentDateTime().toTime_t());
   ui->setupUi(this);
   
@@ -45,12 +46,6 @@ logsDialog::logsDialog(QWidget *parent) :
   connect(ui->customPlot, SIGNAL(axisDoubleClick(QCPAxis*,QCPAxis::SelectablePart,QMouseEvent*)), this, SLOT(axisLabelDoubleClick(QCPAxis*,QCPAxis::SelectablePart)));
   connect(ui->customPlot, SIGNAL(legendDoubleClick(QCPLegend*,QCPAbstractLegendItem*,QMouseEvent*)), this, SLOT(legendDoubleClick(QCPLegend*,QCPAbstractLegendItem*)));
   
-  // connect slot that shows a message in the status bar when a graph is clicked:
-  connect(ui->customPlot, SIGNAL(plottableClick(QCPAbstractPlottable*,QMouseEvent*)), this, SLOT(graphClicked(QCPAbstractPlottable*)));
-  
-  // setup policy and connect slot for context menu popup:
-  ui->customPlot->setContextMenuPolicy(Qt::CustomContextMenu);
-  connect(ui->customPlot, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequest(QPoint)));
 }
 
 logsDialog::~logsDialog()
@@ -220,30 +215,6 @@ void logsDialog::removeAllGraphs()
   ui->customPlot->replot();
 }
 
-void logsDialog::contextMenuRequest(QPoint pos)
-{
-  QMenu *menu = new QMenu(this);
-  menu->setAttribute(Qt::WA_DeleteOnClose);
-  
-  if (ui->customPlot->legend->selectTestLegend(pos)) // context menu on legend requested
-  {
-    menu->addAction("Move to top left", this, SLOT(moveLegend()))->setData((int)QCPLegend::psTopLeft);
-    menu->addAction("Move to top center", this, SLOT(moveLegend()))->setData((int)QCPLegend::psTop);
-    menu->addAction("Move to top right", this, SLOT(moveLegend()))->setData((int)QCPLegend::psTopRight);
-    menu->addAction("Move to bottom right", this, SLOT(moveLegend()))->setData((int)QCPLegend::psBottomRight);
-    menu->addAction("Move to bottom left", this, SLOT(moveLegend()))->setData((int)QCPLegend::psBottomLeft);
-  } else  // general context menu on graphs requested
-  {
-    menu->addAction("Add random graph", this, SLOT(addRandomGraph()));
-    if (ui->customPlot->selectedGraphs().size() > 0)
-      menu->addAction("Remove selected graph", this, SLOT(removeSelectedGraph()));
-    if (ui->customPlot->graphCount() > 0)
-      menu->addAction("Remove all graphs", this, SLOT(removeAllGraphs()));
-  }
-  
-  menu->popup(ui->customPlot->mapToGlobal(pos));
-}
-
 void logsDialog::moveLegend()
 {
   if (QAction* contextAction = qobject_cast<QAction*>(sender())) // make sure this slot is really called by a context menu action, so it carries the data we need
@@ -258,11 +229,53 @@ void logsDialog::moveLegend()
   }
 }
 
-void logsDialog::graphClicked(QCPAbstractPlottable *plottable)
+void logsDialog::on_fileOpen_BT_clicked()
 {
-  ui->statusBar->showMessage(QString("Clicked on graph '%1'.").arg(plottable->name()), 1000);
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getOpenFileName(this,tr("Select your log file"), settings.value("lastImagesDir").toString());
+  if (!fileName.isEmpty()) {
+    settings.setValue("lastImagesDir", fileName);
+    ui->FileName_LE->setText(fileName);
+    cvsFileParse();
+  }
 }
 
+void logsDialog::cvsFileParse() 
+{
+  QFile file(ui->FileName_LE->text());
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
+    return;
+  } else {
+    csvlog.clear();
+    QTextStream inputStream(&file);
+    QRegExp rx2("(?:\"([^\"]*)\";?)|(?:([^,]*),?)");
+    QStringList list;
+    while (!file.atEnd()) {
+      int pos2 = 0;
+      QString buffer = file.readLine();
+      QString line=buffer.trimmed();
+      list.clear();
+      if(line.size()<1){
+        list << "";		
+      } else while (line.size()>pos2 && (pos2 = rx2.indexIn(line, pos2)) != -1) {
+        QString col;
+        if(rx2.cap(1).size()>0)
+          col = rx2.cap(1);
+        else if(rx2.cap(2).size()>0)
+          col = rx2.cap(2);
 
+        list<<col;
+
+        if(col.size())
+          pos2 += rx2.matchedLength();
+        else
+          pos2++;
+      }
+      csvlog.append(list);
+      qDebug() << list;
+    }
+  }
+  file.close();
+}
 
 
