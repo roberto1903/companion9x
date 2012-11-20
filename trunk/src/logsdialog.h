@@ -25,17 +25,19 @@ private slots:
   void selectionChanged();
   void mousePress();
   void mouseWheel();
-  void addRandomGraph();
   void removeSelectedGraph();
   void removeAllGraphs();
   void moveLegend();
+  void plotLogs();
+  void plotValue(int i);
   // void graphClicked(QCPAbstractPlottable *plottable);
   void on_fileOpen_BT_clicked();
   
 private:
   QList<QStringList> csvlog;
   Ui::logsDialog *ui;
-  void cvsFileParse();
+  bool cvsFileParse();
+  
 };
 
 #endif // LOGSDIALOG_H
