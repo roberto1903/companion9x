@@ -14,13 +14,12 @@ logsDialog::logsDialog(QWidget *parent) :
                                   QCustomPlot::iSelectLegend | QCustomPlot::iSelectPlottables | QCustomPlot::iSelectTitle);
   ui->customPlot->setRangeDrag(Qt::Horizontal|Qt::Vertical);
   ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
-  ui->customPlot->xAxis->setRange(-8, 8);
-  ui->customPlot->yAxis->setRange(-5, 5);
+  ui->customPlot->yAxis->setRange(-1024, 1024);
   ui->customPlot->setupFullAxesBox();
   ui->customPlot->setTitle("Telemetry logs");
   ui->customPlot->xAxis->setLabel("Time");
-  ui->customPlot->yAxis->setLabel("y Axis");
   ui->customPlot->legend->setVisible(true);
+  ui->customPlot->yAxis->setTickLabels(false);
   QFont legendFont = font();
   legendFont.setPointSize(10);
   ui->customPlot->legend->setFont(legendFont);
@@ -187,7 +186,7 @@ void logsDialog::plotValue(int index)
     itemSelected=n-1;
   }
   QVector<double> x(itemSelected), y(itemSelected);
-
+  double tmpval,yscale;
   for (int i=1; i<n; i++)
   {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
@@ -199,25 +198,29 @@ void logsDialog::plotValue(int index)
       if (maxx<tmp) {
         maxx=tmp;
       }
+      tmpval = csvlog.at(i).at(index).toDouble();
+      if (tmpval>maxy) {
+        maxy=tmpval;
+      }
+      if (tmpval<miny) {
+        miny=tmpval;
+      }
     }
+  }
+  yscale=std::max(abs(miny),abs(maxy))/1024.0;
+  if (yscale==0) {
+    yscale=1;
   }
   for (int i=1; i<n; i++)
   {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
       uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();   
       x[itemCount] = tmp-minx;
-      y[itemCount] = csvlog.at(i).at(index).toDouble();
-      if (y[itemCount]>maxy) {
-        maxy=y[itemCount];
-      }
-      if (y[itemCount]<miny) {
-        miny=y[itemCount];
-      }
+      y[itemCount] = csvlog.at(i).at(index).toDouble()/yscale;
       itemCount++;
     }
   }
   ui->customPlot->xAxis->setRange(0, maxx-minx);
-  ui->customPlot->yAxis->setRange(miny,maxy);
   ui->customPlot->addGraph();
   ui->customPlot->graph()->setName(csvlog.at(0).at(index));
   ui->customPlot->graph()->setData(x, y);
@@ -350,7 +353,12 @@ bool logsDialog::cvsFileParse()
 
 void logsDialog::plotLogs()
 {
+  int n = csvlog.at(0).count(); // number of points in graph
   removeAllGraphs();
-  plotValue(4);
+  for (int i=0; i<n-2; i++) {
+    if (ui->FieldsTW->item(0,i)->isSelected()) {
+      plotValue(i+2);
+    }
+  }
 }
 
