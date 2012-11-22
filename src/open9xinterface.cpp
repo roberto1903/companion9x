@@ -258,11 +258,11 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
   if (sz) {
     if (board == BOARD_M128 && _settings.myVers >= 212 && _settings.variant != 0x8000) {
       if (_settings.myVers == 212) {
-        uint8_t tmp[849];
+        uint8_t tmp[1000];
         for (int i=1; i<31; i++) {
           efile->openRd(i);
           int sz = efile->readRlc2(tmp, sizeof(tmp));
-          if (sz == sizeof(tmp)) {
+          if (sz == 849) {
             std::cout << " warning: M128 variant not set (model size seems ok)";
             settings = _settings;
             return true;
