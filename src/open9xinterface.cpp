@@ -114,7 +114,7 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
     if (sz) {
       model = _model;
       if (sz < (int)sizeof(T)) {
-        std::cout <<model.name << ", " << sz << ", " << (int)sizeof(T) <<"\n";
+        std::cout << " size(" << model.name << ") " << sz << " < " << (int)sizeof(T) << " ";
       }
       if (stickMode) {
         applyStickModeToModel(model, stickMode);
@@ -245,7 +245,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
     }
   }
 
-  std::cout << "ko\n";
+  std::cout << " ko\n";
   return false;
 }
 
@@ -254,12 +254,31 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 {
   T _settings;
   efile->openRd(FILE_GENERAL);
-  if (efile->readRlc2((uint8_t*)&_settings, sizeof(T))) {
-    settings = _settings;
-    return true;
+  int sz = efile->readRlc2((uint8_t*)&_settings, sizeof(T));
+  if (sz) {
+    if (board == BOARD_M128 && _settings.myVers >= 212 && _settings.variant != 0x8000) {
+      if (_settings.myVers == 212) {
+        uint8_t tmp[849];
+        for (int i=1; i<31; i++) {
+          efile->openRd(i);
+          int sz = efile->readRlc2(tmp, sizeof(tmp));
+          if (sz == sizeof(tmp)) {
+            std::cout << " warning: M128 variant not set (model size seems ok)";
+            settings = _settings;
+            return true;
+          }
+        }
+      }
+      std::cout << " error when loading M128 general settings (wrong variant)";
+      return false;
+    }
+    else {
+      settings = _settings;
+      return true;
+    }
   }
 
-  std::cerr << "error when loading general settings";
+  std::cout << " error when loading general settings";
   return false;
 }
 
@@ -364,8 +383,8 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   std::cout << " variant " << radioData.generalSettings.variant;
   for (int i=0; i<getMaxModels(); i++) {
     if (!loadModel(version, radioData.models[i], NULL, i, radioData.generalSettings.variant, radioData.generalSettings.stickMode+1)) {
-//      std::cout << " ko\n";
-//      return false;
+      std::cout << " ko\n";
+      return false;
     }
   }
   std::cout << " ok\n";
@@ -406,6 +425,8 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
       result = saveGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings, version, variant);
   }
   else {
+    if (board == BOARD_M128)
+      variant |= M128_VARIANT;
     if (version < 212)
       result = saveGeneral<Open9xGeneralData_v201>(radioData.generalSettings, version, variant);
     else
@@ -829,10 +850,10 @@ bool Open9xInterface::checkVersion(uint8_t version)
 
 bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
 {
-  std::cout << "trying " << getName() << " backup import... ";
+  std::cout << "trying " << getName() << " backup import...";
 
   if (esize < 8 || memcmp(eeprom, "o9x", 3) != 0 || eeprom[3] != 0x30+board) {
-    std::cout << "no\n";
+    std::cout << " no\n";
     return false;
   }
 
@@ -841,30 +862,30 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
   uint16_t size = ((uint16_t)eeprom[7] << 8) + eeprom[6];
   uint16_t variant = ((uint16_t)eeprom[9] << 8) + eeprom[8];
 
-  std::cout << "version " << (unsigned int)version << " ";
+  std::cout << " version " << (unsigned int)version << " ";
 
   if (!checkVersion(version)) {
-    std::cout << "not open9x\n";
+    std::cout << " not open9x\n";
     return false;
   }
 
   if (size > esize-8) {
-    std::cout << "wrong size\n";
+    std::cout << " wrong size\n";
     return false;
   }
 
   if (bcktype=='M') {
     if (!loadModel(version, radioData.models[index], &eeprom[8], size, variant)) {
-      std::cout << "ko\n";
+      std::cout << " ko\n";
       return false;
     }
   }
   else {
-    std::cout << "backup type not supported\n";
+    std::cout << " backup type not supported\n";
     return false;
   }
 
-  std::cout << "ok\n";
+  std::cout << " ok\n";
   return true;
 }
 
