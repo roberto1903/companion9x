@@ -37,7 +37,7 @@ private:
   QList<QStringList> csvlog;
   Ui::logsDialog *ui;
   bool cvsFileParse();
-  
+  QList<QColor> palette;
 };
 
 #endif // LOGSDIALOG_H

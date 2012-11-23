@@ -9,12 +9,14 @@ logsDialog::logsDialog(QWidget *parent) :
   csvlog.clear();
   srand(QDateTime::currentDateTime().toTime_t());
   ui->setupUi(this);
-  
+  palette.clear();
+  for (int i=0; i< 60; i++) 
+        palette << QColor(rand()%245+10, rand()%245+10, rand()%245+10);
   ui->customPlot->setInteractions(QCustomPlot::iRangeDrag | QCustomPlot::iRangeZoom | QCustomPlot::iSelectAxes |
                                   QCustomPlot::iSelectLegend | QCustomPlot::iSelectPlottables | QCustomPlot::iSelectTitle);
   ui->customPlot->setRangeDrag(Qt::Horizontal|Qt::Vertical);
   ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
-  ui->customPlot->yAxis->setRange(-1024, 1024);
+  ui->customPlot->yAxis->setRange(-1100, 1100);
   ui->customPlot->setupFullAxesBox();
   ui->customPlot->setTitle("Telemetry logs");
   ui->customPlot->xAxis->setLabel("Time");
@@ -177,6 +179,7 @@ void logsDialog::plotValue(int index)
   double maxy=-9999;
   minx=-1;
   maxx=0;
+  double tmpval,yscale;
   for (int i=1; i<n; i++) {
     if (ui->logTable->item(i-1,1)->isSelected()) {
       rangeSelected=true;
@@ -187,7 +190,6 @@ void logsDialog::plotValue(int index)
     itemSelected=n-1;
   }
   QVector<double> x(itemSelected), y(itemSelected);
-  double tmpval,yscale;
   for (int i=1; i<n; i++)
   {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
@@ -208,7 +210,7 @@ void logsDialog::plotValue(int index)
       }
     }
   }
-  yscale=std::max(abs(miny),abs(maxy))/1024.0;
+  yscale=std::max(abs(miny),abs(maxy))/1000.0;
   if (yscale==0) {
     yscale=1;
   }
@@ -229,7 +231,7 @@ void logsDialog::plotValue(int index)
   ui->customPlot->graph()->setScatterStyle(QCP::ssNone);
   //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
   QPen graphPen;
-  graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+  graphPen.setColor(palette.at(index % 60));
   graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
   ui->customPlot->graph()->setPen(graphPen);
   ui->customPlot->replot();
@@ -284,6 +286,7 @@ void logsDialog::on_fileOpen_BT_clicked()
         QTableWidgetItem* item= new QTableWidgetItem(csvlog.at(0).at(i));
         ui->FieldsTW->setItem(0,i-2,item);
       }
+      ui->FieldsTW->resizeRowsToContents();
       ui->logTable->setColumnCount(csvlog.at(0).count());
       ui->logTable->setRowCount(csvlog.count()-1);
       ui->logTable->setHorizontalHeaderLabels(csvlog.at(0));
