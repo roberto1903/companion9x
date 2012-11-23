@@ -22,11 +22,15 @@ logsDialog::logsDialog(QWidget *parent) :
   ui->customPlot->xAxis->setLabel("Time");
   ui->customPlot->legend->setVisible(true);
   ui->customPlot->yAxis->setTickLabels(false);
+  ui->customPlot->yAxis->setAutoTickCount(10);
+  ui->customPlot->xAxis2->setTicks(false);
+  ui->customPlot->yAxis2->setTicks(false);
   QFont legendFont = font();
   legendFont.setPointSize(10);
   ui->customPlot->legend->setFont(legendFont);
   ui->customPlot->legend->setSelectedFont(legendFont);
   ui->customPlot->legend->setSelectable(QCPLegend::spItems); // legend box shall not be selectable, only legend items
+  ui->customPlot->legend->setVisible(false);
   
   // connect slot that ties some axis selections together (especially opposite axes):
   connect(ui->customPlot, SIGNAL(selectionChangedByUser()), this, SLOT(selectionChanged()));
@@ -210,7 +214,17 @@ void logsDialog::plotValue(int index)
       }
     }
   }
-  yscale=std::max(abs(miny),abs(maxy))/1000.0;
+  if (miny<0) {
+    miny=-miny;
+  }
+  if (maxy<0) {
+    maxy=-maxy;
+  }
+  if (miny>maxy) {
+    yscale=miny/1000.0;
+  } else {
+    yscale=maxy/1000.0;
+  }
   if (yscale==0) {
     yscale=1;
   }
@@ -232,7 +246,7 @@ void logsDialog::plotValue(int index)
   //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
   QPen graphPen;
   graphPen.setColor(palette.at(index % 60));
-  graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
+  graphPen.setWidthF(1.5);
   ui->customPlot->graph()->setPen(graphPen);
   ui->customPlot->replot();
 }
@@ -359,10 +373,14 @@ void logsDialog::plotLogs()
 {
   int n = csvlog.at(0).count(); // number of points in graph
   removeAllGraphs();
+  int hasplots=false;
   for (int i=0; i<n-2; i++) {
     if (ui->FieldsTW->item(0,i)->isSelected()) {
       plotValue(i+2);
+      hasplots=true;
     }
   }
+  ui->customPlot->legend->setVisible(hasplots);
+  ui->customPlot->replot();  
 }
 
