@@ -46,7 +46,7 @@ namespace Open9x {
 #include "../open9x/main_views.cpp"
 #include "../open9x/statistics_views.cpp"
 #include "../open9x/lcd.cpp"
-#include "../open9x/drivers.cpp"
+#include "../open9x/keys.cpp"
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/frsky.cpp"
 #include "../open9x/templates.cpp"
