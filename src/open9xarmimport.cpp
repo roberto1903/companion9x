@@ -54,7 +54,7 @@ namespace Open9xARM {
 #include "../open9x/statistics_views.cpp"
 #include "../open9x/lcd.cpp"
 #include "../open9x/logs.cpp"
-#include "../open9x/drivers.cpp"
+#include "../open9x/keys.cpp"
 #include "../open9x/simpgmspace.cpp"
 #include "../open9x/templates.cpp"
 #include "../open9x/translations.cpp"
