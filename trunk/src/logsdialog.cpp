@@ -18,8 +18,8 @@ logsDialog::logsDialog(QWidget *parent) :
   ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
   ui->customPlot->yAxis->setRange(-1100, 1100);
   ui->customPlot->setupFullAxesBox();
-  ui->customPlot->setTitle("Telemetry logs");
-  ui->customPlot->xAxis->setLabel("Time");
+  ui->customPlot->setTitle(tr("Telemetry logs"));
+  ui->customPlot->xAxis->setLabel(tr("Time"));
   ui->customPlot->legend->setVisible(true);
   ui->customPlot->yAxis->setTickLabels(false);
   ui->customPlot->yAxis->setAutoTickCount(10);
@@ -53,6 +53,18 @@ logsDialog::logsDialog(QWidget *parent) :
 logsDialog::~logsDialog()
 {
   delete ui;
+}
+
+double logsDialog::GetScale(QString channel) {
+  QString Analog="Rud,Ele,Thr,Ail,P1,P2,P3";
+  QString Switches="THR,RUD,ELE,ID0,ID1,ID2,AIL,GEA,TRN";
+  if (Analog.contains(channel)) {
+    return 1.0;
+  }
+  if (Switches.contains(channel)) {
+    return 0.001;
+  }
+  return -1;
 }
 
 void logsDialog::titleDoubleClick()
@@ -194,6 +206,7 @@ void logsDialog::plotValue(int index)
     itemSelected=n-1;
   }
   QVector<double> x(itemSelected), y(itemSelected);
+  yscale=GetScale(csvlog.at(0).at(index));
   for (int i=1; i<n; i++)
   {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
@@ -205,28 +218,32 @@ void logsDialog::plotValue(int index)
       if (maxx<tmp) {
         maxx=tmp;
       }
-      tmpval = csvlog.at(i).at(index).toDouble();
-      if (tmpval>maxy) {
-        maxy=tmpval;
-      }
-      if (tmpval<miny) {
-        miny=tmpval;
+      if (yscale<0) {
+        tmpval = csvlog.at(i).at(index).toDouble();
+        if (tmpval>maxy) {
+          maxy=tmpval;
+        }
+        if (tmpval<miny) {
+          miny=tmpval;
+        }
       }
     }
   }
-  if (miny<0) {
-    miny=-miny;
-  }
-  if (maxy<0) {
-    maxy=-maxy;
-  }
-  if (miny>maxy) {
-    yscale=miny/1000.0;
-  } else {
-    yscale=maxy/1000.0;
-  }
-  if (yscale==0) {
-    yscale=1;
+  if (yscale<0) {
+    if (miny<0) {
+      miny=-miny;
+    }
+    if (maxy<0) {
+      maxy=-maxy;
+    }
+    if (miny>maxy) {
+      yscale=miny/1000.0;
+    } else {
+      yscale=maxy/1000.0;
+    }
+    if (yscale==0) {
+      yscale=1;
+    }
   }
   for (int i=1; i<n; i++)
   {

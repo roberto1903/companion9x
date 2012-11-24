@@ -37,6 +37,7 @@ private:
   QList<QStringList> csvlog;
   Ui::logsDialog *ui;
   bool cvsFileParse();
+  double GetScale(QString channel);
   QList<QColor> palette;
 };
 
