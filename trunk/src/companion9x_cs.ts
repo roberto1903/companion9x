@@ -1002,142 +1002,142 @@ který kanál patří ke kterému výstupu.</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="102"/>
-        <location filename="mainwindow.cpp" line="614"/>
-        <location filename="mainwindow.cpp" line="628"/>
+        <location filename="mainwindow.cpp" line="103"/>
+        <location filename="mainwindow.cpp" line="615"/>
+        <location filename="mainwindow.cpp" line="629"/>
         <source>companion9x - EEPROM Editor - firmware %1</source>
         <translation>companion9x - EEPROM Editor - firmware %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="128"/>
-        <location filename="mainwindow.cpp" line="541"/>
-        <location filename="mainwindow.cpp" line="577"/>
-        <location filename="mainwindow.cpp" line="1814"/>
+        <location filename="mainwindow.cpp" line="129"/>
+        <location filename="mainwindow.cpp" line="542"/>
+        <location filename="mainwindow.cpp" line="578"/>
+        <location filename="mainwindow.cpp" line="1828"/>
         <source>File loaded</source>
         <translation>Soubor byl načten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="142"/>
+        <location filename="mainwindow.cpp" line="143"/>
         <source>Display previous warning again at startup ?</source>
         <translation>Chcete zobrazit předchozí upozornění i příště ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="192"/>
+        <location filename="mainwindow.cpp" line="193"/>
         <source>Checking for updates</source>
         <translation>Kontroluji aktualizace</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="215"/>
-        <location filename="mainwindow.cpp" line="260"/>
-        <location filename="mainwindow.cpp" line="428"/>
-        <location filename="mainwindow.cpp" line="496"/>
-        <location filename="mainwindow.cpp" line="502"/>
+        <location filename="mainwindow.cpp" line="216"/>
+        <location filename="mainwindow.cpp" line="261"/>
+        <location filename="mainwindow.cpp" line="429"/>
+        <location filename="mainwindow.cpp" line="497"/>
+        <location filename="mainwindow.cpp" line="503"/>
         <source>Unable to check for updates.</source>
         <translation>Nelze ověřit aktualizace.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="229"/>
+        <location filename="mainwindow.cpp" line="230"/>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation>Je dostupná nová verze companion9x (verze %1)&lt;br&gt;Chcete ji stáhnout nyní?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="237"/>
-        <location filename="mainwindow.cpp" line="239"/>
-        <location filename="mainwindow.cpp" line="280"/>
-        <location filename="mainwindow.cpp" line="480"/>
-        <location filename="mainwindow.cpp" line="482"/>
+        <location filename="mainwindow.cpp" line="238"/>
+        <location filename="mainwindow.cpp" line="240"/>
+        <location filename="mainwindow.cpp" line="281"/>
+        <location filename="mainwindow.cpp" line="481"/>
+        <location filename="mainwindow.cpp" line="483"/>
         <source>Save As</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="239"/>
+        <location filename="mainwindow.cpp" line="240"/>
         <source>Executable (*.exe)</source>
         <translation>Spustitelný (*.exe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="251"/>
         <source>New release available</source>
         <translation>Je dostupné nové vydání</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="250"/>
+        <location filename="mainwindow.cpp" line="251"/>
         <source>A new release of companion is available please check the repository</source>
         <translation>Je dostupné nové vydání companion9x, prosím zkontrolujte repozitář</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="255"/>
-        <location filename="mainwindow.cpp" line="461"/>
+        <location filename="mainwindow.cpp" line="256"/>
+        <location filename="mainwindow.cpp" line="462"/>
         <source>No updates available at this time.</source>
         <translation>žádné aktualizace nejsou nyní dostupné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="267"/>
         <source>Would you like to launch the installer?</source>
         <translation>Chcete spustit instalátor?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="303"/>
-        <location filename="mainwindow.cpp" line="329"/>
-        <location filename="mainwindow.cpp" line="341"/>
-        <location filename="mainwindow.cpp" line="367"/>
-        <location filename="mainwindow.cpp" line="748"/>
-        <location filename="mainwindow.cpp" line="1718"/>
-        <location filename="mainwindow.cpp" line="1724"/>
+        <location filename="mainwindow.cpp" line="304"/>
+        <location filename="mainwindow.cpp" line="330"/>
+        <location filename="mainwindow.cpp" line="342"/>
+        <location filename="mainwindow.cpp" line="368"/>
+        <location filename="mainwindow.cpp" line="749"/>
         <location filename="mainwindow.cpp" line="1732"/>
-        <location filename="mainwindow.cpp" line="1755"/>
-        <location filename="mainwindow.cpp" line="1761"/>
-        <location filename="mainwindow.cpp" line="1768"/>
-        <location filename="mainwindow.cpp" line="1776"/>
-        <location filename="mainwindow.cpp" line="1780"/>
+        <location filename="mainwindow.cpp" line="1738"/>
+        <location filename="mainwindow.cpp" line="1746"/>
+        <location filename="mainwindow.cpp" line="1769"/>
+        <location filename="mainwindow.cpp" line="1775"/>
+        <location filename="mainwindow.cpp" line="1782"/>
+        <location filename="mainwindow.cpp" line="1790"/>
+        <location filename="mainwindow.cpp" line="1794"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="304"/>
-        <location filename="mainwindow.cpp" line="342"/>
-        <location filename="mainwindow.cpp" line="1724"/>
-        <location filename="mainwindow.cpp" line="1732"/>
-        <location filename="mainwindow.cpp" line="1768"/>
+        <location filename="mainwindow.cpp" line="305"/>
+        <location filename="mainwindow.cpp" line="343"/>
+        <location filename="mainwindow.cpp" line="1738"/>
+        <location filename="mainwindow.cpp" line="1746"/>
+        <location filename="mainwindow.cpp" line="1782"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="354"/>
+        <location filename="mainwindow.cpp" line="355"/>
         <source>Firmware does not fit in flash, due to selected firmware options</source>
         <translation>S těmito volbami se Firmware nevejde do paměti FLASH rádia. Je třeba některé funkce vypnout. Vhodné je zejména vypnout podporu loga zaškrtnutím &quot;nosplash&quot;, to ušetří značné místo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="319"/>
-        <location filename="mainwindow.cpp" line="357"/>
+        <location filename="mainwindow.cpp" line="320"/>
+        <location filename="mainwindow.cpp" line="358"/>
         <source>Compilation server termporary failure, try later</source>
         <translation>Server companion je dočasně nedostupný, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="316"/>
+        <location filename="mainwindow.cpp" line="317"/>
         <source>Firmware does not longer fit in flash, due to selected firmware options</source>
         <translation>Firmware s těmito vybranými součástmi, se již nevejde do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="322"/>
-        <location filename="mainwindow.cpp" line="360"/>
+        <location filename="mainwindow.cpp" line="323"/>
+        <location filename="mainwindow.cpp" line="361"/>
         <source>Compilation server too busy, try later</source>
         <translation>Server companion je zaneprázdněn, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="325"/>
-        <location filename="mainwindow.cpp" line="363"/>
+        <location filename="mainwindow.cpp" line="326"/>
+        <location filename="mainwindow.cpp" line="364"/>
         <source>Unknown server failure, try later</source>
         <translation>Neznámá chyba serveru, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="391"/>
+        <location filename="mainwindow.cpp" line="392"/>
         <source>Do you want to flash the firmware now ?</source>
         <translation>Chcete nyní zapsat firmware do rádia ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="443"/>
+        <location filename="mainwindow.cpp" line="444"/>
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
@@ -1146,7 +1146,7 @@ Verze %2 je dostupná.
 Chcete ho nyní stáhnout ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="452"/>
+        <location filename="mainwindow.cpp" line="453"/>
         <source>A new version of %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
         <translation>Nová verze firmware %1 je dostupná.
@@ -1154,41 +1154,41 @@ Do you want to download it now ?</source>
 Chcete ji stáhnout nyní ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="464"/>
+        <location filename="mainwindow.cpp" line="465"/>
         <source>Ignore this version (r%1)?</source>
         <translation>Ignorovat tuto verzi (r%1)?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="527"/>
+        <location filename="mainwindow.cpp" line="528"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="550"/>
-        <location filename="mainwindow.cpp" line="556"/>
+        <location filename="mainwindow.cpp" line="551"/>
+        <location filename="mainwindow.cpp" line="557"/>
         <source>File saved</source>
         <translation>Soubor byl uložen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="749"/>
+        <location filename="mainwindow.cpp" line="750"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Nelze zapsat soubor %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="809"/>
-        <location filename="mainwindow.cpp" line="1121"/>
+        <location filename="mainwindow.cpp" line="810"/>
+        <location filename="mainwindow.cpp" line="1122"/>
         <source>Read EEPROM From Tx</source>
         <translation>Načíst EEPROM z TX</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="831"/>
+        <location filename="mainwindow.cpp" line="832"/>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Zapsat %1 do paměti EEPROM?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="834"/>
+        <location filename="mainwindow.cpp" line="835"/>
         <source>The file %1
 has not been recognized as a valid EEPROM
 Burn anyway ?</source>
@@ -1197,583 +1197,598 @@ nebyl rozpoznán jako platná EEPROM
 Chcete ji přesto naprogramovat?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="841"/>
-        <location filename="mainwindow.cpp" line="1042"/>
-        <location filename="mainwindow.cpp" line="1091"/>
+        <location filename="mainwindow.cpp" line="842"/>
+        <location filename="mainwindow.cpp" line="1043"/>
+        <location filename="mainwindow.cpp" line="1092"/>
         <source>Backup is impossible</source>
         <translation>Není možné zálohovat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="841"/>
-        <location filename="mainwindow.cpp" line="1042"/>
-        <location filename="mainwindow.cpp" line="1091"/>
+        <location filename="mainwindow.cpp" line="842"/>
+        <location filename="mainwindow.cpp" line="1043"/>
+        <location filename="mainwindow.cpp" line="1092"/>
         <source>The backup dir set in preferences does not exist</source>
         <translation>Složka pro zálohování zvolená v předvolbách neexistuje</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="853"/>
-        <location filename="mainwindow.cpp" line="891"/>
-        <location filename="mainwindow.cpp" line="1055"/>
-        <location filename="mainwindow.cpp" line="1099"/>
+        <location filename="mainwindow.cpp" line="854"/>
+        <location filename="mainwindow.cpp" line="892"/>
+        <location filename="mainwindow.cpp" line="1056"/>
+        <location filename="mainwindow.cpp" line="1100"/>
         <source>Backup EEPROM From Tx</source>
         <translation>Zálohovat EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="868"/>
+        <location filename="mainwindow.cpp" line="869"/>
         <source>Cannot check eeprom compatibility! Continue anyway?</source>
         <translation>Nelze ověřit kompatibilitu EEprom! Mám přesto pokračovat?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="876"/>
-        <location filename="mainwindow.cpp" line="879"/>
+        <location filename="mainwindow.cpp" line="877"/>
+        <location filename="mainwindow.cpp" line="880"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="876"/>
+        <location filename="mainwindow.cpp" line="877"/>
         <source>Firmware in radio is of a different family of eeprom written, check file and preferences!</source>
         <translation>Firmware rádia je z jiné rodiny než EEprom, zkontrolujte nastavení předvoleb!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="879"/>
+        <location filename="mainwindow.cpp" line="880"/>
         <source>Firmware in flash is outdated, please upgrade!</source>
         <translation>Firmware rádia je zastaralý, aktualizujte ho prosím!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1061"/>
-        <location filename="mainwindow.cpp" line="1106"/>
+        <location filename="mainwindow.cpp" line="1062"/>
+        <location filename="mainwindow.cpp" line="1107"/>
         <source>Write Flash To Tx</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1067"/>
+        <location filename="mainwindow.cpp" line="1068"/>
         <source>Conversion failed</source>
         <translation>Porovnání selhalo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1067"/>
+        <location filename="mainwindow.cpp" line="1068"/>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
         <translation>Nemohu konvertovat EEPROM pro tento firmware, bude použita původní EEPROM</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1072"/>
+        <location filename="mainwindow.cpp" line="1073"/>
         <source>Restore EEPROM To Tx</source>
         <translation>Zapsat EEPROM do rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1076"/>
+        <location filename="mainwindow.cpp" line="1077"/>
         <source>Restore failed</source>
         <translation>Zápis selhal</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1076"/>
+        <location filename="mainwindow.cpp" line="1077"/>
         <source>Cannot restore EEProm to TX, original EEProm file can be found at: %1</source>
         <translation>Nemohu obnovit EEPROM v rádiu, původní EEPROM najdete zde: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1080"/>
+        <location filename="mainwindow.cpp" line="1081"/>
         <source>Flash failed</source>
         <translation>Zápis firmware se nezdařil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1080"/>
+        <location filename="mainwindow.cpp" line="1081"/>
         <source>Cannot flash the TX, original EEProm file can be found at: %1</source>
         <translation>Nemohu naprogramovat rádio, původní EEPROM najdete zde: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1084"/>
+        <location filename="mainwindow.cpp" line="1085"/>
         <source>Backup failed</source>
         <translation>Zálohování selhalo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1084"/>
+        <location filename="mainwindow.cpp" line="1085"/>
         <source>Cannot backup existing EEProm from TX, Flash process aborted</source>
         <translation>Nemohu zálohovat sávající EEPROM z rádia, Programování bylo přerušeno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1116"/>
+        <location filename="mainwindow.cpp" line="1117"/>
         <source>Read EEPROM memory to File</source>
         <translation>Načíst EEPROM z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1130"/>
+        <location filename="mainwindow.cpp" line="1131"/>
         <source>Read Flash to File</source>
         <translation>Načíst paměť FLASH z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1169"/>
+        <location filename="mainwindow.cpp" line="1176"/>
         <source>Copyright</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1170"/>
+        <location filename="mainwindow.cpp" line="1177"/>
         <source>Version %1 (revision %2), %3</source>
         <translation>Verze %1 (revize %2), %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1171"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>The companion9x project was originally forked from eePe</source>
         <translation>Projekt companion9x vznikl oddělením z eePe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1172"/>
+        <location filename="mainwindow.cpp" line="1179"/>
         <source>If you&apos;ve found this program useful, please support by</source>
         <translation>Pokud vám byl tento program užitečný, podpořte jej</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1174"/>
+        <location filename="mainwindow.cpp" line="1181"/>
         <source>donating</source>
         <translation>darem</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1176"/>
+        <location filename="mainwindow.cpp" line="1183"/>
         <source>About companion9x</source>
         <translation>O aplikaci Companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1240"/>
-        <location filename="mainwindow.cpp" line="1671"/>
-        <location filename="mainwindow.cpp" line="1692"/>
+        <location filename="mainwindow.cpp" line="1247"/>
+        <location filename="mainwindow.cpp" line="1685"/>
+        <location filename="mainwindow.cpp" line="1706"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1243"/>
+        <location filename="mainwindow.cpp" line="1250"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1271"/>
+        <location filename="mainwindow.cpp" line="1278"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1273"/>
+        <location filename="mainwindow.cpp" line="1280"/>
         <source>Create a new file</source>
         <translation>Vytvořit nový soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1276"/>
+        <location filename="mainwindow.cpp" line="1283"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otevřít...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1278"/>
+        <location filename="mainwindow.cpp" line="1285"/>
         <source>Open an existing file</source>
         <translation>Otevřít existující soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1281"/>
+        <location filename="mainwindow.cpp" line="1288"/>
         <source>&amp;loadBackup...</source>
         <translation>&amp;Načíst zálohu...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1282"/>
+        <location filename="mainwindow.cpp" line="1289"/>
         <source>Load backup from file</source>
         <translation>Načíst zálohu ze souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1285"/>
+        <location filename="mainwindow.cpp" line="1292"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1287"/>
+        <location filename="mainwindow.cpp" line="1294"/>
         <source>Save the document to disk</source>
         <translation>Uložit dokument na disk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1290"/>
+        <location filename="mainwindow.cpp" line="1297"/>
         <source>Save &amp;As...</source>
         <translation>Uložit j&amp;ako...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1292"/>
+        <location filename="mainwindow.cpp" line="1299"/>
         <source>Save the document under a new name</source>
         <translation>Uložit dokument s novým jménem</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1295"/>
+        <location filename="mainwindow.cpp" line="1302"/>
+        <source>Lo&amp;gs</source>
+        <translation>Lo&amp;gy</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1303"/>
+        <source>Ctrl+G</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1304"/>
+        <source>Open log file</source>
+        <translation>Otevřít soubor s logy</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1307"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Předvolby...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1296"/>
+        <location filename="mainwindow.cpp" line="1308"/>
         <source>Edit general preferences</source>
         <translation>Nastavení obecných předvoleb</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1299"/>
+        <location filename="mainwindow.cpp" line="1311"/>
         <source>&amp;Check for updates...</source>
         <translation>&amp;Zkontrolovat aktualizace...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1300"/>
+        <location filename="mainwindow.cpp" line="1312"/>
         <source>Check for new version of companion9x/er9x</source>
         <translation>Zkontolovat dostupnost nové verze companion9x/er9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1303"/>
+        <location filename="mainwindow.cpp" line="1315"/>
         <source>Contributors &amp;List...</source>
         <translation>&amp;Seznam přispěvatelů...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1304"/>
+        <location filename="mainwindow.cpp" line="1316"/>
         <source>Show companion9x contributors list</source>
         <translation>Zobrazit seznam přispěvatelů companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1307"/>
+        <location filename="mainwindow.cpp" line="1319"/>
         <source>Compare...</source>
         <translation>Porovnat...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1308"/>
+        <location filename="mainwindow.cpp" line="1320"/>
         <source>Compare models</source>
         <translation>Porovnat modely</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1312"/>
+        <location filename="mainwindow.cpp" line="1324"/>
         <source>Customize your &amp;TX...</source>
         <translation>&amp;Přizpůsobení loga...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1313"/>
+        <location filename="mainwindow.cpp" line="1325"/>
         <source>Customize the splash screen of your TX</source>
         <translation>Přizpůsobení úvodního logo vašeho rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1318"/>
+        <location filename="mainwindow.cpp" line="1330"/>
         <source>E&amp;xit</source>
         <translation>U&amp;končit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1320"/>
+        <location filename="mainwindow.cpp" line="1332"/>
         <source>Exit the application</source>
         <translation>Ukončit aplikaci companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1324"/>
+        <location filename="mainwindow.cpp" line="1336"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1326"/>
+        <location filename="mainwindow.cpp" line="1338"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Vyjmout aktuální výběr a uložit do schránky</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1330"/>
+        <location filename="mainwindow.cpp" line="1342"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1332"/>
+        <location filename="mainwindow.cpp" line="1344"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopírovat aktuální výběr do schránky</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1336"/>
+        <location filename="mainwindow.cpp" line="1348"/>
         <source>&amp;Paste</source>
         <translation>&amp;Vložit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1338"/>
+        <location filename="mainwindow.cpp" line="1350"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Vložit obsah schránky na aktuální pozici</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1343"/>
+        <location filename="mainwindow.cpp" line="1355"/>
         <source>&amp;Write EEPROM To Tx</source>
         <translation>&amp;Zapsat do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1344"/>
+        <location filename="mainwindow.cpp" line="1356"/>
         <source>Ctrl+Alt+W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1345"/>
+        <location filename="mainwindow.cpp" line="1357"/>
         <source>Write EEPROM to transmitter</source>
         <translation>Zapsat do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1348"/>
+        <location filename="mainwindow.cpp" line="1360"/>
         <source>&amp;Read EEPROM From Tx</source>
         <translation>&amp;Načíst EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1349"/>
+        <location filename="mainwindow.cpp" line="1361"/>
         <source>Ctrl+Alt+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1350"/>
+        <location filename="mainwindow.cpp" line="1362"/>
         <source>Read EEPROM from transmitter</source>
         <translation>Načíst EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1353"/>
+        <location filename="mainwindow.cpp" line="1365"/>
         <source>Write Flash memory</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1354"/>
+        <location filename="mainwindow.cpp" line="1366"/>
         <source>Write flash memory to transmitter</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1357"/>
+        <location filename="mainwindow.cpp" line="1369"/>
         <source>Write EEPROM memory from file</source>
         <translation>Zapsat ze souboru do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1358"/>
+        <location filename="mainwindow.cpp" line="1370"/>
         <source>Write EEPROM memory from file to transmitter</source>
         <translation>Zapsat ze souboru do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1361"/>
+        <location filename="mainwindow.cpp" line="1373"/>
         <source>Read EEPROM memory to file</source>
         <translation>Načíst EEPROM z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1362"/>
+        <location filename="mainwindow.cpp" line="1374"/>
         <source>Read EEPROM memory from transmitter to file</source>
         <translation>Načíst EEPROM z rádia a uložit do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1365"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>Read Flash memory</source>
         <translation>Načíst paměť FLASH z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1366"/>
+        <location filename="mainwindow.cpp" line="1378"/>
         <source>Read flash memory to transmitter</source>
         <translation>Načíst paměť FLASH z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1369"/>
+        <location filename="mainwindow.cpp" line="1381"/>
         <source>&amp;Configure...</source>
         <translation>&amp;Konfigurace...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1370"/>
+        <location filename="mainwindow.cpp" line="1382"/>
         <source>Configure burning software</source>
         <translation>Konfigurace programátoru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1373"/>
+        <location filename="mainwindow.cpp" line="1385"/>
         <source>&amp;List programmers</source>
         <translation>&amp;Seznam programátorů</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1374"/>
+        <location filename="mainwindow.cpp" line="1386"/>
         <source>List available programmers</source>
         <translation>Seznam použitelných programátorů</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1377"/>
+        <location filename="mainwindow.cpp" line="1389"/>
         <source>&amp;Fuses...</source>
         <translation>Pojistky &amp;mikrokontroléru...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1378"/>
+        <location filename="mainwindow.cpp" line="1390"/>
         <source>Show fuses dialog</source>
         <translation>Zobrazit dialog nastavení pojistek mikrokontroléru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1381"/>
+        <location filename="mainwindow.cpp" line="1393"/>
         <source>&amp;Simulate</source>
         <translation>&amp;Simulátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1382"/>
+        <location filename="mainwindow.cpp" line="1394"/>
         <source>Alt+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1383"/>
+        <location filename="mainwindow.cpp" line="1395"/>
         <source>Simulate selected model.</source>
         <translation>Simulovat vybraný model.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1387"/>
+        <location filename="mainwindow.cpp" line="1399"/>
         <source>&amp;Print</source>
         <translation>&amp;Tisk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1388"/>
+        <location filename="mainwindow.cpp" line="1400"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1389"/>
+        <location filename="mainwindow.cpp" line="1401"/>
         <source>Print current model.</source>
         <translation>Vytisknout aktuální model.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1393"/>
+        <location filename="mainwindow.cpp" line="1405"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1394"/>
+        <location filename="mainwindow.cpp" line="1406"/>
         <source>Close the active window</source>
         <translation>Zavřít aktivní okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1398"/>
+        <location filename="mainwindow.cpp" line="1410"/>
         <source>Close &amp;All</source>
         <translation>Zavřít &amp;Vše</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1399"/>
+        <location filename="mainwindow.cpp" line="1411"/>
         <source>Close all the windows</source>
         <translation>Zavřít všechna okna</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1403"/>
+        <location filename="mainwindow.cpp" line="1415"/>
         <source>&amp;Tile</source>
         <translation>D&amp;laždice</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1404"/>
+        <location filename="mainwindow.cpp" line="1416"/>
         <source>Tile the windows</source>
         <translation>Uspořádat okna jako dlaždice</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1407"/>
+        <location filename="mainwindow.cpp" line="1419"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Kaskáda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1408"/>
+        <location filename="mainwindow.cpp" line="1420"/>
         <source>Cascade the windows</source>
         <translation>Uspořádat okna do kaskády</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1411"/>
+        <location filename="mainwindow.cpp" line="1423"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Další</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1413"/>
+        <location filename="mainwindow.cpp" line="1425"/>
         <source>Move the focus to the next window</source>
         <translation>Aktivovat následující okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1417"/>
+        <location filename="mainwindow.cpp" line="1429"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Předchozí</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1419"/>
+        <location filename="mainwindow.cpp" line="1431"/>
         <source>Move the focus to the previous window</source>
         <translation>Aktivovat předchozí okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1427"/>
+        <location filename="mainwindow.cpp" line="1439"/>
         <source>&amp;About</source>
         <translation>&amp;O aplikaci</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1428"/>
+        <location filename="mainwindow.cpp" line="1440"/>
         <source>Show the application&apos;s About box</source>
         <translation>O aplikaci companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1431"/>
+        <location filename="mainwindow.cpp" line="1443"/>
         <source>Switch layout direction</source>
         <translation>Přepnout styl panelu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1432"/>
+        <location filename="mainwindow.cpp" line="1444"/>
         <source>Switch layout Left/Right</source>
         <translation>Přepnout styl rozložení panelu vlevo/vpravo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1452"/>
-        <location filename="mainwindow.cpp" line="1539"/>
+        <location filename="mainwindow.cpp" line="1464"/>
+        <location filename="mainwindow.cpp" line="1553"/>
         <source>Recent Files</source>
         <translation>Nedávné soubory</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1453"/>
-        <location filename="mainwindow.cpp" line="1549"/>
+        <location filename="mainwindow.cpp" line="1465"/>
+        <location filename="mainwindow.cpp" line="1563"/>
         <source>Firmware Profiles</source>
         <translation>Profily firmwaru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1455"/>
+        <location filename="mainwindow.cpp" line="1467"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1478"/>
+        <location filename="mainwindow.cpp" line="1492"/>
         <source>&amp;Edit</source>
         <translation>&amp;Úpravy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1497"/>
         <source>&amp;Burn</source>
         <translation>&amp;Programátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1499"/>
+        <location filename="mainwindow.cpp" line="1513"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1519"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1532"/>
+        <location filename="mainwindow.cpp" line="1546"/>
         <source>File</source>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1569"/>
+        <location filename="mainwindow.cpp" line="1583"/>
         <source>Edit</source>
         <translation>Úpravy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1574"/>
+        <location filename="mainwindow.cpp" line="1588"/>
         <source>Burn</source>
         <translation>Programátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1586"/>
+        <location filename="mainwindow.cpp" line="1600"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1593"/>
+        <location filename="mainwindow.cpp" line="1607"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1718"/>
+        <location filename="mainwindow.cpp" line="1732"/>
         <source>Unable to find file %1!</source>
         <translation>Nemohu nalézt soubor %1!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1755"/>
-        <location filename="mainwindow.cpp" line="1761"/>
+        <location filename="mainwindow.cpp" line="1769"/>
+        <location filename="mainwindow.cpp" line="1775"/>
         <source>Invalid EEPROM File %1</source>
         <translation>Neplatný soubor EEPROM %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1776"/>
+        <location filename="mainwindow.cpp" line="1790"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1780"/>
+        <location filename="mainwindow.cpp" line="1794"/>
         <source>Invalid binary EEPROM File %1</source>
         <translation>Neplatný binární soubor EEPROM %1</translation>
     </message>
@@ -4456,457 +4471,453 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="eeprominterface.cpp" line="370"/>
+        <location filename="eeprominterface.cpp" line="369"/>
         <source>Rud</source>
         <translation>Směrovka</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="370"/>
+        <location filename="eeprominterface.cpp" line="369"/>
         <source>Ele</source>
         <translation>Výškovka</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="370"/>
+        <location filename="eeprominterface.cpp" line="369"/>
         <source>Thr</source>
         <translation>Plyn    </translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="370"/>
+        <location filename="eeprominterface.cpp" line="369"/>
         <source>Ail</source>
         <translation>Křidélka</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="371"/>
+        <location filename="eeprominterface.cpp" line="370"/>
         <source>P1</source>
         <translation>Potenciometr 1</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="371"/>
+        <location filename="eeprominterface.cpp" line="370"/>
         <source>P2</source>
         <translation>Potenciometr 2</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="371"/>
+        <location filename="eeprominterface.cpp" line="370"/>
         <source>P3</source>
         <translation>Potenciometr 3</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="374"/>
+        <location filename="eeprominterface.cpp" line="373"/>
         <source>TrmR</source>
         <translation>Trim směrovky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="374"/>
+        <location filename="eeprominterface.cpp" line="373"/>
         <source>TrmE</source>
         <translation>Trim výškovky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="374"/>
+        <location filename="eeprominterface.cpp" line="373"/>
         <source>TrmT</source>
         <translation>Trim plynu</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="374"/>
+        <location filename="eeprominterface.cpp" line="373"/>
         <source>TrmA</source>
         <translation>Trim křidélek</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="376"/>
+        <location filename="eeprominterface.cpp" line="375"/>
         <source>REa</source>
         <translation>Otočný enkodér :a</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="376"/>
+        <location filename="eeprominterface.cpp" line="375"/>
         <source>REb</source>
         <translation>Otočný enkodér :b</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>A1</source>
         <translation>Telem. vstup A1</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>A2</source>
         <translation>Telem. vstup A2</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>TX</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>RX</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>Alt</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>Rpm</source>
         <translation>Otáčky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>Fuel</source>
         <translation>Palivo</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="378"/>
+        <location filename="eeprominterface.cpp" line="377"/>
         <source>T1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>T2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Dist</source>
         <translation>Vzdálenost</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>GPS Alt</source>
         <translation>Výška GPS</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Cell</source>
         <translation>Článek</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Cels</source>
         <translation>Články</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Vfas</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="379"/>
+        <location filename="eeprominterface.cpp" line="378"/>
         <source>Curr</source>
         <translation>Proud</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>Cnsp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>Powr</source>
         <translation>Výkon</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>AccX</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>AccY</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>AccZ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>HDG </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>VSpd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="380"/>
+        <location filename="eeprominterface.cpp" line="379"/>
         <source>A1-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>A2-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>Alt-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>Alt+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>Rpm+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>T1+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>T2+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>Spd+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="381"/>
+        <location filename="eeprominterface.cpp" line="380"/>
         <source>Dst+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="382"/>
+        <location filename="eeprominterface.cpp" line="381"/>
         <source>Cur+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="382"/>
+        <location filename="eeprominterface.cpp" line="381"/>
         <source>ACC </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="382"/>
+        <location filename="eeprominterface.cpp" line="381"/>
         <source>Time</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="391"/>
+        <location filename="eeprominterface.cpp" line="390"/>
         <source>MAX</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="393"/>
+        <location filename="eeprominterface.cpp" line="392"/>
         <source>3POS</source>
         <translation>Přepínač 3POS</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="397"/>
+        <location filename="eeprominterface.cpp" line="396"/>
         <source>CYC%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="399"/>
+        <location filename="eeprominterface.cpp" line="398"/>
         <source>PPM%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="402"/>
+        <location filename="eeprominterface.cpp" line="401"/>
         <source>CH%1%2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="404"/>
+        <location filename="eeprominterface.cpp" line="403"/>
         <source>X%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="406"/>
+        <location filename="eeprominterface.cpp" line="405"/>
         <source>Timer%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="410"/>
-        <location filename="eeprominterface.cpp" line="465"/>
+        <location filename="eeprominterface.cpp" line="409"/>
+        <location filename="eeprominterface.cpp" line="464"/>
         <location filename="helpers.cpp" line="401"/>
         <source>----</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="421"/>
+        <location filename="eeprominterface.cpp" line="420"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="421"/>
+        <location filename="eeprominterface.cpp" line="420"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="421"/>
+        <location filename="eeprominterface.cpp" line="420"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="422"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>ID0</source>
         <translation>ID0</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="422"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>ID1</source>
         <translation>ID1</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="422"/>
+        <location filename="eeprominterface.cpp" line="421"/>
         <source>ID2</source>
         <translation>ID2</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="423"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="423"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>GEA</source>
         <translation>GEA</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="423"/>
+        <location filename="eeprominterface.cpp" line="422"/>
         <source>TRN</source>
         <translation>TRN</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="438"/>
-        <location filename="eeprominterface.cpp" line="440"/>
-        <location filename="eeprominterface.cpp" line="460"/>
-        <location filename="eeprominterface.cpp" line="462"/>
+        <location filename="eeprominterface.cpp" line="437"/>
+        <location filename="eeprominterface.cpp" line="439"/>
+        <location filename="eeprominterface.cpp" line="459"/>
+        <location filename="eeprominterface.cpp" line="461"/>
         <source>CS%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="443"/>
+        <location filename="eeprominterface.cpp" line="442"/>
         <location filename="helpers.cpp" line="548"/>
         <source>ON</source>
         <translation>ZAPNUTO</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="445"/>
+        <location filename="eeprominterface.cpp" line="444"/>
         <source>mON</source>
         <translation>mZAPNUTO</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="447"/>
+        <location filename="eeprominterface.cpp" line="446"/>
         <location filename="helpers.cpp" line="548"/>
         <source>OFF</source>
         <translation>VYPNUTO</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="603"/>
+        <location filename="eeprominterface.cpp" line="602"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="605"/>
+        <location filename="eeprominterface.cpp" line="604"/>
         <source>er9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="612"/>
         <source>gruvin9x stable for stock board</source>
-        <translation>gruvin9x(stabilní vydání) pro originál 9x</translation>
+        <translation type="obsolete">gruvin9x(stabilní vydání) pro originál 9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="616"/>
         <source>gruvin9x trunk for stock board</source>
-        <translation>gruvin9x(pracovní verze) pro originál 9x</translation>
+        <translation type="obsolete">gruvin9x(pracovní verze) pro originál 9x</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="617"/>
         <source>gruvin9x stable for v4 board</source>
-        <translation>gruvin9x(stabilní vydání) pro v4 desku</translation>
+        <translation type="obsolete">gruvin9x(stabilní vydání) pro v4 desku</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="618"/>
         <source>gruvin9x trunk for v4 board</source>
-        <translation>gruvin9x(pracovní verze) pro v4 desku</translation>
+        <translation type="obsolete">gruvin9x(pracovní verze) pro v4 desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="930"/>
+        <location filename="open9xinterface.cpp" line="953"/>
         <source>open9x for stock board</source>
         <translation>open9x pro originál 9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="931"/>
+        <location filename="open9xinterface.cpp" line="954"/>
         <source>Support for frsky telemetry mod</source>
         <translation>Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
 (je potřeba upravit HW, bez této úpravy nebudou fungovat dva přepínače!
 a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="931"/>
+        <location filename="open9xinterface.cpp" line="954"/>
         <source>Support for jeti telemetry mod</source>
         <translation>Podpora telemetrie JETI</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="931"/>
+        <location filename="open9xinterface.cpp" line="954"/>
         <source>Support for receiving ardupilot data</source>
         <translation>telemetrie - podpora pro příjem ardupilot dat</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="931"/>
+        <location filename="open9xinterface.cpp" line="954"/>
         <source>Support for receiving NMEA data</source>
         <translation>telemetrie - podpora pro příjem NMEA dat</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="933"/>
-        <location filename="open9xinterface.cpp" line="959"/>
-        <location filename="open9xinterface.cpp" line="985"/>
+        <location filename="open9xinterface.cpp" line="956"/>
+        <location filename="open9xinterface.cpp" line="983"/>
+        <location filename="open9xinterface.cpp" line="1009"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="934"/>
-        <location filename="open9xinterface.cpp" line="960"/>
-        <location filename="open9xinterface.cpp" line="986"/>
-        <location filename="open9xinterface.cpp" line="1009"/>
+        <location filename="open9xinterface.cpp" line="957"/>
+        <location filename="open9xinterface.cpp" line="984"/>
+        <location filename="open9xinterface.cpp" line="1010"/>
+        <location filename="open9xinterface.cpp" line="1033"/>
         <source>Enable TEMPLATES menu</source>
         <translation>Přidá menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="935"/>
-        <location filename="open9xinterface.cpp" line="961"/>
+        <location filename="open9xinterface.cpp" line="958"/>
+        <location filename="open9xinterface.cpp" line="985"/>
         <source>No splash screen</source>
         <translation>Bez úvodního loga
 Firmware nebude obsahovat žádné logo, ani podporu pro něj.
 Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkce</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="936"/>
-        <location filename="open9xinterface.cpp" line="962"/>
-        <location filename="open9xinterface.cpp" line="987"/>
-        <location filename="open9xinterface.cpp" line="1010"/>
+        <location filename="open9xinterface.cpp" line="959"/>
+        <location filename="open9xinterface.cpp" line="986"/>
+        <location filename="open9xinterface.cpp" line="1011"/>
+        <location filename="open9xinterface.cpp" line="1034"/>
         <source>No flight phases</source>
         <translation>Bez letových režimů</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="937"/>
-        <location filename="open9xinterface.cpp" line="963"/>
-        <location filename="open9xinterface.cpp" line="988"/>
-        <location filename="open9xinterface.cpp" line="1011"/>
+        <location filename="open9xinterface.cpp" line="960"/>
+        <location filename="open9xinterface.cpp" line="987"/>
+        <location filename="open9xinterface.cpp" line="1012"/>
+        <location filename="open9xinterface.cpp" line="1035"/>
         <source>Disable curves menus</source>
         <translation>Bez uživatelsky definovatelných křivek</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="938"/>
-        <location filename="open9xinterface.cpp" line="964"/>
+        <location filename="open9xinterface.cpp" line="961"/>
+        <location filename="open9xinterface.cpp" line="988"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Vylepšený zvukový výstup,
 funkční i s origo pípákem,
@@ -4914,46 +4925,46 @@ ale doporučuje se provést
 instalaci reproduktoru</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="939"/>
-        <location filename="open9xinterface.cpp" line="965"/>
-        <location filename="open9xinterface.cpp" line="990"/>
+        <location filename="open9xinterface.cpp" line="962"/>
+        <location filename="open9xinterface.cpp" line="989"/>
+        <location filename="open9xinterface.cpp" line="1014"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Hlasový výstup pro telemetrii,
 nutno zastavět hlasový modul</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="940"/>
-        <location filename="open9xinterface.cpp" line="966"/>
+        <location filename="open9xinterface.cpp" line="963"/>
+        <location filename="open9xinterface.cpp" line="990"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Výstrahy pomocí vibračního motoru
 (je třeba osadit)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="941"/>
-        <location filename="open9xinterface.cpp" line="967"/>
+        <location filename="open9xinterface.cpp" line="964"/>
         <location filename="open9xinterface.cpp" line="991"/>
+        <location filename="open9xinterface.cpp" line="1015"/>
         <source>Support of FrSky PXX protocol</source>
         <translation>Podpora pro Frsky PXX protokol</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="942"/>
-        <location filename="open9xinterface.cpp" line="968"/>
+        <location filename="open9xinterface.cpp" line="965"/>
         <location filename="open9xinterface.cpp" line="992"/>
+        <location filename="open9xinterface.cpp" line="1016"/>
         <source>Support for DSM2 modules</source>
         <translation>Podpora DSM2 modulů</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="943"/>
-        <location filename="open9xinterface.cpp" line="969"/>
-        <location filename="open9xinterface.cpp" line="994"/>
+        <location filename="open9xinterface.cpp" line="966"/>
+        <location filename="open9xinterface.cpp" line="993"/>
+        <location filename="open9xinterface.cpp" line="1018"/>
         <source>PPM center adjustment in limits</source>
         <translation>Možnost nastavovat střed serva šířkou pulzu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="944"/>
-        <location filename="open9xinterface.cpp" line="970"/>
+        <location filename="open9xinterface.cpp" line="968"/>
         <location filename="open9xinterface.cpp" line="995"/>
-        <location filename="open9xinterface.cpp" line="1012"/>
+        <location filename="open9xinterface.cpp" line="1020"/>
+        <location filename="open9xinterface.cpp" line="1037"/>
         <source>Symetrical Limits</source>
         <translation>Symetrické limity
 Přidá možnost volby mezi
@@ -4964,35 +4975,35 @@ Přidá možnost volby mezi
 nastavené limity tedy nemusí být rovny hodnotě -100% a 100%, ale budou pouze maximem výchylky)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="945"/>
-        <location filename="open9xinterface.cpp" line="971"/>
+        <location filename="open9xinterface.cpp" line="969"/>
+        <location filename="open9xinterface.cpp" line="996"/>
         <source>Pots use in menus navigation</source>
         <translation>Moznost zadávat hodnoty
 a pohybovat se v menu
 pomocí potenciometrů</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="946"/>
-        <location filename="open9xinterface.cpp" line="972"/>
+        <location filename="open9xinterface.cpp" line="970"/>
+        <location filename="open9xinterface.cpp" line="997"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Podpora pro modul SmartieParts 2.2
 (programátor/podsvícení)
 Není určeno pro starší verze Smartie Parts</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="947"/>
-        <location filename="open9xinterface.cpp" line="973"/>
-        <location filename="open9xinterface.cpp" line="996"/>
-        <location filename="open9xinterface.cpp" line="1013"/>
+        <location filename="open9xinterface.cpp" line="971"/>
+        <location filename="open9xinterface.cpp" line="998"/>
+        <location filename="open9xinterface.cpp" line="1021"/>
+        <location filename="open9xinterface.cpp" line="1038"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Výběr spínače v mixu atd.
 se provádí jeho sepnutím</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="948"/>
-        <location filename="open9xinterface.cpp" line="974"/>
-        <location filename="open9xinterface.cpp" line="997"/>
-        <location filename="open9xinterface.cpp" line="1014"/>
+        <location filename="open9xinterface.cpp" line="972"/>
+        <location filename="open9xinterface.cpp" line="999"/>
+        <location filename="open9xinterface.cpp" line="1022"/>
+        <location filename="open9xinterface.cpp" line="1039"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
 (+) a (-) invertuje hodnotu
@@ -5001,18 +5012,18 @@ se provádí jeho sepnutím</translation>
 (UP) a (DN) vastaví výchozí hodnotu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="949"/>
-        <location filename="open9xinterface.cpp" line="975"/>
-        <location filename="open9xinterface.cpp" line="998"/>
-        <location filename="open9xinterface.cpp" line="1015"/>
+        <location filename="open9xinterface.cpp" line="973"/>
+        <location filename="open9xinterface.cpp" line="1000"/>
+        <location filename="open9xinterface.cpp" line="1023"/>
+        <location filename="open9xinterface.cpp" line="1040"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="950"/>
-        <location filename="open9xinterface.cpp" line="976"/>
-        <location filename="open9xinterface.cpp" line="999"/>
-        <location filename="open9xinterface.cpp" line="1016"/>
+        <location filename="open9xinterface.cpp" line="974"/>
+        <location filename="open9xinterface.cpp" line="1001"/>
+        <location filename="open9xinterface.cpp" line="1024"/>
+        <location filename="open9xinterface.cpp" line="1041"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
 Pokud není tato volby vybrána,
@@ -5021,56 +5032,61 @@ zobrazovány tučným pismem. Neaktivní mixy/spínače budou
 zobrazeny normálním písmem</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="951"/>
-        <location filename="open9xinterface.cpp" line="977"/>
-        <location filename="open9xinterface.cpp" line="1000"/>
+        <location filename="open9xinterface.cpp" line="975"/>
+        <source>Don&apos;t show the throttle trace in Statistics</source>
+        <translation>Nezobrazovat Stopu Plynu (Throttle-trace) v panelu STATISTIKA</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="976"/>
+        <location filename="open9xinterface.cpp" line="1002"/>
+        <location filename="open9xinterface.cpp" line="1025"/>
         <source>EEprom write Progress bar</source>
         <translation>Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="952"/>
-        <location filename="open9xinterface.cpp" line="978"/>
-        <location filename="open9xinterface.cpp" line="1001"/>
-        <location filename="open9xinterface.cpp" line="1017"/>
+        <location filename="open9xinterface.cpp" line="977"/>
+        <location filename="open9xinterface.cpp" line="1003"/>
+        <location filename="open9xinterface.cpp" line="1026"/>
+        <location filename="open9xinterface.cpp" line="1042"/>
         <source>Imperial units</source>
         <translation>Imerialní jednotky pro telemetrii
 (stopy, palce, míle atd.)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="953"/>
-        <location filename="open9xinterface.cpp" line="979"/>
-        <location filename="open9xinterface.cpp" line="1002"/>
-        <location filename="open9xinterface.cpp" line="1018"/>
+        <location filename="open9xinterface.cpp" line="967"/>
+        <location filename="open9xinterface.cpp" line="994"/>
+        <location filename="open9xinterface.cpp" line="1019"/>
+        <location filename="open9xinterface.cpp" line="1036"/>
         <source>Global variables</source>
         <translation>Aktivuje Global Variables
 Jsou to proměnné, které lze použít pro konfiguraci místo některých pevných číselných hodnot.
 Aktivují se dlouhým stiskem MENU, číslo pak nahradí GVx.
 Jejich hodnoty naleznete u originální 9x desky v seznamu křivek. U ostatních v Letových fázích.
-Nastavení hodnoty se provádí pomocí Funkce</translation>
+Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Funkce</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="957"/>
+        <location filename="open9xinterface.cpp" line="981"/>
         <source>open9x for M128 / stock board</source>
         <translation>open9x pro 9x desku s M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="983"/>
+        <location filename="open9xinterface.cpp" line="1007"/>
         <source>open9x for gruvin9x board</source>
         <translation>open9x pro gruvin9x desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="989"/>
+        <location filename="open9xinterface.cpp" line="1013"/>
         <source>Support for SD memory card</source>
         <translation>Podpora paměťové karty SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="992"/>
+        <location filename="open9xinterface.cpp" line="1016"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1006"/>
+        <location filename="open9xinterface.cpp" line="1030"/>
         <source>open9x for sky9x board</source>
         <translation>open9x pro sky9x desku</translation>
     </message>
@@ -5079,12 +5095,12 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
         <translation type="obsolete">open9x pro ersky9x desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1008"/>
+        <location filename="open9xinterface.cpp" line="1032"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="622"/>
+        <location filename="eeprominterface.cpp" line="613"/>
         <source>ersky9x</source>
         <translation></translation>
     </message>
@@ -5183,13 +5199,13 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
         <location filename="ersky9xinterface.cpp" line="199"/>
         <location filename="mdichild.cpp" line="139"/>
         <location filename="modeledit.cpp" line="4502"/>
-        <location filename="open9xinterface.cpp" line="490"/>
+        <location filename="open9xinterface.cpp" line="513"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
         <location filename="ersky9xinterface.cpp" line="200"/>
-        <location filename="open9xinterface.cpp" line="491"/>
+        <location filename="open9xinterface.cpp" line="514"/>
         <source>EEPROM saved with these warnings:</source>
         <translation>EEPROM uložena s těmito varováními:</translation>
     </message>
@@ -5370,12 +5386,12 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
     <message>
         <location filename="helpers.cpp" line="75"/>
         <source>Background Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudba na pozadí</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="76"/>
         <source>Background Music Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudba na pozadí -pozastavit</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="77"/>
@@ -5538,22 +5554,22 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
         <location filename="open9xarmeeprom.cpp" line="2723"/>
         <location filename="open9xarmeeprom.cpp" line="2922"/>
         <location filename="open9xarmeeprom.cpp" line="3119"/>
-        <location filename="open9xeeprom.cpp" line="2386"/>
-        <location filename="open9xeeprom.cpp" line="2542"/>
-        <location filename="open9xeeprom.cpp" line="2710"/>
-        <location filename="open9xeeprom.cpp" line="2896"/>
-        <location filename="open9xeeprom.cpp" line="3098"/>
-        <location filename="open9xeeprom.cpp" line="3312"/>
-        <location filename="open9xeeprom.cpp" line="3514"/>
-        <location filename="open9xeeprom.cpp" line="3715"/>
-        <location filename="open9xeeprom.cpp" line="3938"/>
+        <location filename="open9xeeprom.cpp" line="2391"/>
+        <location filename="open9xeeprom.cpp" line="2547"/>
+        <location filename="open9xeeprom.cpp" line="2715"/>
+        <location filename="open9xeeprom.cpp" line="2901"/>
+        <location filename="open9xeeprom.cpp" line="3103"/>
+        <location filename="open9xeeprom.cpp" line="3317"/>
+        <location filename="open9xeeprom.cpp" line="3519"/>
+        <location filename="open9xeeprom.cpp" line="3720"/>
+        <location filename="open9xeeprom.cpp" line="3943"/>
         <location filename="open9xM128eeprom.cpp" line="159"/>
-        <location filename="open9xv4eeprom.cpp" line="1114"/>
-        <location filename="open9xv4eeprom.cpp" line="1312"/>
-        <location filename="open9xv4eeprom.cpp" line="1518"/>
-        <location filename="open9xv4eeprom.cpp" line="1714"/>
-        <location filename="open9xv4eeprom.cpp" line="1913"/>
-        <location filename="open9xv4eeprom.cpp" line="2111"/>
+        <location filename="open9xv4eeprom.cpp" line="1121"/>
+        <location filename="open9xv4eeprom.cpp" line="1319"/>
+        <location filename="open9xv4eeprom.cpp" line="1525"/>
+        <location filename="open9xv4eeprom.cpp" line="1721"/>
+        <location filename="open9xv4eeprom.cpp" line="1920"/>
+        <location filename="open9xv4eeprom.cpp" line="2118"/>
         <source>Open9x doesn&apos;t accept this protocol</source>
         <translation>Open9x nepodporuje tento protokol</translation>
     </message>
@@ -5561,13 +5577,13 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
         <location filename="open9xarmeeprom.cpp" line="2749"/>
         <location filename="open9xarmeeprom.cpp" line="2948"/>
         <location filename="open9xarmeeprom.cpp" line="3145"/>
-        <location filename="open9xeeprom.cpp" line="3542"/>
-        <location filename="open9xeeprom.cpp" line="3743"/>
-        <location filename="open9xeeprom.cpp" line="3965"/>
+        <location filename="open9xeeprom.cpp" line="3547"/>
+        <location filename="open9xeeprom.cpp" line="3748"/>
+        <location filename="open9xeeprom.cpp" line="3970"/>
         <location filename="open9xM128eeprom.cpp" line="187"/>
-        <location filename="open9xv4eeprom.cpp" line="1742"/>
-        <location filename="open9xv4eeprom.cpp" line="1941"/>
-        <location filename="open9xv4eeprom.cpp" line="2139"/>
+        <location filename="open9xv4eeprom.cpp" line="1749"/>
+        <location filename="open9xv4eeprom.cpp" line="1948"/>
+        <location filename="open9xv4eeprom.cpp" line="2146"/>
         <source>open9x only accepts %1 points in all curves</source>
         <translation>Open9x podporuje pouze %1 bodů ve všech křivkách</translation>
     </message>
@@ -5583,22 +5599,22 @@ Nastavení hodnoty se provádí pomocí Funkce</translation>
         <translation>v Open9x na této desce nelze použít rotační enkodéry</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="2408"/>
-        <location filename="open9xeeprom.cpp" line="2564"/>
-        <location filename="open9xeeprom.cpp" line="2732"/>
-        <location filename="open9xeeprom.cpp" line="2917"/>
-        <location filename="open9xeeprom.cpp" line="3119"/>
-        <location filename="open9xeeprom.cpp" line="3333"/>
-        <location filename="open9xeeprom.cpp" line="3535"/>
-        <location filename="open9xeeprom.cpp" line="3736"/>
-        <location filename="open9xeeprom.cpp" line="3958"/>
+        <location filename="open9xeeprom.cpp" line="2413"/>
+        <location filename="open9xeeprom.cpp" line="2569"/>
+        <location filename="open9xeeprom.cpp" line="2737"/>
+        <location filename="open9xeeprom.cpp" line="2922"/>
+        <location filename="open9xeeprom.cpp" line="3124"/>
+        <location filename="open9xeeprom.cpp" line="3338"/>
+        <location filename="open9xeeprom.cpp" line="3540"/>
+        <location filename="open9xeeprom.cpp" line="3741"/>
+        <location filename="open9xeeprom.cpp" line="3963"/>
         <location filename="open9xM128eeprom.cpp" line="180"/>
-        <location filename="open9xv4eeprom.cpp" line="1135"/>
-        <location filename="open9xv4eeprom.cpp" line="1333"/>
-        <location filename="open9xv4eeprom.cpp" line="1539"/>
-        <location filename="open9xv4eeprom.cpp" line="1735"/>
-        <location filename="open9xv4eeprom.cpp" line="1934"/>
-        <location filename="open9xv4eeprom.cpp" line="2132"/>
+        <location filename="open9xv4eeprom.cpp" line="1142"/>
+        <location filename="open9xv4eeprom.cpp" line="1340"/>
+        <location filename="open9xv4eeprom.cpp" line="1546"/>
+        <location filename="open9xv4eeprom.cpp" line="1742"/>
+        <location filename="open9xv4eeprom.cpp" line="1941"/>
+        <location filename="open9xv4eeprom.cpp" line="2139"/>
         <source>open9x only accepts %1 expos</source>
         <translation>v Open9x lze použít jen %1 exp</translation>
     </message>
@@ -5832,21 +5848,6 @@ Můžete poškodit váš mikrokontrolér.</translation>
 </translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.ui" line="506"/>
-        <source>avrdoper</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="511"/>
-        <source>/dev/ttyUSB0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="516"/>
-        <source>/dev/ttyUSB1</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="burnconfigdialog.ui" line="524"/>
         <location filename="burnconfigdialog.ui" line="637"/>
         <source>Port</source>
@@ -5877,26 +5878,6 @@ m2560 for v4.1 boards</source>
         <translation>CPU osazený ve vašem 9x radiu
 m64 pro původní rádio
 m2560 pro V4 desky</translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="566"/>
-        <source>m64</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="571"/>
-        <source>m128</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="576"/>
-        <source>m2560</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="burnconfigdialog.ui" line="596"/>
-        <source>at91sam3s4-9x</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="604"/>
@@ -7376,6 +7357,44 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <location filename="joystickdialog.cpp" line="128"/>
         <source>Duplicated stick assignement</source>
         <translation>Duplicitní přiřazení páky</translation>
+    </message>
+</context>
+<context>
+    <name>logsDialog</name>
+    <message>
+        <location filename="logsdialog.ui" line="14"/>
+        <source>Companion9x log viewer</source>
+        <translation>Companion9x - zobrazení logu</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.ui" line="103"/>
+        <source>Filename</source>
+        <translation>Soubor</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.ui" line="117"/>
+        <source>Open LogFile</source>
+        <translation>Otevřít</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.cpp" line="21"/>
+        <source>Telemetry logs</source>
+        <translation>Logy telemetrie</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.cpp" line="22"/>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.cpp" line="303"/>
+        <source>Select your log file</source>
+        <translation>Vyberte soubor s logy</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.cpp" line="314"/>
+        <source>Available fields</source>
+        <translation>Dostupná pole</translation>
     </message>
 </context>
 <context>
