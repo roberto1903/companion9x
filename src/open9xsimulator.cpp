@@ -16,6 +16,7 @@
 
 #include "open9xsimulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define FRSKY
 #define FRSKY_HUB
@@ -57,7 +58,7 @@ bool Open9xSimulator::lcdChanged(bool & lightEnable)
 
 void Open9xSimulator::start(RadioData &radioData, bool tests)
 {
-  open9xInterface->save(&Open9x::eeprom[0], radioData);
+  open9xInterface->save(&Open9x::eeprom[0], radioData, SIMU_STOCK_VARIANTS);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }

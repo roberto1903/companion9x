@@ -16,6 +16,7 @@
 
 #include "open9xarmsimulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define PCBSKY9X
 #define REVB

@@ -347,7 +347,7 @@ t_Open9xArmGeneralData_v213::t_Open9xArmGeneralData_v213(GeneralSettings &c9x, u
   memset(this, 0, sizeof(t_Open9xArmGeneralData_v213));
 
   myVers = version;
-  this->variant = (variant & ALL_VARIANTS);
+  this->variant = variant;
 
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     calibMid[i] = c9x.calibMid[i];

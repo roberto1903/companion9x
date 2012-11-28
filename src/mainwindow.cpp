@@ -1004,7 +1004,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   if (!LoadEeprom(radioData, eeprom, eeprom_size))
     return false;
 
-  if (!firmware->saveEEPROM(eeprom, radioData, version, variant))
+  if (!firmware->saveEEPROM(eeprom, radioData, variant, version))
     return false;
 
   QFile file2(restoreFile);
