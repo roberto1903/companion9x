@@ -16,6 +16,7 @@
 
 #include "open9xv4simulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define PCBGRUVIN9X
 
@@ -54,7 +55,7 @@ void Open9xV4Simulator::start(RadioData &radioData, bool tests)
 {
   g_rotenc[0] = 0;
   g_rotenc[1] = 0;
-  open9xInterface->save(&eeprom[0], radioData);
+  open9xInterface->save(&eeprom[0], radioData, SIMU_GRUVIN9X_VARIANTS);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }

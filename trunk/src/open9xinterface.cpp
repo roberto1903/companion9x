@@ -283,7 +283,7 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 }
 
 template <class T>
-bool Open9xInterface::saveGeneral(GeneralSettings &settings, uint32_t version, uint32_t variant)
+bool Open9xInterface::saveGeneral(GeneralSettings &settings, uint32_t variant, uint32_t version)
 {
   T open9xSettings(settings, version, variant);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xSettings, sizeof(T));
@@ -391,7 +391,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   return true;
 }
 
-int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version, uint32_t variant)
+int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t variant, uint8_t version)
 {
   EEPROMWarnings.clear();
 
@@ -420,17 +420,18 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint8_t version
 
   if (board == BOARD_SKY9X) {
     if (version < 213)
-      result = saveGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings, version, variant);
+      result = saveGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings, variant, version);
     else
-      result = saveGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings, version, variant);
+      result = saveGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings, variant, version);
   }
   else {
-    if (board == BOARD_M128)
+    if (board == BOARD_M128) {
       variant |= M128_VARIANT;
+    }
     if (version < 212)
-      result = saveGeneral<Open9xGeneralData_v201>(radioData.generalSettings, version, variant);
+      result = saveGeneral<Open9xGeneralData_v201>(radioData.generalSettings, variant, version);
     else
-      result = saveGeneral<Open9xGeneralData_v212>(radioData.generalSettings, version, variant);
+      result = saveGeneral<Open9xGeneralData_v212>(radioData.generalSettings, variant, version);
   }
   
   if (!result)

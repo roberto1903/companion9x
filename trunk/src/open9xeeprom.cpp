@@ -244,7 +244,7 @@ t_Open9xGeneralData_v212::t_Open9xGeneralData_v212(GeneralSettings &c9x, unsigne
   memset(this, 0, sizeof(t_Open9xGeneralData_v212));
 
   myVers = version;
-  this->variant = (variant & ALL_VARIANTS);
+  this->variant = variant;
 
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     calibMid[i] = c9x.calibMid[i];

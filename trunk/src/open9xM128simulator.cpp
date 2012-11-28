@@ -16,6 +16,7 @@
 
 #include "open9xM128simulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define PCBSTD
 #define M128
@@ -53,7 +54,7 @@ bool Open9xM128Simulator::lcdChanged(bool & lightEnable)
 
 void Open9xM128Simulator::start(RadioData &radioData, bool tests)
 {
-  open9xInterface->save(&eeprom[0], radioData);
+  open9xInterface->save(&eeprom[0], radioData, SIMU_M128_VARIANTS);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }

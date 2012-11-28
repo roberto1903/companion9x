@@ -42,7 +42,7 @@ class Open9xInterface : public EEPROMInterface
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc);
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0, uint32_t variant=0xffffffff);
+    virtual int save(uint8_t *eeprom, RadioData &radioData, uint32_t variant=0, uint8_t version=0);
 
     virtual int getSize(ModelData &);
 
@@ -76,7 +76,7 @@ class Open9xInterface : public EEPROMInterface
     bool loadGeneral(GeneralSettings &settings);
 
     template <class T>
-    bool saveGeneral(GeneralSettings &settings, uint32_t version, uint32_t variant);
+    bool saveGeneral(GeneralSettings &settings, uint32_t variant, uint32_t version);
 
     EFile *efile;
 

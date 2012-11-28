@@ -518,7 +518,8 @@ void burnDialog::on_BurnFlashButton_clicked()
         if (ok)
           radioData.generalSettings.speakerVolume=byte8u;
         patch=true;
-      } else {
+      }
+      else {
         QMessageBox::critical(this, tr("Warning"), tr("Wrong radio setting data in profile, eeprom not patched"));
       }
     
@@ -531,7 +532,7 @@ void burnDialog::on_BurnFlashButton_clicked()
         uint8_t *eeprom = (uint8_t*)malloc(GetEepromInterface()->getEEpromSize());
         int eeprom_size = 0;
 
-        eeprom_size = GetEepromInterface()->save(eeprom, radioData);
+        eeprom_size = GetEepromInterface()->save(eeprom, radioData, GetCurrentFirmwareVariant());
         if (!eeprom_size) {
           QMessageBox::warning(this, tr("Error"),tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
           hexfileName->clear();
@@ -551,11 +552,13 @@ void burnDialog::on_BurnFlashButton_clicked()
         }
         hexfileName->clear();
         hexfileName->append(fileName);
-      } else {
+      }
+      else {
         hexfileName->clear();
         hexfileName->append(ui->FWFileName->text());        
       }
-    } else {
+    }
+    else {
       hexfileName->clear();
       hexfileName->append(ui->FWFileName->text());        
     }

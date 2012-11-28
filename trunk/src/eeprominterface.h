@@ -853,11 +853,11 @@ class EEPROMInterface
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
 
-    virtual bool loadBackup(RadioData &radioData, uint8_t *eeprom,int esize, int index) = 0;
+    virtual bool loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index) = 0;
     
     virtual bool loadxml(RadioData &radioData, QDomDocument &doc) = 0;
 
-    virtual int save(uint8_t *eeprom, RadioData &radioData, uint8_t version=0, uint32_t variant=0xffffffff) = 0;
+    virtual int save(uint8_t *eeprom, RadioData &radioData, uint32_t variant=0, uint8_t version=0) = 0;
 
     virtual int getSize(ModelData &) = 0;
     
@@ -1038,8 +1038,8 @@ class FirmwareInfo {
         return QStringList();
     }
 
-    int saveEEPROM(uint8_t *eeprom, RadioData &radioData, unsigned int version=0, unsigned int variant=0) {
-      return eepromInterface->save(eeprom, radioData, version, variant);
+    int saveEEPROM(uint8_t *eeprom, RadioData &radioData, uint32_t variant=0, unsigned int version=0) {
+      return eepromInterface->save(eeprom, radioData, variant, version);
     }
 
     virtual QString getUrl(const QString &fwId) {
