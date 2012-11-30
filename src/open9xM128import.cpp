@@ -1,7 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSTD
-#define M128
+#define CPUM128
 #define HELI
 #define TEMPLATES
 #define SPLASH
