@@ -2,7 +2,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSTD
-#define M64
+#define CPUM64
 #define SPLASH
 #define FLIGHT_PHASES
 #define DECIMALS_DISPLAYED
