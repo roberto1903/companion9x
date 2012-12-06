@@ -217,7 +217,7 @@ QString compareDialog::getProtocol(ModelData * g_model)
   str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
 
   if(!g_model->protocol) //ppm protocol
-    str.append(tr(": %1 Channels, %2msec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
+    str.append(tr(": %1 Channels, %2usec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
 
   return str;
 }
@@ -327,6 +327,12 @@ QString compareDialog::cSwitchString(CustomSwData * customSw)
         break;
       default:
         break;
+    }
+    if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+      if (customSw->delay)
+        tstr += tr(" Delay %1 sec").arg(customSw->delay/2.0);
+      if (customSw->duration)
+        tstr += tr(" Duration %1 sec").arg(customSw->duration/2.0);
     }
   }
   return tstr;
