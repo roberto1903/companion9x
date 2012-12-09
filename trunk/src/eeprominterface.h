@@ -380,6 +380,7 @@ class GeneralSettings {
     bool      preBeep;
     bool      flashBeep;
     bool      disablePotScroll;
+    bool      frskyinternalalarm;
     bool      disableBG;
     bool      disableSplashScreen;
     uint8_t   filterInput; // TODO enum
@@ -487,6 +488,7 @@ class CustomSwData { // Custom Switches data
     uint8_t func;
     uint8_t delay;
     uint8_t duration;
+    uint8_t andsw;
     void clear() { memset(this, 0, sizeof(CustomSwData)); }
 };
 
@@ -572,6 +574,15 @@ class FrSkyAlarmData {
     uint8_t  value;               // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
 
     void clear() { memset(this, 0, sizeof(FrSkyAlarmData)); }
+};
+
+class FrSkyErAlarmData {
+  public:
+    FrSkyErAlarmData() { clear(); }
+    uint8_t frskyAlarmType ;
+    uint8_t frskyAlarmLimit ;
+    uint8_t frskyAlarmSound ;
+    void clear() { memset(this, 0, sizeof(FrSkyErAlarmData)); }
 };
 
 class FrSkyRSSIAlarm {
@@ -725,8 +736,12 @@ class ModelData {
     // int8_t tmrModeB;
     uint8_t switchWarningStates;
     char     gvars_names[MAX_GVARS][6+1];
+    uint8_t   bt_telemetry;
+    uint8_t   numVoice;
     /* FrSky */    
     FrSkyData frsky;
+    FrSkyErAlarmData frskyalarms[8];
+    uint_8 customdisplay[6];
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
