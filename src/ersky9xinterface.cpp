@@ -55,7 +55,7 @@ const int Ersky9xInterface::getMaxModels()
   return 16;
 }
 
-inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
+inline void applyStickModeToModel(Ersky9xModelData_v10 & model, unsigned int mode)
 {
   for (int i=0; i<2; i++) {
     int stick = applyStickMode(i+1, mode) - 1;
@@ -70,7 +70,37 @@ inline void applyStickModeToModel(Ersky9xModelData & model, unsigned int mode)
       model.expoData[stick] = tmp;
     }
   }
-  for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
+  for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
+    model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
+  for (int i=0; i<ERSKY9X_NUM_CSW; i++) {
+    switch (CS_STATE(model.customSw[i].func)) {
+      case CS_VCOMP:
+        model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
+        // no break
+      case CS_VOFS:
+        model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
+    }
+  }
+  model.swashCollectiveSource = applyStickMode(model.swashCollectiveSource, mode);
+}
+
+inline void applyStickModeToModel(Ersky9xModelData_v11 & model, unsigned int mode)
+{
+  for (int i=0; i<2; i++) {
+    int stick = applyStickMode(i+1, mode) - 1;
+    {
+      int tmp = model.trim[i];
+      model.trim[i] = model.trim[stick];
+      model.trim[stick] = tmp;
+    }
+    {
+      Ersky9xExpoData tmp = model.expoData[i];
+      model.expoData[i] = model.expoData[stick];
+      model.expoData[stick] = tmp;
+    }
+  }
+  for (int i=0; i<ERSKY9X_MAX_MIXERS_V11; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<ERSKY9X_NUM_CSW; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
@@ -100,7 +130,7 @@ bool Ersky9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
   }
   for(int i=0; i<getMaxModels(); i++)
   {
-    Ersky9xModelData ersky9xModel;
+    Ersky9xModelData_v11 ersky9xModel;
     memset(&ersky9xModel,0,sizeof(ersky9xModel));
     if(loadModelDataXML(&doc, &ersky9xModel, i)) {
       applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
@@ -138,11 +168,12 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   switch(ersky9xGeneral.myVers) {
     case 10:
       break;
+    case 11:
+      break;
     default:
       std::cout << "not ersky9x\n";
       return false;
   }
-
   efile->openRd(FILE_GENERAL);
   if (!efile->readRlc2((uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral))) {
     std::cout << "ko\n";
@@ -151,14 +182,28 @@ bool Ersky9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
   radioData.generalSettings = ersky9xGeneral;
   
   for (int i=0; i<getMaxModels(); i++) {
-    Ersky9xModelData ersky9xModel;
+    uint8_t buffer[4096];
+    uint size;
+    memset(buffer,0,sizeof(buffer));
     efile->openRd(FILE_MODEL(i));
-    if (!efile->readRlc2((uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData))) {
+    
+//    if (!efile->readRlc2((uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData))) {
+    size=efile->readRlc2(buffer, 4096);
+    if (!size) {
       radioData.models[i].clear();
     }
     else {
-      applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
-      radioData.models[i] = ersky9xModel;
+      if (size<720) {
+        Ersky9xModelData_v10 ersky9xModel;
+        memcpy(&ersky9xModel, buffer, sizeof(ersky9xModel));
+        applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
+        radioData.models[i] = ersky9xModel;
+      } else {
+        Ersky9xModelData_v11 ersky9xModel;
+        memcpy(&ersky9xModel, buffer, sizeof(ersky9xModel));
+        applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
+        radioData.models[i] = ersky9xModel;
+      }
     } 
   }
 
@@ -185,10 +230,10 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varia
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
-      Ersky9xModelData ersky9xModel(radioData.models[i]);
+      Ersky9xModelData_v11 ersky9xModel(radioData.models[i]);
       applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
-      sz = efile->writeRlc2(FILE_MODEL(i), FILE_TYP_MODEL, (uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData));
-      if(sz != sizeof(Ersky9xModelData)) {
+      sz = efile->writeRlc2(FILE_MODEL(i), FILE_TYP_MODEL, (uint8_t*)&ersky9xModel, sizeof(Ersky9xModelData_v11));
+      if(sz != sizeof(Ersky9xModelData_v11)) {
         return 0;
       }
     }
@@ -216,7 +261,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
     case Mixes:
-      return ERSKY9X_MAX_MIXERS;
+      return ERSKY9X_MAX_MIXERS_V11;
     case NumCurves5:
       return ERSKY9X_MAX_CURVE5;
     case NumCurves9:
@@ -344,13 +389,13 @@ QDomElement Ersky9xInterface::getGeneralDataXML(QDomDocument * qdoc, Ersky9xGene
   return gd;
 }
 
-QDomElement Ersky9xInterface::getModelDataXML(QDomDocument * qdoc, Ersky9xModelData * tmod, int modelNum, int mdver)
+QDomElement Ersky9xInterface::getModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum, int mdver)
 {
   QDomElement md = qdoc->createElement("MODEL_DATA");
   md.setAttribute("number", modelNum);
   appendNumberElement(qdoc, &md, "Version", mdver, true); // have to write value here
   appendTextElement(qdoc, &md, "Name", QString::fromAscii(tmod->name,sizeof(tmod->name)).trimmed());
-  appendCDATAElement(qdoc, &md, "Data", (const char *)tmod,sizeof(Ersky9xModelData));
+  appendCDATAElement(qdoc, &md, "Data", (const char *)tmod,sizeof(Ersky9xModelData_v11));
   return md;
 }
 
@@ -378,7 +423,7 @@ bool Ersky9xInterface::loadGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * 
   return true;
 }
 
-bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData * tmod, int modelNum)
+bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum)
 {
   //look for MODEL_DATA with modelNum attribute.
   //if modelNum = -1 then just pick the first one
@@ -406,7 +451,7 @@ bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData * 
       QString ds = n.toCDATASection().data();
       QByteArray ba = QByteArray::fromBase64(ds.toAscii());
       const char * data = ba.data();
-      memcpy(tmod, data, std::min((unsigned int)ba.size(), (unsigned int)sizeof(Ersky9xModelData)));
+      memcpy(tmod, data, std::min((unsigned int)ba.size(), (unsigned int)sizeof(Ersky9xModelData_v11)));
       break;
     }
     n = n.nextSibling();

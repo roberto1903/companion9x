@@ -63,7 +63,7 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
 {
   memset(this, 0, sizeof(t_Ersky9xGeneral));
 
-  myVers = MDVERS;
+  myVers = ERSKY9X_MDVERS10;
 
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     calibMid[i] = c9x.calibMid[i];
@@ -223,15 +223,14 @@ t_Ersky9xLimitData::operator LimitData ()
   return c9x;
 }
 
-
-t_Ersky9xMixData::t_Ersky9xMixData()
+t_Ersky9xMixData_v10::t_Ersky9xMixData_v10()
 {
-  memset(this, 0, sizeof(t_Ersky9xMixData));
+  memset(this, 0, sizeof(t_Ersky9xMixData_v10));
 }
 
-t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
+t_Ersky9xMixData_v10::t_Ersky9xMixData_v10(MixData &c9x)
 {
-  memset(this, 0, sizeof(t_Ersky9xMixData));
+  memset(this, 0, sizeof(t_Ersky9xMixData_v10));
   destCh = c9x.destCh;
   swtch = er9xFromSwitch(c9x.swtch);
 
@@ -288,7 +287,7 @@ t_Ersky9xMixData::t_Ersky9xMixData(MixData &c9x)
   sOffset = c9x.sOffset;
 }
 
-t_Ersky9xMixData::operator MixData ()
+t_Ersky9xMixData_v10::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
@@ -344,6 +343,126 @@ t_Ersky9xMixData::operator MixData ()
   return c9x;
 }
 
+
+t_Ersky9xMixData_v11::t_Ersky9xMixData_v11()
+{
+  memset(this, 0, sizeof(t_Ersky9xMixData_v11));
+}
+
+t_Ersky9xMixData_v11::t_Ersky9xMixData_v11(MixData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xMixData_v11));
+  destCh = c9x.destCh;
+  swtch = er9xFromSwitch(c9x.swtch);
+
+  if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
+    srcRaw = 0;
+    swtch = 0;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_STICK) {
+    srcRaw = 1 + c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("ersky9x doesn't have Rotary Encoders") + "\n";
+    srcRaw = 5 + c9x.srcRaw.index; // use pots instead
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
+    srcRaw = 8; // MAX
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    srcRaw = 37; // MAX
+  }    
+  else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
+    srcRaw = 9; // FULL
+    swtch = er9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
+    srcRaw = 10 + c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_PPM) {
+    srcRaw = 13 + c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
+    srcRaw = 21 + c9x.srcRaw.index;
+  }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
+    EEPROMWarnings += ::QObject::tr("ersky9x doesn't have trims as source") + "\n";
+    srcRaw = 0; // use pots instead
+  }
+
+  weight = c9x.weight;
+  curve = c9x.curve;
+  delayUp = c9x.delayUp;
+  delayDown = c9x.delayDown;
+  speedUp = c9x.speedUp;
+  speedDown = c9x.speedDown;
+  if (c9x.carryTrim<0) {
+    EEPROMWarnings += ::QObject::tr("er9x doesn't have swappable trims") + "\n";
+    carryTrim=1;
+  } else {
+    carryTrim = c9x.carryTrim;
+  }
+  mltpx = (MltpxValue)c9x.mltpx;
+  mixWarn = c9x.mixWarn;
+  enableFmTrim=c9x.enableFmTrim;
+  sOffset = c9x.sOffset;
+}
+
+t_Ersky9xMixData_v11::operator MixData ()
+{
+  MixData c9x;
+  c9x.destCh = destCh;
+  c9x.weight = weight;
+  c9x.swtch = er9xToSwitch(swtch);
+
+  if (srcRaw == 0) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (srcRaw <= 7) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_STICK, srcRaw-1);
+  }
+  else if (srcRaw == 8) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (srcRaw == 9) {
+    if (swtch < 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, -swtch).toValue());
+      c9x.weight = -weight;
+    }
+    else if (swtch > 0) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
+    }
+    else {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
+    }
+    if (mltpx != MLTPX_REP)
+      c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
+  }
+  else if (srcRaw == 37) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
+  }  
+  else if (srcRaw <= 12) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
+  }
+  else if (srcRaw <= 20) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-13);
+  }
+  else {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-21);
+  }
+
+  c9x.curve = curve;
+  c9x.delayUp = delayUp;
+  c9x.delayDown = delayDown;
+  c9x.speedUp = speedUp;
+  c9x.speedDown = speedDown;
+  c9x.carryTrim = carryTrim;
+  c9x.mltpx = (MltpxValue)mltpx;
+  c9x.mixWarn = mixWarn;
+  c9x.enableFmTrim=enableFmTrim;
+  c9x.sOffset = sOffset;
+  return c9x;
+}
 
 int8_t ersky9xFromSource(RawSource source)
 {
@@ -402,7 +521,7 @@ RawSource ersky9xToSource(int8_t value)
   }
 }
 
-t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
+t_Ersky9xCustomSwData_v10::t_Ersky9xCustomSwData_v10(CustomSwData &c9x)
 {
   func = c9x.func;
   v1 = c9x.val1;
@@ -429,7 +548,7 @@ t_Ersky9xCustomSwData::t_Ersky9xCustomSwData(CustomSwData &c9x)
   }
 }
 
-Ersky9xCustomSwData::operator CustomSwData ()
+Ersky9xCustomSwData_v10::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
@@ -452,20 +571,69 @@ Ersky9xCustomSwData::operator CustomSwData ()
   return c9x;
 }
 
-
-t_Ersky9xSafetySwData::t_Ersky9xSafetySwData()
+t_Ersky9xCustomSwData_v11::t_Ersky9xCustomSwData_v11(CustomSwData &c9x)
 {
-  memset(this, 0, sizeof(t_Ersky9xSafetySwData));
+  func = c9x.func;
+  v1 = c9x.val1;
+  v2 = c9x.val2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    v1 = ersky9xFromSource(RawSource(c9x.val1));
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    v2 = ersky9xFromSource(RawSource(c9x.val2));
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+    v1 = er9xFromSwitch(RawSwitch(c9x.val1));
+    v2 = er9xFromSwitch(RawSwitch(c9x.val2));
+  }
+
+  if (func>ERSKY9X_MAX_CSFUNC ) {
+    EEPROMWarnings += ::QObject::tr("ersky9x does not support Custom Switch function %1").arg(getFuncName(func)) + "\n";
+    func=0;
+    v1=0;
+    v2=0;
+  }
 }
 
-t_Ersky9xSafetySwData::t_Ersky9xSafetySwData(SafetySwData &c9x)
+Ersky9xCustomSwData_v11::operator CustomSwData ()
 {
-  memset(this, 0, sizeof(t_Ersky9xSafetySwData));
+  CustomSwData c9x;
+  c9x.func = func;
+  c9x.val1 = v1;
+  c9x.val2 = v2;
+
+  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+    c9x.val1 = ersky9xToSource(v1).toValue();
+  }
+
+  if (c9x.func >= CS_EQUAL) {
+    c9x.val2 = ersky9xToSource(v2).toValue();
+  }
+
+  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+    c9x.val1 = er9xToSwitch(v1).toValue();
+    c9x.val2 = er9xToSwitch(v2).toValue();
+  }
+
+  return c9x;
+}
+
+t_Ersky9xSafetySwData_v10::t_Ersky9xSafetySwData_v10()
+{
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData_v10));
+}
+
+t_Ersky9xSafetySwData_v10::t_Ersky9xSafetySwData_v10(SafetySwData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData_v10));
   swtch = er9xFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
-t_Ersky9xSafetySwData::operator SafetySwData ()
+t_Ersky9xSafetySwData_v10::operator SafetySwData ()
 {
   SafetySwData c9x;
   c9x.swtch = er9xToSwitch(swtch);
@@ -473,6 +641,25 @@ t_Ersky9xSafetySwData::operator SafetySwData ()
   return c9x;
 }
 
+t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11()
+{
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData_v11));
+}
+
+t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11(SafetySwData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xSafetySwData_v11));
+  swtch = er9xFromSwitch(c9x.swtch);
+  val = c9x.val;
+}
+
+t_Ersky9xSafetySwData_v11::operator SafetySwData ()
+{
+  SafetySwData c9x;
+  c9x.swtch = er9xToSwitch(swtch);
+  c9x.val = val;
+  return c9x;
+}
 
 t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData()
 {
@@ -521,7 +708,6 @@ t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
   return c9x;
 }
 
-
 t_Ersky9xFrSkyData::t_Ersky9xFrSkyData()
 {
   memset(this, 0, sizeof(t_Ersky9xFrSkyData));
@@ -542,9 +728,9 @@ t_Ersky9xFrSkyData::operator FrSkyData ()
   return c9x;
 }
 
-t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
+t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
 {
-  memset(this, 0, sizeof(t_Ersky9xModelData));
+  memset(this, 0, sizeof(t_Ersky9xModelData_v10));
 
   if (c9x.used) {
     setEEPROMString(name, c9x.name, sizeof(name));
@@ -599,7 +785,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
     swashType = c9x.swashRingData.type;
     swashCollectiveSource = ersky9xFromSource(c9x.swashRingData.collectiveSource);
     swashRingValue = c9x.swashRingData.value;
-    for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
+    for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
@@ -704,7 +890,7 @@ t_Ersky9xModelData::t_Ersky9xModelData(ModelData &c9x)
   }
 }
 
-t_Ersky9xModelData::operator ModelData ()
+t_Ersky9xModelData_v10::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -750,7 +936,7 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.swashRingData.type = swashType;
   c9x.swashRingData.collectiveSource = ersky9xToSource(swashCollectiveSource);
   c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<ERSKY9X_MAX_MIXERS; i++)
+  for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
     c9x.mixData[i] = mixData[i];
   for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
     c9x.limitData[i] = limitData[i];
@@ -819,6 +1005,300 @@ t_Ersky9xModelData::operator ModelData ()
   c9x.frsky.usrProto=FrSkyUsrProto;
   c9x.frsky.imperial=FrSkyImperial;
   c9x.frsky.FrSkyGpsAlt=FrSkyGpsAlt;
+  return c9x;
+}
+
+t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xModelData_v11));
+
+  if (c9x.used) {
+    setEEPROMString(name, c9x.name, sizeof(name));
+    sparex = 0;
+    spare22 = 0;
+    for (int i=0; i<2; i++) {
+      timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
+      timer[i].tmrModeB = setEr9xTimerMode(c9x.timers[i].modeB);
+      timer[i].tmrDir = c9x.timers[i].dir;
+      timer[i].tmrVal = c9x.timers[i].val;
+    }
+    switch(c9x.protocol) {
+      case PPM:
+        protocol = 0;
+        break;
+      case PXX:
+        protocol = 1;
+        break;
+      case DSM2:
+        protocol = 2;
+        break;
+      case PPM16:
+        protocol = 3;
+        break;
+      default:
+        protocol = 0;
+        EEPROMWarnings += QObject::tr("Ersky9x doesn't accept this protocol") + "\n";
+        // TODO more explicit warning for each protocol
+        break;
+    }
+    traineron = c9x.traineron;
+    // t2throttle = c9x.t2throttle;
+    ppmFrameLength = c9x.ppmFrameLength;
+    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    thrTrim = c9x.thrTrim;
+    thrExpo = c9x.thrExpo;
+    trimInc = c9x.trimInc;
+    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    for (unsigned int i=0; i<NUM_FSW; i++)
+      if (c9x.funcSw[i].func == FuncInstantTrim && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) {
+        trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
+        break;
+      }
+    beepANACenter = (uint8_t)(c9x.beepANACenter &0x7F);
+    pulsePol = c9x.pulsePol;
+    extendedLimits = c9x.extendedLimits;
+    swashInvertELE = c9x.swashRingData.invertELE;
+    swashInvertAIL = c9x.swashRingData.invertAIL;
+    swashInvertCOL = c9x.swashRingData.invertCOL;
+    swashType = c9x.swashRingData.type;
+    swashCollectiveSource = ersky9xFromSource(c9x.swashRingData.collectiveSource);
+    swashRingValue = c9x.swashRingData.value;
+    for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
+      mixData[i] = c9x.mixData[i];
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+      limitData[i] = c9x.limitData[i];
+
+    // expoData
+    for (int i=0; i<4; i++) {
+      // first we find the switches
+      for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+        if (c9x.expoData[e].chn == i) {
+          if (c9x.expoData[e].swtch.type!=SWITCH_TYPE_NONE) {
+            if (!expoData[i].drSw1)
+              expoData[i].drSw1 = -er9xFromSwitch(c9x.expoData[e].swtch);
+            else if (er9xFromSwitch(c9x.expoData[e].swtch) != -expoData[i].drSw1 && !expoData[i].drSw2) {
+              expoData[i].drSw2 = -er9xFromSwitch(c9x.expoData[e].swtch);
+            }
+          }
+        }
+      }
+
+      if (expoData[i].drSw1 && !expoData[i].drSw2) {
+        expoData[i].drSw1 = -expoData[i].drSw1;
+      }
+
+      for (int pos=0; pos<3; pos++) {
+        int swtch1=0, swtch2=0;
+        if (expoData[i].drSw1 && !expoData[i].drSw2) {
+          switch (pos) {
+            case 0:
+              swtch1 = -expoData[i].drSw1;
+              break;
+            case 1:
+              swtch1 = expoData[i].drSw1;
+              break;
+            default:
+              swtch1 = expoData[i].drSw1;
+              break;
+          }
+        }
+        else {
+          switch (pos) {
+            case 0:
+              swtch1 = -expoData[i].drSw1;
+              break;
+            case 1:
+              swtch1 = expoData[i].drSw1;
+              swtch2 = -expoData[i].drSw2;
+              break;
+            default:
+              swtch1 = expoData[i].drSw1;
+              swtch2 = expoData[i].drSw2;
+              break;
+          }
+        }
+        for (int mode=0; mode<2; mode++) {
+          for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+            if (c9x.expoData[e].chn == i && !c9x.expoData[e].phases) {
+              if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xToSwitch(swtch1) || c9x.expoData[e].swtch == er9xToSwitch(swtch2)) {
+                if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
+                  expoData[i].expo[pos][0][mode] = c9x.expoData[e].expo;
+                  expoData[i].expo[pos][1][mode] = c9x.expoData[e].weight - 100;
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    for (int i=0; i<NUM_STICKS; i++)
+      trim[i] = std::max(-125, std::min(125, c9x.phaseData[0].trim[i]));
+    
+    for (int i=0; i<ERSKY9X_MAX_CURVE5; i++)
+      if  (c9x.curves[i].count==5) {
+        if  (c9x.curves[i].custom)
+          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1) + "\n";    
+        for (int j=0; j<5; j++)
+            curves5[i][j] = c9x.curves[i].points[j].y;
+      } else {
+        EEPROMWarnings += QObject::tr("ErSky9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i].count).arg(i+1) + "\n";
+      }   
+    for (int i=0; i<ERSKY9X_MAX_CURVE9; i++)
+      if  (c9x.curves[i+ERSKY9X_MAX_CURVE5].count==9) {
+        if  (c9x.curves[i+ERSKY9X_MAX_CURVE5].custom)
+          EEPROMWarnings += QObject::tr("ErSky9x doesn't support custom curves as curve%1, curve as been exported as fixed point ").arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";    
+        for (int j=0; j<9; j++)
+            curves9[i][j] = c9x.curves[i+ERSKY9X_MAX_CURVE5].points[j].y;
+      } else {
+        EEPROMWarnings += QObject::tr("ErSky9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+ERSKY9X_MAX_CURVE5].count).arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";
+      }   
+
+    for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+      customSw[i] = c9x.customSw[i];
+
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+      safetySw[i] = c9x.safetySw[i];
+    
+    frsky = c9x.frsky;
+    FrSkyUsrProto = c9x.frsky.usrProto;
+    FrSkyImperial = c9x.frsky.imperial;
+    FrSkyGpsAlt=c9x.frsky.FrSkyGpsAlt;
+    for (int i=0; i<8; i++) {
+      frskyAlarms.alarmData[i].frskyAlarmLimit=c9x.frskyalarms[i].frskyAlarmLimit;
+      frskyAlarms.alarmData[i].frskyAlarmSound=c9x.frskyalarms[i].frskyAlarmSound;
+      frskyAlarms.alarmData[i].frskyAlarmType=c9x.frskyalarms[i].frskyAlarmType;
+    }
+    for (int i=0; i<8; i++) {
+        customDisplayIndex[i]=c9x.customdisplay[i];
+    }
+  }
+}
+
+t_Ersky9xModelData_v11::operator ModelData ()
+{
+  ModelData c9x;
+  c9x.used = true;
+  getEEPROMString(c9x.name, name, sizeof(name));
+  for (int i=0; i<2; i++) {
+    c9x.timers[i].mode = getEr9xTimerMode(timer[i].tmrModeA);
+    c9x.timers[i].modeB = getEr9xTimerModeB(timer[i].tmrModeB);
+    c9x.timers[i].dir = timer[i].tmrDir;
+    c9x.timers[i].val = timer[i].tmrVal;
+  }
+  switch(protocol) {
+    case 1:
+      c9x.protocol = PXX;
+      break;
+    case 2:
+      c9x.protocol = DSM2;
+      break;
+    case 3:
+      c9x.protocol = PPM16;
+      break;
+    default:
+      c9x.protocol = PPM;
+      break;
+  }
+  c9x.traineron= traineron;
+  // c9x.t2throttle =  t2throttle;
+  c9x.ppmFrameLength=ppmFrameLength;
+  c9x.ppmNCH = 8 + 2 * ppmNCH;
+  c9x.thrTrim = thrTrim;
+  c9x.thrExpo = thrExpo;
+  c9x.trimInc = trimInc;
+  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.funcSw[0].func = FuncInstantTrim;
+  if (trimSw) {
+    c9x.funcSw[0].swtch = er9xToSwitch(trimSw);
+  }
+  c9x.beepANACenter = beepANACenter;
+  c9x.pulsePol = pulsePol;
+  c9x.extendedLimits = extendedLimits;
+  c9x.swashRingData.invertELE = swashInvertELE;
+  c9x.swashRingData.invertAIL = swashInvertAIL;
+  c9x.swashRingData.invertCOL = swashInvertCOL;
+  c9x.swashRingData.type = swashType;
+  c9x.swashRingData.collectiveSource = ersky9xToSource(swashCollectiveSource);
+  c9x.swashRingData.value = swashRingValue;
+  for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
+    c9x.mixData[i] = mixData[i];
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    c9x.limitData[i] = limitData[i];
+
+  // expoData
+  int e = 0;
+  for (int ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
+    for (int dr = 0, pos = 0; dr < 3 && e < MAX_EXPOS; dr++, pos++) {
+      if ((dr == 0 && !expoData[ch].drSw1) || (dr == 1 && !expoData[ch].drSw2))
+        dr = 2;
+      if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
+        break;
+      if (expoData[ch].drSw1 && !expoData[ch].drSw2) {
+        c9x.expoData[e].swtch = er9xToSwitch(dr == 0 ? expoData[ch].drSw1 : 0);
+        pos = dr == 0 ? 1 : 0;
+      }
+      else {
+        c9x.expoData[e].swtch = er9xToSwitch(dr == 0 ? -expoData[ch].drSw1 : (dr == 1 ? -expoData[ch].drSw2 : 0));
+      }
+      c9x.expoData[e].chn = ch;
+      c9x.expoData[e].expo = expoData[ch].expo[pos][0][0];
+      c9x.expoData[e].weight = 100 + expoData[ch].expo[pos][1][0];
+      if (expoData[ch].expo[pos][0][0] == expoData[ch].expo[pos][0][1] && expoData[ch].expo[pos][1][0] == expoData[ch].expo[pos][1][1]) {
+        c9x.expoData[e++].mode = 3;
+      }
+      else {
+        c9x.expoData[e].mode = 2;
+        if (e < MAX_EXPOS - 1) {
+          c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
+          c9x.expoData[++e].chn = ch;
+          c9x.expoData[e].mode = 1;
+          c9x.expoData[e].expo = expoData[ch].expo[pos][0][1];
+          c9x.expoData[e++].weight = 100 + expoData[ch].expo[pos][1][1];
+        }
+      }
+    }
+  }
+
+  for (int i=0; i<NUM_STICKS; i++)
+    c9x.phaseData[0].trim[i] = trim[i];
+
+  for (int i=0; i<ERSKY9X_MAX_CURVE5; i++) {
+    c9x.curves[i].custom = false;
+    c9x.curves[i].count = 5;
+    for (int j = 0; j < 5; j++) {
+      c9x.curves[i].points[j].x = -100 + 50 * i;
+      c9x.curves[i].points[j].y = curves5[i][j];
+    }
+  }
+  for (int i=0; i<ERSKY9X_MAX_CURVE9; i++) {
+    c9x.curves[ERSKY9X_MAX_CURVE5 + i].custom = false;
+    c9x.curves[ERSKY9X_MAX_CURVE5 + i].count = 9;
+    for (int j = 0; j < 9; j++) {
+      c9x.curves[ERSKY9X_MAX_CURVE5 + i].points[j].x = -100 + 25 * i;
+      c9x.curves[ERSKY9X_MAX_CURVE5 + i].points[j].y = curves9[i][j];
+    }
+  }
+
+  for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+    c9x.customSw[i] = customSw[i];
+
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    c9x.safetySw[i] = safetySw[i];
+
+  c9x.frsky = frsky;
+  c9x.frsky.usrProto=FrSkyUsrProto;
+  c9x.frsky.imperial=FrSkyImperial;
+  c9x.frsky.FrSkyGpsAlt=FrSkyGpsAlt;
+  for (int i=0; i<8; i++) {
+    c9x.frskyalarms[i].frskyAlarmLimit=frskyAlarms.alarmData[i].frskyAlarmLimit;
+    c9x.frskyalarms[i].frskyAlarmSound=frskyAlarms.alarmData[i].frskyAlarmSound;
+    c9x.frskyalarms[i].frskyAlarmType=frskyAlarms.alarmData[i].frskyAlarmType;
+  }
+  for (int i=0; i<8; i++) {
+        c9x.customdisplay[i]=customDisplayIndex[i];
+  }
   return c9x;
 }
 

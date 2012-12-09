@@ -67,11 +67,11 @@ class Ersky9xInterface : public EEPROMInterface
     
     QDomElement getGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * tgen);   //parse out data to XML format
     
-    QDomElement getModelDataXML(QDomDocument * qdoc, Ersky9xModelData * tmod, int modelNum, int mdver); //parse out data to XML format
+    QDomElement getModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum, int mdver); //parse out data to XML format
     
     bool loadGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * tgen); // get data from XML
     
-    bool loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData * tmod, int modelNum = -1); // get data from XML
+    bool loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum = -1); // get data from XML
 
 };
 
