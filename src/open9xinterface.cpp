@@ -968,6 +968,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOption("telemetrez", QObject::tr("TelemetrEZ board support"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
@@ -995,6 +996,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOption("telemetrez", QObject::tr("TelemetrEZ board support"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
