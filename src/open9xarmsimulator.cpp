@@ -19,6 +19,7 @@
 #include "open9xeeprom.h"
 
 #define PCBSKY9X
+#define CPUARM
 #define REVB
 #define SDCARD
 #define ROTARY_ENCODERS 1
