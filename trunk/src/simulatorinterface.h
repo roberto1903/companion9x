@@ -20,15 +20,15 @@
 #include "eeprominterface.h"
 
 struct TxInputs {
-    int16_t sticks[4]; /* lh lv rv rh */
-    int16_t pots[3];
+    int sticks[4]; /* lh lv rv rh */
+    int pots[3];
     bool sRud;
     bool sEle;
     bool sThr;
     bool sAil;
     bool sGea;
     bool sTrn;
-    uint8_t sId0;
+    int sId0;
     bool menu;
     bool exit;
     bool up;
