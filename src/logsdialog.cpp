@@ -117,7 +117,7 @@ void logsDialog::legendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *ite
 }
 void logsDialog::plottableItemDoubleClick(QCPAbstractPlottable *  plottable, QMouseEvent * event)
 {
-  qDebug() << plottable->
+//   qDebug() << plottable->
 }
 
 void logsDialog::selectionChanged()

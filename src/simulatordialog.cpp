@@ -343,13 +343,13 @@ void simulatorDialog::setTrims()
 
 void simulatorDialog::getValues()
 {
-  TxInputs inputs = {{ 1024*nodeLeft->getX(),  // LEFT HORZ
-                      -1024*nodeLeft->getY(),  // LEFT VERT
-                      -1024*nodeRight->getY(), // RGHT VERT
-                       1024*nodeRight->getX() },  // RGHT HORZ
+  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
+                       int(-1024*nodeLeft->getY()),  // LEFT VERT
+                       int(-1024*nodeRight->getY()), // RGHT VERT
+                       int(1024*nodeRight->getX()) },  // RGHT HORZ
                      { ui->dialP_1->value(),
                        ui->dialP_2->value(),
-                       ui->dialP_3->value()} ,
+                       ui->dialP_3->value() },
                      ui->switchRUD->isChecked(),
                      ui->switchELE->isChecked(),
                      ui->switchTHR->isChecked(),

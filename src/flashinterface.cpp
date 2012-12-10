@@ -211,7 +211,7 @@ void FlashInterface::SeekSplash(void)
   QByteArray splash,spe;
   splash_offset=0;
   splash.clear();
-  splash.append(gr9x_splash, sizeof(gr9x_splash));
+  splash.append((char *)gr9x_splash, sizeof(gr9x_splash));
   int start = flash.indexOf(splash);
   if (start>0) {
     splash_offset=start;
@@ -220,7 +220,7 @@ void FlashInterface::SeekSplash(void)
   } 
   if (start==-1) {
     splash.clear();
-    splash.append(er9x_splash, sizeof(er9x_splash));
+    splash.append((char *)er9x_splash, sizeof(er9x_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
@@ -230,7 +230,7 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
-    splash.append(open9x_splash, sizeof(open9x_splash));
+    splash.append((char *)open9x_splash, sizeof(open9x_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
@@ -240,7 +240,7 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
-    splash.append(gr9xv4_splash, sizeof(gr9xv4_splash));
+    splash.append((char *)gr9xv4_splash, sizeof(gr9xv4_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
@@ -250,7 +250,7 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
-    splash.append(ersky9x_splash, sizeof(ersky9x_splash));
+    splash.append((char *)ersky9x_splash, sizeof(ersky9x_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
