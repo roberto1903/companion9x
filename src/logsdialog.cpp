@@ -13,7 +13,7 @@ logsDialog::logsDialog(QWidget *parent) :
   for (int i=0; i< 60; i++) 
         palette << QColor(rand()%245+10, rand()%245+10, rand()%245+10);
   ui->customPlot->setInteractions(QCustomPlot::iRangeDrag | QCustomPlot::iRangeZoom | QCustomPlot::iSelectAxes |
-                                  QCustomPlot::iSelectLegend | QCustomPlot::iSelectPlottables | QCustomPlot::iSelectTitle);
+                                  QCustomPlot::iSelectLegend | QCustomPlot::iSelectPlottables | QCustomPlot::iSelectTitle | QCustomPlot::iSelectItems);
   ui->customPlot->setRangeDrag(Qt::Horizontal|Qt::Vertical);
   ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
   ui->customPlot->yAxis->setRange(-1100, 1100);
@@ -25,6 +25,7 @@ logsDialog::logsDialog(QWidget *parent) :
   ui->customPlot->yAxis->setAutoTickCount(10);
   ui->customPlot->xAxis2->setTicks(false);
   ui->customPlot->yAxis2->setTicks(false);
+  ui->customPlot->setRangeZoomFactor(2, 1);
   QFont legendFont = font();
   legendFont.setPointSize(10);
   ui->customPlot->legend->setFont(legendFont);
@@ -46,6 +47,7 @@ logsDialog::logsDialog(QWidget *parent) :
   connect(ui->customPlot, SIGNAL(titleDoubleClick(QMouseEvent*)), this, SLOT(titleDoubleClick()));
   connect(ui->customPlot, SIGNAL(axisDoubleClick(QCPAxis*,QCPAxis::SelectablePart,QMouseEvent*)), this, SLOT(axisLabelDoubleClick(QCPAxis*,QCPAxis::SelectablePart)));
   connect(ui->customPlot, SIGNAL(legendDoubleClick(QCPLegend*,QCPAbstractLegendItem*,QMouseEvent*)), this, SLOT(legendDoubleClick(QCPLegend*,QCPAbstractLegendItem*)));
+  connect(ui->customPlot, SIGNAL(plottableDoubleClick(QCPAbstractPlottable *, QMouseEvent *)), this, SLOT(plottableItemDoubleClick(QCPAbstractPlottable *, QMouseEvent *)));
   connect(ui->FieldsTW, SIGNAL(itemSelectionChanged()), this, SLOT(plotLogs()));
   connect(ui->logTable, SIGNAL(itemSelectionChanged()), this, SLOT(plotLogs()));
 }
@@ -113,6 +115,10 @@ void logsDialog::legendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *ite
     }
   }
 }
+void logsDialog::plottableItemDoubleClick(QCPAbstractPlottable *  plottable, QMouseEvent * event)
+{
+  qDebug() << plottable->
+}
 
 void logsDialog::selectionChanged()
 {
@@ -164,10 +170,10 @@ void logsDialog::mousePress()
   
   if (ui->customPlot->xAxis->selected().testFlag(QCPAxis::spAxis))
     ui->customPlot->setRangeDrag(ui->customPlot->xAxis->orientation());
-  else if (ui->customPlot->yAxis->selected().testFlag(QCPAxis::spAxis))
-    ui->customPlot->setRangeDrag(ui->customPlot->yAxis->orientation());
+//  else if (ui->customPlot->yAxis->selected().testFlag(QCPAxis::spAxis))
+//    ui->customPlot->setRangeDrag(ui->customPlot->yAxis->orientation());
   else
-    ui->customPlot->setRangeDrag(Qt::Horizontal|Qt::Vertical);
+    ui->customPlot->setRangeDrag(Qt::Horizontal);
 }
 
 void logsDialog::mouseWheel()

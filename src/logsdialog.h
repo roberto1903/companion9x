@@ -30,6 +30,7 @@ private slots:
   void moveLegend();
   void plotLogs();
   void plotValue(int i);
+  void plottableItemDoubleClick(QCPAbstractPlottable *  plottable, QMouseEvent * event);
   // void graphClicked(QCPAbstractPlottable *plottable);
   void on_fileOpen_BT_clicked();
   
