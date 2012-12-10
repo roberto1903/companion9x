@@ -741,7 +741,7 @@ class ModelData {
     /* FrSky */    
     FrSkyData frsky;
     FrSkyErAlarmData frskyalarms[8];
-    uint_8 customdisplay[6];
+    uint8_t customdisplay[6];
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
