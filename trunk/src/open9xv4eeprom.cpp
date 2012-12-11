@@ -958,6 +958,18 @@ t_Open9xV4FuncSwData_v212::operator FuncSwData ()
       c9x.func = FuncPlayValue;
     else if (func == 28)
       c9x.func = FuncLogs;
+    else if (func == 29)
+      c9x.func = FuncBacklight;
+    else if (func == 30)
+      c9x.func =  FuncAdjustGV1;
+    else if (func == 31)
+      c9x.func =   FuncAdjustGV2;
+    else if (func == 32)
+      c9x.func =   FuncAdjustGV3;
+    else if (func == 33)
+      c9x.func =   FuncAdjustGV4;
+    else if (func == 34)
+      c9x.func =   FuncAdjustGV5;    
     else
       c9x.clear();
   }
