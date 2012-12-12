@@ -6,7 +6,11 @@
 #include <QPen>
 #include "eeprominterface.h"
 #include "mixerslist.h"
-
+#ifdef PHONON
+#include <phonon/audiooutput.h>
+#include <phonon/mediaobject.h>
+#include <phonon/mediasource.h>
+#endif
 namespace Ui {
     class ModelEdit;
 }
@@ -64,6 +68,7 @@ private:
     QComboBox * fswtchSwtch[NUM_FSW];
     QComboBox * fswtchFunc[NUM_FSW];
     QSpinBox * fswtchParam[NUM_FSW];
+    QPushButton * playBT[NUM_FSW];
     QComboBox * fswtchParamT[NUM_FSW];
     QComboBox * fswtchParamArmT[NUM_FSW];
     QCheckBox * fswtchEnable[NUM_FSW];
@@ -142,6 +147,9 @@ private:
     void displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboBox *sw, QDoubleSpinBox *fadeIn, QDoubleSpinBox *fadeOut, QComboBox *trim1Use, QSpinBox *trim1, QLabel *trim1Label, QSlider *trim1Slider, QComboBox *trim2Use, QSpinBox *trim2, QLabel *trim2Label, QSlider *trim2Slider, QComboBox *trim3Use, QSpinBox *trim3, QLabel *trim3Label, QSlider *trim3Slider, QComboBox *trim4Use, QSpinBox *trim4, QLabel *trim4Label, QSlider *trim4Slider, QLabel *gv1Label, QComboBox *gv1Use,QSpinBox *gv1Value, QLabel *gv2Label, QComboBox *gv2Use,QSpinBox *gv2Value, QLabel *gv3Label, QComboBox *gv3Use,QSpinBox *gv3Value, QLabel *gv4Label, QComboBox *gv4Use,QSpinBox *gv4Value, QLabel *gv5Label, QComboBox *gv5Use,QSpinBox *gv5Value, QLabel *re1Label, QComboBox *re1Use,QSpinBox *re1Value, QLabel *re2Label, QComboBox *re2Use,QSpinBox *re2Value,bool doConnect);
     
     void incSubtrim(uint8_t idx, int16_t inc);
+#ifdef PHONON
+    Phonon::MediaObject *clickObject;
+#endif
 
 signals:
     void modelValuesChanged();
@@ -165,6 +173,11 @@ private slots:
     void on_timer2Perm_toggled(bool checked);
     void resetCurve();
     void editCurve();
+    void playMusic();
+#ifdef PHONON
+    void mediaPlayer_state(Phonon::State newState, Phonon::State oldState);
+#endif
+    
     void plotCurve(bool checked);
 //phases slots
     void phaseName_editingFinished();

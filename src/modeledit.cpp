@@ -57,6 +57,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   ui->phase6Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase7Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase8Name->setValidator(new QRegExpValidator(rx, this));
+#ifdef PHONON
+  clickObject = new Phonon::MediaObject(this);
+  connect(clickObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),  this, SLOT(mediaPlayer_state(Phonon::State,Phonon::State)));
+#endif
 
   tabModelEditSetup();
   tabPhases();
@@ -1950,7 +1954,9 @@ void ModelEdit::tabCustomFunctions()
     connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     layout->addWidget(fswtchFunc[i],(i%16)+1,2);
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
-
+    playBT[i] = new QPushButton(this);
+    playBT[i]->setObjectName(QString("play_%1").arg(i));
+    playBT[i]->setIcon(QIcon(":/images/play.png"));
     fswtchParam[i] = new QSpinBox(this);
     if (func==FuncPlayPrompt) {
       fswtchParam[i]->setMinimum(256);      
@@ -1963,7 +1969,11 @@ void ModelEdit::tabCustomFunctions()
     fswtchParam[i]->setAccelerated(true);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
     layout->addWidget(fswtchParam[i],(i%16)+1,3);
-
+    layout->addWidget(playBT[i],(i%16)+1,4);
+    if (!(func==FuncPlayPrompt || func==FuncBackgroundMusic)) {
+      playBT[i]->hide();
+    }
+    connect(playBT[i],SIGNAL(pressed()),this,SLOT(playMusic()));
     fswtchEnable[i] = new QCheckBox(this);
     if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && GetEepromInterface()->getCapability(VoicesAsNumbers))
       fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
@@ -2113,6 +2123,45 @@ void ModelEdit::customSwitchesEdited()
 
     switchEditLock = false;
 }
+#ifdef PHONON
+
+void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState)
+{
+  if (newState!=Phonon::PlayingState && newState!=Phonon::LoadingState) {
+    for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
+      playBT[i]->setObjectName(QString("play_%1").arg(i));
+      playBT[i]->setIcon(QIcon(":/images/play.png"));
+    }
+  }
+}
+#endif
+
+void ModelEdit::playMusic()
+{
+  QPushButton *playButton = qobject_cast<QPushButton*>(sender());
+  int index=playButton->objectName().mid(5,2).toInt();
+  QString function=playButton->objectName().left(4);
+  QSettings settings("companion9x", "companion9x");
+  QString path=settings.value("soundPath", "").toString();
+  QDir qd(path);
+  if (qd.exists() && fswtchParamArmT[index]->currentText()!="----") {
+    QString track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
+#ifdef PHONON
+    if (function=="play") {
+      clickObject->setCurrentSource(Phonon::MediaSource(track));
+      Phonon::AudioOutput *clickOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
+      Phonon::createPath(clickObject, clickOutput);
+      clickObject->play();
+      playBT[index]->setObjectName(QString("stop_%1").arg(index));
+      playBT[index]->setIcon(QIcon(":/images/stop.png"));
+    } else {
+      clickObject->stop();
+      playBT[index]->setObjectName(QString("play_%1").arg(index));
+      playBT[index]->setIcon(QIcon(":/images/play.png"));      
+    }
+#endif
+  }
+}
 
 void ModelEdit::functionSwitchesEdited()
 {
@@ -2149,6 +2198,7 @@ void ModelEdit::functionSwitchesEdited()
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
           fswtchEnable[i]->setChecked(false);
+          playBT[i]->show();
           if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
             fswtchParam[i]->show();
             fswtchParam[i]->setMinimum(256);
