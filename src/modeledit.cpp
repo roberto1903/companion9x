@@ -2132,9 +2132,11 @@ void ModelEdit::customSwitchesEdited()
 void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState)
 {
   if (newState!=Phonon::PlayingState && newState!=Phonon::LoadingState) {
+    clickObject->clearQueue();
     for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
       playBT[i]->setIcon(QIcon(":/images/play.png"));
+      
     }
   }
 }
@@ -2151,11 +2153,16 @@ void ModelEdit::playMusic()
   QString track;
   if (qd.exists()) {
     if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      track=path+"/"+QString("%1").arg(fswtchParam[index]->value(),4,10,(const QChar)'0')+".wav";
+      track=path+QString("/%1.wav").arg(fswtchParam[index]->value(),4,10,(const QChar)'0');
     } else {
       if (fswtchParamArmT[index]->currentText()!="----") {
         track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
       }
+    }
+    QFile file(track);
+    if (!file.exists()) {
+      QMessageBox::critical(this, tr("Error"), tr("Unable to find sound file %1!").arg(track));
+      track.clear();
     }
 #ifdef PHONON
     if (function=="play" and !track.isEmpty()) {
