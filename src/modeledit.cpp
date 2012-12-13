@@ -2148,10 +2148,17 @@ void ModelEdit::playMusic()
   QSettings settings("companion9x", "companion9x");
   QString path=settings.value("soundPath", "").toString();
   QDir qd(path);
-  if (qd.exists() && fswtchParamArmT[index]->currentText()!="----") {
-    QString track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
+  QString track;
+  if (qd.exists()) {
+    if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+      track=path+"/"+QString("%1").arg(fswtchParam[index]->value(),4,10,(const QChar)'0')+".wav";
+    } else {
+      if (fswtchParamArmT[index]->currentText()!="----") {
+        track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
+      }
+    }
 #ifdef PHONON
-    if (function=="play") {
+    if (function=="play" and !track.isEmpty()) {
       clickObject->setCurrentSource(Phonon::MediaSource(track));
       Phonon::AudioOutput *clickOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
       Phonon::createPath(clickObject, clickOutput);
