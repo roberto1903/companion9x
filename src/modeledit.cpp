@@ -1954,9 +1954,11 @@ void ModelEdit::tabCustomFunctions()
     connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     layout->addWidget(fswtchFunc[i],(i%16)+1,2);
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
+#ifdef PHONON    
     playBT[i] = new QPushButton(this);
     playBT[i]->setObjectName(QString("play_%1").arg(i));
     playBT[i]->setIcon(QIcon(":/images/play.png"));
+#endif    
     fswtchParam[i] = new QSpinBox(this);
     if (func==FuncPlayPrompt) {
       fswtchParam[i]->setMinimum(256);      
@@ -1969,11 +1971,13 @@ void ModelEdit::tabCustomFunctions()
     fswtchParam[i]->setAccelerated(true);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
     layout->addWidget(fswtchParam[i],(i%16)+1,3);
+#ifdef PHONON    
     layout->addWidget(playBT[i],(i%16)+1,4);
     if (!(func==FuncPlayPrompt || func==FuncBackgroundMusic)) {
       playBT[i]->hide();
     }
     connect(playBT[i],SIGNAL(pressed()),this,SLOT(playMusic()));
+#endif    
     fswtchEnable[i] = new QCheckBox(this);
     if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && GetEepromInterface()->getCapability(VoicesAsNumbers))
       fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
@@ -2198,7 +2202,9 @@ void ModelEdit::functionSwitchesEdited()
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
           fswtchEnable[i]->setChecked(false);
+#ifdef PHONON
           playBT[i]->show();
+#endif
           if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
             fswtchParam[i]->show();
             fswtchParam[i]->setMinimum(256);
