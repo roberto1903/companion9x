@@ -2173,7 +2173,7 @@ void ModelEdit::playMusic()
       track.clear();
     }
 #ifdef PHONON
-    if (function=="play" and !track.isEmpty()) {
+    if (function=="play" && !track.isEmpty()) {
       clickObject->clear();
       clickObject->setCurrentSource(Phonon::MediaSource(track));
       clickObject->play();
