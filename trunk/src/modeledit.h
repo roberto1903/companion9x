@@ -56,6 +56,7 @@ private:
     bool phasesLock;
     bool telemetryLock;
     bool curvesLock;
+    bool phononLock;
 
     bool plot_curve[16];
 
@@ -149,6 +150,7 @@ private:
     void incSubtrim(uint8_t idx, int16_t inc);
 #ifdef PHONON
     Phonon::MediaObject *clickObject;
+    Phonon::AudioOutput *clickOutput;
 #endif
 
 signals:
