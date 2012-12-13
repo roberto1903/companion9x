@@ -58,7 +58,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   ui->phase7Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase8Name->setValidator(new QRegExpValidator(rx, this));
 #ifdef PHONON
+  phononLock=false;
   clickObject = new Phonon::MediaObject(this);
+  clickOutput = new Phonon::AudioOutput(Phonon::NoCategory, this);
+  Phonon::createPath(clickObject, clickOutput);
   connect(clickObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),  this, SLOT(mediaPlayer_state(Phonon::State,Phonon::State)));
 #endif
 
@@ -2131,14 +2134,19 @@ void ModelEdit::customSwitchesEdited()
 
 void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState)
 {
-  if (newState!=Phonon::PlayingState && newState!=Phonon::LoadingState) {
+  if (phononLock)
+    return;
+  phononLock=true;
+  if (newState==Phonon::PausedState) {
+    clickObject->stop();
     clickObject->clearQueue();
+    clickObject->clear();
     for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
-      playBT[i]->setIcon(QIcon(":/images/play.png"));
-      
+      playBT[i]->setIcon(QIcon(":/images/play.png"));   
     }
   }
+  phononLock=false;
 }
 #endif
 
@@ -2166,14 +2174,14 @@ void ModelEdit::playMusic()
     }
 #ifdef PHONON
     if (function=="play" and !track.isEmpty()) {
+      clickObject->clear();
       clickObject->setCurrentSource(Phonon::MediaSource(track));
-      Phonon::AudioOutput *clickOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
-      Phonon::createPath(clickObject, clickOutput);
       clickObject->play();
       playBT[index]->setObjectName(QString("stop_%1").arg(index));
       playBT[index]->setIcon(QIcon(":/images/stop.png"));
     } else {
       clickObject->stop();
+      clickObject->clear();
       playBT[index]->setObjectName(QString("play_%1").arg(index));
       playBT[index]->setIcon(QIcon(":/images/play.png"));      
     }
