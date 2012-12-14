@@ -2136,11 +2136,19 @@ void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState
 {
   if (phononLock)
     return;
+  if (newState==oldState)
+    return;
   phononLock=true;
   if (newState==Phonon::PausedState) {
     clickObject->stop();
     clickObject->clearQueue();
     clickObject->clear();
+    for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
+      playBT[i]->setObjectName(QString("play_%1").arg(i));
+      playBT[i]->setIcon(QIcon(":/images/play.png"));   
+    }
+  }
+  if (newState==Phonon::StoppedState) {
     for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
       playBT[i]->setIcon(QIcon(":/images/play.png"));   
