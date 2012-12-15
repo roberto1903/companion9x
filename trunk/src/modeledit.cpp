@@ -2014,28 +2014,32 @@ void ModelEdit::tabCustomFunctions()
       fswtchParam[i]->hide();
       fswtchParamT[i]->hide();
       fswtchEnable[i]->hide();
-    }
-    else if (func>FuncSafetyCh16) {
-      if (func==FuncPlayPrompt || func==FuncBackgroundMusic) {
-        if (GetEepromInterface()->getCapability(VoicesAsNumbers))
+    } else if (func>FuncSafetyCh16) {
+      if (func==FuncPlaySound || func==FuncPlayHaptic || func==FuncReset || func==FuncVolume || func==FuncPlayValue || (func>=FuncAdjustGV1 && func<=FuncAdjustGV5)) {
+        fswtchParam[i]->hide();
+        fswtchParamArmT[i]->hide();
+        fswtchParamT[i]->show();
+        fswtchEnable[i]->hide();
+      } else if (func==FuncPlayPrompt || func==FuncBackgroundMusic) {
+        fswtchParamT[i]->hide();
+        fswtchEnable[i]->hide();
+        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+          fswtchParam[i]->show();
           fswtchParamArmT[i]->hide();
-        fswtchParamT[i]->hide();
-      }
-      else if (!(func==FuncPlaySound || func==FuncPlayHaptic || func==FuncReset  || func==FuncVolume || func==FuncPlayValue || (func>=FuncAdjustGV1 && func<=FuncAdjustGV5))) {
-        fswtchParamT[i]->hide();
-        if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+        } else {
           fswtchParam[i]->hide();
+          fswtchParamArmT[i]->show();
         }
-      }
-      else {
+      } else {
         fswtchParamArmT[i]->hide();
         fswtchParam[i]->hide();
+        fswtchParamT[i]->hide();
+        if (index>FuncInstantTrim) {
+          fswtchEnable[i]->hide();
+        } else {
+          fswtchEnable[i]->show();
+        }
       }
-
-      if (func>FuncInstantTrim)
-        fswtchEnable[i]->hide();
-      else
-        fswtchEnable[i]->show();
     }
   }
 
@@ -2136,10 +2140,8 @@ void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState
 {
   if (phononLock)
     return;
-  if (newState==oldState)
-    return;
   phononLock=true;
-  if (newState==Phonon::PausedState) {
+  if ((newState==Phonon::StoppedState || newState==Phonon::PausedState)  && oldState==Phonon::PlayingState) {
     clickObject->stop();
     clickObject->clearQueue();
     clickObject->clear();
@@ -2148,12 +2150,16 @@ void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState
       playBT[i]->setIcon(QIcon(":/images/play.png"));   
     }
   }
-  if (newState==Phonon::StoppedState) {
+  if (newState==Phonon::ErrorState) {
+    clickObject->stop();
+    clickObject->clearQueue();
+    clickObject->clear();
     for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
       playBT[i]->setIcon(QIcon(":/images/play.png"));   
     }
   }
+  
   phononLock=false;
 }
 #endif
@@ -2213,22 +2219,19 @@ void ModelEdit::functionSwitchesEdited()
         fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
         fswtchEnable[i]->setChecked(false);
-      }
-      else if (index>FuncSafetyCh16) {
+      } else if (index>FuncSafetyCh16) {
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue || (index>=FuncAdjustGV1 && index<=FuncAdjustGV5)) {
           fswtchParam[i]->hide();
           fswtchParamArmT[i]->hide();
           if (fswtchParamT[i]->currentIndex()>=0) {
             g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-          }
-          else {
+          } else {
             g_model.funcSw[i].param = 0;
           }
           populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
           fswtchParamT[i]->show();
           fswtchEnable[i]->hide();
-        }
-        else if (index==FuncPlayPrompt || index==FuncBackgroundMusic) {
+        } else if (index==FuncPlayPrompt || index==FuncBackgroundMusic) {
           fswtchParamT[i]->hide();
           fswtchEnable[i]->hide();
           fswtchEnable[i]->setChecked(false);
@@ -2240,8 +2243,7 @@ void ModelEdit::functionSwitchesEdited()
             fswtchParam[i]->setMinimum(256);
             fswtchParam[i]->setMaximum(511);
             g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-          }
-          else {
+          } else {
             fswtchParam[i]->hide();
             fswtchParamArmT[i]->show();
             for (int j=0; j<6; j++) {
@@ -2253,8 +2255,7 @@ void ModelEdit::functionSwitchesEdited()
               }
             }
           }
-        }
-        else {
+        } else {
           g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
           fswtchParamArmT[i]->hide();
           fswtchParam[i]->hide();
@@ -2262,15 +2263,13 @@ void ModelEdit::functionSwitchesEdited()
           if (index>FuncInstantTrim) {
             fswtchEnable[i]->hide();
             fswtchEnable[i]->setChecked(false);
-          }
-          else {
+          } else {
             fswtchEnable[i]->show();
           }
         }
-      }
-      else {
-      fswtchParam[i]->setMinimum(-125);
-      fswtchParam[i]->setMaximum(125);
+      } else {
+        fswtchParam[i]->setMinimum(-125);
+        fswtchParam[i]->setMaximum(125);
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
         fswtchParam[i]->show();
         fswtchEnable[i]->show();
