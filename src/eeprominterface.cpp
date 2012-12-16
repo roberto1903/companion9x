@@ -405,6 +405,8 @@ QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
       return QObject::tr("Timer%1").arg(index+1);
     case SOURCE_TYPE_TELEMETRY:
       return telemetry[index];
+    case SOURCE_TYPE_GVAR:
+      return QObject::tr("GV%1").arg(index+1);      
     default:
       return QObject::tr("----");
   }

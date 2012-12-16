@@ -206,9 +206,10 @@ PACK(typedef struct t_Ersky9xCustomSwData_v10 { // Custom Switches data
 
 PACK(typedef struct t_Ersky9xCustomSwData_v11 { // Custom Switches data
   int8_t  v1; //input
-  int8_t  v2; //offset
-  uint8_t func:4;
-  uint8_t andsw:4;
+  int8_t  v2; 		//offset
+  uint8_t func;
+  int8_t andsw;
+  uint8_t res ;
 
   operator CustomSwData();
   t_Ersky9xCustomSwData_v11() { memset(this, 0, sizeof(t_Ersky9xCustomSwData_v11)); }
@@ -338,7 +339,6 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   uint8_t   FrSkyImperial:1 ;         // Convert FrSky values to imperial units
   uint8_t   FrSkyAltAlarm:2;
   uint8_t   version ;
-  uint8_t   spare_u8 ;				// Was timerval
   uint8_t   protocol;
   int8_t    ppmNCH;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
@@ -365,6 +365,7 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   int8_t    trim[4];
   int8_t    curves5[ERSKY9X_MAX_CURVE5][5];
   int8_t    curves9[ERSKY9X_MAX_CURVE9][9];
+  int8_t    curvexy[18];
   Ersky9xCustomSwData_v11   customSw[ERSKY9X_NUM_CSW_V11];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   bt_telemetry;

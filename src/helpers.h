@@ -39,6 +39,7 @@ void populateTimerSwitchCB(QComboBox *b, int value);
 #define POPULATE_SWITCHES  1
 #define POPULATE_TELEMETRY 2
 #define POPULATE_TRIMS     4
+#define POPULATE_GVARS     8
 
 #define GVARS_VARIANT 0x0001
 #define FRSKY_VARIANT 0x0002

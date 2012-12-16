@@ -6,6 +6,46 @@
 extern int8_t er9xFromSwitch(const RawSwitch & sw);
 extern RawSwitch er9xToSwitch(int8_t sw);
 
+int8_t ersky9xFromSwitch(const RawSwitch & sw)
+{
+  switch (sw.type) {
+    case SWITCH_TYPE_SWITCH:
+      return sw.index;
+    case SWITCH_TYPE_VIRTUAL:
+      return sw.index > 0 ? (9 + sw.index) : (-9 + sw.index);
+    case SWITCH_TYPE_ON:
+      return 34;
+    case SWITCH_TYPE_OFF:
+      return -34;
+    case SWITCH_TYPE_MOMENT_SWITCH:
+      return sw.index > 0 ? (34 + sw.index) : (-34 + sw.index);
+    case SWITCH_TYPE_MOMENT_VIRTUAL:
+      return sw.index > 0 ? (31 + sw.index) : (-31 + sw.index);
+    default:
+      return 0;
+  }
+}
+
+RawSwitch ersky9xToSwitch(int8_t sw)
+{
+  uint8_t swa = abs(sw);
+  if (swa == 0)
+    return RawSwitch(SWITCH_TYPE_NONE);
+  else if (swa <= 9)
+    return RawSwitch(SWITCH_TYPE_SWITCH, sw);
+  else if (swa <= 33)
+    return RawSwitch(SWITCH_TYPE_VIRTUAL, sw > 0 ? sw-9 : sw+9);
+  else if (sw == 34)
+    return RawSwitch(SWITCH_TYPE_ON);
+  else if (sw == -34)
+    return RawSwitch(SWITCH_TYPE_OFF);
+  else if (swa <= 34+9)
+    return RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, sw > 0 ? sw-34 : sw+34);
+  else
+    return RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, sw > 0 ? sw-34-9 : sw+34+9);
+}
+
+
 t_Ersky9xTrainerMix::t_Ersky9xTrainerMix()
 {
   memset(this, 0, sizeof(t_Ersky9xTrainerMix));
@@ -353,8 +393,7 @@ t_Ersky9xMixData_v11::t_Ersky9xMixData_v11(MixData &c9x)
 {
   memset(this, 0, sizeof(t_Ersky9xMixData_v11));
   destCh = c9x.destCh;
-  swtch = er9xFromSwitch(c9x.swtch);
-
+  swtch = ersky9xFromSwitch(c9x.swtch);
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
     swtch = 0;
@@ -370,11 +409,14 @@ t_Ersky9xMixData_v11::t_Ersky9xMixData_v11(MixData &c9x)
     srcRaw = 8; // MAX
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
-    srcRaw = 37; // MAX
+    srcRaw = 45; // MAX
+  }    
+  else if (c9x.srcRaw.type == SOURCE_TYPE_GVAR) {
+    srcRaw = 46+c9x.srcRaw.index; // MAX
   }    
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = er9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+    swtch = ersky9xFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
     srcRaw = 10 + c9x.srcRaw.index;
@@ -413,7 +455,7 @@ t_Ersky9xMixData_v11::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
-  c9x.swtch = er9xToSwitch(swtch);
+  c9x.swtch = ersky9xToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -438,8 +480,11 @@ t_Ersky9xMixData_v11::operator MixData ()
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
-  else if (srcRaw == 37) {
+  else if (srcRaw == 45) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
+  }  
+  else if (srcRaw > 45) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_GVAR, srcRaw-46);
   }  
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
@@ -708,14 +753,14 @@ t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11()
 t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11(SafetySwData &c9x)
 {
   memset(this, 0, sizeof(t_Ersky9xSafetySwData_v11));
-  swtch = er9xFromSwitch(c9x.swtch);
+  swtch = ersky9xFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
 t_Ersky9xSafetySwData_v11::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = er9xToSwitch(swtch);
+  c9x.swtch = ersky9xToSwitch(swtch);
   c9x.val = val;
   return c9x;
 }
@@ -1195,7 +1240,8 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
 
     for (int i=0; i<NUM_STICKS; i++)
       trim[i] = std::max(-125, std::min(125, c9x.phaseData[0].trim[i]));
-    
+    for (int i=0; i<18; i++)
+      curvexy[i]=0;
     for (int i=0; i<ERSKY9X_MAX_CURVE5; i++)
       if  (c9x.curves[i].count==5) {
         if  (c9x.curves[i].custom)
