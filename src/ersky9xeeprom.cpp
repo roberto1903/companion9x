@@ -936,7 +936,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
         EEPROMWarnings += QObject::tr("ErSky9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+ERSKY9X_MAX_CURVE5].count).arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";
       }   
 
-    for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+    for (int i=0; i<ERSKY9X_NUM_CSW_V10; i++)
       customSw[i] = c9x.customSw[i];
 
     for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
@@ -1054,7 +1054,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
     }
   }
 
-  for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+  for (int i=0; i<ERSKY9X_NUM_CSW_V10; i++)
     c9x.customSw[i] = customSw[i];
 
   for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
@@ -1215,7 +1215,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
         EEPROMWarnings += QObject::tr("ErSky9x doesn't support curve with %1 point as curve%2 ").arg(c9x.curves[i+ERSKY9X_MAX_CURVE5].count).arg(i+1+ERSKY9X_MAX_CURVE5) + "\n";
       }   
 
-    for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+    for (int i=0; i<ERSKY9X_NUM_CSW_V11; i++)
       customSw[i] = c9x.customSw[i];
 
     for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
@@ -1341,7 +1341,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
     }
   }
 
-  for (int i=0; i<ERSKY9X_NUM_CSW; i++)
+  for (int i=0; i<ERSKY9X_NUM_CSW_V11; i++)
     c9x.customSw[i] = customSw[i];
 
   for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
