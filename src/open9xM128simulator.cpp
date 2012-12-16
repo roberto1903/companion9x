@@ -20,6 +20,9 @@
 
 #define PCBSTD
 #define M128
+#define FRSKY
+#define FRSKY_HUB
+#define WS_HOW_HIGH
 
 namespace Open9xM128 {
 #define NAMESPACE_IMPORT
