@@ -35,7 +35,8 @@ extern int setEr9xTimerModeB(TimerMode mode);
 #define ERSKY9X_MDVERS11      11
 
 #define ERSKY9X_GENERAL_OWNER_NAME_LEN  10
-#define ERSKY9X_NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
+#define ERSKY9X_NUM_CHNOUT_V10      16 //number of real outputchannels CH1-CH8
+#define ERSKY9X_NUM_CHNOUT_V11      24 //number of real outputchannels CH1-CH8
 #define ERSKY9X_NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
@@ -175,18 +176,17 @@ PACK(typedef struct t_Ersky9xMixData_v11 {
   int8_t  weight;
   int8_t  swtch;
   uint8_t curve;             //0=symmetrisch 1=no neg 2=no pos
-  uint8_t delayUp:4;
-  uint8_t delayDown:4;
-  uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
-  uint8_t speedDown:4;       // 0 nichts
+  uint8_t delayUp;
+  uint8_t delayDown;
+  uint8_t speedUp;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
+  uint8_t speedDown;       // 0 nichts
   uint8_t carryTrim:1;
   uint8_t mltpx:3;           // multiplex method 0=+ 1=* 2=replace
   uint8_t mixWarn:2;         // mixer warning
   uint8_t enableFmTrim:1;
   uint8_t mixres:1;
   int8_t  sOffset;
-  int8_t  res;
-
+  uint8_t  res[4];
   operator MixData();
   t_Ersky9xMixData_v11();
   t_Ersky9xMixData_v11(MixData&);
@@ -309,7 +309,7 @@ PACK(typedef struct t_Ersky9xModelData_v10 {
   uint8_t   swashRingValue;
   int8_t    ppmFrameLength;   //0=22.5  (10msec-30msec) 0.5msec increments
   Ersky9xMixData_v10   mixData[ERSKY9X_MAX_MIXERS_V10];
-  Ersky9xLimitData limitData[ERSKY9X_NUM_CHNOUT];
+  Ersky9xLimitData limitData[ERSKY9X_NUM_CHNOUT_V10];
   Ersky9xExpoData expoData[4];
   int8_t    trim[4];
   int8_t    curves5[ERSKY9X_MAX_CURVE5][5];
@@ -317,7 +317,7 @@ PACK(typedef struct t_Ersky9xModelData_v10 {
   Ersky9xCustomSwData_v10   customSw[ERSKY9X_NUM_CSW];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   res3[2];
-  Ersky9xSafetySwData_v10  safetySw[ERSKY9X_NUM_CHNOUT];
+  Ersky9xSafetySwData_v10  safetySw[ERSKY9X_NUM_CHNOUT_V10];
   Ersky9xFrSkyData frsky;
   Ersky9xTimerMode_v10 timer[2] ;
   operator ModelData();
@@ -359,7 +359,7 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   uint8_t   swashRingValue;
   int8_t    ppmFrameLength;   //0=22.5  (10msec-30msec) 0.5msec increments
   Ersky9xMixData_v11 mixData[ERSKY9X_MAX_MIXERS_V11];
-  Ersky9xLimitData limitData[ERSKY9X_NUM_CHNOUT];
+  Ersky9xLimitData limitData[ERSKY9X_NUM_CHNOUT_V11];
   Ersky9xExpoData expoData[4];
   int8_t    trim[4];
   int8_t    curves5[ERSKY9X_MAX_CURVE5][5];
@@ -368,7 +368,7 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   uint8_t   frSkyVoltThreshold ;
   uint8_t   bt_telemetry;
   uint8_t   numVoice;		// 0-16, rest are Safety switches
-  Ersky9xSafetySwData_v11  safetySw[ERSKY9X_NUM_CHNOUT];
+  Ersky9xSafetySwData_v11  safetySw[ERSKY9X_NUM_CHNOUT_V11];
   Ersky9xFrSkyData frsky;
   Ersky9xTimerMode_v11 timer[2] ;
   Ersky9xFrSkyAlarmData_v11 frskyAlarms ;
