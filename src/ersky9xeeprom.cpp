@@ -464,7 +464,7 @@ t_Ersky9xMixData_v11::operator MixData ()
   return c9x;
 }
 
-int8_t ersky9xFromSource(RawSource source)
+int8_t ersky9xFromSource_v10(RawSource source)
 {
   int v1 = 0;
   if (source.type == SOURCE_TYPE_STICK)
@@ -490,7 +490,34 @@ int8_t ersky9xFromSource(RawSource source)
   return v1;
 }
 
-RawSource ersky9xToSource(int8_t value)
+int8_t ersky9xFromSource_v11(RawSource source)
+{
+  int v1 = 0;
+  if (source.type == SOURCE_TYPE_STICK)
+    v1 = 1+source.index;
+  else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+    EEPROMWarnings += ::QObject::tr("er9x on this board doesn't have Rotary Encoders") + "\n";
+    v1 = 5+source.index;
+  }
+  else if (source.type == SOURCE_TYPE_MAX)
+    v1 = 8;
+  else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 0;
+  else if (source.type == SOURCE_TYPE_CYC)
+    v1 = 10+source.index;
+  else if (source.type == SOURCE_TYPE_PPM)
+    v1 = 13+source.index;
+  else if (source.type == SOURCE_TYPE_CH)
+    v1 = 20+source.index;
+  else if (source.type == SOURCE_TYPE_TIMER)
+    v1 = 37+source.index;
+  else if (source.type == SOURCE_TYPE_TELEMETRY)
+    v1 = 39+source.index;
+  return v1;
+}
+
+
+RawSource ersky9xToSource_v10(int8_t value)
 {
   if (value == 0) {
     return RawSource(SOURCE_TYPE_NONE);
@@ -521,6 +548,38 @@ RawSource ersky9xToSource(int8_t value)
   }
 }
 
+RawSource ersky9xToSource_v11(int8_t value)
+{
+  if (value == 0) {
+    return RawSource(SOURCE_TYPE_NONE);
+  }
+  else if (value <= 7) {
+    return RawSource(SOURCE_TYPE_STICK, value - 1);
+  }
+  else if (value == 8) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value == 9) {
+    return RawSource(SOURCE_TYPE_MAX);
+  }
+  else if (value <= 12) {
+    return RawSource(SOURCE_TYPE_CYC, value-10);
+  }
+  else if (value <= 20) {
+    return RawSource(SOURCE_TYPE_PPM, value-13);
+  }
+  else if (value <= 36) {
+    return RawSource(SOURCE_TYPE_CH, value-21);
+  }
+  else if (value <= 38) {
+    return RawSource(SOURCE_TYPE_TIMER, value-37);
+  }
+  else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+  }
+}
+
+
 t_Ersky9xCustomSwData_v10::t_Ersky9xCustomSwData_v10(CustomSwData &c9x)
 {
   func = c9x.func;
@@ -528,11 +587,11 @@ t_Ersky9xCustomSwData_v10::t_Ersky9xCustomSwData_v10(CustomSwData &c9x)
   v2 = c9x.val2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    v1 = ersky9xFromSource(RawSource(c9x.val1));
+    v1 = ersky9xFromSource_v10(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    v2 = ersky9xFromSource(RawSource(c9x.val2));
+    v2 = ersky9xFromSource_v10(RawSource(c9x.val2));
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
@@ -556,11 +615,11 @@ Ersky9xCustomSwData_v10::operator CustomSwData ()
   c9x.val2 = v2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    c9x.val1 = ersky9xToSource(v1).toValue();
+    c9x.val1 = ersky9xToSource_v10(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    c9x.val2 = ersky9xToSource(v2).toValue();
+    c9x.val2 = ersky9xToSource_v10(v2).toValue();
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
@@ -578,11 +637,11 @@ t_Ersky9xCustomSwData_v11::t_Ersky9xCustomSwData_v11(CustomSwData &c9x)
   v2 = c9x.val2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    v1 = ersky9xFromSource(RawSource(c9x.val1));
+    v1 = ersky9xFromSource_v11(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL) {
-    v2 = ersky9xFromSource(RawSource(c9x.val2));
+    v2 = ersky9xFromSource_v11(RawSource(c9x.val2));
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
@@ -606,11 +665,11 @@ Ersky9xCustomSwData_v11::operator CustomSwData ()
   c9x.val2 = v2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    c9x.val1 = ersky9xToSource(v1).toValue();
+    c9x.val1 = ersky9xToSource_v11(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL) {
-    c9x.val2 = ersky9xToSource(v2).toValue();
+    c9x.val2 = ersky9xToSource_v11(v2).toValue();
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
@@ -783,11 +842,11 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     swashInvertAIL = c9x.swashRingData.invertAIL;
     swashInvertCOL = c9x.swashRingData.invertCOL;
     swashType = c9x.swashRingData.type;
-    swashCollectiveSource = ersky9xFromSource(c9x.swashRingData.collectiveSource);
+    swashCollectiveSource = ersky9xFromSource_v10(c9x.swashRingData.collectiveSource);
     swashRingValue = c9x.swashRingData.value;
     for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
       limitData[i] = c9x.limitData[i];
 
     // expoData
@@ -880,7 +939,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     for (int i=0; i<ERSKY9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
 
-    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
       safetySw[i] = c9x.safetySw[i];
     
     frsky = c9x.frsky;
@@ -934,11 +993,11 @@ t_Ersky9xModelData_v10::operator ModelData ()
   c9x.swashRingData.invertAIL = swashInvertAIL;
   c9x.swashRingData.invertCOL = swashInvertCOL;
   c9x.swashRingData.type = swashType;
-  c9x.swashRingData.collectiveSource = ersky9xToSource(swashCollectiveSource);
+  c9x.swashRingData.collectiveSource = ersky9xToSource_v10(swashCollectiveSource);
   c9x.swashRingData.value = swashRingValue;
   for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
     c9x.limitData[i] = limitData[i];
 
   // expoData
@@ -998,7 +1057,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
   for (int i=0; i<ERSKY9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
 
-  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT_V10; i++)
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;
@@ -1016,6 +1075,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     setEEPROMString(name, c9x.name, sizeof(name));
     sparex = 0;
     spare22 = 0;
+    version=ERSKY9X_MDVERS11;
     for (int i=0; i<2; i++) {
       timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
       timer[i].tmrModeB = setEr9xTimerMode(c9x.timers[i].modeB);
@@ -1061,11 +1121,11 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     swashInvertAIL = c9x.swashRingData.invertAIL;
     swashInvertCOL = c9x.swashRingData.invertCOL;
     swashType = c9x.swashRingData.type;
-    swashCollectiveSource = ersky9xFromSource(c9x.swashRingData.collectiveSource);
+    swashCollectiveSource = ersky9xFromSource_v11(c9x.swashRingData.collectiveSource);
     swashRingValue = c9x.swashRingData.value;
-    for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
+    for (int i=0; i<ERSKY9X_MAX_MIXERS_V11; i++)
       mixData[i] = c9x.mixData[i];
-    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
       limitData[i] = c9x.limitData[i];
 
     // expoData
@@ -1158,7 +1218,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     for (int i=0; i<ERSKY9X_NUM_CSW; i++)
       customSw[i] = c9x.customSw[i];
 
-    for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+    for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
       safetySw[i] = c9x.safetySw[i];
     
     frsky = c9x.frsky;
@@ -1220,11 +1280,11 @@ t_Ersky9xModelData_v11::operator ModelData ()
   c9x.swashRingData.invertAIL = swashInvertAIL;
   c9x.swashRingData.invertCOL = swashInvertCOL;
   c9x.swashRingData.type = swashType;
-  c9x.swashRingData.collectiveSource = ersky9xToSource(swashCollectiveSource);
+  c9x.swashRingData.collectiveSource = ersky9xToSource_v11(swashCollectiveSource);
   c9x.swashRingData.value = swashRingValue;
-  for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
+  for (int i=0; i<ERSKY9X_MAX_MIXERS_V11; i++)
     c9x.mixData[i] = mixData[i];
-  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
     c9x.limitData[i] = limitData[i];
 
   // expoData
@@ -1284,7 +1344,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
   for (int i=0; i<ERSKY9X_NUM_CSW; i++)
     c9x.customSw[i] = customSw[i];
 
-  for (int i=0; i<ERSKY9X_NUM_CHNOUT; i++)
+  for (int i=0; i<ERSKY9X_NUM_CHNOUT_V11; i++)
     c9x.safetySw[i] = safetySw[i];
 
   c9x.frsky = frsky;
