@@ -72,7 +72,7 @@ inline void applyStickModeToModel(Ersky9xModelData_v10 & model, unsigned int mod
   }
   for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
-  for (int i=0; i<ERSKY9X_NUM_CSW; i++) {
+  for (int i=0; i<ERSKY9X_NUM_CSW_V10; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
@@ -102,7 +102,7 @@ inline void applyStickModeToModel(Ersky9xModelData_v11 & model, unsigned int mod
   }
   for (int i=0; i<ERSKY9X_MAX_MIXERS_V11; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
-  for (int i=0; i<ERSKY9X_NUM_CSW; i++) {
+  for (int i=0; i<ERSKY9X_NUM_CSW_V11; i++) {
     switch (CS_STATE(model.customSw[i].func)) {
       case CS_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
@@ -293,11 +293,11 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case FuncSwitches:
       return 0;
     case CustomSwitches:
-      return 12;
+      return ERSKY9X_NUM_CSW_V11;
     case CSFunc:
       return 13;
     case Outputs:
-      return 16;
+      return ERSKY9X_NUM_CHNOUT_V11;
     case ExtraChannels:
       return 0;
     case Simulation:

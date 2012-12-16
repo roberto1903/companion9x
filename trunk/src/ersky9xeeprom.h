@@ -37,7 +37,8 @@ extern int setEr9xTimerModeB(TimerMode mode);
 #define ERSKY9X_GENERAL_OWNER_NAME_LEN  10
 #define ERSKY9X_NUM_CHNOUT_V10      16 //number of real outputchannels CH1-CH8
 #define ERSKY9X_NUM_CHNOUT_V11      24 //number of real outputchannels CH1-CH8
-#define ERSKY9X_NUM_CSW         12 //number of custom switches
+#define ERSKY9X_NUM_CSW_V10         12 //number of custom switches
+#define ERSKY9X_NUM_CSW_V11         24 
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
 PACK(typedef struct t_Ersky9xTrainerMix {
@@ -314,7 +315,7 @@ PACK(typedef struct t_Ersky9xModelData_v10 {
   int8_t    trim[4];
   int8_t    curves5[ERSKY9X_MAX_CURVE5][5];
   int8_t    curves9[ERSKY9X_MAX_CURVE9][9];
-  Ersky9xCustomSwData_v10   customSw[ERSKY9X_NUM_CSW];
+  Ersky9xCustomSwData_v10   customSw[ERSKY9X_NUM_CSW_V10];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   res3[2];
   Ersky9xSafetySwData_v10  safetySw[ERSKY9X_NUM_CHNOUT_V10];
@@ -364,7 +365,7 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   int8_t    trim[4];
   int8_t    curves5[ERSKY9X_MAX_CURVE5][5];
   int8_t    curves9[ERSKY9X_MAX_CURVE9][9];
-  Ersky9xCustomSwData_v11   customSw[ERSKY9X_NUM_CSW];
+  Ersky9xCustomSwData_v11   customSw[ERSKY9X_NUM_CSW_V11];
   uint8_t   frSkyVoltThreshold ;
   uint8_t   bt_telemetry;
   uint8_t   numVoice;		// 0-16, rest are Safety switches
