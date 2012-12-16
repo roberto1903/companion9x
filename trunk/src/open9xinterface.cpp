@@ -569,7 +569,8 @@ int Open9xInterface::getCapability(const Capability capability)
         return O9X_ARM_MAX_PHASES;
       else
         return O9X_MAX_PHASES;
-    case Gvars:    
+    case Gvars:
+    case GvarsAreNamed:
     case ExpoIsCurve:
     case ExpoFlightPhases:
     case MixFlightPhases:
@@ -720,6 +721,8 @@ int Open9xInterface::getCapability(const Capability capability)
         return 0;
       }
     case HasVario:
+      return 1;
+    case HasVariants:
       return 1;
     case HasCurrentCalibration:
       if  (board==BOARD_SKY9X) {

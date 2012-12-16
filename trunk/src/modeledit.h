@@ -190,6 +190,7 @@ private slots:
     void phaseTrim_valueChanged();
     void phaseTrimSlider_valueChanged();
     void GVName_editingFinished();
+    void GVSource_currentIndexChanged();
     void phaseGVValue_editingFinished();
     void phaseGVUse_currentIndexChanged();
     void phaseREValue_editingFinished();
