@@ -16,7 +16,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       this->setWindowTitle(tr("DEST -> X%1").arg(md->destCh-GetEepromInterface()->getCapability(Outputs)));
     else
       this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
-    populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0));
+    populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | (GetEepromInterface()->getCapability(GvarsAsSources) ? POPULATE_GVARS : 0));
     ui->sourceCB->removeItem(0);
     populateGVarCB(ui->weightCB, md->weight, -125, +125);
     populateGVarCB(ui->offsetCB, md->sOffset, -125, +125);

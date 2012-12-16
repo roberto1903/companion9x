@@ -753,26 +753,26 @@ t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11()
 t_Ersky9xSafetySwData_v11::t_Ersky9xSafetySwData_v11(SafetySwData &c9x)
 {
   memset(this, 0, sizeof(t_Ersky9xSafetySwData_v11));
-  swtch = ersky9xFromSwitch(c9x.swtch);
-  val = c9x.val;
+  opt.ss.swtch = ersky9xFromSwitch(c9x.swtch);
+  opt.ss.val = c9x.val;
 }
 
 t_Ersky9xSafetySwData_v11::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = ersky9xToSwitch(swtch);
-  c9x.val = val;
+  c9x.swtch = ersky9xToSwitch(opt.ss.swtch);
+  c9x.val = opt.ss.val;
   return c9x;
 }
 
-t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData()
+t_Ersky9xFrSkyChannelData_v10::t_Ersky9xFrSkyChannelData_v10()
 {
-  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData_v10));
 }
 
-t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData(FrSkyChannelData &c9x)
+t_Ersky9xFrSkyChannelData_v10::t_Ersky9xFrSkyChannelData_v10(FrSkyChannelData &c9x)
 {
-  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData_v10));
   ratio = c9x.ratio;
   alarms_value[0] = c9x.alarms[0].value;
   alarms_value[1] = c9x.alarms[1].value;
@@ -793,7 +793,7 @@ t_Ersky9xFrSkyChannelData::t_Ersky9xFrSkyChannelData(FrSkyChannelData &c9x)
   }
 }
 
-t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
+t_Ersky9xFrSkyChannelData_v10::operator FrSkyChannelData ()
 {
   FrSkyChannelData c9x;
   c9x.ratio = ratio;
@@ -812,19 +812,86 @@ t_Ersky9xFrSkyChannelData::operator FrSkyChannelData ()
   return c9x;
 }
 
-t_Ersky9xFrSkyData::t_Ersky9xFrSkyData()
+t_Ersky9xFrSkyChannelData_v11::t_Ersky9xFrSkyChannelData_v11()
 {
-  memset(this, 0, sizeof(t_Ersky9xFrSkyData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData_v11));
 }
 
-t_Ersky9xFrSkyData::t_Ersky9xFrSkyData(FrSkyData &c9x)
+t_Ersky9xFrSkyChannelData_v11::t_Ersky9xFrSkyChannelData_v11(FrSkyChannelData &c9x)
 {
-  memset(this, 0, sizeof(t_Ersky9xFrSkyData));
+  memset(this, 0, sizeof(t_Ersky9xFrSkyChannelData_v11));
+  ratio = c9x.ratio;
+  alarms_value[0] = c9x.alarms[0].value;
+  alarms_value[1] = c9x.alarms[1].value;
+  alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
+  alarms_greater = (c9x.alarms[1].greater << 1) + c9x.alarms[0].greater;
+  if (c9x.type==0) {
+    if (c9x.multiplier==0) {
+      type = 0;
+    } else if (c9x.multiplier==1) {
+      type = 2;
+    } else {
+      EEPROMWarnings += ::QObject::tr("er9x does not support this range for A1/A2") + "\n";
+    }      
+  } else if (c9x.type==1 || c9x.type==3) {
+    type=c9x.type;
+  } else {
+    EEPROMWarnings += ::QObject::tr("er9x does not support this telemetry units") + "\n";
+  }
+}
+
+t_Ersky9xFrSkyChannelData_v11::operator FrSkyChannelData ()
+{
+  FrSkyChannelData c9x;
+  c9x.ratio = ratio;
+  c9x.alarms[0].value = alarms_value[0];
+  c9x.alarms[0].level =  alarms_level & 3;
+  c9x.alarms[0].greater = alarms_greater & 1;
+  c9x.alarms[1].value = alarms_value[1];
+  c9x.alarms[1].level =  (alarms_level >> 2) & 3;
+  c9x.alarms[1].greater = (alarms_greater >> 1) & 1;
+  if (type==2) {
+    c9x.type = 0;
+    c9x.multiplier=1;
+  } else {
+    c9x.type = type;
+  }
+  return c9x;
+}
+
+t_Ersky9xFrSkyData_v10::t_Ersky9xFrSkyData_v10()
+{
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData_v10));
+}
+
+t_Ersky9xFrSkyData_v10::t_Ersky9xFrSkyData_v10(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData_v10));
   channels[0] = c9x.channels[0];
   channels[1] = c9x.channels[1]; 
 }
 
-t_Ersky9xFrSkyData::operator FrSkyData ()
+t_Ersky9xFrSkyData_v10::operator FrSkyData ()
+{
+  FrSkyData c9x;
+  c9x.channels[0] = channels[0];
+  c9x.channels[1] = channels[1];
+  return c9x;
+}
+
+t_Ersky9xFrSkyData_v11::t_Ersky9xFrSkyData_v11()
+{
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData_v11));
+}
+
+t_Ersky9xFrSkyData_v11::t_Ersky9xFrSkyData_v11(FrSkyData &c9x)
+{
+  memset(this, 0, sizeof(t_Ersky9xFrSkyData_v11));
+  channels[0] = c9x.channels[0];
+  channels[1] = c9x.channels[1]; 
+}
+
+t_Ersky9xFrSkyData_v11::operator FrSkyData ()
 {
   FrSkyData c9x;
   c9x.channels[0] = channels[0];
@@ -1279,6 +1346,10 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     for (int i=0; i<8; i++) {
         customDisplayIndex[i]=c9x.customdisplay[i];
     }
+    for (int i=0; i<5;i++) {
+      gvars[i].gvar=c9x.phaseData[0].gvars[i];
+      gvars[i].gvsource=c9x.gvsource[i];
+    }
   }
 }
 
@@ -1404,6 +1475,10 @@ t_Ersky9xModelData_v11::operator ModelData ()
   }
   for (int i=0; i<8; i++) {
         c9x.customdisplay[i]=customDisplayIndex[i];
+  }
+  for (int i=0; i<5;i++) {
+      c9x.phaseData[0].gvars[i]=gvars[i].gvar;
+      c9x.gvsource[i]=gvars[i].gvsource;
   }
   return c9x;
 }

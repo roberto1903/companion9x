@@ -940,9 +940,12 @@ void ModelEdit::tabPhases()
   
   phasesLock = true;
   int gvars=0;
-  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
-    gvars=1;
-
+  if (GetEepromInterface()->getCapability(HasVariants)) {
+    if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+      gvars=1;
+  } else {
+    gvars=GetEepromInterface()->getCapability(Gvars);
+  }
   if (!GetEepromInterface()->getCapability(RotaryEncoders)) {
     ui->phase0reGB->hide();
     ui->phase1reGB->hide();
@@ -967,7 +970,34 @@ void ModelEdit::tabPhases()
     ui->phase7gvGB->hide();
     ui->phase8gvGB->hide();
   }
+    
+  if (!GetEepromInterface()->getCapability(GvarsAreNamed)) {
+    ui->phase0GV1Name->hide();
+    ui->phase0GV2Name->hide();
+    ui->phase0GV3Name->hide();
+    ui->phase0GV4Name->hide();
+    ui->phase0GV5Name->hide();  
+  }
+
   if (GetEepromInterface()->getCapability(Gvars) &&  gvars==1) {
+    if (!GetEepromInterface()->getCapability(GvarsHaveSources)) {
+      ui->phase0GV1Source->hide();
+      ui->phase0GV2Source->hide();
+      ui->phase0GV3Source->hide();
+      ui->phase0GV4Source->hide();
+      ui->phase0GV5Source->hide();
+    } else {
+      populateGvSourceCB(ui->phase0GV1Source, g_model.gvsource[0]);
+      populateGvSourceCB(ui->phase0GV2Source, g_model.gvsource[1]);
+      populateGvSourceCB(ui->phase0GV3Source, g_model.gvsource[2]);
+      populateGvSourceCB(ui->phase0GV4Source, g_model.gvsource[3]);
+      populateGvSourceCB(ui->phase0GV5Source, g_model.gvsource[4]);  
+      connect(ui->phase0GV1Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      connect(ui->phase0GV2Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      connect(ui->phase0GV3Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      connect(ui->phase0GV4Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      connect(ui->phase0GV5Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+    }
     ui->phase0GV1Name->setText(g_model.gvars_names[0]);
     ui->phase0GV2Name->setText(g_model.gvars_names[1]);
     ui->phase0GV3Name->setText(g_model.gvars_names[2]);
@@ -3705,6 +3735,16 @@ void ModelEdit::GVName_editingFinished()
   memset(&g_model.gvars_names[gvar],0,sizeof(g_model.gvars_names[gvar]));
   const char * le=lineedit->text().toAscii();
   strncpy(g_model.gvars_names[gvar], le, sizeof(g_model.gvars_names[gvar])-1);
+  updateSettings();
+}
+
+void ModelEdit::GVSource_currentIndexChanged()
+{
+  QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
+  int phase = comboBox->objectName().mid(5,1).toInt();
+  int gvar = comboBox->objectName().mid(8,1).toInt()-1;
+  int index=comboBox->currentIndex();
+  g_model.gvsource[gvar]=index;
   updateSettings();
 }
 

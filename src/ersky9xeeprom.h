@@ -35,10 +35,13 @@ extern int setEr9xTimerModeB(TimerMode mode);
 #define ERSKY9X_MDVERS11      11
 
 #define ERSKY9X_GENERAL_OWNER_NAME_LEN  10
-#define ERSKY9X_NUM_CHNOUT_V10      16 //number of real outputchannels CH1-CH8
-#define ERSKY9X_NUM_CHNOUT_V11      24 //number of real outputchannels CH1-CH8
+#define ERSKY9X_NUM_CHNOUT_V10    16 //number of real outputchannels CH1-CH8
+#define ERSKY9X_NUM_CHNOUT_V11    24 //number of real outputchannels CH1-CH8
 #define ERSKY9X_NUM_CSW_V10         12 //number of custom switches
 #define ERSKY9X_NUM_CSW_V11         24 
+#define ERSKY9X_NUM_FSW                 16
+#define ERSKY9X_NUM_VOICE	         8
+
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
 PACK(typedef struct t_Ersky9xTrainerMix {
@@ -208,7 +211,7 @@ PACK(typedef struct t_Ersky9xCustomSwData_v11 { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; 		//offset
   uint8_t func;
-  int8_t andsw;
+  uint8_t andsw;
   uint8_t res ;
 
   operator CustomSwData();
@@ -227,15 +230,50 @@ PACK(typedef struct t_Ersky9xSafetySwData_v10 { // Custom Switches data
 }) Ersky9xSafetySwData_v10;
 
 PACK(typedef struct t_Ersky9xSafetySwData_v11 { // Custom Switches data
-  int8_t  swtch;
-  int8_t  val;
+  union opt {
+    struct ss {	
+      int8_t  swtch ;
+      uint8_t mode ;
+      int8_t  val ;
+      uint8_t res ;
+    } ss ;
+    struct vs {
+      uint8_t vswtch ;
+      uint8_t vmode ; // ON, OFF, BOTH, 15Secs, 30Secs, 60Secs, Varibl
+      uint8_t vval;
+      uint8_t vres ;
+    } vs ;
+  } opt ;
 
   operator SafetySwData();
   t_Ersky9xSafetySwData_v11();
   t_Ersky9xSafetySwData_v11(SafetySwData&);
 }) Ersky9xSafetySwData_v11;
 
-PACK(typedef struct t_Ersky9xFrSkyChannelData {
+PACK(typedef struct t_Ersky9xgvar {
+  int8_t gvar ;
+  uint8_t gvsource ;
+//	int8_t gvswitch ;
+}) Ersky9xGvarData ;
+
+PACK(typedef struct t_Ersky9xPhaseData {
+  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
+  int8_t swtch;       // swtch of phase[0] is not used
+  char name[6];
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+  uint16_t spare ;		// Future expansion
+}) Ersky9xPhaseData;
+
+PACK(typedef struct t_Ersky9xFuncSwData { // Function Switches data
+  int8_t  swtch; //input
+  uint8_t func;
+  char param[6];
+  uint8_t delay;
+  uint8_t spare;
+}) Ersky9xFuncSwData;
+
+PACK(typedef struct t_Ersky9xFrSkyChannelData_v10 {
   uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   alarms_value[2];      // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
   uint8_t   alarms_level:4;
@@ -243,17 +281,39 @@ PACK(typedef struct t_Ersky9xFrSkyChannelData {
   uint8_t   type:2;               // future use: 0=volts, ...
 
   operator FrSkyChannelData();
-  t_Ersky9xFrSkyChannelData();
-  t_Ersky9xFrSkyChannelData(FrSkyChannelData&);
-}) Ersky9xFrSkyChannelData;
+  t_Ersky9xFrSkyChannelData_v10();
+  t_Ersky9xFrSkyChannelData_v10(FrSkyChannelData&);
+}) Ersky9xFrSkyChannelData_v10;
 
-PACK(typedef struct t_Ersky9xFrSkyData {
-  Ersky9xFrSkyChannelData channels[2];
+PACK(typedef struct t_Ersky9xFrSkyData_v10 {
+  Ersky9xFrSkyChannelData_v10 channels[2];
 
   operator FrSkyData();
-  t_Ersky9xFrSkyData();
-  t_Ersky9xFrSkyData(FrSkyData&);
-}) Ersky9xFrSkyData;
+  t_Ersky9xFrSkyData_v10();
+  t_Ersky9xFrSkyData_v10(FrSkyData&);
+}) Ersky9xFrSkyData_v10;
+
+PACK(typedef struct t_Ersky9xFrSkyChannelData_v11 {
+  uint8_t   ratio ;               // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   offset ;              // 
+  uint8_t   gain ;                // 
+  uint8_t   alarms_value[2] ;     // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+  uint8_t   alarms_level ;
+  uint8_t   alarms_greater ;      // 0=LT(<), 1=GT(>)
+  uint8_t   type ;                // 0=volts, 1=raw, 2=volts*2, 3=Amps
+  
+  operator FrSkyChannelData();
+  t_Ersky9xFrSkyChannelData_v11();
+  t_Ersky9xFrSkyChannelData_v11(FrSkyChannelData&);
+}) Ersky9xFrSkyChannelData_v11;
+
+PACK(typedef struct t_Ersky9xFrSkyData_v11 {
+  Ersky9xFrSkyChannelData_v11 channels[2];
+
+  operator FrSkyData();
+  t_Ersky9xFrSkyData_v11();
+  t_Ersky9xFrSkyData_v11(FrSkyData&);
+}) Ersky9xFrSkyData_v11;
 
 PACK(typedef struct t_Ersky9xFrSkyalarms_v11 {
   uint8_t frskyAlarmType ;
@@ -273,11 +333,18 @@ PACK(typedef struct t_Ersky9xTimerMode_v10 {
 }) Ersky9xTimerMode_v10;
 
 PACK(typedef struct t_Ersky9xTimerMode_v11 {
-    uint8_t   tmrModeA:7 ;          // timer trigger source -> off, abs, stk, stk%, cx%
-    uint8_t   tmrDir:1 ;                                                // Timer direction
-    int8_t    tmrModeB ;            // timer trigger source -> !sw, none, sw, m_sw
-    uint16_t  tmrVal ;
+    uint8_t tmrModeA:7 ;          // timer trigger source -> off, abs, stk, stk%, cx%
+    uint8_t tmrDir:1 ;                                                // Timer direction
+    int8_t tmrModeB ;            // timer trigger source -> !sw, none, sw, m_sw
+    uint16_t tmrVal ;
 }) Ersky9xTimerMode_v11;
+
+PACK(typedef struct te_Ersky9xswVoice {
+  uint8_t swtch ;
+  uint8_t mode ; // ON, OFF, BOTH, 15Secs, 30Secs, 60Secs
+  uint8_t val ;
+  uint8_t vres ;
+}) Ersky9xvoiceSwData ;
 
 PACK(typedef struct t_Ersky9xModelData_v10 {
   char      name[10];             // 10 must be first for eeLoadModelName
@@ -320,7 +387,7 @@ PACK(typedef struct t_Ersky9xModelData_v10 {
   uint8_t   frSkyVoltThreshold ;
   uint8_t   res3[2];
   Ersky9xSafetySwData_v10  safetySw[ERSKY9X_NUM_CHNOUT_V10];
-  Ersky9xFrSkyData frsky;
+  Ersky9xFrSkyData_v10 frsky;
   Ersky9xTimerMode_v10 timer[2] ;
   operator ModelData();
   t_Ersky9xModelData_v10() { memset(this, 0, sizeof(t_Ersky9xModelData_v10)); }
@@ -371,11 +438,16 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   uint8_t   bt_telemetry;
   uint8_t   numVoice;		// 0-16, rest are Safety switches
   Ersky9xSafetySwData_v11  safetySw[ERSKY9X_NUM_CHNOUT_V11];
-  Ersky9xFrSkyData frsky;
+  Ersky9xvoiceSwData voiceSwitches[ERSKY9X_NUM_VOICE] ;
+  Ersky9xFrSkyData_v11 frsky;
   Ersky9xTimerMode_v11 timer[2] ;
   Ersky9xFrSkyAlarmData_v11 frskyAlarms ;
 // Add 6 bytes for custom telemetry screen
   uint8_t customDisplayIndex[6] ;
+  Ersky9xFuncSwData   funcSw[ERSKY9X_NUM_FSW];
+  Ersky9xPhaseData phaseData[6] ;
+  Ersky9xGvarData gvars[MAX_GVARS] ;
+
   operator ModelData();
   t_Ersky9xModelData_v11() { memset(this, 0, sizeof(t_Ersky9xModelData_v11)); }
   t_Ersky9xModelData_v11(ModelData&);

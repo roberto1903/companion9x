@@ -23,6 +23,16 @@ QString getStickStr(int index)
   return RawSource(SOURCE_TYPE_STICK, index).toString();
 }
 
+void populateGvSourceCB(QComboBox *b, int value)
+{
+  QString strings[] = { QObject::tr("---"), QObject::tr("Rud Trim"), QObject::tr("Ele Trim"), QObject::tr("Thr Trim"), QObject::tr("Ail Trim"), QObject::tr("Rot Enc"), QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"), QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")};
+  b->clear();
+  for (int i=0; i<= 12; i++) {
+    b->addItem(strings[i]);
+  }
+  b->setCurrentIndex(value);
+}
+
 void populateRotEncCB(QComboBox *b, int value, int renumber)
 {
   QString strings[] = { QObject::tr("No"), QObject::tr("RotEnc A"), QObject::tr("Rot Enc B"), QObject::tr("Rot Enc C"), QObject::tr("Rot Enc D"), QObject::tr("Rot Enc E")};

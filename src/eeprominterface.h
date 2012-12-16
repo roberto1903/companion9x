@@ -737,6 +737,7 @@ class ModelData {
     // int8_t tmrModeB;
     uint8_t switchWarningStates;
     char     gvars_names[MAX_GVARS][6+1];
+    uint8_t gvsource[5];
     uint8_t   bt_telemetry;
     uint8_t   numVoice;
     /* FrSky */    
@@ -823,7 +824,9 @@ enum Capability {
  TelemetryBlades,
  TelemetryBars,
  Gvars,
+ GvarsAreNamed,
  GvarsFlightPhases,
+ GvarsHaveSources,
  GvarsAsSources,
  TelemetryCSFields,
  TelemetryRSSIModel,
@@ -832,6 +835,7 @@ enum Capability {
  TelemetryMaxMultiplier,
  HasAltitudeSel,
  HasVario,
+ HasVariants,
  FSSwitch,
  DiffMixers,
  PPMCenter,

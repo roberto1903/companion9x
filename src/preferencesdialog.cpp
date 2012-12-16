@@ -473,6 +473,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 {
   MainWindow * mw = (MainWindow *)this->parent();
   FirmwareVariant variant = getFirmwareVariant();
+  writeValues();
   if (!variant.firmware->getUrl(variant.id).isNull()) {
     if (ui->burnFirmware->isChecked()) {
       QSettings settings("companion9x", "companion9x");
