@@ -950,9 +950,10 @@ void RegisterOpen9xFirmwares()
 {
   Open9xFirmware * open9x;
 
+  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
+
   /* Stock board */
   open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
-  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -965,6 +966,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
@@ -993,6 +995,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
@@ -1019,6 +1022,7 @@ void RegisterOpen9xFirmwares()
   Option dsm2_options[] = { { "DSM2", QObject::tr("Support for DSM2 modules"), 0 }, { "DSM2PPM", QObject::tr("Support for DSM2 modules using ppm instead of true serial"), 0 }, { NULL } };
   open9x->addOptions(dsm2_options);
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
@@ -1036,6 +1040,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
