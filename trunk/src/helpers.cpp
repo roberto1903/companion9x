@@ -756,6 +756,14 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     }
   }
 
+  if (flags & POPULATE_GVARS) {
+    for (int i=0; i<5; i++) {
+      item = RawSource(SOURCE_TYPE_GVAR, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
+  }
+
   b->setMaxVisibleItems(10);
 }
 
