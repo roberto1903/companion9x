@@ -35,8 +35,8 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
 void populatecsFieldCB(QComboBox *b, int value, bool last, int hubproto);
 void populateExpoCurvesCB(QComboBox *b, int value);
-void populateTimerSwitchCB(QComboBox *b, int value, bool extrafields=false);
-void populateTimerSwitchBCB(QComboBox *b, int value);
+void populateTimerSwitchCB(QComboBox *b, int value, int extrafields=0);
+void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields=0);
 
 #define POPULATE_SWITCHES  1
 #define POPULATE_TELEMETRY 2

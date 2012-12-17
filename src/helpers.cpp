@@ -500,12 +500,12 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase) {
 }
 
 
-void populateTimerSwitchCB(QComboBox *b, int value, bool extrafields)
+void populateTimerSwitchCB(QComboBox *b, int value, int extrafields)
 {
   b->clear();
   uint8_t endvalue=128;
   uint8_t count=0;
-  if (extrafields)
+  if (extrafields==2)
     endvalue=192;
   for (int i=-128; i<endvalue; i++) {
     QString timerMode = getTimerMode(i);
@@ -513,7 +513,7 @@ void populateTimerSwitchCB(QComboBox *b, int value, bool extrafields)
       b->addItem(getTimerMode(i), i);
       if (i==value)
         b->setCurrentIndex(b->count()-1);
-      if (extrafields && (i<0 || (i>3 && i <TMRMODE_FIRST_CHPERC))) {
+      if (extrafields==2 && (i<0 || (i>3 && i <TMRMODE_FIRST_CHPERC))) {
         QModelIndex index = b->model()->index(count, 0);
         // This is the effective 'disable' flag
         QVariant v(0);
@@ -526,15 +526,32 @@ void populateTimerSwitchCB(QComboBox *b, int value, bool extrafields)
   b->setMaxVisibleItems(10);
 }
 
-void populateTimerSwitchBCB(QComboBox *b, int value)
+void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields)
 {
   b->clear();
-  for (int i=-33; i<66; i++) {
-    QString timerMode = getTimerModeB(i);
-    if (!timerMode.isEmpty()) {
-      b->addItem(timerMode, i);
-      if (i==value)
-        b->setCurrentIndex(b->count()-1);
+  if (extrafields!=2) {
+    int startvalue=-128;
+    int endvalue=128;
+    if (extrafields==1) {
+      startvalue=-25;
+      endvalue=26;
+    }
+    for (int i=startvalue; i<endvalue; i++) {
+      QString timerMode = getTimerMode(i);
+      if (!timerMode.isEmpty()) {
+        b->addItem(getTimerMode(i), i);
+        if (i==value)
+          b->setCurrentIndex(b->count()-1);
+      }
+    }
+  } else {
+    for (int i=-33; i<66; i++) {
+      QString timerMode = getTimerModeB(i);
+      if (!timerMode.isEmpty()) {
+        b->addItem(timerMode, i);
+        if (i==value)
+          b->setCurrentIndex(b->count()-1);
+      }
     }
   }
   b->setMaxVisibleItems(10);

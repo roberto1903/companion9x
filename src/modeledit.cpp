@@ -504,8 +504,8 @@ void ModelEdit::tabModelEditSetup()
     ui->timer2ModeBCB->hide();
     ui->timer2ModeB_label->hide();
   } else {
-    populateTimerSwitchBCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
-    populateTimerSwitchBCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
+    populateTimerSwitchBCB(ui->timer1ModeBCB,g_model.timers[0].modeB,GetEepromInterface()->getCapability(TimerTriggerB));
+    populateTimerSwitchBCB(ui->timer2ModeBCB,g_model.timers[1].modeB,GetEepromInterface()->getCapability(TimerTriggerB));
   }
 
   int index=0;
