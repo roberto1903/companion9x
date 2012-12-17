@@ -911,7 +911,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     spare22 = 0;
     for (int i=0; i<2; i++) {
       timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
-      timer[i].tmrModeB = setEr9xTimerMode(c9x.timers[i].modeB);
+      timer[i].tmrModeB = c9x.timers[i].modeB;
       timer[i].tmrDir = c9x.timers[i].dir;
       timer[i].tmrVal = c9x.timers[i].val;
     }
@@ -1068,7 +1068,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
   getEEPROMString(c9x.name, name, sizeof(name));
   for (int i=0; i<2; i++) {
     c9x.timers[i].mode = getEr9xTimerMode(timer[i].tmrModeA);
-    c9x.timers[i].modeB = getEr9xTimerModeB(timer[i].tmrModeB);
+    c9x.timers[i].modeB = timer[i].tmrModeB;
     c9x.timers[i].dir = timer[i].tmrDir;
     c9x.timers[i].val = timer[i].tmrVal;
   }
@@ -1190,7 +1190,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     version=ERSKY9X_MDVERS11;
     for (int i=0; i<2; i++) {
       timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
-      timer[i].tmrModeB = setEr9xTimerMode(c9x.timers[i].modeB);
+      timer[i].tmrModeB = c9x.timers[i].modeB;
       timer[i].tmrDir = c9x.timers[i].dir;
       timer[i].tmrVal = c9x.timers[i].val;
     }
