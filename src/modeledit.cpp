@@ -406,7 +406,7 @@ void ModelEdit::tabModelEditSetup()
   ui->modelNameLE->setText(g_model.name);
 
   //timer1 mode direction value
-  populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode);
+  populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode,GetEepromInterface()->getCapability(TimerTriggerB));
   int min = g_model.timers[0].val/60;
   int sec = g_model.timers[0].val%60;
   ui->timer1ValTE->setTime(QTime(0,min,sec));
@@ -504,8 +504,8 @@ void ModelEdit::tabModelEditSetup()
     ui->timer2ModeBCB->hide();
     ui->timer2ModeB_label->hide();
   } else {
-    populateTimerSwitchCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
-    populateTimerSwitchCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
+    populateTimerSwitchBCB(ui->timer1ModeBCB,g_model.timers[0].modeB);
+    populateTimerSwitchBCB(ui->timer2ModeBCB,g_model.timers[1].modeB);
   }
 
   int index=0;
@@ -535,7 +535,7 @@ void ModelEdit::tabModelEditSetup()
     ui->timer2ModeB_label->hide();
     ui->label_timer2->hide();
   } else {
-    populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode);
+    populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode,GetEepromInterface()->getCapability(TimerTriggerB));
     min = g_model.timers[1].val/60;
     sec = g_model.timers[1].val%60;
     ui->timer2ValTE->setTime(QTime(0,min,sec));
@@ -2731,7 +2731,7 @@ void ModelEdit::on_timer1ValTE_editingFinished()
 
 void ModelEdit::on_timer1ModeBCB_currentIndexChanged(int index)
 {
-    g_model.timers[0].modeB = TimerMode(ui->timer1ModeBCB->itemData(index).toInt());
+    g_model.timers[0].modeB = ui->timer1ModeBCB->itemData(index).toInt();
     updateSettings();
 }
 
@@ -2755,7 +2755,7 @@ void ModelEdit::on_timer2ValTE_editingFinished()
 
 void ModelEdit::on_timer2ModeBCB_currentIndexChanged(int index)
 {
-    g_model.timers[1].modeB = TimerMode(ui->timer2ModeBCB->itemData(index).toInt());
+    g_model.timers[1].modeB = ui->timer2ModeBCB->itemData(index).toInt();
     updateSettings();
 }
 
@@ -3741,7 +3741,6 @@ void ModelEdit::GVName_editingFinished()
 void ModelEdit::GVSource_currentIndexChanged()
 {
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
-  int phase = comboBox->objectName().mid(5,1).toInt();
   int gvar = comboBox->objectName().mid(8,1).toInt()-1;
   int index=comboBox->currentIndex();
   g_model.gvsource[gvar]=index;

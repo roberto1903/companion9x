@@ -629,7 +629,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     setEEPROMString(name, c9x.name, sizeof(name));
     modelVoice=c9x.modelVoice;
     tmrMode = setEr9xTimerMode(c9x.timers[0].mode);
-    tmrModeB = setEr9xTimerModeB(c9x.timers[0].modeB);
+    tmrModeB = c9x.timers[0].modeB;
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
     switch(c9x.protocol) {
@@ -786,7 +786,7 @@ t_Er9xModelData::operator ModelData ()
   c9x.timers[0].mode = getEr9xTimerMode(tmrMode);
   c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
-  c9x.timers[0].modeB = getEr9xTimerModeB(tmrModeB);
+  c9x.timers[0].modeB = tmrModeB;
 
     switch(protocol) {
     case 1:

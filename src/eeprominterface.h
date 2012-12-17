@@ -654,7 +654,8 @@ enum TimerMode {
   TMRMODE_THt,
   TMRMODE_FIRST_SWITCH,
   TMRMODE_FIRST_MOMENT_SWITCH = TMRMODE_FIRST_SWITCH+64,
-
+  TMRMODE_FIRST_CHPERC = TMRMODE_FIRST_MOMENT_SWITCH+64,
+  
   TMRMODE_FIRST_NEG_SWITCH=-TMRMODE_FIRST_SWITCH,
   TMRMODE_FIRST_NEG_MOMENT_SWITCH=-TMRMODE_FIRST_MOMENT_SWITCH,
    /* sw/!sw, !m_sw/!m_sw */
@@ -664,7 +665,7 @@ class TimerData {
   public:
     TimerData() { clear(); }
     TimerMode mode;   // timer trigger source -> off, abs, THs, TH%, THt, sw/!sw, !m_sw/!m_sw
-    TimerMode modeB;
+    int8_t modeB;
     bool      dir;    // 0=>Count Down, 1=>Count Up
     uint16_t  val;
     bool      persistent;

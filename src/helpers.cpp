@@ -500,13 +500,39 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase) {
 }
 
 
-void populateTimerSwitchCB(QComboBox *b, int value)
+void populateTimerSwitchCB(QComboBox *b, int value, bool extrafields)
 {
   b->clear();
-  for (int i=-128; i<128; i++) {
+  uint8_t endvalue=128;
+  uint8_t count=0;
+  if (extrafields)
+    endvalue=192;
+  for (int i=-128; i<endvalue; i++) {
     QString timerMode = getTimerMode(i);
     if (!timerMode.isEmpty()) {
       b->addItem(getTimerMode(i), i);
+      if (i==value)
+        b->setCurrentIndex(b->count()-1);
+      if (extrafields && (i<0 || (i>3 && i <TMRMODE_FIRST_CHPERC))) {
+        QModelIndex index = b->model()->index(count, 0);
+        // This is the effective 'disable' flag
+        QVariant v(0);
+        //the magic
+        b->model()->setData(index, v, Qt::UserRole - 1);
+      }
+      count++;
+    }
+  }
+  b->setMaxVisibleItems(10);
+}
+
+void populateTimerSwitchBCB(QComboBox *b, int value)
+{
+  b->clear();
+  for (int i=-33; i<66; i++) {
+    QString timerMode = getTimerModeB(i);
+    if (!timerMode.isEmpty()) {
+      b->addItem(timerMode, i);
       if (i==value)
         b->setCurrentIndex(b->count()-1);
     }
@@ -549,9 +575,37 @@ QString getTimerMode(int tm) {
     if (tm < 0) s.prepend("!");
     return s;
   }
-
+  if (tma >=TMRMODE_FIRST_CHPERC && tma <TMRMODE_FIRST_CHPERC+16) {
+    s = QString("CH%1%").arg(tma-TMRMODE_FIRST_CHPERC+1);
+    return s;
+  }
   return "";
 }
+
+QString getTimerModeB(int tm) {
+
+  QString stt = "---THRRUDELEIDOID1ID2AILGEATRN";
+
+  QString s;
+  int tma = abs(tm);
+  if (tma>33) {
+    tma-=32;
+  }
+  if (tma < 10) {
+    s=stt.mid(abs(tma)*3, 3);
+  } else if (tma <19) {
+    s=QString("SW%1").arg(tma-9);
+  } else  {
+    s=QString("SW")+QChar('A'+tma-19);
+  }
+  if (tm<0) {
+    s.prepend("!");
+  } else if (tm>33) {
+    s.append("m");
+  }
+  return s;
+}
+
 
 void populateBacklightCB(QComboBox *b, const uint8_t value)
 {
