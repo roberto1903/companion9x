@@ -571,56 +571,24 @@ t_Er9xFrSkyData::operator FrSkyData ()
 
 int setEr9xTimerMode(TimerMode mode)
 {
-  if (mode == TMRMODE_OFF || mode == TMRMODE_ABS)
+  if (mode == TMRMODE_OFF || mode == TMRMODE_ABS || mode == TMRMODE_THs || mode == TMRMODE_THp)
     return mode;
-  else if (mode == TMRMODE_THs || mode == TMRMODE_THp)
-    return mode + 4;
-  else if (mode >= TMRMODE_FIRST_MOMENT_SWITCH)
-    return 37+mode-TMRMODE_FIRST_MOMENT_SWITCH;
-  else if (mode >= TMRMODE_FIRST_SWITCH)
-    return 16+mode-TMRMODE_FIRST_SWITCH;
-  else if (mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
-    return -37+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
-  else if (mode <= TMRMODE_FIRST_NEG_SWITCH)
-    return -16+mode-TMRMODE_FIRST_NEG_SWITCH;
+  else if (mode >= TMRMODE_FIRST_CHPERC)
+    return 4+mode-TMRMODE_FIRST_CHPERC;
   else
     return 0;
 }
 
 TimerMode getEr9xTimerMode(int mode)
 {
-  if (mode <= -33)
-    return TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(mode+33));
-  else if (mode <= -1)
-    return TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
-  else if (mode < 16)
+  if (mode<4)
     return TimerMode(mode);
-  else if (mode < 16+21)
-    return TimerMode(TMRMODE_FIRST_SWITCH+(mode-16));
+  else if (mode < 20)
+    return TimerMode(TMRMODE_FIRST_CHPERC+(mode-4));
   else
-    return TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(mode-16-21));
+    return TimerMode(0);
 }
-
-int setEr9xTimerModeB(TimerMode mode)
-{
-  if (mode >= TMRMODE_FIRST_SWITCH && mode < TMRMODE_FIRST_SWITCH+9+12)
-    return 1+mode-TMRMODE_FIRST_SWITCH;
-  else if (mode <= TMRMODE_FIRST_NEG_SWITCH && mode > TMRMODE_FIRST_NEG_SWITCH-9-12)
-    return -1+mode-TMRMODE_FIRST_NEG_SWITCH;
-  else
-    return 0;
-}
-
-TimerMode getEr9xTimerModeB(int mode)
-{
-  if (mode >= 1 && mode < 1+9+12)
-    return TimerMode(TMRMODE_FIRST_SWITCH+mode-1);
-  else if (mode <= -1 && mode > -1-9-12)
-    return TimerMode(TMRMODE_FIRST_NEG_SWITCH+(mode+1));
-  else
-    return TimerMode(TMRMODE_OFF);
-}
-      
+     
 t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
 {
   memset(this, 0, sizeof(t_Er9xModelData));
