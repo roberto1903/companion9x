@@ -1360,7 +1360,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
   getEEPROMString(c9x.name, name, sizeof(name));
   for (int i=0; i<2; i++) {
     c9x.timers[i].mode = getEr9xTimerMode(timer[i].tmrModeA);
-    c9x.timers[i].modeB = getEr9xTimerModeB(timer[i].tmrModeB);
+    c9x.timers[i].modeB = timer[i].tmrModeB;
     c9x.timers[i].dir = timer[i].tmrDir;
     c9x.timers[i].val = timer[i].tmrVal;
   }
