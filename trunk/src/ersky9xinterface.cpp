@@ -315,7 +315,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case OptrexDisplay:
       return 1;
     case TimerTriggerB:
-      return 1;
+      return 2;
     case HasAltitudeSel:
       return 1;
     case HasCurrentCalibration:

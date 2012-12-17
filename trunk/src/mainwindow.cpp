@@ -789,7 +789,7 @@ QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
 {
   if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
-    return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x20000 0\n");
+    return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x40000 0\n");
   else
     return GetAvrdudeArguments("flash:r:", filename);
 }
@@ -953,11 +953,14 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
 bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
 {
   FirmwareInfo *firmware = GetCurrentFirmware();
+  qDebug() << flashFile;
   FlashInterface flash(flashFile);
   if (!flash.isValid())
     return false;
 
   QString fwSvn = flash.getSvn();
+  qDebug() << fwSvn;
+  
   QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
   fwSvn = svnTags.back();
   if (fwSvn.endsWith('M'))

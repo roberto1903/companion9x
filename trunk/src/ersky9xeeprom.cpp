@@ -6,6 +6,26 @@
 extern int8_t er9xFromSwitch(const RawSwitch & sw);
 extern RawSwitch er9xToSwitch(int8_t sw);
 
+int setErSky9xTimerMode(TimerMode mode)
+{
+  if (mode == TMRMODE_OFF || mode == TMRMODE_ABS || mode == TMRMODE_THs || mode == TMRMODE_THp)
+    return mode;
+  else if (mode >= TMRMODE_FIRST_CHPERC)
+    return 4+mode-TMRMODE_FIRST_CHPERC;
+  else
+    return 0;
+}
+
+TimerMode getErSky9xTimerMode(int mode)
+{
+  if (mode<4)
+    return TimerMode(mode);
+  else if (mode < 20)
+    return TimerMode(TMRMODE_FIRST_CHPERC+(mode-4));
+  else
+    return TimerMode(0);
+}
+
 int8_t ersky9xFromSwitch(const RawSwitch & sw)
 {
   switch (sw.type) {
@@ -910,7 +930,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     sparex = 0;
     spare22 = 0;
     for (int i=0; i<2; i++) {
-      timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
+      timer[i].tmrModeA = setErSky9xTimerMode(c9x.timers[i].mode);
       timer[i].tmrModeB = c9x.timers[i].modeB;
       timer[i].tmrDir = c9x.timers[i].dir;
       timer[i].tmrVal = c9x.timers[i].val;
@@ -1067,7 +1087,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
   for (int i=0; i<2; i++) {
-    c9x.timers[i].mode = getEr9xTimerMode(timer[i].tmrModeA);
+    c9x.timers[i].mode = getErSky9xTimerMode(timer[i].tmrModeA);
     c9x.timers[i].modeB = timer[i].tmrModeB;
     c9x.timers[i].dir = timer[i].tmrDir;
     c9x.timers[i].val = timer[i].tmrVal;
@@ -1189,7 +1209,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     spare22 = 0;
     version=ERSKY9X_MDVERS11;
     for (int i=0; i<2; i++) {
-      timer[i].tmrModeA = setEr9xTimerMode(c9x.timers[i].mode);
+      timer[i].tmrModeA = setErSky9xTimerMode(c9x.timers[i].mode);
       timer[i].tmrModeB = c9x.timers[i].modeB;
       timer[i].tmrDir = c9x.timers[i].dir;
       timer[i].tmrVal = c9x.timers[i].val;
@@ -1359,7 +1379,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
   c9x.used = true;
   getEEPROMString(c9x.name, name, sizeof(name));
   for (int i=0; i<2; i++) {
-    c9x.timers[i].mode = getEr9xTimerMode(timer[i].tmrModeA);
+    c9x.timers[i].mode = getErSky9xTimerMode(timer[i].tmrModeA);
     c9x.timers[i].modeB = timer[i].tmrModeB;
     c9x.timers[i].dir = timer[i].tmrDir;
     c9x.timers[i].val = timer[i].tmrVal;
