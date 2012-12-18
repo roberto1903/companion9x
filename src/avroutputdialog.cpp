@@ -243,6 +243,11 @@ void avrOutputDialog::doAddTextStdErr()
         prevLine=currLine.left(nlPos).trimmed();
         currLine=currLine.mid(nlPos+1);
     }
+
+    if (text.contains("-E-")) {
+      hasErrors = true;
+    }
+    
     addText(text);
 }
 

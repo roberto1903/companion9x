@@ -953,13 +953,11 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
 bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString flashFile)
 {
   FirmwareInfo *firmware = GetCurrentFirmware();
-  qDebug() << flashFile;
   FlashInterface flash(flashFile);
   if (!flash.isValid())
     return false;
 
   QString fwSvn = flash.getSvn();
-  qDebug() << fwSvn;
   
   QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
   fwSvn = svnTags.back();
@@ -1052,9 +1050,9 @@ void MainWindow::burnToFlash(QString fileToFlash)
       }
       if (backupEnable) {
         QDateTime datetime;
-        QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
+        backupFile.clear();
+        backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
       }
-      
       QStringList str = GetReceiveEEpromCommand(backupFile);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"), AVR_DIALOG_CLOSE_IF_SUCCESSFUL);
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
@@ -1079,12 +1077,10 @@ void MainWindow::burnToFlash(QString fileToFlash)
           if (!res) {
             QMessageBox::warning(this, tr("Restore failed"), tr("Cannot restore EEProm to TX, original EEProm file can be found at: %1").arg(backupFile));
           }
-        }
-        else {
+        } else {
           QMessageBox::warning(this, tr("Flash failed"), tr("Cannot flash the TX, original EEProm file can be found at: %1").arg(backupFile));
         }
-      }
-      else {
+      } else {
         QMessageBox::warning(this, tr("Backup failed"), tr("Cannot backup existing EEProm from TX, Flash process aborted"));
       }
     } else {
