@@ -123,7 +123,7 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
 {
   memset(this, 0, sizeof(t_Ersky9xGeneral));
 
-  myVers = ERSKY9X_MDVERS10;
+  myVers = ERSKY9X_MDVERS11;
 
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     calibMid[i] = c9x.calibMid[i];
