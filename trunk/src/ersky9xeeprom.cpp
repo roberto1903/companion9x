@@ -573,7 +573,7 @@ int8_t ersky9xFromSource_v11(RawSource source)
   else if (source.type == SOURCE_TYPE_PPM)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
-    v1 = 20+source.index;
+    v1 = 21+source.index;
   else if (source.type == SOURCE_TYPE_TIMER)
     v1 = 37+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
