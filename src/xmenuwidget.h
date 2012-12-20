@@ -34,24 +34,36 @@ class xmenuWidget : public QWidget {
 
     virtual void mousePressEvent(QMouseEvent * event)
     {
+      float p1x[] = {64,71,90,100,90,72};
+      float p1y[] = {60,50,50,60,73,73};
+      float p2x[] = {63,73,88,98,88,72};
+      float p2y[] = {109,100,100,109,119,119};
+      float p3x[] = {63,72,90,98,88,72};
+      float p3y[] = {155,146,146,155,166,166};
+
       int x=event->x();
       int y=event->y();
       setFocus();
       if (event->button()==Qt::LeftButton) {
-         if (x>25 && x<71 && y>60 && y<81) {
-            setStyleSheet("background:url(:/images/9xmenumenu.png);");
-            emit buttonPressed(Qt::Key_Enter);
-         } else if (x>25 && x<71 && y>117 && y<139) {
-            setStyleSheet("background:url(:/images/9xmenuexit.png);");
-            emit buttonPressed(Qt::Key_Escape);
-         }
+        if (pnpoly(6,p1x,p1y,(float)x,(float)y)==1) {
+          setStyleSheet("background:url(:/images/x9r1.png);");
+          emit buttonPressed(Qt::Key_Plus);
+        }
+        else if (pnpoly(6,p2x,p2y,(float)x,(float)y)==1) {
+          setStyleSheet("background:url(:/images/x9r2.png);");
+          emit buttonPressed(Qt::Key_Minus);
+        }
+        else if (pnpoly(6,p3x,p3y,(float)x,(float)y)==1) {
+          setStyleSheet("background:url(:/images/x9r3.png);");
+          emit buttonPressed(Qt::Key_Enter);
+        } 
       }
       // QWidget::mousePressEvent(event);
     }
     
     virtual void mouseReleaseEvent(QMouseEvent * event)
     {
-      setStyleSheet("background:url(:/images/9xmenu.png);");
+      setStyleSheet("background:url(:/images/x9r0.png);");
       setFocus();
       emit buttonPressed(0);
       // QWidget::mouseReleaseEvent(event);
@@ -63,6 +75,16 @@ class xmenuWidget : public QWidget {
       opt.init(this);
       QPainter p(this);
       style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    }
+
+    inline int pnpoly(int nvert, float *vertx, float *verty, float testx, float testy)
+    {
+        int i, j, c = 0;
+        for (i = 0, j = nvert-1; i < nvert; j = i++) {
+            if ( ((verty[i]>testy) != (verty[j]>testy)) &&  (testx < (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]) )
+               c = !c;
+        }
+        return c;
     }
 
   signals:

@@ -34,36 +34,30 @@ class xcursorWidget : public QWidget {
 
     virtual void mousePressEvent(QMouseEvent * event)
     {
-        float upx[] = {68,28,51,83,105,68};
-        float upy[] = {83,45,32,32,45,83};
-        float minx[] = {74,114,127,127,114,74};
-        float miny[] = {90,51,80,106,130,90};
-        float dox[] = {68,28,51,83,105,68};
-        float doy[] = {98,137,151,151,137,98};
-        float plusx[] = { 80,20,7,7,20,80};
-        float plusy[] = {90,51,80,106,130,90};
+        float p1x[] = {20,27,45,56,50,26};
+        float p1y[] = {59,50,52,59,71,72};
+        float p2x[] = {23,30,46,55,47,28};
+        float p2y[] = {107,99,100,106,117,117};
+        float p3x[] = {24,32,46,57,46,29};
+        float p3y[] = {154,144,146,156,167,166};
 
         int x=event->x();
         int y=event->y();
         setFocus();
         if (event->button()==Qt::LeftButton) {
-          if (pnpoly(6,upx,upy,(float)x,(float)y)==1) {
-            setStyleSheet("background:url(:/images/9xcursup.png);");
-            emit buttonPressed(Qt::Key_Up);
+          if (pnpoly(6,p1x,p1y,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/x9l1.png);");
+            emit buttonPressed(Qt::Key_Menu);
           }
-          else if (pnpoly(6,minx,miny,(float)x,(float)y)==1) {
-            setStyleSheet("background:url(:/images/9xcursmin.png);");
-            emit buttonPressed(Qt::Key_Right);
+          else if (pnpoly(6,p2x,p2y,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/x9l2.png);");
+            emit buttonPressed(Qt::Key_PageDown);
           }
-          else if (pnpoly(6,dox,doy,(float)x,(float)y)==1) {
-            setStyleSheet("background:url(:/images/9xcursdown.png);");
-            emit buttonPressed(Qt::Key_Down);
-          }
-          else if (pnpoly(6,plusx,plusy,(float)x,(float)y)==1) {
-            setStyleSheet("background:url(:/images/9xcursplus.png);");
-            emit buttonPressed(Qt::Key_Left);
+          else if (pnpoly(6,p3x,p3y,(float)x,(float)y)==1) {
+            setStyleSheet("background:url(:/images/x9l3.png);");
+            emit buttonPressed(Qt::Key_Escape);
           } else if (sqrt(((float)x-22)*((float)x-22)+((float)y-165)*((float)y-165))<17) {
-            setStyleSheet("background:url(:/images/9xcursphoto.png);");
+            setStyleSheet("background:url(:/images/x9l0.png);");
             emit buttonPressed(Qt::Key_Print);
           }
         }
@@ -72,7 +66,7 @@ class xcursorWidget : public QWidget {
     
     virtual void mouseReleaseEvent(QMouseEvent * event)
     {
-      setStyleSheet("background:url(:/images/9xcurs.png);");
+      setStyleSheet("background:url(:/images/x9l0.png);");
       emit buttonPressed(0);
       setFocus();
       //QWidget::mouseReleaseEvent(event);

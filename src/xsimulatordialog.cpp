@@ -9,14 +9,14 @@
 
 #define GBALL_SIZE  20
 #define RESX        1024
-#define W           128
+#define W           212
 #define H           64
 
 int xsimulatorDialog::screenshotIdx = 0;
 
 xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::simulatorDialog),
+    ui(new Ui::xsimulatorDialog),
     timer(NULL),
     txInterface(NULL),
     simulator(NULL),
@@ -210,45 +210,6 @@ void xsimulatorDialog::onTimerEvent()
     if (simulator->lcdChanged(lightEnable)) {
       ui->lcd->onLcdChanged(lightEnable);
       if (lightOn!=lightEnable) {
-          if (lightEnable) {
-              switch (backLight) {
-                  case 1:
-                      ui->top->setStyleSheet("background:url(:/images/9xdt-gr.png);");
-                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-gr.png);");
-                      ui->left->setStyleSheet("background:url(:/images/9xdl-gr.png);");
-                      ui->right->setStyleSheet("background:url(:/images/9xdr-gr.png);");
-                      break;
-                  case 2:
-                      ui->top->setStyleSheet("background:url(:/images/9xdt-rd.png);");
-                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-rd.png);");
-                      ui->left->setStyleSheet("background:url(:/images/9xdl-rd.png);");
-                      ui->right->setStyleSheet("background:url(:/images/9xdr-rd.png);");
-                      break;
-                  case 3:
-                      ui->top->setStyleSheet("background:url(:/images/9xdt-or.png);");
-                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-or.png);");
-                      ui->left->setStyleSheet("background:url(:/images/9xdl-or.png);");
-                      ui->right->setStyleSheet("background:url(:/images/9xdr-or.png);");
-                      break;
-                  case 4:
-                      ui->top->setStyleSheet("background:url(:/images/9xdt-yl.png);");
-                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-yl.png);");
-                      ui->left->setStyleSheet("background:url(:/images/9xdl-yl.png);");
-                      ui->right->setStyleSheet("background:url(:/images/9xdr-yl.png);");
-                      break;
-                  default:
-                      ui->top->setStyleSheet("background:url(:/images/9xdt-bl.png);");
-                      ui->bottom->setStyleSheet("background:url(:/images/9xdb-bl.png);");
-                      ui->left->setStyleSheet("background:url(:/images/9xdl-bl.png);");
-                      ui->right->setStyleSheet("background:url(:/images/9xdr-bl.png);");
-                      break;
-              }
-          } else {
-              ui->top->setStyleSheet("background:url(:/images/9xdt.png);");
-              ui->bottom->setStyleSheet("background:url(:/images/9xdb.png);");
-              ui->left->setStyleSheet("background:url(:/images/9xdl.png);");
-              ui->right->setStyleSheet("background:url(:/images/9xdr.png);");
-          }
           lightOn=lightEnable;
       }
     }
@@ -343,7 +304,7 @@ void xsimulatorDialog::setTrims()
 
 void xsimulatorDialog::getValues()
 {
-  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
+/*  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
                        int(-1024*nodeLeft->getY()),  // LEFT VERT
                        int(-1024*nodeRight->getY()), // RGHT VERT
                        int(1024*nodeRight->getX()) },  // RGHT HORZ
@@ -366,7 +327,8 @@ void xsimulatorDialog::getValues()
                      middleButtonPressed
                     };
 
-  xsimulator->setValues(inputs);
+   simulator->setValues(inputs);
+ */
 }
 
 inline int chVal(int val)
@@ -397,7 +359,7 @@ void xsimulatorDialog::on_trimVRight_valueChanged(int value)
 void xsimulatorDialog::setValues()
 {
   TxOutputs outputs;
-  xsimulator->getValues(outputs);
+  simulator->getValues(outputs);
 
   ui->chnout_1->setValue(chVal(outputs.chans[0]));
   ui->chnout_2->setValue(chVal(outputs.chans[1]));
@@ -527,7 +489,7 @@ void xsimulatorDialog::resizeEvent(QResizeEvent *event)
 
 bool xsimulatorDialog::keyState(EnumKeys key)
 {
-    switch (key)
+/*    switch (key)
     {
     case (SW_ThrCt):   return ui->switchTHR->isChecked(); break;
     case (SW_RuddDR):  return ui->switchRUD->isChecked(); break;
@@ -542,6 +504,8 @@ bool xsimulatorDialog::keyState(EnumKeys key)
         return false;
         break;
     }
+ */ 
+  return false;
 }
 
 void xsimulatorDialog::on_holdLeftX_clicked(bool checked)
@@ -633,6 +597,9 @@ void xsimulatorDialog::onjoystickAxisValueChanged(int axis, int value) {
     }
     if (stick==7) {
       ui->dialP_3->setValue(stickval);
+    }
+    if (stick==8) {
+      ui->dialP_4->setValue(stickval);
     }
   }
 }
