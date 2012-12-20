@@ -141,6 +141,7 @@ SET( companion9x_SRCS
      logsdialog.cpp
      downloaddialog.cpp
      simulatordialog.cpp
+     xsimulatordialog.cpp
      splashlibrary.cpp
      mainwindow.cpp
      main.cpp
@@ -167,6 +168,9 @@ SET( companion9x_MOC_HDRS
      cursorwidget.h
      menuwidget.h
      simulatordialog.h
+     xcursorwidget.h
+     xmenuwidget.h
+     xsimulatordialog.h
      generaledit.h
      modeledit.h
      modelslist.h
@@ -188,6 +192,7 @@ SET( companion9x_UIS
      mixerdialog.ui
      preferencesdialog.ui
      simulatordialog.ui
+     xsimulatordialog.ui
      burnconfigdialog.ui
      downloaddialog.ui
      generaledit.ui
