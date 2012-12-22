@@ -12,7 +12,7 @@
 #define FRSKY_HUB
 #define WS_HOW_HIGH
 #define VARIO
-#define DECIMALS_DISPLAYED
+#define PPM_UNIT_PERCENT_PREC1
 #define AUDIO
 #define VOICE
 #define HAPTIC
@@ -42,7 +42,8 @@
 #include <exception>
 
 namespace Open9xARM {
-#include "../open9x/board_sky9x.cpp"
+#include "../open9x/sky9x/board_sky9x.cpp"
+#include "../open9x/sky9x/pwr_driver.cpp"
 #include "../open9x/sky9x/eeprom_driver.cpp"
 #include "../open9x/eeprom_arm.cpp"
 #include "../open9x/eeprom_conversions.cpp"

@@ -5,7 +5,7 @@
 #define CPUM64
 #define SPLASH
 #define FLIGHT_PHASES
-#define DECIMALS_DISPLAYED
+#define PPM_UNIT_PERCENT_PREC1
 #define HELI
 #define TEMPLATES
 #define FRSKY
@@ -35,7 +35,7 @@
 #define EEPROM_VARIANT 3
 
 namespace Open9x {
-#include "../open9x/board_stock.cpp"
+#include "../open9x/stock/board_stock.cpp"
 #include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_avr.cpp"

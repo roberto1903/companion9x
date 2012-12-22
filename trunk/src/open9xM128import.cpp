@@ -10,7 +10,7 @@
 #define FRSKY_HUB
 #define WS_HOW_HIGH
 #define VARIO
-#define DECIMALS_DISPLAYED
+#define PPM_UNIT_PERCENT_PREC1
 #define AUDIO
 #define HAPTIC
 #define AUTOSWITCH
@@ -33,7 +33,7 @@
 #include <exception>
 
 namespace Open9xM128 {
-#include "../open9x/board_stock.cpp"
+#include "../open9x/stock/board_stock.cpp"
 #include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_avr.cpp"
