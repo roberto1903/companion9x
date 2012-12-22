@@ -243,11 +243,10 @@ void avrOutputDialog::doAddTextStdErr()
         prevLine=currLine.left(nlPos).trimmed();
         currLine=currLine.mid(nlPos+1);
     }
-
-    if (text.contains("-E-")) {
+    if (text.contains("-E-") && !text.contains("-E- No receive file name")) {
       hasErrors = true;
     }
-    
+
     addText(text);
 }
 
