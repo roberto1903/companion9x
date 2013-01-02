@@ -25,6 +25,7 @@
 #include "open9xM128simulator.h"
 #include "open9xv4simulator.h"
 #include "open9xarmsimulator.h"
+#include "open9xx9dsimulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -397,6 +398,12 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   if (!version) {
     switch(board) {
+      case BOARD_ACT:
+        version = LAST_OPEN9X_ARM_EEPROM_VER;
+        break;
+      case BOARD_X9DA:
+        version = LAST_OPEN9X_ARM_EEPROM_VER;
+        break;
       case BOARD_SKY9X:
         version = LAST_OPEN9X_ARM_EEPROM_VER;
         break;
@@ -560,6 +567,11 @@ int Open9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
+    case SimulatorType:
+      if (board == BOARD_X9DA)
+        return 1;
+      else
+        return 0;
     case PPMExtCtrl:
       return 1;
     case PPMFrameLength:
@@ -1036,8 +1048,8 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
-  /* Sky9x board */
-  open9x = new Open9xFirmware("open9x-arm", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
+  /* X9DA board */
+  open9x = new Open9xFirmware("open9x-x9da", QObject::tr("open9x for x9da board"), new Open9xInterface(BOARD_X9DA), geturl(BOARD_X9DA), getstamp(BOARD_X9DA), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1052,4 +1064,5 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
+
 }
