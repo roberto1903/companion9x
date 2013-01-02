@@ -43,7 +43,9 @@ enum BoardEnum {
   BOARD_STOCK,
   BOARD_M128,
   BOARD_GRUVIN9X,
-  BOARD_SKY9X
+  BOARD_SKY9X,
+  BOARD_X9DA,
+  BOARD_ACT
 };
 
 const uint8_t modn12x3[4][4]= {
@@ -765,6 +767,7 @@ class RadioData {
 enum Capability {
  OwnerName,
  FlightPhases,
+ SimulatorType,
  MixFlightPhases,
  Mixes,
  MixesWithoutExpo,
