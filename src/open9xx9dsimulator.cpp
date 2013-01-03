@@ -25,6 +25,8 @@
 #define ROTARY_ENCODERS 1
 
 namespace Open9xX9D {
+#include "../open9x/x9d/STM32F2xx_StdPeriph_Lib_V1.1.0/Libraries/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h"
+#include "../open9x/x9d/STM32F2xx_StdPeriph_Lib_V1.1.0/Libraries/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_gpio.h"
 #include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
