@@ -1,6 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBX9D
+#define LCD212
 #define CPUARM
 #define REVB
 #define ROTARY_ENCODERS 1
