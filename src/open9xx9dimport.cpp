@@ -57,18 +57,20 @@ namespace Open9xX9D {
 #include "../open9x/general_menus.cpp"
 #include "../open9x/main_views.cpp"
 #include "../open9x/statistics_views.cpp"
+#include "../open9x/monitors_views.cpp"
 #include "../open9x/lcd.cpp"
 #include "../open9x/logs.cpp"
 #include "../open9x/x9d/keys_driver.cpp"
 #include "../open9x/keys.cpp"
+#include "../open9x/bmp.cpp"
+#undef SDCARD
 #include "../open9x/simpgmspace.cpp"
+#define SDCARD
 #include "../open9x/templates.cpp"
 #include "../open9x/translations.cpp"
 #include "../open9x/frsky.cpp"
 #include "../open9x/x9d/audio_driver.cpp"
-// #include "../open9x/x9d/Audio.c"
-// #include "../open9x/x9d/sdcard_driver.cpp"
-// #include "../open9x/x9d/haptic_driver.cpp"
+#include "../open9x/sky9x/audio.cpp"
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
