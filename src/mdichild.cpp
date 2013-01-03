@@ -51,6 +51,7 @@
 #include "avroutputdialog.h"
 #include "burnconfigdialog.h"
 #include "simulatordialog.h"
+#include "xsimulatordialog.h"
 #include "printdialog.h"
 #include "burndialog.h"
 #include <QFileInfo>
@@ -130,9 +131,15 @@ void MdiChild::setModified()
 void MdiChild::on_SimulateTxButton_clicked()
 {
   if (GetEepromInterface()->getSimulator()) {
-    simulatorDialog sd(this);
-    sd.loadParams(radioData);
-    sd.exec();
+    if (GetEepromInterface()->getCapability(SimulatorType)==1) {
+      xsimulatorDialog sd(this);
+      sd.loadParams(radioData);
+      sd.exec();
+    } else {
+      simulatorDialog sd(this);
+      sd.loadParams(radioData);
+      sd.exec();
+    }
   }
   else {
     QMessageBox::warning(NULL,
