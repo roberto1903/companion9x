@@ -797,6 +797,8 @@ SimulatorInterface * Open9xInterface::getSimulator()
       return new Open9xV4Simulator(this);
     case BOARD_SKY9X:
       return new Open9xARMSimulator(this);
+    case BOARD_X9DA:
+      return new Open9xX9DSimulator(this);
     default:
       return NULL;
   }
