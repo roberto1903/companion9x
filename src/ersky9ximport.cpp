@@ -1,6 +1,7 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBSKY9X
+#define PCBSKY
 #define STAMP
 #define FRSKY
 #define FRSKY_HUB
@@ -23,6 +24,7 @@
 namespace Ersky9x {
 
 //#include "../ersky9x/simpgmspace.h"
+#include "../ersky9x/timers.h"
 #include "../ersky9x/ersky9x.cpp"
 #include "../ersky9x/stamp.cpp"
 #include "../ersky9x/menus.cpp"
@@ -30,6 +32,8 @@ namespace Ersky9x {
 #include "../ersky9x/file.cpp"
 #include "../ersky9x/lcd.cpp"
 #include "../ersky9x/drivers.cpp"
+#include "../ersky9x/logicio.cpp"
+#include "../ersky9x/timers.cpp"
 #include "../ersky9x/simpgmspace.cpp"
 #include "../ersky9x/templates.cpp"
 #include "../ersky9x/frsky.cpp"
