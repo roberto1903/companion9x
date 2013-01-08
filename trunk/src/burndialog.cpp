@@ -8,7 +8,6 @@
 #include "flashinterface.h"
 #include "hexinterface.h"
 
-
 burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * backupEE, QString DocName):
   QDialog(parent),
   ui(new Ui::burnDialog),
@@ -143,8 +142,7 @@ void burnDialog::on_FlashLoadButton_clicked()
   if (hexType==2) {
     fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER);
     checkFw(fileName);
-  }
-  else {
+  } else {
     QString fileName = QFileDialog::getOpenFileName(this,tr("Choose file to write to EEPROM memory"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (checkeEprom(fileName)) {
       if (burnraw==false) {
@@ -189,13 +187,14 @@ void burnDialog::checkFw(QString fileName)
       ui->FwImage->show();
       ui->FwImage->setPixmap(QPixmap::fromImage(flash.getSplash()));
       QString ImageStr = settings.value("SplashImage", "").toString();
+      bool PatchFwCB = settings.value("patchImage", false).toBool();
       if (!ImageStr.isEmpty()) {
         QImage Image = qstring2image(ImageStr);
         ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Mono)));
         ui->InvertColorButton->setEnabled(true);
         ui->PreferredImageCB->setChecked(true);
-      }
-      else {
+        ui->PatchFWCB->setChecked(PatchFwCB);
+      } else {
         QString fileName=ui->ImageFileName->text();
         if (!fileName.isEmpty()) {
           QImage image(fileName);
@@ -203,27 +202,24 @@ void burnDialog::checkFw(QString fileName)
             ui->InvertColorButton->setEnabled(true);
             ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
             ui->PatchFWCB->setEnabled(true);
-          }
-          else {
+            ui->PatchFWCB->setChecked(PatchFwCB);
+          } else {
             ui->PatchFWCB->setDisabled(true);
             ui->PatchFWCB->setChecked(false);
             ui->PreferredImageCB->setDisabled(true);         
           }
-        }
-        else {
+        } else {
           ui->PatchFWCB->setDisabled(true);
           ui->PatchFWCB->setChecked(false);
           ui->PreferredImageCB->setDisabled(true);
         }
       }
-    }
-    else {
+    } else {
       ui->FwImage->hide();
       ui->ImageFileName->setText("");
       ui->SplashFrame->hide();
     }
-  }
-  else {
+  } else {
     QMessageBox::warning(this, tr("Warning"), tr("%1 is not a known firmware").arg(fileName));
     ui->BurnFlashButton->setText(tr("Burn anyway !"));
     ui->BurnFlashButton->setEnabled(true);
@@ -251,8 +247,7 @@ bool burnDialog::checkeEprom(QString fileName)
     }
     QTextStream inputStream(&file);
     XmlInterface(inputStream).load(radioData);
-  }
-  else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
+  } else if (fileType==FILE_TYPE_HEX || fileType==FILE_TYPE_EEPE) { //read HEX file
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  //reading HEX TEXT file
         QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
         return false;
@@ -295,8 +290,7 @@ bool burnDialog::checkeEprom(QString fileName)
       ui->FWFileName->setText(fileName);
       return true;
     }
-  }
-  else if (fileType==FILE_TYPE_BIN) { //read binary
+  } else if (fileType==FILE_TYPE_BIN) { //read binary
     int eeprom_size = file.size();
     if (!file.open(QFile::ReadOnly)) {  //reading binary file   - TODO HEX support
         QMessageBox::critical(this, tr("Error"),tr("Error opening file %1:\n%2.").arg(fileName).arg(file.errorString()));
@@ -380,6 +374,7 @@ void burnDialog::on_BurnFlashButton_clicked()
       settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
       settings.setValue("lastFw", fileName);
       if (ui->PatchFWCB->isChecked()) {
+        settings.setValue("patchImage", true);
         QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
         if (!image.isNull()) {
           QString tempDir    = QDir::tempPath();
@@ -393,23 +388,20 @@ void burnDialog::on_BurnFlashButton_clicked()
           if (flash.saveFlash(tempFile) > 0) {
             hexfileName->clear();
             hexfileName->append(tempFile);
-          }
-          else {
+          } else {
             hexfileName->clear();
             QMessageBox::critical(this, tr("Warning"), tr("Cannot save customized firmware"));
           }
-        }
-        else {
+        } else {
           hexfileName->clear();
           QMessageBox::critical(this, tr("Warning"), tr("Custom image not found"));
         }
-      }
-      else {
+      } else {
+            settings.setValue("patchImage", false);
             hexfileName->clear();
             hexfileName->append(fileName);
       }
-    }
-    else {
+    } else {
       QMessageBox::critical(this, tr("Warning"), tr("No firmware selected"));
       hexfileName->clear();     
     }
@@ -518,8 +510,7 @@ void burnDialog::on_BurnFlashButton_clicked()
         if (ok)
           radioData.generalSettings.speakerVolume=byte8u;
         patch=true;
-      }
-      else {
+      } else {
         QMessageBox::critical(this, tr("Warning"), tr("Wrong radio setting data in profile, eeprom not patched"));
       }
     
@@ -552,13 +543,11 @@ void burnDialog::on_BurnFlashButton_clicked()
         }
         hexfileName->clear();
         hexfileName->append(fileName);
-      }
-      else {
+      } else {
         hexfileName->clear();
         hexfileName->append(ui->FWFileName->text());        
       }
-    }
-    else {
+    } else {
       hexfileName->clear();
       hexfileName->append(ui->FWFileName->text());        
     }
@@ -585,8 +574,7 @@ void burnDialog::on_EEpromCB_toggled(bool checked)
 {
   if (ui->EEpromCB->isChecked()) {
     *backup=true;
-  }
-  else {
+  } else {
     *backup=false;
   }
 }
@@ -607,8 +595,7 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
       ui->libraryButton->setDisabled(true);
       ui->PatchFWCB->setEnabled(true);
     }
-  }
-  else {
+  } else {
     ui->imageLabel->clear();
     ui->ImageLoadButton->setEnabled(true);
     ui->libraryButton->setEnabled(true);
@@ -619,14 +606,13 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
         ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
         ui->InvertColorButton->setEnabled(true);
         ui->ImageFileName->setEnabled(true);
-      }
-      else {
+        ui->PatchFWCB->setDisabled(false);
+      } else {
         ui->InvertColorButton->setDisabled(true);
         ui->PatchFWCB->setDisabled(true);
         ui->PatchFWCB->setChecked(false);
       }
-    }
-    else {
+    } else {
       ui->InvertColorButton->setDisabled(true);
       ui->PatchFWCB->setDisabled(true);
       ui->PatchFWCB->setChecked(false);
@@ -643,8 +629,7 @@ void burnDialog::on_EEbackupCB_clicked()
 {
   if (ui->EEbackupCB->isChecked()) {
     *backup=true;
-  }
-  else {
+  } else {
     *backup=false;
   }
 }

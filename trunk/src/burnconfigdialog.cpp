@@ -256,10 +256,35 @@ void burnConfigDialog::restFuses(bool eeProtect)
           QString erStr = eeProtect ? "hfuse:w:0x11:m" : "hfuse:w:0x19:m";
           str << "-U" << "lfuse:w:0xD7:m" << "-U" << erStr << "-U" << "efuse:w:0xFC:m";
           //use hfuse = 0x81 to prevent eeprom being erased with every flashing          
-        }
-        else {  
+        } else {
+          QString tempDir    = QDir::tempPath();
+          QString tempFile;
+          QString lfuses;
+          tempFile = tempDir + "/ftemp.bin";
+          QStringList argread;
+          argread << "-c" << avrProgrammer << "-p" << avrMCU << args  <<"-U" << "lfuse:r:"+tempFile+":r" ;
+          avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, argread, "Reset Fuses",AVR_DIALOG_CLOSE_IF_SUCCESSFUL,FALSE);
+          ad->setWindowIcon(QIcon(":/images/fuses.png"));
+          ad->exec();
+          QFile file(tempFile);
+          if (file.exists() && file.size()==1) {
+            file.open(QIODevice::ReadOnly);
+            char bin_flash[1];
+            file.read(bin_flash, 1);
+            if (bin_flash[0]==0x0E) {
+              lfuses="lfuse:w:0x0E:m";
+            } else {
+              lfuses="lfuse:w:0x3F:m";
+            } 
+            file.close();
+            unlink(tempFile.toAscii());
+          } else {
+            lfuses="lfuse:w:0x3F:m";
+          }
+          qDebug() << lfuses;
+          
           QString erStr = eeProtect ? "hfuse:w:0x81:m" : "hfuse:w:0x89:m";
-          str << "-U" << "lfuse:w:0x0E:m" << "-U" << erStr << "-U" << "efuse:w:0xFF:m";
+          str << "-U" << lfuses << "-U" << erStr << "-U" << "efuse:w:0xFF:m";
           //use hfuse = 0x81 to prevent eeprom being erased with every flashing
         }
         QStringList arguments;
