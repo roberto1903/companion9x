@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "burnconfigdialog.h"
 #include "ui_burnconfigdialog.h"
 #include "avroutputdialog.h"
