@@ -699,10 +699,14 @@ void MainWindow::loadBackup()
 QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
-  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (eepromInterface->getBoard()==BOARD_X9DA) {
+    return bcd.getDFU();
+  } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
     return bcd.getSAMBA();
-  else
+  } else {
     return bcd.getAVRDUDE();
+  }
 }
 
 QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &filename)
@@ -736,6 +740,21 @@ QStringList MainWindow::GetAvrdudeArguments(const QString &cmd, const QString &f
   return arguments;
 }
 
+QStringList MainWindow::GetDFUUtilArguments(const QString &cmd, const QString &filename)
+{
+  QStringList arguments;
+  burnConfigDialog bcd;
+  QStringList args   = bcd.getDFUArgs();
+
+  arguments << args << "--dfuse-address" << "0x08000000";
+
+  QString fullcmd = cmd + filename;
+
+  arguments << "" << fullcmd;
+
+  return arguments;
+}
+
 QStringList MainWindow::GetSambaArguments(const QString &tcl)
 {
   QStringList result;
@@ -764,41 +783,58 @@ QStringList MainWindow::GetSambaArguments(const QString &tcl)
 
 QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (eepromInterface->getBoard()==BOARD_X9DA) {
+    return ""; // to be implemented
+  } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n" + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
-  else
+  } else {
     return GetAvrdudeArguments("eeprom:r:", filename);
+  }
 }
 
 QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (eepromInterface->getBoard()==BOARD_X9DA) {
+    return "";  // to be implemented
+  } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
-  else
+  } else {
     return GetAvrdudeArguments("eeprom:w:", filename);
+  }
 }
 
 QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (eepromInterface->getBoard()==BOARD_X9DA) {
+    return GetDFUUtilArguments("-D", filename);    
+  } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     return GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
-  else
+  } else {
     return GetAvrdudeArguments("flash:w:", filename);
+  }
 }
 
 QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
 {
-  if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (eepromInterface->getBoard()==BOARD_X9DA) {
+    return GetDFUUtilArguments("-U", filename);    
+  } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x40000 0\n");
-  else
+  } else {
     return GetAvrdudeArguments("flash:r:", filename);
+  }
 }
 
 void MainWindow::burnFrom()
 {
     QString tempDir = QDir::tempPath();
     QString tempFile;
-    if (GetEepromInterface()->getBoard() == BOARD_SKY9X)
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (eepromInterface->getBoard()==BOARD_X9DA || eepromInterface->getBoard() == BOARD_SKY9X) 
       tempFile = tempDir + "/temp.bin";
     else
       tempFile = tempDir + "/temp.hex";

@@ -142,6 +142,7 @@ private:
     QString GetAvrdudeLocation();
     QStringList GetAvrdudeArguments(const QString &cmd, const QString &filename);
     QStringList GetSambaArguments(const QString &tcl);
+    QStringList GetDFUUtilArguments(const QString &cmd, const QString &filename);
     QStringList GetReceiveEEpromCommand(const QString &filename);
     QStringList GetSendEEpromCommand(const QString &filename);
     QStringList GetReceiveFlashCommand(const QString &filename);
