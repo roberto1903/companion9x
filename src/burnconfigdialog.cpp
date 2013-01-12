@@ -13,7 +13,8 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
 
     getSettings();
     populateProgrammers();
-    if (GetEepromInterface()->getEEpromSize() == EESIZE_SKY9X) {
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (eepromInterface->getBoard()==BOARD_X9DA) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_mcu->hide();
@@ -27,6 +28,32 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
       ui->pushButton->hide();
       ui->pushButton_3->hide();
       ui->pushButton_4->hide();
+      ui->label_sb1->hide();
+      ui->label_sb2->hide();
+      ui->label_sb3->hide();
+      ui->arm_mcu->hide();
+      ui->samba_location->hide();
+      ui->samba_port->hide();      
+      ui->sb_browse->hide();
+    } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
+      ui->avrArgs->hide();
+      ui->avrdude_location->hide();
+      ui->avrdude_mcu->hide();
+      ui->avrdude_port->hide();
+      ui->avrdude_programmer->hide();
+      ui->label_av1->hide();
+      ui->label_av2->hide();
+      ui->label_av3->hide();
+      ui->label_av4->hide();
+      ui->label_av5->hide();
+      ui->pushButton->hide();
+      ui->pushButton_3->hide();
+      ui->pushButton_4->hide();
+      ui->label_dfu1->hide();
+      ui->label_dfu2->hide();
+      ui->dfu_location->hide();
+      ui->dfuArgs->hide();
+      ui->dfu_browse->hide();
     } else {
       ui->label_sb1->hide();
       ui->label_sb2->hide();
@@ -34,6 +61,12 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
       ui->arm_mcu->hide();
       ui->samba_location->hide();
       ui->samba_port->hide();
+      ui->sb_browse->hide();
+      ui->label_dfu1->hide();
+      ui->label_dfu2->hide();
+      ui->dfu_location->hide();
+      ui->dfuArgs->hide();
+      ui->dfu_browse->hide();
     }
     QTimer::singleShot(0, this, SLOT(shrink()));
     connect(this,SIGNAL(accepted()),this,SLOT(putSettings()));
@@ -50,12 +83,15 @@ void burnConfigDialog::getSettings()
 #if defined WIN32 || !defined __GNUC__
     avrLoc   = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
     sambaLoc = settings.value("samba_location", QFileInfo("sam-ba.exe").absoluteFilePath()).toString();
+    dfuLoc = settings.value("dfu_location", QFileInfo("dfu-util-static.exe").absoluteFilePath()).toString();
 #elif defined __APPLE__
     avrLoc   = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
     sambaLoc = settings.value("samba_location", "/usr/local/bin/sam-ba").toString();
+    dfuLoc = settings.value("dfu_location", QFileInfo("/usr/local/bin/dfu-util").absoluteFilePath()).toString();
 #else
     avrLoc   = settings.value("avrdude_location", "/usr/bin/avrdude").toString();
     sambaLoc = settings.value("samba_location", "/usr/bin/sam-ba").toString();
+    dfuLoc = settings.value("dfu_location", QFileInfo("/usr/bin/dfu-util").absoluteFilePath()).toString();
 #endif
     QString str = settings.value("avr_arguments").toString();
     avrArgs = str.split(" ", QString::SkipEmptyParts);
@@ -67,12 +103,17 @@ void burnConfigDialog::getSettings()
 
     avrPort   = settings.value("avr_port", "").toString();
     sambaPort = settings.value("samba_port", "\\USBserial\\COM23").toString();
-
+    
+    str = settings.value("dfu_arguments", "-a 0").toString();
+    dfuArgs = str.split(" ", QString::SkipEmptyParts);
     ui->avrdude_location->setText(getAVRDUDE());
     ui->avrArgs->setText(getAVRArgs().join(" "));
 
     ui->samba_location->setText(getSAMBA());
     ui->samba_port->setText(getSambaPort());
+
+    ui->dfu_location->setText(getDFU());
+    ui->dfuArgs->setText(getDFUArgs().join(" "));
 
     int idx1 = ui->avrdude_programmer->findText(getProgrammer());
     int idx2 = ui->avrdude_port->findText(getPort());
@@ -103,6 +144,8 @@ void burnConfigDialog::putSettings()
     settings.setValue("samba_location", sambaLoc);
     settings.setValue("samba_port", sambaPort);
     settings.setValue("arm_mcu", armMCU);
+    settings.setValue("dfu_location", dfuLoc);
+    settings.setValue("dfu_arguments", dfuArgs.join(" "));
 }
 
 void burnConfigDialog::populateProgrammers()
@@ -189,6 +232,31 @@ void burnConfigDialog::on_pushButton_clicked()
     }
 }
 
+void burnConfigDialog::on_sb_browse_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select Location"),ui->samba_location->text());
+    if(!fileName.isEmpty())
+    {
+        ui->samba_location->setText(fileName);
+        sambaLoc = fileName;
+    }
+}
+
+void burnConfigDialog::on_dfu_browse_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select Location"),ui->dfu_location->text());
+
+    if(!fileName.isEmpty())
+    {
+        ui->dfu_location->setText(fileName);
+        dfuLoc = fileName;
+    }
+}
+
+void burnConfigDialog::on_dfuArgs_editingFinished()
+{
+    dfuArgs = ui->dfuArgs->text().split(" ", QString::SkipEmptyParts);
+}
 
 void burnConfigDialog::listProgrammers()
 {

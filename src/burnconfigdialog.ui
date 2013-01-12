@@ -45,6 +45,26 @@
    </item>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="dfu_location">
+       <property name="toolTip">
+        <string>Location of sam-ba executable</string>
+       </property>
+       <property name="whatsThis">
+        <string>The location of the AVRDUDE executable.</string>
+       </property>
+       <property name="text">
+        <string notr="true">dfu-util-static.exe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_dfu1">
+       <property name="text">
+        <string>DFU-Util Location</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QLineEdit" name="avrdude_location">
        <property name="toolTip">
@@ -651,6 +671,49 @@ m2560 for v4.1 boards</string>
        </property>
        <property name="text">
         <string notr="true">\USBserial\COM23</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_dfu2">
+       <property name="text">
+        <string>Alternate device</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="2">
+      <widget class="QLineEdit" name="dfuArgs">
+       <property name="toolTip">
+        <string>Extra arguments that will be passed to AVRDUDE on every call</string>
+       </property>
+       <property name="whatsThis">
+        <string>Extra arguments used in AVRDUDE.
+This can be used for providing extra information to AVRDUDE.
+
+Please only use this if you know what you are doing.  There are no error checks and you could cripple your controller.</string>
+       </property>
+       <property name="text">
+        <string notr="true">0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="4">
+      <widget class="QPushButton" name="sb_browse">
+       <property name="whatsThis">
+        <string>Use this button to browse and look for the AVRDUDE executable file.</string>
+       </property>
+       <property name="text">
+        <string>Browse...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="4">
+      <widget class="QPushButton" name="dfu_browse">
+       <property name="whatsThis">
+        <string>Use this button to browse and look for the AVRDUDE executable file.</string>
+       </property>
+       <property name="text">
+        <string>Browse...</string>
        </property>
       </widget>
      </item>
