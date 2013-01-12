@@ -68,6 +68,10 @@ const char * Open9xInterface::getName()
       return "Open9x for M128 / stock board";
     case BOARD_GRUVIN9X:
       return "Open9x for gruvin9x board";
+    case BOARD_X9DA:
+      return "Open9x for X9DA board";
+    case BOARD_ACT:
+      return "Open9x for ACT board";
     case BOARD_SKY9X:
       return "Open9x for sky9x board";
     default:

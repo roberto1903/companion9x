@@ -91,5 +91,5 @@ class xmenuWidget : public QWidget {
     void buttonPressed(int button);
 
 };
-#endif	/* MENUWIDGET_H */
+#endif	/* XMENUWIDGET_H */
 
