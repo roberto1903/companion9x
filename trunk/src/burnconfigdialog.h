@@ -22,7 +22,9 @@ public:
 
     QString getAVRDUDE() {return avrLoc;}
     QString getSAMBA() {return sambaLoc;}
+    QString getDFU() {return dfuLoc;}
     QStringList getAVRArgs() {return avrArgs;}
+    QStringList getDFUArgs() {return dfuArgs;}
     QString getProgrammer() {return avrProgrammer;}
     QString getMCU() {return avrMCU;}
     QString getArmMCU() {return armMCU;}
@@ -40,12 +42,14 @@ private:
 
     QString avrLoc;
     QString sambaLoc;
+    QString dfuLoc;
     QStringList avrArgs;
     QString avrProgrammer;
     QString avrMCU;
     QString armMCU;
     QString avrPort;
     QString sambaPort;
+    QStringList dfuArgs;
 
 private slots:
     void shrink();
@@ -60,7 +64,9 @@ private slots:
     void on_samba_location_editingFinished();
     void on_samba_port_editingFinished();
     void on_arm_mcu_currentIndexChanged(QString );
-
+    void on_sb_browse_clicked();
+    void on_dfu_browse_clicked();
+    void on_dfuArgs_editingFinished();
     void getSettings();
     void putSettings();
 };

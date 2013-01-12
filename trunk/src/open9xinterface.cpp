@@ -922,6 +922,7 @@ QString geturl( int board) {
       case BOARD_GRUVIN9X:
         url.append("/getfw.php?fw=%1.hex");
         break;
+      case BOARD_X9DA:
       case BOARD_SKY9X:
         url.append("/getfw.php?fw=%1.bin");
         break;
@@ -1050,6 +1051,23 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
+  /* SKY9X board */
+  open9x = new Open9xFirmware("open9x-sky9x", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
+  open9x->setVariantBase(FRSKY_VARIANT);
+  open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
+  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
+  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
+  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
+  open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
+  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("imperial", QObject::tr("Imperial units"));
+  firmwares.push_back(open9x);
+    
   /* X9DA board */
   open9x = new Open9xFirmware("open9x-x9da", QObject::tr("open9x for x9da board"), new Open9xInterface(BOARD_X9DA), geturl(BOARD_X9DA), getstamp(BOARD_X9DA), true);
   open9x->setVariantBase(FRSKY_VARIANT);
