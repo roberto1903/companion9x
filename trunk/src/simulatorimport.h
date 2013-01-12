@@ -72,7 +72,12 @@ extern volatile uint8_t g_rotenc[2];
 extern volatile uint32_t g_rotenc[1];
 #endif
 
+#if defined(PCBX9DA)
 extern uint8_t lcd_buf[128*64/8];
+#else
+extern uint8_t lcd_buf[212*64];
+#endif
+
 extern bool lcd_refresh;
 
 extern void per10ms();
@@ -177,7 +182,7 @@ switch (inputs.sId0) {
 }
 
 // keyboard
-#if defined(PCBSKY9X)
+#if defined(PCBSKY9X) || defined (PCBX9DA)
 bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
 setKeys(keys);
 #elif defined(PCBGRUVIN9X)
