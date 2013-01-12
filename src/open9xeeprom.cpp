@@ -1411,7 +1411,7 @@ Open9xCustomSwData_v209::operator CustomSwData ()
     c9x.val1 = open9x209ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
     c9x.val2 = open9x209ToSource(v2).toValue();
   }
 
