@@ -257,24 +257,30 @@ QString compareDialog::getTrimInc(ModelData * g_model)
   }
 }
 
-QString compareDialog::cSwitchString(CustomSwData * customSw)
+QString compareDialog::cSwitchString(CustomSwData * customSw, const ModelData & Model)
 {
+  RawSource source=RawSource(customSw->val1);
   QString tstr = "";
   if (customSw->func) {
     switch CS_STATE(customSw->func) {
       case CS_VOFS:
         if (customSw->val1)
-          tstr += RawSource(customSw->val1).toString();
+          tstr += source.toString();
         else
           tstr += "0";
         tstr.remove(" ");
         if (customSw->func == CS_APOS || customSw->func == CS_ANEG)
           tstr = "|" + tstr + "|";
-        if (customSw->func == CS_APOS || customSw->func == CS_VPOS)
+        if(customSw->func==CS_DAPOS)
+          tstr = "|d(" + tstr + ")|";
+        if(customSw->func==CS_DPOS)
+              tstr = "d(" + tstr + ")";        
+        if (customSw->func == CS_APOS || customSw->func == CS_VPOS || customSw->func == CS_DAPOS || customSw->func== CS_DPOS)
           tstr += " &gt; ";
         if (customSw->func == CS_ANEG || customSw->func == CS_VNEG)
           tstr += " &lt; ";
-        tstr += QString::number(customSw->val2);
+        tstr += QString::number(source.getStep(Model)*(customSw->val2+source.getRawOffset(Model))+source.getOffset(Model));
+//        tstr += QString::number(customSw->val2);
         break;
       case CS_VBOOL:
         tstr = RawSwitch(customSw->val1).toString();
@@ -1357,8 +1363,8 @@ void compareDialog::printSwitches()
     str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
     for(int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
       
-      QString sw1=cSwitchString(&g_model1->customSw[i]);
-      QString sw2=cSwitchString(&g_model2->customSw[i]);
+      QString sw1=cSwitchString(&g_model1->customSw[i], *g_model1);
+      QString sw2=cSwitchString(&g_model2->customSw[i], *g_model2);
       if (!(sw1.isEmpty() && sw2.isEmpty())) {
         str.append("<tr>");
         color=getColor1(sw1,sw2);
