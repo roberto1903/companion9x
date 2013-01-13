@@ -304,20 +304,20 @@ void xsimulatorDialog::setTrims()
 
 void xsimulatorDialog::getValues()
 {
-/*  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
+  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
                        int(-1024*nodeLeft->getY()),  // LEFT VERT
                        int(-1024*nodeRight->getY()), // RGHT VERT
                        int(1024*nodeRight->getX()) },  // RGHT HORZ
                      { ui->dialP_1->value(),
                        ui->dialP_2->value(),
                        ui->dialP_3->value() },
-                     ui->switchRUD->isChecked(),
-                     ui->switchELE->isChecked(),
-                     ui->switchTHR->isChecked(),
-                     ui->switchAIL->isChecked(),
-                     ui->switchGEA->isChecked(),
-                     ui->switchTRN->isDown(),
-                     ui->switchID2->isChecked() ? 2 : (ui->switchID1->isChecked() ? 1 : 0),
+                     ui->switchA->value(),
+                     ui->switchB->value(),
+                     ui->switchC->value(),
+                     ui->switchD->value(),
+                     ui->switchE->value(),
+                     ui->switchF->value(),
+                     ui->switchG->value(),
                      buttonPressed == Qt::Key_Enter,
                      buttonPressed == Qt::Key_Escape,
                      buttonPressed == Qt::Key_Up,
@@ -328,7 +328,7 @@ void xsimulatorDialog::getValues()
                     };
 
    simulator->setValues(inputs);
- */
+ 
 }
 
 inline int chVal(int val)
@@ -504,7 +504,7 @@ bool xsimulatorDialog::keyState(EnumKeys key)
         return false;
         break;
     }
- */ 
+*/  
   return false;
 }
 

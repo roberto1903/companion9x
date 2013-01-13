@@ -341,32 +341,53 @@ void ModelsListWidget::confirmDelete() {
 
 void ModelsListWidget::deleteSelected(bool ask=true)
 {
-  bool isModel=false;
-  QMessageBox::StandardButton ret = QMessageBox::Yes;
-  if(ask) {
-    foreach(QModelIndex index, this->selectionModel()->selectedIndexes())
-      if  (index.row()>0 && !radioData->models[index.row()-1].isempty())
-        isModel=true;
-    if (isModel==true) {
-      ret = QMessageBox::warning(this, "companion9x", tr("Delete Selected Models?"), QMessageBox::Yes | QMessageBox::No);
+    bool isModel=false;
+    int selModel;
+    QMessageBox::StandardButton ret = QMessageBox::Yes;
+    if(ask) {
+      foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
+        if  (index.row()>0 && !radioData->models[index.row()-1].isempty()) {
+          isModel=true;
+          selModel=index.row()-1;
+        }
+      }    
+      if (isModel==true) {
+        if (radioData->generalSettings.currModel!=selModel) {
+          ret = QMessageBox::warning(this, "companion9x", tr("Delete Selected Models?"), QMessageBox::Yes | QMessageBox::No);
+        } else {
+          ret = QMessageBox::warning(this, "companion9x", tr("Cannot delete default model."), QMessageBox::Ok);
+        }
+      }
     }
-  }
-  if (ret == QMessageBox::Yes) {
-    foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
-      if(index.row()>0)
-        radioData->models[index.row()-1].clear();
-    }
-    ((MdiChild *)parent())->setModified();
+    if (ret == QMessageBox::Yes) {
+      foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
+        if (index.row()>0 && radioData->generalSettings.currModel!=(index.row()-1)) {
+          radioData->models[index.row()-1].clear();
+          ((MdiChild *)parent())->setModified();
+        } else if (index.row()>0) {
+          if (ask) {
+            ret = QMessageBox::warning(this, "companion9x", tr("Cannot delete default model."), QMessageBox::Ok);
+          } else {
+            ret = QMessageBox::warning(this, "companion9x", tr("Cannot cut default model."), QMessageBox::Ok);
+          }
+        }
+      }
   }
 }
 
 void ModelsListWidget::doCut(QByteArray *gmData)
 {
+    bool modified=false;
     DragDropHeader *header = (DragDropHeader *)gmData->data();
     for (int i=0; i<header->models_count; i++) {
-      radioData->models[header->models[i]-1].clear();
+      if (radioData->generalSettings.currModel!=header->models[i]-1) {
+        radioData->models[header->models[i]-1].clear();
+        modified=true;
+      }
     }
-    ((MdiChild *)parent())->setModified();
+    if (modified) {
+      ((MdiChild *)parent())->setModified();
+    }
 }
 
 void ModelsListWidget::doCopy(QByteArray *gmData)
