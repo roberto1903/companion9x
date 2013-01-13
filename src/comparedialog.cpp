@@ -1663,13 +1663,13 @@ void compareDialog::printFrSky()
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor2(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[1].value,10)+"</td>");
-  str.append("</table><br>");
+  str.append("</table>");
 
     if (GetEepromInterface()->getCapability(TelemetryBars) || GetEepromInterface()->getCapability(TelemetryCSFields)) {
     for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/8; j++) {
-      color=getColor1(fd1->screens[0].type,fd2->screens[0].type);
+      color=getColor2(fd1->screens[0].type,fd2->screens[0].type);
       if (fd1->screens[j].type==0) {
-        str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
+        str.append("<br><table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b><font color="+color+">"+tr("Custom Telemetry View")+"</b></td></tr><tr><td colspan=3>&nbsp;</td></tr>");
         for (int i=0; i<4; i++) {
           if (fd1->screens[0].type==fd2->screens[0].type)
            color=getColor2(fd1->screens[1].body.cells[i*2],fd2->screens[1].body.cells[i*2]);
