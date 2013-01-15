@@ -73,28 +73,5 @@ void getTrims(int16_t values[4])
     values[i] = g_model.trim[i];
 }
 
-void setKeys(bool *keys)
-{
-  Ersky9x::Piob.PIO_PDSR |= 0x20;
-  Ersky9x::Pioc.PIO_PDSR |= (0x01000000 | (0x04 >> 1) | (0x20 >> 1) | (0x40 >> 1) | (0x10 >> 1));
-
-  Ersky9x::Pioa.PIO_PDSR |= (0x00800000 | 0x01000000 | 0x00000002 | 0x00000001);
-  Ersky9x::Piob.PIO_PDSR |= (0x00000010);
-  Ersky9x::Pioc.PIO_PDSR |= (0x10000000 | 0x00000400 | 0x00000200);
-
-  if (keys[0])
-    Ersky9x::Piob.PIO_PDSR &= ~0x20;
-  if (keys[1])
-    Ersky9x::Pioc.PIO_PDSR &= ~0x01000000;
-  if (keys[2])
-    Ersky9x::Pioc.PIO_PDSR &= ~(0x04 >> 1);
-  if (keys[3])
-    Ersky9x::Pioc.PIO_PDSR &= ~(0x20 >> 1);
-  if (keys[4])
-    Ersky9x::Pioc.PIO_PDSR &= ~(0x40 >> 1);
-  if (keys[5])
-    Ersky9x::Pioc.PIO_PDSR &= ~(0x10 >> 1);
-}
-
 }
 

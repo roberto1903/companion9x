@@ -25,6 +25,7 @@
 namespace Open9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+#include "../open9x/simpgmspace.h"
 extern uint8_t g_beepCnt;
 uint8_t getStickMode();
 }

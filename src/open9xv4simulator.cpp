@@ -23,6 +23,7 @@
 namespace Open9xV4 {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+#include "../open9x/simpgmspace.h"
 uint8_t getStickMode();
 }
 

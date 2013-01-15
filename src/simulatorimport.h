@@ -115,7 +115,9 @@ pinj = 0;
 pinl = 0;
 #endif
 
-#if defined(PCBSKY9X)
+#if defined(PCBX9D)
+// TODO
+#elif defined(PCBSKY9X)
 if (inputs.sThr) PIOC->PIO_PDSR |= (1<<20); else PIOC->PIO_PDSR &= ~(1<<20);
 if (inputs.sRud) PIOA->PIO_PDSR |= (1<<15); else PIOA->PIO_PDSR &= ~(1<<15);
 if (inputs.sEle) PIOC->PIO_PDSR |= (1<<31); else PIOC->PIO_PDSR &= ~(1<<31);
@@ -182,25 +184,20 @@ switch (inputs.sId0) {
 }
 
 // keyboard
-#if defined(PCBSKY9X) || defined (PCBX9DA)
-bool keys[6] = { inputs.menu, inputs.exit, inputs.up, inputs.right, inputs.down, inputs.left };
-setKeys(keys);
-#elif defined(PCBGRUVIN9X)
-pinl &= ~ ((1<<INP_P_KEY_MEN) | (1<<INP_P_KEY_EXT) | (1<<INP_P_KEY_UP) | (1<<INP_P_KEY_DWN) | (1<<INP_P_KEY_LFT) | (1<<INP_P_KEY_RGT)); // for v4
-if (inputs.menu) { pinl |= (1<<INP_P_KEY_MEN);}
-if (inputs.exit) { pinl |= (1<<INP_P_KEY_EXT); }
-if (inputs.up) { pinl |= (1<<INP_P_KEY_UP); }
-if (inputs.down) { pinl |= (1<<INP_P_KEY_DWN); }
-if (inputs.left) { pinl |= (1<<INP_P_KEY_LFT); }
-if (inputs.right) { pinl |= (1<<INP_P_KEY_RGT); }
+#if defined(PCBX9D)
+simuSetKey(KEY_MENU, inputs.menu);
+simuSetKey(KEY_EXIT, inputs.exit);
+simuSetKey(KEY_PLUS, false);
+simuSetKey(KEY_MINUS, false);
+simuSetKey(KEY_PAGE, false);
+simuSetKey(KEY_ENTER, false);
 #else
-pinb &= ~ 0x7e;
-if (inputs.menu) { pinb |= (1<<INP_B_KEY_MEN); }
-if (inputs.exit) { pinb |= (1<<INP_B_KEY_EXT); }
-if (inputs.up) { pinb |= (1<<INP_B_KEY_UP); }
-if (inputs.down) { pinb |= (1<<INP_B_KEY_DWN); }
-if (inputs.left) { pinb |= (1<<INP_B_KEY_LFT); }
-if (inputs.right) { pinb |= (1<<INP_B_KEY_RGT); }
+simuSetKey(KEY_MENU, inputs.menu);
+simuSetKey(KEY_EXIT, inputs.exit);
+simuSetKey(KEY_UP, inputs.up);
+simuSetKey(KEY_DOWN, inputs.down);
+simuSetKey(KEY_RIGHT, inputs.right);
+simuSetKey(KEY_LEFT, inputs.left);
 #endif
 
 #ifdef PCBGRUVIN9X

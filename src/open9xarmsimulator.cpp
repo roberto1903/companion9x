@@ -30,7 +30,6 @@ namespace Open9xARM {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
 uint8_t getStickMode();
-void setKeys(bool *keys);
 }
 
 using namespace Open9xARM;
