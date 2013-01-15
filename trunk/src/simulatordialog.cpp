@@ -525,7 +525,7 @@ void simulatorDialog::resizeEvent(QResizeEvent *event)
     QDialog::resizeEvent(event);
 }
 
-bool simulatorDialog::keyState(EnumKeys key)
+/* bool simulatorDialog::keyState(EnumKeys key)
 {
     switch (key)
     {
@@ -542,7 +542,7 @@ bool simulatorDialog::keyState(EnumKeys key)
         return false;
         break;
     }
-}
+} */
 
 void simulatorDialog::on_holdLeftX_clicked(bool checked)
 {

@@ -13,24 +13,23 @@
  * GNU General Public License for more details.
  *
  */
+
 #define SIMU
+#define PCBX9D
+#define CPUARM
+#define SDCARD
+
 #include "open9xx9dsimulator.h"
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 
-#define PCBX9D
-#define CPUARM
-#define REVB
-#define SDCARD
-
 namespace Open9xX9D {
 #include "../open9x/x9d/STM32F2xx_StdPeriph_Lib_V1.1.0/Libraries/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h"
 #include "../open9x/x9d/STM32F2xx_StdPeriph_Lib_V1.1.0/Libraries/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_gpio.h"
-#include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+#include "../open9x/simpgmspace.h"
 uint8_t getStickMode();
-void setKeys(bool *keys);
 }
 
 using namespace Open9xX9D;

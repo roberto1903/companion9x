@@ -130,20 +130,33 @@ const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second 
 4,1,2,3 , 4,1,3,2 , 4,2,1,3 , 4,2,3,1 , 4,3,1,2 , 4,3,2,1    }; // TODO delete it?
 
 enum EnumKeys {
-  KEY_MENU ,
-  KEY_EXIT ,
-  KEY_DOWN ,
-  KEY_UP  ,
-  KEY_RIGHT ,
-  KEY_LEFT ,
-  TRM_LH_DWN  ,
-  TRM_LH_UP   ,
-  TRM_LV_DWN  ,
-  TRM_LV_UP   ,
-  TRM_RV_DWN  ,
-  TRM_RV_UP   ,
-  TRM_RH_DWN  ,
-  TRM_RH_UP   ,
+  KEY_MENU,
+  KEY_EXIT,
+#if defined(PCBACT)
+  KEY_CLR,
+  KEY_PAGE,
+  KEY_PLUS,  /* Fake, used for rotary encoder */
+  KEY_MINUS, /* Fake, used for rotary encoder */
+#elif defined(PCBX9D)
+  KEY_ENTER,
+  KEY_PAGE,
+  KEY_PLUS,
+  KEY_MINUS,
+#else
+  KEY_DOWN,
+  KEY_UP,
+  KEY_RIGHT,
+  KEY_LEFT,
+#endif
+  TRM_LH_DWN,
+  TRM_LH_UP,
+  TRM_LV_DWN,
+  TRM_LV_UP,
+  TRM_RV_DWN,
+  TRM_RV_UP,
+  TRM_RH_DWN,
+  TRM_RH_UP,
+
   //SW_NC     ,
   //SW_ON     ,
   SW_ThrCt  ,

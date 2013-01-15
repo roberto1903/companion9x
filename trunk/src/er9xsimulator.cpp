@@ -29,6 +29,24 @@ extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);
 #include "./er9x/simpgmspace.h"
 #include "./er9x/audio.h"
+
+#define KEY_CASE(key, pin, mask) \
+    case key: \
+      if (state) pin |= mask; else pin &= ~mask;\
+      break;
+
+void simuSetKey(uint8_t key, bool state)
+{
+  switch (key) {
+    KEY_CASE(KEY_MENU, pinb, (1<<INP_B_KEY_MEN))
+    KEY_CASE(KEY_EXIT, pinb, (1<<INP_B_KEY_EXT))
+    KEY_CASE(KEY_RIGHT, pinb, (1<<INP_B_KEY_RGT))
+    KEY_CASE(KEY_LEFT, pinb, (1<<INP_B_KEY_LFT))
+    KEY_CASE(KEY_UP, pinb, (1<<INP_B_KEY_UP))
+    KEY_CASE(KEY_DOWN, pinb, (1<<INP_B_KEY_DWN))
+  }
+}
+
 }
 
 using namespace Er9x;
