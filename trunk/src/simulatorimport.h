@@ -187,10 +187,10 @@ switch (inputs.sId0) {
 #if defined(PCBX9D)
 simuSetKey(KEY_MENU, inputs.menu);
 simuSetKey(KEY_EXIT, inputs.exit);
-simuSetKey(KEY_PLUS, false);
-simuSetKey(KEY_MINUS, false);
-simuSetKey(KEY_PAGE, false);
-simuSetKey(KEY_ENTER, false);
+simuSetKey(KEY_PLUS, inputs.right);
+simuSetKey(KEY_MINUS, inputs.left);
+simuSetKey(KEY_PAGE, inputs.up);
+simuSetKey(KEY_ENTER, inputs.down);
 #else
 simuSetKey(KEY_MENU, inputs.menu);
 simuSetKey(KEY_EXIT, inputs.exit);
