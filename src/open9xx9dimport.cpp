@@ -1,10 +1,8 @@
 #define SIMU
 #define SIMU_EXCEPTIONS
 #define PCBX9D
-#define LCD 212
 #define CPUARM
 #define REVB
-#define ROTARY_ENCODERS 1
 #define HELI
 #define TEMPLATES
 #define SPLASH
