@@ -68,7 +68,7 @@ namespace Open9xX9D {
 #include "../open9x/translations.cpp"
 #include "../open9x/frsky.cpp"
 #include "../open9x/x9d/audio_driver.cpp"
-#include "../open9x/sky9x/audio.cpp"
+#include "../open9x/audio_arm.cpp"
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
