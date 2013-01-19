@@ -185,6 +185,8 @@ switch (inputs.sId0) {
 
 // keyboard
 #if defined(PCBX9D)
+// TODO remove that
+resetTrims();
 simuSetKey(KEY_MENU, inputs.menu);
 simuSetKey(KEY_EXIT, inputs.exit);
 simuSetKey(KEY_PLUS, inputs.right);

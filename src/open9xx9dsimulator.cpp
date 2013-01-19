@@ -30,6 +30,7 @@ namespace Open9xX9D {
 #include "simulatorimport.h"
 #include "../open9x/simpgmspace.h"
 uint8_t getStickMode();
+void resetTrims();
 }
 
 using namespace Open9xX9D;

@@ -43,7 +43,7 @@
 namespace Open9xX9D {
 #include "../open9x/x9d/board_x9d.cpp"
 #include "../open9x/x9d/pwr_driver.cpp"
-#include "../open9x/x9d/eeprom_driver.cpp"
+// #include "../open9x/x9d/eeprom_driver.cpp"
 #include "../open9x/eeprom_avr.cpp"
 // TODO later #include "../open9x/eeprom_conversions.cpp"
 #include "../open9x/open9x.cpp"
@@ -90,6 +90,12 @@ bool hasExtendedTrims()
 uint8_t getStickMode()
 {
   return g_eeGeneral.stickMode;
+}
+
+void resetTrims()
+{
+  GPIOE->IDR |= PIN_TRIM_LH_L | PIN_TRIM_LH_R | PIN_TRIM_LV_DN | PIN_TRIM_LV_UP;
+  GPIOC->IDR |= PIN_TRIM_RV_DN | PIN_TRIM_RV_UP | PIN_TRIM_RH_L | PIN_TRIM_RH_R;
 }
 
 }
