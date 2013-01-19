@@ -787,7 +787,7 @@ QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
   if (eepromInterface->getBoard()==BOARD_X9DA) {
 //    return NULL; // to be implemented
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
-    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"\" 0x0 0x1000 0\n" + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
+    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
   } else {
     return GetAvrdudeArguments("eeprom:r:", filename);
   }
