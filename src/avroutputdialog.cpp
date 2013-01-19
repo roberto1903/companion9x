@@ -256,6 +256,9 @@ void avrOutputDialog::doAddTextStdErr()
 void avrOutputDialog::doFinished(int code=0)
 {
     addText("\n" HLINE_SEPARATOR);
+    if (code==1 && getProgrammer()=="SAM-BA")
+      code=0;
+    
     if (code) {
       ui->checkBox->setChecked(true);
       addText("\n" + getProgrammer() + tr(" done - exit code %1").arg(code));
@@ -270,7 +273,7 @@ void avrOutputDialog::doFinished(int code=0)
     addText("\n" HLINE_SEPARATOR "\n");
 
     if(lfuse || hfuse || efuse) addReadFuses();
-
+    
     switch(closeOpt)
     {
       case AVR_DIALOG_CLOSE_IF_SUCCESSFUL:
