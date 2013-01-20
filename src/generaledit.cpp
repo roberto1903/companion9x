@@ -50,7 +50,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
     populateBacklightCB(ui->backlightswCB, g_eeGeneral.backlightMode);
-
+    if (!GetEepromInterface()->getCapability(HasBlInvert)) {
+      ui->blinvert_cb->hide();
+      ui->blinvert_label->hide();
+    } else {
+      ui->blinvert_cb->setChecked(g_eeGeneral.blightinv);
+    }
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
     if (!GetEepromInterface()->getCapability(OwnerName)) {
       ui->ownerNameLE->setDisabled(true);
@@ -819,6 +824,12 @@ void GeneralEdit::on_soundModeCB_currentIndexChanged(int index)
 void GeneralEdit::on_PotScrollEnableChkB_stateChanged(int )
 {
     g_eeGeneral.disablePotScroll = ui->PotScrollEnableChkB->isChecked() ? false : true;
+    updateSettings();
+}
+
+void GeneralEdit::on_blinvert_cb_stateChanged(int )
+{
+    g_eeGeneral.blightinv = ui->blinvert_cb->isChecked();
     updateSettings();
 }
 

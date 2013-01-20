@@ -31,8 +31,9 @@ signals:
 
 private slots:
     void on_ownerNameLE_editingFinished();
-    void on_PotScrollEnableChkB_stateChanged(int );
-    void on_BandGapEnableChkB_stateChanged(int );
+    void on_PotScrollEnableChkB_stateChanged(int);
+    void on_blinvert_cb_stateChanged(int);
+    void on_BandGapEnableChkB_stateChanged(int);
     void on_speakerPitchSB_editingFinished();
     void on_timezoneSB_editingFinished();
     void on_hapticStrengthSB_editingFinished();

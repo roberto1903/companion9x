@@ -86,19 +86,21 @@ PACK(typedef struct t_Er9xGeneral {
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
-  //uint8_t   respre[2]; //mike please check these are correct
-  uint8_t   FRSkyYellow:4;
-  uint8_t   FRSkyOrange:4;
-  uint8_t   FRSkyRed:4;  //mike please check these are correct
-  uint8_t   hideNameOnSplash:1;
-  uint8_t   spare:3; 
-  uint8_t   speakerPitch;
-  uint8_t   hapticStrength;
-  uint8_t   speakerMode;
-  uint8_t   lightOnStickMove;
+  uint8_t unused1;
+  uint8_t unused2:4;
+  uint8_t hideNameOnSplash:1;
+  uint8_t enablePpmsim:1;
+  uint8_t blightinv:1;
+  uint8_t spare:1;
+  uint8_t speakerPitch;
+  uint8_t hapticStrength;
+  uint8_t speakerMode;
+  uint8_t lightOnStickMove;
 
-  char      ownerName[10];
+  char     ownerName[10];
   uint8_t switchWarningStates;
+  uint8_t volume ;
+  uint8_t res[3];
 
   operator GeneralSettings();
   t_Er9xGeneral();
