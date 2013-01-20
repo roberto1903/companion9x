@@ -401,6 +401,7 @@ class GeneralSettings {
     bool      disableSplashScreen;
     uint8_t   filterInput; // TODO enum
     uint8_t   backlightDelay;
+    bool   blightinv;
     uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int8_t    PPM_Multiplier;
     int8_t    hapticLength;
@@ -818,6 +819,7 @@ enum Capability {
  Haptic,
  HapticLength,
  HapticMode,
+ HasBlInvert,
  BandgapMeasure,
  PotScrolling,
  TrainerSwitch,

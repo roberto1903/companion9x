@@ -783,38 +783,44 @@ QStringList MainWindow::GetSambaArguments(const QString &tcl)
 
 QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
 {
+  QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
   if (eepromInterface->getBoard()==BOARD_X9DA) {
 //    return NULL; // to be implemented
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
-    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
+    ret=GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
   } else {
-    return GetAvrdudeArguments("eeprom:r:", filename);
+    ret=GetAvrdudeArguments("eeprom:r:", filename);
   }
+  return ret;
 }
 
 QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 {
+  QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
   if (eepromInterface->getBoard()==BOARD_X9DA) {
 //    return NULL;  // to be implemented
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
-    return GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
+    ret=GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
   } else {
-    return GetAvrdudeArguments("eeprom:w:", filename);
+    ret=GetAvrdudeArguments("eeprom:w:", filename);
   }
+  return ret;
 }
 
 QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 {
+  QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
   if (eepromInterface->getBoard()==BOARD_X9DA) {
-    return GetDFUUtilArguments("-D", filename);    
+    ret=GetDFUUtilArguments("-D", filename);    
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
-    return GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
+    ret=GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
   } else {
-    return GetAvrdudeArguments("flash:w:", filename);
+    ret=GetAvrdudeArguments("flash:w:", filename);
   }
+  return ret;
 }
 
 QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)

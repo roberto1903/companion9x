@@ -141,6 +141,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   disablePotScroll=(c9x.disablePotScroll ? 1 : 0);
   disableBG=(c9x.disableBG ? 1 :0);
   filterInput = c9x.filterInput;
+  blightinv=(c9x.blightinv ? 1 : 0);
 
   if (c9x.backlightMode == 4)
     lightSw = 22;
@@ -154,7 +155,7 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   setEEPROMString(ownerName, c9x.ownerName, sizeof(ownerName));
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
-
+  
   speakerMode = c9x.speakerMode;
   switchWarningStates =c9x.switchWarningStates;
   
@@ -175,6 +176,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.vBatWarn = vBatWarn;
   result.vBatCalib = vBatCalib;
   result.trainer = trainer;
+  result.blightinv=blightinv;
   result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = disableSwitchWarning ? 0 : -1;

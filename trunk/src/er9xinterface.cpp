@@ -287,6 +287,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case BLonStickMove:
       return 1;
+    case HasBlInvert:
+      return 1;
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASWSHH;
     case TelemetryUnits:
