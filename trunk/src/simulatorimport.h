@@ -132,8 +132,8 @@ if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
 if (inputs.sGea) ping &= ~(1<<INP_G_Gear); else ping |= (1<<INP_G_Gear);
 if (inputs.sTrn) pinb &= ~(1<<INP_B_Trainer); else pinb |= (1<<INP_B_Trainer);
 #else
-if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
-if (inputs.sEle) pine &= ~(1<<INP_E_ElevDR); else pine |= (1<<INP_E_ElevDR);
+  if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
+  if (inputs.sEle) pine &= ~(1<<INP_E_ElevDR); else pine |= (1<<INP_E_ElevDR);
 #if defined(JETI) || defined(FRSKY)
   if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
   if (inputs.sThr) pinc &= ~(1<<INP_C_ThrCt); else pinc |= (1<<INP_C_ThrCt);
@@ -183,7 +183,7 @@ switch (inputs.sId0) {
     break;
 }
 
-for (int i=0; i<NUM_STICKS; i++)
+for (int i=0; i<NUM_STICKS*2; i++)
   simuSetTrim(i, 0);
 
 // keyboard
@@ -210,8 +210,7 @@ if (inputs.re1) pind |= 0x20;
 #endif
 
 #ifdef PCBSKY9X
-PIOB->PIO_PDSR |= 0x40;
-if (inputs.re1) PIOB->PIO_PDSR &= ~0x40;
+if (inputs.re1) PIOB->PIO_PDSR &= ~0x40; else PIOB->PIO_PDSR |= 0x40;
 #endif
 #endif
 
