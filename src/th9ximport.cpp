@@ -95,5 +95,31 @@ void simuSetTrim(uint8_t trim, bool state)
   }
 }
 
+
+#define SWITCH_CASE(swtch, pin, mask) \
+    case swtch: \
+      if (state) pin &= ~(mask); else pin |= (mask); \
+      break;
+#define SWITCH_3_CASE(swtch, pin1, pin2, mask1, mask2) \
+    case swtch: \
+      if (state >= 0) pin1 &= ~(mask1); else pin1 |= (mask1); \
+      if (state <= 0) pin2 &= ~(mask2); else pin2 |= (mask2); \
+      break;
+
+void simuSetSwitch(uint8_t swtch, int8_t state)
+{
+  switch (swtch) {
+    SWITCH_CASE(0, pine, 1<<INP_E_ThrCt)
+    SWITCH_CASE(4, pine, 1<<INP_E_AileDR)
+    SWITCH_3_CASE(3, ping, pine, (1<<INP_G_ID1), (1<<INP_E_ID2))
+    SWITCH_CASE(1, ping, 1<<INP_G_RuddDR)
+    SWITCH_CASE(2, pine, 1<<INP_E_ElevDR)
+    SWITCH_CASE(5, pine, 1<<INP_E_Gear)
+    SWITCH_CASE(6, pine, 1<<INP_E_Trainer)
+    default:
+      break;
+  }
+}
+
 }
 

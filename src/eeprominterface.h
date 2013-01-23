@@ -129,6 +129,7 @@ const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second 
 3,1,2,4 , 3,1,4,2 , 3,2,1,4 , 3,2,4,1 , 3,4,1,2 , 3,4,2,1,
 4,1,2,3 , 4,1,3,2 , 4,2,1,3 , 4,2,3,1 , 4,3,1,2 , 4,3,2,1    }; // TODO delete it?
 
+// TODO remove this enum!
 enum EnumKeys {
   KEY_MENU,
   KEY_EXIT,
@@ -148,26 +149,6 @@ enum EnumKeys {
   KEY_RIGHT,
   KEY_LEFT,
 #endif
-  TRM_LH_DWN,
-  TRM_LH_UP,
-  TRM_LV_DWN,
-  TRM_LV_UP,
-  TRM_RV_DWN,
-  TRM_RV_UP,
-  TRM_RH_DWN,
-  TRM_RH_UP,
-
-  //SW_NC     ,
-  //SW_ON     ,
-  SW_ThrCt  ,
-  SW_RuddDR ,
-  SW_ElevDR ,
-  SW_ID0    ,
-  SW_ID1    ,
-  SW_ID2    ,
-  SW_AileDR ,
-  SW_Gear   ,
-  SW_Trainer
 };
 
 #define SW_BASE      SW_ThrCt

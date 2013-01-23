@@ -27,20 +27,9 @@ extern uint8_t portb, portc;
 
 #define INP_E_ID2     6
 #define OUT_E_BUZZER  3
-#define INP_E_AileDR  1
-#define INP_E_ThrCt   0
-#define INP_E_ElevDR  2
-#define INP_E_Trainer 5
-#define INP_E_Gear    4
-#define INP_C_ThrCt   6
-#define INP_C_ElevDR  6
-#define INP_C_AileDR  7
-#define INP_G_ID1     3
 #define INP_G_RF_POW  1
-#define INP_G_ThrCt   2
-#define INP_G_RuddDR  0
-#define INP_G_Gear    5
 
+// TODO remove
 #define INP_P_KEY_EXT 5
 #define INP_P_KEY_MEN 4
 #define INP_P_KEY_LFT 3
@@ -110,78 +99,18 @@ for (int i=0; i<4; i++)
 for (int i=0; i<3; i++)
   g_anas[4+i] = inputs.pots[i];
 
-#ifdef PCBGRUVIN9X
-pinj = 0;
-pinl = 0;
-#endif
-
-#if defined(PCBX9D)
+#if defined(PCBACT)
+#elif defined(PCBX9D)
 // TODO
-#elif defined(PCBSKY9X)
-if (inputs.sThr) PIOC->PIO_PDSR |= (1<<20); else PIOC->PIO_PDSR &= ~(1<<20);
-if (inputs.sRud) PIOA->PIO_PDSR |= (1<<15); else PIOA->PIO_PDSR &= ~(1<<15);
-if (inputs.sEle) PIOC->PIO_PDSR |= (1<<31); else PIOC->PIO_PDSR &= ~(1<<31);
-if (inputs.sAil) PIOA->PIO_PDSR |= (1<<2); else PIOA->PIO_PDSR &= ~(1<<2);
-if (inputs.sGea) PIOC->PIO_PDSR |= (1<<16); else PIOC->PIO_PDSR &= ~(1<<16);
-if (inputs.sTrn) PIOC->PIO_PDSR |= (1<<8); else PIOC->PIO_PDSR &= ~(1<<8);
-#elif defined(PCBGRUVIN9X)
-if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
-if (inputs.sEle) pinc &= ~(1<<INP_C_ElevDR); else pinc |= (1<<INP_C_ElevDR);
-if (inputs.sThr) ping &= ~(1<<INP_G_ThrCt); else ping |= (1<<INP_G_ThrCt);
-if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
-if (inputs.sGea) ping &= ~(1<<INP_G_Gear); else ping |= (1<<INP_G_Gear);
-if (inputs.sTrn) pinb &= ~(1<<INP_B_Trainer); else pinb |= (1<<INP_B_Trainer);
 #else
-  if (inputs.sRud) ping &= ~(1<<INP_G_RuddDR); else ping |= (1<<INP_G_RuddDR);
-  if (inputs.sEle) pine &= ~(1<<INP_E_ElevDR); else pine |= (1<<INP_E_ElevDR);
-#if defined(JETI) || defined(FRSKY)
-  if (inputs.sAil) pinc &= ~(1<<INP_C_AileDR); else pinc |= (1<<INP_C_AileDR);
-  if (inputs.sThr) pinc &= ~(1<<INP_C_ThrCt); else pinc |= (1<<INP_C_ThrCt);
-#else
-  if (inputs.sAil) pine &= ~(1<<INP_E_AileDR); else pine |= (1<<INP_E_AileDR);
-  if (inputs.sThr) pine &= ~(1<<INP_E_ThrCt); else pine |= (1<<INP_E_ThrCt);
+simuSetSwitch(0, inputs.sRud);
+simuSetSwitch(1, inputs.sThr);
+simuSetSwitch(2, inputs.sEle);
+simuSetSwitch(3, inputs.sId0);
+simuSetSwitch(4, inputs.sAil);
+simuSetSwitch(5, inputs.sGea);
+simuSetSwitch(6, inputs.sTrn);
 #endif
-if (inputs.sGea) pine &= ~(1<<INP_E_Gear); else pine |= (1<<INP_E_Gear);
-if (inputs.sTrn) pine &= ~(1<<INP_E_Trainer); else pine |= (1<<INP_E_Trainer);
-#endif
-
-switch (inputs.sId0) {
-  case 2:
-#if defined(PCBSKY9X)
-    PIOC->PIO_PDSR &= ~0x00000800;
-    PIOC->PIO_PDSR |= 0x00004000;
-#elif defined(PCBGRUVIN9X)
-    ping &= ~(1<<INP_G_ID1);
-    pinb |= (1<<INP_B_ID2);
-#else
-    ping &= ~(1<<INP_G_ID1);
-    pine |= (1<<INP_E_ID2);
-#endif
-    break;
-  case 1:
-#if defined(PCBSKY9X)
-    PIOC->PIO_PDSR |= 0x00004800;
-#elif defined(PCBGRUVIN9X)
-    ping &= ~(1<<INP_G_ID1);
-    pinb &= ~(1<<INP_B_ID2);
-#else
-    ping &= ~(1<<INP_G_ID1);
-    pine &= ~(1<<INP_E_ID2);
-#endif
-    break;
-  case 0:
-#if defined(PCBSKY9X)
-    PIOC->PIO_PDSR &= ~0x00004000;
-    PIOC->PIO_PDSR |= 0x00000800;
-#elif defined(PCBGRUVIN9X)
-    ping |=  (1<<INP_G_ID1);
-    pinb &= ~(1<<INP_B_ID2);
-#else
-    ping |=  (1<<INP_G_ID1);
-    pine &= ~(1<<INP_E_ID2);
-#endif
-    break;
-}
 
 for (int i=0; i<NUM_STICKS*2; i++)
   simuSetTrim(i, 0);

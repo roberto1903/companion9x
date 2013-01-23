@@ -73,5 +73,31 @@ void getTrims(int16_t values[4])
     values[i] = g_model.trim[i];
 }
 
+#define SWITCH_CASE(swtch, pin, mask) \
+    case swtch: \
+      if (state) pin |= (mask); else pin &= ~(mask); \
+      break;
+#define SWITCH_3_CASE(swtch, pin1, pin2, mask1, mask2) \
+    case swtch: \
+      if (state < 0) pin1 &= ~(mask1); else pin1 |= (mask1); \
+      if (state > 0) pin2 &= ~(mask2); else pin2 |= (mask2); \
+      break;
+
+void simuSetSwitch(uint8_t swtch, int8_t state)
+{
+  // printf("swtch=%d state=%d\n", swtch, state); fflush(stdout);
+  switch (swtch) {
+    SWITCH_CASE(0, PIOC->PIO_PDSR, 1<<20)
+    SWITCH_CASE(1, PIOA->PIO_PDSR, 1<<15)
+    SWITCH_CASE(2, PIOC->PIO_PDSR, 1<<31)
+    SWITCH_3_CASE(3, PIOC->PIO_PDSR, PIOC->PIO_PDSR, 0x00004000, 0x00000800)
+    SWITCH_CASE(4, PIOA->PIO_PDSR, 1<<2)
+    SWITCH_CASE(5, PIOC->PIO_PDSR, 1<<16)
+    SWITCH_CASE(6, PIOC->PIO_PDSR, 1<<8)
+
+    default:
+      break;
+  }
 }
 
+}
