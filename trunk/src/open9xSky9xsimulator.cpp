@@ -14,7 +14,7 @@
  *
  */
 
-#include "open9xarmsimulator.h"
+#include "open9xSky9xsimulator.h"
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 
@@ -24,7 +24,7 @@
 #define SDCARD
 #define ROTARY_ENCODERS 1
 
-namespace Open9xARM {
+namespace Open9xSky9x {
 #include "../open9x/sky9x/AT91SAM3S4.h"
 #include "../open9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
@@ -32,65 +32,65 @@ namespace Open9xARM {
 uint8_t getStickMode();
 }
 
-using namespace Open9xARM;
+using namespace Open9xSky9x;
 
-Open9xARMSimulator::Open9xARMSimulator(Open9xInterface * open9xInterface):
+Open9xSky9xSimulator::Open9xSky9xSimulator(Open9xInterface * open9xInterface):
   open9xInterface(open9xInterface)
 {
 }
 
-bool Open9xARMSimulator::timer10ms()
+bool Open9xSky9xSimulator::timer10ms()
 {
 #define TIMER10MS_IMPORT
 #include "simulatorimport.h"
 }
 
-uint8_t * Open9xARMSimulator::getLcd()
+uint8_t * Open9xSky9xSimulator::getLcd()
 {
 #define GETLCD_IMPORT
 #include "simulatorimport.h"
 }
 
-bool Open9xARMSimulator::lcdChanged(bool & lightEnable)
+bool Open9xSky9xSimulator::lcdChanged(bool & lightEnable)
 {
 #define LCDCHANGED_IMPORT
 #include "simulatorimport.h"
 }
 
-void Open9xARMSimulator::start(RadioData &radioData, bool tests)
+void Open9xSky9xSimulator::start(RadioData &radioData, bool tests)
 {
   g_rotenc[0] = 0;
-  open9xInterface->save(Open9xARM::eeprom, radioData);
+  open9xInterface->save(Open9xSky9x::eeprom, radioData);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }
 
-void Open9xARMSimulator::stop()
+void Open9xSky9xSimulator::stop()
 {
   StopMainThread();
   StopEepromThread();
 }
 
-void Open9xARMSimulator::getValues(TxOutputs &outputs)
+void Open9xSky9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #include "simulatorimport.h"
 }
 
-void Open9xARMSimulator::setValues(TxInputs &inputs)
+void Open9xSky9xSimulator::setValues(TxInputs &inputs)
 {
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }
 
-void Open9xARMSimulator::setTrim(unsigned int idx, int value)
+void Open9xSky9xSimulator::setTrim(unsigned int idx, int value)
 {
   idx = modn12x3[getStickMode()][idx] - 1;
   uint8_t phase = getTrimFlightPhase(getFlightPhase(), idx);
   setTrimValue(phase, idx, value);
 }
 
-void Open9xARMSimulator::getTrims(Trims & trims)
+void Open9xSky9xSimulator::getTrims(Trims & trims)
 {
   uint8_t phase = getFlightPhase();
   trims.extended = hasExtendedTrims();
@@ -106,17 +106,17 @@ void Open9xARMSimulator::getTrims(Trims & trims)
   }
 }
 
-void Open9xARMSimulator::wheelEvent(uint8_t steps)
+void Open9xSky9xSimulator::wheelEvent(uint8_t steps)
 {
   g_rotenc[0] += steps*4;
 }
 
-unsigned int Open9xARMSimulator::getPhase()
+unsigned int Open9xSky9xSimulator::getPhase()
 {
   return getFlightPhase();
 }
 
-const char * Open9xARMSimulator::getError()
+const char * Open9xSky9xSimulator::getError()
 {
 #define GETERROR_IMPORT
 #include "simulatorimport.h"

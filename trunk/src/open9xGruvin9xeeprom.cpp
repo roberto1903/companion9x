@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "helpers.h"
-#include "open9xv4eeprom.h"
+#include "open9xGruvin9xeeprom.h"
 #include <QObject>
 #include <QMessageBox>
 
@@ -11,7 +11,7 @@ extern void getEEPROMZString(char *dst, const char *src, int size);
 extern int8_t open9xFromSwitch(const RawSwitch & sw);
 extern RawSwitch open9xToSwitch(int8_t sw);
 
-t_Open9xV4TimerData_v212::operator TimerData ()
+t_Open9xGruvin9xTimerData_v212::operator TimerData ()
 {
   TimerData c9x;
 
@@ -32,7 +32,7 @@ t_Open9xV4TimerData_v212::operator TimerData ()
   return c9x;
 }
 
-t_Open9xV4TimerData_v212::t_Open9xV4TimerData_v212(TimerData &c9x)
+t_Open9xGruvin9xTimerData_v212::t_Open9xGruvin9xTimerData_v212(TimerData &c9x)
 {
   start = c9x.val;
 
@@ -52,7 +52,7 @@ t_Open9xV4TimerData_v212::t_Open9xV4TimerData_v212(TimerData &c9x)
   remanent = c9x.persistent;
 }
 
-t_Open9xV4PhaseData_v207::operator PhaseData ()
+t_Open9xGruvin9xPhaseData_v207::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
@@ -66,7 +66,7 @@ t_Open9xV4PhaseData_v207::operator PhaseData ()
   return c9x;
 }
 
-t_Open9xV4PhaseData_v207::t_Open9xV4PhaseData_v207(PhaseData &c9x)
+t_Open9xGruvin9xPhaseData_v207::t_Open9xGruvin9xPhaseData_v207(PhaseData &c9x)
 {
   trim_ext = 0;
   for (int i=0; i<NUM_STICKS; i++) {
@@ -81,7 +81,7 @@ t_Open9xV4PhaseData_v207::t_Open9xV4PhaseData_v207(PhaseData &c9x)
     rotaryEncoders[i] = c9x.rotaryEncoders[i];
 }
 
-t_Open9xV4PhaseData_v208::operator PhaseData ()
+t_Open9xGruvin9xPhaseData_v208::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
@@ -95,7 +95,7 @@ t_Open9xV4PhaseData_v208::operator PhaseData ()
   return c9x;
 }
 
-t_Open9xV4PhaseData_v208::t_Open9xV4PhaseData_v208(PhaseData &c9x)
+t_Open9xGruvin9xPhaseData_v208::t_Open9xGruvin9xPhaseData_v208(PhaseData &c9x)
 {
   for (int i=0; i<NUM_STICKS; i++)
     trim[i] = c9x.trim[i];
@@ -107,7 +107,7 @@ t_Open9xV4PhaseData_v208::t_Open9xV4PhaseData_v208(PhaseData &c9x)
     rotaryEncoders[i] = c9x.rotaryEncoders[i];
 }
 
-t_Open9xV4PhaseData_v212::operator PhaseData ()
+t_Open9xGruvin9xPhaseData_v212::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
@@ -123,7 +123,7 @@ t_Open9xV4PhaseData_v212::operator PhaseData ()
   return c9x;
 }
 
-t_Open9xV4PhaseData_v212::t_Open9xV4PhaseData_v212(PhaseData &c9x)
+t_Open9xGruvin9xPhaseData_v212::t_Open9xGruvin9xPhaseData_v212(PhaseData &c9x)
 {
   for (int i=0; i<NUM_STICKS; i++)
     trim[i] = c9x.trim[i];
@@ -137,7 +137,7 @@ t_Open9xV4PhaseData_v212::t_Open9xV4PhaseData_v212(PhaseData &c9x)
     gvars[i] = c9x.gvars[i];
 }
 
-t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
+t_Open9xGruvin9xMixData_v207::t_Open9xGruvin9xMixData_v207(MixData &c9x)
 {
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
@@ -222,11 +222,11 @@ t_Open9xV4MixData_v207::t_Open9xV4MixData_v207(MixData &c9x)
     sOffset = c9x.sOffset;
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4MixData_v207));
+    memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v207));
   }
 }
 
-t_Open9xV4MixData_v207::operator MixData ()
+t_Open9xGruvin9xMixData_v207::operator MixData ()
 {
   MixData c9x;
   if (srcRaw) {
@@ -283,7 +283,7 @@ t_Open9xV4MixData_v207::operator MixData ()
   return c9x;
 }
 
-t_Open9xV4MixData_v209::t_Open9xV4MixData_v209(MixData &c9x)
+t_Open9xGruvin9xMixData_v209::t_Open9xGruvin9xMixData_v209(MixData &c9x)
 {
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
@@ -371,11 +371,11 @@ t_Open9xV4MixData_v209::t_Open9xV4MixData_v209(MixData &c9x)
     sOffset = c9x.sOffset;
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4MixData_v207));
+    memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v207));
   }
 }
 
-t_Open9xV4MixData_v209::operator MixData ()
+t_Open9xGruvin9xMixData_v209::operator MixData ()
 {
   MixData c9x;
   if (srcRaw) {
@@ -435,7 +435,7 @@ t_Open9xV4MixData_v209::operator MixData ()
   return c9x;
 }
 
-t_Open9xV4MixData_v211::t_Open9xV4MixData_v211(MixData &c9x)
+t_Open9xGruvin9xMixData_v211::t_Open9xGruvin9xMixData_v211(MixData &c9x)
 {
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
@@ -491,11 +491,11 @@ t_Open9xV4MixData_v211::t_Open9xV4MixData_v211(MixData &c9x)
     sOffset = c9x.sOffset;
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4MixData_v211));
+    memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v211));
   }
 }
 
-t_Open9xV4MixData_v211::operator MixData ()
+t_Open9xGruvin9xMixData_v211::operator MixData ()
 {
   MixData c9x;
   if (srcRaw) {
@@ -673,7 +673,7 @@ RawSource open9xV4209ToSource(int8_t value)
   }
 }
 
-t_Open9xV4CustomSwData_v207::t_Open9xV4CustomSwData_v207(CustomSwData &c9x)
+t_Open9xGruvin9xCustomSwData_v207::t_Open9xGruvin9xCustomSwData_v207(CustomSwData &c9x)
 {
   func = c9x.func;
   v1 = c9x.val1;
@@ -700,7 +700,7 @@ t_Open9xV4CustomSwData_v207::t_Open9xV4CustomSwData_v207(CustomSwData &c9x)
   }  
 }
 
-Open9xV4CustomSwData_v207::operator CustomSwData ()
+Open9xGruvin9xCustomSwData_v207::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
@@ -723,7 +723,7 @@ Open9xV4CustomSwData_v207::operator CustomSwData ()
   return c9x;
 }
 
-t_Open9xV4CustomSwData_v209::t_Open9xV4CustomSwData_v209(CustomSwData &c9x)
+t_Open9xGruvin9xCustomSwData_v209::t_Open9xGruvin9xCustomSwData_v209(CustomSwData &c9x)
 {
   func = c9x.func;
   v1 = c9x.val1;
@@ -743,7 +743,7 @@ t_Open9xV4CustomSwData_v209::t_Open9xV4CustomSwData_v209(CustomSwData &c9x)
   }
 }
 
-Open9xV4CustomSwData_v209::operator CustomSwData ()
+Open9xGruvin9xCustomSwData_v209::operator CustomSwData ()
 {
   CustomSwData c9x;
   c9x.func = func;
@@ -766,7 +766,7 @@ Open9xV4CustomSwData_v209::operator CustomSwData ()
   return c9x;
 }
 
-t_Open9xV4FuncSwData_v203::t_Open9xV4FuncSwData_v203(FuncSwData &c9x)
+t_Open9xGruvin9xFuncSwData_v203::t_Open9xGruvin9xFuncSwData_v203(FuncSwData &c9x)
 {
   swtch = open9xFromSwitch(c9x.swtch);
   if (c9x.func <= FuncSafetyCh16) {
@@ -805,7 +805,7 @@ t_Open9xV4FuncSwData_v203::t_Open9xV4FuncSwData_v203(FuncSwData &c9x)
   }
 }
 
-t_Open9xV4FuncSwData_v203::operator FuncSwData ()
+t_Open9xGruvin9xFuncSwData_v203::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
@@ -844,7 +844,7 @@ t_Open9xV4FuncSwData_v203::operator FuncSwData ()
   return c9x;
 }
 
-t_Open9xV4FuncSwData_v210::t_Open9xV4FuncSwData_v210(FuncSwData &c9x)
+t_Open9xGruvin9xFuncSwData_v210::t_Open9xGruvin9xFuncSwData_v210(FuncSwData &c9x)
 {
   swtch = open9xFromSwitch(c9x.swtch);
   param = c9x.param;
@@ -875,7 +875,7 @@ t_Open9xV4FuncSwData_v210::t_Open9xV4FuncSwData_v210(FuncSwData &c9x)
   }
 }
 
-t_Open9xV4FuncSwData_v210::operator FuncSwData ()
+t_Open9xGruvin9xFuncSwData_v210::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
@@ -904,7 +904,7 @@ t_Open9xV4FuncSwData_v210::operator FuncSwData ()
   return c9x;
 }
 
-t_Open9xV4FuncSwData_v212::t_Open9xV4FuncSwData_v212(FuncSwData &c9x)
+t_Open9xGruvin9xFuncSwData_v212::t_Open9xGruvin9xFuncSwData_v212(FuncSwData &c9x)
 {
   swtch = open9xFromSwitch(c9x.swtch);
   param = c9x.param;
@@ -937,7 +937,7 @@ t_Open9xV4FuncSwData_v212::t_Open9xV4FuncSwData_v212(FuncSwData &c9x)
   }
 }
 
-t_Open9xV4FuncSwData_v212::operator FuncSwData ()
+t_Open9xGruvin9xFuncSwData_v212::operator FuncSwData ()
 {
   FuncSwData c9x;
   c9x.swtch = open9xToSwitch(swtch);
@@ -970,7 +970,7 @@ t_Open9xV4FuncSwData_v212::operator FuncSwData ()
   return c9x;
 }
 
-t_Open9xV4SwashRingData_v208::t_Open9xV4SwashRingData_v208(SwashRingData &c9x)
+t_Open9xGruvin9xSwashRingData_v208::t_Open9xGruvin9xSwashRingData_v208(SwashRingData &c9x)
 {
   invertELE = c9x.invertELE;
   invertAIL = c9x.invertAIL;
@@ -980,7 +980,7 @@ t_Open9xV4SwashRingData_v208::t_Open9xV4SwashRingData_v208(SwashRingData &c9x)
   value = c9x.value;
 }
 
-t_Open9xV4SwashRingData_v208::operator SwashRingData ()
+t_Open9xGruvin9xSwashRingData_v208::operator SwashRingData ()
 {
   SwashRingData c9x;
   c9x.invertELE = invertELE;
@@ -992,7 +992,7 @@ t_Open9xV4SwashRingData_v208::operator SwashRingData ()
   return c9x;
 }
 
-t_Open9xV4SwashRingData_v209::t_Open9xV4SwashRingData_v209(SwashRingData &c9x)
+t_Open9xGruvin9xSwashRingData_v209::t_Open9xGruvin9xSwashRingData_v209(SwashRingData &c9x)
 {
   invertELE = c9x.invertELE;
   invertAIL = c9x.invertAIL;
@@ -1002,7 +1002,7 @@ t_Open9xV4SwashRingData_v209::t_Open9xV4SwashRingData_v209(SwashRingData &c9x)
   value = c9x.value;
 }
 
-t_Open9xV4SwashRingData_v209::operator SwashRingData ()
+t_Open9xGruvin9xSwashRingData_v209::operator SwashRingData ()
 {
   SwashRingData c9x;
   c9x.invertELE = invertELE;
@@ -1014,7 +1014,7 @@ t_Open9xV4SwashRingData_v209::operator SwashRingData ()
   return c9x;
 }
 
-t_Open9xV4ModelData_v207::operator ModelData ()
+t_Open9xGruvin9xModelData_v207::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -1099,7 +1099,7 @@ t_Open9xV4ModelData_v207::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_207 761
-t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
+t_Open9xGruvin9xModelData_v207::t_Open9xGruvin9xModelData_v207(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_207) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_207));
@@ -1196,12 +1196,12 @@ t_Open9xV4ModelData_v207::t_Open9xV4ModelData_v207(ModelData &c9x)
     }
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4ModelData_v207));
+    memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v207));
   }
 }
 
 
-t_Open9xV4ModelData_v208::operator ModelData ()
+t_Open9xGruvin9xModelData_v208::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -1294,7 +1294,7 @@ t_Open9xV4ModelData_v208::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_208 794
-t_Open9xV4ModelData_v208::t_Open9xV4ModelData_v208(ModelData &c9x)
+t_Open9xGruvin9xModelData_v208::t_Open9xGruvin9xModelData_v208(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_208) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_208));
@@ -1400,11 +1400,11 @@ t_Open9xV4ModelData_v208::t_Open9xV4ModelData_v208(ModelData &c9x)
     }
   }
   else {
-    memset(this, 0, sizeof(t_Open9xV4ModelData_v208));
+    memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v208));
   }
 }
 
-t_Open9xV4ModelData_v209::operator ModelData ()
+t_Open9xGruvin9xModelData_v209::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -1498,13 +1498,13 @@ t_Open9xV4ModelData_v209::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_209 795
-t_Open9xV4ModelData_v209::t_Open9xV4ModelData_v209(ModelData &c9x)
+t_Open9xGruvin9xModelData_v209::t_Open9xGruvin9xModelData_v209(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_209) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_209));
   }
 
-  memset(this, 0, sizeof(t_Open9xV4ModelData_v209));
+  memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v209));
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
@@ -1609,7 +1609,7 @@ t_Open9xV4ModelData_v209::t_Open9xV4ModelData_v209(ModelData &c9x)
 }
 
 
-t_Open9xV4ModelData_v210::operator ModelData ()
+t_Open9xGruvin9xModelData_v210::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -1694,13 +1694,13 @@ t_Open9xV4ModelData_v210::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_210 796
-t_Open9xV4ModelData_v210::t_Open9xV4ModelData_v210(ModelData &c9x)
+t_Open9xGruvin9xModelData_v210::t_Open9xGruvin9xModelData_v210(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_210) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_210));
   }
 
-  memset(this, 0, sizeof(t_Open9xV4ModelData_v210));
+  memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v210));
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
@@ -1806,7 +1806,7 @@ t_Open9xV4ModelData_v210::t_Open9xV4ModelData_v210(ModelData &c9x)
   }
 }
 
-t_Open9xV4ModelData_v211::operator ModelData ()
+t_Open9xGruvin9xModelData_v211::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -1890,13 +1890,13 @@ t_Open9xV4ModelData_v211::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_V4_211 784
-t_Open9xV4ModelData_v211::t_Open9xV4ModelData_v211(ModelData &c9x)
+t_Open9xGruvin9xModelData_v211::t_Open9xGruvin9xModelData_v211(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_V4_211) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_V4_211));
   }
 
-  memset(this, 0, sizeof(t_Open9xV4ModelData_v211));
+  memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v211));
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
@@ -2002,7 +2002,7 @@ t_Open9xV4ModelData_v211::t_Open9xV4ModelData_v211(ModelData &c9x)
   }
 }
 
-t_Open9xV4ModelData_v212::operator ModelData ()
+t_Open9xGruvin9xModelData_v212::operator ModelData ()
 {
   ModelData c9x;
   c9x.used = true;
@@ -2090,13 +2090,13 @@ t_Open9xV4ModelData_v212::operator ModelData ()
 }
 
 #define MODEL_DATA_SIZE_V4_212 874
-t_Open9xV4ModelData_v212::t_Open9xV4ModelData_v212(ModelData &c9x)
+t_Open9xGruvin9xModelData_v212::t_Open9xGruvin9xModelData_v212(ModelData &c9x)
 {
   if (sizeof(*this) != MODEL_DATA_SIZE_V4_212) {
     QMessageBox::warning(NULL, "companion9x", QString("Open9xModelData wrong size (%1 instead of %2)").arg(sizeof(*this)).arg(MODEL_DATA_SIZE_V4_212));
   }
 
-  memset(this, 0, sizeof(t_Open9xV4ModelData_v212));
+  memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v212));
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));

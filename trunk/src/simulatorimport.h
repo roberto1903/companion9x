@@ -72,10 +72,10 @@ extern volatile uint8_t g_rotenc[2];
 extern volatile uint32_t g_rotenc[1];
 #endif
 
-#if defined(PCBX9DA)
-extern uint8_t lcd_buf[128*64/8];
-#else
+#if defined(PCBX9D)
 extern uint8_t lcd_buf[212*64];
+#else
+extern uint8_t lcd_buf[128*64/8];
 #endif
 
 extern bool lcd_refresh;
@@ -183,10 +183,11 @@ switch (inputs.sId0) {
     break;
 }
 
+for (int i=0; i<NUM_STICKS; i++)
+  simuSetTrim(i, 0);
+
 // keyboard
 #if defined(PCBX9D)
-// TODO remove that
-resetTrims();
 simuSetKey(KEY_MENU, inputs.menu);
 simuSetKey(KEY_EXIT, inputs.exit);
 simuSetKey(KEY_PLUS, inputs.right);

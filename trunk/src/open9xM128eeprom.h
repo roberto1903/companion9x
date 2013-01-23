@@ -18,7 +18,7 @@
 #define open9xM128eeprom_h
 
 #include "open9xeeprom.h"
-#include "open9xv4eeprom.h"
+#include "open9xGruvin9xeeprom.h"
 
 PACK(typedef struct t_Open9xM128PhaseData_v212 {
   int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead

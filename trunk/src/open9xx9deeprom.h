@@ -14,8 +14,8 @@
  *
  */
 
-#ifndef open9xarmeeprom_h
-#define open9xarmeeprom_h
+#ifndef open9xSky9xeeprom_h
+#define open9xSky9xeeprom_h
 
 #include "open9xeeprom.h"
 

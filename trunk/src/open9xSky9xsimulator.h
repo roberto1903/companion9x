@@ -14,19 +14,19 @@
  *
  */
 
-#ifndef open9xarm_simulator_h
-#define open9xarm_simulator_h
+#ifndef open9xSky9x_simulator_h
+#define open9xSky9x_simulator_h
 
 #include "simulatorinterface.h"
 
 class RadioData;
 class Open9xInterface;
 
-class Open9xARMSimulator : public SimulatorInterface {
+class Open9xSky9xSimulator : public SimulatorInterface {
 
   public:
 
-    Open9xARMSimulator(Open9xInterface *);
+    Open9xSky9xSimulator(Open9xInterface *);
 
     virtual void start(RadioData & radioData, bool tests);
 

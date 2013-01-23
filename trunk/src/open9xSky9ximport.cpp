@@ -41,7 +41,7 @@
 
 #include <exception>
 
-namespace Open9xARM {
+namespace Open9xSky9x {
 #include "../open9x/sky9x/board_sky9x.cpp"
 #include "../open9x/sky9x/pwr_driver.cpp"
 #include "../open9x/sky9x/eeprom_driver.cpp"
