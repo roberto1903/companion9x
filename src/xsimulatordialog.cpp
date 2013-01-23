@@ -46,6 +46,7 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
             break;
         default:
             ui->lcd->setRgb(159,165,247);
+            break;
     }
     lightOn=NULL;
     setupSticks();
@@ -143,10 +144,10 @@ void xsimulatorDialog::keyPressEvent (QKeyEvent *event)
     case Qt::Key_Backspace:
       buttonPressed = Qt::Key_Escape;
       break;
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-    case Qt::Key_Right:
-    case Qt::Key_Left:
+    case Qt::Key_Minus:
+    case Qt::Key_Plus:
+    case Qt::Key_PageDown:
+    case Qt::Key_Menu:
       buttonPressed = event->key();
       break;
   }
@@ -159,10 +160,10 @@ void xsimulatorDialog::keyReleaseEvent(QKeyEvent * event)
     case Qt::Key_Return:
     case Qt::Key_Escape:
     case Qt::Key_Backspace:
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-    case Qt::Key_Right:
-    case Qt::Key_Left:
+    case Qt::Key_Plus:
+    case Qt::Key_Minus:
+    case Qt::Key_PageDown:
+    case Qt::Key_Menu:
       buttonPressed = 0;
       break;
   }
@@ -318,12 +319,12 @@ void xsimulatorDialog::getValues()
                      ui->switchE->value(),
                      ui->switchF->value(),
                      ui->switchG->value(),
-                     buttonPressed == Qt::Key_Enter,
+                     buttonPressed == Qt::Key_Menu,
                      buttonPressed == Qt::Key_Escape,
-                     buttonPressed == Qt::Key_Up,
-                     buttonPressed == Qt::Key_Down,
-                     buttonPressed == Qt::Key_Left,
-                     buttonPressed == Qt::Key_Right,
+                     buttonPressed == Qt::Key_PageDown,
+                     buttonPressed == Qt::Key_Enter,
+                     buttonPressed == Qt::Key_Minus,
+                     buttonPressed == Qt::Key_Plus,
                      middleButtonPressed
                     };
 
@@ -577,7 +578,8 @@ void xsimulatorDialog::onjoystickAxisValueChanged(int axis, int value) {
       if (stick==2) {
         nodeRight->setPos(stickval*100/1024-10,currY*100-10);
       } 
-    }  else if (stick==3 || stick==4) {
+    }
+    else if (stick==3 || stick==4) {
       float currX=nodeLeft->getX();
       float currY=nodeLeft->getY();
       if (stick==3) {
