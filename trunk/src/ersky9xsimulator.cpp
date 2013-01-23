@@ -25,6 +25,7 @@ namespace Ersky9x {
 #include "../ersky9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+extern void simuSetSwitch(uint8_t swtch, int8_t state);
 extern void simuSetTrim(uint8_t trim, bool state);
 extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);

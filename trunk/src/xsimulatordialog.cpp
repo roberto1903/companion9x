@@ -488,27 +488,6 @@ void xsimulatorDialog::resizeEvent(QResizeEvent *event)
     QDialog::resizeEvent(event);
 }
 
-bool xsimulatorDialog::keyState(EnumKeys key)
-{
-/*    switch (key)
-    {
-    case (SW_ThrCt):   return ui->switchTHR->isChecked(); break;
-    case (SW_RuddDR):  return ui->switchRUD->isChecked(); break;
-    case (SW_ElevDR):  return ui->switchELE->isChecked(); break;
-    case (SW_ID0):     return ui->switchID0->isChecked(); break;
-    case (SW_ID1):     return ui->switchID1->isChecked(); break;
-    case (SW_ID2):     return ui->switchID2->isChecked(); break;
-    case (SW_AileDR):  return ui->switchAIL->isChecked(); break;
-    case (SW_Gear):    return ui->switchGEA->isChecked(); break;
-    case (SW_Trainer): return ui->switchTRN->isDown(); break;
-    default:
-        return false;
-        break;
-    }
-*/  
-  return false;
-}
-
 void xsimulatorDialog::on_holdLeftX_clicked(bool checked)
 {
     nodeLeft->setCenteringX(!checked);

@@ -77,8 +77,11 @@ void Open9xX9DSimulator::getValues(TxOutputs &outputs)
 #include "simulatorimport.h"
 }
 
-void Open9xX9DSimulator::setValues(TxInputs &inputs)
+void Open9xX9DSimulator::setValues(TxInputs &_inputs)
 {
+  TxInputs inputs = _inputs;
+  inputs.sticks[2] = -inputs.sticks[2];
+  inputs.sticks[3] = -inputs.sticks[3];
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }
