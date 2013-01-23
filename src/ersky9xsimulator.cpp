@@ -25,6 +25,7 @@ namespace Ersky9x {
 #include "../ersky9x/simpgmspace.h"
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+extern void simuSetTrim(uint8_t trim, bool state);
 extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);
 
@@ -55,6 +56,39 @@ void simuSetKey(uint8_t key, bool state)
     KEY_CASE(KEY_LEFT, GPIO_BUTTON_LEFT, PIN_BUTTON_LEFT)
     KEY_CASE(KEY_UP, GPIO_BUTTON_UP, PIN_BUTTON_UP)
     KEY_CASE(KEY_DOWN, GPIO_BUTTON_DOWN, PIN_BUTTON_DOWN)
+  }
+}
+
+#define GPIO_TRIM_LH_L                  PIOA->PIO_PDSR
+#define GPIO_TRIM_LV_DN                 PIOA->PIO_PDSR
+#define GPIO_TRIM_RV_UP                 PIOA->PIO_PDSR
+#define GPIO_TRIM_RH_L                  PIOA->PIO_PDSR
+#define GPIO_TRIM_LH_R                  PIOB->PIO_PDSR
+#define GPIO_TRIM_LV_UP                 PIOC->PIO_PDSR
+#define GPIO_TRIM_RV_DN                 PIOC->PIO_PDSR
+#define GPIO_TRIM_RH_R                  PIOC->PIO_PDSR
+#define PIN_TRIM_LH_L                   0x00800000
+#define PIN_TRIM_LV_DN                  0x01000000
+#define PIN_TRIM_RV_UP                  0x00000002
+#define PIN_TRIM_RH_L                   0x00000001
+#define PIN_TRIM_LH_R                   0x00000010
+#define PIN_TRIM_LV_UP                  0x10000000
+#define PIN_TRIM_RV_DN                  0x00000400
+#define PIN_TRIM_RH_R                   0x00000200
+
+#define TRIM_CASE KEY_CASE
+
+void simuSetTrim(uint8_t trim, bool state)
+{
+  switch (trim) {
+    TRIM_CASE(0, GPIO_TRIM_LH_L, PIN_TRIM_LH_L)
+    TRIM_CASE(1, GPIO_TRIM_LH_R, PIN_TRIM_LH_R)
+    TRIM_CASE(2, GPIO_TRIM_LV_DN, PIN_TRIM_LV_DN)
+    TRIM_CASE(3, GPIO_TRIM_LV_UP, PIN_TRIM_LV_UP)
+    TRIM_CASE(4, GPIO_TRIM_RV_DN, PIN_TRIM_RV_DN)
+    TRIM_CASE(5, GPIO_TRIM_RV_UP, PIN_TRIM_RV_UP)
+    TRIM_CASE(6, GPIO_TRIM_RH_L, PIN_TRIM_RH_L)
+    TRIM_CASE(7, GPIO_TRIM_RH_R, PIN_TRIM_RH_R)
   }
 }
 

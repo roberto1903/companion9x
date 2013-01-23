@@ -14,26 +14,26 @@
  *
  */
 
-#ifndef open9xv4eeprom_h
-#define open9xv4eeprom_h
+#ifndef open9xGruvin9xeeprom_h
+#define open9xGruvin9xeeprom_h
 
 #define O9X_V4_MAX_CSFUNCOLD 13
 #define O9X_V4_MAX_CSFUNC 15
 
 #include "open9xeeprom.h"
 
-PACK(typedef struct t_Open9xV4TimerData_v212 {
+PACK(typedef struct t_Open9xGruvin9xTimerData_v212 {
   int8_t     mode;
   uint16_t   start;
   uint16_t   remanent:1;
   uint16_t   value:15;
 
   operator TimerData();
-  t_Open9xV4TimerData_v212() { memset(this, 0, sizeof(t_Open9xV4TimerData_v212)); }
-  t_Open9xV4TimerData_v212(TimerData &eepe);
-}) Open9xV4TimerData_v212;
+  t_Open9xGruvin9xTimerData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xTimerData_v212)); }
+  t_Open9xGruvin9xTimerData_v212(TimerData &eepe);
+}) Open9xGruvin9xTimerData_v212;
 
-PACK(typedef struct t_Open9xV4PhaseData_v207 {
+PACK(typedef struct t_Open9xGruvin9xPhaseData_v207 {
   int8_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t trim_ext:8;  // 2 less significant extra bits per trim (10bits trims)
   int8_t swtch;       // swtch of phase[0] is not used
@@ -42,11 +42,11 @@ PACK(typedef struct t_Open9xV4PhaseData_v207 {
   uint8_t fadeOut:4;
   int16_t rotaryEncoders[2];
   operator PhaseData();
-  t_Open9xV4PhaseData_v207() { memset(this, 0, sizeof(t_Open9xV4PhaseData_v207)); }
-  t_Open9xV4PhaseData_v207(PhaseData &eepe);
-}) Open9xV4PhaseData_v207;
+  t_Open9xGruvin9xPhaseData_v207() { memset(this, 0, sizeof(t_Open9xGruvin9xPhaseData_v207)); }
+  t_Open9xGruvin9xPhaseData_v207(PhaseData &eepe);
+}) Open9xGruvin9xPhaseData_v207;
 
-PACK(typedef struct t_Open9xV4PhaseData_v208 {
+PACK(typedef struct t_Open9xGruvin9xPhaseData_v208 {
   int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t swtch;       // swtch of phase[0] is not used
   char name[6];
@@ -54,11 +54,11 @@ PACK(typedef struct t_Open9xV4PhaseData_v208 {
   uint8_t fadeOut:4;
   int16_t rotaryEncoders[2];
   operator PhaseData();
-  t_Open9xV4PhaseData_v208() { memset(this, 0, sizeof(t_Open9xV4PhaseData_v208)); }
-  t_Open9xV4PhaseData_v208(PhaseData &eepe);
-}) Open9xV4PhaseData_v208;
+  t_Open9xGruvin9xPhaseData_v208() { memset(this, 0, sizeof(t_Open9xGruvin9xPhaseData_v208)); }
+  t_Open9xGruvin9xPhaseData_v208(PhaseData &eepe);
+}) Open9xGruvin9xPhaseData_v208;
 
-PACK(typedef struct t_Open9xV4PhaseData_v212 {
+PACK(typedef struct t_Open9xGruvin9xPhaseData_v212 {
   int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t swtch;       // swtch of phase[0] is not used
   char name[6];
@@ -67,11 +67,11 @@ PACK(typedef struct t_Open9xV4PhaseData_v212 {
   int16_t rotaryEncoders[2];
   int16_t gvars[O9X_MAX_GVARS];
   operator PhaseData();
-  t_Open9xV4PhaseData_v212() { memset(this, 0, sizeof(t_Open9xV4PhaseData_v212)); }
-  t_Open9xV4PhaseData_v212(PhaseData &eepe);
-}) Open9xV4PhaseData_v212;
+  t_Open9xGruvin9xPhaseData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xPhaseData_v212)); }
+  t_Open9xGruvin9xPhaseData_v212(PhaseData &eepe);
+}) Open9xGruvin9xPhaseData_v212;
 
-PACK(typedef struct t_Open9xV4MixData_v207 {
+PACK(typedef struct t_Open9xGruvin9xMixData_v207 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
@@ -89,12 +89,12 @@ PACK(typedef struct t_Open9xV4MixData_v207 {
   int8_t  sOffset;
 
  operator MixData();
-  t_Open9xV4MixData_v207() { memset(this, 0, sizeof(t_Open9xV4MixData_v207)); }
-  t_Open9xV4MixData_v207(MixData&);
+  t_Open9xGruvin9xMixData_v207() { memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v207)); }
+  t_Open9xGruvin9xMixData_v207(MixData&);
 
-}) Open9xV4MixData_v207;
+}) Open9xGruvin9xMixData_v207;
 
-PACK(typedef struct t_Open9xV4MixData_v209 {
+PACK(typedef struct t_Open9xGruvin9xMixData_v209 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
@@ -112,12 +112,12 @@ PACK(typedef struct t_Open9xV4MixData_v209 {
   int8_t  sOffset;
 
  operator MixData();
-  t_Open9xV4MixData_v209() { memset(this, 0, sizeof(t_Open9xV4MixData_v209)); }
-  t_Open9xV4MixData_v209(MixData&);
+  t_Open9xGruvin9xMixData_v209() { memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v209)); }
+  t_Open9xGruvin9xMixData_v209(MixData&);
 
-}) Open9xV4MixData_v209;
+}) Open9xGruvin9xMixData_v209;
 
-PACK(typedef struct t_Open9xV4MixData_v211 {
+PACK(typedef struct t_Open9xGruvin9xMixData_v211 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
   uint8_t curveMode:1;       // O=curve, 1=differential
   uint8_t noExpo:1;
@@ -137,73 +137,73 @@ PACK(typedef struct t_Open9xV4MixData_v211 {
   int8_t  sOffset;
 
  operator MixData();
-  t_Open9xV4MixData_v211() { memset(this, 0, sizeof(t_Open9xV4MixData_v211)); }
-  t_Open9xV4MixData_v211(MixData&);
+  t_Open9xGruvin9xMixData_v211() { memset(this, 0, sizeof(t_Open9xGruvin9xMixData_v211)); }
+  t_Open9xGruvin9xMixData_v211(MixData&);
 
-}) Open9xV4MixData_v211;
+}) Open9xGruvin9xMixData_v211;
 
-PACK(typedef struct t_Open9xV4CustomSwData_v207 { // Custom Switches data
+PACK(typedef struct t_Open9xGruvin9xCustomSwData_v207 { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
 
   operator CustomSwData();
-  t_Open9xV4CustomSwData_v207() { memset(this, 0, sizeof(t_Open9xV4CustomSwData_v207)); }
-  t_Open9xV4CustomSwData_v207(CustomSwData&);
+  t_Open9xGruvin9xCustomSwData_v207() { memset(this, 0, sizeof(t_Open9xGruvin9xCustomSwData_v207)); }
+  t_Open9xGruvin9xCustomSwData_v207(CustomSwData&);
   int8_t fromSource(RawSource source);
   RawSource toSource(int8_t value);
 
-}) Open9xV4CustomSwData_v207;
+}) Open9xGruvin9xCustomSwData_v207;
 
-PACK(typedef struct t_Open9xV4CustomSwData_v209 { // Custom Switches data
+PACK(typedef struct t_Open9xGruvin9xCustomSwData_v209 { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
   uint8_t func;
 
   operator CustomSwData();
-  t_Open9xV4CustomSwData_v209() { memset(this, 0, sizeof(t_Open9xV4CustomSwData_v209)); }
-  t_Open9xV4CustomSwData_v209(CustomSwData&);
+  t_Open9xGruvin9xCustomSwData_v209() { memset(this, 0, sizeof(t_Open9xGruvin9xCustomSwData_v209)); }
+  t_Open9xGruvin9xCustomSwData_v209(CustomSwData&);
   int8_t fromSource(RawSource source);
   RawSource toSource(int8_t value);
 
-}) Open9xV4CustomSwData_v209;
+}) Open9xGruvin9xCustomSwData_v209;
 
-PACK(typedef struct t_Open9xV4FuncSwData_v203 { // Function Switches data
+PACK(typedef struct t_Open9xGruvin9xFuncSwData_v203 { // Function Switches data
   int8_t  swtch; // input
   uint8_t func;
   uint8_t param;
 
   operator FuncSwData();
-  t_Open9xV4FuncSwData_v203() { memset(this, 0, sizeof(t_Open9xV4FuncSwData_v203)); }
-  t_Open9xV4FuncSwData_v203(FuncSwData&);
+  t_Open9xGruvin9xFuncSwData_v203() { memset(this, 0, sizeof(t_Open9xGruvin9xFuncSwData_v203)); }
+  t_Open9xGruvin9xFuncSwData_v203(FuncSwData&);
 
-}) Open9xV4FuncSwData_v203;
+}) Open9xGruvin9xFuncSwData_v203;
 
-PACK(typedef struct t_Open9xV4FuncSwData_v210 { // Function Switches data
+PACK(typedef struct t_Open9xGruvin9xFuncSwData_v210 { // Function Switches data
   int8_t  swtch; // input
   uint8_t func:5;
   uint8_t delay:3;
   uint8_t param;
 
   operator FuncSwData();
-  t_Open9xV4FuncSwData_v210() { memset(this, 0, sizeof(t_Open9xV4FuncSwData_v210)); }
-  t_Open9xV4FuncSwData_v210(FuncSwData&);
+  t_Open9xGruvin9xFuncSwData_v210() { memset(this, 0, sizeof(t_Open9xGruvin9xFuncSwData_v210)); }
+  t_Open9xGruvin9xFuncSwData_v210(FuncSwData&);
 
-}) Open9xV4FuncSwData_v210;
+}) Open9xGruvin9xFuncSwData_v210;
 
-PACK(typedef struct t_Open9xV4FuncSwData_v212 { // Function Switches data
+PACK(typedef struct t_Open9xGruvin9xFuncSwData_v212 { // Function Switches data
   int8_t  swtch; // input
   uint8_t func:7;
   uint8_t active:1;
   uint8_t param;
 
   operator FuncSwData();
-  t_Open9xV4FuncSwData_v212() { memset(this, 0, sizeof(t_Open9xV4FuncSwData_v212)); }
-  t_Open9xV4FuncSwData_v212(FuncSwData&);
+  t_Open9xGruvin9xFuncSwData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xFuncSwData_v212)); }
+  t_Open9xGruvin9xFuncSwData_v212(FuncSwData&);
 
-}) Open9xV4FuncSwData_v212;
+}) Open9xGruvin9xFuncSwData_v212;
 
-PACK(typedef struct t_Open9xV4SwashRingData_v208 { // Swash Ring data
+PACK(typedef struct t_Open9xGruvin9xSwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
   uint8_t   invertCOL:1;
@@ -212,12 +212,12 @@ PACK(typedef struct t_Open9xV4SwashRingData_v208 { // Swash Ring data
   uint8_t   value;
 
   operator SwashRingData();
-  t_Open9xV4SwashRingData_v208() { memset(this, 0, sizeof(t_Open9xV4SwashRingData_v208)); }
-  t_Open9xV4SwashRingData_v208(SwashRingData&);
+  t_Open9xGruvin9xSwashRingData_v208() { memset(this, 0, sizeof(t_Open9xGruvin9xSwashRingData_v208)); }
+  t_Open9xGruvin9xSwashRingData_v208(SwashRingData&);
 
-}) Open9xV4SwashRingData_v208;
+}) Open9xGruvin9xSwashRingData_v208;
 
-PACK(typedef struct t_Open9xV4SwashRingData_v209 { // Swash Ring data
+PACK(typedef struct t_Open9xGruvin9xSwashRingData_v209 { // Swash Ring data
   uint8_t   invertELE:1;
   uint8_t   invertAIL:1;
   uint8_t   invertCOL:1;
@@ -226,12 +226,12 @@ PACK(typedef struct t_Open9xV4SwashRingData_v209 { // Swash Ring data
   uint8_t   value;
 
   operator SwashRingData();
-  t_Open9xV4SwashRingData_v209() { memset(this, 0, sizeof(t_Open9xV4SwashRingData_v209)); }
-  t_Open9xV4SwashRingData_v209(SwashRingData&);
+  t_Open9xGruvin9xSwashRingData_v209() { memset(this, 0, sizeof(t_Open9xGruvin9xSwashRingData_v209)); }
+  t_Open9xGruvin9xSwashRingData_v209(SwashRingData&);
 
-}) Open9xV4SwashRingData_v209;
+}) Open9xGruvin9xSwashRingData_v209;
 
-PACK(typedef struct t_Open9xV4ModelData_v207 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v207 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
@@ -245,15 +245,15 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
-  Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xCustomSwData_v207  customSw[O9X_NUM_CSW];
   Open9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v208 swashR;
-  Open9xV4PhaseData_v207 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xSwashRingData_v208 swashR;
+  Open9xGruvin9xPhaseData_v207 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v205 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -262,12 +262,12 @@ PACK(typedef struct t_Open9xV4ModelData_v207 {
   uint16_t  frskyLinesXtra;
 
   operator ModelData();
-  t_Open9xV4ModelData_v207() { memset(this, 0, sizeof(t_Open9xV4ModelData_v207)); }
-  t_Open9xV4ModelData_v207(ModelData&);
+  t_Open9xGruvin9xModelData_v207() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v207)); }
+  t_Open9xGruvin9xModelData_v207(ModelData&);
 
-}) Open9xV4ModelData_v207;
+}) Open9xGruvin9xModelData_v207;
 
-PACK(typedef struct t_Open9xV4ModelData_v208 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
@@ -281,15 +281,15 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v207 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v207 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
-  Open9xV4CustomSwData_v207  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v208 swashR;
-  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xCustomSwData_v207  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xGruvin9xSwashRingData_v208 swashR;
+  Open9xGruvin9xPhaseData_v208 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v208 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -303,12 +303,12 @@ PACK(typedef struct t_Open9xV4ModelData_v208 {
   uint8_t varioSpeedDownMin;
 
   operator ModelData();
-  t_Open9xV4ModelData_v208() { memset(this, 0, sizeof(t_Open9xV4ModelData_v208)); }
-  t_Open9xV4ModelData_v208(ModelData&);
+  t_Open9xGruvin9xModelData_v208() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v208)); }
+  t_Open9xGruvin9xModelData_v208(ModelData&);
 
-}) Open9xV4ModelData_v208;
+}) Open9xGruvin9xModelData_v208;
 
-PACK(typedef struct t_Open9xV4ModelData_v209 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v209 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
@@ -322,15 +322,15 @@ PACK(typedef struct t_Open9xV4ModelData_v209 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v209 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves5[O9X_209_MAX_CURVE5][5];
   int8_t    curves9[O9X_209_MAX_CURVE9][9];
-  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v203 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v209 swashR;
-  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xCustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xFuncSwData_v203 funcSw[O9X_NUM_FSW];
+  Open9xGruvin9xSwashRingData_v209 swashR;
+  Open9xGruvin9xPhaseData_v208 phaseData[O9X_MAX_PHASES];
   Open9xFrSkyData_v208 frsky;
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -345,12 +345,12 @@ PACK(typedef struct t_Open9xV4ModelData_v209 {
   uint8_t switchWarningStates;
 
   operator ModelData();
-  t_Open9xV4ModelData_v209() { memset(this, 0, sizeof(t_Open9xV4ModelData_v209)); }
-  t_Open9xV4ModelData_v209(ModelData&);
+  t_Open9xGruvin9xModelData_v209() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v209)); }
+  t_Open9xGruvin9xModelData_v209(ModelData&);
 
-}) Open9xV4ModelData_v209;
+}) Open9xGruvin9xModelData_v209;
 
-PACK(typedef struct t_Open9xV4ModelData_v210 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v210 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
@@ -364,15 +364,15 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
   uint8_t   spare2:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v209 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v209 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v201 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v201  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
-  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v209 swashR;
-  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xCustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
+  Open9xGruvin9xSwashRingData_v209 swashR;
+  Open9xGruvin9xPhaseData_v208 phaseData[O9X_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -385,12 +385,12 @@ PACK(typedef struct t_Open9xV4ModelData_v210 {
   Open9xFrSkyData_v210 frsky;
 
   operator ModelData();
-  t_Open9xV4ModelData_v210() { memset(this, 0, sizeof(t_Open9xV4ModelData_v210)); }
-  t_Open9xV4ModelData_v210(ModelData&);
+  t_Open9xGruvin9xModelData_v210() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v210)); }
+  t_Open9xGruvin9xModelData_v210(ModelData&);
 
-}) Open9xV4ModelData_v210;
+}) Open9xGruvin9xModelData_v210;
 
-PACK(typedef struct t_Open9xV4ModelData_v211 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v211 {
   char      name[10];             // 10 must be first for eeLoadModelName
   Open9xTimerData_v202 timers[MAX_TIMERS];
   uint8_t   protocol:3;
@@ -404,15 +404,15 @@ PACK(typedef struct t_Open9xV4ModelData_v211 {
   uint8_t   spare1:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v211 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v211 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
-  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v210 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v209 swashR;
-  Open9xV4PhaseData_v208 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xCustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xFuncSwData_v210 funcSw[O9X_NUM_FSW];
+  Open9xGruvin9xSwashRingData_v209 swashR;
+  Open9xGruvin9xPhaseData_v208 phaseData[O9X_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -423,14 +423,14 @@ PACK(typedef struct t_Open9xV4ModelData_v211 {
   Open9xTimerDataExtra timersXtra[MAX_TIMERS];
 
   operator ModelData();
-  t_Open9xV4ModelData_v211() { memset(this, 0, sizeof(t_Open9xV4ModelData_v211)); }
-  t_Open9xV4ModelData_v211(ModelData&);
+  t_Open9xGruvin9xModelData_v211() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v211)); }
+  t_Open9xGruvin9xModelData_v211(ModelData&);
 
-}) Open9xV4ModelData_v211;
+}) Open9xGruvin9xModelData_v211;
 
-PACK(typedef struct t_Open9xV4ModelData_v212 {
+PACK(typedef struct t_Open9xGruvin9xModelData_v212 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xV4TimerData_v212 timers[MAX_TIMERS];
+  Open9xGruvin9xTimerData_v212 timers[MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -442,15 +442,15 @@ PACK(typedef struct t_Open9xV4ModelData_v212 {
   uint8_t   spare1:1;
   int8_t    ppmDelay;
   uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xV4MixData_v211 mixData[O9X_MAX_MIXERS];
+  Open9xGruvin9xMixData_v211 mixData[O9X_MAX_MIXERS];
   Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
   Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];
   int8_t    curves[O9X_MAX_CURVES];
   int8_t    points[O9X_NUM_POINTS];
-  Open9xV4CustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xV4FuncSwData_v212 funcSw[O9X_NUM_FSW];
-  Open9xV4SwashRingData_v209 swashR;
-  Open9xV4PhaseData_v212 phaseData[O9X_MAX_PHASES];
+  Open9xGruvin9xCustomSwData_v209  customSw[O9X_NUM_CSW];
+  Open9xGruvin9xFuncSwData_v212 funcSw[O9X_NUM_FSW];
+  Open9xGruvin9xSwashRingData_v209 swashR;
+  Open9xGruvin9xPhaseData_v212 phaseData[O9X_MAX_PHASES];
 
   int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
   uint8_t   thrTraceSrc;
@@ -462,14 +462,14 @@ PACK(typedef struct t_Open9xV4ModelData_v212 {
   Open9xFrSkyData_v212 frsky;
 
   operator ModelData();
-  t_Open9xV4ModelData_v212() { memset(this, 0, sizeof(t_Open9xV4ModelData_v212)); }
-  t_Open9xV4ModelData_v212(ModelData&);
+  t_Open9xGruvin9xModelData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v212)); }
+  t_Open9xGruvin9xModelData_v212(ModelData&);
 
-}) Open9xV4ModelData_v212;
+}) Open9xGruvin9xModelData_v212;
 
 #define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 212
 
-typedef Open9xV4ModelData_v212 Open9xV4ModelData;
-typedef Open9xGeneralData_v212 Open9xV4GeneralData;
+typedef Open9xGruvin9xModelData_v212 Open9xGruvin9xModelData;
+typedef Open9xGeneralData_v212 Open9xGruvin9xGeneralData;
 
 #endif

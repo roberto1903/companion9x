@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "helpers.h"
-#include "open9xarmeeprom.h"
+#include "open9xSky9xeeprom.h"
 #include <QObject>
 #include <QMessageBox>
 

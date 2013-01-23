@@ -25,6 +25,7 @@
 namespace Er9x {
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
+extern void simuSetTrim(uint8_t trim, bool state);
 extern void setTrim(uint8_t idx, int8_t value);
 extern void getTrims(int16_t values[4]);
 #include "./er9x/simpgmspace.h"

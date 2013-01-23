@@ -32,7 +32,7 @@
 
 #include <exception>
 
-namespace Open9xV4 {
+namespace Open9xGruvin9x {
 #include "../open9x/gruvin9x/board_gruvin9x.cpp"
 
 #include "../open9x/eeprom_avr.cpp"

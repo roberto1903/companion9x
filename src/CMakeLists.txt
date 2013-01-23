@@ -109,12 +109,12 @@ SET( companion9x_SRCS
      open9xM128eeprom.cpp
      open9xM128simulator.cpp
      open9xM128import.cpp
-     open9xv4eeprom.cpp
-     open9xv4simulator.cpp
-     open9xv4import.cpp
-     open9xarmeeprom.cpp
-     open9xarmsimulator.cpp
-     open9xarmimport.cpp
+     open9xGruvin9xeeprom.cpp
+     open9xGruvin9xsimulator.cpp
+     open9xGruvin9ximport.cpp
+     open9xSky9xeeprom.cpp
+     open9xSky9xsimulator.cpp
+     open9xSky9ximport.cpp
      open9xx9deeprom.cpp
      open9xx9dsimulator.cpp
      open9xx9dimport.cpp

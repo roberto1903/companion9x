@@ -19,12 +19,12 @@
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
 #include "open9xM128eeprom.h"
-#include "open9xv4eeprom.h"
-#include "open9xarmeeprom.h"
+#include "open9xGruvin9xeeprom.h"
+#include "open9xSky9xeeprom.h"
 #include "open9xsimulator.h"
 #include "open9xM128simulator.h"
-#include "open9xv4simulator.h"
-#include "open9xarmsimulator.h"
+#include "open9xGruvin9xsimulator.h"
+#include "open9xSky9xsimulator.h"
 #include "open9xx9dsimulator.h"
 #include "file.h"
 
@@ -184,11 +184,11 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
     return loadModel<Open9xModelData_v205>(model, data, index, 0 /*no more stick mode messed*/);
   }
   else if (board == BOARD_GRUVIN9X && version == 207) {
-    return loadModel<Open9xV4ModelData_v207>(model, data, index, 0 /*no more stick mode messed*/);
+    return loadModel<Open9xGruvin9xModelData_v207>(model, data, index, 0 /*no more stick mode messed*/);
   }
   else if (version == 208) {
     if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xV4ModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
+      return loadModel<Open9xGruvin9xModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v208>(model, data, index, 0 /*no more stick mode messed*/);
@@ -199,7 +199,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
   }
   else if (version == 209) {
     if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xV4ModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
+      return loadModel<Open9xGruvin9xModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v209>(model, data, index, 0 /*no more stick mode messed*/);
@@ -210,7 +210,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
   }
   else if (version == 210) {
     if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xV4ModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
+      return loadModel<Open9xGruvin9xModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v210>(model, data, index, 0 /*no more stick mode messed*/);
@@ -221,7 +221,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
   }
   else if (version == 211) {
     if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xV4ModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
+      return loadModel<Open9xGruvin9xModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
     }
     else if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v211>(model, data, index, 0 /*no more stick mode messed*/);
@@ -235,7 +235,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
       return loadModel<Open9xArmModelData_v212>(model, data, index);
     }
     else if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xV4ModelData_v212>(model, data, index);
+      return loadModel<Open9xGruvin9xModelData_v212>(model, data, index);
     }
     else if (board == BOARD_M128) {
       return loadModel<Open9xM128ModelData_v212>(model, data, index);
@@ -466,11 +466,11 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           break;
         case 207:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v207>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v207>(i, radioData.models[i]);
           break;
         case 208:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v208>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v208>(i, radioData.models[i]);
           else if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v208>(i, radioData.models[i]);
           else
@@ -478,7 +478,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           break;
         case 209:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v209>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v209>(i, radioData.models[i]);
           else if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v209>(i, radioData.models[i]);
           else
@@ -486,7 +486,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           break;
         case 210:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v210>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v210>(i, radioData.models[i]);
           else if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v210>(i, radioData.models[i]);
           else
@@ -494,7 +494,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           break;
         case 211:
           if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v211>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v211>(i, radioData.models[i]);
           else if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v211>(i, radioData.models[i]);
           else
@@ -504,7 +504,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
           else if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xV4ModelData_v212>(i, radioData.models[i]);
+            result = saveModel<Open9xGruvin9xModelData_v212>(i, radioData.models[i]);
           else if (board == BOARD_M128)
             result = saveModel<Open9xM128ModelData_v212>(i, radioData.models[i]);
           else
@@ -798,9 +798,9 @@ SimulatorInterface * Open9xInterface::getSimulator()
     case BOARD_M128:
       return new Open9xM128Simulator(this);
     case BOARD_GRUVIN9X:
-      return new Open9xV4Simulator(this);
+      return new Open9xGruvin9xSimulator(this);
     case BOARD_SKY9X:
-      return new Open9xARMSimulator(this);
+      return new Open9xSky9xSimulator(this);
     case BOARD_X9DA:
       return new Open9xX9DSimulator(this);
     default:
