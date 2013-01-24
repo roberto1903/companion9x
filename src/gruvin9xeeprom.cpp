@@ -409,7 +409,7 @@ t_Gruvin9xMixData::t_Gruvin9xMixData(MixData &c9x)
     carryTrim = c9x.carryTrim;
   }
   mltpx = (MltpxValue)c9x.mltpx;
-  phase = c9x.phase;
+//  phase = c9x.phase;
   sOffset = c9x.sOffset;
 }
 
@@ -458,7 +458,7 @@ t_Gruvin9xMixData::operator MixData ()
   c9x.carryTrim = carryTrim;
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
-  c9x.phase = phase;
+  // c9x.phase = phase;
   c9x.sOffset = sOffset;
   return c9x;
 }

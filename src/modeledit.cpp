@@ -1138,7 +1138,7 @@ void ModelEdit::tabExpos()
 
         if (md->mode==0) break;
         QString str = "";
-        while(curDest<md->chn-1)
+        while(curDest<(int)md->chn-1)
         {
             curDest++;
             str = getStickStr(curDest);
@@ -1149,7 +1149,7 @@ void ModelEdit::tabExpos()
             ExposlistWidget->addItem(itm);
         }
 
-        if(curDest!=md->chn)
+        if(curDest!=(int)md->chn)
         {
             str = getStickStr(md->chn);
             curDest = md->chn;
@@ -1175,7 +1175,7 @@ void ModelEdit::tabExpos()
         }
         if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
           if(md->phases) {
-            if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+            if (md->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
               int mask=1;
               int first=0;
               for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -1207,11 +1207,11 @@ void ModelEdit::tabExpos()
               str += tr("DISABLED")+QString(" !!!");
             }
           }
-        } else {
+        }/* else {
           if(md->phase) {
             str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
           }
-        }
+        } */
         if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curveMode)
           if (md->curveParam) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curveParam));
@@ -1253,18 +1253,19 @@ void ModelEdit::tabMixes()
     // i -> mixer number
     QByteArray qba;
     MixerlistWidget->clear();
-    int curDest = 0;
+    unsigned int curDest = 0;
     int i;
+    unsigned int outputs = GetEepromInterface()->getCapability(Outputs);
     for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
-        if((md->destCh==0) || (md->destCh>GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels))) break;
+        if((md->destCh==0) || (md->destCh>outputs+(unsigned int)GetEepromInterface()->getCapability(ExtraChannels))) break;
         QString str = "";
         while(curDest<(md->destCh-1))
         {
             curDest++;
-            if (curDest > GetEepromInterface()->getCapability(Outputs))
-              str = tr("X%1  ").arg(curDest-GetEepromInterface()->getCapability(Outputs));
+            if (curDest > outputs)
+              str = tr("X%1  ").arg(curDest-outputs);
             else
               str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
             qba.clear();
@@ -1274,8 +1275,8 @@ void ModelEdit::tabMixes()
             MixerlistWidget->addItem(itm);
         }
 
-        if (md->destCh > GetEepromInterface()->getCapability(Outputs))
-          str = tr("X%1  ").arg(md->destCh-GetEepromInterface()->getCapability(Outputs));
+        if (md->destCh > outputs)
+          str = tr("X%1  ").arg(md->destCh-outputs);
         else
           str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
 
@@ -1293,12 +1294,13 @@ void ModelEdit::tabMixes()
 
         str += " " + getGVarString(md->weight, true).rightJustified(5, ' ');
         str += md->srcRaw.toString();
+        unsigned int fpCount = GetEepromInterface()->getCapability(FlightPhases);
         if (GetEepromInterface()->getCapability(MixFlightPhases)) {
           if(md->phases) {
-            if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+            if (md->phases!=(unsigned int)(1<<fpCount)-1) {
               int mask=1;
               int first=0;
-              for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+              for (unsigned int i=0; i<fpCount; i++) {
                 if (!(md->phases & mask)) {
                   first++;
                 }
@@ -1311,11 +1313,12 @@ void ModelEdit::tabMixes()
               }
               mask=1;
               first=1;
-              for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+              for (unsigned int i=0; i<fpCount; i++) {
                 if (!(md->phases & mask)) {
                   if (!first) {
                     str += QString(", ")+ QString("%1").arg(getPhaseName(i+1, g_model.phaseData[i].name));
-                  } else {
+                  }
+                  else {
                     str += QString("%1").arg(getPhaseName(i+1,g_model.phaseData[i].name));
                     first=0;
                   }
@@ -1328,11 +1331,11 @@ void ModelEdit::tabMixes()
             }
           }
         }
-        else {
+/*        else {
           if(md->phase) {
             str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
           }
-        }
+        }*/
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim>0) {
           str += " " +tr("No Trim");
@@ -1372,13 +1375,13 @@ void ModelEdit::tabMixes()
         MixerlistWidget->addItem(itm);//(str);
     }
 
-    while(curDest<GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels))
+    while(curDest<outputs+GetEepromInterface()->getCapability(ExtraChannels))
     {
         curDest++;
         QString str;
 
-        if (curDest > GetEepromInterface()->getCapability(Outputs))
-          str = tr("X%1  ").arg(curDest-GetEepromInterface()->getCapability(Outputs));
+        if (curDest > outputs)
+          str = tr("X%1  ").arg(curDest-outputs);
         else
           str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
 
@@ -4020,7 +4023,7 @@ void ModelEdit::gm_openMix(int index)
     }
 }
 
-int ModelEdit::getMixerIndex(int dch)
+int ModelEdit::getMixerIndex(unsigned int dch)
 {
     int i = 0;
     while ((g_model.mixData[i].destCh<=dch) && (g_model.mixData[i].destCh) && (i<GetEepromInterface()->getCapability(Mixes))) i++;
@@ -4075,9 +4078,9 @@ void ModelEdit::gm_openExpo(int index)
     }
 }
 
-int ModelEdit::getExpoIndex(int dch)
+int ModelEdit::getExpoIndex(unsigned int dch)
 {
-    int i = 0;
+    unsigned int i = 0;
     while (g_model.expoData[i].chn<=dch && g_model.expoData[i].mode && i<MAX_EXPOS) i++;
     if(i==MAX_EXPOS) return -1;
     return i;
@@ -4522,11 +4525,12 @@ int ModelEdit::gm_moveMix(int idx, bool dir) //true=inc=down false=dec=up
     MixData &src=g_model.mixData[idx];
     MixData &tgt=g_model.mixData[tdx];
 
-    if((src.destCh==0) || (src.destCh>GetEepromInterface()->getCapability(Outputs)) || (tgt.destCh>GetEepromInterface()->getCapability(Outputs))) return idx;
+    unsigned int outputs = GetEepromInterface()->getCapability(Outputs);
+    if((src.destCh==0) || (src.destCh>outputs) || (tgt.destCh>outputs)) return idx;
 
     if(tgt.destCh!=src.destCh) {
-        if ((dir)  && (src.destCh<GetEepromInterface()->getCapability(Outputs))) src.destCh++;
-        if ((!dir) && (src.destCh>0))          src.destCh--;
+        if ((dir)  && (src.destCh<outputs)) src.destCh++;
+        if ((!dir) && (src.destCh>0)) src.destCh--;
         return idx;
     }
 

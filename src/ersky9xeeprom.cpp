@@ -982,7 +982,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
       limitData[i] = c9x.limitData[i];
 
     // expoData
-    for (int i=0; i<4; i++) {
+    for (unsigned int i=0; i<NUM_STICKS; i++) {
       // first we find the switches
       for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
         if (c9x.expoData[e].chn == i) {
@@ -1261,7 +1261,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
       limitData[i] = c9x.limitData[i];
 
     // expoData
-    for (int i=0; i<4; i++) {
+    for (unsigned int i=0; i<4; i++) {
       // first we find the switches
       for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
         if (c9x.expoData[e].chn == i) {

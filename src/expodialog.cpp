@@ -189,7 +189,7 @@ void ExpoDialog::valuesChanged()
           }
           phtemp >>=1;
         }
-        ed->phase=-(ph+1);      
+        ed->phase=-(ph+1);
       }
     }
     else {

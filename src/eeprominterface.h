@@ -404,16 +404,16 @@ class GeneralSettings {
 class ExpoData {
   public:
     ExpoData() { clear(); }
-    uint8_t mode;         // 0=end, 1=pos, 2=neg, 3=both
-    uint8_t chn;
+    unsigned int mode;         // 0=end, 1=pos, 2=neg, 3=both
+    unsigned int chn;
     RawSwitch swtch;
-    int16_t  phases;        // -5=!FP4, 0=normal, 5=FP4
+    unsigned int phases;        // -5=!FP4, 0=normal, 5=FP4
     int  weight;
     int  expo;
-    int8_t phase;
-    uint8_t curveMode;
+    int8_t phase; // TODO remove
+    unsigned int curveMode;
     int  curveParam;
-    char name[6+1];
+    char name[10+1];
     void clear() { memset(this, 0, sizeof(ExpoData)); }
 };
 
@@ -436,12 +436,12 @@ class CurveData {
 class LimitData {
   public:
     LimitData() { clear(); }
-    int     min;
-    int     max;
-    bool    revert;
-    int16_t  offset;
-    int8_t  ppmCenter;
-    bool symetrical;
+    int   min;
+    int   max;
+    bool  revert;
+    int   offset;
+    int   ppmCenter;
+    bool  symetrical;
     void clear() { min = -100; max = +100; revert = false; offset = 0; ppmCenter = 0; symetrical = 0; }
 };
 
@@ -455,25 +455,25 @@ enum MltpxValue {
 class MixData {
   public:
     MixData() { clear(); }
-    uint8_t destCh;            //        1..NUM_CHNOUT
+    unsigned int destCh;            //        1..NUM_CHNOUT
     RawSource srcRaw;
     int     weight;
     int     differential;
     RawSwitch swtch;
     int     curve;             //0=symmetrisch
-    uint8_t delayUp;
-    uint8_t delayDown;
-    uint8_t speedUp;           // Servogeschwindigkeit aus Tabelle (10ms Cycle)
-    uint8_t speedDown;         // 0 nichts
-    int8_t carryTrim;
-    uint8_t noExpo;
+    unsigned int delayUp;
+    unsigned int delayDown;
+    unsigned int speedUp;           // Servogeschwindigkeit aus Tabelle (10ms Cycle)
+    unsigned int speedDown;         // 0 nichts
+    int  carryTrim;
+    bool noExpo;
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
-    uint8_t mixWarn;           // mixer warning
-    uint8_t enableFmTrim;
-    int8_t  phase;             // -5=!FP4, 0=normal, 5=FP4
-    int16_t  phases;             // -5=!FP4, 0=normal, 5=FP4
+    unsigned int mixWarn;           // mixer warning
+    unsigned int enableFmTrim;
+    // int  phase;             // -5=!FP4, 0=normal, 5=FP4
+    unsigned int phases;             // -5=!FP4, 0=normal, 5=FP4
     int    sOffset;
-    char   name[10];
+    char   name[10+1];
 
     void clear() { memset(this, 0, sizeof(MixData)); }
 };
@@ -534,7 +534,7 @@ class FuncSwData { // Function Switches data
     AssignFunc   func;
     unsigned int param;
     char paramarm[6];
-    uint8_t enabled;
+    bool enabled;
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
 };
 
@@ -558,18 +558,18 @@ class SwashRingData { // Swash Ring data
     bool      invertELE;
     bool      invertAIL;
     bool      invertCOL;
-    uint8_t   type;
+    unsigned int  type;
     RawSource collectiveSource;
-    uint8_t   value;
+    unsigned int  value;
     void clear() { memset(this, 0, sizeof(SwashRingData)); }
 };
 
 class FrSkyAlarmData {
   public:
     FrSkyAlarmData() { clear(); }
-    int8_t   level;               // 0=none, 1=Yellow, 2=Orange, 3=Red
-    int8_t   greater;             // 0=LT(<), 1=GT(>)
-    uint8_t  value;               // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+    unsigned int   level;               // 0=none, 1=Yellow, 2=Orange, 3=Red
+    unsigned int   greater;             // 0=LT(<), 1=GT(>)
+    unsigned int value;               // 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
 
     void clear() { memset(this, 0, sizeof(FrSkyAlarmData)); }
 };
@@ -586,27 +586,27 @@ class FrSkyErAlarmData {
 class FrSkyRSSIAlarm {
   public:
     FrSkyRSSIAlarm() { clear(0); }
-    unsigned int  level;
-    int           value;
+    unsigned int level;
+    unsigned int value;
     void clear(unsigned int level) { this->level = level; value = 50;}
 };
 
 class FrSkyChannelData {
   public:
     FrSkyChannelData() { clear(); }
-    uint8_t   ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
-    uint8_t   type;                 // future use: 0=volts, 1=ml...
-    int8_t   offset;
-    uint8_t   multiplier;
+    unsigned int ratio;                // 0.0 means not used, 0.1V steps EG. 6.6 Volts = 66. 25.1V = 251, etc.
+    unsigned int type;                 // future use: 0=volts, 1=ml...
+    int   offset;
+    unsigned int multiplier;
     FrSkyAlarmData alarms[2];
 
     void clear() { memset(this, 0, sizeof(FrSkyChannelData)); }
 };
 
 struct FrSkyBarData {
-  uint8_t   source;
-  uint8_t   barMin;           // minimum for bar display
-  uint8_t   barMax;           // ditto for max display (would usually = ratio)
+  unsigned int   source;
+  unsigned int   barMin;           // minimum for bar display
+  unsigned int   barMax;           // ditto for max display (would usually = ratio)
 };
 
 class FrSkyScreenData {
@@ -615,10 +615,10 @@ class FrSkyScreenData {
 
     typedef union {
       FrSkyBarData bars[4];
-      uint8_t cells[8];
+      unsigned int cells[8];
     } FrSkyScreenBody;
 
-    uint8_t type;
+    unsigned int type;
     FrSkyScreenBody body;
 
     void clear() { memset(this, 0, sizeof(FrSkyScreenData)); }
@@ -628,17 +628,17 @@ class FrSkyData {
   public:
     FrSkyData() { clear(); }
     FrSkyChannelData channels[2];
-    uint8_t usrProto;
-    uint8_t imperial;
-    uint8_t blades;
-    uint8_t voltsSource;
-    uint8_t currentSource;
-    uint8_t FrSkyGpsAlt;
+    unsigned int usrProto;
+    unsigned int imperial;
+    unsigned int blades;
+    unsigned int voltsSource;
+    unsigned int currentSource;
+    unsigned int FrSkyGpsAlt;
     FrSkyScreenData screens[3];
     FrSkyRSSIAlarm rssiAlarms[2];
-    uint8_t varioSource;
-    uint8_t varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
-    uint8_t varioSpeedDownMin;
+    unsigned int varioSource;
+    unsigned int varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
+    unsigned int varioSpeedDownMin;
 
     void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2); rssiAlarms[1].clear(3); }
 };
@@ -662,9 +662,9 @@ class TimerData {
   public:
     TimerData() { clear(); }
     TimerMode mode;   // timer trigger source -> off, abs, THs, TH%, THt, sw/!sw, !m_sw/!m_sw
-    int8_t modeB;
+    int8_t    modeB;
     bool      dir;    // 0=>Count Down, 1=>Count Up
-    uint16_t  val;
+    unsigned int val;
     bool      persistent;
     void clear() { memset(this, 0, sizeof(TimerData)); }
 };
@@ -711,10 +711,10 @@ class ModelData {
     int       ppmNCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
-    int       trimInc;            // Trim Increments
-    uint8_t   disableThrottleWarning;
+    unsigned int trimInc;            // Trim Increments
+    bool      disableThrottleWarning;
     int       ppmDelay;
-    uint16_t  beepANACenter;      // 1<<0->A1.. 1<<6->A7
+    unsigned int beepANACenter;      // 1<<0->A1.. 1<<6->A7
     bool      pulsePol;           // false = positive
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
@@ -727,13 +727,13 @@ class ModelData {
     FuncSwData    funcSw[NUM_FSW];
     SafetySwData  safetySw[NUM_CHNOUT];
     SwashRingData swashRingData;
-    int8_t   ppmFrameLength;
-    uint8_t  thrTraceSrc;
+    int   ppmFrameLength;
+    unsigned int  thrTraceSrc;
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
-    uint8_t   modelId;
+    unsigned int   modelId;
     // int8_t tmrModeB;
-    uint8_t switchWarningStates;
+    unsigned int switchWarningStates;
     char     gvars_names[MAX_GVARS][6+1];
     uint8_t gvsource[5];
     uint8_t   bt_telemetry;
@@ -948,7 +948,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
       model_copy.expoData[i].chn = applyStickMode(model.expoData[i].chn+1, mode) - 1;
   }
   int index=0;
-  for (int i=0; i<NUM_STICKS; i++) {
+  for (unsigned int i=0; i<NUM_STICKS; i++) {
     for (unsigned int e=0; e<sizeof(model.expoData) / sizeof(model.expoData[1]); e++) {
       if (model_copy.expoData[e].mode && model_copy.expoData[e].chn == i)
         model.expoData[index++] = model_copy.expoData[e];
@@ -1115,4 +1115,298 @@ inline unsigned int GetCurrentFirmwareVariant()
   return current_firmware_variant.variant;
 }
 
+
+class DataField {
+  public:
+    virtual ~DataField() { }
+    virtual void Export(QBitArray & output) = 0;
+    virtual void Import(QBitArray & input) = 0;
+    virtual unsigned int size() = 0;
+};
+
+template<int N>
+class UnsignedField: public DataField {
+  public:
+    UnsignedField(unsigned int & field):
+      field(field)
+    {
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      output.resize(N);
+      for (int i=0; i<N; i++) {
+        if (field & (1<<i))
+          output.setBit(i);
+      }
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      field = 0;
+      for (int i=0; i<N; i++) {
+        if (input[i])
+          field |= (1<<i);
+      }
+    }
+
+    virtual unsigned int size()
+    {
+      return N;
+    }
+
+  protected:
+    unsigned int & field;
+};
+
+template<int N>
+class BoolField: public UnsignedField<N> {
+  public:
+    BoolField(bool & field):
+      UnsignedField<N>((unsigned int &)_bool),
+      _bool(field)
+    {
+    }
+  protected:
+    bool _bool;
+};
+
+template<int N>
+class SignedField: public UnsignedField<N> {
+  public:
+    SignedField(int & field):
+      UnsignedField<N>((unsigned int &)field)
+    {
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      UnsignedField<N>::Import(input);
+      if (input[N-1]) {
+        for (unsigned int i=N; i<8*sizeof(int); i++) {
+          UnsignedField<N>::field |= (1<<i);
+        }
+      }
+    }
+};
+
+template<int N>
+class SpareBitsField: public UnsignedField<N> {
+  public:
+    SpareBitsField():
+      UnsignedField<N>(spare),
+      spare(0)
+    {
+    }
+  protected:
+    unsigned int spare;
+};
+
+int8_t char2idx(char c);
+char idx2char(int8_t idx);
+
+template<int N>
+class ZCharField: public DataField {
+  public:
+    ZCharField(char *field):
+      field(field)
+    {
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      output.resize(N*8);
+      int b = 0;
+      for (int i=0; i<N; i++) {
+        int idx = char2idx(field[i]);
+        qDebug() << QString("char=") << field[i] << " idx=" << idx;
+        for (int j=0; j<8; j++, b++) {
+          if (idx & (1<<j))
+            output.setBit(b);
+        }
+      }
+      qDebug() << QString("output=") << output;
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      unsigned int b = 0;
+      for (int i=0; i<N; i++) {
+        int8_t idx = 0;
+        for (int j=0; j<8; j++) {
+          if (input[b++])
+            idx |= (1<<j);
+        }
+        field[i] = idx2char(idx);
+      }
+
+      field[N] = '\0';
+      for (int i=N-1; i>=0; i--) {
+        if (field[i] == ' ')
+          field[i] = '\0';
+        else
+          break;
+      }
+    }
+
+    virtual unsigned int size()
+    {
+      return 8*N;
+    }
+
+  protected:
+    char * field;
+};
+
+// TODO inside Struct
+inline QBitArray bytesToBits(QByteArray bytes)
+{
+  QBitArray bits(bytes.count()*8);
+  // Convert from QByteArray to QBitArray
+  for (int i=0; i<bytes.count(); ++i)
+    for (int b=0; b<8; ++b)
+      bits.setBit(i*8+b, bytes.at(i)&(1<<b));
+  return bits;
+}
+
+inline QByteArray bitsToBytes(QBitArray bits)
+{
+  QByteArray bytes;
+  bytes.resize((7+bits.count())/8);
+  bytes.fill(0);
+  // Convert from QBitArray to QByteArray
+  for (int b=0; b<bits.count(); ++b)
+    bytes[b/8] = ( bytes.at(b/8) | ((bits[b]?1:0)<<(b%8)));
+  return bytes;
+}
+
+class StructField: public DataField {
+  public:
+    ~StructField() {
+      foreach(DataField *field, fields) {
+        delete field;
+      }
+    }
+
+    inline void Append(DataField *field) {
+      fields.append(field);
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      int offset = 0;
+      output.resize(size());
+      foreach(DataField *field, fields) {
+        QBitArray bits;
+        field->Export(bits);
+        for (int i=0; i<bits.size(); i++)
+          output[offset++] = bits[i];
+      }
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      int offset = 0;
+      foreach(DataField *field, fields) {
+        unsigned int size = field->size();
+        QBitArray bits(size);
+        for (unsigned int i=0; i<size; i++) {
+          bits[i] = input[offset++];
+        }
+        field->Import(bits);
+      }
+    }
+
+    virtual unsigned int size()
+    {
+      unsigned int result = 0;
+      foreach(DataField *field, fields) {
+        result += field->size();
+      }
+      return result;
+    }
+
+    int Export(QByteArray & output)
+    {
+      QBitArray result;
+      StructField::Export(result);
+      output = bitsToBytes(result);
+      return 0;
+    }
+
+    int Import(QByteArray & input)
+    {
+      QBitArray bits = bytesToBits(input);
+      StructField::Import(bits);
+      return 0;
+    }
+
+  protected:
+    QList<DataField *> fields;
+};
+
+class TransformedField: public DataField {
+  public:
+    TransformedField(DataField * field):
+      field(field)
+    {
+    }
+
+    virtual ~TransformedField()
+    {
+      // TODO later delete field;
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      beforeExport();
+      field->Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      field->Import(input);
+      afterImport();
+    }
+
+    virtual unsigned int size()
+    {
+      return field->size();
+    }
+
+    virtual void beforeExport() = 0;
+
+    virtual void afterImport() = 0;
+
+  protected:
+    DataField *field;
+};
+
+template <int N>
+class ShiftedField: public SignedField<N> {
+  public:
+    ShiftedField(int & field, int shift):
+      SignedField<N>(_field),
+      field(field),
+      shift(shift)
+    {
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      _field = field + shift;
+      SignedField<N>::Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      SignedField<N>::Import(input);
+      _field = field - shift;
+    }
+
+  protected:
+    int & field;
+    int _field;
+    int shift;
+};
 #endif

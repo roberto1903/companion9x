@@ -953,7 +953,7 @@ t_Open9xx9dMixData_v208::operator MixData ()
     c9x.carryTrim = carryTrim;
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
-    c9x.phase = phase;
+//    c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
     } else if (phase==0) {
@@ -1099,7 +1099,7 @@ t_Open9xx9dMixData_v209::operator MixData ()
     c9x.carryTrim = carryTrim;
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
-    c9x.phase = phase;
+//    c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
     } else if (phase==0) {
@@ -1246,7 +1246,7 @@ t_Open9xx9dMixData_v210::operator MixData ()
     c9x.carryTrim = carryTrim;
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
-    c9x.phase = phase;
+//    c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
     } else if (phase==0) {

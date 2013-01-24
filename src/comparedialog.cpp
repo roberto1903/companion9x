@@ -927,7 +927,7 @@ void compareDialog::printExpos()
           str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(ed->phases) {
-              if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+              if (ed->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
                 int first=0;
                 for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -960,7 +960,7 @@ void compareDialog::printExpos()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          } else {
+          }/* else {
             if (ed->phase!=0) {
               PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
               if (ed->phase<0) {
@@ -969,7 +969,7 @@ void compareDialog::printExpos()
                 str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
               }
             }
-          }
+          }*/
           if (ed->swtch.type)
             str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curveMode)
@@ -1015,7 +1015,7 @@ void compareDialog::printExpos()
           str += " " + tr("Expo") + QString("%1").arg(getGVarString(ed->expo)).rightJustified(7, ' ');
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(ed->phases) {
-              if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+              if (ed->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
                 int first=0;
                 for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -1048,7 +1048,7 @@ void compareDialog::printExpos()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          } else {
+          }/* else {
             if (ed->phase!=0) {
               PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
               if (ed->phase<0) {
@@ -1057,7 +1057,7 @@ void compareDialog::printExpos()
                 str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
               }
             }
-          }
+          } */
           if (ed->swtch.type)
             str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curveMode)
@@ -1128,7 +1128,7 @@ void compareDialog::printMixers()
           if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(md->phases) {
-              if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+              if (md->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
                 int first=0;
                 for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -1161,7 +1161,7 @@ void compareDialog::printMixers()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          } else {
+          }/* else {
             if (md->phase!=0) {
               PhaseData *pd = &g_model1->phaseData[abs(md->phase)-1];
               if (md->phase<0) {
@@ -1170,7 +1170,7 @@ void compareDialog::printMixers()
                 str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
               }
             }
-          }          
+          }  */
           str.append("</font></td></tr>");
         }
       }
@@ -1220,7 +1220,7 @@ void compareDialog::printMixers()
           if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
           if (GetEepromInterface()->getCapability(MixFlightPhases)) {
             if(md->phases) {
-              if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+              if (md->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
                 int mask=1;
                 int first=0;
                 for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -1253,7 +1253,7 @@ void compareDialog::printMixers()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          } else {
+          }/* else {
             if (md->phase!=0) {
               PhaseData *pd = &g_model2->phaseData[abs(md->phase)-1];
               if (md->phase<0) {
@@ -1262,7 +1262,7 @@ void compareDialog::printMixers()
                 str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
               }
             }
-          }
+          }*/
           str.append("</font></td></tr>");
         }
       }

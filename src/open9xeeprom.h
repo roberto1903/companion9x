@@ -703,7 +703,7 @@ PACK(typedef struct t_Open9xTimerDataExtra {
   t_Open9xTimerDataExtra() { memset(this, 0, sizeof(t_Open9xTimerDataExtra)); }
 }) Open9xTimerDataExtra;
 
-#define MAX_TIMERS     2
+#define O9X_MAX_TIMERS     2
 #define O9X_MAX_PHASES 5
 #define O9X_MAX_MIXERS 32
 #define O9X_MAX_EXPOS  14
@@ -860,7 +860,7 @@ PACK(typedef struct t_Open9xModelData_v204 {
 
 PACK(typedef struct t_Open9xModelData_v205 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -897,7 +897,7 @@ PACK(typedef struct t_Open9xModelData_v205 {
 
 PACK(typedef struct t_Open9xModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -938,7 +938,7 @@ PACK(typedef struct t_Open9xModelData_v208 {
 
 PACK(typedef struct t_Open9xModelData_v209 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -980,7 +980,7 @@ PACK(typedef struct t_Open9xModelData_v209 {
 
 PACK(typedef struct t_Open9xModelData_v210 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -1020,7 +1020,7 @@ PACK(typedef struct t_Open9xModelData_v210 {
 
 PACK(typedef struct t_Open9xModelData_v211 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xTimerData_v202 timers[MAX_TIMERS];
+  Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -1070,7 +1070,7 @@ class Open9xModelData_v212 {
 
     PACK(typedef struct {
       char      name[10]; // must be first for eeLoadModelName
-      Open9xTimerData_v202 timers[MAX_TIMERS];
+      Open9xTimerData_v202 timers[O9X_MAX_TIMERS];
       uint8_t   protocol:3;
       uint8_t   thrTrim:1;            // Enable Throttle Trim
       int8_t    ppmNCH:4;
@@ -1100,6 +1100,638 @@ class Open9xModelData_v212 {
     }) CommonData;
 
     ModelData & modelData;
+};
+
+/*
+ * New EEPROM import / export implementation !
+ */
+
+class FrskyScreenDataFieldV212: public DataField {
+  public:
+    FrskyScreenDataFieldV212(FrSkyScreenData & screen):
+      screen(screen)
+    {
+      for (int i=0; i<4; i++) {
+        bars.Append(new UnsignedField<8>(screen.body.bars[i].source));
+        bars.Append(new UnsignedField<8>(screen.body.bars[i].barMin));
+        bars.Append(new UnsignedField<8>(screen.body.bars[i].barMax));
+      }
+
+      for (int i=0; i<8; i++) {
+        numbers.Append(new UnsignedField<8>(screen.body.cells[i]));
+      }
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      if (screen.type == 0)
+        numbers.Export(output);
+      else
+        bars.Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      // NOTA: screen.type should have been imported first!
+      if (screen.type == 0)
+        numbers.Import(input);
+      else
+        bars.Import(input);
+    }
+
+    virtual unsigned int size()
+    {
+      // NOTA: screen.type should have been imported first!
+      if (screen.type == 0)
+        return numbers.size();
+      else
+        return bars.size();
+    }
+
+  protected:
+    FrSkyScreenData & screen;
+    StructField bars;
+    StructField numbers;
+};
+
+class FrskyDataFieldV212: public StructField {
+  public:
+    FrskyDataFieldV212(FrSkyData & frsky)
+    {
+      for (int i=0; i<2; i++) {
+        Append(new UnsignedField<8>(frsky.channels[i].ratio));
+        Append(new SignedField<12>(frsky.channels[i].offset));
+        Append(new UnsignedField<4>(frsky.channels[i].type));
+        for (int j=0; j<2; j++)
+          Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value));
+        for (int j=0; j<2; j++)
+          Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
+        for (int j=0; j<2; j++)
+          Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
+        Append(new UnsignedField<2>(frsky.channels[i].multiplier));
+      }
+
+      Append(new UnsignedField<2>(frsky.usrProto));
+      Append(new UnsignedField<2>(frsky.blades));
+      Append(new SpareBitsField<4>());
+      Append(new UnsignedField<3>(frsky.voltsSource));
+      Append(new UnsignedField<3>(frsky.currentSource));
+      Append(new UnsignedField<1>(frsky.screens[0].type));
+      Append(new UnsignedField<1>(frsky.screens[1].type));
+      for (int i=0; i<2; i++) {
+        Append(new UnsignedField<2>(frsky.rssiAlarms[i].level));
+        Append(new UnsignedField<6>(frsky.rssiAlarms[i].value));
+      }
+      for (int i=0; i<2; i++) {
+        Append(new FrskyScreenDataFieldV212(frsky.screens[i]));
+      }
+      Append(new UnsignedField<3>(frsky.varioSource));
+      Append(new UnsignedField<5>(frsky.varioSpeedUpMin));
+      Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
+    }
+};
+
+class TimerModeV212: public TransformedField {
+  public:
+    TimerModeV212(TimerMode & mode):
+      TransformedField(new SignedField<8>(_mode)),
+      mode(mode)
+    {
+    }
+
+    virtual void beforeExport()
+    {
+      if (mode >= TMRMODE_OFF && mode <= TMRMODE_THt)
+        _mode = 0+mode-TMRMODE_OFF;
+      else if (mode >= TMRMODE_FIRST_MOMENT_SWITCH)
+        _mode = 26+mode-TMRMODE_FIRST_MOMENT_SWITCH;
+      else if (mode >= TMRMODE_FIRST_SWITCH)
+        _mode = 5+mode-TMRMODE_FIRST_SWITCH;
+      else if (mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
+        _mode = -22+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
+      else if (mode <= TMRMODE_FIRST_NEG_SWITCH)
+        _mode = -1+mode-TMRMODE_FIRST_NEG_SWITCH;
+      else
+        _mode = 0;
+    }
+
+    virtual void afterImport()
+    {
+      if (_mode <= -22)
+        mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(_mode+22));
+      else if (_mode <= -1)
+        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+1));
+      else if (_mode < 5)
+        mode = TimerMode(_mode);
+      else if (_mode < 5+21)
+        mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
+      else
+        mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(_mode-5-21));
+    }
+
+  protected:
+    TimerMode & mode;
+    int _mode;
+};
+
+int8_t open9xFromSwitch(const RawSwitch & sw);
+RawSwitch open9xToSwitch(int8_t sw);
+int8_t open9x209FromSource(RawSource source);
+RawSource open9x209ToSource(int8_t value);
+
+template <int N>
+class SwitchField: public TransformedField {
+  public:
+    SwitchField(RawSwitch & sw):
+      TransformedField(new SignedField<N>(_sw)),
+      sw(sw)
+    {
+    }
+
+    virtual void beforeExport()
+    {
+      _sw = open9xFromSwitch(sw);
+    }
+
+    virtual void afterImport()
+    {
+      sw = open9xToSwitch(_sw);
+    }
+
+  protected:
+    int _sw;
+    RawSwitch & sw;
+};
+
+template <int N>
+class MixCurveParamField: public SignedField<N> {
+  public:
+    MixCurveParamField(int & curve, int & differential):
+      SignedField<N>(param),
+      curve(curve),
+      differential(differential)
+    {
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      param = (curve ? curve : differential);
+      SignedField<N>::Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      // NOTA: screen.type should have been imported first!
+      SignedField<N>::Import(input);
+      if (curve)
+        curve = param;
+      else
+        differential = param;
+    }
+
+  protected:
+    int & curve;
+    int & differential;
+    int param;
+};
+
+template <int N>
+class MixSourceFieldV211: public UnsignedField<N> {
+  public:
+    MixSourceFieldV211(RawSource & source):
+      UnsignedField<N>(param),
+      source(source)
+    {
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      if (source.type == SOURCE_TYPE_NONE) {
+        param = 0;
+      }
+      else if (source.type == SOURCE_TYPE_STICK) {
+        param = 1 + source.index;
+      }
+      else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
+        EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
+        param = 5 + source.index; // use pots instead
+      }
+      else if (source.type == SOURCE_TYPE_TRIM) {
+        param = 8 + source.index; // use pots instead
+      }
+      else if (source.type == SOURCE_TYPE_MAX) {
+        param = 12; // MAX
+      }
+      else if (source.type == SOURCE_TYPE_3POS) {
+        param = 13;
+      }
+      else if (source.type == SOURCE_TYPE_SWITCH) {
+        param = 13 + open9xFromSwitch(RawSwitch(source.index));
+      }
+      else if (source.type == SOURCE_TYPE_CYC) {
+        param = 35 + source.index;
+      }
+      else if (source.type == SOURCE_TYPE_PPM) {
+        param = 38 + source.index;
+      }
+      else if (source.type == SOURCE_TYPE_CH) {
+        param = 46 + source.index;
+      }
+
+      UnsignedField<N>::Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      UnsignedField<N>::Import(input);
+      if (param == 0) {
+        source = RawSource(SOURCE_TYPE_NONE);
+      }
+      else if (param <= 7) {
+        source = RawSource(SOURCE_TYPE_STICK, param-1);
+      }
+      else if (param <= 11) {
+        source = RawSource(SOURCE_TYPE_TRIM, param-8);
+      }
+      else if (param == 12) {
+        source = RawSource(SOURCE_TYPE_MAX);
+      }
+      else if (param == 13) {
+        source = RawSource(SOURCE_TYPE_3POS);
+      }
+      else if (param <= 34) {
+        source = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(param-13).toValue());
+      }
+      else if (param <= 37) {
+        source = RawSource(SOURCE_TYPE_CYC, param-35);
+      }
+      else if (param <= 45) {
+        source = RawSource(SOURCE_TYPE_PPM, param-38);
+      }
+      else {
+        source = RawSource(SOURCE_TYPE_CH, param-46);
+      }
+    }
+
+  protected:
+    RawSource & source;
+    unsigned int param;
+};
+
+class MixFieldV211: public StructField {
+  public:
+    MixFieldV211(MixData & mix)
+    {
+      Append(new UnsignedField<4>(mix.destCh));
+      Append(new BoolField<1>((bool &)mix.curve));
+      Append(new BoolField<1>(mix.noExpo));
+      Append(new SpareBitsField<2>());
+      Append(new SignedField<8>(mix.weight));
+      Append(new SwitchField<6>(mix.swtch));
+      Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
+      Append(new UnsignedField<5>(mix.phases));
+      Append(new SignedField<3>(mix.carryTrim));
+      Append(new MixSourceFieldV211<6>(mix.srcRaw));
+      Append(new UnsignedField<2>(mix.mixWarn));
+      Append(new UnsignedField<4>(mix.delayUp));
+      Append(new UnsignedField<4>(mix.delayDown));
+      Append(new UnsignedField<4>(mix.speedUp));
+      Append(new UnsignedField<4>(mix.speedDown));
+      Append(new MixCurveParamField<8>(mix.curve, mix.differential));
+      Append(new SignedField<8>(mix.sOffset));
+    }
+};
+
+class ExpoFieldV211: public StructField {
+  public:
+    ExpoFieldV211(ExpoData & expo)
+    {
+      Append(new UnsignedField<2>(expo.mode));
+      Append(new SwitchField<6>(expo.swtch));
+      Append(new UnsignedField<2>(expo.chn));
+      Append(new UnsignedField<5>(expo.phases));
+      Append(new BoolField<1>((bool &)expo.curveMode));
+      Append(new SignedField<8>(expo.weight));
+      Append(new SignedField<8>(expo.curveParam));
+    }
+};
+
+class LimitFieldV211: public StructField {
+  public:
+    LimitFieldV211(LimitData & limit)
+    {
+      Append(new ShiftedField<8>(limit.min, +100));
+      Append(new ShiftedField<8>(limit.max, -100));
+      Append(new SignedField<8>(limit.ppmCenter));
+      Append(new SignedField<14>(limit.offset));
+      Append(new BoolField<1>(limit.symetrical));
+      Append(new BoolField<1>(limit.revert));
+    }
+};
+
+class CurvesField: public StructField {
+  public:
+    CurvesField(CurveData * curves):
+      curves(curves)
+    {
+      for (int i=0; i<O9X_MAX_CURVES; i++)
+        Append(new SignedField<8>(_curves[i]));
+      for (int i=0; i<O9X_NUM_POINTS; i++)
+        Append(new SignedField<8>(_points[i]));
+    }
+
+    virtual void Export(QBitArray & output)
+    {
+      int * cur = &_points[0];
+      int offset = 0;
+      for (int i=0; i<O9X_MAX_CURVES; i++) {
+        CurveData *curve = &curves[i];
+        offset += (curve->custom ? curve->count * 2 - 2 : curve->count) - 5;
+        if (offset > O9X_NUM_POINTS - 5 * O9X_MAX_CURVES) {
+          EEPROMWarnings += ::QObject::tr("open9x only accepts %1 points in all curves").arg(O9X_NUM_POINTS) + "\n";
+          break;
+        }
+        _curves[i] = offset;
+        for (int j=0; j<curve->count; j++) {
+          *cur++ = curve->points[j].y;
+        }
+        if (curve->custom) {
+          for (int j=1; j<curve->count-1; j++) {
+            *cur++ = curve->points[j].x;
+          }
+        }
+      }
+
+      StructField::Export(output);
+    }
+
+    virtual void Import(QBitArray & input)
+    {
+      StructField::Import(input);
+
+      for (int i=0; i<O9X_MAX_CURVES; i++) {
+        CurveData *curve = &curves[i];
+        int * cur = &_points[i==0 ? 0 : 5*i + _curves[i-1]];
+        int * next = &_points[(i+1) + _curves[i]];
+        int size = next - cur;
+        if (size % 2 == 0) {
+          curve->count = (size / 2) + 1;
+          curve->custom = true;
+        }
+        else {
+          curve->count = size;
+          curve->custom = false;
+        }
+        for (int j=0; j<curve->count; j++)
+          curve->points[j].y = cur[j];
+        if (curve->custom) {
+          curve->points[0].x = -100;
+          for (int j=1; j<curve->count-1; j++)
+            curve->points[j].x = cur[curve->count+j-1];
+          curve->points[curve->count-1].x = +100;
+        }
+        else {
+          for (int j=0; j<curve->count; j++)
+            curve->points[j].x = -100 + (200*i) / (curve->count-1);
+        }
+      }
+    }
+
+  protected:
+    CurveData *curves;
+    int _curves[O9X_MAX_CURVES];
+    int _points[O9X_NUM_POINTS];
+};
+
+class HeliFieldV211: public StructField {
+  public:
+    HeliFieldV211(SwashRingData & heli)
+    {
+      Append(new BoolField<1>(heli.invertELE));
+      Append(new BoolField<1>(heli.invertAIL));
+      Append(new BoolField<1>(heli.invertCOL));
+      Append(new UnsignedField<5>(heli.type));
+      Append(new MixSourceFieldV211<8>(heli.collectiveSource));
+      Append(new UnsignedField<8>(heli.value));
+    }
+};
+
+class CustomSwitchFieldV209: public TransformedField {
+  public:
+    CustomSwitchFieldV209(CustomSwData & csw):
+      TransformedField(&internalField),
+      csw(csw)
+    {
+      internalField.Append(new SignedField<8>(v1));
+      internalField.Append(new SignedField<8>(v2));
+      internalField.Append(new UnsignedField<8>(func));
+    }
+
+    virtual void beforeExport()
+    {
+      func = csw.func;
+      v1 = csw.val1;
+      v2 = csw.val2;
+
+      if ((csw.func >= CS_VPOS && csw.func <= CS_ANEG) || csw.func >= CS_EQUAL) {
+        v1 = open9x209FromSource(RawSource(csw.val1));
+      }
+
+      if (csw.func >= CS_EQUAL && csw.func <= CS_ELESS) {
+        v2 = open9x209FromSource(RawSource(csw.val2));
+      }
+
+      if (csw.func >= CS_AND && csw.func <= CS_XOR) {
+        v1 = open9xFromSwitch(RawSwitch(csw.val1));
+        v2 = open9xFromSwitch(RawSwitch(csw.val2));
+      }
+    }
+
+    virtual void afterImport()
+    {
+      csw.func = func;
+      csw.val1 = v1;
+      csw.val2 = v2;
+
+      if ((csw.func >= CS_VPOS && csw.func <= CS_ANEG) || csw.func >= CS_EQUAL) {
+        csw.val1 = open9x209ToSource(v1).toValue();
+      }
+
+      if (csw.func >= CS_EQUAL && csw.func <= CS_ELESS) {
+        csw.val2 = open9x209ToSource(v2).toValue();
+      }
+
+      if (csw.func >= CS_AND && csw.func <= CS_XOR) {
+        csw.val1 = open9xToSwitch(v1).toValue();
+        csw.val2 = open9xToSwitch(v2).toValue();
+      }
+    }
+
+  protected:
+    StructField internalField;
+    CustomSwData & csw;
+    int v1;
+    int v2;
+    unsigned int func;
+};
+
+class CustomFunctionFieldV212: public TransformedField {
+  public:
+    CustomFunctionFieldV212(FuncSwData & fn):
+      TransformedField(&internalField),
+      fn(fn)
+    {
+      internalField.Append(new SwitchField<8>(fn.swtch));
+      internalField.Append(new UnsignedField<7>(func));
+      internalField.Append(new BoolField<1>(fn.enabled));
+      internalField.Append(new UnsignedField<8>(fn.param));
+    }
+
+    virtual void beforeExport()
+    {
+      if (fn.func <= FuncInstantTrim)
+        func = fn.func;
+      else if (fn.func == FuncPlaySound)
+        func = 22;
+      else if (fn.func == FuncPlayHaptic)
+        func = 23;
+      else if (fn.func == FuncReset)
+        func = 24;
+      else if (fn.func == FuncVario)
+        func = 25;
+      else if (fn.func == FuncPlayPrompt)
+        func = 26;
+      else if (fn.func == FuncPlayValue)
+        func = 27;
+      else if (fn.func == FuncBacklight)
+        func = 28;
+      else if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)
+        func = 29 + fn.func - FuncAdjustGV1;
+      else
+        func = 0;
+    }
+
+    virtual void afterImport()
+    {
+      if (func < 22)
+        fn.func = AssignFunc(func);
+      else if (func == 22)
+        fn.func = FuncPlaySound;
+      else if (func == 23)
+        fn.func = FuncPlayHaptic;
+      else if (func == 24)
+        fn.func = FuncReset;
+      else if (func == 25)
+        fn.func = FuncVario;
+      else if (func == 26)
+        fn.func = FuncPlayPrompt;
+      else if (func == 27)
+        fn.func = FuncPlayValue;
+      else if (func == 28)
+        fn.func = FuncBacklight;
+      else if (func >= 29 && func <= 33)
+        fn.func = AssignFunc(FuncAdjustGV1 + func - 29);
+      else
+        fn.func = AssignFunc(0);
+    }
+
+  protected:
+    StructField internalField;
+    FuncSwData & fn;
+    unsigned int func;
+};
+
+class PhaseFieldV201: public TransformedField {
+  public:
+    PhaseFieldV201(PhaseData & phase):
+      TransformedField(&internalField),
+      phase(phase)
+    {
+      for (int i=0; i<NUM_STICKS; i++)
+        internalField.Append(new SignedField<8>(trimBase[i]));
+      for (int i=0; i<NUM_STICKS; i++)
+        internalField.Append(new SignedField<2>(trimExt[i]));
+      internalField.Append(new SwitchField<8>(phase.swtch));
+      internalField.Append(new ZCharField<6>(phase.name));
+      internalField.Append(new UnsignedField<4>(phase.fadeIn));
+      internalField.Append(new UnsignedField<4>(phase.fadeOut));
+    }
+
+    virtual void beforeExport()
+    {
+      for (int i=0; i<NUM_STICKS; i++) {
+        trimBase[i] = phase.trim[i] >> 2;
+        trimExt[i] = (phase.trim[i] & 0x03) << (2*i);
+      }
+    }
+
+    virtual void afterImport()
+    {
+      for (int i=0; i<NUM_STICKS; i++)
+        phase.trim[i] = ((trimBase[i]) << 2) + ((trimExt[i] >> (2*i)) & 0x03);
+    }
+
+  protected:
+    StructField internalField;
+    PhaseData & phase;
+    int trimBase[NUM_STICKS];
+    int trimExt[NUM_STICKS];
+};
+
+class Open9xModelDataV212: public StructField {
+  public:
+    Open9xModelDataV212(ModelData & modelData, unsigned int variant):
+      variant(variant)
+    {
+      Append(new ZCharField<10>(modelData.name));
+      for (int i=0; i<O9X_MAX_TIMERS; i++) {
+        Append(new TimerModeV212(modelData.timers[i].mode));
+        Append(new UnsignedField<16>(modelData.timers[i].val));
+      }
+      Append(new UnsignedField<3>((unsigned int &)modelData.protocol));
+      Append(new BoolField<1>(modelData.thrTrim));
+      Append(new SignedField<4>(modelData.ppmNCH));
+      Append(new UnsignedField<3>(modelData.trimInc));
+      Append(new BoolField<1>(modelData.disableThrottleWarning));
+      Append(new BoolField<1>(modelData.pulsePol));
+      Append(new BoolField<1>(modelData.extendedLimits));
+      Append(new BoolField<1>(modelData.extendedTrims));
+      Append(new SpareBitsField<1>());
+      Append(new SignedField<8>(modelData.ppmDelay));
+      Append(new UnsignedField<8>(modelData.beepANACenter));
+      for (int i=0; i<O9X_MAX_MIXERS; i++)
+        Append(new MixFieldV211(modelData.mixData[i]));
+      for (int i=0; i<O9X_NUM_CHNOUT; i++)
+        Append(new LimitFieldV211(modelData.limitData[i]));
+      for (int i=0; i<O9X_MAX_EXPOS; i++)
+        Append(new ExpoFieldV211(modelData.expoData[i]));
+      Append(new CurvesField(modelData.curves));
+      for (int i=0; i<O9X_NUM_CSW; i++)
+        Append(new CustomSwitchFieldV209(modelData.customSw[i]));
+      for (int i=0; i<O9X_NUM_FSW; i++)
+        Append(new CustomFunctionFieldV212(modelData.funcSw[i]));
+      Append(new HeliFieldV211(modelData.swashRingData));
+      for (int i=0; i<O9X_MAX_PHASES; i++)
+        Append(new PhaseFieldV201(modelData.phaseData[i]));
+      Append(new SignedField<8>(modelData.ppmFrameLength));
+      Append(new UnsignedField<8>(modelData.thrTraceSrc));
+      Append(new UnsignedField<8>(modelData.modelId));
+      Append(new UnsignedField<8>(modelData.switchWarningStates));
+
+      if (variant & GVARS_VARIANT) {
+        for (int i=0; i<O9X_MAX_GVARS; i++) {
+          // on M64 GVARS are common to all phases, and there is no name
+          Append(new SignedField<16>(modelData.phaseData[0].gvars[i]));
+        }
+      }
+
+      if (variant & FRSKY_VARIANT) {
+        Append(new FrskyDataFieldV212(modelData.frsky));
+      }
+    }
+
+  protected:
+    unsigned int variant;
 };
 
 #define LAST_OPEN9X_STOCK_EEPROM_VER 212
