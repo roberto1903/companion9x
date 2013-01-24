@@ -960,16 +960,7 @@ void compareDialog::printExpos()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          }/* else {
-            if (ed->phase!=0) {
-              PhaseData *pd = &g_model1->phaseData[abs(ed->phase)-1];
-              if (ed->phase<0) {
-                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(ed->phase+1)).arg(pd->name);
-              } else {
-                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
-              }
-            }
-          }*/
+          } 
           if (ed->swtch.type)
             str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curveMode)
@@ -1048,16 +1039,7 @@ void compareDialog::printExpos()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          }/* else {
-            if (ed->phase!=0) {
-              PhaseData *pd = &g_model2->phaseData[abs(ed->phase)-1];
-              if (ed->phase<0) {
-                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(ed->phase+1)).arg(pd->name);
-              } else {
-                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
-              }
-            }
-          } */
+          } 
           if (ed->swtch.type)
             str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
           if (ed->curveMode)
@@ -1161,16 +1143,7 @@ void compareDialog::printMixers()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          }/* else {
-            if (md->phase!=0) {
-              PhaseData *pd = &g_model1->phaseData[abs(md->phase)-1];
-              if (md->phase<0) {
-                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
-              } else {
-                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
-              }
-            }
-          }  */
+          }
           str.append("</font></td></tr>");
         }
       }
@@ -1253,16 +1226,7 @@ void compareDialog::printMixers()
                 str += tr("DISABLED")+QString(" !!!");
               }
             }
-          }/* else {
-            if (md->phase!=0) {
-              PhaseData *pd = &g_model2->phaseData[abs(md->phase)-1];
-              if (md->phase<0) {
-                str += " "+tr("Phase")+" !"+tr("FP")+QString("%1 (!%2)").arg(-(md->phase+1)).arg(pd->name);
-              } else {
-                str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
-              }
-            }
-          }*/
+          }
           str.append("</font></td></tr>");
         }
       }

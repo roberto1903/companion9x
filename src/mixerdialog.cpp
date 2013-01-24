@@ -53,8 +53,6 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         ui->mixerName->hide();
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
-      ui->label_phase->hide();
-      ui->phasesCB->hide();
       ui->label_phases->hide();
       for (int i=0; i<9; i++) {
         lb_fp[i]->hide();
@@ -62,8 +60,6 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       }
     } else {
       if (GetEepromInterface()->getCapability(MixFlightPhases)) {
-        ui->label_phase->hide();
-        ui->phasesCB->hide();
         int mask=1;
         for (int i=0; i<9 ; i++) {
           if ((md->phases & mask)==0) {
@@ -81,7 +77,6 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
           cb_fp[i]->hide();
         }
         ui->label_phases->hide();
-//        populatePhasesCB(ui->phasesCB,md->phase);
       }
     }
     ui->mixerName->setText(md->name);
@@ -119,7 +114,6 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->warningCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->mltpxCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->delayDownSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
@@ -166,7 +160,6 @@ void MixerDialog::valuesChanged()
       ui->differentialCB->show();
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
-//    md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();

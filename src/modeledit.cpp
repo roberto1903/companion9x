@@ -1207,11 +1207,7 @@ void ModelEdit::tabExpos()
               str += tr("DISABLED")+QString(" !!!");
             }
           }
-        }/* else {
-          if(md->phase) {
-            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
-          }
-        } */
+        } 
         if (md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if (md->curveMode)
           if (md->curveParam) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curveParam));
