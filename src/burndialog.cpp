@@ -184,6 +184,8 @@ void burnDialog::checkFw(QString fileName)
       ui->SplashFrame->show();
       ui->ImageLoadButton->setEnabled(true);
       ui->libraryButton->setEnabled(true);
+      ui->FwImage->setFixedSize(flash.getSplashWidth(),flash.getSplashHeight());
+      ui->imageLabel->setFixedSize(flash.getSplashWidth(),flash.getSplashHeight());
       ui->FwImage->show();
       ui->FwImage->setPixmap(QPixmap::fromImage(flash.getSplash()));
       QString ImageStr = settings.value("SplashImage", "").toString();
@@ -200,7 +202,7 @@ void burnDialog::checkFw(QString fileName)
           QImage image(fileName);
           if (!image.isNull()) {
             ui->InvertColorButton->setEnabled(true);
-            ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+            ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
             ui->PatchFWCB->setEnabled(true);
             ui->PatchFWCB->setChecked(PatchFwCB);
           } else {
@@ -339,7 +341,7 @@ void burnDialog::on_ImageLoadButton_clicked()
     }
     ui->ImageFileName->setText(fileName);
     ui->InvertColorButton->setEnabled(true);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
     ui->PatchFWCB->setEnabled(true);
   }
 }
@@ -360,7 +362,7 @@ void burnDialog::on_libraryButton_clicked()
     }
     ui->ImageFileName->setText(fileName);
     ui->InvertColorButton->setEnabled(true);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
     ui->PatchFWCB->setEnabled(true);
   }
 }
@@ -375,7 +377,7 @@ void burnDialog::on_BurnFlashButton_clicked()
       settings.setValue("lastFw", fileName);
       if (ui->PatchFWCB->isChecked()) {
         settings.setValue("patchImage", true);
-        QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
+        QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_MonoLSB);
         if (!image.isNull()) {
           QString tempDir    = QDir::tempPath();
           QString tempFile;
@@ -603,7 +605,8 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
     if (!tmpFileName.isEmpty()) {
       QImage image(tmpFileName);
       if (!image.isNull()) {
-        ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
+        
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
         ui->InvertColorButton->setEnabled(true);
         ui->ImageFileName->setEnabled(true);
         ui->PatchFWCB->setDisabled(false);

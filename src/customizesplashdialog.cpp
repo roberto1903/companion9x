@@ -44,8 +44,8 @@ void customizeSplashDialog::on_FlashLoadButton_clicked()
     ui->libraryButton->setEnabled(true);
     ui->SaveImageButton->setEnabled(true);
     ui->imageLabel->setPixmap(QPixmap::fromImage(flash.getSplash()));
-  }
-  else {
+    ui->imageLabel->setFixedSize(flash.getSplashWidth()*2,flash.getSplashHeight()*2);
+  } else {
     QMessageBox::information(this, tr("Error"), tr("Could not find bitmap to replace in file"));
     return;
   }
@@ -71,7 +71,7 @@ void customizeSplashDialog::on_ImageLoadButton_clicked() {
     }
     ui->HowToLabel->clear();
     ui->ImageFileName->setText(fileName);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
     ui->SaveFlashButton->setEnabled(true);
     ui->HowToLabel->append("<center>" + tr("Save your custimized firmware") + "</center>");
   }
@@ -90,7 +90,7 @@ void customizeSplashDialog::on_libraryButton_clicked() {
     }
     ui->HowToLabel->clear();
     ui->ImageFileName->setText(fileName);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono)));
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
     ui->SaveFlashButton->setEnabled(true);
     ui->HowToLabel->append("<center>" + tr("Save your custimized firmware") + "</center>");
   }
@@ -111,13 +111,12 @@ void customizeSplashDialog::on_SaveFlashButton_clicked()
     return;
   }
   settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
-  QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_MonoLSB);
+  QImage image = ui->imageLabel->pixmap()->toImage().scaled(flash.getSplashWidth(), flash.getSplashHeight()).convertToFormat(QImage::Format_MonoLSB);
   flash.setSplash(image);
   if (flash.saveFlash(fileName) > 0) {
     ui->HowToLabel->setStyleSheet("background:rgb(0,255.0);");
     ui->HowToLabel->append("<center>" + tr("Firmware correctly saved.") + "</center>");
-  }
-  else {
+  } else {
     ui->HowToLabel->setStyleSheet("background:rgb(255.0.0);");
     ui->HowToLabel->append("<center>" + tr("Firmware not saved.") + "</center>");
   }
@@ -138,7 +137,7 @@ void customizeSplashDialog::on_SaveImageButton_clicked()
   fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastImagesDir").toString(), tr("PNG images (*.png);;"), 0, QFileDialog::DontConfirmOverwrite);
   if (!fileName.isEmpty()) {
     settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
-    QImage image = ui->imageLabel->pixmap()->toImage().scaled(SPLASH_WIDTH, SPLASH_HEIGHT).convertToFormat(QImage::Format_Mono);
+    QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono);
     image.save(fileName, "PNG");
   }
 }
