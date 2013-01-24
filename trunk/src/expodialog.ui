@@ -59,27 +59,13 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="label_phase">
-     <property name="text">
-      <string>Phase</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="phasesCB">
-     <property name="whatsThis">
-      <string>Phase used by the expo.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
     <widget class="QLabel" name="label_phases">
      <property name="text">
       <string>Phases</string>
      </property>
     </widget>
    </item>
-   <item row="9" column="0" colspan="2">
+   <item row="8" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="minimumSize">
       <size>
@@ -95,7 +81,7 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0" colspan="2">
+   <item row="7" column="0" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -108,7 +94,7 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1">
+   <item row="3" column="1">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
       <widget class="QLabel" name="lb_FP0">
@@ -265,14 +251,14 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0">
+   <item row="4" column="0">
     <widget class="QLabel" name="label_7">
      <property name="text">
       <string>Switch</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="4" column="1">
     <widget class="QComboBox" name="switchesCB">
      <property name="whatsThis">
       <string>Switch used by the expo.
@@ -280,14 +266,14 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
+   <item row="5" column="0">
     <widget class="QLabel" name="label_curves">
      <property name="text">
       <string>Curve/Exponential</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="5" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="curvesCB">
@@ -308,14 +294,14 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
      </item>
     </layout>
    </item>
-   <item row="7" column="0">
+   <item row="6" column="0">
     <widget class="QLabel" name="label_9">
      <property name="text">
       <string>Mode</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
+   <item row="6" column="1">
     <widget class="QComboBox" name="modeCB">
      <item>
       <property name="text">

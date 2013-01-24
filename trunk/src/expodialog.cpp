@@ -37,8 +37,6 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         ui->expoCB->hide();
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
-        ui->label_phase->hide();
-        ui->phasesCB->hide();
         ui->label_phases->hide();
         for (int i=0; i<9; i++) {
           lb_fp[i]->hide();
@@ -46,8 +44,6 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         }
     } else {
       if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
-        ui->label_phase->hide();
-        ui->phasesCB->hide();
         int mask=1;
         for (int i=0; i<9 ; i++) {
           if ((ed->phases & mask)==0) {
@@ -65,7 +61,6 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
           cb_fp[i]->hide();
         }
         ui->label_phases->hide();
-        populatePhasesCB(ui->phasesCB,ed->phase);
       }
     }
     if (!GetEepromInterface()->getCapability(HasExpoNames)) {
@@ -78,7 +73,6 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     connect(ui->expoCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->expoCurveCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->weightCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
-    connect(ui->phasesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->modeCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -156,7 +150,6 @@ void ExpoDialog::valuesChanged()
       int zeros=0;
       int ones=0;
       int phtemp=ed->phases;
-      int ph=0;
       for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
         if (phtemp & 1) {
           ones++;
@@ -166,44 +159,26 @@ void ExpoDialog::valuesChanged()
         }
         phtemp >>=1;
       }
-      if (zeros==GetEepromInterface()->getCapability(FlightPhases) || zeros==0) {
-        ed->phase=0;
-      }
-      else if (zeros==1) {
+      if (zeros==1) {
         phtemp=ed->phases;
         for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
           if ((phtemp & 1)==0) {
-            ph=i;
             break;
           }
           phtemp >>=1;
         }
-        ed->phase=ph+1;
       }
       else if (ones==1) {
         phtemp=ed->phases;
         for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
           if (phtemp & 1) {
-            ph=i;
             break;
           }
           phtemp >>=1;
         }
-        ed->phase=-(ph+1);
       }
-    }
-    else {
-      ed->phase  = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
-      if (ed->phase <0 ) {
-        ed->phases= 1 << (ed->phase -1);
-      }
-      else if (ed->phase==0) {
-        ed->phases=0;
-      }
-      else {
-        ed->phases=( 2<< GetEepromInterface()->getCapability(FlightPhases))-1;
-        ed->phases &= ~(1 << (ed->phase -1));
-      }
+    } else {
+      ed->phases=0;
     }  
 }
 

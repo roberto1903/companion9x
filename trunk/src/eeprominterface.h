@@ -410,7 +410,6 @@ class ExpoData {
     unsigned int phases;        // -5=!FP4, 0=normal, 5=FP4
     int  weight;
     int  expo;
-    int8_t phase; // TODO remove
     unsigned int curveMode;
     int  curveParam;
     char name[10+1];
@@ -470,7 +469,6 @@ class MixData {
     MltpxValue mltpx;          // multiplex method 0=+ 1=* 2=replace
     unsigned int mixWarn;           // mixer warning
     unsigned int enableFmTrim;
-    // int  phase;             // -5=!FP4, 0=normal, 5=FP4
     unsigned int phases;             // -5=!FP4, 0=normal, 5=FP4
     int    sOffset;
     char   name[10+1];
