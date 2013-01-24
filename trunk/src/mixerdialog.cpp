@@ -59,24 +59,16 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         cb_fp[i]->hide();
       }
     } else {
-      if (GetEepromInterface()->getCapability(MixFlightPhases)) {
-        int mask=1;
-        for (int i=0; i<9 ; i++) {
-          if ((md->phases & mask)==0) {
-            cb_fp[i]->setChecked(true);
-          }
-          mask <<= 1;
+      int mask=1;
+      for (int i=0; i<9 ; i++) {
+        if ((md->phases & mask)==0) {
+          cb_fp[i]->setChecked(true);
         }
-        for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
-          lb_fp[i]->hide();
-          cb_fp[i]->hide();
-        }
-      } else {
-        for (int i=0; i<9; i++) {
-          lb_fp[i]->hide();
-          cb_fp[i]->hide();
-        }
-        ui->label_phases->hide();
+        mask <<= 1;
+      }
+      for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
+        lb_fp[i]->hide();
+        cb_fp[i]->hide();
       }
     }
     ui->mixerName->setText(md->name);

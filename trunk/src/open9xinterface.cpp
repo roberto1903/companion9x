@@ -605,8 +605,6 @@ int Open9xInterface::getCapability(const Capability capability)
     case Gvars:
     case GvarsAreNamed:
     case ExpoIsCurve:
-    case ExpoFlightPhases:
-    case MixFlightPhases:
       return 1;
     case GvarsFlightPhases:
       if (board == BOARD_STOCK)

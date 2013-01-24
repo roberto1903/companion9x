@@ -43,25 +43,17 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
           cb_fp[i]->hide();
         }
     } else {
-      if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
-        int mask=1;
-        for (int i=0; i<9 ; i++) {
-          if ((ed->phases & mask)==0) {
-            cb_fp[i]->setChecked(true);
-          }
-          mask <<= 1;
+      int mask=1;
+      for (int i=0; i<9 ; i++) {
+        if ((ed->phases & mask)==0) {
+          cb_fp[i]->setChecked(true);
         }
-        for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
-          lb_fp[i]->hide();
-          cb_fp[i]->hide();
-        }
-      } else {
-        for (int i=0; i<9; i++) {
-          lb_fp[i]->hide();
-          cb_fp[i]->hide();
-        }
-        ui->label_phases->hide();
+        mask <<= 1;
       }
+      for (int i=GetEepromInterface()->getCapability(FlightPhases); i<9;i++) {
+        lb_fp[i]->hide();
+        cb_fp[i]->hide();
+      }      
     }
     if (!GetEepromInterface()->getCapability(HasExpoNames)) {
         ui->label_name->hide();
@@ -103,31 +95,28 @@ void ExpoDialog::valuesChanged()
 {
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     if (ui->curvesCB->currentIndex()==0)  {
-        if (GetEepromInterface()->getCapability(ExpoIsCurve)) {
-          ed->curveMode = 0;
-          ui->expoCurveCB->show();
-          ed->curveParam = ui->expoCurveCB->itemData(ui->expoCurveCB->currentIndex()).toInt();
-          ed->expo = ed->curveParam;
-        }
-        else {
-          ui->expoCurveCB->hide();
-          ed->curveMode = 0;
-          ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
-          ed->curveParam = ed->expo;
-        }
-    }
-    else {
-        if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
-          ed->curveMode = 1;
-          ed->curveParam = ui->curvesCB->currentIndex();
-          ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
-        }
-        else {
-          ed->curveMode = 1;
-          ed->curveParam = ui->curvesCB->currentIndex();
-          ed->expo = 0;
-        }
+      if (GetEepromInterface()->getCapability(ExpoIsCurve)) {
+        ed->curveMode = 0;
+        ui->expoCurveCB->show();
+        ed->curveParam = ui->expoCurveCB->itemData(ui->expoCurveCB->currentIndex()).toInt();
+        ed->expo = ed->curveParam;
+      } else {
         ui->expoCurveCB->hide();
+        ed->curveMode = 0;
+        ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
+        ed->curveParam = ed->expo;
+      }
+    } else {
+      if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
+        ed->curveMode = 1;
+        ed->curveParam = ui->curvesCB->currentIndex();
+        ed->expo = ui->expoCB->itemData(ui->expoCB->currentIndex()).toInt();
+      } else {
+        ed->curveMode = 1;
+        ed->curveParam = ui->curvesCB->currentIndex();
+        ed->expo = 0;
+      }
+      ui->expoCurveCB->hide();
     }
     
     ed->weight = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
@@ -146,7 +135,7 @@ void ExpoDialog::valuesChanged()
       ed->phases<<=1;
     }
     ed->phases>>=1;
-    if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
+    if (GetEepromInterface()->getCapability(FlightPhases)) {
       int zeros=0;
       int ones=0;
       int phtemp=ed->phases;

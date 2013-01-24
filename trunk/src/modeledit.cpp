@@ -1173,7 +1173,7 @@ void ModelEdit::tabExpos()
           if (md->curveMode==0 && md->curveParam!=0)  
             str += " " + tr("Expo") + getGVarString(md->curveParam, true).rightJustified(7, ' ');
         }
-        if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
+        if (GetEepromInterface()->getCapability(FlightPhases)) {
           if(md->phases) {
             if (md->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
               int mask=1;
@@ -1291,7 +1291,7 @@ void ModelEdit::tabMixes()
         str += " " + getGVarString(md->weight, true).rightJustified(5, ' ');
         str += md->srcRaw.toString();
         unsigned int fpCount = GetEepromInterface()->getCapability(FlightPhases);
-        if (GetEepromInterface()->getCapability(MixFlightPhases)) {
+        if (GetEepromInterface()->getCapability(FlightPhases)) {
           if(md->phases) {
             if (md->phases!=(unsigned int)(1<<fpCount)-1) {
               int mask=1;
@@ -1327,11 +1327,6 @@ void ModelEdit::tabMixes()
             }
           }
         }
-/*        else {
-          if(md->phase) {
-            str += " " + tr("Phase") + QString("(%1)").arg(getPhaseName(md->phase,g_model.phaseData[i].name));
-          }
-        }*/
         if(md->swtch.type != SWITCH_TYPE_NONE) str += " " + tr("Switch") + QString("(%1)").arg(md->swtch.toString());
         if(md->carryTrim>0) {
           str += " " +tr("No Trim");
