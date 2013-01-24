@@ -365,15 +365,18 @@ void FlashInterface::SeekSplash(void)
 bool FlashInterface::setSplash(QImage newsplash) 
 {
   char b[SPLASHX9D_SIZE]= {0};
-  quint8 * p = newsplash.bits();
+  uint qrgb, black;
+  black=QColor(0,0,0).rgb();
   QByteArray splash;
   if (splash_offset==0) {
     return false;
   }
   else {
     for(uint y=0; y<splash_height; y++)
-        for(uint x=0; x<splash_width; x++)
-            b[splash_width*(y/8) + x] |= ((p[(y*splash_width + x)/8] & (1<<(x%8))) ? 1 : 0)<<(y % 8);
+        for(uint x=0; x<splash_width; x++) {
+          qrgb=newsplash.pixel(x,y);
+          b[splash_width*(y/8) + x] |= ((qrgb==black) ? 1 : 0)<<(y % 8);
+        }
 
     splash.clear();
     splash.append(b, splash_size);

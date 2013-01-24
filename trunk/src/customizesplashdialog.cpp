@@ -31,11 +31,18 @@ void customizeSplashDialog::on_FlashLoadButton_clicked()
   ui->HowToLabel->clear();
   ui->HowToLabel->setStyleSheet("background:rgb(255, 255, 0)");
   fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastFlashDir").toString(), tr("HEX files (*.hex);;"));
+  QFile file(fileName);
+  if (!file.exists()) {
+    ui->FWFileName->clear();
+    ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
+    return;    
+  }
   if (fileName.isEmpty()) {
     ui->FWFileName->clear();
     ui->HowToLabel->append("<center>" + tr("Select an original firmware file") + "</center>");
     return;
   }
+  
   ui->FWFileName->setText(fileName);
   FlashInterface flash(fileName);
   if (flash.hasSplash()) {
