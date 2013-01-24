@@ -12,7 +12,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     QLabel * lb_fp[] = {ui->lb_FP0,ui->lb_FP1,ui->lb_FP2,ui->lb_FP3,ui->lb_FP4,ui->lb_FP5,ui->lb_FP6,ui->lb_FP7,ui->lb_FP8 };
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
-    if (md->destCh > GetEepromInterface()->getCapability(Outputs))
+    if (md->destCh > (unsigned int)GetEepromInterface()->getCapability(Outputs))
       this->setWindowTitle(tr("DEST -> X%1").arg(md->destCh-GetEepromInterface()->getCapability(Outputs)));
     else
       this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
@@ -81,7 +81,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
           cb_fp[i]->hide();
         }
         ui->label_phases->hide();
-        populatePhasesCB(ui->phasesCB,md->phase);
+//        populatePhasesCB(ui->phasesCB,md->phase);
       }
     }
     ui->mixerName->setText(md->name);
@@ -166,7 +166,7 @@ void MixerDialog::valuesChanged()
       ui->differentialCB->show();
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
-    md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
+//    md->phase     = ui->phasesCB->itemData(ui->phasesCB->currentIndex()).toInt();
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
     md->mixWarn   = ui->warningCB->currentIndex();
     md->mltpx     = (MltpxValue)ui->mltpxCB->currentIndex();

@@ -631,7 +631,7 @@ t_Open9xMixData_v201::operator MixData ()
   c9x.carryTrim = carryTrim;
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
-  c9x.phase = phase;
+//  c9x.phase = phase;
   if (phase<0) {
     c9x.phases= 1 << (-phase -1);
   } else if (phase==0) {
@@ -776,7 +776,7 @@ t_Open9xMixData_v203::operator MixData ()
   c9x.carryTrim = carryTrim;
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
-  c9x.phase = phase;
+  // c9x.phase = phase;
   if (phase<0) {
     c9x.phases= 1 << (-phase -1);
   } else if (phase==0) {
@@ -923,7 +923,7 @@ t_Open9xMixData_v205::operator MixData ()
     c9x.carryTrim = carryTrim;
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
-    c9x.phase = phase;
+    // c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
     } else if (phase==0) {
@@ -1077,7 +1077,7 @@ t_Open9xMixData_v209::operator MixData ()
     c9x.carryTrim = carryTrim;
     c9x.mltpx = (MltpxValue)mltpx;
     c9x.mixWarn = mixWarn;
-    c9x.phase = phase;
+    // c9x.phase = phase;
     if (phase<0) {
       c9x.phases= 1 << (-phase -1);
     } else if (phase==0) {
@@ -1817,7 +1817,7 @@ t_Open9xFrSkyChannelData_v201::t_Open9xFrSkyChannelData_v201(FrSkyChannelData &c
   alarms_level = (c9x.alarms[1].level << 2) + c9x.alarms[0].level;
   alarms_greater = (c9x.alarms[1].greater << 1) + c9x.alarms[0].greater;
   type = c9x.type;
-  offset = LIMIT((int8_t)-8, c9x.offset, (int8_t)+7);
+  offset = LIMIT<int8_t>(-8, c9x.offset, +7);
 }
 
 t_Open9xFrSkyChannelData_v201::operator FrSkyChannelData ()

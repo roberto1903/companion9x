@@ -326,7 +326,7 @@ void printDialog::printExpo()
     str.append(tr("Expo/Dr Settings"));
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
     int ec=0;
-    int lastCHN = -1;
+    unsigned int lastCHN = 255;
     for(int i=0; i<MAX_EXPOS; i++) {
       ExpoData *ed=&g_model->expoData[i];
       if(ed->mode==0)
@@ -374,7 +374,7 @@ void printDialog::printExpo()
       }   
       if (GetEepromInterface()->getCapability(ExpoFlightPhases)) {
         if(ed->phases) {
-          if (ed->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+          if (ed->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
             int mask=1;
             int first=0;
             for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
@@ -407,7 +407,7 @@ void printDialog::printExpo()
             str += tr("DISABLED")+QString(" !!!");
           }
         }
-      } else {
+      }/* else {
         if (ed->phase!=0) {
           PhaseData *pd = &g_model->phaseData[abs(ed->phase)-1];
           if (ed->phase<0) {
@@ -416,7 +416,7 @@ void printDialog::printExpo()
             str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(ed->phase-1).arg(pd->name);               
           }
         }
-      }
+      }*/
       if (ed->swtch.type) 
         str += " " + tr("Switch") + QString("(%1)").arg(ed->swtch.toString());
       if (ed->curveMode)
@@ -443,10 +443,10 @@ void printDialog::printMixes()
     str.append(tr("Mixers"));
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
-    int lastCHN = -1;
+    unsigned int lastCHN = 255;
     for(int i=0; i<GetEepromInterface()->getCapability(Mixes); i++) {
       MixData *md = &g_model->mixData[i];
-      if(!md->destCh || md->destCh>GetEepromInterface()->getCapability(Outputs) ) break;
+      if(!md->destCh || md->destCh>(unsigned int)GetEepromInterface()->getCapability(Outputs) ) break;
       str.append("<tr><td><font size=+1 face='Courier New'>");
       if(lastCHN!=md->destCh) {
         lastCHN=md->destCh;
@@ -477,10 +477,10 @@ void printDialog::printMixes()
       if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
       if (GetEepromInterface()->getCapability(MixFlightPhases)) {
         if(md->phases) {
-          if (md->phases!=(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
+          if (md->phases!=(unsigned int)(1<<GetEepromInterface()->getCapability(FlightPhases))-1) {
             int mask=1;
             int first=0;
-            for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases);i++) {
+            for (int i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
               if (!(md->phases & mask)) {
                 first++;
               }
@@ -510,7 +510,7 @@ void printDialog::printMixes()
             str += tr("DISABLED")+QString(" !!!");
           }
         }
-      } else {
+      } /*else {
         if (md->phase!=0) {
           PhaseData *pd = &g_model->phaseData[abs(md->phase)-1];
           if (md->phase<0) {
@@ -519,7 +519,7 @@ void printDialog::printMixes()
             str += " "+tr("Phase")+" "+tr("FP")+QString("%1 (%2)").arg(md->phase-1).arg(pd->name);               
           }
         }
-      }
+      }*/
       if (GetEepromInterface()->getCapability(HasMixerNames)) {
         QString MixerName;
         MixerName.append(md->name);
