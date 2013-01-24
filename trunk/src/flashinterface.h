@@ -21,7 +21,10 @@
 #define MAX_FSIZE (256*1024)
 #define SPLASH_WIDTH (128)
 #define SPLASH_HEIGHT (64)
+#define SPLASHX9D_WIDTH (212)
+#define SPLASHX9D_HEIGHT (64)
 #define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
+#define SPLASHX9D_SIZE (SPLASHX9D_WIDTH*SPLASHX9D_HEIGHT/8)
 #define ERSPLASH_MARKER "Splash"
 #define ERSPLASH_OFFSET (10)
 #define O9X_SPS "SPS"
@@ -57,6 +60,8 @@ public:
   QImage getSplash();
   bool setSplash(QImage newsplash);
   bool hasSplash();
+  uint getSplashWidth();
+  uint getSplashHeight();
   uint saveFlash(QString fileName);
   bool isValid();
 
@@ -77,6 +82,8 @@ private:
   uint splash_offset;
   uint splash_type;
   uint splash_size;
+  uint splash_width;
+  uint splash_height;
   uint flash_size;
 
 protected:

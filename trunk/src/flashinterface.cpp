@@ -240,6 +240,16 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
+    splash.append((char *)open9xx9d_splash, sizeof(open9xx9d_splash));
+    start = flash.indexOf(splash);
+    if (start>0) {
+      splash_offset=start;
+      splash_type=5;
+      splash_size=sizeof(open9xx9d_splash);
+    }
+  }
+  if (start==-1) {
+    splash.clear();
     splash.append((char *)gr9xv4_splash, sizeof(gr9xv4_splash));
     start = flash.indexOf(splash);
     if (start>0) {
@@ -286,6 +296,12 @@ void FlashInterface::SeekSplash(void)
               splash_size=sizeof(open9x_splash);
               break;
             }
+            if (diff==1702) {
+              splash_offset=start+O9X_OFFSET;
+              splash_type=5;
+              splash_size=sizeof(open9xx9d_splash);
+              break;
+            }            
           }
         }
       }
@@ -335,40 +351,58 @@ void FlashInterface::SeekSplash(void)
       splash_size=sizeof(er9x_splash);
     }
   }
-
+  if (splash_offset>0) {
+    if (splash_type==5) {
+      splash_width=SPLASHX9D_WIDTH;
+      splash_height=SPLASHX9D_HEIGHT;
+    } else {
+      splash_width=SPLASH_WIDTH;
+      splash_height=SPLASH_HEIGHT;
+    }
+  }
 }
 
 bool FlashInterface::setSplash(QImage newsplash) 
 {
-  char b[SPLASH_SIZE]= {0};
+  char b[SPLASHX9D_SIZE]= {0};
   quint8 * p = newsplash.bits();
   QByteArray splash;
   if (splash_offset==0) {
     return false;
   }
   else {
-    for(int y=0; y<SPLASH_HEIGHT; y++)
-        for(int x=0; x<SPLASH_WIDTH; x++)
-            b[SPLASH_WIDTH*(y/8) + x] |= ((p[(y*SPLASH_WIDTH + x)/8] & (1<<(x%8))) ? 1 : 0)<<(y % 8);
+    for(uint y=0; y<splash_height; y++)
+        for(uint x=0; x<splash_width; x++)
+            b[splash_width*(y/8) + x] |= ((p[(y*splash_width + x)/8] & (1<<(x%8))) ? 1 : 0)<<(y % 8);
 
     splash.clear();
-    splash.append(b, sizeof(b));
+    splash.append(b, splash_size);
     flash.replace(splash_offset,splash_size,splash);
     return true;
   }
 }
 
+uint FlashInterface::getSplashWidth()
+{
+  return splash_width;
+}
+
+uint FlashInterface::getSplashHeight()
+{
+  return splash_height;
+}
+
 QImage FlashInterface::getSplash()
 {
   uint k=0;
-  QImage image(128, 64, QImage::Format_Mono);
-  uchar b[SPLASH_SIZE] = {0};
+  QImage image(splash_width, splash_height, QImage::Format_Mono);
+  uchar b[SPLASHX9D_SIZE] = {0};
   if (splash_offset>0) {
     for (k=0; k<sizeof(b); k++)
       b[k]=flash.at(splash_offset+k);
-    for(int y=0; y<SPLASH_HEIGHT; y++)
-      for(int x=0; x<SPLASH_WIDTH; x++)
-        image.setPixel(x,y,((b[SPLASH_WIDTH*(y/8) + x]) & (1<<(y % 8))) ? 0 : 1  );
+    for(uint y=0; y<splash_height; y++)
+      for(uint x=0; x<splash_width; x++)
+        image.setPixel(x,y,((b[splash_width*(y/8) + x]) & (1<<(y % 8))) ? 0 : 1  );
   }
   return image;
 }
