@@ -30,6 +30,7 @@
 
 #include <inttypes.h>
 #include "eeprominterface.h"
+#include "eepromimportexport.h"
 #include <qbytearray.h>
 
 struct CurveInfo {
@@ -1194,7 +1195,8 @@ class FrskyDataFieldV212: public StructField {
 class TimerModeV212: public TransformedField {
   public:
     TimerModeV212(TimerMode & mode):
-      TransformedField(new SignedField<8>(_mode)),
+      TransformedField(internalField),
+      internalField(_mode),
       mode(mode)
     {
     }
@@ -1230,6 +1232,7 @@ class TimerModeV212: public TransformedField {
     }
 
   protected:
+    SignedField<8> internalField;
     TimerMode & mode;
     int _mode;
 };
@@ -1243,7 +1246,8 @@ template <int N>
 class SwitchField: public TransformedField {
   public:
     SwitchField(RawSwitch & sw):
-      TransformedField(new SignedField<N>(_sw)),
+      TransformedField(internalField),
+      internalField(_sw),
       sw(sw)
     {
     }
@@ -1259,6 +1263,7 @@ class SwitchField: public TransformedField {
     }
 
   protected:
+    SignedField<N> internalField;
     int _sw;
     RawSwitch & sw;
 };
@@ -1378,28 +1383,53 @@ class MixSourceFieldV211: public UnsignedField<N> {
     unsigned int param;
 };
 
-class MixFieldV211: public StructField {
+class MixFieldV211: public TransformedField {
   public:
-    MixFieldV211(MixData & mix)
+    MixFieldV211(MixData & mix):
+      TransformedField(internalField),
+      mix(mix)
     {
-      Append(new UnsignedField<4>(mix.destCh));
-      Append(new BoolField<1>((bool &)mix.curve));
-      Append(new BoolField<1>(mix.noExpo));
-      Append(new SpareBitsField<2>());
-      Append(new SignedField<8>(mix.weight));
-      Append(new SwitchField<6>(mix.swtch));
-      Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
-      Append(new UnsignedField<5>(mix.phases));
-      Append(new SignedField<3>(mix.carryTrim));
-      Append(new MixSourceFieldV211<6>(mix.srcRaw));
-      Append(new UnsignedField<2>(mix.mixWarn));
-      Append(new UnsignedField<4>(mix.delayUp));
-      Append(new UnsignedField<4>(mix.delayDown));
-      Append(new UnsignedField<4>(mix.speedUp));
-      Append(new UnsignedField<4>(mix.speedDown));
-      Append(new MixCurveParamField<8>(mix.curve, mix.differential));
-      Append(new SignedField<8>(mix.sOffset));
+      internalField.Append(new UnsignedField<4>(_mix.destCh));
+      internalField.Append(new BoolField<1>(_curve));
+      internalField.Append(new BoolField<1>(_mix.noExpo));
+      internalField.Append(new SpareBitsField<2>());
+      internalField.Append(new SignedField<8>(_mix.weight));
+      internalField.Append(new SwitchField<6>(_mix.swtch));
+      internalField.Append(new UnsignedField<2>((unsigned int &)_mix.mltpx));
+      internalField.Append(new UnsignedField<5>(_mix.phases));
+      internalField.Append(new SignedField<3>(_mix.carryTrim));
+      internalField.Append(new MixSourceFieldV211<6>(_mix.srcRaw));
+      internalField.Append(new UnsignedField<2>(_mix.mixWarn));
+      internalField.Append(new UnsignedField<4>(_mix.delayUp));
+      internalField.Append(new UnsignedField<4>(_mix.delayDown));
+      internalField.Append(new UnsignedField<4>(_mix.speedUp));
+      internalField.Append(new UnsignedField<4>(_mix.speedDown));
+      internalField.Append(new MixCurveParamField<8>(_mix.curve, _mix.differential));
+      internalField.Append(new SignedField<8>(_mix.sOffset));
     }
+
+    virtual void beforeExport()
+    {
+      if (mix.destCh && mix.srcRaw.type != SOURCE_TYPE_NONE) {
+        _mix = mix;
+        _mix.destCh -= 1;
+        _curve = mix.curve;
+      }
+    }
+
+    virtual void afterImport()
+    {
+      if (_mix.srcRaw.type != SOURCE_TYPE_NONE) {
+        mix = _mix;
+        mix.destCh += 1;
+      }
+    }
+
+  protected:
+    StructField internalField;
+    MixData & mix;
+    MixData _mix;
+    bool _curve;
 };
 
 class ExpoFieldV211: public StructField {
@@ -1519,7 +1549,7 @@ class HeliFieldV211: public StructField {
 class CustomSwitchFieldV209: public TransformedField {
   public:
     CustomSwitchFieldV209(CustomSwData & csw):
-      TransformedField(&internalField),
+      TransformedField(internalField),
       csw(csw)
     {
       internalField.Append(new SignedField<8>(v1));
@@ -1578,7 +1608,7 @@ class CustomSwitchFieldV209: public TransformedField {
 class CustomFunctionFieldV212: public TransformedField {
   public:
     CustomFunctionFieldV212(FuncSwData & fn):
-      TransformedField(&internalField),
+      TransformedField(internalField),
       fn(fn)
     {
       internalField.Append(new SwitchField<8>(fn.swtch));
@@ -1644,7 +1674,7 @@ class CustomFunctionFieldV212: public TransformedField {
 class PhaseFieldV201: public TransformedField {
   public:
     PhaseFieldV201(PhaseData & phase):
-      TransformedField(&internalField),
+      TransformedField(internalField),
       phase(phase)
     {
       for (int i=0; i<NUM_STICKS; i++)
