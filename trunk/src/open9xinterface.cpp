@@ -517,12 +517,12 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
         case 212:
           if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
-          else if (board == BOARD_GRUVIN9X)
-            result = saveModel<Open9xGruvin9xModelData_v212>(i, radioData.models[i]);
 #if 0
           else
             result = saveModelVariantNew<Open9xModelDataNew>(i, radioData.models[i], board, variant);
 #else
+          else if (board == BOARD_GRUVIN9X)
+            result = saveModel<Open9xGruvin9xModelData_v212>(i, radioData.models[i]);
           else if (board == BOARD_M128)
             result = saveModel<Open9xM128ModelData_v212>(i, radioData.models[i]);
           else

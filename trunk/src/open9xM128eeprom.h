@@ -17,7 +17,7 @@
 #ifndef open9xM128eeprom_h
 #define open9xM128eeprom_h
 
-#include "open9xeeprom.h"
+#include "open9xStockeeprom.h"
 #include "open9xGruvin9xeeprom.h"
 
 PACK(typedef struct t_Open9xM128PhaseData_v212 {

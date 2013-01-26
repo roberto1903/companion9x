@@ -17,7 +17,7 @@
 #ifndef open9xSky9xeeprom_h
 #define open9xSky9xeeprom_h
 
-#include "open9xeeprom.h"
+#include "open9xStockeeprom.h"
 
 #define O9X_X9D_MAX_PHASES  9
 #define O9X_X9D_MAX_MIXERS  64
