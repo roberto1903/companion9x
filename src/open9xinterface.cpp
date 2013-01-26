@@ -317,9 +317,10 @@ bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uin
 }
 
 template <class T>
-bool Open9xInterface::saveModelVariantNew(unsigned int index, ModelData &model, uint32_t variant)
+bool Open9xInterface::saveModelVariantNew(unsigned int index, ModelData &model, BoardEnum board, uint32_t variant)
 {
-  T open9xModel(model, variant);
+  T open9xModel(model, board, variant);
+  // open9xModel.Dump(model.name);
   QByteArray eeprom;
   open9xModel.Export(eeprom);
   int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
@@ -518,12 +519,13 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
           else if (board == BOARD_GRUVIN9X)
             result = saveModel<Open9xGruvin9xModelData_v212>(i, radioData.models[i]);
+#if 0
+          else
+            result = saveModelVariantNew<Open9xModelDataNew>(i, radioData.models[i], board, variant);
+#else
           else if (board == BOARD_M128)
             result = saveModel<Open9xM128ModelData_v212>(i, radioData.models[i]);
           else
-#if 0
-            result = saveModelVariantNew<Open9xModelDataV212>(i, radioData.models[i], variant);
-#else
             result = saveModelVariant<Open9xModelData_v212>(i, radioData.models[i], variant);
 #endif            
           break;

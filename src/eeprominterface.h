@@ -705,7 +705,7 @@ class ModelData {
     char      name[10+1];
     uint8_t   modelVoice;
     TimerData timers[2];
-    Protocol  protocol;
+    int       protocol;
     int       ppmNCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
