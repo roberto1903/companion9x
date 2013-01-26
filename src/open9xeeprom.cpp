@@ -85,9 +85,10 @@ class SwitchField: public TransformedField {
 
 class PhaseField: public TransformedField {
   public:
-    PhaseField(PhaseData & phase, BoardEnum board):
+    PhaseField(PhaseData & phase, int index, BoardEnum board):
       TransformedField(internalField),
       phase(phase),
+      index(index),
       board(board)
     {
       if (board == BOARD_STOCK) {
@@ -99,7 +100,7 @@ class PhaseField: public TransformedField {
       }
       else {
         for (int i=0; i<NUM_STICKS; i++)
-          internalField.Append(new SignedField<16>(phase.trim[i]));
+          internalField.Append(new SignedField<16>(trimBase[i]));
       }
 
       internalField.Append(new SwitchField<8>(phase.swtch));
@@ -124,25 +125,49 @@ class PhaseField: public TransformedField {
 
     virtual void beforeExport()
     {
-      if (board == BOARD_STOCK) {
-        for (int i=0; i<NUM_STICKS; i++) {
-          trimBase[i] = phase.trim[i] >> 2;
-          trimExt[i] = (phase.trim[i] & 0x03);
+      for (int i=0; i<NUM_STICKS; i++) {
+        int trim;
+        if (phase.trimRef[i] >= 0) {
+          trim = 501 + phase.trimRef[i] - (phase.trimRef[i] >= index ? 1 : 0);
+        }
+        else {
+          trim = std::max(-500, std::min(500, phase.trim[i]));
+        }
+        if (board == BOARD_STOCK) {
+          trimBase[i] = trim >> 2;
+          trimExt[i] = (trim & 0x03);
+        }
+        else {
+          trimBase[i] = trim;
         }
       }
     }
 
     virtual void afterImport()
     {
-      if (board == BOARD_STOCK) {
-        for (int i=0; i<NUM_STICKS; i++)
-          phase.trim[i] = ((trimBase[i]) << 2) + (trimExt[i] & 0x03);
+      for (int i=0; i<NUM_STICKS; i++) {
+        int trim;
+        if (board == BOARD_STOCK)
+          trim = ((trimBase[i]) << 2) + (trimExt[i] & 0x03);
+        else
+          trim = trimBase[i];
+        if (trim > 500) {
+          phase.trimRef[i] = trim - 501;
+          if (phase.trimRef[i] >= index)
+            phase.trimRef[i] += 1;
+          phase.trim[i] = 0;
+        }
+        else {
+          phase.trim[i] = trim;
+        }
+
       }
     }
 
   protected:
     StructField internalField;
     PhaseData & phase;
+    int index;
     BoardEnum board;
     int trimBase[NUM_STICKS];
     int trimExt[NUM_STICKS];
@@ -732,7 +757,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new CustomFunctionField(modelData.funcSw[i], board));
   Append(new HeliField(modelData.swashRingData, board));
   for (int i=0; i<O9X_MAX_PHASES; i++)
-    Append(new PhaseField(modelData.phaseData[i], board));
+    Append(new PhaseField(modelData.phaseData[i], i, board));
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
   Append(new UnsignedField<8>(modelData.modelId));
