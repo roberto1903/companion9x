@@ -103,8 +103,8 @@ for (int i=0; i<3; i++)
 #elif defined(PCBX9D)
 // TODO
 #else
-simuSetSwitch(0, inputs.sRud);
-simuSetSwitch(1, inputs.sThr);
+simuSetSwitch(0, inputs.sThr);
+simuSetSwitch(1, inputs.sRud);
 simuSetSwitch(2, inputs.sEle);
 simuSetSwitch(3, inputs.sId0);
 simuSetSwitch(4, inputs.sAil);
