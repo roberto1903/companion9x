@@ -127,7 +127,7 @@ class PhaseField: public TransformedField {
       if (board == BOARD_STOCK) {
         for (int i=0; i<NUM_STICKS; i++) {
           trimBase[i] = phase.trim[i] >> 2;
-          trimExt[i] = (phase.trim[i] & 0x03) << (2*i);
+          trimExt[i] = (phase.trim[i] & 0x03);
         }
       }
     }
@@ -136,7 +136,7 @@ class PhaseField: public TransformedField {
     {
       if (board == BOARD_STOCK) {
         for (int i=0; i<NUM_STICKS; i++)
-          phase.trim[i] = ((trimBase[i]) << 2) + ((trimExt[i] >> (2*i)) & 0x03);
+          phase.trim[i] = ((trimBase[i]) << 2) + (trimExt[i] & 0x03);
       }
     }
 
