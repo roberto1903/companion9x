@@ -20,7 +20,7 @@
 #define O9X_V4_MAX_CSFUNCOLD 13
 #define O9X_V4_MAX_CSFUNC 15
 
-#include "open9xeeprom.h"
+#include "open9xStockeeprom.h"
 
 PACK(typedef struct t_Open9xGruvin9xTimerData_v212 {
   int8_t     mode;

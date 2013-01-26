@@ -229,7 +229,8 @@ enum RawSourceType {
   SOURCE_TYPE_CH,
   SOURCE_TYPE_TIMER,
   SOURCE_TYPE_TELEMETRY,
-  SOURCE_TYPE_GVAR        
+  SOURCE_TYPE_GVAR,
+  MAX_SOURCE_TYPE
 };
 class ModelData;
 

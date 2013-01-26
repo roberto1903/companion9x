@@ -103,6 +103,7 @@ SET( companion9x_SRCS
      gruvin9xeeprom.cpp
      gruvin9xinterface.cpp  
      open9xeeprom.cpp
+     open9xStockeeprom.cpp
      open9xinterface.cpp
      open9xsimulator.cpp  
      open9ximport.cpp
