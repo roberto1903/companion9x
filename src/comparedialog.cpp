@@ -1627,7 +1627,7 @@ void compareDialog::printFrSky()
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor2(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[1].value,10)+"</td>");
-  str.append("</table>");
+  str.append("</table></br>");
 
     if (GetEepromInterface()->getCapability(TelemetryBars) || GetEepromInterface()->getCapability(TelemetryCSFields)) {
     for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/8; j++) {
@@ -1645,7 +1645,7 @@ void compareDialog::printFrSky()
         }
         str.append("</table>");
       } else {
-        str.append("<table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b><font color="+color+">"+tr("Telemetry Bars")+"</b></td></tr>");
+        str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr><td colspan=4 align=\"Left\"><b><font color="+color+">"+tr("Telemetry Bars")+"</b></td></tr>");
         str.append("<tr><td  align=\"Center\"><b>"+tr("Bar Number")+"</b></td><td  align=\"Center\"><b>"+tr("Source")+"</b></td><td  align=\"Center\"><b>"+tr("Min")+"</b></td><td  align=\"Center\"><b>"+tr("Max")+"</b></td></tr>");
         for (int i=0; i<4; i++) {
           str.append("<tr><td  align=\"Center\"><b>"+QString::number(i+1,10)+"</b></td>");

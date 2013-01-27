@@ -65,6 +65,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->hideNameOnSplashChkB->hide();
       ui->label_hideOwnerName->hide();      
     }
+    if (!GetEepromInterface()->getCapability(HasInputFilter)) {
+      ui->inputfilterCB->hide();
+      ui->inputfilterLabel->hide();
+    }
     if (GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
       ui->thrwarnChkB->setDisabled(true);
       ui->thrwarnChkB->hide();

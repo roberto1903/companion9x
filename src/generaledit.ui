@@ -357,7 +357,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="11" column="0">
-        <widget class="QLabel" name="label_8">
+        <widget class="QLabel" name="inputfilterLabel">
          <property name="text">
           <string>Input Filter</string>
          </property>
