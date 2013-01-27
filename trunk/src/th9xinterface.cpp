@@ -205,6 +205,8 @@ int Th9xInterface::getCapability(const Capability capability)
       return 4;
     case Simulation:
       return 1;
+    case HasInputFilter:
+      return 1;
     case CSFunc:
       return 13;      
     default:

@@ -303,6 +303,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 2;
     case ModelVoice:
       return 1;
+    case HasInputFilter:
+      return 1;
     case VoicesAsNumbers:
       return 1;
     default:

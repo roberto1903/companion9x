@@ -780,6 +780,7 @@ enum Capability {
  ExtraTrims,
  ExtendedTrims,
  HasNegCurves,
+ HasInputFilter,
  HasExpoCurves,
  ExpoIsCurve,
  ExpoCurve5,

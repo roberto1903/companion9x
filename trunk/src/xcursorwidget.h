@@ -56,8 +56,8 @@ class xcursorWidget : public QWidget {
           else if (pnpoly(6,p3x,p3y,(float)x,(float)y)==1) {
             setStyleSheet("background:url(:/images/x9l3.png);");
             emit buttonPressed(Qt::Key_Escape);
-          } else if (sqrt(((float)x-22)*((float)x-22)+((float)y-165)*((float)y-165))<17) {
-            setStyleSheet("background:url(:/images/x9l0.png);");
+          } else if ((x>90 && x<118) && (y>177 && y<197)) {
+            setStyleSheet("background:url(:/images/x9l4.png);");
             emit buttonPressed(Qt::Key_Print);
           }
         }
