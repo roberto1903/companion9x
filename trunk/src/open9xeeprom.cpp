@@ -12,9 +12,9 @@ RawSource open9x209ToSource(int8_t value);
 int8_t open9xFromSwitch(const RawSwitch & sw);
 RawSwitch open9xToSwitch(int8_t sw);
 
-class TimerModeV212: public TransformedField {
+class TimerModeField: public TransformedField {
   public:
-    TimerModeV212(TimerMode & mode):
+    TimerModeField(TimerMode & mode):
       TransformedField(internalField),
       internalField(_mode),
       mode(mode)
@@ -364,9 +364,9 @@ class MixField: public TransformedField {
     bool _curve;
 };
 
-class ExpoFieldV211: public TransformedField {
+class ExpoField: public TransformedField {
   public:
-    ExpoFieldV211(ExpoData & expo):
+    ExpoField(ExpoData & expo):
       TransformedField(internalField),
       expo(expo)
     {
@@ -397,9 +397,9 @@ class ExpoFieldV211: public TransformedField {
     bool _curveMode;
 };
 
-class LimitFieldV211: public StructField {
+class LimitField: public StructField {
   public:
-    LimitFieldV211(LimitData & limit)
+    LimitField(LimitData & limit)
     {
       Append(new ConversionField< SignedField<8> >(limit.min, +100));
       Append(new ConversionField< SignedField<8> >(limit.max, -100));
@@ -724,7 +724,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new ZCharField<10>(modelData.name));
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
-    Append(new TimerModeV212(modelData.timers[i].mode));
+    Append(new TimerModeField(modelData.timers[i].mode));
     Append(new UnsignedField<16>(modelData.timers[i].val));
     if (board == BOARD_GRUVIN9X) {
       Append(new BoolField<1>(modelData.timers[i].persistent));
@@ -747,9 +747,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   for (int i=0; i<O9X_MAX_MIXERS; i++)
     Append(new MixField(modelData.mixData[i], board));
   for (int i=0; i<O9X_NUM_CHNOUT; i++)
-    Append(new LimitFieldV211(modelData.limitData[i]));
+    Append(new LimitField(modelData.limitData[i]));
   for (int i=0; i<O9X_MAX_EXPOS; i++)
-    Append(new ExpoFieldV211(modelData.expoData[i]));
+    Append(new ExpoField(modelData.expoData[i]));
   Append(new CurvesField(modelData.curves));
   for (int i=0; i<O9X_NUM_CSW; i++)
     Append(new CustomSwitchField(modelData.customSw[i], board));
