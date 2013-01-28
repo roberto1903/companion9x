@@ -70,10 +70,7 @@ class Open9xInterface : public EEPROMInterface
     bool saveModel(unsigned int index, ModelData &model);
 
     template <class T>
-    bool saveModelVariant(unsigned int index, ModelData &model, uint32_t variant);
-
-    template <class T>
-    bool saveModelVariantNew(unsigned int index, ModelData &model, BoardEnum board, uint32_t variant);
+    bool saveModelVariant(unsigned int index, ModelData &model, BoardEnum board, uint32_t variant);
 
     template <class T>
     bool loadGeneral(GeneralSettings &settings);
