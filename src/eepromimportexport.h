@@ -58,7 +58,7 @@ class DataField {
     int Import(QByteArray & input)
     {
       QBitArray bits = bytesToBits(input);
-      DataField::ImportBits(bits);
+      ImportBits(bits);
       return 0;
     }
 
@@ -138,6 +138,49 @@ class SpareBitsField: public UnsignedField<N> {
     }
   protected:
     unsigned int spare;
+};
+
+template<int N>
+class CharField: public DataField {
+  public:
+    CharField(char *field):
+      field(field)
+    {
+    }
+
+    virtual void ExportBits(QBitArray & output)
+    {
+      output.resize(N*8);
+      int b = 0;
+      for (int i=0; i<N; i++) {
+        int idx = field[i];
+        for (int j=0; j<8; j++, b++) {
+          if (idx & (1<<j))
+            output.setBit(b);
+        }
+      }
+    }
+
+    virtual void ImportBits(QBitArray & input)
+    {
+      unsigned int b = 0;
+      for (int i=0; i<N; i++) {
+        int8_t idx = 0;
+        for (int j=0; j<8; j++) {
+          if (input[b++])
+            idx |= (1<<j);
+        }
+        field[i] = idx;
+      }
+    }
+
+    virtual unsigned int size()
+    {
+      return 8*N;
+    }
+
+  protected:
+    char * field;
 };
 
 int8_t char2idx(char c);

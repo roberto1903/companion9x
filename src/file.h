@@ -24,14 +24,20 @@
 #include "../winbuild/winbuild.h"
 #endif
 
+#include "eeprominterface.h"
+
 #define ERR_NONE 0
 #define ERR_FULL 1
 #define ERR_TMO  2
 
-#define BS                 16
-
-PACK(struct DirEnt{
+PACK(struct DirEnt {
   uint8_t  startBlk;
+  uint16_t size:12;
+  uint16_t typ:4;
+});
+
+PACK(struct DirEntArm {
+  uint16_t startBlk;
   uint16_t size:12;
   uint16_t typ:4;
 });
@@ -44,6 +50,15 @@ PACK(struct EeFs{
   DirEnt   files[36];
 });
 
+PACK(struct EeFsArm {
+  uint8_t   version;
+  uint16_t  mySize;
+  uint16_t  freeList;
+  uint8_t   bs;
+  uint8_t  spare[2];
+  DirEntArm files[62];
+});
+
 struct t_eeprom_header
 {
   uint32_t sequence_no ;          // sequence # to decide which block is most recent
@@ -54,96 +69,96 @@ struct t_eeprom_header
 
 class EFile
 {
-  uint8_t  m_fileId;    //index of file in directory = filename
-  unsigned int m_pos;       //over all filepos
-  uint8_t  m_currBlk;   //current block.id
-  uint8_t  m_ofs;       //offset inside of the current block
-  uint8_t  m_zeroes;    //control byte for run length decoder
-  uint8_t  m_bRlc;      //control byte for run length decoder
-  uint8_t  m_err;       //error reasons
-  uint16_t m_size;
-  //uint16_t m_stopTime10ms; //maximum point of time for writing
+  uint8_t       m_fileId;    //index of file in directory = filename
+  unsigned int  m_pos;       //over all filepos
+  unsigned int  m_currBlk;   //current block.id
+  unsigned int  m_ofs;       //offset inside of the current block
+  uint8_t       m_zeroes;    //control byte for run length decoder
+  uint8_t       m_bRlc;      //control byte for run length decoder
+  unsigned int  m_err;       //error reasons
+  uint16_t      m_size;
 
-
+  BoardEnum board;
   uint8_t *eeprom;
-  int     eeprom_size;
-  EeFs    *eeFs;
-  uint8_t eeFsVersion;
-  uint8_t eeFsSize;
-  uint8_t eeFsFirstBlock;
-  uint8_t eeFsBlocksOffset;
-  uint8_t eeFsBlocksMax;
+  unsigned int eeprom_size;
+  EeFs         *eeFs;
+  EeFsArm      *eeFsArm;
+  unsigned int eeFsVersion;
+  unsigned int eeFsBlockSize;
+  unsigned int eeFsSize;
+  unsigned int eeFsFirstBlock;
+  unsigned int eeFsBlocksOffset;
+  unsigned int eeFsBlocksMax;
+  unsigned int eeFsLinkSize;
 
   void eeprom_read_block (void *pointer_ram, unsigned int pointer_eeprom, size_t size);
   void eeprom_write_block(const void *pointer_ram, unsigned int pointer_eeprom, size_t size);
 
-  uint8_t EeFsRead(uint8_t blk,uint8_t ofs);
-  void EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val);
-  uint8_t EeFsGetLink(uint8_t blk);
-  void EeFsSetLink(uint8_t blk,uint8_t val);
-  uint8_t EeFsGetDat(uint8_t blk,uint8_t ofs);
-  void EeFsSetDat(uint8_t blk,uint8_t ofs, const uint8_t*buf,uint8_t len);
-  uint16_t EeFsGetFree();
-  void EeFsFree(uint8_t blk);///free one or more blocks
-  uint8_t EeFsAlloc(); ///alloc one block from freelist
+  uint8_t EeFsRead(unsigned int blk, unsigned int ofs);
+  void EeFsWrite(unsigned int blk, unsigned int ofs, uint8_t val);
+
+  unsigned int EeFsGetLink(unsigned int blk);
+  void EeFsSetLink(unsigned int blk, unsigned int val);
+  uint8_t EeFsGetDat(unsigned int blk, unsigned int ofs);
+  void EeFsSetDat(unsigned int blk, unsigned int ofs, const uint8_t *buf, unsigned int len);
+  unsigned int EeFsGetFree();
+  void EeFsFree(unsigned int blk); // free one or more blocks
+  unsigned int EeFsAlloc(); // alloc one block from freelist
 
 public:
 
   EFile();
 
-  void EeFsCreate(uint8_t *eeprom, int size, uint8_t version);
+  void EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t version);
 
-  bool EeFsOpen(uint8_t *eeprom, int size);
+  bool EeFsOpen(uint8_t *eeprom, int size, BoardEnum board);
 
   ///remove contents of given file
-  void rm(uint8_t i_fileId);
+  void rm(unsigned int i_fileId);
 
   ///swap contents of file1 with them of file2
-  void swap(uint8_t i_fileId1,uint8_t i_fileId2);
+  void swap(unsigned int i_fileId1, unsigned int i_fileId2);
 
   ///return true if the file with given fileid exists
-  bool exists(uint8_t i_fileId);
+  bool exists(unsigned int i_fileId);
 
   ///open file for reading, no close necessary
   ///for writing use writeRlc() or create()
-  uint8_t openRd(uint8_t i_fileId); 
+  unsigned int openRd(unsigned int i_fileId);
   /// create a new file with given fileId, 
   /// !!! if this file already exists, then all blocks are reused
   /// and all contents will be overwritten.
   /// after writing closeTrunc has to be called
-  void    create(uint8_t i_fileId, uint8_t typ);
+  void    create(unsigned int i_fileId, unsigned int typ);
   /// close file and truncate the blockchain if to long.
   void    closeTrunc();
 
   ///open file, write to file and close it. 
   ///If file existed before, then contents is overwritten. 
   ///If file was larger before, then unused blocks are freed
-  uint16_t writeRlc1(uint8_t i_fileId, uint8_t typ,const uint8_t*buf,uint16_t i_len);
-  uint16_t writeRlc2(uint8_t i_fileId, uint8_t typ,const uint8_t*buf,uint16_t i_len);
+  unsigned int writeRlc1(unsigned int i_fileId, unsigned int typ, const uint8_t *buf, unsigned int i_len);
+  unsigned int writeRlc2(unsigned int i_fileId, unsigned int typ, const uint8_t *buf, unsigned int i_len);
 
-  uint8_t read(uint8_t*buf, uint16_t i_len);
-  uint8_t write1(uint8_t b);
-  uint8_t write(const uint8_t*buf, uint8_t i_len);
+  unsigned int read(uint8_t *buf, unsigned int i_len);
+  unsigned int write1(uint8_t b);
+  unsigned int write(const uint8_t *buf, unsigned int i_len);
 
   ///return size of compressed file without block overhead
-  uint16_t size(uint8_t id);
+  unsigned int size(unsigned int id);
   ///read from opened file and decode rlc-coded data
-  uint16_t readRlc12(uint8_t*buf,uint16_t i_len,bool rlc2);
-  inline uint16_t readRlc1(uint8_t*buf,uint16_t i_len)
+  unsigned int readRlc12(uint8_t *buf, unsigned int i_len, bool rlc2);
+  inline unsigned int readRlc1(uint8_t *buf, unsigned int i_len)
   {
-    return readRlc12(buf,i_len,false);
+    return readRlc12(buf, i_len, false);
   }
-  inline uint16_t readRlc2(uint8_t*buf, uint16_t i_len)
+  inline unsigned int readRlc2(uint8_t *buf, unsigned int i_len)
   {
     return readRlc12(buf, i_len, true);
   }
 
-  uint8_t byte_checksum( uint8_t *p, uint32_t size );
-  uint32_t ee32_check_header( struct t_eeprom_header *hptr );
-  uint32_t get_current_block_number( uint32_t block_no, uint16_t *p_size);
-
-
+  uint8_t byte_checksum(uint8_t *p, unsigned int size);
+  unsigned int ee32_check_header(struct t_eeprom_header *hptr);
+  unsigned int get_current_block_number(unsigned int block_no, uint16_t *p_size);
 };
 
 #endif
-/*eof*/

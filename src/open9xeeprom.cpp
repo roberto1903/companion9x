@@ -5,19 +5,65 @@
 #include <QObject>
 // #include <QMessageBox>
 
+int8_t open9xStock209FromSource(RawSource source);
+RawSource open9xStock209ToSource(int8_t value);
+int8_t open9xStockFromSwitch(const RawSwitch & sw);
+RawSwitch open9xStockToSwitch(int8_t sw);
 int8_t open9xV4209FromSource(RawSource source);
-int8_t open9x209FromSource(RawSource source);
 RawSource open9xV4209ToSource(int8_t value);
-RawSource open9x209ToSource(int8_t value);
-int8_t open9xFromSwitch(const RawSwitch & sw);
-RawSwitch open9xToSwitch(int8_t sw);
+int8_t open9xArmFromSwitch(const RawSwitch & sw);
+RawSwitch open9xArmToSwitch(int8_t sw);
+RawSource open9xArm210ToSource(int8_t value);
+int8_t open9xArm210FromSource(RawSource source);
+
+#define HAS_PERSISTENT_TIMERS(board) (IS_ARM(board) || board == BOARD_GRUVIN9X)
+#define MAX_CUSTOM_SWITCHES(board)   (IS_ARM(board) ? 32 : 12)
+
+inline int8_t open9xFromSource(RawSource source, BoardEnum board)
+{
+  if (board == BOARD_SKY9X)
+    return open9xArm210FromSource(source);
+  else if (board == BOARD_GRUVIN9X)
+    return open9xV4209FromSource(source);
+  else
+    return open9xStock209FromSource(source);
+}
+
+inline RawSource open9xToSource(int8_t value, BoardEnum board)
+{
+  if (board == BOARD_SKY9X)
+    return open9xArm210ToSource(value);
+  else if (board == BOARD_GRUVIN9X)
+    return open9xV4209ToSource(value);
+  else
+    return open9xStock209ToSource(value);
+}
+
+inline int8_t open9xFromSwitch(const RawSwitch & sw, BoardEnum board)
+{
+  if (board == BOARD_SKY9X)
+    return open9xArmFromSwitch(sw);
+  else
+    return open9xStockFromSwitch(sw);
+}
+
+inline RawSwitch open9xToSwitch(int8_t sw, BoardEnum board)
+{
+  if (board == BOARD_SKY9X)
+    return open9xArmToSwitch(sw);
+  else
+    return open9xStockToSwitch(sw);
+}
 
 class TimerModeField: public TransformedField {
   public:
-    TimerModeField(TimerMode & mode):
+    TimerModeField(TimerMode & mode, BoardEnum board):
       TransformedField(internalField),
       internalField(_mode),
-      mode(mode)
+      mode(mode),
+      board(board),
+      numCSW(MAX_CUSTOM_SWITCHES(board)),
+      _mode(0)
     {
     }
 
@@ -26,11 +72,11 @@ class TimerModeField: public TransformedField {
       if (mode >= TMRMODE_OFF && mode <= TMRMODE_THt)
         _mode = 0+mode-TMRMODE_OFF;
       else if (mode >= TMRMODE_FIRST_MOMENT_SWITCH)
-        _mode = 26+mode-TMRMODE_FIRST_MOMENT_SWITCH;
+        _mode = numCSW+14+mode-TMRMODE_FIRST_MOMENT_SWITCH;
       else if (mode >= TMRMODE_FIRST_SWITCH)
         _mode = 5+mode-TMRMODE_FIRST_SWITCH;
       else if (mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
-        _mode = -22+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
+        _mode = -numCSW-10+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
       else if (mode <= TMRMODE_FIRST_NEG_SWITCH)
         _mode = -1+mode-TMRMODE_FIRST_NEG_SWITCH;
       else
@@ -39,48 +85,52 @@ class TimerModeField: public TransformedField {
 
     virtual void afterImport()
     {
-      if (_mode <= -22)
-        mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(_mode+22));
+      if (_mode <= -numCSW-10)
+        mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(_mode+numCSW+10));
       else if (_mode <= -1)
         mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+1));
       else if (_mode < 5)
         mode = TimerMode(_mode);
-      else if (_mode < 5+21)
+      else if (_mode < numCSW+14)
         mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
       else
-        mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(_mode-5-21));
+        mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(_mode-numCSW-14));
     }
 
   protected:
     SignedField<8> internalField;
     TimerMode & mode;
+    BoardEnum board;
+    int numCSW;
     int _mode;
 };
 
 template <int N>
 class SwitchField: public TransformedField {
   public:
-    SwitchField(RawSwitch & sw):
+    SwitchField(RawSwitch & sw, BoardEnum board):
       TransformedField(internalField),
       internalField(_sw),
-      sw(sw)
+      sw(sw),
+      board(board)
     {
     }
 
     virtual void beforeExport()
     {
-      _sw = open9xFromSwitch(sw);
+      _sw = open9xFromSwitch(sw, board);
     }
 
     virtual void afterImport()
     {
-      sw = open9xToSwitch(_sw);
+      sw = open9xToSwitch(_sw, board);
     }
 
   protected:
     SignedField<N> internalField;
     int _sw;
     RawSwitch & sw;
+    BoardEnum board;
 };
 
 class PhaseField: public TransformedField {
@@ -89,7 +139,8 @@ class PhaseField: public TransformedField {
       TransformedField(internalField),
       phase(phase),
       index(index),
-      board(board)
+      board(board),
+      rotencCount(board == BOARD_SKY9X ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0))
     {
       if (board == BOARD_STOCK) {
         // On stock we use 10bits per trim
@@ -103,15 +154,13 @@ class PhaseField: public TransformedField {
           internalField.Append(new SignedField<16>(trimBase[i]));
       }
 
-      internalField.Append(new SwitchField<8>(phase.swtch));
+      internalField.Append(new SwitchField<8>(phase.swtch, board));
       internalField.Append(new ZCharField<6>(phase.name));
       internalField.Append(new UnsignedField<4>(phase.fadeIn));
       internalField.Append(new UnsignedField<4>(phase.fadeOut));
 
-      if (board == BOARD_GRUVIN9X) {
-        for (int i=0; i<2; i++) {
-          internalField.Append(new SignedField<16>(phase.rotaryEncoders[i]));
-        }
+      for (int i=0; i<rotencCount; i++) {
+        internalField.Append(new SignedField<16>(phase.rotaryEncoders[i]));
       }
 
       if (board != BOARD_STOCK) {
@@ -169,6 +218,7 @@ class PhaseField: public TransformedField {
     PhaseData & phase;
     int index;
     BoardEnum board;
+    int rotencCount;
     int trimBase[NUM_STICKS];
     int trimExt[NUM_STICKS];
 };
@@ -182,7 +232,8 @@ class MixSourceField: public TransformedField {
       source(source),
       board(board),
       param(0),
-      rotencCount(board == BOARD_GRUVIN9X ? 2 : 0)
+      rotencCount(board == BOARD_SKY9X ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0)),
+      customSwitchesCount(MAX_CUSTOM_SWITCHES(board))
     {
     }
 
@@ -213,16 +264,16 @@ class MixSourceField: public TransformedField {
         param = 13 + rotencCount;
       }
       else if (source.type == SOURCE_TYPE_SWITCH) {
-        param = 13 + rotencCount + open9xFromSwitch(RawSwitch(source.index));
+        param = 13 + rotencCount + open9xFromSwitch(RawSwitch(source.index), board);
       }
       else if (source.type == SOURCE_TYPE_CYC) {
-        param = 35 + rotencCount + source.index;
+        param = 23 + customSwitchesCount + rotencCount + source.index;
       }
       else if (source.type == SOURCE_TYPE_PPM) {
-        param = 38 + rotencCount + source.index;
+        param = 26 + customSwitchesCount + rotencCount + source.index;
       }
       else if (source.type == SOURCE_TYPE_CH) {
-        param = 46 + rotencCount + source.index;
+        param = 34 + customSwitchesCount + rotencCount + source.index;
       }
     }
 
@@ -246,17 +297,17 @@ class MixSourceField: public TransformedField {
       else if (param == 13 + rotencCount) {
         source = RawSource(SOURCE_TYPE_3POS);
       }
-      else if (param <= 34 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(param-13-rotencCount).toValue());
+      else if (param <= 22 + customSwitchesCount + rotencCount) {
+        source = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(param-13-rotencCount, board).toValue());
       }
-      else if (param <= 37 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_CYC, param-35-rotencCount);
+      else if (param <= 25 + customSwitchesCount + rotencCount) {
+        source = RawSource(SOURCE_TYPE_CYC, param-23-customSwitchesCount-rotencCount);
       }
-      else if (param <= 45 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_PPM, param-38-rotencCount);
+      else if (param <= 33 + customSwitchesCount + rotencCount) {
+        source = RawSource(SOURCE_TYPE_PPM, param-26-customSwitchesCount-rotencCount);
       }
       else {
-        source = RawSource(SOURCE_TYPE_CH, param-46-rotencCount);
+        source = RawSource(SOURCE_TYPE_CH, param-34-customSwitchesCount-rotencCount);
       }
     }
 
@@ -266,6 +317,7 @@ class MixSourceField: public TransformedField {
     BoardEnum board;
     unsigned int param;
     unsigned int rotencCount;
+    unsigned int customSwitchesCount;
 };
 
 class HeliField: public StructField {
@@ -281,61 +333,51 @@ class HeliField: public StructField {
     }
 };
 
-template <int N>
-class MixCurveParamField: public SignedField<N> {
-  public:
-    MixCurveParamField(int & curve, int & differential):
-      SignedField<N>(param),
-      curve(curve),
-      differential(differential)
-    {
-    }
-
-    virtual void ExportBits(QBitArray & output)
-    {
-      param = (curve ? curve : differential);
-      SignedField<N>::ExportBits(output);
-    }
-
-    virtual void ImportBits(QBitArray & input)
-    {
-      // NOTA: screen.type should have been imported first!
-      SignedField<N>::ImportBits(input);
-      if (curve)
-        curve = param;
-      else
-        differential = param;
-    }
-
-  protected:
-    int & curve;
-    int & differential;
-    int param;
-};
-
 class MixField: public TransformedField {
   public:
     MixField(MixData & mix, BoardEnum board):
       TransformedField(internalField),
       mix(mix)
     {
-      internalField.Append(new UnsignedField<4>(_mix.destCh));
-      internalField.Append(new BoolField<1>(_curve));
-      internalField.Append(new BoolField<1>(_mix.noExpo));
-      internalField.Append(new SpareBitsField<2>());
-      internalField.Append(new SignedField<8>(_mix.weight));
-      internalField.Append(new SwitchField<6>(_mix.swtch));
-      internalField.Append(new UnsignedField<2>((unsigned int &)_mix.mltpx));
-      internalField.Append(new UnsignedField<5>(_mix.phases));
-      internalField.Append(new SignedField<3>(_mix.carryTrim));
-      internalField.Append(new MixSourceField<6>(_mix.srcRaw, board));
-      internalField.Append(new UnsignedField<2>(_mix.mixWarn));
-      internalField.Append(new UnsignedField<4>(_mix.delayUp));
-      internalField.Append(new UnsignedField<4>(_mix.delayDown));
-      internalField.Append(new UnsignedField<4>(_mix.speedUp));
-      internalField.Append(new UnsignedField<4>(_mix.speedDown));
-      internalField.Append(new MixCurveParamField<8>(_mix.curve, _mix.differential));
-      internalField.Append(new SignedField<8>(_mix.sOffset));
+      if (IS_ARM(board)) {
+        internalField.Append(new UnsignedField<8>(_destCh));
+        internalField.Append(new UnsignedField<16>(mix.phases));
+        internalField.Append(new BoolField<1>(_curveMode));
+        internalField.Append(new BoolField<1>(mix.noExpo));
+        internalField.Append(new SignedField<3>(mix.carryTrim));
+        internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
+        internalField.Append(new SpareBitsField<1>());
+        internalField.Append(new SignedField<16>(mix.weight));
+        internalField.Append(new SwitchField<8>(mix.swtch, board));
+        internalField.Append(new SignedField<8>(_curveParam));
+        internalField.Append(new UnsignedField<8>(mix.mixWarn));
+        internalField.Append(new UnsignedField<8>(mix.delayUp));
+        internalField.Append(new UnsignedField<8>(mix.delayDown));
+        internalField.Append(new UnsignedField<8>(mix.speedUp));
+        internalField.Append(new UnsignedField<8>(mix.speedDown));
+        internalField.Append(new MixSourceField<8>(mix.srcRaw, board));
+        internalField.Append(new SignedField<8>(mix.sOffset));
+        internalField.Append(new ZCharField<6>(mix.name));
+      }
+      else {
+        internalField.Append(new UnsignedField<4>(_destCh));
+        internalField.Append(new BoolField<1>(_curveMode));
+        internalField.Append(new BoolField<1>(mix.noExpo));
+        internalField.Append(new SpareBitsField<2>());
+        internalField.Append(new SignedField<8>(mix.weight));
+        internalField.Append(new SwitchField<6>(mix.swtch, board));
+        internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
+        internalField.Append(new UnsignedField<5>(mix.phases));
+        internalField.Append(new SignedField<3>(mix.carryTrim));
+        internalField.Append(new MixSourceField<6>(mix.srcRaw, board));
+        internalField.Append(new UnsignedField<2>(mix.mixWarn));
+        internalField.Append(new UnsignedField<4>(mix.delayUp));
+        internalField.Append(new UnsignedField<4>(mix.delayDown));
+        internalField.Append(new UnsignedField<4>(mix.speedUp));
+        internalField.Append(new UnsignedField<4>(mix.speedDown));
+        internalField.Append(new SignedField<8>(_curveParam));
+        internalField.Append(new SignedField<8>(mix.sOffset));
+      }
 
       // Dump("Mix");
     }
@@ -343,40 +385,62 @@ class MixField: public TransformedField {
     virtual void beforeExport()
     {
       if (mix.destCh && mix.srcRaw.type != SOURCE_TYPE_NONE) {
-        _mix = mix;
-        _mix.destCh -= 1;
-        _curve = mix.curve;
+        _destCh = mix.destCh - 1;
+        _curveMode = mix.curve;
+        _curveParam = (mix.curve ? mix.curve : mix.differential);
+      }
+      else {
+        mix.clear();
       }
     }
 
     virtual void afterImport()
     {
-      if (_mix.srcRaw.type != SOURCE_TYPE_NONE) {
-        mix = _mix;
-        mix.destCh += 1;
+      if (mix.srcRaw.type != SOURCE_TYPE_NONE) {
+        mix.destCh = _destCh + 1;
+        mix.curve = 0;
+        mix.differential = 0;
+        if (_curveMode)
+          mix.curve = _curveParam;
+        else
+          mix.differential = _curveParam;
       }
     }
 
   protected:
     StructField internalField;
     MixData & mix;
-    MixData _mix;
-    bool _curve;
+    unsigned int _destCh;
+    bool _curveMode;
+    int _curveParam;
 };
 
 class ExpoField: public TransformedField {
   public:
-    ExpoField(ExpoData & expo):
+    ExpoField(ExpoData & expo, BoardEnum board):
       TransformedField(internalField),
-      expo(expo)
+      expo(expo),
+      board(board)
     {
-      internalField.Append(new UnsignedField<2>(expo.mode));
-      internalField.Append(new SwitchField<6>(expo.swtch));
-      internalField.Append(new UnsignedField<2>(expo.chn));
-      internalField.Append(new UnsignedField<5>(expo.phases));
-      internalField.Append(new BoolField<1>(_curveMode));
-      internalField.Append(new SignedField<8>(expo.weight));
-      internalField.Append(new SignedField<8>(expo.curveParam));
+      if (IS_ARM(board)) {
+        internalField.Append(new UnsignedField<8>(expo.mode));
+        internalField.Append(new UnsignedField<8>(expo.chn));
+        internalField.Append(new SwitchField<8>(expo.swtch, board));
+        internalField.Append(new UnsignedField<16>(expo.phases));
+        internalField.Append(new SignedField<8>(expo.weight));
+        internalField.Append(new BoolField<8>(_curveMode));
+        internalField.Append(new ZCharField<6>(expo.name));
+        internalField.Append(new SignedField<8>(expo.curveParam));
+      }
+      else {
+        internalField.Append(new UnsignedField<2>(expo.mode));
+        internalField.Append(new SwitchField<6>(expo.swtch, board));
+        internalField.Append(new UnsignedField<2>(expo.chn));
+        internalField.Append(new UnsignedField<5>(expo.phases));
+        internalField.Append(new BoolField<1>(_curveMode));
+        internalField.Append(new SignedField<8>(expo.weight));
+        internalField.Append(new SignedField<8>(expo.curveParam));
+      }
 
       // Dump("Expo");
     }
@@ -394,6 +458,7 @@ class ExpoField: public TransformedField {
   protected:
     StructField internalField;
     ExpoData & expo;
+    BoardEnum board;
     bool _curveMode;
 };
 
@@ -414,14 +479,22 @@ class LimitField: public StructField {
 
 class CurvesField: public TransformedField {
   public:
-    CurvesField(CurveData * curves):
+    CurvesField(CurveData * curves, BoardEnum board):
       TransformedField(internalField),
-      curves(curves)
+      curves(curves),
+      board(board),
+      maxCurves(IS_ARM(board) ? O9X_ARM_MAX_CURVES : O9X_MAX_CURVES),
+      maxPoints(IS_ARM(board) ? O9X_ARM_NUM_POINTS : O9X_NUM_POINTS)
     {
-      for (int i=0; i<O9X_MAX_CURVES; i++)
-        internalField.Append(new SignedField<8>(_curves[i]));
-      for (int i=0; i<O9X_NUM_POINTS; i++)
+      for (int i=0; i<maxCurves; i++) {
+        if (IS_ARM(board))
+          internalField.Append(new SignedField<16>(_curves[i]));
+        else
+          internalField.Append(new SignedField<8>(_curves[i]));
+      }
+      for (int i=0; i<maxPoints; i++) {
         internalField.Append(new SignedField<8>(_points[i]));
+      }
 
       // Dump("Curves");
     }
@@ -432,11 +505,11 @@ class CurvesField: public TransformedField {
 
       int * cur = &_points[0];
       int offset = 0;
-      for (int i=0; i<O9X_MAX_CURVES; i++) {
+      for (int i=0; i<maxCurves; i++) {
         CurveData *curve = &curves[i];
         offset += (curve->custom ? curve->count * 2 - 2 : curve->count) - 5;
-        if (offset > O9X_NUM_POINTS - 5 * O9X_MAX_CURVES) {
-          EEPROMWarnings += ::QObject::tr("open9x only accepts %1 points in all curves").arg(O9X_NUM_POINTS) + "\n";
+        if (offset > maxPoints - 5 * maxCurves) {
+          EEPROMWarnings += ::QObject::tr("open9x only accepts %1 points in all curves").arg(maxPoints) + "\n";
           break;
         }
         _curves[i] = offset;
@@ -453,10 +526,10 @@ class CurvesField: public TransformedField {
 
     virtual void afterImport()
     {
-      for (int i=0; i<O9X_MAX_CURVES; i++) {
+      for (int i=0; i<maxCurves; i++) {
         CurveData *curve = &curves[i];
         int * cur = &_points[i==0 ? 0 : 5*i + _curves[i-1]];
-        int * next = &_points[(i+1) + _curves[i]];
+        int * next = &_points[5*(i+1) + _curves[i]];
         int size = next - cur;
         if (size % 2 == 0) {
           curve->count = (size / 2) + 1;
@@ -484,25 +557,12 @@ class CurvesField: public TransformedField {
   protected:
     StructField internalField;
     CurveData *curves;
-    int _curves[O9X_MAX_CURVES];
-    int _points[O9X_NUM_POINTS];
+    BoardEnum board;
+    int maxCurves;
+    int maxPoints;
+    int _curves[O9X_ARM_MAX_CURVES];
+    int _points[O9X_ARM_NUM_POINTS];
 };
-
-inline int8_t open9xFromSource(RawSource source, BoardEnum board)
-{
-  if (board == BOARD_GRUVIN9X)
-    return open9xV4209FromSource(source);
-  else
-    return open9x209FromSource(source);
-}
-
-inline RawSource open9xToSource(int8_t value, BoardEnum board)
-{
-  if (board == BOARD_GRUVIN9X)
-      return open9xV4209ToSource(value);
-  else
-    return open9x209ToSource(value);
-}
 
 class CustomSwitchField: public TransformedField {
   public:
@@ -514,6 +574,10 @@ class CustomSwitchField: public TransformedField {
       internalField.Append(new SignedField<8>(v1));
       internalField.Append(new SignedField<8>(v2));
       internalField.Append(new UnsignedField<8>(func));
+      if (IS_ARM(board)) {
+        internalField.Append(new UnsignedField<8>(csw.delay));
+        internalField.Append(new UnsignedField<8>(csw.duration));
+      }
 
       // Dump("CustomSwitch");
     }
@@ -533,8 +597,8 @@ class CustomSwitchField: public TransformedField {
       }
 
       if (csw.func >= CS_AND && csw.func <= CS_XOR) {
-        v1 = open9xFromSwitch(RawSwitch(csw.val1));
-        v2 = open9xFromSwitch(RawSwitch(csw.val2));
+        v1 = open9xFromSwitch(RawSwitch(csw.val1), board);
+        v2 = open9xFromSwitch(RawSwitch(csw.val2), board);
       }
     }
 
@@ -553,8 +617,8 @@ class CustomSwitchField: public TransformedField {
       }
 
       if (csw.func >= CS_AND && csw.func <= CS_XOR) {
-        csw.val1 = open9xToSwitch(v1).toValue();
-        csw.val2 = open9xToSwitch(v2).toValue();
+        csw.val1 = open9xToSwitch(v1, board).toValue();
+        csw.val2 = open9xToSwitch(v2, board).toValue();
       }
     }
 
@@ -604,20 +668,79 @@ const int gruvin9xFunctionsConversion[] = {
     FuncAdjustGV5, 34
 };
 
-class CustomFunctionField: public StructField {
+class CustomFunctionField: public TransformedField {
   public:
-    CustomFunctionField(FuncSwData & fn, BoardEnum board)
+    CustomFunctionField(FuncSwData & fn, BoardEnum board):
+      TransformedField(internalField),
+      fn(fn),
+      board(board),
+      _delay(0)
     {
-      Append(new SwitchField<8>(fn.swtch));
-      if (board == BOARD_GRUVIN9X)
-        Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(gruvin9xFunctionsConversion), ::QObject::tr("Open9x on gruvin9x board doesn't accept this function")));
-      else
-        Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(stockFunctionsConversion), ::QObject::tr("Open9x on stock board doesn't accept this function")));
-      Append(new BoolField<1>(fn.enabled));
-      Append(new UnsignedField<8>(fn.param));
+      internalField.Append(new SwitchField<8>(fn.swtch, board));
+      if (IS_ARM(board)) {
+        internalField.Append(new UnsignedField<8>((unsigned int &)fn.func));
+        internalField.Append(new CharField<6>(_param));
+        internalField.Append(new UnsignedField<8>(_delay));
+        internalField.Append(new SpareBitsField<8>());
+      }
+      else {
+        if (board == BOARD_GRUVIN9X)
+          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(gruvin9xFunctionsConversion), ::QObject::tr("Open9x on gruvin9x board doesn't accept this function")));
+        else
+          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(stockFunctionsConversion), ::QObject::tr("Open9x on stock board doesn't accept this function")));
+        internalField.Append(new BoolField<1>(fn.enabled));
+        internalField.Append(new UnsignedField<8>(fn.param));
+      }
 
       // Dump("CustomFunction");
     }
+
+    virtual void beforeExport()
+    {
+      if (IS_ARM(board)) {
+        if (fn.func <= FuncInstantTrim) {
+          *((uint32_t *)_param) = fn.param;
+          _delay = (fn.enabled & 0x01);
+        }
+        else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
+          memcpy(_param, fn.paramarm, sizeof(_param));
+        }
+        else {
+          unsigned int value = fn.param;
+          if ((fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) && value > 7) {
+            value--;
+          }
+          *((uint32_t *)_param) = value;
+        }
+      }
+    }
+
+    virtual void afterImport()
+    {
+      if (IS_ARM(board)) {
+        unsigned int value = *((uint32_t *)_param);
+        if (fn.func <= FuncInstantTrim) {
+          fn.enabled = (_delay & 0x01);
+          fn.param = value;
+        }
+        else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
+          memcpy(fn.paramarm, _param, sizeof(fn.paramarm));
+        }
+        else {
+          fn.param = value;
+          if ((fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) && value > 7) {
+            fn.param++;
+          }
+        }
+      }
+    }
+
+  protected:
+    StructField internalField;
+    FuncSwData & fn;
+    BoardEnum board;
+    char _param[6];
+    unsigned int _delay;
 };
 
 class FrskyScreenField: public DataField {
@@ -675,7 +798,7 @@ const int rssiLevelConversion[2][8] = { {0, 2, 1, 3, 2, 0, 3, 1}, {0, 1, 1, 2, 2
 
 class FrskyField: public StructField {
   public:
-    FrskyField(FrSkyData & frsky)
+    FrskyField(FrSkyData & frsky, BoardEnum board)
     {
       for (int i=0; i<2; i++) {
         Append(new UnsignedField<8>(frsky.channels[i].ratio));
@@ -690,23 +813,48 @@ class FrskyField: public StructField {
         Append(new UnsignedField<2>(frsky.channels[i].multiplier));
       }
 
-      Append(new UnsignedField<2>(frsky.usrProto));
-      Append(new UnsignedField<2>(frsky.blades));
-      Append(new SpareBitsField<4>());
-      Append(new UnsignedField<3>(frsky.voltsSource));
-      Append(new UnsignedField<3>(frsky.currentSource));
-      Append(new UnsignedField<1>(frsky.screens[0].type));
-      Append(new UnsignedField<1>(frsky.screens[1].type));
-      for (int i=0; i<2; i++) {
-        Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
-        Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
+      if (IS_ARM(board)) {
+        for (int i=0; i<2; i++) {
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
+        }
+        Append(new UnsignedField<8>(frsky.usrProto));
+        Append(new UnsignedField<8>(frsky.voltsSource));
+        Append(new UnsignedField<8>(frsky.blades));
+        Append(new UnsignedField<8>(frsky.currentSource));
+        Append(new UnsignedField<1>(frsky.screens[0].type));
+        Append(new UnsignedField<1>(frsky.screens[1].type));
+        Append(new UnsignedField<1>(frsky.screens[2].type));
+        for (int i=0; i<3; i++) {
+          Append(new FrskyScreenField(frsky.screens[i]));
+        }
+        Append(new UnsignedField<8>(frsky.varioSource));
+        Append(new UnsignedField<8>(frsky.varioSpeedUpMin));
+        Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
+        Append(new SpareBitsField<8>());
+        Append(new SpareBitsField<8>());
+        Append(new SpareBitsField<8>());
+        Append(new SpareBitsField<8>());
       }
-      for (int i=0; i<2; i++) {
-        Append(new FrskyScreenField(frsky.screens[i]));
+      else {
+        Append(new UnsignedField<2>(frsky.usrProto));
+        Append(new UnsignedField<2>(frsky.blades));
+        Append(new SpareBitsField<4>());
+        Append(new UnsignedField<3>(frsky.voltsSource));
+        Append(new UnsignedField<3>(frsky.currentSource));
+        Append(new UnsignedField<1>(frsky.screens[0].type));
+        Append(new UnsignedField<1>(frsky.screens[1].type));
+        for (int i=0; i<2; i++) {
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
+        }
+        for (int i=0; i<2; i++) {
+          Append(new FrskyScreenField(frsky.screens[i]));
+        }
+        Append(new UnsignedField<3>(frsky.varioSource));
+        Append(new UnsignedField<5>(frsky.varioSpeedUpMin));
+        Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
       }
-      Append(new UnsignedField<3>(frsky.varioSource));
-      Append(new UnsignedField<5>(frsky.varioSpeedUpMin));
-      Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
 
       // Dump("FrSky");
     }
@@ -719,14 +867,20 @@ int importPpmDelay(int delay) { return 300 + 50 * delay; }
 
 Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant):
   board(board),
-  variant(variant)
+  variant(variant),
+  maxPhases(IS_ARM(board) ? O9X_ARM_MAX_PHASES : O9X_MAX_PHASES),
+  maxMixers(IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS),
+  maxChannels(IS_ARM(board) ? O9X_ARM_NUM_CHNOUT : O9X_NUM_CHNOUT),
+  maxExpos(IS_ARM(board) ? O9X_ARM_MAX_EXPOS : O9X_MAX_EXPOS),
+  maxCustomSwitches(IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW),
+  maxCustomFunctions(IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW)
 {
   Append(new ZCharField<10>(modelData.name));
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
-    Append(new TimerModeField(modelData.timers[i].mode));
+    Append(new TimerModeField(modelData.timers[i].mode, board));
     Append(new UnsignedField<16>(modelData.timers[i].val));
-    if (board == BOARD_GRUVIN9X) {
+    if (HAS_PERSISTENT_TIMERS(board)) {
       Append(new BoolField<1>(modelData.timers[i].persistent));
       Append(new SpareBitsField<15>());
     }
@@ -742,21 +896,25 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new BoolField<1>(modelData.extendedTrims));
   Append(new SpareBitsField<1>());
   Append(new ConversionField< SignedField<8> >(modelData.ppmDelay, exportPpmDelay, importPpmDelay));
-  Append(new UnsignedField<8>(modelData.beepANACenter));
 
-  for (int i=0; i<O9X_MAX_MIXERS; i++)
+  if (IS_ARM(board))
+    Append(new UnsignedField<16>(modelData.beepANACenter));
+  else
+    Append(new UnsignedField<8>(modelData.beepANACenter));
+
+  for (int i=0; i<maxMixers; i++)
     Append(new MixField(modelData.mixData[i], board));
-  for (int i=0; i<O9X_NUM_CHNOUT; i++)
+  for (int i=0; i<maxChannels; i++)
     Append(new LimitField(modelData.limitData[i]));
-  for (int i=0; i<O9X_MAX_EXPOS; i++)
-    Append(new ExpoField(modelData.expoData[i]));
-  Append(new CurvesField(modelData.curves));
-  for (int i=0; i<O9X_NUM_CSW; i++)
+  for (int i=0; i<maxExpos; i++)
+    Append(new ExpoField(modelData.expoData[i], board));
+  Append(new CurvesField(modelData.curves, board));
+  for (int i=0; i<maxCustomSwitches; i++)
     Append(new CustomSwitchField(modelData.customSw[i], board));
-  for (int i=0; i<O9X_NUM_FSW; i++)
+  for (int i=0; i<maxCustomFunctions; i++)
     Append(new CustomFunctionField(modelData.funcSw[i], board));
   Append(new HeliField(modelData.swashRingData, board));
-  for (int i=0; i<O9X_MAX_PHASES; i++)
+  for (int i=0; i<maxPhases; i++)
     Append(new PhaseField(modelData.phaseData[i], i, board));
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
@@ -777,6 +935,6 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   }
 
   if (board != BOARD_STOCK || (variant & FRSKY_VARIANT)) {
-    Append(new FrskyField(modelData.frsky));
+    Append(new FrskyField(modelData.frsky, board));
   }
 }

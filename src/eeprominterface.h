@@ -34,7 +34,8 @@
 #define EESIZE_STOCK    2048
 #define EESIZE_M128     4096
 #define EESIZE_GRUVIN9X 4096
-#define EESIZE_AVRMAX   EESIZE_GRUVIN9X
+#define EESIZE_X9D      (32*1024)
+#define EESIZE_ACT      (32*1024)
 #define EESIZE_SKY9X    (128*4096)
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
@@ -47,6 +48,8 @@ enum BoardEnum {
   BOARD_X9DA,
   BOARD_ACT
 };
+
+#define IS_ARM(board)  (board == BOARD_SKY9X || board == BOARD_X9DA || board == BOARD_ACT)
 
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
@@ -482,10 +485,10 @@ class CustomSwData { // Custom Switches data
     CustomSwData() { clear(); }
     int  val1; //input
     int  val2; //offset
-    uint8_t func;
-    uint8_t delay;
-    uint8_t duration;
-    uint8_t andsw;
+    unsigned int func;
+    unsigned int delay;
+    unsigned int duration;
+    unsigned int andsw;
     void clear() { memset(this, 0, sizeof(CustomSwData)); }
 };
 
@@ -493,7 +496,7 @@ class SafetySwData { // Custom Switches data
   public:
     SafetySwData() { clear(); }
     RawSwitch  swtch;
-    int8_t     val;
+    int        val;
 
     void clear() { memset(this, 0, sizeof(SafetySwData)); }
 };

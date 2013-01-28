@@ -34,11 +34,11 @@
 #include <qbytearray.h>
 
 int8_t open9xV4209FromSource(RawSource source);
-int8_t open9x209FromSource(RawSource source);
+int8_t open9xStock209FromSource(RawSource source);
 RawSource open9xV4209ToSource(int8_t value);
-RawSource open9x209ToSource(int8_t value);
-int8_t open9xFromSwitch(const RawSwitch & sw);
-RawSwitch open9xToSwitch(int8_t sw);
+RawSource open9xStock209ToSource(int8_t value);
+int8_t open9xStockFromSwitch(const RawSwitch & sw);
+RawSwitch open9xStockToSwitch(int8_t sw);
 
 struct CurveInfo {
   int8_t *crv;

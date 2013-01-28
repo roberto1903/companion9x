@@ -8,15 +8,15 @@
 extern void setEEPROMZString(char *dst, const char *src, int size);
 extern void getEEPROMZString(char *dst, const char *src, int size);
 
-extern int8_t open9xFromSwitch(const RawSwitch & sw);
-extern RawSwitch open9xToSwitch(int8_t sw);
+extern int8_t open9xStockFromSwitch(const RawSwitch & sw);
+extern RawSwitch open9xStockToSwitch(int8_t sw);
 
 t_Open9xM128PhaseData_v212::operator PhaseData ()
 {
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = trim[i];
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -29,7 +29,7 @@ t_Open9xM128PhaseData_v212::t_Open9xM128PhaseData_v212(PhaseData &c9x)
 {
   for (int i=0; i<NUM_STICKS; i++)
     trim[i] = c9x.trim[i];
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -208,7 +208,7 @@ t_Open9xM128ModelData_v212::t_Open9xM128ModelData_v212(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }

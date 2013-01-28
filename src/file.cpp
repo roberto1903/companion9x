@@ -26,58 +26,98 @@
 EFile::EFile():
 eeprom(NULL),
 eeprom_size(0),
-eeFs(NULL)
+eeFs(NULL),
+eeFsArm(NULL)
 {
 }
 
-void EFile::EeFsCreate(uint8_t *eeprom, int size, uint8_t version)
+void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t version)
 {
   this->eeprom = eeprom;
   this->eeprom_size = size;
+  this->board = board;
 
-  if (this->eeprom_size == EESIZE_SKY9X) {
+  if (board == BOARD_SKY9X) {
     memset(eeprom, 0xFF, size);
+  }
+  else if (board == BOARD_X9DA || board == BOARD_ACT) {
+    eeFsArm = (EeFsArm *)eeprom;
+    eeFsVersion = version;
+    eeFsSize = 8+4*62;
+    eeFsBlockSize = 64;
+    eeFsFirstBlock = 1;
+    eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
+    eeFsBlocksMax = 1 + (EESIZE_X9D-eeFsSize)/eeFsBlockSize;
+    eeFsLinkSize = sizeof(int16_t);
+    memset(eeprom, 0, size);
+    eeFsArm->version  = eeFsVersion;
+    eeFsArm->mySize   = eeFsSize;
+    eeFsArm->freeList = 0;
+    eeFsArm->bs       = 64;
+    for (unsigned int i=eeFsFirstBlock; i<eeFsBlocksMax-1; i++)
+      EeFsSetLink(i, i+1);
+    EeFsSetLink(eeFsBlocksMax-1, 0);
+    eeFsArm->freeList = eeFsFirstBlock;
+    // EeFsFlush();
   }
   else {
     eeFs = (EeFs *)eeprom;
     eeFsVersion = version;
+    eeFsBlockSize = 16;
 
     if (version == 5) {
       eeFsSize = 4+3*36;
       eeFsFirstBlock = 1;
       eeFsBlocksOffset = 112 - 16;
       eeFsBlocksMax = 1 + (4096-112)/16;
+      eeFsLinkSize = 1;
     }
     else {
       eeFsSize = 4+3*20;
       eeFsFirstBlock = 4;
       eeFsBlocksOffset = 0;
       eeFsBlocksMax = 2048/16;
+      eeFsLinkSize = 1;
     }
 
     memset(eeprom, 0, size);
     eeFs->version  = eeFsVersion;
     eeFs->mySize   = eeFsSize;
     eeFs->freeList = 0;
-    eeFs->bs       = BS;
-    for (int i=eeFsFirstBlock; i<eeFsBlocksMax-1; i++) EeFsSetLink(i, i+1);
+    eeFs->bs       = 16;
+    for (unsigned int i=eeFsFirstBlock; i<eeFsBlocksMax-1; i++)
+      EeFsSetLink(i, i+1);
     EeFsSetLink(eeFsBlocksMax-1, 0);
     eeFs->freeList = eeFsFirstBlock;
     // EeFsFlush();
   }
 }
 
-bool EFile::EeFsOpen(uint8_t *eeprom, int size)
+bool EFile::EeFsOpen(uint8_t *eeprom, int size, BoardEnum board)
 {
   this->eeprom = eeprom;
   this->eeprom_size = size;
+  this->board = board;
 
-  if (this->eeprom_size == EESIZE_SKY9X) {
+  if (board == BOARD_SKY9X) {
     return 1;
+  }
+  else if (board == BOARD_X9DA || board == BOARD_ACT) {
+    eeFsArm = (EeFsArm *)eeprom;
+    eeFsVersion = eeFsArm->version;
+    eeFsSize = 8+4*62;
+    eeFsBlockSize = 64;
+    eeFsLinkSize = sizeof(int16_t);
+    eeFsFirstBlock = 1;
+    eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
+    eeFsBlocksMax = 1 + (EESIZE_X9D-eeFsSize)/eeFsBlockSize;
+    return eeFsArm->mySize == eeFsSize;
   }
   else {
     eeFs = (EeFs *)eeprom;
     eeFsVersion = eeFs->version;
+    eeFsBlockSize = 16;
+    eeFsLinkSize = 1;
     if (eeFsVersion == 5) {
       eeFsSize = 4+3*36;
       eeFsFirstBlock = 1;
@@ -108,44 +148,62 @@ void EFile::eeprom_write_block(const void *pointer_ram, unsigned int pointer_eep
   memcpy(&eeprom[pointer_eeprom], pointer_ram, size);
 }
 
-uint8_t EFile::EeFsRead(uint8_t blk,uint8_t ofs)
+uint8_t EFile::EeFsRead(unsigned int blk, unsigned int ofs)
 {
   uint8_t ret;
-  eeprom_read_block(&ret,(uint16_t)(blk*BS+ofs+eeFsBlocksOffset),1);
+  eeprom_read_block(&ret, blk*eeFsBlockSize+ofs+eeFsBlocksOffset, eeFsLinkSize);
   return ret;
 }
 
-void EFile::EeFsWrite(uint8_t blk,uint8_t ofs,uint8_t val)
+void EFile::EeFsWrite(unsigned int blk, unsigned int ofs, uint8_t val)
 {
-  eeprom_write_block(&val, (uint16_t)(blk*BS+ofs+eeFsBlocksOffset), 1);
+  eeprom_write_block(&val, blk*eeFsBlockSize+ofs+eeFsBlocksOffset, 1);
 }
 
-uint8_t EFile::EeFsGetLink(uint8_t blk)
+unsigned int EFile::EeFsGetLink(unsigned int blk)
 {
-  return EeFsRead(blk, 0);
+  if (IS_ARM(board)) {
+    int16_t ret;
+    eeprom_read_block((uint8_t *)&ret, blk*eeFsBlockSize+eeFsBlocksOffset, eeFsLinkSize);
+    return ret;
+  }
+  else {
+    return EeFsRead(blk, 0);
+  }
 }
 
-void EFile::EeFsSetLink(uint8_t blk, uint8_t val)
+void EFile::EeFsSetLink(unsigned int blk, unsigned int val)
 {
-  EeFsWrite(blk, 0, val);
+  if (IS_ARM(board)) {
+    int16_t s_link = val;
+    eeprom_write_block((uint8_t *)&s_link, (blk*eeFsBlockSize)+eeFsBlocksOffset, eeFsLinkSize);
+  }
+  else {
+    EeFsWrite(blk, 0, val);
+  }
 }
 
-uint8_t EFile::EeFsGetDat(uint8_t blk,uint8_t ofs)
+uint8_t EFile::EeFsGetDat(unsigned int blk, unsigned int ofs)
 {
-  return EeFsRead(blk,ofs+1);
+  return EeFsRead(blk, ofs+eeFsLinkSize);
 }
 
-void EFile::EeFsSetDat(uint8_t blk, uint8_t ofs, const uint8_t *buf, uint8_t len)
+void EFile::EeFsSetDat(unsigned int blk, unsigned int ofs, const uint8_t *buf, unsigned int len)
 {
-  eeprom_write_block(buf, (uint16_t)(blk*BS+ofs+1+eeFsBlocksOffset), len);
+  eeprom_write_block(buf, blk*eeFsBlockSize+ofs+eeFsLinkSize+eeFsBlocksOffset, len);
 }
 
-uint16_t EFile::EeFsGetFree()
+unsigned int EFile::EeFsGetFree()
 {
-  uint16_t  ret = 0;
-  uint8_t i = eeFs->freeList;
+  unsigned int ret = 0;
+  unsigned int i;
+  if (IS_ARM(board))
+    i = eeFsArm->freeList;
+  else
+    i = eeFs->freeList;
+
   while (i) {
-    ret += BS-1;
+    ret += eeFsBlockSize-eeFsLinkSize;
     i = EeFsGetLink(i);
   }
   return ret;
@@ -154,60 +212,78 @@ uint16_t EFile::EeFsGetFree()
 /*
  * free one or more blocks
  */
-void EFile::EeFsFree(uint8_t blk)
+void EFile::EeFsFree(unsigned int blk)
 {
-  uint8_t i = blk;
-  while( EeFsGetLink(i)) i = EeFsGetLink(i);
-  EeFsSetLink(i,eeFs->freeList);
-  eeFs->freeList = blk; //chain in front
-  // EeFsFlushFreelist();
+  unsigned int i = blk;
+  while (EeFsGetLink(i)) i = EeFsGetLink(i);
+  if (IS_ARM(board)) {
+    EeFsSetLink(i, eeFsArm->freeList);
+    eeFs->freeList = blk; //chain in front
+  }
+  else {
+    EeFsSetLink(i, eeFs->freeList);
+    eeFs->freeList = blk; //chain in front
+  }
 }
 
 /*
  * alloc one block from freelist
  */
-uint8_t EFile::EeFsAlloc()
+unsigned int EFile::EeFsAlloc()
 {
-  uint8_t ret=eeFs->freeList;
-  if (ret){
-    eeFs->freeList = EeFsGetLink(ret);
-    // EeFsFlushFreelist();
-    EeFsSetLink(ret,0);
+  unsigned int ret = (IS_ARM(board) ? eeFsArm->freeList : eeFs->freeList);
+  if (ret) {
+    if (IS_ARM(board))
+      eeFsArm->freeList = EeFsGetLink(ret);
+    else
+      eeFs->freeList = EeFsGetLink(ret);
+    EeFsSetLink(ret, 0);
   }
   return ret;
 }
 
-bool EFile::exists(uint8_t i_fileId)
+bool EFile::exists(unsigned int i_fileId)
 {
-  return eeFs->files[i_fileId].startBlk;
+  return IS_ARM(board) ? eeFsArm->files[i_fileId].startBlk : eeFs->files[i_fileId].startBlk;
 }
 
-void EFile::swap(uint8_t i_fileId1,uint8_t i_fileId2)
+void EFile::swap(unsigned int i_fileId1, unsigned int i_fileId2)
 {
-  DirEnt            tmp = eeFs->files[i_fileId1];
-  eeFs->files[i_fileId1] = eeFs->files[i_fileId2];
-  eeFs->files[i_fileId2] = tmp;;
-  // EeFsFlush();
+  if (IS_ARM(board)) {
+    DirEntArm             tmp = eeFsArm->files[i_fileId1];
+    eeFsArm->files[i_fileId1] = eeFsArm->files[i_fileId2];
+    eeFsArm->files[i_fileId2] = tmp;
+  }
+  else {
+    DirEnt            tmp = eeFs->files[i_fileId1];
+    eeFs->files[i_fileId1] = eeFs->files[i_fileId2];
+    eeFs->files[i_fileId2] = tmp;
+  }
 }
 
-void EFile::rm(uint8_t i_fileId)
+void EFile::rm(unsigned int i_fileId)
 {
-  uint8_t i = eeFs->files[i_fileId].startBlk;
-  memset(&(eeFs->files[i_fileId]), 0, sizeof(eeFs->files[i_fileId]));
-  // EeFsFlush(); //chained out
+  unsigned int i;
 
+  if (IS_ARM(board)) {
+    i = eeFsArm->files[i_fileId].startBlk;
+    memset(&(eeFsArm->files[i_fileId]), 0, sizeof(eeFsArm->files[i_fileId]));
+  }
+  else {
+    i = eeFs->files[i_fileId].startBlk;
+    memset(&(eeFs->files[i_fileId]), 0, sizeof(eeFs->files[i_fileId]));
+  }
   if(i) EeFsFree( i ); //chain in
 }
 
-uint16_t EFile::size(uint8_t id)
+unsigned int EFile::size(unsigned int id)
 {
-  return eeFs->files[id].size;
+  return IS_ARM(board) ? eeFsArm->files[id].size : eeFs->files[id].size;
 }
 
-
-uint8_t EFile::openRd(uint8_t i_fileId)
+unsigned int EFile::openRd(unsigned int i_fileId)
 {
-  if (this->eeprom_size == EESIZE_SKY9X) {
+  if (board == BOARD_SKY9X) {
     m_fileId = get_current_block_number(i_fileId * 2, &m_size);
     m_pos = sizeof(t_eeprom_header);
     return 1;
@@ -215,26 +291,30 @@ uint8_t EFile::openRd(uint8_t i_fileId)
   else {
     m_fileId = i_fileId;
     m_pos      = 0;
-    m_currBlk  = eeFs->files[m_fileId].startBlk;
+    m_currBlk  = IS_ARM(board) ? eeFsArm->files[m_fileId].startBlk : eeFs->files[m_fileId].startBlk;
     m_ofs      = 0;
     m_zeroes   = 0;
     m_bRlc     = 0;
     m_err      = ERR_NONE;       //error reasons
-    return eeFs->files[m_fileId].typ;
+    if (IS_ARM(board))
+      return eeFsArm->files[m_fileId].typ;
+    else
+      return eeFs->files[m_fileId].typ;
   }
 }
 
-uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
+unsigned int EFile::read(uint8_t *buf, unsigned int i_len)
 {
-  uint16_t len = eeFs->files[m_fileId].size - m_pos;
+  unsigned int len = IS_ARM(board) ? eeFsArm->files[m_fileId].size : eeFs->files[m_fileId].size;
+  len -= m_pos;
   if (len < i_len) i_len = len;
   len = i_len;
   while(len) {
-    if(!m_currBlk) break;
+    if (!m_currBlk) break;
     *buf++ = EeFsGetDat(m_currBlk, m_ofs++);
-    if (m_ofs >= (BS-1)){
-      m_ofs=0;
-      m_currBlk=EeFsGetLink(m_currBlk);
+    if (m_ofs >= (eeFsBlockSize-1)){
+      m_ofs = 0;
+      m_currBlk = EeFsGetLink(m_currBlk);
     }
     len--;
   }
@@ -243,11 +323,11 @@ uint8_t EFile::read(uint8_t*buf, uint16_t i_len)
 }
 
 // G: Read runlength (RLE) compressed bytes into buf.
-uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
+unsigned int EFile::readRlc12(uint8_t *buf, unsigned int i_len, bool rlc2)
 {
   memset(buf, 0, i_len);
 
-  if (this->eeprom_size == EESIZE_SKY9X) {
+  if (board == BOARD_SKY9X) {
     int len = std::min((int)i_len, (int)m_size + (int)sizeof(t_eeprom_header) - (int)m_pos);
     if (len > 0) {
       eeprom_read_block(buf, (m_fileId << 12) + m_pos, len);
@@ -295,17 +375,20 @@ uint16_t EFile::readRlc12(uint8_t *buf, uint16_t i_len, bool rlc2)
   }
 }
 
-uint8_t EFile::write1(uint8_t b)
+unsigned int EFile::write1(uint8_t b)
 {
   return write(&b, 1);
 }
 
-uint8_t EFile::write(const uint8_t *buf, uint8_t i_len)
+unsigned int EFile::write(const uint8_t *buf, unsigned int i_len)
 {
-  uint8_t len = i_len;
+  unsigned int len = i_len;
   if (!m_currBlk && m_pos==0)
   {
-    eeFs->files[m_fileId].startBlk = m_currBlk = EeFsAlloc();
+    if (IS_ARM(board))
+      eeFsArm->files[m_fileId].startBlk = m_currBlk = EeFsAlloc();
+    else
+      eeFs->files[m_fileId].startBlk = m_currBlk = EeFsAlloc();
   }
   while (len)
   {
@@ -313,8 +396,8 @@ uint8_t EFile::write(const uint8_t *buf, uint8_t i_len)
       m_err = ERR_FULL;
       return 0;
     }
-    if (m_ofs>=(BS-1)) {
-      m_ofs=0;
+    if (m_ofs >= eeFsBlockSize-eeFsLinkSize) {
+      m_ofs = 0;
       if (!EeFsGetLink(m_currBlk) ){
         EeFsSetLink(m_currBlk, EeFsAlloc());
       }
@@ -324,7 +407,7 @@ uint8_t EFile::write(const uint8_t *buf, uint8_t i_len)
       m_err = ERR_FULL;
       return 0;
     }
-    uint8_t l = BS-1-m_ofs; if(l>len) l=len;
+    uint8_t l = eeFsBlockSize-eeFsLinkSize-m_ofs; if(l>len) l=len;
     EeFsSetDat(m_currBlk, m_ofs, buf, l);
     buf   +=l;
     m_ofs +=l;
@@ -334,24 +417,31 @@ uint8_t EFile::write(const uint8_t *buf, uint8_t i_len)
   return i_len - len;
 }
 
-void EFile::create(uint8_t i_fileId, uint8_t typ)
+void EFile::create(unsigned int i_fileId, unsigned int typ)
 {
   openRd(i_fileId); //internal use
-  eeFs->files[i_fileId].typ      = typ;
-  eeFs->files[i_fileId].size     = 0;
+  if (IS_ARM(board)) {
+    eeFsArm->files[i_fileId].typ   = typ;
+    eeFsArm->files[i_fileId].size  = 0;
+  }
+  else {
+    eeFs->files[i_fileId].typ   = typ;
+    eeFs->files[i_fileId].size  = 0;
+  }
 }
 
 void EFile::closeTrunc()
 {
-  uint8_t fri=0;
-  eeFs->files[m_fileId].size     = m_pos;
+  unsigned int fri=0;
+  if (IS_ARM(board))
+    eeFsArm->files[m_fileId].size = m_pos;
+  else
+    eeFs->files[m_fileId].size = m_pos;
   if (m_currBlk && ( fri = EeFsGetLink(m_currBlk))) EeFsSetLink(m_currBlk, 0);
-  // EeFsFlush(); //chained out
-
   if(fri) EeFsFree( fri );  //chain in
 }
 
-uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uint16_t i_len)
+unsigned int EFile::writeRlc1(unsigned int i_fileId, unsigned int typ, const uint8_t *buf, unsigned int i_len)
 {
   create(i_fileId, typ);
   bool state0 = true;
@@ -397,9 +487,9 @@ uint16_t EFile::writeRlc1(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uin
 /*
  * Write runlength (RLE) compressed bytes
  */
-uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uint16_t i_len)
+unsigned int EFile::writeRlc2(unsigned int i_fileId, unsigned int typ, const uint8_t *buf, unsigned int i_len)
 {
-  if (this->eeprom_size == EESIZE_SKY9X) {
+  if (board == BOARD_SKY9X) {
     openRd(i_fileId);
     eeprom_write_block(buf, (m_fileId << 12) + m_pos, i_len);
     t_eeprom_header header;
@@ -461,8 +551,7 @@ uint16_t EFile::writeRlc2(uint8_t i_fileId, uint8_t typ, const uint8_t *buf, uin
   }
 }
 
-
-uint8_t EFile::byte_checksum( uint8_t *p, uint32_t size )
+uint8_t EFile::byte_checksum( uint8_t *p, unsigned int size )
 {
         uint32_t csum ;
 
