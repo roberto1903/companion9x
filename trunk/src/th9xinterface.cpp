@@ -73,7 +73,7 @@ bool Th9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     return false;
   }
 
-  if (!efile->EeFsOpen(eeprom, size)) {
+  if (!efile->EeFsOpen(eeprom, size, BOARD_STOCK)) {
     std::cout << "wrong file system\n";
     return false;
   }
@@ -128,7 +128,7 @@ int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t variant,
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, getEEpromSize(), 4);
+  efile->EeFsCreate(eeprom, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xGeneral th9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
@@ -156,8 +156,8 @@ int Th9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_AVRMAX];
-  efile->EeFsCreate(tmp, getEEpromSize(), 4);
+  uint8_t tmp[EESIZE_STOCK];
+  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xModelData th9xModel(model);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));
@@ -169,8 +169,8 @@ int Th9xInterface::getSize(ModelData &model)
 
 int Th9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_AVRMAX];
-  efile->EeFsCreate(tmp, getEEpromSize(), 4);
+  uint8_t tmp[EESIZE_STOCK];
+  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xGeneral th9xGeneral(settings);
   int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));

@@ -90,6 +90,10 @@ const int Open9xInterface::getEEpromSize()
       return EESIZE_GRUVIN9X;
     case BOARD_SKY9X:
       return EESIZE_SKY9X;
+    case BOARD_X9DA:
+      return EESIZE_X9D;
+    case BOARD_ACT:
+      return EESIZE_ACT;
     default:
       return 0;
   }
@@ -97,7 +101,7 @@ const int Open9xInterface::getEEpromSize()
 
 const int Open9xInterface::getMaxModels()
 {
-  if (board == BOARD_SKY9X)
+  if (IS_ARM(board))
     return 60;
   else if (board == BOARD_M128)
     return 30;
@@ -161,6 +165,31 @@ bool Open9xInterface::loadModelVariant(ModelData &model, uint8_t *data, int inde
     // load from SD Backup, size is stored in index
     // TODO will not work with SD backups from gruvin9x board!!!
     _model.importVariant(variant, data);
+  }
+
+  return true;
+}
+
+template <class T>
+bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int variant)
+{
+  T _model(model, board, variant);
+
+  if (!data) {
+    // load from EEPROM
+    QByteArray eepromData(sizeof(model), 0);  // ModelData should be always bigger than the EEPROM struct
+    efile->openRd(FILE_MODEL(index));
+    if (efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size())) {
+      _model.Import(eepromData);
+    }
+    else {
+      model.clear();
+    }
+  }
+  else {
+    // load from SD Backup, size is stored in index
+    QByteArray eepromData((char *)data, index);
+    _model.Import(eepromData);
   }
 
   return true;
@@ -234,6 +263,11 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
     if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v212>(model, data, index);
     }
+#if 1
+    else {
+      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, variant);
+    }
+#else
     else if (board == BOARD_GRUVIN9X) {
       return loadModel<Open9xGruvin9xModelData_v212>(model, data, index);
     }
@@ -243,6 +277,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
     else {
       return loadModelVariant<Open9xModelData_v212>(model, data, index, variant);
     }
+#endif
   }
   else if (version == 213) {
     if (board == BOARD_SKY9X) {
@@ -290,6 +325,13 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 template <class T>
 bool Open9xInterface::saveGeneral(GeneralSettings &settings, uint32_t variant, uint32_t version)
 {
+  if (board == BOARD_X9DA) {
+    // TODO temporary !!!
+    memset(settings.calibMid, 0, sizeof(settings.calibMid));
+    memset(settings.calibSpanNeg, 0, sizeof(settings.calibSpanNeg));
+    memset(settings.calibSpanPos, 0, sizeof(settings.calibSpanPos));
+  }
+
   T open9xSettings(settings, version, variant);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xSettings, sizeof(T));
   return (sz == sizeof(T));
@@ -304,7 +346,7 @@ bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
 }
 
 template <class T>
-bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, BoardEnum board, uint32_t variant)
+bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uint32_t variant)
 {
   T open9xModel(model, board, variant);
   // open9xModel.Dump(model.name);
@@ -331,7 +373,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     return false;
   }
 
-  if (!efile->EeFsOpen(eeprom, size)) {
+  if (!efile->EeFsOpen(eeprom, size, board)) {
     std::cout << " wrong file system\n";
     return false;
   }
@@ -426,11 +468,11 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   int size = getEEpromSize();
 
-  efile->EeFsCreate(eeprom, size, ((board==BOARD_GRUVIN9X || board==BOARD_M128) && version >= 207) ? 5 : 4);
+  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || board==BOARD_X9DA) && version >= 207) ? 5 : 4);
 
   int result = 0;
 
-  if (board == BOARD_SKY9X) {
+  if (IS_ARM(board)) {
     if (version < 213)
       result = saveGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings, variant, version);
     else
@@ -505,11 +547,11 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
           else
-            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], board, variant);
+            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], variant);
           break;
         case 213:
-          if (board == BOARD_SKY9X)
-            result = saveModel<Open9xArmModelData_v213>(i, radioData.models[i]);
+          if (IS_ARM(board))
+            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], variant);
           break;
       }
       if (!result)
@@ -533,8 +575,9 @@ int Open9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
+  // TODO something better
+  uint8_t tmp[EESIZE_X9D];
+  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
   Open9xModelData open9xModel(model);
   QByteArray eeprom;
@@ -551,8 +594,8 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   if (board == BOARD_SKY9X)
     return 0;
 
-  uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, 5);
+  uint8_t tmp[EESIZE_X9D];
+  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
   Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER, GetCurrentFirmwareVariant());
   memset(&open9xGeneral, 0, sizeof(Open9xGeneralData));

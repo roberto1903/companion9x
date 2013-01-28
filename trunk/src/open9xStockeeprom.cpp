@@ -62,7 +62,7 @@ void getEEPROMZString(char *dst, const char *src, int size)
   }
 }
 
-int8_t open9xFromSwitch(const RawSwitch & sw)
+int8_t open9xStockFromSwitch(const RawSwitch & sw)
 {
   switch (sw.type) {
     case SWITCH_TYPE_SWITCH:
@@ -84,7 +84,7 @@ int8_t open9xFromSwitch(const RawSwitch & sw)
   }
 }
 
-RawSwitch open9xToSwitch(int8_t sw)
+RawSwitch open9xStockToSwitch(int8_t sw)
 {
   uint8_t swa = abs(sw);
   if (swa == 0)
@@ -351,7 +351,7 @@ t_Open9xExpoData_v201::t_Open9xExpoData_v201(ExpoData &c9x)
   else {
     expo=c9x.expo;
   }
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   int zeros=0;
   int ones=0;
   int phtemp=c9x.phases;
@@ -418,7 +418,7 @@ t_Open9xExpoData_v201::operator ExpoData ()
         c9x.curveParam = curve + 4;
     }
   }
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   if (negPhase) {
     c9x.phases= 1 << (phase -1);
   }
@@ -439,7 +439,7 @@ t_Open9xExpoData_v211::t_Open9xExpoData_v211(ExpoData &c9x)
   chn = c9x.chn;
   // 0=no curve, 1-6=std curves, 7-10=CV1-CV4, 11-15=CV9-CV13
 
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   phases = c9x.phases;
   weight = c9x.weight;
   curveMode = c9x.curveMode;
@@ -453,7 +453,7 @@ t_Open9xExpoData_v211::operator ExpoData ()
   c9x.chn = chn;
   c9x.curveMode = curveMode;
   c9x.curveParam = curveParam;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   c9x.phases = phases;
   c9x.weight = weight;
   return c9x;
@@ -503,7 +503,7 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -521,7 +521,7 @@ t_Open9xMixData_v201::t_Open9xMixData_v201(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+    swtch = open9xStockFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
     srcRaw = 10 + c9x.srcRaw.index;
@@ -588,7 +588,7 @@ t_Open9xMixData_v201::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -648,7 +648,7 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
 {
   destCh = c9x.destCh;
   mixWarn = c9x.mixWarn;
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
 
   if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
     srcRaw = 0;
@@ -666,7 +666,7 @@ t_Open9xMixData_v203::t_Open9xMixData_v203(MixData &c9x)
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
-    swtch = open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+    swtch = open9xStockFromSwitch(RawSwitch(c9x.srcRaw.index));
   }
   else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
     srcRaw = 10 + c9x.srcRaw.index;
@@ -733,7 +733,7 @@ t_Open9xMixData_v203::operator MixData ()
   MixData c9x;
   c9x.destCh = destCh;
   c9x.weight = weight;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
 
   if (srcRaw == 0) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -794,7 +794,7 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-    swtch = open9xFromSwitch(c9x.swtch);
+    swtch = open9xStockFromSwitch(c9x.swtch);
 
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
@@ -814,7 +814,7 @@ t_Open9xMixData_v205::t_Open9xMixData_v205(MixData &c9x)
       srcRaw = 9;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 9 + open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+      srcRaw = 9 + open9xStockFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
       srcRaw = 31 + c9x.srcRaw.index;
@@ -887,7 +887,7 @@ t_Open9xMixData_v205::operator MixData ()
 
   if (srcRaw) {
     c9x.destCh = destCh+1;
-    c9x.swtch = open9xToSwitch(swtch);
+    c9x.swtch = open9xStockToSwitch(swtch);
 
     if (srcRaw == 0) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -902,7 +902,7 @@ t_Open9xMixData_v205::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
     else if (srcRaw <= 30) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(srcRaw-9).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-9).toValue());
     }
     else if (srcRaw <= 33) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-31);
@@ -942,7 +942,7 @@ t_Open9xMixData_v209::t_Open9xMixData_v209(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-    swtch = open9xFromSwitch(c9x.swtch);
+    swtch = open9xStockFromSwitch(c9x.swtch);
 
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
@@ -965,7 +965,7 @@ t_Open9xMixData_v209::t_Open9xMixData_v209(MixData &c9x)
       srcRaw = 13;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 13 + open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+      srcRaw = 13 + open9xStockFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
       srcRaw = 35 + c9x.srcRaw.index;
@@ -1038,7 +1038,7 @@ t_Open9xMixData_v209::operator MixData ()
 
   if (srcRaw) {
     c9x.destCh = destCh+1;
-    c9x.swtch = open9xToSwitch(swtch);
+    c9x.swtch = open9xStockToSwitch(swtch);
 
     if (srcRaw == 0) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -1056,7 +1056,7 @@ t_Open9xMixData_v209::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
     else if (srcRaw <= 34) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(srcRaw-13).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-13).toValue());
     }
     else if (srcRaw <= 37) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-35);
@@ -1096,7 +1096,7 @@ t_Open9xMixData_v211::t_Open9xMixData_v211(MixData &c9x)
   if (c9x.destCh) {
     destCh = c9x.destCh-1;
     mixWarn = c9x.mixWarn;
-    swtch = open9xFromSwitch(c9x.swtch);
+    swtch = open9xStockFromSwitch(c9x.swtch);
 
     if (c9x.srcRaw.type == SOURCE_TYPE_NONE) {
       srcRaw = 0;
@@ -1119,7 +1119,7 @@ t_Open9xMixData_v211::t_Open9xMixData_v211(MixData &c9x)
       srcRaw = 13;
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
-      srcRaw = 13 + open9xFromSwitch(RawSwitch(c9x.srcRaw.index));
+      srcRaw = 13 + open9xStockFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
     else if (c9x.srcRaw.type == SOURCE_TYPE_CYC) {
       srcRaw = 35 + c9x.srcRaw.index;
@@ -1161,7 +1161,7 @@ t_Open9xMixData_v211::operator MixData ()
 
   if (srcRaw) {
     c9x.destCh = destCh+1;
-    c9x.swtch = open9xToSwitch(swtch);
+    c9x.swtch = open9xStockToSwitch(swtch);
 
     if (srcRaw == 0) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_NONE);
@@ -1179,7 +1179,7 @@ t_Open9xMixData_v211::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     }
     else if (srcRaw <= 34) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(srcRaw-13).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-13).toValue());
     }
     else if (srcRaw <= 37) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-35);
@@ -1268,7 +1268,7 @@ RawSource open9x208ToSource(int8_t value)
   }
 }
 
-int8_t open9x209FromSource(RawSource source)
+int8_t open9xStock209FromSource(RawSource source)
 {
   int v1 = 0;
   if (source.type == SOURCE_TYPE_STICK)
@@ -1296,7 +1296,7 @@ int8_t open9x209FromSource(RawSource source)
   return v1;
 }
 
-RawSource open9x209ToSource(int8_t value)
+RawSource open9xStock209ToSource(int8_t value)
 {
   if (value == 0) {
     return RawSource(SOURCE_TYPE_NONE);
@@ -1345,8 +1345,8 @@ t_Open9xCustomSwData_v208::t_Open9xCustomSwData_v208(CustomSwData &c9x)
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
-    v1 = open9xFromSwitch(RawSwitch(c9x.val1));
-    v2 = open9xFromSwitch(RawSwitch(c9x.val2));
+    v1 = open9xStockFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xStockFromSwitch(RawSwitch(c9x.val2));
   }
 
   if (func>O9X_MAX_CSFUNCOLD ) {
@@ -1373,8 +1373,8 @@ Open9xCustomSwData_v208::operator CustomSwData ()
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
-    c9x.val1 = open9xToSwitch(v1).toValue();
-    c9x.val2 = open9xToSwitch(v2).toValue();
+    c9x.val1 = open9xStockToSwitch(v1).toValue();
+    c9x.val2 = open9xStockToSwitch(v2).toValue();
   }
 
   return c9x;
@@ -1387,16 +1387,16 @@ t_Open9xCustomSwData_v209::t_Open9xCustomSwData_v209(CustomSwData &c9x)
   v2 = c9x.val2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    v1 = open9x209FromSource(RawSource(c9x.val1));
+    v1 = open9xStock209FromSource(RawSource(c9x.val1));
   }
 
   if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
-    v2 = open9x209FromSource(RawSource(c9x.val2));
+    v2 = open9xStock209FromSource(RawSource(c9x.val2));
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
-    v1 = open9xFromSwitch(RawSwitch(c9x.val1));
-    v2 = open9xFromSwitch(RawSwitch(c9x.val2));
+    v1 = open9xStockFromSwitch(RawSwitch(c9x.val1));
+    v2 = open9xStockFromSwitch(RawSwitch(c9x.val2));
   }
 }
 
@@ -1408,16 +1408,16 @@ Open9xCustomSwData_v209::operator CustomSwData ()
   c9x.val2 = v2;
 
   if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
-    c9x.val1 = open9x209ToSource(v1).toValue();
+    c9x.val1 = open9xStock209ToSource(v1).toValue();
   }
 
   if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
-    c9x.val2 = open9x209ToSource(v2).toValue();
+    c9x.val2 = open9xStock209ToSource(v2).toValue();
   }
 
   if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
-    c9x.val1 = open9xToSwitch(v1).toValue();
-    c9x.val2 = open9xToSwitch(v2).toValue();
+    c9x.val1 = open9xStockToSwitch(v1).toValue();
+    c9x.val2 = open9xStockToSwitch(v2).toValue();
   }
 
   return c9x;
@@ -1425,14 +1425,14 @@ Open9xCustomSwData_v209::operator CustomSwData ()
 
 t_Open9xFuncSwData_v201::t_Open9xFuncSwData_v201(FuncSwData &c9x)
 {
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   func = c9x.func - O9X_NUM_CHNOUT;
 }
 
 t_Open9xFuncSwData_v201::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   c9x.func = (AssignFunc)(func+O9X_NUM_CHNOUT);
   return c9x;
 }
@@ -1465,7 +1465,7 @@ enum Functions {
 
 t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 {
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   if (c9x.func <= FuncSafetyCh16) {
     param = ((c9x.param>>1)<<1);
     param |=(c9x.enabled & 0x01);
@@ -1497,7 +1497,7 @@ t_Open9xFuncSwData_v203::t_Open9xFuncSwData_v203(FuncSwData &c9x)
 t_Open9xFuncSwData_v203::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   if (func < 16) {
     c9x.enabled=param & 0x01;
     c9x.param = (param>>1)<<1;
@@ -1526,7 +1526,7 @@ t_Open9xFuncSwData_v203::operator FuncSwData ()
 
 t_Open9xFuncSwData_v210::t_Open9xFuncSwData_v210(FuncSwData &c9x)
 {
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   param = c9x.param;
   if (c9x.func <= FuncInstantTrim) {
     delay = c9x.enabled;
@@ -1559,7 +1559,7 @@ t_Open9xFuncSwData_v210::t_Open9xFuncSwData_v210(FuncSwData &c9x)
 t_Open9xFuncSwData_v210::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   c9x.param = param;
   if (func < 22) {
     c9x.enabled = delay;
@@ -1592,7 +1592,7 @@ t_Open9xFuncSwData_v210::operator FuncSwData ()
 
 t_Open9xFuncSwData_v212::t_Open9xFuncSwData_v212(FuncSwData &c9x)
 {
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   param = c9x.param;
   if (c9x.func <= FuncInstantTrim) {
     active = c9x.enabled;
@@ -1628,7 +1628,7 @@ t_Open9xFuncSwData_v212::t_Open9xFuncSwData_v212(FuncSwData &c9x)
 t_Open9xFuncSwData_v212::operator FuncSwData ()
 {
   FuncSwData c9x;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   c9x.param = param;
   if (func < 22) {
     c9x.enabled = active;
@@ -1663,14 +1663,14 @@ t_Open9xFuncSwData_v212::operator FuncSwData ()
 
 t_Open9xSafetySwData::t_Open9xSafetySwData(SafetySwData &c9x)
 {
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   val = c9x.val;
 }
 
 t_Open9xSafetySwData::operator SafetySwData ()
 {
   SafetySwData c9x;
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   c9x.val = val;
   return c9x;
 }
@@ -1703,7 +1703,7 @@ t_Open9xSwashRingData_v209::t_Open9xSwashRingData_v209(SwashRingData &c9x)
   invertAIL = c9x.invertAIL;
   invertCOL = c9x.invertCOL;
   type = c9x.type;
-  collectiveSource = open9x209FromSource(c9x.collectiveSource);
+  collectiveSource = open9xStock209FromSource(c9x.collectiveSource);
   value = c9x.value;
 }
 
@@ -1714,7 +1714,7 @@ t_Open9xSwashRingData_v209::operator SwashRingData ()
   c9x.invertAIL = invertAIL;
   c9x.invertCOL = invertCOL;
   c9x.type = type;
-  c9x.collectiveSource = open9x209ToSource(collectiveSource);
+  c9x.collectiveSource = open9xStock209ToSource(collectiveSource);
   c9x.value = value;
   return c9x;
 }
@@ -1724,7 +1724,7 @@ t_Open9xPhaseData_v201::operator PhaseData ()
   PhaseData c9x;
   for (int i=0; i<NUM_STICKS; i++)
     c9x.trim[i] = (((int16_t)trim[i]) << 2) + ((trim_ext >> (2*i)) & 0x03);
-  c9x.swtch = open9xToSwitch(swtch);
+  c9x.swtch = open9xStockToSwitch(swtch);
   getEEPROMZString(c9x.name, name, sizeof(name));
   c9x.fadeIn = fadeIn;
   c9x.fadeOut = fadeOut;
@@ -1738,7 +1738,7 @@ t_Open9xPhaseData_v201::t_Open9xPhaseData_v201(PhaseData &c9x)
     trim[i] = (int8_t)(c9x.trim[i] >> 2);
     trim_ext = (trim_ext & ~(0x03 << (2*i))) + (((c9x.trim[i] & 0x03) << (2*i)));
   }
-  swtch = open9xFromSwitch(c9x.swtch);
+  swtch = open9xStockFromSwitch(c9x.swtch);
   setEEPROMZString(name, c9x.name, sizeof(name));
   fadeIn = c9x.fadeIn;
   fadeOut = c9x.fadeOut;
@@ -2585,7 +2585,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -2753,7 +2753,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -2936,7 +2936,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -3139,7 +3139,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -3353,7 +3353,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -3569,7 +3569,7 @@ t_Open9xModelData_v210::t_Open9xModelData_v210(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -3770,7 +3770,7 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (c9x.safetySw[i].swtch.type) {
         funcSw[count].func = i;
-        funcSw[count].swtch = open9xFromSwitch(c9x.safetySw[i].swtch);
+        funcSw[count].swtch = open9xStockFromSwitch(c9x.safetySw[i].swtch);
         funcSw[count].param = c9x.safetySw[i].val;
         count++;
       }
@@ -3992,7 +3992,7 @@ int Open9xModelData_v212::exportVariant(unsigned int variant, QByteArray & outpu
     for (int i=0; i<O9X_NUM_CHNOUT; i++) {
       if (modelData.safetySw[i].swtch.type) {
         commonData.funcSw[count].func = i;
-        commonData.funcSw[count].swtch = open9xFromSwitch(modelData.safetySw[i].swtch);
+        commonData.funcSw[count].swtch = open9xStockFromSwitch(modelData.safetySw[i].swtch);
         commonData.funcSw[count].param = modelData.safetySw[i].val;
         count++;
       }
