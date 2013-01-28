@@ -967,7 +967,7 @@ void RegisterOpen9xFirmwares()
 {
   Open9xFirmware * open9x;
 
-  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
+  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT },{ "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
 
   /* Stock board */
   open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
@@ -987,7 +987,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
-  open9x->addOption("telemetrez", QObject::tr("TelemetrEZ board support"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
@@ -1016,7 +1015,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
-  open9x->addOption("telemetrez", QObject::tr("TelemetrEZ board support"));
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
@@ -1065,6 +1063,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   firmwares.push_back(open9x);
     
   /* X9DA board */
