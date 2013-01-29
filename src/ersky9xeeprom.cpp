@@ -168,7 +168,7 @@ t_Ersky9xGeneral::t_Ersky9xGeneral(GeneralSettings &c9x)
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  disableSplashScreen = c9x.disableSplashScreen;
+  disableSplashScreen = c9x.splashMode;
   disablePotScroll=(c9x.disablePotScroll ? 1 : 0);
   disableBG=(c9x.disableBG ? 1 :0);
   filterInput = c9x.filterInput;
@@ -189,7 +189,7 @@ Ersky9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
   
-  result.myVers = myVers;
+  result.version = myVers;
   
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     result.calibMid[i] = calibMid[i];
@@ -241,7 +241,7 @@ Ersky9xGeneral::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
+  result.splashMode = disableSplashScreen;
   result.disablePotScroll=(disablePotScroll==1);
   result.disableBG=(disableBG==1);
   result.filterInput = filterInput;

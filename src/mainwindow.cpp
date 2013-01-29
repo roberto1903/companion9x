@@ -1836,7 +1836,7 @@ int MainWindow::getEpromVersion(QString fileName)
       return -1;
     }
   }
-  return testData.generalSettings.myVers;
+  return testData.generalSettings.version;
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)

@@ -18,7 +18,6 @@
 #include <QMessageBox>
 #include "open9xinterface.h"
 #include "open9xeeprom.h"
-#include "open9xM128eeprom.h"
 #include "open9xGruvin9xeeprom.h"
 #include "open9xSky9xeeprom.h"
 #include "open9xsimulator.h"
@@ -173,14 +172,16 @@ bool Open9xInterface::loadModelVariant(ModelData &model, uint8_t *data, int inde
 template <class T>
 bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int variant)
 {
-  T _model(model, board, variant);
+  T open9xModel(model, board, variant);
 
   if (!data) {
     // load from EEPROM
     QByteArray eepromData(sizeof(model), 0);  // ModelData should be always bigger than the EEPROM struct
     efile->openRd(FILE_MODEL(index));
-    if (efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size())) {
-      _model.Import(eepromData);
+    int numbytes = efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size());
+    if (numbytes) {
+      open9xModel.Import(eepromData);
+      model.used = true;
     }
     else {
       model.clear();
@@ -189,7 +190,7 @@ bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, 
   else {
     // load from SD Backup, size is stored in index
     QByteArray eepromData((char *)data, index);
-    _model.Import(eepromData);
+    open9xModel.Import(eepromData);
   }
 
   return true;
@@ -280,8 +281,8 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
 #endif
   }
   else if (version == 213) {
-    if (board == BOARD_SKY9X) {
-      return loadModel<Open9xArmModelData_v213>(model, data, index);
+    if (IS_ARM(board)) {
+      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, variant);
     }
   }
 
@@ -290,21 +291,23 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
 }
 
 template <class T>
-bool Open9xInterface::loadGeneral(GeneralSettings &settings)
+bool Open9xInterface::loadGeneral(GeneralSettings &settings, unsigned int version)
 {
-  T _settings;
+  QByteArray eepromData(sizeof(settings), 0); // GeneralSettings should be always bigger than the EEPROM struct
+  T open9xSettings(settings, board, version);
   efile->openRd(FILE_GENERAL);
-  int sz = efile->readRlc2((uint8_t*)&_settings, sizeof(T));
+  int sz = efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size());
   if (sz) {
-    if (board == BOARD_M128 && _settings.variant != 0x8000) {
-      if (_settings.myVers == 212) {
+/*  It was needed for a bug in EEPROM 212. Should not be needed any more.
+    if (board == BOARD_M128 && open9xSettings.variant != 0x8000) {
+      if (settings.version == 212) {
         uint8_t tmp[1000];
         for (int i=1; i<31; i++) {
           efile->openRd(i);
           int sz = efile->readRlc2(tmp, sizeof(tmp));
           if (sz == 849) {
             std::cout << " warning: M128 variant not set (model size seems ok)";
-            settings = _settings;
+            settings = open9xSettings;
             return true;
           }
         }
@@ -312,10 +315,10 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
       std::cout << " error when loading M128 general settings (wrong variant)";
       return false;
     }
-    else {
-      settings = _settings;
+    else { */
+      open9xSettings.Import(eepromData);
       return true;
-    }
+    // }
   }
 
   std::cout << " error when loading general settings";
@@ -323,18 +326,13 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings)
 }
 
 template <class T>
-bool Open9xInterface::saveGeneral(GeneralSettings &settings, uint32_t variant, uint32_t version)
+bool Open9xInterface::saveGeneral(GeneralSettings &settings, BoardEnum board, uint32_t version, uint32_t variant)
 {
-  if (board == BOARD_X9DA) {
-    // TODO temporary !!!
-    memset(settings.calibMid, 0, sizeof(settings.calibMid));
-    memset(settings.calibSpanNeg, 0, sizeof(settings.calibSpanNeg));
-    memset(settings.calibSpanPos, 0, sizeof(settings.calibSpanPos));
-  }
-
-  T open9xSettings(settings, version, variant);
-  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&open9xSettings, sizeof(T));
-  return (sz == sizeof(T));
+  T open9xSettings(settings, board, version, variant);
+  QByteArray eeprom;
+  open9xSettings.Export(eeprom);
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (const uint8_t*)eeprom.constData(), eeprom.size());
+  return (sz == eeprom.size());
 }
 
 template <class T>
@@ -353,10 +351,7 @@ bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uin
   QByteArray eeprom;
   open9xModel.Export(eeprom);
   int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
-  if (sz != eeprom.size()) {
-    return false;
-  }
-  return true;
+  return (sz == eeprom.size());
 }
 
 bool Open9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
@@ -393,39 +388,9 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
     return false;
   }
 
-  if (board == BOARD_SKY9X) {
-    if (version >= 213) {
-      if (!loadGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings)) {
-        std::cout << " ko\n";
-        return false;
-      }
-    }
-    else if (version >= 208) {
-      if (!loadGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings)) {
-        std::cout << " ko\n";
-        return false;
-      }
-    }
-    else {
-      if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
-        std::cout << " ko\n";
-        return false;
-      }
-    }
-  }
-  else {
-    if (version >= 212) {
-      if (!loadGeneral<Open9xGeneralData_v212>(radioData.generalSettings)) {
-        std::cout << " ko\n";
-        return false;
-      }
-    }
-    else {
-      if (!loadGeneral<Open9xGeneralData_v201>(radioData.generalSettings)) {
-        std::cout << " ko\n";
-        return false;
-      }
-    }
+  if (!loadGeneral<Open9xGeneralDataNew>(radioData.generalSettings, version)) {
+    std::cout << " ko\n";
+    return false;
   }
   
   std::cout << " variant " << radioData.generalSettings.variant;
@@ -458,7 +423,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
         version = LAST_OPEN9X_GRUVIN9X_EEPROM_VER;
         break;
       case BOARD_M128:
-        version = LAST_OPEN9X_M128_EEPROM_VER;
+        version = LAST_OPEN9X_STOCK_EEPROM_VER; // TODO M128
         break;
       case BOARD_STOCK:
         version = LAST_OPEN9X_STOCK_EEPROM_VER;
@@ -472,22 +437,12 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   int result = 0;
 
-  if (IS_ARM(board)) {
-    if (version < 213)
-      result = saveGeneral<Open9xArmGeneralData_v208>(radioData.generalSettings, variant, version);
-    else
-      result = saveGeneral<Open9xArmGeneralData_v213>(radioData.generalSettings, variant, version);
-  }
-  else {
-    if (board == BOARD_M128) {
-      variant |= M128_VARIANT;
-    }
-    if (version < 212)
-      result = saveGeneral<Open9xGeneralData_v201>(radioData.generalSettings, variant, version);
-    else
-      result = saveGeneral<Open9xGeneralData_v212>(radioData.generalSettings, variant, version);
+  if (board == BOARD_M128) {
+    variant |= M128_VARIANT;
   }
   
+  result = saveGeneral<Open9xGeneralDataNew>(radioData.generalSettings, board, version, variant);
+
   if (!result)
     return 0;
 

@@ -234,7 +234,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->beepMinuteChkB->setChecked(g_eeGeneral.minuteBeep);
     ui->beepCountDownChkB->setChecked(g_eeGeneral.preBeep);
     ui->beepFlashChkB->setChecked(g_eeGeneral.flashBeep);
-    ui->splashScreenChkB->setChecked(!g_eeGeneral.disableSplashScreen);
+    ui->splashScreenChkB->setChecked(!g_eeGeneral.splashMode);
     ui->hideNameOnSplashChkB->setChecked(!g_eeGeneral.hideNameOnSplash);
 
     ui->trnMode_1->setCurrentIndex(g_eeGeneral.trainer.mix[0].mode);
@@ -785,7 +785,7 @@ void GeneralEdit::on_beepFlashChkB_stateChanged(int )
 
 void GeneralEdit::on_splashScreenChkB_stateChanged(int )
 {
-    g_eeGeneral.disableSplashScreen = ui->splashScreenChkB->isChecked() ? 0 : 1;
+    g_eeGeneral.splashMode = ui->splashScreenChkB->isChecked() ? 0 : 1;
     updateSettings();
 }
 

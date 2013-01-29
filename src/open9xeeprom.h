@@ -53,6 +53,21 @@
 #define O9X_ARM_MAX_CSFUNCOLD 13
 #define O9X_ARM_MAX_CSFUNC 15
 
+class Open9xGeneralDataNew: public TransformedField {
+  public:
+    Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant=0);
+
+  protected:
+    virtual void beforeExport();
+    virtual void afterImport();
+
+    StructField internalField;
+    GeneralSettings & generalData;
+    BoardEnum board;
+    int inputsCount;
+    unsigned int chkSum;
+};
+
 class Open9xModelDataNew: public StructField {
   public:
     Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant);

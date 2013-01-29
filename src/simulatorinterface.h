@@ -20,22 +20,11 @@
 #include "eeprominterface.h"
 
 struct TxInputs {
-    int sticks[4]; /* lh lv rv rh */
-    int pots[3];
-    bool sRud;
-    bool sEle;
-    bool sThr;
-    bool sAil;
-    bool sGea;
-    bool sTrn;
-    int sId0;
-    bool menu;
-    bool exit;
-    bool up;
-    bool down;
-    bool left;
-    bool right;
-    bool re1;
+    int  sticks[NUM_STICKS]; /* lh lv rv rh */
+    int  pots[4]; /* TODO NUM_POTS */
+    int  switches[10]; /* TODO NUM_SWITCHES */
+    bool keys[6]; /* TODO NUM_KEYS */
+    bool rotenc;
 };
 
 class TxOutputs {
@@ -45,12 +34,12 @@ class TxOutputs {
     }
 
     int16_t chans[NUM_CHNOUT];
-    bool vsw[12];
+    bool vsw[32]; /* TODO NUM_VIRTUAL_SWITCHES */
     unsigned int beep;
 };
 
 struct Trims {
-    int16_t values[4]; /* lh lv rv rh */
+    int16_t values[NUM_STICKS]; /* lh lv rv rh */
     bool extended;
 };
 

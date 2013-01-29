@@ -270,7 +270,7 @@ t_Open9xArmGeneralData_v208::t_Open9xArmGeneralData_v208(GeneralSettings &c9x, u
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  disableSplashScreen = c9x.disableSplashScreen;
+  disableSplashScreen = c9x.splashMode;
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
   hapticMode = c9x.hapticMode;
   filterInput = c9x.filterInput;
@@ -293,7 +293,7 @@ Open9xArmGeneralData_v208::operator GeneralSettings ()
 {
   GeneralSettings result;
   
-  result.myVers = myVers;
+  result.version = myVers;
   
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
@@ -321,7 +321,7 @@ Open9xArmGeneralData_v208::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
+  result.splashMode = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
@@ -378,7 +378,7 @@ t_Open9xArmGeneralData_v213::t_Open9xArmGeneralData_v213(GeneralSettings &c9x, u
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  splashMode = c9x.disableSplashScreen;
+  splashMode = c9x.splashMode;
   hapticMode = c9x.hapticMode;
   filterInput = c9x.filterInput;
   backlightDelay = c9x.backlightDelay;
@@ -400,7 +400,7 @@ Open9xArmGeneralData_v213::operator GeneralSettings ()
 {
   GeneralSettings result;
 
-  result.myVers = myVers;
+  result.version = myVers;
 
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
@@ -426,7 +426,7 @@ Open9xArmGeneralData_v213::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = splashMode;
+  result.splashMode = splashMode;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
   result.backlightDelay = backlightDelay;

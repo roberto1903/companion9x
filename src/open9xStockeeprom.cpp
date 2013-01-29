@@ -178,7 +178,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, unsigne
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  disableSplashScreen = c9x.disableSplashScreen;
+  disableSplashScreen = c9x.splashMode;
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
   hapticMode=c9x.hapticMode;
   filterInput = c9x.filterInput;
@@ -196,7 +196,7 @@ t_Open9xGeneralData_v201::t_Open9xGeneralData_v201(GeneralSettings &c9x, unsigne
 Open9xGeneralData_v201::operator GeneralSettings ()
 {
   GeneralSettings result;
-  result.myVers = myVers;
+  result.version = myVers;
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];
@@ -223,7 +223,7 @@ Open9xGeneralData_v201::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
+  result.splashMode = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
@@ -274,7 +274,7 @@ t_Open9xGeneralData_v212::t_Open9xGeneralData_v212(GeneralSettings &c9x, unsigne
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  splashMode = c9x.disableSplashScreen; // TODO
+  splashMode = c9x.splashMode; // TODO
   hapticMode=c9x.hapticMode;
   filterInput = c9x.filterInput;
   backlightDelay = c9x.backlightDelay;
@@ -292,7 +292,7 @@ Open9xGeneralData_v212::operator GeneralSettings ()
 {
   GeneralSettings result;
 
-  result.myVers = myVers;
+  result.version = myVers;
   result.variant = variant;
 
   for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
@@ -318,7 +318,7 @@ Open9xGeneralData_v212::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = splashMode;
+  result.splashMode = splashMode;
   result.hapticMode = (BeeperMode)hapticMode;
   result.filterInput = filterInput;
   result.backlightDelay = backlightDelay;

@@ -129,13 +129,12 @@ void ModelsListWidget::print()
 
 void ModelsListWidget::setdefault()
 {
-  if(currentRow()==0) return;
-  if (!radioData->models[currentRow()-1].isempty()) {
-    if (radioData->generalSettings.currModel!=(currentRow()-1)) {
-      radioData->generalSettings.currModel=currentRow()-1;
-      refreshList();
-      ((MdiChild *)parent())->setModified();
-    }
+  if (currentRow()==0) return;
+  unsigned int currModel = currentRow() - 1;
+  if (!radioData->models[currModel].isempty() && radioData->generalSettings.currModel != currModel) {
+    radioData->generalSettings.currModel = currModel;
+    refreshList();
+    ((MdiChild *)parent())->setModified();
   }
 }
 
@@ -317,7 +316,7 @@ void ModelsListWidget::refreshList()
        }
       addItem(item);
     }
-    if (radioData->generalSettings.currModel < GetEepromInterface()->getMaxModels()) {
+    if (radioData->generalSettings.currModel < (unsigned int)GetEepromInterface()->getMaxModels()) {
         QFont f = QFont("Courier New", 12);
         f.setBold(true);
         this->item(radioData->generalSettings.currModel+1)->setFont(f);
@@ -342,7 +341,7 @@ void ModelsListWidget::confirmDelete() {
 void ModelsListWidget::deleteSelected(bool ask=true)
 {
     bool isModel=false;
-    int selModel;
+    unsigned int selModel;
     QMessageBox::StandardButton ret = QMessageBox::Yes;
     if(ask) {
       foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
@@ -352,7 +351,7 @@ void ModelsListWidget::deleteSelected(bool ask=true)
         }
       }    
       if (isModel==true) {
-        if (radioData->generalSettings.currModel!=selModel) {
+        if (radioData->generalSettings.currModel != selModel) {
           ret = QMessageBox::warning(this, "companion9x", tr("Delete Selected Models?"), QMessageBox::Yes | QMessageBox::No);
         } else {
           ret = QMessageBox::warning(this, "companion9x", tr("Cannot delete default model."), QMessageBox::Ok);
@@ -361,7 +360,7 @@ void ModelsListWidget::deleteSelected(bool ask=true)
     }
     if (ret == QMessageBox::Yes) {
       foreach(QModelIndex index, this->selectionModel()->selectedIndexes()) {
-        if (index.row()>0 && radioData->generalSettings.currModel!=(index.row()-1)) {
+        if (index.row()>0 && radioData->generalSettings.currModel!=(unsigned int)(index.row()-1)) {
           radioData->models[index.row()-1].clear();
           ((MdiChild *)parent())->setModified();
         } else if (index.row()>0) {
@@ -380,7 +379,7 @@ void ModelsListWidget::doCut(QByteArray *gmData)
     bool modified=false;
     DragDropHeader *header = (DragDropHeader *)gmData->data();
     for (int i=0; i<header->models_count; i++) {
-      if (radioData->generalSettings.currModel!=header->models[i]-1) {
+      if (radioData->generalSettings.currModel != (unsigned int)header->models[i]-1) {
         radioData->models[header->models[i]-1].clear();
         modified=true;
       }

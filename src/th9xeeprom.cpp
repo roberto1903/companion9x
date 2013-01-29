@@ -124,7 +124,7 @@ Th9xGeneral::operator GeneralSettings ()
 {
   GeneralSettings result;
   
-  result.myVers = myVers;
+  result.version = myVers;
   
   for (int i=0; i<NUM_STICKSnPOTS; i++) {
     result.calibMid[i] = calibMid[i];

@@ -201,7 +201,7 @@ enum EnumKeys {
 #define SWASH_TYPE_90    4
 
 #define NUM_STICKS          4
-#define NUM_POTS            3
+#define NUM_POTS            3 // TODO should be 4 now!
 #define NUM_ROTARY_ENCODERS 2
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
@@ -214,10 +214,6 @@ enum EnumKeys {
 #define TM_HASTELEMETRY     0x01
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
-
-#define NUM_XCHNRAW (NUM_STICKS+NUM_POTS+NUM_ROTARY_ENCODERS+1/*MAX*/+1/*ID3*/+NUM_CYC+NUM_PPM+NUM_CHNOUT)
-#define NUM_XCHNCSW (NUM_XCHNRAW+MAX_TIMERS+NUM_TELEMETRY)
-#define NUM_XCHNMIX (NUM_XCHNRAW+MAX_SWITCH)
 
 enum RawSourceType {
   SOURCE_TYPE_NONE,
@@ -350,32 +346,33 @@ enum BeeperMode {
   e_all = 1
 };
 
+// TODO NUM_POTS should be used here, but when equal to 4 !!!
 class GeneralSettings {
   public:
     GeneralSettings();
-    uint8_t   myVers;
-    uint32_t  variant;
-    int16_t   calibMid[NUM_STICKS+NUM_POTS];
-    int16_t   calibSpanNeg[NUM_STICKS+NUM_POTS];
-    int16_t   calibSpanPos[NUM_STICKS+NUM_POTS];
-    uint8_t   currModel; // 0..15
-    uint8_t   contrast;
-    uint8_t   vBatWarn;
-    int8_t    vBatCalib;
-    uint8_t   backlightMode;
+    unsigned int version;
+    unsigned int variant;
+    int   calibMid[NUM_STICKS+4];
+    int   calibSpanNeg[NUM_STICKS+4];
+    int   calibSpanPos[NUM_STICKS+4];
+    unsigned int  currModel; // 0..15
+    unsigned int   contrast;
+    unsigned int   vBatWarn;
+    int    vBatCalib;
+    int   backlightMode;
     TrainerData trainer;
-    uint8_t   view;    // main screen view // TODO enum
+    unsigned int   view;    // main screen view // TODO enum
     bool      disableThrottleWarning;
-    int8_t    switchWarning; // -1=down, 0=off, 1=up
+    int       switchWarning; // -1=down, 0=off, 1=up
     bool      disableMemoryWarning;
     BeeperMode beeperMode;
     bool      disableAlarmWarning;
     bool      enableTelemetryAlarm;
     BeeperMode hapticMode;
-    uint8_t   stickMode; // TODO enum
-    int8_t    timezone;
+    unsigned int   stickMode; // TODO enum
+    int    timezone;
     bool      optrexDisplay;
-    int8_t    inactivityTimer;
+    unsigned int    inactivityTimer;
     bool      throttleReversed;
     bool      minuteBeep;
     bool      preBeep;
@@ -383,26 +380,31 @@ class GeneralSettings {
     bool      disablePotScroll;
     bool      frskyinternalalarm;
     bool      disableBG;
-    bool      disableSplashScreen;
+    unsigned int  splashMode;
     uint8_t   filterInput; // TODO enum
-    uint8_t   backlightDelay;
+    unsigned int  backlightDelay;
     bool   blightinv;
-    uint8_t   templateSetup;  //RETA order according to chout_ar array // TODO enum
-    int8_t    PPM_Multiplier;
-    int8_t    hapticLength;
-    uint8_t   reNavigation;
+    unsigned int   templateSetup;  //RETA order according to chout_ar array // TODO enum
+    int    PPM_Multiplier;
+    int    hapticLength;
+    unsigned int   reNavigation;
     bool      hideNameOnSplash;
-    uint8_t   speakerPitch;
-    uint8_t   hapticStrength;
-    uint8_t   speakerMode;
-    uint8_t   lightOnStickMove; /* er9x / ersky9x only */
+    unsigned int   speakerPitch;
+    unsigned int   hapticStrength;
+    unsigned int   speakerMode;
+    unsigned int   lightOnStickMove; /* er9x / ersky9x only */
     char      ownerName[10+1];
-    uint8_t   switchWarningStates;
-    int8_t    beeperLength;
-    int8_t    gpsFormat;
-    uint8_t   speakerVolume;
-    uint8_t   backlightBright;
-    int8_t    currentCalib;
+    unsigned int   switchWarningStates;
+    int    beeperLength;
+    unsigned int    gpsFormat;
+    int     speakerVolume;
+    unsigned int   backlightBright;
+    int    currentCalib;
+    int    temperatureCalib;
+    int    temperatureWarn;
+    unsigned int mAhWarn;
+    unsigned int btBaudrate;
+    unsigned int sticksGain;
 };
 
 class ExpoData {
@@ -744,6 +746,9 @@ class ModelData {
     FrSkyData frsky;
     FrSkyErAlarmData frskyalarms[8];
     uint8_t customdisplay[6];
+
+    char bitmap[10+1];
+
     void clear();
     bool isempty();
     void setDefault(uint8_t id);
