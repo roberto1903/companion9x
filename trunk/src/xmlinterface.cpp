@@ -128,8 +128,8 @@ bool XmlInterface::save(RadioData &radioData)
         tb.screen_flash(true);
       gs.timer_beeps(tb);
     }
-    if (settings.disableSplashScreen)
-      gs.splash_screen(false);
+    /* TODO if (settings.disableSplashScreen)
+      gs.splash_screen(false); */
     if (settings.filterInput)
       gs.filter_input(filter_input::value(settings.filterInput));
     /* TODO if (settings.backlightDelay)

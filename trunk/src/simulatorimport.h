@@ -99,47 +99,26 @@ for (int i=0; i<4; i++)
 for (int i=0; i<3; i++)
   g_anas[4+i] = inputs.pots[i];
 
-#if defined(PCBACT)
-#elif defined(PCBX9D)
-// TODO
-#else
-simuSetSwitch(0, inputs.sThr);
-simuSetSwitch(1, inputs.sRud);
-simuSetSwitch(2, inputs.sEle);
-simuSetSwitch(3, inputs.sId0);
-simuSetSwitch(4, inputs.sAil);
-simuSetSwitch(5, inputs.sGea);
-simuSetSwitch(6, inputs.sTrn);
-#endif
+// switches
+for (int i=0; i<10/*TODO NUM_SWITCHES*/; i++)
+  simuSetSwitch(i, inputs.switches[i]);
 
+// keys
+for (int i=0; i<6/*NUM_KEYS*/; i++)
+  simuSetKey(i, inputs.keys[i]);
+
+// trims
 for (int i=0; i<NUM_STICKS*2; i++)
   simuSetTrim(i, 0);
-
-// keyboard
-#if defined(PCBX9D)
-simuSetKey(KEY_MENU, inputs.menu);
-simuSetKey(KEY_EXIT, inputs.exit);
-simuSetKey(KEY_PLUS, inputs.right);
-simuSetKey(KEY_MINUS, inputs.left);
-simuSetKey(KEY_PAGE, inputs.up);
-simuSetKey(KEY_ENTER, inputs.down);
-#else
-simuSetKey(KEY_MENU, inputs.menu);
-simuSetKey(KEY_EXIT, inputs.exit);
-simuSetKey(KEY_UP, inputs.up);
-simuSetKey(KEY_DOWN, inputs.down);
-simuSetKey(KEY_RIGHT, inputs.right);
-simuSetKey(KEY_LEFT, inputs.left);
-#endif
 
 #ifdef PCBGRUVIN9X
 // rotary encoders
 pind = 0;
-if (inputs.re1) pind |= 0x20;
+if (inputs.rotenc) pind |= 0x20;
 #endif
 
 #ifdef PCBSKY9X
-if (inputs.re1) PIOB->PIO_PDSR &= ~0x40; else PIOB->PIO_PDSR |= 0x40;
+if (inputs.rotenc) PIOB->PIO_PDSR &= ~0x40; else PIOB->PIO_PDSR |= 0x40;
 #endif
 #endif
 

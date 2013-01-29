@@ -77,16 +77,22 @@ class DataField {
 template<int N>
 class UnsignedField: public DataField {
   public:
-    UnsignedField(unsigned int & field):
-      field(field)
+    UnsignedField(unsigned int & field, unsigned int min=0, unsigned int max=UINT_MAX):
+      field(field),
+      min(min),
+      max(max)
     {
     }
 
     virtual void ExportBits(QBitArray & output)
     {
+      unsigned int value = field;
+      if (value > max) value = max;
+      if (value < min) value = min;
+
       output.resize(N);
       for (int i=0; i<N; i++) {
-        if (field & (1<<i))
+        if (value & (1<<i))
           output.setBit(i);
       }
     }
@@ -107,6 +113,8 @@ class UnsignedField: public DataField {
 
   protected:
     unsigned int & field;
+    unsigned int min;
+    unsigned int max;
 };
 
 template<int N>

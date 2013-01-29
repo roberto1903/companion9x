@@ -138,7 +138,7 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
+  result.splashMode = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.filterInput = filterInput;
   result.templateSetup = templateSetup;
@@ -192,7 +192,7 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
   minuteBeep = c9x.minuteBeep;
   preBeep = c9x.preBeep;
   flashBeep = c9x.flashBeep;
-  disableSplashScreen = c9x.disableSplashScreen;
+  disableSplashScreen = c9x.splashMode;
   enableTelemetryAlarm = c9x.enableTelemetryAlarm;
   spare = 0;
   filterInput = c9x.filterInput;
@@ -238,7 +238,7 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
   result.minuteBeep = minuteBeep;
   result.preBeep = preBeep;
   result.flashBeep = flashBeep;
-  result.disableSplashScreen = disableSplashScreen;
+  result.splashMode = disableSplashScreen;
   result.enableTelemetryAlarm = enableTelemetryAlarm;
   result.filterInput = filterInput;
   result.templateSetup = templateSetup;

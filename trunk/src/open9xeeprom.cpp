@@ -18,6 +18,8 @@ int8_t open9xArm210FromSource(RawSource source);
 
 #define HAS_PERSISTENT_TIMERS(board) (IS_ARM(board) || board == BOARD_GRUVIN9X)
 #define MAX_CUSTOM_SWITCHES(board)   (IS_ARM(board) ? 32 : 12)
+#define HAS_LARGE_LCD(board)         (board == BOARD_X9DA || board == BOARD_ACT)
+#define MAX_VIEWS(board)             (HAS_LARGE_LCD(board) ? 2 : 256)
 
 inline int8_t open9xFromSource(RawSource source, BoardEnum board)
 {
@@ -140,7 +142,7 @@ class PhaseField: public TransformedField {
       phase(phase),
       index(index),
       board(board),
-      rotencCount(board == BOARD_SKY9X ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0))
+      rotencCount(IS_ARM(board) ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0))
     {
       if (board == BOARD_STOCK) {
         // On stock we use 10bits per trim
@@ -155,7 +157,10 @@ class PhaseField: public TransformedField {
       }
 
       internalField.Append(new SwitchField<8>(phase.swtch, board));
-      internalField.Append(new ZCharField<6>(phase.name));
+      if (HAS_LARGE_LCD(board))
+        internalField.Append(new ZCharField<10>(phase.name));
+      else
+        internalField.Append(new ZCharField<6>(phase.name));
       internalField.Append(new UnsignedField<4>(phase.fadeIn));
       internalField.Append(new UnsignedField<4>(phase.fadeOut));
 
@@ -357,7 +362,10 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<8>(mix.speedDown));
         internalField.Append(new MixSourceField<8>(mix.srcRaw, board));
         internalField.Append(new SignedField<8>(mix.sOffset));
-        internalField.Append(new ZCharField<6>(mix.name));
+        if (HAS_LARGE_LCD(board))
+          internalField.Append(new ZCharField<10>(mix.name));
+        else
+          internalField.Append(new ZCharField<6>(mix.name));
       }
       else {
         internalField.Append(new UnsignedField<4>(_destCh));
@@ -429,7 +437,10 @@ class ExpoField: public TransformedField {
         internalField.Append(new UnsignedField<16>(expo.phases));
         internalField.Append(new SignedField<8>(expo.weight));
         internalField.Append(new BoolField<8>(_curveMode));
-        internalField.Append(new ZCharField<6>(expo.name));
+        if (HAS_LARGE_LCD(board))
+          internalField.Append(new ZCharField<10>(expo.name));
+        else
+          internalField.Append(new ZCharField<6>(expo.name));
         internalField.Append(new SignedField<8>(expo.curveParam));
       }
       else {
@@ -875,7 +886,10 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   maxCustomSwitches(IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW),
   maxCustomFunctions(IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW)
 {
-  Append(new ZCharField<10>(modelData.name));
+  if (HAS_LARGE_LCD(board))
+    Append(new ZCharField<12>(modelData.name));
+  else
+    Append(new ZCharField<10>(modelData.name));
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
     Append(new TimerModeField(modelData.timers[i].mode, board));
@@ -919,7 +933,11 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
   Append(new UnsignedField<8>(modelData.modelId));
-  Append(new UnsignedField<8>(modelData.switchWarningStates));
+
+  if (board == BOARD_X9DA || board == BOARD_ACT)
+    Append(new UnsignedField<16>(modelData.switchWarningStates));
+  else
+    Append(new UnsignedField<8>(modelData.switchWarningStates));
 
   if (board == BOARD_STOCK && (variant & GVARS_VARIANT)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
@@ -937,4 +955,112 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (board != BOARD_STOCK || (variant & FRSKY_VARIANT)) {
     Append(new FrskyField(modelData.frsky, board));
   }
+
+  if (HAS_LARGE_LCD(board))
+    Append(new CharField<10>(modelData.bitmap));
+
 }
+
+Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
+  TransformedField(internalField),
+  generalData(generalData),
+  board(board),
+  inputsCount(board == BOARD_X9DA ? 8 : 7)
+{
+  generalData.version = version;
+  generalData.variant = variant;
+
+  internalField.Append(new UnsignedField<8>(generalData.version));
+  if (version >= 213 || (!IS_ARM(board) && version >= 212))
+    internalField.Append(new UnsignedField<16>(generalData.variant));
+
+  for (int i=0; i<inputsCount; i++)
+    internalField.Append(new SignedField<16>(generalData.calibMid[i]));
+  for (int i=0; i<inputsCount; i++)
+    internalField.Append(new SignedField<16>(generalData.calibSpanNeg[i]));
+  for (int i=0; i<inputsCount; i++)
+    internalField.Append(new SignedField<16>(generalData.calibSpanPos[i]));
+
+  internalField.Append(new UnsignedField<16>(chkSum));
+  internalField.Append(new UnsignedField<8>(generalData.currModel));
+  internalField.Append(new UnsignedField<8>(generalData.contrast));
+  internalField.Append(new UnsignedField<8>(generalData.vBatWarn));
+  internalField.Append(new SignedField<8>(generalData.vBatCalib));
+  internalField.Append(new SignedField<8>(generalData.backlightMode));
+
+  for (int i=0; i<NUM_STICKS; i++)
+    internalField.Append(new SignedField<16>(generalData.trainer.calib[i]));
+  for (int i=0; i<NUM_STICKS; i++) {
+    internalField.Append(new UnsignedField<6>(generalData.trainer.mix[i].src));
+    internalField.Append(new UnsignedField<2>(generalData.trainer.mix[i].mode));
+    internalField.Append(new SignedField<8>(generalData.trainer.mix[i].weight));
+  }
+
+  internalField.Append(new UnsignedField<8>(generalData.view, 0, MAX_VIEWS(board)-1));
+
+  internalField.Append(new SpareBitsField<3>());
+  internalField.Append(new SignedField<2>((int &)generalData.beeperMode));
+  internalField.Append(new BoolField<1>(generalData.flashBeep));
+  internalField.Append(new BoolField<1>(generalData.disableMemoryWarning));
+  internalField.Append(new BoolField<1>(generalData.disableAlarmWarning));
+
+  internalField.Append(new UnsignedField<2>(generalData.stickMode));
+  internalField.Append(new SignedField<5>(generalData.timezone));
+  internalField.Append(new SpareBitsField<1>());
+
+  internalField.Append(new UnsignedField<8>(generalData.inactivityTimer));
+
+  internalField.Append(new BoolField<1>(generalData.throttleReversed));
+  internalField.Append(new BoolField<1>(generalData.minuteBeep));
+  internalField.Append(new BoolField<1>(generalData.preBeep));
+  if (version >= 213 || (!IS_ARM(board) && version >= 212))
+    internalField.Append(new UnsignedField<3>(generalData.splashMode)); // TODO
+  else
+    internalField.Append(new SpareBitsField<3>());
+  internalField.Append(new SignedField<2>((int &)generalData.hapticMode));
+
+  internalField.Append(new SpareBitsField<8>());
+  internalField.Append(new UnsignedField<8>(generalData.backlightDelay));
+  internalField.Append(new UnsignedField<8>(generalData.templateSetup));
+  internalField.Append(new SignedField<8>(generalData.PPM_Multiplier));
+  internalField.Append(new SignedField<8>(generalData.hapticLength));
+  internalField.Append(new UnsignedField<8>(generalData.reNavigation));
+
+  internalField.Append(new SignedField<3>(generalData.beeperLength));
+  internalField.Append(new UnsignedField<3>(generalData.hapticStrength));
+  internalField.Append(new UnsignedField<1>(generalData.gpsFormat));
+  internalField.Append(new SpareBitsField<1>()); // unexpectedShutdown
+
+  internalField.Append(new UnsignedField<8>(generalData.speakerPitch));
+  internalField.Append(new SignedField<8>(generalData.speakerVolume));
+
+  if (IS_ARM(board)) {
+    internalField.Append(new UnsignedField<8>(generalData.backlightBright));
+    internalField.Append(new SignedField<8>(generalData.currentCalib));
+    if (version >= 213) {
+      internalField.Append(new SignedField<8>(generalData.temperatureWarn)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.mAhWarn));
+      internalField.Append(new SpareBitsField<16>()); // mAhUsed
+      internalField.Append(new SpareBitsField<32>()); // globalTimer
+      internalField.Append(new SignedField<8>(generalData.temperatureCalib)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.btBaudrate)); // TODO
+      internalField.Append(new BoolField<8>(generalData.optrexDisplay)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.sticksGain)); // TODO
+    }
+  }
+}
+
+void Open9xGeneralDataNew::beforeExport()
+{
+  uint16_t sum = 0;
+  for (int i=0; i<inputsCount; i++)
+    sum += generalData.calibMid[i];
+  for (int i=0; i<5; i++)
+    sum += generalData.calibSpanNeg[i];
+  chkSum = sum;
+}
+
+void Open9xGeneralDataNew::afterImport()
+{
+}
+

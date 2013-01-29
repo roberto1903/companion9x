@@ -46,6 +46,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
             break;
         default:
             ui->lcd->setRgb(159,165,247);
+            break;
     }
     lightOn=NULL;
     setupSticks();
@@ -349,20 +350,22 @@ void simulatorDialog::getValues()
                        int(1024*nodeRight->getX()) },  // RGHT HORZ
                      { ui->dialP_1->value(),
                        ui->dialP_2->value(),
-                       ui->dialP_3->value() },
-                     ui->switchRUD->isChecked(),
-                     ui->switchELE->isChecked(),
-                     ui->switchTHR->isChecked(),
-                     ui->switchAIL->isChecked(),
-                     ui->switchGEA->isChecked(),
-                     ui->switchTRN->isDown(),
-                     ui->switchID2->isChecked() ? 1 : (ui->switchID1->isChecked() ? 0 : -1),
-                     buttonPressed == Qt::Key_Enter,
-                     buttonPressed == Qt::Key_Escape,
-                     buttonPressed == Qt::Key_Up,
-                     buttonPressed == Qt::Key_Down,
-                     buttonPressed == Qt::Key_Left,
-                     buttonPressed == Qt::Key_Right,
+                       ui->dialP_3->value(), 0 },
+                     { ui->switchTHR->isChecked(),
+                       ui->switchRUD->isChecked(),
+                       ui->switchELE->isChecked(),
+                       ui->switchID2->isChecked() ? 1 : (ui->switchID1->isChecked() ? 0 : -1),
+                       ui->switchAIL->isChecked(),
+                       ui->switchGEA->isChecked(),
+                       ui->switchTRN->isDown(),
+                       0, 0, 0 },
+                     { buttonPressed == Qt::Key_Enter,
+                       buttonPressed == Qt::Key_Escape,
+                       buttonPressed == Qt::Key_Down,
+                       buttonPressed == Qt::Key_Up,
+                       buttonPressed == Qt::Key_Right,
+                       buttonPressed == Qt::Key_Left,
+                     },
                      middleButtonPressed
                     };
 
