@@ -88,4 +88,10 @@ class Open9xModelDataNew: public StructField {
     char name[256];
 };
 
+#define LAST_OPEN9X_STOCK_EEPROM_VER    212
+#define LAST_OPEN9X_M128_EEPROM_VER     212
+#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 212
+#define LAST_OPEN9X_ARM_EEPROM_VER      213
+
+
 #endif

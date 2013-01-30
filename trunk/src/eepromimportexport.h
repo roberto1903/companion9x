@@ -101,19 +101,19 @@ class UnsignedField: public DataField {
     {
     }
 
-    UnsignedField(unsigned int & field, unsigned int min, unsigned int max, const char *name="Unsigned"):
-      DataField(name),
-      field(field),
-      min(min),
-      max(max)
-    {
-    }
-
     UnsignedField(unsigned int & field, const char *name):
       DataField(name),
       field(field),
       min(0),
       max(UINT_MAX)
+    {
+    }
+
+    UnsignedField(unsigned int & field, unsigned int min, unsigned int max, const char *name="Unsigned"):
+      DataField(name),
+      field(field),
+      min(min),
+      max(max)
     {
     }
 
@@ -153,11 +153,11 @@ class UnsignedField: public DataField {
 template<int N>
 class SignedField: public DataField {
   public:
-    SignedField(int & field, int min=INT_MIN, int max=INT_MAX, const char *name="Signed"):
-      DataField(name),
+    SignedField(int & field):
+      DataField("Signed"),
       field(field),
-      min(min),
-      max(max)
+      min(INT_MIN),
+      max(INT_MAX)
     {
     }
 
@@ -166,6 +166,14 @@ class SignedField: public DataField {
       field(field),
       min(INT_MIN),
       max(INT_MAX)
+    {
+    }
+
+    SignedField(int & field, int min, int max, const char *name="Signed"):
+      DataField(name),
+      field(field),
+      min(min),
+      max(max)
     {
     }
 
@@ -489,6 +497,8 @@ class ConversionField: public TransformedField {
       count(count),
       table(table),
       shift(0),
+      min(INT_MIN),
+      max(INT_MAX),
       exportFunc(NULL),
       importFunc(NULL),
       error(error)
@@ -503,20 +513,24 @@ class ConversionField: public TransformedField {
       count(0),
       table(NULL),
       shift(0),
+      min(INT_MIN),
+      max(INT_MAX),
       exportFunc(exportFunc),
       importFunc(importFunc),
       error("")
     {
     }
 
-    ConversionField(int & field, int shift):
+    ConversionField(int & field, int shift, int min=INT_MIN, int max=INT_MAX, const char *name = "Converted"):
       TransformedField(internalField),
-      internalField(_field),
+      internalField(_field, name),
       field(field),
       _field(0),
       count(0),
       table(NULL),
       shift(shift),
+      min(min),
+      max(max),
       exportFunc(NULL),
       importFunc(NULL),
       error("")
@@ -531,6 +545,8 @@ class ConversionField: public TransformedField {
       count(0),
       table(NULL),
       shift(shift),
+      min(INT_MIN),
+      max(INT_MAX),
       exportFunc(NULL),
       importFunc(NULL),
       error("")
@@ -549,7 +565,9 @@ class ConversionField: public TransformedField {
         EEPROMWarnings += error + "\n";
       }
       else if (shift) {
-        _field = field + shift;
+        if (field < min) _field = min + shift;
+        else if (field > max) _field = max + shift;
+        else _field = field + shift;
       }
       else {
         _field = exportFunc(field);
@@ -580,6 +598,8 @@ class ConversionField: public TransformedField {
     const unsigned int count;
     const int * table;
     int shift;
+    int min;
+    int max;
     int (*exportFunc)(int);
     int (*importFunc)(int);
     const QString error;

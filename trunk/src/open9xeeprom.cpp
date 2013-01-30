@@ -830,28 +830,31 @@ class FrskyField: public StructField {
         Append(new UnsignedField<8>(frsky.voltsSource));
         Append(new UnsignedField<8>(frsky.blades));
         Append(new UnsignedField<8>(frsky.currentSource));
+
         Append(new UnsignedField<1>(frsky.screens[0].type));
         Append(new UnsignedField<1>(frsky.screens[1].type));
         Append(new UnsignedField<1>(frsky.screens[2].type));
+        Append(new SpareBitsField<5>());
+
         for (int i=0; i<3; i++) {
           Append(new FrskyScreenField(frsky.screens[i]));
         }
         Append(new UnsignedField<8>(frsky.varioSource));
-        Append(new UnsignedField<8>(frsky.varioSpeedUpMin));
-        Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
-        Append(new SpareBitsField<8>());
-        Append(new SpareBitsField<8>());
+        Append(new SignedField<8>(frsky.varioCenterMin));
+        Append(new SignedField<8>(frsky.varioCenterMax));
+        Append(new SignedField<8>(frsky.varioMin));
+        Append(new SignedField<8>(frsky.varioMax));
         Append(new SpareBitsField<8>());
         Append(new SpareBitsField<8>());
       }
       else {
         Append(new UnsignedField<2>(frsky.usrProto));
         Append(new UnsignedField<2>(frsky.blades));
-        Append(new SpareBitsField<4>());
-        Append(new UnsignedField<3>(frsky.voltsSource));
-        Append(new UnsignedField<3>(frsky.currentSource));
         Append(new UnsignedField<1>(frsky.screens[0].type));
         Append(new UnsignedField<1>(frsky.screens[1].type));
+        Append(new UnsignedField<2>(frsky.voltsSource));
+        Append(new SignedField<4>(frsky.varioMin));
+        Append(new SignedField<4>(frsky.varioMax));
         for (int i=0; i<2; i++) {
           Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
           Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
@@ -860,8 +863,9 @@ class FrskyField: public StructField {
           Append(new FrskyScreenField(frsky.screens[i]));
         }
         Append(new UnsignedField<3>(frsky.varioSource));
-        Append(new UnsignedField<5>(frsky.varioSpeedUpMin));
-        Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
+        Append(new SignedField<5>(frsky.varioCenterMin));
+        Append(new UnsignedField<3>(frsky.currentSource));
+        Append(new SignedField<8>(frsky.varioCenterMax));
       }
     }
 };
@@ -961,6 +965,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
 Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
   TransformedField(internalField),
+  internalField("General Settings"),
   generalData(generalData),
   board(board),
   inputsCount(board == BOARD_X9DA ? 8 : 7)
@@ -1030,7 +1035,11 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
   internalField.Append(new SpareBitsField<1>()); // unexpectedShutdown
 
   internalField.Append(new UnsignedField<8>(generalData.speakerPitch));
-  internalField.Append(new SignedField<8>(generalData.speakerVolume));
+
+  if (IS_ARM(board))
+    internalField.Append(new ConversionField< SignedField<8> >(generalData.speakerVolume, -12, 0, 23, "Volume"));
+  else
+    internalField.Append(new ConversionField< SignedField<8> >(generalData.speakerVolume, -7, 0, 7, "Volume"));
 
   if (IS_ARM(board)) {
     internalField.Append(new UnsignedField<8>(generalData.backlightBright));

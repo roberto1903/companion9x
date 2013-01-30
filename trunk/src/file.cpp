@@ -241,40 +241,6 @@ unsigned int EFile::EeFsAlloc()
   return ret;
 }
 
-bool EFile::exists(unsigned int i_fileId)
-{
-  return IS_ARM(board) ? eeFsArm->files[i_fileId].startBlk : eeFs->files[i_fileId].startBlk;
-}
-
-void EFile::swap(unsigned int i_fileId1, unsigned int i_fileId2)
-{
-  if (IS_ARM(board)) {
-    DirEntArm             tmp = eeFsArm->files[i_fileId1];
-    eeFsArm->files[i_fileId1] = eeFsArm->files[i_fileId2];
-    eeFsArm->files[i_fileId2] = tmp;
-  }
-  else {
-    DirEnt            tmp = eeFs->files[i_fileId1];
-    eeFs->files[i_fileId1] = eeFs->files[i_fileId2];
-    eeFs->files[i_fileId2] = tmp;
-  }
-}
-
-void EFile::rm(unsigned int i_fileId)
-{
-  unsigned int i;
-
-  if (IS_ARM(board)) {
-    i = eeFsArm->files[i_fileId].startBlk;
-    memset(&(eeFsArm->files[i_fileId]), 0, sizeof(eeFsArm->files[i_fileId]));
-  }
-  else {
-    i = eeFs->files[i_fileId].startBlk;
-    memset(&(eeFs->files[i_fileId]), 0, sizeof(eeFs->files[i_fileId]));
-  }
-  if(i) EeFsFree( i ); //chain in
-}
-
 unsigned int EFile::size(unsigned int id)
 {
   return IS_ARM(board) ? eeFsArm->files[id].size : eeFs->files[id].size;
@@ -288,7 +254,7 @@ unsigned int EFile::openRd(unsigned int i_fileId)
     return 1;
   }
   else {
-    m_fileId = i_fileId;
+    m_fileId   = i_fileId;
     m_pos      = 0;
     m_currBlk  = (IS_ARM(board) ? eeFsArm->files[m_fileId].startBlk : eeFs->files[m_fileId].startBlk);
     m_ofs      = 0;

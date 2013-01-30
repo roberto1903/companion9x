@@ -22,17 +22,6 @@
 
 #include "open9xStockeeprom.h"
 
-PACK(typedef struct t_Open9xGruvin9xTimerData_v212 {
-  int8_t     mode;
-  uint16_t   start;
-  uint16_t   remanent:1;
-  uint16_t   value:15;
-
-  operator TimerData();
-  t_Open9xGruvin9xTimerData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xTimerData_v212)); }
-  t_Open9xGruvin9xTimerData_v212(TimerData &eepe);
-}) Open9xGruvin9xTimerData_v212;
-
 PACK(typedef struct t_Open9xGruvin9xPhaseData_v207 {
   int8_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
   int8_t trim_ext:8;  // 2 less significant extra bits per trim (10bits trims)
@@ -57,19 +46,6 @@ PACK(typedef struct t_Open9xGruvin9xPhaseData_v208 {
   t_Open9xGruvin9xPhaseData_v208() { memset(this, 0, sizeof(t_Open9xGruvin9xPhaseData_v208)); }
   t_Open9xGruvin9xPhaseData_v208(PhaseData &eepe);
 }) Open9xGruvin9xPhaseData_v208;
-
-PACK(typedef struct t_Open9xGruvin9xPhaseData_v212 {
-  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of phases 1|2|3|4 instead
-  int8_t swtch;       // swtch of phase[0] is not used
-  char name[6];
-  uint8_t fadeIn:4;
-  uint8_t fadeOut:4;
-  int16_t rotaryEncoders[2];
-  int16_t gvars[O9X_MAX_GVARS];
-  operator PhaseData();
-  t_Open9xGruvin9xPhaseData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xPhaseData_v212)); }
-  t_Open9xGruvin9xPhaseData_v212(PhaseData &eepe);
-}) Open9xGruvin9xPhaseData_v212;
 
 PACK(typedef struct t_Open9xGruvin9xMixData_v207 {
   uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
@@ -190,18 +166,6 @@ PACK(typedef struct t_Open9xGruvin9xFuncSwData_v210 { // Function Switches data
   t_Open9xGruvin9xFuncSwData_v210(FuncSwData&);
 
 }) Open9xGruvin9xFuncSwData_v210;
-
-PACK(typedef struct t_Open9xGruvin9xFuncSwData_v212 { // Function Switches data
-  int8_t  swtch; // input
-  uint8_t func:7;
-  uint8_t active:1;
-  uint8_t param;
-
-  operator FuncSwData();
-  t_Open9xGruvin9xFuncSwData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xFuncSwData_v212)); }
-  t_Open9xGruvin9xFuncSwData_v212(FuncSwData&);
-
-}) Open9xGruvin9xFuncSwData_v212;
 
 PACK(typedef struct t_Open9xGruvin9xSwashRingData_v208 { // Swash Ring data
   uint8_t   invertELE:1;
@@ -427,49 +391,5 @@ PACK(typedef struct t_Open9xGruvin9xModelData_v211 {
   t_Open9xGruvin9xModelData_v211(ModelData&);
 
 }) Open9xGruvin9xModelData_v211;
-
-PACK(typedef struct t_Open9xGruvin9xModelData_v212 {
-  char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xGruvin9xTimerData_v212 timers[MAX_TIMERS];
-  uint8_t   protocol:3;
-  uint8_t   thrTrim:1;            // Enable Throttle Trim
-  int8_t    ppmNCH:4;
-  uint8_t   trimInc:3;            // Trim Increments
-  uint8_t   disableThrottleWarning:1;
-  uint8_t   pulsePol:1;
-  uint8_t   extendedLimits:1;
-  uint8_t   extendedTrims:1;
-  uint8_t   spare1:1;
-  int8_t    ppmDelay;
-  uint16_t  beepANACenter;        // 1<<0->A1.. 1<<6->A7
-  Open9xGruvin9xMixData_v211 mixData[O9X_MAX_MIXERS];
-  Open9xLimitData_v211 limitData[O9X_NUM_CHNOUT];
-  Open9xExpoData_v211  expoData[O9X_MAX_EXPOS];
-  int8_t    curves[O9X_MAX_CURVES];
-  int8_t    points[O9X_NUM_POINTS];
-  Open9xGruvin9xCustomSwData_v209  customSw[O9X_NUM_CSW];
-  Open9xGruvin9xFuncSwData_v212 funcSw[O9X_NUM_FSW];
-  Open9xGruvin9xSwashRingData_v209 swashR;
-  Open9xGruvin9xPhaseData_v212 phaseData[O9X_MAX_PHASES];
-
-  int8_t    ppmFrameLength;       // 0=22.5ms  (10ms-30ms) 0.5msec increments
-  uint8_t   thrTraceSrc;
-  uint8_t   modelId;
-  uint8_t   switchWarningStates;
-
-  char      gvars_names[O9X_MAX_GVARS][6];
-
-  Open9xFrSkyData_v212 frsky;
-
-  operator ModelData();
-  t_Open9xGruvin9xModelData_v212() { memset(this, 0, sizeof(t_Open9xGruvin9xModelData_v212)); }
-  t_Open9xGruvin9xModelData_v212(ModelData&);
-
-}) Open9xGruvin9xModelData_v212;
-
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 212
-
-typedef Open9xGruvin9xModelData_v212 Open9xGruvin9xModelData;
-typedef Open9xGeneralData_v212 Open9xGruvin9xGeneralData;
 
 #endif

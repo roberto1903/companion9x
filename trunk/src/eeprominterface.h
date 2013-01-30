@@ -641,8 +641,10 @@ class FrSkyData {
     FrSkyScreenData screens[3];
     FrSkyRSSIAlarm rssiAlarms[2];
     unsigned int varioSource;
-    unsigned int varioSpeedUpMin;    // if increment in 0.2m/s = 3.0m/s max
-    unsigned int varioSpeedDownMin;
+    int varioMin;
+    int varioCenterMin;    // if increment in 0.2m/s = 3.0m/s max
+    int varioCenterMax;
+    int varioMax;
 
     void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2); rssiAlarms[1].clear(3); }
 };
