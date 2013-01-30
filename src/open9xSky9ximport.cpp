@@ -77,7 +77,7 @@ int16_t g_anas[NUM_STICKS+NUM_POTS];
 uint16_t anaIn(uint8_t chan)
 {
   if (chan == 7)
-    return 150;
+    return 1500;
   else
     return g_anas[chan];
 }

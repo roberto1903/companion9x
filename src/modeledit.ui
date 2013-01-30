@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>10</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -6105,7 +6105,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>480</height>
+            <height>612</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9537,8 +9537,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>860</width>
+            <height>598</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14455,8 +14455,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>860</width>
+            <height>627</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -15141,12 +15141,7 @@
                   </property>
                   <item>
                    <property name="text">
-                    <string>Barometer V1</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Barometer V2</string>
+                    <string>FrSky</string>
                    </property>
                   </item>
                   <item>
@@ -15157,6 +15152,11 @@
                   <item>
                    <property name="text">
                     <string>A2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Halcyon</string>
                    </property>
                   </item>
                  </widget>
