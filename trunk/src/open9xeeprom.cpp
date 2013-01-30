@@ -823,8 +823,8 @@ class FrskyField: public StructField {
 
       if (IS_ARM(board)) {
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
-          Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
+          Append(new ConversionField< SignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
         }
         Append(new UnsignedField<8>(frsky.usrProto));
         Append(new UnsignedField<8>(frsky.voltsSource));
@@ -856,8 +856,8 @@ class FrskyField: public StructField {
         Append(new SignedField<4>(frsky.varioMin));
         Append(new SignedField<4>(frsky.varioMax));
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
-          Append(new ConversionField< UnsignedField<6> >(frsky.rssiAlarms[i].value, -50));
+          Append(new ConversionField< SignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
         }
         for (int i=0; i<2; i++) {
           Append(new FrskyScreenField(frsky.screens[i]));
