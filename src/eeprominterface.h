@@ -590,8 +590,8 @@ class FrSkyErAlarmData {
 class FrSkyRSSIAlarm {
   public:
     FrSkyRSSIAlarm() { clear(0); }
-    unsigned int level;
-    unsigned int value;
+    int level;
+    int value;
     void clear(unsigned int level) { this->level = level; value = 50;}
 };
 
