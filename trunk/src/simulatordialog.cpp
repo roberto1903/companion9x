@@ -21,7 +21,8 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     txInterface(NULL),
     simulator(NULL),
     g_modelIdx(-1),
-    buttonPressed(0)
+    buttonPressed(0),
+    middleButtonPressed(false)
 {
     ui->setupUi(this);
     ui->lcd->setFocus();
