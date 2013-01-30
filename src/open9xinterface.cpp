@@ -532,16 +532,19 @@ int Open9xInterface::getSize(ModelData &model)
 
   // TODO something better
   uint8_t tmp[EESIZE_X9D];
-  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
+  efile->EeFsCreate(tmp, EESIZE_X9D, board, 4);
 
-  Open9xModelData open9xModel(model);
+  // TODO change this name, it's a factory
+  Open9xModelDataNew open9xModel(model, board, GetCurrentFirmwareVariant());
+  // open9xModel.Dump();
+
   QByteArray eeprom;
-  open9xModel.exportVariant(GetCurrentFirmwareVariant(), eeprom);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
+  open9xModel.Export(eeprom);
+  int sz = efile->writeRlc2(0, FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
   if(sz != eeprom.size()) {
     return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Open9xInterface::getSize(GeneralSettings &settings)

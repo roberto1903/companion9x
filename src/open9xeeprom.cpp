@@ -139,6 +139,7 @@ class PhaseField: public TransformedField {
   public:
     PhaseField(PhaseData & phase, int index, BoardEnum board):
       TransformedField(internalField),
+      internalField("Phase"),
       phase(phase),
       index(index),
       board(board),
@@ -173,8 +174,6 @@ class PhaseField: public TransformedField {
           internalField.Append(new SignedField<16>(phase.gvars[i]));
         }
       }
-
-      // Dump("Phase");
     }
 
     virtual void beforeExport()
@@ -342,6 +341,7 @@ class MixField: public TransformedField {
   public:
     MixField(MixData & mix, BoardEnum board):
       TransformedField(internalField),
+      internalField("Mix"),
       mix(mix)
     {
       if (IS_ARM(board)) {
@@ -386,8 +386,6 @@ class MixField: public TransformedField {
         internalField.Append(new SignedField<8>(_curveParam));
         internalField.Append(new SignedField<8>(mix.sOffset));
       }
-
-      // Dump("Mix");
     }
 
     virtual void beforeExport()
@@ -399,6 +397,9 @@ class MixField: public TransformedField {
       }
       else {
         mix.clear();
+        _destCh = 0;
+        _curveMode = 0;
+        _curveParam = 0;
       }
     }
 
@@ -427,6 +428,7 @@ class ExpoField: public TransformedField {
   public:
     ExpoField(ExpoData & expo, BoardEnum board):
       TransformedField(internalField),
+      internalField("Expo"),
       expo(expo),
       board(board)
     {
@@ -452,8 +454,6 @@ class ExpoField: public TransformedField {
         internalField.Append(new SignedField<8>(expo.weight));
         internalField.Append(new SignedField<8>(expo.curveParam));
       }
-
-      // Dump("Expo");
     }
 
     virtual void beforeExport()
@@ -475,7 +475,8 @@ class ExpoField: public TransformedField {
 
 class LimitField: public StructField {
   public:
-    LimitField(LimitData & limit)
+    LimitField(LimitData & limit):
+      StructField("Limit")
     {
       Append(new ConversionField< SignedField<8> >(limit.min, +100));
       Append(new ConversionField< SignedField<8> >(limit.max, -100));
@@ -483,8 +484,6 @@ class LimitField: public StructField {
       Append(new SignedField<14>(limit.offset));
       Append(new BoolField<1>(limit.symetrical));
       Append(new BoolField<1>(limit.revert));
-
-      // Dump("Limit");
     }
 };
 
@@ -492,6 +491,7 @@ class CurvesField: public TransformedField {
   public:
     CurvesField(CurveData * curves, BoardEnum board):
       TransformedField(internalField),
+      internalField("Curves"),
       curves(curves),
       board(board),
       maxCurves(IS_ARM(board) ? O9X_ARM_MAX_CURVES : O9X_MAX_CURVES),
@@ -506,8 +506,6 @@ class CurvesField: public TransformedField {
       for (int i=0; i<maxPoints; i++) {
         internalField.Append(new SignedField<8>(_points[i]));
       }
-
-      // Dump("Curves");
     }
 
     virtual void beforeExport()
@@ -579,6 +577,7 @@ class CustomSwitchField: public TransformedField {
   public:
     CustomSwitchField(CustomSwData & csw, BoardEnum board):
       TransformedField(internalField),
+      internalField("CustomSwitch"),
       board(board),
       csw(csw)
     {
@@ -589,8 +588,6 @@ class CustomSwitchField: public TransformedField {
         internalField.Append(new UnsignedField<8>(csw.delay));
         internalField.Append(new UnsignedField<8>(csw.duration));
       }
-
-      // Dump("CustomSwitch");
     }
 
     virtual void beforeExport()
@@ -683,6 +680,7 @@ class CustomFunctionField: public TransformedField {
   public:
     CustomFunctionField(FuncSwData & fn, BoardEnum board):
       TransformedField(internalField),
+      internalField("CustomFunction"),
       fn(fn),
       board(board),
       _delay(0)
@@ -702,8 +700,6 @@ class CustomFunctionField: public TransformedField {
         internalField.Append(new BoolField<1>(fn.enabled));
         internalField.Append(new UnsignedField<8>(fn.param));
       }
-
-      // Dump("CustomFunction");
     }
 
     virtual void beforeExport()
@@ -809,7 +805,8 @@ const int rssiLevelConversion[2][8] = { {0, 2, 1, 3, 2, 0, 3, 1}, {0, 1, 1, 2, 2
 
 class FrskyField: public StructField {
   public:
-    FrskyField(FrSkyData & frsky, BoardEnum board)
+    FrskyField(FrSkyData & frsky, BoardEnum board):
+      StructField("FrSky")
     {
       for (int i=0; i<2; i++) {
         Append(new UnsignedField<8>(frsky.channels[i].ratio));
@@ -866,8 +863,6 @@ class FrskyField: public StructField {
         Append(new UnsignedField<5>(frsky.varioSpeedUpMin));
         Append(new UnsignedField<8>(frsky.varioSpeedDownMin));
       }
-
-      // Dump("FrSky");
     }
 };
 
@@ -877,6 +872,7 @@ int exportPpmDelay(int delay) { return (delay - 300) / 50; }
 int importPpmDelay(int delay) { return 300 + 50 * delay; }
 
 Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant):
+  StructField(),
   board(board),
   variant(variant),
   maxPhases(IS_ARM(board) ? O9X_ARM_MAX_PHASES : O9X_MAX_PHASES),
@@ -886,6 +882,8 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   maxCustomSwitches(IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW),
   maxCustomFunctions(IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW)
 {
+  sprintf(name, "Model %s", modelData.name);
+
   if (HAS_LARGE_LCD(board))
     Append(new ZCharField<12>(modelData.name));
   else

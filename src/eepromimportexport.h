@@ -21,6 +21,11 @@
 
 class DataField {
   public:
+    DataField(const char *name=""):
+      name(name)
+    {
+    }
+    virtual const char *getName() { return name; }
     virtual ~DataField() { }
     virtual void ExportBits(QBitArray & output) = 0;
     virtual void ImportBits(QBitArray & input) = 0;
@@ -36,14 +41,14 @@ class DataField {
       return bits;
     }
 
-    QByteArray bitsToBytes(QBitArray bits)
+    QByteArray bitsToBytes(QBitArray bits, int offset=0)
     {
       QByteArray bytes;
-      bytes.resize((7+bits.count())/8);
+      bytes.resize((offset+bits.count()+7)/8);
       bytes.fill(0);
       // Convert from QBitArray to QByteArray
       for (int b=0; b<bits.count(); ++b)
-        bytes[b/8] = ( bytes.at(b/8) | ((bits[b]?1:0)<<(b%8)));
+        bytes[(b+offset)/8] = ( bytes.at((b+offset)/8) | ((bits[b]?1:0)<<((b+offset)%8)));
       return bytes;
     }
 
@@ -62,25 +67,53 @@ class DataField {
       return 0;
     }
 
-    virtual void Dump(const char *title)
+    virtual int Dump(int level=0, int offset=0)
     {
-      QByteArray tmp;
-      Export(tmp);
-      printf("%s\n", title);
-      foreach(char c, tmp) {
-        printf("%d, ", (int)c);
+      QBitArray bits;
+      ExportBits(bits);
+      QByteArray bytes = bitsToBytes(bits);
+      int result = (offset+bits.count()) % 8;
+      for (int i=0; i<level; i++) printf("  ");
+      printf("%s ", getName());
+      for (int i=0; i<bytes.count(); i++) {
+        unsigned char c = bytes[i];
+        if ((i==0 && offset) || (i==bytes.count()-1 && result!=0))
+          printf("(%02x) ", c);
+        else
+          printf("%02x ", c);
       }
-      printf("\n\n"); fflush(stdout);
+      printf("\n"); fflush(stdout);
+      return result;
     }
+
+  private:
+    const char *name;
 };
 
 template<int N>
 class UnsignedField: public DataField {
   public:
-    UnsignedField(unsigned int & field, unsigned int min=0, unsigned int max=UINT_MAX):
+    UnsignedField(unsigned int & field):
+      DataField("Unsigned"),
+      field(field),
+      min(0),
+      max(UINT_MAX)
+    {
+    }
+
+    UnsignedField(unsigned int & field, unsigned int min, unsigned int max, const char *name="Unsigned"):
+      DataField(name),
       field(field),
       min(min),
       max(max)
+    {
+    }
+
+    UnsignedField(unsigned int & field, const char *name):
+      DataField(name),
+      field(field),
+      min(0),
+      max(UINT_MAX)
     {
     }
 
@@ -118,29 +151,70 @@ class UnsignedField: public DataField {
 };
 
 template<int N>
-class SignedField: public UnsignedField<N> {
+class SignedField: public DataField {
   public:
-    SignedField(int & field):
-      UnsignedField<N>((unsigned int &)field)
+    SignedField(int & field, int min=INT_MIN, int max=INT_MAX, const char *name="Signed"):
+      DataField(name),
+      field(field),
+      min(min),
+      max(max)
     {
+    }
+
+    SignedField(int & field, const char *name):
+      DataField(name),
+      field(field),
+      min(INT_MIN),
+      max(INT_MAX)
+    {
+    }
+
+    virtual void ExportBits(QBitArray & output)
+    {
+      int value = field;
+      if (value > max) value = max;
+      if (value < min) value = min;
+
+      output.resize(N);
+      for (int i=0; i<N; i++) {
+        if (((unsigned int)value) & (1<<i))
+          output.setBit(i);
+      }
     }
 
     virtual void ImportBits(QBitArray & input)
     {
-      UnsignedField<N>::ImportBits(input);
+      unsigned int value = 0;
+      for (int i=0; i<N; i++) {
+        if (input[i])
+          value |= (1<<i);
+      }
+
       if (input[N-1]) {
         for (unsigned int i=N; i<8*sizeof(int); i++) {
-          UnsignedField<N>::field |= (1<<i);
+          value |= (1<<i);
         }
       }
+
+      field = (int)value;
     }
+
+    virtual unsigned int size()
+    {
+      return N;
+    }
+
+  protected:
+    int & field;
+    int min;
+    int max;
 };
 
 template<int N>
 class SpareBitsField: public UnsignedField<N> {
   public:
     SpareBitsField():
-      UnsignedField<N>(spare),
+      UnsignedField<N>(spare, 0, 0, "Spare"),
       spare(0)
     {
     }
@@ -152,6 +226,7 @@ template<int N>
 class CharField: public DataField {
   public:
     CharField(char *field):
+      DataField("Char"),
       field(field)
     {
     }
@@ -198,6 +273,7 @@ template<int N>
 class ZCharField: public DataField {
   public:
     ZCharField(char *field):
+      DataField("ZChar"),
       field(field)
     {
     }
@@ -247,6 +323,11 @@ class ZCharField: public DataField {
 
 class StructField: public DataField {
   public:
+    StructField(const char *name="Struct"):
+      DataField(name)
+    {
+    }
+
     ~StructField() {
       foreach(DataField *field, fields) {
         delete field;
@@ -291,6 +372,16 @@ class StructField: public DataField {
       return result;
     }
 
+    virtual int Dump(int level=0, int offset=0)
+    {
+      for (int i=0; i<level; i++) printf("  ");
+      printf("%s\n", getName());
+      foreach(DataField *field, fields) {
+        offset = field->Dump(level+1, offset);
+      }
+      return offset;
+    }
+
   protected:
     QList<DataField *> fields;
 };
@@ -298,6 +389,7 @@ class StructField: public DataField {
 class TransformedField: public DataField {
   public:
     TransformedField(DataField & field):
+      DataField(),
       field(field)
     {
     }
@@ -318,6 +410,12 @@ class TransformedField: public DataField {
       afterImport();
     }
 
+
+    virtual const char *getName()
+    {
+      return field.getName();
+    }
+
     virtual unsigned int size()
     {
       return field.size();
@@ -326,6 +424,12 @@ class TransformedField: public DataField {
     virtual void beforeExport() = 0;
 
     virtual void afterImport() = 0;
+
+    virtual int Dump(int level=0, int offset=0)
+    {
+      beforeExport();
+      return field.Dump(level, offset);
+    }
 
   protected:
     DataField & field;
@@ -336,7 +440,7 @@ class BoolField: public TransformedField {
   public:
     BoolField(bool & b):
       TransformedField(internalField),
-      internalField((unsigned int &)_b),
+      internalField((unsigned int &)_b, "Bool"),
       b(b),
       _b(0)
     {

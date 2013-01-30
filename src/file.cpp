@@ -64,27 +64,26 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
     eeFs = (EeFs *)eeprom;
     eeFsVersion = version;
     eeFsBlockSize = 16;
+    eeFsLinkSize = 1;
 
     if (version == 5) {
       eeFsSize = 4+3*36;
       eeFsFirstBlock = 1;
       eeFsBlocksOffset = 112 - 16;
       eeFsBlocksMax = 1 + (4096-112)/16;
-      eeFsLinkSize = 1;
     }
     else {
       eeFsSize = 4+3*20;
       eeFsFirstBlock = 4;
       eeFsBlocksOffset = 0;
       eeFsBlocksMax = 2048/16;
-      eeFsLinkSize = 1;
     }
 
     memset(eeprom, 0, size);
     eeFs->version  = eeFsVersion;
     eeFs->mySize   = eeFsSize;
     eeFs->freeList = 0;
-    eeFs->bs       = 16;
+    eeFs->bs       = eeFsBlockSize;
     for (unsigned int i=eeFsFirstBlock; i<eeFsBlocksMax-1; i++)
       EeFsSetLink(i, i+1);
     EeFsSetLink(eeFsBlocksMax-1, 0);
@@ -151,7 +150,7 @@ void EFile::eeprom_write_block(const void *pointer_ram, unsigned int pointer_eep
 uint8_t EFile::EeFsRead(unsigned int blk, unsigned int ofs)
 {
   uint8_t ret;
-  eeprom_read_block(&ret, blk*eeFsBlockSize+ofs+eeFsBlocksOffset, eeFsLinkSize);
+  eeprom_read_block(&ret, blk*eeFsBlockSize+ofs+eeFsBlocksOffset, 1);
   return ret;
 }
 
@@ -218,7 +217,7 @@ void EFile::EeFsFree(unsigned int blk)
   while (EeFsGetLink(i)) i = EeFsGetLink(i);
   if (IS_ARM(board)) {
     EeFsSetLink(i, eeFsArm->freeList);
-    eeFs->freeList = blk; //chain in front
+    eeFsArm->freeList = blk; //chain in front
   }
   else {
     EeFsSetLink(i, eeFs->freeList);
@@ -291,7 +290,7 @@ unsigned int EFile::openRd(unsigned int i_fileId)
   else {
     m_fileId = i_fileId;
     m_pos      = 0;
-    m_currBlk  = IS_ARM(board) ? eeFsArm->files[m_fileId].startBlk : eeFs->files[m_fileId].startBlk;
+    m_currBlk  = (IS_ARM(board) ? eeFsArm->files[m_fileId].startBlk : eeFs->files[m_fileId].startBlk);
     m_ofs      = 0;
     m_zeroes   = 0;
     m_bRlc     = 0;
