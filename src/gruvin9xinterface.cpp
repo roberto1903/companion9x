@@ -22,11 +22,8 @@
 #define FILE_TYP_GENERAL 1
 #define FILE_TYP_MODEL   2
 
-/// fileId of general file
 #define FILE_GENERAL   0
-/// convert model number 0..MAX_MODELS-1  int fileId
 #define FILE_MODEL(n) (1+n)
-#define FILE_TMP      (1+16)
 
 Gruvin9xInterface::Gruvin9xInterface(BoardEnum board):
 efile(new EFile()),
@@ -210,12 +207,10 @@ int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t vari
   efile->EeFsCreate(eeprom, size, BOARD_STOCK, 4);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
   if(sz != sizeof(Gruvin9xGeneral)) {
     return 0;
   }
-
-  efile->swap(FILE_GENERAL, FILE_TMP);
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
@@ -224,11 +219,10 @@ int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t vari
         applyStickModeToModel(model, radioData.generalSettings.stickMode+1);
       }
       Gruvin9xModelData gruvin9xModel(model);
-      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
+      sz = efile->writeRlc2(FILE_MODEL(i), FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
       if(sz != sizeof(Gruvin9xModelData)) {
         return 0;
       }
-      efile->swap(FILE_MODEL(i), FILE_TMP);
     }
   }
 
@@ -244,11 +238,11 @@ int Gruvin9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK, 4);
 
   Gruvin9xModelData gruvin9xModel(model);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
+  int sz = efile->writeRlc2(0, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
   if(sz != sizeof(Gruvin9xModelData)) {
      return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Gruvin9xInterface::getSize(GeneralSettings &settings)
@@ -257,11 +251,11 @@ int Gruvin9xInterface::getSize(GeneralSettings &settings)
   efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK, 4);
 
   Gruvin9xGeneral gruvin9xGeneral(settings);
-  int sz = efile->writeRlc1(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));
+  int sz = efile->writeRlc1(0, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));
   if(sz != sizeof(gruvin9xGeneral)) {
     return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Gruvin9xInterface::getCapability(const Capability capability)

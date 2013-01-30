@@ -113,15 +113,6 @@ public:
 
   bool EeFsOpen(uint8_t *eeprom, int size, BoardEnum board);
 
-  ///remove contents of given file
-  void rm(unsigned int i_fileId);
-
-  ///swap contents of file1 with them of file2
-  void swap(unsigned int i_fileId1, unsigned int i_fileId2);
-
-  ///return true if the file with given fileid exists
-  bool exists(unsigned int i_fileId);
-
   ///open file for reading, no close necessary
   ///for writing use writeRlc() or create()
   unsigned int openRd(unsigned int i_fileId);

@@ -34,7 +34,6 @@
 #define FILE_GENERAL   0
 /// convert model number 0..MAX_MODELS-1  int fileId
 #define FILE_MODEL(n) (1+n)
-#define FILE_TMP      (1+16)
 
 template <typename T, size_t N>
 inline
@@ -329,6 +328,7 @@ template <class T>
 bool Open9xInterface::saveGeneral(GeneralSettings &settings, BoardEnum board, uint32_t version, uint32_t variant)
 {
   T open9xSettings(settings, board, version, variant);
+  // open9xSettings.Dump();
   QByteArray eeprom;
   open9xSettings.Export(eeprom);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (const uint8_t*)eeprom.constData(), eeprom.size());
@@ -347,7 +347,7 @@ template <class T>
 bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uint32_t variant)
 {
   T open9xModel(model, board, variant);
-  // open9xModel.Dump(model.name);
+  // open9xModel.Dump();
   QByteArray eeprom;
   open9xModel.Export(eeprom);
   int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
@@ -532,7 +532,7 @@ int Open9xInterface::getSize(ModelData &model)
 
   // TODO something better
   uint8_t tmp[EESIZE_X9D];
-  efile->EeFsCreate(tmp, EESIZE_X9D, board, 4);
+  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
   // TODO change this name, it's a factory
   Open9xModelDataNew open9xModel(model, board, GetCurrentFirmwareVariant());
@@ -541,7 +541,7 @@ int Open9xInterface::getSize(ModelData &model)
   QByteArray eeprom;
   open9xModel.Export(eeprom);
   int sz = efile->writeRlc2(0, FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
-  if(sz != eeprom.size()) {
+  if (sz != eeprom.size()) {
     return -1;
   }
   return efile->size(0);
@@ -555,13 +555,17 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   uint8_t tmp[EESIZE_X9D];
   efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
-  Open9xGeneralData open9xGeneral(settings, LAST_OPEN9X_STOCK_EEPROM_VER, GetCurrentFirmwareVariant());
-  memset(&open9xGeneral, 0, sizeof(Open9xGeneralData));
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&open9xGeneral, sizeof(Open9xGeneralData));
-  if(sz != sizeof(open9xGeneral)) {
+  // TODO change this name, it's a factory
+  Open9xGeneralDataNew open9xGeneral(settings, board, LAST_OPEN9X_STOCK_EEPROM_VER, GetCurrentFirmwareVariant());
+  // open9xGeneral.Dump();
+
+  QByteArray eeprom;
+  open9xGeneral.Export(eeprom);
+  int sz = efile->writeRlc2(0, FILE_TYP_GENERAL, (const uint8_t*)eeprom.constData(), eeprom.size());
+  if (sz != eeprom.size()) {
     return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Open9xInterface::getCapability(const Capability capability)

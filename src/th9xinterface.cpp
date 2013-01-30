@@ -23,11 +23,8 @@
 #define FILE_TYP_GENERAL 1
 #define FILE_TYP_MODEL   2
 
-/// fileId of general file
 #define FILE_GENERAL   0
-/// convert model number 0..MAX_MODELS-1  int fileId
 #define FILE_MODEL(n) (1+n)
-#define FILE_TMP      (1+16)
 
 Th9xInterface::Th9xInterface():
 efile(new EFile())
@@ -131,20 +128,18 @@ int Th9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t variant,
   efile->EeFsCreate(eeprom, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xGeneral th9xGeneral(radioData.generalSettings);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
+  int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
   if(sz != sizeof(Th9xGeneral)) {
     return 0;
   }
-  efile->swap(FILE_GENERAL, FILE_TMP);
 
   for (int i=0; i<getMaxModels(); i++) {
     if (!radioData.models[i].isempty()) {
       Th9xModelData th9xModel(radioData.models[i]);
-      sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));
+      sz = efile->writeRlc2(FILE_MODEL(i), FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));
       if(sz != sizeof(Th9xModelData)) {
         return 0;
       }
-      efile->swap(FILE_MODEL(i), FILE_TMP);
     }
   }
 
@@ -160,11 +155,11 @@ int Th9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xModelData th9xModel(model);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));
+  int sz = efile->writeRlc2(0, FILE_TYP_MODEL, (uint8_t*)&th9xModel, sizeof(Th9xModelData));
   if(sz != sizeof(Th9xModelData)) {
      return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Th9xInterface::getSize(GeneralSettings &settings)
@@ -173,11 +168,11 @@ int Th9xInterface::getSize(GeneralSettings &settings)
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xGeneral th9xGeneral(settings);
-  int sz = efile->writeRlc2(FILE_TMP, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
+  int sz = efile->writeRlc2(0, FILE_TYP_GENERAL, (uint8_t*)&th9xGeneral, sizeof(Th9xGeneral));
   if(sz != sizeof(th9xGeneral)) {
     return -1;
   }
-  return efile->size(FILE_TMP);
+  return efile->size(0);
 }
 
 int Th9xInterface::getCapability(const Capability capability)
