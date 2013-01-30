@@ -16,21 +16,11 @@
 #ifndef open9xstockeeprom_h
 #define open9xstockeeprom_h
 
-#define GVARS_VARIANT 0x0001
-#define FRSKY_VARIANT 0x0002
-#define M128_VARIANT  0x8000
-
-#define SIMU_STOCK_VARIANTS      (GVARS_VARIANT|FRSKY_VARIANT)
-#define SIMU_M128_VARIANTS       (M128_VARIANT)
-#define SIMU_GRUVIN9X_VARIANTS   (0)
-#define SIMU_ARM_VARIANTS        (0)
-
 #define O9X_MAX_CSFUNCOLD 13
 #define O9X_MAX_CSFUNC 15
 
 #include <inttypes.h>
 #include "eeprominterface.h"
-#include "eepromimportexport.h"
 #include <qbytearray.h>
 
 int8_t open9xV4209FromSource(RawSource source);

@@ -16,7 +16,6 @@
 
 #include "open9xsimulator.h"
 #include "open9xinterface.h"
-#include "open9xeeprom.h"
 
 #define FRSKY
 #define FRSKY_HUB

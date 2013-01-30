@@ -18,6 +18,15 @@
 
 #include "eeprominterface.h"
 
+#define GVARS_VARIANT 0x0001
+#define FRSKY_VARIANT 0x0002
+#define M128_VARIANT  0x8000
+
+#define SIMU_STOCK_VARIANTS      (GVARS_VARIANT|FRSKY_VARIANT)
+#define SIMU_M128_VARIANTS       (M128_VARIANT)
+#define SIMU_GRUVIN9X_VARIANTS   (0)
+#define SIMU_ARM_VARIANTS        (0)
+
 class EFile;
 
 class Open9xInterface : public EEPROMInterface

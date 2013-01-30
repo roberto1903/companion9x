@@ -16,7 +16,6 @@
 
 #include "open9xM128simulator.h"
 #include "open9xinterface.h"
-#include "open9xeeprom.h"
 
 #define PCBSTD
 #define M128

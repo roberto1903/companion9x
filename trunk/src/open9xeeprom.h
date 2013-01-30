@@ -72,6 +72,8 @@ class Open9xModelDataNew: public StructField {
   public:
     Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant);
 
+    const char * getName() { return name; }
+
   protected:
     BoardEnum board;
     unsigned int variant;
@@ -83,6 +85,7 @@ class Open9xModelDataNew: public StructField {
     int maxExpos;
     int maxCustomSwitches;
     int maxCustomFunctions;
+    char name[256];
 };
 
 #endif
