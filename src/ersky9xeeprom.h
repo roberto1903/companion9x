@@ -150,7 +150,7 @@ PACK(typedef struct t_Ersky9xLimitData {
 #define MLTPX_REP  2
 
 PACK(typedef struct t_Ersky9xMixData_v10 {
-  uint8_t destCh;            //        1..NUM_CHNOUT
+  uint8_t destCh;            //        1..C9X_NUM_CHNOUT
   uint8_t srcRaw;            //
   int8_t  weight;
   int8_t  swtch;
@@ -173,7 +173,7 @@ PACK(typedef struct t_Ersky9xMixData_v10 {
 }) Ersky9xMixData_v10;
 
 PACK(typedef struct t_Ersky9xMixData_v11 {
-  uint8_t destCh;            //        1..NUM_CHNOUT
+  uint8_t destCh;            //        1..C9X_NUM_CHNOUT
   uint8_t srcRaw;            //
   int8_t  weight;
   int8_t  swtch;

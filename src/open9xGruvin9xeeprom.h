@@ -48,7 +48,7 @@ PACK(typedef struct t_Open9xGruvin9xPhaseData_v208 {
 }) Open9xGruvin9xPhaseData_v208;
 
 PACK(typedef struct t_Open9xGruvin9xMixData_v207 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch:6;
@@ -71,7 +71,7 @@ PACK(typedef struct t_Open9xGruvin9xMixData_v207 {
 }) Open9xGruvin9xMixData_v207;
 
 PACK(typedef struct t_Open9xGruvin9xMixData_v209 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch:6;
@@ -94,7 +94,7 @@ PACK(typedef struct t_Open9xGruvin9xMixData_v209 {
 }) Open9xGruvin9xMixData_v209;
 
 PACK(typedef struct t_Open9xGruvin9xMixData_v211 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   uint8_t curveMode:1;       // O=curve, 1=differential
   uint8_t noExpo:1;
   uint8_t spare:2;

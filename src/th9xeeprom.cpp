@@ -287,15 +287,15 @@ t_Th9xCustomSwData::t_Th9xCustomSwData(CustomSwData &c9x)
   val1 = c9x.val1;
   val2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     val1 = fromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     val2 = fromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     val1 = th9xFromSwitch(RawSwitch(c9x.val1));
     val2 = th9xFromSwitch(RawSwitch(c9x.val2));
   }
@@ -315,15 +315,15 @@ t_Th9xCustomSwData::operator CustomSwData ()
   c9x.val1 = val1;
   c9x.val2 = val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = toSource(val1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = toSource(val2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = th9xToSwitch(val1).toValue();
     c9x.val2 = th9xToSwitch(val2).toValue();
   }

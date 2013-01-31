@@ -521,7 +521,7 @@ class ConversionField: public TransformedField {
     {
     }
 
-    ConversionField(int & field, int shift, int min=INT_MIN, int max=INT_MAX, const char *name = "Converted"):
+    ConversionField(int & field, int shift, int min=INT_MIN, int max=INT_MAX, const char *name = "Signed shifted"):
       TransformedField(internalField),
       internalField(_field, name),
       field(field),
@@ -579,8 +579,10 @@ class ConversionField: public TransformedField {
       if (table) {
         field = 0;
         for (unsigned int i=0; i<count; i++) {
-          if (table[1+2*i] == _field)
+          if (table[1+2*i] == _field) {
             field = table[2*i];
+            return;
+          }
         }
       }
       else if (shift) {

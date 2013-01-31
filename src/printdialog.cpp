@@ -327,7 +327,7 @@ void printDialog::printExpo()
     str.append("</h2></td></tr><tr><td><table border=0 cellspacing=0 cellpadding=3>");
     int ec=0;
     unsigned int lastCHN = 255;
-    for(int i=0; i<MAX_EXPOS; i++) {
+    for(int i=0; i<C9X_MAX_EXPOS; i++) {
       ExpoData *ed=&g_model->expoData[i];
       if(ed->mode==0)
         continue;
@@ -828,89 +828,11 @@ void printDialog::printSwitches()
     str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=0 cellspacing=0 cellpadding=3>");
 
-    for(int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
-      RawSource source=RawSource(g_model->customSw[i].val1);
-      if(g_model->customSw[i].func) {
+    for (int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      if (g_model->customSw[i].func) {
         str.append("<tr>");
         str.append("<td width=\"60\" align=\"center\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
-        QString tstr;
-        switch CS_STATE(g_model->customSw[i].func) {
-          case CS_VOFS:            
-            if (g_model->customSw[i].val1)
-              tstr += RawSource(g_model->customSw[i].val1).toString();
-            else
-              tstr += "0";
-            tstr.remove(" ");
-            if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_ANEG)
-                tstr = "|" + tstr + "|";
-            if(g_model->customSw[i].func==CS_DAPOS)
-                tstr = "|d(" + tstr + ")|";
-            if(g_model->customSw[i].func==CS_DPOS)
-                tstr = "d(" + tstr + ")";
-            if(g_model->customSw[i].func==CS_APOS || g_model->customSw[i].func==CS_VPOS || g_model->customSw[i].func==CS_DPOS || g_model->customSw[i].func==CS_DAPOS)
-                tstr += " &gt; ";
-            if(g_model->customSw[i].func==CS_ANEG || g_model->customSw[i].func==CS_VNEG)
-                tstr += " &lt; ";
-            tstr += QString::number(source.getStep(*g_model)*(g_model->customSw[i].val2+source.getRawOffset(*g_model))+source.getOffset(*g_model));
-            break;
-          case CS_VBOOL:
-            tstr = RawSwitch(g_model->customSw[i].val1).toString();
-            switch (g_model->customSw[i].func) {
-              case CS_AND:
-                tstr += " AND ";
-                break;
-              case CS_OR:
-                tstr += " OR ";
-                break;
-              case CS_XOR:
-                tstr += " XOR ";
-                break;
-              default:
-                break;
-            }
-            tstr += RawSwitch(g_model->customSw[i].val2).toString();
-            break;
-          case CS_VCOMP:
-            if (g_model->customSw[i].val1)
-              tstr += RawSource(g_model->customSw[i].val1).toString();
-            else
-              tstr += "0";
-            switch (g_model->customSw[i].func) {
-              case CS_EQUAL:
-                tstr += " = ";
-                break;
-              case CS_NEQUAL:
-                tstr += " != ";
-                break;
-              case CS_GREATER:
-                tstr += " &gt; ";
-                break;
-              case CS_LESS:
-                tstr += " &lt; ";
-                break;
-              case CS_EGREATER:
-                tstr += " &gt;= ";
-                break;
-              case CS_ELESS:
-                tstr += " &lt;= ";
-                break;
-              default:
-                break;
-            }
-            if (g_model->customSw[i].val2)
-              tstr += RawSource(g_model->customSw[i].val2).toString();
-            else
-              tstr += "0";
-            break;
-          default:
-              break;
-        }
-        if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
-          if (g_model->customSw[i].delay)
-            tstr += tr(" Delay %1 sec").arg(g_model->customSw[i].delay/2.0);
-          if (g_model->customSw[i].duration)
-            tstr += tr(" Duration %1 sec").arg(g_model->customSw[i].duration/2.0);
-        }
+        QString tstr = getCustomSwitchStr(&g_model->customSw[i], *g_model);
         str.append(doTC(tstr,"green"));
         str.append("</tr>");
         sc++;

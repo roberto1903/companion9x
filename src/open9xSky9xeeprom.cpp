@@ -1104,15 +1104,15 @@ t_Open9xArmCustomSwData_v208::t_Open9xArmCustomSwData_v208(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = open9xArm208FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     v2 = open9xArm208FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
@@ -1132,15 +1132,15 @@ t_Open9xArmCustomSwData_v208::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = open9xArm208ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = open9xArm208ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = open9xArmToSwitch(v1).toValue();
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }
@@ -1154,15 +1154,15 @@ t_Open9xArmCustomSwData_v209::t_Open9xArmCustomSwData_v209(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = open9xArm209FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     v2 = open9xArm209FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
@@ -1182,15 +1182,15 @@ t_Open9xArmCustomSwData_v209::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = open9xArm209ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = open9xArm209ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = open9xArmToSwitch(v1).toValue();
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }
@@ -1206,15 +1206,15 @@ t_Open9xArmCustomSwData_v210::t_Open9xArmCustomSwData_v210(CustomSwData &c9x)
 
   delay = c9x.delay;
   duration = c9x.duration;
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = open9xArm210FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
+  if (c9x.func >= CS_FN_EQUAL && c9x.func <= CS_FN_ELESS) {
     v2 = open9xArm210FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = open9xArmFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xArmFromSwitch(RawSwitch(c9x.val2));
   }
@@ -1229,15 +1229,15 @@ t_Open9xArmCustomSwData_v210::operator CustomSwData ()
   c9x.delay = delay;
   c9x.duration = duration;
   
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = open9xArm210ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
+  if (c9x.func >= CS_FN_EQUAL && c9x.func <= CS_FN_ELESS) {
     c9x.val2 = open9xArm210ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = open9xArmToSwitch(v1).toValue();
     c9x.val2 = open9xArmToSwitch(v2).toValue();
   }
@@ -1671,7 +1671,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<C9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
@@ -1876,7 +1876,7 @@ t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<C9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
@@ -2073,7 +2073,7 @@ t_Open9xArmModelData_v210::t_Open9xArmModelData_v210(ModelData &c9x)
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<C9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
@@ -2259,7 +2259,7 @@ t_Open9xArmModelData_v211::t_Open9xArmModelData_v211(ModelData &c9x)
     spare2 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<C9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];
@@ -2458,7 +2458,7 @@ t_Open9xArmModelData_v212::t_Open9xArmModelData_v212(ModelData &c9x)
     spare1 = 0;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
     beepANACenter = c9x.beepANACenter;
-    for (int i=0; i<MAX_MIXERS; i++)
+    for (int i=0; i<C9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
     for (int i=0; i<O9X_ARM_NUM_CHNOUT; i++)
       limitData[i] = c9x.limitData[i];

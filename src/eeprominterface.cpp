@@ -494,16 +494,16 @@ void ModelData::clear()
   ppmDelay = 300;
   for (int i=0; i<MAX_PHASES; i++)
     phaseData[i].clear();
-  for (int i=0; i<MAX_EXPOS; i++)
+  for (int i=0; i<C9X_MAX_EXPOS; i++)
     expoData[i].clear();
-  for (int i=0; i<MAX_MIXERS; i++)
+  for (int i=0; i<C9X_MAX_MIXERS; i++)
     mixData[i].clear();
   for(int i=0; i<4; i++){
     mixData[i].destCh = i+1;
     mixData[i].srcRaw = RawSource(SOURCE_TYPE_STICK, i);
     mixData[i].weight = 100;
   }
-  for (int i=0; i<NUM_CHNOUT; i++)
+  for (int i=0; i<C9X_NUM_CHNOUT; i++)
     limitData[i].clear();
   for (int i=0; i<NUM_STICKS; i++)
     expoData[i].clear();
@@ -564,13 +564,13 @@ ModelData ModelData::removeGlobalVars()
 {
   ModelData result = *this;
 
-  for (int i=0; i<MAX_MIXERS; i++) {
+  for (int i=0; i<C9X_MAX_MIXERS; i++) {
     removeGlobalVar(mixData[i].weight);
     removeGlobalVar(mixData[i].differential);
     removeGlobalVar(mixData[i].sOffset);
   }
 
-  for (int i=0; i<MAX_EXPOS; i++) {
+  for (int i=0; i<C9X_MAX_EXPOS; i++) {
     removeGlobalVar(expoData[i].weight);
     removeGlobalVar(expoData[i].expo);
   }

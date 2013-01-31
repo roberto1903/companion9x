@@ -1132,7 +1132,7 @@ void ModelEdit::tabExpos()
     ExposlistWidget->clear();
     int curDest = -1;
 
-    for(int i=0; i<MAX_EXPOS; i++)
+    for(int i=0; i<C9X_MAX_EXPOS; i++)
     {
         ExpoData *md = &g_model.expoData[i];
 
@@ -1767,9 +1767,9 @@ void ModelEdit::curvePointEdited()
 void ModelEdit::setSwitchWidgetVisibility(int i)
 {
     RawSource source=RawSource(g_model.customSw[i].val1);
-    switch CS_STATE(g_model.customSw[i].func)
+    switch (getCSFunctionFamily(g_model.customSw[i].func))
     {
-      case CS_VOFS:
+      case CS_FAMILY_VOFS:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
@@ -1784,14 +1784,14 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchOffset[i]->setSingleStep(source.getStep(g_model));
         cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
         break;
-      case CS_VBOOL:
+      case CS_FAMILY_VBOOL:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
         populateSwitchCB(cswitchSource1[i], RawSwitch(g_model.customSw[i].val1));
         populateSwitchCB(cswitchSource2[i], RawSwitch(g_model.customSw[i].val2));
         break;
-      case CS_VCOMP:
+      case CS_FAMILY_VCOMP:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
@@ -1802,8 +1802,6 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
           populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TELEMETRY);
           populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_TELEMETRY);
         }
-        break;
-      default:
         break;
     }
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
@@ -2112,10 +2110,10 @@ void ModelEdit::customSwitchesEdited()
     bool chAr[NUM_CSW];
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
     for (int i=0; i<num_csw;i++) {
-        chAr[i]  = (CS_STATE(g_model.customSw[i].func)) !=(CS_STATE(csw[i]->currentIndex()));
-        g_model.customSw[i].func  = csw[i]->currentIndex();
+        chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->currentIndex()));
+        g_model.customSw[i].func = csw[i]->currentIndex();
     }
-    for(int i=0; i<num_csw; i++) {
+    for (int i=0; i<num_csw; i++) {
         if(chAr[i]) {
             g_model.customSw[i].val1 = 0;
             g_model.customSw[i].val2 = 0;
@@ -2126,9 +2124,9 @@ void ModelEdit::customSwitchesEdited()
           g_model.customSw[i].delay= (uint8_t)round(cswitchDelay[i]->value()*2);
         }
         RawSource source;
-        switch(CS_STATE(g_model.customSw[i].func))
+        switch (getCSFunctionFamily(g_model.customSw[i].func))
         {
-          case (CS_VOFS):
+          case (CS_FAMILY_VOFS):
             if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
@@ -2144,12 +2142,10 @@ void ModelEdit::customSwitchesEdited()
               g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
             }
             break;
-          case (CS_VBOOL):
-          case (CS_VCOMP):
+          case (CS_FAMILY_VBOOL):
+          case (CS_FAMILY_VCOMP):
             g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
             g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
-            break;
-          default:
             break;
         }
     }
@@ -4025,14 +4021,14 @@ int ModelEdit::getMixerIndex(unsigned int dch)
 
 bool ModelEdit::gm_insertExpo(int idx)
 {
-    if (idx<0 || idx>=MAX_EXPOS || g_model.expoData[MAX_EXPOS-1].mode > 0) {
+    if (idx<0 || idx>=C9X_MAX_EXPOS || g_model.expoData[C9X_MAX_EXPOS-1].mode > 0) {
       QMessageBox::information(this, "companion9x", tr("Not enough available expos!"));
       return false;
     }
 
     int chn = g_model.expoData[idx].chn;
     memmove(&g_model.expoData[idx+1],&g_model.expoData[idx],
-            (MAX_EXPOS-(idx+1))*sizeof(ExpoData) );
+            (C9X_MAX_EXPOS-(idx+1))*sizeof(ExpoData) );
     memset(&g_model.expoData[idx],0,sizeof(ExpoData));
     g_model.expoData[idx].chn = chn;
     g_model.expoData[idx].weight = 100;
@@ -4043,13 +4039,13 @@ bool ModelEdit::gm_insertExpo(int idx)
 void ModelEdit::gm_deleteExpo(int index)
 {
   memmove(&g_model.expoData[index],&g_model.expoData[index+1],
-            (MAX_EXPOS-(index+1))*sizeof(ExpoData));
-  memset(&g_model.expoData[MAX_EXPOS-1],0,sizeof(ExpoData));
+            (C9X_MAX_EXPOS-(index+1))*sizeof(ExpoData));
+  memset(&g_model.expoData[C9X_MAX_EXPOS-1],0,sizeof(ExpoData));
 }
 
 void ModelEdit::gm_openExpo(int index)
 {
-    if(index<0 || index>=MAX_EXPOS) return;
+    if(index<0 || index>=C9X_MAX_EXPOS) return;
 
     ExpoData mixd(g_model.expoData[index]);
     updateSettings();
@@ -4073,8 +4069,8 @@ void ModelEdit::gm_openExpo(int index)
 int ModelEdit::getExpoIndex(unsigned int dch)
 {
     unsigned int i = 0;
-    while (g_model.expoData[i].chn<=dch && g_model.expoData[i].mode && i<MAX_EXPOS) i++;
-    if(i==MAX_EXPOS) return -1;
+    while (g_model.expoData[i].chn<=dch && g_model.expoData[i].mode && i<C9X_MAX_EXPOS) i++;
+    if(i==C9X_MAX_EXPOS) return -1;
     return i;
 }
 
@@ -4139,7 +4135,7 @@ QList<int> ModelEdit::createExpoListFromSelected()
     foreach(QListWidgetItem *item, ExposlistWidget->selectedItems())
     {
         int idx= item->data(Qt::UserRole).toByteArray().at(0);
-        if(idx>=0 && idx<MAX_EXPOS) list << idx;
+        if(idx>=0 && idx<C9X_MAX_EXPOS) list << idx;
     }
     return list;
 }
@@ -4562,7 +4558,7 @@ void ModelEdit::moveMixDown()
 
 int ModelEdit::gm_moveExpo(int idx, bool dir) //true=inc=down false=dec=up
 {
-    if(idx>MAX_EXPOS || (idx==0 && !dir) || (idx==MAX_EXPOS && dir)) return idx;
+    if(idx>C9X_MAX_EXPOS || (idx==0 && !dir) || (idx==C9X_MAX_EXPOS && dir)) return idx;
 
     int tdx = dir ? idx+1 : idx-1;
     ExpoData &src=g_model.expoData[idx];
@@ -5082,16 +5078,16 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
       setCurve(CURVE5(6),heli_ar5);
       switch (swashtype) {
         case 0:
-          g_model.swashRingData.type = SWASH_TYPE_90;
+          g_model.swashRingData.type = HELI_SWASH_TYPE_90;
           break;
         case 1:
-          g_model.swashRingData.type = SWASH_TYPE_120;
+          g_model.swashRingData.type = HELI_SWASH_TYPE_120;
           break;
         case 2:
-          g_model.swashRingData.type = SWASH_TYPE_120X;
+          g_model.swashRingData.type = HELI_SWASH_TYPE_120X;
           break;
         case 3:
-          g_model.swashRingData.type = SWASH_TYPE_140;
+          g_model.swashRingData.type = HELI_SWASH_TYPE_140;
           break;
       }
       g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
@@ -5397,8 +5393,8 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(14); md->srcRaw=RawSource(SOURCE_TYPE_CH, 13); md->weight= 100; md->swtch=RawSwitch();
     md=setDest(14); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-100;  md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 11);  md->mltpx=MLTPX_REP;
     md=setDest(14); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 100;  md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_THR);  md->mltpx=MLTPX_REP;
-    setSwitch(0xB, CS_VNEG, RawSource(SOURCE_TYPE_STICK, 2).toValue(), -99);
-    setSwitch(0xC, CS_VPOS, RawSource(SOURCE_TYPE_CH, 13).toValue(), 0);
+    setSwitch(0xB, CS_FN_VNEG, RawSource(SOURCE_TYPE_STICK, 2).toValue(), -99);
+    setSwitch(0xC, CS_FN_VPOS, RawSource(SOURCE_TYPE_CH, 13).toValue(), 0);
     updateSwitchesTab();
   }
 
@@ -5453,7 +5449,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.type = HELI_SWASH_TYPE_120;
     g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
@@ -5499,7 +5495,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.type = HELI_SWASH_TYPE_120;
     g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
@@ -5565,7 +5561,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.type = HELI_SWASH_TYPE_120;
     g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
@@ -5611,7 +5607,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(5); md->carryTrim=TRIM_OFF;
     md=setDest(11); md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID2); md->curve=CV(6); md->carryTrim=TRIM_OFF;
 
-    g_model.swashRingData.type = SWASH_TYPE_120;
+    g_model.swashRingData.type = HELI_SWASH_TYPE_120;
     g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
     // set up Curves
@@ -5654,9 +5650,9 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, 1).toValue()); md->weight= 110; md->swtch=RawSwitch();
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 2); md->mltpx=MLTPX_REP;
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 3); md->mltpx=MLTPX_REP;
-    setSwitch(1, CS_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
-    setSwitch(2, CS_VPOS, RawSource(SOURCE_TYPE_CH, 14).toValue(), 105);
-    setSwitch(3, CS_VNEG, RawSource(SOURCE_TYPE_CH, 14).toValue(), -105);
+    setSwitch(1, CS_FN_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
+    setSwitch(2, CS_FN_VPOS, RawSource(SOURCE_TYPE_CH, 14).toValue(), 105);
+    setSwitch(3, CS_FN_VNEG, RawSource(SOURCE_TYPE_CH, 14).toValue(), -105);
 
     // redraw switches tab
     updateSwitchesTab();

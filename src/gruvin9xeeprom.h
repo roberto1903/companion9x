@@ -177,7 +177,7 @@ PACK(typedef struct t_Gruvin9xLimitData {
 #define MLTPX_REP  2
 
 PACK(typedef struct t_Gruvin9xMixData {
-  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:5;          // 0, 1..C9X_NUM_CHNOUT
   uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
   int8_t  weight;

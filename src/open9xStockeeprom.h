@@ -126,7 +126,7 @@ PACK(typedef struct t_Open9xLimitData_v211 {
 }) Open9xLimitData_v211;
 
 PACK(typedef struct t_Open9xMixData_v201 {
-  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:5;          // 0, 1..C9X_NUM_CHNOUT
   uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
   int8_t  weight;
@@ -148,7 +148,7 @@ PACK(typedef struct t_Open9xMixData_v201 {
 }) Open9xMixData_v201;
 
 PACK(typedef struct t_Open9xMixData_v203 {
-  uint8_t destCh:5;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:5;          // 0, 1..C9X_NUM_CHNOUT
   uint8_t mixWarn:3;         // mixer warning
   uint8_t srcRaw;            //
   int8_t  weight;
@@ -170,7 +170,7 @@ PACK(typedef struct t_Open9xMixData_v203 {
 }) Open9xMixData_v203;
 
 PACK(typedef struct t_Open9xMixData_v205 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch:6;
@@ -193,7 +193,7 @@ PACK(typedef struct t_Open9xMixData_v205 {
 }) Open9xMixData_v205;
 
 PACK(typedef struct t_Open9xMixData_v209 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase:4;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch:6;
@@ -216,7 +216,7 @@ PACK(typedef struct t_Open9xMixData_v209 {
 }) Open9xMixData_v209;
 
 PACK(typedef struct t_Open9xMixData_v211 {
-  uint8_t destCh:4;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh:4;          // 0, 1..C9X_NUM_CHNOUT
   uint8_t curveMode:1;       // O=curve, 1=differential
   uint8_t noExpo:1;
   uint8_t spare:2;

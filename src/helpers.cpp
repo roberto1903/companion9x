@@ -62,7 +62,6 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
   b->setMaxVisibleItems(10);
 }
 
-
 QString getFuncName(unsigned int val)
 {
   if (val < NUM_SAFETY_CHNOUT) {
@@ -96,6 +95,97 @@ QString getFuncName(unsigned int val)
       return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
     }
   }
+}
+
+QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
+{
+  QString result = "";
+
+  if (!customSw->func)
+    return result;
+
+  switch (getCSFunctionFamily(customSw->func)) {
+    case CS_FAMILY_VOFS: {
+      RawSource source = RawSource(customSw->val1);
+
+      if (customSw->val1)
+        result += source.toString();
+      else
+        result += "0";
+      result.remove(" ");
+      if (customSw->func == CS_FN_APOS || customSw->func == CS_FN_ANEG)
+        result = "|" + result + "|";
+      else if (customSw->func == CS_FN_DAPOS)
+        result = "|d(" + result + ")|";
+      else if (customSw->func == CS_FN_DPOS) result = "d(" + result + ")";
+      if (customSw->func == CS_FN_APOS || customSw->func == CS_FN_VPOS || customSw->func == CS_FN_DAPOS || customSw->func == CS_FN_DPOS)
+        result += " &gt; ";
+      else if (customSw->func == CS_FN_ANEG || customSw->func == CS_FN_VNEG)
+        result += " &lt; ";
+      result += QString::number(source.getStep(model) * (customSw->val2 + source.getRawOffset(model)) + source.getOffset(model));
+      break;
+    }
+
+    case CS_FAMILY_VBOOL:
+      result = RawSwitch(customSw->val1).toString();
+      switch (customSw->func) {
+        case CS_FN_AND:
+          result += " AND ";
+          break;
+        case CS_FN_OR:
+          result += " OR ";
+          break;
+        case CS_FN_XOR:
+          result += " XOR ";
+          break;
+        default:
+          break;
+      }
+      result += RawSwitch(customSw->val2).toString();
+      break;
+
+    case CS_FAMILY_VCOMP:
+      if (customSw->val1)
+        result += RawSource(customSw->val1).toString();
+      else
+        result += "0";
+      switch (customSw->func) {
+        case CS_FN_EQUAL:
+          result += " = ";
+          break;
+        case CS_FN_NEQUAL:
+          result += " != ";
+          break;
+        case CS_FN_GREATER:
+          result += " &gt; ";
+          break;
+        case CS_FN_LESS:
+          result += " &lt; ";
+          break;
+        case CS_FN_EGREATER:
+          result += " &gt;= ";
+          break;
+        case CS_FN_ELESS:
+          result += " &lt;= ";
+          break;
+        default:
+          break;
+      }
+      if (customSw->val2)
+        result += RawSource(customSw->val2).toString();
+      else
+        result += "0";
+      break;
+  }
+
+  if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+    if (customSw->delay)
+      result += QObject::tr(" Delay %1 sec").arg(customSw->delay/2.0);
+    if (customSw->duration)
+      result += QObject::tr(" Duration %1 sec").arg(customSw->duration/2.0);
+  }
+
+  return result;
 }
 
 void populateFuncCB(QComboBox *b, unsigned int value)
