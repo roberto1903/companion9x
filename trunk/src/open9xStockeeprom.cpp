@@ -1108,15 +1108,15 @@ t_Open9xCustomSwData_v208::t_Open9xCustomSwData_v208(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = open9x208FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     v2 = open9x208FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = open9xStockFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xStockFromSwitch(RawSwitch(c9x.val2));
   }
@@ -1136,15 +1136,15 @@ Open9xCustomSwData_v208::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = open9x208ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = open9x208ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = open9xStockToSwitch(v1).toValue();
     c9x.val2 = open9xStockToSwitch(v2).toValue();
   }
@@ -1158,15 +1158,15 @@ t_Open9xCustomSwData_v209::t_Open9xCustomSwData_v209(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = open9xStock209FromSource(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
+  if (c9x.func >= CS_FN_EQUAL && c9x.func <= CS_FN_ELESS) {
     v2 = open9xStock209FromSource(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = open9xStockFromSwitch(RawSwitch(c9x.val1));
     v2 = open9xStockFromSwitch(RawSwitch(c9x.val2));
   }
@@ -1179,15 +1179,15 @@ Open9xCustomSwData_v209::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = open9xStock209ToSource(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL && c9x.func <= CS_ELESS) {
+  if (c9x.func >= CS_FN_EQUAL && c9x.func <= CS_FN_ELESS) {
     c9x.val2 = open9xStock209ToSource(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = open9xStockToSwitch(v1).toValue();
     c9x.val2 = open9xStockToSwitch(v2).toValue();
   }

@@ -74,8 +74,8 @@ private:
     QComboBox * fswtchParamArmT[NUM_FSW];
     QCheckBox * fswtchEnable[NUM_FSW];
     
-    QSpinBox  * safetySwitchValue[NUM_CHNOUT];
-    QComboBox * safetySwitchSwtch[NUM_CHNOUT];
+    QSpinBox  * safetySwitchValue[C9X_NUM_CHNOUT];
+    QComboBox * safetySwitchSwtch[C9X_NUM_CHNOUT];
     QSlider * phasesTrimSliders[9][4];
     QSpinBox * phasesTrimValues[9][4];
 

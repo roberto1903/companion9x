@@ -18,16 +18,16 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::xsimulatorDialog),
     timer(NULL),
+    lightOn(false),
     txInterface(NULL),
     simulator(NULL),
     g_modelIdx(-1),
+    beepVal(0),
+    beepShow(0),
     buttonPressed(0)
 {
     ui->setupUi(this);
     ui->lcd->setFocus();
-
-    beepVal = 0;
-    beepShow = 0;
 
     QSettings settings("companion9x", "companion9x");
     backLight = settings.value("backLight",0).toInt();
@@ -48,7 +48,7 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
             ui->lcd->setRgb(159,165,247);
             break;
     }
-    lightOn=NULL;
+
     setupSticks();
     resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(),this->height());
@@ -201,10 +201,6 @@ void xsimulatorDialog::onTimerEvent()
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];
     setWindowTitle(windowName + (txInterface->getCapability(FlightPhases) ? tr(" - Phase: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
-/* TODO + QString(" - Timer: (%3, %4) %1:%2") .arg(abs(
-        -s_timerVal) / 60, 2, 10, QChar('0')).arg(abs(-s_timerVal) % 60, 2, 10,
-            QChar('0')) .arg(getTimerMode(model->timers[0].mode)) // TODO why timers[0]
-            .arg(model->timers[0].dir ? "Count Up" : "Count Down")); */
   }
   else if (ui->tabWidget->currentIndex() == 0) {
     bool lightEnable;

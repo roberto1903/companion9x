@@ -11,12 +11,17 @@
 #define CONVERT_MODE(x) (((x)<=4) ? modn12x3[g_eeGeneral.stickMode][((x)-1)] : (x))
 #define CHANNEL_ORDER(x) (chout_ar[g_eeGeneral.templateSetup*4 + (x)-1])
 
+#define CURVE_BASE   7
 #define CH(x) (SRC_CH1+(x)-1-(SRC_SWC-SRC_3POS))
 #define CV(x) (CURVE_BASE+(x)-1)
 #define CC(x) (CHANNEL_ORDER(x)) //need to invert this to work with dest
 
 #define CURVE5(x) ((x)-1)
 #define CURVE9(x) (MAX_CURVE5+(x)-1)
+
+#define TRIM_ON  0
+#define TRIM_OFF 1
+#define TRIM_OFFSET 2
 
 #define TELEMETRY_SRC "----""Tmr1""Tmr2""Tx  ""Rx  ""A1  ""A2  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""Cels""Vfas""Curr""Cnsp""Powr""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""Cur+""ACC ""Time"
 void populateGvSourceCB(QComboBox *b, int value);
@@ -37,6 +42,7 @@ void populatecsFieldCB(QComboBox *b, int value, bool last, int hubproto);
 void populateExpoCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields=0);
 void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields=0);
+QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model);
 
 #define POPULATE_SWITCHES  1
 #define POPULATE_TELEMETRY 2

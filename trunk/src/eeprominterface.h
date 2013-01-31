@@ -59,14 +59,14 @@ const uint8_t modn12x3[4][4]= {
 
 #define C9XMAX_MODELS  60
 #define MAX_PHASES  9
-#define MAX_MIXERS  64
-#define MAX_EXPOS   32
+#define C9X_MAX_MIXERS  64
+#define C9X_MAX_EXPOS   32
 #define MAX_CURVES  16
 #define MAX_POINTS  17
 #define MAX_GVARS   5
 
 #define NUM_SAFETY_CHNOUT 16
-#define NUM_CHNOUT        32 // number of real output channels CH1-CH8
+#define C9X_NUM_CHNOUT    32 // number of real output channels
 #define NUM_CSW           32 // number of custom switches
 #define NUM_FSW           32 // number of functions assigned to switches
 
@@ -77,13 +77,6 @@ const uint8_t modn12x3[4][4]= {
 #define STK_P1   5
 #define STK_P2   6
 #define STK_P3   7
-#define NUM_TEMPLATES    DIM(n_Templates)
-#define NUM_TEMPLATE_MIX 8
-#define TEMPLATE_NLEN    15
-
-#define TRIM_ON  0
-#define TRIM_OFF 1
-#define TRIM_OFFSET 2
 
 #define DR_HIGH   0
 #define DR_MID    1
@@ -117,10 +110,8 @@ const uint8_t modn12x3[4][4]= {
 #define DSW_SWB   20
 #define DSW_SWC   21
 
-#define NUM_KEYS TRM_RH_UP+1
-#define TRM_BASE TRM_LH_DWN
-
-#define MAX_ALERT_TIME   60
+// #define NUM_KEYS TRM_RH_UP+1
+// #define TRM_BASE TRM_LH_DWN
 
 #define SUB_MODE_V     1
 #define SUB_MODE_H     2
@@ -157,48 +148,58 @@ enum EnumKeys {
 #define SW_BASE      SW_ThrCt
 #define SW_BASE_DIAG SW_ThrCt
 
-#define MAX_PSWITCH   (SW_Trainer-SW_ThrCt+1)  // 9 physical switches
-#define MAX_SWITCH    (MAX_PSWITCH+NUM_CSW)
-#define SWITCH_ON     (1+MAX_SWITCH)
-#define SWITCH_OFF    (-SWITCH_ON)
-#define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
+// #define MAX_PSWITCH   (SW_Trainer-SW_ThrCt+1)  // 9 physical switches
+// #define MAX_SWITCH    (MAX_PSWITCH+NUM_CSW)
+// #define SWITCH_ON     (1+MAX_SWITCH)
+// #define SWITCH_OFF    (-SWITCH_ON)
+// #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
 
-#define CURVE_BASE   7
+// #define CURVE_BASE   7
 #define CSWITCH_STR  "----    v>ofs   v<ofs   |v|>ofs |v|<ofs AND     OR      XOR     ""v1==v2  ""v1!=v2  ""v1>v2   ""v1<v2   ""v1>=v2  ""v1<=v2  ""d>=ofs  ""|d|>=ofs"
 #define CSW_NUM_FUNC 16
 #define CSW_LEN_FUNC 8
 
-// TODO enum here!
-#define CS_OFF       0
-#define CS_VPOS      1  //v>offset
-#define CS_VNEG      2  //v<offset
-#define CS_APOS      3  //|v|>offset
-#define CS_ANEG      4  //|v|<offset
-#define CS_AND       5
-#define CS_OR        6
-#define CS_XOR       7
-#define CS_EQUAL     8
-#define CS_NEQUAL    9
-#define CS_GREATER   10
-#define CS_LESS      11
-#define CS_EGREATER  12
-#define CS_ELESS     13
-#define CS_DPOS      14  //d>offset
-#define CS_DAPOS     15  //|d|>offset
-#define CS_MAXF      15  //max function
+enum CSFunction {
+  CS_FN_OFF,
+  CS_FN_VPOS,
+  CS_FN_VNEG,
+  CS_FN_APOS,
+  CS_FN_ANEG,
+  CS_FN_AND,
+  CS_FN_OR,
+  CS_FN_XOR,
+  CS_FN_EQUAL,
+  CS_FN_NEQUAL,
+  CS_FN_GREATER,
+  CS_FN_LESS,
+  CS_FN_EGREATER,
+  CS_FN_ELESS,
+  CS_FN_DPOS,
+  CS_FN_DAPOS,
+  CS_FN_MAXF
+};
 
-#define CS_VOFS       0
-#define CS_VBOOL      1
-#define CS_VCOMP      2
-#define CS_STATE(x)   (((x)<CS_AND || (x)>CS_ELESS) ? CS_VOFS : ((x)<CS_EQUAL ? CS_VBOOL : CS_VCOMP))
+enum CSFunctionFamily {
+  CS_FAMILY_VOFS,
+  CS_FAMILY_VBOOL,
+  CS_FAMILY_VCOMP
+};
+
+inline CSFunctionFamily getCSFunctionFamily(int fn)
+{
+  return ((fn<CS_FN_AND || fn>CS_FN_ELESS) ? CS_FAMILY_VOFS : (fn<CS_FN_EQUAL ? CS_FAMILY_VBOOL : CS_FAMILY_VCOMP));
+}
 
 #define CHAR_FOR_NAMES " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-."
 #define CHAR_FOR_NAMES_REGEX "[ A-Za-z0-9_.-,]*"
 
-#define SWASH_TYPE_120   1
-#define SWASH_TYPE_120X  2
-#define SWASH_TYPE_140   3
-#define SWASH_TYPE_90    4
+enum HeliSwashTypes {
+ HELI_SWASH_TYPE_120=1,
+ HELI_SWASH_TYPE_120X,
+ HELI_SWASH_TYPE_140,
+ HELI_SWASH_TYPE_90
+};
+
 
 #define NUM_STICKS          4
 #define NUM_POTS            3 // TODO should be 4 now!
@@ -460,7 +461,7 @@ enum MltpxValue {
 class MixData {
   public:
     MixData() { clear(); }
-    unsigned int destCh;            //        1..NUM_CHNOUT
+    unsigned int destCh;            //        1..C9X_NUM_CHNOUT
     RawSource srcRaw;
     int     weight;
     int     differential;
@@ -590,7 +591,7 @@ class FrSkyErAlarmData {
 class FrSkyRSSIAlarm {
   public:
     FrSkyRSSIAlarm() { clear(0); }
-    int level;
+    unsigned int level;
     int value;
     void clear(unsigned int level) { this->level = level; value = 50;}
 };
@@ -725,13 +726,13 @@ class ModelData {
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
     PhaseData phaseData[MAX_PHASES];
-    MixData   mixData[MAX_MIXERS];
-    LimitData limitData[NUM_CHNOUT];
-    ExpoData  expoData[MAX_EXPOS];
+    MixData   mixData[C9X_MAX_MIXERS];
+    LimitData limitData[C9X_NUM_CHNOUT];
+    ExpoData  expoData[C9X_MAX_EXPOS];
     CurveData curves[MAX_CURVES];
     CustomSwData  customSw[NUM_CSW];
     FuncSwData    funcSw[NUM_FSW];
-    SafetySwData  safetySw[NUM_CHNOUT];
+    SafetySwData  safetySw[C9X_NUM_CHNOUT];
     SwashRingData swashRingData;
     int   ppmFrameLength;
     unsigned int  thrTraceSrc;
@@ -964,7 +965,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   }
 
   // mixers
-  for (int i=0; i<MAX_MIXERS; i++) {
+  for (int i=0; i<C9X_MAX_MIXERS; i++) {
     if (model.mixData[i].srcRaw.type == SOURCE_TYPE_STICK) {
       model.mixData[i].srcRaw.index = applyStickMode(model.mixData[i].srcRaw.index + 1, mode) - 1;
     }
@@ -973,19 +974,20 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   // virtual switches
   for (int i=0; i<NUM_CSW; i++) {
     RawSource source;
-    switch (CS_STATE(model.customSw[i].func)) {
-      case CS_VCOMP:
+    switch (getCSFunctionFamily(model.customSw[i].func)) {
+      case CS_FAMILY_VCOMP:
         source = RawSource(model.customSw[i].val2);
         if (source.type == SOURCE_TYPE_STICK)
           source.index = applyStickMode(source.index + 1, mode) - 1;
         model.customSw[i].val2 = source.toValue();
         // no break
-      case CS_VOFS:
+      case CS_FAMILY_VOFS:
         source = RawSource(model.customSw[i].val1);
         if (source.type == SOURCE_TYPE_STICK)
           source.index = applyStickMode(source.index + 1, mode) - 1;
         model.customSw[i].val1 = source.toValue();
         break;
+      default:
         break;
     }
   }

@@ -63,7 +63,7 @@ private:
       else
         return "grey";
     }
-    QString cSwitchString(CustomSwData * customSw, const ModelData & Model);
+
     int ModelHasExpo(ExpoData * ExpoArray, ExpoData expo, bool * expoused);
     bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);
     int ModelHasMix(MixData * mixArray, MixData mix, bool * mixused);

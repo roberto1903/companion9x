@@ -94,33 +94,25 @@ SET( companion9x_SRCS
      ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
      th9xeeprom.cpp
      th9xinterface.cpp
-     th9xsimulator.cpp
-     th9ximport.cpp
      er9xeeprom.cpp
      er9xinterface.cpp
-     er9xsimulator.cpp
-     er9ximport.cpp
      gruvin9xeeprom.cpp
      gruvin9xinterface.cpp  
      open9xeeprom.cpp
      open9xStockeeprom.cpp
      open9xinterface.cpp
-     open9xsimulator.cpp  
-     open9ximport.cpp
-     open9xM128simulator.cpp
-     open9xM128import.cpp
      open9xGruvin9xeeprom.cpp
-     open9xGruvin9xsimulator.cpp
-     open9xGruvin9ximport.cpp
      open9xSky9xeeprom.cpp
-     open9xSky9xsimulator.cpp
-     open9xSky9ximport.cpp
-     open9xx9dsimulator.cpp
-     open9xx9dimport.cpp
      ersky9xeeprom.cpp
      ersky9xinterface.cpp
-     ersky9ximport.cpp
+     open9xx9dsimulator.cpp
+     open9xSky9xsimulator.cpp
+     open9xGruvin9xsimulator.cpp
+     open9xM128simulator.cpp
+     open9xsimulator.cpp  
      ersky9xsimulator.cpp
+     er9xsimulator.cpp
+     th9xsimulator.cpp
      node.cpp
      edge.cpp
      helpers.cpp

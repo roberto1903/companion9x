@@ -596,15 +596,15 @@ class CustomSwitchField: public TransformedField {
       v1 = csw.val1;
       v2 = csw.val2;
 
-      if ((csw.func >= CS_VPOS && csw.func <= CS_ANEG) || csw.func >= CS_EQUAL) {
+      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
         v1 = open9xFromSource(RawSource(csw.val1), board);
       }
 
-      if (csw.func >= CS_EQUAL && csw.func <= CS_ELESS) {
+      if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
         v2 = open9xFromSource(RawSource(csw.val2), board);
       }
 
-      if (csw.func >= CS_AND && csw.func <= CS_XOR) {
+      if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
         v1 = open9xFromSwitch(RawSwitch(csw.val1), board);
         v2 = open9xFromSwitch(RawSwitch(csw.val2), board);
       }
@@ -616,15 +616,15 @@ class CustomSwitchField: public TransformedField {
       csw.val1 = v1;
       csw.val2 = v2;
 
-      if ((csw.func >= CS_VPOS && csw.func <= CS_ANEG) || csw.func >= CS_EQUAL) {
+      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
         csw.val1 = open9xToSource(v1, board).toValue();
       }
 
-      if (csw.func >= CS_EQUAL && csw.func <= CS_ELESS) {
+      if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
         csw.val2 = open9xToSource(v2, board).toValue();
       }
 
-      if (csw.func >= CS_AND && csw.func <= CS_XOR) {
+      if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
         csw.val1 = open9xToSwitch(v1, board).toValue();
         csw.val2 = open9xToSwitch(v2, board).toValue();
       }
@@ -753,6 +753,7 @@ class CustomFunctionField: public TransformedField {
 class FrskyScreenField: public DataField {
   public:
     FrskyScreenField(FrSkyScreenData & screen):
+      DataField("Frsky Screen"),
       screen(screen)
     {
       for (int i=0; i<4; i++) {
@@ -801,7 +802,7 @@ class FrskyScreenField: public DataField {
     StructField numbers;
 };
 
-const int rssiLevelConversion[2][8] = { {0, 2, 1, 3, 2, 0, 3, 1}, {0, 1, 1, 2, 2, 3, 3, 4} };
+const int rssiLevelConversion[2][8] = { {0, 2, 1, 3, 2, 0, 3, 1}, {0, 1, 1, 2, 2, 3, 3, 0} };
 
 class FrskyField: public StructField {
   public:
@@ -809,21 +810,21 @@ class FrskyField: public StructField {
       StructField("FrSky")
     {
       for (int i=0; i<2; i++) {
-        Append(new UnsignedField<8>(frsky.channels[i].ratio));
-        Append(new SignedField<12>(frsky.channels[i].offset));
-        Append(new UnsignedField<4>(frsky.channels[i].type));
+        Append(new UnsignedField<8>(frsky.channels[i].ratio, "Ratio"));
+        Append(new SignedField<12>(frsky.channels[i].offset, "Offset"));
+        Append(new UnsignedField<4>(frsky.channels[i].type, "Type"));
         for (int j=0; j<2; j++)
-          Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value));
+          Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value, "Alarm value"));
         for (int j=0; j<2; j++)
           Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
         for (int j=0; j<2; j++)
           Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
-        Append(new UnsignedField<2>(frsky.channels[i].multiplier));
+        Append(new UnsignedField<2>(frsky.channels[i].multiplier, "Multiplier"));
       }
 
       if (IS_ARM(board)) {
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< SignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
           Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
         }
         Append(new UnsignedField<8>(frsky.usrProto));
@@ -856,8 +857,8 @@ class FrskyField: public StructField {
         Append(new SignedField<4>(frsky.varioMin));
         Append(new SignedField<4>(frsky.varioMax));
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< SignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
-          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50, 0, 100, "RSSI value"));
         }
         for (int i=0; i<2; i++) {
           Append(new FrskyScreenField(frsky.screens[i]));

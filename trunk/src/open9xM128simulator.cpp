@@ -17,17 +17,85 @@
 #include "open9xM128simulator.h"
 #include "open9xinterface.h"
 
+#define SIMU
+#define SIMU_EXCEPTIONS
 #define PCBSTD
-#define M128
+#define CPUM128
+#define HELI
+#define TEMPLATES
+#define SPLASH
+#define FLIGHT_PHASES
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
+#define VARIO
+#define PPM_UNIT_PERCENT_PREC1
+#define AUDIO
+#define HAPTIC
+#define AUTOSWITCH
+#define GRAPHICS
+#define CURVES
+#define XCURVES
+#define GVARS
+#define BOLD_FONT
+#define VOICE
+
+#define EEPROM_VARIANT 3
+
+#undef min
+#undef max
+
+#ifndef __GNUC__
+#include "../winbuild/winbuild.h"
+#endif
+
+#include <exception>
 
 namespace Open9xM128 {
+#include "../open9x/stock/board_stock.cpp"
+#include "../open9x/eeprom_avr.cpp"
+#include "../open9x/open9x.cpp"
+#include "../open9x/pulses_avr.cpp"
+#include "../open9x/stamp.cpp"
+#include "../open9x/menus.cpp"
+#include "../open9x/model_menus.cpp"
+#include "../open9x/general_menus.cpp"
+#include "../open9x/main_views.cpp"
+#include "../open9x/statistics_views.cpp"
+#include "../open9x/lcd.cpp"
+#include "../open9x/keys.cpp"
+#include "../open9x/simpgmspace.cpp"
+#include "../open9x/templates.cpp"
+#include "../open9x/translations.cpp"
+#include "../open9x/audio_avr.cpp"
+#include "../open9x/stock/voice.cpp"
+#include "../open9x/frsky.cpp"
+#include "../open9x/translations/tts_en.cpp"
+#include "../open9x/haptic.cpp"
+
+int16_t g_anas[NUM_STICKS+NUM_POTS];
+
+uint16_t anaIn(uint8_t chan)
+{
+  if (chan == 7)
+    return 150;
+  else
+    return g_anas[chan];
+}
+
+bool hasExtendedTrims()
+{
+  return g_model.extendedTrims;
+}
+
+uint8_t getStickMode()
+{
+  return g_eeGeneral.stickMode;
+}
+
 #define NAMESPACE_IMPORT
 #include "simulatorimport.h"
-#include "../open9x/simpgmspace.h"
-uint8_t getStickMode();
+
 }
 
 using namespace Open9xM128;
@@ -82,7 +150,7 @@ void Open9xM128Simulator::setValues(TxInputs &inputs)
 
 void Open9xM128Simulator::setTrim(unsigned int idx, int value)
 {
-  idx = modn12x3[getStickMode()][idx] - 1;
+  idx = Open9xM128::modn12x3[4*getStickMode()+idx-1];
   uint8_t phase = getTrimFlightPhase(getFlightPhase(), idx);
   setTrimValue(phase, idx, value);
 }
@@ -96,7 +164,7 @@ void Open9xM128Simulator::getTrims(Trims & trims)
   }
 
   for (int i=0; i<2; i++) {
-    uint8_t idx = modn12x3[getStickMode()][i] - 1;
+    uint8_t idx = Open9xM128::modn12x3[4*getStickMode()+i-1];
     int16_t tmp = trims.values[i];
     trims.values[i] = trims.values[idx];
     trims.values[idx] = tmp;

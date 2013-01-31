@@ -126,7 +126,7 @@ PACK(typedef struct t_Th9xLimitData {
 #define MLTPX_REP  2
 
 PACK(typedef struct t_Th9xMixData {
-  uint8_t destCh:4;     // 1..NUM_CHNOUT,X1-X4
+  uint8_t destCh:4;     // 1..C9X_NUM_CHNOUT,X1-X4
   uint8_t mixMode:2;    // + * =
   uint8_t dmy1:2;       //
 

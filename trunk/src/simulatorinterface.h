@@ -33,7 +33,7 @@ class TxOutputs {
       memset(this, 0, sizeof(TxOutputs));
     }
 
-    int16_t chans[NUM_CHNOUT];
+    int16_t chans[C9X_NUM_CHNOUT];
     bool vsw[32]; /* TODO NUM_VIRTUAL_SWITCHES */
     unsigned int beep;
 };

@@ -73,12 +73,14 @@ inline void applyStickModeToModel(Ersky9xModelData_v10 & model, unsigned int mod
   for (int i=0; i<ERSKY9X_MAX_MIXERS_V10; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<ERSKY9X_NUM_CSW_V10; i++) {
-    switch (CS_STATE(model.customSw[i].func)) {
-      case CS_VCOMP:
+    switch (getCSFunctionFamily(model.customSw[i].func)) {
+      case CS_FAMILY_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
         // no break
-      case CS_VOFS:
+      case CS_FAMILY_VOFS:
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
+      default:
         break;
     }
   }
@@ -103,12 +105,14 @@ inline void applyStickModeToModel(Ersky9xModelData_v11 & model, unsigned int mod
   for (int i=0; i<ERSKY9X_MAX_MIXERS_V11; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<ERSKY9X_NUM_CSW_V11; i++) {
-    switch (CS_STATE(model.customSw[i].func)) {
-      case CS_VCOMP:
+    switch (getCSFunctionFamily(model.customSw[i].func)) {
+      case CS_FAMILY_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
         // no break
-      case CS_VOFS:
+      case CS_FAMILY_VOFS:
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
+      default:
         break;
     }
   }

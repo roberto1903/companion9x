@@ -88,7 +88,7 @@ PACK(typedef struct t_Open9xArmExpoData_v212 {
 }) Open9xArmExpoData_v212;
 
 PACK(typedef struct t_Open9xArmMixData_v208 {
-  uint8_t destCh;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch;
@@ -111,7 +111,7 @@ PACK(typedef struct t_Open9xArmMixData_v208 {
 }) Open9xArmMixData_v208;
 
 PACK(typedef struct t_Open9xArmMixData_v209 {
-  uint8_t destCh;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch;
@@ -134,7 +134,7 @@ PACK(typedef struct t_Open9xArmMixData_v209 {
 }) Open9xArmMixData_v209;
 
 PACK(typedef struct t_Open9xArmMixData_v210 {
-  uint8_t destCh;          // 0, 1..NUM_CHNOUT
+  uint8_t destCh;          // 0, 1..C9X_NUM_CHNOUT
   int8_t  phase;           // -5=!FP4, 0=normal, 5=FP4
   int8_t  weight;
   int8_t  swtch;

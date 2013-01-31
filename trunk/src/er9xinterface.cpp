@@ -74,12 +74,15 @@ inline void applyStickModeToModel(Er9xModelData & model, unsigned int mode)
   for (int i=0; i<ER9X_MAX_MIXERS; i++)
     model.mixData[i].srcRaw = applyStickMode(model.mixData[i].srcRaw, mode);
   for (int i=0; i<ER9X_NUM_CSW; i++) {
-    switch (CS_STATE(model.customSw[i].func)) {
-      case CS_VCOMP:
+    switch (getCSFunctionFamily(model.customSw[i].func)) {
+      case CS_FAMILY_VCOMP:
         model.customSw[i].v2 = applyStickMode(model.customSw[i].v2, mode);
         // no break
-      case CS_VOFS:
+      case CS_FAMILY_VOFS:
         model.customSw[i].v1 = applyStickMode(model.customSw[i].v1, mode);
+        break;
+      default:
+        break;
     }
   }
   model.swashCollectiveSource = applyStickMode(model.swashCollectiveSource, mode);

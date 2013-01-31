@@ -257,96 +257,9 @@ QString compareDialog::getTrimInc(ModelData * g_model)
   }
 }
 
-QString compareDialog::cSwitchString(CustomSwData * customSw, const ModelData & Model)
-{
-  RawSource source=RawSource(customSw->val1);
-  QString tstr = "";
-  if (customSw->func) {
-    switch CS_STATE(customSw->func) {
-      case CS_VOFS:
-        if (customSw->val1)
-          tstr += source.toString();
-        else
-          tstr += "0";
-        tstr.remove(" ");
-        if (customSw->func == CS_APOS || customSw->func == CS_ANEG)
-          tstr = "|" + tstr + "|";
-        if(customSw->func==CS_DAPOS)
-          tstr = "|d(" + tstr + ")|";
-        if(customSw->func==CS_DPOS)
-              tstr = "d(" + tstr + ")";        
-        if (customSw->func == CS_APOS || customSw->func == CS_VPOS || customSw->func == CS_DAPOS || customSw->func== CS_DPOS)
-          tstr += " &gt; ";
-        if (customSw->func == CS_ANEG || customSw->func == CS_VNEG)
-          tstr += " &lt; ";
-        tstr += QString::number(source.getStep(Model)*(customSw->val2+source.getRawOffset(Model))+source.getOffset(Model));
-//        tstr += QString::number(customSw->val2);
-        break;
-      case CS_VBOOL:
-        tstr = RawSwitch(customSw->val1).toString();
-        switch (customSw->func) {
-          case CS_AND:
-            tstr += " AND ";
-            break;
-          case CS_OR:
-            tstr += " OR ";
-            break;
-          case CS_XOR:
-            tstr += " XOR ";
-            break;
-          default:
-            break;
-        }
-        tstr += RawSwitch(customSw->val2).toString();
-        break;
-      case CS_VCOMP:
-        if (customSw->val1)
-          tstr += RawSource(customSw->val1).toString();
-        else
-          tstr += "0";
-        switch (customSw->func) {
-          case CS_EQUAL:
-            tstr += " = ";
-            break;
-          case CS_NEQUAL:
-            tstr += " != ";
-            break;
-          case CS_GREATER:
-            tstr += " &gt; ";
-            break;
-          case CS_LESS:
-            tstr += " &lt; ";
-            break;
-          case CS_EGREATER:
-            tstr += " &gt;= ";
-            break;
-          case CS_ELESS:
-            tstr += " &lt;= ";
-            break;
-          default:
-            break;
-        }
-        if (customSw->val2)
-          tstr += RawSource(customSw->val2).toString();
-        else
-          tstr += "0";
-        break;
-      default:
-        break;
-    }
-    if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
-      if (customSw->delay)
-        tstr += tr(" Delay %1 sec").arg(customSw->delay/2.0);
-      if (customSw->duration)
-        tstr += tr(" Duration %1 sec").arg(customSw->duration/2.0);
-    }
-  }
-  return tstr;
-}
-
 int compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo, bool * expoused)
 {
-  for (int i=0; i< MAX_EXPOS; i++) {
+  for (int i=0; i< C9X_MAX_EXPOS; i++) {
     if ((memcmp(&expo,&ExpoArray[i],sizeof(ExpoData))==0) && (expoused[i]==false)) {
       return i;
     }
@@ -356,7 +269,7 @@ int compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo, bool * expo
 
 bool compareDialog::ChannelHasExpo(ExpoData * expoArray, uint8_t destCh)
 {
-  for (int i=0; i< MAX_EXPOS; i++) {
+  for (int i=0; i< C9X_MAX_EXPOS; i++) {
     if ((expoArray[i].chn==destCh)&&(expoArray[i].mode!=0)) {
       return true;
     }
@@ -366,7 +279,7 @@ bool compareDialog::ChannelHasExpo(ExpoData * expoArray, uint8_t destCh)
 
 int compareDialog::ModelHasMix(MixData * mixArray, MixData mix, bool * mixused)
 {
-  for (int i=0; i< MAX_MIXERS; i++) {
+  for (int i=0; i< C9X_MAX_MIXERS; i++) {
     if ((memcmp(&mix,&mixArray[i],sizeof(MixData))==0) && (mixused[i]==false)) {
       return i;
     }
@@ -376,7 +289,7 @@ int compareDialog::ModelHasMix(MixData * mixArray, MixData mix, bool * mixused)
 
 bool compareDialog::ChannelHasMix(MixData * mixArray, uint8_t destCh)
 {
-  for (int i=0; i< MAX_MIXERS; i++) {
+  for (int i=0; i< C9X_MAX_MIXERS; i++) {
     if (mixArray[i].destCh==destCh) {
       return true;
     }
@@ -883,8 +796,8 @@ void compareDialog::printGvars()
 void compareDialog::printExpos()
 {
   QString color;
-  bool expoused[MAX_EXPOS]={false};
-  bool expoused2[MAX_EXPOS]={false};
+  bool expoused[C9X_MAX_EXPOS]={false};
+  bool expoused2[C9X_MAX_EXPOS]={false};
 
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Expo/Dr Settings"));
@@ -894,7 +807,7 @@ void compareDialog::printExpos()
       str.append("<tr>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
-      for (int j=0; j<MAX_EXPOS; j++) {    
+      for (int j=0; j<C9X_MAX_EXPOS; j++) {    
         if (g_model1->expoData[j].chn==i){
           int expo=ModelHasExpo(g_model2->expoData, g_model1->expoData[j],expoused);
           if (expo>-1) {
@@ -973,7 +886,7 @@ void compareDialog::printExpos()
       str.append("<td width=\"10%\" align=\"center\" valign=\"middle\"><b>"+getStickStr(i)+"</b></td>");
       str.append("<td width=\"45%\">");
       str.append("<table border=0 cellspacing=0 cellpadding=0>");
-      for (int j=0; j<MAX_EXPOS; j++) {
+      for (int j=0; j<C9X_MAX_EXPOS; j++) {
         if (g_model2->expoData[j].chn==i){
           int expo=ModelHasExpo(g_model1->expoData, g_model2->expoData[j], expoused2);
           if (expo>-1) {
@@ -1325,10 +1238,9 @@ void compareDialog::printSwitches()
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td><h2>"+tr("Custom Switches")+"</h2></td></tr>");
     str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
-    for(int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
-      
-      QString sw1=cSwitchString(&g_model1->customSw[i], *g_model1);
-      QString sw2=cSwitchString(&g_model2->customSw[i], *g_model2);
+    for (int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
+      QString sw1 = getCustomSwitchStr(&g_model1->customSw[i], *g_model1);
+      QString sw2 = getCustomSwitchStr(&g_model2->customSw[i], *g_model2);
       if (!(sw1.isEmpty() && sw2.isEmpty())) {
         str.append("<tr>");
         color=getColor1(sw1,sw2);

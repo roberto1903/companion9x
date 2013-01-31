@@ -651,15 +651,15 @@ t_Ersky9xCustomSwData_v10::t_Ersky9xCustomSwData_v10(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = ersky9xFromSource_v10(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     v2 = ersky9xFromSource_v10(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = er9xFromSwitch(RawSwitch(c9x.val1));
     v2 = er9xFromSwitch(RawSwitch(c9x.val2));
   }
@@ -679,15 +679,15 @@ Ersky9xCustomSwData_v10::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = ersky9xToSource_v10(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = ersky9xToSource_v10(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = er9xToSwitch(v1).toValue();
     c9x.val2 = er9xToSwitch(v2).toValue();
   }
@@ -701,15 +701,15 @@ t_Ersky9xCustomSwData_v11::t_Ersky9xCustomSwData_v11(CustomSwData &c9x)
   v1 = c9x.val1;
   v2 = c9x.val2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     v1 = ersky9xFromSource_v11(RawSource(c9x.val1));
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     v2 = ersky9xFromSource_v11(RawSource(c9x.val2));
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     v1 = er9xFromSwitch(RawSwitch(c9x.val1));
     v2 = er9xFromSwitch(RawSwitch(c9x.val2));
   }
@@ -729,15 +729,15 @@ Ersky9xCustomSwData_v11::operator CustomSwData ()
   c9x.val1 = v1;
   c9x.val2 = v2;
 
-  if ((c9x.func >= CS_VPOS && c9x.func <= CS_ANEG) || c9x.func >= CS_EQUAL) {
+  if ((c9x.func >= CS_FN_VPOS && c9x.func <= CS_FN_ANEG) || c9x.func >= CS_FN_EQUAL) {
     c9x.val1 = ersky9xToSource_v11(v1).toValue();
   }
 
-  if (c9x.func >= CS_EQUAL) {
+  if (c9x.func >= CS_FN_EQUAL) {
     c9x.val2 = ersky9xToSource_v11(v2).toValue();
   }
 
-  if (c9x.func >= CS_AND && c9x.func <= CS_XOR) {
+  if (c9x.func >= CS_FN_AND && c9x.func <= CS_FN_XOR) {
     c9x.val1 = er9xToSwitch(v1).toValue();
     c9x.val2 = er9xToSwitch(v2).toValue();
   }
@@ -984,7 +984,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     // expoData
     for (unsigned int i=0; i<NUM_STICKS; i++) {
       // first we find the switches
-      for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+      for (int e=0; e<C9X_MAX_EXPOS && c9x.expoData[e].mode; e++) {
         if (c9x.expoData[e].chn == i) {
           if (c9x.expoData[e].swtch.type!=SWITCH_TYPE_NONE) {
             if (!expoData[i].drSw1)
@@ -1031,7 +1031,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
           }
         }
         for (int mode=0; mode<2; mode++) {
-          for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+          for (int e=0; e<C9X_MAX_EXPOS && c9x.expoData[e].mode; e++) {
             if (c9x.expoData[e].chn == i && !c9x.expoData[e].phases) {
               if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xToSwitch(swtch1) || c9x.expoData[e].swtch == er9xToSwitch(swtch2)) {
                 if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
@@ -1134,8 +1134,8 @@ t_Ersky9xModelData_v10::operator ModelData ()
 
   // expoData
   int e = 0;
-  for (int ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
-    for (int dr = 0, pos = 0; dr < 3 && e < MAX_EXPOS; dr++, pos++) {
+  for (int ch = 0; ch < 4 && e < C9X_MAX_EXPOS; ch++) {
+    for (int dr = 0, pos = 0; dr < 3 && e < C9X_MAX_EXPOS; dr++, pos++) {
       if ((dr == 0 && !expoData[ch].drSw1) || (dr == 1 && !expoData[ch].drSw2))
         dr = 2;
       if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
@@ -1155,7 +1155,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
       }
       else {
         c9x.expoData[e].mode = 2;
-        if (e < MAX_EXPOS - 1) {
+        if (e < C9X_MAX_EXPOS - 1) {
           c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
           c9x.expoData[++e].chn = ch;
           c9x.expoData[e].mode = 1;
@@ -1263,7 +1263,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     // expoData
     for (unsigned int i=0; i<4; i++) {
       // first we find the switches
-      for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+      for (int e=0; e<C9X_MAX_EXPOS && c9x.expoData[e].mode; e++) {
         if (c9x.expoData[e].chn == i) {
           if (c9x.expoData[e].swtch.type!=SWITCH_TYPE_NONE) {
             if (!expoData[i].drSw1)
@@ -1310,7 +1310,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
           }
         }
         for (int mode=0; mode<2; mode++) {
-          for (int e=0; e<MAX_EXPOS && c9x.expoData[e].mode; e++) {
+          for (int e=0; e<C9X_MAX_EXPOS && c9x.expoData[e].mode; e++) {
             if (c9x.expoData[e].chn == i && !c9x.expoData[e].phases) {
               if (c9x.expoData[e].swtch.type==SWITCH_TYPE_NONE || c9x.expoData[e].swtch == er9xToSwitch(swtch1) || c9x.expoData[e].swtch == er9xToSwitch(swtch2)) {
                 if (c9x.expoData[e].mode == 3 || (c9x.expoData[e].mode==2 && mode==0) || (c9x.expoData[e].mode==1 && mode==1)) {
@@ -1426,8 +1426,8 @@ t_Ersky9xModelData_v11::operator ModelData ()
 
   // expoData
   int e = 0;
-  for (int ch = 0; ch < 4 && e < MAX_EXPOS; ch++) {
-    for (int dr = 0, pos = 0; dr < 3 && e < MAX_EXPOS; dr++, pos++) {
+  for (int ch = 0; ch < 4 && e < C9X_MAX_EXPOS; ch++) {
+    for (int dr = 0, pos = 0; dr < 3 && e < C9X_MAX_EXPOS; dr++, pos++) {
       if ((dr == 0 && !expoData[ch].drSw1) || (dr == 1 && !expoData[ch].drSw2))
         dr = 2;
       if (dr == 2 && !expoData[ch].expo[0][0][0] && !expoData[ch].expo[0][0][1] && !expoData[ch].expo[0][1][0] && !expoData[ch].expo[0][1][1])
@@ -1447,7 +1447,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
       }
       else {
         c9x.expoData[e].mode = 2;
-        if (e < MAX_EXPOS - 1) {
+        if (e < C9X_MAX_EXPOS - 1) {
           c9x.expoData[e + 1].swtch = c9x.expoData[e].swtch;
           c9x.expoData[++e].chn = ch;
           c9x.expoData[e].mode = 1;
