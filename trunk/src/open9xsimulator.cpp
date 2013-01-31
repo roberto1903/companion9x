@@ -95,10 +95,6 @@ uint8_t getStickMode()
   return g_eeGeneral.stickMode;
 }
 
-#define NAMESPACE_IMPORT
-#include "simulatorimport.h"
-#include "../open9x/simpgmspace.h"
-
 }
 
 using namespace Open9x;

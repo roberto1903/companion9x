@@ -14,69 +14,6 @@
  *
  */
 
-#ifdef NAMESPACE_IMPORT
-#undef NAMESPACE_IMPORT
-
-/* extern void StartEepromThread(const char *filename);
-extern void StartMainThread(bool tests);
-extern void StopEepromThread();
-extern void StopMainThread();
-
-extern volatile unsigned char pind, pine, ping, pinj, pinl;
-extern uint8_t portb, portc;
-
-#define INP_E_ID2     6
-#define OUT_E_BUZZER  3
-#define INP_G_RF_POW  1 */
-
-// TODO remove
-/* #define INP_P_KEY_EXT 5
-#define INP_P_KEY_MEN 4
-#define INP_P_KEY_LFT 3
-#define INP_P_KEY_RGT 2
-#define INP_P_KEY_UP  1
-#define INP_P_KEY_DWN 0
-
-#define INP_B_KEY_LFT 6
-#define INP_B_Trainer 5
-#define INP_B_KEY_RGT 5
-#define INP_B_KEY_UP  4
-#define INP_B_KEY_DWN 3
-#define INP_B_KEY_EXT 2
-#define INP_B_KEY_MEN 1
-#define INP_B_ID2     4
-
-#define OUT_C_LIGHT   0
-#define OUT_B_LIGHT   7 */
-
-extern uint8_t eeprom[];
-extern int16_t g_anas[NUM_STICKS+NUM_POTS];
-// extern int16_t g_chans512[C9X_NUM_CHNOUT];
-
-#if defined(PCBGRUVIN9X)
-extern volatile uint8_t g_rotenc[2];
-#endif
-
-#if defined(PCBSKY9X)
-extern volatile uint32_t g_rotenc[1];
-#endif
-
-// extern void per10ms();
-// extern bool getSwitch(int8_t swtch, bool nc=0);
-
-/* extern uint8_t getTrimFlightPhase(uint8_t idx, uint8_t phase);
-extern void setTrimValue(uint8_t phase, uint8_t idx, int16_t trim);
-extern int16_t getTrimValue(uint8_t phase, uint8_t idx);
-extern uint8_t getFlightPhase();
-extern bool hasExtendedTrims(); */
-// extern uint8_t main_thread_running;
-// extern char * main_thread_error;
-
-#ifdef FRSKY
-// extern int8_t frskyStreaming;
-#endif
-#endif
-
 #ifdef INIT_IMPORT
 #undef INIT_IMPORT
 #ifdef FRSKY

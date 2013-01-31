@@ -116,9 +116,6 @@ void resetTrims()
   GPIOC->IDR |= PIN_TRIM_RV_DN | PIN_TRIM_RV_UP | PIN_TRIM_RH_L | PIN_TRIM_RH_R;
 }
 
-#define NAMESPACE_IMPORT
-#include "simulatorimport.h"
-
 }
 
 using namespace Open9xX9D;
