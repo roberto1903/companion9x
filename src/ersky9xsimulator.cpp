@@ -115,9 +115,6 @@ void simuSetSwitch(uint8_t swtch, int8_t state)
   }
 }
 
-#define NAMESPACE_IMPORT
-#include "simulatorimport.h"
-
 #define GPIO_BUTTON_MENU                PIOB->PIO_PDSR
 #define GPIO_BUTTON_EXIT                PIOC->PIO_PDSR
 #define GPIO_BUTTON_UP                  PIOC->PIO_PDSR

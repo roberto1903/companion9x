@@ -111,9 +111,6 @@ uint8_t getStickMode()
   return g_eeGeneral.stickMode;
 }
 
-#define NAMESPACE_IMPORT
-#include "simulatorimport.h"
-
 }
 
 using namespace Open9xSky9x;
