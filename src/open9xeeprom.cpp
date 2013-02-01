@@ -924,7 +924,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   for (int i=0; i<maxMixers; i++)
     Append(new MixField(modelData.mixData[i], board));
   for (int i=0; i<maxChannels; i++)
-    Append(new LimitField(modelData.limitData[i]));
+    Append(new LimitField(modelData.limitData[i], board));
   for (int i=0; i<maxExpos; i++)
     Append(new ExpoField(modelData.expoData[i], board));
   Append(new CurvesField(modelData.curves, board));
