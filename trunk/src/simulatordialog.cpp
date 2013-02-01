@@ -34,19 +34,19 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     backLight = settings.value("backLight",0).toInt();
     switch (backLight) {
         case 1:
-            ui->lcd->setRgb(166,247,159);
+            ui->lcd->setBackgroundColor(166,247,159);
             break;
         case 2:
-            ui->lcd->setRgb(247,159,166);
+            ui->lcd->setBackgroundColor(247,159,166);
             break;
         case 3:
-            ui->lcd->setRgb(255,195,151);
+            ui->lcd->setBackgroundColor(255,195,151);
             break;
         case 4:
-            ui->lcd->setRgb(247,242,159);
+            ui->lcd->setBackgroundColor(247,242,159);
             break;
         default:
-            ui->lcd->setRgb(159,165,247);
+            ui->lcd->setBackgroundColor(159,165,247);
             break;
     }
     lightOn=NULL;
@@ -296,7 +296,7 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
    
     if (model_idx < 0) {
       windowName = QString(tr("Simulating Tx (%1)").arg(txInterface->getName()));
-      ui->lcd->setData(simulator->getLcd());
+      ui->lcd->setData(simulator->getLcd(), W, H);
     }
     else {
       ui->tabWidget->removeTab(0);

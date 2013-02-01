@@ -448,6 +448,7 @@ class LimitData {
     int   offset;
     int   ppmCenter;
     bool  symetrical;
+    char  name[6+1];
     void clear() { min = -100; max = +100; revert = false; offset = 0; ppmCenter = 0; symetrical = 0; }
 };
 

@@ -13,36 +13,49 @@
  * GNU General Public License for more details.
  *
  */
+
 #ifndef lcd_widget_h
 #define lcd_widget_h
 
 #include <QWidget>
 
-#define W           128
-#define H           64
-
 class lcdWidget : public QWidget {
   public:
     lcdWidget(QWidget * parent = 0):
       QWidget(parent),
-      lcd_buf(NULL),
+      lcdBuf(NULL),
+      previousBuf(NULL),
       lightEnable(false)
     {
-      memset(previous_buf, 0, W*H/8);
     }
 
-    void setData(uint8_t *buf)
+    ~lcdWidget()
     {
-      lcd_buf = buf;
+      if (previousBuf)
+        free(previousBuf);
     }
-    void setRgb(uint8_t R, uint8_t G, uint8_t B) {
-        r=R;
-        g=G;
-        b=B;
+
+    void setData(unsigned char *buf, int width, int height, int depth=1)
+    {
+      lcdBuf = buf;
+      lcdWidth = width;
+      lcdHeight = height;
+      lcdDepth = depth;
+      lcdSize = (width * ((height+7)/8)) * depth;
+      previousBuf = (unsigned char *)malloc(lcdSize);
+      memset(previousBuf, 0, lcdSize);
     }
+
+    void setBackgroundColor(int red, int green, int blue)
+    {
+      r = red;
+      g = green;
+      b = blue;
+    }
+
     void makeScreenshot(const QString & fileName)
     {
-      QPixmap buffer(2*W, 2*H);
+      QPixmap buffer(2*lcdWidth, 2*lcdHeight);
       QPainter p(&buffer);
       doPaint(p);
       buffer.toImage().save(fileName);
@@ -50,9 +63,9 @@ class lcdWidget : public QWidget {
 
     void onLcdChanged(bool light)
     {
-      if (light != lightEnable || memcmp(previous_buf, lcd_buf, W*H/8)) {
+      if (light != lightEnable || memcmp(previousBuf, lcdBuf, lcdSize)) {
         lightEnable = light;
-        memcpy(previous_buf, lcd_buf, W*H/8);
+        memcpy(previousBuf, lcdBuf, lcdSize);
         update();
       }
     }
@@ -65,34 +78,67 @@ class lcdWidget : public QWidget {
 
   protected:
 
-    uint8_t *lcd_buf;
+    int lcdWidth;
+    int lcdHeight;
+    int lcdDepth;
+    int lcdSize;
+
+    unsigned char *lcdBuf;
+    unsigned char *previousBuf;
 
     bool lightEnable;
-    uint8_t r,g,b;
-    
-    uint8_t previous_buf[W*H/8];
+    int r, g, b;
+
+    inline unsigned int PALETTE_IDX(int x, unsigned int mask)
+    {
+      int planSize = (lcdWidth * ((lcdHeight+7) / 8));
+      return (((lcdBuf[x] & mask) ? 0x1 : 0) + ((lcdBuf[planSize+x] & mask) ? 0x2 : 0) + ((lcdBuf[2*planSize+x] & mask) ? 0x4 : 0) + ((lcdBuf[3*planSize+x] & mask) ? 0x8 : 0));
+    }
 
     inline void doPaint(QPainter & p)
     {
       QRgb rgb;
+
       if (lightEnable)
         rgb = qRgb(r, g, b);
       else
         rgb = qRgb(161, 161, 161);
+
       p.setBackground(QBrush(rgb));
-      p.eraseRect(0, 0, 2*W, 2*H);
+      p.eraseRect(0, 0, 2*lcdWidth, 2*lcdHeight);
 
-      if (lcd_buf) {
-        rgb = qRgb(0, 0, 0);
+      if (lcdBuf) {
+        if (lcdDepth == 1) {
+          rgb = qRgb(0, 0, 0);
+          p.setPen(rgb);
+          p.setBrush(QBrush(rgb));
+        }
 
-        p.setPen(rgb);
-        p.setBrush(QBrush(rgb));
+        unsigned int previousDepth = 0xFF;
 
-        for (int x=0; x<W; x++) {
-          for (int y=0; y<H; y++) {
-            int idx = x+(y/8)*W;
-            if (lcd_buf[idx] & (1<<(y%8)))
-              p.drawRect(2*x, 2*y, 1, 1);
+        for (int y=0; y<lcdHeight; y++) {
+          unsigned int mask = (1 << (y%8));
+          int idx = (y/8)*lcdWidth;
+          for (int x=0; x<lcdWidth; x++, idx++) {
+            if (lcdDepth == 1) {
+              if (lcdBuf[idx] & mask)
+                p.drawRect(2*x, 2*y, 1, 1);
+            }
+            else {
+              unsigned int z = PALETTE_IDX(idx, mask);
+              if (z) {
+                if (z != previousDepth) {
+                  previousDepth = z;
+                  if (lightEnable)
+                    rgb = qRgb(r-(z*r)/15, g-(z*g)/15, b-(z*b)/15);
+                  else
+                    rgb = qRgb(161-(z*161)/15, 161-(z*161)/15, 161-(z*161)/15);
+                  p.setPen(rgb);
+                  p.setBrush(QBrush(rgb));
+                }
+                p.drawRect(2*x, 2*y, 1, 1);
+              }
+            }
           }
         }
       }
