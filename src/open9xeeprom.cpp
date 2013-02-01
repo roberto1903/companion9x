@@ -475,7 +475,7 @@ class ExpoField: public TransformedField {
 
 class LimitField: public StructField {
   public:
-    LimitField(LimitData & limit):
+    LimitField(LimitData & limit, BoardEnum board):
       StructField("Limit")
     {
       Append(new ConversionField< SignedField<8> >(limit.min, +100));
@@ -484,6 +484,8 @@ class LimitField: public StructField {
       Append(new SignedField<14>(limit.offset));
       Append(new BoolField<1>(limit.symetrical));
       Append(new BoolField<1>(limit.revert));
+      if (HAS_LARGE_LCD(board))
+        Append(new ZCharField<6>(limit.name));
     }
 };
 

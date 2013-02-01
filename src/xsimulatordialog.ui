@@ -1085,7 +1085,7 @@ QPushButton:checked {
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="xlcdWidget" name="lcd" native="true">
+          <widget class="lcdWidget" name="lcd" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -3067,9 +3067,9 @@ border-radius: 4px;
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>xlcdWidget</class>
+   <class>lcdWidget</class>
    <extends>QWidget</extends>
-   <header>xlcdwidget.h</header>
+   <header>lcdwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

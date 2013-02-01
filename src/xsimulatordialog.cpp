@@ -30,28 +30,10 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
     ui->lcd->setFocus();
 
     QSettings settings("companion9x", "companion9x");
-    backLight = settings.value("backLight",0).toInt();
-    switch (backLight) {
-        case 1:
-            ui->lcd->setRgb(166,247,159);
-            break;
-        case 2:
-            ui->lcd->setRgb(247,159,166);
-            break;
-        case 3:
-            ui->lcd->setRgb(255,195,151);
-            break;
-        case 4:
-            ui->lcd->setRgb(247,242,159);
-            break;
-        default:
-            ui->lcd->setRgb(159,165,247);
-            break;
-    }
-
+    ui->lcd->setBackgroundColor(47, 123, 227);
     setupSticks();
     resize(0, 0); // to force min height, min width
-    this->setFixedSize(this->width(),this->height());
+    this->setFixedSize(this->width(), this->height());
 
 #ifdef JOYSTICKS
     bool js_enable=settings.value("js_support",false).toBool();
@@ -207,7 +189,7 @@ void xsimulatorDialog::onTimerEvent()
     if (simulator->lcdChanged(lightEnable)) {
       ui->lcd->onLcdChanged(lightEnable);
       if (lightOn!=lightEnable) {
-          lightOn=lightEnable;
+        lightOn=lightEnable;
       }
     }
   }
@@ -252,7 +234,7 @@ void xsimulatorDialog::loadParams(RadioData &radioData, const int model_idx)
    
     if (model_idx < 0) {
       windowName = QString(tr("Simulating Tx (%1)").arg(txInterface->getName()));
-      ui->lcd->setData(simulator->getLcd());
+      ui->lcd->setData(simulator->getLcd(), W, H, 4);
     }
     else {
       ui->tabWidget->removeTab(0);
