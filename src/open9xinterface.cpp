@@ -723,7 +723,11 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryTimeshift:
       return 1;
     case TelemetryMaxMultiplier:
-      return 8;      
+      if  (board==BOARD_SKY9X) {
+        return 32;
+      } else {
+        return 8;
+      }
     case DiffMixers:
       return 1;
     case PPMCenter:
