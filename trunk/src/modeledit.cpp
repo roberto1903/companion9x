@@ -2369,24 +2369,22 @@ void ModelEdit::tabTelemetry()
     ui->AltitudeGPS_CB->setChecked(g_model.frsky.FrSkyGpsAlt);
   }
   if (!GetEepromInterface()->getCapability(HasVario)) {
-    ui->VarioHS->invalidate();
     ui->varioLimitMax_DSB->hide();
-    ui->varioLimitMinOff_ChkB->hide();
     ui->varioLimitMin_DSB->hide();
+    ui->varioLimitCenterMin_DSB->hide();
+    ui->varioLimitCenterMax_DSB->hide();
     ui->varioLimit_label->hide();
+    ui->VarioLabel_1->hide();
+    ui->VarioLabel_2->hide();
+    ui->VarioLabel_3->hide();
+    ui->VarioLabel_4->hide();
     ui->varioSourceCB->hide();
     ui->varioSource_label->hide();
-  }
-  else {
-    ui->varioLimitMax_DSB->setValue((g_model.frsky.varioCenterMax/10.0)-1);
-    if (g_model.frsky.varioCenterMin==0) {
-      ui->varioLimitMinOff_ChkB->setChecked(true);
-      ui->varioLimitMin_DSB->setValue(-10);
-      ui->varioLimitMin_DSB->setDisabled(true);
-    } else {
-      ui->varioLimitMinOff_ChkB->setChecked(false);
-      ui->varioLimitMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-10.1);
-    }
+  } else {
+    ui->varioLimitMin_DSB->setValue(g_model.frsky.varioMin-10);
+    ui->varioLimitMax_DSB->setValue(g_model.frsky.varioMax+10);
+    ui->varioLimitCenterMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-0.5);
+    ui->varioLimitCenterMax_DSB->setValue((g_model.frsky.varioCenterMax/10.0)+0.5);
     ui->varioSourceCB->setCurrentIndex(g_model.frsky.varioSource);
   }
   if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
@@ -3444,29 +3442,34 @@ void ModelEdit::on_varioSourceCB_currentIndexChanged(int index)
 void ModelEdit::on_varioLimitMin_DSB_editingFinished()
 {
   if (telemetryLock) return;
-  g_model.frsky.varioCenterMin= round((ui->varioLimitMin_DSB->value()+10)*10)+1;
+  g_model.frsky.varioMin= round(ui->varioLimitMin_DSB->value()+10);
   updateSettings();    
-}
-
-void ModelEdit::on_varioLimitMinOff_ChkB_toggled(bool checked)
-{
-  if (telemetryLock) return;
-  g_model.frsky.varioCenterMin = checked;
-  if (!checked) {
-    telemetryLock=true;
-    ui->varioLimitMin_DSB->setValue(-10);
-    ui->varioLimitMin_DSB->setEnabled(true);
-    telemetryLock=false;
-  } else {
-    ui->varioLimitMin_DSB->setDisabled(true);
-  }
-  updateSettings();
 }
 
 void ModelEdit::on_varioLimitMax_DSB_editingFinished()
 {
   if (telemetryLock) return;
-  g_model.frsky.varioCenterMax= (ui->varioLimitMax_DSB->value()+1)*10;
+  g_model.frsky.varioMax= round(ui->varioLimitMax_DSB->value()-10);
+  updateSettings();    
+}
+
+void ModelEdit::on_varioLimitCenterMin_DSB_editingFinished()
+{
+  if (telemetryLock) return;
+  if (ui->varioLimitCenterMin_DSB->value()>ui->varioLimitCenterMax_DSB->value()) {
+    ui->varioLimitCenterMax_DSB->setValue(ui->varioLimitCenterMin_DSB->value());
+  }
+  g_model.frsky.varioCenterMin= round((ui->varioLimitCenterMin_DSB->value()+0.5)*10);
+  updateSettings();    
+}
+
+void ModelEdit::on_varioLimitCenterMax_DSB_editingFinished()
+{
+  if (telemetryLock) return;
+  if (ui->varioLimitCenterMin_DSB->value()>ui->varioLimitCenterMax_DSB->value()) {
+    ui->varioLimitCenterMax_DSB->setValue(ui->varioLimitCenterMin_DSB->value());
+  }
+  g_model.frsky.varioCenterMax= round((ui->varioLimitCenterMax_DSB->value()-0.5)*10);
   updateSettings();    
 }
 

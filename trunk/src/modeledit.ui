@@ -15141,7 +15141,17 @@
                   </property>
                   <item>
                    <property name="text">
-                    <string>FrSky</string>
+                    <string>Alti</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Alti+</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Vario</string>
                    </property>
                   </item>
                   <item>
@@ -15154,22 +15164,27 @@
                     <string>A2</string>
                    </property>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>Halcyon</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1,0,1">
-                  <item>
-                   <widget class="QDoubleSpinBox" name="varioLimitMin_DSB">
+                 <layout class="QGridLayout" name="gridLayout_65">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="VarioLabel_1">
+                    <property name="text">
+                     <string>Min</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="varioLimitCenterMin_DSB">
                     <property name="decimals">
                      <number>1</number>
                     </property>
                     <property name="minimum">
-                     <double>-10.000000000000000</double>
+                     <double>-2.000000000000000</double>
                     </property>
                     <property name="maximum">
                      <double>0.000000000000000</double>
@@ -15178,32 +15193,15 @@
                      <double>0.100000000000000</double>
                     </property>
                     <property name="value">
-                     <double>-10.000000000000000</double>
+                     <double>-0.500000000000000</double>
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QCheckBox" name="varioLimitMinOff_ChkB">
-                    <property name="text">
-                     <string>Off</string>
+                  <item row="1" column="2">
+                   <widget class="QDoubleSpinBox" name="varioLimitCenterMax_DSB">
+                    <property name="decimals">
+                     <number>1</number>
                     </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="VarioHS">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QDoubleSpinBox" name="varioLimitMax_DSB">
                     <property name="minimum">
                      <double>-1.000000000000000</double>
                     </property>
@@ -15214,7 +15212,69 @@
                      <double>0.100000000000000</double>
                     </property>
                     <property name="value">
-                     <double>-1.000000000000000</double>
+                     <double>0.500000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="3">
+                   <widget class="QDoubleSpinBox" name="varioLimitMax_DSB">
+                    <property name="decimals">
+                     <number>0</number>
+                    </property>
+                    <property name="minimum">
+                     <double>3.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>17.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>10.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QDoubleSpinBox" name="varioLimitMin_DSB">
+                    <property name="decimals">
+                     <number>0</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-17.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-3.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>-10.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <widget class="QLabel" name="VarioLabel_4">
+                    <property name="text">
+                     <string>Max</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="VarioLabel_2">
+                    <property name="text">
+                     <string>Center Max</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="VarioLabel_3">
+                    <property name="text">
+                     <string>Center Min</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -16260,7 +16320,7 @@
                   </item>
                   <item row="1" column="1">
                    <widget class="QGroupBox" name="CS1Bars">
-                    <layout class="QGridLayout" name="telemetryCS1Bars" columnstretch="1,0,1,0">
+                    <layout class="QGridLayout" name="telemetryCS1Bars" columnstretch="1,0,0,0">
                      <item row="0" column="0">
                       <widget class="QLabel" name="label_265">
                        <property name="text">
