@@ -292,8 +292,9 @@ private slots:
     void on_AltitudeGPS_CB_toggled(bool checked);
     void on_varioSourceCB_currentIndexChanged(int index);
     void on_varioLimitMin_DSB_editingFinished();
-    void on_varioLimitMinOff_ChkB_toggled(bool checked);
     void on_varioLimitMax_DSB_editingFinished();
+    void on_varioLimitCenterMin_DSB_editingFinished();
+    void on_varioLimitCenterMax_DSB_editingFinished();
     void telBarCBcurrentIndexChanged(int index);
     void ScreenTypeCBcurrentIndexChanged(int index);
     void telMaxSBeditingFinished();

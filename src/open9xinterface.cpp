@@ -588,9 +588,9 @@ int Open9xInterface::getCapability(const Capability capability)
       else
         return O9X_MAX_PHASES;
     case Gvars:
-    case GvarsAreNamed:
     case ExpoIsCurve:
       return 1;
+    case GvarsAreNamed:
     case GvarsFlightPhases:
       if (board == BOARD_STOCK)
         return 0;
