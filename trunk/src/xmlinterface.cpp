@@ -182,7 +182,7 @@ bool XmlInterface::save(RadioData &radioData)
 
         phases xphases;
         phases::phase_sequence & phases_sequence (xphases.phase());
-        for (int i=0; i<MAX_PHASES; i++) {
+        for (int i=0; i<C9X_MAX_PHASES; i++) {
           PhaseData & p = m.phaseData[i];
           if (i == 0 || p.swtch.type!=SWITCH_TYPE_NONE) {
             TrimType xtrim[4];

@@ -492,7 +492,7 @@ void ModelData::clear()
   memset(this, 0, sizeof(ModelData));
   ppmNCH = 8;
   ppmDelay = 300;
-  for (int i=0; i<MAX_PHASES; i++)
+  for (int i=0; i<C9X_MAX_PHASES; i++)
     phaseData[i].clear();
   for (int i=0; i<C9X_MAX_EXPOS; i++)
     expoData[i].clear();
@@ -507,10 +507,10 @@ void ModelData::clear()
     limitData[i].clear();
   for (int i=0; i<NUM_STICKS; i++)
     expoData[i].clear();
-  for (int i=0; i<NUM_CSW; i++)
+  for (int i=0; i<C9X_NUM_CSW; i++)
     customSw[i].clear();
   bool custom = GetEepromInterface()->getCapability(CustomCurves);
-  for (int i=0; i<MAX_CURVES; i++) {
+  for (int i=0; i<C9X_MAX_CURVES; i++) {
     if (!custom && i>=8)
       curves[i].clear(9);
     else
@@ -537,7 +537,7 @@ unsigned int ModelData::getTrimFlightPhase(uint8_t idx, int8_t phase)
 {
   // if (phase == -1) phase = getFlightPhase();
 
-  for (uint8_t i=0; i<MAX_PHASES; i++) {
+  for (uint8_t i=0; i<C9X_MAX_PHASES; i++) {
     if (phase == 0 || phaseData[phase].trimRef[idx] < 0) return phase;
     phase = phaseData[phase].trimRef[idx];
   }

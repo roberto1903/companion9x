@@ -418,7 +418,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    for (unsigned int i=0; i<NUM_FSW; i++)
+    for (unsigned int i=0; i<C9X_MAX_CUSTOM_FUNCTIONS; i++)
       if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch) trimSw = c9x.funcSw[i].swtch;
     beepANACenter = c9x.beepANACenter;
     pulsePol = c9x.pulsePol;*/

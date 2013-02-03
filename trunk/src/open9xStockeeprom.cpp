@@ -2419,7 +2419,7 @@ t_Open9xModelData_v205::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<O9X_MAX_TIMERS; i++)
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
@@ -2511,7 +2511,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
     switch(c9x.protocol) {
       case PPM:
@@ -2610,7 +2610,7 @@ t_Open9xModelData_v208::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<O9X_MAX_TIMERS; i++)
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
@@ -2710,7 +2710,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
     switch(c9x.protocol) {
       case PPM:
@@ -2821,7 +2821,7 @@ t_Open9xModelData_v209::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<O9X_MAX_TIMERS; i++)
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
@@ -2924,7 +2924,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
     switch(c9x.protocol) {
       case PPM:
@@ -3032,7 +3032,7 @@ t_Open9xModelData_v210::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<O9X_MAX_TIMERS; i++)
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
@@ -3126,7 +3126,7 @@ t_Open9xModelData_v210::t_Open9xModelData_v210(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
     switch(c9x.protocol) {
       case PPM:
@@ -3237,7 +3237,7 @@ t_Open9xModelData_v211::operator ModelData ()
   ModelData c9x;
   c9x.used = true;
   getEEPROMZString(c9x.name, name, sizeof(name));
-  for (int i=0; i<MAX_TIMERS; i++)
+  for (int i=0; i<O9X_MAX_TIMERS; i++)
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
@@ -3327,7 +3327,7 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
 
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
-    for (int i=0; i<MAX_TIMERS; i++)
+    for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
     switch(c9x.protocol) {
       case PPM:
