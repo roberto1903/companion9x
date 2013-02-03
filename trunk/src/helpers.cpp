@@ -1043,6 +1043,15 @@ int findmult(float value, float base) {
   if ((vvalue/vbase)>=4) {
     mult=3;
   }
+  if ((vvalue/vbase)>=8) {
+    mult=4;
+  }
+  if ((vvalue/vbase)>=16) {
+    mult=5;
+  }
+  if ((vvalue/vbase)>=32) {
+    mult=6;
+  }
   return mult;
 }
 
