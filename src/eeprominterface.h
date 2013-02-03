@@ -58,17 +58,17 @@ const uint8_t modn12x3[4][4]= {
   {4, 3, 2, 1} };
 
 #define C9XMAX_MODELS  60
-#define MAX_PHASES  9
+#define C9X_MAX_PHASES  9
 #define C9X_MAX_MIXERS  64
 #define C9X_MAX_EXPOS   32
-#define MAX_CURVES  16
+#define C9X_MAX_CURVES  16
 #define MAX_POINTS  17
 #define MAX_GVARS   5
 
 #define NUM_SAFETY_CHNOUT 16
 #define C9X_NUM_CHNOUT    32 // number of real output channels
-#define NUM_CSW           32 // number of custom switches
-#define NUM_FSW           32 // number of functions assigned to switches
+#define C9X_NUM_CSW           32 // number of custom switches
+#define C9X_MAX_CUSTOM_FUNCTIONS           32 // number of functions assigned to switches
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -145,20 +145,6 @@ enum EnumKeys {
 #endif
 };
 
-#define SW_BASE      SW_ThrCt
-#define SW_BASE_DIAG SW_ThrCt
-
-// #define MAX_PSWITCH   (SW_Trainer-SW_ThrCt+1)  // 9 physical switches
-// #define MAX_SWITCH    (MAX_PSWITCH+NUM_CSW)
-// #define SWITCH_ON     (1+MAX_SWITCH)
-// #define SWITCH_OFF    (-SWITCH_ON)
-// #define MAX_DRSWITCH (1+SW_Trainer-SW_ThrCt+1+NUM_CSW)
-
-// #define CURVE_BASE   7
-#define CSWITCH_STR  "----    v>ofs   v<ofs   |v|>ofs |v|<ofs AND     OR      XOR     ""v1==v2  ""v1!=v2  ""v1>v2   ""v1<v2   ""v1>=v2  ""v1<=v2  ""d>=ofs  ""|d|>=ofs"
-#define CSW_NUM_FUNC 16
-#define CSW_LEN_FUNC 8
-
 enum CSFunction {
   CS_FN_OFF,
   CS_FN_VPOS,
@@ -203,15 +189,14 @@ enum HeliSwashTypes {
 
 #define NUM_STICKS          4
 #define NUM_POTS            3 // TODO should be 4 now!
-#define NUM_ROTARY_ENCODERS 2
+// #define NUM_ROTARY_ENCODERS 2
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
 #define NUM_CYC             3
 
-#define MAX_TIMERS          2
+#define C9X_MAX_TIMERS      2
 
-#define NUM_TELEMETRY       18
-#define TELEMETRY_CHANNELS  "AD1 AD2 "
+#define C9X_NUM_TELEMETRY_SOURCES   18
 #define TM_HASTELEMETRY     0x01
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
@@ -726,13 +711,13 @@ class ModelData {
     bool      pulsePol;           // false = positive
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
-    PhaseData phaseData[MAX_PHASES];
+    PhaseData phaseData[C9X_MAX_PHASES];
     MixData   mixData[C9X_MAX_MIXERS];
     LimitData limitData[C9X_NUM_CHNOUT];
     ExpoData  expoData[C9X_MAX_EXPOS];
-    CurveData curves[MAX_CURVES];
-    CustomSwData  customSw[NUM_CSW];
-    FuncSwData    funcSw[NUM_FSW];
+    CurveData curves[C9X_MAX_CURVES];
+    CustomSwData  customSw[C9X_NUM_CSW];
+    FuncSwData    funcSw[C9X_MAX_CUSTOM_FUNCTIONS];
     SafetySwData  safetySw[C9X_NUM_CHNOUT];
     SwashRingData swashRingData;
     int   ppmFrameLength;
@@ -940,7 +925,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   ModelData model_copy = model;
 
   // trims
-  for (int p=0; p<MAX_PHASES; p++) {
+  for (int p=0; p<C9X_MAX_PHASES; p++) {
     for (int i=0; i<NUM_STICKS/2; i++) {
       int converted_stick = applyStickMode(i+1, mode) - 1;
       int tmp = model.phaseData[p].trim[i];
@@ -973,7 +958,7 @@ inline void applyStickModeToModel(ModelData &model, unsigned int mode)
   }
 
   // virtual switches
-  for (int i=0; i<NUM_CSW; i++) {
+  for (int i=0; i<C9X_NUM_CSW; i++) {
     RawSource source;
     switch (getCSFunctionFamily(model.customSw[i].func)) {
       case CS_FAMILY_VCOMP:

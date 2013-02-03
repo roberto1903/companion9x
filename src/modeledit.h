@@ -41,7 +41,7 @@ private:
     QDoubleSpinBox* minSB[12];
     QDoubleSpinBox* maxSB[12];
     QComboBox* csf[24];
-    QComboBox* csw[NUM_CSW];
+    QComboBox* csw[C9X_NUM_CSW];
     MixersList *ExposlistWidget;
 
     MixersList *MixerlistWidget;
@@ -60,19 +60,19 @@ private:
 
     bool plot_curve[16];
 
-    QDoubleSpinBox  * cswitchOffset[NUM_CSW];
-    QDoubleSpinBox  * cswitchDuration[NUM_CSW];
-    QDoubleSpinBox  * cswitchDelay[NUM_CSW];
-    QComboBox * cswitchSource1[NUM_CSW];
-    QComboBox * cswitchSource2[NUM_CSW];
-    QLabel * fswLabel[NUM_FSW];
-    QComboBox * fswtchSwtch[NUM_FSW];
-    QComboBox * fswtchFunc[NUM_FSW];
-    QSpinBox * fswtchParam[NUM_FSW];
-    QPushButton * playBT[NUM_FSW];
-    QComboBox * fswtchParamT[NUM_FSW];
-    QComboBox * fswtchParamArmT[NUM_FSW];
-    QCheckBox * fswtchEnable[NUM_FSW];
+    QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
+    QDoubleSpinBox  * cswitchDuration[C9X_NUM_CSW];
+    QDoubleSpinBox  * cswitchDelay[C9X_NUM_CSW];
+    QComboBox * cswitchSource1[C9X_NUM_CSW];
+    QComboBox * cswitchSource2[C9X_NUM_CSW];
+    QLabel * fswLabel[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchSwtch[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchFunc[C9X_MAX_CUSTOM_FUNCTIONS];
+    QSpinBox * fswtchParam[C9X_MAX_CUSTOM_FUNCTIONS];
+    QPushButton * playBT[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchParamT[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchParamArmT[C9X_MAX_CUSTOM_FUNCTIONS];
+    QCheckBox * fswtchEnable[C9X_MAX_CUSTOM_FUNCTIONS];
     
     QSpinBox  * safetySwitchValue[C9X_NUM_CHNOUT];
     QComboBox * safetySwitchSwtch[C9X_NUM_CHNOUT];

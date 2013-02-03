@@ -460,7 +460,7 @@ void ModelEdit::tabModelEditSetup()
   } else {
     switchEditLock=true;
     int found=false;
-    for (int i=0; i< NUM_FSW; i++) {
+    for (int i=0; i< C9X_MAX_CUSTOM_FUNCTIONS; i++) {
       if (g_model.funcSw[i].func==FuncInstantTrim) {
         populateSwitchCB(ui->instantTrim_CB,g_model.funcSw[i].swtch,POPULATE_MSWITCHES & POPULATE_ONOFF);
         found=true;
@@ -1827,7 +1827,7 @@ void ModelEdit::updateSwitchesTab()
 void ModelEdit::tabCustomSwitches()
 {
     switchEditLock = true;
-    QComboBox* tmpcsw[NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
+    QComboBox* tmpcsw[C9X_NUM_CSW] = {ui->cswitchFunc_1, ui->cswitchFunc_2, ui->cswitchFunc_3, ui->cswitchFunc_4,
       ui->cswitchFunc_5, ui->cswitchFunc_6, ui->cswitchFunc_7, ui->cswitchFunc_8,
       ui->cswitchFunc_9, ui->cswitchFunc_10, ui->cswitchFunc_11, ui->cswitchFunc_12,
       ui->cswitchFunc_13, ui->cswitchFunc_14, ui->cswitchFunc_15, ui->cswitchFunc_16,
@@ -1835,7 +1835,7 @@ void ModelEdit::tabCustomSwitches()
       ui->cswitchFunc_21, ui->cswitchFunc_22, ui->cswitchFunc_23, ui->cswitchFunc_24,
       ui->cswitchFunc_25, ui->cswitchFunc_26, ui->cswitchFunc_27, ui->cswitchFunc_28,
       ui->cswitchFunc_29, ui->cswitchFunc_30, ui->cswitchFunc_31, ui->cswitchFunc_32 };
-    QLabel* cswlabel[NUM_CSW] = { ui->cswlabel_1, ui->cswlabel_2, ui->cswlabel_3, ui->cswlabel_4,
+    QLabel* cswlabel[C9X_NUM_CSW] = { ui->cswlabel_1, ui->cswlabel_2, ui->cswlabel_3, ui->cswlabel_4,
       ui->cswlabel_5, ui->cswlabel_6, ui->cswlabel_7, ui->cswlabel_8,
       ui->cswlabel_9, ui->cswlabel_10, ui->cswlabel_11, ui->cswlabel_12,
       ui->cswlabel_13, ui->cswlabel_14, ui->cswlabel_15, ui->cswlabel_16,
@@ -2107,7 +2107,7 @@ void ModelEdit::customSwitchesEdited()
     if(switchEditLock) return;
     switchEditLock = true;
 
-    bool chAr[NUM_CSW];
+    bool chAr[C9X_NUM_CSW];
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
     for (int i=0; i<num_csw;i++) {
         chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->currentIndex()));
@@ -2881,14 +2881,14 @@ void ModelEdit::on_instantTrim_CB_currentIndexChanged(int index)
 {
   if(switchEditLock) return;
   bool found=false;
-  for (int i=0; i< NUM_FSW; i++) {
+  for (int i=0; i< C9X_MAX_CUSTOM_FUNCTIONS; i++) {
     if (g_model.funcSw[i].func==FuncInstantTrim) {
       g_model.funcSw[i].swtch = RawSwitch(ui->instantTrim_CB->itemData(ui->instantTrim_CB->currentIndex()).toInt());
       found=true;
     }
   }
   if (found==false) {
-    for (int i=0; i< NUM_FSW; i++) {
+    for (int i=0; i< C9X_MAX_CUSTOM_FUNCTIONS; i++) {
       if (g_model.funcSw[i].swtch==RawSwitch()) {
         g_model.funcSw[i].swtch = RawSwitch(ui->instantTrim_CB->itemData(ui->instantTrim_CB->currentIndex()).toInt());
         g_model.funcSw[i].func = FuncInstantTrim;

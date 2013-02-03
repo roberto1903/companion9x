@@ -46,7 +46,7 @@ const int Er9xInterface::getEEpromSize()
   QSettings settings("companion9x", "companion9x");
   QString avrMCU = settings.value("mcu", QString("m64")).toString();
   if (avrMCU==QString("m128")) {
-    return EESIZE_STOCK*2;
+    return 2*EESIZE_STOCK;
   }
   return EESIZE_STOCK;
 }
@@ -212,7 +212,7 @@ int Er9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_STOCK];
+  uint8_t tmp[2*EESIZE_STOCK];
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Er9xModelData er9xModel(model);
@@ -225,7 +225,7 @@ int Er9xInterface::getSize(ModelData &model)
 
 int Er9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_STOCK];
+  uint8_t tmp[2*EESIZE_STOCK];
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
   
   Er9xGeneral er9xGeneral(settings);

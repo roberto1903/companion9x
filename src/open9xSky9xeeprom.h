@@ -360,7 +360,7 @@ PACK(typedef struct t_Open9xArmFrSkyData_v211 {
 
 PACK(typedef struct t_Open9xArmModelData_v208 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xArmTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -401,7 +401,7 @@ PACK(typedef struct t_Open9xArmModelData_v208 {
 
 PACK(typedef struct t_Open9xArmModelData_v209 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xArmTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -443,7 +443,7 @@ PACK(typedef struct t_Open9xArmModelData_v209 {
 
 PACK(typedef struct t_Open9xArmModelData_v210 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xArmTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -483,7 +483,7 @@ PACK(typedef struct t_Open9xArmModelData_v210 {
 
 PACK(typedef struct t_Open9xArmModelData_v211 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xArmTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -523,7 +523,7 @@ PACK(typedef struct t_Open9xArmModelData_v211 {
 
 PACK(typedef struct t_Open9xArmModelData_v212 {
   char      name[10];             // 10 must be first for eeLoadModelName
-  Open9xArmTimerData_v202 timers[MAX_TIMERS];
+  Open9xArmTimerData_v202 timers[O9X_MAX_TIMERS];
   uint8_t   protocol:3;
   uint8_t   thrTrim:1;            // Enable Throttle Trim
   int8_t    ppmNCH:4;
@@ -551,7 +551,7 @@ PACK(typedef struct t_Open9xArmModelData_v212 {
   uint8_t switchWarningStates;
 
   Open9xArmFrSkyData_v211 frsky;
-  Open9xTimerDataExtra timersXtra[MAX_TIMERS];
+  Open9xTimerDataExtra timersXtra[O9X_MAX_TIMERS];
   
   operator ModelData();
   t_Open9xArmModelData_v212() { memset(this, 0, sizeof(t_Open9xArmModelData_v212)); }

@@ -962,7 +962,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    for (unsigned int i=0; i<NUM_FSW; i++)
+    for (unsigned int i=0; i<C9X_MAX_CUSTOM_FUNCTIONS; i++)
       if (c9x.funcSw[i].func == FuncInstantTrim && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) {
         trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
         break;
@@ -1241,7 +1241,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
     ppmDelay = (c9x.ppmDelay - 300) / 50;
-    for (unsigned int i=0; i<NUM_FSW; i++)
+    for (unsigned int i=0; i<C9X_MAX_CUSTOM_FUNCTIONS; i++)
       if (c9x.funcSw[i].func == FuncInstantTrim && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) {
         trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
         break;

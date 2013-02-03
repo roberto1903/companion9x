@@ -915,12 +915,12 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   }
 
   if (flags & POPULATE_TELEMETRY) {
-    for (int i=0; i<MAX_TIMERS; i++) {
+    for (int i=0; i<C9X_MAX_TIMERS; i++) {
       item = RawSource(SOURCE_TYPE_TIMER, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
-    for (int i=0; i<NUM_TELEMETRY; i++) {
+    for (int i=0; i<C9X_NUM_TELEMETRY_SOURCES; i++) {
       item = RawSource(SOURCE_TYPE_TELEMETRY, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
@@ -938,6 +938,9 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   b->setMaxVisibleItems(10);
 }
 
+#define CSWITCH_STR  "----    v>ofs   v<ofs   |v|>ofs |v|<ofs AND     OR      XOR     ""v1==v2  ""v1!=v2  ""v1>v2   ""v1<v2   ""v1>=v2  ""v1<=v2  ""d>=ofs  ""|d|>=ofs"
+#define CSW_NUM_FUNC 16 // TODO enum
+#define CSW_LEN_FUNC 8
 QString getCSWFunc(int val)
 {
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
@@ -964,7 +967,7 @@ QString getSignedStr(int value)
 
 QString getCurveStr(int curve) {
   QString crvStr = "!c16!c15!c14!c13!c12!c11!c10!c9 !c8 !c7 !c6 !c5 !c4 !c3 !c2 !c1 ----x>0 x<0 |x| f>0 f<0 |f| c1  c2  c3  c4  c5  c6  c7  c8  c9  c10 c11 c12 c13 c14 c15 c16 ";
-  return crvStr.mid((curve+MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
+  return crvStr.mid((curve+C9X_MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
 }
 
 QString getGVarString(int8_t val, bool sign)

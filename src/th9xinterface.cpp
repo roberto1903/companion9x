@@ -46,7 +46,7 @@ const int Th9xInterface::getEEpromSize()
   QSettings settings("companion9x", "companion9x");
   QString avrMCU = settings.value("mcu", QString("m64")).toString();
   if (avrMCU==QString("m128")) {
-    return EESIZE_STOCK*2;
+    return 2*EESIZE_STOCK;
   }
   return EESIZE_STOCK;
 }
@@ -151,7 +151,7 @@ int Th9xInterface::getSize(ModelData &model)
   if (model.isempty())
     return 0;
 
-  uint8_t tmp[EESIZE_STOCK];
+  uint8_t tmp[2*EESIZE_STOCK];
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xModelData th9xModel(model);
@@ -164,7 +164,7 @@ int Th9xInterface::getSize(ModelData &model)
 
 int Th9xInterface::getSize(GeneralSettings &settings)
 {
-  uint8_t tmp[EESIZE_STOCK];
+  uint8_t tmp[2*EESIZE_STOCK];
   efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
 
   Th9xGeneral th9xGeneral(settings);
