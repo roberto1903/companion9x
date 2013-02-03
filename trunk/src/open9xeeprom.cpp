@@ -811,23 +811,19 @@ class FrskyField: public StructField {
     FrskyField(FrSkyData & frsky, BoardEnum board):
       StructField("FrSky")
     {
-      for (int i=0; i<2; i++) {
-        Append(new UnsignedField<8>(frsky.channels[i].ratio, "Ratio"));
-        Append(new SignedField<12>(frsky.channels[i].offset, "Offset"));
-        Append(new UnsignedField<4>(frsky.channels[i].type, "Type"));
-        for (int j=0; j<2; j++)
-          Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value, "Alarm value"));
-        for (int j=0; j<2; j++)
-          Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
-        for (int j=0; j<2; j++)
-          Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
-        Append(new UnsignedField<2>(frsky.channels[i].multiplier, "Multiplier"));
-      }
-
       if (IS_ARM(board)) {
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
-          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
+          Append(new UnsignedField<8>(frsky.channels[i].ratio, "Ratio"));
+          Append(new SignedField<12>(frsky.channels[i].offset, "Offset"));
+          Append(new UnsignedField<4>(frsky.channels[i].type, "Type"));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value, "Alarm value"));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
+          Append(new SpareBitsField<2>());
+          Append(new UnsignedField<8>(frsky.channels[i].multiplier, "Multiplier"));
         }
         Append(new UnsignedField<8>(frsky.usrProto));
         Append(new UnsignedField<8>(frsky.voltsSource));
@@ -847,10 +843,24 @@ class FrskyField: public StructField {
         Append(new SignedField<8>(frsky.varioCenterMin));
         Append(new SignedField<8>(frsky.varioMin));
         Append(new SignedField<8>(frsky.varioMax));
-        Append(new SpareBitsField<8>());
-        Append(new SpareBitsField<8>());
+        for (int i=0; i<2; i++) {
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
+        }
       }
       else {
+        for (int i=0; i<2; i++) {
+          Append(new UnsignedField<8>(frsky.channels[i].ratio, "Ratio"));
+          Append(new SignedField<12>(frsky.channels[i].offset, "Offset"));
+          Append(new UnsignedField<4>(frsky.channels[i].type, "Type"));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<8>(frsky.channels[i].alarms[j].value, "Alarm value"));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
+          for (int j=0; j<2; j++)
+            Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
+          Append(new UnsignedField<2>(frsky.channels[i].multiplier, "Multiplier"));
+        }
         Append(new UnsignedField<2>(frsky.usrProto));
         Append(new UnsignedField<2>(frsky.blades));
         Append(new UnsignedField<1>(frsky.screens[0].type));
