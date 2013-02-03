@@ -843,8 +843,8 @@ class FrskyField: public StructField {
           Append(new FrskyScreenField(frsky.screens[i]));
         }
         Append(new UnsignedField<8>(frsky.varioSource));
-        Append(new SignedField<8>(frsky.varioCenterMin));
         Append(new SignedField<8>(frsky.varioCenterMax));
+        Append(new SignedField<8>(frsky.varioCenterMin));
         Append(new SignedField<8>(frsky.varioMin));
         Append(new SignedField<8>(frsky.varioMax));
         Append(new SpareBitsField<8>());
