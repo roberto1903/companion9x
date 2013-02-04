@@ -589,7 +589,6 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase) {
   }
 }
 
-
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields)
 {
   b->clear();
@@ -946,7 +945,8 @@ QString getCSWFunc(int val)
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
 }
 
-void populateCSWCB(QComboBox *b, int value) {
+void populateCSWCB(QComboBox *b, int value)
+{
   b->clear();
   for (int i = 0; i < CSW_NUM_FUNC; i++) {
     b->addItem(getCSWFunc(i));
@@ -965,7 +965,8 @@ QString getSignedStr(int value)
   return value > 0 ? QString("+%1").arg(value) : QString("%1").arg(value);
 }
 
-QString getCurveStr(int curve) {
+QString getCurveStr(int curve)
+{
   QString crvStr = "!c16!c15!c14!c13!c12!c11!c10!c9 !c8 !c7 !c6 !c5 !c4 !c3 !c2 !c1 ----x>0 x<0 |x| f>0 f<0 |f| c1  c2  c3  c4  c5  c6  c7  c8  c9  c10 c11 c12 c13 c14 c15 c16 ";
   return crvStr.mid((curve+C9X_MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
 }
@@ -981,7 +982,8 @@ QString getGVarString(int8_t val, bool sign)
     return QObject::tr("(GV%1)").arg((uint8_t)val-125);
 }
 
-QString image2qstring(QImage image) {
+QString image2qstring(QImage image)
+{
   image.scaled(128, 64);
   uchar b[1024] = {0};
   quint8 * p = image.bits();
@@ -999,7 +1001,8 @@ QString image2qstring(QImage image) {
   return ImageStr;
 }
 
-QImage qstring2image(QString imagestr) {
+QImage qstring2image(QString imagestr)
+{
   uchar b[1024] = {0};
   bool ok;
   bool failed = false;
@@ -1029,36 +1032,24 @@ QImage qstring2image(QString imagestr) {
   return Image;
 }
 
-int findmult(float value, float base) {
-  int vvalue=value*10;
-  int vbase=base*10;
+int findmult(float value, float base)
+{
+  int vvalue = value*10;
+  int vbase = base*10;
   vvalue--;
-  int mult=0;
-  if ((vvalue/vbase)>=1) {
-    mult=1;
+
+  int mult = 0;
+  for (int i=8; i>=0; i--) {
+    if (vvalue/vbase >= (1<<i)) {
+      mult = i+1;
+      break;
+    }
   }
-  if ((vvalue/vbase)>=2) {
-    mult=2;
-  }
-  if ((vvalue/vbase)>=4) {
-    mult=3;
-  }
-  if ((vvalue/vbase)>=8) {
-    mult=4;
-  }
-  if ((vvalue/vbase)>=16) {
-    mult=5;
-  }
-  if ((vvalue/vbase)>=32) {
-    mult=6;
-  }
+
   return mult;
 }
 
-bool checkbit(int value, int bit) {
-  if ((value & (1<<bit))==(1<<bit)) {
-    return true;
-  } else {
-    return false;
-  }
+bool checkbit(int value, int bit)
+{
+  return ((value & (1<<bit))==(1<<bit));
 }
