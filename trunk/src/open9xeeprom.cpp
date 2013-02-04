@@ -685,12 +685,13 @@ class CustomFunctionField: public TransformedField {
       internalField("CustomFunction"),
       fn(fn),
       board(board),
+      _param(0),
       _delay(0)
     {
       internalField.Append(new SwitchField<8>(fn.swtch, board));
       if (IS_ARM(board)) {
         internalField.Append(new UnsignedField<8>((unsigned int &)fn.func));
-        internalField.Append(new CharField<6>(_param));
+        internalField.Append(new CharField<6>(_arm_param));
         internalField.Append(new UnsignedField<8>(_delay));
         internalField.Append(new SpareBitsField<8>());
       }
@@ -700,7 +701,7 @@ class CustomFunctionField: public TransformedField {
         else
           internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(stockFunctionsConversion), ::QObject::tr("Open9x on stock board doesn't accept this function")));
         internalField.Append(new BoolField<1>(fn.enabled));
-        internalField.Append(new UnsignedField<8>(fn.param));
+        internalField.Append(new UnsignedField<8>(_param));
       }
     }
 
@@ -708,32 +709,38 @@ class CustomFunctionField: public TransformedField {
     {
       if (IS_ARM(board)) {
         if (fn.func <= FuncInstantTrim) {
-          *((uint32_t *)_param) = fn.param;
+          *((uint32_t *)_arm_param) = fn.param;
           _delay = (fn.enabled & 0x01);
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
-          memcpy(_param, fn.paramarm, sizeof(_param));
+          memcpy(_arm_param, fn.paramarm, sizeof(_arm_param));
         }
         else {
           unsigned int value = fn.param;
           if ((fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) && value > 7) {
             value--;
           }
-          *((uint32_t *)_param) = value;
+          *((uint32_t *)_arm_param) = value;
         }
+      }
+      else {
+        if (fn.func == FuncPlayValue)
+          _param = fn.param - 2;
+        else
+          _param = fn.param;
       }
     }
 
     virtual void afterImport()
     {
       if (IS_ARM(board)) {
-        unsigned int value = *((uint32_t *)_param);
+        unsigned int value = *((uint32_t *)_arm_param);
         if (fn.func <= FuncInstantTrim) {
           fn.enabled = (_delay & 0x01);
           fn.param = value;
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
-          memcpy(fn.paramarm, _param, sizeof(fn.paramarm));
+          memcpy(fn.paramarm, _arm_param, sizeof(fn.paramarm));
         }
         else {
           fn.param = value;
@@ -742,13 +749,20 @@ class CustomFunctionField: public TransformedField {
           }
         }
       }
+      else {
+        if (fn.func == FuncPlayValue)
+          fn.param = _param + 2;
+        else
+          fn.param = _param;
+      }
     }
 
   protected:
     StructField internalField;
     FuncSwData & fn;
     BoardEnum board;
-    char _param[6];
+    char _arm_param[6];
+    unsigned int _param;
     unsigned int _delay;
 };
 
