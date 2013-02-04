@@ -21,7 +21,6 @@
 #define SIMU_EXCEPTIONS
 #define PCBX9D
 #define CPUARM
-#define REVB
 #define HELI
 #define TEMPLATES
 #define SPLASH
@@ -35,8 +34,6 @@
 #define VOICE
 #define HAPTIC
 #define PXX
-#define DSM2
-#define DSM2_PPM
 #define DBLKEYS
 #define AUTOSWITCH
 #define GRAPHICS
