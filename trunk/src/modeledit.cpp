@@ -180,7 +180,7 @@ float ModelEdit::getBarValue(int barId, int Value)
     case TELEM_GPSALT:
     case TELEM_MAX_ALT:
     case TELEM_MIN_ALT:
-      return (8*Value)-510;
+      return (8*Value)-500;
       break;
     case TELEM_RPM:
     case TELEM_MAX_RPM:
