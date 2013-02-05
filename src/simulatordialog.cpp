@@ -100,6 +100,9 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
       }
     }
 #endif
+    connect(ui->dialP_1,SIGNAL(valueChanged(int)),this,SLOT(dialChanged()));
+    connect(ui->dialP_2,SIGNAL(valueChanged(int)),this,SLOT(dialChanged()));
+    connect(ui->dialP_3,SIGNAL(valueChanged(int)),this,SLOT(dialChanged()));
     
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
@@ -121,6 +124,13 @@ void simulatorDialog::mousePressEvent(QMouseEvent *event)
 {
   if (event->button() == Qt::MidButton)
     middleButtonPressed = true;
+}
+
+void simulatorDialog::dialChanged()
+{
+  ui->dialP_1value->setText(QString("%1 %").arg((ui->dialP_1->value()*100)/1024));
+  ui->dialP_2value->setText(QString("%1 %").arg((ui->dialP_2->value()*100)/1024));
+  ui->dialP_3value->setText(QString("%1 %").arg((ui->dialP_3->value()*100)/1024));
 }
 
 void simulatorDialog::mouseReleaseEvent(QMouseEvent *event)
