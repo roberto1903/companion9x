@@ -106,6 +106,7 @@ private slots:
     void on_trimHRight_valueChanged(int);
     void on_trimVRight_valueChanged(int);
     void onTimerEvent();
+    void dialChanged();
 #ifdef JOYSTICKS
     void onjoystickAxisValueChanged(int axis, int value);
 #endif
