@@ -2554,10 +2554,10 @@ void ModelEdit::updateA1Fields() {
     ui->a11ValueSB->setSingleStep(a1ratio/255.0);
     ui->a12ValueSB->setDecimals(2);
     ui->a12ValueSB->setSingleStep(a1ratio/255.0);
-    ui->a11ValueSB->setMinimum((g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/2550.0);
-    ui->a11ValueSB->setMaximum(a1ratio+(g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/2550.0);
-    ui->a11ValueSB->setMinimum((g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/2550.0);
-    ui->a12ValueSB->setMaximum(a1ratio+(g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/2550.0);
+    ui->a11ValueSB->setMinimum(((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/2550.0);
+    ui->a11ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/2550.0);
+    ui->a12ValueSB->setMinimum(((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/2550.0);
+    ui->a12ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/2550.0);
   }
   else {
     a1ratio=g_model.frsky.channels[0].ratio<<g_model.frsky.channels[0].multiplier;
@@ -2565,10 +2565,10 @@ void ModelEdit::updateA1Fields() {
     ui->a11ValueSB->setSingleStep(a1ratio/255.0);
     ui->a12ValueSB->setDecimals(2);
     ui->a12ValueSB->setSingleStep(a1ratio/255.0);
-    ui->a11ValueSB->setMinimum((g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/255.0);
-    ui->a11ValueSB->setMaximum(a1ratio+(g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/255.0);
-    ui->a11ValueSB->setMinimum((g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/255.0);
-    ui->a12ValueSB->setMaximum(a1ratio+(g_model.frsky.channels[0].offset*g_model.frsky.channels[0].ratio)/255.0);
+    ui->a11ValueSB->setMinimum(((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/255.0);
+    ui->a11ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/255.0);
+    ui->a12ValueSB->setMinimum(((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/255.0);
+    ui->a12ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[0].offset*1.0)*(g_model.frsky.channels[0].ratio*1.0))/255.0);
   }  
   ui->a1CalibSB->setDecimals(2);
   ui->a1CalibSB->setMaximum((a1ratio*127)/255.0);
@@ -2601,10 +2601,10 @@ void ModelEdit::updateA2Fields() {
     ui->a21ValueSB->setSingleStep(a2ratio/255.0);
     ui->a22ValueSB->setDecimals(2);
     ui->a22ValueSB->setSingleStep(a2ratio/255.0);
-    ui->a21ValueSB->setMinimum((g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/2550.0);
-    ui->a21ValueSB->setMaximum(a2ratio+(g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/2550.0);
-    ui->a21ValueSB->setMinimum((g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/2550.0);
-    ui->a22ValueSB->setMaximum(a2ratio+(g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/2550.0);
+    ui->a21ValueSB->setMinimum(((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/2550.0);
+    ui->a21ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/2550.0);
+    ui->a22ValueSB->setMinimum(((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/2550.0);
+    ui->a22ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/2550.0);
   }
   else {
     a2ratio=g_model.frsky.channels[1].ratio;
@@ -2612,10 +2612,10 @@ void ModelEdit::updateA2Fields() {
     ui->a21ValueSB->setSingleStep(a2ratio/255.0);
     ui->a22ValueSB->setDecimals(2);
     ui->a22ValueSB->setSingleStep(a2ratio/255.0);
-    ui->a21ValueSB->setMinimum((g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/255.0);
-    ui->a21ValueSB->setMaximum(a2ratio+(g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/255.0);
-    ui->a21ValueSB->setMinimum((g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/255.0);
-    ui->a22ValueSB->setMaximum(a2ratio+(g_model.frsky.channels[1].offset*g_model.frsky.channels[1].ratio)/255.0);
+    ui->a21ValueSB->setMinimum(((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/255.0);
+    ui->a21ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/255.0);
+    ui->a22ValueSB->setMinimum(((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/255.0);
+    ui->a22ValueSB->setMaximum(a1ratio+((g_model.frsky.channels[1].offset*1.0)*(g_model.frsky.channels[1].ratio*1.0))/255.0);
   }  
   ui->a2CalibSB->setDecimals(2);
   ui->a2CalibSB->setMaximum((a2ratio*127)/255.0);
