@@ -824,12 +824,24 @@ void populateGVarCB(QComboBox *b, int value, int min, int max)
   if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
     gvars=1;
   b->clear();
-  for (int i=min; i<=max; i++)
+  for (int i=-5; i<=-1; i++) {
+    int16_t gval = (int16_t)(-125+i);
+    b->addItem(QObject::tr("-GV%1").arg(-i), gval);
+    if (gvars==0) {
+      QModelIndex index = b->model()->index(b->count()-1, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);        
+    }
+    if (value == gval)
+      b->setCurrentIndex(b->count()-1);
+  }
+  for (int i=min; i<=max; i++) {
     b->addItem(QString::number(i, 10), i);
-  if (value >= min && value <= max)
-    b->setCurrentIndex(value-min);
+    if (value == i)
+      b->setCurrentIndex(b->count()-1);
+  }
   for (int i=1; i<=5; i++) {
-    int8_t gval = (int8_t)(125+i);
+    int16_t gval = (int16_t)(125+i);
     b->addItem(QObject::tr("GV%1").arg(i), gval);
     if (gvars==0) {
       QModelIndex index = b->model()->index(b->count()-1, 0);
@@ -971,7 +983,7 @@ QString getCurveStr(int curve)
   return crvStr.mid((curve+C9X_MAX_CURVES) * 4, 4).remove(' ').replace("c", QObject::tr("Curve") + " ");
 }
 
-QString getGVarString(int8_t val, bool sign)
+QString getGVarString(int16_t val, bool sign)
 {
   if (val >= -125 && val <= +125)
     if (sign)
@@ -979,7 +991,11 @@ QString getGVarString(int8_t val, bool sign)
     else
       return QString("(%1%)").arg(val);
   else
-    return QObject::tr("(GV%1)").arg((uint8_t)val-125);
+    if (val<0) {
+      return QObject::tr("(-GV%1)").arg(-val-125);
+    } else {
+      return QObject::tr("(GV%1)").arg(val-125);
+    }
 }
 
 QString image2qstring(QImage image)
