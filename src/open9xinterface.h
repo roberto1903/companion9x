@@ -65,7 +65,9 @@ class Open9xInterface : public EEPROMInterface
 
   protected:
 
-    bool checkVersion(uint8_t version);
+    bool checkVersion(unsigned int version);
+
+    bool checkVariant(unsigned int version, unsigned int variant);
 
     template <class T>
     bool loadModel(ModelData &model, uint8_t *data, int index, unsigned int stickMode=0);
