@@ -297,27 +297,8 @@ bool Open9xInterface::loadGeneral(GeneralSettings &settings, unsigned int versio
   efile->openRd(FILE_GENERAL);
   int sz = efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size());
   if (sz) {
-/*  It was needed for a bug in EEPROM 212. Should not be needed any more.
-    if (board == BOARD_M128 && open9xSettings.variant != 0x8000) {
-      if (settings.version == 212) {
-        uint8_t tmp[1000];
-        for (int i=1; i<31; i++) {
-          efile->openRd(i);
-          int sz = efile->readRlc2(tmp, sizeof(tmp));
-          if (sz == 849) {
-            std::cout << " warning: M128 variant not set (model size seems ok)";
-            settings = open9xSettings;
-            return true;
-          }
-        }
-      }
-      std::cout << " error when loading M128 general settings (wrong variant)";
-      return false;
-    }
-    else { */
-      open9xSettings.Import(eepromData);
-      return true;
-    // }
+    open9xSettings.Import(eepromData);
+    return checkVariant(settings.version, settings.variant);
   }
 
   std::cout << " error when loading general settings";
@@ -817,7 +798,7 @@ size_t getSizeA(T (&)[SIZE]) {
     return SIZE;
 }
 
-bool Open9xInterface::checkVersion(uint8_t version)
+bool Open9xInterface::checkVersion(unsigned int version)
 {
   switch(version) {
     case 201:
@@ -872,6 +853,28 @@ bool Open9xInterface::checkVersion(uint8_t version)
   }
 
   return true;
+}
+
+bool Open9xInterface::checkVariant(unsigned int version, unsigned int variant)
+{
+  if (board == BOARD_M128 && !(variant & 0x8000)) {
+    if (version == 212) {
+      uint8_t tmp[1000];
+      for (int i=1; i<31; i++) {
+        efile->openRd(i);
+        int sz = efile->readRlc2(tmp, sizeof(tmp));
+        if (sz == 849) {
+          std::cout << " warning: M128 variant not set (but model size seems ok)";
+          return true;
+        }
+      }
+    }
+    std::cout << " error when loading M128 general settings (wrong variant)";
+    return false;
+  }
+  else {
+    return true;
+  }
 }
 
 bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esize, int index)
