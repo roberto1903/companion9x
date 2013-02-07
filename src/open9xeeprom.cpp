@@ -337,12 +337,68 @@ class HeliField: public StructField {
     }
 };
 
+void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam)
+{
+  if (gvar < -125) {
+    _gvarParam = 1;
+    _gvar = gvar + 125;
+  }
+  else if (gvar > 125) {
+    _gvarParam = 1;
+    _gvar = gvar - 126;
+  }
+  else {
+    _gvarParam = 0;
+    _gvar = gvar;
+  }
+}
+
+void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam)
+{
+  if (_gvarParam == 0) {
+    gvar = _gvar;
+  }
+  else if (_gvar >= 0) {
+    gvar = 126 + _gvar;
+  }
+  else {
+    gvar = -125 + _gvar;
+  }
+}
+
+void exportGvarParam(const int gvar, int & _gvar)
+{
+  if (gvar < -125) {
+    _gvar = 1024 + gvar + 125;
+  }
+  else if (gvar > 125) {
+    _gvar = 1024 + gvar - 126;
+  }
+  else {
+    _gvar = gvar;
+  }
+}
+
+void importGvarParam(int & gvar, const int _gvar)
+{
+  if (_gvar >= 1024) {
+    gvar = 126 + _gvar - 1024;
+  }
+  else if (gvar >= 1019) {
+    gvar = -126 + 1019 - _gvar;
+  }
+  else {
+    gvar = _gvar;
+  }
+}
+
 class MixField: public TransformedField {
   public:
     MixField(MixData & mix, BoardEnum board):
       TransformedField(internalField),
       internalField("Mix"),
-      mix(mix)
+      mix(mix),
+      board(board)
     {
       if (IS_ARM(board)) {
         internalField.Append(new UnsignedField<8>(_destCh));
@@ -351,8 +407,8 @@ class MixField: public TransformedField {
         internalField.Append(new BoolField<1>(mix.noExpo));
         internalField.Append(new SignedField<3>(mix.carryTrim));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
-        internalField.Append(new SpareBitsField<1>());
-        internalField.Append(new SignedField<16>(mix.weight));
+        internalField.Append(new UnsignedField<1>(_offsetMode));
+        internalField.Append(new SignedField<16>(_weight));
         internalField.Append(new SwitchField<8>(mix.swtch, board));
         internalField.Append(new SignedField<8>(_curveParam));
         internalField.Append(new UnsignedField<8>(mix.mixWarn));
@@ -361,7 +417,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<8>(mix.speedUp));
         internalField.Append(new UnsignedField<8>(mix.speedDown));
         internalField.Append(new MixSourceField<8>(mix.srcRaw, board));
-        internalField.Append(new SignedField<8>(mix.sOffset));
+        internalField.Append(new SignedField<8>(_offset));
         if (HAS_LARGE_LCD(board))
           internalField.Append(new ZCharField<10>(mix.name));
         else
@@ -371,8 +427,9 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<4>(_destCh));
         internalField.Append(new BoolField<1>(_curveMode));
         internalField.Append(new BoolField<1>(mix.noExpo));
-        internalField.Append(new SpareBitsField<2>());
-        internalField.Append(new SignedField<8>(mix.weight));
+        internalField.Append(new UnsignedField<1>(_weightMode));
+        internalField.Append(new UnsignedField<1>(_offsetMode));
+        internalField.Append(new SignedField<8>(_weight));
         internalField.Append(new SwitchField<6>(mix.swtch, board));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
         internalField.Append(new UnsignedField<5>(mix.phases));
@@ -384,7 +441,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<4>(mix.speedUp));
         internalField.Append(new UnsignedField<4>(mix.speedDown));
         internalField.Append(new SignedField<8>(_curveParam));
-        internalField.Append(new SignedField<8>(mix.sOffset));
+        internalField.Append(new SignedField<8>(_offset));
       }
     }
 
@@ -401,6 +458,15 @@ class MixField: public TransformedField {
         _curveMode = 0;
         _curveParam = 0;
       }
+
+      if (IS_ARM(board)) {
+        exportGvarParam(mix.weight, _weight);
+        splitGvarParam(mix.sOffset, _offset, _offsetMode);
+      }
+      else {
+        splitGvarParam(mix.weight, _weight, _weightMode);
+        splitGvarParam(mix.sOffset, _offset, _offsetMode);
+      }
     }
 
     virtual void afterImport()
@@ -414,14 +480,28 @@ class MixField: public TransformedField {
         else
           mix.differential = _curveParam;
       }
+
+      if (IS_ARM(board)) {
+        importGvarParam(mix.weight, _weight);
+        concatGvarParam(mix.sOffset, _offset, _offsetMode);
+      }
+      else {
+        concatGvarParam(mix.weight, _weight, _weightMode);
+        concatGvarParam(mix.sOffset, _offset, _offsetMode);
+      }
     }
 
   protected:
     StructField internalField;
     MixData & mix;
+    BoardEnum board;
     unsigned int _destCh;
     bool _curveMode;
     int _curveParam;
+    int _weight;
+    int _offset;
+    unsigned int _weightMode;
+    unsigned int _offsetMode;
 };
 
 class ExpoField: public TransformedField {
