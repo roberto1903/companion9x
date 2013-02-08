@@ -917,7 +917,7 @@ class FrskyField: public StructField {
           for (int j=0; j<2; j++)
             Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
           Append(new SpareBitsField<2>());
-          Append(new UnsignedField<8>(frsky.channels[i].multiplier, "Multiplier"));
+          Append(new UnsignedField<8>(frsky.channels[i].multiplier, 0, 5, "Multiplier"));
         }
         Append(new UnsignedField<8>(frsky.usrProto));
         Append(new UnsignedField<8>(frsky.voltsSource));
@@ -953,7 +953,7 @@ class FrskyField: public StructField {
             Append(new UnsignedField<2>(frsky.channels[i].alarms[j].level));
           for (int j=0; j<2; j++)
             Append(new UnsignedField<1>(frsky.channels[i].alarms[j].greater));
-          Append(new UnsignedField<2>(frsky.channels[i].multiplier, "Multiplier"));
+          Append(new UnsignedField<2>(frsky.channels[i].multiplier, 0, 3, "Multiplier"));
         }
         Append(new UnsignedField<2>(frsky.usrProto));
         Append(new UnsignedField<2>(frsky.blades));
@@ -978,6 +978,7 @@ class FrskyField: public StructField {
 };
 
 const int protocolConversion[] = {PPM, 0, PPM16, 1, PPMSIM, 2, PXX, 3, DSM2, 4};
+const int protocolSky9xConversion[] = {PPM, 0, PXX, 1, DSM2, 2};
 const int channelsConversion[] = {4, -2, 6, -1, 8, 0, 10, 1, 12, 2, 14, 3, 16, 4};
 int exportPpmDelay(int delay) { return (delay - 300) / 50; }
 int importPpmDelay(int delay) { return 300 + 50 * delay; }
@@ -1009,7 +1010,10 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     }
   }
 
-  Append(new ConversionField< SignedField<3> >(modelData.protocol, TABLE_CONVERSION(protocolConversion), ::QObject::tr("Open9x doesn't accept this protocol")));
+  if (board == BOARD_SKY9X)
+    Append(new ConversionField< SignedField<3> >(modelData.protocol, TABLE_CONVERSION(protocolSky9xConversion), ::QObject::tr("Open9x / sky9x doesn't accept this protocol")));
+  else
+    Append(new ConversionField< SignedField<3> >(modelData.protocol, TABLE_CONVERSION(protocolConversion), ::QObject::tr("Open9x doesn't accept this protocol")));
   Append(new BoolField<1>(modelData.thrTrim));
   Append(new ConversionField< SignedField<4> >(modelData.ppmNCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels")));
   Append(new UnsignedField<3>(modelData.trimInc));
@@ -1065,9 +1069,15 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new FrskyField(modelData.frsky, board));
   }
 
-  if (HAS_LARGE_LCD(board))
+  if (HAS_LARGE_LCD(board)) {
     Append(new CharField<10>(modelData.bitmap));
+  }
 
+  if (board == BOARD_SKY9X) {
+    Append(new UnsignedField<8>(modelData.ppmSCH));
+    Append(new UnsignedField<8>(modelData.ppm2SCH));
+    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels")));
+  }
 }
 
 Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
