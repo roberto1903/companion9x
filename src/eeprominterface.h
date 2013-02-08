@@ -701,7 +701,10 @@ class ModelData {
     uint8_t   modelVoice;
     TimerData timers[2];
     int       protocol;
+    unsigned int ppmSCH;
     int       ppmNCH;
+    unsigned int ppm2SCH;
+    int       ppm2NCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
     unsigned int trimInc;            // Trim Increments
