@@ -991,11 +991,12 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     QString SpeakerSet=settings.value("Speaker","").toString();
     settings.endGroup();
     settings.endGroup();
-    if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
+    // TODO NUM_POTS harcoded to 3 again here
+    if ((calib.length()==(NUM_STICKS+3)*12) && (trainercalib.length()==16)) {
       QString Byte;
       int16_t byte16;
       bool ok;
-      for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
+      for (int i=0; i<(NUM_STICKS+3); i++) {
         Byte=calib.mid(i*12,4);
         byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
@@ -1094,7 +1095,8 @@ void GeneralEdit::on_calstore_PB_clicked()
       }
     }
     calib.clear();
-    for (int i=0; i< (NUM_STICKS+NUM_POTS); i++) {
+    // TODO NUM_POTS hardcoded again here to 3
+    for (int i=0; i< (NUM_STICKS+3); i++) {
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibMid[i], 4, 16, QChar('0')));
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanNeg[i], 4, 16, QChar('0')));
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanPos[i], 4, 16, QChar('0')));

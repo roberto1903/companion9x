@@ -87,7 +87,7 @@ namespace Open9xX9D {
 #include "../open9x/translations/tts_en.cpp"
 #include "../open9x/haptic.cpp"
 
-int16_t g_anas[NUM_STICKS+NUM_POTS];
+int16_t g_anas[NUM_STICKS+BOARD_X9D_NUM_POTS];
 
 uint16_t anaIn(uint8_t chan)
 {

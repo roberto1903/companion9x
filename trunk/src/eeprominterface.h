@@ -186,10 +186,10 @@ enum HeliSwashTypes {
  HELI_SWASH_TYPE_90
 };
 
-
 #define NUM_STICKS          4
-#define NUM_POTS            3 // TODO should be 4 now!
-// #define NUM_ROTARY_ENCODERS 2
+#define BOARD_9X_NUM_POTS   3
+#define BOARD_X9D_NUM_POTS  4
+#define C9X_NUM_POTS        4
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
 #define NUM_CYC             3
@@ -332,15 +332,14 @@ enum BeeperMode {
   e_all = 1
 };
 
-// TODO NUM_POTS should be used here, but when equal to 4 !!!
 class GeneralSettings {
   public:
     GeneralSettings();
     unsigned int version;
     unsigned int variant;
-    int   calibMid[NUM_STICKS+4];
-    int   calibSpanNeg[NUM_STICKS+4];
-    int   calibSpanPos[NUM_STICKS+4];
+    int   calibMid[NUM_STICKS+C9X_NUM_POTS];
+    int   calibSpanNeg[NUM_STICKS+C9X_NUM_POTS];
+    int   calibSpanPos[NUM_STICKS+C9X_NUM_POTS];
     unsigned int  currModel; // 0..15
     unsigned int   contrast;
     unsigned int   vBatWarn;
