@@ -92,7 +92,7 @@ Gruvin9xGeneral_v103::operator GeneralSettings ()
 {
   GeneralSettings result;
 
-  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+  for (int i=0; i<NUM_STICKS+BOARD_9X_NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];
     result.calibSpanPos[i] = calibSpanPos[i];
@@ -153,7 +153,7 @@ t_Gruvin9xGeneral_v104::t_Gruvin9xGeneral_v104(GeneralSettings &c9x)
 
   myVers = EEPROM_VER;
 
-  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+  for (int i=0; i<NUM_STICKS+BOARD_9X_NUM_POTS; i++) {
     calibMid[i] = c9x.calibMid[i];
     calibSpanNeg[i] = c9x.calibSpanNeg[i];
     calibSpanPos[i] = c9x.calibSpanPos[i];
@@ -205,7 +205,7 @@ Gruvin9xGeneral_v104::operator GeneralSettings ()
 {
   GeneralSettings result;
 
-  for (int i=0; i<NUM_STICKS+NUM_POTS; i++) {
+  for (int i=0; i<NUM_STICKS+BOARD_9X_NUM_POTS; i++) {
     result.calibMid[i] = calibMid[i];
     result.calibSpanNeg[i] = calibSpanNeg[i];
     result.calibSpanPos[i] = calibSpanPos[i];

@@ -87,7 +87,8 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
           ui->profile_label->show();
           ui->patchcalib_CB->show();
           ui->patchhw_CB->show();
-          if (!((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16))) {
+          // TODO I hardcode the number of pots here, should be dependant on the board?
+          if (!((calib.length()==(NUM_STICKS+3)*12) && (trainercalib.length()==16))) {
             ui->patchcalib_CB->setDisabled(true);
           }
           if (!((DisplaySet.length()==6) && (BeeperSet.length()==4) && (HapticSet.length()==6) && (SpeakerSet.length()==6))) {
@@ -430,11 +431,13 @@ void burnDialog::on_BurnFlashButton_clicked()
     settings.endGroup();
     bool patch=false;
     if (ui->patchcalib_CB->isChecked()) {
-      if ((calib.length()==(NUM_STICKS+NUM_POTS)*12) && (trainercalib.length()==16)) {
+      // TODO I hardcode the number of pots here, should be dependant on the board?
+      if ((calib.length()==(NUM_STICKS+3)*12) && (trainercalib.length()==16)) {
         QString Byte;
         int16_t byte16;
         bool ok;
-        for (int i=0; i<(NUM_STICKS+NUM_POTS); i++) {
+        // TODO I hardcode the number of pots here, should be dependant on the board?
+        for (int i=0; i<(NUM_STICKS+3); i++) {
           Byte=calib.mid(i*12,4);
           byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)
