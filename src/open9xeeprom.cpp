@@ -1024,7 +1024,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new SpareBitsField<1>());
   Append(new ConversionField< SignedField<8> >(modelData.ppmDelay, exportPpmDelay, importPpmDelay));
 
-  if (IS_ARM(board))
+  if (IS_ARM(board) || board==BOARD_GRUVIN9X)
     Append(new UnsignedField<16>(modelData.beepANACenter));
   else
     Append(new UnsignedField<8>(modelData.beepANACenter));
