@@ -985,28 +985,28 @@ který kanál patří ke kterému výstupu.</translation>
         <translation>Proud</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1023"/>
-        <location filename="generaledit.cpp" line="1064"/>
+        <location filename="generaledit.cpp" line="1024"/>
+        <location filename="generaledit.cpp" line="1065"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1023"/>
+        <location filename="generaledit.cpp" line="1024"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Špatná data v profilu, není možné získat parametry kalibrace</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1064"/>
+        <location filename="generaledit.cpp" line="1065"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Špatná data v profilu, není možné získat HW parametry</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1088"/>
+        <location filename="generaledit.cpp" line="1089"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Chcete uložit kalibraci do profilu %1&lt;br&gt;Přepsat existující kalibraci?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1119"/>
+        <location filename="generaledit.cpp" line="1121"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Kalibrace a HW parametry byly uloženy.</translation>
     </message>
@@ -4867,7 +4867,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="444"/>
-        <location filename="helpers.cpp" line="719"/>
+        <location filename="helpers.cpp" line="718"/>
         <source>ON</source>
         <translation>ZAPNUTO</translation>
     </message>
@@ -4878,17 +4878,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="448"/>
-        <location filename="helpers.cpp" line="719"/>
+        <location filename="helpers.cpp" line="718"/>
         <source>OFF</source>
         <translation>VYPNUTO</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="604"/>
+        <location filename="eeprominterface.cpp" line="596"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="606"/>
+        <location filename="eeprominterface.cpp" line="598"/>
         <source>er9x</source>
         <translation></translation>
     </message>
@@ -4909,83 +4909,83 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">gruvin9x(pracovní verze) pro v4 desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="978"/>
+        <location filename="open9xinterface.cpp" line="985"/>
         <source>open9x for stock board</source>
         <translation>open9x pro 9X/9XR zákl. desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="975"/>
+        <location filename="open9xinterface.cpp" line="982"/>
         <source>Support for frsky telemetry mod</source>
         <translation>Podpora frsky telemetrie tj. zobrazení telemetrických dat na displeji rádia
 (je potřeba upravit HW, bez této úpravy nebudou fungovat dva přepínače!
 a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="975"/>
+        <location filename="open9xinterface.cpp" line="982"/>
         <source>Support for jeti telemetry mod</source>
         <translation>Podpora telemetrie JETI</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="975"/>
+        <location filename="open9xinterface.cpp" line="982"/>
         <source>Support for receiving ardupilot data</source>
         <translation>telemetrie - podpora pro příjem ardupilot dat</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="975"/>
+        <location filename="open9xinterface.cpp" line="982"/>
         <source>Support for receiving NMEA data</source>
         <translation>telemetrie - podpora pro příjem NMEA dat</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="975"/>
+        <location filename="open9xinterface.cpp" line="982"/>
         <source>Support for telemetry easy board</source>
         <translation>Podpora pro desku TelemetrEZ</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="980"/>
-        <location filename="open9xinterface.cpp" line="1008"/>
-        <location filename="open9xinterface.cpp" line="1035"/>
+        <location filename="open9xinterface.cpp" line="987"/>
+        <location filename="open9xinterface.cpp" line="1015"/>
+        <location filename="open9xinterface.cpp" line="1042"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="981"/>
-        <location filename="open9xinterface.cpp" line="1009"/>
-        <location filename="open9xinterface.cpp" line="1036"/>
-        <location filename="open9xinterface.cpp" line="1060"/>
-        <location filename="open9xinterface.cpp" line="1078"/>
+        <location filename="open9xinterface.cpp" line="988"/>
+        <location filename="open9xinterface.cpp" line="1016"/>
+        <location filename="open9xinterface.cpp" line="1043"/>
+        <location filename="open9xinterface.cpp" line="1067"/>
+        <location filename="open9xinterface.cpp" line="1085"/>
         <source>Enable TEMPLATES menu</source>
         <translation>Přidá menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="982"/>
-        <location filename="open9xinterface.cpp" line="1010"/>
+        <location filename="open9xinterface.cpp" line="989"/>
+        <location filename="open9xinterface.cpp" line="1017"/>
         <source>No splash screen</source>
         <translation>Bez úvodního loga
 Firmware nebude obsahovat žádné logo, ani podporu pro něj.
 Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkce</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="983"/>
-        <location filename="open9xinterface.cpp" line="1011"/>
-        <location filename="open9xinterface.cpp" line="1037"/>
-        <location filename="open9xinterface.cpp" line="1061"/>
-        <location filename="open9xinterface.cpp" line="1079"/>
+        <location filename="open9xinterface.cpp" line="990"/>
+        <location filename="open9xinterface.cpp" line="1018"/>
+        <location filename="open9xinterface.cpp" line="1044"/>
+        <location filename="open9xinterface.cpp" line="1068"/>
+        <location filename="open9xinterface.cpp" line="1086"/>
         <source>No flight phases</source>
         <translation>Bez letových režimů</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="984"/>
-        <location filename="open9xinterface.cpp" line="1012"/>
-        <location filename="open9xinterface.cpp" line="1038"/>
-        <location filename="open9xinterface.cpp" line="1062"/>
-        <location filename="open9xinterface.cpp" line="1080"/>
+        <location filename="open9xinterface.cpp" line="991"/>
+        <location filename="open9xinterface.cpp" line="1019"/>
+        <location filename="open9xinterface.cpp" line="1045"/>
+        <location filename="open9xinterface.cpp" line="1069"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
         <source>Disable curves menus</source>
         <translation>Bez uživatelsky definovatelných křivek</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="985"/>
-        <location filename="open9xinterface.cpp" line="1013"/>
+        <location filename="open9xinterface.cpp" line="992"/>
+        <location filename="open9xinterface.cpp" line="1020"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Vylepšený zvukový výstup,
 funkční i s origo pípákem,
@@ -4993,56 +4993,56 @@ ale doporučuje se provést
 instalaci reproduktoru</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="986"/>
-        <location filename="open9xinterface.cpp" line="1014"/>
-        <location filename="open9xinterface.cpp" line="1040"/>
+        <location filename="open9xinterface.cpp" line="993"/>
+        <location filename="open9xinterface.cpp" line="1021"/>
+        <location filename="open9xinterface.cpp" line="1047"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Hlasový výstup pro telemetrii,
 nutno zastavět hlasový modul</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="987"/>
-        <location filename="open9xinterface.cpp" line="1015"/>
+        <location filename="open9xinterface.cpp" line="994"/>
+        <location filename="open9xinterface.cpp" line="1022"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Výstrahy pomocí vibračního motoru
 (je třeba osadit)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="988"/>
-        <location filename="open9xinterface.cpp" line="1016"/>
-        <location filename="open9xinterface.cpp" line="1041"/>
+        <location filename="open9xinterface.cpp" line="995"/>
+        <location filename="open9xinterface.cpp" line="1023"/>
+        <location filename="open9xinterface.cpp" line="1048"/>
         <source>Support of FrSky PXX protocol</source>
         <translation>Podpora pro Frsky PXX protokol</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="989"/>
-        <location filename="open9xinterface.cpp" line="1017"/>
-        <location filename="open9xinterface.cpp" line="1042"/>
+        <location filename="open9xinterface.cpp" line="996"/>
+        <location filename="open9xinterface.cpp" line="1024"/>
+        <location filename="open9xinterface.cpp" line="1049"/>
         <source>Support for DSM2 modules</source>
         <translation>Podpora DSM2 modulů</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="990"/>
-        <location filename="open9xinterface.cpp" line="1018"/>
-        <location filename="open9xinterface.cpp" line="1044"/>
+        <location filename="open9xinterface.cpp" line="997"/>
+        <location filename="open9xinterface.cpp" line="1025"/>
+        <location filename="open9xinterface.cpp" line="1051"/>
         <source>PPM center adjustment in limits</source>
         <translation>Možnost nastavovat střed serva šířkou pulzu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="991"/>
-        <location filename="open9xinterface.cpp" line="1019"/>
-        <location filename="open9xinterface.cpp" line="1045"/>
-        <location filename="open9xinterface.cpp" line="1063"/>
-        <location filename="open9xinterface.cpp" line="1081"/>
+        <location filename="open9xinterface.cpp" line="998"/>
+        <location filename="open9xinterface.cpp" line="1026"/>
+        <location filename="open9xinterface.cpp" line="1052"/>
+        <location filename="open9xinterface.cpp" line="1070"/>
+        <location filename="open9xinterface.cpp" line="1088"/>
         <source>PPM values displayed in us</source>
         <translation>hodnoty PPM budou zobrazeny v us (mikrosekundy)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="993"/>
-        <location filename="open9xinterface.cpp" line="1021"/>
-        <location filename="open9xinterface.cpp" line="1047"/>
-        <location filename="open9xinterface.cpp" line="1065"/>
-        <location filename="open9xinterface.cpp" line="1083"/>
+        <location filename="open9xinterface.cpp" line="1000"/>
+        <location filename="open9xinterface.cpp" line="1028"/>
+        <location filename="open9xinterface.cpp" line="1054"/>
+        <location filename="open9xinterface.cpp" line="1072"/>
+        <location filename="open9xinterface.cpp" line="1090"/>
         <source>Symetrical Limits</source>
         <translation>Symetrické limity
 Přidá možnost volby mezi
@@ -5053,8 +5053,8 @@ Přidá možnost volby mezi
 nastavené limity tedy nemusí být rovny hodnotě -100% a 100%, ale budou pouze maximem výchylky)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="994"/>
-        <location filename="open9xinterface.cpp" line="1022"/>
+        <location filename="open9xinterface.cpp" line="1001"/>
+        <location filename="open9xinterface.cpp" line="1029"/>
         <source>Pots use in menus navigation</source>
         <translation>Moznost zadávat hodnoty
 a pohybovat se v menu
@@ -5065,29 +5065,29 @@ pomocí potenciometrů</translation>
         <translation type="obsolete">Podpora přídavné desky TelemetrEZ</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="995"/>
-        <location filename="open9xinterface.cpp" line="1023"/>
+        <location filename="open9xinterface.cpp" line="1002"/>
+        <location filename="open9xinterface.cpp" line="1030"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Podpora pro modul SmartieParts 2.2
 (programátor/podsvícení)
 Není určeno pro starší verze Smartie Parts</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="996"/>
-        <location filename="open9xinterface.cpp" line="1024"/>
-        <location filename="open9xinterface.cpp" line="1048"/>
-        <location filename="open9xinterface.cpp" line="1066"/>
-        <location filename="open9xinterface.cpp" line="1084"/>
+        <location filename="open9xinterface.cpp" line="1003"/>
+        <location filename="open9xinterface.cpp" line="1031"/>
+        <location filename="open9xinterface.cpp" line="1055"/>
+        <location filename="open9xinterface.cpp" line="1073"/>
+        <location filename="open9xinterface.cpp" line="1091"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Výběr spínače v mixu atd.
 se provádí jeho sepnutím</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="997"/>
-        <location filename="open9xinterface.cpp" line="1025"/>
-        <location filename="open9xinterface.cpp" line="1049"/>
-        <location filename="open9xinterface.cpp" line="1067"/>
-        <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1004"/>
+        <location filename="open9xinterface.cpp" line="1032"/>
+        <location filename="open9xinterface.cpp" line="1056"/>
+        <location filename="open9xinterface.cpp" line="1074"/>
+        <location filename="open9xinterface.cpp" line="1092"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
 (+) a (-) invertuje hodnotu
@@ -5096,20 +5096,20 @@ se provádí jeho sepnutím</translation>
 (UP) a (DN) vastaví výchozí hodnotu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="998"/>
-        <location filename="open9xinterface.cpp" line="1026"/>
-        <location filename="open9xinterface.cpp" line="1050"/>
-        <location filename="open9xinterface.cpp" line="1068"/>
-        <location filename="open9xinterface.cpp" line="1086"/>
+        <location filename="open9xinterface.cpp" line="1005"/>
+        <location filename="open9xinterface.cpp" line="1033"/>
+        <location filename="open9xinterface.cpp" line="1057"/>
+        <location filename="open9xinterface.cpp" line="1075"/>
+        <location filename="open9xinterface.cpp" line="1093"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="999"/>
-        <location filename="open9xinterface.cpp" line="1027"/>
-        <location filename="open9xinterface.cpp" line="1051"/>
-        <location filename="open9xinterface.cpp" line="1069"/>
-        <location filename="open9xinterface.cpp" line="1087"/>
+        <location filename="open9xinterface.cpp" line="1006"/>
+        <location filename="open9xinterface.cpp" line="1034"/>
+        <location filename="open9xinterface.cpp" line="1058"/>
+        <location filename="open9xinterface.cpp" line="1076"/>
+        <location filename="open9xinterface.cpp" line="1094"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
 Pokud není tato volby vybrána,
@@ -5118,44 +5118,44 @@ zobrazovány tučným pismem. Neaktivní mixy/spínače budou
 zobrazeny normálním písmem</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1000"/>
+        <location filename="open9xinterface.cpp" line="1007"/>
         <source>Don&apos;t show the throttle trace in Statistics</source>
         <translation>Nezobrazovat Stopu Plynu (Throttle-trace) v panelu STATISTIKA</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1001"/>
-        <location filename="open9xinterface.cpp" line="1028"/>
-        <location filename="open9xinterface.cpp" line="1052"/>
+        <location filename="open9xinterface.cpp" line="1008"/>
+        <location filename="open9xinterface.cpp" line="1035"/>
+        <location filename="open9xinterface.cpp" line="1059"/>
         <source>EEprom write Progress bar</source>
         <translation>Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1002"/>
-        <location filename="open9xinterface.cpp" line="1029"/>
-        <location filename="open9xinterface.cpp" line="1053"/>
-        <location filename="open9xinterface.cpp" line="1070"/>
-        <location filename="open9xinterface.cpp" line="1088"/>
+        <location filename="open9xinterface.cpp" line="1009"/>
+        <location filename="open9xinterface.cpp" line="1036"/>
+        <location filename="open9xinterface.cpp" line="1060"/>
+        <location filename="open9xinterface.cpp" line="1077"/>
+        <location filename="open9xinterface.cpp" line="1095"/>
         <source>Imperial units</source>
         <translation>Imerialní jednotky pro telemetrii
 (stopy, palce, míle atd.)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1071"/>
+        <location filename="open9xinterface.cpp" line="1078"/>
         <source>Bluetooth interface</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1075"/>
+        <location filename="open9xinterface.cpp" line="1082"/>
         <source>open9x for x9da board</source>
         <translation>open9x pro x9da zákl. desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="992"/>
-        <location filename="open9xinterface.cpp" line="1020"/>
-        <location filename="open9xinterface.cpp" line="1046"/>
-        <location filename="open9xinterface.cpp" line="1064"/>
-        <location filename="open9xinterface.cpp" line="1082"/>
+        <location filename="open9xinterface.cpp" line="999"/>
+        <location filename="open9xinterface.cpp" line="1027"/>
+        <location filename="open9xinterface.cpp" line="1053"/>
+        <location filename="open9xinterface.cpp" line="1071"/>
+        <location filename="open9xinterface.cpp" line="1089"/>
         <source>Global variables</source>
         <translation>Aktivuje Global Variables
 Jsou to proměnné, které lze použít pro konfiguraci místo některých pevných číselných hodnot.
@@ -5164,27 +5164,27 @@ Jejich hodnoty naleznete u originální 9x desky v seznamu křivek. U ostatních
 Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Funkce</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1006"/>
+        <location filename="open9xinterface.cpp" line="1013"/>
         <source>open9x for M128 / stock board</source>
         <translation>open9x pro 9X/9XR zákl. desku s M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1033"/>
+        <location filename="open9xinterface.cpp" line="1040"/>
         <source>open9x for gruvin9x board</source>
         <translation>open9x pro gruvin9x zákl. desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1039"/>
+        <location filename="open9xinterface.cpp" line="1046"/>
         <source>Support for SD memory card</source>
         <translation>Podpora paměťové karty SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1042"/>
+        <location filename="open9xinterface.cpp" line="1049"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1057"/>
+        <location filename="open9xinterface.cpp" line="1064"/>
         <source>open9x for sky9x board</source>
         <translation>open9x pro sky9x desku</translation>
     </message>
@@ -5193,13 +5193,13 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation type="obsolete">open9x pro ersky9x desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1059"/>
-        <location filename="open9xinterface.cpp" line="1077"/>
+        <location filename="open9xinterface.cpp" line="1066"/>
+        <location filename="open9xinterface.cpp" line="1084"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="615"/>
+        <location filename="eeprominterface.cpp" line="607"/>
         <source>ersky9x</source>
         <translation></translation>
     </message>
@@ -5310,13 +5310,13 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <location filename="ersky9xinterface.cpp" line="248"/>
         <location filename="mdichild.cpp" line="146"/>
         <location filename="modeledit.cpp" line="4621"/>
-        <location filename="open9xinterface.cpp" line="519"/>
+        <location filename="open9xinterface.cpp" line="500"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
         <location filename="ersky9xinterface.cpp" line="249"/>
-        <location filename="open9xinterface.cpp" line="520"/>
+        <location filename="open9xinterface.cpp" line="501"/>
         <source>EEPROM saved with these warnings:</source>
         <translation>EEPROM uložena s těmito varováními:</translation>
     </message>
@@ -5635,28 +5635,38 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation>Hodnota fáze FP%1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="719"/>
+        <location filename="helpers.cpp" line="718"/>
         <source>Keys</source>
         <translation>Klávesy</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="719"/>
+        <location filename="helpers.cpp" line="718"/>
         <source>Sticks</source>
         <translation>Páky</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="719"/>
+        <location filename="helpers.cpp" line="718"/>
         <source>Keys + Sticks</source>
         <translation>Klávesy i páky</translation>
     </message>
     <message>
+        <location filename="helpers.cpp" line="829"/>
+        <source>-GV%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="995"/>
+        <source>(-GV%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="eeprominterface.cpp" line="409"/>
-        <location filename="helpers.cpp" line="834"/>
+        <location filename="helpers.cpp" line="845"/>
         <source>GV%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="970"/>
+        <location filename="helpers.cpp" line="983"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
@@ -5701,17 +5711,22 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation>Tato verze Open9x nepodporuje v CS funkci %1</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="699"/>
+        <location filename="open9xeeprom.cpp" line="780"/>
         <source>Open9x on gruvin9x board doesn&apos;t accept this function</source>
         <translation>Open9x nepodporuje tuto funkci na desce gruvin9x</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="701"/>
+        <location filename="open9xeeprom.cpp" line="782"/>
         <source>Open9x on stock board doesn&apos;t accept this function</source>
         <translation>Open9x nepodporuje tuto funkci na desce 9X/9XR</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="908"/>
+        <location filename="open9xeeprom.cpp" line="1014"/>
+        <source>Open9x / sky9x doesn&apos;t accept this protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xeeprom.cpp" line="1016"/>
         <location filename="open9xGruvin9xeeprom.cpp" line="990"/>
         <location filename="open9xGruvin9xeeprom.cpp" line="1188"/>
         <location filename="open9xGruvin9xeeprom.cpp" line="1394"/>
@@ -5734,12 +5749,13 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation>Open9x nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="910"/>
+        <location filename="open9xeeprom.cpp" line="1018"/>
+        <location filename="open9xeeprom.cpp" line="1079"/>
         <source>Open9x doesn&apos;t allow this number of channels</source>
         <translation>V Open9x nelze použít tento počet kanálů</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="523"/>
+        <location filename="open9xeeprom.cpp" line="603"/>
         <location filename="open9xGruvin9xeeprom.cpp" line="1618"/>
         <location filename="open9xGruvin9xeeprom.cpp" line="1817"/>
         <location filename="open9xSky9xeeprom.cpp" line="2274"/>
@@ -5824,7 +5840,7 @@ Pořadí telemetrických kanálů bylo změněno, prosím zkontrolujte nastvení
 V konfiguraci DV/Expo byly provedeny změny, zkontrolujte nastavení než poletíte!</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="981"/>
+        <location filename="helpers.cpp" line="997"/>
         <source>(GV%1)</source>
         <translation></translation>
     </message>
@@ -6206,7 +6222,7 @@ m2560 pro V4 desky</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="444"/>
-        <location filename="burndialog.cpp" line="182"/>
+        <location filename="burndialog.cpp" line="183"/>
         <source>Burn to TX</source>
         <translation>Zapsat do rádia</translation>
     </message>
@@ -6236,128 +6252,128 @@ m2560 pro V4 desky</translation>
         <translation>Současný profil</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="143"/>
+        <location filename="burndialog.cpp" line="144"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="146"/>
+        <location filename="burndialog.cpp" line="147"/>
         <source>Choose file to write to EEPROM memory</source>
         <translation>Vyberte soubor pro zápis do paměti EEPROM</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="225"/>
-        <location filename="burndialog.cpp" line="395"/>
-        <location filename="burndialog.cpp" line="399"/>
-        <location filename="burndialog.cpp" line="407"/>
-        <location filename="burndialog.cpp" line="462"/>
-        <location filename="burndialog.cpp" line="516"/>
+        <location filename="burndialog.cpp" line="226"/>
+        <location filename="burndialog.cpp" line="396"/>
+        <location filename="burndialog.cpp" line="400"/>
+        <location filename="burndialog.cpp" line="408"/>
+        <location filename="burndialog.cpp" line="465"/>
+        <location filename="burndialog.cpp" line="519"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="225"/>
+        <location filename="burndialog.cpp" line="226"/>
         <source>%1 is not a known firmware</source>
         <translation>%1 není známý firmware</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="226"/>
+        <location filename="burndialog.cpp" line="227"/>
         <source>Burn anyway !</source>
         <translation>Přesto vypálit !</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="240"/>
-        <location filename="burndialog.cpp" line="247"/>
-        <location filename="burndialog.cpp" line="254"/>
-        <location filename="burndialog.cpp" line="298"/>
-        <location filename="burndialog.cpp" line="306"/>
-        <location filename="burndialog.cpp" line="336"/>
-        <location filename="burndialog.cpp" line="357"/>
-        <location filename="burndialog.cpp" line="530"/>
-        <location filename="burndialog.cpp" line="535"/>
-        <location filename="burndialog.cpp" line="543"/>
+        <location filename="burndialog.cpp" line="241"/>
+        <location filename="burndialog.cpp" line="248"/>
+        <location filename="burndialog.cpp" line="255"/>
+        <location filename="burndialog.cpp" line="299"/>
+        <location filename="burndialog.cpp" line="307"/>
+        <location filename="burndialog.cpp" line="337"/>
+        <location filename="burndialog.cpp" line="358"/>
+        <location filename="burndialog.cpp" line="533"/>
+        <location filename="burndialog.cpp" line="538"/>
+        <location filename="burndialog.cpp" line="546"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="240"/>
+        <location filename="burndialog.cpp" line="241"/>
         <source>Unable to find file %1!</source>
         <translation>Nemohu nalézt soubor %1!</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="247"/>
-        <location filename="burndialog.cpp" line="254"/>
-        <location filename="burndialog.cpp" line="298"/>
+        <location filename="burndialog.cpp" line="248"/>
+        <location filename="burndialog.cpp" line="255"/>
+        <location filename="burndialog.cpp" line="299"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="277"/>
-        <location filename="burndialog.cpp" line="287"/>
-        <location filename="burndialog.cpp" line="310"/>
+        <location filename="burndialog.cpp" line="278"/>
+        <location filename="burndialog.cpp" line="288"/>
+        <location filename="burndialog.cpp" line="311"/>
         <source>Invalid binary EEPROM File %1, Proceed anyway ?</source>
         <translation>Neplatný binární soubor EEPROM %1, Přesto pokračovat ?</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="306"/>
+        <location filename="burndialog.cpp" line="307"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="330"/>
+        <location filename="burndialog.cpp" line="331"/>
         <source>Open Image to load</source>
         <translation>Otevřít soubor s logem</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="330"/>
+        <location filename="burndialog.cpp" line="331"/>
         <source>Images (%1)</source>
         <translation>obrázky (%1)</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="336"/>
-        <location filename="burndialog.cpp" line="357"/>
+        <location filename="burndialog.cpp" line="337"/>
+        <location filename="burndialog.cpp" line="358"/>
         <source>Cannot load %1.</source>
         <translation>Nemohu načíst %1.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="395"/>
+        <location filename="burndialog.cpp" line="396"/>
         <source>Cannot save customized firmware</source>
         <translation>Nelze uložit upravený firmware</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="399"/>
+        <location filename="burndialog.cpp" line="400"/>
         <source>Custom image not found</source>
         <translation>Vlastní obrázek nebyl nalezen</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="407"/>
+        <location filename="burndialog.cpp" line="408"/>
         <source>No firmware selected</source>
         <translation>nebyl vybrán firmware</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="462"/>
+        <location filename="burndialog.cpp" line="465"/>
         <source>Wrong radio calibration data in profile, eeprom not patched</source>
         <translation>Špatná kalibrační data v profilu, nebala zaměněna v EEPROM</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="516"/>
+        <location filename="burndialog.cpp" line="519"/>
         <source>Wrong radio setting data in profile, eeprom not patched</source>
         <translation>Špatná HW data v profilu, nebala zaměněna v EEPROM</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="530"/>
-        <location filename="burndialog.cpp" line="535"/>
+        <location filename="burndialog.cpp" line="533"/>
+        <location filename="burndialog.cpp" line="538"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Nelze zapsat soubor %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="543"/>
+        <location filename="burndialog.cpp" line="546"/>
         <source>Error writing file %1:
 %2.</source>
         <translation>Chyba při zápisuí souboru %1:
@@ -9255,192 +9271,199 @@ nutno zastavět hlasový modul</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="800"/>
+        <location filename="simulatordialog.ui" line="813"/>
         <source>P1</source>
         <translation>Potenciometr1</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="834"/>
+        <location filename="simulatordialog.ui" line="835"/>
+        <location filename="simulatordialog.ui" line="895"/>
+        <location filename="simulatordialog.ui" line="952"/>
+        <source>0 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="870"/>
         <source>P2</source>
         <translation>Potenciometr2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="871"/>
+        <location filename="simulatordialog.ui" line="930"/>
         <source>P3</source>
         <translation>Potenciometr3</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="917"/>
+        <location filename="simulatordialog.ui" line="999"/>
         <source>9x Simulator</source>
         <translation>9x Simulátor</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1110"/>
+        <location filename="simulatordialog.ui" line="1192"/>
         <source>Outputs</source>
         <translation>Výstupy</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1141"/>
+        <location filename="simulatordialog.ui" line="1223"/>
         <source>SW1</source>
         <translation>CS1</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1172"/>
+        <location filename="simulatordialog.ui" line="1254"/>
         <source>SW2</source>
         <translation>CS2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1203"/>
+        <location filename="simulatordialog.ui" line="1285"/>
         <source>SW3</source>
         <translation>CS3</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1234"/>
+        <location filename="simulatordialog.ui" line="1316"/>
         <source>SW4</source>
         <translation>CS4</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1265"/>
+        <location filename="simulatordialog.ui" line="1347"/>
         <source>SW5</source>
         <translation>CS5</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1296"/>
+        <location filename="simulatordialog.ui" line="1378"/>
         <source>SW6</source>
         <translation>CS6</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1327"/>
+        <location filename="simulatordialog.ui" line="1409"/>
         <source>BEEP</source>
         <translation>Zvuk</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1358"/>
+        <location filename="simulatordialog.ui" line="1440"/>
         <source>SW7</source>
         <translation>CS7</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1389"/>
+        <location filename="simulatordialog.ui" line="1471"/>
         <source>SW8</source>
         <translation>CS8</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1420"/>
+        <location filename="simulatordialog.ui" line="1502"/>
         <source>SW9</source>
         <translation>CS9</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1451"/>
+        <location filename="simulatordialog.ui" line="1533"/>
         <source>SWA</source>
         <translation>SCA</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1482"/>
+        <location filename="simulatordialog.ui" line="1564"/>
         <source>SWB</source>
         <translation>CSB</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1513"/>
+        <location filename="simulatordialog.ui" line="1595"/>
         <source>SWC</source>
         <translation>CSC</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1596"/>
+        <location filename="simulatordialog.ui" line="1678"/>
         <source>CH1</source>
         <translation>Kanál1</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1615"/>
-        <location filename="simulatordialog.ui" line="1637"/>
-        <location filename="simulatordialog.ui" line="1795"/>
-        <location filename="simulatordialog.ui" line="1817"/>
-        <location filename="simulatordialog.ui" line="1975"/>
-        <location filename="simulatordialog.ui" line="1997"/>
-        <location filename="simulatordialog.ui" line="2155"/>
-        <location filename="simulatordialog.ui" line="2177"/>
-        <location filename="simulatordialog.ui" line="2329"/>
-        <location filename="simulatordialog.ui" line="2351"/>
-        <location filename="simulatordialog.ui" line="2454"/>
-        <location filename="simulatordialog.ui" line="2476"/>
-        <location filename="simulatordialog.ui" line="2634"/>
-        <location filename="simulatordialog.ui" line="2656"/>
-        <location filename="simulatordialog.ui" line="2814"/>
-        <location filename="simulatordialog.ui" line="2836"/>
+        <location filename="simulatordialog.ui" line="1697"/>
+        <location filename="simulatordialog.ui" line="1719"/>
+        <location filename="simulatordialog.ui" line="1877"/>
+        <location filename="simulatordialog.ui" line="1899"/>
+        <location filename="simulatordialog.ui" line="2057"/>
+        <location filename="simulatordialog.ui" line="2079"/>
+        <location filename="simulatordialog.ui" line="2237"/>
+        <location filename="simulatordialog.ui" line="2259"/>
+        <location filename="simulatordialog.ui" line="2411"/>
+        <location filename="simulatordialog.ui" line="2433"/>
+        <location filename="simulatordialog.ui" line="2536"/>
+        <location filename="simulatordialog.ui" line="2558"/>
+        <location filename="simulatordialog.ui" line="2716"/>
+        <location filename="simulatordialog.ui" line="2738"/>
+        <location filename="simulatordialog.ui" line="2896"/>
+        <location filename="simulatordialog.ui" line="2918"/>
         <source>-100.1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1708"/>
+        <location filename="simulatordialog.ui" line="1790"/>
         <source>CH9</source>
         <translation>Kanál9</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1721"/>
+        <location filename="simulatordialog.ui" line="1803"/>
         <source>CH2</source>
         <translation>Kanál2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1888"/>
+        <location filename="simulatordialog.ui" line="1970"/>
         <source>CH10</source>
         <translation>Kanál10</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1901"/>
+        <location filename="simulatordialog.ui" line="1983"/>
         <source>CH3</source>
         <translation>Kanál3</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2068"/>
+        <location filename="simulatordialog.ui" line="2150"/>
         <source>CH11</source>
         <translation>Kanál11</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2081"/>
+        <location filename="simulatordialog.ui" line="2163"/>
         <source>CH4</source>
         <translation>Kanál4</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2248"/>
+        <location filename="simulatordialog.ui" line="2330"/>
         <source>CH12</source>
         <translation>Kanál12</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2261"/>
+        <location filename="simulatordialog.ui" line="2343"/>
         <source>CH5</source>
         <translation>Kanál5</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2422"/>
+        <location filename="simulatordialog.ui" line="2504"/>
         <source>CH13</source>
         <translation>Kanál13</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2435"/>
+        <location filename="simulatordialog.ui" line="2517"/>
         <source>CH6</source>
         <translation>Kanál6</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2547"/>
+        <location filename="simulatordialog.ui" line="2629"/>
         <source>CH14</source>
         <translation>Kanál14</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2560"/>
+        <location filename="simulatordialog.ui" line="2642"/>
         <source>CH7</source>
         <translation>Kanál7</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2727"/>
+        <location filename="simulatordialog.ui" line="2809"/>
         <source>CH15</source>
         <translation>Kanál15</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2740"/>
+        <location filename="simulatordialog.ui" line="2822"/>
         <source>CH8</source>
         <translation>Kanál8</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="2907"/>
+        <location filename="simulatordialog.ui" line="2989"/>
         <source>CH16</source>
         <translation>Kanál16</translation>
     </message>
@@ -9461,22 +9484,22 @@ nutno zastavět hlasový modul</translation>
         <translation>Nelze otevřít joystick, není povolený</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="195"/>
+        <location filename="simulatordialog.cpp" line="205"/>
         <source>Firmware %1 error: %2</source>
         <translation>Firmware %1 chyba: %2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="204"/>
+        <location filename="simulatordialog.cpp" line="214"/>
         <source> - Phase: %1(%2)</source>
         <translation> - Fáze: %1(%2)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="298"/>
+        <location filename="simulatordialog.cpp" line="308"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simulace Tx (%1)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="304"/>
+        <location filename="simulatordialog.cpp" line="314"/>
         <source>Simulating </source>
         <translation>Simulace </translation>
     </message>
