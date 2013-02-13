@@ -1076,7 +1076,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (board == BOARD_SKY9X) {
     Append(new UnsignedField<8>(modelData.ppmSCH));
     Append(new UnsignedField<8>(modelData.ppm2SCH));
-    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels")));
+    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
   }
 }
 

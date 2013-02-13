@@ -141,7 +141,7 @@ bool Open9xSky9xSimulator::lcdChanged(bool & lightEnable)
 void Open9xSky9xSimulator::start(RadioData &radioData, bool tests)
 {
   g_rotenc[0] = 0;
-  open9xInterface->save(Open9xSky9x::eeprom, radioData);
+  open9xInterface->save(&eeprom[0], radioData);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }

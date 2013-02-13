@@ -550,16 +550,16 @@ void MdiChild::burnTo()  // write to Tx
 void MdiChild::simulate()
 {
     if(ui->modelsList->currentRow()<1) return;
-    simulatorDialog *sd = new simulatorDialog(this);
-    sd->loadParams(radioData, ui->modelsList->currentRow()-1);
-    sd->exec();
+    simulatorDialog sd(this);
+    sd.loadParams(radioData, ui->modelsList->currentRow()-1);
+    sd.exec();
 }
 
 void MdiChild::print()
 {
     if(ui->modelsList->currentRow()<1) return;
-    printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
-    pd->show();
+    printDialog pd(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
+    pd.show();
 }
 
 void MdiChild::viableModelSelected(bool viable)

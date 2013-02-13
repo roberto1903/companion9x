@@ -4612,8 +4612,10 @@ void ModelEdit::moveExpoDown()
 void ModelEdit::launchSimulation()
 {
   if (GetEepromInterface()->getSimulator()) {
+    RadioData simuData = radioData;
+    simuData.models[id_model] = g_model;
     simulatorDialog sd(this);
-    sd.loadParams(radioData, id_model);
+    sd.loadParams(simuData, id_model);
     sd.exec();
   }
   else {
