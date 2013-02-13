@@ -100,7 +100,9 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->volume_SB->hide();
       ui->volume_SB->setDisabled(true);
       ui->label_volume->hide();
-    }
+    } else {
+      ui->volume_SB->setMaximum(GetEepromInterface()->getCapability(MaxVolume));
+    }    
     if (!GetEepromInterface()->getCapability(HasBrightness)) {
       ui->BLBright_SB->hide();
       ui->BLBright_SB->setDisabled(true);

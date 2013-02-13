@@ -330,6 +330,8 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return 1;
     case HasBrightness:
       return 1;
+    case MaxVolume:
+      return 23;
     case Gvars:
     case GvarsHaveSources:
     case GvarsAsSources:

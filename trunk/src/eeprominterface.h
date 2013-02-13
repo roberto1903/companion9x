@@ -793,6 +793,7 @@ enum Capability {
  Simulation,
  SoundMod,
  SoundPitch,
+ MaxVolume,
  Beeperlen,
  Haptic,
  HapticLength,

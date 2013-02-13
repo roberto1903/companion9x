@@ -634,6 +634,11 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case Beeperlen:
       return 1;
+    case MaxVolume:
+      if ((board == BOARD_SKY9X) || (board == BOARD_X9DA))
+        return 23;
+      else
+        return 7;
     case ExtraChannels:
       return 0;
     case ExtraInputs:
