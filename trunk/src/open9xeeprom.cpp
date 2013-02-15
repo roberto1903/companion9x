@@ -227,17 +227,20 @@ class PhaseField: public TransformedField {
     int trimExt[NUM_STICKS];
 };
 
+#define FLAG_NOSWITCHES   1
+
 template <int N>
 class MixSourceField: public TransformedField {
   public:
-    MixSourceField(RawSource & source, BoardEnum board):
+    MixSourceField(RawSource & source, BoardEnum board, unsigned long flags=0):
       TransformedField(internalField),
       internalField(param),
       source(source),
       board(board),
       param(0),
       rotencCount(board == BOARD_SKY9X ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0)),
-      customSwitchesCount(MAX_CUSTOM_SWITCHES(board))
+      physicSwitchesCount((flags & FLAG_NOSWITCHES) ? 0 : 9),
+      customSwitchesCount((flags & FLAG_NOSWITCHES) ? 0 : MAX_CUSTOM_SWITCHES(board))
     {
     }
 
@@ -271,13 +274,13 @@ class MixSourceField: public TransformedField {
         param = 13 + rotencCount + open9xFromSwitch(RawSwitch(source.index), board);
       }
       else if (source.type == SOURCE_TYPE_CYC) {
-        param = 23 + customSwitchesCount + rotencCount + source.index;
+        param = 14 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
       }
       else if (source.type == SOURCE_TYPE_PPM) {
-        param = 26 + customSwitchesCount + rotencCount + source.index;
+        param = 17 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
       }
       else if (source.type == SOURCE_TYPE_CH) {
-        param = 34 + customSwitchesCount + rotencCount + source.index;
+        param = 25 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
       }
     }
 
@@ -301,17 +304,17 @@ class MixSourceField: public TransformedField {
       else if (param == 13 + rotencCount) {
         source = RawSource(SOURCE_TYPE_3POS);
       }
-      else if (param <= 22 + customSwitchesCount + rotencCount) {
+      else if (param <= 13+physicSwitchesCount + customSwitchesCount + rotencCount) {
         source = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(param-13-rotencCount, board).toValue());
       }
-      else if (param <= 25 + customSwitchesCount + rotencCount) {
-        source = RawSource(SOURCE_TYPE_CYC, param-23-customSwitchesCount-rotencCount);
+      else if (param <= 16 + physicSwitchesCount + customSwitchesCount + rotencCount) {
+        source = RawSource(SOURCE_TYPE_CYC, param-14-physicSwitchesCount-customSwitchesCount-rotencCount);
       }
-      else if (param <= 33 + customSwitchesCount + rotencCount) {
-        source = RawSource(SOURCE_TYPE_PPM, param-26-customSwitchesCount-rotencCount);
+      else if (param <= 24 + physicSwitchesCount + customSwitchesCount + rotencCount) {
+        source = RawSource(SOURCE_TYPE_PPM, param-17-physicSwitchesCount-customSwitchesCount-rotencCount);
       }
       else {
-        source = RawSource(SOURCE_TYPE_CH, param-34-customSwitchesCount-rotencCount);
+        source = RawSource(SOURCE_TYPE_CH, param-25-physicSwitchesCount-customSwitchesCount-rotencCount);
       }
     }
 
@@ -321,6 +324,7 @@ class MixSourceField: public TransformedField {
     BoardEnum board;
     unsigned int param;
     unsigned int rotencCount;
+    unsigned int physicSwitchesCount;
     unsigned int customSwitchesCount;
 };
 
@@ -332,7 +336,7 @@ class HeliField: public StructField {
       Append(new BoolField<1>(heli.invertAIL));
       Append(new BoolField<1>(heli.invertCOL));
       Append(new UnsignedField<5>(heli.type));
-      Append(new MixSourceField<8>(heli.collectiveSource, board));
+      Append(new MixSourceField<8>(heli.collectiveSource, board, FLAG_NOSWITCHES));
       Append(new UnsignedField<8>(heli.value));
     }
 };
