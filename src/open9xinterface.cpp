@@ -709,11 +709,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return 0;
       }
     case HasVolume:
-  //    if  (board==BOARD_SKY9X) {
+      if  (board==BOARD_SKY9X) {
         return 1;
-  //    } else {
-  //      return 0;
-  //    }
+      } else {
+        return 0;
+      }
     case HasBrightness:
       if  (board==BOARD_SKY9X) {
         return 1;
