@@ -470,31 +470,84 @@ class BoolField: public TransformedField {
     bool _b;
 };
 
-#define TABLE_CONVERSION(table) DIM(table)/2, table
+class ConversionTable {
+
+  public:
+    bool exportValue(int before, int &after)
+    {
+      after = 0;
+
+      for (std::list<ConversionTuple>::iterator it=internalTable.begin(); it!=internalTable.end(); it++) {
+        ConversionTuple tuple = *it;
+        if (before == tuple.a) {
+          after = tuple.b;
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    bool importValue(int before, int &after)
+    {
+      after = 0;
+
+      for (std::list<ConversionTuple>::iterator it=internalTable.begin(); it!=internalTable.end(); it++) {
+        ConversionTuple tuple = *it;
+        if (before == tuple.b) {
+          after = tuple.a;
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+  protected:
+
+    class ConversionTuple {
+      public:
+        ConversionTuple(int a, int b):
+          a(a),
+          b(b)
+        {
+        }
+
+        int a;
+        int b;
+    };
+
+    void addConversion(int a, int b)
+    {
+      internalTable.push_back(ConversionTuple(a, b));
+    }
+
+    std::list<ConversionTuple> internalTable;
+};
 
 template<class T>
 class ConversionField: public TransformedField {
   public:
-    ConversionField(int & field, const unsigned int count, const int *table, const QString & error = ""):
+    ConversionField(int & field, ConversionTable *table, const char *name, const QString & error = ""):
       TransformedField(internalField),
-      internalField(_field),
+      internalField(_field, name),
       field(field),
       _field(0),
-      count(count),
       table(table),
       shift(0),
+      min(INT_MIN),
+      max(INT_MAX),
       exportFunc(NULL),
       importFunc(NULL),
       error(error)
     {
     }
 
-    ConversionField(unsigned int & field, const unsigned int count, const int *table, const QString & error = ""):
+    ConversionField(unsigned int & field, ConversionTable *table, const char *name, const QString & error = ""):
       TransformedField(internalField),
-      internalField((unsigned int &)_field),
+      internalField((unsigned int &)_field, name),
       field((int &)field),
       _field(0),
-      count(count),
       table(table),
       shift(0),
       min(INT_MIN),
@@ -510,7 +563,6 @@ class ConversionField: public TransformedField {
       internalField(_field),
       field(field),
       _field(0),
-      count(0),
       table(NULL),
       shift(0),
       min(INT_MIN),
@@ -526,7 +578,6 @@ class ConversionField: public TransformedField {
       internalField(_field, name),
       field(field),
       _field(0),
-      count(0),
       table(NULL),
       shift(shift),
       min(min),
@@ -542,7 +593,6 @@ class ConversionField: public TransformedField {
       internalField((unsigned int &)_field),
       field((int &)field),
       _field(0),
-      count(0),
       table(NULL),
       shift(shift),
       min(INT_MIN),
@@ -556,12 +606,8 @@ class ConversionField: public TransformedField {
     virtual void beforeExport()
     {
       if (table) {
-        for (unsigned int i=0; i<count; i++) {
-          if (table[2*i] == field) {
-            _field = table[1+2*i];
-            return;
-          }
-        }
+        if (table->exportValue(field, _field))
+          return;
         EEPROMWarnings += error + "\n";
       }
       else if (shift) {
@@ -577,13 +623,8 @@ class ConversionField: public TransformedField {
     virtual void afterImport()
     {
       if (table) {
-        field = 0;
-        for (unsigned int i=0; i<count; i++) {
-          if (table[1+2*i] == _field) {
-            field = table[2*i];
-            return;
-          }
-        }
+        if (table->importValue(_field, field))
+          return;
       }
       else if (shift) {
         field = _field - shift;
@@ -597,8 +638,7 @@ class ConversionField: public TransformedField {
     T internalField;
     int & field;
     int _field;
-    const unsigned int count;
-    const int * table;
+    ConversionTable * table;
     int shift;
     int min;
     int max;

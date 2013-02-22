@@ -68,8 +68,6 @@ const char * Open9xInterface::getName()
       return "Open9x for gruvin9x board";
     case BOARD_X9DA:
       return "Open9x for X9DA board";
-    case BOARD_ACT:
-      return "Open9x for ACT board";
     case BOARD_SKY9X:
       return "Open9x for sky9x board";
     default:
@@ -90,8 +88,6 @@ const int Open9xInterface::getEEpromSize()
       return EESIZE_SKY9X;
     case BOARD_X9DA:
       return EESIZE_X9D;
-    case BOARD_ACT:
-      return EESIZE_ACT;
     default:
       return 0;
   }
@@ -169,9 +165,9 @@ bool Open9xInterface::loadModelVariant(ModelData &model, uint8_t *data, int inde
 }
 
 template <class T>
-bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int variant)
+bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int version, unsigned int variant)
 {
-  T open9xModel(model, board, variant);
+  T open9xModel(model, board, version, variant);
 
   if (!data) {
     // load from EEPROM
@@ -263,26 +259,12 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
     if (board == BOARD_SKY9X) {
       return loadModel<Open9xArmModelData_v212>(model, data, index);
     }
-#if 1
     else {
-      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, variant);
+      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
     }
-#else
-    else if (board == BOARD_GRUVIN9X) {
-      return loadModel<Open9xGruvin9xModelData_v212>(model, data, index);
-    }
-    else if (board == BOARD_M128) {
-      return loadModel<Open9xM128ModelData_v212>(model, data, index);
-    }
-    else {
-      return loadModelVariant<Open9xModelData_v212>(model, data, index, variant);
-    }
-#endif
   }
   else if (version == 213) {
-    if (IS_ARM(board)) {
-      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, variant);
-    }
+    return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
   }
 
   std::cout << " ko\n";
@@ -325,9 +307,9 @@ bool Open9xInterface::saveModel(unsigned int index, ModelData &model)
 }
 
 template <class T>
-bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, uint32_t variant)
+bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, unsigned int version, unsigned int variant)
 {
-  T open9xModel(model, board, variant);
+  T open9xModel(model, board, version, variant);
   // open9xModel.Dump();
   QByteArray eeprom;
   open9xModel.Export(eeprom);
@@ -391,23 +373,14 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   if (!version) {
     switch(board) {
-      case BOARD_ACT:
-        version = LAST_OPEN9X_ARM_EEPROM_VER;
-        break;
       case BOARD_X9DA:
-        version = LAST_OPEN9X_ARM_EEPROM_VER;
-        break;
       case BOARD_SKY9X:
         version = LAST_OPEN9X_ARM_EEPROM_VER;
         break;
       case BOARD_GRUVIN9X:
-        version = LAST_OPEN9X_GRUVIN9X_EEPROM_VER;
-        break;
       case BOARD_M128:
-        version = LAST_OPEN9X_STOCK_EEPROM_VER; // TODO M128
-        break;
       case BOARD_STOCK:
-        version = LAST_OPEN9X_STOCK_EEPROM_VER;
+        version = LAST_OPEN9X_AVR_EEPROM_VER;
         break;
     }
   }
@@ -483,11 +456,10 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           if (board == BOARD_SKY9X)
             result = saveModel<Open9xArmModelData_v212>(i, radioData.models[i]);
           else
-            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], variant);
+            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], version, variant);
           break;
         case 213:
-          if (IS_ARM(board))
-            result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], variant);
+          result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], version, variant);
           break;
       }
       if (!result)
@@ -516,7 +488,7 @@ int Open9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
   // TODO change this name, it's a factory
-  Open9xModelDataNew open9xModel(model, board, GetCurrentFirmwareVariant());
+  Open9xModelDataNew open9xModel(model, board, 213/*TODO*/, GetCurrentFirmwareVariant());
   // open9xModel.Dump();
 
   QByteArray eeprom;
@@ -537,7 +509,7 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
 
   // TODO change this name, it's a factory
-  Open9xGeneralDataNew open9xGeneral(settings, board, LAST_OPEN9X_STOCK_EEPROM_VER, GetCurrentFirmwareVariant());
+  Open9xGeneralDataNew open9xGeneral(settings, board, LAST_OPEN9X_AVR_EEPROM_VER, GetCurrentFirmwareVariant());
   // open9xGeneral.Dump();
 
   QByteArray eeprom;

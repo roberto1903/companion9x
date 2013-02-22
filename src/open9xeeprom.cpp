@@ -5,66 +5,155 @@
 #include <QObject>
 // #include <QMessageBox>
 
-int8_t open9xStock209FromSource(RawSource source);
-RawSource open9xStock209ToSource(int8_t value);
-int8_t open9xStockFromSwitch(const RawSwitch & sw);
-RawSwitch open9xStockToSwitch(int8_t sw);
-int8_t open9xV4209FromSource(RawSource source);
-RawSource open9xV4209ToSource(int8_t value);
-int8_t open9xArmFromSwitch(const RawSwitch & sw);
-RawSwitch open9xArmToSwitch(int8_t sw);
-RawSource open9xArm210ToSource(int8_t value);
-int8_t open9xArm210FromSource(RawSource source);
+#define HAS_PERSISTENT_TIMERS(board)         (IS_ARM(board) || board == BOARD_GRUVIN9X)
+#define HAS_LARGE_LCD(board)                 (board == BOARD_X9DA)
+#define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
+#define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
+#define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
+#define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
+#define MAX_CHANNELS(board, version)         (IS_ARM(board) ? 32 : 16)
+#define MAX_EXPOS(board, version)            (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 16 : 14))
+#define MAX_CUSTOM_SWITCHES(board, version)  (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 15 : 12))
+#define MAX_CUSTOM_FUNCTIONS(board, version) (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 24 : 16))
 
-#define HAS_PERSISTENT_TIMERS(board) (IS_ARM(board) || board == BOARD_GRUVIN9X)
-#define MAX_CUSTOM_SWITCHES(board)   (IS_ARM(board) ? 32 : 12)
-#define HAS_LARGE_LCD(board)         (board == BOARD_X9DA || board == BOARD_ACT)
-#define MAX_VIEWS(board)             (HAS_LARGE_LCD(board) ? 2 : 256)
-
-inline int8_t open9xFromSource(RawSource source, BoardEnum board)
+inline int switchIndex(int i, BoardEnum board, unsigned int version)
 {
-  if (board == BOARD_SKY9X)
-    return open9xArm210FromSource(source);
-  else if (board == BOARD_GRUVIN9X)
-    return open9xV4209FromSource(source);
+  bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+  if (recent)
+    return (i<=3 ? i+3 : (i<=6 ? i-3 : i));
   else
-    return open9xStock209FromSource(source);
+    return i;
 }
 
-inline RawSource open9xToSource(int8_t value, BoardEnum board)
-{
-  if (board == BOARD_SKY9X)
-    return open9xArm210ToSource(value);
-  else if (board == BOARD_GRUVIN9X)
-    return open9xV4209ToSource(value);
-  else
-    return open9xStock209ToSource(value);
-}
+class SwitchesConversionTable: public ConversionTable {
 
-inline int8_t open9xFromSwitch(const RawSwitch & sw, BoardEnum board)
-{
-  if (board == BOARD_SKY9X)
-    return open9xArmFromSwitch(sw);
-  else
-    return open9xStockFromSwitch(sw);
-}
+  public:
+    SwitchesConversionTable(BoardEnum board, unsigned int version, unsigned long flags=0)
+    {
+      int val=0;
 
-inline RawSwitch open9xToSwitch(int8_t sw, BoardEnum board)
-{
-  if (board == BOARD_SKY9X)
-    return open9xArmToSwitch(sw);
-  else
-    return open9xStockToSwitch(sw);
-}
+      addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
+
+      for (int i=1; i<=9; i++) {
+        int s = switchIndex(i, board, version);
+        addConversion(RawSwitch(SWITCH_TYPE_SWITCH, -s), -val);
+        addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+      }
+
+      for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++) {
+        addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, -i), -val);
+        addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+      }
+
+      addConversion(RawSwitch(SWITCH_TYPE_OFF), -val);
+      addConversion(RawSwitch(SWITCH_TYPE_ON), val++);
+
+      for (int i=1; i<=9; i++) {
+        int s = switchIndex(i, board, version);
+        addConversion(RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, -s), -val);
+        addConversion(RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, s), val++);
+      }
+
+      for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++) {
+        addConversion(RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, -i), -val);
+        addConversion(RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i), val++);
+      }
+
+      addConversion(RawSwitch(SWITCH_TYPE_ONM), val++);
+    }
+
+  protected:
+
+    // TODO const RawSwitch & sw
+    void addConversion(RawSwitch sw, int b)
+    {
+      ConversionTable::addConversion(sw.toValue(), b);
+    }
+};
+
+#define FLAG_NOSWITCHES   1
+#define FLAG_NOTELEMETRY  2
+
+class SourcesConversionTable: public ConversionTable {
+
+  public:
+    SourcesConversionTable(BoardEnum board, unsigned int version, unsigned long flags=0)
+    {
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+
+      int val=0;
+
+      addConversion(RawSource(SOURCE_TYPE_NONE), val++);
+
+      for (int i=0; i<7; i++)
+        addConversion(RawSource(SOURCE_TYPE_STICK, i), val++);
+
+      for (int i=0; i<MAX_ROTARY_ENCODERS(board); i++)
+        addConversion(RawSource(SOURCE_TYPE_ROTARY_ENCODER, 0), val++);
+
+      if (!recent) {
+        for (int i=0; i<NUM_STICKS; i++)
+          addConversion(RawSource(SOURCE_TYPE_TRIM, i), val++);
+      }
+
+      addConversion(RawSource(SOURCE_TYPE_MAX), val++);
+
+      if (recent) {
+        for (int i=0; i<3; i++)
+          addConversion(RawSource(SOURCE_TYPE_CYC, i), val++);
+      }
+
+      if (recent) {
+        for (int i=0; i<NUM_STICKS; i++)
+          addConversion(RawSource(SOURCE_TYPE_TRIM, i), val++);
+      }
+
+      addConversion(RawSource(SOURCE_TYPE_3POS), val++);
+
+      if (!(flags & FLAG_NOSWITCHES)) {
+        for (int i=1; i<=9; i++)
+          addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+        for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++)
+          addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue()), val++);
+      }
+
+      if (!recent) {
+        for (int i=0; i<3; i++)
+          addConversion(RawSource(SOURCE_TYPE_CYC, i), val++);
+      }
+
+      for (int i=0; i<8; i++)
+        addConversion(RawSource(SOURCE_TYPE_PPM, i), val++);
+
+      for (int i=0; i<MAX_CHANNELS(board, version); i++)
+        addConversion(RawSource(SOURCE_TYPE_CH, i), val++);
+
+      if (!(flags & FLAG_NOTELEMETRY)) {
+        for (int i=0; i<2; i++)
+          addConversion(RawSource(SOURCE_TYPE_TIMER, i), val++);
+
+        for (int i=0; i<C9X_NUM_TELEMETRY_SOURCES; i++)
+          addConversion(RawSource(SOURCE_TYPE_TELEMETRY, i), val++);
+      }
+    }
+
+  protected:
+
+    // TODO const RawSource & source
+    void addConversion(RawSource source, int b)
+    {
+      ConversionTable::addConversion(source.toValue(), b);
+    }
+};
 
 class TimerModeField: public TransformedField {
   public:
-    TimerModeField(TimerMode & mode, BoardEnum board):
+    TimerModeField(TimerMode & mode, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField(_mode),
       mode(mode),
       board(board),
-      numCSW(MAX_CUSTOM_SWITCHES(board)),
+      numCSW(MAX_CUSTOM_SWITCHES(board, version)),
       _mode(0)
     {
     }
@@ -108,41 +197,85 @@ class TimerModeField: public TransformedField {
 };
 
 template <int N>
-class SwitchField: public TransformedField {
+class SwitchField: public ConversionField< SignedField<N> > {
   public:
-    SwitchField(RawSwitch & sw, BoardEnum board):
-      TransformedField(internalField),
-      internalField(_sw),
+    SwitchField(RawSwitch & sw, BoardEnum board, unsigned int version, unsigned long flags=0):
+      ConversionField< SignedField<N> >(_switch, &switchesConversionTable, "Switch"),
+      switchesConversionTable(board, version, flags),
       sw(sw),
-      board(board)
+      _switch(0)
     {
     }
 
     virtual void beforeExport()
     {
-      _sw = open9xFromSwitch(sw, board);
+      _switch = sw.toValue();
+      ConversionField< SignedField<N> >::beforeExport();
     }
-
+    
     virtual void afterImport()
     {
-      sw = open9xToSwitch(_sw, board);
+      ConversionField< SignedField<N> >::afterImport();	
+      sw = RawSwitch(_switch);
+    }    
+    
+  protected:
+    SwitchesConversionTable switchesConversionTable;
+    RawSwitch & sw;
+    int _switch;
+};
+
+template <int N>
+class SourceField: public ConversionField< UnsignedField<N> > {
+  public:
+    SourceField(RawSource & source, BoardEnum board, unsigned int version, unsigned long flags=0):
+      ConversionField< UnsignedField<N> >(_source, &sourcesConversionTable, "Source"),
+      sourcesConversionTable(board, version, flags),
+      source(source),
+      _source(0)
+    {
     }
 
+    virtual void beforeExport()
+    {
+      _source = source.toValue();
+      ConversionField< UnsignedField<N> >::beforeExport();
+    }
+    
+    virtual void afterImport()
+    {
+      ConversionField< UnsignedField<N> >::afterImport();	
+      source = RawSource(_source);
+    }    
+
   protected:
-    SignedField<N> internalField;
-    int _sw;
-    RawSwitch & sw;
-    BoardEnum board;
+    SourcesConversionTable sourcesConversionTable;
+    RawSource & source;
+    unsigned int _source;
+};
+
+class HeliField: public StructField {
+  public:
+    HeliField(SwashRingData & heli, BoardEnum board, unsigned int version)
+    {
+      Append(new BoolField<1>(heli.invertELE));
+      Append(new BoolField<1>(heli.invertAIL));
+      Append(new BoolField<1>(heli.invertCOL));
+      Append(new UnsignedField<5>(heli.type));
+      Append(new SourceField<8>(heli.collectiveSource, board, version, FLAG_NOSWITCHES));
+      Append(new UnsignedField<8>(heli.value));
+    }
 };
 
 class PhaseField: public TransformedField {
   public:
-    PhaseField(PhaseData & phase, int index, BoardEnum board):
+    PhaseField(PhaseData & phase, int index, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField("Phase"),
       phase(phase),
       index(index),
       board(board),
+      version(version),
       rotencCount(IS_ARM(board) ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0))
     {
       if (board == BOARD_STOCK) {
@@ -157,13 +290,20 @@ class PhaseField: public TransformedField {
           internalField.Append(new SignedField<16>(trimBase[i]));
       }
 
-      internalField.Append(new SwitchField<8>(phase.swtch, board));
+      internalField.Append(new SwitchField<8>(phase.swtch, board, version));
       if (HAS_LARGE_LCD(board))
         internalField.Append(new ZCharField<10>(phase.name));
       else
         internalField.Append(new ZCharField<6>(phase.name));
-      internalField.Append(new UnsignedField<4>(phase.fadeIn));
-      internalField.Append(new UnsignedField<4>(phase.fadeOut));
+
+      if (IS_ARM(board) && version >= 214) {
+        internalField.Append(new UnsignedField<8>(phase.fadeIn));
+        internalField.Append(new UnsignedField<8>(phase.fadeOut));
+      }
+      else {
+        internalField.Append(new UnsignedField<4>(phase.fadeIn));
+        internalField.Append(new UnsignedField<4>(phase.fadeOut));
+      }
 
       for (int i=0; i<rotencCount; i++) {
         internalField.Append(new SignedField<16>(phase.rotaryEncoders[i]));
@@ -222,123 +362,10 @@ class PhaseField: public TransformedField {
     PhaseData & phase;
     int index;
     BoardEnum board;
+    unsigned int version;
     int rotencCount;
     int trimBase[NUM_STICKS];
     int trimExt[NUM_STICKS];
-};
-
-#define FLAG_NOSWITCHES   1
-
-template <int N>
-class MixSourceField: public TransformedField {
-  public:
-    MixSourceField(RawSource & source, BoardEnum board, unsigned long flags=0):
-      TransformedField(internalField),
-      internalField(param),
-      source(source),
-      board(board),
-      param(0),
-      rotencCount(board == BOARD_SKY9X ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0)),
-      physicSwitchesCount((flags & FLAG_NOSWITCHES) ? 0 : 9),
-      customSwitchesCount((flags & FLAG_NOSWITCHES) ? 0 : MAX_CUSTOM_SWITCHES(board))
-    {
-    }
-
-    virtual void beforeExport()
-    {
-      if (source.type == SOURCE_TYPE_NONE) {
-        param = 0;
-      }
-      else if (source.type == SOURCE_TYPE_STICK) {
-        param = 1 + source.index;
-      }
-      else if (source.type == SOURCE_TYPE_ROTARY_ENCODER) {
-        if (board == BOARD_GRUVIN9X) {
-          param = 8 + source.index;
-        }
-        else {
-          EEPROMWarnings += ::QObject::tr("Open9x on this board doesn't have Rotary Encoders") + "\n";
-          param = 5 + source.index; // use pots instead
-        }
-      }
-      else if (source.type == SOURCE_TYPE_TRIM) {
-        param = 8 + rotencCount + source.index; // use pots instead
-      }
-      else if (source.type == SOURCE_TYPE_MAX) {
-        param = 12 + rotencCount; // MAX
-      }
-      else if (source.type == SOURCE_TYPE_3POS) {
-        param = 13 + rotencCount;
-      }
-      else if (source.type == SOURCE_TYPE_SWITCH) {
-        param = 13 + rotencCount + open9xFromSwitch(RawSwitch(source.index), board);
-      }
-      else if (source.type == SOURCE_TYPE_CYC) {
-        param = 14 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
-      }
-      else if (source.type == SOURCE_TYPE_PPM) {
-        param = 17 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
-      }
-      else if (source.type == SOURCE_TYPE_CH) {
-        param = 25 + physicSwitchesCount + customSwitchesCount + rotencCount + source.index;
-      }
-    }
-
-    virtual void afterImport()
-    {
-      if (param == 0) {
-        source = RawSource(SOURCE_TYPE_NONE);
-      }
-      else if (param <= 7) {
-        source = RawSource(SOURCE_TYPE_STICK, param-1);
-      }
-      else if (param <= 7 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_STICK, param-8);
-      }
-      else if (param <= 11 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_TRIM, param-8-rotencCount);
-      }
-      else if (param == 12 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_MAX);
-      }
-      else if (param == 13 + rotencCount) {
-        source = RawSource(SOURCE_TYPE_3POS);
-      }
-      else if (param <= 13+physicSwitchesCount + customSwitchesCount + rotencCount) {
-        source = RawSource(SOURCE_TYPE_SWITCH, open9xToSwitch(param-13-rotencCount, board).toValue());
-      }
-      else if (param <= 16 + physicSwitchesCount + customSwitchesCount + rotencCount) {
-        source = RawSource(SOURCE_TYPE_CYC, param-14-physicSwitchesCount-customSwitchesCount-rotencCount);
-      }
-      else if (param <= 24 + physicSwitchesCount + customSwitchesCount + rotencCount) {
-        source = RawSource(SOURCE_TYPE_PPM, param-17-physicSwitchesCount-customSwitchesCount-rotencCount);
-      }
-      else {
-        source = RawSource(SOURCE_TYPE_CH, param-25-physicSwitchesCount-customSwitchesCount-rotencCount);
-      }
-    }
-
-  protected:
-    UnsignedField<N> internalField;
-    RawSource & source;
-    BoardEnum board;
-    unsigned int param;
-    unsigned int rotencCount;
-    unsigned int physicSwitchesCount;
-    unsigned int customSwitchesCount;
-};
-
-class HeliField: public StructField {
-  public:
-    HeliField(SwashRingData & heli, BoardEnum board)
-    {
-      Append(new BoolField<1>(heli.invertELE));
-      Append(new BoolField<1>(heli.invertAIL));
-      Append(new BoolField<1>(heli.invertCOL));
-      Append(new UnsignedField<5>(heli.type));
-      Append(new MixSourceField<8>(heli.collectiveSource, board, FLAG_NOSWITCHES));
-      Append(new UnsignedField<8>(heli.value));
-    }
 };
 
 void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam)
@@ -398,11 +425,12 @@ void importGvarParam(int & gvar, const int _gvar)
 
 class MixField: public TransformedField {
   public:
-    MixField(MixData & mix, BoardEnum board):
+    MixField(MixData & mix, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField("Mix"),
       mix(mix),
-      board(board)
+      board(board),
+      version(version)
     {
       if (IS_ARM(board)) {
         internalField.Append(new UnsignedField<8>(_destCh));
@@ -411,17 +439,29 @@ class MixField: public TransformedField {
         internalField.Append(new BoolField<1>(mix.noExpo));
         internalField.Append(new SignedField<3>(mix.carryTrim));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
-        internalField.Append(new UnsignedField<1>(_offsetMode));
+        if (version >= 214)
+          internalField.Append(new SpareBitsField<1>());
+        else
+          internalField.Append(new UnsignedField<1>(_offsetMode));
         internalField.Append(new SignedField<16>(_weight));
-        internalField.Append(new SwitchField<8>(mix.swtch, board));
+        internalField.Append(new SwitchField<8>(mix.swtch, board, version));
         internalField.Append(new SignedField<8>(_curveParam));
-        internalField.Append(new UnsignedField<8>(mix.mixWarn));
+        if (version >= 214) {
+          internalField.Append(new UnsignedField<4>(mix.mixWarn));
+          internalField.Append(new UnsignedField<4>(mix.srcVariant));
+        }
+        else {
+          internalField.Append(new UnsignedField<8>(mix.mixWarn));
+        }
         internalField.Append(new UnsignedField<8>(mix.delayUp));
         internalField.Append(new UnsignedField<8>(mix.delayDown));
         internalField.Append(new UnsignedField<8>(mix.speedUp));
         internalField.Append(new UnsignedField<8>(mix.speedDown));
-        internalField.Append(new MixSourceField<8>(mix.srcRaw, board));
-        internalField.Append(new SignedField<8>(_offset));
+        internalField.Append(new SourceField<8>(mix.srcRaw, board, version, FLAG_NOTELEMETRY));
+        if (version >= 214)
+          internalField.Append(new SignedField<16>(_offset));
+        else
+          internalField.Append(new SignedField<8>(_offset));
         if (HAS_LARGE_LCD(board))
           internalField.Append(new ZCharField<10>(mix.name));
         else
@@ -434,11 +474,11 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<1>(_weightMode));
         internalField.Append(new UnsignedField<1>(_offsetMode));
         internalField.Append(new SignedField<8>(_weight));
-        internalField.Append(new SwitchField<6>(mix.swtch, board));
+        internalField.Append(new SwitchField<6>(mix.swtch, board, version));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
         internalField.Append(new UnsignedField<5>(mix.phases));
         internalField.Append(new SignedField<3>(mix.carryTrim));
-        internalField.Append(new MixSourceField<6>(mix.srcRaw, board));
+        internalField.Append(new SourceField<6>(mix.srcRaw, board, version, FLAG_NOTELEMETRY));
         internalField.Append(new UnsignedField<2>(mix.mixWarn));
         internalField.Append(new UnsignedField<4>(mix.delayUp));
         internalField.Append(new UnsignedField<4>(mix.delayDown));
@@ -465,7 +505,10 @@ class MixField: public TransformedField {
 
       if (IS_ARM(board)) {
         exportGvarParam(mix.weight, _weight);
-        splitGvarParam(mix.sOffset, _offset, _offsetMode);
+        if (version >= 214)
+          exportGvarParam(mix.sOffset, _offset);
+        else
+          splitGvarParam(mix.sOffset, _offset, _offsetMode);
       }
       else {
         splitGvarParam(mix.weight, _weight, _weightMode);
@@ -487,7 +530,10 @@ class MixField: public TransformedField {
 
       if (IS_ARM(board)) {
         importGvarParam(mix.weight, _weight);
-        concatGvarParam(mix.sOffset, _offset, _offsetMode);
+        if (version >= 214)
+          importGvarParam(mix.sOffset, _offset);
+        else
+          concatGvarParam(mix.sOffset, _offset, _offsetMode);
       }
       else {
         concatGvarParam(mix.weight, _weight, _weightMode);
@@ -499,6 +545,7 @@ class MixField: public TransformedField {
     StructField internalField;
     MixData & mix;
     BoardEnum board;
+    unsigned int version;
     unsigned int _destCh;
     bool _curveMode;
     int _curveParam;
@@ -510,7 +557,7 @@ class MixField: public TransformedField {
 
 class ExpoField: public TransformedField {
   public:
-    ExpoField(ExpoData & expo, BoardEnum board):
+    ExpoField(ExpoData & expo, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField("Expo"),
       expo(expo),
@@ -519,7 +566,7 @@ class ExpoField: public TransformedField {
       if (IS_ARM(board)) {
         internalField.Append(new UnsignedField<8>(expo.mode));
         internalField.Append(new UnsignedField<8>(expo.chn));
-        internalField.Append(new SwitchField<8>(expo.swtch, board));
+        internalField.Append(new SwitchField<8>(expo.swtch, board, version));
         internalField.Append(new UnsignedField<16>(expo.phases));
         internalField.Append(new SignedField<8>(expo.weight));
         internalField.Append(new BoolField<8>(_curveMode));
@@ -531,7 +578,7 @@ class ExpoField: public TransformedField {
       }
       else {
         internalField.Append(new UnsignedField<2>(expo.mode));
-        internalField.Append(new SwitchField<6>(expo.swtch, board));
+        internalField.Append(new SwitchField<6>(expo.swtch, board, version));
         internalField.Append(new UnsignedField<2>(expo.chn));
         internalField.Append(new UnsignedField<5>(expo.phases));
         internalField.Append(new BoolField<1>(_curveMode));
@@ -659,132 +706,213 @@ class CurvesField: public TransformedField {
     int _points[O9X_ARM_NUM_POINTS];
 };
 
+class CustomSwitchesFunctionsTable: public ConversionTable {
+
+  public:
+    CustomSwitchesFunctionsTable(BoardEnum board, unsigned int version)
+    {
+      int val=0;
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      addConversion(CS_FN_OFF, val++);
+      if (recent)
+        addConversion(CS_FN_VEQUAL, val++);
+      addConversion(CS_FN_VPOS, val++);
+      addConversion(CS_FN_VNEG, val++);
+      addConversion(CS_FN_APOS, val++);
+      addConversion(CS_FN_ANEG, val++);
+      addConversion(CS_FN_AND, val++);
+      addConversion(CS_FN_OR, val++);
+      addConversion(CS_FN_XOR, val++);
+      addConversion(CS_FN_EQUAL, val++);
+      if (!recent)
+        addConversion(CS_FN_NEQUAL, val++);
+      addConversion(CS_FN_GREATER, val++);
+      addConversion(CS_FN_LESS, val++);
+      if (!recent) {
+        addConversion(CS_FN_EGREATER, val++);
+        addConversion(CS_FN_ELESS, val++);
+      }
+      addConversion(CS_FN_DPOS, val++);
+      addConversion(CS_FN_DAPOS, val++);
+    }
+};
+
+class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
+
+  public:
+    CustomSwitchesAndSwitchesConversionTable()
+    {
+      int val=0;
+
+      addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
+
+      for (int i=1; i<=8; i++) {
+        int s = switchIndex(i, BOARD_STOCK, 214);
+        addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+      }
+
+      for (int i=3; i<=9; i++) {
+        addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+      }
+    }
+
+  protected:
+
+    // TODO const RawSwitch & sw
+    void addConversion(RawSwitch sw, int b)
+    {
+      ConversionTable::addConversion(sw.toValue(), b);
+    }
+};
+
 class CustomSwitchField: public TransformedField {
   public:
-    CustomSwitchField(CustomSwData & csw, BoardEnum board):
+    CustomSwitchField(CustomSwData & csw, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField("CustomSwitch"),
+      csw(csw),
       board(board),
-      csw(csw)
+      version(version),
+      functionsConversionTable(board, version),
+      sourcesConversionTable(board, version, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES),
+      switchesConversionTable(board, version)
     {
       internalField.Append(new SignedField<8>(v1));
       internalField.Append(new SignedField<8>(v2));
-      internalField.Append(new UnsignedField<8>(func));
+
       if (IS_ARM(board)) {
+        internalField.Append(new ConversionField< UnsignedField<8> >(csw.func, &functionsConversionTable, "Function"));
         internalField.Append(new UnsignedField<8>(csw.delay));
         internalField.Append(new UnsignedField<8>(csw.duration));
+        if (version >= 214) {
+          internalField.Append(new ConversionField< UnsignedField<8> >(csw.andsw, &andswitchesConversionTable, "AND switch"));
+        }
+      }
+      else {
+        if (version >= 213) {
+          internalField.Append(new ConversionField< UnsignedField<4> >(csw.func, &functionsConversionTable, "Function"));
+          internalField.Append(new ConversionField< UnsignedField<4> >(csw.andsw, &andswitchesConversionTable, "AND switch"));
+        }
+        else {
+          internalField.Append(new ConversionField< UnsignedField<8> >(csw.func, &functionsConversionTable, "Function"));
+        }
       }
     }
 
     virtual void beforeExport()
     {
-      func = csw.func;
       v1 = csw.val1;
       v2 = csw.val2;
 
-      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
-        v1 = open9xFromSource(RawSource(csw.val1), board);
+      if ((csw.func >= CS_FN_VEQUAL && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
+        sourcesConversionTable.exportValue(csw.val1, v1);
       }
 
       if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
-        v2 = open9xFromSource(RawSource(csw.val2), board);
+        sourcesConversionTable.exportValue(csw.val2, v2);
       }
 
       if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
-        v1 = open9xFromSwitch(RawSwitch(csw.val1), board);
-        v2 = open9xFromSwitch(RawSwitch(csw.val2), board);
+        switchesConversionTable.exportValue(csw.val1, v1);
+        switchesConversionTable.exportValue(csw.val2, v2);
       }
     }
 
     virtual void afterImport()
     {
-      csw.func = func;
       csw.val1 = v1;
       csw.val2 = v2;
 
       if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
-        csw.val1 = open9xToSource(v1, board).toValue();
+        sourcesConversionTable.importValue(v1, csw.val1);
       }
 
       if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
-        csw.val2 = open9xToSource(v2, board).toValue();
+        sourcesConversionTable.importValue(v2, csw.val2);
       }
 
       if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
-        csw.val1 = open9xToSwitch(v1, board).toValue();
-        csw.val2 = open9xToSwitch(v2, board).toValue();
+        switchesConversionTable.importValue(v1, csw.val1);
+        switchesConversionTable.importValue(v2, csw.val2);
       }
     }
 
   protected:
     StructField internalField;
-    BoardEnum board;
     CustomSwData & csw;
+    BoardEnum board;
+    unsigned int version;
+    CustomSwitchesFunctionsTable functionsConversionTable;
+    SourcesConversionTable sourcesConversionTable;
+    SwitchesConversionTable switchesConversionTable;
+    CustomSwitchesAndSwitchesConversionTable andswitchesConversionTable;
     int v1;
     int v2;
-    unsigned int func;
 };
 
-const int stockFunctionsConversion[] = {
-    0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15,
-    FuncTrainer, 16, FuncTrainerRUD, 17, FuncTrainerELE, 18, FuncTrainerTHR, 19, FuncTrainerAIL, 20,
-    FuncInstantTrim, 21,
-    FuncPlaySound, 22,
-    FuncPlayHaptic, 23,
-    FuncReset, 24,
-    FuncVario, 25,
-    FuncPlayPrompt, 26,
-    FuncPlayValue, 27,
-    FuncBacklight, 28,
-    FuncAdjustGV1, 29,
-    FuncAdjustGV2, 30,
-    FuncAdjustGV3, 31,
-    FuncAdjustGV4, 32,
-    FuncAdjustGV5, 33
-};
+class CustomFunctionsConversionTable: public ConversionTable {
 
-const int gruvin9xFunctionsConversion[] = {
-    0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15,
-    FuncTrainer, 16, FuncTrainerRUD, 17, FuncTrainerELE, 18, FuncTrainerTHR, 19, FuncTrainerAIL, 20,
-    FuncInstantTrim, 21,
-    FuncPlaySound, 22,
-    FuncPlayHaptic, 23,
-    FuncReset, 24,
-    FuncVario, 25,
-    FuncPlayPrompt, 26,
-    FuncPlayValue, 27,
-    FuncLogs, 28,
-    FuncBacklight, 29,
-    FuncAdjustGV1, 30,
-    FuncAdjustGV2, 31,
-    FuncAdjustGV3, 32,
-    FuncAdjustGV4, 33,
-    FuncAdjustGV5, 34
+  public:
+    CustomFunctionsConversionTable(BoardEnum board, unsigned int version)
+    {
+      int val=0;
+
+      for (int i=0; i<16; i++) {
+        addConversion(val, val);
+        val++;
+      }
+      addConversion(FuncTrainer, val++);
+      addConversion(FuncTrainerRUD, val++);
+      addConversion(FuncTrainerELE, val++);
+      addConversion(FuncTrainerTHR, val++);
+      addConversion(FuncTrainerAIL, val++);
+      addConversion(FuncInstantTrim, val++);
+      addConversion(FuncPlaySound, val++);
+      addConversion(FuncPlayHaptic, val++);
+      addConversion(FuncReset, val++);
+      addConversion(FuncVario, val++);
+      addConversion(FuncPlayPrompt, val++);
+      if (version >= 213 && !IS_ARM(board))
+        addConversion(FuncPlayBoth, val++);
+      addConversion(FuncPlayValue, val++);
+      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X)
+        addConversion(FuncLogs, val++);
+      addConversion(FuncBacklight, val++);
+      for (int i=0; i<5; i++)
+        addConversion(FuncAdjustGV1+i, val++);
+    }
 };
 
 class CustomFunctionField: public TransformedField {
   public:
-    CustomFunctionField(FuncSwData & fn, BoardEnum board):
+    CustomFunctionField(FuncSwData & fn, BoardEnum board, unsigned int version):
       TransformedField(internalField),
       internalField("CustomFunction"),
       fn(fn),
       board(board),
+      version(version),
+      functionsConversionTable(board, version),
+      sourcesConversionTable(board, version),
       _param(0),
       _delay(0)
     {
-      internalField.Append(new SwitchField<8>(fn.swtch, board));
+      internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
-        internalField.Append(new UnsignedField<8>((unsigned int &)fn.func));
+        internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
         internalField.Append(new CharField<6>(_arm_param));
         internalField.Append(new UnsignedField<8>(_delay));
-        internalField.Append(new SpareBitsField<8>());
+        if (version < 214)
+          internalField.Append(new SpareBitsField<8>());
       }
       else {
-        if (board == BOARD_GRUVIN9X)
-          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(gruvin9xFunctionsConversion), ::QObject::tr("Open9x on gruvin9x board doesn't accept this function")));
-        else
-          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, TABLE_CONVERSION(stockFunctionsConversion), ::QObject::tr("Open9x on stock board doesn't accept this function")));
-        internalField.Append(new BoolField<1>(fn.enabled));
+        if (version >= 213) {
+          internalField.Append(new ConversionField< UnsignedField<6> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
+          internalField.Append(new UnsignedField<2>(fn.enabled));
+        }
+        else {
+          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
+          internalField.Append(new BoolField<1>((bool &)fn.enabled));
+        }
         internalField.Append(new UnsignedField<8>(_param));
       }
     }
@@ -800,16 +928,19 @@ class CustomFunctionField: public TransformedField {
           memcpy(_arm_param, fn.paramarm, sizeof(_arm_param));
         }
         else {
-          unsigned int value = fn.param;
-          if ((fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) && value > 7) {
-            value--;
+          unsigned int value;
+          if (fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) {
+            sourcesConversionTable.exportValue(fn.param, (int &)value);
+          }
+          else {
+            value = fn.param;
           }
           *((uint32_t *)_arm_param) = value;
         }
       }
       else {
-        if (fn.func == FuncPlayValue)
-          _param = fn.param - 2;
+        if (fn.func == FuncPlayValue || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5))
+          sourcesConversionTable.exportValue(fn.param, (int &)_param);
         else
           _param = fn.param;
       }
@@ -827,15 +958,17 @@ class CustomFunctionField: public TransformedField {
           memcpy(fn.paramarm, _arm_param, sizeof(fn.paramarm));
         }
         else {
-          fn.param = value;
-          if ((fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) && value > 7) {
-            fn.param++;
+          if (fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) {
+            sourcesConversionTable.importValue(value, (int &)fn.param);
+          }
+          else {
+            fn.param = value;
           }
         }
       }
       else {
-        if (fn.func == FuncPlayValue)
-          fn.param = _param + 2;
+        if (fn.func == FuncPlayValue || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5))
+          sourcesConversionTable.importValue(_param, (int &)fn.param);
         else
           fn.param = _param;
       }
@@ -845,6 +978,9 @@ class CustomFunctionField: public TransformedField {
     StructField internalField;
     FuncSwData & fn;
     BoardEnum board;
+    unsigned int version;
+    CustomFunctionsConversionTable functionsConversionTable;
+    SourcesConversionTable sourcesConversionTable;
     char _arm_param[6];
     unsigned int _param;
     unsigned int _delay;
@@ -902,12 +1038,23 @@ class FrskyScreenField: public DataField {
     StructField numbers;
 };
 
-const int rssiLevelConversion[2][8] = { {0, 2, 1, 3, 2, 0, 3, 1}, {0, 1, 1, 2, 2, 3, 3, 0} };
+class RSSIConversionTable: public ConversionTable
+{
+  public:
+    RSSIConversionTable(int index)
+    {
+      addConversion(0, 2-index);
+      addConversion(1, 3-index);
+      addConversion(2, index ? 3 : 0);
+      addConversion(3, 1-index);
+    }
+};
 
 class FrskyField: public StructField {
   public:
     FrskyField(FrSkyData & frsky, BoardEnum board):
-      StructField("FrSky")
+      StructField("FrSky"),
+      rssiConversionTable({RSSIConversionTable(0), RSSIConversionTable(1)})
     {
       if (IS_ARM(board)) {
         for (int i=0; i<2; i++) {
@@ -942,7 +1089,7 @@ class FrskyField: public StructField {
         Append(new SignedField<8>(frsky.varioMin));
         Append(new SignedField<8>(frsky.varioMax));
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, &rssiConversionTable[i], "RSSI"));
           Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
         }
       }
@@ -967,7 +1114,7 @@ class FrskyField: public StructField {
         Append(new SignedField<4>(frsky.varioMin));
         Append(new SignedField<4>(frsky.varioMax));
         for (int i=0; i<2; i++) {
-          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, 4, rssiLevelConversion[i]));
+          Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, &rssiConversionTable[i], "RSSI level"));
           Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50, 0, 100, "RSSI value"));
         }
         for (int i=0; i<2; i++) {
@@ -979,24 +1126,19 @@ class FrskyField: public StructField {
         Append(new SignedField<8>(frsky.varioCenterMax));
       }
     }
+
+  protected:
+    RSSIConversionTable rssiConversionTable[2];
 };
 
-const int protocolConversion[] = {PPM, 0, PPM16, 1, PPMSIM, 2, PXX, 3, DSM2, 4};
-const int protocolSky9xConversion[] = {PPM, 0, PXX, 1, DSM2, 2};
-const int channelsConversion[] = {4, -2, 6, -1, 8, 0, 10, 1, 12, 2, 14, 3, 16, 4};
 int exportPpmDelay(int delay) { return (delay - 300) / 50; }
 int importPpmDelay(int delay) { return 300 + 50 * delay; }
 
-Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant):
+Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int version, unsigned int variant):
   StructField(),
   board(board),
   variant(variant),
-  maxPhases(IS_ARM(board) ? O9X_ARM_MAX_PHASES : O9X_MAX_PHASES),
-  maxMixers(IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS),
-  maxChannels(IS_ARM(board) ? O9X_ARM_NUM_CHNOUT : O9X_NUM_CHNOUT),
-  maxExpos(IS_ARM(board) ? O9X_ARM_MAX_EXPOS : O9X_MAX_EXPOS),
-  maxCustomSwitches(IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW),
-  maxCustomFunctions(IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW)
+  protocolsConversionTable(board)
 {
   sprintf(name, "Model %s", modelData.name);
 
@@ -1006,7 +1148,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new ZCharField<10>(modelData.name));
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
-    Append(new TimerModeField(modelData.timers[i].mode, board));
+    Append(new TimerModeField(modelData.timers[i].mode, board, version));
     Append(new UnsignedField<16>(modelData.timers[i].val));
     if (HAS_PERSISTENT_TIMERS(board)) {
       Append(new BoolField<1>(modelData.timers[i].persistent));
@@ -1014,12 +1156,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     }
   }
 
-  if (board == BOARD_SKY9X)
-    Append(new ConversionField< SignedField<3> >(modelData.protocol, TABLE_CONVERSION(protocolSky9xConversion), ::QObject::tr("Open9x / sky9x doesn't accept this protocol")));
-  else
-    Append(new ConversionField< SignedField<3> >(modelData.protocol, TABLE_CONVERSION(protocolConversion), ::QObject::tr("Open9x doesn't accept this protocol")));
+  Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("Open9x doesn't accept this protocol")));
   Append(new BoolField<1>(modelData.thrTrim));
-  Append(new ConversionField< SignedField<4> >(modelData.ppmNCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels")));
+  Append(new ConversionField< SignedField<4> >(modelData.ppmNCH, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
   Append(new BoolField<1>(modelData.pulsePol));
@@ -1033,25 +1172,25 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   else
     Append(new UnsignedField<8>(modelData.beepANACenter));
 
-  for (int i=0; i<maxMixers; i++)
-    Append(new MixField(modelData.mixData[i], board));
-  for (int i=0; i<maxChannels; i++)
+  for (int i=0; i<MAX_MIXERS(board, version); i++)
+    Append(new MixField(modelData.mixData[i], board, version));
+  for (int i=0; i<MAX_CHANNELS(board, version); i++)
     Append(new LimitField(modelData.limitData[i], board));
-  for (int i=0; i<maxExpos; i++)
-    Append(new ExpoField(modelData.expoData[i], board));
+  for (int i=0; i<MAX_EXPOS(board, version); i++)
+    Append(new ExpoField(modelData.expoData[i], board, version));
   Append(new CurvesField(modelData.curves, board));
-  for (int i=0; i<maxCustomSwitches; i++)
-    Append(new CustomSwitchField(modelData.customSw[i], board));
-  for (int i=0; i<maxCustomFunctions; i++)
-    Append(new CustomFunctionField(modelData.funcSw[i], board));
-  Append(new HeliField(modelData.swashRingData, board));
-  for (int i=0; i<maxPhases; i++)
-    Append(new PhaseField(modelData.phaseData[i], i, board));
+  for (int i=0; i<MAX_CUSTOM_SWITCHES(board, version); i++)
+    Append(new CustomSwitchField(modelData.customSw[i], board, version));
+  for (int i=0; i<MAX_CUSTOM_FUNCTIONS(board, version); i++)
+    Append(new CustomFunctionField(modelData.funcSw[i], board, version));
+  Append(new HeliField(modelData.swashRingData, board, version));
+  for (int i=0; i<MAX_PHASES(board, version); i++)
+    Append(new PhaseField(modelData.phaseData[i], i, board, version));
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
   Append(new UnsignedField<8>(modelData.modelId));
 
-  if (board == BOARD_X9DA || board == BOARD_ACT)
+  if (board == BOARD_X9DA)
     Append(new UnsignedField<16>(modelData.switchWarningStates));
   else
     Append(new UnsignedField<8>(modelData.switchWarningStates));
@@ -1080,7 +1219,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (board == BOARD_SKY9X) {
     Append(new UnsignedField<8>(modelData.ppmSCH));
     Append(new UnsignedField<8>(modelData.ppm2SCH));
-    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, TABLE_CONVERSION(channelsConversion), ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
+    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
   }
 }
 
@@ -1191,4 +1330,3 @@ void Open9xGeneralDataNew::beforeExport()
 void Open9xGeneralDataNew::afterImport()
 {
 }
-
