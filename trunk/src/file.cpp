@@ -40,7 +40,7 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
   if (board == BOARD_SKY9X) {
     memset(eeprom, 0xFF, size);
   }
-  else if (board == BOARD_X9DA || board == BOARD_ACT) {
+  else if (board == BOARD_X9DA) {
     eeFsArm = (EeFsArm *)eeprom;
     eeFsVersion = version;
     eeFsSize = 8+4*62;
@@ -101,7 +101,7 @@ bool EFile::EeFsOpen(uint8_t *eeprom, int size, BoardEnum board)
   if (board == BOARD_SKY9X) {
     return 1;
   }
-  else if (board == BOARD_X9DA || board == BOARD_ACT) {
+  else if (board == BOARD_X9DA) {
     eeFsArm = (EeFsArm *)eeprom;
     eeFsVersion = eeFsArm->version;
     eeFsSize = 8+4*62;

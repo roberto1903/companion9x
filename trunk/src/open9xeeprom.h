@@ -32,15 +32,15 @@
 #define SIMU_ARM_VARIANTS        (0)
 
 #define O9X_MAX_TIMERS     2
-#define O9X_MAX_PHASES 5
-#define O9X_MAX_MIXERS 32
-#define O9X_MAX_EXPOS  14
-#define O9X_NUM_CHNOUT 16 // number of real output channels CH1-CH16
-#define O9X_NUM_CSW    12 // number of custom switches
-#define O9X_NUM_FSW    16 // number of functions assigned to switches
-#define O9X_MAX_CURVES 8
-#define O9X_NUM_POINTS (112-O9X_MAX_CURVES)
-#define O9X_MAX_GVARS  5
+#define O9X_MAX_PHASES     5
+#define O9X_MAX_MIXERS     32
+#define O9X_MAX_EXPOS      14
+#define O9X_NUM_CHNOUT     16 // number of real output channels CH1-CH16
+#define O9X_NUM_CSW        12 // number of custom switches
+#define O9X_NUM_FSW        16 // number of functions assigned to switches
+#define O9X_MAX_CURVES     8
+#define O9X_NUM_POINTS     (112-O9X_MAX_CURVES)
+#define O9X_MAX_GVARS      5
 
 #define O9X_ARM_MAX_PHASES  9
 #define O9X_ARM_MAX_MIXERS  64
@@ -68,9 +68,36 @@ class Open9xGeneralDataNew: public TransformedField {
     unsigned int chkSum;
 };
 
+class ProtocolsConversionTable: public ConversionTable
+{
+  public:
+    ProtocolsConversionTable(BoardEnum board)
+    {
+      int val = 0;
+      addConversion(PPM, val++);
+      if (board != BOARD_SKY9X) {
+        addConversion(PPM16, val++);
+        addConversion(PPMSIM, val++);
+      }
+      addConversion(PXX, val++);
+      addConversion(DSM2, val++);
+    }
+};
+
+class ChannelsConversionTable: public ConversionTable
+{
+  public:
+    ChannelsConversionTable()
+    {
+      for (int i=4; i<=16; i+= 2)
+        addConversion(i, -4+i/2);
+    }
+};
+
+
 class Open9xModelDataNew: public StructField {
   public:
-    Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int variant);
+    Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int version, unsigned int variant);
 
     const char * getName() { return name; }
 
@@ -79,19 +106,12 @@ class Open9xModelDataNew: public StructField {
     unsigned int variant;
 
   private:
-    int maxPhases;
-    int maxMixers;
-    int maxChannels;
-    int maxExpos;
-    int maxCustomSwitches;
-    int maxCustomFunctions;
     char name[256];
+    ProtocolsConversionTable protocolsConversionTable;
+    ChannelsConversionTable channelsConversionTable;
 };
 
-#define LAST_OPEN9X_STOCK_EEPROM_VER    212
-#define LAST_OPEN9X_M128_EEPROM_VER     212
-#define LAST_OPEN9X_GRUVIN9X_EEPROM_VER 212
-#define LAST_OPEN9X_ARM_EEPROM_VER      213
-
+#define LAST_OPEN9X_AVR_EEPROM_VER      213
+#define LAST_OPEN9X_ARM_EEPROM_VER      214
 
 #endif

@@ -67,33 +67,54 @@ QString getFuncName(unsigned int val)
   if (val < NUM_SAFETY_CHNOUT) {
     return QObject::tr("Safety %1").arg(RawSource(SOURCE_TYPE_CH, val).toString());
   }
+  else if (val == FuncTrainer)
+    return QObject::tr("Trainer");
+  else if (val == FuncTrainerRUD)
+    return QObject::tr("Trainer RUD");
+  else if (val == FuncTrainerELE)
+    return QObject::tr("Trainer ELE");
+  else if (val == FuncTrainerTHR)
+    return QObject::tr("Trainer THR");
+  else if (val == FuncTrainerAIL)
+    return QObject::tr("Trainer AIL");
+  else if (val == FuncInstantTrim)
+    return QObject::tr("Instant Trim");
+  else if (val == FuncPlaySound)
+    return QObject::tr("Play Sound");
+  else if (val == FuncPlayHaptic)
+    return QObject::tr("Play Haptic");
+  else if (val == FuncReset)
+    return QObject::tr("Reset");
+  else if (val == FuncVario)
+    return QObject::tr("Vario");
+  else if (val == FuncPlayPrompt)
+    return QObject::tr("Play Track");
+  else if (val == FuncPlayBoth)
+    return QObject::tr("Play Both");
+  else if (val == FuncPlayValue)
+    return QObject::tr("Play Value");
+  else if (val == FuncLogs)
+    return QObject::tr("Start Logs");
+  else if (val == FuncVolume)
+    return QObject::tr("Volume");
+  else if (val == FuncBacklight)
+    return QObject::tr("Backlight");
+  else if (val == FuncBackgroundMusic)
+    return QObject::tr("Background Music");
+  else if (val == FuncBackgroundMusicPause)
+    return QObject::tr("Background Music Pause");
+  else if (val == FuncAdjustGV1)
+    return QObject::tr("Adjust GV1");
+  else if (val == FuncAdjustGV2)
+    return QObject::tr("Adjust GV2");
+  else if (val == FuncAdjustGV3)
+    return QObject::tr("Adjust GV3");
+  else if (val == FuncAdjustGV4)
+    return QObject::tr("Adjust GV4");
+  else if (val == FuncAdjustGV5)
+    return QObject::tr("Adjust GV5");
   else {
-    if (val< FuncCount) {
-      QString strings[] = {
-          QObject::tr("Trainer"), QObject::tr("Trainer RUD"), QObject::tr("Trainer ELE"), QObject::tr("Trainer THR"), QObject::tr("Trainer AIL"),
-          QObject::tr("Instant Trim"),
-          QObject::tr("Play Sound"),
-          QObject::tr("Play Haptic"),
-          QObject::tr("Reset"),
-          QObject::tr("Vario"),
-          QObject::tr("Play Track"),
-          QObject::tr("Play Value"),
-          QObject::tr("Start Logs"),
-          QObject::tr("Volume"),
-          QObject::tr("Backlight"),
-          QObject::tr("Background Music"),
-          QObject::tr("Background Music Pause"),
-          QObject::tr("Adjust GV1"),
-          QObject::tr("Adjust GV2"),
-          QObject::tr("Adjust GV3"),
-          QObject::tr("Adjust GV4"),
-          QObject::tr("Adjust GV5"),
-      };
-      return strings[val-NUM_SAFETY_CHNOUT];
-    }
-    else {
-      return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
-    }
+    return QString("???"); // Highlight unknown functions with output of question marks.(BTW should not happen that we do not know what a function is)
   }
 }
 

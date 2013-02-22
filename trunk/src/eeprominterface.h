@@ -45,11 +45,11 @@ enum BoardEnum {
   BOARD_M128,
   BOARD_GRUVIN9X,
   BOARD_SKY9X,
-  BOARD_X9DA,
-  BOARD_ACT
+  BOARD_X9DA
 };
 
-#define IS_ARM(board)  (board == BOARD_SKY9X || board == BOARD_X9DA || board == BOARD_ACT)
+#define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_X9DA)
+#define IS_DBLEEPROM(board) (board==BOARD_GRUVIN9X || board==BOARD_M128)
 
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
@@ -162,6 +162,7 @@ enum CSFunction {
   CS_FN_ELESS,
   CS_FN_DPOS,
   CS_FN_DAPOS,
+  CS_FN_VEQUAL, // added at the end to avoid everything renumbered
   CS_FN_MAXF
 };
 
@@ -196,7 +197,7 @@ enum HeliSwashTypes {
 
 #define C9X_MAX_TIMERS      2
 
-#define C9X_NUM_TELEMETRY_SOURCES   18
+#define C9X_NUM_TELEMETRY_SOURCES   19 // TODO enum here
 #define TM_HASTELEMETRY     0x01
 #define TM_HASOFFSET        0x02
 #define TM_HASWSHH          0x04
@@ -448,6 +449,7 @@ class MixData {
     MixData() { clear(); }
     unsigned int destCh;            //        1..C9X_NUM_CHNOUT
     RawSource srcRaw;
+    unsigned int srcVariant;
     int     weight;
     int     differential;
     RawSwitch swtch;
@@ -503,6 +505,7 @@ enum AssignFunc {
   FuncReset,
   FuncVario,
   FuncPlayPrompt,
+  FuncPlayBoth,
   FuncPlayValue,
   FuncLogs,
   FuncVolume,
@@ -524,7 +527,7 @@ class FuncSwData { // Function Switches data
     AssignFunc   func;
     unsigned int param;
     char paramarm[6];
-    bool enabled;
+    unsigned int enabled; // TODO perhaps not any more the right name
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
 };
 

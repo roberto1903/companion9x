@@ -76,7 +76,7 @@ class Open9xInterface : public EEPROMInterface
     bool loadModelVariant(ModelData &model, uint8_t *data, int index, unsigned int variant);
 
     template <class T>
-    bool loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int variant);
+    bool loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int version, unsigned int variant);
 
     bool loadModel(uint8_t version, ModelData &model, uint8_t *data, int index, unsigned int variant, unsigned int stickMode=0);
 
@@ -84,7 +84,7 @@ class Open9xInterface : public EEPROMInterface
     bool saveModel(unsigned int index, ModelData &model);
 
     template <class T>
-    bool saveModelVariant(unsigned int index, ModelData &model, uint32_t variant);
+    bool saveModelVariant(unsigned int index, ModelData &model, unsigned int version, unsigned int variant);
 
     template <class T>
     bool loadGeneral(GeneralSettings &settings, unsigned int version);
