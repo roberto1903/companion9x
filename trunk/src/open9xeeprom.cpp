@@ -129,6 +129,11 @@ class SourcesConversionTable: public ConversionTable {
         addConversion(RawSource(SOURCE_TYPE_CH, i), val++);
 
       if (!(flags & FLAG_NOTELEMETRY)) {
+        if (recent) {
+          for (int i=0; i<5; i++)
+            addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
+        }
+
         for (int i=0; i<2; i++)
           addConversion(RawSource(SOURCE_TYPE_TIMER, i), val++);
 
@@ -857,9 +862,17 @@ class CustomFunctionsConversionTable: public ConversionTable {
     {
       int val=0;
 
-      for (int i=0; i<16; i++) {
-        addConversion(val, val);
-        val++;
+      if (IS_ARM(board) || version < 213) {
+        for (int i=0; i<16; i++) {
+          addConversion(val, val);
+          val++;
+        }
+      }
+      else {
+        for (int i=0; i<4; i++) {
+          addConversion(val, val);
+          val++;
+        }
       }
       addConversion(FuncTrainer, val++);
       addConversion(FuncTrainerRUD, val++);
@@ -894,20 +907,27 @@ class CustomFunctionField: public TransformedField {
       functionsConversionTable(board, version),
       sourcesConversionTable(board, version),
       _param(0),
-      _delay(0)
+      _delay(0),
+      _union_param(0)
     {
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
         internalField.Append(new CharField<6>(_arm_param));
-        internalField.Append(new UnsignedField<8>(_delay));
+        if (version >= 214) {
+          internalField.Append(new UnsignedField<2>(_mode));
+          internalField.Append(new UnsignedField<6>(_delay));
+        }
+        else {
+          internalField.Append(new UnsignedField<8>(_delay));
+        }
         if (version < 214)
           internalField.Append(new SpareBitsField<8>());
       }
       else {
         if (version >= 213) {
-          internalField.Append(new ConversionField< UnsignedField<6> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
-          internalField.Append(new UnsignedField<2>(fn.enabled));
+          internalField.Append(new UnsignedField<3>(_union_param));
+          internalField.Append(new ConversionField< UnsignedField<5> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
         }
         else {
           internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
@@ -920,16 +940,33 @@ class CustomFunctionField: public TransformedField {
     virtual void beforeExport()
     {
       if (IS_ARM(board)) {
+        _mode = 0;
+        if (fn.func == FuncPlayPrompt || fn.func == FuncPlayValue)
+          _delay = fn.repeatParam;
+        else
+          _delay = (fn.enabled ? 1 : 0);
+          
         if (fn.func <= FuncInstantTrim) {
           *((uint32_t *)_arm_param) = fn.param;
-          _delay = (fn.enabled & 0x01);
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
           memcpy(_arm_param, fn.paramarm, sizeof(_arm_param));
         }
         else {
           unsigned int value;
-          if (fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) {
+          if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
+            if (version >= 214) {
+              _mode = fn.adjustMode;
+              if (fn.adjustMode == 1)
+                sourcesConversionTable.exportValue(fn.param, (int &)value);
+              else
+                value = fn.param;
+            }
+            else {
+              sourcesConversionTable.exportValue(fn.param, (int &)value);
+            }
+          }
+          else if (fn.func == FuncPlayValue || fn.func == FuncVolume) {
             sourcesConversionTable.exportValue(fn.param, (int &)value);
           }
           else {
@@ -939,15 +976,40 @@ class CustomFunctionField: public TransformedField {
         }
       }
       else {
-        if (fn.func == FuncPlayValue || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5))
+        if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
+          if (version >= 213) {
+            _union_param = (fn.adjustMode << 1) + (fn.enabled ? 1 : 0);
+            if (fn.adjustMode == 1)
+              sourcesConversionTable.exportValue(fn.param, (int &)_param);
+            else
+              _param = fn.param;
+          }
+          else {
+            sourcesConversionTable.exportValue(fn.param, (int &)_param);
+          }
+        }
+        else if (fn.func == FuncPlayValue) {
+          if (version >= 213)
+            _union_param = fn.repeatParam;
           sourcesConversionTable.exportValue(fn.param, (int &)_param);
-        else
+        }
+        else if (fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
+          if (version >= 213)
+            _union_param = fn.repeatParam;
+        }
+        else if (fn.func <= FuncSafetyCh16) {
+          if (version >= 213)
+            _union_param = ((fn.func % 4) << 1) + (fn.enabled ? 1 : 0);
+        }
+        else {
           _param = fn.param;
+        }
       }
     }
 
     virtual void afterImport()
     {
+      // TODO
       if (IS_ARM(board)) {
         unsigned int value = *((uint32_t *)_arm_param);
         if (fn.func <= FuncInstantTrim) {
@@ -984,6 +1046,8 @@ class CustomFunctionField: public TransformedField {
     char _arm_param[6];
     unsigned int _param;
     unsigned int _delay;
+    unsigned int _mode;
+    unsigned int _union_param;
 };
 
 class FrskyScreenField: public DataField {
@@ -1300,6 +1364,11 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
     internalField.Append(new ConversionField< SignedField<8> >(generalData.speakerVolume, -12, 0, 23, "Volume"));
   else
     internalField.Append(new ConversionField< SignedField<8> >(generalData.speakerVolume, -7, 0, 7, "Volume"));
+
+  if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
+    internalField.Append(new SignedField<8>(generalData.vBatMin));
+    internalField.Append(new SignedField<8>(generalData.vBatMax));
+  }
 
   if (IS_ARM(board)) {
     internalField.Append(new UnsignedField<8>(generalData.backlightBright));

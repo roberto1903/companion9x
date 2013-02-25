@@ -213,9 +213,9 @@ enum RawSourceType {
   SOURCE_TYPE_CYC,
   SOURCE_TYPE_PPM,
   SOURCE_TYPE_CH,
+  SOURCE_TYPE_GVAR,
   SOURCE_TYPE_TIMER,
   SOURCE_TYPE_TELEMETRY,
-  SOURCE_TYPE_GVAR,
   MAX_SOURCE_TYPE
 };
 class ModelData;
@@ -345,6 +345,8 @@ class GeneralSettings {
     unsigned int   contrast;
     unsigned int   vBatWarn;
     int    vBatCalib;
+    int    vBatMin;
+    int    vBatMax;
     int   backlightMode;
     TrainerData trainer;
     unsigned int   view;    // main screen view // TODO enum
@@ -528,6 +530,8 @@ class FuncSwData { // Function Switches data
     unsigned int param;
     char paramarm[6];
     unsigned int enabled; // TODO perhaps not any more the right name
+    unsigned int adjustMode;
+    unsigned int repeatParam;
     void clear() { memset(this, 0, sizeof(FuncSwData)); }
 };
 
