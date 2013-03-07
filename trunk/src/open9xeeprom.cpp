@@ -1112,14 +1112,20 @@ class RSSIConversionTable: public ConversionTable
       addConversion(2, index ? 3 : 0);
       addConversion(3, 1-index);
     }
+
+    RSSIConversionTable()
+    {
+    }
 };
 
 class FrskyField: public StructField {
   public:
     FrskyField(FrSkyData & frsky, BoardEnum board):
-      StructField("FrSky"),
-      rssiConversionTable({RSSIConversionTable(0), RSSIConversionTable(1)})
+      StructField("FrSky")
     {
+      rssiConversionTable[0] = RSSIConversionTable(0);
+      rssiConversionTable[1] = RSSIConversionTable(1);
+
       if (IS_ARM(board)) {
         for (int i=0; i<2; i++) {
           Append(new UnsignedField<8>(frsky.channels[i].ratio, "Ratio"));

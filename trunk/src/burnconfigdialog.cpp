@@ -131,14 +131,6 @@ void burnConfigDialog::getSettings()
 
 void burnConfigDialog::putSettings()
 {
-//    avrTempDir = ui->temp_location->text();
-//    avrLoc = ui->avrdude_location->text();
-//    avrArgs = ui->avrArgs->text().split(" ", QString::SkipEmptyParts);
-//    avrProgrammer = ui->avrdude_programmer->currentText();
-//    avrPort = ui->avrdude_port->currentText();
-//    avrEraseEEPROM = ui->eraseEEPROM_CB->isChecked();
-
-
     QSettings settings("companion9x", "companion9x");
     settings.setValue("avrdude_location", avrLoc);
     settings.setValue("programmer", avrProgrammer);
@@ -156,8 +148,10 @@ void burnConfigDialog::populateProgrammers()
 {
     QString fileName = QDir(avrLoc).absolutePath() + "/avrdude.conf"; //for windows
     if(!QFileInfo(fileName).exists()) fileName = "/etc/avrdude.conf"; //for linux
+    if(!QFileInfo(fileName).exists()) fileName = "/etc/avrdude/avrdude.conf"; //for linux
     if(!QFileInfo(fileName).exists()) return; // not found avrdude.conf - returning
 
+    qDebug() << fileName;
     QFile file(fileName);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;

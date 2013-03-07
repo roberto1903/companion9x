@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>890</width>
-    <height>707</height>
+    <height>731</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>10</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -765,11 +765,11 @@
        </item>
        <item row="9" column="2" colspan="6">
         <layout class="QGridLayout" name="gridLayout_34">
-         <property name="verticalSpacing">
-          <number>6</number>
-         </property>
          <property name="topMargin">
           <number>0</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>6</number>
          </property>
          <item row="0" column="9" rowspan="2">
           <widget class="Line" name="swwarn_line4">
@@ -6104,8 +6104,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>864</width>
-            <height>612</height>
+            <width>826</width>
+            <height>483</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9537,8 +9537,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>598</height>
+            <width>712</width>
+            <height>582</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14455,8 +14455,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>627</height>
+            <width>149</width>
+            <height>343</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14662,7 +14662,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_24">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1,0">
+           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1,0,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -14771,7 +14771,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_23">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1,0">
+           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1,0,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -15248,6 +15248,13 @@
                     </property>
                    </widget>
                   </item>
+                  <item row="2" column="1">
+                   <widget class="QCheckBox" name="varioLimitMinOff_ChkB">
+                    <property name="text">
+                     <string>Off</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="0" column="3">
                    <widget class="QLabel" name="VarioLabel_4">
                     <property name="text">
@@ -15261,7 +15268,7 @@
                   <item row="0" column="1">
                    <widget class="QLabel" name="VarioLabel_2">
                     <property name="text">
-                     <string>Center Max</string>
+                     <string>Center Min</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
@@ -15271,7 +15278,7 @@
                   <item row="0" column="2">
                    <widget class="QLabel" name="VarioLabel_3">
                     <property name="text">
-                     <string>Center Min</string>
+                     <string>Center Max</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
