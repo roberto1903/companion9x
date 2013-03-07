@@ -250,7 +250,7 @@ QString FuncParam(uint function, unsigned int value)
     qs.append( QObject::tr("Telemetry"));
     return qs.at(value);
   }
-  else if (function==FuncVolume || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
+  else if (function==FuncVolume) {
     RawSource item;
     for (int i=0; i<7; i++) {
       item = RawSource(SOURCE_TYPE_STICK, i);
@@ -383,7 +383,8 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
   }
-  else if (function==FuncVolume || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
+  //COMMENT: I removed the adjustGV because it noe need four different modes
+  else if (function==FuncVolume) { // || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
     unsigned int count=0;
     RawSource item;
     for (int i=0; i<7; i++) {
@@ -502,13 +503,33 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
       if (count==value) b->setCurrentIndex(b->count()-1);
       count++;
     }
-    
   }
   else {
     b->hide();
   }
   b->addItems(qs);
   b->setCurrentIndex(value); 
+}
+
+void populateRepeatCB(QComboBox *b, unsigned int value)
+{
+  b->clear();
+  b->addItem(QObject::tr("No repeat", 0));
+  unsigned int step = IS_ARM(GetEepromInterface()->getBoard()) ? 5 : 10;
+  for (unsigned int i=step; i<=60; i+=step) {
+    b->addItem(QObject::tr("%1s").arg(i), i);
+    if (i==value) b->setCurrentIndex(b->count()-1);
+  }
+}
+
+void populateGVmodeCB(QComboBox *b, unsigned int value)
+{
+  b->clear();
+  b->addItem(QObject::tr("Value"));
+  b->addItem(QObject::tr("Source"));
+  b->addItem(QObject::tr("GVAR"));
+  b->addItem(QObject::tr("Increment"));
+  b->setCurrentIndex(value);
 }
 
 void populatePhasesCB(QComboBox *b, int value)

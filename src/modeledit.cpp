@@ -1960,14 +1960,14 @@ void ModelEdit::tabCustomSwitches()
 void ModelEdit::tabCustomFunctions()
 {
   switchEditLock = true;
-  int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
-  for(int i=0; i<num_fsw; i++) {
+  int num_fsw = GetEepromInterface()->getCapability(FuncSwitches);
+  for (int i=0; i<num_fsw; i++) {
     AssignFunc func = g_model.funcSw[i].func;
     QGridLayout *layout = i >= 16 ? ui->fswitchlayout2 : ui->fswitchlayout1;
 
     fswLabel[i] = new QLabel(this);
     fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
-    fswLabel[i]->setText(tr("FSW%1").arg(i+1));
+    fswLabel[i]->setText(tr("CFN%1").arg(i+1));
     layout->addWidget(fswLabel[i],(i%16)+1,0);
 
     fswtchSwtch[i] = new QComboBox(this);
@@ -1979,90 +1979,54 @@ void ModelEdit::tabCustomFunctions()
     connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     layout->addWidget(fswtchFunc[i],(i%16)+1,2);
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
-#ifdef PHONON    
-    playBT[i] = new QPushButton(this);
-    playBT[i]->setObjectName(QString("play_%1").arg(i));
-    playBT[i]->setIcon(QIcon(":/images/play.png"));
-#endif    
+
+    QHBoxLayout *paramLayout = new QHBoxLayout();
+    layout->addLayout(paramLayout, (i%16)+1, 3);
+
+    fswtchGVmode[i] = new QComboBox(this);
+    connect(fswtchGVmode[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    paramLayout->addWidget(fswtchGVmode[i]);
+    populateGVmodeCB(fswtchGVmode[i], g_model.funcSw[i].adjustMode);
+
     fswtchParam[i] = new QSpinBox(this);
-    if (func==FuncPlayPrompt) {
-      fswtchParam[i]->setMinimum(256);      
-      fswtchParam[i]->setMaximum(511);
-    }
-    else {
-      fswtchParam[i]->setMinimum(-125);
-      fswtchParam[i]->setMaximum(125);
-    } 
     fswtchParam[i]->setAccelerated(true);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
-    layout->addWidget(fswtchParam[i],(i%16)+1,3);
-#ifdef PHONON    
-    layout->addWidget(playBT[i],(i%16)+1,4);
-    if (!(func==FuncPlayPrompt || func==FuncBackgroundMusic)) {
-      playBT[i]->hide();
-    }
-    connect(playBT[i],SIGNAL(pressed()),this,SLOT(playMusic()));
-#endif    
-    fswtchEnable[i] = new QCheckBox(this);
-    if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && GetEepromInterface()->getCapability(VoicesAsNumbers))
-      fswtchParam[i]->setValue(g_model.funcSw[i].param+256);      
-    else
-      fswtchParam[i]->setValue((int8_t)g_model.funcSw[i].param);
-    fswtchEnable[i]->setText(tr("ON"));
-    layout->addWidget(fswtchEnable[i],(i%16)+1,4);
-    fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
-    connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
+    paramLayout->addWidget(fswtchParam[i]);
 
     fswtchParamT[i] = new QComboBox(this);
-    layout->addWidget(fswtchParamT[i],(i%16)+1,3);
+    paramLayout->addWidget(fswtchParamT[i]);
     populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param);
     connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
     fswtchParamArmT[i] = new QComboBox(this);
     fswtchParamArmT[i]->setEditable(true);
-    layout->addWidget(fswtchParamArmT[i],(i%16)+1,3);
-    if ((func==FuncPlayPrompt || func==FuncBackgroundMusic) && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,g_model.funcSw[i].paramarm);
-    }
-    else {
-      populateFuncParamArmTCB(fswtchParamArmT[i],&g_model,NULL);
-      fswtchParamArmT[i]->hide();
-    }
+    paramLayout->addWidget(fswtchParamArmT[i]);
+
     connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(functionSwitchesEdited()));
-    
-    int index = fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt();
-    if (index==0) {
-      fswtchParam[i]->hide();
-      fswtchParamT[i]->hide();
-      fswtchEnable[i]->hide();
-    } else if (func>FuncSafetyCh16) {
-      if (func==FuncPlaySound || func==FuncPlayHaptic || func==FuncReset || func==FuncVolume || func==FuncPlayValue || (func>=FuncAdjustGV1 && func<=FuncAdjustGV5)) {
-        fswtchParam[i]->hide();
-        fswtchParamArmT[i]->hide();
-        fswtchParamT[i]->show();
-        fswtchEnable[i]->hide();
-      } else if (func==FuncPlayPrompt || func==FuncBackgroundMusic) {
-        fswtchParamT[i]->hide();
-        fswtchEnable[i]->hide();
-        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-          fswtchParam[i]->show();
-          fswtchParamArmT[i]->hide();
-        } else {
-          fswtchParam[i]->hide();
-          fswtchParamArmT[i]->show();
-        }
-      } else {
-        fswtchParamArmT[i]->hide();
-        fswtchParam[i]->hide();
-        fswtchParamT[i]->hide();
-        if (index>FuncInstantTrim) {
-          fswtchEnable[i]->hide();
-        } else {
-          fswtchEnable[i]->show();
-        }
-      }
-    }
+
+#ifdef PHONON    
+    playBT[i] = new QPushButton(this);
+    playBT[i]->setObjectName(QString("play_%1").arg(i));
+    playBT[i]->setIcon(QIcon(":/images/play.png"));
+    paramLayout->addWidget(playBT[i]);
+    connect(playBT[i],SIGNAL(pressed()),this,SLOT(playMusic()));
+#endif    
+
+    QHBoxLayout *repeatLayout = new QHBoxLayout();
+    layout->addLayout(repeatLayout, (i%16)+1, 4);
+
+    fswtchRepeat[i] = new QComboBox(this);
+    connect(fswtchRepeat[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    repeatLayout->addWidget(fswtchRepeat[i],(i%16)+1);
+    populateRepeatCB(fswtchRepeat[i], g_model.funcSw[i].repeatParam);
+    fswtchRepeat[i]->hide();
+
+    fswtchEnable[i] = new QCheckBox(this);
+    fswtchEnable[i]->setText(tr("ON"));
+    repeatLayout->addWidget(fswtchEnable[i],(i%16)+1);
+    fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
+    connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
   }
 
   if (num_fsw <= 16) {
@@ -2070,6 +2034,8 @@ void ModelEdit::tabCustomFunctions()
   }
 
   switchEditLock = false;
+
+  functionSwitchesEdited();
 }
 
 void ModelEdit::tabSafetySwitches()
@@ -2232,62 +2198,22 @@ void ModelEdit::functionSwitchesEdited()
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
+      g_model.funcSw[i].repeatParam= (AssignFunc)fswtchRepeat[i]->currentIndex();
+      g_model.funcSw[i].adjustMode= (AssignFunc)fswtchGVmode[i]->currentIndex();
       int index=fswtchFunc[i]->currentIndex();
+#ifdef PHONON
+      playBT[i]->hide();
+#endif
       if (g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
         fswtchParam[i]->hide();
         fswtchParamT[i]->hide();
         fswtchParamArmT[i]->hide();
         fswtchEnable[i]->hide();
         fswtchEnable[i]->setChecked(false);
-      } else if (index>FuncSafetyCh16) {
-        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue || (index>=FuncAdjustGV1 && index<=FuncAdjustGV5)) {
-          fswtchParam[i]->hide();
-          fswtchParamArmT[i]->hide();
-          if (fswtchParamT[i]->currentIndex()>=0) {
-            g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-          } else {
-            g_model.funcSw[i].param = 0;
-          }
-          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-          fswtchParamT[i]->show();
-          fswtchEnable[i]->hide();
-        } else if (index==FuncPlayPrompt || index==FuncBackgroundMusic) {
-          fswtchParamT[i]->hide();
-          fswtchEnable[i]->hide();
-          fswtchEnable[i]->setChecked(false);
-#ifdef PHONON
-          playBT[i]->show();
-#endif
-          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-            fswtchParam[i]->show();
-            fswtchParam[i]->setMinimum(256);
-            fswtchParam[i]->setMaximum(511);
-            g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-          } else {
-            fswtchParam[i]->hide();
-            fswtchParamArmT[i]->show();
-            for (int j=0; j<6; j++) {
-              g_model.funcSw[i].paramarm[j]=0;
-            }
-            if (fswtchParamArmT[i]->currentText()!="----") {
-              for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
-                g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
-              }
-            }
-          }
-        } else {
-          g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
-          fswtchParamArmT[i]->hide();
-          fswtchParam[i]->hide();
-          fswtchParamT[i]->hide();
-          if (index>FuncInstantTrim) {
-            fswtchEnable[i]->hide();
-            fswtchEnable[i]->setChecked(false);
-          } else {
-            fswtchEnable[i]->show();
-          }
-        }
-      } else {
+        fswtchRepeat[i]->hide();
+        fswtchGVmode[i]->hide();
+      }
+      else if (index >= FuncSafetyCh1 && index <=FuncSafetyCh16) {
         fswtchParam[i]->setMinimum(-125);
         fswtchParam[i]->setMaximum(125);
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
@@ -2295,6 +2221,96 @@ void ModelEdit::functionSwitchesEdited()
         fswtchEnable[i]->show();
         fswtchParamT[i]->hide();
         fswtchParamArmT[i]->hide();
+        fswtchRepeat[i]->hide();
+        fswtchGVmode[i]->hide();
+      }
+      else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
+        if (fswtchParamT[i]->currentIndex()>=0) {
+          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+        }
+        else {
+          g_model.funcSw[i].param = 0;
+        }
+        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+        fswtchRepeat[i]->hide();
+        fswtchEnable[i]->show();
+        fswtchGVmode[i]->show();
+        fswtchParam[i]->show();
+        fswtchParamT[i]->hide();
+        fswtchParamArmT[i]->hide();
+      }
+      else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue) {
+        fswtchParam[i]->hide();
+        fswtchParamArmT[i]->hide();
+        if (fswtchParamT[i]->currentIndex()>=0) {
+          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+        }
+        else {
+          g_model.funcSw[i].param = 0;
+        }
+        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+        fswtchParamT[i]->show();
+        if (index==FuncPlayValue) {
+          fswtchRepeat[i]->show();
+        }
+        else {
+          fswtchRepeat[i]->hide();
+        }
+        fswtchEnable[i]->hide();
+        fswtchGVmode[i]->hide();
+      }
+      else if (index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+        fswtchParamT[i]->hide();
+        if (index==FuncPlayPrompt || index==FuncPlayBoth) {
+          fswtchRepeat[i]->show();
+        }
+        else {
+          fswtchRepeat[i]->hide();
+        }
+        fswtchGVmode[i]->hide();
+        fswtchEnable[i]->hide();
+        fswtchEnable[i]->setChecked(false);
+#ifdef PHONON
+        playBT[i]->show();
+#endif
+        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+          fswtchParam[i]->show();
+          fswtchParam[i]->setMinimum(256);
+          if (index==FuncPlayBoth) {
+            fswtchParam[i]->setMaximum(510);
+          }
+          else {
+            fswtchParam[i]->setMaximum(511);
+          }
+          g_model.funcSw[i].param=fswtchParam[i]->value()-256;
+        }
+        else {
+          fswtchParam[i]->hide();
+          fswtchParamArmT[i]->show();
+          for (int j=0; j<6; j++) {
+            g_model.funcSw[i].paramarm[j]=0;
+          }
+          if (fswtchParamArmT[i]->currentText()!="----") {
+            for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
+              g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
+            }
+          }
+        }
+      }
+      else {
+        g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
+        fswtchParamArmT[i]->hide();
+        fswtchParam[i]->hide();
+        fswtchParamT[i]->hide();
+        fswtchRepeat[i]->hide();
+        fswtchGVmode[i]->hide();
+        if (index>FuncInstantTrim && index<FuncAdjustGV1) {
+          fswtchEnable[i]->hide();
+          fswtchEnable[i]->setChecked(false);
+        }
+        else {
+          fswtchEnable[i]->show();
+        }
       }
     }
 
@@ -2370,6 +2386,7 @@ void ModelEdit::tabTelemetry()
   }
   if (!GetEepromInterface()->getCapability(HasVario)) {
     ui->varioLimitMax_DSB->hide();
+    ui->varioLimitMinOff_ChkB->hide();
     ui->varioLimitMin_DSB->hide();
     ui->varioLimitCenterMin_DSB->hide();
     ui->varioLimitCenterMax_DSB->hide();
@@ -2383,9 +2400,16 @@ void ModelEdit::tabTelemetry()
   } else {
     ui->varioLimitMin_DSB->setValue(g_model.frsky.varioMin-10);
     ui->varioLimitMax_DSB->setValue(g_model.frsky.varioMax+10);
-    ui->varioLimitCenterMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-0.5);
     ui->varioLimitCenterMax_DSB->setValue((g_model.frsky.varioCenterMax/10.0)+0.5);
     ui->varioSourceCB->setCurrentIndex(g_model.frsky.varioSource);
+    if (g_model.frsky.varioCenterMin==-16) {
+      ui->varioLimitMinOff_ChkB->setChecked(true);
+      ui->varioLimitCenterMin_DSB->setValue(-2.0);
+      ui->varioLimitCenterMin_DSB->setDisabled(true);
+    } else {
+      ui->varioLimitMinOff_ChkB->setChecked(false);
+      ui->varioLimitCenterMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-0.5);
+    }
   }
   if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
     ui->altimetryGB->hide();
@@ -3461,6 +3485,22 @@ void ModelEdit::on_varioLimitCenterMin_DSB_editingFinished()
   }
   g_model.frsky.varioCenterMin= round((ui->varioLimitCenterMin_DSB->value()+0.5)*10);
   updateSettings();    
+}
+
+void ModelEdit::on_varioLimitMinOff_ChkB_toggled(bool checked)
+{
+  if (telemetryLock) return;
+  g_model.frsky.varioCenterMin = -16;
+  if (!checked) {
+    telemetryLock=true;
+    ui->varioLimitCenterMin_DSB->setValue(-2.0);
+    ui->varioLimitCenterMin_DSB->setEnabled(true);
+    telemetryLock=false;
+  } else {
+    ui->varioLimitCenterMin_DSB->setValue(-2.0);
+    ui->varioLimitCenterMin_DSB->setDisabled(true);
+  }
+  updateSettings();
 }
 
 void ModelEdit::on_varioLimitCenterMax_DSB_editingFinished()

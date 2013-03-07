@@ -31,6 +31,8 @@ void populateBacklightCB(QComboBox *b, const uint8_t value);
 #define POPULATE_MSWITCHES  2
 void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0, UseContext context=DefaultContext);
 void populateFuncCB(QComboBox *b, unsigned int value);
+void populateRepeatCB(QComboBox *b, unsigned int value);
+void populateGVmodeCB(QComboBox *b, unsigned int value);
 QString FuncParam(uint function, unsigned int value);
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value);
 void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);

@@ -73,6 +73,8 @@ private:
     QComboBox * fswtchParamT[C9X_MAX_CUSTOM_FUNCTIONS];
     QComboBox * fswtchParamArmT[C9X_MAX_CUSTOM_FUNCTIONS];
     QCheckBox * fswtchEnable[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchRepeat[C9X_MAX_CUSTOM_FUNCTIONS];
+    QComboBox * fswtchGVmode[C9X_MAX_CUSTOM_FUNCTIONS];
     
     QSpinBox  * safetySwitchValue[C9X_NUM_CHNOUT];
     QComboBox * safetySwitchSwtch[C9X_NUM_CHNOUT];
@@ -294,6 +296,7 @@ private slots:
     void on_varioLimitMin_DSB_editingFinished();
     void on_varioLimitMax_DSB_editingFinished();
     void on_varioLimitCenterMin_DSB_editingFinished();
+    void on_varioLimitMinOff_ChkB_toggled(bool checked);
     void on_varioLimitCenterMax_DSB_editingFinished();
     void telBarCBcurrentIndexChanged(int index);
     void ScreenTypeCBcurrentIndexChanged(int index);
