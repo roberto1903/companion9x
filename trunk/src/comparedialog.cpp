@@ -197,65 +197,7 @@ QString compareDialog::fv(const QString name, const QString value, const QString
     return "<b>" + name + ": </b><font color=" +color + ">" + value + "</font><br>";
 }
 
-QString compareDialog::getTimer1(ModelData * g_model)
-{
-  // TODO timer2
-    QString str = ", " + (g_model->timers[0].dir ? tr("Count Up") : tr("Count Down"));
-    return tr("%1:%2, ").arg(g_model->timers[0].val/60, 2, 10, QChar('0')).arg(g_model->timers[0].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[0].mode) + str;
-}
 
-QString compareDialog::getTimer2(ModelData * g_model)
-{
-  // TODO timer2
-    QString str = ", " + (g_model->timers[1].dir ? tr("Count Up") : tr("Count Down"));
-    return tr("%1:%2, ").arg(g_model->timers[1].val/60, 2, 10, QChar('0')).arg(g_model->timers[1].val%60, 2, 10, QChar('0')) + getTimerMode(g_model->timers[1].mode) + str;
-}
-
-QString compareDialog::getProtocol(ModelData * g_model)
-{
-  QString str;
-  str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
-
-  if(!g_model->protocol) //ppm protocol
-    str.append(tr(": %1 Channels, %2usec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
-
-  return str;
-}
-
-QString compareDialog::getCenterBeep(ModelData * g_model)
-{
-  //RETA123
-  QStringList strl;
-  if(g_model->beepANACenter & 0x01) strl << tr("Rudder");
-  if(g_model->beepANACenter & 0x02) strl << tr("Elevator");
-  if(g_model->beepANACenter & 0x04) strl << tr("Throttle");
-  if(g_model->beepANACenter & 0x08) strl << tr("Aileron");
-  if(g_model->beepANACenter & 0x10) strl << "P1";
-  if(g_model->beepANACenter & 0x20) strl << "P2";
-  if(g_model->beepANACenter & 0x40) strl << "P3";
-  return strl.join(", ");
-}
-
-QString compareDialog::getTrimInc(ModelData * g_model)
-{
-  switch (g_model->trimInc) {
-    case (1):
-      return tr("Extra Fine");
-      break;
-    case (2):
-      return tr("Fine");
-      break;
-    case (3):
-      return tr("Medium");
-      break;
-    case (4):
-      return tr("Coarse");
-      break;
-    default:
-      return tr("Exponential");
-      break;
-  }
-}
 
 int compareDialog::ModelHasExpo(ExpoData * ExpoArray, ExpoData expo, bool * expoused)
 {
@@ -297,177 +239,6 @@ bool compareDialog::ChannelHasMix(MixData * mixArray, uint8_t destCh)
   return false;
 }
 
-QString compareDialog::FrSkyAtype(int alarm)
-{
-  switch (alarm) {
-    case 1:
-      return tr("Yellow");
-      break;
-    case 2:
-      return tr("Orange");
-      break;
-    case 3:
-      return tr("Red");
-      break;
-    default:
-      return "----";
-      break;
-  }
-}
-
-QString compareDialog::FrSkyBlades(int blades)
-{
-  switch (blades) {
-    case 1:
-      return "3";
-      break;
-    case 2:
-      return "4";
-      break;
-    default:
-      return "2";
-      break;
-  }
-}
-
-
-QString compareDialog::FrSkyUnits(int units)
-{
-  switch(units) {
-    case 1:
-      return tr("---");
-      break;
-    default:
-      return "V";
-      break;
-  }
- }
-
-QString compareDialog::FrSkyProtocol(int protocol)
-{
-  switch(protocol) {
-    case 2:
-      if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
-        return tr("Winged Shadow How High");
-      } else {
-        return tr("Winged Shadow How High (not supported)");
-      }
-      break;
-    case 1:
-      return tr("FrSky Sensor Hub");
-      break;
-    default:
-      return tr("None");
-      break;
-  }
- }
-
-QString compareDialog::FrSkyMeasure(int units)
-{
-  switch(units) {
-    case 1:
-      return tr("Imperial");
-      break;
-    default:
-      return tr("Metric");;
-      break;
-  }
- }
-
-QString  compareDialog::getFrSkySrc(int index) {
-  return QString(TELEMETRY_SRC).mid((abs(index))*4, 4);
-}
-
-float compareDialog::getBarValue(int barId, int Value, FrSkyData *fd) 
-{
-  switch (barId) {
-    case TELEM_TM1:
-    case TELEM_TM2:
-      return (3*Value);
-      break;
-    case TELEM_RSSI_TX:
-    case TELEM_RSSI_RX:
-    case TELEM_FUEL:
-      if (Value>100) {
-        return 100;
-      } else {
-        return Value;
-      }
-      break;
-    case TELEM_A1:
-    case TELEM_MIN_A1:
-      if (fd->channels[0].type==0) {
-        return ((fd->channels[0].ratio*Value/255.0)+fd->channels[0].offset)/10;
-      } else {
-        return ((fd->channels[0].ratio*Value/255.0)+fd->channels[0].offset);
-      }
-      break;
-    case TELEM_A2:
-    case TELEM_MIN_A2:
-      if (fd->channels[1].type==0) {
-        return ((fd->channels[1].ratio*Value/255.0)+fd->channels[1].offset)/10;
-      } else {
-        return ((fd->channels[1].ratio*Value/255.0)+fd->channels[1].offset);
-      }
-      break;
-    case TELEM_ALT:
-    case TELEM_GPSALT:
-    case TELEM_MAX_ALT:
-    case TELEM_MIN_ALT:
-      return (8*Value)-510;
-      break;
-    case TELEM_RPM:
-    case TELEM_MAX_RPM:
-      return Value * 50;
-      break;
-    case TELEM_T1:
-    case TELEM_T2:
-    case TELEM_MAX_T1:
-    case TELEM_MAX_T2:
-      return  Value - 30.0;
-      break;
-    case TELEM_CELL:
-      return  Value*2.0/100;
-      break;
-    case TELEM_CELLS_SUM:
-    case TELEM_VFAS:
-      return  Value/10.0;
-      break;      
-    case TELEM_HDG:
-      if (Value>359) {
-        return 359;
-      } else {
-        return  Value * 2;
-      }
-      break;
-    case TELEM_DIST:
-    case TELEM_MAX_DIST:
-      return  Value * 8;
-      break;
-    case TELEM_MAX_CURRENT:
-    case TELEM_CURRENT:
-      return  Value/2.0;
-      break;
-    case TELEM_POWER:
-      return  Value*5;
-      break;
-    case TELEM_CONSUMPTION:
-      return  Value * 20;
-      break;
-    case TELEM_SPEED:
-    case TELEM_MAX_SPEED:
-      if (fd->imperial==1) {
-        return Value;
-      } else {
-        return Value*1.852;
-      }
-      break;
-    default:
-      return  Value;
-      break;
-  }  
-}
-
 void compareDialog::printSetup()
 {
   QString color;
@@ -478,10 +249,10 @@ void compareDialog::printSetup()
   str.append(fv(tr("Name"), g_model1->name, color));
   color=getColor1(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
   str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model1)).arg(color));
-  color=getColor1(getTimer1(g_model1),getTimer1(g_model2));
-  str.append(fv(tr("Timer1"), getTimer1(g_model1),color));  //value, mode, count up/down
-  color=getColor1(getTimer2(g_model1),getTimer2(g_model2));
-  str.append(fv(tr("Timer2"), getTimer2(g_model1),color));  //value, mode, count up/down
+  color=getColor1(getTimerStr(g_model1->timers[0]), getTimerStr(g_model2->timers[0]));
+  str.append(fv(tr("Timer1"), getTimerStr(g_model1->timers[0]), color));  //value, mode, count up/down
+  color=getColor1(getTimerStr(g_model1->timers[1]), getTimerStr(g_model2->timers[1]));
+  str.append(fv(tr("Timer2"), getTimerStr(g_model1->timers[1]), color));  //value, mode, count up/down
   color=getColor1(getProtocol(g_model1),getProtocol(g_model2));
   str.append(fv(tr("Protocol"), getProtocol(g_model1), color)); //proto, numch, delay,
   color=getColor1(g_model1->pulsePol,g_model2->pulsePol);
@@ -501,10 +272,10 @@ void compareDialog::printSetup()
   str.append(fv(tr("Name"), g_model2->name, color));
   color=getColor2(eepromInterface->getSize(*g_model1),eepromInterface->getSize(*g_model2));
   str.append("<b>"+tr("EEprom Size")+QString(": </b><font color=%2>%1</font><br>").arg(eepromInterface->getSize(*g_model2)).arg(color));
-  color=getColor2(getTimer1(g_model1),getTimer1(g_model2));
-  str.append(fv(tr("Timer1"), getTimer1(g_model2),color));  //value, mode, count up/down
-  color=getColor2(getTimer2(g_model1),getTimer2(g_model2));
-  str.append(fv(tr("Timer2"), getTimer2(g_model2),color));  //value, mode, count up/down
+  color=getColor2(getTimerStr(g_model1->timers[0]), getTimerStr(g_model2->timers[0]));
+  str.append(fv(tr("Timer1"), getTimerStr(g_model2->timers[0]),color));  //value, mode, count up/down
+  color=getColor2(getTimerStr(g_model1->timers[1]), getTimerStr(g_model2->timers[1]));
+  str.append(fv(tr("Timer2"), getTimerStr(g_model2->timers[1]),color));  //value, mode, count up/down
   color=getColor2(getProtocol(g_model1),getProtocol(g_model2));
   str.append(fv(tr("Protocol"), getProtocol(g_model2), color)); //proto, numch, delay,
   color=getColor2(g_model1->pulsePol,g_model2->pulsePol);
@@ -1387,7 +1158,7 @@ void compareDialog::printFrSky()
     float ratio=(fd1->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
     str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
     color=getColor1(fd1->channels[i].type,fd2->channels[i].type);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyUnits(fd1->channels[i].type)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyUnits(fd1->channels[i].type)+"</font></td>");
     color=getColor1(fd1->channels[i].ratio,fd2->channels[i].ratio);
     str.append("<td align=\"center\"><font color="+color+">"+QString::number(ratio,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td>");
     color=getColor1(fd1->channels[i].offset*fd1->channels[i].ratio,fd2->channels[i].offset*fd2->channels[i].ratio);
@@ -1410,7 +1181,7 @@ void compareDialog::printFrSky()
     str.append("<tr>");
     str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
     color=getColor1(fd1->channels[i].alarms[0].level,fd2->channels[i].alarms[0].level);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->channels[i].alarms[0].level)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd1->channels[i].alarms[0].level)+"</font></td>");
     color=getColor1(fd1->channels[i].alarms[0].greater,fd2->channels[i].alarms[0].greater);
     str.append("<td align=\"center\"><font color="+color+">");
     str.append((fd1->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
@@ -1419,7 +1190,7 @@ void compareDialog::printFrSky()
     color=getColor1(value1,value2);
     str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value1,10,(fd1->channels[i].type==0 ? 1:0))+"</font></td>");
     color=getColor1(fd1->channels[i].alarms[1].level,fd2->channels[i].alarms[1].level);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->channels[i].alarms[1].level)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd1->channels[i].alarms[1].level)+"</font></td>");
     color=getColor1(fd1->channels[i].alarms[1].greater,fd2->channels[i].alarms[1].greater);
     str.append("<td align=\"center\"><font color="+color+">");
     str.append((fd1->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
@@ -1430,12 +1201,12 @@ void compareDialog::printFrSky()
   }
   str.append("<tr><td align=\"center\"><b>"+tr("RSSI Alarm")+"</b></td>");
   color=getColor1(fd1->rssiAlarms[0].level,fd2->rssiAlarms[0].level);
-  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->rssiAlarms[0].level)+"</td>");
+  str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd1->rssiAlarms[0].level)+"</td>");
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor1(fd1->rssiAlarms[0].value,fd2->rssiAlarms[0].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd1->rssiAlarms[0].value,10)+"</td>");
   color=getColor1(fd1->rssiAlarms[1].level,fd2->rssiAlarms[1].level);
-  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd1->rssiAlarms[1].level)+"</td>");
+  str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd1->rssiAlarms[1].level)+"</td>");
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor1(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd1->rssiAlarms[1].value,10)+"</td>");
@@ -1487,7 +1258,7 @@ void compareDialog::printFrSky()
     float ratio=(fd2->channels[i].ratio/(fd1->channels[i].type==0 ?10.0:1));
     str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
     color=getColor2(fd1->channels[i].type,fd2->channels[i].type);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyUnits(fd2->channels[i].type)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyUnits(fd2->channels[i].type)+"</font></td>");
     color=getColor2(fd1->channels[i].ratio,fd2->channels[i].ratio);
     str.append("<td align=\"center\"><font color="+color+">"+QString::number(ratio,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td>");
     color=getColor2(fd1->channels[i].offset*fd1->channels[i].ratio,fd2->channels[i].offset*fd2->channels[i].ratio);
@@ -1510,7 +1281,7 @@ void compareDialog::printFrSky()
     str.append("<tr>");
     str.append("<td align=\"center\"><b>"+tr("A%1").arg(i+1)+"</b></td>");
     color=getColor2(fd1->channels[i].alarms[0].level,fd2->channels[i].alarms[0].level);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->channels[i].alarms[0].level)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd2->channels[i].alarms[0].level)+"</font></td>");
     color=getColor2(fd1->channels[i].alarms[0].greater,fd2->channels[i].alarms[0].greater);
     str.append("<td align=\"center\"><font color="+color+">");
     str.append((fd2->channels[i].alarms[0].greater==1) ? "&gt;" : "&lt;");
@@ -1519,7 +1290,7 @@ void compareDialog::printFrSky()
     color=getColor2(value1,value2);
     str.append("</font></td><td align=\"center\"><font color="+color+">"+QString::number(value2,10,(fd2->channels[i].type==0 ? 1:0))+"</font></td>");
     color=getColor2(fd1->channels[i].alarms[1].level,fd2->channels[i].alarms[1].level);
-    str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->channels[i].alarms[1].level)+"</font></td>");
+    str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd2->channels[i].alarms[1].level)+"</font></td>");
     color=getColor2(fd1->channels[i].alarms[1].greater,fd2->channels[i].alarms[1].greater);
     str.append("<td align=\"center\"><font color="+color+">");
     str.append((fd2->channels[i].alarms[1].greater==1) ? "&gt;" : "&lt;");
@@ -1530,12 +1301,12 @@ void compareDialog::printFrSky()
   }
   str.append("<tr><td align=\"Center\"><b>"+tr("RSSI Alarm")+"</b></td>");
   color=getColor2(fd1->rssiAlarms[0].level,fd2->rssiAlarms[0].level);
-  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->rssiAlarms[0].level)+"</td>");
+  str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd2->rssiAlarms[0].level)+"</td>");
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor2(fd1->rssiAlarms[0].value,fd2->rssiAlarms[0].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[0].value,10)+"</td>");
   color=getColor2(fd1->rssiAlarms[1].level,fd2->rssiAlarms[1].level);
-  str.append("<td align=\"center\"><font color="+color+">"+FrSkyAtype(fd2->rssiAlarms[1].level)+"</td>");
+  str.append("<td align=\"center\"><font color="+color+">"+getFrSkyAlarmType(fd2->rssiAlarms[1].level)+"</td>");
   str.append("<td align=\"center\">&lt;</td>");
   color=getColor2(fd1->rssiAlarms[1].value,fd2->rssiAlarms[1].value);
   str.append("<td align=\"center\"><font color="+color+">"+QString::number(fd2->rssiAlarms[1].value,10)+"</td>");

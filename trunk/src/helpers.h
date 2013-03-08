@@ -23,7 +23,6 @@
 #define TRIM_OFF 1
 #define TRIM_OFFSET 2
 
-#define TELEMETRY_SRC "----""Tmr1""Tmr2""Tx  ""Rx  ""A1  ""A2  ""Alt ""Rpm ""Fuel""T1  ""T2  ""Spd ""Dist""GAlt""Cell""Cels""Vfas""Curr""Cnsp""Powr""AccX""AccY""AccZ""HDG ""VSpd""A1- ""A2- ""Alt-""Alt+""Rpm+""T1+ ""T2+ ""Spd+""Dst+""Cur+""ACC ""Time"
 void populateGvSourceCB(QComboBox *b, int value);
 void populateRotEncCB(QComboBox *b, int value, int renumber);
 void populateBacklightCB(QComboBox *b, const uint8_t value);
@@ -71,49 +70,18 @@ QImage qstring2image(QString imagestr);
 int findmult(float value, float base);
 bool checkbit(int value, int bit);
 
-enum TelemetrySource {
-  TELEM_NONE,
-  TELEM_TM1,
-  TELEM_TM2,
-  TELEM_RSSI_TX,
-  TELEM_RSSI_RX,
-  TELEM_A1,
-  TELEM_A2,
-  TELEM_ALT,
-  TELEM_RPM,
-  TELEM_FUEL,
-  TELEM_T1,
-  TELEM_T2,
-  TELEM_SPEED,
-  TELEM_DIST,
-  TELEM_GPSALT,
-  TELEM_CELL,
-  TELEM_CELLS_SUM,
-  TELEM_VFAS,
-  TELEM_CURRENT,
-  TELEM_CONSUMPTION,
-  TELEM_POWER,
-  TELEM_ACCx,
-  TELEM_ACCy,
-  TELEM_ACCz,
-  TELEM_HDG,
-  TELEM_VSPD,
-  TELEM_MIN_A1,
-  TELEM_MIN_A2,
-  TELEM_MIN_ALT,
-  TELEM_MAX_ALT,
-  TELEM_MAX_RPM,
-  TELEM_MAX_T1,
-  TELEM_MAX_T2,
-  TELEM_MAX_SPEED,
-  TELEM_MAX_DIST,
-  TELEM_MAX_CURRENT,
-  TELEM_ACC,
-  TELEM_GPS_TIME,
-  TELEM_CSW_MAX = TELEM_POWER,
-  TELEM_NOUSR_MAX = TELEM_A2,
-  TELEM_DISPLAY_MAX = TELEM_MAX_CURRENT,
-  TELEM_STATUS_MAX = TELEM_GPS_TIME
-};
+QString getTrimInc(ModelData * g_model);
+QString getTimerStr(TimerData & timer);
+QString getProtocol(ModelData * g_model);
+QString getCenterBeep(ModelData * g_model);
+
+/* FrSky helpers */
+QString getFrSkyAlarmType(int alarm);
+QString getFrSkyBlades(int blades);
+QString getFrSkyUnits(int units);
+QString getFrSkyProtocol(int protocol);
+QString getFrSkyMeasure(int units);
+QString getFrSkySrc(int index);
+float   getBarValue(int barId, int value, FrSkyData *fd);
 
 #endif // HELPERS_H

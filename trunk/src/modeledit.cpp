@@ -116,175 +116,58 @@ ModelEdit::~ModelEdit()
   delete ui;
 }
 
-/*
- 1,2) Timer1/Timer2 0:765
- 3,4) TX/RX
- 5) A1 range
- 6) A2 range
- 7) ALT 0-1020
- 8)RPM 0-12750
- 9FUEL 0-100%
- 10) T1 -30-225
- 11) T2 -30-225
- 12) spd 0-510
- 13) dist 0-2040
- 14)GAlt 0-1020
- 15) cell 0-5.1
- 16) Cels 0 25.5
- 17) Vfas 0 25.5
- 18) Curr 0 127.5
- 19) Cnsp 0 5100
- 20) Powr 0 1275
- 21) AccX 0 2.55
- 22) AccY 0 2.55
- 23) AccZ 0 2.55
- 24) Hdg 0 255
- 25) VSpd 0 2.55
- 26) A1- A1 range
- 27) A2- A2 range
- 28) Alt- 0 255
- 29) Alt+ 0 255
- 30) Rpm+ 0 255
- 31) T1+ 0 255 (s????)
- 32) T2+ 0 255 (e????)
- 33) Spd+ 0 255 (ILG???)
- 34) Dst+ 0 255 (v ????)
- 35) Cur+ 0 25.5 (A)
- 1.852
- */
-float ModelEdit::getBarValue(int barId, int Value) 
-{
-  switch (barId) {
-    case TELEM_TM1:
-    case TELEM_TM2:
-      return (3*Value);
-      break;
-    case TELEM_RSSI_TX:
-    case TELEM_RSSI_RX:
-    case TELEM_FUEL:
-      if (Value>100) {
-        return 100;
-      } else {
-        return Value;
-      }
-      break;
-    case TELEM_A1:
-    case TELEM_MIN_A1:
-      return ((ui->a1RatioSB->value()*Value/255.0)+ui->a1CalibSB->value());
-      break;
-    case TELEM_A2:
-    case TELEM_MIN_A2:
-      return ((ui->a2RatioSB->value()*Value/255.0)+ui->a2CalibSB->value());
-      break;
-    case TELEM_ALT:
-    case TELEM_GPSALT:
-    case TELEM_MAX_ALT:
-    case TELEM_MIN_ALT:
-      return (8*Value)-500;
-      break;
-    case TELEM_RPM:
-    case TELEM_MAX_RPM:
-      return Value * 50;
-      break;
-    case TELEM_T1:
-    case TELEM_T2:
-    case TELEM_MAX_T1:
-    case TELEM_MAX_T2:
-      return  Value - 30.0;
-      break;
-    case TELEM_CELL:
-      return  Value*2.0/100;
-      break;
-    case TELEM_CELLS_SUM:
-    case TELEM_VFAS:
-      return  Value/10.0;
-      break;      
-    case TELEM_HDG:
-      if (Value>359) {
-        return 359;
-      } else {
-        return  Value * 2;
-      }
-      break;
-    case TELEM_DIST:
-    case TELEM_MAX_DIST:
-      return  Value * 8;
-      break;
-    case TELEM_MAX_CURRENT:
-    case TELEM_CURRENT:
-      return  Value/2.0;
-      break;
-    case TELEM_POWER:
-      return  Value*5;
-      break;
-    case TELEM_CONSUMPTION:
-      return  Value * 20;
-      break;
-    case TELEM_SPEED:
-    case TELEM_MAX_SPEED:
-      if (g_model.frsky.imperial==1) {
-        return Value;
-      } else {
-        return Value*1.852;
-      }
-      break;
-    default:
-      return  Value;
-      break;
-  }
-}
 
 float ModelEdit::getBarStep(int barId) 
 {
   switch (barId) {
-    case TELEM_TM1:
-    case TELEM_TM2:
+    case TELEMETRY_SOURCE_TIMER1:
+    case TELEMETRY_SOURCE_TIMER2:
       return 3;
       break;
-    case TELEM_A1:
-    case TELEM_MIN_A1:
+    case TELEMETRY_SOURCE_A1:
+    case TELEMETRY_SOURCE_A1_MIN:
       return (ui->a1RatioSB->value()/255);
       break;
-    case TELEM_A2:
-    case TELEM_MIN_A2:
+    case TELEMETRY_SOURCE_A2:
+    case TELEMETRY_SOURCE_A2_MIN:
       return (ui->a2RatioSB->value()/255);
       break;
-    case TELEM_ALT:
-    case TELEM_GPSALT:
-    case TELEM_MAX_ALT:
-    case TELEM_MIN_ALT:
+    case TELEMETRY_SOURCE_ALT:
+    case TELEMETRY_SOURCE_GPS_ALT:
+    case TELEMETRY_SOURCE_ALT_MAX:
+    case TELEMETRY_SOURCE_ALT_MIN:
       return 8;
       break;
-    case TELEM_RPM:
-    case TELEM_MAX_RPM:
+    case TELEMETRY_SOURCE_RPM:
+    case TELEMETRY_SOURCE_RPM_MAX:
       return 50;
       break;
-    case TELEM_CELLS_SUM:
-    case TELEM_VFAS:
+    case TELEMETRY_SOURCE_CELLS_SUM:
+    case TELEMETRY_SOURCE_VFAS:
       return  0.1;
       break;
-    case TELEM_CELL:
+    case TELEMETRY_SOURCE_CELL:
       return  0.02;
       break;      
-    case TELEM_HDG:
+    case TELEMETRY_SOURCE_HDG:
       return  2;
       break;
-    case TELEM_DIST:
-    case TELEM_MAX_DIST:
+    case TELEMETRY_SOURCE_DIST:
+    case TELEMETRY_SOURCE_DIST_MAX:
       return  8;
       break;
-    case TELEM_MAX_CURRENT:
-    case TELEM_CURRENT:
+    case TELEMETRY_SOURCE_CURRENT_MAX:
+    case TELEMETRY_SOURCE_CURRENT:
       return  0.5;
       break;
-    case TELEM_POWER:
+    case TELEMETRY_SOURCE_POWER:
       return  5;
       break;
-    case TELEM_CONSUMPTION:
+    case TELEMETRY_SOURCE_CONSUMPTION:
       return  20;
       break;
-    case TELEM_SPEED:
-    case TELEM_MAX_SPEED:
+    case TELEMETRY_SOURCE_SPEED:
+    case TELEMETRY_SOURCE_SPEED_MAX:
       if (g_model.frsky.imperial==1) {
         return 1;
       } else {
@@ -328,7 +211,6 @@ void ModelEdit::setupExposListWidget()
 
     connect(ExposlistWidget,SIGNAL(keyWasPressed(QKeyEvent*)), this, SLOT(expolistWidget_KeyPress(QKeyEvent*)));
 }
-
 
 void ModelEdit::setupMixerListWidget()
 {
@@ -2020,7 +1902,6 @@ void ModelEdit::tabCustomFunctions()
     connect(fswtchRepeat[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
     repeatLayout->addWidget(fswtchRepeat[i],(i%16)+1);
     populateRepeatCB(fswtchRepeat[i], g_model.funcSw[i].repeatParam);
-    fswtchRepeat[i]->hide();
 
     fswtchEnable[i] = new QCheckBox(this);
     fswtchEnable[i]->setText(tr("ON"));
@@ -2189,12 +2070,20 @@ void ModelEdit::playMusic()
   }
 }
 
+#define CUSTOM_FUNCTION_NUMERIC_PARAM  0x01
+#define CUSTOM_FUNCTION_SOURCE_PARAM   0x02
+#define CUSTOM_FUNCTION_FILE_PARAM     0x04
+#define CUSTOM_FUNCTION_GV_MODE        0x08
+#define CUSTOM_FUNCTION_ENABLE         0x10
+#define CUSTOM_FUNCTION_REPEAT         0x20
+
 void ModelEdit::functionSwitchesEdited()
 {
-    if(switchEditLock) return;
+    if (switchEditLock) return;
     switchEditLock = true;
     int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
     for(int i=0; i<num_fsw; i++) {
+      unsigned int widgetsMask = 0;
       g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
       g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
       g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
@@ -2204,114 +2093,98 @@ void ModelEdit::functionSwitchesEdited()
 #ifdef PHONON
       playBT[i]->hide();
 #endif
-      if (g_model.funcSw[i].swtch.type==SWITCH_TYPE_NONE) {
-        fswtchParam[i]->hide();
-        fswtchParamT[i]->hide();
-        fswtchParamArmT[i]->hide();
-        fswtchEnable[i]->hide();
-        fswtchEnable[i]->setChecked(false);
-        fswtchRepeat[i]->hide();
-        fswtchGVmode[i]->hide();
-      }
-      else if (index >= FuncSafetyCh1 && index <=FuncSafetyCh16) {
+      if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
         fswtchParam[i]->setMinimum(-125);
         fswtchParam[i]->setMaximum(125);
-        g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
-        fswtchParam[i]->show();
-        fswtchEnable[i]->show();
-        fswtchParamT[i]->hide();
-        fswtchParamArmT[i]->hide();
-        fswtchRepeat[i]->hide();
-        fswtchGVmode[i]->hide();
+        g_model.funcSw[i].param = fswtchParam[i]->value();
+        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
       }
       else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
-        if (fswtchParamT[i]->currentIndex()>=0) {
-          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+        g_model.funcSw[i].adjustMode = fswtchGVmode[i]->currentIndex();
+        widgetsMask |= CUSTOM_FUNCTION_GV_MODE + CUSTOM_FUNCTION_ENABLE;
+        switch (g_model.funcSw[i].adjustMode) {
+          // TODO constants !
+          case 0:
+            g_model.funcSw[i].param = fswtchParam[i]->value();
+            fswtchParam[i]->setMinimum(-125);
+            fswtchParam[i]->setMaximum(125);
+            widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
+            break;
+          case 1:
+            g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+            populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+            break;
+          case 2:
+            g_model.funcSw[i].param = fswtchParam[i]->value();
+            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+            // TODO populate only GVARS
+            break;
+          case 3:
+            g_model.funcSw[i].param = fswtchParam[i]->value();
+            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+            // TODO populate -1 / +1
+            break;
         }
-        else {
-          g_model.funcSw[i].param = 0;
-        }
-        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-        fswtchRepeat[i]->hide();
-        fswtchEnable[i]->show();
-        fswtchGVmode[i]->show();
-        fswtchParam[i]->show();
-        fswtchParamT[i]->hide();
-        fswtchParamArmT[i]->hide();
       }
-      else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncReset || index==FuncVolume || index==FuncPlayValue) {
-        fswtchParam[i]->hide();
-        fswtchParamArmT[i]->hide();
-        if (fswtchParamT[i]->currentIndex()>=0) {
-          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-        }
-        else {
-          g_model.funcSw[i].param = 0;
-        }
+      else if (index==FuncReset) {
+        g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
         populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-        fswtchParamT[i]->show();
-        if (index==FuncPlayValue) {
-          fswtchRepeat[i]->show();
-        }
-        else {
-          fswtchRepeat[i]->hide();
-        }
-        fswtchEnable[i]->hide();
-        fswtchGVmode[i]->hide();
+        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_ENABLE;
       }
-      else if (index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-        fswtchParamT[i]->hide();
-        if (index==FuncPlayPrompt || index==FuncPlayBoth) {
-          fswtchRepeat[i]->show();
-        }
-        else {
-          fswtchRepeat[i]->hide();
-        }
-        fswtchGVmode[i]->hide();
-        fswtchEnable[i]->hide();
-        fswtchEnable[i]->setChecked(false);
+      else if (index==FuncVolume) {
+        g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_ENABLE;
+      }
+      else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+        g_model.funcSw[i].repeatParam = fswtchRepeat[i]->itemData(fswtchRepeat[i]->currentIndex()).toInt();
+        if (index != FuncBackgroundMusic) widgetsMask |= CUSTOM_FUNCTION_REPEAT;
 #ifdef PHONON
-        playBT[i]->show();
+        playBT[i]->hide();
 #endif
-        if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-          fswtchParam[i]->show();
-          fswtchParam[i]->setMinimum(256);
-          if (index==FuncPlayBoth) {
-            fswtchParam[i]->setMaximum(510);
+        if (index==FuncPlayValue) {
+          g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+        }
+        else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
+          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+            widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
+            fswtchParam[i]->setMinimum(256);
+            fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 510 : 511);
+            g_model.funcSw[i].param=fswtchParam[i]->value()-256;
           }
           else {
-            fswtchParam[i]->setMaximum(511);
-          }
-          g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-        }
-        else {
-          fswtchParam[i]->hide();
-          fswtchParamArmT[i]->show();
-          for (int j=0; j<6; j++) {
-            g_model.funcSw[i].paramarm[j]=0;
-          }
-          if (fswtchParamArmT[i]->currentText()!="----") {
-            for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
-              g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
+#ifdef PHONON
+            playBT[i]->show();
+#endif
+            widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
+            for (int j=0; j<6; j++) {
+              g_model.funcSw[i].paramarm[j]=0;
+            }
+            if (fswtchParamArmT[i]->currentText() != "----") {
+              for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
+                g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
+              }
             }
           }
         }
       }
-      else {
+      else if (g_model.funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
-        fswtchParamArmT[i]->hide();
-        fswtchParam[i]->hide();
-        fswtchParamT[i]->hide();
-        fswtchRepeat[i]->hide();
-        fswtchGVmode[i]->hide();
-        if (index>FuncInstantTrim && index<FuncAdjustGV1) {
-          fswtchEnable[i]->hide();
-          fswtchEnable[i]->setChecked(false);
-        }
-        else {
-          fswtchEnable[i]->show();
+        if (index<=FuncInstantTrim) {
+          widgetsMask |= CUSTOM_FUNCTION_ENABLE;
         }
       }
+
+      fswtchParam[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_NUMERIC_PARAM);
+      fswtchParamT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_SOURCE_PARAM);
+      fswtchParamArmT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_FILE_PARAM);
+      fswtchEnable[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_ENABLE);
+      if (!(widgetsMask & CUSTOM_FUNCTION_ENABLE)) fswtchEnable[i]->setChecked(false);
+      fswtchRepeat[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_REPEAT);
+      fswtchGVmode[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_MODE);
     }
 
     updateSettings();
@@ -2518,18 +2391,18 @@ void ModelEdit::tabTelemetry()
     if (g_model.frsky.screens[screen].type==1) {
       barsCB[j]->setCurrentIndex(g_model.frsky.screens[screen].body.bars[j].source);
       switch (g_model.frsky.screens[screen].body.bars[j%4].source) {
-        case TELEM_A1:
-        case TELEM_MIN_A1:
-        case TELEM_A2:
-        case TELEM_MIN_A2:
-        case TELEM_CELLS_SUM:
-        case TELEM_VFAS:
-        case TELEM_MAX_CURRENT:
-        case TELEM_CURRENT:
+        case TELEMETRY_SOURCE_A1:
+        case TELEMETRY_SOURCE_A1_MIN:
+        case TELEMETRY_SOURCE_A2:
+        case TELEMETRY_SOURCE_A2_MIN:
+        case TELEMETRY_SOURCE_CELLS_SUM:
+        case TELEMETRY_SOURCE_VFAS:
+        case TELEMETRY_SOURCE_CURRENT_MAX:
+        case TELEMETRY_SOURCE_CURRENT:
           minsb[j]->setDecimals(1);
           maxsb[j]->setDecimals(1);
           break;
-        case TELEM_CELL:
+        case TELEMETRY_SOURCE_CELL:
           minsb[j]->setDecimals(2);
           maxsb[j]->setDecimals(2);
           break;
@@ -2537,14 +2410,14 @@ void ModelEdit::tabTelemetry()
           minsb[j]->setDecimals(0);
           maxsb[j]->setDecimals(0);
       }
-      minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
-      minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,255));
+      minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 0, &g_model.frsky));
+      minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 255, &g_model.frsky));
       minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-      minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,g_model.frsky.screens[screen].body.bars[j%4].barMin));
-      maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,0));
-      maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,255));
+      minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, g_model.frsky.screens[screen].body.bars[j%4].barMin, &g_model.frsky));
+      maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 0, &g_model.frsky));
+      maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 255, &g_model.frsky));
       maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source,(255-g_model.frsky.screens[screen].body.bars[j%4].barMax)));      
+      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, (255-g_model.frsky.screens[screen].body.bars[j%4].barMax), &g_model.frsky));
     }
     if (g_model.frsky.screens[screen].body.bars[j%4].source==0 || g_model.frsky.screens[screen].type==0) {
       minsb[j]->setDisabled(true);
@@ -3520,15 +3393,15 @@ void ModelEdit::telBarUpdate()
   for (int i=0; i<12; i++) {
     int screen=i/4;
     index=barsCB[i]->currentIndex();
-    if (index==TELEM_A1 || index==TELEM_A1 || index==TELEM_MIN_A1 || index==TELEM_MIN_A2) {
-      minSB[i]->setMinimum(getBarValue(index,0));
-      minSB[i]->setMaximum(getBarValue(index,255));
+    if (index==TELEMETRY_SOURCE_A1 || index==TELEMETRY_SOURCE_A1 || index==TELEMETRY_SOURCE_A1_MIN || index==TELEMETRY_SOURCE_A2_MIN) {
+      minSB[i]->setMinimum(getBarValue(index, 0, &g_model.frsky));
+      minSB[i]->setMaximum(getBarValue(index, 255, &g_model.frsky));
       minSB[i]->setSingleStep(getBarStep(index));
-      maxSB[i]->setMinimum(getBarValue(index,0));
-      maxSB[i]->setMaximum(getBarValue(index,255));
+      maxSB[i]->setMinimum(getBarValue(index, 0, &g_model.frsky));
+      maxSB[i]->setMaximum(getBarValue(index, 255, &g_model.frsky));
       maxSB[i]->setSingleStep(getBarStep(index));
-      minSB[i]->setValue(getBarValue(index,g_model.frsky.screens[screen].body.bars[i%4].barMin));
-      maxSB[i]->setValue(getBarValue(index,(255-g_model.frsky.screens[screen].body.bars[i%4].barMax)));
+      minSB[i]->setValue(getBarValue(index, g_model.frsky.screens[screen].body.bars[i%4].barMin, &g_model.frsky));
+      maxSB[i]->setValue(getBarValue(index, 255-g_model.frsky.screens[screen].body.bars[i%4].barMax, &g_model.frsky));
     }
   }
   telemetryLock=false;
@@ -3565,7 +3438,8 @@ void ModelEdit::ScreenTypeCBcurrentIndexChanged(int index) {
   updateSettings();
 }
 
-void ModelEdit::telBarCBcurrentIndexChanged(int index) {
+void ModelEdit::telBarCBcurrentIndexChanged(int index)
+{
   if (telemetryLock) return;
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int screenId = comboBox->objectName().mid(8,1).toInt() - 1;
@@ -3578,23 +3452,24 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index) {
     g_model.frsky.screens[screenId].body.bars[barId].barMax=0;
     minSB[bar]->setDisabled(true);
     maxSB[bar]->setDisabled(true);
-  } else {
+  }
+  else {
     minSB[bar]->setEnabled(true);
     maxSB[bar]->setEnabled(true);    
   }
   switch (index) {
-    case TELEM_A1:
-    case TELEM_MIN_A1:
-    case TELEM_A2:
-    case TELEM_MIN_A2:
-    case TELEM_CELLS_SUM:
-    case TELEM_VFAS:
-    case TELEM_MAX_CURRENT:
-    case TELEM_CURRENT:
+    case TELEMETRY_SOURCE_A1:
+    case TELEMETRY_SOURCE_A1_MIN:
+    case TELEMETRY_SOURCE_A2:
+    case TELEMETRY_SOURCE_A2_MIN:
+    case TELEMETRY_SOURCE_CELLS_SUM:
+    case TELEMETRY_SOURCE_VFAS:
+    case TELEMETRY_SOURCE_CURRENT_MAX:
+    case TELEMETRY_SOURCE_CURRENT:
       minSB[bar]->setDecimals(1);
       maxSB[bar]->setDecimals(1);
       break;
-    case TELEM_CELL:
+    case TELEMETRY_SOURCE_CELL:
       minSB[bar]->setDecimals(2);
       maxSB[bar]->setDecimals(2);
       break;
@@ -3602,14 +3477,14 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index) {
       minSB[bar]->setDecimals(0);
       maxSB[bar]->setDecimals(0);
   }  
-  minSB[bar]->setMinimum(getBarValue(index,0));
-  minSB[bar]->setMaximum(getBarValue(index,255));
+  minSB[bar]->setMinimum(getBarValue(index, 0, &g_model.frsky));
+  minSB[bar]->setMaximum(getBarValue(index, 255, &g_model.frsky));
   minSB[bar]->setSingleStep(getBarStep(index));
-  maxSB[bar]->setMinimum(getBarValue(index,0));
-  maxSB[bar]->setMaximum(getBarValue(index,255));
+  maxSB[bar]->setMinimum(getBarValue(index, 0, &g_model.frsky));
+  maxSB[bar]->setMaximum(getBarValue(index, 255, &g_model.frsky));
   maxSB[bar]->setSingleStep(getBarStep(index));
-  minSB[bar]->setValue(getBarValue(index,g_model.frsky.screens[screenId].body.bars[barId].barMin));
-  maxSB[bar]->setValue(getBarValue(index,(255-g_model.frsky.screens[screenId].body.bars[barId].barMax)));
+  minSB[bar]->setValue(getBarValue(index, g_model.frsky.screens[screenId].body.bars[barId].barMin, &g_model.frsky));
+  maxSB[bar]->setValue(getBarValue(index, 255-g_model.frsky.screens[screenId].body.bars[barId].barMax, &g_model.frsky));
   telemetryLock=false;
   updateSettings();
 }
@@ -3622,19 +3497,19 @@ void ModelEdit::telMinSBeditingFinished()
   int barId = spinBox->objectName().right(1).toInt() - 1;
   int minId = barId+screenId*4;
   telemetryLock=true;
-  if (g_model.frsky.screens[screenId].body.bars[barId].source==TELEM_A1 || g_model.frsky.screens[screenId].body.bars[barId].source==TELEM_MIN_A1) {
+  if (g_model.frsky.screens[screenId].body.bars[barId].source==TELEMETRY_SOURCE_A1 || g_model.frsky.screens[screenId].body.bars[barId].source==TELEMETRY_SOURCE_A1_MIN) {
         g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
-  } else if (g_model.frsky.screens[screenId].body.bars[minId].source==TELEM_A2 || g_model.frsky.screens[screenId].body.bars[minId].source==TELEM_MIN_A2) {
+  } else if (g_model.frsky.screens[screenId].body.bars[minId].source==TELEMETRY_SOURCE_A2 || g_model.frsky.screens[screenId].body.bars[minId].source==TELEMETRY_SOURCE_A2_MIN) {
         g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
   } else {
-        g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,0))/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
+        g_model.frsky.screens[screenId].body.bars[barId].barMin=round((minSB[minId]->value()-getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, 0, &g_model.frsky))/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source));
   }
-  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,g_model.frsky.screens[screenId].body.bars[barId].barMin));
+  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, g_model.frsky.screens[screenId].body.bars[barId].barMin, &g_model.frsky));
   if (maxSB[minId]->value()<minSB[minId]->value()) {
     g_model.frsky.screens[screenId].body.bars[minId].barMax=(255-g_model.frsky.screens[screenId].body.bars[barId].barMin+1);
-    maxSB[minId]->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,(255-g_model.frsky.screens[screenId].body.bars[barId].barMax)));
+    maxSB[minId]->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, 255-g_model.frsky.screens[screenId].body.bars[barId].barMax, &g_model.frsky));
   }
-  maxSB[minId]->setMinimum(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,(g_model.frsky.screens[screenId].body.bars[barId].barMin+1)));
+  maxSB[minId]->setMinimum(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, (g_model.frsky.screens[screenId].body.bars[barId].barMin+1), &g_model.frsky));
   telemetryLock=false;
   updateSettings();
 }
@@ -3646,14 +3521,13 @@ void ModelEdit::telMaxSBeditingFinished()
   int screenId = spinBox->objectName().mid(8,1).toInt() - 1;
   int barId = spinBox->objectName().right(1).toInt() - 1;
   telemetryLock=true;
-  if (g_model.frsky.screens[screenId].body.bars[barId].source==5) {
-        g_model.frsky.screens[screenId].body.bars[barId].barMax=(255-round((spinBox->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source)));
-  } else if (g_model.frsky.screens[screenId].body.bars[barId].source==6) {
-        g_model.frsky.screens[screenId].body.bars[barId].barMax=(255-round((spinBox->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source)));
-  } else {
-        g_model.frsky.screens[screenId].body.bars[barId].barMax=(255-round((spinBox->value()-getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,0))/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source) ));
-  }
-  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source,(255-g_model.frsky.screens[screenId].body.bars[barId].barMax)));
+  if (g_model.frsky.screens[screenId].body.bars[barId].source==5)
+    g_model.frsky.screens[screenId].body.bars[barId].barMax = (255-round((spinBox->value()-ui->a1CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source)));
+  else if (g_model.frsky.screens[screenId].body.bars[barId].source==6)
+    g_model.frsky.screens[screenId].body.bars[barId].barMax = (255-round((spinBox->value()-ui->a2CalibSB->value())/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source)));
+  else
+    g_model.frsky.screens[screenId].body.bars[barId].barMax = (255-round((spinBox->value()-getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, 0, &g_model.frsky))/getBarStep(g_model.frsky.screens[screenId].body.bars[barId].source) ));
+  spinBox->setValue(getBarValue(g_model.frsky.screens[screenId].body.bars[barId].source, (255-g_model.frsky.screens[screenId].body.bars[barId].barMax), &g_model.frsky));
   telemetryLock=false;
   updateSettings();
 }

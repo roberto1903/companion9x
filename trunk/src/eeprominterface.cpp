@@ -374,11 +374,11 @@ QString RawSource::toString()
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString telemetry[] = { QObject::tr("TX"), QObject::tr("RX"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"), 
-QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"), 
-QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
-QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
-QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") }; 
+  QString telemetry[] = { QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
+                          QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"),
+                          QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
+                          QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
+                          QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
   switch(type) {
     case SOURCE_TYPE_STICK:
       return sticks[index];
@@ -401,6 +401,8 @@ QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
         return QObject::tr("CH%1%2").arg((index+1)/10).arg((index+1)%10);
       else
         return QObject::tr("X%1").arg(index-GetEepromInterface()->getCapability(Outputs)+1);
+    case SOURCE_TYPE_BATTERY:
+      return QObject::tr("Batt");
     case SOURCE_TYPE_TIMER:
       return QObject::tr("Timer%1").arg(index+1);
     case SOURCE_TYPE_TELEMETRY:

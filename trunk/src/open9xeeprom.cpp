@@ -71,8 +71,9 @@ class SwitchesConversionTable: public ConversionTable {
     }
 };
 
-#define FLAG_NOSWITCHES   1
-#define FLAG_NOTELEMETRY  2
+#define FLAG_NONONE       0x01
+#define FLAG_NOSWITCHES   0x02
+#define FLAG_NOTELEMETRY  0x04
 
 class SourcesConversionTable: public ConversionTable {
 
@@ -83,7 +84,9 @@ class SourcesConversionTable: public ConversionTable {
 
       int val=0;
 
-      addConversion(RawSource(SOURCE_TYPE_NONE), val++);
+      if (!(flags & FLAG_NONONE)) {
+        addConversion(RawSource(SOURCE_TYPE_NONE), val++);
+      }
 
       for (int i=0; i<7; i++)
         addConversion(RawSource(SOURCE_TYPE_STICK, i), val++);
@@ -111,8 +114,16 @@ class SourcesConversionTable: public ConversionTable {
       addConversion(RawSource(SOURCE_TYPE_3POS), val++);
 
       if (!(flags & FLAG_NOSWITCHES)) {
-        for (int i=1; i<=9; i++)
-          addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+        if (recent) {
+          for (int i=1; i<=3; i++)
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+          for (int i=7; i<=9; i++)
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+        }
+        else {
+          for (int i=1; i<=9; i++)
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+        }
         for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++)
           addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue()), val++);
       }
@@ -134,10 +145,13 @@ class SourcesConversionTable: public ConversionTable {
             addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
         }
 
+        if (recent)
+          addConversion(RawSource(SOURCE_TYPE_BATTERY, 0), val++);
+
         for (int i=0; i<2; i++)
           addConversion(RawSource(SOURCE_TYPE_TIMER, i), val++);
 
-        for (int i=0; i<C9X_NUM_TELEMETRY_SOURCES; i++)
+        for (int i=0; i<TELEMETRY_SOURCES_COUNT; i++)
           addConversion(RawSource(SOURCE_TYPE_TELEMETRY, i), val++);
       }
     }
@@ -905,7 +919,7 @@ class CustomFunctionField: public TransformedField {
       board(board),
       version(version),
       functionsConversionTable(board, version),
-      sourcesConversionTable(board, version),
+      sourcesConversionTable(board, version, FLAG_NONONE),
       _param(0),
       _delay(0),
       _union_param(0)
@@ -990,12 +1004,12 @@ class CustomFunctionField: public TransformedField {
         }
         else if (fn.func == FuncPlayValue) {
           if (version >= 213)
-            _union_param = fn.repeatParam;
+            _union_param = fn.repeatParam / 10;
           sourcesConversionTable.exportValue(fn.param, (int &)_param);
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
           if (version >= 213)
-            _union_param = fn.repeatParam;
+            _union_param = fn.repeatParam / 10;
         }
         else if (fn.func <= FuncSafetyCh16) {
           if (version >= 213)

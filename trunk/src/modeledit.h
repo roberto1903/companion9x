@@ -83,7 +83,6 @@ private:
 
     void setupExposListWidget();
     void setupMixerListWidget();
-    float getBarValue(int barId, int Value);
     float getBarStep(int barId);
     void telBarUpdate();
     

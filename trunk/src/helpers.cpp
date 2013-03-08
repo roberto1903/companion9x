@@ -48,8 +48,8 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
   int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1};
   b->clear();
-  for (int i = 0; i < 38-(last ? 2 :0); i++) {
-    b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
+  for (int i = 0; i < TELEMETRY_SOURCES_DISPLAY_COUNT-(last ? 2 :0); i++) {
+    b->addItem(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);
       QVariant v(0);
@@ -57,7 +57,7 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
     }
   }
   if ((telem_hub[value]==0 || ((telem_hub[value]>=hubproto) && hubproto!=0))) {
-        b->setCurrentIndex(value);
+    b->setCurrentIndex(value);
   }
   b->setMaxVisibleItems(10);
 }
@@ -231,6 +231,47 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
+QString SourceParam(unsigned int value, unsigned int flags)
+{
+  QStringList qs;
+  RawSource item;
+  for (int i=0; i<7; i++) {
+    item = RawSource(SOURCE_TYPE_STICK, i);
+    qs.append(item.toString());
+  }
+  for (int i=0; i<2; i++) {
+    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+    qs.append(item.toString());
+  }
+  for (int i=0; i<4; i++) {
+    item = RawSource(SOURCE_TYPE_TRIM, i);
+    qs.append(item.toString());
+  }
+  item = RawSource(SOURCE_TYPE_MAX);
+  qs.append(item.toString());
+
+  item = RawSource(SOURCE_TYPE_3POS);
+  qs.append(item.toString());
+
+  for (int i=0; i<NUM_CYC; i++) {
+    item = RawSource(SOURCE_TYPE_CYC, i);
+    qs.append(item.toString());
+  }
+
+  for (int i=0; i<NUM_PPM; i++) {
+    item = RawSource(SOURCE_TYPE_PPM, i);
+    qs.append(item.toString());
+  }
+  for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+    item = RawSource(SOURCE_TYPE_CH, i);
+    qs.append(item.toString());
+  }
+  for (int i = 1; i < TELEMETRY_SOURCES_DISPLAY_COUNT; i++) {
+    qs.append(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
+  }
+  return qs.at(value);
+}
+
 QString FuncParam(uint function, unsigned int value)
 {
   QStringList qs;
@@ -251,77 +292,10 @@ QString FuncParam(uint function, unsigned int value)
     return qs.at(value);
   }
   else if (function==FuncVolume) {
-    RawSource item;
-    for (int i=0; i<7; i++) {
-      item = RawSource(SOURCE_TYPE_STICK, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<2; i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
-      qs.append(item.toString());
-    }
-    item = RawSource(SOURCE_TYPE_MAX);
-    qs.append(item.toString());
-
-    item = RawSource(SOURCE_TYPE_3POS);
-    qs.append(item.toString());
-
-    for (int i=0; i<NUM_CYC; i++) {
-      item = RawSource(SOURCE_TYPE_CYC, i);
-      qs.append(item.toString());
-    }
-
-    for (int i=0; i<NUM_PPM; i++) {
-      item = RawSource(SOURCE_TYPE_PPM, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
-      item = RawSource(SOURCE_TYPE_CH, i);
-      qs.append(item.toString());
-    }
-    return qs.at(value);
+    return SourceParam(value, 0);
   }
   else if (function==FuncPlayValue) {
-    RawSource item;
-    for (int i=0; i<7; i++) {
-      item = RawSource(SOURCE_TYPE_STICK, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<2; i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
-      qs.append(item.toString());
-    }
-    item = RawSource(SOURCE_TYPE_MAX);
-    qs.append(item.toString());
-
-    item = RawSource(SOURCE_TYPE_3POS);
-    qs.append(item.toString());
-
-    for (int i=0; i<NUM_CYC; i++) {
-      item = RawSource(SOURCE_TYPE_CYC, i);
-      qs.append(item.toString());
-    }
-
-    for (int i=0; i<NUM_PPM; i++) {
-      item = RawSource(SOURCE_TYPE_PPM, i);
-      qs.append(item.toString());
-    }
-    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
-      item = RawSource(SOURCE_TYPE_CH, i);
-      qs.append(item.toString());
-    } 
-    for (int i = 1; i < 36; i++) {
-      qs.append(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
-    }
-    return qs.at(value);
+    return SourceParam(value, 0);
   }
 
   return "";
@@ -373,142 +347,31 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
   if (function==FuncPlaySound) {
     qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+    b->addItems(qs);
+    b->setCurrentIndex(value);
   }
   else if (function==FuncPlayHaptic) {
     qs << "0" << "1" << "2" << "3";
+    b->addItems(qs);
+    b->setCurrentIndex(value);
   }
   else if (function==FuncReset) {
     qs.append( QObject::tr("Timer1"));
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
+    b->addItems(qs);
+    b->setCurrentIndex(value);
   }
-  //COMMENT: I removed the adjustGV because it noe need four different modes
-  else if (function==FuncVolume) { // || (function>=FuncAdjustGV1 && function<=FuncAdjustGV5)) {
-    unsigned int count=0;
-    RawSource item;
-    for (int i=0; i<7; i++) {
-      item = RawSource(SOURCE_TYPE_STICK, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    for (int i=0; i<2; i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-      b->addItem(item.toString(), item.toValue());
-      if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
-        QModelIndex index = b->model()->index(count, 0);
-        QVariant v(0);
-        b->model()->setData(index, v, Qt::UserRole - 1);        
-      }
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    item = RawSource(SOURCE_TYPE_MAX);
-    b->addItem(item.toString(), item.toValue());
-    if (count==value) b->setCurrentIndex(b->count()-1);
-    count++;
-
-    item = RawSource(SOURCE_TYPE_3POS);
-    b->addItem(item.toString(), item.toValue());
-    if (count==value) b->setCurrentIndex(b->count()-1);
-    count++;
-
-    for (int i=0; i<NUM_CYC; i++) {
-      item = RawSource(SOURCE_TYPE_CYC, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-
-    for (int i=0; i<NUM_PPM; i++) {
-      item = RawSource(SOURCE_TYPE_PPM, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-
-    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
-      item = RawSource(SOURCE_TYPE_CH, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
+  else if (function==FuncVolume) {
+    populateSourceCB(b, RawSource(value), 0);
   }
   else if (function==FuncPlayValue) {
-    unsigned int count=0;
-    RawSource item;
-    for (int i=0; i<7; i++) {
-      item = RawSource(SOURCE_TYPE_STICK, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    for (int i=0; i<2; i++) {
-      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-      b->addItem(item.toString(), item.toValue());
-      if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
-        QModelIndex index = b->model()->index(count, 0);
-        QVariant v(0);
-        b->model()->setData(index, v, Qt::UserRole - 1);
-      }
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    for (int i=0; i<4; i++) {
-      item = RawSource(SOURCE_TYPE_TRIM, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-    item = RawSource(SOURCE_TYPE_MAX);
-    b->addItem(item.toString(), item.toValue());
-    if (count==value) b->setCurrentIndex(b->count()-1);
-    count++;
-
-    item = RawSource(SOURCE_TYPE_3POS);
-    b->addItem(item.toString(), item.toValue());
-    if (count==value) b->setCurrentIndex(b->count()-1);
-    count++;
-
-    for (int i=0; i<NUM_CYC; i++) {
-      item = RawSource(SOURCE_TYPE_CYC, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-
-    for (int i=0; i<NUM_PPM; i++) {
-      item = RawSource(SOURCE_TYPE_PPM, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-
-    for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
-      item = RawSource(SOURCE_TYPE_CH, i);
-      b->addItem(item.toString(), item.toValue());
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
-
-    for (int i = 1; i < 36; i++) {
-      b->addItem(QString(TELEMETRY_SRC).mid((abs(i))*4, 4));
-      if (count==value) b->setCurrentIndex(b->count()-1);
-      count++;
-    }
+    populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
   }
   else {
     b->hide();
   }
-  b->addItems(qs);
-  b->setCurrentIndex(value); 
 }
 
 void populateRepeatCB(QComboBox *b, unsigned int value)
@@ -545,7 +408,8 @@ void populatePhasesCB(QComboBox *b, int value)
   b->setCurrentIndex(value + GetEepromInterface()->getCapability(FlightPhases));
 }
 
-void populateCurvesCB(QComboBox *b, int value) {
+void populateCurvesCB(QComboBox *b, int value)
+{
   b->clear();
   int numcurves=GetEepromInterface()->getCapability(NumCurves);
   if (numcurves==0) {
@@ -562,7 +426,8 @@ void populateCurvesCB(QComboBox *b, int value) {
   b->setMaxVisibleItems(10);
 }
 
-void populateExpoCurvesCB(QComboBox *b, int value) {
+void populateExpoCurvesCB(QComboBox *b, int value)
+{
   b->clear();
   int numcurves=GetEepromInterface()->getCapability(NumCurves);
   if (numcurves==0) {
@@ -607,7 +472,8 @@ void populateExpoCurvesCB(QComboBox *b, int value) {
   */
 }
 
-void populateTrimUseCB(QComboBox *b, unsigned int phase) {
+void populateTrimUseCB(QComboBox *b, unsigned int phase)
+{
   b->addItem(QObject::tr("Own trim"));
   unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
   if (num_phases>0) {
@@ -619,7 +485,8 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase) {
   }
 }
 
-void populateGvarUseCB(QComboBox *b, unsigned int phase) {
+void populateGvarUseCB(QComboBox *b, unsigned int phase)
+{
   b->addItem(QObject::tr("Own value"));
   unsigned int num_phases = GetEepromInterface()->getCapability(FlightPhases);
   if (num_phases>0) {
@@ -753,7 +620,6 @@ QString getTimerModeB(int tm) {
   }
   return s;
 }
-
 
 void populateBacklightCB(QComboBox *b, const uint8_t value)
 {
@@ -968,12 +834,16 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   }
 
   if (flags & POPULATE_TELEMETRY) {
+    item = RawSource(SOURCE_TYPE_BATTERY, 0);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+
     for (int i=0; i<C9X_MAX_TIMERS; i++) {
       item = RawSource(SOURCE_TYPE_TIMER, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
-    for (int i=0; i<C9X_NUM_TELEMETRY_SOURCES; i++) {
+    for (int i=0; i<TELEMETRY_SOURCES_COUNT; i++) {
       item = RawSource(SOURCE_TYPE_TELEMETRY, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
@@ -1110,4 +980,215 @@ int findmult(float value, float base)
 bool checkbit(int value, int bit)
 {
   return ((value & (1<<bit))==(1<<bit));
+}
+
+
+QString getFrSkyAlarmType(int alarm)
+{
+  switch (alarm) {
+    case 1:
+      return QObject::tr("Yellow");
+    case 2:
+      return QObject::tr("Orange");
+    case 3:
+      return QObject::tr("Red");
+    default:
+      return "----";
+  }
+}
+
+QString getFrSkyBlades(int blades)
+{
+  switch (blades) {
+    case 1:
+      return "3";
+    case 2:
+      return "4";
+    default:
+      return "2";
+  }
+}
+
+
+QString getFrSkyUnits(int units)
+{
+  switch(units) {
+    case 1:
+      return QObject::tr("---");
+    default:
+      return "V";
+  }
+}
+
+QString getFrSkyProtocol(int protocol)
+{
+  switch(protocol) {
+    case 2:
+      if ((GetEepromInterface()->getCapability(Telemetry) & TM_HASWSHH))
+        return QObject::tr("Winged Shadow How High");
+      else
+        return QObject::tr("Winged Shadow How High (not supported)");
+    case 1:
+      return QObject::tr("FrSky Sensor Hub");
+    default:
+      return QObject::tr("None");
+  }
+}
+
+QString getFrSkyMeasure(int units)
+{
+  switch(units) {
+    case 1:
+      return QObject::tr("Imperial");
+    default:
+      return QObject::tr("Metric");
+  }
+}
+
+QString getFrSkySrc(int index)
+{
+  return RawSource(SOURCE_TYPE_TELEMETRY, index).toString();
+}
+
+
+/*
+ 1,2) Timer1/Timer2 0:765
+ 3,4) TX/RX
+ 5) A1 range
+ 6) A2 range
+ 7) ALT 0-1020
+ 8)RPM 0-12750
+ 9FUEL 0-100%
+ 10) T1 -30-225
+ 11) T2 -30-225
+ 12) spd 0-510
+ 13) dist 0-2040
+ 14)GAlt 0-1020
+ 15) cell 0-5.1
+ 16) Cels 0 25.5
+ 17) Vfas 0 25.5
+ 18) Curr 0 127.5
+ 19) Cnsp 0 5100
+ 20) Powr 0 1275
+ 21) AccX 0 2.55
+ 22) AccY 0 2.55
+ 23) AccZ 0 2.55
+ 24) Hdg 0 255
+ 25) VSpd 0 2.55
+ 26) A1- A1 range
+ 27) A2- A2 range
+ 28) Alt- 0 255
+ 29) Alt+ 0 255
+ 30) Rpm+ 0 255
+ 31) T1+ 0 255 (s????)
+ 32) T2+ 0 255 (e????)
+ 33) Spd+ 0 255 (ILG???)
+ 34) Dst+ 0 255 (v ????)
+ 35) Cur+ 0 25.5 (A)
+ 1.852
+ */
+
+float getBarValue(int barId, int value, FrSkyData *fd)
+{
+  switch (barId) {
+    case TELEMETRY_SOURCE_TIMER1:
+    case TELEMETRY_SOURCE_TIMER2:
+      return (3*value);
+    case TELEMETRY_SOURCE_RSSI_TX:
+    case TELEMETRY_SOURCE_RSSI_RX:
+    case TELEMETRY_SOURCE_FUEL:
+      return std::min(100, value);
+    case TELEMETRY_SOURCE_A1:
+    case TELEMETRY_SOURCE_A1_MIN:
+      if (fd->channels[0].type==0)
+        return ((fd->channels[0].ratio*value/255.0)+fd->channels[0].offset)/10;
+      else
+        return ((fd->channels[0].ratio*value/255.0)+fd->channels[0].offset);
+    case TELEMETRY_SOURCE_A2:
+    case TELEMETRY_SOURCE_A2_MIN:
+      if (fd->channels[1].type==0)
+        return ((fd->channels[1].ratio*value/255.0)+fd->channels[1].offset)/10;
+      else
+        return ((fd->channels[1].ratio*value/255.0)+fd->channels[1].offset);
+    case TELEMETRY_SOURCE_ALT:
+    case TELEMETRY_SOURCE_GPS_ALT:
+    case TELEMETRY_SOURCE_ALT_MAX:
+    case TELEMETRY_SOURCE_ALT_MIN:
+      return (8*value)-510;
+    case TELEMETRY_SOURCE_RPM:
+    case TELEMETRY_SOURCE_RPM_MAX:
+      return value * 50;
+    case TELEMETRY_SOURCE_T1:
+    case TELEMETRY_SOURCE_T2:
+    case TELEMETRY_SOURCE_T1_MAX:
+    case TELEMETRY_SOURCE_T2_MAX:
+      return value - 30.0;
+    case TELEMETRY_SOURCE_CELL:
+      return value*2.0/100;
+    case TELEMETRY_SOURCE_CELLS_SUM:
+    case TELEMETRY_SOURCE_VFAS:
+      return value/10.0;
+    case TELEMETRY_SOURCE_HDG:
+      return std::min(359, value*2);
+    case TELEMETRY_SOURCE_DIST_MAX:
+    case TELEMETRY_SOURCE_DIST:
+      return value * 8;
+    case TELEMETRY_SOURCE_CURRENT_MAX:
+    case TELEMETRY_SOURCE_CURRENT:
+      return value/2.0;
+    case TELEMETRY_SOURCE_POWER:
+      return value*5;
+    case TELEMETRY_SOURCE_CONSUMPTION:
+      return value * 20;
+    case TELEMETRY_SOURCE_SPEED:
+    case TELEMETRY_SOURCE_SPEED_MAX:
+      if (fd->imperial==1)
+        return value;
+      else
+        return value*1.852;
+    default:
+      return value;
+  }
+}
+
+QString getTrimInc(ModelData * g_model)
+{
+    switch (g_model->trimInc) {
+      case (1): return QObject::tr("Extra Fine");
+      case (2): return QObject::tr("Fine");
+      case (3): return QObject::tr("Medium");
+      case (4): return QObject::tr("Coarse");
+      default: return QObject::tr("Exponential");
+    }
+}
+
+QString getTimerStr(TimerData & timer)
+{
+  QString str = ", " + (timer.dir ? QObject::tr("Count Up") : QObject::tr("Count Down"));
+  return QObject::tr("%1:%2, ").arg(timer.val/60, 2, 10, QChar('0')).arg(timer.val%60, 2, 10, QChar('0')) + getTimerMode(timer.mode) + str;
+}
+
+QString getProtocol(ModelData * g_model)
+{
+  QString str;
+  str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
+
+  if (!g_model->protocol) //ppm protocol
+    str.append(QObject::tr(": %1 Channels, %2usec Delay").arg(g_model->ppmNCH).arg(g_model->ppmDelay));
+
+  return str;
+}
+
+QString getCenterBeep(ModelData * g_model)
+{
+  //RETA123
+  QStringList strl;
+  if(g_model->beepANACenter & 0x01) strl << QObject::tr("Rudder");
+  if(g_model->beepANACenter & 0x02) strl << QObject::tr("Elevator");
+  if(g_model->beepANACenter & 0x04) strl << QObject::tr("Throttle");
+  if(g_model->beepANACenter & 0x08) strl << QObject::tr("Aileron");
+  if(g_model->beepANACenter & 0x10) strl << "P1";
+  if(g_model->beepANACenter & 0x20) strl << "P2";
+  if(g_model->beepANACenter & 0x40) strl << "P3";
+  return strl.join(", ");
 }
