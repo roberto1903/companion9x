@@ -34,11 +34,6 @@ private:
     QString doTR(const QString s, const QString color, bool bold);
     QString doTL(const QString s, const QString color, bool bold);
     QString fv(const QString name, const QString value,const QString color);
-    QString getTimer1(ModelData * g_model);
-    QString getTimer2(ModelData * g_model);
-    QString getProtocol(ModelData * g_model);
-    QString getCenterBeep(ModelData * g_model);
-    QString getTrimInc(ModelData * g_model);
     template<class T> QString getColor1(T val1, T val2) {
       if (val1!=val2)
         return "green";
@@ -68,13 +63,6 @@ private:
     bool ChannelHasExpo(ExpoData * expoArray, uint8_t destCh);
     int ModelHasMix(MixData * mixArray, MixData mix, bool * mixused);
     bool ChannelHasMix(MixData * mixArray, uint8_t destCh);
-    QString FrSkyAtype(int alarm);
-    QString FrSkyUnits(int units);
-    QString FrSkyProtocol(int protocol);
-    QString FrSkyMeasure(int units);
-    QString FrSkyBlades(int blades);
-    QString getFrSkySrc(int index);
-    float getBarValue(int barId, int Value, FrSkyData *fd);
     
     QTextEdit * te;
     QString curvefile5;
