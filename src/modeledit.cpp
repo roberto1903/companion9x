@@ -2195,8 +2195,6 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
-  const char * StdTelBar[]={"---","Tmr1","Tmr2","Tx","Rx","A1","A2",NULL};
-  const char * FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell","Cels","Vfas","Curr","Cnsp","Powr","AccX","AccY","AccZ","Hdg","VSpd","A1-","A2-","Alt-","Alt+","Rpm+","T1+","T2+","Spd+","Dst+","Cur+",NULL};
   QComboBox* barscb[12] = { ui->telBarCS1B1_CB, ui->telBarCS1B2_CB,  ui->telBarCS1B3_CB,  ui->telBarCS1B4_CB,
                             ui->telBarCS2B1_CB, ui->telBarCS2B2_CB,  ui->telBarCS2B3_CB,  ui->telBarCS2B4_CB,
                             ui->telBarCS3B1_CB, ui->telBarCS3B2_CB,  ui->telBarCS3B3_CB,  ui->telBarCS3B4_CB};
@@ -2289,7 +2287,8 @@ void ModelEdit::tabTelemetry()
   }
   if (GetEepromInterface()->getCapability(TelemetryCSFields)==0) {
     ui->groupBox_5->hide();
-  } else {
+  }
+  else {
     if (GetEepromInterface()->getCapability(TelemetryCSFields)==8) {
       ui->tabCsView->removeTab(1);
       ui->tabCsView->removeTab(2);
@@ -2369,28 +2368,11 @@ void ModelEdit::tabTelemetry()
   ui->frskyBladesCB->setCurrentIndex(g_model.frsky.blades);
   ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
   ui->frskyVoltCB->setCurrentIndex(g_model.frsky.voltsSource);
-  for(int i=0; StdTelBar[i];i++) {
-    for (int j=0;j<12;j++) {
-      barsCB[j]->addItem(StdTelBar[i]);
-    }
-  }
-  if (g_model.frsky.usrProto!=0) {
-    for (int j=0;j<12;j++) {
-      barsCB[j]->addItem("Alt");
-    }
-  }
-  if (g_model.frsky.usrProto==1) {
-    for(int i=0; FrSkyTelBar[i];i++) {
-      for (int j=0;j<12;j++) {
-        barsCB[j]->addItem(FrSkyTelBar[i]);
-      }
-    }
-  }
 
   for (int j=0;j<12;j++) {
     int screen=j/4;
     if (g_model.frsky.screens[screen].type==1) {
-      barsCB[j]->setCurrentIndex(g_model.frsky.screens[screen].body.bars[j].source);
+      populatecsFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[j%4].source, false, g_model.frsky.usrProto);
       switch (g_model.frsky.screens[screen].body.bars[j%4].source) {
         case TELEMETRY_SOURCE_A1:
         case TELEMETRY_SOURCE_A1_MIN:
@@ -2431,7 +2413,8 @@ void ModelEdit::tabTelemetry()
   telemetryLock=false;
 }
 
-void ModelEdit::updateA1Fields() {
+void ModelEdit::updateA1Fields()
+{
   float a1ratio,a11value, a12value;
   if (g_model.frsky.channels[0].ratio==0) {
     ui->a11ValueSB->setMinimum(0);
@@ -2977,25 +2960,12 @@ void ModelEdit::on_frskyVoltCB_currentIndexChanged(int index)
 void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
 {
   if (telemetryLock) return;
-  const char *  StdTelBar[]={"---","Tmr1","Tmr2","TX","RX","A1","A2",NULL};
-  const char *  FrSkyTelBar[]={"RPM","Fuel","Temp1","Temp2","Speed","Dist","GAlt","Cell","Cels","Vfas","Curr","Cnsp","Powr","AccX","AccY","AccZ","Hdg","VSpd","A1-","A2-","Alt-","Alt+","Rpm+","T1+","T2+","Spd+","Dst+","Cur+",NULL};
   int bindex[12];
   telemetryLock=true;
   for (int i=0; i<12; i++) {
     bindex[i]=barsCB[i]->currentIndex();
     g_model.frsky.usrProto=index;
-    barsCB[i]->clear();
-    for(int j=0; StdTelBar[j];j++) {
-      barsCB[i]->addItem(StdTelBar[j]);
-    }
-    if (index!=0) {
-      barsCB[i]->addItem("Alt");
-    }
-    if (index==1) {
-      for(int j=0; FrSkyTelBar[j];j++) {
-        barsCB[i]->addItem(FrSkyTelBar[j]);
-      }
-    }
+    populatecsFieldCB(barsCB[i], bindex[i], false, g_model.frsky.usrProto);
   }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
@@ -3004,7 +2974,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
     for (int j=0; j<24; j++) {
       int screen=j/8;
       csf[j]->clear();
-      populatecsFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6),g_model.frsky.usrProto);
+      populatecsFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6), g_model.frsky.usrProto);
     }
   }
   telemetryLock=false;
