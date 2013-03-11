@@ -2299,10 +2299,11 @@ void ModelEdit::tabTelemetry()
     }
     for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
       int screen=i/8;
-      if (g_model.frsky.screens[screen].type==0)  {
-        populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6),g_model.frsky.usrProto);
-      } else {
-        populatecsFieldCB(csf[i], 0, ((i % 8)<6),g_model.frsky.usrProto);
+      if (g_model.frsky.screens[screen].type==0) {
+        populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6), g_model.frsky.usrProto);
+      }
+      else {
+        populatecsFieldCB(csf[i], 0, ((i % 8)<6), g_model.frsky.usrProto);
       }
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
@@ -2998,7 +2999,8 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
-  } else {
+  }
+  else {
     for (int j=0; j<24; j++) {
       int screen=j/8;
       csf[j]->clear();

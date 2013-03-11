@@ -38,6 +38,7 @@
 #define AUTOSWITCH
 #define GRAPHICS
 #define SDCARD
+#define RTCLOCK
 #define CURVES
 #define XCURVES
 #define GVARS
@@ -62,6 +63,7 @@ namespace Open9xX9D {
 #include "../open9x/eeprom_avr.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/x9d/pulses_driver.cpp"
+#include "../open9x/x9d/rtc_driver.cpp"
 #include "../open9x/pulses_arm.cpp"
 #include "../open9x/stamp.cpp"
 #include "../open9x/menus.cpp"
@@ -72,6 +74,7 @@ namespace Open9xX9D {
 #include "../open9x/monitors_views.cpp"
 #include "../open9x/lcd.cpp"
 #include "../open9x/logs.cpp"
+#include "../open9x/rtc.cpp"
 #include "../open9x/x9d/keys_driver.cpp"
 #include "../open9x/keys.cpp"
 #include "../open9x/bmp.cpp"
