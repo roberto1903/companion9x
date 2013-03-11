@@ -46,8 +46,14 @@ void populateRotEncCB(QComboBox *b, int value, int renumber)
 
 void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
 {
-  int telem_hub[]={0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1};
+  int telem_hub[] = {0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1};
   b->clear();
+
+  b->addItem(RawSource(SOURCE_TYPE_NONE, 0).toString());
+  b->addItem(RawSource(SOURCE_TYPE_BATTERY, 0).toString());
+  b->addItem(RawSource(SOURCE_TYPE_TIMER, 0).toString());
+  b->addItem(RawSource(SOURCE_TYPE_TIMER, 1).toString());
+
   for (int i = 0; i < TELEMETRY_SOURCES_DISPLAY_COUNT-(last ? 2 :0); i++) {
     b->addItem(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
     if (!(telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
@@ -56,9 +62,11 @@ void populatecsFieldCB(QComboBox *b, int value, bool last=false, int hubproto=0)
       b->model()->setData(index, v, Qt::UserRole - 1);
     }
   }
+
   if ((telem_hub[value]==0 || ((telem_hub[value]>=hubproto) && hubproto!=0))) {
     b->setCurrentIndex(value);
   }
+
   b->setMaxVisibleItems(10);
 }
 
