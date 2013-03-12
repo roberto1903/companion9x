@@ -558,8 +558,8 @@ void MdiChild::simulate()
 void MdiChild::print()
 {
     if(ui->modelsList->currentRow()<1) return;
-    printDialog pd(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
-    pd.show();
+    printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
+    pd->show();
 }
 
 void MdiChild::viableModelSelected(bool viable)
