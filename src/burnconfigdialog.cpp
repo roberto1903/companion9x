@@ -146,12 +146,11 @@ void burnConfigDialog::putSettings()
 
 void burnConfigDialog::populateProgrammers()
 {
-    QString fileName = QDir(avrLoc).absolutePath() + "/avrdude.conf"; //for windows
+    QString fileName = QFileInfo(avrLoc).canonicalPath() + "/avrdude.conf"; //for windows
     if(!QFileInfo(fileName).exists()) fileName = "/etc/avrdude.conf"; //for linux
     if(!QFileInfo(fileName).exists()) fileName = "/etc/avrdude/avrdude.conf"; //for linux
     if(!QFileInfo(fileName).exists()) return; // not found avrdude.conf - returning
 
-    qDebug() << fileName;
     QFile file(fileName);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
