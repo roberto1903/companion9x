@@ -2384,6 +2384,7 @@ void ModelEdit::tabTelemetry()
     int field = j%4;
     populateCustomScreenFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[field].source, false, g_model.frsky.usrProto);
     switch (g_model.frsky.screens[screen].body.bars[field].source) {
+      case TELEMETRY_SOURCE_TX_BATT:
       case TELEMETRY_SOURCE_A1:
       case TELEMETRY_SOURCE_A1_MIN:
       case TELEMETRY_SOURCE_A2:
@@ -3429,6 +3430,7 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index)
     maxSB[bar]->setEnabled(true);    
   }
   switch (index) {
+    case TELEMETRY_SOURCE_TX_BATT:
     case TELEMETRY_SOURCE_A1:
     case TELEMETRY_SOURCE_A1_MIN:
     case TELEMETRY_SOURCE_A2:
