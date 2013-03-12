@@ -2139,7 +2139,7 @@ void ModelEdit::functionSwitchesEdited()
       else if (index==FuncReset) {
         g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
         populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_ENABLE;
+        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
       }
       else if (index==FuncVolume) {
         g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
