@@ -74,7 +74,8 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   tabCustomSwitches();
   int telTab=10;
   int fswTab=9;
-  if (GetEepromInterface()->getCapability(FSSwitch) ) {
+
+  if (GetEepromInterface()->getCapability(FSSwitch)) {
     ui->tabSafetySwitches->setDisabled(true);
     ui->tabWidget->removeTab(8);
     telTab--;
@@ -83,6 +84,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   else {
     tabSafetySwitches();
   }
+
   if (GetEepromInterface()->getCapability(FuncSwitches)==0 ) {
     ui->tabCustomFunctions->setDisabled(true);
     ui->tabWidget->removeTab(fswTab);
@@ -91,8 +93,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   else {
     tabCustomFunctions();
   }
+
   tabTemplates();
   tabHeli();
+
   if (GetEepromInterface()->getCapability(Telemetry) & TM_HASTELEMETRY) {
     tabTelemetry();
   }
@@ -104,8 +108,10 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   ui->tabWidget->setCurrentIndex(0);
   ui->curvePreview->setMinimumWidth(240);
   ui->curvePreview->setMinimumHeight(240);
+
   resizeEvent();
   QTimer::singleShot(0, this, SLOT(shrink()));
+
   if (openWizard) {
     QTimer::singleShot(1, this, SLOT(wizard()));
   }
@@ -2195,6 +2201,10 @@ void ModelEdit::tabTelemetry()
 {
   float a1ratio;
   float a2ratio;
+
+  QGroupBox* barsgb[3] = { ui->CS1Bars, ui->CS2Bars, ui->CS3Bars };
+  QGroupBox* numsgb[3] = { ui->CS1Nums, ui->CS2Nums, ui->CS3Nums };
+
   QComboBox* barscb[12] = { ui->telBarCS1B1_CB, ui->telBarCS1B2_CB,  ui->telBarCS1B3_CB,  ui->telBarCS1B4_CB,
                             ui->telBarCS2B1_CB, ui->telBarCS2B2_CB,  ui->telBarCS2B3_CB,  ui->telBarCS2B4_CB,
                             ui->telBarCS3B1_CB, ui->telBarCS3B2_CB,  ui->telBarCS3B3_CB,  ui->telBarCS3B4_CB};
@@ -2207,6 +2217,9 @@ void ModelEdit::tabTelemetry()
   QComboBox* tmp[24] = { ui->telemetryCS1F1_CB, ui->telemetryCS1F2_CB, ui->telemetryCS1F3_CB, ui->telemetryCS1F4_CB, ui->telemetryCS1F5_CB, ui->telemetryCS1F6_CB, ui->telemetryCS1F7_CB, ui->telemetryCS1F8_CB,
                          ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB,
                          ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB};
+
+  memcpy(barsGB, barsgb, sizeof(barsGB));
+  memcpy(numsGB, numsgb, sizeof(numsGB));
   memcpy(barsCB, barscb, sizeof(barsCB));
   memcpy(maxSB, maxsb, sizeof(maxSB));
   memcpy(minSB, minsb, sizeof(minSB));
@@ -2216,27 +2229,13 @@ void ModelEdit::tabTelemetry()
   ui->telemetryCSType1->setCurrentIndex(g_model.frsky.screens[0].type);
   ui->telemetryCSType2->setCurrentIndex(g_model.frsky.screens[1].type);
   ui->telemetryCSType3->setCurrentIndex(g_model.frsky.screens[2].type);
-  if (g_model.frsky.screens[0].type==0) {
-    ui->CS1Bars->hide();
-    ui->CS1Nums->show();    
-  } else{
-    ui->CS1Bars->show();
-    ui->CS1Nums->hide();
+
+  for (int i=0; i<3; i++) {
+    bool isNum = (g_model.frsky.screens[i].type==0);
+    barsGB[i]->setVisible(!isNum);
+    numsGB[i]->setVisible(isNum);
   }
-  if (g_model.frsky.screens[1].type==0) {
-    ui->CS2Bars->hide();
-    ui->CS2Nums->show();    
-  } else{
-    ui->CS2Bars->show();
-    ui->CS2Nums->hide();
-  }
-  if (g_model.frsky.screens[2].type==0) {
-    ui->CS3Bars->hide();
-    ui->CS3Nums->show();    
-  } else{
-    ui->CS3Bars->show();
-    ui->CS3Nums->hide();
-  }
+
   connect(ui->telemetryCSType1,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
   connect(ui->telemetryCSType2,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
   connect(ui->telemetryCSType3,SIGNAL(currentIndexChanged(int)),this,SLOT(ScreenTypeCBcurrentIndexChanged(int)));
@@ -2252,9 +2251,11 @@ void ModelEdit::tabTelemetry()
   
   if (!GetEepromInterface()->getCapability(HasAltitudeSel)) {
     ui->AltitudeGPS_CB->hide();
-  } else {
+  }
+  else {
     ui->AltitudeGPS_CB->setChecked(g_model.frsky.FrSkyGpsAlt);
   }
+
   if (!GetEepromInterface()->getCapability(HasVario)) {
     ui->varioLimitMax_DSB->hide();
     ui->varioLimitMinOff_ChkB->hide();
@@ -2268,7 +2269,8 @@ void ModelEdit::tabTelemetry()
     ui->VarioLabel_4->hide();
     ui->varioSourceCB->hide();
     ui->varioSource_label->hide();
-  } else {
+  }
+  else {
     ui->varioLimitMin_DSB->setValue(g_model.frsky.varioMin-10);
     ui->varioLimitMax_DSB->setValue(g_model.frsky.varioMax+10);
     ui->varioLimitCenterMax_DSB->setValue((g_model.frsky.varioCenterMax/10.0)+0.5);
@@ -2282,9 +2284,11 @@ void ModelEdit::tabTelemetry()
       ui->varioLimitCenterMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-0.5);
     }
   }
+
   if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
     ui->altimetryGB->hide();
   }
+
   if (GetEepromInterface()->getCapability(TelemetryCSFields)==0) {
     ui->groupBox_5->hide();
   }
@@ -2369,40 +2373,46 @@ void ModelEdit::tabTelemetry()
   ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
   ui->frskyVoltCB->setCurrentIndex(g_model.frsky.voltsSource);
 
-  for (int j=0;j<12;j++) {
-    int screen=j/4;
-    if (g_model.frsky.screens[screen].type==1) {
-      populateCustomScreenFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[j%4].source, false, g_model.frsky.usrProto);
-      switch (g_model.frsky.screens[screen].body.bars[j%4].source) {
-        case TELEMETRY_SOURCE_A1:
-        case TELEMETRY_SOURCE_A1_MIN:
-        case TELEMETRY_SOURCE_A2:
-        case TELEMETRY_SOURCE_A2_MIN:
-        case TELEMETRY_SOURCE_CELLS_SUM:
-        case TELEMETRY_SOURCE_VFAS:
-        case TELEMETRY_SOURCE_CURRENT_MAX:
-        case TELEMETRY_SOURCE_CURRENT:
-          minsb[j]->setDecimals(1);
-          maxsb[j]->setDecimals(1);
-          break;
-        case TELEMETRY_SOURCE_CELL:
-          minsb[j]->setDecimals(2);
-          maxsb[j]->setDecimals(2);
-          break;
-        default:
-          minsb[j]->setDecimals(0);
-          maxsb[j]->setDecimals(0);
-      }
-      minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 0, &g_model.frsky));
-      minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 255, &g_model.frsky));
-      minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-      minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, g_model.frsky.screens[screen].body.bars[j%4].barMin, &g_model.frsky));
-      maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 0, &g_model.frsky));
-      maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, 255, &g_model.frsky));
-      maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[j%4].source));
-      maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[j%4].source, (255-g_model.frsky.screens[screen].body.bars[j%4].barMax), &g_model.frsky));
+  for (int j=0; j<24; j++) {
+    int screen = j/8;
+    int field = j%8;
+    populateCustomScreenFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[field], (j<6), g_model.frsky.usrProto);
+  }
+
+  for (int j=0; j<12; j++) {
+    int screen = j/4;
+    int field = j%4;
+    populateCustomScreenFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[field].source, false, g_model.frsky.usrProto);
+    switch (g_model.frsky.screens[screen].body.bars[field].source) {
+      case TELEMETRY_SOURCE_A1:
+      case TELEMETRY_SOURCE_A1_MIN:
+      case TELEMETRY_SOURCE_A2:
+      case TELEMETRY_SOURCE_A2_MIN:
+      case TELEMETRY_SOURCE_CELLS_SUM:
+      case TELEMETRY_SOURCE_VFAS:
+      case TELEMETRY_SOURCE_CURRENT_MAX:
+      case TELEMETRY_SOURCE_CURRENT:
+        minsb[j]->setDecimals(1);
+        maxsb[j]->setDecimals(1);
+        break;
+      case TELEMETRY_SOURCE_CELL:
+        minsb[j]->setDecimals(2);
+        maxsb[j]->setDecimals(2);
+        break;
+      default:
+        minsb[j]->setDecimals(0);
+        maxsb[j]->setDecimals(0);
     }
-    if (g_model.frsky.screens[screen].body.bars[j%4].source==0 || g_model.frsky.screens[screen].type==0) {
+    minsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, 0, &g_model.frsky));
+    minsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, 255, &g_model.frsky));
+    minsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[field].source));
+    minsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, g_model.frsky.screens[screen].body.bars[field].barMin, &g_model.frsky));
+    maxsb[j]->setMinimum(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, 0, &g_model.frsky));
+    maxsb[j]->setMaximum(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, 255, &g_model.frsky));
+    maxsb[j]->setSingleStep(getBarStep(g_model.frsky.screens[screen].body.bars[field].source));
+    maxsb[j]->setValue(getBarValue(g_model.frsky.screens[screen].body.bars[field].source, (255-g_model.frsky.screens[screen].body.bars[field].barMax), &g_model.frsky));
+
+    if (g_model.frsky.screens[screen].body.bars[field].source==0 || g_model.frsky.screens[screen].type==0) {
       minsb[j]->setDisabled(true);
       maxsb[j]->setDisabled(true);
     }
@@ -2462,7 +2472,8 @@ void ModelEdit::updateA1Fields()
   ui->a12ValueSB->setValue(a12value);
 }
 
-void ModelEdit::updateA2Fields() {
+void ModelEdit::updateA2Fields()
+{
   float a2ratio,a21value, a22value;
   if (g_model.frsky.channels[1].ratio==0) {
     ui->a21ValueSB->setMinimum(0);
@@ -2509,7 +2520,8 @@ void ModelEdit::updateA2Fields() {
   ui->a22ValueSB->setValue(a22value);
 }
 
-void ModelEdit::tabTemplates() {
+void ModelEdit::tabTemplates()
+{
   ui->templateList->clear();
   ui->templateList->addItem(tr("Simple 4-CH"));
   ui->templateList->addItem(tr("T-Cut"));
@@ -2973,7 +2985,6 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   else {
     for (int j=0; j<24; j++) {
       int screen=j/8;
-      csf[j]->clear();
       populateCustomScreenFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6), g_model.frsky.usrProto);
     }
   }
@@ -3379,33 +3390,21 @@ void ModelEdit::telBarUpdate()
   telemetryLock=false;
 }
 
-void ModelEdit::ScreenTypeCBcurrentIndexChanged(int index) {
+void ModelEdit::ScreenTypeCBcurrentIndexChanged(int index)
+{
   if (telemetryLock) return;
+
   QComboBox *comboBox = qobject_cast<QComboBox*>(sender());
   int screen = comboBox->objectName().right(1).toInt() -1;
   telemetryLock=true;
   g_model.frsky.screens[screen].type=index;
-  if (g_model.frsky.screens[0].type==0) {
-    ui->CS1Bars->hide();
-    ui->CS1Nums->show();    
-  } else{
-    ui->CS1Bars->show();
-    ui->CS1Nums->hide();
+
+  for (int i=0; i<3; i++) {
+    bool isNum = (g_model.frsky.screens[i].type==0);
+    barsGB[i]->setVisible(!isNum);
+    numsGB[i]->setVisible(isNum);
   }
-  if (g_model.frsky.screens[1].type==0) {
-    ui->CS2Bars->hide();
-    ui->CS2Nums->show();    
-  } else{
-    ui->CS2Bars->show();
-    ui->CS2Nums->hide();
-  }
-  if (g_model.frsky.screens[2].type==0) {
-    ui->CS3Bars->hide();
-    ui->CS3Nums->show();    
-  } else{
-    ui->CS3Bars->show();
-    ui->CS3Nums->hide();
-  }
+
   telemetryLock=false;
   updateSettings();
 }

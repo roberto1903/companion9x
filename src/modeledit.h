@@ -37,6 +37,8 @@ private:
     QSpinBox* spnx[17];
     QSpinBox* gvarsSB[9][5];
     QSpinBox* reSB[9][2];
+    QGroupBox* barsGB[3];
+    QGroupBox* numsGB[3];
     QComboBox* barsCB[12];
     QDoubleSpinBox* minSB[12];
     QDoubleSpinBox* maxSB[12];
