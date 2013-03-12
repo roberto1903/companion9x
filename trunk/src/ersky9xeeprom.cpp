@@ -548,10 +548,8 @@ int8_t ersky9xFromSource_v10(RawSource source)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 21+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 37+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 39+source.index;
+    v1 = 36+source.index;
   return v1;
 }
 
@@ -574,10 +572,8 @@ int8_t ersky9xFromSource_v11(RawSource source)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 21+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 37+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 39+source.index;
+    v1 = 36+source.index;
   return v1;
 }
 
@@ -605,11 +601,8 @@ RawSource ersky9xToSource_v10(int8_t value)
   else if (value <= 36) {
     return RawSource(SOURCE_TYPE_CH, value-21);
   }
-  else if (value <= 38) {
-    return RawSource(SOURCE_TYPE_TIMER, value-37);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-36);
   }
 }
 
@@ -636,14 +629,10 @@ RawSource ersky9xToSource_v11(int8_t value)
   else if (value <= 36) {
     return RawSource(SOURCE_TYPE_CH, value-21);
   }
-  else if (value <= 38) {
-    return RawSource(SOURCE_TYPE_TIMER, value-37);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-36);
   }
 }
-
 
 t_Ersky9xCustomSwData_v10::t_Ersky9xCustomSwData_v10(CustomSwData &c9x)
 {

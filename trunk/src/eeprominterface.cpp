@@ -61,38 +61,26 @@ int RawSource::getDecimals(const ModelData & Model)
 double RawSource::getMin(const ModelData & Model)
 {
   switch (type) {
-    case SOURCE_TYPE_TIMER:
-      return 0;
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
-        case 2:
-        case 3:
+        /*case TELEMETRY_SOURCE_NONE:
+        case TELEMETRY_SOURCE_TX_BATT:
+        case TELEMETRY_SOURCE_TIMER1:
+        case TELEMETRY_SOURCE_TIMER2:
+          return 0; */
+        case TELEMETRY_SOURCE_A1:
+        case TELEMETRY_SOURCE_A2:
           if (Model.frsky.channels[index-2].type==0) {
             return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
-          } else {
+          }
+          else {
             return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
-        case 0:
-        case 1:
-        case 4:
-        case 5:
-        case 6:    
-          return 0;
-        case 7:
-        case 8:
+        case TELEMETRY_SOURCE_T1:
+        case TELEMETRY_SOURCE_T2:
           return -30;
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-          return 0;
         default:
-          return -125;
+          return 0;
       }
       break;
     default:
@@ -103,45 +91,46 @@ double RawSource::getMin(const ModelData & Model)
 double RawSource::getMax(const ModelData & Model)
 {
   switch (type) {
-    case SOURCE_TYPE_TIMER:
-      return 765;
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
-        case 0:
-        case 1:
+        case TELEMETRY_SOURCE_TIMER1:
+        case TELEMETRY_SOURCE_TIMER2:
+          return 765;
+        case TELEMETRY_SOURCE_RSSI_TX:
+        case TELEMETRY_SOURCE_RSSI_RX:
           return 100;
-        case 2:
-        case 3:
+        case TELEMETRY_SOURCE_A1:
+        case TELEMETRY_SOURCE_A2:
           if (Model.frsky.channels[index-2].type==0) {
             return (Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0)/10;
           } else {
             return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
-        case 4:
+        case TELEMETRY_SOURCE_ALT:
           return 1020;
-        case 5:
+        case TELEMETRY_SOURCE_RPM:
           return 12750;
-        case 6:
+        case TELEMETRY_SOURCE_FUEL:
           return 100;        
-        case 7:
-        case 8:
+        case TELEMETRY_SOURCE_T1:
+        case TELEMETRY_SOURCE_T2:
           return 225;
-        case 9:
+        case TELEMETRY_SOURCE_SPEED:
           return 944;
-        case 10:
+        case TELEMETRY_SOURCE_DIST:
           return 2040;
-        case 11:
+        case TELEMETRY_SOURCE_GPS_ALT:
           return 1020;
-        case 12:
+        case TELEMETRY_SOURCE_CELL:
           return 5.1;
-        case 13:
-        case 14:
+        case TELEMETRY_SOURCE_CELLS_SUM:
+        case TELEMETRY_SOURCE_VFAS:
           return 25.5;
-        case 15:
+        case TELEMETRY_SOURCE_CURRENT:
           return 127.5;
-        case 16:
+        case TELEMETRY_SOURCE_CONSUMPTION:
           return 5100;
-        case 17:
+        case TELEMETRY_SOURCE_POWER:
           return 1275;
         default:
           return 125;
@@ -151,130 +140,34 @@ double RawSource::getMax(const ModelData & Model)
       return (Model.extendedLimits ? 125 :100);
   }
 }
-double RawSource::getCsMin(const ModelData & Model)
-{
-  switch (type) {
-    case SOURCE_TYPE_TIMER:
-      return 0;
-    case SOURCE_TYPE_TELEMETRY:
-      switch (index) {
-        case 2:
-        case 3:
-          if (Model.frsky.channels[index-2].type==0) {
-            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
-          } else {
-            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
-          }
-        case 0:
-        case 1:
-        case 4:
-        case 5:
-        case 6:    
-          return 0;
-        case 7:
-        case 8:
-          return -30;
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-          return 0;
-        default:
-          return -125;
-      }
-      break;
-    default:
-      return -125;
-  }
-}
-
-double RawSource::getCsMax(const ModelData & Model)
-{
-  switch (type) {
-    case SOURCE_TYPE_TIMER:
-      return 765;
-    case SOURCE_TYPE_TELEMETRY:
-      switch (index) {
-        case 0:
-        case 1:
-          return 100;
-        case 2:
-        case 3:
-          if (Model.frsky.channels[index-2].type==0) {
-            return (Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0)/10;
-          } else {
-            return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
-          }
-        case 4:
-          return 1020;
-        case 5:
-          return 12750;
-        case 6:
-          return 100;        
-        case 7:
-        case 8:
-          return 225;
-        case 9:
-          return 944;
-        case 10:
-          return 2040;
-        case 11:
-          return 1020;
-        case 12:
-          return 5.1;
-        case 13:
-        case 14:
-          return 25.5;
-        case 15:
-          return 127.5;
-        case 16:
-          return 5100;
-        case 17:
-          return 1275;
-        default:
-          return 125;
-      }
-      break;
-    default:
-      return 125;
-  }
-}
 
 double RawSource::getOffset(const ModelData & Model)
 {
-  if(type==SOURCE_TYPE_TELEMETRY) {
+  if (type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
-      case 0:
-      case 1:
-        return 0;
-      case 2:
-      case 3:
+      case TELEMETRY_SOURCE_A1:
+      case TELEMETRY_SOURCE_A2:
         if (Model.frsky.channels[index-2].type==0) {
           return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
-        } else {
+        }
+        else {
           return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
         }
-      case 4:
+      case TELEMETRY_SOURCE_ALT:
+      case TELEMETRY_SOURCE_GPS_ALT:
         return 512;
-      case 5:
+      case TELEMETRY_SOURCE_RPM:
         return 6400;
-      case 6:
+      case TELEMETRY_SOURCE_FUEL:
         return 0;
-      case 7:
-      case 8:
+      case TELEMETRY_SOURCE_T1:
+      case TELEMETRY_SOURCE_T2:
         return 98;
-      case 9:
+      case TELEMETRY_SOURCE_SPEED:
         return 474;
-      case 10:
+      case TELEMETRY_SOURCE_DIST:
         return 1024;
-      case 11:
-        return 512;
-      case 12:
+      case TELEMETRY_SOURCE_CELL:
         return 2.56;
       default:
         return 0;
@@ -288,24 +181,22 @@ int RawSource::getRawOffset(const ModelData & Model)
   switch (type) {
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 6:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
+        case TELEMETRY_SOURCE_TIMER1:
+        case TELEMETRY_SOURCE_TIMER2:
+        case TELEMETRY_SOURCE_RSSI_TX:
+        case TELEMETRY_SOURCE_RSSI_RX:
+        case TELEMETRY_SOURCE_A1:
+        case TELEMETRY_SOURCE_A2:
+        case TELEMETRY_SOURCE_FUEL:
+        case TELEMETRY_SOURCE_CELLS_SUM:
+        case TELEMETRY_SOURCE_VFAS:
+        case TELEMETRY_SOURCE_CURRENT:
+        case TELEMETRY_SOURCE_CONSUMPTION:
+        case TELEMETRY_SOURCE_POWER:
           return 128;        
         default:
           return 0;
       }
-      break;
-   case SOURCE_TYPE_TIMER:
-      return 128;
-      break;
    default:
       return 0;
   }
@@ -316,48 +207,40 @@ double RawSource::getStep(const ModelData & Model)
   switch (type) {
     case SOURCE_TYPE_TELEMETRY:
       switch (index) {
-        case 0:
-        case 1:
-          return 1;
-        case 2:
-        case 3:
+        case TELEMETRY_SOURCE_TIMER1:
+        case TELEMETRY_SOURCE_TIMER2:
+          return 3;
+        case TELEMETRY_SOURCE_A1:
+        case TELEMETRY_SOURCE_A2:
           if (Model.frsky.channels[index-2].type==0) {
             return (Model.frsky.channels[index-2].ratio/2550.0);
-          } else {
+          }
+          else {
             return (Model.frsky.channels[index-2].ratio/255.0);
           }
-        case 4:
+        case TELEMETRY_SOURCE_ALT:
+        case TELEMETRY_SOURCE_GPS_ALT:
           return 4;
-        case 5:
+        case TELEMETRY_SOURCE_RPM:
           return 50;
-        case 6:
-          return 1;
-        case 7:
-        case 8:
-          return 1;
-        case 9:
+        case TELEMETRY_SOURCE_SPEED:
           return 4;
-        case 10:
+        case TELEMETRY_SOURCE_DIST:
           return 8;
-        case 11:
-          return 4;
-        case 12:
+        case TELEMETRY_SOURCE_CELL:
           return 0.02;
-        case 13:
-        case 14:
+        case TELEMETRY_SOURCE_CELLS_SUM:
+        case TELEMETRY_SOURCE_VFAS:
           return 0.1;
-        case 15:
+        case TELEMETRY_SOURCE_CURRENT:
           return 0.5;
-        case 16:
+        case TELEMETRY_SOURCE_CONSUMPTION:
           return 20;
-        case 17:
+        case TELEMETRY_SOURCE_POWER:
           return 5;
         default:
           return 1;
       }
-      break;
-    case SOURCE_TYPE_TIMER:
-      return 3;
       break;
    default:
       return 1;
@@ -374,7 +257,8 @@ QString RawSource::toString()
 
   QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString telemetry[] = { QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
+  QString telemetry[] = { QObject::tr("Batt"), QObject::tr("Timer1"), QObject::tr("Timer2"),
+                          QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
                           QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"),
                           QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
                           QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
@@ -401,11 +285,11 @@ QString RawSource::toString()
         return QObject::tr("CH%1%2").arg((index+1)/10).arg((index+1)%10);
       else
         return QObject::tr("X%1").arg(index-GetEepromInterface()->getCapability(Outputs)+1);
-    case SOURCE_TYPE_BATTERY:
-      return QObject::tr("Batt");
-    case SOURCE_TYPE_TIMER:
-      return QObject::tr("Timer%1").arg(index+1);
     case SOURCE_TYPE_TELEMETRY:
+      if (index<int(sizeof(telemetry)/sizeof(QString)))
+        return telemetry[index];
+      else
+        return QObject::tr("----");
       return telemetry[index];
     case SOURCE_TYPE_GVAR:
       return QObject::tr("GV%1").arg(index+1);      

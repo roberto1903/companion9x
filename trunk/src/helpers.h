@@ -39,7 +39,7 @@ void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateGvarUseCB(QComboBox *b, unsigned int phase);
 void populateCurvesCB(QComboBox *b, int value);
-void populatecsFieldCB(QComboBox *b, unsigned int value, bool last, int hubproto);
+void populateCustomScreenFieldCB(QComboBox *b, unsigned int value, bool last, int hubproto);
 void populateExpoCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields=0);
 void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields=0);

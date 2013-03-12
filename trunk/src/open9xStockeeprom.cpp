@@ -1002,10 +1002,8 @@ int8_t open9x208FromSource(RawSource source)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 21+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 37+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 39+source.index;
+    v1 = 36+source.index;
   return v1;
 }
 
@@ -1032,11 +1030,8 @@ RawSource open9x208ToSource(int8_t value)
   else if (value <= 36) {
     return RawSource(SOURCE_TYPE_CH, value-21);
   }
-  else if (value <= 38) {
-    return RawSource(SOURCE_TYPE_TIMER, value-37);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-36);
   }
 }
 
@@ -1061,10 +1056,8 @@ int8_t open9xStock209FromSource(RawSource source)
     v1 = 17+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 25+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 41+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 43+source.index;
+    v1 = 40+source.index;
   return v1;
 }
 
@@ -1094,11 +1087,8 @@ RawSource open9xStock209ToSource(int8_t value)
   else if (value <= 40) {
     return RawSource(SOURCE_TYPE_CH, value-25);
   }
-  else if (value <= 42) {
-    return RawSource(SOURCE_TYPE_TIMER, value-41);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-43);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-40);
   }
 }
 

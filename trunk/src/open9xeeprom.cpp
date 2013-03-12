@@ -146,12 +146,9 @@ class SourcesConversionTable: public ConversionTable {
         }
 
         if (recent)
-          addConversion(RawSource(SOURCE_TYPE_BATTERY, 0), val++);
+          addConversion(RawSource(SOURCE_TYPE_TELEMETRY, 0), val++);
 
-        for (int i=0; i<2; i++)
-          addConversion(RawSource(SOURCE_TYPE_TIMER, i), val++);
-
-        for (int i=0; i<TELEMETRY_SOURCES_COUNT; i++)
+        for (int i=1; i<TELEMETRY_SOURCES_COUNT; i++)
           addConversion(RawSource(SOURCE_TYPE_TELEMETRY, i), val++);
       }
     }

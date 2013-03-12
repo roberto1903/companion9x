@@ -259,8 +259,6 @@ enum RawSourceType {
   SOURCE_TYPE_PPM,
   SOURCE_TYPE_CH,
   SOURCE_TYPE_GVAR,
-  SOURCE_TYPE_BATTERY,
-  SOURCE_TYPE_TIMER,
   SOURCE_TYPE_TELEMETRY,
   MAX_SOURCE_TYPE
 };
@@ -291,8 +289,6 @@ class RawSource {
     QString toString();
     
     int getDecimals(const ModelData & Model);
-    double getCsMin(const ModelData & Model);
-    double getCsMax(const ModelData & Model);
     double getMin(const ModelData & Model);
     double getMax(const ModelData & Model);
     double getStep(const ModelData & Model);

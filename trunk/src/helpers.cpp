@@ -44,15 +44,12 @@ void populateRotEncCB(QComboBox *b, int value, int renumber)
   b->setCurrentIndex(value);
 }
 
-void populatecsFieldCB(QComboBox *b, unsigned int value, bool last=false, int hubproto=0)
+void populateCustomScreenFieldCB(QComboBox *b, unsigned int value, bool last=false, int hubproto=0)
 {
   int telem_hub[] = {0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,1,1,1,1,1,1};
   b->clear();
 
   b->addItem(RawSource(SOURCE_TYPE_NONE, 0).toString());
-  b->addItem(RawSource(SOURCE_TYPE_BATTERY, 0).toString());
-  b->addItem(RawSource(SOURCE_TYPE_TIMER, 0).toString());
-  b->addItem(RawSource(SOURCE_TYPE_TIMER, 1).toString());
 
   for (unsigned int i = 0; i < (last ? TELEMETRY_SOURCES_STATUS_COUNT : TELEMETRY_SOURCES_DISPLAY_COUNT); i++) {
     b->addItem(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
@@ -844,15 +841,6 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   }
 
   if (flags & POPULATE_TELEMETRY) {
-    item = RawSource(SOURCE_TYPE_BATTERY, 0);
-    b->addItem(item.toString(), item.toValue());
-    if (item == source) b->setCurrentIndex(b->count()-1);
-
-    for (int i=0; i<C9X_MAX_TIMERS; i++) {
-      item = RawSource(SOURCE_TYPE_TIMER, i);
-      b->addItem(item.toString(), item.toValue());
-      if (item == source) b->setCurrentIndex(b->count()-1);
-    }
     for (int i=0; i<TELEMETRY_SOURCES_COUNT; i++) {
       item = RawSource(SOURCE_TYPE_TELEMETRY, i);
       b->addItem(item.toString(), item.toValue());
