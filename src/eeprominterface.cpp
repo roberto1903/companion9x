@@ -193,7 +193,7 @@ int RawSource::getRawOffset(const ModelData & Model)
         case TELEMETRY_SOURCE_CURRENT:
         case TELEMETRY_SOURCE_CONSUMPTION:
         case TELEMETRY_SOURCE_POWER:
-          return 128;        
+          return 128;
         default:
           return 0;
       }
