@@ -384,19 +384,35 @@ class PhaseField: public TransformedField {
     int trimExt[NUM_STICKS];
 };
 
-void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam)
+void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, int version)
 {
-  if (gvar < -125) {
-    _gvarParam = 1;
-    _gvar = gvar + 125;
-  }
-  else if (gvar > 125) {
-    _gvarParam = 1;
-    _gvar = gvar - 126;
-  }
-  else {
-    _gvarParam = 0;
-    _gvar = gvar;
+  if (version>=213) {
+      if (gvar < -125) {
+        _gvarParam = 0;
+        _gvar = 256+ gvar + 125;
+      }
+      else if (gvar > 125) {
+        _gvarParam = 1;
+        _gvar = gvar - 126;
+      }
+      else {
+        if (gvar<0) _gvarParam=1;
+        else _gvarParam = 0;
+        _gvar = gvar;
+      }
+  } else { 
+	  if (gvar < -125) {
+		_gvarParam = 1;
+		_gvar = gvar + 125;
+	  }
+	  else if (gvar > 125) {
+		_gvarParam = 1;
+		_gvar = gvar - 126;
+	  }
+	  else {
+		_gvarParam = 0;
+		_gvar = gvar;
+	  }
   }
 }
 
@@ -524,11 +540,11 @@ class MixField: public TransformedField {
         if (version >= 214)
           exportGvarParam(mix.sOffset, _offset);
         else
-          splitGvarParam(mix.sOffset, _offset, _offsetMode);
+          splitGvarParam(mix.sOffset, _offset, _offsetMode, version);
       }
       else {
-        splitGvarParam(mix.weight, _weight, _weightMode);
-        splitGvarParam(mix.sOffset, _offset, _offsetMode);
+        splitGvarParam(mix.weight, _weight, _weightMode, version);
+        splitGvarParam(mix.sOffset, _offset, _offsetMode, version);
       }
     }
 
