@@ -70,10 +70,8 @@ int8_t open9xArm208FromSource(RawSource source)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 21+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 53+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 55+source.index;
+    v1 = 52+source.index;
   return v1;
 }
 
@@ -100,11 +98,8 @@ RawSource open9xArm208ToSource(int8_t value)
   else if (value <= 52) {
     return RawSource(SOURCE_TYPE_CH, value-21);
   }
-  else if (value <= 54) {
-    return RawSource(SOURCE_TYPE_TIMER, value-53);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-55);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-52);
   }
 }
 
@@ -129,10 +124,8 @@ int8_t open9xArm209FromSource(RawSource source)
     v1 = 17+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 25+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 57+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 59+source.index;
+    v1 = 56+source.index;
   return v1;
 }
 
@@ -162,11 +155,8 @@ RawSource open9xArm209ToSource(int8_t value)
   else if (value <= 56) {
     return RawSource(SOURCE_TYPE_CH, value-25);
   }
-  else if (value <= 58) {
-    return RawSource(SOURCE_TYPE_TIMER, value-57);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-59);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-56);
   }
 }
 
@@ -189,10 +179,8 @@ int8_t open9xArm210FromSource(RawSource source)
     v1 = 18+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 26+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 58+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 60+source.index;
+    v1 = 57+source.index;
   return v1;
 }
 
@@ -225,11 +213,8 @@ RawSource open9xArm210ToSource(int8_t value)
   else if (value <= 57) {
     return RawSource(SOURCE_TYPE_CH, value-26);
   }
-  else if (value <= 59) {
-    return RawSource(SOURCE_TYPE_TIMER, value-58);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-60);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-57);
   }
 }
 

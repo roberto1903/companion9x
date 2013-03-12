@@ -1661,8 +1661,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
           populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);          
         }
         cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
-        cswitchOffset[i]->setMinimum(source.getCsMin(g_model));
-        cswitchOffset[i]->setMaximum(source.getCsMax(g_model));
+        cswitchOffset[i]->setMinimum(source.getMin(g_model));
+        cswitchOffset[i]->setMaximum(source.getMax(g_model));
         cswitchOffset[i]->setSingleStep(source.getStep(g_model));
         cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
         break;
@@ -1978,7 +1978,7 @@ void ModelEdit::customSwitchesEdited()
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
               RawSource newSource = RawSource(g_model.customSw[i].val1);
-              if (newSource.type == SOURCE_TYPE_TIMER || newSource.type == SOURCE_TYPE_TELEMETRY)
+              if (newSource.type == SOURCE_TYPE_TELEMETRY)
                 g_model.customSw[i].val2 = -128;
               else
                 g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
@@ -2299,10 +2299,10 @@ void ModelEdit::tabTelemetry()
     for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
       int screen=i/8;
       if (g_model.frsky.screens[screen].type==0) {
-        populatecsFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6), g_model.frsky.usrProto);
+        populateCustomScreenFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6), g_model.frsky.usrProto);
       }
       else {
-        populatecsFieldCB(csf[i], 0, ((i % 8)<6), g_model.frsky.usrProto);
+        populateCustomScreenFieldCB(csf[i], 0, ((i % 8)<6), g_model.frsky.usrProto);
       }
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
@@ -2372,7 +2372,7 @@ void ModelEdit::tabTelemetry()
   for (int j=0;j<12;j++) {
     int screen=j/4;
     if (g_model.frsky.screens[screen].type==1) {
-      populatecsFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[j%4].source, false, g_model.frsky.usrProto);
+      populateCustomScreenFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[j%4].source, false, g_model.frsky.usrProto);
       switch (g_model.frsky.screens[screen].body.bars[j%4].source) {
         case TELEMETRY_SOURCE_A1:
         case TELEMETRY_SOURCE_A1_MIN:
@@ -2965,7 +2965,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   for (int i=0; i<12; i++) {
     bindex[i]=barsCB[i]->currentIndex();
     g_model.frsky.usrProto=index;
-    populatecsFieldCB(barsCB[i], bindex[i], false, g_model.frsky.usrProto);
+    populateCustomScreenFieldCB(barsCB[i], bindex[i], false, g_model.frsky.usrProto);
   }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
@@ -2974,7 +2974,7 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
     for (int j=0; j<24; j++) {
       int screen=j/8;
       csf[j]->clear();
-      populatecsFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6), g_model.frsky.usrProto);
+      populateCustomScreenFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6), g_model.frsky.usrProto);
     }
   }
   telemetryLock=false;

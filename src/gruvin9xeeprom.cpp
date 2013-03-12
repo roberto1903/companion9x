@@ -483,10 +483,8 @@ int8_t gruvin9xFromSource(RawSource source)
     v1 = 13+source.index;
   else if (source.type == SOURCE_TYPE_CH)
     v1 = 21+source.index;
-  else if (source.type == SOURCE_TYPE_TIMER)
-    v1 = 37+source.index;
   else if (source.type == SOURCE_TYPE_TELEMETRY)
-    v1 = 39+source.index;
+    v1 = 36+source.index;
   return v1;
 }
 
@@ -513,11 +511,8 @@ RawSource gruvin9xToSource(int8_t value)
   else if (value <= 36) {
     return RawSource(SOURCE_TYPE_CH, value-21);
   }
-  else if (value <= 38) {
-    return RawSource(SOURCE_TYPE_TIMER, value-37);
-  }
   else {
-    return RawSource(SOURCE_TYPE_TELEMETRY, value-39);
+    return RawSource(SOURCE_TYPE_TELEMETRY, value-36);
   }
 }
 
