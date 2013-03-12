@@ -1089,6 +1089,8 @@ QString getFrSkySrc(int index)
 float getBarValue(int barId, int value, FrSkyData *fd)
 {
   switch (barId) {
+    case TELEMETRY_SOURCE_TX_BATT:
+      return value/10.0;
     case TELEMETRY_SOURCE_TIMER1:
     case TELEMETRY_SOURCE_TIMER2:
       return (3*value);
@@ -1112,7 +1114,7 @@ float getBarValue(int barId, int value, FrSkyData *fd)
     case TELEMETRY_SOURCE_GPS_ALT:
     case TELEMETRY_SOURCE_ALT_MAX:
     case TELEMETRY_SOURCE_ALT_MIN:
-      return (8*value)-510;
+      return (8*value)-500;
     case TELEMETRY_SOURCE_RPM:
     case TELEMETRY_SOURCE_RPM_MAX:
       return value * 50;

@@ -126,6 +126,9 @@ ModelEdit::~ModelEdit()
 float ModelEdit::getBarStep(int barId) 
 {
   switch (barId) {
+    case TELEMETRY_SOURCE_TX_BATT:
+      return  0.1;
+      break;
     case TELEMETRY_SOURCE_TIMER1:
     case TELEMETRY_SOURCE_TIMER2:
       return 3;
@@ -2160,11 +2163,11 @@ void ModelEdit::functionSwitchesEdited()
             fswtchParam[i]->setMinimum(256);
             fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 510 : 511);
             g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-          }
-          else {
 #ifdef PHONON
             playBT[i]->show();
 #endif
+          }
+          else {
             widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
             for (int j=0; j<6; j++) {
               g_model.funcSw[i].paramarm[j]=0;
