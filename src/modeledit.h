@@ -63,6 +63,7 @@ private:
     bool plot_curve[16];
 
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
+    QComboBox * cswitchAnd[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchDuration[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchDelay[C9X_NUM_CSW];
     QComboBox * cswitchSource1[C9X_NUM_CSW];
