@@ -1244,6 +1244,11 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   else
     Append(new ZCharField<10>(modelData.name));
 
+  bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+
+  if (recent)
+    Append(new UnsignedField<8>(modelData.modelId));
+
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
     Append(new TimerModeField(modelData.timers[i].mode, board, version));
     Append(new UnsignedField<16>(modelData.timers[i].val));
@@ -1285,7 +1290,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new PhaseField(modelData.phaseData[i], i, board, version));
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
-  Append(new UnsignedField<8>(modelData.modelId));
+
+  if (!recent)
+    Append(new UnsignedField<8>(modelData.modelId));
 
   if (board == BOARD_X9DA)
     Append(new UnsignedField<16>(modelData.switchWarningStates));

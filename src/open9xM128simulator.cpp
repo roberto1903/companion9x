@@ -53,7 +53,8 @@
 
 namespace Open9xM128 {
 #include "../open9x/stock/board_stock.cpp"
-#include "../open9x/eeprom_avr.cpp"
+#include "../open9x/eeprom_common.cpp"
+#include "../open9x/eeprom_rlc.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/pulses_avr.cpp"
 #include "../open9x/stamp.cpp"
