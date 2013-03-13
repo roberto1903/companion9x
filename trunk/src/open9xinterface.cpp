@@ -671,7 +671,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 16;
       }
     case TelemetryUnits:
-      return 1;
+      return 0;
     case TelemetryBlades:
       return 1;
     case TelemetryRSSIModel:
