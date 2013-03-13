@@ -1697,7 +1697,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
     }
 //TODO second AND need to populate only valid switches
     cswitchAnd[i]->setVisible(true);
-    populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw));
+    populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), 0, DefaultContext, POPULATE_AND_SWITCHES);
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
       cswitchDuration[i]->setVisible(true);
       cswitchDuration[i]->setValue(g_model.customSw[i].duration/2.0);
