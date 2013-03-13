@@ -2179,6 +2179,16 @@ void ModelEdit::functionSwitchesEdited()
             }
           }
         }
+        else if (index==FuncPlaySound) {
+          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;          
+        }
+        else if (index==FuncPlayHaptic) {
+          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;        
+        }
       }
       else if (g_model.funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
         g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
