@@ -2202,6 +2202,9 @@ void ModelEdit::functionSwitchesEdited()
 
 void ModelEdit::tabTelemetry()
 {
+  QSettings settings("companion9x", "companion9x");
+  QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
+  qDebug()<<firmware_id;
   float a1ratio;
   float a2ratio;
 
@@ -2314,8 +2317,14 @@ void ModelEdit::tabTelemetry()
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
   }
+  
   if (!GetEepromInterface()->getCapability(TelemetryUnits)) {
     ui->frskyUnitsCB->setDisabled(true);
+    int index=0;
+    if (firmware_id.contains("imperial")) {
+      index=1;
+    }
+    ui->frskyUnitsCB->setCurrentIndex(index);
   }
   if ((GetEepromInterface()->getCapability(Telemetry)&TM_HASWSHH)) {
     ui->frskyProtoCB->addItem(tr("Winged Shadow How High"));

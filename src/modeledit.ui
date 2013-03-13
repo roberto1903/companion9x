@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>10</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -765,11 +765,11 @@
        </item>
        <item row="9" column="2" colspan="6">
         <layout class="QGridLayout" name="gridLayout_34">
-         <property name="topMargin">
-          <number>0</number>
-         </property>
          <property name="verticalSpacing">
           <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
          </property>
          <item row="0" column="9" rowspan="2">
           <widget class="Line" name="swwarn_line4">
@@ -6104,8 +6104,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>826</width>
-            <height>483</height>
+            <width>864</width>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -9537,8 +9537,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>712</width>
-            <height>582</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -14455,8 +14455,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>149</width>
-            <height>343</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -14662,7 +14662,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_24">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1,0,0">
+           <layout class="QGridLayout" name="fswitchlayout1" columnstretch="0,0,1,1,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -14771,7 +14771,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_23">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1,0,0">
+           <layout class="QGridLayout" name="fswitchlayout2" columnstretch="0,0,1,1,0">
             <property name="sizeConstraint">
              <enum>QLayout::SetNoConstraint</enum>
             </property>
@@ -16327,7 +16327,7 @@
                   </item>
                   <item row="1" column="1">
                    <widget class="QGroupBox" name="CS1Bars">
-                    <layout class="QGridLayout" name="telemetryCS1Bars" columnstretch="1,0,0,0">
+                    <layout class="QGridLayout" name="telemetryCS1Bars" columnstretch="1,0,1,0">
                      <item row="0" column="0">
                       <widget class="QLabel" name="label_265">
                        <property name="text">
