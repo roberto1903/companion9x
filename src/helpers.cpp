@@ -238,47 +238,6 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
-QString SourceParam(unsigned int value, unsigned int flags)
-{
-  QStringList qs;
-  RawSource item;
-  for (int i=0; i<7; i++) {
-    item = RawSource(SOURCE_TYPE_STICK, i);
-    qs.append(item.toString());
-  }
-  for (int i=0; i<2; i++) {
-    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-    qs.append(item.toString());
-  }
-  for (int i=0; i<4; i++) {
-    item = RawSource(SOURCE_TYPE_TRIM, i);
-    qs.append(item.toString());
-  }
-  item = RawSource(SOURCE_TYPE_MAX);
-  qs.append(item.toString());
-
-  item = RawSource(SOURCE_TYPE_3POS);
-  qs.append(item.toString());
-
-  for (int i=0; i<NUM_CYC; i++) {
-    item = RawSource(SOURCE_TYPE_CYC, i);
-    qs.append(item.toString());
-  }
-
-  for (int i=0; i<NUM_PPM; i++) {
-    item = RawSource(SOURCE_TYPE_PPM, i);
-    qs.append(item.toString());
-  }
-  for (int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
-    item = RawSource(SOURCE_TYPE_CH, i);
-    qs.append(item.toString());
-  }
-  for (int i = 1; i < TELEMETRY_SOURCES_DISPLAY_COUNT; i++) {
-    qs.append(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
-  }
-  return qs.at(value);
-}
-
 QString FuncParam(uint function, unsigned int value)
 {
   QStringList qs;
@@ -298,11 +257,9 @@ QString FuncParam(uint function, unsigned int value)
     qs.append( QObject::tr("Telemetry"));
     return qs.at(value);
   }
-  else if (function==FuncVolume) {
-    return SourceParam(value, 0);
-  }
-  else if (function==FuncPlayValue) {
-    return SourceParam(value, 0);
+  else if ((function==FuncVolume)|| (function==FuncPlayValue)) {
+    RawSource item(value);
+    return item.toString();
   }
 
   return "";
