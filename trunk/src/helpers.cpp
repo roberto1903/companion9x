@@ -333,6 +333,10 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
   else if (function==FuncPlayValue) {
     populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
   }
+  else if (function>FuncPlayValue && function<FuncCount ) {
+    populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
+  }
+
   else {
     b->hide();
   }
@@ -725,7 +729,7 @@ void populateGVarCB(QComboBox *b, int value, int min, int max)
   }
 }
 
-void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
+void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags,unsigned int flagonly)
 {
   RawSource item;
 
@@ -751,6 +755,9 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     if (item == source)
       b->setCurrentIndex(b->count()-1);
   }
+  if (flagonly) {
+    b->clear();
+  }
   if (flags & POPULATE_TRIMS) {
     for (int i=0; i<4; i++) {
       item = RawSource(SOURCE_TYPE_TRIM, i);
@@ -765,7 +772,9 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   item = RawSource(SOURCE_TYPE_3POS);
   b->addItem(item.toString(), item.toValue());
   if (item == source) b->setCurrentIndex(b->count()-1);
-
+  if (flagonly) {
+    b->clear();
+  }
   if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=9; i++) {
       item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
@@ -796,6 +805,9 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
+  if (flagonly) {
+    b->clear();
+  }
 
   if (flags & POPULATE_TELEMETRY) {
     for (int i=0; i<TELEMETRY_SOURCES_COUNT; i++) {
@@ -803,6 +815,10 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
+  }
+
+  if (flagonly) {
+    b->clear();
   }
 
   if (flags & POPULATE_GVARS) {

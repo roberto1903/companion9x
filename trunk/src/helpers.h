@@ -54,7 +54,7 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model);
 #define FRSKY_VARIANT 0x0002
 
 void populateGVarCB(QComboBox *b, int value, int min, int max);
-void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags);
+void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags, unsigned int flagonly=false);
 void populateCSWCB(QComboBox *b, int value);
 QString getTimerMode(int tm);
 QString getTimerModeB(int tm);
