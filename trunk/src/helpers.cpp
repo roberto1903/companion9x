@@ -131,7 +131,9 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
 
   if (!customSw->func)
     return result;
-
+  if (customSw->andsw!=0) {
+    result +="( ";
+  }
   switch (getCSFunctionFamily(customSw->func)) {
     case CS_FAMILY_VOFS: {
       RawSource source = RawSource(customSw->val1);
@@ -204,6 +206,11 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
       else
         result += "0";
       break;
+  }
+
+  if (customSw->andsw!=0) {
+    result +=" ) AND ";
+    result += RawSwitch(customSw->andsw).toString();
   }
 
   if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
