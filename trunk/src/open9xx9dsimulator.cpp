@@ -60,7 +60,8 @@
 namespace Open9xX9D {
 #include "../open9x/x9d/board_x9d.cpp"
 #include "../open9x/x9d/pwr_driver.cpp"
-#include "../open9x/eeprom_avr.cpp"
+#include "../open9x/eeprom_common.cpp"
+#include "../open9x/eeprom_rlc.cpp"
 #include "../open9x/open9x.cpp"
 #include "../open9x/x9d/pulses_driver.cpp"
 #include "../open9x/x9d/rtc_driver.cpp"
