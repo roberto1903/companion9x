@@ -13267,7 +13267,7 @@
          <layout class="QGridLayout" name="gridLayout_26">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayout_21">
-            <item row="0" column="4">
+            <item row="0" column="5">
              <widget class="QLabel" name="cswCol3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -13354,6 +13354,28 @@
               </property>
               <property name="text">
                <string>CSwitchD</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="cswCol3_1">
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="midLineWidth">
+               <number>0</number>
+              </property>
+              <property name="text">
+               <string>AND</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="margin">
+               <number>3</number>
               </property>
              </widget>
             </item>
@@ -13810,7 +13832,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="6">
              <widget class="QLabel" name="cswCol4">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -13927,6 +13949,28 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="cswCol3_12">
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="midLineWidth">
+               <number>0</number>
+              </property>
+              <property name="text">
+               <string>AND</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="margin">
+               <number>3</number>
               </property>
              </widget>
             </item>
@@ -14382,7 +14426,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="4">
+            <item row="0" column="5">
              <widget class="QLabel" name="cswCol3_2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -14401,7 +14445,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="6">
              <widget class="QLabel" name="cswCol4_2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
