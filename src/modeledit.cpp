@@ -2018,9 +2018,7 @@ void ModelEdit::customSwitchesEdited()
         }
         g_model.customSw[i].andsw = cswitchAnd[i]->itemData(cswitchAnd[i]->currentIndex()).toInt();
     }
-
     updateSettings();
-
     switchEditLock = false;
 }
 #ifdef PHONON
@@ -2138,9 +2136,9 @@ void ModelEdit::functionSwitchesEdited()
             widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
             break;
           case 2:
-            g_model.funcSw[i].param = fswtchParam[i]->value();
+            g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
             widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-            // TODO populate only GVARS
+            populateSourceCB(fswtchParamT[i], RawSource(g_model.funcSw[i].param), POPULATE_GVARS,true);
             break;
           case 3:
             g_model.funcSw[i].param = fswtchParam[i]->value();
@@ -2227,7 +2225,6 @@ void ModelEdit::tabTelemetry()
 {
   QSettings settings("companion9x", "companion9x");
   QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
-  qDebug()<<firmware_id;
   float a1ratio;
   float a2ratio;
 
