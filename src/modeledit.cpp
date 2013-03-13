@@ -1897,7 +1897,7 @@ void ModelEdit::tabCustomFunctions()
 
     fswtchParamT[i] = new QComboBox(this);
     paramLayout->addWidget(fswtchParamT[i]);
-    populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param);
+    populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param,g_model.funcSw[i].adjustMode);
     connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
 
     fswtchParamArmT[i] = new QComboBox(this);
@@ -2122,29 +2122,15 @@ void ModelEdit::functionSwitchesEdited()
       else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
         g_model.funcSw[i].adjustMode = fswtchGVmode[i]->currentIndex();
         widgetsMask |= CUSTOM_FUNCTION_GV_MODE + CUSTOM_FUNCTION_ENABLE;
-        switch (g_model.funcSw[i].adjustMode) {
-          // TODO constants !
-          case 0:
-            g_model.funcSw[i].param = fswtchParam[i]->value();
-            fswtchParam[i]->setMinimum(-125);
-            fswtchParam[i]->setMaximum(125);
-            widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
-            break;
-          case 1:
-            g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
-            populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-            break;
-          case 2:
-            g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
-            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-            populateSourceCB(fswtchParamT[i], RawSource(g_model.funcSw[i].param), POPULATE_GVARS,true);
-            break;
-          case 3:
-            g_model.funcSw[i].param = fswtchParam[i]->value();
-            widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-            // TODO populate -1 / +1
-            break;
+        if (g_model.funcSw[i].adjustMode==0) {
+          g_model.funcSw[i].param = fswtchParam[i]->value();
+          fswtchParam[i]->setMinimum(-125);
+          fswtchParam[i]->setMaximum(125);
+          widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
+        } else {
+          g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param,g_model.funcSw[i].adjustMode);
+          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
         }
       }
       else if (index==FuncReset) {

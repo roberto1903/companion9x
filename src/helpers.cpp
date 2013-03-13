@@ -304,7 +304,7 @@ void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value)
   }
 }
 
-void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
+void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsigned int adjustmode)
 {
   QStringList qs;
   b->clear();
@@ -334,7 +334,20 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value)
     populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
   }
   else if (function>FuncPlayValue && function<FuncCount ) {
-    populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
+    switch (adjustmode) {
+      case 1:
+        populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
+        break;
+      case 2:
+        populateSourceCB(b, RawSource(value), POPULATE_GVARS,true);
+        break;
+      case 3:
+        b->clear();
+        b->addItem("-1",0);
+        b->addItem("+1",1);
+        b->setCurrentIndex(value);
+        break;
+    }
   }
 
   else {
