@@ -273,6 +273,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return G9X_MAX_PHASES;
     case Timers:
       return 2;
+    case Switches:
+      return 9;
     case FuncSwitches:
       return 12;
     case CustomSwitches:

@@ -545,27 +545,17 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case GvarsAreNamed:
     case GvarsFlightPhases:
-      if (board == BOARD_STOCK)
-        return 0;
-      else
-        return 1;    
+      return (board==BOARD_STOCK ? 0 : 1);
     case Mixes:
-      if (board == BOARD_SKY9X)
-        return O9X_ARM_MAX_MIXERS;
-      else
-        return O9X_MAX_MIXERS;
+      return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
     case Timers:
       return 2;
+    case Switches:
+      return (board==BOARD_X9DA ? 22 : 9);
     case FuncSwitches:
-      if (board == BOARD_SKY9X)
-        return O9X_ARM_NUM_FSW; 
-      else
-        return O9X_NUM_FSW;
+      return (IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW);
     case CustomSwitches:
-      if (board == BOARD_SKY9X)
-        return O9X_ARM_NUM_CSW;
-      else
-        return O9X_NUM_CSW;
+      return (IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW);
     case CustomSwitchesExt:
       if (board == BOARD_SKY9X)
         return true;

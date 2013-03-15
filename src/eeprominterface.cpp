@@ -314,14 +314,14 @@ QString RawSwitch::toString()
                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
                          };
 
-  QString switchesX9D[] = { QObject::tr("SAup"), QObject::tr("SA-"), QObject::tr("SAdn"),
-                            QObject::tr("SBup"), QObject::tr("SB-"), QObject::tr("SBdn"),
-                            QObject::tr("SCup"), QObject::tr("SC-"), QObject::tr("SCdn"),
-                            QObject::tr("SDup"), QObject::tr("SD-"), QObject::tr("SDdn"),
-                            QObject::tr("SEup"), QObject::tr("SE-"), QObject::tr("SEdn"),
-                            QObject::tr("SFup"), QObject::tr("SFdn"),
-                            QObject::tr("SGup"), QObject::tr("SG-"), QObject::tr("SGdn"),
-                            QObject::tr("SHup"), QObject::tr("SHdn"),
+  QString switchesX9D[] = { QString::fromUtf8("SA\u2191"), QObject::tr("SA-"), QString::fromUtf8("SA\u2193"),
+                            QString::fromUtf8("SB\u2191"), QObject::tr("SB-"), QString::fromUtf8("SB\u2193"),
+                            QString::fromUtf8("SC\u2191"), QObject::tr("SC-"), QString::fromUtf8("SC\u2193"),
+                            QString::fromUtf8("SD\u2191"), QObject::tr("SD-"), QString::fromUtf8("SD\u2193"),
+                            QString::fromUtf8("SE\u2191"), QObject::tr("SE-"), QString::fromUtf8("SE\u2193"),
+                            QString::fromUtf8("SF\u2191"), QString::fromUtf8("SF\u2193"),
+                            QString::fromUtf8("SG\u2191"), QObject::tr("SG-"), QString::fromUtf8("SG\u2193"),
+                            QString::fromUtf8("SH\u2191"), QString::fromUtf8("SH\u2193"),
                           };
 
   switch(type) {
