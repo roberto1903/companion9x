@@ -819,6 +819,7 @@ enum Capability {
  VoicesAsNumbers,
  ModelVoice,
  InstantTrimSW,
+ Switches,
  CustomSwitches,
  CustomSwitchesExt,
  RotaryEncoders,
