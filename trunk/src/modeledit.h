@@ -245,7 +245,8 @@ private slots:
     void ppmcenterEdited();
     void customSwitchesEdited();
     void safetySwitchesEdited();
-    void functionSwitchesEdited();
+    void customFunctionEdited();
+    void refreshCustomFunction(int index, bool modified=false);
     void startupSwitchEdited();
     void exposEdited();
     void mixesEdited();

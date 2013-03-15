@@ -1299,7 +1299,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, 0);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, POPULATE_SOURCES);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
@@ -1664,11 +1664,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        if (GetEepromInterface()->getCapability(ExtraTrims)) {
-          populateSourceCB(cswitchSource1[i], source , POPULATE_TRIMS | POPULATE_TELEMETRY);
-        } else {
-          populateSourceCB(cswitchSource1[i], source , POPULATE_TELEMETRY);          
-        }
+        populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
         cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
         cswitchOffset[i]->setMinimum(source.getMin(g_model));
         cswitchOffset[i]->setMaximum(source.getMax(g_model));
@@ -1686,13 +1682,8 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        if (GetEepromInterface()->getCapability(ExtraTrims)) {
-          populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TRIMS | POPULATE_TELEMETRY);
-          populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_TRIMS | POPULATE_TELEMETRY);
-        } else {
-          populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_TELEMETRY);
-          populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_TELEMETRY);
-        }
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
+        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
         break;
     }
 //TODO second AND need to populate only valid switches
@@ -1873,12 +1864,14 @@ void ModelEdit::tabCustomFunctions()
     layout->addWidget(fswLabel[i],(i%16)+1,0);
 
     fswtchSwtch[i] = new QComboBox(this);
-    connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    fswtchSwtch[i]->setProperty("functionIndex", i);
+    connect(fswtchSwtch[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
     layout->addWidget(fswtchSwtch[i],(i%16)+1,1);
     populateSwitchCB(fswtchSwtch[i], g_model.funcSw[i].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
 
     fswtchFunc[i] = new QComboBox(this);
-    connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    fswtchFunc[i]->setProperty("functionIndex", i);
+    connect(fswtchFunc[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
     layout->addWidget(fswtchFunc[i],(i%16)+1,2);
     populateFuncCB(fswtchFunc[i], g_model.funcSw[i].func);
 
@@ -1886,26 +1879,30 @@ void ModelEdit::tabCustomFunctions()
     layout->addLayout(paramLayout, (i%16)+1, 3);
 
     fswtchGVmode[i] = new QComboBox(this);
-    connect(fswtchGVmode[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    fswtchGVmode[i]->setProperty("functionIndex", i);
+    connect(fswtchGVmode[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
     paramLayout->addWidget(fswtchGVmode[i]);
     populateGVmodeCB(fswtchGVmode[i], g_model.funcSw[i].adjustMode);
 
     fswtchParam[i] = new QSpinBox(this);
+    fswtchParam[i]->setProperty("functionIndex", i);
     fswtchParam[i]->setAccelerated(true);
-    connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(functionSwitchesEdited()));
+    connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(customFunctionEdited()));
     paramLayout->addWidget(fswtchParam[i]);
 
     fswtchParamT[i] = new QComboBox(this);
+    fswtchParamT[i]->setProperty("functionIndex", i);
     paramLayout->addWidget(fswtchParamT[i]);
-    populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param,g_model.funcSw[i].adjustMode);
-    connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    populateFuncParamCB(fswtchParamT[i], func, g_model.funcSw[i].param, g_model.funcSw[i].adjustMode);
+    connect(fswtchParamT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
 
     fswtchParamArmT[i] = new QComboBox(this);
+    fswtchParamArmT[i]->setProperty("functionIndex", i);
     fswtchParamArmT[i]->setEditable(true);
     paramLayout->addWidget(fswtchParamArmT[i]);
 
-    connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
-    connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(functionSwitchesEdited()));
+    connect(fswtchParamArmT[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
+    connect(fswtchParamArmT[i],SIGNAL(editTextChanged ( const QString)),this,SLOT(customFunctionEdited()));
 
 #ifdef PHONON    
     playBT[i] = new QPushButton(this);
@@ -1919,15 +1916,19 @@ void ModelEdit::tabCustomFunctions()
     layout->addLayout(repeatLayout, (i%16)+1, 4);
 
     fswtchRepeat[i] = new QComboBox(this);
-    connect(fswtchRepeat[i],SIGNAL(currentIndexChanged(int)),this,SLOT(functionSwitchesEdited()));
+    fswtchRepeat[i]->setProperty("functionIndex", i);
+    connect(fswtchRepeat[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFunctionEdited()));
     repeatLayout->addWidget(fswtchRepeat[i],(i%16)+1);
     populateRepeatCB(fswtchRepeat[i], g_model.funcSw[i].repeatParam);
 
     fswtchEnable[i] = new QCheckBox(this);
+    fswtchEnable[i]->setProperty("functionIndex", i);
     fswtchEnable[i]->setText(tr("ON"));
     repeatLayout->addWidget(fswtchEnable[i],(i%16)+1);
     fswtchEnable[i]->setChecked(g_model.funcSw[i].enabled);
-    connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(functionSwitchesEdited()));
+    connect(fswtchEnable[i],SIGNAL(stateChanged(int)),this,SLOT(customFunctionEdited()));
+
+    refreshCustomFunction(i);
   }
 
   if (num_fsw <= 16) {
@@ -1935,8 +1936,6 @@ void ModelEdit::tabCustomFunctions()
   }
 
   switchEditLock = false;
-
-  functionSwitchesEdited();
 }
 
 void ModelEdit::tabSafetySwitches()
@@ -1958,7 +1957,9 @@ void ModelEdit::tabSafetySwitches()
         connect(safetySwitchValue[i],SIGNAL(editingFinished()),this,SLOT(safetySwitchesEdited()));
     }
 }
-void ModelEdit::customFieldEdited() {
+
+void ModelEdit::customFieldEdited()
+{
   if (telemetryLock) return;
   for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
     int screen=i/8;
@@ -2097,114 +2098,128 @@ void ModelEdit::playMusic()
 #define CUSTOM_FUNCTION_ENABLE         0x10
 #define CUSTOM_FUNCTION_REPEAT         0x20
 
-void ModelEdit::functionSwitchesEdited()
+void ModelEdit::customFunctionEdited()
 {
-    if (switchEditLock) return;
-    switchEditLock = true;
-    int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
-    for(int i=0; i<num_fsw; i++) {
-      unsigned int widgetsMask = 0;
-      g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
-      g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
-      g_model.funcSw[i].enabled=fswtchEnable[i]->isChecked();
-      g_model.funcSw[i].repeatParam= (AssignFunc)fswtchRepeat[i]->currentIndex();
-      g_model.funcSw[i].adjustMode= (AssignFunc)fswtchGVmode[i]->currentIndex();
-      int index=fswtchFunc[i]->currentIndex();
-#ifdef PHONON
-      playBT[i]->hide();
-#endif
-      if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
-        fswtchParam[i]->setMinimum(-125);
-        fswtchParam[i]->setMaximum(125);
-        g_model.funcSw[i].param = fswtchParam[i]->value();
-        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
-      }
-      else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
-        g_model.funcSw[i].adjustMode = fswtchGVmode[i]->currentIndex();
-        widgetsMask |= CUSTOM_FUNCTION_GV_MODE + CUSTOM_FUNCTION_ENABLE;
-        if (g_model.funcSw[i].adjustMode==0) {
-          g_model.funcSw[i].param = fswtchParam[i]->value();
-          fswtchParam[i]->setMinimum(-125);
-          fswtchParam[i]->setMaximum(125);
-          widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
-        } else {
-          g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
-          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param,g_model.funcSw[i].adjustMode);
-          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-        }
-      }
-      else if (index==FuncReset) {
-        g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-      }
-      else if (index==FuncVolume) {
-        g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
-        populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-        widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_ENABLE;
-      }
-      else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-        g_model.funcSw[i].repeatParam = fswtchRepeat[i]->itemData(fswtchRepeat[i]->currentIndex()).toInt();
-        if (index != FuncBackgroundMusic) widgetsMask |= CUSTOM_FUNCTION_REPEAT;
-#ifdef PHONON
-        playBT[i]->hide();
-#endif
-        if (index==FuncPlayValue) {
-          g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
-          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
-        }
-        else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
-          if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-            widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
-            fswtchParam[i]->setMinimum(256);
-            fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 510 : 511);
-            g_model.funcSw[i].param=fswtchParam[i]->value()-256;
-#ifdef PHONON
-            playBT[i]->show();
-#endif
-          }
-          else {
-            widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
-            for (int j=0; j<6; j++) {
-              g_model.funcSw[i].paramarm[j]=0;
-            }
-            if (fswtchParamArmT[i]->currentText() != "----") {
-              for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
-                g_model.funcSw[i].paramarm[j]=fswtchParamArmT[i]->currentText().toAscii().at(j);
-              }
-            }
-          }
-        }
-        else if (index==FuncPlaySound) {
-          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;          
-        }
-        else if (index==FuncPlayHaptic) {
-          g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
-          populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-          widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;        
-        }
-      }
-      else if (g_model.funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
-        g_model.funcSw[i].param = (uint8_t)fswtchParam[i]->value();
-        if (index<=FuncInstantTrim) {
-          widgetsMask |= CUSTOM_FUNCTION_ENABLE;
-        }
-      }
+  if (switchEditLock) return;
+  switchEditLock = true;
 
-      fswtchParam[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_NUMERIC_PARAM);
-      fswtchParamT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_SOURCE_PARAM);
-      fswtchParamArmT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_FILE_PARAM);
-      fswtchEnable[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_ENABLE);
-      if (!(widgetsMask & CUSTOM_FUNCTION_ENABLE)) fswtchEnable[i]->setChecked(false);
-      fswtchRepeat[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_REPEAT);
-      fswtchGVmode[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_MODE);
+  int index = sender()->property("functionIndex").toInt();
+  refreshCustomFunction(index, true);
+
+  updateSettings();
+  switchEditLock = false;
+}
+
+void ModelEdit::refreshCustomFunction(int i, bool modified)
+{
+  unsigned int widgetsMask = 0;
+  if (modified) {
+    g_model.funcSw[i].swtch = RawSwitch(fswtchSwtch[i]->itemData(fswtchSwtch[i]->currentIndex()).toInt());
+    g_model.funcSw[i].func = (AssignFunc)fswtchFunc[i]->currentIndex();
+    g_model.funcSw[i].enabled =fswtchEnable[i]->isChecked();
+    g_model.funcSw[i].repeatParam = (AssignFunc)fswtchRepeat[i]->currentIndex();
+    g_model.funcSw[i].adjustMode = (AssignFunc)fswtchGVmode[i]->currentIndex();
+  }
+
+  int index = fswtchFunc[i]->currentIndex();
+
+#ifdef PHONON
+  playBT[i]->hide();
+#endif
+
+  if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
+    fswtchParam[i]->setMinimum(-125);
+    fswtchParam[i]->setMaximum(125);
+    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
+    fswtchParam[i]->setValue(g_model.funcSw[i].param);
+    widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
+  }
+  else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
+    if (modified) g_model.funcSw[i].adjustMode = fswtchGVmode[i]->currentIndex();
+    widgetsMask |= CUSTOM_FUNCTION_GV_MODE + CUSTOM_FUNCTION_ENABLE;
+    if (g_model.funcSw[i].adjustMode==0) {
+      if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
+      fswtchParam[i]->setMinimum(-125);
+      fswtchParam[i]->setMaximum(125);
+      fswtchParam[i]->setValue(g_model.funcSw[i].param);
+      widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
     }
+    else {
+      if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+      populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param, g_model.funcSw[i].adjustMode);
+      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+    }
+  }
+  else if (index==FuncReset) {
+    if (modified) g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+    populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+    widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+  }
+  else if (index==FuncVolume) {
+    if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+    populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+    widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_ENABLE;
+  }
+  else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+    if (modified) g_model.funcSw[i].repeatParam = fswtchRepeat[i]->itemData(fswtchRepeat[i]->currentIndex()).toInt();
+    if (index != FuncBackgroundMusic) widgetsMask |= CUSTOM_FUNCTION_REPEAT;
+#ifdef PHONON
+    playBT[i]->hide();
+#endif
+    if (index==FuncPlayValue) {
+      if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
+      populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+    }
+    else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
+      if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
+        fswtchParam[i]->setMinimum(256);
+        fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 510 : 511);
+        if (modified) g_model.funcSw[i].param = fswtchParam[i]->value()-256;
+        fswtchParam[i]->setValue(256+g_model.funcSw[i].param);
+#ifdef PHONON
+        playBT[i]->show();
+#endif
+      }
+      else {
+        widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
+        if (modified) {
+          memset(g_model.funcSw[i].paramarm, 0, sizeof(g_model.funcSw[i].paramarm));
+          if (fswtchParamArmT[i]->currentText() != "----") {
+            for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),6); j++) {
+              g_model.funcSw[i].paramarm[j] = fswtchParamArmT[i]->currentText().toAscii().at(j);
+            }
+          }
+        }
+      }
+    }
+    else if (index==FuncPlaySound) {
+      if (modified) g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+      populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+    }
+    else if (index==FuncPlayHaptic) {
+      if (modified) g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
+      populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
+      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+    }
+  }
+  else if (g_model.funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
+    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
+    fswtchParam[i]->setValue(g_model.funcSw[i].param);
+    if (index<=FuncInstantTrim) {
+      widgetsMask |= CUSTOM_FUNCTION_ENABLE;
+    }
+  }
 
-    updateSettings();
-    switchEditLock = false;
+  fswtchParam[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_NUMERIC_PARAM);
+  fswtchParamT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_SOURCE_PARAM);
+  fswtchParamArmT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_FILE_PARAM);
+  fswtchEnable[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_ENABLE);
+  if (!(widgetsMask & CUSTOM_FUNCTION_ENABLE)) fswtchEnable[i]->setChecked(false);
+  fswtchRepeat[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_REPEAT);
+  fswtchGVmode[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_MODE);
 }
 
 void ModelEdit::tabTelemetry()
