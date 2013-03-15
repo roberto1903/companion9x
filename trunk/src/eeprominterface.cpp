@@ -249,9 +249,13 @@ double RawSource::getStep(const ModelData & Model)
 
 QString RawSource::toString()
 {
-  QString sticks[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
-                       QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
-                     };
+  QString sticks9X[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
+                         QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
+                       };
+
+  QString sticksX9D[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
+                          QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS")
+                        };
 
   QString trims[] = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
 
@@ -265,7 +269,7 @@ QString RawSource::toString()
                           QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
   switch(type) {
     case SOURCE_TYPE_STICK:
-      return sticks[index];
+      return (GetEepromInterface()->getBoard() == BOARD_X9DA ? sticksX9D[index] : sticks9X[index]);
     case SOURCE_TYPE_TRIM:
       return trims[index];
     case SOURCE_TYPE_ROTARY_ENCODER:
@@ -305,14 +309,27 @@ int RawSwitch::toValue()
 
 QString RawSwitch::toString()
 {
-  QString switches[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
-                         QObject::tr("ID0"), QObject::tr("ID1"), QObject::tr("ID2"),
-                         QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
-                       };
+  QString switches9X[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
+                           QObject::tr("ID0"), QObject::tr("ID1"), QObject::tr("ID2"),
+                           QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
+                         };
+
+  QString switchesX9D[] = { QObject::tr("SAup"), QObject::tr("SA-"), QObject::tr("SAdn"),
+                            QObject::tr("SBup"), QObject::tr("SB-"), QObject::tr("SBdn"),
+                            QObject::tr("SCup"), QObject::tr("SC-"), QObject::tr("SCdn"),
+                            QObject::tr("SDup"), QObject::tr("SD-"), QObject::tr("SDdn"),
+                            QObject::tr("SEup"), QObject::tr("SE-"), QObject::tr("SEdn"),
+                            QObject::tr("SFup"), QObject::tr("SFdn"),
+                            QObject::tr("SGup"), QObject::tr("SG-"), QObject::tr("SGdn"),
+                            QObject::tr("SHup"), QObject::tr("SHdn"),
+                          };
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
-      return index > 0 ? switches[index-1] : QString("!") + switches[-index-1];
+      if (GetEepromInterface()->getBoard() == BOARD_X9DA)
+        return index > 0 ? switchesX9D[index-1] : QString("!") + switchesX9D[-index-1];
+      else
+        return index > 0 ? switches9X[index-1] : QString("!") + switches9X[-index-1];
     case SWITCH_TYPE_VIRTUAL:
     {
       QString neg = QString("");
@@ -334,7 +351,10 @@ QString RawSwitch::toString()
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
       // TODO assert(index != 0);
-      return index > 0 ? QString("m") + switches[index-1] : QString("!m") + switches[-index-1];
+      if (GetEepromInterface()->getBoard() == BOARD_X9DA)
+        return index > 0 ? QString("m") + switchesX9D[index-1] : QString("!m") + switchesX9D[-index-1];
+      else
+        return index > 0 ? QString("m") + switches9X[index-1] : QString("!m") + switches9X[-index-1];
     case SWITCH_TYPE_MOMENT_VIRTUAL:
     {
       QString neg = QString("m");

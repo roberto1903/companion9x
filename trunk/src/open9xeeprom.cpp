@@ -940,7 +940,10 @@ class CustomFunctionField: public TransformedField {
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
-        internalField.Append(new CharField<6>(_arm_param));
+        if (board == BOARD_X9DA)
+          internalField.Append(new CharField<10>(_arm_param));
+        else
+          internalField.Append(new CharField<6>(_arm_param));
         if (version >= 214) {
           internalField.Append(new UnsignedField<2>(_mode));
           internalField.Append(new UnsignedField<6>(_delay));
@@ -968,8 +971,8 @@ class CustomFunctionField: public TransformedField {
     {
       if (IS_ARM(board)) {
         _mode = 0;
-        if (fn.func == FuncPlayPrompt || fn.func == FuncPlayValue)
-          _delay = fn.repeatParam;
+        if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayValue)
+          _delay = fn.repeatParam / 5;
         else
           _delay = (fn.enabled ? 1 : 0);
           
@@ -1034,7 +1037,6 @@ class CustomFunctionField: public TransformedField {
 
     virtual void afterImport()
     {
-      // TODO
       if (IS_ARM(board)) {
         unsigned int value = *((uint32_t *)_arm_param);
         if (fn.func <= FuncInstantTrim) {
