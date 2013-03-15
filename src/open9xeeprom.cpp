@@ -896,10 +896,10 @@ class CustomFunctionsConversionTable: public ConversionTable {
         }
       }
       else {
-        for (int i=0; i<4; i++) {
-          addConversion(val, val);
-          val++;
+        for (int i=0; i<16; i++) {
+          addConversion(i, i / 4);
         }
+        val+=4;
       }
       addConversion(FuncTrainer, val++);
       addConversion(FuncTrainerRUD, val++);
@@ -1003,13 +1003,14 @@ class CustomFunctionField: public TransformedField {
         }
       }
       else {
+        /* the default behaviour */
+        _param = fn.param;
+        _union_param = (fn.enabled ? 1 : 0);
         if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
           if (version >= 213) {
-            _union_param = (fn.adjustMode << 1) + (fn.enabled ? 1 : 0);
+            _union_param += (fn.adjustMode << 1);
             if (fn.adjustMode == 1)
               sourcesConversionTable.exportValue(fn.param, (int &)_param);
-            else
-              _param = fn.param;
           }
           else {
             sourcesConversionTable.exportValue(fn.param, (int &)_param);
@@ -1020,16 +1021,13 @@ class CustomFunctionField: public TransformedField {
             _union_param = fn.repeatParam / 10;
           sourcesConversionTable.exportValue(fn.param, (int &)_param);
         }
-        else if (fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
+        else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
           if (version >= 213)
             _union_param = fn.repeatParam / 10;
         }
         else if (fn.func <= FuncSafetyCh16) {
           if (version >= 213)
-            _union_param = ((fn.func % 4) << 1) + (fn.enabled ? 1 : 0);
-        }
-        else {
-          _param = fn.param;
+            _union_param += ((fn.func % 4) << 1);
         }
       }
     }
@@ -1056,10 +1054,34 @@ class CustomFunctionField: public TransformedField {
         }
       }
       else {
-        if (fn.func == FuncPlayValue || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5))
+        fn.param = _param;
+        if (version >= 213) {
+          fn.enabled = (_union_param & 0x01);
+        }
+        if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
+          if (version >= 213) {
+            fn.adjustMode = ((_union_param >> 1) & 0x03);
+            if (fn.adjustMode == 1)
+              sourcesConversionTable.importValue(_param, (int &)fn.param);
+          }
+          else {
+            sourcesConversionTable.importValue(_param, (int &)fn.param);
+          }
+        }
+        else if (fn.func == FuncPlayValue) {
+          if (version >= 213)
+            fn.repeatParam = _union_param * 10;
           sourcesConversionTable.importValue(_param, (int &)fn.param);
-        else
-          fn.param = _param;
+        }
+        else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
+          if (version >= 213)
+            fn.repeatParam = _union_param * 10;
+        }
+        else if (fn.func <= FuncSafetyCh16) {
+          if (version >= 213) {
+            fn.func = AssignFunc(((fn.func >> 2) << 2) + ((_union_param >> 1) & 0x03));
+          }
+        }
       }
     }
 

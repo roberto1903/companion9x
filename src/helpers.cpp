@@ -335,23 +335,23 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
     b->setCurrentIndex(value);
   }
   else if (function==FuncVolume) {
-    populateSourceCB(b, RawSource(value), 0);
+    populateSourceCB(b, RawSource(value), POPULATE_SOURCES);
   }
   else if (function==FuncPlayValue) {
-    populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
+    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TELEMETRY);
   }
   else if (function>FuncPlayValue && function<FuncCount ) {
     switch (adjustmode) {
       case 1:
-        populateSourceCB(b, RawSource(value), POPULATE_TELEMETRY);
+        populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TELEMETRY);
         break;
       case 2:
-        populateSourceCB(b, RawSource(value), POPULATE_GVARS,true);
+        populateSourceCB(b, RawSource(SOURCE_TYPE_GVAR, value), POPULATE_GVARS);
         break;
       case 3:
         b->clear();
-        b->addItem("-1",0);
-        b->addItem("+1",1);
+        b->addItem("-1", 0);
+        b->addItem("+1", 1);
         b->setCurrentIndex(value);
         break;
     }
@@ -770,35 +770,35 @@ void populateGVarCB(QComboBox *b, int value, int min, int max)
   }
 }
 
-void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags,unsigned int flagonly)
+void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
 {
   RawSource item;
 
   b->clear();
 
-  item = RawSource(SOURCE_TYPE_NONE);
-  b->addItem(item.toString(), item.toValue());
-  if (item == source) b->setCurrentIndex(b->count()-1);
-
-  for (int i=0; i<7; i++) {
-    item = RawSource(SOURCE_TYPE_STICK, i);
+  if (flags & POPULATE_SOURCES) {
+    item = RawSource(SOURCE_TYPE_NONE);
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
-  }
-  for (int i=0; i<2; i++) {
-    item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
-    b->addItem(item.toString(), item.toValue());
-    if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
-      QModelIndex index = b->model()->index(8+i, 0);
-      QVariant v(0);
-      b->model()->setData(index, v, Qt::UserRole - 1);        
+
+    for (int i=0; i<7; i++) {
+      item = RawSource(SOURCE_TYPE_STICK, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
     }
-    if (item == source)
-      b->setCurrentIndex(b->count()-1);
+    for (int i=0; i<2; i++) {
+      item = RawSource(SOURCE_TYPE_ROTARY_ENCODER, i);
+      b->addItem(item.toString(), item.toValue());
+      if (i>(GetEepromInterface()->getCapability(RotaryEncoders)-1)) {
+        QModelIndex index = b->model()->index(8+i, 0);
+        QVariant v(0);
+        b->model()->setData(index, v, Qt::UserRole - 1);
+      }
+      if (item == source)
+        b->setCurrentIndex(b->count()-1);
+    }
   }
-  if (flagonly) {
-    b->clear();
-  }
+
   if (flags & POPULATE_TRIMS) {
     for (int i=0; i<4; i++) {
       item = RawSource(SOURCE_TYPE_TRIM, i);
@@ -806,16 +806,17 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags,
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
   }
-  item = RawSource(SOURCE_TYPE_MAX);
-  b->addItem(item.toString(), item.toValue());
-  if (item == source) b->setCurrentIndex(b->count()-1);
 
-  item = RawSource(SOURCE_TYPE_3POS);
-  b->addItem(item.toString(), item.toValue());
-  if (item == source) b->setCurrentIndex(b->count()-1);
-  if (flagonly) {
-    b->clear();
+  if (flags & POPULATE_SOURCES) {
+    item = RawSource(SOURCE_TYPE_MAX);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
+
+    item = RawSource(SOURCE_TYPE_3POS);
+    b->addItem(item.toString(), item.toValue());
+    if (item == source) b->setCurrentIndex(b->count()-1);
   }
+
   if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=9; i++) {
       item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
@@ -829,25 +830,24 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags,
     }
   }
 
-  for (int i=0; i<NUM_CYC; i++) {
-    item = RawSource(SOURCE_TYPE_CYC, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == source) b->setCurrentIndex(b->count()-1);
-  }
+  if (flags & POPULATE_SOURCES) {
+    for (int i=0; i<NUM_CYC; i++) {
+      item = RawSource(SOURCE_TYPE_CYC, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
 
-  for (int i=0; i<NUM_PPM; i++) {
-    item = RawSource(SOURCE_TYPE_PPM, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == source) b->setCurrentIndex(b->count()-1);
-  }
+    for (int i=0; i<NUM_PPM; i++) {
+      item = RawSource(SOURCE_TYPE_PPM, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
 
-  for (int i=0; i<GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels); i++) {
-    item = RawSource(SOURCE_TYPE_CH, i);
-    b->addItem(item.toString(), item.toValue());
-    if (item == source) b->setCurrentIndex(b->count()-1);
-  }
-  if (flagonly) {
-    b->clear();
+    for (int i=0; i<GetEepromInterface()->getCapability(Outputs)+GetEepromInterface()->getCapability(ExtraChannels); i++) {
+      item = RawSource(SOURCE_TYPE_CH, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   if (flags & POPULATE_TELEMETRY) {
@@ -856,10 +856,6 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags,
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);
     }
-  }
-
-  if (flagonly) {
-    b->clear();
   }
 
   if (flags & POPULATE_GVARS) {
