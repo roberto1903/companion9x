@@ -263,7 +263,7 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
       return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
     }
   }
-  else if (version == 213) {
+  else if (version >= 213) {
     return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
   }
 
@@ -310,7 +310,7 @@ template <class T>
 bool Open9xInterface::saveModelVariant(unsigned int index, ModelData &model, unsigned int version, unsigned int variant)
 {
   T open9xModel(model, board, version, variant);
-  // open9xModel.Dump();
+  open9xModel.Dump();
   QByteArray eeprom;
   open9xModel.Export(eeprom);
   int sz = efile->writeRlc2(FILE_MODEL(index), FILE_TYP_MODEL, (const uint8_t*)eeprom.constData(), eeprom.size());
@@ -458,7 +458,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
           else
             result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], version, variant);
           break;
-        case 213:
+        default:
           result = saveModelVariant<Open9xModelDataNew>(i, radioData.models[i], version, variant);
           break;
       }
@@ -824,6 +824,9 @@ bool Open9xInterface::checkVersion(unsigned int version)
       break;
     case 213:
       // GVARS / Variants introduction
+      break;
+    case 214:
+      // Massive EEPROM change!
       break;
     default:
       return false;
