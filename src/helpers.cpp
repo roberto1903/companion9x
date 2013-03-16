@@ -346,7 +346,7 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
         populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TELEMETRY);
         break;
       case 2:
-        populateSourceCB(b, RawSource(SOURCE_TYPE_GVAR, value), POPULATE_GVARS);
+        populateSourceCB(b, RawSource(value), POPULATE_GVARS);
         break;
       case 3:
         b->clear();

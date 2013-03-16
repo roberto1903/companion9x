@@ -1014,6 +1014,8 @@ class CustomFunctionField: public TransformedField {
             _union_param += (fn.adjustMode << 1);
             if (fn.adjustMode == 1)
               sourcesConversionTable.exportValue(fn.param, (int &)_param);
+            else if (fn.adjustMode == 2)
+              _param = RawSource(fn.param).index;
           }
           else {
             sourcesConversionTable.exportValue(fn.param, (int &)_param);
@@ -1065,6 +1067,8 @@ class CustomFunctionField: public TransformedField {
             fn.adjustMode = ((_union_param >> 1) & 0x03);
             if (fn.adjustMode == 1)
               sourcesConversionTable.importValue(_param, (int &)fn.param);
+            else if (fn.adjustMode == 2)
+              fn.param = RawSource(SOURCE_TYPE_GVAR, _param).toValue();
           }
           else {
             sourcesConversionTable.importValue(_param, (int &)fn.param);
