@@ -2330,10 +2330,10 @@ void ModelEdit::tabTelemetry()
     for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
       int screen=i/8;
       if (g_model.frsky.screens[screen].type==0) {
-        populateCustomScreenFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], ((i % 8)<6), g_model.frsky.usrProto);
+        populateCustomScreenFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], !((i % 8)<6), g_model.frsky.usrProto);
       }
       else {
-        populateCustomScreenFieldCB(csf[i], 0, ((i % 8)<6), g_model.frsky.usrProto);
+        populateCustomScreenFieldCB(csf[i], 0, !((i % 8)<6), g_model.frsky.usrProto);
       }
       connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
