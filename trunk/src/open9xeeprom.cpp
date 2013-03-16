@@ -929,6 +929,48 @@ class CustomFunctionsConversionTable: public ConversionTable {
     }
 };
 
+template <int N>
+class SwitchesWarningField: public TransformedField {
+  public:
+    SwitchesWarningField(unsigned int & sw, BoardEnum board, unsigned int version):
+      TransformedField(internalField),
+      internalField(_sw, "SwitchesWarning"),
+      sw(sw),
+      board(board),
+      version(version)
+    {
+    }
+
+    virtual void beforeExport()
+    {
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      if (recent) {
+        _sw = (sw & 0b11000001) + ((sw & 0b110000) >> 3) + ((sw & 0b001110) << 2);
+      }
+      else {
+        _sw = sw;
+      }
+    }
+
+    virtual void afterImport()
+    {
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      if (recent) {
+        sw = (_sw & 0b11000001) + ((_sw & 0b111000) >> 2) + ((_sw & 0b000110) << 3);
+      }
+      else {
+        sw = _sw;
+      }
+    }
+
+  protected:
+    UnsignedField<N> internalField;
+    unsigned int &sw;
+    unsigned int _sw;
+    BoardEnum board;
+    unsigned int version;
+};
+
 class CustomFunctionField: public TransformedField {
   public:
     CustomFunctionField(FuncSwData & fn, BoardEnum board, unsigned int version):
@@ -1353,7 +1395,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (board == BOARD_X9DA)
     Append(new UnsignedField<16>(modelData.switchWarningStates));
   else
-    Append(new UnsignedField<8>(modelData.switchWarningStates));
+    Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
 
   if (board == BOARD_STOCK && (variant & GVARS_VARIANT)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
