@@ -917,7 +917,13 @@ class CustomFunctionsConversionTable: public ConversionTable {
       addConversion(FuncPlayValue, val++);
       if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X)
         addConversion(FuncLogs, val++);
+      if (IS_ARM(board))
+        addConversion(FuncVolume, val++);
       addConversion(FuncBacklight, val++);
+      if (IS_ARM(board)) {
+        addConversion(FuncBackgroundMusic, val++);
+        addConversion(FuncBackgroundMusicPause, val++);
+      }
       for (int i=0; i<5; i++)
         addConversion(FuncAdjustGV1+i, val++);
     }
@@ -982,27 +988,30 @@ class CustomFunctionField: public TransformedField {
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
           memcpy(_arm_param, fn.paramarm, sizeof(_arm_param));
         }
-        else {
+        else if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
           unsigned int value;
-          if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
-            if (version >= 214) {
-              _mode = fn.adjustMode;
-              if (fn.adjustMode == 1)
-                sourcesConversionTable.exportValue(fn.param, (int &)value);
-              else
-                value = fn.param;
-            }
-            else {
+          if (version >= 214) {
+            _mode = fn.adjustMode;
+            if (fn.adjustMode == 1)
               sourcesConversionTable.exportValue(fn.param, (int &)value);
-            }
-          }
-          else if (fn.func == FuncPlayValue || fn.func == FuncVolume) {
-            sourcesConversionTable.exportValue(fn.param, (int &)value);
+            else if (fn.adjustMode == 2)
+              _param = RawSource(fn.param).index;
+            else
+              value = fn.param;
           }
           else {
-            value = fn.param;
+            unsigned int value;
+            sourcesConversionTable.exportValue(fn.param, (int &)value);
           }
           *((uint32_t *)_arm_param) = value;
+        }
+        else if (fn.func == FuncPlayValue || fn.func == FuncVolume) {
+          unsigned int value;
+          sourcesConversionTable.exportValue(fn.param, (int &)value);
+          *((uint32_t *)_arm_param) = value;
+        }
+        else {
+          *((uint32_t *)_arm_param) = fn.param;
         }
       }
       else {
@@ -1040,21 +1049,40 @@ class CustomFunctionField: public TransformedField {
     virtual void afterImport()
     {
       if (IS_ARM(board)) {
+        if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayValue)
+          fn.repeatParam = _delay * 5;
+        else
+          fn.enabled = (_delay & 0x01);
+
         unsigned int value = *((uint32_t *)_arm_param);
         if (fn.func <= FuncInstantTrim) {
-          fn.enabled = (_delay & 0x01);
           fn.param = value;
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
           memcpy(fn.paramarm, _arm_param, sizeof(fn.paramarm));
         }
-        else {
-          if (fn.func == FuncPlayValue || fn.func == FuncVolume || (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5)) {
-            sourcesConversionTable.importValue(value, (int &)fn.param);
+        else if (fn.func == FuncVolume) {
+          sourcesConversionTable.importValue(value, (int &)fn.param);
+        }
+        else if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
+          if (version >= 214) {
+            fn.adjustMode = _mode;
+            if (fn.adjustMode == 1)
+              sourcesConversionTable.importValue(_param, (int &)fn.param);
+            else if (fn.adjustMode == 2)
+              fn.param = RawSource(SOURCE_TYPE_GVAR, _param).toValue();
           }
           else {
-            fn.param = value;
+            sourcesConversionTable.importValue(_param, (int &)fn.param);
           }
+        }
+        else if (fn.func == FuncPlayValue) {
+          if (version >= 213)
+            fn.repeatParam = _union_param * 10;
+          sourcesConversionTable.importValue(_param, (int &)fn.param);
+        }
+        else {
+          fn.param = value;
         }
       }
       else {
