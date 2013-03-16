@@ -836,7 +836,7 @@ class CustomSwitchField: public TransformedField {
       v1 = csw.val1;
       v2 = csw.val2;
 
-      if ((csw.func >= CS_FN_VEQUAL && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
+      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
         sourcesConversionTable.exportValue(csw.val1, v1);
       }
 
