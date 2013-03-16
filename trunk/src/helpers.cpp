@@ -51,7 +51,7 @@ void populateCustomScreenFieldCB(QComboBox *b, unsigned int value, bool last=fal
 
   b->addItem(RawSource(SOURCE_TYPE_NONE, 0).toString());
 
-  for (unsigned int i = 0; i < (last ? TELEMETRY_SOURCES_STATUS_COUNT : TELEMETRY_SOURCES_DISPLAY_COUNT); i++) {
+  for (unsigned int i = 0; i < (last ? TELEMETRY_SOURCES_STATUS_COUNT : TELEMETRY_SOURCES_DISPLAY_COUNT)-1; i++) {
     b->addItem(RawSource(SOURCE_TYPE_TELEMETRY, i).toString());
     if (!(i>=sizeof(telem_hub)/sizeof(int) || telem_hub[i]==0 || ((telem_hub[i]>=hubproto) && hubproto!=0))) {
       QModelIndex index = b->model()->index(i, 0);
@@ -1055,7 +1055,11 @@ QString getFrSkyMeasure(int units)
 
 QString getFrSkySrc(int index)
 {
-  return RawSource(SOURCE_TYPE_TELEMETRY, index).toString();
+  if (index==0) {
+    return QString("----"); 
+  } else {
+    return RawSource(SOURCE_TYPE_TELEMETRY, index-1).toString();
+  }
 }
 
 
