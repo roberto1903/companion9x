@@ -1037,13 +1037,15 @@ void compareDialog::printFSwitches()
   str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"19%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
   str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Param")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Repeat")+"</b></td>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Enable")+"</b></td>");
   str.append("<td width=\"10%\">&nbsp;</td>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"19%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
   str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Param")+"</b></td>");
+  str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Repeat")+"</b></td>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Enable")+"</b></td>");
   str.append("</tr>");
   for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
@@ -1060,8 +1062,14 @@ void compareDialog::printFSwitches()
       if (g_model1->funcSw[i].swtch.type) {
         str.append(doTC(g_model1->funcSw[i].swtch.toString(),color1));
         str.append(doTC(getFuncName(g_model1->funcSw[i].func),color1));
-        str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param),color1));        
-        if (g_model1->funcSw[i].func<=FuncInstantTrim) {
+        str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param,g_model1->funcSw[i].paramarm),color1));        
+        int index=g_model1->funcSw[i].func;
+        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+          str.append(doTC(getRepeatString(g_model1->funcSw[i].repeatParam),"green"));
+        } else {
+          str.append(doTC( "---","green"));
+        }
+        if (index<=FuncInstantTrim) {
           str.append(doTC((g_model1->funcSw[i].enabled ? "ON" : "OFF"),color1));
         } else {
           str.append(doTC( "---",color1));
@@ -1073,8 +1081,14 @@ void compareDialog::printFSwitches()
       if (g_model2->funcSw[i].swtch.type) {
         str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
-        str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param),color2));        
-        if (g_model2->funcSw[i].func<=FuncInstantTrim) {
+        str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param,g_model2->funcSw[i].paramarm),color2));        
+        int index=g_model2->funcSw[i].func;
+        if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+          str.append(doTC(getRepeatString(g_model2->funcSw[i].repeatParam),"green"));
+        } else {
+          str.append(doTC( "---","green"));
+        }
+        if (index<=FuncInstantTrim) {
           str.append(doTC((g_model2->funcSw[i].enabled ? "ON" : "OFF"),color2));
         } else {
           str.append(doTC( "---",color2));

@@ -782,6 +782,7 @@ void printDialog::printFSwitches()
     str.append(doTC(tr("Switch"), "", true));
     str.append(doTL(tr("Function"), "", true));
     str.append(doTL(tr("Parameter"), "", true));
+    str.append(doTL(tr("Repeat"), "", true));
     str.append(doTL(tr("Enabled"), "", true));
     str.append("</tr>");
     for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
@@ -790,8 +791,14 @@ void printDialog::printFSwitches()
           str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
           str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
-          str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param),"green"));
-          if (g_model->funcSw[i].func<=FuncInstantTrim) {
+          str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param,g_model->funcSw[i].paramarm),"green"));
+          int index=g_model->funcSw[i].func;
+          if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
+            str.append(doTC(getRepeatString(g_model->funcSw[i].repeatParam),"green"));
+          } else {
+            str.append(doTC( "---","green"));
+          }
+          if (index<=FuncInstantTrim) {
             str.append(doTC((g_model->funcSw[i].enabled ? "ON" : "OFF"),"green"));
           } else {
             str.append(doTC( "---","green"));
