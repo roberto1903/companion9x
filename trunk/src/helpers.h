@@ -33,7 +33,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populateRepeatCB(QComboBox *b, unsigned int value);
 void populateGVmodeCB(QComboBox *b, unsigned int value);
-QString FuncParam(uint function, unsigned int value, QString paramT="");
+QString FuncParam(uint function, unsigned int value, QString paramT="",unsigned int adjustmode=0);
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsigned int adjustmode=0);
 void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);
 void populatePhasesCB(QComboBox *b, int value);

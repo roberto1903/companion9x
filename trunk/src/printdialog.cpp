@@ -791,14 +791,14 @@ void printDialog::printFSwitches()
           str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
           str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
-          str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param,g_model->funcSw[i].paramarm),"green"));
+          str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param,g_model->funcSw[i].paramarm, g_model->funcSw[i].adjustMode),"green"));
           int index=g_model->funcSw[i].func;
           if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
             str.append(doTC(getRepeatString(g_model->funcSw[i].repeatParam),"green"));
           } else {
-            str.append(doTC( "---","green"));
+            str.append(doTC( "&nbsp;","green"));
           }
-          if (index<=FuncInstantTrim) {
+          if ((index<=FuncInstantTrim) || (index>FuncBackgroundMusicPause)) {
             str.append(doTC((g_model->funcSw[i].enabled ? "ON" : "OFF"),"green"));
           } else {
             str.append(doTC( "---","green"));
