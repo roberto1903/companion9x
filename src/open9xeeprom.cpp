@@ -1073,9 +1073,13 @@ class CustomFunctionField: public TransformedField {
           }
         }
         else if (fn.func == FuncPlayValue) {
-          if (version >= 213)
+          if (version >= 213) {
             _union_param = fn.repeatParam / 10;
-          sourcesConversionTable.exportValue(fn.param, (int &)_param);
+            sourcesConversionTable.exportValue(fn.param, (int &)_param);
+          }
+          else {
+            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).exportValue(fn.param, (int &)_param);
+          }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
           if (version >= 213)
@@ -1119,9 +1123,13 @@ class CustomFunctionField: public TransformedField {
           }
         }
         else if (fn.func == FuncPlayValue) {
-          if (version >= 213)
+          if (version >= 213) {
             fn.repeatParam = _union_param * 10;
-          sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable.importValue(_param, (int &)fn.param);
+          }
+          else {
+            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
+          }
         }
         else {
           fn.param = value;
@@ -1145,9 +1153,13 @@ class CustomFunctionField: public TransformedField {
           }
         }
         else if (fn.func == FuncPlayValue) {
-          if (version >= 213)
+          if (version >= 213) {
             fn.repeatParam = _union_param * 10;
-          sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable.importValue(_param, (int &)fn.param);
+          }
+          else {
+            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
+          }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
           if (version >= 213)
@@ -1177,18 +1189,19 @@ class CustomFunctionField: public TransformedField {
 
 class FrskyScreenField: public DataField {
   public:
-    FrskyScreenField(FrSkyScreenData & screen):
+    FrskyScreenField(FrSkyScreenData & screen, BoardEnum board, unsigned int version):
       DataField("Frsky Screen"),
-      screen(screen)
+      screen(screen),
+      board(board),
+      version(version)
     {
       for (int i=0; i<4; i++) {
-        bars.Append(new UnsignedField<8>(screen.body.bars[i].source));
-        bars.Append(new UnsignedField<8>(screen.body.bars[i].barMin));
-        bars.Append(new UnsignedField<8>(screen.body.bars[i].barMax));
+        bars.Append(new UnsignedField<8>(_screen.body.bars[i].source));
+        bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMin));
+        bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMax));
       }
-
       for (int i=0; i<8; i++) {
-        numbers.Append(new UnsignedField<8>(screen.body.cells[i]));
+        numbers.Append(new UnsignedField<8>(_screen.body.cells[i]));
       }
       for (int i=0; i<4; i++) {
         numbers.Append(new SpareBitsField<8>());
@@ -1197,6 +1210,20 @@ class FrskyScreenField: public DataField {
 
     virtual void ExportBits(QBitArray & output)
     {
+      _screen = screen;
+
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      if (!recent) {
+        for (int i=0; i<4; i++) {
+          if (_screen.body.bars[i].source > 0)
+            _screen.body.bars[i].source--;
+        }
+        for (int i=0; i<8; i++) {
+          if (_screen.body.cells[i] > 0)
+            _screen.body.cells[i]--;
+        }
+      }
+
       if (screen.type == 0)
         numbers.ExportBits(output);
       else
@@ -1205,11 +1232,32 @@ class FrskyScreenField: public DataField {
 
     virtual void ImportBits(QBitArray & input)
     {
+      _screen = screen;
+
+      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+
       // NOTA: screen.type should have been imported first!
-      if (screen.type == 0)
+      if (screen.type == 0) {
         numbers.ImportBits(input);
-      else
+        if (!recent) {
+          for (int i=0; i<8; i++) {
+            if (_screen.body.cells[i] > 0) {
+              _screen.body.cells[i]++;
+            }
+          }
+        }
+      }
+      else {
         bars.ImportBits(input);
+        if (!recent) {
+          for (int i=0; i<4; i++) {
+            if (_screen.body.bars[i].source > 0)
+              _screen.body.bars[i].source++;
+          }
+        }
+      }
+
+      screen = _screen;
     }
 
     virtual unsigned int size()
@@ -1223,6 +1271,9 @@ class FrskyScreenField: public DataField {
 
   protected:
     FrSkyScreenData & screen;
+    FrSkyScreenData _screen;
+    BoardEnum board;
+    unsigned int version;
     StructField bars;
     StructField numbers;
 };
@@ -1245,7 +1296,7 @@ class RSSIConversionTable: public ConversionTable
 
 class FrskyField: public StructField {
   public:
-    FrskyField(FrSkyData & frsky, BoardEnum board):
+    FrskyField(FrSkyData & frsky, BoardEnum board, unsigned int version):
       StructField("FrSky")
     {
       rssiConversionTable[0] = RSSIConversionTable(0);
@@ -1276,7 +1327,7 @@ class FrskyField: public StructField {
         Append(new SpareBitsField<5>());
 
         for (int i=0; i<3; i++) {
-          Append(new FrskyScreenField(frsky.screens[i]));
+          Append(new FrskyScreenField(frsky.screens[i], board, version));
         }
         Append(new UnsignedField<8>(frsky.varioSource));
         Append(new SignedField<8>(frsky.varioCenterMax));
@@ -1313,7 +1364,7 @@ class FrskyField: public StructField {
           Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50, 0, 100, "RSSI value"));
         }
         for (int i=0; i<2; i++) {
-          Append(new FrskyScreenField(frsky.screens[i]));
+          Append(new FrskyScreenField(frsky.screens[i], board, version));
         }
         Append(new UnsignedField<3>(frsky.varioSource));
         Append(new SignedField<5>(frsky.varioCenterMin));
@@ -1411,7 +1462,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   }
 
   if (board != BOARD_STOCK || (variant & FRSKY_VARIANT)) {
-    Append(new FrskyField(modelData.frsky, board));
+    Append(new FrskyField(modelData.frsky, board, version));
   }
 
   if (HAS_LARGE_LCD(board)) {
