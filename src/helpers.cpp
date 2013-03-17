@@ -255,7 +255,7 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
-QString FuncParam(uint function, unsigned int value, QString paramT)
+QString FuncParam(uint function, unsigned int value, QString paramT,unsigned int adjustmode)
 {
   QStringList qs;
   if (function==FuncPlaySound) {
@@ -284,8 +284,28 @@ QString FuncParam(uint function, unsigned int value, QString paramT)
     } else {
       return paramT;
     }
-  } 
-
+  } else if ((function>FuncBackgroundMusicPause) && (function<FuncCount)) {
+    switch (adjustmode) {
+      case 0:
+        return QObject::tr("Value ")+QString("%1").arg(value);
+        break;
+      case 1:
+        return RawSource(value).toString();
+        break;
+      case 2:
+        return RawSource(value).toString();
+        break;
+      case 3:
+        if (value==0) {
+          return QObject::tr("Decr:")+QString(" -1");
+        } else {
+          return QObject::tr("Incr:")+QString(" +1");
+        }
+        break;
+      default:
+        return "";
+    } 
+  }
   return "";
 }
 

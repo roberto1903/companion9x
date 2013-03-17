@@ -1051,7 +1051,7 @@ void compareDialog::printFSwitches()
   for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
   {
     if (g_model1->funcSw[i].swtch.type || g_model2->funcSw[i].swtch.type) {
-      if ((g_model1->funcSw[i].swtch != g_model2->funcSw[i].swtch) || (g_model1->funcSw[i].func!=g_model2->funcSw[i].func)) {
+      if ((g_model1->funcSw[i].swtch != g_model2->funcSw[i].swtch) || (g_model1->funcSw[i].func!=g_model2->funcSw[i].func) || (g_model1->funcSw[i].adjustMode!=g_model2->funcSw[i].adjustMode) || (g_model1->funcSw[i].param!=g_model2->funcSw[i].param)) {
         color1="green";
         color2="red";
       } else {
@@ -1062,14 +1062,14 @@ void compareDialog::printFSwitches()
       if (g_model1->funcSw[i].swtch.type) {
         str.append(doTC(g_model1->funcSw[i].swtch.toString(),color1));
         str.append(doTC(getFuncName(g_model1->funcSw[i].func),color1));
-        str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param,g_model1->funcSw[i].paramarm),color1));        
+        str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param,g_model1->funcSw[i].paramarm, g_model1->funcSw[i].adjustMode),color1));        
         int index=g_model1->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
           str.append(doTC(getRepeatString(g_model1->funcSw[i].repeatParam),color1));
         } else {
           str.append(doTC( "---",color1));
         }
-        if (index<=FuncInstantTrim) {
+        if ((index<=FuncInstantTrim) || (index>FuncBackgroundMusicPause)) {
           str.append(doTC((g_model1->funcSw[i].enabled ? "ON" : "OFF"),color1));
         } else {
           str.append(doTC( "---",color1));
@@ -1081,14 +1081,14 @@ void compareDialog::printFSwitches()
       if (g_model2->funcSw[i].swtch.type) {
         str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
-        str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param,g_model2->funcSw[i].paramarm),color2));        
+        str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param,g_model2->funcSw[i].paramarm, g_model2->funcSw[i].adjustMode),color2));        
         int index=g_model2->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
           str.append(doTC(getRepeatString(g_model2->funcSw[i].repeatParam),color2));
         } else {
           str.append(doTC( "---",color2));
         }
-        if (index<=FuncInstantTrim) {
+        if ((index<=FuncInstantTrim) || (index>FuncBackgroundMusicPause)) {
           str.append(doTC((g_model2->funcSw[i].enabled ? "ON" : "OFF"),color2));
         } else {
           str.append(doTC( "---",color2));
