@@ -1686,7 +1686,6 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
         break;
     }
-//TODO second AND need to populate only valid switches
     cswitchAnd[i]->setVisible(true);
     populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), 0, DefaultContext, POPULATE_AND_SWITCHES);
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {

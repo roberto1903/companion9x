@@ -1033,8 +1033,8 @@ void compareDialog::printFSwitches()
   QString color1;
   QString color2;
   int sc=0;
-  QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-  str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
+  QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-before:always;\" width=\"100%\">";
+  str.append("<tr><td><h2>"+tr("Custom Functions")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
   str.append("<td width=\"12%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
@@ -1065,9 +1065,9 @@ void compareDialog::printFSwitches()
         str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param,g_model1->funcSw[i].paramarm),color1));        
         int index=g_model1->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-          str.append(doTC(getRepeatString(g_model1->funcSw[i].repeatParam),"green"));
+          str.append(doTC(getRepeatString(g_model1->funcSw[i].repeatParam),color1));
         } else {
-          str.append(doTC( "---","green"));
+          str.append(doTC( "---",color1));
         }
         if (index<=FuncInstantTrim) {
           str.append(doTC((g_model1->funcSw[i].enabled ? "ON" : "OFF"),color1));
@@ -1075,18 +1075,18 @@ void compareDialog::printFSwitches()
           str.append(doTC( "---",color1));
         }
       } else {
-        str.append("<td>&nbsp;</td><td>&nbsp;</td>");
+        str.append("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
       }
-      str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
+      str.append(doTC(tr("CFn")+QString("%1").arg(i+1),"",true));
       if (g_model2->funcSw[i].swtch.type) {
         str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
         str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param,g_model2->funcSw[i].paramarm),color2));        
         int index=g_model2->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-          str.append(doTC(getRepeatString(g_model2->funcSw[i].repeatParam),"green"));
+          str.append(doTC(getRepeatString(g_model2->funcSw[i].repeatParam),color2));
         } else {
-          str.append(doTC( "---","green"));
+          str.append(doTC( "---",color2));
         }
         if (index<=FuncInstantTrim) {
           str.append(doTC((g_model2->funcSw[i].enabled ? "ON" : "OFF"),color2));
@@ -1113,13 +1113,13 @@ void compareDialog::printSafetySwitches()
   QString color2;
   int sc=0;
   QString str = "<table border=1 cellspacing=0 cellpadding=3  style=\"page-break-before:always;\" width=\"100%\">";
-  str.append("<tr><td><h2>"+tr("Function Switches")+"</h2></td></tr>");
+  str.append("<tr><td><h2>"+tr("Safety Switches")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"100%\"><tr>");
   str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Value")+"</b></td>");
   str.append("<td width=\"10%\">&nbsp;</td>");
   str.append("<td width=\"8%\" align=\"center\"><b>"+tr("Switch")+"</b></td>");
-  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Function")+"</b></td>");
+  str.append("<td width=\"37%\" align=\"center\"><b>"+tr("Value")+"</b></td>");
   str.append("</tr>");
   for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++)
   {
@@ -1139,7 +1139,7 @@ void compareDialog::printSafetySwitches()
       else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td>");
       }
-      str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
+      str.append(doTC(tr("CH")+QString("%1").arg(i+1),"",true));
       if (g_model2->safetySw[i].swtch.type) {
         str.append(doTC(g_model2->safetySw[i].swtch.toString(),color2));
         str.append(doTC(QString::number(g_model2->safetySw[i].val),color2));
