@@ -1898,6 +1898,7 @@ void ModelEdit::tabCustomFunctions()
 
     fswtchParamArmT[i] = new QComboBox(this);
     fswtchParamArmT[i]->setProperty("functionIndex", i);
+    populateFuncParamArmTCB(fswtchParamArmT[i],&g_model, g_model.funcSw[i].paramarm);
     fswtchParamArmT[i]->setEditable(true);
     paramLayout->addWidget(fswtchParamArmT[i]);
 

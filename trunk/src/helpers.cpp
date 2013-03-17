@@ -69,6 +69,16 @@ void populateCustomScreenFieldCB(QComboBox *b, unsigned int value, bool last=fal
   b->setMaxVisibleItems(10);
 }
 
+QString getRepeatString(unsigned int val) 
+{
+  if (val==0) {
+    return QObject::tr("No repeat");
+  } else {
+    unsigned int step = IS_ARM(GetEepromInterface()->getBoard()) ? 5 : 10;
+    return QObject::tr("%1 sec").arg(step*val);
+  }
+}
+
 QString getFuncName(unsigned int val)
 {
   if (val < NUM_SAFETY_CHNOUT) {
@@ -245,7 +255,7 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
-QString FuncParam(uint function, unsigned int value)
+QString FuncParam(uint function, unsigned int value, QString paramT)
 {
   QStringList qs;
   if (function==FuncPlaySound) {
@@ -268,6 +278,13 @@ QString FuncParam(uint function, unsigned int value)
     RawSource item(value);
     return item.toString();
   }
+  else if ((function==FuncPlayPrompt) || (function==FuncPlayBoth)) {
+    if ( GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+      return QString("%1").arg(value+256);
+    } else {
+      return paramT;
+    }
+  } 
 
   return "";
 }

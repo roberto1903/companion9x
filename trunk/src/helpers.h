@@ -33,7 +33,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populateRepeatCB(QComboBox *b, unsigned int value);
 void populateGVmodeCB(QComboBox *b, unsigned int value);
-QString FuncParam(uint function, unsigned int value);
+QString FuncParam(uint function, unsigned int value, QString paramT="");
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsigned int adjustmode=0);
 void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);
 void populatePhasesCB(QComboBox *b, int value);
@@ -64,6 +64,7 @@ QString getPhaseName(int val, char * phasename=NULL);
 QString getStickStr(int index);
 QString getCSWFunc(int val);
 QString getFuncName(unsigned int val);
+QString getRepeatString(unsigned int val);
 QString getSignedStr(int value);
 QString getCurveStr(int curve);
 QString getGVarString(int16_t val, bool sign=false);
