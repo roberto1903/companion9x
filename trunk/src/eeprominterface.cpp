@@ -48,7 +48,6 @@ int RawSource::getDecimals(const ModelData & Model)
       case 12:
         return 2;
       case 13:
-      case 14:
       case 15:
         return 1;
       default:
@@ -77,6 +76,7 @@ double RawSource::getMin(const ModelData & Model)
             return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case TELEMETRY_SOURCE_ALT:
+        case TELEMETRY_SOURCE_GPS_ALT:
           return -500;
         case TELEMETRY_SOURCE_T1:
         case TELEMETRY_SOURCE_T2:
@@ -109,6 +109,7 @@ double RawSource::getMax(const ModelData & Model)
             return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case TELEMETRY_SOURCE_ALT:
+        case TELEMETRY_SOURCE_GPS_ALT:
           return 1540;
         case TELEMETRY_SOURCE_RPM:
           return 12750;
@@ -121,8 +122,6 @@ double RawSource::getMax(const ModelData & Model)
           return 944;
         case TELEMETRY_SOURCE_DIST:
           return 2040;
-        case TELEMETRY_SOURCE_GPS_ALT:
-          return 1020;
         case TELEMETRY_SOURCE_CELL:
           return 5.1;
         case TELEMETRY_SOURCE_CELLS_SUM:
