@@ -29,7 +29,7 @@ void populateBacklightCB(QComboBox *b, const uint8_t value);
 #define POPULATE_ONOFF      1
 #define POPULATE_MSWITCHES  2
 #define POPULATE_AND_SWITCHES 1
-void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0, UseContext context=DefaultContext, unsigned int flags=0);
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0, UseContext context=DefaultContext);
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populateRepeatCB(QComboBox *b, unsigned int value);
 void populateGVmodeCB(QComboBox *b, unsigned int value);

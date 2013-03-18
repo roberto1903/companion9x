@@ -1664,7 +1664,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
-        populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
+        populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
         cswitchOffset[i]->setMinimum(source.getMin(g_model));
         cswitchOffset[i]->setMaximum(source.getMax(g_model));
@@ -1682,12 +1682,12 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
         cswitchOffset[i]->setVisible(false);
-        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
-        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY);
+        populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
+        populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         break;
     }
     cswitchAnd[i]->setVisible(true);
-    populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), 0, DefaultContext, POPULATE_AND_SWITCHES);
+    populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), POPULATE_AND_SWITCHES);
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
       cswitchDuration[i]->setVisible(true);
       cswitchDuration[i]->setValue(g_model.customSw[i].duration/2.0);
