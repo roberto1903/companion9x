@@ -816,6 +816,7 @@ enum Capability {
  TimerTriggerB,
  PermTimers,
  FuncSwitches,
+ FuncAndSwitches,
  VoicesAsNumbers,
  ModelVoice,
  InstantTrimSW,

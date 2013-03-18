@@ -554,6 +554,13 @@ int Open9xInterface::getCapability(const Capability capability)
       return (board==BOARD_X9DA ? 22 : 9);
     case FuncSwitches:
       return (IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW);
+    case FuncAndSwitches:
+      if (board == BOARD_X9DA)
+        return 0;
+      else if (board == BOARD_SKY9X)
+	return 23;
+      else
+        return 3;
     case CustomSwitches:
       return (IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW);
     case CustomSwitchesExt:

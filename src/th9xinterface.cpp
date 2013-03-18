@@ -194,6 +194,8 @@ int Th9xInterface::getCapability(const Capability capability)
       return 9;
     case FuncSwitches:
       return 0;
+    case FuncAndSwitches:
+        return 0;
     case CustomSwitches:
       return TH9X_MAX_SWITCHES;
     case Outputs:
