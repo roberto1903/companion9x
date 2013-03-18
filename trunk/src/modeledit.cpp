@@ -125,7 +125,7 @@ ModelEdit::~ModelEdit()
 
 float ModelEdit::getBarStep(int barId) 
 {
-  switch (barId) {
+  switch (barId-1) {
     case TELEMETRY_SOURCE_TX_BATT:
       return  0.1;
       break;
@@ -2416,7 +2416,7 @@ void ModelEdit::tabTelemetry()
     int screen = j/4;
     int field = j%4;
     populateCustomScreenFieldCB(barsCB[j], g_model.frsky.screens[screen].body.bars[field].source, false, g_model.frsky.usrProto);
-    switch (g_model.frsky.screens[screen].body.bars[field].source) {
+    switch (g_model.frsky.screens[screen].body.bars[field].source-1) {
       case TELEMETRY_SOURCE_TX_BATT:
       case TELEMETRY_SOURCE_A1:
       case TELEMETRY_SOURCE_A1_MIN:
@@ -3462,7 +3462,7 @@ void ModelEdit::telBarCBcurrentIndexChanged(int index)
     minSB[bar]->setEnabled(true);
     maxSB[bar]->setEnabled(true);    
   }
-  switch (index) {
+  switch (index-1) {
     case TELEMETRY_SOURCE_TX_BATT:
     case TELEMETRY_SOURCE_A1:
     case TELEMETRY_SOURCE_A1_MIN:
