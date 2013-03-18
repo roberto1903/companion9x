@@ -380,7 +380,7 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
   else if (function>FuncPlayValue && function<FuncCount ) {
     switch (adjustmode) {
       case 1:
-        populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TELEMETRY);
+        populateSourceCB(b, RawSource(value), POPULATE_SOURCES);
         break;
       case 2:
         populateSourceCB(b, RawSource(value), POPULATE_GVARS);
@@ -658,7 +658,7 @@ void populateBacklightCB(QComboBox *b, const uint8_t value)
   }
 }
 
-void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr, UseContext context, unsigned int flags)
+void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr, UseContext context)
 {
   RawSwitch item;
 
@@ -748,7 +748,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
     }
   }
 
-  if (flags) {
+  if (attr & POPULATE_AND_SWITCHES) {
     b->clear();
     item = RawSwitch(SWITCH_TYPE_NONE);
     if (GetEepromInterface()->isAvailable(item, context)) {
@@ -756,14 +756,14 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
       if (item == value) b->setCurrentIndex(b->count()-1);
     }
     if (QString(GetEepromInterface()->getName()) != QString("Th9x") ) {
-      for (int i=1; i<=GetEepromInterface()->getCapability(Switches)-(GetEepromInterface()->getCapability(FuncAndSwitches) > 0 ? 1 : 0); i++) {
+      for (int i=1; i<=GetEepromInterface()->getCapability(Switches)-(GetEepromInterface()->getCapability(CustomAndSwitches) > 0 ? 1 : 0); i++) {
         item = RawSwitch(SWITCH_TYPE_SWITCH, i);
         if (GetEepromInterface()->isAvailable(item, context)) {
           b->addItem(item.toString(), item.toValue());
           if (item == value) b->setCurrentIndex(b->count()-1);
         }
       }
-      for (int i=(GetEepromInterface()->getCapability(FuncAndSwitches) == 3 || GetEepromInterface()->getCapability(FuncAndSwitches) == 23) ? 3 : 1; i<=GetEepromInterface()->getCapability(CustomSwitches)-(GetEepromInterface()->getCapability(FuncAndSwitches) >2 ? GetEepromInterface()->getCapability(FuncAndSwitches) : 0); i++) {
+      for (int i=(GetEepromInterface()->getCapability(CustomAndSwitches) == 3 || GetEepromInterface()->getCapability(CustomAndSwitches) == 23) ? 3 : 1; i<=GetEepromInterface()->getCapability(CustomSwitches)-(GetEepromInterface()->getCapability(CustomAndSwitches) >2 ? GetEepromInterface()->getCapability(CustomAndSwitches) : 0); i++) {
         item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
         b->addItem(item.toString(), item.toValue());
         if (item == value) b->setCurrentIndex(b->count()-1);
@@ -854,6 +854,15 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     item = RawSource(SOURCE_TYPE_3POS);
     b->addItem(item.toString(), item.toValue());
     if (item == source) b->setCurrentIndex(b->count()-1);
+  }
+  
+    if (flags & POPULATE_SOURCES) {
+// THR, RUD, ELE need to be added
+    for (int i=7; i<10; i++) {
+      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
+      b->addItem(item.toString(), item.toValue());
+      if (item == source) b->setCurrentIndex(b->count()-1);
+    }
   }
 
   if (flags & POPULATE_SWITCHES) {
