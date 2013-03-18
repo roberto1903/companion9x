@@ -1094,7 +1094,7 @@ QString getFrSkyMeasure(int units)
 
 QString getFrSkySrc(int index)
 {
-  return RawSource(SOURCE_TYPE_TELEMETRY, index).toString();
+  return RawSource(SOURCE_TYPE_TELEMETRY, index-1).toString();
 }
 
 
