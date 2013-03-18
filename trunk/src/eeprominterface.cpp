@@ -269,6 +269,9 @@ QString RawSource::toString()
                           QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
                           QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
                           QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
+  if (index<0) {
+    return QObject::tr("----");
+  }
   switch(type) {
     case SOURCE_TYPE_STICK:
       return (GetEepromInterface()->getBoard() == BOARD_X9DA ? sticksX9D[index] : sticks9X[index]);
