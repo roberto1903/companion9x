@@ -1169,6 +1169,7 @@ class CustomFunctionField: public TransformedField {
           if (version >= 213) {
             fn.func = AssignFunc(((fn.func >> 2) << 2) + ((_union_param >> 1) & 0x03));
           }
+          fn.param = (int8_t)fn.param;
         }
       }
     }
