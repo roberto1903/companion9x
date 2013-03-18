@@ -76,6 +76,8 @@ double RawSource::getMin(const ModelData & Model)
           else {
             return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
+        case TELEMETRY_SOURCE_ALT:
+          return -500;
         case TELEMETRY_SOURCE_T1:
         case TELEMETRY_SOURCE_T2:
           return -30;
@@ -107,7 +109,7 @@ double RawSource::getMax(const ModelData & Model)
             return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
           }
         case TELEMETRY_SOURCE_ALT:
-          return 1020;
+          return 1540;
         case TELEMETRY_SOURCE_RPM:
           return 12750;
         case TELEMETRY_SOURCE_FUEL:
@@ -155,7 +157,7 @@ double RawSource::getOffset(const ModelData & Model)
         }
       case TELEMETRY_SOURCE_ALT:
       case TELEMETRY_SOURCE_GPS_ALT:
-        return 512;
+        return 524;
       case TELEMETRY_SOURCE_RPM:
         return 6400;
       case TELEMETRY_SOURCE_FUEL:
@@ -220,7 +222,7 @@ double RawSource::getStep(const ModelData & Model)
           }
         case TELEMETRY_SOURCE_ALT:
         case TELEMETRY_SOURCE_GPS_ALT:
-          return 4;
+          return 8;
         case TELEMETRY_SOURCE_RPM:
           return 50;
         case TELEMETRY_SOURCE_SPEED:
