@@ -859,9 +859,12 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   
   if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=GetEepromInterface()->getCapability(Switches); i++) {
-      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
-      b->addItem(item.toString(), item.toValue());
-      if (item == source) b->setCurrentIndex(b->count()-1);
+      // TODO temporary for this release ...
+      if (GetEepromInterface()->getBoard() == BOARD_X9DA || i<4 || i>6) {
+        item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
+        b->addItem(item.toString(), item.toValue());
+        if (item == source) b->setCurrentIndex(b->count()-1);
+      }
     }
     for (int i=1; i<=GetEepromInterface()->getCapability(CustomSwitches); i++) {
       item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue());

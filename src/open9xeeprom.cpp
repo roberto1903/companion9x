@@ -115,14 +115,16 @@ class SourcesConversionTable: public ConversionTable {
 
       if (!(flags & FLAG_NOSWITCHES)) {
         if (recent) {
+          // TODO remove SOURCE_TYPE_3POS
+          // TODO add SOURCE_TYPE_CUSTOM_SWITCH
           for (int i=1; i<=3; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
           for (int i=7; i<=9; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
         }
         else {
           for (int i=1; i<=9; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, switchIndex(i, board, version)).toValue()), val++);
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
         }
         for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++)
           addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue()), val++);
