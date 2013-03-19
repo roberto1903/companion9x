@@ -955,7 +955,7 @@ class SwitchesWarningField: public TransformedField {
     {
       bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
       if (recent) {
-        _sw = (sw & 0b11000001) + ((sw & 0b110000) >> 3) + ((sw & 0b001110) << 2);
+        _sw = (sw & 0xC1) + ((sw & 0x30) >> 3) + ((sw & 0x0E) << 2);
       }
       else {
         _sw = sw;
@@ -966,7 +966,7 @@ class SwitchesWarningField: public TransformedField {
     {
       bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
       if (recent) {
-        sw = (_sw & 0b11000001) + ((_sw & 0b111000) >> 2) + ((_sw & 0b000110) << 3);
+        sw = (_sw & 0xC1) + ((_sw & 0x38) >> 2) + ((_sw & 0x06) << 3);
       }
       else {
         sw = _sw;
