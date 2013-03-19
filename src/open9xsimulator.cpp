@@ -141,6 +141,7 @@ void Open9xSimulator::stop()
 void Open9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
+#define g_chans512 channelOutputs
 #include "simulatorimport.h"
   outputs.beep = g_beepCnt;
   g_beepCnt = 0;

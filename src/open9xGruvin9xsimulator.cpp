@@ -139,6 +139,7 @@ void Open9xGruvin9xSimulator::stop()
 void Open9xGruvin9xSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
+#define g_chans512 channelOutputs
 #include "simulatorimport.h"
 }
 

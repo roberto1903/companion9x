@@ -372,15 +372,15 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
     b->setCurrentIndex(value);
   }
   else if (function==FuncVolume) {
-    populateSourceCB(b, RawSource(value), POPULATE_SOURCES);
+    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TRIMS);
   }
   else if (function==FuncPlayValue) {
-    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TELEMETRY);
+    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TRIMS|POPULATE_TELEMETRY);
   }
-  else if (function>FuncPlayValue && function<FuncCount ) {
+  else if (function>=FuncAdjustGV1 && function<=FuncAdjustGV5 ) {
     switch (adjustmode) {
       case 1:
-        populateSourceCB(b, RawSource(value), POPULATE_SOURCES);
+        populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TRIMS|POPULATE_SWITCHES);
         break;
       case 2:
         populateSourceCB(b, RawSource(value), POPULATE_GVARS);
@@ -740,6 +740,7 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
       if (item == value) b->setCurrentIndex(b->count()-1);
     }
   }
+
   if (attr & POPULATE_MSWITCHES) {
     if (attr & POPULATE_ONOFF) {
       item = RawSwitch(SWITCH_TYPE_ONM);
@@ -856,15 +857,6 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
     if (item == source) b->setCurrentIndex(b->count()-1);
   }
   
-    if (flags & POPULATE_SOURCES) {
-// THR, RUD, ELE need to be added
-    for (int i=7; i<10; i++) {
-      item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
-      b->addItem(item.toString(), item.toValue());
-      if (item == source) b->setCurrentIndex(b->count()-1);
-    }
-  }
-
   if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=GetEepromInterface()->getCapability(Switches); i++) {
       item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());

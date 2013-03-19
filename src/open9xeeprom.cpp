@@ -1037,7 +1037,7 @@ class CustomFunctionField: public TransformedField {
             if (fn.adjustMode == 1)
               sourcesConversionTable.exportValue(fn.param, (int &)value);
             else if (fn.adjustMode == 2)
-              _param = RawSource(fn.param).index;
+              value = RawSource(fn.param).index;
             else
               value = fn.param;
           }
@@ -1114,21 +1114,23 @@ class CustomFunctionField: public TransformedField {
           if (version >= 214) {
             fn.adjustMode = _mode;
             if (fn.adjustMode == 1)
-              sourcesConversionTable.importValue(_param, (int &)fn.param);
+              sourcesConversionTable.importValue(value, (int &)fn.param);
             else if (fn.adjustMode == 2)
-              fn.param = RawSource(SOURCE_TYPE_GVAR, _param).toValue();
+              fn.param = RawSource(SOURCE_TYPE_GVAR, value).toValue();
+            else
+              fn.param = value;
           }
           else {
-            sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable.importValue(value, (int &)fn.param);
           }
         }
         else if (fn.func == FuncPlayValue) {
           if (version >= 213) {
             fn.repeatParam = _union_param * 10;
-            sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable.importValue(value, (int &)fn.param);
           }
           else {
-            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
+            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(value, (int &)fn.param);
           }
         }
         else {

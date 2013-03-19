@@ -137,6 +137,7 @@ void Open9xM128Simulator::stop()
 void Open9xM128Simulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
+#define g_chans512 channelOutputs
 #include "simulatorimport.h"
 }
 
