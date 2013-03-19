@@ -26,9 +26,10 @@
 void populateGvSourceCB(QComboBox *b, int value);
 void populateRotEncCB(QComboBox *b, int value, int renumber);
 void populateBacklightCB(QComboBox *b, const uint8_t value);
-#define POPULATE_ONOFF      1
-#define POPULATE_MSWITCHES  2
-#define POPULATE_AND_SWITCHES 1
+
+#define POPULATE_ONOFF        0x01
+#define POPULATE_MSWITCHES    0x02
+#define POPULATE_AND_SWITCHES 0x04
 void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr=0, UseContext context=DefaultContext);
 void populateFuncCB(QComboBox *b, unsigned int value);
 void populateRepeatCB(QComboBox *b, unsigned int value);

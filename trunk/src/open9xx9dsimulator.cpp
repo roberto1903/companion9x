@@ -160,6 +160,7 @@ void Open9xX9DSimulator::stop()
 void Open9xX9DSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
+#define g_chans512 channelOutputs
 #include "simulatorimport.h"
 }
 
