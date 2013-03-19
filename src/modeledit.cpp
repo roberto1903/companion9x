@@ -1299,7 +1299,7 @@ void ModelEdit::updateHeliTab()
     heliEditLock = true;
 
     ui->swashTypeCB->setCurrentIndex(g_model.swashRingData.type);
-    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, POPULATE_SOURCES | POPULATE_SWITCHES);
+    populateSourceCB(ui->swashCollectiveCB, g_model.swashRingData.collectiveSource, POPULATE_SOURCES | POPULATE_SWITCHES | POPULATE_TRIMS);
     ui->swashRingValSB->setValue(g_model.swashRingData.value);
     ui->swashInvertELE->setChecked(g_model.swashRingData.invertELE);
     ui->swashInvertAIL->setChecked(g_model.swashRingData.invertAIL);
