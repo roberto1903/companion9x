@@ -298,7 +298,8 @@ class HeliField: public StructField {
       Append(new BoolField<1>(heli.invertAIL));
       Append(new BoolField<1>(heli.invertCOL));
       Append(new UnsignedField<5>(heli.type));
-      Append(new SourceField<8>(heli.collectiveSource, board, version, FLAG_NOSWITCHES));
+      Append(new SourceField<8>(heli.collectiveSource, board, version));
+      //, FLAG_NOSWITCHES)); Fix shift in collective
       Append(new UnsignedField<8>(heli.value));
     }
 };
