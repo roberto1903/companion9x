@@ -204,10 +204,20 @@ class TimerModeField: public TransformedField {
     {
       if (_mode <= -numCSW-10)
         mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(_mode+numCSW+10));
-      else if (_mode <= -1)
+      else if (_mode <= -7)
         mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+1));
+      else if (_mode <= -4)
+        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+4));
+      else if (_mode <= -1)
+        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode-2));
       else if (_mode < 5)
         mode = TimerMode(_mode);
+      else if (_mode < 8)
+       mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-2));
+      else if (_mode < 11)
+       mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-8));
+      else if (_mode < 14)
+        mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
       else if (_mode < numCSW+14)
         mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
       else
