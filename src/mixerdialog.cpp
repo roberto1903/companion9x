@@ -18,8 +18,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SOURCES | POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | (GetEepromInterface()->getCapability(GvarsAsSources) ? POPULATE_GVARS : 0));
     ui->sourceCB->removeItem(0);
-    populateGVarCB(ui->weightCB, md->weight, -125, +125);
-    populateGVarCB(ui->offsetCB, md->sOffset, -125, +125);
+    populateGVarCB(ui->weightCB, md->weight, -245, +245);
+    populateGVarCB(ui->offsetCB, md->sOffset, -245, +245);
     populateGVarCB(ui->differentialCB, md->differential, -100, +100);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
