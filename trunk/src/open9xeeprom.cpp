@@ -405,33 +405,51 @@ class PhaseField: public TransformedField {
     int trimExt[NUM_STICKS];
 };
 
+
+int smallGvarToEEPROM(int gvar) {
+    if (gvar < -10000) {
+      gvar = 128 + gvar + 10000;
+    } else if (gvar > 10000) {
+      gvar = -128+gvar - 10001;
+    }
+	return gvar;
+}
+
+int smallGvarToC9x(int gvar) {
+    if (gvar>110) {
+        gvar = gvar-128 - 10000;
+    } else if (gvar<-110) {
+        gvar = gvar+128 + 10001;
+    }
+	return gvar;
+}
+
+
 void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, const BoardEnum board, const int version)
 {
   if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
-    if (gvar < -125) {
+    if (gvar < -10000) {
       _gvarParam = 0;
-      _gvar = 256 + gvar + 125;
+      _gvar = 256 + gvar + 10000;
     }
-    else if (gvar > 125) {
+    else if (gvar > 10000) {
       _gvarParam = 1;
-      _gvar = gvar - 126;
+      _gvar = gvar - 10001;
     }
     else {
-      if (gvar < 0)
-        _gvarParam = 1;
-      else
-        _gvarParam = 0;
+      if (gvar < 0) _gvarParam = 1;
+      else          _gvarParam = 0;
       _gvar = gvar;
     }
   }
   else {
-    if (gvar < -125) {
+    if (gvar < -10000) {
       _gvarParam = 1;
-      _gvar = gvar + 125;
+      _gvar = gvar + 10000;
     }
-    else if (gvar > 125) {
+    else if (gvar > 10000) {
       _gvarParam = 1;
-      _gvar = gvar - 126;
+      _gvar = gvar - 10001;
     }
     else {
       _gvarParam = 0;
@@ -443,17 +461,15 @@ void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, cons
 void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam, const BoardEnum board, const int version)
 {
   if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
-    if (_gvarParam == 0) {
-      if (_gvar >= -5 && _gvar < 0)
-        gvar = _gvar - 125;
-      else
-        gvar = _gvar;
-    }
-    else {
-      if (_gvar >= 0 && _gvar <= 4)
-        gvar = _gvar + 126;
-      else
-        gvar = _gvar;
+	gvar = _gvar;
+	if (_gvarParam) {
+	  gvar|=-256;   // set all higher bits to simulate negative value
+	}
+
+    if (gvar>245) {
+        gvar = gvar-256 - 10000;
+    } else if (gvar<-245) {
+        gvar = gvar+256 + 10001;
     }
   }
   else {
@@ -461,21 +477,21 @@ void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam,
       gvar = _gvar;
     }
     else if (_gvar >= 0) {
-      gvar = 126 + _gvar;
+      gvar = 10001 + _gvar;
     }
     else {
-      gvar = -125 + _gvar;
+      gvar = -10000 + _gvar;
     }
   }
 }
 
 void exportGvarParam(const int gvar, int & _gvar)
 {
-  if (gvar < -125) {
-    _gvar = 1024 + gvar + 125;
+  if (gvar < -10000) {
+    _gvar = 1024 + gvar + 10000;
   }
-  else if (gvar > 125) {
-    _gvar = 1024 + gvar - 126;
+  else if (gvar > 10000) {
+    _gvar = 1024 + gvar - 10001;
   }
   else {
     _gvar = gvar;
@@ -485,10 +501,10 @@ void exportGvarParam(const int gvar, int & _gvar)
 void importGvarParam(int & gvar, const int _gvar)
 {
   if (_gvar >= 1024) {
-    gvar = 126 + _gvar - 1024;
+    gvar = 10001 + _gvar - 1024;
   }
   else if (gvar >= 1019) {
-    gvar = -126 + 1019 - _gvar;
+    gvar = -10001 + 1019 - _gvar;
   }
   else {
     gvar = _gvar;
@@ -545,7 +561,7 @@ class MixField: public TransformedField {
         internalField.Append(new BoolField<1>(mix.noExpo));
         internalField.Append(new UnsignedField<1>(_weightMode));
         internalField.Append(new UnsignedField<1>(_offsetMode));
-        internalField.Append(new SignedField<8>(_weight));
+        internalField.Append(new UnsignedField<8>((unsigned int&)_weight));
         internalField.Append(new SwitchField<6>(mix.swtch, board, version));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
         internalField.Append(new UnsignedField<5>(mix.phases));
@@ -557,7 +573,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<4>(mix.speedUp));
         internalField.Append(new UnsignedField<4>(mix.speedDown));
         internalField.Append(new SignedField<8>(_curveParam));
-        internalField.Append(new SignedField<8>(_offset));
+        internalField.Append(new UnsignedField<8>((unsigned int&)_offset));
       }
     }
 
@@ -566,7 +582,7 @@ class MixField: public TransformedField {
       if (mix.destCh && mix.srcRaw.type != SOURCE_TYPE_NONE) {
         _destCh = mix.destCh - 1;
         _curveMode = mix.curve;
-        _curveParam = (mix.curve ? mix.curve : mix.differential);
+        _curveParam = (mix.curve ? mix.curve : smallGvarToEEPROM(mix.differential));
       }
       else {
         mix.clear();
@@ -597,7 +613,7 @@ class MixField: public TransformedField {
         if (_curveMode)
           mix.curve = _curveParam;
         else
-          mix.differential = _curveParam;
+          mix.differential = smallGvarToC9x(_curveParam);
       }
 
       if (IS_ARM(board)) {
@@ -654,19 +670,23 @@ class ExpoField: public TransformedField {
         internalField.Append(new UnsignedField<2>(expo.chn));
         internalField.Append(new UnsignedField<5>(expo.phases));
         internalField.Append(new BoolField<1>(_curveMode));
-        internalField.Append(new SignedField<8>(expo.weight));
-        internalField.Append(new SignedField<8>(expo.curveParam));
+        internalField.Append(new SignedField<8>(_weight));
+        internalField.Append(new SignedField<8>(_curveParam));
       }
     }
 
     virtual void beforeExport()
     {
       _curveMode = (expo.curveMode && expo.curveParam);
+	  _weight    =smallGvarToEEPROM(expo.weight);
+	  _curveParam=smallGvarToEEPROM(expo.curveParam);
     }
 
     virtual void afterImport()
     {
-      expo.curveMode = _curveMode;
+      expo.curveMode  = _curveMode;
+	  expo.weight     = smallGvarToC9x(_weight);
+	  expo.curveParam = smallGvarToC9x(_curveParam);
     }
 
   protected:
@@ -674,6 +694,8 @@ class ExpoField: public TransformedField {
     ExpoData & expo;
     BoardEnum board;
     bool _curveMode;
+	int  _weight;
+	int  _curveParam;
 };
 
 class LimitField: public StructField {
