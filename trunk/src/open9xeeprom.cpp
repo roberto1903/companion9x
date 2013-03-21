@@ -405,48 +405,67 @@ class PhaseField: public TransformedField {
     int trimExt[NUM_STICKS];
 };
 
-void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, int version)
+void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, const BoardEnum board, const int version)
 {
-  if (version>=213) {
-      if (gvar < -125) {
-        _gvarParam = 0;
-        _gvar = 256+ gvar + 125;
-      }
-      else if (gvar > 125) {
+  if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
+    if (gvar < -125) {
+      _gvarParam = 0;
+      _gvar = 256 + gvar + 125;
+    }
+    else if (gvar > 125) {
+      _gvarParam = 1;
+      _gvar = gvar - 126;
+    }
+    else {
+      if (gvar < 0)
         _gvarParam = 1;
-        _gvar = gvar - 126;
-      }
-      else {
-        if (gvar<0) _gvarParam=1;
-        else _gvarParam = 0;
-        _gvar = gvar;
-      }
-  } else { 
-	  if (gvar < -125) {
-		_gvarParam = 1;
-		_gvar = gvar + 125;
-	  }
-	  else if (gvar > 125) {
-		_gvarParam = 1;
-		_gvar = gvar - 126;
-	  }
-	  else {
-		_gvarParam = 0;
-		_gvar = gvar;
-	  }
+      else
+        _gvarParam = 0;
+      _gvar = gvar;
+    }
+  }
+  else {
+    if (gvar < -125) {
+      _gvarParam = 1;
+      _gvar = gvar + 125;
+    }
+    else if (gvar > 125) {
+      _gvarParam = 1;
+      _gvar = gvar - 126;
+    }
+    else {
+      _gvarParam = 0;
+      _gvar = gvar;
+    }
   }
 }
 
-void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam)
+void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam, const BoardEnum board, const int version)
 {
-  if (_gvarParam == 0) {
-    gvar = _gvar;
-  }
-  else if (_gvar >= 0) {
-    gvar = 126 + _gvar;
+  if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
+    if (_gvarParam == 0) {
+      if (_gvar >= -5 && _gvar < 0)
+        gvar = _gvar - 125;
+      else
+        gvar = _gvar;
+    }
+    else {
+      if (_gvar >= 0 && _gvar <= 4)
+        gvar = _gvar + 126;
+      else
+        gvar = _gvar;
+    }
   }
   else {
-    gvar = -125 + _gvar;
+    if (_gvarParam == 0) {
+      gvar = _gvar;
+    }
+    else if (_gvar >= 0) {
+      gvar = 126 + _gvar;
+    }
+    else {
+      gvar = -125 + _gvar;
+    }
   }
 }
 
@@ -561,11 +580,11 @@ class MixField: public TransformedField {
         if (version >= 214)
           exportGvarParam(mix.sOffset, _offset);
         else
-          splitGvarParam(mix.sOffset, _offset, _offsetMode, version);
+          splitGvarParam(mix.sOffset, _offset, _offsetMode, board, version);
       }
       else {
-        splitGvarParam(mix.weight, _weight, _weightMode, version);
-        splitGvarParam(mix.sOffset, _offset, _offsetMode, version);
+        splitGvarParam(mix.weight, _weight, _weightMode, board, version);
+        splitGvarParam(mix.sOffset, _offset, _offsetMode, board, version);
       }
     }
 
@@ -586,11 +605,11 @@ class MixField: public TransformedField {
         if (version >= 214)
           importGvarParam(mix.sOffset, _offset);
         else
-          concatGvarParam(mix.sOffset, _offset, _offsetMode);
+          concatGvarParam(mix.sOffset, _offset, _offsetMode, board, version);
       }
       else {
-        concatGvarParam(mix.weight, _weight, _weightMode);
-        concatGvarParam(mix.sOffset, _offset, _offsetMode);
+        concatGvarParam(mix.weight, _weight, _weightMode, board, version);
+        concatGvarParam(mix.sOffset, _offset, _offsetMode, board, version);
       }
     }
 
