@@ -8,6 +8,7 @@
 #define HAS_PERSISTENT_TIMERS(board)         (IS_ARM(board) || board == BOARD_GRUVIN9X)
 #define HAS_LARGE_LCD(board)                 (board == BOARD_TARANIS)
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
+#define MAX_POTS(board)                      (board==BOARD_TARANIS ? 4 : 3)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
 #define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
 #define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
@@ -91,7 +92,7 @@ class SourcesConversionTable: public ConversionTable {
         addConversion(RawSource(SOURCE_TYPE_NONE), val++);
       }
 
-      for (int i=0; i<7; i++)
+      for (int i=0; i<4+MAX_POTS(board); i++)
         addConversion(RawSource(SOURCE_TYPE_STICK, i), val++);
 
       for (int i=0; i<MAX_ROTARY_ENCODERS(board); i++)
@@ -1578,6 +1579,14 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new UnsignedField<8>(modelData.ppm2SCH));
     Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
   }
+
+  if (board == BOARD_TARANIS) {
+    Append(new SignedField<8>(modelData.rfProtocol));
+    Append(new UnsignedField<8>(modelData.ppmSCH));
+    Append(new UnsignedField<8>(modelData.failsafeMode));
+    for (int i=0; i<16; i++)
+      Append(new SignedField<16>(modelData.failsafeChannels[i]));
+  }
 }
 
 Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
@@ -1675,6 +1684,10 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
       internalField.Append(new UnsignedField<8>(generalData.btBaudrate)); // TODO
       internalField.Append(new BoolField<8>(generalData.optrexDisplay)); // TODO
       internalField.Append(new UnsignedField<8>(generalData.sticksGain)); // TODO
+    }
+    if (version >= 214) {
+      internalField.Append(new UnsignedField<8>(generalData.rotarySteps)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.countryCode)); // TODO
     }
   }
 }

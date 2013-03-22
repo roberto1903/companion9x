@@ -86,7 +86,7 @@ class DataField {
       return result;
     }
 
-  private:
+  protected:
     const char *name;
 };
 
@@ -608,7 +608,8 @@ class ConversionField: public TransformedField {
       if (table) {
         if (table->exportValue(field, _field))
           return;
-        EEPROMWarnings += error + "\n";
+        if (!error.isEmpty())
+          EEPROMWarnings += error + "\n";
       }
       else if (shift) {
         if (field < min) _field = min + shift;

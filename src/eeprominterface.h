@@ -434,6 +434,8 @@ class GeneralSettings {
     unsigned int mAhWarn;
     unsigned int btBaudrate;
     unsigned int sticksGain;
+    unsigned int rotarySteps;
+    unsigned int countryCode;
 };
 
 class ExpoData {
@@ -748,6 +750,7 @@ class ModelData {
     uint8_t   modelVoice;
     TimerData timers[2];
     int       protocol;
+    int       rfProtocol;
     unsigned int ppmSCH;
     int       ppmNCH;
     unsigned int ppm2SCH;
@@ -787,6 +790,9 @@ class ModelData {
     uint8_t customdisplay[6];
 
     char bitmap[10+1];
+
+    unsigned int failsafeMode;
+    int failsafeChannels[C9X_NUM_CHNOUT];
 
     void clear();
     bool isempty();
