@@ -314,7 +314,7 @@ void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value)
   QStringList qs;
   b->clear();
   b->addItem("----");
-  int num_fsw=GetEepromInterface()->getCapability(FuncSwitches);
+  int num_fsw=GetEepromInterface()->getCapability(CustomFunctions);
   for(int i=0; i<num_fsw; i++) {
     if ((g_model->funcSw[i].func==FuncPlayPrompt || g_model->funcSw[i].func==FuncBackgroundMusic) && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
       QString temp=g_model->funcSw[i].paramarm;
@@ -867,7 +867,7 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   if (flags & POPULATE_SWITCHES) {
     for (int i=1; i<=GetEepromInterface()->getCapability(Switches); i++) {
       // TODO temporary for this release ...
-      if (GetEepromInterface()->getBoard() == BOARD_X9DA || i<4 || i>6) {
+      if (GetEepromInterface()->getBoard() == BOARD_TARANIS || i<4 || i>6) {
         item = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue());
         b->addItem(item.toString(), item.toValue());
         if (item == source) b->setCurrentIndex(b->count()-1);

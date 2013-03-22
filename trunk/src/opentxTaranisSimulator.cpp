@@ -14,12 +14,12 @@
  *
  */
 
-#include "open9xx9dsimulator.h"
+#include "opentxTaranisSimulator.h"
 #include "open9xinterface.h"
 
 #define SIMU
 #define SIMU_EXCEPTIONS
-#define PCBX9D
+#define PCBTARANIS
 #define CPUARM
 #define HELI
 #define TEMPLATES
@@ -58,38 +58,40 @@
 #include <exception>
 
 namespace Open9xX9D {
-#include "../open9x/x9d/board_x9d.cpp"
-#include "../open9x/x9d/pwr_driver.cpp"
-#include "../open9x/eeprom_common.cpp"
-#include "../open9x/eeprom_rlc.cpp"
-#include "../open9x/open9x.cpp"
-#include "../open9x/x9d/pulses_driver.cpp"
-#include "../open9x/x9d/rtc_driver.cpp"
-#include "../open9x/pulses_arm.cpp"
-#include "../open9x/stamp.cpp"
-#include "../open9x/menus.cpp"
-#include "../open9x/model_menus.cpp"
-#include "../open9x/general_menus.cpp"
-#include "../open9x/main_views.cpp"
-#include "../open9x/statistics_views.cpp"
-#include "../open9x/monitors_views.cpp"
-#include "../open9x/lcd.cpp"
-#include "../open9x/logs.cpp"
-#include "../open9x/rtc.cpp"
-#include "../open9x/x9d/keys_driver.cpp"
-#include "../open9x/keys.cpp"
-#include "../open9x/bmp.cpp"
+#include "../opentx/taranis/board_taranis.cpp"
+#include "../opentx/taranis/pwr_driver.cpp"
+#include "../opentx/eeprom_common.cpp"
+#include "../opentx/eeprom_rlc.cpp"
+#include "../opentx/opentx.cpp"
+#include "../opentx/taranis/pulses_driver.cpp"
+#include "../opentx/taranis/rtc_driver.cpp"
+#include "../opentx/pulses_arm.cpp"
+#include "../opentx/stamp.cpp"
+#include "../opentx/maths.cpp"
+#include "../opentx/menus.cpp"
+#include "../opentx/menu_model.cpp"
+#include "../opentx/menu_general.cpp"
+#include "../opentx/view_main.cpp"
+#include "../opentx/view_statistics.cpp"
+#include "../opentx/view_channels.cpp"
+#include "../opentx/view_telemetry.cpp"
+#include "../opentx/lcd.cpp"
+#include "../opentx/logs.cpp"
+#include "../opentx/rtc.cpp"
+#include "../opentx/taranis/keys_driver.cpp"
+#include "../opentx/keys.cpp"
+#include "../opentx/bmp.cpp"
 // TODO why?
 #undef SDCARD
-#include "../open9x/simpgmspace.cpp"
+#include "../opentx/simpgmspace.cpp"
 #define SDCARD
-#include "../open9x/templates.cpp"
-#include "../open9x/translations.cpp"
-#include "../open9x/frsky.cpp"
-#include "../open9x/x9d/audio_driver.cpp"
-#include "../open9x/audio_arm.cpp"
-#include "../open9x/translations/tts_en.cpp"
-#include "../open9x/haptic.cpp"
+#include "../opentx/templates.cpp"
+#include "../opentx/translations.cpp"
+#include "../opentx/telemetry_frsky.cpp"
+#include "../opentx/taranis/audio_driver.cpp"
+#include "../opentx/audio_arm.cpp"
+#include "../opentx/translations/tts_en.cpp"
+#include "../opentx/haptic.cpp"
 
 int16_t g_anas[NUM_STICKS+BOARD_X9D_NUM_POTS];
 
@@ -121,63 +123,63 @@ void resetTrims()
 
 using namespace Open9xX9D;
 
-Open9xX9DSimulator::Open9xX9DSimulator(Open9xInterface * open9xInterface):
+OpentxTaranisSimulator::OpentxTaranisSimulator(Open9xInterface * open9xInterface):
   open9xInterface(open9xInterface)
 {
 }
 
-bool Open9xX9DSimulator::timer10ms()
+bool OpentxTaranisSimulator::timer10ms()
 {
 #define TIMER10MS_IMPORT
 #include "simulatorimport.h"
 }
 
-uint8_t * Open9xX9DSimulator::getLcd()
+uint8_t * OpentxTaranisSimulator::getLcd()
 {
 #define GETLCD_IMPORT
 #include "simulatorimport.h"
 }
 
-bool Open9xX9DSimulator::lcdChanged(bool & lightEnable)
+bool OpentxTaranisSimulator::lcdChanged(bool & lightEnable)
 {
 #define LCDCHANGED_IMPORT
 #include "simulatorimport.h"
 }
 
-void Open9xX9DSimulator::start(RadioData &radioData, bool tests)
+void OpentxTaranisSimulator::start(RadioData &radioData, bool tests)
 {
   open9xInterface->save(Open9xX9D::eeprom, radioData);
   StartEepromThread(NULL);
   StartMainThread(tests);
 }
 
-void Open9xX9DSimulator::stop()
+void OpentxTaranisSimulator::stop()
 {
   StopMainThread();
   StopEepromThread();
 }
 
-void Open9xX9DSimulator::getValues(TxOutputs &outputs)
+void OpentxTaranisSimulator::getValues(TxOutputs &outputs)
 {
 #define GETVALUES_IMPORT
 #define g_chans512 channelOutputs
 #include "simulatorimport.h"
 }
 
-void Open9xX9DSimulator::setValues(TxInputs &inputs)
+void OpentxTaranisSimulator::setValues(TxInputs &inputs)
 {
 #define SETVALUES_IMPORT
 #include "simulatorimport.h"
 }
 
-void Open9xX9DSimulator::setTrim(unsigned int idx, int value)
+void OpentxTaranisSimulator::setTrim(unsigned int idx, int value)
 {
   idx = Open9xX9D::modn12x3[4*getStickMode() + idx] - 1;
   uint8_t phase = getTrimFlightPhase(getFlightPhase(), idx);
   setTrimValue(phase, idx, value);
 }
 
-void Open9xX9DSimulator::getTrims(Trims & trims)
+void OpentxTaranisSimulator::getTrims(Trims & trims)
 {
   uint8_t phase = getFlightPhase();
   trims.extended = hasExtendedTrims();
@@ -193,17 +195,17 @@ void Open9xX9DSimulator::getTrims(Trims & trims)
   }
 }
 
-void Open9xX9DSimulator::wheelEvent(uint8_t steps)
+void OpentxTaranisSimulator::wheelEvent(uint8_t steps)
 {
   // g_rotenc[0] += steps*4;
 }
 
-unsigned int Open9xX9DSimulator::getPhase()
+unsigned int OpentxTaranisSimulator::getPhase()
 {
   return getFlightPhase();
 }
 
-const char * Open9xX9DSimulator::getError()
+const char * OpentxTaranisSimulator::getError()
 {
 #define GETERROR_IMPORT
 #include "simulatorimport.h"

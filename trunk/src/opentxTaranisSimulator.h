@@ -14,19 +14,19 @@
  *
  */
 
-#ifndef open9xx9d_simulator_h
-#define open9xx9d_simulator_h
+#ifndef opentx_taranis_simulator_h
+#define opentx_taranis_simulator_h
 
 #include "simulatorinterface.h"
 
 class RadioData;
 class Open9xInterface;
 
-class Open9xX9DSimulator : public SimulatorInterface {
+class OpentxTaranisSimulator : public SimulatorInterface {
 
   public:
 
-    Open9xX9DSimulator(Open9xInterface *);
+    OpentxTaranisSimulator(Open9xInterface *);
 
     virtual void start(RadioData & radioData, bool tests);
 

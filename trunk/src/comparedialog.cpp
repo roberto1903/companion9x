@@ -1048,7 +1048,7 @@ void compareDialog::printFSwitches()
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Repeat")+"</b></td>");
   str.append("<td width=\"7%\" align=\"center\"><b>"+tr("Enable")+"</b></td>");
   str.append("</tr>");
-  for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++)
+  for(int i=0; i<GetEepromInterface()->getCapability(CustomFunctions); i++)
   {
     if (g_model1->funcSw[i].swtch.type || g_model2->funcSw[i].swtch.type) {
       if ((g_model1->funcSw[i].swtch != g_model2->funcSw[i].swtch) || (g_model1->funcSw[i].func!=g_model2->funcSw[i].func) || (g_model1->funcSw[i].adjustMode!=g_model2->funcSw[i].adjustMode) || (g_model1->funcSw[i].param!=g_model2->funcSw[i].param)) {

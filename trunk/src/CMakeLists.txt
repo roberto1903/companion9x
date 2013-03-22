@@ -89,7 +89,7 @@ SET( companion9x_SRCS
      file.cpp
      xmlinterface.cpp
      ${PROJECT_BINARY_DIR}/radio.cxx
-     ${PROJECT_SOURCE_DIR}/../open9x/stamp-open9x.h
+     ${PROJECT_SOURCE_DIR}/../opentx/stamp-opentx.h
      ${PROJECT_SOURCE_DIR}/../th9x/stamp-th9x.h
      ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
      th9xeeprom.cpp
@@ -105,7 +105,7 @@ SET( companion9x_SRCS
      open9xSky9xeeprom.cpp
      ersky9xeeprom.cpp
      ersky9xinterface.cpp
-     open9xx9dsimulator.cpp
+     opentxTaranisSimulator.cpp
      open9xSky9xsimulator.cpp
      open9xGruvin9xsimulator.cpp
      open9xM128simulator.cpp
@@ -255,10 +255,10 @@ NOW(TIME)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h @ONLY)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc @ONLY)
 
-SET( FIRMWARES open9x )
+SET( FIRMWARES opentx )
 FOREACH( FIRMWARE ${FIRMWARES} )
   Subversion_WC_INFO( ${PROJECT_SOURCE_DIR}/../${FIRMWARE} G9X )
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-open9x.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-open9x.h @ONLY)
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/stamp-opentx.h.in ${CMAKE_CURRENT_SOURCE_DIR}/../${FIRMWARE}/stamp-opentx.h @ONLY)
 ENDFOREACH( FIRMWARE )
 
 SET( PATCH_FLAGS "--binary" )
@@ -375,7 +375,7 @@ ADD_CUSTOM_TARGET( translations
                    COMMAND lupdate-qt4 ${CMAKE_SOURCE_DIR} -ts ${companion9x_TS} )
 
 SET(CPACK_PACKAGE_NAME "COMPANION9X")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "EEPROM Editor for open9x / er9x / th9x open source 9X firmwares")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "EEPROM Editor for the openTx open source firmware")
 string(TOLOWER "${CPACK_PACKAGE_NAME}" CPACK_PACKAGE_NAME_LOWERCASE)
 find_program(DPKG_PROGRAM dpkg DOC "dpkg program of Debian-based systems")
 if(DPKG_PROGRAM)

@@ -273,7 +273,7 @@ QString RawSource::toString()
   }
   switch(type) {
     case SOURCE_TYPE_STICK:
-      return (GetEepromInterface()->getBoard() == BOARD_X9DA ? sticksX9D[index] : sticks9X[index]);
+      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? sticksX9D[index] : sticks9X[index]);
     case SOURCE_TYPE_TRIM:
       return trims[index];
     case SOURCE_TYPE_ROTARY_ENCODER:
@@ -330,7 +330,7 @@ QString RawSwitch::toString()
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
-      if (GetEepromInterface()->getBoard() == BOARD_X9DA)
+      if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
         return index > 0 ? switchesX9D[index-1] : QString("!") + switchesX9D[-index-1];
       else
         return index > 0 ? switches9X[index-1] : QString("!") + switches9X[-index-1];
@@ -355,7 +355,7 @@ QString RawSwitch::toString()
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
       // TODO assert(index != 0);
-      if (GetEepromInterface()->getBoard() == BOARD_X9DA)
+      if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
         return index > 0 ? QString("m") + switchesX9D[index-1] : QString("!m") + switchesX9D[-index-1];
       else
         return index > 0 ? QString("m") + switches9X[index-1] : QString("!m") + switches9X[-index-1];
@@ -518,7 +518,7 @@ void RegisterFirmwares()
 
   firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
 
-  default_firmware_variant = GetFirmwareVariant("open9x-stock-heli-templates-en");
+  default_firmware_variant = GetFirmwareVariant("opentx-stock-heli-templates-en");
 
   RegisterEepromInterfaces();
 }
