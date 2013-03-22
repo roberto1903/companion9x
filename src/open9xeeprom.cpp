@@ -442,7 +442,7 @@ void splitGvarParam(const int gvar, int & _gvar, unsigned int & _gvarParam, cons
     else {
       if (gvar < 0) _gvarParam = 1;
       else          _gvarParam = 0;
-      _gvar = gvar;
+      _gvar = gvar;  // save routine throws away all unused bits; therefore no 2er complement compensation needed here
     }
   }
   else {
@@ -465,7 +465,8 @@ void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam,
 {
   if (version >= 214 || (!IS_ARM(board) && version >= 213)) {
 	gvar = _gvar;
-	if (_gvarParam) {
+    if (gvar<0) gvar+=256;  // remove 2er complement, because 8bit part is in this case unsigned
+	if (_gvarParam) {  // here is the real sign bit
 	  gvar|=-256;   // set all higher bits to simulate negative value
 	}
 
@@ -565,7 +566,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<1>(_weightMode));
         internalField.Append(new UnsignedField<1>(_offsetMode));
         internalField.Append(new SourceField<8>(mix.srcRaw, board, version, FLAG_NOTELEMETRY));
-        internalField.Append(new UnsignedField<8>((unsigned int&)_weight));
+        internalField.Append(new SignedField<8>(_weight));
         internalField.Append(new SwitchField<8>(mix.swtch, board, version));
         internalField.Append(new UnsignedField<8>(mix.phases));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
@@ -577,7 +578,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<4>(mix.speedUp));
         internalField.Append(new UnsignedField<4>(mix.speedDown));
         internalField.Append(new SignedField<8>(_curveParam));
-        internalField.Append(new UnsignedField<8>((unsigned int&)_offset));
+        internalField.Append(new SignedField<8>(_offset));
       }
       else {
         internalField.Append(new UnsignedField<4>(_destCh));
@@ -585,7 +586,7 @@ class MixField: public TransformedField {
         internalField.Append(new BoolField<1>(mix.noExpo));
         internalField.Append(new UnsignedField<1>(_weightMode));
         internalField.Append(new UnsignedField<1>(_offsetMode));
-        internalField.Append(new UnsignedField<8>((unsigned int&)_weight));
+        internalField.Append(new SignedField<8>(_weight));
         internalField.Append(new SwitchField<6>(mix.swtch, board, version));
         internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
         internalField.Append(new UnsignedField<5>(mix.phases));
@@ -597,7 +598,7 @@ class MixField: public TransformedField {
         internalField.Append(new UnsignedField<4>(mix.speedUp));
         internalField.Append(new UnsignedField<4>(mix.speedDown));
         internalField.Append(new SignedField<8>(_curveParam));
-        internalField.Append(new UnsignedField<8>((unsigned int&)_offset));
+        internalField.Append(new SignedField<8>(_offset));
       }
     }
 
@@ -712,15 +713,19 @@ class ExpoField: public TransformedField {
     virtual void beforeExport()
     {
       _curveMode = (expo.curveMode && expo.curveParam);
-	  _weight    =smallGvarToEEPROM(expo.weight);
-	  _curveParam=smallGvarToEEPROM(expo.curveParam);
+      if (!IS_ARM(board)) {
+	    _weight    =smallGvarToEEPROM(expo.weight);
+	    _curveParam=smallGvarToEEPROM(expo.curveParam);
+      }//endif
     }
 
     virtual void afterImport()
     {
       expo.curveMode  = _curveMode;
-	  expo.weight     = smallGvarToC9x(_weight);
-	  expo.curveParam = smallGvarToC9x(_curveParam);
+      if (!IS_ARM(board)) {
+        expo.weight     = smallGvarToC9x(_weight);
+        expo.curveParam = smallGvarToC9x(_curveParam);
+      }//endif
     }
 
   protected:
