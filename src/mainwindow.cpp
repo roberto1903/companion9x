@@ -601,8 +601,10 @@ void MainWindow::loadProfile()
     QString soundPath=settings.value("soundPath", "").toString();
     renfw=settings.value("rename_firmware_files", false).toBool();
     QString firmware_id=settings.value("firmware", default_firmware_variant.id).toString();
+    firmware_id.replace("open9x","opentx");
+    firmware_id.replace("x9da","taranis");
+    settings.setValue("firmware", firmware_id);
     settings.endGroup();
-    // TODO question for Romolo: why do we set them again?
     settings.endGroup();
     settings.setValue("default_channel_order", chord);
     settings.setValue("default_mode", defmod);

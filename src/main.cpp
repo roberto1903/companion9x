@@ -84,7 +84,11 @@ int main(int argc, char *argv[])
     RegisterFirmwares();
 
     QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
+    firmware_id.replace("open9x","opentx");
+    firmware_id.replace("x9da","taranis");
+    settings.setValue("firmware", firmware_id);
     current_firmware_variant = GetFirmwareVariant(firmware_id);
+    // qDebug() << current_firmware_variant;
 
     if (showSplash) {
       splash->show();
