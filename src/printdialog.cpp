@@ -785,7 +785,7 @@ void printDialog::printFSwitches()
     str.append(doTL(tr("Repeat"), "", true));
     str.append(doTL(tr("Enabled"), "", true));
     str.append("</tr>");
-    for(int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
+    for(int i=0; i<GetEepromInterface()->getCapability(CustomFunctions); i++) {
       if (g_model->funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
           str.append("<tr>");
           str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));

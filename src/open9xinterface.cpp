@@ -24,7 +24,7 @@
 #include "open9xM128simulator.h"
 #include "open9xGruvin9xsimulator.h"
 #include "open9xSky9xsimulator.h"
-#include "open9xx9dsimulator.h"
+#include "opentxTaranisSimulator.h"
 #include "file.h"
 
 #define FILE_TYP_GENERAL 1
@@ -66,8 +66,8 @@ const char * Open9xInterface::getName()
       return "Open9x for M128 / stock board";
     case BOARD_GRUVIN9X:
       return "Open9x for gruvin9x board";
-    case BOARD_X9DA:
-      return "Open9x for X9DA board";
+    case BOARD_TARANIS:
+      return "Open9x for TARANIS board";
     case BOARD_SKY9X:
       return "Open9x for sky9x board";
     default:
@@ -86,7 +86,7 @@ const int Open9xInterface::getEEpromSize()
       return EESIZE_GRUVIN9X;
     case BOARD_SKY9X:
       return EESIZE_SKY9X;
-    case BOARD_X9DA:
+    case BOARD_TARANIS:
       return EESIZE_X9D;
     default:
       return 0;
@@ -373,21 +373,23 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   if (!version) {
     switch(board) {
-      case BOARD_X9DA:
+      case BOARD_TARANIS:
       case BOARD_SKY9X:
-        version = LAST_OPEN9X_ARM_EEPROM_VER;
+        version = 214;
         break;
       case BOARD_GRUVIN9X:
       case BOARD_M128:
+        version = 214;
+        break;
       case BOARD_STOCK:
-        version = LAST_OPEN9X_AVR_EEPROM_VER;
+        version = 213;
         break;
     }
   }
 
   int size = getEEpromSize();
 
-  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || board==BOARD_X9DA) && version >= 207) ? 5 : 4);
+  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || board==BOARD_TARANIS) && version >= 207) ? 5 : 4);
 
   int result = 0;
 
@@ -527,7 +529,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case OwnerName:
       return 0;
     case SimulatorType:
-      if (board == BOARD_X9DA)
+      if (board == BOARD_TARANIS)
         return 1;
       else
         return 0;
@@ -536,10 +538,12 @@ int Open9xInterface::getCapability(const Capability capability)
     case PPMFrameLength:
       return 40;
     case FlightPhases:
-      if (board == BOARD_SKY9X)
-        return O9X_ARM_MAX_PHASES;
+      if (IS_ARM(board))
+        return 9;
+      else if (IS_DBLEEPROM(board))
+        return 6;
       else
-        return O9X_MAX_PHASES;
+        return 5;
     case Gvars:
     case GvarsInCS:
     case ExpoIsCurve:
@@ -552,23 +556,30 @@ int Open9xInterface::getCapability(const Capability capability)
     case Timers:
       return 2;
     case Switches:
-      return (board==BOARD_X9DA ? 22 : 9);
-    case FuncSwitches:
-      return (IS_ARM(board) ? O9X_ARM_NUM_FSW : O9X_NUM_FSW);
+      return (board==BOARD_TARANIS ? 22 : 9);
+    case CustomFunctions:
+      if (IS_ARM(board))
+        return 32;
+      else if (IS_DBLEEPROM(board))
+        return 24;
+      else
+        return 16;
     case CustomSwitches:
-      return (IS_ARM(board) ? O9X_ARM_NUM_CSW : O9X_NUM_CSW);
+      if (IS_ARM(board))
+        return 32;
+      else if (IS_DBLEEPROM(board))
+        return 15;
+      else
+        return 12;
     case CustomAndSwitches:
-      if (board == BOARD_X9DA)
+      if (board == BOARD_TARANIS)
         return 0;
       else if (board == BOARD_SKY9X)
 	return 23;
       else
         return 3;
     case CustomSwitchesExt:
-      if (board == BOARD_SKY9X)
-        return true;
-      else
-        return false;
+      return (IS_ARM(board) ? true : false);
     case RotaryEncoders:
       if (board == BOARD_GRUVIN9X)
         return 2;
@@ -582,20 +593,11 @@ int Open9xInterface::getCapability(const Capability capability)
       else
         return 0;
     case Outputs:
-      if (board == BOARD_SKY9X)
-        return O9X_ARM_NUM_CHNOUT;
-      else
-        return O9X_NUM_CHNOUT;
+      return (IS_ARM(board) ? O9X_ARM_NUM_CHNOUT : O9X_NUM_CHNOUT);
     case NumCurvePoints:
-      if (board == BOARD_SKY9X)
-        return 512;
-      else
-        return 104;
+      return (IS_ARM(board) ? 512 : 104);
     case VoicesAsNumbers:
-      if (board == BOARD_SKY9X)
-        return 0;
-      else
-        return 1;
+      return (IS_ARM(board) ? 0 : 1);
     case SoundPitch:
       return 1;
     case Haptic:
@@ -605,10 +607,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case Beeperlen:
       return 1;
     case MaxVolume:
-      if ((board == BOARD_SKY9X) || (board == BOARD_X9DA))
-        return 23;
-      else
-        return 7;
+      return (IS_ARM(board) ? 23 : 7);
     case ExtraChannels:
       return 0;
     case ExtraInputs:
@@ -637,23 +636,11 @@ int Open9xInterface::getCapability(const Capability capability)
     case MixesWithoutExpo:
       return 1;
     case NumCurves:
-      if  (board==BOARD_SKY9X) {
-        return 16;
-      } else {
-        return 8;
-      }
+      return (IS_ARM(board) ? 16 : 8);
     case HasMixerNames:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (IS_ARM(board) ? true : false);
     case HasExpoNames:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (IS_ARM(board) ? true : false);
     case NoTimerDirs:
       return 1;
     case NoThrExpo:
@@ -663,11 +650,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryBars:
       return 1;
     case TelemetryCSFields:
-      if  (board==BOARD_SKY9X) {
-        return 24;
-      } else {
-        return 16;
-      }
+      return IS_ARM(board) ? 24 : 16;
     case TelemetryUnits:
       return 0;
     case TelemetryBlades:
@@ -679,11 +662,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryTimeshift:
       return 1;
     case TelemetryMaxMultiplier:
-      if  (board==BOARD_SKY9X) {
-        return 32;
-      } else {
-        return 8;
-      }
+      return (IS_ARM(board) ? 32 : 8);
     case DiffMixers:
       return 1;
     case PPMCenter:
@@ -691,33 +670,17 @@ int Open9xInterface::getCapability(const Capability capability)
     case SYMLimits:
       return 1;
     case OptrexDisplay:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (board==BOARD_SKY9X ? true : false);
     case HasVario:
       return 1;
     case HasVariants:
       return 1;
     case HasCurrentCalibration:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (IS_ARM(board) ? true : false);
     case HasVolume:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (IS_ARM(board) ? true : false);
     case HasBrightness:
-      if  (board==BOARD_SKY9X) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return (board==BOARD_SKY9X ? true : false);
     case PerModelThrottleWarning:
       return 1;
     case pmSwitchMask:
@@ -727,10 +690,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case CSFunc:
       return 15;
     case HasSDLogs:
-      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X)
-        return 1;
-      else
-        return 0;
+      return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     default:
       return 0;
   }
@@ -761,8 +721,8 @@ SimulatorInterface * Open9xInterface::getSimulator()
       return new Open9xGruvin9xSimulator(this);
     case BOARD_SKY9X:
       return new Open9xSky9xSimulator(this);
-    case BOARD_X9DA:
-      return new Open9xX9DSimulator(this);
+    case BOARD_TARANIS:
+      return new OpentxTaranisSimulator(this);
     default:
       return NULL;
   }
@@ -911,7 +871,7 @@ QString geturl( int board) {
       case BOARD_GRUVIN9X:
         url.append("/getfw.php?fw=%1.hex");
         break;
-      case BOARD_X9DA:
+      case BOARD_TARANIS:
       case BOARD_SKY9X:
         url.append("/getfw.php?fw=%1.bin");
         break;
@@ -932,7 +892,7 @@ QString getstamp( int board) {
       settings.setValue("fwserver",server);
     }
     url.append(o9xservers.at(server));
-    url.append("/binaries/stamp-open9x-");
+    url.append("/binaries/stamp-opentx-");
     switch(board) {
       case BOARD_STOCK:
         url.append("stock.txt");
@@ -960,7 +920,7 @@ void RegisterOpen9xFirmwares()
   Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT },{ "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
 
   /* 9x board */
-  open9x = new Open9xFirmware("open9x-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
+  open9x = new Open9xFirmware("opentx-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -988,7 +948,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* 9x board with M128 chip */
-  open9x = new Open9xFirmware("open9x-stock128", QObject::tr("open9x for M128 / stock board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
+  open9x = new Open9xFirmware("opentx-stock128", QObject::tr("open9x for M128 / stock board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1015,7 +975,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* 9XR board */
-  open9x = new Open9xFirmware("open9x-9xr", QObject::tr("open9x for 9XR board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
+  open9x = new Open9xFirmware("opentx-9xr", QObject::tr("open9x for 9XR board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
@@ -1063,7 +1023,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* SKY9X board */
-  open9x = new Open9xFirmware("open9x-sky9x", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
+  open9x = new Open9xFirmware("opentx-sky9x", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1080,8 +1040,8 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   firmwares.push_back(open9x);
     
-  /* X9DA board */
-  open9x = new Open9xFirmware("open9x-x9da", QObject::tr("open9x for x9da board"), new Open9xInterface(BOARD_X9DA), geturl(BOARD_X9DA), getstamp(BOARD_X9DA), true);
+  /* TARANIS board */
+  open9x = new Open9xFirmware("opentx-taranis", QObject::tr("open9x for taranis board"), new Open9xInterface(BOARD_TARANIS), geturl(BOARD_TARANIS), getstamp(BOARD_TARANIS), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));

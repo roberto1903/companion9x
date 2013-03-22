@@ -85,7 +85,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     tabSafetySwitches();
   }
 
-  if (GetEepromInterface()->getCapability(FuncSwitches)==0 ) {
+  if (GetEepromInterface()->getCapability(CustomFunctions)==0 ) {
     ui->tabCustomFunctions->setDisabled(true);
     ui->tabWidget->removeTab(fswTab);
     telTab--;
@@ -1852,7 +1852,7 @@ void ModelEdit::tabCustomSwitches()
 void ModelEdit::tabCustomFunctions()
 {
   switchEditLock = true;
-  int num_fsw = GetEepromInterface()->getCapability(FuncSwitches);
+  int num_fsw = GetEepromInterface()->getCapability(CustomFunctions);
   for (int i=0; i<num_fsw; i++) {
     AssignFunc func = g_model.funcSw[i].func;
     QGridLayout *layout = i >= 16 ? ui->fswitchlayout2 : ui->fswitchlayout1;
@@ -2033,7 +2033,7 @@ void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState
     clickObject->stop();
     clickObject->clearQueue();
     clickObject->clear();
-    for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
+    for (int i=0; i<GetEepromInterface()->getCapability(CustomFunctions); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
       playBT[i]->setIcon(QIcon(":/images/play.png"));   
     }
@@ -2042,7 +2042,7 @@ void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState
     clickObject->stop();
     clickObject->clearQueue();
     clickObject->clear();
-    for (int i=0; i<GetEepromInterface()->getCapability(FuncSwitches); i++) {
+    for (int i=0; i<GetEepromInterface()->getCapability(CustomFunctions); i++) {
       playBT[i]->setObjectName(QString("play_%1").arg(i));
       playBT[i]->setIcon(QIcon(":/images/play.png"));   
     }

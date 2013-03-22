@@ -191,7 +191,7 @@ void avrOutputDialog::doAddTextStdOut()
 QString avrOutputDialog::getProgrammer()
 {
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_X9DA) {
+  if (eepromInterface->getBoard()==BOARD_TARANIS) {
     return "DFU Util";
   } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
     return "SAM-BA";

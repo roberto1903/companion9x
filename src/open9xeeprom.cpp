@@ -6,7 +6,7 @@
 // #include <QMessageBox>
 
 #define HAS_PERSISTENT_TIMERS(board)         (IS_ARM(board) || board == BOARD_GRUVIN9X)
-#define HAS_LARGE_LCD(board)                 (board == BOARD_X9DA)
+#define HAS_LARGE_LCD(board)                 (board == BOARD_TARANIS)
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
 #define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
@@ -16,10 +16,13 @@
 #define MAX_CUSTOM_SWITCHES(board, version)  (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 15 : 12))
 #define MAX_CUSTOM_FUNCTIONS(board, version) (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 24 : 16))
 
+#define IS_RELEASE_21_MARCH_2013(board, version) (version >= 214 || (!IS_ARM(board) && version >= 213))
+#define IS_RELEASE_23_MARCH_2013(board, version) (version >= 214 || (board==BOARD_STOCK && version >= 213))
+
 inline int switchIndex(int i, BoardEnum board, unsigned int version)
 {
-  bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
-  if (recent)
+  bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
+  if (release21March2013)
     return (i<=3 ? i+3 : (i<=6 ? i-3 : i));
   else
     return i;
@@ -80,7 +83,7 @@ class SourcesConversionTable: public ConversionTable {
   public:
     SourcesConversionTable(BoardEnum board, unsigned int version, unsigned long flags=0)
     {
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
 
       int val=0;
 
@@ -94,19 +97,19 @@ class SourcesConversionTable: public ConversionTable {
       for (int i=0; i<MAX_ROTARY_ENCODERS(board); i++)
         addConversion(RawSource(SOURCE_TYPE_ROTARY_ENCODER, 0), val++);
 
-      if (!recent) {
+      if (!release21March2013) {
         for (int i=0; i<NUM_STICKS; i++)
           addConversion(RawSource(SOURCE_TYPE_TRIM, i), val++);
       }
 
       addConversion(RawSource(SOURCE_TYPE_MAX), val++);
 
-      if (recent) {
+      if (release21March2013) {
         for (int i=0; i<3; i++)
           addConversion(RawSource(SOURCE_TYPE_CYC, i), val++);
       }
 
-      if (recent) {
+      if (release21March2013) {
         for (int i=0; i<NUM_STICKS; i++)
           addConversion(RawSource(SOURCE_TYPE_TRIM, i), val++);
       }
@@ -114,7 +117,7 @@ class SourcesConversionTable: public ConversionTable {
       addConversion(RawSource(SOURCE_TYPE_3POS), val++);
 
       if (!(flags & FLAG_NOSWITCHES)) {
-        if (recent) {
+        if (release21March2013) {
           // TODO remove SOURCE_TYPE_3POS
           // TODO add SOURCE_TYPE_CUSTOM_SWITCH
           for (int i=1; i<=3; i++)
@@ -130,7 +133,7 @@ class SourcesConversionTable: public ConversionTable {
           addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue()), val++);
       }
 
-      if (!recent) {
+      if (!release21March2013) {
         for (int i=0; i<3; i++)
           addConversion(RawSource(SOURCE_TYPE_CYC, i), val++);
       }
@@ -142,12 +145,12 @@ class SourcesConversionTable: public ConversionTable {
         addConversion(RawSource(SOURCE_TYPE_CH, i), val++);
 
       if (!(flags & FLAG_NOTELEMETRY)) {
-        if (recent) {
+        if (release21March2013) {
           for (int i=0; i<5; i++)
             addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
         }
 
-        if (recent)
+        if (release21March2013)
           addConversion(RawSource(SOURCE_TYPE_TELEMETRY, 0), val++);
 
         for (int i=1; i<TELEMETRY_SOURCES_COUNT; i++)
@@ -555,6 +558,27 @@ class MixField: public TransformedField {
         else
           internalField.Append(new ZCharField<6>(mix.name));
       }
+      else if (IS_DBLEEPROM(board) && IS_RELEASE_23_MARCH_2013(board, version)) {
+        internalField.Append(new UnsignedField<4>(_destCh));
+        internalField.Append(new BoolField<1>(_curveMode));
+        internalField.Append(new BoolField<1>(mix.noExpo));
+        internalField.Append(new UnsignedField<1>(_weightMode));
+        internalField.Append(new UnsignedField<1>(_offsetMode));
+        internalField.Append(new SourceField<8>(mix.srcRaw, board, version, FLAG_NOTELEMETRY));
+        internalField.Append(new UnsignedField<8>((unsigned int&)_weight));
+        internalField.Append(new SwitchField<8>(mix.swtch, board, version));
+        internalField.Append(new UnsignedField<8>(mix.phases));
+        internalField.Append(new UnsignedField<2>((unsigned int &)mix.mltpx));
+        internalField.Append(new SignedField<3>(mix.carryTrim));
+        internalField.Append(new UnsignedField<2>(mix.mixWarn));
+        internalField.Append(new SpareBitsField<1>());
+        internalField.Append(new UnsignedField<4>(mix.delayUp));
+        internalField.Append(new UnsignedField<4>(mix.delayDown));
+        internalField.Append(new UnsignedField<4>(mix.speedUp));
+        internalField.Append(new UnsignedField<4>(mix.speedDown));
+        internalField.Append(new SignedField<8>(_curveParam));
+        internalField.Append(new UnsignedField<8>((unsigned int&)_offset));
+      }
       else {
         internalField.Append(new UnsignedField<4>(_destCh));
         internalField.Append(new BoolField<1>(_curveMode));
@@ -663,6 +687,16 @@ class ExpoField: public TransformedField {
         else
           internalField.Append(new ZCharField<6>(expo.name));
         internalField.Append(new SignedField<8>(expo.curveParam));
+      }
+      else if (IS_DBLEEPROM(board) && IS_RELEASE_23_MARCH_2013(board, version)) {
+        internalField.Append(new UnsignedField<2>(expo.mode));
+        internalField.Append(new UnsignedField<2>(expo.chn));
+        internalField.Append(new BoolField<1>(_curveMode));
+        internalField.Append(new SpareBitsField<3>());
+        internalField.Append(new UnsignedField<8>(expo.phases));
+        internalField.Append(new SwitchField<8>(expo.swtch, board, version));
+        internalField.Append(new SignedField<8>(_weight));
+        internalField.Append(new SignedField<8>(_curveParam));
       }
       else {
         internalField.Append(new UnsignedField<2>(expo.mode));
@@ -806,9 +840,9 @@ class CustomSwitchesFunctionsTable: public ConversionTable {
     CustomSwitchesFunctionsTable(BoardEnum board, unsigned int version)
     {
       int val=0;
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
       addConversion(CS_FN_OFF, val++);
-      if (recent)
+      if (release21March2013)
         addConversion(CS_FN_VEQUAL, val++);
       addConversion(CS_FN_VPOS, val++);
       addConversion(CS_FN_VNEG, val++);
@@ -818,11 +852,11 @@ class CustomSwitchesFunctionsTable: public ConversionTable {
       addConversion(CS_FN_OR, val++);
       addConversion(CS_FN_XOR, val++);
       addConversion(CS_FN_EQUAL, val++);
-      if (!recent)
+      if (!release21March2013)
         addConversion(CS_FN_NEQUAL, val++);
       addConversion(CS_FN_GREATER, val++);
       addConversion(CS_FN_LESS, val++);
-      if (!recent) {
+      if (!release21March2013) {
         addConversion(CS_FN_EGREATER, val++);
         addConversion(CS_FN_ELESS, val++);
       }
@@ -1005,8 +1039,8 @@ class SwitchesWarningField: public TransformedField {
 
     virtual void beforeExport()
     {
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
-      if (recent) {
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
+      if (release21March2013) {
         _sw = (sw & 0xC1) + ((sw & 0x30) >> 3) + ((sw & 0x0E) << 2);
       }
       else {
@@ -1016,8 +1050,8 @@ class SwitchesWarningField: public TransformedField {
 
     virtual void afterImport()
     {
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
-      if (recent) {
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
+      if (release21March2013) {
         sw = (_sw & 0xC1) + ((_sw & 0x38) >> 2) + ((_sw & 0x06) << 3);
       }
       else {
@@ -1050,7 +1084,7 @@ class CustomFunctionField: public TransformedField {
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
-        if (board == BOARD_X9DA)
+        if (board == BOARD_TARANIS)
           internalField.Append(new CharField<10>(_arm_param));
         else
           internalField.Append(new CharField<6>(_arm_param));
@@ -1277,8 +1311,8 @@ class FrskyScreenField: public DataField {
     {
       _screen = screen;
 
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
-      if (!recent) {
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
+      if (!release21March2013) {
         for (int i=0; i<4; i++) {
           if (_screen.body.bars[i].source > 0)
             _screen.body.bars[i].source--;
@@ -1299,12 +1333,12 @@ class FrskyScreenField: public DataField {
     {
       _screen = screen;
 
-      bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+      bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
 
       // NOTA: screen.type should have been imported first!
       if (screen.type == 0) {
         numbers.ImportBits(input);
-        if (!recent) {
+        if (!release21March2013) {
           for (int i=0; i<8; i++) {
             if (_screen.body.cells[i] > 0) {
               _screen.body.cells[i]++;
@@ -1314,7 +1348,7 @@ class FrskyScreenField: public DataField {
       }
       else {
         bars.ImportBits(input);
-        if (!recent) {
+        if (!release21March2013) {
           for (int i=0; i<4; i++) {
             if (_screen.body.bars[i].source > 0)
               _screen.body.bars[i].source++;
@@ -1458,9 +1492,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   else
     Append(new ZCharField<10>(modelData.name));
 
-  bool recent = (version >= 214 || (!IS_ARM(board) && version >= 213));
+  bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
 
-  if (recent)
+  if (release21March2013)
     Append(new UnsignedField<8>(modelData.modelId));
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
@@ -1505,10 +1539,10 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new SignedField<8>(modelData.ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
 
-  if (!recent)
+  if (!release21March2013)
     Append(new UnsignedField<8>(modelData.modelId));
 
-  if (board == BOARD_X9DA)
+  if (board == BOARD_TARANIS)
     Append(new UnsignedField<16>(modelData.switchWarningStates));
   else
     Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
@@ -1546,7 +1580,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
   internalField("General Settings"),
   generalData(generalData),
   board(board),
-  inputsCount(board == BOARD_X9DA ? 8 : 7)
+  inputsCount(board == BOARD_TARANIS ? 8 : 7)
 {
   generalData.version = version;
   generalData.variant = variant;

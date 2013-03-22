@@ -45,10 +45,10 @@ enum BoardEnum {
   BOARD_M128,
   BOARD_GRUVIN9X,
   BOARD_SKY9X,
-  BOARD_X9DA
+  BOARD_TARANIS
 };
 
-#define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_X9DA)
+#define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_TARANIS)
 #define IS_DBLEEPROM(board) (board==BOARD_GRUVIN9X || board==BOARD_M128)
 
 const uint8_t modn12x3[4][4]= {
@@ -814,7 +814,7 @@ enum Capability {
  Timers,
  TimerTriggerB,
  PermTimers,
- FuncSwitches,
+ CustomFunctions,
  VoicesAsNumbers,
  ModelVoice,
  InstantTrimSW,

@@ -18,7 +18,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
     getSettings();
     populateProgrammers();
     EEPROMInterface *eepromInterface = GetEepromInterface();
-    if (eepromInterface->getBoard()==BOARD_X9DA) {
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_mcu->hide();
