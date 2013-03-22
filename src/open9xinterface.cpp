@@ -919,7 +919,8 @@ void RegisterOpen9xFirmwares()
 {
   Open9xFirmware * open9x;
 
-  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT },{ "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
+  Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
+  Option nav_options[] = { { "rotenc", QObject::tr("Rotary Encoder use in menus navigation") }, { "potscroll", QObject::tr("Pots use in menus navigation") }, { NULL } };
 
   /* 9x board */
   open9x = new Open9xFirmware("opentx-stock", QObject::tr("openTx for 9X board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
@@ -938,7 +939,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
-  open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOptions(nav_options);
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
@@ -967,7 +968,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
-  open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOptions(nav_options);
   open9x->addOption("sp22", QObject::tr("SmartieParts 2.2 Backlight support"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
