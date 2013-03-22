@@ -45,8 +45,8 @@ size_t SizeOfArray( T(&)[ N ] )
 QStringList o9xservers;
 
 Open9xInterface::Open9xInterface(BoardEnum board):
-efile(new EFile()),
-board(board)
+  efile(new EFile()),
+  board(board)
 {
   o9xservers.clear();
   o9xservers << "85.18.253.250" << "open9x.9xforums.com";
@@ -61,17 +61,17 @@ const char * Open9xInterface::getName()
 {
   switch (board) {
     case BOARD_STOCK:
-      return "Open9x";
+      return "openTx for 9X board";
     case BOARD_M128:
-      return "Open9x for M128 / stock board";
+      return "openTx for M128 / 9X board";
     case BOARD_GRUVIN9X:
-      return "Open9x for gruvin9x board";
+      return "openTx for Gruvin9x board / 9X";
     case BOARD_TARANIS:
-      return "Open9x for TARANIS board";
+      return "openTx for FrSky Taranis";
     case BOARD_SKY9X:
-      return "Open9x for sky9x board";
+      return "openTx for Sky9x board / 9X";
     default:
-      return "Open9x for an unknown board";
+      return "openTx for an unknown board";
   }
 }
 
@@ -856,12 +856,13 @@ bool Open9xInterface::loadBackup(RadioData &radioData, uint8_t *eeprom, int esiz
   return true;
 }
 
-QString geturl( int board) {
+QString geturl( int board)
+{
     QString url="http://";
     QSettings settings("companion9x", "companion9x");
-    int server = settings.value("fwserver",0).toInt();
-    if (server >=o9xservers.count()) {
-      server=0;
+    int server = settings.value("fwserver", 0).toInt();
+    if (server >= o9xservers.count()) {
+      server = 0;
       settings.setValue("fwserver",server);
     }
     url.append(o9xservers.at(server));
@@ -883,7 +884,8 @@ QString geturl( int board) {
 }
 
 
-QString getstamp( int board) {
+QString getstamp( int board)
+{
     QString url="http://";
     QSettings settings("companion9x", "companion9x");
     int server = settings.value("fwserver",0).toInt();
@@ -920,7 +922,7 @@ void RegisterOpen9xFirmwares()
   Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT },{ "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
 
   /* 9x board */
-  open9x = new Open9xFirmware("opentx-stock", QObject::tr("open9x for stock board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
+  open9x = new Open9xFirmware("opentx-stock", QObject::tr("openTx for 9X board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -941,6 +943,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
@@ -948,7 +951,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* 9x board with M128 chip */
-  open9x = new Open9xFirmware("opentx-stock128", QObject::tr("open9x for M128 / stock board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
+  open9x = new Open9xFirmware("opentx-stock128", QObject::tr("openTx for M128 / 9X board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
   open9x->addOptions(ext_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -969,13 +972,14 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
   /* 9XR board */
-  open9x = new Open9xFirmware("opentx-9xr", QObject::tr("open9x for 9XR board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
+  open9x = new Open9xFirmware("opentx-9xr", QObject::tr("openTx for 9XR board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
@@ -992,6 +996,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
@@ -999,7 +1004,7 @@ void RegisterOpen9xFirmwares()
   firmwares.push_back(open9x);
 
   /* Gruvin9x board */
-  open9x = new Open9xFirmware("open9x-v4", QObject::tr("open9x for gruvin9x board"), new Open9xInterface(BOARD_GRUVIN9X), geturl(BOARD_GRUVIN9X), getstamp(BOARD_GRUVIN9X), false);
+  open9x = new Open9xFirmware("open9x-v4", QObject::tr("openTx for Gruvin9x board / 9X"), new Open9xInterface(BOARD_GRUVIN9X), geturl(BOARD_GRUVIN9X), getstamp(BOARD_GRUVIN9X), false);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1017,13 +1022,14 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
   /* SKY9X board */
-  open9x = new Open9xFirmware("opentx-sky9x", QObject::tr("open9x for sky9x board"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
+  open9x = new Open9xFirmware("opentx-sky9x", QObject::tr("openTx for Sky9x board / 9X"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1035,13 +1041,14 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   firmwares.push_back(open9x);
     
-  /* TARANIS board */
-  open9x = new Open9xFirmware("opentx-taranis", QObject::tr("open9x for taranis board"), new Open9xInterface(BOARD_TARANIS), geturl(BOARD_TARANIS), getstamp(BOARD_TARANIS), true);
+  /* Taranis board */
+  open9x = new Open9xFirmware("opentx-taranis", QObject::tr("openTx for FrSky Taranis"), new Open9xInterface(BOARD_TARANIS), geturl(BOARD_TARANIS), getstamp(BOARD_TARANIS), true);
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
@@ -1051,9 +1058,6 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
-  open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
-  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
-  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
