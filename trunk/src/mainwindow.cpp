@@ -902,7 +902,7 @@ void MainWindow::burnExtenalToEEPROM()
       }
       int oldrev = getEpromVersion(fileName);
       QString tempDir = QDir::tempPath();
-      QString tempFlash = tempDir + "/flash.hex";
+      QString tempFlash = tempDir + "/flash.bin";
       QStringList str = GetReceiveFlashCommand(tempFlash);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
       ad->setWindowIcon(QIcon(":/images/read_flash.png"));
@@ -1002,7 +1002,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     return false;
 
   QString fwSvn = flash.getSvn();
-  
+  qDebug() << fwSvn;
   QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
   fwSvn = svnTags.back();
   if (fwSvn.endsWith('M'))
@@ -1014,7 +1014,7 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
   unsigned int version = 0;
   unsigned int variant = 0;
 
-  if (svnTags.at(0) == "open9x") {
+  if ((svnTags.at(0) == "open9x")||(svnTags.at(0) == "opentx")) {
     if (revision > 1464) {
       QString fwBuild = flash.getBuild();
       if (fwBuild.contains("-")) {

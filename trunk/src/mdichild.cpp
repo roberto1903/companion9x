@@ -505,7 +505,7 @@ void MdiChild::burnTo()  // write to Tx
         sleep(1);
       }
       int oldrev=((MainWindow *)this->parent())->getEpromVersion(tempFile);
-      QString tempFlash=tempDir + "/flash.hex";
+      QString tempFlash=tempDir + "/flash.bin";
       QStringList str = ((MainWindow *)this->parent())->GetReceiveFlashCommand(tempFlash);
       avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Read Flash From Tx");
       ad->setWindowIcon(QIcon(":/images/read_flash.png"));
