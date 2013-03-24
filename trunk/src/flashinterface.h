@@ -27,9 +27,9 @@
 #define SPLASHX9D_SIZE (SPLASHX9D_WIDTH*SPLASHX9D_HEIGHT/8)
 #define ERSPLASH_MARKER "Splash"
 #define ERSPLASH_OFFSET (10)
-#define O9X_SPS "SPS"
-#define O9X_SPE "SPE"
-#define O9X_OFFSET (6)
+#define OTX_SPS "SPS"
+#define OTX_SPE "SPE"
+#define OTX_OFFSET (6)
 #define ERSKY9X_SPS "SPS"
 #define ERSKY9X_SPE "SPE"
 #define ERSKY9X_OFFSET (7)
@@ -62,6 +62,7 @@ public:
   bool hasSplash();
   uint getSplashWidth();
   uint getSplashHeight();
+  uint getSplashColors();
   uint saveFlash(QString fileName);
   bool isValid();
 
@@ -84,6 +85,7 @@ private:
   uint splash_size;
   uint splash_width;
   uint splash_height;
+  uint splash_colors;
   uint flash_size;
 
 protected:

@@ -230,22 +230,22 @@ void FlashInterface::SeekSplash(void)
   }
   if (start==-1) {
     splash.clear();
-    splash.append((char *)open9x_splash, sizeof(open9x_splash));
+    splash.append((char *)opentx_splash, sizeof(opentx_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
       splash_type=3;
-      splash_size=sizeof(open9x_splash);
+      splash_size=sizeof(opentx_splash);
     }
   }
   if (start==-1) {
     splash.clear();
-    splash.append((char *)open9xx9d_splash, sizeof(open9xx9d_splash));
+    splash.append((char *)opentxtaranis_splash, sizeof(opentxtaranis_splash));
     start = flash.indexOf(splash);
     if (start>0) {
       splash_offset=start;
       splash_type=5;
-      splash_size=sizeof(open9xx9d_splash);
+      splash_size=sizeof(opentxtaranis_splash);
     }
   }
   if (start==-1) {
@@ -271,10 +271,10 @@ void FlashInterface::SeekSplash(void)
   if (start==-1) {
     start=0;
     splash.clear();
-    splash.append(O9X_SPS);
+    splash.append(OTX_SPS);
     splash.append('\0');
     spe.clear();
-    spe.append(O9X_SPE);
+    spe.append(OTX_SPE);
     spe.append('\0');   
     int diff=0;
     int end=0;
@@ -291,15 +291,15 @@ void FlashInterface::SeekSplash(void)
           if (end>0) {
             diff=end-start;
             if (diff==1030) {
-              splash_offset=start+O9X_OFFSET;
+              splash_offset=start+OTX_OFFSET;
               splash_type=2;
-              splash_size=sizeof(open9x_splash);
+              splash_size=sizeof(opentx_splash);
               break;
             }
             if (diff==1702) {
-              splash_offset=start+O9X_OFFSET;
+              splash_offset=start+OTX_OFFSET;
               splash_type=5;
-              splash_size=sizeof(open9xx9d_splash);
+              splash_size=sizeof(opentxtaranis_splash);
               break;
             }            
           }
@@ -355,9 +355,11 @@ void FlashInterface::SeekSplash(void)
     if (splash_type==5) {
       splash_width=SPLASHX9D_WIDTH;
       splash_height=SPLASHX9D_HEIGHT;
+      splash_colors=16;
     } else {
       splash_width=SPLASH_WIDTH;
       splash_height=SPLASH_HEIGHT;
+      splash_colors=1;
     }
   }
 }
@@ -393,6 +395,11 @@ uint FlashInterface::getSplashWidth()
 uint FlashInterface::getSplashHeight()
 {
   return splash_height;
+}
+
+uint FlashInterface::getSplashColors()
+{
+  return splash_colors;
 }
 
 QImage FlashInterface::getSplash()

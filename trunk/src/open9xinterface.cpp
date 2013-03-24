@@ -1036,6 +1036,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
@@ -1055,6 +1056,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nofp", QObject::tr("No flight phases"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));

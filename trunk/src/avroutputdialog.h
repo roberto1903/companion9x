@@ -50,6 +50,8 @@ private:
     quint8 efuse;
     QString prevLine;
     QString currLine;
+    QString prevStdLine;
+    QString currStdLine;
     int phase;
     QString winTitle;
     bool hasErrors;
