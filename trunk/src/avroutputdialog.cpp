@@ -158,8 +158,7 @@ void avrOutputDialog::doAddTextStdOut()
       temp=currStdLine.mid(pos+7);
       pos=temp.lastIndexOf("\n");
       size=temp.left(pos).toInt();
-      ui->progressBar->setMaximum(size/2024);
-      qDebug() << size;
+      ui->progressBar->setMaximum(size/2048);
     }
     if (currStdLine.contains("\n")) {
         nlPos=currStdLine.lastIndexOf("\n");
