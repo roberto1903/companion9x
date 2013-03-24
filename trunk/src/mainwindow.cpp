@@ -1002,7 +1002,6 @@ bool MainWindow::convertEEPROM(QString backupFile, QString restoreFile, QString 
     return false;
 
   QString fwSvn = flash.getSvn();
-  qDebug() << fwSvn;
   QStringList svnTags = fwSvn.split("-r", QString::SkipEmptyParts);
   fwSvn = svnTags.back();
   if (fwSvn.endsWith('M'))

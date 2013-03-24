@@ -346,7 +346,6 @@ void burnConfigDialog::restFuses(bool eeProtect)
           } else {
             lfuses="lfuse:w:0x3F:m";
           }
-          qDebug() << lfuses;
           
           QString erStr = eeProtect ? "hfuse:w:0x81:m" : "hfuse:w:0x89:m";
           str << "-U" << lfuses << "-U" << erStr << "-U" << "efuse:w:0xFF:m";
