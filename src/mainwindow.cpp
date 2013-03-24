@@ -748,7 +748,7 @@ QStringList MainWindow::GetDFUUtilArguments(const QString &cmd, const QString &f
   burnConfigDialog bcd;
   QStringList args   = bcd.getDFUArgs();
 
-  arguments << args << "--dfuse-address" << "0x08000000";
+  arguments << args << "--dfuse-address" << "0x08000000" << "-d" << "0483:df11";
 
   QString fullcmd = cmd + filename;
 
