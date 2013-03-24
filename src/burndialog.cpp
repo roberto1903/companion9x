@@ -193,7 +193,11 @@ void burnDialog::checkFw(QString fileName)
       bool PatchFwCB = settings.value("patchImage", false).toBool();
       if (!ImageStr.isEmpty()) {
         QImage Image = qstring2image(ImageStr);
-        ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Mono)));
+        if (flash.getSplashColors()>1 ) {
+          ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Indexed8)));
+        } else {
+          ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Mono)));
+        }
         ui->InvertColorButton->setEnabled(true);
         ui->PreferredImageCB->setChecked(true);
         ui->PatchFWCB->setChecked(PatchFwCB);

@@ -148,9 +148,30 @@ void avrOutputDialog::doAddTextStdOut()
 {
     QByteArray data = process->readAllStandardOutput();
     QString text = QString(data);
+    QString temp;
+    int nlPos, pos, size;
 
     addText(text);
-
+    currStdLine.append(text);
+    if (currStdLine.contains("size = ")) {
+      pos=currStdLine.lastIndexOf("size = ");
+      temp=currStdLine.mid(pos+7);
+      pos=temp.lastIndexOf("\n");
+      size=temp.left(pos).toInt();
+      ui->progressBar->setMaximum(size/2024);
+      qDebug() << size;
+    }
+    if (currStdLine.contains("\n")) {
+        nlPos=currStdLine.lastIndexOf("\n");
+        prevStdLine=currStdLine.left(nlPos).trimmed();
+        currStdLine=currStdLine.mid(nlPos+1);
+    }
+    if (!currStdLine.isEmpty()) {
+      if (currStdLine.at(0)==QChar('.')) {
+        pos=currStdLine.lastIndexOf(".");
+        ui->progressBar->setValue(pos);
+      }
+    }
     if (text.contains("Complete ")) {
 #if !__GNUC__
       if (kill_timer) {
