@@ -39,6 +39,9 @@
 #define GVARS
 #define BOLD_FONT
 #define VOICE
+#define PPM_CENTER_ADJUSTABLE YES
+#define PPM_LIMITS_SYMETRICAL YES
+
 
 #define EEPROM_VARIANT 3
 
