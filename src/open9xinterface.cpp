@@ -1004,6 +1004,32 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
+  /* 9x board with M128 chip */
+  open9x = new Open9xFirmware("opentx-9xr128", QObject::tr("openTx for M128 / 9XR board"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
+  open9x->addOptions(ext_options);
+  open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
+  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
+  open9x->addOption("nosplash", QObject::tr("No splash screen"));
+  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
+  open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
+  open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
+  open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
+  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
+  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
+  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
+  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
+  open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
+  open9x->addOption("battgraph", QObject::tr("Battery graph"));
+  open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
+  open9x->addOption("imperial", QObject::tr("Imperial units"));
+  firmwares.push_back(open9x);
+
   /* Gruvin9x board */
   open9x = new Open9xFirmware("opentx-v4", QObject::tr("openTx for Gruvin9x board / 9X"), new Open9xInterface(BOARD_GRUVIN9X), geturl(BOARD_GRUVIN9X), getstamp(BOARD_GRUVIN9X), false);
   open9x->setVariantBase(FRSKY_VARIANT);
