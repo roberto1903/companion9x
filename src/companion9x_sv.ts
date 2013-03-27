@@ -46,28 +46,8 @@ Om fältet lämnas tomt så är expo påslaget hela tiden.</translation>
         <translation>ALLT</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expo value&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expovärde&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Weight</source>
         <translation>Vikt</translation>
-    </message>
-    <message>
-        <source>The value of the weight</source>
-        <translation type="obsolete">Viktningsvärde</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation type="obsolete">Fas</translation>
     </message>
     <message>
         <source>DEST -&gt; %1</source>
@@ -165,14 +145,6 @@ p, li { white-space: pre-wrap; }
         <translation>Summer</translation>
     </message>
     <message>
-        <source>PiSpkr</source>
-        <translation type="obsolete">PiSpkr</translation>
-    </message>
-    <message>
-        <source>PcmWav</source>
-        <translation type="obsolete">PcmWav</translation>
-    </message>
-    <message>
         <source>Speaker Pitch (spkr only)</source>
         <translation>Högtalarton (endast högtalare)</translation>
     </message>
@@ -199,10 +171,6 @@ Värden mellan mellan 5 och 10 volt accepteras</translation>
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Kalibrering av batterispänning:
 Detta värde läggs till det uppmätta värdet för batterispänningen. Använd värdet för att kalibrera den inbyggda spänningsmätaren.</translation>
-    </message>
-    <message>
-        <source>Backlight Switch</source>
-        <translation type="obsolete">Brytare för bakgrundsbelysning</translation>
     </message>
     <message>
         <source>This is the switch selectrion for turning on the backlight (if installed).
@@ -234,7 +202,7 @@ Detta värde läggs till det uppmätta värdet för batterispänningen. Använd 
     </message>
     <message>
         <source>Timer Beeps</source>
-        <translation>Timer-pip</translation>
+        <translation>Timerpip</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -523,10 +491,6 @@ Mode 4:
         <translation>För alla händelser</translation>
     </message>
     <message>
-        <source>Backlight On Stick Move</source>
-        <translation type="obsolete">Ljus på vid spakrörelse</translation>
-    </message>
-    <message>
         <source>THR</source>
         <translation>GAS</translation>
     </message>
@@ -737,10 +701,6 @@ Mode 4:
     <message>
         <source>Retrieve calib. and hw settings from profile</source>
         <translation>Hämta kalibrering ojch håprdvaruinställningar från vald profil</translation>
-    </message>
-    <message>
-        <source>Backlight  Auto OFF after</source>
-        <translation type="obsolete">Automatisk avstängning av bakgrundsljus efter</translation>
     </message>
     <message>
         <source>Speaker Volume</source>
@@ -1546,24 +1506,8 @@ Vill du spara förändringarna?</translation>
         <translation>Vikt</translation>
     </message>
     <message>
-        <source>The value of the mixer is multiplied by this value and divided by 100.</source>
-        <translation type="obsolete">Mixerns värde multipliceras med detta värde och divideras sedan med 100.</translation>
-    </message>
-    <message>
         <source>Offset</source>
         <translation>Offset</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This value is added to the &lt;span style=&quot; font-weight:600;&quot;&gt;input &lt;/span&gt;of the mixer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Detta värde läggs till &lt;span style=&quot; font-weight:600;&quot;&gt;insignalen &lt;/span&gt;för mixern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Include Trim</source>
@@ -1647,10 +1591,6 @@ Anger hur mixervärden påverkar kanalen.
         <translation>ERSÄTT</translation>
     </message>
     <message>
-        <source>Phase</source>
-        <translation type="obsolete">Fas</translation>
-    </message>
-    <message>
         <source>Enable FM Trim</source>
         <translation>Slå på FM-Trim</translation>
     </message>
@@ -1709,10 +1649,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>No</source>
         <translation>Nej</translation>
-    </message>
-    <message>
-        <source>Differential</source>
-        <translation type="obsolete">Differential</translation>
     </message>
     <message>
         <source>Rud</source>
@@ -1894,10 +1830,6 @@ p, li { white-space: pre-wrap; }
         <translation>KN16</translation>
     </message>
     <message>
-        <source>Function switches</source>
-        <translation type="obsolete">Brytarfunktioner</translation>
-    </message>
-    <message>
         <source>Param</source>
         <translation>Parametrar</translation>
     </message>
@@ -2000,10 +1932,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Blades</source>
         <translation>Blad</translation>
-    </message>
-    <message>
-        <source>Telemetry Gauges</source>
-        <translation type="obsolete">Telemetri-mätare</translation>
     </message>
     <message>
         <source>Source</source>
@@ -2196,10 +2124,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Invert Aileron</source>
         <translation>Invertera skevroder</translation>
-    </message>
-    <message>
-        <source>Invert Collective</source>
-        <translation></translation>
     </message>
     <message>
         <source>Mixes</source>
@@ -2635,10 +2559,6 @@ p, li { white-space: pre-wrap; }
         <translation>RSSI</translation>
     </message>
     <message>
-        <source>Custom Telemetry View</source>
-        <translation type="obsolete">Egen Telemetriskärm</translation>
-    </message>
-    <message>
         <source>Flight Phase 0 (Default)</source>
         <translation>Flygfas 0 (Standard)</translation>
     </message>
@@ -2827,14 +2747,6 @@ p, li { white-space: pre-wrap; }
         <translation>Höjdmätare / Vario</translation>
     </message>
     <message>
-        <source>Barometer V1</source>
-        <translation type="obsolete">Barometer V1</translation>
-    </message>
-    <message>
-        <source>Barometer V2</source>
-        <translation type="obsolete">Barometer V2</translation>
-    </message>
-    <message>
         <source>Vario source</source>
         <translation>Vario-källa</translation>
     </message>
@@ -2881,10 +2793,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>No Trim</source>
         <translation>Ingen Trim</translation>
-    </message>
-    <message>
-        <source>FSW%1</source>
-        <translation>FSW%1</translation>
     </message>
     <message>
         <source>Really clear existing mixes on CH6?</source>
@@ -3131,14 +3039,6 @@ p, li { white-space: pre-wrap; }
         <translation>Specialfunktioner</translation>
     </message>
     <message>
-        <source>Alti</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Alti+</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Vario</source>
         <translation>Vario</translation>
     </message>
@@ -3149,10 +3049,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Center Min</source>
         <translation>Centrum Min</translation>
-    </message>
-    <message>
-        <source>Custom Screen Type</source>
-        <translation></translation>
     </message>
     <message>
         <source>Nums</source>
@@ -3177,6 +3073,30 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Unable to find sound file %1!</source>
         <translation>Kan inte hitta ljudfilen %1!</translation>
+    </message>
+    <message>
+        <source>Invert Collective</source>
+        <translation>Invertera collective</translation>
+    </message>
+    <message>
+        <source>AND</source>
+        <translation>OCH</translation>
+    </message>
+    <message>
+        <source>Alti</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Alti+</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Custom Screen Type</source>
+        <translation>Specialskärms-typ</translation>
+    </message>
+    <message>
+        <source>CFN%1</source>
+        <translation>CFN%1</translation>
     </message>
 </context>
 <context>
@@ -3347,26 +3267,6 @@ p, li { white-space: pre-wrap; }
         <translation>er9x</translation>
     </message>
     <message>
-        <source>open9x for stock board</source>
-        <translation>open9x för omodifierad radio</translation>
-    </message>
-    <message>
-        <source>gruvin9x stable for stock board</source>
-        <translation type="obsolete">gruvin9x (stabil byggning) för ursprungligt processorkort</translation>
-    </message>
-    <message>
-        <source>gruvin9x stable for v4 board</source>
-        <translation type="obsolete">gruvin9x (stabil byggning) för v4 processorkort</translation>
-    </message>
-    <message>
-        <source>gruvin9x trunk for stock board</source>
-        <translation type="obsolete">gruvin9x (senaste bygget) för ursprungligt processorkort</translation>
-    </message>
-    <message>
-        <source>gruvin9x trunk for v4 board</source>
-        <translation type="obsolete">gruvin9x (senaste bygget) för v4 processorkort</translation>
-    </message>
-    <message>
         <source>Er9x doesn&apos;t accept this protocol</source>
         <translation>Er9x accepterar inte detta protokoll</translation>
     </message>
@@ -3447,22 +3347,6 @@ p, li { white-space: pre-wrap; }
         <translation>Modelldata sparades, men med dessa varningar:</translation>
     </message>
     <message>
-        <source>TX</source>
-        <translation>TX</translation>
-    </message>
-    <message>
-        <source>RX</source>
-        <translation>RX</translation>
-    </message>
-    <message>
-        <source>open9x for gruvin9x board</source>
-        <translation>open9x för gruvin9x-kort</translation>
-    </message>
-    <message>
-        <source>open9x for ersky9x board</source>
-        <translation type="obsolete">open9x för ersky9x-kort</translation>
-    </message>
-    <message>
         <source>ersky9x</source>
         <translation>ersky9x</translation>
     </message>
@@ -3531,14 +3415,6 @@ p, li { white-space: pre-wrap; }
         <translation>PPM%1</translation>
     </message>
     <message>
-        <source>CH%1</source>
-        <translation type="obsolete">KN%1</translation>
-    </message>
-    <message>
-        <source>Timer%1</source>
-        <translation>Timer%1</translation>
-    </message>
-    <message>
         <source>THR</source>
         <translation>GAS</translation>
     </message>
@@ -3573,10 +3449,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>TRN</source>
         <translation>TRN</translation>
-    </message>
-    <message>
-        <source>SW%1</source>
-        <translation type="obsolete">BR%1</translation>
     </message>
     <message>
         <source>ON</source>
@@ -3683,10 +3555,6 @@ p, li { white-space: pre-wrap; }
         <translation>Telemetri</translation>
     </message>
     <message>
-        <source>Play Prompt</source>
-        <translation type="obsolete">Spela Meddelande</translation>
-    </message>
-    <message>
         <source>Play Value</source>
         <translation>Spela Värde</translation>
     </message>
@@ -3701,30 +3569,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Curr</source>
         <translation>Ström</translation>
-    </message>
-    <message>
-        <source>Cnsp</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Powr</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>AccX</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>AccY</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>AccZ</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HDG </source>
-        <translation></translation>
     </message>
     <message>
         <source>VSpd</source>
@@ -4139,18 +3983,6 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>(GV%1)</translation>
     </message>
     <message>
-        <source>Open9x on gruvin9x board doesn&apos;t accept this function</source>
-        <translation>open9x för gruvin9x-kort stödjer inte denna funktion</translation>
-    </message>
-    <message>
-        <source>Open9x on stock board doesn&apos;t accept this function</source>
-        <translation>Open9x för omodifierad 9x-radio accepterar inte denna funktion</translation>
-    </message>
-    <message>
-        <source>Open9x / sky9x doesn&apos;t accept this protocol</source>
-        <translation>Open9x för sky9x accepterar inte detta protokoll</translation>
-    </message>
-    <message>
         <source>Open9x doesn&apos;t allow this number of channels</source>
         <translation>Open9x tillåter inte antalet kanaler</translation>
     </message>
@@ -4167,20 +3999,256 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>Visa inte gaspåslag i Statistiken</translation>
     </message>
     <message>
-        <source>open9x for M128 / stock board</source>
-        <translation>open9x för radio med uppgraderad processor (M128)</translation>
-    </message>
-    <message>
-        <source>open9x for sky9x board</source>
-        <translation>open9x för radio med monterat sky9x-kort</translation>
-    </message>
-    <message>
         <source>Bluetooth interface</source>
         <translation>Blåtandsinterface</translation>
     </message>
     <message>
-        <source>open9x for x9da board</source>
-        <translation>open9x för FrSky x9da</translation>
+        <source>S1</source>
+        <translation>S1</translation>
+    </message>
+    <message>
+        <source>S2</source>
+        <translation>S2</translation>
+    </message>
+    <message>
+        <source>LS</source>
+        <translation>LS</translation>
+    </message>
+    <message>
+        <source>RS</source>
+        <translation>RS</translation>
+    </message>
+    <message>
+        <source>Batt</source>
+        <translation>Batt</translation>
+    </message>
+    <message>
+        <source>Tx</source>
+        <translation>Tx</translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation>Rx</translation>
+    </message>
+    <message>
+        <source>Cnsp</source>
+        <translation>Cnsp</translation>
+    </message>
+    <message>
+        <source>Powr</source>
+        <translation>Powr</translation>
+    </message>
+    <message>
+        <source>AccX</source>
+        <translation>AccX</translation>
+    </message>
+    <message>
+        <source>AccY</source>
+        <translation>AccY</translation>
+    </message>
+    <message>
+        <source>AccZ</source>
+        <translation>AccZ</translation>
+    </message>
+    <message>
+        <source>HDG </source>
+        <translation>HDG </translation>
+    </message>
+    <message>
+        <source>SA-</source>
+        <translation>SA-</translation>
+    </message>
+    <message>
+        <source>SB-</source>
+        <translation>SB-</translation>
+    </message>
+    <message>
+        <source>SC-</source>
+        <translation>SC-</translation>
+    </message>
+    <message>
+        <source>SD-</source>
+        <translation>SD-</translation>
+    </message>
+    <message>
+        <source>SE-</source>
+        <translation>SE-</translation>
+    </message>
+    <message>
+        <source>SG-</source>
+        <translation>SG-</translation>
+    </message>
+    <message>
+        <source>No repeat</source>
+        <translation>Repetera ej</translation>
+    </message>
+    <message>
+        <source>%1 sec</source>
+        <translation>%1 sek</translation>
+    </message>
+    <message>
+        <source>Play Both</source>
+        <translation>Spela båda</translation>
+    </message>
+    <message>
+        <source>Value </source>
+        <translation>Värde</translation>
+    </message>
+    <message>
+        <source>Decr:</source>
+        <translation>Minsk:</translation>
+    </message>
+    <message>
+        <source>Incr:</source>
+        <translation>Öka:</translation>
+    </message>
+    <message>
+        <source>%1s</source>
+        <translation>%1s</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Värde</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Källa</translation>
+    </message>
+    <message>
+        <source>GVAR</source>
+        <translation>GVAR</translation>
+    </message>
+    <message>
+        <source>Increment</source>
+        <translation>Ökning</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gul</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Röd</translation>
+    </message>
+    <message>
+        <source>Winged Shadow How High</source>
+        <translation>Winged Shadow How High</translation>
+    </message>
+    <message>
+        <source>Winged Shadow How High (not supported)</source>
+        <translation>Winged Shadow How High (stöds ej)</translation>
+    </message>
+    <message>
+        <source>FrSky Sensor Hub</source>
+        <translation>FrSky Sensor Hub</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Imperial</source>
+        <translation>Imperial</translation>
+    </message>
+    <message>
+        <source>Metric</source>
+        <translation>Metrisk</translation>
+    </message>
+    <message>
+        <source>Extra Fine</source>
+        <translation>Extrafin</translation>
+    </message>
+    <message>
+        <source>Fine</source>
+        <translation>Fin</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Medium</translation>
+    </message>
+    <message>
+        <source>Coarse</source>
+        <translation>Grov</translation>
+    </message>
+    <message>
+        <source>Exponential</source>
+        <translation>Exponentiell</translation>
+    </message>
+    <message>
+        <source>Count Up</source>
+        <translation>Uppräkning</translation>
+    </message>
+    <message>
+        <source>Count Down</source>
+        <translation>Nedräkning</translation>
+    </message>
+    <message>
+        <source>%1:%2, </source>
+        <translation>%1:%2, </translation>
+    </message>
+    <message>
+        <source>: %1 Channels, %2usec Delay</source>
+        <translation>: %1 Kanaler, %2msec Fördröjning</translation>
+    </message>
+    <message>
+        <source>Rudder</source>
+        <translation>Sidroder</translation>
+    </message>
+    <message>
+        <source>Elevator</source>
+        <translation>Höjdroder</translation>
+    </message>
+    <message>
+        <source>Throttle</source>
+        <translation>Gas</translation>
+    </message>
+    <message>
+        <source>Aileron</source>
+        <translation>Skevroder</translation>
+    </message>
+    <message>
+        <source>Open9x on this board doesn&apos;t accept this function</source>
+        <translation>Open9x stödjer inte funktionen för vald sändare</translation>
+    </message>
+    <message>
+        <source>Open9x doesn&apos;t allow this number of channels for PPM2</source>
+        <translation>Open9X stödjer inte detta antal kanaler för PPM2</translation>
+    </message>
+    <message>
+        <source>Rotary Encoder use in menus navigation</source>
+        <translation>Använd inmatningshjul för att navigera i menyer</translation>
+    </message>
+    <message>
+        <source>openTx for 9X board</source>
+        <translation>openTx för 9X</translation>
+    </message>
+    <message>
+        <source>Battery graph</source>
+        <translation>Batteriikon</translation>
+    </message>
+    <message>
+        <source>openTx for M128 / 9X board</source>
+        <translation>openTx för 9X/9XR med M128-processor</translation>
+    </message>
+    <message>
+        <source>openTx for 9XR board</source>
+        <translation>openTx för Turnigy 9XR</translation>
+    </message>
+    <message>
+        <source>openTx for Gruvin9x board / 9X</source>
+        <translation>openTx för 9X  med Gruvin9x</translation>
+    </message>
+    <message>
+        <source>openTx for Sky9x board / 9X</source>
+        <translation>openTx for 9X med Sky9x</translation>
+    </message>
+    <message>
+        <source>openTx for FrSky Taranis</source>
+        <translation>openTx för FrSky Taranis</translation>
     </message>
 </context>
 <context>
@@ -4309,10 +4377,6 @@ OBS. Fyll enbart i detta fällt om du är säker på vad du gör. Ingen kontroll
 </translation>
     </message>
     <message>
-        <source>avrdoper</source>
-        <translation type="obsolete">AVR-Doper</translation>
-    </message>
-    <message>
         <source>Port</source>
         <translation>Port</translation>
     </message>
@@ -4345,10 +4409,6 @@ m2560 for v4.1 boards</source>
 m2560 för v4.1-kort</translation>
     </message>
     <message>
-        <source>m64</source>
-        <translation type="obsolete">m64</translation>
-    </message>
-    <message>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
         <translation>&lt;b&gt;&lt;u&gt;VARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Detta åerställer säkringarna för %1 till deras ursprungliga värden.&lt;br&gt;Att ändra dessa värden kan skapa allvarliga problem med din radio.&lt;br&gt;Ändra säkringarna  bara om du är helt säker på att de har fel värde!&lt;br&gt;Är du säker på att du vill fortsätta?</translation>
     </message>
@@ -4361,32 +4421,12 @@ m2560 för v4.1-kort</translation>
         <translation>Tryck på knappen för att söka efter AVRDUDEs programfil.</translation>
     </message>
     <message>
-        <source>m128</source>
-        <translation type="obsolete">m128</translation>
-    </message>
-    <message>
-        <source>m2560</source>
-        <translation type="obsolete">m2560</translation>
-    </message>
-    <message>
-        <source>at91sam3s4-9x</source>
-        <translation type="obsolete">at91sam3s4-9x</translation>
-    </message>
-    <message>
         <source>SAM-BA Location</source>
         <translation>Sökväg till SAM-BA</translation>
     </message>
     <message>
         <source>ARM MCU</source>
         <translation>ARM MCU</translation>
-    </message>
-    <message>
-        <source>/dev/ttyUSB0</source>
-        <translation type="obsolete">/dev/ttyUSB0</translation>
-    </message>
-    <message>
-        <source>/dev/ttyUSB1</source>
-        <translation type="obsolete">/dev/ttyUSB1</translation>
     </message>
     <message>
         <source>Location of sam-ba executable</source>
@@ -4416,20 +4456,12 @@ m2560 för v4.1-kort</translation>
         <translation>Ladda firmware</translation>
     </message>
     <message>
-        <source>Version:</source>
-        <translation type="obsolete">Version:</translation>
-    </message>
-    <message>
         <source>Date &amp; Time</source>
         <translation>Dag &amp; Tid</translation>
     </message>
     <message>
         <source>SVN</source>
         <translation>Subversion</translation>
-    </message>
-    <message>
-        <source>MOD/Build</source>
-        <translation type="obsolete">Byggning</translation>
     </message>
     <message>
         <source>Load Image</source>
@@ -4574,18 +4606,10 @@ m2560 för v4.1-kort</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Invalid EEPROM File %1</source>
-        <translation type="obsolete">Ogiltig modelldatafil %1</translation>
-    </message>
-    <message>
         <source>Error reading file %1:
 %2.</source>
         <translation>Fel vid inläsning från filen %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>Invalid binary EEPROM File %1</source>
-        <translation type="obsolete">Ogiltig binär modelldatafil %1</translation>
     </message>
     <message>
         <source>Wrong radio calibration data in profile, eeprom not patched</source>
@@ -4641,98 +4665,6 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>Print to file</source>
         <translation>Skriv till fil</translation>
-    </message>
-    <message>
-        <source>Count Up</source>
-        <translation>Uppräkning</translation>
-    </message>
-    <message>
-        <source>Count Down</source>
-        <translation>Nedräkning</translation>
-    </message>
-    <message>
-        <source>%1:%2, </source>
-        <translation>%1:%2, </translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %2msec Delay</source>
-        <translation type="obsolete">: %1 Kanaler, %2msec fördröjning</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation>Sidroder</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation>Höjdroder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation>Gas</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation>Skevroder</translation>
-    </message>
-    <message>
-        <source>Extra Fine</source>
-        <translation>Extrafin</translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation>Fin</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation>Medium</translation>
-    </message>
-    <message>
-        <source>Coarse</source>
-        <translation>Grov</translation>
-    </message>
-    <message>
-        <source>Exponential</source>
-        <translation>Exponential</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation>Gul</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation>Orange</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation>Röd</translation>
-    </message>
-    <message>
-        <source>---</source>
-        <translation>----</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High</source>
-        <translation>Winged Shadow How High</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High (not supported)</source>
-        <translation>Winged Shadow How High (stöds ej)</translation>
-    </message>
-    <message>
-        <source>FrSky Sensor Hub</source>
-        <translation>FrSky Sensor Hub</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>Imperial</source>
-        <translation>Imperial</translation>
-    </message>
-    <message>
-        <source>Metric</source>
-        <translation>Metrisk</translation>
     </message>
     <message>
         <source>General Model Settings</source>
@@ -4919,20 +4851,8 @@ m2560 för v4.1-kort</translation>
         <translation>Logiska Brytare</translation>
     </message>
     <message>
-        <source>SW</source>
-        <translation type="obsolete">BR</translation>
-    </message>
-    <message>
-        <source>Function Switches</source>
-        <translation>Brytarfunktioner</translation>
-    </message>
-    <message>
         <source>Function</source>
         <translation>Funktion</translation>
-    </message>
-    <message>
-        <source>FSW</source>
-        <translation>FSW</translation>
     </message>
     <message>
         <source>Telemetry Settings</source>
@@ -5027,10 +4947,6 @@ m2560 för v4.1-kort</translation>
         <translation>Slå på</translation>
     </message>
     <message>
-        <source>: %1 Channels, %2usec Delay</source>
-        <translation>: %1 Kanaler, %2msec Fördröjning</translation>
-    </message>
-    <message>
         <source>Gvars</source>
         <translation>Gvars</translation>
     </message>
@@ -5045,6 +4961,22 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>GV</source>
         <translation>GV</translation>
+    </message>
+    <message>
+        <source>Custom Functions</source>
+        <translation>Specialfunktioner</translation>
+    </message>
+    <message>
+        <source>Repeat</source>
+        <translation>Upprepa</translation>
+    </message>
+    <message>
+        <source>CFn</source>
+        <translation>CFn</translation>
+    </message>
+    <message>
+        <source>Safety Switches</source>
+        <translation>Säkerhetsbrytare</translation>
     </message>
 </context>
 <context>
@@ -6031,86 +5963,6 @@ Mode 4:
         <translation>Språk</translation>
     </message>
     <message>
-        <source>Support for frsky telemetry mod</source>
-        <translation type="obsolete">Stöd för  FrSky telemeri-modifiering</translation>
-    </message>
-    <message>
-        <source>Support for jeti telemetry mod</source>
-        <translation type="obsolete">Stöd för Jeti telemetri-modifieering</translation>
-    </message>
-    <message>
-        <source>Enable heli menu and cyclic mix support</source>
-        <translation type="obsolete">Slå på helikoptermenyn och stöd för cyklisk mix</translation>
-    </message>
-    <message>
-        <source>Enable template menu</source>
-        <translation type="obsolete">Slå på menyn Mallar</translation>
-    </message>
-    <message>
-        <source>No splash screen</source>
-        <translation type="obsolete">Ingen startbild</translation>
-    </message>
-    <message>
-        <source>No flight phases</source>
-        <translation type="obsolete">Inga flygfaser</translation>
-    </message>
-    <message>
-        <source>Used if you have modified your radio with haptic mode</source>
-        <translation type="obsolete">Stöd för vibrations-modifiering</translation>
-    </message>
-    <message>
-        <source>Support of frsky PXX protocol</source>
-        <translation type="obsolete">Stöd för FrSky PXX-protokoll</translation>
-    </message>
-    <message>
-        <source>Support for DSM2 modules</source>
-        <translation type="obsolete">Stöd för DSM2-moduler</translation>
-    </message>
-    <message>
-        <source>Support for sound module</source>
-        <translation type="obsolete">Stöd för ljudmodul</translation>
-    </message>
-    <message>
-        <source>PPM center adjustment in limits</source>
-        <translation type="obsolete">Justering av PPM-centrum i menyn för Gränser</translation>
-    </message>
-    <message>
-        <source>Pots use in menus navigation</source>
-        <translation type="obsolete">Bläddra i menyer med potentiometrar</translation>
-    </message>
-    <message>
-        <source>In model setup menus automatically set switch by moving some of them</source>
-        <translation type="obsolete">Använd brytarna för att ställa brytarvärden i menyer</translation>
-    </message>
-    <message>
-        <source>EEprom write Progress bar</source>
-        <translation type="obsolete">Visa skrivning av modelldata </translation>
-    </message>
-    <message>
-        <source>Imperial units</source>
-        <translation type="obsolete">British Imperial Units</translation>
-    </message>
-    <message>
-        <source>Disable heli and templates menus</source>
-        <translation type="obsolete">Ta bort menyer för helikoptrar och mallar</translation>
-    </message>
-    <message>
-        <source>Support for receiving ardupilot data</source>
-        <translation type="obsolete">Stöd för att ta emot ardupilot-data</translation>
-    </message>
-    <message>
-        <source>Support for receiving NMEA data</source>
-        <translation type="obsolete">Stöd för att ta emot NMEA-data</translation>
-    </message>
-    <message>
-        <source>Support for radio modified with regular speaker</source>
-        <translation type="obsolete">Stöd för radio modifierad med en vanlig högtalare</translation>
-    </message>
-    <message>
-        <source>Support for SD memory card</source>
-        <translation type="obsolete">Stöd för SD-minneskort</translation>
-    </message>
-    <message>
         <source>Profile Name</source>
         <translation>Profilnamn</translation>
     </message>
@@ -6140,11 +5992,7 @@ Mode 4:
     </message>
     <message>
         <source>Profile name is empty, profile slot %1 will we deleted.&lt;br&gt;Are you sure ?</source>
-        <translation>Profilnamn sknas. Profilplats %1 kommer att tas bort.&lt;br&gt; Är du säker?</translation>
-    </message>
-    <message>
-        <source>No graphical check boxes and sliders</source>
-        <translation type="obsolete">Använd inte grafiska kontroller</translation>
+        <translation>Profilnamn saknas. Profilplats %1 kommer att tas bort.&lt;br&gt; Är du säker?</translation>
     </message>
     <message>
         <source>Export Profile</source>
@@ -6212,100 +6060,8 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Inställningar för: </translation>
     </message>
     <message>
-        <source>Count Up</source>
-        <translation>Uppräkning</translation>
-    </message>
-    <message>
-        <source>Count Down</source>
-        <translation>Nedräkning</translation>
-    </message>
-    <message>
-        <source>%1:%2, </source>
-        <translation>%1:%2, </translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Namn</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation>Gul</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation>Orange</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation>Röd</translation>
-    </message>
-    <message>
-        <source>---</source>
-        <translation>----</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High</source>
-        <translation>Winged Shadow How High</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High (not supported)</source>
-        <translation>Winged Shadow How High (stöds ej)</translation>
-    </message>
-    <message>
-        <source>FrSky Sensor Hub</source>
-        <translation>FrSky sensor-central</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Inget</translation>
-    </message>
-    <message>
-        <source>Imperial</source>
-        <translation>Imperial</translation>
-    </message>
-    <message>
-        <source>Metric</source>
-        <translation>Metrisk</translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %2msec Delay</source>
-        <translation type="obsolete">: %1 Kanaler, %2msec fördröjning</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation>Sidroder</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation>Höjdroder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation>Gas</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation>Skevroder</translation>
-    </message>
-    <message>
-        <source>Extra Fine</source>
-        <translation>Extrafin</translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation>Fin</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation>Medium</translation>
-    </message>
-    <message>
-        <source>Coarse</source>
-        <translation>Grov</translation>
-    </message>
-    <message>
-        <source>Exponential</source>
-        <translation>Exponentiell</translation>
     </message>
     <message>
         <source>printed on: %1</source>
@@ -6492,10 +6248,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Logiska Brytare</translation>
     </message>
     <message>
-        <source>SW</source>
-        <translation type="obsolete">BR</translation>
-    </message>
-    <message>
         <source>Safety Switches</source>
         <translation>Säkerhetsbrytare</translation>
     </message>
@@ -6608,10 +6360,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Parameter</translation>
     </message>
     <message>
-        <source>: %1 Channels, %2usec Delay</source>
-        <translation>: %1 Kanaler, %2msec Fördröjning</translation>
-    </message>
-    <message>
         <source>Gvars</source>
         <translation>Gvars</translation>
     </message>
@@ -6626,6 +6374,10 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>GV</source>
         <translation>GV</translation>
+    </message>
+    <message>
+        <source>Repeat</source>
+        <translation>Upprepa</translation>
     </message>
 </context>
 <context>
@@ -6905,10 +6657,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Companion 9x-Simulator</translation>
     </message>
     <message>
-        <source>SF</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>SE</source>
         <translation>SE</translation>
     </message>
@@ -7127,6 +6875,10 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>Simulating </source>
         <translation>Simulerar </translation>
+    </message>
+    <message>
+        <source>SF</source>
+        <translation>SF</translation>
     </message>
 </context>
 </TS>
