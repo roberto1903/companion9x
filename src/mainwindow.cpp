@@ -225,7 +225,7 @@ void MainWindow::checkForUpdateFinished(QNetworkReply * reply)
         }
         double c9xver=(c9xversion.left(i).toDouble());
         if (c9xver< vnum) {
-#if defined __APPLE__ || defined WIN32 || !defined __GNUC__
+#if defined WIN32 || !defined __GNUC__ // || defined __APPLE__  // OSX should only notify of updates since no update packages are available. 
           showcheckForUpdatesResult = false; // update is available - do not show dialog
             int ret = QMessageBox::question(this, "companion9x", tr("A new version of companion9x is available (version %1)<br>"
                                                                 "Would you like to download it?").arg(version) ,
