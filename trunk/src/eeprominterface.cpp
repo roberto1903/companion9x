@@ -330,14 +330,14 @@ QString RawSwitch::toString()
                          };
 
 #if defined(WIN32) || !defined(__GNUC__)
-  QString switchesX9D[] = { QString::tr("SAup"), QObject::tr("SA-"), QString::tr("SAdown"),
-                            QString::tr("SBup"), QObject::tr("SB-"), QString::tr("SBdown"),
-                            QString::tr("SCup"), QObject::tr("SC-"), QString::tr("SCdown"),
-                            QString::tr("SDup"), QObject::tr("SD-"), QString::tr("SDdown"),
-                            QString::tr("SEup"), QObject::tr("SE-"), QString::tr("SEdown"),
-                            QString::tr("SFup"), QString::tr("SFdown"),
-                            QString::tr("SGup"), QObject::tr("SG-"), QString::tr("SGdown"),
-                            QString::tr("SHup"), QString::tr("SHdown"),
+  QString switchesX9D[] = { QObject::tr("SAup"), QObject::tr("SA-"), QObject::tr("SAdown"),
+                            QObject::tr("SBup"), QObject::tr("SB-"), QObject::tr("SBdown"),
+                            QObject::tr("SCup"), QObject::tr("SC-"), QObject::tr("SCdown"),
+                            QObject::tr("SDup"), QObject::tr("SD-"), QObject::tr("SDdown"),
+                            QObject::tr("SEup"), QObject::tr("SE-"), QObject::tr("SEdown"),
+                            QObject::tr("SFup"), QObject::tr("SFdown"),
+                            QObject::tr("SGup"), QObject::tr("SG-"), QObject::tr("SGdown"),
+                            QObject::tr("SHup"), QObject::tr("SHdown"),
                           };
 #else
   QString switchesX9D[] = { QString::fromUtf8("SA\u2191"), QString::fromUtf8("SA-"), QString::fromUtf8("SA\u2193"),
