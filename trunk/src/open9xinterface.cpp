@@ -87,7 +87,7 @@ const int Open9xInterface::getEEpromSize()
     case BOARD_SKY9X:
       return EESIZE_SKY9X;
     case BOARD_TARANIS:
-      return EESIZE_X9D;
+      return EESIZE_TARANIS;
     default:
       return 0;
   }
@@ -486,8 +486,8 @@ int Open9xInterface::getSize(ModelData &model)
     return 0;
 
   // TODO something better
-  uint8_t tmp[EESIZE_X9D];
-  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
+  uint8_t tmp[EESIZE_RLC_MAX];
+  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
   // TODO change this name, it's a factory
   Open9xModelDataNew open9xModel(model, board, 213/*TODO*/, GetCurrentFirmwareVariant());
@@ -507,8 +507,8 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   if (board == BOARD_SKY9X)
     return 0;
 
-  uint8_t tmp[EESIZE_X9D];
-  efile->EeFsCreate(tmp, EESIZE_X9D, board, 5);
+  uint8_t tmp[EESIZE_RLC_MAX];
+  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
   // TODO change this name, it's a factory
   Open9xGeneralDataNew open9xGeneral(settings, board, LAST_OPEN9X_AVR_EEPROM_VER, GetCurrentFirmwareVariant());
@@ -555,7 +555,11 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
     case Timers:
       return 2;
+    case Pots:
+      return (board==BOARD_TARANIS ? 4 : 3);
     case Switches:
+      return (board==BOARD_TARANIS ? 8 : 7);
+    case SwitchesPositions:
       return (board==BOARD_TARANIS ? 22 : 9);
     case CustomFunctions:
       if (IS_ARM(board))
@@ -933,7 +937,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
-  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
@@ -962,7 +966,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
-  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
@@ -988,7 +992,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
-  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
@@ -1015,7 +1019,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
-  open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
+  // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));

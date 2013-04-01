@@ -298,7 +298,11 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return 1;
     case Timers:
       return 2;
+    case Pots:
+      return 3;
     case Switches:
+      return 7;
+    case SwitchesPositions:
       return 9;
     case CustomFunctions:
       return 0;

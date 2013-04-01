@@ -967,15 +967,23 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
     eeprom_size = file.size();
     uint8_t *eeprom = (uint8_t *)malloc(eeprom_size);
     QTextStream inputStream(&file);
-    eeprom_size = HexInterface(inputStream).load(eeprom);
-    if (!eeprom_size) 
+    eeprom_size = HexInterface(inputStream).load(eeprom, eeprom_size);
+    if (!eeprom_size) {
+      free(eeprom);
       return false;
+    }
     file.close();
     RadioData radioData;
-    if (!LoadEeprom(radioData, eeprom, eeprom_size))
+    if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+      free(eeprom);
       return false;
-    return true;
-  } else if (fileType==FILE_TYPE_BIN) { //read binary
+    }
+    else {
+      free(eeprom);
+      return true;
+    }
+  }
+  else if (fileType==FILE_TYPE_BIN) { //read binary
     if (!file.open(QFile::ReadOnly))
       return false;
     eeprom_size = file.size();
@@ -984,12 +992,18 @@ bool MainWindow::isValidEEPROM(QString eepromfile)
     long result = file.read((char*)eeprom, eeprom_size);
     file.close();
     if (result != eeprom_size) {
+      free(eeprom);
       return false;
     }
     RadioData radioData;
-    if (!LoadEeprom(radioData, eeprom, eeprom_size))
+    if (!LoadEeprom(radioData, eeprom, eeprom_size)) {
+      free(eeprom);
       return false;
-    return true;
+    }
+    else {
+      free(eeprom);
+      return true;
+    }
   }
   return false;
 }
@@ -1807,8 +1821,8 @@ int MainWindow::getEpromVersion(QString fileName)
         return -1;
       }
     }
-    uint8_t eeprom[EESIZE_GRUVIN9X];
-    int eeprom_size = HexInterface(inputStream).load(eeprom);
+    uint8_t eeprom[EESIZE_RLC_MAX];
+    int eeprom_size = HexInterface(inputStream).load(eeprom, EESIZE_RLC_MAX);
     if (!eeprom_size) {
       QMessageBox::critical(this, tr("Error"), tr("Invalid EEPROM File %1").arg(fileName));
       file.close();

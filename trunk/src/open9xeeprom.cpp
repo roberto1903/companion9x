@@ -9,6 +9,7 @@
 #define HAS_LARGE_LCD(board)                 (board == BOARD_TARANIS)
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
 #define MAX_POTS(board)                      (board==BOARD_TARANIS ? 4 : 3)
+#define MAX_SWITCHES(board)                  (board==BOARD_TARANIS ? 8 : 7)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
 #define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
 #define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
@@ -115,23 +116,23 @@ class SourcesConversionTable: public ConversionTable {
           addConversion(RawSource(SOURCE_TYPE_TRIM, i), val++);
       }
 
-      addConversion(RawSource(SOURCE_TYPE_3POS), val++);
+      addConversion(RawSource(SOURCE_TYPE_SWITCH, 0), val++);
 
       if (!(flags & FLAG_NOSWITCHES)) {
         if (release21March2013) {
-          // TODO remove SOURCE_TYPE_3POS
-          // TODO add SOURCE_TYPE_CUSTOM_SWITCH
-          for (int i=1; i<=3; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
-          for (int i=7; i<=9; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
+          for (int i=1; i<MAX_SWITCHES(board); i++)
+            addConversion(RawSource(SOURCE_TYPE_SWITCH, i), val++);
         }
         else {
-          for (int i=1; i<=9; i++)
-            addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, i).toValue()), val++);
+          for (int i=1; i<=9; i++) {
+            if (i>=4 && i<=6)
+              addConversion(RawSource(SOURCE_TYPE_SWITCH, 0), val++);
+            else
+              addConversion(RawSource(SOURCE_TYPE_SWITCH, i), val++);
+          }
         }
-        for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++)
-          addConversion(RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, i).toValue()), val++);
+        for (int i=0; i<MAX_CUSTOM_SWITCHES(board, version); i++)
+          addConversion(RawSource(SOURCE_TYPE_CUSTOM_SWITCH, i), val++);
       }
 
       if (!release21March2013) {

@@ -250,40 +250,51 @@ double RawSource::getStep(const ModelData & Model)
 
 QString RawSource::toString()
 {
-  QString sticks9X[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
-                         QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")
-                       };
+  QString sticks[]      = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail") };
 
-  QString sticksX9D[] = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail"),
-                          QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS")
-                        };
+  QString trims[]       = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
 
-  QString trims[] = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
+  QString pots9X[]      = { QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3") };
 
-  QString rotary[] = { QObject::tr("REa"), QObject::tr("REb") };
+  QString potsX9D[]     = { QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS") };
 
-  QString telemetry[] = { QObject::tr("Batt"), QObject::tr("Timer1"), QObject::tr("Timer2"),
-                          QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
-                          QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"),
-                          QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
-                          QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
-                          QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time") };
+  QString rotary[]      = { QObject::tr("REa"), QObject::tr("REb") };
+
+  QString switches9X[]  = { QObject::tr("3POS"),
+                            QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
+                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN"),
+                          };
+
+  QString switchesX9D[] = { QObject::tr("SA"), QObject::tr("SB"), QObject::tr("SC"), QObject::tr("SD"),
+                            QObject::tr("SE"), QObject::tr("SF"), QObject::tr("SG"), QObject::tr("SH"),
+                          };
+
+  QString telemetry[]   = { QObject::tr("Batt"), QObject::tr("Timer1"), QObject::tr("Timer2"),
+                            QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
+                            QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"),
+                            QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
+                            QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
+                            QObject::tr("Cur+"), QObject::tr("ACC "), QObject::tr("Time"),
+                          };
   if (index<0) {
     return QObject::tr("----");
   }
   switch(type) {
     case SOURCE_TYPE_STICK:
-      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? sticksX9D[index] : sticks9X[index]);
+      if (index < 4)
+        return sticks[index];
+      else
+        return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? potsX9D[index-4] : pots9X[index-4]);
     case SOURCE_TYPE_TRIM:
       return trims[index];
     case SOURCE_TYPE_ROTARY_ENCODER:
       return rotary[index];
     case SOURCE_TYPE_MAX:
       return QObject::tr("MAX");
-    case SOURCE_TYPE_3POS:
-      return QObject::tr("3POS");
     case SOURCE_TYPE_SWITCH:
-      return RawSwitch(index).toString();
+      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? switchesX9D[index] : switches9X[index]);
+    case SOURCE_TYPE_CUSTOM_SWITCH:
+      return QObject::tr("CS%1").arg(index+1);
     case SOURCE_TYPE_CYC:
       return QObject::tr("CYC%1").arg(index+1);
     case SOURCE_TYPE_PPM:
@@ -318,15 +329,27 @@ QString RawSwitch::toString()
                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
                          };
 
-  QString switchesX9D[] = { QString::fromUtf8("SA\u2191"), QObject::tr("SA-"), QString::fromUtf8("SA\u2193"),
-                            QString::fromUtf8("SB\u2191"), QObject::tr("SB-"), QString::fromUtf8("SB\u2193"),
-                            QString::fromUtf8("SC\u2191"), QObject::tr("SC-"), QString::fromUtf8("SC\u2193"),
-                            QString::fromUtf8("SD\u2191"), QObject::tr("SD-"), QString::fromUtf8("SD\u2193"),
-                            QString::fromUtf8("SE\u2191"), QObject::tr("SE-"), QString::fromUtf8("SE\u2193"),
+#if defined(WIN32)
+  QString switchesX9D[] = { QString::tr("SAup"), QObject::tr("SA-"), QString::tr("SAdown"),
+                            QString::tr("SBup"), QObject::tr("SB-"), QString::tr("SBdown"),
+                            QString::tr("SCup"), QObject::tr("SC-"), QString::tr("SCdown"),
+                            QString::tr("SDup"), QObject::tr("SD-"), QString::tr("SDdown"),
+                            QString::tr("SEup"), QObject::tr("SE-"), QString::tr("SEdown"),
+                            QString::tr("SFup"), QString::tr("SFdown"),
+                            QString::tr("SGup"), QObject::tr("SG-"), QString::tr("SGdown"),
+                            QString::tr("SHup"), QString::tr("SHdown"),
+                          };
+#else
+  QString switchesX9D[] = { QString::fromUtf8("SA\u2191"), QString::fromUtf8("SA-"), QString::fromUtf8("SA\u2193"),
+                            QString::fromUtf8("SB\u2191"), QString::fromUtf8("SB-"), QString::fromUtf8("SB\u2193"),
+                            QString::fromUtf8("SC\u2191"), QString::fromUtf8("SC-"), QString::fromUtf8("SC\u2193"),
+                            QString::fromUtf8("SD\u2191"), QString::fromUtf8("SD-"), QString::fromUtf8("SD\u2193"),
+                            QString::fromUtf8("SE\u2191"), QString::fromUtf8("SE-"), QString::fromUtf8("SE\u2193"),
                             QString::fromUtf8("SF\u2191"), QString::fromUtf8("SF\u2193"),
-                            QString::fromUtf8("SG\u2191"), QObject::tr("SG-"), QString::fromUtf8("SG\u2193"),
+                            QString::fromUtf8("SG\u2191"), QString::fromUtf8("SG-"), QString::fromUtf8("SG\u2193"),
                             QString::fromUtf8("SH\u2191"), QString::fromUtf8("SH\u2193"),
                           };
+#endif
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
@@ -489,6 +512,7 @@ void RegisterEepromInterfaces()
   eepromInterfaces.push_back(new Open9xInterface(BOARD_M128));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_SKY9X));
+  eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Ersky9xInterface());

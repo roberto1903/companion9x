@@ -475,8 +475,8 @@ int8_t gruvin9xFromSource(RawSource source)
   }
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 8;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 0;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 0; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 10+source.index;
   else if (source.type == SOURCE_TYPE_PPM)

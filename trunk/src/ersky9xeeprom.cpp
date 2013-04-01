@@ -308,9 +308,9 @@ t_Ersky9xMixData_v10::t_Ersky9xMixData_v10(MixData &c9x)
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
   }
-  else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
-    srcRaw = 37; // MAX
-  }    
+  /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    srcRaw = 37;
+  } */
   else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
     srcRaw = 9; // FULL
     swtch = er9xFromSwitch(RawSwitch(c9x.srcRaw.index));
@@ -377,9 +377,9 @@ t_Ersky9xMixData_v10::operator MixData ()
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
-  else if (srcRaw == 37) {
+  /* else if (srcRaw == 37) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
-  }  
+  } */
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
   }
@@ -428,9 +428,9 @@ t_Ersky9xMixData_v11::t_Ersky9xMixData_v11(MixData &c9x)
   else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
     srcRaw = 8; // MAX
   }
-  else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
-    srcRaw = 45; // MAX
-  }    
+  /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    srcRaw = 45;
+  } */
   else if (c9x.srcRaw.type == SOURCE_TYPE_GVAR) {
     srcRaw = 46+c9x.srcRaw.index; // MAX
   }    
@@ -500,9 +500,9 @@ t_Ersky9xMixData_v11::operator MixData ()
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
-  else if (srcRaw == 45) {
+  /* else if (srcRaw == 45) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
-  }  
+  } */
   else if (srcRaw > 45) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_GVAR, srcRaw-46);
   }  
@@ -540,8 +540,8 @@ int8_t ersky9xFromSource_v10(RawSource source)
   }
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 8;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 0;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 0; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 10+source.index;
   else if (source.type == SOURCE_TYPE_PPM)
@@ -564,8 +564,8 @@ int8_t ersky9xFromSource_v11(RawSource source)
   }
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 8;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 0;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 0; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 10+source.index;
   else if (source.type == SOURCE_TYPE_PPM)

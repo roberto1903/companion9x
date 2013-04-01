@@ -342,8 +342,8 @@ int8_t t_Th9xCustomSwData::fromSource(RawSource source)
   }
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 8;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 9;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 10+source.index;
   else if (source.type == SOURCE_TYPE_PPM)
@@ -366,9 +366,9 @@ RawSource t_Th9xCustomSwData::toSource(int8_t value)
   else if (value == 8) {
     return RawSource(SOURCE_TYPE_MAX);
   }
-  else if (value == 9) {
+  /* else if (value == 9) {
     return RawSource(SOURCE_TYPE_3POS);
-  }
+  } */
   else if (value <= 12) {
     return RawSource(SOURCE_TYPE_CYC, value-10);
   }

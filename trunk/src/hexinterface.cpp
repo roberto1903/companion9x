@@ -80,9 +80,10 @@ int HexInterface::load(uint8_t *data, int maxsize)
 }
 
 
-bool HexInterface::save(uint8_t *data, const int size) {
+bool HexInterface::save(uint8_t *data, const int size)
+{
   int addr = 0;
-  uint8_t nextbank=1;
+  int nextbank = 1;
   while (addr < size) {
     if (addr>(nextbank*0x010000)-1) {
       stream << iHEXExtRec(nextbank) << "\n";
@@ -98,8 +99,9 @@ bool HexInterface::save(uint8_t *data, const int size) {
   return true;
 }
 
-QString HexInterface::iHEXLine(quint8 * data, quint32 addr, quint8 len) {
-  quint16 bankaddr;
+QString HexInterface::iHEXLine(quint8 * data, quint32 addr, quint8 len)
+{
+  unsigned int bankaddr;
   bankaddr=addr&0xffff;
   QString str = QString(":%1%2000").arg(len, 2, 16, QChar('0')).arg(bankaddr, 4, 16, QChar('0')); //write start, bytecount (32), address and record type
   quint8 chkSum = 0;
@@ -115,7 +117,8 @@ QString HexInterface::iHEXLine(quint8 * data, quint32 addr, quint8 len) {
   return str.toUpper(); // output to file and lf;
 }
 
-QString HexInterface::iHEXExtRec(quint8 bank) {
+QString HexInterface::iHEXExtRec(quint8 bank)
+{
   QString str = QString(":02000002"); //write record type 2 record
   quint8 chkSum = 0;
   chkSum = -2; //-bytecount; recordtype is zero
