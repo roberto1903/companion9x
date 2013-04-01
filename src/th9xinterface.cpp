@@ -190,7 +190,11 @@ int Th9xInterface::getCapability(const Capability capability)
       return 0;
     case Timers:
       return 1;
+    case Pots:
+      return 3;
     case Switches:
+      return 7;
+    case SwitchesPositions:
       return 9;
     case CustomFunctions:
       return 0;

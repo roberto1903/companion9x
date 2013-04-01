@@ -34,9 +34,9 @@
 #define EESIZE_STOCK    2048
 #define EESIZE_M128     4096
 #define EESIZE_GRUVIN9X 4096
-#define EESIZE_X9D      (32*1024)
-#define EESIZE_ACT      (32*1024)
+#define EESIZE_TARANIS  (64*1024)
 #define EESIZE_SKY9X    (128*4096)
+#define EESIZE_RLC_MAX  EESIZE_TARANIS
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
 
@@ -252,8 +252,8 @@ enum RawSourceType {
   SOURCE_TYPE_ROTARY_ENCODER,
   SOURCE_TYPE_TRIM,
   SOURCE_TYPE_MAX,
-  SOURCE_TYPE_3POS,
   SOURCE_TYPE_SWITCH,
+  SOURCE_TYPE_CUSTOM_SWITCH,
   SOURCE_TYPE_CYC,
   SOURCE_TYPE_PPM,
   SOURCE_TYPE_CH,
@@ -746,7 +746,7 @@ class ModelData {
   public:
     ModelData();
     bool      used;
-    char      name[10+1];
+    char      name[12+1];
     uint8_t   modelVoice;
     TimerData timers[2];
     int       protocol;
@@ -781,9 +781,9 @@ class ModelData {
     // int8_t tmrModeB;
     unsigned int switchWarningStates;
     char     gvars_names[MAX_GVARS][6+1];
-    uint8_t gvsource[5];
-    uint8_t   bt_telemetry;
-    uint8_t   numVoice;
+    uint8_t  gvsource[5];
+    uint8_t  bt_telemetry;
+    uint8_t  numVoice;
     /* FrSky */    
     FrSkyData frsky;
     FrSkyErAlarmData frskyalarms[8];
@@ -824,7 +824,9 @@ enum Capability {
  VoicesAsNumbers,
  ModelVoice,
  InstantTrimSW,
+ Pots,
  Switches,
+ SwitchesPositions,
  CustomSwitches,
  CustomAndSwitches,
  CustomSwitchesExt,

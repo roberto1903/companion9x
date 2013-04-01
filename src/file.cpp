@@ -47,7 +47,7 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
     eeFsBlockSize = 64;
     eeFsFirstBlock = 1;
     eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
-    eeFsBlocksMax = 1 + (EESIZE_X9D-eeFsSize)/eeFsBlockSize;
+    eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
     eeFsLinkSize = sizeof(int16_t);
     memset(eeprom, 0, size);
     eeFsArm->version  = eeFsVersion;
@@ -109,7 +109,7 @@ bool EFile::EeFsOpen(uint8_t *eeprom, int size, BoardEnum board)
     eeFsLinkSize = sizeof(int16_t);
     eeFsFirstBlock = 1;
     eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
-    eeFsBlocksMax = 1 + (EESIZE_X9D-eeFsSize)/eeFsBlockSize;
+    eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
     return eeFsArm->mySize == eeFsSize;
   }
   else {
@@ -272,12 +272,12 @@ unsigned int EFile::read(uint8_t *buf, unsigned int i_len)
 {
   unsigned int len = IS_ARM(board) ? eeFsArm->files[m_fileId].size : eeFs->files[m_fileId].size;
   len -= m_pos;
-  if (len < i_len) i_len = len;
+  if (i_len > len) i_len = len;
   len = i_len;
   while(len) {
     if (!m_currBlk) break;
     *buf++ = EeFsGetDat(m_currBlk, m_ofs++);
-    if (m_ofs >= (eeFsBlockSize-1)){
+    if (m_ofs >= (eeFsBlockSize-(IS_ARM(board)? 2 : 1))) {
       m_ofs = 0;
       m_currBlk = EeFsGetLink(m_currBlk);
     }
@@ -301,23 +301,24 @@ unsigned int EFile::readRlc12(uint8_t *buf, unsigned int i_len, bool rlc2)
     return len;
   }
   else {
-    uint16_t i=0;
+    unsigned int i=0;
     for( ; 1; ) {
-      uint8_t l = std::min<uint16_t>(m_zeroes, i_len-i);
-      memset(&buf[i],0,l);
-      i        += l;
-      m_zeroes -= l;
+      uint8_t ln = std::min<uint16_t>(m_zeroes, i_len-i);
+      memset(&buf[i], 0, ln);
+      i        += ln;
+      m_zeroes -= ln;
       if(m_zeroes) break;
 
-      l=std::min<uint16_t>(m_bRlc, i_len-i);
-      uint8_t lr = read(&buf[i], l);
+      ln = std::min<uint16_t>(m_bRlc, i_len-i);
+      uint8_t lr = read(&buf[i], ln);
       i        += lr ;
       m_bRlc   -= lr;
       if(m_bRlc) break;
 
-      if (read(&m_bRlc,1)!=1) break; //read how many bytes to read
+      if (read(&m_bRlc, 1) !=1) break; //read how many bytes to read
 
       assert(m_bRlc & 0x7f);
+      
       if (rlc2) {
         if(m_bRlc&0x80){ // if contains high byte
           m_zeroes  =(m_bRlc>>4) & 0x7;

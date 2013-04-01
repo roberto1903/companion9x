@@ -276,8 +276,8 @@ bool burnDialog::checkeEprom(QString fileName)
         return false;
       }
     }
-    uint8_t eeprom[EESIZE_GRUVIN9X];
-    int eeprom_size = HexInterface(inputStream).load(eeprom);
+    uint8_t eeprom[EESIZE_RLC_MAX];
+    int eeprom_size = HexInterface(inputStream).load(eeprom, EESIZE_RLC_MAX);
     if (!eeprom_size) {
       int res = QMessageBox::question(this, "companion9x",tr("Invalid binary EEPROM File %1, Proceed anyway ?").arg(fileName),QMessageBox::Yes | QMessageBox::No);
       if (res == QMessageBox::No) {

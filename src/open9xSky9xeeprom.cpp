@@ -62,8 +62,8 @@ int8_t open9xArm208FromSource(RawSource source)
   }
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 8;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 9;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 9; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 10+source.index;
   else if (source.type == SOURCE_TYPE_PPM)
@@ -86,9 +86,9 @@ RawSource open9xArm208ToSource(int8_t value)
   else if (value == 8) {
     return RawSource(SOURCE_TYPE_MAX);
   }
-  else if (value == 9) {
+  /* else if (value == 9) {
     return RawSource(SOURCE_TYPE_3POS);
-  }
+  } */
   else if (value <= 12) {
     return RawSource(SOURCE_TYPE_CYC, value-10);
   }
@@ -116,8 +116,8 @@ int8_t open9xArm209FromSource(RawSource source)
     v1 = 8 + source.index;
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 12;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 13;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 13; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 14+source.index;
   else if (source.type == SOURCE_TYPE_PPM)
@@ -143,9 +143,9 @@ RawSource open9xArm209ToSource(int8_t value)
   else if (value == 12) {
     return RawSource(SOURCE_TYPE_MAX);
   }
-  else if (value == 13) {
+  /* else if (value == 13) {
     return RawSource(SOURCE_TYPE_3POS);
-  }
+  } */
   else if (value <= 16) {
     return RawSource(SOURCE_TYPE_CYC, value-14);
   }
@@ -171,8 +171,8 @@ int8_t open9xArm210FromSource(RawSource source)
     v1 = 9 + source.index;
   else if (source.type == SOURCE_TYPE_MAX)
     v1 = 13;
-  else if (source.type == SOURCE_TYPE_3POS)
-    v1 = 14;
+  /* else if (source.type == SOURCE_TYPE_3POS)
+    v1 = 14; */
   else if (source.type == SOURCE_TYPE_CYC)
     v1 = 15+source.index;
   else if (source.type == SOURCE_TYPE_PPM)
@@ -201,9 +201,9 @@ RawSource open9xArm210ToSource(int8_t value)
   else if (value == 13) {
     return RawSource(SOURCE_TYPE_MAX);
   }
-  else if (value == 14) {
+  /* else if (value == 14) {
     return RawSource(SOURCE_TYPE_3POS);
-  }
+  } */
   else if (value <= 17) {
     return RawSource(SOURCE_TYPE_CYC, value-15);
   }
@@ -546,9 +546,9 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
       srcRaw = 8;
     }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 9;
-    }
+    } */
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
       srcRaw = 9 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
@@ -630,9 +630,9 @@ t_Open9xArmMixData_v208::operator MixData ()
     else if (srcRaw == 8) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    else if (srcRaw == 9) {
+    /* else if (srcRaw == 9) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    }
+    } */
     else if (srcRaw <= 9+9+O9X_ARM_NUM_CSW) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-9).toValue());
     }
@@ -689,9 +689,9 @@ t_Open9xArmMixData_v209::t_Open9xArmMixData_v209(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
       srcRaw = 9 + c9x.srcRaw.index;
     }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 13;
-    }
+    } */
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
       srcRaw = 13 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
@@ -776,9 +776,9 @@ t_Open9xArmMixData_v209::operator MixData ()
     else if (srcRaw == 12) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    else if (srcRaw == 13) {
+    /* else if (srcRaw == 13) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    }
+    } */
     else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-13).toValue());
     }
@@ -835,9 +835,9 @@ t_Open9xArmMixData_v210::t_Open9xArmMixData_v210(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
       srcRaw = 12;
     }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 13;
-    }
+    } */
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
       srcRaw = 13 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
@@ -923,9 +923,9 @@ t_Open9xArmMixData_v210::operator MixData ()
     else if (srcRaw == 12) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    else if (srcRaw == 13) {
+    /* else if (srcRaw == 13) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    }
+    } */
     else if (srcRaw <= 13+9+O9X_ARM_NUM_CSW) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-13).toValue());
     }
@@ -986,9 +986,9 @@ t_Open9xArmMixData_v212::t_Open9xArmMixData_v212(MixData &c9x)
     else if (c9x.srcRaw.type == SOURCE_TYPE_MAX) {
       srcRaw = 13;
     }
-    else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
+    /* else if (c9x.srcRaw.type == SOURCE_TYPE_3POS) {
       srcRaw = 14;
-    }
+    } */
     else if (c9x.srcRaw.type == SOURCE_TYPE_SWITCH) {
       srcRaw = 14 + open9xArmFromSwitch(RawSwitch(c9x.srcRaw.index));
     }
@@ -1045,9 +1045,9 @@ t_Open9xArmMixData_v212::operator MixData ()
     else if (srcRaw == 13) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    else if (srcRaw == 14) {
+    /* else if (srcRaw == 14) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    }
+    } */
     else if (srcRaw <= 14+9+O9X_ARM_NUM_CSW) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xArmToSwitch(srcRaw-14).toValue());
     }

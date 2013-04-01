@@ -23,7 +23,7 @@ class HexInterface {
   public:
     HexInterface(QTextStream &stream);
 
-    int load(uint8_t *output, int maxsize=4096);
+    int load(uint8_t *output, int maxsize);
     bool save(uint8_t *data, const int size);
 
   protected:
