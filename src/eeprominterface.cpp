@@ -329,7 +329,7 @@ QString RawSwitch::toString()
                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
                          };
 
-#if defined(WIN32)
+#if defined(WIN32) || !defined(__GNUC__)
   QString switchesX9D[] = { QString::tr("SAup"), QObject::tr("SA-"), QString::tr("SAdown"),
                             QString::tr("SBup"), QObject::tr("SB-"), QString::tr("SBdown"),
                             QString::tr("SCup"), QObject::tr("SC-"), QString::tr("SCdown"),
