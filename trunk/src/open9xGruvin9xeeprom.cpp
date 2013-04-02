@@ -176,7 +176,7 @@ t_Open9xGruvin9xMixData_v207::operator MixData ()
       c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
     } */
     else if (srcRaw <= 32) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-11).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-11);
     }
     else if (srcRaw <= 35) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-33);
@@ -324,11 +324,11 @@ t_Open9xGruvin9xMixData_v209::operator MixData ()
     else if (srcRaw == 14) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    /* else if (srcRaw == 15) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    } */
+    else if (srcRaw == 15) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, 0);
+    }
     else if (srcRaw <= 36) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-15).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-15);
     }
     else if (srcRaw <= 39) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-37);
@@ -444,11 +444,11 @@ t_Open9xGruvin9xMixData_v211::operator MixData ()
     else if (srcRaw == 14) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
     }
-    /* else if (srcRaw == 15) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_3POS);
-    } */
+    else if (srcRaw == 15) {
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, 0);
+    }
     else if (srcRaw <= 36) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, open9xStockToSwitch(srcRaw-15).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, srcRaw-15);
     }
     else if (srcRaw <= 39) {
       c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-37);

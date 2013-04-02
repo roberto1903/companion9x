@@ -132,13 +132,18 @@ bool Ersky9xInterface::loadxml(RadioData &radioData, QDomDocument &doc)
     radioData.generalSettings=ersky9xGeneral;
     std::cout << "version " << (unsigned int)ersky9xGeneral.myVers << " ";
   }
-  for(int i=0; i<getMaxModels(); i++)
-  {
-    Ersky9xModelData_v11 ersky9xModel;
-    memset(&ersky9xModel,0,sizeof(ersky9xModel));
-    if(loadModelDataXML(&doc, &ersky9xModel, i)) {
-      applyStickModeToModel(ersky9xModel, radioData.generalSettings.stickMode+1);
-      radioData.models[i] = ersky9xModel;
+  for(int i=0; i<getMaxModels(); i++) {
+    if (ersky9xGeneral.myVers == 10) {
+      if (!loadModelDataXML<Ersky9xModelData_v10>(&doc, &radioData.models[i], i, radioData.generalSettings.stickMode+1)) {
+        std::cout << "ko\n";
+        return false;
+      }
+    }
+    else {
+      if (!loadModelDataXML<Ersky9xModelData_v11>(&doc, &radioData.models[i], i, radioData.generalSettings.stickMode+1)) {
+        std::cout << "ko\n";
+        return false;
+      }
     }
   }
   std::cout << "ok\n";
@@ -445,15 +450,19 @@ bool Ersky9xInterface::loadGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * 
   return true;
 }
 
-bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum)
+template <class T>
+bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, ModelData *model, int modelNum, int stickMode)
 {
+  T ersky9xModel;
+  memset(&ersky9xModel, 0, sizeof(ersky9xModel));
+
   //look for MODEL_DATA with modelNum attribute.
   //if modelNum = -1 then just pick the first one
   QDomNodeList ndl = qdoc->elementsByTagName("MODEL_DATA");
 
   //cycle through nodes to find correct model number
   QDomNode k = ndl.at(0);
-  if(modelNum>=0) {
+  if (modelNum>=0) {
     while(!k.isNull()) {
       int a = k.toElement().attribute("number").toInt();
       if(a==modelNum)
@@ -462,9 +471,8 @@ bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v1
     }
   }
 
-  if(k.isNull()) // couldn't find
+  if (k.isNull()) // couldn't find
     return false;
-
 
   //load cdata into tgen
   QDomNode n = k.toElement().elementsByTagName("Data").at(0).firstChild();// get all children in Data
@@ -473,11 +481,13 @@ bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v1
       QString ds = n.toCDATASection().data();
       QByteArray ba = QByteArray::fromBase64(ds.toAscii());
       const char * data = ba.data();
-      memcpy(tmod, data, std::min((unsigned int)ba.size(), (unsigned int)sizeof(Ersky9xModelData_v11)));
+      memcpy(&ersky9xModel, data, std::min((unsigned int)ba.size(), sizeof(ersky9xModel)));
       break;
     }
     n = n.nextSibling();
   }
-  //check version?
+
+  applyStickModeToModel(ersky9xModel, stickMode);
+  *model = ersky9xModel;
   return true;
 }

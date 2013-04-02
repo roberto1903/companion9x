@@ -1011,7 +1011,8 @@ class CustomFunctionsConversionTable: public ConversionTable {
       addConversion(FuncTrainerAIL, val++);
       addConversion(FuncInstantTrim, val++);
       addConversion(FuncPlaySound, val++);
-      addConversion(FuncPlayHaptic, val++);
+      if (board != BOARD_TARANIS)
+        addConversion(FuncPlayHaptic, val++);
       addConversion(FuncReset, val++);
       addConversion(FuncVario, val++);
       addConversion(FuncPlayPrompt, val++);

@@ -365,11 +365,11 @@ t_Ersky9xMixData_v10::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, -swtch).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch < -3 ? -swtch-3 : -swtch);
       c9x.weight = -weight;
     }
     else if (swtch > 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch > 3 ? swtch-3 : swtch);
     }
     else {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
@@ -377,9 +377,9 @@ t_Ersky9xMixData_v10::operator MixData ()
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
-  /* else if (srcRaw == 37) {
-    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
-  } */
+  else if (srcRaw == 37) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, 0);
+  }
   else if (srcRaw <= 12) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CYC, srcRaw-10);
   }
@@ -488,11 +488,11 @@ t_Ersky9xMixData_v11::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_SWITCH, -swtch).toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch < -3 ? -swtch-3 : -swtch);
       c9x.weight = -weight;
     }
     else if (swtch > 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch > 3 ? swtch-3 : swtch);
     }
     else {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
@@ -500,9 +500,9 @@ t_Ersky9xMixData_v11::operator MixData ()
     if (mltpx != MLTPX_REP)
       c9x.swtch = RawSwitch(SWITCH_TYPE_NONE);
   }
-  /* else if (srcRaw == 45) {
-    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, SOURCE_TYPE_3POS);
-  } */
+  else if (srcRaw == 45) {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, 0);
+  }
   else if (srcRaw > 45) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_GVAR, srcRaw-46);
   }  

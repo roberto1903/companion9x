@@ -71,7 +71,8 @@ class Ersky9xInterface : public EEPROMInterface
     
     bool loadGeneralDataXML(QDomDocument * qdoc, Ersky9xGeneral * tgen); // get data from XML
     
-    bool loadModelDataXML(QDomDocument * qdoc, Ersky9xModelData_v11 * tmod, int modelNum = -1); // get data from XML
+    template <class T>
+    bool loadModelDataXML(QDomDocument * qdoc, ModelData * model, int modelNum, int stickMode); // get data from XML
 
 };
 
