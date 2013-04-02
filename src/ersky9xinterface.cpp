@@ -481,7 +481,7 @@ bool Ersky9xInterface::loadModelDataXML(QDomDocument * qdoc, ModelData *model, i
       QString ds = n.toCDATASection().data();
       QByteArray ba = QByteArray::fromBase64(ds.toAscii());
       const char * data = ba.data();
-      memcpy(&ersky9xModel, data, std::min((unsigned int)ba.size(), sizeof(ersky9xModel)));
+      memcpy(&ersky9xModel, data, std::min(ba.size(), (int)sizeof(ersky9xModel)));
       break;
     }
     n = n.nextSibling();
