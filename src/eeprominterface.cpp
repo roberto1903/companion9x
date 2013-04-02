@@ -248,6 +248,8 @@ double RawSource::getStep(const ModelData & Model)
   }
 }
 
+#define CHECK_IN_ARRAY(T, index) (index < (int)sizeof(T)/sizeof(T[0]) ? T[index] : "???")
+
 QString RawSource::toString()
 {
   QString sticks[]      = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail") };
@@ -292,7 +294,7 @@ QString RawSource::toString()
     case SOURCE_TYPE_MAX:
       return QObject::tr("MAX");
     case SOURCE_TYPE_SWITCH:
-      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? switchesX9D[index] : switches9X[index]);
+      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? CHECK_IN_ARRAY(switchesX9D, index) : CHECK_IN_ARRAY(switches9X, index));
     case SOURCE_TYPE_CUSTOM_SWITCH:
       return QObject::tr("CS%1").arg(index+1);
     case SOURCE_TYPE_CYC:
@@ -305,11 +307,7 @@ QString RawSource::toString()
       else
         return QObject::tr("X%1").arg(index-GetEepromInterface()->getCapability(Outputs)+1);
     case SOURCE_TYPE_TELEMETRY:
-      if (index<int(sizeof(telemetry)/sizeof(QString)))
-        return telemetry[index];
-      else
-        return QObject::tr("----");
-      return telemetry[index];
+      return CHECK_IN_ARRAY(telemetry, index);
     case SOURCE_TYPE_GVAR:
       return QObject::tr("GV%1").arg(index+1);      
     default:

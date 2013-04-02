@@ -32,7 +32,6 @@
 #define PPM_UNIT_PERCENT_PREC1
 #define AUDIO
 #define VOICE
-#define HAPTIC
 #define PXX
 #define DBLKEYS
 #define AUTOSWITCH
@@ -91,7 +90,6 @@ namespace Open9xX9D {
 #include "../opentx/taranis/audio_driver.cpp"
 #include "../opentx/audio_arm.cpp"
 #include "../opentx/translations/tts_en.cpp"
-#include "../opentx/haptic.cpp"
 
 int16_t g_anas[NUM_STICKS+BOARD_X9D_NUM_POTS];
 

@@ -5572,7 +5572,7 @@ void ModelEdit::applyTemplate(uint8_t idx)
   //Servo Test
   if(idx==j++) {
     md=setDest(15); md->srcRaw=RawSource(SOURCE_TYPE_CH, 15);   md->weight= 100; md->speedUp = 8; md->speedDown = 8; md->swtch=RawSwitch();
-    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_SWITCH, RawSwitch(SWITCH_TYPE_VIRTUAL, 1).toValue()); md->weight= 110; md->swtch=RawSwitch();
+    md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_CUSTOM_SWITCH, 0); md->weight= 110; md->swtch=RawSwitch();
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight=-110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 2); md->mltpx=MLTPX_REP;
     md=setDest(16); md->srcRaw=RawSource(SOURCE_TYPE_MAX);  md->weight= 110; md->swtch=RawSwitch(SWITCH_TYPE_VIRTUAL, 3); md->mltpx=MLTPX_REP;
     setSwitch(1, CS_FN_LESS, RawSource(SOURCE_TYPE_CH, 14).toValue(), RawSource(SOURCE_TYPE_CH, 15).toValue());
@@ -5592,7 +5592,6 @@ void ModelEdit::applyTemplate(uint8_t idx)
     md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight=100; md->swtch=RawSwitch(); //CH3 THR
     md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0);  md->weight=100; md->swtch=RawSwitch(); //CH4 RUD
   }
-
 }
 
 void ModelEdit::ControlCurveSignal(bool flag)

@@ -333,11 +333,11 @@ t_Er9xMixData::operator MixData ()
   }
   else if (srcRaw == 9) {
     if (swtch < 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, -c9x.swtch.toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch < -3 ? -swtch-3 : -swtch);
       c9x.weight = -weight;
     }
     else if (swtch > 0) {
-      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, c9x.swtch.toValue());
+      c9x.srcRaw = RawSource(SOURCE_TYPE_SWITCH, swtch > 3 ? swtch-3 : swtch);
     }
     else {
       c9x.srcRaw = RawSource(SOURCE_TYPE_MAX);
