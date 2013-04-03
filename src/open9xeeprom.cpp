@@ -83,7 +83,7 @@ class SwitchesConversionTable: public ConversionTable {
 class SourcesConversionTable: public ConversionTable {
 
   public:
-    SourcesConversionTable(BoardEnum board, unsigned int version, unsigned long flags=0)
+    SourcesConversionTable(BoardEnum board, unsigned int version, unsigned int variant, unsigned long flags=0)
     {
       bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
 
@@ -148,8 +148,10 @@ class SourcesConversionTable: public ConversionTable {
 
       if (!(flags & FLAG_NOTELEMETRY)) {
         if (release21March2013) {
-          for (int i=0; i<5; i++)
-            addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
+          if (board != BOARD_STOCK || (variant & GVARS_VARIANT)) {
+            for (int i=0; i<5; i++)
+              addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
+          }
         }
 
         if (release21March2013)
@@ -269,9 +271,9 @@ class SwitchField: public ConversionField< SignedField<N> > {
 template <int N>
 class SourceField: public ConversionField< UnsignedField<N> > {
   public:
-    SourceField(RawSource & source, BoardEnum board, unsigned int version, unsigned long flags=0):
+    SourceField(RawSource & source, BoardEnum board, unsigned int version, unsigned int variant, unsigned long flags=0):
       ConversionField< UnsignedField<N> >(_source, &sourcesConversionTable, "Source"),
-      sourcesConversionTable(board, version, flags),
+      sourcesConversionTable(board, version, variant, flags),
       source(source),
       _source(0)
     {
@@ -297,13 +299,13 @@ class SourceField: public ConversionField< UnsignedField<N> > {
 
 class HeliField: public StructField {
   public:
-    HeliField(SwashRingData & heli, BoardEnum board, unsigned int version)
+    HeliField(SwashRingData & heli, BoardEnum board, unsigned int version, unsigned int variant)
     {
       Append(new BoolField<1>(heli.invertELE));
       Append(new BoolField<1>(heli.invertAIL));
       Append(new BoolField<1>(heli.invertCOL));
       Append(new UnsignedField<5>(heli.type));
-      Append(new SourceField<8>(heli.collectiveSource, board, version));
+      Append(new SourceField<8>(heli.collectiveSource, board, version, variant));
       //, FLAG_NOSWITCHES)); Fix shift in collective
       Append(new UnsignedField<8>(heli.value));
     }
@@ -902,14 +904,15 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
 
 class CustomSwitchField: public TransformedField {
   public:
-    CustomSwitchField(CustomSwData & csw, BoardEnum board, unsigned int version):
+    CustomSwitchField(CustomSwData & csw, BoardEnum board, unsigned int version, unsigned int variant):
       TransformedField(internalField),
       internalField("CustomSwitch"),
       csw(csw),
       board(board),
       version(version),
+      variant(variant),
       functionsConversionTable(board, version),
-      sourcesConversionTable(board, version, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES),
+      sourcesConversionTable(board, version, variant, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES),
       switchesConversionTable(board, version)
     {
       internalField.Append(new SignedField<8>(v1));
@@ -977,6 +980,7 @@ class CustomSwitchField: public TransformedField {
     CustomSwData & csw;
     BoardEnum board;
     unsigned int version;
+    unsigned int variant;
     CustomSwitchesFunctionsTable functionsConversionTable;
     SourcesConversionTable sourcesConversionTable;
     SwitchesConversionTable switchesConversionTable;
@@ -1077,14 +1081,15 @@ class SwitchesWarningField: public TransformedField {
 
 class CustomFunctionField: public TransformedField {
   public:
-    CustomFunctionField(FuncSwData & fn, BoardEnum board, unsigned int version):
+    CustomFunctionField(FuncSwData & fn, BoardEnum board, unsigned int version, unsigned int variant):
       TransformedField(internalField),
       internalField("CustomFunction"),
       fn(fn),
       board(board),
       version(version),
+      variant(variant),
       functionsConversionTable(board, version),
-      sourcesConversionTable(board, version, FLAG_NONONE),
+      sourcesConversionTable(board, version, variant, FLAG_NONONE),
       _param(0),
       _delay(0),
       _union_param(0)
@@ -1182,7 +1187,7 @@ class CustomFunctionField: public TransformedField {
             sourcesConversionTable.exportValue(fn.param, (int &)_param);
           }
           else {
-            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).exportValue(fn.param, (int &)_param);
+            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).exportValue(fn.param, (int &)_param);
           }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
@@ -1234,7 +1239,7 @@ class CustomFunctionField: public TransformedField {
             sourcesConversionTable.importValue(value, (int &)fn.param);
           }
           else {
-            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(value, (int &)fn.param);
+            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).importValue(value, (int &)fn.param);
           }
         }
         else {
@@ -1264,7 +1269,7 @@ class CustomFunctionField: public TransformedField {
             sourcesConversionTable.importValue(_param, (int &)fn.param);
           }
           else {
-            SourcesConversionTable(board, version, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
+            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
           }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
@@ -1285,6 +1290,7 @@ class CustomFunctionField: public TransformedField {
     FuncSwData & fn;
     BoardEnum board;
     unsigned int version;
+    unsigned int variant;
     CustomFunctionsConversionTable functionsConversionTable;
     SourcesConversionTable sourcesConversionTable;
     char _arm_param[6];
@@ -1538,10 +1544,10 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new ExpoField(modelData.expoData[i], board, version));
   Append(new CurvesField(modelData.curves, board));
   for (int i=0; i<MAX_CUSTOM_SWITCHES(board, version); i++)
-    Append(new CustomSwitchField(modelData.customSw[i], board, version));
+    Append(new CustomSwitchField(modelData.customSw[i], board, version, variant));
   for (int i=0; i<MAX_CUSTOM_FUNCTIONS(board, version); i++)
-    Append(new CustomFunctionField(modelData.funcSw[i], board, version));
-  Append(new HeliField(modelData.swashRingData, board, version));
+    Append(new CustomFunctionField(modelData.funcSw[i], board, version, variant));
+  Append(new HeliField(modelData.swashRingData, board, version, variant));
   for (int i=0; i<MAX_PHASES(board, version); i++)
     Append(new PhaseField(modelData.phaseData[i], i, board, version));
   Append(new SignedField<8>(modelData.ppmFrameLength));
