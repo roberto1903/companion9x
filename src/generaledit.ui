@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>683</width>
-    <height>714</height>
+    <height>743</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -97,6 +97,22 @@
      </layout>
     </widget>
    </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>334</width>
+       <height>6</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="sizePolicy">
@@ -136,7 +152,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </item>
         </widget>
        </item>
-       <item row="35" column="2">
+       <item row="36" column="2">
         <widget class="QSpinBox" name="timezoneSB">
          <property name="minimum">
           <number>-14</number>
@@ -163,7 +179,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="36" column="4">
+       <item row="37" column="4">
         <widget class="QLabel" name="label_13">
          <property name="text">
           <string>Channel Order (For Templates)</string>
@@ -180,7 +196,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="36" column="2">
+       <item row="37" column="2">
         <widget class="QComboBox" name="stickmodeCB">
          <property name="toolTip">
           <string/>
@@ -307,6 +323,35 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="7" column="2">
+        <widget class="QComboBox" name="hapticLengthCB">
+         <item>
+          <property name="text">
+           <string>X-Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Normal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Long</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X-Long</string>
+          </property>
+         </item>
+        </widget>
+       </item>
        <item row="7" column="0">
         <widget class="QLabel" name="label_HL">
          <property name="text">
@@ -355,6 +400,19 @@ p, li { white-space: pre-wrap; }
           <string>BackLight  Auto OFF after</string>
          </property>
         </widget>
+       </item>
+       <item row="28" column="2" colspan="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item row="11" column="0">
         <widget class="QLabel" name="inputfilterLabel">
@@ -685,19 +743,6 @@ Acceptable values are 5v..10v</string>
          </property>
         </widget>
        </item>
-       <item row="28" column="2" colspan="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>5</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="23" column="5">
         <widget class="QCheckBox" name="splashScreenChkB">
          <property name="maximumSize">
@@ -807,7 +852,7 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </property>
         </widget>
        </item>
-       <item row="35" column="4" colspan="2">
+       <item row="36" column="4" colspan="2">
         <layout class="QHBoxLayout" name="gpsFormatLayout">
          <item>
           <widget class="QLabel" name="gpsFormatLabel">
@@ -845,14 +890,14 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </property>
         </widget>
        </item>
-       <item row="35" column="0">
+       <item row="36" column="0">
         <widget class="QLabel" name="label_timezone">
          <property name="text">
           <string>Timeshift from UTC</string>
          </property>
         </widget>
        </item>
-       <item row="36" column="5">
+       <item row="37" column="5">
         <widget class="QComboBox" name="channelorderCB">
          <property name="toolTip">
           <string/>
@@ -1004,7 +1049,7 @@ This is used by the templated to determine which channel goes to what number out
          </property>
         </widget>
        </item>
-       <item row="36" column="0">
+       <item row="37" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
           <string>Stick Mode</string>
@@ -1110,35 +1155,6 @@ p, li { white-space: pre-wrap; }
          <property name="text">
           <string>Speaker Volume</string>
          </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
-        <widget class="QComboBox" name="hapticLengthCB">
-         <item>
-          <property name="text">
-           <string>X-Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Normal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Long</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>X-Long</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="7" column="4">
@@ -1289,6 +1305,13 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="16" column="5">
+        <widget class="QSpinBox" name="BLBright_SB">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
        <item row="16" column="2">
         <widget class="QComboBox" name="displayTypeCB">
          <item>
@@ -1307,13 +1330,6 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_BLBright">
          <property name="text">
           <string>BackLight Brightness</string>
-         </property>
-        </widget>
-       </item>
-       <item row="16" column="5">
-        <widget class="QSpinBox" name="BLBright_SB">
-         <property name="maximum">
-          <number>100</number>
          </property>
         </widget>
        </item>
@@ -1360,6 +1376,57 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="maximum">
           <number>120</number>
+         </property>
+        </widget>
+       </item>
+       <item row="35" column="4" colspan="2">
+        <layout class="QHBoxLayout" name="pxxCountry">
+         <item>
+          <widget class="QLabel" name="countrycode_label">
+           <property name="text">
+            <string>Country Code</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="countrycode_CB">
+           <item>
+            <property name="text">
+             <string>America</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Europe</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Japan</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="35" column="2">
+        <widget class="QComboBox" name="units_CB">
+         <item>
+          <property name="text">
+           <string>Metric</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Imperial</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="35" column="0">
+        <widget class="QLabel" name="units_label">
+         <property name="text">
+          <string>Measurement Units</string>
          </property>
         </widget>
        </item>
@@ -2611,22 +2678,6 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
     </widget>
-   </item>
-   <item row="1" column="0">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::MinimumExpanding</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>334</width>
-       <height>6</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
