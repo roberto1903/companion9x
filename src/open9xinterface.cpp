@@ -1080,23 +1080,15 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
-  open9x->addOption("imperial", QObject::tr("Imperial units"));
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   firmwares.push_back(open9x);
     
   /* Taranis board */
   open9x = new Open9xFirmware("opentx-taranis", QObject::tr("openTx for FrSky Taranis"), new Open9xInterface(BOARD_TARANIS), geturl(BOARD_TARANIS), getstamp(BOARD_TARANIS), true);
-  open9x->setVariantBase(FRSKY_VARIANT);
-  open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
-  open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
-  open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
-  open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
+  open9x->addOption("noheli", QObject::tr("Disable HELI menu and cyclic mix support"));
+  open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
+  open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
-  open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
-  open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
-  open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
-  open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
 
 }
