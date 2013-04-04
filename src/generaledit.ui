@@ -1392,17 +1392,17 @@ p, li { white-space: pre-wrap; }
           <widget class="QComboBox" name="countrycode_CB">
            <item>
             <property name="text">
-             <string>America</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
              <string>Europe</string>
             </property>
            </item>
            <item>
             <property name="text">
              <string>Japan</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>America</string>
             </property>
            </item>
           </widget>
