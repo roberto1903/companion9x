@@ -6,6 +6,7 @@
 #include "expodialog.h"
 #include "mixerdialog.h"
 #include "simulatordialog.h"
+#include "xsimulatordialog.h"
 #include "modelconfigdialog.h"
 #include <assert.h>
 #include <QtGui>
@@ -4534,9 +4535,15 @@ void ModelEdit::launchSimulation()
   if (GetEepromInterface()->getSimulator()) {
     RadioData simuData = radioData;
     simuData.models[id_model] = g_model;
-    simulatorDialog sd(this);
-    sd.loadParams(simuData, id_model);
-    sd.exec();
+    if (GetEepromInterface()->getCapability(SimulatorType)) {
+      xsimulatorDialog sd(this);
+      sd.loadParams(simuData, id_model);
+      sd.exec();
+    } else {
+      simulatorDialog sd(this);
+      sd.loadParams(simuData, id_model);
+      sd.exec();
+    }
   }
   else {
     QMessageBox::warning(NULL,
