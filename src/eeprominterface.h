@@ -865,6 +865,8 @@ enum Capability {
  HasTTrace,
  HasExpoNames,
  HasMixerNames,
+ HasPxxCountry,
+ HasGeneralUnits,
  NoTimerDirs,
  NoThrExpo,
  OptrexDisplay,
