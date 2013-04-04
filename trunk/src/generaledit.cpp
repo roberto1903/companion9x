@@ -80,6 +80,17 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swtchWarnChkB->hide();
       layout()->removeItem(ui->swwarn_layout);
     }
+    if (!GetEepromInterface()->getCapability( HasPxxCountry)) {
+      ui->countrycode_label->hide();
+      ui->countrycode_CB->hide();
+      layout()->removeItem(ui->pxxCountry);
+    } else {
+      ui->countrycode_CB->setCurrentIndex(g_eeGeneral.countryCode);
+    }
+    if (!GetEepromInterface()->getCapability( HasGeneralUnits)) {
+      ui->units_label->hide();
+      ui->units_CB->hide();
+    }
     
     if (!GetEepromInterface()->getCapability(TelemetryTimeshift)) {
       ui->label_timezone->hide();
@@ -366,6 +377,11 @@ void GeneralEdit::on_re_CB_currentIndexChanged(int index)
   updateSettings();
 }
 
+void GeneralEdit::on_countrycode_CB_currentIndexChanged(int index)
+{
+  g_eeGeneral.countryCode = ui->countrycode_CB->currentIndex();
+  updateSettings();
+}
 
 void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 {

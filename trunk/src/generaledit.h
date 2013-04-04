@@ -54,6 +54,7 @@ private slots:
     void on_displayTypeCB_currentIndexChanged(int index);
     void on_BLBright_SB_editingFinished();
     void on_re_CB_currentIndexChanged(int index);
+    void on_countrycode_CB_currentIndexChanged(int index);
     void on_trnMode_1_currentIndexChanged(int index);
     void on_trnChn_1_currentIndexChanged(int index);
     void on_swtchCB_1_currentIndexChanged(int index);
