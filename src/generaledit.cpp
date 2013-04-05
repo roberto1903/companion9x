@@ -90,6 +90,8 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     if (!GetEepromInterface()->getCapability( HasGeneralUnits)) {
       ui->units_label->hide();
       ui->units_CB->hide();
+    } else {
+      ui->units_CB->setCurrentIndex(g_eeGeneral.imperial);
     }
     
     if (!GetEepromInterface()->getCapability(TelemetryTimeshift)) {
@@ -380,6 +382,12 @@ void GeneralEdit::on_re_CB_currentIndexChanged(int index)
 void GeneralEdit::on_countrycode_CB_currentIndexChanged(int index)
 {
   g_eeGeneral.countryCode = ui->countrycode_CB->currentIndex();
+  updateSettings();
+}
+
+void GeneralEdit::on_units_CB_currentIndexChanged(int index)
+{
+  g_eeGeneral.imperial = ui->units_CB->currentIndex();
   updateSettings();
 }
 
