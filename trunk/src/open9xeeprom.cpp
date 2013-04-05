@@ -1696,6 +1696,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
     if (version >= 214) {
       internalField.Append(new UnsignedField<8>(generalData.rotarySteps)); // TODO
       internalField.Append(new UnsignedField<8>(generalData.countryCode)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.imperial)); // TODO
     }
   }
 }

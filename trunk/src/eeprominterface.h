@@ -436,6 +436,7 @@ class GeneralSettings {
     unsigned int sticksGain;
     unsigned int rotarySteps;
     unsigned int countryCode;
+    unsigned int imperial;
 };
 
 class ExpoData {
