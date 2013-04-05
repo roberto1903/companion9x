@@ -664,6 +664,27 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
 
   b->clear();
 
+  if (attr & POPULATE_AND_SWITCHES) {
+    item = RawSwitch(SWITCH_TYPE_NONE);
+    if (GetEepromInterface()->isAvailable(item, context)) {
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    for (int i=1; i<=GetEepromInterface()->getCapability(SwitchesPositions); i++) {
+      item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+      if (GetEepromInterface()->isAvailable(item, context)) {
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
+    }
+    for (int i=1; i<=GetEepromInterface()->getCapability(CustomAndSwitches); i++) {
+      item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    return;
+  }
+
   if (attr & POPULATE_MSWITCHES) {
     for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
       item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
@@ -746,22 +767,6 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
       item = RawSwitch(SWITCH_TYPE_ONM);
       b->addItem(item.toString(), item.toValue());
       if (item == value) b->setCurrentIndex(b->count()-1);
-    }
-  }
-
-  if (attr & POPULATE_AND_SWITCHES) {
-    b->clear();
-    item = RawSwitch(SWITCH_TYPE_NONE);
-    if (GetEepromInterface()->isAvailable(item, context)) {
-      b->addItem(item.toString(), item.toValue());
-      if (item == value) b->setCurrentIndex(b->count()-1);
-    }
-    if (GetEepromInterface()->getCapability(CustomAndSwitches)) {
-      for (int i=1; i<=GetEepromInterface()->getCapability(CustomAndSwitches); i++) {
-        item = RawSwitch(SWITCH_TYPE_SWITCH, i);
-        b->addItem(item.toString(), item.toValue());
-        if (item == value) b->setCurrentIndex(b->count()-1);
-      }
     }
   }
 

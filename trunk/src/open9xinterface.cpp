@@ -586,12 +586,10 @@ int Open9xInterface::getCapability(const Capability capability)
       else
         return 12;
     case CustomAndSwitches:
-      if (board == BOARD_TARANIS)
-        return 0;
-      else if (board == BOARD_SKY9X)
-	return 23;
+      if (IS_ARM(board))
+	return getCapability(CustomSwitches);
       else
-        return 3;
+        return 15/*4bits*/-9/*sw positions*/;
     case CustomSwitchesExt:
       return (IS_ARM(board) ? true : false);
     case RotaryEncoders:

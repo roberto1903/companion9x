@@ -314,7 +314,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case CustomSwitches:
       return ERSKY9X_NUM_CSW_V11;
     case CustomAndSwitches:
-        return 1;
+      return 1;
     case CSFunc:
       return 13;
     case Outputs:

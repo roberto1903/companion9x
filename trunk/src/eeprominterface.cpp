@@ -248,7 +248,7 @@ double RawSource::getStep(const ModelData & Model)
   }
 }
 
-#define CHECK_IN_ARRAY(T, index) (index < (int)sizeof(T)/sizeof(T[0]) ? T[index] : "???")
+#define CHECK_IN_ARRAY(T, index) ((unsigned int)index < (unsigned int)(sizeof(T)/sizeof(T[0])) ? T[(unsigned int)index] : "???")
 
 QString RawSource::toString()
 {
@@ -284,13 +284,13 @@ QString RawSource::toString()
   switch(type) {
     case SOURCE_TYPE_STICK:
       if (index < 4)
-        return sticks[index];
+        return CHECK_IN_ARRAY(sticks, index);
       else
-        return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? potsX9D[index-4] : pots9X[index-4]);
+        return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? CHECK_IN_ARRAY(potsX9D, index-4) : CHECK_IN_ARRAY(pots9X, index-4));
     case SOURCE_TYPE_TRIM:
-      return trims[index];
+      return CHECK_IN_ARRAY(trims, index);
     case SOURCE_TYPE_ROTARY_ENCODER:
-      return rotary[index];
+      return CHECK_IN_ARRAY(rotary, index);
     case SOURCE_TYPE_MAX:
       return QObject::tr("MAX");
     case SOURCE_TYPE_SWITCH:
@@ -352,9 +352,9 @@ QString RawSwitch::toString()
   switch(type) {
     case SWITCH_TYPE_SWITCH:
       if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
-        return index > 0 ? switchesX9D[index-1] : QString("!") + switchesX9D[-index-1];
+        return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1) : QString("!") + CHECK_IN_ARRAY(switchesX9D, -index-1);
       else
-        return index > 0 ? switches9X[index-1] : QString("!") + switches9X[-index-1];
+        return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1) : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1);
     case SWITCH_TYPE_VIRTUAL:
     {
       QString neg = QString("");
@@ -377,9 +377,9 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_MOMENT_SWITCH:
       // TODO assert(index != 0);
       if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
-        return index > 0 ? QString("m") + switchesX9D[index-1] : QString("!m") + switchesX9D[-index-1];
+        return index > 0 ? QString("m") + CHECK_IN_ARRAY(switchesX9D, index-1) : QString("!m") + CHECK_IN_ARRAY(switchesX9D, -index-1);
       else
-        return index > 0 ? QString("m") + switches9X[index-1] : QString("!m") + switches9X[-index-1];
+        return index > 0 ? QString("m") + CHECK_IN_ARRAY(switches9X, index-1) : QString("!m") + CHECK_IN_ARRAY(switches9X, -index-1);
     case SWITCH_TYPE_MOMENT_VIRTUAL:
     {
       QString neg = QString("m");
