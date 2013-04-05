@@ -490,7 +490,7 @@ int Open9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
   // TODO change this name, it's a factory
-  Open9xModelDataNew open9xModel(model, board, 213/*TODO*/, GetCurrentFirmwareVariant());
+  Open9xModelDataNew open9xModel(model, board, 214/*TODO*/, GetCurrentFirmwareVariant());
   // open9xModel.Dump();
 
   QByteArray eeprom;

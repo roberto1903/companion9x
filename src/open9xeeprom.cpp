@@ -1094,6 +1094,8 @@ class CustomFunctionField: public TransformedField {
       _delay(0),
       _union_param(0)
     {
+      memset(_arm_param, 0, sizeof(_arm_param));
+
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
@@ -1293,7 +1295,7 @@ class CustomFunctionField: public TransformedField {
     unsigned int variant;
     CustomFunctionsConversionTable functionsConversionTable;
     SourcesConversionTable sourcesConversionTable;
-    char _arm_param[6];
+    char _arm_param[10];
     unsigned int _param;
     unsigned int _delay;
     unsigned int _mode;
