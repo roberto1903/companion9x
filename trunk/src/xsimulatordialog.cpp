@@ -318,6 +318,11 @@ inline int chVal(int val)
   return qMin(1024, qMax(-1024, val));
 }
 
+void xsimulatorDialog::on_switchH_sliderReleased()
+{
+  QTimer::singleShot(400, this, SLOT(resetTrn()));
+}
+
 void xsimulatorDialog::on_trimHLeft_valueChanged(int value)
 {
   simulator->setTrim(0, value);
@@ -509,6 +514,12 @@ void xsimulatorDialog::on_FixRightY_clicked(bool checked)
 {
     nodeRight->setFixedY(checked);
 }
+
+void xsimulatorDialog::resetTrn()
+{
+  ui->switchH->setValue(0);
+}
+
 
 #ifdef JOYSTICKS
 void xsimulatorDialog::onjoystickAxisValueChanged(int axis, int value) {
