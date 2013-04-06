@@ -90,7 +90,9 @@ private slots:
     void on_trimVLeft_valueChanged(int);
     void on_trimHRight_valueChanged(int);
     void on_trimVRight_valueChanged(int);
+    void on_switchH_sliderReleased();
     void onTimerEvent();
+    void resetTrn();
 #ifdef JOYSTICKS
     void onjoystickAxisValueChanged(int axis, int value);
 #endif
