@@ -25,9 +25,14 @@ frskyStreaming = 20;
 #undef SETVALUES_IMPORT
 for (int i=0; i<4; i++)
   g_anas[i] = inputs.sticks[i];
+#ifndef PCBTARANIS
 for (int i=0; i<3; i++)
   g_anas[4+i] = inputs.pots[i];
+#else
+for (int i=0; i<4; i++)
+  g_anas[4+i] = inputs.pots[i];
 
+#endif
 // switches
 for (int i=0; i<10/*TODO NUM_SWITCHES*/; i++)
   simuSetSwitch(i, inputs.switches[i]);
