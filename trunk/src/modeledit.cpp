@@ -19,6 +19,7 @@
 #define BC_BIT_P1  (0x10)
 #define BC_BIT_P2  (0x20)
 #define BC_BIT_P3  (0x40)
+#define BC_BIT_P4  (0x80)
 #define BC_BIT_REA  (0x80)
 #define BC_BIT_REB  (0x100)
 
@@ -381,6 +382,14 @@ void ModelEdit::tabModelEditSetup()
     ui->bcREaChkB->hide();
     ui->bcREbChkB->hide();
   }
+  if (GetEepromInterface()->getCapability(Pots)==3) {
+    ui->bcP4ChkB->hide();
+  } else {
+    ui->bcP1ChkB->setText(tr("S1"));
+    ui->bcP2ChkB->setText(tr("S2"));
+    ui->bcP3ChkB->setText(tr("SL"));
+  }
+  
   if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
     ui->thrwarnChkB->setDisabled(true);
     ui->thrwarnChkB->hide();
@@ -440,6 +449,21 @@ void ModelEdit::tabModelEditSetup()
     ui->timer1Perm->setChecked(g_model.timers[0].persistent);
     ui->timer2Perm->setChecked(g_model.timers[1].persistent);
   }
+  if (!GetEepromInterface()->getCapability(minuteBeep)) {
+    ui->timer1Minute->hide();
+    ui->timer2Minute->hide();
+  } else {
+    ui->timer1Minute->setChecked(g_model.timers[0].minuteBeep);
+    ui->timer2Minute->setChecked(g_model.timers[1].minuteBeep);
+  }
+
+  if (!GetEepromInterface()->getCapability(countdownBeep)) {
+    ui->timer1CountDownBeep->hide();
+    ui->timer2CountDownBeep->hide();
+  } else {
+    ui->timer1CountDownBeep->setChecked(g_model.timers[0].countdownBeep);
+    ui->timer2CountDownBeep->setChecked(g_model.timers[1].countdownBeep);
+  }
 
   //trim inc, thro trim, thro expo, instatrim
   ui->trimIncCB->setCurrentIndex(g_model.trimInc);
@@ -454,6 +478,7 @@ void ModelEdit::tabModelEditSetup()
   ui->bcP1ChkB->setChecked(g_model.beepANACenter & BC_BIT_P1);
   ui->bcP2ChkB->setChecked(g_model.beepANACenter & BC_BIT_P2);
   ui->bcP3ChkB->setChecked(g_model.beepANACenter & BC_BIT_P3);
+  ui->bcP4ChkB->setChecked(g_model.beepANACenter & BC_BIT_P4);
   ui->bcREaChkB->setChecked(g_model.beepANACenter & BC_BIT_REA);
   ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
 
@@ -527,6 +552,30 @@ void ModelEdit::on_timer1Perm_toggled(bool checked)
 void ModelEdit::on_timer2Perm_toggled(bool checked)
 {
   g_model.timers[1].persistent=checked;
+  updateSettings();
+}
+
+void ModelEdit::on_timer1Minute_toggled(bool checked)
+{
+  g_model.timers[0].minuteBeep=checked;
+  updateSettings();
+}
+
+void ModelEdit::on_timer2Minute_toggled(bool checked)
+{
+  g_model.timers[1].minuteBeep=checked;
+  updateSettings();
+}
+
+void ModelEdit::on_timer1CountDownBeep_toggled(bool checked)
+{
+  g_model.timers[0].countdownBeep=checked;
+  updateSettings();
+}
+
+void ModelEdit::on_timer2CountDownBeep_toggled(bool checked)
+{
+  g_model.timers[1].countdownBeep=checked;
   updateSettings();
 }
 
@@ -3610,6 +3659,15 @@ void ModelEdit::on_bcP3ChkB_toggled(bool checked)
         g_model.beepANACenter |= BC_BIT_P3;
     else
         g_model.beepANACenter &= ~BC_BIT_P3;
+    updateSettings();
+}
+
+void ModelEdit::on_bcP4ChkB_toggled(bool checked)
+{
+    if(checked)
+        g_model.beepANACenter |= BC_BIT_P4;
+    else
+        g_model.beepANACenter &= ~BC_BIT_P4;
     updateSettings();
 }
 

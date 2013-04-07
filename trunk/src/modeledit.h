@@ -177,6 +177,11 @@ private slots:
     void on_thrwarnChkB_toggled(bool checked);
     void on_timer1Perm_toggled(bool checked);
     void on_timer2Perm_toggled(bool checked);
+    void on_timer1Minute_toggled(bool checked);
+    void on_timer2Minute_toggled(bool checked);
+    void on_timer1CountDownBeep_toggled(bool checked);
+    void on_timer2CountDownBeep_toggled(bool checked);
+
     void resetCurve();
     void editCurve();
     void playMusic();
@@ -259,6 +264,7 @@ private slots:
     void on_bcP1ChkB_toggled(bool checked);
     void on_bcP2ChkB_toggled(bool checked);
     void on_bcP3ChkB_toggled(bool checked);
+    void on_bcP4ChkB_toggled(bool checked);
     void on_bcREaChkB_toggled(bool checked);
     void on_bcREbChkB_toggled(bool checked);
 
