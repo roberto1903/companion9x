@@ -383,8 +383,45 @@ void ModelEdit::tabModelEditSetup()
     ui->bcREbChkB->hide();
   }
   if (GetEepromInterface()->getCapability(Pots)==3) {
+    ui->tswwarn0_CB->hide();
+    ui->tswwarn0_label->hide();
+    ui->tswwarn1_label->hide();
+    ui->tswwarn2_label->hide();
+    ui->tswwarn3_label->hide();
+    ui->tswwarn4_label->hide();
+    ui->tswwarn5_label->hide();
+    ui->tswwarn6_label->hide();
+    ui->tswwarn7_label->hide();
+    ui->tswwarn8_label->hide();
+    ui->chkSA->hide();
+    ui->chkSB->hide();
+    ui->chkSC->hide();
+    ui->chkSD->hide();
+    ui->chkSE->hide();
+    ui->chkSF->hide();
+    ui->chkSG->hide();
+    ui->chkSH->hide();
+    this->layout()->removeItem(ui->TaranisSwitchStartup);
     ui->bcP4ChkB->hide();
   } else {
+    ui->swwarn0_CB->hide();
+    ui->swwarn0_label->hide();
+    ui->swwarn0_line->hide();
+    ui->swwarn1_ChkB->hide();
+    ui->swwarn1_line->hide();
+    ui->swwarn2_ChkB->hide();
+    ui->swwarn3_ChkB->hide();
+    ui->swwarn4_CB->hide();
+    ui->swwarn4_label->hide();
+    ui->swwarn5_ChkB->hide();
+    ui->swwarn6_ChkB->hide();
+    ui->swwarn_line0->hide();
+    ui->swwarn_line1->hide();
+    ui->swwarn_line2->hide();
+    ui->swwarn_line3->hide();
+    ui->swwarn_line4->hide();
+    ui->swwarn_line5->hide();
+    this->layout()->removeItem(ui->StockSwitchStartup);
     ui->bcP1ChkB->setText(tr("S1"));
     ui->bcP2ChkB->setText(tr("S2"));
     ui->bcP3ChkB->setText(tr("SL"));
