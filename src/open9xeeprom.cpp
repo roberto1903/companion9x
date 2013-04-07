@@ -1515,10 +1515,25 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
     Append(new TimerModeField(modelData.timers[i].mode, board, version));
-    Append(new UnsignedField<16>(modelData.timers[i].val));
-    if (HAS_PERSISTENT_TIMERS(board)) {
-      Append(new BoolField<1>(modelData.timers[i].persistent));
-      Append(new SpareBitsField<15>());
+    if (release21March2013) {
+      Append(new UnsignedField<12>(modelData.timers[i].val));
+      Append(new BoolField<1>(modelData.timers[i].countdownBeep));
+      Append(new BoolField<1>(modelData.timers[i].minuteBeep));
+      if (HAS_PERSISTENT_TIMERS(board)) {
+        Append(new BoolField<1>(modelData.timers[i].persistent));
+        Append(new SpareBitsField<1>());
+        Append(new SpareBitsField<16>());
+      }
+      else {
+        Append(new SpareBitsField<2>());
+      }
+    }
+    else {
+      Append(new UnsignedField<16>(modelData.timers[i].val));
+      if (HAS_PERSISTENT_TIMERS(board)) {
+        Append(new BoolField<1>(modelData.timers[i].persistent));
+        Append(new SpareBitsField<15>());
+      }
     }
   }
 
