@@ -565,6 +565,15 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
     case Timers:
       return 2;
+    case PermTimers:
+      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X || board == BOARD_TARANIS )
+        return 1;
+      else
+        return 0;
+    case minuteBeep:
+        return 1;
+    case countdownBeep:
+        return 1;
     case Pots:
       return (board==BOARD_TARANIS ? 4 : 3);
     case Switches:
@@ -596,11 +605,6 @@ int Open9xInterface::getCapability(const Capability capability)
       if (board == BOARD_GRUVIN9X)
         return 2;
       else if (board == BOARD_SKY9X)
-        return 1;
-      else
-        return 0;
-    case PermTimers:
-      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X)
         return 1;
       else
         return 0;

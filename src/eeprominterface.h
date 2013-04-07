@@ -706,6 +706,8 @@ class TimerData {
     TimerData() { clear(); }
     TimerMode mode;   // timer trigger source -> off, abs, THs, TH%, THt, sw/!sw, !m_sw/!m_sw
     int8_t    modeB;
+    bool minuteBeep;
+    bool countdownBeep;
     bool      dir;    // 0=>Count Down, 1=>Count Up
     unsigned int val;
     bool      persistent;
@@ -821,6 +823,8 @@ enum Capability {
  Timers,
  TimerTriggerB,
  PermTimers,
+ minuteBeep,
+ countdownBeep,
  CustomFunctions,
  VoicesAsNumbers,
  ModelVoice,

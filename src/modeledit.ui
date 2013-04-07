@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>890</width>
-    <height>731</height>
+    <height>707</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,14 +44,36 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>10</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
        <string>Setup</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_11" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1" columnstretch="0,0,0,0,0,0,0,1">
-       <item row="15" column="6">
+      <layout class="QGridLayout" name="gridLayout_11" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1" columnstretch="0,0,0,0,1,0,1,0,1,1">
+       <item row="15" column="4">
+        <widget class="QSpinBox" name="numChannelsSB">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="suffix">
+          <string>ch</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>16</number>
+         </property>
+         <property name="singleStep">
+          <number>2</number>
+         </property>
+         <property name="value">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="8">
         <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB">
          <property name="suffix">
           <string> mSec</string>
@@ -102,27 +124,11 @@
          </item>
         </widget>
        </item>
-       <item row="15" column="4">
-        <widget class="QSpinBox" name="numChannelsSB">
-         <property name="suffix">
-          <string>ch</string>
-         </property>
-         <property name="minimum">
-          <number>4</number>
-         </property>
-         <property name="maximum">
-          <number>16</number>
-         </property>
-         <property name="singleStep">
-          <number>2</number>
-         </property>
-         <property name="value">
-          <number>8</number>
-         </property>
-        </widget>
-       </item>
        <item row="17" column="4">
         <widget class="QSpinBox" name="ppmDelaySB">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
          <property name="suffix">
           <string> usec</string>
          </property>
@@ -141,7 +147,7 @@
         </widget>
        </item>
        <item row="15" column="1">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="protocol_label">
          <property name="text">
           <string>Protocol</string>
          </property>
@@ -150,7 +156,7 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="5">
+       <item row="15" column="7">
         <widget class="QLabel" name="label_ppmFrameLength">
          <property name="text">
           <string>PPM Frame Length</string>
@@ -216,19 +222,6 @@
          </property>
         </widget>
        </item>
-       <item row="25" column="0" colspan="7">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>5</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="13" column="0" colspan="2">
         <widget class="QLabel" name="label_55">
          <property name="text">
@@ -273,6 +266,16 @@
         <widget class="QLabel" name="label_timer2">
          <property name="text">
           <string>Timer2</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0" colspan="2">
+        <widget class="QLabel" name="label_57">
+         <property name="text">
+          <string>Extended Trims</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -368,22 +371,6 @@
          </item>
         </widget>
        </item>
-       <item row="9" column="0" colspan="2">
-        <widget class="QLabel" name="swwarn_label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Switch startup  Warning</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="12" column="0" colspan="2">
         <widget class="QLabel" name="instantTrim_label">
          <property name="text">
@@ -401,13 +388,6 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="2" colspan="5">
-        <widget class="Line" name="swwarn1_line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -495,13 +475,6 @@
          </property>
          <property name="text">
           <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2" colspan="5">
-        <widget class="Line" name="swwarn0_line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -622,16 +595,6 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="0" colspan="2">
-        <widget class="QLabel" name="label_57">
-         <property name="text">
-          <string>Extended Trims</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="22" column="2">
         <widget class="QSpinBox" name="pxxRxNum">
          <property name="sizePolicy">
@@ -683,7 +646,7 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="7">
+       <item row="15" column="9">
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -696,9 +659,9 @@
          </property>
         </spacer>
        </item>
-       <item row="11" column="2" colspan="6">
+       <item row="11" column="2" colspan="8">
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="7">
+         <item row="0" column="8">
           <widget class="QCheckBox" name="bcREaChkB">
            <property name="text">
             <string>REa</string>
@@ -754,16 +717,284 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="8">
+         <item row="0" column="9">
           <widget class="QCheckBox" name="bcREbChkB">
            <property name="text">
             <string>REb</string>
            </property>
           </widget>
          </item>
+         <item row="0" column="7">
+          <widget class="QCheckBox" name="bcP4ChkB">
+           <property name="text">
+            <string>SR</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
-       <item row="9" column="2" colspan="6">
+       <item row="1" column="2" colspan="8">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1,0,0,0">
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QTimeEdit" name="timer1ValTE">
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="currentSection">
+            <enum>QDateTimeEdit::MinuteSection</enum>
+           </property>
+           <property name="displayFormat">
+            <string>mm:ss</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer1DirCB">
+           <item>
+            <property name="text">
+             <string>Count Down</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Count Up</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer1ModeCB"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="timer1ModeB_label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>TriggerB</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer1ModeBCB"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer1Perm">
+           <property name="text">
+            <string>Persistent</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer1Minute">
+           <property name="text">
+            <string>MinuteBeep</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer1CountDownBeep">
+           <property name="text">
+            <string>CountDownBeep</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="2" colspan="8">
+        <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1,0,0,0">
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QTimeEdit" name="timer2ValTE">
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="currentSection">
+            <enum>QDateTimeEdit::MinuteSection</enum>
+           </property>
+           <property name="displayFormat">
+            <string>mm:ss</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer2DirCB">
+           <item>
+            <property name="text">
+             <string>Count Down</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Count Up</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer2ModeCB"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="timer2ModeB_label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>TriggerB</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="timer2ModeBCB"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer2Perm">
+           <property name="text">
+            <string>Persistent</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer2Minute">
+           <property name="text">
+            <string>MinuteBeep</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timer2CountDownBeep">
+           <property name="text">
+            <string>CountDownBeep</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="2" colspan="8">
+        <layout class="QGridLayout" name="gridLayout_37" columnstretch="1,0,0" columnminimumwidth="0,0,0">
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="modelNameLE">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maxLength">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="modelVoice_label">
+           <property name="text">
+            <string>Model Voice</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QSpinBox" name="modelVoice_SB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>260</number>
+           </property>
+           <property name="maximum">
+            <number>511</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>260</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="15" column="6">
+        <widget class="QSpinBox" name="numChannelsEndSB">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="suffix">
+          <string>ch</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>16</number>
+         </property>
+         <property name="singleStep">
+          <number>2</number>
+         </property>
+         <property name="value">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="5">
+        <widget class="QLabel" name="protocol_label_2">
+         <property name="text">
+          <string>--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="0" colspan="10">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="9" column="1">
+        <widget class="QLabel" name="swwarn_label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Switch startup  Warning</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2" colspan="8">
         <layout class="QGridLayout" name="gridLayout_34">
          <property name="verticalSpacing">
           <number>6</number>
@@ -812,6 +1043,12 @@
          </item>
          <item row="0" column="8">
           <widget class="QLabel" name="swwarn4_label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>3POS</string>
            </property>
@@ -822,6 +1059,12 @@
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="swwarn0_label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Check</string>
            </property>
@@ -957,171 +1200,19 @@
          </item>
         </layout>
        </item>
-       <item row="1" column="2" colspan="6">
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1,0">
-         <item>
-          <widget class="QTimeEdit" name="timer1ValTE">
-           <property name="accelerated">
-            <bool>true</bool>
-           </property>
-           <property name="currentSection">
-            <enum>QDateTimeEdit::MinuteSection</enum>
-           </property>
-           <property name="displayFormat">
-            <string>mm:ss</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer1DirCB">
-           <item>
-            <property name="text">
-             <string>Count Down</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Count Up</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer1ModeCB"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="timer1ModeB_label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>TriggerB</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer1ModeBCB"/>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="timer1Perm">
-           <property name="text">
-            <string>Permanent</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="8" column="2" colspan="8">
+        <widget class="Line" name="swwarn0_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
        </item>
-       <item row="2" column="2" colspan="6">
-        <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1,0">
-         <item>
-          <widget class="QTimeEdit" name="timer2ValTE">
-           <property name="accelerated">
-            <bool>true</bool>
-           </property>
-           <property name="currentSection">
-            <enum>QDateTimeEdit::MinuteSection</enum>
-           </property>
-           <property name="displayFormat">
-            <string>mm:ss</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer2DirCB">
-           <item>
-            <property name="text">
-             <string>Count Down</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Count Up</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer2ModeCB"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="timer2ModeB_label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>TriggerB</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="timer2ModeBCB"/>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="timer2Perm">
-           <property name="text">
-            <string>Permanent</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="2" colspan="6">
-        <layout class="QGridLayout" name="gridLayout_37" columnstretch="1,0,0" columnminimumwidth="0,0,0">
-         <item row="0" column="0">
-          <widget class="QLineEdit" name="modelNameLE">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maxLength">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="modelVoice_label">
-           <property name="text">
-            <string>Model Voice</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QSpinBox" name="modelVoice_SB">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="suffix">
-            <string/>
-           </property>
-           <property name="minimum">
-            <number>260</number>
-           </property>
-           <property name="maximum">
-            <number>511</number>
-           </property>
-           <property name="singleStep">
-            <number>1</number>
-           </property>
-           <property name="value">
-            <number>260</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="10" column="2" colspan="8">
+        <widget class="Line" name="swwarn1_line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
