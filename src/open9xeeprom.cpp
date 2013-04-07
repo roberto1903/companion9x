@@ -10,6 +10,7 @@
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
 #define MAX_POTS(board)                      (board==BOARD_TARANIS ? 4 : 3)
 #define MAX_SWITCHES(board)                  (board==BOARD_TARANIS ? 8 : 7)
+#define MAX_SWITCHES_POSITION(board)         (board==BOARD_TARANIS ? 22 : 9)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
 #define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
 #define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
@@ -24,7 +25,7 @@
 inline int switchIndex(int i, BoardEnum board, unsigned int version)
 {
   bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
-  if (release21March2013)
+  if (board != BOARD_TARANIS && release21March2013)
     return (i<=3 ? i+3 : (i<=6 ? i-3 : i));
   else
     return i;
@@ -39,7 +40,7 @@ class SwitchesConversionTable: public ConversionTable {
 
       addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
 
-      for (int i=1; i<=9; i++) {
+      for (int i=1; i<=MAX_SWITCHES_POSITION(board); i++) {
         int s = switchIndex(i, board, version);
         addConversion(RawSwitch(SWITCH_TYPE_SWITCH, -s), -val);
         addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
@@ -53,7 +54,7 @@ class SwitchesConversionTable: public ConversionTable {
       addConversion(RawSwitch(SWITCH_TYPE_OFF), -val);
       addConversion(RawSwitch(SWITCH_TYPE_ON), val++);
 
-      for (int i=1; i<=9; i++) {
+      for (int i=1; i<=MAX_SWITCHES_POSITION(board); i++) {
         int s = switchIndex(i, board, version);
         addConversion(RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, -s), -val);
         addConversion(RawSwitch(SWITCH_TYPE_MOMENT_SWITCH, s), val++);
