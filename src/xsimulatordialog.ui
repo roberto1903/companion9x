@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>696</width>
-    <height>693</height>
+    <height>639</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -73,47 +73,7 @@
        <number>6</number>
       </property>
       <item row="0" column="1">
-       <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0,0,0,0,0,0,0">
-        <item row="0" column="7">
-         <widget class="QSlider" name="switchH">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>SH</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="maximum">
-           <number>1</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="invertedAppearance">
-           <bool>true</bool>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksBothSides</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0">
         <item row="2" column="4">
          <spacer name="horizontalSpacer_13">
           <property name="orientation">
@@ -127,7 +87,7 @@
           </property>
          </spacer>
         </item>
-        <item row="3" column="1" colspan="8">
+        <item row="3" column="1" colspan="9">
          <widget class="QGraphicsView" name="rightStick">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -149,7 +109,20 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="10">
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="11">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QPushButton" name="holdRightY">
@@ -273,19 +246,6 @@ QPushButton:checked {
           </item>
          </layout>
         </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="2" column="5">
          <widget class="QSlider" name="switchD">
           <property name="sizePolicy">
@@ -323,7 +283,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="4" column="2" colspan="7">
+        <item row="4" column="2" colspan="8">
          <widget class="mySlider" name="trimHRight">
           <property name="toolTip">
            <string>Right Double Click to Reset</string>
@@ -376,47 +336,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="2" column="7">
-         <widget class="QSlider" name="switchG">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>SG</string>
-          </property>
-          <property name="maximum">
-           <number>2</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="invertedAppearance">
-           <bool>true</bool>
-          </property>
-          <property name="invertedControls">
-           <bool>false</bool>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksBothSides</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2" colspan="7">
+        <item row="5" column="2" colspan="8">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <property name="leftMargin">
            <number>20</number>
@@ -513,7 +433,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="3" column="9">
+        <item row="3" column="10">
          <spacer name="horizontalSpacer_9">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -526,7 +446,60 @@ QPushButton:checked {
           </property>
          </spacer>
         </item>
-        <item row="2" column="10">
+        <item row="2" column="7">
+         <spacer name="horizontalSpacer_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="6">
+         <widget class="QSlider" name="switchG">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>SG</string>
+          </property>
+          <property name="maximum">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
+          </property>
+          <property name="invertedControls">
+           <bool>false</bool>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBothSides</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="8">
          <widget class="QDial" name="dialP_4">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -560,25 +533,8 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="2" column="6">
-         <spacer name="horizontalSpacer_14">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="0">
-       <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0,0,0,0,0,0">
-        <item row="0" column="3">
-         <widget class="QSlider" name="switchF">
+        <item row="2" column="11">
+         <widget class="QSlider" name="switchH">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -592,18 +548,15 @@ QPushButton:checked {
            </size>
           </property>
           <property name="toolTip">
-           <string>SF</string>
+           <string>SH</string>
           </property>
-          <property name="statusTip">
-           <string>SF</string>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="maximum">
            <number>1</number>
           </property>
           <property name="value">
-           <number>0</number>
-          </property>
-          <property name="sliderPosition">
            <number>0</number>
           </property>
           <property name="orientation">
@@ -620,7 +573,11 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="1" column="4">
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0">
+        <item row="2" column="4">
          <spacer name="horizontalSpacer_11">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -633,41 +590,20 @@ QPushButton:checked {
           </property>
          </spacer>
         </item>
-        <item row="1" column="0">
-         <widget class="QDial" name="dialP_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="3" column="1">
+         <spacer name="horizontalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="maximumSize">
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>42</width>
-            <height>42</height>
+            <width>40</width>
+            <height>20</height>
            </size>
           </property>
-          <property name="toolTip">
-           <string>SL</string>
-          </property>
-          <property name="minimum">
-           <number>-1024</number>
-          </property>
-          <property name="maximum">
-           <number>1024</number>
-          </property>
-          <property name="pageStep">
-           <number>128</number>
-          </property>
-          <property name="notchTarget">
-           <double>64.000000000000000</double>
-          </property>
-          <property name="notchesVisible">
-           <bool>true</bool>
-          </property>
-         </widget>
+         </spacer>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QPushButton" name="holdLeftY">
@@ -791,7 +727,7 @@ QPushButton:checked {
           </item>
          </layout>
         </item>
-        <item row="1" column="8">
+        <item row="2" column="9">
          <spacer name="horizontalSpacer_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -804,7 +740,7 @@ QPushButton:checked {
           </property>
          </spacer>
         </item>
-        <item row="1" column="9">
+        <item row="2" column="10">
          <widget class="QDial" name="dialP_1">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -838,7 +774,20 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="8" column="2" colspan="8">
+        <item row="2" column="7">
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="2" colspan="9">
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <property name="leftMargin">
            <number>20</number>
@@ -868,7 +817,7 @@ QPushButton:checked {
           </item>
          </layout>
         </item>
-        <item row="1" column="7">
+        <item row="2" column="8">
          <widget class="QSlider" name="switchB">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -905,7 +854,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="2" column="2" colspan="8">
+        <item row="3" column="2" colspan="9">
          <widget class="QGraphicsView" name="leftStick">
           <property name="minimumSize">
            <size>
@@ -921,44 +870,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
-         <widget class="QSlider" name="switchE">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>SE</string>
-          </property>
-          <property name="maximum">
-           <number>2</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="invertedAppearance">
-           <bool>true</bool>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksBothSides</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="5">
+        <item row="2" column="6">
          <widget class="QSlider" name="switchA">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -995,7 +907,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="3" column="2" colspan="8">
+        <item row="4" column="2" colspan="9">
          <widget class="mySlider" name="trimHLeft">
           <property name="toolTip">
            <string>Right Double Click to Reset</string>
@@ -1011,7 +923,7 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="2" column="10">
+        <item row="3" column="11">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="mySlider" name="trimVLeft">
@@ -1053,31 +965,119 @@ QPushButton:checked {
           </item>
          </layout>
         </item>
-        <item row="2" column="1">
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="2" column="5">
+         <widget class="QSlider" name="switchE">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
+          <property name="maximumSize">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>16777215</width>
+            <height>50</height>
            </size>
           </property>
-         </spacer>
+          <property name="toolTip">
+           <string>SE</string>
+          </property>
+          <property name="maximum">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBothSides</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
-        <item row="1" column="6">
-         <spacer name="horizontalSpacer_12">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="2" column="3">
+         <widget class="QDial" name="dialP_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
+          <property name="maximumSize">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>42</width>
+            <height>42</height>
            </size>
           </property>
-         </spacer>
+          <property name="toolTip">
+           <string>SL</string>
+          </property>
+          <property name="minimum">
+           <number>-1024</number>
+          </property>
+          <property name="maximum">
+           <number>1024</number>
+          </property>
+          <property name="pageStep">
+           <number>128</number>
+          </property>
+          <property name="notchTarget">
+           <double>64.000000000000000</double>
+          </property>
+          <property name="notchesVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QSlider" name="switchF">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>SF</string>
+          </property>
+          <property name="statusTip">
+           <string>SF</string>
+          </property>
+          <property name="maximum">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="sliderPosition">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBothSides</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
