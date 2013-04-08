@@ -295,6 +295,7 @@ void ModelEdit::tabModelEditSetup()
   //name
   QLabel * pmsl[] = {ui->swwarn_label, ui->swwarn0_label, ui->swwarn4_label, NULL};
   QCheckBox * pmchkb[] = {ui->swwarn1_ChkB,ui->swwarn2_ChkB,ui->swwarn3_ChkB,ui->swwarn5_ChkB,ui->swwarn6_ChkB, NULL};
+  QSlider * tpmsld[] = {ui->chkSA, ui->chkSB, ui->chkSC, ui->chkSD, ui->chkSE, ui->chkSF, ui->chkSG, NULL};
   
   ui->modelNameLE->setText(g_model.name);
 
@@ -318,6 +319,10 @@ void ModelEdit::tabModelEditSetup()
     for (int i=0; pmchkb[i]; i++) {
       pmchkb[i]->hide();
     }
+    ui->tswwarn0_CB->hide(); 
+    for (int i=0; tpmsld[i]; i++) {
+      tpmsld[i]->hide();
+    }
     ui->swwarn0_line->hide();
     ui->swwarn0_line->hide();
     ui->swwarn0_CB->hide();
@@ -328,19 +333,49 @@ void ModelEdit::tabModelEditSetup()
     ui->swwarn_line3->hide();
     ui->swwarn_line4->hide();
     ui->swwarn_line5->hide();
+    ui->tswwarn0_label->hide();
+    ui->tswwarn1_label->hide();
+    ui->tswwarn2_label->hide();
+    ui->tswwarn3_label->hide();
+    ui->tswwarn4_label->hide();
+    ui->tswwarn5_label->hide();
+    ui->tswwarn6_label->hide();
+    ui->tswwarn7_label->hide();
   } else {
-    ui->swwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
-    ui->swwarn1_ChkB->setChecked(checkbit(g_model.switchWarningStates, 1));
-    ui->swwarn2_ChkB->setChecked(checkbit(g_model.switchWarningStates, 2));
-    ui->swwarn3_ChkB->setChecked(checkbit(g_model.switchWarningStates, 3));
-    ui->swwarn4_CB->setCurrentIndex((g_model.switchWarningStates & 0x30)>>4);
-    ui->swwarn5_ChkB->setChecked(checkbit(g_model.switchWarningStates, 6));
-    ui->swwarn6_ChkB->setChecked(checkbit(g_model.switchWarningStates, 7));
-    for (int i=0; pmchkb[i]; i++) {
-      connect(pmchkb[i], SIGNAL(stateChanged(int)),this,SLOT(startupSwitchEdited()));
+    if (GetEepromInterface()->getCapability(Pots)==3) {
+      ui->swwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
+      ui->swwarn1_ChkB->setChecked(checkbit(g_model.switchWarningStates, 1));
+      ui->swwarn2_ChkB->setChecked(checkbit(g_model.switchWarningStates, 2));
+      ui->swwarn3_ChkB->setChecked(checkbit(g_model.switchWarningStates, 3));
+      ui->swwarn4_CB->setCurrentIndex((g_model.switchWarningStates & 0x30)>>4);
+      ui->swwarn5_ChkB->setChecked(checkbit(g_model.switchWarningStates, 6));
+      ui->swwarn6_ChkB->setChecked(checkbit(g_model.switchWarningStates, 7));
+      for (int i=0; pmchkb[i]; i++) {
+        connect(pmchkb[i], SIGNAL(stateChanged(int)),this,SLOT(startupSwitchEdited()));
+      }
+      connect(ui->swwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
+      connect(ui->swwarn4_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
+    } else {
+      ui->tswwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
+      uint16_t switchstate=(g_model.switchWarningStates>>1);
+      ui->chkSA->setValue(switchstate & 0x11);
+      switchstate >>= 2;
+      ui->chkSB->setValue(switchstate & 0x11);
+      switchstate >>= 2;
+      ui->chkSC->setValue(switchstate & 0x11);
+      switchstate >>= 2;
+      ui->chkSD->setValue(switchstate & 0x11);
+      switchstate >>= 2;
+      ui->chkSE->setValue(switchstate & 0x11);
+      switchstate >>= 2;
+      ui->chkSF->setValue((switchstate & 0x11)/2);
+      switchstate >>= 2;
+      ui->chkSG->setValue(switchstate & 0x11);
+      connect(ui->tswwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
+      for (int i=0; tpmsld[i]; i++) {
+        connect(tpmsld[i], SIGNAL(valueChanged(int)),this,SLOT(startupSwitchEdited()));
+      }      
     }
-    connect(ui->swwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
-    connect(ui->swwarn4_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
   }
   int ppmmax=GetEepromInterface()->getCapability(PPMFrameLength);
   if (ppmmax>0) {
@@ -392,7 +427,6 @@ void ModelEdit::tabModelEditSetup()
     ui->tswwarn5_label->hide();
     ui->tswwarn6_label->hide();
     ui->tswwarn7_label->hide();
-    ui->tswwarn8_label->hide();
     ui->chkSA->hide();
     ui->chkSB->hide();
     ui->chkSC->hide();
@@ -400,7 +434,6 @@ void ModelEdit::tabModelEditSetup()
     ui->chkSE->hide();
     ui->chkSF->hide();
     ui->chkSG->hide();
-    ui->chkSH->hide();
     this->layout()->removeItem(ui->TaranisSwitchStartup);
     ui->bcP4ChkB->hide();
   } else {
@@ -1647,30 +1680,60 @@ void ModelEdit::ppmcenterEdited()
 
 void ModelEdit::startupSwitchEdited()
 {
-  uint8_t i= 0;
-  i|=(uint8_t)ui->swwarn0_CB->currentIndex();
-  if (i==1) {
-    ui->swwarn1_ChkB->setDisabled(true) ;
-    ui->swwarn2_ChkB->setDisabled(true) ;
-    ui->swwarn3_ChkB->setDisabled(true) ;
-    ui->swwarn4_CB->setDisabled(true) ;
-    ui->swwarn5_ChkB->setDisabled(true) ;
-    ui->swwarn6_ChkB->setDisabled(true) ;
+  if (GetEepromInterface()->getCapability(Pots)==3) {
+    uint8_t i= 0;
+    i|=(uint8_t)ui->swwarn0_CB->currentIndex();
+    if (i==1) {
+      ui->swwarn1_ChkB->setDisabled(true) ;
+      ui->swwarn2_ChkB->setDisabled(true) ;
+      ui->swwarn3_ChkB->setDisabled(true) ;
+      ui->swwarn4_CB->setDisabled(true) ;
+      ui->swwarn5_ChkB->setDisabled(true) ;
+      ui->swwarn6_ChkB->setDisabled(true) ;
+    } else {
+      ui->swwarn1_ChkB->setEnabled(true) ;
+      ui->swwarn2_ChkB->setEnabled(true) ;
+      ui->swwarn3_ChkB->setEnabled(true) ;
+      ui->swwarn4_CB->setEnabled(true) ;
+      ui->swwarn5_ChkB->setEnabled(true) ;
+      ui->swwarn6_ChkB->setEnabled(true) ;
+      i|=(ui->swwarn1_ChkB->isChecked() ? 1 : 0)<<1;
+      i|=(ui->swwarn2_ChkB->isChecked() ? 1 : 0)<<2;
+      i|=(ui->swwarn3_ChkB->isChecked() ? 1 : 0)<<3;
+      i|=((uint8_t)ui->swwarn4_CB->currentIndex() & 0x03)<<4;
+      i|=(ui->swwarn5_ChkB->isChecked() ? 1 : 0)<<6;
+      i|=(ui->swwarn6_ChkB->isChecked() ? 1 : 0)<<7;
+    }
+    g_model.switchWarningStates=i;
   } else {
-    ui->swwarn1_ChkB->setEnabled(true) ;
-    ui->swwarn2_ChkB->setEnabled(true) ;
-    ui->swwarn3_ChkB->setEnabled(true) ;
-    ui->swwarn4_CB->setEnabled(true) ;
-    ui->swwarn5_ChkB->setEnabled(true) ;
-    ui->swwarn6_ChkB->setEnabled(true) ;
-    i|=(ui->swwarn1_ChkB->isChecked() ? 1 : 0)<<1;
-    i|=(ui->swwarn2_ChkB->isChecked() ? 1 : 0)<<2;
-    i|=(ui->swwarn3_ChkB->isChecked() ? 1 : 0)<<3;
-    i|=((uint8_t)ui->swwarn4_CB->currentIndex() & 0x03)<<4;
-    i|=(ui->swwarn5_ChkB->isChecked() ? 1 : 0)<<6;
-    i|=(ui->swwarn6_ChkB->isChecked() ? 1 : 0)<<7;
+    uint16_t i= 0;
+    i|=(uint16_t)ui->tswwarn0_CB->currentIndex();
+    if (i==1) {
+      ui->chkSA->setDisabled(true);
+      ui->chkSB->setDisabled(true);
+      ui->chkSC->setDisabled(true);
+      ui->chkSD->setDisabled(true);
+      ui->chkSE->setDisabled(true);
+      ui->chkSF->setDisabled(true);
+      ui->chkSG->setDisabled(true);
+    } else {
+      ui->chkSA->setEnabled(true);
+      ui->chkSB->setEnabled(true);
+      ui->chkSC->setEnabled(true);
+      ui->chkSD->setEnabled(true);
+      ui->chkSE->setEnabled(true);
+      ui->chkSF->setEnabled(true);
+      ui->chkSG->setEnabled(true);
+      i|=(((uint16_t)ui->chkSA->value())<<1);
+      i|=(((uint16_t)ui->chkSB->value())<<3);
+      i|=(((uint16_t)ui->chkSC->value())<<5);
+      i|=(((uint16_t)ui->chkSD->value())<<7);
+      i|=(((uint16_t)ui->chkSE->value())<<9);
+      i|=(((uint16_t)ui->chkSF->value())<<12);
+      i|=(((uint16_t)ui->chkSG->value())<<13);
+    }
+    g_model.switchWarningStates=i;
   }
-  g_model.switchWarningStates=i;
   updateSettings();
 }
 

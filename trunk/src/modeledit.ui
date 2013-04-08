@@ -1215,7 +1215,7 @@
         </layout>
        </item>
        <item row="10" column="2" colspan="8">
-        <layout class="QGridLayout" name="TaranisSwitchStartup" rowstretch="0,0" columnstretch="0,0,0,0,0,0,0,0,0,0">
+        <layout class="QGridLayout" name="TaranisSwitchStartup" rowstretch="0,0" columnstretch="0,0,0,0,0,0,0,0,0">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinimumSize</enum>
          </property>
@@ -1225,6 +1225,26 @@
          <property name="topMargin">
           <number>0</number>
          </property>
+         <item row="1" column="0">
+          <widget class="QComboBox" name="tswwarn0_CB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>ON</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>OFF</string>
+            </property>
+           </item>
+          </widget>
+         </item>
          <item row="0" column="2">
           <widget class="QLabel" name="tswwarn2_label">
            <property name="sizePolicy">
@@ -1304,19 +1324,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1341,19 +1364,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1361,26 +1387,6 @@
            <property name="tickInterval">
             <number>1</number>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QComboBox" name="tswwarn0_CB">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <item>
-            <property name="text">
-             <string>ON</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>OFF</string>
-            </property>
-           </item>
           </widget>
          </item>
          <item row="0" column="3">
@@ -1414,19 +1420,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1449,43 +1458,6 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="6">
-          <widget class="QSlider" name="chkSF">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="maximum">
-            <number>1</number>
-           </property>
-           <property name="pageStep">
-            <number>1</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBothSides</enum>
-           </property>
-           <property name="tickInterval">
-            <number>1</number>
            </property>
           </widget>
          </item>
@@ -1520,19 +1492,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1557,19 +1532,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1589,59 +1567,6 @@
            </property>
            <property name="text">
             <string>SF</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="8">
-          <widget class="QSlider" name="chkSH">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="maximum">
-            <number>1</number>
-           </property>
-           <property name="pageStep">
-            <number>1</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBothSides</enum>
-           </property>
-           <property name="tickInterval">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="8">
-          <widget class="QLabel" name="tswwarn8_label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>SH</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1669,19 +1594,22 @@
             </size>
            </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="pageStep">
             <number>1</number>
            </property>
            <property name="value">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::TicksBothSides</enum>
@@ -1691,7 +1619,7 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="9">
+         <item row="1" column="8">
           <spacer name="horizontalSpacer_6">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -1703,6 +1631,49 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item row="1" column="6">
+          <widget class="QSlider" name="chkSF">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>1</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>true</bool>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksBothSides</enum>
+           </property>
+           <property name="tickInterval">
+            <number>1</number>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
