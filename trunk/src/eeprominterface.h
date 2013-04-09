@@ -49,7 +49,6 @@ enum BoardEnum {
 };
 
 #define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_TARANIS)
-#define IS_DBLEEPROM(board) (board==BOARD_GRUVIN9X || board==BOARD_M128)
 
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},

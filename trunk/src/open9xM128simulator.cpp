@@ -16,6 +16,7 @@
 
 #include "open9xM128simulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define SIMU
 #define SIMU_EXCEPTIONS
@@ -41,8 +42,7 @@
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
-
-#define EEPROM_VARIANT 3
+#define EEPROM_VARIANT SIMU_M128_VARIANTS
 
 #undef min
 #undef max

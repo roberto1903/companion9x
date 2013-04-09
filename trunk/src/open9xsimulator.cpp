@@ -16,6 +16,7 @@
 
 #include "open9xsimulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define HELI
 #define SIMU
@@ -42,6 +43,7 @@
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
 #define BEEPER
+#define EEPROM_VARIANT SIMU_STOCK_VARIANTS
 
 #undef min
 #undef max
@@ -51,8 +53,6 @@
 #endif
 
 #include <exception>
-
-#define EEPROM_VARIANT 3
 
 namespace Open9x {
 #include "../opentx/stock/board_stock.cpp"

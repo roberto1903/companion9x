@@ -139,33 +139,7 @@ bool Open9xInterface::loadModel(ModelData &model, uint8_t *data, int index, unsi
 }
 
 template <class T>
-bool Open9xInterface::loadModelVariant(ModelData &model, uint8_t *data, int index, unsigned int variant)
-{
-  T _model(model);
-
-  uint8_t modelData[sizeof(model)];
-
-  if (!data) {
-    // load from EEPROM
-    efile->openRd(FILE_MODEL(index));
-    if (efile->readRlc2(modelData, sizeof(modelData))) {
-      _model.importVariant(variant, modelData);
-    }
-    else {
-      model.clear();
-    }
-  }
-  else {
-    // load from SD Backup, size is stored in index
-    // TODO will not work with SD backups from gruvin9x board!!!
-    _model.importVariant(variant, data);
-  }
-
-  return true;
-}
-
-template <class T>
-bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, uint8_t *data, unsigned int version, unsigned int variant)
+bool Open9xInterface::loadModelVariant(unsigned int index, ModelData &model, uint8_t *data, unsigned int version, unsigned int variant)
 {
   T open9xModel(model, board, version, variant);
 
@@ -176,6 +150,7 @@ bool Open9xInterface::loadModelVariantNew(unsigned int index, ModelData &model, 
     int numbytes = efile->readRlc2((uint8_t *)eepromData.data(), eepromData.size());
     if (numbytes) {
       open9xModel.Import(eepromData);
+      // open9xModel.Dump();
       model.used = true;
     }
     else {
@@ -260,11 +235,11 @@ bool Open9xInterface::loadModel(uint8_t version, ModelData &model, uint8_t *data
       return loadModel<Open9xArmModelData_v212>(model, data, index);
     }
     else {
-      return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
+      return loadModelVariant<Open9xModelDataNew>(index, model, data, version, variant);
     }
   }
   else if (version >= 213) {
-    return loadModelVariantNew<Open9xModelDataNew>(index, model, data, version, variant);
+    return loadModelVariant<Open9xModelDataNew>(index, model, data, version, variant);
   }
 
   std::cout << " ko\n";
@@ -378,8 +353,10 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
         version = 214;
         break;
       case BOARD_GRUVIN9X:
-      case BOARD_M128:
         version = 214;
+        break;
+      case BOARD_M128:
+        version = 215;
         break;
       case BOARD_STOCK:
         version = 213;
@@ -490,7 +467,7 @@ int Open9xInterface::getSize(ModelData &model)
   efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
   // TODO change this name, it's a factory
-  Open9xModelDataNew open9xModel(model, board, 214/*TODO*/, GetCurrentFirmwareVariant());
+  Open9xModelDataNew open9xModel(model, board, 215/*TODO*/, GetCurrentFirmwareVariant());
   // open9xModel.Dump();
 
   QByteArray eeprom;
@@ -550,7 +527,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case FlightPhases:
       if (IS_ARM(board))
         return 9;
-      else if (IS_DBLEEPROM(board))
+      else if (board==BOARD_GRUVIN9X)
         return 6;
       else
         return 5;
@@ -583,14 +560,14 @@ int Open9xInterface::getCapability(const Capability capability)
     case CustomFunctions:
       if (IS_ARM(board))
         return 32;
-      else if (IS_DBLEEPROM(board))
+      else if (board==BOARD_GRUVIN9X||board==BOARD_M128)
         return 24;
       else
         return 16;
     case CustomSwitches:
       if (IS_ARM(board))
         return 32;
-      else if (IS_DBLEEPROM(board))
+      else if (board==BOARD_GRUVIN9X||board==BOARD_M128)
         return 15;
       else
         return 12;
@@ -802,6 +779,9 @@ bool Open9xInterface::checkVersion(unsigned int version)
     case 214:
       // Massive EEPROM change!
       break;
+    case 215:
+      // M128 revert because too much RAM used!
+      break;
     default:
       return false;
   }
@@ -963,7 +943,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
-  open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
+  open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
@@ -993,6 +973,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
@@ -1018,7 +999,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
-  open9x->addOption("nottrace", QObject::tr("Don't show the throttle trace in Statistics"));
+  open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
@@ -1045,6 +1026,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   firmwares.push_back(open9x);
