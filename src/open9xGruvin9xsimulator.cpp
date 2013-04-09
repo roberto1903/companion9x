@@ -16,6 +16,7 @@
 
 #include "open9xGruvin9xsimulator.h"
 #include "open9xinterface.h"
+#include "open9xeeprom.h"
 
 #define SIMU
 #define SIMU_EXCEPTIONS

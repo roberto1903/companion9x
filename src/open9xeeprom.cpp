@@ -5,6 +5,10 @@
 #include <QObject>
 // #include <QMessageBox>
 
+#define IS_DBLEEPROM(board, version)         ((board==BOARD_GRUVIN9X || board==BOARD_M128) && version >= 213)
+// Macro used for Gruvin9x board and M128 board between versions 213 and 214 (when there were stack overflows!)
+#define IS_DBLRAM(board, version)            ((board==BOARD_GRUVIN9X && version >= 213) || (board==BOARD_M128 && version >= 213 && version <= 214))
+
 #define HAS_PERSISTENT_TIMERS(board)         (IS_ARM(board) || board == BOARD_GRUVIN9X)
 #define HAS_LARGE_LCD(board)                 (board == BOARD_TARANIS)
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
@@ -12,12 +16,12 @@
 #define MAX_SWITCHES(board)                  (board==BOARD_TARANIS ? 8 : 7)
 #define MAX_SWITCHES_POSITION(board)         (board==BOARD_TARANIS ? 22 : 9)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
-#define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  ((IS_DBLEEPROM(board) && version >= 213) ? 6 :  5))
+#define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  (IS_DBLRAM(board, version) ? 6 :  5))
 #define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
 #define MAX_CHANNELS(board, version)         (IS_ARM(board) ? 32 : 16)
-#define MAX_EXPOS(board, version)            (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 16 : 14))
-#define MAX_CUSTOM_SWITCHES(board, version)  (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 15 : 12))
-#define MAX_CUSTOM_FUNCTIONS(board, version) (IS_ARM(board) ? 32 : ((IS_DBLEEPROM(board) && version >= 213) ? 24 : 16))
+#define MAX_EXPOS(board, version)            (IS_ARM(board) ? 32 : (IS_DBLRAM(board, version) ? 16 : 14))
+#define MAX_CUSTOM_SWITCHES(board, version)  (IS_ARM(board) ? 32 : (IS_DBLEEPROM(board, version) ? 15 : 12))
+#define MAX_CUSTOM_FUNCTIONS(board, version) (IS_ARM(board) ? 32 : (IS_DBLEEPROM(board, version) ? 24 : 16))
 
 #define IS_RELEASE_21_MARCH_2013(board, version) (version >= 214 || (!IS_ARM(board) && version >= 213))
 #define IS_RELEASE_23_MARCH_2013(board, version) (version >= 214 || (board==BOARD_STOCK && version >= 213))
@@ -149,7 +153,7 @@ class SourcesConversionTable: public ConversionTable {
 
       if (!(flags & FLAG_NOTELEMETRY)) {
         if (release21March2013) {
-          if (board != BOARD_STOCK || (variant & GVARS_VARIANT)) {
+          if ((board != BOARD_STOCK && (board!=BOARD_M128 || version<215)) || (variant & GVARS_VARIANT)) {
             for (int i=0; i<5; i++)
               addConversion(RawSource(SOURCE_TYPE_GVAR, i), val++);
           }
@@ -323,7 +327,7 @@ class PhaseField: public TransformedField {
       version(version),
       rotencCount(IS_ARM(board) ? 1 : (board == BOARD_GRUVIN9X ? 2 : 0))
     {
-      if (board == BOARD_STOCK) {
+      if (board == BOARD_STOCK || (board==BOARD_M128 && version>=215)) {
         // On stock we use 10bits per trim
         for (int i=0; i<NUM_STICKS; i++)
           internalField.Append(new SignedField<8>(trimBase[i]));
@@ -354,7 +358,7 @@ class PhaseField: public TransformedField {
         internalField.Append(new SignedField<16>(phase.rotaryEncoders[i]));
       }
 
-      if (board != BOARD_STOCK) {
+      if (board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) {
         for (int i=0; i<O9X_MAX_GVARS; i++) {
           internalField.Append(new SignedField<16>(phase.gvars[i]));
         }
@@ -371,7 +375,7 @@ class PhaseField: public TransformedField {
         else {
           trim = std::max(-500, std::min(500, phase.trim[i]));
         }
-        if (board == BOARD_STOCK) {
+        if (board == BOARD_STOCK || (board == BOARD_M128 && version >= 215)) {
           trimBase[i] = trim >> 2;
           trimExt[i] = (trim & 0x03);
         }
@@ -385,7 +389,7 @@ class PhaseField: public TransformedField {
     {
       for (int i=0; i<NUM_STICKS; i++) {
         int trim;
-        if (board == BOARD_STOCK)
+        if (board == BOARD_STOCK || (board == BOARD_M128 && version >= 215))
           trim = ((trimBase[i]) << 2) + (trimExt[i] & 0x03);
         else
           trim = trimBase[i];
@@ -564,7 +568,7 @@ class MixField: public TransformedField {
         else
           internalField.Append(new ZCharField<6>(mix.name));
       }
-      else if (IS_DBLEEPROM(board) && IS_RELEASE_23_MARCH_2013(board, version)) {
+      else if (IS_DBLRAM(board, version) && IS_RELEASE_23_MARCH_2013(board, version)) {
         internalField.Append(new UnsignedField<4>(_destCh));
         internalField.Append(new BoolField<1>(_curveMode));
         internalField.Append(new BoolField<1>(mix.noExpo));
@@ -694,7 +698,7 @@ class ExpoField: public TransformedField {
           internalField.Append(new ZCharField<6>(expo.name));
         internalField.Append(new SignedField<8>(expo.curveParam));
       }
-      else if (IS_DBLEEPROM(board) && IS_RELEASE_23_MARCH_2013(board, version)) {
+      else if (IS_DBLRAM(board, version) && IS_RELEASE_23_MARCH_2013(board, version)) {
         internalField.Append(new UnsignedField<2>(expo.mode));
         internalField.Append(new UnsignedField<2>(expo.chn));
         internalField.Append(new BoolField<1>(_curveMode));
@@ -1579,20 +1583,20 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   else
     Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
 
-  if (board == BOARD_STOCK && (variant & GVARS_VARIANT)) {
+  if ((board == BOARD_STOCK || (board == BOARD_M128 && version >= 215)) && (variant & GVARS_VARIANT)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
       // on M64 GVARS are common to all phases, and there is no name
       Append(new SignedField<16>(modelData.phaseData[0].gvars[i]));
     }
   }
 
-  if (board != BOARD_STOCK) {
+  if (board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
       Append(new ZCharField<6>(modelData.gvars_names[i]));
     }
   }
 
-  if (board != BOARD_STOCK || (variant & FRSKY_VARIANT)) {
+  if ((board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) || (variant & FRSKY_VARIANT)) {
     Append(new FrskyField(modelData.frsky, board, version));
   }
 
