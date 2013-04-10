@@ -457,7 +457,7 @@ void ModelEdit::tabModelEditSetup()
     this->layout()->removeItem(ui->StockSwitchStartup);
     ui->bcP1ChkB->setText(tr("S1"));
     ui->bcP2ChkB->setText(tr("S2"));
-    ui->bcP3ChkB->setText(tr("SL"));
+    ui->bcP3ChkB->setText(tr("LS"));
   }
   
   if (!GetEepromInterface()->getCapability(PerModelThrottleWarning)) {

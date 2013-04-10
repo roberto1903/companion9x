@@ -1208,7 +1208,7 @@
          <item row="0" column="7">
           <widget class="QCheckBox" name="bcP4ChkB">
            <property name="text">
-            <string>SR</string>
+            <string>RS</string>
            </property>
           </widget>
          </item>

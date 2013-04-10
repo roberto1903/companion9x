@@ -514,7 +514,7 @@ QPushButton:checked {
            </size>
           </property>
           <property name="toolTip">
-           <string>SR</string>
+           <string>RS</string>
           </property>
           <property name="minimum">
            <number>-1024</number>
@@ -626,7 +626,7 @@ QPushButton:checked {
         <item row="3" column="8">
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>SR</string>
+           <string>RS</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -1130,7 +1130,7 @@ QPushButton:checked {
            </size>
           </property>
           <property name="toolTip">
-           <string>SL</string>
+           <string>LS</string>
           </property>
           <property name="minimum">
            <number>-1024</number>
@@ -1182,7 +1182,7 @@ QPushButton:checked {
         <item row="3" column="3">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>SL</string>
+           <string>LS</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
