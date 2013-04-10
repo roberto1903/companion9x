@@ -42,13 +42,14 @@ int RawSource::getDecimals(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
     switch (index) {
-      case 2:
-      case 3:
-        return (Model.frsky.channels[index-2].type==0 ? 2: 0);
-      case 12:
+      case TELEMETRY_SOURCE_A1:
+      case TELEMETRY_SOURCE_A2:
+        return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].type==0 ? 2: 0);
+      case TELEMETRY_SOURCE_CELL:
         return 2;
-      case 13:
-      case 15:
+      case TELEMETRY_SOURCE_CELLS_SUM:
+      case TELEMETRY_SOURCE_VFAS:
+      case TELEMETRY_SOURCE_CURRENT:
         return 1;
       default:
         return 0;
@@ -69,11 +70,11 @@ double RawSource::getMin(const ModelData & Model)
           return 0; */
         case TELEMETRY_SOURCE_A1:
         case TELEMETRY_SOURCE_A2:
-          if (Model.frsky.channels[index-2].type==0) {
-            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
+          if (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].type==0) {
+            return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/2550.0;
           }
           else {
-            return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
+            return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/255.0;
           }
         case TELEMETRY_SOURCE_ALT:
         case TELEMETRY_SOURCE_GPS_ALT:
@@ -103,10 +104,10 @@ double RawSource::getMax(const ModelData & Model)
           return 100;
         case TELEMETRY_SOURCE_A1:
         case TELEMETRY_SOURCE_A2:
-          if (Model.frsky.channels[index-2].type==0) {
-            return (Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0)/10;
+          if (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].type==0) {
+            return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio-(Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/255.0)/10;
           } else {
-            return Model.frsky.channels[index-2].ratio-(Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
+            return Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio-(Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/255.0;
           }
         case TELEMETRY_SOURCE_ALT:
         case TELEMETRY_SOURCE_GPS_ALT:
@@ -148,11 +149,11 @@ double RawSource::getOffset(const ModelData & Model)
     switch (index) {
       case TELEMETRY_SOURCE_A1:
       case TELEMETRY_SOURCE_A2:
-        if (Model.frsky.channels[index-2].type==0) {
-          return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/2550.0;
+        if (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].type==0) {
+          return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/2550.0;
         }
         else {
-          return (Model.frsky.channels[index-2].offset*Model.frsky.channels[index-2].ratio)/255.0;
+          return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].offset*Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio)/255.0;
         }
       case TELEMETRY_SOURCE_ALT:
       case TELEMETRY_SOURCE_GPS_ALT:
@@ -213,11 +214,11 @@ double RawSource::getStep(const ModelData & Model)
           return 3;
         case TELEMETRY_SOURCE_A1:
         case TELEMETRY_SOURCE_A2:
-          if (Model.frsky.channels[index-2].type==0) {
-            return (Model.frsky.channels[index-2].ratio/2550.0);
+          if (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].type==0) {
+            return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio/2550.0);
           }
           else {
-            return (Model.frsky.channels[index-2].ratio/255.0);
+            return (Model.frsky.channels[index-TELEMETRY_SOURCE_A1].ratio/255.0);
           }
         case TELEMETRY_SOURCE_ALT:
         case TELEMETRY_SOURCE_GPS_ALT:
