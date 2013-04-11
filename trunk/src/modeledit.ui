@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -1792,7 +1792,7 @@
      </widget>
      <widget class="QWidget" name="tabPhases">
       <attribute name="title">
-       <string>Phases</string>
+       <string>Flight Modes</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_16">
        <item row="0" column="0">
@@ -1800,11 +1800,11 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>0</number>
+            <number>8</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
-             <string>Flight Phase 0 (Default)</string>
+             <string>Flight Mode 0 (Default)</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_4a">
              <item>
@@ -1819,7 +1819,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37c">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -2363,7 +2363,7 @@
            </widget>
            <widget class="QWidget" name="phase1">
             <attribute name="title">
-             <string>FP 1</string>
+             <string>FM 1</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_17">
              <item row="0" column="0">
@@ -2378,7 +2378,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37e_3">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -2895,7 +2895,7 @@
            </widget>
            <widget class="QWidget" name="phase2">
             <attribute name="title">
-             <string>FP 2</string>
+             <string>FM 2</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_4c">
              <item>
@@ -2910,7 +2910,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37e">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -3427,7 +3427,7 @@
            </widget>
            <widget class="QWidget" name="phase3">
             <attribute name="title">
-             <string>FP 3</string>
+             <string>FM 3</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_4d">
              <item>
@@ -3442,7 +3442,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37a">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -3959,7 +3959,7 @@
            </widget>
            <widget class="QWidget" name="phase4">
             <attribute name="title">
-             <string>FP 4</string>
+             <string>FM 4</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_4e">
              <item>
@@ -3974,7 +3974,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37b">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -4491,7 +4491,7 @@
            </widget>
            <widget class="QWidget" name="phase5">
             <attribute name="title">
-             <string>FP 5</string>
+             <string>FM 5</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_12">
              <item row="1" column="0">
@@ -4812,7 +4812,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37b_5">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -5023,7 +5023,7 @@
            </widget>
            <widget class="QWidget" name="phase6">
             <attribute name="title">
-             <string>FP 6</string>
+             <string>FM 6</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_13">
              <item row="1" column="0">
@@ -5344,7 +5344,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37b_7">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -5555,7 +5555,7 @@
            </widget>
            <widget class="QWidget" name="phase7">
             <attribute name="title">
-             <string>FP 7</string>
+             <string>FM 7</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_14">
              <item row="2" column="0">
@@ -5577,7 +5577,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37b_9">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -6087,7 +6087,7 @@
            </widget>
            <widget class="QWidget" name="phase8">
             <attribute name="title">
-             <string>FP 8</string>
+             <string>FM 8</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_15">
              <item row="1" column="0">
@@ -6415,7 +6415,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_37b_11">
                  <property name="text">
-                  <string>Phase Name</string>
+                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -6659,7 +6659,7 @@
             <x>0</x>
             <y>0</y>
             <width>864</width>
-            <height>480</height>
+            <height>630</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -10091,8 +10091,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>860</width>
+            <height>616</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -15053,8 +15053,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>860</width>
+            <height>645</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

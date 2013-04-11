@@ -138,7 +138,7 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
      <item row="8" column="0">
       <widget class="QLabel" name="label_phases">
        <property name="text">
-        <string>Phases</string>
+        <string>Flight modes</string>
        </property>
       </widget>
      </item>

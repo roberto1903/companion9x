@@ -146,7 +146,7 @@ t_Open9xGruvin9xMixData_v207::t_Open9xGruvin9xMixData_v207(MixData &c9x)
       phase=-(ph+1);
     } else {
       phase=0;
-      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+      EEPROMWarnings += ::QObject::tr("Flight mode settings on mixers not exported") + "\n";
     }
     sOffset = c9x.sOffset;
   }
@@ -295,7 +295,7 @@ t_Open9xGruvin9xMixData_v209::t_Open9xGruvin9xMixData_v209(MixData &c9x)
       phase=-(ph+1);
     } else {
       phase=0;
-      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+      EEPROMWarnings += ::QObject::tr("Flight mode settings on mixers not exported") + "\n";
     }
     sOffset = c9x.sOffset;
   }

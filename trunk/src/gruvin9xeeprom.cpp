@@ -302,7 +302,7 @@ t_Gruvin9xExpoData::t_Gruvin9xExpoData(ExpoData &c9x)
     negPhase=1;
   } else {
     phase=0;
-    EEPROMWarnings += ::QObject::tr("Phases settings on expos not exported") + "\n";
+    EEPROMWarnings += ::QObject::tr("Flight modes settings on expos not exported") + "\n";
   }
   weight = c9x.weight;
   expo = c9x.expo;
