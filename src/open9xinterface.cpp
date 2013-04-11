@@ -681,7 +681,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case SlowScale:
       return 1;
     case CSFunc:
-      return 15;
+      return 16;
     case HasSDLogs:
       return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     default:
