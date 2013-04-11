@@ -5,13 +5,13 @@ QString getPhaseName(int val, char * phasename)
 {
   if (!val) return "---";
   if (!phasename) {
-    return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+    return QString(val < 0 ? "!" : "") + QObject::tr("FM%1").arg(abs(val) - 1);
   }
   else {
     QString phaseName;
     phaseName.append(phasename);
     if (phaseName.isEmpty()) {
-      return QString(val < 0 ? "!" : "") + QObject::tr("FP%1").arg(abs(val) - 1);
+      return QString(val < 0 ? "!" : "") + QObject::tr("FM%1").arg(abs(val) - 1);
     } else {
       return QString(val < 0 ? "!" : "") + phaseName;
     }
@@ -424,9 +424,9 @@ void populatePhasesCB(QComboBox *b, int value)
 {
   for (int i=-GetEepromInterface()->getCapability(FlightPhases); i<=GetEepromInterface()->getCapability(FlightPhases); i++) {
     if (i < 0)
-      b->addItem(QObject::tr("!Phase %1").arg(-i-1), i);
+      b->addItem(QObject::tr("!Flight mode %1").arg(-i-1), i);
     else if (i > 0)
-      b->addItem(QObject::tr("Phase %1").arg(i-1), i);
+      b->addItem(QObject::tr("Flight mode %1").arg(i-1), i);
     else
       b->addItem(QObject::tr("----"), 0);
   }
@@ -504,7 +504,7 @@ void populateTrimUseCB(QComboBox *b, unsigned int phase)
   if (num_phases>0) {
     for (unsigned int i = 0; i < num_phases; i++) {
       if (i != phase) {
-        b->addItem(QObject::tr("Flight phase %1 trim").arg(i));
+        b->addItem(QObject::tr("Flight mode %1 trim").arg(i));
       }
     }
   }
@@ -517,7 +517,7 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase)
   if (num_phases>0) {
     for (unsigned int i = 0; i < num_phases; i++) {
       if (i != phase) {
-        b->addItem(QObject::tr("Flight phase %1 value").arg(i));
+        b->addItem(QObject::tr("Flight mode %1 value").arg(i));
       }
     }
   }

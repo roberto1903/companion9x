@@ -211,7 +211,7 @@ void simulatorDialog::onTimerEvent()
 
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];
-    setWindowTitle(windowName + (txInterface->getCapability(FlightPhases) ? tr(" - Phase: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
+    setWindowTitle(windowName + (txInterface->getCapability(FlightPhases) ? tr(" - Flight mode: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
 /* TODO + QString(" - Timer: (%3, %4) %1:%2") .arg(abs(
         -s_timerVal) / 60, 2, 10, QChar('0')).arg(abs(-s_timerVal) % 60, 2, 10,
             QChar('0')) .arg(getTimerMode(model->timers[0].mode)) // TODO why timers[0]

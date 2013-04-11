@@ -298,11 +298,11 @@ void compareDialog::printPhases()
   QString color;
   int i,k;
   QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
-  str.append("<tr><td colspan=2><h2>"+tr("Flight Phases Settings")+"</h2></td></tr>");
+  str.append("<tr><td colspan=2><h2>"+tr("Flight modes Settings")+"</h2></td></tr>");
   str.append("<tr><td  width=\"50%\"><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
   str.append("<tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
   str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
-  str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
+  str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Flight mode name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
     str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
@@ -311,7 +311,7 @@ void compareDialog::printPhases()
   for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
     PhaseData *pd1=&g_model1->phaseData[i];
     PhaseData *pd2=&g_model2->phaseData[i];
-    str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+    str.append("<tr><td><b>"+tr("FM")+QString("%1</b> ").arg(i));
     color=getColor1(pd1->name,pd2->name);
     str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->name).arg(color));
     color=getColor1(pd1->fadeIn,pd2->fadeIn);
@@ -324,7 +324,7 @@ void compareDialog::printPhases()
         str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->trim[k]).arg(color));
       } else {
         color=getColor1(pd1->trimRef[k],pd2->trimRef[k]);
-        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(pd1->trimRef[k]));
+        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(pd1->trimRef[k]));
       }
     }
     color=getColor1(pd1->swtch,pd2->swtch);
@@ -344,7 +344,7 @@ void compareDialog::printPhases()
     if (GetEepromInterface()->getCapability(RotaryEncoders)) {
       str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
     }
-    str.append("</tr><tr><td align=center><b>"+tr("Phase name")+"</b></td>");
+    str.append("</tr><tr><td align=center><b>"+tr("Flight mode name")+"</b></td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
       for (i=0; i<MAX_GVARS; i++) {
         str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i+1).arg(g_model1->gvars_names[i]));
@@ -357,7 +357,7 @@ void compareDialog::printPhases()
     for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
       PhaseData *pd1=&g_model1->phaseData[i];
       PhaseData *pd2=&g_model2->phaseData[i];
-      str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+      str.append("<tr><td><b>"+tr("FM")+QString("%1</b> ").arg(i));
       color=getColor1(pd1->name,pd2->name);
       str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->name).arg(color));
       if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
@@ -369,7 +369,7 @@ void compareDialog::printPhases()
           else {
             int num = pd1->gvars[k] - 1025;
             if (num>=i) num++;
-            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(num));
           }
         }
       }
@@ -381,7 +381,7 @@ void compareDialog::printPhases()
         else {
           int num = pd1->rotaryEncoders[k] - 1025;
           if (num>=i) num++;
-          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(num));
         }
       }
       str.append("</tr>");
@@ -393,7 +393,7 @@ void compareDialog::printPhases()
   str.append("<td  width=\"50%\"><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
   str.append("<tr><td style=\"border-style:none;\">&nbsp;</td><td colspan=2 align=center><b>");
   str.append(tr("Fades")+"</b></td><td colspan=4 align=center><b>"+tr("Trims"));
-  str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Phase name"));
+  str.append("</b></td><td rowspan=2 align=\"center\" valign=\"bottom\"><b>"+tr("Switch")+"</b></td></tr><tr><td align=center width=\"80\"><b>"+tr("Flight mode name"));
   str.append("</b></td><td align=center width=\"30\"><b>"+tr("IN")+"</b></td><td align=center width=\"30\"><b>"+tr("OUT")+"</b></td>");
   for (i=0; i<4; i++) {
     str.append(QString("<td width=\"40\" align=\"center\"><b>%1</b></td>").arg(getStickStr(i)));
@@ -402,7 +402,7 @@ void compareDialog::printPhases()
   for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
     PhaseData *pd1=&g_model1->phaseData[i];
     PhaseData *pd2=&g_model2->phaseData[i];
-    str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+    str.append("<tr><td><b>"+tr("FM")+QString("%1</b> ").arg(i));
     color=getColor2(pd1->name,pd2->name);
     str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->name).arg(color));
     color=getColor2(pd1->fadeIn,pd2->fadeIn);
@@ -415,7 +415,7 @@ void compareDialog::printPhases()
         str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->trim[k]).arg(color));
       } else {
         color=getColor2(pd1->trimRef[k],pd2->trimRef[k]);
-        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(pd2->trimRef[k]));
+        str.append(QString("<td align=\"right\" width=\"30\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(pd2->trimRef[k]));
       }
     }
     color=getColor2(pd1->swtch,pd2->swtch);
@@ -432,7 +432,7 @@ void compareDialog::printPhases()
     if (GetEepromInterface()->getCapability(RotaryEncoders)) {
       str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
     }
-    str.append("</tr><tr><td align=center ><b>"+tr("Phase name")+"</b></td>");
+    str.append("</tr><tr><td align=center ><b>"+tr("Flight mode name")+"</b></td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
       for (i=0; i<MAX_GVARS; i++) {
         str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i+1).arg(g_model2->gvars_names[i]));
@@ -445,7 +445,7 @@ void compareDialog::printPhases()
     for (i=0; i<GetEepromInterface()->getCapability(FlightPhases); i++) {
       PhaseData *pd1=&g_model1->phaseData[i];
       PhaseData *pd2=&g_model2->phaseData[i];
-      str.append("<tr><td><b>"+tr("FP")+QString("%1</b> ").arg(i));
+      str.append("<tr><td><b>"+tr("FM")+QString("%1</b> ").arg(i));
       color=getColor1(pd1->name,pd2->name);
       str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->name).arg(color));
       if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
@@ -457,7 +457,7 @@ void compareDialog::printPhases()
           else {
             int num = pd2->gvars[k] - 1025;
             if (num>=i) num++;
-            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+            str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(num));
           }
         }
       }
@@ -469,7 +469,7 @@ void compareDialog::printPhases()
         else {
           int num = pd2->rotaryEncoders[k] - 1025;
           if (num>=i) num++;
-          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FP")+QString("%1</font></td>").arg(num));
+          str.append(QString("<td align=\"right\"><font size=+1 face='Courier New' color=%1>").arg(color)+tr("FM")+QString("%1</font></td>").arg(num));
         }
       }
       str.append("</tr>");
@@ -621,9 +621,9 @@ void compareDialog::printExpos()
                   mask <<=1;
                 }
                 if (first>1) {
-                  str += " " + tr("Phases") + QString("(");
+                  str += " " + tr("Flight modes") + QString("(");
                 } else {
-                  str += " " + tr("Phase") + QString("(");
+                  str += " " + tr("Flight mode") + QString("(");
                 }
                 mask=1;
                 first=1;
@@ -700,9 +700,9 @@ void compareDialog::printExpos()
                   mask <<=1;
                 }
                 if (first>1) {
-                  str += " " + tr("Phases") + QString("(");
+                  str += " " + tr("Flight modes") + QString("(");
                 } else {
-                  str += " " + tr("Phase") + QString("(");
+                  str += " " + tr("Flight mode") + QString("(");
                 }
                 mask=1;
                 first=1;
@@ -804,9 +804,9 @@ void compareDialog::printMixers()
                   mask <<=1;
                 }
                 if (first>1) {
-                  str += " " + tr("Phases") + QString("(");
+                  str += " " + tr("Flight modes") + QString("(");
                 } else {
-                  str += " " + tr("Phase") + QString("(");
+                  str += " " + tr("Flight mode") + QString("(");
                 }
                 mask=1;
                 first=1;
@@ -887,9 +887,9 @@ void compareDialog::printMixers()
                   mask <<=1;
                 }
                 if (first>1) {
-                  str += " " + tr("Phases") + QString("(");
+                  str += " " + tr("Flight modes") + QString("(");
                 } else {
-                  str += " " + tr("Phase") + QString("(");
+                  str += " " + tr("Flight mode") + QString("(");
                 }
                 mask=1;
                 first=1;

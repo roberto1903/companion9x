@@ -61,7 +61,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_phases">
      <property name="text">
-      <string>Phases</string>
+      <string>Flight modes</string>
      </property>
     </widget>
    </item>
@@ -288,7 +288,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
      <item>
       <widget class="QComboBox" name="expoCurveCB">
        <property name="whatsThis">
-        <string>Phase used by the expo.</string>
+        <string/>
        </property>
       </widget>
      </item>

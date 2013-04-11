@@ -924,7 +924,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
@@ -954,7 +954,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
@@ -983,7 +983,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
@@ -1010,7 +1010,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
@@ -1036,7 +1036,7 @@ void RegisterOpen9xFirmwares()
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("sdcard", QObject::tr("Support for SD memory card"));
   open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
@@ -1062,7 +1062,7 @@ void RegisterOpen9xFirmwares()
   open9x->setVariantBase(FRSKY_VARIANT);
   open9x->addOption("heli", QObject::tr("Enable HELI menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
-  open9x->addOption("nofp", QObject::tr("No flight phases"));
+  open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("ppmca", QObject::tr("PPM center adjustment in limits"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));

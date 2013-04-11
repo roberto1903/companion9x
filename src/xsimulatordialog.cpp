@@ -182,7 +182,7 @@ void xsimulatorDialog::onTimerEvent()
 
   if (g_modelIdx >= 0) {
     ModelData *model = & g_radioData.models[g_modelIdx];
-    setWindowTitle(windowName + (txInterface->getCapability(FlightPhases) ? tr(" - Phase: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
+    setWindowTitle(windowName + (txInterface->getCapability(FlightPhases) ? tr(" - Flight mode: %1(%2)").arg(model->phaseData[simulator->getPhase()].name).arg(simulator->getPhase()) : ""));
   }
   else if (ui->tabWidget->currentIndex() == 0) {
     bool lightEnable;

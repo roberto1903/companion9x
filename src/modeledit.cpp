@@ -1088,9 +1088,9 @@ void ModelEdit::tabPhases()
     QString PhaseName=g_model.phaseData[i].name;
     QString TabName;
     if (i==0) { 
-      TabName.append(QObject::tr("Flight Phase 0 (Default)"));
+      TabName.append(QObject::tr("Flight Mode 0 (Default)"));
     } else {
-      TabName.append(QObject::tr("FP %1").arg(i));
+      TabName.append(QObject::tr("FM %1").arg(i));
     }
     if (!PhaseName.isEmpty()) {
       TabName.append(" (");
@@ -1196,9 +1196,9 @@ void ModelEdit::tabExpos()
                 mask <<=1;
               }
               if (first>1) {
-                str += " " + tr("Phases") + QString("(");
+                str += " " + tr("Flight modes") + QString("(");
               } else {
-                str += " " + tr("Phase") + QString("(");
+                str += " " + tr("Flight mode") + QString("(");
               }
               mask=1;
               first=1;
@@ -1314,9 +1314,9 @@ void ModelEdit::tabMixes()
                 mask <<=1;
               }
               if (first>1) {
-                str += " " + tr("Phases") + QString("(");
+                str += " " + tr("Flight modes") + QString("(");
               } else {
-                str += " " + tr("Phase") + QString("(");
+                str += " " + tr("Flight mode") + QString("(");
               }
               mask=1;
               first=1;
@@ -2735,9 +2735,9 @@ void ModelEdit::phaseName_editingFinished()
   QString PhaseName=lineEdit->text();
   QString TabName;
   if (phase==0) { 
-    TabName.append(QObject::tr("Flight Phase 0 (Default)"));
+    TabName.append(QObject::tr("Flight Mode 0 (Default)"));
   } else {
-    TabName.append(QObject::tr("FP %1").arg(phase));
+    TabName.append(QObject::tr("FM %1").arg(phase));
   }
   
   if (!PhaseName.isEmpty()) {

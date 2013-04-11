@@ -314,7 +314,7 @@ t_Open9xArmExpoData_v208::t_Open9xArmExpoData_v208(ExpoData &c9x)
     phase=-(ph+1);
   } else {
     phase=0;
-    EEPROMWarnings += ::QObject::tr("Phases settings on expos not exported") + "\n";
+    EEPROMWarnings += ::QObject::tr("Flight modes settings on expos not exported") + "\n";
   }
 
   weight = c9x.weight;
@@ -412,7 +412,7 @@ t_Open9xArmExpoData_v210::t_Open9xArmExpoData_v210(ExpoData &c9x)
     phase=-(ph+1);
   } else {
     phase=0;
-    EEPROMWarnings += ::QObject::tr("Phases settings on expos not exported") + "\n";
+    EEPROMWarnings += ::QObject::tr("Flight modes settings on expos not exported") + "\n";
   }
   weight = c9x.weight;
   expo = c9x.expo;
@@ -607,7 +607,7 @@ t_Open9xArmMixData_v208::t_Open9xArmMixData_v208(MixData &c9x)
       phase=-(ph+1);
     } else {
       phase=0;
-      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+      EEPROMWarnings += ::QObject::tr("Flight modes settings on mixers not exported") + "\n";
     }
     sOffset = c9x.sOffset;
   }
@@ -750,7 +750,7 @@ t_Open9xArmMixData_v209::t_Open9xArmMixData_v209(MixData &c9x)
       phase=-(ph+1);
     } else {
       phase=0;
-      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+      EEPROMWarnings += ::QObject::tr("Flight modes settings on mixers not exported") + "\n";
     }
     sOffset = c9x.sOffset;
   }
@@ -896,7 +896,7 @@ t_Open9xArmMixData_v210::t_Open9xArmMixData_v210(MixData &c9x)
       phase=-(ph+1);
     } else {
       phase=0;
-      EEPROMWarnings += ::QObject::tr("Phases settings on mixers not exported") + "\n";
+      EEPROMWarnings += ::QObject::tr("Flight modes settings on mixers not exported") + "\n";
     }
     sOffset = c9x.sOffset;
     setEEPROMZString(name, c9x.name, sizeof(name));
