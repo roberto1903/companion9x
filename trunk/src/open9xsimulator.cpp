@@ -24,7 +24,7 @@
 #define PCBSTD
 #define CPUM64
 #define SPLASH
-#define FLIGHT_PHASES
+#define FLIGHT_MODES
 #define PPM_UNIT_PERCENT_PREC1
 #define HELI
 #define TEMPLATES

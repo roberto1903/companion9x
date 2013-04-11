@@ -24,7 +24,7 @@
 #define HELI
 #define TEMPLATES
 #define SPLASH
-#define FLIGHT_PHASES
+#define FLIGHT_MODES
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
