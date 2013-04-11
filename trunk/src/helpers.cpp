@@ -905,7 +905,7 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   b->setMaxVisibleItems(10);
 }
 
-#define CSWITCH_STR  "----  a~x   a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=x"
+#define CSWITCH_STR  "----  a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=xa~x   "
 #define CSW_NUM_FUNC 17 // TODO enum
 #define CSW_LEN_FUNC 6
 QString getCSWFunc(int val)
