@@ -42,7 +42,7 @@
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
-#define BEEPER
+#define BUZZER
 #define EEPROM_VARIANT SIMU_STOCK_VARIANTS
 
 #undef min
@@ -75,7 +75,7 @@ namespace Open9x {
 #include "../opentx/templates.cpp"
 #include "../opentx/translations.cpp"
 #include "../opentx/stock/voice.cpp"
-#include "../opentx/beeper.cpp"
+#include "../opentx/buzzer.cpp"
 #include "../opentx/translations/tts_en.cpp"
 #include "../opentx/haptic.cpp"
 
