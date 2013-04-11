@@ -905,9 +905,29 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   b->setMaxVisibleItems(10);
 }
 
-#define CSWITCH_STR  "----  a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=xa~x   "
+#define CSWITCH_STR  "----  a~x   a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=x"
 #define CSW_NUM_FUNC 17 // TODO enum
 #define CSW_LEN_FUNC 6
+int csw_values[]={  
+  CS_FN_OFF,
+  CS_FN_VEQUAL, // added at the end to avoid everything renumbered
+  CS_FN_VPOS,
+  CS_FN_VNEG,
+  CS_FN_APOS,
+  CS_FN_ANEG,
+  CS_FN_AND,
+  CS_FN_OR,
+  CS_FN_XOR,
+  CS_FN_EQUAL,
+  CS_FN_NEQUAL,
+  CS_FN_GREATER,
+  CS_FN_LESS,
+  CS_FN_EGREATER,
+  CS_FN_ELESS,
+  CS_FN_DPOS,
+  CS_FN_DAPOS
+};
+
 QString getCSWFunc(int val)
 {
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
@@ -917,14 +937,16 @@ void populateCSWCB(QComboBox *b, int value)
 {
   b->clear();
   for (int i = 0; i < CSW_NUM_FUNC; i++) {
-    b->addItem(getCSWFunc(i));
+    b->addItem(getCSWFunc(i),csw_values[i]);
     if (i>GetEepromInterface()->getCapability(CSFunc)) {
       QModelIndex index = b->model()->index(i, 0);
       QVariant v(0);
       b->model()->setData(index, v, Qt::UserRole - 1);
+      if (value == csw_values[i]) {
+        b->setCurrentIndex(b->count()-1);
+      }
     }
   }
-  b->setCurrentIndex(value);
   b->setMaxVisibleItems(10);
 }
 

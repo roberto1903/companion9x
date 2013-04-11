@@ -2128,8 +2128,8 @@ void ModelEdit::customSwitchesEdited()
     bool chAr[C9X_NUM_CSW];
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
     for (int i=0; i<num_csw;i++) {
-        chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->currentIndex()));
-        g_model.customSw[i].func = csw[i]->currentIndex();
+        chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
+        g_model.customSw[i].func = csw[i]->itemData(csw[i]->currentIndex()).toInt();
     }
     for (int i=0; i<num_csw; i++) {
         if(chAr[i]) {
