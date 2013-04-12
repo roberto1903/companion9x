@@ -631,7 +631,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>BackLight Color</string>
+        <string>Simu BackLight</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -665,6 +665,13 @@
          <string>Yellow</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="simuSW">
+       <property name="text">
+        <string>Remember switches</string>
+       </property>
       </widget>
      </item>
     </layout>

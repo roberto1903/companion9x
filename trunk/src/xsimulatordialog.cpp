@@ -13,6 +13,7 @@
 #define H           64
 
 int xsimulatorDialog::screenshotIdx = 0;
+uint32_t xsimulatorDialog::xswitchstatus = 0;
 
 xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
     QDialog(parent),
@@ -34,7 +35,7 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
     setupSticks();
     resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(), this->height());
-
+    bool simuSW=settings.value("simuSW",false).toBool();
 #ifdef JOYSTICKS
     bool js_enable=settings.value("js_support",false).toBool();
     int js_ctrl=settings.value("js_ctrl",-1).toInt();
@@ -81,7 +82,23 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
       }
     }
 #endif
-    
+    if (simuSW) {
+      ui->switchH->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchG->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchF->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchE->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchD->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchC->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchB->setValue(xswitchstatus & 0x3);
+      xswitchstatus>>=2;
+      ui->switchA->setValue(xswitchstatus & 0x3);
+    }
     connect(ui->cursor, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
     connect(ui->menu, SIGNAL(buttonPressed(int)), this, SLOT(onButtonPressed(int)));
 }
@@ -308,9 +325,23 @@ void xsimulatorDialog::getValues()
                        buttonPressed == Qt::Key_Minus },
                      middleButtonPressed
                     };
-
+  
    simulator->setValues(inputs);
- 
+   xswitchstatus=ui->switchA->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchB->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchC->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchD->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchE->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchF->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchG->value();
+   xswitchstatus<<=2;
+   xswitchstatus+=ui->switchH->value();
 }
 
 inline int chVal(int val)

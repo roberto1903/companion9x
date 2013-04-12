@@ -245,6 +245,7 @@ void preferencesDialog::writeValues()
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
   settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
   settings.setValue("show_splash", ui->showSplash->isChecked());
+  settings.setValue("simuSW", ui->simuSW->isChecked());
   settings.setValue("history_size", ui->historySize->value());
   settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
   current_firmware_variant = getFirmwareVariant();
@@ -369,6 +370,7 @@ void preferencesDialog::initSettings()
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
   ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
+  ui->simuSW->setChecked(settings.value("simuSW", false).toBool());
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
     ui->libraryPath->setText(Path);
@@ -682,6 +684,7 @@ void preferencesDialog::on_clearImageButton_clicked() {
   ui->imageLabel->clear();
   ui->SplashFileName->clear();
 }
+
 
 #ifdef JOYSTICKS
 
