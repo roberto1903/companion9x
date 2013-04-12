@@ -634,6 +634,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? true : false);
     case HasExpoNames:
       return (IS_ARM(board) ? true : false);
+    case HasChNames:
+      return (board==BOARD_TARANIS ? 1 : 0);
     case NoTimerDirs:
       return 1;
     case NoThrExpo:
