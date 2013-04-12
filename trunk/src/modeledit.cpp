@@ -1271,10 +1271,11 @@ void ModelEdit::tabMixes()
         while(curDest<(md->destCh-1))
         {
             curDest++;
-            if (curDest > outputs)
+            if (curDest > outputs) {
               str = tr("X%1  ").arg(curDest-outputs);
-            else
+            } else {
               str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
+            }
             qba.clear();
             qba.append((quint8)-curDest);
             QListWidgetItem *itm = new QListWidgetItem(str);
@@ -1282,11 +1283,17 @@ void ModelEdit::tabMixes()
             MixerlistWidget->addItem(itm);
         }
 
-        if (md->destCh > outputs)
+        if (md->destCh > outputs) {
           str = tr("X%1  ").arg(md->destCh-outputs);
-        else
+        } else {
           str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
-
+          if (GetEepromInterface()->getCapability(HasChNames)) {
+            QString name=g_model.limitData[md->destCh-1].name;
+            if (!name.isEmpty()) {
+              str+="("+name+")";
+            }
+          }
+        }
         if (curDest != md->destCh)
           curDest = md->destCh;
         else
@@ -1382,11 +1389,17 @@ void ModelEdit::tabMixes()
         curDest++;
         QString str;
 
-        if (curDest > outputs)
+        if (curDest > outputs) {
           str = tr("X%1  ").arg(curDest-outputs);
-        else
+        } else {
           str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
-
+          if (GetEepromInterface()->getCapability(HasChNames)) {
+            QString name=g_model.limitData[curDest-1].name;
+            if (!name.isEmpty()) {
+              str+="("+name+")";
+            }
+          }
+        }
         qba.clear();
         qba.append((quint8)-curDest);
         QListWidgetItem *itm = new QListWidgetItem(str);
@@ -1442,6 +1455,27 @@ void ModelEdit::heliEdited()
 
 void ModelEdit::tabLimits()
 {
+  limitEditLock=true;
+  int chnames=GetEepromInterface()->getCapability(HasChNames);
+  foreach(QLineEdit *le, findChildren<QLineEdit *>(QRegExp("CHName_[0-9]+"))) {
+    int len=le->objectName().mid(le->objectName().lastIndexOf("_")+1).toInt()-1;
+    if (chnames ) {
+      QString name=g_model.limitData[len].name;
+      if (name.trimmed().isEmpty()) {
+        le->setText(tr("CH %1").arg(len+1));
+      } else {
+        le->setText(name);
+      }
+      le->setEnabled(true);
+      le->setReadOnly(false);
+      connect(le, SIGNAL(editingFinished()), this, SLOT(limitNameEdited()));
+    } else {
+      le->setText(tr("CH %1").arg(len+1));
+      le->setDisabled(true);
+      le->setReadOnly(true);
+    }
+  }
+  limitEditLock=false;
   foreach(QDoubleSpinBox *sb, findChildren<QDoubleSpinBox *>(QRegExp("offsetDSB_[0-9]+"))) {
     int sbn=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
     sb->setValue(g_model.limitData[sbn].offset/10.0);
@@ -1638,6 +1672,28 @@ void ModelEdit::limitSymEdited()
   int limitId=ckb->objectName().mid(ckb->objectName().lastIndexOf("_")+1).toInt()-1;
   g_model.limitData[limitId].symetrical = (ckb->checkState() ? 1 : 0);
   updateSettings(); 
+}
+
+void ModelEdit::limitNameEdited()
+{
+  if(limitEditLock) return;
+  limitEditLock=true;
+  QLineEdit *le = qobject_cast<QLineEdit*>(sender());
+  int limitId=le->objectName().mid(le->objectName().lastIndexOf("_")+1).toInt()-1;
+  int i=0;
+  if (le->text()==tr("CH %1").arg(limitId+1)) {
+    le->setText("");
+  }
+  for (i=0; i<le->text().toAscii().length(); i++) {
+    g_model.limitData[limitId].name[i]=le->text().toAscii().at(i);
+  }
+  if (le->text().trimmed().isEmpty()) {
+    le->setText(tr("CH %1").arg(limitId+1));
+  }
+  g_model.limitData[limitId].name[i]=0;
+  updateSettings();
+  tabMixes();
+  limitEditLock=false;
 }
 
 

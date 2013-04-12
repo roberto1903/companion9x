@@ -55,6 +55,7 @@ private:
     bool protocolEditLock;
     bool switchEditLock;
     bool heliEditLock;
+    bool limitEditLock;
     bool phasesLock;
     bool telemetryLock;
     bool curvesLock;
@@ -246,6 +247,7 @@ private slots:
     void limitOffsetEdited();
     void limitSymEdited();
     void limitEdited();
+    void limitNameEdited();
     void limitInvEdited();
     void ppmcenterEdited();
     void customSwitchesEdited();
