@@ -88,6 +88,7 @@ protected:
     virtual void keyPressEvent(QKeyEvent *);
     virtual void keyReleaseEvent(QKeyEvent *);
     static int screenshotIdx;
+    static uint32_t switchstatus;
     int buttonPressed;
     bool middleButtonPressed;
 

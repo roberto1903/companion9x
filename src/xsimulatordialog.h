@@ -14,6 +14,7 @@
 #define TMR_STOPPED 3
 
 #define FLASH_DURATION 10
+;
 
 namespace Ui {
     class xsimulatorDialog;
@@ -75,6 +76,7 @@ protected:
     static int screenshotIdx;
     int buttonPressed;
     bool middleButtonPressed;
+    static uint32_t xswitchstatus;
 
 private slots:
     void onButtonPressed(int value);

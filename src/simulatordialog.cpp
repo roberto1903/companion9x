@@ -13,6 +13,8 @@
 #define H           64
 
 int simulatorDialog::screenshotIdx = 0;
+uint32_t simulatorDialog::switchstatus = 0;
+
 
 simulatorDialog::simulatorDialog(QWidget *parent) :
     QDialog(parent),
@@ -32,6 +34,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 
     QSettings settings("companion9x", "companion9x");
     backLight = settings.value("backLight",0).toInt();
+    bool simuSW=settings.value("simuSW",false).toBool();
     switch (backLight) {
         case 1:
             ui->lcd->setBackgroundColor(166,247,159);
@@ -53,6 +56,23 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
     setupSticks();
     resize(0, 0); // to force min height, min width
     this->setFixedSize(this->width(),this->height());
+    if  (simuSW) {
+      ui->switchAIL->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchELE->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchGEA->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchID0->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchID1->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchID2->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchRUD->setChecked(switchstatus & 0x1);
+      switchstatus >>=1;
+      ui->switchTHR->setChecked(switchstatus & 0x1);
+    }
 
 #ifdef JOYSTICKS
     bool js_enable=settings.value("js_support",false).toBool();
@@ -355,7 +375,7 @@ void simulatorDialog::setTrims()
 
 void simulatorDialog::getValues()
 {
-  TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
+    TxInputs inputs = {{ int(1024*nodeLeft->getX()),  // LEFT HORZ
                        int(-1024*nodeLeft->getY()),  // LEFT VERT
                        int(-1024*nodeRight->getY()), // RGHT VERT
                        int(1024*nodeRight->getX()) },  // RGHT HORZ
@@ -380,7 +400,22 @@ void simulatorDialog::getValues()
                      middleButtonPressed
                     };
 
-  simulator->setValues(inputs);
+    simulator->setValues(inputs);
+    switchstatus=ui->switchTHR->isChecked();
+    switchstatus<<=1;
+    switchstatus+=(ui->switchRUD->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchID2->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchID1->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchID0->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchGEA->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchELE->isChecked()&0x1);
+    switchstatus<<=1;
+    switchstatus+=(ui->switchAIL->isChecked()&0x1);
 }
 
 inline int chVal(int val)
