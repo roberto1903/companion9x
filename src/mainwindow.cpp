@@ -99,8 +99,11 @@ downloadDialog_forWait(NULL)
     updateMenus();
 
     readSettings();
-
-    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    if (ActiveProfile) {
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
+    } else {
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    }
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
     QNetworkProxyFactory::setUseSystemConfiguration(true);
@@ -592,9 +595,12 @@ void MainWindow::loadProfile()
   {
     int profnum=action->data().toInt();
     QSettings settings("companion9x", "companion9x");
+    settings.setValue("ActiveProfile",profnum);
     settings.beginGroup("Profiles");
     QString profile=QString("profile%1").arg(profnum);
     settings.beginGroup(profile);
+    ActiveProfile=profnum;
+    ActiveProfileName=settings.value("Name", "").toString();
     chord=settings.value("default_channel_order", 0).toInt();
     defmod=settings.value("default_mode", 0).toInt();
     burnfw=settings.value("burnFirmware", 0).toInt();
@@ -620,7 +626,17 @@ void MainWindow::loadProfile()
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
       mdiChild->eepromInterfaceChanged();
     }
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
   }
+}
+
+void MainWindow::unloadProfile()
+{
+    ActiveProfile=0;
+    ActiveProfileName="";
+    QSettings settings("companion9x", "companion9x");
+    settings.setValue("ActiveProfile",0);
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
 }
 
 void MainWindow::preferences()
@@ -628,7 +644,11 @@ void MainWindow::preferences()
     preferencesDialog *pd = new preferencesDialog(this);
     pd->exec();
 
-    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    if (ActiveProfile) {
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
+    } else {
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    }
 
     foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
@@ -1675,7 +1695,15 @@ void MainWindow::readSettings()
     checkCompanion9x = settings.value("startup_check_companion9x", true).toBool();
     checkFW = settings.value("startup_check_fw", true).toBool();
     MaxRecentFiles =settings.value("history_size",10).toInt();
-    
+    ActiveProfile=settings.value("activeprofile",0).toInt();
+    if (ActiveProfile) {
+      settings.beginGroup("Profiles");
+      QString profile=QString("profile%1").arg(ActiveProfile);
+      settings.beginGroup(profile);
+      ActiveProfileName=settings.value("Name","").toString();
+      settings.endGroup();
+      settings.endGroup();
+    }
     if (maximized) {
       setWindowState(Qt::WindowMaximized);
     }

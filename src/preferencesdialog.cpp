@@ -274,6 +274,8 @@ void preferencesDialog::writeValues()
     settings.remove("js_ctrl");
   }
   settings.setValue("backupEnable", ui->backupEnable->isChecked());
+  MainWindow * mw = (MainWindow *)this->parent();
+  mw->unloadProfile();
 }
 
 void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)

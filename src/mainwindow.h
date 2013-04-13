@@ -79,6 +79,7 @@ protected:
 
 public slots:
     void downloadLatestFW(FirmwareInfo *firmware, const QString & firmwareId);
+    void unloadProfile();
     
 private slots:
     void checkForUpdates(bool ignoreSettings, QString & fwId);
@@ -159,6 +160,7 @@ private:
     QString installer_fileName;
     QString downloadedFW;
     QString downloadedFWFilename;
+    QString ActiveProfileName;
     downloadDialog * downloadDialog_forWait;
 
     bool checkCompanion9x;
@@ -166,6 +168,7 @@ private:
     bool needRename;
     bool showcheckForUpdatesResult;
     int MaxRecentFiles;
+    int ActiveProfile;
     int currentFWrev;
     int currentFWrev_temp;
     int NewFwRev;
