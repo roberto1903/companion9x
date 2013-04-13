@@ -180,7 +180,8 @@ inline CSFunctionFamily getCSFunctionFamily(int fn)
 #define CHAR_FOR_NAMES_REGEX "[ A-Za-z0-9_.-,]*"
 
 enum HeliSwashTypes {
- HELI_SWASH_TYPE_120=1,
+ HELI_SWASH_TYPE_NONE=0,
+ HELI_SWASH_TYPE_120,
  HELI_SWASH_TYPE_120X,
  HELI_SWASH_TYPE_140,
  HELI_SWASH_TYPE_90

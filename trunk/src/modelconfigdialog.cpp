@@ -435,8 +435,16 @@ void modelConfigDialog::ConfigChanged()
         break;
       case 1:
         wimages.clear();
-        wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png";
+        wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png" << "h90.png";
         index=ui->swashType_CB->currentIndex();
+        if (index==4) {
+          ui->gyro_CB->setCurrentIndex(0);
+          ui->gyroType_Label->hide();
+          ui->gyro_CB->hide();
+        } else {
+          ui->gyroType_Label->show();
+          ui->gyro_CB->show();
+        }
         ailerons=1;
         throttle=1;
         imgname.append(wimages.at(index));
@@ -727,7 +735,7 @@ void modelConfigDialog::doAction(QAbstractButton *button)
         tmp |= ui->spoilersType_CB->currentIndex();
         tmp <<=2;
         tmp |= ui->rudder_CB->currentIndex();
-        tmp <<=2;
+        tmp <<=3;
         tmp |= ui->swashType_CB->currentIndex();
         tmp <<=2;
         tmp |= ui->tailType_CB->currentIndex();

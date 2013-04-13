@@ -5090,8 +5090,8 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
   tpl>>=2;
   uint8_t tailtype=(tpl & 0x03);
   tpl>>=2;
-  uint8_t swashtype=(tpl & 0x03);
-  tpl>>=2;
+  uint8_t swashtype=(tpl & 0x07);
+  tpl>>=3;
   uint8_t ruddertype=(tpl & 0x03);
   tpl>>=2;
   uint8_t spoilertype=(tpl & 0x3);
@@ -5237,13 +5237,22 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
         case 3:
           g_model.swashRingData.type = HELI_SWASH_TYPE_140;
           break;
+        case 4:
+          g_model.swashRingData.type = HELI_SWASH_TYPE_NONE;
+          break;
       }
       g_model.swashRingData.collectiveSource = RawSource(SOURCE_TYPE_CH, 10);
 
       if (chstyle==0) {
-        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
-        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
-        md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        if (swashtype!=4) {
+          md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+          md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+          md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        } else {
+          md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+          md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+          md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        }
         md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
         md=setDest(5);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
@@ -5260,9 +5269,15 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
             break;
         }
       } else {
-        md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
-        md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
-        md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        if (swashtype!=4) {
+          md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+          md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 0);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+          md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CYC, 2);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);
+        } else {
+          md=setDest(1);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 3);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("AIL").toAscii().data(),6);
+          md=setDest(2);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 1);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("ELE").toAscii().data(),6);
+          md=setDest(6);  md->srcRaw=RawSource(SOURCE_TYPE_CH, 10);  md->weight= 100; md->swtch=RawSwitch();strncpy(md->name, tr("PITCH").toAscii().data(),6);          
+        }
         md=setDest(4);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 0); md->weight=100; md->swtch=RawSwitch();strncpy(md->name, tr("RUD").toAscii().data(),6);
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID0); md->curve=CV(1); md->carryTrim=TRIM_OFF;
         md=setDest(3);  md->srcRaw=RawSource(SOURCE_TYPE_STICK, 2);  md->weight= 100; md->swtch=RawSwitch(SWITCH_TYPE_SWITCH,DSW_ID1); md->curve=CV(2); md->carryTrim=TRIM_OFF;
@@ -5491,7 +5506,7 @@ void ModelEdit::applyNumericTemplate(uint64_t tpl)
   }
   updateHeliTab();
   updateCurvesTab();
-  if (modeltype==1) {
+  if (modeltype==1 && swashtype!=4) {
     ui->tabWidget->setCurrentIndex(1);
   } else {
     ui->tabWidget->setCurrentIndex(4);
