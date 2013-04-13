@@ -941,10 +941,9 @@ void populateCSWCB(QComboBox *b, int value)
     if (i>GetEepromInterface()->getCapability(CSFunc)) {
       QModelIndex index = b->model()->index(i, 0);
       QVariant v(0);
-      b->model()->setData(index, v, Qt::UserRole - 1);
-      if (value == csw_values[i]) {
-        b->setCurrentIndex(b->count()-1);
-      }
+    }
+    if (value == csw_values[i]) {
+      b->setCurrentIndex(b->count()-1);
     }
   }
   b->setMaxVisibleItems(10);
