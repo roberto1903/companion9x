@@ -1287,10 +1287,12 @@ void ModelEdit::tabMixes()
           str = tr("X%1  ").arg(md->destCh-outputs);
         } else {
           str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
+          str.append("  ");
           if (GetEepromInterface()->getCapability(HasChNames)) {
             QString name=g_model.limitData[md->destCh-1].name;
             if (!name.isEmpty()) {
-              str+="("+name+")";
+              name.append("     ");
+              str=name.left(6);
             }
           }
         }
@@ -1396,7 +1398,8 @@ void ModelEdit::tabMixes()
           if (GetEepromInterface()->getCapability(HasChNames)) {
             QString name=g_model.limitData[curDest-1].name;
             if (!name.isEmpty()) {
-              str+="("+name+")";
+              name.append("     ");
+              str=name.left(6);
             }
           }
         }
