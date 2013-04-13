@@ -2382,12 +2382,14 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     }
     else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
       if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+        fswtchParam[i]->setMinimum(0);
         widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
         fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 254 : 255);
         if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
         fswtchParam[i]->setValue(g_model.funcSw[i].param);
 #ifdef PHONON
-        playBT[i]->show();
+        if (g_model.funcSw[i].param<251)
+          playBT[i]->show();
 #endif
       }
       else {
