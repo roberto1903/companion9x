@@ -582,7 +582,7 @@ void ModelEdit::tabModelEditSetup()
     case PXX:
       ui->pxxRxNum->setMinimum(1);
       ui->numChannelsSB->setValue(8);
-      ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+      ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
       ui->DSM_Type->setCurrentIndex(0);
       break;
     case DSM2:
@@ -594,7 +594,7 @@ void ModelEdit::tabModelEditSetup()
           ui->pxxRxNum->setValue((g_model.modelId));
       }
       ui->numChannelsSB->setValue(8);
-      ui->DSM_Type->setCurrentIndex((g_model.ppmNCH-8)/2);
+      ui->DSM_Type->setCurrentIndex((g_model.moduleData[0].channelsCount-8)/2);
       break;
     default:
       ui->label_DSM->hide();
@@ -603,7 +603,7 @@ void ModelEdit::tabModelEditSetup()
       ui->label_PXX->hide();
       ui->pxxRxNum->hide();
       ui->pxxRxNum->setEnabled(false);
-      ui->numChannelsSB->setValue(g_model.ppmNCH);
+      ui->numChannelsSB->setValue(g_model.moduleData[0].channelsCount);
       break;
   }
 }
@@ -2937,7 +2937,7 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->pxxRxNum->setMinimum(1);
         ui->pxxRxNum->show();
         ui->pxxRxNum->setEnabled(true);
-        ui->pxxRxNum->setValue((g_model.ppmNCH-8)/2+1);
+        ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
         break;
       case DSM2:
         ui->label_pulsePol->hide();
@@ -2997,7 +2997,7 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 void ModelEdit::on_numChannelsSB_editingFinished()
 {
   // TODO only accept valid values
-  g_model.ppmNCH = ui->numChannelsSB->value();
+  g_model.moduleData[0].channelsCount = ui->numChannelsSB->value();
   updateSettings();
 }
 
@@ -3012,7 +3012,7 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
 void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
 {
   if(protocolEditLock) return;
-  g_model.ppmNCH = (index*2)+8;
+  g_model.moduleData[0].channelsCount = (index*2)+8;
   updateSettings();
 }
 
@@ -3044,7 +3044,7 @@ void ModelEdit::on_pxxRxNum_editingFinished()
     return;
 
   if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
-    g_model.ppmNCH = (ui->pxxRxNum->value()-1)*2+8;
+    g_model.moduleData[0].channelsCount = (ui->pxxRxNum->value()-1)*2+8;
   }
    else {
     g_model.modelId= ui->pxxRxNum->value();

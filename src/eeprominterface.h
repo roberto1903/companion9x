@@ -56,18 +56,18 @@ const uint8_t modn12x3[4][4]= {
   {4, 2, 3, 1},
   {4, 3, 2, 1} };
 
-#define C9XMAX_MODELS  60
-#define C9X_MAX_PHASES  9
-#define C9X_MAX_MIXERS  64
-#define C9X_MAX_EXPOS   32
-#define C9X_MAX_CURVES  16
-#define MAX_POINTS  17
-#define MAX_GVARS   5
-
-#define NUM_SAFETY_CHNOUT 16
-#define C9X_NUM_CHNOUT    32 // number of real output channels
-#define C9X_NUM_CSW           32 // number of custom switches
-#define C9X_MAX_CUSTOM_FUNCTIONS           32 // number of functions assigned to switches
+#define C9XMAX_MODELS             60
+#define C9X_MAX_PHASES            9
+#define C9X_MAX_MIXERS            64
+#define C9X_MAX_EXPOS             32
+#define C9X_MAX_CURVES            16
+#define MAX_POINTS                17
+#define MAX_GVARS                 5
+#define NUM_SAFETY_CHNOUT         16
+#define C9X_NUM_CHNOUT            32 // number of real output channels
+#define C9X_NUM_CSW               32 // number of custom switches
+#define C9X_MAX_CUSTOM_FUNCTIONS  32 // number of functions assigned to switches
+#define C9X_NUM_MODULES           2
 
 #define STK_RUD  1
 #define STK_ELE  2
@@ -744,6 +744,14 @@ const t_protocol prot_list[]= {
   {PPMSIM, "PPMsim"},
 };
 
+class ModuleData {
+  public:
+    int          rfProtocol;
+    unsigned int channelsStart;
+    int          channelsCount; // 0=8 channels
+    unsigned int failsafeMode;
+    int          failsafeChannels[C9X_NUM_CHNOUT];
+};
 
 class ModelData {
   public:
@@ -753,11 +761,6 @@ class ModelData {
     uint8_t   modelVoice;
     TimerData timers[2];
     int       protocol;
-    int       rfProtocol;
-    unsigned int ppmSCH;
-    int       ppmNCH;
-    unsigned int ppm2SCH;
-    int       ppm2NCH;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
     unsigned int trimInc;            // Trim Increments
@@ -794,8 +797,9 @@ class ModelData {
 
     char bitmap[10+1];
 
-    unsigned int failsafeMode;
-    int failsafeChannels[C9X_NUM_CHNOUT];
+    unsigned int externalModule;
+    ModuleData moduleData[C9X_NUM_MODULES];
+    unsigned int trainerMode;
 
     void clear();
     bool isempty();

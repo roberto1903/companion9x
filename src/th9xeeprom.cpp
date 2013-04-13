@@ -408,7 +408,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     tmrVal = c9x.timers[0].val;
     //protocol = c9x.protocol;
     /*
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
@@ -480,7 +480,7 @@ t_Th9xModelData::operator ModelData ()
   // c9x.timers[0].dir = tmrDir;
   c9x.timers[0].val = tmrVal;
   /*c9x.protocol = (Protocol)protocol;
-  c9x.ppmNCH = 8 + 2 * ppmNCH;
+  c9x.moduleData[0].channelsCount = 8 + 2 * ppmNCH;
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;

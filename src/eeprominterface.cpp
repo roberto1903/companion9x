@@ -422,9 +422,9 @@ ModelData::ModelData()
 void ModelData::clear()
 {
   memset(this, 0, sizeof(ModelData));
-  ppmNCH = 8;
-  ppm2NCH = 8;
-  ppm2SCH = 8;
+  moduleData[0].channelsCount = 8;
+  moduleData[1].channelsStart = 8;
+  moduleData[1].channelsCount = 8;
   ppmDelay = 300;
   for (int i=0; i<C9X_MAX_PHASES; i++)
     phaseData[i].clear();

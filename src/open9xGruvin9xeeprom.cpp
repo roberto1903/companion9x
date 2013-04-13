@@ -888,7 +888,7 @@ t_Open9xGruvin9xModelData_v207::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.ppmDelay = 300 + 50 * ppmDelay;
@@ -982,7 +982,7 @@ t_Open9xGruvin9xModelData_v207::t_Open9xGruvin9xModelData_v207(ModelData &c9x)
         break;
     }
     thrTrim = c9x.thrTrim;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
     pulsePol = c9x.pulsePol;
@@ -1078,7 +1078,7 @@ t_Open9xGruvin9xModelData_v208::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.disableThrottleWarning=disableThrottleWarning;
@@ -1180,7 +1180,7 @@ t_Open9xGruvin9xModelData_v208::t_Open9xGruvin9xModelData_v208(ModelData &c9x)
         break;
     }
     thrTrim = c9x.thrTrim;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;
@@ -1281,7 +1281,7 @@ t_Open9xGruvin9xModelData_v209::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.disableThrottleWarning=disableThrottleWarning;
@@ -1386,7 +1386,7 @@ t_Open9xGruvin9xModelData_v209::t_Open9xGruvin9xModelData_v209(ModelData &c9x)
         break;
     }
     thrTrim = c9x.thrTrim;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;
@@ -1486,7 +1486,7 @@ t_Open9xGruvin9xModelData_v210::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.disableThrottleWarning=disableThrottleWarning;
@@ -1582,7 +1582,7 @@ t_Open9xGruvin9xModelData_v210::t_Open9xGruvin9xModelData_v210(ModelData &c9x)
         break;
     }
     thrTrim = c9x.thrTrim;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;
@@ -1686,7 +1686,7 @@ t_Open9xGruvin9xModelData_v211::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
   c9x.disableThrottleWarning=disableThrottleWarning;
@@ -1781,7 +1781,7 @@ t_Open9xGruvin9xModelData_v211::t_Open9xGruvin9xModelData_v211(ModelData &c9x)
         break;
     }
     thrTrim = c9x.thrTrim;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
     pulsePol = c9x.pulsePol;

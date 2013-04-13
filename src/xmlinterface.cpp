@@ -153,10 +153,10 @@ bool XmlInterface::save(RadioData &radioData)
             timer_sequence.push_back(xt);
           } */
         }
-        if (m.protocol != PPM || m.ppmNCH != 8 || m.ppmDelay != 300 || m.pulsePol != 0) {
+        if (m.protocol != PPM || m.moduleData[0].channelsCount != 8 || m.ppmDelay != 300 || m.pulsePol != 0) {
           modulation mod;
           mod.type(modulation::type_type::value(m.protocol));
-          mod.channels(m.ppmNCH);
+          mod.channels(m.moduleData[0].channelsCount);
           mod.delay(m.ppmDelay);
           mod.polarity(modulation::polarity_type::value(m.pulsePol));
           xm.modulation(mod);
