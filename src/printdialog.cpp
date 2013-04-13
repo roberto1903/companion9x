@@ -312,14 +312,22 @@ void printDialog::printMixes()
     for(int i=0; i<GetEepromInterface()->getCapability(Mixes); i++) {
       MixData *md = &g_model->mixData[i];
       if(!md->destCh || md->destCh>(unsigned int)GetEepromInterface()->getCapability(Outputs) ) break;
-      str.append("<tr><td><font size=+1 face='Courier New'>");
+      str.append("<tr><td><font size=+1 face='Courier New'><b>");
       if(lastCHN!=md->destCh) {
         lastCHN=md->destCh;
-        str.append("<b>"+tr("CH")+QString("%1</b>").arg(lastCHN,2,10,QChar('0')));
+        QString chname=tr("CH")+QString("%1  ").arg(lastCHN,2,10,QChar('0'));
+        if (GetEepromInterface()->getCapability(HasChNames)) {
+          QString name=g_model->limitData[md->destCh-1].name;
+          if (!name.isEmpty()) {
+            name.append("      ");
+            chname=name.left(6);
+          }
+        }
+        str.append(chname);
       } else {
         str.append("&nbsp;");
       }
-      str.append("</font></td>");
+      str.append("</b></font></td>");
       str.append("<td><font size=+1 face='Courier New' color=green>");
       switch(md->mltpx) {
         case (1): str += "&nbsp;*"; break;
@@ -401,6 +409,12 @@ void printDialog::printLimits()
         str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
       }
       str.append("</tr>");
+      if (GetEepromInterface()->getCapability(HasChNames)) {
+        str.append("<tr><td><b>"+tr("Name")+"</b></td>");
+        for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(g_model->limitData[i].name,"green"));
+        }
+      }
       str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
       for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
@@ -425,6 +439,12 @@ void printDialog::printLimits()
         str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
       }
       str.append("</tr>");
+      if (GetEepromInterface()->getCapability(HasChNames)) {
+        str.append("<tr><td><b>"+tr("Name")+"</b></td>");
+        for(int i=0; i<16; i++) {
+          str.append(doTR(g_model->limitData[i].name,"green"));
+        }
+      }
       str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
       for(int i=0; i<16; i++) {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
@@ -451,6 +471,12 @@ void printDialog::printLimits()
         str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
       }
       str.append("</tr>");
+      if (GetEepromInterface()->getCapability(HasChNames)) {
+        str.append("<tr><td><b>"+tr("Name")+"</b></td>");
+        for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
+          str.append(doTR(g_model->limitData[i].name,"green"));
+        }
+      }
       str.append("<tr><td><b>"+tr("Offset")+"</b></td>");
       for(int i=16; i<GetEepromInterface()->getCapability(Outputs); i++) {
         str.append(doTR(QString::number((qreal)g_model->limitData[i].offset/10, 'f', 1),"green"));
