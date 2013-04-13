@@ -882,19 +882,38 @@ class CustomSwitchesFunctionsTable: public ConversionTable {
 class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
 
   public:
-    CustomSwitchesAndSwitchesConversionTable()
+    CustomSwitchesAndSwitchesConversionTable(BoardEnum board, unsigned int version)
     {
       int val=0;
 
       addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
 
-      for (int i=1; i<=8; i++) {
-        int s = switchIndex(i, BOARD_STOCK, 214);
-        addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+      if (board == BOARD_TARANIS) {
+        for (int i=1; i<=MAX_SWITCHES_POSITION(board); i++) {
+          int s = switchIndex(i, board, version);
+          addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+        }
+        for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++) {
+          addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+        }
       }
-
-      for (int i=3; i<=9; i++) {
-        addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+      else if (board == BOARD_SKY9X) {
+        for (int i=1; i<=8; i++) {
+          int s = switchIndex(i, board, version);
+          addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+        }
+        for (int i=1; i<=MAX_CUSTOM_SWITCHES(board, version); i++) {
+          addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+        }
+      }
+      else {
+        for (int i=1; i<=8; i++) {
+          int s = switchIndex(i, board, version);
+          addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+        }
+        for (int i=1; i<=7; i++) {
+          addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+        }
       }
     }
 
@@ -918,7 +937,8 @@ class CustomSwitchField: public TransformedField {
       variant(variant),
       functionsConversionTable(board, version),
       sourcesConversionTable(board, version, variant, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES),
-      switchesConversionTable(board, version)
+      switchesConversionTable(board, version),
+      andswitchesConversionTable(board, version)
     {
       internalField.Append(new SignedField<8>(v1));
       internalField.Append(new SignedField<8>(v2));
