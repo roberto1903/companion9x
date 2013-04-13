@@ -31,6 +31,7 @@
 #define WS_HOW_HIGH
 #define VARIO
 #define PPM_UNIT_PERCENT_PREC1
+#define BUZZER
 #define AUDIO
 #define HAPTIC
 #define AUTOSWITCH
@@ -74,6 +75,7 @@ namespace Open9xGruvin9x {
 #include "../opentx/templates.cpp"
 #include "../opentx/translations.cpp"
 #include "../opentx/audio_avr.cpp"
+#include "../opentx/buzzer.cpp"
 #include "../opentx/gruvin9x/somo14d.cpp"
 #include "../opentx/telemetry_frsky.cpp"
 #include "../opentx/translations/tts_en.cpp"
@@ -146,6 +148,8 @@ void Open9xGruvin9xSimulator::getValues(TxOutputs &outputs)
 #define GETVALUES_IMPORT
 #define g_chans512 channelOutputs
 #include "simulatorimport.h"
+  outputs.beep = g_beepCnt;
+  g_beepCnt = 0;
 }
 
 void Open9xGruvin9xSimulator::setValues(TxInputs &inputs)

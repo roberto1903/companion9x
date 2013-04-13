@@ -1564,7 +1564,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("Open9x doesn't accept this protocol")));
   Append(new BoolField<1>(modelData.thrTrim));
-  Append(new ConversionField< SignedField<4> >(modelData.ppmNCH, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
+  Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
   Append(new BoolField<1>(modelData.pulsePol));
@@ -1625,17 +1625,22 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   }
 
   if (board == BOARD_SKY9X) {
-    Append(new UnsignedField<8>(modelData.ppmSCH));
-    Append(new UnsignedField<8>(modelData.ppm2SCH));
-    Append(new ConversionField< SignedField<8> >(modelData.ppm2NCH, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
+    Append(new UnsignedField<8>(modelData.moduleData[0].channelsStart));
+    Append(new UnsignedField<8>(modelData.moduleData[1].channelsStart));
+    Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
   }
 
   if (board == BOARD_TARANIS) {
-    Append(new SignedField<8>(modelData.rfProtocol));
-    Append(new UnsignedField<8>(modelData.ppmSCH));
-    Append(new UnsignedField<8>(modelData.failsafeMode));
-    for (int i=0; i<16; i++)
-      Append(new SignedField<16>(modelData.failsafeChannels[i]));
+    Append(new UnsignedField<8>(modelData.externalModule));
+    for (int module=0; module<2; module++) {
+      Append(new SignedField<8>(modelData.moduleData[module].rfProtocol));
+      Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
+      Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
+      Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
+      for (int i=0; i<32; i++)
+        Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
+    }
+    Append(new UnsignedField<8>(modelData.trainerMode));
   }
 }
 

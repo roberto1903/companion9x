@@ -760,7 +760,7 @@ t_Gruvin9xModelData_v102::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
@@ -833,7 +833,7 @@ t_Gruvin9xModelData_v103::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
@@ -906,7 +906,7 @@ t_Gruvin9xModelData_v105::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
@@ -999,7 +999,7 @@ t_Gruvin9xModelData_v106::operator ModelData ()
       c9x.protocol = PPM;
       break;
   }
-  c9x.ppmNCH = 8 + (2 * ppmNCH);
+  c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
@@ -1088,7 +1088,7 @@ t_Gruvin9xModelData_v106::t_Gruvin9xModelData_v106(ModelData &c9x)
         // TODO more explicit warning for each protocol
         break;
     }
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;

@@ -32,6 +32,7 @@
 #define WS_HOW_HIGH
 #define VARIO
 #define PPM_UNIT_PERCENT_PREC1
+#define BUZZER
 #define AUDIO
 #define VOICE
 #define HAPTIC
@@ -88,6 +89,7 @@ namespace Open9xSky9x {
 #include "../opentx/telemetry_frsky.cpp"
 #include "../opentx/sky9x/audio_driver.cpp"
 #include "../opentx/audio_arm.cpp"
+#include "../opentx/buzzer.cpp"
 #include "../opentx/sky9x/sdcard_driver.cpp"
 #include "../opentx/sky9x/coproc_driver.cpp"
 #include "../opentx/sky9x/haptic_driver.cpp"
@@ -160,6 +162,8 @@ void Open9xSky9xSimulator::getValues(TxOutputs &outputs)
 #define GETVALUES_IMPORT
 #define g_chans512 channelOutputs
 #include "simulatorimport.h"
+  outputs.beep = g_beepCnt;
+  g_beepCnt = 0;
 }
 
 void Open9xSky9xSimulator::setValues(TxInputs &inputs)

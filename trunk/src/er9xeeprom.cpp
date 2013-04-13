@@ -623,7 +623,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     traineron = c9x.traineron;
     t2throttle = c9x.t2throttle;
     ppmFrameLength = c9x.ppmFrameLength;
-    ppmNCH = (c9x.ppmNCH - 8) / 2;
+    ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
@@ -774,7 +774,7 @@ t_Er9xModelData::operator ModelData ()
   c9x.traineron= traineron;
   c9x.t2throttle =  t2throttle;
   c9x.ppmFrameLength=ppmFrameLength;
-  c9x.ppmNCH = 8 + 2 * ppmNCH;
+  c9x.moduleData[0].channelsCount = 8 + 2 * ppmNCH;
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
