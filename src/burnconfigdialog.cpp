@@ -352,8 +352,11 @@ void burnConfigDialog::restFuses(bool eeProtect)
           //use hfuse = 0x81 to prevent eeprom being erased with every flashing
         }
         QStringList arguments;
-        arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << "-u" << str;
-
+        if (avrMCU=="m2560") {
+          arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << "-u" << str;
+        } else {
+          arguments << "-c" << avrProgrammer << "-p" << avrMCU << args << "-B" << "100" << "-u" << str;          
+        }
         avrOutputDialog *ad = new avrOutputDialog(this, avrLoc, arguments, "Reset Fuses",AVR_DIALOG_KEEP_OPEN,TRUE);
         ad->setWindowIcon(QIcon(":/images/fuses.png"));
         ad->show();
