@@ -486,10 +486,25 @@ void compareDialog::printLimits()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\">";
   str.append("<tr><td colspan=2><h2>"+tr("Limits")+"</h2></td></tr>");
   str.append("<tr><td><table border=1 cellspacing=0 cellpadding=1 width=\"50%\">");
-  str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
+  if (GetEepromInterface()->getCapability(HasChNames)) {
+    str.append("<tr><td>"+tr("Name")+"</td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
+  } else {
+    str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");    
+  }
   for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     str.append("<tr>");
-    str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+    if (GetEepromInterface()->getCapability(HasChNames)) {
+      QString name1=g_model1->limitData[i].name;
+      QString name2=g_model2->limitData[i].name;
+      color=getColor1(name1,name2);
+      if (name1.trimmed().isEmpty()) {
+        str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),color,true));
+      } else {
+        str.append(doTC(name1,color,true));
+      }
+    } else {
+      str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+    }
     color=getColor1(g_model1->limitData[i].offset,g_model2->limitData[i].offset);
     str.append(doTR(QString::number((qreal)g_model1->limitData[i].offset/10, 'f', 1),color));
     color=getColor1(g_model1->limitData[i].min,g_model2->limitData[i].min);
@@ -505,7 +520,18 @@ void compareDialog::printLimits()
   str.append("<tr><td></td><td align=center><b>"+tr("Offset")+"</b></td><td align=center><b>"+tr("Min")+"</b></td><td align=center><b>"+tr("Max")+"</b></td><td align=center><b>"+tr("Invert")+"</b></td></tr>");
   for(int i=0; i<GetEepromInterface()->getCapability(Outputs); i++) {
     str.append("<tr>");
-    str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+    if (GetEepromInterface()->getCapability(HasChNames)) {
+      QString name1=g_model1->limitData[i].name;
+      QString name2=g_model2->limitData[i].name;
+      color=getColor2(name1,name2);
+      if (name2.trimmed().isEmpty()) {
+        str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),color,true));
+      } else {
+        str.append(doTC(name2,color,true));
+      }
+    } else {
+      str.append(doTC(tr("CH")+QString(" %1").arg(i+1,2,10,QChar('0')),"",true));
+    }
     color=getColor2(g_model1->limitData[i].offset,g_model2->limitData[i].offset);
     str.append(doTR(QString::number((qreal)g_model2->limitData[i].offset/10, 'f', 1),color));
     color=getColor2(g_model1->limitData[i].min,g_model2->limitData[i].min);
