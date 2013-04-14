@@ -50,6 +50,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
     populateBacklightCB(ui->backlightswCB, g_eeGeneral.backlightMode);
+    bool voice=current_firmware_variant.id.contains("voice");
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
       ui->blinvert_label->hide();
@@ -109,7 +110,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->displayTypeCB->setDisabled(true);
       ui->displayTypeCB->hide();
     }
-    if (!GetEepromInterface()->getCapability(HasVolume)) {
+    if (!GetEepromInterface()->getCapability(HasVolume) && !voice) {
       ui->volume_SB->hide();
       ui->volume_SB->setDisabled(true);
       ui->label_volume->hide();
