@@ -60,6 +60,7 @@ private:
     bool telemetryLock;
     bool curvesLock;
     bool phononLock;
+    bool fsLock;
 
     bool plot_curve[16];
 
@@ -182,7 +183,10 @@ private slots:
     void on_timer2Minute_toggled(bool checked);
     void on_timer1CountDownBeep_toggled(bool checked);
     void on_timer2CountDownBeep_toggled(bool checked);
-
+    void fssldEdited();
+    void fssbEdited();
+    void fssldValueChanged();
+    void fssbValueChanged();
     void resetCurve();
     void editCurve();
     void playMusic();

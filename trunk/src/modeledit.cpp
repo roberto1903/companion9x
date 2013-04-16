@@ -290,15 +290,111 @@ void ModelEdit::on_tabWidget_currentChanged(int index)
     resizeEvent();
 }
 
+void ModelEdit::fssldValueChanged()
+{
+  if (fsLock)
+    return;
+  fsLock=true;
+  QSpinBox * fssb1[] = { ui->fsm1SB_1, ui->fsm1SB_2,ui->fsm1SB_3,ui->fsm1SB_4,ui->fsm1SB_5,ui->fsm1SB_6,ui->fsm1SB_7,ui->fsm1SB_8,
+                               ui->fsm1SB_9, ui->fsm1SB_10,ui->fsm1SB_11,ui->fsm1SB_12,ui->fsm1SB_13,ui->fsm1SB_14,ui->fsm1SB_15,ui->fsm1SB_16, NULL };
+  QSpinBox * fssb2[] = { ui->fsm2SB_1, ui->fsm2SB_2,ui->fsm2SB_3,ui->fsm2SB_4,ui->fsm2SB_5,ui->fsm2SB_6,ui->fsm2SB_7,ui->fsm2SB_8,
+                               ui->fsm2SB_9, ui->fsm2SB_10,ui->fsm2SB_11,ui->fsm2SB_12,ui->fsm2SB_13,ui->fsm2SB_14,ui->fsm2SB_15,ui->fsm2SB_16, NULL };
+  QSlider *sl = qobject_cast<QSlider*>(sender());
+  int fsId=sl->objectName().mid(sl->objectName().lastIndexOf("_")+1).toInt()-1;
+  int moduleid=sl->objectName().mid(3,1).toInt();
+  if (moduleid==1) {
+    fssb1[fsId]->setValue(sl->value());
+  } else {
+    fssb2[fsId]->setValue(sl->value());
+  }
+  fsLock=false;
+}
+
+void ModelEdit::fssbValueChanged()
+{
+  if (fsLock)
+    return;
+  fsLock=true;
+  QSlider * fssld1[] = { ui->fsm1SL_1, ui->fsm1SL_2,ui->fsm1SL_3,ui->fsm1SL_4,ui->fsm1SL_5,ui->fsm1SL_6,ui->fsm1SL_7,ui->fsm1SL_8,
+                               ui->fsm1SL_9, ui->fsm1SL_10,ui->fsm1SL_11,ui->fsm1SL_12,ui->fsm1SL_13,ui->fsm1SL_14,ui->fsm1SL_15,ui->fsm1SL_16, NULL };
+  QSlider * fssld2[] = { ui->fsm2SL_1, ui->fsm2SL_2,ui->fsm2SL_3,ui->fsm2SL_4,ui->fsm2SL_5,ui->fsm2SL_6,ui->fsm2SL_7,ui->fsm2SL_8,
+                               ui->fsm2SL_9, ui->fsm2SL_10,ui->fsm2SL_11,ui->fsm2SL_12,ui->fsm2SL_13,ui->fsm2SL_14,ui->fsm2SL_15,ui->fsm2SL_16, NULL };
+  QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+  int fsId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+  int moduleid=sb->objectName().mid(3,1).toInt();
+  if (moduleid==1) {
+    fssld1[fsId]->setValue(sb->value());
+  } else {
+    fssld2[fsId]->setValue(sb->value());
+  }
+  fsLock=false;
+}
+
+void ModelEdit::fssldEdited()
+{
+  QSlider *sl = qobject_cast<QSlider*>(sender());
+  int fsId=sl->objectName().mid(sl->objectName().lastIndexOf("_")+1).toInt()-1;
+  int moduleid=sl->objectName().mid(3,1).toInt();
+  if (moduleid==1) {
+    g_model.moduleData[0].failsafeChannels[fsId]=sl->value();
+  } else {
+    g_model.moduleData[1].failsafeChannels[fsId]=sl->value();
+  }
+  updateSettings();
+}
+
+void ModelEdit::fssbEdited()
+{
+  QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+  int fsId=sb->objectName().mid(sb->objectName().lastIndexOf("_")+1).toInt()-1;
+  int moduleid=sb->objectName().mid(3,1).toInt();
+  if (moduleid==1) {
+    g_model.moduleData[0].failsafeChannels[fsId]=sb->value();
+  } else {
+    g_model.moduleData[1].failsafeChannels[fsId]=sb->value();
+  }
+  updateSettings();
+}
+
 void ModelEdit::tabModelEditSetup()
 {
   //name
   QLabel * pmsl[] = {ui->swwarn_label, ui->swwarn0_label, ui->swwarn4_label, NULL};
   QCheckBox * pmchkb[] = {ui->swwarn1_ChkB,ui->swwarn2_ChkB,ui->swwarn3_ChkB,ui->swwarn5_ChkB,ui->swwarn6_ChkB, NULL};
   QSlider * tpmsld[] = {ui->chkSA, ui->chkSB, ui->chkSC, ui->chkSD, ui->chkSE, ui->chkSF, ui->chkSG, NULL};
-  
-  ui->modelNameLE->setText(g_model.name);
+  QSlider * fssld1[] = { ui->fsm1SL_1, ui->fsm1SL_2,ui->fsm1SL_3,ui->fsm1SL_4,ui->fsm1SL_5,ui->fsm1SL_6,ui->fsm1SL_7,ui->fsm1SL_8,
+                               ui->fsm1SL_9, ui->fsm1SL_10,ui->fsm1SL_11,ui->fsm1SL_12,ui->fsm1SL_13,ui->fsm1SL_14,ui->fsm1SL_15,ui->fsm1SL_16, NULL };
+  QSlider * fssld2[] = { ui->fsm2SL_1, ui->fsm2SL_2,ui->fsm2SL_3,ui->fsm2SL_4,ui->fsm2SL_5,ui->fsm2SL_6,ui->fsm2SL_7,ui->fsm2SL_8,
+                               ui->fsm2SL_9, ui->fsm2SL_10,ui->fsm2SL_11,ui->fsm2SL_12,ui->fsm2SL_13,ui->fsm2SL_14,ui->fsm2SL_15,ui->fsm2SL_16, NULL };
+  QSpinBox * fssb1[] = { ui->fsm1SB_1, ui->fsm1SB_2,ui->fsm1SB_3,ui->fsm1SB_4,ui->fsm1SB_5,ui->fsm1SB_6,ui->fsm1SB_7,ui->fsm1SB_8,
+                               ui->fsm1SB_9, ui->fsm1SB_10,ui->fsm1SB_11,ui->fsm1SB_12,ui->fsm1SB_13,ui->fsm1SB_14,ui->fsm1SB_15,ui->fsm1SB_16, NULL };
+  QSpinBox * fssb2[] = { ui->fsm2SB_1, ui->fsm2SB_2,ui->fsm2SB_3,ui->fsm2SB_4,ui->fsm2SB_5,ui->fsm2SB_6,ui->fsm2SB_7,ui->fsm2SB_8,
+                               ui->fsm2SB_9, ui->fsm2SB_10,ui->fsm2SB_11,ui->fsm2SB_12,ui->fsm2SB_13,ui->fsm2SB_14,ui->fsm2SB_15,ui->fsm2SB_16, NULL };
 
+  ui->modelNameLE->setText(g_model.name);
+  fsLock=true;
+  if (!GetEepromInterface()->getCapability(HasFailsafe)) {
+    ui->ModelSetupTab->setTabEnabled(1,0);
+  } else {
+    if (GetEepromInterface()->getCapability(HasFailsafe)<32) {
+      ui->FSGB_2->hide();
+    }
+    for (int i=0; fssld1[i]; i++) {
+      fssld1[i]->setValue(g_model.moduleData[0].failsafeChannels[i]);
+      fssld2[i]->setValue(g_model.moduleData[1].failsafeChannels[i]);
+      fssb1[i]->setValue(g_model.moduleData[0].failsafeChannels[i]);
+      fssb2[i]->setValue(g_model.moduleData[1].failsafeChannels[i]);
+      connect(fssld1[i],SIGNAL(valueChanged(int)),this,SLOT(fssldValueChanged()));
+      connect(fssld2[i],SIGNAL(valueChanged(int)),this,SLOT(fssldValueChanged()));
+      connect(fssb1[i],SIGNAL(valueChanged(int)),this,SLOT(fssbValueChanged()));
+      connect(fssb2[i],SIGNAL(valueChanged(int)),this,SLOT(fssbValueChanged()));
+      connect(fssld1[i],SIGNAL(sliderReleased()),this,SLOT(fssldEdited()));
+      connect(fssld2[i],SIGNAL(sliderReleased()),this,SLOT(fssldEdited()));
+      connect(fssb1[i],SIGNAL(editingFinished()),this,SLOT(fssbEdited()));
+      connect(fssb2[i],SIGNAL(editingFinished()),this,SLOT(fssbEdited()));
+    }
+  }
+  fsLock=false;
   //timer1 mode direction value
   populateTimerSwitchCB(ui->timer1ModeCB,g_model.timers[0].mode,GetEepromInterface()->getCapability(TimerTriggerB));
   int min = g_model.timers[0].val/60;

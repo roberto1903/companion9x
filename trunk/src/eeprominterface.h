@@ -905,6 +905,7 @@ enum Capability {
  HasAltitudeSel,
  HasVario,
  HasVariants,
+ HasFailsafe,
  FSSwitch,
  DiffMixers,
  PPMCenter,
