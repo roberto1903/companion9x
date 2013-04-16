@@ -306,10 +306,10 @@ bool MdiChild::loadFile(const QString &fileName, bool resetCurrentFile)
 bool MdiChild::save()
 {
   if (isUntitled) {
-      return saveAs(true);
+    return saveAs(true);
   }
   else {
-      return saveFile(curFile);
+    return saveFile(curFile);
   }
 }
 
@@ -317,16 +317,17 @@ bool MdiChild::saveAs(bool isNew)
 {
     QSettings settings("companion9x", "companion9x");
     QString fileName;
-    if (GetEepromInterface()->getEEpromSize()==EESIZE_SKY9X) {
-      curFile.replace(".eepe",".bin");
+    if (GetEepromInterface()->getBoard() == BOARD_SKY9X) {
+      curFile.replace(".eepe", ".bin");
       QFileInfo fi(curFile);      
       fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(BIN_FILES_FILTER));
-    } else {
+    }
+    else {
       QFileInfo fi(curFile);
       fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(EEPROM_FILES_FILTER));
     }
     if (fileName.isEmpty())
-        return false;
+      return false;
 
     settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
     if (isNew)
