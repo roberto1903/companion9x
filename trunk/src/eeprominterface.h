@@ -906,6 +906,7 @@ enum Capability {
  HasVario,
  HasVariants,
  HasFailsafe,
+ NumModules,
  FSSwitch,
  DiffMixers,
  PPMCenter,
