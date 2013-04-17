@@ -674,6 +674,8 @@ int Open9xInterface::getCapability(const Capability capability)
       if (board==BOARD_TARANIS) 
         return 32; // 
       return (board==BOARD_SKY9X ? 16 : 0);
+    case NumModules:
+      return (board==BOARD_TARANIS ? 2 : 1);      
     case HasCurrentCalibration:
       return (IS_ARM(board) ? true : false);
     case HasVolume:

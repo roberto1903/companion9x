@@ -377,8 +377,13 @@ void ModelEdit::tabModelEditSetup()
     ui->ModelSetupTab->setTabEnabled(1,0);
   } else {
     if (GetEepromInterface()->getCapability(HasFailsafe)<32) {
-      ui->FSGB_2->hide();
+      ui->FSGB_2->hide();      
     }
+    if (GetEepromInterface()->getCapability(NumModules)<2) {
+      ui->rf2_GB->hide();
+    }
+    ui->rf2_GB->hide(); // for the moment hide anyway.
+    
     for (int i=0; fssld1[i]; i++) {
       fssld1[i]->setValue(g_model.moduleData[0].failsafeChannels[i]);
       fssld2[i]->setValue(g_model.moduleData[1].failsafeChannels[i]);
