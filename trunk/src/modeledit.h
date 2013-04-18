@@ -248,6 +248,7 @@ private slots:
     void mixerlistWidget_KeyPress(QKeyEvent *event);
 
     void curvePointEdited();
+    void on_cname_LE_editingFinished();
     void limitOffsetEdited();
     void limitSymEdited();
     void limitEdited();

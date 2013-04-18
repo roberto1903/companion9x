@@ -1714,6 +1714,12 @@ void ModelEdit::tabCurves()
   } else {
     ui->curvetype_CB->setEnabled(true);
   }
+  if (!GetEepromInterface()->getCapability(HasCvNames)){
+    ui->cname_LE->hide();
+    ui->cname_label->hide();
+  } else {
+    ui->cname_LE->setText(g_model.curves[0].name);
+  }
   
   for (int i=numcurves; i<16;i++) {
     editb[i]->hide();
@@ -1937,6 +1943,13 @@ void ModelEdit::setCurrentCurve(int curveId)
   if (g_model.curves[currentCurve].custom) {
     index++;
   }
+  if (!GetEepromInterface()->getCapability(HasCvNames)){
+    ui->cname_LE->hide();
+    ui->cname_label->hide();
+  } else {
+    ui->cname_LE->setText(g_model.curves[currentCurve].name);
+  }
+  
   ui->curvetype_CB->setCurrentIndex(index);
   curvesLock=false;
 }
@@ -5962,6 +5975,16 @@ void ModelEdit::shrink() {
     }
   }
   ui->curvePreview->repaint();
+}
+
+void ModelEdit::on_cname_LE_editingFinished() {
+    if (GetEepromInterface()->getCapability(HasCvNames)) {
+      int i=0;
+      for (i=0; i<ui->cname_LE->text().toAscii().length(); i++) {
+        g_model.curves[currentCurve].name[i]=ui->cname_LE->text().toAscii().at(i);
+      }
+      g_model.curves[currentCurve].name[i]=0;
+    }
 }
 
 void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {

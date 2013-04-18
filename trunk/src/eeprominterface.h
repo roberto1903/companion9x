@@ -466,7 +466,7 @@ class CurveData {
     bool custom;         // 0=end, 1=pos, 2=neg, 3=both
     uint8_t count;
     CurvePoint points[MAX_POINTS];
-
+    char  name[6+1];
     void clear(int count) { memset(this, 0, sizeof(CurveData)); this->count = count; }
 };
 
@@ -875,6 +875,7 @@ enum Capability {
  HasExpoNames,
  HasMixerNames,
  HasChNames,
+ HasCvNames,
  HasPxxCountry,
  HasGeneralUnits,
  NoTimerDirs,
