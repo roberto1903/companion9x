@@ -58,6 +58,7 @@ class lcdWidget : public QWidget {
       QPixmap buffer(2*lcdWidth, 2*lcdHeight);
       QPainter p(&buffer);
       doPaint(p);
+      QApplication::clipboard()->setPixmap( buffer );
       buffer.toImage().save(fileName);
     }
 
