@@ -45,6 +45,8 @@ private slots:
     void on_InvertPixels_clicked();
     void on_clearImageButton_clicked();
     void on_libraryPathButton_clicked();
+    void on_snapshotPathButton_clicked();
+    void on_snapshotClipboardCKB_clicked();
     void on_backupPathButton_clicked();
     void on_voicePathButton_clicked();
     void on_splashLibraryButton_clicked();
