@@ -58,8 +58,18 @@ class lcdWidget : public QWidget {
       QPixmap buffer(2*lcdWidth, 2*lcdHeight);
       QPainter p(&buffer);
       doPaint(p);
-      QApplication::clipboard()->setPixmap( buffer );
-      buffer.toImage().save(fileName);
+      QSettings settings("companion9x", "companion9x");
+      bool toclipboard=settings.value("snapshot_to_clipboard", false).toBool();
+      if (toclipboard) {
+        QApplication::clipboard()->setPixmap( buffer );
+      } else {
+        QString Path=settings.value("snapshotPath", "").toString();
+        if (Path.isEmpty() || !QDir(Path).exists()) {
+          Path=".";
+        }
+        Path.append(QDir::separator()+fileName);
+        buffer.toImage().save(Path);
+      }
     }
 
     void onLcdChanged(bool light)
