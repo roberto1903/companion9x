@@ -60,14 +60,14 @@ class lcdWidget : public QWidget {
       doPaint(p);
       QSettings settings("companion9x", "companion9x");
       bool toclipboard=settings.value("snapshot_to_clipboard", false).toBool();
-      if (toclipboard) {
-        QApplication::clipboard()->setPixmap( buffer );
-      } else {
+      QApplication::clipboard()->setPixmap( buffer );
+      if (!toclipboard) {
         QString Path=settings.value("snapshotPath", "").toString();
         if (Path.isEmpty() || !QDir(Path).exists()) {
           Path=".";
         }
         Path.append(QDir::separator()+fileName);
+        qDebug() << "Screenshot" << Path;
         buffer.toImage().save(Path);
       }
     }

@@ -1295,7 +1295,7 @@ May be different from firmware language</string>
      <item row="0" column="0">
       <widget class="QCheckBox" name="snapshotClipboardCKB">
        <property name="text">
-        <string>Use clipboard</string>
+        <string>Use clipboard only</string>
        </property>
       </widget>
      </item>

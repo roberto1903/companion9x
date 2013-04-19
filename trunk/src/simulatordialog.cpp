@@ -210,9 +210,13 @@ void simulatorDialog::setupTimer()
 void simulatorDialog::onButtonPressed(int value)
 {
   if (value==Qt::Key_Print) {
-      QString fileName = QString("screenshot-%1.png").arg(++screenshotIdx);
-      qDebug() << "Screenshot" << fileName;
-      ui->lcd->makeScreenshot(fileName);      
+      QSettings settings("companion9x", "companion9x");
+      bool toclipboard=settings.value("snapshot_to_clipboard", false).toBool();
+      QString fileName ="";
+      if (!toclipboard) {
+        fileName = QString("screenshot-%1.png").arg(++screenshotIdx);
+      }
+      ui->lcd->makeScreenshot(fileName);
   } else {
       buttonPressed = value;
   }
