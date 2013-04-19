@@ -362,7 +362,18 @@ void preferencesDialog::initSettings()
   int i = ui->locale_QB->findData(settings.value("locale"));
   if (i < 0) i = 0;
   ui->locale_QB->setCurrentIndex(i);
-
+  ui->snapshotClipboardCKB->setChecked(settings.value("snapshot_to_clipboard", false).toBool());
+  if (ui->snapshotClipboardCKB->isChecked()) {
+    ui->snapshotPath->setDisabled(true);
+    ui->snapshotPathButton->setDisabled(true);
+  } else {
+    QString Path=settings.value("snapshotPath", "").toString();
+    if (QDir(Path).exists()) {
+      ui->snapshotPath->setText(Path);
+      ui->snapshotPath->setReadOnly(true);
+      ui->snapshotPathButton->setEnabled(true);
+    }
+  }
   ui->channelorderCB->setCurrentIndex(settings.value("default_channel_order", 0).toInt());
   ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
   ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
@@ -499,12 +510,39 @@ void preferencesDialog::on_voice_dnld_clicked()
 void preferencesDialog::on_libraryPathButton_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library folder"), settings.value("lastImagesDir").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library folder"), settings.value("libraryPath").toString());
   if (!fileName.isEmpty()) {
-    settings.setValue("lastImagesDir", fileName);
+    settings.setValue("libraryPath", fileName);
     ui->libraryPath->setText(fileName);
   }
 }
+
+void preferencesDialog::on_snapshotPathButton_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your snapshot folder"), settings.value("snapshotPath").toString());
+  if (!fileName.isEmpty()) {
+    settings.setValue("snapshotpath", fileName);
+    settings.setValue("snapshot_to_clipboard", false);
+    ui->snapshotPath->setText(fileName);
+  }
+}
+
+void preferencesDialog::on_snapshotClipboardCKB_clicked()
+{
+  QSettings settings("companion9x", "companion9x");
+  if (ui->snapshotClipboardCKB->isChecked()) {
+    ui->snapshotPath->setDisabled(true);
+    ui->snapshotPathButton->setDisabled(true);
+    settings.setValue("snapshot_to_clipboard", true);
+  } else {
+    ui->snapshotPath->setEnabled(true);
+    ui->snapshotPath->setReadOnly(true);
+    ui->snapshotPathButton->setEnabled(true);
+    settings.setValue("snapshot_to_clipboard", false);
+  }
+}
+
 
 void preferencesDialog::on_backupPathButton_clicked()
 {

@@ -178,7 +178,7 @@ void xsimulatorDialog::setupTimer()
 void xsimulatorDialog::onButtonPressed(int value)
 {
   if (value==Qt::Key_Print) {
-      QString fileName = QString("./screenshot-%1.png").arg(++screenshotIdx);
+      QString fileName = QString("screenshot-%1.png").arg(++screenshotIdx);
       qDebug() << "Screenshot" << fileName;
       ui->lcd->makeScreenshot(fileName);      
   } else {
