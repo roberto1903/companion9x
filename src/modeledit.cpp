@@ -5985,6 +5985,7 @@ void ModelEdit::on_cname_LE_editingFinished() {
       }
       g_model.curves[currentCurve].name[i]=0;
     }
+    updateSettings();
 }
 
 void ModelEdit::on_curvetype_CB_currentIndexChanged(int index) {
