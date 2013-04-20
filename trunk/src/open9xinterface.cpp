@@ -350,7 +350,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
     switch(board) {
       case BOARD_TARANIS:
       case BOARD_SKY9X:
-        version = 214;
+        version = 215;
         break;
       case BOARD_GRUVIN9X:
         version = 214;
@@ -466,8 +466,7 @@ int Open9xInterface::getSize(ModelData &model)
   uint8_t tmp[EESIZE_RLC_MAX];
   efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
-  // TODO change this name, it's a factory
-  Open9xModelDataNew open9xModel(model, board, 215/*TODO*/, GetCurrentFirmwareVariant());
+  Open9xModelDataNew open9xModel(model, board, 255, GetCurrentFirmwareVariant());
   // open9xModel.Dump();
 
   QByteArray eeprom;
@@ -487,8 +486,7 @@ int Open9xInterface::getSize(GeneralSettings &settings)
   uint8_t tmp[EESIZE_RLC_MAX];
   efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
 
-  // TODO change this name, it's a factory
-  Open9xGeneralDataNew open9xGeneral(settings, board, LAST_OPEN9X_AVR_EEPROM_VER, GetCurrentFirmwareVariant());
+  Open9xGeneralDataNew open9xGeneral(settings, board, 255, GetCurrentFirmwareVariant());
   // open9xGeneral.Dump();
 
   QByteArray eeprom;

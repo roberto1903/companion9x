@@ -111,7 +111,4 @@ class Open9xModelDataNew: public StructField {
     ChannelsConversionTable channelsConversionTable;
 };
 
-#define LAST_OPEN9X_AVR_EEPROM_VER      213
-#define LAST_OPEN9X_ARM_EEPROM_VER      214
-
 #endif
