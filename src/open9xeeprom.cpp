@@ -22,6 +22,7 @@
 #define MAX_EXPOS(board, version)            (IS_ARM(board) ? 32 : (IS_DBLRAM(board, version) ? 16 : 14))
 #define MAX_CUSTOM_SWITCHES(board, version)  (IS_ARM(board) ? 32 : (IS_DBLEEPROM(board, version) ? 15 : 12))
 #define MAX_CUSTOM_FUNCTIONS(board, version) (IS_ARM(board) ? 32 : (IS_DBLEEPROM(board, version) ? 24 : 16))
+#define MAX_CURVES(board)                    (IS_ARM(board) ? O9X_ARM_MAX_CURVES : O9X_MAX_CURVES)
 
 #define IS_RELEASE_21_MARCH_2013(board, version) (version >= 214 || (!IS_ARM(board) && version >= 213))
 #define IS_RELEASE_23_MARCH_2013(board, version) (version >= 214 || (board==BOARD_STOCK && version >= 213))
@@ -769,7 +770,7 @@ class CurvesField: public TransformedField {
       internalField("Curves"),
       curves(curves),
       board(board),
-      maxCurves(IS_ARM(board) ? O9X_ARM_MAX_CURVES : O9X_MAX_CURVES),
+      maxCurves(MAX_CURVES(board)),
       maxPoints(IS_ARM(board) ? O9X_ARM_NUM_POINTS : O9X_NUM_POINTS)
     {
       for (int i=0; i<maxCurves; i++) {
@@ -940,8 +941,14 @@ class CustomSwitchField: public TransformedField {
       switchesConversionTable(board, version),
       andswitchesConversionTable(board, version)
     {
-      internalField.Append(new SignedField<8>(v1));
-      internalField.Append(new SignedField<8>(v2));
+      if (IS_ARM(board) && version >= 215) {
+        internalField.Append(new SignedField<16>(v1));
+        internalField.Append(new SignedField<16>(v2));
+      }
+      else {
+        internalField.Append(new SignedField<8>(v1));
+        internalField.Append(new SignedField<8>(v2));
+      }
 
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >(csw.func, &functionsConversionTable, "Function"));
@@ -1538,6 +1545,10 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (release21March2013)
     Append(new UnsignedField<8>(modelData.modelId));
 
+  if (board == BOARD_TARANIS && version >= 215) {
+    Append(new CharField<10>(modelData.bitmap));
+  }
+
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
     Append(new TimerModeField(modelData.timers[i].mode, board, version));
     if (release21March2013) {
@@ -1562,9 +1573,18 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     }
   }
 
-  Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("Open9x doesn't accept this protocol")));
+  if (board == BOARD_TARANIS)
+    Append(new SpareBitsField<3>());
+  else
+    Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("Open9x doesn't accept this protocol")));
+
   Append(new BoolField<1>(modelData.thrTrim));
-  Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
+
+  if (board == BOARD_TARANIS)
+    Append(new SpareBitsField<4>());
+  else
+    Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
+
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
   Append(new BoolField<1>(modelData.pulsePol));
@@ -1620,7 +1640,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new FrskyField(modelData.frsky, board, version));
   }
 
-  if (HAS_LARGE_LCD(board)) {
+  if (board == BOARD_TARANIS && version < 215) {
     Append(new CharField<10>(modelData.bitmap));
   }
 
@@ -1641,6 +1661,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
         Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
     }
     Append(new UnsignedField<8>(modelData.trainerMode));
+    for (int i=0; i<MAX_CURVES(board); i++) {
+      Append(new ZCharField<6>(modelData.curves[i].name));
+    }
   }
 }
 
