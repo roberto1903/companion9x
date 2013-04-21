@@ -480,7 +480,7 @@ class LimitData {
     int   ppmCenter;
     bool  symetrical;
     char  name[6+1];
-    void clear() { min = -100; max = +100; revert = false; offset = 0; ppmCenter = 0; symetrical = 0; }
+    void clear() { memset(this, 0, sizeof(LimitData)); min = -100; max = +100; }
 };
 
 enum MltpxValue {
