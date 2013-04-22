@@ -860,10 +860,59 @@ QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
   }
 }
 
+QString MainWindow::FindTaranisPath()
+{
+    int pathcount=0;
+    QString path;
+    QStringList drives;
+    QString eepromfile;
+    QString fsname;
+#if defined WIN32 || !defined __GNUC__
+    foreach( QFileInfo drive, QDir::drives() ) {  
+      WCHAR szFileSystemName[256];
+      DWORD dwSerialNumber = 0;
+      DWORD dwMaxFileNameLength=256;
+      DWORD dwFileSystemFlags=0;
+      bool ret = GetVolumeInformation( (WCHAR *) drive.absolutePath().utf16(),szVolumeName,256,&dwSerialNumber,&dwMaxFileNameLength,&dwFileSystemFlags,szFileSystemName,256);
+      if(ret) {
+        QString vName=QString::fromUtf16 ( (const ushort *) szVolumeName) ;
+        if (vName.contains("TARANIS")) {
+          eepromfile=drive.absolutePath();
+          eepromfile.append("/TARANIS.bin");
+          if (QFile::exists(eepromfile)) {
+            pathcount++;
+            path=eepromfile;
+          }
+        }
+      }
+    }
+#else    
+    FILE *fdes = setmntent(_PATH_MOUNTED, "r");
+    mntent *entry = NULL;
+    while ((entry = getmntent(fdes)) != NULL) {
+      eepromfile=entry->mnt_dir;
+      fsname=entry->mnt_fsname;
+      eepromfile.append("/TARANIS.bin");
+      if (QFile::exists(eepromfile) && fsname.compare("vfat")) {
+        pathcount++;
+        path=eepromfile;
+      }
+    }
+    endmntent(fdes);
+#endif
+    if (pathcount==1) {
+      return path;
+    } else {
+      return "";
+    }
+}
+
+
 void MainWindow::burnFrom()
 {
     QString tempDir = QDir::tempPath();
     QString tempFile;
+    int res=0;
     EEPROMInterface *eepromInterface = GetEepromInterface();
     if (eepromInterface->getBoard()==BOARD_TARANIS || eepromInterface->getBoard() == BOARD_SKY9X) 
       tempFile = tempDir + "/temp.bin";
@@ -874,32 +923,25 @@ void MainWindow::burnFrom()
     }
 
     if (eepromInterface->getBoard()==BOARD_TARANIS) {
-      FILE *fdes = setmntent(_PATH_MOUNTED, "r");
-      mntent *entry = NULL;
-      QStringList drives;
-      QString eepromfile;
-      while ((entry = getmntent(fdes)) != NULL) {
-        eepromfile=entry->mnt_dir;
-        eepromfile.append("/TARANIS.bin");
-        if (QFile::exists(eepromfile)) {
-           //TODO try to identify a real radio.
-        }
-        qDebug()<<entry->mnt_fsname;
-        drives << entry->mnt_dir;
+      QString path=FindTaranisPath();
+      if (path.isEmpty()) {
+        QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+        res=false;
+      } else {
+        QFile::copy(path,tempFile);
+        res=true;
       }
-      endmntent(fdes);
     } else {    
       QStringList str = GetReceiveEEpromCommand(tempFile);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
       ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-      int res = ad->exec();
-
-      if(QFileInfo(tempFile).exists() && res) {
-          MdiChild *child = createMdiChild();
-          child->newFile();
-          child->loadFile(tempFile, false);
-          child->show();
-      }
+      res = ad->exec();
+    }
+    if(QFileInfo(tempFile).exists() && res) {
+        MdiChild *child = createMdiChild();
+        child->newFile();
+        child->loadFile(tempFile, false);
+        child->show();
     }
 }
 
