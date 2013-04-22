@@ -135,7 +135,7 @@ private:
     void updateRecentFileActions();
     void updateProfilesActions();
     int getFileType(const QString &fullFileName);
-    
+    QString FindTaranisPath();
     QString strippedName(const QString &fullFileName);
 
     MdiChild *activeMdiChild();
