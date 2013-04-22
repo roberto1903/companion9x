@@ -74,6 +74,8 @@
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
+#elif __APPLE__
+#include <unistd.h>
 #else
 #include <unistd.h>
 #include <sys/statfs.h>
@@ -887,6 +889,33 @@ QString MainWindow::FindTaranisPath()
         }
       }
     }
+#elif __APPLE__
+NSWorkspace   *ws = [NSWorkspace sharedWorkspace];
+NSArray     *vols = [ws mountedLocalVolumePaths];
+NSFileManager *fm = [NSFileManager defaultManager];
+
+for (NSString *path in vols) 
+{
+    NSDictionary* fsAttributes;
+    NSString *description, *type, *name;
+    BOOL removable, writable, unmountable, res;
+    NSNumber *size;
+
+    res = [ws getFileSystemInfoForPath:path 
+                           isRemovable:&removable 
+                            isWritable:&writable 
+                         isUnmountable:&unmountable
+                           description:&description
+                                  type:&type];
+    if (!res) continue;
+    fsAttributes = [fm fileSystemAttributesAtPath:path];
+    name         = [fm displayNameAtPath:path];
+    size         = [fsAttributes objectForKey:NSFileSystemSize];
+
+    NSLog(@"path=%@\nname=%@\nremovable=%d\nwritable=%d\nunmountable=%d\n"
+           "description=%@\ntype=%@, size=%@\n\n",
+          path, name, removable, writable, unmountable, description, type, size);
+}
 #else    
     FILE *fdes = setmntent(_PATH_MOUNTED, "r");
     mntent *entry = NULL;
