@@ -91,7 +91,7 @@ private slots:
     void reply1Finished(QNetworkReply * reply);
     void reply1Accepted();
     void newFile();
-    void open();
+    void openFile();
     void save();
     void saveAs();
     void cut();

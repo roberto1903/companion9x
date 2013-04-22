@@ -76,6 +76,9 @@
 #define sleep(x) Sleep(x*1000)
 #else
 #include <unistd.h>
+#include <sys/statfs.h>
+#include <stdio.h>
+#include <mntent.h>
 #endif
 
 MainWindow::MainWindow():
@@ -525,7 +528,7 @@ void MainWindow::newFile()
     child->show();
 }
 
-void MainWindow::open()
+void MainWindow::openFile()
 {
     QSettings settings("companion9x", "companion9x");
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open"), settings.value("lastDir").toString(),tr(EEPROM_FILES_FILTER));
@@ -870,17 +873,33 @@ void MainWindow::burnFrom()
       unlink(tempFile.toAscii());
     }
 
-    QStringList str = GetReceiveEEpromCommand(tempFile);
-    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
-    ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-    int res = ad->exec();
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      FILE *fdes = setmntent(_PATH_MOUNTED, "r");
+      mntent *entry = NULL;
+      QStringList drives;
+      QString eepromfile;
+      while ((entry = getmntent(fdes)) != NULL) {
+        eepromfile=entry->mnt_dir;
+        eepromfile.append("/TARANIS.bin");
+        if (QFile::exists(eepromfile)) {
+           //TODO try to identify a real radio.
+        }
+        qDebug()<<entry->mnt_fsname;
+        drives << entry->mnt_dir;
+      }
+      endmntent(fdes);
+    } else {    
+      QStringList str = GetReceiveEEpromCommand(tempFile);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+      ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+      int res = ad->exec();
 
-    if(QFileInfo(tempFile).exists() && res)
-    {
-        MdiChild *child = createMdiChild();
-        child->newFile();
-        child->loadFile(tempFile, false);
-        child->show();
+      if(QFileInfo(tempFile).exists() && res) {
+          MdiChild *child = createMdiChild();
+          child->newFile();
+          child->loadFile(tempFile, false);
+          child->show();
+      }
     }
 }
 
@@ -1361,7 +1380,7 @@ void MainWindow::createActions()
     openAct = new QAction(QIcon(":/images/open.png"), tr("&Open..."), this);
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
-    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(openFile()));
     
     loadbackupAct = new QAction(QIcon(":/images/open.png"), tr("&loadBackup..."), this);
     loadbackupAct->setStatusTip(tr("Load backup from file"));
