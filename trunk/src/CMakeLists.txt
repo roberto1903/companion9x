@@ -120,6 +120,7 @@ SET( companion9x_SRCS
      generaledit.cpp
      modeledit.cpp 
      modelslist.cpp
+     mountlist.cpp 
      mixerslist.cpp 
      avroutputdialog.cpp
      preferencesdialog.cpp

@@ -74,14 +74,9 @@
 #if defined WIN32 || !defined __GNUC__
 #include <windows.h>
 #define sleep(x) Sleep(x*1000)
-#elif __APPLE__
-#include <unistd.h>
-#include <mountlist.h>
 #else
 #include <unistd.h>
-#include <sys/statfs.h>
-#include <stdio.h>
-#include <mntent.h>
+#include "mountlist.h"
 #endif
 
 MainWindow::MainWindow():
@@ -890,7 +885,7 @@ QString MainWindow::FindTaranisPath()
         }
       }
     }
-#elif __APPLE__
+#else
     struct mount_entry *entry;
     entry = read_file_system_list(true); 
     while (entry != NULL) {
@@ -899,21 +894,10 @@ QString MainWindow::FindTaranisPath()
       if (QFile::exists(eepromfile)) {
         pathcount++;
         path=eepromfile;
+        qDebug() << entry->me_type;
       }
+      entry = entry->me_next; ;
     }
-#else    
-    FILE *fdes = setmntent(_PATH_MOUNTED, "r");
-    mntent *entry = NULL;
-    while ((entry = getmntent(fdes)) != NULL) {
-      eepromfile=entry->mnt_dir;
-      fsname=entry->mnt_fsname;
-      eepromfile.append("/TARANIS.bin");
-      if (QFile::exists(eepromfile) && fsname.compare("vfat")) {
-        pathcount++;
-        path=eepromfile;
-      }
-    }
-    endmntent(fdes);
 #endif
     if (pathcount==1) {
       return path;
