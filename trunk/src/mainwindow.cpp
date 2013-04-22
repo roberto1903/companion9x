@@ -868,12 +868,13 @@ QString MainWindow::FindTaranisPath()
     QString eepromfile;
     QString fsname;
 #if defined WIN32 || !defined __GNUC__
-    foreach( QFileInfo drive, QDir::drives() ) {  
+    foreach( QFileInfo drive, QDir::drives() ) {
+      WCHAR szVolumeName[256] ;
       WCHAR szFileSystemName[256];
       DWORD dwSerialNumber = 0;
       DWORD dwMaxFileNameLength=256;
       DWORD dwFileSystemFlags=0;
-      bool ret = GetVolumeInformation( (WCHAR *) drive.absolutePath().utf16(),szVolumeName,256,&dwSerialNumber,&dwMaxFileNameLength,&dwFileSystemFlags,szFileSystemName,256);
+      bool ret = GetVolumeInformationW( (WCHAR *) drive.absolutePath().utf16(),szVolumeName,256,&dwSerialNumber,&dwMaxFileNameLength,&dwFileSystemFlags,szFileSystemName,256);
       if(ret) {
         QString vName=QString::fromUtf16 ( (const ushort *) szVolumeName) ;
         if (vName.contains("TARANIS")) {
