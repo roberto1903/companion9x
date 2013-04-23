@@ -55,8 +55,12 @@
 #include <errno.h>
 
 #include <fcntl.h>
-
+#if defined WIN32 || !defined __GNUC__
+#define bool char
+#else
 #include <unistd.h>
+#endif
+
 
 #if HAVE_SYS_PARAM_H
 # include <sys/param.h>
