@@ -568,16 +568,25 @@ void MdiChild::burnTo()  // write to Tx
         QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
         return;
       } else {
-        char buf[4096];
-        size_t size;
-        FILE* source = fopen(tempFile.toLatin1(), "rb");
-        FILE* dest = fopen(path.toLatin1(), "wb");
-        while ((size = fread(buf, 1, 4096, source))) {
-            fwrite(buf, 1, size, dest);
+        char buf[65536];
+        QFile source(tempFile);
+        if (!source.open(QIODevice::ReadOnly)) {
+          QMessageBox::warning(this, tr("Error"),tr("Cannot open temporary file"));
         }
-        fclose(source);
-        fclose(dest);
+        qDebug() << sizeof(buf);
+        source.read(buf,sizeof(buf));
+        source.close();
+
+        QFile dest(path);
+        if (!dest.open(QIODevice::WriteOnly)) {
+          QMessageBox::warning(this, tr("Error"),tr("Cannot write to radio eeprom"));
+          return;
+        }        
+        dest.write(buf,sizeof(buf));
+        dest.close();
+#if !(defined WIN32 || !defined __GNUC__)
         sync();
+#endif
         QMessageBox::information(this, "companion9x", tr("Taranis eeprom write finished correctly"));
       }
     } else {
