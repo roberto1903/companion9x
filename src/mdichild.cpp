@@ -492,6 +492,7 @@ void MdiChild::burnTo()  // write to Tx
     QMessageBox::critical(this,tr("Error"), tr("Cannot write temporary file!"));
     return;
   }
+  EEPROMInterface *eepromInterface = GetEepromInterface();
   bool backup=false;
   burnDialog *cd = new burnDialog(this, 1, &tempFile, &backup,strippedName(curFile));
   cd->exec();
@@ -499,11 +500,21 @@ void MdiChild::burnTo()  // write to Tx
     if (backup) {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss")+".bin";
-        QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
-        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
-        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-        ad->exec();
-        sleep(1);
+        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+          QString path=((MainWindow *)this->parent())->FindTaranisPath();
+          if (path.isEmpty()) {
+            QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+            return;
+          } else {
+            QFile::copy(path,backupFile);
+          }
+        } else {
+          QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
+          avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+          ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+          ad->exec();
+          sleep(1);
+        }
       }
       int oldrev=((MainWindow *)this->parent())->getEpromVersion(tempFile);
       QString tempFlash=tempDir + "/flash.bin";
@@ -534,17 +545,45 @@ void MdiChild::burnTo()  // write to Tx
     } else {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
-        QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
-        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
-        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-        ad->exec();
-        sleep(1);
+        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+          QString path=((MainWindow *)this->parent())->FindTaranisPath();
+          if (path.isEmpty()) {
+            QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+            return;
+          } else {
+            QFile::copy(path,backupFile);
+          }
+        } else {
+          QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
+          avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+          ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+          ad->exec();
+          sleep(1);
+        }
       }
     }
-    QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
-    avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
-    ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
-    ad->show();
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      QString path=((MainWindow *)this->parent())->FindTaranisPath();
+      if (path.isEmpty()) {
+        QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+        return;
+      } else {
+        char buf[4096];
+        size_t size;
+        FILE* source = fopen(tempFile.toLatin1(), "rb");
+        FILE* dest = fopen(path.toLatin1(), "wb");
+        while ((size = fread(buf, 1, 4096, source))) {
+            fwrite(buf, 1, size, dest);
+        }
+        fclose(source);
+        fclose(dest);        
+      }
+    } else {
+      QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
+      avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+      ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
+      ad->show();
+    }
   }
 }
 
