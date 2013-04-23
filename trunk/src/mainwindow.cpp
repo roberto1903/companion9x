@@ -896,7 +896,7 @@ QString MainWindow::FindTaranisPath()
       if (QFile::exists(eepromfile) && fstype.contains("fat") ) {
 #else
       if (QFile::exists(eepromfile)) {
-#  
+#endif 
         pathcount++;
         path=eepromfile;
       }
