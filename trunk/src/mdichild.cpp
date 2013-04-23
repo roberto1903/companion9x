@@ -573,10 +573,8 @@ void MdiChild::burnTo()  // write to Tx
         if (!source.open(QIODevice::ReadOnly)) {
           QMessageBox::warning(this, tr("Error"),tr("Cannot open temporary file"));
         }
-        qDebug() << sizeof(buf);
         source.read(buf,sizeof(buf));
         source.close();
-
         QFile dest(path);
         if (!dest.open(QIODevice::WriteOnly)) {
           QMessageBox::warning(this, tr("Error"),tr("Cannot write to radio eeprom"));
