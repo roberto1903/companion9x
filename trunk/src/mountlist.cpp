@@ -20,7 +20,7 @@
 */
 
 // This file is not used on some platforms, so don't do anything for them
-#if(!defined(__WIN32__))&&(!defined(__amigaos4__))&&(!defined(__AROS__))&&(!defined(__MORPHOS__))&&(!defined(__amigaos__))
+#if(!defined(WIN32))&&(!defined(__amigaos4__))&&(!defined(__AROS__))&&(!defined(__MORPHOS__))&&(!defined(__amigaos__))
 
 // We don't use autoconf and all that in grafx2, so let's do the config here ...
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__)                       // MacOS X is POSIX compliant
@@ -55,12 +55,7 @@
 #include <errno.h>
 
 #include <fcntl.h>
-#if defined WIN32 || !defined __GNUC__
-#define bool char
-#else
 #include <unistd.h>
-#endif
-
 
 #if HAVE_SYS_PARAM_H
 # include <sys/param.h>
