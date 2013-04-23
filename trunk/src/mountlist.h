@@ -28,10 +28,10 @@
 #ifndef MOUNTLIST_H_
 # define MOUNTLIST_H_
 
-#if !defined(__VBCC__)
-  # include <stdbool.h>
-#else
+#if defined WIN32 || !defined __GNUC__
     #define bool char
+#else
+# include <stdbool.h>
 #endif
 
 #include <sys/types.h>
