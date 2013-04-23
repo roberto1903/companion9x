@@ -576,7 +576,9 @@ void MdiChild::burnTo()  // write to Tx
             fwrite(buf, 1, size, dest);
         }
         fclose(source);
-        fclose(dest);        
+        fclose(dest);
+        sync();
+        QMessageBox::information(this, "companion9x", tr("Taranis eeprom write finished correctly"));
       }
     } else {
       QStringList str = ((MainWindow *)this->parent())->GetSendEEpromCommand(tempFile);
