@@ -20,7 +20,7 @@
 */
 
 // This file is not used on some platforms, so don't do anything for them
-#if(!(defined(WIN32) || !defined __GNUC__)&&(!defined(__amigaos4__))&&(!defined(__AROS__))&&(!defined(__MORPHOS__))&&(!defined(__amigaos__))
+#if(!(defined(WIN32) || !defined __GNUC__)&&(!defined(__amigaos4__))&&(!defined(__AROS__))&&(!defined(__MORPHOS__))&&(!defined(__amigaos__)))
 
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__)                       // MacOS X is POSIX compliant
     #define MOUNTED_GETMNTINFO
