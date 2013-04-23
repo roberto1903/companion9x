@@ -891,10 +891,10 @@ QString MainWindow::FindTaranisPath()
     while (entry != NULL) {
       eepromfile=entry->me_mountdir;
       eepromfile.append("/TARANIS.bin");
-      if (QFile::exists(eepromfile)) {
+      QString fstype=entry->me_type;
+      if (QFile::exists(eepromfile) && fstype.contains("fat") ) {
         pathcount++;
         path=eepromfile;
-        qDebug() << entry->me_type;
       }
       entry = entry->me_next; ;
     }
