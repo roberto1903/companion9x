@@ -931,8 +931,12 @@ void MainWindow::burnFrom()
         QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
         res=false;
       } else {
-        QFile::copy(path,tempFile);
-        res=true;
+        QStringList str;
+        str << path << tempFile;
+        avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+        res = ad->exec();
+        sleep(1);
       }
     } else {    
       QStringList str = GetReceiveEEpromCommand(tempFile);
