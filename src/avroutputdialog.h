@@ -31,6 +31,7 @@ protected slots:
     void doAddTextStdOut();
     void doAddTextStdErr();
     void doProcessStarted();
+    void doCopy();
     void doFinished(int code);
     void on_checkBox_toggled(bool checked);
     void shrink();
@@ -55,6 +56,8 @@ private:
     int phase;
     QString winTitle;
     bool hasErrors;
+    QString sourceFile;
+    QString destFile;
     
 };
 

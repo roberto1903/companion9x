@@ -17,13 +17,6 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
 {
     ui->setupUi(this);
 
-    if(wTitle.isEmpty())
-        setWindowTitle(getProgrammer() + tr(" result"));
-    else
-        setWindowTitle(getProgrammer() + " - " + wTitle);
-    QFile exec;
-    winTitle=wTitle;
-    
 #ifdef __APPLE__
     QFont newFont("Courier", 13);
     ui->plainTextEdit->setFont(newFont);
@@ -33,43 +26,57 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     QFont newFont("Courier", 9);
     ui->plainTextEdit->setFont(newFont);
 #endif
-    
+
     cmdLine = prog;
-    if (!(exec.exists(prog))) {
-      QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" executable not found"));
-      closeOpt = AVR_DIALOG_FORCE_CLOSE;
-      QTimer::singleShot(0, this, SLOT(forceClose()));
-    }
-    else {
-      foreach(QString str, arg) cmdLine.append(" " + str);
-      closeOpt = closeBehaviour;
+    closeOpt = closeBehaviour;
+    if (cmdLine.isEmpty()) {
+      sourceFile=arg.at(0);
+      destFile=arg.at(1);
+      ui->plainTextEdit->hide();
+      ui->progressBar->setMaximum(127);
+      QTimer::singleShot(0, this, SLOT(shrink()));
+      QTimer::singleShot(0, this, SLOT(doCopy()));
+    } else {
+      if(wTitle.isEmpty())
+          setWindowTitle(getProgrammer() + tr(" result"));
+      else
+          setWindowTitle(getProgrammer() + " - " + wTitle);
+      QFile exec;
+      winTitle=wTitle;
 
-      lfuse = 0;
-      hfuse = 0;
-      efuse = 0;
-      phase=0;
-      currLine.clear();
-      prevLine.clear();
-      if (!displayDetails) {
-          ui->plainTextEdit->hide();
-          QTimer::singleShot(0, this, SLOT(shrink()));
+      if (!(exec.exists(prog))) {
+        QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" executable not found"));
+        closeOpt = AVR_DIALOG_FORCE_CLOSE;
+        QTimer::singleShot(0, this, SLOT(forceClose()));
       } else {
-          ui->checkBox->setChecked(true);
+        foreach(QString str, arg) cmdLine.append(" " + str);
+        lfuse = 0;
+        hfuse = 0;
+        efuse = 0;
+        phase=0;
+        currLine.clear();
+        prevLine.clear();
+        if (!displayDetails) {
+            ui->plainTextEdit->hide();
+            QTimer::singleShot(0, this, SLOT(shrink()));
+        } else {
+            ui->checkBox->setChecked(true);
+        }
+        process = new QProcess(this);
+        connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
+        connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
+        connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
+        connect(process,SIGNAL(finished(int)),this,SLOT(doFinished(int)));
+
+  #if !__GNUC__
+        kill_timer = new QTimer(this);
+        connect(kill_timer, SIGNAL(timeout()), this, SLOT(killTimerElapsed()));
+        kill_timer->start(2000);
+  #endif
+
+        process->start(prog,arg);
       }
-      process = new QProcess(this);
-      connect(process,SIGNAL(readyReadStandardError()), this, SLOT(doAddTextStdErr()));
-      connect(process,SIGNAL(started()),this,SLOT(doProcessStarted()));
-      connect(process,SIGNAL(readyReadStandardOutput()),this,SLOT(doAddTextStdOut()));
-      connect(process,SIGNAL(finished(int)),this,SLOT(doFinished(int)));
-
-#if !__GNUC__
-      kill_timer = new QTimer(this);
-      connect(kill_timer, SIGNAL(timeout()), this, SLOT(killTimerElapsed()));
-      kill_timer->start(2000);
-#endif
-
-      process->start(prog,arg);
-   }
+    }  
 }
 
 # if !__GNUC__
@@ -104,6 +111,39 @@ BOOL KillProcessByName(char *szProcessToKill){
         return( TRUE );
 }
 #endif
+
+void avrOutputDialog::doCopy() 
+{
+  hasErrors=false;
+  char buf[65536];
+  char * pointer=buf;
+  QFile source(sourceFile);
+  if (!source.open(QIODevice::ReadOnly)) {
+    QMessageBox::warning(this, tr("Error"),tr("Cannot open source file"));
+    hasErrors=true;
+  } else {
+    source.read(buf,sizeof(buf));
+    source.close();
+    QFile dest(destFile);
+    if (!dest.open(QIODevice::WriteOnly)) {
+      QMessageBox::warning(this, tr("Error"),tr("Cannot write destination"));
+      hasErrors=true;
+    } else {
+      for (int i=0;i<128;i++) {
+        if (dest.write(pointer,512)!=512) {
+          hasErrors=true;
+          break;
+        };
+        dest.flush();
+        dest.flush();
+        pointer+=512;
+        ui->progressBar->setValue(i);
+      }
+      dest.close();
+    }
+  }
+  doFinished(0);
+}
 
 void avrOutputDialog::killTimerElapsed()
 {
@@ -282,13 +322,13 @@ void avrOutputDialog::doFinished(int code=0)
     if (code) {
       ui->checkBox->setChecked(true);
       addText("\n" + getProgrammer() + tr(" done - exit code %1").arg(code));
-    }
-    else if (hasErrors) {
+    } else if (hasErrors) {
       ui->checkBox->setChecked(true);
       addText("\n" + getProgrammer() + tr(" done with errors"));
-    }
-    else {
+    } else if (!cmdLine.isEmpty()) {
       addText("\n" + getProgrammer() + tr(" done - SUCCESSFUL"));
+    } else {
+      addText(tr("done - SUCCESSFUL"));
     }
     addText("\n" HLINE_SEPARATOR "\n");
 
@@ -309,14 +349,21 @@ void avrOutputDialog::doFinished(int code=0)
 
       case AVR_DIALOG_SHOW_DONE:
         if (hasErrors || code) {
+          if (!cmdLine.isEmpty()) {
             QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" did not finish correctly"));
+          } else {
+            QMessageBox::critical(this, "companion9x",  tr("Copy did not finish correctly"));
+          }
             // reject();
-        }
-        else
-        {
+        } else {
+          if (!cmdLine.isEmpty()) {
             ui->progressBar->setValue(100);
             QMessageBox::information(this, "companion9x", getProgrammer() + tr(" finished correctly"));
             accept();
+          } else {
+            QMessageBox::information(this, "companion9x", tr("Copy finished correctly"));
+            accept();            
+          }
         }
         break;
 
