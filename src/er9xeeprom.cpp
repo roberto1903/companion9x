@@ -622,19 +622,19 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     }
     traineron = c9x.traineron;
     t2throttle = c9x.t2throttle;
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     for (unsigned int i=0; i<C9X_MAX_CUSTOM_FUNCTIONS; i++) 
       if (c9x.funcSw[i].func == FuncInstantTrim && c9x.funcSw[i].swtch.type != SWITCH_TYPE_NONE) {
         trimSw = er9xFromSwitch(c9x.funcSw[i].swtch);
         break;
       }
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     swashInvertELE = c9x.swashRingData.invertELE;
     swashInvertAIL = c9x.swashRingData.invertAIL;
@@ -773,18 +773,18 @@ t_Er9xModelData::operator ModelData ()
   }
   c9x.traineron= traineron;
   c9x.t2throttle =  t2throttle;
-  c9x.ppmFrameLength=ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength=ppmFrameLength;
   c9x.moduleData[0].channelsCount = 8 + 2 * ppmNCH;
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.funcSw[0].func = FuncInstantTrim;
   if (trimSw) {
     c9x.funcSw[0].swtch = er9xToSwitch(trimSw);
   }
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.swashRingData.invertELE = swashInvertELE;
   c9x.swashRingData.invertAIL = swashInvertAIL;

@@ -654,13 +654,13 @@ void ModelEdit::tabModelEditSetup()
   ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
 
   //pulse polarity
-  ui->pulsePolCB->setCurrentIndex(g_model.pulsePol);
+  ui->pulsePolCB->setCurrentIndex(g_model.moduleData[0].ppmPulsePol);
 
   //throttle trace
   ui->ttraceCB->setCurrentIndex(g_model.thrTraceSrc);
 
   //protocol channels ppm delay (disable if needed)
-  ui->ppmDelaySB->setValue(g_model.ppmDelay);
+  ui->ppmDelaySB->setValue(g_model.moduleData[0].ppmDelay);
   ui->ppmDelaySB->setEnabled(!g_model.protocol);
   ui->numChannelsSB->setEnabled(!g_model.protocol);
   ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
@@ -674,7 +674,7 @@ void ModelEdit::tabModelEditSetup()
     ui->T2ThrTrg->hide();
     ui->T2ThrTrgChkB->hide();
   }
-  ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.ppmFrameLength)*0.5);
+  ui->ppmFrameLengthDSB->setValue(22.5+((double)g_model.moduleData[0].ppmFrameLength)*0.5);
   if (!GetEepromInterface()->getCapability(PPMExtCtrl)) {
     ui->ppmFrameLengthDSB->hide();
     ui->label_ppmFrameLength->hide();
@@ -3011,7 +3011,7 @@ void ModelEdit::on_trimIncCB_currentIndexChanged(int index)
 
 void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 {
-    g_model.pulsePol = index;
+    g_model.moduleData[0].ppmPulsePol = index;
     updateSettings();
 }
 
@@ -3119,7 +3119,7 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
 {
   if(protocolEditLock) return;
   // TODO only accept valid values
-  g_model.ppmDelay = ui->ppmDelaySB->value();
+  g_model.moduleData[0].ppmDelay = ui->ppmDelaySB->value();
   updateSettings();
 }
 
@@ -4953,7 +4953,7 @@ void ModelEdit::on_T2ThrTrgChkB_toggled(bool checked)
 
 void ModelEdit::on_ppmFrameLengthDSB_editingFinished()
 {
-  g_model.ppmFrameLength = (ui->ppmFrameLengthDSB->value()-22.5)/0.5;
+  g_model.moduleData[0].ppmFrameLength = (ui->ppmFrameLengthDSB->value()-22.5)/0.5;
   updateSettings();
 }
 

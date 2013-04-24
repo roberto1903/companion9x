@@ -1241,7 +1241,7 @@ QString getProtocol(ModelData * g_model)
   str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
 
   if (!g_model->protocol) //ppm protocol
-    str.append(QObject::tr(": %1 Channels, %2usec Delay").arg(g_model->moduleData[0].channelsCount).arg(g_model->ppmDelay));
+    str.append(QObject::tr(": %1 Channels, %2usec Delay").arg(g_model->moduleData[0].channelsCount).arg(g_model->moduleData[0].ppmDelay));
 
   return str;
 }

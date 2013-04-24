@@ -412,7 +412,7 @@ t_Th9xModelData::t_Th9xModelData(ModelData &c9x)
     thrTrim = c9x.thrTrim;
     thrExpo = c9x.thrExpo;
     trimInc = c9x.trimInc;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     for (unsigned int i=0; i<C9X_MAX_CUSTOM_FUNCTIONS; i++)
       if (c9x.funcSw[i].func == FuncTrims2Offsets && c9x.funcSw[i].swtch) trimSw = c9x.funcSw[i].swtch;
     beepANACenter = c9x.beepANACenter;
@@ -484,7 +484,7 @@ t_Th9xModelData::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.funcSw[0].func = FuncTrims2Offsets;
   if (trimSw) {
     c9x.funcSw[0].swtch = trimSw;

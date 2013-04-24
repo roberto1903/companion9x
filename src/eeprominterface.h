@@ -751,6 +751,9 @@ class ModuleData {
     int          channelsCount; // 0=8 channels
     unsigned int failsafeMode;
     int          failsafeChannels[C9X_NUM_CHNOUT];
+    int          ppmDelay;
+    bool         ppmPulsePol;           // false = positive
+    int          ppmFrameLength;
 };
 
 class ModelData {
@@ -765,9 +768,9 @@ class ModelData {
     bool      thrExpo;            // Enable Throttle Expo
     unsigned int trimInc;            // Trim Increments
     bool      disableThrottleWarning;
-    int       ppmDelay;
+
     unsigned int beepANACenter;      // 1<<0->A1.. 1<<6->A7
-    bool      pulsePol;           // false = positive
+
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
     PhaseData phaseData[C9X_MAX_PHASES];
@@ -779,7 +782,6 @@ class ModelData {
     FuncSwData    funcSw[C9X_MAX_CUSTOM_FUNCTIONS];
     SafetySwData  safetySw[C9X_NUM_CHNOUT];
     SwashRingData swashRingData;
-    int   ppmFrameLength;
     unsigned int  thrTraceSrc;
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
@@ -798,8 +800,9 @@ class ModelData {
     char bitmap[10+1];
 
     unsigned int externalModule;
-    ModuleData moduleData[C9X_NUM_MODULES];
     unsigned int trainerMode;
+
+    ModuleData moduleData[C9X_NUM_MODULES+1/*trainer*/];
 
     void clear();
     bool isempty();
