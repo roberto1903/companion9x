@@ -8,6 +8,8 @@
 #define AVR_DIALOG_KEEP_OPEN           0x01
 #define AVR_DIALOG_FORCE_CLOSE         0x02
 #define AVR_DIALOG_SHOW_DONE           0x04
+#define READBUF 65536
+#define BLKSIZE 512
 
 
 namespace Ui {
