@@ -3,10 +3,14 @@
 #include <QtGui>
 #include "eeprominterface.h"
 
-#if !__GNUC__
+#if defined WIN32 || !defined __GNUC__
 #include <Windows.h>
 #include <WinBase.h>
 #include <tlhelp32.h>
+#define sleep(x) Sleep(x*1000)
+#else
+#include <unistd.h>
+#include "mountlist.h"
 #endif
 
 avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg, QString wTitle, int closeBehaviour, bool displayDetails) :
@@ -32,10 +36,14 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     if (cmdLine.isEmpty()) {
       sourceFile=arg.at(0);
       destFile=arg.at(1);
-      ui->plainTextEdit->hide();
+      if (!displayDetails) {
+        ui->plainTextEdit->hide();
+        QTimer::singleShot(0, this, SLOT(shrink()));
+      } else {
+          ui->checkBox->setChecked(true);
+      }
       ui->progressBar->setMaximum(127);
-      QTimer::singleShot(0, this, SLOT(shrink()));
-      QTimer::singleShot(0, this, SLOT(doCopy()));
+      QTimer::singleShot(500, this, SLOT(doCopy()));
     } else {
       if(wTitle.isEmpty())
           setWindowTitle(getProgrammer() + tr(" result"));
@@ -115,29 +123,31 @@ BOOL KillProcessByName(char *szProcessToKill){
 void avrOutputDialog::doCopy() 
 {
   hasErrors=false;
-  char buf[65536];
+  char buf[READBUF];
   char * pointer=buf;
   QFile source(sourceFile);
   if (!source.open(QIODevice::ReadOnly)) {
     QMessageBox::warning(this, tr("Error"),tr("Cannot open source file"));
     hasErrors=true;
   } else {
-    source.read(buf,sizeof(buf));
+    source.read(buf,READBUF);
     source.close();
     QFile dest(destFile);
     if (!dest.open(QIODevice::WriteOnly)) {
       QMessageBox::warning(this, tr("Error"),tr("Cannot write destination"));
       hasErrors=true;
     } else {
+      addText(tr("Writing file: "));
       for (int i=0;i<128;i++) {
-        if (dest.write(pointer,512)!=512) {
+        if (dest.write(pointer,BLKSIZE)!=BLKSIZE) {
           hasErrors=true;
           break;
         };
         dest.flush();
-        dest.flush();
-        pointer+=512;
+        pointer+=BLKSIZE;
         ui->progressBar->setValue(i);
+        if ((i%2)!=0)
+          addText("#");
       }
       dest.close();
     }
