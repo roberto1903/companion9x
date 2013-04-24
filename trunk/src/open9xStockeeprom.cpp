@@ -1858,9 +1858,9 @@ t_Open9xModelData_v201::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.thrExpo = thrExpo;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -1934,9 +1934,9 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter,
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -1982,7 +1982,7 @@ t_Open9xModelData_v202::operator ModelData ()
     c9x.safetySw[i] = safetySw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId=modelId;
   return c9x;
@@ -2016,11 +2016,11 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
@@ -2059,7 +2059,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId=c9x.modelId;
   }
@@ -2092,9 +2092,9 @@ t_Open9xModelData_v203::operator ModelData ()
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -2138,7 +2138,7 @@ t_Open9xModelData_v203::operator ModelData ()
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
   return c9x;
@@ -2172,11 +2172,11 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
@@ -2225,7 +2225,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
   }
@@ -2258,9 +2258,9 @@ t_Open9xModelData_v204::operator ModelData ()
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -2306,7 +2306,7 @@ t_Open9xModelData_v204::operator ModelData ()
   c9x.frsky = frsky;
   c9x.frsky.rssiAlarms[0] = frskyRssiAlarms[0].get(0);
   c9x.frsky.rssiAlarms[1] = frskyRssiAlarms[1].get(1);
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
   return c9x;
@@ -2340,11 +2340,11 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     timer2 = c9x.timers[1];
     for (int i=0; i<O9X_MAX_MIXERS; i++)
@@ -2393,7 +2393,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
     frskyRssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.frsky.rssiAlarms[0]);
@@ -2431,9 +2431,9 @@ t_Open9xModelData_v205::operator ModelData ()
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
   c9x.thrTrim = thrTrim;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -2477,7 +2477,7 @@ t_Open9xModelData_v205::operator ModelData ()
     c9x.funcSw[i] = funcSw[i];
   c9x.swashRingData = swashR;
   c9x.frsky = frsky;
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
   c9x.frsky.screens[1].type = 0;
@@ -2526,11 +2526,11 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     spare1 = 0;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -2576,7 +2576,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
       phaseData[i] = phase;
     }
     frsky = c9x.frsky;
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
     frskyLinesXtra=0;
@@ -2623,9 +2623,9 @@ t_Open9xModelData_v208::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.disableThrottleWarning=disableThrottleWarning;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -2673,7 +2673,7 @@ t_Open9xModelData_v208::operator ModelData ()
   c9x.frsky.varioCenterMax = varioSpeedUpMin;
   c9x.frsky.varioCenterMin = varioSpeedDownMin;
 
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
   c9x.frsky.screens[1].type = 0;
@@ -2728,11 +2728,11 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -2783,7 +2783,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     varioSpeedUpMin = c9x.frsky.varioCenterMax;
     varioSpeedDownMin = c9x.frsky.varioCenterMin;
 
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
     frskyLinesXtra=0;
@@ -2834,9 +2834,9 @@ t_Open9xModelData_v209::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.disableThrottleWarning=disableThrottleWarning;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -2885,7 +2885,7 @@ t_Open9xModelData_v209::operator ModelData ()
   c9x.frsky.varioCenterMin = varioSpeedDownMin;
   c9x.switchWarningStates = switchWarningStates;
 
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
   c9x.frsky.screens[1].type = 0;
@@ -2942,11 +2942,11 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -2998,7 +2998,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     varioSpeedDownMin = c9x.frsky.varioCenterMin;
     switchWarningStates = c9x.switchWarningStates;
 
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
     frskyLinesXtra=0;
@@ -3045,9 +3045,9 @@ t_Open9xModelData_v210::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.disableThrottleWarning=disableThrottleWarning;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -3094,7 +3094,7 @@ t_Open9xModelData_v210::operator ModelData ()
   c9x.frsky = frsky;
   c9x.switchWarningStates = switchWarningStates;
 
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
 
@@ -3144,11 +3144,11 @@ t_Open9xModelData_v210::t_Open9xModelData_v210(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare2 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -3212,7 +3212,7 @@ t_Open9xModelData_v210::t_Open9xModelData_v210(ModelData &c9x)
 
     switchWarningStates = c9x.switchWarningStates;
 
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
 
@@ -3250,9 +3250,9 @@ t_Open9xModelData_v211::operator ModelData ()
   c9x.thrTrim = thrTrim;
   c9x.disableThrottleWarning=disableThrottleWarning;
   c9x.trimInc = trimInc;
-  c9x.ppmDelay = 300 + 50 * ppmDelay;
+  c9x.moduleData[0].ppmDelay = 300 + 50 * ppmDelay;
   c9x.beepANACenter = beepANACenter;
-  c9x.pulsePol = pulsePol;
+  c9x.moduleData[0].ppmPulsePol = pulsePol;
   c9x.extendedLimits = extendedLimits;
   c9x.extendedTrims = extendedTrims;
   for (int i=0; i<O9X_MAX_PHASES; i++) {
@@ -3299,7 +3299,7 @@ t_Open9xModelData_v211::operator ModelData ()
   c9x.frsky = frsky;
   c9x.switchWarningStates = switchWarningStates;
 
-  c9x.ppmFrameLength = ppmFrameLength;
+  c9x.moduleData[0].ppmFrameLength = ppmFrameLength;
   c9x.thrTraceSrc = thrTraceSrc;
   c9x.modelId = modelId;
 
@@ -3345,11 +3345,11 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
     ppmNCH = (c9x.moduleData[0].channelsCount - 8) / 2;
     trimInc = c9x.trimInc;
     disableThrottleWarning=c9x.disableThrottleWarning;
-    pulsePol = c9x.pulsePol;
+    pulsePol = c9x.moduleData[0].ppmPulsePol;
     extendedLimits = c9x.extendedLimits;
     extendedTrims = c9x.extendedTrims;
     spare1 = 0;
-    ppmDelay = (c9x.ppmDelay - 300) / 50;
+    ppmDelay = (c9x.moduleData[0].ppmDelay - 300) / 50;
     beepANACenter = (uint8_t)(c9x.beepANACenter & 0x7F);
     for (int i=0; i<O9X_MAX_MIXERS; i++)
       mixData[i] = c9x.mixData[i];
@@ -3413,7 +3413,7 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
 
     switchWarningStates = c9x.switchWarningStates;
 
-    ppmFrameLength = c9x.ppmFrameLength;
+    ppmFrameLength = c9x.moduleData[0].ppmFrameLength;
     thrTraceSrc = c9x.thrTraceSrc;
     modelId = c9x.modelId;
   }

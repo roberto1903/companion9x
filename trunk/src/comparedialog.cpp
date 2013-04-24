@@ -255,8 +255,8 @@ void compareDialog::printSetup()
   str.append(fv(tr("Timer2"), getTimerStr(g_model1->timers[1]), color));  //value, mode, count up/down
   color=getColor1(getProtocol(g_model1),getProtocol(g_model2));
   str.append(fv(tr("Protocol"), getProtocol(g_model1), color)); //proto, numch, delay,
-  color=getColor1(g_model1->pulsePol,g_model2->pulsePol);
-  str.append(fv(tr("Pulse Polarity"), g_model1->pulsePol ? "NEG" : "POS", color));
+  color=getColor1(g_model1->moduleData[0].ppmPulsePol,g_model2->moduleData[0].ppmPulsePol);
+  str.append(fv(tr("Pulse Polarity"), g_model1->moduleData[0].ppmPulsePol ? "NEG" : "POS", color));
   color=getColor1(g_model1->thrTrim,g_model2->thrTrim);
   str.append(fv(tr("Throttle Trim"), g_model1->thrTrim ? tr("Enabled") : tr("Disabled"), color));
   color=getColor1(g_model1->thrExpo,g_model2->thrExpo);
@@ -278,8 +278,8 @@ void compareDialog::printSetup()
   str.append(fv(tr("Timer2"), getTimerStr(g_model2->timers[1]),color));  //value, mode, count up/down
   color=getColor2(getProtocol(g_model1),getProtocol(g_model2));
   str.append(fv(tr("Protocol"), getProtocol(g_model2), color)); //proto, numch, delay,
-  color=getColor2(g_model1->pulsePol,g_model2->pulsePol);
-  str.append(fv(tr("Pulse Polarity"), g_model2->pulsePol ? "NEG" : "POS", color));
+  color=getColor2(g_model1->moduleData[0].ppmPulsePol,g_model2->moduleData[0].ppmPulsePol);
+  str.append(fv(tr("Pulse Polarity"), g_model2->moduleData[0].ppmPulsePol ? "NEG" : "POS", color));
   color=getColor2(g_model1->thrTrim,g_model2->thrTrim);
   str.append(fv(tr("Throttle Trim"), g_model2->thrTrim ? tr("Enabled") : tr("Disabled"), color));
   color=getColor2(g_model1->thrExpo,g_model2->thrExpo);

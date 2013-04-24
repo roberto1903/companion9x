@@ -794,7 +794,7 @@ class CurvesField: public TransformedField {
         CurveData *curve = &curves[i];
         offset += (curve->custom ? curve->count * 2 - 2 : curve->count) - 5;
         if (offset > maxPoints - 5 * maxCurves) {
-          EEPROMWarnings += ::QObject::tr("open9x only accepts %1 points in all curves").arg(maxPoints) + "\n";
+          EEPROMWarnings += ::QObject::tr("openTx only accepts %1 points in all curves").arg(maxPoints) + "\n";
           break;
         }
         _curves[i] = offset;
@@ -1587,11 +1587,16 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
-  Append(new BoolField<1>(modelData.pulsePol));
+
+  if (board==BOARD_TARANIS)
+    Append(new SpareBitsField<1>());
+  else
+    Append(new BoolField<1>(modelData.moduleData[0].ppmPulsePol));
+
   Append(new BoolField<1>(modelData.extendedLimits));
   Append(new BoolField<1>(modelData.extendedTrims));
   Append(new SpareBitsField<1>());
-  Append(new ConversionField< SignedField<8> >(modelData.ppmDelay, exportPpmDelay, importPpmDelay));
+  Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].ppmDelay, exportPpmDelay, importPpmDelay));
 
   if (IS_ARM(board) || board==BOARD_GRUVIN9X)
     Append(new UnsignedField<16>(modelData.beepANACenter));
@@ -1612,7 +1617,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new HeliField(modelData.swashRingData, board, version, variant));
   for (int i=0; i<MAX_PHASES(board, version); i++)
     Append(new PhaseField(modelData.phaseData[i], i, board, version));
-  Append(new SignedField<8>(modelData.ppmFrameLength));
+  Append(new SignedField<8>(modelData.moduleData[0].ppmFrameLength));
   Append(new UnsignedField<8>(modelData.thrTraceSrc));
 
   if (!release21March2013)
@@ -1652,15 +1657,18 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   if (board == BOARD_TARANIS) {
     Append(new UnsignedField<8>(modelData.externalModule));
-    for (int module=0; module<2; module++) {
+    Append(new UnsignedField<8>(modelData.trainerMode));
+    for (int module=0; module<3; module++) {
       Append(new SignedField<8>(modelData.moduleData[module].rfProtocol));
       Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
       Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
       Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
       for (int i=0; i<32; i++)
         Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
+      Append(new ConversionField< SignedField<8> >(modelData.moduleData[module].ppmDelay, exportPpmDelay, importPpmDelay));
+      Append(new SignedField<8>(modelData.moduleData[module].ppmFrameLength));
+      Append(new BoolField<8>(modelData.moduleData[module].ppmPulsePol));
     }
-    Append(new UnsignedField<8>(modelData.trainerMode));
     for (int i=0; i<MAX_CURVES(board); i++) {
       Append(new ZCharField<6>(modelData.curves[i].name));
     }
