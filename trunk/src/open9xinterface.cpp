@@ -645,7 +645,17 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryBars:
       return 1;
     case TelemetryCSFields:
-      return IS_ARM(board) ? 24 : 16;
+      if (board==BOARD_TARANIS) {
+        return 36;
+      } else {
+        return IS_ARM(board) ? 24 : 16;
+      }
+    case TelemetryColsCSFields:
+      if (board==BOARD_TARANIS) {
+        return 3;
+      } else {
+        return 2;
+      }
     case TelemetryUnits:
       return 0;
     case TelemetryBlades:

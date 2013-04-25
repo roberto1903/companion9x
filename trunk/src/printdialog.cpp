@@ -878,13 +878,34 @@ void printDialog::printFrSky()
   str.append("<tr><td colspan=10 align=\"Left\" height=\"4px\"></td></tr></table>");
   
   if (GetEepromInterface()->getCapability(TelemetryBars) || (GetEepromInterface()->getCapability(TelemetryCSFields))) {
-    for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/8; j++ ) {
+    int cols=GetEepromInterface()->getCapability(TelemetryColsCSFields);
+    if (cols==0) cols=2;
+    for (int j=0; j<GetEepromInterface()->getCapability(TelemetryCSFields)/(4*cols); j++ ) {
       if (fd->screens[j].type==0) {
-        str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr>");
-        for (int i=0; i<4; i++) {
-          if ((fd->screens[j].body.cells[i*2] !=0) || (fd->screens[j].body.cells[i*2+1]!=0))
-            tc++;
-          str.append("<tr><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->screens[j].body.cells[i*2])+"</b></td><td  align=\"Center\"width=\"10%\">&nbsp;</td><td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->screens[j].body.cells[i*2+1])+"</b></td></tr>");
+        if (cols==2) {
+          str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=3 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr>");
+        } else {
+          str.append("<table border=1 cellspacing=0 cellpadding=3 width=\"100%\"><tr><td colspan=5 align=\"Left\"><b>"+tr("Custom Telemetry View")+"</b></td></tr>");
+        }
+        for (int r=0; r<4; r++) {
+          str.append("<tr>");
+          for (int c=0; c<cols; c++) {
+            if (fd->screens[j].body.lines[r].source[c]!=0)
+              tc++;
+            if (cols==2) {
+              str.append("<td  align=\"Center\" width=\"45%\"><b>"+getFrSkySrc(fd->screens[j].body.lines[r].source[c])+"</b></td>");
+            } else {
+              str.append("<td  align=\"Center\" width=\"30%\"><b>"+getFrSkySrc(fd->screens[j].body.lines[r].source[c])+"</b></td>");
+            }
+            if (c<(cols-1)) {
+              if (cols==2) {
+                str.append("<td  align=\"Center\" width=\"10%\"><b>&nbsp;</b></td>");
+              } else {
+                str.append("<td  align=\"Center\" width=\"5%\"><b>&nbsp;</b></td>");
+              }
+            }
+          }
+          str.append("</tr>");
         }
         str.append("</table>");
       } else {

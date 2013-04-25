@@ -1347,8 +1347,11 @@ class FrskyScreenField: public DataField {
         bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMin));
         bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMax));
       }
-      for (int i=0; i<8; i++) {
-        numbers.Append(new UnsignedField<8>(_screen.body.cells[i]));
+      int columns=(board==BOARD_TARANIS ? 3:2);
+      for (int i=0; i<4; i++) {
+        for (int j=0; j<columns; j++) {
+          numbers.Append(new UnsignedField<8>(_screen.body.lines[i].source[j]));
+        }
       }
       for (int i=0; i<4; i++) {
         numbers.Append(new SpareBitsField<8>());
@@ -1365,9 +1368,12 @@ class FrskyScreenField: public DataField {
           if (_screen.body.bars[i].source > 0)
             _screen.body.bars[i].source--;
         }
-        for (int i=0; i<8; i++) {
-          if (_screen.body.cells[i] > 0)
-            _screen.body.cells[i]--;
+        int columns=(board==BOARD_TARANIS ? 3:2);
+        for (int i=0; i<4; i++) {
+          for (int j=0; j<columns;j++) {
+            if (_screen.body.lines[i].source[j] > 0)
+              _screen.body.lines[i].source[j]--;
+          }
         }
       }
 
@@ -1387,9 +1393,11 @@ class FrskyScreenField: public DataField {
       if (screen.type == 0) {
         numbers.ImportBits(input);
         if (!release21March2013) {
-          for (int i=0; i<8; i++) {
-            if (_screen.body.cells[i] > 0) {
-              _screen.body.cells[i]++;
+          int columns=(board==BOARD_TARANIS ? 3:2);
+          for (int i=0; i<4; i++) {
+            for (int j=0; j<columns;j++) {
+              if (_screen.body.lines[i].source[j] > 0)
+                _screen.body.lines[i].source[j]++;
             }
           }
         }

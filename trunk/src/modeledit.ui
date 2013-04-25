@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -1671,7 +1671,6 @@
              <zorder>label_PPM</zorder>
              <zorder>numChannelsEndSB</zorder>
              <zorder>protocol_label_2</zorder>
-             <zorder>horizontalSpacer_3</zorder>
              <zorder>label_pulsePol</zorder>
              <zorder>label_PPMCH</zorder>
              <zorder>protocol_label</zorder>
@@ -2714,7 +2713,6 @@
              <zorder>fsm2SB_16</zorder>
              <zorder>fsm2LB_13</zorder>
              <zorder>fsm2SL_2</zorder>
-             <zorder>fsm2HS</zorder>
              <zorder>fsm2LB_1</zorder>
              <zorder>fsm2LB_4</zorder>
              <zorder>fsm2SL_6</zorder>
@@ -18543,6 +18541,16 @@
                   <item row="1" column="0">
                    <widget class="QGroupBox" name="CS1Nums">
                     <layout class="QGridLayout" name="telemetryCS1Nums">
+                     <item row="1" column="0">
+                      <widget class="QComboBox" name="telemetryCS1F2_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
                      <item row="0" column="0">
                       <widget class="QComboBox" name="telemetryCS1F1_CB">
                        <property name="sizePolicy">
@@ -18553,17 +18561,7 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="0" column="1">
-                      <widget class="QComboBox" name="telemetryCS1F2_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="0">
+                     <item row="2" column="0">
                       <widget class="QComboBox" name="telemetryCS1F3_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -18573,28 +18571,8 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="1">
-                      <widget class="QComboBox" name="telemetryCS1F4_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="0">
-                      <widget class="QComboBox" name="telemetryCS1F5_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="1">
-                      <widget class="QComboBox" name="telemetryCS1F6_CB">
+                     <item row="0" column="2">
+                      <widget class="QComboBox" name="telemetryCS1F9_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -18604,6 +18582,46 @@
                       </widget>
                      </item>
                      <item row="3" column="0">
+                      <widget class="QComboBox" name="telemetryCS1F4_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QComboBox" name="telemetryCS1F5_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QComboBox" name="telemetryCS1F6_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="2">
+                      <widget class="QComboBox" name="telemetryCS1F10_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
                       <widget class="QComboBox" name="telemetryCS1F7_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -18615,6 +18633,26 @@
                      </item>
                      <item row="3" column="1">
                       <widget class="QComboBox" name="telemetryCS1F8_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="2">
+                      <widget class="QComboBox" name="telemetryCS1F11_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="2">
+                      <widget class="QComboBox" name="telemetryCS1F12_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -18880,38 +18918,8 @@
                   <item row="1" column="0">
                    <widget class="QGroupBox" name="CS2Nums">
                     <layout class="QGridLayout" name="telemetryCS2Nums">
-                     <item row="3" column="0">
-                      <widget class="QComboBox" name="telemetryCS2F7_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="1">
-                      <widget class="QComboBox" name="telemetryCS2F6_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="1">
+                     <item row="1" column="0">
                       <widget class="QComboBox" name="telemetryCS2F2_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QComboBox" name="telemetryCS2F4_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -18931,7 +18939,57 @@
                       </widget>
                      </item>
                      <item row="2" column="0">
+                      <widget class="QComboBox" name="telemetryCS2F3_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="2">
+                      <widget class="QComboBox" name="telemetryCS2F9_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QComboBox" name="telemetryCS2F4_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
                       <widget class="QComboBox" name="telemetryCS2F5_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QComboBox" name="telemetryCS2F6_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QComboBox" name="telemetryCS2F7_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -18950,8 +19008,28 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="0">
-                      <widget class="QComboBox" name="telemetryCS2F3_CB">
+                     <item row="1" column="2">
+                      <widget class="QComboBox" name="telemetryCS2F10_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="2">
+                      <widget class="QComboBox" name="telemetryCS2F11_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="2">
+                      <widget class="QComboBox" name="telemetryCS2F12_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -19217,38 +19295,8 @@
                   <item row="1" column="0">
                    <widget class="QGroupBox" name="CS3Nums">
                     <layout class="QGridLayout" name="telemetryCS3Nums">
-                     <item row="3" column="0">
-                      <widget class="QComboBox" name="telemetryCS3F7_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="1">
-                      <widget class="QComboBox" name="telemetryCS3F6_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="1">
+                     <item row="1" column="0">
                       <widget class="QComboBox" name="telemetryCS3F2_CB">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QComboBox" name="telemetryCS3F4_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -19268,7 +19316,57 @@
                       </widget>
                      </item>
                      <item row="2" column="0">
+                      <widget class="QComboBox" name="telemetryCS3F3_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="2">
+                      <widget class="QComboBox" name="telemetryCS3F9_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QComboBox" name="telemetryCS3F4_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
                       <widget class="QComboBox" name="telemetryCS3F5_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QComboBox" name="telemetryCS3F6_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QComboBox" name="telemetryCS3F7_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -19287,8 +19385,28 @@
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="0">
-                      <widget class="QComboBox" name="telemetryCS3F3_CB">
+                     <item row="1" column="2">
+                      <widget class="QComboBox" name="telemetryCS3F10_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="2">
+                      <widget class="QComboBox" name="telemetryCS3F11_CB">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="2">
+                      <widget class="QComboBox" name="telemetryCS3F12_CB">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -20249,13 +20367,7 @@
   <tabstop>tabCsView</tabstop>
   <tabstop>telemetryCSType1</tabstop>
   <tabstop>telemetryCS1F1_CB</tabstop>
-  <tabstop>telemetryCS1F2_CB</tabstop>
   <tabstop>telemetryCS1F3_CB</tabstop>
-  <tabstop>telemetryCS1F4_CB</tabstop>
-  <tabstop>telemetryCS1F5_CB</tabstop>
-  <tabstop>telemetryCS1F6_CB</tabstop>
-  <tabstop>telemetryCS1F7_CB</tabstop>
-  <tabstop>telemetryCS1F8_CB</tabstop>
   <tabstop>telBarCS1B1_CB</tabstop>
   <tabstop>telMinCS1SB1</tabstop>
   <tabstop>telMaxCS1SB1</tabstop>
@@ -20269,13 +20381,7 @@
   <tabstop>telMinCS1SB4</tabstop>
   <tabstop>telMaxCS1SB4</tabstop>
   <tabstop>telemetryCSType2</tabstop>
-  <tabstop>telemetryCS2F7_CB</tabstop>
-  <tabstop>telemetryCS2F6_CB</tabstop>
-  <tabstop>telemetryCS2F2_CB</tabstop>
-  <tabstop>telemetryCS2F4_CB</tabstop>
   <tabstop>telemetryCS2F1_CB</tabstop>
-  <tabstop>telemetryCS2F5_CB</tabstop>
-  <tabstop>telemetryCS2F8_CB</tabstop>
   <tabstop>telemetryCS2F3_CB</tabstop>
   <tabstop>telBarCS2B1_CB</tabstop>
   <tabstop>telMinCS2SB1</tabstop>
@@ -20290,13 +20396,7 @@
   <tabstop>telMinCS2SB4</tabstop>
   <tabstop>telMaxCS2SB4</tabstop>
   <tabstop>telemetryCSType3</tabstop>
-  <tabstop>telemetryCS3F7_CB</tabstop>
-  <tabstop>telemetryCS3F6_CB</tabstop>
-  <tabstop>telemetryCS3F2_CB</tabstop>
-  <tabstop>telemetryCS3F4_CB</tabstop>
   <tabstop>telemetryCS3F1_CB</tabstop>
-  <tabstop>telemetryCS3F5_CB</tabstop>
-  <tabstop>telemetryCS3F8_CB</tabstop>
   <tabstop>telemetryCS3F3_CB</tabstop>
   <tabstop>telBarCS3B1_CB</tabstop>
   <tabstop>telMinCS3SB1</tabstop>
