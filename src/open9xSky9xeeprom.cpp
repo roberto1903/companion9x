@@ -1444,7 +1444,7 @@ t_Open9xArmFrSkyData_v210::operator FrSkyData ()
 
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      int i=line*4+col;
+      int i=line*2+col;
       c9x.screens[1].body.lines[line].source[col] = lines[i];
     }
   }
@@ -1468,7 +1468,7 @@ t_Open9xArmFrSkyData_v210::t_Open9xArmFrSkyData_v210(FrSkyData &c9x)
   }
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      int i=line*4+col;
+      int i=line*2+col;
       lines[i]=c9x.screens[1].body.lines[line].source[col];
     }
   }
@@ -1497,7 +1497,7 @@ t_Open9xArmFrSkyData_v211::operator FrSkyData ()
 
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      int i=line*4+col;
+      int i=line*2+col;
       c9x.screens[1].body.lines[line].source[col] = lines[i];
     }
   }
@@ -1525,7 +1525,7 @@ t_Open9xArmFrSkyData_v211::t_Open9xArmFrSkyData_v211(FrSkyData &c9x)
   }
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      int i=line*4+col;
+      int i=line*2+col;
       lines[i]=c9x.screens[1].body.lines[line].source[col];
     }
   }
