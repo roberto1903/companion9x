@@ -669,7 +669,10 @@ int Open9xInterface::getCapability(const Capability capability)
     case HasVario:
       return 1;
     case HasVariants:
-      return 1;
+      if (board == BOARD_TARANIS)
+        return 0;
+      else
+        return 1;
     case HasFailsafe:
       if (board==BOARD_TARANIS) 
         return 32; // 
