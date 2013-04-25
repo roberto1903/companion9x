@@ -1441,8 +1441,12 @@ t_Open9xArmFrSkyData_v210::operator FrSkyData ()
   }
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
   c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
-  for (int i=0; i<4*2/*cols*/*2/*pages*/; i++) {
-    c9x.screens[1].body.cells[i] = lines[i];
+
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      int i=line*4+col;
+      c9x.screens[1].body.lines[line].source[col] = lines[i];
+    }
   }
 
   return c9x;
@@ -1462,8 +1466,11 @@ t_Open9xArmFrSkyData_v210::t_Open9xArmFrSkyData_v210(FrSkyData &c9x)
     bars[i].barMin = c9x.screens[0].body.bars[i].barMin;
     bars[i].barMax = c9x.screens[0].body.bars[i].barMax;
   }
-  for (int i=0; i<4*2/*cols*/*2/*pages*/; i++) {
-    lines[i] = c9x.screens[1].body.cells[i];
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      int i=line*4+col;
+      lines[i]=c9x.screens[1].body.lines[line].source[col];
+    }
   }
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
   rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
@@ -1487,9 +1494,14 @@ t_Open9xArmFrSkyData_v211::operator FrSkyData ()
   }
   c9x.rssiAlarms[0] = rssiAlarms[0].get(0);
   c9x.rssiAlarms[1] = rssiAlarms[1].get(1);
-  for (int i=0; i<4*2/*cols*/*2/*pages*/; i++) {
-    c9x.screens[1].body.cells[i] = lines[i];
+
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      int i=line*4+col;
+      c9x.screens[1].body.lines[line].source[col] = lines[i];
+    }
   }
+
   c9x.varioSource = varioSource;
   c9x.varioCenterMax = varioSpeedUpMin;
   c9x.varioCenterMin = varioSpeedDownMin;
@@ -1511,8 +1523,11 @@ t_Open9xArmFrSkyData_v211::t_Open9xArmFrSkyData_v211(FrSkyData &c9x)
     bars[i].barMin = c9x.screens[0].body.bars[i].barMin;
     bars[i].barMax = c9x.screens[0].body.bars[i].barMax;
   }
-  for (int i=0; i<4*2/*cols*/*2/*pages*/; i++) {
-    lines[i] = c9x.screens[1].body.cells[i];
+  for (int line=0; line<4; line++) {
+    for (int col=0; col<2; col++) {
+      int i=line*4+col;
+      lines[i]=c9x.screens[1].body.lines[line].source[col];
+    }
   }
   rssiAlarms[0] = Open9xFrSkyRSSIAlarm(0, c9x.rssiAlarms[0]);
   rssiAlarms[1] = Open9xFrSkyRSSIAlarm(1, c9x.rssiAlarms[1]);
@@ -1601,9 +1616,8 @@ t_Open9xArmModelData_v208::operator ModelData ()
   c9x.modelId = modelId;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      uint8_t i = 2*line + col;
-      c9x.frsky.screens[1].body.cells[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.screens[1].body.cells[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.frsky.screens[1].body.lines[line].source[col] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.screens[1].body.lines[line].source[col] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
   for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -1709,7 +1723,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
     for (int j=0; j<4; j++) {
       frskyLines[j] = 0;
       for (int k=0; k<2; k++) {
-        int value = c9x.frsky.screens[1].body.cells[2*j+k];
+        int value = c9x.frsky.screens[1].body.lines[j].source[k];
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }
@@ -1804,9 +1818,8 @@ t_Open9xArmModelData_v209::operator ModelData ()
   c9x.modelId = modelId;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      uint8_t i = 2*line + col;
-      c9x.frsky.screens[1].body.cells[i] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
-      c9x.frsky.screens[1].body.cells[i] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
+      c9x.frsky.screens[1].body.lines[line].source[col] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
+      c9x.frsky.screens[1].body.lines[line].source[col] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
   }
   for (int i=0; i<O9X_NUM_CHNOUT; i++) {
@@ -1915,7 +1928,7 @@ t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
     for (int j=0; j<4; j++) {
       frskyLines[j] = 0;
       for (int k=0; k<2; k++) {
-        int value = c9x.frsky.screens[1].body.cells[2*j+k];
+        int value = c9x.frsky.screens[1].body.lines[j].source[k];
         frskyLines[j] |= (k==0 ? (value & 0x0f) : ((value & 0x0f) << 4));
         frskyLinesXtra |= (value / 16) << (4*j+2*k);
       }

@@ -650,13 +650,17 @@ struct FrSkyBarData {
   unsigned int   barMax;           // ditto for max display (would usually = ratio)
 };
 
+struct FrSkyLineData {
+  unsigned int     source[3];
+};
+
 class FrSkyScreenData {
   public:
     FrSkyScreenData() { clear(); }
 
     typedef union {
       FrSkyBarData bars[4];
-      unsigned int cells[8];
+      FrSkyLineData lines[4];
     } FrSkyScreenBody;
 
     unsigned int type;
@@ -902,6 +906,7 @@ enum Capability {
  GvarsHaveSources,
  GvarsAsSources,
  TelemetryCSFields,
+ TelemetryColsCSFields,
  TelemetryRSSIModel,
  TelemetryAlarm,
  TelemetryTimeshift,

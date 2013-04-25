@@ -2284,10 +2284,15 @@ void ModelEdit::tabSafetySwitches()
 void ModelEdit::customFieldEdited()
 {
   if (telemetryLock) return;
+  int cols=GetEepromInterface()->getCapability(TelemetryColsCSFields);
+  if (cols==0) cols=2;
+
   for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
-    int screen=i/8;
+    int screen=i/(4*cols);
+    int r=((i%(4*cols))%4);
+    int c=((i%(4*cols))/4);
     if (g_model.frsky.screens[screen].type==0) {
-      g_model.frsky.screens[screen].body.cells[i % 8]=csf[i]->currentIndex();
+      g_model.frsky.screens[screen].body.lines[r].source[c]=csf[i]->currentIndex();
     }
   }
   updateSettings();
@@ -2569,9 +2574,9 @@ void ModelEdit::tabTelemetry()
   QDoubleSpinBox* maxsb[12] = { ui->telMaxCS1SB1,  ui->telMaxCS1SB2,  ui->telMaxCS1SB3,  ui->telMaxCS1SB4,
                                 ui->telMaxCS2SB1,  ui->telMaxCS2SB2,  ui->telMaxCS2SB3,  ui->telMaxCS2SB4,
                                 ui->telMaxCS3SB1,  ui->telMaxCS3SB2,  ui->telMaxCS3SB3,  ui->telMaxCS3SB4};
-  QComboBox* tmp[24] = { ui->telemetryCS1F1_CB, ui->telemetryCS1F2_CB, ui->telemetryCS1F3_CB, ui->telemetryCS1F4_CB, ui->telemetryCS1F5_CB, ui->telemetryCS1F6_CB, ui->telemetryCS1F7_CB, ui->telemetryCS1F8_CB,
-                         ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB,
-                         ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB};
+  QComboBox* tmp[36] = { ui->telemetryCS1F1_CB, ui->telemetryCS1F2_CB, ui->telemetryCS1F3_CB, ui->telemetryCS1F4_CB, ui->telemetryCS1F5_CB, ui->telemetryCS1F6_CB, ui->telemetryCS1F7_CB, ui->telemetryCS1F8_CB, ui->telemetryCS1F9_CB, ui->telemetryCS1F10_CB, ui->telemetryCS1F11_CB, ui->telemetryCS1F12_CB,
+                         ui->telemetryCS2F1_CB, ui->telemetryCS2F2_CB, ui->telemetryCS2F3_CB, ui->telemetryCS2F4_CB, ui->telemetryCS2F5_CB, ui->telemetryCS2F6_CB, ui->telemetryCS2F7_CB, ui->telemetryCS2F8_CB, ui->telemetryCS2F9_CB, ui->telemetryCS2F10_CB, ui->telemetryCS2F11_CB, ui->telemetryCS2F12_CB,
+                         ui->telemetryCS3F1_CB, ui->telemetryCS3F2_CB, ui->telemetryCS3F3_CB, ui->telemetryCS3F4_CB, ui->telemetryCS3F5_CB, ui->telemetryCS3F6_CB, ui->telemetryCS3F7_CB, ui->telemetryCS3F8_CB, ui->telemetryCS3F9_CB, ui->telemetryCS3F10_CB, ui->telemetryCS3F11_CB, ui->telemetryCS3F12_CB};
 
   memcpy(barsGB, barsgb, sizeof(barsGB));
   memcpy(numsGB, numsgb, sizeof(numsGB));
@@ -2655,15 +2660,21 @@ void ModelEdit::tabTelemetry()
     if (GetEepromInterface()->getCapability(TelemetryCSFields)==16) {
       ui->tabCsView->removeTab(2);
     }
-    for (int i=0; i<GetEepromInterface()->getCapability(TelemetryCSFields); i++) {
-      int screen=i/8;
-      if (g_model.frsky.screens[screen].type==0) {
-        populateCustomScreenFieldCB(csf[i], g_model.frsky.screens[screen].body.cells[i % 8], !((i % 8)<6), g_model.frsky.usrProto);
+    int cols=GetEepromInterface()->getCapability(TelemetryColsCSFields);
+    if (cols==0) cols=2;
+    for (int screen=0; screen<(GetEepromInterface()->getCapability(TelemetryCSFields)/(4*cols)); screen++) {
+      for (int c=0; c<cols; c++) {
+        for (int r=0; r<4; r++) {
+          int index=screen*12+c*4+r;
+          if (g_model.frsky.screens[screen].type==0) {
+            populateCustomScreenFieldCB(csf[index], g_model.frsky.screens[screen].body.lines[r].source[c], (r<4), g_model.frsky.usrProto);
+          }
+          else {
+            populateCustomScreenFieldCB(csf[index], 0, (r<4), g_model.frsky.usrProto);
+          }
+          connect(csf[index],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));  
+        }
       }
-      else {
-        populateCustomScreenFieldCB(csf[i], 0, !((i % 8)<6), g_model.frsky.usrProto);
-      }
-      connect(csf[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));
     }   
   }
   
@@ -2734,10 +2745,13 @@ void ModelEdit::tabTelemetry()
   ui->frskyCurrentCB->setCurrentIndex(g_model.frsky.currentSource);
   ui->frskyVoltCB->setCurrentIndex(g_model.frsky.voltsSource);
 
-  for (int j=0; j<24; j++) {
-    int screen = j/8;
-    int field = j%8;
-    populateCustomScreenFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[field], (j<6), g_model.frsky.usrProto);
+  for (int screen=0; screen<2;screen++) {
+    for (int rows=0; rows<4; rows++) {
+      for (int cols=0; cols<3; cols++) {
+        int index=screen*12+cols*4+rows;
+        populateCustomScreenFieldCB(csf[index], g_model.frsky.screens[screen].body.lines[rows].source[cols], (rows<4), g_model.frsky.usrProto);
+      }
+    }
   }
 
   for (int j=0; j<12; j++) {
@@ -3343,11 +3357,14 @@ void ModelEdit::on_frskyProtoCB_currentIndexChanged(int index)
   }
   if (!GetEepromInterface()->getCapability(TelemetryCSFields)) {
     ui->groupBox_5->hide();
-  }
-  else {
-    for (int j=0; j<24; j++) {
-      int screen=j/8;
-      populateCustomScreenFieldCB(csf[j], g_model.frsky.screens[screen].body.cells[j %8], (j<6), g_model.frsky.usrProto);
+  } else {
+    for (int screen=0; screen<2;screen++) {
+      for (int rows=0; rows<4; rows++) {
+        for (int cols=0; cols<3; cols++) {
+          int index=screen*12+cols*4+rows;
+          populateCustomScreenFieldCB(csf[index], g_model.frsky.screens[screen].body.lines[rows].source[cols], (rows<4), g_model.frsky.usrProto);
+        }
+      }
     }
   }
   telemetryLock=false;
