@@ -305,6 +305,10 @@ int Ersky9xInterface::getCapability(const Capability capability)
       return 2;
     case Pots:
       return 3;
+    case GvarsNum:
+      return 7;
+    case GvarsOfsNum:
+      return 5;
     case Switches:
       return 7;
     case SwitchesPositions:

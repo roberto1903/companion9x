@@ -19,9 +19,9 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SOURCES | POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | (GetEepromInterface()->getCapability(GvarsAsSources) ? POPULATE_GVARS : 0));
     ui->sourceCB->removeItem(0);
     int limit=GetEepromInterface()->getCapability(OffsetWeight);
-    populateGVarCB(ui->weightCB, md->weight, -limit, limit, GetEepromInterface()->getCapability(GvarsAsWeight));
-    populateGVarCB(ui->offsetCB, md->sOffset, -limit, limit, GetEepromInterface()->getCapability(GvarsAsWeight));
-    populateGVarCB(ui->differentialCB, md->differential, -100, +100, GetEepromInterface()->getCapability(GvarsAsWeight));
+    populateGVarCB(ui->weightCB, md->weight, -limit, limit, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0) );
+    populateGVarCB(ui->offsetCB, md->sOffset, -limit, limit, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
+    populateGVarCB(ui->differentialCB, md->differential, -100, +100, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
     ui->FixOffsetChkB->setChecked(md->lateOffset);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
