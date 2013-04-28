@@ -293,29 +293,29 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case BLonStickMove:
       return 1;
-    case HasBlInvert:
-      return 1;
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASWSHH;
     case TelemetryUnits:
       return 1;
     case TimerTriggerB:
       return 1;
-    case HasAltitudeSel:
-      return 1;
-    case InstantTrimSW:
-      return 1;
     case TelemetryMaxMultiplier:
       return 2;
-    case HasVolume:
-    case ModelVoice:
-      return 1;
     case MaxVolume:
       return 7;      
     case HasInputFilter:
-      return 1;
+      return 0;
     case VoicesAsNumbers:
-      return 1;
+    case TelemetryInternalAlarm:
+    case HasPPMSim:
+    case HasCrossTrims:
+    case HasStickScroll:
+    case HasAltitudeSel:
+    case InstantTrimSW:
+    case HasVolume:
+    case HasBlInvert:
+    case ModelVoice:
+      return 1;      
     default:
       return 0;
   }

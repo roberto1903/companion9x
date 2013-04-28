@@ -140,8 +140,9 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   disableSplashScreen = c9x.splashMode;
   disablePotScroll=(c9x.disablePotScroll ? 1 : 0);
   disableBG=(c9x.disableBG ? 1 :0);
-  filterInput = c9x.filterInput;
+  frskyinternalalarm = c9x.frskyinternalalarm;
   blightinv=(c9x.blightinv ? 1 : 0);
+  stickScroll=(c9x.stickScroll ? 1 : 0);
 
   if (c9x.backlightMode == 4)
     lightSw = 22;
@@ -155,9 +156,12 @@ t_Er9xGeneral::t_Er9xGeneral(GeneralSettings &c9x)
   setEEPROMString(ownerName, c9x.ownerName, sizeof(ownerName));
   speakerPitch = c9x.speakerPitch;
   hapticStrength = c9x.hapticStrength;
-  
+  hideNameOnSplash = (c9x.hideNameOnSplash ? 1 : 0);
+  enablePpmsim = (c9x.enablePpmsim ? 1 : 0);;
+
   speakerMode = c9x.speakerMode;
   switchWarningStates =c9x.switchWarningStates;
+  crosstrim=(c9x.crosstrim ? 1 : 0);
   
 }
 
@@ -177,6 +181,11 @@ Er9xGeneral::operator GeneralSettings ()
   result.vBatCalib = vBatCalib;
   result.trainer = trainer;
   result.blightinv=blightinv;
+  result.stickScroll=stickScroll;
+  result.crosstrim=crosstrim;
+  result.hideNameOnSplash=hideNameOnSplash;
+  result.enablePpmsim=enablePpmsim;
+
   result.view = std::min((uint8_t)4, view);
   result.disableThrottleWarning = disableThrottleWarning;
   result.switchWarning = disableSwitchWarning ? 0 : -1;
@@ -205,7 +214,7 @@ Er9xGeneral::operator GeneralSettings ()
   result.splashMode = disableSplashScreen;
   result.disablePotScroll=(disablePotScroll==1);
   result.disableBG=(disableBG==1);
-  result.filterInput = filterInput;
+  result.frskyinternalalarm = frskyinternalalarm;
 
   result.backlightMode = 0;
   if (lightSw == 22) {

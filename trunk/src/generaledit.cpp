@@ -70,6 +70,23 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->inputfilterCB->hide();
       ui->inputfilterLabel->hide();
     }
+    if (!GetEepromInterface()->getCapability(HasStickScroll)) {
+      ui->StickScrollChkB->hide();
+      ui->StickScrollLB->hide();
+    }
+    if (!GetEepromInterface()->getCapability(TelemetryInternalAlarm)) {
+      ui->frskyintalarmChkB->hide();
+      ui->label_frskyintalarm->hide();
+    }
+    if (!GetEepromInterface()->getCapability(HasCrossTrims)) {
+      ui->crosstrimChkB->hide();
+      ui->crosstrimLB->hide();
+    }
+   if (!GetEepromInterface()->getCapability(HasPPMSim)) {
+      ui->PPMSimLB->hide();
+      ui->PPMSimChkB->hide();
+    }
+     
     if (GetEepromInterface()->getCapability(PerModelThrottleWarning)) {
       ui->thrwarnChkB->setDisabled(true);
       ui->thrwarnChkB->hide();
@@ -239,6 +256,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->backlightautoSB->setValue(g_eeGeneral.backlightDelay*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
     ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
+    ui->crosstrimChkB->setChecked(g_eeGeneral.crosstrim);
+    ui->frskyintalarmChkB->setChecked(g_eeGeneral.frskyinternalalarm);
+    ui->StickScrollChkB->setChecked(g_eeGeneral.stickScroll);
+    ui->PPMSimChkB->setChecked(g_eeGeneral.enablePpmsim);
     ui->inputfilterCB->setCurrentIndex(g_eeGeneral.filterInput);
     ui->thrwarnChkB->setChecked(!g_eeGeneral.disableThrottleWarning);   //Default is zero=checked
     ui->swtchWarnChkB->setChecked(g_eeGeneral.switchWarning == -1);
@@ -867,6 +888,30 @@ void GeneralEdit::on_blinvert_cb_stateChanged(int )
 void GeneralEdit::on_BandGapEnableChkB_stateChanged(int )
 {
     g_eeGeneral.disableBG = ui->BandGapEnableChkB->isChecked() ? false : true;
+    updateSettings();
+}
+
+void GeneralEdit::on_crosstrimChkB_stateChanged(int )
+{
+    g_eeGeneral.crosstrim = ui->crosstrimChkB->isChecked() ? true : false;
+    updateSettings();
+}
+
+void GeneralEdit::on_frskyintalarmChkB_stateChanged(int )
+{
+    g_eeGeneral.frskyinternalalarm = ui->frskyintalarmChkB->isChecked() ? true : false  ;
+    updateSettings();
+}
+
+void GeneralEdit::on_StickScrollChkB_stateChanged(int )
+{
+    g_eeGeneral.stickScroll = ui->StickScrollChkB->isChecked() ? true : false;
+    updateSettings();
+}
+
+void GeneralEdit::on_PPMSimChkB_stateChanged(int )
+{
+    g_eeGeneral.enablePpmsim = ui->PPMSimChkB->isChecked() ? true : false;
     updateSettings();
 }
 

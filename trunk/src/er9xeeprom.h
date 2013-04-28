@@ -30,6 +30,9 @@
 #define ER9X_NUM_CHNOUT      16 //number of real outputchannels CH1-CH8
 #define ER9X_NUM_CSW         12 //number of custom switches
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
+#define ER9X_MAX_GVARS 7
+
+#define ER9X_MAX_MODES		4
 
 PACK(typedef struct t_Er9xTrainerMix {
   uint8_t srcChn:3; //0-7 = ch1-8
@@ -81,8 +84,8 @@ PACK(typedef struct t_Er9xGeneral {
   uint8_t   disableSplashScreen:1;
   uint8_t   disablePotScroll:1;
   uint8_t   disableBG:1;
-  uint8_t   res1:1;
-  uint8_t   filterInput;
+  uint8_t   frskyinternalalarm:1;
+  uint8_t   spare_filter ;		// No longer needed, left for eepe compatibility for now
   uint8_t   lightAutoOff;
   uint8_t   templateSetup;  //RETA order according to chout_ar array
   int8_t    PPM_Multiplier;
@@ -91,7 +94,7 @@ PACK(typedef struct t_Er9xGeneral {
   uint8_t hideNameOnSplash:1;
   uint8_t enablePpmsim:1;
   uint8_t blightinv:1;
-  uint8_t spare:1;
+  uint8_t stickScroll:1;
   uint8_t speakerPitch;
   uint8_t hapticStrength;
   uint8_t speakerMode;
@@ -101,6 +104,8 @@ PACK(typedef struct t_Er9xGeneral {
   uint8_t switchWarningStates;
   uint8_t volume ;
   uint8_t res[3];
+  uint8_t crosstrim:1;
+  uint8_t spare1:7;  
 
   operator GeneralSettings();
   t_Er9xGeneral();
@@ -143,10 +148,11 @@ PACK(typedef struct t_Er9xMixData {
   uint8_t speedUp:4;         // Servogeschwindigkeit aus Tabelle (10ms Cycle)
   uint8_t speedDown:4;       // 0 nichts
   uint8_t carryTrim:1;
-  uint8_t mltpx:3;           // multiplex method 0=+ 1=* 2=replace
+  uint8_t mltpx:2;           // multiplex method 0=+ 1=* 2=replace
+  uint8_t lateOffset:1;      // Add offset later
   uint8_t mixWarn:2;         // mixer warning
   uint8_t enableFmTrim:1;
-  uint8_t mixres:1;
+  uint8_t differential:1;
   int8_t  sOffset;
   int8_t  res;
 
@@ -159,7 +165,8 @@ PACK(typedef struct t_Er9xMixData {
 PACK(typedef struct t_Er9xCustomSwData { // Custom Switches data
   int8_t  v1; //input
   int8_t  v2; //offset
-  uint8_t func;
+  uint8_t func:4;
+  uint8_t andsw:4;
 
   operator CustomSwData();
   t_Er9xCustomSwData() { memset(this, 0, sizeof(t_Er9xCustomSwData)); }
@@ -195,6 +202,21 @@ PACK(typedef struct t_Er9xFrSkyData {
   t_Er9xFrSkyData(FrSkyData&);
 }) Er9xFrSkyData;
 
+PACK(typedef struct t_gvar {
+	int8_t gvar ;
+	uint8_t gvsource ;
+//	int8_t gvswitch ;
+}) Er9xGvarData ;
+
+
+PACK(typedef struct t_PhaseData {
+	// Trim store as -1001 to -1, trim value-501, 0-5 use trim of phase 0-5
+  int16_t trim[4];     // -500..500 => trim value, 501 => use trim of phase 0, 502, 503, 504 => use trim of modes 1|2|3|4 instead
+  int8_t swtch;        // Try 0-5 use trim of phase 0-5, 1000-2000, trim + 1500 ???
+  uint8_t fadeIn:4;
+  uint8_t fadeOut:4;
+}) Er9xPhaseData;
+
 PACK(typedef struct t_Er9xModelData {
   char      name[10];             // 10 must be first for eeLoadModelName
   uint8_t   modelVoice ;		// Index to model name voice (260+value)
@@ -209,8 +231,11 @@ PACK(typedef struct t_Er9xModelData {
   uint16_t  tmrVal;
   uint8_t   protocol;
   int8_t    ppmNCH;
-  int8_t    thrTrim:4;            // Enable Throttle Trim
-  int8_t    thrExpo:4;            // Enable Throttle Expo
+  uint8_t   thrTrim:1;            // Enable Throttle Trim
+  uint8_t   xnumBlades:2;					// RPM scaling
+  uint8_t   spare10:1;
+  uint8_t   thrExpo:1;            // Enable Throttle Expo
+  uint8_t   ppmStart:3 ;					// Start channel for PPM
   int8_t    trimInc;              // Trim Increments
   int8_t    ppmDelay;
   int8_t    trimSw;
@@ -233,9 +258,15 @@ PACK(typedef struct t_Er9xModelData {
   Er9xCustomSwData   customSw[ER9X_NUM_CSW];
   uint8_t   frSkyVoltThreshold ;
   int8_t   tmrModeB;
-  uint8_t   res3;
+  uint8_t   numVoice;
   Er9xSafetySwData  safetySw[ER9X_NUM_CHNOUT];
   Er9xFrSkyData frsky;
+  uint8_t numBlades ;
+  uint8_t unused1[8] ;
+  uint8_t CustomDisplayIndex[6] ;
+  Er9xGvarData gvars[ER9X_MAX_GVARS] ;
+  Er9xPhaseData phaseData[ER9X_MAX_MODES] ;
+  
   operator ModelData();
   t_Er9xModelData() { memset(this, 0, sizeof(t_Er9xModelData)); }
   t_Er9xModelData(ModelData&);

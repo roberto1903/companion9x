@@ -509,6 +509,10 @@ void ModelEdit::tabModelEditSetup()
     ui->label_thrExpo->hide();
     ui->thrExpoChkB->hide();
   }
+  if (!(GetEepromInterface()->getCapability(ExtendedTrims)>0)) {
+    ui->extendedTrimsChkB->hide();
+    ui->extendedTrims_label->hide();
+  }
 
   if (!GetEepromInterface()->getCapability(HasTTrace)) {
     ui->label_ttrace->hide();
