@@ -1,221 +1,30 @@
-Index: er9x/audio.h
-===================================================================
---- er9x/audio.h	(revision 780)
-+++ er9x/audio.h	(working copy)
-@@ -101,6 +101,7 @@
- 
- 
- inline void driver() {
+diff -ur ../er9x/er9x.cpp er9x/er9x.cpp
+--- ../er9x/er9x.cpp	2013-04-28 09:23:57.241264078 +0200
++++ er9x/er9x.cpp	2013-04-28 09:51:02.536562451 +0200
+@@ -615,8 +615,9 @@
+ //        for(uint8_t i=0; i<32; i++)
+ //            getADC_filt(); // init ADC array
+ //#endif
 +#ifndef SIMU
-   if (toneTimeLeft > 0) {	
- 					switch ((g_eeGeneral.speakerMode & 1)){					 
- 								case 0:
-@@ -122,6 +123,7 @@
- 	} else {
- 			PORTE &=  ~(1<<OUT_E_BUZZER); // speaker output 'low'
- 	}								  	     
-+#endif
- }	 
- 
-     // heartbeat is responsibile for issueing the audio tones and general square waves
-Index: er9x/er9x.cpp
-===================================================================
---- er9x/er9x.cpp	(revision 780)
-+++ er9x/er9x.cpp	(working copy)
-@@ -37,8 +37,11 @@
- static void checkTHR( void );
- ///   Pr�ft beim Einschalten ob alle Switches 'off' sind.
- static void checkSwitches( void );
-+
-+#ifndef SIMU
- static void checkQuickSelect( void ); // Quick model select on startup
- static void getADC_osmp( void ) ;
-+#endif
- 
- EEGeneral  g_eeGeneral;
- ModelData  g_model;
-@@ -827,6 +830,7 @@
- 		lcd_putcAtt(FW*2+i*2*FW-i-2, y, g_model.name[i],DBLSIZE);
- }
- 
-+#ifndef SIMU
- static void checkQuickSelect()
- {
-     uint8_t i = keyDown(); //check for keystate
-@@ -860,6 +864,7 @@
-         clearKeyEvents(); // wait for user to release key
-     }
- }
-+#endif
- 
- MenuFuncP g_menuStack[5];
- 
-@@ -1762,7 +1767,6 @@
- {
-     g_tmr16KHz++;
- }
--#endif
- 
- static uint16_t getTmr16KHz()
- {
-@@ -2403,6 +2407,7 @@
- 		}
- 	}
- }
-+#endif
- 
- 
- int16_t calc1000toRESX(int16_t x)  // improve calc time by Pat MacKenzie
-Index: er9x/er9x.h
-===================================================================
---- er9x/er9x.h	(revision 780)
-+++ er9x/er9x.h	(working copy)
-@@ -814,7 +814,11 @@
- NOINLINE void resetTimer1(void) ;
- 
- // Fiddle to force compiler to use a pointer
-+#ifndef SIMU
- #define FORCE_INDIRECT(ptr) __asm__ __volatile__ ("" : "=e" (ptr) : "0" (ptr))
-+#else
-+#define FORCE_INDIRECT(ptr)
-+#endif
- 
- extern uint8_t telemItemValid( uint8_t index ) ;
- extern uint8_t Main_running ;
-Index: er9x/frsky.cpp
-===================================================================
---- er9x/frsky.cpp	(revision 780)
-+++ er9x/frsky.cpp	(working copy)
-@@ -577,7 +577,6 @@
-   } else
-     UCSR0B &= ~(1 << UDRIE0); // disable UDRE0 interrupt
- }
--#endif
- 
- /******************************************/
- 
-@@ -586,13 +585,14 @@
-   frskyTxISRIndex = 0;
-   UCSR0B |= (1 << UDRIE0); // enable  UDRE0 interrupt
- }
-+#endif
- 
- 
- uint8_t FrskyAlarmSendState = 0 ;
- uint8_t FrskyDelay = 0 ;
- //uint8_t FrskyRSSIsend = 0 ;
- 
+         getADC_osmp();
 -
-+#ifndef SIMU
- static void FRSKY10mspoll(void)
++#endif
+         uint16_t inacSum = stickMoveValue();
+         //        for(uint8_t i=0; i<4; i++)
+         //           inacSum += anaIn(i)/INAC_DEVISOR;
+diff -ur ../er9x/menus.cpp er9x/menus.cpp
+--- ../er9x/menus.cpp	2013-04-28 09:23:56.990138570 +0200
++++ er9x/menus.cpp	2013-04-28 09:51:47.573071020 +0200
+@@ -5676,8 +5676,11 @@
+ struct t_output
  {
-   if (FrskyDelay)
-@@ -650,6 +650,7 @@
-     frskyTransmitBuffer(); 
-   }
- }
+ 	uint16_t sDelay[MAX_MIXERS] ;
++#ifndef SIMU	
+ 	__int24	 act   [MAX_MIXERS] ;
+-//	int32_t  act   [MAX_MIXERS] ;
++#else	
++	int32_t  act   [MAX_MIXERS] ;
 +#endif
- 
- //  uint8_t i = 0;
- 
-@@ -966,13 +967,15 @@
- 		}
- 	}
-   if (frskyUsrStreaming > 0) frskyUsrStreaming--;
--#endif
-+
- 	
-   if ( FrskyAlarmSendState )
-   {
-     FRSKY10mspoll() ;
-   }
- 
-+#endif
-+
-   if ( g_model.frsky.channels[0].type == 3 )		// Current (A)
- 		current_check( 0 ) ;
-   if ( g_model.frsky.channels[1].type == 3 )		// Current (A)
-Index: er9x/myeeprom.h
-===================================================================
---- er9x/myeeprom.h	(revision 780)
-+++ er9x/myeeprom.h	(working copy)
-@@ -44,6 +44,9 @@
- //#define GENERAL_MYVER_r365 4
- //#define GENERAL_MYVER      5
- 
-+#ifndef PACK
-+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
-+#endif
- 
- // eeprom ver <9 => mdvers == 1
- // eeprom ver >9 => mdvers ==2
-Index: er9x/simpgmspace.cpp
-===================================================================
---- er9x/simpgmspace.cpp	(revision 780)
-+++ er9x/simpgmspace.cpp	(working copy)
-@@ -81,7 +81,7 @@
-   try {
- #endif
-     g_menuStack[0] = menuProc0;
--    // g_menuStack[1] = menuProcModelSelect;
-+    g_menuStack[1] = menuProcModelSelect;
- 
-     eeReadAll(); //load general setup and selected model
- 
-@@ -133,3 +133,12 @@
-   puts("");
- }
- #endif
-+
-+void sig(int sgn)
-+{
-+  main_thread_error = (char *)malloc(2048);
-+  sprintf(main_thread_error,"Signal %d caught\n", sgn);
-+  write_backtrace(main_thread_error);
-+  throw std::exception();
-+}
-+
-Index: er9x/simpgmspace.h
-===================================================================
---- er9x/simpgmspace.h	(revision 780)
-+++ er9x/simpgmspace.h	(working copy)
-@@ -48,13 +48,7 @@
-   }
- }
- #endif
--void sig(int sgn)
--{
--  main_thread_error = (char *)malloc(2048);
--  sprintf(main_thread_error,"Signal %d caught\n", sgn);
--  write_backtrace(main_thread_error);
--  throw std::exception();
--}
-+void sig(int sgn);
- #define assert(x) do { if (!(x)) { main_thread_error = (char *)malloc(2048); sprintf(main_thread_error, "Assert failed, %s:%d: %s\n", __FILE__, __LINE__, #x); write_backtrace(main_thread_error); throw std::exception(); } } while(0)
- #else
- #include <assert.h>
-@@ -96,6 +90,7 @@
- #define strcpy_P strcpy
- #define strncpy_P strncpy
- #define memcpy_P memcpy
-+#define asm(x)
- 
- #define PORTA dummyport
- #define PORTB portb
-@@ -112,6 +107,7 @@
- #define DDRE  dummyport
- #define DDRF  dummyport
- #define DDRG  dummyport
-+#define PINA  ~pinb
- #define PINB  ~pinb
- #define PINC  ~pinc
- #define PIND  ~pind
-@@ -140,6 +136,8 @@
- #define SPIF dummyport
- #define SPCR dummyport
- 
-+#define TCNT0 0
-+
- #define TIMSK  dummyport
- #define TIMSK1 dummyport
- 
+ 	uint8_t  swOn  [MAX_MIXERS] ;
+ #if GVARS
+ 	int16_t  anas [NUM_XCHNRAW+1+MAX_GVARS] ;		// To allow for 3POS

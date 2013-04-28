@@ -298,7 +298,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case OwnerName:
       return 10;
     case HasInputFilter:
-      return 1;
+      return 0;
     case ModelVoice:
       return 1;
     case Timers:

@@ -62,7 +62,7 @@ const uint8_t modn12x3[4][4]= {
 #define C9X_MAX_EXPOS             32
 #define C9X_MAX_CURVES            16
 #define MAX_POINTS                17
-#define MAX_GVARS                 5
+#define C9X_MAX_GVARS                 5
 #define NUM_SAFETY_CHNOUT         16
 #define C9X_NUM_CHNOUT            32 // number of real output channels
 #define C9X_NUM_CSW               32 // number of custom switches
@@ -413,11 +413,13 @@ class GeneralSettings {
     uint8_t   filterInput; // TODO enum
     unsigned int  backlightDelay;
     bool   blightinv;
+    bool   stickScroll;
     unsigned int   templateSetup;  //RETA order according to chout_ar array // TODO enum
     int    PPM_Multiplier;
     int    hapticLength;
     unsigned int   reNavigation;
     bool      hideNameOnSplash;
+    bool      enablePpmsim;
     unsigned int   speakerPitch;
     unsigned int   hapticStrength;
     unsigned int   speakerMode;
@@ -437,6 +439,7 @@ class GeneralSettings {
     unsigned int rotarySteps;
     unsigned int countryCode;
     unsigned int imperial;
+    bool crosstrim;
 };
 
 class ExpoData {
@@ -792,7 +795,7 @@ class ModelData {
     unsigned int   modelId;
     // int8_t tmrModeB;
     unsigned int switchWarningStates;
-    char     gvars_names[MAX_GVARS][6+1];
+    char     gvars_names[C9X_MAX_GVARS][6+1];
     uint8_t  gvsource[5];
     uint8_t  bt_telemetry;
     uint8_t  numVoice;
@@ -909,12 +912,16 @@ enum Capability {
  TelemetryColsCSFields,
  TelemetryRSSIModel,
  TelemetryAlarm,
+ TelemetryInternalAlarm,
  TelemetryTimeshift,
  TelemetryMaxMultiplier,
  HasAltitudeSel,
  HasVario,
  HasVariants,
  HasFailsafe,
+ HasPPMSim,
+ HasCrossTrims,
+ HasStickScroll,
  NumModules,
  FSSwitch,
  DiffMixers,

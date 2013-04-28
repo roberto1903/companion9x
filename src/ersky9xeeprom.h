@@ -39,6 +39,7 @@ extern int setEr9xTimerMode(TimerMode mode);
 #define ERSKY9X_NUM_CSW_V11         24 
 #define ERSKY9X_NUM_FSW                 16
 #define ERSKY9X_NUM_VOICE	         8
+#define ERSKY9X_MAX_GVARS	         7
 
 #define NUM_STICKSnPOTS 7  //number of sticks and pots
 
@@ -444,7 +445,7 @@ PACK(typedef struct t_Ersky9xModelData_v11 {
   uint8_t customDisplayIndex[6] ;
   Ersky9xFuncSwData   funcSw[ERSKY9X_NUM_FSW];
   Ersky9xPhaseData phaseData[6] ;
-  Ersky9xGvarData gvars[MAX_GVARS] ;
+  Ersky9xGvarData gvars[ERSKY9X_MAX_GVARS] ;
 
   operator ModelData();
   t_Ersky9xModelData_v11() { memset(this, 0, sizeof(t_Ersky9xModelData_v11)); }
