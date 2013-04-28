@@ -773,22 +773,23 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->setMaxVisibleItems(10);
 }
 
-void populateGVarCB(QComboBox *b, int value, int min, int max,bool pgvars)
+void populateGVarCB(QComboBox *b, int value, int min, int max,int pgvars)
 {
   int gvars=0;
   if (GetEepromInterface()->getCapability(HasVariants)) {
-    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) & pgvars)
+    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) & (pgvars>0)) {
       gvars=1;
+    }
   } else {
-    if (pgvars)
+    if (pgvars>0)
       gvars=1;
   }
   b->clear();
 
   if (gvars) {
-	  for (int i=-5; i<=-1; i++) {
-		int16_t gval = (int16_t)(-10000+i);
-		b->addItem(QObject::tr("-GV%1").arg(-i), gval);
+    for (int i=-pgvars; i<=-1; i++) {
+      int16_t gval = (int16_t)(-10000+i);
+      b->addItem(QObject::tr("-GV%1").arg(-i), gval);
 //      no special range if GVARS are not active
 //		if (gvars==0) {
 //		  QModelIndex index = b->model()->index(b->count()-1, 0);
@@ -805,7 +806,7 @@ void populateGVarCB(QComboBox *b, int value, int min, int max,bool pgvars)
       b->setCurrentIndex(b->count()-1);
   }
   if (gvars) {
-    for (int i=1; i<=5; i++) {
+    for (int i=1; i<=pgvars; i++) {
       int16_t gval = (int16_t)(10000+i);
       b->addItem(QObject::tr("GV%1").arg(i), gval);
 //    no special range if GVARS are not active
@@ -900,7 +901,7 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   }
 
   if (flags & POPULATE_GVARS) {
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<GetEepromInterface()->getCapability(GvarsNum); i++) {
       item = RawSource(SOURCE_TYPE_GVAR, i);
       b->addItem(item.toString(), item.toValue());
       if (item == source) b->setCurrentIndex(b->count()-1);

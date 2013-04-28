@@ -301,6 +301,9 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   else if (c9x.srcRaw.type == SOURCE_TYPE_CH) {
     srcRaw = 21 + c9x.srcRaw.index;
   }
+  else if (c9x.srcRaw.type == SOURCE_TYPE_GVAR) {
+    srcRaw = 38 + c9x.srcRaw.index;
+  } 
   else if (c9x.srcRaw.type == SOURCE_TYPE_TRIM) {
     EEPROMWarnings += ::QObject::tr("er9x doesn't have trims as source") + "\n";
     srcRaw = 0; // use pots instead
@@ -425,8 +428,11 @@ t_Er9xMixData::operator MixData ()
   else if (srcRaw <= 20) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_PPM, srcRaw-13);
   }
-  else {
+  else if (srcRaw <=37) {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-21);
+  } 
+  else {
+    c9x.srcRaw = RawSource(SOURCE_TYPE_GVAR, srcRaw-38);    
   }
   if (differential==1) {
     c9x.differential=curve;

@@ -706,6 +706,9 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case CSFunc:
       return 16;
+    case GvarsNum:
+    case GvarsOfsNum:  
+      return 5;
     case HasSDLogs:
       return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     default:

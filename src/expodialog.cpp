@@ -13,12 +13,12 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
     setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
-    populateGVarCB(ui->expoCB, ed->expo, -100, +100);
-    populateGVarCB(ui->weightCB, ed->weight, 0, +100);
+    populateGVarCB(ui->expoCB, ed->expo, -100, +100, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
+    populateGVarCB(ui->weightCB, ed->weight, 0, +100, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
     populateSwitchCB(ui->switchesCB,ed->swtch);
     if (ed->curveMode==0) {
         populateExpoCurvesCB(ui->curvesCB,0); // TODO capacity for er9x
-        populateGVarCB(ui->expoCurveCB, ed->curveParam, -100, +100);
+        populateGVarCB(ui->expoCurveCB, ed->curveParam, -100, +100, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
     }
     else {
         populateExpoCurvesCB(ui->curvesCB,ed->curveParam); // TODO capacity for er9x

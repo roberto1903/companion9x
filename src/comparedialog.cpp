@@ -333,20 +333,25 @@ void compareDialog::printPhases()
   }
   str.append("</table>");
   int gvars=0;
-  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+  int gvarnum=0;
+  
+  if ((GetCurrentFirmwareVariant() & GVARS_VARIANT ) || (!GetEepromInterface()->getCapability(HasVariants) && GetEepromInterface()->getCapability(Gvars))) {
     gvars=1;
+    gvarnum=GetEepromInterface()->getCapability(GvarsNum);
+  }
   if ((gvars==1 && GetEepromInterface()->getCapability(GvarsFlightPhases)) || GetEepromInterface()->getCapability(RotaryEncoders)) {
     str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
     str.append("<tr><td style=\"border-style:none;\">&nbsp;</td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-      str.append(QString("<td colspan=%1 align=center><b>").arg(C9X_MAX_GVARS)+tr("Gvars")+"</td>");
+      
+      str.append(QString("<td colspan=%1 align=center><b>").arg(gvarnum)+tr("Gvars")+"</td>");
     }
     if (GetEepromInterface()->getCapability(RotaryEncoders)) {
       str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
     }
     str.append("</tr><tr><td align=center><b>"+tr("Flight mode name")+"</b></td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-      for (i=0; i<C9X_MAX_GVARS; i++) {
+      for (i=0; i<gvarnum; i++) {
         str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i+1).arg(g_model1->gvars_names[i]));
       }
     }
@@ -361,7 +366,7 @@ void compareDialog::printPhases()
       color=getColor1(pd1->name,pd2->name);
       str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd1->name).arg(color));
       if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-        for (k=0; k<C9X_MAX_GVARS; k++) {
+        for (k=0; k<gvarnum; k++) {
           color=getColor1(pd1->gvars[k],pd2->gvars[k]);
           if (pd1->gvars[k]<=1024) {
             str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%2>%1").arg(pd1->gvars[k]).arg(color)+"</font></td>");
@@ -423,18 +428,19 @@ void compareDialog::printPhases()
     str.append("</tr>");
   }
   str.append("</table>");
+  
   if ((gvars==1 && GetEepromInterface()->getCapability(GvarsFlightPhases)) || GetEepromInterface()->getCapability(RotaryEncoders)) {
     str.append("<br><table border=1 cellspacing=0 cellpadding=1 width=\"100%\">");
     str.append("<tr><td style=\"border-style:none;\">&nbsp;</td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-      str.append(QString("<td colspan=%1 align=center><b>").arg(C9X_MAX_GVARS)+tr("Gvars")+"</td>");
+      str.append(QString("<td colspan=%1 align=center><b>").arg(gvarnum)+tr("Gvars")+"</td>");
     }
     if (GetEepromInterface()->getCapability(RotaryEncoders)) {
       str.append(QString("<td colspan=%1 align=center><b>").arg(GetEepromInterface()->getCapability(RotaryEncoders))+tr("Rot. Enc.")+"</td>");
     }
     str.append("</tr><tr><td align=center ><b>"+tr("Flight mode name")+"</b></td>");
     if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-      for (i=0; i<C9X_MAX_GVARS; i++) {
+      for (i=0; i<gvarnum; i++) {
         str.append(QString("<td width=\"40\" align=\"center\"><b>GV%1</b><br>%2</td>").arg(i+1).arg(g_model2->gvars_names[i]));
       }
     }
@@ -449,7 +455,7 @@ void compareDialog::printPhases()
       color=getColor1(pd1->name,pd2->name);
       str.append(QString("<font size=+1 face='Courier New' color=%2>%1</font></td>").arg(pd2->name).arg(color));
       if (GetEepromInterface()->getCapability(GvarsFlightPhases)) {
-        for (k=0; k<C9X_MAX_GVARS; k++) {
+        for (k=0; k<gvarnum; k++) {
           color=getColor1(pd1->gvars[k],pd2->gvars[k]);
           if (pd2->gvars[k]<=1024) {
             str.append(QString("<td align=\"right\" width=\"40\"><font size=+1 face='Courier New' color=%2>%1").arg(pd2->gvars[k]).arg(color)+"</font></td>");
@@ -550,8 +556,12 @@ void compareDialog::printGvars()
 {
   QString color;
   int gvars=0;
-  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+  int gvarnum=0;
+  if ((GetCurrentFirmwareVariant() & GVARS_VARIANT ) || (!GetEepromInterface()->getCapability(HasVariants) && GetEepromInterface()->getCapability(Gvars))) {
     gvars=1;
+    gvarnum=GetEepromInterface()->getCapability(GvarsNum);
+  }
+
   if (!GetEepromInterface()->getCapability(GvarsFlightPhases) && (gvars==1 && GetEepromInterface()->getCapability(Gvars))) {
     QString str = "<table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append("<tr><td colspan=2><h2>"+tr("Global Variables")+"</h2></td></tr>");
@@ -559,14 +569,14 @@ void compareDialog::printGvars()
     str.append("<table border=1 cellspacing=0 cellpadding=3 width=100>");
     PhaseData *pd1=&g_model1->phaseData[0];
     PhaseData *pd2=&g_model2->phaseData[0];
-    int width=100/C9X_MAX_GVARS;
+    int width=100/gvarnum;
     str.append("<tr>");
-    for(int i=0; i<C9X_MAX_GVARS; i++) {        
+    for(int i=0; i<gvarnum; i++) {        
       str.append(QString("<td width=\"%1%\" align=\"center\"><b>").arg(width)+tr("GV")+QString("%1</b></td>").arg(i+1));
     }
     str.append("</tr>");
     str.append("<tr>");
-    for(int i=0; i<C9X_MAX_GVARS; i++) {
+    for(int i=0; i<gvarnum; i++) {
       color=getColor1(pd1->gvars[i],pd2->gvars[i]);
       str.append(QString("<td width=\"%1%\" align=\"center\"><font color=%2>").arg(width).arg(color)+QString("%1</font></td>").arg(pd1->gvars[i]));
     }
@@ -574,12 +584,12 @@ void compareDialog::printGvars()
     str.append("</table></td><td width=50%>");
     str.append("<table border=1 cellspacing=0 cellpadding=3 width=100>");
     str.append("<tr>");
-    for(int i=0; i<C9X_MAX_GVARS; i++) {        
+    for(int i=0; i<gvarnum; i++) {        
       str.append(QString("<td width=\"%1%\" align=\"center\"><b>").arg(width)+tr("GV")+QString("%1</b></td>").arg(i+1));
     }
     str.append("</tr>");
     str.append("<tr>");
-    for(int i=0; i<C9X_MAX_GVARS; i++) {
+    for(int i=0; i<gvarnum; i++) {
       color=getColor2(pd1->gvars[i],pd2->gvars[i]);
       str.append(QString("<td width=\"%1%\" align=\"center\"><font color=%2>").arg(width).arg(color)+QString("%1</font></td>").arg(pd2->gvars[i]));
     }
