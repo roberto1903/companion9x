@@ -305,8 +305,38 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
     EEPROMWarnings += ::QObject::tr("er9x doesn't have trims as source") + "\n";
     srcRaw = 0; // use pots instead
   }
+  if (abs(c9x.weight)>125) {
+    if (c9x.weight>0) {
+      int index=abs(c9x.weight)-10000;
+      int gvar=125+index;
+      if (gvar>127) {
+        gvar-=256;
+      }
+      weight = gvar;
+    } else {
+      EEPROMWarnings += ::QObject::tr("er9x doesn't have negative gvars as weight") + "\n";
+      weight=0;
+    }
+  } else {
+    weight = c9x.weight;
+  }
+
+  if (abs(c9x.sOffset)>125) {
+    if (c9x.sOffset>0) {
+      int index=abs(c9x.sOffset)-10000;
+      int gvar=125+index;
+      if (gvar>127) {
+        gvar-=256;
+      }
+      sOffset = gvar;
+    } else {
+      EEPROMWarnings += ::QObject::tr("er9x doesn't have negative gvars as offset") + "\n";
+      sOffset=0;
+    }
+  } else {
+    sOffset = c9x.sOffset;
+  }
   
-  weight = c9x.weight;
   if (c9x.curve!=0) {
     curve = c9x.curve;
     differential=0;
@@ -333,14 +363,37 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   mltpx = (MltpxValue)c9x.mltpx;
   mixWarn = c9x.mixWarn;
   enableFmTrim=c9x.enableFmTrim;
-  sOffset = c9x.sOffset;
+  
 }
 
 t_Er9xMixData::operator MixData ()
 {
   MixData c9x;
   c9x.destCh = destCh;
-  c9x.weight = weight;
+  if (abs(weight)>125) {
+    int gvar;
+    if (weight>0) {
+      gvar=weight-125;
+    } else {
+      gvar=weight+131;
+    }
+    gvar+=10000;
+    c9x.weight=gvar;
+  } else {
+    c9x.weight = weight;
+  }
+  if (abs(sOffset)>125) {
+    int gvar;
+    if (sOffset>0) {
+      gvar=sOffset-125;
+    } else {
+      gvar=sOffset+131;
+    }
+    gvar+=10000;
+    c9x.sOffset=gvar;
+  } else {
+    c9x.sOffset=sOffset;
+  }  
   c9x.swtch = er9xToSwitch(swtch);
 
   if (srcRaw == 0) {
@@ -391,7 +444,6 @@ t_Er9xMixData::operator MixData ()
   c9x.mltpx = (MltpxValue)mltpx;
   c9x.mixWarn = mixWarn;
   c9x.enableFmTrim=enableFmTrim;
-  c9x.sOffset = sOffset;
   return c9x;
 }
 
