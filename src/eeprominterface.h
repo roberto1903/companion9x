@@ -513,6 +513,7 @@ class MixData {
     unsigned int mixWarn;           // mixer warning
     unsigned int enableFmTrim;
     unsigned int phases;             // -5=!FP4, 0=normal, 5=FP4
+    unsigned int lateOffset;
     int    sOffset;
     char   name[10+1];
 
@@ -867,6 +868,7 @@ enum Capability {
  NumCurves9,
  NumCurves,
  NumCurvePoints,
+ OffsetWeight,
  Simulation,
  SoundMod,
  SoundPitch,
@@ -908,6 +910,7 @@ enum Capability {
  GvarsFlightPhases,
  GvarsHaveSources,
  GvarsAsSources,
+ GvarsAsWeight,
  TelemetryCSFields,
  TelemetryColsCSFields,
  TelemetryRSSIModel,
@@ -922,6 +925,7 @@ enum Capability {
  HasPPMSim,
  HasCrossTrims,
  HasStickScroll,
+ HasFixOffset,
  NumModules,
  FSSwitch,
  DiffMixers,

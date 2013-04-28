@@ -773,11 +773,16 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->setMaxVisibleItems(10);
 }
 
-void populateGVarCB(QComboBox *b, int value, int min, int max)
+void populateGVarCB(QComboBox *b, int value, int min, int max,bool pgvars)
 {
   int gvars=0;
-  if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
-    gvars=1;
+  if (GetEepromInterface()->getCapability(HasVariants)) {
+    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) & pgvars)
+      gvars=1;
+  } else {
+    if (pgvars)
+      gvars=1;
+  }
   b->clear();
 
   if (gvars) {

@@ -307,7 +307,19 @@ t_Er9xMixData::t_Er9xMixData(MixData &c9x)
   }
   
   weight = c9x.weight;
-  curve = c9x.curve;
+  if (c9x.curve!=0) {
+    curve = c9x.curve;
+    differential=0;
+  } else {
+    if (c9x.differential!=0) {
+      curve=c9x.differential;
+      differential=1;
+    } else {
+      curve=0;
+      differential=0;
+    }
+  }
+  lateOffset=c9x.lateOffset;
   delayUp = c9x.delayUp;
   delayDown = c9x.delayDown;
   speedUp = c9x.speedUp;
@@ -363,8 +375,14 @@ t_Er9xMixData::operator MixData ()
   else {
     c9x.srcRaw = RawSource(SOURCE_TYPE_CH, srcRaw-21);
   }
-
-  c9x.curve = curve;
+  if (differential==1) {
+    c9x.differential=curve;
+    c9x.curve=0;
+  } else {
+    c9x.differential=0;
+    c9x.curve=curve;
+  }
+  c9x.lateOffset=lateOffset;
   c9x.delayUp = delayUp;
   c9x.delayDown = delayDown;
   c9x.speedUp = speedUp;

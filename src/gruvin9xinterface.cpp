@@ -293,6 +293,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return 500;
     case Simulation:
       return true;
+    case OffsetWeight:
+      return 125;
     case HasExpoCurves:
       return true;           
     case Telemetry:
