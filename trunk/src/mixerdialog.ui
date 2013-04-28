@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>367</width>
-    <height>444</height>
+    <height>469</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,7 +26,7 @@
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="9" column="1" colspan="2">
+     <item row="10" column="1" colspan="2">
       <widget class="QComboBox" name="switchesCB">
        <property name="whatsThis">
         <string>Switch used by the mix.
@@ -34,7 +34,7 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="10" column="0">
+     <item row="11" column="0">
       <widget class="QLabel" name="label_8">
        <property name="text">
         <string>Warning</string>
@@ -72,7 +72,7 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="11" column="0">
+     <item row="12" column="0">
       <widget class="QLabel" name="label_9">
        <property name="text">
         <string>Multiplex</string>
@@ -135,21 +135,21 @@ If blank then the mix is considered to be &quot;ON&quot; all the time.</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="9" column="0">
       <widget class="QLabel" name="label_phases">
        <property name="text">
         <string>Flight modes</string>
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
+     <item row="10" column="0">
       <widget class="QLabel" name="label_7">
        <property name="text">
         <string>Switch</string>
        </property>
       </widget>
      </item>
-     <item row="11" column="1" colspan="2">
+     <item row="12" column="1" colspan="2">
       <widget class="QComboBox" name="mltpxCB">
        <property name="whatsThis">
         <string>Multiplexer
@@ -177,7 +177,7 @@ This determines how mixer values are added.
        </item>
       </widget>
      </item>
-     <item row="10" column="1" colspan="2">
+     <item row="11" column="1" colspan="2">
       <widget class="QComboBox" name="warningCB">
        <property name="whatsThis">
         <string>Mixer warning.
@@ -219,7 +219,7 @@ Setting this value will cause a beep to be emmitted when this value is active.</
        </property>
       </widget>
      </item>
-     <item row="8" column="1" colspan="2">
+     <item row="9" column="1" colspan="2">
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
         <widget class="QLabel" name="lb_FP0">
@@ -401,6 +401,23 @@ Setting this value will cause a beep to be emmitted when this value is active.</
       <widget class="QComboBox" name="differentialCB">
        <property name="whatsThis">
         <string>The source for the mixer</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_FixOffset">
+       <property name="text">
+        <string>Fix Offset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1" colspan="2">
+      <widget class="QCheckBox" name="FixOffsetChkB">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
       </widget>
      </item>

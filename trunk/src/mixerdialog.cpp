@@ -18,9 +18,11 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       this->setWindowTitle(tr("DEST -> CH%1%2").arg(md->destCh/10).arg(md->destCh%10));
     populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SOURCES | POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | (GetEepromInterface()->getCapability(GvarsAsSources) ? POPULATE_GVARS : 0));
     ui->sourceCB->removeItem(0);
-    populateGVarCB(ui->weightCB, md->weight, -245, +245);
-    populateGVarCB(ui->offsetCB, md->sOffset, -245, +245);
-    populateGVarCB(ui->differentialCB, md->differential, -100, +100);
+    int limit=GetEepromInterface()->getCapability(OffsetWeight);
+    populateGVarCB(ui->weightCB, md->weight, -limit, limit, GetEepromInterface()->getCapability(GvarsAsWeight));
+    populateGVarCB(ui->offsetCB, md->sOffset, -limit, limit, GetEepromInterface()->getCapability(GvarsAsWeight));
+    populateGVarCB(ui->differentialCB, md->differential, -100, +100, GetEepromInterface()->getCapability(GvarsAsWeight));
+    ui->FixOffsetChkB->setChecked(md->lateOffset);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
@@ -36,6 +38,10 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         ui->FMtrimChkB->hide();
         ui->label_FMtrim->hide();
         ui->label_4->setText(tr("Offset"));
+    }
+    if (!GetEepromInterface()->getCapability(HasFixOffset)) {
+        ui->FixOffsetChkB->hide();
+        ui->label_FixOffset->hide();
     }
     if (GetEepromInterface()->getCapability(ExtraTrims)) {
       ui->trimCB->addItem(tr("Rud"),1);
@@ -104,6 +110,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->MixDR_CB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
+    connect(ui->FixOffsetChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->curvesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->switchesCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->warningCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
@@ -143,6 +150,7 @@ void MixerDialog::valuesChanged()
     md->sOffset    = ui->offsetCB->itemData(ui->offsetCB->currentIndex()).toInt();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
+    md->lateOffset = ui->FixOffsetChkB->checkState() ? 1 : 0;
     md->enableFmTrim = ui->FMtrimChkB->checkState() ? 1 : 0;
     int numcurves=GetEepromInterface()->getCapability(NumCurves);
     if (numcurves==0) {

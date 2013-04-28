@@ -204,6 +204,8 @@ int Th9xInterface::getCapability(const Capability capability)
       return 8;
     case ExtraChannels:
       return 4;
+    case OffsetWeight:
+      return 125;      
     case Simulation:
       return 1;
     case HasInputFilter:

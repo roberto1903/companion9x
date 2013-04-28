@@ -531,6 +531,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 5;
     case Gvars:
     case GvarsInCS:
+    case GvarsAsWeight:
     case ExpoIsCurve:
       return 1;
     case GvarsAreNamed:
@@ -538,6 +539,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (board==BOARD_STOCK ? 0 : 1);
     case Mixes:
       return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
+    case OffsetWeight:
+      return (IS_ARM(board) ? 501 : 245);
     case Timers:
       return 2;
     case PermTimers:

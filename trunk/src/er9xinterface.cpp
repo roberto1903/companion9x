@@ -255,6 +255,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case TrainerSwitch:
       return 1;
+    case OffsetWeight:
+      return 125;
     case BandgapMeasure:
       return 1;
     case PotScrolling:
@@ -303,8 +305,6 @@ int Er9xInterface::getCapability(const Capability capability)
       return 2;
     case MaxVolume:
       return 7;      
-    case HasInputFilter:
-      return 0;
     case VoicesAsNumbers:
     case TelemetryInternalAlarm:
     case HasPPMSim:
@@ -315,7 +315,14 @@ int Er9xInterface::getCapability(const Capability capability)
     case HasVolume:
     case HasBlInvert:
     case ModelVoice:
-      return 1;      
+    case DiffMixers:
+    case HasNegCurves:
+    case HasFixOffset:
+    case Gvars:
+    case GvarsHaveSources:
+    case GvarsAsSources:
+    case GvarsAsWeight:
+     return 1;      
     default:
       return 0;
   }
