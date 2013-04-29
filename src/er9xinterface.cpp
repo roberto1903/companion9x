@@ -239,6 +239,8 @@ int Er9xInterface::getSize(GeneralSettings &settings)
 int Er9xInterface::getCapability(const Capability capability)
 {
   switch (capability) {
+    case FlightPhases:
+        return 4;
     case Mixes:
       return ER9X_MAX_MIXERS;
     case NumCurves5:

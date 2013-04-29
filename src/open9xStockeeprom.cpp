@@ -2888,7 +2888,6 @@ t_Open9xModelData_v209::operator ModelData ()
   c9x.frsky.screens[1].type = 0;
   for (int line=0; line<4; line++) {
     for (int col=0; col<2; col++) {
-      uint8_t i = 2*line + col;
       c9x.frsky.screens[1].body.lines[line].source[col] = (col==0 ? (frskyLines[line] & 0x0f) : ((frskyLines[line] & 0xf0) / 16));
       c9x.frsky.screens[1].body.lines[line].source[col] += (((frskyLinesXtra >> (4*line+2*col)) & 0x03) * 16);
     }
