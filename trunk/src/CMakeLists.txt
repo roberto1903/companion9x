@@ -91,7 +91,7 @@ SET( companion9x_SRCS
      ${PROJECT_BINARY_DIR}/radio.cxx
      ${PROJECT_SOURCE_DIR}/../opentx/stamp-opentx.h
      ${PROJECT_SOURCE_DIR}/../th9x/stamp-th9x.h
-     ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
+     ${PROJECT_SOURCE_DIR}/../er9x/stamp-er9x.h
      th9xeeprom.cpp
      th9xinterface.cpp
      er9xeeprom.cpp
@@ -270,15 +270,6 @@ IF( WIN32 )
     SET(CMAKE_EXE_LINKER_FLAGS -mwindows)
   ENDIF( )
 ENDIF( )
-
-ADD_CUSTOM_COMMAND(
-  COMMAND cmake -E remove_directory ${PROJECT_BINARY_DIR}/er9x
-  COMMAND cmake -E copy_directory ${PROJECT_SOURCE_DIR}/../er9x ${PROJECT_BINARY_DIR}/er9x
-  COMMAND patch ${PATCH_FLAGS} -s -f -p0 < ${PROJECT_SOURCE_DIR}/../er9x.patch
-  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  OUTPUT ${PROJECT_BINARY_DIR}/er9x/stamp-er9x.h
-  DEPENDS ${PROJECT_SOURCE_DIR}/../er9x.patch
-)
 
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} )
