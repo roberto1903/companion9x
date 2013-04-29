@@ -203,11 +203,10 @@ PACK(typedef struct t_Er9xFrSkyData {
 }) Er9xFrSkyData;
 
 PACK(typedef struct t_gvar {
-	int8_t gvar ;
-	uint8_t gvsource ;
+  int8_t gvar ;
+  uint8_t gvsource ;
 //	int8_t gvswitch ;
 }) Er9xGvarData ;
-
 
 PACK(typedef struct t_PhaseData {
 	// Trim store as -1001 to -1, trim value-501, 0-5 use trim of phase 0-5

@@ -832,6 +832,7 @@ class RadioData {
 enum Capability {
  OwnerName,
  FlightPhases,
+ FlightPhasesAreNamed,
  SimulatorType,
  Mixes,
  MixesWithoutExpo,

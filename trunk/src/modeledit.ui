@@ -3479,7 +3479,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>8</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -3488,6 +3488,13 @@
             <layout class="QVBoxLayout" name="verticalLayout_4a">
              <item>
               <layout class="QGridLayout" name="gridLayout_11a">
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_38c">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="2">
                 <widget class="QLineEdit" name="phase0Name">
                  <property name="maxLength">
@@ -3496,16 +3503,9 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37c">
+                <widget class="QLabel" name="label_fm0name">
                  <property name="text">
                   <string>Flight Mode Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_38c">
-                 <property name="text">
-                  <string>Fade In</string>
                  </property>
                 </widget>
                </item>
@@ -3529,6 +3529,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="3">
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -3865,6 +3878,13 @@
                     </property>
                    </widget>
                   </item>
+                  <item row="2" column="2">
+                   <widget class="QLineEdit" name="phase0GV3Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="0" column="2">
                    <widget class="QLineEdit" name="phase0GV1Name">
                     <property name="maxLength">
@@ -3910,13 +3930,6 @@
                    <widget class="QLabel" name="phase0GV3_Label">
                     <property name="text">
                      <string>GVAR3</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="2">
-                   <widget class="QLineEdit" name="phase0GV3Name">
-                    <property name="maxLength">
-                     <number>6</number>
                     </property>
                    </widget>
                   </item>
@@ -3993,6 +4006,63 @@
                   <item row="4" column="1">
                    <widget class="QComboBox" name="phase0GV5Source"/>
                   </item>
+                  <item row="5" column="3">
+                   <widget class="QSpinBox" name="phase0GV6Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QComboBox" name="phase0GV6Source"/>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="phase0GV6_Label">
+                    <property name="text">
+                     <string>GVAR6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="2">
+                   <widget class="QLineEdit" name="phase0GV6Name">
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="phase0GV7_Label">
+                    <property name="text">
+                     <string>GVAR7</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QComboBox" name="phase0GV7Source"/>
+                  </item>
+                  <item row="6" column="2">
+                   <widget class="QLineEdit" name="phase0GV7Name">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="maxLength">
+                     <number>6</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="3">
+                   <widget class="QSpinBox" name="phase0GV7Value">
+                    <property name="minimum">
+                     <number>-100</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                </item>
@@ -4055,7 +4125,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37e_3">
+                <widget class="QLabel" name="label_fm1name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -4098,6 +4168,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -4587,7 +4670,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37e">
+                <widget class="QLabel" name="label_fm2name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -4630,6 +4713,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -5119,7 +5215,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37a">
+                <widget class="QLabel" name="label_fm3name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -5162,6 +5258,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_15">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -5643,17 +5752,17 @@
             <layout class="QVBoxLayout" name="verticalLayout_4e">
              <item>
               <layout class="QGridLayout" name="gridLayout_11e">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_fm4name">
+                 <property name="text">
+                  <string>Flight Mode Name</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="2">
                 <widget class="QLineEdit" name="phase4Name">
                  <property name="maxLength">
                   <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_37b">
-                 <property name="text">
-                  <string>Flight Mode Name</string>
                  </property>
                 </widget>
                </item>
@@ -5694,6 +5803,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -6489,7 +6611,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_5">
+                <widget class="QLabel" name="label_fm5name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -6532,6 +6654,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -7021,7 +7156,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_7">
+                <widget class="QLabel" name="label_fm6name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -7064,6 +7199,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -7254,7 +7402,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_9">
+                <widget class="QLabel" name="label_fm7name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -7297,6 +7445,19 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_22">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -8084,15 +8245,8 @@
              </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_6">
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="phase8Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="label_37b_11">
+                <widget class="QLabel" name="label_fm8name">
                  <property name="text">
                   <string>Flight Mode Name</string>
                  </property>
@@ -8135,6 +8289,26 @@
                   <number>1</number>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLineEdit" name="phase8Name">
+                 <property name="maxLength">
+                  <number>6</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" rowspan="4">
+                <spacer name="horizontalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -8338,7 +8512,7 @@
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>738</height>
+            <height>740</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -11771,7 +11945,7 @@
             <x>0</x>
             <y>0</y>
             <width>915</width>
-            <height>724</height>
+            <height>726</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -16746,7 +16920,7 @@
             <x>0</x>
             <y>0</y>
             <width>915</width>
-            <height>753</height>
+            <height>755</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">

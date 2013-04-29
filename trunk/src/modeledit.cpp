@@ -513,7 +513,6 @@ void ModelEdit::tabModelEditSetup()
     ui->extendedTrimsChkB->hide();
     ui->extendedTrims_label->hide();
   }
-
   if (!GetEepromInterface()->getCapability(HasTTrace)) {
     ui->label_ttrace->hide();
     ui->ttraceCB->hide();
@@ -1093,6 +1092,8 @@ void ModelEdit::tabPhases()
     ui->phase0GV3Name->hide();
     ui->phase0GV4Name->hide();
     ui->phase0GV5Name->hide();  
+    ui->phase0GV6Name->hide();
+    ui->phase0GV7Name->hide();  
   }
 
   if (GetEepromInterface()->getCapability(Gvars) &&  gvars==1) {
@@ -1102,6 +1103,8 @@ void ModelEdit::tabPhases()
       ui->phase0GV3Source->hide();
       ui->phase0GV4Source->hide();
       ui->phase0GV5Source->hide();
+      ui->phase0GV6Source->hide();
+      ui->phase0GV7Source->hide();
     } else {
       populateGvSourceCB(ui->phase0GV1Source, g_model.gvsource[0]);
       populateGvSourceCB(ui->phase0GV2Source, g_model.gvsource[1]);
@@ -1125,6 +1128,32 @@ void ModelEdit::tabPhases()
     connect(ui->phase0GV4Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
     connect(ui->phase0GV5Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
   }
+  if (gvars) {
+    if (GetEepromInterface()->getCapability(GvarsNum)<7) {
+      ui->phase0GV6Name->hide();
+      ui->phase0GV7Name->hide();
+      ui->phase0GV6Source->hide();
+      ui->phase0GV7Source->hide();
+      ui->phase0GV6Value->hide();
+      ui->phase0GV7Value->hide();
+      ui->phase0GV6_Label->hide();
+      ui->phase0GV7_Label->hide();
+    } else {
+      populateGvSourceCB(ui->phase0GV6Source, g_model.gvsource[5]);
+      populateGvSourceCB(ui->phase0GV7Source, g_model.gvsource[6]);  
+      connect(ui->phase0GV6Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      connect(ui->phase0GV7Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
+      ui->phase0GV6Name->setText(g_model.gvars_names[5]);
+      ui->phase0GV7Name->setText(g_model.gvars_names[6]);
+      connect(ui->phase0GV6Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+      connect(ui->phase0GV7Name,SIGNAL(editingFinished()),this,SLOT(GVName_editingFinished()));
+      ui->phase0GV6Value->setValue(g_model.phaseData[0].gvars[5]);
+      ui->phase0GV7Value->setValue(g_model.phaseData[0].gvars[6]);
+      connect(ui->phase0GV6Value,SIGNAL(editingFinished()),this,SLOT(phaseGVValue_editingFinished()));
+      connect(ui->phase0GV7Value,SIGNAL(editingFinished()),this,SLOT(phaseGVValue_editingFinished()));
+    }
+  }
+
   displayOnePhase(0, ui->phase0Name, NULL,                   ui->phase0FadeIn, ui->phase0FadeOut, NULL,                      ui->phase0Trim1Value, ui->phase0Trim1Label, ui->phase0Trim1Slider, NULL,                       ui->phase0Trim2Value, ui->phase0Trim2Label, ui->phase0Trim2Slider, NULL,                       ui->phase0Trim3Value, ui->phase0Trim3Label, ui->phase0Trim3Slider, NULL,                       ui->phase0Trim4Value, ui->phase0Trim4Label, ui->phase0Trim4Slider, ui->phase0GV1_Label, NULL                    , ui->phase0GV1Value, ui->phase0GV2_Label, NULL                    , ui->phase0GV2Value, ui->phase0GV3_Label, NULL                    , ui->phase0GV3Value, ui->phase0GV4_Label, NULL                    , ui->phase0GV4Value, ui->phase0GV5_Label, NULL                    , ui->phase0GV5Value,ui->phase0REA_Label,NULL, ui->phase0RE1Value,ui->phase0REB_Label, NULL, ui->phase0RE2Value, true);
   displayOnePhase(1, ui->phase1Name, ui->phase1Switch, ui->phase1FadeIn, ui->phase1FadeOut, ui->phase1Trim1Use, ui->phase1Trim1Value, ui->phase1Trim1Label, ui->phase1Trim1Slider, ui->phase1Trim2Use, ui->phase1Trim2Value, ui->phase1Trim2Label, ui->phase1Trim2Slider, ui->phase1Trim3Use, ui->phase1Trim3Value, ui->phase1Trim3Label, ui->phase1Trim3Slider, ui->phase1Trim4Use, ui->phase1Trim4Value, ui->phase1Trim4Label, ui->phase1Trim4Slider, ui->phase1GV1_Label, ui->phase1GV1Use, ui->phase1GV1Value, ui->phase1GV2_Label, ui->phase1GV2Use, ui->phase1GV2Value, ui->phase1GV3_Label, ui->phase1GV3Use, ui->phase1GV3Value, ui->phase1GV4_Label, ui->phase1GV4Use, ui->phase1GV4Value, ui->phase1GV5_Label, ui->phase1GV5Use, ui->phase1GV5Value,ui->phase1REA_Label, ui->phase1RE1Use, ui->phase1RE1Value,ui->phase1REB_Label, ui->phase1RE2Use, ui->phase1RE2Value, true);
   displayOnePhase(2, ui->phase2Name, ui->phase2Switch, ui->phase2FadeIn, ui->phase2FadeOut, ui->phase2Trim1Use, ui->phase2Trim1Value, ui->phase2Trim1Label, ui->phase2Trim1Slider, ui->phase2Trim2Use, ui->phase2Trim2Value, ui->phase2Trim2Label, ui->phase2Trim2Slider, ui->phase2Trim3Use, ui->phase2Trim3Value, ui->phase2Trim3Label, ui->phase2Trim3Slider, ui->phase2Trim4Use, ui->phase2Trim4Value, ui->phase2Trim4Label, ui->phase2Trim4Slider, ui->phase2GV1_Label, ui->phase2GV1Use, ui->phase2GV1Value, ui->phase2GV2_Label, ui->phase2GV2Use, ui->phase2GV2Value, ui->phase2GV3_Label, ui->phase2GV3Use, ui->phase2GV3Value, ui->phase2GV4_Label, ui->phase2GV4Use, ui->phase2GV4Value, ui->phase2GV5_Label, ui->phase2GV5Use, ui->phase2GV5Value,ui->phase2REA_Label, ui->phase2RE1Use, ui->phase2RE1Value,ui->phase2REB_Label, ui->phase2RE2Use, ui->phase2RE2Value, true);
@@ -1177,32 +1206,48 @@ void ModelEdit::tabPhases()
     ui->phase5->setDisabled(true);
     ui->phases->removeTab(5);
   }
-  if (phases < 5)
+  if (phases < 5) {
     ui->phase4->setDisabled(true);
-  if (phases < 4)
+    ui->phases->removeTab(4);
+  }
+  if (phases < 4) {
     ui->phase3->setDisabled(true);
-  if (phases < 3)
+    ui->phases->removeTab(3);
+  }
+  if (phases < 3) {
     ui->phase2->setDisabled(true);
+    ui->phases->removeTab(2);
+  }
   if (phases < 2) {
     ui->phase1->setDisabled(true);
+    ui->phases->removeTab(1);
     ui->phase0Name->setDisabled(true);
     ui->phase0FadeIn->setDisabled(true);
     ui->phase0FadeOut->setDisabled(true);
   }
-  for (int i=0; i < phases; i++) {
-    QString PhaseName=g_model.phaseData[i].name;
-    QString TabName;
-    if (i==0) { 
-      TabName.append(QObject::tr("Flight Mode 0 (Default)"));
-    } else {
-      TabName.append(QObject::tr("FM %1").arg(i));
+  if ( GetEepromInterface()->getCapability(FlightPhasesAreNamed) ) {
+    for (int i=0; i < phases; i++) {
+      QString PhaseName=g_model.phaseData[i].name;
+      QString TabName;
+      if (i==0) { 
+        TabName.append(QObject::tr("Flight Mode 0 (Default)"));
+      } else {
+        TabName.append(QObject::tr("FM %1").arg(i));
+      }
+      if (!PhaseName.isEmpty()) {
+        TabName.append(" (");
+        TabName.append(PhaseName);
+        TabName.append(")");
+      }
+      ui->phases->setTabText(i,TabName);
     }
-    if (!PhaseName.isEmpty()) {
-      TabName.append(" (");
-      TabName.append(PhaseName);
-      TabName.append(")");
+  } else {
+    QLineEdit * tmp[]= { ui->phase0Name,ui->phase1Name,ui->phase2Name,ui->phase3Name,ui->phase4Name,ui->phase5Name,ui->phase6Name,ui->phase7Name,ui->phase8Name};
+    QLabel * tmp2[] = { ui->label_fm0name,ui->label_fm1name,ui->label_fm2name,ui->label_fm3name,ui->label_fm4name,ui->label_fm5name,ui->label_fm6name,ui->label_fm7name,ui->label_fm8name};
+    for (int i=0; i < phases; i++) {
+      tmp[i]->hide();
+      tmp2[i]->hide();
     }
-    ui->phases->setTabText(i,TabName);
   }
   ui->phases->setCurrentIndex(0);
   phasesLock = false;

@@ -529,6 +529,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 6;
       else
         return 5;
+    case FlightPhasesAreNamed:
     case Gvars:
     case GvarsInCS:
     case GvarsAsWeight:
