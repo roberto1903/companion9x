@@ -307,6 +307,10 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return 2;
     case SlowRange:
       return 15;
+    case HasSDLogs:
+    case Haptic:
+      return 1;
+      
     default:
       return false;
   }

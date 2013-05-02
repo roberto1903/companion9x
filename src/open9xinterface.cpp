@@ -597,6 +597,10 @@ int Open9xInterface::getCapability(const Capability capability)
     case SoundPitch:
       return 1;
     case Haptic:
+      if (board == BOARD_TARANIS)
+        return 0;
+      else
+        return 1;
     case HapticLength:
     case HapticMode:
       return 1;
