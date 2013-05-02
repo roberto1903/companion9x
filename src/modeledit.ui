@@ -69,21 +69,14 @@
           <attribute name="title">
            <string>ModelSetup</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_34" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-           <item row="3" column="9">
+          <layout class="QGridLayout" name="gridLayout_34" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+           <item row="3" column="10">
             <widget class="QLabel" name="label_thrExpo">
              <property name="text">
               <string>Throttle Expo</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="6">
-            <widget class="QCheckBox" name="thrwarnChkB">
-             <property name="text">
-              <string/>
              </property>
             </widget>
            </item>
@@ -247,7 +240,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2" colspan="19">
+           <item row="0" column="2" colspan="20">
             <layout class="QGridLayout" name="gridLayout_37" columnstretch="1,0,0" columnminimumwidth="0,0,0">
              <item row="0" column="0">
               <widget class="QLineEdit" name="modelNameLE">
@@ -309,14 +302,24 @@
              </property>
             </widget>
            </item>
-           <item row="13" column="2" colspan="19">
+           <item row="13" column="2" colspan="20">
             <widget class="Line" name="swwarn1_line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
-           <item row="1" column="2" colspan="19">
+           <item row="14" column="0">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>Center beep</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2" colspan="20">
             <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1,0,0,0,1">
              <property name="rightMargin">
               <number>2</number>
@@ -413,7 +416,7 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="2" colspan="19">
+           <item row="2" column="2" colspan="20">
             <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1,0,0,0,1">
              <property name="rightMargin">
               <number>2</number>
@@ -545,7 +548,7 @@
              </item>
             </widget>
            </item>
-           <item row="10" column="2" colspan="19">
+           <item row="10" column="2" colspan="20">
             <widget class="Line" name="swwarn0_line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -568,7 +571,7 @@
              </property>
             </widget>
            </item>
-           <item row="11" column="2" colspan="19">
+           <item row="11" column="2" colspan="20">
             <layout class="QGridLayout" name="StockSwitchStartup">
              <property name="verticalSpacing">
               <number>6</number>
@@ -774,7 +777,7 @@
              </item>
             </layout>
            </item>
-           <item row="12" column="2" colspan="19">
+           <item row="12" column="2" colspan="20">
             <layout class="QGridLayout" name="TaranisSwitchStartup" rowstretch="0,0" columnstretch="0,0,0,0,0,0,0,0,0">
              <property name="sizeConstraint">
               <enum>QLayout::SetMinimumSize</enum>
@@ -1237,17 +1240,7 @@
              </item>
             </layout>
            </item>
-           <item row="14" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>Center beep</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="2" colspan="19">
+           <item row="14" column="2" colspan="20">
             <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="8">
               <widget class="QCheckBox" name="bcREaChkB">
@@ -1334,7 +1327,7 @@
              </property>
             </widget>
            </item>
-           <item row="18" column="0" colspan="21">
+           <item row="18" column="0" colspan="22">
             <widget class="QGroupBox" name="rf1_GB">
              <property name="title">
               <string/>
@@ -1656,7 +1649,7 @@
              <zorder>label_4</zorder>
             </widget>
            </item>
-           <item row="19" column="0" colspan="21">
+           <item row="19" column="0" colspan="22">
             <widget class="QGroupBox" name="rf2_GB">
              <property name="title">
               <string/>
@@ -1961,7 +1954,7 @@
              </layout>
             </widget>
            </item>
-           <item row="21" column="13">
+           <item row="21" column="14">
             <spacer name="verticalSpacer_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1984,14 +1977,7 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="6">
-            <widget class="QCheckBox" name="extendedTrimsChkB">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="7">
+           <item row="3" column="8">
             <widget class="QLabel" name="T2ThrTrg">
              <property name="text">
               <string>Throttle2Trig</string>
@@ -2001,10 +1987,10 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="8">
+           <item row="3" column="9">
             <widget class="QCheckBox" name="T2ThrTrgChkB"/>
            </item>
-           <item row="3" column="10">
+           <item row="3" column="11">
             <widget class="QCheckBox" name="thrExpoChkB">
              <property name="minimumSize">
               <size>
@@ -2017,7 +2003,7 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="11" rowspan="5" colspan="10">
+           <item row="3" column="12" rowspan="5" colspan="10">
             <spacer name="horizontalSpacer_9">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -2030,7 +2016,7 @@
              </property>
             </spacer>
            </item>
-           <item row="7" column="7">
+           <item row="7" column="8">
             <widget class="QLabel" name="instantTrim_label">
              <property name="text">
               <string>Instant Trim</string>
@@ -2062,7 +2048,7 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="8">
+           <item row="7" column="9">
             <widget class="QComboBox" name="instantTrim_CB">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -2074,6 +2060,20 @@
            </item>
            <item row="7" column="2">
             <widget class="QCheckBox" name="extendedLimitsChkB">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="6">
+            <widget class="QCheckBox" name="extendedTrimsChkB">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="6">
+            <widget class="QCheckBox" name="thrwarnChkB">
              <property name="text">
               <string/>
              </property>
@@ -8512,7 +8512,7 @@
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>740</height>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -11944,8 +11944,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>726</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -16919,8 +16919,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>755</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
