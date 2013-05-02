@@ -801,20 +801,28 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   if (name) name->setText(phase->name);
   if (sw) populateSwitchCB(sw, phase->swtch);
 
-  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
-  if (fadeIn) {
-    fadeIn->setMaximum(15.0/scale);
+  int scale=GetEepromInterface()->getCapability(SlowScale);
+  float range=GetEepromInterface()->getCapability(SlowRange);
+  int fades=GetEepromInterface()->getCapability(FlightPhasesHaveFades);
+  if (fades) {
+    fadeIn->setEnabled(true);
+    fadeOut->setEnabled(true);
+    fadeIn->setMaximum(range/scale);
     fadeIn->setSingleStep(1.0/scale);
-    fadeIn->setDecimals(scale-1);
-    fadeIn->setValue((double)phase->fadeIn/scale);
-  }
-  if (fadeOut) {
-    fadeOut->setMaximum(15.0/scale);
+    fadeIn->setDecimals((scale==1 ? 0 :1) );
+    if (fadeIn) {
+      fadeIn->setValue((double)phase->fadeIn/scale);
+    }
+    fadeOut->setMaximum(range/scale);
     fadeOut->setSingleStep(1.0/scale);
-    fadeOut->setDecimals(scale-1);
-    fadeOut->setValue((double)phase->fadeOut/scale);
+    fadeOut->setDecimals((scale==1 ? 0 :1));
+    if (fadeOut) {
+      fadeOut->setValue((double)phase->fadeOut/scale);
+    }
+  } else {
+    fadeIn->setDisabled(true);
+    fadeOut->setDisabled(true);
   }
-
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(1)-1, trim1Use, trim1, trim1Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(2)-1, trim2Use, trim2, trim2Slider);
   displayOnePhaseOneTrim(phase_idx, CONVERT_MODE(3)-1, trim3Use, trim3, trim3Slider);
@@ -3004,7 +3012,7 @@ void ModelEdit::phaseFadeIn_editingFinished()
 {
   QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
   int phase = spinBox->objectName().mid(5,1).toInt();
-  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+  int scale=GetEepromInterface()->getCapability(SlowScale);  
   g_model.phaseData[phase].fadeIn = round(spinBox->value()*scale);
   updateSettings();
 }
@@ -3013,7 +3021,7 @@ void ModelEdit::phaseFadeOut_editingFinished()
 {
   QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
   int phase = spinBox->objectName().mid(5,1).toInt();
-  int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+  int scale=GetEepromInterface()->getCapability(SlowScale);  
   g_model.phaseData[phase].fadeOut = round(spinBox->value()*scale);
   updateSettings();
 }
