@@ -576,7 +576,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 12;
     case CustomAndSwitches:
       if (IS_ARM(board))
-	return getCapability(CustomSwitches);
+        return getCapability(CustomSwitches);
       else
         return 15/*4bits*/-9/*sw positions*/;
     case CustomSwitchesExt:
