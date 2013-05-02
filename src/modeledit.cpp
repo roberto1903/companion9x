@@ -516,6 +516,8 @@ void ModelEdit::tabModelEditSetup()
   if (!GetEepromInterface()->getCapability(HasTTrace)) {
     ui->label_ttrace->hide();
     ui->ttraceCB->hide();
+  } else {
+    populateTTraceCB(ui->ttraceCB,g_model.thrTraceSrc);
   }
   if (GetEepromInterface()->getCapability(RotaryEncoders)==0) {
     ui->bcREaChkB->hide();
@@ -658,9 +660,6 @@ void ModelEdit::tabModelEditSetup()
 
   //pulse polarity
   ui->pulsePolCB->setCurrentIndex(g_model.moduleData[0].ppmPulsePol);
-
-  //throttle trace
-  ui->ttraceCB->setCurrentIndex(g_model.thrTraceSrc);
 
   //protocol channels ppm delay (disable if needed)
   ui->ppmDelaySB->setValue(g_model.moduleData[0].ppmDelay);
