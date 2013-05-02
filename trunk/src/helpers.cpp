@@ -266,6 +266,11 @@ void populateFuncCB(QComboBox *b, unsigned int value)
         b->model()->setData(index, v, Qt::UserRole - 1);
       }
     }
+    if ((i==FuncPlayHaptic) && !GetEepromInterface()->getCapability(Haptic)) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);      
+    }
     if ((i==FuncLogs) && !GetEepromInterface()->getCapability(HasSDLogs)) {
       QModelIndex index = b->model()->index(i, 0);
       QVariant v(0);
