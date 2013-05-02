@@ -5037,8 +5037,11 @@ void ModelEdit::on_extendedLimitsChkB_toggled(bool checked)
     setLimitMinMax();
     updateSettings();
 }
+
 void ModelEdit::on_thrwarnChkB_toggled(bool checked)
 {
+    if (switchEditLock)
+      return;
     g_model.disableThrottleWarning = checked;
     updateSettings();
 }
