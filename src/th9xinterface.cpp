@@ -211,7 +211,11 @@ int Th9xInterface::getCapability(const Capability capability)
     case HasInputFilter:
       return 1;
     case CSFunc:
-      return 13;      
+      return 13;
+    case SlowScale:
+      return 1;
+    case SlowRange:
+      return 10;      
     default:
       return 0;
   }

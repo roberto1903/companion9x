@@ -530,6 +530,7 @@ int Open9xInterface::getCapability(const Capability capability)
       else
         return 5;
     case FlightPhasesAreNamed:
+    case FlightPhasesHaveFades:
     case Gvars:
     case GvarsInCS:
     case GvarsAsWeight:
@@ -704,7 +705,9 @@ int Open9xInterface::getCapability(const Capability capability)
     case pmSwitchMask:
       return 1;
     case SlowScale:
-      return 1;
+      return (IS_ARM(board) ? 10 : 2);
+    case SlowRange:
+      return (IS_ARM(board) ? 250 : 15);
     case CSFunc:
       return 16;
     case GvarsNum:

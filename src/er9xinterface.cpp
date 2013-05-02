@@ -310,7 +310,11 @@ int Er9xInterface::getCapability(const Capability capability)
     case TelemetryMaxMultiplier:
       return 2;
     case MaxVolume:
-      return 7;      
+      return 7;
+    case SlowScale:
+      return 1;
+    case SlowRange:
+      return 15;
     case VoicesAsNumbers:
     case TelemetryInternalAlarm:
     case HasPPMSim:

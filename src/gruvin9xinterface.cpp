@@ -271,6 +271,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return G9X_MAX_MIXERS;
     case FlightPhases:
       return G9X_MAX_PHASES;
+    case FlightPhasesHaveFades:
+      return 1;
     case Timers:
       return 2;
     case Pots:
@@ -301,6 +303,10 @@ int Gruvin9xInterface::getCapability(const Capability capability)
       return TM_HASTELEMETRY|TM_HASWSHH;
     case TelemetryMaxMultiplier:
       return 1;
+    case SlowScale:
+      return 2;
+    case SlowRange:
+      return 15;
     default:
       return false;
   }
