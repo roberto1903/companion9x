@@ -979,14 +979,30 @@ void MainWindow::burnExtenalToEEPROM()
     else {
       backupEnable = false;
     }
+    EEPROMInterface *eepromInterface = GetEepromInterface();
     if (backup) {
       if (backupEnable) {
         QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss") + ".bin";
-        QStringList str = GetReceiveEEpromCommand(backupFile);
-        avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
-        ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-        ad->exec();
-        sleep(1);
+        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+          QString path=FindTaranisPath();
+          if (path.isEmpty()) {
+            QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+            return;
+          } else {
+            QStringList str;
+            str << path << backupFile;
+            avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Backup EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+            ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+            ad->exec();
+            sleep(1);
+          }
+        } else {
+          QStringList str = GetReceiveEEpromCommand(backupFile);
+          avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+          ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+          ad->exec();
+          sleep(1);
+        }
       }
       int oldrev = getEpromVersion(fileName);
       QString tempDir = QDir::tempPath();
@@ -1016,21 +1032,50 @@ void MainWindow::burnExtenalToEEPROM()
       QByteArray ba = tempFlash.toLatin1();
       char *name = ba.data();
       unlink(name);
-    }
-    else {
+    } else {
       if (backupEnable) {
         QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss") + ".bin";
-        QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
-        avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+          QString path=FindTaranisPath();
+          if (path.isEmpty()) {
+            QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+            return;
+          } else {
+            QStringList str;
+            str << path << backupFile;
+            avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Backup EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+            ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+            ad->exec();
+            sleep(1);
+          }
+        } else {
+          QStringList str = ((MainWindow *)this->parent())->GetReceiveEEpromCommand(backupFile);
+          avrOutputDialog *ad = new avrOutputDialog(this, ((MainWindow *)this->parent())->GetAvrdudeLocation(), str, tr("Backup EEPROM From Tx"));
+          ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+          ad->exec();
+          sleep(1);
+        }
+      }
+    }
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      QString path=FindTaranisPath();
+      if (path.isEmpty()) {
+        QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+        return;
+      } else {
+        QStringList str;
+        str << fileName << path;
+        avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Write EEPROM To Tx")); //, AVR_DIALOG_KEEP_OPEN);
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->exec();
         sleep(1);
-      }
+      }      
+    } else {
+      QStringList str = GetSendEEpromCommand(fileName);
+      avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
+      ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
+      ad->exec();
     }
-    QStringList str = GetSendEEpromCommand(fileName);
-    avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Write EEPROM To Tx", AVR_DIALOG_SHOW_DONE);
-    ad->setWindowIcon(QIcon(":/images/write_eeprom.png"));
-    ad->exec();
   }
 }
 
@@ -1263,11 +1308,26 @@ void MainWindow::burnExtenalFromEEPROM()
     QString fileName = QFileDialog::getSaveFileName(this, tr("Read EEPROM memory to File"), settings.value("lastDir").toString(), tr(EXTERNAL_EEPROM_FILES_FILTER));
     if (!fileName.isEmpty())
     {
+      EEPROMInterface *eepromInterface = GetEepromInterface();
+      if (eepromInterface->getBoard()==BOARD_TARANIS) {
+        QString path=FindTaranisPath();
+        if (path.isEmpty()) {
+          QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
+          return;
+        } else {
+          QStringList str;            
+          str << path << fileName;
+          avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
+          ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
+          ad->show();
+        }
+      } else {
         settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
         QStringList str = GetReceiveEEpromCommand(fileName);
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
         ad->show();
+      }
     }
 }
 
