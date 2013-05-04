@@ -1603,7 +1603,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   Append(new BoolField<1>(modelData.extendedLimits));
   Append(new BoolField<1>(modelData.extendedTrims));
-  Append(new SpareBitsField<1>());
+  Append(new BoolField<1>(modelData.throttleReversed));
   Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].ppmDelay, exportPpmDelay, importPpmDelay));
 
   if (IS_ARM(board) || board==BOARD_GRUVIN9X)

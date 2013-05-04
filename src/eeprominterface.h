@@ -781,6 +781,7 @@ class ModelData {
 
     bool      extendedLimits; // TODO xml
     bool      extendedTrims;
+    bool      throttleReversed;
     PhaseData phaseData[C9X_MAX_PHASES];
     MixData   mixData[C9X_MAX_MIXERS];
     LimitData limitData[C9X_NUM_CHNOUT];
@@ -939,6 +940,7 @@ enum Capability {
  HasVolume,
  HasBrightness,
  PerModelThrottleWarning,
+ PerModelThrottleInvert,
  SlowScale,
  SlowRange,
  PermTimers,
