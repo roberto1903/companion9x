@@ -412,7 +412,13 @@ void ModelEdit::tabModelEditSetup()
   } else {
     ui->modelVoice_SB->setValue(g_model.modelVoice+260);
   }
-
+  if (!GetEepromInterface()->getCapability(PerModelThrottleInvert)) {
+    ui->label_thrrev->hide();
+    ui->thrrevChkB->hide();
+  } else {
+    ui->thrrevChkB->setChecked(g_model.throttleReversed);
+  }
+  
   if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
     for (int i=0; pmsl[i]; i++) {
       pmsl[i]->hide();
@@ -5042,6 +5048,12 @@ void ModelEdit::on_thrwarnChkB_toggled(bool checked)
     if (switchEditLock)
       return;
     g_model.disableThrottleWarning = checked;
+    updateSettings();
+}
+
+void ModelEdit::on_thrrevChkB_toggled(bool checked)
+{
+    g_model.throttleReversed = checked;
     updateSettings();
 }
 

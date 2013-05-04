@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>683</width>
-    <height>793</height>
+    <height>818</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -133,7 +133,62 @@ These will be relevant for all models in the same EEPROM.</string>
        <string>Setup</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="27" column="0">
+       <item row="25" column="5">
+        <widget class="QComboBox" name="re_CB"/>
+       </item>
+       <item row="24" column="5">
+        <widget class="QCheckBox" name="hideNameOnSplashChkB">
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="4">
+        <widget class="QLabel" name="label_hideOwnerName">
+         <property name="text">
+          <string>Show Owner Name on Splash</string>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="0">
+        <widget class="QLabel" name="label_29">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Show Splash Screen on Startup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="2">
+        <widget class="QCheckBox" name="splashScreenChkB">
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Show splash screen on startup</string>
+         </property>
+         <property name="whatsThis">
+          <string>Show splash screen on startup</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="28" column="0">
         <widget class="QLabel" name="StickScrollLB">
          <property name="text">
           <string>StickScroll</string>
@@ -143,14 +198,14 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="27" column="5">
+       <item row="28" column="5">
         <widget class="QCheckBox" name="crosstrimChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="27" column="4">
+       <item row="28" column="4">
         <widget class="QLabel" name="crosstrimLB">
          <property name="text">
           <string>CrossTrim</string>
@@ -160,14 +215,14 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="27" column="2">
+       <item row="28" column="2">
         <widget class="QCheckBox" name="StickScrollChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="34" column="0">
+       <item row="36" column="0">
         <widget class="QLabel" name="swwarn_label">
          <property name="text">
           <string>Switch Startup Warning</string>
@@ -193,7 +248,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </item>
         </widget>
        </item>
-       <item row="40" column="2">
+       <item row="42" column="2">
         <widget class="QSpinBox" name="timezoneSB">
          <property name="minimum">
           <number>-14</number>
@@ -220,7 +275,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="41" column="4">
+       <item row="43" column="4">
         <widget class="QLabel" name="label_13">
          <property name="text">
           <string>Channel Order (For Templates)</string>
@@ -237,7 +292,7 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
-       <item row="41" column="2">
+       <item row="43" column="2">
         <widget class="QComboBox" name="stickmodeCB">
          <property name="toolTip">
           <string/>
@@ -291,11 +346,40 @@ Mode 4:
          </item>
         </widget>
        </item>
-       <item row="25" column="4">
-        <widget class="QLabel" name="label_hideOwnerName">
+       <item row="33" column="0">
+        <widget class="QLabel" name="thrwarnLabel">
          <property name="text">
-          <string>Show Owner Name on Splash</string>
+          <string>Throttle Startup Warning</string>
          </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QComboBox" name="beeperlenCB">
+         <item>
+          <property name="text">
+           <string>X-Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Short</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Normal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Long</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X-Long</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="13" column="0">
@@ -374,7 +458,7 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="32" column="4">
+       <item row="34" column="4">
         <widget class="QLabel" name="label_telalarms">
          <property name="text">
           <string>Telemetry NO DATA Alarm</string>
@@ -452,7 +536,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="32" column="5">
+       <item row="34" column="5">
         <widget class="QCheckBox" name="telalarmsChkB">
          <property name="text">
           <string/>
@@ -466,7 +550,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="30" column="2" colspan="2">
+       <item row="32" column="2" colspan="2">
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -483,19 +567,6 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="inputfilterLabel">
          <property name="text">
           <string>Input Filter</string>
-         </property>
-        </widget>
-       </item>
-       <item row="24" column="2">
-        <widget class="QCheckBox" name="thrrevChkB">
-         <property name="whatsThis">
-          <string>Reverse throttle operation.
-If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
-
-</string>
-         </property>
-         <property name="text">
-          <string/>
          </property>
         </widget>
        </item>
@@ -595,40 +666,11 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="28" column="4">
+       <item row="30" column="4">
         <widget class="QLabel" name="label_11">
          <property name="text">
           <string>Memory Startup Warning</string>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QComboBox" name="beeperlenCB">
-         <item>
-          <property name="text">
-           <string>X-Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Short</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Normal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Long</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>X-Long</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="13" column="2">
@@ -668,7 +710,7 @@ Acceptable values are 5v..10v</string>
          </property>
         </widget>
        </item>
-       <item row="38" column="0" colspan="6">
+       <item row="40" column="0" colspan="6">
         <layout class="QHBoxLayout" name="switchMaskLayout">
          <item>
           <widget class="QCheckBox" name="swTHRChkB">
@@ -735,13 +777,6 @@ Acceptable values are 5v..10v</string>
          </property>
         </widget>
        </item>
-       <item row="24" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Reverse Throttle Operation</string>
-         </property>
-        </widget>
-       </item>
        <item row="25" column="0">
         <widget class="QLabel" name="label_PotScrollEnable">
          <property name="text">
@@ -753,25 +788,6 @@ Acceptable values are 5v..10v</string>
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>Battery Calibration</string>
-         </property>
-        </widget>
-       </item>
-       <item row="24" column="5">
-        <widget class="QCheckBox" name="splashScreenChkB">
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Show splash screen on startup</string>
-         </property>
-         <property name="whatsThis">
-          <string>Show splash screen on startup</string>
-         </property>
-         <property name="text">
-          <string/>
          </property>
         </widget>
        </item>
@@ -814,19 +830,6 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </property>
         </widget>
        </item>
-       <item row="24" column="4">
-        <widget class="QLabel" name="label_29">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Show Splash Screen on Startup</string>
-         </property>
-        </widget>
-       </item>
        <item row="22" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
@@ -865,7 +868,7 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </property>
         </widget>
        </item>
-       <item row="40" column="4" colspan="2">
+       <item row="42" column="4" colspan="2">
         <layout class="QHBoxLayout" name="gpsFormatLayout">
          <item>
           <widget class="QLabel" name="gpsFormatLabel">
@@ -890,27 +893,14 @@ This value will be added to the measured battery voltage.  Use this value to cal
          </item>
         </layout>
        </item>
-       <item row="25" column="5">
-        <widget class="QCheckBox" name="hideNameOnSplashChkB">
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="40" column="0">
+       <item row="42" column="0">
         <widget class="QLabel" name="label_timezone">
          <property name="text">
           <string>Timeshift from UTC</string>
          </property>
         </widget>
        </item>
-       <item row="41" column="5">
+       <item row="43" column="5">
         <widget class="QComboBox" name="channelorderCB">
          <property name="toolTip">
           <string/>
@@ -1062,14 +1052,14 @@ This is used by the templated to determine which channel goes to what number out
          </property>
         </widget>
        </item>
-       <item row="41" column="0">
+       <item row="43" column="0">
         <widget class="QLabel" name="label_14">
          <property name="text">
           <string>Stick Mode</string>
          </property>
         </widget>
        </item>
-       <item row="28" column="5">
+       <item row="30" column="5">
         <widget class="QCheckBox" name="memwarnChkB">
          <property name="maximumSize">
           <size>
@@ -1098,14 +1088,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="31" column="0">
-        <widget class="QLabel" name="thrwarnLabel">
-         <property name="text">
-          <string>Throttle Startup Warning</string>
-         </property>
-        </widget>
-       </item>
-       <item row="31" column="2">
+       <item row="33" column="2">
         <widget class="QCheckBox" name="thrwarnChkB">
          <property name="whatsThis">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1163,14 +1146,14 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="28" column="0">
+       <item row="30" column="0">
         <widget class="QLabel" name="label_27">
          <property name="text">
           <string>Alarm Warning</string>
          </property>
         </widget>
        </item>
-       <item row="28" column="2">
+       <item row="30" column="2">
         <widget class="QCheckBox" name="alarmwarnChkB">
          <property name="maximumSize">
           <size>
@@ -1199,14 +1182,14 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="31" column="4">
+       <item row="33" column="4">
         <widget class="QLabel" name="label_BandGapEnable">
          <property name="text">
           <string>Bandgap Measuring Enable</string>
          </property>
         </widget>
        </item>
-       <item row="31" column="5">
+       <item row="33" column="5">
         <widget class="QCheckBox" name="BandGapEnableChkB">
          <property name="whatsThis">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1228,16 +1211,6 @@ p, li { white-space: pre-wrap; }
           <bool>true</bool>
          </property>
         </widget>
-       </item>
-       <item row="26" column="0">
-        <widget class="QLabel" name="re_label">
-         <property name="text">
-          <string>RotEnc Navigation</string>
-         </property>
-        </widget>
-       </item>
-       <item row="26" column="2">
-        <widget class="QComboBox" name="re_CB"/>
        </item>
        <item row="16" column="0">
         <widget class="QLabel" name="label_4">
@@ -1371,7 +1344,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="39" column="4" colspan="2">
+       <item row="41" column="4" colspan="2">
         <layout class="QHBoxLayout" name="pxxCountry">
          <item>
           <widget class="QLabel" name="countrycode_label">
@@ -1401,7 +1374,7 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="39" column="2">
+       <item row="41" column="2">
         <widget class="QComboBox" name="units_CB">
          <item>
           <property name="text">
@@ -1415,14 +1388,14 @@ p, li { white-space: pre-wrap; }
          </item>
         </widget>
        </item>
-       <item row="39" column="0">
+       <item row="41" column="0">
         <widget class="QLabel" name="units_label">
          <property name="text">
           <string>Measurement Units</string>
          </property>
         </widget>
        </item>
-       <item row="34" column="2">
+       <item row="36" column="2">
         <layout class="QHBoxLayout" name="swwarn_layout">
          <item>
           <widget class="QComboBox" name="swtchWarnCB">
@@ -1464,21 +1437,21 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="32" column="0">
+       <item row="34" column="0">
         <widget class="QLabel" name="label_frskyintalarm">
          <property name="text">
           <string>FrSky Internal Alarm</string>
          </property>
         </widget>
        </item>
-       <item row="32" column="2">
+       <item row="34" column="2">
         <widget class="QCheckBox" name="frskyintalarmChkB">
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="33" column="0">
+       <item row="35" column="0">
         <widget class="QLabel" name="PPMSimLB">
          <property name="text">
           <string>PPMSim</string>
@@ -1488,8 +1461,35 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="33" column="2">
+       <item row="35" column="2">
         <widget class="QCheckBox" name="PPMSimChkB">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="4">
+        <widget class="QLabel" name="re_label">
+         <property name="text">
+          <string>RotEnc Navigation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="29" column="0">
+        <widget class="QLabel" name="label_thrrev">
+         <property name="text">
+          <string>Reverse Throttle Operation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="29" column="2">
+        <widget class="QCheckBox" name="thrrevChkB">
+         <property name="whatsThis">
+          <string>Reverse throttle operation.
+If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
+
+</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -2758,10 +2758,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>beepMinuteChkB</tabstop>
   <tabstop>beepCountDownChkB</tabstop>
   <tabstop>beepFlashChkB</tabstop>
-  <tabstop>thrrevChkB</tabstop>
-  <tabstop>splashScreenChkB</tabstop>
   <tabstop>PotScrollEnableChkB</tabstop>
-  <tabstop>hideNameOnSplashChkB</tabstop>
   <tabstop>thrwarnChkB</tabstop>
   <tabstop>swtchWarnCB</tabstop>
   <tabstop>swtchWarnChkB</tabstop>

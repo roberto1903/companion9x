@@ -247,7 +247,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     } else {
       populateRotEncCB(ui->re_CB, g_eeGeneral.reNavigation, renumber);
     }
-
+    if (GetEepromInterface()->getCapability(PerModelThrottleInvert)) {
+      ui->label_thrrev->hide();
+      ui->thrrevChkB->hide();
+    } else {
+      ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
+    }
     ui->telalarmsChkB->setChecked(g_eeGeneral.enableTelemetryAlarm);
     ui->PotScrollEnableChkB->setChecked(!g_eeGeneral.disablePotScroll);
     ui->BandGapEnableChkB->setChecked(!g_eeGeneral.disableBG);
@@ -255,7 +260,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->battwarningDSB->setValue((double)g_eeGeneral.vBatWarn/10);
     ui->backlightautoSB->setValue(g_eeGeneral.backlightDelay*5);
     ui->inactimerSB->setValue(g_eeGeneral.inactivityTimer);
-    ui->thrrevChkB->setChecked(g_eeGeneral.throttleReversed);
+    
     ui->crosstrimChkB->setChecked(g_eeGeneral.crosstrim);
     ui->frskyintalarmChkB->setChecked(g_eeGeneral.frskyinternalalarm);
     ui->StickScrollChkB->setChecked(g_eeGeneral.stickScroll);

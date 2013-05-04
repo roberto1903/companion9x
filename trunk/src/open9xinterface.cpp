@@ -706,6 +706,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (board==BOARD_SKY9X ? true : false);
     case PerModelThrottleWarning:
       return 1;
+    case PerModelThrottleInvert:
+      return 1;
     case pmSwitchMask:
       return 1;
     case SlowScale:
