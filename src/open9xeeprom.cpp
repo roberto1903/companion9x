@@ -1347,14 +1347,17 @@ class FrskyScreenField: public DataField {
         bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMin));
         bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMax));
       }
+
       int columns=(board==BOARD_TARANIS ? 3:2);
       for (int i=0; i<4; i++) {
         for (int j=0; j<columns; j++) {
           numbers.Append(new UnsignedField<8>(_screen.body.lines[i].source[j]));
         }
       }
-      for (int i=0; i<4; i++) {
-        numbers.Append(new SpareBitsField<8>());
+      if (board != BOARD_TARANIS) {
+        for (int i=0; i<4; i++) {
+          numbers.Append(new SpareBitsField<8>());
+        }
       }
     }
 
