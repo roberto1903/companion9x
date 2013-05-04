@@ -64,6 +64,7 @@ namespace Open9xX9D {
 #include "../opentx/opentx.cpp"
 #include "../opentx/taranis/pulses_driver.cpp"
 #include "../opentx/taranis/rtc_driver.cpp"
+#include "../opentx/taranis/trainer_driver.cpp"
 #include "../opentx/pulses_arm.cpp"
 #include "../opentx/stamp.cpp"
 #include "../opentx/maths.cpp"
