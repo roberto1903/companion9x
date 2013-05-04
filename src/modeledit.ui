@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>945</width>
-    <height>835</height>
+    <height>839</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -8432,7 +8432,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>740</height>
+            <height>744</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -11865,7 +11865,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>915</width>
-            <height>726</height>
+            <height>730</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -16840,7 +16840,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>915</width>
-            <height>755</height>
+            <height>759</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -18586,9 +18586,15 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </attribute>
                  <layout class="QGridLayout" name="gridLayout_35">
                   <item row="0" column="0" colspan="2">
-                   <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0,1">
                     <item>
                      <widget class="QLabel" name="telemetryCS1Type_LABEL">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="text">
                        <string>Custom Screen Type</string>
                       </property>
@@ -18596,6 +18602,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     </item>
                     <item>
                      <widget class="QComboBox" name="telemetryCSType1">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <item>
                        <property name="text">
                         <string>Nums</string>
@@ -18963,9 +18975,15 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </attribute>
                  <layout class="QGridLayout" name="gridLayout_36">
                   <item row="0" column="0" colspan="2">
-                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,0,1">
                     <item>
                      <widget class="QLabel" name="telemetryCS2Type_LABEL">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="text">
                        <string>Custom Screen Type</string>
                       </property>
@@ -18973,6 +18991,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     </item>
                     <item>
                      <widget class="QComboBox" name="telemetryCSType2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <item>
                        <property name="text">
                         <string>Nums</string>
@@ -19340,9 +19364,15 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </attribute>
                  <layout class="QGridLayout" name="gridLayout_32">
                   <item row="0" column="0" colspan="2">
-                   <layout class="QHBoxLayout" name="horizontalLayout_9">
+                   <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,1">
                     <item>
                      <widget class="QLabel" name="telemetryCS3Type_LABEL">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="text">
                        <string>Custom Screen Type</string>
                       </property>
@@ -19350,6 +19380,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     </item>
                     <item>
                      <widget class="QComboBox" name="telemetryCSType3">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <item>
                        <property name="text">
                         <string>Nums</string>
