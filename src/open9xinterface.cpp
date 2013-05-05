@@ -1023,6 +1023,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
+  open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
   // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
@@ -1050,6 +1051,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nofp", QObject::tr("No flight modes"));
   open9x->addOption("nocurves", QObject::tr("Disable curves menus"));
   open9x->addOption("audio", QObject::tr("Support for radio modified with regular speaker"));
+  open9x->addOption("voice", QObject::tr("Used if you have modified your radio with voice mode"));
   open9x->addOption("haptic", QObject::tr("Used if you have modified your radio with haptic mode"));
   // NOT TESTED open9x->addOption("PXX", QObject::tr("Support of FrSky PXX protocol"));
   open9x->addOption("DSM2", QObject::tr("Support for DSM2 modules"));
