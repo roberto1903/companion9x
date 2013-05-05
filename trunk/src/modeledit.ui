@@ -8432,7 +8432,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>744</height>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -11864,8 +11864,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>730</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -16839,8 +16839,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>759</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -18595,6 +18595,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="text">
                        <string>Custom Screen Type</string>
                       </property>
@@ -18607,6 +18613,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>0</height>
+                       </size>
                       </property>
                       <item>
                        <property name="text">
@@ -18974,56 +18986,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   <string>Telemetry screen 2</string>
                  </attribute>
                  <layout class="QGridLayout" name="gridLayout_36">
-                  <item row="0" column="0" colspan="2">
-                   <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,0,1">
-                    <item>
-                     <widget class="QLabel" name="telemetryCS2Type_LABEL">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="text">
-                       <string>Custom Screen Type</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QComboBox" name="telemetryCSType2">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>Nums</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Bars</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_17">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </item>
                   <item row="1" column="0">
                    <widget class="QGroupBox" name="CS2Nums">
                     <layout class="QGridLayout" name="telemetryCS2Nums">
@@ -19356,6 +19318,62 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     </layout>
                    </widget>
                   </item>
+                  <item row="0" column="0" colspan="2">
+                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0,1">
+                    <item>
+                     <widget class="QLabel" name="telemetryCS2Type_LABEL">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="text">
+                       <string>Custom Screen Type</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="telemetryCSType2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Nums</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Bars</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_17">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
                  </layout>
                 </widget>
                 <widget class="QWidget" name="tab_3">
@@ -19385,6 +19403,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>0</height>
+                       </size>
                       </property>
                       <item>
                        <property name="text">
@@ -20501,7 +20525,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>telBarCS1B4_CB</tabstop>
   <tabstop>telMinCS1SB4</tabstop>
   <tabstop>telMaxCS1SB4</tabstop>
-  <tabstop>telemetryCSType2</tabstop>
   <tabstop>telemetryCS2F1_CB</tabstop>
   <tabstop>telemetryCS2F3_CB</tabstop>
   <tabstop>telBarCS2B1_CB</tabstop>
@@ -20516,7 +20539,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>telBarCS2B4_CB</tabstop>
   <tabstop>telMinCS2SB4</tabstop>
   <tabstop>telMaxCS2SB4</tabstop>
-  <tabstop>telemetryCSType3</tabstop>
   <tabstop>telemetryCS3F1_CB</tabstop>
   <tabstop>telemetryCS3F3_CB</tabstop>
   <tabstop>telBarCS3B1_CB</tabstop>
