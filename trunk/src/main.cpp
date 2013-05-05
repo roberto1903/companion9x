@@ -77,15 +77,22 @@ int main(int argc, char *argv[])
     qtTranslator.load((QString)QT_TRANSLATIONS_DIR + "/qt_" + locale);
     app.installTranslator(&companion9xTranslator);
     app.installTranslator(&qtTranslator);
-    
-    QPixmap pixmap(":/images/splash.png");
+    QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
+    firmware_id.replace("open9x","opentx");
+    firmware_id.replace("x9da","taranis");
+    QPixmap pixmap;
+    if (firmware_id.contains("taranis")) {
+      QPixmap pt(":/images/splasht.png");
+      pixmap=pt;
+    } else {
+      QPixmap pt(":/images/splash.png");
+      pixmap=pt;
+    }
     QSplashScreen *splash = new QSplashScreen(pixmap);
 
     RegisterFirmwares();
 
-    QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
-    firmware_id.replace("open9x","opentx");
-    firmware_id.replace("x9da","taranis");
+    
     settings.setValue("firmware", firmware_id);
     current_firmware_variant = GetFirmwareVariant(firmware_id);
     // qDebug() << current_firmware_variant;
