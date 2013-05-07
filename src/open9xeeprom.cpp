@@ -1660,16 +1660,16 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new CharField<10>(modelData.bitmap));
   }
 
-  if (board == BOARD_SKY9X) {
-    Append(new UnsignedField<8>(modelData.moduleData[0].channelsStart));
-    Append(new UnsignedField<8>(modelData.moduleData[1].channelsStart));
-    Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels for PPM2")));
-  }
+  int modulesCount = 2;
 
   if (board == BOARD_TARANIS) {
+    modulesCount = 3;
     Append(new UnsignedField<8>(modelData.externalModule));
     Append(new UnsignedField<8>(modelData.trainerMode));
-    for (int module=0; module<3; module++) {
+  }
+
+  if (IS_ARM(board) && version >= 215) {
+    for (int module=0; module<modulesCount; module++) {
       Append(new SignedField<8>(modelData.moduleData[module].rfProtocol));
       Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
       Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
@@ -1680,6 +1680,9 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
       Append(new SignedField<8>(modelData.moduleData[module].ppmFrameLength));
       Append(new BoolField<8>(modelData.moduleData[module].ppmPulsePol));
     }
+  }
+
+  if (board == BOARD_TARANIS) {
     for (int i=0; i<MAX_CURVES(board); i++) {
       Append(new ZCharField<6>(modelData.curves[i].name));
     }
