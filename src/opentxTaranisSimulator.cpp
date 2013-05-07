@@ -44,7 +44,6 @@
 #define BOLD_FONT
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
-
 #define EEPROM_VARIANT 3
 
 #undef min
@@ -57,28 +56,30 @@
 #include <exception>
 
 namespace Open9xX9D {
-#include "../opentx/taranis/board_taranis.cpp"
-#include "../opentx/taranis/pwr_driver.cpp"
+#include "../opentx/targets/taranis/board_taranis.cpp"
+#include "../opentx/protocols/ppm_arm.cpp"
+#include "../opentx/protocols/pxx_arm.cpp"
+#include "../opentx/targets/taranis/pwr_driver.cpp"
 #include "../opentx/eeprom_common.cpp"
 #include "../opentx/eeprom_rlc.cpp"
 #include "../opentx/opentx.cpp"
-#include "../opentx/taranis/pulses_driver.cpp"
-#include "../opentx/taranis/rtc_driver.cpp"
-#include "../opentx/taranis/trainer_driver.cpp"
-#include "../opentx/pulses_arm.cpp"
+#include "../opentx/targets/taranis/pulses_driver.cpp"
+#include "../opentx/targets/taranis/rtc_driver.cpp"
+#include "../opentx/targets/taranis/trainer_driver.cpp"
+#include "../opentx/protocols/pulses_arm.cpp"
 #include "../opentx/stamp.cpp"
 #include "../opentx/maths.cpp"
-#include "../opentx/menus.cpp"
-#include "../opentx/menu_model.cpp"
-#include "../opentx/menu_general.cpp"
-#include "../opentx/view_main.cpp"
-#include "../opentx/view_statistics.cpp"
-#include "../opentx/view_channels.cpp"
-#include "../opentx/view_telemetry.cpp"
+#include "../opentx/gui/menus.cpp"
+#include "../opentx/gui/menu_model.cpp"
+#include "../opentx/gui/menu_general.cpp"
+#include "../opentx/gui/view_main.cpp"
+#include "../opentx/gui/view_statistics.cpp"
+#include "../opentx/gui/view_channels.cpp"
+#include "../opentx/gui/view_telemetry.cpp"
 #include "../opentx/lcd.cpp"
 #include "../opentx/logs.cpp"
 #include "../opentx/rtc.cpp"
-#include "../opentx/taranis/keys_driver.cpp"
+#include "../opentx/targets/taranis/keys_driver.cpp"
 #include "../opentx/keys.cpp"
 #include "../opentx/bmp.cpp"
 // TODO why?
@@ -87,8 +88,8 @@ namespace Open9xX9D {
 #define SDCARD
 #include "../opentx/templates.cpp"
 #include "../opentx/translations.cpp"
-#include "../opentx/telemetry_frsky.cpp"
-#include "../opentx/taranis/audio_driver.cpp"
+#include "../opentx/telemetry/frsky.cpp"
+#include "../opentx/targets/taranis/audio_driver.cpp"
 #include "../opentx/audio_arm.cpp"
 #include "../opentx/translations/tts_en.cpp"
 
