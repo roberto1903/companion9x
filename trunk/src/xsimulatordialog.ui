@@ -1226,7 +1226,7 @@ QPushButton:checked {
      </property>
      <widget class="QWidget" name="simu">
       <attribute name="title">
-       <string>X9DA Simulator</string>
+       <string>Taranis Simulator</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="1">
