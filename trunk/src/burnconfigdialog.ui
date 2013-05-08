@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>531</width>
-    <height>323</height>
+    <height>335</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -561,7 +561,7 @@ Please only use this if you know what you are doing.  There are no error checks 
      <item row="3" column="0">
       <widget class="QLabel" name="label_av3">
        <property name="text">
-        <string>mcu (not used for V4)</string>
+        <string>MCU</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -714,6 +714,20 @@ Please only use this if you know what you are doing.  There are no error checks 
        </property>
        <property name="text">
         <string>Browse...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="2">
+      <widget class="QCheckBox" name="advCtrChkB">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Use advanced controls</string>
        </property>
       </widget>
      </item>

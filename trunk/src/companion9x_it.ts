@@ -5766,8 +5766,8 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="961"/>
         <location filename="open9xinterface.cpp" line="991"/>
         <location filename="open9xinterface.cpp" line="1020"/>
-        <location filename="open9xinterface.cpp" line="1047"/>
-        <location filename="open9xinterface.cpp" line="1074"/>
+        <location filename="open9xinterface.cpp" line="1048"/>
+        <location filename="open9xinterface.cpp" line="1076"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Abilita supporto menù elicotteri e miscelazione ciclico</translation>
     </message>
@@ -5775,9 +5775,9 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="962"/>
         <location filename="open9xinterface.cpp" line="992"/>
         <location filename="open9xinterface.cpp" line="1021"/>
-        <location filename="open9xinterface.cpp" line="1048"/>
-        <location filename="open9xinterface.cpp" line="1075"/>
-        <location filename="open9xinterface.cpp" line="1101"/>
+        <location filename="open9xinterface.cpp" line="1049"/>
+        <location filename="open9xinterface.cpp" line="1077"/>
+        <location filename="open9xinterface.cpp" line="1103"/>
         <source>Enable TEMPLATES menu</source>
         <translation>Abilita menù dei MODELLI</translation>
     </message>
@@ -5785,7 +5785,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="963"/>
         <location filename="open9xinterface.cpp" line="993"/>
         <location filename="open9xinterface.cpp" line="1022"/>
-        <location filename="open9xinterface.cpp" line="1049"/>
+        <location filename="open9xinterface.cpp" line="1050"/>
         <source>No splash screen</source>
         <translation>Disabilita schermata di avvio</translation>
     </message>
@@ -5793,9 +5793,9 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="964"/>
         <location filename="open9xinterface.cpp" line="994"/>
         <location filename="open9xinterface.cpp" line="1023"/>
-        <location filename="open9xinterface.cpp" line="1050"/>
-        <location filename="open9xinterface.cpp" line="1076"/>
-        <location filename="open9xinterface.cpp" line="1102"/>
+        <location filename="open9xinterface.cpp" line="1051"/>
+        <location filename="open9xinterface.cpp" line="1078"/>
+        <location filename="open9xinterface.cpp" line="1104"/>
         <source>No flight modes</source>
         <oldsource>No flight phases</oldsource>
         <translation>Disabilita supporto fasi di volo</translation>
@@ -5804,9 +5804,9 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="965"/>
         <location filename="open9xinterface.cpp" line="995"/>
         <location filename="open9xinterface.cpp" line="1024"/>
-        <location filename="open9xinterface.cpp" line="1051"/>
-        <location filename="open9xinterface.cpp" line="1077"/>
-        <location filename="open9xinterface.cpp" line="1103"/>
+        <location filename="open9xinterface.cpp" line="1052"/>
+        <location filename="open9xinterface.cpp" line="1079"/>
+        <location filename="open9xinterface.cpp" line="1105"/>
         <source>Disable curves menus</source>
         <translation>Disabilita il menu delle curve</translation>
     </message>
@@ -5814,50 +5814,52 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="966"/>
         <location filename="open9xinterface.cpp" line="996"/>
         <location filename="open9xinterface.cpp" line="1025"/>
-        <location filename="open9xinterface.cpp" line="1052"/>
+        <location filename="open9xinterface.cpp" line="1053"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Supporto per modifica con altoparlante</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="967"/>
         <location filename="open9xinterface.cpp" line="997"/>
-        <location filename="open9xinterface.cpp" line="1079"/>
+        <location filename="open9xinterface.cpp" line="1026"/>
+        <location filename="open9xinterface.cpp" line="1054"/>
+        <location filename="open9xinterface.cpp" line="1081"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Utilizzato per la gestione del modulo audio</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="968"/>
         <location filename="open9xinterface.cpp" line="998"/>
-        <location filename="open9xinterface.cpp" line="1026"/>
-        <location filename="open9xinterface.cpp" line="1053"/>
+        <location filename="open9xinterface.cpp" line="1027"/>
+        <location filename="open9xinterface.cpp" line="1055"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Abilita supporto vibrazione</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="977"/>
         <location filename="open9xinterface.cpp" line="1007"/>
-        <location filename="open9xinterface.cpp" line="1034"/>
-        <location filename="open9xinterface.cpp" line="1061"/>
-        <location filename="open9xinterface.cpp" line="1087"/>
-        <location filename="open9xinterface.cpp" line="1108"/>
+        <location filename="open9xinterface.cpp" line="1035"/>
+        <location filename="open9xinterface.cpp" line="1063"/>
+        <location filename="open9xinterface.cpp" line="1089"/>
+        <location filename="open9xinterface.cpp" line="1110"/>
         <source>In model setup menus automatically set source by moving some of them</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="981"/>
         <location filename="open9xinterface.cpp" line="1011"/>
-        <location filename="open9xinterface.cpp" line="1037"/>
-        <location filename="open9xinterface.cpp" line="1064"/>
-        <location filename="open9xinterface.cpp" line="1091"/>
-        <location filename="open9xinterface.cpp" line="1112"/>
+        <location filename="open9xinterface.cpp" line="1038"/>
+        <location filename="open9xinterface.cpp" line="1066"/>
+        <location filename="open9xinterface.cpp" line="1093"/>
+        <location filename="open9xinterface.cpp" line="1114"/>
         <source>Battery graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="983"/>
         <location filename="open9xinterface.cpp" line="1013"/>
-        <location filename="open9xinterface.cpp" line="1039"/>
-        <location filename="open9xinterface.cpp" line="1066"/>
+        <location filename="open9xinterface.cpp" line="1040"/>
+        <location filename="open9xinterface.cpp" line="1068"/>
         <source>Enable the throttle trace in Statistics</source>
         <translation>Abilita il grafico utilizzo motore nelle statistiche</translation>
     </message>
@@ -5872,84 +5874,84 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1045"/>
+        <location filename="open9xinterface.cpp" line="1046"/>
         <source>openTx for 9XR with M128 chip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1072"/>
+        <location filename="open9xinterface.cpp" line="1074"/>
         <source>openTx for Gruvin9x board / 9X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1080"/>
+        <location filename="open9xinterface.cpp" line="1082"/>
         <source>Support of FrSky PXX protocol</source>
         <translation>Supporto del protocollo PXX FrSky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1118"/>
+        <location filename="open9xinterface.cpp" line="1120"/>
         <source>openTx for FrSky Taranis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1119"/>
+        <location filename="open9xinterface.cpp" line="1121"/>
         <source>Disable HELI menu and cyclic mix support</source>
         <translation>Disabilita il menù HELI e le funzioni del piatto ciclico</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
+        <location filename="open9xinterface.cpp" line="1122"/>
         <source>Disable TEMPLATES menu</source>
         <translation>Disabilita menù dei MODELLI</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1121"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
         <source>Disable Global variables</source>
         <translation>Disabilita variabili globali</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="970"/>
         <location filename="open9xinterface.cpp" line="1000"/>
-        <location filename="open9xinterface.cpp" line="1028"/>
-        <location filename="open9xinterface.cpp" line="1055"/>
-        <location filename="open9xinterface.cpp" line="1081"/>
+        <location filename="open9xinterface.cpp" line="1029"/>
+        <location filename="open9xinterface.cpp" line="1057"/>
+        <location filename="open9xinterface.cpp" line="1083"/>
         <source>Support for DSM2 modules</source>
         <translation>Supporto per moduli DSM2</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="971"/>
         <location filename="open9xinterface.cpp" line="1001"/>
-        <location filename="open9xinterface.cpp" line="1029"/>
-        <location filename="open9xinterface.cpp" line="1056"/>
-        <location filename="open9xinterface.cpp" line="1083"/>
-        <location filename="open9xinterface.cpp" line="1104"/>
+        <location filename="open9xinterface.cpp" line="1030"/>
+        <location filename="open9xinterface.cpp" line="1058"/>
+        <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1106"/>
         <source>PPM center adjustment in limits</source>
         <translation>Regolazione del centro PPM nel menù limiti</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="972"/>
         <location filename="open9xinterface.cpp" line="1002"/>
-        <location filename="open9xinterface.cpp" line="1030"/>
-        <location filename="open9xinterface.cpp" line="1057"/>
-        <location filename="open9xinterface.cpp" line="1084"/>
-        <location filename="open9xinterface.cpp" line="1105"/>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1031"/>
+        <location filename="open9xinterface.cpp" line="1059"/>
+        <location filename="open9xinterface.cpp" line="1086"/>
+        <location filename="open9xinterface.cpp" line="1107"/>
+        <location filename="open9xinterface.cpp" line="1124"/>
         <source>PPM values displayed in us</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="974"/>
         <location filename="open9xinterface.cpp" line="1004"/>
-        <location filename="open9xinterface.cpp" line="1032"/>
-        <location filename="open9xinterface.cpp" line="1059"/>
-        <location filename="open9xinterface.cpp" line="1086"/>
-        <location filename="open9xinterface.cpp" line="1107"/>
+        <location filename="open9xinterface.cpp" line="1033"/>
+        <location filename="open9xinterface.cpp" line="1061"/>
+        <location filename="open9xinterface.cpp" line="1088"/>
+        <location filename="open9xinterface.cpp" line="1109"/>
         <source>Symetrical Limits</source>
         <translation>Limiti Simmetrici</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="956"/>
-        <location filename="open9xinterface.cpp" line="1033"/>
-        <location filename="open9xinterface.cpp" line="1060"/>
+        <location filename="open9xinterface.cpp" line="1034"/>
+        <location filename="open9xinterface.cpp" line="1062"/>
         <source>Pots use in menus navigation</source>
         <translation>Utilizzo dei potenziometri per la navigazione nei menù</translation>
     </message>
@@ -5962,76 +5964,76 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="open9xinterface.cpp" line="978"/>
         <location filename="open9xinterface.cpp" line="1008"/>
-        <location filename="open9xinterface.cpp" line="1035"/>
-        <location filename="open9xinterface.cpp" line="1062"/>
-        <location filename="open9xinterface.cpp" line="1088"/>
-        <location filename="open9xinterface.cpp" line="1109"/>
+        <location filename="open9xinterface.cpp" line="1036"/>
+        <location filename="open9xinterface.cpp" line="1064"/>
+        <location filename="open9xinterface.cpp" line="1090"/>
+        <location filename="open9xinterface.cpp" line="1111"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Selezione automatica degli switch nei menù tramite loro azionamento</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="979"/>
         <location filename="open9xinterface.cpp" line="1009"/>
-        <location filename="open9xinterface.cpp" line="1089"/>
-        <location filename="open9xinterface.cpp" line="1110"/>
+        <location filename="open9xinterface.cpp" line="1091"/>
+        <location filename="open9xinterface.cpp" line="1112"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Abilita l&apos;azzeramento di un valore mediante pressione contemporanea di tasti</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="980"/>
         <location filename="open9xinterface.cpp" line="1010"/>
-        <location filename="open9xinterface.cpp" line="1036"/>
-        <location filename="open9xinterface.cpp" line="1063"/>
-        <location filename="open9xinterface.cpp" line="1090"/>
-        <location filename="open9xinterface.cpp" line="1111"/>
+        <location filename="open9xinterface.cpp" line="1037"/>
+        <location filename="open9xinterface.cpp" line="1065"/>
+        <location filename="open9xinterface.cpp" line="1092"/>
+        <location filename="open9xinterface.cpp" line="1113"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Disabilita grafica per caselle di spunta e cursori </translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="982"/>
         <location filename="open9xinterface.cpp" line="1012"/>
-        <location filename="open9xinterface.cpp" line="1038"/>
-        <location filename="open9xinterface.cpp" line="1065"/>
-        <location filename="open9xinterface.cpp" line="1092"/>
-        <location filename="open9xinterface.cpp" line="1113"/>
+        <location filename="open9xinterface.cpp" line="1039"/>
+        <location filename="open9xinterface.cpp" line="1067"/>
+        <location filename="open9xinterface.cpp" line="1094"/>
+        <location filename="open9xinterface.cpp" line="1115"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Non utilizzare font in grassetto per evidenziare le voci attive</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="984"/>
         <location filename="open9xinterface.cpp" line="1014"/>
-        <location filename="open9xinterface.cpp" line="1040"/>
-        <location filename="open9xinterface.cpp" line="1067"/>
-        <location filename="open9xinterface.cpp" line="1093"/>
+        <location filename="open9xinterface.cpp" line="1041"/>
+        <location filename="open9xinterface.cpp" line="1069"/>
+        <location filename="open9xinterface.cpp" line="1095"/>
         <source>EEprom write Progress bar</source>
         <translation>Barra di avanzamento durante la scrittura della eeprom</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="985"/>
         <location filename="open9xinterface.cpp" line="1015"/>
-        <location filename="open9xinterface.cpp" line="1041"/>
-        <location filename="open9xinterface.cpp" line="1068"/>
-        <location filename="open9xinterface.cpp" line="1094"/>
+        <location filename="open9xinterface.cpp" line="1042"/>
+        <location filename="open9xinterface.cpp" line="1070"/>
+        <location filename="open9xinterface.cpp" line="1096"/>
         <source>Imperial units</source>
         <translation>Unità Imperiali nella telemetria</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1098"/>
+        <location filename="open9xinterface.cpp" line="1100"/>
         <source>openTx for Sky9x board / 9X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1114"/>
+        <location filename="open9xinterface.cpp" line="1116"/>
         <source>Bluetooth interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="973"/>
         <location filename="open9xinterface.cpp" line="1003"/>
-        <location filename="open9xinterface.cpp" line="1031"/>
-        <location filename="open9xinterface.cpp" line="1058"/>
-        <location filename="open9xinterface.cpp" line="1085"/>
-        <location filename="open9xinterface.cpp" line="1106"/>
+        <location filename="open9xinterface.cpp" line="1032"/>
+        <location filename="open9xinterface.cpp" line="1060"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
+        <location filename="open9xinterface.cpp" line="1108"/>
         <source>Global variables</source>
         <translation>Variabili Globali</translation>
     </message>
@@ -6044,12 +6046,12 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation type="obsolete">open9x for piastra v4.1 (gruvin9x)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1078"/>
+        <location filename="open9xinterface.cpp" line="1080"/>
         <source>Support for SD memory card</source>
         <translation>Supporto memorie SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1081"/>
+        <location filename="open9xinterface.cpp" line="1083"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Supporto per moduli DSM2 usando il ppm invece della seriale</translation>
     </message>
@@ -6062,7 +6064,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation type="obsolete">open9x per piastra ersky9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1100"/>
+        <location filename="open9xinterface.cpp" line="1102"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Abilita il menù HELI e le funzioni del piatto ciclico</translation>
     </message>
@@ -6877,9 +6879,19 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
         <translation>Porta di comunicazione per il programmatore.</translation>
     </message>
     <message>
+        <location filename="burnconfigdialog.ui" line="564"/>
+        <source>MCU</source>
+        <translation>Processore</translation>
+    </message>
+    <message>
         <location filename="burnconfigdialog.ui" line="680"/>
         <source>Alternate device</source>
         <translation>Dispositivo alternativo</translation>
+    </message>
+    <message>
+        <location filename="burnconfigdialog.ui" line="730"/>
+        <source>Use advanced controls</source>
+        <translation>Usa controlli avanzati</translation>
     </message>
     <message>
         <source>avrdoper</source>
@@ -6918,26 +6930,31 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
         <translation>Porta seriale per sam-ba</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="223"/>
-        <location filename="burnconfigdialog.cpp" line="234"/>
-        <location filename="burnconfigdialog.cpp" line="244"/>
+        <location filename="burnconfigdialog.cpp" line="219"/>
+        <location filename="burnconfigdialog.cpp" line="230"/>
+        <location filename="burnconfigdialog.cpp" line="240"/>
         <source>Select Location</source>
         <translation>Seleziona eseguibile</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="311"/>
+        <location filename="burnconfigdialog.cpp" line="307"/>
+        <location filename="burnconfigdialog.cpp" line="376"/>
         <source>companion9x</source>
         <translation>companion9x</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="312"/>
+        <location filename="burnconfigdialog.cpp" line="308"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
         <translation>&lt;b&gt;&lt;u&gt;ATTENZIONE!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Questa operazione ripristinerà i fuse del processore %1 ai valori di fabbrica.&lt;br&gt;Modificare i fuse pruo bloccare la radio.&lt;br&gt;Fatelo solo se siete assolutamente sicuri che siano sbagliati&lt;br&gt;sicuri di voler continuare ?</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.ui" line="564"/>
+        <location filename="burnconfigdialog.cpp" line="377"/>
+        <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normally CPU type is automatically selected according to the chosen firmware.&lt;br&gt;If you change the CPU type the resulting eeprom could be inconsistent.</source>
+        <translation>&lt;b&gt;&lt;u&gt;Attenzione!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normalmente il processore viene selezionato automaticamente in base al firmware scelto.&lt;br&gt;Se cambiate il tipo di processore la EEPROM potrebbe risultare incoerente.</translation>
+    </message>
+    <message>
         <source>mcu (not used for V4)</source>
-        <translation>mcu (non usata per V4)</translation>
+        <translation type="obsolete">mcu (non usata per V4)</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="574"/>

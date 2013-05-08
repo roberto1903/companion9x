@@ -21,57 +21,53 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
     if (eepromInterface->getBoard()==BOARD_TARANIS) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
-      ui->avrdude_mcu->hide();
       ui->avrdude_port->hide();
       ui->avrdude_programmer->hide();
       ui->label_av1->hide();
       ui->label_av2->hide();
-      ui->label_av3->hide();
       ui->label_av4->hide();
       ui->label_av5->hide();
       ui->pushButton->hide();
       ui->pushButton_3->hide();
       ui->pushButton_4->hide();
       ui->label_sb1->hide();
-      ui->label_sb2->hide();
       ui->label_sb3->hide();
-      ui->arm_mcu->hide();
       ui->samba_location->hide();
       ui->samba_port->hide();      
       ui->sb_browse->hide();
     } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
-      ui->avrdude_mcu->hide();
       ui->avrdude_port->hide();
       ui->avrdude_programmer->hide();
       ui->label_av1->hide();
       ui->label_av2->hide();
-      ui->label_av3->hide();
       ui->label_av4->hide();
       ui->label_av5->hide();
       ui->pushButton->hide();
       ui->pushButton_3->hide();
       ui->pushButton_4->hide();
       ui->label_dfu1->hide();
-      ui->label_dfu2->hide();
       ui->dfu_location->hide();
-      ui->dfuArgs->hide();
       ui->dfu_browse->hide();
     } else {
       ui->label_sb1->hide();
-      ui->label_sb2->hide();
       ui->label_sb3->hide();
-      ui->arm_mcu->hide();
       ui->samba_location->hide();
       ui->samba_port->hide();
       ui->sb_browse->hide();
       ui->label_dfu1->hide();
       ui->label_dfu2->hide();
       ui->dfu_location->hide();
-      ui->dfuArgs->hide();
       ui->dfu_browse->hide();
     }
+    ui->label_av3->hide();
+    ui->avrdude_mcu->hide();
+    ui->label_sb2->hide();
+    ui->arm_mcu->hide();
+    ui->label_dfu2->hide();
+    ui->dfuArgs->hide();
+
     QTimer::singleShot(0, this, SLOT(shrink()));
     connect(this,SIGNAL(accepted()),this,SLOT(putSettings()));
 }
@@ -364,9 +360,42 @@ void burnConfigDialog::restFuses(bool eeProtect)
 
 }
 
+void burnConfigDialog::on_advCtrChkB_toggled(bool checked)
+{
+  EEPROMInterface *eepromInterface = GetEepromInterface();
+  if (checked) {
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      ui->label_dfu2->show();
+      ui->dfuArgs->show();
+    } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
+      ui->label_sb2->show();
+      ui->arm_mcu->show();
+    } else {
+      ui->label_av3->show();
+      ui->avrdude_mcu->show();
+      QMessageBox::warning(this, tr("companion9x"),
+        tr("<b><u>WARNING!</u></b><br>Normally CPU type is automatically selected according to the chosen firmware.<br>If you change the CPU type the resulting eeprom could be inconsistent."),
+        QMessageBox::Ok);
+    }
+  } else {
+    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      ui->label_dfu2->hide();
+      ui->dfuArgs->hide();
+    } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
+      ui->label_sb2->hide();
+      ui->arm_mcu->hide();
+    } else {
+      ui->label_av3->hide();
+      ui->avrdude_mcu->hide();
+    }
+  }
+  QTimer::singleShot(0, this, SLOT(shrink()));
+}
+
+
 void burnConfigDialog::shrink()
 {
-    resize(0,0);
+  resize(0,0);
 }
 
 
