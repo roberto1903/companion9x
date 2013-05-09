@@ -100,10 +100,11 @@ downloadDialog_forWait(NULL)
     updateMenus();
 
     readSettings();
+    FirmwareInfo *firmware = GetCurrentFirmware();
     if (ActiveProfile) {
-      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(firmware->name).arg(ActiveProfileName));
     } else {
-      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(firmware->name));
     }
     setUnifiedTitleAndToolBarOnMac(true);
     this->setWindowIcon(QIcon(":/icon.png"));
@@ -621,13 +622,14 @@ void MainWindow::loadProfile()
     settings.setValue("firmware", firmware_id);
     settings.setValue("profileId", profnum);
     current_firmware_variant = GetFirmwareVariant(firmware_id);
-    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    FirmwareInfo *firmware = GetCurrentFirmware();    
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(firmware->name));
     // settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
     foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
       mdiChild->eepromInterfaceChanged();
     }
-    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(firmware->name).arg(ActiveProfileName));
   }
 }
 
@@ -637,18 +639,19 @@ void MainWindow::unloadProfile()
     ActiveProfileName="";
     QSettings settings("companion9x", "companion9x");
     settings.setValue("ActiveProfile",0);
-    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+    FirmwareInfo *firmware = GetCurrentFirmware();    
+    setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(firmware->name));
 }
 
 void MainWindow::preferences()
 {
     preferencesDialog *pd = new preferencesDialog(this);
     pd->exec();
-
+    FirmwareInfo *firmware = GetCurrentFirmware();    
     if (ActiveProfile) {
-      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(GetEepromInterface()->getName()).arg(ActiveProfileName));
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1 - profile %2").arg(firmware->name).arg(ActiveProfileName));
     } else {
-      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(GetEepromInterface()->getName()));
+      setWindowTitle(tr("companion9x - EEPROM Editor - firmware %1").arg(firmware->name));
     }
 
     foreach (QMdiSubWindow *window, mdiArea->subWindowList()) {
