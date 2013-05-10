@@ -809,7 +809,7 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   int scale=GetEepromInterface()->getCapability(SlowScale);
   float range=GetEepromInterface()->getCapability(SlowRange);
   int fades=GetEepromInterface()->getCapability(FlightPhasesHaveFades);
-  if (fades) {
+  if (fades && fadeIn) {
     fadeIn->setEnabled(true);
     fadeOut->setEnabled(true);
     fadeIn->setMaximum(range/scale);
@@ -824,7 +824,7 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
     if (fadeOut) {
       fadeOut->setValue((double)phase->fadeOut/scale);
     }
-  } else {
+  } else if ( fadeIn ) {
     fadeIn->setDisabled(true);
     fadeOut->setDisabled(true);
   }
