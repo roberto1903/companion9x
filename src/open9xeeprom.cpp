@@ -1791,7 +1791,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
       internalField.Append(new UnsignedField<8>(generalData.imperial)); // TODO
     }
     if (version >= 215) {
-      internalField.Append(new ZCharField<2>(generalData.ttsLanguage)); // TODO
+      internalField.Append(new CharField<2>(generalData.ttsLanguage)); // TODO
     }
   }
 }
