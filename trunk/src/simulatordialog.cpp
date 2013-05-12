@@ -99,7 +99,8 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
         joystick = new Joystick(this);
         if (joystick) {
           if (joystick->open(js_ctrl)) {
-            for (int j=0; j<joystick->numAxes; j++) {
+            int numAxes=std::min(joystick->numAxes,8);
+            for (int j=0; j<numAxes; j++) {
                 joystick->sensitivities[j] = 0;
                 joystick->deadzones[j]=0;
             }
