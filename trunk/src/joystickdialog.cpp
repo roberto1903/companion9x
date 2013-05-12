@@ -41,10 +41,11 @@ void joystickDialog::joystickOpen(int stick) {
     return;
   }
   joystick = new Joystick(this, 1, false, 0);
-
+  int numAxes=std::min(joystick->numAxes,8);
   if (joystick) {
     joystick->open(stick);
-    for (int j=0; j<joystick->numAxes; j++) {
+    
+    for (int j=0; j<numAxes; j++) {
         joystick->sensitivities[j] = 0;
         joystick->deadzones[j]=20;
     }
@@ -75,13 +76,14 @@ void joystickDialog::onjoystickAxisValueChanged(int axis, int value) {
 }
 
 void joystickDialog::on_nextButton_clicked() {
+  int numAxes=std::min(joystick->numAxes,8);
   switch (step) {
     case 0:
       ui->howtoLabel->setText(tr("Place sticks and pots in middle position.\nPress next when done"));
       step++;
       break;
     case 1:
-      for (int i=0; i< joystick->numAxes; i++) {
+      for (int i=0; i<numAxes; i++) {
         jscal[i][1]=0;
         for (int j=0; j<100;j++) {
           jscal[i][1]+=joystick->getAxisValue(i);
@@ -100,7 +102,6 @@ void joystickDialog::on_nextButton_clicked() {
       foreach(QCheckBox *ib, findChildren<QCheckBox *>(QRegExp("ChInv_[0-9]+"))) {
         ib->setEnabled(true);
       }
-
       break;
     case 3:
       ui->howtoLabel->setText(tr("Press ok to save configuration\nPress cancel to abort joystick calibration"));
