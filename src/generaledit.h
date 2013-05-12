@@ -23,6 +23,7 @@ private:
     GeneralSettings g_eeGeneral;
 
     bool switchDefPosEditLock;
+    bool voiceLangEditLock;
     void getGeneralSwitchDefPos(int i, bool val);
     void setSwitchDefPos();
     

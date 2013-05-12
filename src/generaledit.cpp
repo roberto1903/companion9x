@@ -55,7 +55,9 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->VoiceLang_label->hide();
       ui->voiceLang_CB->hide();
     } else {
+      voiceLangEditLock=true;
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
+      voiceLangEditLock=false;
     }
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
@@ -434,6 +436,8 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
 
 void GeneralEdit::on_voiceLang_CB_currentIndexChanged(int index)
 {
+  if (voiceLangEditLock)
+    return;
   QString code=ui->voiceLang_CB->itemData(index).toString();
   for (int i=0; i<2; i++) {
     g_eeGeneral.ttsLanguage[i]=code.at(i).toAscii();
