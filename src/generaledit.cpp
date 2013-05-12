@@ -51,6 +51,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     switchDefPosEditLock=true;
     populateBacklightCB(ui->backlightswCB, g_eeGeneral.backlightMode);
     bool voice=current_firmware_variant.id.contains("voice");
+    if (!GetEepromInterface()->getCapability(MultiLangVoice)) {
+      ui->VoiceLang_label->hide();
+      ui->voiceLang_CB->hide();
+    } else {
+      populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
+    }
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
       ui->blinvert_label->hide();
@@ -423,6 +429,16 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
   if (switchDefPosEditLock)
     return;
   g_eeGeneral.backlightMode = ui->backlightswCB->currentIndex();
+  updateSettings();
+}
+
+void GeneralEdit::on_voiceLang_CB_currentIndexChanged(int index)
+{
+  QString code=ui->voiceLang_CB->itemData(index).toString();
+  for (int i=0; i<2; i++) {
+    g_eeGeneral.ttsLanguage[i]=code.at(i).toAscii();
+  }
+  g_eeGeneral.ttsLanguage[2]=0;
   updateSettings();
 }
 

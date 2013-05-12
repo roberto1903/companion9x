@@ -122,6 +122,7 @@ private slots:
     void on_inactimerSB_editingFinished();
     void on_backlightautoSB_editingFinished();
     void on_backlightswCB_currentIndexChanged(int index);
+    void on_voiceLang_CB_currentIndexChanged(int index);
     void on_blOnStickMoveSB_editingFinished();
     void on_battcalibDSB_editingFinished();
     void on_battwarningDSB_editingFinished();

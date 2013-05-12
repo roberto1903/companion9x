@@ -91,8 +91,15 @@ namespace Open9xX9D {
 #include "../opentx/telemetry/frsky.cpp"
 #include "../opentx/targets/taranis/audio_driver.cpp"
 #include "../opentx/audio_arm.cpp"
+#include "../opentx/translations/tts_cz.cpp"
+#include "../opentx/translations/tts_de.cpp"
 #include "../opentx/translations/tts_en.cpp"
-
+#include "../opentx/translations/tts_es.cpp"
+#include "../opentx/translations/tts_it.cpp"
+#include "../opentx/translations/tts_fr.cpp"
+#include "../opentx/translations/tts_pt.cpp"
+#include "../opentx/translations/tts_sk.cpp"
+  
 int16_t g_anas[NUM_STICKS+BOARD_X9D_NUM_POTS];
 
 uint16_t anaIn(uint8_t chan)

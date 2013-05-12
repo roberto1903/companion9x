@@ -33,6 +33,20 @@ void populateGvSourceCB(QComboBox *b, int value)
   b->setCurrentIndex(value);
 }
 
+void populateVoiceLangCB(QComboBox *b, QString language)
+{
+  QString strings[] = { QObject::tr("English"), QObject::tr("French"), QObject::tr("Italian"), QObject::tr("German"), QObject::tr("Czech"), QObject::tr("Slovak"), QObject::tr("Spanish"), QObject::tr("Portuguese"), NULL};
+  QString langcode[] = { "en", "fr", "it", "de", "cz", "sk", "es", "pt", NULL};
+  
+  b->clear();
+  for (int i=0; strings[i]!=NULL; i++) {
+    b->addItem(strings[i],langcode[i]);
+    if (language==langcode[i]) {
+      b->setCurrentIndex(b->count()-1);
+    }
+  }
+}
+
 void populateTTraceCB(QComboBox *b, int value)
 {
   QString strings9x[] = { QObject::tr("THR"), QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")};
