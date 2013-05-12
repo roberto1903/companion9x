@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>418</width>
-    <height>299</height>
+    <height>301</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -114,7 +114,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -171,7 +176,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -246,7 +256,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -342,7 +357,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -417,7 +437,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -492,7 +517,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -581,7 +611,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
@@ -663,7 +698,12 @@
          </item>
          <item>
           <property name="text">
-           <string>P3</string>
+           <string>P3/LS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RS</string>
           </property>
          </item>
         </widget>
