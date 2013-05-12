@@ -594,6 +594,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? 512 : 104);
     case VoicesAsNumbers:
       return (IS_ARM(board) ? 0 : 1);
+    case MultiLangVoice:
+      return (IS_ARM(board) ? 1 : 0);
     case SoundPitch:
       return 1;
     case Haptic:

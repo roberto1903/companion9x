@@ -440,6 +440,7 @@ class GeneralSettings {
     unsigned int countryCode;
     unsigned int imperial;
     bool crosstrim;
+    char ttsLanguage[2+1];
 };
 
 class ExpoData {
@@ -846,6 +847,7 @@ enum Capability {
  CustomFunctions,
  VoicesAsNumbers,
  ModelVoice,
+ MultiLangVoice,
  InstantTrimSW,
  Pots,
  Switches,

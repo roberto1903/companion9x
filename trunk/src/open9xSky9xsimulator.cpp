@@ -96,8 +96,15 @@ namespace Open9xSky9x {
 #include "../opentx/targets/sky9x/sdcard_driver.cpp"
 #include "../opentx/targets/sky9x/coproc_driver.cpp"
 #include "../opentx/targets/sky9x/haptic_driver.cpp"
-#include "../opentx/translations/tts_en.cpp"
 #include "../opentx/haptic.cpp"
+#include "../opentx/translations/tts_cz.cpp"
+#include "../opentx/translations/tts_de.cpp"
+#include "../opentx/translations/tts_en.cpp"
+#include "../opentx/translations/tts_es.cpp"
+#include "../opentx/translations/tts_it.cpp"
+#include "../opentx/translations/tts_fr.cpp"
+#include "../opentx/translations/tts_pt.cpp"
+#include "../opentx/translations/tts_sk.cpp"
 
 int16_t g_anas[NUM_STICKS+BOARD_9X_NUM_POTS];
 

@@ -1789,6 +1789,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
       internalField.Append(new UnsignedField<8>(generalData.rotarySteps)); // TODO
       internalField.Append(new UnsignedField<8>(generalData.countryCode)); // TODO
       internalField.Append(new UnsignedField<8>(generalData.imperial)); // TODO
+      internalField.Append(new ZCharField<2>(generalData.ttsLanguage)); // TODO
     }
   }
 }
