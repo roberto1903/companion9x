@@ -419,22 +419,26 @@ class PhaseField: public TransformedField {
 };
 
 
-int smallGvarToEEPROM(int gvar) {
-    if (gvar < -10000) {
-      gvar = 128 + gvar + 10000;
-    } else if (gvar > 10000) {
-      gvar = -128+gvar - 10001;
-    }
-	return gvar;
+int smallGvarToEEPROM(int gvar)
+{
+  if (gvar < -10000) {
+    gvar = 128 + gvar + 10000;
+  }
+  else if (gvar > 10000) {
+    gvar = -128 +gvar - 10001;
+  }
+  return gvar;
 }
 
-int smallGvarToC9x(int gvar) {
-    if (gvar>110) {
-        gvar = gvar-128 - 10000;
-    } else if (gvar<-110) {
-        gvar = gvar+128 + 10001;
-    }
-	return gvar;
+int smallGvarToC9x(int gvar)
+{
+  if (gvar>110) {
+    gvar = gvar-128 - 10000;
+  }
+  else if (gvar<-110) {
+    gvar = gvar+128 + 10001;
+  }
+  return gvar;
 }
 
 
@@ -517,8 +521,8 @@ void importGvarParam(int & gvar, const int _gvar)
   if (_gvar >= 1024) {
     gvar = 10001 + _gvar - 1024;
   }
-  else if (gvar >= 1019) {
-    gvar = -10001 + 1019 - _gvar;
+  else if (_gvar >= 1019) {
+    gvar = -10000 + _gvar - 1024;
   }
   else {
     gvar = _gvar;
@@ -691,7 +695,7 @@ class ExpoField: public TransformedField {
         internalField.Append(new UnsignedField<8>(expo.chn));
         internalField.Append(new SwitchField<8>(expo.swtch, board, version));
         internalField.Append(new UnsignedField<16>(expo.phases));
-        internalField.Append(new SignedField<8>(expo.weight));
+        internalField.Append(new SignedField<8>(_weight));
         internalField.Append(new BoolField<8>(_curveMode));
         if (HAS_LARGE_LCD(board))
           internalField.Append(new ZCharField<10>(expo.name));
@@ -723,19 +727,19 @@ class ExpoField: public TransformedField {
     virtual void beforeExport()
     {
       _curveMode = (expo.curveMode && expo.curveParam);
+      _weight    = smallGvarToEEPROM(expo.weight);
       if (!IS_ARM(board)) {
-	    _weight    =smallGvarToEEPROM(expo.weight);
-	    _curveParam=smallGvarToEEPROM(expo.curveParam);
-      }//endif
+        _curveParam = smallGvarToEEPROM(expo.curveParam);
+      }
     }
 
     virtual void afterImport()
     {
       expo.curveMode  = _curveMode;
+      expo.weight     = smallGvarToC9x(_weight);
       if (!IS_ARM(board)) {
-        expo.weight     = smallGvarToC9x(_weight);
         expo.curveParam = smallGvarToC9x(_curveParam);
-      }//endif
+      }
     }
 
   protected:
@@ -743,8 +747,8 @@ class ExpoField: public TransformedField {
     ExpoData & expo;
     BoardEnum board;
     bool _curveMode;
-	int  _weight;
-	int  _curveParam;
+    int  _weight;
+    int  _curveParam;
 };
 
 class LimitField: public StructField {
