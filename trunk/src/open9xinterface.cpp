@@ -542,7 +542,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case Mixes:
       return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
     case OffsetWeight:
-      return (IS_ARM(board) ? 501 : 245);
+      return (IS_ARM(board) ? 500 : 245);
     case Timers:
       return 2;
     case PermTimers:

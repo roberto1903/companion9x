@@ -813,14 +813,15 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->setMaxVisibleItems(10);
 }
 
-void populateGVarCB(QComboBox *b, int value, int min, int max,int pgvars)
+void populateGVarCB(QComboBox *b, int value, int min, int max, int pgvars)
 {
   int gvars=0;
   if (GetEepromInterface()->getCapability(HasVariants)) {
     if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) & (pgvars>0)) {
       gvars=1;
     }
-  } else {
+  }
+  else {
     if (pgvars>0)
       gvars=1;
   }
@@ -836,9 +837,9 @@ void populateGVarCB(QComboBox *b, int value, int min, int max,int pgvars)
 //		  QVariant v(0);
 //		  b->model()->setData(index, v, Qt::UserRole - 1);        
 //		}
-		if (value == gval)
-		  b->setCurrentIndex(b->count()-1);
-	  }
+      if (value == gval)
+        b->setCurrentIndex(b->count()-1);
+    }
   }//endif gvars
   for (int i=min; i<=max; i++) {
     b->addItem(QString::number(i, 10), i);
