@@ -912,7 +912,7 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
         }
       }
       else {
-        for (int i=1; i<=8; i++) {
+        for (int i=1; i<=9; i++) {
           int s = switchIndex(i, board, version);
           addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
         }
