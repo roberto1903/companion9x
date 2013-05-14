@@ -31,6 +31,9 @@
 #define FRSKY
 #define FRSKY_HUB
 #define WS_HOW_HIGH
+#define PXX
+#define DSM2
+#define DSM2_PPM
 #define VARIO
 #define HAPTIC
 #define AUTOSWITCH

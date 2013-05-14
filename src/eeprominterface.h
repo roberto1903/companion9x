@@ -854,6 +854,7 @@ enum Capability {
  SwitchesPositions,
  CustomSwitches,
  CustomAndSwitches,
+ HasNegAndSwitches,
  CustomSwitchesExt,
  RotaryEncoders,
  Outputs,

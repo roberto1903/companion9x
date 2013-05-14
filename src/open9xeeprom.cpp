@@ -1134,7 +1134,7 @@ class CustomFunctionField: public TransformedField {
 
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
-        internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
+        internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("OpenTX on this board doesn't accept this function")));
         if (board == BOARD_TARANIS)
           internalField.Append(new CharField<10>(_arm_param));
         else
@@ -1152,10 +1152,10 @@ class CustomFunctionField: public TransformedField {
       else {
         if (version >= 213) {
           internalField.Append(new UnsignedField<3>(_union_param));
-          internalField.Append(new ConversionField< UnsignedField<5> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
+          internalField.Append(new ConversionField< UnsignedField<5> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("OpenTX on this board doesn't accept this function")));
         }
         else {
-          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("Open9x on this board doesn't accept this function")));
+          internalField.Append(new ConversionField< UnsignedField<7> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("OpenTX on this board doesn't accept this function")));
           internalField.Append(new BoolField<1>((bool &)fn.enabled));
         }
         internalField.Append(new UnsignedField<8>(_param));
@@ -1591,14 +1591,14 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (board == BOARD_TARANIS)
     Append(new SpareBitsField<3>());
   else
-    Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("Open9x doesn't accept this protocol")));
+    Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("OpenTX doesn't accept this protocol")));
 
   Append(new BoolField<1>(modelData.thrTrim));
 
   if (board == BOARD_TARANIS)
     Append(new SpareBitsField<4>());
   else
-    Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("Open9x doesn't allow this number of channels")));
+    Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("OpenTX doesn't allow this number of channels")));
 
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
@@ -1786,16 +1786,16 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
       internalField.Append(new SpareBitsField<32>()); // globalTimer
       internalField.Append(new SignedField<8>(generalData.temperatureCalib)); // TODO
       internalField.Append(new UnsignedField<8>(generalData.btBaudrate)); // TODO
-      internalField.Append(new BoolField<8>(generalData.optrexDisplay)); // TODO
+      internalField.Append(new BoolField<8>(generalData.optrexDisplay)); //TODO
       internalField.Append(new UnsignedField<8>(generalData.sticksGain)); // TODO
     }
     if (version >= 214) {
       internalField.Append(new UnsignedField<8>(generalData.rotarySteps)); // TODO
-      internalField.Append(new UnsignedField<8>(generalData.countryCode)); // TODO
-      internalField.Append(new UnsignedField<8>(generalData.imperial)); // TODO
+      internalField.Append(new UnsignedField<8>(generalData.countryCode));
+      internalField.Append(new UnsignedField<8>(generalData.imperial));
     }
     if (version >= 215) {
-      internalField.Append(new CharField<2>(generalData.ttsLanguage)); // TODO
+      internalField.Append(new CharField<2>(generalData.ttsLanguage));
     }
   }
 }

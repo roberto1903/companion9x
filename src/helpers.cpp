@@ -705,6 +705,20 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->clear();
 
   if (attr & POPULATE_AND_SWITCHES) {
+    if (GetEepromInterface()->getCapability(HasNegAndSwitches)) {
+      for (int i=-GetEepromInterface()->getCapability(CustomAndSwitches); i<=1; i++) {
+        item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
+      for (int i=-GetEepromInterface()->getCapability(SwitchesPositions); i<=1; i++) {
+        item = RawSwitch(SWITCH_TYPE_SWITCH, i);
+        if (GetEepromInterface()->isAvailable(item, context)) {
+          b->addItem(item.toString(), item.toValue());
+          if (item == value) b->setCurrentIndex(b->count()-1);
+        }
+      }
+    }
     item = RawSwitch(SWITCH_TYPE_NONE);
     if (GetEepromInterface()->isAvailable(item, context)) {
       b->addItem(item.toString(), item.toValue());
@@ -1304,5 +1318,6 @@ QString getCenterBeep(ModelData * g_model)
   if(g_model->beepANACenter & 0x10) strl << "P1";
   if(g_model->beepANACenter & 0x20) strl << "P2";
   if(g_model->beepANACenter & 0x40) strl << "P3";
+  if(g_model->beepANACenter & 0x80) strl << "LS";
   return strl.join(", ");
 }
