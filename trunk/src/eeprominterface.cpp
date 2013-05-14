@@ -372,27 +372,27 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
     case SWITCH_TYPE_ONM:
-      return QObject::tr("mON");
+      return QObject::tr("ONE");
     case SWITCH_TYPE_OFF:
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
       // TODO assert(index != 0);
       if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
-        return index > 0 ? QString("m") + CHECK_IN_ARRAY(switchesX9D, index-1) : QString("!m") + CHECK_IN_ARRAY(switchesX9D, -index-1);
+        return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1)+QString("t")  : QString("!") + CHECK_IN_ARRAY(switchesX9D, -index-1)+QString("t");
       else
-        return index > 0 ? QString("m") + CHECK_IN_ARRAY(switches9X, index-1) : QString("!m") + CHECK_IN_ARRAY(switches9X, -index-1);
+        return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1)+QString("t") : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1)+QString("t");
     case SWITCH_TYPE_MOMENT_VIRTUAL:
     {
-      QString neg = QString("m");
+      QString neg = QString("");
       int ind=index;
       if (index < 0) {
-        neg = QString("!m"); 
+        neg = QString("!"); 
         ind = -index;
       }
       if (ind < 10)
-        return neg+QObject::tr("CS%1").arg(ind);
+        return neg+QObject::tr("CS%1t").arg(ind);
       else
-        return neg+QObject::tr("CS%1").arg(QChar('A'+ind-10));
+        return neg+QObject::tr("CS%1t").arg(QChar('A'+ind-10));
     }
     default:
       return QObject::tr("----");

@@ -509,11 +509,13 @@ int Open9xInterface::getCapability(const Capability capability)
       else
         return 0;
     case HasPxxCountry:
-      if (board == BOARD_TARANIS)
+      return 1;
+    case HasGeneralUnits:
+      if (IS_ARM(board))
         return 1;
       else
         return 0;
-    case HasGeneralUnits:
+    case HasNegAndSwitches:
       if (IS_ARM(board))
         return 1;
       else
