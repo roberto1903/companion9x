@@ -508,6 +508,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return 1;
       else
         return 0;
+    case HasBeeper:
+      if (IS_ARM(board))
+        return 0;
+      else
+        return 1;
     case HasPxxCountry:
       return 1;
     case HasGeneralUnits:
