@@ -321,6 +321,18 @@ int RawSwitch::toValue()
   return index >= 0 ? (type * 256 + index) : -(type * 256 - index);
 }
 
+QString SwitchUp(const char sw)
+{
+  const char result[] = {'S', sw, (char)0xE2, (char)0x86, (char)0x91, 0};
+  return QString::fromUtf8(result);
+}
+
+QString SwitchDn(const char sw)
+{
+  const char result[] = {'S', sw, (char)0xE2, (char)0x86, (char)0x93, 0};
+  return QString::fromUtf8(result);
+}
+
 QString RawSwitch::toString()
 {
   QString switches9X[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
@@ -328,27 +340,15 @@ QString RawSwitch::toString()
                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
                          };
 
-#if defined(WIN32) || !defined(__GNUC__)
-  QString switchesX9D[] = { QObject::tr("SAup"), QObject::tr("SA-"), QObject::tr("SAdown"),
-                            QObject::tr("SBup"), QObject::tr("SB-"), QObject::tr("SBdown"),
-                            QObject::tr("SCup"), QObject::tr("SC-"), QObject::tr("SCdown"),
-                            QObject::tr("SDup"), QObject::tr("SD-"), QObject::tr("SDdown"),
-                            QObject::tr("SEup"), QObject::tr("SE-"), QObject::tr("SEdown"),
-                            QObject::tr("SFup"), QObject::tr("SFdown"),
-                            QObject::tr("SGup"), QObject::tr("SG-"), QObject::tr("SGdown"),
-                            QObject::tr("SHup"), QObject::tr("SHdown"),
+  QString switchesX9D[] = { SwitchUp('A'), QString::fromUtf8("SA-"), SwitchDn('A'),
+                            SwitchUp('B'), QString::fromUtf8("SB-"), SwitchDn('B'),
+                            SwitchUp('C'), QString::fromUtf8("SC-"), SwitchDn('C'),
+                            SwitchUp('D'), QString::fromUtf8("SD-"), SwitchDn('D'),
+                            SwitchUp('E'), QString::fromUtf8("SE-"), SwitchDn('E'),
+                            SwitchUp('F'), SwitchDn('F'),
+                            SwitchUp('G'), QString::fromUtf8("SG-"), SwitchDn('G'),
+                            SwitchUp('H'), SwitchDn('H'),
                           };
-#else
-  QString switchesX9D[] = { QString::fromUtf8("SA\u2191"), QString::fromUtf8("SA-"), QString::fromUtf8("SA\u2193"),
-                            QString::fromUtf8("SB\u2191"), QString::fromUtf8("SB-"), QString::fromUtf8("SB\u2193"),
-                            QString::fromUtf8("SC\u2191"), QString::fromUtf8("SC-"), QString::fromUtf8("SC\u2193"),
-                            QString::fromUtf8("SD\u2191"), QString::fromUtf8("SD-"), QString::fromUtf8("SD\u2193"),
-                            QString::fromUtf8("SE\u2191"), QString::fromUtf8("SE-"), QString::fromUtf8("SE\u2193"),
-                            QString::fromUtf8("SF\u2191"), QString::fromUtf8("SF\u2193"),
-                            QString::fromUtf8("SG\u2191"), QString::fromUtf8("SG-"), QString::fromUtf8("SG\u2193"),
-                            QString::fromUtf8("SH\u2191"), QString::fromUtf8("SH\u2193"),
-                          };
-#endif
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
