@@ -93,7 +93,7 @@ class DataField {
 template<int N>
 class UnsignedField: public DataField {
   public:
-    UnsignedField(unsigned int & field):
+    explicit UnsignedField(unsigned int & field):
       DataField("Unsigned"),
       field(field),
       min(0),
@@ -148,6 +148,9 @@ class UnsignedField: public DataField {
     unsigned int & field;
     unsigned int min;
     unsigned int max;
+
+  private:
+    UnsignedField();
 };
 
 template<int N>
