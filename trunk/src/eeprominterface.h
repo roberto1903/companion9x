@@ -884,6 +884,7 @@ enum Capability {
  HapticLength,
  HapticMode,
  HasBlInvert,
+ HasBeeper,
  BandgapMeasure,
  PotScrolling,
  TrainerSwitch,

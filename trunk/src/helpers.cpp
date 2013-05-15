@@ -285,6 +285,11 @@ void populateFuncCB(QComboBox *b, unsigned int value)
       QVariant v(0);
       b->model()->setData(index, v, Qt::UserRole - 1);      
     }
+    if ((i==FuncPlayBoth) && !GetEepromInterface()->getCapability(HasBeeper)) {
+      QModelIndex index = b->model()->index(i, 0);
+      QVariant v(0);
+      b->model()->setData(index, v, Qt::UserRole - 1);      
+    }
     if ((i==FuncLogs) && !GetEepromInterface()->getCapability(HasSDLogs)) {
       QModelIndex index = b->model()->index(i, 0);
       QVariant v(0);
