@@ -253,26 +253,26 @@ double RawSource::getStep(const ModelData & Model)
 
 QString RawSource::toString()
 {
-  QString sticks[]      = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail") };
+  static const QString sticks[]      = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail") };
 
-  QString trims[]       = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
+  static const QString trims[]       = { QObject::tr("TrmR"), QObject::tr("TrmE"), QObject::tr("TrmT"), QObject::tr("TrmA")};
 
-  QString pots9X[]      = { QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3") };
+  static const QString pots9X[]      = { QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3") };
 
-  QString potsX9D[]     = { QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS") };
+  static const QString potsX9D[]     = { QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS") };
 
-  QString rotary[]      = { QObject::tr("REa"), QObject::tr("REb") };
+  static const QString rotary[]      = { QObject::tr("REa"), QObject::tr("REb") };
 
-  QString switches9X[]  = { QObject::tr("3POS"),
+  static const QString switches9X[]  = { QObject::tr("3POS"),
                             QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
                             QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN"),
                           };
 
-  QString switchesX9D[] = { QObject::tr("SA"), QObject::tr("SB"), QObject::tr("SC"), QObject::tr("SD"),
+  static const QString switchesX9D[] = { QObject::tr("SA"), QObject::tr("SB"), QObject::tr("SC"), QObject::tr("SD"),
                             QObject::tr("SE"), QObject::tr("SF"), QObject::tr("SG"), QObject::tr("SH"),
                           };
 
-  QString telemetry[]   = { QObject::tr("Batt"), QObject::tr("Timer1"), QObject::tr("Timer2"),
+  static const QString telemetry[]   = { QObject::tr("Batt"), QObject::tr("Timer1"), QObject::tr("Timer2"),
                             QObject::tr("Tx"), QObject::tr("Rx"), QObject::tr("A1"), QObject::tr("A2"), QObject::tr("Alt"), QObject::tr("Rpm"), QObject::tr("Fuel"), QObject::tr("T1"),
                             QObject::tr("T2"), QObject::tr("Speed"), QObject::tr("Dist"), QObject::tr("GPS Alt"), QObject::tr("Cell"), QObject::tr("Cels"), QObject::tr("Vfas"), QObject::tr("Curr"),
                             QObject::tr("Cnsp"), QObject::tr("Powr"), QObject::tr("AccX"), QObject::tr("AccY"), QObject::tr("AccZ"), QObject::tr("HDG "), QObject::tr("VSpd"), QObject::tr("A1-"),
@@ -335,12 +335,12 @@ QString SwitchDn(const char sw)
 
 QString RawSwitch::toString()
 {
-  QString switches9X[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
+  static const QString switches9X[] = { QObject::tr("THR"), QObject::tr("RUD"), QObject::tr("ELE"),
                            QObject::tr("ID0"), QObject::tr("ID1"), QObject::tr("ID2"),
                            QObject::tr("AIL"), QObject::tr("GEA"), QObject::tr("TRN")
                          };
 
-  QString switchesX9D[] = { SwitchUp('A'), QString::fromUtf8("SA-"), SwitchDn('A'),
+  static const QString switchesX9D[] = { SwitchUp('A'), QString::fromUtf8("SA-"), SwitchDn('A'),
                             SwitchUp('B'), QString::fromUtf8("SB-"), SwitchDn('B'),
                             SwitchUp('C'), QString::fromUtf8("SC-"), SwitchDn('C'),
                             SwitchUp('D'), QString::fromUtf8("SD-"), SwitchDn('D'),
