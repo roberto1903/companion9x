@@ -76,6 +76,7 @@ namespace Open9xX9D {
 #include "../opentx/gui/view_statistics.cpp"
 #include "../opentx/gui/view_channels.cpp"
 #include "../opentx/gui/view_telemetry.cpp"
+#include "../opentx/gui/view_about.cpp"
 #include "../opentx/lcd.cpp"
 #include "../opentx/logs.cpp"
 #include "../opentx/rtc.cpp"
