@@ -372,24 +372,30 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
     case SWITCH_TYPE_ONM:
-      return QObject::tr("ONE");
+      if (index==0) {
+        return QObject::tr("ONE");
+      } else if (index==1) {
+        return QObject::tr("!ONE");
+      }
+      break;
     case SWITCH_TYPE_TRN:
       if (index==0) {
         if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
           return SwitchDn('H')+"s";
         else
           return QObject::tr("TRNs");
-      } else {
+      } else if (index==1) {
         if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
           return SwitchDn('H')+"l";
         else
           return QObject::tr("TRNl");
       }
+      break;
     case SWITCH_TYPE_REA:
       if (index==0) {
         if (GetEepromInterface()->getBoard() == BOARD_SKY9X) 
           return QObject::tr("REAs");
-      } else {
+      } else if (index==1) {
         if (GetEepromInterface()->getBoard() == BOARD_SKY9X) 
           return QObject::tr("REAl");
       }
