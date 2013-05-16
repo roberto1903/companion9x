@@ -373,6 +373,27 @@ QString RawSwitch::toString()
       return QObject::tr("ON");
     case SWITCH_TYPE_ONM:
       return QObject::tr("ONE");
+    case SWITCH_TYPE_TRN:
+      if (index==0) {
+        if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
+          return SwitchDn('H')+"s";
+        else
+          return QObject::tr("TRNs");
+      } else {
+        if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
+          return SwitchDn('H')+"l";
+        else
+          return QObject::tr("TRNl");
+      }
+    case SWITCH_TYPE_REA:
+      if (index==0) {
+        if (GetEepromInterface()->getBoard() == BOARD_SKY9X) 
+          return QObject::tr("REAs");
+      } else {
+        if (GetEepromInterface()->getBoard() == BOARD_SKY9X) 
+          return QObject::tr("REAl");
+      }
+      break;
     case SWITCH_TYPE_OFF:
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
@@ -397,6 +418,7 @@ QString RawSwitch::toString()
     default:
       return QObject::tr("----");
   }
+  return QObject::tr("----");
 }
 
 GeneralSettings::GeneralSettings()

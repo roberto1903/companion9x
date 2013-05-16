@@ -71,6 +71,10 @@ class SwitchesConversionTable: public ConversionTable {
       }
 
       addConversion(RawSwitch(SWITCH_TYPE_ONM), val++);
+      addConversion(RawSwitch(SWITCH_TYPE_TRN, 0), val++);
+      addConversion(RawSwitch(SWITCH_TYPE_TRN, 1), val++);        
+      addConversion(RawSwitch(SWITCH_TYPE_REA, 0), val++);
+      addConversion(RawSwitch(SWITCH_TYPE_REA, 1), val++);        
     }
 
   protected:
@@ -889,11 +893,17 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
   public:
     CustomSwitchesAndSwitchesConversionTable(BoardEnum board, unsigned int version)
     {
-      int val=0;
-
-      addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
-
+      
       if (board == BOARD_TARANIS) {
+        int val=-(MAX_CUSTOM_SWITCHES(board, version)+MAX_SWITCHES_POSITION(board));
+        for (int i=-MAX_CUSTOM_SWITCHES(board, version); i<=-1; i++) {
+          addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+        }
+        for (int i=-MAX_SWITCHES_POSITION(board); i<=-1; i++) {
+          int s = switchIndex(i, board, version);
+          addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+        }
+        addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
         for (int i=1; i<=MAX_SWITCHES_POSITION(board); i++) {
           int s = switchIndex(i, board, version);
           addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
@@ -903,6 +913,15 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
         }
       }
       else if (board == BOARD_SKY9X) {
+        int val=-(8+MAX_CUSTOM_SWITCHES(board, version)+1);
+        for (int i=-MAX_CUSTOM_SWITCHES(board, version); i<=-1; i++) {
+          addConversion(RawSwitch(SWITCH_TYPE_VIRTUAL, i), val++);
+        }
+        for (int i=-8; i<=-1; i++) {
+          int s = switchIndex(i, board, version);
+          addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
+        }
+        addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
         for (int i=1; i<=8; i++) {
           int s = switchIndex(i, board, version);
           addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);
@@ -912,6 +931,8 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
         }
       }
       else {
+        int val=0;
+        addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
         for (int i=1; i<=9; i++) {
           int s = switchIndex(i, board, version);
           addConversion(RawSwitch(SWITCH_TYPE_SWITCH, s), val++);

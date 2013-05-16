@@ -311,6 +311,8 @@ enum RawSwitchType {
   SWITCH_TYPE_ON,
   SWITCH_TYPE_OFF,
   SWITCH_TYPE_ONM,
+  SWITCH_TYPE_TRN,
+  SWITCH_TYPE_REA,
 };
 
 class RawSwitch {
