@@ -1116,6 +1116,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   open9x->addOption("gvars", QObject::tr("Global variables"), GVARS_VARIANT);
   open9x->addOption("symlimits", QObject::tr("Symetrical Limits"));
+  open9x->addOption("potscroll", QObject::tr("Pots use in menus navigation"));
   open9x->addOption("autosource", QObject::tr("In model setup menus automatically set source by moving some of them"));
   open9x->addOption("autoswitch", QObject::tr("In model setup menus automatically set switch by moving some of them"));
   open9x->addOption("dblkeys", QObject::tr("Enable resetting values by pressing up and down at the same time"));
