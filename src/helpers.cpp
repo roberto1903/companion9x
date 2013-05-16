@@ -745,6 +745,12 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   }
 
   if (attr & POPULATE_MSWITCHES) {
+    if (attr & POPULATE_ONOFF) {
+      item = RawSwitch(SWITCH_TYPE_ONM, 1);
+      b->addItem(item.toString(), item.toValue());
+      if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    
     for (int i=-GetEepromInterface()->getCapability(CustomSwitches); i<0; i++) {
       item = RawSwitch(SWITCH_TYPE_MOMENT_VIRTUAL, i);
       b->addItem(item.toString(), item.toValue());
