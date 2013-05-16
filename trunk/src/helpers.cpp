@@ -711,12 +711,12 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
 
   if (attr & POPULATE_AND_SWITCHES) {
     if (GetEepromInterface()->getCapability(HasNegAndSwitches)) {
-      for (int i=-GetEepromInterface()->getCapability(CustomAndSwitches); i<=1; i++) {
+      for (int i=-GetEepromInterface()->getCapability(CustomAndSwitches); i<=-1; i++) {
         item = RawSwitch(SWITCH_TYPE_VIRTUAL, i);
         b->addItem(item.toString(), item.toValue());
         if (item == value) b->setCurrentIndex(b->count()-1);
       }
-      for (int i=-GetEepromInterface()->getCapability(SwitchesPositions); i<=1; i++) {
+      for (int i=-GetEepromInterface()->getCapability(SwitchesPositions); i<=-1; i++) {
         item = RawSwitch(SWITCH_TYPE_SWITCH, i);
         if (GetEepromInterface()->isAvailable(item, context)) {
           b->addItem(item.toString(), item.toValue());
@@ -826,6 +826,30 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
       item = RawSwitch(SWITCH_TYPE_ONM);
       b->addItem(item.toString(), item.toValue());
       if (item == value) b->setCurrentIndex(b->count()-1);
+    }
+    if (IS_ARM(GetEepromInterface()->getBoard())) {
+      item = RawSwitch(SWITCH_TYPE_TRN,0);
+      if (GetEepromInterface()->isAvailable(item, context)) {
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
+      item = RawSwitch(SWITCH_TYPE_TRN,1);
+      if (GetEepromInterface()->isAvailable(item, context)) {
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
+    }
+    if (GetEepromInterface()->getBoard()==BOARD_SKY9X) {
+      item = RawSwitch(SWITCH_TYPE_REA,0);
+      if (GetEepromInterface()->isAvailable(item, context)) {
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
+      item = RawSwitch(SWITCH_TYPE_REA,1);
+      if (GetEepromInterface()->isAvailable(item, context)) {
+        b->addItem(item.toString(), item.toValue());
+        if (item == value) b->setCurrentIndex(b->count()-1);
+      }
     }
   }
 
