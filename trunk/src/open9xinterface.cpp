@@ -963,6 +963,7 @@ void RegisterOpen9xFirmwares()
 
   Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
   Option nav_options[] = { { "rotenc", QObject::tr("Rotary Encoder use in menus navigation") }, { "potscroll", QObject::tr("Pots use in menus navigation") }, { NULL } };
+  Option extr_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
 
   /* 9x board */
   open9x = new Open9xFirmware("opentx-stock", QObject::tr("openTx for 9X board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
@@ -1026,6 +1027,7 @@ void RegisterOpen9xFirmwares()
 
   /* 9XR board */
   open9x = new Open9xFirmware("opentx-9xr", QObject::tr("openTx for 9XR"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
+  open9x->addOptions(extr_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
@@ -1053,7 +1055,7 @@ void RegisterOpen9xFirmwares()
 
   /* 9XR board with M128 chip */
   open9x = new Open9xFirmware("opentx-9xr128", QObject::tr("openTx for 9XR with M128 chip"), new Open9xInterface(BOARD_M128), geturl(BOARD_M128), getstamp(BOARD_M128), false);
-  open9x->addOptions(ext_options);
+  open9x->addOptions(extr_options);
   open9x->addOption("heli", QObject::tr("Enable heli menu and cyclic mix support"));
   open9x->addOption("templates", QObject::tr("Enable TEMPLATES menu"));
   open9x->addOption("nosplash", QObject::tr("No splash screen"));
