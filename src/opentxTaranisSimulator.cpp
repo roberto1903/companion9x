@@ -27,8 +27,9 @@
 #define FLIGHT_MODES
 #define FRSKY
 #define FRSKY_HUB
-#define WS_HOW_HIGH
+#define GPS
 #define VARIO
+#define GAUGES
 #define PPM_UNIT_PERCENT_PREC1
 #define AUDIO
 #define VOICE
@@ -45,6 +46,7 @@
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
 #define EEPROM_VARIANT 3
+#define REV4a
 
 #undef min
 #undef max
