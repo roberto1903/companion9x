@@ -991,8 +991,12 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
-  open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
+  open9x->addOption("pgbar", QObject::tr("EEprom write progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("nowshh", QObject::tr("No Winged Shadow How High support"));
+  open9x->addOption("novario", QObject::tr("No vario support"));
+  open9x->addOption("nogps", QObject::tr("No GPS support"));
+  open9x->addOption("nogauges", QObject::tr("No gauges in the custom telemetry screen"));
   firmwares.push_back(open9x);
 
   /* 9x board with M128 chip */
@@ -1051,6 +1055,10 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOption("nowshh", QObject::tr("No Winged Shadow How High support"));
+  open9x->addOption("novario", QObject::tr("No vario support"));
+  open9x->addOption("nogps", QObject::tr("No GPS support"));
+  open9x->addOption("nogauges", QObject::tr("No gauges in the custom telemetry screen"));
   firmwares.push_back(open9x);
 
   /* 9XR board with M128 chip */
