@@ -109,7 +109,7 @@ public:
 
   EFile();
 
-  void EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t version);
+  void EeFsCreate(uint8_t *eeprom, int size, BoardEnum board);
 
   bool EeFsOpen(uint8_t *eeprom, int size, BoardEnum board);
 

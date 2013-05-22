@@ -229,7 +229,7 @@ int Ersky9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varia
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, EESIZE_SKY9X, BOARD_SKY9X, 0/*version*/);
+  efile->EeFsCreate(eeprom, EESIZE_SKY9X, BOARD_SKY9X);
 
   Ersky9xGeneral ersky9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&ersky9xGeneral, sizeof(Ersky9xGeneral));

@@ -204,7 +204,7 @@ int Gruvin9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t vari
 
   int size = getEEpromSize();
 
-  efile->EeFsCreate(eeprom, size, BOARD_STOCK, 4);
+  efile->EeFsCreate(eeprom, size, BOARD_STOCK);
 
   Gruvin9xGeneral gruvin9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc2(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(Gruvin9xGeneral));
@@ -235,7 +235,7 @@ int Gruvin9xInterface::getSize(ModelData &model)
     return 0;
 
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK, 4);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK);
 
   Gruvin9xModelData gruvin9xModel(model);
   int sz = efile->writeRlc2(0, FILE_TYP_MODEL, (uint8_t*)&gruvin9xModel, sizeof(Gruvin9xModelData));
@@ -248,7 +248,7 @@ int Gruvin9xInterface::getSize(ModelData &model)
 int Gruvin9xInterface::getSize(GeneralSettings &settings)
 {
   uint8_t tmp[EESIZE_GRUVIN9X];
-  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK, 4);
+  efile->EeFsCreate(tmp, EESIZE_GRUVIN9X, BOARD_STOCK);
 
   Gruvin9xGeneral gruvin9xGeneral(settings);
   int sz = efile->writeRlc1(0, FILE_TYP_GENERAL, (uint8_t*)&gruvin9xGeneral, sizeof(gruvin9xGeneral));

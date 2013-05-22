@@ -38,7 +38,7 @@ void populateRepeatCB(QComboBox *b, unsigned int value);
 void populateGVmodeCB(QComboBox *b, unsigned int value);
 QString FuncParam(uint function, unsigned int value, QString paramT="",unsigned int adjustmode=0);
 void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsigned int adjustmode=0);
-void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value);
+void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value, QStringList & paramsList);
 void populatePhasesCB(QComboBox *b, int value);
 void populateTrimUseCB(QComboBox *b, unsigned int phase);
 void populateGvarUseCB(QComboBox *b, unsigned int phase);

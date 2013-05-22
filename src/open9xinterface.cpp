@@ -371,7 +371,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   int size = getEEpromSize();
 
-  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || IS_TARANIS(board)) && version >= 207) ? 5 : 4);
+  efile->EeFsCreate(eeprom, size, board);
 
   int result = 0;
 
@@ -469,7 +469,7 @@ int Open9xInterface::getSize(ModelData &model)
 
   // TODO something better
   uint8_t tmp[EESIZE_RLC_MAX];
-  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
+  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board);
 
   Open9xModelDataNew open9xModel(model, board, 255, GetCurrentFirmwareVariant());
   // open9xModel.Dump();
@@ -489,7 +489,7 @@ int Open9xInterface::getSize(GeneralSettings &settings)
     return 0;
 
   uint8_t tmp[EESIZE_RLC_MAX];
-  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board, 5);
+  efile->EeFsCreate(tmp, EESIZE_RLC_MAX, board);
 
   Open9xGeneralDataNew open9xGeneral(settings, board, 255, GetCurrentFirmwareVariant());
   // open9xGeneral.Dump();
