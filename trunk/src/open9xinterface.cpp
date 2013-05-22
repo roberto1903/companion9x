@@ -956,9 +956,11 @@ QString getstamp( int board)
         url.append("v4.txt");
         break;
       case BOARD_SKY9X:
+        url.append("arm.txt");
+        break;
       case BOARD_TARANIS:
       case BOARD_TARANIS_REV4a:
-        url.append("arm.txt");
+        url.append("taranis.txt");
         break;
       default:
         url.clear();
