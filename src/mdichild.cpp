@@ -328,7 +328,12 @@ bool MdiChild::saveAs(bool isNew)
     }
     if (fileName.isEmpty())
       return false;
-
+    if (fileName.contains("rev4a")) {
+      settings.setValue("rev4asupport", 1);
+    }
+    if (fileName.contains("norev4a")) {
+      settings.setValue("rev4asupport", 0);
+    }
     settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
     if (isNew)
       return saveFile(fileName);

@@ -767,6 +767,8 @@ SimulatorInterface * Open9xInterface::getSimulator()
       return new Open9xSky9xSimulator(this);
     case BOARD_TARANIS:
       return new OpentxTaranisSimulator(this);
+    case BOARD_TARANIS_REV4a:
+      return new OpentxTaranisSimulator(this);
     default:
       return NULL;
   }
@@ -1152,13 +1154,15 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   firmwares.push_back(open9x);
-/*
-  open9x = new Open9xFirmware("opentx-taranis-rev4a", QObject::tr("openTx for FrSky Taranis Rev4a"), new Open9xInterface(BOARD_TARANIS_REV4a), geturl(BOARD_TARANIS_REV4a), getstamp(BOARD_TARANIS_REV4a), true);
-  open9x->addOption("noheli", QObject::tr("Disable HELI menu and cyclic mix support"));
-  open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
-  open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
-  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
-  firmwares.push_back(open9x);
-*/
-  
+
+  QSettings settings("companion9x", "companion9x");
+  int rev4a = settings.value("rev4asupport",0).toInt();
+  if (rev4a) {
+    open9x = new Open9xFirmware("opentx-taranisrev4a", QObject::tr("openTx for FrSky Taranis Rev4a"), new Open9xInterface(BOARD_TARANIS_REV4a), geturl(BOARD_TARANIS_REV4a), getstamp(BOARD_TARANIS_REV4a), true);
+    open9x->addOption("noheli", QObject::tr("Disable HELI menu and cyclic mix support"));
+    open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
+    open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
+    open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+    firmwares.push_back(open9x);
+  }
 }

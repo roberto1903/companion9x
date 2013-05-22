@@ -535,12 +535,15 @@ ModelData ModelData::removeGlobalVars()
 QList<EEPROMInterface *> eepromInterfaces;
 void RegisterEepromInterfaces()
 {
+  QSettings settings("companion9x", "companion9x");
+  int rev4a = settings.value("rev4asupport",0).toInt();
   eepromInterfaces.push_back(new Open9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_M128));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_SKY9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS));
-//  eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS_REV4a));
+  if (rev4a)
+    eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS_REV4a));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Ersky9xInterface());
