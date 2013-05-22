@@ -500,7 +500,7 @@ void MdiChild::burnTo()  // write to Tx
     if (backup) {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss")+".bin";
-        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+        if (IS_TARANIS(eepromInterface->getBoard())) {
           QString path=((MainWindow *)this->parent())->FindTaranisPath();
           if (path.isEmpty()) {
             QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -550,7 +550,7 @@ void MdiChild::burnTo()  // write to Tx
     } else {
       if (backupEnable) {
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
-        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+        if (IS_TARANIS(eepromInterface->getBoard())) {
           QString path=((MainWindow *)this->parent())->FindTaranisPath();
           if (path.isEmpty()) {
             QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -567,7 +567,7 @@ void MdiChild::burnTo()  // write to Tx
         }
       }
     }
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       QString path=((MainWindow *)this->parent())->FindTaranisPath();
       if (path.isEmpty()) {
         QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));

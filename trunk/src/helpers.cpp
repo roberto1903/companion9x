@@ -52,7 +52,7 @@ void populateTTraceCB(QComboBox *b, int value)
   QString strings9x[] = { QObject::tr("THR"), QObject::tr("P1"), QObject::tr("P2"), QObject::tr("P3")};
   QString stringstaranis[] = { QObject::tr("THR"), QObject::tr("S1"), QObject::tr("S2"), QObject::tr("LS"), QObject::tr("RS")};
   b->clear();
-  if (GetEepromInterface()->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(GetEepromInterface()->getBoard())) {
     for (int i=0; i< 5; i++) {
       b->addItem(stringstaranis[i]);
     }

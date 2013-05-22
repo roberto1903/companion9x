@@ -726,7 +726,7 @@ QString MainWindow::GetAvrdudeLocation()
 {
   burnConfigDialog bcd;
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(eepromInterface->getBoard())) {
     return bcd.getDFU();
   } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
     return bcd.getSAMBA();
@@ -811,7 +811,7 @@ QStringList MainWindow::GetReceiveEEpromCommand(const QString &filename)
 {
   QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(eepromInterface->getBoard())) {
 //    return NULL; // to be implemented
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     ret=GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "receive_file {SerialFlash AT25} \"" + filename + "\" 0x0 0x80000 0\n");
@@ -825,7 +825,7 @@ QStringList MainWindow::GetSendEEpromCommand(const QString &filename)
 {
   QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(eepromInterface->getBoard())) {
 //    return NULL;  // to be implemented
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     ret=GetSambaArguments(QString("SERIALFLASH::Init 0\n") + "send_file {SerialFlash AT25} \"" + filename + "\" 0x0 0\n");
@@ -852,7 +852,7 @@ QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 QStringList MainWindow::GetReceiveFlashCommand(const QString &filename)
 {
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(eepromInterface->getBoard())) {
     return GetDFUUtilArguments("-U", filename);    
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     return GetSambaArguments(QString("receive_file {Flash} \"") + filename + "\" 0x400000 0x40000 0\n");
@@ -920,7 +920,7 @@ void MainWindow::burnFrom()
     QString tempFile;
     int res=0;
     EEPROMInterface *eepromInterface = GetEepromInterface();
-    if (eepromInterface->getBoard()==BOARD_TARANIS || eepromInterface->getBoard() == BOARD_SKY9X) 
+    if (IS_ARM(eepromInterface->getBoard())) 
       tempFile = tempDir + "/temp.bin";
     else
       tempFile = tempDir + "/temp.hex";
@@ -928,7 +928,7 @@ void MainWindow::burnFrom()
       unlink(tempFile.toAscii());
     }
 
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       QString path=FindTaranisPath();
       if (path.isEmpty()) {
         QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -986,7 +986,7 @@ void MainWindow::burnExtenalToEEPROM()
     if (backup) {
       if (backupEnable) {
         QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-HHmmss") + ".bin";
-        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+        if (IS_TARANIS(eepromInterface->getBoard())) {
           QString path=FindTaranisPath();
           if (path.isEmpty()) {
             QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -1038,7 +1038,7 @@ void MainWindow::burnExtenalToEEPROM()
     } else {
       if (backupEnable) {
         QString backupFile = backupPath + "/backup-" + QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss") + ".bin";
-        if (eepromInterface->getBoard()==BOARD_TARANIS) {
+        if (IS_TARANIS(eepromInterface->getBoard())) {
           QString path=FindTaranisPath();
           if (path.isEmpty()) {
             QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -1060,7 +1060,7 @@ void MainWindow::burnExtenalToEEPROM()
         }
       }
     }
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       QString path=FindTaranisPath();
       if (path.isEmpty()) {
         QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));
@@ -1312,7 +1312,7 @@ void MainWindow::burnExtenalFromEEPROM()
     if (!fileName.isEmpty())
     {
       EEPROMInterface *eepromInterface = GetEepromInterface();
-      if (eepromInterface->getBoard()==BOARD_TARANIS) {
+      if (IS_TARANIS(eepromInterface->getBoard())) {
         QString path=FindTaranisPath();
         if (path.isEmpty()) {
           QMessageBox::warning(this, tr("Taranis radio not found"), tr("Impossible to identify the radio on your system, please verify the eeprom disk is connected."));

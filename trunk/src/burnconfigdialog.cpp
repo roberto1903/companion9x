@@ -18,7 +18,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
     getSettings();
     populateProgrammers();
     EEPROMInterface *eepromInterface = GetEepromInterface();
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_port->hide();
@@ -364,7 +364,7 @@ void burnConfigDialog::on_advCtrChkB_toggled(bool checked)
 {
   EEPROMInterface *eepromInterface = GetEepromInterface();
   if (checked) {
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       ui->label_dfu2->show();
       ui->dfuArgs->show();
     } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
@@ -378,7 +378,7 @@ void burnConfigDialog::on_advCtrChkB_toggled(bool checked)
         QMessageBox::Ok);
     }
   } else {
-    if (eepromInterface->getBoard()==BOARD_TARANIS) {
+    if (IS_TARANIS(eepromInterface->getBoard())) {
       ui->label_dfu2->hide();
       ui->dfuArgs->hide();
     } else if (eepromInterface->getBoard()==BOARD_SKY9X) {

@@ -45,10 +45,12 @@ enum BoardEnum {
   BOARD_M128,
   BOARD_GRUVIN9X,
   BOARD_SKY9X,
-  BOARD_TARANIS
+  BOARD_TARANIS,
+  BOARD_TARANIS_REV4a
 };
 
-#define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_TARANIS)
+#define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_TARANIS  || board==BOARD_TARANIS_REV4a)
+#define IS_TARANIS(board)       (board==BOARD_TARANIS  || board==BOARD_TARANIS_REV4a)
 
 const uint8_t modn12x3[4][4]= {
   {1, 2, 3, 4},
