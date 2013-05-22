@@ -839,7 +839,7 @@ QStringList MainWindow::GetSendFlashCommand(const QString &filename)
 {
   QStringList ret;
   EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (eepromInterface->getBoard()==BOARD_TARANIS) {
+  if (IS_TARANIS(eepromInterface->getBoard())) {
     ret=GetDFUUtilArguments("-D", filename);    
   } else if (eepromInterface->getBoard() == BOARD_SKY9X) {
     ret=GetSambaArguments(QString("send_file {Flash} \"") + filename + "\" 0x400000 0\n" + "FLASH::ScriptGPNMV 2\n");
