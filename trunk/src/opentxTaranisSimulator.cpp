@@ -47,8 +47,9 @@
 #define PPM_LIMITS_SYMETRICAL
 #define EEPROM_VARIANT 3
 #define COMPANION9X
-int geteepromsize() {
-  if (GetEepromInterface()->getBoard()==BOARD_TARANIS_REV4a) {
+int board=0;
+inline int geteepromsize() {
+  if (board==BOARD_TARANIS_REV4a) {
     return 64*1024;
   } else {
     return 32*1024;
@@ -144,6 +145,7 @@ using namespace Open9xX9D;
 OpentxTaranisSimulator::OpentxTaranisSimulator(Open9xInterface * open9xInterface):
   open9xInterface(open9xInterface)
 {
+  board=GetEepromInterface()->getBoard();
 }
 
 bool OpentxTaranisSimulator::timer10ms()
