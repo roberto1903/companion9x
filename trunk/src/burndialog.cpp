@@ -27,6 +27,9 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
     ui->patchhw_CB->hide();
     ui->InvertColorButton->setDisabled(true);
     this->setWindowTitle(tr("Write firmware to TX"));
+    if (IS_TARANIS(GetEepromInterface()->getBoard())) {
+      ui->EEbackupCB->hide();
+    }
   } else {
     ui->FlashLoadButton->setText(tr("Load eEprom"));
     ui->profile_label->hide();
@@ -171,7 +174,12 @@ void burnDialog::checkFw(QString fileName)
     return;
   }
   QSettings settings("companion9x", "companion9x");
-  ui->EEbackupCB->show();
+  if (!IS_TARANIS(GetEepromInterface()->getBoard())) {
+    ui->EEbackupCB->show();
+  } else {
+    ui->EEbackupCB->setChecked(false);
+    *backup=false;
+  }
   ui->FWFileName->setText(fileName);
   FlashInterface flash(fileName);
   if (flash.isValid()) {
