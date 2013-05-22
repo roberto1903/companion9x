@@ -27,6 +27,7 @@
 #define FILE_MODEL(n) (1+n)
 
 Th9xInterface::Th9xInterface():
+EEPROMInterface(BOARD_STOCK),
 efile(new EFile())
 {
 }

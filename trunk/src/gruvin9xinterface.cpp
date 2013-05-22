@@ -26,8 +26,8 @@
 #define FILE_MODEL(n) (1+n)
 
 Gruvin9xInterface::Gruvin9xInterface(BoardEnum board):
-efile(new EFile()),
-board(board)
+EEPROMInterface(board),
+efile(new EFile())
 {
 }
 
