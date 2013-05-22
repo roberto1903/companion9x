@@ -185,7 +185,7 @@ int Er9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t variant,
 {
   EEPROMWarnings.clear();
 
-  efile->EeFsCreate(eeprom, getEEpromSize(), BOARD_STOCK, 4);
+  efile->EeFsCreate(eeprom, getEEpromSize(), BOARD_STOCK);
 
   Er9xGeneral er9xGeneral(radioData.generalSettings);
   int sz = efile->writeRlc1(FILE_GENERAL, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));
@@ -213,7 +213,7 @@ int Er9xInterface::getSize(ModelData &model)
     return 0;
 
   uint8_t tmp[2*EESIZE_STOCK];
-  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
+  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK);
 
   Er9xModelData er9xModel(model);
   int sz = efile->writeRlc1(0, FILE_TYP_MODEL, (uint8_t*)&er9xModel, sizeof(Er9xModelData));
@@ -226,7 +226,7 @@ int Er9xInterface::getSize(ModelData &model)
 int Er9xInterface::getSize(GeneralSettings &settings)
 {
   uint8_t tmp[2*EESIZE_STOCK];
-  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK, 4);
+  efile->EeFsCreate(tmp, getEEpromSize(), BOARD_STOCK);
   
   Er9xGeneral er9xGeneral(settings);
   int sz = efile->writeRlc1(0, FILE_TYP_GENERAL, (uint8_t*)&er9xGeneral, sizeof(Er9xGeneral));

@@ -31,7 +31,7 @@ eeFsArm(NULL)
 {
 }
 
-void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t version)
+void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board)
 {
   this->eeprom = eeprom;
   this->eeprom_size = size;
@@ -42,7 +42,7 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
   }
   else if (IS_TARANIS(board)) {
     eeFsArm = (EeFsArm *)eeprom;
-    eeFsVersion = version;
+    eeFsVersion = 5;
     eeFsSize = 8+4*62;
     eeFsBlockSize = 64;
     eeFsFirstBlock = 1;
@@ -65,11 +65,11 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
   }
   else {
     eeFs = (EeFs *)eeprom;
-    eeFsVersion = version;
+    eeFsVersion = (board==BOARD_GRUVIN9X || board==BOARD_M128) ? 5 : 4;
     eeFsBlockSize = 16;
     eeFsLinkSize = 1;
 
-    if (version == 5) {
+    if (eeFsVersion == 5) {
       eeFsSize = 4+3*36;
       eeFsFirstBlock = 1;
       eeFsBlocksOffset = 112 - 16;

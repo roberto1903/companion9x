@@ -350,6 +350,12 @@ QString RawSwitch::toString()
                             SwitchUp('H'), SwitchDn('H'),
                           };
 
+  static const QString virtualSwitches[] = { QObject::tr("CS1"), QObject::tr("CS2"), QObject::tr("CS3"), QObject::tr("CS4"), QObject::tr("CS5"), QObject::tr("CS6"), QObject::tr("CS7"), QObject::tr("CS8"), QObject::tr("CS9"), QObject::tr("CSA"),
+                                             QObject::tr("CSB"), QObject::tr("CSC"), QObject::tr("CSD"), QObject::tr("CSE"), QObject::tr("CSF"), QObject::tr("CSG"), QObject::tr("CSH"), QObject::tr("CSI"), QObject::tr("CSJ"), QObject::tr("CSK"),
+                                             QObject::tr("CSL"), QObject::tr("CSM"), QObject::tr("CSN"), QObject::tr("CSO"), QObject::tr("CSP"), QObject::tr("CSQ"), QObject::tr("CSR"), QObject::tr("CSS"), QObject::tr("CST"), QObject::tr("CSU"),
+                                             QObject::tr("CSV"), QObject::tr("CSW")
+                                           };
+
   switch(type) {
     case SWITCH_TYPE_SWITCH:
       if (IS_TARANIS(GetEepromInterface()->getBoard()))
@@ -357,24 +363,14 @@ QString RawSwitch::toString()
       else
         return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1) : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1);
     case SWITCH_TYPE_VIRTUAL:
-    {
-      QString neg = QString("");
-      int ind=index;
-      if (index < 0) { 
-        neg = QString("!"); 
-        ind = -index;
-      }
-      if (ind < 10)
-        return neg+QObject::tr("CS%1").arg(ind);
-      else
-        return neg+QObject::tr("CS%1").arg(QChar('A'+ind-10));
-    }
+      return index > 0 ? CHECK_IN_ARRAY(virtualSwitches, index-1) : QString("!") + CHECK_IN_ARRAY(virtualSwitches, -index-1);
     case SWITCH_TYPE_ON:
       return QObject::tr("ON");
     case SWITCH_TYPE_ONM:
       if (index==0) {
         return QObject::tr("ONE");
-      } else if (index==1) {
+      }
+      else if (index==1) {
         return QObject::tr("!ONE");
       }
       break;
@@ -403,27 +399,16 @@ QString RawSwitch::toString()
     case SWITCH_TYPE_OFF:
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
-      // TODO assert(index != 0);
       if (IS_TARANIS(GetEepromInterface()->getBoard()))
-        return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1)+QString("t")  : QString("!") + CHECK_IN_ARRAY(switchesX9D, -index-1)+QString("t");
+        return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1)+QString("t") : QString("!")+CHECK_IN_ARRAY(switchesX9D, -index-1)+QString("t");
       else
-        return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1)+QString("t") : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1)+QString("t");
+        return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1)+QString("t") : QString("!")+CHECK_IN_ARRAY(switches9X, -index-1)+QString("t");
     case SWITCH_TYPE_MOMENT_VIRTUAL:
-    {
-      QString neg = QString("");
-      int ind=index;
-      if (index < 0) {
-        neg = QString("!"); 
-        ind = -index;
-      }
-      if (ind < 10)
-        return neg+QObject::tr("CS%1t").arg(ind);
-      else
-        return neg+QObject::tr("CS%1t").arg(QChar('A'+ind-10));
-    }
+      return index > 0 ? CHECK_IN_ARRAY(virtualSwitches, index-1)+QString("t") : QString("!")+CHECK_IN_ARRAY(virtualSwitches, -index-1)+QString("t");
     default:
-      return QObject::tr("----");
+      break;
   }
+
   return QObject::tr("----");
 }
 

@@ -2238,6 +2238,36 @@ void ModelEdit::tabCustomFunctions()
 {
   switchEditLock = true;
   int num_fsw = GetEepromInterface()->getCapability(CustomFunctions);
+
+  QStringList paramarmList;
+  if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+    for (int i=0; i<num_fsw; i++) {
+      if (g_model.funcSw[i].func==FuncPlayPrompt || g_model.funcSw[i].func==FuncBackgroundMusic) {
+        QString temp = g_model.funcSw[i].paramarm;
+        if (!temp.isEmpty()) {
+          if (!paramarmList.contains(temp)) {
+            paramarmList.append(temp);
+          }
+        }
+      }
+    }
+
+    QSettings settings("companion9x", "companion9x");
+    QString path=settings.value("soundPath", "").toString();
+    QDir qd(path);
+    if (qd.exists()) {
+      QStringList filters;
+      filters << "*.wav" << "*.WAV";
+      foreach ( QString file, qd.entryList(filters, QDir::Files) ) {
+        QFileInfo fi(file);
+        QString temp=fi.completeBaseName();
+        if (!paramarmList.contains(temp)) {
+          paramarmList.append(temp);
+        }
+      }
+    }
+  }
+
   for (int i=0; i<num_fsw; i++) {
     AssignFunc func = g_model.funcSw[i].func;
     QGridLayout *layout = i >= 16 ? ui->fswitchlayout2 : ui->fswitchlayout1;
@@ -2282,7 +2312,7 @@ void ModelEdit::tabCustomFunctions()
 
     fswtchParamArmT[i] = new QComboBox(this);
     fswtchParamArmT[i]->setProperty("functionIndex", i);
-    populateFuncParamArmTCB(fswtchParamArmT[i],&g_model, g_model.funcSw[i].paramarm);
+    populateFuncParamArmTCB(fswtchParamArmT[i],&g_model, g_model.funcSw[i].paramarm, paramarmList);
     fswtchParamArmT[i]->setEditable(true);
     paramLayout->addWidget(fswtchParamArmT[i]);
 

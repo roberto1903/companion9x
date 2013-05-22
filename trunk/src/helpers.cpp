@@ -354,38 +354,13 @@ QString FuncParam(uint function, unsigned int value, QString paramT,unsigned int
   return "";
 }
 
-void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value)
+void populateFuncParamArmTCB(QComboBox *b, ModelData * g_model, char * value, QStringList & paramsList)
 {
-  QStringList qs;
   b->clear();
   b->addItem("----");
-  int num_fsw=GetEepromInterface()->getCapability(CustomFunctions);
-  for(int i=0; i<num_fsw; i++) {
-    if ((g_model->funcSw[i].func==FuncPlayPrompt || g_model->funcSw[i].func==FuncBackgroundMusic) && !GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      QString temp=g_model->funcSw[i].paramarm;
-      if (!temp.isEmpty()) {
-        if (!qs.contains(temp)) {
-          qs.append(temp);
-        }
-      }
-    }
-  }
-  QSettings settings("companion9x", "companion9x");
-  QString path=settings.value("soundPath", "").toString();
-  QDir qd(path);
-  if (qd.exists()) {
-    QStringList filters;
-    filters << "*.wav" << "*.WAV"; 
-    foreach ( QString file, qd.entryList(filters, QDir::Files) ) {
-      QFileInfo fi(file);
-      QString temp=fi.completeBaseName();
-      if (!qs.contains(temp)) {
-        qs.append(temp);
-      }
-    }
-  }
+
   QString currentvalue(value);
-  foreach ( QString entry, qs ) {
+  foreach ( QString entry, paramsList ) {
     b->addItem(entry);
     if (entry==currentvalue) {
       b->setCurrentIndex(b->count()-1);
