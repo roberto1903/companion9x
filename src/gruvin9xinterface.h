@@ -31,8 +31,6 @@ class Gruvin9xInterface : public EEPROMInterface
 
     virtual const char * getName();
     
-    virtual BoardEnum getBoard() { return board; }
-
     virtual const int  getEEpromSize();
 
     virtual const int getMaxModels();
@@ -64,8 +62,6 @@ class Gruvin9xInterface : public EEPROMInterface
     bool loadGeneral(GeneralSettings &settings, int version=2);
 
     EFile *efile;
-
-    BoardEnum board;
 
 };
 

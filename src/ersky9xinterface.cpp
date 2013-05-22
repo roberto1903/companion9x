@@ -31,6 +31,7 @@
 #define FILE_TMP      (1+16)
 
 Ersky9xInterface::Ersky9xInterface():
+EEPROMInterface(BOARD_SKY9X),
 efile(new EFile())
 {
 }
@@ -47,7 +48,7 @@ const char * Ersky9xInterface::getName()
 
 const int Ersky9xInterface::getEEpromSize()
 {
-    return EESIZE_SKY9X;
+  return EESIZE_SKY9X;
 }
 
 const int Ersky9xInterface::getMaxModels()

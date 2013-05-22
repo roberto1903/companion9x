@@ -29,8 +29,6 @@ class Open9xInterface : public EEPROMInterface
     virtual ~Open9xInterface();
 
     virtual const char * getName();
-    
-    virtual BoardEnum getBoard() { return board; }
 
     virtual const int getEEpromSize();
 
@@ -81,8 +79,6 @@ class Open9xInterface : public EEPROMInterface
     bool saveGeneral(GeneralSettings &settings, BoardEnum board, uint32_t version, uint32_t variant);
 
     EFile *efile;
-
-    BoardEnum board;
 
 };
 

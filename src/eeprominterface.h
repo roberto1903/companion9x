@@ -970,7 +970,8 @@ class EEPROMInterface
 {
   public:
 
-    EEPROMInterface()
+    EEPROMInterface(BoardEnum board):
+      board(board)
     {
     }
 
@@ -978,7 +979,7 @@ class EEPROMInterface
 
     virtual const char * getName() = 0;
 
-    virtual BoardEnum getBoard() = 0;
+    inline BoardEnum getBoard() { return board; }
 
     virtual bool load(RadioData &radioData, uint8_t *eeprom, int size) = 0;
 
@@ -1005,6 +1006,14 @@ class EEPROMInterface
     virtual const int getEEpromSize() = 0;
 
     virtual const int getMaxModels() = 0;
+
+  protected:
+
+    BoardEnum board;
+
+  private:
+
+    EEPROMInterface();
 
 };
 

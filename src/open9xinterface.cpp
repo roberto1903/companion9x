@@ -45,8 +45,8 @@ size_t SizeOfArray( T(&)[ N ] )
 QStringList o9xservers;
 
 Open9xInterface::Open9xInterface(BoardEnum board):
-  efile(new EFile()),
-  board(board)
+  EEPROMInterface(board),
+  efile(new EFile())
 {
   o9xservers.clear();
   o9xservers << "85.18.253.250" << "open9x.9xforums.com";

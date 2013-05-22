@@ -30,8 +30,6 @@ class Th9xInterface : public EEPROMInterface
 
     virtual const char * getName();
 
-    virtual BoardEnum getBoard() { return BOARD_STOCK; }
-
     virtual const int getEEpromSize();
 
     virtual const int getMaxModels();
