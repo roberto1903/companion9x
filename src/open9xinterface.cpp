@@ -68,6 +68,8 @@ const char * Open9xInterface::getName()
       return "openTx for Gruvin9x board / 9X";
     case BOARD_TARANIS:
       return "openTx for FrSky Taranis";
+    case BOARD_TARANIS_REV4a:
+      return "openTx for FrSky Taranis Rev4a";
     case BOARD_SKY9X:
       return "openTx for Sky9x board / 9X";
     default:
@@ -88,6 +90,8 @@ const int Open9xInterface::getEEpromSize()
       return EESIZE_SKY9X;
     case BOARD_TARANIS:
       return EESIZE_TARANIS;
+    case BOARD_TARANIS_REV4a:
+      return EESIZE_TARANIS*2;
     default:
       return 0;
   }
@@ -349,6 +353,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
   if (!version) {
     switch(board) {
       case BOARD_TARANIS:
+      case BOARD_TARANIS_REV4a:
       case BOARD_SKY9X:
         version = 215;
         break;
@@ -366,7 +371,7 @@ int Open9xInterface::save(uint8_t *eeprom, RadioData &radioData, uint32_t varian
 
   int size = getEEpromSize();
 
-  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || board==BOARD_TARANIS) && version >= 207) ? 5 : 4);
+  efile->EeFsCreate(eeprom, size, board, ((board==BOARD_GRUVIN9X || board==BOARD_M128 || IS_TARANIS(board)) && version >= 207) ? 5 : 4);
 
   int result = 0;
 
@@ -504,7 +509,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case OwnerName:
       return 0;
     case SimulatorType:
-      if (board == BOARD_TARANIS)
+      if (IS_TARANIS(board))
         return 1;
       else
         return 0;
@@ -553,7 +558,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case Timers:
       return 2;
     case PermTimers:
-      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X || board == BOARD_TARANIS )
+      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X || IS_TARANIS(board) )
         return 1;
       else
         return 0;
@@ -562,11 +567,11 @@ int Open9xInterface::getCapability(const Capability capability)
     case countdownBeep:
         return 1;
     case Pots:
-      return (board==BOARD_TARANIS ? 4 : 3);
+      return (IS_TARANIS(board) ? 4 : 3);
     case Switches:
-      return (board==BOARD_TARANIS ? 8 : 7);
+      return (IS_TARANIS(board) ? 8 : 7);
     case SwitchesPositions:
-      return (board==BOARD_TARANIS ? 22 : 9);
+      return (IS_TARANIS(board) ? 22 : 9);
     case CustomFunctions:
       if (IS_ARM(board))
         return 32;
@@ -606,7 +611,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case SoundPitch:
       return 1;
     case Haptic:
-      if (board == BOARD_TARANIS)
+      if (IS_TARANIS(board))
         return 0;
       else
         return 1;
@@ -651,9 +656,9 @@ int Open9xInterface::getCapability(const Capability capability)
     case HasExpoNames:
       return (IS_ARM(board) ? true : false);
     case HasChNames:
-      return (board==BOARD_TARANIS ? 1 : 0);
+      return (IS_TARANIS(board) ? 1 : 0);
     case HasCvNames:
-      return (board==BOARD_TARANIS ? 1 : 0);
+      return (IS_TARANIS(board) ? 1 : 0);
     case NoTimerDirs:
       return 1;
     case NoThrExpo:
@@ -663,13 +668,13 @@ int Open9xInterface::getCapability(const Capability capability)
     case TelemetryBars:
       return 1;
     case TelemetryCSFields:
-      if (board==BOARD_TARANIS) {
+      if (IS_TARANIS(board)) {
         return 36;
       } else {
         return IS_ARM(board) ? 24 : 16;
       }
     case TelemetryColsCSFields:
-      if (board==BOARD_TARANIS) {
+      if (IS_TARANIS(board)) {
         return 3;
       } else {
         return 2;
@@ -697,16 +702,16 @@ int Open9xInterface::getCapability(const Capability capability)
     case HasVario:
       return 1;
     case HasVariants:
-      if (board == BOARD_TARANIS)
+      if (IS_TARANIS(board))
         return 0;
       else
         return 1;
     case HasFailsafe:
-      if (board==BOARD_TARANIS) 
+      if (IS_TARANIS(board)) 
         return 32; // 
       return (board==BOARD_SKY9X ? 16 : 0);
     case NumModules:
-      return (board==BOARD_TARANIS ? 2 : 1);      
+      return (IS_TARANIS(board) ? 2 : 1);      
     case HasCurrentCalibration:
       return (IS_ARM(board) ? true : false);
     case HasVolume:
@@ -914,8 +919,9 @@ QString geturl( int board)
       case BOARD_GRUVIN9X:
         url.append("/getfw.php?fw=%1.hex");
         break;
-      case BOARD_TARANIS:
       case BOARD_SKY9X:
+      case BOARD_TARANIS:
+      case BOARD_TARANIS_REV4a:
         url.append("/getfw.php?fw=%1.bin");
         break;
       default:
@@ -948,6 +954,8 @@ QString getstamp( int board)
         url.append("v4.txt");
         break;
       case BOARD_SKY9X:
+      case BOARD_TARANIS:
+      case BOARD_TARANIS_REV4a:
         url.append("arm.txt");
         break;
       default:
@@ -1144,5 +1152,13 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
   firmwares.push_back(open9x);
-
+/*
+  open9x = new Open9xFirmware("opentx-taranis-rev4a", QObject::tr("openTx for FrSky Taranis Rev4a"), new Open9xInterface(BOARD_TARANIS_REV4a), geturl(BOARD_TARANIS_REV4a), getstamp(BOARD_TARANIS_REV4a), true);
+  open9x->addOption("noheli", QObject::tr("Disable HELI menu and cyclic mix support"));
+  open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
+  open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
+  open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+  firmwares.push_back(open9x);
+*/
+  
 }

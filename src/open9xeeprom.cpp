@@ -10,11 +10,11 @@
 #define IS_DBLRAM(board, version)            ((board==BOARD_GRUVIN9X && version >= 213) || (board==BOARD_M128 && version >= 213 && version <= 214))
 
 #define HAS_PERSISTENT_TIMERS(board)         (IS_ARM(board) || board == BOARD_GRUVIN9X)
-#define HAS_LARGE_LCD(board)                 (board == BOARD_TARANIS)
+#define HAS_LARGE_LCD(board)                 IS_TARANIS(board)
 #define MAX_VIEWS(board)                     (HAS_LARGE_LCD(board) ? 2 : 256)
-#define MAX_POTS(board)                      (board==BOARD_TARANIS ? 4 : 3)
-#define MAX_SWITCHES(board)                  (board==BOARD_TARANIS ? 8 : 7)
-#define MAX_SWITCHES_POSITION(board)         (board==BOARD_TARANIS ? 22 : 9)
+#define MAX_POTS(board)                      (IS_TARANIS(board) ? 4 : 3)
+#define MAX_SWITCHES(board)                  (IS_TARANIS(board) ? 8 : 7)
+#define MAX_SWITCHES_POSITION(board)         (IS_TARANIS(board) ? 22 : 9)
 #define MAX_ROTARY_ENCODERS(board)           (board==BOARD_GRUVIN9X ? 2 : (board==BOARD_SKY9X ? 1 : 0))
 #define MAX_PHASES(board, version)           (IS_ARM(board) ? 9 :  (IS_DBLRAM(board, version) ? 6 :  5))
 #define MAX_MIXERS(board, version)           (IS_ARM(board) ? 64 : 32)
@@ -30,7 +30,7 @@
 inline int switchIndex(int i, BoardEnum board, unsigned int version)
 {
   bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
-  if (board != BOARD_TARANIS && release21March2013)
+  if (!IS_TARANIS(board) && release21March2013)
     return (i<=3 ? i+3 : (i<=6 ? i-3 : i));
   else
     return i;
@@ -897,7 +897,7 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
       int val=0;
       addConversion(RawSwitch(SWITCH_TYPE_NONE), val++);
       
-      if (board == BOARD_TARANIS) {
+      if (IS_TARANIS(board)) {
         for (int i=1; i<=MAX_SWITCHES_POSITION(board); i++) {
           int s = switchIndex(i, board, version);
           addConversion(RawSwitch(SWITCH_TYPE_SWITCH, -s), -val);
@@ -1059,7 +1059,7 @@ class CustomFunctionsConversionTable: public ConversionTable {
       addConversion(FuncTrainerAIL, val++);
       addConversion(FuncInstantTrim, val++);
       addConversion(FuncPlaySound, val++);
-      if (board != BOARD_TARANIS)
+      if (!IS_TARANIS(board))
         addConversion(FuncPlayHaptic, val++);
       addConversion(FuncReset, val++);
       addConversion(FuncVario, val++);
@@ -1143,7 +1143,7 @@ class CustomFunctionField: public TransformedField {
       internalField.Append(new SwitchField<8>(fn.swtch, board, version));
       if (IS_ARM(board)) {
         internalField.Append(new ConversionField< UnsignedField<8> >((unsigned int &)fn.func, &functionsConversionTable, "Function", ::QObject::tr("OpenTX on this board doesn't accept this function")));
-        if (board == BOARD_TARANIS)
+        if (IS_TARANIS(board))
           internalField.Append(new CharField<10>(_arm_param));
         else
           internalField.Append(new CharField<6>(_arm_param));
@@ -1360,13 +1360,13 @@ class FrskyScreenField: public DataField {
         bars.Append(new UnsignedField<8>(_screen.body.bars[i].barMax));
       }
 
-      int columns=(board==BOARD_TARANIS ? 3:2);
+      int columns=(IS_TARANIS(board) ? 3:2);
       for (int i=0; i<4; i++) {
         for (int j=0; j<columns; j++) {
           numbers.Append(new UnsignedField<8>(_screen.body.lines[i].source[j]));
         }
       }
-      if (board != BOARD_TARANIS) {
+      if (!IS_TARANIS(board)) {
         for (int i=0; i<4; i++) {
           numbers.Append(new SpareBitsField<8>());
         }
@@ -1383,7 +1383,7 @@ class FrskyScreenField: public DataField {
           if (_screen.body.bars[i].source > 0)
             _screen.body.bars[i].source--;
         }
-        int columns=(board==BOARD_TARANIS ? 3:2);
+        int columns=(IS_TARANIS(board) ? 3:2);
         for (int i=0; i<4; i++) {
           for (int j=0; j<columns;j++) {
             if (_screen.body.lines[i].source[j] > 0)
@@ -1408,7 +1408,7 @@ class FrskyScreenField: public DataField {
       if (screen.type == 0) {
         numbers.ImportBits(input);
         if (!release21March2013) {
-          int columns=(board==BOARD_TARANIS ? 3:2);
+          int columns=(IS_TARANIS(board) ? 3:2);
           for (int i=0; i<4; i++) {
             for (int j=0; j<columns;j++) {
               if (_screen.body.lines[i].source[j] > 0)
@@ -1568,7 +1568,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (release21March2013)
     Append(new UnsignedField<8>(modelData.modelId));
 
-  if (board == BOARD_TARANIS && version >= 215) {
+  if (IS_TARANIS(board) && version >= 215) {
     Append(new CharField<10>(modelData.bitmap));
   }
 
@@ -1596,14 +1596,14 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     }
   }
 
-  if (board == BOARD_TARANIS)
+  if (IS_TARANIS(board))
     Append(new SpareBitsField<3>());
   else
     Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("OpenTX doesn't accept this protocol")));
 
   Append(new BoolField<1>(modelData.thrTrim));
 
-  if (board == BOARD_TARANIS)
+  if (IS_TARANIS(board))
     Append(new SpareBitsField<4>());
   else
     Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("OpenTX doesn't allow this number of channels")));
@@ -1611,7 +1611,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   Append(new UnsignedField<3>(modelData.trimInc));
   Append(new BoolField<1>(modelData.disableThrottleWarning));
 
-  if (board==BOARD_TARANIS)
+  if (IS_TARANIS(board))
     Append(new SpareBitsField<1>());
   else
     Append(new BoolField<1>(modelData.moduleData[0].ppmPulsePol));
@@ -1646,7 +1646,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   if (!release21March2013)
     Append(new UnsignedField<8>(modelData.modelId));
 
-  if (board == BOARD_TARANIS)
+  if (IS_TARANIS(board))
     Append(new UnsignedField<16>(modelData.switchWarningStates));
   else
     Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
@@ -1668,13 +1668,13 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     Append(new FrskyField(modelData.frsky, board, version));
   }
 
-  if (board == BOARD_TARANIS && version < 215) {
+  if (IS_TARANIS(board) && version < 215) {
     Append(new CharField<10>(modelData.bitmap));
   }
 
   int modulesCount = 2;
 
-  if (board == BOARD_TARANIS) {
+  if (IS_TARANIS(board)) {
     modulesCount = 3;
     Append(new UnsignedField<8>(modelData.externalModule));
     Append(new UnsignedField<8>(modelData.trainerMode));
@@ -1694,7 +1694,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     }
   }
 
-  if (board == BOARD_TARANIS) {
+  if (IS_TARANIS(board)) {
     for (int i=0; i<MAX_CURVES(board); i++) {
       Append(new ZCharField<6>(modelData.curves[i].name));
     }
@@ -1706,7 +1706,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
   internalField("General Settings"),
   generalData(generalData),
   board(board),
-  inputsCount(board == BOARD_TARANIS ? 8 : 7)
+  inputsCount(IS_TARANIS(board) ? 8 : 7)
 {
   generalData.version = version;
   generalData.variant = variant;

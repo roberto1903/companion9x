@@ -287,7 +287,7 @@ QString RawSource::toString()
       if (index < 4)
         return CHECK_IN_ARRAY(sticks, index);
       else
-        return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? CHECK_IN_ARRAY(potsX9D, index-4) : CHECK_IN_ARRAY(pots9X, index-4));
+        return (IS_TARANIS(GetEepromInterface()->getBoard()) ? CHECK_IN_ARRAY(potsX9D, index-4) : CHECK_IN_ARRAY(pots9X, index-4));
     case SOURCE_TYPE_TRIM:
       return CHECK_IN_ARRAY(trims, index);
     case SOURCE_TYPE_ROTARY_ENCODER:
@@ -295,7 +295,7 @@ QString RawSource::toString()
     case SOURCE_TYPE_MAX:
       return QObject::tr("MAX");
     case SOURCE_TYPE_SWITCH:
-      return (GetEepromInterface()->getBoard() == BOARD_TARANIS ? CHECK_IN_ARRAY(switchesX9D, index) : CHECK_IN_ARRAY(switches9X, index));
+      return (IS_TARANIS(GetEepromInterface()->getBoard()) ? CHECK_IN_ARRAY(switchesX9D, index) : CHECK_IN_ARRAY(switches9X, index));
     case SOURCE_TYPE_CUSTOM_SWITCH:
       return QObject::tr("CS%1").arg(index+1);
     case SOURCE_TYPE_CYC:
@@ -352,7 +352,7 @@ QString RawSwitch::toString()
 
   switch(type) {
     case SWITCH_TYPE_SWITCH:
-      if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
+      if (IS_TARANIS(GetEepromInterface()->getBoard()))
         return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1) : QString("!") + CHECK_IN_ARRAY(switchesX9D, -index-1);
       else
         return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1) : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1);
@@ -380,12 +380,12 @@ QString RawSwitch::toString()
       break;
     case SWITCH_TYPE_TRN:
       if (index==0) {
-        if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
+        if (IS_TARANIS(GetEepromInterface()->getBoard())) 
           return SwitchDn('H')+"s";
         else
           return QObject::tr("TRNs");
       } else if (index==1) {
-        if (GetEepromInterface()->getBoard() == BOARD_TARANIS) 
+        if (IS_TARANIS(GetEepromInterface()->getBoard())) 
           return SwitchDn('H')+"l";
         else
           return QObject::tr("TRNl");
@@ -404,7 +404,7 @@ QString RawSwitch::toString()
       return QObject::tr("OFF");
     case SWITCH_TYPE_MOMENT_SWITCH:
       // TODO assert(index != 0);
-      if (GetEepromInterface()->getBoard() == BOARD_TARANIS)
+      if (IS_TARANIS(GetEepromInterface()->getBoard()))
         return index > 0 ? CHECK_IN_ARRAY(switchesX9D, index-1)+QString("t")  : QString("!") + CHECK_IN_ARRAY(switchesX9D, -index-1)+QString("t");
       else
         return index > 0 ? CHECK_IN_ARRAY(switches9X, index-1)+QString("t") : QString("!") + CHECK_IN_ARRAY(switches9X, -index-1)+QString("t");
@@ -540,6 +540,7 @@ void RegisterEepromInterfaces()
   eepromInterfaces.push_back(new Open9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_SKY9X));
   eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS));
+//  eepromInterfaces.push_back(new Open9xInterface(BOARD_TARANIS_REV4a));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_STOCK));
   eepromInterfaces.push_back(new Gruvin9xInterface(BOARD_GRUVIN9X));
   eepromInterfaces.push_back(new Ersky9xInterface());
