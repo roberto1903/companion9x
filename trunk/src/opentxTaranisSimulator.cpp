@@ -46,7 +46,15 @@
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
 #define EEPROM_VARIANT 3
-#define REV4a
+#define COMPANION9X
+int geteepromsize() {
+  if (GetEepromInterface()->getBoard()==BOARD_TARANIS_REV4a) {
+    return 64*1024;
+  } else {
+    return 32*1024;
+  }
+}
+#define EESIZE geteepromsize()
 
 #undef min
 #undef max
