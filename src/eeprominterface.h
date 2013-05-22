@@ -34,9 +34,9 @@
 #define EESIZE_STOCK    2048
 #define EESIZE_M128     4096
 #define EESIZE_GRUVIN9X 4096
-#define EESIZE_TARANIS  (64*1024)
+#define EESIZE_TARANIS  (32*1024)
 #define EESIZE_SKY9X    (128*4096)
-#define EESIZE_RLC_MAX  EESIZE_TARANIS
+#define EESIZE_RLC_MAX  (2*EESIZE_TARANIS)
 
 template<class t> t LIMIT(t mi, t x, t ma) { return std::min(std::max(mi, x), ma); }
 
