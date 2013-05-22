@@ -47,7 +47,10 @@ void EFile::EeFsCreate(uint8_t *eeprom, int size, BoardEnum board, uint8_t versi
     eeFsBlockSize = 64;
     eeFsFirstBlock = 1;
     eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
-    eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
+    if (board == BOARD_TARANIS_REV4a)
+      eeFsBlocksMax = 1 + (EESIZE_TARANIS_REV4a-eeFsSize)/eeFsBlockSize;
+    else
+      eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
     eeFsLinkSize = sizeof(int16_t);
     memset(eeprom, 0, size);
     eeFsArm->version  = eeFsVersion;
@@ -109,7 +112,10 @@ bool EFile::EeFsOpen(uint8_t *eeprom, int size, BoardEnum board)
     eeFsLinkSize = sizeof(int16_t);
     eeFsFirstBlock = 1;
     eeFsBlocksOffset = eeFsSize - eeFsBlockSize;
-    eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
+    if (board == BOARD_TARANIS_REV4a)
+      eeFsBlocksMax = 1 + (EESIZE_TARANIS_REV4a-eeFsSize)/eeFsBlockSize;
+    else
+      eeFsBlocksMax = 1 + (EESIZE_TARANIS-eeFsSize)/eeFsBlockSize;
     return eeFsArm->mySize == eeFsSize;
   }
   else {
