@@ -91,7 +91,7 @@ const int Open9xInterface::getEEpromSize()
     case BOARD_TARANIS:
       return EESIZE_TARANIS;
     case BOARD_TARANIS_REV4a:
-      return EESIZE_TARANIS*2;
+      return EESIZE_TARANIS_REV4a;
     default:
       return 0;
   }
