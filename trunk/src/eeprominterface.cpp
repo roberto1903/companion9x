@@ -244,8 +244,6 @@ double RawSource::getStep(const ModelData & Model)
   }
 }
 
-#define CHECK_IN_ARRAY(T, index) ((unsigned int)index < (unsigned int)(sizeof(T)/sizeof(T[0])) ? T[(unsigned int)index] : "???")
-
 QString RawSource::toString()
 {
   static const QString sticks[]      = { QObject::tr("Rud"), QObject::tr("Ele"), QObject::tr("Thr"), QObject::tr("Ail") };

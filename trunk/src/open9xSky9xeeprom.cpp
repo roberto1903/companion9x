@@ -1551,7 +1551,7 @@ t_Open9xArmModelData_v208::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1648,7 +1648,7 @@ t_Open9xArmModelData_v208::t_Open9xArmModelData_v208(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -1752,7 +1752,7 @@ t_Open9xArmModelData_v209::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1852,7 +1852,7 @@ t_Open9xArmModelData_v209::t_Open9xArmModelData_v209(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -1955,7 +1955,7 @@ t_Open9xArmModelData_v210::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -2049,7 +2049,7 @@ t_Open9xArmModelData_v210::t_Open9xArmModelData_v210(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -2143,7 +2143,7 @@ t_Open9xArmModelData_v211::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -2235,7 +2235,7 @@ t_Open9xArmModelData_v211::t_Open9xArmModelData_v211(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -2343,7 +2343,7 @@ t_Open9xArmModelData_v212::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -2434,7 +2434,7 @@ t_Open9xArmModelData_v212::t_Open9xArmModelData_v212(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:

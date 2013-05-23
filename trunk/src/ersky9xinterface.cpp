@@ -371,7 +371,7 @@ int Ersky9xInterface::isAvailable(Protocol prot, int port)
   switch (prot) {
     case PPM:
     case DSM2:
-    case PXX:
+    case PXX_DJT:
     case PPM16:
       return 1;
     default:

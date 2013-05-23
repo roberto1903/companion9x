@@ -928,7 +928,7 @@ t_Ersky9xModelData_v10::t_Ersky9xModelData_v10(ModelData &c9x)
       case PPM:
         protocol = 0;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 1;
         break;
       case DSM2:
@@ -1083,7 +1083,7 @@ t_Ersky9xModelData_v10::operator ModelData ()
   }
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 2:
       c9x.protocol = DSM2;
@@ -1207,7 +1207,7 @@ t_Ersky9xModelData_v11::t_Ersky9xModelData_v11(ModelData &c9x)
       case PPM:
         protocol = 0;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 1;
         break;
       case DSM2:
@@ -1375,7 +1375,7 @@ t_Ersky9xModelData_v11::operator ModelData ()
   }
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 2:
       c9x.protocol = DSM2;

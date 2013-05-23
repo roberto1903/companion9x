@@ -597,11 +597,11 @@ void ModelEdit::tabModelEditSetup()
   protocolEditLock=true; 
   protocol2EditLock=true; 
   ui->protocolCB->clear();
-  for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
-    if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
-      ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
-      if (g_model.moduleData[0].rfProtocol==prot_list[i].prot_num) {
-        selindex=index;
+  for (int i=0; i<PROTO_LAST; i++) {
+    if (GetEepromInterface()->isAvailable((Protocol)i)) {
+      ui->protocolCB->addItem(getProtocolStr(i), (QVariant)i);
+      if (g_model.moduleData[0].rfProtocol == i) {
+        selindex = index;
       }
       index++;
     }
@@ -609,11 +609,11 @@ void ModelEdit::tabModelEditSetup()
   if (GetEepromInterface()->getCapability(NumModules)>1) {
     index=0;
     ui->protocolCB_2->clear();
-    for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
-      if (GetEepromInterface()->isAvailable(prot_list[i].prot_num,1)) {
-        ui->protocolCB_2->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
-        if (g_model.moduleData[1].rfProtocol==prot_list[i].prot_num) {
-          selindex2=index;
+    for (int i=0; i<PROTO_LAST; ++i) {
+      if (GetEepromInterface()->isAvailable((Protocol)i, 1)) {
+        ui->protocolCB_2->addItem(getProtocolStr(i), (QVariant)i);
+        if (g_model.moduleData[1].rfProtocol == i) {
+          selindex2 = index;
         }
         index++;
       }
@@ -665,7 +665,8 @@ void ModelEdit::tabModelEditSetup()
     ui->timer2ModeBCB->hide();
     ui->timer2ModeB_label->hide();
     ui->label_timer2->hide();
-  } else {
+  }
+  else {
     populateTimerSwitchCB(ui->timer2ModeCB,g_model.timers[1].mode,GetEepromInterface()->getCapability(TimerTriggerB));
     min = g_model.timers[1].val/60;
     sec = g_model.timers[1].val%60;
@@ -736,7 +737,7 @@ void ModelEdit::tabModelEditSetup()
     ui->label_ppmFrameLength->hide();
   }
 /*  switch (g_model.protocol) {
-    case PXX:
+    case PXX_DJT:
       ui->pxxRxNum->setMinimum(1);
       ui->numChannelsSB->setValue(8);
       ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
@@ -3210,11 +3211,10 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->label_numChannelsEnd->hide();
         ui->numChannelsEndSB->hide();
         break;    
-      case DJT:
-      case X16:
-      case D8:
-      case LR12:        
-      case PXX:
+      case PXX_XJT_X16:
+      case PXX_XJT_D8:
+      case PXX_XJT_LR12:
+      case PXX_DJT:
         ui->label_PPM->hide();
         ui->ppmDelaySB->hide();
         ui->ppmDelaySB->setEnabled(false);
@@ -3323,11 +3323,10 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->label_numChannelsEnd_2->hide();
         ui->numChannelsEndSB_2->hide();
         break;    
-      case DJT:
-      case X16:
-      case D8:
-      case LR12:        
-      case PXX:
+      case PXX_XJT_X16:
+      case PXX_XJT_D8:
+      case PXX_XJT_LR12:
+      case PXX_DJT:
         ui->label_PPM_2->hide();
         ui->ppmDelaySB_2->hide();
         ui->ppmDelaySB_2->setEnabled(false);

@@ -741,45 +741,16 @@ enum Protocol {
   SILV_B,
   SILV_C,
   CTP1009,
-  PXX,
   LP45,
   DSM2,
   DSMX,
   PPM16,
   PPMSIM,
-  X16,
-  D8,
-  LR12,
-  DJT,
-  MASTER,
-  SLAVE  
-};
-
-typedef struct proto
-{
-  Protocol prot_num;
-  char prot_descr[50];
-} t_protocol;
-
-const t_protocol prot_list[]= {
-  {OFF, "OFF"},
-  {PPM, "PPM"},
-  {SILV_A, "Silverlit A"},
-  {SILV_B, "Silverlit B"},
-  {SILV_C, "Silverlit C"},
-  {CTP1009, "CTP1009"},
-  {PXX, "FRSky PXX"},
-  {LP45, "LP45"},
-  {DSM2, "DSM2"},
-  {DSMX, "DSMX"},
-  {PPM16, "PPM16"},
-  {PPMSIM, "PPMsim"},
-  {X16, "FRSky X16"},
-  {D8, "FRSky D8"},
-  {LR12, "FRSky LR12"},
-  {DJT, "FRSky DJT"},
-  {MASTER, "Trainer Master"},
-  {SLAVE, "Trainer Slave"},  
+  PXX_XJT_X16,
+  PXX_XJT_D8,
+  PXX_XJT_LR12,
+  PXX_DJT,
+  PROTO_LAST
 };
 
 class ModuleData {
@@ -1256,5 +1227,7 @@ inline unsigned int GetCurrentFirmwareVariant()
 {
   return current_firmware_variant.variant;
 }
+
+#define CHECK_IN_ARRAY(T, index) ((unsigned int)index < (unsigned int)(sizeof(T)/sizeof(T[0])) ? T[(unsigned int)index] : "???")
 
 #endif

@@ -876,7 +876,7 @@ t_Open9xGruvin9xModelData_v207::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 2:
       c9x.protocol = DSM2;
@@ -965,7 +965,7 @@ t_Open9xGruvin9xModelData_v207::t_Open9xGruvin9xModelData_v207(ModelData &c9x)
       case PPM:
         protocol = 0;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 1;
         break;
       case DSM2:
@@ -1068,7 +1068,7 @@ t_Open9xGruvin9xModelData_v208::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1165,7 +1165,7 @@ t_Open9xGruvin9xModelData_v208::t_Open9xGruvin9xModelData_v208(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -1270,7 +1270,7 @@ t_Open9xGruvin9xModelData_v209::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1370,7 +1370,7 @@ t_Open9xGruvin9xModelData_v209::t_Open9xGruvin9xModelData_v209(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -1474,7 +1474,7 @@ t_Open9xGruvin9xModelData_v210::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1566,7 +1566,7 @@ t_Open9xGruvin9xModelData_v210::t_Open9xGruvin9xModelData_v210(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:
@@ -1674,7 +1674,7 @@ t_Open9xGruvin9xModelData_v211::operator ModelData ()
       c9x.protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX;
+      c9x.protocol = PXX_DJT;
       break;
     case 4:
       c9x.protocol = DSM2;
@@ -1765,7 +1765,7 @@ t_Open9xGruvin9xModelData_v211::t_Open9xGruvin9xModelData_v211(ModelData &c9x)
       case PPMSIM:
         protocol = 2;
         break;
-      case PXX:
+      case PXX_DJT:
         protocol = 3;
         break;
       case DSM2:

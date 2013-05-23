@@ -747,9 +747,9 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
       case 0:
         switch (proto) {
           case OFF:
-          case X16:
-          case D8:
-          case LR12:
+          case PXX_XJT_X16:
+          case PXX_XJT_D8:
+          case PXX_XJT_LR12:
             return 1;
           default:
             return 0;
@@ -759,10 +759,10 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
         switch (proto) {
           case OFF:
           case PPM:
-          case X16:
-          case D8:
-          case LR12:
-          case DJT:
+          case PXX_XJT_X16:
+          case PXX_XJT_D8:
+          case PXX_XJT_LR12:
+          case PXX_DJT:
             return 1;
           default:
             return 0;
@@ -770,8 +770,7 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
         break;
       case 2:
         switch (proto) {
-          case MASTER:
-          case SLAVE:
+          case PPM:
             return 1;
           default:
             return 0;
@@ -780,12 +779,13 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
       default:
         return 0;
     }
-  } else if (board==BOARD_SKY9X) {
+  }
+  else if (board==BOARD_SKY9X) {
     switch (port) {
       case 0:
         switch (proto) {
           case PPM:
-          case PXX:
+          case PXX_DJT:
           case LP45:
           case DSM2:
           case DSMX:
@@ -805,13 +805,14 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
       default:
         return 0;
     }   
-  } else {
+  }
+  else {
     switch (proto) {
       case PPM:
       case DSMX:
       case LP45:
       case DSM2:
-      case PXX:
+      case PXX_DJT:
       case PPM16:
       case PPMSIM:
         return 1;
