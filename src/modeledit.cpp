@@ -2698,6 +2698,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   }
   else if (g_model.funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
     if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
+    fswtchParam[i]->setDecimals(0);
+    fswtchParam[i]->setSingleStep(1);
     fswtchParam[i]->setValue(g_model.funcSw[i].param);
     if (index<=FuncInstantTrim) {
       widgetsMask |= CUSTOM_FUNCTION_ENABLE;
