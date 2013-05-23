@@ -169,9 +169,6 @@ private slots:
     void on_modelVoice_SB_editingFinished();
     void on_T2ThrTrgChkB_toggled(bool checked);
     void on_TrainerChkB_toggled(bool checked);
-    void on_ppmFrameLengthDSB_editingFinished();
-    void on_DSM_Type_currentIndexChanged(int index);
-    void on_pxxRxNum_editingFinished();
     void on_ttraceCB_currentIndexChanged(int index);
     void on_instantTrim_CB_currentIndexChanged(int index);
     void on_extendedLimitsChkB_toggled(bool checked);
@@ -278,7 +275,6 @@ private slots:
 
     void on_thrExpoChkB_toggled(bool checked);
     void on_thrTrimChkB_toggled(bool checked);
-    void on_ppmDelaySB_editingFinished();
     void on_a1UnitCB_currentIndexChanged(int index);
     void on_a2UnitCB_currentIndexChanged(int index);
     void on_a1RatioSB_editingFinished();
@@ -320,9 +316,21 @@ private slots:
     void telMaxSBeditingFinished();
     void telMinSBeditingFinished();
     void customFieldEdited();
+    void on_ppmDelaySB_editingFinished();
+    void on_ppmDelaySB_2_editingFinished();
     void on_numChannelsSB_editingFinished();
+    void on_numChannelsSB_2_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
+    void on_protocolCB_2_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);
+    void on_pulsePolCB_2_currentIndexChanged(int index);
+    void on_ppmFrameLengthDSB_editingFinished();
+    void on_ppmFrameLengthDSB_2_editingFinished();
+    void on_DSM_Type_currentIndexChanged(int index);
+    void on_DSM_Type_2_currentIndexChanged(int index);
+    void on_pxxRxNum_editingFinished();
+    void on_pxxRxNum_2_editingFinished();
+    
     // TODO void on_trimSWCB_currentIndexChanged(int index);
     void on_trimIncCB_currentIndexChanged(int index);
     void on_timer1DirCB_currentIndexChanged(int index);

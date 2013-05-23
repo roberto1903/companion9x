@@ -366,7 +366,7 @@ int Ersky9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Ersky9xInterface::isAvailable(Protocol prot)
+int Ersky9xInterface::isAvailable(Protocol prot, int port)
 {
   switch (prot) {
     case PPM:

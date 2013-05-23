@@ -740,17 +740,82 @@ int Open9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Open9xInterface::isAvailable(Protocol proto)
+int Open9xInterface::isAvailable(Protocol proto, int port)
 {
-  switch (proto) {
-    case PPM:
-    case DSM2:
-    case PXX:
-    case PPM16:
-    case PPMSIM:
-      return 1;
-    default:
-      return 0;
+  if (IS_TARANIS(board)) {
+    switch (port) {
+      case 0:
+        switch (proto) {
+          case OFF:
+          case X16:
+          case D8:
+          case LR12:
+            return 1;
+          default:
+            return 0;
+        }
+        break;
+      case 1:
+        switch (proto) {
+          case OFF:
+          case PPM:
+          case XJT:
+          case DJT:
+            return 1;
+          default:
+            return 0;
+        }
+        break;
+      case 2:
+        switch (proto) {
+          case MASTER:
+          case SLAVE:
+            return 1;
+          default:
+            return 0;
+        }
+        break;
+      default:
+        return 0;
+    }
+  } else if (board==BOARD_SKY9X) {
+    switch (port) {
+      case 0:
+        switch (proto) {
+          case PPM:
+          case PXX:
+          case LP45:
+          case DSM2:
+          case DSMX:
+            return 1;
+          default:
+            return 0;
+        }
+        break;
+      case 1:
+        switch (proto) {
+          case PPM:
+            return 1;
+          default:
+            return 0;
+        }
+        break;
+      default:
+        return 0;
+    }   
+  } else {
+    switch (proto) {
+      case PPM:
+      case DSMX:
+      case LP45:
+      case DSM2:
+      case PXX:
+      case PPM16:
+      case PPMSIM:
+        return 1;
+      default:
+        return 0;
+    }
   }
 }
 
@@ -932,7 +997,6 @@ QString geturl( int board)
     }
     return url;
 }
-
 
 QString getstamp( int board)
 {

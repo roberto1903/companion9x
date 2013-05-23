@@ -339,7 +339,7 @@ int Er9xInterface::getCapability(const Capability capability)
   }
 }
 
-int Er9xInterface::isAvailable(Protocol prot)
+int Er9xInterface::isAvailable(Protocol prot, int port)
 {
   switch (prot) {
     case PPM:
