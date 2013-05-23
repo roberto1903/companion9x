@@ -2599,6 +2599,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
 
   if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
     fswtchParam[i]->setDecimals(0);
+    fswtchParam[i]->setSingleStep(1);
     fswtchParam[i]->setMinimum(-125);
     fswtchParam[i]->setMaximum(125);
     if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
@@ -2620,6 +2621,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     widgetsMask |= CUSTOM_FUNCTION_GV_MODE + CUSTOM_FUNCTION_ENABLE;
     if (g_model.funcSw[i].adjustMode==0) {
       if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
+      fswtchParam[i]->setDecimals(0);
+      fswtchParam[i]->setSingleStep(1);
       fswtchParam[i]->setMinimum(-125);
       fswtchParam[i]->setMaximum(125);
       fswtchParam[i]->setValue(g_model.funcSw[i].param);
@@ -2658,6 +2661,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     }
     else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
       if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+        fswtchParam[i]->setDecimals(0);
+        fswtchParam[i]->setSingleStep(1);
         fswtchParam[i]->setMinimum(0);
         widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
         fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 254 : 255);
