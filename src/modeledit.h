@@ -74,7 +74,7 @@ private:
     QLabel * fswLabel[C9X_MAX_CUSTOM_FUNCTIONS];
     QComboBox * fswtchSwtch[C9X_MAX_CUSTOM_FUNCTIONS];
     QComboBox * fswtchFunc[C9X_MAX_CUSTOM_FUNCTIONS];
-    QSpinBox * fswtchParam[C9X_MAX_CUSTOM_FUNCTIONS];
+    QDoubleSpinBox * fswtchParam[C9X_MAX_CUSTOM_FUNCTIONS];
     QPushButton * playBT[C9X_MAX_CUSTOM_FUNCTIONS];
     QComboBox * fswtchParamT[C9X_MAX_CUSTOM_FUNCTIONS];
     QComboBox * fswtchParamArmT[C9X_MAX_CUSTOM_FUNCTIONS];
