@@ -53,6 +53,7 @@ private:
     ModelData g_model;
     GeneralSettings g_eeGeneral;
     bool protocolEditLock;
+    bool protocol2EditLock;
     bool switchEditLock;
     bool heliEditLock;
     bool limitEditLock;
