@@ -729,15 +729,25 @@ class TimerData {
 };
 
 enum Protocol {
+  OFF,
   PPM,
   SILV_A,
   SILV_B,
   SILV_C,
   CTP1009,
   PXX,
+  LP45,
   DSM2,
+  DSMX,
   PPM16,
-  PPMSIM
+  PPMSIM,
+  X16,
+  D8,
+  LR12,
+  XJT,
+  DJT,
+  MASTER,
+  SLAVE  
 };
 
 typedef struct proto
@@ -747,15 +757,25 @@ typedef struct proto
 } t_protocol;
 
 const t_protocol prot_list[]= {
+  {OFF, "OFF"},
   {PPM, "PPM"},
   {SILV_A, "Silverlit A"},
   {SILV_B, "Silverlit B"},
   {SILV_C, "Silverlit C"},
   {CTP1009, "CTP1009"},
-  {DSM2, "DSM2"},
   {PXX, "FRSky PXX"},
+  {LP45, "LP45"},
+  {DSM2, "DSM2"},
+  {DSMX, "DSMX"},
   {PPM16, "PPM16"},
   {PPMSIM, "PPMsim"},
+  {X16, "FRSky X16"},
+  {D8, "FRSky D8"},
+  {LR12, "FRSky LR12"},
+  {XJT, "FRSky XJT"},
+  {DJT, "FRSky DJT"},
+  {MASTER, "Trainer Master"},
+  {SLAVE, "Trainer Slave"},  
 };
 
 class ModuleData {
@@ -995,7 +1015,7 @@ class EEPROMInterface
     
     virtual int getCapability(const Capability) = 0;
     
-    virtual int isAvailable(Protocol proto) = 0;
+    virtual int isAvailable(Protocol proto, int port=0) = 0;
 
     virtual bool isAvailable(const RawSwitch & swtch, UseContext context) { return true; }
 

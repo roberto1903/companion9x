@@ -48,7 +48,7 @@ class Th9xInterface : public EEPROMInterface
 
     virtual int getCapability(const Capability);
     
-    virtual int isAvailable(Protocol proto);
+    virtual int isAvailable(Protocol proto, int port=0);
 
     virtual SimulatorInterface * getSimulator();
 

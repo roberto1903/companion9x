@@ -373,16 +373,16 @@ void ModelEdit::tabModelEditSetup()
 
   ui->modelNameLE->setText(g_model.name);
   fsLock=true;
+  if (GetEepromInterface()->getCapability(NumModules)<2) {
+    ui->rf2_GB->hide();
+  }
+  
   if (!GetEepromInterface()->getCapability(HasFailsafe)) {
     ui->ModelSetupTab->setTabEnabled(1,0);
   } else {
     if (GetEepromInterface()->getCapability(HasFailsafe)<32) {
       ui->FSGB_2->hide();      
     }
-    if (GetEepromInterface()->getCapability(NumModules)<2) {
-      ui->rf2_GB->hide();
-    }
-    ui->rf2_GB->hide(); // for the moment hide anyway.
     
     for (int i=0; fssld1[i]; i++) {
       fssld1[i]->setValue(g_model.moduleData[0].failsafeChannels[i]);
@@ -593,21 +593,39 @@ void ModelEdit::tabModelEditSetup()
 
   int index=0;
   int selindex;
+  int selindex2;
   protocolEditLock=true; 
   ui->protocolCB->clear();
   for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
     if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
       ui->protocolCB->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
-      if (g_model.protocol==prot_list[i].prot_num) {
+      if (g_model.moduleData[0].rfProtocol==prot_list[i].prot_num) {
         selindex=index;
       }
       index++;
     }
   }
-
+  if (GetEepromInterface()->getCapability(NumModules)>1) {
+    ui->protocolCB_2->clear();
+    for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
+      if (GetEepromInterface()->isAvailable(prot_list[i].prot_num,1)) {
+        ui->protocolCB_2->addItem(prot_list[i].prot_descr, (QVariant)prot_list[i].prot_num);
+        if (g_model.moduleData[1].rfProtocol==prot_list[i].prot_num) {
+          selindex2=index;
+        }
+        index++;
+      }
+    }
+  }
 
   protocolEditLock=false;  
-  ui->pxxRxNum->setEnabled(false);    ui->protocolCB->setCurrentIndex(selindex);
+  ui->pxxRxNum->setEnabled(false);    
+  ui->protocolCB->setCurrentIndex(selindex);
+  if (GetEepromInterface()->getCapability(NumModules)>1) {
+    ui->pxxRxNum_2->setEnabled(false);
+    ui->protocolCB_2->setCurrentIndex(selindex2);
+  }
+  
   //timer2 mode direction value
   if (GetEepromInterface()->getCapability(Timers)<2) {
     ui->timer2DirCB->hide();
@@ -3115,15 +3133,21 @@ void ModelEdit::on_trimIncCB_currentIndexChanged(int index)
     updateSettings();
 }
 
+void ModelEdit::on_ttraceCB_currentIndexChanged(int index)
+{
+    g_model.thrTraceSrc = index;
+    updateSettings();
+}
+
 void ModelEdit::on_pulsePolCB_currentIndexChanged(int index)
 {
     g_model.moduleData[0].ppmPulsePol = index;
     updateSettings();
 }
 
-void ModelEdit::on_ttraceCB_currentIndexChanged(int index)
+void ModelEdit::on_pulsePolCB_2_currentIndexChanged(int index)
 {
-    g_model.thrTraceSrc = index;
+    g_model.moduleData[1].ppmPulsePol = index;
     updateSettings();
 }
 
@@ -3131,22 +3155,29 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 {
   if (!protocolEditLock) {
     protocolEditLock=true;
-    g_model.protocol=(Protocol)ui->protocolCB->itemData(index).toInt();
+    
+    g_model.moduleData[0].rfProtocol=(Protocol)ui->protocolCB->itemData(index).toInt();
+    int protocol=g_model.moduleData[0].rfProtocol;
   //  g_model.protocol = (Protocol)index;
     updateSettings();
 
-    ui->ppmDelaySB->setEnabled(!g_model.protocol);
-    ui->numChannelsSB->setEnabled(!g_model.protocol);
-    switch (g_model.protocol) {
+    ui->ppmDelaySB->setEnabled(!protocol);
+    ui->numChannelsSB->setEnabled(!protocol);
+    switch (protocol) {
+      case DJT:
+      case XJT:
+      case X16:
+      case D8:
+      case LR12:        
       case PXX:
         ui->label_PPM->hide();
         ui->ppmDelaySB->hide();
         ui->ppmDelaySB->setEnabled(false);
-        ui->label_PPMCH->hide();
+        ui->label_PPMCH->show();
         ui->label_pulsePol->hide();
         ui->pulsePolCB->hide();
-        ui->numChannelsSB->hide();
-        ui->numChannelsSB->setEnabled(false);
+        ui->numChannelsSB->show();
+        ui->numChannelsSB->setEnabled(true);
         ui->label_ppmFrameLength->hide();
         ui->ppmFrameLengthDSB->hide();
         ui->ppmFrameLengthDSB->setEnabled(false);
@@ -3159,7 +3190,9 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->pxxRxNum->setEnabled(true);
         ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
         break;
+      case LP45:
       case DSM2:
+      case DSMX:
         ui->label_pulsePol->hide();
         ui->pulsePolCB->hide();
         ui->label_PPM->hide();
@@ -3183,9 +3216,9 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
           ui->pxxRxNum->show();
           ui->pxxRxNum->setEnabled(true);         
         }
-        ui->DSM_Type->setEnabled(true);
-        ui->label_DSM->show();
-        ui->DSM_Type->show();
+        ui->DSM_Type->setEnabled(false);
+        ui->label_DSM->hide();
+        ui->DSM_Type->hide();
         break;
       default:
         ui->label_pulsePol->show();
@@ -3214,10 +3247,114 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
   }
 }
 
+void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
+{
+  if (!protocolEditLock) {
+    protocolEditLock=true;
+    
+    g_model.moduleData[1].rfProtocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
+    int protocol=g_model.moduleData[1].rfProtocol;
+  //  g_model.protocol = (Protocol)index;
+    updateSettings();
+
+    ui->ppmDelaySB_2->setEnabled(!protocol);
+    ui->numChannelsSB_2->setEnabled(!protocol);
+    switch (protocol) {
+      case DJT:
+      case XJT:
+      case X16:
+      case D8:
+      case LR12:        
+      case PXX:
+        ui->label_PPM_2->hide();
+        ui->ppmDelaySB_2->hide();
+        ui->ppmDelaySB_2->setEnabled(false);
+        ui->label_PPMCH_2->show();
+        ui->label_pulsePol_2->hide();
+        ui->pulsePolCB_2->hide();
+        ui->numChannelsSB_2->show();
+        ui->numChannelsSB_2->setEnabled(true);
+        ui->label_ppmFrameLength_2->hide();
+        ui->ppmFrameLengthDSB_2->hide();
+        ui->ppmFrameLengthDSB_2->setEnabled(false);
+        ui->label_DSM_2->hide();
+        ui->DSM_Type_2->hide();
+        ui->DSM_Type_2->setEnabled(false);
+        ui->label_PXX_2->show();
+        ui->pxxRxNum_2->setMinimum(1);
+        ui->pxxRxNum_2->show();
+        ui->pxxRxNum_2->setEnabled(true);
+        ui->pxxRxNum_2->setValue((g_model.moduleData[1].channelsCount-8)/2+1);
+        break;
+      case LP45:
+      case DSM2:
+      case DSMX:
+        ui->label_pulsePol_2->hide();
+        ui->pulsePolCB_2->hide();
+        ui->label_PPM_2->hide();
+        ui->ppmDelaySB_2->hide();
+        ui->ppmDelaySB_2->setEnabled(false);
+        ui->label_PPMCH_2->hide();
+        ui->numChannelsSB_2->hide();
+        ui->numChannelsSB_2->setEnabled(false);
+        ui->label_ppmFrameLength_2->hide();
+        ui->ppmFrameLengthDSB_2->hide();
+        ui->ppmFrameLengthDSB_2->setEnabled(false);
+        if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+          ui->label_PXX_2->hide();
+          ui->pxxRxNum_2->hide();
+          ui->pxxRxNum_2->setEnabled(false);
+        }
+        else {
+          ui->pxxRxNum_2->setMinimum(0);
+          ui->pxxRxNum_2->setValue(g_model.modelId);
+          ui->label_PXX_2->show();
+          ui->pxxRxNum_2->show();
+          ui->pxxRxNum_2->setEnabled(true);         
+        }
+        ui->DSM_Type_2->setEnabled(false);
+        ui->label_DSM_2->hide();
+        ui->DSM_Type_2->hide();
+        break;
+      default:
+        ui->label_pulsePol_2->show();
+        ui->pulsePolCB_2->show();
+        ui->label_DSM_2->hide();
+        ui->DSM_Type_2->hide();
+        ui->DSM_Type_2->setEnabled(false);
+        ui->label_PXX_2->hide();
+        ui->pxxRxNum_2->hide();
+        ui->pxxRxNum_2->setEnabled(false);
+        ui->label_PPM_2->show();
+        ui->ppmDelaySB_2->show();        
+        ui->ppmDelaySB_2->setEnabled(true);
+        ui->label_PPMCH_2->show();
+        ui->numChannelsSB_2->show();        
+        ui->numChannelsSB_2->setEnabled(true);
+        ui->ppmFrameLengthDSB_2->setEnabled(true);
+        if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
+          ui->ppmFrameLengthDSB_2->show();
+          ui->label_ppmFrameLength_2->show();
+        }
+
+        break;
+    }
+    protocolEditLock=false;
+  }
+}
+
+
 void ModelEdit::on_numChannelsSB_editingFinished()
 {
   // TODO only accept valid values
   g_model.moduleData[0].channelsCount = ui->numChannelsSB->value();
+  updateSettings();
+}
+
+void ModelEdit::on_numChannelsSB_2_editingFinished()
+{
+  // TODO only accept valid values
+  g_model.moduleData[1].channelsCount = ui->numChannelsSB_2->value();
   updateSettings();
 }
 
@@ -3229,10 +3366,62 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
   updateSettings();
 }
 
+void ModelEdit::on_ppmDelaySB_2_editingFinished()
+{
+  if(protocolEditLock) return;
+  // TODO only accept valid values
+  g_model.moduleData[1].ppmDelay = ui->ppmDelaySB_2->value();
+  updateSettings();
+}
+
 void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
 {
   if(protocolEditLock) return;
   g_model.moduleData[0].channelsCount = (index*2)+8;
+  updateSettings();
+}
+
+void ModelEdit::on_DSM_Type_2_currentIndexChanged(int index)
+{
+  if(protocolEditLock) return;
+  g_model.moduleData[1].channelsCount = (index*2)+8;
+  updateSettings();
+}
+
+void ModelEdit::on_pxxRxNum_editingFinished()
+{
+  if(protocolEditLock)
+    return;
+
+  if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+    g_model.moduleData[0].channelsCount = (ui->pxxRxNum->value()-1)*2+8;
+  }
+   else {
+    g_model.modelId= ui->pxxRxNum->value();
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_pxxRxNum_2_editingFinished()
+{
+  if(protocolEditLock)
+    return;
+
+  if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
+    g_model.moduleData[1].channelsCount = (ui->pxxRxNum_2->value()-1)*2+8;
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_ppmFrameLengthDSB_editingFinished()
+{
+  g_model.moduleData[0].ppmFrameLength = (ui->ppmFrameLengthDSB->value()-22.5)/0.5;
+  updateSettings();
+}
+
+void ModelEdit::on_ppmFrameLengthDSB_2_editingFinished()
+{
+  g_model.moduleData[1].ppmFrameLength = (ui->ppmFrameLengthDSB_2->value()-22.5)/0.5;
   updateSettings();
 }
 
@@ -3254,20 +3443,6 @@ void ModelEdit::on_instantTrim_CB_currentIndexChanged(int index)
         break;
       }
     }
-  }
-  updateSettings();
-}
-
-void ModelEdit::on_pxxRxNum_editingFinished()
-{
-  if(protocolEditLock)
-    return;
-
-  if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
-    g_model.moduleData[0].channelsCount = (ui->pxxRxNum->value()-1)*2+8;
-  }
-   else {
-    g_model.modelId= ui->pxxRxNum->value();
   }
   updateSettings();
 }
@@ -5057,12 +5232,6 @@ void ModelEdit::on_TrainerChkB_toggled(bool checked)
 void ModelEdit::on_T2ThrTrgChkB_toggled(bool checked)
 {
   g_model.t2throttle = checked;
-  updateSettings();
-}
-
-void ModelEdit::on_ppmFrameLengthDSB_editingFinished()
-{
-  g_model.moduleData[0].ppmFrameLength = (ui->ppmFrameLengthDSB->value()-22.5)/0.5;
   updateSettings();
 }
 
