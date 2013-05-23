@@ -1126,7 +1126,7 @@ class CustomFunctionsConversionTable: public ConversionTable {
       if (version >= 213 && !IS_ARM(board))
         addConversion(FuncPlayBoth, val++);
       addConversion(FuncPlayValue, val++);
-      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X)
+      if (board == BOARD_GRUVIN9X || board == BOARD_SKY9X || IS_TARANIS(board) )
         addConversion(FuncLogs, val++);
       if (IS_ARM(board))
         addConversion(FuncVolume, val++);
