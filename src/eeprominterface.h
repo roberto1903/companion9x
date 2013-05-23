@@ -286,7 +286,10 @@ class RawSource {
     {
     }
 
-    int toValue();
+    inline const int toValue() const
+    {
+      return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
+    }
 
     QString toString();
     
@@ -338,7 +341,10 @@ class RawSwitch {
     {
     }
 
-    int toValue();
+    inline const int toValue() const
+    {
+      return index >= 0 ? (type * 256 + index) : -(type * 256 - index);
+    }
 
     QString toString();
 

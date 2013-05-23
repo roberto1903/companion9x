@@ -80,10 +80,41 @@ class SwitchesConversionTable: public ConversionTable {
 
   protected:
 
-    // TODO const RawSwitch & sw
-    void addConversion(RawSwitch sw, int b)
+    void addConversion(const RawSwitch & sw, const int b)
     {
       ConversionTable::addConversion(sw.toValue(), b);
+    }
+
+    class Cache {
+      public:
+        Cache(BoardEnum board, unsigned int version, unsigned long flags, SwitchesConversionTable * table):
+          board(board),
+          version(version),
+          flags(flags),
+          table(table)
+        {
+        }
+        BoardEnum board;
+        unsigned int version;
+        unsigned long flags;
+        SwitchesConversionTable * table;
+    };
+
+  public:
+
+    static SwitchesConversionTable * getInstance(BoardEnum board, unsigned int version, unsigned long flags=0)
+    {
+      static std::list<Cache> internalCache;
+
+      for (std::list<Cache>::iterator it=internalCache.begin(); it!=internalCache.end(); it++) {
+        Cache element = *it;
+        if (element.board == board && element.version == version && element.flags == flags)
+          return element.table;
+      }
+
+      Cache element(board, version, flags, new SwitchesConversionTable(board, version, flags));
+      internalCache.push_back(element);
+      return element.table;
     }
 };
 
@@ -175,10 +206,43 @@ class SourcesConversionTable: public ConversionTable {
 
   protected:
 
-    // TODO const RawSource & source
-    void addConversion(RawSource source, int b)
+    void addConversion(const RawSource & source, const int b)
     {
       ConversionTable::addConversion(source.toValue(), b);
+    }
+
+    class Cache {
+      public:
+        Cache(BoardEnum board, unsigned int version, unsigned int variant, unsigned long flags, SourcesConversionTable * table):
+          board(board),
+          version(version),
+          variant(variant),
+          flags(flags),
+          table(table)
+        {
+        }
+        BoardEnum board;
+        unsigned int version;
+        unsigned int variant;
+        unsigned long flags;
+        SourcesConversionTable * table;
+    };
+
+  public:
+
+    static SourcesConversionTable * getInstance(BoardEnum board, unsigned int version, unsigned int variant, unsigned long flags=0)
+    {
+      static std::list<Cache> internalCache;
+
+      for (std::list<Cache>::iterator it=internalCache.begin(); it!=internalCache.end(); it++) {
+        Cache element = *it;
+        if (element.board == board && element.version == version && element.variant == variant && element.flags == flags)
+          return element.table;
+      }
+
+      Cache element(board, version, variant, flags, new SourcesConversionTable(board, version, variant, flags));
+      internalCache.push_back(element);
+      return element.table;
     }
 };
 
@@ -254,8 +318,7 @@ template <int N>
 class SwitchField: public ConversionField< SignedField<N> > {
   public:
     SwitchField(RawSwitch & sw, BoardEnum board, unsigned int version, unsigned long flags=0):
-      ConversionField< SignedField<N> >(_switch, &switchesConversionTable, "Switch"),
-      switchesConversionTable(board, version, flags),
+      ConversionField< SignedField<N> >(_switch, SwitchesConversionTable::getInstance(board, version, flags), "Switch"),
       sw(sw),
       _switch(0)
     {
@@ -274,7 +337,6 @@ class SwitchField: public ConversionField< SignedField<N> > {
     }    
     
   protected:
-    SwitchesConversionTable switchesConversionTable;
     RawSwitch & sw;
     int _switch;
 };
@@ -283,8 +345,7 @@ template <int N>
 class SourceField: public ConversionField< UnsignedField<N> > {
   public:
     SourceField(RawSource & source, BoardEnum board, unsigned int version, unsigned int variant, unsigned long flags=0):
-      ConversionField< UnsignedField<N> >(_source, &sourcesConversionTable, "Source"),
-      sourcesConversionTable(board, version, variant, flags),
+      ConversionField< UnsignedField<N> >(_source, SourcesConversionTable::getInstance(board, version, variant, flags), "Source"),
       source(source),
       _source(0)
     {
@@ -303,7 +364,6 @@ class SourceField: public ConversionField< UnsignedField<N> > {
     }    
 
   protected:
-    SourcesConversionTable sourcesConversionTable;
     RawSource & source;
     unsigned int _source;
 };
@@ -932,8 +992,7 @@ class CustomSwitchesAndSwitchesConversionTable: public ConversionTable {
 
   protected:
 
-    // TODO const RawSwitch & sw
-    void addConversion(RawSwitch sw, int b)
+    void addConversion(const RawSwitch & sw, const int b)
     {
       ConversionTable::addConversion(sw.toValue(), b);
     }
@@ -949,8 +1008,8 @@ class CustomSwitchField: public TransformedField {
       version(version),
       variant(variant),
       functionsConversionTable(board, version),
-      sourcesConversionTable(board, version, variant, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES),
-      switchesConversionTable(board, version),
+      sourcesConversionTable(SourcesConversionTable::getInstance(board, version, variant, (version >= 214 || (!IS_ARM(board) && version >= 213)) ? 0 : FLAG_NOSWITCHES)),
+      switchesConversionTable(SwitchesConversionTable::getInstance(board, version)),
       andswitchesConversionTable(board, version)
     {
       if (IS_ARM(board) && version >= 215) {
@@ -987,16 +1046,16 @@ class CustomSwitchField: public TransformedField {
       v2 = csw.val2;
 
       if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
-        sourcesConversionTable.exportValue(csw.val1, v1);
+        sourcesConversionTable->exportValue(csw.val1, v1);
       }
 
       if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
-        sourcesConversionTable.exportValue(csw.val2, v2);
+        sourcesConversionTable->exportValue(csw.val2, v2);
       }
 
       if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
-        switchesConversionTable.exportValue(csw.val1, v1);
-        switchesConversionTable.exportValue(csw.val2, v2);
+        switchesConversionTable->exportValue(csw.val1, v1);
+        switchesConversionTable->exportValue(csw.val2, v2);
       }
     }
 
@@ -1006,16 +1065,16 @@ class CustomSwitchField: public TransformedField {
       csw.val2 = v2;
 
       if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
-        sourcesConversionTable.importValue(v1, csw.val1);
+        sourcesConversionTable->importValue(v1, csw.val1);
       }
 
       if (csw.func >= CS_FN_EQUAL && csw.func <= CS_FN_ELESS) {
-        sourcesConversionTable.importValue(v2, csw.val2);
+        sourcesConversionTable->importValue(v2, csw.val2);
       }
 
       if (csw.func >= CS_FN_AND && csw.func <= CS_FN_XOR) {
-        switchesConversionTable.importValue(v1, csw.val1);
-        switchesConversionTable.importValue(v2, csw.val2);
+        switchesConversionTable->importValue(v1, csw.val1);
+        switchesConversionTable->importValue(v2, csw.val2);
       }
     }
 
@@ -1026,8 +1085,8 @@ class CustomSwitchField: public TransformedField {
     unsigned int version;
     unsigned int variant;
     CustomSwitchesFunctionsTable functionsConversionTable;
-    SourcesConversionTable sourcesConversionTable;
-    SwitchesConversionTable switchesConversionTable;
+    SourcesConversionTable * sourcesConversionTable;
+    SwitchesConversionTable * switchesConversionTable;
     CustomSwitchesAndSwitchesConversionTable andswitchesConversionTable;
     int v1;
     int v2;
@@ -1133,7 +1192,7 @@ class CustomFunctionField: public TransformedField {
       version(version),
       variant(variant),
       functionsConversionTable(board, version),
-      sourcesConversionTable(board, version, variant, FLAG_NONONE),
+      sourcesConversionTable(SourcesConversionTable::getInstance(board, version, variant, FLAG_NONONE)),
       _param(0),
       _delay(0),
       _union_param(0)
@@ -1190,7 +1249,7 @@ class CustomFunctionField: public TransformedField {
           if (version >= 214) {
             _mode = fn.adjustMode;
             if (fn.adjustMode == 1)
-              sourcesConversionTable.exportValue(fn.param, (int &)value);
+              sourcesConversionTable->exportValue(fn.param, (int &)value);
             else if (fn.adjustMode == 2)
               value = RawSource(fn.param).index;
             else
@@ -1198,13 +1257,13 @@ class CustomFunctionField: public TransformedField {
           }
           else {
             unsigned int value;
-            sourcesConversionTable.exportValue(fn.param, (int &)value);
+            sourcesConversionTable->exportValue(fn.param, (int &)value);
           }
           *((uint32_t *)_arm_param) = value;
         }
         else if (fn.func == FuncPlayValue || fn.func == FuncVolume) {
           unsigned int value;
-          sourcesConversionTable.exportValue(fn.param, (int &)value);
+          sourcesConversionTable->exportValue(fn.param, (int &)value);
           *((uint32_t *)_arm_param) = value;
         }
         else {
@@ -1212,28 +1271,28 @@ class CustomFunctionField: public TransformedField {
         }
       }
       else {
-        /* the default behaviour */
+        /* the default behavior */
         _param = fn.param;
         _union_param = (fn.enabled ? 1 : 0);
         if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
           if (version >= 213) {
             _union_param += (fn.adjustMode << 1);
             if (fn.adjustMode == 1)
-              sourcesConversionTable.exportValue(fn.param, (int &)_param);
+              sourcesConversionTable->exportValue(fn.param, (int &)_param);
             else if (fn.adjustMode == 2)
               _param = RawSource(fn.param).index;
           }
           else {
-            sourcesConversionTable.exportValue(fn.param, (int &)_param);
+            sourcesConversionTable->exportValue(fn.param, (int &)_param);
           }
         }
         else if (fn.func == FuncPlayValue) {
           if (version >= 213) {
             _union_param = fn.repeatParam / 10;
-            sourcesConversionTable.exportValue(fn.param, (int &)_param);
+            sourcesConversionTable->exportValue(fn.param, (int &)_param);
           }
           else {
-            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).exportValue(fn.param, (int &)_param);
+            SourcesConversionTable::getInstance(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES)->exportValue(fn.param, (int &)_param);
           }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
@@ -1263,29 +1322,29 @@ class CustomFunctionField: public TransformedField {
           memcpy(fn.paramarm, _arm_param, sizeof(fn.paramarm));
         }
         else if (fn.func == FuncVolume) {
-          sourcesConversionTable.importValue(value, (int &)fn.param);
+          sourcesConversionTable->importValue(value, (int &)fn.param);
         }
         else if (fn.func >= FuncAdjustGV1 && fn.func <= FuncAdjustGV5) {
           if (version >= 214) {
             fn.adjustMode = _mode;
             if (fn.adjustMode == 1)
-              sourcesConversionTable.importValue(value, (int &)fn.param);
+              sourcesConversionTable->importValue(value, (int &)fn.param);
             else if (fn.adjustMode == 2)
               fn.param = RawSource(SOURCE_TYPE_GVAR, value).toValue();
             else
               fn.param = value;
           }
           else {
-            sourcesConversionTable.importValue(value, (int &)fn.param);
+            sourcesConversionTable->importValue(value, (int &)fn.param);
           }
         }
         else if (fn.func == FuncPlayValue) {
           if (version >= 213) {
             fn.repeatParam = _union_param * 10;
-            sourcesConversionTable.importValue(value, (int &)fn.param);
+            sourcesConversionTable->importValue(value, (int &)fn.param);
           }
           else {
-            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).importValue(value, (int &)fn.param);
+            SourcesConversionTable::getInstance(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES)->importValue(value, (int &)fn.param);
           }
         }
         else {
@@ -1301,21 +1360,21 @@ class CustomFunctionField: public TransformedField {
           if (version >= 213) {
             fn.adjustMode = ((_union_param >> 1) & 0x03);
             if (fn.adjustMode == 1)
-              sourcesConversionTable.importValue(_param, (int &)fn.param);
+              sourcesConversionTable->importValue(_param, (int &)fn.param);
             else if (fn.adjustMode == 2)
               fn.param = RawSource(SOURCE_TYPE_GVAR, _param).toValue();
           }
           else {
-            sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable->importValue(_param, (int &)fn.param);
           }
         }
         else if (fn.func == FuncPlayValue) {
           if (version >= 213) {
             fn.repeatParam = _union_param * 10;
-            sourcesConversionTable.importValue(_param, (int &)fn.param);
+            sourcesConversionTable->importValue(_param, (int &)fn.param);
           }
           else {
-            SourcesConversionTable(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES).importValue(_param, (int &)fn.param);
+            SourcesConversionTable::getInstance(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES)->importValue(_param, (int &)fn.param);
           }
         }
         else if (fn.func == FuncPlaySound || fn.func == FuncPlayPrompt || fn.func == FuncPlayBoth) {
@@ -1338,7 +1397,7 @@ class CustomFunctionField: public TransformedField {
     unsigned int version;
     unsigned int variant;
     CustomFunctionsConversionTable functionsConversionTable;
-    SourcesConversionTable sourcesConversionTable;
+    SourcesConversionTable * sourcesConversionTable;
     char _arm_param[10];
     unsigned int _param;
     unsigned int _delay;

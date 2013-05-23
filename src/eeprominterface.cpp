@@ -33,11 +33,6 @@ void getEEPROMString(char *dst, const char *src, int size)
   }
 }
 
-int RawSource::toValue()
-{
-  return index >= 0 ? (type * 65536 + index) : -(type * 65536 - index);
-}
-
 int RawSource::getDecimals(const ModelData & Model)
 {
   if(type==SOURCE_TYPE_TELEMETRY) {
@@ -314,11 +309,6 @@ QString RawSource::toString()
     default:
       return QObject::tr("----");
   }
-}
-
-int RawSwitch::toValue()
-{
-  return index >= 0 ? (type * 256 + index) : -(type * 256 - index);
 }
 
 QString SwitchUp(const char sw)
