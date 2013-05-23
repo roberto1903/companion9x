@@ -106,8 +106,10 @@ FirmwareVariant preferencesDialog::getFirmwareVariant()
           id += QString("-") + cb->text();
         }
       }
-      if (ui->voiceCombo->count() && (voice || firmware->voice))
-        id += QString("-tts") + ui->voiceCombo->currentText();
+      if (! firmware->eepromInterface->getCapability(MultiLangVoice)) {
+        if (ui->voiceCombo->count() && (voice || firmware->voice))
+          id += QString("-tts") + ui->voiceCombo->currentText();
+      }
       if (ui->langCombo->count())
         id += QString("-") + ui->langCombo->currentText();
 
