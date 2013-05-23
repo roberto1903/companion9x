@@ -79,7 +79,7 @@ class ProtocolsConversionTable: public ConversionTable
         addConversion(PPM16, val++);
         addConversion(PPMSIM, val++);
       }
-      addConversion(PXX, val++);
+      addConversion(PXX_DJT, val++);
       addConversion(DSM2, val++);
     }
 };

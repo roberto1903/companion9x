@@ -268,6 +268,20 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
   return result;
 }
 
+QString getProtocolStr(const int proto)
+{
+  static const char *strings[] = { "OFF",
+                                   "PPM",
+                                   "Silverlit A", "Silverlit B", "Silverlit C",
+                                   "CTP1009",
+                                   "LP45", "DSM2", "DSMX",
+                                   "PPM16", "PPMsim",
+                                   "FrSky XJT - X16", "FrSky XJT - D8", "FrSky XJT - LR12", "FrSky DJT",
+  };
+
+  return CHECK_IN_ARRAY(strings, proto);
+}
+
 void populateFuncCB(QComboBox *b, unsigned int value)
 {
   b->clear();

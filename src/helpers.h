@@ -48,6 +48,7 @@ void populateExpoCurvesCB(QComboBox *b, int value);
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields=0);
 void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields=0);
 QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model);
+QString getProtocolStr(const int proto);
 
 #define POPULATE_SOURCES   1
 #define POPULATE_TRIMS     2
