@@ -476,7 +476,7 @@ class BoolField: public TransformedField {
 class ConversionTable {
 
   public:
-    bool exportValue(int before, int &after)
+    bool exportValue(const int before, int &after)
     {
       after = 0;
 
@@ -491,7 +491,7 @@ class ConversionTable {
       return false;
     }
 
-    bool importValue(int before, int &after)
+    bool importValue(const int before, int &after)
     {
       after = 0;
 
@@ -510,7 +510,7 @@ class ConversionTable {
 
     class ConversionTuple {
       public:
-        ConversionTuple(int a, int b):
+        ConversionTuple(const int a, const int b):
           a(a),
           b(b)
         {
@@ -520,7 +520,7 @@ class ConversionTable {
         int b;
     };
 
-    void addConversion(int a, int b)
+    void addConversion(const int a, const int b)
     {
       internalTable.push_back(ConversionTuple(a, b));
     }
