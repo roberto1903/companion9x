@@ -2347,9 +2347,10 @@ void ModelEdit::tabCustomFunctions()
     paramLayout->addWidget(fswtchGVmode[i]);
     populateGVmodeCB(fswtchGVmode[i], g_model.funcSw[i].adjustMode);
 
-    fswtchParam[i] = new QSpinBox(this);
+    fswtchParam[i] = new QDoubleSpinBox(this);
     fswtchParam[i]->setProperty("functionIndex", i);
     fswtchParam[i]->setAccelerated(true);
+    fswtchParam[i]->setDecimals(0);
     connect(fswtchParam[i],SIGNAL(editingFinished()),this,SLOT(customFunctionEdited()));
     paramLayout->addWidget(fswtchParam[i]);
 
@@ -2532,7 +2533,7 @@ void ModelEdit::playMusic()
   QString track;
   if (qd.exists()) {
     if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      track=path+QString("/%1.wav").arg(fswtchParam[index]->value(),4,10,(const QChar)'0');
+      track=path+QString("/%1.wav").arg(int(fswtchParam[index]->value()),4,10,(const QChar)'0');
     } else {
       if (fswtchParamArmT[index]->currentText()!="----") {
         track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
@@ -2597,11 +2598,22 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
 #endif
 
   if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
+    fswtchParam[i]->setDecimals(0);
     fswtchParam[i]->setMinimum(-125);
     fswtchParam[i]->setMaximum(125);
     if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
     fswtchParam[i]->setValue(g_model.funcSw[i].param);
     widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
+  }  
+  else if (index==FuncLogs) {
+    fswtchParam[i]->setDecimals(1);
+    fswtchParam[i]->setMinimum(0);
+    fswtchParam[i]->setMaximum(25.5);
+    fswtchParam[i]->setSingleStep(0.1);
+    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value()*10;
+    fswtchParam[i]->setValue(g_model.funcSw[i].param/10);
+    widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
+    
   }
   else if (index>=FuncAdjustGV1 && index<=FuncAdjustGV5) {
     if (modified) g_model.funcSw[i].adjustMode = fswtchGVmode[i]->currentIndex();
