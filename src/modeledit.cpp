@@ -595,6 +595,7 @@ void ModelEdit::tabModelEditSetup()
   int selindex;
   int selindex2;
   protocolEditLock=true; 
+  protocol2EditLock=true; 
   ui->protocolCB->clear();
   for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
     if (GetEepromInterface()->isAvailable(prot_list[i].prot_num)) {
@@ -606,6 +607,7 @@ void ModelEdit::tabModelEditSetup()
     }
   }
   if (GetEepromInterface()->getCapability(NumModules)>1) {
+    index=0;
     ui->protocolCB_2->clear();
     for (uint i=0; i<(sizeof(prot_list)/sizeof(t_protocol)); i++) {
       if (GetEepromInterface()->isAvailable(prot_list[i].prot_num,1)) {
@@ -631,9 +633,8 @@ void ModelEdit::tabModelEditSetup()
   ui->pxxRxNum->hide();
   ui->label_numChannelsEnd->hide();
   ui->numChannelsEndSB->hide();
-
-  protocolEditLock=false;  
-  ui->pxxRxNum->setEnabled(false);    
+  ui->pxxRxNum->setEnabled(false);
+  protocolEditLock=false;    
   ui->protocolCB->setCurrentIndex(selindex);
   if (GetEepromInterface()->getCapability(NumModules)>1) {
     ui->label_PPM_2->hide();
@@ -651,6 +652,7 @@ void ModelEdit::tabModelEditSetup()
     ui->label_numChannelsEnd_2->hide();
     ui->numChannelsEndSB_2->hide();
     ui->pxxRxNum_2->setEnabled(false);
+    protocol2EditLock=false;
     ui->protocolCB_2->setCurrentIndex(selindex2);
   }
   
@@ -733,7 +735,7 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmFrameLengthDSB->hide();
     ui->label_ppmFrameLength->hide();
   }
-  switch (g_model.protocol) {
+/*  switch (g_model.protocol) {
     case PXX:
       ui->pxxRxNum->setMinimum(1);
       ui->numChannelsSB->setValue(8);
@@ -760,7 +762,7 @@ void ModelEdit::tabModelEditSetup()
       ui->pxxRxNum->setEnabled(false);
       ui->numChannelsSB->setValue(g_model.moduleData[0].channelsCount);
       break;
-  }
+  }*/
 }
 
 void ModelEdit::on_modelVoice_SB_editingFinished() {
@@ -3209,7 +3211,6 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->numChannelsEndSB->hide();
         break;    
       case DJT:
-      case XJT:
       case X16:
       case D8:
       case LR12:        
@@ -3295,8 +3296,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 
 void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
 {
-  if (!protocolEditLock) {
-    protocolEditLock=true;
+  if (!protocol2EditLock) {
+    protocol2EditLock=true;
     
     g_model.moduleData[1].rfProtocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
     int protocol=g_model.moduleData[1].rfProtocol;
@@ -3323,7 +3324,6 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->numChannelsEndSB_2->hide();
         break;    
       case DJT:
-      case XJT:
       case X16:
       case D8:
       case LR12:        
@@ -3403,7 +3403,7 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
 
         break;
     }
-    protocolEditLock=false;
+    protocol2EditLock=false;
   }
 }
 
@@ -3432,7 +3432,7 @@ void ModelEdit::on_ppmDelaySB_editingFinished()
 
 void ModelEdit::on_ppmDelaySB_2_editingFinished()
 {
-  if(protocolEditLock) return;
+  if(protocol2EditLock) return;
   // TODO only accept valid values
   g_model.moduleData[1].ppmDelay = ui->ppmDelaySB_2->value();
   updateSettings();
@@ -3447,7 +3447,7 @@ void ModelEdit::on_DSM_Type_currentIndexChanged(int index)
 
 void ModelEdit::on_DSM_Type_2_currentIndexChanged(int index)
 {
-  if(protocolEditLock) return;
+  if(protocol2EditLock) return;
   g_model.moduleData[1].channelsCount = (index*2)+8;
   updateSettings();
 }
@@ -3468,7 +3468,7 @@ void ModelEdit::on_pxxRxNum_editingFinished()
 
 void ModelEdit::on_pxxRxNum_2_editingFinished()
 {
-  if(protocolEditLock)
+  if(protocol2EditLock)
     return;
 
   if (!GetEepromInterface()->getCapability(DSM2Indexes)) {

@@ -759,7 +759,9 @@ int Open9xInterface::isAvailable(Protocol proto, int port)
         switch (proto) {
           case OFF:
           case PPM:
-          case XJT:
+          case X16:
+          case D8:
+          case LR12:
           case DJT:
             return 1;
           default:

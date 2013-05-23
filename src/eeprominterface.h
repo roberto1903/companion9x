@@ -744,7 +744,6 @@ enum Protocol {
   X16,
   D8,
   LR12,
-  XJT,
   DJT,
   MASTER,
   SLAVE  
@@ -772,7 +771,6 @@ const t_protocol prot_list[]= {
   {X16, "FRSky X16"},
   {D8, "FRSky D8"},
   {LR12, "FRSky LR12"},
-  {XJT, "FRSky XJT"},
   {DJT, "FRSky DJT"},
   {MASTER, "Trainer Master"},
   {SLAVE, "Trainer Slave"},  
