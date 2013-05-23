@@ -617,11 +617,39 @@ void ModelEdit::tabModelEditSetup()
       }
     }
   }
+  ui->label_PPM->hide();
+  ui->ppmDelaySB->hide();
+  ui->label_PPMCH->hide();
+  ui->label_pulsePol->hide();
+  ui->pulsePolCB->hide();
+  ui->numChannelsSB->hide();
+  ui->label_ppmFrameLength->hide();
+  ui->ppmFrameLengthDSB->hide();
+  ui->label_DSM->hide();
+  ui->DSM_Type->hide();
+  ui->label_PXX->hide();
+  ui->pxxRxNum->hide();
+  ui->label_numChannelsEnd->hide();
+  ui->numChannelsEndSB->hide();
 
   protocolEditLock=false;  
   ui->pxxRxNum->setEnabled(false);    
   ui->protocolCB->setCurrentIndex(selindex);
   if (GetEepromInterface()->getCapability(NumModules)>1) {
+    ui->label_PPM_2->hide();
+    ui->ppmDelaySB_2->hide();
+    ui->label_PPMCH_2->hide();
+    ui->label_pulsePol_2->hide();
+    ui->pulsePolCB_2->hide();
+    ui->numChannelsSB_2->hide();
+    ui->label_ppmFrameLength_2->hide();
+    ui->ppmFrameLengthDSB_2->hide();
+    ui->label_DSM_2->hide();
+    ui->DSM_Type_2->hide();
+    ui->label_PXX_2->hide();
+    ui->pxxRxNum_2->hide();
+    ui->label_numChannelsEnd_2->hide();
+    ui->numChannelsEndSB_2->hide();
     ui->pxxRxNum_2->setEnabled(false);
     ui->protocolCB_2->setCurrentIndex(selindex2);
   }
@@ -3164,6 +3192,22 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
     ui->ppmDelaySB->setEnabled(!protocol);
     ui->numChannelsSB->setEnabled(!protocol);
     switch (protocol) {
+      case OFF:
+        ui->label_PPM->hide();
+        ui->ppmDelaySB->hide();
+        ui->label_PPMCH->hide();
+        ui->label_pulsePol->hide();
+        ui->pulsePolCB->hide();
+        ui->numChannelsSB->hide();
+        ui->label_ppmFrameLength->hide();
+        ui->ppmFrameLengthDSB->hide();
+        ui->label_DSM->hide();
+        ui->DSM_Type->hide();
+        ui->label_PXX->hide();
+        ui->pxxRxNum->hide();
+        ui->label_numChannelsEnd->hide();
+        ui->numChannelsEndSB->hide();
+        break;    
       case DJT:
       case XJT:
       case X16:
@@ -3185,10 +3229,12 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->DSM_Type->hide();
         ui->DSM_Type->setEnabled(false);
         ui->label_PXX->show();
-        ui->pxxRxNum->setMinimum(1);
+        ui->pxxRxNum->setMinimum(0);
         ui->pxxRxNum->show();
         ui->pxxRxNum->setEnabled(true);
         ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
+        ui->label_numChannelsEnd->show();
+        ui->numChannelsEndSB->show();
         break;
       case LP45:
       case DSM2:
@@ -3260,6 +3306,22 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
     ui->ppmDelaySB_2->setEnabled(!protocol);
     ui->numChannelsSB_2->setEnabled(!protocol);
     switch (protocol) {
+      case OFF:
+        ui->label_PPM_2->hide();
+        ui->ppmDelaySB_2->hide();
+        ui->label_PPMCH_2->hide();
+        ui->label_pulsePol_2->hide();
+        ui->pulsePolCB_2->hide();
+        ui->numChannelsSB_2->hide();
+        ui->label_ppmFrameLength_2->hide();
+        ui->ppmFrameLengthDSB_2->hide();
+        ui->label_DSM_2->hide();
+        ui->DSM_Type_2->hide();
+        ui->label_PXX_2->hide();
+        ui->pxxRxNum_2->hide();
+        ui->label_numChannelsEnd_2->hide();
+        ui->numChannelsEndSB_2->hide();
+        break;    
       case DJT:
       case XJT:
       case X16:
@@ -3281,10 +3343,12 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->DSM_Type_2->hide();
         ui->DSM_Type_2->setEnabled(false);
         ui->label_PXX_2->show();
-        ui->pxxRxNum_2->setMinimum(1);
+        ui->pxxRxNum_2->setMinimum(0);
         ui->pxxRxNum_2->show();
         ui->pxxRxNum_2->setEnabled(true);
         ui->pxxRxNum_2->setValue((g_model.moduleData[1].channelsCount-8)/2+1);
+        ui->label_numChannelsEnd_2->show();
+        ui->numChannelsEndSB_2->show();
         break;
       case LP45:
       case DSM2:
