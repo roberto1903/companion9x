@@ -95,13 +95,16 @@ class Open9xFirmware: public FirmwareInfo {
       addLanguage("cz");
       addLanguage("es");
       addLanguage("pt");
-      if (voice) {
+
+      if (!eepromInterface->getCapability(MultiLangVoice)) {
         addTTSLanguage("en");
         addTTSLanguage("fr");
         addTTSLanguage("it");
         addTTSLanguage("de");
         addTTSLanguage("cz");
         addTTSLanguage("sk");
+        addTTSLanguage("pt");
+        addTTSLanguage("es");
       }
     }
     

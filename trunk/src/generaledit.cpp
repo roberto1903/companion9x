@@ -50,11 +50,12 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->ownerNameLE->setValidator(new QRegExpValidator(rx, this));
     switchDefPosEditLock=true;
     populateBacklightCB(ui->backlightswCB, g_eeGeneral.backlightMode);
-    bool voice=current_firmware_variant.id.contains("voice");
+    bool voice = current_firmware_variant.id.contains("voice");
     if (!GetEepromInterface()->getCapability(MultiLangVoice)) {
       ui->VoiceLang_label->hide();
       ui->voiceLang_CB->hide();
-    } else {
+    }
+    else {
       voiceLangEditLock=true;
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
@@ -62,7 +63,8 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
       ui->blinvert_label->hide();
-    } else {
+    }
+    else {
       ui->blinvert_cb->setChecked(g_eeGeneral.blightinv);
     }
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
