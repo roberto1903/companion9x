@@ -111,6 +111,7 @@ const uint8_t modn12x3[4][4]= {
 #define DSW_SWA   19
 #define DSW_SWB   20
 #define DSW_SWC   21
+#define DSW_SW1T   23
 
 // #define NUM_KEYS TRM_RH_UP+1
 // #define TRM_BASE TRM_LH_DWN
