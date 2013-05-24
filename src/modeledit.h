@@ -54,6 +54,7 @@ private:
     GeneralSettings g_eeGeneral;
     bool protocolEditLock;
     bool protocol2EditLock;
+    bool trainerEditLock;
     bool switchEditLock;
     bool heliEditLock;
     bool limitEditLock;
@@ -323,6 +324,7 @@ private slots:
     void on_numChannelsSB_2_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_protocolCB_2_currentIndexChanged(int index);
+    void on_protocolCB_3_currentIndexChanged(int index);
     void on_pulsePolCB_currentIndexChanged(int index);
     void on_pulsePolCB_2_currentIndexChanged(int index);
     void on_ppmFrameLengthDSB_editingFinished();
