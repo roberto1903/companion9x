@@ -232,7 +232,6 @@ void xsimulatorDialog::onTimerEvent()
 #define CBEEP_ON  "QLabel { background-color: #FF364E }"
 #define CBEEP_OFF "QLabel { }"
 
-    ui->label_beep->setStyleSheet(beepShow ? CBEEP_ON : CBEEP_OFF);
     if (beepShow) {
       beepShow--;
     }

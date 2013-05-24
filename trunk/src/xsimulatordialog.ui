@@ -283,22 +283,6 @@ QPushButton:checked {
           </property>
          </widget>
         </item>
-        <item row="5" column="2" colspan="8">
-         <widget class="mySlider" name="trimHRight">
-          <property name="toolTip">
-           <string>Right Double Click to Reset</string>
-          </property>
-          <property name="minimum">
-           <number>-125</number>
-          </property>
-          <property name="maximum">
-           <number>125</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="3">
          <widget class="QSlider" name="switchC">
           <property name="sizePolicy">
@@ -335,36 +319,6 @@ QPushButton:checked {
            <number>1</number>
           </property>
          </widget>
-        </item>
-        <item row="6" column="2" colspan="8">
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <property name="leftMargin">
-           <number>20</number>
-          </property>
-          <property name="rightMargin">
-           <number>20</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="rightXPerc">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="rightYPerc">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
         <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -632,6 +586,52 @@ QPushButton:checked {
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
+        </item>
+        <item row="5" column="1" colspan="9">
+         <widget class="mySlider" name="trimHRight">
+          <property name="toolTip">
+           <string>Right Double Click to Reset</string>
+          </property>
+          <property name="minimum">
+           <number>-125</number>
+          </property>
+          <property name="maximum">
+           <number>125</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="9">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="leftMargin">
+           <number>20</number>
+          </property>
+          <property name="rightMargin">
+           <number>20</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="rightXPerc">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="rightYPerc">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -2848,7 +2848,38 @@ border-radius: 4px;
          </property>
          <item>
           <layout class="QGridLayout" name="gridLayout_9">
-           <item row="0" column="13">
+           <item row="1" column="3">
+            <widget class="QFrame" name="cswitch_20">
+             <property name="autoFillBackground">
+              <bool>true</bool>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <property name="lineWidth">
+              <number>2</number>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_41">
+              <property name="margin">
+               <number>2</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelCSW_20">
+                <property name="text">
+                 <string>SWK</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="12">
             <widget class="QFrame" name="cswitch_12">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -2879,7 +2910,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="14">
+           <item row="0" column="13">
             <widget class="QFrame" name="cswitch_13">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -2972,7 +3003,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="12">
+           <item row="0" column="11">
             <widget class="QFrame" name="cswitch_11">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3065,7 +3096,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="17">
+           <item row="0" column="16">
             <widget class="QFrame" name="cswitch_16">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3096,7 +3127,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="15">
+           <item row="0" column="14">
             <widget class="QFrame" name="cswitch_14">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3127,7 +3158,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="16">
+           <item row="0" column="15">
             <widget class="QFrame" name="cswitch_15">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3189,7 +3220,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="10">
+           <item row="0" column="9">
             <widget class="QFrame" name="cswitch_9">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3220,7 +3251,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="11">
+           <item row="0" column="10">
             <widget class="QFrame" name="cswitch_10">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3335,37 +3366,6 @@ border-radius: 4px;
                <widget class="QLabel" name="labelCSW_18">
                 <property name="text">
                  <string>SWI</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QFrame" name="cswitch_20">
-             <property name="autoFillBackground">
-              <bool>true</bool>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Panel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <property name="lineWidth">
-              <number>2</number>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_41">
-              <property name="margin">
-               <number>2</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="labelCSW_20">
-                <property name="text">
-                 <string>SWK</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -3592,7 +3592,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="10">
+           <item row="1" column="9">
             <widget class="QFrame" name="cswitch_25">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3623,7 +3623,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="11">
+           <item row="1" column="10">
             <widget class="QFrame" name="cswitch_26">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3654,38 +3654,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="0" column="9" rowspan="2">
-            <widget class="QFrame" name="beep_frame">
-             <property name="autoFillBackground">
-              <bool>true</bool>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Panel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <property name="lineWidth">
-              <number>2</number>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <property name="margin">
-               <number>2</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="label_beep">
-                <property name="text">
-                 <string>BEEP</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="12">
+           <item row="1" column="11">
             <widget class="QFrame" name="cswitch_27">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3716,7 +3685,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="13">
+           <item row="1" column="12">
             <widget class="QFrame" name="cswitch_28">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3747,7 +3716,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="14">
+           <item row="1" column="13">
             <widget class="QFrame" name="cswitch_29">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3778,7 +3747,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="15">
+           <item row="1" column="14">
             <widget class="QFrame" name="cswitch_30">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3809,7 +3778,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="16">
+           <item row="1" column="15">
             <widget class="QFrame" name="cswitch_31">
              <property name="autoFillBackground">
               <bool>true</bool>
@@ -3840,7 +3809,7 @@ border-radius: 4px;
              </layout>
             </widget>
            </item>
-           <item row="1" column="17">
+           <item row="1" column="16">
             <widget class="QFrame" name="cswitch_32">
              <property name="autoFillBackground">
               <bool>true</bool>
