@@ -344,9 +344,9 @@ bool MdiChild::saveAs(bool isNew)
 bool MdiChild::saveFile(const QString &fileName, bool setCurrent)
 {
     QString myFile;
-    myFile=fileName;
-    if (GetEepromInterface()->getEEpromSize()==EESIZE_SKY9X) {
-      myFile.replace(".eepe",".bin");
+    myFile = fileName;
+    if (GetEepromInterface()->getBoard() == BOARD_SKY9X) {
+      myFile.replace(".eepe", ".bin");
     }
     QFile file(myFile);
 
