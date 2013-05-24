@@ -615,6 +615,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return 0;
       else
         return 1;
+    case ModelTrainerEnable:
+      if (IS_TARANIS(board))
+        return 1;
+      else
+        return 0;
     case HapticLength:
     case HapticMode:
       return 1;
@@ -711,7 +716,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 32; // 
       return (board==BOARD_SKY9X ? 16 : 0);
     case NumModules:
-      return (IS_TARANIS(board) ? 2 : 1);      
+      return (IS_ARM(board) ? 2 : 1);      
     case HasCurrentCalibration:
       return (IS_ARM(board) ? true : false);
     case HasVolume:

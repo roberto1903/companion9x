@@ -619,6 +619,38 @@ void ModelEdit::tabModelEditSetup()
       }
     }
   }
+  if (GetEepromInterface()->getCapability(ModelTrainerEnable)) {
+    trainerEditLock=true;
+    if (!g_model.traineron) {
+      ui->protocolCB_3->setCurrentIndex(0);
+      ui->label_PPM_3->hide();
+      ui->ppmDelaySB_3->hide();
+      ui->label_PPMCH_3->hide();
+      ui->label_pulsePol_3->hide();
+      ui->pulsePolCB_3->hide();
+      ui->numChannelsSB_3->hide();
+      ui->label_ppmFrameLength_3->hide();
+      ui->ppmFrameLengthDSB_3->hide();
+      ui->label_numChannelsEnd_3->hide();
+      ui->numChannelsEndSB_3->hide();      
+    } else {
+      ui->protocolCB_3->setCurrentIndex(1);
+      ui->label_PPM_3->show();
+      ui->ppmDelaySB_3->show();
+      ui->label_PPMCH_3->show();
+      ui->label_pulsePol_3->show();
+      ui->pulsePolCB_3->show();
+      ui->numChannelsSB_3->show();
+      ui->label_ppmFrameLength_3->show();
+      ui->ppmFrameLengthDSB_3->show();
+      ui->label_numChannelsEnd_3->show();
+      ui->numChannelsEndSB_3->show();      
+    }
+    trainerEditLock=false;
+  } else {
+        ui->rf3_GB->hide();
+  }
+
   ui->label_PPM->hide();
   ui->ppmDelaySB->hide();
   ui->label_PPMCH->hide();
@@ -721,11 +753,6 @@ void ModelEdit::tabModelEditSetup()
   ui->ppmDelaySB->setEnabled(!g_model.protocol);
   ui->numChannelsSB->setEnabled(!g_model.protocol);
   ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
-  ui->TrainerChkB->setChecked(g_model.traineron);
-  if (!GetEepromInterface()->getCapability(ModelTrainerEnable)) {
-      ui->label_Trainer->hide();
-      ui->TrainerChkB->hide();
-  }
   ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
   if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
     ui->T2ThrTrg->hide();
@@ -736,12 +763,14 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmFrameLengthDSB->hide();
     ui->label_ppmFrameLength->hide();
   }
-/*  switch (g_model.protocol) {
+  switch (g_model.protocol) {
     case PXX_DJT:
-      ui->pxxRxNum->setMinimum(1);
-      ui->numChannelsSB->setValue(8);
-      ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
-      ui->DSM_Type->setCurrentIndex(0);
+    case PXX_XJT_X16:
+    case PXX_XJT_D8:
+    case PXX_XJT_LR12:
+      ui->pxxRxNum->setMinimum(0);
+//      ui->numChannelsSB->setValue(8);
+//      ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
       break;
     case DSM2:
         if (!GetEepromInterface()->getCapability(DSM2Indexes)) {
@@ -752,7 +781,6 @@ void ModelEdit::tabModelEditSetup()
           ui->pxxRxNum->setValue((g_model.modelId));
       }
       ui->numChannelsSB->setValue(8);
-      ui->DSM_Type->setCurrentIndex((g_model.moduleData[0].channelsCount-8)/2);
       break;
     default:
       ui->label_DSM->hide();
@@ -763,7 +791,7 @@ void ModelEdit::tabModelEditSetup()
       ui->pxxRxNum->setEnabled(false);
       ui->numChannelsSB->setValue(g_model.moduleData[0].channelsCount);
       break;
-  }*/
+  }
 }
 
 void ModelEdit::on_modelVoice_SB_editingFinished() {
@@ -3422,6 +3450,45 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         break;
     }
     protocol2EditLock=false;
+  }
+}
+
+void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
+{
+  if (!trainerEditLock) {
+    trainerEditLock=true;
+    
+//    g_model.moduleData[1].protocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
+//    int protocol=g_model.moduleData[1].protocol;
+  //  g_model.protocol = (Protocol)index;
+    updateSettings();
+    switch (index) {
+      case 0:
+        ui->label_PPM_3->hide();
+        ui->ppmDelaySB_3->hide();
+        ui->label_PPMCH_3->hide();
+        ui->label_pulsePol_3->hide();
+        ui->pulsePolCB_3->hide();
+        ui->numChannelsSB_3->hide();
+        ui->label_ppmFrameLength_3->hide();
+        ui->ppmFrameLengthDSB_3->hide();
+        ui->label_numChannelsEnd_3->hide();
+        ui->numChannelsEndSB_3->hide();
+        break;    
+      default:
+        ui->label_PPM_3->show();
+        ui->ppmDelaySB_3->show();
+        ui->label_PPMCH_3->show();
+        ui->label_pulsePol_3->show();
+        ui->pulsePolCB_3->show();
+        ui->numChannelsSB_3->show();
+        ui->label_ppmFrameLength_3->show();
+        ui->ppmFrameLengthDSB_3->show();
+        ui->label_numChannelsEnd_3->show();
+        ui->numChannelsEndSB_3->show();
+        break;
+    }
+    trainerEditLock=false;
   }
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>945</width>
-    <height>839</height>
+    <height>822</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1217,19 +1217,6 @@
              </item>
             </layout>
            </item>
-           <item row="21" column="2">
-            <widget class="QCheckBox" name="TrainerChkB"/>
-           </item>
-           <item row="21" column="0">
-            <widget class="QLabel" name="label_Trainer">
-             <property name="text">
-              <string>Trainer mode</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
            <item row="19" column="0" colspan="23">
             <widget class="QGroupBox" name="rf1_GB">
              <property name="title">
@@ -1840,22 +1827,6 @@
              </layout>
             </widget>
            </item>
-           <item row="22" column="15">
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>80</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
            <item row="3" column="7">
             <widget class="QCheckBox" name="thrTrimChkB">
              <property name="text">
@@ -1980,6 +1951,242 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              <property name="text">
               <string/>
              </property>
+            </widget>
+           </item>
+           <item row="22" column="0">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::MinimumExpanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>2</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="21" column="0" colspan="23">
+            <widget class="QGroupBox" name="rf3_GB">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_73" columnstretch="0,0,0,0,0,0,0,0,1" columnminimumwidth="110,110,0,0,0,0,0,0,0">
+              <item row="2" column="3">
+               <widget class="QSpinBox" name="ppmDelaySB_3">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="suffix">
+                 <string> usec</string>
+                </property>
+                <property name="minimum">
+                 <number>100</number>
+                </property>
+                <property name="maximum">
+                 <number>800</number>
+                </property>
+                <property name="singleStep">
+                 <number>50</number>
+                </property>
+                <property name="value">
+                 <number>300</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_PPM_3">
+                <property name="text">
+                 <string>PPM delay</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="5">
+               <widget class="QSpinBox" name="numChannelsEndSB_3">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="suffix">
+                 <string>ch</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>16</number>
+                </property>
+                <property name="singleStep">
+                 <number>2</number>
+                </property>
+                <property name="value">
+                 <number>8</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="4">
+               <widget class="QLabel" name="label_numChannelsEnd_3">
+                <property name="text">
+                 <string>--</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="8">
+               <spacer name="horizontalSpacer_25">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_pulsePol_3">
+                <property name="text">
+                 <string>Pulse Shift (polarity)</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_PPMCH_3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Channels</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="protocol_label_6">
+                <property name="text">
+                 <string>Trainer Mode</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="protocolCB_3">
+                <item>
+                 <property name="text">
+                  <string>Master</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Slave</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QSpinBox" name="numChannelsSB_3">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="suffix">
+                 <string>ch</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>16</number>
+                </property>
+                <property name="singleStep">
+                 <number>2</number>
+                </property>
+                <property name="value">
+                 <number>8</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="7">
+               <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB_3">
+                <property name="suffix">
+                 <string> mSec</string>
+                </property>
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>12.500000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>32.500000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.500000000000000</double>
+                </property>
+                <property name="value">
+                 <double>22.500000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="pulsePolCB_3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Negative</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Positive</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="6">
+               <widget class="QLabel" name="label_ppmFrameLength_3">
+                <property name="text">
+                 <string>PPM Frame Length</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_8">
+                <property name="styleSheet">
+                 <string notr="true">font-weight:bold;</string>
+                </property>
+                <property name="text">
+                 <string>Master/Trainer Port</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
@@ -8415,7 +8622,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>480</height>
+            <height>727</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -11847,8 +12054,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>915</width>
+            <height>713</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -16822,8 +17029,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>915</width>
+            <height>742</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
