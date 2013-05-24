@@ -170,7 +170,6 @@ private slots:
     void clearCurves(bool ask=true);
     void on_modelVoice_SB_editingFinished();
     void on_T2ThrTrgChkB_toggled(bool checked);
-    void on_TrainerChkB_toggled(bool checked);
     void on_ttraceCB_currentIndexChanged(int index);
     void on_instantTrim_CB_currentIndexChanged(int index);
     void on_extendedLimitsChkB_toggled(bool checked);

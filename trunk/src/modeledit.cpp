@@ -5372,12 +5372,6 @@ void ModelEdit::plotCurve(bool checked)
   drawCurve();
 }
 
-void ModelEdit::on_TrainerChkB_toggled(bool checked)
-{
-  g_model.traineron = checked;
-  updateSettings();
-}
-
 void ModelEdit::on_T2ThrTrgChkB_toggled(bool checked)
 {
   g_model.t2throttle = checked;
