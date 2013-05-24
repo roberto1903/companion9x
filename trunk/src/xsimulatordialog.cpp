@@ -443,6 +443,26 @@ void xsimulatorDialog::setValues()
   ui->labelCSW_10->setStyleSheet(outputs.vsw[9] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_11->setStyleSheet(outputs.vsw[10] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_12->setStyleSheet(outputs.vsw[11] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_13->setStyleSheet(outputs.vsw[12] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_14->setStyleSheet(outputs.vsw[13] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_15->setStyleSheet(outputs.vsw[14] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_16->setStyleSheet(outputs.vsw[15] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_17->setStyleSheet(outputs.vsw[16] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_18->setStyleSheet(outputs.vsw[17] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_19->setStyleSheet(outputs.vsw[18] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_20->setStyleSheet(outputs.vsw[19] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_21->setStyleSheet(outputs.vsw[20] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_22->setStyleSheet(outputs.vsw[21] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_23->setStyleSheet(outputs.vsw[22] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_24->setStyleSheet(outputs.vsw[23] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_25->setStyleSheet(outputs.vsw[24] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_26->setStyleSheet(outputs.vsw[25] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_27->setStyleSheet(outputs.vsw[26] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_28->setStyleSheet(outputs.vsw[27] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_29->setStyleSheet(outputs.vsw[28] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_30->setStyleSheet(outputs.vsw[29] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_31->setStyleSheet(outputs.vsw[30] ? CSWITCH_ON : CSWITCH_OFF);
+  ui->labelCSW_32->setStyleSheet(outputs.vsw[31] ? CSWITCH_ON : CSWITCH_OFF);
 
   if (outputs.beep) {
     beepVal = outputs.beep;
