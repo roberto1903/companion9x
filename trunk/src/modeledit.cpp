@@ -600,7 +600,7 @@ void ModelEdit::tabModelEditSetup()
   for (int i=0; i<PROTO_LAST; i++) {
     if (GetEepromInterface()->isAvailable((Protocol)i)) {
       ui->protocolCB->addItem(getProtocolStr(i), (QVariant)i);
-      if (g_model.moduleData[0].rfProtocol == i) {
+      if (g_model.moduleData[0].protocol == i) {
         selindex = index;
       }
       index++;
@@ -612,7 +612,7 @@ void ModelEdit::tabModelEditSetup()
     for (int i=0; i<PROTO_LAST; ++i) {
       if (GetEepromInterface()->isAvailable((Protocol)i, 1)) {
         ui->protocolCB_2->addItem(getProtocolStr(i), (QVariant)i);
-        if (g_model.moduleData[1].rfProtocol == i) {
+        if (g_model.moduleData[1].protocol == i) {
           selindex2 = index;
         }
         index++;
@@ -3206,8 +3206,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
   if (!protocolEditLock) {
     protocolEditLock=true;
     
-    g_model.moduleData[0].rfProtocol=(Protocol)ui->protocolCB->itemData(index).toInt();
-    int protocol=g_model.moduleData[0].rfProtocol;
+    g_model.moduleData[0].protocol=(Protocol)ui->protocolCB->itemData(index).toInt();
+    int protocol=g_model.moduleData[0].protocol;
   //  g_model.protocol = (Protocol)index;
     updateSettings();
 
@@ -3318,8 +3318,8 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
   if (!protocol2EditLock) {
     protocol2EditLock=true;
     
-    g_model.moduleData[1].rfProtocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
-    int protocol=g_model.moduleData[1].rfProtocol;
+    g_model.moduleData[1].protocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
+    int protocol=g_model.moduleData[1].protocol;
   //  g_model.protocol = (Protocol)index;
     updateSettings();
 

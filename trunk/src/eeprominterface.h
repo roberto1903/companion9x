@@ -755,7 +755,7 @@ enum Protocol {
 
 class ModuleData {
   public:
-    int          rfProtocol;
+    int          protocol;
     unsigned int channelsStart;
     int          channelsCount; // 0=8 channels
     unsigned int failsafeMode;
@@ -809,7 +809,6 @@ class ModelData {
 
     char bitmap[10+1];
 
-    unsigned int externalModule;
     unsigned int trainerMode;
 
     ModuleData moduleData[C9X_NUM_MODULES+1/*trainer*/];

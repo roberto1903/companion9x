@@ -1610,7 +1610,9 @@ int exportPpmDelay(int delay) { return (delay - 300) / 50; }
 int importPpmDelay(int delay) { return 300 + 50 * delay; }
 
 Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, unsigned int version, unsigned int variant):
-  StructField(),
+  TransformedField(internalField),
+  internalField("ModelData"),
+  modelData(modelData),
   board(board),
   variant(variant),
   protocolsConversionTable(board)
@@ -1618,146 +1620,160 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
   sprintf(name, "Model %s", modelData.name);
 
   if (HAS_LARGE_LCD(board))
-    Append(new ZCharField<12>(modelData.name));
+    internalField.Append(new ZCharField<12>(modelData.name));
   else
-    Append(new ZCharField<10>(modelData.name));
+    internalField.Append(new ZCharField<10>(modelData.name));
 
   bool release21March2013 = IS_RELEASE_21_MARCH_2013(board, version);
 
   if (release21March2013)
-    Append(new UnsignedField<8>(modelData.modelId));
+    internalField.Append(new UnsignedField<8>(modelData.modelId));
 
   if (IS_TARANIS(board) && version >= 215) {
-    Append(new CharField<10>(modelData.bitmap));
+    internalField.Append(new CharField<10>(modelData.bitmap));
   }
 
   for (int i=0; i<O9X_MAX_TIMERS; i++) {
-    Append(new TimerModeField(modelData.timers[i].mode, board, version));
+    internalField.Append(new TimerModeField(modelData.timers[i].mode, board, version));
     if (release21March2013) {
-      Append(new UnsignedField<12>(modelData.timers[i].val));
-      Append(new BoolField<1>(modelData.timers[i].countdownBeep));
-      Append(new BoolField<1>(modelData.timers[i].minuteBeep));
+      internalField.Append(new UnsignedField<12>(modelData.timers[i].val));
+      internalField.Append(new BoolField<1>(modelData.timers[i].countdownBeep));
+      internalField.Append(new BoolField<1>(modelData.timers[i].minuteBeep));
       if (HAS_PERSISTENT_TIMERS(board)) {
-        Append(new BoolField<1>(modelData.timers[i].persistent));
-        Append(new SpareBitsField<1>());
-        Append(new SpareBitsField<16>());
+        internalField.Append(new BoolField<1>(modelData.timers[i].persistent));
+        internalField.Append(new SpareBitsField<1>());
+        internalField.Append(new SpareBitsField<16>());
       }
       else {
-        Append(new SpareBitsField<2>());
+        internalField.Append(new SpareBitsField<2>());
       }
     }
     else {
-      Append(new UnsignedField<16>(modelData.timers[i].val));
+      internalField.Append(new UnsignedField<16>(modelData.timers[i].val));
       if (HAS_PERSISTENT_TIMERS(board)) {
-        Append(new BoolField<1>(modelData.timers[i].persistent));
-        Append(new SpareBitsField<15>());
+        internalField.Append(new BoolField<1>(modelData.timers[i].persistent));
+        internalField.Append(new SpareBitsField<15>());
       }
     }
   }
 
   if (IS_TARANIS(board))
-    Append(new SpareBitsField<3>());
+    internalField.Append(new SpareBitsField<3>());
   else
-    Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("OpenTX doesn't accept this protocol")));
+    internalField.Append(new ConversionField< SignedField<3> >(modelData.protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("OpenTX doesn't accept this protocol")));
 
-  Append(new BoolField<1>(modelData.thrTrim));
+  internalField.Append(new BoolField<1>(modelData.thrTrim));
 
   if (IS_TARANIS(board))
-    Append(new SpareBitsField<4>());
+    internalField.Append(new SpareBitsField<4>());
   else
-    Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("OpenTX doesn't allow this number of channels")));
+    internalField.Append(new ConversionField< SignedField<4> >(modelData.moduleData[0].channelsCount, &channelsConversionTable, "Channels number", ::QObject::tr("OpenTX doesn't allow this number of channels")));
 
-  Append(new UnsignedField<3>(modelData.trimInc));
-  Append(new BoolField<1>(modelData.disableThrottleWarning));
+  internalField.Append(new UnsignedField<3>(modelData.trimInc));
+  internalField.Append(new BoolField<1>(modelData.disableThrottleWarning));
 
   if (IS_TARANIS(board))
-    Append(new SpareBitsField<1>());
+    internalField.Append(new SpareBitsField<1>());
   else
-    Append(new BoolField<1>(modelData.moduleData[0].ppmPulsePol));
+    internalField.Append(new BoolField<1>(modelData.moduleData[0].ppmPulsePol));
 
-  Append(new BoolField<1>(modelData.extendedLimits));
-  Append(new BoolField<1>(modelData.extendedTrims));
-  Append(new BoolField<1>(modelData.throttleReversed));
-  Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].ppmDelay, exportPpmDelay, importPpmDelay));
+  internalField.Append(new BoolField<1>(modelData.extendedLimits));
+  internalField.Append(new BoolField<1>(modelData.extendedTrims));
+  internalField.Append(new BoolField<1>(modelData.throttleReversed));
+  internalField.Append(new ConversionField< SignedField<8> >(modelData.moduleData[0].ppmDelay, exportPpmDelay, importPpmDelay));
 
   if (IS_ARM(board) || board==BOARD_GRUVIN9X)
-    Append(new UnsignedField<16>(modelData.beepANACenter));
+    internalField.Append(new UnsignedField<16>(modelData.beepANACenter));
   else
-    Append(new UnsignedField<8>(modelData.beepANACenter));
+    internalField.Append(new UnsignedField<8>(modelData.beepANACenter));
 
   for (int i=0; i<MAX_MIXERS(board, version); i++)
-    Append(new MixField(modelData.mixData[i], board, version));
+    internalField.Append(new MixField(modelData.mixData[i], board, version));
   for (int i=0; i<MAX_CHANNELS(board, version); i++)
-    Append(new LimitField(modelData.limitData[i], board));
+    internalField.Append(new LimitField(modelData.limitData[i], board));
   for (int i=0; i<MAX_EXPOS(board, version); i++)
-    Append(new ExpoField(modelData.expoData[i], board, version));
-  Append(new CurvesField(modelData.curves, board));
+    internalField.Append(new ExpoField(modelData.expoData[i], board, version));
+  internalField.Append(new CurvesField(modelData.curves, board));
   for (int i=0; i<MAX_CUSTOM_SWITCHES(board, version); i++)
-    Append(new CustomSwitchField(modelData.customSw[i], board, version, variant));
+    internalField.Append(new CustomSwitchField(modelData.customSw[i], board, version, variant));
   for (int i=0; i<MAX_CUSTOM_FUNCTIONS(board, version); i++)
-    Append(new CustomFunctionField(modelData.funcSw[i], board, version, variant));
-  Append(new HeliField(modelData.swashRingData, board, version, variant));
+    internalField.Append(new CustomFunctionField(modelData.funcSw[i], board, version, variant));
+  internalField.Append(new HeliField(modelData.swashRingData, board, version, variant));
   for (int i=0; i<MAX_PHASES(board, version); i++)
-    Append(new PhaseField(modelData.phaseData[i], i, board, version));
-  Append(new SignedField<8>(modelData.moduleData[0].ppmFrameLength));
-  Append(new UnsignedField<8>(modelData.thrTraceSrc));
+    internalField.Append(new PhaseField(modelData.phaseData[i], i, board, version));
+  internalField.Append(new SignedField<8>(modelData.moduleData[0].ppmFrameLength));
+  internalField.Append(new UnsignedField<8>(modelData.thrTraceSrc));
 
   if (!release21March2013)
-    Append(new UnsignedField<8>(modelData.modelId));
+    internalField.Append(new UnsignedField<8>(modelData.modelId));
 
   if (IS_TARANIS(board))
-    Append(new UnsignedField<16>(modelData.switchWarningStates));
+    internalField.Append(new UnsignedField<16>(modelData.switchWarningStates));
   else
-    Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
+    internalField.Append(new SwitchesWarningField<8>(modelData.switchWarningStates, board, version));
 
   if ((board == BOARD_STOCK || (board == BOARD_M128 && version >= 215)) && (variant & GVARS_VARIANT)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
       // on M64 GVARS are common to all phases, and there is no name
-      Append(new SignedField<16>(modelData.phaseData[0].gvars[i]));
+      internalField.Append(new SignedField<16>(modelData.phaseData[0].gvars[i]));
     }
   }
 
   if (board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) {
     for (int i=0; i<O9X_MAX_GVARS; i++) {
-      Append(new ZCharField<6>(modelData.gvars_names[i]));
+      internalField.Append(new ZCharField<6>(modelData.gvars_names[i]));
     }
   }
 
   if ((board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) || (variant & FRSKY_VARIANT)) {
-    Append(new FrskyField(modelData.frsky, board, version));
+    internalField.Append(new FrskyField(modelData.frsky, board, version));
   }
 
   if (IS_TARANIS(board) && version < 215) {
-    Append(new CharField<10>(modelData.bitmap));
+    internalField.Append(new CharField<10>(modelData.bitmap));
   }
 
   int modulesCount = 2;
 
   if (IS_TARANIS(board)) {
     modulesCount = 3;
-    Append(new UnsignedField<8>(modelData.externalModule));
-    Append(new UnsignedField<8>(modelData.trainerMode));
+    internalField.Append(new ConversionField< SignedField<8> >(modelData.moduleData[1].protocol, &protocolsConversionTable, "Protocol", ::QObject::tr("OpenTX doesn't accept this protocol")));
+    internalField.Append(new UnsignedField<8>(modelData.trainerMode));
   }
 
   if (IS_ARM(board) && version >= 215) {
     for (int module=0; module<modulesCount; module++) {
-      Append(new SignedField<8>(modelData.moduleData[module].rfProtocol));
-      Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
-      Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
-      Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
+      internalField.Append(new UnsignedField<8>(subprotocols[module]));
+      internalField.Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
+      internalField.Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
+      internalField.Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
       for (int i=0; i<32; i++)
-        Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
-      Append(new ConversionField< SignedField<8> >(modelData.moduleData[module].ppmDelay, exportPpmDelay, importPpmDelay));
-      Append(new SignedField<8>(modelData.moduleData[module].ppmFrameLength));
-      Append(new BoolField<8>(modelData.moduleData[module].ppmPulsePol));
+        internalField.Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
+      internalField.Append(new ConversionField< SignedField<8> >(modelData.moduleData[module].ppmDelay, exportPpmDelay, importPpmDelay));
+      internalField.Append(new SignedField<8>(modelData.moduleData[module].ppmFrameLength));
+      internalField.Append(new BoolField<8>(modelData.moduleData[module].ppmPulsePol));
     }
   }
 
   if (IS_TARANIS(board)) {
     for (int i=0; i<MAX_CURVES(board); i++) {
-      Append(new ZCharField<6>(modelData.curves[i].name));
+      internalField.Append(new ZCharField<6>(modelData.curves[i].name));
     }
   }
+}
+
+void Open9xModelDataNew::beforeExport()
+{
+  if (IS_TARANIS(board)) {
+    for (int module=0; module<3; module++) {
+      if (modelData.moduleData[module].protocol >= PXX_XJT_X16 && modelData.moduleData[module].protocol <= PXX_XJT_LR12)
+        subprotocols[module] = modelData.moduleData[module].protocol - PXX_XJT_X16;
+    }
+  }
+}
+
+void Open9xModelDataNew::afterImport()
+{
 }
 
 Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
