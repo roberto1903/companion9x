@@ -356,6 +356,51 @@ void simulatorDialog::loadParams(RadioData &radioData, const int model_idx)
 
     beepVal = 0;
     beepShow = 0;
+    switches=txInterface->getCapability(CustomSwitches);
+    if ( switches < 13) {
+      ui->cswitch_13->hide();
+      ui->labelCSW_13->hide();
+      ui->cswitch_14->hide();
+      ui->labelCSW_14->hide();
+      ui->cswitch_15->hide();
+      ui->labelCSW_15->hide();
+    }
+    if ( switches < 16) {
+      ui->cswitch_16->hide();
+      ui->labelCSW_16->hide();
+      ui->cswitch_17->hide();
+      ui->labelCSW_17->hide();
+      ui->cswitch_18->hide();
+      ui->labelCSW_18->hide();
+      ui->cswitch_19->hide();
+      ui->labelCSW_19->hide();
+      ui->cswitch_20->hide();
+      ui->labelCSW_20->hide();
+      ui->cswitch_21->hide();
+      ui->labelCSW_21->hide();
+      ui->cswitch_22->hide();
+      ui->labelCSW_22->hide();
+      ui->cswitch_23->hide();
+      ui->labelCSW_23->hide();
+      ui->cswitch_24->hide();
+      ui->labelCSW_24->hide();
+      ui->cswitch_25->hide();
+      ui->labelCSW_25->hide();
+      ui->cswitch_26->hide();
+      ui->labelCSW_26->hide();
+      ui->cswitch_27->hide();
+      ui->labelCSW_27->hide();
+      ui->cswitch_28->hide();
+      ui->labelCSW_28->hide();
+      ui->cswitch_29->hide();
+      ui->labelCSW_29->hide();
+      ui->cswitch_30->hide();
+      ui->labelCSW_30->hide();
+      ui->cswitch_31->hide();
+      ui->labelCSW_31->hide();
+      ui->cswitch_32->hide();
+      ui->labelCSW_32->hide();
+    }
 
     simulator->start(g_radioData, model_idx<0);
 
@@ -512,7 +557,30 @@ void simulatorDialog::setValues()
   ui->labelCSW_10->setStyleSheet(outputs.vsw[9] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_11->setStyleSheet(outputs.vsw[10] ? CSWITCH_ON : CSWITCH_OFF);
   ui->labelCSW_12->setStyleSheet(outputs.vsw[11] ? CSWITCH_ON : CSWITCH_OFF);
-
+  if (switches > 12) {
+    ui->labelCSW_13->setStyleSheet(outputs.vsw[12] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_14->setStyleSheet(outputs.vsw[13] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_15->setStyleSheet(outputs.vsw[14] ? CSWITCH_ON : CSWITCH_OFF);
+  }
+  if (switches > 15) {  
+    ui->labelCSW_16->setStyleSheet(outputs.vsw[15] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_17->setStyleSheet(outputs.vsw[16] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_18->setStyleSheet(outputs.vsw[17] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_19->setStyleSheet(outputs.vsw[18] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_20->setStyleSheet(outputs.vsw[19] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_21->setStyleSheet(outputs.vsw[20] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_22->setStyleSheet(outputs.vsw[21] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_23->setStyleSheet(outputs.vsw[22] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_24->setStyleSheet(outputs.vsw[23] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_25->setStyleSheet(outputs.vsw[24] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_26->setStyleSheet(outputs.vsw[25] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_27->setStyleSheet(outputs.vsw[26] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_28->setStyleSheet(outputs.vsw[27] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_29->setStyleSheet(outputs.vsw[28] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_30->setStyleSheet(outputs.vsw[29] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_31->setStyleSheet(outputs.vsw[30] ? CSWITCH_ON : CSWITCH_OFF);
+    ui->labelCSW_32->setStyleSheet(outputs.vsw[31] ? CSWITCH_ON : CSWITCH_OFF);
+  }
   if (outputs.beep) {
     beepVal = outputs.beep;
     beepShow=20;
