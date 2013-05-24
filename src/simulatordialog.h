@@ -37,6 +37,7 @@ private:
     QString windowName;
     int backLight;
     bool lightOn;
+    int switches;
 #ifdef JOYSTICKS
     Joystick *joystick;
     int jscal[8][4];
