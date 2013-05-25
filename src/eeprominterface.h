@@ -80,16 +80,6 @@ const uint8_t modn12x3[4][4]= {
 #define STK_P2   6
 #define STK_P3   7
 
-#define DR_HIGH   0
-#define DR_MID    1
-#define DR_LOW    2
-#define DR_EXPO   0
-#define DR_WEIGHT 1
-#define DR_RIGHT  0
-#define DR_LEFT   1
-#define DR_DRSW1  99
-#define DR_DRSW2  98
-
 #define DSW_THR   1
 #define DSW_RUD   2
 #define DSW_ELE   3
@@ -99,26 +89,6 @@ const uint8_t modn12x3[4][4]= {
 #define DSW_AIL   7
 #define DSW_GEA   8
 #define DSW_TRN   9
-#define DSW_SW1   10
-#define DSW_SW2   11
-#define DSW_SW3   12
-#define DSW_SW4   13
-#define DSW_SW5   14
-#define DSW_SW6   15
-#define DSW_SW7   16
-#define DSW_SW8   17
-#define DSW_SW9   18
-#define DSW_SWA   19
-#define DSW_SWB   20
-#define DSW_SWC   21
-#define DSW_SW1T   23
-
-// #define NUM_KEYS TRM_RH_UP+1
-// #define TRM_BASE TRM_LH_DWN
-
-#define SUB_MODE_V     1
-#define SUB_MODE_H     2
-#define SUB_MODE_H_DBL 3
 
 const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second is relevant channel out
 1,2,3,4 , 1,2,4,3 , 1,3,2,4 , 1,3,4,2 , 1,4,2,3 , 1,4,3,2,

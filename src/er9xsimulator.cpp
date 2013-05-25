@@ -24,6 +24,8 @@
 #undef min
 #undef max
 
+#define SWSRC_SW1 DSW_SW1
+
 #ifndef __GNUC__
 #include "../winbuild/winbuild.h"
 #endif
