@@ -31,6 +31,7 @@
 #define AUDIO
 #define REVB
 
+#define NUM_POTS  3
 #define SWSRC_SW1 DSW_SW1
 
 #undef min
