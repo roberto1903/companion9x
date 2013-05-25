@@ -60,17 +60,8 @@ if (inputs.rotenc) PIOB->PIO_PDSR &= ~0x40; else PIOB->PIO_PDSR |= 0x40;
 #undef GETVALUES_IMPORT
 memset(outputs.chans, 0, sizeof(outputs.chans));
 memcpy(outputs.chans, g_chans512, sizeof(g_chans512));
-
-#if !defined(NUM_CSW)
-#define NUM_CSW 12
-#endif
-#if !defined PCBTARANIS
 for (int i=0; i<NUM_CSW; i++)
-  outputs.vsw[i] = getSwitch(DSW_SW1+i, 0);
-#else
-for (int i=0; i<32; i++)
-  outputs.vsw[i] = getSwitch(DSW_SW1T+i, 0);
-#endif
+  outputs.vsw[i] = getSwitch(SWSRC_SW1+i, 0);
 #endif
 
 #ifdef LCDCHANGED_IMPORT

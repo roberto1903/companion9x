@@ -31,6 +31,8 @@
 #define AUDIO
 #define REVB
 
+#define SWSRC_SW1 DSW_SW1
+
 #undef min
 #undef max
 
