@@ -24,6 +24,7 @@
 #undef min
 #undef max
 
+#define NUM_POTS  3
 #define NUM_CSW   12
 #define SWSRC_SW1 10
 

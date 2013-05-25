@@ -25,23 +25,12 @@ frskyStreaming = 20;
 #undef SETVALUES_IMPORT
 for (int i=0; i<NUM_STICKS; i++)
   g_anas[i] = inputs.sticks[i];
-#ifndef PCBTARANIS
-for (int i=0; i<BOARD_9X_NUM_POTS; i++)
+for (int i=0; i<NUM_POTS; i++)
   g_anas[NUM_STICKS+i] = inputs.pots[i];
-#else
-for (int i=0; i<BOARD_X9D_NUM_POTS; i++)
-  g_anas[NUM_STICKS+i] = inputs.pots[i];
-
-#endif
-// switches
 for (int i=0; i<C9X_NUM_SWITCHES; i++)
   simuSetSwitch(i, inputs.switches[i]);
-
-// keys
 for (int i=0; i<C9X_NUM_KEYS; i++)
   simuSetKey(i, inputs.keys[i]);
-
-// trims
 for (int i=0; i<NUM_STICKS*2; i++)
   simuSetTrim(i, 0);
 
