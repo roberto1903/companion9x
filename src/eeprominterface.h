@@ -168,7 +168,8 @@ enum HeliSwashTypes {
 #define NUM_CAL_PPM         4
 #define NUM_PPM             8
 #define NUM_CYC             3
-
+#define C9X_NUM_SWITCHES          10
+#define C9X_NUM_KEYS          6
 #define C9X_MAX_TIMERS      2
 
 enum TelemetrySource {
