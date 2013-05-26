@@ -606,6 +606,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? 512 : 104);
     case VoicesAsNumbers:
       return (IS_ARM(board) ? 0 : 1);
+    case VoicesMaxLenght:
+      return (IS_ARM(board) ? (IS_TARANIS(board) ? 10 :  6) : 0);
     case MultiLangVoice:
       return (IS_ARM(board) ? 1 : 0);
     case SoundPitch:
