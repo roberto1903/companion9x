@@ -560,7 +560,7 @@ class FuncSwData { // Function Switches data
     RawSwitch    swtch;
     AssignFunc   func;
     int param;
-    char paramarm[6];
+    char paramarm[10];
     unsigned int enabled; // TODO perhaps not any more the right name
     unsigned int adjustMode;
     unsigned int repeatParam;
@@ -817,6 +817,7 @@ enum Capability {
  countdownBeep,
  CustomFunctions,
  VoicesAsNumbers,
+ VoicesMaxLenght,
  ModelVoice,
  MultiLangVoice,
  InstantTrimSW,
