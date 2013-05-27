@@ -43,6 +43,7 @@
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
+#define GAUGES
 
 #define EEPROM_VARIANT 3
 

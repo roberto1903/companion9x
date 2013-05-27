@@ -47,6 +47,8 @@
 #define PPM_LIMITS_SYMETRICAL
 #define EEPROM_VARIANT 3
 #define COMPANION9X
+#define GAUGES
+
 int board=0;
 inline int geteepromsize() {
   if (board==BOARD_TARANIS_REV4a) {
