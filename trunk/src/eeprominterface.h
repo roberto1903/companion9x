@@ -615,10 +615,10 @@ class FrSkyErAlarmData {
 
 class FrSkyRSSIAlarm {
   public:
-    FrSkyRSSIAlarm() { clear(0); }
+    FrSkyRSSIAlarm() { clear(0, 50); }
     unsigned int level;
     int value;
-    void clear(unsigned int level) { this->level = level; value = 50;}
+    void clear(unsigned int level, int value) { this->level = level; this->value = value;}
 };
 
 class FrSkyChannelData {
@@ -676,7 +676,7 @@ class FrSkyData {
     int varioCenterMax;
     int varioMax;
 
-    void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2); rssiAlarms[1].clear(3); }
+    void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2, 45); rssiAlarms[1].clear(3, 42); }
 };
 
 enum TimerMode {
