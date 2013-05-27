@@ -2690,14 +2690,14 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     if (index==FuncPlayValue) {
       if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
       populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
-      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM;
+      widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_REPEAT;
     }
     else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
       if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
         fswtchParam[i]->setDecimals(0);
         fswtchParam[i]->setSingleStep(1);
         fswtchParam[i]->setMinimum(0);
-        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM;
+        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT;
         fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 254 : 255);
         if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
         fswtchParam[i]->setValue(g_model.funcSw[i].param);
