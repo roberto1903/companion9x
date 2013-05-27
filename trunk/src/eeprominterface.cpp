@@ -427,6 +427,14 @@ void ModelData::clear()
   moduleData[1].channelsStart = 8;
   moduleData[1].channelsCount = 8;
   moduleData[0].ppmDelay = 300;
+  int board=GetEepromInterface()->getBoard();
+  if (IS_TARANIS(board)) {
+    moduleData[0].protocol=PXX_XJT_X16;
+    moduleData[1].protocol=OFF;
+  } else {
+    moduleData[0].protocol=PPM;
+    moduleData[1].protocol=OFF;      
+  }
   for (int i=0; i<C9X_MAX_PHASES; i++)
     phaseData[i].clear();
   for (int i=0; i<C9X_MAX_EXPOS; i++)

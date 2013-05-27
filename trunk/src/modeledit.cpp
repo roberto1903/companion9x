@@ -666,8 +666,9 @@ void ModelEdit::tabModelEditSetup()
   ui->label_numChannelsEnd->hide();
   ui->numChannelsEndSB->hide();
   ui->pxxRxNum->setEnabled(false);
-  protocolEditLock=false;    
   ui->protocolCB->setCurrentIndex(selindex);
+  protocolEditLock=false;    
+  on_protocolCB_currentIndexChanged(selindex);
   if (GetEepromInterface()->getCapability(NumModules)>1) {
     ui->label_PPM_2->hide();
     ui->ppmDelaySB_2->hide();
@@ -684,8 +685,9 @@ void ModelEdit::tabModelEditSetup()
     ui->label_numChannelsEnd_2->hide();
     ui->numChannelsEndSB_2->hide();
     ui->pxxRxNum_2->setEnabled(false);
-    protocol2EditLock=false;
     ui->protocolCB_2->setCurrentIndex(selindex2);
+    protocol2EditLock=false;
+    on_protocolCB_2_currentIndexChanged(selindex2);
   }
   
   //timer2 mode direction value
@@ -2863,6 +2865,12 @@ void ModelEdit::tabTelemetry()
             populateCustomScreenFieldCB(csf[index], 0, (r<4), g_model.frsky.usrProto);
           }
           connect(csf[index],SIGNAL(currentIndexChanged(int)),this,SLOT(customFieldEdited()));  
+        }
+      }
+      for (int c=cols; c<3; c++) {
+        for (int r=0; r<4; r++) {
+          int index=screen*12+c*4+r;
+          csf[index]->hide();
         }
       }
     }   

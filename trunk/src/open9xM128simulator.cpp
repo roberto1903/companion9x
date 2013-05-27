@@ -43,6 +43,7 @@
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
 #define EEPROM_VARIANT SIMU_M128_VARIANTS
+#define GAUGES
 
 #undef min
 #undef max

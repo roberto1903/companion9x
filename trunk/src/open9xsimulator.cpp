@@ -47,6 +47,7 @@
 #define PPM_LIMITS_SYMETRICAL
 #define BUZZER
 #define EEPROM_VARIANT SIMU_STOCK_VARIANTS
+#define GAUGES
 
 #undef min
 #undef max
