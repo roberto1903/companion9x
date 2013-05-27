@@ -45,19 +45,8 @@
 #define BOLD_FONT
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
-#define EEPROM_VARIANT 3
-#define COMPANION9X
-#define GAUGES
 
-int board=0;
-inline int geteepromsize() {
-  if (board==BOARD_TARANIS_REV4a) {
-    return 64*1024;
-  } else {
-    return 32*1024;
-  }
-}
-#define EESIZE geteepromsize()
+#define EEPROM_VARIANT 3
 
 #undef min
 #undef max
@@ -69,6 +58,13 @@ inline int geteepromsize() {
 #include <exception>
 
 namespace Open9xX9D {
+
+int taranisSimulatorBoard = 0;
+inline int geteepromsize() {
+  return taranisSimulatorBoard==BOARD_TARANIS_REV4a ? 64*1024 : 32*1024;
+}
+#define EESIZE geteepromsize()
+
 #include "../opentx/targets/taranis/board_taranis.cpp"
 #include "../opentx/protocols/ppm_arm.cpp"
 #include "../opentx/protocols/pxx_arm.cpp"
@@ -147,7 +143,7 @@ using namespace Open9xX9D;
 OpentxTaranisSimulator::OpentxTaranisSimulator(Open9xInterface * open9xInterface):
   open9xInterface(open9xInterface)
 {
-  board=GetEepromInterface()->getBoard();
+  taranisSimulatorBoard = GetEepromInterface()->getBoard();
 }
 
 bool OpentxTaranisSimulator::timer10ms()

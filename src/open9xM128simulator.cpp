@@ -42,6 +42,9 @@
 #define VOICE
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
+#define GAUGES
+#define GPS
+
 #define EEPROM_VARIANT SIMU_M128_VARIANTS
 #define GAUGES
 
