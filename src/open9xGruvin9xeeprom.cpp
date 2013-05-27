@@ -876,16 +876,16 @@ t_Open9xGruvin9xModelData_v207::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -961,7 +961,7 @@ t_Open9xGruvin9xModelData_v207::t_Open9xGruvin9xModelData_v207(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -1062,19 +1062,19 @@ t_Open9xGruvin9xModelData_v208::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1155,7 +1155,7 @@ t_Open9xGruvin9xModelData_v208::t_Open9xGruvin9xModelData_v208(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -1264,19 +1264,19 @@ t_Open9xGruvin9xModelData_v209::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1360,7 +1360,7 @@ t_Open9xGruvin9xModelData_v209::t_Open9xGruvin9xModelData_v209(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -1468,19 +1468,19 @@ t_Open9xGruvin9xModelData_v210::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1556,7 +1556,7 @@ t_Open9xGruvin9xModelData_v210::t_Open9xGruvin9xModelData_v210(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -1668,19 +1668,19 @@ t_Open9xGruvin9xModelData_v211::operator ModelData ()
   }
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1755,7 +1755,7 @@ t_Open9xGruvin9xModelData_v211::t_Open9xGruvin9xModelData_v211(ModelData &c9x)
       timersXtra[i].value=c9x.timers[i].val;
       timersXtra[i].remanent=c9x.timers[i].persistent;
     }
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;

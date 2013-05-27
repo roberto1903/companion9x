@@ -1841,16 +1841,16 @@ t_Open9xModelData_v201::operator ModelData ()
   c9x.timers[1] = timer2;
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1918,16 +1918,16 @@ t_Open9xModelData_v202::operator ModelData ()
   c9x.timers[1] = timer2;
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -1992,7 +1992,7 @@ t_Open9xModelData_v202::t_Open9xModelData_v202(ModelData &c9x)
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -2076,16 +2076,16 @@ t_Open9xModelData_v203::operator ModelData ()
   c9x.timers[1] = timer2;
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -2148,7 +2148,7 @@ t_Open9xModelData_v203::t_Open9xModelData_v203(ModelData &c9x)
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -2242,16 +2242,16 @@ t_Open9xModelData_v204::operator ModelData ()
   c9x.timers[1] = timer2;
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -2316,7 +2316,7 @@ t_Open9xModelData_v204::t_Open9xModelData_v204(ModelData &c9x)
   if (c9x.used) {
     setEEPROMZString(name, c9x.name, sizeof(name));
     timer1 = c9x.timers[0];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -2412,19 +2412,19 @@ t_Open9xModelData_v205::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 4:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -2501,7 +2501,7 @@ t_Open9xModelData_v205::t_Open9xModelData_v205(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -2602,19 +2602,19 @@ t_Open9xModelData_v208::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -2699,7 +2699,7 @@ t_Open9xModelData_v208::t_Open9xModelData_v208(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -2812,19 +2812,19 @@ t_Open9xModelData_v209::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -2912,7 +2912,7 @@ t_Open9xModelData_v209::t_Open9xModelData_v209(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -3022,19 +3022,19 @@ t_Open9xModelData_v210::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -3114,7 +3114,7 @@ t_Open9xModelData_v210::t_Open9xModelData_v210(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -3227,19 +3227,19 @@ t_Open9xModelData_v211::operator ModelData ()
     c9x.timers[i] = timers[i];
   switch(protocol) {
     case 1:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     case 2:
-      c9x.protocol = PPMSIM;
+      c9x.moduleData[0].protocol = PPMSIM;
       break;
     case 3:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 4:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.moduleData[0].channelsCount = 8 + (2 * ppmNCH);
@@ -3315,7 +3315,7 @@ t_Open9xModelData_v211::t_Open9xModelData_v211(ModelData &c9x)
     setEEPROMZString(name, c9x.name, sizeof(name));
     for (int i=0; i<O9X_MAX_TIMERS; i++)
       timers[i] = c9x.timers[i];
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;

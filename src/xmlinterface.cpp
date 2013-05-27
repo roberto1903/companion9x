@@ -126,9 +126,9 @@ void saveModel(ModelData & m, model & xm)
       timer_sequence.push_back(xt);
     } */
   }
-  if (m.protocol != PPM || m.moduleData[0].channelsCount != 8 || m.moduleData[0].ppmDelay != 300 || m.moduleData[0].ppmPulsePol != 0) {
+  if (m.moduleData[0].protocol != PPM || m.moduleData[0].channelsCount != 8 || m.moduleData[0].ppmDelay != 300 || m.moduleData[0].ppmPulsePol != 0) {
     modulation mod;
-    mod.type(modulation::type_type::value(m.protocol));
+    mod.type(modulation::type_type::value(m.moduleData[0].protocol));
     mod.channels(m.moduleData[0].channelsCount);
     mod.delay(m.moduleData[0].ppmDelay);
     mod.polarity(modulation::polarity_type::value(m.moduleData[0].ppmPulsePol));
