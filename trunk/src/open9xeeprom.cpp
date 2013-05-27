@@ -1565,7 +1565,7 @@ class FrskyField: public StructField {
         Append(new SignedField<8>(frsky.varioMax));
         for (int i=0; i<2; i++) {
           Append(new ConversionField< UnsignedField<2> >(frsky.rssiAlarms[i].level, &rssiConversionTable[i], "RSSI"));
-          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -50));
+          Append(new ConversionField< SignedField<6> >(frsky.rssiAlarms[i].value, -45+i*3));
         }
       }
       else {

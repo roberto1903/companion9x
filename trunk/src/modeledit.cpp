@@ -747,13 +747,13 @@ void ModelEdit::tabModelEditSetup()
   ui->bcREaChkB->setChecked(g_model.beepANACenter & BC_BIT_REA);
   ui->bcREbChkB->setChecked(g_model.beepANACenter & BC_BIT_REB);
 
-  //pulse polarity
+  // PPM settings fields
+  ui->ppmDelaySB->setEnabled(g_model.moduleData[0].protocol == PPM);
   ui->pulsePolCB->setCurrentIndex(g_model.moduleData[0].ppmPulsePol);
-
-  //protocol channels ppm delay (disable if needed)
+  ui->ppmDelaySB->setEnabled(g_model.moduleData[0].protocol == PPM);
   ui->ppmDelaySB->setValue(g_model.moduleData[0].ppmDelay);
-  ui->ppmDelaySB->setEnabled(!g_model.protocol);
-  ui->numChannelsSB->setEnabled(!g_model.protocol);
+  // TODO? ui->numChannelsSB->setEnabled(g_model.moduleData[0].protocol == PPM);
+
   ui->extendedLimitsChkB->setChecked(g_model.extendedLimits);
   ui->T2ThrTrgChkB->setChecked(g_model.t2throttle);
   if (!GetEepromInterface()->getCapability(Timer2ThrTrig)) {
@@ -765,7 +765,7 @@ void ModelEdit::tabModelEditSetup()
     ui->ppmFrameLengthDSB->hide();
     ui->label_ppmFrameLength->hide();
   }
-  switch (g_model.protocol) {
+  switch (g_model.moduleData[0].protocol) {
     case PXX_DJT:
     case PXX_XJT_X16:
     case PXX_XJT_D8:

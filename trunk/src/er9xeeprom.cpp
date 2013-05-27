@@ -686,7 +686,7 @@ t_Er9xModelData::t_Er9xModelData(ModelData &c9x)
     tmrModeB = c9x.timers[0].modeB;
     tmrDir = c9x.timers[0].dir;
     tmrVal = c9x.timers[0].val;
-    switch(c9x.protocol) {
+    switch(c9x.moduleData[0].protocol) {
       case PPM:
         protocol = 0;
         break;
@@ -844,16 +844,16 @@ t_Er9xModelData::operator ModelData ()
 
     switch(protocol) {
     case 1:
-      c9x.protocol = PXX_DJT;
+      c9x.moduleData[0].protocol = PXX_DJT;
       break;
     case 2:
-      c9x.protocol = DSM2;
+      c9x.moduleData[0].protocol = DSM2;
       break;
     case 3:
-      c9x.protocol = PPM16;
+      c9x.moduleData[0].protocol = PPM16;
       break;
     default:
-      c9x.protocol = PPM;
+      c9x.moduleData[0].protocol = PPM;
       break;
   }
   c9x.traineron= traineron;

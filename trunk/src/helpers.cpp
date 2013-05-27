@@ -1322,10 +1322,9 @@ QString getTimerStr(TimerData & timer)
 
 QString getProtocol(ModelData * g_model)
 {
-  QString str;
-  str = QString("PPM   SILV_ASILV_BSILV_CTRAC09").mid(g_model->protocol*6,6).replace(" ","");
+  QString str = getProtocolStr(g_model->moduleData[0].protocol);
 
-  if (!g_model->protocol) //ppm protocol
+  if (g_model->moduleData[0].protocol == PPM)
     str.append(QObject::tr(": %1 Channels, %2usec Delay").arg(g_model->moduleData[0].channelsCount).arg(g_model->moduleData[0].ppmDelay));
 
   return str;

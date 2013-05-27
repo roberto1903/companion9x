@@ -209,6 +209,7 @@ enum TelemetrySource {
   TELEMETRY_SOURCE_SPEED_MAX,
   TELEMETRY_SOURCE_DIST_MAX,
   TELEMETRY_SOURCE_CURRENT_MAX,
+  TELEMETRY_SOURCE_POWER_MAX,
   TELEMETRY_SOURCE_ACC,
   TELEMETRY_SOURCE_GPS_TIME,
   TELEMETRY_SOURCES_STATUS_COUNT,
@@ -744,7 +745,6 @@ class ModelData {
     char      name[12+1];
     uint8_t   modelVoice;
     TimerData timers[2];
-    int       protocol;
     bool      thrTrim;            // Enable Throttle Trim
     bool      thrExpo;            // Enable Throttle Expo
     unsigned int trimInc;            // Trim Increments
@@ -768,7 +768,6 @@ class ModelData {
     int8_t   traineron;  // 0 disable trainer, 1 allow trainer
     int8_t   t2throttle;  // Start timer2 using throttle
     unsigned int   modelId;
-    // int8_t tmrModeB;
     unsigned int switchWarningStates;
     char     gvars_names[C9X_MAX_GVARS][6+1];
     uint8_t  gvsource[5];
