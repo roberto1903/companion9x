@@ -1607,7 +1607,9 @@ void ModelEdit::tabMixes()
         }
         if (md->differential) str += " " + tr("Diff") + getGVarString(md->differential);
         if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve));
-        int scale=GetEepromInterface()->getCapability(SlowScale)+1;
+        int scale=GetEepromInterface()->getCapability(SlowScale);
+        if (scale==0)
+          scale=1;
         if (md->delayDown || md->delayUp)
           str += tr(" Delay(u%1:d%2)").arg((double)md->delayUp/scale).arg((double)md->delayDown/scale);
         if (md->speedDown || md->speedUp)
