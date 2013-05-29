@@ -5550,6 +5550,7 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j<16; j++) {
         g_model.curves[j].count=5;
         g_model.curves[j].custom=false;
+        g_model.curves[j].name[0]=0;
         for (int i=0; i<17; i++) {
           g_model.curves[j].points[i].x=0;
           g_model.curves[j].points[i].y=0;
@@ -5569,6 +5570,7 @@ void ModelEdit::clearCurves(bool ask)
   } else {
     ui->curvetype_CB->setCurrentIndex(2);  
   }
+  ui->cname_LE->clear();
   updateSettings();
   drawCurve();
 }
