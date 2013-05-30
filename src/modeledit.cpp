@@ -2380,6 +2380,13 @@ void ModelEdit::tabCustomFunctions()
     paramLayout->addWidget(fswtchGVmode[i]);
     populateGVmodeCB(fswtchGVmode[i], g_model.funcSw[i].adjustMode);
 
+    fswtchParamGV[i] = new QCheckBox(this);
+    fswtchParamGV[i]->setProperty("functionIndex", i);
+    fswtchParamGV[i]->setText("GV");
+    fswtchParamGV[i]->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
+    connect(fswtchParamGV[i],SIGNAL(stateChanged(int)),this,SLOT(customFunctionEdited()));
+    paramLayout->addWidget(fswtchParamGV[i]);
+    
     fswtchParam[i] = new QDoubleSpinBox(this);
     fswtchParam[i]->setProperty("functionIndex", i);
     fswtchParam[i]->setAccelerated(true);
@@ -2595,11 +2602,12 @@ void ModelEdit::playMusic()
 }
 
 #define CUSTOM_FUNCTION_NUMERIC_PARAM  0x01
-#define CUSTOM_FUNCTION_SOURCE_PARAM   0x02
-#define CUSTOM_FUNCTION_FILE_PARAM     0x04
-#define CUSTOM_FUNCTION_GV_MODE        0x08
-#define CUSTOM_FUNCTION_ENABLE         0x10
-#define CUSTOM_FUNCTION_REPEAT         0x20
+#define CUSTOM_FUNCTION_SOURCE_PARAM  0x02
+#define CUSTOM_FUNCTION_FILE_PARAM  0x04
+#define CUSTOM_FUNCTION_GV_MODE  0x08
+#define CUSTOM_FUNCTION_GV_TOOGLE  0x10
+#define CUSTOM_FUNCTION_ENABLE  0x20
+#define CUSTOM_FUNCTION_REPEAT  0x40
 
 void ModelEdit::customFunctionEdited()
 {
@@ -2697,10 +2705,29 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         fswtchParam[i]->setDecimals(0);
         fswtchParam[i]->setSingleStep(1);
         fswtchParam[i]->setMinimum(0);
-        widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT;
+        if (index==FuncPlayPrompt) {
+          widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT + CUSTOM_FUNCTION_GV_TOOGLE;
+        } else {
+          widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT;
+          fswtchParamGV[i]->setChecked(false);
+        }
         fswtchParam[i]->setMaximum(index==FuncPlayBoth ? 254 : 255);
-        if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
-        fswtchParam[i]->setValue(g_model.funcSw[i].param);
+        if (modified) {
+          if (fswtchParamGV[i]->isChecked()) {
+            fswtchParam[i]->setMinimum(1);
+            g_model.funcSw[i].param = std::min(fswtchParam[i]->value(),5.0)+(fswtchParamGV[i]->isChecked() ? 250 : 0);
+          } else {
+            g_model.funcSw[i].param = fswtchParam[i]->value();
+          }
+        }
+        if (g_model.funcSw[i].param>250 && (index!=FuncPlayBoth)) {
+          fswtchParamGV[i]->setChecked(true);
+          fswtchParam[i]->setValue(g_model.funcSw[i].param-250);
+          fswtchParam[i]->setMaximum(5);
+        } else {
+          fswtchParamGV[i]->setChecked(false);
+          fswtchParam[i]->setValue(g_model.funcSw[i].param);
+        }
 #ifdef PHONON
         if (g_model.funcSw[i].param<251)
           playBT[i]->show();
@@ -2741,6 +2768,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   }
 
   fswtchParam[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_NUMERIC_PARAM);
+  fswtchParamGV[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_TOOGLE);
   fswtchParamT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_SOURCE_PARAM);
   fswtchParamArmT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_FILE_PARAM);
   fswtchEnable[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_ENABLE);
