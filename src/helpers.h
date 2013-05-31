@@ -60,6 +60,7 @@ QString getProtocolStr(const int proto);
 #define FRSKY_VARIANT 0x0002
 
 void populateGVarCB(QComboBox *b, int value, int min, int max,int pgvars=5);
+void populateGVCB(QComboBox *b, int value);
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags);
 void populateCSWCB(QComboBox *b, int value);
 QString getTimerMode(int tm);

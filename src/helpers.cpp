@@ -900,6 +900,39 @@ void populateGVarCB(QComboBox *b, int value, int min, int max, int pgvars)
   }//endif gvars
 }
 
+void populateGVCB(QComboBox *b, int value)
+{
+  int selected=0;
+  int nullitem;
+  b->clear();
+  int pgvars=GetEepromInterface()->getCapability(GvarsOfsNum);
+  for (int i=-pgvars; i<=-1; i++) {
+    int16_t gval = (int16_t)(-10000+i);
+    b->addItem(QObject::tr("-GV%1").arg(-i), gval);
+    if (value == gval) {
+      b->setCurrentIndex(b->count()-1);
+      selected=1;
+    }
+  }
+  b->addItem("---", 0);
+  nullitem=b->count()-1;
+  if (value == 0) {
+    b->setCurrentIndex(b->count()-1);
+    selected=1;
+  }
+  for (int i=1; i<=pgvars; i++) {
+    int16_t gval = (int16_t)(10000+i);
+    b->addItem(QObject::tr("GV%1").arg(i), gval);
+    if (value == gval) {
+      b->setCurrentIndex(b->count()-1);
+      selected=1;
+    }
+  }
+  if (selected==0)
+    b->setCurrentIndex(nullitem);
+}
+
+
 void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
 {
   RawSource item;
