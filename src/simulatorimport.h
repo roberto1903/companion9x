@@ -50,7 +50,11 @@ if (inputs.rotenc) PIOB->PIO_PDSR &= ~0x40; else PIOB->PIO_PDSR |= 0x40;
 memset(outputs.chans, 0, sizeof(outputs.chans));
 memcpy(outputs.chans, g_chans512, sizeof(g_chans512));
 for (int i=0; i<NUM_CSW; i++)
+#if defined(BOLD_FONT)
+  outputs.vsw[i] = getSwitch(SWSRC_SW1+i);
+#else
   outputs.vsw[i] = getSwitch(SWSRC_SW1+i, 0);
+#endif
 #endif
 
 #ifdef LCDCHANGED_IMPORT
