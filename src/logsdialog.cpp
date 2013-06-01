@@ -189,7 +189,7 @@ void logsDialog::mouseWheel()
     ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
 }
 
-void logsDialog::plotValue(int index)
+void logsDialog::plotValue(int index, int plot, int numplots)
 {
   int n = csvlog.count(); // number of points in graph
   bool rangeSelected=false;
@@ -212,19 +212,17 @@ void logsDialog::plotValue(int index)
     itemSelected=n-1;
   }
   QVector<double> x(itemSelected), y(itemSelected);
-  yscale=GetScale(csvlog.at(0).at(index));
-  for (int i=1; i<n; i++)
-  {
-    if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
-      uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();
-
-      if (minx>tmp) {
-        minx=tmp;
-      }
-      if (maxx<tmp) {
-        maxx=tmp;
-      }
-      if (yscale<0) {
+  if (numplots<3) {
+    for (int i=1; i<n; i++)
+    {
+      if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
+        uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();
+        if (minx>tmp) {
+          minx=tmp;
+        }
+        if (maxx<tmp) {
+          maxx=tmp;
+        }
         tmpval = csvlog.at(i).at(index).toDouble();
         if (tmpval>maxy) {
           maxy=tmpval;
@@ -234,21 +232,46 @@ void logsDialog::plotValue(int index)
         }
       }
     }
-  }
-  if (yscale<0) {
-    if (miny<0) {
-      miny=-miny;
+    yscale=1;
+  } else {
+    yscale=GetScale(csvlog.at(0).at(index));
+    for (int i=1; i<n; i++)
+    {
+      if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
+        uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();
+
+        if (minx>tmp) {
+          minx=tmp;
+        }
+        if (maxx<tmp) {
+          maxx=tmp;
+        }
+        if (yscale<0) {
+          tmpval = csvlog.at(i).at(index).toDouble();
+          if (tmpval>maxy) {
+            maxy=tmpval;
+          }
+          if (tmpval<miny) {
+            miny=tmpval;
+          }
+        }
+      }
     }
-    if (maxy<0) {
-      maxy=-maxy;
-    }
-    if (miny>maxy) {
-      yscale=miny/1000.0;
-    } else {
-      yscale=maxy/1000.0;
-    }
-    if (yscale==0) {
-      yscale=1;
+    if (yscale<0) {
+      if (miny<0) {
+        miny=-miny;
+      }
+      if (maxy<0) {
+        maxy=-maxy;
+      }
+      if (miny>maxy) {
+        yscale=miny/1000.0;
+      } else {
+        yscale=maxy/1000.0;
+      }
+      if (yscale==0) {
+        yscale=1;
+      }
     }
   }
   for (int i=1; i<n; i++)
@@ -260,18 +283,55 @@ void logsDialog::plotValue(int index)
       itemCount++;
     }
   }
-  ui->customPlot->xAxis->setRange(0, maxx-minx);
-  ui->customPlot->addGraph();
-  ui->customPlot->graph()->setName(csvlog.at(0).at(index));
-  ui->customPlot->graph()->setData(x, y);
-  ui->customPlot->graph()->setLineStyle(QCPGraph::lsLine);
-  ui->customPlot->graph()->setScatterStyle(QCP::ssNone);
-  //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
   QPen graphPen;
-  graphPen.setColor(palette.at(index % 60));
+  QColor color=palette.at(index % 60);
+  graphPen.setColor(color);
   graphPen.setWidthF(1.5);
-  ui->customPlot->graph()->setPen(graphPen);
-  ui->customPlot->replot();
+  if (numplots<3) {
+    if (plot==1) {
+      ui->customPlot->xAxis->setRange(0, maxx-minx);
+      ui->customPlot->yAxis->setRange(miny,maxy);
+      ui->customPlot->yAxis->setLabelColor(color);
+      ui->customPlot->yAxis->setLabel(csvlog.at(0).at(index));
+      ui->customPlot->yAxis->setTickLabels(true);
+      ui->customPlot->yAxis->setVisible(true);
+      ui->customPlot->yAxis2->setVisible(false);
+      ui->customPlot->addGraph(ui->customPlot->xAxis, ui->customPlot->yAxis);
+      ui->customPlot->graph(0)->setName(csvlog.at(0).at(index));
+      ui->customPlot->graph(0)->setData(x, y);
+      ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+      ui->customPlot->graph(0)->setScatterStyle(QCP::ssNone);
+      //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
+      ui->customPlot->graph(0)->setPen(graphPen);
+    } else {
+      ui->customPlot->xAxis2->setRange(0, maxx-minx);
+      ui->customPlot->yAxis2->setTickLabels(true);
+      ui->customPlot->yAxis2->setRange(miny,maxy);
+      ui->customPlot->yAxis2->setVisible(true);
+      ui->customPlot->yAxis2->setLabelColor(color);
+      ui->customPlot->yAxis2->setLabel(csvlog.at(0).at(index));
+      ui->customPlot->addGraph(ui->customPlot->xAxis2, ui->customPlot->yAxis2);
+      ui->customPlot->graph(1)->setName(csvlog.at(0).at(index));
+      ui->customPlot->graph(1)->setData(x, y);
+      ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+      ui->customPlot->graph(1)->setScatterStyle(QCP::ssNone);
+      //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
+      ui->customPlot->graph(1)->setPen(graphPen);
+    }
+  } else {
+      ui->customPlot->yAxis->setTickLabels(false);
+      ui->customPlot->yAxis2->setTickLabels(false);
+      ui->customPlot->yAxis->setRange(-1100, 1100);
+      ui->customPlot->yAxis->setVisible(false);
+      ui->customPlot->yAxis2->setVisible(false);
+      ui->customPlot->addGraph();
+      ui->customPlot->graph()->setName(csvlog.at(0).at(index));
+      ui->customPlot->graph()->setData(x, y);
+      ui->customPlot->graph()->setLineStyle(QCPGraph::lsLine);
+      ui->customPlot->graph()->setScatterStyle(QCP::ssNone);
+      //ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
+      ui->customPlot->graph()->setPen(graphPen);
+  }
 }
 
 void logsDialog::removeSelectedGraph()
@@ -396,14 +456,21 @@ void logsDialog::plotLogs()
 {
   int n = csvlog.at(0).count(); // number of points in graph
   removeAllGraphs();
-  int hasplots=false;
+  int numplots=0;
+  int plots=0;
   for (int i=0; i<n-2; i++) {
     if (ui->FieldsTW->item(0,i)->isSelected()) {
-      plotValue(i+2);
-      hasplots=true;
+      numplots++;
     }
   }
-  ui->customPlot->legend->setVisible(hasplots);
+  
+  for (int i=0; i<n-2; i++) {
+    if (ui->FieldsTW->item(0,i)->isSelected()) {
+      plots++;
+      plotValue(i+2,plots, numplots);
+    }
+  }
+  ui->customPlot->legend->setVisible((numplots>2));
   ui->customPlot->replot();  
 }
 
