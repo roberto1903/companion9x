@@ -19,9 +19,83 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     populateSourceCB(ui->sourceCB, md->srcRaw, POPULATE_SOURCES | POPULATE_SWITCHES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | (GetEepromInterface()->getCapability(GvarsAsSources) ? POPULATE_GVARS : 0));
     ui->sourceCB->removeItem(0);
     int limit=GetEepromInterface()->getCapability(OffsetWeight);
-    populateGVarCB(ui->weightCB, md->weight, -limit, limit, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0) );
-    populateGVarCB(ui->offsetCB, md->sOffset, -limit, limit, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
-    populateGVarCB(ui->differentialCB, md->differential, -100, +100, (GetEepromInterface()->getCapability(GvarsAsWeight) ? GetEepromInterface()->getCapability(GvarsOfsNum) : 0));
+    if (GetEepromInterface()->getCapability(GvarsAsWeight)) {
+      int gvars=0;
+      if (GetEepromInterface()->getCapability(HasVariants)) {
+        if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
+          gvars=1;
+        }
+      }
+      if (gvars==0) {
+        ui->offsetGV->setDisabled(true);
+        ui->weightGV->setDisabled(true);
+        ui->differentialGV->setDisabled(true);
+        if (md->weight>limit || md->weight<-limit) {
+          md->weight=100;
+        }
+        if (md->sOffset>limit || md->sOffset<-limit) {
+          md->sOffset=0;
+        }
+        if (md->differential>100 || md->weight<-100) {
+          md->differential=0;
+        }
+      }
+      populateGVCB(ui->offsetCB,md->sOffset);
+      populateGVCB(ui->weightCB,md->weight);
+      populateGVCB(ui->differentialCB,md->differential);
+      ui->weightSB->setMinimum(-limit);
+      ui->weightSB->setMaximum(limit);
+      if (md->weight>limit || md->weight<-limit) {
+        ui->weightGV->setChecked(true);
+        ui->weightSB->hide();
+        ui->weightCB->show();
+      } else {
+        ui->weightGV->setChecked(false);
+        ui->weightSB->setValue(md->weight);
+        ui->weightSB->show();
+        ui->weightCB->hide();
+      }
+
+      ui->offsetSB->setMinimum(-limit);
+      ui->offsetSB->setMaximum(limit);
+      if (md->sOffset>limit || md->sOffset<-limit) {
+        ui->offsetGV->setChecked(true);
+        ui->offsetSB->hide();
+        ui->offsetCB->show();
+      } else {
+        ui->offsetGV->setChecked(false);
+        ui->offsetSB->setValue(md->sOffset);
+        ui->offsetSB->show();
+        ui->offsetCB->hide();
+      }
+
+      ui->differentialSB->setMinimum(-100);
+      ui->differentialSB->setMaximum(100);
+      if (md->differential>100 || md->differential<-100) {
+        ui->differentialGV->setChecked(true);
+        ui->differentialSB->hide();
+        ui->differentialCB->show();
+      } else {
+        ui->differentialGV->setChecked(false);
+        ui->differentialSB->setValue(md->differential);
+        ui->differentialSB->show();
+        ui->differentialCB->hide();
+      }
+    } else {
+      ui->offsetGV->hide();
+      ui->weightGV->hide();
+      ui->differentialGV->hide();
+      ui->offsetSB->setMinimum(-limit);
+      ui->offsetSB->setMaximum(limit);
+      ui->offsetSB->setValue(md->sOffset);
+      ui->differentialSB->setMinimum(-100);
+      ui->differentialSB->setMaximum(100);
+      ui->differentialSB->setValue(md->differential);
+      ui->weightSB->setMinimum(-limit);
+      ui->weightSB->setMaximum(limit);
+      ui->weightSB->setValue(md->weight);
+    }
+
     ui->FixOffsetChkB->setChecked(md->lateOffset);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
@@ -51,6 +125,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     }
     ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
+        ui->differentialGV->hide();
+        ui->differentialSB->hide();
         ui->differentialCB->hide();
         ui->label_curve->setText(tr("Curve"));
     }
@@ -108,6 +184,12 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     connect(ui->weightCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->offsetCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->differentialCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
+    connect(ui->weightSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->offsetSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->differentialSB,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));
+    connect(ui->weightGV,SIGNAL(stateChanged(int)),this,SLOT(widgetChanged()));
+    connect(ui->offsetGV,SIGNAL(stateChanged(int)),this,SLOT(widgetChanged()));
+    connect(ui->differentialGV,SIGNAL(stateChanged(int)),this,SLOT(widgetChanged()));
     connect(ui->trimCB,SIGNAL(currentIndexChanged(int)),this,SLOT(valuesChanged()));
     connect(ui->MixDR_CB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
     connect(ui->FMtrimChkB,SIGNAL(toggled(bool)),this,SLOT(valuesChanged()));
@@ -142,12 +224,60 @@ void MixerDialog::changeEvent(QEvent *e)
     }
 }
 
+void MixerDialog::widgetChanged()
+{
+    if (GetEepromInterface()->getCapability(GvarsAsWeight)) {
+      int gvars=0;
+      if (GetEepromInterface()->getCapability(HasVariants)) {
+        if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
+          gvars=1;
+        }
+      }
+      if (gvars==1) {
+        if (!GetEepromInterface()->getCapability(DiffMixers)) {
+          if (ui->differentialGV->isChecked()) {
+            ui->differentialCB->show();
+            ui->differentialSB->hide();
+          } else {
+            ui->differentialCB->hide();
+            ui->differentialSB->show();
+          }
+        } 
+        if (ui->weightGV->isChecked()) {
+          ui->weightCB->show();
+          ui->weightSB->hide();
+        } else {
+          ui->weightCB->hide();
+          ui->weightSB->show();
+        }
+        if (ui->offsetGV->isChecked()) {
+          ui->offsetCB->show();
+          ui->offsetSB->hide();
+        } else {
+          ui->offsetCB->hide();
+          ui->offsetSB->show();
+        }
+      }
+      valuesChanged();
+      QTimer::singleShot(0, this, SLOT(shrink()));      
+    }
+}
 
 void MixerDialog::valuesChanged()
 {
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
     md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
-    md->weight    = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
+    if (ui->weightGV->isChecked()) {
+      md->weight = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
+    } else {
+      md->weight = ui->weightSB->value();
+    }
+    if (ui->offsetGV->isChecked()) {
+      md->sOffset = ui->offsetCB->itemData(ui->offsetCB->currentIndex()).toInt();
+    } else {
+      md->sOffset = ui->offsetSB->value();
+    }
+    
     md->sOffset    = ui->offsetCB->itemData(ui->offsetCB->currentIndex()).toInt();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
@@ -158,7 +288,20 @@ void MixerDialog::valuesChanged()
       numcurves=16;
     }
     if (GetEepromInterface()->getCapability(DiffMixers) && (ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves))==0){
-      ui->differentialCB->show();
+      if (GetEepromInterface()->getCapability(GvarsAsWeight)) {
+        ui->differentialGV->show();
+        if (ui->differentialGV->isChecked()) {
+          ui->differentialSB->hide();
+          ui->differentialCB->show();
+        } else {
+          ui->differentialSB->show();
+          ui->differentialCB->hide();            
+        }
+      } else {
+        ui->differentialGV->hide();
+        ui->differentialCB->hide();
+        ui->differentialSB->show();
+      }
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
@@ -169,7 +312,11 @@ void MixerDialog::valuesChanged()
     md->delayUp   = round(ui->delayUpSB->value()*scale);
     md->speedDown = round(ui->slowDownSB->value()*scale);
     md->speedUp   = round(ui->slowUpSB->value()*scale);
-    md->differential = ui->differentialCB->itemData(ui->differentialCB->currentIndex()).toInt();
+    if (ui->differentialGV->isChecked()) {
+      md->differential = ui->differentialCB->itemData(ui->differentialCB->currentIndex()).toInt();
+    } else {
+      md->differential = ui->differentialSB->value();
+    }
     if (GetEepromInterface()->getCapability(MixFmTrim) && md->enableFmTrim==1) {
         ui->label_4->setText(tr("FM Trim Value"));
     } else {

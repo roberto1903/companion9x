@@ -38,43 +38,40 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
       populateGVCB(ui->weightCB,ed->weight);
       populateGVCB(ui->expoCurveCB,ed->curveParam);
 
+      ui->weightSB->setMinimum(0);
+      ui->weightSB->setMaximum(100);
       if (ed->weight>100 || ed->weight<0) {
         ui->weightGV->setChecked(true);
-        ui->weightSB->setMinimum(0);
-        ui->weightSB->setMaximum(100);
         ui->weightSB->hide();
         ui->weightCB->show();
       } else {
         ui->weightGV->setChecked(false);
-        ui->weightSB->setMinimum(0);
-        ui->weightSB->setMaximum(100);
         ui->weightSB->setValue(ed->weight);
         ui->weightSB->show();
         ui->weightCB->hide();
       }
+
+      ui->expoSB->setMinimum(-100);
+      ui->expoSB->setMaximum(100);
       if (ed->expo>100 || ed->expo<-100) {
         ui->expoGV->setChecked(true);
-        ui->expoSB->setMinimum(-100);
-        ui->expoSB->setMaximum(100);
         ui->expoSB->hide();
         ui->expoCB->show();
       } else {
-        ui->expoSB->setMinimum(-100);
-        ui->expoSB->setMaximum(100);
+        ui->expoGV->setChecked(false);
         ui->expoSB->setValue(ed->expo);
         ui->expoSB->show();
         ui->expoCB->hide();
       }
+
+      ui->expoCurveSB->setMinimum(-100);
+      ui->expoCurveSB->setMaximum(100);
       if (ed->curveParam>100 || ed->curveParam<-100) {
         ui->expoCurveGV->setChecked(true);
-        ui->expoCurveSB->setMinimum(-100);
-        ui->expoCurveSB->setMaximum(100);
         ui->expoCurveSB->hide();
         ui->expoCurveCB->show();
       } else {
         ui->expoCurveGV->setChecked(false);
-        ui->expoCurveSB->setMinimum(-100);
-        ui->expoCurveSB->setMaximum(100);
         ui->expoCurveSB->setValue(ed->curveParam);
         ui->expoCurveSB->show();
         ui->expoCurveCB->hide();
@@ -212,9 +209,9 @@ void ExpoDialog::widgetChanged()
           ui->weightSB->show();
         }
       }
+      valuesChanged();
+      QTimer::singleShot(0, this, SLOT(shrink()));      
     }
-    valuesChanged();
-    QTimer::singleShot(0, this, SLOT(shrink()));
 }
 
 
