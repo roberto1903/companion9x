@@ -5376,6 +5376,8 @@ void ModelEdit::resetCurve()
       return;
     }
   }
+  memset(g_model.curves[btn].name,0,sizeof(g_model.curves[btn].name));
+  ui->cname_LE->clear();
   g_model.curves[btn].count=5;
   g_model.curves[btn].custom=false;
   curvesLock=true;
@@ -5542,6 +5544,7 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j< GetEepromInterface()->getCapability(NumCurves3); j++) {
         g_model.curves[count].count=3;
         g_model.curves[count].custom=false;
+        memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name)); 
         for (int i=0; i<17; i++) {
           g_model.curves[count].points[i].x=0;
           g_model.curves[count].points[i].y=0;
@@ -5551,6 +5554,7 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j< GetEepromInterface()->getCapability(NumCurves5); j++) {
         g_model.curves[count].count=5;
         g_model.curves[count].custom=false;
+        memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name)); 
         for (int i=0; i<17; i++) {
           g_model.curves[count].points[i].x=0;
           g_model.curves[count].points[i].y=0;
@@ -5560,6 +5564,7 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j< GetEepromInterface()->getCapability(NumCurves9); j++) {
         g_model.curves[count].count=9;
         g_model.curves[count].custom=false;
+        memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name)); 
         for (int i=0; i<17; i++) {
           g_model.curves[count].points[i].x=0;
           g_model.curves[count].points[i].y=0;
@@ -5569,6 +5574,7 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=count; j<16; j++) {
         g_model.curves[j].count=5;
         g_model.curves[j].custom=false;
+        memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name)); 
         for (int i=0; i<17; i++) {
           g_model.curves[j].points[i].x=0;
           g_model.curves[j].points[i].y=0;
@@ -5578,7 +5584,9 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j<16; j++) {
         g_model.curves[j].count=5;
         g_model.curves[j].custom=false;
-        g_model.curves[j].name[0]=0;
+        int pippo=sizeof(g_model.curves[j].name);
+        qDebug() << pippo;
+        memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name));
         for (int i=0; i<17; i++) {
           g_model.curves[j].points[i].x=0;
           g_model.curves[j].points[i].y=0;
