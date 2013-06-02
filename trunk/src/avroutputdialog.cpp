@@ -270,6 +270,45 @@ QString avrOutputDialog::getProgrammer()
   }
 }
 
+void avrOutputDialog::errorWizard()
+{
+  QString output=ui->plainTextEdit->toPlainText();
+  if (output.contains("avrdude: Expected signature for")) { // wrong signature
+    int pos=output.indexOf("avrdude: Device signature = ");
+    bool fwexist=false;
+    QString DeviceStr="Unknown";
+    QString FwStr="";
+
+    if (pos>0) {
+      QString DeviceId=output.mid(pos+28,8);
+      if (DeviceId=="0x1e9602") {
+        DeviceStr="Atmega 64";
+        FwStr="\n"+tr("ie: OpenTX for 9X board or OpenTX for 9XR board");
+        fwexist=true;
+      } else if (DeviceId=="0x1e9702") {
+        DeviceStr="Atmega 128";
+        FwStr="\n"+tr("ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip");
+        fwexist=true;
+      } else if (DeviceId=="0x1e9703") {
+        DeviceStr="Atmega 1280";
+      } else if (DeviceId=="0x1e9704") {
+        DeviceStr="Atmega 1281";
+      } else if (DeviceId=="0x1e9801") {
+        DeviceStr="Atmega 2560";
+        FwStr="\n"+tr("ie: OpenTX for Gruvin9X  board");
+        fwexist=true;
+      } else if (DeviceId=="0x1e9802") {
+        DeviceStr="Atmega 2561";
+      }
+    }
+    if (fwexist==false) {
+      QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease check advanced burn options to set the correct cpu type.").arg(DeviceStr));
+    } else {
+      QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease select an appropriate firmware type to program it.").arg(DeviceStr)+FwStr);
+    }
+  }
+}
+
 void avrOutputDialog::doAddTextStdErr()
 {
     int nlPos;
@@ -348,8 +387,10 @@ void avrOutputDialog::doFinished(int code=0)
     {
       case AVR_DIALOG_CLOSE_IF_SUCCESSFUL:
         if (!hasErrors && !code) accept();
+        if (code) {
+          errorWizard();
+        }
         break;
-
       case AVR_DIALOG_FORCE_CLOSE:
         if (hasErrors || code)
           reject();
@@ -360,7 +401,14 @@ void avrOutputDialog::doFinished(int code=0)
       case AVR_DIALOG_SHOW_DONE:
         if (hasErrors || code) {
           if (!cmdLine.isEmpty()) {
-            QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" did not finish correctly"));
+            if (getProgrammer()!="AVRDUDE") {
+               QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" did not finish correctly"));
+            } else {
+              int res = QMessageBox::question(this, "companion9x",getProgrammer() + tr(" did not finish correctly!\nDo you want some help ?"),QMessageBox::Yes | QMessageBox::No);
+              if (res != QMessageBox::No) {
+                errorWizard();
+              }
+            }
           } else {
             QMessageBox::critical(this, "companion9x",  tr("Copy did not finish correctly"));
           }
@@ -378,7 +426,7 @@ void avrOutputDialog::doFinished(int code=0)
         break;
 
     default: //AVR_DIALOG_KEEP_OPEN
-        break;
+      break;
     }
 
 
