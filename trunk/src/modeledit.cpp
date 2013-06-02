@@ -1508,7 +1508,7 @@ void ModelEdit::tabMixes()
     for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
-        if((md->destCh==0) || (md->destCh>outputs+(unsigned int)GetEepromInterface()->getCapability(ExtraChannels))) break;
+        if ((md->destCh==0) || (md->destCh>outputs+(unsigned int)GetEepromInterface()->getCapability(ExtraChannels))) continue; 
         QString str = "";
         while(curDest<(md->destCh-1))
         {
@@ -5584,8 +5584,6 @@ void ModelEdit::clearCurves(bool ask)
     for (int j=0; j<16; j++) {
         g_model.curves[j].count=5;
         g_model.curves[j].custom=false;
-        int pippo=sizeof(g_model.curves[j].name);
-        qDebug() << pippo;
         memset(g_model.curves[j].name,0,sizeof(g_model.curves[j].name));
         for (int i=0; i<17; i++) {
           g_model.curves[j].points[i].x=0;
