@@ -39,6 +39,7 @@ protected slots:
     void shrink();
     void forceClose();
     void killTimerElapsed();
+    void errorWizard();
 
 private:
     QString getProgrammer();
