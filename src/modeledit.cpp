@@ -5072,7 +5072,7 @@ void ModelEdit::exposPaste()
 {
   const QClipboard *clipboard = QApplication::clipboard();
   const QMimeData *mimeData = clipboard->mimeData();
-  QListWidgetItem *item = MixerlistWidget->currentItem();
+  QListWidgetItem *item = ExposlistWidget->currentItem();
   if (item)
     pasteExpoMimeData(mimeData, item->data(Qt::UserRole).toByteArray().at(0));
 }
