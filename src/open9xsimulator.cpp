@@ -48,6 +48,7 @@
 #define BUZZER
 #define GAUGES
 #define GPS
+#define FAI_CHOICE
 
 #define EEPROM_VARIANT SIMU_STOCK_VARIANTS
 #define GAUGES

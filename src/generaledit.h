@@ -34,6 +34,7 @@ private slots:
     void on_ownerNameLE_editingFinished();
     void on_PotScrollEnableChkB_stateChanged(int);
     void on_blinvert_cb_stateChanged(int);
+    void on_faimode_CB_stateChanged(int );
     void on_BandGapEnableChkB_stateChanged(int);
     void on_crosstrimChkB_stateChanged(int );
     void on_frskyintalarmChkB_stateChanged(int );

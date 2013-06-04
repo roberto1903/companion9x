@@ -67,6 +67,13 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     else {
       ui->blinvert_cb->setChecked(g_eeGeneral.blightinv);
     }
+    if (!GetEepromInterface()->getCapability(HasFAIMode)) {
+      ui->faimode_CB->hide();
+      ui->label_faimode->hide();
+    }
+    else {
+      ui->faimode_CB->setChecked(g_eeGeneral.fai);
+    }
     ui->ownerNameLE->setText(g_eeGeneral.ownerName);
     if (!GetEepromInterface()->getCapability(OwnerName)) {
       ui->ownerNameLE->setDisabled(true);
@@ -909,6 +916,12 @@ void GeneralEdit::on_PotScrollEnableChkB_stateChanged(int )
 void GeneralEdit::on_blinvert_cb_stateChanged(int )
 {
     g_eeGeneral.blightinv = ui->blinvert_cb->isChecked();
+    updateSettings();
+}
+
+void GeneralEdit::on_faimode_CB_stateChanged(int )
+{
+    g_eeGeneral.fai = ui->faimode_CB->isChecked();
     updateSettings();
 }
 

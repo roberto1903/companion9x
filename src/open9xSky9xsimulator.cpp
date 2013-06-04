@@ -51,6 +51,7 @@
 #define PPM_LIMITS_SYMETRICAL
 #define GAUGES
 #define GPS
+#define FAI_CHOICE
 
 #define EEPROM_VARIANT 3
 

@@ -45,7 +45,7 @@
 #define BOLD_FONT
 #define PPM_CENTER_ADJUSTABLE
 #define PPM_LIMITS_SYMETRICAL
-
+#define FAI_CHOICE
 #define EEPROM_VARIANT 3
 
 #undef min
