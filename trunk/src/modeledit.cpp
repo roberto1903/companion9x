@@ -2601,13 +2601,14 @@ void ModelEdit::playMusic()
   }
 }
 
-#define CUSTOM_FUNCTION_NUMERIC_PARAM  0x01
-#define CUSTOM_FUNCTION_SOURCE_PARAM  0x02
-#define CUSTOM_FUNCTION_FILE_PARAM  0x04
-#define CUSTOM_FUNCTION_GV_MODE  0x08
-#define CUSTOM_FUNCTION_GV_TOOGLE  0x10
-#define CUSTOM_FUNCTION_ENABLE  0x20
-#define CUSTOM_FUNCTION_REPEAT  0x40
+#define CUSTOM_FUNCTION_NUMERIC_PARAM  (1<<0)
+#define CUSTOM_FUNCTION_SOURCE_PARAM   (1<<1)
+#define CUSTOM_FUNCTION_FILE_PARAM     (1<<2)
+#define CUSTOM_FUNCTION_GV_MODE        (1<<3)
+#define CUSTOM_FUNCTION_GV_TOOGLE      (1<<4)
+#define CUSTOM_FUNCTION_ENABLE         (1<<5)
+#define CUSTOM_FUNCTION_REPEAT         (1<<6)
+#define CUSTOM_FUNCTION_PLAY           (1<<7)
 
 void ModelEdit::customFunctionEdited()
 {
@@ -2633,10 +2634,6 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   }
 
   int index = fswtchFunc[i]->currentIndex();
-
-#ifdef PHONON
-  playBT[i]->hide();
-#endif
 
   if (index>=FuncSafetyCh1 && index<=FuncSafetyCh16) {
     fswtchParam[i]->setDecimals(0);
@@ -2692,9 +2689,6 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         widgetsMask |= CUSTOM_FUNCTION_REPEAT;
       }
     }
-#ifdef PHONON
-    playBT[i]->hide();
-#endif
     if (index==FuncPlayValue) {
       if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
       populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
@@ -2707,7 +2701,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         fswtchParam[i]->setMinimum(0);
         if (index==FuncPlayPrompt) {
           widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT + CUSTOM_FUNCTION_GV_TOOGLE;
-        } else {
+        }
+        else {
           widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT;
           fswtchParamGV[i]->setChecked(false);
         }
@@ -2716,7 +2711,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
           if (fswtchParamGV[i]->isChecked()) {
             fswtchParam[i]->setMinimum(1);
             g_model.funcSw[i].param = std::min(fswtchParam[i]->value(),5.0)+(fswtchParamGV[i]->isChecked() ? 250 : 0);
-          } else {
+          }
+          else {
             g_model.funcSw[i].param = fswtchParam[i]->value();
           }
         }
@@ -2728,10 +2724,8 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
           fswtchParamGV[i]->setChecked(false);
           fswtchParam[i]->setValue(g_model.funcSw[i].param);
         }
-#ifdef PHONON
-        if (g_model.funcSw[i].param<251)
-          playBT[i]->show();
-#endif
+        if (g_model.funcSw[i].param < 251)
+          widgetsMask |= CUSTOM_FUNCTION_PLAY;
       }
       else {
         widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
@@ -2739,6 +2733,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
           memset(g_model.funcSw[i].paramarm, 0, sizeof(g_model.funcSw[i].paramarm));
           int vml=GetEepromInterface()->getCapability(VoicesMaxLenght);
           if (fswtchParamArmT[i]->currentText() != "----") {
+    	    widgetsMask |= CUSTOM_FUNCTION_PLAY;
             for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),vml); j++) {
               g_model.funcSw[i].paramarm[j] = fswtchParamArmT[i]->currentText().toAscii().at(j);
             }
@@ -2775,6 +2770,9 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   if (!(widgetsMask & CUSTOM_FUNCTION_ENABLE)) fswtchEnable[i]->setChecked(false);
   fswtchRepeat[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_REPEAT);
   fswtchGVmode[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_MODE);
+#ifdef PHONON
+  playBT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_PLAY);
+#endif
 }
 
 void ModelEdit::tabTelemetry()
