@@ -376,6 +376,7 @@ class GeneralSettings {
     TrainerData trainer;
     unsigned int   view;    // main screen view // TODO enum
     bool      disableThrottleWarning;
+    bool      fai;
     int       switchWarning; // -1=down, 0=off, 1=up
     bool      disableMemoryWarning;
     BeeperMode beeperMode;
@@ -868,6 +869,7 @@ enum Capability {
  HasCvNames,
  HasPxxCountry,
  HasGeneralUnits,
+ HasFAIMode,
  NoTimerDirs,
  NoThrExpo,
  OptrexDisplay,

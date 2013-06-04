@@ -1814,7 +1814,8 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
 
   internalField.Append(new UnsignedField<8>(generalData.view, 0, MAX_VIEWS(board)-1));
 
-  internalField.Append(new SpareBitsField<3>());
+  internalField.Append(new SpareBitsField<2>());
+  internalField.Append(new BoolField<1>(generalData.fai));
   internalField.Append(new SignedField<2>((int &)generalData.beeperMode));
   internalField.Append(new BoolField<1>(generalData.flashBeep));
   internalField.Append(new BoolField<1>(generalData.disableMemoryWarning));

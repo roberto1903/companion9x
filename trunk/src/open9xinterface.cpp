@@ -547,6 +547,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case GvarsInCS:
     case GvarsAsWeight:
     case ExpoIsCurve:
+    case HasFAIMode:
       return 1;
     case GvarsAreNamed:
     case GvarsFlightPhases:
