@@ -319,12 +319,20 @@ bool MdiChild::saveAs(bool isNew)
     QString fileName;
     if (GetEepromInterface()->getBoard() == BOARD_SKY9X) {
       curFile.replace(".eepe", ".bin");
-      QFileInfo fi(curFile);      
+      QFileInfo fi(curFile);
+#ifdef __APPLE__
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName());
+#else
       fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(BIN_FILES_FILTER));
+#endif      
     }
     else {
       QFileInfo fi(curFile);
+#ifdef __APPLE__
+      fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName());
+#else
       fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastDir").toString() + "/" +fi.fileName(), tr(EEPROM_FILES_FILTER));
+#endif      
     }
     if (fileName.isEmpty())
       return false;
