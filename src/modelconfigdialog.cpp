@@ -437,14 +437,14 @@ void modelConfigDialog::ConfigChanged()
         wimages.clear();
         wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png" << "h90.png";
         index=ui->swashType_CB->currentIndex();
-        if (index==4) {
+/*        if (index==4) {
           ui->gyro_CB->setCurrentIndex(0);
           ui->gyroType_Label->hide();
           ui->gyro_CB->hide();
-        } else {
+        } else {*/
           ui->gyroType_Label->show();
           ui->gyro_CB->show();
-        }
+/*      }*/
         ailerons=1;
         throttle=1;
         imgname.append(wimages.at(index));
