@@ -921,7 +921,18 @@ void GeneralEdit::on_blinvert_cb_stateChanged(int )
 
 void GeneralEdit::on_faimode_CB_stateChanged(int )
 {
-    g_eeGeneral.fai = ui->faimode_CB->isChecked();
+    if (ui->faimode_CB->isChecked()) {
+      int ret = QMessageBox::question(this, "companion9x", 
+                     tr("If you enable FAI, you loose the vario, the play functions, the telemetry screen.\nThis function cannot be disabled by the radio.\nAre you sure ?") ,
+                     QMessageBox::Yes | QMessageBox::No);
+      if (ret==QMessageBox::Yes) {
+        g_eeGeneral.fai = true;
+      } else {
+        ui->faimode_CB->setChecked(false);
+      }
+    } else {
+      g_eeGeneral.fai = false;
+    }
     updateSettings();
 }
 
