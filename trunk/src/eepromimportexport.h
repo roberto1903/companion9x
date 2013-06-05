@@ -154,6 +154,40 @@ class UnsignedField: public DataField {
 };
 
 template<int N>
+class BoolField: public DataField {
+  public:
+    explicit BoolField(bool & field):
+      DataField("Bool"),
+      field(field)
+    {
+    }
+
+    virtual void ExportBits(QBitArray & output)
+    {
+      output.resize(N);
+      if (field) {
+        output.setBit(0);
+      }
+    }
+
+    virtual void ImportBits(QBitArray & input)
+    {
+      field = input[0] ? true : false;
+    }
+
+    virtual unsigned int size()
+    {
+      return N;
+    }
+
+  protected:
+    bool & field;
+
+  private:
+    BoolField();
+};
+
+template<int N>
 class SignedField: public DataField {
   public:
     SignedField(int & field):
@@ -444,33 +478,6 @@ class TransformedField: public DataField {
 
   protected:
     DataField & field;
-};
-
-template<int N>
-class BoolField: public TransformedField {
-  public:
-    BoolField(bool & b):
-      TransformedField(internalField),
-      internalField((unsigned int &)_b, "Bool"),
-      b(b),
-      _b(0)
-    {
-    }
-
-    virtual void beforeExport()
-    {
-      _b = b;
-    }
-
-    virtual void afterImport()
-    {
-      b = _b;
-    }
-
-  protected:
-    UnsignedField<N> internalField;
-    bool & b;
-    bool _b;
 };
 
 class ConversionTable {

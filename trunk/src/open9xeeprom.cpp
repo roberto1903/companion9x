@@ -1764,11 +1764,11 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
 void Open9xModelDataNew::beforeExport()
 {
-  if (IS_TARANIS(board)) {
-    for (int module=0; module<3; module++) {
-      if (modelData.moduleData[module].protocol >= PXX_XJT_X16 && modelData.moduleData[module].protocol <= PXX_XJT_LR12)
-        subprotocols[module] = modelData.moduleData[module].protocol - PXX_XJT_X16;
-    }
+  for (int module=0; module<3; module++) {
+    if (modelData.moduleData[module].protocol >= PXX_XJT_X16 && modelData.moduleData[module].protocol <= PXX_XJT_LR12)
+      subprotocols[module] = modelData.moduleData[module].protocol - PXX_XJT_X16;
+    else
+      subprotocols[module] = 0;
   }
 }
 
