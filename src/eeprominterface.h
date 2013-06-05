@@ -729,6 +729,7 @@ enum Protocol {
 
 class ModuleData {
   public:
+    ModuleData() { clear(); }
     int          protocol;
     unsigned int channelsStart;
     int          channelsCount; // 0=8 channels
@@ -737,6 +738,7 @@ class ModuleData {
     int          ppmDelay;
     bool         ppmPulsePol;           // false = positive
     int          ppmFrameLength;
+    void clear() { memset(this, 0, sizeof(ModuleData)); }
 };
 
 class ModelData {
