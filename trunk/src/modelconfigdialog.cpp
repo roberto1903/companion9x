@@ -346,6 +346,7 @@ void modelConfigDialog::tailConfigChanged()
     tailLock=true;
     QImage image;
     int index;
+    int head;
     switch (ModelType) {
       case 0:
         index=ui->tailType_CB->currentIndex();
@@ -370,17 +371,33 @@ void modelConfigDialog::tailConfigChanged()
       case 1:
         elevators=1;
         rudders=1;
-        index=ui->gyro_CB->currentIndex();
-        switch (index) {
-            case 0:
-                image.load(":/images/mcw/htailng.png");
-                break;
-            case 1:
-                image.load(":/images/mcw/htailg.png");
-                break;
-            case 2:
-                image.load(":/images/mcw/htailg.png");
-                break;
+        head=ui->swashType_CB->currentIndex();
+        if (head==4) {
+          index=ui->gyro_CB->currentIndex();
+          switch (index) {
+              case 0:
+                  image.load(":/images/mcw/htailfblng.png");
+                  break;
+              case 1:
+                  image.load(":/images/mcw/htailfblg.png");
+                  break;
+              case 2:
+                  image.load(":/images/mcw/htailfblg.png");
+                  break;
+          }
+        } else {
+          index=ui->gyro_CB->currentIndex();
+          switch (index) {
+              case 0:
+                  image.load(":/images/mcw/htailng.png");
+                  break;
+              case 1:
+                  image.load(":/images/mcw/htailg.png");
+                  break;
+              case 2:
+                  image.load(":/images/mcw/htailg.png");
+                  break;
+          }          
         }
         break;
       case 2:
@@ -435,21 +452,16 @@ void modelConfigDialog::ConfigChanged()
         break;
       case 1:
         wimages.clear();
-        wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png" << "h90.png";
+        wimages << "h90.png" << "h120.png" << "h120x.png" << "h140.png" << "hfbl.png";
         index=ui->swashType_CB->currentIndex();
-/*        if (index==4) {
-          ui->gyro_CB->setCurrentIndex(0);
-          ui->gyroType_Label->hide();
-          ui->gyro_CB->hide();
-        } else {*/
-          ui->gyroType_Label->show();
-          ui->gyro_CB->show();
-/*      }*/
+        ui->gyroType_Label->show();
+        ui->gyro_CB->show();
         ailerons=1;
         throttle=1;
         imgname.append(wimages.at(index));
         image.load(imgname);
         ui->wingImg->setPixmap(QPixmap::fromImage(image));
+        tailConfigChanged();
         break;
       case 2:
         if (ui->ailType_CB->currentIndex()==0) {
