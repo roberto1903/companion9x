@@ -85,6 +85,7 @@ namespace Open9xSky9x {
 #include "../opentx/gui/view_main.cpp"
 #include "../opentx/gui/view_statistics.cpp"
 #include "../opentx/gui/view_telemetry.cpp"
+#include "../opentx/gui/view_about.cpp"
 #include "../opentx/lcd.cpp"
 #include "../opentx/logs.cpp"
 #include "../opentx/targets/sky9x/keys_driver.cpp"
