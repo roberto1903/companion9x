@@ -259,7 +259,7 @@ void preferencesDialog::writeValues()
   settings.setValue("soundPath", ui->voicePath->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
   if (!ui->SplashFileName->text().isEmpty()) {
-    QImage Image = ui->imageLabel->pixmap()->toImage().convertToFormat(QImage::Format_MonoLSB);
+    QImage Image = ui->imageLabel->pixmap()->toImage();
     settings.setValue("SplashImage", image2qstring(Image));
     settings.setValue("SplashFileName", ui->SplashFileName->text());
   }

@@ -23,8 +23,7 @@
 #define SPLASH_HEIGHT (64)
 #define SPLASHX9D_WIDTH (212)
 #define SPLASHX9D_HEIGHT (64)
-#define SPLASH_SIZE (SPLASH_WIDTH*SPLASH_HEIGHT/8)
-#define SPLASHX9D_SIZE (SPLASHX9D_WIDTH*SPLASHX9D_HEIGHT/8)
+#define SPLASH_SIZE_MAX   (SPLASHX9D_WIDTH*SPLASHX9D_HEIGHT/2)
 #define ERSPLASH_MARKER "Splash"
 #define ERSPLASH_OFFSET (10)
 #define OTX_SPS "SPS"
@@ -58,7 +57,7 @@ public:
   int getSize();
   QString getBuild();
   QImage getSplash();
-  bool setSplash(QImage newsplash);
+  bool setSplash(const QImage & newsplash);
   bool hasSplash();
   uint getSplashWidth();
   uint getSplashHeight();

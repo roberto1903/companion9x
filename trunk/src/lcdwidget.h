@@ -100,12 +100,6 @@ class lcdWidget : public QWidget {
     bool lightEnable;
     int r, g, b;
 
-    inline unsigned int PALETTE_IDX(int x, unsigned int mask)
-    {
-      int planSize = (lcdWidth * ((lcdHeight+7) / 8));
-      return (((lcdBuf[x] & mask) ? 0x1 : 0) + ((lcdBuf[planSize+x] & mask) ? 0x2 : 0) + ((lcdBuf[2*planSize+x] & mask) ? 0x4 : 0) + ((lcdBuf[3*planSize+x] & mask) ? 0x8 : 0));
-    }
-
     inline void doPaint(QPainter & p)
     {
       QRgb rgb;
@@ -126,17 +120,18 @@ class lcdWidget : public QWidget {
         }
 
         unsigned int previousDepth = 0xFF;
+        const int planSize = (lcdWidth * ((lcdHeight+7) / 8));
 
         for (int y=0; y<lcdHeight; y++) {
+          unsigned int idx = (y/8)*lcdWidth;
           unsigned int mask = (1 << (y%8));
-          int idx = (y/8)*lcdWidth;
           for (int x=0; x<lcdWidth; x++, idx++) {
             if (lcdDepth == 1) {
               if (lcdBuf[idx] & mask)
                 p.drawRect(2*x, 2*y, 1, 1);
             }
             else {
-              unsigned int z = PALETTE_IDX(idx, mask);
+              unsigned int z = (((lcdBuf[idx] & mask) ? 0x1 : 0) + ((lcdBuf[planSize+idx] & mask) ? 0x2 : 0) + ((lcdBuf[2*planSize+idx] & mask) ? 0x4 : 0) + ((lcdBuf[3*planSize+idx] & mask) ? 0x8 : 0));
               if (z) {
                 if (z != previousDepth) {
                   previousDepth = z;
