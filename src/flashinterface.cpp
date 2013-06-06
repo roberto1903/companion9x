@@ -364,25 +364,46 @@ void FlashInterface::SeekSplash(void)
   }
 }
 
-bool FlashInterface::setSplash(QImage newsplash) 
+bool FlashInterface::setSplash(const QImage & newsplash)
 {
-  char b[SPLASHX9D_SIZE]= {0};
-  uint qrgb, black;
-  black=QColor(0,0,0).rgb();
+  char b[SPLASH_SIZE_MAX] = {0};
+  QRgb qrgb;
   QByteArray splash;
   if (splash_offset==0) {
     return false;
   }
   else {
-    for(uint y=0; y<splash_height; y++)
-        for(uint x=0; x<splash_width; x++) {
-          qrgb=newsplash.pixel(x,y);
-          b[splash_width*(y/8) + x] |= ((qrgb==black) ? 1 : 0)<<(y % 8);
+    if (splash_colors == 16) {
+      unsigned int idx = 0;
+      for (unsigned int y=0; y<splash_height; y+=8) {
+        for (unsigned int x=0; x<splash_width; x++) {
+          unsigned int values[] = { 255, 255, 255, 255 };
+          for (unsigned int z=0; z<8; z++) {
+            if (y+z < splash_height) {
+              QRgb gray = qGray(newsplash.pixel(x, y+z));
+              for (unsigned int i=0; i<4; i++) {
+                if (gray & (1<<(4+i)))
+                  values[i] -= 1 << z;
+              }
+            }
+          }
+          for (int i=0; i<4; i++)
+            b[idx++] = values[i];
         }
-
+      }
+    }
+    else {
+      QImage blackNwhite = newsplash.convertToFormat(QImage::Format_MonoLSB);
+      for (uint y=0; y<splash_height; y++) {
+        for (uint x=0; x<splash_width; x++) {
+          qrgb = blackNwhite.pixel(x,y);
+          b[splash_width*(y/8) + x] |= ((qrgb==Qt::black) ? 1 : 0)<<(y % 8);
+        }
+      }
+    }
     splash.clear();
     splash.append(b, splash_size);
-    flash.replace(splash_offset,splash_size,splash);
+    flash.replace(splash_offset, splash_size, splash);
     return true;
   }
 }
@@ -404,17 +425,31 @@ uint FlashInterface::getSplashColors()
 
 QImage FlashInterface::getSplash()
 {
-  uint k=0;
-  QImage image(splash_width, splash_height, QImage::Format_Mono);
-  uchar b[SPLASHX9D_SIZE] = {0};
-  if (splash_offset>0) {
-    for (k=0; k<sizeof(b); k++)
-      b[k]=flash.at(splash_offset+k);
-    for(uint y=0; y<splash_height; y++)
-      for(uint x=0; x<splash_width; x++)
-        image.setPixel(x,y,((b[splash_width*(y/8) + x]) & (1<<(y % 8))) ? 0 : 1  );
+  if (splash_colors == 16) {
+    QImage image(splash_width, splash_height, QImage::Format_RGB888);
+    if (splash_offset > 0) {
+      for (unsigned int y=0; y<splash_height; y++) {
+        unsigned int idx = (y/8)*splash_width*4;
+        unsigned int mask = (1 << (y%8));
+        for (unsigned int x=0; x<splash_width; x++, idx+=4) {
+          unsigned int z = ((flash.at(splash_offset+idx) & mask) ? 0x1 : 0) + ((flash.at(splash_offset+idx+1) & mask) ? 0x2 : 0) + ((flash.at(splash_offset+idx+2) & mask) ? 0x4 : 0) + ((flash.at(splash_offset+idx+3) & mask) ? 0x8 : 0);
+          z = 161-(z*161)/15;
+          QRgb rgb = qRgb(z, z, z);
+          image.setPixel(x, y, rgb);
+        }
+      }
+    }
+    return image;
   }
-  return image;
+  else {
+    QImage image(splash_width, splash_height, QImage::Format_Mono);
+    if (splash_offset > 0) {
+      for (unsigned int y=0; y<splash_height; y++)
+        for(unsigned int x=0; x<splash_width; x++)
+          image.setPixel(x, y, (flash.at(splash_offset+(splash_width*(y/8)+x)) & (1<<(y % 8))) ? 0 : 1);
+    }
+    return image;
+  }
 }
 
 bool FlashInterface::hasSplash()

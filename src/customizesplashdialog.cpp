@@ -118,7 +118,7 @@ void customizeSplashDialog::on_SaveFlashButton_clicked()
     return;
   }
   settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
-  QImage image = ui->imageLabel->pixmap()->toImage().scaled(flash.getSplashWidth(), flash.getSplashHeight()).convertToFormat(QImage::Format_MonoLSB);
+  QImage image = ui->imageLabel->pixmap()->toImage().scaled(flash.getSplashWidth(), flash.getSplashHeight());
   flash.setSplash(image);
   if (flash.saveFlash(fileName) > 0) {
     ui->HowToLabel->setStyleSheet("background:rgb(0,255.0);");

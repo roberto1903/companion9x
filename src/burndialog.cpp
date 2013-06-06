@@ -390,7 +390,7 @@ void burnDialog::on_BurnFlashButton_clicked()
       settings.setValue("lastFw", fileName);
       if (ui->PatchFWCB->isChecked()) {
         settings.setValue("patchImage", true);
-        QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_MonoLSB);
+        QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width(), ui->imageLabel->height());
         if (!image.isNull()) {
           QString tempDir    = QDir::tempPath();
           QString tempFile;
@@ -620,7 +620,6 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
     if (!tmpFileName.isEmpty()) {
       QImage image(tmpFileName);
       if (!image.isNull()) {
-        
         ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
         ui->InvertColorButton->setEnabled(true);
         ui->ImageFileName->setEnabled(true);
