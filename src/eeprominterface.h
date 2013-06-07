@@ -822,6 +822,7 @@ enum Capability {
  VoicesMaxLenght,
  ModelVoice,
  MultiLangVoice,
+ ModelImage,
  InstantTrimSW,
  Pots,
  Switches,

@@ -131,7 +131,7 @@
             </widget>
            </item>
            <item row="0" column="2" colspan="21">
-            <layout class="QGridLayout" name="gridLayout_37" columnstretch="1,0,0" columnminimumwidth="0,0,0">
+            <layout class="QGridLayout" name="gridLayout_37" columnstretch="0,1,0,0,1,0,0" columnminimumwidth="0,0,0,0,0,0,0">
              <item row="0" column="0">
               <widget class="QLineEdit" name="modelNameLE">
                <property name="sizePolicy">
@@ -145,7 +145,7 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="0" column="5">
               <widget class="QLabel" name="modelVoice_label">
                <property name="text">
                 <string>Model Voice</string>
@@ -155,7 +155,7 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
+             <item row="0" column="6">
               <widget class="QSpinBox" name="modelVoice_SB">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -179,6 +179,46 @@
                 <number>260</number>
                </property>
               </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="modelImage_label">
+               <property name="text">
+                <string>Model Image</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="modelImage_LE">
+               <property name="maxLength">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <spacer name="horizontalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="4">
+              <spacer name="horizontalSpacer_26">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
@@ -8622,7 +8662,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <x>0</x>
             <y>0</y>
             <width>952</width>
-            <height>727</height>
+            <height>480</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -12054,8 +12094,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>713</height>
+            <width>724</width>
+            <height>494</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -17029,8 +17069,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>915</width>
-            <height>742</height>
+            <width>153</width>
+            <height>318</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
