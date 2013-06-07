@@ -418,6 +418,12 @@ void ModelEdit::tabModelEditSetup()
   } else {
     ui->thrrevChkB->setChecked(g_model.throttleReversed);
   }
+  if (!GetEepromInterface()->getCapability(ModelImage)) {
+    ui->modelImage_LE->hide();
+    ui->modelImage_label->hide();
+  } else {
+    ui->modelImage_LE->setText(g_model.bitmap);
+  }
   
   if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
     for (int i=0; pmsl[i]; i++) {
@@ -3144,6 +3150,12 @@ void ModelEdit::tabTemplates()
 void ModelEdit::on_modelNameLE_editingFinished()
 {
     strncpy(g_model.name, ui->modelNameLE->text().toAscii(), 10);
+    updateSettings();
+}
+
+void ModelEdit::on_modelImage_LE_editingFinished()
+{
+    strncpy(g_model.bitmap, ui->modelImage_LE->text().toAscii(), 10);
     updateSettings();
 }
 

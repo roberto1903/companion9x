@@ -508,6 +508,11 @@ int Open9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
+    case ModelImage:  
+      if (IS_TARANIS(board))
+        return 1;
+      else
+        return 0;
     case SimulatorType:
       if (IS_TARANIS(board))
         return 1;
