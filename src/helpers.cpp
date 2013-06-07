@@ -1084,51 +1084,41 @@ QString getGVarString(int16_t val, bool sign)
 
 QString image2qstring(QImage image)
 {
-  image.scaled(128, 64);
-  uchar b[1024] = {0};
-  quint8 * p = image.bits();
-  for (int y = 0; y < 64; y++) {
-    for (int x = 0; x < 16; x++) {
-      for (int k = 0; k < 8; k++) {
-        b[y * 16 + x] |= (((p[(y * 128 + x * 8 + k) / 8] & (1 << k)) ? 1 : 0) << (7 - k));
-      }
+    QBuffer buffer;
+    image.save(&buffer, "PNG");
+    QString ImageStr;
+    int b=0;
+    int size=buffer.data().size();
+    for (int j = 0; j < size; j++) {
+      b=buffer.data().at(j);
+      ImageStr += QString("%1").arg(b&0xff, 2, 16, QChar('0'));
     }
-  }
-  QString ImageStr;
-  ImageStr.clear();
-  for (int j = 0; j < 128 * 8; j++)
-    ImageStr += QString("%1").arg(b[ j]&0xff, 2, 16, QChar('0'));
-  return ImageStr;
+    return ImageStr;
 }
 
 QImage qstring2image(QString imagestr)
 {
-  uchar b[1024] = {0};
   bool ok;
-  bool failed = false;
-  int pixel;
-  QImage Image(128, 64, QImage::Format_MonoLSB);
-  Image.setColor(0, qRgb(255, 255, 255));
-  Image.setColor(1, qRgb(0, 0, 0));
+  bool failed=false;
+  QImage Image;
   int len = imagestr.length();
-  if (len == 2048) {
-    for (int i = 0; i < 1024; i++) {
-      QString Byte;
-      Byte = imagestr.mid((i * 2), 2);
-      b[i] = Byte.toUInt(&ok, 16);
-      if (!ok) {
-        failed = true;
-      }
+  char b=0;
+  QBuffer buffer;
+  buffer.open(QIODevice::ReadWrite);
+  buffer.seek(0);
+  for (int i = 0; i < len/2; i++) {
+    QString Byte;
+    Byte = imagestr.mid((i * 2), 2);
+    b = Byte.toUInt(&ok, 16);
+    if (!ok) {
+      failed = true;
     }
-    if (!failed) {
-      for (int y = 0; y < 64; y++)
-        for (int x = 0; x < 16; x++)
-          for (int k = 0; k < 8; k++) {
-            pixel = ((b[y * 16 + x]&(1 << k)) ? 1 : 0);
-            Image.setPixel((x * 8)+(7 - k), y, pixel);
-          }
-    }
+    buffer.putChar(b);
   }
+  buffer.seek(0);
+  if (!failed) {
+    Image.load(&buffer,"PNG");
+  }  
   return Image;
 }
 
@@ -1145,7 +1135,7 @@ int findmult(float value, float base)
       break;
     }
   }
-
+  
   return mult;
 }
 
