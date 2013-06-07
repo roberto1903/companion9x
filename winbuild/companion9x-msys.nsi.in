@@ -94,6 +94,7 @@ Section "companion9x" SecDummy
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.exe"
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\avrdude.conf"
   File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\libusb0.dll"
+  File "@CMAKE_CURRENT_SOURCE_DIR@\..\winbuild\dfu-util.exe"
   
   CreateDirectory "$INSTDIR\lang"
   SetOutPath "$INSTDIR\lang"
@@ -157,6 +158,7 @@ Section "Uninstall"
   Delete "$INSTDIR\avrdude.exe"
   Delete "$INSTDIR\avrdude.conf"
   Delete "$INSTDIR\libusb0.dll"
+  Delete "$INSTDIR\dfu-util.exe"
   Delete "$INSTDIR\Uninstall.exe"
   
   Delete "$INSTDIR\lang\*.*"
