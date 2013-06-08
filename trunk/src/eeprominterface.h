@@ -926,6 +926,7 @@ enum Capability {
  PermTimers,
  HasSDLogs,
  CSFunc,
+ LCDWidth,
 };
 
 enum UseContext {
