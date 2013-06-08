@@ -633,10 +633,13 @@ class MixField: public TransformedField {
           internalField.Append(new SignedField<16>(_offset));
         else
           internalField.Append(new SignedField<8>(_offset));
-        if (HAS_LARGE_LCD(board))
-          internalField.Append(new ZCharField<10>(mix.name));
-        else
+        if (HAS_LARGE_LCD(board)) {
+          internalField.Append(new ZCharField<8>(mix.name));
+          internalField.Append(new SpareBitsField<16>());
+        }
+        else {
           internalField.Append(new ZCharField<6>(mix.name));
+        }
       }
       else if (IS_DBLRAM(board, version) && IS_RELEASE_23_MARCH_2013(board, version)) {
         internalField.Append(new UnsignedField<4>(_destCh));
@@ -762,10 +765,13 @@ class ExpoField: public TransformedField {
         internalField.Append(new UnsignedField<16>(expo.phases));
         internalField.Append(new SignedField<8>(_weight));
         internalField.Append(new BoolField<8>(_curveMode));
-        if (HAS_LARGE_LCD(board))
-          internalField.Append(new ZCharField<10>(expo.name));
-        else
+        if (HAS_LARGE_LCD(board)) {
+          internalField.Append(new ZCharField<8>(expo.name));
+          internalField.Append(new SpareBitsField<16>());
+        }
+        else {
           internalField.Append(new ZCharField<6>(expo.name));
+        }
         internalField.Append(new SignedField<8>(expo.curveParam));
       }
       else if (IS_DBLRAM(board, version) && IS_RELEASE_23_MARCH_2013(board, version)) {
