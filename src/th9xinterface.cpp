@@ -216,7 +216,9 @@ int Th9xInterface::getCapability(const Capability capability)
     case SlowScale:
       return 1;
     case SlowRange:
-      return 10;      
+      return 10;
+    case LCDWidth:
+      return 128;
     default:
       return 0;
   }

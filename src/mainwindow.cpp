@@ -608,6 +608,8 @@ void MainWindow::loadProfile()
     burnfw=settings.value("burnFirmware", 0).toInt();
     QString soundPath=settings.value("soundPath", "").toString();
     renfw=settings.value("rename_firmware_files", false).toBool();
+    QString SplashFileName=settings.value("SplashFileName","").toString();
+    QString SplashImage=settings.value("SplashImage", "").toString();            
     QString firmware_id=settings.value("firmware", default_firmware_variant.id).toString();
     firmware_id.replace("open9x","opentx");
     firmware_id.replace("x9da","taranis");
@@ -619,6 +621,8 @@ void MainWindow::loadProfile()
     settings.setValue("burnFirmware", burnfw);
     settings.setValue("rename_firmware_files", renfw);
     settings.setValue("soundPath", soundPath);
+    settings.setValue("SplashFileName", SplashFileName);
+    settings.setValue("SplashImage", SplashImage);
     settings.setValue("firmware", firmware_id);
     settings.setValue("profileId", profnum);
     current_firmware_variant = GetFirmwareVariant(firmware_id);

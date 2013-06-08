@@ -316,6 +316,8 @@ int Er9xInterface::getCapability(const Capability capability)
       return 1;
     case SlowRange:
       return 15;
+    case LCDWidth:
+      return 128;
     case VoicesAsNumbers:
     case TelemetryInternalAlarm:
     case HasPPMSim:

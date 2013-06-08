@@ -86,6 +86,8 @@ void preferencesDialog::baseFirmwareChanged()
         ui->voicePathLabel->hide();
       }
       populateFirmwareOptions(firmware);
+      int width=firmware->eepromInterface->getCapability(LCDWidth);
+      ui->imageLabel->setFixedWidth(width);
       break;
     }
   }
@@ -418,7 +420,7 @@ void preferencesDialog::initSettings()
       ui->downloadVerCB->setCurrentIndex(ui->downloadVerCB->count() - 1);
     }
   }
-
+  
   baseFirmwareChanged();
   ui->ProfSlot_SB->setValue(settings.value("profileId", 1).toInt());
   on_ProfSlot_SB_valueChanged();
@@ -621,7 +623,7 @@ void preferencesDialog::on_ProfSave_PB_clicked()
   QString name=ui->ProfName_LE->text();
   if (name.isEmpty()) {
     int ret = QMessageBox::question(this, "companion9x", 
-                tr("Profile name is empty, profile slot %1 will we deleted.<br>Are you sure ?").arg(ui->ProfSlot_SB->value()) ,
+                tr("Profile name is empty, profile slot %1 will be deleted.<br>Are you sure ?").arg(ui->ProfSlot_SB->value()) ,
                 QMessageBox::Yes | QMessageBox::No);
     if (ret==QMessageBox::Yes) {
       settings.remove(profile);
@@ -637,6 +639,9 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
     settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
     settings.setValue("soundPath", ui->voicePath->text());
+    settings.setValue("SplashFileName", ui->SplashFileName->text());
+    QImage Image = ui->imageLabel->pixmap()->toImage();
+    settings.setValue("SplashImage", image2qstring(Image));
     current_firmware_variant = getFirmwareVariant();
     settings.setValue("firmware", current_firmware_variant.id);
     settings.endGroup();
@@ -712,7 +717,8 @@ void preferencesDialog::on_SplashSelect_clicked()
       return;
     }
     ui->SplashFileName->setText(fileName);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(128, 64).convertToFormat(QImage::Format_Mono)));
+    int width=ui->imageLabel->width();
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(width, 64).convertToFormat(QImage::Format_Mono)));
     ui->InvertPixels->setEnabled(true);
   }
 }
