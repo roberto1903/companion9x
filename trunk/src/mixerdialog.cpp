@@ -277,8 +277,6 @@ void MixerDialog::valuesChanged()
     } else {
       md->sOffset = ui->offsetSB->value();
     }
-    
-    md->sOffset    = ui->offsetCB->itemData(ui->offsetCB->currentIndex()).toInt();
     md->carryTrim = -(ui->trimCB->currentIndex()-1);
     md->noExpo = ui->MixDR_CB->checkState() ? 0 : 1;
     md->lateOffset = ui->FixOffsetChkB->checkState() ? 1 : 0;
