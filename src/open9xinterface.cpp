@@ -665,9 +665,9 @@ int Open9xInterface::getCapability(const Capability capability)
     case NumCurves:
       return (IS_ARM(board) ? 16 : 8);
     case HasMixerNames:
-      return (IS_ARM(board) ? true : false);
+      return (IS_ARM(board) ? (IS_TARANIS(board) ? 8 : 6) : false);
     case HasExpoNames:
-      return (IS_ARM(board) ? true : false);
+      return (IS_ARM(board) ? (IS_TARANIS(board) ? 8 : 6) : false);
     case HasChNames:
       return (IS_TARANIS(board) ? 1 : 0);
     case HasCvNames:
@@ -724,7 +724,9 @@ int Open9xInterface::getCapability(const Capability capability)
         return 32; // 
       return (board==BOARD_SKY9X ? 16 : 0);
     case NumModules:
-      return (IS_ARM(board) ? 2 : 1);      
+      return (IS_ARM(board) ? 2 : 1);
+    case HasPPMStart:
+      return (IS_ARM(board) ? true : false);
     case HasCurrentCalibration:
       return (IS_ARM(board) ? true : false);
     case HasVolume:

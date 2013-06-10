@@ -322,6 +322,9 @@ private slots:
     void on_ppmDelaySB_2_editingFinished();
     void on_numChannelsSB_editingFinished();
     void on_numChannelsSB_2_editingFinished();
+    void on_numChannelsStart_editingFinished();
+    void on_numChannelsStart_2_editingFinished();
+//    void void ModelEdit::on_numChannelsStart_3_editingFinished();
     void on_protocolCB_currentIndexChanged(int index);
     void on_protocolCB_2_currentIndexChanged(int index);
     void on_protocolCB_3_currentIndexChanged(int index);

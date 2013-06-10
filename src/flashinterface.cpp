@@ -296,7 +296,7 @@ void FlashInterface::SeekSplash(void)
               splash_size=sizeof(opentx_splash);
               break;
             }
-            if (diff==1702) {
+            if (diff==6790) {
               splash_offset=start+OTX_OFFSET;
               splash_type=5;
               splash_size=sizeof(opentxtaranis_splash);

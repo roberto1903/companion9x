@@ -132,9 +132,12 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         cb_fp[i]->hide();
       }      
     }
-    if (!GetEepromInterface()->getCapability(HasExpoNames)) {
+    int expolenght=GetEepromInterface()->getCapability(HasExpoNames);
+    if (!expolenght) {
       ui->label_name->hide();
       ui->expoName->hide();
+    } else {
+      ui->expoName->setMaxLength(expolenght);
     }
     ui->expoName->setText(ed->name);
     valuesChanged();
