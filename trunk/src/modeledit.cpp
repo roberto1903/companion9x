@@ -637,8 +637,8 @@ void ModelEdit::tabModelEditSetup()
       ui->numChannelsSB_3->hide();
       ui->label_ppmFrameLength_3->hide();
       ui->ppmFrameLengthDSB_3->hide();
-      ui->label_numChannelsEnd_3->hide();
-      ui->numChannelsEndSB_3->hide();      
+      ui->label_numChannelsStart_3->hide();
+      ui->numChannelsStart_3->hide();      
     } else {
       ui->protocolCB_3->setCurrentIndex(1);
       ui->label_PPM_3->show();
@@ -649,8 +649,8 @@ void ModelEdit::tabModelEditSetup()
       ui->numChannelsSB_3->show();
       ui->label_ppmFrameLength_3->show();
       ui->ppmFrameLengthDSB_3->show();
-      ui->label_numChannelsEnd_3->show();
-      ui->numChannelsEndSB_3->show();      
+      ui->label_numChannelsStart_3->show();
+      ui->numChannelsStart_3->show();      
     }
     trainerEditLock=false;
   } else {
@@ -669,8 +669,8 @@ void ModelEdit::tabModelEditSetup()
   ui->DSM_Type->hide();
   ui->label_PXX->hide();
   ui->pxxRxNum->hide();
-  ui->label_numChannelsEnd->hide();
-  ui->numChannelsEndSB->hide();
+  ui->label_numChannelsStart->hide();
+  ui->numChannelsStart->hide();
   ui->pxxRxNum->setEnabled(false);
   ui->protocolCB->setCurrentIndex(selindex);
   protocolEditLock=false;    
@@ -688,8 +688,8 @@ void ModelEdit::tabModelEditSetup()
     ui->DSM_Type_2->hide();
     ui->label_PXX_2->hide();
     ui->pxxRxNum_2->hide();
-    ui->label_numChannelsEnd_2->hide();
-    ui->numChannelsEndSB_2->hide();
+    ui->label_numChannelsStart_2->hide();
+    ui->numChannelsStart_2->hide();
     ui->pxxRxNum_2->setEnabled(false);
     ui->protocolCB_2->setCurrentIndex(selindex2);
     protocol2EditLock=false;
@@ -3305,8 +3305,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->DSM_Type->hide();
         ui->label_PXX->hide();
         ui->pxxRxNum->hide();
-        ui->label_numChannelsEnd->hide();
-        ui->numChannelsEndSB->hide();
+        ui->label_numChannelsStart->hide();
+        ui->numChannelsStart->hide();
         break;    
       case PXX_XJT_X16:
       case PXX_XJT_D8:
@@ -3331,8 +3331,11 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->pxxRxNum->show();
         ui->pxxRxNum->setEnabled(true);
         ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
-        ui->label_numChannelsEnd->show();
-        ui->numChannelsEndSB->show();
+        ui->label_numChannelsStart->show();
+        ui->numChannelsStart->show();
+        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart);
+        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
+        ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount);
         break;
       case LP45:
       case DSM2:
@@ -3343,6 +3346,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->ppmDelaySB->hide();
         ui->ppmDelaySB->setEnabled(false);
         ui->label_PPMCH->hide();
+        ui->label_numChannelsStart->hide();
+        ui->numChannelsStart->hide();
         ui->numChannelsSB->hide();
         ui->numChannelsSB->setEnabled(false);
         ui->label_ppmFrameLength->hide();
@@ -3365,6 +3370,16 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->DSM_Type->hide();
         break;
       default:
+        if (GetEepromInterface()->getCapability(HasPPMStart)) {
+          ui->label_numChannelsStart->show();
+          ui->numChannelsStart->show();
+        } else {
+          ui->label_numChannelsStart->hide();
+          ui->numChannelsStart->hide();
+        }
+        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart);
+        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
+        ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount);
         ui->label_pulsePol->show();
         ui->pulsePolCB->show();
         ui->label_DSM->hide();
@@ -3417,8 +3432,8 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->DSM_Type_2->hide();
         ui->label_PXX_2->hide();
         ui->pxxRxNum_2->hide();
-        ui->label_numChannelsEnd_2->hide();
-        ui->numChannelsEndSB_2->hide();
+        ui->label_numChannelsStart_2->hide();
+        ui->numChannelsStart_2->hide();
         break;    
       case PXX_XJT_X16:
       case PXX_XJT_D8:
@@ -3443,8 +3458,11 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->pxxRxNum_2->show();
         ui->pxxRxNum_2->setEnabled(true);
         ui->pxxRxNum_2->setValue((g_model.moduleData[1].channelsCount-8)/2+1);
-        ui->label_numChannelsEnd_2->show();
-        ui->numChannelsEndSB_2->show();
+        ui->label_numChannelsStart_2->show();
+        ui->numChannelsStart_2->show();
+        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart);
+        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
+        ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
         break;
       case LP45:
       case DSM2:
@@ -3477,6 +3495,16 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->DSM_Type_2->hide();
         break;
       default:
+        if (GetEepromInterface()->getCapability(HasPPMStart)) {
+          ui->label_numChannelsStart_2->show();
+          ui->numChannelsStart_2->show();
+        } else {
+          ui->label_numChannelsStart_2->hide();
+          ui->numChannelsStart_2->hide();
+        }
+        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart);
+        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
+        ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
         ui->label_pulsePol_2->show();
         ui->pulsePolCB_2->show();
         ui->label_DSM_2->hide();
@@ -3522,8 +3550,8 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
         ui->numChannelsSB_3->hide();
         ui->label_ppmFrameLength_3->hide();
         ui->ppmFrameLengthDSB_3->hide();
-        ui->label_numChannelsEnd_3->hide();
-        ui->numChannelsEndSB_3->hide();
+        ui->label_numChannelsStart_3->hide();
+        ui->numChannelsStart_3->hide();
         break;    
       default:
         ui->label_PPM_3->show();
@@ -3534,8 +3562,8 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
         ui->numChannelsSB_3->show();
         ui->label_ppmFrameLength_3->show();
         ui->ppmFrameLengthDSB_3->show();
-        ui->label_numChannelsEnd_3->show();
-        ui->numChannelsEndSB_3->show();
+        ui->label_numChannelsStart_3->show();
+        ui->numChannelsStart_3->show();
         break;
     }
     trainerEditLock=false;
@@ -3546,16 +3574,35 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
 void ModelEdit::on_numChannelsSB_editingFinished()
 {
   // TODO only accept valid values
-  g_model.moduleData[0].channelsCount = ui->numChannelsSB->value();
+  g_model.moduleData[0].channelsCount = 1+ui->numChannelsSB->value()-ui->numChannelsStart->value();
   updateSettings();
 }
 
 void ModelEdit::on_numChannelsSB_2_editingFinished()
 {
   // TODO only accept valid values
-  g_model.moduleData[1].channelsCount = ui->numChannelsSB_2->value();
+  g_model.moduleData[1].channelsCount = 1+ui->numChannelsSB_2->value()-ui->numChannelsStart_2->value();
   updateSettings();
 }
+
+void ModelEdit::on_numChannelsStart_editingFinished()
+{
+  // TODO only accept valid values
+  g_model.moduleData[0].channelsStart= ui->numChannelsStart->value();
+  ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
+  ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount-1);
+  updateSettings();
+}
+
+void ModelEdit::on_numChannelsStart_2_editingFinished()
+{
+  // TODO only accept valid values
+  g_model.moduleData[1].channelsStart= ui->numChannelsStart_2->value();
+  ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
+  ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount-1);
+  updateSettings();
+}
+
 
 void ModelEdit::on_ppmDelaySB_editingFinished()
 {

@@ -871,6 +871,7 @@ enum Capability {
  HasChNames,
  HasCvNames,
  HasPxxCountry,
+ HasPPMStart,
  HasGeneralUnits,
  HasFAIMode,
  NoTimerDirs,

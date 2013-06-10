@@ -99,23 +99,23 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     ui->FixOffsetChkB->setChecked(md->lateOffset);
     ui->MixDR_CB->setChecked(md->noExpo==0);
     if (md->enableFmTrim==1) {
-        ui->label_4->setText(tr("FM Trim Value"));
+      ui->label_4->setText(tr("FM Trim Value"));
     }
     else {
-        ui->label_4->setText(tr("Offset"));
+      ui->label_4->setText(tr("Offset"));
     }
     if (!GetEepromInterface()->getCapability(MixesWithoutExpo)) {
       ui->MixDR_CB->hide();
       ui->label_MixDR->hide();
     }
     if (!GetEepromInterface()->getCapability(MixFmTrim)) {
-        ui->FMtrimChkB->hide();
-        ui->label_FMtrim->hide();
-        ui->label_4->setText(tr("Offset"));
+      ui->FMtrimChkB->hide();
+      ui->label_FMtrim->hide();
+      ui->label_4->setText(tr("Offset"));
     }
     if (!GetEepromInterface()->getCapability(HasFixOffset)) {
-        ui->FixOffsetChkB->hide();
-        ui->label_FixOffset->hide();
+      ui->FixOffsetChkB->hide();
+      ui->label_FixOffset->hide();
     }
     if (GetEepromInterface()->getCapability(ExtraTrims)) {
       ui->trimCB->addItem(tr("Rud"),1);
@@ -125,14 +125,17 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     }
     ui->trimCB->setCurrentIndex((-md->carryTrim)+1);
     if (!GetEepromInterface()->getCapability(DiffMixers)) {
-        ui->differentialGV->hide();
-        ui->differentialSB->hide();
-        ui->differentialCB->hide();
-        ui->label_curve->setText(tr("Curve"));
+      ui->differentialGV->hide();
+      ui->differentialSB->hide();
+      ui->differentialCB->hide();
+      ui->label_curve->setText(tr("Curve"));
     }
-    if (!GetEepromInterface()->getCapability(HasMixerNames)) {
-        ui->label_name->hide();
-        ui->mixerName->hide();
+    int namelenght=GetEepromInterface()->getCapability(HasMixerNames);
+    if (!namelenght) {
+      ui->label_name->hide();
+      ui->mixerName->hide();
+    } else {
+      ui->mixerName->setMaxLength(namelenght);
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
       ui->label_phases->hide();
