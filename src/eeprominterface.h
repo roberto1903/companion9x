@@ -819,7 +819,7 @@ enum Capability {
  countdownBeep,
  CustomFunctions,
  VoicesAsNumbers,
- VoicesMaxLenght,
+ VoicesMaxLength,
  ModelVoice,
  MultiLangVoice,
  ModelImage,

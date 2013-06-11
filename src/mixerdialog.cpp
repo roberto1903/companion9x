@@ -130,12 +130,12 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
       ui->differentialCB->hide();
       ui->label_curve->setText(tr("Curve"));
     }
-    int namelenght=GetEepromInterface()->getCapability(HasMixerNames);
-    if (!namelenght) {
+    int namelength=GetEepromInterface()->getCapability(HasMixerNames);
+    if (!namelength) {
       ui->label_name->hide();
       ui->mixerName->hide();
     } else {
-      ui->mixerName->setMaxLength(namelenght);
+      ui->mixerName->setMaxLength(namelength);
     }
     if (!GetEepromInterface()->getCapability(FlightPhases)) {
       ui->label_phases->hide();
