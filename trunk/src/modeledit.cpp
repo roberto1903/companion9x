@@ -2342,7 +2342,7 @@ void ModelEdit::tabCustomFunctions()
     QSettings settings("companion9x", "companion9x");
     QString path=settings.value("soundPath", "").toString();
     QDir qd(path);
-    int vml= GetEepromInterface()->getCapability(VoicesMaxLenght)+4;
+    int vml= GetEepromInterface()->getCapability(VoicesMaxLength)+4;
     if (qd.exists()) {
       QStringList filters;
       filters << "*.wav" << "*.WAV";
@@ -2737,7 +2737,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
         if (modified) {
           memset(g_model.funcSw[i].paramarm, 0, sizeof(g_model.funcSw[i].paramarm));
-          int vml=GetEepromInterface()->getCapability(VoicesMaxLenght);
+          int vml=GetEepromInterface()->getCapability(VoicesMaxLength);
           if (fswtchParamArmT[i]->currentText() != "----") {
     	    widgetsMask |= CUSTOM_FUNCTION_PLAY;
             for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),vml); j++) {
