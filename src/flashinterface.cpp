@@ -396,8 +396,8 @@ bool FlashInterface::setSplash(const QImage & newsplash)
       QImage blackNwhite = newsplash.convertToFormat(QImage::Format_MonoLSB);
       for (uint y=0; y<splash_height; y++) {
         for (uint x=0; x<splash_width; x++) {
-          qrgb = blackNwhite.pixel(x,y);
-          b[splash_width*(y/8) + x] |= ((qrgb==Qt::black) ? 1 : 0)<<(y % 8);
+          qrgb = (blackNwhite.pixel(x,y)&0xffffff);
+          b[splash_width*(y/8) + x] |=((qrgb==0 ? 1: 0)<<(y % 8));
         }
       }
     }
