@@ -109,7 +109,7 @@ void customizeSplashDialog::on_SaveFlashButton_clicked()
   QString fileName;
   QSettings settings("companion9x", "companion9x");
   ui->HowToLabel->clear();
-  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastFlashDir").toString(), tr("HEX files (*.hex);;"), 0, QFileDialog::DontConfirmOverwrite);
+  fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastFlashDir").toString(), FLASH_FILES_FILTER, 0, QFileDialog::DontConfirmOverwrite);
   if (fileName.isEmpty()) {
     return;
   }
