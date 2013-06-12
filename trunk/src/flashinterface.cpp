@@ -367,7 +367,7 @@ void FlashInterface::SeekSplash(void)
 bool FlashInterface::setSplash(const QImage & newsplash)
 {
   char b[SPLASH_SIZE_MAX] = {0};
-  QRgb qrgb;
+  QColor color;
   QByteArray splash;
   if (splash_offset==0) {
     return false;
@@ -393,11 +393,12 @@ bool FlashInterface::setSplash(const QImage & newsplash)
       }
     }
     else {
+      QColor black = QColor(0,0,0);
       QImage blackNwhite = newsplash.convertToFormat(QImage::Format_MonoLSB);
       for (uint y=0; y<splash_height; y++) {
         for (uint x=0; x<splash_width; x++) {
-          qrgb = (blackNwhite.pixel(x,y)&0xffffff);
-          b[splash_width*(y/8) + x] |=((qrgb==0 ? 1: 0)<<(y % 8));
+          color = QColor(blackNwhite.pixel(x,y));
+          b[splash_width*(y/8) + x] |=((color==black ? 1: 0)<<(y % 8));
         }
       }
     }
