@@ -356,10 +356,12 @@ void FlashInterface::SeekSplash(void)
       splash_width=SPLASHX9D_WIDTH;
       splash_height=SPLASHX9D_HEIGHT;
       splash_colors=16;
+      splash_format=QImage::Format_Indexed8;
     } else {
       splash_width=SPLASH_WIDTH;
       splash_height=SPLASH_HEIGHT;
       splash_colors=1;
+      splash_format=QImage::Format_Mono;
     }
   }
 }
@@ -369,7 +371,7 @@ bool FlashInterface::setSplash(const QImage & newsplash)
   char b[SPLASH_SIZE_MAX] = {0};
   QColor color;
   QByteArray splash;
-  if (splash_offset==0) {
+  if (splash_offset == 0) {
     return false;
   }
   else {
@@ -422,6 +424,11 @@ uint FlashInterface::getSplashHeight()
 uint FlashInterface::getSplashColors()
 {
   return splash_colors;
+}
+
+QImage::Format FlashInterface::getSplashFormat()
+{
+  return splash_format;
 }
 
 QImage FlashInterface::getSplash()

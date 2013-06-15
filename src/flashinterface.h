@@ -62,6 +62,7 @@ public:
   uint getSplashWidth();
   uint getSplashHeight();
   uint getSplashColors();
+  QImage::Format getSplashFormat();
   uint saveFlash(QString fileName);
   bool isValid();
 
@@ -85,6 +86,7 @@ private:
   uint splash_width;
   uint splash_height;
   uint splash_colors;
+  QImage::Format splash_format;
   uint flash_size;
 
 protected:
