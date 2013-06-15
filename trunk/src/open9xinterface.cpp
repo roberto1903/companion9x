@@ -305,9 +305,25 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
 {
   std::cout << "trying " << getName() << " import...";
 
-  if (size != getEEpromSize()) {
-    std::cout << " wrong size (" << size << ")\n";
-    return false;
+  if (size != getEEpromSize()) {    
+    if (size==4096) {
+      int notnull=false;
+      for (int i=2048; i<4096; i++) {
+        if (eeprom[i]!=255) {
+          notnull=true;
+        }
+      }
+      if (notnull) {
+        std::cout << " wrong size (" << size << ")\n";
+        return false;
+      } else {
+        std::cout << " wrong firmware on TX: eeprom size is " << size << " but only 2048 are used\n";
+        size=2048;
+      }
+    } else {
+      std::cout << " wrong size (" << size << ")\n";
+      return false;
+    }
   }
 
   if (!efile->EeFsOpen(eeprom, size, board)) {
