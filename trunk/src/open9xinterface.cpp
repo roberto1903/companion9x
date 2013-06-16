@@ -317,7 +317,7 @@ bool Open9xInterface::load(RadioData &radioData, uint8_t *eeprom, int size)
         std::cout << " wrong size (" << size << ")\n";
         return false;
       } else {
-        std::cout << " wrong firmware on TX: eeprom size is " << size << " but only 2048 are used\n";
+        QMessageBox::warning(NULL,"companion9x", QObject::tr("Your radio probably uses a wrong firmware,\n eeprom size is 4096 but only the first 2048 are used"));
         size=2048;
       }
     } else {

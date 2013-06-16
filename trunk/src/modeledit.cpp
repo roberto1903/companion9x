@@ -3333,8 +3333,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->pxxRxNum->setValue((g_model.moduleData[0].channelsCount-8)/2+1);
         ui->label_numChannelsStart->show();
         ui->numChannelsStart->show();
-        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart);
-        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
+        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart+1);
+        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+4);
         ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount);
         break;
       case LP45:
@@ -3377,8 +3377,8 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
           ui->label_numChannelsStart->hide();
           ui->numChannelsStart->hide();
         }
-        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart);
-        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
+        ui->numChannelsStart->setValue(g_model.moduleData[0].channelsStart+1);
+        ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+4);
         ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount);
         ui->label_pulsePol->show();
         ui->pulsePolCB->show();
@@ -3460,8 +3460,8 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->pxxRxNum_2->setValue((g_model.moduleData[1].channelsCount-8)/2+1);
         ui->label_numChannelsStart_2->show();
         ui->numChannelsStart_2->show();
-        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart);
-        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
+        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart+1);
+        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+4);
         ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
         break;
       case LP45:
@@ -3502,8 +3502,8 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
           ui->label_numChannelsStart_2->hide();
           ui->numChannelsStart_2->hide();
         }
-        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart);
-        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
+        ui->numChannelsStart_2->setValue(g_model.moduleData[1].channelsStart+1);
+        ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+4);
         ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
         ui->label_pulsePol_2->show();
         ui->pulsePolCB_2->show();
@@ -3588,18 +3588,18 @@ void ModelEdit::on_numChannelsSB_2_editingFinished()
 void ModelEdit::on_numChannelsStart_editingFinished()
 {
   // TODO only accept valid values
-  g_model.moduleData[0].channelsStart= ui->numChannelsStart->value();
-  ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+3);
-  ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount-1);
+  g_model.moduleData[0].channelsStart= ui->numChannelsStart->value()-1;
+  ui->numChannelsSB->setMinimum(g_model.moduleData[0].channelsStart+4);
+  ui->numChannelsSB->setValue(g_model.moduleData[0].channelsStart+g_model.moduleData[0].channelsCount);
   updateSettings();
 }
 
 void ModelEdit::on_numChannelsStart_2_editingFinished()
 {
   // TODO only accept valid values
-  g_model.moduleData[1].channelsStart= ui->numChannelsStart_2->value();
-  ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+3);
-  ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount-1);
+  g_model.moduleData[1].channelsStart= ui->numChannelsStart_2->value()-1;
+  ui->numChannelsSB_2->setMinimum(g_model.moduleData[1].channelsStart+4);
+  ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
   updateSettings();
 }
 
