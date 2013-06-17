@@ -58,10 +58,6 @@ Om fältet lämnas tomt så är expo påslaget hela tiden.</translation>
         <translation>Namn</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation>Faser</translation>
-    </message>
-    <message>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -100,6 +96,14 @@ Om fältet lämnas tomt så är expo påslaget hela tiden.</translation>
     <message>
         <source>Curve/Exponential</source>
         <translation>Kurva/Expo</translation>
+    </message>
+    <message>
+        <source>GV</source>
+        <translation>GV</translation>
+    </message>
+    <message>
+        <source>Flight modes</source>
+        <translation>Flygmoder</translation>
     </message>
 </context>
 <context>
@@ -780,7 +784,71 @@ Mode 4:
     </message>
     <message>
         <source>BackLight Invert</source>
-        <translation>Invertera belysninfen</translation>
+        <translation>Invertera belysningen</translation>
+    </message>
+    <message>
+        <source>FrSky Internal Alarm</source>
+        <translation>FrSky Internlarm</translation>
+    </message>
+    <message>
+        <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
+        <translation>Om du väljer FAI-läget så stängs varion, uppspelningsfunktionerna och telemetri-skärmen av permanent. FAI-funktionen kan inte slås av av radion.</translation>
+    </message>
+    <message>
+        <source>FAI Mode</source>
+        <translation>FAI-läge</translation>
+    </message>
+    <message>
+        <source>StickScroll</source>
+        <translation>Spakscrollning</translation>
+    </message>
+    <message>
+        <source>CrossTrim</source>
+        <translation>Kross-trimning</translation>
+    </message>
+    <message>
+        <source>Country Code</source>
+        <translation>Landskod</translation>
+    </message>
+    <message>
+        <source>Europe</source>
+        <translation>Europa</translation>
+    </message>
+    <message>
+        <source>Japan</source>
+        <translation>Japan</translation>
+    </message>
+    <message>
+        <source>America</source>
+        <translation>Amerika</translation>
+    </message>
+    <message>
+        <source>Metric</source>
+        <translation>Metrisk</translation>
+    </message>
+    <message>
+        <source>Imperial</source>
+        <translation>Imperial</translation>
+    </message>
+    <message>
+        <source>Measurement Units</source>
+        <translation>Måttenheter</translation>
+    </message>
+    <message>
+        <source>Voice Language</source>
+        <translation>Språk för Röst</translation>
+    </message>
+    <message>
+        <source>PPMSim</source>
+        <translation>PPMSim</translation>
+    </message>
+    <message>
+        <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
+This function cannot be disabled by the radio.
+Are you sure ?</source>
+        <translation>Om du väljer FAI-läget så stängs varion, uppspelningsfunktionerna och telemetri-skärmen av permanent.
+FAI-funktionen kan inte slås av av radion.
+Är du säker ?</translation>
     </message>
 </context>
 <context>
@@ -933,7 +1001,7 @@ Vill du starta bränningen trots detta ?</translation>
     </message>
     <message>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
-        <translation>Modelldata kan inte konverteras till formatet för denna firmware. Originaldata kommer att användas.</translation>
+        <translation>Modelldata kan inte konverteras till formatet för denna firmware. Originaldata kommer att användas</translation>
     </message>
     <message>
         <source>Restore EEPROM To Tx</source>
@@ -1381,6 +1449,22 @@ Vill du starta bränningen trots detta ?</translation>
         <source>Open log file</source>
         <translation>Öppna loggfil</translation>
     </message>
+    <message>
+        <source>companion9x - EEPROM Editor - firmware %1 - profile %2</source>
+        <translation>companion9x - EEPROM Editor - firmware %1 - profil %2</translation>
+    </message>
+    <message>
+        <source>Taranis radio not found</source>
+        <translation>Hittade inte någon Taranis-radio</translation>
+    </message>
+    <message>
+        <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
+        <translation>Det går inte att identifiera radion. Verifiera att EEPOROM-skivan är ansluteten.</translation>
+    </message>
+    <message>
+        <source>Write EEPROM To Tx</source>
+        <translation>Skriv EEPROM till sändaren</translation>
+    </message>
 </context>
 <context>
     <name>MdiChild</name>
@@ -1485,6 +1569,18 @@ Vill du spara förändringarna?</translation>
     <message>
         <source>Invalid binary backup File %1</source>
         <translation>Den binära backupfilen är felaktig %1</translation>
+    </message>
+    <message>
+        <source>Taranis radio not found</source>
+        <translation>Taranis-radion hittades ej</translation>
+    </message>
+    <message>
+        <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
+        <translation>Det går inte att identifiera radion. Verifiera att EEPOROM-skivan är ansluteten.</translation>
+    </message>
+    <message>
+        <source>Write EEPROM To Tx</source>
+        <translation>Skriv EEPROM till sändaren</translation>
     </message>
 </context>
 <context>
@@ -1675,10 +1771,6 @@ p, li { white-space: pre-wrap; }
         <translation>Kurva/Diff</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation>Faser</translation>
-    </message>
-    <message>
         <source>Include DR/Expo</source>
         <translation>Inkludera DR/Expo</translation>
     </message>
@@ -1722,16 +1814,24 @@ p, li { white-space: pre-wrap; }
         <source>DEST -&gt; X%1</source>
         <translation>DEST -&gt; X%1</translation>
     </message>
+    <message>
+        <source>Flight modes</source>
+        <translation>Flygmoder</translation>
+    </message>
+    <message>
+        <source>Fix Offset</source>
+        <translation>Fast Offset</translation>
+    </message>
+    <message>
+        <source>GV</source>
+        <translation>GV</translation>
+    </message>
 </context>
 <context>
     <name>ModelEdit</name>
     <message>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Trainer</source>
-        <translation>Slavsändare</translation>
     </message>
     <message>
         <source>PPM Frame Length</source>
@@ -2190,14 +2290,6 @@ p, li { white-space: pre-wrap; }
         <translation>Utökade trimmar</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation>Faser</translation>
-    </message>
-    <message>
-        <source>Phase Name</source>
-        <translation>Fasnamn</translation>
-    </message>
-    <message>
         <source>Fade In</source>
         <translation>Tona in</translation>
     </message>
@@ -2364,10 +2456,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation>Fas</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -2557,42 +2645,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>RSSI</source>
         <translation>RSSI</translation>
-    </message>
-    <message>
-        <source>Flight Phase 0 (Default)</source>
-        <translation>Flygfas 0 (Standard)</translation>
-    </message>
-    <message>
-        <source>FP 1</source>
-        <translation>FP 1</translation>
-    </message>
-    <message>
-        <source>FP 2</source>
-        <translation>FP 2</translation>
-    </message>
-    <message>
-        <source>FP 3</source>
-        <translation>FP 3</translation>
-    </message>
-    <message>
-        <source>FP 4</source>
-        <translation>FP 4</translation>
-    </message>
-    <message>
-        <source>FP 5</source>
-        <translation>FP 5</translation>
-    </message>
-    <message>
-        <source>FP 6</source>
-        <translation>FP 6</translation>
-    </message>
-    <message>
-        <source>FP 7</source>
-        <translation>FP 7</translation>
-    </message>
-    <message>
-        <source>FP 8</source>
-        <translation>FP 8</translation>
     </message>
     <message>
         <source>PPM Center</source>
@@ -2801,10 +2853,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Really clear existing mixes on CH5?</source>
         <translation>Vill du nollställa alla mixar på kanal 5?</translation>
-    </message>
-    <message>
-        <source>Permanent</source>
-        <translation>Permanent</translation>
     </message>
     <message>
         <source>Model Voice</source>
@@ -3098,6 +3146,192 @@ p, li { white-space: pre-wrap; }
         <source>CFN%1</source>
         <translation>CFN%1</translation>
     </message>
+    <message>
+        <source>ModelSetup</source>
+        <translation>Modelinställningar</translation>
+    </message>
+    <message>
+        <source>Model Image</source>
+        <translation>Modell-backup</translation>
+    </message>
+    <message>
+        <source>Persistent</source>
+        <translation>Bestående</translation>
+    </message>
+    <message>
+        <source>MinuteBeep</source>
+        <translation>Minutpip</translation>
+    </message>
+    <message>
+        <source>CountDownBeep</source>
+        <translation>Nedräkningspip</translation>
+    </message>
+    <message>
+        <source>SB</source>
+        <translation>SB</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>SA</source>
+        <translation>SA</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>SG</source>
+        <translation>SG</translation>
+    </message>
+    <message>
+        <source>SE</source>
+        <translation>SE</translation>
+    </message>
+    <message>
+        <source>SF</source>
+        <translation>SF</translation>
+    </message>
+    <message>
+        <source>RS</source>
+        <translation>RS</translation>
+    </message>
+    <message>
+        <source>Reverse Throttle Operation</source>
+        <translation>Inverterad gas</translation>
+    </message>
+    <message>
+        <source>Reverse throttle operation.
+If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
+
+</source>
+        <translation>Inverterad gas.
+Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och gasvarning reverseras också.
+
+</translation>
+    </message>
+    <message>
+        <source>RF Module 1</source>
+        <translation>RF-modul 1</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <source>RF Module 2</source>
+        <translation>RF-modul 2</translation>
+    </message>
+    <message>
+        <source>Trainer Mode</source>
+        <translation>Trainerläge</translation>
+    </message>
+    <message>
+        <source>Master</source>
+        <translation>Master</translation>
+    </message>
+    <message>
+        <source>Slave</source>
+        <translation>Slav</translation>
+    </message>
+    <message>
+        <source>Master/Trainer Port</source>
+        <translation>Trainer-port</translation>
+    </message>
+    <message>
+        <source>Failsafe</source>
+        <translation>Failsafe</translation>
+    </message>
+    <message>
+        <source>External module</source>
+        <translation>Extern modul</translation>
+    </message>
+    <message>
+        <source>Internal Module</source>
+        <translation>Intern modul</translation>
+    </message>
+    <message>
+        <source>Flight Modes</source>
+        <translation>Flygmoder</translation>
+    </message>
+    <message>
+        <source>Flight Mode 0 (Default)</source>
+        <translation>Flygmod 0 (Default)</translation>
+    </message>
+    <message>
+        <source>Flight Mode Name</source>
+        <translation>Flygmodens namn</translation>
+    </message>
+    <message>
+        <source>GVAR6</source>
+        <translation>GVAR6</translation>
+    </message>
+    <message>
+        <source>GVAR7</source>
+        <translation>GVAR7</translation>
+    </message>
+    <message>
+        <source>FM 1</source>
+        <translation>FM 1</translation>
+    </message>
+    <message>
+        <source>FM 2</source>
+        <translation>FM 2</translation>
+    </message>
+    <message>
+        <source>FM 3</source>
+        <translation>FM 3</translation>
+    </message>
+    <message>
+        <source>FM 4</source>
+        <translation>FM 4</translation>
+    </message>
+    <message>
+        <source>FM 5</source>
+        <translation>FM 5</translation>
+    </message>
+    <message>
+        <source>FM 6</source>
+        <translation>FM 6</translation>
+    </message>
+    <message>
+        <source>FM 7</source>
+        <translation>FM 7</translation>
+    </message>
+    <message>
+        <source>FM 8</source>
+        <translation>FM 8</translation>
+    </message>
+    <message>
+        <source>Curve name</source>
+        <translation>Kurvans namn</translation>
+    </message>
+    <message>
+        <source>S1</source>
+        <translation>S1</translation>
+    </message>
+    <message>
+        <source>S2</source>
+        <translation>S2</translation>
+    </message>
+    <message>
+        <source>LS</source>
+        <translation>LS</translation>
+    </message>
+    <message>
+        <source>Flight modes</source>
+        <translation>Flygmoder</translation>
+    </message>
+    <message>
+        <source>Flight mode</source>
+        <translation>Flygmod</translation>
+    </message>
+    <message>
+        <source>CH %1</source>
+        <translation>KN %1</translation>
+    </message>
 </context>
 <context>
     <name>ModelsListWidget</name>
@@ -3196,19 +3430,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cannot delete default model.</source>
-        <translation>Det går inte att ta bort standard-modellen</translation>
+        <translation>Det går inte att ta bort standard-modellen.</translation>
     </message>
     <message>
         <source>Cannot cut default model.</source>
-        <translation>Det går inte att klippa ut standard-modellen</translation>
+        <translation>Det går inte att klippa ut standard-modellen.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Flight phase %1 trim</source>
-        <translation>Flygfas %1 trim</translation>
-    </message>
     <message>
         <source>P1</source>
         <translation>P1</translation>
@@ -3467,20 +3697,8 @@ p, li { white-space: pre-wrap; }
         <translation>gruvin9x stödjer inte inställningshjul för detta sändarkort</translation>
     </message>
     <message>
-        <source>FP%1</source>
-        <translation>FF%1</translation>
-    </message>
-    <message>
         <source>Safety %1</source>
         <translation>Säkring %1</translation>
-    </message>
-    <message>
-        <source>!Phase %1</source>
-        <translation>!Fas %1</translation>
-    </message>
-    <message>
-        <source>Phase %1</source>
-        <translation>Fas %1</translation>
     </message>
     <message>
         <source>open9x on this board doesn&apos;t have Rotary Encoders</source>
@@ -3627,10 +3845,6 @@ p, li { white-space: pre-wrap; }
         <translation>LB%1</translation>
     </message>
     <message>
-        <source>mON</source>
-        <translation>mPÅ</translation>
-    </message>
-    <message>
         <source>er9x does not support Custom Switch function %1</source>
         <translation>er9x stöder inte LB-funktionen %1</translation>
     </message>
@@ -3653,10 +3867,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>ErSky9x doesn&apos;t support curve with %1 point as curve%2 </source>
         <translation>ErSky9x stödjer inte %1-punktskurvor som kurva %2 </translation>
-    </message>
-    <message>
-        <source>Phases settings on expos not exported</source>
-        <translation>Fasinställningar för expos exporterades inte</translation>
     </message>
     <message>
         <source>gruvin9x does not support Custom Switch function %1</source>
@@ -3731,20 +3941,8 @@ p, li { white-space: pre-wrap; }
         <translation>Knappar + Spakar</translation>
     </message>
     <message>
-        <source>Flight Phase 0 (Default)</source>
-        <translation>Flygfas 0 (Standard)</translation>
-    </message>
-    <message>
-        <source>FP %1</source>
-        <translation>FF %1</translation>
-    </message>
-    <message>
         <source>Simultaneous usage of expo and curves is no longer supported</source>
         <translation>Expo och pspecialkurva kan inte längre kombineras</translation>
-    </message>
-    <message>
-        <source>Phases settings on mixers not exported</source>
-        <translation>Flygfas-beroende inställningar för mixar exporterade inte</translation>
     </message>
     <message>
         <source>This version of open9x does not support Custom Switch function %1</source>
@@ -3785,10 +3983,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>No splash screen</source>
         <translation>Ingen startbild</translation>
-    </message>
-    <message>
-        <source>No flight phases</source>
-        <translation>Inga flygfaser</translation>
     </message>
     <message>
         <source>Disable curves menus</source>
@@ -3883,14 +4077,6 @@ p, li { white-space: pre-wrap; }
         <translation>th9x stödjer inte %1-punktskurvor som kurva %2 </translation>
     </message>
     <message>
-        <source>Warning!
-Telemetry channel order has been changed, please check function switches and telemetry settings!
-Expos settings have been changed, please verify before flight!</source>
-        <translation>Warning!
-Kanalordningen för telemetrin har ändrats. Kontrollera funktionsbrytarna och telemetri-inställningarna!
-Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translation>
-    </message>
-    <message>
         <source>CH%1%2</source>
         <translation>KN%1%2</translation>
     </message>
@@ -3967,10 +4153,6 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>Eget värde</translation>
     </message>
     <message>
-        <source>Flight phase %1 value</source>
-        <translation>Flygfas %1 värde</translation>
-    </message>
-    <message>
         <source>-GV%1</source>
         <translation>-GV%1</translation>
     </message>
@@ -3983,20 +4165,12 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>(GV%1)</translation>
     </message>
     <message>
-        <source>Open9x doesn&apos;t allow this number of channels</source>
-        <translation>Open9x tillåter inte antalet kanaler</translation>
-    </message>
-    <message>
         <source>Support for telemetry easy board</source>
         <translation>Stöd för TelemetryEZ-kort</translation>
     </message>
     <message>
         <source>PPM values displayed in us</source>
         <translation>PPM-värden visade i ms</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show the throttle trace in Statistics</source>
-        <translation>Visa inte gaspåslag i Statistiken</translation>
     </message>
     <message>
         <source>Bluetooth interface</source>
@@ -4053,30 +4227,6 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
     <message>
         <source>HDG </source>
         <translation>HDG </translation>
-    </message>
-    <message>
-        <source>SA-</source>
-        <translation>SA-</translation>
-    </message>
-    <message>
-        <source>SB-</source>
-        <translation>SB-</translation>
-    </message>
-    <message>
-        <source>SC-</source>
-        <translation>SC-</translation>
-    </message>
-    <message>
-        <source>SD-</source>
-        <translation>SD-</translation>
-    </message>
-    <message>
-        <source>SE-</source>
-        <translation>SE-</translation>
-    </message>
-    <message>
-        <source>SG-</source>
-        <translation>SG-</translation>
     </message>
     <message>
         <source>No repeat</source>
@@ -4211,14 +4361,6 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>Skevroder</translation>
     </message>
     <message>
-        <source>Open9x on this board doesn&apos;t accept this function</source>
-        <translation>Open9x stödjer inte funktionen för vald sändare</translation>
-    </message>
-    <message>
-        <source>Open9x doesn&apos;t allow this number of channels for PPM2</source>
-        <translation>Open9X stödjer inte detta antal kanaler för PPM2</translation>
-    </message>
-    <message>
         <source>Rotary Encoder use in menus navigation</source>
         <translation>Använd inmatningshjul för att navigera i menyer</translation>
     </message>
@@ -4235,10 +4377,6 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
         <translation>openTx för 9X/9XR med M128-processor</translation>
     </message>
     <message>
-        <source>openTx for 9XR board</source>
-        <translation>openTx för Turnigy 9XR</translation>
-    </message>
-    <message>
         <source>openTx for Gruvin9x board / 9X</source>
         <translation>openTx för 9X  med Gruvin9x</translation>
     </message>
@@ -4249,6 +4387,364 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
     <message>
         <source>openTx for FrSky Taranis</source>
         <translation>openTx för FrSky Taranis</translation>
+    </message>
+    <message>
+        <source>SA</source>
+        <translation>SA</translation>
+    </message>
+    <message>
+        <source>SB</source>
+        <translation>SB</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>SE</source>
+        <translation>SE</translation>
+    </message>
+    <message>
+        <source>SF</source>
+        <translation>SF</translation>
+    </message>
+    <message>
+        <source>SG</source>
+        <translation>SG</translation>
+    </message>
+    <message>
+        <source>SH</source>
+        <translation>SH</translation>
+    </message>
+    <message>
+        <source>Pwr+</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>CS1</source>
+        <translation>LB1</translation>
+    </message>
+    <message>
+        <source>CS2</source>
+        <translation>LB2</translation>
+    </message>
+    <message>
+        <source>CS3</source>
+        <translation>LB3</translation>
+    </message>
+    <message>
+        <source>CS4</source>
+        <translation>LB4</translation>
+    </message>
+    <message>
+        <source>CS5</source>
+        <translation>LB5</translation>
+    </message>
+    <message>
+        <source>CS6</source>
+        <translation>LB6</translation>
+    </message>
+    <message>
+        <source>CS7</source>
+        <translation>LB7</translation>
+    </message>
+    <message>
+        <source>CS8</source>
+        <translation>LB8</translation>
+    </message>
+    <message>
+        <source>CS9</source>
+        <translation>LB9</translation>
+    </message>
+    <message>
+        <source>CSA</source>
+        <translation>LBA</translation>
+    </message>
+    <message>
+        <source>CSB</source>
+        <translation>LBB</translation>
+    </message>
+    <message>
+        <source>CSC</source>
+        <translation>LBC</translation>
+    </message>
+    <message>
+        <source>CSD</source>
+        <translation>LBD</translation>
+    </message>
+    <message>
+        <source>CSE</source>
+        <translation>LBE</translation>
+    </message>
+    <message>
+        <source>CSF</source>
+        <translation>LBF</translation>
+    </message>
+    <message>
+        <source>CSG</source>
+        <translation>LBG</translation>
+    </message>
+    <message>
+        <source>CSH</source>
+        <translation>LBH</translation>
+    </message>
+    <message>
+        <source>CSI</source>
+        <translation>LBI</translation>
+    </message>
+    <message>
+        <source>CSJ</source>
+        <translation>LBJ</translation>
+    </message>
+    <message>
+        <source>CSK</source>
+        <translation>LBK</translation>
+    </message>
+    <message>
+        <source>CSL</source>
+        <translation>LBL</translation>
+    </message>
+    <message>
+        <source>CSM</source>
+        <translation>LBM</translation>
+    </message>
+    <message>
+        <source>CSN</source>
+        <translation>LBN</translation>
+    </message>
+    <message>
+        <source>CSO</source>
+        <translation>LBO</translation>
+    </message>
+    <message>
+        <source>CSP</source>
+        <translation>LBP</translation>
+    </message>
+    <message>
+        <source>CSQ</source>
+        <translation>LBQ</translation>
+    </message>
+    <message>
+        <source>CSR</source>
+        <translation>LBR</translation>
+    </message>
+    <message>
+        <source>CSS</source>
+        <translation>LBS</translation>
+    </message>
+    <message>
+        <source>CST</source>
+        <translation>LBT</translation>
+    </message>
+    <message>
+        <source>CSU</source>
+        <translation>LBU</translation>
+    </message>
+    <message>
+        <source>CSV</source>
+        <translation>LBV</translation>
+    </message>
+    <message>
+        <source>CSW</source>
+        <translation>LBW</translation>
+    </message>
+    <message>
+        <source>ONE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>!ONE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TRNs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TRNl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REAs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REAl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>er9x doesn&apos;t have negative gvars as weight</source>
+        <translation>er9x kan inte använda negativa gvar-värden som vikter</translation>
+    </message>
+    <message>
+        <source>er9x doesn&apos;t have negative gvars as offset</source>
+        <translation>er9x kan inte använda negativa gvar-värden som offset</translation>
+    </message>
+    <message>
+        <source>Flight modes settings on expos not exported</source>
+        <translation>Flygmod-inställningar för expos stöds inte</translation>
+    </message>
+    <message>
+        <source>FM%1</source>
+        <translation>FM%1</translation>
+    </message>
+    <message>
+        <source>English</source>
+        <translation>Engelska</translation>
+    </message>
+    <message>
+        <source>French</source>
+        <translation>Franska</translation>
+    </message>
+    <message>
+        <source>Italian</source>
+        <translation>Italienska</translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation>Tyska</translation>
+    </message>
+    <message>
+        <source>Czech</source>
+        <translation>Czeckiska</translation>
+    </message>
+    <message>
+        <source>Slovak</source>
+        <translation>Slovakiska</translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation>Spanska</translation>
+    </message>
+    <message>
+        <source>Portuguese</source>
+        <translation>Portugisiska</translation>
+    </message>
+    <message>
+        <source>CH</source>
+        <translation>KN</translation>
+    </message>
+    <message>
+        <source>!Flight mode %1</source>
+        <translation>!Flygmod %1</translation>
+    </message>
+    <message>
+        <source>Flight mode %1</source>
+        <translation>Flygmod %1</translation>
+    </message>
+    <message>
+        <source>Flight mode %1 trim</source>
+        <translation>Fligmod %1 trim</translation>
+    </message>
+    <message>
+        <source>Flight mode %1 value</source>
+        <translation>Flygmod %1 värde</translation>
+    </message>
+    <message>
+        <source>Flight Mode 0 (Default)</source>
+        <translation>Flygmod 0 (Default)</translation>
+    </message>
+    <message>
+        <source>FM %1</source>
+        <translation>FM %1</translation>
+    </message>
+    <message>
+        <source>openTx only accepts %1 points in all curves</source>
+        <translation>openTX accepterar bar %1 punkter i alla kurvor</translation>
+    </message>
+    <message>
+        <source>OpenTX on this board doesn&apos;t accept this function</source>
+        <translation>OpenTX stödjer inte funktionen för den aktuella hårdvaran</translation>
+    </message>
+    <message>
+        <source>OpenTX doesn&apos;t accept this protocol</source>
+        <translation>OpenTX accepterar inte detta protokoll</translation>
+    </message>
+    <message>
+        <source>OpenTX doesn&apos;t allow this number of channels</source>
+        <translation>OpenTX accepterar inte detta antal kanaler</translation>
+    </message>
+    <message>
+        <source>Flight mode settings on mixers not exported</source>
+        <translation>Flygmod-inställningar för expos stöds inte</translation>
+    </message>
+    <message>
+        <source>Your radio probably uses a wrong firmware,
+ eeprom size is 4096 but only the first 2048 are used</source>
+        <translation>Din radio har antagligen laddats med felaktig programvara.
+eeprom-storleken är 4096, men enbart den första hälften används</translation>
+    </message>
+    <message>
+        <source>No flight modes</source>
+        <translation>Inga flygmoder</translation>
+    </message>
+    <message>
+        <source>In model setup menus automatically set source by moving some of them</source>
+        <translation>Välj automatisk kontroller i menyn för modelinställningar genom att använda dem</translation>
+    </message>
+    <message>
+        <source>Enable the throttle trace in Statistics</source>
+        <translation>Slå på gasspårning i statistiken</translation>
+    </message>
+    <message>
+        <source>EEprom write progress bar</source>
+        <translation>Grafisk visning av skrivning till eeprom</translation>
+    </message>
+    <message>
+        <source>No Winged Shadow How High support</source>
+        <translation>Inget stöd för Winged Shadow How High</translation>
+    </message>
+    <message>
+        <source>No vario support</source>
+        <translation>Vario stöds ej</translation>
+    </message>
+    <message>
+        <source>No GPS support</source>
+        <translation>GPS-stöd saknas</translation>
+    </message>
+    <message>
+        <source>No gauges in the custom telemetry screen</source>
+        <translation>Inga mätare i på telemetri-skärmen</translation>
+    </message>
+    <message>
+        <source>openTx for 9XR</source>
+        <translation>openTX för 9XR</translation>
+    </message>
+    <message>
+        <source>openTx for 9XR with M128 chip</source>
+        <translation>openTX för 9XR med M128-CPU</translation>
+    </message>
+    <message>
+        <source>Disable HELI menu and cyclic mix support</source>
+        <translation>Slå av HELI-menyn och stöd för cykliska mixar</translation>
+    </message>
+    <message>
+        <source>Disable TEMPLATES menu</source>
+        <translation>Slå av menyn för Mallar</translation>
+    </message>
+    <message>
+        <source>Disable Global variables</source>
+        <translation>Slå av Globala Variabler</translation>
+    </message>
+    <message>
+        <source>openTx for FrSky Taranis Rev4a</source>
+        <translation>openTX för FrSky Taranis Rev 4a</translation>
+    </message>
+    <message>
+        <source>Flight modes settings on mixers not exported</source>
+        <translation>Mixerinställningar för flygmoder exporteras inte</translation>
+    </message>
+    <message>
+        <source>Warning!
+splash image format stored in preferences has been changed!
+Check your settings again.</source>
+        <translation>Varning!
+Formatet för startskärmen som lagras i Inställningar har ändrats! 
+Kontrollera dina Inställningar.</translation>
     </message>
 </context>
 <context>
@@ -4309,6 +4805,76 @@ Expo-inställningrna har ändrats. Kontrollera dessa innan flygning!</translatio
     <message>
         <source>Started </source>
         <translation>Startade </translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Fel</translation>
+    </message>
+    <message>
+        <source>Cannot open source file</source>
+        <translation>Kan inte öppna ursprungsfilen</translation>
+    </message>
+    <message>
+        <source>Cannot write destination</source>
+        <translation>Det gick inte att skriva till målet</translation>
+    </message>
+    <message>
+        <source>Writing file: </source>
+        <translation>Skriver till fi: </translation>
+    </message>
+    <message>
+        <source>ie: OpenTX for 9X board or OpenTX for 9XR board</source>
+        <translation>dvs: OpenTX för 9X eller OpenTX för 9XR</translation>
+    </message>
+    <message>
+        <source>ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip</source>
+        <translation>dvs: OpenTX för 9X eller 9XR med M128-processor</translation>
+    </message>
+    <message>
+        <source>ie: OpenTX for Gruvin9X  board</source>
+        <translation>dvs: OpenTX för 9X med Gruvin9X-kort</translation>
+    </message>
+    <message>
+        <source>Your radio uses a %1 CPU!!!
+
+Please check advanced burn options to set the correct cpu type.</source>
+        <translation>Din radio använder en %1 CPU!!!
+
+Välj rätt CPU-typ i de avancerade inställningarna i Brännar-menyn.</translation>
+    </message>
+    <message>
+        <source>Your radio uses a %1 CPU!!!
+
+Please select an appropriate firmware type to program it.</source>
+        <translation>Din radio använder en %1 CPU!!!
+
+Välj rätt programvara att bränna till den.</translation>
+    </message>
+    <message>
+        <source>
+You are currently using:
+ %1</source>
+        <translation>
+Du använder för närvarande:
+ %1</translation>
+    </message>
+    <message>
+        <source>done - SUCCESSFUL</source>
+        <translation>färdig - Allt gick bra</translation>
+    </message>
+    <message>
+        <source> did not finish correctly!
+Do you want some help ?</source>
+        <translation> avslutades inte korrekt!
+Vill du ha hjälp ?</translation>
+    </message>
+    <message>
+        <source>Copy did not finish correctly</source>
+        <translation>Kopieringen gick inte bra</translation>
+    </message>
+    <message>
+        <source>Copy finished correctly</source>
+        <translation>Kopieringen gick bra</translation>
     </message>
 </context>
 <context>
@@ -4393,10 +4959,6 @@ OBS. Fyll enbart i detta fällt om du är säker på vad du gör. Ingen kontroll
         <translation>companion9x</translation>
     </message>
     <message>
-        <source>mcu (not used for V4)</source>
-        <translation>MCU (ej för V4-kort)</translation>
-    </message>
-    <message>
         <source>CPU of your TX</source>
         <translation>CPU i sändaren</translation>
     </message>
@@ -4443,6 +5005,18 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>Alternate device</source>
         <translation>Alternativ enhet</translation>
+    </message>
+    <message>
+        <source>MCU</source>
+        <translation>MCU</translation>
+    </message>
+    <message>
+        <source>Use advanced controls</source>
+        <translation>Använd avancerade kontroller</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normally CPU type is automatically selected according to the chosen firmware.&lt;br&gt;If you change the CPU type the resulting eeprom could be inconsistent.</source>
+        <translation>&lt;b&gt;&lt;u&gt;VARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;I vanliga fall väljs CPU-typ utgående från den programvara som valts för skrivning.&lt;br&gt;Om du ändrar CPU-typ så kan resultetet bli ett ogiltigt eeprom.</translation>
     </message>
 </context>
 <context>
@@ -4719,10 +5293,6 @@ m2560 för v4.1-kort</translation>
         <translation>Centrumpip</translation>
     </message>
     <message>
-        <source>Flight Phases Settings</source>
-        <translation>Inställningar för Flygfaser</translation>
-    </message>
-    <message>
         <source>Fades</source>
         <translation>Toningar</translation>
     </message>
@@ -4735,20 +5305,12 @@ m2560 för v4.1-kort</translation>
         <translation>Brytare</translation>
     </message>
     <message>
-        <source>Phase name</source>
-        <translation>Fasnamn</translation>
-    </message>
-    <message>
         <source>IN</source>
         <translation>IN</translation>
     </message>
     <message>
         <source>OUT</source>
         <translation>UT</translation>
-    </message>
-    <message>
-        <source>FP</source>
-        <translation>FF</translation>
     </message>
     <message>
         <source>Limits</source>
@@ -4793,10 +5355,6 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation>Fas</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -4927,10 +5485,6 @@ m2560 för v4.1-kort</translation>
         <translation>Inget namn</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation>Faser</translation>
-    </message>
-    <message>
         <source>DISABLED</source>
         <translation>INAKTIV</translation>
     </message>
@@ -4977,6 +5531,26 @@ m2560 för v4.1-kort</translation>
     <message>
         <source>Safety Switches</source>
         <translation>Säkerhetsbrytare</translation>
+    </message>
+    <message>
+        <source>Flight modes Settings</source>
+        <translation>Inställningar för flygmod</translation>
+    </message>
+    <message>
+        <source>Flight mode name</source>
+        <translation>Namn för flygmod</translation>
+    </message>
+    <message>
+        <source>FM</source>
+        <translation>FM</translation>
+    </message>
+    <message>
+        <source>Flight modes</source>
+        <translation>Flygmoder</translation>
+    </message>
+    <message>
+        <source>Flight mode</source>
+        <translation>Flygmod</translation>
     </message>
 </context>
 <context>
@@ -5037,20 +5611,12 @@ companion9x grenades av.</translation>
         <translation>Öppna bildbibliotek</translation>
     </message>
     <message>
-        <source>Save To Hex</source>
-        <translation>Spara som HEX-fil</translation>
-    </message>
-    <message>
         <source>Select an original firmware file</source>
         <translation>Välj original-firmware</translation>
     </message>
     <message>
         <source>Open</source>
         <translation>Öppna</translation>
-    </message>
-    <message>
-        <source>HEX files (*.hex);;</source>
-        <translation>HEX-filer (*.hex);;</translation>
     </message>
     <message>
         <source>Select an image to customize your splash &lt;br /&gt;or save actual firmware splash</source>
@@ -5115,6 +5681,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Save Firmware</source>
+        <translation>Spara Firmware</translation>
     </message>
 </context>
 <context>
@@ -5308,10 +5878,6 @@ p, li { white-space: pre-wrap; }
         <translation>P2</translation>
     </message>
     <message>
-        <source>P3</source>
-        <translation>P3</translation>
-    </message>
-    <message>
         <source>Ch1</source>
         <translation>Kn1</translation>
     </message>
@@ -5396,6 +5962,14 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
     <message>
         <source>Duplicated stick assignement</source>
         <translation>Dubblerad koppling av spak</translation>
+    </message>
+    <message>
+        <source>P3/LS</source>
+        <translation>P3/LS</translation>
+    </message>
+    <message>
+        <source>RS</source>
+        <translation>RS</translation>
     </message>
 </context>
 <context>
@@ -5726,6 +6300,10 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
         <source>Apply configuration deleting existing model ?</source>
         <translation>Tillämpa inställningarna ojch ta bort den existerande modellen ?</translation>
     </message>
+    <message>
+        <source>FlyBarLess</source>
+        <translation>FlyBarLess</translation>
+    </message>
 </context>
 <context>
     <name>preferencesDialog</name>
@@ -5899,10 +6477,6 @@ Mode 4:
         <translation>Invertera bild</translation>
     </message>
     <message>
-        <source>BackLight Color</source>
-        <translation>Färg på bakgrunddsbelysning</translation>
-    </message>
-    <message>
         <source>FwInfo</source>
         <translation>Firmware-info</translation>
     </message>
@@ -5991,10 +6565,6 @@ Mode 4:
         <translation>Välj katalog för säkerhetskopiering av modelldata</translation>
     </message>
     <message>
-        <source>Profile name is empty, profile slot %1 will we deleted.&lt;br&gt;Are you sure ?</source>
-        <translation>Profilnamn saknas. Profilplats %1 kommer att tas bort.&lt;br&gt; Är du säker?</translation>
-    </message>
-    <message>
         <source>Export Profile</source>
         <translation>Exportera Profil</translation>
     </message>
@@ -6035,6 +6605,30 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>Open Profile to import</source>
         <translation>Öppna profil för import</translation>
+    </message>
+    <message>
+        <source>Simu BackLight</source>
+        <translation>Simulatorbelysning</translation>
+    </message>
+    <message>
+        <source>Remember switches</source>
+        <translation>Memorera brytare</translation>
+    </message>
+    <message>
+        <source>Simulator capture folder</source>
+        <translation>Katalog för simulator-data</translation>
+    </message>
+    <message>
+        <source>Use clipboard only</source>
+        <translation>Använd bara clipboard</translation>
+    </message>
+    <message>
+        <source>Select your snapshot folder</source>
+        <translation>Välj katalog för snapshots</translation>
+    </message>
+    <message>
+        <source>Profile name is empty, profile slot %1 will be deleted.&lt;br&gt;Are you sure ?</source>
+        <translation>Profilnamn saknas, profilplats %1 kommer att raderas.&lt;br&gt; Är du säker?</translation>
     </message>
 </context>
 <context>
@@ -6108,10 +6702,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Gas-expo</translation>
     </message>
     <message>
-        <source>Flight Phases Settings</source>
-        <translation>Inställningar för Flygfaser</translation>
-    </message>
-    <message>
         <source>Fades</source>
         <translation>Toningar</translation>
     </message>
@@ -6156,16 +6746,8 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Brytare</translation>
     </message>
     <message>
-        <source>Phase name</source>
-        <translation>Fasnamn</translation>
-    </message>
-    <message>
         <source>IN</source>
         <translation>IN</translation>
-    </message>
-    <message>
-        <source>FP</source>
-        <translation>FF</translation>
     </message>
     <message>
         <source>Expo/Dr Settings</source>
@@ -6178,10 +6760,6 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation>Fas</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -6344,10 +6922,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Egna inställning av telemetriskärmen</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation>Faser</translation>
-    </message>
-    <message>
         <source>DISABLED</source>
         <translation>INAKTIV</translation>
     </message>
@@ -6378,6 +6952,26 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>Repeat</source>
         <translation>Upprepa</translation>
+    </message>
+    <message>
+        <source>Flight modes Settings</source>
+        <translation>Inställningar för flygmod</translation>
+    </message>
+    <message>
+        <source>Flight mode name</source>
+        <translation>Namn på flygmode</translation>
+    </message>
+    <message>
+        <source>FM</source>
+        <translation>FM</translation>
+    </message>
+    <message>
+        <source>Flight modes</source>
+        <translation>Flygmoder</translation>
+    </message>
+    <message>
+        <source>Flight mode</source>
+        <translation>Flygmod</translation>
     </message>
 </context>
 <context>
@@ -6607,10 +7201,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Firmware %1 fel: %2</translation>
     </message>
     <message>
-        <source> - Phase: %1(%2)</source>
-        <translation> - Fas: %1(%2)</translation>
-    </message>
-    <message>
         <source>Simulating Tx (%1)</source>
         <translation>Simulerar sändare (%1)</translation>
     </message>
@@ -6621,6 +7211,90 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>0 %</source>
         <translation>0 %</translation>
+    </message>
+    <message>
+        <source>SWD</source>
+        <translation>BRD</translation>
+    </message>
+    <message>
+        <source>SWE</source>
+        <translation>BRE</translation>
+    </message>
+    <message>
+        <source>SWF</source>
+        <translation>BRF</translation>
+    </message>
+    <message>
+        <source>SWG</source>
+        <translation>BRG</translation>
+    </message>
+    <message>
+        <source>SWH</source>
+        <translation>BRH</translation>
+    </message>
+    <message>
+        <source>SWI</source>
+        <translation>BRI</translation>
+    </message>
+    <message>
+        <source>SWJ</source>
+        <translation>BRJ</translation>
+    </message>
+    <message>
+        <source>SWK</source>
+        <translation>BRK</translation>
+    </message>
+    <message>
+        <source>SWL</source>
+        <translation>BRL</translation>
+    </message>
+    <message>
+        <source>SWM</source>
+        <translation>BRM</translation>
+    </message>
+    <message>
+        <source>SWN</source>
+        <translation>BRN</translation>
+    </message>
+    <message>
+        <source>SWO</source>
+        <translation>BRO</translation>
+    </message>
+    <message>
+        <source>SWP</source>
+        <translation>BRP</translation>
+    </message>
+    <message>
+        <source>SWQ</source>
+        <translation>BRQ</translation>
+    </message>
+    <message>
+        <source>SWR</source>
+        <translation>BRR</translation>
+    </message>
+    <message>
+        <source>SWS</source>
+        <translation>BRS</translation>
+    </message>
+    <message>
+        <source>SWT</source>
+        <translation>BRT</translation>
+    </message>
+    <message>
+        <source>SWU</source>
+        <translation>BRU</translation>
+    </message>
+    <message>
+        <source>SWV</source>
+        <translation>BRV</translation>
+    </message>
+    <message>
+        <source>SWW</source>
+        <translation>BRW</translation>
+    </message>
+    <message>
+        <source> - Flight mode: %1(%2)</source>
+        <translation> - Fligmod: %1(%2)</translation>
     </message>
 </context>
 <context>
@@ -6669,10 +7343,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>SB</translation>
     </message>
     <message>
-        <source>P2</source>
-        <translation>P2</translation>
-    </message>
-    <message>
         <source>Right Double Click to Reset</source>
         <translation>Höger dubbelklick nollställer</translation>
     </message>
@@ -6697,14 +7367,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Håll Y</translation>
     </message>
     <message>
-        <source>P1</source>
-        <translation>P1</translation>
-    </message>
-    <message>
-        <source>P3</source>
-        <translation>P3</translation>
-    </message>
-    <message>
         <source>SH</source>
         <translation>SH</translation>
     </message>
@@ -6719,10 +7381,6 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>SC</source>
         <translation>SC</translation>
-    </message>
-    <message>
-        <source>X9DA Simulator</source>
-        <translation>X9DA-simulator</translation>
     </message>
     <message>
         <source>Outputs</source>
@@ -6751,10 +7409,6 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>SW6</source>
         <translation>BR6</translation>
-    </message>
-    <message>
-        <source>BEEP</source>
-        <translation>Summer</translation>
     </message>
     <message>
         <source>SW7</source>
@@ -6865,10 +7519,6 @@ Får skilja från språket för mjukvaran</translation>
         <translation>Firmware %1 fel: %2</translation>
     </message>
     <message>
-        <source> - Phase: %1(%2)</source>
-        <translation> - Fas: %1(%2)</translation>
-    </message>
-    <message>
         <source>Simulating Tx (%1)</source>
         <translation>Simulerar sändare (%1)</translation>
     </message>
@@ -6879,6 +7529,110 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <source>SF</source>
         <translation>SF</translation>
+    </message>
+    <message>
+        <source>S2</source>
+        <translation>S2</translation>
+    </message>
+    <message>
+        <source>RS</source>
+        <translation>RS</translation>
+    </message>
+    <message>
+        <source>S1</source>
+        <translation>S1</translation>
+    </message>
+    <message>
+        <source>LS</source>
+        <translation>LS</translation>
+    </message>
+    <message>
+        <source>Taranis Simulator</source>
+        <translation>Taranissimulator</translation>
+    </message>
+    <message>
+        <source>SWK</source>
+        <translation>BRK</translation>
+    </message>
+    <message>
+        <source>SWD</source>
+        <translation>BRD</translation>
+    </message>
+    <message>
+        <source>SWL</source>
+        <translation>BRL</translation>
+    </message>
+    <message>
+        <source>SWH</source>
+        <translation>BRH</translation>
+    </message>
+    <message>
+        <source>SWG</source>
+        <translation>BRG</translation>
+    </message>
+    <message>
+        <source>SWE</source>
+        <translation>BRE</translation>
+    </message>
+    <message>
+        <source>SWF</source>
+        <translation>BRF</translation>
+    </message>
+    <message>
+        <source>SWM</source>
+        <translation>BRM</translation>
+    </message>
+    <message>
+        <source>SWJ</source>
+        <translation>BRJ</translation>
+    </message>
+    <message>
+        <source>SWI</source>
+        <translation>BRI</translation>
+    </message>
+    <message>
+        <source>SWN</source>
+        <translation>BRN</translation>
+    </message>
+    <message>
+        <source>SWO</source>
+        <translation>BRO</translation>
+    </message>
+    <message>
+        <source>SWP</source>
+        <translation>BRP</translation>
+    </message>
+    <message>
+        <source>SWQ</source>
+        <translation>BRQ</translation>
+    </message>
+    <message>
+        <source>SWR</source>
+        <translation>BRR</translation>
+    </message>
+    <message>
+        <source>SWS</source>
+        <translation>BRS</translation>
+    </message>
+    <message>
+        <source>SWT</source>
+        <translation>BRT</translation>
+    </message>
+    <message>
+        <source>SWU</source>
+        <translation>BRU</translation>
+    </message>
+    <message>
+        <source>SWV</source>
+        <translation>BRV</translation>
+    </message>
+    <message>
+        <source>SWW</source>
+        <translation>BRW</translation>
+    </message>
+    <message>
+        <source> - Flight mode: %1(%2)</source>
+        <translation> - Fligmod: %1(%2)</translation>
     </message>
 </context>
 </TS>
