@@ -110,7 +110,11 @@ private slots:
     void on_PPM2_editingFinished();
     void on_PPM3_editingFinished();
     void on_PPM4_editingFinished();
-
+    void on_beepVolume_SL_valueChanged();
+    void on_bgVolume_SL_valueChanged();
+    void on_varioVolume_SL_valueChanged();
+    void on_wavVolume_SL_valueChanged();
+    
     void on_stickmodeCB_currentIndexChanged(int index);
     void on_channelorderCB_currentIndexChanged(int index);
     void on_beeperCB_currentIndexChanged(int index);

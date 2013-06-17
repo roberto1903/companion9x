@@ -651,6 +651,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case MaxVolume:
       return (IS_ARM(board) ? 23 : 7);
+    case HasSoundMixer:
+      return (IS_ARM(board) ? 1 : 0);
     case ExtraChannels:
       return 0;
     case ExtraInputs:
