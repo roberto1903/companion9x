@@ -471,19 +471,19 @@ void ModelEdit::tabModelEditSetup()
     } else {
       ui->tswwarn0_CB->setCurrentIndex(g_model.switchWarningStates & 0x01);
       uint16_t switchstate=(g_model.switchWarningStates>>1);
-      ui->chkSA->setValue(switchstate & 0x11);
+      ui->chkSA->setValue(switchstate & 0x3);
       switchstate >>= 2;
-      ui->chkSB->setValue(switchstate & 0x11);
+      ui->chkSB->setValue(switchstate & 0x3);
       switchstate >>= 2;
-      ui->chkSC->setValue(switchstate & 0x11);
+      ui->chkSC->setValue(switchstate & 0x3);
       switchstate >>= 2;
-      ui->chkSD->setValue(switchstate & 0x11);
+      ui->chkSD->setValue(switchstate & 0x3);
       switchstate >>= 2;
-      ui->chkSE->setValue(switchstate & 0x11);
+      ui->chkSE->setValue(switchstate & 0x3);
       switchstate >>= 2;
-      ui->chkSF->setValue((switchstate & 0x11)/2);
+      ui->chkSF->setValue((switchstate & 0x3)/2);
       switchstate >>= 2;
-      ui->chkSG->setValue(switchstate & 0x11);
+      ui->chkSG->setValue(switchstate & 0x3);
       connect(ui->tswwarn0_CB,SIGNAL(currentIndexChanged(int)),this,SLOT(startupSwitchEdited()));
       for (int i=0; tpmsld[i]; i++) {
         connect(tpmsld[i], SIGNAL(valueChanged(int)),this,SLOT(startupSwitchEdited()));
