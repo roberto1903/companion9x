@@ -916,6 +916,7 @@ enum Capability {
  HasCrossTrims,
  HasStickScroll,
  HasFixOffset,
+ HasSoundMixer,
  NumModules,
  FSSwitch,
  DiffMixers,

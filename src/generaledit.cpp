@@ -60,6 +60,22 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
     }
+    if (!GetEepromInterface()->getCapability(HasSoundMixer)) {
+      ui->beepVolume_SL->hide();
+      ui->beepVolume_label->hide();
+      ui->varioVolume_SL->hide();
+      ui->varioVolume_label->hide();
+      ui->bgVolume_SL->hide();
+      ui->bgVolume_label->hide();
+      ui->wavVolume_SL->hide();
+      ui->wavVolume_label->hide();
+    } else {
+      ui->beepVolume_SL->setValue(g_eeGeneral.beepVolume);
+      ui->varioVolume_SL->setValue(g_eeGeneral.varioVolume);
+      ui->bgVolume_SL->setValue(g_eeGeneral.backgroundVolume);
+      ui->wavVolume_SL->setValue(g_eeGeneral.wavVolume);
+    }
+    
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
       ui->blinvert_label->hide();
@@ -812,6 +828,30 @@ void GeneralEdit::on_BLBright_SB_editingFinished()
 void GeneralEdit::on_CurrentCalib_SB_editingFinished()
 {
     g_eeGeneral.currentCalib = ui->CurrentCalib_SB->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_beepVolume_SL_valueChanged()
+{
+    g_eeGeneral.beepVolume=ui->beepVolume_SL->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_wavVolume_SL_valueChanged()
+{
+    g_eeGeneral.wavVolume=ui->wavVolume_SL->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_varioVolume_SL_valueChanged()
+{
+    g_eeGeneral.varioVolume=ui->varioVolume_SL->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_bgVolume_SL_valueChanged()
+{
+    g_eeGeneral.backgroundVolume=ui->bgVolume_SL->value();
     updateSettings();
 }
 
