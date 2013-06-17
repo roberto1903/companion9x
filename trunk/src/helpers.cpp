@@ -1083,7 +1083,9 @@ QString getGVarString(int16_t val, bool sign)
 }
 
 QString image2qstring(QImage image)
-{
+{   
+    if (image.isNull())
+      return "";
     QBuffer buffer;
     image.save(&buffer, "PNG");
     QString ImageStr;

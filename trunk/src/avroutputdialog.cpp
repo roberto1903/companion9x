@@ -126,6 +126,8 @@ void avrOutputDialog::doCopy()
   char buf[READBUF];
   char * pointer=buf;
   QFile source(sourceFile);
+  int blocks=(source.size()/BLKSIZE);
+   ui->progressBar->setMaximum(blocks-1);
   if (!source.open(QIODevice::ReadOnly)) {
     QMessageBox::warning(this, tr("Error"),tr("Cannot open source file"));
     hasErrors=true;
@@ -138,7 +140,7 @@ void avrOutputDialog::doCopy()
       hasErrors=true;
     } else {
       addText(tr("Writing file: "));
-      for (int i=0;i<128;i++) {
+      for (int i=0;i<blocks;i++) {
         if (dest.write(pointer,BLKSIZE)!=BLKSIZE) {
           hasErrors=true;
           break;

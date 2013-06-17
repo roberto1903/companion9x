@@ -206,7 +206,7 @@ void preferencesDialog::firmwareChanged()
 {
   if (updateLock)
     return;
-
+  
   FirmwareVariant variant = getFirmwareVariant();
   QString stamp;
   stamp.append(variant.firmware->stamp);
@@ -472,6 +472,7 @@ void preferencesDialog::initSettings()
 
 void preferencesDialog::populateLocale()
 {
+  ui->ProfSave_PB->setEnabled(true);
   ui->locale_QB->clear();
   ui->locale_QB->addItem("System default language", "");
   ui->locale_QB->addItem("English", "en");
@@ -506,6 +507,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 
 void preferencesDialog::on_voice_dnld_clicked()
 {
+  ui->ProfSave_PB->setEnabled(true);
   QString url="http://85.18.253.250/voices/";
   FirmwareVariant variant = getFirmwareVariant();
   url.append(QString("%1/%2/").arg(variant.firmware->id).arg(ui->voiceCombo->currentText()));
@@ -514,6 +516,7 @@ void preferencesDialog::on_voice_dnld_clicked()
 
 void preferencesDialog::on_libraryPathButton_clicked()
 {
+  ui->ProfSave_PB->setEnabled(true);
   QSettings settings("companion9x", "companion9x");
   QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your library folder"), settings.value("libraryPath").toString());
   if (!fileName.isEmpty()) {
@@ -584,6 +587,7 @@ void preferencesDialog::on_voicePathButton_clicked()
   if (!fileName.isEmpty()) {
     ui->voicePath->setText(fileName);
   }
+  ui->ProfSave_PB->setEnabled(true);
 }
 
 void preferencesDialog::on_ProfSlot_SB_valueChanged()
@@ -640,8 +644,12 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
     settings.setValue("soundPath", ui->voicePath->text());
     settings.setValue("SplashFileName", ui->SplashFileName->text());
-    QImage Image = ui->imageLabel->pixmap()->toImage();
-    settings.setValue("SplashImage", image2qstring(Image));
+    if (ui->imageLabel->pixmap()) {
+      QImage Image = ui->imageLabel->pixmap()->toImage();
+      settings.setValue("SplashImage", image2qstring(Image));
+    } else {
+      settings.remove("SplashImage");
+    }
     current_firmware_variant = getFirmwareVariant();
     settings.setValue("firmware", current_firmware_variant.id);
     settings.endGroup();
