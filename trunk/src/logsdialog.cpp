@@ -213,10 +213,16 @@ void logsDialog::plotValue(int index, int plot, int numplots)
   }
   QVector<double> x(itemSelected), y(itemSelected);
   if (numplots<3) {
-    for (int i=1; i<n; i++)
-    {
+    for (int i=1; i<n; i++) {
       if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
-        uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();
+        double tmp;
+        QString tstamp=csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1);
+        if (csvlog.at(i).at(1).contains(".")) {
+          tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss.zzz").toTime_t();
+          tmp+=csvlog.at(i).at(1).mid(csvlog.at(i).at(1).indexOf(".")).toDouble();
+        } else {
+          tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss").toTime_t();
+        }
         if (minx>tmp) {
           minx=tmp;
         }
@@ -238,8 +244,14 @@ void logsDialog::plotValue(int index, int plot, int numplots)
     for (int i=1; i<n; i++)
     {
       if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
-        uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();
-
+        double tmp;
+        QString tstamp=csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1);
+        if (csvlog.at(i).at(1).contains(".")) {
+          tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss.zzz").toTime_t();
+          tmp+=csvlog.at(i).at(1).mid(csvlog.at(i).at(1).indexOf(".")).toDouble();
+        } else {
+          tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss").toTime_t();
+        }
         if (minx>tmp) {
           minx=tmp;
         }
@@ -277,7 +289,14 @@ void logsDialog::plotValue(int index, int plot, int numplots)
   for (int i=1; i<n; i++)
   {
     if ((ui->logTable->item(i-1,1)->isSelected() &&rangeSelected) || !rangeSelected) {
-      uint tmp=QDateTime::fromString(csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1), "yyyy-MM-dd HH:mm:ss").toTime_t();   
+      double tmp;
+      QString tstamp=csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1);
+      if (csvlog.at(i).at(1).contains(".")) {
+        tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss.zzz").toTime_t();
+        tmp+=csvlog.at(i).at(1).mid(csvlog.at(i).at(1).indexOf(".")).toDouble();
+      } else {
+        tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss").toTime_t();
+      }
       x[itemCount] = tmp-minx;
       y[itemCount] = csvlog.at(i).at(index).toDouble()/yscale;
       itemCount++;
@@ -439,6 +458,9 @@ bool logsDialog::cvsFileParse()
           col = rx2.cap(1);
         else if(rx2.cap(2).size()>0)
           col = rx2.cap(2);
+        if (col.contains("."))
+          if (col.indexOf(".")==(col.length()-3))
+            col.append("0");
         list<<col;
         if(col.size())
           pos2 += rx2.matchedLength();
