@@ -1751,7 +1751,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     for (int module=0; module<modulesCount; module++) {
       internalField.Append(new UnsignedField<8>(subprotocols[module]));
       internalField.Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
-      internalField.Append(new SignedField<8>(modelData.moduleData[module].channelsCount));
+      internalField.Append(new ConversionField< SignedField<8> >(modelData.moduleData[module].channelsCount, -8));
       internalField.Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
       for (int i=0; i<32; i++)
         internalField.Append(new SignedField<16>(modelData.moduleData[module].failsafeChannels[i]));
@@ -1780,6 +1780,10 @@ void Open9xModelDataNew::beforeExport()
 
 void Open9xModelDataNew::afterImport()
 {
+  for (int module=0; module<3; module++) {
+    if (modelData.moduleData[module].protocol == PXX_XJT_X16)
+      modelData.moduleData[module].protocol = PXX_XJT_X16 + subprotocols[module];
+  }
 }
 
 Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardEnum board, unsigned int version, unsigned int variant):
@@ -1886,6 +1890,10 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
     }
     if (version >= 215) {
       internalField.Append(new CharField<2>(generalData.ttsLanguage));
+      internalField.Append(new SignedField<8>(generalData.beepVolume));
+      internalField.Append(new SignedField<8>(generalData.wavVolume));
+      internalField.Append(new SignedField<8>(generalData.varioVolume));
+      internalField.Append(new SignedField<8>(generalData.backgroundVolume));
     }
   }
 }

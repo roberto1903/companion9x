@@ -426,6 +426,10 @@ class GeneralSettings {
     unsigned int imperial;
     bool crosstrim;
     char ttsLanguage[2+1];
+    int beepVolume;
+    int wavVolume;
+    int varioVolume;
+    int backgroundVolume;
 };
 
 class ExpoData {
