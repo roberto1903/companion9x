@@ -2654,9 +2654,9 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     fswtchParam[i]->setDecimals(1);
     fswtchParam[i]->setMinimum(0);
     fswtchParam[i]->setMaximum(25.5);
-    fswtchParam[i]->setSingleStep(0.1);
-    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value()*10;
-    fswtchParam[i]->setValue(g_model.funcSw[i].param/10);
+    fswtchParam[i]->setSingleStep(0.1);    
+    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value()*10.0;
+    fswtchParam[i]->setValue(g_model.funcSw[i].param/10.0);
     widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
     
   }
