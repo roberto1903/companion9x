@@ -341,12 +341,10 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case TimerTriggerB:
       return 2;
     case HasAltitudeSel:
-      return 1;
     case HasCurrentCalibration:
-      return 1;
     case HasVolume:
-      return 1;
     case HasBrightness:
+    case HasContrast:
       return 1;
     case OffsetWeight:
       return 125;

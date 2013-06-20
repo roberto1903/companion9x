@@ -60,6 +60,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
     }
+    if (!GetEepromInterface()->getCapability(HasContrast)) {
+      ui->contrastSB->hide();
+      ui->label_contrast->hide();
+    }
     if (!GetEepromInterface()->getCapability(HasSoundMixer)) {
       ui->beepVolume_SL->hide();
       ui->beepVolume_label->hide();

@@ -378,6 +378,8 @@ void ModelEdit::tabModelEditSetup()
   }
   
   if (!GetEepromInterface()->getCapability(HasFailsafe)) {
+    ui->FSGB_1 ->hide();
+    ui->FSGB_2->hide();
     ui->ModelSetupTab->setTabEnabled(1,0);
   } else {
     if (GetEepromInterface()->getCapability(HasFailsafe)<32) {

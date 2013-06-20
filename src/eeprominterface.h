@@ -925,6 +925,7 @@ enum Capability {
  HasCurrentCalibration,
  HasVolume,
  HasBrightness,
+ HasContrast,
  PerModelThrottleWarning,
  PerModelThrottleInvert,
  SlowScale,

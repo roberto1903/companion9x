@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>781</width>
-    <height>927</height>
+    <height>902</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -188,13 +188,6 @@ These will be relevant for all models in the same EEPROM.</string>
         <widget class="QLabel" name="label_frskyintalarm">
          <property name="text">
           <string>FrSky Internal Alarm</string>
-         </property>
-        </widget>
-       </item>
-       <item row="34" column="0">
-        <widget class="QLabel" name="label_faimode">
-         <property name="text">
-          <string>FAI Mode</string>
          </property>
         </widget>
        </item>
@@ -736,7 +729,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="18" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_contrast">
          <property name="toolTip">
           <string extracomment="Screen Contrast [20-45]"/>
          </property>
@@ -762,13 +755,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="singleStep">
           <number>5</number>
-         </property>
-        </widget>
-       </item>
-       <item row="42" column="0">
-        <widget class="QLabel" name="units_label">
-         <property name="text">
-          <string>Measurement Units</string>
          </property>
         </widget>
        </item>
@@ -1066,16 +1052,6 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="34" column="1" colspan="2">
-        <widget class="QCheckBox" name="faimode_CB">
-         <property name="toolTip">
-          <string>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="35" column="1" colspan="2">
         <widget class="QCheckBox" name="frskyintalarmChkB">
          <property name="text">
@@ -1234,20 +1210,6 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
         </layout>
-       </item>
-       <item row="42" column="1">
-        <widget class="QComboBox" name="units_CB">
-         <item>
-          <property name="text">
-           <string>Metric</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Imperial</string>
-          </property>
-         </item>
-        </widget>
        </item>
        <item row="47" column="1">
         <widget class="QSpinBox" name="timezoneSB">
@@ -1681,6 +1643,44 @@ Acceptable values are 5v..10v</string>
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="45" column="0">
+        <widget class="QLabel" name="units_label">
+         <property name="text">
+          <string>Measurement Units</string>
+         </property>
+        </widget>
+       </item>
+       <item row="45" column="1">
+        <widget class="QComboBox" name="units_CB">
+         <item>
+          <property name="text">
+           <string>Metric</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Imperial</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="42" column="0">
+        <widget class="QLabel" name="label_faimode">
+         <property name="text">
+          <string>FAI Mode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="42" column="1">
+        <widget class="QCheckBox" name="faimode_CB">
+         <property name="toolTip">
+          <string>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

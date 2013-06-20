@@ -324,6 +324,7 @@ int Er9xInterface::getCapability(const Capability capability)
     case HasCrossTrims:
     case HasStickScroll:
     case HasAltitudeSel:
+    case HasContrast:
     case InstantTrimSW:
     case HasVolume:
     case HasBlInvert:
