@@ -644,6 +644,11 @@ int Open9xInterface::getCapability(const Capability capability)
         return 1;
       else
         return 0;
+    case HasContrast:
+      if (IS_TARANIS(board))
+        return 0;
+      else
+        return 1;      
     case HapticLength:
     case HapticMode:
       return 1;

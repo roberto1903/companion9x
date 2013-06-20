@@ -209,6 +209,7 @@ int Th9xInterface::getCapability(const Capability capability)
       return 125;      
     case Simulation:
       return 1;
+    case HasContrast:  
     case HasInputFilter:
       return 1;
     case CSFunc:

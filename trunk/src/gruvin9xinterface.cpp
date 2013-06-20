@@ -298,6 +298,7 @@ int Gruvin9xInterface::getCapability(const Capability capability)
     case OffsetWeight:
       return 125;
     case HasExpoCurves:
+    case HasContrast:
       return true;           
     case Telemetry:
       return TM_HASTELEMETRY|TM_HASWSHH;

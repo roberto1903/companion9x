@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>945</width>
-    <height>822</height>
+    <width>1064</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,7 +26,7 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnstretch="0,1">
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
    <item row="6" column="1">
     <widget class="QPushButton" name="pushButton">
      <property name="text">
@@ -69,18 +69,30 @@
           <attribute name="title">
            <string>ModelSetup</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_34" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-           <item row="3" column="11">
-            <widget class="QLabel" name="label_thrExpo">
+          <layout class="QGridLayout" name="gridLayout_34" columnstretch="0,0,0,0,0,0,0,0,0,1">
+           <item row="6" column="2">
+            <widget class="QLabel" name="thrwarnLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
-              <string>Throttle Expo</string>
+              <string>Disable Throttle Warning</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
-           <item row="6" column="2">
+           <item row="6" column="1">
             <widget class="QComboBox" name="ttraceCB">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -100,7 +112,7 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="6">
+           <item row="3" column="2">
             <widget class="QLabel" name="label_7">
              <property name="text">
               <string>Throttle Trim</string>
@@ -130,7 +142,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2" colspan="21">
+           <item row="0" column="1" colspan="9">
             <layout class="QGridLayout" name="gridLayout_37" columnstretch="0,1,0,0,1,0,0" columnminimumwidth="0,0,0,0,0,0,0">
              <item row="0" column="0">
               <widget class="QLineEdit" name="modelNameLE">
@@ -232,7 +244,7 @@
              </property>
             </widget>
            </item>
-           <item row="14" column="2" colspan="21">
+           <item row="14" column="1" colspan="9">
             <widget class="Line" name="swwarn1_line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -249,7 +261,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="2" colspan="21">
+           <item row="1" column="1" colspan="9">
             <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,0,1,0,0,0,1">
              <property name="rightMargin">
               <number>2</number>
@@ -346,7 +358,20 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="2" colspan="21">
+           <item row="3" column="8" rowspan="6" colspan="2">
+            <spacer name="horizontalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="1" colspan="9">
             <layout class="QHBoxLayout" name="timer2_layout" stretch="1,1,1,0,1,0,0,0,1">
              <property name="rightMargin">
               <number>2</number>
@@ -433,19 +458,6 @@
              </item>
             </layout>
            </item>
-           <item row="3" column="13" rowspan="6" colspan="10">
-            <spacer name="horizontalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_10">
              <property name="text">
@@ -456,7 +468,7 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
+           <item row="3" column="1">
             <widget class="QComboBox" name="trimIncCB">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -491,7 +503,7 @@
              </item>
             </widget>
            </item>
-           <item row="11" column="2" colspan="21">
+           <item row="11" column="1" colspan="9">
             <widget class="Line" name="swwarn0_line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -514,7 +526,7 @@
              </property>
             </widget>
            </item>
-           <item row="12" column="2" colspan="21">
+           <item row="12" column="1" colspan="9">
             <layout class="QGridLayout" name="StockSwitchStartup">
              <property name="verticalSpacing">
               <number>6</number>
@@ -720,7 +732,7 @@
              </item>
             </layout>
            </item>
-           <item row="13" column="2" colspan="21">
+           <item row="13" column="1" colspan="9">
             <layout class="QGridLayout" name="TaranisSwitchStartup" rowstretch="0,0" columnstretch="0,0,0,0,0,0,0,0,0">
              <property name="sizeConstraint">
               <enum>QLayout::SetMinimumSize</enum>
@@ -1183,7 +1195,7 @@
              </item>
             </layout>
            </item>
-           <item row="15" column="2" colspan="21">
+           <item row="15" column="1" colspan="9">
             <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="8">
               <widget class="QCheckBox" name="bcREaChkB">
@@ -1257,14 +1269,14 @@
              </item>
             </layout>
            </item>
-           <item row="3" column="7">
+           <item row="3" column="3">
             <widget class="QCheckBox" name="thrTrimChkB">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
-           <item row="3" column="9">
+           <item row="3" column="4">
             <widget class="QLabel" name="T2ThrTrg">
              <property name="text">
               <string>Throttle2Trig</string>
@@ -1274,10 +1286,10 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="10">
+           <item row="3" column="5">
             <widget class="QCheckBox" name="T2ThrTrgChkB"/>
            </item>
-           <item row="3" column="12">
+           <item row="3" column="7">
             <widget class="QCheckBox" name="thrExpoChkB">
              <property name="minimumSize">
               <size>
@@ -1290,7 +1302,7 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="9">
+           <item row="8" column="4">
             <widget class="QLabel" name="instantTrim_label">
              <property name="text">
               <string>Instant Trim</string>
@@ -1300,7 +1312,7 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="10">
+           <item row="8" column="5">
             <widget class="QComboBox" name="instantTrim_CB">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -1310,14 +1322,14 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="2">
+           <item row="8" column="1">
             <widget class="QCheckBox" name="extendedLimitsChkB">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
-           <item row="8" column="6">
+           <item row="8" column="2">
             <widget class="QLabel" name="extendedTrims_label">
              <property name="text">
               <string>Extended Trims</string>
@@ -1327,50 +1339,28 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="7">
+           <item row="8" column="3">
             <widget class="QCheckBox" name="extendedTrimsChkB">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
-           <item row="6" column="6">
-            <widget class="QLabel" name="thrwarnLabel">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Disable Throttle Warning</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="7">
+           <item row="6" column="3">
             <widget class="QCheckBox" name="thrwarnChkB">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
-           <item row="6" column="9">
+           <item row="6" column="4">
             <widget class="QLabel" name="label_thrrev">
              <property name="text">
               <string>Reverse Throttle Operation</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="10">
+           <item row="6" column="5">
             <widget class="QCheckBox" name="thrrevChkB">
              <property name="whatsThis">
               <string>Reverse throttle operation.
@@ -1383,7 +1373,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </property>
             </widget>
            </item>
-           <item row="22" column="0">
+           <item row="20" column="0">
             <spacer name="verticalSpacer_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1399,622 +1389,26 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </property>
             </spacer>
            </item>
-           <item row="19" column="0" colspan="23">
-            <widget class="QGroupBox" name="rf1_GB">
-             <property name="title">
-              <string/>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_69" columnstretch="0,0,0,0,0,0,0,0,0">
-              <item row="1" column="8">
-               <spacer name="horizontalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="4" column="1">
-               <widget class="QSpinBox" name="pxxRxNum">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="suffix">
-                 <string/>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>125</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="3">
-               <widget class="QSpinBox" name="ppmDelaySB">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string> usec</string>
-                </property>
-                <property name="minimum">
-                 <number>100</number>
-                </property>
-                <property name="maximum">
-                 <number>800</number>
-                </property>
-                <property name="singleStep">
-                 <number>50</number>
-                </property>
-                <property name="value">
-                 <number>300</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_PPM">
-                <property name="text">
-                 <string>PPM delay</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_pulsePol">
-                <property name="text">
-                 <string>Pulse Shift (polarity)</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="protocol_label">
-                <property name="text">
-                 <string>Protocol</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="protocolCB">
-                <item>
-                 <property name="text">
-                  <string notr="true">PPM</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver A</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver B</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver C</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Trac 09</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QComboBox" name="DSM_Type">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>LP4/LP5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>DSM2only</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>DSM2/DSMX</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_PXX">
-                <property name="text">
-                 <string>RX Number</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_DSM">
-                <property name="text">
-                 <string>DSM Type</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="7">
-               <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB">
-                <property name="suffix">
-                 <string> mSec</string>
-                </property>
-                <property name="decimals">
-                 <number>1</number>
-                </property>
-                <property name="minimum">
-                 <double>12.500000000000000</double>
-                </property>
-                <property name="maximum">
-                 <double>32.500000000000000</double>
-                </property>
-                <property name="singleStep">
-                 <double>0.500000000000000</double>
-                </property>
-                <property name="value">
-                 <double>22.500000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QComboBox" name="pulsePolCB">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Negative</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Positive</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="6">
-               <widget class="QLabel" name="label_ppmFrameLength">
-                <property name="text">
-                 <string>PPM Frame Length</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_4">
-                <property name="styleSheet">
-                 <string notr="true">font-weight: bold;</string>
-                </property>
-                <property name="text">
-                 <string>RF Module 1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="5">
-               <widget class="QSpinBox" name="numChannelsSB">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string>ch</string>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>16</number>
-                </property>
-                <property name="singleStep">
-                 <number>2</number>
-                </property>
-                <property name="value">
-                 <number>8</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QSpinBox" name="numChannelsStart">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string>ch</string>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>32</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <widget class="QLabel" name="label_PPMCH">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Channels</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_numChannelsStart">
-                <property name="text">
-                 <string>Start</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="20" column="0" colspan="23">
-            <widget class="QGroupBox" name="rf2_GB">
-             <property name="title">
-              <string/>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_70" columnstretch="0,0,0,0,0,0,0,0,0">
-              <item row="4" column="1">
-               <widget class="QSpinBox" name="pxxRxNum_2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="suffix">
-                 <string/>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>125</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="3">
-               <widget class="QSpinBox" name="ppmDelaySB_2">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string> usec</string>
-                </property>
-                <property name="minimum">
-                 <number>100</number>
-                </property>
-                <property name="maximum">
-                 <number>800</number>
-                </property>
-                <property name="singleStep">
-                 <number>50</number>
-                </property>
-                <property name="value">
-                 <number>300</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_PPM_2">
-                <property name="text">
-                 <string>PPM delay</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="8">
-               <spacer name="horizontalSpacer_8">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_pulsePol_2">
-                <property name="text">
-                 <string>Pulse Shift (polarity)</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="protocol_label_4">
-                <property name="text">
-                 <string>Protocol</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="protocolCB_2">
-                <item>
-                 <property name="text">
-                  <string notr="true">PPM</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver A</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver B</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Silver C</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Trac 09</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QComboBox" name="DSM_Type_2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>LP4/LP5</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>DSM2only</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>DSM2/DSMX</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_PXX_2">
-                <property name="text">
-                 <string>RX Number</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_DSM_2">
-                <property name="text">
-                 <string>DSM Type</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="7">
-               <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB_2">
-                <property name="suffix">
-                 <string> mSec</string>
-                </property>
-                <property name="decimals">
-                 <number>1</number>
-                </property>
-                <property name="minimum">
-                 <double>12.500000000000000</double>
-                </property>
-                <property name="maximum">
-                 <double>32.500000000000000</double>
-                </property>
-                <property name="singleStep">
-                 <double>0.500000000000000</double>
-                </property>
-                <property name="value">
-                 <double>22.500000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QComboBox" name="pulsePolCB_2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Negative</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Positive</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_5">
-                <property name="styleSheet">
-                 <string notr="true">font-weight:bold;</string>
-                </property>
-                <property name="text">
-                 <string>RF Module 2</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="5">
-               <widget class="QSpinBox" name="numChannelsSB_2">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string>ch</string>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>16</number>
-                </property>
-                <property name="singleStep">
-                 <number>2</number>
-                </property>
-                <property name="value">
-                 <number>8</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <widget class="QLabel" name="label_PPMCH_2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Channels</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_numChannelsStart_2">
-                <property name="text">
-                 <string>Start</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="6">
-               <widget class="QLabel" name="label_ppmFrameLength_2">
-                <property name="text">
-                 <string>PPM Frame Length</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QSpinBox" name="numChannelsStart_2">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="suffix">
-                 <string>ch</string>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>32</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="21" column="0" colspan="23">
+           <item row="19" column="0" colspan="10">
             <widget class="QGroupBox" name="rf3_GB">
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_73" columnstretch="0,0,0,0,0,0,0,0,0,0">
+             <layout class="QGridLayout" name="gridLayout_73" columnstretch="0,0,0,0,0,0,0,0,0,1">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="protocolCB_3">
+                <item>
+                 <property name="text">
+                  <string>Master</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Slave</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
               <item row="2" column="3">
                <widget class="QSpinBox" name="ppmDelaySB_3">
                 <property name="alignment">
@@ -2037,16 +1431,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_PPM_3">
-                <property name="text">
-                 <string>PPM delay</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="9">
                <spacer name="horizontalSpacer_25">
                 <property name="orientation">
@@ -2059,6 +1443,16 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_PPM_3">
+                <property name="text">
+                 <string>PPM delay</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="label_pulsePol_3">
@@ -2078,20 +1472,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="protocolCB_3">
-                <item>
-                 <property name="text">
-                  <string>Master</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Slave</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item row="1" column="8">
@@ -2227,6 +1607,724 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+           <item row="16" column="0" colspan="10">
+            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
+             <item>
+              <widget class="QGroupBox" name="rf1_GB">
+               <property name="title">
+                <string/>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_69" columnstretch="0,0,0,0,0,0,0,1">
+                <item row="2" column="4">
+                 <widget class="QLabel" name="label_PPM">
+                  <property name="text">
+                   <string>PPM delay</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="label_pulsePol">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Polarity</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QComboBox" name="pulsePolCB">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Negative</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Positive</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="2" column="5">
+                 <widget class="QSpinBox" name="ppmDelaySB">
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="suffix">
+                   <string> usec</string>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>800</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>50</number>
+                  </property>
+                  <property name="value">
+                   <number>300</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_ppmFrameLength">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>PPM Frame Length</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB">
+                  <property name="suffix">
+                   <string> mSec</string>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>12.500000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>32.500000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.500000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>22.500000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QSpinBox" name="pxxRxNum">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="suffix">
+                   <string/>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>125</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>1</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="6" rowspan="4">
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>5</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_DSM">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>DSM Type</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QComboBox" name="DSM_Type">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>LP4/LP5</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DSM2only</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DSM2/DSMX</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="label_PXX">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>RX Number</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="protocolCB">
+                  <item>
+                   <property name="text">
+                    <string notr="true">PPM</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver A</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver B</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver C</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Trac 09</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="8">
+                 <widget class="QLabel" name="label_4">
+                  <property name="styleSheet">
+                   <string notr="true">font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>RF Module 1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="protocol_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Protocol</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <spacer name="verticalSpacer_20">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="2" colspan="4">
+                 <layout class="QHBoxLayout" name="horizontalLayout_11">
+                  <item>
+                   <widget class="QLabel" name="label_numChannelsStart">
+                    <property name="text">
+                     <string>Start</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="numChannelsStart">
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="suffix">
+                     <string>ch</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>32</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>1</number>
+                    </property>
+                    <property name="value">
+                     <number>1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_PPMCH">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Channels</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="numChannelsSB">
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="suffix">
+                     <string>ch</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>2</number>
+                    </property>
+                    <property name="value">
+                     <number>8</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="rf2_GB">
+               <property name="title">
+                <string/>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_70" columnstretch="0,0,0,0,0,0,0,1">
+                <item row="2" column="4">
+                 <widget class="QLabel" name="label_PPM_2">
+                  <property name="text">
+                   <string>PPM delay</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="5">
+                 <widget class="QSpinBox" name="ppmDelaySB_2">
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="suffix">
+                   <string> usec</string>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>800</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>50</number>
+                  </property>
+                  <property name="value">
+                   <number>300</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QComboBox" name="pulsePolCB_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Negative</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Positive</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="label_pulsePol_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Polarity</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="label_PXX_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>RX Number</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QSpinBox" name="pxxRxNum_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="suffix">
+                   <string/>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>125</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>1</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_DSM_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>DSM Type</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QComboBox" name="DSM_Type_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>LP4/LP5</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DSM2only</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DSM2/DSMX</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="8">
+                 <widget class="QLabel" name="label_5">
+                  <property name="styleSheet">
+                   <string notr="true">font-weight:bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>RF Module 2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <spacer name="verticalSpacer_19">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_ppmFrameLength_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>PPM Frame Length</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QDoubleSpinBox" name="ppmFrameLengthDSB_2">
+                  <property name="suffix">
+                   <string> mSec</string>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>12.500000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>32.500000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.500000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>22.500000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="6" rowspan="4">
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>5</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="protocolCB_2">
+                  <item>
+                   <property name="text">
+                    <string notr="true">PPM</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver A</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver B</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Silver C</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string notr="true">Trac 09</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="protocol_label_4">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Protocol</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2" colspan="4">
+                 <layout class="QHBoxLayout" name="horizontalLayout_10">
+                  <item>
+                   <widget class="QLabel" name="label_numChannelsStart_2">
+                    <property name="text">
+                     <string>Start</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="numChannelsStart_2">
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="suffix">
+                     <string>ch</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>32</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>1</number>
+                    </property>
+                    <property name="value">
+                     <number>1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_PPMCH_2">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Channels</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="numChannelsSB_2">
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="suffix">
+                     <string>ch</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>2</number>
+                    </property>
+                    <property name="value">
+                     <number>8</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="6">
+            <widget class="QLabel" name="label_thrExpo">
+             <property name="text">
+              <string>Throttle Expo</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
             </widget>
            </item>
           </layout>
@@ -3497,7 +3595,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>40</height>
+               <height>1</height>
               </size>
              </property>
             </spacer>
@@ -3512,7 +3610,30 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
       <attribute name="title">
        <string>Heli Setup</string>
       </attribute>
-      <layout class="QFormLayout" name="formLayout_2">
+      <layout class="QGridLayout" name="gridLayout_72">
+       <item row="2" column="2" rowspan="2">
+        <spacer name="horizontalSpacer_27">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>647</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_107">
+         <property name="text">
+          <string>Swash Ring</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" rowspan="2">
+        <widget class="QComboBox" name="swashCollectiveCB"/>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_103">
          <property name="text">
@@ -3549,50 +3670,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </item>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_106">
-         <property name="text">
-          <string>Collective</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="swashCollectiveCB"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_107">
-         <property name="text">
-          <string>Swash Ring</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QSpinBox" name="swashRingValSB">
-         <property name="suffix">
-          <string/>
-         </property>
-         <property name="minimum">
-          <number>0</number>
-         </property>
-         <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="singleStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_108">
-         <property name="text">
-          <string>Invert</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <layout class="QGridLayout" name="gridLayout_20">
          <item row="0" column="0">
           <widget class="QCheckBox" name="swashInvertELE">
@@ -3617,6 +3695,52 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </item>
         </layout>
        </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_108">
+         <property name="text">
+          <string>Invert</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_106">
+         <property name="text">
+          <string>Collective</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSpinBox" name="swashRingValSB">
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <spacer name="verticalSpacer_21">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tabPhases">
@@ -3629,7 +3753,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          <item row="1" column="0">
           <widget class="QTabWidget" name="phases">
            <property name="currentIndex">
-            <number>0</number>
+            <number>6</number>
            </property>
            <widget class="QWidget" name="phase0">
             <attribute name="title">
@@ -3638,14 +3762,35 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <layout class="QVBoxLayout" name="verticalLayout_4a">
              <item>
               <layout class="QGridLayout" name="gridLayout_11a">
-               <item row="1" column="0">
+               <item row="0" column="2">
                 <widget class="QLabel" name="label_38c">
                  <property name="text">
                   <string>Fade In</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase0FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase0FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39c">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase0Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -3659,28 +3804,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_39c">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QDoubleSpinBox" name="phase0FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase0FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="3">
+               <item row="0" column="4" rowspan="2">
                 <spacer name="horizontalSpacer_12">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4267,7 +4391,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <layout class="QGridLayout" name="gridLayout_17">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11c_2">
-               <item row="0" column="2">
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase1FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase1Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -4281,20 +4412,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38e_2">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39e_2">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_37e_4">
                  <property name="text">
@@ -4302,24 +4419,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase1Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase1FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase1FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_13">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4331,6 +4434,27 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39e_2">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase1FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38e_2">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -4812,7 +4936,28 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <layout class="QVBoxLayout" name="verticalLayout_4c">
              <item>
               <layout class="QGridLayout" name="gridLayout_11c">
-               <item row="0" column="2">
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase2FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase2FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39e">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase2Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -4826,20 +4971,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38e">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39e">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_37e_2">
                  <property name="text">
@@ -4847,24 +4978,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase2Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase2FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase2FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_14">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4876,6 +4993,13 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38e">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -5357,7 +5481,21 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <layout class="QVBoxLayout" name="verticalLayout_4d">
              <item>
               <layout class="QGridLayout" name="gridLayout_11d">
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39a">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="2">
+                <widget class="QLabel" name="label_38a">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase3Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -5371,20 +5509,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38a">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39a">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_37a_2">
                  <property name="text">
@@ -5392,24 +5516,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase3Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase3FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase3FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_15">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -5421,6 +5531,20 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase3FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase3FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -5909,24 +6033,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase4Name">
                  <property name="maxLength">
                   <number>6</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b">
-                 <property name="text">
-                  <string>Fade Out</string>
                  </property>
                 </widget>
                </item>
@@ -5937,24 +6047,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase4Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase4FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase4FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_19">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -5966,6 +6062,34 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38b">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39b">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase4FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase4FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -6753,13 +6877,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_3">
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="phase5Name">
-                 <property name="maxLength">
-                  <number>6</number>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_fm5name">
                  <property name="text">
@@ -6767,17 +6884,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_3">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_3">
-                 <property name="text">
-                  <string>Fade Out</string>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="phase5Name">
+                 <property name="maxLength">
+                  <number>6</number>
                  </property>
                 </widget>
                </item>
@@ -6788,24 +6898,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase5Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase5FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase5FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_20">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -6817,6 +6913,34 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase5FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase5FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38b_3">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39b_3">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -7082,7 +7206,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7114,7 +7238,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7131,7 +7255,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7163,7 +7287,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7204,7 +7328,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7236,7 +7360,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7253,7 +7377,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7285,7 +7409,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>1</height>
                       </size>
                      </property>
                     </spacer>
@@ -7298,7 +7422,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_4">
-               <item row="0" column="2">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase6Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -7312,20 +7436,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_4">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_4">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_37b_8">
                  <property name="text">
@@ -7333,24 +7443,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase6Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase6FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase6FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_21">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -7362,6 +7458,34 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38b_4">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase6FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase6FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39b_4">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -7544,7 +7668,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_5">
-               <item row="0" column="2">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase7Name">
                  <property name="maxLength">
                   <number>6</number>
@@ -7558,20 +7682,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_5">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_5">
-                 <property name="text">
-                  <string>Fade Out</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_37b_10">
                  <property name="text">
@@ -7579,24 +7689,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase7Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase7FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase7FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_22">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -7608,6 +7704,34 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase7FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase7FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38b_5">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39b_5">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -8395,24 +8519,17 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </item>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_11e_6">
+               <item row="1" column="3">
+                <widget class="QDoubleSpinBox" name="phase8FadeOut">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_fm8name">
                  <property name="text">
                   <string>Flight Mode Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_38b_6">
-                 <property name="text">
-                  <string>Fade In</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_39b_6">
-                 <property name="text">
-                  <string>Fade Out</string>
                  </property>
                 </widget>
                </item>
@@ -8423,31 +8540,17 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="phase8Switch"/>
                </item>
-               <item row="2" column="2">
-                <widget class="QDoubleSpinBox" name="phase8FadeIn">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="phase8FadeOut">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="phase8Name">
                  <property name="maxLength">
                   <number>6</number>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3" rowspan="4">
+               <item row="0" column="4" rowspan="3">
                 <spacer name="horizontalSpacer_23">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -8459,6 +8562,27 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_38b_6">
+                 <property name="text">
+                  <string>Fade In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_39b_6">
+                 <property name="text">
+                  <string>Fade Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QDoubleSpinBox" name="phase8FadeIn">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -8661,8 +8785,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>952</width>
-            <height>480</height>
+            <width>1034</width>
+            <height>620</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_6" rowstretch="0" columnstretch="0,0">
@@ -10117,7 +10241,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>40</height>
+                  <height>1</height>
                  </size>
                 </property>
                </spacer>
@@ -11788,7 +11912,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>30</height>
+                  <height>1</height>
                  </size>
                 </property>
                </spacer>
@@ -12094,8 +12218,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>724</width>
-            <height>494</height>
+            <width>1034</width>
+            <height>591</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12291,7 +12415,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             </widget>
            </item>
            <item row="0" column="3" rowspan="17">
-            <layout class="QGridLayout" name="gridLayout_7" columnstretch="1,0" columnminimumwidth="0,0">
+            <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,1" columnstretch="1,0" columnminimumwidth="0,0">
              <item row="0" column="0" colspan="2">
               <widget class="QGraphicsView" name="curvePreview">
                <property name="sizePolicy">
@@ -12390,7 +12514,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>397</width>
-                 <height>53</height>
+                 <height>1</height>
                 </size>
                </property>
               </spacer>
@@ -16431,7 +16555,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>1</height>
              </size>
             </property>
            </spacer>
@@ -17044,7 +17168,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>1</height>
              </size>
             </property>
            </spacer>
@@ -17069,8 +17193,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>318</height>
+            <width>1034</width>
+            <height>620</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
@@ -17364,7 +17488,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>1</height>
              </size>
             </property>
            </spacer>
@@ -17473,7 +17597,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>1</height>
              </size>
             </property>
            </spacer>
@@ -20018,7 +20142,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>1</height>
           </size>
          </property>
         </spacer>
@@ -20088,10 +20212,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>swashInvertELE</tabstop>
   <tabstop>swashInvertAIL</tabstop>
   <tabstop>swashInvertCOL</tabstop>
-  <tabstop>phases</tabstop>
   <tabstop>phase0Name</tabstop>
-  <tabstop>phase0FadeIn</tabstop>
-  <tabstop>phase0FadeOut</tabstop>
   <tabstop>phase0Trim2Slider</tabstop>
   <tabstop>phase0Trim1Slider</tabstop>
   <tabstop>phase0Trim4Slider</tabstop>
@@ -20119,8 +20240,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase0RE2Value</tabstop>
   <tabstop>phase1Name</tabstop>
   <tabstop>phase1Switch</tabstop>
-  <tabstop>phase1FadeIn</tabstop>
-  <tabstop>phase1FadeOut</tabstop>
   <tabstop>phase1Trim2Slider</tabstop>
   <tabstop>phase1Trim1Slider</tabstop>
   <tabstop>phase1Trim4Slider</tabstop>
@@ -20149,8 +20268,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase1RE2Value</tabstop>
   <tabstop>phase2Name</tabstop>
   <tabstop>phase2Switch</tabstop>
-  <tabstop>phase2FadeIn</tabstop>
-  <tabstop>phase2FadeOut</tabstop>
   <tabstop>phase2Trim2Slider</tabstop>
   <tabstop>phase2Trim1Slider</tabstop>
   <tabstop>phase2Trim4Slider</tabstop>
@@ -20179,8 +20296,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase2RE2Value</tabstop>
   <tabstop>phase3Name</tabstop>
   <tabstop>phase3Switch</tabstop>
-  <tabstop>phase3FadeIn</tabstop>
-  <tabstop>phase3FadeOut</tabstop>
   <tabstop>phase3Trim2Slider</tabstop>
   <tabstop>phase3Trim1Slider</tabstop>
   <tabstop>phase3Trim4Slider</tabstop>
@@ -20209,8 +20324,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase3RE2Value</tabstop>
   <tabstop>phase4Name</tabstop>
   <tabstop>phase4Switch</tabstop>
-  <tabstop>phase4FadeIn</tabstop>
-  <tabstop>phase4FadeOut</tabstop>
   <tabstop>phase4Trim2Slider</tabstop>
   <tabstop>phase4Trim1Slider</tabstop>
   <tabstop>phase4Trim4Slider</tabstop>
@@ -20239,8 +20352,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase4RE2Value</tabstop>
   <tabstop>phase5Name</tabstop>
   <tabstop>phase5Switch</tabstop>
-  <tabstop>phase5FadeIn</tabstop>
-  <tabstop>phase5FadeOut</tabstop>
   <tabstop>phase5Trim2Slider</tabstop>
   <tabstop>phase5Trim1Slider</tabstop>
   <tabstop>phase5Trim4Slider</tabstop>
@@ -20269,8 +20380,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase5RE2Value</tabstop>
   <tabstop>phase6Name</tabstop>
   <tabstop>phase6Switch</tabstop>
-  <tabstop>phase6FadeIn</tabstop>
-  <tabstop>phase6FadeOut</tabstop>
   <tabstop>phase6Trim2Slider</tabstop>
   <tabstop>phase6Trim1Slider</tabstop>
   <tabstop>phase6Trim4Slider</tabstop>
@@ -20299,8 +20408,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase6RE2Value</tabstop>
   <tabstop>phase7Name</tabstop>
   <tabstop>phase7Switch</tabstop>
-  <tabstop>phase7FadeIn</tabstop>
-  <tabstop>phase7FadeOut</tabstop>
   <tabstop>phase7Trim2Slider</tabstop>
   <tabstop>phase7Trim1Slider</tabstop>
   <tabstop>phase7Trim4Slider</tabstop>
@@ -20329,8 +20436,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>phase7RE2Value</tabstop>
   <tabstop>phase8Name</tabstop>
   <tabstop>phase8Switch</tabstop>
-  <tabstop>phase8FadeIn</tabstop>
-  <tabstop>phase8FadeOut</tabstop>
   <tabstop>phase8Trim2Slider</tabstop>
   <tabstop>phase8Trim1Slider</tabstop>
   <tabstop>phase8Trim4Slider</tabstop>
