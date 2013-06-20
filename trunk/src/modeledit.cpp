@@ -2367,6 +2367,7 @@ void ModelEdit::tabCustomFunctions()
 
     fswLabel[i] = new QLabel(this);
     fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    fswLabel[i]->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed);
     fswLabel[i]->setText(tr("CFN%1").arg(i+1));
     layout->addWidget(fswLabel[i],(i%16)+1,0);
 
