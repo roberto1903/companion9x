@@ -44,7 +44,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>8</number>
      </property>
      <widget class="QWidget" name="tabModelSetup">
       <attribute name="title">
@@ -15946,7 +15946,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
       <attribute name="title">
        <string>Custom switches</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_8" rowstretch="0" columnstretch="0,0">
+      <layout class="QGridLayout" name="gridLayout_8" rowstretch="0,0" columnstretch="0,0">
        <item row="0" column="0">
         <widget class="QGroupBox" name="cswitchGB1">
          <property name="sizePolicy">
@@ -15960,7 +15960,26 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </property>
          <layout class="QGridLayout" name="gridLayout_26">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_21">
+           <layout class="QGridLayout" name="gridLayout_21" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0">
+            <item row="9" column="0">
+             <widget class="QLabel" name="cswlabel_9">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Panel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="text">
+               <string>CSwitch9</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="5">
              <widget class="QLabel" name="cswCol3">
               <property name="sizePolicy">
@@ -15986,7 +16005,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="15" column="1">
              <widget class="QComboBox" name="cswitchFunc_15">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -15996,7 +16015,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="13" column="1">
              <widget class="QComboBox" name="cswitchFunc_13">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16006,7 +16025,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="15" column="0">
              <widget class="QLabel" name="cswlabel_15">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16025,7 +16044,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="14" column="1">
              <widget class="QComboBox" name="cswitchFunc_14">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16035,7 +16054,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="13" column="0">
              <widget class="QLabel" name="cswlabel_13">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16114,7 +16133,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="6" column="0">
              <widget class="QLabel" name="cswlabel_6">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16130,29 +16149,10 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="cswlabel_9">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <property name="text">
-               <string>CSwitch9</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="cswlabel_1">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16171,7 +16171,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="4" column="1">
              <widget class="QComboBox" name="cswitchFunc_4">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16181,7 +16181,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="8" column="0">
              <widget class="QLabel" name="cswlabel_8">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16200,7 +16200,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="8" column="1">
              <widget class="QComboBox" name="cswitchFunc_8">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16210,7 +16210,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="7" column="0">
              <widget class="QLabel" name="cswlabel_7">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16229,7 +16229,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="7" column="1">
              <widget class="QComboBox" name="cswitchFunc_7">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16239,7 +16239,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="9" column="1">
              <widget class="QComboBox" name="cswitchFunc_9">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16249,7 +16249,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="10" column="0">
              <widget class="QLabel" name="cswlabel_10">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16268,7 +16268,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="10" column="1">
              <widget class="QComboBox" name="cswitchFunc_10">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16278,7 +16278,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="11" column="0">
              <widget class="QLabel" name="cswlabel_11">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16297,7 +16297,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="11" column="1">
              <widget class="QComboBox" name="cswitchFunc_11">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16307,7 +16307,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="12" column="0">
              <widget class="QLabel" name="cswlabel_12">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16326,7 +16326,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="12" column="1">
              <widget class="QComboBox" name="cswitchFunc_12">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16336,7 +16336,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="6" column="1">
              <widget class="QComboBox" name="cswitchFunc_6">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16346,7 +16346,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="1" column="1">
              <widget class="QComboBox" name="cswitchFunc_1">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16356,7 +16356,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="5" column="0">
              <widget class="QLabel" name="cswlabel_5">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16375,7 +16375,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="5" column="1">
              <widget class="QComboBox" name="cswitchFunc_5">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16385,7 +16385,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="2" column="1">
              <widget class="QComboBox" name="cswitchFunc_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16395,7 +16395,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="3" column="1">
              <widget class="QComboBox" name="cswitchFunc_3">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16424,7 +16424,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="3" column="0">
              <widget class="QLabel" name="cswlabel_3">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16443,7 +16443,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="2" column="0">
              <widget class="QLabel" name="cswlabel_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16462,7 +16462,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="14" column="0">
              <widget class="QLabel" name="cswlabel_14">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16481,7 +16481,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="16" column="0">
              <widget class="QLabel" name="cswlabel_16">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16500,7 +16500,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="16" column="1">
              <widget class="QComboBox" name="cswitchFunc_16">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16510,7 +16510,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="4" column="0">
              <widget class="QLabel" name="cswlabel_4">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16547,19 +16547,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>1</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
        </item>
@@ -16576,11 +16563,11 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
          </property>
          <layout class="QGridLayout" name="gridLayout_25">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_22">
+           <layout class="QGridLayout" name="gridLayout_22" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1">
             <item row="15" column="1">
              <widget class="QComboBox" name="cswitchFunc_31">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16590,7 +16577,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="16" column="1">
              <widget class="QComboBox" name="cswitchFunc_32">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16600,7 +16587,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="14" column="1">
              <widget class="QComboBox" name="cswitchFunc_30">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16610,7 +16597,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="13" column="0">
              <widget class="QLabel" name="cswlabel_29">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16629,7 +16616,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="13" column="1">
              <widget class="QComboBox" name="cswitchFunc_29">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16639,7 +16626,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="9" column="1">
              <widget class="QComboBox" name="cswitchFunc_25">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16709,7 +16696,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="6" column="0">
              <widget class="QLabel" name="cswlabel_22">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16728,7 +16715,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="9" column="0">
              <widget class="QLabel" name="cswlabel_25">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16747,7 +16734,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="1" column="0">
              <widget class="QLabel" name="cswlabel_17">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16766,7 +16753,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="4" column="1">
              <widget class="QComboBox" name="cswitchFunc_20">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16776,7 +16763,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="8" column="0">
              <widget class="QLabel" name="cswlabel_24">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16795,7 +16782,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="7" column="0">
              <widget class="QLabel" name="cswlabel_23">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16814,7 +16801,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="7" column="1">
              <widget class="QComboBox" name="cswitchFunc_23">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16824,7 +16811,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="10" column="0">
              <widget class="QLabel" name="cswlabel_26">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16843,7 +16830,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="10" column="1">
              <widget class="QComboBox" name="cswitchFunc_26">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16853,7 +16840,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="11" column="0">
              <widget class="QLabel" name="cswlabel_27">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16872,7 +16859,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="11" column="1">
              <widget class="QComboBox" name="cswitchFunc_27">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16882,7 +16869,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="12" column="0">
              <widget class="QLabel" name="cswlabel_28">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16901,7 +16888,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="12" column="1">
              <widget class="QComboBox" name="cswitchFunc_28">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16911,7 +16898,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="6" column="1">
              <widget class="QComboBox" name="cswitchFunc_22">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16921,7 +16908,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="1" column="1">
              <widget class="QComboBox" name="cswitchFunc_17">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16931,7 +16918,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="5" column="0">
              <widget class="QLabel" name="cswlabel_21">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16950,7 +16937,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="2" column="1">
              <widget class="QComboBox" name="cswitchFunc_18">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16960,7 +16947,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="3" column="1">
              <widget class="QComboBox" name="cswitchFunc_19">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -16970,7 +16957,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="4" column="0">
              <widget class="QLabel" name="cswlabel_20">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17008,7 +16995,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="3" column="0">
              <widget class="QLabel" name="cswlabel_19">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17027,7 +17014,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="2" column="0">
              <widget class="QLabel" name="cswlabel_18">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17046,7 +17033,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="14" column="0">
              <widget class="QLabel" name="cswlabel_30">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17065,7 +17052,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="15" column="0">
              <widget class="QLabel" name="cswlabel_31">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17084,7 +17071,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="16" column="0">
              <widget class="QLabel" name="cswlabel_32">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17103,7 +17090,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="8" column="1">
              <widget class="QComboBox" name="cswitchFunc_24">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17113,7 +17100,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <item row="5" column="1">
              <widget class="QComboBox" name="cswitchFunc_21">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -17160,21 +17147,21 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>1</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
+       </item>
+       <item row="1" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -17197,7 +17184,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <height>620</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10" columnstretch="0,10,10">
+          <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
            <item row="0" column="0">
             <widget class="QLabel" name="label_56">
              <property name="frameShape">
@@ -17266,6 +17253,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_97">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH1</string>
              </property>
@@ -17273,6 +17272,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_88">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH2</string>
              </property>
@@ -17280,6 +17291,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_85">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH3</string>
              </property>
@@ -17287,6 +17310,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_84">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH4</string>
              </property>
@@ -17294,6 +17329,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="label_89">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH5</string>
              </property>
@@ -17301,6 +17348,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="6" column="0">
             <widget class="QLabel" name="label_90">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH6</string>
              </property>
@@ -17308,6 +17367,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="7" column="0">
             <widget class="QLabel" name="label_86">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH7</string>
              </property>
@@ -17315,6 +17386,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="8" column="0">
             <widget class="QLabel" name="label_98">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH8</string>
              </property>
@@ -17322,6 +17405,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="9" column="0">
             <widget class="QLabel" name="label_91">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH9</string>
              </property>
@@ -17329,6 +17424,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="10" column="0">
             <widget class="QLabel" name="label_92">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH10</string>
              </property>
@@ -17336,6 +17443,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="11" column="0">
             <widget class="QLabel" name="label_83">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH11</string>
              </property>
@@ -17343,6 +17462,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="12" column="0">
             <widget class="QLabel" name="label_93">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH12</string>
              </property>
@@ -17350,6 +17481,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="13" column="0">
             <widget class="QLabel" name="label_94">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH13</string>
              </property>
@@ -17357,6 +17500,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="14" column="0">
             <widget class="QLabel" name="label_95">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH14</string>
              </property>
@@ -17364,6 +17519,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="15" column="0">
             <widget class="QLabel" name="label_87">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH15</string>
              </property>
@@ -17371,10 +17538,35 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="16" column="0">
             <widget class="QLabel" name="label_96">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
               <string notr="true">CH16</string>
              </property>
             </widget>
+           </item>
+           <item row="17" column="0">
+            <spacer name="verticalSpacer_22">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
