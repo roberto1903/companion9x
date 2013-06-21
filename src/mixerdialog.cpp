@@ -25,6 +25,8 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
           gvars=1;
         }
+      } else {
+        gvars=1;
       }
       if (gvars==0) {
         ui->offsetGV->setDisabled(true);
@@ -235,6 +237,8 @@ void MixerDialog::widgetChanged()
         if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
           gvars=1;
         }
+      } else {
+        gvars=1;
       }
       if (gvars==1) {
         if (!GetEepromInterface()->getCapability(DiffMixers)) {

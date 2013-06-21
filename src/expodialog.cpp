@@ -19,6 +19,8 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
         if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
           gvars=1;
         }
+      } else {
+        gvars=1;
       }
       if (gvars==0) {
         ui->expoGV->setDisabled(true);
@@ -185,6 +187,8 @@ void ExpoDialog::widgetChanged()
         if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
           gvars=1;
         }
+      } else {
+        gvars=1;
       }
       if (gvars==1) {
         if (!GetEepromInterface()->getCapability(ExpoIsCurve)) {
