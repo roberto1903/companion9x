@@ -106,7 +106,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     ui->tabTelemetry->setDisabled(true);
     ui->tabWidget->removeTab(telTab);
   }
-
+  
   ui->tabWidget->setCurrentIndex(0);
   ui->curvePreview->setMinimumWidth(240);
   ui->curvePreview->setMinimumHeight(240);
