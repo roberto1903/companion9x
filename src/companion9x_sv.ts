@@ -850,6 +850,22 @@ Are you sure ?</source>
 FAI-funktionen kan inte slås av av radion.
 Är du säker ?</translation>
     </message>
+    <message>
+        <source>Beep volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wav volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vario volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background volume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -3331,6 +3347,10 @@ Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och ga
     <message>
         <source>CH %1</source>
         <translation>KN %1</translation>
+    </message>
+    <message>
+        <source>Polarity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
