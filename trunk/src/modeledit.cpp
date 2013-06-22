@@ -82,8 +82,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     ui->tabWidget->removeTab(8);
     telTab--;
     fswTab--;
-  } 
-  else {
+  } else {
     tabSafetySwitches();
   }
 
@@ -91,29 +90,22 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     ui->tabCustomFunctions->setDisabled(true);
     ui->tabWidget->removeTab(fswTab);
     telTab--;
-  } 
-  else {
+  } else {
     tabCustomFunctions();
   }
-
   tabTemplates();
   tabHeli();
-
   if (GetEepromInterface()->getCapability(Telemetry) & TM_HASTELEMETRY) {
     tabTelemetry();
-  }
-  else {
+  } else {
     ui->tabTelemetry->setDisabled(true);
     ui->tabWidget->removeTab(telTab);
   }
-  
   ui->tabWidget->setCurrentIndex(0);
   ui->curvePreview->setMinimumWidth(240);
   ui->curvePreview->setMinimumHeight(240);
-
   resizeEvent();
   QTimer::singleShot(0, this, SLOT(shrink()));
-
   if (openWizard) {
     QTimer::singleShot(1, this, SLOT(wizard()));
   }
