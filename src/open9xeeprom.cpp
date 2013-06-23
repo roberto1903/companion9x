@@ -1243,7 +1243,6 @@ class CustomFunctionField: public TransformedField {
           _delay = fn.repeatParam / 5;
         else
           _delay = (fn.enabled ? 1 : 0);
-          
         if (fn.func <= FuncInstantTrim) {
           *((uint32_t *)_arm_param) = fn.param;
         }
@@ -1345,13 +1344,10 @@ class CustomFunctionField: public TransformedField {
           }
         }
         else if (fn.func == FuncPlayValue) {
-          if (version >= 213) {
-            fn.repeatParam = _union_param * 10;
+          if (version >= 213)
             sourcesConversionTable->importValue(value, (int &)fn.param);
-          }
-          else {
+          else
             SourcesConversionTable::getInstance(board, version, variant, FLAG_NONONE|FLAG_NOSWITCHES)->importValue(value, (int &)fn.param);
-          }
         }
         else {
           fn.param = value;
