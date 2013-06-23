@@ -772,7 +772,7 @@ class ExpoField: public TransformedField {
         else {
           internalField.Append(new ZCharField<6>(expo.name));
         }
-        internalField.Append(new SignedField<8>(expo.curveParam));
+        internalField.Append(new SignedField<8>(_curveParam));
       }
       else if (IS_DBLRAM(board, version) && IS_RELEASE_23_MARCH_2013(board, version)) {
         internalField.Append(new UnsignedField<2>(expo.mode));
@@ -799,18 +799,14 @@ class ExpoField: public TransformedField {
     {
       _curveMode = (expo.curveMode && expo.curveParam);
       _weight    = smallGvarToEEPROM(expo.weight);
-      if (!IS_ARM(board)) {
-        _curveParam = smallGvarToEEPROM(expo.curveParam);
-      }
+      _curveParam = smallGvarToEEPROM(expo.curveParam);
     }
 
     virtual void afterImport()
     {
       expo.curveMode  = _curveMode;
       expo.weight     = smallGvarToC9x(_weight);
-      if (!IS_ARM(board)) {
-        expo.curveParam = smallGvarToC9x(_curveParam);
-      }
+      expo.curveParam = smallGvarToC9x(_curveParam);
     }
 
   protected:
