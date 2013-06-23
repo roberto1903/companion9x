@@ -280,8 +280,9 @@ class CharField: public DataField {
     {
       output.resize(N*8);
       int b = 0;
+      int len = strlen(field);
       for (int i=0; i<N; i++) {
-        int idx = field[i];
+        int idx = (i>=len ? 0 : field[i]);
         for (int j=0; j<8; j++, b++) {
           if (idx & (1<<j))
             output.setBit(b);
@@ -327,8 +328,9 @@ class ZCharField: public DataField {
     {
       output.resize(N*8);
       int b = 0;
+      int len = strlen(field);
       for (int i=0; i<N; i++) {
-        int idx = char2idx(field[i]);
+        int idx = i>=len ? 0 : char2idx(field[i]);
         for (int j=0; j<8; j++, b++) {
           if (idx & (1<<j))
             output.setBit(b);
