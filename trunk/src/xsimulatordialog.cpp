@@ -309,7 +309,7 @@ void xsimulatorDialog::getValues()
                        int(-1024*nodeRight->getY()), // RGHT VERT
                        int(1024*nodeRight->getX()) },  // RGHT HORZ
                      { -ui->dialP_1->value(),
-                       -ui->dialP_2->value(),
+                       ui->dialP_2->value(),
                        -ui->dialP_3->value(),
                        ui->dialP_4->value() },
                      { ui->switchA->value() - 1,
