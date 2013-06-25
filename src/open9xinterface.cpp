@@ -572,7 +572,7 @@ int Open9xInterface::getCapability(const Capability capability)
       return 1;
     case GvarsAreNamed:
     case GvarsFlightPhases:
-      return (board==BOARD_STOCK ? 0 : 1);
+      return ((IS_ARM(board)||(board==BOARD_GRUVIN9X)) ? 1 : 0);
     case Mixes:
       return (IS_ARM(board) ? O9X_ARM_MAX_MIXERS : O9X_MAX_MIXERS);
     case OffsetWeight:
