@@ -293,20 +293,20 @@ void MixerDialog::valuesChanged()
       numcurves=16;
     }
     if (GetEepromInterface()->getCapability(DiffMixers) && (ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves))==0){
-      if (GetEepromInterface()->getCapability(GvarsAsWeight)) {
-        ui->differentialGV->show();
-        if (ui->differentialGV->isChecked()) {
-          ui->differentialSB->hide();
-          ui->differentialCB->show();
-        } else {
-          ui->differentialSB->show();
-          ui->differentialCB->hide();            
-        }
-      } else {
-        ui->differentialGV->hide();
-        ui->differentialCB->hide();
-        ui->differentialSB->show();
-      }
+      ui->differentialGV->show();
+       if (ui->differentialGV->isChecked()) {
+         ui->differentialSB->hide();
+         ui->differentialCB->show();
+       } else {
+         ui->differentialSB->show();
+         ui->differentialCB->hide();            
+       }
+    } else {
+      ui->differentialGV->hide();
+      ui->differentialGV->setChecked(false);
+      ui->differentialSB->hide();
+      ui->differentialSB->setValue(0);
+      ui->differentialCB->hide(); 
     }
     md->curve     = ui->curvesCB->currentIndex()-(numcurves)*GetEepromInterface()->getCapability(HasNegCurves);
     md->swtch     = RawSwitch(ui->switchesCB->itemData(ui->switchesCB->currentIndex()).toInt());
