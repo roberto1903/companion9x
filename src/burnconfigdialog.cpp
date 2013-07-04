@@ -83,7 +83,7 @@ void burnConfigDialog::getSettings()
 #if defined WIN32 || !defined __GNUC__
     avrLoc   = settings.value("avrdude_location", QFileInfo("avrdude.exe").absoluteFilePath()).toString();
     sambaLoc = settings.value("samba_location", QFileInfo("sam-ba.exe").absoluteFilePath()).toString();
-    dfuLoc = settings.value("dfu_location", QFileInfo("dfu-util-static.exe").absoluteFilePath()).toString();
+    dfuLoc = settings.value("dfu_location", QFileInfo("dfu-util.exe").absoluteFilePath()).toString();
 #elif defined __APPLE__
     avrLoc   = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
     sambaLoc = settings.value("samba_location", "/usr/local/bin/sam-ba").toString();
