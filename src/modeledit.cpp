@@ -2337,7 +2337,7 @@ void ModelEdit::tabCustomFunctions()
     }
 
     QSettings settings("companion9x", "companion9x");
-    QString path=settings.value("sdPath", "").toString();
+    QString path=settings.value("sdPath", ".").toString();
     path.append("/SOUNDS/");
     path.append(radioData.generalSettings.ttsLanguage);
     QDir qd(path);
@@ -2574,7 +2574,7 @@ void ModelEdit::playMusic()
   int index=playButton->objectName().mid(5,2).toInt();
   QString function=playButton->objectName().left(4);
   QSettings settings("companion9x", "companion9x");
-  QString path=settings.value("sdPath", "").toString();
+  QString path=settings.value("sdPath", ".").toString();
   QDir qd(path);
   QString track;
   if (qd.exists()) {
