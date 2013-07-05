@@ -139,7 +139,6 @@ Open9xSky9xSimulator::Open9xSky9xSimulator(Open9xInterface * open9xInterface):
 {
     QSettings settings("companion9x", "companion9x");
     QString path=settings.value("sdPath", "").toString()+"/";
-    qDebug() << path;
     int i=0;
     for (i=0; i< std::min(path.length(),1022); i++) {
       simuSdDirectory[i]=path.at(i).toAscii();
