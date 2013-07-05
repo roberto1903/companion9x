@@ -92,7 +92,7 @@ inline int geteepromsize() {
 #include "../opentx/targets/taranis/keys_driver.cpp"
 #include "../opentx/keys.cpp"
 #include "../opentx/bmp.cpp"
-// TODO why?
+// TODO Because FatFS in not C++ there cannot be namespaces there and the functions are defined several times!
 #undef SDCARD
 #include "../opentx/simpgmspace.cpp"
 #define SDCARD
