@@ -2337,7 +2337,9 @@ void ModelEdit::tabCustomFunctions()
     }
 
     QSettings settings("companion9x", "companion9x");
-    QString path=settings.value("soundPath", "").toString();
+    QString path=settings.value("sdPath", "").toString();
+    path.append("/SOUNDS/");
+    path.append(radioData.generalSettings.ttsLanguage);
     QDir qd(path);
     int vml= GetEepromInterface()->getCapability(VoicesMaxLength)+4;
     if (qd.exists()) {
@@ -2572,15 +2574,18 @@ void ModelEdit::playMusic()
   int index=playButton->objectName().mid(5,2).toInt();
   QString function=playButton->objectName().left(4);
   QSettings settings("companion9x", "companion9x");
-  QString path=settings.value("soundPath", "").toString();
+  QString path=settings.value("sdPath", "").toString();
   QDir qd(path);
   QString track;
   if (qd.exists()) {
     if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
       track=path+QString("/%1.wav").arg(int(fswtchParam[index]->value()),4,10,(const QChar)'0');
     } else {
+      path.append("/SOUNDS/");
+      path.append(radioData.generalSettings.ttsLanguage);
       if (fswtchParamArmT[index]->currentText()!="----") {
         track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
+        qDebug() << track;
       }
     }
     QFile file(track);
