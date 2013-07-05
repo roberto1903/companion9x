@@ -48,7 +48,7 @@ private slots:
     void on_snapshotPathButton_clicked();
     void on_snapshotClipboardCKB_clicked();
     void on_backupPathButton_clicked();
-    void on_voicePathButton_clicked();
+    void on_sdPathButton_clicked();
     void on_splashLibraryButton_clicked();
     void on_checkFWUpdates_clicked();
     void on_ProfSlot_SB_valueChanged();

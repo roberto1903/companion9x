@@ -69,21 +69,21 @@ void preferencesDialog::baseFirmwareChanged()
         ui->voiceLabel->show();
         ui->voiceCombo->show();
         ui->voice_dnld->show();
-        ui->voicePathButton->show();
-        ui->voicePath->show();
-        ui->voicePathLabel->show();
+        ui->sdPathButton->show();
+        ui->sdPath->show();
+        ui->sdPathLabel->show();
         ui->voiceLabel->setEnabled(true);
         ui->voiceCombo->setEnabled(true);
         ui->voice_dnld->setEnabled(true);
-        ui->voicePathButton->setEnabled(true);
-        ui->voicePath->setEnabled(true);
+        ui->sdPathButton->setEnabled(true);
+        ui->sdPath->setEnabled(true);
       } else {
         ui->voiceLabel->hide();
         ui->voiceCombo->hide();
         ui->voice_dnld->hide();        
-        ui->voicePathButton->hide();
-        ui->voicePath->hide();
-        ui->voicePathLabel->hide();
+        ui->sdPathButton->hide();
+        ui->sdPath->hide();
+        ui->sdPathLabel->hide();
       }
       populateFirmwareOptions(firmware);
       int width=firmware->eepromInterface->getCapability(LCDWidth);
@@ -152,14 +152,14 @@ void preferencesDialog::firmwareOptionChanged(bool state)
                   ui->voiceLabel->setEnabled(true);
                   ui->voiceCombo->setEnabled(true);
                   ui->voice_dnld->setEnabled(true);
-                  ui->voicePathButton->setEnabled(true);
-                  ui->voicePath->setEnabled(true);
+                  ui->sdPathButton->setEnabled(true);
+                  ui->sdPath->setEnabled(true);
                 } else {
                   ui->voiceLabel->setDisabled(true);
                   ui->voiceCombo->setDisabled(true);
                   ui->voice_dnld->setDisabled(true);
-                  ui->voicePathButton->setDisabled(true);
-                  ui->voicePath->setDisabled(true);
+                  ui->sdPathButton->setDisabled(true);
+                  ui->sdPath->setDisabled(true);
                 }
               }
               
@@ -174,8 +174,8 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       ui->voiceLabel->setDisabled(true);
       ui->voiceCombo->setDisabled(true);
       ui->voice_dnld->setDisabled(true);
-      ui->voicePathButton->setEnabled(true);
-      ui->voicePath->setEnabled(true);
+      ui->sdPathButton->setEnabled(true);
+      ui->sdPath->setEnabled(true);
     }
   }
   if (voice ) {
@@ -187,16 +187,16 @@ void preferencesDialog::firmwareOptionChanged(bool state)
       ui->voiceLabel->setDisabled(true);
       ui->voiceCombo->setDisabled(true);
       ui->voice_dnld->setDisabled(true);
-      ui->voicePathButton->setDisabled(true);
-      ui->voicePath->setDisabled(true);
+      ui->sdPathButton->setDisabled(true);
+      ui->sdPath->setDisabled(true);
     }
   }  else if (firmware) {
     if (firmware->voice) {
       ui->voiceLabel->setEnabled(true);
       ui->voiceCombo->setEnabled(true);
       ui->voice_dnld->setEnabled(true);    
-      ui->voicePathButton->setEnabled(true);
-      ui->voicePath->setEnabled(true);
+      ui->sdPathButton->setEnabled(true);
+      ui->sdPath->setEnabled(true);
     }
   }
   return firmwareChanged();
@@ -258,7 +258,7 @@ void preferencesDialog::writeValues()
   settings.setValue("profileId", ui->ProfSlot_SB->value());
   settings.setValue("backLight", ui->backLightColor->currentIndex());
   settings.setValue("libraryPath", ui->libraryPath->text());
-  settings.setValue("soundPath", ui->voicePath->text());
+  settings.setValue("sdPath", ui->sdPath->text());
   settings.setValue("embedded_splashes", ui->splashincludeCB->currentIndex());
   if (!ui->SplashFileName->text().isEmpty()) {
     QImage Image = ui->imageLabel->pixmap()->toImage();
@@ -330,21 +330,21 @@ void preferencesDialog::populateFirmwareOptions(const FirmwareInfo * firmware)
             ui->voiceLabel->show();
             ui->voiceCombo->show();
             ui->voice_dnld->show();
-            ui->voicePathButton->show();
-            ui->voicePath->show();
-            ui->voicePathLabel->show();
+            ui->sdPathButton->show();
+            ui->sdPath->show();
+            ui->sdPathLabel->show();
             if (current_firmware_variant.id.contains(opt.name) ||firmware->voice) {
               ui->voiceLabel->setEnabled(true);
               ui->voiceCombo->setEnabled(true);
               ui->voice_dnld->setEnabled(true);
-              ui->voicePathButton->setEnabled(true);
-              ui->voicePath->setEnabled(true);
+              ui->sdPathButton->setEnabled(true);
+              ui->sdPath->setEnabled(true);
             } else {
               ui->voiceLabel->setDisabled(true);
               ui->voiceCombo->setDisabled(true);
               ui->voice_dnld->setDisabled(true);
-              ui->voicePathButton->setDisabled(true);
-              ui->voicePath->setDisabled(true);
+              ui->sdPathButton->setDisabled(true);
+              ui->sdPath->setDisabled(true);
             }
           }
         }
@@ -393,9 +393,9 @@ void preferencesDialog::initSettings()
   if (QDir(Path).exists()) {
     ui->libraryPath->setText(Path);
   }
-  Path=settings.value("soundPath", "").toString();
+  Path=settings.value("sdPath", "").toString();
   if (QDir(Path).exists()) {
-    ui->voicePath->setText(Path);
+    ui->sdPath->setText(Path);
   }
   Path=settings.value("backupPath", "").toString();
   if (!Path.isEmpty()) {
@@ -580,12 +580,12 @@ void preferencesDialog::on_splashLibraryButton_clicked()
   }  
 }
 
-void preferencesDialog::on_voicePathButton_clicked()
+void preferencesDialog::on_sdPathButton_clicked()
 {
   QSettings settings("companion9x", "companion9x");
-  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select your sound sample folder"), settings.value("soundPath").toString());
+  QString fileName = QFileDialog::getExistingDirectory(this,tr("Select the folder replicating your SD structure"), settings.value("sdPath").toString());
   if (!fileName.isEmpty()) {
-    ui->voicePath->setText(fileName);
+    ui->sdPath->setText(fileName);
   }
   ui->ProfSave_PB->setEnabled(true);
 }
@@ -642,7 +642,7 @@ void preferencesDialog::on_ProfSave_PB_clicked()
     settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
     settings.setValue("burnFirmware", ui->burnFirmware->isChecked());
     settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
-    settings.setValue("soundPath", ui->voicePath->text());
+    settings.setValue("sdPath", ui->sdPath->text());
     settings.setValue("SplashFileName", ui->SplashFileName->text());
     if (ui->imageLabel->pixmap()) {
       QImage Image = ui->imageLabel->pixmap()->toImage();

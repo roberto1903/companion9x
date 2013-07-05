@@ -606,7 +606,7 @@ void MainWindow::loadProfile()
     chord=settings.value("default_channel_order", 0).toInt();
     defmod=settings.value("default_mode", 0).toInt();
     burnfw=settings.value("burnFirmware", 0).toInt();
-    QString soundPath=settings.value("soundPath", "").toString();
+    QString sdPath=settings.value("sdPath", "").toString();
     renfw=settings.value("rename_firmware_files", false).toBool();
     QString SplashFileName=settings.value("SplashFileName","").toString();
     QString SplashImage=settings.value("SplashImage", "").toString();            
@@ -620,7 +620,7 @@ void MainWindow::loadProfile()
     settings.setValue("default_mode", defmod);
     settings.setValue("burnFirmware", burnfw);
     settings.setValue("rename_firmware_files", renfw);
-    settings.setValue("soundPath", soundPath);
+    settings.setValue("sdPath", sdPath);
     settings.setValue("SplashFileName", SplashFileName);
     settings.setValue("SplashImage", SplashImage);
     settings.setValue("firmware", firmware_id);

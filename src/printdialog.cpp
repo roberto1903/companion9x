@@ -946,15 +946,20 @@ void printDialog::on_printButton_clicked()
 
 void printDialog::on_printFileButton_clicked()
 {
-    QPrinter printer;
-    QString filename = QFileDialog::getSaveFileName(this,tr("Select PDF output file"),QString(),"Pdf File(*.pdf)"); 
-    printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setColorMode(QPrinter::Color);
-    if(!filename.isEmpty()) { 
-      if(QFileInfo(filename).suffix().isEmpty()) 
-        filename.append(".pdf"); 
-      printer.setOutputFileName(filename);
+    QString fn = QFileDialog::getSaveFileName(this,tr("Select PDF output file"),QString(),tr("ODF files (*.odt);;PDF Files(*.pdf);;HTML-Files (*.htm *.html);;All Files (*)")); 
+    if (fn.isEmpty())
+      return;
+    if (! (fn.endsWith(".odt", Qt::CaseInsensitive) || fn.endsWith(".pdf", Qt::CaseInsensitive) || fn.endsWith(".htm", Qt::CaseInsensitive) || fn.endsWith(".html", Qt::CaseInsensitive)) )
+      fn += ".pdf"; // default
+    if (fn.endsWith(".pdf", Qt::CaseInsensitive)) {
+      QPrinter printer;
+      printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
+      printer.setOutputFormat(QPrinter::PdfFormat);
+      printer.setColorMode(QPrinter::Color);
+      printer.setOutputFileName(fn);
       te->print(&printer);
+    } else {
+      QTextDocumentWriter writer(fn);
+       writer.write(te->document());      
     }
 }
