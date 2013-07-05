@@ -276,7 +276,7 @@ QString getProtocolStr(const int proto)
                                    "CTP1009",
                                    "LP45", "DSM2", "DSMX",
                                    "PPM16", "PPMsim",
-                                   "FrSky XJT - X16", "FrSky XJT - D8", "FrSky XJT - LR12", "FrSky DJT",
+                                   "FrSky XJT - D16", "FrSky XJT - D8", "FrSky XJT - LR12", "FrSky DJT",
   };
 
   return CHECK_IN_ARRAY(strings, proto);
