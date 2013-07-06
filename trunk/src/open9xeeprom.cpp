@@ -1741,7 +1741,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   if (IS_ARM(board) && version >= 215) {
     for (int module=0; module<modulesCount; module++) {
-      internalField.Append(new UnsignedField<8>(subprotocols[module]));
+      internalField.Append(new SignedField<8>(subprotocols[module]));
       internalField.Append(new UnsignedField<8>(modelData.moduleData[module].channelsStart));
       internalField.Append(new ConversionField< SignedField<8> >(modelData.moduleData[module].channelsCount, -8));
       internalField.Append(new UnsignedField<8>(modelData.moduleData[module].failsafeMode));
@@ -1774,7 +1774,11 @@ void Open9xModelDataNew::afterImport()
 {
   for (int module=0; module<3; module++) {
     if (modelData.moduleData[module].protocol == PXX_XJT_X16)
-      modelData.moduleData[module].protocol = PXX_XJT_X16 + subprotocols[module];
+      if (subprotocols[module]>=0) {
+        modelData.moduleData[module].protocol = PXX_XJT_X16 + subprotocols[module];
+      } else {
+        modelData.moduleData[module].protocol = OFF;
+      }
   }
 }
 
