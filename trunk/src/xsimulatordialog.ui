@@ -266,6 +266,9 @@ QPushButton:checked {
           <property name="maximum">
            <number>2</number>
           </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
           <property name="value">
            <number>0</number>
           </property>
@@ -302,6 +305,9 @@ QPushButton:checked {
           </property>
           <property name="maximum">
            <number>2</number>
+          </property>
+          <property name="pageStep">
+           <number>1</number>
           </property>
           <property name="value">
            <number>0</number>
@@ -433,6 +439,9 @@ QPushButton:checked {
           <property name="maximum">
            <number>2</number>
           </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
           <property name="value">
            <number>0</number>
           </property>
@@ -509,6 +518,9 @@ QPushButton:checked {
           </property>
           <property name="maximum">
            <number>1</number>
+          </property>
+          <property name="pageStep">
+           <number>0</number>
           </property>
           <property name="value">
            <number>0</number>
@@ -897,6 +909,9 @@ QPushButton:checked {
           <property name="maximum">
            <number>2</number>
           </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
           <property name="value">
            <number>0</number>
           </property>
@@ -949,6 +964,9 @@ QPushButton:checked {
           </property>
           <property name="maximum">
            <number>2</number>
+          </property>
+          <property name="pageStep">
+           <number>1</number>
           </property>
           <property name="value">
            <number>0</number>
@@ -1045,6 +1063,9 @@ QPushButton:checked {
           <property name="maximum">
            <number>2</number>
           </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
           <property name="value">
            <number>0</number>
           </property>
@@ -1093,6 +1114,9 @@ QPushButton:checked {
            <string>SF</string>
           </property>
           <property name="maximum">
+           <number>1</number>
+          </property>
+          <property name="pageStep">
            <number>1</number>
           </property>
           <property name="value">
