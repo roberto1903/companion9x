@@ -1766,7 +1766,7 @@ void Open9xModelDataNew::beforeExport()
     if (modelData.moduleData[module].protocol >= PXX_XJT_X16 && modelData.moduleData[module].protocol <= PXX_XJT_LR12)
       subprotocols[module] = modelData.moduleData[module].protocol - PXX_XJT_X16;
     else
-      subprotocols[module] = 0;
+      subprotocols[module] = (module==0 ? -1:0);
   }
 }
 
