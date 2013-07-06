@@ -30,7 +30,16 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
     curvefile5=QString("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name);
     curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name);
     printSetup();
-    if (GetCurrentFirmwareVariant() & GVARS_VARIANT) {
+    int gvars=0;
+    if (GetEepromInterface()->getCapability(HasVariants)) {
+      if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
+        gvars=1;
+      }
+    } else {
+      gvars=1;
+    }
+    
+    if (gvars) {
       te->append(printPhases()+"<br>");
     }
     printExpo();
@@ -93,8 +102,13 @@ QString printDialog::fv(const QString name, const QString value)
 void printDialog::printSetup()
 {
     int gvars=0;
-    if (GetCurrentFirmwareVariant() & GVARS_VARIANT)
+    if (GetEepromInterface()->getCapability(HasVariants)) {
+      if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
+        gvars=1;
+      }
+    } else {
       gvars=1;
+    }
     QString str = "<a name=1></a><table border=1 cellspacing=0 cellpadding=3 width=\"100%\">";
     str.append(QString("<tr><td colspan=%1 ><table border=0 width=\"100%\"><tr><td><h1>").arg((GetEepromInterface()->getCapability(FlightPhases) && gvars==0) ? 2 : 1));
     str.append(g_model->name);
@@ -351,8 +365,9 @@ void printDialog::printMixes()
       }
       if (md->differential)  str += " "+ tr("Diff") + QString(" %1").arg(getGVarString(md->differential));
       if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
-      if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/2.0).arg(md->delayDown/2.0);
-      if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/2.0).arg(md->speedDown/2.0);
+      float scale=GetEepromInterface()->getCapability(SlowScale);
+      if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/scale).arg(md->delayDown/scale);
+      if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/scale).arg(md->speedDown/scale);
       if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
       if (GetEepromInterface()->getCapability(FlightPhases)) {
         if(md->phases) {
@@ -829,7 +844,7 @@ void printDialog::printFSwitches()
           str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param,g_model->funcSw[i].paramarm, g_model->funcSw[i].adjustMode),"green"));
           int index=g_model->funcSw[i].func;
           if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-            str.append(doTC(getRepeatString(g_model->funcSw[i].repeatParam),"green"));
+            str.append(doTC(QString("%1").arg(g_model->funcSw[i].repeatParam),"green"));
           } else {
             str.append(doTC( "&nbsp;","green"));
           }

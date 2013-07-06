@@ -334,9 +334,14 @@ void compareDialog::printPhases()
   str.append("</table>");
   int gvars=0;
   int gvarnum=0;
-  
-  if ((GetCurrentFirmwareVariant() & GVARS_VARIANT ) || (!GetEepromInterface()->getCapability(HasVariants) && GetEepromInterface()->getCapability(Gvars))) {
+  if (GetEepromInterface()->getCapability(HasVariants)) {
+    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT)) {
+      gvars=1;
+    }
+  } else {
     gvars=1;
+  }
+  if (gvars==1) {
     gvarnum=GetEepromInterface()->getCapability(GvarsNum);
   }
   if ((gvars==1 && GetEepromInterface()->getCapability(GvarsFlightPhases)) || GetEepromInterface()->getCapability(RotaryEncoders)) {
@@ -781,6 +786,7 @@ void compareDialog::printMixers()
   QString str = "<table border=1 cellspacing=0 cellpadding=3 style=\"page-break-after:always;\" width=\"100%\"><tr><td><h2>";
   str.append(tr("Mixers"));
   str.append("</h2></td></tr><tr><td><table border=1 cellspacing=0 cellpadding=3>");
+  float scale=GetEepromInterface()->getCapability(SlowScale);
   bool mixused[64]={false};
   bool mixused2[64]={false};
   for(uint8_t i=1; i<=GetEepromInterface()->getCapability(Outputs); i++) {
@@ -825,8 +831,8 @@ void compareDialog::printMixers()
           }
           if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(getGVarString(md->differential));
           if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/2.0).arg(md->delayDown/2.0);
-          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/2.0).arg(md->speedDown/2.0);
+          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/scale).arg(md->delayDown/scale);
+          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/scale).arg(md->speedDown/scale);
           if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
           if (GetEepromInterface()->getCapability(FlightPhases)) {
             if(md->phases) {
@@ -908,8 +914,8 @@ void compareDialog::printMixers()
           }
           if (md->differential)  str += " "+ tr("Diff") + QString(" (%1%)").arg(getGVarString(md->differential));
           if (md->curve) str += " " + tr("Curve") + QString("(%1)").arg(getCurveStr(md->curve).replace("<", "&lt;").replace(">", "&gt;"));
-          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/2.0).arg(md->delayDown/2.0);
-          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/2.0).arg(md->speedDown/2.0);
+          if (md->delayDown || md->delayUp) str += tr(" Delay(u%1:d%2)").arg(md->delayUp/scale).arg(md->delayDown/scale);
+          if (md->speedDown || md->speedUp) str += tr(" Slow(u%1:d%2)").arg(md->speedUp/scale).arg(md->speedDown/scale);
           if (md->mixWarn)  str += " "+tr("Warn")+QString("(%1)").arg(md->mixWarn);
           if (GetEepromInterface()->getCapability(FlightPhases)) {
             if(md->phases) {
@@ -1101,7 +1107,7 @@ void compareDialog::printFSwitches()
         str.append(doTC(FuncParam(g_model1->funcSw[i].func,g_model1->funcSw[i].param,g_model1->funcSw[i].paramarm, g_model1->funcSw[i].adjustMode),color1));        
         int index=g_model1->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-          str.append(doTC(getRepeatString(g_model1->funcSw[i].repeatParam),color1));
+          str.append(doTC(QString("%1").arg(g_model1->funcSw[i].repeatParam),color1));
         } else {
           str.append(doTC( "---",color1));
         }
@@ -1120,7 +1126,7 @@ void compareDialog::printFSwitches()
         str.append(doTC(FuncParam(g_model2->funcSw[i].func,g_model2->funcSw[i].param,g_model2->funcSw[i].paramarm, g_model2->funcSw[i].adjustMode),color2));        
         int index=g_model2->funcSw[i].func;
         if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
-          str.append(doTC(getRepeatString(g_model2->funcSw[i].repeatParam),color2));
+          str.append(doTC(QString("%1").arg(g_model2->funcSw[i].repeatParam),color2));
         } else {
           str.append(doTC( "---",color2));
         }
