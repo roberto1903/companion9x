@@ -119,7 +119,7 @@ class Open9xModelDataNew: public TransformedField {
 
   private:
     char name[256];
-    unsigned int subprotocols[C9X_NUM_MODULES+1/*trainer*/];
+    signed int subprotocols[C9X_NUM_MODULES+1/*trainer*/];
     ProtocolsConversionTable protocolsConversionTable;
     ChannelsConversionTable channelsConversionTable;
 };
