@@ -348,8 +348,7 @@ private slots:
     void on_timer2ValTE_editingFinished();
     void on_timer2ModeBCB_currentIndexChanged(int index);
     void on_modelNameLE_editingFinished();
-    void on_modelImage_LE_editingFinished();
-
+    void on_modelImage_CB_currentIndexChanged(int index);
     void on_phases_currentChanged(int index);
     void on_tabWidget_currentChanged(int index);
     void on_templateList_doubleClicked(QModelIndex index);
