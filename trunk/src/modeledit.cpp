@@ -417,6 +417,7 @@ void ModelEdit::tabModelEditSetup()
     ui->modelImage_label->hide();
     ui->modelImage_image->hide();
   } else {
+    modelImageLock=true;
     QStringList items;
     QSettings settings("companion9x", "companion9x");
     QString path=settings.value("sdPath", ".").toString();
@@ -454,10 +455,11 @@ void ModelEdit::tabModelEditSetup()
           image.load(fileName);
         }
         if (!image.isNull()) {
-          ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32).convertToFormat(QImage::Format_Mono)));;
+          ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32)));;
         }
       }
     }
+    modelImageLock=false;
   }
   
   if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
@@ -3199,6 +3201,8 @@ void ModelEdit::on_modelNameLE_editingFinished()
 
 void ModelEdit::on_modelImage_CB_currentIndexChanged(int index)
 {
+    if (modelImageLock)
+      return;
     strncpy(g_model.bitmap, ui->modelImage_CB->currentText().toAscii(), GetEepromInterface()->getCapability(VoicesMaxLength));
     QSettings settings("companion9x", "companion9x");
     QString path=settings.value("sdPath", ".").toString();
@@ -3216,7 +3220,7 @@ void ModelEdit::on_modelImage_CB_currentIndexChanged(int index)
         image.load(fileName);
       }
       if (!image.isNull()) {
-        ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32).convertToFormat(QImage::Format_Mono)));;
+        ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32)));;
       }
     }
     updateSettings();

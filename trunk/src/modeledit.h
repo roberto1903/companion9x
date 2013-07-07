@@ -63,7 +63,7 @@ private:
     bool curvesLock;
     bool phononLock;
     bool fsLock;
-
+    bool modelImageLock;
     bool plot_curve[16];
 
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
