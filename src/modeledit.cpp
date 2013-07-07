@@ -664,7 +664,7 @@ void ModelEdit::tabModelEditSetup()
   }
   if (GetEepromInterface()->getCapability(ModelTrainerEnable)) {
     trainerEditLock=true;
-    if (!g_model.traineron) {
+    if (!(g_model.trainerMode||g_model.traineron)) {
       ui->protocolCB_3->setCurrentIndex(0);
       ui->label_PPM_3->hide();
       ui->ppmDelaySB_3->hide();
@@ -691,7 +691,7 @@ void ModelEdit::tabModelEditSetup()
       ui->numChannelsStart_3->show();      
     }
     trainerEditLock=false;
-    on_protocolCB_3_currentIndexChanged(g_model.traineron);
+    on_protocolCB_3_currentIndexChanged(g_model.traineron||g_model.trainerMode);
   }
   else {
     ui->rf3_GB->hide();
@@ -3627,7 +3627,7 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
     trainerEditLock=true;
     
     g_model.moduleData[2].protocol=ui->protocolCB_3->currentIndex();
-    g_model.traineron=ui->protocolCB_3->currentIndex();
+    g_model.trainerMode=ui->protocolCB_3->currentIndex();
     updateSettings();
     switch (index) {
       case 0:
