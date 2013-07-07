@@ -220,6 +220,8 @@ int Th9xInterface::getCapability(const Capability capability)
       return 10;
     case LCDWidth:
       return 128;
+    case GetThrSwitch:
+      return DSW_THR;
     default:
       return 0;
   }

@@ -360,7 +360,9 @@ int Ersky9xInterface::getCapability(const Capability capability)
     case TelemetryMaxMultiplier:
       return 2;
     case LCDWidth:
-      return 128;      
+      return 128;
+    case GetThrSwitch:
+      return DSW_THR;      
     default:
       return 0;
   }

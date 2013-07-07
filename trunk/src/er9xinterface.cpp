@@ -336,7 +336,9 @@ int Er9xInterface::getCapability(const Capability capability)
     case GvarsHaveSources:
     case GvarsAsSources:
     case GvarsAsWeight:
-     return 1;      
+     return 1;
+    case GetThrSwitch:
+      return DSW_THR;     
     default:
       return 0;
   }
