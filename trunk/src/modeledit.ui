@@ -544,10 +544,16 @@
              <item row="1" column="2">
               <widget class="QSlider" name="chkSB">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -584,10 +590,16 @@
              <item row="1" column="3">
               <widget class="QSlider" name="chkSC">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -640,10 +652,16 @@
              <item row="1" column="4">
               <widget class="QSlider" name="chkSD">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -712,10 +730,16 @@
              <item row="1" column="5">
               <widget class="QSlider" name="chkSE">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -752,10 +776,16 @@
              <item row="1" column="7">
               <widget class="QSlider" name="chkSG">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -808,7 +838,7 @@
              <item row="1" column="1">
               <widget class="QSlider" name="chkSA">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -816,7 +846,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>0</height>
+                 <height>50</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -867,10 +897,16 @@
              <item row="1" column="6">
               <widget class="QSlider" name="chkSF">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -8832,8 +8868,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>630</height>
+            <width>944</width>
+            <height>481</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12534,8 +12570,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>601</height>
+            <width>722</width>
+            <height>467</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -17598,8 +17634,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>630</height>
+            <width>153</width>
+            <height>354</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
