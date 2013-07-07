@@ -341,6 +341,8 @@ private slots:
     void on_DSM_Type_2_currentIndexChanged(int index);
     void on_pxxRxNum_editingFinished();
     void on_pxxRxNum_2_editingFinished();
+    void on_fsm1CB_currentIndexChanged(int index);
+    void on_fsm2CB_currentIndexChanged(int index);
     
     // TODO void on_trimSWCB_currentIndexChanged(int index);
     void on_trimIncCB_currentIndexChanged(int index);

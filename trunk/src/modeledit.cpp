@@ -3361,6 +3361,13 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
     g_model.moduleData[0].protocol=(Protocol)ui->protocolCB->itemData(index).toInt();
     int protocol=g_model.moduleData[0].protocol;
   //  g_model.protocol = (Protocol)index;
+    if (protocol==PXX_XJT_D8 || protocol==OFF) {
+      ui->FSGB_1->hide();
+    } else {
+      ui->fsm1CB->setCurrentIndex(g_model.moduleData[0].failsafeMode);
+      on_fsm1CB_currentIndexChanged(g_model.moduleData[0].failsafeMode);
+      ui->FSGB_1->show();
+    }
     updateSettings();
 
     ui->ppmDelaySB->setEnabled(!protocol);
@@ -3494,6 +3501,13 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
     
     g_model.moduleData[1].protocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
     int protocol=g_model.moduleData[1].protocol;
+    if (protocol==PXX_XJT_X16 || protocol==PXX_XJT_LR12) {
+      ui->FSGB_2->show();
+      ui->fsm2CB->setCurrentIndex(g_model.moduleData[1].failsafeMode);
+      on_fsm2CB_currentIndexChanged(g_model.moduleData[1].failsafeMode);
+    } else {
+      ui->FSGB_2->hide();
+    }
   //  g_model.protocol = (Protocol)index;
     updateSettings();
 
@@ -3796,6 +3810,44 @@ void ModelEdit::on_ppmFrameLengthDSB_2_editingFinished()
 void ModelEdit::on_ppmFrameLengthDSB_3_editingFinished()
 {
   g_model.moduleData[2].ppmFrameLength = (ui->ppmFrameLengthDSB_3->value()-22.5)/0.5;
+  updateSettings();
+}
+
+void ModelEdit::on_fsm1CB_currentIndexChanged(int index)
+{
+  QSpinBox * fssb[] = { ui->fsm1SB_1, ui->fsm1SB_2,ui->fsm1SB_3,ui->fsm1SB_4,ui->fsm1SB_5,ui->fsm1SB_6,ui->fsm1SB_7,ui->fsm1SB_8,
+                               ui->fsm1SB_9, ui->fsm1SB_10,ui->fsm1SB_11,ui->fsm1SB_12,ui->fsm1SB_13,ui->fsm1SB_14,ui->fsm1SB_15,ui->fsm1SB_16, NULL };
+  QSlider * fssld[] = { ui->fsm1SL_1, ui->fsm1SL_2,ui->fsm1SL_3,ui->fsm1SL_4,ui->fsm1SL_5,ui->fsm1SL_6,ui->fsm1SL_7,ui->fsm1SL_8,
+                               ui->fsm1SL_9, ui->fsm1SL_10,ui->fsm1SL_11,ui->fsm1SL_12,ui->fsm1SL_13,ui->fsm1SL_14,ui->fsm1SL_15,ui->fsm1SL_16, NULL };
+  g_model.moduleData[0].failsafeMode=index;
+  for (int i=0; fssb[i]; i++) {
+   if (index==1) {
+      fssb[i]->setEnabled(true);
+      fssld[i]->setEnabled(true);
+    } else {
+      fssb[i]->setDisabled(true);
+      fssld[i]->setDisabled(true);     
+    }
+  }
+  updateSettings();
+}
+
+void ModelEdit::on_fsm2CB_currentIndexChanged(int index)
+{
+  QSpinBox * fssb[] = { ui->fsm2SB_1, ui->fsm2SB_2,ui->fsm2SB_3,ui->fsm2SB_4,ui->fsm2SB_5,ui->fsm2SB_6,ui->fsm2SB_7,ui->fsm2SB_8,
+                               ui->fsm2SB_9, ui->fsm2SB_10,ui->fsm2SB_11,ui->fsm2SB_12,ui->fsm2SB_13,ui->fsm2SB_14,ui->fsm2SB_15,ui->fsm2SB_16, NULL };
+  QSlider * fssld[] = { ui->fsm2SL_1, ui->fsm2SL_2,ui->fsm2SL_3,ui->fsm2SL_4,ui->fsm2SL_5,ui->fsm2SL_6,ui->fsm2SL_7,ui->fsm2SL_8,
+                               ui->fsm2SL_9, ui->fsm2SL_10,ui->fsm2SL_11,ui->fsm2SL_12,ui->fsm2SL_13,ui->fsm2SL_14,ui->fsm2SL_15,ui->fsm2SL_16, NULL };  
+  g_model.moduleData[1].failsafeMode=index;
+  for (int i=0; fssb[i]; i++) {
+   if (index==1) {
+      fssb[i]->setEnabled(true);
+      fssld[i]->setEnabled(true);
+    } else {
+      fssb[i]->setDisabled(true);
+      fssld[i]->setDisabled(true);     
+    }
+  }
   updateSettings();
 }
 

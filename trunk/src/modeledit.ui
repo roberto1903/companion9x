@@ -2413,7 +2413,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               <string>External module</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_68">
-              <item row="2" column="10">
+              <item row="3" column="10">
                <widget class="QSpinBox" name="fsm2SB_11">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2432,7 +2432,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="10">
+              <item row="1" column="10">
                <widget class="QSpinBox" name="fsm2SB_9">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2451,7 +2451,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
+              <item row="4" column="1">
                <widget class="QSlider" name="fsm2SL_4">
                 <property name="minimum">
                  <number>-100</number>
@@ -2464,14 +2464,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="8">
+              <item row="4" column="8">
                <widget class="QLabel" name="fsm2LB_12">
                 <property name="text">
                  <string>CH12</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="1" column="1">
                <widget class="QSlider" name="fsm2SL_1">
                 <property name="minimum">
                  <number>-100</number>
@@ -2484,7 +2484,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="2">
+              <item row="3" column="2">
                <widget class="QSpinBox" name="fsm2SB_3">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2503,7 +2503,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="9">
+              <item row="3" column="9">
                <widget class="QSlider" name="fsm2SL_11">
                 <property name="minimum">
                  <number>-100</number>
@@ -2516,7 +2516,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="2" column="1">
                <widget class="QSlider" name="fsm2SL_2">
                 <property name="minimum">
                  <number>-100</number>
@@ -2529,21 +2529,21 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
+              <item row="1" column="0">
                <widget class="QLabel" name="fsm2LB_1">
                 <property name="text">
                  <string>CH01</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="4" column="0">
                <widget class="QLabel" name="fsm2LB_4">
                 <property name="text">
                  <string>CH04</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="10">
+              <item row="2" column="10">
                <widget class="QSpinBox" name="fsm2SB_10">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2562,7 +2562,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="9">
+              <item row="4" column="9">
                <widget class="QSlider" name="fsm2SL_12">
                 <property name="minimum">
                  <number>-100</number>
@@ -2575,14 +2575,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="8">
+              <item row="2" column="8">
                <widget class="QLabel" name="fsm2LB_10">
                 <property name="text">
                  <string>CH10</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="2">
+              <item row="4" column="2">
                <widget class="QSpinBox" name="fsm2SB_4">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2601,14 +2601,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="fsm2LB_2">
                 <property name="text">
                  <string>CH02</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="10">
+              <item row="4" column="10">
                <widget class="QSpinBox" name="fsm2SB_12">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2627,7 +2627,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="2">
+              <item row="1" column="2">
                <widget class="QSpinBox" name="fsm2SB_1">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2646,7 +2646,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="9">
+              <item row="2" column="9">
                <widget class="QSlider" name="fsm2SL_10">
                 <property name="minimum">
                  <number>-100</number>
@@ -2659,14 +2659,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="8">
+              <item row="3" column="8">
                <widget class="QLabel" name="fsm2LB_11">
                 <property name="text">
                  <string>CH11</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="3" column="1">
                <widget class="QSlider" name="fsm2SL_3">
                 <property name="minimum">
                  <number>-100</number>
@@ -2679,21 +2679,21 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <widget class="QLabel" name="fsm2LB_3">
                 <property name="text">
                  <string>CH03</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="8">
+              <item row="1" column="8">
                <widget class="QLabel" name="fsm2LB_9">
                 <property name="text">
                  <string>CH09</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="9">
+              <item row="1" column="9">
                <widget class="QSlider" name="fsm2SL_9">
                 <property name="minimum">
                  <number>-100</number>
@@ -2706,7 +2706,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
+              <item row="2" column="2">
                <widget class="QSpinBox" name="fsm2SB_2">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2725,14 +2725,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="4">
+              <item row="1" column="4">
                <widget class="QLabel" name="fsm2LB_5">
                 <property name="text">
                  <string>CH05</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="5">
+              <item row="1" column="5">
                <widget class="QSlider" name="fsm2SL_5">
                 <property name="minimum">
                  <number>-100</number>
@@ -2745,7 +2745,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="6">
+              <item row="1" column="6">
                <widget class="QSpinBox" name="fsm2SB_5">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2764,14 +2764,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="4">
+              <item row="2" column="4">
                <widget class="QLabel" name="fsm2LB_6">
                 <property name="text">
                  <string>CH06</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="5">
+              <item row="2" column="5">
                <widget class="QSlider" name="fsm2SL_6">
                 <property name="minimum">
                  <number>-100</number>
@@ -2784,7 +2784,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="6">
+              <item row="2" column="6">
                <widget class="QSpinBox" name="fsm2SB_6">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2803,14 +2803,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="4">
+              <item row="3" column="4">
                <widget class="QLabel" name="fsm2LB_7">
                 <property name="text">
                  <string>CH07</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="5">
+              <item row="3" column="5">
                <widget class="QSlider" name="fsm2SL_7">
                 <property name="minimum">
                  <number>-100</number>
@@ -2823,7 +2823,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="6">
+              <item row="3" column="6">
                <widget class="QSpinBox" name="fsm2SB_7">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2842,7 +2842,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="6">
+              <item row="4" column="6">
                <widget class="QSpinBox" name="fsm2SB_8">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2861,7 +2861,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="5">
+              <item row="4" column="5">
                <widget class="QSlider" name="fsm2SL_8">
                 <property name="minimum">
                  <number>-100</number>
@@ -2874,28 +2874,28 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="4">
+              <item row="4" column="4">
                <widget class="QLabel" name="fsm2LB_8">
                 <property name="text">
                  <string>CH08</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="3" rowspan="4">
+              <item row="1" column="3" rowspan="4">
                <widget class="Line" name="line_13">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>
-              <item row="0" column="12">
+              <item row="1" column="12">
                <widget class="QLabel" name="fsm2LB_13">
                 <property name="text">
                  <string>CH13</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="13">
+              <item row="1" column="13">
                <widget class="QSlider" name="fsm2SL_13">
                 <property name="minimum">
                  <number>-100</number>
@@ -2908,7 +2908,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="14">
+              <item row="1" column="14">
                <widget class="QSpinBox" name="fsm2SB_13">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2927,14 +2927,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="12">
+              <item row="2" column="12">
                <widget class="QLabel" name="fsm2LB_14">
                 <property name="text">
                  <string>CH14</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="13">
+              <item row="2" column="13">
                <widget class="QSlider" name="fsm2SL_14">
                 <property name="minimum">
                  <number>-100</number>
@@ -2947,7 +2947,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="1" column="14">
+              <item row="2" column="14">
                <widget class="QSpinBox" name="fsm2SB_14">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2966,14 +2966,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="12">
+              <item row="3" column="12">
                <widget class="QLabel" name="fsm2LB_15">
                 <property name="text">
                  <string>CH15</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="13">
+              <item row="3" column="13">
                <widget class="QSlider" name="fsm2SL_15">
                 <property name="minimum">
                  <number>-100</number>
@@ -2986,7 +2986,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="2" column="14">
+              <item row="3" column="14">
                <widget class="QSpinBox" name="fsm2SB_15">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3005,14 +3005,14 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="12">
+              <item row="4" column="12">
                <widget class="QLabel" name="fsm2LB_16">
                 <property name="text">
                  <string>CH16</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="13">
+              <item row="4" column="13">
                <widget class="QSlider" name="fsm2SL_16">
                 <property name="minimum">
                  <number>-100</number>
@@ -3025,7 +3025,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="3" column="14">
+              <item row="4" column="14">
                <widget class="QSpinBox" name="fsm2SB_16">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3044,628 +3044,49 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                </widget>
               </item>
-              <item row="0" column="7" rowspan="4">
+              <item row="1" column="7" rowspan="4">
                <widget class="Line" name="line_14">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>
-              <item row="0" column="11" rowspan="4">
+              <item row="1" column="11" rowspan="4">
                <widget class="Line" name="line_15">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QGroupBox" name="FSGB_1">
-             <property name="title">
-              <string>Internal Module</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_67">
-              <item row="0" column="8">
-               <widget class="QLabel" name="fsm1LB_9">
-                <property name="text">
-                 <string>CH09</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="fsm1LB_2">
-                <property name="text">
-                 <string>CH02</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSlider" name="fsm1SL_2">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="fsm1LB_1">
-                <property name="text">
-                 <string>CH01</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="9">
-               <widget class="QSlider" name="fsm1SL_9">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="fsm1LB_4">
-                <property name="text">
-                 <string>CH04</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QSlider" name="fsm1SL_4">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="8">
-               <widget class="QLabel" name="fsm1LB_12">
-                <property name="text">
-                 <string>CH12</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="9">
-               <widget class="QSlider" name="fsm1SL_12">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="8">
-               <widget class="QLabel" name="fsm1LB_10">
-                <property name="text">
-                 <string>CH10</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="9">
-               <widget class="QSlider" name="fsm1SL_10">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QSlider" name="fsm1SL_1">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="fsm1LB_3">
-                <property name="text">
-                 <string>CH03</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QSlider" name="fsm1SL_3">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="8">
-               <widget class="QLabel" name="fsm1LB_11">
-                <property name="text">
-                 <string>CH11</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="9">
-               <widget class="QSlider" name="fsm1SL_11">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="10">
-               <widget class="QSpinBox" name="fsm1SB_12">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="10">
-               <widget class="QSpinBox" name="fsm1SB_11">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="10">
-               <widget class="QSpinBox" name="fsm1SB_10">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="10">
-               <widget class="QSpinBox" name="fsm1SB_9">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QSpinBox" name="fsm1SB_4">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QSpinBox" name="fsm1SB_3">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QSpinBox" name="fsm1SB_2">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QSpinBox" name="fsm1SB_1">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QLabel" name="fsm1LB_5">
-                <property name="text">
-                 <string>CH05</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="5">
-               <widget class="QSlider" name="fsm1SL_5">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="6">
-               <widget class="QSpinBox" name="fsm1SB_5">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <widget class="QLabel" name="fsm1LB_6">
-                <property name="text">
-                 <string>CH06</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="5">
-               <widget class="QSlider" name="fsm1SL_6">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="6">
-               <widget class="QSpinBox" name="fsm1SB_6">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="5">
-               <widget class="QSlider" name="fsm1SL_7">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="4">
-               <widget class="QLabel" name="fsm1LB_7">
-                <property name="text">
-                 <string>CH07</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="4">
-               <widget class="QLabel" name="fsm1LB_8">
-                <property name="text">
-                 <string>CH08</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="5">
-               <widget class="QSlider" name="fsm1SL_8">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="6">
-               <widget class="QSpinBox" name="fsm1SB_7">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="6">
-               <widget class="QSpinBox" name="fsm1SB_8">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="12">
-               <widget class="QLabel" name="fsm1LB_13">
-                <property name="text">
-                 <string>CH13</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="13">
-               <widget class="QSlider" name="fsm1SL_13">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="14">
-               <widget class="QSpinBox" name="fsm1SB_13">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="12">
-               <widget class="QLabel" name="fsm1LB_14">
-                <property name="text">
-                 <string>CH14</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="13">
-               <widget class="QSlider" name="fsm1SL_14">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="14">
-               <widget class="QSpinBox" name="fsm1SB_14">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="12">
-               <widget class="QLabel" name="fsm1LB_15">
-                <property name="text">
-                 <string>CH15</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="13">
-               <widget class="QSlider" name="fsm1SL_15">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="14">
-               <widget class="QSpinBox" name="fsm1SB_15">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="12">
-               <widget class="QLabel" name="fsm1LB_16">
-                <property name="text">
-                 <string>CH16</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="13">
-               <widget class="QSlider" name="fsm1SL_16">
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="14">
-               <widget class="QSpinBox" name="fsm1SB_16">
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="accelerated">
-                 <bool>true</bool>
-                </property>
-                <property name="minimum">
-                 <number>-100</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="11" rowspan="4">
-               <widget class="Line" name="line_10">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="7" rowspan="4">
-               <widget class="Line" name="line_11">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3" rowspan="4">
-               <widget class="Line" name="line_12">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
+              <item row="0" column="0" colspan="3">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>Failsafe Mode</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="fsm2CB">
+                  <item>
+                   <property name="text">
+                    <string>Hold</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Custom</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>No Pulses</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
@@ -3682,6 +3103,645 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="FSGB_1">
+             <property name="title">
+              <string>Internal Module</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_67">
+              <item row="3" column="10">
+               <widget class="QSpinBox" name="fsm1SB_11">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="6">
+               <widget class="QSpinBox" name="fsm1SB_8">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="12">
+               <widget class="QLabel" name="fsm1LB_14">
+                <property name="text">
+                 <string>CH14</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="8">
+               <widget class="QLabel" name="fsm1LB_9">
+                <property name="text">
+                 <string>CH09</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="fsm1LB_2">
+                <property name="text">
+                 <string>CH02</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QSlider" name="fsm1SL_2">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="fsm1LB_1">
+                <property name="text">
+                 <string>CH01</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="9">
+               <widget class="QSlider" name="fsm1SL_9">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="fsm1LB_4">
+                <property name="text">
+                 <string>CH04</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QSlider" name="fsm1SL_4">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="8">
+               <widget class="QLabel" name="fsm1LB_12">
+                <property name="text">
+                 <string>CH12</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="9">
+               <widget class="QSlider" name="fsm1SL_12">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="8">
+               <widget class="QLabel" name="fsm1LB_10">
+                <property name="text">
+                 <string>CH10</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="9">
+               <widget class="QSlider" name="fsm1SL_10">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSlider" name="fsm1SL_1">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="fsm1LB_3">
+                <property name="text">
+                 <string>CH03</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QSlider" name="fsm1SL_3">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="8">
+               <widget class="QLabel" name="fsm1LB_11">
+                <property name="text">
+                 <string>CH11</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="9">
+               <widget class="QSlider" name="fsm1SL_11">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="10">
+               <widget class="QSpinBox" name="fsm1SB_12">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="10">
+               <widget class="QSpinBox" name="fsm1SB_10">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="10">
+               <widget class="QSpinBox" name="fsm1SB_9">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QSpinBox" name="fsm1SB_4">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QSpinBox" name="fsm1SB_3">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QSpinBox" name="fsm1SB_2">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QSpinBox" name="fsm1SB_1">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="4">
+               <widget class="QLabel" name="fsm1LB_5">
+                <property name="text">
+                 <string>CH05</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="5">
+               <widget class="QSlider" name="fsm1SL_5">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="6">
+               <widget class="QSpinBox" name="fsm1SB_5">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="4">
+               <widget class="QLabel" name="fsm1LB_6">
+                <property name="text">
+                 <string>CH06</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="5">
+               <widget class="QSlider" name="fsm1SL_6">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="6">
+               <widget class="QSpinBox" name="fsm1SB_6">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="5">
+               <widget class="QSlider" name="fsm1SL_7">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="4">
+               <widget class="QLabel" name="fsm1LB_7">
+                <property name="text">
+                 <string>CH07</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="4">
+               <widget class="QLabel" name="fsm1LB_8">
+                <property name="text">
+                 <string>CH08</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="5">
+               <widget class="QSlider" name="fsm1SL_8">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="6">
+               <widget class="QSpinBox" name="fsm1SB_7">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="12">
+               <widget class="QLabel" name="fsm1LB_13">
+                <property name="text">
+                 <string>CH13</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="13">
+               <widget class="QSlider" name="fsm1SL_13">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="14">
+               <widget class="QSpinBox" name="fsm1SB_13">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="13">
+               <widget class="QSlider" name="fsm1SL_14">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="14">
+               <widget class="QSpinBox" name="fsm1SB_14">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="12">
+               <widget class="QLabel" name="fsm1LB_15">
+                <property name="text">
+                 <string>CH15</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="13">
+               <widget class="QSlider" name="fsm1SL_15">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="14">
+               <widget class="QSpinBox" name="fsm1SB_15">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="12">
+               <widget class="QLabel" name="fsm1LB_16">
+                <property name="text">
+                 <string>CH16</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="13">
+               <widget class="QSlider" name="fsm1SL_16">
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="14">
+               <widget class="QSpinBox" name="fsm1SB_16">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>-100</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="11" rowspan="4">
+               <widget class="Line" name="line_10">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="7" rowspan="4">
+               <widget class="Line" name="line_11">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3" rowspan="4">
+               <widget class="Line" name="line_12">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="3">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Failsafe Mode</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="fsm1CB">
+                  <item>
+                   <property name="text">
+                    <string>Hold</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Custom</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>No Pulses</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -8868,8 +8928,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>944</width>
-            <height>481</height>
+            <width>1034</width>
+            <height>630</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -12570,8 +12630,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>722</width>
-            <height>467</height>
+            <width>1034</width>
+            <height>601</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -17634,8 +17694,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>354</height>
+            <width>1034</width>
+            <height>630</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
