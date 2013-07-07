@@ -59,11 +59,29 @@
 #include <unistd.h>
 #endif
 
+#ifdef __APPLE__
+#include <QProxyStyle> 
+
+class MyProxyStyle : public QProxyStyle
+ {
+   public:
+    void polish ( QWidget * w ) {
+      QMenu* mn = dynamic_cast<QMenu*>(w);
+      if(!mn && !w->testAttribute(Qt::WA_MacNormalSize))
+          w->setAttribute(Qt::WA_MacSmallSize);
+    }
+
+ };
+#endif
+
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(companion9x);
     QApplication app(argc, argv);
     app.setApplicationName("Companion9x");
+#ifdef __APPLE__
+    app.setStyle(new MyProxyStyle);
+#endif
     QString dir;
     if(argc) dir = QFileInfo(argv[0]).canonicalPath() + "/lang";
 
