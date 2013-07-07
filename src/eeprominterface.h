@@ -80,15 +80,26 @@ const uint8_t modn12x3[4][4]= {
 #define STK_P2   6
 #define STK_P3   7
 
-#define DSW_THR   1
-#define DSW_RUD   2
-#define DSW_ELE   3
-#define DSW_ID0   4
-#define DSW_ID1   5
-#define DSW_ID2   6
-#define DSW_AIL   7
-#define DSW_GEA   8
-#define DSW_TRN   9
+#define DSW_THR   1 //DSW_SA ^
+#define DSW_RUD   2 //DSW_SA -
+#define DSW_ELE   3 //DSW_SA _
+#define DSW_ID0   4  //DSW_SB ^
+#define DSW_ID1   5  //DSW_SB -
+#define DSW_ID2   6 //DSW_SB _
+#define DSW_AIL   7 //DSW_SC ^
+#define DSW_GEA   8  //DSW_SC -
+#define DSW_TRN   9 //DSW_SC _
+#define DSW_SD0 10
+#define DSW_SD1 11
+#define DSW_SD2 12
+#define DSW_SE0 13
+#define DSW_SE1 14
+#define DSW_SE2 15
+#define DSW_SF0 16
+#define DSW_SF1 17
+#define DSW_SG0 18
+#define DSW_SG1 19
+#define DSW_SG2 20
 
 const uint8_t chout_ar[] = { //First number is 0..23 -> template setup,  Second is relevant channel out
 1,2,3,4 , 1,2,4,3 , 1,3,2,4 , 1,3,4,2 , 1,4,2,3 , 1,4,3,2,
@@ -934,6 +945,7 @@ enum Capability {
  HasSDLogs,
  CSFunc,
  LCDWidth,
+ GetThrSwitch,
 };
 
 enum UseContext {

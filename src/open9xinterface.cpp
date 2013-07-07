@@ -775,6 +775,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     case LCDWidth:
       return (IS_TARANIS(board) ? 212 : 128) ;
+    case GetThrSwitch:
+      return (IS_TARANIS(board) ?DSW_SF0 : DSW_THR) ;
     default:
       return 0;
   }

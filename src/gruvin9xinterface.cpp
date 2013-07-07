@@ -313,7 +313,8 @@ int Gruvin9xInterface::getCapability(const Capability capability)
     case HasSDLogs:
     case Haptic:
       return 1;
-      
+    case GetThrSwitch:
+      return DSW_THR; 
     default:
       return false;
   }
