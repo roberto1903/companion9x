@@ -691,6 +691,7 @@ void ModelEdit::tabModelEditSetup()
       ui->numChannelsStart_3->show();      
     }
     trainerEditLock=false;
+    on_protocolCB_3_currentIndexChanged(g_model.traineron);
   }
   else {
     ui->rf3_GB->hide();
@@ -3346,6 +3347,12 @@ void ModelEdit::on_pulsePolCB_2_currentIndexChanged(int index)
     updateSettings();
 }
 
+void ModelEdit::on_pulsePolCB_3_currentIndexChanged(int index)
+{
+    g_model.moduleData[2].ppmPulsePol = index;
+    updateSettings();
+}
+
 void ModelEdit::on_protocolCB_currentIndexChanged(int index)
 {
   if (!protocolEditLock) {
@@ -3587,6 +3594,7 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->numChannelsSB_2->setValue(g_model.moduleData[1].channelsStart+g_model.moduleData[1].channelsCount);
         ui->label_pulsePol_2->show();
         ui->pulsePolCB_2->show();
+        ui->pulsePolCB_2->setCurrentIndex(g_model.moduleData[1].ppmPulsePol);
         ui->label_DSM_2->hide();
         ui->DSM_Type_2->hide();
         ui->DSM_Type_2->setEnabled(false);
@@ -3596,6 +3604,7 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->label_PPM_2->show();
         ui->ppmDelaySB_2->show();        
         ui->ppmDelaySB_2->setEnabled(true);
+        ui->ppmDelaySB_2->setValue(g_model.moduleData[1].ppmDelay);
         ui->label_PPMCH_2->show();
         ui->numChannelsSB_2->show();        
         ui->numChannelsSB_2->setEnabled(true);
@@ -3603,6 +3612,7 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
           ui->ppmFrameLengthDSB_2->show();
           ui->label_ppmFrameLength_2->show();
+          ui->ppmFrameLengthDSB_2->setValue(g_model.moduleData[1].ppmFrameLength/2.0+22.5);
         }
 
         break;
@@ -3616,9 +3626,8 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
   if (!trainerEditLock) {
     trainerEditLock=true;
     
-//    g_model.moduleData[1].protocol=(Protocol)ui->protocolCB_2->itemData(index).toInt();
-//    int protocol=g_model.moduleData[1].protocol;
-  //  g_model.protocol = (Protocol)index;
+    g_model.moduleData[2].protocol=ui->protocolCB_3->currentIndex();
+    g_model.traineron=ui->protocolCB_3->currentIndex();
     updateSettings();
     switch (index) {
       case 0:
@@ -3644,6 +3653,16 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
         ui->ppmFrameLengthDSB_3->show();
         ui->label_numChannelsStart_3->show();
         ui->numChannelsStart_3->show();
+        ui->numChannelsStart_3->setValue(g_model.moduleData[2].channelsStart+1);
+        ui->numChannelsSB_3->setMinimum(g_model.moduleData[2].channelsStart+4);
+        ui->numChannelsSB_3->setValue(g_model.moduleData[2].channelsStart+g_model.moduleData[2].channelsCount);
+        ui->pulsePolCB_3->setCurrentIndex(g_model.moduleData[2].ppmPulsePol);
+        ui->ppmDelaySB_3->setValue(g_model.moduleData[2].ppmDelay);
+        if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
+          ui->ppmFrameLengthDSB_3->show();
+          ui->label_ppmFrameLength_3->show();
+          ui->ppmFrameLengthDSB_3->setValue(g_model.moduleData[2].ppmFrameLength/2.0+22.5);
+        }
         break;
     }
     trainerEditLock=false;
@@ -3665,6 +3684,13 @@ void ModelEdit::on_numChannelsSB_2_editingFinished()
   updateSettings();
 }
 
+void ModelEdit::on_numChannelsSB_3_editingFinished()
+{
+  // TODO only accept valid values
+  g_model.moduleData[2].channelsCount = 1+ui->numChannelsSB_3->value()-ui->numChannelsStart_3->value();
+  updateSettings();
+}
+
 void ModelEdit::on_numChannelsStart_editingFinished()
 {
   // TODO only accept valid values
@@ -3683,6 +3709,14 @@ void ModelEdit::on_numChannelsStart_2_editingFinished()
   updateSettings();
 }
 
+void ModelEdit::on_numChannelsStart_3_editingFinished()
+{
+  // TODO only accept valid values
+  g_model.moduleData[2].channelsStart = ui->numChannelsStart_3->value()-1;
+  ui->numChannelsSB_3->setMinimum(g_model.moduleData[2].channelsStart+4);
+  ui->numChannelsSB_3->setValue(g_model.moduleData[2].channelsStart+g_model.moduleData[2].channelsCount);
+  updateSettings();
+}
 
 void ModelEdit::on_ppmDelaySB_editingFinished()
 {
@@ -3697,6 +3731,14 @@ void ModelEdit::on_ppmDelaySB_2_editingFinished()
   if(protocol2EditLock) return;
   // TODO only accept valid values
   g_model.moduleData[1].ppmDelay = ui->ppmDelaySB_2->value();
+  updateSettings();
+}
+
+void ModelEdit::on_ppmDelaySB_3_editingFinished()
+{
+  if(trainerEditLock) return;
+  // TODO only accept valid values
+  g_model.moduleData[2].ppmDelay = ui->ppmDelaySB_3->value();
   updateSettings();
 }
 
@@ -3748,6 +3790,12 @@ void ModelEdit::on_ppmFrameLengthDSB_editingFinished()
 void ModelEdit::on_ppmFrameLengthDSB_2_editingFinished()
 {
   g_model.moduleData[1].ppmFrameLength = (ui->ppmFrameLengthDSB_2->value()-22.5)/0.5;
+  updateSettings();
+}
+
+void ModelEdit::on_ppmFrameLengthDSB_3_editingFinished()
+{
+  g_model.moduleData[2].ppmFrameLength = (ui->ppmFrameLengthDSB_3->value()-22.5)/0.5;
   updateSettings();
 }
 
