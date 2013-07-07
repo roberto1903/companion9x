@@ -413,10 +413,51 @@ void ModelEdit::tabModelEditSetup()
     ui->thrrevChkB->setChecked(g_model.throttleReversed);
   }
   if (!GetEepromInterface()->getCapability(ModelImage)) {
-    ui->modelImage_LE->hide();
+    ui->modelImage_CB->hide();
     ui->modelImage_label->hide();
+    ui->modelImage_image->hide();
   } else {
-    ui->modelImage_LE->setText(g_model.bitmap);
+    QStringList items;
+    QSettings settings("companion9x", "companion9x");
+    QString path=settings.value("sdPath", ".").toString();
+    path.append("/BMP/");
+    QDir qd(path);
+    int vml= GetEepromInterface()->getCapability(VoicesMaxLength)+4;
+    if (qd.exists()) {
+      QStringList filters;
+      filters << "*.bmp" << "*.bmp";
+      foreach ( QString file, qd.entryList(filters, QDir::Files) ) {
+        QFileInfo fi(file);
+        QString temp=fi.completeBaseName();
+        if (!items.contains(temp) && temp.length()<=vml) {
+          items.append(temp);
+        }
+      }
+    }
+    if (!items.contains(g_model.bitmap)) {
+      items.append(g_model.bitmap);      
+    }
+    items.sort();
+    ui->modelImage_CB->clear();
+    foreach ( QString file, items ) {
+      ui->modelImage_CB->addItem(file);
+      if (file==g_model.bitmap) {
+        ui->modelImage_CB->setCurrentIndex(ui->modelImage_CB->count()-1);
+        QString fileName=path;
+        fileName.append(g_model.bitmap);
+        fileName.append(".bmp");
+        QImage image(fileName);
+        if (image.isNull()) {
+          fileName=path;
+          fileName.append(g_model.bitmap);
+          fileName.append(".BMP");
+          image.load(fileName);
+        }
+        if (!image.isNull()) {
+          ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32).convertToFormat(QImage::Format_Mono)));;
+        }
+      }
+    }
   }
   
   if (!GetEepromInterface()->getCapability(pmSwitchMask)) {
@@ -3156,9 +3197,28 @@ void ModelEdit::on_modelNameLE_editingFinished()
     updateSettings();
 }
 
-void ModelEdit::on_modelImage_LE_editingFinished()
+void ModelEdit::on_modelImage_CB_currentIndexChanged(int index)
 {
-    strncpy(g_model.bitmap, ui->modelImage_LE->text().toAscii(), 10);
+    strncpy(g_model.bitmap, ui->modelImage_CB->currentText().toAscii(), GetEepromInterface()->getCapability(VoicesMaxLength));
+    QSettings settings("companion9x", "companion9x");
+    QString path=settings.value("sdPath", ".").toString();
+    path.append("/BMP/");
+    QDir qd(path);
+    if (qd.exists()) {
+      QString fileName=path;
+      fileName.append(g_model.bitmap);
+      fileName.append(".bmp");
+      QImage image(fileName);
+      if (image.isNull()) {
+        fileName=path;
+        fileName.append(g_model.bitmap);
+        fileName.append(".BMP");
+        image.load(fileName);
+      }
+      if (!image.isNull()) {
+        ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32).convertToFormat(QImage::Format_Mono)));;
+      }
+    }
     updateSettings();
 }
 
