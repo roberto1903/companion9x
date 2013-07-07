@@ -4212,7 +4212,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="modeledit.ui" line="18902"/>
         <location filename="modeledit.ui" line="19196"/>
         <source>Meters (m or ft)</source>
-        <translation>Matri (m o ft)</translation>
+        <translation>Metri (m o ft)</translation>
     </message>
     <message utf8="true">
         <location filename="modeledit.ui" line="18907"/>
