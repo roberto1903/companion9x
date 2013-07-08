@@ -1774,11 +1774,10 @@ void Open9xModelDataNew::afterImport()
 {
   for (int module=0; module<3; module++) {
     if (modelData.moduleData[module].protocol == PXX_XJT_X16)
-      if (subprotocols[module]>=0) {
+      if (subprotocols[module] >= 0)
         modelData.moduleData[module].protocol = PXX_XJT_X16 + subprotocols[module];
-      } else {
+      else
         modelData.moduleData[module].protocol = OFF;
-      }
   }
 }
 
