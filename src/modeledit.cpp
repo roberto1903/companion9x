@@ -2635,7 +2635,6 @@ void ModelEdit::playMusic()
       path.append(lang);
       if (fswtchParamArmT[index]->currentText()!="----") {
         track=path+"/"+fswtchParamArmT[index]->currentText()+".wav";
-        qDebug() << track;
       }
     }
     QFile file(track);
