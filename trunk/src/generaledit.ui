@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>781</width>
-    <height>902</height>
+    <height>909</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -126,7 +126,7 @@
 These will be relevant for all models in the same EEPROM.</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabSetup">
       <attribute name="title">
@@ -2347,7 +2347,14 @@ p, li { white-space: pre-wrap; }
       <attribute name="title">
        <string>Calibration</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0" columnstretch="0,1,1,1">
+      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0" columnstretch="0,1,1,1">
+       <item row="14" column="0">
+        <widget class="QLabel" name="label_23">
+         <property name="text">
+          <string>PPM 1</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_17">
          <property name="text">
@@ -2582,7 +2589,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="label_19">
+        <widget class="QLabel" name="label_pot1">
          <property name="text">
           <string>POT 1</string>
          </property>
@@ -2615,7 +2622,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QLabel" name="label_20">
+        <widget class="QLabel" name="label_pot2">
          <property name="text">
           <string>POT 2</string>
          </property>
@@ -2661,7 +2668,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="7" column="0">
-        <widget class="QLabel" name="label_21">
+        <widget class="QLabel" name="label_pot3">
          <property name="text">
           <string>POT 3</string>
          </property>
@@ -2693,6 +2700,19 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="20" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="7" column="3">
         <widget class="QSpinBox" name="ana7Pos">
          <property name="statusTip">
@@ -2706,14 +2726,14 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="9" column="0">
+       <item row="11" column="0">
         <widget class="QLabel" name="label_22">
          <property name="text">
           <string>Battery</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="11" column="1">
         <widget class="QDoubleSpinBox" name="battCalib">
          <property name="statusTip">
           <string/>
@@ -2735,27 +2755,14 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="17" column="0">
+       <item row="19" column="0">
         <widget class="QLabel" name="label_30">
          <property name="text">
           <string>PPM Multiplier</string>
          </property>
         </widget>
        </item>
-       <item row="18" column="1">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="17" column="1">
+       <item row="19" column="1">
         <widget class="QDoubleSpinBox" name="PPM_MultiplierDSB">
          <property name="decimals">
           <number>1</number>
@@ -2768,7 +2775,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="11" column="0" colspan="4">
+       <item row="13" column="0" colspan="4">
         <widget class="Line" name="line">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -2793,14 +2800,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="12" column="0">
-        <widget class="QLabel" name="label_23">
-         <property name="text">
-          <string>PPM 1</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="1">
+       <item row="16" column="1">
         <widget class="QSpinBox" name="PPM2">
          <property name="toolTip">
           <string/>
@@ -2819,7 +2819,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="15" column="1">
+       <item row="17" column="1">
         <widget class="QSpinBox" name="PPM3">
          <property name="toolTip">
           <string/>
@@ -2838,7 +2838,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="16" column="1">
+       <item row="18" column="1">
         <widget class="QSpinBox" name="PPM4">
          <property name="toolTip">
           <string/>
@@ -2857,7 +2857,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
+       <item row="14" column="1">
         <widget class="QSpinBox" name="PPM1">
          <property name="toolTip">
           <string/>
@@ -2876,28 +2876,28 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="16" column="0">
         <widget class="QLabel" name="label_33">
          <property name="text">
           <string>PPM 2</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="17" column="0">
         <widget class="QLabel" name="label_34">
          <property name="text">
           <string>PPM 3</string>
          </property>
         </widget>
        </item>
-       <item row="16" column="0">
+       <item row="18" column="0">
         <widget class="QLabel" name="label_35">
          <property name="text">
           <string>PPM 4</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="0" colspan="4">
+       <item row="10" column="0" colspan="4">
         <widget class="Line" name="line_2">
          <property name="minimumSize">
           <size>
@@ -2910,7 +2910,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="10" column="1">
+       <item row="12" column="1">
         <widget class="QSpinBox" name="CurrentCalib_SB">
          <property name="minimum">
           <number>-49</number>
@@ -2920,10 +2920,56 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="10" column="0">
+       <item row="12" column="0">
         <widget class="QLabel" name="label_CurrentCalib">
          <property name="text">
           <string>Current</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QSpinBox" name="ana8Neg">
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>-9999</number>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_pot4">
+         <property name="text">
+          <string>POT 4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QSpinBox" name="ana8Mid">
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>-9999</number>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="3">
+        <widget class="QSpinBox" name="ana8Pos">
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>-9999</number>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
          </property>
         </widget>
        </item>

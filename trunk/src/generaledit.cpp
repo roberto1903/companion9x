@@ -328,6 +328,13 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     ui->trnMode_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].mode);
     ui->trnChn_4->setCurrentIndex(g_eeGeneral.trainer.mix[3].src);
     ui->trnWeight_4->setValue(g_eeGeneral.trainer.mix[3].weight);
+    int potsnum=GetEepromInterface()->getCapability(Pots);
+    if (potsnum==3) {
+      ui->label_pot4->hide();
+      ui->ana8Neg->hide();
+      ui->ana8Mid->hide();
+      ui->ana8Pos->hide();
+    }
     setValues();
     switchDefPosEditLock=false;
     QTimer::singleShot(0, this, SLOT(shrink()));
@@ -367,6 +374,7 @@ void GeneralEdit::setValues()
     ui->ana5Neg->setValue(g_eeGeneral.calibSpanNeg[4]);
     ui->ana6Neg->setValue(g_eeGeneral.calibSpanNeg[5]);
     ui->ana7Neg->setValue(g_eeGeneral.calibSpanNeg[6]);
+    ui->ana8Neg->setValue(g_eeGeneral.calibSpanNeg[7]);
 
     ui->ana1Mid->setValue(g_eeGeneral.calibMid[0]);
     ui->ana2Mid->setValue(g_eeGeneral.calibMid[1]);
@@ -375,6 +383,7 @@ void GeneralEdit::setValues()
     ui->ana5Mid->setValue(g_eeGeneral.calibMid[4]);
     ui->ana6Mid->setValue(g_eeGeneral.calibMid[5]);
     ui->ana7Mid->setValue(g_eeGeneral.calibMid[6]);
+    ui->ana8Mid->setValue(g_eeGeneral.calibMid[7]);
 
     ui->ana1Pos->setValue(g_eeGeneral.calibSpanPos[0]);
     ui->ana2Pos->setValue(g_eeGeneral.calibSpanPos[1]);
@@ -383,6 +392,7 @@ void GeneralEdit::setValues()
     ui->ana5Pos->setValue(g_eeGeneral.calibSpanPos[4]);
     ui->ana6Pos->setValue(g_eeGeneral.calibSpanPos[5]);
     ui->ana7Pos->setValue(g_eeGeneral.calibSpanPos[6]);
+    ui->ana8Pos->setValue(g_eeGeneral.calibSpanPos[7]);
 
     ui->PPM1->setValue(g_eeGeneral.trainer.calib[0]);
     ui->PPM2->setValue(g_eeGeneral.trainer.calib[1]);
@@ -722,7 +732,11 @@ void GeneralEdit::on_ana7Neg_editingFinished()
     updateSettings();
 }
 
-
+void GeneralEdit::on_ana8Neg_editingFinished()
+{
+    g_eeGeneral.calibSpanNeg[7] = ui->ana8Neg->value();
+    updateSettings();
+}
 
 void GeneralEdit::on_ana1Mid_editingFinished()
 {
@@ -766,6 +780,11 @@ void GeneralEdit::on_ana7Mid_editingFinished()
     updateSettings();
 }
 
+void GeneralEdit::on_ana8Mid_editingFinished()
+{
+    g_eeGeneral.calibMid[7] = ui->ana8Mid->value();
+    updateSettings();
+}
 
 
 void GeneralEdit::on_ana1Pos_editingFinished()
@@ -807,6 +826,12 @@ void GeneralEdit::on_ana6Pos_editingFinished()
 void GeneralEdit::on_ana7Pos_editingFinished()
 {
     g_eeGeneral.calibSpanPos[6] = ui->ana7Pos->value();
+    updateSettings();
+}
+
+void GeneralEdit::on_ana8Pos_editingFinished()
+{
+    g_eeGeneral.calibSpanPos[7] = ui->ana8Pos->value();
     updateSettings();
 }
 
@@ -1141,6 +1166,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
   QString profile=QString("profile%1").arg(profile_id);
   settings.beginGroup(profile);
   QString calib=settings.value("StickPotCalib","").toString();
+  int potsnum=GetEepromInterface()->getCapability(Pots);
   if (calib.isEmpty()) {
     settings.endGroup();
     settings.endGroup();
@@ -1158,12 +1184,12 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     QString SpeakerSet=settings.value("Speaker","").toString();
     settings.endGroup();
     settings.endGroup();
-    // TODO NUM_POTS harcoded to 3 again here
-    if ((calib.length()==(NUM_STICKS+3)*12) && (trainercalib.length()==16)) {
+    
+    if ((calib.length()==(NUM_STICKS+potsnum)*12) && (trainercalib.length()==16)) {
       QString Byte;
       int16_t byte16;
       bool ok;
-      for (int i=0; i<(NUM_STICKS+3); i++) {
+      for (int i=0; i<(NUM_STICKS+potsnum); i++) {
         Byte=calib.mid(i*12,4);
         byte16=(int16_t)Byte.toInt(&ok,16);
         if (ok)
@@ -1244,6 +1270,7 @@ void GeneralEdit::on_calstore_PB_clicked()
   QString profile=QString("profile%1").arg(profile_id);
   settings.beginGroup(profile);
   QString name=settings.value("Name","").toString();
+  int potsnum=GetEepromInterface()->getCapability(Pots);
   if (name.isEmpty()) {
     ui->calstore_PB->setDisabled(true);
     settings.endGroup();
@@ -1262,8 +1289,7 @@ void GeneralEdit::on_calstore_PB_clicked()
       }
     }
     calib.clear();
-    // TODO NUM_POTS hardcoded again here to 3
-    for (int i=0; i< (NUM_STICKS+3); i++) {
+    for (int i=0; i< (NUM_STICKS+potsnum); i++) {
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibMid[i], 4, 16, QChar('0')));
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanNeg[i], 4, 16, QChar('0')));
       calib.append(QString("%1").arg((uint16_t)g_eeGeneral.calibSpanPos[i], 4, 16, QChar('0')));

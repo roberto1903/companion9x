@@ -405,7 +405,7 @@ GeneralSettings::GeneralSettings()
   memset(this, 0, sizeof(GeneralSettings));
   contrast  = 25;
   vBatWarn  = 90;
-  for (int i=0; i<7; ++i) {
+  for (int i=0; i<(NUM_STICKS+C9X_NUM_POTS ); ++i) {
     calibMid[i]     = 0x200;
     calibSpanNeg[i] = 0x180;
     calibSpanPos[i] = 0x180;

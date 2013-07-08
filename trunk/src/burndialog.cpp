@@ -426,6 +426,7 @@ void burnDialog::on_BurnFlashButton_clicked()
     settings.beginGroup(profile);
     QString calib=settings.value("StickPotCalib","").toString();
     QString trainercalib=settings.value("TrainerCalib","").toString();
+    int potsnum=GetEepromInterface()->getCapability(Pots);
     int8_t vBatCalib=(int8_t)settings.value("VbatCalib", radioData.generalSettings.vBatCalib).toInt();
     int8_t currentCalib=(int8_t)settings.value("currentCalib", radioData.generalSettings.currentCalib).toInt();
     int8_t PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", radioData.generalSettings.PPM_Multiplier).toInt();
@@ -440,13 +441,11 @@ void burnDialog::on_BurnFlashButton_clicked()
     settings.endGroup();
     bool patch=false;
     if (ui->patchcalib_CB->isChecked()) {
-      // TODO I hardcode the number of pots here, should be dependant on the board?
-      if ((calib.length()==(NUM_STICKS+3)*12) && (trainercalib.length()==16)) {
+      if ((calib.length()==(NUM_STICKS+potsnum)*12) && (trainercalib.length()==16)) {
         QString Byte;
         int16_t byte16;
         bool ok;
-        // TODO I hardcode the number of pots here, should be dependant on the board?
-        for (int i=0; i<(NUM_STICKS+3); i++) {
+        for (int i=0; i<(NUM_STICKS+potsnum); i++) {
           Byte=calib.mid(i*12,4);
           byte16=(int16_t)Byte.toInt(&ok,16);
           if (ok)

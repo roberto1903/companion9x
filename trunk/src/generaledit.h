@@ -89,6 +89,7 @@ private slots:
     void on_ana5Neg_editingFinished();
     void on_ana6Neg_editingFinished();
     void on_ana7Neg_editingFinished();
+    void on_ana8Neg_editingFinished();
 
     void on_ana1Mid_editingFinished();
     void on_ana2Mid_editingFinished();
@@ -97,6 +98,7 @@ private slots:
     void on_ana5Mid_editingFinished();
     void on_ana6Mid_editingFinished();
     void on_ana7Mid_editingFinished();
+    void on_ana8Mid_editingFinished();
 
     void on_ana1Pos_editingFinished();
     void on_ana2Pos_editingFinished();
@@ -105,6 +107,7 @@ private slots:
     void on_ana5Pos_editingFinished();
     void on_ana6Pos_editingFinished();
     void on_ana7Pos_editingFinished();
+    void on_ana8Pos_editingFinished();
 
     void on_PPM1_editingFinished();
     void on_PPM2_editingFinished();
