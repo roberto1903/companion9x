@@ -524,7 +524,7 @@ int Open9xInterface::getCapability(const Capability capability)
   switch (capability) {
     case OwnerName:
       return 0;
-    case ModelImage:  
+    case ModelImage:
       if (IS_TARANIS(board))
         return 1;
       else
@@ -651,7 +651,10 @@ int Open9xInterface::getCapability(const Capability capability)
         return 1;      
     case HapticLength:
     case HapticMode:
-      return 1;
+      if (IS_TARANIS(board))
+        return 0;
+      else
+        return 1;
     case Beeperlen:
       return 1;
     case MaxVolume:
@@ -756,8 +759,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (IS_ARM(board) ? true : false);
     case HasBrightness:
       return (board==BOARD_SKY9X ? true : false);
+    case PerModelTimers:
     case PerModelThrottleWarning:
-      return 1;
     case PerModelThrottleInvert:
       return 1;
     case pmSwitchMask:

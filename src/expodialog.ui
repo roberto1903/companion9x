@@ -346,7 +346,7 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</string>
    <item row="6" column="0">
     <widget class="QLabel" name="label_9">
      <property name="text">
-      <string>Mode</string>
+      <string>Stick Side</string>
      </property>
     </widget>
    </item>
