@@ -1229,7 +1229,8 @@ void MainWindow::burnToFlash(QString fileToFlash)
     fileName = fileToFlash;
   burnDialog *cd = new burnDialog(this, 2, &fileName, &backup);
   cd->exec();
-
+  if (IS_TARANIS(GetEepromInterface()->getBoard()))
+    backup=false;
   if (!fileName.isEmpty()) {
     settings.setValue("backupOnFlash", backup);
     if (backup) {
@@ -1237,7 +1238,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
       QString backupFile = tempDir + "/backup.bin";
       bool backupEnable=settings.value("backupEnable", true).toBool();
       QString backupPath=settings.value("backupPath", "").toString();
-      if (!backupPath.isEmpty()) {
+      if (!backupPath.isEmpty() && !IS_TARANIS(GetEepromInterface()->getBoard())) {
         if (!QDir(backupPath).exists()) {
           if (backupEnable) {
             QMessageBox::warning(this, tr("Backup is impossible"), tr("The backup dir set in preferences does not exist"));
@@ -1291,7 +1292,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
         }
         backupEnable=false;
       }
-      if (backupEnable) {
+      if (backupEnable && !IS_TARANIS(GetEepromInterface()->getBoard())) {
         QDateTime datetime;
         QString backupFile=backupPath+"/backup-"+QDateTime().currentDateTime().toString("yyyy-MM-dd-hhmmss")+".bin";
         QStringList str = GetReceiveEEpromCommand(backupFile);

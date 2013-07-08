@@ -205,6 +205,14 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->label_hapticStrengthSB->hide();
     } 
 
+    if (GetEepromInterface()->getCapability(PerModelTimers)) {
+      ui->beepCountDownChkB->hide();
+      ui->beepFlashChkB->hide();
+      ui->beepMinuteChkB->hide();
+      ui->label_timers->hide();
+    } 
+
+    
     if (!GetEepromInterface()->getCapability(HapticMode)) {
       ui->hapticmodeCB->setDisabled(true);
       ui->hapticmodeCB->hide();
