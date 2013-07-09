@@ -20,13 +20,12 @@ preferencesDialog::preferencesDialog(QWidget *parent) :
 
 
   QCheckBox * OptionCheckBox[]= {
-      ui->optionCheckBox_1,  ui->optionCheckBox_2,  ui->optionCheckBox_3,  ui->optionCheckBox_4,  ui->optionCheckBox_5,
-      ui->optionCheckBox_6,  ui->optionCheckBox_7,  ui->optionCheckBox_8,  ui->optionCheckBox_9,  ui->optionCheckBox_10,
-      ui->optionCheckBox_11, ui->optionCheckBox_12, ui->optionCheckBox_13, ui->optionCheckBox_14, ui->optionCheckBox_15,
-      ui->optionCheckBox_16, ui->optionCheckBox_17, ui->optionCheckBox_18, ui->optionCheckBox_19, ui->optionCheckBox_20,
-      ui->optionCheckBox_21, ui->optionCheckBox_22, ui->optionCheckBox_23, ui->optionCheckBox_24, ui->optionCheckBox_25,
-      ui->optionCheckBox_26, ui->optionCheckBox_27, ui->optionCheckBox_28, ui->optionCheckBox_29, ui->optionCheckBox_30,
-      ui->optionCheckBox_31, ui->optionCheckBox_32, ui->optionCheckBox_33, ui->optionCheckBox_34, ui->optionCheckBox_35,
+      ui->optionCheckBox_1, ui->optionCheckBox_2, ui->optionCheckBox_3, ui->optionCheckBox_4,  ui->optionCheckBox_5, ui->optionCheckBox_6,  ui->optionCheckBox_7,
+      ui->optionCheckBox_8, ui->optionCheckBox_9, ui->optionCheckBox_10,  ui->optionCheckBox_11, ui->optionCheckBox_12, ui->optionCheckBox_13, ui->optionCheckBox_14,
+      ui->optionCheckBox_15,ui->optionCheckBox_16, ui->optionCheckBox_17, ui->optionCheckBox_18, ui->optionCheckBox_19, ui->optionCheckBox_20, ui->optionCheckBox_21,
+      ui->optionCheckBox_22, ui->optionCheckBox_23, ui->optionCheckBox_24, ui->optionCheckBox_25, ui->optionCheckBox_26, ui->optionCheckBox_27, ui->optionCheckBox_28,
+      ui->optionCheckBox_29, ui->optionCheckBox_30, ui->optionCheckBox_31, ui->optionCheckBox_32, ui->optionCheckBox_33, ui->optionCheckBox_34, ui->optionCheckBox_35,
+      ui->optionCheckBox_36, ui->optionCheckBox_37, ui->optionCheckBox_38, ui->optionCheckBox_39, ui->optionCheckBox_40, ui->optionCheckBox_41, ui->optionCheckBox_42,
       NULL };
 
   voice=NULL;
