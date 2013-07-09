@@ -1088,7 +1088,7 @@ void RegisterOpen9xFirmwares()
   Option ext_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "telemetrez", QObject::tr("Support for telemetry easy board"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
   Option nav_options[] = { { "rotenc", QObject::tr("Rotary Encoder use in menus navigation") }, { "potscroll", QObject::tr("Pots use in menus navigation") }, { NULL } };
   Option extr_options[] = { { "frsky", QObject::tr("Support for frsky telemetry mod"), FRSKY_VARIANT }, { "jeti", QObject::tr("Support for jeti telemetry mod"), 0 }, { "ardupilot", QObject::tr("Support for receiving ardupilot data"), 0 }, { "nmea", QObject::tr("Support for receiving NMEA data"), 0 }, { NULL } };
-
+  Option fai_options[] = { { "faichoice", QObject::tr("Possibility to enable FAI MODE at field") }, { "faimode", QObject::tr("FAI MODE always enabled") }, { NULL } };
   /* 9x board */
   open9x = new Open9xFirmware("opentx-stock", QObject::tr("openTx for 9X board"), new Open9xInterface(BOARD_STOCK), geturl(BOARD_STOCK), getstamp(BOARD_STOCK), false);
   open9x->addOptions(ext_options);
@@ -1121,6 +1121,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("novario", QObject::tr("No vario support"));
   open9x->addOption("nogps", QObject::tr("No GPS support"));
   open9x->addOption("nogauges", QObject::tr("No gauges in the custom telemetry screen"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   /* 9x board with M128 chip */
@@ -1151,6 +1152,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   /* 9XR board */
@@ -1183,6 +1185,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("novario", QObject::tr("No vario support"));
   open9x->addOption("nogps", QObject::tr("No GPS support"));
   open9x->addOption("nogauges", QObject::tr("No gauges in the custom telemetry screen"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   /* 9XR board with M128 chip */
@@ -1211,6 +1214,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   /* Gruvin9x board */
@@ -1238,6 +1242,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   /* SKY9X board */
@@ -1259,6 +1264,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
     
   /* Taranis board */
@@ -1267,6 +1273,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
   open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+  open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
   QSettings settings("companion9x", "companion9x");
@@ -1277,6 +1284,7 @@ void RegisterOpen9xFirmwares()
     open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
     open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
     open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+    open9x->addOptions(fai_options);
     firmwares.push_back(open9x);
   }
 }
