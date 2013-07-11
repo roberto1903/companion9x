@@ -66,6 +66,7 @@ private slots:
     void on_arm_mcu_currentIndexChanged(QString );
     void on_sb_browse_clicked();
     void on_dfu_browse_clicked();
+    void on_dfu_location_editingFinished();
     void on_dfuArgs_editingFinished();
     void on_advCtrChkB_toggled(bool checked);
     void getSettings();

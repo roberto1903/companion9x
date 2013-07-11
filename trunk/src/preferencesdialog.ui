@@ -846,7 +846,11 @@ Mode 4:
    <item row="11" column="1" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
-      <widget class="QLineEdit" name="backupPath"/>
+      <widget class="QLineEdit" name="backupPath">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="backupPathButton">
