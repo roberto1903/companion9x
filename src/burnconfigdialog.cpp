@@ -246,6 +246,11 @@ void burnConfigDialog::on_dfu_browse_clicked()
     }
 }
 
+void burnConfigDialog::on_dfu_location_editingFinished()
+{
+    dfuLoc = ui->dfu_location->text();
+}
+
 void burnConfigDialog::on_dfuArgs_editingFinished()
 {
     dfuArgs = ui->dfuArgs->text().split(" ", QString::SkipEmptyParts);

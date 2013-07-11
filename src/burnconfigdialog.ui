@@ -54,7 +54,7 @@
         <string>The location of the AVRDUDE executable.</string>
        </property>
        <property name="text">
-        <string notr="true">dfu-util-static.exe</string>
+        <string notr="true">dfu-util</string>
        </property>
       </widget>
      </item>

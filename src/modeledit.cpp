@@ -3488,7 +3488,7 @@ void ModelEdit::on_protocolCB_currentIndexChanged(int index)
         ui->numChannelsSB->show();        
         ui->numChannelsSB->setEnabled(true);
         ui->ppmFrameLengthDSB->setEnabled(true);
-        ui->ppmFrameLengthDSB->setMinimum(ui->numChannelsSB->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+        ui->ppmFrameLengthDSB->setMinimum(g_model.moduleData[0].channelsCount*(g_model.extendedLimits ? 2.250 :2)+3.5);
         if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
           ui->ppmFrameLengthDSB->show();
           ui->label_ppmFrameLength->show();
@@ -3629,7 +3629,7 @@ void ModelEdit::on_protocolCB_2_currentIndexChanged(int index)
         ui->numChannelsSB_2->show();        
         ui->numChannelsSB_2->setEnabled(true);
         ui->ppmFrameLengthDSB_2->setEnabled(true);
-        ui->ppmFrameLengthDSB_2->setMinimum(ui->numChannelsSB_2->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+        ui->ppmFrameLengthDSB_2->setMinimum(g_model.moduleData[1].channelsCount*(g_model.extendedLimits ? 2.250 :2)+3.5);
         if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
           ui->ppmFrameLengthDSB_2->show();
           ui->label_ppmFrameLength_2->show();
@@ -3679,7 +3679,7 @@ void ModelEdit::on_protocolCB_3_currentIndexChanged(int index)
         ui->numChannelsSB_3->setValue(g_model.moduleData[2].channelsStart+g_model.moduleData[2].channelsCount);
         ui->pulsePolCB_3->setCurrentIndex(g_model.moduleData[2].ppmPulsePol);
         ui->ppmDelaySB_3->setValue(g_model.moduleData[2].ppmDelay);
-        ui->ppmFrameLengthDSB_3->setMinimum(ui->numChannelsSB_3->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+        ui->ppmFrameLengthDSB_3->setMinimum(g_model.moduleData[2].channelsCount*(g_model.extendedLimits ? 2.250 :2)+3.5);
         if (GetEepromInterface()->getCapability(PPMExtCtrl)) {
           ui->ppmFrameLengthDSB_3->show();
           ui->label_ppmFrameLength_3->show();
@@ -3696,7 +3696,7 @@ void ModelEdit::on_numChannelsSB_editingFinished()
 {
   // TODO only accept valid values
   g_model.moduleData[0].channelsCount = 1+ui->numChannelsSB->value()-ui->numChannelsStart->value();
-  ui->ppmFrameLengthDSB->setMinimum(ui->numChannelsSB->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+  ui->ppmFrameLengthDSB->setMinimum(g_model.moduleData[0].channelsCount*(g_model.extendedLimits ? 2.250 :2)+3.5);
   updateSettings();
 }
 
@@ -3704,7 +3704,7 @@ void ModelEdit::on_numChannelsSB_2_editingFinished()
 {
   // TODO only accept valid values
   g_model.moduleData[1].channelsCount = 1+ui->numChannelsSB_2->value()-ui->numChannelsStart_2->value();
-  ui->ppmFrameLengthDSB_2->setMinimum(ui->numChannelsSB_2->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+  ui->ppmFrameLengthDSB_2->setMinimum(g_model.moduleData[1].channelsCount*(g_model.extendedLimits ? 2.250 :2.0)+3.5);
   updateSettings();
 }
 
@@ -3712,7 +3712,7 @@ void ModelEdit::on_numChannelsSB_3_editingFinished()
 {
   // TODO only accept valid values
   g_model.moduleData[2].channelsCount = 1+ui->numChannelsSB_3->value()-ui->numChannelsStart_3->value();
-  ui->ppmFrameLengthDSB_3->setMinimum(ui->numChannelsSB_3->value()*(g_model.extendedLimits ? 2.250 :2)+4.5);
+  ui->ppmFrameLengthDSB_3->setMinimum(g_model.moduleData[2].channelsCount*(g_model.extendedLimits ? 2.250 :2)+3.5);
   updateSettings();
 }
 
@@ -5698,6 +5698,9 @@ void ModelEdit::on_extendedTrimsChkB_toggled(bool checked)
 
 void ModelEdit::setLimitMinMax()
 {
+  on_numChannelsSB_editingFinished();
+  on_numChannelsSB_2_editingFinished();
+  on_numChannelsSB_3_editingFinished();
   int v = g_model.extendedLimits ? 125 : 100;
   foreach(QSpinBox *sb, findChildren<QSpinBox *>(QRegExp("minSB_[0-9]+"))) {
     sb->setMaximum(25);
