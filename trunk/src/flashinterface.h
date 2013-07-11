@@ -18,7 +18,7 @@
 #include <QtGui>
 #include <inttypes.h>
 #include "file.h"
-#define MAX_FSIZE (256*1024)
+#define MAX_FSIZE (512*1024)
 #define SPLASH_WIDTH (128)
 #define SPLASH_HEIGHT (64)
 #define SPLASHX9D_WIDTH (212)
