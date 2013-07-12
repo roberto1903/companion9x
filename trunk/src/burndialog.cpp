@@ -100,7 +100,11 @@ burnDialog::burnDialog(QWidget *parent, int Type, QString * fileName, bool * bac
         } else {
           ui->profile_label->hide();
         }
-        ui->EEpromCB->show();
+        if (!IS_TARANIS(GetEepromInterface()->getBoard())) {
+          ui->EEpromCB->show();
+        } else {
+          ui->EEpromCB->setChecked(false);
+        }
         ui->BurnFlashButton->setEnabled(true);
       }
     }
@@ -154,7 +158,11 @@ void burnDialog::on_FlashLoadButton_clicked()
         ui->profile_label->show();
         ui->patchcalib_CB->show();
         ui->patchhw_CB->show();
-        ui->EEpromCB->show();
+        if (!IS_TARANIS(GetEepromInterface()->getBoard())) {
+          ui->EEpromCB->show();
+        } else {
+          ui->EEpromCB->setChecked(false);
+        }
       } else {
         ui->BurnFlashButton->setEnabled(true);
         ui->profile_label->hide();
