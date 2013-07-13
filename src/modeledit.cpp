@@ -6689,20 +6689,24 @@ void ModelEdit::ControlCurveSignal(bool flag)
 }
 
 void ModelEdit::shrink() {
+#if defined __APPLE__
+  QSettings settings("companion9x", "companion9x");
+  QPoint pos = settings.value("mepos", QPoint(0, 0)).toPoint();
+  QSize size = settings.value("mesize", QSize(800, 625)).toSize();
+  move(pos);
+  resize(size);    
+# else
   const int height = QApplication::desktop()->height();
   QSettings settings("companion9x", "companion9x");
-  QPoint pos = settings.value("mepos", QPoint(200, 200)).toPoint();
+  QPoint pos = settings.value("mepos", QPoint(100, 100)).toPoint();
   QSize size = settings.value("mesize", QSize(800, 625)).toSize();
   if (size.height() < height) {
       move(pos);
       resize(size);    
   } else {
-    if (height < 625) {
-      resize(0,0);
-    } else {
-      resize(0,625);
-    }
+    resize(0,0);
   }
+#endif  
   ui->curvePreview->repaint();
 }
 

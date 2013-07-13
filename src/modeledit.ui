@@ -4637,6 +4637,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase1Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -4650,6 +4656,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase1Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -5182,6 +5194,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase2Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -5195,6 +5213,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase2Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -5727,6 +5751,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase3Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -5740,6 +5770,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase3Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -6272,6 +6308,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase4Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -6285,6 +6327,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase4Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -6748,6 +6796,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase5Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -6761,6 +6815,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase5Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -7293,6 +7353,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase6Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -7306,6 +7372,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase6Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -7914,6 +7986,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase7Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -7927,6 +8005,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase7Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -8383,6 +8467,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="2">
                 <widget class="QSlider" name="phase8Trim4Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -8396,6 +8486,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </item>
                <item row="2" column="1">
                 <widget class="QSlider" name="phase8Trim1Slider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -8950,7 +9046,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_27" columnstretch="0,1,1,1,1,1,0">
+             <layout class="QGridLayout" name="gridLayout_27" columnstretch="1,0,0,0,0,1,1">
               <item row="16" column="6">
                <widget class="QSpinBox" name="ppmcenter_16">
                 <property name="alignment">
@@ -10466,6 +10562,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="1" column="2">
                <widget class="QCheckBox" name="symckb_1">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10473,6 +10575,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="2" column="2">
                <widget class="QCheckBox" name="symckb_2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10480,6 +10588,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="3" column="2">
                <widget class="QCheckBox" name="symckb_3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10487,6 +10601,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="4" column="2">
                <widget class="QCheckBox" name="symckb_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10494,6 +10614,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="5" column="2">
                <widget class="QCheckBox" name="symckb_5">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10501,6 +10627,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="6" column="2">
                <widget class="QCheckBox" name="symckb_6">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10508,6 +10640,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="7" column="2">
                <widget class="QCheckBox" name="symckb_7">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10515,6 +10653,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="8" column="2">
                <widget class="QCheckBox" name="symckb_8">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10522,6 +10666,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="9" column="2">
                <widget class="QCheckBox" name="symckb_9">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10529,6 +10679,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="10" column="2">
                <widget class="QCheckBox" name="symckb_10">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10536,6 +10692,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="11" column="2">
                <widget class="QCheckBox" name="symckb_11">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10543,6 +10705,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="12" column="2">
                <widget class="QCheckBox" name="symckb_12">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10550,6 +10718,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="13" column="2">
                <widget class="QCheckBox" name="symckb_13">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10557,6 +10731,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="14" column="2">
                <widget class="QCheckBox" name="symckb_14">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10564,6 +10744,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="15" column="2">
                <widget class="QCheckBox" name="symckb_15">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10571,6 +10757,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="16" column="2">
                <widget class="QCheckBox" name="symckb_16">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -10763,6 +10955,19 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              </layout>
             </widget>
            </item>
+           <item row="1" column="0" colspan="2">
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="0" column="1">
             <widget class="QGroupBox" name="limitGB2">
              <property name="sizePolicy">
@@ -10774,7 +10979,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
              <property name="title">
               <string/>
              </property>
-             <layout class="QGridLayout" name="gridLayout_28" columnstretch="0,1,1,1,1,1,1">
+             <layout class="QGridLayout" name="gridLayout_28" columnstretch="1,0,0,0,0,1,1">
               <item row="4" column="1">
                <widget class="QDoubleSpinBox" name="offsetDSB_20">
                 <property name="alignment">
@@ -12238,6 +12443,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="1" column="2">
                <widget class="QCheckBox" name="symckb_17">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12245,6 +12456,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="2" column="2">
                <widget class="QCheckBox" name="symckb_18">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12252,6 +12469,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="3" column="2">
                <widget class="QCheckBox" name="symckb_19">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12259,6 +12482,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="4" column="2">
                <widget class="QCheckBox" name="symckb_20">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12266,6 +12495,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="5" column="2">
                <widget class="QCheckBox" name="symckb_21">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12273,6 +12508,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="6" column="2">
                <widget class="QCheckBox" name="symckb_22">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12280,6 +12521,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="7" column="2">
                <widget class="QCheckBox" name="symckb_23">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12287,6 +12534,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="8" column="2">
                <widget class="QCheckBox" name="symckb_24">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12294,6 +12547,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="9" column="2">
                <widget class="QCheckBox" name="symckb_25">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12301,6 +12560,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="10" column="2">
                <widget class="QCheckBox" name="symckb_26">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12308,6 +12573,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="11" column="2">
                <widget class="QCheckBox" name="symckb_27">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12315,6 +12586,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="12" column="2">
                <widget class="QCheckBox" name="symckb_28">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12322,6 +12599,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="13" column="2">
                <widget class="QCheckBox" name="symckb_29">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12329,6 +12612,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="14" column="2">
                <widget class="QCheckBox" name="symckb_30">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12336,6 +12625,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="15" column="2">
                <widget class="QCheckBox" name="symckb_31">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12343,6 +12638,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
               <item row="16" column="2">
                <widget class="QCheckBox" name="symckb_32">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -12586,19 +12887,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               </item>
              </layout>
             </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
@@ -18601,6 +18889,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  <layout class="QGridLayout" name="gridLayout_65">
                   <item row="0" column="0">
                    <widget class="QLabel" name="VarioLabel_1">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Min</string>
                     </property>
@@ -18611,6 +18905,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="1" column="1">
                    <widget class="QDoubleSpinBox" name="varioLimitCenterMin_DSB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="decimals">
                      <number>1</number>
                     </property>
@@ -18630,6 +18930,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="1" column="2">
                    <widget class="QDoubleSpinBox" name="varioLimitCenterMax_DSB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="decimals">
                      <number>1</number>
                     </property>
@@ -18649,6 +18955,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="1" column="3">
                    <widget class="QDoubleSpinBox" name="varioLimitMax_DSB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="decimals">
                      <number>0</number>
                     </property>
@@ -18665,6 +18977,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="1" column="0">
                    <widget class="QDoubleSpinBox" name="varioLimitMin_DSB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="decimals">
                      <number>0</number>
                     </property>
@@ -18681,6 +18999,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="2" column="1">
                    <widget class="QCheckBox" name="varioLimitMinOff_ChkB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Off</string>
                     </property>
@@ -18688,6 +19012,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="0" column="3">
                    <widget class="QLabel" name="VarioLabel_4">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Max</string>
                     </property>
@@ -18698,6 +19028,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="0" column="1">
                    <widget class="QLabel" name="VarioLabel_2">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Center Min</string>
                     </property>
@@ -18708,6 +19044,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                   </item>
                   <item row="0" column="2">
                    <widget class="QLabel" name="VarioLabel_3">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Center Max</string>
                     </property>
