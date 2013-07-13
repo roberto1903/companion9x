@@ -1028,7 +1028,7 @@ class CustomSwitchField: public TransformedField {
         internalField.Append(new UnsignedField<8>(csw.delay));
         internalField.Append(new UnsignedField<8>(csw.duration));
         if (version >= 214) {
-          internalField.Append(new ConversionField< UnsignedField<8> >(csw.andsw, &andswitchesConversionTable, "AND switch"));
+          internalField.Append(new ConversionField< SignedField<8> >((int &)csw.andsw, &andswitchesConversionTable, "AND switch"));
         }
       }
       else {
