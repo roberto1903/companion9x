@@ -2,6 +2,7 @@
 #include "ui_avroutputdialog.h"
 #include <QtGui>
 #include "eeprominterface.h"
+#include "flashinterface.h"
 
 #if defined WIN32 || !defined __GNUC__
 #include <Windows.h>
@@ -220,6 +221,12 @@ void avrOutputDialog::doAddTextStdOut()
     if (!currStdLine.isEmpty()) {
       if (currStdLine.at(0)==QChar('.')) {
         pos=currStdLine.lastIndexOf(".");
+        ui->progressBar->setValue(pos);
+      }
+    }
+    if (!currStdLine.isEmpty()) {
+      if (currStdLine.startsWith("Starting upload: [")) {
+        pos=(currStdLine.lastIndexOf("#")-19)/(MAX_FSIZE/204800.0);
         ui->progressBar->setValue(pos);
       }
     }

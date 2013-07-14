@@ -775,9 +775,11 @@ QStringList MainWindow::GetDFUUtilArguments(const QString &cmd, const QString &f
   QStringList arguments;
   burnConfigDialog bcd;
   QStringList args   = bcd.getDFUArgs();
-
-  arguments << args << "--dfuse-address" << "0x08000000" << "-d" << "0483:df11";
-
+  QString memory="0x08000000";
+  if (cmd=="-U") {
+    memory.append(QString(":%1").arg(MAX_FSIZE));
+  }
+  arguments << args << "--dfuse-address" << memory << "-d" << "0483:df11";
   QString fullcmd = cmd + filename;
 
   arguments << "" << fullcmd;
@@ -1345,6 +1347,10 @@ void MainWindow::burnFromFlash()
     QString fileName = QFileDialog::getSaveFileName(this,tr("Read Flash to File"), settings.value("lastFlashDir").toString(),tr(FLASH_FILES_FILTER));
     if (!fileName.isEmpty())
     {
+        QFile file(fileName);
+        if (file.exists()) {
+          file.remove();
+        }
         settings.setValue("lastFlashDir",QFileInfo(fileName).dir().absolutePath());
         QStringList str = GetReceiveFlashCommand(fileName);
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
