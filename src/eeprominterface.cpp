@@ -424,9 +424,11 @@ void ModelData::clear()
 {
   memset(this, 0, sizeof(ModelData));
   moduleData[0].channelsCount = 8;
-  moduleData[1].channelsStart = 8;
+  moduleData[1].channelsStart = 0;
   moduleData[1].channelsCount = 8;
   moduleData[0].ppmDelay = 300;
+  moduleData[1].ppmDelay = 300;
+  moduleData[2].ppmDelay = 300;
   int board=GetEepromInterface()->getBoard();
   if (IS_TARANIS(board)) {
     moduleData[0].protocol=PXX_XJT_X16;
