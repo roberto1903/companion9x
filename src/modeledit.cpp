@@ -1751,6 +1751,7 @@ void ModelEdit::tabLimits()
 {
   limitEditLock=true;
   int chnames=GetEepromInterface()->getCapability(HasChNames);
+  QRegExp rx(CHAR_FOR_NAMES_REGEX);
   foreach(QLineEdit *le, findChildren<QLineEdit *>(QRegExp("CHName_[0-9]+"))) {
     int len=le->objectName().mid(le->objectName().lastIndexOf("_")+1).toInt()-1;
     if (chnames ) {
@@ -1760,6 +1761,7 @@ void ModelEdit::tabLimits()
       } else {
         le->setText(name);
       }
+      le->setValidator(new QRegExpValidator(rx, this));
       le->setEnabled(true);
       le->setReadOnly(false);
       connect(le, SIGNAL(editingFinished()), this, SLOT(limitNameEdited()));
@@ -5539,22 +5541,29 @@ void ModelEdit::moveMixDown()
 
 int ModelEdit::gm_moveExpo(int idx, bool dir) //true=inc=down false=dec=up
 {
-    if(idx>C9X_MAX_EXPOS || (idx==0 && !dir) || (idx==C9X_MAX_EXPOS && dir)) return idx;
-
+    if(idx>C9X_MAX_EXPOS || (idx==C9X_MAX_EXPOS && dir)) return idx;
+    
     int tdx = dir ? idx+1 : idx-1;
+    ExpoData temp;
+    temp.clear();    
     ExpoData &src=g_model.expoData[idx];
     ExpoData &tgt=g_model.expoData[tdx];
-
-    if(src.chn==0) return idx;
-
-    if(tgt.chn!=src.chn) {
-        if ((dir)  && (src.chn<NUM_STICKS)) src.chn++;
+    if (!dir && tdx<0 && src.chn>0) {
+      src.chn--;
+      return idx;
+    } else if (!dir && tdx<0) {
+      return idx;
+    }
+    
+    if(memcmp(&src,&temp,sizeof(ExpoData))==0) return idx;
+    bool tgtempty=(memcmp(&tgt,&temp,sizeof(ExpoData))==0 ? 1:0);
+    if(tgt.chn!=src.chn || tgtempty) {
+        if ((dir)  && (src.chn<(NUM_STICKS-1))) src.chn++;
         if ((!dir) && (src.chn>0))          src.chn--;
         return idx;
     }
 
     //flip between idx and tgt
-    ExpoData temp;
     memcpy(&temp,&src,sizeof(ExpoData));
     memcpy(&src,&tgt,sizeof(ExpoData));
     memcpy(&tgt,&temp,sizeof(ExpoData));

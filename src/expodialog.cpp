@@ -13,6 +13,8 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
     setWindowTitle(tr("DEST -> %1").arg(getStickStr(ed->chn)));
+    QRegExp rx(CHAR_FOR_NAMES_REGEX);
+    
     if (GetEepromInterface()->getCapability(GvarsAsWeight)) {
       int gvars=0;
       if (GetEepromInterface()->getCapability(HasVariants)) {
@@ -141,6 +143,7 @@ ExpoDialog::ExpoDialog(QWidget *parent, ExpoData *expoData, int stickMode) :
     } else {
       ui->expoName->setMaxLength(expolength);
     }
+    ui->expoName->setValidator(new QRegExpValidator(rx, this));
     ui->expoName->setText(ed->name);
     valuesChanged();
     connect(ui->expoName,SIGNAL(editingFinished()),this,SLOT(valuesChanged()));

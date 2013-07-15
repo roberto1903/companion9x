@@ -9,6 +9,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
     md(mixdata)
 {
     ui->setupUi(this);
+    QRegExp rx(CHAR_FOR_NAMES_REGEX);
     QLabel * lb_fp[] = {ui->lb_FP0,ui->lb_FP1,ui->lb_FP2,ui->lb_FP3,ui->lb_FP4,ui->lb_FP5,ui->lb_FP6,ui->lb_FP7,ui->lb_FP8 };
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
 
@@ -158,6 +159,7 @@ MixerDialog::MixerDialog(QWidget *parent, MixData *mixdata, int stickMode) :
         cb_fp[i]->hide();
       }
     }
+    ui->mixerName->setValidator(new QRegExpValidator(rx, this));
     ui->mixerName->setText(md->name);
     populateCurvesCB(ui->curvesCB,md->curve);
     populateSwitchCB(ui->switchesCB,md->swtch);
