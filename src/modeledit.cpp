@@ -59,6 +59,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   ui->phase6Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase7Name->setValidator(new QRegExpValidator(rx, this));
   ui->phase8Name->setValidator(new QRegExpValidator(rx, this));
+  ui->cname_LE->setValidator(new QRegExpValidator(rx, this));
 #ifdef PHONON
   phononLock=false;
   clickObject = new Phonon::MediaObject(this);
@@ -1909,7 +1910,7 @@ void ModelEdit::tabCurves()
   if (!GetEepromInterface()->getCapability(HasCvNames)){
     ui->cname_LE->hide();
     ui->cname_label->hide();
-  } else {
+  } else {    
     ui->cname_LE->setText(g_model.curves[0].name);
   }
   
@@ -1966,6 +1967,148 @@ void ModelEdit::tabCurves()
     connect(ChkB, SIGNAL(toggled(bool)), this, SLOT(plotCurve(bool)));
   }
   setCurrentCurve(currentCurve);
+  ui->ca_coeff_SB->hide();
+  ui->ca_coeff_label->hide();
+  ui->ca_ymid_SB->hide();
+  ui->ca_ymid_label->hide();
+}
+
+void ModelEdit::on_ca_ctype_CB_currentIndexChanged()
+{
+  int index=ui->ca_ctype_CB->currentIndex();
+  switch (index) {
+    case 0:
+      ui->ca_coeff_SB->hide();
+      ui->ca_coeff_label->hide();
+      ui->ca_ymid_SB->hide();
+      ui->ca_ymid_label->hide();
+      ui->ca_ymin_SB->show();
+      ui->ca_ymin_label->show();
+      ui->ca_ymin_SB->setValue(-100);
+      ui->ca_ymax_SB->setValue(100);
+      break;
+    case 1:
+      ui->ca_coeff_SB->show();
+      ui->ca_coeff_label->show();
+      ui->ca_ymid_SB->hide();
+      ui->ca_ymid_label->hide();
+      ui->ca_ymin_SB->show();
+      ui->ca_ymin_label->show();
+      ui->ca_ymin_SB->setValue(-100);
+      ui->ca_ymax_SB->setValue(100);
+      break;
+    case 2:
+      ui->ca_coeff_SB->show();
+      ui->ca_coeff_label->show();
+      ui->ca_ymid_SB->hide();
+      ui->ca_ymid_label->hide();
+      ui->ca_ymin_SB->hide();
+      ui->ca_ymin_label->hide();
+      ui->ca_ymax_SB->setValue(100);      
+      break;
+    case 3:
+      ui->ca_coeff_SB->show();
+      ui->ca_coeff_label->show();
+      ui->ca_ymid_SB->show();
+      ui->ca_ymid_label->show();
+      ui->ca_ymin_SB->hide();
+      ui->ca_ymin_label->hide();
+      ui->ca_ymid_SB->setValue(0);
+      ui->ca_ymax_SB->setValue(100);      
+      break;
+  }
+}
+
+void ModelEdit::on_ca_apply_PB_clicked()
+{
+  int index=ui->ca_ctype_CB->currentIndex();
+  float x;
+  int y;
+  int invert=0;
+  float a;
+  if (index==0) {
+    a=(ui->ca_ymax_SB->value()-ui->ca_ymin_SB->value())/200.0;
+    int numpoints=g_model.curves[currentCurve].count;
+    for (int i=0; i<numpoints; i++) {
+      if (g_model.curves[currentCurve].custom) {
+        x=(g_model.curves[currentCurve].points[i].x+100);
+      } else {
+        x=(200.0/(numpoints-1))*i;
+      }
+      y=ui->ca_ymin_SB->value()+a*x;
+      g_model.curves[currentCurve].points[i].y=y;
+    }
+  } else if (index==1) {
+    int numpoints=g_model.curves[currentCurve].count;
+    for (int i=0; i<numpoints; i++) {
+      if (g_model.curves[currentCurve].custom) {
+        x=((g_model.curves[currentCurve].points[i].x)+100)/2.0;
+      } else {
+        x=(100.0/(numpoints-1))*i;
+      }
+      a=ui->ca_coeff_SB->value();
+      if (a>=0) {
+        y=round(c9xexpou(x,a)*(ui->ca_ymax_SB->value()-ui->ca_ymin_SB->value())/100.0+ui->ca_ymin_SB->value());
+      } else {
+        a=-a;
+        x=100-x;
+        y=round((100.0-c9xexpou(x,a))*(ui->ca_ymax_SB->value()-ui->ca_ymin_SB->value())/100.0+ui->ca_ymin_SB->value());
+      }
+      g_model.curves[currentCurve].points[i].y=y;
+    }
+  } else if (index==2) {
+    int numpoints=g_model.curves[currentCurve].count;
+    for (int i=0; i<numpoints; i++) {
+      if (g_model.curves[currentCurve].custom) {
+        x=(g_model.curves[currentCurve].points[i].x);
+      } else {
+        x=-100.0+(200.0/(numpoints-1))*i;
+      }
+      a=ui->ca_coeff_SB->value();
+      if (x<0) {
+        x=-x;
+        invert=1; 
+      } else {
+        invert=0;
+      }
+      if (a>=0) {
+        y=round(c9xexpou(x,a)*(ui->ca_ymax_SB->value()/100.0));
+      } else {
+        a=-a;
+        x=100-x;
+        y=round((100.0-c9xexpou(x,a))*(ui->ca_ymax_SB->value()/100.0));
+      }
+      if (invert==1) {
+        g_model.curves[currentCurve].points[i].y=-y;
+      } else {
+        g_model.curves[currentCurve].points[i].y=y;
+      }
+    }
+  } else if (index==3) {
+    int numpoints=g_model.curves[currentCurve].count;
+    for (int i=0; i<numpoints; i++) {
+      if (g_model.curves[currentCurve].custom) {
+        x=(g_model.curves[currentCurve].points[i].x);
+      } else {
+        x=-100.0+(200.0/(numpoints-1))*i;
+      }
+      a=ui->ca_coeff_SB->value();
+      if (x<0) {
+        x=-x;
+      }
+      if (a>=0) {
+        y=round(c9xexpou(x,a)*((ui->ca_ymax_SB->value()-ui->ca_ymid_SB->value())/100.0)+ui->ca_ymid_SB->value());
+      } else {
+        a=-a;
+        x=100-x;
+        y=round((100.0-c9xexpou(x,a))*((ui->ca_ymax_SB->value()-ui->ca_ymid_SB->value())/100.0)+ui->ca_ymid_SB->value());
+      }
+      g_model.curves[currentCurve].points[i].y=y;
+    }
+  }  
+  updateSettings();
+  setCurrentCurve(currentCurve);
+  drawCurve();
 }
 
 void ModelEdit::limitSymEdited()
