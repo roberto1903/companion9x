@@ -1344,6 +1344,13 @@ QString getProtocol(ModelData * g_model)
   return str;
 }
 
+float c9xexpou(float point, float coeff)
+{
+  float x=point*1024.0/100.0;
+  float k=coeff*256.0/100.0;
+  return ((k*x*x*x/(1024*1024) + x*(256-k) + 128) / 256)/1024.0*100;
+}
+
 QString getCenterBeep(ModelData * g_model)
 {
   //RETA123
