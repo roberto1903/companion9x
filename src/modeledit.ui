@@ -17760,12 +17760,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </item>
                 <item>
                  <property name="text">
-                  <string>Simmetrycal f(x)=-f(-x)</string>
+                  <string>Symmetrical f(x)=-f(-x)</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Simmetrycal f(x)=f(-x)</string>
+                  <string>Symmetrical f(x)=f(-x)</string>
                  </property>
                 </item>
                </widget>
