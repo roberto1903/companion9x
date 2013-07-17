@@ -2036,7 +2036,21 @@ void ModelEdit::on_ca_apply_PB_clicked()
         x=(200.0/(numpoints-1))*i;
       }
       y=ui->ca_ymin_SB->value()+a*x;
-      g_model.curves[currentCurve].points[i].y=y;
+      switch (ui->ca_side_CB->currentIndex()) {
+        case 0:
+          g_model.curves[currentCurve].points[i].y=y;
+          break;
+        case 1:
+          if (x>=100) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+        case 2:
+          if (x<100) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+      }
     }
   } else if (index==1) {
     int numpoints=g_model.curves[currentCurve].count;
@@ -2054,7 +2068,21 @@ void ModelEdit::on_ca_apply_PB_clicked()
         x=100-x;
         y=round((100.0-c9xexpou(x,a))*(ui->ca_ymax_SB->value()-ui->ca_ymin_SB->value())/100.0+ui->ca_ymin_SB->value());
       }
-      g_model.curves[currentCurve].points[i].y=y;
+      switch (ui->ca_side_CB->currentIndex()) {
+        case 0:
+          g_model.curves[currentCurve].points[i].y=y;
+          break;
+        case 1:
+          if (x>=50) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+        case 2:
+          if (x<50) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+      }
     }
   } else if (index==2) {
     int numpoints=g_model.curves[currentCurve].count;
@@ -2078,11 +2106,25 @@ void ModelEdit::on_ca_apply_PB_clicked()
         x=100-x;
         y=round((100.0-c9xexpou(x,a))*(ui->ca_ymax_SB->value()/100.0));
       }
-      if (invert==1) {
-        g_model.curves[currentCurve].points[i].y=-y;
-      } else {
-        g_model.curves[currentCurve].points[i].y=y;
-      }
+      switch (ui->ca_side_CB->currentIndex()) {
+        case 0:
+          if (invert==1) {
+            g_model.curves[currentCurve].points[i].y=-y;
+          } else {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+        case 1:
+          if (invert==0) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+        case 2:
+          if (invert==1) {
+            g_model.curves[currentCurve].points[i].y=-y;
+          }
+          break;
+      }      
     }
   } else if (index==3) {
     int numpoints=g_model.curves[currentCurve].count;
@@ -2092,6 +2134,7 @@ void ModelEdit::on_ca_apply_PB_clicked()
       } else {
         x=-100.0+(200.0/(numpoints-1))*i;
       }
+      int pos=(x>=0);
       a=ui->ca_coeff_SB->value();
       if (x<0) {
         x=-x;
@@ -2103,7 +2146,21 @@ void ModelEdit::on_ca_apply_PB_clicked()
         x=100-x;
         y=round((100.0-c9xexpou(x,a))*((ui->ca_ymax_SB->value()-ui->ca_ymid_SB->value())/100.0)+ui->ca_ymid_SB->value());
       }
-      g_model.curves[currentCurve].points[i].y=y;
+      switch (ui->ca_side_CB->currentIndex()) {
+        case 0:
+          g_model.curves[currentCurve].points[i].y=y;
+          break;
+        case 1:
+          if (pos) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+        case 2:
+          if (!pos) {
+            g_model.curves[currentCurve].points[i].y=y;
+          }
+          break;
+      }
     }
   }  
   updateSettings();
