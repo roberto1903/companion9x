@@ -9,7 +9,7 @@
     </message>
     <message>
         <location filename="expodialog.ui" line="91"/>
-        <location filename="ui_expodialog.h" line="292"/>
+        <location filename="ui_expodialog.h" line="360"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
@@ -27,7 +27,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="expodialog.ui" line="50"/>
-        <location filename="ui_expodialog.h" line="291"/>
+        <location filename="ui_expodialog.h" line="355"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
@@ -42,27 +42,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="expodialog.ui" line="36"/>
-        <location filename="ui_expodialog.h" line="290"/>
+        <location filename="ui_expodialog.h" line="354"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="69"/>
         <location filename="expodialog.ui" line="110"/>
-        <location filename="ui_expodialog.h" line="335"/>
-        <location filename="ui_expodialog.h" line="338"/>
+        <location filename="ui_expodialog.h" line="358"/>
+        <location filename="ui_expodialog.h" line="363"/>
         <source>Phase used by the expo.</source>
         <translation>Phase utilisée par l&apos;expo.</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="141"/>
-        <location filename="ui_expodialog.h" line="294"/>
+        <location filename="ui_expodialog.h" line="366"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="132"/>
-        <location filename="ui_expodialog.h" line="293"/>
+        <location filename="ui_expodialog.h" line="365"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
@@ -70,66 +70,69 @@ p, li { white-space: pre-wrap; }
         <location filename="expodialog.ui" line="59"/>
         <location filename="expodialog.ui" line="100"/>
         <location filename="expodialog.ui" line="330"/>
+        <location filename="ui_expodialog.h" line="356"/>
+        <location filename="ui_expodialog.h" line="361"/>
+        <location filename="ui_expodialog.h" line="396"/>
         <source>GV</source>
         <translation>VG</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="151"/>
-        <location filename="ui_expodialog.h" line="295"/>
+        <location filename="ui_expodialog.h" line="367"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="161"/>
-        <location filename="ui_expodialog.h" line="296"/>
+        <location filename="ui_expodialog.h" line="368"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="171"/>
-        <location filename="ui_expodialog.h" line="297"/>
+        <location filename="ui_expodialog.h" line="369"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="181"/>
-        <location filename="ui_expodialog.h" line="298"/>
+        <location filename="ui_expodialog.h" line="370"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="191"/>
-        <location filename="ui_expodialog.h" line="299"/>
+        <location filename="ui_expodialog.h" line="371"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="201"/>
-        <location filename="ui_expodialog.h" line="300"/>
+        <location filename="ui_expodialog.h" line="372"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="211"/>
-        <location filename="ui_expodialog.h" line="301"/>
+        <location filename="ui_expodialog.h" line="373"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="221"/>
-        <location filename="ui_expodialog.h" line="302"/>
+        <location filename="ui_expodialog.h" line="374"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="296"/>
-        <location filename="ui_expodialog.h" line="312"/>
+        <location filename="ui_expodialog.h" line="384"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="303"/>
-        <location filename="ui_expodialog.h" line="314"/>
+        <location filename="ui_expodialog.h" line="386"/>
         <source>Switch used by the expo.
 If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <translation>Interrupteur utilisé par l&apos;expo.
@@ -137,42 +140,46 @@ Expo actif par défaut si non renseigné.</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="311"/>
-        <location filename="ui_expodialog.h" line="317"/>
+        <location filename="ui_expodialog.h" line="389"/>
         <source>Curve/Exponential</source>
         <translation>Courbe/Exponentiel</translation>
     </message>
     <message>
-        <location filename="expodialog.cpp" line="111"/>
+        <location filename="expodialog.ui" line="349"/>
+        <location filename="ui_expodialog.h" line="400"/>
+        <source>Stick Side</source>
+        <translation>Direction</translation>
+    </message>
+    <message>
+        <location filename="expodialog.cpp" line="113"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="323"/>
-        <location filename="ui_expodialog.h" line="322"/>
+        <location filename="ui_expodialog.h" line="394"/>
         <source>The curve used by the expo</source>
         <translation>Courbe utilisée par l&apos;expo</translation>
     </message>
     <message>
-        <location filename="expodialog.ui" line="349"/>
-        <location filename="ui_expodialog.h" line="327"/>
         <source>Mode</source>
-        <translation>Mode</translation>
+        <translation type="obsolete">Mode</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="357"/>
-        <location filename="ui_expodialog.h" line="330"/>
+        <location filename="ui_expodialog.h" line="403"/>
         <source>NEG</source>
         <translation>Négatif</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="362"/>
-        <location filename="ui_expodialog.h" line="331"/>
+        <location filename="ui_expodialog.h" line="404"/>
         <source>POS</source>
         <translation>Positif</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="367"/>
-        <location filename="ui_expodialog.h" line="332"/>
+        <location filename="ui_expodialog.h" line="405"/>
         <source>ALL</source>
         <translation>Partout</translation>
     </message>
@@ -185,8 +192,8 @@ Expo actif par défaut si non renseigné.</translation>
 <context>
     <name>GeneralEdit</name>
     <message>
-        <location filename="generaledit.ui" line="2722"/>
-        <location filename="ui_generaledit.h" line="2283"/>
+        <location filename="generaledit.ui" line="2691"/>
+        <location filename="ui_generaledit.h" line="2443"/>
         <source>v</source>
         <translation></translation>
     </message>
@@ -196,29 +203,29 @@ Expo actif par défaut si non renseigné.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1299"/>
-        <location filename="ui_generaledit.h" line="1918"/>
+        <location filename="ui_generaledit.h" line="2031"/>
         <source> min</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="305"/>
-        <location filename="generaledit.ui" line="751"/>
-        <location filename="ui_generaledit.h" line="1722"/>
-        <location filename="ui_generaledit.h" line="1906"/>
+        <location filename="generaledit.ui" line="338"/>
+        <location filename="generaledit.ui" line="777"/>
+        <location filename="ui_generaledit.h" line="1770"/>
+        <location filename="ui_generaledit.h" line="1865"/>
         <source> sec</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="133"/>
-        <location filename="ui_generaledit.h" line="1953"/>
+        <location filename="ui_generaledit.h" line="2132"/>
         <source>Setup</source>
         <translation>Configuration</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="338"/>
+        <location filename="generaledit.ui" line="371"/>
         <location filename="generaledit.ui" line="1321"/>
-        <location filename="ui_generaledit.h" line="1749"/>
-        <location filename="ui_generaledit.h" line="1892"/>
+        <location filename="ui_generaledit.h" line="1780"/>
+        <location filename="ui_generaledit.h" line="2039"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -237,20 +244,20 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Rétroéclairage, extinction auto après</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="318"/>
-        <location filename="ui_generaledit.h" line="1725"/>
+        <location filename="generaledit.ui" line="351"/>
+        <location filename="ui_generaledit.h" line="1771"/>
         <source>Input Filter</source>
         <translation>Conversion</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="458"/>
-        <location filename="ui_generaledit.h" line="1790"/>
+        <location filename="generaledit.ui" line="491"/>
+        <location filename="ui_generaledit.h" line="1806"/>
         <source>Inactivity Timer</source>
         <translation>Alerte d&apos;inactivité</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1025"/>
-        <location filename="ui_generaledit.h" line="1689"/>
+        <location filename="ui_generaledit.h" line="1941"/>
         <source>Every Minute</source>
         <translation>Toutes les minutes</translation>
     </message>
@@ -260,7 +267,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="1296"/>
-        <location filename="ui_generaledit.h" line="1916"/>
+        <location filename="ui_generaledit.h" line="2029"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
         <translation>Si différent de 0, émission d&apos;un bip sonore régulier si aucune action n&apos;a été effectuée sur l&apos;émetteur depuis le temps spécifié (en minutes).
 Réinitialisation en agissant sur n&apos;importe lequel des manches / touches de navigation.</translation>
@@ -271,13 +278,13 @@ Réinitialisation en agissant sur n&apos;importe lequel des manches / touches de
     </message>
     <message>
         <location filename="generaledit.ui" line="20"/>
-        <location filename="ui_generaledit.h" line="1557"/>
+        <location filename="ui_generaledit.h" line="1727"/>
         <source>General Edit</source>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="942"/>
-        <location filename="ui_generaledit.h" line="1946"/>
+        <location filename="generaledit.ui" line="968"/>
+        <location filename="ui_generaledit.h" line="1913"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -289,7 +296,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
     </message>
     <message>
         <location filename="generaledit.ui" line="1042"/>
-        <location filename="ui_generaledit.h" line="1695"/>
+        <location filename="ui_generaledit.h" line="1947"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -298,40 +305,40 @@ p, li { white-space: pre-wrap; }
         <translation>Le rétroéclairage clignote en synchro avec les bips du chrono</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1168"/>
-        <location filename="ui_generaledit.h" line="1756"/>
+        <location filename="generaledit.ui" line="1181"/>
+        <location filename="ui_generaledit.h" line="1980"/>
         <source>Memory Startup Warning</source>
         <translation>Alerte mémoire</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1032"/>
-        <location filename="ui_generaledit.h" line="1691"/>
+        <location filename="ui_generaledit.h" line="1943"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
         <translation>Bip à 30, 15, 10, 5 puis toutes les secondes</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1362"/>
-        <location filename="ui_generaledit.h" line="1842"/>
+        <location filename="ui_generaledit.h" line="2058"/>
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
         <translation>Interrupteur déclenchant le rétroéclairage&apos; (si installé).</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="256"/>
-        <location filename="ui_generaledit.h" line="1622"/>
+        <location filename="generaledit.ui" line="289"/>
+        <location filename="ui_generaledit.h" line="1751"/>
         <source>Timer Beeps</source>
         <translation>Bips du chrono</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1266"/>
-        <location filename="ui_generaledit.h" line="1631"/>
+        <location filename="ui_generaledit.h" line="1991"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mode 2 (DIR GAZ PROF AIL)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1428"/>
-        <location filename="ui_generaledit.h" line="1583"/>
+        <location filename="generaledit.ui" line="1441"/>
+        <location filename="ui_generaledit.h" line="2078"/>
         <source>Filter</source>
         <translation>Filtre (si &apos;jitter&apos; - Latence +30msec)</translation>
     </message>
@@ -349,23 +356,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="1521"/>
-        <location filename="generaledit.ui" line="1755"/>
-        <location filename="generaledit.ui" line="1789"/>
-        <location filename="generaledit.ui" line="1857"/>
-        <location filename="generaledit.ui" line="1891"/>
-        <location filename="generaledit.ui" line="1930"/>
-        <location filename="generaledit.ui" line="1998"/>
-        <location filename="generaledit.ui" line="2042"/>
-        <location filename="generaledit.ui" line="2076"/>
-        <location filename="ui_generaledit.h" line="1614"/>
-        <location filename="ui_generaledit.h" line="1981"/>
-        <location filename="ui_generaledit.h" line="2003"/>
-        <location filename="ui_generaledit.h" line="2034"/>
-        <location filename="ui_generaledit.h" line="2056"/>
-        <location filename="ui_generaledit.h" line="2078"/>
+        <location filename="generaledit.ui" line="1768"/>
+        <location filename="generaledit.ui" line="1802"/>
+        <location filename="generaledit.ui" line="1870"/>
+        <location filename="generaledit.ui" line="1904"/>
+        <location filename="generaledit.ui" line="1943"/>
+        <location filename="generaledit.ui" line="2011"/>
+        <location filename="generaledit.ui" line="2055"/>
+        <location filename="generaledit.ui" line="2089"/>
         <location filename="ui_generaledit.h" line="2109"/>
-        <location filename="ui_generaledit.h" line="2131"/>
-        <location filename="ui_generaledit.h" line="2153"/>
+        <location filename="ui_generaledit.h" line="2160"/>
+        <location filename="ui_generaledit.h" line="2182"/>
+        <location filename="ui_generaledit.h" line="2213"/>
+        <location filename="ui_generaledit.h" line="2235"/>
+        <location filename="ui_generaledit.h" line="2257"/>
+        <location filename="ui_generaledit.h" line="2288"/>
+        <location filename="ui_generaledit.h" line="2310"/>
+        <location filename="ui_generaledit.h" line="2332"/>
         <source>Beeper volume
 
 0 - Quiet.  No beeps at all.
@@ -382,32 +389,32 @@ Long : bips plus longs.
 Extra long : bips extra longs.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="273"/>
-        <location filename="ui_generaledit.h" line="1662"/>
+        <location filename="generaledit.ui" line="306"/>
+        <location filename="ui_generaledit.h" line="1756"/>
         <source>Throttle Startup Warning</source>
         <translation>Alerte gaz</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1418"/>
-        <location filename="ui_generaledit.h" line="1581"/>
+        <location filename="generaledit.ui" line="1431"/>
+        <location filename="ui_generaledit.h" line="2076"/>
         <source>Single</source>
         <translation>Simple conversion (1024 bits)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="283"/>
-        <location filename="ui_generaledit.h" line="1674"/>
+        <location filename="generaledit.ui" line="316"/>
+        <location filename="ui_generaledit.h" line="1760"/>
         <source>Battery Warning</source>
         <translation>Alerte batterie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="737"/>
-        <location filename="ui_generaledit.h" line="1884"/>
+        <location filename="generaledit.ui" line="763"/>
+        <location filename="ui_generaledit.h" line="1863"/>
         <source>Contrast</source>
         <translation>Contraste</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1276"/>
-        <location filename="ui_generaledit.h" line="1633"/>
+        <location filename="ui_generaledit.h" line="1993"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mode 4 (AIL GAZ PROF DIR)</translation>
     </message>
@@ -417,7 +424,7 @@ Extra long : bips extra longs.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1236"/>
-        <location filename="ui_generaledit.h" line="1642"/>
+        <location filename="ui_generaledit.h" line="2002"/>
         <source>Mode selection:
 
 Mode 1:
@@ -463,19 +470,19 @@ Manche Droit:  Profondeur, Direction
     </message>
     <message>
         <location filename="generaledit.ui" line="1271"/>
-        <location filename="ui_generaledit.h" line="1632"/>
+        <location filename="ui_generaledit.h" line="1992"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mode 3 (AIL PROF GAZ DIR)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="764"/>
-        <location filename="ui_generaledit.h" line="1944"/>
+        <location filename="generaledit.ui" line="790"/>
+        <location filename="ui_generaledit.h" line="1866"/>
         <source>Reverse Throttle Operation</source>
         <translation>Inversion des gaz</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="125"/>
-        <location filename="ui_generaledit.h" line="1561"/>
+        <location filename="ui_generaledit.h" line="1731"/>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
         <translation>Paramètres généraux de l&apos;émetteur.
@@ -483,19 +490,19 @@ Communs à tous les modèles d&apos;une même EEPROM.</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1049"/>
-        <location filename="ui_generaledit.h" line="1701"/>
+        <location filename="ui_generaledit.h" line="1953"/>
         <source>Flash on beep</source>
         <translation>Clignotement avec les bips</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1423"/>
-        <location filename="ui_generaledit.h" line="1582"/>
+        <location filename="generaledit.ui" line="1436"/>
+        <location filename="ui_generaledit.h" line="2077"/>
         <source>Oversample</source>
         <translation>Suréchantillonnage (2048 bits)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1386"/>
-        <location filename="ui_generaledit.h" line="1764"/>
+        <location filename="generaledit.ui" line="1399"/>
+        <location filename="ui_generaledit.h" line="2069"/>
         <source>Battery warning voltage.
 This is the threashhold where the battery warning sounds.
 
@@ -506,20 +513,20 @@ Seuil auquel se déclenche l&apos;alarme de batterie.
 Plage de valeurs: 5v...10v</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2348"/>
-        <location filename="ui_generaledit.h" line="2326"/>
+        <location filename="generaledit.ui" line="2361"/>
+        <location filename="ui_generaledit.h" line="2518"/>
         <source>Calibration</source>
         <translation>Étalonnage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="928"/>
-        <location filename="ui_generaledit.h" line="1819"/>
+        <location filename="generaledit.ui" line="954"/>
+        <location filename="ui_generaledit.h" line="1910"/>
         <source>Stick Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="509"/>
-        <location filename="ui_generaledit.h" line="1813"/>
+        <location filename="generaledit.ui" line="535"/>
+        <location filename="ui_generaledit.h" line="1822"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -528,7 +535,7 @@ Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélection
     </message>
     <message>
         <location filename="generaledit.ui" line="1154"/>
-        <location filename="ui_generaledit.h" line="1779"/>
+        <location filename="ui_generaledit.h" line="1978"/>
         <source>Battery Calibration</source>
         <translation>Étalonnage batterie</translation>
     </message>
@@ -538,13 +545,13 @@ Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélection
     </message>
     <message>
         <location filename="generaledit.ui" line="1035"/>
-        <location filename="ui_generaledit.h" line="1693"/>
+        <location filename="ui_generaledit.h" line="1945"/>
         <source>Count Down to Zero</source>
         <translation>Compte à rebours </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="302"/>
-        <location filename="ui_generaledit.h" line="1720"/>
+        <location filename="generaledit.ui" line="335"/>
+        <location filename="ui_generaledit.h" line="1768"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
         <translation>Si cette valeur est différente de 0, l&apos;appui sur une touche de navigation déclenche le rétroéclairage qui s&apos;éteint après la durée spécifiée (en secondes).</translation>
     </message>
@@ -553,14 +560,14 @@ Indique l&apos;affectation voie / numéro d&apos;entrée pour les présélection
         <translation type="obsolete">Négatif</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="325"/>
-        <location filename="ui_generaledit.h" line="1741"/>
+        <location filename="generaledit.ui" line="358"/>
+        <location filename="ui_generaledit.h" line="1772"/>
         <source>Beeper Mode</source>
         <translation>Réglage des bips</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="432"/>
-        <location filename="ui_generaledit.h" line="1787"/>
+        <location filename="generaledit.ui" line="465"/>
+        <location filename="ui_generaledit.h" line="1803"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Étalonnage batterie:
@@ -568,7 +575,7 @@ Cette valeur est ajoutée à la tension mesurée.Mesurer la tension réelle&apos
     </message>
     <message>
         <location filename="generaledit.ui" line="1018"/>
-        <location filename="ui_generaledit.h" line="1683"/>
+        <location filename="ui_generaledit.h" line="1935"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -581,18 +588,18 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Emet un bip à chaque minute écoulée&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="660"/>
-        <location filename="generaledit.ui" line="690"/>
-        <location filename="generaledit.ui" line="863"/>
-        <location filename="generaledit.ui" line="967"/>
+        <location filename="generaledit.ui" line="686"/>
+        <location filename="generaledit.ui" line="716"/>
+        <location filename="generaledit.ui" line="889"/>
+        <location filename="generaledit.ui" line="993"/>
         <location filename="generaledit.ui" line="1086"/>
-        <location filename="generaledit.ui" line="2324"/>
-        <location filename="ui_generaledit.h" line="1586"/>
-        <location filename="ui_generaledit.h" line="1727"/>
-        <location filename="ui_generaledit.h" line="1821"/>
-        <location filename="ui_generaledit.h" line="1849"/>
-        <location filename="ui_generaledit.h" line="1865"/>
-        <location filename="ui_generaledit.h" line="2191"/>
+        <location filename="generaledit.ui" line="2337"/>
+        <location filename="ui_generaledit.h" line="1828"/>
+        <location filename="ui_generaledit.h" line="1844"/>
+        <location filename="ui_generaledit.h" line="1888"/>
+        <location filename="ui_generaledit.h" line="1920"/>
+        <location filename="ui_generaledit.h" line="1958"/>
+        <location filename="ui_generaledit.h" line="2370"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -618,7 +625,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="1261"/>
-        <location filename="ui_generaledit.h" line="1630"/>
+        <location filename="ui_generaledit.h" line="1990"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mode 1 (DIR PROF GAZ AIL)</translation>
     </message>
@@ -627,208 +634,208 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">0 - Silence</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="996"/>
-        <location filename="ui_generaledit.h" line="1623"/>
+        <location filename="generaledit.ui" line="262"/>
+        <location filename="ui_generaledit.h" line="1749"/>
         <source>Channel Order (For Templates)</source>
         <translation>Ordre des voies par défaut</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="249"/>
-        <location filename="ui_generaledit.h" line="1578"/>
+        <location filename="ui_generaledit.h" line="1748"/>
         <source>Switch Startup Warning</source>
         <translation>Alerte interrupteurs</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="225"/>
-        <location filename="ui_generaledit.h" line="1566"/>
+        <location filename="ui_generaledit.h" line="1745"/>
         <source>Show Splash Screen on Startup</source>
         <translation>Afficher l&apos;écran de démarrage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="814"/>
-        <location filename="generaledit.ui" line="817"/>
-        <location filename="ui_generaledit.h" line="1568"/>
-        <location filename="ui_generaledit.h" line="1571"/>
+        <location filename="generaledit.ui" line="840"/>
+        <location filename="generaledit.ui" line="843"/>
+        <location filename="ui_generaledit.h" line="1872"/>
+        <location filename="ui_generaledit.h" line="1875"/>
         <source>Show splash screen on startup</source>
         <translation>Affiche l&apos;écran d&apos;accueil au démarrage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="683"/>
-        <location filename="ui_generaledit.h" line="1847"/>
+        <location filename="generaledit.ui" line="709"/>
+        <location filename="ui_generaledit.h" line="1842"/>
         <source>Alarm Warning</source>
         <translation>Alerte mode silencieux</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1463"/>
         <location filename="generaledit.ui" line="1531"/>
-        <location filename="ui_generaledit.h" line="1602"/>
-        <location filename="ui_generaledit.h" line="1677"/>
+        <location filename="ui_generaledit.h" line="2082"/>
+        <location filename="ui_generaledit.h" line="2097"/>
         <source>Quiet</source>
         <translation>Mode silencieux</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1473"/>
         <location filename="generaledit.ui" line="1541"/>
-        <location filename="ui_generaledit.h" line="1604"/>
-        <location filename="ui_generaledit.h" line="1679"/>
+        <location filename="ui_generaledit.h" line="2084"/>
+        <location filename="ui_generaledit.h" line="2099"/>
         <source>No Keys</source>
         <translation>Touches silencieuses</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="838"/>
+        <location filename="generaledit.ui" line="864"/>
         <location filename="generaledit.ui" line="1497"/>
-        <location filename="ui_generaledit.h" line="1667"/>
-        <location filename="ui_generaledit.h" line="1708"/>
+        <location filename="ui_generaledit.h" line="1882"/>
+        <location filename="ui_generaledit.h" line="2091"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="843"/>
+        <location filename="generaledit.ui" line="869"/>
         <location filename="generaledit.ui" line="1502"/>
-        <location filename="ui_generaledit.h" line="1668"/>
-        <location filename="ui_generaledit.h" line="1709"/>
+        <location filename="ui_generaledit.h" line="1883"/>
+        <location filename="ui_generaledit.h" line="2092"/>
         <source>Long</source>
         <translation>Long</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2741"/>
-        <location filename="ui_generaledit.h" line="2284"/>
+        <location filename="generaledit.ui" line="2710"/>
+        <location filename="ui_generaledit.h" line="2444"/>
         <source>PPM Multiplier</source>
         <translation>Coeff. multiplicateur PPM</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="266"/>
-        <location filename="ui_generaledit.h" line="1627"/>
+        <location filename="generaledit.ui" line="299"/>
+        <location filename="ui_generaledit.h" line="1755"/>
         <source>Owner Name</source>
         <translation>Nom du propriétaire</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1190"/>
-        <location filename="generaledit.ui" line="1765"/>
-        <location filename="generaledit.ui" line="1867"/>
-        <location filename="generaledit.ui" line="2008"/>
-        <location filename="generaledit.ui" line="2052"/>
-        <location filename="ui_generaledit.h" line="1934"/>
-        <location filename="ui_generaledit.h" line="1970"/>
-        <location filename="ui_generaledit.h" line="2023"/>
-        <location filename="ui_generaledit.h" line="2098"/>
-        <location filename="ui_generaledit.h" line="2120"/>
+        <location filename="generaledit.ui" line="1203"/>
+        <location filename="generaledit.ui" line="1778"/>
+        <location filename="generaledit.ui" line="1880"/>
+        <location filename="generaledit.ui" line="2021"/>
+        <location filename="generaledit.ui" line="2065"/>
+        <location filename="ui_generaledit.h" line="1983"/>
+        <location filename="ui_generaledit.h" line="2149"/>
+        <location filename="ui_generaledit.h" line="2202"/>
+        <location filename="ui_generaledit.h" line="2277"/>
+        <location filename="ui_generaledit.h" line="2299"/>
         <source>Off</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1195"/>
-        <location filename="ui_generaledit.h" line="1935"/>
+        <location filename="generaledit.ui" line="1208"/>
+        <location filename="ui_generaledit.h" line="1984"/>
         <source>Switches Up</source>
         <translation>Inters vers le haut</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1200"/>
-        <location filename="ui_generaledit.h" line="1936"/>
+        <location filename="generaledit.ui" line="1213"/>
+        <location filename="ui_generaledit.h" line="1985"/>
         <source>Switches Down</source>
         <translation>Inters vers le bas</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1689"/>
-        <location filename="ui_generaledit.h" line="2170"/>
+        <location filename="generaledit.ui" line="1702"/>
+        <location filename="ui_generaledit.h" line="2349"/>
         <source>Trainer</source>
         <translation>Ecolage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1742"/>
-        <location filename="generaledit.ui" line="2799"/>
-        <location filename="ui_generaledit.h" line="1967"/>
-        <location filename="ui_generaledit.h" line="2285"/>
+        <location filename="generaledit.ui" line="1755"/>
+        <location filename="generaledit.ui" line="2441"/>
+        <location filename="ui_generaledit.h" line="2146"/>
+        <location filename="ui_generaledit.h" line="2395"/>
         <source>PPM 1</source>
         <translation>PPM 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1770"/>
-        <location filename="generaledit.ui" line="1872"/>
-        <location filename="generaledit.ui" line="2013"/>
-        <location filename="generaledit.ui" line="2057"/>
-        <location filename="ui_generaledit.h" line="1971"/>
-        <location filename="ui_generaledit.h" line="2024"/>
-        <location filename="ui_generaledit.h" line="2099"/>
-        <location filename="ui_generaledit.h" line="2121"/>
+        <location filename="generaledit.ui" line="1783"/>
+        <location filename="generaledit.ui" line="1885"/>
+        <location filename="generaledit.ui" line="2026"/>
+        <location filename="generaledit.ui" line="2070"/>
+        <location filename="ui_generaledit.h" line="2150"/>
+        <location filename="ui_generaledit.h" line="2203"/>
+        <location filename="ui_generaledit.h" line="2278"/>
+        <location filename="ui_generaledit.h" line="2300"/>
         <source>+=</source>
         <translation>+=</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1775"/>
-        <location filename="generaledit.ui" line="1877"/>
-        <location filename="generaledit.ui" line="2018"/>
-        <location filename="generaledit.ui" line="2062"/>
-        <location filename="ui_generaledit.h" line="1972"/>
-        <location filename="ui_generaledit.h" line="2025"/>
-        <location filename="ui_generaledit.h" line="2100"/>
-        <location filename="ui_generaledit.h" line="2122"/>
+        <location filename="generaledit.ui" line="1788"/>
+        <location filename="generaledit.ui" line="1890"/>
+        <location filename="generaledit.ui" line="2031"/>
+        <location filename="generaledit.ui" line="2075"/>
+        <location filename="ui_generaledit.h" line="2151"/>
+        <location filename="ui_generaledit.h" line="2204"/>
+        <location filename="ui_generaledit.h" line="2279"/>
+        <location filename="ui_generaledit.h" line="2301"/>
         <source>:=</source>
         <translation>:=</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1799"/>
-        <location filename="generaledit.ui" line="1901"/>
-        <location filename="generaledit.ui" line="1940"/>
-        <location filename="generaledit.ui" line="2086"/>
-        <location filename="ui_generaledit.h" line="1991"/>
-        <location filename="ui_generaledit.h" line="2044"/>
-        <location filename="ui_generaledit.h" line="2066"/>
-        <location filename="ui_generaledit.h" line="2141"/>
+        <location filename="generaledit.ui" line="1812"/>
+        <location filename="generaledit.ui" line="1914"/>
+        <location filename="generaledit.ui" line="1953"/>
+        <location filename="generaledit.ui" line="2099"/>
+        <location filename="ui_generaledit.h" line="2170"/>
+        <location filename="ui_generaledit.h" line="2223"/>
+        <location filename="ui_generaledit.h" line="2245"/>
+        <location filename="ui_generaledit.h" line="2320"/>
         <source>chn1</source>
         <translation>Can. 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1804"/>
-        <location filename="generaledit.ui" line="1906"/>
-        <location filename="generaledit.ui" line="1945"/>
-        <location filename="generaledit.ui" line="2091"/>
-        <location filename="ui_generaledit.h" line="1992"/>
-        <location filename="ui_generaledit.h" line="2045"/>
-        <location filename="ui_generaledit.h" line="2067"/>
-        <location filename="ui_generaledit.h" line="2142"/>
+        <location filename="generaledit.ui" line="1817"/>
+        <location filename="generaledit.ui" line="1919"/>
+        <location filename="generaledit.ui" line="1958"/>
+        <location filename="generaledit.ui" line="2104"/>
+        <location filename="ui_generaledit.h" line="2171"/>
+        <location filename="ui_generaledit.h" line="2224"/>
+        <location filename="ui_generaledit.h" line="2246"/>
+        <location filename="ui_generaledit.h" line="2321"/>
         <source>chn2</source>
         <translation>Can. 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1809"/>
-        <location filename="generaledit.ui" line="1911"/>
-        <location filename="generaledit.ui" line="1950"/>
-        <location filename="generaledit.ui" line="2096"/>
-        <location filename="ui_generaledit.h" line="1993"/>
-        <location filename="ui_generaledit.h" line="2046"/>
-        <location filename="ui_generaledit.h" line="2068"/>
-        <location filename="ui_generaledit.h" line="2143"/>
+        <location filename="generaledit.ui" line="1822"/>
+        <location filename="generaledit.ui" line="1924"/>
+        <location filename="generaledit.ui" line="1963"/>
+        <location filename="generaledit.ui" line="2109"/>
+        <location filename="ui_generaledit.h" line="2172"/>
+        <location filename="ui_generaledit.h" line="2225"/>
+        <location filename="ui_generaledit.h" line="2247"/>
+        <location filename="ui_generaledit.h" line="2322"/>
         <source>chn3</source>
         <translation>Can. 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1814"/>
-        <location filename="generaledit.ui" line="1916"/>
-        <location filename="generaledit.ui" line="1955"/>
-        <location filename="generaledit.ui" line="2101"/>
-        <location filename="ui_generaledit.h" line="1994"/>
-        <location filename="ui_generaledit.h" line="2047"/>
-        <location filename="ui_generaledit.h" line="2069"/>
-        <location filename="ui_generaledit.h" line="2144"/>
+        <location filename="generaledit.ui" line="1827"/>
+        <location filename="generaledit.ui" line="1929"/>
+        <location filename="generaledit.ui" line="1968"/>
+        <location filename="generaledit.ui" line="2114"/>
+        <location filename="ui_generaledit.h" line="2173"/>
+        <location filename="ui_generaledit.h" line="2226"/>
+        <location filename="ui_generaledit.h" line="2248"/>
+        <location filename="ui_generaledit.h" line="2323"/>
         <source>chn4</source>
         <translation>Can. 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1714"/>
-        <location filename="ui_generaledit.h" line="1963"/>
+        <location filename="generaledit.ui" line="1727"/>
+        <location filename="ui_generaledit.h" line="2142"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="795"/>
-        <location filename="ui_generaledit.h" line="1777"/>
+        <location filename="generaledit.ui" line="821"/>
+        <location filename="ui_generaledit.h" line="1870"/>
         <source>Sound Mode</source>
         <translation>Mode Son</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="466"/>
-        <location filename="ui_generaledit.h" line="1793"/>
+        <location filename="generaledit.ui" line="499"/>
+        <location filename="ui_generaledit.h" line="1809"/>
         <source>Beeper</source>
         <translation>Bipeur</translation>
     </message>
@@ -842,45 +849,45 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="generaledit.ui" line="139"/>
-        <location filename="ui_generaledit.h" line="1817"/>
+        <location filename="ui_generaledit.h" line="1734"/>
         <source>Speaker Pitch (spkr only)</source>
         <translation>Tonalité (HP uniquement)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="419"/>
-        <location filename="ui_generaledit.h" line="1778"/>
+        <location filename="generaledit.ui" line="452"/>
+        <location filename="ui_generaledit.h" line="1795"/>
         <source>Pot Scrolling Enable</source>
         <translation>Navigation avec les pots</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1130"/>
-        <location filename="ui_generaledit.h" line="1863"/>
+        <location filename="ui_generaledit.h" line="1975"/>
         <source>Bandgap Measuring Enable</source>
         <translation>Mesure Bandgap</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1137"/>
-        <location filename="ui_generaledit.h" line="1565"/>
+        <location filename="ui_generaledit.h" line="1976"/>
         <source>Show Owner Name on Splash</source>
         <translation>Nom sur l&apos;écran de démarrage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="935"/>
-        <location filename="ui_generaledit.h" line="1702"/>
+        <location filename="generaledit.ui" line="961"/>
+        <location filename="ui_generaledit.h" line="1911"/>
         <source>Telemetry NO DATA Alarm</source>
         <translation>Alarme Pas de télémesure</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1468"/>
-        <location filename="ui_generaledit.h" line="1678"/>
+        <location filename="ui_generaledit.h" line="2083"/>
         <source>Only Alarms</source>
         <translation>Seulement les alarmes</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1478"/>
         <location filename="generaledit.ui" line="1546"/>
-        <location filename="ui_generaledit.h" line="1605"/>
-        <location filename="ui_generaledit.h" line="1680"/>
+        <location filename="ui_generaledit.h" line="2085"/>
+        <location filename="ui_generaledit.h" line="2100"/>
         <source>All</source>
         <translation>Tous</translation>
     </message>
@@ -889,116 +896,116 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Rétroéclairage mouv. sticks</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="361"/>
-        <location filename="ui_generaledit.h" line="1769"/>
+        <location filename="generaledit.ui" line="394"/>
+        <location filename="ui_generaledit.h" line="1787"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="368"/>
-        <location filename="ui_generaledit.h" line="1770"/>
+        <location filename="generaledit.ui" line="401"/>
+        <location filename="ui_generaledit.h" line="1788"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="375"/>
-        <location filename="ui_generaledit.h" line="1771"/>
+        <location filename="generaledit.ui" line="408"/>
+        <location filename="ui_generaledit.h" line="1789"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="382"/>
-        <location filename="ui_generaledit.h" line="1772"/>
+        <location filename="generaledit.ui" line="415"/>
+        <location filename="ui_generaledit.h" line="1790"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="389"/>
-        <location filename="ui_generaledit.h" line="1773"/>
+        <location filename="generaledit.ui" line="422"/>
+        <location filename="ui_generaledit.h" line="1791"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="396"/>
-        <location filename="ui_generaledit.h" line="1774"/>
+        <location filename="generaledit.ui" line="429"/>
+        <location filename="ui_generaledit.h" line="1792"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="403"/>
-        <location filename="ui_generaledit.h" line="1775"/>
+        <location filename="generaledit.ui" line="436"/>
+        <location filename="ui_generaledit.h" line="1793"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="410"/>
-        <location filename="ui_generaledit.h" line="1776"/>
+        <location filename="generaledit.ui" line="443"/>
+        <location filename="ui_generaledit.h" line="1794"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="489"/>
-        <location filename="ui_generaledit.h" line="1798"/>
+        <location filename="generaledit.ui" line="282"/>
+        <location filename="ui_generaledit.h" line="1750"/>
         <source>Beeper Length</source>
         <translation>Durée des bips</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="828"/>
+        <location filename="generaledit.ui" line="854"/>
         <location filename="generaledit.ui" line="1487"/>
-        <location filename="ui_generaledit.h" line="1665"/>
-        <location filename="ui_generaledit.h" line="1706"/>
+        <location filename="ui_generaledit.h" line="1880"/>
+        <location filename="ui_generaledit.h" line="2089"/>
         <source>X-Short</source>
         <translation>X-court</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="833"/>
+        <location filename="generaledit.ui" line="859"/>
         <location filename="generaledit.ui" line="1492"/>
-        <location filename="ui_generaledit.h" line="1666"/>
-        <location filename="ui_generaledit.h" line="1707"/>
+        <location filename="ui_generaledit.h" line="1881"/>
+        <location filename="ui_generaledit.h" line="2090"/>
         <source>Short</source>
         <translation>Court</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="848"/>
+        <location filename="generaledit.ui" line="874"/>
         <location filename="generaledit.ui" line="1507"/>
-        <location filename="ui_generaledit.h" line="1669"/>
-        <location filename="ui_generaledit.h" line="1710"/>
+        <location filename="ui_generaledit.h" line="1884"/>
+        <location filename="ui_generaledit.h" line="2093"/>
         <source>X-Long</source>
         <translation>X-long</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="641"/>
-        <location filename="ui_generaledit.h" line="1818"/>
+        <location filename="generaledit.ui" line="667"/>
+        <location filename="ui_generaledit.h" line="1826"/>
         <source>Haptic Mode</source>
         <translation>Mode du vibreur</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1536"/>
-        <location filename="ui_generaledit.h" line="1603"/>
+        <location filename="ui_generaledit.h" line="2098"/>
         <source>Alarms Only</source>
         <translation>Seulement les Alarmes</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1161"/>
-        <location filename="ui_generaledit.h" line="1712"/>
+        <location filename="generaledit.ui" line="1174"/>
+        <location filename="ui_generaledit.h" line="1979"/>
         <source>Haptic Length</source>
         <translation>Durée vibreur</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="891"/>
-        <location filename="ui_generaledit.h" line="1799"/>
+        <location filename="generaledit.ui" line="917"/>
+        <location filename="ui_generaledit.h" line="1902"/>
         <source>GPS Coordinates</source>
         <translation>Coordonnées GPS</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="75"/>
-        <location filename="ui_generaledit.h" line="1558"/>
+        <location filename="ui_generaledit.h" line="1728"/>
         <source>Store calib. and hw settings in selected profile</source>
         <translation>Sauver étalonnage et réglages hw dans profil</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="88"/>
-        <location filename="ui_generaledit.h" line="1559"/>
+        <location filename="ui_generaledit.h" line="1729"/>
         <source>Retrieve calib. and hw settings from profile</source>
         <translation>Lire étalonnage et réglages hw du profil</translation>
     </message>
@@ -1007,409 +1014,427 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Arrêt rétroéclairage auto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="471"/>
-        <location filename="ui_generaledit.h" line="1794"/>
+        <location filename="generaledit.ui" line="504"/>
+        <location filename="ui_generaledit.h" line="1810"/>
         <source>Speaker</source>
         <translation>Haut-parleur</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="476"/>
-        <location filename="ui_generaledit.h" line="1795"/>
+        <location filename="generaledit.ui" line="509"/>
+        <location filename="ui_generaledit.h" line="1811"/>
         <source>BeeperVoice</source>
         <translation>Bipeur/Voix</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="481"/>
-        <location filename="ui_generaledit.h" line="1796"/>
+        <location filename="generaledit.ui" line="514"/>
+        <location filename="ui_generaledit.h" line="1812"/>
         <source>SpeakerVoice</source>
         <translation>Haut-parleur/Voix</translation>
     </message>
     <message utf8="true">
-        <location filename="generaledit.ui" line="899"/>
-        <location filename="ui_generaledit.h" line="1802"/>
+        <location filename="generaledit.ui" line="925"/>
+        <location filename="ui_generaledit.h" line="1905"/>
         <source>hh° (N/S) mm&apos; ss&apos;&apos;.dd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="904"/>
-        <location filename="ui_generaledit.h" line="1803"/>
+        <location filename="generaledit.ui" line="930"/>
+        <location filename="ui_generaledit.h" line="1906"/>
         <source>NMEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="496"/>
-        <location filename="ui_generaledit.h" line="1805"/>
+        <location filename="generaledit.ui" line="522"/>
+        <location filename="ui_generaledit.h" line="1814"/>
         <source>Timeshift from UTC</source>
         <translation>Décalage horaire (UTC)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="744"/>
-        <location filename="ui_generaledit.h" line="1899"/>
+        <location filename="generaledit.ui" line="770"/>
+        <location filename="ui_generaledit.h" line="1864"/>
         <source>LCD Display Type</source>
         <translation>Type de LCD</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1343"/>
-        <location filename="ui_generaledit.h" line="1902"/>
+        <location filename="ui_generaledit.h" line="2048"/>
         <source>Standard</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1348"/>
-        <location filename="ui_generaledit.h" line="1903"/>
+        <location filename="ui_generaledit.h" line="2049"/>
         <source>Optrex</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="856"/>
-        <location filename="ui_generaledit.h" line="1703"/>
+        <location filename="generaledit.ui" line="882"/>
+        <location filename="ui_generaledit.h" line="1886"/>
         <source>Speaker Volume</source>
         <translation>Volume haut-parleur</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="914"/>
-        <location filename="ui_generaledit.h" line="1846"/>
+        <location filename="generaledit.ui" line="940"/>
+        <location filename="ui_generaledit.h" line="1908"/>
         <source>Haptic Strength</source>
         <translation>Puissance vibreur</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1109"/>
-        <location filename="ui_generaledit.h" line="1905"/>
+        <location filename="ui_generaledit.h" line="1972"/>
         <source>BackLight Brightness</source>
         <translation>Luminosité rétroéclairage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="771"/>
-        <location filename="ui_generaledit.h" line="1943"/>
+        <location filename="generaledit.ui" line="797"/>
+        <location filename="ui_generaledit.h" line="1867"/>
         <source>RotEnc Navigation</source>
         <translation>Navigation avec encodeur</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1123"/>
-        <location filename="ui_generaledit.h" line="1724"/>
+        <location filename="ui_generaledit.h" line="1974"/>
         <source>BackLight  Auto OFF after</source>
         <translation>Durée rétroéclairage</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="713"/>
-        <location filename="ui_generaledit.h" line="1879"/>
+        <location filename="generaledit.ui" line="739"/>
+        <location filename="ui_generaledit.h" line="1858"/>
         <source>BackLight Switch</source>
         <translation>Inter rétroéclairage</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1116"/>
-        <location filename="ui_generaledit.h" line="1907"/>
+        <location filename="ui_generaledit.h" line="1973"/>
         <source>BackLight On Stick Move</source>
         <translation>Rétroéclairage par sticks</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1079"/>
-        <location filename="ui_generaledit.h" line="1908"/>
+        <location filename="ui_generaledit.h" line="1956"/>
         <source>BackLight Invert</source>
         <translation>Inversion du rétroéclairage</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="155"/>
-        <location filename="ui_generaledit.h" line="1919"/>
+        <location filename="ui_generaledit.h" line="1736"/>
         <source>Country Code</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="163"/>
-        <location filename="ui_generaledit.h" line="1922"/>
+        <location filename="ui_generaledit.h" line="1739"/>
         <source>Europe</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="168"/>
-        <location filename="ui_generaledit.h" line="1923"/>
+        <location filename="ui_generaledit.h" line="1740"/>
         <source>Japan</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="173"/>
-        <location filename="ui_generaledit.h" line="1924"/>
+        <location filename="ui_generaledit.h" line="1741"/>
         <source>America</source>
         <translation></translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1658"/>
-        <location filename="ui_generaledit.h" line="1928"/>
+        <location filename="ui_generaledit.h" line="2124"/>
         <source>Metric</source>
         <translation>Métrique</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1663"/>
-        <location filename="ui_generaledit.h" line="1929"/>
+        <location filename="ui_generaledit.h" line="2125"/>
         <source>Imperial</source>
         <translation>Impérial</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1650"/>
-        <location filename="ui_generaledit.h" line="1931"/>
+        <location filename="ui_generaledit.h" line="2121"/>
         <source>Measurement Units</source>
         <translation>Unités</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="190"/>
-        <location filename="ui_generaledit.h" line="1939"/>
+        <location filename="ui_generaledit.h" line="1743"/>
         <source>FrSky Internal Alarm</source>
         <translation>Alarmes FrSky internes</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="232"/>
-        <location filename="ui_generaledit.h" line="1574"/>
+        <location filename="ui_generaledit.h" line="1746"/>
         <source>StickScroll</source>
         <translation>Défilement par manches</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="785"/>
-        <location filename="ui_generaledit.h" line="1941"/>
+        <location filename="generaledit.ui" line="811"/>
+        <location filename="ui_generaledit.h" line="1869"/>
         <source>PPMSim</source>
         <translation>PPMSim</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1067"/>
-        <location filename="ui_generaledit.h" line="1952"/>
+        <location filename="ui_generaledit.h" line="1955"/>
         <source>Voice Language</source>
         <translation>Langue audio</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1144"/>
-        <location filename="ui_generaledit.h" line="1576"/>
+        <location filename="ui_generaledit.h" line="1977"/>
         <source>CrossTrim</source>
         <translation>Trims croisés</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1556"/>
+        <location filename="ui_generaledit.h" line="2117"/>
         <source>Beep volume</source>
         <translation>Volume des bips</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1579"/>
+        <location filename="ui_generaledit.h" line="2118"/>
         <source>Wav volume</source>
         <translation>Volume des fichiers audio</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1602"/>
+        <location filename="ui_generaledit.h" line="2119"/>
         <source>Vario volume</source>
         <translation>Volume du variomètre</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1625"/>
+        <location filename="ui_generaledit.h" line="2120"/>
         <source>Background volume</source>
         <translation>Volume de la musique d&apos;ambiance</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1671"/>
+        <location filename="ui_generaledit.h" line="2127"/>
         <source>FAI Mode</source>
         <translation>Mode FAI</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1678"/>
+        <location filename="ui_generaledit.h" line="2129"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
         <translation>Lorsque le mode FAI est activé, le variomètre ainsi que l&apos;écran et la lecture des valeurs de télémesure sont désactivés. Ce mode ne peut pas être désactivé sur la radio.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1721"/>
-        <location filename="ui_generaledit.h" line="1964"/>
+        <location filename="generaledit.ui" line="1734"/>
+        <location filename="ui_generaledit.h" line="2143"/>
         <source>Input</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1728"/>
-        <location filename="ui_generaledit.h" line="1965"/>
+        <location filename="generaledit.ui" line="1741"/>
+        <location filename="ui_generaledit.h" line="2144"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1735"/>
-        <location filename="ui_generaledit.h" line="1966"/>
+        <location filename="generaledit.ui" line="1748"/>
+        <location filename="ui_generaledit.h" line="2145"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1844"/>
-        <location filename="generaledit.ui" line="2882"/>
-        <location filename="ui_generaledit.h" line="2020"/>
-        <location filename="ui_generaledit.h" line="2322"/>
+        <location filename="generaledit.ui" line="1857"/>
+        <location filename="generaledit.ui" line="2818"/>
+        <location filename="ui_generaledit.h" line="2199"/>
+        <location filename="ui_generaledit.h" line="2481"/>
         <source>PPM 2</source>
         <translation>PPM 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1985"/>
-        <location filename="generaledit.ui" line="2889"/>
-        <location filename="ui_generaledit.h" line="2095"/>
-        <location filename="ui_generaledit.h" line="2323"/>
+        <location filename="generaledit.ui" line="1998"/>
+        <location filename="generaledit.ui" line="2825"/>
+        <location filename="ui_generaledit.h" line="2274"/>
+        <location filename="ui_generaledit.h" line="2482"/>
         <source>PPM 3</source>
         <translation>PPM 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2029"/>
-        <location filename="generaledit.ui" line="2896"/>
-        <location filename="ui_generaledit.h" line="2117"/>
-        <location filename="ui_generaledit.h" line="2324"/>
+        <location filename="generaledit.ui" line="2042"/>
+        <location filename="generaledit.ui" line="2832"/>
+        <location filename="ui_generaledit.h" line="2296"/>
+        <location filename="ui_generaledit.h" line="2483"/>
         <source>PPM 4</source>
         <translation>PPM 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2145"/>
-        <location filename="ui_generaledit.h" line="2205"/>
+        <location filename="generaledit.ui" line="2158"/>
+        <location filename="ui_generaledit.h" line="2384"/>
         <source>Telemetry</source>
         <translation>Télémesure</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2170"/>
-        <location filename="ui_generaledit.h" line="2171"/>
+        <location filename="generaledit.ui" line="2183"/>
+        <location filename="ui_generaledit.h" line="2350"/>
         <source>RSSI Alarm 1</source>
         <translation>Alarme RSSI 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2214"/>
-        <location filename="generaledit.ui" line="2289"/>
-        <location filename="ui_generaledit.h" line="2175"/>
-        <location filename="ui_generaledit.h" line="2184"/>
+        <location filename="generaledit.ui" line="2227"/>
+        <location filename="generaledit.ui" line="2302"/>
+        <location filename="ui_generaledit.h" line="2354"/>
+        <location filename="ui_generaledit.h" line="2363"/>
         <source>----</source>
         <translation>----</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2219"/>
-        <location filename="generaledit.ui" line="2294"/>
-        <location filename="ui_generaledit.h" line="2176"/>
-        <location filename="ui_generaledit.h" line="2185"/>
+        <location filename="generaledit.ui" line="2232"/>
+        <location filename="generaledit.ui" line="2307"/>
+        <location filename="ui_generaledit.h" line="2355"/>
+        <location filename="ui_generaledit.h" line="2364"/>
         <source>Yellow</source>
         <translation>Jaune</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2224"/>
-        <location filename="generaledit.ui" line="2299"/>
-        <location filename="ui_generaledit.h" line="2177"/>
-        <location filename="ui_generaledit.h" line="2186"/>
+        <location filename="generaledit.ui" line="2237"/>
+        <location filename="generaledit.ui" line="2312"/>
+        <location filename="ui_generaledit.h" line="2356"/>
+        <location filename="ui_generaledit.h" line="2365"/>
         <source>Orange</source>
         <translation>Orange</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2229"/>
-        <location filename="generaledit.ui" line="2304"/>
-        <location filename="ui_generaledit.h" line="2178"/>
-        <location filename="ui_generaledit.h" line="2187"/>
+        <location filename="generaledit.ui" line="2242"/>
+        <location filename="generaledit.ui" line="2317"/>
+        <location filename="ui_generaledit.h" line="2357"/>
+        <location filename="ui_generaledit.h" line="2366"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2245"/>
-        <location filename="ui_generaledit.h" line="2180"/>
+        <location filename="generaledit.ui" line="2258"/>
+        <location filename="ui_generaledit.h" line="2359"/>
         <source>RSSI Alarm 2</source>
         <translation>Alarme RSSI 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2314"/>
-        <location filename="ui_generaledit.h" line="2189"/>
+        <location filename="generaledit.ui" line="2327"/>
+        <location filename="ui_generaledit.h" line="2368"/>
         <source>NO DATA Alarm</source>
         <translation>Alarme Pas de télémesure</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2374"/>
-        <location filename="ui_generaledit.h" line="2210"/>
+        <location filename="generaledit.ui" line="2380"/>
+        <location filename="ui_generaledit.h" line="2388"/>
+        <source>POT 4</source>
+        <translation>POT 4</translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2455"/>
+        <location filename="generaledit.ui" line="2999"/>
+        <location filename="ui_generaledit.h" line="2397"/>
+        <location filename="ui_generaledit.h" line="2515"/>
         <source>Negative span</source>
         <translation>Amplitude nég.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2384"/>
-        <location filename="ui_generaledit.h" line="2211"/>
+        <location filename="generaledit.ui" line="2465"/>
+        <location filename="generaledit.ui" line="3009"/>
+        <location filename="ui_generaledit.h" line="2398"/>
+        <location filename="ui_generaledit.h" line="2516"/>
         <source>Mid value</source>
         <translation>Centre</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2394"/>
-        <location filename="ui_generaledit.h" line="2212"/>
+        <location filename="generaledit.ui" line="2475"/>
+        <location filename="generaledit.ui" line="3019"/>
+        <location filename="ui_generaledit.h" line="2399"/>
+        <location filename="ui_generaledit.h" line="2517"/>
         <source>Positive span</source>
         <translation>Amplitude pos.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2404"/>
-        <location filename="ui_generaledit.h" line="2213"/>
+        <location filename="generaledit.ui" line="2485"/>
+        <location filename="ui_generaledit.h" line="2400"/>
         <source>STICK 1</source>
         <translation>MANCHE 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2453"/>
-        <location filename="ui_generaledit.h" line="2223"/>
+        <location filename="generaledit.ui" line="2534"/>
+        <location filename="ui_generaledit.h" line="2410"/>
         <source>STICK 2</source>
         <translation>MANCHE 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2926"/>
-        <location filename="ui_generaledit.h" line="2325"/>
+        <location filename="generaledit.ui" line="2862"/>
+        <location filename="ui_generaledit.h" line="2484"/>
         <source>Current</source>
         <translation>Courant</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2354"/>
-        <location filename="ui_generaledit.h" line="2206"/>
+        <location filename="generaledit.ui" line="2448"/>
+        <location filename="ui_generaledit.h" line="2396"/>
         <source>STICK 3</source>
         <translation>MANCHE 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2538"/>
-        <location filename="ui_generaledit.h" line="2242"/>
+        <location filename="generaledit.ui" line="2619"/>
+        <location filename="ui_generaledit.h" line="2429"/>
         <source>STICK 4</source>
         <translation>MANCHE 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2587"/>
-        <location filename="ui_generaledit.h" line="2252"/>
+        <location filename="generaledit.ui" line="2421"/>
+        <location filename="ui_generaledit.h" line="2394"/>
         <source>POT 1</source>
         <translation>POT 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2620"/>
-        <location filename="ui_generaledit.h" line="2259"/>
+        <location filename="generaledit.ui" line="2414"/>
+        <location filename="ui_generaledit.h" line="2393"/>
         <source>POT 2</source>
         <translation>POT 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2666"/>
-        <location filename="ui_generaledit.h" line="2269"/>
+        <location filename="generaledit.ui" line="2394"/>
+        <location filename="ui_generaledit.h" line="2389"/>
         <source>POT 3</source>
         <translation>POT 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2712"/>
-        <location filename="ui_generaledit.h" line="2279"/>
+        <location filename="generaledit.ui" line="2681"/>
+        <location filename="ui_generaledit.h" line="2439"/>
         <source>Battery</source>
         <translation>Batterie</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="970"/>
+        <location filename="generaledit.cpp" line="1003"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
 This function cannot be disabled by the radio.
 Are you sure ?</source>
         <translation>Lorsque le mode FAI est activé, le variomètre ainsi que l&apos;écran et la lecture des valeurs de télémesure sont désactivés.\nCe mode ne peut pas être désactivé sur la radio.\nEtes-vous sûr?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1191"/>
-        <location filename="generaledit.cpp" line="1232"/>
+        <location filename="generaledit.cpp" line="1225"/>
+        <location filename="generaledit.cpp" line="1266"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1191"/>
+        <location filename="generaledit.cpp" line="1225"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Données du profil erronnées, l&apos;étalonnage n&apos;a pas été lu</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1232"/>
+        <location filename="generaledit.cpp" line="1266"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Données du profil erronnées, les paramètres hw n&apos;ont pas été lus</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1256"/>
+        <location filename="generaledit.cpp" line="1291"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Voulez-vous stocker l&apos;étalonnage dans le profil %1&lt;br&gt; et écraser l&apos;étalonnage existant?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1288"/>
+        <location filename="generaledit.cpp" line="1322"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Etalonnage et paramètres hw enregistrés avec succès.</translation>
     </message>
@@ -1417,27 +1442,27 @@ Are you sure ?</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1498"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1801"/>
+        <location filename="mainwindow.cpp" line="1808"/>
         <source>Burn</source>
         <translation>Flasher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1549"/>
+        <location filename="mainwindow.cpp" line="1556"/>
         <source>Cu&amp;t</source>
         <translation>C&amp;ouper</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1796"/>
+        <location filename="mainwindow.cpp" line="1803"/>
         <source>Edit</source>
         <translation>Edition</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1759"/>
+        <location filename="mainwindow.cpp" line="1766"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
@@ -1469,24 +1494,24 @@ Are you sure ?</source>
         <location filename="mainwindow.cpp" line="335"/>
         <location filename="mainwindow.cpp" line="347"/>
         <location filename="mainwindow.cpp" line="373"/>
-        <location filename="mainwindow.cpp" line="798"/>
-        <location filename="mainwindow.cpp" line="1953"/>
-        <location filename="mainwindow.cpp" line="1959"/>
-        <location filename="mainwindow.cpp" line="1967"/>
-        <location filename="mainwindow.cpp" line="1990"/>
-        <location filename="mainwindow.cpp" line="1996"/>
+        <location filename="mainwindow.cpp" line="800"/>
+        <location filename="mainwindow.cpp" line="1960"/>
+        <location filename="mainwindow.cpp" line="1966"/>
+        <location filename="mainwindow.cpp" line="1974"/>
+        <location filename="mainwindow.cpp" line="1997"/>
         <location filename="mainwindow.cpp" line="2003"/>
-        <location filename="mainwindow.cpp" line="2011"/>
-        <location filename="mainwindow.cpp" line="2015"/>
+        <location filename="mainwindow.cpp" line="2010"/>
+        <location filename="mainwindow.cpp" line="2018"/>
+        <location filename="mainwindow.cpp" line="2022"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="310"/>
         <location filename="mainwindow.cpp" line="348"/>
-        <location filename="mainwindow.cpp" line="1959"/>
-        <location filename="mainwindow.cpp" line="1967"/>
-        <location filename="mainwindow.cpp" line="2003"/>
+        <location filename="mainwindow.cpp" line="1966"/>
+        <location filename="mainwindow.cpp" line="1974"/>
+        <location filename="mainwindow.cpp" line="2010"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Erreur à l&apos;ouverture du fichier %1:
@@ -1538,284 +1563,284 @@ Are you sure ?</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="799"/>
+        <location filename="mainwindow.cpp" line="801"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Ecriture fichier %1 impossible:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="938"/>
-        <location filename="mainwindow.cpp" line="996"/>
-        <location filename="mainwindow.cpp" line="1048"/>
-        <location filename="mainwindow.cpp" line="1070"/>
-        <location filename="mainwindow.cpp" line="1322"/>
+        <location filename="mainwindow.cpp" line="940"/>
+        <location filename="mainwindow.cpp" line="998"/>
+        <location filename="mainwindow.cpp" line="1050"/>
+        <location filename="mainwindow.cpp" line="1072"/>
+        <location filename="mainwindow.cpp" line="1325"/>
         <source>Taranis radio not found</source>
         <translation>Radio Taranis non détectée</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="938"/>
-        <location filename="mainwindow.cpp" line="996"/>
-        <location filename="mainwindow.cpp" line="1048"/>
-        <location filename="mainwindow.cpp" line="1070"/>
-        <location filename="mainwindow.cpp" line="1322"/>
+        <location filename="mainwindow.cpp" line="940"/>
+        <location filename="mainwindow.cpp" line="998"/>
+        <location filename="mainwindow.cpp" line="1050"/>
+        <location filename="mainwindow.cpp" line="1072"/>
+        <location filename="mainwindow.cpp" line="1325"/>
         <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
         <translation>Impossible de trouver la radio, vérifiez qu&apos;elle est bien sous tension et connectée.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="974"/>
+        <location filename="mainwindow.cpp" line="976"/>
         <source>The file %1
 has not been recognized as a valid EEPROM
 Burn anyway ?</source>
         <translation>Le fichier %1 n&apos;est pas reconnu comme une EEPROM valide. Confirmer le transfert ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="981"/>
-        <location filename="mainwindow.cpp" line="1243"/>
-        <location filename="mainwindow.cpp" line="1290"/>
+        <location filename="mainwindow.cpp" line="983"/>
+        <location filename="mainwindow.cpp" line="1246"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source>Backup is impossible</source>
         <translation>Sauvegarde impossible</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="981"/>
-        <location filename="mainwindow.cpp" line="1243"/>
-        <location filename="mainwindow.cpp" line="1290"/>
+        <location filename="mainwindow.cpp" line="983"/>
+        <location filename="mainwindow.cpp" line="1246"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source>The backup dir set in preferences does not exist</source>
         <translation>Le dossier de sauvegarde configuré dans les préférences n&apos;existe pas</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1001"/>
-        <location filename="mainwindow.cpp" line="1008"/>
-        <location filename="mainwindow.cpp" line="1053"/>
-        <location filename="mainwindow.cpp" line="1060"/>
-        <location filename="mainwindow.cpp" line="1256"/>
-        <location filename="mainwindow.cpp" line="1298"/>
+        <location filename="mainwindow.cpp" line="1003"/>
+        <location filename="mainwindow.cpp" line="1010"/>
+        <location filename="mainwindow.cpp" line="1055"/>
+        <location filename="mainwindow.cpp" line="1062"/>
+        <location filename="mainwindow.cpp" line="1259"/>
+        <location filename="mainwindow.cpp" line="1301"/>
         <source>Backup EEPROM From Tx</source>
         <translation>Sauvegarder l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1024"/>
+        <location filename="mainwindow.cpp" line="1026"/>
         <source>Cannot check eeprom compatibility! Continue anyway?</source>
         <translation>Impossible de vérifier la compatibilité de l&apos;EEPROM! Continuer quand même?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1032"/>
-        <location filename="mainwindow.cpp" line="1035"/>
+        <location filename="mainwindow.cpp" line="1034"/>
+        <location filename="mainwindow.cpp" line="1037"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1032"/>
+        <location filename="mainwindow.cpp" line="1034"/>
         <source>Firmware in radio is of a different family of eeprom written, check file and preferences!</source>
         <translation>Le firmware de la radio n&apos;est pas compatible avec la version de l&apos;EEPROM à flasher, vérifier le fichier et les préférences!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1035"/>
+        <location filename="mainwindow.cpp" line="1037"/>
         <source>Firmware in flash is outdated, please upgrade!</source>
         <translation>Le firmware de la radio est dépassé, veuillez mettre à jour!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1075"/>
+        <location filename="mainwindow.cpp" line="1077"/>
         <source>Write EEPROM To Tx</source>
         <translation>Transférer l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1262"/>
-        <location filename="mainwindow.cpp" line="1305"/>
+        <location filename="mainwindow.cpp" line="1265"/>
+        <location filename="mainwindow.cpp" line="1308"/>
         <source>Write Flash To Tx</source>
         <translation>Flasher l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1268"/>
+        <location filename="mainwindow.cpp" line="1271"/>
         <source>Conversion failed</source>
         <translation>La conversion a échoué</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1268"/>
+        <location filename="mainwindow.cpp" line="1271"/>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
         <translation>Impossible de convertir l&apos;EEPROM pour ce firmware, l&apos;EEPROM d&apos;origine sera utilisée</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1273"/>
+        <location filename="mainwindow.cpp" line="1276"/>
         <source>Restore EEPROM To Tx</source>
         <translation>Restaurer l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1277"/>
+        <location filename="mainwindow.cpp" line="1280"/>
         <source>Restore failed</source>
         <translation>Erreur lors de la restauration</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1277"/>
+        <location filename="mainwindow.cpp" line="1280"/>
         <source>Cannot restore EEProm to TX, original EEProm file can be found at: %1</source>
         <translation>Impossible de restaurer l&apos;EEProm, le fichier sauvagardé se trouve dans : %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1280"/>
+        <location filename="mainwindow.cpp" line="1283"/>
         <source>Flash failed</source>
         <translation>Erreur lors du flash</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1280"/>
+        <location filename="mainwindow.cpp" line="1283"/>
         <source>Cannot flash the TX, original EEProm file can be found at: %1</source>
         <translation>Impossible de flasher l&apos;émetteur, l&apos;EEPROM d&apos;origine se trouve dans : %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1286"/>
         <source>Backup failed</source>
         <translation>Erreur lors de la sauvegarde</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1286"/>
         <source>Cannot backup existing EEProm from TX, Flash process aborted</source>
         <translation>Impossible de sauvegarder l&apos;EEPROM. Flashage annulé</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1463"/>
+        <location filename="mainwindow.cpp" line="1470"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1508"/>
         <source>&amp;loadBackup...</source>
         <translation>c&amp;harger sauvegarde...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1502"/>
+        <location filename="mainwindow.cpp" line="1509"/>
         <source>Load backup from file</source>
         <translation>Charger une sauvegarde à partir du fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1515"/>
+        <location filename="mainwindow.cpp" line="1522"/>
         <source>Lo&amp;gs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1516"/>
+        <location filename="mainwindow.cpp" line="1523"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1517"/>
+        <location filename="mainwindow.cpp" line="1524"/>
         <source>Open log file</source>
         <translation>Ouvrir fichier de log</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1532"/>
+        <location filename="mainwindow.cpp" line="1539"/>
         <source>Compare...</source>
         <translation>Comparer...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1540"/>
         <source>Compare models</source>
         <translation>Comparer les modèles</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1603"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Show fuses dialog</source>
         <translation>Afficher les réglages des fusibles</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1953"/>
+        <location filename="mainwindow.cpp" line="1960"/>
         <source>Unable to find file %1!</source>
         <translation>Fichier %1 introuvable!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1990"/>
-        <location filename="mainwindow.cpp" line="1996"/>
+        <location filename="mainwindow.cpp" line="1997"/>
+        <location filename="mainwindow.cpp" line="2003"/>
         <source>Invalid EEPROM File %1</source>
         <translation>Fichier EEPROM %1 invalide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2011"/>
+        <location filename="mainwindow.cpp" line="2018"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Fichier %1 corrompu:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2015"/>
+        <location filename="mainwindow.cpp" line="2022"/>
         <source>Invalid binary EEPROM File %1</source>
         <translation>Fichier binaire %1 invalide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1568"/>
+        <location filename="mainwindow.cpp" line="1575"/>
         <source>&amp;Write EEPROM To Tx</source>
         <translation>&amp;Transférer l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1710"/>
+        <location filename="mainwindow.cpp" line="1717"/>
         <source>&amp;Burn</source>
         <translation>Fl&amp;asher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1555"/>
+        <location filename="mainwindow.cpp" line="1562"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1705"/>
+        <location filename="mainwindow.cpp" line="1712"/>
         <source>&amp;Edit</source>
         <translation>Éditio&amp;n</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1680"/>
+        <location filename="mainwindow.cpp" line="1687"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1739"/>
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1512"/>
         <source>&amp;Save</source>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1628"/>
+        <location filename="mainwindow.cpp" line="1635"/>
         <source>&amp;Tile</source>
         <translation>&amp;Mosaïque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1543"/>
+        <location filename="mainwindow.cpp" line="1550"/>
         <source>E&amp;xit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1607"/>
+        <location filename="mainwindow.cpp" line="1614"/>
         <source>Alt+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1606"/>
+        <location filename="mainwindow.cpp" line="1613"/>
         <source>&amp;Simulate</source>
         <translation>&amp;Simulation</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1636"/>
+        <location filename="mainwindow.cpp" line="1643"/>
         <source>Ne&amp;xt</source>
         <translation>Sui&amp;vante</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1678"/>
-        <location filename="mainwindow.cpp" line="1776"/>
+        <location filename="mainwindow.cpp" line="1685"/>
+        <location filename="mainwindow.cpp" line="1783"/>
         <source>Firmware Profiles</source>
         <translation>Profils de firmware</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1820"/>
+        <location filename="mainwindow.cpp" line="1827"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1344"/>
+        <location filename="mainwindow.cpp" line="1347"/>
         <source>Read Flash to File</source>
         <translation>Enregistrer la mémoire Flash sous</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1653"/>
+        <location filename="mainwindow.cpp" line="1660"/>
         <source>Show the application&apos;s About box</source>
         <translation>Afficher la fenêtre &quot;A propos&quot; de l&apos;application</translation>
     </message>
@@ -1824,34 +1849,34 @@ Burn anyway ?</source>
         <translation type="obsolete">Fichiers FLASH (*.bin *.hex);;fichiers BIN (*.bin);;fichiers HEX (*.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1460"/>
-        <location filename="mainwindow.cpp" line="1906"/>
-        <location filename="mainwindow.cpp" line="1927"/>
+        <location filename="mainwindow.cpp" line="1467"/>
+        <location filename="mainwindow.cpp" line="1913"/>
+        <location filename="mainwindow.cpp" line="1934"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1652"/>
+        <location filename="mainwindow.cpp" line="1659"/>
         <source>&amp;About</source>
         <translation>&amp;À Propos</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1561"/>
+        <location filename="mainwindow.cpp" line="1568"/>
         <source>&amp;Paste</source>
         <translation>Co&amp;ller</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1612"/>
+        <location filename="mainwindow.cpp" line="1619"/>
         <source>&amp;Print</source>
         <translation>Im&amp;primer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1510"/>
+        <location filename="mainwindow.cpp" line="1517"/>
         <source>Save &amp;As...</source>
         <translation>Enregistrer &amp;Sous...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1633"/>
+        <location filename="mainwindow.cpp" line="1640"/>
         <source>Cascade the windows</source>
         <translation>Disposer les fenêtres en cascade</translation>
     </message>
@@ -1860,12 +1885,12 @@ Burn anyway ?</source>
         <translation type="obsolete">Fichiers EEPROM (*.bin *.hex);;fichiers BIN (*.bin);;fichiers HEX (*.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1590"/>
+        <location filename="mainwindow.cpp" line="1597"/>
         <source>Read Flash memory</source>
         <translation>Lire la mémoire Flash</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1563"/>
+        <location filename="mainwindow.cpp" line="1570"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Coller le contenu du presse-papier à l&apos;emplacement sélectionné</translation>
     </message>
@@ -1874,42 +1899,42 @@ Burn anyway ?</source>
         <translation type="obsolete">Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1498"/>
+        <location filename="mainwindow.cpp" line="1505"/>
         <source>Open an existing file</source>
         <translation>Ouvrir un fichier existant</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1594"/>
+        <location filename="mainwindow.cpp" line="1601"/>
         <source>&amp;Configure...</source>
         <translation>&amp;Configurer AVRDUDE...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1625"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1613"/>
+        <location filename="mainwindow.cpp" line="1620"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1614"/>
+        <location filename="mainwindow.cpp" line="1621"/>
         <source>Print current model.</source>
         <translation>Imprimer les données du modèle sélectionné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1575"/>
+        <location filename="mainwindow.cpp" line="1582"/>
         <source>Read EEPROM from transmitter</source>
         <translation>Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1624"/>
+        <location filename="mainwindow.cpp" line="1631"/>
         <source>Close all the windows</source>
         <translation>Fermer toutes les fenêtres</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1579"/>
+        <location filename="mainwindow.cpp" line="1586"/>
         <source>Write flash memory to transmitter</source>
         <translation>Écrire dans la mémoire Flash de l&apos;émetteur</translation>
     </message>
@@ -1922,7 +1947,7 @@ Burn anyway ?</source>
         <translation type="obsolete">Sélectionner le fichier à flasher</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1394"/>
+        <location filename="mainwindow.cpp" line="1401"/>
         <source>donating</source>
         <translation>don</translation>
     </message>
@@ -1931,17 +1956,17 @@ Burn anyway ?</source>
         <translation type="obsolete">Fichiers HEX (*.hex);;fichiers BIN (*.bin);;fichiers FLASH (*.bin *.hex)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1496"/>
+        <location filename="mainwindow.cpp" line="1503"/>
         <source>&amp;Open...</source>
         <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1500"/>
         <source>Create a new file</source>
         <translation>Créer un nouveau fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1619"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Close the active window</source>
         <translation>Fermer la fenêtre active</translation>
     </message>
@@ -1949,7 +1974,7 @@ Burn anyway ?</source>
         <location filename="mainwindow.cpp" line="134"/>
         <location filename="mainwindow.cpp" line="547"/>
         <location filename="mainwindow.cpp" line="583"/>
-        <location filename="mainwindow.cpp" line="2049"/>
+        <location filename="mainwindow.cpp" line="2056"/>
         <source>File loaded</source>
         <translation>Fichier chargé</translation>
     </message>
@@ -1964,47 +1989,47 @@ Burn anyway ?</source>
         <translation>Fichier sauvegardé</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1656"/>
+        <location filename="mainwindow.cpp" line="1663"/>
         <source>Switch layout direction</source>
         <translation>Inverser l&apos;interface</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1644"/>
+        <location filename="mainwindow.cpp" line="1651"/>
         <source>Move the focus to the previous window</source>
         <translation>Activer la fenêtre précedente</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1642"/>
+        <location filename="mainwindow.cpp" line="1649"/>
         <source>Pre&amp;vious</source>
         <translation>P&amp;récédente</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1552"/>
         <source>Exit the application</source>
         <translation>Quitter l&apos;application</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1578"/>
+        <location filename="mainwindow.cpp" line="1585"/>
         <source>Write Flash memory</source>
         <translation>Écrire la mémoire Flash</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1599"/>
+        <location filename="mainwindow.cpp" line="1606"/>
         <source>List available programmers</source>
         <translation>Lister les programmateurs supportés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1507"/>
+        <location filename="mainwindow.cpp" line="1514"/>
         <source>Save the document to disk</source>
         <translation>Enregistrer sur le disque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1623"/>
+        <location filename="mainwindow.cpp" line="1630"/>
         <source>Close &amp;All</source>
         <translation>Fermer To&amp;ut</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1639"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Cascade</translation>
     </message>
@@ -2013,92 +2038,92 @@ Burn anyway ?</source>
         <translation type="obsolete">Liste les contributeurs à er9x/companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1608"/>
+        <location filename="mainwindow.cpp" line="1615"/>
         <source>Simulate selected model.</source>
         <translation>Simuler le modèle sélectionné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1629"/>
+        <location filename="mainwindow.cpp" line="1636"/>
         <source>Tile the windows</source>
         <translation>Disposer les fenêtres en mosaïque</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1591"/>
+        <location filename="mainwindow.cpp" line="1598"/>
         <source>Read flash memory to transmitter</source>
         <translation>Lire la mémoire Flash de l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1512"/>
+        <location filename="mainwindow.cpp" line="1519"/>
         <source>Save the document under a new name</source>
         <translation>Enregistrer sous un nom différent</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1726"/>
+        <location filename="mainwindow.cpp" line="1733"/>
         <source>&amp;Window</source>
         <translation>Fe&amp;nêtre</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1521"/>
+        <location filename="mainwindow.cpp" line="1528"/>
         <source>Edit general preferences</source>
         <translation>Définir les préférences générales</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1520"/>
+        <location filename="mainwindow.cpp" line="1527"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Préférences...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1396"/>
+        <location filename="mainwindow.cpp" line="1403"/>
         <source>About companion9x</source>
         <translation>À propos de companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1602"/>
+        <location filename="mainwindow.cpp" line="1609"/>
         <source>&amp;Fuses...</source>
         <translation>&amp;Fusibles...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1557"/>
+        <location filename="mainwindow.cpp" line="1564"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Copier la sélection dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1638"/>
+        <location filename="mainwindow.cpp" line="1645"/>
         <source>Move the focus to the next window</source>
         <translation>Activer la fenêtre suivante</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1598"/>
+        <location filename="mainwindow.cpp" line="1605"/>
         <source>&amp;List programmers</source>
         <translation>&amp;Programmateurs supportés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1570"/>
+        <location filename="mainwindow.cpp" line="1577"/>
         <source>Write EEPROM to transmitter</source>
         <translation>Transférer l&apos;EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1551"/>
+        <location filename="mainwindow.cpp" line="1558"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Couper la sélection et la copier dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1574"/>
+        <location filename="mainwindow.cpp" line="1581"/>
         <source>Ctrl+Alt+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1569"/>
+        <location filename="mainwindow.cpp" line="1576"/>
         <source>Ctrl+Alt+W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1595"/>
+        <location filename="mainwindow.cpp" line="1602"/>
         <source>Configure burning software</source>
         <translation>Configurer le logiciel de flashage</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1573"/>
+        <location filename="mainwindow.cpp" line="1580"/>
         <source>&amp;Read EEPROM From Tx</source>
         <translation>&amp;Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
@@ -2107,10 +2132,10 @@ Burn anyway ?</source>
         <translation type="obsolete">Les mises à jour automatiques ne sont pas disponibles sur ce système d&apos;exploitation.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="943"/>
-        <location filename="mainwindow.cpp" line="950"/>
-        <location filename="mainwindow.cpp" line="1327"/>
-        <location filename="mainwindow.cpp" line="1334"/>
+        <location filename="mainwindow.cpp" line="945"/>
+        <location filename="mainwindow.cpp" line="952"/>
+        <location filename="mainwindow.cpp" line="1330"/>
+        <location filename="mainwindow.cpp" line="1337"/>
         <source>Read EEPROM From Tx</source>
         <translation>Charger l&apos;EEPROM de l&apos;émetteur</translation>
     </message>
@@ -2123,47 +2148,47 @@ Burn anyway ?</source>
         <translation type="obsolete">Choisir le fichier FLASH à transmettre à l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1315"/>
+        <location filename="mainwindow.cpp" line="1318"/>
         <source>Read EEPROM memory to File</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur dans un fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1390"/>
+        <location filename="mainwindow.cpp" line="1397"/>
         <source>Version %1 (revision %2), %3</source>
         <translation>Version %1 (révision %2), %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1391"/>
+        <location filename="mainwindow.cpp" line="1398"/>
         <source>The companion9x project was originally forked from eePe</source>
         <translation>Le projet companion9x a été créé à partir de eePe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1537"/>
+        <location filename="mainwindow.cpp" line="1544"/>
         <source>Customize your &amp;TX...</source>
         <translation>&amp;Personnaliser votre émetteur...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1538"/>
+        <location filename="mainwindow.cpp" line="1545"/>
         <source>Customize the splash screen of your TX</source>
         <translation>Personnaliser l&apos;écran de démarrage de votre émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1582"/>
+        <location filename="mainwindow.cpp" line="1589"/>
         <source>Write EEPROM memory from file</source>
         <translation>Transférer un fichier EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1583"/>
+        <location filename="mainwindow.cpp" line="1590"/>
         <source>Write EEPROM memory from file to transmitter</source>
         <translation>Transférer un fichier EEPROM vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1586"/>
+        <location filename="mainwindow.cpp" line="1593"/>
         <source>Read EEPROM memory to file</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur dans un fichier</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1587"/>
+        <location filename="mainwindow.cpp" line="1594"/>
         <source>Read EEPROM memory from transmitter to file</source>
         <translation>Enregistrer l&apos;EEPROM de l&apos;émetteur dans un fichier</translation>
     </message>
@@ -2217,7 +2242,7 @@ Do you want to download it now ?</source>
 Voulez vous la télécharger maintenant ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="971"/>
+        <location filename="mainwindow.cpp" line="973"/>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Transférer %1 dans la mémoire EEPROM de l&apos;émetteur ?</translation>
     </message>
@@ -2226,17 +2251,17 @@ Voulez vous la télécharger maintenant ?</translation>
         <translation type="obsolete">Transférer %1 dans la mémoire FLASH de l&apos;émetteur ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1531"/>
         <source>&amp;Check for updates...</source>
         <translation>Re&amp;chercher des mises à jour...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1525"/>
+        <location filename="mainwindow.cpp" line="1532"/>
         <source>Check for new version of companion9x/er9x</source>
         <translation>Vérifier l&apos;existence d&apos;une nouvelle version de companion9x et du firmware sélectionné</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1389"/>
+        <location filename="mainwindow.cpp" line="1396"/>
         <source>Copyright</source>
         <translation>Copyright</translation>
     </message>
@@ -2245,7 +2270,7 @@ Voulez vous la télécharger maintenant ?</translation>
         <translation type="obsolete">Si vous trouvez ce programme et/ou ce firmware utiles, merci d&apos;apporter votre soutien en effectuant un &lt;a href=&apos;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1657"/>
+        <location filename="mainwindow.cpp" line="1664"/>
         <source>Switch layout Left/Right</source>
         <translation>Inverser l&apos;interface gauche/droite</translation>
     </message>
@@ -2275,7 +2300,7 @@ Voulez vous la télécharger maintenant ?</translation>
         <translation type="obsolete">Affiche le manuel d&apos;utilisation d&apos;ER9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1813"/>
+        <location filename="mainwindow.cpp" line="1820"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
@@ -2327,23 +2352,23 @@ Voulez-vous la télécharger à nouveau ?</translation>
         <translation type="obsolete">Date %1 %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1392"/>
+        <location filename="mainwindow.cpp" line="1399"/>
         <source>If you&apos;ve found this program useful, please support by</source>
         <translation>Si vous trouvez ce programme utile, merci d&apos;apporter votre soutien en effectuant un</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1528"/>
+        <location filename="mainwindow.cpp" line="1535"/>
         <source>Contributors &amp;List...</source>
         <translation>&amp;Liste des contributeurs...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1529"/>
+        <location filename="mainwindow.cpp" line="1536"/>
         <source>Show companion9x contributors list</source>
         <translation>Lister les contributeurs de companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1677"/>
-        <location filename="mainwindow.cpp" line="1766"/>
+        <location filename="mainwindow.cpp" line="1684"/>
+        <location filename="mainwindow.cpp" line="1773"/>
         <source>Recent Files</source>
         <translation>Derniers documents utilisés</translation>
     </message>
@@ -2636,54 +2661,54 @@ Enregistrer les changements ?</translation>
     <name>MixerDialog</name>
     <message>
         <location filename="mixerdialog.ui" line="46"/>
-        <location filename="ui_mixerdialog.h" line="513"/>
+        <location filename="ui_mixerdialog.h" line="500"/>
         <source>Up</source>
         <translation>Haut</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="194"/>
-        <location filename="ui_mixerdialog.h" line="454"/>
+        <location filename="ui_mixerdialog.h" line="560"/>
         <source>ADD</source>
         <translation>Ajouter</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="460"/>
-        <location filename="ui_mixerdialog.h" line="510"/>
+        <location filename="ui_mixerdialog.h" line="606"/>
         <source>Fix Offset</source>
         <translation>Décalage sur la sortie</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="472"/>
-        <location filename="ui_mixerdialog.h" line="469"/>
+        <location filename="ui_mixerdialog.h" line="609"/>
         <source>OFF</source>
         <translation></translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="432"/>
-        <location filename="ui_mixerdialog.h" line="449"/>
+        <location filename="ui_mixerdialog.h" line="602"/>
         <source>Enable FM Trim</source>
         <translation>Trims de phases de vol</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="56"/>
-        <location filename="ui_mixerdialog.h" line="514"/>
+        <location filename="ui_mixerdialog.h" line="501"/>
         <source>Down</source>
         <translation>Bas</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="39"/>
-        <location filename="ui_mixerdialog.h" line="512"/>
+        <location filename="ui_mixerdialog.h" line="499"/>
         <source>Slow</source>
         <translation>Ralenti</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="32"/>
-        <location filename="ui_mixerdialog.h" line="511"/>
+        <location filename="ui_mixerdialog.h" line="498"/>
         <source>Delay</source>
         <translation>Délai</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="133"/>
+        <location filename="mixerdialog.cpp" line="134"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
@@ -2693,7 +2718,7 @@ Enregistrer les changements ?</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="184"/>
-        <location filename="ui_mixerdialog.h" line="459"/>
+        <location filename="ui_mixerdialog.h" line="565"/>
         <source>Multiplexer
 
 This determines how mixer values are added.
@@ -2711,7 +2736,7 @@ Spécifie comment les valeurs de mixage  sont interprétées.
     </message>
     <message>
         <location filename="mixerdialog.ui" line="495"/>
-        <location filename="ui_mixerdialog.h" line="435"/>
+        <location filename="ui_mixerdialog.h" line="619"/>
         <source>The curve used by the mix</source>
         <translation>Courbe utilisée par le mixage</translation>
     </message>
@@ -2719,24 +2744,27 @@ Spécifie comment les valeurs de mixage  sont interprétées.
         <location filename="mixerdialog.ui" line="531"/>
         <location filename="mixerdialog.ui" line="579"/>
         <location filename="mixerdialog.ui" line="628"/>
+        <location filename="ui_mixerdialog.h" line="622"/>
+        <location filename="ui_mixerdialog.h" line="631"/>
+        <location filename="ui_mixerdialog.h" line="639"/>
         <source>GV</source>
         <translation>VG</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="569"/>
-        <location filename="ui_mixerdialog.h" line="440"/>
+        <location filename="ui_mixerdialog.h" line="629"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="564"/>
-        <location filename="ui_mixerdialog.h" line="439"/>
+        <location filename="ui_mixerdialog.h" line="628"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="418"/>
-        <location filename="ui_mixerdialog.h" line="447"/>
+        <location filename="ui_mixerdialog.h" line="600"/>
         <source>Curve/Differential</source>
         <translation>Courbe/Différentiel</translation>
     </message>
@@ -2746,7 +2774,7 @@ Spécifie comment les valeurs de mixage  sont interprétées.
     </message>
     <message>
         <location filename="mixerdialog.ui" line="467"/>
-        <location filename="ui_mixerdialog.h" line="475"/>
+        <location filename="ui_mixerdialog.h" line="615"/>
         <source>Mixer warning.
 Setting this value will cause a beep to be emmitted when this value is active.</source>
         <translation>Alerte de mixage.
@@ -2754,64 +2782,64 @@ Si activée, signale par des bips que le mixage est actif.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="477"/>
-        <location filename="ui_mixerdialog.h" line="470"/>
+        <location filename="ui_mixerdialog.h" line="610"/>
         <source>1 Beep</source>
         <translation>1 Bip</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="482"/>
-        <location filename="ui_mixerdialog.h" line="471"/>
+        <location filename="ui_mixerdialog.h" line="611"/>
         <source>2 Beep</source>
         <translation>2 Bips</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="487"/>
-        <location filename="ui_mixerdialog.h" line="472"/>
+        <location filename="ui_mixerdialog.h" line="612"/>
         <source>3 Beep</source>
         <translation>3 Bips</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="383"/>
-        <location filename="ui_mixerdialog.h" line="442"/>
+        <location filename="ui_mixerdialog.h" line="595"/>
         <source>Multiplex</source>
         <translation>Multiplexage</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="20"/>
-        <location filename="ui_mixerdialog.h" line="428"/>
+        <location filename="ui_mixerdialog.h" line="497"/>
         <source>Dialog</source>
         <translation>Dialogue</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="411"/>
-        <location filename="mixerdialog.cpp" line="107"/>
-        <location filename="mixerdialog.cpp" line="116"/>
-        <location filename="mixerdialog.cpp" line="328"/>
-        <location filename="ui_mixerdialog.h" line="446"/>
+        <location filename="mixerdialog.cpp" line="108"/>
+        <location filename="mixerdialog.cpp" line="117"/>
+        <location filename="mixerdialog.cpp" line="330"/>
+        <location filename="ui_mixerdialog.h" line="599"/>
         <source>Offset</source>
         <translation>Décalage</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="397"/>
-        <location filename="ui_mixerdialog.h" line="444"/>
+        <location filename="ui_mixerdialog.h" line="597"/>
         <source>Source</source>
         <translation>Maître</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="446"/>
-        <location filename="ui_mixerdialog.h" line="451"/>
+        <location filename="ui_mixerdialog.h" line="604"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="404"/>
-        <location filename="ui_mixerdialog.h" line="445"/>
+        <location filename="ui_mixerdialog.h" line="598"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="204"/>
-        <location filename="ui_mixerdialog.h" line="456"/>
+        <location filename="ui_mixerdialog.h" line="562"/>
         <source>REPLACE</source>
         <translation>Remplacer</translation>
     </message>
@@ -2820,10 +2848,10 @@ Si activée, signale par des bips que le mixage est actif.</translation>
         <location filename="mixerdialog.ui" line="538"/>
         <location filename="mixerdialog.ui" line="586"/>
         <location filename="mixerdialog.ui" line="635"/>
-        <location filename="ui_mixerdialog.h" line="499"/>
-        <location filename="ui_mixerdialog.h" line="502"/>
-        <location filename="ui_mixerdialog.h" line="505"/>
-        <location filename="ui_mixerdialog.h" line="508"/>
+        <location filename="ui_mixerdialog.h" line="574"/>
+        <location filename="ui_mixerdialog.h" line="624"/>
+        <location filename="ui_mixerdialog.h" line="633"/>
+        <location filename="ui_mixerdialog.h" line="641"/>
         <source>The source for the mixer</source>
         <translation>La voie maître pour le mixage</translation>
     </message>
@@ -2841,13 +2869,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mixerdialog.ui" line="199"/>
-        <location filename="ui_mixerdialog.h" line="455"/>
+        <location filename="ui_mixerdialog.h" line="561"/>
         <source>MULTIPLY</source>
         <translation>Multiplier</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="611"/>
-        <location filename="ui_mixerdialog.h" line="430"/>
+        <location filename="ui_mixerdialog.h" line="636"/>
         <source>Switch used by the mix.
 If blank then the mix is considered to be &quot;ON&quot; all the time.</source>
         <translation>Interrupteur utilisé par le mixage.
@@ -2855,7 +2883,7 @@ Mixage actif par défaut si non-renseigné.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="376"/>
-        <location filename="ui_mixerdialog.h" line="433"/>
+        <location filename="ui_mixerdialog.h" line="594"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
@@ -2865,7 +2893,7 @@ Mixage actif par défaut si non-renseigné.</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="390"/>
-        <location filename="ui_mixerdialog.h" line="443"/>
+        <location filename="ui_mixerdialog.h" line="596"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
@@ -2874,10 +2902,10 @@ Mixage actif par défaut si non-renseigné.</translation>
         <location filename="mixerdialog.ui" line="95"/>
         <location filename="mixerdialog.ui" line="124"/>
         <location filename="mixerdialog.ui" line="147"/>
-        <location filename="ui_mixerdialog.h" line="516"/>
-        <location filename="ui_mixerdialog.h" line="530"/>
-        <location filename="ui_mixerdialog.h" line="544"/>
-        <location filename="ui_mixerdialog.h" line="558"/>
+        <location filename="ui_mixerdialog.h" line="503"/>
+        <location filename="ui_mixerdialog.h" line="517"/>
+        <location filename="ui_mixerdialog.h" line="531"/>
+        <location filename="ui_mixerdialog.h" line="545"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -2902,38 +2930,38 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Si Ralentissement est différent de 0, la vitesse du mixage sera la valeur spécifiée -&amp;gt; La valeur représente le nombre de secondes nécessaires à la course -100/100.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="16"/>
+        <location filename="mixerdialog.cpp" line="17"/>
         <source>DEST -&gt; X%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="18"/>
+        <location filename="mixerdialog.cpp" line="19"/>
         <source>DEST -&gt; CH%1%2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="104"/>
-        <location filename="mixerdialog.cpp" line="326"/>
+        <location filename="mixerdialog.cpp" line="105"/>
+        <location filename="mixerdialog.cpp" line="328"/>
         <source>FM Trim Value</source>
         <translation>Trim de phase de vol</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="123"/>
+        <location filename="mixerdialog.cpp" line="124"/>
         <source>Rud</source>
         <translation>Dir</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="124"/>
+        <location filename="mixerdialog.cpp" line="125"/>
         <source>Ele</source>
         <translation>Prf</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="125"/>
+        <location filename="mixerdialog.cpp" line="126"/>
         <source>Thr</source>
         <translation>Gaz</translation>
     </message>
     <message>
-        <location filename="mixerdialog.cpp" line="126"/>
+        <location filename="mixerdialog.cpp" line="127"/>
         <source>Ail</source>
         <oldsource>Ale</oldsource>
         <translation>Ail</translation>
@@ -2944,73 +2972,73 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mixerdialog.ui" line="425"/>
-        <location filename="ui_mixerdialog.h" line="448"/>
+        <location filename="ui_mixerdialog.h" line="601"/>
         <source>Include Trim</source>
         <translation>Inclure Trim</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="439"/>
-        <location filename="ui_mixerdialog.h" line="450"/>
+        <location filename="ui_mixerdialog.h" line="603"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="453"/>
-        <location filename="ui_mixerdialog.h" line="479"/>
+        <location filename="ui_mixerdialog.h" line="605"/>
         <source>Include DR/Expo</source>
         <translation>Inclure DR/Expo</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="221"/>
-        <location filename="ui_mixerdialog.h" line="480"/>
+        <location filename="ui_mixerdialog.h" line="576"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="231"/>
-        <location filename="ui_mixerdialog.h" line="481"/>
+        <location filename="ui_mixerdialog.h" line="577"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="241"/>
-        <location filename="ui_mixerdialog.h" line="482"/>
+        <location filename="ui_mixerdialog.h" line="578"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="251"/>
-        <location filename="ui_mixerdialog.h" line="483"/>
+        <location filename="ui_mixerdialog.h" line="579"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="261"/>
-        <location filename="ui_mixerdialog.h" line="484"/>
+        <location filename="ui_mixerdialog.h" line="580"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="271"/>
-        <location filename="ui_mixerdialog.h" line="485"/>
+        <location filename="ui_mixerdialog.h" line="581"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="281"/>
-        <location filename="ui_mixerdialog.h" line="486"/>
+        <location filename="ui_mixerdialog.h" line="582"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="291"/>
-        <location filename="ui_mixerdialog.h" line="487"/>
+        <location filename="ui_mixerdialog.h" line="583"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="301"/>
-        <location filename="ui_mixerdialog.h" line="488"/>
+        <location filename="ui_mixerdialog.h" line="584"/>
         <source>8</source>
         <translation>8</translation>
     </message>
@@ -3022,136 +3050,138 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ModelEdit</name>
     <message>
-        <location filename="modeledit.ui" line="1238"/>
-        <location filename="ui_modeledit.h" line="13206"/>
+        <location filename="modeledit.ui" line="988"/>
+        <location filename="ui_modeledit.h" line="14223"/>
         <source>P1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1245"/>
-        <location filename="ui_modeledit.h" line="13207"/>
+        <location filename="modeledit.ui" line="995"/>
+        <location filename="ui_modeledit.h" line="14224"/>
         <source>P2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1252"/>
-        <location filename="ui_modeledit.h" line="13208"/>
+        <location filename="modeledit.ui" line="1002"/>
+        <location filename="ui_modeledit.h" line="14225"/>
         <source>P3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1545"/>
-        <location filename="modeledit.ui" line="1567"/>
-        <location filename="modeledit.ui" line="1907"/>
-        <location filename="modeledit.ui" line="1945"/>
-        <location filename="modeledit.ui" line="2259"/>
-        <location filename="modeledit.ui" line="2297"/>
-        <location filename="ui_modeledit.h" line="13215"/>
-        <location filename="ui_modeledit.h" line="13217"/>
-        <location filename="ui_modeledit.h" line="13242"/>
-        <location filename="ui_modeledit.h" line="13253"/>
+        <location filename="modeledit.ui" line="1302"/>
+        <location filename="modeledit.ui" line="1324"/>
+        <location filename="modeledit.ui" line="1667"/>
+        <location filename="modeledit.ui" line="1705"/>
+        <location filename="modeledit.ui" line="2022"/>
+        <location filename="modeledit.ui" line="2060"/>
+        <location filename="ui_modeledit.h" line="14262"/>
+        <location filename="ui_modeledit.h" line="14263"/>
+        <location filename="ui_modeledit.h" line="14289"/>
+        <location filename="ui_modeledit.h" line="14291"/>
+        <location filename="ui_modeledit.h" line="14315"/>
+        <location filename="ui_modeledit.h" line="14317"/>
         <source>ch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="658"/>
-        <location filename="modeledit.ui" line="1231"/>
-        <location filename="modeledit.cpp" line="5836"/>
-        <location filename="modeledit.cpp" line="5920"/>
-        <location filename="modeledit.cpp" line="5924"/>
-        <location filename="modeledit.cpp" line="5944"/>
-        <location filename="modeledit.cpp" line="5948"/>
-        <location filename="modeledit.cpp" line="6027"/>
-        <location filename="modeledit.cpp" line="6121"/>
-        <location filename="modeledit.cpp" line="6122"/>
-        <location filename="ui_modeledit.h" line="13180"/>
-        <location filename="ui_modeledit.h" line="13205"/>
+        <location filename="modeledit.ui" line="372"/>
+        <location filename="modeledit.ui" line="981"/>
+        <location filename="modeledit.cpp" line="6223"/>
+        <location filename="modeledit.cpp" line="6307"/>
+        <location filename="modeledit.cpp" line="6311"/>
+        <location filename="modeledit.cpp" line="6331"/>
+        <location filename="modeledit.cpp" line="6335"/>
+        <location filename="modeledit.cpp" line="6414"/>
+        <location filename="modeledit.cpp" line="6508"/>
+        <location filename="modeledit.cpp" line="6509"/>
+        <location filename="ui_modeledit.h" line="14197"/>
+        <location filename="ui_modeledit.h" line="14222"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="648"/>
-        <location filename="modeledit.ui" line="1217"/>
-        <location filename="modeledit.cpp" line="5810"/>
-        <location filename="modeledit.cpp" line="5817"/>
-        <location filename="modeledit.cpp" line="5919"/>
-        <location filename="modeledit.cpp" line="5923"/>
-        <location filename="modeledit.cpp" line="5945"/>
-        <location filename="modeledit.cpp" line="5949"/>
-        <location filename="modeledit.cpp" line="6002"/>
-        <location filename="modeledit.cpp" line="6004"/>
-        <location filename="modeledit.cpp" line="6117"/>
-        <location filename="modeledit.cpp" line="6118"/>
-        <location filename="ui_modeledit.h" line="13179"/>
-        <location filename="ui_modeledit.h" line="13203"/>
+        <location filename="modeledit.ui" line="362"/>
+        <location filename="modeledit.ui" line="967"/>
+        <location filename="modeledit.cpp" line="6197"/>
+        <location filename="modeledit.cpp" line="6204"/>
+        <location filename="modeledit.cpp" line="6306"/>
+        <location filename="modeledit.cpp" line="6310"/>
+        <location filename="modeledit.cpp" line="6332"/>
+        <location filename="modeledit.cpp" line="6336"/>
+        <location filename="modeledit.cpp" line="6389"/>
+        <location filename="modeledit.cpp" line="6391"/>
+        <location filename="modeledit.cpp" line="6504"/>
+        <location filename="modeledit.cpp" line="6505"/>
+        <location filename="ui_modeledit.h" line="14196"/>
+        <location filename="ui_modeledit.h" line="14220"/>
         <source>ELE</source>
         <translation>PROF</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8984"/>
-        <location filename="modeledit.ui" line="9065"/>
-        <location filename="modeledit.ui" line="9114"/>
-        <location filename="modeledit.ui" line="9147"/>
-        <location filename="modeledit.ui" line="9193"/>
-        <location filename="modeledit.ui" line="9207"/>
-        <location filename="modeledit.ui" line="9323"/>
-        <location filename="modeledit.ui" line="9385"/>
-        <location filename="modeledit.ui" line="9431"/>
-        <location filename="modeledit.ui" line="9480"/>
-        <location filename="modeledit.ui" line="9596"/>
-        <location filename="modeledit.ui" line="9610"/>
-        <location filename="modeledit.ui" line="9726"/>
-        <location filename="modeledit.ui" line="9796"/>
-        <location filename="modeledit.ui" line="9877"/>
-        <location filename="modeledit.ui" line="10036"/>
-        <location filename="modeledit.ui" line="10673"/>
-        <location filename="modeledit.ui" line="10687"/>
-        <location filename="modeledit.ui" line="10701"/>
-        <location filename="modeledit.ui" line="10897"/>
-        <location filename="modeledit.ui" line="10943"/>
-        <location filename="modeledit.ui" line="11008"/>
-        <location filename="modeledit.ui" line="11054"/>
-        <location filename="modeledit.ui" line="11221"/>
-        <location filename="modeledit.ui" line="11286"/>
-        <location filename="modeledit.ui" line="11351"/>
-        <location filename="modeledit.ui" line="11416"/>
-        <location filename="modeledit.ui" line="11564"/>
-        <location filename="modeledit.ui" line="11629"/>
-        <location filename="modeledit.ui" line="11694"/>
-        <location filename="modeledit.ui" line="11759"/>
-        <location filename="modeledit.ui" line="11792"/>
-        <location filename="ui_modeledit.h" line="13488"/>
-        <location filename="ui_modeledit.h" line="13493"/>
-        <location filename="ui_modeledit.h" line="13498"/>
-        <location filename="ui_modeledit.h" line="13503"/>
-        <location filename="ui_modeledit.h" line="13508"/>
-        <location filename="ui_modeledit.h" line="13513"/>
-        <location filename="ui_modeledit.h" line="13518"/>
-        <location filename="ui_modeledit.h" line="13523"/>
-        <location filename="ui_modeledit.h" line="13528"/>
-        <location filename="ui_modeledit.h" line="13533"/>
-        <location filename="ui_modeledit.h" line="13538"/>
-        <location filename="ui_modeledit.h" line="13543"/>
-        <location filename="ui_modeledit.h" line="13548"/>
-        <location filename="ui_modeledit.h" line="13555"/>
-        <location filename="ui_modeledit.h" line="13560"/>
-        <location filename="ui_modeledit.h" line="13567"/>
-        <location filename="ui_modeledit.h" line="13592"/>
-        <location filename="ui_modeledit.h" line="13597"/>
-        <location filename="ui_modeledit.h" line="13606"/>
-        <location filename="ui_modeledit.h" line="13611"/>
-        <location filename="ui_modeledit.h" line="13616"/>
-        <location filename="ui_modeledit.h" line="13621"/>
-        <location filename="ui_modeledit.h" line="13626"/>
-        <location filename="ui_modeledit.h" line="13631"/>
-        <location filename="ui_modeledit.h" line="13636"/>
-        <location filename="ui_modeledit.h" line="13641"/>
-        <location filename="ui_modeledit.h" line="13646"/>
-        <location filename="ui_modeledit.h" line="13651"/>
-        <location filename="ui_modeledit.h" line="13656"/>
-        <location filename="ui_modeledit.h" line="13661"/>
-        <location filename="ui_modeledit.h" line="13666"/>
-        <location filename="ui_modeledit.h" line="13671"/>
+        <location filename="modeledit.ui" line="9264"/>
+        <location filename="modeledit.ui" line="9375"/>
+        <location filename="modeledit.ui" line="9442"/>
+        <location filename="modeledit.ui" line="9487"/>
+        <location filename="modeledit.ui" line="9551"/>
+        <location filename="modeledit.ui" line="9571"/>
+        <location filename="modeledit.ui" line="9729"/>
+        <location filename="modeledit.ui" line="9815"/>
+        <location filename="modeledit.ui" line="9879"/>
+        <location filename="modeledit.ui" line="9946"/>
+        <location filename="modeledit.ui" line="10104"/>
+        <location filename="modeledit.ui" line="10124"/>
+        <location filename="modeledit.ui" line="10282"/>
+        <location filename="modeledit.ui" line="10358"/>
+        <location filename="modeledit.ui" line="10469"/>
+        <location filename="modeledit.ui" line="10664"/>
+        <location filename="modeledit.ui" line="11515"/>
+        <location filename="modeledit.ui" line="11535"/>
+        <location filename="modeledit.ui" line="11555"/>
+        <location filename="modeledit.ui" line="11781"/>
+        <location filename="modeledit.ui" line="11845"/>
+        <location filename="modeledit.ui" line="11934"/>
+        <location filename="modeledit.ui" line="11998"/>
+        <location filename="modeledit.ui" line="12225"/>
+        <location filename="modeledit.ui" line="12314"/>
+        <location filename="modeledit.ui" line="12403"/>
+        <location filename="modeledit.ui" line="12492"/>
+        <location filename="modeledit.ui" line="12694"/>
+        <location filename="modeledit.ui" line="12783"/>
+        <location filename="modeledit.ui" line="12872"/>
+        <location filename="modeledit.ui" line="12961"/>
+        <location filename="modeledit.ui" line="13006"/>
+        <location filename="ui_modeledit.h" line="14566"/>
+        <location filename="ui_modeledit.h" line="14571"/>
+        <location filename="ui_modeledit.h" line="14576"/>
+        <location filename="ui_modeledit.h" line="14581"/>
+        <location filename="ui_modeledit.h" line="14586"/>
+        <location filename="ui_modeledit.h" line="14591"/>
+        <location filename="ui_modeledit.h" line="14596"/>
+        <location filename="ui_modeledit.h" line="14601"/>
+        <location filename="ui_modeledit.h" line="14606"/>
+        <location filename="ui_modeledit.h" line="14611"/>
+        <location filename="ui_modeledit.h" line="14616"/>
+        <location filename="ui_modeledit.h" line="14621"/>
+        <location filename="ui_modeledit.h" line="14626"/>
+        <location filename="ui_modeledit.h" line="14633"/>
+        <location filename="ui_modeledit.h" line="14638"/>
+        <location filename="ui_modeledit.h" line="14645"/>
+        <location filename="ui_modeledit.h" line="14670"/>
+        <location filename="ui_modeledit.h" line="14675"/>
+        <location filename="ui_modeledit.h" line="14680"/>
+        <location filename="ui_modeledit.h" line="14689"/>
+        <location filename="ui_modeledit.h" line="14694"/>
+        <location filename="ui_modeledit.h" line="14699"/>
+        <location filename="ui_modeledit.h" line="14704"/>
+        <location filename="ui_modeledit.h" line="14709"/>
+        <location filename="ui_modeledit.h" line="14714"/>
+        <location filename="ui_modeledit.h" line="14719"/>
+        <location filename="ui_modeledit.h" line="14724"/>
+        <location filename="ui_modeledit.h" line="14729"/>
+        <location filename="ui_modeledit.h" line="14734"/>
+        <location filename="ui_modeledit.h" line="14739"/>
+        <location filename="ui_modeledit.h" line="14744"/>
+        <location filename="ui_modeledit.h" line="14749"/>
         <source>INV</source>
         <translation></translation>
     </message>
@@ -3164,140 +3194,140 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">CENTRE</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8979"/>
-        <location filename="modeledit.ui" line="9060"/>
-        <location filename="modeledit.ui" line="9109"/>
-        <location filename="modeledit.ui" line="9142"/>
-        <location filename="modeledit.ui" line="9188"/>
-        <location filename="modeledit.ui" line="9202"/>
-        <location filename="modeledit.ui" line="9318"/>
-        <location filename="modeledit.ui" line="9380"/>
-        <location filename="modeledit.ui" line="9426"/>
-        <location filename="modeledit.ui" line="9475"/>
-        <location filename="modeledit.ui" line="9591"/>
-        <location filename="modeledit.ui" line="9605"/>
-        <location filename="modeledit.ui" line="9721"/>
-        <location filename="modeledit.ui" line="9791"/>
-        <location filename="modeledit.ui" line="9872"/>
-        <location filename="modeledit.ui" line="10031"/>
-        <location filename="modeledit.ui" line="10668"/>
-        <location filename="modeledit.ui" line="10682"/>
-        <location filename="modeledit.ui" line="10696"/>
-        <location filename="modeledit.ui" line="10892"/>
-        <location filename="modeledit.ui" line="10938"/>
-        <location filename="modeledit.ui" line="11003"/>
-        <location filename="modeledit.ui" line="11049"/>
-        <location filename="modeledit.ui" line="11216"/>
-        <location filename="modeledit.ui" line="11281"/>
-        <location filename="modeledit.ui" line="11346"/>
-        <location filename="modeledit.ui" line="11411"/>
-        <location filename="modeledit.ui" line="11559"/>
-        <location filename="modeledit.ui" line="11624"/>
-        <location filename="modeledit.ui" line="11689"/>
-        <location filename="modeledit.ui" line="11754"/>
-        <location filename="modeledit.ui" line="11787"/>
-        <location filename="ui_modeledit.h" line="13487"/>
-        <location filename="ui_modeledit.h" line="13492"/>
-        <location filename="ui_modeledit.h" line="13497"/>
-        <location filename="ui_modeledit.h" line="13502"/>
-        <location filename="ui_modeledit.h" line="13507"/>
-        <location filename="ui_modeledit.h" line="13512"/>
-        <location filename="ui_modeledit.h" line="13517"/>
-        <location filename="ui_modeledit.h" line="13522"/>
-        <location filename="ui_modeledit.h" line="13527"/>
-        <location filename="ui_modeledit.h" line="13532"/>
-        <location filename="ui_modeledit.h" line="13537"/>
-        <location filename="ui_modeledit.h" line="13542"/>
-        <location filename="ui_modeledit.h" line="13547"/>
-        <location filename="ui_modeledit.h" line="13554"/>
-        <location filename="ui_modeledit.h" line="13559"/>
-        <location filename="ui_modeledit.h" line="13566"/>
-        <location filename="ui_modeledit.h" line="13591"/>
-        <location filename="ui_modeledit.h" line="13596"/>
-        <location filename="ui_modeledit.h" line="13605"/>
-        <location filename="ui_modeledit.h" line="13610"/>
-        <location filename="ui_modeledit.h" line="13615"/>
-        <location filename="ui_modeledit.h" line="13620"/>
-        <location filename="ui_modeledit.h" line="13625"/>
-        <location filename="ui_modeledit.h" line="13630"/>
-        <location filename="ui_modeledit.h" line="13635"/>
-        <location filename="ui_modeledit.h" line="13640"/>
-        <location filename="ui_modeledit.h" line="13645"/>
-        <location filename="ui_modeledit.h" line="13650"/>
-        <location filename="ui_modeledit.h" line="13655"/>
-        <location filename="ui_modeledit.h" line="13660"/>
-        <location filename="ui_modeledit.h" line="13665"/>
-        <location filename="ui_modeledit.h" line="13670"/>
+        <location filename="modeledit.ui" line="9259"/>
+        <location filename="modeledit.ui" line="9370"/>
+        <location filename="modeledit.ui" line="9437"/>
+        <location filename="modeledit.ui" line="9482"/>
+        <location filename="modeledit.ui" line="9546"/>
+        <location filename="modeledit.ui" line="9566"/>
+        <location filename="modeledit.ui" line="9724"/>
+        <location filename="modeledit.ui" line="9810"/>
+        <location filename="modeledit.ui" line="9874"/>
+        <location filename="modeledit.ui" line="9941"/>
+        <location filename="modeledit.ui" line="10099"/>
+        <location filename="modeledit.ui" line="10119"/>
+        <location filename="modeledit.ui" line="10277"/>
+        <location filename="modeledit.ui" line="10353"/>
+        <location filename="modeledit.ui" line="10464"/>
+        <location filename="modeledit.ui" line="10659"/>
+        <location filename="modeledit.ui" line="11510"/>
+        <location filename="modeledit.ui" line="11530"/>
+        <location filename="modeledit.ui" line="11550"/>
+        <location filename="modeledit.ui" line="11776"/>
+        <location filename="modeledit.ui" line="11840"/>
+        <location filename="modeledit.ui" line="11929"/>
+        <location filename="modeledit.ui" line="11993"/>
+        <location filename="modeledit.ui" line="12220"/>
+        <location filename="modeledit.ui" line="12309"/>
+        <location filename="modeledit.ui" line="12398"/>
+        <location filename="modeledit.ui" line="12487"/>
+        <location filename="modeledit.ui" line="12689"/>
+        <location filename="modeledit.ui" line="12778"/>
+        <location filename="modeledit.ui" line="12867"/>
+        <location filename="modeledit.ui" line="12956"/>
+        <location filename="modeledit.ui" line="13001"/>
+        <location filename="ui_modeledit.h" line="14565"/>
+        <location filename="ui_modeledit.h" line="14570"/>
+        <location filename="ui_modeledit.h" line="14575"/>
+        <location filename="ui_modeledit.h" line="14580"/>
+        <location filename="ui_modeledit.h" line="14585"/>
+        <location filename="ui_modeledit.h" line="14590"/>
+        <location filename="ui_modeledit.h" line="14595"/>
+        <location filename="ui_modeledit.h" line="14600"/>
+        <location filename="ui_modeledit.h" line="14605"/>
+        <location filename="ui_modeledit.h" line="14610"/>
+        <location filename="ui_modeledit.h" line="14615"/>
+        <location filename="ui_modeledit.h" line="14620"/>
+        <location filename="ui_modeledit.h" line="14625"/>
+        <location filename="ui_modeledit.h" line="14632"/>
+        <location filename="ui_modeledit.h" line="14637"/>
+        <location filename="ui_modeledit.h" line="14644"/>
+        <location filename="ui_modeledit.h" line="14669"/>
+        <location filename="ui_modeledit.h" line="14674"/>
+        <location filename="ui_modeledit.h" line="14679"/>
+        <location filename="ui_modeledit.h" line="14688"/>
+        <location filename="ui_modeledit.h" line="14693"/>
+        <location filename="ui_modeledit.h" line="14698"/>
+        <location filename="ui_modeledit.h" line="14703"/>
+        <location filename="ui_modeledit.h" line="14708"/>
+        <location filename="ui_modeledit.h" line="14713"/>
+        <location filename="ui_modeledit.h" line="14718"/>
+        <location filename="ui_modeledit.h" line="14723"/>
+        <location filename="ui_modeledit.h" line="14728"/>
+        <location filename="ui_modeledit.h" line="14733"/>
+        <location filename="ui_modeledit.h" line="14738"/>
+        <location filename="ui_modeledit.h" line="14743"/>
+        <location filename="ui_modeledit.h" line="14748"/>
         <source>NOR</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="9954"/>
-        <location filename="modeledit.ui" line="10799"/>
-        <location filename="modeledit.ui" line="18559"/>
-        <location filename="modeledit.ui" line="19726"/>
-        <location filename="modeledit.ui" line="20065"/>
-        <location filename="modeledit.ui" line="20516"/>
-        <location filename="ui_modeledit.h" line="13562"/>
-        <location filename="ui_modeledit.h" line="13601"/>
-        <location filename="ui_modeledit.h" line="13865"/>
-        <location filename="ui_modeledit.h" line="13994"/>
-        <location filename="ui_modeledit.h" line="14003"/>
-        <location filename="ui_modeledit.h" line="14024"/>
+        <location filename="modeledit.ui" line="10564"/>
+        <location filename="modeledit.ui" line="11659"/>
+        <location filename="modeledit.ui" line="20287"/>
+        <location filename="modeledit.ui" line="21459"/>
+        <location filename="modeledit.ui" line="21798"/>
+        <location filename="modeledit.ui" line="22249"/>
+        <location filename="ui_modeledit.h" line="14640"/>
+        <location filename="ui_modeledit.h" line="14684"/>
+        <location filename="ui_modeledit.h" line="14964"/>
+        <location filename="ui_modeledit.h" line="15083"/>
+        <location filename="ui_modeledit.h" line="15092"/>
+        <location filename="ui_modeledit.h" line="15113"/>
         <source>Max</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="9777"/>
-        <location filename="modeledit.ui" line="10771"/>
-        <location filename="modeledit.ui" line="18472"/>
-        <location filename="modeledit.ui" line="19706"/>
-        <location filename="modeledit.ui" line="20045"/>
-        <location filename="modeledit.ui" line="20496"/>
-        <location filename="ui_modeledit.h" line="13551"/>
-        <location filename="ui_modeledit.h" line="13600"/>
-        <location filename="ui_modeledit.h" line="13863"/>
-        <location filename="ui_modeledit.h" line="13992"/>
-        <location filename="ui_modeledit.h" line="14001"/>
-        <location filename="ui_modeledit.h" line="14022"/>
+        <location filename="modeledit.ui" line="10333"/>
+        <location filename="modeledit.ui" line="11631"/>
+        <location filename="modeledit.ui" line="20164"/>
+        <location filename="modeledit.ui" line="21439"/>
+        <location filename="modeledit.ui" line="21778"/>
+        <location filename="modeledit.ui" line="22229"/>
+        <location filename="ui_modeledit.h" line="14629"/>
+        <location filename="ui_modeledit.h" line="14683"/>
+        <location filename="ui_modeledit.h" line="14962"/>
+        <location filename="ui_modeledit.h" line="15081"/>
+        <location filename="ui_modeledit.h" line="15090"/>
+        <location filename="ui_modeledit.h" line="15111"/>
         <source>Min</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="638"/>
-        <location filename="modeledit.ui" line="1210"/>
-        <location filename="modeledit.cpp" line="5808"/>
-        <location filename="modeledit.cpp" line="5815"/>
-        <location filename="modeledit.cpp" line="5927"/>
-        <location filename="modeledit.cpp" line="5952"/>
-        <location filename="modeledit.cpp" line="5995"/>
-        <location filename="modeledit.cpp" line="5997"/>
-        <location filename="modeledit.cpp" line="6126"/>
-        <location filename="ui_modeledit.h" line="13178"/>
-        <location filename="ui_modeledit.h" line="13202"/>
+        <location filename="modeledit.ui" line="352"/>
+        <location filename="modeledit.ui" line="960"/>
+        <location filename="modeledit.cpp" line="6195"/>
+        <location filename="modeledit.cpp" line="6202"/>
+        <location filename="modeledit.cpp" line="6314"/>
+        <location filename="modeledit.cpp" line="6339"/>
+        <location filename="modeledit.cpp" line="6382"/>
+        <location filename="modeledit.cpp" line="6384"/>
+        <location filename="modeledit.cpp" line="6513"/>
+        <location filename="ui_modeledit.h" line="14195"/>
+        <location filename="ui_modeledit.h" line="14219"/>
         <source>RUD</source>
         <translation>DIR</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="614"/>
-        <location filename="modeledit.ui" line="1224"/>
-        <location filename="modeledit.cpp" line="5820"/>
-        <location filename="modeledit.cpp" line="5991"/>
-        <location filename="modeledit.cpp" line="6113"/>
-        <location filename="ui_modeledit.h" line="13172"/>
-        <location filename="ui_modeledit.h" line="13204"/>
+        <location filename="modeledit.ui" line="328"/>
+        <location filename="modeledit.ui" line="974"/>
+        <location filename="modeledit.cpp" line="6207"/>
+        <location filename="modeledit.cpp" line="6378"/>
+        <location filename="modeledit.cpp" line="6500"/>
+        <location filename="ui_modeledit.h" line="14189"/>
+        <location filename="ui_modeledit.h" line="14221"/>
         <source>THR</source>
         <translation>GAZ</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5243"/>
-        <location filename="modeledit.cpp" line="5267"/>
+        <location filename="modeledit.cpp" line="5620"/>
+        <location filename="modeledit.cpp" line="5644"/>
         <source>&amp;Add</source>
         <translation>&amp;Ajouter</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5248"/>
-        <location filename="modeledit.cpp" line="5272"/>
+        <location filename="modeledit.cpp" line="5625"/>
+        <location filename="modeledit.cpp" line="5649"/>
         <source>&amp;Cut</source>
         <translation>C&amp;ouper</translation>
     </message>
@@ -3306,78 +3336,79 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">HAUT</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="491"/>
-        <location filename="ui_modeledit.h" line="13165"/>
+        <location filename="modeledit.ui" line="205"/>
+        <location filename="ui_modeledit.h" line="14182"/>
         <source>Fine</source>
         <translation>Fin</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1418"/>
-        <location filename="modeledit.ui" line="1672"/>
-        <location filename="modeledit.ui" line="1988"/>
-        <location filename="ui_modeledit.h" line="13227"/>
-        <location filename="ui_modeledit.h" line="13240"/>
+        <location filename="modeledit.ui" line="1175"/>
+        <location filename="modeledit.ui" line="1429"/>
+        <location filename="modeledit.ui" line="1748"/>
+        <location filename="ui_modeledit.h" line="14250"/>
+        <location filename="ui_modeledit.h" line="14274"/>
+        <location filename="ui_modeledit.h" line="14294"/>
         <source> usec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5247"/>
-        <location filename="modeledit.cpp" line="5271"/>
+        <location filename="modeledit.cpp" line="5624"/>
+        <location filename="modeledit.cpp" line="5648"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5244"/>
-        <location filename="modeledit.cpp" line="5268"/>
+        <location filename="modeledit.cpp" line="5621"/>
+        <location filename="modeledit.cpp" line="5645"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edition</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="33"/>
-        <location filename="ui_modeledit.h" line="13129"/>
+        <location filename="ui_modeledit.h" line="14170"/>
         <source>Simulate</source>
         <translation>Simulation</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5244"/>
-        <location filename="modeledit.cpp" line="5268"/>
+        <location filename="modeledit.cpp" line="5621"/>
+        <location filename="modeledit.cpp" line="5645"/>
         <source>Enter</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8775"/>
-        <location filename="ui_modeledit.h" line="13483"/>
+        <location filename="modeledit.ui" line="9010"/>
+        <location filename="ui_modeledit.h" line="14561"/>
         <source>Mixes</source>
         <translation>Mixages</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="51"/>
-        <location filename="ui_modeledit.h" line="13317"/>
+        <location filename="ui_modeledit.h" line="14395"/>
         <source>Setup</source>
         <translation>Configuration</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="278"/>
-        <location filename="modeledit.ui" line="388"/>
-        <location filename="ui_modeledit.h" line="13139"/>
-        <location filename="ui_modeledit.h" line="13150"/>
+        <location filename="modeledit.ui" line="2127"/>
+        <location filename="modeledit.ui" line="2214"/>
+        <location filename="ui_modeledit.h" line="14321"/>
+        <location filename="ui_modeledit.h" line="14331"/>
         <source>mm:ss</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="464"/>
-        <location filename="ui_modeledit.h" line="13160"/>
+        <location filename="modeledit.ui" line="178"/>
+        <location filename="ui_modeledit.h" line="14177"/>
         <source>Trim Increment</source>
         <translation>Incrément trims</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1619"/>
+        <location filename="modeledit.cpp" line="1664"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Ralentissement(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5249"/>
-        <location filename="modeledit.cpp" line="5273"/>
+        <location filename="modeledit.cpp" line="5626"/>
+        <location filename="modeledit.cpp" line="5650"/>
         <source>&amp;Paste</source>
         <translation>&amp;Coller</translation>
     </message>
@@ -3406,76 +3437,76 @@ Left</source>
 Gauche</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1617"/>
+        <location filename="modeledit.cpp" line="1662"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Délai(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="501"/>
-        <location filename="ui_modeledit.h" line="13167"/>
+        <location filename="modeledit.ui" line="215"/>
+        <location filename="ui_modeledit.h" line="14184"/>
         <source>Coarse</source>
         <translation>Grossier</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5246"/>
-        <location filename="modeledit.cpp" line="5270"/>
+        <location filename="modeledit.cpp" line="5623"/>
+        <location filename="modeledit.cpp" line="5647"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12478"/>
-        <location filename="ui_modeledit.h" line="13755"/>
+        <location filename="modeledit.ui" line="13874"/>
+        <location filename="ui_modeledit.h" line="14854"/>
         <source>Curves</source>
         <translation>Courbes</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20"/>
-        <location filename="ui_modeledit.h" line="13128"/>
+        <location filename="ui_modeledit.h" line="14169"/>
         <source>Dialog</source>
         <translation>Dialogue</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3711"/>
-        <location filename="modeledit.ui" line="9982"/>
-        <location filename="modeledit.ui" line="10827"/>
-        <location filename="ui_modeledit.h" line="13330"/>
-        <location filename="ui_modeledit.h" line="13563"/>
-        <location filename="ui_modeledit.h" line="13602"/>
+        <location filename="modeledit.ui" line="3850"/>
+        <location filename="modeledit.ui" line="10592"/>
+        <location filename="modeledit.ui" line="11687"/>
+        <location filename="ui_modeledit.h" line="14409"/>
+        <location filename="ui_modeledit.h" line="14641"/>
+        <location filename="ui_modeledit.h" line="14685"/>
         <source>Invert</source>
         <translation>Inversion</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="481"/>
-        <location filename="ui_modeledit.h" line="13163"/>
+        <location filename="modeledit.ui" line="195"/>
+        <location filename="ui_modeledit.h" line="14180"/>
         <source>Exponential</source>
         <translation>Exponentiel</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8785"/>
-        <location filename="ui_modeledit.h" line="13692"/>
+        <location filename="modeledit.ui" line="9020"/>
+        <location filename="ui_modeledit.h" line="14770"/>
         <source>Limits</source>
         <translation>Débattements</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="496"/>
-        <location filename="ui_modeledit.h" line="13166"/>
+        <location filename="modeledit.ui" line="210"/>
+        <location filename="ui_modeledit.h" line="14183"/>
         <source>Medium</source>
         <translation>Moyen</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="9749"/>
-        <location filename="modeledit.ui" line="10743"/>
-        <location filename="modeledit.cpp" line="1609"/>
-        <location filename="ui_modeledit.h" line="13550"/>
-        <location filename="ui_modeledit.h" line="13599"/>
+        <location filename="modeledit.ui" line="10305"/>
+        <location filename="modeledit.ui" line="11603"/>
+        <location filename="modeledit.cpp" line="1654"/>
+        <location filename="ui_modeledit.h" line="14628"/>
+        <location filename="ui_modeledit.h" line="14682"/>
         <source>Offset</source>
         <translation>SubTrim</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="286"/>
-        <location filename="modeledit.ui" line="396"/>
-        <location filename="ui_modeledit.h" line="13142"/>
-        <location filename="ui_modeledit.h" line="13153"/>
+        <location filename="modeledit.ui" line="2135"/>
+        <location filename="modeledit.ui" line="2222"/>
+        <location filename="ui_modeledit.h" line="14324"/>
+        <location filename="ui_modeledit.h" line="14334"/>
         <source>Count Down</source>
         <translation>Décroissant</translation>
     </message>
@@ -3484,26 +3515,26 @@ Gauche</translation>
         <translation type="obsolete">Direction</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1460"/>
-        <location filename="ui_modeledit.h" line="13220"/>
-        <location filename="ui_modeledit.h" line="13244"/>
+        <location filename="modeledit.ui" line="1217"/>
+        <location filename="ui_modeledit.h" line="14252"/>
         <source>Pulse Shift (polarity)</source>
         <translation>Modulation</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1514"/>
-        <location filename="modeledit.ui" line="1661"/>
-        <location filename="modeledit.ui" line="2019"/>
-        <location filename="ui_modeledit.h" line="13224"/>
-        <location filename="ui_modeledit.h" line="13260"/>
+        <location filename="modeledit.ui" line="1271"/>
+        <location filename="modeledit.ui" line="1418"/>
+        <location filename="modeledit.ui" line="1779"/>
+        <location filename="ui_modeledit.h" line="14258"/>
+        <location filename="ui_modeledit.h" line="14272"/>
+        <location filename="ui_modeledit.h" line="14298"/>
         <source>Positive</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="291"/>
-        <location filename="modeledit.ui" line="401"/>
-        <location filename="ui_modeledit.h" line="13143"/>
-        <location filename="ui_modeledit.h" line="13154"/>
+        <location filename="modeledit.ui" line="2140"/>
+        <location filename="modeledit.ui" line="2227"/>
+        <location filename="ui_modeledit.h" line="14325"/>
+        <location filename="ui_modeledit.h" line="14335"/>
         <source>Count Up</source>
         <translation>Croissant</translation>
     </message>
@@ -3526,14 +3557,14 @@ Gauche</translation>
         <translation type="obsolete">Ailerons</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="486"/>
-        <location filename="ui_modeledit.h" line="13164"/>
+        <location filename="modeledit.ui" line="200"/>
+        <location filename="ui_modeledit.h" line="14181"/>
         <source>Extra Fine</source>
         <translation>Extra fin</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="118"/>
-        <location filename="ui_modeledit.h" line="13132"/>
+        <location filename="modeledit.ui" line="128"/>
+        <location filename="ui_modeledit.h" line="14174"/>
         <source>Throttle Trim</source>
         <translation>Trim des gaz</translation>
     </message>
@@ -3554,23 +3585,23 @@ Gauche</translation>
         <translation type="obsolete">MANCHE 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2323"/>
-        <location filename="ui_modeledit.h" line="13130"/>
+        <location filename="modeledit.ui" line="2086"/>
+        <location filename="ui_modeledit.h" line="14318"/>
         <source>Throttle Expo</source>
         <translation>Expo des gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1620"/>
+        <location filename="modeledit.cpp" line="1665"/>
         <source> Warn(%1)</source>
         <translation> Alerte(%1)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1869"/>
-        <location filename="modeledit.ui" line="2234"/>
-        <location filename="modeledit.ui" line="18266"/>
-        <location filename="ui_modeledit.h" line="13213"/>
-        <location filename="ui_modeledit.h" line="13246"/>
-        <location filename="ui_modeledit.h" line="13826"/>
+        <location filename="modeledit.ui" line="1626"/>
+        <location filename="modeledit.ui" line="1997"/>
+        <location filename="modeledit.ui" line="19952"/>
+        <location filename="ui_modeledit.h" line="14287"/>
+        <location filename="ui_modeledit.h" line="14313"/>
+        <location filename="ui_modeledit.h" line="14925"/>
         <source>Protocol</source>
         <translation>Codage</translation>
     </message>
@@ -3579,72 +3610,72 @@ Gauche</translation>
         <translation type="obsolete"> Courbe(%1)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="10503"/>
-        <location filename="modeledit.ui" line="12249"/>
-        <location filename="modeledit.ui" line="17581"/>
-        <location filename="ui_modeledit.h" line="13587"/>
-        <location filename="ui_modeledit.h" line="13691"/>
-        <location filename="ui_modeledit.h" line="13803"/>
+        <location filename="modeledit.ui" line="11317"/>
+        <location filename="modeledit.ui" line="13655"/>
+        <location filename="modeledit.ui" line="19245"/>
+        <location filename="ui_modeledit.h" line="14665"/>
+        <location filename="ui_modeledit.h" line="14769"/>
+        <location filename="ui_modeledit.h" line="14902"/>
         <source>Channel</source>
         <translation>Voie</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5246"/>
-        <location filename="modeledit.cpp" line="5270"/>
+        <location filename="modeledit.cpp" line="5623"/>
+        <location filename="modeledit.cpp" line="5647"/>
         <source>&amp;Delete</source>
         <translation>&amp;Supprimer</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12560"/>
-        <location filename="ui_modeledit.h" line="13694"/>
+        <location filename="modeledit.ui" line="14182"/>
+        <location filename="ui_modeledit.h" line="14776"/>
         <source>Curve 1</source>
         <translation>Courbe 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12905"/>
-        <location filename="ui_modeledit.h" line="13710"/>
+        <location filename="modeledit.ui" line="14527"/>
+        <location filename="ui_modeledit.h" line="14792"/>
         <source>Curve 2</source>
         <translation>Courbe 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="13131"/>
-        <location filename="ui_modeledit.h" line="13713"/>
+        <location filename="modeledit.ui" line="14753"/>
+        <location filename="ui_modeledit.h" line="14795"/>
         <source>Curve 3</source>
         <translation>Courbe 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="13357"/>
-        <location filename="ui_modeledit.h" line="13716"/>
+        <location filename="modeledit.ui" line="14979"/>
+        <location filename="ui_modeledit.h" line="14798"/>
         <source>Curve 4</source>
         <translation>Courbe 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="13583"/>
-        <location filename="ui_modeledit.h" line="13719"/>
+        <location filename="modeledit.ui" line="15205"/>
+        <location filename="ui_modeledit.h" line="14801"/>
         <source>Curve 5</source>
         <translation>Courbe 5</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="13809"/>
-        <location filename="ui_modeledit.h" line="13722"/>
+        <location filename="modeledit.ui" line="15431"/>
+        <location filename="ui_modeledit.h" line="14804"/>
         <source>Curve 6</source>
         <translation>Courbe 6</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="14035"/>
-        <location filename="ui_modeledit.h" line="13725"/>
+        <location filename="modeledit.ui" line="15657"/>
+        <location filename="ui_modeledit.h" line="14807"/>
         <source>Curve 7</source>
         <translation>Courbe 7</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="14261"/>
-        <location filename="ui_modeledit.h" line="13728"/>
+        <location filename="modeledit.ui" line="15883"/>
+        <location filename="ui_modeledit.h" line="14810"/>
         <source>Curve 8</source>
         <translation>Courbe 8</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="14487"/>
-        <location filename="ui_modeledit.h" line="13731"/>
+        <location filename="modeledit.ui" line="16109"/>
+        <location filename="ui_modeledit.h" line="14813"/>
         <source>Curve 9</source>
         <translation>Courbe 9</translation>
     </message>
@@ -3661,43 +3692,31 @@ Gauche</translation>
         <translation type="obsolete"> Inter(</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16542"/>
-        <location filename="ui_modeledit.h" line="13765"/>
         <source>CSwitch1</source>
-        <translation>Inter Pers. 1</translation>
+        <translation type="obsolete">Inter Pers. 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16833"/>
-        <location filename="ui_modeledit.h" line="13774"/>
         <source>CSwitch2</source>
-        <translation>Inter Pers. 2</translation>
+        <translation type="obsolete">Inter Pers. 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16814"/>
-        <location filename="ui_modeledit.h" line="13773"/>
         <source>CSwitch3</source>
-        <translation>Inter Pers. 3</translation>
+        <translation type="obsolete">Inter Pers. 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16900"/>
-        <location filename="ui_modeledit.h" line="13777"/>
         <source>CSwitch4</source>
-        <translation>Inter Pers. 4</translation>
+        <translation type="obsolete">Inter Pers. 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16746"/>
-        <location filename="ui_modeledit.h" line="13771"/>
         <source>CSwitch5</source>
-        <translation>Inter Pers. 5</translation>
+        <translation type="obsolete">Inter Pers. 5</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16523"/>
-        <location filename="ui_modeledit.h" line="13763"/>
         <source>CSwitch6</source>
-        <translation>Inter Pers. 6</translation>
+        <translation type="obsolete">Inter Pers. 6</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4976"/>
+        <location filename="modeledit.cpp" line="5353"/>
         <source>Delete Selected Mixes?</source>
         <translation>Supprimer mixages sélectionnés ?</translation>
     </message>
@@ -3706,23 +3725,24 @@ Gauche</translation>
         <translation type="obsolete">Sens du chrono</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1509"/>
-        <location filename="modeledit.ui" line="1656"/>
-        <location filename="modeledit.ui" line="2014"/>
-        <location filename="ui_modeledit.h" line="13223"/>
-        <location filename="ui_modeledit.h" line="13259"/>
+        <location filename="modeledit.ui" line="1266"/>
+        <location filename="modeledit.ui" line="1413"/>
+        <location filename="modeledit.ui" line="1774"/>
+        <location filename="ui_modeledit.h" line="14257"/>
+        <location filename="ui_modeledit.h" line="14271"/>
+        <location filename="ui_modeledit.h" line="14297"/>
         <source>Negative</source>
         <translation>Négative</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="138"/>
-        <location filename="ui_modeledit.h" line="13134"/>
+        <location filename="modeledit.ui" line="2096"/>
+        <location filename="ui_modeledit.h" line="14319"/>
         <source>Model Name</source>
         <translation>Nom du modèle</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="257"/>
-        <location filename="ui_modeledit.h" line="13138"/>
+        <location filename="modeledit.ui" line="155"/>
+        <location filename="ui_modeledit.h" line="14176"/>
         <source>Center beep</source>
         <translation>Bip de centrage</translation>
     </message>
@@ -3731,14 +3751,14 @@ Gauche</translation>
         <translation type="obsolete">Mode du chrono</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16795"/>
-        <location filename="modeledit.ui" line="17366"/>
-        <location filename="modeledit.ui" line="18005"/>
-        <location filename="modeledit.ui" line="18114"/>
-        <location filename="ui_modeledit.h" line="13772"/>
-        <location filename="ui_modeledit.h" line="13794"/>
-        <location filename="ui_modeledit.h" line="13809"/>
-        <location filename="ui_modeledit.h" line="13814"/>
+        <location filename="modeledit.ui" line="18455"/>
+        <location filename="modeledit.ui" line="19026"/>
+        <location filename="modeledit.ui" line="19684"/>
+        <location filename="modeledit.ui" line="19793"/>
+        <location filename="ui_modeledit.h" line="14871"/>
+        <location filename="ui_modeledit.h" line="14893"/>
+        <location filename="ui_modeledit.h" line="14908"/>
+        <location filename="ui_modeledit.h" line="14913"/>
         <source>Function</source>
         <translation>Fonction</translation>
     </message>
@@ -3747,44 +3767,44 @@ Gauche</translation>
         <translation type="obsolete">Courbe %1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="14713"/>
-        <location filename="ui_modeledit.h" line="13734"/>
+        <location filename="modeledit.ui" line="16335"/>
+        <location filename="ui_modeledit.h" line="14816"/>
         <source>Curve 10</source>
         <translation>Courbe 10</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="14939"/>
-        <location filename="ui_modeledit.h" line="13737"/>
+        <location filename="modeledit.ui" line="16561"/>
+        <location filename="ui_modeledit.h" line="14819"/>
         <source>Curve 11</source>
         <translation>Courbe 11</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="15165"/>
-        <location filename="ui_modeledit.h" line="13740"/>
+        <location filename="modeledit.ui" line="16787"/>
+        <location filename="ui_modeledit.h" line="14822"/>
         <source>Curve 12</source>
         <translation>Courbe 12</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="15391"/>
-        <location filename="ui_modeledit.h" line="13743"/>
+        <location filename="modeledit.ui" line="17035"/>
+        <location filename="ui_modeledit.h" line="14825"/>
         <source>Curve 13</source>
         <translation>Courbe 13</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="15617"/>
-        <location filename="ui_modeledit.h" line="13746"/>
+        <location filename="modeledit.ui" line="13955"/>
+        <location filename="ui_modeledit.h" line="14772"/>
         <source>Curve 14</source>
         <translation>Courbe 14</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="15843"/>
-        <location filename="ui_modeledit.h" line="13749"/>
+        <location filename="modeledit.ui" line="17239"/>
+        <location filename="ui_modeledit.h" line="14828"/>
         <source>Curve 15</source>
         <translation>Courbe 15</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16046"/>
-        <location filename="ui_modeledit.h" line="13752"/>
+        <location filename="modeledit.ui" line="17442"/>
+        <location filename="ui_modeledit.h" line="14830"/>
         <source>Curve 16</source>
         <translation>Courbe 16</translation>
     </message>
@@ -3797,11 +3817,12 @@ Gauche</translation>
         <translation type="obsolete"> Décalage(%1%)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1592"/>
-        <location filename="modeledit.ui" line="1932"/>
-        <location filename="modeledit.ui" line="2284"/>
-        <location filename="ui_modeledit.h" line="13214"/>
-        <location filename="ui_modeledit.h" line="13245"/>
+        <location filename="modeledit.ui" line="1349"/>
+        <location filename="modeledit.ui" line="1692"/>
+        <location filename="modeledit.ui" line="2047"/>
+        <location filename="ui_modeledit.h" line="14264"/>
+        <location filename="ui_modeledit.h" line="14290"/>
+        <location filename="ui_modeledit.h" line="14316"/>
         <source>Channels</source>
         <translation>Voies</translation>
     </message>
@@ -3824,122 +3845,116 @@ Right</source>
 Droite</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16504"/>
-        <location filename="modeledit.ui" line="17067"/>
-        <location filename="ui_modeledit.h" line="13762"/>
-        <location filename="ui_modeledit.h" line="13783"/>
+        <location filename="modeledit.ui" line="18164"/>
+        <location filename="modeledit.ui" line="18727"/>
+        <location filename="ui_modeledit.h" line="14862"/>
+        <location filename="ui_modeledit.h" line="14882"/>
         <source>V1</source>
         <translation>V1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16485"/>
-        <location filename="modeledit.ui" line="17048"/>
-        <location filename="ui_modeledit.h" line="13761"/>
-        <location filename="ui_modeledit.h" line="13782"/>
+        <location filename="modeledit.ui" line="18145"/>
+        <location filename="modeledit.ui" line="18708"/>
+        <location filename="ui_modeledit.h" line="14861"/>
+        <location filename="ui_modeledit.h" line="14881"/>
         <source>V2</source>
         <translation>V2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="108"/>
-        <location filename="ui_modeledit.h" line="13131"/>
+        <location filename="modeledit.ui" line="118"/>
+        <location filename="ui_modeledit.h" line="14173"/>
         <source>Extended Limits</source>
         <translation>Débattements étendus</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17545"/>
-        <location filename="ui_modeledit.h" line="13806"/>
+        <location filename="modeledit.ui" line="19209"/>
+        <location filename="ui_modeledit.h" line="14905"/>
         <source>Safety Switches</source>
         <translation>Inters de sécurité</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4428"/>
-        <location filename="modeledit.ui" line="4987"/>
-        <location filename="modeledit.ui" line="5525"/>
-        <location filename="modeledit.ui" line="6056"/>
-        <location filename="modeledit.ui" line="6907"/>
-        <location filename="modeledit.ui" line="7452"/>
-        <location filename="modeledit.ui" line="7698"/>
-        <location filename="modeledit.ui" line="8549"/>
-        <location filename="modeledit.ui" line="17603"/>
-        <location filename="modeledit.ui" line="17989"/>
-        <location filename="modeledit.ui" line="18098"/>
-        <location filename="modeledit.cpp" line="1467"/>
-        <location filename="modeledit.cpp" line="1595"/>
-        <location filename="ui_modeledit.h" line="13356"/>
-        <location filename="ui_modeledit.h" line="13372"/>
-        <location filename="ui_modeledit.h" line="13388"/>
-        <location filename="ui_modeledit.h" line="13404"/>
-        <location filename="ui_modeledit.h" line="13424"/>
-        <location filename="ui_modeledit.h" line="13440"/>
-        <location filename="ui_modeledit.h" line="13452"/>
-        <location filename="ui_modeledit.h" line="13472"/>
-        <location filename="ui_modeledit.h" line="13804"/>
-        <location filename="ui_modeledit.h" line="13808"/>
-        <location filename="ui_modeledit.h" line="13813"/>
+        <location filename="modeledit.ui" line="4567"/>
+        <location filename="modeledit.ui" line="5138"/>
+        <location filename="modeledit.ui" line="5688"/>
+        <location filename="modeledit.ui" line="6231"/>
+        <location filename="modeledit.ui" line="7106"/>
+        <location filename="modeledit.ui" line="7663"/>
+        <location filename="modeledit.ui" line="7909"/>
+        <location filename="modeledit.ui" line="8784"/>
+        <location filename="modeledit.ui" line="19267"/>
+        <location filename="modeledit.ui" line="19668"/>
+        <location filename="modeledit.ui" line="19777"/>
+        <location filename="modeledit.cpp" line="1512"/>
+        <location filename="modeledit.cpp" line="1640"/>
+        <location filename="ui_modeledit.h" line="14432"/>
+        <location filename="ui_modeledit.h" line="14449"/>
+        <location filename="ui_modeledit.h" line="14466"/>
+        <location filename="ui_modeledit.h" line="14480"/>
+        <location filename="ui_modeledit.h" line="14500"/>
+        <location filename="ui_modeledit.h" line="14516"/>
+        <location filename="ui_modeledit.h" line="14528"/>
+        <location filename="ui_modeledit.h" line="14548"/>
+        <location filename="ui_modeledit.h" line="14903"/>
+        <location filename="ui_modeledit.h" line="14907"/>
+        <location filename="ui_modeledit.h" line="14912"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17625"/>
-        <location filename="ui_modeledit.h" line="13805"/>
+        <location filename="modeledit.ui" line="19289"/>
+        <location filename="ui_modeledit.h" line="14904"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5250"/>
-        <location filename="modeledit.cpp" line="5274"/>
+        <location filename="modeledit.cpp" line="5627"/>
+        <location filename="modeledit.cpp" line="5651"/>
         <source>Du&amp;plicate</source>
         <translation>Du&amp;pliquer</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="193"/>
-        <location filename="modeledit.cpp" line="225"/>
-        <location filename="modeledit.cpp" line="5252"/>
-        <location filename="modeledit.cpp" line="5276"/>
+        <location filename="modeledit.cpp" line="194"/>
+        <location filename="modeledit.cpp" line="226"/>
+        <location filename="modeledit.cpp" line="5629"/>
+        <location filename="modeledit.cpp" line="5653"/>
         <source>Move Up</source>
         <translation>Monter</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="195"/>
-        <location filename="modeledit.cpp" line="227"/>
-        <location filename="modeledit.cpp" line="5252"/>
-        <location filename="modeledit.cpp" line="5276"/>
+        <location filename="modeledit.cpp" line="196"/>
+        <location filename="modeledit.cpp" line="228"/>
+        <location filename="modeledit.cpp" line="5629"/>
+        <location filename="modeledit.cpp" line="5653"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Haut</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="196"/>
-        <location filename="modeledit.cpp" line="228"/>
-        <location filename="modeledit.cpp" line="5253"/>
-        <location filename="modeledit.cpp" line="5277"/>
+        <location filename="modeledit.cpp" line="197"/>
+        <location filename="modeledit.cpp" line="229"/>
+        <location filename="modeledit.cpp" line="5630"/>
+        <location filename="modeledit.cpp" line="5654"/>
         <source>Move Down</source>
         <translation>Descendre</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="198"/>
-        <location filename="modeledit.cpp" line="230"/>
-        <location filename="modeledit.cpp" line="5253"/>
-        <location filename="modeledit.cpp" line="5277"/>
+        <location filename="modeledit.cpp" line="199"/>
+        <location filename="modeledit.cpp" line="231"/>
+        <location filename="modeledit.cpp" line="5630"/>
+        <location filename="modeledit.cpp" line="5654"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Bas</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16600"/>
-        <location filename="ui_modeledit.h" line="13767"/>
         <source>CSwitch7</source>
-        <translation>Inter Pers. 7</translation>
+        <translation type="obsolete">Inter Pers. 7</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16571"/>
-        <location filename="ui_modeledit.h" line="13766"/>
         <source>CSwitch8</source>
-        <translation>Inter Pers. 8</translation>
+        <translation type="obsolete">Inter Pers. 8</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16354"/>
-        <location filename="ui_modeledit.h" line="13764"/>
         <source>CSwitch9</source>
-        <translation>Inter Pers. 9</translation>
+        <translation type="obsolete">Inter Pers. 9</translation>
     </message>
     <message>
         <source>CSwitch10</source>
@@ -3954,200 +3969,200 @@ Droite</translation>
         <translation type="obsolete">Inter Pers 12</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3650"/>
-        <location filename="ui_modeledit.h" line="13318"/>
+        <location filename="modeledit.ui" line="3789"/>
+        <location filename="ui_modeledit.h" line="14397"/>
         <source>Swash Type</source>
         <translation>Type de plateau cyclique</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3658"/>
-        <location filename="modeledit.ui" line="18552"/>
-        <location filename="ui_modeledit.h" line="13321"/>
-        <location filename="ui_modeledit.h" line="13864"/>
+        <location filename="modeledit.ui" line="3797"/>
+        <location filename="modeledit.ui" line="20274"/>
+        <location filename="ui_modeledit.h" line="14400"/>
+        <location filename="ui_modeledit.h" line="14963"/>
         <source>Off</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3663"/>
-        <location filename="ui_modeledit.h" line="13322"/>
+        <location filename="modeledit.ui" line="3802"/>
+        <location filename="ui_modeledit.h" line="14401"/>
         <source>120</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3668"/>
-        <location filename="ui_modeledit.h" line="13323"/>
+        <location filename="modeledit.ui" line="3807"/>
+        <location filename="ui_modeledit.h" line="14402"/>
         <source>120X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3673"/>
-        <location filename="ui_modeledit.h" line="13324"/>
+        <location filename="modeledit.ui" line="3812"/>
+        <location filename="ui_modeledit.h" line="14403"/>
         <source>140</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3678"/>
-        <location filename="ui_modeledit.h" line="13325"/>
+        <location filename="modeledit.ui" line="3817"/>
+        <location filename="ui_modeledit.h" line="14404"/>
         <source>90</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3718"/>
-        <location filename="ui_modeledit.h" line="13327"/>
+        <location filename="modeledit.ui" line="3857"/>
+        <location filename="ui_modeledit.h" line="14410"/>
         <source>Collective</source>
         <translation>Source du pas collectif</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4161"/>
-        <location filename="modeledit.ui" line="4785"/>
-        <location filename="modeledit.ui" line="5337"/>
-        <location filename="modeledit.ui" line="5882"/>
-        <location filename="modeledit.ui" line="6427"/>
-        <location filename="modeledit.ui" line="6972"/>
-        <location filename="modeledit.ui" line="7510"/>
-        <location filename="modeledit.ui" line="8062"/>
-        <location filename="modeledit.ui" line="8680"/>
-        <location filename="ui_modeledit.h" line="13342"/>
-        <location filename="ui_modeledit.h" line="13361"/>
-        <location filename="ui_modeledit.h" line="13377"/>
-        <location filename="ui_modeledit.h" line="13393"/>
-        <location filename="ui_modeledit.h" line="13409"/>
-        <location filename="ui_modeledit.h" line="13425"/>
-        <location filename="ui_modeledit.h" line="13441"/>
-        <location filename="ui_modeledit.h" line="13457"/>
-        <location filename="ui_modeledit.h" line="13476"/>
+        <location filename="modeledit.ui" line="4300"/>
+        <location filename="modeledit.ui" line="4936"/>
+        <location filename="modeledit.ui" line="5500"/>
+        <location filename="modeledit.ui" line="6057"/>
+        <location filename="modeledit.ui" line="6614"/>
+        <location filename="modeledit.ui" line="7171"/>
+        <location filename="modeledit.ui" line="7721"/>
+        <location filename="modeledit.ui" line="8285"/>
+        <location filename="modeledit.ui" line="8915"/>
+        <location filename="ui_modeledit.h" line="14420"/>
+        <location filename="ui_modeledit.h" line="14439"/>
+        <location filename="ui_modeledit.h" line="14455"/>
+        <location filename="ui_modeledit.h" line="14471"/>
+        <location filename="ui_modeledit.h" line="14487"/>
+        <location filename="ui_modeledit.h" line="14503"/>
+        <location filename="ui_modeledit.h" line="14519"/>
+        <location filename="ui_modeledit.h" line="14535"/>
+        <location filename="ui_modeledit.h" line="14554"/>
         <source>GVAR1</source>
         <translation>Variable globale VG1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4386"/>
-        <location filename="modeledit.ui" line="4891"/>
-        <location filename="modeledit.ui" line="5443"/>
-        <location filename="modeledit.ui" line="5988"/>
-        <location filename="modeledit.ui" line="6533"/>
-        <location filename="modeledit.ui" line="7078"/>
-        <location filename="modeledit.ui" line="7616"/>
-        <location filename="modeledit.ui" line="8168"/>
-        <location filename="modeledit.ui" line="8746"/>
-        <location filename="ui_modeledit.h" line="13351"/>
-        <location filename="ui_modeledit.h" line="13366"/>
-        <location filename="ui_modeledit.h" line="13382"/>
-        <location filename="ui_modeledit.h" line="13398"/>
-        <location filename="ui_modeledit.h" line="13414"/>
-        <location filename="ui_modeledit.h" line="13430"/>
-        <location filename="ui_modeledit.h" line="13446"/>
-        <location filename="ui_modeledit.h" line="13462"/>
-        <location filename="ui_modeledit.h" line="13479"/>
+        <location filename="modeledit.ui" line="4525"/>
+        <location filename="modeledit.ui" line="5042"/>
+        <location filename="modeledit.ui" line="5606"/>
+        <location filename="modeledit.ui" line="6163"/>
+        <location filename="modeledit.ui" line="6720"/>
+        <location filename="modeledit.ui" line="7277"/>
+        <location filename="modeledit.ui" line="7827"/>
+        <location filename="modeledit.ui" line="8391"/>
+        <location filename="modeledit.ui" line="8981"/>
+        <location filename="ui_modeledit.h" line="14429"/>
+        <location filename="ui_modeledit.h" line="14444"/>
+        <location filename="ui_modeledit.h" line="14460"/>
+        <location filename="ui_modeledit.h" line="14476"/>
+        <location filename="ui_modeledit.h" line="14492"/>
+        <location filename="ui_modeledit.h" line="14508"/>
+        <location filename="ui_modeledit.h" line="14524"/>
+        <location filename="ui_modeledit.h" line="14540"/>
+        <location filename="ui_modeledit.h" line="14557"/>
         <source>Rotary encoder A</source>
         <translation>Encodeur rotatif A</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4192"/>
-        <location filename="modeledit.ui" line="4805"/>
-        <location filename="modeledit.ui" line="5357"/>
-        <location filename="modeledit.ui" line="5902"/>
-        <location filename="modeledit.ui" line="6447"/>
-        <location filename="modeledit.ui" line="6992"/>
-        <location filename="modeledit.ui" line="7530"/>
-        <location filename="modeledit.ui" line="8082"/>
-        <location filename="modeledit.ui" line="8667"/>
-        <location filename="ui_modeledit.h" line="13343"/>
-        <location filename="ui_modeledit.h" line="13362"/>
-        <location filename="ui_modeledit.h" line="13378"/>
-        <location filename="ui_modeledit.h" line="13394"/>
-        <location filename="ui_modeledit.h" line="13410"/>
-        <location filename="ui_modeledit.h" line="13426"/>
-        <location filename="ui_modeledit.h" line="13442"/>
-        <location filename="ui_modeledit.h" line="13458"/>
-        <location filename="ui_modeledit.h" line="13475"/>
+        <location filename="modeledit.ui" line="4331"/>
+        <location filename="modeledit.ui" line="4956"/>
+        <location filename="modeledit.ui" line="5520"/>
+        <location filename="modeledit.ui" line="6077"/>
+        <location filename="modeledit.ui" line="6634"/>
+        <location filename="modeledit.ui" line="7191"/>
+        <location filename="modeledit.ui" line="7741"/>
+        <location filename="modeledit.ui" line="8305"/>
+        <location filename="modeledit.ui" line="8902"/>
+        <location filename="ui_modeledit.h" line="14421"/>
+        <location filename="ui_modeledit.h" line="14440"/>
+        <location filename="ui_modeledit.h" line="14456"/>
+        <location filename="ui_modeledit.h" line="14472"/>
+        <location filename="ui_modeledit.h" line="14488"/>
+        <location filename="ui_modeledit.h" line="14504"/>
+        <location filename="ui_modeledit.h" line="14520"/>
+        <location filename="ui_modeledit.h" line="14536"/>
+        <location filename="ui_modeledit.h" line="14553"/>
         <source>GVAR2</source>
         <translation>Variable globale VG2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4359"/>
-        <location filename="modeledit.ui" line="4901"/>
-        <location filename="modeledit.ui" line="5463"/>
-        <location filename="modeledit.ui" line="6008"/>
-        <location filename="modeledit.ui" line="6553"/>
-        <location filename="modeledit.ui" line="7098"/>
-        <location filename="modeledit.ui" line="7636"/>
-        <location filename="modeledit.ui" line="8188"/>
-        <location filename="modeledit.ui" line="8713"/>
-        <location filename="ui_modeledit.h" line="13350"/>
-        <location filename="ui_modeledit.h" line="13367"/>
-        <location filename="ui_modeledit.h" line="13383"/>
-        <location filename="ui_modeledit.h" line="13399"/>
-        <location filename="ui_modeledit.h" line="13415"/>
-        <location filename="ui_modeledit.h" line="13431"/>
-        <location filename="ui_modeledit.h" line="13447"/>
-        <location filename="ui_modeledit.h" line="13463"/>
-        <location filename="ui_modeledit.h" line="13478"/>
+        <location filename="modeledit.ui" line="4498"/>
+        <location filename="modeledit.ui" line="5052"/>
+        <location filename="modeledit.ui" line="5626"/>
+        <location filename="modeledit.ui" line="6183"/>
+        <location filename="modeledit.ui" line="6740"/>
+        <location filename="modeledit.ui" line="7297"/>
+        <location filename="modeledit.ui" line="7847"/>
+        <location filename="modeledit.ui" line="8411"/>
+        <location filename="modeledit.ui" line="8948"/>
+        <location filename="ui_modeledit.h" line="14428"/>
+        <location filename="ui_modeledit.h" line="14445"/>
+        <location filename="ui_modeledit.h" line="14461"/>
+        <location filename="ui_modeledit.h" line="14477"/>
+        <location filename="ui_modeledit.h" line="14493"/>
+        <location filename="ui_modeledit.h" line="14509"/>
+        <location filename="ui_modeledit.h" line="14525"/>
+        <location filename="ui_modeledit.h" line="14541"/>
+        <location filename="ui_modeledit.h" line="14556"/>
         <source>Rotary encoder B</source>
         <translation>Encodeur rotatif B</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4216"/>
-        <location filename="modeledit.ui" line="4825"/>
-        <location filename="modeledit.ui" line="5377"/>
-        <location filename="modeledit.ui" line="5922"/>
-        <location filename="modeledit.ui" line="6467"/>
-        <location filename="modeledit.ui" line="7012"/>
-        <location filename="modeledit.ui" line="7550"/>
-        <location filename="modeledit.ui" line="8102"/>
-        <location filename="modeledit.ui" line="8697"/>
-        <location filename="ui_modeledit.h" line="13344"/>
-        <location filename="ui_modeledit.h" line="13363"/>
-        <location filename="ui_modeledit.h" line="13379"/>
-        <location filename="ui_modeledit.h" line="13395"/>
-        <location filename="ui_modeledit.h" line="13411"/>
-        <location filename="ui_modeledit.h" line="13427"/>
-        <location filename="ui_modeledit.h" line="13443"/>
-        <location filename="ui_modeledit.h" line="13459"/>
-        <location filename="ui_modeledit.h" line="13477"/>
+        <location filename="modeledit.ui" line="4355"/>
+        <location filename="modeledit.ui" line="4976"/>
+        <location filename="modeledit.ui" line="5540"/>
+        <location filename="modeledit.ui" line="6097"/>
+        <location filename="modeledit.ui" line="6654"/>
+        <location filename="modeledit.ui" line="7211"/>
+        <location filename="modeledit.ui" line="7761"/>
+        <location filename="modeledit.ui" line="8325"/>
+        <location filename="modeledit.ui" line="8932"/>
+        <location filename="ui_modeledit.h" line="14422"/>
+        <location filename="ui_modeledit.h" line="14441"/>
+        <location filename="ui_modeledit.h" line="14457"/>
+        <location filename="ui_modeledit.h" line="14473"/>
+        <location filename="ui_modeledit.h" line="14489"/>
+        <location filename="ui_modeledit.h" line="14505"/>
+        <location filename="ui_modeledit.h" line="14521"/>
+        <location filename="ui_modeledit.h" line="14537"/>
+        <location filename="ui_modeledit.h" line="14555"/>
         <source>GVAR3</source>
         <translation>Variable globale VG3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4233"/>
-        <location filename="modeledit.ui" line="4845"/>
-        <location filename="modeledit.ui" line="5397"/>
-        <location filename="modeledit.ui" line="5942"/>
-        <location filename="modeledit.ui" line="6487"/>
-        <location filename="modeledit.ui" line="7032"/>
-        <location filename="modeledit.ui" line="7570"/>
-        <location filename="modeledit.ui" line="8122"/>
-        <location filename="modeledit.ui" line="8660"/>
-        <location filename="ui_modeledit.h" line="13345"/>
-        <location filename="ui_modeledit.h" line="13364"/>
-        <location filename="ui_modeledit.h" line="13380"/>
-        <location filename="ui_modeledit.h" line="13396"/>
-        <location filename="ui_modeledit.h" line="13412"/>
-        <location filename="ui_modeledit.h" line="13428"/>
-        <location filename="ui_modeledit.h" line="13444"/>
-        <location filename="ui_modeledit.h" line="13460"/>
-        <location filename="ui_modeledit.h" line="13474"/>
+        <location filename="modeledit.ui" line="4372"/>
+        <location filename="modeledit.ui" line="4996"/>
+        <location filename="modeledit.ui" line="5560"/>
+        <location filename="modeledit.ui" line="6117"/>
+        <location filename="modeledit.ui" line="6674"/>
+        <location filename="modeledit.ui" line="7231"/>
+        <location filename="modeledit.ui" line="7781"/>
+        <location filename="modeledit.ui" line="8345"/>
+        <location filename="modeledit.ui" line="8895"/>
+        <location filename="ui_modeledit.h" line="14423"/>
+        <location filename="ui_modeledit.h" line="14442"/>
+        <location filename="ui_modeledit.h" line="14458"/>
+        <location filename="ui_modeledit.h" line="14474"/>
+        <location filename="ui_modeledit.h" line="14490"/>
+        <location filename="ui_modeledit.h" line="14506"/>
+        <location filename="ui_modeledit.h" line="14522"/>
+        <location filename="ui_modeledit.h" line="14538"/>
+        <location filename="ui_modeledit.h" line="14552"/>
         <source>GVAR4</source>
         <translation>Variable globale VG4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4257"/>
-        <location filename="modeledit.ui" line="4865"/>
-        <location filename="modeledit.ui" line="5417"/>
-        <location filename="modeledit.ui" line="5962"/>
-        <location filename="modeledit.ui" line="6507"/>
-        <location filename="modeledit.ui" line="7052"/>
-        <location filename="modeledit.ui" line="7590"/>
-        <location filename="modeledit.ui" line="8142"/>
-        <location filename="modeledit.ui" line="8607"/>
-        <location filename="ui_modeledit.h" line="13346"/>
-        <location filename="ui_modeledit.h" line="13365"/>
-        <location filename="ui_modeledit.h" line="13381"/>
-        <location filename="ui_modeledit.h" line="13397"/>
-        <location filename="ui_modeledit.h" line="13413"/>
-        <location filename="ui_modeledit.h" line="13429"/>
-        <location filename="ui_modeledit.h" line="13445"/>
-        <location filename="ui_modeledit.h" line="13461"/>
-        <location filename="ui_modeledit.h" line="13473"/>
+        <location filename="modeledit.ui" line="4396"/>
+        <location filename="modeledit.ui" line="5016"/>
+        <location filename="modeledit.ui" line="5580"/>
+        <location filename="modeledit.ui" line="6137"/>
+        <location filename="modeledit.ui" line="6694"/>
+        <location filename="modeledit.ui" line="7251"/>
+        <location filename="modeledit.ui" line="7801"/>
+        <location filename="modeledit.ui" line="8365"/>
+        <location filename="modeledit.ui" line="8842"/>
+        <location filename="ui_modeledit.h" line="14424"/>
+        <location filename="ui_modeledit.h" line="14443"/>
+        <location filename="ui_modeledit.h" line="14459"/>
+        <location filename="ui_modeledit.h" line="14475"/>
+        <location filename="ui_modeledit.h" line="14491"/>
+        <location filename="ui_modeledit.h" line="14507"/>
+        <location filename="ui_modeledit.h" line="14523"/>
+        <location filename="ui_modeledit.h" line="14539"/>
+        <location filename="ui_modeledit.h" line="14551"/>
         <source>GVAR5</source>
         <translation>Variable globale VG5</translation>
     </message>
@@ -4184,308 +4199,458 @@ Droite</translation>
         <translation type="obsolete">PV8</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="10072"/>
-        <location filename="modeledit.ui" line="11812"/>
-        <location filename="ui_modeledit.h" line="13569"/>
-        <location filename="ui_modeledit.h" line="13673"/>
         <source>PPM Center</source>
-        <translation>Centre PPM</translation>
+        <translation type="obsolete">Centre PPM</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="10324"/>
-        <location filename="modeledit.ui" line="12096"/>
-        <location filename="ui_modeledit.h" line="13570"/>
-        <location filename="ui_modeledit.h" line="13674"/>
+        <location filename="modeledit.ui" line="11042"/>
+        <location filename="modeledit.ui" line="13406"/>
+        <location filename="ui_modeledit.h" line="14648"/>
+        <location filename="ui_modeledit.h" line="14752"/>
         <source>Sym</source>
         <translation>Sym</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12749"/>
-        <location filename="ui_modeledit.h" line="13696"/>
+        <location filename="modeledit.ui" line="14371"/>
+        <location filename="modeledit.ui" line="17870"/>
+        <location filename="ui_modeledit.h" line="14778"/>
+        <location filename="ui_modeledit.h" line="14851"/>
         <source>Curve type</source>
         <translation>Type de courbe</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12760"/>
-        <location filename="ui_modeledit.h" line="13699"/>
+        <location filename="modeledit.ui" line="14382"/>
+        <location filename="ui_modeledit.h" line="14781"/>
         <source>3 points</source>
         <translation>3 points</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12765"/>
-        <location filename="ui_modeledit.h" line="13700"/>
+        <location filename="modeledit.ui" line="14387"/>
+        <location filename="ui_modeledit.h" line="14782"/>
         <source>3 points custom</source>
         <translation>3 points personnalisée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12770"/>
-        <location filename="ui_modeledit.h" line="13701"/>
+        <location filename="modeledit.ui" line="14392"/>
+        <location filename="ui_modeledit.h" line="14783"/>
         <source>5 points</source>
         <translation>5 points</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12775"/>
-        <location filename="ui_modeledit.h" line="13702"/>
+        <location filename="modeledit.ui" line="14397"/>
+        <location filename="ui_modeledit.h" line="14784"/>
         <source>5 points custom</source>
         <translation>5 points personnalisée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12780"/>
-        <location filename="ui_modeledit.h" line="13703"/>
+        <location filename="modeledit.ui" line="14402"/>
+        <location filename="ui_modeledit.h" line="14785"/>
         <source>9 points</source>
         <translation>9 points</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12785"/>
-        <location filename="ui_modeledit.h" line="13704"/>
+        <location filename="modeledit.ui" line="14407"/>
+        <location filename="ui_modeledit.h" line="14786"/>
         <source>9 points custom</source>
         <translation>9 points personnalisée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12790"/>
-        <location filename="ui_modeledit.h" line="13705"/>
+        <location filename="modeledit.ui" line="14412"/>
+        <location filename="ui_modeledit.h" line="14787"/>
         <source>17 points</source>
         <translation>17 points</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12795"/>
-        <location filename="ui_modeledit.h" line="13706"/>
+        <location filename="modeledit.ui" line="14417"/>
+        <location filename="ui_modeledit.h" line="14788"/>
         <source>17 points custom</source>
         <translation>17 points personnalisée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16373"/>
-        <location filename="modeledit.ui" line="17500"/>
-        <location filename="ui_modeledit.h" line="13757"/>
-        <location filename="ui_modeledit.h" line="13800"/>
+        <location filename="modeledit.ui" line="18014"/>
+        <location filename="ui_modeledit.h" line="14856"/>
+        <source>CSw9</source>
+        <translation>IP9</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18033"/>
+        <location filename="modeledit.ui" line="19160"/>
+        <location filename="ui_modeledit.h" line="14857"/>
+        <location filename="ui_modeledit.h" line="14899"/>
         <source>Duration</source>
         <translation>Durée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16415"/>
-        <location filename="ui_modeledit.h" line="13758"/>
         <source>CSwitchF</source>
-        <translation>Inter Pers. F</translation>
+        <translation type="obsolete">Inter Pers. F</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16444"/>
-        <location filename="ui_modeledit.h" line="13759"/>
         <source>CSwitchD</source>
-        <translation>Inter Pers. D</translation>
+        <translation type="obsolete">Inter Pers. D</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16460"/>
-        <location filename="modeledit.ui" line="17023"/>
-        <location filename="ui_modeledit.h" line="13760"/>
-        <location filename="ui_modeledit.h" line="13781"/>
+        <location filename="modeledit.ui" line="18120"/>
+        <location filename="modeledit.ui" line="18683"/>
+        <location filename="ui_modeledit.h" line="14860"/>
+        <location filename="ui_modeledit.h" line="14880"/>
         <source>AND</source>
         <translation>ET</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16852"/>
-        <location filename="ui_modeledit.h" line="13775"/>
         <source>CSwitchE</source>
-        <translation>Inter Pers. E</translation>
+        <translation type="obsolete">Inter Pers. E</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16871"/>
-        <location filename="ui_modeledit.h" line="13776"/>
         <source>CSwitchG</source>
-        <translation>Inter Pers. G</translation>
+        <translation type="obsolete">Inter Pers. G</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16919"/>
-        <location filename="modeledit.ui" line="17519"/>
-        <location filename="ui_modeledit.h" line="13778"/>
-        <location filename="ui_modeledit.h" line="13801"/>
+        <location filename="modeledit.ui" line="18579"/>
+        <location filename="modeledit.ui" line="19179"/>
+        <location filename="ui_modeledit.h" line="14877"/>
+        <location filename="ui_modeledit.h" line="14900"/>
         <source>Delay</source>
         <translation>Délai</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16987"/>
-        <location filename="ui_modeledit.h" line="13780"/>
         <source>CSwitchT</source>
-        <translation>Inter Pers. T</translation>
+        <translation type="obsolete">Inter Pers. T</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17086"/>
-        <location filename="ui_modeledit.h" line="13784"/>
         <source>CSwitchM</source>
-        <translation>Inter Pers. M</translation>
+        <translation type="obsolete">Inter Pers. M</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17105"/>
-        <location filename="ui_modeledit.h" line="13785"/>
         <source>CSwitchP</source>
-        <translation>Inter Pers. P</translation>
+        <translation type="obsolete">Inter Pers. P</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17124"/>
-        <location filename="ui_modeledit.h" line="13786"/>
         <source>CSwitchH</source>
-        <translation>Inter Pers. H</translation>
+        <translation type="obsolete">Inter Pers. H</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17153"/>
-        <location filename="ui_modeledit.h" line="13787"/>
         <source>CSwitchO</source>
-        <translation>Inter Pers. O</translation>
+        <translation type="obsolete">Inter Pers. O</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17172"/>
-        <location filename="ui_modeledit.h" line="13788"/>
         <source>CSwitchN</source>
-        <translation>Inter Pers. N</translation>
+        <translation type="obsolete">Inter Pers. N</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17201"/>
-        <location filename="ui_modeledit.h" line="13789"/>
         <source>CSwitchQ</source>
-        <translation>Inter Pers. Q</translation>
+        <translation type="obsolete">Inter Pers. Q</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17230"/>
-        <location filename="ui_modeledit.h" line="13790"/>
         <source>CSwitchR</source>
-        <translation>Inter Pers. R</translation>
+        <translation type="obsolete">Inter Pers. R</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17259"/>
-        <location filename="ui_modeledit.h" line="13791"/>
         <source>CSwitchS</source>
-        <translation>Inter Pers. S</translation>
+        <translation type="obsolete">Inter Pers. S</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17308"/>
-        <location filename="ui_modeledit.h" line="13792"/>
         <source>CSwitchL</source>
-        <translation>Inter Pers. L</translation>
+        <translation type="obsolete">Inter Pers. L</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17347"/>
-        <location filename="ui_modeledit.h" line="13793"/>
         <source>CSwitchK</source>
-        <translation>Inter Pers. K</translation>
+        <translation type="obsolete">Inter Pers. K</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17385"/>
-        <location filename="ui_modeledit.h" line="13795"/>
         <source>CSwitchJ</source>
-        <translation>Inter Pers. J</translation>
+        <translation type="obsolete">Inter Pers. J</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17404"/>
-        <location filename="ui_modeledit.h" line="13796"/>
         <source>CSwitchI</source>
-        <translation>Inter Pers. I</translation>
+        <translation type="obsolete">Inter Pers. I</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17423"/>
-        <location filename="ui_modeledit.h" line="13797"/>
         <source>CSwitchU</source>
-        <translation>Inter Pers. U</translation>
+        <translation type="obsolete">Inter Pers. U</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17442"/>
-        <location filename="ui_modeledit.h" line="13798"/>
         <source>CSwitchV</source>
-        <translation>Inter Pers. V</translation>
+        <translation type="obsolete">Inter Pers. V</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17461"/>
-        <location filename="ui_modeledit.h" line="13799"/>
         <source>CSwitchW</source>
-        <translation>Inter Pers. W</translation>
+        <translation type="obsolete">Inter Pers. W</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18295"/>
-        <location filename="modeledit.ui" line="18340"/>
-        <location filename="ui_modeledit.h" line="13832"/>
-        <location filename="ui_modeledit.h" line="13843"/>
+        <location filename="modeledit.ui" line="19981"/>
+        <location filename="modeledit.ui" line="20026"/>
+        <location filename="ui_modeledit.h" line="14931"/>
+        <location filename="ui_modeledit.h" line="14942"/>
         <source>FAS</source>
         <translation>FAS</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18345"/>
-        <location filename="ui_modeledit.h" line="13844"/>
+        <location filename="modeledit.ui" line="20031"/>
+        <location filename="ui_modeledit.h" line="14943"/>
         <source>CEL</source>
         <translation>ELEM</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18442"/>
-        <location filename="ui_modeledit.h" line="13857"/>
+        <location filename="modeledit.ui" line="20128"/>
+        <location filename="ui_modeledit.h" line="14956"/>
         <source>Alti</source>
         <translation>Alti</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18447"/>
-        <location filename="ui_modeledit.h" line="13858"/>
+        <location filename="modeledit.ui" line="20133"/>
+        <location filename="ui_modeledit.h" line="14957"/>
         <source>Alti+</source>
         <translation>Alti+</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18452"/>
-        <location filename="ui_modeledit.h" line="13859"/>
+        <location filename="modeledit.ui" line="20138"/>
+        <location filename="ui_modeledit.h" line="14958"/>
         <source>Vario</source>
         <translation>Vario</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18579"/>
-        <location filename="ui_modeledit.h" line="13867"/>
+        <location filename="modeledit.ui" line="20319"/>
+        <location filename="ui_modeledit.h" line="14966"/>
         <source>Center Max</source>
         <translation>Neutre max</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18569"/>
-        <location filename="ui_modeledit.h" line="13866"/>
+        <location filename="modeledit.ui" line="20303"/>
+        <location filename="ui_modeledit.h" line="14965"/>
         <source>Center Min</source>
         <translation>Neutre min</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19499"/>
-        <location filename="ui_modeledit.h" line="13999"/>
+        <location filename="modeledit.ui" line="18075"/>
+        <location filename="ui_modeledit.h" line="14858"/>
+        <source>CSwF</source>
+        <translation>IPF</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18104"/>
+        <location filename="ui_modeledit.h" line="14859"/>
+        <source>CSwD</source>
+        <translation>IPD</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18183"/>
+        <location filename="ui_modeledit.h" line="14863"/>
+        <source>CSw6</source>
+        <translation>IP6</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18202"/>
+        <location filename="ui_modeledit.h" line="14864"/>
+        <source>CSw1</source>
+        <translation>IP1</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18231"/>
+        <location filename="ui_modeledit.h" line="14865"/>
+        <source>CSw8</source>
+        <translation>IP8</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18260"/>
+        <location filename="ui_modeledit.h" line="14866"/>
+        <source>CSw7</source>
+        <translation>IP7</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18299"/>
+        <location filename="ui_modeledit.h" line="14867"/>
+        <source>CSwA</source>
+        <translation>IPA</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18328"/>
+        <location filename="ui_modeledit.h" line="14868"/>
+        <source>CSwB</source>
+        <translation>IPB</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18357"/>
+        <location filename="ui_modeledit.h" line="14869"/>
+        <source>CSwC</source>
+        <translation>IPC</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18406"/>
+        <location filename="ui_modeledit.h" line="14870"/>
+        <source>CSw5</source>
+        <translation>IP5</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18474"/>
+        <location filename="ui_modeledit.h" line="14872"/>
+        <source>CSw3</source>
+        <translation>IP3</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18493"/>
+        <location filename="ui_modeledit.h" line="14873"/>
+        <source>CSw2</source>
+        <translation>IP2</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18512"/>
+        <location filename="ui_modeledit.h" line="14874"/>
+        <source>CSwE</source>
+        <translation>IPE</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18531"/>
+        <location filename="ui_modeledit.h" line="14875"/>
+        <source>CSwG</source>
+        <translation>IPG</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18560"/>
+        <location filename="ui_modeledit.h" line="14876"/>
+        <source>CSw4</source>
+        <translation>IP4</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18647"/>
+        <location filename="ui_modeledit.h" line="14879"/>
+        <source>CSwT</source>
+        <translation>IPT</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18746"/>
+        <location filename="ui_modeledit.h" line="14883"/>
+        <source>CSwM</source>
+        <translation>IPM</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18765"/>
+        <location filename="ui_modeledit.h" line="14884"/>
+        <source>CSwP</source>
+        <translation>IPP</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18784"/>
+        <location filename="ui_modeledit.h" line="14885"/>
+        <source>CSwH</source>
+        <translation>IPH</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18813"/>
+        <location filename="ui_modeledit.h" line="14886"/>
+        <source>CSwO</source>
+        <translation>IPO</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18832"/>
+        <location filename="ui_modeledit.h" line="14887"/>
+        <source>CSwN</source>
+        <translation>IPN</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18861"/>
+        <location filename="ui_modeledit.h" line="14888"/>
+        <source>CSwQ</source>
+        <translation>IPQ</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18890"/>
+        <location filename="ui_modeledit.h" line="14889"/>
+        <source>CSwR</source>
+        <translation>IPR</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18919"/>
+        <location filename="ui_modeledit.h" line="14890"/>
+        <source>CSwS</source>
+        <translation>IPS</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="18968"/>
+        <location filename="ui_modeledit.h" line="14891"/>
+        <source>CSwL</source>
+        <translation>IPL</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19007"/>
+        <location filename="ui_modeledit.h" line="14892"/>
+        <source>CSwK</source>
+        <translation>IPK</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19045"/>
+        <location filename="ui_modeledit.h" line="14894"/>
+        <source>CSwJ</source>
+        <translation>IPJ</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19064"/>
+        <location filename="ui_modeledit.h" line="14895"/>
+        <source>CSwI</source>
+        <translation>IPI</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19083"/>
+        <location filename="ui_modeledit.h" line="14896"/>
+        <source>CSwU</source>
+        <translation>IPU</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19102"/>
+        <location filename="ui_modeledit.h" line="14897"/>
+        <source>CSwV</source>
+        <translation>IPV</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="19121"/>
+        <location filename="ui_modeledit.h" line="14898"/>
+        <source>CSwW</source>
+        <translation>IPW</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="21232"/>
+        <location filename="ui_modeledit.h" line="15088"/>
         <source>Telemetry screen 1</source>
         <translation>Ecran de télémesure 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19519"/>
-        <location filename="modeledit.ui" line="20246"/>
-        <location filename="modeledit.ui" line="20309"/>
-        <location filename="ui_modeledit.h" line="13985"/>
-        <location filename="ui_modeledit.h" line="14008"/>
-        <location filename="ui_modeledit.h" line="14015"/>
+        <location filename="modeledit.ui" line="21252"/>
+        <location filename="modeledit.ui" line="21979"/>
+        <location filename="modeledit.ui" line="22042"/>
+        <location filename="ui_modeledit.h" line="15074"/>
+        <location filename="ui_modeledit.h" line="15097"/>
+        <location filename="ui_modeledit.h" line="15104"/>
         <source>Custom Screen Type</source>
         <translation>Type d&apos;écran personnalisé</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19539"/>
-        <location filename="modeledit.ui" line="20266"/>
-        <location filename="modeledit.ui" line="20329"/>
-        <location filename="ui_modeledit.h" line="13988"/>
-        <location filename="ui_modeledit.h" line="14011"/>
-        <location filename="ui_modeledit.h" line="14018"/>
+        <location filename="modeledit.ui" line="21272"/>
+        <location filename="modeledit.ui" line="21999"/>
+        <location filename="modeledit.ui" line="22062"/>
+        <location filename="ui_modeledit.h" line="15077"/>
+        <location filename="ui_modeledit.h" line="15100"/>
+        <location filename="ui_modeledit.h" line="15107"/>
         <source>Nums</source>
         <translation>Valeurs</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19544"/>
-        <location filename="modeledit.ui" line="20271"/>
-        <location filename="modeledit.ui" line="20334"/>
-        <location filename="ui_modeledit.h" line="13989"/>
-        <location filename="ui_modeledit.h" line="14012"/>
-        <location filename="ui_modeledit.h" line="14019"/>
+        <location filename="modeledit.ui" line="21277"/>
+        <location filename="modeledit.ui" line="22004"/>
+        <location filename="modeledit.ui" line="22067"/>
+        <location filename="ui_modeledit.h" line="15078"/>
+        <location filename="ui_modeledit.h" line="15101"/>
+        <location filename="ui_modeledit.h" line="15108"/>
         <source>Bars</source>
         <translation>Barres</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19900"/>
-        <location filename="ui_modeledit.h" line="14014"/>
+        <location filename="modeledit.ui" line="21633"/>
+        <location filename="ui_modeledit.h" line="15103"/>
         <source>Telemetry screen 2</source>
         <translation>Ecran de télémesure 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="20295"/>
-        <location filename="ui_modeledit.h" line="14029"/>
+        <location filename="modeledit.ui" line="22028"/>
+        <location filename="ui_modeledit.h" line="15118"/>
         <source>Telemetry screen 3</source>
         <translation>Ecran de télémesure 3</translation>
     </message>
@@ -4554,98 +4719,98 @@ Droite</translation>
         <translation type="obsolete">Interrupteur de fonction 32</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18669"/>
-        <location filename="modeledit.ui" line="18963"/>
-        <location filename="ui_modeledit.h" line="13873"/>
-        <location filename="ui_modeledit.h" line="13915"/>
+        <location filename="modeledit.ui" line="20412"/>
+        <location filename="modeledit.ui" line="20730"/>
+        <location filename="ui_modeledit.h" line="14972"/>
+        <location filename="ui_modeledit.h" line="15014"/>
         <source>Max Value</source>
         <translation>Valeur Max</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18802"/>
-        <location filename="modeledit.ui" line="19096"/>
-        <location filename="ui_modeledit.h" line="13900"/>
-        <location filename="ui_modeledit.h" line="13942"/>
+        <location filename="modeledit.ui" line="20551"/>
+        <location filename="modeledit.ui" line="20869"/>
+        <location filename="ui_modeledit.h" line="14999"/>
+        <location filename="ui_modeledit.h" line="15041"/>
         <source>Min Value</source>
         <translation>Valeur Min</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19230"/>
-        <location filename="ui_modeledit.h" line="13955"/>
+        <location filename="modeledit.ui" line="21021"/>
+        <location filename="ui_modeledit.h" line="15054"/>
         <source>RSSI</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19393"/>
-        <location filename="ui_modeledit.h" line="13983"/>
+        <location filename="modeledit.ui" line="21042"/>
+        <location filename="ui_modeledit.h" line="15055"/>
         <source>Alarm 1</source>
         <translation>Alarme 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18188"/>
-        <location filename="ui_modeledit.h" line="13818"/>
+        <location filename="modeledit.ui" line="19874"/>
+        <location filename="ui_modeledit.h" line="14917"/>
         <source>Serial Protocol</source>
         <translation>Protocole Série</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18390"/>
-        <location filename="ui_modeledit.h" line="13852"/>
+        <location filename="modeledit.ui" line="20076"/>
+        <location filename="ui_modeledit.h" line="14951"/>
         <source>Units</source>
         <translation>Unités</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18310"/>
-        <location filename="ui_modeledit.h" line="13836"/>
+        <location filename="modeledit.ui" line="19996"/>
+        <location filename="ui_modeledit.h" line="14935"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18315"/>
-        <location filename="ui_modeledit.h" line="13837"/>
+        <location filename="modeledit.ui" line="20001"/>
+        <location filename="ui_modeledit.h" line="14936"/>
         <source>FrSky Sensor Hub</source>
         <translation>Sensor Hub FrSky</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18222"/>
-        <location filename="ui_modeledit.h" line="13822"/>
+        <location filename="modeledit.ui" line="19908"/>
+        <location filename="ui_modeledit.h" line="14921"/>
         <source>Metric</source>
         <translation>Métrique</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18227"/>
-        <location filename="ui_modeledit.h" line="13823"/>
+        <location filename="modeledit.ui" line="19913"/>
+        <location filename="ui_modeledit.h" line="14922"/>
         <source>Imperial</source>
         <translation>Impérial</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18360"/>
-        <location filename="ui_modeledit.h" line="13848"/>
+        <location filename="modeledit.ui" line="20046"/>
+        <location filename="ui_modeledit.h" line="14947"/>
         <source>2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18037"/>
-        <location filename="modeledit.ui" line="18146"/>
-        <location filename="ui_modeledit.h" line="13811"/>
-        <location filename="ui_modeledit.h" line="13816"/>
+        <location filename="modeledit.ui" line="19716"/>
+        <location filename="modeledit.ui" line="19825"/>
+        <location filename="ui_modeledit.h" line="14910"/>
+        <location filename="ui_modeledit.h" line="14915"/>
         <source>Enable</source>
         <translation>Actif</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18208"/>
-        <location filename="ui_modeledit.h" line="13819"/>
+        <location filename="modeledit.ui" line="19894"/>
+        <location filename="ui_modeledit.h" line="14918"/>
         <source>Volt source</source>
         <translation>Source de mesure de tension</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18247"/>
-        <location filename="ui_modeledit.h" line="13825"/>
+        <location filename="modeledit.ui" line="19933"/>
+        <location filename="ui_modeledit.h" line="14924"/>
         <source>Current source</source>
         <translation>Source de mesure de courant</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18280"/>
-        <location filename="ui_modeledit.h" line="13829"/>
+        <location filename="modeledit.ui" line="19966"/>
+        <location filename="ui_modeledit.h" line="14928"/>
         <source>NONE</source>
         <translation>Aucune</translation>
     </message>
@@ -4654,26 +4819,26 @@ Droite</translation>
         <translation type="obsolete">HUB</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18365"/>
-        <location filename="ui_modeledit.h" line="13849"/>
+        <location filename="modeledit.ui" line="20051"/>
+        <location filename="ui_modeledit.h" line="14948"/>
         <source>3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18370"/>
-        <location filename="ui_modeledit.h" line="13850"/>
+        <location filename="modeledit.ui" line="20056"/>
+        <location filename="ui_modeledit.h" line="14949"/>
         <source>4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18403"/>
-        <location filename="ui_modeledit.h" line="13853"/>
+        <location filename="modeledit.ui" line="20089"/>
+        <location filename="ui_modeledit.h" line="14952"/>
         <source>Blades</source>
         <translation>Pales</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18421"/>
-        <location filename="ui_modeledit.h" line="13854"/>
+        <location filename="modeledit.ui" line="20107"/>
+        <location filename="ui_modeledit.h" line="14953"/>
         <source>Altimetry / Vario</source>
         <translation>Altimètre / Vario</translation>
     </message>
@@ -4686,84 +4851,84 @@ Droite</translation>
         <translation type="obsolete">Halcyon</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18591"/>
-        <location filename="ui_modeledit.h" line="13868"/>
+        <location filename="modeledit.ui" line="20331"/>
+        <location filename="ui_modeledit.h" line="14967"/>
         <source>Vario source</source>
         <translation>Source vario</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18598"/>
-        <location filename="ui_modeledit.h" line="13869"/>
+        <location filename="modeledit.ui" line="20338"/>
+        <location filename="ui_modeledit.h" line="14968"/>
         <source>Vario limits</source>
         <translation>Limites vario</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18605"/>
-        <location filename="ui_modeledit.h" line="13870"/>
+        <location filename="modeledit.ui" line="20345"/>
+        <location filename="ui_modeledit.h" line="14969"/>
         <source>Use GPS as altitude source</source>
         <translation>Utiliser le GPS comme source d&apos;altitude</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18877"/>
-        <location filename="modeledit.ui" line="19171"/>
-        <location filename="ui_modeledit.h" line="13903"/>
-        <location filename="ui_modeledit.h" line="13945"/>
+        <location filename="modeledit.ui" line="20644"/>
+        <location filename="modeledit.ui" line="20962"/>
+        <location filename="ui_modeledit.h" line="15002"/>
+        <location filename="ui_modeledit.h" line="15044"/>
         <source>Volts (V)</source>
         <translation>Tension (V)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18882"/>
-        <location filename="modeledit.ui" line="19176"/>
-        <location filename="ui_modeledit.h" line="13904"/>
-        <location filename="ui_modeledit.h" line="13946"/>
+        <location filename="modeledit.ui" line="20649"/>
+        <location filename="modeledit.ui" line="20967"/>
+        <location filename="ui_modeledit.h" line="15003"/>
+        <location filename="ui_modeledit.h" line="15045"/>
         <source>Amps (A)</source>
         <translation>Courant (A)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18887"/>
-        <location filename="modeledit.ui" line="19181"/>
-        <location filename="ui_modeledit.h" line="13905"/>
-        <location filename="ui_modeledit.h" line="13947"/>
+        <location filename="modeledit.ui" line="20654"/>
+        <location filename="modeledit.ui" line="20972"/>
+        <location filename="ui_modeledit.h" line="15004"/>
+        <location filename="ui_modeledit.h" line="15046"/>
         <source>Speed (m/s or ft/s)</source>
         <translation>Vitesse (m/s ou ft/s)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18897"/>
-        <location filename="modeledit.ui" line="19191"/>
-        <location filename="ui_modeledit.h" line="13907"/>
-        <location filename="ui_modeledit.h" line="13949"/>
+        <location filename="modeledit.ui" line="20664"/>
+        <location filename="modeledit.ui" line="20982"/>
+        <location filename="ui_modeledit.h" line="15006"/>
+        <location filename="ui_modeledit.h" line="15048"/>
         <source>Speed (km/h or miles/h)</source>
         <translation>Vitesse (km/h ou miles/h)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18902"/>
-        <location filename="modeledit.ui" line="19196"/>
-        <location filename="ui_modeledit.h" line="13908"/>
-        <location filename="ui_modeledit.h" line="13950"/>
+        <location filename="modeledit.ui" line="20669"/>
+        <location filename="modeledit.ui" line="20987"/>
+        <location filename="ui_modeledit.h" line="15007"/>
+        <location filename="ui_modeledit.h" line="15049"/>
         <source>Meters (m or ft)</source>
         <translation>Distance (m ou ft)</translation>
     </message>
     <message utf8="true">
-        <location filename="modeledit.ui" line="18907"/>
-        <location filename="modeledit.ui" line="19201"/>
-        <location filename="ui_modeledit.h" line="13909"/>
-        <location filename="ui_modeledit.h" line="13951"/>
+        <location filename="modeledit.ui" line="20674"/>
+        <location filename="modeledit.ui" line="20992"/>
+        <location filename="ui_modeledit.h" line="15008"/>
+        <location filename="ui_modeledit.h" line="15050"/>
         <source>Temp (°)</source>
         <translation>Temp (°)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18912"/>
-        <location filename="modeledit.ui" line="19206"/>
-        <location filename="ui_modeledit.h" line="13910"/>
-        <location filename="ui_modeledit.h" line="13952"/>
+        <location filename="modeledit.ui" line="20679"/>
+        <location filename="modeledit.ui" line="20997"/>
+        <location filename="ui_modeledit.h" line="15009"/>
+        <location filename="ui_modeledit.h" line="15051"/>
         <source>Fuel (%)</source>
         <translation>Carburant (%)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18917"/>
-        <location filename="modeledit.ui" line="19211"/>
-        <location filename="ui_modeledit.h" line="13911"/>
-        <location filename="ui_modeledit.h" line="13953"/>
+        <location filename="modeledit.ui" line="20684"/>
+        <location filename="modeledit.ui" line="21002"/>
+        <location filename="ui_modeledit.h" line="15010"/>
+        <location filename="ui_modeledit.h" line="15052"/>
         <source>mAmps (mA)</source>
         <translation>Courant (mA)</translation>
     </message>
@@ -4772,32 +4937,32 @@ Droite</translation>
         <translation type="obsolete">Jauges de télémesure</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19696"/>
-        <location filename="modeledit.ui" line="20035"/>
-        <location filename="modeledit.ui" line="20486"/>
-        <location filename="ui_modeledit.h" line="13991"/>
-        <location filename="ui_modeledit.h" line="14000"/>
-        <location filename="ui_modeledit.h" line="14021"/>
+        <location filename="modeledit.ui" line="21429"/>
+        <location filename="modeledit.ui" line="21768"/>
+        <location filename="modeledit.ui" line="22219"/>
+        <location filename="ui_modeledit.h" line="15080"/>
+        <location filename="ui_modeledit.h" line="15089"/>
+        <location filename="ui_modeledit.h" line="15110"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19716"/>
-        <location filename="modeledit.ui" line="20055"/>
-        <location filename="modeledit.ui" line="20506"/>
-        <location filename="ui_modeledit.h" line="13993"/>
-        <location filename="ui_modeledit.h" line="14002"/>
-        <location filename="ui_modeledit.h" line="14023"/>
+        <location filename="modeledit.ui" line="21449"/>
+        <location filename="modeledit.ui" line="21788"/>
+        <location filename="modeledit.ui" line="22239"/>
+        <location filename="ui_modeledit.h" line="15082"/>
+        <location filename="ui_modeledit.h" line="15091"/>
+        <location filename="ui_modeledit.h" line="15112"/>
         <source>Gauge</source>
         <translation>Jauge</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19759"/>
-        <location filename="modeledit.ui" line="20098"/>
-        <location filename="modeledit.ui" line="20549"/>
-        <location filename="ui_modeledit.h" line="13995"/>
-        <location filename="ui_modeledit.h" line="14004"/>
-        <location filename="ui_modeledit.h" line="14025"/>
+        <location filename="modeledit.ui" line="21492"/>
+        <location filename="modeledit.ui" line="21831"/>
+        <location filename="modeledit.ui" line="22289"/>
+        <location filename="ui_modeledit.h" line="15084"/>
+        <location filename="ui_modeledit.h" line="15093"/>
+        <location filename="ui_modeledit.h" line="15114"/>
         <source>Gauge 1</source>
         <translation>Jauge 1</translation>
     </message>
@@ -4810,32 +4975,32 @@ Droite</translation>
         <translation type="obsolete">Alarme RX</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19799"/>
-        <location filename="modeledit.ui" line="20138"/>
-        <location filename="modeledit.ui" line="20589"/>
-        <location filename="ui_modeledit.h" line="13996"/>
-        <location filename="ui_modeledit.h" line="14005"/>
-        <location filename="ui_modeledit.h" line="14026"/>
+        <location filename="modeledit.ui" line="21532"/>
+        <location filename="modeledit.ui" line="21871"/>
+        <location filename="modeledit.ui" line="22329"/>
+        <location filename="ui_modeledit.h" line="15085"/>
+        <location filename="ui_modeledit.h" line="15094"/>
+        <location filename="ui_modeledit.h" line="15115"/>
         <source>Gauge 2</source>
         <translation>Jauge 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19839"/>
-        <location filename="modeledit.ui" line="20178"/>
-        <location filename="modeledit.ui" line="20629"/>
-        <location filename="ui_modeledit.h" line="13997"/>
-        <location filename="ui_modeledit.h" line="14006"/>
-        <location filename="ui_modeledit.h" line="14027"/>
+        <location filename="modeledit.ui" line="21572"/>
+        <location filename="modeledit.ui" line="21911"/>
+        <location filename="modeledit.ui" line="22369"/>
+        <location filename="ui_modeledit.h" line="15086"/>
+        <location filename="ui_modeledit.h" line="15095"/>
+        <location filename="ui_modeledit.h" line="15116"/>
         <source>Gauge 3</source>
         <translation>Jauge 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="19879"/>
-        <location filename="modeledit.ui" line="20218"/>
-        <location filename="modeledit.ui" line="20669"/>
-        <location filename="ui_modeledit.h" line="13998"/>
-        <location filename="ui_modeledit.h" line="14007"/>
-        <location filename="ui_modeledit.h" line="14028"/>
+        <location filename="modeledit.ui" line="21612"/>
+        <location filename="modeledit.ui" line="21951"/>
+        <location filename="modeledit.ui" line="22409"/>
+        <location filename="ui_modeledit.h" line="15087"/>
+        <location filename="ui_modeledit.h" line="15096"/>
+        <location filename="ui_modeledit.h" line="15117"/>
         <source>Gauge 4</source>
         <translation>Jauge 4</translation>
     </message>
@@ -4844,124 +5009,125 @@ Droite</translation>
         <translation type="obsolete">Vue Télémesure personnalisée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="20714"/>
-        <location filename="ui_modeledit.h" line="14031"/>
+        <location filename="modeledit.ui" line="22454"/>
+        <location filename="ui_modeledit.h" line="15120"/>
         <source>Templates</source>
         <translation>Gabarits</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5563"/>
+        <location filename="modeledit.cpp" line="5950"/>
         <source>Apply Template?</source>
         <translation>Appliquer le gabarit ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5563"/>
+        <location filename="modeledit.cpp" line="5950"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Appliquer le gabarit &quot;%1&quot; ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5599"/>
-        <location filename="modeledit.cpp" line="6351"/>
-        <location filename="modeledit.cpp" line="6463"/>
+        <location filename="modeledit.cpp" line="5986"/>
+        <location filename="modeledit.cpp" line="6738"/>
+        <location filename="modeledit.cpp" line="6850"/>
         <source>Clear Mixes?</source>
         <translation>Effacer les mixages ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5599"/>
+        <location filename="modeledit.cpp" line="5986"/>
         <source>Really clear all the mixes?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer tous les mixages ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5610"/>
+        <location filename="modeledit.cpp" line="5997"/>
         <source>Clear Curves?</source>
         <translation>Effacer les courbes ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5610"/>
+        <location filename="modeledit.cpp" line="5997"/>
         <source>Really clear all the curves?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les courbes ?</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3640"/>
-        <location filename="ui_modeledit.h" line="13328"/>
+        <location filename="modeledit.ui" line="3779"/>
+        <location filename="ui_modeledit.h" line="14396"/>
         <source>Swash Ring</source>
         <translation>Limite cyclique</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3621"/>
-        <location filename="modeledit.cpp" line="3142"/>
-        <location filename="ui_modeledit.h" line="13334"/>
+        <location filename="modeledit.ui" line="3760"/>
+        <location filename="modeledit.cpp" line="3393"/>
+        <location filename="ui_modeledit.h" line="14412"/>
         <source>Heli Setup</source>
         <translation>Hélicoptère</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1266"/>
-        <location filename="ui_modeledit.h" line="13210"/>
+        <location filename="modeledit.ui" line="1016"/>
+        <location filename="ui_modeledit.h" line="14227"/>
         <source>RS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="775"/>
-        <location filename="ui_modeledit.h" line="13193"/>
+        <location filename="modeledit.ui" line="489"/>
+        <location filename="ui_modeledit.h" line="14210"/>
         <source>SB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="70"/>
-        <location filename="ui_modeledit.h" line="13281"/>
+        <location filename="ui_modeledit.h" line="14345"/>
         <source>ModelSetup</source>
         <translation>Configuration du modèle</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="198"/>
+        <location filename="modeledit.ui" line="2340"/>
+        <location filename="ui_modeledit.h" line="14343"/>
         <source>Model Image</source>
         <translation>Image du modèle</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="791"/>
-        <location filename="ui_modeledit.h" line="13194"/>
+        <location filename="modeledit.ui" line="505"/>
+        <location filename="ui_modeledit.h" line="14211"/>
         <source>SD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="807"/>
-        <location filename="ui_modeledit.h" line="13195"/>
+        <location filename="modeledit.ui" line="521"/>
+        <location filename="ui_modeledit.h" line="14212"/>
         <source>SA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="919"/>
-        <location filename="ui_modeledit.h" line="13197"/>
+        <location filename="modeledit.ui" line="645"/>
+        <location filename="ui_modeledit.h" line="14214"/>
         <source>SC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="975"/>
-        <location filename="ui_modeledit.h" line="13198"/>
+        <location filename="modeledit.ui" line="707"/>
+        <location filename="ui_modeledit.h" line="14215"/>
         <source>SG</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="991"/>
-        <location filename="ui_modeledit.h" line="13199"/>
+        <location filename="modeledit.ui" line="723"/>
+        <location filename="ui_modeledit.h" line="14216"/>
         <source>SE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1087"/>
-        <location filename="ui_modeledit.h" line="13200"/>
+        <location filename="modeledit.ui" line="831"/>
+        <location filename="ui_modeledit.h" line="14217"/>
         <source>SF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1359"/>
-        <location filename="ui_modeledit.h" line="13273"/>
+        <location filename="modeledit.ui" line="1116"/>
+        <location filename="ui_modeledit.h" line="14236"/>
         <source>Reverse Throttle Operation</source>
         <translation>Inversion des gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1366"/>
-        <location filename="ui_modeledit.h" line="13275"/>
+        <location filename="modeledit.ui" line="1123"/>
+        <location filename="ui_modeledit.h" line="14238"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -4972,234 +5138,364 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
 </translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1402"/>
+        <location filename="modeledit.ui" line="1159"/>
+        <location filename="ui_modeledit.h" line="14247"/>
         <source>Master</source>
         <translation>Maître</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1407"/>
+        <location filename="modeledit.ui" line="1164"/>
+        <location filename="ui_modeledit.h" line="14248"/>
         <source>Slave</source>
         <translation>Elève</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1470"/>
+        <location filename="modeledit.ui" line="1227"/>
+        <location filename="ui_modeledit.h" line="14253"/>
         <source>Trainer Mode</source>
         <translation>Mode écolage</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1535"/>
+        <location filename="modeledit.ui" line="1292"/>
+        <location filename="ui_modeledit.h" line="14261"/>
         <source>Master/Trainer Port</source>
         <translation>Prise écolage</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1602"/>
-        <location filename="modeledit.ui" line="1894"/>
-        <location filename="modeledit.ui" line="2246"/>
+        <location filename="modeledit.ui" line="1359"/>
+        <location filename="modeledit.ui" line="1654"/>
+        <location filename="modeledit.ui" line="2009"/>
+        <location filename="ui_modeledit.h" line="14265"/>
+        <location filename="ui_modeledit.h" line="14288"/>
+        <location filename="ui_modeledit.h" line="14314"/>
         <source>Start</source>
         <translation>1er canal</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1639"/>
-        <location filename="modeledit.ui" line="2033"/>
+        <location filename="modeledit.ui" line="1396"/>
+        <location filename="modeledit.ui" line="1793"/>
+        <location filename="ui_modeledit.h" line="14268"/>
+        <location filename="ui_modeledit.h" line="14300"/>
         <source>Polarity</source>
         <translation>Polarité</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1856"/>
-        <location filename="ui_modeledit.h" line="13237"/>
+        <location filename="modeledit.ui" line="1613"/>
+        <location filename="ui_modeledit.h" line="14286"/>
         <source>RF Module 1</source>
-        <translation type="unfinished">Module HF interne</translation>
+        <translation>Module HF interne</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2128"/>
-        <location filename="ui_modeledit.h" line="13263"/>
+        <location filename="modeledit.ui" line="1888"/>
+        <location filename="ui_modeledit.h" line="14310"/>
         <source>RF Module 2</source>
-        <translation type="unfinished">Module HF externe</translation>
+        <translation>Module HF externe</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2334"/>
-        <location filename="ui_modeledit.h" line="13316"/>
+        <location filename="modeledit.ui" line="2413"/>
+        <location filename="ui_modeledit.h" line="14394"/>
         <source>Failsafe</source>
         <translation>Failsafe</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2340"/>
-        <location filename="ui_modeledit.h" line="13282"/>
+        <location filename="modeledit.ui" line="2419"/>
+        <location filename="ui_modeledit.h" line="14346"/>
         <source>External module</source>
         <translation>Module HF externe</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2994"/>
-        <location filename="ui_modeledit.h" line="13299"/>
+        <location filename="modeledit.ui" line="3072"/>
+        <location filename="modeledit.ui" line="3724"/>
+        <location filename="ui_modeledit.h" line="14363"/>
+        <location filename="ui_modeledit.h" line="14387"/>
+        <source>Failsafe Mode</source>
+        <translation>Mode Failsafe</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3080"/>
+        <location filename="modeledit.ui" line="3732"/>
+        <location filename="ui_modeledit.h" line="14366"/>
+        <location filename="ui_modeledit.h" line="14390"/>
+        <source>Hold</source>
+        <translation>Maintien</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3085"/>
+        <location filename="modeledit.ui" line="3737"/>
+        <location filename="ui_modeledit.h" line="14367"/>
+        <location filename="ui_modeledit.h" line="14391"/>
+        <source>Custom</source>
+        <translation>Prédéfini</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3090"/>
+        <location filename="modeledit.ui" line="3742"/>
+        <location filename="ui_modeledit.h" line="14368"/>
+        <location filename="ui_modeledit.h" line="14392"/>
+        <source>No Pulses</source>
+        <translation>Pas d&apos;impulsions</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="3116"/>
+        <location filename="ui_modeledit.h" line="14370"/>
         <source>Internal Module</source>
         <translation>Module HF interne</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3688"/>
-        <location filename="ui_modeledit.h" line="13331"/>
+        <location filename="modeledit.ui" line="3827"/>
+        <location filename="ui_modeledit.h" line="14406"/>
         <source>Invert Elevator</source>
         <translation>Profondeur</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3695"/>
-        <location filename="ui_modeledit.h" line="13332"/>
+        <location filename="modeledit.ui" line="3834"/>
+        <location filename="ui_modeledit.h" line="14407"/>
         <source>Invert Aileron</source>
         <translation>Aileron</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3702"/>
-        <location filename="ui_modeledit.h" line="13333"/>
+        <location filename="modeledit.ui" line="3841"/>
+        <location filename="ui_modeledit.h" line="14408"/>
         <source>Invert Collective</source>
         <translation>Pas collectif</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3758"/>
-        <location filename="ui_modeledit.h" line="13481"/>
+        <location filename="modeledit.ui" line="3897"/>
+        <location filename="ui_modeledit.h" line="14559"/>
         <source>Flight Modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3770"/>
-        <location filename="ui_modeledit.h" line="13352"/>
+        <location filename="modeledit.ui" line="3909"/>
+        <location filename="ui_modeledit.h" line="14430"/>
         <source>Flight Mode 0 (Default)</source>
         <translation>Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3813"/>
-        <location filename="modeledit.ui" line="4421"/>
-        <location filename="modeledit.ui" line="4980"/>
-        <location filename="modeledit.ui" line="5518"/>
-        <location filename="modeledit.ui" line="6042"/>
-        <location filename="modeledit.ui" line="6893"/>
-        <location filename="modeledit.ui" line="7445"/>
-        <location filename="modeledit.ui" line="7691"/>
-        <location filename="modeledit.ui" line="8542"/>
-        <location filename="ui_modeledit.h" line="13336"/>
-        <location filename="ui_modeledit.h" line="13353"/>
-        <location filename="ui_modeledit.h" line="13369"/>
-        <location filename="ui_modeledit.h" line="13385"/>
-        <location filename="ui_modeledit.h" line="13401"/>
-        <location filename="ui_modeledit.h" line="13421"/>
-        <location filename="ui_modeledit.h" line="13437"/>
-        <location filename="ui_modeledit.h" line="13449"/>
-        <location filename="ui_modeledit.h" line="13469"/>
+        <location filename="modeledit.ui" line="3952"/>
+        <location filename="modeledit.ui" line="4560"/>
+        <location filename="modeledit.ui" line="5131"/>
+        <location filename="modeledit.ui" line="5681"/>
+        <location filename="modeledit.ui" line="6217"/>
+        <location filename="modeledit.ui" line="7092"/>
+        <location filename="modeledit.ui" line="7656"/>
+        <location filename="modeledit.ui" line="7902"/>
+        <location filename="modeledit.ui" line="8777"/>
+        <location filename="ui_modeledit.h" line="14415"/>
+        <location filename="ui_modeledit.h" line="14431"/>
+        <location filename="ui_modeledit.h" line="14448"/>
+        <location filename="ui_modeledit.h" line="14465"/>
+        <location filename="ui_modeledit.h" line="14479"/>
+        <location filename="ui_modeledit.h" line="14499"/>
+        <location filename="ui_modeledit.h" line="14515"/>
+        <location filename="ui_modeledit.h" line="14527"/>
+        <location filename="ui_modeledit.h" line="14547"/>
         <source>Flight Mode Name</source>
         <translation>Nom de la phase</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4309"/>
-        <location filename="ui_modeledit.h" line="13347"/>
+        <location filename="modeledit.ui" line="4448"/>
+        <location filename="ui_modeledit.h" line="14425"/>
         <source>GVAR6</source>
         <translation>Variable globale VG6</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4323"/>
-        <location filename="ui_modeledit.h" line="13348"/>
+        <location filename="modeledit.ui" line="4462"/>
+        <location filename="ui_modeledit.h" line="14426"/>
         <source>GVAR7</source>
         <translation>Variable globale VG7</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4399"/>
-        <location filename="ui_modeledit.h" line="13368"/>
+        <location filename="modeledit.ui" line="4538"/>
+        <location filename="ui_modeledit.h" line="14446"/>
         <source>FM 1</source>
         <translation>PV 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4944"/>
-        <location filename="ui_modeledit.h" line="13384"/>
+        <location filename="modeledit.ui" line="5095"/>
+        <location filename="ui_modeledit.h" line="14462"/>
         <source>FM 2</source>
         <translation>PV 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="5489"/>
-        <location filename="ui_modeledit.h" line="13400"/>
+        <location filename="modeledit.ui" line="5652"/>
+        <location filename="ui_modeledit.h" line="14478"/>
         <source>FM 3</source>
         <translation>PV 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="6034"/>
-        <location filename="ui_modeledit.h" line="13416"/>
+        <location filename="modeledit.ui" line="6209"/>
+        <location filename="ui_modeledit.h" line="14494"/>
         <source>FM 4</source>
         <translation>PV 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="6579"/>
-        <location filename="ui_modeledit.h" line="13432"/>
+        <location filename="modeledit.ui" line="6766"/>
+        <location filename="ui_modeledit.h" line="14510"/>
         <source>FM 5</source>
         <translation>PV 5</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="7124"/>
-        <location filename="ui_modeledit.h" line="13448"/>
+        <location filename="modeledit.ui" line="7323"/>
+        <location filename="ui_modeledit.h" line="14526"/>
         <source>FM 6</source>
         <translation>PV 6</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="7669"/>
-        <location filename="ui_modeledit.h" line="13464"/>
+        <location filename="modeledit.ui" line="7880"/>
+        <location filename="ui_modeledit.h" line="14542"/>
         <source>FM 7</source>
         <translation>PV 7</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8214"/>
-        <location filename="ui_modeledit.h" line="13480"/>
+        <location filename="modeledit.ui" line="8437"/>
+        <location filename="ui_modeledit.h" line="14558"/>
         <source>FM 8</source>
         <translation>PV 8</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="12803"/>
-        <location filename="ui_modeledit.h" line="13708"/>
+        <location filename="modeledit.ui" line="10706"/>
+        <location filename="modeledit.ui" line="13026"/>
+        <location filename="ui_modeledit.h" line="14647"/>
+        <location filename="ui_modeledit.h" line="14751"/>
+        <source>Center</source>
+        <translation>Centre</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="14425"/>
+        <location filename="ui_modeledit.h" line="14790"/>
         <source>Curve name</source>
         <translation>Nom de la courbe</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16310"/>
-        <location filename="ui_modeledit.h" line="13754"/>
+        <location filename="modeledit.ui" line="17727"/>
+        <location filename="ui_modeledit.h" line="14832"/>
+        <source>Curve Creator</source>
+        <translation>Créateur de courbes</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17734"/>
+        <location filename="ui_modeledit.h" line="14835"/>
+        <source>Both</source>
+        <translation>Les 2</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17739"/>
+        <location filename="ui_modeledit.h" line="14836"/>
+        <source>x&gt;0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17744"/>
+        <location filename="ui_modeledit.h" line="14837"/>
+        <source>x&lt;0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17753"/>
+        <location filename="ui_modeledit.h" line="14841"/>
+        <source>Linear</source>
+        <translation>Linéaire</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17758"/>
+        <location filename="ui_modeledit.h" line="14842"/>
+        <source>Single Expo</source>
+        <translation>Expo simple</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17763"/>
+        <location filename="ui_modeledit.h" line="14843"/>
+        <source>Symmetrical f(x)=-f(-x)</source>
+        <oldsource>Simmetrycal f(x)=-f(-x)</oldsource>
+        <translation>Symétrique f(x)=-f(-x)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17768"/>
+        <location filename="ui_modeledit.h" line="14844"/>
+        <source>Symmetrical f(x)=f(-x)</source>
+        <oldsource>Simmetrycal f(x)=f(-x)</oldsource>
+        <translation>Symétrique f(x)=f(-x)</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17791"/>
+        <location filename="ui_modeledit.h" line="14846"/>
+        <source>Apply</source>
+        <translation>Appliquer</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17813"/>
+        <location filename="ui_modeledit.h" line="14847"/>
+        <source>Side</source>
+        <translation>Direction</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17833"/>
+        <location filename="ui_modeledit.h" line="14848"/>
+        <source>Y at X=-100</source>
+        <translation>Y pour X=-100</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17840"/>
+        <location filename="ui_modeledit.h" line="14849"/>
+        <source>Y at X=0</source>
+        <translation>Y pour X=0</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17863"/>
+        <location filename="ui_modeledit.h" line="14850"/>
+        <source>Y at X=100</source>
+        <translation>Y pour X=100</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17877"/>
+        <location filename="ui_modeledit.h" line="14852"/>
+        <source>Coefficient</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="17955"/>
+        <location filename="ui_modeledit.h" line="14853"/>
         <source>Clear All Curves</source>
         <translation>Effacer toutes les courbes</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16639"/>
-        <location filename="ui_modeledit.h" line="13768"/>
         <source>CSwitchA</source>
-        <translation>Inter Pers. A</translation>
+        <translation type="obsolete">Inter Pers. A</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16668"/>
-        <location filename="ui_modeledit.h" line="13769"/>
         <source>CSwitchB</source>
-        <translation>Inter Pers. B</translation>
+        <translation type="obsolete">Inter Pers. B</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16697"/>
-        <location filename="ui_modeledit.h" line="13770"/>
         <source>CSwitchC</source>
-        <translation>Inter Pers. C</translation>
+        <translation type="obsolete">Inter Pers. C</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="240"/>
-        <location filename="ui_modeledit.h" line="13137"/>
+        <location filename="modeledit.ui" line="2106"/>
+        <location filename="ui_modeledit.h" line="14320"/>
         <source>Timer1</source>
         <translation>Chrono 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="354"/>
-        <location filename="ui_modeledit.h" line="13149"/>
+        <location filename="modeledit.ui" line="76"/>
+        <location filename="ui_modeledit.h" line="14171"/>
         <source>Timer2</source>
         <translation>Chrono2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1450"/>
-        <location filename="modeledit.ui" line="1623"/>
-        <location filename="modeledit.ui" line="1975"/>
-        <location filename="ui_modeledit.h" line="13226"/>
-        <location filename="ui_modeledit.h" line="13241"/>
+        <location filename="modeledit.ui" line="1207"/>
+        <location filename="modeledit.ui" line="1380"/>
+        <location filename="modeledit.ui" line="1735"/>
+        <location filename="ui_modeledit.h" line="14251"/>
+        <location filename="ui_modeledit.h" line="14267"/>
+        <location filename="ui_modeledit.h" line="14293"/>
         <source>PPM delay</source>
         <translation>Délai PPM</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1335"/>
-        <location filename="ui_modeledit.h" line="13269"/>
+        <location filename="modeledit.ui" line="1092"/>
+        <location filename="ui_modeledit.h" line="14233"/>
         <source>Extended Trims</source>
         <translation>Trims étendus</translation>
     </message>
@@ -5208,26 +5504,28 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Ecolage</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1282"/>
-        <location filename="ui_modeledit.h" line="13265"/>
+        <location filename="modeledit.ui" line="1032"/>
+        <location filename="ui_modeledit.h" line="14229"/>
         <source>Throttle2Trig</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1522"/>
-        <location filename="modeledit.ui" line="1697"/>
-        <location filename="modeledit.ui" line="2154"/>
-        <location filename="ui_modeledit.h" line="13218"/>
-        <location filename="ui_modeledit.h" line="13262"/>
+        <location filename="modeledit.ui" line="1279"/>
+        <location filename="modeledit.ui" line="1454"/>
+        <location filename="modeledit.ui" line="1917"/>
+        <location filename="ui_modeledit.h" line="14260"/>
+        <location filename="ui_modeledit.h" line="14275"/>
+        <location filename="ui_modeledit.h" line="14311"/>
         <source>PPM Frame Length</source>
         <translation>Longueur de trame PPM</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1480"/>
-        <location filename="modeledit.ui" line="1707"/>
-        <location filename="modeledit.ui" line="2164"/>
-        <location filename="ui_modeledit.h" line="13219"/>
-        <location filename="ui_modeledit.h" line="13256"/>
+        <location filename="modeledit.ui" line="1237"/>
+        <location filename="modeledit.ui" line="1464"/>
+        <location filename="modeledit.ui" line="1927"/>
+        <location filename="ui_modeledit.h" line="14254"/>
+        <location filename="ui_modeledit.h" line="14276"/>
+        <location filename="ui_modeledit.h" line="14312"/>
         <source> mSec</source>
         <translation>ms</translation>
     </message>
@@ -5244,392 +5542,385 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Nom de la phase</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3778"/>
-        <location filename="modeledit.ui" line="4465"/>
-        <location filename="modeledit.ui" line="5010"/>
-        <location filename="modeledit.ui" line="5504"/>
-        <location filename="modeledit.ui" line="6079"/>
-        <location filename="modeledit.ui" line="6944"/>
-        <location filename="modeledit.ui" line="7475"/>
-        <location filename="modeledit.ui" line="7735"/>
-        <location filename="modeledit.ui" line="8579"/>
-        <location filename="ui_modeledit.h" line="13335"/>
-        <location filename="ui_modeledit.h" line="13354"/>
-        <location filename="ui_modeledit.h" line="13370"/>
-        <location filename="ui_modeledit.h" line="13386"/>
-        <location filename="ui_modeledit.h" line="13402"/>
-        <location filename="ui_modeledit.h" line="13422"/>
-        <location filename="ui_modeledit.h" line="13438"/>
-        <location filename="ui_modeledit.h" line="13450"/>
-        <location filename="ui_modeledit.h" line="13470"/>
+        <location filename="modeledit.ui" line="3917"/>
+        <location filename="modeledit.ui" line="4604"/>
+        <location filename="modeledit.ui" line="5161"/>
+        <location filename="modeledit.ui" line="5667"/>
+        <location filename="modeledit.ui" line="6254"/>
+        <location filename="modeledit.ui" line="7143"/>
+        <location filename="modeledit.ui" line="7686"/>
+        <location filename="modeledit.ui" line="7946"/>
+        <location filename="modeledit.ui" line="8814"/>
+        <location filename="ui_modeledit.h" line="14413"/>
+        <location filename="ui_modeledit.h" line="14434"/>
+        <location filename="ui_modeledit.h" line="14450"/>
+        <location filename="ui_modeledit.h" line="14464"/>
+        <location filename="ui_modeledit.h" line="14481"/>
+        <location filename="ui_modeledit.h" line="14501"/>
+        <location filename="ui_modeledit.h" line="14517"/>
+        <location filename="ui_modeledit.h" line="14529"/>
+        <location filename="ui_modeledit.h" line="14549"/>
         <source>Fade In</source>
         <translation>Fondu en entrée</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3799"/>
-        <location filename="modeledit.ui" line="4451"/>
-        <location filename="modeledit.ui" line="4966"/>
-        <location filename="modeledit.ui" line="5497"/>
-        <location filename="modeledit.ui" line="6086"/>
-        <location filename="modeledit.ui" line="6951"/>
-        <location filename="modeledit.ui" line="7496"/>
-        <location filename="modeledit.ui" line="7742"/>
-        <location filename="modeledit.ui" line="8586"/>
-        <location filename="ui_modeledit.h" line="13337"/>
-        <location filename="ui_modeledit.h" line="13355"/>
-        <location filename="ui_modeledit.h" line="13371"/>
-        <location filename="ui_modeledit.h" line="13387"/>
-        <location filename="ui_modeledit.h" line="13403"/>
-        <location filename="ui_modeledit.h" line="13423"/>
-        <location filename="ui_modeledit.h" line="13439"/>
-        <location filename="ui_modeledit.h" line="13451"/>
-        <location filename="ui_modeledit.h" line="13471"/>
+        <location filename="modeledit.ui" line="3938"/>
+        <location filename="modeledit.ui" line="4590"/>
+        <location filename="modeledit.ui" line="5117"/>
+        <location filename="modeledit.ui" line="5660"/>
+        <location filename="modeledit.ui" line="6261"/>
+        <location filename="modeledit.ui" line="7150"/>
+        <location filename="modeledit.ui" line="7707"/>
+        <location filename="modeledit.ui" line="7953"/>
+        <location filename="modeledit.ui" line="8821"/>
+        <location filename="ui_modeledit.h" line="14414"/>
+        <location filename="ui_modeledit.h" line="14433"/>
+        <location filename="ui_modeledit.h" line="14447"/>
+        <location filename="ui_modeledit.h" line="14463"/>
+        <location filename="ui_modeledit.h" line="14482"/>
+        <location filename="ui_modeledit.h" line="14502"/>
+        <location filename="ui_modeledit.h" line="14518"/>
+        <location filename="ui_modeledit.h" line="14530"/>
+        <location filename="ui_modeledit.h" line="14550"/>
         <source>Fade Out</source>
         <translation>Fondu en sortie</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3954"/>
-        <location filename="modeledit.ui" line="4546"/>
-        <location filename="modeledit.ui" line="5091"/>
-        <location filename="modeledit.ui" line="5636"/>
-        <location filename="modeledit.ui" line="6181"/>
-        <location filename="modeledit.ui" line="6657"/>
-        <location filename="modeledit.ui" line="7202"/>
-        <location filename="modeledit.ui" line="7823"/>
-        <location filename="modeledit.ui" line="8292"/>
-        <location filename="ui_modeledit.h" line="13339"/>
-        <location filename="ui_modeledit.h" line="13358"/>
-        <location filename="ui_modeledit.h" line="13374"/>
-        <location filename="ui_modeledit.h" line="13390"/>
-        <location filename="ui_modeledit.h" line="13406"/>
-        <location filename="ui_modeledit.h" line="13418"/>
-        <location filename="ui_modeledit.h" line="13434"/>
-        <location filename="ui_modeledit.h" line="13454"/>
-        <location filename="ui_modeledit.h" line="13466"/>
+        <location filename="modeledit.ui" line="4093"/>
+        <location filename="modeledit.ui" line="4697"/>
+        <location filename="modeledit.ui" line="5254"/>
+        <location filename="modeledit.ui" line="5811"/>
+        <location filename="modeledit.ui" line="6368"/>
+        <location filename="modeledit.ui" line="6856"/>
+        <location filename="modeledit.ui" line="7413"/>
+        <location filename="modeledit.ui" line="8046"/>
+        <location filename="modeledit.ui" line="8527"/>
+        <location filename="ui_modeledit.h" line="14417"/>
+        <location filename="ui_modeledit.h" line="14436"/>
+        <location filename="ui_modeledit.h" line="14452"/>
+        <location filename="ui_modeledit.h" line="14468"/>
+        <location filename="ui_modeledit.h" line="14484"/>
+        <location filename="ui_modeledit.h" line="14496"/>
+        <location filename="ui_modeledit.h" line="14512"/>
+        <location filename="ui_modeledit.h" line="14532"/>
+        <location filename="ui_modeledit.h" line="14544"/>
         <source>trim2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="3909"/>
-        <location filename="modeledit.ui" line="4536"/>
-        <location filename="modeledit.ui" line="5081"/>
-        <location filename="modeledit.ui" line="5626"/>
-        <location filename="modeledit.ui" line="6171"/>
-        <location filename="modeledit.ui" line="6647"/>
-        <location filename="modeledit.ui" line="7192"/>
-        <location filename="modeledit.ui" line="7813"/>
-        <location filename="modeledit.ui" line="8282"/>
-        <location filename="ui_modeledit.h" line="13338"/>
-        <location filename="ui_modeledit.h" line="13357"/>
-        <location filename="ui_modeledit.h" line="13373"/>
-        <location filename="ui_modeledit.h" line="13389"/>
-        <location filename="ui_modeledit.h" line="13405"/>
-        <location filename="ui_modeledit.h" line="13417"/>
-        <location filename="ui_modeledit.h" line="13433"/>
-        <location filename="ui_modeledit.h" line="13453"/>
-        <location filename="ui_modeledit.h" line="13465"/>
+        <location filename="modeledit.ui" line="4048"/>
+        <location filename="modeledit.ui" line="4687"/>
+        <location filename="modeledit.ui" line="5244"/>
+        <location filename="modeledit.ui" line="5801"/>
+        <location filename="modeledit.ui" line="6358"/>
+        <location filename="modeledit.ui" line="6846"/>
+        <location filename="modeledit.ui" line="7403"/>
+        <location filename="modeledit.ui" line="8036"/>
+        <location filename="modeledit.ui" line="8517"/>
+        <location filename="ui_modeledit.h" line="14416"/>
+        <location filename="ui_modeledit.h" line="14435"/>
+        <location filename="ui_modeledit.h" line="14451"/>
+        <location filename="ui_modeledit.h" line="14467"/>
+        <location filename="ui_modeledit.h" line="14483"/>
+        <location filename="ui_modeledit.h" line="14495"/>
+        <location filename="ui_modeledit.h" line="14511"/>
+        <location filename="ui_modeledit.h" line="14531"/>
+        <location filename="ui_modeledit.h" line="14543"/>
         <source>trim1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1773"/>
-        <location filename="modeledit.ui" line="2090"/>
-        <location filename="ui_modeledit.h" line="13228"/>
-        <location filename="ui_modeledit.h" line="13255"/>
+        <location filename="modeledit.ui" line="1530"/>
+        <location filename="modeledit.ui" line="1850"/>
+        <location filename="ui_modeledit.h" line="14278"/>
+        <location filename="ui_modeledit.h" line="14303"/>
         <source>DSM Type</source>
         <translation>Type DSM</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1790"/>
-        <location filename="modeledit.ui" line="2107"/>
-        <location filename="ui_modeledit.h" line="13231"/>
-        <location filename="ui_modeledit.h" line="13249"/>
+        <location filename="modeledit.ui" line="1547"/>
+        <location filename="modeledit.ui" line="1867"/>
+        <location filename="ui_modeledit.h" line="14281"/>
+        <location filename="ui_modeledit.h" line="14306"/>
         <source>LP4/LP5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1795"/>
-        <location filename="modeledit.ui" line="2112"/>
-        <location filename="ui_modeledit.h" line="13232"/>
-        <location filename="ui_modeledit.h" line="13250"/>
+        <location filename="modeledit.ui" line="1552"/>
+        <location filename="modeledit.ui" line="1872"/>
+        <location filename="ui_modeledit.h" line="14282"/>
+        <location filename="ui_modeledit.h" line="14307"/>
         <source>DSM2only</source>
         <translation>DSM2seul</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1800"/>
-        <location filename="modeledit.ui" line="2117"/>
-        <location filename="ui_modeledit.h" line="13233"/>
-        <location filename="ui_modeledit.h" line="13251"/>
+        <location filename="modeledit.ui" line="1557"/>
+        <location filename="modeledit.ui" line="1877"/>
+        <location filename="ui_modeledit.h" line="14283"/>
+        <location filename="ui_modeledit.h" line="14308"/>
         <source>DSM2/DSMX</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1814"/>
-        <location filename="modeledit.ui" line="2049"/>
-        <location filename="ui_modeledit.h" line="13235"/>
-        <location filename="ui_modeledit.h" line="13254"/>
+        <location filename="modeledit.ui" line="1571"/>
+        <location filename="modeledit.ui" line="1809"/>
+        <location filename="ui_modeledit.h" line="14285"/>
+        <location filename="ui_modeledit.h" line="14301"/>
         <source>RX Number</source>
         <translation>Numéro de récepteur</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="88"/>
-        <location filename="ui_modeledit.h" line="13271"/>
+        <location filename="modeledit.ui" line="98"/>
+        <location filename="ui_modeledit.h" line="14172"/>
         <source>Disable Throttle Warning</source>
         <translation>Désactiver alerte gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="522"/>
-        <location filename="ui_modeledit.h" line="13169"/>
+        <location filename="modeledit.ui" line="236"/>
+        <location filename="ui_modeledit.h" line="14186"/>
         <source>Switch startup  Warning</source>
         <translation>Alerte interrupteurs</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1308"/>
-        <location filename="ui_modeledit.h" line="13267"/>
+        <location filename="modeledit.ui" line="1065"/>
+        <location filename="ui_modeledit.h" line="14231"/>
         <source>Instant Trim</source>
         <translation>Trims instantanés</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="128"/>
-        <location filename="ui_modeledit.h" line="13133"/>
+        <location filename="modeledit.ui" line="138"/>
+        <location filename="ui_modeledit.h" line="14175"/>
         <source>Throttle Trace</source>
         <translation>Graphe de Gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="318"/>
-        <location filename="modeledit.ui" line="428"/>
-        <location filename="ui_modeledit.h" line="13146"/>
-        <location filename="ui_modeledit.h" line="13157"/>
+        <location filename="modeledit.ui" line="2167"/>
+        <location filename="modeledit.ui" line="2254"/>
+        <location filename="ui_modeledit.h" line="14328"/>
+        <location filename="ui_modeledit.h" line="14338"/>
         <source>Persistent</source>
         <translation>Persistant</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="325"/>
-        <location filename="modeledit.ui" line="435"/>
-        <location filename="ui_modeledit.h" line="13147"/>
-        <location filename="ui_modeledit.h" line="13158"/>
+        <location filename="modeledit.ui" line="2174"/>
+        <location filename="modeledit.ui" line="2261"/>
+        <location filename="ui_modeledit.h" line="14329"/>
+        <location filename="ui_modeledit.h" line="14339"/>
         <source>MinuteBeep</source>
         <translation>Bip chaque minute</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="332"/>
-        <location filename="modeledit.ui" line="442"/>
-        <location filename="ui_modeledit.h" line="13148"/>
-        <location filename="ui_modeledit.h" line="13159"/>
+        <location filename="modeledit.ui" line="2181"/>
+        <location filename="modeledit.ui" line="2268"/>
+        <location filename="ui_modeledit.h" line="14330"/>
+        <location filename="ui_modeledit.h" line="14340"/>
         <source>CountDownBeep</source>
         <translation>Compte à rebours final</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2462"/>
-        <location filename="modeledit.ui" line="3030"/>
-        <location filename="ui_modeledit.h" line="13288"/>
-        <location filename="ui_modeledit.h" line="13302"/>
+        <location filename="modeledit.ui" line="2541"/>
+        <location filename="modeledit.ui" line="3191"/>
+        <location filename="ui_modeledit.h" line="14348"/>
+        <location filename="ui_modeledit.h" line="14374"/>
         <source>CH01</source>
         <translation>VOIE01</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2534"/>
-        <location filename="modeledit.ui" line="3010"/>
-        <location filename="ui_modeledit.h" line="13292"/>
-        <location filename="ui_modeledit.h" line="13301"/>
+        <location filename="modeledit.ui" line="2613"/>
+        <location filename="modeledit.ui" line="3171"/>
+        <location filename="ui_modeledit.h" line="14351"/>
+        <location filename="ui_modeledit.h" line="14373"/>
         <source>CH02</source>
         <translation>VOIE02</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2612"/>
-        <location filename="modeledit.ui" line="3123"/>
-        <location filename="ui_modeledit.h" line="13294"/>
-        <location filename="ui_modeledit.h" line="13314"/>
+        <location filename="modeledit.ui" line="2691"/>
+        <location filename="modeledit.ui" line="3284"/>
+        <location filename="ui_modeledit.h" line="14353"/>
+        <location filename="ui_modeledit.h" line="14378"/>
         <source>CH03</source>
         <translation>VOIE03</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2469"/>
-        <location filename="modeledit.ui" line="3050"/>
-        <location filename="ui_modeledit.h" line="13289"/>
-        <location filename="ui_modeledit.h" line="13310"/>
+        <location filename="modeledit.ui" line="2548"/>
+        <location filename="modeledit.ui" line="3211"/>
+        <location filename="ui_modeledit.h" line="14349"/>
+        <location filename="ui_modeledit.h" line="14375"/>
         <source>CH04</source>
         <translation>VOIE04</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2658"/>
-        <location filename="modeledit.ui" line="3291"/>
-        <location filename="ui_modeledit.h" line="13285"/>
-        <location filename="ui_modeledit.h" line="13312"/>
+        <location filename="modeledit.ui" line="2737"/>
+        <location filename="modeledit.ui" line="3436"/>
+        <location filename="ui_modeledit.h" line="14355"/>
+        <location filename="ui_modeledit.h" line="14380"/>
         <source>CH05</source>
         <translation>VOIE05</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2697"/>
-        <location filename="modeledit.ui" line="3327"/>
-        <location filename="ui_modeledit.h" line="13291"/>
-        <location filename="ui_modeledit.h" line="13304"/>
+        <location filename="modeledit.ui" line="2776"/>
+        <location filename="modeledit.ui" line="3472"/>
+        <location filename="ui_modeledit.h" line="14356"/>
+        <location filename="ui_modeledit.h" line="14381"/>
         <source>CH06</source>
         <translation>VOIE06</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2736"/>
-        <location filename="modeledit.ui" line="3376"/>
-        <location filename="ui_modeledit.h" line="13286"/>
-        <location filename="ui_modeledit.h" line="13306"/>
+        <location filename="modeledit.ui" line="2815"/>
+        <location filename="modeledit.ui" line="3521"/>
+        <location filename="ui_modeledit.h" line="14357"/>
+        <location filename="ui_modeledit.h" line="14382"/>
         <source>CH07</source>
         <translation>VOIE07</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2807"/>
-        <location filename="modeledit.ui" line="3383"/>
-        <location filename="ui_modeledit.h" line="13298"/>
-        <location filename="ui_modeledit.h" line="13308"/>
+        <location filename="modeledit.ui" line="2886"/>
+        <location filename="modeledit.ui" line="3528"/>
+        <location filename="ui_modeledit.h" line="14358"/>
+        <location filename="ui_modeledit.h" line="14383"/>
         <source>CH08</source>
         <translation>VOIE08</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2619"/>
-        <location filename="modeledit.ui" line="3003"/>
-        <location filename="ui_modeledit.h" line="13295"/>
-        <location filename="ui_modeledit.h" line="13300"/>
+        <location filename="modeledit.ui" line="2698"/>
+        <location filename="modeledit.ui" line="3164"/>
+        <location filename="ui_modeledit.h" line="14354"/>
+        <location filename="ui_modeledit.h" line="14372"/>
         <source>CH09</source>
         <translation>VOIE09</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2508"/>
-        <location filename="modeledit.ui" line="3090"/>
-        <location filename="ui_modeledit.h" line="13290"/>
-        <location filename="ui_modeledit.h" line="13313"/>
+        <location filename="modeledit.ui" line="2587"/>
+        <location filename="modeledit.ui" line="3251"/>
+        <location filename="ui_modeledit.h" line="14350"/>
+        <location filename="ui_modeledit.h" line="14377"/>
         <source>CH10</source>
         <translation>VOIE10</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2592"/>
-        <location filename="modeledit.ui" line="3143"/>
-        <location filename="ui_modeledit.h" line="13293"/>
-        <location filename="ui_modeledit.h" line="13315"/>
+        <location filename="modeledit.ui" line="2671"/>
+        <location filename="modeledit.ui" line="3304"/>
+        <location filename="ui_modeledit.h" line="14352"/>
+        <location filename="ui_modeledit.h" line="14379"/>
         <source>CH11</source>
         <translation>VOIE11</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2397"/>
-        <location filename="modeledit.ui" line="3070"/>
-        <location filename="ui_modeledit.h" line="13283"/>
-        <location filename="ui_modeledit.h" line="13311"/>
+        <location filename="modeledit.ui" line="2476"/>
+        <location filename="modeledit.ui" line="3231"/>
+        <location filename="ui_modeledit.h" line="14347"/>
+        <location filename="ui_modeledit.h" line="14376"/>
         <source>CH12</source>
         <translation>VOIE12</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2821"/>
-        <location filename="modeledit.ui" line="3435"/>
-        <location filename="ui_modeledit.h" line="13287"/>
-        <location filename="ui_modeledit.h" line="13303"/>
+        <location filename="modeledit.ui" line="2900"/>
+        <location filename="modeledit.ui" line="3564"/>
+        <location filename="ui_modeledit.h" line="14359"/>
+        <location filename="ui_modeledit.h" line="14384"/>
         <source>CH13</source>
         <translation>VOIE13</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2860"/>
-        <location filename="modeledit.ui" line="3471"/>
-        <location filename="ui_modeledit.h" line="13296"/>
-        <location filename="ui_modeledit.h" line="13305"/>
+        <location filename="modeledit.ui" line="2939"/>
+        <location filename="modeledit.ui" line="3157"/>
+        <location filename="ui_modeledit.h" line="14360"/>
+        <location filename="ui_modeledit.h" line="14371"/>
         <source>CH14</source>
         <translation>VOIE14</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2899"/>
-        <location filename="modeledit.ui" line="3507"/>
-        <location filename="ui_modeledit.h" line="13297"/>
-        <location filename="ui_modeledit.h" line="13307"/>
+        <location filename="modeledit.ui" line="2978"/>
+        <location filename="modeledit.ui" line="3629"/>
+        <location filename="ui_modeledit.h" line="14361"/>
+        <location filename="ui_modeledit.h" line="14385"/>
         <source>CH15</source>
         <translation>VOIE15</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="2938"/>
-        <location filename="modeledit.ui" line="3543"/>
-        <location filename="ui_modeledit.h" line="13284"/>
-        <location filename="ui_modeledit.h" line="13309"/>
+        <location filename="modeledit.ui" line="3017"/>
+        <location filename="modeledit.ui" line="3665"/>
+        <location filename="ui_modeledit.h" line="14362"/>
+        <location filename="ui_modeledit.h" line="14386"/>
         <source>CH16</source>
         <translation>VOIE16</translation>
     </message>
     <message>
-        <location filename="ui_modeledit.h" line="13211"/>
         <source>Trainer mode</source>
-        <translation>Mode écolage</translation>
+        <translation type="obsolete">Mode écolage</translation>
     </message>
     <message>
-        <location filename="ui_modeledit.h" line="13216"/>
-        <location filename="ui_modeledit.h" line="13243"/>
-        <source>--</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="modeledit.ui" line="1203"/>
-        <location filename="ui_modeledit.h" line="13201"/>
+        <location filename="modeledit.ui" line="953"/>
+        <location filename="ui_modeledit.h" line="14218"/>
         <source>REa</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="1259"/>
-        <location filename="ui_modeledit.h" line="13209"/>
+        <location filename="modeledit.ui" line="1009"/>
+        <location filename="ui_modeledit.h" line="14226"/>
         <source>REb</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="585"/>
-        <location filename="ui_modeledit.h" line="13170"/>
+        <location filename="modeledit.ui" line="299"/>
+        <location filename="ui_modeledit.h" line="14187"/>
         <source>3POS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="601"/>
-        <location filename="modeledit.ui" line="823"/>
-        <location filename="ui_modeledit.h" line="13171"/>
-        <location filename="ui_modeledit.h" line="13196"/>
+        <location filename="modeledit.ui" line="315"/>
+        <location filename="modeledit.ui" line="537"/>
+        <location filename="ui_modeledit.h" line="14188"/>
+        <location filename="ui_modeledit.h" line="14213"/>
         <source>Check</source>
         <translation>Vérif.</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="622"/>
-        <location filename="modeledit.ui" line="756"/>
-        <location filename="modeledit.cpp" line="2437"/>
-        <location filename="ui_modeledit.h" line="13175"/>
-        <location filename="ui_modeledit.h" line="13190"/>
+        <location filename="modeledit.ui" line="336"/>
+        <location filename="modeledit.ui" line="470"/>
+        <location filename="modeledit.cpp" line="2686"/>
+        <location filename="ui_modeledit.h" line="14192"/>
+        <location filename="ui_modeledit.h" line="14207"/>
         <source>ON</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="627"/>
-        <location filename="modeledit.ui" line="761"/>
-        <location filename="ui_modeledit.h" line="13176"/>
-        <location filename="ui_modeledit.h" line="13191"/>
+        <location filename="modeledit.ui" line="341"/>
+        <location filename="modeledit.ui" line="475"/>
+        <location filename="ui_modeledit.h" line="14193"/>
+        <location filename="ui_modeledit.h" line="14208"/>
         <source>OFF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="668"/>
-        <location filename="ui_modeledit.h" line="13181"/>
+        <location filename="modeledit.ui" line="382"/>
+        <location filename="ui_modeledit.h" line="14198"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="679"/>
-        <location filename="ui_modeledit.h" line="13184"/>
+        <location filename="modeledit.ui" line="393"/>
+        <location filename="ui_modeledit.h" line="14201"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="684"/>
-        <location filename="ui_modeledit.h" line="13185"/>
+        <location filename="modeledit.ui" line="398"/>
+        <location filename="ui_modeledit.h" line="14202"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="689"/>
-        <location filename="ui_modeledit.h" line="13186"/>
+        <location filename="modeledit.ui" line="403"/>
+        <location filename="ui_modeledit.h" line="14203"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="308"/>
-        <location filename="modeledit.ui" line="418"/>
-        <location filename="ui_modeledit.h" line="13145"/>
-        <location filename="ui_modeledit.h" line="13156"/>
+        <location filename="modeledit.ui" line="2157"/>
+        <location filename="modeledit.ui" line="2244"/>
+        <location filename="ui_modeledit.h" line="14327"/>
+        <location filename="ui_modeledit.h" line="14337"/>
         <source>TriggerB</source>
         <translation>2e condition</translation>
     </message>
@@ -5638,8 +5929,8 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Permanent</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="163"/>
-        <location filename="ui_modeledit.h" line="13135"/>
+        <location filename="modeledit.ui" line="2305"/>
+        <location filename="ui_modeledit.h" line="14341"/>
         <source>Model Voice</source>
         <translation>Fichier son</translation>
     </message>
@@ -5648,46 +5939,46 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4029"/>
-        <location filename="modeledit.ui" line="4658"/>
-        <location filename="modeledit.ui" line="5203"/>
-        <location filename="modeledit.ui" line="5748"/>
-        <location filename="modeledit.ui" line="6293"/>
-        <location filename="modeledit.ui" line="6769"/>
-        <location filename="modeledit.ui" line="7314"/>
-        <location filename="modeledit.ui" line="7935"/>
-        <location filename="modeledit.ui" line="8404"/>
-        <location filename="ui_modeledit.h" line="13340"/>
-        <location filename="ui_modeledit.h" line="13359"/>
-        <location filename="ui_modeledit.h" line="13375"/>
-        <location filename="ui_modeledit.h" line="13391"/>
-        <location filename="ui_modeledit.h" line="13407"/>
-        <location filename="ui_modeledit.h" line="13419"/>
-        <location filename="ui_modeledit.h" line="13435"/>
-        <location filename="ui_modeledit.h" line="13455"/>
-        <location filename="ui_modeledit.h" line="13467"/>
+        <location filename="modeledit.ui" line="4168"/>
+        <location filename="modeledit.ui" line="4809"/>
+        <location filename="modeledit.ui" line="5366"/>
+        <location filename="modeledit.ui" line="5923"/>
+        <location filename="modeledit.ui" line="6480"/>
+        <location filename="modeledit.ui" line="6968"/>
+        <location filename="modeledit.ui" line="7525"/>
+        <location filename="modeledit.ui" line="8158"/>
+        <location filename="modeledit.ui" line="8639"/>
+        <location filename="ui_modeledit.h" line="14418"/>
+        <location filename="ui_modeledit.h" line="14437"/>
+        <location filename="ui_modeledit.h" line="14453"/>
+        <location filename="ui_modeledit.h" line="14469"/>
+        <location filename="ui_modeledit.h" line="14485"/>
+        <location filename="ui_modeledit.h" line="14497"/>
+        <location filename="ui_modeledit.h" line="14513"/>
+        <location filename="ui_modeledit.h" line="14533"/>
+        <location filename="ui_modeledit.h" line="14545"/>
         <source>trim4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="4061"/>
-        <location filename="modeledit.ui" line="4668"/>
-        <location filename="modeledit.ui" line="5213"/>
-        <location filename="modeledit.ui" line="5758"/>
-        <location filename="modeledit.ui" line="6303"/>
-        <location filename="modeledit.ui" line="6779"/>
-        <location filename="modeledit.ui" line="7324"/>
-        <location filename="modeledit.ui" line="7945"/>
-        <location filename="modeledit.ui" line="8414"/>
-        <location filename="ui_modeledit.h" line="13341"/>
-        <location filename="ui_modeledit.h" line="13360"/>
-        <location filename="ui_modeledit.h" line="13376"/>
-        <location filename="ui_modeledit.h" line="13392"/>
-        <location filename="ui_modeledit.h" line="13408"/>
-        <location filename="ui_modeledit.h" line="13420"/>
-        <location filename="ui_modeledit.h" line="13436"/>
-        <location filename="ui_modeledit.h" line="13456"/>
-        <location filename="ui_modeledit.h" line="13468"/>
+        <location filename="modeledit.ui" line="4200"/>
+        <location filename="modeledit.ui" line="4819"/>
+        <location filename="modeledit.ui" line="5376"/>
+        <location filename="modeledit.ui" line="5933"/>
+        <location filename="modeledit.ui" line="6490"/>
+        <location filename="modeledit.ui" line="6978"/>
+        <location filename="modeledit.ui" line="7535"/>
+        <location filename="modeledit.ui" line="8168"/>
+        <location filename="modeledit.ui" line="8649"/>
+        <location filename="ui_modeledit.h" line="14419"/>
+        <location filename="ui_modeledit.h" line="14438"/>
+        <location filename="ui_modeledit.h" line="14454"/>
+        <location filename="ui_modeledit.h" line="14470"/>
+        <location filename="ui_modeledit.h" line="14486"/>
+        <location filename="ui_modeledit.h" line="14498"/>
+        <location filename="ui_modeledit.h" line="14514"/>
+        <location filename="ui_modeledit.h" line="14534"/>
+        <location filename="ui_modeledit.h" line="14546"/>
         <source>trim3</source>
         <translation></translation>
     </message>
@@ -5708,21 +5999,21 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Phase de vol 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="8765"/>
-        <location filename="ui_modeledit.h" line="13482"/>
+        <location filename="modeledit.ui" line="9000"/>
+        <location filename="ui_modeledit.h" line="14560"/>
         <source>Expos/DR</source>
         <oldsource>Expos</oldsource>
         <translation>Expos / Doubles débattements</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="16322"/>
-        <location filename="ui_modeledit.h" line="13802"/>
+        <location filename="modeledit.ui" line="17967"/>
+        <location filename="ui_modeledit.h" line="14901"/>
         <source>Custom switches</source>
         <translation>Inters personnalisés</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="17960"/>
-        <location filename="ui_modeledit.h" line="13817"/>
+        <location filename="modeledit.ui" line="19624"/>
+        <location filename="ui_modeledit.h" line="14916"/>
         <source>Custom Functions</source>
         <oldsource>Function switches</oldsource>
         <translation>Fonctions personnalisées</translation>
@@ -5792,36 +6083,36 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Interrupteur de fonction 16</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18021"/>
-        <location filename="modeledit.ui" line="18130"/>
-        <location filename="ui_modeledit.h" line="13810"/>
-        <location filename="ui_modeledit.h" line="13815"/>
+        <location filename="modeledit.ui" line="19700"/>
+        <location filename="modeledit.ui" line="19809"/>
+        <location filename="ui_modeledit.h" line="14909"/>
+        <location filename="ui_modeledit.h" line="14914"/>
         <source>Param</source>
         <translation>Paramètre</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18172"/>
-        <location filename="ui_modeledit.h" line="14030"/>
+        <location filename="modeledit.ui" line="19855"/>
+        <location filename="ui_modeledit.h" line="15119"/>
         <source>Telemetry</source>
         <translation>Télémesure</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18285"/>
-        <location filename="modeledit.ui" line="18330"/>
-        <location filename="modeledit.ui" line="18457"/>
-        <location filename="modeledit.ui" line="18633"/>
-        <location filename="ui_modeledit.h" line="13830"/>
-        <location filename="ui_modeledit.h" line="13841"/>
-        <location filename="ui_modeledit.h" line="13860"/>
-        <location filename="ui_modeledit.h" line="13871"/>
+        <location filename="modeledit.ui" line="19971"/>
+        <location filename="modeledit.ui" line="20016"/>
+        <location filename="modeledit.ui" line="20143"/>
+        <location filename="modeledit.ui" line="20376"/>
+        <location filename="ui_modeledit.h" line="14929"/>
+        <location filename="ui_modeledit.h" line="14940"/>
+        <location filename="ui_modeledit.h" line="14959"/>
+        <location filename="ui_modeledit.h" line="14970"/>
         <source>A1</source>
         <translation>A1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18656"/>
-        <location filename="modeledit.ui" line="18950"/>
-        <location filename="ui_modeledit.h" line="13872"/>
-        <location filename="ui_modeledit.h" line="13914"/>
+        <location filename="modeledit.ui" line="20399"/>
+        <location filename="modeledit.ui" line="20717"/>
+        <location filename="ui_modeledit.h" line="14971"/>
+        <location filename="ui_modeledit.h" line="15013"/>
         <source>Unit</source>
         <translation>Unité</translation>
     </message>
@@ -5830,10 +6121,10 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Volts (v)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18892"/>
-        <location filename="modeledit.ui" line="19186"/>
-        <location filename="ui_modeledit.h" line="13906"/>
-        <location filename="ui_modeledit.h" line="13948"/>
+        <location filename="modeledit.ui" line="20659"/>
+        <location filename="modeledit.ui" line="20977"/>
+        <location filename="ui_modeledit.h" line="15005"/>
+        <location filename="ui_modeledit.h" line="15047"/>
         <source>Raw (-)</source>
         <translation>Chiffres bruts (-)</translation>
     </message>
@@ -5842,128 +6133,120 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Ratio</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18682"/>
-        <location filename="modeledit.ui" line="18976"/>
-        <location filename="ui_modeledit.h" line="13874"/>
-        <location filename="ui_modeledit.h" line="13916"/>
+        <location filename="modeledit.ui" line="20425"/>
+        <location filename="modeledit.ui" line="20743"/>
+        <location filename="ui_modeledit.h" line="14973"/>
+        <location filename="ui_modeledit.h" line="15015"/>
         <source>Alarm 1    </source>
         <translation>Alarme 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18696"/>
-        <location filename="modeledit.ui" line="18759"/>
-        <location filename="modeledit.ui" line="18990"/>
-        <location filename="modeledit.ui" line="19053"/>
-        <location filename="modeledit.ui" line="19255"/>
-        <location filename="modeledit.ui" line="19304"/>
-        <location filename="ui_modeledit.h" line="13877"/>
-        <location filename="ui_modeledit.h" line="13890"/>
-        <location filename="ui_modeledit.h" line="13919"/>
-        <location filename="ui_modeledit.h" line="13932"/>
-        <location filename="ui_modeledit.h" line="13958"/>
-        <location filename="ui_modeledit.h" line="13971"/>
+        <location filename="modeledit.ui" line="20439"/>
+        <location filename="modeledit.ui" line="20502"/>
+        <location filename="modeledit.ui" line="20757"/>
+        <location filename="modeledit.ui" line="20820"/>
+        <location filename="modeledit.ui" line="21056"/>
+        <location filename="modeledit.ui" line="21133"/>
+        <location filename="ui_modeledit.h" line="14976"/>
+        <location filename="ui_modeledit.h" line="14989"/>
+        <location filename="ui_modeledit.h" line="15018"/>
+        <location filename="ui_modeledit.h" line="15031"/>
+        <location filename="ui_modeledit.h" line="15058"/>
+        <location filename="ui_modeledit.h" line="15067"/>
         <source>----</source>
         <translation>----</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18701"/>
-        <location filename="modeledit.ui" line="18764"/>
-        <location filename="modeledit.ui" line="18995"/>
-        <location filename="modeledit.ui" line="19058"/>
-        <location filename="modeledit.ui" line="19260"/>
-        <location filename="modeledit.ui" line="19309"/>
-        <location filename="ui_modeledit.h" line="13878"/>
-        <location filename="ui_modeledit.h" line="13891"/>
-        <location filename="ui_modeledit.h" line="13920"/>
-        <location filename="ui_modeledit.h" line="13933"/>
-        <location filename="ui_modeledit.h" line="13959"/>
-        <location filename="ui_modeledit.h" line="13972"/>
+        <location filename="modeledit.ui" line="20444"/>
+        <location filename="modeledit.ui" line="20507"/>
+        <location filename="modeledit.ui" line="20762"/>
+        <location filename="modeledit.ui" line="20825"/>
+        <location filename="modeledit.ui" line="21061"/>
+        <location filename="modeledit.ui" line="21138"/>
+        <location filename="ui_modeledit.h" line="14977"/>
+        <location filename="ui_modeledit.h" line="14990"/>
+        <location filename="ui_modeledit.h" line="15019"/>
+        <location filename="ui_modeledit.h" line="15032"/>
+        <location filename="ui_modeledit.h" line="15059"/>
+        <location filename="ui_modeledit.h" line="15068"/>
         <source>Yellow</source>
         <translation>Jaune</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18706"/>
-        <location filename="modeledit.ui" line="18769"/>
-        <location filename="modeledit.ui" line="19000"/>
-        <location filename="modeledit.ui" line="19063"/>
-        <location filename="modeledit.ui" line="19265"/>
-        <location filename="modeledit.ui" line="19314"/>
-        <location filename="ui_modeledit.h" line="13879"/>
-        <location filename="ui_modeledit.h" line="13892"/>
-        <location filename="ui_modeledit.h" line="13921"/>
-        <location filename="ui_modeledit.h" line="13934"/>
-        <location filename="ui_modeledit.h" line="13960"/>
-        <location filename="ui_modeledit.h" line="13973"/>
+        <location filename="modeledit.ui" line="20449"/>
+        <location filename="modeledit.ui" line="20512"/>
+        <location filename="modeledit.ui" line="20767"/>
+        <location filename="modeledit.ui" line="20830"/>
+        <location filename="modeledit.ui" line="21066"/>
+        <location filename="modeledit.ui" line="21143"/>
+        <location filename="ui_modeledit.h" line="14978"/>
+        <location filename="ui_modeledit.h" line="14991"/>
+        <location filename="ui_modeledit.h" line="15020"/>
+        <location filename="ui_modeledit.h" line="15033"/>
+        <location filename="ui_modeledit.h" line="15060"/>
+        <location filename="ui_modeledit.h" line="15069"/>
         <source>Orange</source>
         <translation>Orange</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18711"/>
-        <location filename="modeledit.ui" line="18774"/>
-        <location filename="modeledit.ui" line="19005"/>
-        <location filename="modeledit.ui" line="19068"/>
-        <location filename="modeledit.ui" line="19270"/>
-        <location filename="modeledit.ui" line="19319"/>
-        <location filename="ui_modeledit.h" line="13880"/>
-        <location filename="ui_modeledit.h" line="13893"/>
-        <location filename="ui_modeledit.h" line="13922"/>
-        <location filename="ui_modeledit.h" line="13935"/>
-        <location filename="ui_modeledit.h" line="13961"/>
-        <location filename="ui_modeledit.h" line="13974"/>
+        <location filename="modeledit.ui" line="20454"/>
+        <location filename="modeledit.ui" line="20517"/>
+        <location filename="modeledit.ui" line="20772"/>
+        <location filename="modeledit.ui" line="20835"/>
+        <location filename="modeledit.ui" line="21071"/>
+        <location filename="modeledit.ui" line="21148"/>
+        <location filename="ui_modeledit.h" line="14979"/>
+        <location filename="ui_modeledit.h" line="14992"/>
+        <location filename="ui_modeledit.h" line="15021"/>
+        <location filename="ui_modeledit.h" line="15034"/>
+        <location filename="ui_modeledit.h" line="15061"/>
+        <location filename="ui_modeledit.h" line="15070"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18726"/>
-        <location filename="modeledit.ui" line="18789"/>
-        <location filename="modeledit.ui" line="19020"/>
-        <location filename="modeledit.ui" line="19083"/>
-        <location filename="modeledit.ui" line="19337"/>
-        <location filename="modeledit.ui" line="19410"/>
-        <location filename="ui_modeledit.h" line="13884"/>
-        <location filename="ui_modeledit.h" line="13897"/>
-        <location filename="ui_modeledit.h" line="13926"/>
-        <location filename="ui_modeledit.h" line="13939"/>
-        <location filename="ui_modeledit.h" line="13965"/>
-        <location filename="ui_modeledit.h" line="13979"/>
+        <location filename="modeledit.ui" line="20469"/>
+        <location filename="modeledit.ui" line="20532"/>
+        <location filename="modeledit.ui" line="20787"/>
+        <location filename="modeledit.ui" line="20850"/>
+        <location filename="ui_modeledit.h" line="14983"/>
+        <location filename="ui_modeledit.h" line="14996"/>
+        <location filename="ui_modeledit.h" line="15025"/>
+        <location filename="ui_modeledit.h" line="15038"/>
         <source>&lt;</source>
         <translation>&lt;</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18731"/>
-        <location filename="modeledit.ui" line="18794"/>
-        <location filename="modeledit.ui" line="19025"/>
-        <location filename="modeledit.ui" line="19088"/>
-        <location filename="modeledit.ui" line="19342"/>
-        <location filename="modeledit.ui" line="19415"/>
-        <location filename="ui_modeledit.h" line="13885"/>
-        <location filename="ui_modeledit.h" line="13898"/>
-        <location filename="ui_modeledit.h" line="13927"/>
-        <location filename="ui_modeledit.h" line="13940"/>
-        <location filename="ui_modeledit.h" line="13966"/>
-        <location filename="ui_modeledit.h" line="13980"/>
+        <location filename="modeledit.ui" line="20474"/>
+        <location filename="modeledit.ui" line="20537"/>
+        <location filename="modeledit.ui" line="20792"/>
+        <location filename="modeledit.ui" line="20855"/>
+        <location filename="ui_modeledit.h" line="14984"/>
+        <location filename="ui_modeledit.h" line="14997"/>
+        <location filename="ui_modeledit.h" line="15026"/>
+        <location filename="ui_modeledit.h" line="15039"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18745"/>
-        <location filename="modeledit.ui" line="19039"/>
-        <location filename="modeledit.ui" line="19290"/>
-        <location filename="ui_modeledit.h" line="13887"/>
-        <location filename="ui_modeledit.h" line="13929"/>
-        <location filename="ui_modeledit.h" line="13976"/>
+        <location filename="modeledit.ui" line="20488"/>
+        <location filename="modeledit.ui" line="20806"/>
+        <location filename="modeledit.ui" line="21119"/>
+        <location filename="ui_modeledit.h" line="14986"/>
+        <location filename="ui_modeledit.h" line="15028"/>
+        <location filename="ui_modeledit.h" line="15064"/>
         <source>Alarm 2</source>
         <translation>Alarme 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="18290"/>
-        <location filename="modeledit.ui" line="18335"/>
-        <location filename="modeledit.ui" line="18462"/>
-        <location filename="modeledit.ui" line="18930"/>
-        <location filename="ui_modeledit.h" line="13831"/>
-        <location filename="ui_modeledit.h" line="13842"/>
-        <location filename="ui_modeledit.h" line="13861"/>
-        <location filename="ui_modeledit.h" line="13913"/>
+        <location filename="modeledit.ui" line="19976"/>
+        <location filename="modeledit.ui" line="20021"/>
+        <location filename="modeledit.ui" line="20148"/>
+        <location filename="modeledit.ui" line="20697"/>
+        <location filename="ui_modeledit.h" line="14930"/>
+        <location filename="ui_modeledit.h" line="14941"/>
+        <location filename="ui_modeledit.h" line="14960"/>
+        <location filename="ui_modeledit.h" line="15012"/>
         <source>A2</source>
         <translation>A2</translation>
     </message>
@@ -5972,22 +6255,22 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete"> Phase(</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4719"/>
+        <location filename="modeledit.cpp" line="5096"/>
         <source>Editing curve %1</source>
         <translation>Édition de la courbe %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5015"/>
+        <location filename="modeledit.cpp" line="5392"/>
         <source>Delete Selected Expos?</source>
         <translation>Supprimer les expos sélectionnés ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5588"/>
+        <location filename="modeledit.cpp" line="5975"/>
         <source>Clear Expos?</source>
         <translation>Effacer les expos ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5588"/>
+        <location filename="modeledit.cpp" line="5975"/>
         <source>Really clear all the expos?</source>
         <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
     </message>
@@ -5996,7 +6279,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Ratio(%1%)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1424"/>
+        <location filename="modeledit.cpp" line="1469"/>
         <source>Weight</source>
         <oldsource>Weight(+%1%)</oldsource>
         <translation>Ratio</translation>
@@ -6010,18 +6293,18 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete"> Expo(+%1%)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="199"/>
+        <location filename="modeledit.cpp" line="200"/>
         <source>Clear Expo Settings</source>
         <translation>Effacer les données d&apos;expos</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="231"/>
+        <location filename="modeledit.cpp" line="232"/>
         <source>Clear Mixes</source>
         <translation>Effacer les mixages</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1427"/>
-        <location filename="modeledit.cpp" line="1430"/>
+        <location filename="modeledit.cpp" line="1472"/>
+        <location filename="modeledit.cpp" line="1475"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
@@ -6030,15 +6313,15 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Phase</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1469"/>
-        <location filename="modeledit.cpp" line="1612"/>
+        <location filename="modeledit.cpp" line="1514"/>
+        <location filename="modeledit.cpp" line="1657"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1522"/>
-        <location filename="modeledit.cpp" line="1534"/>
-        <location filename="modeledit.cpp" line="1644"/>
+        <location filename="modeledit.cpp" line="1567"/>
+        <location filename="modeledit.cpp" line="1579"/>
+        <location filename="modeledit.cpp" line="1689"/>
         <source>CH%1%2</source>
         <translation>VOIE%1%2</translation>
     </message>
@@ -6047,22 +6330,22 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Pas de trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1597"/>
+        <location filename="modeledit.cpp" line="1642"/>
         <source>No Trim</source>
         <translation>Pas de Trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1603"/>
+        <location filename="modeledit.cpp" line="1648"/>
         <source>No DR/Expo</source>
         <translation>Pas d&apos;expo/DR</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1606"/>
+        <location filename="modeledit.cpp" line="1651"/>
         <source>FMTrim</source>
         <translation>Trims des phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1611"/>
+        <location filename="modeledit.cpp" line="1656"/>
         <source>Diff</source>
         <translation>Diff</translation>
     </message>
@@ -6071,300 +6354,300 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">FP%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2593"/>
+        <location filename="modeledit.cpp" line="2844"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2593"/>
+        <location filename="modeledit.cpp" line="2844"/>
         <source>Unable to find sound file %1!</source>
         <translation>Impossible de trouver le fichier %1!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2925"/>
+        <location filename="modeledit.cpp" line="3176"/>
         <source>Winged Shadow How High</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2928"/>
+        <location filename="modeledit.cpp" line="3179"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (non supporté)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2974"/>
-        <location filename="modeledit.cpp" line="2975"/>
+        <location filename="modeledit.cpp" line="3225"/>
+        <location filename="modeledit.cpp" line="3226"/>
         <source>Range</source>
         <translation>Plage</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3137"/>
+        <location filename="modeledit.cpp" line="3388"/>
         <source>Simple 4-CH</source>
         <translation>4 Canaux simple</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3138"/>
+        <location filename="modeledit.cpp" line="3389"/>
         <source>T-Cut</source>
         <translation>Coupure de gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3139"/>
+        <location filename="modeledit.cpp" line="3390"/>
         <source>Sticky T-Cut</source>
         <translation>Coupure de gaz avec maintien (nécessite la remise à 0 du manche pour déverrouiller)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3140"/>
+        <location filename="modeledit.cpp" line="3391"/>
         <source>V-Tail</source>
         <translation>Stabilisateur en V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3141"/>
+        <location filename="modeledit.cpp" line="3392"/>
         <source>Elevon\Delta</source>
         <translation>Elevon, aile delta</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3143"/>
+        <location filename="modeledit.cpp" line="3394"/>
         <source>Heli Setup with gyro gain control</source>
         <translation>Hélicoptère avec contrôle du gain du gyro</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3144"/>
+        <location filename="modeledit.cpp" line="3395"/>
         <source>Gyro gain control</source>
         <translation>Contrôle du gain du gyro pour hélicoptères</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3145"/>
+        <location filename="modeledit.cpp" line="3396"/>
         <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
         <translation>Hélicoptère (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3146"/>
+        <location filename="modeledit.cpp" line="3397"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Hélicoptère avec contrôle du gain du gyro (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3147"/>
+        <location filename="modeledit.cpp" line="3398"/>
         <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Contrôle du gain du gyro pour hélicoptères (assignation des canaux style Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3148"/>
+        <location filename="modeledit.cpp" line="3399"/>
         <source>Servo Test</source>
         <translation>Test de servos (CH15)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3149"/>
+        <location filename="modeledit.cpp" line="3400"/>
         <source>MultiCopter</source>
         <translation>Multicoptère</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3150"/>
+        <location filename="modeledit.cpp" line="3401"/>
         <source>Use Model Config Wizard</source>
         <translation>Utiliser l&apos;assistant de configuration de modèle (BETA - POUR COMMENTAIRES!)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4776"/>
+        <location filename="modeledit.cpp" line="5153"/>
         <source>Not enough available mixers!</source>
         <translation>Plus de mixages disponibles !</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="4831"/>
+        <location filename="modeledit.cpp" line="5208"/>
         <source>Not enough available expos!</source>
         <translation>Plus d&apos;expos disponibles !</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5243"/>
-        <location filename="modeledit.cpp" line="5267"/>
+        <location filename="modeledit.cpp" line="5620"/>
+        <location filename="modeledit.cpp" line="5644"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5247"/>
-        <location filename="modeledit.cpp" line="5271"/>
+        <location filename="modeledit.cpp" line="5624"/>
+        <location filename="modeledit.cpp" line="5648"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5248"/>
-        <location filename="modeledit.cpp" line="5272"/>
+        <location filename="modeledit.cpp" line="5625"/>
+        <location filename="modeledit.cpp" line="5649"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5249"/>
-        <location filename="modeledit.cpp" line="5273"/>
+        <location filename="modeledit.cpp" line="5626"/>
+        <location filename="modeledit.cpp" line="5650"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5250"/>
-        <location filename="modeledit.cpp" line="5274"/>
+        <location filename="modeledit.cpp" line="5627"/>
+        <location filename="modeledit.cpp" line="5651"/>
         <source>Ctrl+U</source>
         <translation>Ctlf+U</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5447"/>
+        <location filename="modeledit.cpp" line="5831"/>
         <source>Are you sure you want to delete curve %1 ?</source>
         <translation>Etes-vous sûr de vouloir effacer la courbe %1?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5843"/>
-        <location filename="modeledit.cpp" line="5849"/>
-        <location filename="modeledit.cpp" line="6034"/>
-        <location filename="modeledit.cpp" line="6040"/>
+        <location filename="modeledit.cpp" line="6230"/>
+        <location filename="modeledit.cpp" line="6236"/>
+        <location filename="modeledit.cpp" line="6421"/>
+        <location filename="modeledit.cpp" line="6427"/>
         <source>AIL2</source>
         <translation>AIL2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5866"/>
-        <location filename="modeledit.cpp" line="5867"/>
-        <location filename="modeledit.cpp" line="6057"/>
-        <location filename="modeledit.cpp" line="6058"/>
-        <location filename="modeledit.cpp" line="6152"/>
-        <location filename="modeledit.cpp" line="6153"/>
+        <location filename="modeledit.cpp" line="6253"/>
+        <location filename="modeledit.cpp" line="6254"/>
+        <location filename="modeledit.cpp" line="6444"/>
+        <location filename="modeledit.cpp" line="6445"/>
+        <location filename="modeledit.cpp" line="6539"/>
+        <location filename="modeledit.cpp" line="6540"/>
         <source>FLAPS</source>
         <translation>VOLETS</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5881"/>
-        <location filename="modeledit.cpp" line="5887"/>
-        <location filename="modeledit.cpp" line="6072"/>
-        <location filename="modeledit.cpp" line="6078"/>
-        <location filename="modeledit.cpp" line="6167"/>
-        <location filename="modeledit.cpp" line="6173"/>
+        <location filename="modeledit.cpp" line="6268"/>
+        <location filename="modeledit.cpp" line="6274"/>
+        <location filename="modeledit.cpp" line="6459"/>
+        <location filename="modeledit.cpp" line="6465"/>
+        <location filename="modeledit.cpp" line="6554"/>
+        <location filename="modeledit.cpp" line="6560"/>
         <source>FLAP%1</source>
         <translation>VOLET%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5921"/>
-        <location filename="modeledit.cpp" line="5925"/>
-        <location filename="modeledit.cpp" line="5946"/>
-        <location filename="modeledit.cpp" line="5950"/>
+        <location filename="modeledit.cpp" line="6308"/>
+        <location filename="modeledit.cpp" line="6312"/>
+        <location filename="modeledit.cpp" line="6333"/>
+        <location filename="modeledit.cpp" line="6337"/>
         <source>PITCH</source>
         <translation>PAS</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5934"/>
-        <location filename="modeledit.cpp" line="5935"/>
-        <location filename="modeledit.cpp" line="5938"/>
-        <location filename="modeledit.cpp" line="5939"/>
-        <location filename="modeledit.cpp" line="5959"/>
-        <location filename="modeledit.cpp" line="5960"/>
-        <location filename="modeledit.cpp" line="5963"/>
-        <location filename="modeledit.cpp" line="5964"/>
+        <location filename="modeledit.cpp" line="6321"/>
+        <location filename="modeledit.cpp" line="6322"/>
+        <location filename="modeledit.cpp" line="6325"/>
+        <location filename="modeledit.cpp" line="6326"/>
+        <location filename="modeledit.cpp" line="6346"/>
+        <location filename="modeledit.cpp" line="6347"/>
+        <location filename="modeledit.cpp" line="6350"/>
+        <location filename="modeledit.cpp" line="6351"/>
         <source>GYRO</source>
         <translation>GYRO</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5856"/>
-        <location filename="modeledit.cpp" line="5862"/>
-        <location filename="modeledit.cpp" line="6047"/>
-        <location filename="modeledit.cpp" line="6053"/>
+        <location filename="modeledit.cpp" line="6243"/>
+        <location filename="modeledit.cpp" line="6249"/>
+        <location filename="modeledit.cpp" line="6434"/>
+        <location filename="modeledit.cpp" line="6440"/>
         <source>ELE2</source>
         <translation>PROF2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="570"/>
+        <location filename="modeledit.cpp" line="614"/>
         <source>S1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="571"/>
+        <location filename="modeledit.cpp" line="615"/>
         <source>S2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="572"/>
+        <location filename="modeledit.cpp" line="616"/>
         <source>LS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1076"/>
+        <location filename="modeledit.cpp" line="1121"/>
         <source>Rud</source>
         <translation>Dir</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1076"/>
+        <location filename="modeledit.cpp" line="1121"/>
         <source>Ele</source>
         <translation>Prf</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1076"/>
+        <location filename="modeledit.cpp" line="1121"/>
         <source>Thr</source>
         <translation>Gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1076"/>
+        <location filename="modeledit.cpp" line="1121"/>
         <source>Ail</source>
         <translation>Ail</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1444"/>
-        <location filename="modeledit.cpp" line="1571"/>
+        <location filename="modeledit.cpp" line="1489"/>
+        <location filename="modeledit.cpp" line="1616"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1446"/>
-        <location filename="modeledit.cpp" line="1573"/>
+        <location filename="modeledit.cpp" line="1491"/>
+        <location filename="modeledit.cpp" line="1618"/>
         <source>Flight mode</source>
         <translation>Phase de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1463"/>
-        <location filename="modeledit.cpp" line="1591"/>
+        <location filename="modeledit.cpp" line="1508"/>
+        <location filename="modeledit.cpp" line="1636"/>
         <source>DISABLED</source>
         <translation>DESACTIVE</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1520"/>
-        <location filename="modeledit.cpp" line="1532"/>
-        <location filename="modeledit.cpp" line="1642"/>
+        <location filename="modeledit.cpp" line="1565"/>
+        <location filename="modeledit.cpp" line="1577"/>
+        <location filename="modeledit.cpp" line="1687"/>
         <source>X%1  </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1715"/>
-        <location filename="modeledit.cpp" line="1723"/>
-        <location filename="modeledit.cpp" line="1940"/>
-        <location filename="modeledit.cpp" line="1947"/>
+        <location filename="modeledit.cpp" line="1761"/>
+        <location filename="modeledit.cpp" line="1770"/>
+        <location filename="modeledit.cpp" line="2186"/>
+        <location filename="modeledit.cpp" line="2193"/>
         <source>CH %1</source>
         <translation>VOIE %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2365"/>
+        <location filename="modeledit.cpp" line="2614"/>
         <source>CFN%1</source>
         <translation>FP%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6082"/>
-        <location filename="modeledit.cpp" line="6083"/>
+        <location filename="modeledit.cpp" line="6469"/>
+        <location filename="modeledit.cpp" line="6470"/>
         <source>SPOIL</source>
         <translation>SPOIL</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6097"/>
-        <location filename="modeledit.cpp" line="6103"/>
+        <location filename="modeledit.cpp" line="6484"/>
+        <location filename="modeledit.cpp" line="6490"/>
         <source>SPOIL%1</source>
         <translation>SPOIL%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6142"/>
-        <location filename="modeledit.cpp" line="6148"/>
+        <location filename="modeledit.cpp" line="6529"/>
+        <location filename="modeledit.cpp" line="6535"/>
         <source>RUD2</source>
         <translation>DIR2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6351"/>
+        <location filename="modeledit.cpp" line="6738"/>
         <source>Really clear existing mixes on CH6?</source>
         <translation>Voulez-vous vraiment effacer tous les mixages du canal 6?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6463"/>
+        <location filename="modeledit.cpp" line="6850"/>
         <source>Really clear existing mixes on CH5?</source>
         <translation>Voulez-vous vraiment effacer tous les mixages du canal 5?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6570"/>
+        <location filename="modeledit.cpp" line="6961"/>
         <source>Not enough free points in eeprom to store the curve.</source>
         <oldsource>Not enought points free in eeprom to store the curve.</oldsource>
         <translation>Pas assez de points libres dans l&apos;eeprom pour enregistrer la courbe.</translation>
@@ -6978,22 +7261,22 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>: %1 voies, délai de %2us</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1351"/>
+        <location filename="helpers.cpp" line="1358"/>
         <source>Rudder</source>
         <translation>Direction</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1352"/>
+        <location filename="helpers.cpp" line="1359"/>
         <source>Elevator</source>
         <translation>Profondeur</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1353"/>
+        <location filename="helpers.cpp" line="1360"/>
         <source>Throttle</source>
         <translation>Gaz</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1354"/>
+        <location filename="helpers.cpp" line="1361"/>
         <source>Aileron</source>
         <translation>Ailerons</translation>
     </message>
@@ -7690,68 +7973,78 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1083"/>
         <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
         <source>Support for frsky telemetry mod</source>
         <translation>Support de la télémétrie FrSky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1083"/>
         <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
         <source>Support for jeti telemetry mod</source>
         <translation>Support de la télémétrie JETI</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1083"/>
         <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
         <source>Support for receiving ardupilot data</source>
         <translation>Support de la télémétrie ARDUPILOT</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1083"/>
         <location filename="open9xinterface.cpp" line="1085"/>
+        <location filename="open9xinterface.cpp" line="1087"/>
         <source>Support for receiving NMEA data</source>
         <translation>Support de la télémétrie NMEA</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1083"/>
+        <location filename="open9xinterface.cpp" line="1085"/>
         <source>Support for telemetry easy board</source>
         <translation>Support de la carte TelemetrEZ</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1084"/>
+        <location filename="open9xinterface.cpp" line="1086"/>
         <source>Rotary Encoder use in menus navigation</source>
         <translation>Utiliser un encodeur rotatif pour la navigation</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1088"/>
+        <source>Possibility to enable FAI MODE at field</source>
+        <translation>Possibilité d&apos;activer le mode FAI sur le terrain</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1088"/>
+        <source>FAI MODE always enabled</source>
+        <translation>Mode FAI toujours actif</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1090"/>
         <source>openTx for 9X board</source>
         <translation>openTx pour carte d&apos;origine 9X</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1090"/>
-        <location filename="open9xinterface.cpp" line="1124"/>
-        <location filename="open9xinterface.cpp" line="1154"/>
-        <location filename="open9xinterface.cpp" line="1186"/>
-        <location filename="open9xinterface.cpp" line="1214"/>
+        <location filename="open9xinterface.cpp" line="1092"/>
+        <location filename="open9xinterface.cpp" line="1127"/>
+        <location filename="open9xinterface.cpp" line="1158"/>
+        <location filename="open9xinterface.cpp" line="1191"/>
+        <location filename="open9xinterface.cpp" line="1220"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Activer le menu hélico et les mixages CCPM</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1091"/>
-        <location filename="open9xinterface.cpp" line="1125"/>
-        <location filename="open9xinterface.cpp" line="1155"/>
-        <location filename="open9xinterface.cpp" line="1187"/>
-        <location filename="open9xinterface.cpp" line="1215"/>
-        <location filename="open9xinterface.cpp" line="1242"/>
+        <location filename="open9xinterface.cpp" line="1093"/>
+        <location filename="open9xinterface.cpp" line="1128"/>
+        <location filename="open9xinterface.cpp" line="1159"/>
+        <location filename="open9xinterface.cpp" line="1192"/>
+        <location filename="open9xinterface.cpp" line="1221"/>
+        <location filename="open9xinterface.cpp" line="1249"/>
         <source>Enable TEMPLATES menu</source>
         <translation>Inclure les gabarits</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1092"/>
-        <location filename="open9xinterface.cpp" line="1126"/>
-        <location filename="open9xinterface.cpp" line="1156"/>
-        <location filename="open9xinterface.cpp" line="1188"/>
+        <location filename="open9xinterface.cpp" line="1094"/>
+        <location filename="open9xinterface.cpp" line="1129"/>
+        <location filename="open9xinterface.cpp" line="1160"/>
+        <location filename="open9xinterface.cpp" line="1193"/>
         <source>No splash screen</source>
         <translation>Pas d&apos;écran de démarrage</translation>
     </message>
@@ -7760,192 +8053,192 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Pas de phases de vol</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1094"/>
-        <location filename="open9xinterface.cpp" line="1128"/>
-        <location filename="open9xinterface.cpp" line="1158"/>
-        <location filename="open9xinterface.cpp" line="1190"/>
-        <location filename="open9xinterface.cpp" line="1217"/>
-        <location filename="open9xinterface.cpp" line="1244"/>
+        <location filename="open9xinterface.cpp" line="1096"/>
+        <location filename="open9xinterface.cpp" line="1131"/>
+        <location filename="open9xinterface.cpp" line="1162"/>
+        <location filename="open9xinterface.cpp" line="1195"/>
+        <location filename="open9xinterface.cpp" line="1223"/>
+        <location filename="open9xinterface.cpp" line="1251"/>
         <source>Disable curves menus</source>
         <translation>Désactiver le menu des courbes</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1095"/>
-        <location filename="open9xinterface.cpp" line="1129"/>
-        <location filename="open9xinterface.cpp" line="1159"/>
-        <location filename="open9xinterface.cpp" line="1191"/>
+        <location filename="open9xinterface.cpp" line="1097"/>
+        <location filename="open9xinterface.cpp" line="1132"/>
+        <location filename="open9xinterface.cpp" line="1163"/>
+        <location filename="open9xinterface.cpp" line="1196"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Haut-parleur au lieu du buzzer d&apos;origine</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1096"/>
-        <location filename="open9xinterface.cpp" line="1130"/>
-        <location filename="open9xinterface.cpp" line="1160"/>
-        <location filename="open9xinterface.cpp" line="1192"/>
-        <location filename="open9xinterface.cpp" line="1219"/>
+        <location filename="open9xinterface.cpp" line="1098"/>
+        <location filename="open9xinterface.cpp" line="1133"/>
+        <location filename="open9xinterface.cpp" line="1164"/>
+        <location filename="open9xinterface.cpp" line="1197"/>
+        <location filename="open9xinterface.cpp" line="1225"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Support du module vocal</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1097"/>
-        <location filename="open9xinterface.cpp" line="1131"/>
-        <location filename="open9xinterface.cpp" line="1161"/>
-        <location filename="open9xinterface.cpp" line="1193"/>
+        <location filename="open9xinterface.cpp" line="1099"/>
+        <location filename="open9xinterface.cpp" line="1134"/>
+        <location filename="open9xinterface.cpp" line="1165"/>
+        <location filename="open9xinterface.cpp" line="1198"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Support du vibreur</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1106"/>
-        <location filename="open9xinterface.cpp" line="1140"/>
-        <location filename="open9xinterface.cpp" line="1169"/>
-        <location filename="open9xinterface.cpp" line="1201"/>
-        <location filename="open9xinterface.cpp" line="1228"/>
-        <location filename="open9xinterface.cpp" line="1250"/>
+        <location filename="open9xinterface.cpp" line="1108"/>
+        <location filename="open9xinterface.cpp" line="1143"/>
+        <location filename="open9xinterface.cpp" line="1173"/>
+        <location filename="open9xinterface.cpp" line="1206"/>
+        <location filename="open9xinterface.cpp" line="1234"/>
+        <location filename="open9xinterface.cpp" line="1257"/>
         <source>In model setup menus automatically set source by moving some of them</source>
         <translation>Sélectionner les sources des mixeurs en bougeant le contrôle désiré</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1110"/>
-        <location filename="open9xinterface.cpp" line="1144"/>
-        <location filename="open9xinterface.cpp" line="1172"/>
-        <location filename="open9xinterface.cpp" line="1204"/>
-        <location filename="open9xinterface.cpp" line="1232"/>
-        <location filename="open9xinterface.cpp" line="1254"/>
+        <location filename="open9xinterface.cpp" line="1112"/>
+        <location filename="open9xinterface.cpp" line="1147"/>
+        <location filename="open9xinterface.cpp" line="1176"/>
+        <location filename="open9xinterface.cpp" line="1209"/>
+        <location filename="open9xinterface.cpp" line="1238"/>
+        <location filename="open9xinterface.cpp" line="1261"/>
         <source>Battery graph</source>
         <translation>Graphique de batterie</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1112"/>
-        <location filename="open9xinterface.cpp" line="1146"/>
-        <location filename="open9xinterface.cpp" line="1174"/>
-        <location filename="open9xinterface.cpp" line="1206"/>
+        <location filename="open9xinterface.cpp" line="1114"/>
+        <location filename="open9xinterface.cpp" line="1149"/>
+        <location filename="open9xinterface.cpp" line="1178"/>
+        <location filename="open9xinterface.cpp" line="1211"/>
         <source>Enable the throttle trace in Statistics</source>
         <translation>Activer l&apos;historique du manche des gaz dans les statistiques</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1113"/>
+        <location filename="open9xinterface.cpp" line="1115"/>
         <source>EEprom write progress bar</source>
         <translation>Barre de progression pour l&apos;écriture de l&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1115"/>
-        <location filename="open9xinterface.cpp" line="1177"/>
+        <location filename="open9xinterface.cpp" line="1117"/>
+        <location filename="open9xinterface.cpp" line="1181"/>
         <source>No Winged Shadow How High support</source>
         <translation>Supprimer le support du variomètre Winged Shadow How High</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1116"/>
-        <location filename="open9xinterface.cpp" line="1178"/>
+        <location filename="open9xinterface.cpp" line="1118"/>
+        <location filename="open9xinterface.cpp" line="1182"/>
         <source>No vario support</source>
         <translation>Supprimer la fonction variomètre audio</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1117"/>
-        <location filename="open9xinterface.cpp" line="1179"/>
+        <location filename="open9xinterface.cpp" line="1119"/>
+        <location filename="open9xinterface.cpp" line="1183"/>
         <source>No GPS support</source>
         <translation>Supprimer le support du GPS</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1118"/>
-        <location filename="open9xinterface.cpp" line="1180"/>
+        <location filename="open9xinterface.cpp" line="1120"/>
+        <location filename="open9xinterface.cpp" line="1184"/>
         <source>No gauges in the custom telemetry screen</source>
         <translation>Supptimer l&apos;affichage des valeurs de télémesure par barres</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1125"/>
         <source>openTx for M128 / 9X board</source>
         <translation>openTx pour carte d&apos;origine 9X avec M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1152"/>
+        <location filename="open9xinterface.cpp" line="1156"/>
         <source>openTx for 9XR</source>
         <translation>openTx pour 9XR</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1184"/>
+        <location filename="open9xinterface.cpp" line="1189"/>
         <source>openTx for 9XR with M128 chip</source>
         <translation>openTx pour 9XR avec M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1212"/>
+        <location filename="open9xinterface.cpp" line="1218"/>
         <source>openTx for Gruvin9x board / 9X</source>
         <translation>openTx pour carte Gruvin9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1220"/>
+        <location filename="open9xinterface.cpp" line="1226"/>
         <source>Support of FrSky PXX protocol</source>
         <translation>Support du protocole PXX FrSky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1261"/>
-        <location filename="open9xinterface.cpp" line="1271"/>
+        <location filename="open9xinterface.cpp" line="1269"/>
+        <location filename="open9xinterface.cpp" line="1280"/>
         <source>Disable HELI menu and cyclic mix support</source>
         <translation>Supprimer le menu HELICO et les mixages cycliques</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1262"/>
-        <location filename="open9xinterface.cpp" line="1272"/>
+        <location filename="open9xinterface.cpp" line="1270"/>
+        <location filename="open9xinterface.cpp" line="1281"/>
         <source>Disable TEMPLATES menu</source>
         <translation>Supprimer le menu des gabarits</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1263"/>
-        <location filename="open9xinterface.cpp" line="1273"/>
+        <location filename="open9xinterface.cpp" line="1271"/>
+        <location filename="open9xinterface.cpp" line="1282"/>
         <source>Disable Global variables</source>
         <translation>Supprimer le support des variables globales</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1270"/>
+        <location filename="open9xinterface.cpp" line="1279"/>
         <source>openTx for FrSky Taranis Rev4a</source>
         <translation>openTx pour FrSky Taranis REV4a</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1099"/>
-        <location filename="open9xinterface.cpp" line="1133"/>
-        <location filename="open9xinterface.cpp" line="1163"/>
-        <location filename="open9xinterface.cpp" line="1195"/>
-        <location filename="open9xinterface.cpp" line="1221"/>
+        <location filename="open9xinterface.cpp" line="1101"/>
+        <location filename="open9xinterface.cpp" line="1136"/>
+        <location filename="open9xinterface.cpp" line="1167"/>
+        <location filename="open9xinterface.cpp" line="1200"/>
+        <location filename="open9xinterface.cpp" line="1227"/>
         <source>Support for DSM2 modules</source>
         <translation>Support du protocole DSM2</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1100"/>
-        <location filename="open9xinterface.cpp" line="1134"/>
-        <location filename="open9xinterface.cpp" line="1164"/>
-        <location filename="open9xinterface.cpp" line="1196"/>
-        <location filename="open9xinterface.cpp" line="1223"/>
-        <location filename="open9xinterface.cpp" line="1245"/>
+        <location filename="open9xinterface.cpp" line="1102"/>
+        <location filename="open9xinterface.cpp" line="1137"/>
+        <location filename="open9xinterface.cpp" line="1168"/>
+        <location filename="open9xinterface.cpp" line="1201"/>
+        <location filename="open9xinterface.cpp" line="1229"/>
+        <location filename="open9xinterface.cpp" line="1252"/>
         <source>PPM center adjustment in limits</source>
         <translation>Centres PPM ajustables</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1101"/>
-        <location filename="open9xinterface.cpp" line="1135"/>
-        <location filename="open9xinterface.cpp" line="1165"/>
-        <location filename="open9xinterface.cpp" line="1197"/>
-        <location filename="open9xinterface.cpp" line="1224"/>
-        <location filename="open9xinterface.cpp" line="1246"/>
-        <location filename="open9xinterface.cpp" line="1264"/>
-        <location filename="open9xinterface.cpp" line="1274"/>
+        <location filename="open9xinterface.cpp" line="1103"/>
+        <location filename="open9xinterface.cpp" line="1138"/>
+        <location filename="open9xinterface.cpp" line="1169"/>
+        <location filename="open9xinterface.cpp" line="1202"/>
+        <location filename="open9xinterface.cpp" line="1230"/>
+        <location filename="open9xinterface.cpp" line="1253"/>
+        <location filename="open9xinterface.cpp" line="1272"/>
+        <location filename="open9xinterface.cpp" line="1283"/>
         <source>PPM values displayed in us</source>
         <translation>Positions de canaux affichées en us</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1103"/>
-        <location filename="open9xinterface.cpp" line="1137"/>
-        <location filename="open9xinterface.cpp" line="1167"/>
-        <location filename="open9xinterface.cpp" line="1199"/>
-        <location filename="open9xinterface.cpp" line="1226"/>
-        <location filename="open9xinterface.cpp" line="1248"/>
+        <location filename="open9xinterface.cpp" line="1105"/>
+        <location filename="open9xinterface.cpp" line="1140"/>
+        <location filename="open9xinterface.cpp" line="1171"/>
+        <location filename="open9xinterface.cpp" line="1204"/>
+        <location filename="open9xinterface.cpp" line="1232"/>
+        <location filename="open9xinterface.cpp" line="1255"/>
         <source>Symetrical Limits</source>
         <translation>Limites symétriques</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1084"/>
-        <location filename="open9xinterface.cpp" line="1168"/>
-        <location filename="open9xinterface.cpp" line="1200"/>
-        <location filename="open9xinterface.cpp" line="1227"/>
-        <location filename="open9xinterface.cpp" line="1249"/>
+        <location filename="open9xinterface.cpp" line="1086"/>
+        <location filename="open9xinterface.cpp" line="1172"/>
+        <location filename="open9xinterface.cpp" line="1205"/>
+        <location filename="open9xinterface.cpp" line="1233"/>
+        <location filename="open9xinterface.cpp" line="1256"/>
         <source>Pots use in menus navigation</source>
         <translation>Support de la navigation dans les menus avec les POTS</translation>
     </message>
@@ -7956,56 +8249,56 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>Il semblerait que votre radio utilise le mauvais firmware. La taille de l&apos;EEPROM est de 4096, mais seulement les 2048 premiers sont utilisés. Pensez à charger la version pour m128.</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1093"/>
-        <location filename="open9xinterface.cpp" line="1127"/>
-        <location filename="open9xinterface.cpp" line="1157"/>
-        <location filename="open9xinterface.cpp" line="1189"/>
-        <location filename="open9xinterface.cpp" line="1216"/>
-        <location filename="open9xinterface.cpp" line="1243"/>
+        <location filename="open9xinterface.cpp" line="1095"/>
+        <location filename="open9xinterface.cpp" line="1130"/>
+        <location filename="open9xinterface.cpp" line="1161"/>
+        <location filename="open9xinterface.cpp" line="1194"/>
+        <location filename="open9xinterface.cpp" line="1222"/>
+        <location filename="open9xinterface.cpp" line="1250"/>
         <source>No flight modes</source>
         <translation>Pas de phases de vol</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1105"/>
-        <location filename="open9xinterface.cpp" line="1139"/>
+        <location filename="open9xinterface.cpp" line="1107"/>
+        <location filename="open9xinterface.cpp" line="1142"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Support du rétroéclairage pour la carte SmartieParts 2.2</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1107"/>
-        <location filename="open9xinterface.cpp" line="1141"/>
-        <location filename="open9xinterface.cpp" line="1170"/>
-        <location filename="open9xinterface.cpp" line="1202"/>
-        <location filename="open9xinterface.cpp" line="1229"/>
-        <location filename="open9xinterface.cpp" line="1251"/>
+        <location filename="open9xinterface.cpp" line="1109"/>
+        <location filename="open9xinterface.cpp" line="1144"/>
+        <location filename="open9xinterface.cpp" line="1174"/>
+        <location filename="open9xinterface.cpp" line="1207"/>
+        <location filename="open9xinterface.cpp" line="1235"/>
+        <location filename="open9xinterface.cpp" line="1258"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Sélection automatique des Switches dans les menus</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1108"/>
-        <location filename="open9xinterface.cpp" line="1142"/>
-        <location filename="open9xinterface.cpp" line="1230"/>
-        <location filename="open9xinterface.cpp" line="1252"/>
+        <location filename="open9xinterface.cpp" line="1110"/>
+        <location filename="open9xinterface.cpp" line="1145"/>
+        <location filename="open9xinterface.cpp" line="1236"/>
+        <location filename="open9xinterface.cpp" line="1259"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Permet la remise à zéro des valeurs en pressant haut-bas en même temps, valeur min avec gauche/bas, valeur max avec haut/droite</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1109"/>
-        <location filename="open9xinterface.cpp" line="1143"/>
-        <location filename="open9xinterface.cpp" line="1171"/>
-        <location filename="open9xinterface.cpp" line="1203"/>
-        <location filename="open9xinterface.cpp" line="1231"/>
-        <location filename="open9xinterface.cpp" line="1253"/>
+        <location filename="open9xinterface.cpp" line="1111"/>
+        <location filename="open9xinterface.cpp" line="1146"/>
+        <location filename="open9xinterface.cpp" line="1175"/>
+        <location filename="open9xinterface.cpp" line="1208"/>
+        <location filename="open9xinterface.cpp" line="1237"/>
+        <location filename="open9xinterface.cpp" line="1260"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Pas de cases à cocher et de curseurs graphiques</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1111"/>
-        <location filename="open9xinterface.cpp" line="1145"/>
-        <location filename="open9xinterface.cpp" line="1173"/>
-        <location filename="open9xinterface.cpp" line="1205"/>
-        <location filename="open9xinterface.cpp" line="1233"/>
-        <location filename="open9xinterface.cpp" line="1255"/>
+        <location filename="open9xinterface.cpp" line="1113"/>
+        <location filename="open9xinterface.cpp" line="1148"/>
+        <location filename="open9xinterface.cpp" line="1177"/>
+        <location filename="open9xinterface.cpp" line="1210"/>
+        <location filename="open9xinterface.cpp" line="1239"/>
+        <location filename="open9xinterface.cpp" line="1262"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Ne pas mettre les lignes actives en gras</translation>
     </message>
@@ -8014,45 +8307,45 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">Ne pas montrer l&apos;historique des gaz dans les statistiques</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1147"/>
-        <location filename="open9xinterface.cpp" line="1175"/>
-        <location filename="open9xinterface.cpp" line="1207"/>
-        <location filename="open9xinterface.cpp" line="1234"/>
+        <location filename="open9xinterface.cpp" line="1150"/>
+        <location filename="open9xinterface.cpp" line="1179"/>
+        <location filename="open9xinterface.cpp" line="1212"/>
+        <location filename="open9xinterface.cpp" line="1240"/>
         <source>EEprom write Progress bar</source>
         <translation>Barre de progression affichée lors des écritures EEPROM </translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1114"/>
-        <location filename="open9xinterface.cpp" line="1148"/>
-        <location filename="open9xinterface.cpp" line="1176"/>
-        <location filename="open9xinterface.cpp" line="1208"/>
-        <location filename="open9xinterface.cpp" line="1235"/>
+        <location filename="open9xinterface.cpp" line="1116"/>
+        <location filename="open9xinterface.cpp" line="1151"/>
+        <location filename="open9xinterface.cpp" line="1180"/>
+        <location filename="open9xinterface.cpp" line="1213"/>
+        <location filename="open9xinterface.cpp" line="1241"/>
         <source>Imperial units</source>
         <translation>Unités Impériales</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1239"/>
+        <location filename="open9xinterface.cpp" line="1246"/>
         <source>openTx for Sky9x board / 9X</source>
         <translation>openTx pour 9x avec carte Sky9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1256"/>
+        <location filename="open9xinterface.cpp" line="1263"/>
         <source>Bluetooth interface</source>
         <translation>Interface Bluetooth</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1260"/>
+        <location filename="open9xinterface.cpp" line="1268"/>
         <source>openTx for FrSky Taranis</source>
         <oldsource>open9x for x9da board</oldsource>
         <translation>openTx pour FrSky Taranis</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1102"/>
-        <location filename="open9xinterface.cpp" line="1136"/>
-        <location filename="open9xinterface.cpp" line="1166"/>
-        <location filename="open9xinterface.cpp" line="1198"/>
-        <location filename="open9xinterface.cpp" line="1225"/>
-        <location filename="open9xinterface.cpp" line="1247"/>
+        <location filename="open9xinterface.cpp" line="1104"/>
+        <location filename="open9xinterface.cpp" line="1139"/>
+        <location filename="open9xinterface.cpp" line="1170"/>
+        <location filename="open9xinterface.cpp" line="1203"/>
+        <location filename="open9xinterface.cpp" line="1231"/>
+        <location filename="open9xinterface.cpp" line="1254"/>
         <source>Global variables</source>
         <translation>Variables globales</translation>
     </message>
@@ -8065,12 +8358,12 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">open9x pour carte gruvin</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1218"/>
+        <location filename="open9xinterface.cpp" line="1224"/>
         <source>Support for SD memory card</source>
         <translation>Support de la carte SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1221"/>
+        <location filename="open9xinterface.cpp" line="1227"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Support pour les modules DSM2 par le signal PPM</translation>
     </message>
@@ -8083,12 +8376,12 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation type="obsolete">open9x pour carte ersky9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1241"/>
+        <location filename="open9xinterface.cpp" line="1248"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Activer le menu hélico et les mixages CCPM</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="555"/>
+        <location filename="eeprominterface.cpp" line="557"/>
         <source>ersky9x</source>
         <translation></translation>
     </message>
@@ -8423,12 +8716,12 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>open9x accepte jusqu&apos;à %1 expos</translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="544"/>
+        <location filename="eeprominterface.cpp" line="546"/>
         <source>th9x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="eeprominterface.cpp" line="546"/>
+        <location filename="eeprominterface.cpp" line="548"/>
         <source>er9x</source>
         <translation>er9x</translation>
     </message>
@@ -8566,7 +8859,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
     <message>
         <location filename="ersky9xinterface.cpp" line="254"/>
         <location filename="mdichild.cpp" line="146"/>
-        <location filename="modeledit.cpp" line="5432"/>
+        <location filename="modeledit.cpp" line="5816"/>
         <location filename="open9xinterface.cpp" line="472"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
@@ -8620,7 +8913,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
     </message>
     <message>
         <location filename="mdichild.cpp" line="147"/>
-        <location filename="modeledit.cpp" line="5433"/>
+        <location filename="modeledit.cpp" line="5817"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation>Le simulateur n&apos;est pas encore disponible pour ce firmware</translation>
     </message>
@@ -8676,14 +8969,14 @@ Les réglages d&apos;expo ont changé, veuillez vérifier avant de voler!</trans
         <translation type="obsolete">PV %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1328"/>
-        <location filename="modeledit.cpp" line="3172"/>
+        <location filename="modeledit.cpp" line="1373"/>
+        <location filename="modeledit.cpp" line="3444"/>
         <source>Flight Mode 0 (Default)</source>
         <translation>Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1330"/>
-        <location filename="modeledit.cpp" line="3174"/>
+        <location filename="modeledit.cpp" line="1375"/>
+        <location filename="modeledit.cpp" line="3446"/>
         <source>FM %1</source>
         <translation>PV %1</translation>
     </message>
@@ -8715,7 +9008,7 @@ Les réglages d&apos;expo ont changé, veuillez vérifier avant de voler!</trans
         <source>Warning!
 splash image format stored in preferences has been changed!
 Check your settings again.</source>
-        <translation type="unfinished">Attention, le format de l&apos;écran d&apos;accueil personnalisé dans les préférences a changé. Veuillez le sélectionner à nouveau le cas échéant.</translation>
+        <translation>Attention, le format de l&apos;écran d&apos;accueil personnalisé dans les préférences a changé. Veuillez le sélectionner à nouveau le cas échéant.</translation>
     </message>
 </context>
 <context>
@@ -8745,53 +9038,53 @@ Check your settings again.</source>
         <translation type="obsolete">Binaire AVRDUDE non trouvé</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="49"/>
+        <location filename="avroutputdialog.cpp" line="50"/>
         <source> result</source>
         <translation> résultat</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="56"/>
+        <location filename="avroutputdialog.cpp" line="57"/>
         <source> executable not found</source>
         <translation>Binaire non trouvé</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="132"/>
-        <location filename="avroutputdialog.cpp" line="139"/>
+        <location filename="avroutputdialog.cpp" line="133"/>
+        <location filename="avroutputdialog.cpp" line="140"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="132"/>
+        <location filename="avroutputdialog.cpp" line="133"/>
         <source>Cannot open source file</source>
         <translation>Impossible d&apos;ouvrir le fichier source</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="139"/>
+        <location filename="avroutputdialog.cpp" line="140"/>
         <source>Cannot write destination</source>
         <translation>Impossible d&apos;écrire le fichier de destination</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="142"/>
+        <location filename="avroutputdialog.cpp" line="143"/>
         <source>Writing file: </source>
         <translation>Ecriture du fichier:</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="288"/>
+        <location filename="avroutputdialog.cpp" line="295"/>
         <source>ie: OpenTX for 9X board or OpenTX for 9XR board</source>
         <translation>p.ex. openTx pour carte d&apos;origine 9x ou openTx pour 9XR</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="292"/>
+        <location filename="avroutputdialog.cpp" line="299"/>
         <source>ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip</source>
         <translation>p.ex. openTx pour carte d&apos;origine 9x avec m128 ou openTx pour 9XR avec m128</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="300"/>
+        <location filename="avroutputdialog.cpp" line="307"/>
         <source>ie: OpenTX for Gruvin9X  board</source>
         <translation>p.ex. openTx pour carte gruvin9x</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="307"/>
+        <location filename="avroutputdialog.cpp" line="314"/>
         <source>Your radio uses a %1 CPU!!!
 
 Please check advanced burn options to set the correct cpu type.</source>
@@ -8800,7 +9093,7 @@ Please check advanced burn options to set the correct cpu type.</source>
 Vérifiez les options de programmateur et choisissez le bon type de processeur.</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="310"/>
+        <location filename="avroutputdialog.cpp" line="317"/>
         <source>Your radio uses a %1 CPU!!!
 
 Please select an appropriate firmware type to program it.</source>
@@ -8809,7 +9102,7 @@ Please select an appropriate firmware type to program it.</source>
 Veuillez choisir le firmware approprié.</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="310"/>
+        <location filename="avroutputdialog.cpp" line="317"/>
         <source>
 You are currently using:
  %1</source>
@@ -8818,77 +9111,77 @@ Vous utilisez actuellement:
 %1</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="330"/>
-        <location filename="avroutputdialog.cpp" line="332"/>
+        <location filename="avroutputdialog.cpp" line="337"/>
+        <location filename="avroutputdialog.cpp" line="339"/>
         <source>Writing</source>
         <translation>Ecriture</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="340"/>
-        <location filename="avroutputdialog.cpp" line="342"/>
+        <location filename="avroutputdialog.cpp" line="347"/>
+        <location filename="avroutputdialog.cpp" line="349"/>
         <source>Reading</source>
         <translation>Lecture</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="347"/>
-        <location filename="avroutputdialog.cpp" line="349"/>
+        <location filename="avroutputdialog.cpp" line="354"/>
+        <location filename="avroutputdialog.cpp" line="356"/>
         <source>Verifying</source>
         <translation>Vérification</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="376"/>
+        <location filename="avroutputdialog.cpp" line="383"/>
         <source> done - exit code %1</source>
         <translation> terminé - code de sortie %1</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="379"/>
+        <location filename="avroutputdialog.cpp" line="386"/>
         <source> done with errors</source>
         <translation> terminé avec des erreurs</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="381"/>
+        <location filename="avroutputdialog.cpp" line="388"/>
         <source> done - SUCCESSFUL</source>
         <translation> terminé avec SUCCES</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="383"/>
+        <location filename="avroutputdialog.cpp" line="390"/>
         <source>done - SUCCESSFUL</source>
         <translation>terminé avec SUCCES</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="408"/>
+        <location filename="avroutputdialog.cpp" line="415"/>
         <source> did not finish correctly</source>
         <translation> n&apos;a pas terminé correctement</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="410"/>
+        <location filename="avroutputdialog.cpp" line="417"/>
         <source> did not finish correctly!
 Do you want some help ?</source>
         <translation> n&apos;a pas terminé correctement.
 Avez-vous besoin d&apos;aide?</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="416"/>
+        <location filename="avroutputdialog.cpp" line="423"/>
         <source>Copy did not finish correctly</source>
         <translation>La copie ne s&apos;est pas terminée correctement</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="422"/>
+        <location filename="avroutputdialog.cpp" line="429"/>
         <source> finished correctly</source>
         <translation> a terminé correctement</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="425"/>
+        <location filename="avroutputdialog.cpp" line="432"/>
         <source>Copy finished correctly</source>
         <translation>La copie s&apos;est terminée correctement</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="441"/>
+        <location filename="avroutputdialog.cpp" line="448"/>
         <source>Started </source>
         <translation>Démarré </translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="451"/>
+        <location filename="avroutputdialog.cpp" line="458"/>
         <source>FUSES: Low=%1 High=%2 Ext=%3</source>
         <translation>Fusibles: Bas=%1 Haut=%2 Ext=%3</translation>
     </message>
@@ -9029,12 +9322,12 @@ Consulter la documentation du programmateur utilisé et celle d&apos;AVRDUDE pou
         <translation>Choisir l&apos;emplacement</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="308"/>
+        <location filename="burnconfigdialog.cpp" line="313"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
         <translation>&lt;b&gt;&lt;u&gt;AVERTISSEMENT!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Ceci réinitialisera les fusibles %1 à leur valeur par défaut.&lt;br&gt;Modifier les fusibles peut entraîner le blocage de votre émetteur.&lt;br&gt;Ne l&apos;effectuer que si vous êtes certain qu&apos;ils sont incorrects!&lt;br&gt;Etes-vous sûr de vouloir continuer?</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="377"/>
+        <location filename="burnconfigdialog.cpp" line="382"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normally CPU type is automatically selected according to the chosen firmware.&lt;br&gt;If you change the CPU type the resulting eeprom could be inconsistent.</source>
         <translation>&lt;b&gt;&lt;u&gt;ATTENTION!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Le type de processeur est normalement choisi automatiquement pour le firmware sélectionné.&lt;br&gt;Si vous le changez, l&apos;EEPROM peut être corrompue lors du transfert. </translation>
     </message>
@@ -9165,8 +9458,8 @@ m2560 for v4.1 boards</source>
         <translation>Port série de SAM-BA</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="307"/>
-        <location filename="burnconfigdialog.cpp" line="376"/>
+        <location filename="burnconfigdialog.cpp" line="312"/>
+        <location filename="burnconfigdialog.cpp" line="381"/>
         <source>companion9x</source>
         <translation>companion9x</translation>
     </message>
@@ -9299,7 +9592,7 @@ m2560 for v4.1 boards</source>
     </message>
     <message>
         <location filename="burndialog.ui" line="444"/>
-        <location filename="burndialog.cpp" line="191"/>
+        <location filename="burndialog.cpp" line="199"/>
         <location filename="ui_burndialog.h" line="399"/>
         <source>Burn to TX</source>
         <translation>Flasher l&apos;émetteur</translation>
@@ -9315,7 +9608,7 @@ m2560 for v4.1 boards</source>
         <translation>Transférer les modèles vers l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="147"/>
+        <location filename="burndialog.cpp" line="151"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
@@ -9324,12 +9617,12 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">Fichiers iHEX (*.hex);;Fichiers BIN (*.bin)</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="235"/>
-        <location filename="burndialog.cpp" line="405"/>
-        <location filename="burndialog.cpp" line="409"/>
+        <location filename="burndialog.cpp" line="243"/>
+        <location filename="burndialog.cpp" line="413"/>
         <location filename="burndialog.cpp" line="417"/>
-        <location filename="burndialog.cpp" line="474"/>
-        <location filename="burndialog.cpp" line="528"/>
+        <location filename="burndialog.cpp" line="425"/>
+        <location filename="burndialog.cpp" line="481"/>
+        <location filename="burndialog.cpp" line="535"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
@@ -9338,43 +9631,43 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">%1 semble ne pas être un firmware</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="235"/>
+        <location filename="burndialog.cpp" line="243"/>
         <source>%1 is not a known firmware</source>
         <translation>%1 n&apos;est pas un firmware connu</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="236"/>
+        <location filename="burndialog.cpp" line="244"/>
         <source>Burn anyway !</source>
         <translation>Confirmer le transfert !</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="287"/>
-        <location filename="burndialog.cpp" line="297"/>
-        <location filename="burndialog.cpp" line="320"/>
+        <location filename="burndialog.cpp" line="295"/>
+        <location filename="burndialog.cpp" line="305"/>
+        <location filename="burndialog.cpp" line="328"/>
         <source>Invalid binary EEPROM File %1, Proceed anyway ?</source>
         <translation>Fichier binaire EEPROM %1 invalide. Continuer quand même?</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="340"/>
+        <location filename="burndialog.cpp" line="348"/>
         <source>Open Image to load</source>
         <translation>Ouvrir l&apos;image à charger</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="340"/>
+        <location filename="burndialog.cpp" line="348"/>
         <source>Images (%1)</source>
         <translation>Images (%1)</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="250"/>
-        <location filename="burndialog.cpp" line="257"/>
-        <location filename="burndialog.cpp" line="264"/>
-        <location filename="burndialog.cpp" line="308"/>
+        <location filename="burndialog.cpp" line="258"/>
+        <location filename="burndialog.cpp" line="265"/>
+        <location filename="burndialog.cpp" line="272"/>
         <location filename="burndialog.cpp" line="316"/>
-        <location filename="burndialog.cpp" line="346"/>
-        <location filename="burndialog.cpp" line="367"/>
-        <location filename="burndialog.cpp" line="542"/>
-        <location filename="burndialog.cpp" line="547"/>
-        <location filename="burndialog.cpp" line="555"/>
+        <location filename="burndialog.cpp" line="324"/>
+        <location filename="burndialog.cpp" line="354"/>
+        <location filename="burndialog.cpp" line="375"/>
+        <location filename="burndialog.cpp" line="549"/>
+        <location filename="burndialog.cpp" line="554"/>
+        <location filename="burndialog.cpp" line="562"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -9394,19 +9687,19 @@ m2560 for v4.1 boards</source>
         <translation>Profil courant</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="150"/>
+        <location filename="burndialog.cpp" line="154"/>
         <source>Choose file to write to EEPROM memory</source>
         <translation>Choisir le fichier EEPROM à transmettre à l&apos;émetteur</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="250"/>
+        <location filename="burndialog.cpp" line="258"/>
         <source>Unable to find file %1!</source>
         <translation>Fichier %1 introuvable!</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="257"/>
-        <location filename="burndialog.cpp" line="264"/>
-        <location filename="burndialog.cpp" line="308"/>
+        <location filename="burndialog.cpp" line="265"/>
+        <location filename="burndialog.cpp" line="272"/>
+        <location filename="burndialog.cpp" line="316"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Erreur à l&apos;ouverture du fichier %1:
@@ -9417,7 +9710,7 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">Fichier EEPROM %1 invalide</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="316"/>
+        <location filename="burndialog.cpp" line="324"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Fichier %1 corrompu:
@@ -9428,46 +9721,46 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">Fichier binaire %1 invalide</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="346"/>
-        <location filename="burndialog.cpp" line="367"/>
+        <location filename="burndialog.cpp" line="354"/>
+        <location filename="burndialog.cpp" line="375"/>
         <source>Cannot load %1.</source>
         <translation>Impossible de charger %1.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="405"/>
+        <location filename="burndialog.cpp" line="413"/>
         <source>Cannot save customized firmware</source>
         <translation>Impossible d&apos;enregistrer le firmware personnalisé</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="409"/>
+        <location filename="burndialog.cpp" line="417"/>
         <source>Custom image not found</source>
         <translation>Image personnalisée non trouvée</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="417"/>
+        <location filename="burndialog.cpp" line="425"/>
         <source>No firmware selected</source>
         <translation>Aucun firmware sélectionné</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="474"/>
+        <location filename="burndialog.cpp" line="481"/>
         <source>Wrong radio calibration data in profile, eeprom not patched</source>
         <translation>Données d&apos;étalonnage invalides, l&apos;EEPROM n&apos;a pas été patchée!</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="528"/>
+        <location filename="burndialog.cpp" line="535"/>
         <source>Wrong radio setting data in profile, eeprom not patched</source>
         <translation>Paramètres hardware invalides, l&apos;EEPROM n&apos;a pas été patchée!</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="542"/>
-        <location filename="burndialog.cpp" line="547"/>
+        <location filename="burndialog.cpp" line="549"/>
+        <location filename="burndialog.cpp" line="554"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Ecriture fichier %1 impossible:
 %2.</translation>
     </message>
     <message>
-        <location filename="burndialog.cpp" line="555"/>
+        <location filename="burndialog.cpp" line="562"/>
         <source>Error writing file %1:
 %2.</source>
         <translation>Erreur d&apos;écriture fichier %1:
@@ -9617,7 +9910,7 @@ m2560 for v4.1 boards</source>
     <message>
         <location filename="comparedialog.cpp" line="249"/>
         <location filename="comparedialog.cpp" line="272"/>
-        <location filename="comparedialog.cpp" line="496"/>
+        <location filename="comparedialog.cpp" line="501"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
@@ -9699,27 +9992,27 @@ m2560 for v4.1 boards</source>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="304"/>
-        <location filename="comparedialog.cpp" line="400"/>
+        <location filename="comparedialog.cpp" line="405"/>
         <source>Fades</source>
         <translation>Fondus</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="304"/>
-        <location filename="comparedialog.cpp" line="400"/>
+        <location filename="comparedialog.cpp" line="405"/>
         <source>Trims</source>
         <translation>Trims</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="305"/>
-        <location filename="comparedialog.cpp" line="401"/>
-        <location filename="comparedialog.cpp" line="685"/>
-        <location filename="comparedialog.cpp" line="764"/>
-        <location filename="comparedialog.cpp" line="819"/>
-        <location filename="comparedialog.cpp" line="902"/>
-        <location filename="comparedialog.cpp" line="1075"/>
+        <location filename="comparedialog.cpp" line="406"/>
+        <location filename="comparedialog.cpp" line="690"/>
+        <location filename="comparedialog.cpp" line="769"/>
+        <location filename="comparedialog.cpp" line="825"/>
+        <location filename="comparedialog.cpp" line="908"/>
         <location filename="comparedialog.cpp" line="1081"/>
-        <location filename="comparedialog.cpp" line="1154"/>
-        <location filename="comparedialog.cpp" line="1157"/>
+        <location filename="comparedialog.cpp" line="1087"/>
+        <location filename="comparedialog.cpp" line="1160"/>
+        <location filename="comparedialog.cpp" line="1163"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
@@ -9729,131 +10022,131 @@ m2560 for v4.1 boards</source>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="306"/>
-        <location filename="comparedialog.cpp" line="402"/>
+        <location filename="comparedialog.cpp" line="407"/>
         <source>IN</source>
         <translation>Entrée</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="306"/>
-        <location filename="comparedialog.cpp" line="402"/>
+        <location filename="comparedialog.cpp" line="407"/>
         <source>OUT</source>
         <translation>Sortie</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="314"/>
         <location filename="comparedialog.cpp" line="327"/>
-        <location filename="comparedialog.cpp" line="365"/>
-        <location filename="comparedialog.cpp" line="377"/>
-        <location filename="comparedialog.cpp" line="389"/>
-        <location filename="comparedialog.cpp" line="410"/>
-        <location filename="comparedialog.cpp" line="423"/>
-        <location filename="comparedialog.cpp" line="454"/>
-        <location filename="comparedialog.cpp" line="466"/>
-        <location filename="comparedialog.cpp" line="478"/>
+        <location filename="comparedialog.cpp" line="370"/>
+        <location filename="comparedialog.cpp" line="382"/>
+        <location filename="comparedialog.cpp" line="394"/>
+        <location filename="comparedialog.cpp" line="415"/>
+        <location filename="comparedialog.cpp" line="428"/>
+        <location filename="comparedialog.cpp" line="459"/>
+        <location filename="comparedialog.cpp" line="471"/>
+        <location filename="comparedialog.cpp" line="483"/>
         <source>FM</source>
         <oldsource>FP</oldsource>
         <translation>PV</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="347"/>
-        <location filename="comparedialog.cpp" line="436"/>
+        <location filename="comparedialog.cpp" line="352"/>
+        <location filename="comparedialog.cpp" line="441"/>
         <source>Gvars</source>
         <translation>Variables globales</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="350"/>
-        <location filename="comparedialog.cpp" line="439"/>
+        <location filename="comparedialog.cpp" line="355"/>
+        <location filename="comparedialog.cpp" line="444"/>
         <source>Rot. Enc.</source>
         <translation>Enc. Rot.</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="493"/>
+        <location filename="comparedialog.cpp" line="498"/>
         <source>Limits</source>
         <translation>Débattements</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="496"/>
-        <location filename="comparedialog.cpp" line="498"/>
-        <location filename="comparedialog.cpp" line="526"/>
-        <location filename="comparedialog.cpp" line="824"/>
-        <location filename="comparedialog.cpp" line="907"/>
-        <location filename="comparedialog.cpp" line="1205"/>
-        <location filename="comparedialog.cpp" line="1322"/>
+        <location filename="comparedialog.cpp" line="501"/>
+        <location filename="comparedialog.cpp" line="503"/>
+        <location filename="comparedialog.cpp" line="531"/>
+        <location filename="comparedialog.cpp" line="830"/>
+        <location filename="comparedialog.cpp" line="913"/>
+        <location filename="comparedialog.cpp" line="1211"/>
+        <location filename="comparedialog.cpp" line="1328"/>
         <source>Offset</source>
         <translation>Décalage</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="496"/>
-        <location filename="comparedialog.cpp" line="498"/>
-        <location filename="comparedialog.cpp" line="526"/>
-        <location filename="comparedialog.cpp" line="1298"/>
-        <location filename="comparedialog.cpp" line="1416"/>
+        <location filename="comparedialog.cpp" line="501"/>
+        <location filename="comparedialog.cpp" line="503"/>
+        <location filename="comparedialog.cpp" line="531"/>
+        <location filename="comparedialog.cpp" line="1304"/>
+        <location filename="comparedialog.cpp" line="1422"/>
         <source>Min</source>
         <translation>Min</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="496"/>
-        <location filename="comparedialog.cpp" line="498"/>
-        <location filename="comparedialog.cpp" line="526"/>
-        <location filename="comparedialog.cpp" line="1298"/>
-        <location filename="comparedialog.cpp" line="1416"/>
+        <location filename="comparedialog.cpp" line="501"/>
+        <location filename="comparedialog.cpp" line="503"/>
+        <location filename="comparedialog.cpp" line="531"/>
+        <location filename="comparedialog.cpp" line="1304"/>
+        <location filename="comparedialog.cpp" line="1422"/>
         <source>Max</source>
         <translation>Max</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="496"/>
-        <location filename="comparedialog.cpp" line="498"/>
-        <location filename="comparedialog.cpp" line="526"/>
+        <location filename="comparedialog.cpp" line="501"/>
+        <location filename="comparedialog.cpp" line="503"/>
+        <location filename="comparedialog.cpp" line="531"/>
         <source>Invert</source>
         <translation>Inversion</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="507"/>
         <location filename="comparedialog.cpp" line="512"/>
-        <location filename="comparedialog.cpp" line="534"/>
+        <location filename="comparedialog.cpp" line="517"/>
         <location filename="comparedialog.cpp" line="539"/>
-        <location filename="comparedialog.cpp" line="871"/>
-        <location filename="comparedialog.cpp" line="1178"/>
+        <location filename="comparedialog.cpp" line="544"/>
+        <location filename="comparedialog.cpp" line="877"/>
+        <location filename="comparedialog.cpp" line="1184"/>
         <source>CH</source>
         <translation>VOIE</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="521"/>
-        <location filename="comparedialog.cpp" line="548"/>
+        <location filename="comparedialog.cpp" line="526"/>
+        <location filename="comparedialog.cpp" line="553"/>
         <source>INV</source>
         <translation>Inversion</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="521"/>
-        <location filename="comparedialog.cpp" line="548"/>
+        <location filename="comparedialog.cpp" line="526"/>
+        <location filename="comparedialog.cpp" line="553"/>
         <source>NOR</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="567"/>
+        <location filename="comparedialog.cpp" line="572"/>
         <source>Global Variables</source>
         <translation>Variables globales</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="575"/>
-        <location filename="comparedialog.cpp" line="588"/>
+        <location filename="comparedialog.cpp" line="580"/>
+        <location filename="comparedialog.cpp" line="593"/>
         <source>GV</source>
         <translation>VG</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="610"/>
+        <location filename="comparedialog.cpp" line="615"/>
         <source>Expo/Dr Settings</source>
         <translation>Expos / Valeurs de dual rates</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="646"/>
-        <location filename="comparedialog.cpp" line="725"/>
+        <location filename="comparedialog.cpp" line="651"/>
+        <location filename="comparedialog.cpp" line="730"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="647"/>
-        <location filename="comparedialog.cpp" line="726"/>
+        <location filename="comparedialog.cpp" line="652"/>
+        <location filename="comparedialog.cpp" line="731"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
@@ -9862,53 +10155,53 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">Phase</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="688"/>
-        <location filename="comparedialog.cpp" line="767"/>
-        <location filename="comparedialog.cpp" line="827"/>
-        <location filename="comparedialog.cpp" line="910"/>
-        <location filename="comparedialog.cpp" line="1000"/>
-        <location filename="comparedialog.cpp" line="1029"/>
+        <location filename="comparedialog.cpp" line="693"/>
+        <location filename="comparedialog.cpp" line="772"/>
+        <location filename="comparedialog.cpp" line="833"/>
+        <location filename="comparedialog.cpp" line="916"/>
+        <location filename="comparedialog.cpp" line="1006"/>
+        <location filename="comparedialog.cpp" line="1035"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="782"/>
+        <location filename="comparedialog.cpp" line="787"/>
         <source>Mixers</source>
         <translation>Mixages</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="820"/>
-        <location filename="comparedialog.cpp" line="903"/>
+        <location filename="comparedialog.cpp" line="826"/>
+        <location filename="comparedialog.cpp" line="909"/>
         <source>noTrim</source>
         <translation>Pas de trim</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="822"/>
-        <location filename="comparedialog.cpp" line="905"/>
+        <location filename="comparedialog.cpp" line="828"/>
+        <location filename="comparedialog.cpp" line="911"/>
         <source>FMTrim</source>
         <translation>Trims des phases de vol</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="826"/>
-        <location filename="comparedialog.cpp" line="909"/>
+        <location filename="comparedialog.cpp" line="832"/>
+        <location filename="comparedialog.cpp" line="915"/>
         <source>Diff</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="828"/>
-        <location filename="comparedialog.cpp" line="911"/>
+        <location filename="comparedialog.cpp" line="834"/>
+        <location filename="comparedialog.cpp" line="917"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Délai(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="829"/>
-        <location filename="comparedialog.cpp" line="912"/>
+        <location filename="comparedialog.cpp" line="835"/>
+        <location filename="comparedialog.cpp" line="918"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Ralentissement(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="830"/>
-        <location filename="comparedialog.cpp" line="913"/>
+        <location filename="comparedialog.cpp" line="836"/>
+        <location filename="comparedialog.cpp" line="919"/>
         <source>Warn</source>
         <translation>Avertissement</translation>
     </message>
@@ -9923,43 +10216,43 @@ m2560 for v4.1 boards</source>
         <translation>Sans titre</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="680"/>
-        <location filename="comparedialog.cpp" line="759"/>
-        <location filename="comparedialog.cpp" line="863"/>
-        <location filename="comparedialog.cpp" line="946"/>
+        <location filename="comparedialog.cpp" line="685"/>
+        <location filename="comparedialog.cpp" line="764"/>
+        <location filename="comparedialog.cpp" line="869"/>
+        <location filename="comparedialog.cpp" line="952"/>
         <source>DISABLED</source>
         <translation>DESACTIVE</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="977"/>
+        <location filename="comparedialog.cpp" line="983"/>
         <source>Curves</source>
         <translation>Courbes</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="979"/>
+        <location filename="comparedialog.cpp" line="985"/>
         <source>5 Points Curves</source>
         <translation>Courbes à 5 points</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="981"/>
-        <location filename="comparedialog.cpp" line="984"/>
-        <location filename="comparedialog.cpp" line="1011"/>
-        <location filename="comparedialog.cpp" line="1014"/>
+        <location filename="comparedialog.cpp" line="987"/>
+        <location filename="comparedialog.cpp" line="990"/>
+        <location filename="comparedialog.cpp" line="1017"/>
+        <location filename="comparedialog.cpp" line="1020"/>
         <source>pt %1</source>
         <translation>point %1</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1009"/>
+        <location filename="comparedialog.cpp" line="1015"/>
         <source>9 Points Curves</source>
         <translation>Courbes à 9 points</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1046"/>
+        <location filename="comparedialog.cpp" line="1052"/>
         <source>Custom Switches</source>
         <translation>Inters personnalisés</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1055"/>
+        <location filename="comparedialog.cpp" line="1061"/>
         <source>CS</source>
         <translation>SW</translation>
     </message>
@@ -9972,20 +10265,20 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">Fonctions personnalisées</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1076"/>
         <location filename="comparedialog.cpp" line="1082"/>
+        <location filename="comparedialog.cpp" line="1088"/>
         <source>Function</source>
         <translation>Fonction</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1077"/>
         <location filename="comparedialog.cpp" line="1083"/>
+        <location filename="comparedialog.cpp" line="1089"/>
         <source>Param</source>
         <translation>Paramètre</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1079"/>
         <location filename="comparedialog.cpp" line="1085"/>
+        <location filename="comparedialog.cpp" line="1091"/>
         <source>Enable</source>
         <translation>Actif</translation>
     </message>
@@ -9994,156 +10287,156 @@ m2560 for v4.1 boards</source>
         <translation type="obsolete">FP</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1200"/>
+        <location filename="comparedialog.cpp" line="1206"/>
         <source>Telemetry Settings</source>
         <translation>Paramètres de télémesure</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1205"/>
-        <location filename="comparedialog.cpp" line="1322"/>
+        <location filename="comparedialog.cpp" line="1211"/>
+        <location filename="comparedialog.cpp" line="1328"/>
         <source>Analog</source>
         <translation>Analogue</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1205"/>
-        <location filename="comparedialog.cpp" line="1322"/>
+        <location filename="comparedialog.cpp" line="1211"/>
+        <location filename="comparedialog.cpp" line="1328"/>
         <source>Unit</source>
         <translation>Unité</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1205"/>
-        <location filename="comparedialog.cpp" line="1322"/>
+        <location filename="comparedialog.cpp" line="1211"/>
+        <location filename="comparedialog.cpp" line="1328"/>
         <source>Scale</source>
         <translation>Echelle</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1209"/>
-        <location filename="comparedialog.cpp" line="1232"/>
-        <location filename="comparedialog.cpp" line="1326"/>
-        <location filename="comparedialog.cpp" line="1349"/>
+        <location filename="comparedialog.cpp" line="1215"/>
+        <location filename="comparedialog.cpp" line="1238"/>
+        <location filename="comparedialog.cpp" line="1332"/>
+        <location filename="comparedialog.cpp" line="1355"/>
         <source>A%1</source>
         <translation>A%1</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1220"/>
-        <location filename="comparedialog.cpp" line="1337"/>
+        <location filename="comparedialog.cpp" line="1226"/>
+        <location filename="comparedialog.cpp" line="1343"/>
         <source>Alarm 1</source>
         <translation>Alarme 1</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1220"/>
-        <location filename="comparedialog.cpp" line="1337"/>
+        <location filename="comparedialog.cpp" line="1226"/>
+        <location filename="comparedialog.cpp" line="1343"/>
         <source>Alarm 2</source>
         <translation>Alarme 2</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1222"/>
-        <location filename="comparedialog.cpp" line="1225"/>
-        <location filename="comparedialog.cpp" line="1339"/>
-        <location filename="comparedialog.cpp" line="1342"/>
+        <location filename="comparedialog.cpp" line="1228"/>
+        <location filename="comparedialog.cpp" line="1231"/>
+        <location filename="comparedialog.cpp" line="1345"/>
+        <location filename="comparedialog.cpp" line="1348"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1223"/>
-        <location filename="comparedialog.cpp" line="1226"/>
-        <location filename="comparedialog.cpp" line="1340"/>
-        <location filename="comparedialog.cpp" line="1343"/>
+        <location filename="comparedialog.cpp" line="1229"/>
+        <location filename="comparedialog.cpp" line="1232"/>
+        <location filename="comparedialog.cpp" line="1346"/>
+        <location filename="comparedialog.cpp" line="1349"/>
         <source>Condition</source>
         <translation>Condition</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1155"/>
-        <location filename="comparedialog.cpp" line="1158"/>
-        <location filename="comparedialog.cpp" line="1224"/>
-        <location filename="comparedialog.cpp" line="1227"/>
-        <location filename="comparedialog.cpp" line="1341"/>
-        <location filename="comparedialog.cpp" line="1344"/>
+        <location filename="comparedialog.cpp" line="1161"/>
+        <location filename="comparedialog.cpp" line="1164"/>
+        <location filename="comparedialog.cpp" line="1230"/>
+        <location filename="comparedialog.cpp" line="1233"/>
+        <location filename="comparedialog.cpp" line="1347"/>
+        <location filename="comparedialog.cpp" line="1350"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="305"/>
-        <location filename="comparedialog.cpp" line="352"/>
-        <location filename="comparedialog.cpp" line="401"/>
-        <location filename="comparedialog.cpp" line="441"/>
+        <location filename="comparedialog.cpp" line="357"/>
+        <location filename="comparedialog.cpp" line="406"/>
+        <location filename="comparedialog.cpp" line="446"/>
         <source>Flight mode name</source>
         <translation>Nom del la phase de vol</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="660"/>
-        <location filename="comparedialog.cpp" line="739"/>
-        <location filename="comparedialog.cpp" line="843"/>
-        <location filename="comparedialog.cpp" line="926"/>
+        <location filename="comparedialog.cpp" line="665"/>
+        <location filename="comparedialog.cpp" line="744"/>
+        <location filename="comparedialog.cpp" line="849"/>
+        <location filename="comparedialog.cpp" line="932"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="662"/>
-        <location filename="comparedialog.cpp" line="741"/>
-        <location filename="comparedialog.cpp" line="845"/>
-        <location filename="comparedialog.cpp" line="928"/>
+        <location filename="comparedialog.cpp" line="667"/>
+        <location filename="comparedialog.cpp" line="746"/>
+        <location filename="comparedialog.cpp" line="851"/>
+        <location filename="comparedialog.cpp" line="934"/>
         <source>Flight mode</source>
         <translation>Phase de vol</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1073"/>
+        <location filename="comparedialog.cpp" line="1079"/>
         <source>Custom Functions</source>
         <translation>Fonctions spéciales</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1078"/>
         <location filename="comparedialog.cpp" line="1084"/>
+        <location filename="comparedialog.cpp" line="1090"/>
         <source>Repeat</source>
         <translation>Répétition</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1116"/>
+        <location filename="comparedialog.cpp" line="1122"/>
         <source>CFn</source>
         <translation>FSn</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1152"/>
+        <location filename="comparedialog.cpp" line="1158"/>
         <source>Safety Switches</source>
         <translation>Inters de sécurité</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1252"/>
-        <location filename="comparedialog.cpp" line="1369"/>
+        <location filename="comparedialog.cpp" line="1258"/>
+        <location filename="comparedialog.cpp" line="1375"/>
         <source>RSSI Alarm</source>
         <translation>Alarme RSSI</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1297"/>
-        <location filename="comparedialog.cpp" line="1415"/>
+        <location filename="comparedialog.cpp" line="1303"/>
+        <location filename="comparedialog.cpp" line="1421"/>
         <source>Telemetry Bars</source>
         <translation>Jauges de Télémétrie</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1298"/>
-        <location filename="comparedialog.cpp" line="1416"/>
+        <location filename="comparedialog.cpp" line="1304"/>
+        <location filename="comparedialog.cpp" line="1422"/>
         <source>Bar Number</source>
         <translation>Barre</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1298"/>
-        <location filename="comparedialog.cpp" line="1416"/>
+        <location filename="comparedialog.cpp" line="1304"/>
+        <location filename="comparedialog.cpp" line="1422"/>
         <source>Source</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1282"/>
-        <location filename="comparedialog.cpp" line="1400"/>
+        <location filename="comparedialog.cpp" line="1288"/>
+        <location filename="comparedialog.cpp" line="1406"/>
         <source>Custom Telemetry View</source>
         <translation>Vue Télémesure personnalisée</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1446"/>
+        <location filename="comparedialog.cpp" line="1452"/>
         <source>Print Document</source>
         <translation>Imprimer le Document</translation>
     </message>
     <message>
-        <location filename="comparedialog.cpp" line="1455"/>
+        <location filename="comparedialog.cpp" line="1461"/>
         <source>Select PDF output file</source>
         <translation>Choisir le fichier PDF de sortie</translation>
     </message>
@@ -10230,9 +10523,11 @@ Egalement à Erez Raviv (er9x) et son fantastique programme eePe d&apos;où est 
         <translation></translation>
     </message>
     <message>
+        <location filename="customizesplashdialog.ui" line="245"/>
         <location filename="ui_customizesplashdialog.h" line="215"/>
-        <source>Save To Hex</source>
-        <translation>Enregistrer en Hex</translation>
+        <source>Save Firmware</source>
+        <oldsource>Save To Hex</oldsource>
+        <translation>Sauvegarder le firmware</translation>
     </message>
     <message>
         <location filename="customizesplashdialog.ui" line="156"/>
@@ -10727,6 +11022,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>P3</source>
         <translation type="obsolete">P3</translation>
+    </message>
+    <message>
+        <location filename="joystickdialog.ui" line="117"/>
+        <location filename="joystickdialog.ui" line="179"/>
+        <location filename="joystickdialog.ui" line="259"/>
+        <location filename="joystickdialog.ui" line="360"/>
+        <location filename="joystickdialog.ui" line="440"/>
+        <location filename="joystickdialog.ui" line="520"/>
+        <location filename="joystickdialog.ui" line="614"/>
+        <location filename="joystickdialog.ui" line="701"/>
+        <location filename="ui_joystickdialog.h" line="419"/>
+        <location filename="ui_joystickdialog.h" line="432"/>
+        <location filename="ui_joystickdialog.h" line="444"/>
+        <location filename="ui_joystickdialog.h" line="459"/>
+        <location filename="ui_joystickdialog.h" line="471"/>
+        <location filename="ui_joystickdialog.h" line="483"/>
+        <location filename="ui_joystickdialog.h" line="497"/>
+        <location filename="ui_joystickdialog.h" line="510"/>
+        <source>P3/LS</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="joystickdialog.ui" line="122"/>
@@ -11498,19 +11813,19 @@ Press cancel to abort joystick calibration</source>
     <name>preferencesDialog</name>
     <message>
         <location filename="preferencesdialog.ui" line="739"/>
-        <location filename="ui_preferencesdialog.h" line="1025"/>
+        <location filename="ui_preferencesdialog.h" line="1073"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mode 2 (DIR GAZ PROF AIL)</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="749"/>
-        <location filename="ui_preferencesdialog.h" line="1027"/>
+        <location filename="ui_preferencesdialog.h" line="1075"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mode 4 (AIL GAZ PROF DIR)</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="709"/>
-        <location filename="ui_preferencesdialog.h" line="1030"/>
+        <location filename="ui_preferencesdialog.h" line="1078"/>
         <source>Mode selection:
 
 Mode 1:
@@ -11552,63 +11867,63 @@ Manche Droit:  Profondeur, Direction
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="449"/>
-        <location filename="ui_preferencesdialog.h" line="1008"/>
+        <location filename="ui_preferencesdialog.h" line="1056"/>
         <source>Check selected Fw updates</source>
         <translation>Vérifier les mises à jour de firmwares au démarrage</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="744"/>
-        <location filename="ui_preferencesdialog.h" line="1026"/>
+        <location filename="ui_preferencesdialog.h" line="1074"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mode 3 (AIL PROF GAZ DIR)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1009"/>
-        <location filename="ui_preferencesdialog.h" line="1073"/>
+        <location filename="preferencesdialog.ui" line="1013"/>
+        <location filename="ui_preferencesdialog.h" line="1121"/>
         <source>Firmware</source>
         <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="91"/>
         <location filename="preferencesdialog.ui" line="208"/>
-        <location filename="ui_preferencesdialog.h" line="952"/>
-        <location filename="ui_preferencesdialog.h" line="958"/>
+        <location filename="ui_preferencesdialog.h" line="1030"/>
+        <location filename="ui_preferencesdialog.h" line="1036"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="119"/>
-        <location filename="ui_preferencesdialog.h" line="953"/>
+        <location filename="ui_preferencesdialog.h" line="1031"/>
         <source>Enable</source>
         <translation>Actif</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="136"/>
-        <location filename="ui_preferencesdialog.h" line="954"/>
+        <location filename="ui_preferencesdialog.h" line="1032"/>
         <source>Calibrate</source>
         <translation>Calibrer</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="150"/>
-        <location filename="preferencesdialog.ui" line="854"/>
-        <location filename="preferencesdialog.ui" line="989"/>
-        <location filename="preferencesdialog.ui" line="1046"/>
-        <location filename="ui_preferencesdialog.h" line="955"/>
-        <location filename="ui_preferencesdialog.h" line="1060"/>
-        <location filename="ui_preferencesdialog.h" line="1072"/>
-        <location filename="ui_preferencesdialog.h" line="1076"/>
+        <location filename="preferencesdialog.ui" line="858"/>
+        <location filename="preferencesdialog.ui" line="993"/>
+        <location filename="preferencesdialog.ui" line="1050"/>
+        <location filename="ui_preferencesdialog.h" line="1033"/>
+        <location filename="ui_preferencesdialog.h" line="1108"/>
+        <location filename="ui_preferencesdialog.h" line="1120"/>
+        <location filename="ui_preferencesdialog.h" line="1124"/>
         <source>Open Folder</source>
         <translation>Ouvrir le répertoire</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="438"/>
-        <location filename="ui_preferencesdialog.h" line="1007"/>
+        <location filename="ui_preferencesdialog.h" line="1055"/>
         <source>Remember switches</source>
         <translation>Mémoriser les inters</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="938"/>
-        <location filename="ui_preferencesdialog.h" line="1067"/>
+        <location filename="preferencesdialog.ui" line="942"/>
+        <location filename="ui_preferencesdialog.h" line="1115"/>
         <source>Set language of voice.
 May be different from firmware language</source>
         <translation>Langue des voix.
@@ -11616,123 +11931,143 @@ Peut être différente de la langue du firmware.</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="345"/>
-        <location filename="ui_preferencesdialog.h" line="994"/>
+        <location filename="ui_preferencesdialog.h" line="1042"/>
         <source>Export Profile</source>
         <translation>Exporter le profil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="369"/>
-        <location filename="ui_preferencesdialog.h" line="996"/>
+        <location filename="ui_preferencesdialog.h" line="1044"/>
         <source>Import Profile</source>
         <translation>Importer le profil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="503"/>
-        <location filename="ui_preferencesdialog.h" line="1012"/>
+        <location filename="ui_preferencesdialog.h" line="1060"/>
         <source>Custom TX splash screen</source>
         <translation>Personnaliser l&apos;écran d&apos;accueil</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="894"/>
-        <location filename="ui_preferencesdialog.h" line="1062"/>
+        <location filename="preferencesdialog.ui" line="898"/>
+        <location filename="ui_preferencesdialog.h" line="1110"/>
         <source>Automatically add version number to the filename after download</source>
         <translation>Ajouter le numéro de version au nom de fichier après téléchargement</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1022"/>
+        <location filename="preferencesdialog.ui" line="1026"/>
+        <location filename="ui_preferencesdialog.h" line="1122"/>
         <source>SD Structure path</source>
         <translation>Chemin de la structure de la carte SD</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1034"/>
-        <location filename="ui_preferencesdialog.h" line="1075"/>
+        <location filename="preferencesdialog.ui" line="1038"/>
+        <location filename="ui_preferencesdialog.h" line="1123"/>
         <source>Simulator capture folder</source>
         <translation>Dossier de sauvegarde des captures d&apos;écran</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1063"/>
-        <location filename="ui_preferencesdialog.h" line="1077"/>
+        <location filename="preferencesdialog.ui" line="1067"/>
+        <location filename="ui_preferencesdialog.h" line="1125"/>
         <source>Use clipboard only</source>
         <translation>Utiliser le presse-papiers</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1077"/>
-        <location filename="preferencesdialog.ui" line="1084"/>
-        <location filename="preferencesdialog.ui" line="1097"/>
-        <location filename="preferencesdialog.ui" line="1110"/>
-        <location filename="preferencesdialog.ui" line="1123"/>
-        <location filename="preferencesdialog.ui" line="1130"/>
-        <location filename="preferencesdialog.ui" line="1137"/>
-        <location filename="preferencesdialog.ui" line="1144"/>
-        <location filename="preferencesdialog.ui" line="1151"/>
-        <location filename="preferencesdialog.ui" line="1158"/>
-        <location filename="preferencesdialog.ui" line="1165"/>
-        <location filename="preferencesdialog.ui" line="1172"/>
-        <location filename="preferencesdialog.ui" line="1179"/>
-        <location filename="preferencesdialog.ui" line="1186"/>
-        <location filename="preferencesdialog.ui" line="1193"/>
-        <location filename="preferencesdialog.ui" line="1200"/>
-        <location filename="preferencesdialog.ui" line="1207"/>
-        <location filename="preferencesdialog.ui" line="1214"/>
-        <location filename="preferencesdialog.ui" line="1221"/>
-        <location filename="preferencesdialog.ui" line="1228"/>
-        <location filename="preferencesdialog.ui" line="1235"/>
-        <location filename="preferencesdialog.ui" line="1242"/>
-        <location filename="preferencesdialog.ui" line="1249"/>
-        <location filename="preferencesdialog.ui" line="1256"/>
-        <location filename="preferencesdialog.ui" line="1263"/>
-        <location filename="preferencesdialog.ui" line="1270"/>
-        <location filename="preferencesdialog.ui" line="1277"/>
-        <location filename="preferencesdialog.ui" line="1284"/>
-        <location filename="preferencesdialog.ui" line="1291"/>
-        <location filename="preferencesdialog.ui" line="1298"/>
-        <location filename="preferencesdialog.ui" line="1305"/>
-        <location filename="preferencesdialog.ui" line="1312"/>
-        <location filename="preferencesdialog.ui" line="1319"/>
-        <location filename="preferencesdialog.ui" line="1326"/>
-        <location filename="preferencesdialog.ui" line="1333"/>
-        <location filename="ui_preferencesdialog.h" line="962"/>
-        <location filename="ui_preferencesdialog.h" line="963"/>
-        <location filename="ui_preferencesdialog.h" line="964"/>
-        <location filename="ui_preferencesdialog.h" line="965"/>
-        <location filename="ui_preferencesdialog.h" line="966"/>
-        <location filename="ui_preferencesdialog.h" line="967"/>
-        <location filename="ui_preferencesdialog.h" line="968"/>
-        <location filename="ui_preferencesdialog.h" line="969"/>
-        <location filename="ui_preferencesdialog.h" line="970"/>
-        <location filename="ui_preferencesdialog.h" line="971"/>
-        <location filename="ui_preferencesdialog.h" line="972"/>
-        <location filename="ui_preferencesdialog.h" line="973"/>
-        <location filename="ui_preferencesdialog.h" line="974"/>
-        <location filename="ui_preferencesdialog.h" line="975"/>
-        <location filename="ui_preferencesdialog.h" line="976"/>
-        <location filename="ui_preferencesdialog.h" line="977"/>
-        <location filename="ui_preferencesdialog.h" line="978"/>
-        <location filename="ui_preferencesdialog.h" line="979"/>
-        <location filename="ui_preferencesdialog.h" line="980"/>
-        <location filename="ui_preferencesdialog.h" line="981"/>
-        <location filename="ui_preferencesdialog.h" line="982"/>
-        <location filename="ui_preferencesdialog.h" line="983"/>
-        <location filename="ui_preferencesdialog.h" line="984"/>
-        <location filename="ui_preferencesdialog.h" line="985"/>
-        <location filename="ui_preferencesdialog.h" line="986"/>
-        <location filename="ui_preferencesdialog.h" line="987"/>
-        <location filename="ui_preferencesdialog.h" line="988"/>
-        <location filename="ui_preferencesdialog.h" line="989"/>
-        <location filename="ui_preferencesdialog.h" line="990"/>
-        <location filename="ui_preferencesdialog.h" line="991"/>
+        <location filename="preferencesdialog.ui" line="1081"/>
+        <location filename="preferencesdialog.ui" line="1088"/>
+        <location filename="preferencesdialog.ui" line="1101"/>
+        <location filename="preferencesdialog.ui" line="1114"/>
+        <location filename="preferencesdialog.ui" line="1127"/>
+        <location filename="preferencesdialog.ui" line="1134"/>
+        <location filename="preferencesdialog.ui" line="1141"/>
+        <location filename="preferencesdialog.ui" line="1148"/>
+        <location filename="preferencesdialog.ui" line="1155"/>
+        <location filename="preferencesdialog.ui" line="1162"/>
+        <location filename="preferencesdialog.ui" line="1169"/>
+        <location filename="preferencesdialog.ui" line="1176"/>
+        <location filename="preferencesdialog.ui" line="1183"/>
+        <location filename="preferencesdialog.ui" line="1190"/>
+        <location filename="preferencesdialog.ui" line="1197"/>
+        <location filename="preferencesdialog.ui" line="1204"/>
+        <location filename="preferencesdialog.ui" line="1211"/>
+        <location filename="preferencesdialog.ui" line="1218"/>
+        <location filename="preferencesdialog.ui" line="1225"/>
+        <location filename="preferencesdialog.ui" line="1232"/>
+        <location filename="preferencesdialog.ui" line="1239"/>
+        <location filename="preferencesdialog.ui" line="1246"/>
+        <location filename="preferencesdialog.ui" line="1253"/>
+        <location filename="preferencesdialog.ui" line="1260"/>
+        <location filename="preferencesdialog.ui" line="1267"/>
+        <location filename="preferencesdialog.ui" line="1274"/>
+        <location filename="preferencesdialog.ui" line="1281"/>
+        <location filename="preferencesdialog.ui" line="1288"/>
+        <location filename="preferencesdialog.ui" line="1295"/>
+        <location filename="preferencesdialog.ui" line="1302"/>
+        <location filename="preferencesdialog.ui" line="1309"/>
+        <location filename="preferencesdialog.ui" line="1316"/>
+        <location filename="preferencesdialog.ui" line="1323"/>
+        <location filename="preferencesdialog.ui" line="1330"/>
+        <location filename="preferencesdialog.ui" line="1337"/>
+        <location filename="preferencesdialog.ui" line="1344"/>
+        <location filename="preferencesdialog.ui" line="1351"/>
+        <location filename="preferencesdialog.ui" line="1358"/>
+        <location filename="preferencesdialog.ui" line="1365"/>
+        <location filename="preferencesdialog.ui" line="1372"/>
+        <location filename="preferencesdialog.ui" line="1379"/>
+        <location filename="preferencesdialog.ui" line="1386"/>
+        <location filename="ui_preferencesdialog.h" line="1126"/>
+        <location filename="ui_preferencesdialog.h" line="1127"/>
+        <location filename="ui_preferencesdialog.h" line="1128"/>
+        <location filename="ui_preferencesdialog.h" line="1129"/>
+        <location filename="ui_preferencesdialog.h" line="1130"/>
+        <location filename="ui_preferencesdialog.h" line="1131"/>
+        <location filename="ui_preferencesdialog.h" line="1132"/>
+        <location filename="ui_preferencesdialog.h" line="1133"/>
+        <location filename="ui_preferencesdialog.h" line="1134"/>
+        <location filename="ui_preferencesdialog.h" line="1135"/>
+        <location filename="ui_preferencesdialog.h" line="1136"/>
+        <location filename="ui_preferencesdialog.h" line="1137"/>
+        <location filename="ui_preferencesdialog.h" line="1138"/>
+        <location filename="ui_preferencesdialog.h" line="1139"/>
+        <location filename="ui_preferencesdialog.h" line="1140"/>
+        <location filename="ui_preferencesdialog.h" line="1141"/>
+        <location filename="ui_preferencesdialog.h" line="1142"/>
+        <location filename="ui_preferencesdialog.h" line="1143"/>
+        <location filename="ui_preferencesdialog.h" line="1144"/>
+        <location filename="ui_preferencesdialog.h" line="1145"/>
+        <location filename="ui_preferencesdialog.h" line="1146"/>
+        <location filename="ui_preferencesdialog.h" line="1147"/>
+        <location filename="ui_preferencesdialog.h" line="1148"/>
+        <location filename="ui_preferencesdialog.h" line="1149"/>
+        <location filename="ui_preferencesdialog.h" line="1150"/>
+        <location filename="ui_preferencesdialog.h" line="1151"/>
+        <location filename="ui_preferencesdialog.h" line="1152"/>
+        <location filename="ui_preferencesdialog.h" line="1153"/>
+        <location filename="ui_preferencesdialog.h" line="1154"/>
+        <location filename="ui_preferencesdialog.h" line="1155"/>
+        <location filename="ui_preferencesdialog.h" line="1156"/>
+        <location filename="ui_preferencesdialog.h" line="1157"/>
+        <location filename="ui_preferencesdialog.h" line="1158"/>
+        <location filename="ui_preferencesdialog.h" line="1159"/>
+        <location filename="ui_preferencesdialog.h" line="1160"/>
+        <location filename="ui_preferencesdialog.h" line="1161"/>
+        <location filename="ui_preferencesdialog.h" line="1162"/>
+        <location filename="ui_preferencesdialog.h" line="1163"/>
+        <location filename="ui_preferencesdialog.h" line="1164"/>
+        <location filename="ui_preferencesdialog.h" line="1165"/>
+        <location filename="ui_preferencesdialog.h" line="1166"/>
+        <location filename="ui_preferencesdialog.h" line="1167"/>
         <source>CheckBox</source>
         <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="184"/>
-        <location filename="ui_preferencesdialog.h" line="957"/>
+        <location filename="ui_preferencesdialog.h" line="1035"/>
         <source>Check for updates</source>
         <translation>Vérifier les mises à jour</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="522"/>
-        <location filename="ui_preferencesdialog.h" line="1014"/>
+        <location filename="ui_preferencesdialog.h" line="1062"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -11740,134 +12075,133 @@ This is used by the templated to determine which channel goes to what number out
 Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de la création  d&apos;un modèle.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="956"/>
-        <location filename="ui_preferencesdialog.h" line="1070"/>
+        <location filename="preferencesdialog.ui" line="960"/>
+        <location filename="ui_preferencesdialog.h" line="1118"/>
         <source>Language</source>
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="918"/>
-        <location filename="ui_preferencesdialog.h" line="1064"/>
+        <location filename="preferencesdialog.ui" line="922"/>
+        <location filename="ui_preferencesdialog.h" line="1112"/>
         <source>Voice</source>
         <translation>Voix</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="379"/>
-        <location filename="ui_preferencesdialog.h" line="997"/>
+        <location filename="ui_preferencesdialog.h" line="1045"/>
         <source>Profile Name</source>
         <translation>Nom du profil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="352"/>
-        <location filename="ui_preferencesdialog.h" line="995"/>
+        <location filename="ui_preferencesdialog.h" line="1043"/>
         <source>Save Profile</source>
         <translation>Sauvegarder profil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="399"/>
-        <location filename="ui_preferencesdialog.h" line="998"/>
+        <location filename="ui_preferencesdialog.h" line="1046"/>
         <source>Simu BackLight</source>
         <translation>Rétroéclairage simu</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="410"/>
-        <location filename="ui_preferencesdialog.h" line="1001"/>
+        <location filename="ui_preferencesdialog.h" line="1049"/>
         <source>Blue</source>
         <oldsource>Blu</oldsource>
         <translation>Bleu</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="415"/>
-        <location filename="ui_preferencesdialog.h" line="1002"/>
+        <location filename="ui_preferencesdialog.h" line="1050"/>
         <source>Green</source>
         <translation>Vert</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="420"/>
-        <location filename="ui_preferencesdialog.h" line="1003"/>
+        <location filename="ui_preferencesdialog.h" line="1051"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="425"/>
-        <location filename="ui_preferencesdialog.h" line="1004"/>
+        <location filename="ui_preferencesdialog.h" line="1052"/>
         <source>Orange</source>
         <translation>Orange</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="430"/>
-        <location filename="ui_preferencesdialog.h" line="1005"/>
+        <location filename="ui_preferencesdialog.h" line="1053"/>
         <source>Yellow</source>
         <translation>Jaune</translation>
     </message>
     <message>
-        <location filename="ui_preferencesdialog.h" line="1074"/>
         <source>Sound samples dir</source>
-        <translation>Dossier des fichiers vocaux</translation>
+        <translation type="obsolete">Dossier des fichiers vocaux</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="240"/>
-        <location filename="ui_preferencesdialog.h" line="960"/>
+        <location filename="ui_preferencesdialog.h" line="1038"/>
         <source>Personal splash library</source>
         <translation>Bibliothèque de splashs personnalisés</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="835"/>
-        <location filename="ui_preferencesdialog.h" line="1058"/>
+        <location filename="ui_preferencesdialog.h" line="1106"/>
         <source>Profile slot</source>
         <translation>Numéro de profil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="842"/>
-        <location filename="ui_preferencesdialog.h" line="1059"/>
+        <location filename="ui_preferencesdialog.h" line="1107"/>
         <source>eEprom backup folder</source>
         <translation>Dossier de sauvegarde de l&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="861"/>
-        <location filename="ui_preferencesdialog.h" line="1061"/>
+        <location filename="preferencesdialog.ui" line="865"/>
+        <location filename="ui_preferencesdialog.h" line="1109"/>
         <source>auto backup before write</source>
         <translation>Sauvegarde automatique avant programmation</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="308"/>
-        <location filename="ui_preferencesdialog.h" line="992"/>
+        <location filename="ui_preferencesdialog.h" line="1040"/>
         <source>Ask for flashing after Download</source>
         <translation>Demander pour flasher après téléchargement</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="796"/>
-        <location filename="ui_preferencesdialog.h" line="1056"/>
+        <location filename="ui_preferencesdialog.h" line="1104"/>
         <source>Splash library behaviour</source>
         <translation>Utilisation de la bibliothèque de Splashes</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="777"/>
-        <location filename="ui_preferencesdialog.h" line="1053"/>
+        <location filename="ui_preferencesdialog.h" line="1101"/>
         <source>Include companion splashes</source>
         <translation>Inclure les écrans d&apos;accueil de companion9x</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="782"/>
-        <location filename="ui_preferencesdialog.h" line="1054"/>
+        <location filename="ui_preferencesdialog.h" line="1102"/>
         <source>Only user defined splashes</source>
         <translation>Seulement vos écrans d&apos;accueil</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="763"/>
-        <location filename="ui_preferencesdialog.h" line="1050"/>
+        <location filename="ui_preferencesdialog.h" line="1098"/>
         <source>Joystick</source>
         <translation>Joystick</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="225"/>
-        <location filename="ui_preferencesdialog.h" line="959"/>
+        <location filename="ui_preferencesdialog.h" line="1037"/>
         <source>Open Image</source>
         <translation>Charger une image</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="84"/>
-        <location filename="ui_preferencesdialog.h" line="951"/>
+        <location filename="ui_preferencesdialog.h" line="1029"/>
         <source>Invert Pixels</source>
         <translation>Inverser les couleurs</translation>
     </message>
@@ -11877,38 +12211,38 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="177"/>
-        <location filename="ui_preferencesdialog.h" line="956"/>
+        <location filename="ui_preferencesdialog.h" line="1034"/>
         <source>FwInfo</source>
         <translation></translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="490"/>
-        <location filename="ui_preferencesdialog.h" line="1011"/>
+        <location filename="ui_preferencesdialog.h" line="1059"/>
         <source>Language (requires restart)</source>
         <translatorcomment>Version française par Pascal Dugué / Octobre 2010.</translatorcomment>
         <translation>Langue (nécessite un redémarrage de companion9x)</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="676"/>
-        <location filename="ui_preferencesdialog.h" line="1019"/>
+        <location filename="ui_preferencesdialog.h" line="1067"/>
         <source>Default Channel Order</source>
         <translation>Ordre des voies par défaut</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="26"/>
-        <location filename="ui_preferencesdialog.h" line="949"/>
+        <location filename="ui_preferencesdialog.h" line="1027"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="663"/>
-        <location filename="ui_preferencesdialog.h" line="1018"/>
+        <location filename="ui_preferencesdialog.h" line="1066"/>
         <source>Default Stick Mode</source>
         <translation>Mode par défaut</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="734"/>
-        <location filename="ui_preferencesdialog.h" line="1024"/>
+        <location filename="ui_preferencesdialog.h" line="1072"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mode 1 (DIR PROF GAZ AIL)</translation>
     </message>
@@ -11918,7 +12252,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="477"/>
-        <location filename="ui_preferencesdialog.h" line="1010"/>
+        <location filename="ui_preferencesdialog.h" line="1058"/>
         <source>Check for updates on startup</source>
         <translation>Vérifier les mises à jour au démarrage</translation>
     </message>
@@ -11928,13 +12262,13 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="692"/>
-        <location filename="ui_preferencesdialog.h" line="1020"/>
+        <location filename="ui_preferencesdialog.h" line="1068"/>
         <source>Show Splash Screen</source>
         <translation>Afficher l&apos;écran d&apos;accueil au démarrage</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="828"/>
-        <location filename="ui_preferencesdialog.h" line="1057"/>
+        <location filename="ui_preferencesdialog.h" line="1105"/>
         <source>Recent History Size</source>
         <translation>Taille de l&apos;historique des derniers documents utilisés</translation>
     </message>
@@ -11943,10 +12277,10 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Format d&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="931"/>
-        <location filename="preferencesdialog.ui" line="972"/>
-        <location filename="ui_preferencesdialog.h" line="1065"/>
-        <location filename="ui_preferencesdialog.h" line="1071"/>
+        <location filename="preferencesdialog.ui" line="935"/>
+        <location filename="preferencesdialog.ui" line="976"/>
+        <location filename="ui_preferencesdialog.h" line="1113"/>
+        <location filename="ui_preferencesdialog.h" line="1119"/>
         <source>Download</source>
         <translation>Télécharger</translation>
     </message>
@@ -11963,35 +12297,40 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">gruvin9x trunk - carte v3/v4</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="220"/>
+        <location filename="preferencesdialog.cpp" line="219"/>
         <source>Last downloaded release: %1</source>
         <translation>Dernière version téléchargée : %1</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="229"/>
+        <location filename="preferencesdialog.cpp" line="228"/>
         <source>The selected firmware has never been downloaded by companion9x.</source>
         <translation>Le firmware sélectionné n&apos;a jamais été téléchargé par companion9x.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="233"/>
+        <location filename="preferencesdialog.cpp" line="232"/>
         <source>The selected firmware cannot be downloaded by companion9x.</source>
         <translation>Le firmware sélectionné ne peut pas être téléchargé par companion9x.</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="436"/>
+        <location filename="preferencesdialog.cpp" line="435"/>
         <source>Image stored in settings</source>
         <translation>Image enregistrée dans les paramètres</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="447"/>
-        <location filename="preferencesdialog.cpp" line="751"/>
+        <location filename="preferencesdialog.cpp" line="446"/>
+        <location filename="preferencesdialog.cpp" line="750"/>
         <source>No joysticks found</source>
         <translation>Aucun joystick</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="586"/>
+        <location filename="preferencesdialog.cpp" line="585"/>
         <source>Select the folder replicating your SD structure</source>
         <translation>Sélectionner un dossier contenant une copie des dossiers de la carte SD</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.cpp" line="629"/>
+        <source>Profile name is empty, profile slot %1 will be deleted.&lt;br&gt;Are you sure ?</source>
+        <translation>Le nom du profil est vide, le profil %1 va être effacé.&lt;br&gt;Etes-vous sûr?</translation>
     </message>
     <message>
         <source>Select your sound sample folder</source>
@@ -12114,17 +12453,17 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Le nom du profil est vide, le profil no. %1 va être effacé.&lt;br&gt;Etes-vous sûr?</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="666"/>
+        <location filename="preferencesdialog.cpp" line="665"/>
         <source>Export profile As</source>
         <translation>Exporter le profil sous</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="688"/>
+        <location filename="preferencesdialog.cpp" line="687"/>
         <source>Profile slot is not empty, profile slot %1 will we overwritten.&lt;br&gt;Are you sure ?</source>
         <translation>L&apos;emplacement %1 n&apos;est pas vide, il va être écrasé. Continuer?</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="694"/>
+        <location filename="preferencesdialog.cpp" line="693"/>
         <source>Open Profile to import</source>
         <translation>Ouvrir le profil à importer</translation>
     </message>
@@ -12133,39 +12472,39 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Choisir le répertoire des splash</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="718"/>
+        <location filename="preferencesdialog.cpp" line="717"/>
         <source>Open Image to load</source>
         <translation>Ouvre l&apos;image à charger</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="718"/>
+        <location filename="preferencesdialog.cpp" line="717"/>
         <source>Images (%1)</source>
         <translation>Images (%1)</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="574"/>
-        <location filename="preferencesdialog.cpp" line="724"/>
+        <location filename="preferencesdialog.cpp" line="573"/>
+        <location filename="preferencesdialog.cpp" line="723"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="521"/>
+        <location filename="preferencesdialog.cpp" line="520"/>
         <source>Select your library folder</source>
         <translation>Sélectionner le dossier de bibliothèque</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="531"/>
+        <location filename="preferencesdialog.cpp" line="530"/>
         <source>Select your snapshot folder</source>
         <translation>Sélectionner le dossier où stocker les captures d&apos;écran</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="558"/>
+        <location filename="preferencesdialog.cpp" line="557"/>
         <source>Select your eeprom backup folder</source>
         <translation>Sélectionner le dossier de sauvegarde d&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="574"/>
-        <location filename="preferencesdialog.cpp" line="724"/>
+        <location filename="preferencesdialog.cpp" line="573"/>
+        <location filename="preferencesdialog.cpp" line="723"/>
         <source>Cannot load %1.</source>
         <translation>Impossible de charger %1.</translation>
     </message>
@@ -12189,10 +12528,10 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Haut</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="106"/>
-        <location filename="printdialog.cpp" line="419"/>
-        <location filename="printdialog.cpp" line="449"/>
-        <location filename="printdialog.cpp" line="481"/>
+        <location filename="printdialog.cpp" line="120"/>
+        <location filename="printdialog.cpp" line="434"/>
+        <location filename="printdialog.cpp" line="464"/>
+        <location filename="printdialog.cpp" line="496"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
@@ -12217,15 +12556,15 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Chrono</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="552"/>
-        <location filename="printdialog.cpp" line="591"/>
-        <location filename="printdialog.cpp" line="665"/>
+        <location filename="printdialog.cpp" line="567"/>
+        <location filename="printdialog.cpp" line="606"/>
+        <location filename="printdialog.cpp" line="680"/>
         <source>pt %1</source>
         <translation>point %1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="112"/>
-        <location filename="printdialog.cpp" line="113"/>
+        <location filename="printdialog.cpp" line="126"/>
+        <location filename="printdialog.cpp" line="127"/>
         <source>Disabled</source>
         <translation>Inactif</translation>
     </message>
@@ -12259,29 +12598,29 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation>Configuration pour: </translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="115"/>
+        <location filename="printdialog.cpp" line="129"/>
         <source>Trim Increment</source>
         <translation>Incrémentation Trim</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="150"/>
+        <location filename="printdialog.cpp" line="164"/>
         <source>Flight mode name</source>
         <translation>Nom del la phase de vol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="267"/>
-        <location filename="printdialog.cpp" line="369"/>
+        <location filename="printdialog.cpp" line="281"/>
+        <location filename="printdialog.cpp" line="384"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="269"/>
-        <location filename="printdialog.cpp" line="371"/>
+        <location filename="printdialog.cpp" line="283"/>
+        <location filename="printdialog.cpp" line="386"/>
         <source>Flight mode</source>
         <translation>Phase de vol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="355"/>
+        <location filename="printdialog.cpp" line="370"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Ralentissement(u%1:d%2)</translation>
     </message>
@@ -12294,7 +12633,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">D/R Droite</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="354"/>
+        <location filename="printdialog.cpp" line="369"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Délai(u%1:d%2)</translation>
     </message>
@@ -12305,16 +12644,16 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation>Dialogue</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="350"/>
-        <location filename="printdialog.cpp" line="424"/>
-        <location filename="printdialog.cpp" line="454"/>
-        <location filename="printdialog.cpp" line="486"/>
-        <location filename="printdialog.cpp" line="857"/>
+        <location filename="printdialog.cpp" line="364"/>
+        <location filename="printdialog.cpp" line="439"/>
+        <location filename="printdialog.cpp" line="469"/>
+        <location filename="printdialog.cpp" line="501"/>
+        <location filename="printdialog.cpp" line="872"/>
         <source>Offset</source>
         <translation>Décalage</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="740"/>
+        <location filename="printdialog.cpp" line="755"/>
         <source>CS</source>
         <translation>SW</translation>
     </message>
@@ -12327,22 +12666,22 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete"> Durée %1 sec</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="763"/>
+        <location filename="printdialog.cpp" line="778"/>
         <source>Global Variables</source>
         <translation>Variables globales</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="769"/>
+        <location filename="printdialog.cpp" line="784"/>
         <source>GV</source>
         <translation>VG</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="857"/>
+        <location filename="printdialog.cpp" line="872"/>
         <source>Scale</source>
         <translation>Echelle</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="922"/>
+        <location filename="printdialog.cpp" line="937"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
@@ -12367,12 +12706,12 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete"> PasDeTrim(</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="112"/>
+        <location filename="printdialog.cpp" line="126"/>
         <source>Throttle Trim</source>
         <translation>Trim des Gaz</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="113"/>
+        <location filename="printdialog.cpp" line="127"/>
         <source>Throttle Expo</source>
         <translation>Expo des Gaz</translation>
     </message>
@@ -12385,7 +12724,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">&lt;h2&gt;Paramètres Généraux&lt;/h2&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="110"/>
+        <location filename="printdialog.cpp" line="124"/>
         <source>Protocol</source>
         <translation>Codage</translation>
     </message>
@@ -12394,7 +12733,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete"> Courbe(%1)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="111"/>
+        <location filename="printdialog.cpp" line="125"/>
         <source>Pulse Polarity</source>
         <translation>Modulation</translation>
     </message>
@@ -12415,19 +12754,19 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete"> Inter(</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="116"/>
+        <location filename="printdialog.cpp" line="130"/>
         <source>Center Beep</source>
         <translation>Bip de Centrage</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="112"/>
-        <location filename="printdialog.cpp" line="113"/>
-        <location filename="printdialog.cpp" line="821"/>
+        <location filename="printdialog.cpp" line="126"/>
+        <location filename="printdialog.cpp" line="127"/>
+        <location filename="printdialog.cpp" line="836"/>
         <source>Enabled</source>
         <translation>Actif</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="818"/>
+        <location filename="printdialog.cpp" line="833"/>
         <source>Function</source>
         <translation>Fonction</translation>
     </message>
@@ -12436,7 +12775,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Courbe %1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="941"/>
+        <location filename="printdialog.cpp" line="956"/>
         <source>Print Document</source>
         <translation>Imprimer le Document</translation>
     </message>
@@ -12457,20 +12796,20 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">&lt;h2&gt;Inters de sécurité&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="150"/>
-        <location filename="printdialog.cpp" line="292"/>
-        <location filename="printdialog.cpp" line="345"/>
-        <location filename="printdialog.cpp" line="790"/>
-        <location filename="printdialog.cpp" line="817"/>
+        <location filename="printdialog.cpp" line="164"/>
+        <location filename="printdialog.cpp" line="306"/>
+        <location filename="printdialog.cpp" line="359"/>
+        <location filename="printdialog.cpp" line="805"/>
+        <location filename="printdialog.cpp" line="832"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="791"/>
-        <location filename="printdialog.cpp" line="858"/>
-        <location filename="printdialog.cpp" line="859"/>
-        <location filename="printdialog.cpp" line="878"/>
-        <location filename="printdialog.cpp" line="879"/>
+        <location filename="printdialog.cpp" line="806"/>
+        <location filename="printdialog.cpp" line="873"/>
+        <location filename="printdialog.cpp" line="874"/>
+        <location filename="printdialog.cpp" line="893"/>
+        <location filename="printdialog.cpp" line="894"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
@@ -12566,53 +12905,53 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Exponentiel</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="103"/>
+        <location filename="printdialog.cpp" line="117"/>
         <source>printed on: %1</source>
         <translation>Imprimé le : %1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="104"/>
+        <location filename="printdialog.cpp" line="118"/>
         <source>General Model Settings</source>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="107"/>
+        <location filename="printdialog.cpp" line="121"/>
         <source>EEprom Size</source>
         <translation>Taille d&apos;EEPROM</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="108"/>
+        <location filename="printdialog.cpp" line="122"/>
         <source>Timer1</source>
         <translation>Chrono1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="109"/>
+        <location filename="printdialog.cpp" line="123"/>
         <source>Timer2</source>
         <translation>Chrono2</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="140"/>
+        <location filename="printdialog.cpp" line="154"/>
         <source>Flight modes Settings</source>
         <oldsource>Flight Phases Settings</oldsource>
         <translation>Paramètres de phases de vol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="142"/>
+        <location filename="printdialog.cpp" line="156"/>
         <source>Fades</source>
         <translation>Fondus</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="143"/>
+        <location filename="printdialog.cpp" line="157"/>
         <source>Trims</source>
         <translation>Trims</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="145"/>
+        <location filename="printdialog.cpp" line="159"/>
         <source>Gvars</source>
         <translation>Variables globales</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="148"/>
+        <location filename="printdialog.cpp" line="162"/>
         <source>Rot.Enc.</source>
         <translation>Enc. Rot.</translation>
     </message>
@@ -12621,39 +12960,39 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Nom de la phase</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="151"/>
+        <location filename="printdialog.cpp" line="165"/>
         <source>IN</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="151"/>
+        <location filename="printdialog.cpp" line="165"/>
         <source>OUT</source>
         <translation>Sortie</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="166"/>
-        <location filename="printdialog.cpp" line="171"/>
-        <location filename="printdialog.cpp" line="182"/>
-        <location filename="printdialog.cpp" line="193"/>
+        <location filename="printdialog.cpp" line="180"/>
+        <location filename="printdialog.cpp" line="185"/>
+        <location filename="printdialog.cpp" line="196"/>
+        <location filename="printdialog.cpp" line="207"/>
         <source>FM</source>
         <oldsource>FP</oldsource>
         <translation>PV</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="206"/>
+        <location filename="printdialog.cpp" line="220"/>
         <source>Expo/Dr Settings</source>
         <translation>Expos / Valeurs de dual rates</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="237"/>
+        <location filename="printdialog.cpp" line="251"/>
         <source>Weight</source>
         <translation>Ratio</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="241"/>
-        <location filename="printdialog.cpp" line="243"/>
-        <location filename="printdialog.cpp" line="249"/>
-        <location filename="printdialog.cpp" line="251"/>
+        <location filename="printdialog.cpp" line="255"/>
+        <location filename="printdialog.cpp" line="257"/>
+        <location filename="printdialog.cpp" line="263"/>
+        <location filename="printdialog.cpp" line="265"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
@@ -12662,47 +13001,47 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Phase</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="295"/>
-        <location filename="printdialog.cpp" line="353"/>
-        <location filename="printdialog.cpp" line="565"/>
-        <location filename="printdialog.cpp" line="612"/>
-        <location filename="printdialog.cpp" line="653"/>
-        <location filename="printdialog.cpp" line="680"/>
-        <location filename="printdialog.cpp" line="682"/>
+        <location filename="printdialog.cpp" line="309"/>
+        <location filename="printdialog.cpp" line="367"/>
+        <location filename="printdialog.cpp" line="580"/>
+        <location filename="printdialog.cpp" line="627"/>
+        <location filename="printdialog.cpp" line="668"/>
+        <location filename="printdialog.cpp" line="695"/>
+        <location filename="printdialog.cpp" line="697"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="314"/>
+        <location filename="printdialog.cpp" line="328"/>
         <source>Mixers</source>
         <translation>Mixages</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="324"/>
-        <location filename="printdialog.cpp" line="415"/>
-        <location filename="printdialog.cpp" line="445"/>
-        <location filename="printdialog.cpp" line="477"/>
-        <location filename="printdialog.cpp" line="797"/>
+        <location filename="printdialog.cpp" line="338"/>
+        <location filename="printdialog.cpp" line="430"/>
+        <location filename="printdialog.cpp" line="460"/>
+        <location filename="printdialog.cpp" line="492"/>
+        <location filename="printdialog.cpp" line="812"/>
         <source>CH</source>
         <translation>VOIE</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="346"/>
+        <location filename="printdialog.cpp" line="360"/>
         <source>noTrim</source>
         <translation>Pas de trim</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="348"/>
+        <location filename="printdialog.cpp" line="362"/>
         <source>FMTrim</source>
         <translation>Trims des phases de vol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="352"/>
+        <location filename="printdialog.cpp" line="366"/>
         <source>Diff</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="356"/>
+        <location filename="printdialog.cpp" line="371"/>
         <source>Warn</source>
         <translation>Avertissement</translation>
     </message>
@@ -12711,75 +13050,75 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Phases</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="287"/>
-        <location filename="printdialog.cpp" line="389"/>
+        <location filename="printdialog.cpp" line="301"/>
+        <location filename="printdialog.cpp" line="404"/>
         <source>DISABLED</source>
         <translation>DESACTIVE</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="411"/>
+        <location filename="printdialog.cpp" line="426"/>
         <source>Limits</source>
         <translation>Débattements</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="429"/>
-        <location filename="printdialog.cpp" line="459"/>
-        <location filename="printdialog.cpp" line="491"/>
-        <location filename="printdialog.cpp" line="922"/>
+        <location filename="printdialog.cpp" line="444"/>
+        <location filename="printdialog.cpp" line="474"/>
+        <location filename="printdialog.cpp" line="506"/>
+        <location filename="printdialog.cpp" line="937"/>
         <source>Min</source>
         <translation>Min</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="434"/>
-        <location filename="printdialog.cpp" line="464"/>
-        <location filename="printdialog.cpp" line="496"/>
-        <location filename="printdialog.cpp" line="922"/>
+        <location filename="printdialog.cpp" line="449"/>
+        <location filename="printdialog.cpp" line="479"/>
+        <location filename="printdialog.cpp" line="511"/>
+        <location filename="printdialog.cpp" line="937"/>
         <source>Max</source>
         <translation>Max</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="439"/>
-        <location filename="printdialog.cpp" line="469"/>
-        <location filename="printdialog.cpp" line="501"/>
+        <location filename="printdialog.cpp" line="454"/>
+        <location filename="printdialog.cpp" line="484"/>
+        <location filename="printdialog.cpp" line="516"/>
         <source>Invert</source>
         <translation>Inversion</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="441"/>
-        <location filename="printdialog.cpp" line="471"/>
-        <location filename="printdialog.cpp" line="503"/>
+        <location filename="printdialog.cpp" line="456"/>
+        <location filename="printdialog.cpp" line="486"/>
+        <location filename="printdialog.cpp" line="518"/>
         <source>INV</source>
         <translation>Inversion</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="441"/>
-        <location filename="printdialog.cpp" line="471"/>
-        <location filename="printdialog.cpp" line="503"/>
+        <location filename="printdialog.cpp" line="456"/>
+        <location filename="printdialog.cpp" line="486"/>
+        <location filename="printdialog.cpp" line="518"/>
         <source>NOR</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="536"/>
+        <location filename="printdialog.cpp" line="551"/>
         <source>Curves</source>
         <translation>Courbes</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="548"/>
+        <location filename="printdialog.cpp" line="563"/>
         <source>5 Points Curves</source>
         <translation>Courbes à 5 points</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="589"/>
+        <location filename="printdialog.cpp" line="604"/>
         <source>9 Points Curves</source>
         <translation>Courbes à 9 points</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="734"/>
+        <location filename="printdialog.cpp" line="749"/>
         <source>Custom Switches</source>
         <translation>Inters personnalisés</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="949"/>
+        <location filename="printdialog.cpp" line="964"/>
         <source>ODF files (*.odt);;PDF Files(*.pdf);;HTML-Files (*.htm *.html);;All Files (*)</source>
         <translation>Fichiers ODF (*.odt);; Fichiers PDF (*.pdf);;Fichiers HTML (*.htm *.html);;Tous les fichiers (*)</translation>
     </message>
@@ -12788,54 +13127,54 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">SW</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="787"/>
+        <location filename="printdialog.cpp" line="802"/>
         <source>Safety Switches</source>
         <translation>Inters de sécurité</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="814"/>
+        <location filename="printdialog.cpp" line="829"/>
         <source>Function Switches</source>
         <translation>Fonctions personnalisées</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="819"/>
+        <location filename="printdialog.cpp" line="834"/>
         <source>Parameter</source>
         <translation>Paramètre</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="820"/>
+        <location filename="printdialog.cpp" line="835"/>
         <source>Repeat</source>
         <translation>Répétition</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="826"/>
+        <location filename="printdialog.cpp" line="841"/>
         <source>FSW</source>
         <translation>FP</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="855"/>
+        <location filename="printdialog.cpp" line="870"/>
         <source>Telemetry Settings</source>
         <translation>Paramètres de télémesure</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="856"/>
-        <location filename="printdialog.cpp" line="877"/>
+        <location filename="printdialog.cpp" line="871"/>
+        <location filename="printdialog.cpp" line="892"/>
         <source>Alarm 1</source>
         <translation>Alarme 1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="856"/>
-        <location filename="printdialog.cpp" line="877"/>
+        <location filename="printdialog.cpp" line="871"/>
+        <location filename="printdialog.cpp" line="892"/>
         <source>Alarm 2</source>
         <translation>Alarme 2</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="857"/>
+        <location filename="printdialog.cpp" line="872"/>
         <source>Analog</source>
         <translation>Analogue</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="857"/>
+        <location filename="printdialog.cpp" line="872"/>
         <source>Unit</source>
         <translation>Unité</translation>
     </message>
@@ -12844,64 +13183,64 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Ratio</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="858"/>
-        <location filename="printdialog.cpp" line="859"/>
-        <location filename="printdialog.cpp" line="878"/>
-        <location filename="printdialog.cpp" line="879"/>
+        <location filename="printdialog.cpp" line="873"/>
+        <location filename="printdialog.cpp" line="874"/>
+        <location filename="printdialog.cpp" line="893"/>
+        <location filename="printdialog.cpp" line="894"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="858"/>
-        <location filename="printdialog.cpp" line="859"/>
-        <location filename="printdialog.cpp" line="878"/>
-        <location filename="printdialog.cpp" line="879"/>
+        <location filename="printdialog.cpp" line="873"/>
+        <location filename="printdialog.cpp" line="874"/>
+        <location filename="printdialog.cpp" line="893"/>
+        <location filename="printdialog.cpp" line="894"/>
         <source>Condition</source>
         <translation>Condition</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="865"/>
+        <location filename="printdialog.cpp" line="880"/>
         <source>A%1</source>
         <translation>A%1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="880"/>
+        <location filename="printdialog.cpp" line="895"/>
         <source>RSSI Alarm</source>
         <translation>Alarme RSSI</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="884"/>
+        <location filename="printdialog.cpp" line="899"/>
         <source>Frsky serial protocol</source>
         <translation>Protocole Série FrSky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="885"/>
+        <location filename="printdialog.cpp" line="900"/>
         <source>System of units</source>
         <translation>Unités</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="886"/>
+        <location filename="printdialog.cpp" line="901"/>
         <source>Propeller blades</source>
         <translation>Pales de l&apos;hélice</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="921"/>
+        <location filename="printdialog.cpp" line="936"/>
         <source>Telemetry Bars</source>
         <translation>Jauges de Télémesure</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="922"/>
+        <location filename="printdialog.cpp" line="937"/>
         <source>Bar Number</source>
         <translation>Barre no</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="895"/>
-        <location filename="printdialog.cpp" line="897"/>
+        <location filename="printdialog.cpp" line="910"/>
+        <location filename="printdialog.cpp" line="912"/>
         <source>Custom Telemetry View</source>
         <translation>Vue Télémesure personnalisée</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="949"/>
+        <location filename="printdialog.cpp" line="964"/>
         <source>Select PDF output file</source>
         <translation>Choisir le fichier PDF de sortie</translation>
     </message>
@@ -12910,257 +13249,277 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <name>simulatorDialog</name>
     <message>
         <location filename="simulatordialog.ui" line="844"/>
-        <location filename="ui_simulatordialog.h" line="1923"/>
+        <location filename="ui_simulatordialog.h" line="2337"/>
         <source>P1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="901"/>
-        <location filename="ui_simulatordialog.h" line="1927"/>
+        <location filename="ui_simulatordialog.h" line="2341"/>
         <source>P2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="961"/>
-        <location filename="ui_simulatordialog.h" line="1931"/>
+        <location filename="ui_simulatordialog.h" line="2345"/>
         <source>P3</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="230"/>
-        <location filename="ui_simulatordialog.h" line="1895"/>
+        <location filename="ui_simulatordialog.h" line="2308"/>
         <source>AIL</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1637"/>
+        <location filename="ui_simulatordialog.h" line="2361"/>
         <source>SWD</source>
         <translation>IPD</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1668"/>
+        <location filename="ui_simulatordialog.h" line="2362"/>
         <source>SWE</source>
         <translation>IPE</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1699"/>
+        <location filename="ui_simulatordialog.h" line="2363"/>
         <source>SWF</source>
         <translation>IPF</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1730"/>
+        <location filename="ui_simulatordialog.h" line="2364"/>
         <source>SWG</source>
         <translation>IPG</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1761"/>
+        <location filename="ui_simulatordialog.h" line="2365"/>
         <source>SWH</source>
         <translation>IPH</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1792"/>
+        <location filename="ui_simulatordialog.h" line="2366"/>
         <source>SWI</source>
         <translation>IPI</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1823"/>
+        <location filename="ui_simulatordialog.h" line="2367"/>
         <source>SWJ</source>
         <translation>IPJ</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1854"/>
+        <location filename="ui_simulatordialog.h" line="2368"/>
         <source>SWK</source>
         <translation>IPK</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1885"/>
+        <location filename="ui_simulatordialog.h" line="2369"/>
         <source>SWL</source>
         <translation>IPL</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1916"/>
+        <location filename="ui_simulatordialog.h" line="2370"/>
         <source>SWM</source>
         <translation>IPM</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1947"/>
+        <location filename="ui_simulatordialog.h" line="2371"/>
         <source>SWN</source>
         <translation>IPN</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1978"/>
+        <location filename="ui_simulatordialog.h" line="2372"/>
         <source>SWO</source>
         <translation>IPO</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2009"/>
+        <location filename="ui_simulatordialog.h" line="2373"/>
         <source>SWP</source>
         <translation>IPP</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2040"/>
+        <location filename="ui_simulatordialog.h" line="2374"/>
         <source>SWQ</source>
         <translation>IPQ</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2071"/>
+        <location filename="ui_simulatordialog.h" line="2375"/>
         <source>SWR</source>
         <translation>IPR</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2102"/>
+        <location filename="ui_simulatordialog.h" line="2376"/>
         <source>SWS</source>
         <translation>IPS</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2133"/>
+        <location filename="ui_simulatordialog.h" line="2377"/>
         <source>SWT</source>
         <translation>IPT</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2164"/>
+        <location filename="ui_simulatordialog.h" line="2378"/>
         <source>SWU</source>
         <translation>IPU</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2195"/>
+        <location filename="ui_simulatordialog.h" line="2379"/>
         <source>SWV</source>
         <translation>IPV</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2226"/>
+        <location filename="ui_simulatordialog.h" line="2380"/>
         <source>SWW</source>
         <translation>IPW</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2307"/>
-        <location filename="ui_simulatordialog.h" line="1948"/>
+        <location filename="ui_simulatordialog.h" line="2381"/>
         <source>CH1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2432"/>
-        <location filename="ui_simulatordialog.h" line="1952"/>
+        <location filename="ui_simulatordialog.h" line="2385"/>
         <source>CH2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2612"/>
-        <location filename="ui_simulatordialog.h" line="1956"/>
+        <location filename="ui_simulatordialog.h" line="2389"/>
         <source>CH3</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2792"/>
-        <location filename="ui_simulatordialog.h" line="1960"/>
+        <location filename="ui_simulatordialog.h" line="2393"/>
         <source>CH4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2972"/>
-        <location filename="ui_simulatordialog.h" line="1964"/>
+        <location filename="ui_simulatordialog.h" line="2397"/>
         <source>CH5</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3146"/>
-        <location filename="ui_simulatordialog.h" line="1968"/>
+        <location filename="ui_simulatordialog.h" line="2401"/>
         <source>CH6</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3271"/>
-        <location filename="ui_simulatordialog.h" line="1972"/>
+        <location filename="ui_simulatordialog.h" line="2405"/>
         <source>CH7</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3451"/>
-        <location filename="ui_simulatordialog.h" line="1976"/>
+        <location filename="ui_simulatordialog.h" line="2409"/>
         <source>CH8</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2419"/>
-        <location filename="ui_simulatordialog.h" line="1951"/>
+        <location filename="ui_simulatordialog.h" line="2384"/>
         <source>CH9</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="200"/>
-        <location filename="ui_simulatordialog.h" line="1894"/>
+        <location filename="ui_simulatordialog.h" line="2307"/>
         <source>ELE</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="497"/>
-        <location filename="ui_simulatordialog.h" line="1909"/>
+        <location filename="ui_simulatordialog.h" line="2322"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="530"/>
-        <location filename="ui_simulatordialog.h" line="1910"/>
+        <location filename="ui_simulatordialog.h" line="2323"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="566"/>
-        <location filename="ui_simulatordialog.h" line="1911"/>
+        <location filename="ui_simulatordialog.h" line="2324"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="599"/>
-        <location filename="ui_simulatordialog.h" line="1912"/>
+        <location filename="ui_simulatordialog.h" line="2325"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="170"/>
-        <location filename="ui_simulatordialog.h" line="1893"/>
+        <location filename="ui_simulatordialog.h" line="2306"/>
         <source>RUD</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1265"/>
-        <location filename="ui_simulatordialog.h" line="1935"/>
+        <location filename="ui_simulatordialog.h" line="2349"/>
         <source>SW1</source>
         <translation>IP1</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1296"/>
-        <location filename="ui_simulatordialog.h" line="1936"/>
+        <location filename="ui_simulatordialog.h" line="2350"/>
         <source>SW2</source>
         <translation>IP2</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1327"/>
-        <location filename="ui_simulatordialog.h" line="1937"/>
+        <location filename="ui_simulatordialog.h" line="2351"/>
         <source>SW3</source>
         <translation>IP3</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1358"/>
-        <location filename="ui_simulatordialog.h" line="1938"/>
+        <location filename="ui_simulatordialog.h" line="2352"/>
         <source>SW4</source>
         <translation>IP4</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1389"/>
-        <location filename="ui_simulatordialog.h" line="1939"/>
+        <location filename="ui_simulatordialog.h" line="2353"/>
         <source>SW5</source>
         <translation>IP5</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1420"/>
-        <location filename="ui_simulatordialog.h" line="1940"/>
+        <location filename="ui_simulatordialog.h" line="2354"/>
         <source>SW6</source>
         <translation>IP6</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="140"/>
-        <location filename="ui_simulatordialog.h" line="1892"/>
+        <location filename="ui_simulatordialog.h" line="2305"/>
         <source>THR</source>
         <translation></translation>
     </message>
@@ -13169,16 +13528,16 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="396"/>
         <location filename="simulatordialog.ui" line="416"/>
         <location filename="simulatordialog.ui" line="768"/>
-        <location filename="ui_simulatordialog.h" line="1890"/>
-        <location filename="ui_simulatordialog.h" line="1903"/>
-        <location filename="ui_simulatordialog.h" line="1906"/>
-        <location filename="ui_simulatordialog.h" line="1920"/>
+        <location filename="ui_simulatordialog.h" line="2303"/>
+        <location filename="ui_simulatordialog.h" line="2316"/>
+        <location filename="ui_simulatordialog.h" line="2319"/>
+        <location filename="ui_simulatordialog.h" line="2333"/>
         <source>Right Double Click to Reset</source>
         <translation>Double cliquer pour remettre à 0</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="470"/>
-        <location filename="ui_simulatordialog.h" line="1908"/>
+        <location filename="ui_simulatordialog.h" line="2321"/>
         <source>TRN</source>
         <translation></translation>
     </message>
@@ -13186,73 +13545,73 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="866"/>
         <location filename="simulatordialog.ui" line="926"/>
         <location filename="simulatordialog.ui" line="983"/>
-        <location filename="ui_simulatordialog.h" line="1925"/>
-        <location filename="ui_simulatordialog.h" line="1929"/>
-        <location filename="ui_simulatordialog.h" line="1933"/>
+        <location filename="ui_simulatordialog.h" line="2339"/>
+        <location filename="ui_simulatordialog.h" line="2343"/>
+        <location filename="ui_simulatordialog.h" line="2347"/>
         <source>0 %</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="806"/>
-        <location filename="ui_simulatordialog.h" line="1941"/>
+        <location filename="ui_simulatordialog.h" line="2335"/>
         <source>BEEP</source>
         <translation>BIP</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2599"/>
-        <location filename="ui_simulatordialog.h" line="1955"/>
+        <location filename="ui_simulatordialog.h" line="2388"/>
         <source>CH10</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2779"/>
-        <location filename="ui_simulatordialog.h" line="1959"/>
+        <location filename="ui_simulatordialog.h" line="2392"/>
         <source>CH11</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2959"/>
-        <location filename="ui_simulatordialog.h" line="1963"/>
+        <location filename="ui_simulatordialog.h" line="2396"/>
         <source>CH12</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3133"/>
-        <location filename="ui_simulatordialog.h" line="1967"/>
+        <location filename="ui_simulatordialog.h" line="2400"/>
         <source>CH13</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3258"/>
-        <location filename="ui_simulatordialog.h" line="1971"/>
+        <location filename="ui_simulatordialog.h" line="2404"/>
         <source>CH14</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3438"/>
-        <location filename="ui_simulatordialog.h" line="1975"/>
+        <location filename="ui_simulatordialog.h" line="2408"/>
         <source>CH15</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="3618"/>
-        <location filename="ui_simulatordialog.h" line="1979"/>
+        <location filename="ui_simulatordialog.h" line="2412"/>
         <source>CH16</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="294"/>
         <location filename="simulatordialog.ui" line="666"/>
-        <location filename="ui_simulatordialog.h" line="1897"/>
-        <location filename="ui_simulatordialog.h" line="1914"/>
+        <location filename="ui_simulatordialog.h" line="2310"/>
+        <location filename="ui_simulatordialog.h" line="2327"/>
         <source>Fix X</source>
         <translation>Verrou X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="324"/>
         <location filename="simulatordialog.ui" line="696"/>
-        <location filename="ui_simulatordialog.h" line="1898"/>
-        <location filename="ui_simulatordialog.h" line="1915"/>
+        <location filename="ui_simulatordialog.h" line="2311"/>
+        <location filename="ui_simulatordialog.h" line="2328"/>
         <source>Fix Y</source>
         <translation>Verrou Y</translation>
     </message>
@@ -13277,38 +13636,38 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="3367"/>
         <location filename="simulatordialog.ui" line="3525"/>
         <location filename="simulatordialog.ui" line="3547"/>
-        <location filename="ui_simulatordialog.h" line="1949"/>
-        <location filename="ui_simulatordialog.h" line="1950"/>
-        <location filename="ui_simulatordialog.h" line="1953"/>
-        <location filename="ui_simulatordialog.h" line="1954"/>
-        <location filename="ui_simulatordialog.h" line="1957"/>
-        <location filename="ui_simulatordialog.h" line="1958"/>
-        <location filename="ui_simulatordialog.h" line="1961"/>
-        <location filename="ui_simulatordialog.h" line="1962"/>
-        <location filename="ui_simulatordialog.h" line="1965"/>
-        <location filename="ui_simulatordialog.h" line="1966"/>
-        <location filename="ui_simulatordialog.h" line="1969"/>
-        <location filename="ui_simulatordialog.h" line="1970"/>
-        <location filename="ui_simulatordialog.h" line="1973"/>
-        <location filename="ui_simulatordialog.h" line="1974"/>
-        <location filename="ui_simulatordialog.h" line="1977"/>
-        <location filename="ui_simulatordialog.h" line="1978"/>
+        <location filename="ui_simulatordialog.h" line="2382"/>
+        <location filename="ui_simulatordialog.h" line="2383"/>
+        <location filename="ui_simulatordialog.h" line="2386"/>
+        <location filename="ui_simulatordialog.h" line="2387"/>
+        <location filename="ui_simulatordialog.h" line="2390"/>
+        <location filename="ui_simulatordialog.h" line="2391"/>
+        <location filename="ui_simulatordialog.h" line="2394"/>
+        <location filename="ui_simulatordialog.h" line="2395"/>
+        <location filename="ui_simulatordialog.h" line="2398"/>
+        <location filename="ui_simulatordialog.h" line="2399"/>
+        <location filename="ui_simulatordialog.h" line="2402"/>
+        <location filename="ui_simulatordialog.h" line="2403"/>
+        <location filename="ui_simulatordialog.h" line="2406"/>
+        <location filename="ui_simulatordialog.h" line="2407"/>
+        <location filename="ui_simulatordialog.h" line="2410"/>
+        <location filename="ui_simulatordialog.h" line="2411"/>
         <source>-100.1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="264"/>
         <location filename="simulatordialog.ui" line="636"/>
-        <location filename="ui_simulatordialog.h" line="1896"/>
-        <location filename="ui_simulatordialog.h" line="1913"/>
+        <location filename="ui_simulatordialog.h" line="2309"/>
+        <location filename="ui_simulatordialog.h" line="2326"/>
         <source>Hold X</source>
         <translation>Retenir X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="354"/>
         <location filename="simulatordialog.ui" line="726"/>
-        <location filename="ui_simulatordialog.h" line="1899"/>
-        <location filename="ui_simulatordialog.h" line="1916"/>
+        <location filename="ui_simulatordialog.h" line="2312"/>
+        <location filename="ui_simulatordialog.h" line="2329"/>
         <source>Hold Y</source>
         <translation>Retenir Y</translation>
     </message>
@@ -13322,58 +13681,58 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <location filename="simulatordialog.ui" line="384"/>
         <location filename="simulatordialog.ui" line="746"/>
         <location filename="simulatordialog.ui" line="756"/>
-        <location filename="ui_simulatordialog.h" line="1900"/>
-        <location filename="ui_simulatordialog.h" line="1901"/>
-        <location filename="ui_simulatordialog.h" line="1917"/>
-        <location filename="ui_simulatordialog.h" line="1918"/>
+        <location filename="ui_simulatordialog.h" line="2313"/>
+        <location filename="ui_simulatordialog.h" line="2314"/>
+        <location filename="ui_simulatordialog.h" line="2330"/>
+        <location filename="ui_simulatordialog.h" line="2331"/>
         <source>TextLabel</source>
         <translation></translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1451"/>
-        <location filename="ui_simulatordialog.h" line="1942"/>
+        <location filename="ui_simulatordialog.h" line="2355"/>
         <source>SW7</source>
         <translation>IP7</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1482"/>
-        <location filename="ui_simulatordialog.h" line="1943"/>
+        <location filename="ui_simulatordialog.h" line="2356"/>
         <source>SW8</source>
         <translation>IP8</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1513"/>
-        <location filename="ui_simulatordialog.h" line="1944"/>
+        <location filename="ui_simulatordialog.h" line="2357"/>
         <source>SW9</source>
         <translation>IP9</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1544"/>
-        <location filename="ui_simulatordialog.h" line="1945"/>
+        <location filename="ui_simulatordialog.h" line="2358"/>
         <source>SWA</source>
         <translation>IPA</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1575"/>
-        <location filename="ui_simulatordialog.h" line="1946"/>
+        <location filename="ui_simulatordialog.h" line="2359"/>
         <source>SWB</source>
         <translation>IPB</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1606"/>
-        <location filename="ui_simulatordialog.h" line="1947"/>
+        <location filename="ui_simulatordialog.h" line="2360"/>
         <source>SWC</source>
         <translation>IPC</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="26"/>
-        <location filename="ui_simulatordialog.h" line="1888"/>
+        <location filename="ui_simulatordialog.h" line="2301"/>
         <source>Companion9x Simulator</source>
         <translation>Simulateur companion9x</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1046"/>
-        <location filename="ui_simulatordialog.h" line="1934"/>
+        <location filename="ui_simulatordialog.h" line="2348"/>
         <source>9x Simulator</source>
         <translation>Simulateur 9x</translation>
     </message>
@@ -13383,7 +13742,7 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1239"/>
-        <location filename="ui_simulatordialog.h" line="1980"/>
+        <location filename="ui_simulatordialog.h" line="2413"/>
         <source>Outputs</source>
         <translation>Sorties</translation>
     </message>
@@ -13460,41 +13819,41 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
     <name>xsimulatorDialog</name>
     <message>
         <location filename="xsimulatordialog.ui" line="26"/>
-        <location filename="ui_xsimulatordialog.h" line="1905"/>
+        <location filename="ui_xsimulatordialog.h" line="2312"/>
         <source>Companion9x Simulator</source>
         <translation>Simulateur companion9x</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1068"/>
-        <location filename="xsimulatordialog.ui" line="1090"/>
-        <location filename="xsimulatordialog.ui" line="1093"/>
-        <location filename="ui_xsimulatordialog.h" line="1966"/>
-        <location filename="ui_xsimulatordialog.h" line="1968"/>
-        <location filename="ui_xsimulatordialog.h" line="1971"/>
+        <location filename="xsimulatordialog.ui" line="1089"/>
+        <location filename="xsimulatordialog.ui" line="1111"/>
+        <location filename="xsimulatordialog.ui" line="1114"/>
+        <location filename="ui_xsimulatordialog.h" line="2373"/>
+        <location filename="ui_xsimulatordialog.h" line="2375"/>
+        <location filename="ui_xsimulatordialog.h" line="2378"/>
         <source>SF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1043"/>
-        <location filename="xsimulatordialog.ui" line="1175"/>
-        <location filename="ui_xsimulatordialog.h" line="1964"/>
-        <location filename="ui_xsimulatordialog.h" line="1978"/>
+        <location filename="xsimulatordialog.ui" line="1061"/>
+        <location filename="xsimulatordialog.ui" line="1199"/>
+        <location filename="ui_xsimulatordialog.h" line="2371"/>
+        <location filename="ui_xsimulatordialog.h" line="2385"/>
         <source>SE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="948"/>
-        <location filename="xsimulatordialog.ui" line="1155"/>
-        <location filename="ui_xsimulatordialog.h" line="1955"/>
-        <location filename="ui_xsimulatordialog.h" line="1976"/>
+        <location filename="xsimulatordialog.ui" line="963"/>
+        <location filename="xsimulatordialog.ui" line="1179"/>
+        <location filename="ui_xsimulatordialog.h" line="2362"/>
+        <location filename="ui_xsimulatordialog.h" line="2383"/>
         <source>SA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="895"/>
-        <location filename="xsimulatordialog.ui" line="1165"/>
-        <location filename="ui_xsimulatordialog.h" line="1952"/>
-        <location filename="ui_xsimulatordialog.h" line="1977"/>
+        <location filename="xsimulatordialog.ui" line="907"/>
+        <location filename="xsimulatordialog.ui" line="1189"/>
+        <location filename="ui_xsimulatordialog.h" line="2359"/>
+        <location filename="ui_xsimulatordialog.h" line="2384"/>
         <source>SB</source>
         <translation></translation>
     </message>
@@ -13503,58 +13862,58 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">P2</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="341"/>
-        <location filename="xsimulatordialog.ui" line="593"/>
-        <location filename="xsimulatordialog.ui" line="973"/>
-        <location filename="xsimulatordialog.ui" line="997"/>
-        <location filename="ui_xsimulatordialog.h" line="1914"/>
-        <location filename="ui_xsimulatordialog.h" line="1922"/>
-        <location filename="ui_xsimulatordialog.h" line="1958"/>
-        <location filename="ui_xsimulatordialog.h" line="1961"/>
+        <location filename="xsimulatordialog.ui" line="347"/>
+        <location filename="xsimulatordialog.ui" line="605"/>
+        <location filename="xsimulatordialog.ui" line="991"/>
+        <location filename="xsimulatordialog.ui" line="1015"/>
+        <location filename="ui_xsimulatordialog.h" line="2324"/>
+        <location filename="ui_xsimulatordialog.h" line="2345"/>
+        <location filename="ui_xsimulatordialog.h" line="2365"/>
+        <location filename="ui_xsimulatordialog.h" line="2368"/>
         <source>Right Double Click to Reset</source>
         <translation>Double clic droit pour remettre à 0</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="617"/>
-        <location filename="xsimulatordialog.ui" line="627"/>
-        <location filename="xsimulatordialog.ui" line="861"/>
-        <location filename="xsimulatordialog.ui" line="871"/>
-        <location filename="ui_xsimulatordialog.h" line="1919"/>
-        <location filename="ui_xsimulatordialog.h" line="1920"/>
-        <location filename="ui_xsimulatordialog.h" line="1949"/>
-        <location filename="ui_xsimulatordialog.h" line="1950"/>
+        <location filename="xsimulatordialog.ui" line="629"/>
+        <location filename="xsimulatordialog.ui" line="639"/>
+        <location filename="xsimulatordialog.ui" line="873"/>
+        <location filename="xsimulatordialog.ui" line="883"/>
+        <location filename="ui_xsimulatordialog.h" line="2347"/>
+        <location filename="ui_xsimulatordialog.h" line="2348"/>
+        <location filename="ui_xsimulatordialog.h" line="2356"/>
+        <location filename="ui_xsimulatordialog.h" line="2357"/>
         <source>TextLabel</source>
         <translation></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="240"/>
-        <location filename="xsimulatordialog.ui" line="794"/>
-        <location filename="ui_xsimulatordialog.h" line="1909"/>
-        <location filename="ui_xsimulatordialog.h" line="1945"/>
+        <location filename="xsimulatordialog.ui" line="806"/>
+        <location filename="ui_xsimulatordialog.h" line="2316"/>
+        <location filename="ui_xsimulatordialog.h" line="2352"/>
         <source>Hold X</source>
         <translation>Retenir X</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="210"/>
-        <location filename="xsimulatordialog.ui" line="764"/>
-        <location filename="ui_xsimulatordialog.h" line="1908"/>
-        <location filename="ui_xsimulatordialog.h" line="1944"/>
+        <location filename="xsimulatordialog.ui" line="776"/>
+        <location filename="ui_xsimulatordialog.h" line="2315"/>
+        <location filename="ui_xsimulatordialog.h" line="2351"/>
         <source>Fix X</source>
         <translation>Bloquer X</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="180"/>
-        <location filename="xsimulatordialog.ui" line="734"/>
-        <location filename="ui_xsimulatordialog.h" line="1907"/>
-        <location filename="ui_xsimulatordialog.h" line="1943"/>
+        <location filename="xsimulatordialog.ui" line="746"/>
+        <location filename="ui_xsimulatordialog.h" line="2314"/>
+        <location filename="ui_xsimulatordialog.h" line="2350"/>
         <source>Fix Y</source>
         <translation>Bloquer Y</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="150"/>
-        <location filename="xsimulatordialog.ui" line="704"/>
-        <location filename="ui_xsimulatordialog.h" line="1906"/>
-        <location filename="ui_xsimulatordialog.h" line="1942"/>
+        <location filename="xsimulatordialog.ui" line="716"/>
+        <location filename="ui_xsimulatordialog.h" line="2313"/>
+        <location filename="ui_xsimulatordialog.h" line="2349"/>
         <source>Hold Y</source>
         <translation>Retenir Y</translation>
     </message>
@@ -13567,66 +13926,66 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">P3</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="505"/>
-        <location filename="xsimulatordialog.ui" line="563"/>
-        <location filename="ui_xsimulatordialog.h" line="1934"/>
-        <location filename="ui_xsimulatordialog.h" line="1939"/>
+        <location filename="xsimulatordialog.ui" line="514"/>
+        <location filename="xsimulatordialog.ui" line="575"/>
+        <location filename="ui_xsimulatordialog.h" line="2336"/>
+        <location filename="ui_xsimulatordialog.h" line="2341"/>
         <source>SH</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="431"/>
-        <location filename="xsimulatordialog.ui" line="553"/>
-        <location filename="ui_xsimulatordialog.h" line="1928"/>
-        <location filename="ui_xsimulatordialog.h" line="1938"/>
+        <location filename="xsimulatordialog.ui" line="437"/>
+        <location filename="xsimulatordialog.ui" line="565"/>
+        <location filename="ui_xsimulatordialog.h" line="2330"/>
+        <location filename="ui_xsimulatordialog.h" line="2340"/>
         <source>SG</source>
         <translation></translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="264"/>
-        <location filename="xsimulatordialog.ui" line="543"/>
-        <location filename="ui_xsimulatordialog.h" line="1911"/>
-        <location filename="ui_xsimulatordialog.h" line="1937"/>
+        <location filename="xsimulatordialog.ui" line="555"/>
+        <location filename="ui_xsimulatordialog.h" line="2318"/>
+        <location filename="ui_xsimulatordialog.h" line="2339"/>
         <source>SD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="301"/>
-        <location filename="xsimulatordialog.ui" line="533"/>
-        <location filename="ui_xsimulatordialog.h" line="1917"/>
-        <location filename="ui_xsimulatordialog.h" line="1936"/>
+        <location filename="xsimulatordialog.ui" line="304"/>
+        <location filename="xsimulatordialog.ui" line="545"/>
+        <location filename="ui_xsimulatordialog.h" line="2321"/>
+        <location filename="ui_xsimulatordialog.h" line="2338"/>
         <source>SC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="371"/>
-        <location filename="xsimulatordialog.ui" line="573"/>
-        <location filename="ui_xsimulatordialog.h" line="1925"/>
-        <location filename="ui_xsimulatordialog.h" line="1940"/>
+        <location filename="xsimulatordialog.ui" line="377"/>
+        <location filename="xsimulatordialog.ui" line="585"/>
+        <location filename="ui_xsimulatordialog.h" line="2327"/>
+        <location filename="ui_xsimulatordialog.h" line="2342"/>
         <source>S2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="471"/>
-        <location filename="xsimulatordialog.ui" line="583"/>
-        <location filename="ui_xsimulatordialog.h" line="1931"/>
-        <location filename="ui_xsimulatordialog.h" line="1941"/>
+        <location filename="xsimulatordialog.ui" line="480"/>
+        <location filename="xsimulatordialog.ui" line="595"/>
+        <location filename="ui_xsimulatordialog.h" line="2333"/>
+        <location filename="ui_xsimulatordialog.h" line="2343"/>
         <source>RS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="831"/>
-        <location filename="xsimulatordialog.ui" line="1195"/>
-        <location filename="ui_xsimulatordialog.h" line="1947"/>
-        <location filename="ui_xsimulatordialog.h" line="1980"/>
+        <location filename="xsimulatordialog.ui" line="843"/>
+        <location filename="xsimulatordialog.ui" line="1219"/>
+        <location filename="ui_xsimulatordialog.h" line="2354"/>
+        <location filename="ui_xsimulatordialog.h" line="2387"/>
         <source>S1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1133"/>
-        <location filename="xsimulatordialog.ui" line="1185"/>
-        <location filename="ui_xsimulatordialog.h" line="1974"/>
-        <location filename="ui_xsimulatordialog.h" line="1979"/>
+        <location filename="xsimulatordialog.ui" line="1157"/>
+        <location filename="xsimulatordialog.ui" line="1209"/>
+        <location filename="ui_xsimulatordialog.h" line="2381"/>
+        <location filename="ui_xsimulatordialog.h" line="2386"/>
         <source>LS</source>
         <translation></translation>
     </message>
@@ -13635,323 +13994,342 @@ Indique l&apos;affectation voie / numéro de canal par défaut utilisée lors de
         <translation type="obsolete">Simulateur Taranis</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1400"/>
-        <location filename="ui_xsimulatordialog.h" line="2027"/>
+        <location filename="xsimulatordialog.ui" line="1424"/>
+        <location filename="ui_xsimulatordialog.h" line="2453"/>
         <source>Outputs</source>
         <translation>Sorties</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2872"/>
+        <location filename="xsimulatordialog.ui" line="2896"/>
+        <location filename="ui_xsimulatordialog.h" line="2421"/>
         <source>SWK</source>
         <translation>IPK</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2934"/>
+        <location filename="xsimulatordialog.ui" line="2958"/>
+        <location filename="ui_xsimulatordialog.h" line="2423"/>
         <source>SWD</source>
         <translation>IPD</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2996"/>
+        <location filename="xsimulatordialog.ui" line="3020"/>
+        <location filename="ui_xsimulatordialog.h" line="2425"/>
         <source>SWL</source>
         <translation>IPL</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3058"/>
-        <location filename="ui_xsimulatordialog.h" line="1982"/>
+        <location filename="xsimulatordialog.ui" line="3082"/>
+        <location filename="ui_xsimulatordialog.h" line="2427"/>
         <source>SW1</source>
         <translation>IP1</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3089"/>
+        <location filename="xsimulatordialog.ui" line="3113"/>
+        <location filename="ui_xsimulatordialog.h" line="2428"/>
         <source>SWH</source>
         <translation>IPH</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3120"/>
+        <location filename="xsimulatordialog.ui" line="3144"/>
+        <location filename="ui_xsimulatordialog.h" line="2429"/>
         <source>SWG</source>
         <translation>IPG</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3151"/>
+        <location filename="xsimulatordialog.ui" line="3175"/>
+        <location filename="ui_xsimulatordialog.h" line="2430"/>
         <source>SWE</source>
         <translation>IPE</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3182"/>
+        <location filename="xsimulatordialog.ui" line="3206"/>
+        <location filename="ui_xsimulatordialog.h" line="2431"/>
         <source>SWF</source>
         <translation>IPF</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3306"/>
+        <location filename="xsimulatordialog.ui" line="3330"/>
+        <location filename="ui_xsimulatordialog.h" line="2435"/>
         <source>SWM</source>
         <translation>IPM</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3337"/>
+        <location filename="xsimulatordialog.ui" line="3361"/>
+        <location filename="ui_xsimulatordialog.h" line="2436"/>
         <source>SWJ</source>
         <translation>IPJ</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3368"/>
+        <location filename="xsimulatordialog.ui" line="3392"/>
+        <location filename="ui_xsimulatordialog.h" line="2437"/>
         <source>SWI</source>
         <translation>IPI</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3461"/>
-        <location filename="ui_xsimulatordialog.h" line="1983"/>
+        <location filename="xsimulatordialog.ui" line="3485"/>
+        <location filename="ui_xsimulatordialog.h" line="2440"/>
         <source>SW2</source>
         <translation>IP2</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3492"/>
-        <location filename="ui_xsimulatordialog.h" line="1984"/>
+        <location filename="xsimulatordialog.ui" line="3516"/>
+        <location filename="ui_xsimulatordialog.h" line="2441"/>
         <source>SW3</source>
         <translation>IP3</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3399"/>
-        <location filename="ui_xsimulatordialog.h" line="1985"/>
+        <location filename="xsimulatordialog.ui" line="3423"/>
+        <location filename="ui_xsimulatordialog.h" line="2438"/>
         <source>SW4</source>
         <translation>IP4</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3430"/>
-        <location filename="ui_xsimulatordialog.h" line="1986"/>
+        <location filename="xsimulatordialog.ui" line="3454"/>
+        <location filename="ui_xsimulatordialog.h" line="2439"/>
         <source>SW5</source>
         <translation>IP5</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3523"/>
-        <location filename="ui_xsimulatordialog.h" line="1987"/>
+        <location filename="xsimulatordialog.ui" line="3547"/>
+        <location filename="ui_xsimulatordialog.h" line="2442"/>
         <source>SW6</source>
         <translation>IP6</translation>
     </message>
     <message>
-        <location filename="ui_xsimulatordialog.h" line="1988"/>
         <source>BEEP</source>
-        <translation>BIP</translation>
+        <translation type="obsolete">BIP</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2965"/>
-        <location filename="ui_xsimulatordialog.h" line="1989"/>
+        <location filename="xsimulatordialog.ui" line="2989"/>
+        <location filename="ui_xsimulatordialog.h" line="2424"/>
         <source>SW7</source>
         <translation>IP7</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3213"/>
-        <location filename="ui_xsimulatordialog.h" line="1990"/>
+        <location filename="xsimulatordialog.ui" line="3237"/>
+        <location filename="ui_xsimulatordialog.h" line="2432"/>
         <source>SW8</source>
         <translation>IP8</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3244"/>
-        <location filename="ui_xsimulatordialog.h" line="1991"/>
+        <location filename="xsimulatordialog.ui" line="3268"/>
+        <location filename="ui_xsimulatordialog.h" line="2433"/>
         <source>SW9</source>
         <translation>IP9</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3275"/>
-        <location filename="ui_xsimulatordialog.h" line="1992"/>
+        <location filename="xsimulatordialog.ui" line="3299"/>
+        <location filename="ui_xsimulatordialog.h" line="2434"/>
         <source>SWA</source>
         <translation>IPA</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3027"/>
-        <location filename="ui_xsimulatordialog.h" line="1993"/>
+        <location filename="xsimulatordialog.ui" line="3051"/>
+        <location filename="ui_xsimulatordialog.h" line="2426"/>
         <source>SWB</source>
         <translation>IPB</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2903"/>
-        <location filename="ui_xsimulatordialog.h" line="1994"/>
+        <location filename="xsimulatordialog.ui" line="2927"/>
+        <location filename="ui_xsimulatordialog.h" line="2422"/>
         <source>SWC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1527"/>
-        <location filename="ui_xsimulatordialog.h" line="1995"/>
+        <location filename="xsimulatordialog.ui" line="1551"/>
+        <location filename="ui_xsimulatordialog.h" line="2389"/>
         <source>CH1</source>
         <translation>VOIE1</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1245"/>
-        <location filename="ui_xsimulatordialog.h" line="1981"/>
+        <location filename="xsimulatordialog.ui" line="1269"/>
+        <location filename="ui_xsimulatordialog.h" line="2388"/>
         <source>Taranis Simulator</source>
         <translation>Simulateur Taranis</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1546"/>
-        <location filename="xsimulatordialog.ui" line="1568"/>
-        <location filename="xsimulatordialog.ui" line="1726"/>
-        <location filename="xsimulatordialog.ui" line="1748"/>
-        <location filename="xsimulatordialog.ui" line="1906"/>
-        <location filename="xsimulatordialog.ui" line="1928"/>
-        <location filename="xsimulatordialog.ui" line="2086"/>
-        <location filename="xsimulatordialog.ui" line="2108"/>
-        <location filename="xsimulatordialog.ui" line="2260"/>
-        <location filename="xsimulatordialog.ui" line="2282"/>
-        <location filename="xsimulatordialog.ui" line="2385"/>
-        <location filename="xsimulatordialog.ui" line="2407"/>
-        <location filename="xsimulatordialog.ui" line="2565"/>
-        <location filename="xsimulatordialog.ui" line="2587"/>
-        <location filename="xsimulatordialog.ui" line="2745"/>
-        <location filename="xsimulatordialog.ui" line="2767"/>
-        <location filename="ui_xsimulatordialog.h" line="1996"/>
-        <location filename="ui_xsimulatordialog.h" line="1997"/>
-        <location filename="ui_xsimulatordialog.h" line="2000"/>
-        <location filename="ui_xsimulatordialog.h" line="2001"/>
-        <location filename="ui_xsimulatordialog.h" line="2004"/>
-        <location filename="ui_xsimulatordialog.h" line="2005"/>
-        <location filename="ui_xsimulatordialog.h" line="2008"/>
-        <location filename="ui_xsimulatordialog.h" line="2009"/>
-        <location filename="ui_xsimulatordialog.h" line="2012"/>
-        <location filename="ui_xsimulatordialog.h" line="2013"/>
-        <location filename="ui_xsimulatordialog.h" line="2016"/>
-        <location filename="ui_xsimulatordialog.h" line="2017"/>
-        <location filename="ui_xsimulatordialog.h" line="2020"/>
-        <location filename="ui_xsimulatordialog.h" line="2021"/>
-        <location filename="ui_xsimulatordialog.h" line="2024"/>
-        <location filename="ui_xsimulatordialog.h" line="2025"/>
+        <location filename="xsimulatordialog.ui" line="1570"/>
+        <location filename="xsimulatordialog.ui" line="1592"/>
+        <location filename="xsimulatordialog.ui" line="1750"/>
+        <location filename="xsimulatordialog.ui" line="1772"/>
+        <location filename="xsimulatordialog.ui" line="1930"/>
+        <location filename="xsimulatordialog.ui" line="1952"/>
+        <location filename="xsimulatordialog.ui" line="2110"/>
+        <location filename="xsimulatordialog.ui" line="2132"/>
+        <location filename="xsimulatordialog.ui" line="2284"/>
+        <location filename="xsimulatordialog.ui" line="2306"/>
+        <location filename="xsimulatordialog.ui" line="2409"/>
+        <location filename="xsimulatordialog.ui" line="2431"/>
+        <location filename="xsimulatordialog.ui" line="2589"/>
+        <location filename="xsimulatordialog.ui" line="2611"/>
+        <location filename="xsimulatordialog.ui" line="2769"/>
+        <location filename="xsimulatordialog.ui" line="2791"/>
+        <location filename="ui_xsimulatordialog.h" line="2390"/>
+        <location filename="ui_xsimulatordialog.h" line="2391"/>
+        <location filename="ui_xsimulatordialog.h" line="2394"/>
+        <location filename="ui_xsimulatordialog.h" line="2395"/>
+        <location filename="ui_xsimulatordialog.h" line="2398"/>
+        <location filename="ui_xsimulatordialog.h" line="2399"/>
+        <location filename="ui_xsimulatordialog.h" line="2402"/>
+        <location filename="ui_xsimulatordialog.h" line="2403"/>
+        <location filename="ui_xsimulatordialog.h" line="2406"/>
+        <location filename="ui_xsimulatordialog.h" line="2407"/>
+        <location filename="ui_xsimulatordialog.h" line="2410"/>
+        <location filename="ui_xsimulatordialog.h" line="2411"/>
+        <location filename="ui_xsimulatordialog.h" line="2414"/>
+        <location filename="ui_xsimulatordialog.h" line="2415"/>
+        <location filename="ui_xsimulatordialog.h" line="2418"/>
+        <location filename="ui_xsimulatordialog.h" line="2419"/>
         <source>-100.1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1639"/>
-        <location filename="ui_xsimulatordialog.h" line="1998"/>
+        <location filename="xsimulatordialog.ui" line="1663"/>
+        <location filename="ui_xsimulatordialog.h" line="2392"/>
         <source>CH9</source>
         <translation>VOIE9</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1652"/>
-        <location filename="ui_xsimulatordialog.h" line="1999"/>
+        <location filename="xsimulatordialog.ui" line="1676"/>
+        <location filename="ui_xsimulatordialog.h" line="2393"/>
         <source>CH2</source>
         <translation>VOIE2</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1819"/>
-        <location filename="ui_xsimulatordialog.h" line="2002"/>
+        <location filename="xsimulatordialog.ui" line="1843"/>
+        <location filename="ui_xsimulatordialog.h" line="2396"/>
         <source>CH10</source>
         <translation>VOIE10</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1832"/>
-        <location filename="ui_xsimulatordialog.h" line="2003"/>
+        <location filename="xsimulatordialog.ui" line="1856"/>
+        <location filename="ui_xsimulatordialog.h" line="2397"/>
         <source>CH3</source>
         <translation>VOIE3</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="1999"/>
-        <location filename="ui_xsimulatordialog.h" line="2006"/>
+        <location filename="xsimulatordialog.ui" line="2023"/>
+        <location filename="ui_xsimulatordialog.h" line="2400"/>
         <source>CH11</source>
         <translation>VOIE11</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2012"/>
-        <location filename="ui_xsimulatordialog.h" line="2007"/>
+        <location filename="xsimulatordialog.ui" line="2036"/>
+        <location filename="ui_xsimulatordialog.h" line="2401"/>
         <source>CH4</source>
         <translation>VOIE4</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2179"/>
-        <location filename="ui_xsimulatordialog.h" line="2010"/>
+        <location filename="xsimulatordialog.ui" line="2203"/>
+        <location filename="ui_xsimulatordialog.h" line="2404"/>
         <source>CH12</source>
         <translation>VOIE12</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2192"/>
-        <location filename="ui_xsimulatordialog.h" line="2011"/>
+        <location filename="xsimulatordialog.ui" line="2216"/>
+        <location filename="ui_xsimulatordialog.h" line="2405"/>
         <source>CH5</source>
         <translation>VOIE5</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2353"/>
-        <location filename="ui_xsimulatordialog.h" line="2014"/>
+        <location filename="xsimulatordialog.ui" line="2377"/>
+        <location filename="ui_xsimulatordialog.h" line="2408"/>
         <source>CH13</source>
         <translation>VOIE13</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2366"/>
-        <location filename="ui_xsimulatordialog.h" line="2015"/>
+        <location filename="xsimulatordialog.ui" line="2390"/>
+        <location filename="ui_xsimulatordialog.h" line="2409"/>
         <source>CH6</source>
         <translation>VOIE6</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2478"/>
-        <location filename="ui_xsimulatordialog.h" line="2018"/>
+        <location filename="xsimulatordialog.ui" line="2502"/>
+        <location filename="ui_xsimulatordialog.h" line="2412"/>
         <source>CH14</source>
         <translation>VOIE14</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2491"/>
-        <location filename="ui_xsimulatordialog.h" line="2019"/>
+        <location filename="xsimulatordialog.ui" line="2515"/>
+        <location filename="ui_xsimulatordialog.h" line="2413"/>
         <source>CH7</source>
         <translation>VOIE7</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2658"/>
-        <location filename="ui_xsimulatordialog.h" line="2022"/>
+        <location filename="xsimulatordialog.ui" line="2682"/>
+        <location filename="ui_xsimulatordialog.h" line="2416"/>
         <source>CH15</source>
         <translation>VOIE15</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2671"/>
-        <location filename="ui_xsimulatordialog.h" line="2023"/>
+        <location filename="xsimulatordialog.ui" line="2695"/>
+        <location filename="ui_xsimulatordialog.h" line="2417"/>
         <source>CH8</source>
         <translation>VOIE8</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="2838"/>
-        <location filename="ui_xsimulatordialog.h" line="2026"/>
+        <location filename="xsimulatordialog.ui" line="2862"/>
+        <location filename="ui_xsimulatordialog.h" line="2420"/>
         <source>CH16</source>
         <translation>VOIE16</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3554"/>
+        <location filename="xsimulatordialog.ui" line="3578"/>
+        <location filename="ui_xsimulatordialog.h" line="2443"/>
         <source>SWN</source>
         <translation>IPN</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3585"/>
+        <location filename="xsimulatordialog.ui" line="3609"/>
+        <location filename="ui_xsimulatordialog.h" line="2444"/>
         <source>SWO</source>
         <translation>IPO</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3616"/>
+        <location filename="xsimulatordialog.ui" line="3640"/>
+        <location filename="ui_xsimulatordialog.h" line="2445"/>
         <source>SWP</source>
         <translation>IPP</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3647"/>
+        <location filename="xsimulatordialog.ui" line="3671"/>
+        <location filename="ui_xsimulatordialog.h" line="2446"/>
         <source>SWQ</source>
         <translation>IPQ</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3678"/>
+        <location filename="xsimulatordialog.ui" line="3702"/>
+        <location filename="ui_xsimulatordialog.h" line="2447"/>
         <source>SWR</source>
         <translation>IPR</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3709"/>
+        <location filename="xsimulatordialog.ui" line="3733"/>
+        <location filename="ui_xsimulatordialog.h" line="2448"/>
         <source>SWS</source>
         <translation>IPS</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3740"/>
+        <location filename="xsimulatordialog.ui" line="3764"/>
+        <location filename="ui_xsimulatordialog.h" line="2449"/>
         <source>SWT</source>
         <translation>IPT</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3771"/>
+        <location filename="xsimulatordialog.ui" line="3795"/>
+        <location filename="ui_xsimulatordialog.h" line="2450"/>
         <source>SWU</source>
         <translation>IPU</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3802"/>
+        <location filename="xsimulatordialog.ui" line="3826"/>
+        <location filename="ui_xsimulatordialog.h" line="2451"/>
         <source>SWV</source>
         <translation>IPV</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.ui" line="3833"/>
+        <location filename="xsimulatordialog.ui" line="3857"/>
+        <location filename="ui_xsimulatordialog.h" line="2452"/>
         <source>SWW</source>
         <translation>IPW</translation>
     </message>
