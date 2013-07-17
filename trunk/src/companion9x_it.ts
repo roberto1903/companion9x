@@ -3725,12 +3725,14 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     </message>
     <message>
         <location filename="modeledit.ui" line="17763"/>
-        <source>Simmetrycal f(x)=-f(-x)</source>
+        <source>Symmetrical f(x)=-f(-x)</source>
+        <oldsource>Simmetrycal f(x)=-f(-x)</oldsource>
         <translation>Expo simmetrica f(x)=-f(-x)</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="17768"/>
-        <source>Simmetrycal f(x)=f(-x)</source>
+        <source>Symmetrical f(x)=f(-x)</source>
+        <oldsource>Simmetrycal f(x)=f(-x)</oldsource>
         <translation>Expo simmetrica f(x)=f(-x)</translation>
     </message>
     <message>
