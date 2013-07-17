@@ -9030,8 +9030,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>908</width>
-            <height>481</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -17714,11 +17714,17 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="1" column="7" rowspan="8">
             <widget class="QGroupBox" name="ca_GB">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
              <property name="autoFillBackground">
               <bool>false</bool>
              </property>
              <property name="title">
-              <string>Curves assistant</string>
+              <string>Curve Creator</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_76" rowstretch="0,0,0,0,0,0,1">
               <item row="0" column="1" colspan="2">
@@ -17921,8 +17927,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>654</width>
-            <height>482</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_74">
@@ -19169,8 +19175,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>354</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
@@ -19578,8 +19584,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>48</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_75">
