@@ -560,11 +560,11 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase)
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields)
 {
   b->clear();
-  uint8_t endvalue=128;
+  uint8_t endvalue=TMRMODE_FIRST_MOMENT_SWITCH-1;
   uint8_t count=0;
   if (extrafields==2)
     endvalue=192;
-  for (int i=-128; i<endvalue; i++) {
+  for (int i=-(TMRMODE_FIRST_MOMENT_SWITCH-1); i<endvalue; i++) {
     QString timerMode = getTimerMode(i);
     if (!timerMode.isEmpty()) {
       b->addItem(getTimerMode(i), i);
