@@ -1324,7 +1324,7 @@ Volete scaricarla ora ?</translation>
         <location filename="mainwindow.cpp" line="1330"/>
         <location filename="mainwindow.cpp" line="1337"/>
         <source>Read EEPROM From Tx</source>
-        <translation>Leggi la memoria modelli dalla radio</translation>
+        <translation>Leggi la memoria dalla radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="973"/>
@@ -1362,7 +1362,7 @@ Scriverlo ugualmente ?</translation>
         <location filename="mainwindow.cpp" line="1259"/>
         <location filename="mainwindow.cpp" line="1301"/>
         <source>Backup EEPROM From Tx</source>
-        <translation>Salva memoria modelli dalla radio</translation>
+        <translation>Salva memoria della radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1026"/>
@@ -1388,7 +1388,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1077"/>
         <source>Write EEPROM To Tx</source>
-        <translation>Scrivi la memoria modelli nella radio</translation>
+        <translation>Scrivi la memoria nella radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1265"/>
@@ -1409,7 +1409,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1276"/>
         <source>Restore EEPROM To Tx</source>
-        <translation>Ripristina memoria modelli sulla Radio</translation>
+        <translation>Ripristina memoria sulla Radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1280"/>
@@ -1419,7 +1419,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1280"/>
         <source>Cannot restore EEProm to TX, original EEProm file can be found at: %1</source>
-        <translation>Non posso ripristinare la memoria dei modelli sulla radio, il file originale può essere trovato in %1</translation>
+        <translation>Non posso ripristinare le impostazioni sulla radio, il file originale può essere trovato in %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1283"/>
@@ -1429,7 +1429,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1283"/>
         <source>Cannot flash the TX, original EEProm file can be found at: %1</source>
-        <translation>Non posso aggiornare il firmware, la memoria dei modelli originale può essere trovata in %1</translation>
+        <translation>Non posso aggiornare il firmware, la memoria dei settaggi originale può essere trovata in %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1286"/>
@@ -1439,12 +1439,12 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1286"/>
         <source>Cannot backup existing EEProm from TX, Flash process aborted</source>
-        <translation>Non riesco a salvare la memodia dei modelli dalla radio, l&apos;aggiornamento firmware viene annullato</translation>
+        <translation>Non riesco a salvare la memoria dalla radio, l&apos;aggiornamento firmware viene annullato</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1318"/>
         <source>Read EEPROM memory to File</source>
-        <translation>Scrivi la memoria modelli in un documento</translation>
+        <translation>Scrivi le impostazioni della radio in un documento</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1347"/>
@@ -1661,7 +1661,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1577"/>
         <source>Write EEPROM to transmitter</source>
-        <translation>Scrivi la memoria dei modelli nella radio</translation>
+        <translation>Scrivi le impostazioni nella radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1580"/>
@@ -1676,7 +1676,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1582"/>
         <source>Read EEPROM from transmitter</source>
-        <translation>Leggi la memoria dei modelli dalla radio</translation>
+        <translation>Leggi le impostazioni dalla radio</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1585"/>
@@ -1691,12 +1691,12 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1589"/>
         <source>Write EEPROM memory from file</source>
-        <translation>Scrivi la memoria dei modelli da un documento</translation>
+        <translation>Scrivi le impostazioni da un documento</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1590"/>
         <source>Write EEPROM memory from file to transmitter</source>
-        <translation>Scrivi la memoria dei modelli della radio da un documento su disco</translation>
+        <translation>Scrivi le impostazioni della radio da un documento su disco</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1593"/>
@@ -1706,7 +1706,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1594"/>
         <source>Read EEPROM memory from transmitter to file</source>
-        <translation>Leggi la memoria dei modelli dalla radio e scrivila in un documento</translation>
+        <translation>Leggi le impostazioni dalla radio e scrivile in un documento</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1597"/>
@@ -1929,7 +1929,7 @@ Scriverlo ugualmente ?</translation>
         <location filename="mainwindow.cpp" line="1997"/>
         <location filename="mainwindow.cpp" line="2003"/>
         <source>Invalid EEPROM File %1</source>
-        <translation>File memoria modelli non valido %1</translation>
+        <translation>File impostazioni non valido %1</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2018"/>
@@ -1941,7 +1941,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mainwindow.cpp" line="2022"/>
         <source>Invalid binary EEPROM File %1</source>
-        <translation>File binario di memoria modelli non valido %1</translation>
+        <translation>File binario delle impostazioni non valido %1</translation>
     </message>
 </context>
 <context>
@@ -1999,7 +1999,7 @@ Scriverlo ugualmente ?</translation>
         <location filename="mdichild.cpp" line="245"/>
         <location filename="mdichild.cpp" line="255"/>
         <source>Invalid EEPROM File %1</source>
-        <translation>File memoria modelli non valido %1</translation>
+        <translation>File impostazioni non valido %1</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="282"/>
@@ -2012,7 +2012,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mdichild.cpp" line="291"/>
         <source>Invalid binary EEPROM File %1</source>
-        <translation>File binario di memoria modelli non valido %1</translation>
+        <translation>File binario delle impostazioni non valido %1</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="324"/>
@@ -2069,7 +2069,7 @@ Scriverlo ugualmente ?</translation>
         <location filename="mdichild.cpp" line="531"/>
         <location filename="mdichild.cpp" line="576"/>
         <source>Backup EEPROM From Tx</source>
-        <translation>Salva memoria modelli dalla radio</translation>
+        <translation>Salva impostazioni dalla radio</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="546"/>
@@ -2095,7 +2095,7 @@ Scriverlo ugualmente ?</translation>
     <message>
         <location filename="mdichild.cpp" line="591"/>
         <source>Write EEPROM To Tx</source>
-        <translation>Scrivi la memoria modelli nella radio</translation>
+        <translation>Scrivi le impostazioni nella radio</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="633"/>
@@ -7326,7 +7326,7 @@ m2560 per le schede v4.1</translation>
     <message>
         <location filename="burndialog.cpp" line="54"/>
         <source>Write models to TX</source>
-        <translation>Scrittura memoria modelli sulla radio</translation>
+        <translation>Scrittura impostazioni sulla radio</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="151"/>
