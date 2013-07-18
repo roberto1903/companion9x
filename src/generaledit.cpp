@@ -31,6 +31,10 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->calstore_PB->setDisabled(true);
     }
     settings.endGroup();
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (IS_TARANIS(eepromInterface->getBoard())) {
+      ui->contrastSB->setMinimum(0);
+    }
     ui->profile_CB->clear();
     for ( int i = 0; i < MAX_PROFILES; ++i) {
       QString profile=QString("profile%1").arg(i+1);
