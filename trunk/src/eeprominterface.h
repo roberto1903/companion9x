@@ -147,18 +147,24 @@ enum CSFunction {
   CS_FN_DPOS,
   CS_FN_DAPOS,
   CS_FN_VEQUAL, // added at the end to avoid everything renumbered
+  CS_FN_TIM,
   CS_FN_MAXF
 };
 
 enum CSFunctionFamily {
   CS_FAMILY_VOFS,
   CS_FAMILY_VBOOL,
-  CS_FAMILY_VCOMP
+  CS_FAMILY_VCOMP,
+  CS_FAMILY_TIMERS
 };
 
 inline CSFunctionFamily getCSFunctionFamily(int fn)
 {
-  return ((fn<CS_FN_AND || fn>CS_FN_ELESS) ? CS_FAMILY_VOFS : (fn<CS_FN_EQUAL ? CS_FAMILY_VBOOL : CS_FAMILY_VCOMP));
+  if (fn==CS_FN_TIM) {
+    return (CS_FAMILY_TIMERS);
+  } else {
+    return ((fn<CS_FN_AND || fn>CS_FN_ELESS) ? CS_FAMILY_VOFS : (fn<CS_FN_EQUAL ? CS_FAMILY_VBOOL : CS_FAMILY_VCOMP));
+  }
 }
 
 #define CHAR_FOR_NAMES " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-."

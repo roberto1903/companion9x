@@ -2378,6 +2378,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
       case CS_FAMILY_VOFS:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
+        cswitchValue[i]->setVisible(false);
         cswitchOffset[i]->setVisible(true);
         populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
@@ -2389,6 +2390,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
       case CS_FAMILY_VBOOL:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
+        cswitchValue[i]->setVisible(false);
         cswitchOffset[i]->setVisible(false);
         populateSwitchCB(cswitchSource1[i], RawSwitch(g_model.customSw[i].val1));
         populateSwitchCB(cswitchSource2[i], RawSwitch(g_model.customSw[i].val2));
@@ -2396,10 +2398,30 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
       case CS_FAMILY_VCOMP:
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(true);
+        cswitchValue[i]->setVisible(false);
         cswitchOffset[i]->setVisible(false);
         populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         break;
+      case CS_FAMILY_TIMERS:
+        cswitchSource1[i]->setVisible(false);
+        cswitchSource2[i]->setVisible(false);
+        cswitchValue[i]->setVisible(true);
+        cswitchOffset[i]->setVisible(true);
+        cswitchOffset[i]->setDecimals(1);
+        cswitchOffset[i]->setMinimum(0);
+        cswitchOffset[i]->setMaximum(237);
+        cswitchOffset[i]->setSingleStep(0.1); //todo adjust on the base of value
+        // cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+        
+        cswitchValue[i]->setDecimals(1);
+        cswitchValue[i]->setMinimum(0);
+        cswitchValue[i]->setMaximum(237);
+        cswitchValue[i]->setSingleStep(0.1); //todo adjust on the base of value
+        
+        // cswitchValue[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+        break;
+
     }
     cswitchAnd[i]->setVisible(true);
     populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), POPULATE_AND_SWITCHES);
@@ -2451,6 +2473,14 @@ void ModelEdit::tabCustomSwitches()
         connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchSource1[i],i+1,2);
         cswitchSource1[i]->setVisible(false);
+        cswitchValue[i] = new QDoubleSpinBox(this);
+        cswitchValue[i]->setMaximum(125);
+        cswitchValue[i]->setMinimum(-125);
+        cswitchValue[i]->setAccelerated(true);
+        cswitchValue[i]->setDecimals(0);
+        connect(cswitchValue[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+        ui->gridLayout_21->addWidget(cswitchValue[i],i+1,2);
+        cswitchValue[i]->setVisible(false);
 
         cswitchSource2[i] = new QComboBox(this);
         connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
@@ -2505,6 +2535,14 @@ void ModelEdit::tabCustomSwitches()
           connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchSource1[i],i-15,2);
           cswitchSource1[i]->setVisible(false);
+          cswitchValue[i] = new QDoubleSpinBox(this);
+          cswitchValue[i]->setMaximum(125);
+          cswitchValue[i]->setMinimum(-125);
+          cswitchValue[i]->setAccelerated(true);
+          cswitchValue[i]->setDecimals(0);
+          connect(cswitchValue[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_21->addWidget(cswitchValue[i],i-15,2);
+          cswitchValue[i]->setVisible(false);
 
           cswitchSource2[i] = new QComboBox(this);
           connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
@@ -2775,6 +2813,9 @@ void ModelEdit::customSwitchesEdited()
               source=RawSource(g_model.customSw[i].val1);
               g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
             }
+            break;
+          case (CS_FAMILY_TIMERS):
+            // TODO HANDLE TIM  
             break;
           case (CS_FAMILY_VBOOL):
           case (CS_FAMILY_VCOMP):

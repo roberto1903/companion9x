@@ -767,7 +767,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case SlowRange:
       return (IS_ARM(board) ? 250 : 15);
     case CSFunc:
-      return 16;
+      return 18;
     case GvarsNum:
     case GvarsOfsNum:  
       return 5;
