@@ -65,7 +65,7 @@ private:
     bool fsLock;
     bool modelImageLock;
     bool plot_curve[16];
-
+    QDoubleSpinBox  * cswitchValue[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
     QComboBox * cswitchAnd[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchDuration[C9X_NUM_CSW];

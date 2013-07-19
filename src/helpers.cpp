@@ -180,6 +180,10 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
     result +="( ";
   }
   switch (getCSFunctionFamily(customSw->func)) {
+    case CS_FAMILY_TIMERS: 
+      //Todo To be implemented
+      break;
+      
     case CS_FAMILY_VOFS: {
       RawSource source = RawSource(customSw->val1);
 
@@ -200,7 +204,6 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
       result += QString::number(source.getStep(model) * (customSw->val2 + source.getRawOffset(model)) + source.getOffset(model));
       break;
     }
-
     case CS_FAMILY_VBOOL:
       result = RawSwitch(customSw->val1).toString();
       switch (customSw->func) {
@@ -1012,8 +1015,8 @@ void populateSourceCB(QComboBox *b, const RawSource &source, unsigned int flags)
   b->setMaxVisibleItems(10);
 }
 
-#define CSWITCH_STR  "----  a~x   a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=x"
-#define CSW_NUM_FUNC 17 // TODO enum
+#define CSWITCH_STR  "----  a~x   a>x   a<x   |a|>x |a|<x AND   OR    XOR   a=b   a!=b  a>b   a<b   a>=b  a<=b  d>=x  |d|>=xTIM   "
+#define CSW_NUM_FUNC 18 // TODO enum
 #define CSW_LEN_FUNC 6
 int csw_values[]={  
   CS_FN_OFF,
@@ -1032,7 +1035,8 @@ int csw_values[]={
   CS_FN_EGREATER,
   CS_FN_ELESS,
   CS_FN_DPOS,
-  CS_FN_DAPOS
+  CS_FN_DAPOS,
+  CS_FN_TIM
 };
 
 QString getCSWFunc(int val)
