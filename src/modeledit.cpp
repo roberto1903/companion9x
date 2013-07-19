@@ -2410,18 +2410,28 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchOffset[i]->setVisible(true);
         cswitchOffset[i]->setDecimals(1);
         cswitchOffset[i]->setMinimum(0);
-        cswitchOffset[i]->setMaximum(237);
-        cswitchOffset[i]->setSingleStep(0.1); //todo adjust on the base of value
-        // cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+        cswitchOffset[i]->setMaximum(175);
+        float value=ValToTim(g_model.customSw[i].val2);
+        cswitchOffset[i]->setSingleStep(0.1);
+        if (value>60) {
+           cswitchOffset[i]->setSingleStep(1);
+        } else if (value>2) {
+          cswitchOffset[i]->setSingleStep(0.5);
+        }
+        cswitchOffset[i]->setValue(value);
         
         cswitchValue[i]->setDecimals(1);
         cswitchValue[i]->setMinimum(0);
-        cswitchValue[i]->setMaximum(237);
-        cswitchValue[i]->setSingleStep(0.1); //todo adjust on the base of value
-        
-        // cswitchValue[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+        cswitchValue[i]->setMaximum(175);
+        value=ValToTim(g_model.customSw[i].val1);
+        cswitchValue[i]->setSingleStep(0.1);
+        if (value>60) {
+           cswitchValue[i]->setSingleStep(1);
+        } else if (value>2) {
+          cswitchValue[i]->setSingleStep(0.5);
+        }
+        cswitchValue[i]->setValue(value);
         break;
-
     }
     cswitchAnd[i]->setVisible(true);
     populateSwitchCB(cswitchAnd[i], RawSwitch(g_model.customSw[i].andsw), POPULATE_AND_SWITCHES);
@@ -2441,7 +2451,6 @@ void ModelEdit::updateSwitchesTab()
       populateCSWCB(csw[i], g_model.customSw[i].func);
       setSwitchWidgetVisibility(i);
     }
-
     switchEditLock = false;
 }
 
@@ -2478,7 +2487,7 @@ void ModelEdit::tabCustomSwitches()
         cswitchValue[i]->setMinimum(-125);
         cswitchValue[i]->setAccelerated(true);
         cswitchValue[i]->setDecimals(0);
-        connect(cswitchValue[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+        connect(cswitchValue[i],SIGNAL(valueChanged(double)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchValue[i],i+1,2);
         cswitchValue[i]->setVisible(false);
 
@@ -2492,7 +2501,7 @@ void ModelEdit::tabCustomSwitches()
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
         cswitchOffset[i]->setDecimals(0);
-        connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+        connect(cswitchOffset[i],SIGNAL(valueChanged(double)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
         cswitchAnd[i] = new QComboBox(this);
@@ -2779,6 +2788,7 @@ void ModelEdit::customSwitchesEdited()
     switchEditLock = true;
 
     bool chAr[C9X_NUM_CSW];
+    float value;
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
     for (int i=0; i<num_csw;i++) {
         chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
@@ -2814,9 +2824,40 @@ void ModelEdit::customSwitchesEdited()
               g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
             }
             break;
-          case (CS_FAMILY_TIMERS):
-            // TODO HANDLE TIM  
+          case (CS_FAMILY_TIMERS): {
+            value=cswitchOffset[i]->value();
+            if (value==2.1) {
+              value=2.5;
+            } else if (value==60.5) {
+              value=61;
+            }
+            g_model.customSw[i].val2=TimToVal(value);
+            value=ValToTim(g_model.customSw[i].val2);
+            cswitchOffset[i]->setSingleStep(0.1);
+            if (value>60) {
+               cswitchOffset[i]->setSingleStep(1);
+            } else if (value>2) {
+              cswitchOffset[i]->setSingleStep(0.5);
+            }
+            cswitchOffset[i]->setValue(value);
+
+            value=cswitchValue[i]->value();
+            if (value>2.05 && value<2.5) {
+              value=2.5;
+            } else if (value>60.1 && value <60.95) {
+              value=61;
+            }
+            g_model.customSw[i].val1=TimToVal(value);
+            value=ValToTim(g_model.customSw[i].val1);
+            cswitchValue[i]->setSingleStep(0.1);
+            if (value>60) {
+               cswitchValue[i]->setSingleStep(1);
+            } else if (value>2) {
+              cswitchValue[i]->setSingleStep(0.5);
+            }
+            cswitchValue[i]->setValue(value);
             break;
+            }          
           case (CS_FAMILY_VBOOL):
           case (CS_FAMILY_VCOMP):
             g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
