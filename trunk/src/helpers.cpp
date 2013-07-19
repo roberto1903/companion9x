@@ -1044,6 +1044,33 @@ QString getCSWFunc(int val)
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
 }
 
+float ValToTim(uint value)
+{
+  float temp;
+   if (value>136) {
+     temp=60+(value-136);
+   } else if (value>20) {
+     temp=2+(value-20)*0.5;
+   } else {
+     temp=value/10.0;
+   }
+   return (temp);
+}
+
+uint TimToVal(float value)
+{
+   uint temp;
+   if (value>60) {
+     temp=136+(value-60);
+   } else if (value>2) {
+     temp=20+(value-2)*2;
+   } else {
+     temp=value*10;
+   }
+   return (temp);
+}
+
+
 void populateCSWCB(QComboBox *b, int value)
 {
   b->clear();
