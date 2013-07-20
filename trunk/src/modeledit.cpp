@@ -2811,15 +2811,20 @@ void ModelEdit::customSwitchesEdited()
       switchEditLock = false;
       return;
     }
-    bool chAr[C9X_NUM_CSW];
+    bool chAr;
     float value;
-    chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
+    chAr = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
     g_model.customSw[i].func = csw[i]->itemData(csw[i]->currentIndex()).toInt();
-    if(chAr[i]) {
+    if(chAr) {
+      if (getCSFunctionFamily(g_model.customSw[i].func)==CS_FAMILY_TIMERS) {
+        g_model.customSw[i].val1 = -119;
+        g_model.customSw[i].val2 = -119;
+      } else {
         g_model.customSw[i].val1 = 0;
-        g_model.customSw[i].val2 = 0;
-        g_model.customSw[i].andsw = 0;
-        setSwitchWidgetVisibility(i);
+        g_model.customSw[i].val2 = 0;        
+      }
+      g_model.customSw[i].andsw = 0;
+      setSwitchWidgetVisibility(i);
     }
     if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
       g_model.customSw[i].duration= (uint8_t)round(cswitchDuration[i]->value()*2);
@@ -2888,101 +2893,6 @@ void ModelEdit::customSwitchesEdited()
     updateSettings();
     switchEditLock = false;
 }
-
-/*
-void ModelEdit::customSwitchesEdited()
-{
-    if(switchEditLock) return;
-    switchEditLock = true;
-    int index=-1;
-    QString indextext=sender()->property("index").toString();
-    if (!indextext.isEmpty()) {
-      index=indextext.toInt();
-    }
-    qDebug() << index;
-    bool chAr[C9X_NUM_CSW];
-    float value;
-    int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
-    for (int i=0; i<num_csw;i++) {
-        chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
-        g_model.customSw[i].func = csw[i]->itemData(csw[i]->currentIndex()).toInt();
-    }
-    for (int i=0; i<num_csw; i++) {
-        if(chAr[i]) {
-            g_model.customSw[i].val1 = 0;
-            g_model.customSw[i].val2 = 0;
-            g_model.customSw[i].andsw = 0;
-            setSwitchWidgetVisibility(i);
-        }
-        if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
-          g_model.customSw[i].duration= (uint8_t)round(cswitchDuration[i]->value()*2);
-          g_model.customSw[i].delay= (uint8_t)round(cswitchDelay[i]->value()*2);
-        }
-        RawSource source;
-        switch (getCSFunctionFamily(g_model.customSw[i].func))
-        {
-          case (CS_FAMILY_VOFS):
-            if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
-              source=RawSource(g_model.customSw[i].val1);
-              g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-              RawSource newSource = RawSource(g_model.customSw[i].val1);
-              if (newSource.type == SOURCE_TYPE_TELEMETRY)
-                g_model.customSw[i].val2 = -128;
-              else
-                g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
-              setSwitchWidgetVisibility(i);
-            }
-            else {
-              source=RawSource(g_model.customSw[i].val1);
-              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
-            }
-            break;
-          case (CS_FAMILY_TIMERS): {
-            value=cswitchOffset[i]->value();
-            if (value==2.1) {
-              value=2.5;
-            } else if (value==60.5) {
-              value=61;
-            }
-            g_model.customSw[i].val2=TimToVal(value);
-            value=ValToTim(g_model.customSw[i].val2);
-            cswitchOffset[i]->setSingleStep(0.1);
-            if (value>60) {
-               cswitchOffset[i]->setSingleStep(1);
-            } else if (value>2) {
-              cswitchOffset[i]->setSingleStep(0.5);
-            }
-            cswitchOffset[i]->setValue(value);
-
-            value=cswitchValue[i]->value();
-            if (value>2.05 && value<2.5) {
-              value=2.5;
-            } else if (value>60.1 && value <60.95) {
-              value=61;
-            }
-            g_model.customSw[i].val1=TimToVal(value);
-            value=ValToTim(g_model.customSw[i].val1);
-            cswitchValue[i]->setSingleStep(0.1);
-            if (value>60) {
-               cswitchValue[i]->setSingleStep(1);
-            } else if (value>2) {
-              cswitchValue[i]->setSingleStep(0.5);
-            }
-            cswitchValue[i]->setValue(value);
-            break;
-            }          
-          case (CS_FAMILY_VBOOL):
-          case (CS_FAMILY_VCOMP):
-            g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
-            g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
-            break;
-        }
-        g_model.customSw[i].andsw = cswitchAnd[i]->itemData(cswitchAnd[i]->currentIndex()).toInt();
-    }
-    updateSettings();
-    switchEditLock = false;
-}
-*/
 
 #ifdef PHONON
 
