@@ -80,6 +80,19 @@ MdiChild::MdiChild():
   }
 }
 
+void MdiChild::qSleep(int ms)
+{
+  if (ms<0)
+    return;
+
+#if defined WIN32 || !defined __GNUC__
+    Sleep(uint(ms));
+#else
+    struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+    nanosleep(&ts, NULL);
+#endif
+}
+
 void MdiChild::eepromInterfaceChanged()
 {
   ui->modelsList->refreshList();
@@ -162,9 +175,25 @@ void MdiChild::OpenEditWindow(bool wizard=false)
       isNew = true; //modeledit - clear mixes, apply first template
       setModified();
     }
-
+    if (isNew && !wizard) {
+      int ret;
+      QSettings settings("companion9x", "companion9x");
+      bool wizardEnable=settings.value("wizardEnable", true).toBool();
+      if (wizardEnable) {
+        ret = QMessageBox::question(this, tr("companion9x"), tr("Do you want to use model wizard? "), QMessageBox::Yes | QMessageBox::No);
+        if (ret == QMessageBox::Yes) {
+          wizard=true;
+        } else {
+          qSleep(500);
+          ret = QMessageBox::question(this, tr("companion9x"), tr("Ask this question again ? "), QMessageBox::Yes | QMessageBox::No);
+          if (ret == QMessageBox::No) {
+            settings.setValue("wizardEnable", false);
+          }
+        }
+      }
+    }
     ModelEdit *t = new ModelEdit(radioData, (row - 1), wizard, this);
-    if (isNew) t->applyBaseTemplate();
+    if (isNew && !wizard) t->applyBaseTemplate();
     t->setWindowTitle(tr("Editing model %1: ").arg(row) + model.name);
     connect(t, SIGNAL(modelValuesChanged()), this, SLOT(setModified()));
     //t->exec();

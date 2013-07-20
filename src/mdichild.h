@@ -86,6 +86,7 @@ protected:
 private slots:
     void documentWasModified();
     void on_SimulateTxButton_clicked();
+    void qSleep(int ms);
 
 public slots:
     void OpenEditWindow(bool wizard);
