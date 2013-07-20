@@ -563,11 +563,11 @@ void populateGvarUseCB(QComboBox *b, unsigned int phase)
 void populateTimerSwitchCB(QComboBox *b, int value, int extrafields)
 {
   b->clear();
-  uint8_t endvalue=TMRMODE_FIRST_MOMENT_SWITCH-1;
+  uint8_t endvalue=128;
   uint8_t count=0;
   if (extrafields==2)
     endvalue=192;
-  for (int i=-(TMRMODE_FIRST_MOMENT_SWITCH-1); i<endvalue; i++) {
+  for (int i=-128; i<endvalue; i++) {
     QString timerMode = getTimerMode(i);
     if (!timerMode.isEmpty()) {
       b->addItem(getTimerMode(i), i);
@@ -642,13 +642,13 @@ QString getTimerMode(int tm) {
   }
 
   if (tma >= TMRMODE_FIRST_MOMENT_SWITCH && tma < TMRMODE_FIRST_MOMENT_SWITCH + GetEepromInterface()->getCapability(SwitchesPositions)) {
-    s = "m" + RawSwitch(SWITCH_TYPE_SWITCH, tma - TMRMODE_FIRST_MOMENT_SWITCH + 1).toString();
+    s =  RawSwitch(SWITCH_TYPE_SWITCH, tma - TMRMODE_FIRST_MOMENT_SWITCH + 1).toString()+"t";
     if (tm < 0) s.prepend("!");
     return s;
   }
 
   if (tma >= TMRMODE_FIRST_MOMENT_SWITCH + GetEepromInterface()->getCapability(SwitchesPositions) && tma < TMRMODE_FIRST_MOMENT_SWITCH + GetEepromInterface()->getCapability(SwitchesPositions) + GetEepromInterface()->getCapability(CustomSwitches)) {
-    s = "m" + RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMRMODE_FIRST_MOMENT_SWITCH - GetEepromInterface()->getCapability(SwitchesPositions) + 1).toString();
+    s = RawSwitch(SWITCH_TYPE_VIRTUAL, tma - TMRMODE_FIRST_MOMENT_SWITCH - GetEepromInterface()->getCapability(SwitchesPositions) + 1).toString()+"t";
     if (tm < 0) s.prepend("!");
     return s;
   }
@@ -1044,22 +1044,14 @@ QString getCSWFunc(int val)
   return QString(CSWITCH_STR).mid(val*CSW_LEN_FUNC, CSW_LEN_FUNC);
 }
 
-float ValToTim(uint value)
+float ValToTim(int value)
 {
-  float temp;
-   if (value>136) {
-     temp=60+(value-136);
-   } else if (value>20) {
-     temp=2+(value-20)*0.5;
-   } else {
-     temp=value/10.0;
-   }
-   return (temp);
+   return ((value < -109 ? 129+value : (value < 7 ? (113+value)*5 : (53+value)*10))/10.0);   
 }
 
-uint TimToVal(float value)
+int TimToVal(float value)
 {
-   uint temp;
+   int temp;
    if (value>60) {
      temp=136+(value-60);
    } else if (value>2) {
@@ -1067,7 +1059,7 @@ uint TimToVal(float value)
    } else {
      temp=value*10;
    }
-   return (temp);
+   return (temp-129);
 }
 
 

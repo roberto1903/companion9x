@@ -948,6 +948,7 @@ class CustomSwitchesFunctionsTable: public ConversionTable {
       }
       addConversion(CS_FN_DPOS, val++);
       addConversion(CS_FN_DAPOS, val++);
+      addConversion(CS_FN_TIM, val++);
     }
 };
 
@@ -1047,7 +1048,7 @@ class CustomSwitchField: public TransformedField {
       v1 = csw.val1;
       v2 = csw.val2;
 
-      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
+      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || (csw.func >= CS_FN_EQUAL && csw.func!=CS_FN_TIM)) {
         sourcesConversionTable->exportValue(csw.val1, v1);
       }
 
@@ -1066,7 +1067,7 @@ class CustomSwitchField: public TransformedField {
       csw.val1 = v1;
       csw.val2 = v2;
 
-      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || csw.func >= CS_FN_EQUAL) {
+      if ((csw.func >= CS_FN_VPOS && csw.func <= CS_FN_ANEG) || (csw.func >= CS_FN_EQUAL && csw.func!=CS_FN_TIM)) {
         sourcesConversionTable->importValue(v1, csw.val1);
       }
 
