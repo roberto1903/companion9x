@@ -180,13 +180,11 @@ QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model)
     result +="( ";
   }
   switch (getCSFunctionFamily(customSw->func)) {
-    case CS_FAMILY_TIMERS: 
-      //Todo To be implemented
-      break;
-      
+    case CS_FAMILY_TIMERS:
+      result = QString("TIM(%1 , %2)").arg(ValToTim(customSw->val1)).arg(ValToTim(customSw->val2));
+      break;     
     case CS_FAMILY_VOFS: {
       RawSource source = RawSource(customSw->val1);
-
       if (customSw->val1)
         result += source.toString();
       else
