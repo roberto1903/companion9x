@@ -160,7 +160,7 @@ These will be relevant for all models in the same EEPROM.</string>
           <widget class="QComboBox" name="countrycode_CB">
            <item>
             <property name="text">
-             <string>Europe</string>
+             <string>America</string>
             </property>
            </item>
            <item>
@@ -170,7 +170,7 @@ These will be relevant for all models in the same EEPROM.</string>
            </item>
            <item>
             <property name="text">
-             <string>America</string>
+             <string>Europe</string>
             </property>
            </item>
           </widget>
