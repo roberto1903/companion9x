@@ -92,6 +92,6 @@ QString getFrSkyMeasure(int units);
 QString getFrSkySrc(int index);
 float getBarValue(int barId, int value, FrSkyData *fd);
 float c9xexpou(float point, float coeff);
-float ValToTim(uint value);
-uint TimToVal(float value);
+float ValToTim(int value);
+int TimToVal(float value);
 #endif // HELPERS_H

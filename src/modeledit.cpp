@@ -2409,7 +2409,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchValue[i]->setVisible(true);
         cswitchOffset[i]->setVisible(true);
         cswitchOffset[i]->setDecimals(1);
-        cswitchOffset[i]->setMinimum(0);
+        cswitchOffset[i]->setMinimum(0.1);
         cswitchOffset[i]->setMaximum(175);
         float value=ValToTim(g_model.customSw[i].val2);
         cswitchOffset[i]->setSingleStep(0.1);
@@ -2421,7 +2421,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchOffset[i]->setValue(value);
         
         cswitchValue[i]->setDecimals(1);
-        cswitchValue[i]->setMinimum(0);
+        cswitchValue[i]->setMinimum(0.1);
         cswitchValue[i]->setMaximum(175);
         value=ValToTim(g_model.customSw[i].val1);
         cswitchValue[i]->setSingleStep(0.1);
@@ -2478,7 +2478,9 @@ void ModelEdit::tabCustomSwitches()
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
     for(int i=0; i<16; i++) {
       if (i<num_csw) {
+        tmpcsw[i]->setProperty("index",i);
         cswitchSource1[i] = new QComboBox(this);
+        cswitchSource1[i]->setProperty("index",i);
         connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchSource1[i],i+1,2);
         cswitchSource1[i]->setVisible(false);
@@ -2487,16 +2489,19 @@ void ModelEdit::tabCustomSwitches()
         cswitchValue[i]->setMinimum(-125);
         cswitchValue[i]->setAccelerated(true);
         cswitchValue[i]->setDecimals(0);
+        cswitchValue[i]->setProperty("index",i);
         connect(cswitchValue[i],SIGNAL(valueChanged(double)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchValue[i],i+1,2);
         cswitchValue[i]->setVisible(false);
 
         cswitchSource2[i] = new QComboBox(this);
+        cswitchSource2[i]->setProperty("index",i);
         connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchSource2[i],i+1,3);
         cswitchSource2[i]->setVisible(false);
 
         cswitchOffset[i] = new QDoubleSpinBox(this);
+        cswitchOffset[i]->setProperty("index",i);
         cswitchOffset[i]->setMaximum(125);
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
@@ -2505,11 +2510,13 @@ void ModelEdit::tabCustomSwitches()
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
         cswitchAnd[i] = new QComboBox(this);
+        cswitchAnd[i]->setProperty("index",i);
         connect(cswitchAnd[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchAnd[i],i+1,4);
         cswitchAnd[i]->setVisible(false);
         if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
           cswitchDuration[i] = new QDoubleSpinBox(this);
+          cswitchDuration[i]->setProperty("index",i);
           cswitchDuration[i]->setSingleStep(0.5);
           cswitchDuration[i]->setMaximum(50);
           cswitchDuration[i]->setMinimum(0);
@@ -2520,6 +2527,7 @@ void ModelEdit::tabCustomSwitches()
           cswitchDuration[i]->setVisible(false);
 
           cswitchDelay[i] = new QDoubleSpinBox(this);
+          cswitchDelay[i]->setProperty("index",i);
           cswitchDelay[i]->setSingleStep(0.5);
           cswitchDelay[i]->setMaximum(50);
           cswitchDelay[i]->setMinimum(0);
@@ -2540,25 +2548,30 @@ void ModelEdit::tabCustomSwitches()
     if (num_csw>16) {
       for(int i=16; i<32; i++) {
         if (i<=num_csw) {
+          tmpcsw[i]->setProperty("index",i);
           cswitchSource1[i] = new QComboBox(this);
+          cswitchSource1[i]->setProperty("index",i);
           connect(cswitchSource1[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchSource1[i],i-15,2);
           cswitchSource1[i]->setVisible(false);
           cswitchValue[i] = new QDoubleSpinBox(this);
+          cswitchValue[i]->setProperty("index",i);
           cswitchValue[i]->setMaximum(125);
           cswitchValue[i]->setMinimum(-125);
           cswitchValue[i]->setAccelerated(true);
           cswitchValue[i]->setDecimals(0);
           connect(cswitchValue[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
-          ui->gridLayout_21->addWidget(cswitchValue[i],i-15,2);
+          ui->gridLayout_22->addWidget(cswitchValue[i],i-15,2);
           cswitchValue[i]->setVisible(false);
 
           cswitchSource2[i] = new QComboBox(this);
+          cswitchSource2[i]->setProperty("index",i);
           connect(cswitchSource2[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchSource2[i],i-15,3);
           cswitchSource2[i]->setVisible(false);
 
           cswitchOffset[i] = new QDoubleSpinBox(this);
+          cswitchOffset[i]->setProperty("index",i);
           cswitchOffset[i]->setMaximum(125);
           cswitchOffset[i]->setMinimum(-125);
           cswitchOffset[i]->setAccelerated(true);
@@ -2567,11 +2580,13 @@ void ModelEdit::tabCustomSwitches()
           ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
           cswitchOffset[i]->setVisible(false);
           cswitchAnd[i] = new QComboBox(this);
+          cswitchAnd[i]->setProperty("index",i);
           connect(cswitchAnd[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchAnd[i],i-15,4);
           cswitchAnd[i]->setVisible(false);
           if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
             cswitchDuration[i] = new QDoubleSpinBox(this);
+            cswitchDuration[i]->setProperty("index",i);
             cswitchDuration[i]->setSingleStep(0.5);
             cswitchDuration[i]->setMaximum(50);
             cswitchDuration[i]->setMinimum(0);
@@ -2582,6 +2597,7 @@ void ModelEdit::tabCustomSwitches()
             cswitchDuration[i]->setVisible(false);
 
             cswitchDelay[i] = new QDoubleSpinBox(this);
+            cswitchDelay[i]->setProperty("index",i);
             cswitchDelay[i]->setSingleStep(0.5);
             cswitchDelay[i]->setMaximum(50);
             cswitchDelay[i]->setMinimum(0);
@@ -2786,7 +2802,104 @@ void ModelEdit::customSwitchesEdited()
 {
     if(switchEditLock) return;
     switchEditLock = true;
+    int i=-1;
+    QString indextext=sender()->property("index").toString();
+    if (!indextext.isEmpty()) {
+      i=indextext.toInt();
+    } else {
+      // should not happen
+      switchEditLock = false;
+      return;
+    }
+    bool chAr[C9X_NUM_CSW];
+    float value;
+    chAr[i] = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
+    g_model.customSw[i].func = csw[i]->itemData(csw[i]->currentIndex()).toInt();
+    if(chAr[i]) {
+        g_model.customSw[i].val1 = 0;
+        g_model.customSw[i].val2 = 0;
+        g_model.customSw[i].andsw = 0;
+        setSwitchWidgetVisibility(i);
+    }
+    if (GetEepromInterface()->getCapability(CustomSwitchesExt)) {
+      g_model.customSw[i].duration= (uint8_t)round(cswitchDuration[i]->value()*2);
+      g_model.customSw[i].delay= (uint8_t)round(cswitchDelay[i]->value()*2);
+    }
+    RawSource source;
+    switch (getCSFunctionFamily(g_model.customSw[i].func))
+    {
+      case (CS_FAMILY_VOFS):
+        if (g_model.customSw[i].val1 != cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt()) {
+          source=RawSource(g_model.customSw[i].val1);
+          g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+          RawSource newSource = RawSource(g_model.customSw[i].val1);
+          if (newSource.type == SOURCE_TYPE_TELEMETRY)
+            g_model.customSw[i].val2 = -128;
+          else
+            g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+          setSwitchWidgetVisibility(i);
+        }
+        else {
+          source=RawSource(g_model.customSw[i].val1);
+          g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+        }
+        break;
+      case (CS_FAMILY_TIMERS): {
+        value=cswitchOffset[i]->value();
+        if (value==2.1) {
+          value=2.5;
+        } else if (value==60.5) {
+          value=61;
+        }
+        g_model.customSw[i].val2=TimToVal(value);
+        value=ValToTim(g_model.customSw[i].val2);
+        cswitchOffset[i]->setSingleStep(0.1);
+        if (value>60) {
+           cswitchOffset[i]->setSingleStep(1);
+        } else if (value>2) {
+          cswitchOffset[i]->setSingleStep(0.5);
+        }
+        cswitchOffset[i]->setValue(value);
 
+        value=cswitchValue[i]->value();
+        if (value>2.05 && value<2.5) {
+          value=2.5;
+        } else if (value>60.1 && value <60.95) {
+          value=61;
+        }
+        g_model.customSw[i].val1=TimToVal(value);
+        value=ValToTim(g_model.customSw[i].val1);
+        cswitchValue[i]->setSingleStep(0.1);
+        if (value>60) {
+           cswitchValue[i]->setSingleStep(1);
+        } else if (value>2) {
+          cswitchValue[i]->setSingleStep(0.5);
+        }
+        cswitchValue[i]->setValue(value);
+        break;
+        }          
+      case (CS_FAMILY_VBOOL):
+      case (CS_FAMILY_VCOMP):
+        g_model.customSw[i].val1 = cswitchSource1[i]->itemData(cswitchSource1[i]->currentIndex()).toInt();
+        g_model.customSw[i].val2 = cswitchSource2[i]->itemData(cswitchSource2[i]->currentIndex()).toInt();
+        break;
+    }
+    g_model.customSw[i].andsw = cswitchAnd[i]->itemData(cswitchAnd[i]->currentIndex()).toInt();
+    updateSettings();
+    switchEditLock = false;
+}
+
+/*
+void ModelEdit::customSwitchesEdited()
+{
+    if(switchEditLock) return;
+    switchEditLock = true;
+    int index=-1;
+    QString indextext=sender()->property("index").toString();
+    if (!indextext.isEmpty()) {
+      index=indextext.toInt();
+    }
+    qDebug() << index;
     bool chAr[C9X_NUM_CSW];
     float value;
     int num_csw=GetEepromInterface()->getCapability(CustomSwitches);
@@ -2869,6 +2982,8 @@ void ModelEdit::customSwitchesEdited()
     updateSettings();
     switchEditLock = false;
 }
+*/
+
 #ifdef PHONON
 
 void ModelEdit::mediaPlayer_state(Phonon::State newState, Phonon::State oldState)
