@@ -248,6 +248,7 @@ void preferencesDialog::writeValues()
   settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
   settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
+  settings.setValue("wizardEnable", ui->wizardEnable_ChkB->isChecked());
   settings.setValue("show_splash", ui->showSplash->isChecked());
   settings.setValue("simuSW", ui->simuSW->isChecked());
   settings.setValue("history_size", ui->historySize->value());
@@ -382,6 +383,7 @@ void preferencesDialog::initSettings()
   ui->stickmodeCB->setCurrentIndex(settings.value("default_mode", 1).toInt());
   ui->startupCheck_companion9x->setChecked(settings.value("startup_check_companion9x", true).toBool());
   ui->renameFirmware->setChecked(settings.value("rename_firmware_files", false).toBool());
+  ui->wizardEnable_ChkB->setChecked(settings.value("wizardEnable", true).toBool());
   ui->showSplash->setChecked(settings.value("show_splash", true).toBool());
   ui->historySize->setValue(settings.value("history_size", 10).toInt());
   ui->backLightColor->setCurrentIndex(settings.value("backLight", 0).toInt());

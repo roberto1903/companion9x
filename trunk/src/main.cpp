@@ -67,10 +67,10 @@ class MyProxyStyle : public QProxyStyle
    public:
     void polish ( QWidget * w ) {
       QMenu* mn = dynamic_cast<QMenu*>(w);
-      if(!mn && !w->testAttribute(Qt::WA_MacNormalSize))
+      QPushButton* pb = dynamic_cast<QPushButton*>(w);
+      if(!(mn || pb) && !w->testAttribute(Qt::WA_MacNormalSize))
           w->setAttribute(Qt::WA_MacSmallSize);
     }
-
  };
 #endif
 
