@@ -3068,8 +3068,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         fswtchParam[i]->setMinimum(0);
         if (index==FuncPlayPrompt) {
           widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT + CUSTOM_FUNCTION_GV_TOOGLE;
-        }
-        else {
+        } else {
           widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_REPEAT;
           fswtchParamGV[i]->setChecked(false);
         }
@@ -3078,8 +3077,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
           if (fswtchParamGV[i]->isChecked()) {
             fswtchParam[i]->setMinimum(1);
             g_model.funcSw[i].param = std::min(fswtchParam[i]->value(),5.0)+(fswtchParamGV[i]->isChecked() ? 250 : 0);
-          }
-          else {
+          } else {
             g_model.funcSw[i].param = fswtchParam[i]->value();
           }
         }
@@ -3093,8 +3091,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
         }
         if (g_model.funcSw[i].param < 251)
           widgetsMask |= CUSTOM_FUNCTION_PLAY;
-      }
-      else {
+      } else {
         widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
         if (modified) {
           memset(g_model.funcSw[i].paramarm, 0, sizeof(g_model.funcSw[i].paramarm));
@@ -3107,6 +3104,19 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
           }
         }
       }
+    }
+    else if (index==FuncBackgroundMusic) {
+      widgetsMask |= CUSTOM_FUNCTION_FILE_PARAM;
+      if (modified) {
+        memset(g_model.funcSw[i].paramarm, 0, sizeof(g_model.funcSw[i].paramarm));
+        int vml=GetEepromInterface()->getCapability(VoicesMaxLength);
+        if (fswtchParamArmT[i]->currentText() != "----") {
+          widgetsMask |= CUSTOM_FUNCTION_PLAY;
+          for (int j=0; j<std::min(fswtchParamArmT[i]->currentText().length(),vml); j++) {
+            g_model.funcSw[i].paramarm[j] = fswtchParamArmT[i]->currentText().toAscii().at(j);
+          }
+        }
+      }      
     }
     else if (index==FuncPlaySound) {
       if (modified) g_model.funcSw[i].param = (uint8_t)fswtchParamT[i]->currentIndex();
