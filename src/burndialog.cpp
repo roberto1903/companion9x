@@ -644,7 +644,25 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
     QString ImageStr = settings.value("SplashImage", "").toString();
     if (!ImageStr.isEmpty()) {
       QImage Image = qstring2image(ImageStr);
-      ui->imageLabel->setPixmap(QPixmap::fromImage(Image.convertToFormat(QImage::Format_Mono)));
+      if (ui->imageLabel->width()!=128) {
+        Image=Image.convertToFormat(QImage::Format_RGB32);
+        QRgb col;
+        int gray;
+        int width = Image.width();
+        int height = Image.height();
+        for (int i = 0; i < width; ++i)
+        {
+            for (int j = 0; j < height; ++j)
+            {
+                col = Image.pixel(i, j);
+                gray = qGray(col);
+                Image.setPixel(i, j, qRgb(gray, gray, gray));
+            }
+        }
+      } else {
+         Image=Image.convertToFormat(QImage::Format_Mono);
+      }
+      ui->imageLabel->setPixmap(QPixmap::fromImage(Image));
       ui->InvertColorButton->setEnabled(true);
       ui->PreferredImageCB->setChecked(true);
       ui->ImageFileName->setDisabled(true);
@@ -660,7 +678,25 @@ void burnDialog::on_PreferredImageCB_toggled(bool checked)
     if (!tmpFileName.isEmpty()) {
       QImage image(tmpFileName);
       if (!image.isNull()) {
-        ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
+        if (ui->imageLabel->width()!=128) {
+          image=image.convertToFormat(QImage::Format_RGB32);
+          QRgb col;
+          int gray;
+          int width = image.width();
+          int height = image.height();
+          for (int i = 0; i < width; ++i)
+          {
+              for (int j = 0; j < height; ++j)
+              {
+                  col = image.pixel(i, j);
+                  gray = qGray(col);
+                  image.setPixel(i, j, qRgb(gray, gray, gray));
+              }
+          }
+        } else {
+           image=image.convertToFormat(QImage::Format_Mono);
+        }        
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height())));
         ui->InvertColorButton->setEnabled(true);
         ui->ImageFileName->setEnabled(true);
         ui->PatchFWCB->setDisabled(false);
