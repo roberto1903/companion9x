@@ -78,8 +78,26 @@ void customizeSplashDialog::on_ImageLoadButton_clicked() {
       return;
     }
     ui->HowToLabel->clear();
-    ui->ImageFileName->setText(fileName);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    ui->ImageFileName->setText(fileName);    
+    if (ui->imageLabel->width()==424) {
+      image=image.convertToFormat(QImage::Format_RGB32);
+      QRgb col;
+      int gray;
+      int width = image.width();
+      int height = image.height();
+      for (int i = 0; i < width; ++i)
+      {
+          for (int j = 0; j < height; ++j)
+          {
+              col = image.pixel(i, j);
+              gray = qGray(col);
+              image.setPixel(i, j, qRgb(gray, gray, gray));
+          }
+      }      
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2)));
+    } else {
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    }
     ui->SaveFlashButton->setEnabled(true);
     ui->HowToLabel->append("<center>" + tr("Save your custimized firmware") + "</center>");
   }
@@ -98,7 +116,25 @@ void customizeSplashDialog::on_libraryButton_clicked() {
     }
     ui->HowToLabel->clear();
     ui->ImageFileName->setText(fileName);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    if (ui->imageLabel->width()==424) {
+      image=image.convertToFormat(QImage::Format_RGB32);
+      QRgb col;
+      int gray;
+      int width = image.width();
+      int height = image.height();
+      for (int i = 0; i < width; ++i)
+      {
+          for (int j = 0; j < height; ++j)
+          {
+              col = image.pixel(i, j);
+              gray = qGray(col);
+              image.setPixel(i, j, qRgb(gray, gray, gray));
+          }
+      }      
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2)));
+    } else {
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    }
     ui->SaveFlashButton->setEnabled(true);
     ui->HowToLabel->append("<center>" + tr("Save your custimized firmware") + "</center>");
   }
@@ -145,7 +181,7 @@ void customizeSplashDialog::on_SaveImageButton_clicked()
   fileName = QFileDialog::getSaveFileName(this, tr("Write to file"), settings.value("lastImagesDir").toString(), tr("PNG images (*.png);;"), 0, QFileDialog::DontConfirmOverwrite);
   if (!fileName.isEmpty()) {
     settings.setValue("lastImagesDir", QFileInfo(fileName).dir().absolutePath());
-    QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono);
+    QImage image = ui->imageLabel->pixmap()->toImage().scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Indexed8);
     image.save(fileName, "PNG");
   }
 }

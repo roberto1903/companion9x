@@ -1307,7 +1307,7 @@ void MainWindow::burnToFlash(QString fileToFlash)
       QStringList str = GetSendFlashCommand(fileName);
       avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Write Flash To Tx"), AVR_DIALOG_SHOW_DONE);
       ad->setWindowIcon(QIcon(":/images/write_flash.png"));
-      ad->show();
+      ad->exec();
     }
   }
 }
@@ -1329,14 +1329,14 @@ void MainWindow::burnExtenalFromEEPROM()
           str << path << fileName;
           avrOutputDialog *ad = new avrOutputDialog(this,"", str, tr("Read EEPROM From Tx")); //, AVR_DIALOG_KEEP_OPEN);
           ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-          ad->show();
+          ad->exec();
         }
       } else {
         settings.setValue("lastDir", QFileInfo(fileName).dir().absolutePath());
         QStringList str = GetReceiveEEpromCommand(fileName);
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, tr("Read EEPROM From Tx"));
         ad->setWindowIcon(QIcon(":/images/read_eeprom.png"));
-        ad->show();
+        ad->exec();
       }
     }
 }
@@ -1355,7 +1355,7 @@ void MainWindow::burnFromFlash()
         QStringList str = GetReceiveFlashCommand(fileName);
         avrOutputDialog *ad = new avrOutputDialog(this, GetAvrdudeLocation(), str, "Read Flash From Tx");
         ad->setWindowIcon(QIcon(":/images/read_flash.png"));
-        ad->show();
+        ad->exec();
     }
 
 }

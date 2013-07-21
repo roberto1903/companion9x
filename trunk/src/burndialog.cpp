@@ -359,7 +359,25 @@ void burnDialog::on_ImageLoadButton_clicked()
     }
     ui->ImageFileName->setText(fileName);
     ui->InvertColorButton->setEnabled(true);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
+    if (ui->imageLabel->width()!=128) {
+      image=image.convertToFormat(QImage::Format_RGB32);
+      QRgb col;
+      int gray;
+      int width = image.width();
+      int height = image.height();
+      for (int i = 0; i < width; ++i)
+      {
+          for (int j = 0; j < height; ++j)
+          {
+              col = image.pixel(i, j);
+              gray = qGray(col);
+              image.setPixel(i, j, qRgb(gray, gray, gray));
+          }
+      }      
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2)));
+    } else {
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    }
     ui->PatchFWCB->setEnabled(true);
   }
 }
@@ -380,7 +398,25 @@ void burnDialog::on_libraryButton_clicked()
     }
     ui->ImageFileName->setText(fileName);
     ui->InvertColorButton->setEnabled(true);
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
+    if (ui->imageLabel->width()!=128) {
+      image=image.convertToFormat(QImage::Format_RGB32);
+      QRgb col;
+      int gray;
+      int width = image.width();
+      int height = image.height();
+      for (int i = 0; i < width; ++i)
+      {
+          for (int j = 0; j < height; ++j)
+          {
+              col = image.pixel(i, j);
+              gray = qGray(col);
+              image.setPixel(i, j, qRgb(gray, gray, gray));
+          }
+      }      
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2)));
+    } else {
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+    }
     ui->PatchFWCB->setEnabled(true);
   }
 }
