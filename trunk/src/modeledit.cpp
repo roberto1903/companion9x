@@ -2812,7 +2812,8 @@ void ModelEdit::customSwitchesEdited()
       return;
     }
     bool chAr;
-    float value;
+    float value, step;
+    int newval;
     chAr = (getCSFunctionFamily(g_model.customSw[i].func) != getCSFunctionFamily(csw[i]->itemData(csw[i]->currentIndex()).toInt()));
     g_model.customSw[i].func = csw[i]->itemData(csw[i]->currentIndex()).toInt();
     if(chAr) {
@@ -2851,36 +2852,60 @@ void ModelEdit::customSwitchesEdited()
         break;
       case (CS_FAMILY_TIMERS): {
         value=cswitchOffset[i]->value();
-        if (value==2.1) {
-          value=2.5;
-        } else if (value==60.5) {
-          value=61;
+        newval=TimToVal(value);
+        if (newval>g_model.customSw[i].val2) {
+          if (value >=60) {
+            value=round(value);
+            step=1;
+          } else if (value>=2) {
+            value=(round(value*2.0)/2);
+            step=0.5;
+          } else {
+            step=0.1;
+          }
+        } else {
+          if (value <=2) {
+            step=0.1;
+          } else if (value<=60) {
+            value=(round(value*2.0)/2);
+            step=0.5;
+          } else {
+            value=round(value);
+            step=1;            
+          }
         }
         g_model.customSw[i].val2=TimToVal(value);
         value=ValToTim(g_model.customSw[i].val2);
-        cswitchOffset[i]->setSingleStep(0.1);
-        if (value>60) {
-           cswitchOffset[i]->setSingleStep(1);
-        } else if (value>2) {
-          cswitchOffset[i]->setSingleStep(0.5);
-        }
         cswitchOffset[i]->setValue(value);
+        cswitchOffset[i]->setSingleStep(step);
 
         value=cswitchValue[i]->value();
-        if (value>2.05 && value<2.5) {
-          value=2.5;
-        } else if (value>60.1 && value <60.95) {
-          value=61;
+        newval=TimToVal(value);
+        if (newval>g_model.customSw[i].val1) {
+          if (value >=60) {
+            value=round(value);
+            step=1;
+          } else if (value>=2) {
+            value=(round(value*2.0)/2);
+            step=0.5;
+          } else {
+            step=0.1;
+          }
+        } else {
+          if (value <=2) {
+            step=0.1;
+          } else if (value<=60) {
+            value=(round(value*2.0)/2);
+            step=0.5;
+          } else {
+            value=round(value);
+            step=1;            
+          }
         }
         g_model.customSw[i].val1=TimToVal(value);
         value=ValToTim(g_model.customSw[i].val1);
-        cswitchValue[i]->setSingleStep(0.1);
-        if (value>60) {
-           cswitchValue[i]->setSingleStep(1);
-        } else if (value>2) {
-          cswitchValue[i]->setSingleStep(0.5);
-        }
         cswitchValue[i]->setValue(value);
+        cswitchValue[i]->setSingleStep(step);
         break;
         }          
       case (CS_FAMILY_VBOOL):
