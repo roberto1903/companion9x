@@ -1049,17 +1049,16 @@ float ValToTim(int value)
 
 int TimToVal(float value)
 {
-   int temp;
-   if (value>60) {
-     temp=136+(value-60);
-   } else if (value>2) {
-     temp=20+(value-2)*2;
-   } else {
-     temp=value*10;
-   }
-   return (temp-129);
-}
-
+  int temp;
+  if (value>60) {
+    temp=136+round((value-60));
+  } else if (value>2) {
+    temp=20+round((value-2.0)*2.0);
+  } else {
+    temp=round(value*10.0);
+  }
+  return (temp-129);
+}  
 
 void populateCSWCB(QComboBox *b, int value)
 {
