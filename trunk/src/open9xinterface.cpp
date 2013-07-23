@@ -751,11 +751,11 @@ int Open9xInterface::getCapability(const Capability capability)
     case HasPPMStart:
       return (IS_ARM(board) ? true : false);
     case HasCurrentCalibration:
-      return (IS_ARM(board) ? true : false);
+      return (board==BOARD_SKY9X ? true : false);
     case HasVolume:
       return (IS_ARM(board) ? true : false);
     case HasBrightness:
-      return (board==BOARD_SKY9X ? true : false);
+      return (IS_ARM(board) ? true : false);
     case PerModelTimers:
     case PerModelThrottleWarning:
     case PerModelThrottleInvert:
