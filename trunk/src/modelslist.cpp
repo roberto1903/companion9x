@@ -296,7 +296,7 @@ void ModelsListWidget::refreshList()
           }
         }
         else {
-          char modelname[11];
+          char modelname[256];
           if (radioData->models[i].name[0]==0) {
             sprintf(modelname, "Model%02d", i+1);
           } else {
