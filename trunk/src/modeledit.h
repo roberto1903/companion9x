@@ -66,6 +66,7 @@ private:
     bool modelImageLock;
     bool plot_curve[16];
     int selectedSwitch;
+    int selectedFunction;
     QDoubleSpinBox  * cswitchValue[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
     QComboBox * cswitchAnd[C9X_NUM_CSW];
@@ -232,6 +233,11 @@ private slots:
     void cswCopy();
     void cswPaste();
     void cswCut();
+
+    void fswDelete();
+    void fswCopy();
+    void fswPaste();
+    void fswCut();
     
     void moveExpoUp();
     void moveExpoDown();
@@ -256,6 +262,7 @@ private slots:
     void mixerlistWidget_KeyPress(QKeyEvent *event);
 
     void csw_customContextMenuRequested(QPoint pos);
+    void fsw_customContextMenuRequested(QPoint pos);
     
     
     void curvePointEdited();

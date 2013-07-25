@@ -2719,8 +2719,12 @@ void ModelEdit::tabCustomFunctions()
     fswLabel[i] = new QLabel(this);
     fswLabel[i]->setFrameStyle(QFrame::Panel | QFrame::Raised);
     fswLabel[i]->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed);
+    fswLabel[i]->setContextMenuPolicy(Qt::CustomContextMenu);
+    fswLabel[i]->setMouseTracking(true);
+    fswLabel[i]->setProperty("FunctionId", i+1);
     fswLabel[i]->setText(tr("CFN%1").arg(i+1));
     layout->addWidget(fswLabel[i],(i%16)+1,0);
+    connect(fswLabel[i],SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(fsw_customContextMenuRequested(QPoint)));
 
     fswtchSwtch[i] = new QComboBox(this);
     fswtchSwtch[i]->setProperty("functionIndex", i);
@@ -5859,7 +5863,6 @@ void ModelEdit::cswPaste()
   }
 }
 
-
 void ModelEdit::cswDelete()
 {
   g_model.customSw[selectedSwitch].clear();
@@ -5915,6 +5918,66 @@ void ModelEdit::csw_customContextMenuRequested(QPoint pos)
     contextMenu.exec(globalPos);
 }
 
+void ModelEdit::fsw_customContextMenuRequested(QPoint pos)
+{
+    QLabel *label = (QLabel *)sender();
+    if (!label)
+      return;
+    int fsw=label->property("FunctionId").toInt();
+    if (!(fsw>0 && fsw<32))
+      return;
+    selectedFunction=fsw-1;
+    
+    QPoint globalPos = label->mapToGlobal(pos);
+
+    const QClipboard *clipboard = QApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+    bool hasData = mimeData->hasFormat("application/x-companion9x-fsw");
+
+    QMenu contextMenu;
+    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(fswDelete()),tr("Delete"));
+    contextMenu.addAction(QIcon(":/images/copy.png"), tr("&Copy"),this,SLOT(fswCopy()),tr("Ctrl+C"));
+    contextMenu.addAction(QIcon(":/images/cut.png"), tr("&Cut"),this,SLOT(fswCut()),tr("Ctrl+X"));
+    contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(fswPaste()),tr("Ctrl+V"))->setEnabled(hasData);
+
+    contextMenu.exec(globalPos);
+}
+
+void ModelEdit::fswPaste()
+{
+  const QClipboard *clipboard = QApplication::clipboard();
+  const QMimeData *mimeData = clipboard->mimeData();  
+  if (mimeData->hasFormat("application/x-companion9x-fsw")) {
+    QByteArray fswData = mimeData->data("application/x-companion9x-fsw");
+    
+    FuncSwData *fsw = &g_model.funcSw[selectedFunction];
+    memcpy(fsw, fswData.mid(0, sizeof(FuncSwData)).constData(), sizeof(FuncSwData));
+    updateSettings();
+    tabCustomFunctions();
+  }
+}
+
+void ModelEdit::fswDelete()
+{
+  g_model.funcSw[selectedFunction].clear();
+  updateSettings();
+  tabCustomFunctions();
+}
+
+void ModelEdit::fswCopy()
+{
+    QByteArray fswData;
+    fswData.append((char*)&g_model.funcSw[selectedSwitch],sizeof(FuncSwData));
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setData("application/x-companion9x-fsw", fswData);
+    QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
+}
+
+void ModelEdit::fswCut()
+{
+  fswCopy();
+  fswDelete();
+}
 
 void ModelEdit::mixerlistWidget_KeyPress(QKeyEvent *event)
 {

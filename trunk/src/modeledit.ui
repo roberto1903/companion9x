@@ -9030,8 +9030,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>908</width>
-            <height>481</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13893,8 +13893,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>923</width>
-            <height>467</height>
+            <width>1034</width>
+            <height>589</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13903,7 +13903,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <layout class="QGridLayout" name="gridLayout_79" columnstretch="0,0,0,0,0,1">
+          <layout class="QGridLayout" name="gridLayout_79" columnstretch="0,0,0,0,0,0">
            <item row="3" column="4">
             <spacer name="horizontalSpacer_29">
              <property name="orientation">
@@ -13913,6 +13913,19 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               <size>
                <width>5</width>
                <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="4">
+            <spacer name="verticalSpacer_17">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
             </spacer>
@@ -17881,25 +17894,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="0" column="1" rowspan="4">
             <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0" columnstretch="1,0">
-             <item row="0" column="0" colspan="2">
-              <widget class="QGraphicsView" name="curvePreview">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>400</width>
-                 <height>400</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="curvetype_label">
                <property name="text">
@@ -17971,6 +17965,25 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </property>
               </widget>
              </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QGraphicsView" name="curvePreview">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>400</width>
+                 <height>400</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item row="4" column="0" colspan="5">
@@ -17991,9 +18004,62 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            </item>
            <item row="0" column="2" rowspan="4" colspan="2">
             <layout class="QGridLayout" name="gridLayout_71">
-             <property name="spacing">
+             <property name="horizontalSpacing">
               <number>0</number>
              </property>
+             <property name="verticalSpacing">
+              <number>2</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="15" column="1">
+              <widget class="QSpinBox" name="curvePt16_x">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="accelerated">
+                <bool>true</bool>
+               </property>
+               <property name="minimum">
+                <number>-100</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QSpinBox" name="curvePt08_y">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="accelerated">
+                <bool>true</bool>
+               </property>
+               <property name="minimum">
+                <number>-100</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QSpinBox" name="curvePt01_y">
                <property name="sizePolicy">
@@ -18434,50 +18500,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                </property>
               </widget>
              </item>
-             <item row="15" column="1">
-              <widget class="QSpinBox" name="curvePt16_x">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="accelerated">
-                <bool>true</bool>
-               </property>
-               <property name="minimum">
-                <number>-100</number>
-               </property>
-               <property name="maximum">
-                <number>100</number>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QSpinBox" name="curvePt08_y">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="accelerated">
-                <bool>true</bool>
-               </property>
-               <property name="minimum">
-                <number>-100</number>
-               </property>
-               <property name="maximum">
-                <number>100</number>
-               </property>
-              </widget>
-             </item>
              <item row="9" column="1">
               <widget class="QSpinBox" name="curvePt10_x">
                <property name="sizePolicy">
@@ -18769,19 +18791,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               <size>
                <width>5</width>
                <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="4">
-            <spacer name="verticalSpacer_17">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
               </size>
              </property>
             </spacer>
@@ -20478,8 +20487,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>354</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
@@ -20887,8 +20896,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>48</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_75">
