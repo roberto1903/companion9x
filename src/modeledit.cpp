@@ -363,7 +363,11 @@ void ModelEdit::tabModelEditSetup()
                                ui->fsm1SB_9, ui->fsm1SB_10,ui->fsm1SB_11,ui->fsm1SB_12,ui->fsm1SB_13,ui->fsm1SB_14,ui->fsm1SB_15,ui->fsm1SB_16, NULL };
   QSpinBox * fssb2[] = { ui->fsm2SB_1, ui->fsm2SB_2,ui->fsm2SB_3,ui->fsm2SB_4,ui->fsm2SB_5,ui->fsm2SB_6,ui->fsm2SB_7,ui->fsm2SB_8,
                                ui->fsm2SB_9, ui->fsm2SB_10,ui->fsm2SB_11,ui->fsm2SB_12,ui->fsm2SB_13,ui->fsm2SB_14,ui->fsm2SB_15,ui->fsm2SB_16, NULL };
-
+  if (IS_TARANIS(GetEepromInterface()->getBoard())) {
+    ui->modelNameLE->setMaxLength(12);
+  } else {
+    ui->modelNameLE->setMaxLength(10);
+  }
   ui->modelNameLE->setText(g_model.name);
   fsLock=true;
   if (GetEepromInterface()->getCapability(NumModules)<2) {
@@ -930,6 +934,12 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
 {
   phasesLock=true;
   PhaseData *phase = &g_model.phaseData[phase_idx];
+  if (IS_TARANIS(GetEepromInterface()->getBoard())) {
+    name->setMaxLength(10);
+  } else {
+    name->setMaxLength(6);
+  }
+  
   if (name) name->setText(phase->name);
   if (sw) populateSwitchCB(sw, phase->swtch);
 
@@ -1257,6 +1267,20 @@ void ModelEdit::tabPhases()
       connect(ui->phase0GV4Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
       connect(ui->phase0GV5Source,SIGNAL(currentIndexChanged(int)),this,SLOT(GVSource_currentIndexChanged()));
     }
+    if (IS_TARANIS(GetEepromInterface()->getBoard())) {
+      ui->phase0GV1Name->setMaxLength(10);
+      ui->phase0GV2Name->setMaxLength(10);
+      ui->phase0GV3Name->setMaxLength(10);
+      ui->phase0GV4Name->setMaxLength(10);
+      ui->phase0GV5Name->setMaxLength(10);
+    } else {
+      ui->phase0GV1Name->setMaxLength(6);
+      ui->phase0GV2Name->setMaxLength(6);
+      ui->phase0GV3Name->setMaxLength(6);
+      ui->phase0GV4Name->setMaxLength(6);
+      ui->phase0GV5Name->setMaxLength(6);      
+    }
+
     ui->phase0GV1Name->setText(g_model.gvars_names[0]);
     ui->phase0GV2Name->setText(g_model.gvars_names[1]);
     ui->phase0GV3Name->setText(g_model.gvars_names[2]);
@@ -3545,7 +3569,8 @@ void ModelEdit::tabTemplates()
 
 void ModelEdit::on_modelNameLE_editingFinished()
 {
-    strncpy(g_model.name, ui->modelNameLE->text().toAscii(), 10);
+    int length=ui->modelNameLE->maxLength();
+    strncpy(g_model.name, ui->modelNameLE->text().toAscii(), length);
     updateSettings();
 }
 
