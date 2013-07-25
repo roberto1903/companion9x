@@ -75,6 +75,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
   tabLimits();
   tabCurves();
   tabCustomSwitches();
+  selectedSwitch=0;
   int telTab=10;
   int fswTab=9;
 
@@ -1950,6 +1951,24 @@ void ModelEdit::tabCurves()
   }
   redrawCurve=true;
   drawing=false;
+#ifdef __APPLE__
+  ui->curveEdit_1->setStyleSheet("color: #00007f;");
+  ui->curveEdit_2->setStyleSheet("color: #007f00;");
+  ui->curveEdit_3->setStyleSheet("color: #7f0000;");
+  ui->curveEdit_4->setStyleSheet("color: #007f7f;");
+  ui->curveEdit_5->setStyleSheet("color: #7f007f;");
+  ui->curveEdit_6->setStyleSheet("color: #7f7f00;");
+  ui->curveEdit_7->setStyleSheet("color: #7f7f7f;");
+  ui->curveEdit_8->setStyleSheet("color: #0000ff;");
+  ui->curveEdit_9->setStyleSheet("color: #007fff;");
+  ui->curveEdit_10->setStyleSheet("color: #7f00ff;");
+  ui->curveEdit_11->setStyleSheet("color: #00ff00;");
+  ui->curveEdit_12->setStyleSheet("color: #00ff7f;");
+  ui->curveEdit_13->setStyleSheet("color: #7fff00;");
+  ui->curveEdit_14->setStyleSheet("color: #ff0000;");
+  ui->curveEdit_15->setStyleSheet("color: #ff007f;");
+  ui->curveEdit_16->setStyleSheet("color: #ff7f00;");
+#else  
   ui->curveEdit_1->setStyleSheet("background-color: #00007f; color: white;");
   ui->curveEdit_2->setStyleSheet("background-color: #007f00; color: white;");
   ui->curveEdit_3->setStyleSheet("background-color: #7f0000; color: white;");
@@ -1966,6 +1985,7 @@ void ModelEdit::tabCurves()
   ui->curveEdit_14->setStyleSheet("background-color: #ff0000; color: white;");
   ui->curveEdit_15->setStyleSheet("background-color: #ff007f; color: white;");
   ui->curveEdit_16->setStyleSheet("background-color: #ff7f00; color: white;");
+#endif
   updateCurvesTab();
 
   QGraphicsScene *scene = new QGraphicsScene(ui->curvePreview);
@@ -2489,9 +2509,9 @@ void ModelEdit::tabCustomSwitches()
       ui->cswitchFunc_21, ui->cswitchFunc_22, ui->cswitchFunc_23, ui->cswitchFunc_24,
       ui->cswitchFunc_25, ui->cswitchFunc_26, ui->cswitchFunc_27, ui->cswitchFunc_28,
       ui->cswitchFunc_29, ui->cswitchFunc_30, ui->cswitchFunc_31, ui->cswitchFunc_32 };
-    QLabel* cswlabel[C9X_NUM_CSW] = { ui->cswlabel_1, ui->cswlabel_2, ui->cswlabel_3, ui->cswlabel_4,
-      ui->cswlabel_5, ui->cswlabel_6, ui->cswlabel_7, ui->cswlabel_8,
-      ui->cswlabel_9, ui->cswlabel_10, ui->cswlabel_11, ui->cswlabel_12,
+    QLabel* cswlabel[C9X_NUM_CSW] = { ui->cswlabel_01, ui->cswlabel_02, ui->cswlabel_03, ui->cswlabel_04,
+      ui->cswlabel_05, ui->cswlabel_06, ui->cswlabel_07, ui->cswlabel_08,
+      ui->cswlabel_09, ui->cswlabel_10, ui->cswlabel_11, ui->cswlabel_12,
       ui->cswlabel_13, ui->cswlabel_14, ui->cswlabel_15, ui->cswlabel_16,
       ui->cswlabel_17, ui->cswlabel_18, ui->cswlabel_19, ui->cswlabel_20,
       ui->cswlabel_21, ui->cswlabel_22, ui->cswlabel_23, ui->cswlabel_24, 
@@ -2564,6 +2584,7 @@ void ModelEdit::tabCustomSwitches()
           ui->cswCol3->hide();
           ui->cswCol4->hide();
         }
+        connect(cswlabel[i],SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(csw_customContextMenuRequested(QPoint)));
       } else {
         csw[i]->hide();
         cswlabel[i]->hide();
@@ -2634,6 +2655,7 @@ void ModelEdit::tabCustomSwitches()
             ui->cswCol3_2->hide();
             ui->cswCol4_2->hide();
           }
+          connect(cswlabel[i],SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(csw_customContextMenuRequested(QPoint)));        
         } else {
           csw[i]->hide();
           cswlabel[i]->hide();
@@ -2647,7 +2669,6 @@ void ModelEdit::tabCustomSwitches()
     for (int i=0; i<num_csw; i++) {
       connect(csw[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
     }
-
     switchEditLock = false;
 }
 
@@ -5823,6 +5844,77 @@ void ModelEdit::expolistWidget_customContextMenuRequested(QPoint pos)
 
     contextMenu.exec(globalPos);
 }
+
+void ModelEdit::cswPaste()
+{
+  const QClipboard *clipboard = QApplication::clipboard();
+  const QMimeData *mimeData = clipboard->mimeData();  
+  if (mimeData->hasFormat("application/x-companion9x-csw")) {
+    QByteArray cswData = mimeData->data("application/x-companion9x-csw");
+
+    CustomSwData *csw = &g_model.customSw[selectedSwitch];
+    memcpy(csw, cswData.mid(0, sizeof(CustomSwData)).constData(), sizeof(CustomSwData));
+    updateSettings();
+    updateSelectedSwitch();
+  }
+}
+
+
+void ModelEdit::cswDelete()
+{
+  g_model.customSw[selectedSwitch].clear();
+  updateSettings();
+  updateSelectedSwitch();
+}
+
+void ModelEdit::cswCopy()
+{
+    QByteArray cswData;
+    cswData.append((char*)&g_model.customSw[selectedSwitch],sizeof(CustomSwData));
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setData("application/x-companion9x-csw", cswData);
+    QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
+}
+
+void ModelEdit::updateSelectedSwitch()
+{
+    switchEditLock = true;
+    populateCSWCB(csw[selectedSwitch], g_model.customSw[selectedSwitch].func);
+    setSwitchWidgetVisibility(selectedSwitch);
+    switchEditLock = false;
+}
+
+void ModelEdit::cswCut()
+{
+  cswCopy();
+  cswDelete();
+}
+
+void ModelEdit::csw_customContextMenuRequested(QPoint pos)
+{
+    QLabel *label = (QLabel *)sender();
+    if (!label)
+      return;
+    QString name=label->objectName();
+    if (!name.startsWith("cswlabel"))
+      return;
+    selectedSwitch=name.mid(9,2).toInt()-1;
+    
+    QPoint globalPos = label->mapToGlobal(pos);
+
+    const QClipboard *clipboard = QApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+    bool hasData = mimeData->hasFormat("application/x-companion9x-csw");
+
+    QMenu contextMenu;
+    contextMenu.addAction(QIcon(":/images/clear.png"), tr("&Delete"),this,SLOT(cswDelete()),tr("Delete"));
+    contextMenu.addAction(QIcon(":/images/copy.png"), tr("&Copy"),this,SLOT(cswCopy()),tr("Ctrl+C"));
+    contextMenu.addAction(QIcon(":/images/cut.png"), tr("&Cut"),this,SLOT(cswCut()),tr("Ctrl+X"));
+    contextMenu.addAction(QIcon(":/images/paste.png"), tr("&Paste"),this,SLOT(cswPaste()),tr("Ctrl+V"))->setEnabled(hasData);
+
+    contextMenu.exec(globalPos);
+}
+
 
 void ModelEdit::mixerlistWidget_KeyPress(QKeyEvent *event)
 {
