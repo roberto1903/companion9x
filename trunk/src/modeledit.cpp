@@ -94,6 +94,7 @@ ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget 
     telTab--;
   } else {
     tabCustomFunctions();
+    selectedFunction=0;
   }
   tabTemplates();
   tabHeli();
