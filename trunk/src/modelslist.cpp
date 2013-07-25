@@ -300,9 +300,17 @@ void ModelsListWidget::refreshList()
           if (radioData->models[i].name[0]==0) {
             sprintf(modelname, "Model%02d", i+1);
           } else {
-            sprintf(modelname,"%10s",radioData->models[i].name);
+            if (IS_TARANIS(eepromInterface->getBoard())) {
+              sprintf(modelname,"%12s",radioData->models[i].name);
+            } else {
+              sprintf(modelname,"%10s",radioData->models[i].name);
+            }            
           }
-          item += QString().sprintf("%10s", modelname);
+          if (IS_TARANIS(eepromInterface->getBoard())) {
+            item += QString().sprintf("%12s", modelname);
+          } else {
+            item += QString().sprintf("%10s", modelname);
+          }            
           msize = eepromInterface->getSize(radioData->models[i]);
           item += QString().sprintf("%5d", msize);
           divresult=div(msize,15);
