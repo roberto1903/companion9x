@@ -3618,8 +3618,9 @@ void ModelEdit::phaseName_editingFinished()
     TabName.append(PhaseName);
     TabName.append(")");
   }
-  ui->phases->setTabText(phase,TabName);  
-  strncpy(g_model.phaseData[phase].name, lineEdit->text().toAscii(), 6);
+  ui->phases->setTabText(phase,TabName);
+  int length=lineEdit->maxLength();
+  strncpy(g_model.phaseData[phase].name, lineEdit->text().toAscii(), length);
   updateSettings();
 }
 
