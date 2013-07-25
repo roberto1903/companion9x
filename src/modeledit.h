@@ -65,6 +65,7 @@ private:
     bool fsLock;
     bool modelImageLock;
     bool plot_curve[16];
+    int selectedSwitch;
     QDoubleSpinBox  * cswitchValue[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
     QComboBox * cswitchAnd[C9X_NUM_CSW];
@@ -110,6 +111,7 @@ private:
     void updateCurvesTab();
     void setSwitchWidgetVisibility(int i);
     void setLimitMinMax();
+    void updateSelectedSwitch();
     void updateSwitchesTab();
     void updateHeliTab();
     void updateA1Fields();
@@ -225,6 +227,12 @@ private slots:
     void exposDuplicate();
     void expoOpen(QListWidgetItem *item = NULL);
     void expoAdd();
+    
+    void cswDelete();
+    void cswCopy();
+    void cswPaste();
+    void cswCut();
+    
     void moveExpoUp();
     void moveExpoDown();
 
@@ -247,6 +255,9 @@ private slots:
     void mixerlistWidget_doubleClicked(QModelIndex index);
     void mixerlistWidget_KeyPress(QKeyEvent *event);
 
+    void csw_customContextMenuRequested(QPoint pos);
+    
+    
     void curvePointEdited();
     void on_ca_ctype_CB_currentIndexChanged();
     void on_ca_apply_PB_clicked();

@@ -13893,8 +13893,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>589</height>
+            <width>923</width>
+            <height>467</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -19035,8 +19035,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>654</width>
-            <height>482</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_74">
@@ -19055,12 +19055,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_21" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0">
                 <item row="9" column="0">
-                 <widget class="QLabel" name="cswlabel_9">
+                 <widget class="QLabel" name="cswlabel_09">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19123,6 +19129,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19151,6 +19163,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19224,12 +19242,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="6" column="0">
-                 <widget class="QLabel" name="cswlabel_6">
+                 <widget class="QLabel" name="cswlabel_06">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19243,12 +19267,21 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QLabel" name="cswlabel_1">
+                 <widget class="QLabel" name="cswlabel_01">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
+                  <property name="acceptDrops">
+                   <bool>false</bool>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19272,12 +19305,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="8" column="0">
-                 <widget class="QLabel" name="cswlabel_8">
+                 <widget class="QLabel" name="cswlabel_08">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19301,12 +19340,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="7" column="0">
-                 <widget class="QLabel" name="cswlabel_7">
+                 <widget class="QLabel" name="cswlabel_07">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19347,6 +19392,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19376,6 +19427,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19404,6 +19461,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19447,12 +19510,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="5" column="0">
-                 <widget class="QLabel" name="cswlabel_5">
+                 <widget class="QLabel" name="cswlabel_05">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19515,12 +19584,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="3" column="0">
-                 <widget class="QLabel" name="cswlabel_3">
+                 <widget class="QLabel" name="cswlabel_03">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19534,12 +19609,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="2" column="0">
-                 <widget class="QLabel" name="cswlabel_2">
+                 <widget class="QLabel" name="cswlabel_02">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19560,6 +19641,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19578,6 +19665,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19601,12 +19694,18 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="4" column="0">
-                 <widget class="QLabel" name="cswlabel_4">
+                 <widget class="QLabel" name="cswlabel_04">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19694,6 +19793,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19794,6 +19899,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19813,6 +19924,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19831,6 +19948,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19861,6 +19984,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19879,6 +20008,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -19909,6 +20044,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19938,6 +20079,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -19966,6 +20113,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -20016,6 +20169,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -20055,6 +20214,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -20093,6 +20258,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -20111,6 +20282,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
@@ -20131,6 +20308,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -20150,6 +20333,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
                   </property>
@@ -20168,6 +20357,12 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="mouseTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::CustomContextMenu</enum>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::Panel</enum>
