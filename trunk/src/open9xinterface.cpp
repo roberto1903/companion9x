@@ -715,6 +715,12 @@ int Open9xInterface::getCapability(const Capability capability)
       } else {
         return 2;
       }
+    case NoTelemetryProtocol:
+      if (IS_TARANIS(board)) {
+        return 1;
+      } else {
+        return 0;
+      }      
     case TelemetryUnits:
       return 0;
     case TelemetryBlades:

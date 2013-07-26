@@ -3327,6 +3327,12 @@ void ModelEdit::tabTelemetry()
   if (!(GetEepromInterface()->getCapability(HasAltitudeSel)||GetEepromInterface()->getCapability(HasVario))) {
     ui->altimetryGB->hide();
   }
+  if (GetEepromInterface()->getCapability(NoTelemetryProtocol)) {
+    g_model.frsky.usrProto=1;
+    ui->frskyProtoCB->setDisabled(true);
+  } else {
+    ui->frskyProtoCB->setEnabled(true);
+  }
 
   if (GetEepromInterface()->getCapability(TelemetryCSFields)==0) {
     ui->groupBox_5->hide();

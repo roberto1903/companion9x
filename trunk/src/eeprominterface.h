@@ -919,6 +919,7 @@ enum Capability {
  GvarsAsWeight,
  GvarsNum,
  GvarsOfsNum,
+ NoTelemetryProtocol,
  TelemetryCSFields,
  TelemetryColsCSFields,
  TelemetryRSSIModel,
