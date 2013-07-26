@@ -10,6 +10,7 @@ logsDialog::logsDialog(QWidget *parent) :
   srand(QDateTime::currentDateTime().toTime_t());
   ui->setupUi(this);
   palette.clear();
+  plotLock=false;
   for (int i=0; i< 60; i++) 
         palette << QColor(rand()%245+10, rand()%245+10, rand()%245+10);
   ui->customPlot->setInteractions(QCustomPlot::iRangeDrag | QCustomPlot::iRangeZoom | QCustomPlot::iSelectAxes |
@@ -134,7 +135,8 @@ void logsDialog::selectionChanged()
    legend item belonging to that graph. So the user can select a graph by either clicking on the graph itself
    or on its legend item.
   */
-  
+  if (plotLock)
+    return;
   // make top and bottom axes be selected synchronously, and handle axis and tick labels as one selectable object:
   if (ui->customPlot->xAxis->selected().testFlag(QCPAxis::spAxis) || ui->customPlot->xAxis->selected().testFlag(QCPAxis::spTickLabels) ||
       ui->customPlot->xAxis2->selected().testFlag(QCPAxis::spAxis) || ui->customPlot->xAxis2->selected().testFlag(QCPAxis::spTickLabels))
@@ -191,6 +193,8 @@ void logsDialog::mouseWheel()
 
 void logsDialog::plotValue(int index, int plot, int numplots)
 {
+  if (plotLock)
+    return;
   int n = csvlog.count(); // number of points in graph
   bool rangeSelected=false;
   uint minx;
@@ -480,6 +484,7 @@ bool logsDialog::cvsFileParse()
     
   }
   file.close();
+  plotLock=true;
   int n=csvlog.count();
   int lastvalue=0;
   int tmp;
@@ -499,14 +504,18 @@ bool logsDialog::cvsFileParse()
       lastvalue=tmp;
     }
   }
+  plotLock=false;
   return true;
 }
 
 
 void logsDialog::on_sessions_CB_currentIndexChanged(int index)
 {
+  if (plotLock)
+     return;
+  plotLock=true;
   int start=0;
-  int stop=-1;
+  int stop=-1;  
   if (index!=0) {
     start=ui->sessions_CB->itemData(index,Qt::UserRole).toInt();
     if (index<(ui->sessions_CB->count()-1)) {
@@ -514,9 +523,8 @@ void logsDialog::on_sessions_CB_currentIndexChanged(int index)
     }
   }
 //    if (ui->logTable->item(i-1,1)->isSelected()) {
-  if (start==0) {
-    ui->logTable->clearSelection();
-  } else {
+  ui->logTable->clearSelection();
+  if (start>0) {
     int n=csvlog.count();
     int tmp;
     ui->logTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -543,10 +551,14 @@ void logsDialog::on_sessions_CB_currentIndexChanged(int index)
       }
     }    
   }
+  plotLock=false;
+  plotLogs();
 }
 
 void logsDialog::plotLogs()
 {
+  if (plotLock)
+    return;
   int n = csvlog.at(0).count(); // number of points in graph
   removeAllGraphs();
   int numplots=0;
@@ -556,7 +568,6 @@ void logsDialog::plotLogs()
       numplots++;
     }
   }
-  
   for (int i=0; i<n-2; i++) {
     if (ui->FieldsTW->item(0,i)->isSelected()) {
       plots++;
