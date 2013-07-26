@@ -41,6 +41,7 @@ private:
   bool cvsFileParse();
   double GetScale(QString channel);
   QList<QColor> palette;
+  bool plotLock;
 };
 
 #endif // LOGSDIALOG_H
