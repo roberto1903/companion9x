@@ -374,9 +374,9 @@ void burnDialog::on_ImageLoadButton_clicked()
               image.setPixel(i, j, qRgb(gray, gray, gray));
           }
       }      
-      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2)));
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height())));
     } else {
-      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width()/2, ui->imageLabel->height()/2).convertToFormat(QImage::Format_Mono)));
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(ui->imageLabel->width(), ui->imageLabel->height()).convertToFormat(QImage::Format_Mono)));
     }
     ui->PatchFWCB->setEnabled(true);
   }
