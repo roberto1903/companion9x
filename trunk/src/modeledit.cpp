@@ -937,9 +937,9 @@ void ModelEdit::displayOnePhase(unsigned int phase_idx, QLineEdit *name, QComboB
   phasesLock=true;
   PhaseData *phase = &g_model.phaseData[phase_idx];
   if (IS_TARANIS(GetEepromInterface()->getBoard())) {
-    name->setMaxLength(10);
+    if (name) name->setMaxLength(10);
   } else {
-    name->setMaxLength(6);
+    if (name) name->setMaxLength(6);
   }
   
   if (name) name->setText(phase->name);
