@@ -1572,7 +1572,7 @@ void ModelEdit::exposEdited()
 
 void ModelEdit::tabMixes()
 {
-    // curDest -> destination channel
+    // curDest -> destination channel4
     // i -> mixer number
     QByteArray qba;
     MixerlistWidget->clear();
@@ -1591,6 +1591,13 @@ void ModelEdit::tabMixes()
               str = tr("X%1  ").arg(curDest-outputs);
             } else {
               str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
+              if (GetEepromInterface()->getCapability(HasChNames)) {
+                QString name=g_model.limitData[curDest].name;
+                if (!name.isEmpty()) {
+                  name.append("     ");
+                  str=name.left(6);
+                }
+              }
             }
             qba.clear();
             qba.append((quint8)-curDest);
@@ -1624,7 +1631,7 @@ void ModelEdit::tabMixes()
         default:  str += "  "; break;
         };
 
-        str += " " + getGVarString(md->weight, true).rightJustified(5, ' ');
+        str += " " + getGVarString(md->weight, true).rightJustified(6, ' ');
         str += md->srcRaw.toString();
         unsigned int fpCount = GetEepromInterface()->getCapability(FlightPhases);
         if (GetEepromInterface()->getCapability(FlightPhases)) {
