@@ -434,6 +434,7 @@ bool logsDialog::cvsFileParse()
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
     return false;
   } else {
+    ui->sessions_CB->clear();
     csvlog.clear();
     QTextStream inputStream(&file);
     QRegExp rx2("(?:\"([^\"]*)\";?)|(?:([^,]*),?)");
@@ -452,26 +453,96 @@ bool logsDialog::cvsFileParse()
       list.clear();
       if(line.size()<1){
         list << "";		
-      } else while (line.size()>pos2 && (pos2 = rx2.indexIn(line, pos2)) != -1) {
-        QString col;
-        if(rx2.cap(1).size()>0)
-          col = rx2.cap(1);
-        else if(rx2.cap(2).size()>0)
-          col = rx2.cap(2);
-        if (col.contains("."))
-          if (col.indexOf(".")==(col.length()-3))
-            col.append("0");
-        list<<col;
-        if(col.size())
-          pos2 += rx2.matchedLength();
-        else
-          pos2++;
+      } else {
+        while (line.size()>pos2 && (pos2 = rx2.indexIn(line, pos2)) != -1) {
+          QString col;
+          if(rx2.cap(1).size()>0) {
+            col = rx2.cap(1);
+          } else if(rx2.cap(2).size()>0) {
+            col = rx2.cap(2);
+          }
+          if (col.contains(".")) {
+            if (col.indexOf(".")==(col.length()-3)) {
+              col.append("0");
+            }
+          }
+          list<<col;
+          if(col.size()) {
+            pos2 += rx2.matchedLength();
+          } else {
+            pos2++;
+          }
+        }
       }
       csvlog.append(list);
+      
     }
+    
   }
   file.close();
+  int n=csvlog.count();
+  int lastvalue=0;
+  int tmp;
+  ui->sessions_CB->addItem("---");
+  for (int i=1; i<n; i++) {
+    QString tstamp=csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1);
+    if (csvlog.at(i).at(1).contains(".")) {
+      tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss.zzz").toTime_t();
+      tmp+=csvlog.at(i).at(1).mid(csvlog.at(i).at(1).indexOf(".")).toDouble();
+    } else {
+      tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss").toTime_t();
+    }
+    if (tmp>(lastvalue+60)) {
+      ui->sessions_CB->addItem(tstamp, tmp);
+      lastvalue=tmp;
+    } else {
+      lastvalue=tmp;
+    }
+  }
   return true;
+}
+
+
+void logsDialog::on_sessions_CB_currentIndexChanged(int index)
+{
+  int start=0;
+  int stop=-1;
+  if (index!=0) {
+    start=ui->sessions_CB->itemData(index,Qt::UserRole).toInt();
+    if (index<(ui->sessions_CB->count()-1)) {
+      stop=ui->sessions_CB->itemData(index+1,Qt::UserRole).toInt();
+    }
+  }
+//    if (ui->logTable->item(i-1,1)->isSelected()) {
+  if (start==0) {
+    ui->logTable->clearSelection();
+  } else {
+    int n=csvlog.count();
+    int tmp;
+    ui->logTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    for (int i=1; i<n; i++) {
+      QString tstamp=csvlog.at(i).at(0)+QString(" ")+csvlog.at(i).at(1);
+      if (csvlog.at(i).at(1).contains(".")) {
+        tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss.zzz").toTime_t();
+        tmp+=csvlog.at(i).at(1).mid(csvlog.at(i).at(1).indexOf(".")).toDouble();
+      } else {
+        tmp=QDateTime::fromString(tstamp, "yyyy-MM-dd HH:mm:ss").toTime_t();
+      }
+      if (stop>0) {
+        if (tmp==start) {
+          ui->logTable->selectionModel()->select(ui->logTable->model()->index(i-1,0), QItemSelectionModel::SelectCurrent|QItemSelectionModel::Rows);
+        } else if (tmp>start && tmp<stop) {
+          ui->logTable->selectionModel()->select(ui->logTable->model()->index(i-1,0), QItemSelectionModel::Select|QItemSelectionModel::Rows);
+        }
+      } else {
+        if (tmp==start) {
+          ui->logTable->selectionModel()->select(ui->logTable->model()->index(i-1,0), QItemSelectionModel::SelectCurrent|QItemSelectionModel::Rows);
+        } else if (tmp>start) {
+          ui->logTable->selectionModel()->select(ui->logTable->model()->index(i-1,0), QItemSelectionModel::Select|QItemSelectionModel::Rows);
+        }
+      }
+    }    
+  }
 }
 
 void logsDialog::plotLogs()
