@@ -123,6 +123,12 @@ void burnConfigDialog::getSettings()
     if(idx2>=0) ui->avrdude_port->setCurrentIndex(idx2);
     if(idx3>=0) ui->avrdude_mcu->setCurrentIndex(idx3);
     if(idx4>=0) ui->arm_mcu->setCurrentIndex(idx4);
+    QFile file;
+    if (file.exists(avrLoc)) {
+      ui->pushButton_3->setEnabled(true);
+    } else {
+      ui->pushButton_3->setDisabled(true);
+    }    
 }
 
 void burnConfigDialog::putSettings()
@@ -187,6 +193,14 @@ void burnConfigDialog::on_avrdude_mcu_currentIndexChanged(QString )
 void burnConfigDialog::on_avrdude_location_editingFinished()
 {
     avrLoc = ui->avrdude_location->text();
+    if (avrLoc.isEmpty()) {
+      ui->pushButton_3->setDisabled(true);
+    } else {
+      QFile file;
+      if (file.exists(avrLoc)) {
+        ui->pushButton_3->setEnabled(true);
+      }
+    }
 }
 
 void burnConfigDialog::on_avrArgs_editingFinished()
@@ -260,7 +274,6 @@ void burnConfigDialog::listProgrammers()
 {
     QStringList arguments;
     arguments << "-c?";
-
     avrOutputDialog *ad = new avrOutputDialog(this, ui->avrdude_location->text(), arguments, "List available programmers", AVR_DIALOG_KEEP_OPEN, TRUE);
     ad->setWindowIcon(QIcon(":/images/list.png"));
     ad->show();

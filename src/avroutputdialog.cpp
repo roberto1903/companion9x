@@ -35,16 +35,21 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
     cmdLine = prog;
     closeOpt = closeBehaviour;
     if (cmdLine.isEmpty()) {
-      sourceFile=arg.at(0);
-      destFile=arg.at(1);
-      if (!displayDetails) {
-        ui->plainTextEdit->hide();
-        QTimer::singleShot(0, this, SLOT(shrink()));
+      if (arg.count()<2) {
+        closeOpt = AVR_DIALOG_FORCE_CLOSE;
+        QTimer::singleShot(0, this, SLOT(forceClose()));                
       } else {
-          ui->checkBox->setChecked(true);
+        sourceFile=arg.at(0);
+        destFile=arg.at(1);
+        if (!displayDetails) {
+          ui->plainTextEdit->hide();
+          QTimer::singleShot(0, this, SLOT(shrink()));
+        } else {
+            ui->checkBox->setChecked(true);
+        }
+        ui->progressBar->setMaximum(127);
+        QTimer::singleShot(500, this, SLOT(doCopy()));
       }
-      ui->progressBar->setMaximum(127);
-      QTimer::singleShot(500, this, SLOT(doCopy()));
     } else {
       if(wTitle.isEmpty())
           setWindowTitle(getProgrammer() + tr(" result"));
@@ -52,7 +57,6 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
           setWindowTitle(getProgrammer() + " - " + wTitle);
       QFile exec;
       winTitle=wTitle;
-
       if (!(exec.exists(prog))) {
         QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" executable not found"));
         closeOpt = AVR_DIALOG_FORCE_CLOSE;
