@@ -17,7 +17,7 @@ Version 1.39
 Custom functions cut&paste 
 Custom switches cut&paste 
 Color button text in curve editor for MACOSX
-Adjust name lenghts for taranis 
+Adjust name lengths for taranis 
 
 Version 1.38
 Core when model names are > 10 chars
@@ -43,4 +43,3 @@ Expo move bug + invalid chars in channels, expo and mixer names
 Try to reduce modeledit window form MAC
 Wrong init of RF-Module data
 Read flash from TX didn't worked for taranis
-
