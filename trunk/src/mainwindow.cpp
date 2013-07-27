@@ -667,9 +667,16 @@ void MainWindow::preferences()
 
 void MainWindow::contributors()
 {
-    contributorsDialog *cd = new contributorsDialog(this);
+    contributorsDialog *cd = new contributorsDialog(this,0);
     cd->exec();
 }
+
+void MainWindow::changelog()
+{
+    contributorsDialog *cd = new contributorsDialog(this,1);
+    cd->exec();
+}
+
 
 void MainWindow::customizeSplash()
 {    
@@ -1536,6 +1543,10 @@ void MainWindow::createActions()
     contributorsAct->setStatusTip(tr("Show companion9x contributors list"));
     connect(contributorsAct, SIGNAL(triggered()), this, SLOT(contributors()));
 
+    changelogAct = new QAction(QIcon(":/images/changelog.png"), tr("ChangeLog..."), this);
+    changelogAct->setStatusTip(tr("Show companion9x changelog"));
+    connect(changelogAct, SIGNAL(triggered()), this, SLOT(changelog()));
+    
     compareAct = new QAction(QIcon(":/images/compare.png"), tr("Compare..."), this);
     compareAct->setStatusTip(tr("Compare models"));
     compareAct->setEnabled(false);
@@ -1746,6 +1757,7 @@ void MainWindow::createMenus()
     helpMenu->addAction(checkForUpdatesAct);
     helpMenu->addSeparator();
     helpMenu->addAction(contributorsAct);
+    helpMenu->addAction(changelogAct);
 }
  
 QMenu *MainWindow::createRecentFileMenu()

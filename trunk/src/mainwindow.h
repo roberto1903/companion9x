@@ -111,6 +111,7 @@ private slots:
     void burnFuses();
     void simulate();
     void contributors();
+    void changelog();
     void customizeSplash();
     void about();
     void compare();
@@ -196,6 +197,7 @@ private:
     QAction *preferencesAct;
     QAction *checkForUpdatesAct;
     QAction *contributorsAct;
+    QAction *changelogAct;
     QAction *compareAct;
     QAction *customizeSplashAct;
     QAction *cutAct;
