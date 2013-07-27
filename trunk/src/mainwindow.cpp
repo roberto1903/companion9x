@@ -1601,15 +1601,16 @@ void MainWindow::createActions()
     burnConfigAct = new QAction(QIcon(":/images/configure.png"), tr("&Configure..."), this);
     burnConfigAct->setStatusTip(tr("Configure burning software"));
     connect(burnConfigAct,SIGNAL(triggered()),this,SLOT(burnConfig()));
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (!IS_ARM(eepromInterface->getBoard())) {
+      burnListAct = new QAction(QIcon(":/images/list.png"), tr("&List programmers"), this);
+      burnListAct->setStatusTip(tr("List available programmers"));
+      connect(burnListAct,SIGNAL(triggered()),this,SLOT(burnList()));
 
-    burnListAct = new QAction(QIcon(":/images/list.png"), tr("&List programmers"), this);
-    burnListAct->setStatusTip(tr("List available programmers"));
-    connect(burnListAct,SIGNAL(triggered()),this,SLOT(burnList()));
-
-    burnFusesAct = new QAction(QIcon(":/images/fuses.png"), tr("&Fuses..."), this);
-    burnFusesAct->setStatusTip(tr("Show fuses dialog"));
-    connect(burnFusesAct,SIGNAL(triggered()),this,SLOT(burnFuses()));
-
+      burnFusesAct = new QAction(QIcon(":/images/fuses.png"), tr("&Fuses..."), this);
+      burnFusesAct->setStatusTip(tr("Show fuses dialog"));
+      connect(burnFusesAct,SIGNAL(triggered()),this,SLOT(burnFuses()));
+    }
     simulateAct = new QAction(QIcon(":/images/simulate.png"), tr("&Simulate"), this);
     simulateAct->setShortcut(tr("Alt+S"));
     simulateAct->setStatusTip(tr("Simulate selected model."));
@@ -1727,9 +1728,11 @@ void MainWindow::createMenus()
     burnMenu->addAction(customizeSplashAct);
     burnMenu->addSeparator();
     burnMenu->addAction(burnConfigAct);
-    burnMenu->addAction(burnFusesAct);
-    burnMenu->addAction(burnListAct);
-
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (!IS_ARM(eepromInterface->getBoard())) {    
+      burnMenu->addAction(burnFusesAct);
+      burnMenu->addAction(burnListAct);
+    }
     windowMenu = menuBar()->addMenu(tr("&Window"));
     updateWindowMenu();
     connect(windowMenu, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
