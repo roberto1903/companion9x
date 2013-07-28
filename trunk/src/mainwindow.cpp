@@ -143,14 +143,15 @@ void MainWindow::displayWarnings()
 {
   QSettings settings("companion9x", "companion9x");
   int warnId=settings.value("warningId", 0 ).toInt();
-  if (warnId<WARNING_ID) {
+  if (warnId<WARNING_ID && warnId!=0) {
     QMessageBox::warning(this, "companion9x", WARNING);
     int res = QMessageBox::question(this, "companion9x",tr("Display previous warning again at startup ?"),QMessageBox::Yes | QMessageBox::No);
     if (res == QMessageBox::No) {
       settings.setValue("warningId", WARNING_ID);
     }
+  } else if (warnId==0) {
+    settings.setValue("warningId", WARNING_ID);    
   }
-  
 }
 
 void MainWindow::doAutoUpdates()
