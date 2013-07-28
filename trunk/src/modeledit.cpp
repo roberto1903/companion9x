@@ -5981,7 +5981,7 @@ void ModelEdit::fswDelete()
 void ModelEdit::fswCopy()
 {
     QByteArray fswData;
-    fswData.append((char*)&g_model.funcSw[selectedSwitch],sizeof(FuncSwData));
+    fswData.append((char*)&g_model.funcSw[selectedFunction],sizeof(FuncSwData));
     QMimeData *mimeData = new QMimeData;
     mimeData->setData("application/x-companion9x-fsw", fswData);
     QApplication::clipboard()->setMimeData(mimeData,QClipboard::Clipboard);
