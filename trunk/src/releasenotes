@@ -2,7 +2,7 @@
 <ul>
 <li>Add Companion9X changelog</li>
 <li>Add Fw release notes browser</li>
-<li>Simplify burn menu for sky9x and taranis.</li>
+<li>Simplify burn menu for sky9x and Taranis.</li>
 <li>Fix in telemetry conversion (rssi alarm) for stock board</li>
 <li>Drop support of sky9x boards on MacOS due to missing SAM.BA tool.</li>
 </ul>
@@ -10,7 +10,7 @@
 <h2>Version 1.41</h2>
 <ul>
 <li>Fix unneeded rescaling of splash images</li>
-<li>Fix for telemetry screens for taranis</li>
+<li>Fix for telemetry screens for Taranis</li>
 </ul>
 
 <h2>Version 1.40</h2>
@@ -26,17 +26,17 @@
 <li>Custom functions cut&paste </li>
 <li>Custom switches cut&paste </li>
 <li>Color button text in curve editor for MACOSX</li>
-<li>Adjust name lengths for taranis </li>
+<li>Adjust name lengths for Taranis</li>
 </ul>
 
 <h2>Version 1.38</h2>
 <ul>
-<li>Core when model names are > 10 chars</li>
+<li>Core when model names were > 10 chars</li>
 </ul>
 
 <h2>Version 1.37</h2>
 <ul>
-<li>Fix OpenTX segfault in taranis simulator</li>
+<li>Fix OpenTX segfault in Taranis simulator</li>
 <li>Implement brightness control for Taranis</li>
 <li>Reduce modeledit windows size</li>
 <li>Taranis splash screen in grayscale</li>
@@ -48,16 +48,16 @@
 <li>Allow a selection of tracks for Background Music (Issue 199)</li>
 </ul>
 
-<h2>Version 135</h2>
+<h2>Version 1.35</h2>
 <ul>
 <li>Country names mismatch between Taranis and Companion 9X (Issue 198)</li>
 <li>TIM function in custom switches</li>
 <li>Fix timer switches.</li>
-<li>Taranis lcd adjustment in general settings.</li>
+<li>Taranis LCD adjustment in general settings.</li>
 <li>New tool in curve editor</li>
 <li>Minor fixes</li>
 <li>Expo move bug + invalid chars in channels, expo and mixer names</li>
 <li>Try to reduce modeledit window form MAC</li>
 <li>Wrong init of RF-Module data</li>
-<li>Read flash from TX didn't worked for taranis</li>
+<li>Read flash from TX didn't worked for Taranis</li>
 </ul>
