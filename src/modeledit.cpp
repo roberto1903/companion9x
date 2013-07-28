@@ -3134,7 +3134,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
     if (modified) g_model.funcSw[i].repeatParam = fswtchRepeat[i]->itemData(fswtchRepeat[i]->currentIndex()).toInt();
     if (index != FuncBackgroundMusic) {
-      if (!GetEepromInterface()->getCapability(VoicesAsNumbers)) {
+      if (!GetEepromInterface()->getCapability(HasFuncRepeat)) {
         widgetsMask |= CUSTOM_FUNCTION_REPEAT;
       }
     }

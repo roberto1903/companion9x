@@ -644,6 +644,7 @@ int Open9xInterface::getCapability(const Capability capability)
         return 1;
       else
         return 0;
+    case HasFuncRepeat:
     case HasContrast:
       return 1;      
     case HapticLength:
