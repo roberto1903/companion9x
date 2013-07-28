@@ -2369,12 +2369,12 @@ File wrong size - %1</source>
     <message>
         <location filename="mdichild.cpp" line="183"/>
         <source>Do you want to use model wizard? </source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous utiliser l&apos;assistant de configuration de modèle ?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="188"/>
         <source>Ask this question again ? </source>
-        <translation type="unfinished"></translation>
+        <translation>Poser la question à nouveau ?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="274"/>
@@ -10165,7 +10165,7 @@ Press cancel to abort joystick calibration</source>
     <message>
         <location filename="logsdialog.ui" line="174"/>
         <source>Fly sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessions de vol</translation>
     </message>
     <message>
         <location filename="logsdialog.cpp" line="22"/>
