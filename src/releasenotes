@@ -3,6 +3,7 @@ Add Companion9X changelog
 Add Fw release notes browser
 Simplify burn menu for sky9x and taranis.
 Fix in telemetry conversion (rssi alarm) for stock board...
+Drop support of sky9x boards on MacOS due to missing SAM.BA tool.
 
 Version 1.41
 Fix unneeded rescaling of splash images
