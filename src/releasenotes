@@ -1,47 +1,63 @@
-Version 1.42
-Add Companion9X changelog
-Add Fw release notes browser
-Simplify burn menu for sky9x and taranis.
-Fix in telemetry conversion (rssi alarm) for stock board...
-Drop support of sky9x boards on MacOS due to missing SAM.BA tool.
+<h2>Version 1.42</h2>
+<ul>
+<li>Add Companion9X changelog</li>
+<li>Add Fw release notes browser</li>
+<li>Simplify burn menu for sky9x and taranis.</li>
+<li>Fix in telemetry conversion (rssi alarm) for stock board</li>
+<li>Drop support of sky9x boards on MacOS due to missing SAM.BA tool.</li>
+</ul>
 
-Version 1.41
-Fix unneeded rescaling of splash images
-Fix for telemetry screens for taranis
+<h2>Version 1.41</h2>
+<ul>
+<li>Fix unneeded rescaling of splash images</li>
+<li>Fix for telemetry screens for taranis</li>
+</ul>
 
-Version 1.40
-Log dialog - Split of logging sessions.
-Telemetry screen 1 as default (issue 206)
-Rename all channels in mixer tab accordingly to limits names
-Fix a segfault in phases tabs (Issue 203 regression introduced in release 2140)
+<h2>Version 1.40</h2>
+<ul>
+<li>Log dialog - Split of logging sessions.</li>
+<li>Telemetry screen 1 as default (issue 206)</li>
+<li>Rename all channels in mixer tab accordingly to limits names</li>
+<li>Fix a segfault in phases tabs (Issue 203 regression introduced in release 2140)</li>
+</ul>
 
-Version 1.39
-Custom functions cut&paste 
-Custom switches cut&paste 
-Color button text in curve editor for MACOSX
-Adjust name lengths for taranis 
+<h2>Version 1.39</h2>
+<ul>
+<li>Custom functions cut&paste </li>
+<li>Custom switches cut&paste </li>
+<li>Color button text in curve editor for MACOSX</li>
+<li>Adjust name lengths for taranis </li>
+</ul>
 
-Version 1.38
-Core when model names are > 10 chars
+<h2>Version 1.38</h2>
+<ul>
+<li>Core when model names are > 10 chars</li>
+</ul>
 
-Version 1.37
-Fix OpenTX segfault in taranis simulator
-Implement brightness control for Taranis
-Reduce modeledit windows size
-Taranis splash screen in grayscale
+<h2>Version 1.37</h2>
+<ul>
+<li>Fix OpenTX segfault in taranis simulator</li>
+<li>Implement brightness control for Taranis</li>
+<li>Reduce modeledit windows size</li>
+<li>Taranis splash screen in grayscale</li>
+</ul>
 
-Version 1.36
-Burning windows (with progress bar) now in foreground (Issue 197)
-Allow a selection of tracks for Background Music (Issue 199)
+<h2>Version 1.36</h2>
+<ul>
+<li>Burning windows (with progress bar) now in foreground (Issue 197)</li>
+<li>Allow a selection of tracks for Background Music (Issue 199)</li>
+</ul>
 
-Version 135
-Country names mismatch between Taranis and Companion 9X (Issue 198)
-TIM function in custom switches
-Fix timer switches.
-Taranis lcd adjustment in general settings.
-New tool in curve editor
-Minor fixes
-Expo move bug + invalid chars in channels, expo and mixer names
-Try to reduce modeledit window form MAC
-Wrong init of RF-Module data
-Read flash from TX didn't worked for taranis
+<h2>Version 135</h2>
+<ul>
+<li>Country names mismatch between Taranis and Companion 9X (Issue 198)</li>
+<li>TIM function in custom switches</li>
+<li>Fix timer switches.</li>
+<li>Taranis lcd adjustment in general settings.</li>
+<li>New tool in curve editor</li>
+<li>Minor fixes</li>
+<li>Expo move bug + invalid chars in channels, expo and mixer names</li>
+<li>Try to reduce modeledit window form MAC</li>
+<li>Wrong init of RF-Module data</li>
+<li>Read flash from TX didn't worked for taranis</li>
+</ul>
