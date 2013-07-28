@@ -1277,6 +1277,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
+#ifndef __APPLE__
   /* SKY9X board */
   open9x = new Open9xFirmware("opentx-sky9x", QObject::tr("openTx for Sky9x board / 9X"), new Open9xInterface(BOARD_SKY9X), geturl(BOARD_SKY9X), getstamp(BOARD_SKY9X),getrnurl(BOARD_SKY9X), true);
   open9x->setVariantBase(FRSKY_VARIANT);
@@ -1298,7 +1299,8 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
-    
+#endif
+  
   /* Taranis board */
   open9x = new Open9xFirmware("opentx-taranis", QObject::tr("openTx for FrSky Taranis"), new Open9xInterface(BOARD_TARANIS), geturl(BOARD_TARANIS), getstamp(BOARD_TARANIS),getrnurl(BOARD_TARANIS), true);
   open9x->addOption("noheli", QObject::tr("Disable HELI menu and cyclic mix support"));

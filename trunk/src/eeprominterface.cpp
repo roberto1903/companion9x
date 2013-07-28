@@ -553,9 +553,9 @@ void RegisterFirmwares()
   er9x->addOption("noht");
 
   RegisterOpen9xFirmwares();
-
+#ifndef __APPLE__
   firmwares.push_back(new FirmwareInfo("ersky9x", QObject::tr("ersky9x"), new Ersky9xInterface(), "http://ersky9x.googlecode.com/svn/trunk/ersky9x_rom.bin", ERSKY9X_STAMP));
-
+#endif
   default_firmware_variant = GetFirmwareVariant("opentx-stock-heli-templates-en");
 
   RegisterEepromInterfaces();
