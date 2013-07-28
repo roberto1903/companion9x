@@ -446,18 +446,56 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             settings.endGroup();
             if (OldFwRev == 0) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
-                int ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev),
+                int ret;
+                QString rn = GetFirmware(fwToUpdate)->rnurl;
+                if (rn.isEmpty()) {
+                  ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
-                if (ret == QMessageBox::Yes) {
+                } else {
+                  ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Help);
+                }
+                
+                ret = QMessageBox::question(this, "companion9x", tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Help);
+                if (ret == QMessageBox::Help) {
+                  contributorsDialog *cd = new contributorsDialog(this,2,fwToUpdate);
+                  cd->exec();
+                  int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No);
+                  if (ret2 == QMessageBox::Yes) {
+                      download = true;
+                  } else {
+                      ignore = true;
+                  }                                    
+                } else if (ret == QMessageBox::Yes) {
                     download = true;
                 } else {
                     ignore = true;
                 }
             } else if (NewFwRev > OldFwRev) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
-                int ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate).arg(OldFwRev).arg(NewFwRev),
+                QString rn = GetFirmware(fwToUpdate)->rnurl;
+                int ret;
+                if (rn.isEmpty()) {
+                  ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate).arg(OldFwRev).arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
-                if (ret == QMessageBox::Yes) {
+                } else {
+//                  QAbstractButton *myNotesButton = msgBox.addButton(trUtf8("Notes"), QMessageBox::HelpRole);
+                  ret = QMessageBox::question(this, "companion9x", tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate).arg(OldFwRev).arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Help);                  
+                }
+                if (ret == QMessageBox::Help) {
+                  contributorsDialog *cd = new contributorsDialog(this,2,fwToUpdate);
+                  cd->exec();
+                  int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
+                        QMessageBox::Yes | QMessageBox::No);
+                  if (ret2 == QMessageBox::Yes) {
+                      download = true;
+                  } else {
+                      ignore = true;
+                  }                                    
+                } else if (ret == QMessageBox::Yes) {
                     download = true;
                 } else {
                     ignore = true;
@@ -474,8 +512,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                     settings.setValue(fwToUpdate, NewFwRev);
                     settings.endGroup();
                 }
-            }
-            else if (download == true) {
+            } else if (download == true) {
                 downloadedFW = fwToUpdate;
                 QString url = GetFirmware(fwToUpdate)->getUrl(fwToUpdate);
                 QString ext = url.mid(url.lastIndexOf("."));

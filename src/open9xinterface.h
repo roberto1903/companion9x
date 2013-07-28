@@ -84,8 +84,8 @@ class Open9xInterface : public EEPROMInterface
 
 class Open9xFirmware: public FirmwareInfo {
   public:
-    Open9xFirmware(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), bool voice = false):
-      FirmwareInfo(id, name, eepromInterface, url, stamp, voice)
+    Open9xFirmware(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), const QString & rnurl = QString(), bool voice = false):
+      FirmwareInfo(id, name, eepromInterface, url, stamp, rnurl, voice)
     {
       addLanguage("en");
       addLanguage("fr");

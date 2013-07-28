@@ -1132,25 +1132,27 @@ class FirmwareInfo {
     {
     }
 
-    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), bool voice = false):
+    FirmwareInfo(const QString & id, const QString & name, EEPROMInterface * eepromInterface, const QString & url = QString(), const QString & stamp = QString(), const QString & rnurl = QString(), bool voice = false):
       parent(NULL),
       id(id),
       name(name),
       eepromInterface(eepromInterface),
       url(url),
       stamp(stamp),
+      rnurl(rnurl),
       voice(voice),
       variantBase(0)
     {
     }
 
-    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const QString & stamp = QString(), bool voice=false):
+    FirmwareInfo(const QString & id, EEPROMInterface * eepromInterface, const QString & url, const QString & stamp = QString(), const QString & rnurl = QString(), bool voice=false):
       parent(NULL),
       id(id),
       name(QString::null),
       eepromInterface(eepromInterface),
       url(url),
       stamp(stamp),
+      rnurl(rnurl),
       voice(voice),
       variantBase(0)
     {
@@ -1188,6 +1190,14 @@ class FirmwareInfo {
         return url;
     }
 
+    virtual QString getRnUrl(const QString &fwId) {
+      if (rnurl.contains("%1"))
+        return rnurl.arg(fwId);
+      else
+        return rnurl;
+    }
+
+    
     QList<const char *> languages;
     QList<const char *> ttslanguages;
     QList< QList<Option> > opts;
@@ -1197,6 +1207,7 @@ class FirmwareInfo {
     EEPROMInterface * eepromInterface;
     QString url;
     QString stamp;
+    QString rnurl;
     bool voice;
     unsigned int variantBase;
 };
