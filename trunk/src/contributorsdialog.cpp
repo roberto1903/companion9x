@@ -36,18 +36,13 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwI
         break;
       
       case 1:{
-        ui->textBrowser->insertPlainText(CLINESEP);
-        ui->textBrowser->insertPlainText(tr("Companion9x - release notes")+"\n");
-        ui->textBrowser->insertPlainText(CLINESEP);
         QFile file(":/releasenotes");
         if(file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-            ui->textBrowser->insertPlainText(file.readAll());
+          ui->textBrowser->insertHtml(file.readAll());
         }
-        ui->textBrowser->insertPlainText("\n");
-        ui->textBrowser->insertPlainText(CLINESEP);
         ui->textBrowser->setReadOnly(true);
         ui->textBrowser->verticalScrollBar()->setValue(0);
-        this->setWindowTitle(tr("Release Notes"));
+        this->setWindowTitle(tr("Companion9x Release Notes"));
         }
         break;
       case 2:{
