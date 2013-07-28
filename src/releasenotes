@@ -4,7 +4,7 @@
 <li>Add Fw release notes browser</li>
 <li>Simplify burn menu for sky9x and Taranis.</li>
 <li>Fix in telemetry conversion (rssi alarm) for stock board</li>
-<li>Drop support of sky9x boards on MacOS due to missing SAM.BA tool.</li>
+<li>Drop support of sky9x boards on MacOS due to missing SAM-BA tool.</li>
 </ul>
 
 <h2>Version 1.41</h2>
