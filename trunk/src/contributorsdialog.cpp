@@ -8,9 +8,9 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwI
     ui(new Ui::contributorsDialog)
 {
     ui->setupUi(this);
-    ui->textBrowser->insertPlainText(CLINESEP);
     switch (contest) {
       case 0: {
+        ui->textBrowser->insertPlainText(CLINESEP);
         ui->textBrowser->insertPlainText(tr("People who have contributed to this project")+"\n");
         ui->textBrowser->insertPlainText(CLINESEP);
         QFile file(":/contributors");
@@ -36,6 +36,7 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwI
         break;
       
       case 1:{
+        ui->textBrowser->insertPlainText(CLINESEP);
         ui->textBrowser->insertPlainText(tr("Companion9x - release notes")+"\n");
         ui->textBrowser->insertPlainText(CLINESEP);
         QFile file(":/releasenotes");
@@ -52,6 +53,7 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwI
       case 2:{
         QString rn = GetFirmware(fwId)->rnurl;
         if (!rn.isEmpty()) {
+          this->setWindowTitle(tr("OpenTX Release Notes"));
           manager = new QNetworkAccessManager(this);
           connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
           QUrl url(rn);
@@ -78,8 +80,6 @@ contributorsDialog::~contributorsDialog()
 
 void contributorsDialog::replyFinished(QNetworkReply * reply)
 {
-    ui->textBrowser->insertPlainText(tr("Firmware Release Notes")+"\n");
-    ui->textBrowser->insertPlainText(CLINESEP);
     ui->textBrowser->insertHtml(reply->readAll());
 }
 
