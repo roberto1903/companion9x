@@ -92,7 +92,9 @@ int main(int argc, char *argv[])
     QTranslator companion9xTranslator;
     companion9xTranslator.load(":/companion9x_" + locale);
     QTranslator qtTranslator;
-    qtTranslator.load((QString)QT_TRANSLATIONS_DIR + "/qt_" + locale);
+    qtTranslator.load((QString)"qt_" + locale.left(2), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+//    qDebug() << locale;
+//    qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));    
     app.installTranslator(&companion9xTranslator);
     app.installTranslator(&qtTranslator);
 
