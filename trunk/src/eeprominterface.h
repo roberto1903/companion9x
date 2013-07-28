@@ -892,6 +892,7 @@ enum Capability {
  HasMixerNames,
  HasChNames,
  HasCvNames,
+ HasFuncRepeat,
  HasPxxCountry,
  HasPPMStart,
  HasGeneralUnits,
