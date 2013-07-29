@@ -112,6 +112,7 @@ private slots:
     void simulate();
     void contributors();
     void changelog();
+    void fwchangelog();
     void customizeSplash();
     void about();
     void compare();
@@ -198,6 +199,7 @@ private:
     QAction *checkForUpdatesAct;
     QAction *contributorsAct;
     QAction *changelogAct;
+    QAction *fwchangelogAct;
     QAction *compareAct;
     QAction *customizeSplashAct;
     QAction *cutAct;

@@ -2542,7 +2542,7 @@ void ModelEdit::tabCustomSwitches()
         cswitchValue[i]->setAccelerated(true);
         cswitchValue[i]->setDecimals(0);
         cswitchValue[i]->setProperty("index",i);
-        connect(cswitchValue[i],SIGNAL(valueChanged(double)),this,SLOT(customSwitchesEdited()));
+        connect(cswitchValue[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchValue[i],i+1,2);
         cswitchValue[i]->setVisible(false);
 
@@ -2558,7 +2558,7 @@ void ModelEdit::tabCustomSwitches()
         cswitchOffset[i]->setMinimum(-125);
         cswitchOffset[i]->setAccelerated(true);
         cswitchOffset[i]->setDecimals(0);
-        connect(cswitchOffset[i],SIGNAL(valueChanged(double)),this,SLOT(customSwitchesEdited()));
+        connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
         cswitchAnd[i] = new QComboBox(this);
@@ -2858,6 +2858,7 @@ void ModelEdit::customFieldEdited()
 void ModelEdit::customSwitchesEdited()
 {
     if(switchEditLock) return;
+        
     switchEditLock = true;
     int i=-1;
     QString indextext=sender()->property("index").toString();
@@ -2905,6 +2906,7 @@ void ModelEdit::customSwitchesEdited()
         else {
           source=RawSource(g_model.customSw[i].val1);
           g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+          setSwitchWidgetVisibility(i);
         }
         break;
       case (CS_FAMILY_TIMERS): {

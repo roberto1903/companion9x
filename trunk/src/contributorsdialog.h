@@ -13,7 +13,7 @@ class contributorsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit contributorsDialog(QWidget *parent = 0, int contest = 0, QString fwId = QString() );
+    explicit contributorsDialog(QWidget *parent = 0, int contest = 0, QString rnurl = QString() );
     ~contributorsDialog();
 
 private:

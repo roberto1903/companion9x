@@ -3,7 +3,7 @@
 #include <QtGui>
 #define CLINESEP "=====================================================\n"
 
-contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwId) :
+contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString rnurl) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::contributorsDialog)
 {
@@ -46,12 +46,11 @@ contributorsDialog::contributorsDialog(QWidget *parent, int contest, QString fwI
         }
         break;
       case 2:{
-        QString rn = GetFirmware(fwId)->rnurl;
-        if (!rn.isEmpty()) {
+        if (!rnurl.isEmpty()) {
           this->setWindowTitle(tr("OpenTX Release Notes"));
           manager = new QNetworkAccessManager(this);
           connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-          QUrl url(rn);
+          QUrl url(rnurl);
           QNetworkRequest request(url);
           request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
           manager->get(request);

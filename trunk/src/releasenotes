@@ -1,8 +1,11 @@
 <h2>Version 1.43</h2>
 <ul>
-<li>Copy Malfunctions in Custom Functions</li>
+<li>Copy Malfunctions in Custom Functions (Issue 205)</li>
 <li>Enable repeat parameter in functions for all boards</li>
 <li>Remove sink tones from vario for stock/m128 board</li>
+<li>Fix for wrongly named channels in mixerlist (Issue 210)</li>
+<li>Fix while editing custom switches</li>
+<li>Add access to the release notes of currently selected firmware</li>
 </ul>
 
 <h2>Version 1.42</h2>
