@@ -744,6 +744,8 @@ int Open9xInterface::getCapability(const Capability capability)
       return (board==BOARD_SKY9X ? true : false);
     case HasVario:
       return 1;
+    case HasVarioSink:
+      return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     case HasVariants:
       if (IS_TARANIS(board))
         return 0;

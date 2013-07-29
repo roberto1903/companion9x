@@ -2575,52 +2575,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="352"/>
         <location filename="modeledit.ui" line="960"/>
-        <location filename="modeledit.cpp" line="6532"/>
         <location filename="modeledit.cpp" line="6539"/>
-        <location filename="modeledit.cpp" line="6651"/>
-        <location filename="modeledit.cpp" line="6676"/>
-        <location filename="modeledit.cpp" line="6719"/>
-        <location filename="modeledit.cpp" line="6721"/>
-        <location filename="modeledit.cpp" line="6850"/>
+        <location filename="modeledit.cpp" line="6546"/>
+        <location filename="modeledit.cpp" line="6658"/>
+        <location filename="modeledit.cpp" line="6683"/>
+        <location filename="modeledit.cpp" line="6726"/>
+        <location filename="modeledit.cpp" line="6728"/>
+        <location filename="modeledit.cpp" line="6857"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="362"/>
         <location filename="modeledit.ui" line="967"/>
-        <location filename="modeledit.cpp" line="6534"/>
         <location filename="modeledit.cpp" line="6541"/>
-        <location filename="modeledit.cpp" line="6643"/>
-        <location filename="modeledit.cpp" line="6647"/>
-        <location filename="modeledit.cpp" line="6669"/>
-        <location filename="modeledit.cpp" line="6673"/>
-        <location filename="modeledit.cpp" line="6726"/>
-        <location filename="modeledit.cpp" line="6728"/>
-        <location filename="modeledit.cpp" line="6841"/>
-        <location filename="modeledit.cpp" line="6842"/>
+        <location filename="modeledit.cpp" line="6548"/>
+        <location filename="modeledit.cpp" line="6650"/>
+        <location filename="modeledit.cpp" line="6654"/>
+        <location filename="modeledit.cpp" line="6676"/>
+        <location filename="modeledit.cpp" line="6680"/>
+        <location filename="modeledit.cpp" line="6733"/>
+        <location filename="modeledit.cpp" line="6735"/>
+        <location filename="modeledit.cpp" line="6848"/>
+        <location filename="modeledit.cpp" line="6849"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="328"/>
         <location filename="modeledit.ui" line="974"/>
-        <location filename="modeledit.cpp" line="6544"/>
-        <location filename="modeledit.cpp" line="6715"/>
-        <location filename="modeledit.cpp" line="6837"/>
+        <location filename="modeledit.cpp" line="6551"/>
+        <location filename="modeledit.cpp" line="6722"/>
+        <location filename="modeledit.cpp" line="6844"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="372"/>
         <location filename="modeledit.ui" line="981"/>
-        <location filename="modeledit.cpp" line="6560"/>
-        <location filename="modeledit.cpp" line="6644"/>
-        <location filename="modeledit.cpp" line="6648"/>
-        <location filename="modeledit.cpp" line="6668"/>
-        <location filename="modeledit.cpp" line="6672"/>
-        <location filename="modeledit.cpp" line="6751"/>
-        <location filename="modeledit.cpp" line="6845"/>
-        <location filename="modeledit.cpp" line="6846"/>
+        <location filename="modeledit.cpp" line="6567"/>
+        <location filename="modeledit.cpp" line="6651"/>
+        <location filename="modeledit.cpp" line="6655"/>
+        <location filename="modeledit.cpp" line="6675"/>
+        <location filename="modeledit.cpp" line="6679"/>
+        <location filename="modeledit.cpp" line="6758"/>
+        <location filename="modeledit.cpp" line="6852"/>
+        <location filename="modeledit.cpp" line="6853"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
@@ -2727,7 +2727,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="modeledit.ui" line="3760"/>
-        <location filename="modeledit.cpp" line="3598"/>
+        <location filename="modeledit.cpp" line="3605"/>
         <source>Heli Setup</source>
         <translation>Elicottero</translation>
     </message>
@@ -3231,7 +3231,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="10333"/>
         <location filename="modeledit.ui" line="11631"/>
-        <location filename="modeledit.ui" line="21426"/>
         <location filename="modeledit.ui" line="22701"/>
         <location filename="modeledit.ui" line="23040"/>
         <location filename="modeledit.ui" line="23491"/>
@@ -3241,7 +3240,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="10564"/>
         <location filename="modeledit.ui" line="11659"/>
-        <location filename="modeledit.ui" line="21549"/>
         <location filename="modeledit.ui" line="22721"/>
         <location filename="modeledit.ui" line="23060"/>
         <location filename="modeledit.ui" line="23511"/>
@@ -3901,14 +3899,14 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation>Variometro</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21581"/>
         <source>Center Max</source>
-        <translation>Centro Max</translation>
+        <translation type="obsolete">Centro Max</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21565"/>
-        <source>Center Min</source>
-        <translation>Centro Min</translation>
+        <source>Sunk Min</source>
+        <oldsource>Center Min</oldsource>
+        <translation>Minimo Discesa</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21661"/>
@@ -4232,6 +4230,21 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation>Pale dell&apos;elica</translation>
     </message>
     <message>
+        <location filename="modeledit.ui" line="21426"/>
+        <source>Sunk Max</source>
+        <translation>Massimo Discesa</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="21549"/>
+        <source>Raise Max</source>
+        <translation>Massimo Salita</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="21581"/>
+        <source>Raise Min</source>
+        <translation>Minimo Salita</translation>
+    </message>
+    <message>
         <location filename="modeledit.ui" line="21906"/>
         <location filename="modeledit.ui" line="22224"/>
         <source>Volts (V)</source>
@@ -4385,16 +4398,16 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="modeledit.cpp" line="198"/>
         <location filename="modeledit.cpp" line="230"/>
-        <location filename="modeledit.cpp" line="5836"/>
-        <location filename="modeledit.cpp" line="5860"/>
+        <location filename="modeledit.cpp" line="5843"/>
+        <location filename="modeledit.cpp" line="5867"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Up</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="201"/>
         <location filename="modeledit.cpp" line="233"/>
-        <location filename="modeledit.cpp" line="5837"/>
-        <location filename="modeledit.cpp" line="5861"/>
+        <location filename="modeledit.cpp" line="5844"/>
+        <location filename="modeledit.cpp" line="5868"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Down</translation>
     </message>
@@ -4501,318 +4514,318 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation>Impossibile trovare il file sonoro %1!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3381"/>
+        <location filename="modeledit.cpp" line="3388"/>
         <source>Winged Shadow How High</source>
         <translation>Winged Shadow How High</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3384"/>
+        <location filename="modeledit.cpp" line="3391"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (non supportato)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3430"/>
-        <location filename="modeledit.cpp" line="3431"/>
+        <location filename="modeledit.cpp" line="3437"/>
+        <location filename="modeledit.cpp" line="3438"/>
         <source>Range</source>
         <translation>Intervallo</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3593"/>
+        <location filename="modeledit.cpp" line="3600"/>
         <source>Simple 4-CH</source>
         <translation>4 Canali (Modello base)  </translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3594"/>
+        <location filename="modeledit.cpp" line="3601"/>
         <source>T-Cut</source>
         <translation>Taglio Motore</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3595"/>
+        <location filename="modeledit.cpp" line="3602"/>
         <source>Sticky T-Cut</source>
         <translation>Taglio motore con controllo comando</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3596"/>
+        <location filename="modeledit.cpp" line="3603"/>
         <source>V-Tail</source>
         <translation>Coda a V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3597"/>
+        <location filename="modeledit.cpp" line="3604"/>
         <source>Elevon\Delta</source>
         <translation>Elevoni/Ala a delta</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3599"/>
+        <location filename="modeledit.cpp" line="3606"/>
         <source>Heli Setup with gyro gain control</source>
         <translation>Elicottero con controllo giroscopio</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3600"/>
+        <location filename="modeledit.cpp" line="3607"/>
         <source>Gyro gain control</source>
         <translation>Controllo giroscopio</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3601"/>
+        <location filename="modeledit.cpp" line="3608"/>
         <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
         <translation>Elicottero (Assegnazione canali alla Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3602"/>
+        <location filename="modeledit.cpp" line="3609"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Elicottero con controllo giroscopio (Assegnazione canali alla Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3603"/>
+        <location filename="modeledit.cpp" line="3610"/>
         <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Controllo giroscopio (Assegnazione canali alla Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3604"/>
+        <location filename="modeledit.cpp" line="3611"/>
         <source>Servo Test</source>
         <translation>Controllo servocomandi</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3605"/>
+        <location filename="modeledit.cpp" line="3612"/>
         <source>MultiCopter</source>
         <translation>Multirotore</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3606"/>
+        <location filename="modeledit.cpp" line="3613"/>
         <source>Use Model Config Wizard</source>
         <translation>Usa assistente di configurazione modelli</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5303"/>
+        <location filename="modeledit.cpp" line="5310"/>
         <source>Editing curve %1</source>
         <translation>Modifica curva %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5360"/>
+        <location filename="modeledit.cpp" line="5367"/>
         <source>Not enough available mixers!</source>
         <translation>Non ci sono più miscelazioni disponibili!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5415"/>
+        <location filename="modeledit.cpp" line="5422"/>
         <source>Not enough available expos!</source>
         <translation>Non ci sono più esponenziali disponibili!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5560"/>
+        <location filename="modeledit.cpp" line="5567"/>
         <source>Delete Selected Mixes?</source>
         <translation>Cancellare le miscelazioni selezionate ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5599"/>
+        <location filename="modeledit.cpp" line="5606"/>
         <source>Delete Selected Expos?</source>
         <translation>Cancellare le impostazioni dell&apos;esponenziale selezionate ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5827"/>
-        <location filename="modeledit.cpp" line="5851"/>
+        <location filename="modeledit.cpp" line="5834"/>
+        <location filename="modeledit.cpp" line="5858"/>
         <source>&amp;Add</source>
         <translation>&amp;Aggiungi</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5827"/>
-        <location filename="modeledit.cpp" line="5851"/>
+        <location filename="modeledit.cpp" line="5834"/>
+        <location filename="modeledit.cpp" line="5858"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5828"/>
-        <location filename="modeledit.cpp" line="5852"/>
+        <location filename="modeledit.cpp" line="5835"/>
+        <location filename="modeledit.cpp" line="5859"/>
         <source>&amp;Edit</source>
         <translation>&amp;Modifica</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5828"/>
-        <location filename="modeledit.cpp" line="5852"/>
+        <location filename="modeledit.cpp" line="5835"/>
+        <location filename="modeledit.cpp" line="5859"/>
         <source>Enter</source>
         <translation>Invio</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5830"/>
-        <location filename="modeledit.cpp" line="5854"/>
-        <location filename="modeledit.cpp" line="5927"/>
-        <location filename="modeledit.cpp" line="5952"/>
+        <location filename="modeledit.cpp" line="5837"/>
+        <location filename="modeledit.cpp" line="5861"/>
+        <location filename="modeledit.cpp" line="5934"/>
+        <location filename="modeledit.cpp" line="5959"/>
         <source>&amp;Delete</source>
         <translation>&amp;Elimina</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5830"/>
-        <location filename="modeledit.cpp" line="5854"/>
-        <location filename="modeledit.cpp" line="5927"/>
-        <location filename="modeledit.cpp" line="5952"/>
+        <location filename="modeledit.cpp" line="5837"/>
+        <location filename="modeledit.cpp" line="5861"/>
+        <location filename="modeledit.cpp" line="5934"/>
+        <location filename="modeledit.cpp" line="5959"/>
         <source>Delete</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5831"/>
-        <location filename="modeledit.cpp" line="5855"/>
-        <location filename="modeledit.cpp" line="5928"/>
-        <location filename="modeledit.cpp" line="5953"/>
+        <location filename="modeledit.cpp" line="5838"/>
+        <location filename="modeledit.cpp" line="5862"/>
+        <location filename="modeledit.cpp" line="5935"/>
+        <location filename="modeledit.cpp" line="5960"/>
         <source>&amp;Copy</source>
         <translation>Co&amp;pia</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5831"/>
-        <location filename="modeledit.cpp" line="5855"/>
-        <location filename="modeledit.cpp" line="5928"/>
-        <location filename="modeledit.cpp" line="5953"/>
+        <location filename="modeledit.cpp" line="5838"/>
+        <location filename="modeledit.cpp" line="5862"/>
+        <location filename="modeledit.cpp" line="5935"/>
+        <location filename="modeledit.cpp" line="5960"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5832"/>
-        <location filename="modeledit.cpp" line="5856"/>
-        <location filename="modeledit.cpp" line="5929"/>
-        <location filename="modeledit.cpp" line="5954"/>
+        <location filename="modeledit.cpp" line="5839"/>
+        <location filename="modeledit.cpp" line="5863"/>
+        <location filename="modeledit.cpp" line="5936"/>
+        <location filename="modeledit.cpp" line="5961"/>
         <source>&amp;Cut</source>
         <translation>&amp;Taglia</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5832"/>
-        <location filename="modeledit.cpp" line="5856"/>
-        <location filename="modeledit.cpp" line="5929"/>
-        <location filename="modeledit.cpp" line="5954"/>
+        <location filename="modeledit.cpp" line="5839"/>
+        <location filename="modeledit.cpp" line="5863"/>
+        <location filename="modeledit.cpp" line="5936"/>
+        <location filename="modeledit.cpp" line="5961"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5833"/>
-        <location filename="modeledit.cpp" line="5857"/>
-        <location filename="modeledit.cpp" line="5930"/>
-        <location filename="modeledit.cpp" line="5955"/>
+        <location filename="modeledit.cpp" line="5840"/>
+        <location filename="modeledit.cpp" line="5864"/>
+        <location filename="modeledit.cpp" line="5937"/>
+        <location filename="modeledit.cpp" line="5962"/>
         <source>&amp;Paste</source>
         <translation>&amp;Incolla</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5833"/>
-        <location filename="modeledit.cpp" line="5857"/>
-        <location filename="modeledit.cpp" line="5930"/>
-        <location filename="modeledit.cpp" line="5955"/>
+        <location filename="modeledit.cpp" line="5840"/>
+        <location filename="modeledit.cpp" line="5864"/>
+        <location filename="modeledit.cpp" line="5937"/>
+        <location filename="modeledit.cpp" line="5962"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5834"/>
-        <location filename="modeledit.cpp" line="5858"/>
+        <location filename="modeledit.cpp" line="5841"/>
+        <location filename="modeledit.cpp" line="5865"/>
         <source>Du&amp;plicate</source>
         <translation>Dup&amp;lica</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5834"/>
-        <location filename="modeledit.cpp" line="5858"/>
+        <location filename="modeledit.cpp" line="5841"/>
+        <location filename="modeledit.cpp" line="5865"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6168"/>
+        <location filename="modeledit.cpp" line="6175"/>
         <source>Are you sure you want to delete curve %1 ?</source>
         <translation>Sicuro di voler cancella re la curva %1 ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6567"/>
-        <location filename="modeledit.cpp" line="6573"/>
-        <location filename="modeledit.cpp" line="6758"/>
-        <location filename="modeledit.cpp" line="6764"/>
+        <location filename="modeledit.cpp" line="6574"/>
+        <location filename="modeledit.cpp" line="6580"/>
+        <location filename="modeledit.cpp" line="6765"/>
+        <location filename="modeledit.cpp" line="6771"/>
         <source>AIL2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6580"/>
-        <location filename="modeledit.cpp" line="6586"/>
-        <location filename="modeledit.cpp" line="6771"/>
-        <location filename="modeledit.cpp" line="6777"/>
+        <location filename="modeledit.cpp" line="6587"/>
+        <location filename="modeledit.cpp" line="6593"/>
+        <location filename="modeledit.cpp" line="6778"/>
+        <location filename="modeledit.cpp" line="6784"/>
         <source>ELE2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6590"/>
-        <location filename="modeledit.cpp" line="6591"/>
-        <location filename="modeledit.cpp" line="6781"/>
-        <location filename="modeledit.cpp" line="6782"/>
-        <location filename="modeledit.cpp" line="6876"/>
-        <location filename="modeledit.cpp" line="6877"/>
+        <location filename="modeledit.cpp" line="6597"/>
+        <location filename="modeledit.cpp" line="6598"/>
+        <location filename="modeledit.cpp" line="6788"/>
+        <location filename="modeledit.cpp" line="6789"/>
+        <location filename="modeledit.cpp" line="6883"/>
+        <location filename="modeledit.cpp" line="6884"/>
         <source>FLAPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6605"/>
-        <location filename="modeledit.cpp" line="6611"/>
-        <location filename="modeledit.cpp" line="6796"/>
-        <location filename="modeledit.cpp" line="6802"/>
-        <location filename="modeledit.cpp" line="6891"/>
-        <location filename="modeledit.cpp" line="6897"/>
+        <location filename="modeledit.cpp" line="6612"/>
+        <location filename="modeledit.cpp" line="6618"/>
+        <location filename="modeledit.cpp" line="6803"/>
+        <location filename="modeledit.cpp" line="6809"/>
+        <location filename="modeledit.cpp" line="6898"/>
+        <location filename="modeledit.cpp" line="6904"/>
         <source>FLAP%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6645"/>
-        <location filename="modeledit.cpp" line="6649"/>
-        <location filename="modeledit.cpp" line="6670"/>
-        <location filename="modeledit.cpp" line="6674"/>
+        <location filename="modeledit.cpp" line="6652"/>
+        <location filename="modeledit.cpp" line="6656"/>
+        <location filename="modeledit.cpp" line="6677"/>
+        <location filename="modeledit.cpp" line="6681"/>
         <source>PITCH</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6658"/>
-        <location filename="modeledit.cpp" line="6659"/>
-        <location filename="modeledit.cpp" line="6662"/>
-        <location filename="modeledit.cpp" line="6663"/>
-        <location filename="modeledit.cpp" line="6683"/>
-        <location filename="modeledit.cpp" line="6684"/>
-        <location filename="modeledit.cpp" line="6687"/>
-        <location filename="modeledit.cpp" line="6688"/>
+        <location filename="modeledit.cpp" line="6665"/>
+        <location filename="modeledit.cpp" line="6666"/>
+        <location filename="modeledit.cpp" line="6669"/>
+        <location filename="modeledit.cpp" line="6670"/>
+        <location filename="modeledit.cpp" line="6690"/>
+        <location filename="modeledit.cpp" line="6691"/>
+        <location filename="modeledit.cpp" line="6694"/>
+        <location filename="modeledit.cpp" line="6695"/>
         <source>GYRO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6806"/>
-        <location filename="modeledit.cpp" line="6807"/>
+        <location filename="modeledit.cpp" line="6813"/>
+        <location filename="modeledit.cpp" line="6814"/>
         <source>SPOIL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6821"/>
-        <location filename="modeledit.cpp" line="6827"/>
+        <location filename="modeledit.cpp" line="6828"/>
+        <location filename="modeledit.cpp" line="6834"/>
         <source>SPOIL%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6866"/>
-        <location filename="modeledit.cpp" line="6872"/>
+        <location filename="modeledit.cpp" line="6873"/>
+        <location filename="modeledit.cpp" line="6879"/>
         <source>RUD2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7075"/>
+        <location filename="modeledit.cpp" line="7082"/>
         <source>Really clear existing mixes on CH6?</source>
         <translation>Sicuri di voler cancellare le miscelazioni sul canale 6 ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7187"/>
+        <location filename="modeledit.cpp" line="7194"/>
         <source>Really clear existing mixes on CH5?</source>
         <translation>Sicuri di voler cancellare le miscelazioni sul canale 5?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7298"/>
+        <location filename="modeledit.cpp" line="7305"/>
         <source>Not enough free points in eeprom to store the curve.</source>
         <translation>Non ci sono punti liberi a sufficienza per il tipo di curva.</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="196"/>
         <location filename="modeledit.cpp" line="228"/>
-        <location filename="modeledit.cpp" line="5836"/>
-        <location filename="modeledit.cpp" line="5860"/>
+        <location filename="modeledit.cpp" line="5843"/>
+        <location filename="modeledit.cpp" line="5867"/>
         <source>Move Up</source>
         <translation>Muovi in Su</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="199"/>
         <location filename="modeledit.cpp" line="231"/>
-        <location filename="modeledit.cpp" line="5837"/>
-        <location filename="modeledit.cpp" line="5861"/>
+        <location filename="modeledit.cpp" line="5844"/>
+        <location filename="modeledit.cpp" line="5868"/>
         <source>Move Down</source>
         <translation>Muovi in Giù</translation>
     </message>
@@ -4867,44 +4880,44 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6287"/>
+        <location filename="modeledit.cpp" line="6294"/>
         <source>Apply Template?</source>
         <translation>Applicare il modelo ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6287"/>
+        <location filename="modeledit.cpp" line="6294"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Applicare il modello &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6312"/>
+        <location filename="modeledit.cpp" line="6319"/>
         <source>Clear Expos?</source>
         <translation>Cancellare gli esponenziali ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6312"/>
+        <location filename="modeledit.cpp" line="6319"/>
         <source>Really clear all the expos?</source>
         <translation>Sicuri di voler cancellare gli esponenziali ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6323"/>
-        <location filename="modeledit.cpp" line="7075"/>
-        <location filename="modeledit.cpp" line="7187"/>
+        <location filename="modeledit.cpp" line="6330"/>
+        <location filename="modeledit.cpp" line="7082"/>
+        <location filename="modeledit.cpp" line="7194"/>
         <source>Clear Mixes?</source>
         <translation>Cancellare le miscelazioni ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6323"/>
+        <location filename="modeledit.cpp" line="6330"/>
         <source>Really clear all the mixes?</source>
         <translation>Sicuri di voler cancellare le miscelazioni ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6334"/>
+        <location filename="modeledit.cpp" line="6341"/>
         <source>Clear Curves?</source>
         <translation>Cancellare le curve ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6334"/>
+        <location filename="modeledit.cpp" line="6341"/>
         <source>Really clear all the curves?</source>
         <translation>Sicuri di voler cancellare le curve ?</translation>
     </message>
@@ -5893,108 +5906,80 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <translation></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1125"/>
         <source>Support for frsky telemetry mod</source>
         <translation>Supporto per la modifica per la telemetria FrSky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1125"/>
         <source>Support for jeti telemetry mod</source>
         <translation>Supporto per la modifica per la telemetria Jeti</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1125"/>
         <source>Support for receiving ardupilot data</source>
         <translation>Supporto per la modifica per la ricezione dati ardupilot</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
-        <location filename="open9xinterface.cpp" line="1122"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1125"/>
         <source>Support for receiving NMEA data</source>
         <translation>Supporto per la modifica per la ricezione dati NMEA</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1120"/>
+        <location filename="open9xinterface.cpp" line="1123"/>
         <source>Support for telemetry easy board</source>
         <translation>Supporto per la scheda Telemetrez</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1121"/>
+        <location filename="open9xinterface.cpp" line="1124"/>
         <source>Rotary Encoder use in menus navigation</source>
         <translation>Utilizzo dell&apos;encoder rotativo nella navigazione dei menù</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1126"/>
         <source>Possibility to enable FAI MODE at field</source>
         <translation>Impostazione della modalità FAI da radio</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1123"/>
+        <location filename="open9xinterface.cpp" line="1126"/>
         <source>FAI MODE always enabled</source>
         <translation>Modalità FAI sempre attiva</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1125"/>
+        <location filename="open9xinterface.cpp" line="1128"/>
         <source>openTx for 9X board</source>
         <translation>openTx per scheda orriginale</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1127"/>
-        <location filename="open9xinterface.cpp" line="1162"/>
-        <location filename="open9xinterface.cpp" line="1193"/>
-        <location filename="open9xinterface.cpp" line="1226"/>
-        <location filename="open9xinterface.cpp" line="1255"/>
-        <source>Enable heli menu and cyclic mix support</source>
-        <translation>Abilita supporto menù elicotteri e miscelazione ciclico</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1128"/>
-        <location filename="open9xinterface.cpp" line="1163"/>
-        <location filename="open9xinterface.cpp" line="1194"/>
-        <location filename="open9xinterface.cpp" line="1227"/>
-        <location filename="open9xinterface.cpp" line="1256"/>
-        <location filename="open9xinterface.cpp" line="1285"/>
-        <source>Enable TEMPLATES menu</source>
-        <translation>Abilita menù dei MODELLI</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1129"/>
-        <location filename="open9xinterface.cpp" line="1164"/>
-        <location filename="open9xinterface.cpp" line="1195"/>
-        <location filename="open9xinterface.cpp" line="1228"/>
-        <source>No splash screen</source>
-        <translation>Disabilita schermata di avvio</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1130"/>
         <location filename="open9xinterface.cpp" line="1165"/>
         <location filename="open9xinterface.cpp" line="1196"/>
         <location filename="open9xinterface.cpp" line="1229"/>
-        <location filename="open9xinterface.cpp" line="1257"/>
-        <location filename="open9xinterface.cpp" line="1286"/>
-        <source>No flight modes</source>
-        <translation>Disabilita supporto fasi di volo</translation>
+        <location filename="open9xinterface.cpp" line="1258"/>
+        <source>Enable heli menu and cyclic mix support</source>
+        <translation>Abilita supporto menù elicotteri e miscelazione ciclico</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1131"/>
         <location filename="open9xinterface.cpp" line="1166"/>
         <location filename="open9xinterface.cpp" line="1197"/>
         <location filename="open9xinterface.cpp" line="1230"/>
-        <location filename="open9xinterface.cpp" line="1258"/>
-        <location filename="open9xinterface.cpp" line="1287"/>
-        <source>Disable curves menus</source>
-        <translation>Disabilita il menu delle curve</translation>
+        <location filename="open9xinterface.cpp" line="1259"/>
+        <location filename="open9xinterface.cpp" line="1288"/>
+        <source>Enable TEMPLATES menu</source>
+        <translation>Abilita menù dei MODELLI</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1132"/>
         <location filename="open9xinterface.cpp" line="1167"/>
         <location filename="open9xinterface.cpp" line="1198"/>
         <location filename="open9xinterface.cpp" line="1231"/>
-        <source>Support for radio modified with regular speaker</source>
-        <translation>Supporto per modifica con altoparlante</translation>
+        <source>No splash screen</source>
+        <translation>Disabilita schermata di avvio</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1133"/>
@@ -6002,157 +5987,163 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="1199"/>
         <location filename="open9xinterface.cpp" line="1232"/>
         <location filename="open9xinterface.cpp" line="1260"/>
-        <source>Used if you have modified your radio with voice mode</source>
-        <translation>Utilizzato per la gestione del modulo audio</translation>
+        <location filename="open9xinterface.cpp" line="1289"/>
+        <source>No flight modes</source>
+        <translation>Disabilita supporto fasi di volo</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1134"/>
         <location filename="open9xinterface.cpp" line="1169"/>
         <location filename="open9xinterface.cpp" line="1200"/>
         <location filename="open9xinterface.cpp" line="1233"/>
-        <source>Used if you have modified your radio with haptic mode</source>
-        <translation>Abilita supporto vibrazione</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1143"/>
-        <location filename="open9xinterface.cpp" line="1178"/>
-        <location filename="open9xinterface.cpp" line="1208"/>
-        <location filename="open9xinterface.cpp" line="1241"/>
-        <location filename="open9xinterface.cpp" line="1269"/>
-        <location filename="open9xinterface.cpp" line="1293"/>
-        <source>In model setup menus automatically set source by moving some of them</source>
-        <translation>Selezione automatica delle sorgenti nei menù tramite loro azionamento</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1147"/>
-        <location filename="open9xinterface.cpp" line="1182"/>
-        <location filename="open9xinterface.cpp" line="1211"/>
-        <location filename="open9xinterface.cpp" line="1244"/>
-        <location filename="open9xinterface.cpp" line="1273"/>
-        <location filename="open9xinterface.cpp" line="1297"/>
-        <source>Battery graph</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1149"/>
-        <location filename="open9xinterface.cpp" line="1184"/>
-        <location filename="open9xinterface.cpp" line="1213"/>
-        <location filename="open9xinterface.cpp" line="1246"/>
-        <source>Enable the throttle trace in Statistics</source>
-        <translation>Abilita il grafico utilizzo motore nelle statistiche</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1150"/>
-        <source>EEprom write progress bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1152"/>
-        <location filename="open9xinterface.cpp" line="1216"/>
-        <source>No Winged Shadow How High support</source>
-        <translation>Disabilita supporto Winged Shadow How High</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1153"/>
-        <location filename="open9xinterface.cpp" line="1217"/>
-        <source>No vario support</source>
-        <translation>Nessun Variometro</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1154"/>
-        <location filename="open9xinterface.cpp" line="1218"/>
-        <source>No GPS support</source>
-        <translation>Disabilita supporto GPS</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1155"/>
-        <location filename="open9xinterface.cpp" line="1219"/>
-        <source>No gauges in the custom telemetry screen</source>
-        <translation>Disabilita schermate telemetriche a barre</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1160"/>
-        <source>openTx for M128 / 9X board</source>
-        <translation>openTx per scheda originale con CPU ATMEGA 128</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1191"/>
-        <source>openTx for 9XR</source>
-        <translation>openTx per 9XR</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1224"/>
-        <source>openTx for 9XR with M128 chip</source>
-        <translation>openTx per 9XR con chip M128</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1253"/>
-        <source>openTx for Gruvin9x board / 9X</source>
-        <translation>openTX per piastra Gruivin9X</translation>
-    </message>
-    <message>
         <location filename="open9xinterface.cpp" line="1261"/>
-        <source>Support of FrSky PXX protocol</source>
-        <translation>Supporto del protocollo PXX FrSky</translation>
+        <location filename="open9xinterface.cpp" line="1290"/>
+        <source>Disable curves menus</source>
+        <translation>Disabilita il menu delle curve</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1305"/>
-        <source>openTx for FrSky Taranis</source>
-        <translation>openTx per FrSky Taranis</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1306"/>
-        <location filename="open9xinterface.cpp" line="1317"/>
-        <source>Disable HELI menu and cyclic mix support</source>
-        <translation>Disabilita il menù HELI e le funzioni del piatto ciclico</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1307"/>
-        <location filename="open9xinterface.cpp" line="1318"/>
-        <source>Disable TEMPLATES menu</source>
-        <translation>Disabilita menù dei MODELLI</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1308"/>
-        <location filename="open9xinterface.cpp" line="1319"/>
-        <source>Disable Global variables</source>
-        <translation>Disabilita variabili globali</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1316"/>
-        <source>openTx for FrSky Taranis Rev4a</source>
-        <translation>openTx per FrSky Taranis Rev4a</translation>
+        <location filename="open9xinterface.cpp" line="1135"/>
+        <location filename="open9xinterface.cpp" line="1170"/>
+        <location filename="open9xinterface.cpp" line="1201"/>
+        <location filename="open9xinterface.cpp" line="1234"/>
+        <source>Support for radio modified with regular speaker</source>
+        <translation>Supporto per modifica con altoparlante</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1136"/>
         <location filename="open9xinterface.cpp" line="1171"/>
         <location filename="open9xinterface.cpp" line="1202"/>
         <location filename="open9xinterface.cpp" line="1235"/>
-        <location filename="open9xinterface.cpp" line="1262"/>
-        <source>Support for DSM2 modules</source>
-        <translation>Supporto per moduli DSM2</translation>
+        <location filename="open9xinterface.cpp" line="1263"/>
+        <source>Used if you have modified your radio with voice mode</source>
+        <translation>Utilizzato per la gestione del modulo audio</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1137"/>
         <location filename="open9xinterface.cpp" line="1172"/>
         <location filename="open9xinterface.cpp" line="1203"/>
         <location filename="open9xinterface.cpp" line="1236"/>
-        <location filename="open9xinterface.cpp" line="1264"/>
-        <location filename="open9xinterface.cpp" line="1288"/>
-        <source>PPM center adjustment in limits</source>
-        <translation>Regolazione del centro PPM nel menù limiti</translation>
+        <source>Used if you have modified your radio with haptic mode</source>
+        <translation>Abilita supporto vibrazione</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1138"/>
-        <location filename="open9xinterface.cpp" line="1173"/>
-        <location filename="open9xinterface.cpp" line="1204"/>
-        <location filename="open9xinterface.cpp" line="1237"/>
-        <location filename="open9xinterface.cpp" line="1265"/>
-        <location filename="open9xinterface.cpp" line="1289"/>
+        <location filename="open9xinterface.cpp" line="1146"/>
+        <location filename="open9xinterface.cpp" line="1181"/>
+        <location filename="open9xinterface.cpp" line="1211"/>
+        <location filename="open9xinterface.cpp" line="1244"/>
+        <location filename="open9xinterface.cpp" line="1272"/>
+        <location filename="open9xinterface.cpp" line="1296"/>
+        <source>In model setup menus automatically set source by moving some of them</source>
+        <translation>Selezione automatica delle sorgenti nei menù tramite loro azionamento</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1150"/>
+        <location filename="open9xinterface.cpp" line="1185"/>
+        <location filename="open9xinterface.cpp" line="1214"/>
+        <location filename="open9xinterface.cpp" line="1247"/>
+        <location filename="open9xinterface.cpp" line="1276"/>
+        <location filename="open9xinterface.cpp" line="1300"/>
+        <source>Battery graph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1152"/>
+        <location filename="open9xinterface.cpp" line="1187"/>
+        <location filename="open9xinterface.cpp" line="1216"/>
+        <location filename="open9xinterface.cpp" line="1249"/>
+        <source>Enable the throttle trace in Statistics</source>
+        <translation>Abilita il grafico utilizzo motore nelle statistiche</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1153"/>
+        <source>EEprom write progress bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1155"/>
+        <location filename="open9xinterface.cpp" line="1219"/>
+        <source>No Winged Shadow How High support</source>
+        <translation>Disabilita supporto Winged Shadow How High</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1156"/>
+        <location filename="open9xinterface.cpp" line="1220"/>
+        <source>No vario support</source>
+        <translation>Nessun Variometro</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1157"/>
+        <location filename="open9xinterface.cpp" line="1221"/>
+        <source>No GPS support</source>
+        <translation>Disabilita supporto GPS</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1158"/>
+        <location filename="open9xinterface.cpp" line="1222"/>
+        <source>No gauges in the custom telemetry screen</source>
+        <translation>Disabilita schermate telemetriche a barre</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1163"/>
+        <source>openTx for M128 / 9X board</source>
+        <translation>openTx per scheda originale con CPU ATMEGA 128</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1194"/>
+        <source>openTx for 9XR</source>
+        <translation>openTx per 9XR</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1227"/>
+        <source>openTx for 9XR with M128 chip</source>
+        <translation>openTx per 9XR con chip M128</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1256"/>
+        <source>openTx for Gruvin9x board / 9X</source>
+        <translation>openTX per piastra Gruivin9X</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1264"/>
+        <source>Support of FrSky PXX protocol</source>
+        <translation>Supporto del protocollo PXX FrSky</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1308"/>
+        <source>openTx for FrSky Taranis</source>
+        <translation>openTx per FrSky Taranis</translation>
+    </message>
+    <message>
         <location filename="open9xinterface.cpp" line="1309"/>
         <location filename="open9xinterface.cpp" line="1320"/>
-        <source>PPM values displayed in us</source>
-        <translation>Valori del PPM in uSec</translation>
+        <source>Disable HELI menu and cyclic mix support</source>
+        <translation>Disabilita il menù HELI e le funzioni del piatto ciclico</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1310"/>
+        <location filename="open9xinterface.cpp" line="1321"/>
+        <source>Disable TEMPLATES menu</source>
+        <translation>Disabilita menù dei MODELLI</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1311"/>
+        <location filename="open9xinterface.cpp" line="1322"/>
+        <source>Disable Global variables</source>
+        <translation>Disabilita variabili globali</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1319"/>
+        <source>openTx for FrSky Taranis Rev4a</source>
+        <translation>openTx per FrSky Taranis Rev4a</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1139"/>
+        <location filename="open9xinterface.cpp" line="1174"/>
+        <location filename="open9xinterface.cpp" line="1205"/>
+        <location filename="open9xinterface.cpp" line="1238"/>
+        <location filename="open9xinterface.cpp" line="1265"/>
+        <source>Support for DSM2 modules</source>
+        <translation>Supporto per moduli DSM2</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1140"/>
@@ -6161,15 +6152,37 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="open9xinterface.cpp" line="1239"/>
         <location filename="open9xinterface.cpp" line="1267"/>
         <location filename="open9xinterface.cpp" line="1291"/>
-        <source>Symetrical Limits</source>
-        <translation>Limiti Simmetrici</translation>
+        <source>PPM center adjustment in limits</source>
+        <translation>Regolazione del centro PPM nel menù limiti</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1121"/>
+        <location filename="open9xinterface.cpp" line="1141"/>
+        <location filename="open9xinterface.cpp" line="1176"/>
         <location filename="open9xinterface.cpp" line="1207"/>
         <location filename="open9xinterface.cpp" line="1240"/>
         <location filename="open9xinterface.cpp" line="1268"/>
         <location filename="open9xinterface.cpp" line="1292"/>
+        <location filename="open9xinterface.cpp" line="1312"/>
+        <location filename="open9xinterface.cpp" line="1323"/>
+        <source>PPM values displayed in us</source>
+        <translation>Valori del PPM in uSec</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1143"/>
+        <location filename="open9xinterface.cpp" line="1178"/>
+        <location filename="open9xinterface.cpp" line="1209"/>
+        <location filename="open9xinterface.cpp" line="1242"/>
+        <location filename="open9xinterface.cpp" line="1270"/>
+        <location filename="open9xinterface.cpp" line="1294"/>
+        <source>Symetrical Limits</source>
+        <translation>Limiti Simmetrici</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1124"/>
+        <location filename="open9xinterface.cpp" line="1210"/>
+        <location filename="open9xinterface.cpp" line="1243"/>
+        <location filename="open9xinterface.cpp" line="1271"/>
+        <location filename="open9xinterface.cpp" line="1295"/>
         <source>Pots use in menus navigation</source>
         <translation>Utilizzo dei potenziometri per la navigazione nei menù</translation>
     </message>
@@ -6181,98 +6194,98 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
 la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1142"/>
-        <location filename="open9xinterface.cpp" line="1177"/>
+        <location filename="open9xinterface.cpp" line="1145"/>
+        <location filename="open9xinterface.cpp" line="1180"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Abilita il supporto per la scheda SmartiePart versione 2.2</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1144"/>
-        <location filename="open9xinterface.cpp" line="1179"/>
-        <location filename="open9xinterface.cpp" line="1209"/>
-        <location filename="open9xinterface.cpp" line="1242"/>
-        <location filename="open9xinterface.cpp" line="1270"/>
-        <location filename="open9xinterface.cpp" line="1294"/>
+        <location filename="open9xinterface.cpp" line="1147"/>
+        <location filename="open9xinterface.cpp" line="1182"/>
+        <location filename="open9xinterface.cpp" line="1212"/>
+        <location filename="open9xinterface.cpp" line="1245"/>
+        <location filename="open9xinterface.cpp" line="1273"/>
+        <location filename="open9xinterface.cpp" line="1297"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Selezione automatica degli switch nei menù tramite loro azionamento</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1145"/>
-        <location filename="open9xinterface.cpp" line="1180"/>
-        <location filename="open9xinterface.cpp" line="1271"/>
-        <location filename="open9xinterface.cpp" line="1295"/>
+        <location filename="open9xinterface.cpp" line="1148"/>
+        <location filename="open9xinterface.cpp" line="1183"/>
+        <location filename="open9xinterface.cpp" line="1274"/>
+        <location filename="open9xinterface.cpp" line="1298"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Abilita l&apos;azzeramento di un valore mediante pressione contemporanea di tasti</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1146"/>
-        <location filename="open9xinterface.cpp" line="1181"/>
-        <location filename="open9xinterface.cpp" line="1210"/>
-        <location filename="open9xinterface.cpp" line="1243"/>
-        <location filename="open9xinterface.cpp" line="1272"/>
-        <location filename="open9xinterface.cpp" line="1296"/>
+        <location filename="open9xinterface.cpp" line="1149"/>
+        <location filename="open9xinterface.cpp" line="1184"/>
+        <location filename="open9xinterface.cpp" line="1213"/>
+        <location filename="open9xinterface.cpp" line="1246"/>
+        <location filename="open9xinterface.cpp" line="1275"/>
+        <location filename="open9xinterface.cpp" line="1299"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Disabilita grafica per caselle di spunta e cursori </translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1148"/>
-        <location filename="open9xinterface.cpp" line="1183"/>
-        <location filename="open9xinterface.cpp" line="1212"/>
-        <location filename="open9xinterface.cpp" line="1245"/>
-        <location filename="open9xinterface.cpp" line="1274"/>
-        <location filename="open9xinterface.cpp" line="1298"/>
-        <source>Don&apos;t use bold font for highlighting active items</source>
-        <translation>Non utilizzare font in grassetto per evidenziare le voci attive</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1185"/>
-        <location filename="open9xinterface.cpp" line="1214"/>
-        <location filename="open9xinterface.cpp" line="1247"/>
-        <location filename="open9xinterface.cpp" line="1275"/>
-        <source>EEprom write Progress bar</source>
-        <translation>Barra di avanzamento durante la scrittura della eeprom</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1151"/>
         <location filename="open9xinterface.cpp" line="1186"/>
         <location filename="open9xinterface.cpp" line="1215"/>
         <location filename="open9xinterface.cpp" line="1248"/>
-        <location filename="open9xinterface.cpp" line="1276"/>
+        <location filename="open9xinterface.cpp" line="1277"/>
+        <location filename="open9xinterface.cpp" line="1301"/>
+        <source>Don&apos;t use bold font for highlighting active items</source>
+        <translation>Non utilizzare font in grassetto per evidenziare le voci attive</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1188"/>
+        <location filename="open9xinterface.cpp" line="1217"/>
+        <location filename="open9xinterface.cpp" line="1250"/>
+        <location filename="open9xinterface.cpp" line="1278"/>
+        <source>EEprom write Progress bar</source>
+        <translation>Barra di avanzamento durante la scrittura della eeprom</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1154"/>
+        <location filename="open9xinterface.cpp" line="1189"/>
+        <location filename="open9xinterface.cpp" line="1218"/>
+        <location filename="open9xinterface.cpp" line="1251"/>
+        <location filename="open9xinterface.cpp" line="1279"/>
         <source>Imperial units</source>
         <translation>Unità Imperiali nella telemetria</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1282"/>
+        <location filename="open9xinterface.cpp" line="1285"/>
         <source>openTx for Sky9x board / 9X</source>
         <translation>openTx per piastra sky9x</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1299"/>
+        <location filename="open9xinterface.cpp" line="1302"/>
         <source>Bluetooth interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1139"/>
-        <location filename="open9xinterface.cpp" line="1174"/>
-        <location filename="open9xinterface.cpp" line="1205"/>
-        <location filename="open9xinterface.cpp" line="1238"/>
-        <location filename="open9xinterface.cpp" line="1266"/>
-        <location filename="open9xinterface.cpp" line="1290"/>
+        <location filename="open9xinterface.cpp" line="1142"/>
+        <location filename="open9xinterface.cpp" line="1177"/>
+        <location filename="open9xinterface.cpp" line="1208"/>
+        <location filename="open9xinterface.cpp" line="1241"/>
+        <location filename="open9xinterface.cpp" line="1269"/>
+        <location filename="open9xinterface.cpp" line="1293"/>
         <source>Global variables</source>
         <translation>Variabili Globali</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1259"/>
+        <location filename="open9xinterface.cpp" line="1262"/>
         <source>Support for SD memory card</source>
         <translation>Supporto memorie SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1262"/>
+        <location filename="open9xinterface.cpp" line="1265"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Supporto per moduli DSM2 usando il ppm invece della seriale</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1284"/>
+        <location filename="open9xinterface.cpp" line="1287"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Abilita il menù HELI e le funzioni del piatto ciclico</translation>
     </message>
@@ -6823,7 +6836,7 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     <message>
         <location filename="ersky9xinterface.cpp" line="254"/>
         <location filename="mdichild.cpp" line="159"/>
-        <location filename="modeledit.cpp" line="6153"/>
+        <location filename="modeledit.cpp" line="6160"/>
         <location filename="open9xinterface.cpp" line="472"/>
         <source>Warning</source>
         <translation>Avviso</translation>
@@ -6876,7 +6889,7 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="160"/>
-        <location filename="modeledit.cpp" line="6154"/>
+        <location filename="modeledit.cpp" line="6161"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation>Il simulatore per questo firmware non è ancora disponibile</translation>
     </message>
@@ -6906,13 +6919,13 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1399"/>
-        <location filename="modeledit.cpp" line="3650"/>
+        <location filename="modeledit.cpp" line="3657"/>
         <source>Flight Mode 0 (Default)</source>
         <translation>Fase di volo 0 (Predefinita)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1401"/>
-        <location filename="modeledit.cpp" line="3652"/>
+        <location filename="modeledit.cpp" line="3659"/>
         <source>FM %1</source>
         <translation>FV %1</translation>
     </message>
