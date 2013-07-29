@@ -1592,7 +1592,7 @@ void ModelEdit::tabMixes()
             } else {
               str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
               if (GetEepromInterface()->getCapability(HasChNames)) {
-                QString name=g_model.limitData[curDest].name;
+                QString name=g_model.limitData[curDest-1].name;
                 if (!name.isEmpty()) {
                   name.append("     ");
                   str=name.left(6);
