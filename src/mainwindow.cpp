@@ -462,7 +462,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 msgBox.resize(0,0);
                 msgBox.exec();
                 if( msgBox.clickedButton() == rnButton ) {
-                  contributorsDialog *cd = new contributorsDialog(this,2,fwToUpdate);
+                  contributorsDialog *cd = new contributorsDialog(this,2,rn);
                   cd->exec();
                   int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
@@ -491,7 +491,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
                 msgBox.resize(0,0);
                 msgBox.exec(); 
                 if( msgBox.clickedButton() == rnButton ) {
-                  contributorsDialog *cd = new contributorsDialog(this,2,fwToUpdate);
+                  contributorsDialog *cd = new contributorsDialog(this,2,rn);
                   cd->exec();
                   int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
                         QMessageBox::Yes | QMessageBox::No);
@@ -719,6 +719,17 @@ void MainWindow::changelog()
     cd->exec();
 }
 
+void MainWindow::fwchangelog()
+{
+    FirmwareInfo *currfirm = GetCurrentFirmware();
+    QString rn=currfirm->rnurl;
+    if (rn.isEmpty()) {
+      QMessageBox::information(this, tr("Firmware updates"), tr("Current firmware does not provide release notes informations."));
+    } else {
+      contributorsDialog *cd = new contributorsDialog(this,2, rn);
+      cd->exec();
+    }
+}
 
 void MainWindow::customizeSplash()
 {    
@@ -1588,6 +1599,10 @@ void MainWindow::createActions()
     changelogAct = new QAction(QIcon(":/images/changelog.png"), tr("ChangeLog..."), this);
     changelogAct->setStatusTip(tr("Show companion9x changelog"));
     connect(changelogAct, SIGNAL(triggered()), this, SLOT(changelog()));
+
+    fwchangelogAct = new QAction(QIcon(":/images/changelog.png"), tr("Firmware ChangeLog..."), this);
+    fwchangelogAct->setStatusTip(tr("Show firmware changelog"));
+    connect(fwchangelogAct, SIGNAL(triggered()), this, SLOT(fwchangelog()));
     
     compareAct = new QAction(QIcon(":/images/compare.png"), tr("Compare..."), this);
     compareAct->setStatusTip(tr("Compare models"));
@@ -1800,6 +1815,7 @@ void MainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(contributorsAct);
     helpMenu->addAction(changelogAct);
+    helpMenu->addAction(fwchangelogAct);
 }
  
 QMenu *MainWindow::createRecentFileMenu()
