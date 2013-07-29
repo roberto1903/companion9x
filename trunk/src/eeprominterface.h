@@ -930,6 +930,7 @@ enum Capability {
  TelemetryMaxMultiplier,
  HasAltitudeSel,
  HasVario,
+ HasVarioSink,
  HasVariants,
  HasFailsafe,
  HasPPMSim,

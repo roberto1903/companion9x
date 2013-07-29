@@ -9030,8 +9030,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>908</width>
+            <height>481</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13893,8 +13893,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>589</height>
+            <width>923</width>
+            <height>467</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -19044,8 +19044,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>654</width>
+            <height>482</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_74">
@@ -20487,8 +20487,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>153</width>
+            <height>354</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
@@ -21423,7 +21423,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Min</string>
+                     <string>Sunk Max</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
@@ -21546,7 +21546,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Max</string>
+                     <string>Raise Max</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
@@ -21562,7 +21562,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Center Min</string>
+                     <string>Sunk Min</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
@@ -21578,7 +21578,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Center Max</string>
+                     <string>Raise Min</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>

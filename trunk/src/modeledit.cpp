@@ -3310,6 +3310,13 @@ void ModelEdit::tabTelemetry()
     ui->varioSource_label->hide();
   }
   else {
+    if (!GetEepromInterface()->getCapability(HasVarioSink)) {
+      ui->varioLimitMinOff_ChkB->hide();
+      ui->varioLimitMin_DSB->hide();
+      ui->varioLimitCenterMin_DSB->hide();
+      ui->VarioLabel_1->hide();
+      ui->VarioLabel_2->hide();      
+    }
     ui->varioLimitMin_DSB->setValue(g_model.frsky.varioMin-10);
     ui->varioLimitMax_DSB->setValue(g_model.frsky.varioMax+10);
     ui->varioLimitCenterMax_DSB->setValue((g_model.frsky.varioCenterMax/10.0)+0.5);
