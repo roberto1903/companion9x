@@ -4,6 +4,7 @@
 <li>Enable repeat parameter in functions for all boards</li>
 <li>Remove sink tones from vario for stock/m128 board</li>
 <li>Fix for wrongly named channels in mixerlist (Issue 210)</li>
+<li>Fix badly exported gvars in mixers</li>
 <li>Fix while editing custom switches</li>
 <li>Add access to the release notes of currently selected firmware</li>
 </ul>
