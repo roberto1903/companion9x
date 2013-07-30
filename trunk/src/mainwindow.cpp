@@ -446,12 +446,13 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             OldFwRev = settings.value(fwToUpdate, 0).toInt();
             settings.endGroup();
             QMessageBox msgBox;
-            msgBox.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+            QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+            QGridLayout* layout = (QGridLayout*)msgBox.layout();
+            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());            
             if (OldFwRev == 0) {
                 showcheckForUpdatesResult = false; // update is available - do not show dialog
                 QString rn = GetFirmware(fwToUpdate)->rnurl;
                 QAbstractButton *rnButton;
-                msgBox.setText("companion9x");
                 msgBox.setInformativeText(tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev));
                 QAbstractButton *YesButton = msgBox.addButton(trUtf8("Yes"), QMessageBox::YesRole);
                 msgBox.addButton(trUtf8("No"), QMessageBox::NoRole);
@@ -1813,9 +1814,10 @@ void MainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(checkForUpdatesAct);
     helpMenu->addSeparator();
-    helpMenu->addAction(contributorsAct);
     helpMenu->addAction(changelogAct);
     helpMenu->addAction(fwchangelogAct);
+    helpMenu->addSeparator();
+    helpMenu->addAction(contributorsAct);
 }
  
 QMenu *MainWindow::createRecentFileMenu()
