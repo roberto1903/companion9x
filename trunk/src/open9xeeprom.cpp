@@ -571,10 +571,10 @@ void concatGvarParam(int & gvar, const int _gvar, const unsigned int _gvarParam,
 void exportGvarParam(const int gvar, int & _gvar)
 {
   if (gvar < -10000) {
-    _gvar = 1024 + gvar + 10000;
+    _gvar = 512 + gvar + 10000;
   }
   else if (gvar > 10000) {
-    _gvar = 1024 + gvar - 10001;
+    _gvar = 512 + gvar - 10001;
   }
   else {
     _gvar = gvar;
@@ -583,11 +583,11 @@ void exportGvarParam(const int gvar, int & _gvar)
 
 void importGvarParam(int & gvar, const int _gvar)
 {
-  if (_gvar >= 1024) {
-    gvar = 10001 + _gvar - 1024;
+  if (_gvar >= 512) {
+    gvar = 10001 + _gvar - 512;
   }
-  else if (_gvar >= 1019) {
-    gvar = -10000 + _gvar - 1024;
+  else if (_gvar >= 512-5) {
+    gvar = -10000 + _gvar - 512;
   }
   else {
     gvar = _gvar;
