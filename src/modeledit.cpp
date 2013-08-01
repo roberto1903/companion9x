@@ -30,10 +30,11 @@
 
 #define GFX_MARGIN 16
 
-ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, QWidget *parent) :
+ModelEdit::ModelEdit(RadioData &radioData, uint8_t id, bool openWizard, bool isNew, QWidget *parent) :
     QDialog(parent),
     redrawCurve(true),
     openWizard(openWizard),
+    isNew(isNew),
     ui(new Ui::ModelEdit),
     radioData(radioData),   
     id_model(id),
@@ -7418,5 +7419,8 @@ void ModelEdit::wizard()
       applyNumericTemplate(result);
       updateSettings();
       tabMixes();
+    } else if (this->isNew) {
+      memset(&g_model, 0, sizeof(ModelData));
+      accept();
     }
 }

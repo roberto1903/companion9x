@@ -20,7 +20,7 @@ class ModelEdit : public QDialog
     Q_OBJECT
 
 public:
-    explicit ModelEdit(RadioData &radioData, uint8_t id , bool openWizard =false, QWidget *parent = 0);
+    explicit ModelEdit(RadioData &radioData, uint8_t id , bool openWizard =false, bool inNew =false, QWidget *parent = 0);
     ~ModelEdit();
 
     void applyBaseTemplate();
@@ -30,6 +30,7 @@ public:
     bool mixInserted;
     bool expoInserted;
     bool openWizard;
+    bool isNew;
 private:
     Ui::ModelEdit *ui;
 
