@@ -5416,7 +5416,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="helpers.cpp" line="901"/>
         <source>-GV%1</source>
-        <translation></translation>
+        <translation>-VG%1</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1099"/>

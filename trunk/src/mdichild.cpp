@@ -54,6 +54,7 @@
 #include "xsimulatordialog.h"
 #include "printdialog.h"
 #include "burndialog.h"
+#include "helpers.h"
 #include <QFileInfo>
 
 #if defined WIN32 || !defined __GNUC__
