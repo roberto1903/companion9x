@@ -64,6 +64,17 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
     }
+    bool mavlink = (current_firmware_variant.id.contains("mavplane")||current_firmware_variant.id.contains("mavcopter"));  ;
+    if (!mavlink) {
+      ui->mavbaud_CB->hide();
+      ui->mavbaud_label->hide();
+    } else {
+      mavbaudEditLock=true;
+      ui->mavbaud_CB->setCurrentIndex(g_eeGeneral.mavbaud);
+      populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
+      mavbaudEditLock=false;
+    }
+    
     if (!GetEepromInterface()->getCapability(HasContrast)) {
       ui->contrastSB->hide();
       ui->label_contrast->hide();
@@ -484,6 +495,15 @@ void GeneralEdit::on_backlightswCB_currentIndexChanged(int index)
   g_eeGeneral.backlightMode = ui->backlightswCB->currentIndex();
   updateSettings();
 }
+
+void GeneralEdit::on_mavbaud_CB_currentIndexChanged(int index)
+{
+  if (mavbaudEditLock)
+    return;
+  g_eeGeneral.mavbaud = ui->mavbaud_CB->currentIndex();
+  updateSettings();
+}
+
 
 void GeneralEdit::on_voiceLang_CB_currentIndexChanged(int index)
 {

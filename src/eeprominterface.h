@@ -447,6 +447,7 @@ class GeneralSettings {
     int wavVolume;
     int varioVolume;
     int backgroundVolume;
+    unsigned int mavbaud;
 };
 
 class ExpoData {
