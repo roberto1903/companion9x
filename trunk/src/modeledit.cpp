@@ -2907,7 +2907,7 @@ void ModelEdit::customSwitchesEdited()
         else {
           source=RawSource(g_model.customSw[i].val1);
           g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
-          setSwitchWidgetVisibility(i);
+          cswitchOffset[i]->setValue((g_model.customSw[i].val2 +source.getRawOffset(g_model))*source.getStep(g_model)+source.getOffset(g_model));
         }
         break;
       case (CS_FAMILY_TIMERS): {
