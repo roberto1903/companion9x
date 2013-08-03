@@ -1,3 +1,9 @@
+<h2>Version 1.44</h2>
+<ul>
+<li>Fix regression on AND parameter in custom functions</li>
+<li>Add mavlink support for stock and m128 boards</li>
+</ul>
+
 <h2>Version 1.43</h2>
 <ul>
 <li>Copy Malfunctions in Custom Functions (Issue 205)</li>
