@@ -635,9 +635,21 @@ void MdiChild::burnTo()  // write to Tx
 void MdiChild::simulate()
 {
     if(ui->modelsList->currentRow()<1) return;
-    simulatorDialog sd(this);
-    sd.loadParams(radioData, ui->modelsList->currentRow()-1);
-    sd.exec();
+    if (GetEepromInterface()->getSimulator()) {
+      if (GetEepromInterface()->getCapability(SimulatorType)) {
+        xsimulatorDialog sd(this);
+        sd.loadParams(radioData, ui->modelsList->currentRow()-1);
+        sd.exec();
+      } else {
+        simulatorDialog sd(this);
+        sd.loadParams(radioData, ui->modelsList->currentRow()-1);
+        sd.exec();
+      }
+    }  else {
+      QMessageBox::warning(NULL,
+      QObject::tr("Warning"),
+      QObject::tr("Simulator for this firmware is not yet available"));
+    }
 }
 
 void MdiChild::print()
