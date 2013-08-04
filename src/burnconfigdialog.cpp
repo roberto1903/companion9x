@@ -19,7 +19,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
     populateProgrammers();
     EEPROMInterface *eepromInterface = GetEepromInterface();
     if (IS_TARANIS(eepromInterface->getBoard())) {
-      setWindowTitle(tr("DFU-UTIL Cconfiguration"));
+      setWindowTitle(tr("DFU-UTIL Configuration"));
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_port->hide();
@@ -37,7 +37,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
       ui->samba_port->hide();      
       ui->sb_browse->hide();
     } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
-      setWindowTitle(tr("SAM-BA Cconfiguration"));
+      setWindowTitle(tr("SAM-BA Configuration"));
       ui->avrArgs->hide();
       ui->avrdude_location->hide();
       ui->avrdude_port->hide();
@@ -53,7 +53,7 @@ burnConfigDialog::burnConfigDialog(QWidget *parent) :
       ui->dfu_location->hide();
       ui->dfu_browse->hide();
     } else {
-      setWindowTitle(tr("AVRDUDE Cconfiguration"));
+      setWindowTitle(tr("AVRDUDE Configuration"));
       ui->label_sb1->hide();
       ui->label_sb3->hide();
       ui->samba_location->hide();

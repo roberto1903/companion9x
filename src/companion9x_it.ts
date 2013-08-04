@@ -142,25 +142,25 @@ Se vuoto l&apos;esponenziale è sempre attivo nella fase scelta (o in tutte).</t
         <translation>Impostazioni generali</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="125"/>
+        <location filename="generaledit.ui" line="39"/>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
         <translation>Impostazioni generali utilizzate nella radio.
 Queste impostazioni sono comuni a tutti i modelli nella stessa EEPROM.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="133"/>
+        <location filename="generaledit.ui" line="47"/>
         <source>Setup</source>
         <translation>Impostazioni</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1640"/>
+        <location filename="generaledit.ui" line="672"/>
         <source>Contrast</source>
         <translation>Contrasto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="371"/>
-        <location filename="generaledit.ui" line="1659"/>
+        <location filename="generaledit.ui" line="250"/>
+        <location filename="generaledit.ui" line="413"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -175,27 +175,27 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;I valori possono andare da 20 a 45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="804"/>
+        <location filename="generaledit.ui" line="365"/>
         <source>Sound Mode</source>
         <translation>Modalità audio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="499"/>
+        <location filename="generaledit.ui" line="165"/>
         <source>Beeper</source>
         <translation>Altoparlante standard</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="139"/>
+        <location filename="generaledit.ui" line="237"/>
         <source>Speaker Pitch (spkr only)</source>
         <translation>Tonalità suono (modifica HW)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="316"/>
+        <location filename="generaledit.ui" line="497"/>
         <source>Battery Warning</source>
         <translation>Allarme batteria scarica</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1335"/>
+        <location filename="generaledit.ui" line="516"/>
         <source>Battery warning voltage.
 This is the threashhold where the battery warning sounds.
 
@@ -206,57 +206,57 @@ Al di sotto di questo valore verrà generato un seganle di allarme.
 Valori accettabili da 5v a 10v</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1137"/>
+        <location filename="generaledit.ui" line="547"/>
         <source>Battery Calibration</source>
         <translation>Calibrazione Batteria</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="465"/>
+        <location filename="generaledit.ui" line="560"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Calibrazione batteria:
 Questo  vlore verrà sommato al voltaggio misurato.  Impostate questo valore per calibrare la lettura utilizzando un multimetro.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1298"/>
+        <location filename="generaledit.ui" line="622"/>
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
         <translation>Questo è l&apos;interruttore selezionato per l&apos;accensione della retroilluminazione (se installata).</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="335"/>
+        <location filename="generaledit.ui" line="653"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
         <translation>Se questo valore non è 0, ogni pressione di tasto provocherà l&apos;accensione della luce e questa verrà spenta dopo il numero di secondi specificato.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="338"/>
-        <location filename="generaledit.ui" line="760"/>
+        <location filename="generaledit.ui" line="656"/>
+        <location filename="generaledit.ui" line="768"/>
         <source> sec</source>
         <translation>sec</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="491"/>
+        <location filename="generaledit.ui" line="781"/>
         <source>Inactivity Timer</source>
         <translation>Temporizzatore di inattività</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1279"/>
+        <location filename="generaledit.ui" line="800"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
         <translation>Se non è zero, verrà fatto suonare l&apos;allarme se la radio non è utilizzata per il numero di minuti specificato.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1282"/>
+        <location filename="generaledit.ui" line="803"/>
         <source> min</source>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="289"/>
+        <location filename="generaledit.ui" line="813"/>
         <source>Timer Beeps</source>
         <translation>Allarmi timer</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1001"/>
+        <location filename="generaledit.ui" line="1148"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -269,22 +269,22 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Avviso singolo ogni minuto.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1008"/>
+        <location filename="generaledit.ui" line="1155"/>
         <source>Every Minute</source>
         <translation>ogni Minuto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1015"/>
+        <location filename="generaledit.ui" line="1162"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
         <translation>Avvisi a 30, 15, 10, e poi ogni secondo da 5 in giù</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1018"/>
+        <location filename="generaledit.ui" line="1165"/>
         <source>Count Down to Zero</source>
         <translation>Conto alla rovescia</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1025"/>
+        <location filename="generaledit.ui" line="1172"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -297,17 +297,17 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Lampeggio della retroilluminazione durante gli avvisi del temporizzatori&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1032"/>
+        <location filename="generaledit.ui" line="1179"/>
         <source>Flash on beep</source>
         <translation>Lampeggio durante il beep</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="773"/>
+        <location filename="generaledit.ui" line="941"/>
         <source>Reverse Throttle Operation</source>
         <translation>Stick motore invertito</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="951"/>
+        <location filename="generaledit.ui" line="948"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -318,28 +318,28 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="225"/>
+        <location filename="generaledit.ui" line="826"/>
         <source>Show Splash Screen on Startup</source>
         <translation>Mostra schermata all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="823"/>
-        <location filename="generaledit.ui" line="826"/>
+        <location filename="generaledit.ui" line="845"/>
+        <location filename="generaledit.ui" line="848"/>
         <source>Show splash screen on startup</source>
         <translation>Mostra schermata all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="306"/>
+        <location filename="generaledit.ui" line="1045"/>
         <source>Throttle Startup Warning</source>
         <translation>Avviso motore all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="686"/>
-        <location filename="generaledit.ui" line="716"/>
-        <location filename="generaledit.ui" line="872"/>
-        <location filename="generaledit.ui" line="976"/>
-        <location filename="generaledit.ui" line="1069"/>
-        <location filename="generaledit.ui" line="2337"/>
+        <location filename="generaledit.ui" line="679"/>
+        <location filename="generaledit.ui" line="891"/>
+        <location filename="generaledit.ui" line="980"/>
+        <location filename="generaledit.ui" line="1022"/>
+        <location filename="generaledit.ui" line="1052"/>
+        <location filename="generaledit.ui" line="2277"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -364,37 +364,37 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Suoni disabilitati - avvisa se i suoni sono disabilitati (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="249"/>
+        <location filename="generaledit.ui" line="1188"/>
         <source>Switch Startup Warning</source>
         <translation>Avviso interruttori all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1164"/>
+        <location filename="generaledit.ui" line="1003"/>
         <source>Memory Startup Warning</source>
         <translation>Avviso memoria all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="709"/>
+        <location filename="generaledit.ui" line="961"/>
         <source>Alarm Warning</source>
         <translation>Avvisi sonori</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="452"/>
+        <location filename="generaledit.ui" line="884"/>
         <source>Pot Scrolling Enable</source>
         <translation>Abilita scorrimento con POT</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1113"/>
+        <location filename="generaledit.ui" line="705"/>
         <source>Bandgap Measuring Enable</source>
         <translation>Misurazione BandGap</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="262"/>
+        <location filename="generaledit.ui" line="1387"/>
         <source>Channel Order (For Templates)</source>
         <translation>Ordine uscita canali (Per modelli)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="535"/>
+        <location filename="generaledit.ui" line="1400"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -403,12 +403,12 @@ This is used by the templated to determine which channel goes to what number out
 Utilizzato dai Modelli per stabilire quale uscita viene assegnata ai canali.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="937"/>
+        <location filename="generaledit.ui" line="1320"/>
         <source>Stick Mode</source>
         <translation>Modo Stick</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1219"/>
+        <location filename="generaledit.ui" line="1333"/>
         <source>Mode selection:
 
 Mode 1:
@@ -449,40 +449,40 @@ Mode 4:
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1244"/>
+        <location filename="generaledit.ui" line="1358"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Modo 1 (DIR ELE MOT ALE)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1249"/>
+        <location filename="generaledit.ui" line="1363"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Modo 2 (DIR MOTO ELE ALE)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1254"/>
+        <location filename="generaledit.ui" line="1368"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Modo 3 (ALE ELE MOT DIR)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1259"/>
+        <location filename="generaledit.ui" line="1373"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Modo 4 (ALE MOT ELE DIR)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="358"/>
+        <location filename="generaledit.ui" line="319"/>
         <source>Beeper Mode</source>
         <translation>Modalità suono beeper</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1457"/>
-        <location filename="generaledit.ui" line="1768"/>
-        <location filename="generaledit.ui" line="1802"/>
-        <location filename="generaledit.ui" line="1870"/>
-        <location filename="generaledit.ui" line="1904"/>
-        <location filename="generaledit.ui" line="1943"/>
-        <location filename="generaledit.ui" line="2011"/>
-        <location filename="generaledit.ui" line="2055"/>
-        <location filename="generaledit.ui" line="2089"/>
+        <location filename="generaledit.ui" line="332"/>
+        <location filename="generaledit.ui" line="1708"/>
+        <location filename="generaledit.ui" line="1742"/>
+        <location filename="generaledit.ui" line="1810"/>
+        <location filename="generaledit.ui" line="1844"/>
+        <location filename="generaledit.ui" line="1883"/>
+        <location filename="generaledit.ui" line="1951"/>
+        <location filename="generaledit.ui" line="1995"/>
+        <location filename="generaledit.ui" line="2029"/>
         <source>Beeper volume
 
 0 - Quiet.  No beeps at all.
@@ -499,81 +499,81 @@ Mode 4:
 4 - Fortissimo.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1399"/>
-        <location filename="generaledit.ui" line="1467"/>
+        <location filename="generaledit.ui" line="279"/>
+        <location filename="generaledit.ui" line="342"/>
         <source>Quiet</source>
         <translation>Silenzioso</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1409"/>
-        <location filename="generaledit.ui" line="1477"/>
+        <location filename="generaledit.ui" line="289"/>
+        <location filename="generaledit.ui" line="352"/>
         <source>No Keys</source>
         <translation>No Tasti</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="847"/>
-        <location filename="generaledit.ui" line="1433"/>
+        <location filename="generaledit.ui" line="219"/>
+        <location filename="generaledit.ui" line="383"/>
         <source>Normal</source>
         <translation>Normale</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="852"/>
-        <location filename="generaledit.ui" line="1438"/>
+        <location filename="generaledit.ui" line="224"/>
+        <location filename="generaledit.ui" line="388"/>
         <source>Long</source>
         <translation>Lungo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="351"/>
+        <location filename="generaledit.ui" line="468"/>
         <source>Input Filter</source>
         <translation>Filtro ingressi</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1367"/>
+        <location filename="generaledit.ui" line="476"/>
         <source>Single</source>
         <translation>Singolo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1372"/>
+        <location filename="generaledit.ui" line="481"/>
         <source>Oversample</source>
         <translation>Sovracampionato</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1377"/>
+        <location filename="generaledit.ui" line="486"/>
         <source>Filter</source>
         <translation>Filtro</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="299"/>
+        <location filename="generaledit.ui" line="312"/>
         <source>Owner Name</source>
         <translation>Proprietario</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1186"/>
-        <location filename="generaledit.ui" line="1778"/>
-        <location filename="generaledit.ui" line="1880"/>
-        <location filename="generaledit.ui" line="2021"/>
-        <location filename="generaledit.ui" line="2065"/>
+        <location filename="generaledit.ui" line="1210"/>
+        <location filename="generaledit.ui" line="1718"/>
+        <location filename="generaledit.ui" line="1820"/>
+        <location filename="generaledit.ui" line="1961"/>
+        <location filename="generaledit.ui" line="2005"/>
         <source>Off</source>
         <translation>NO</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1191"/>
+        <location filename="generaledit.ui" line="1215"/>
         <source>Switches Up</source>
         <translation>Interruttori Su</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1196"/>
+        <location filename="generaledit.ui" line="1220"/>
         <source>Switches Down</source>
         <translation>Interruttori Giù</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1702"/>
+        <location filename="generaledit.ui" line="1642"/>
         <source>Trainer</source>
         <translation>Maestro/Allievo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1755"/>
-        <location filename="generaledit.ui" line="2441"/>
+        <location filename="generaledit.ui" line="1695"/>
+        <location filename="generaledit.ui" line="2381"/>
         <source>PPM 1</source>
         <translation>PPM 1</translation>
     </message>
@@ -586,509 +586,529 @@ Mode 4:
         <translation type="obsolete">:=</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1812"/>
-        <location filename="generaledit.ui" line="1914"/>
-        <location filename="generaledit.ui" line="1953"/>
-        <location filename="generaledit.ui" line="2099"/>
+        <location filename="generaledit.ui" line="1752"/>
+        <location filename="generaledit.ui" line="1854"/>
+        <location filename="generaledit.ui" line="1893"/>
+        <location filename="generaledit.ui" line="2039"/>
         <source>chn1</source>
         <translation>chn1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1817"/>
-        <location filename="generaledit.ui" line="1919"/>
-        <location filename="generaledit.ui" line="1958"/>
-        <location filename="generaledit.ui" line="2104"/>
+        <location filename="generaledit.ui" line="1757"/>
+        <location filename="generaledit.ui" line="1859"/>
+        <location filename="generaledit.ui" line="1898"/>
+        <location filename="generaledit.ui" line="2044"/>
         <source>chn2</source>
         <translation>chn2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1822"/>
-        <location filename="generaledit.ui" line="1924"/>
-        <location filename="generaledit.ui" line="1963"/>
-        <location filename="generaledit.ui" line="2109"/>
+        <location filename="generaledit.ui" line="1762"/>
+        <location filename="generaledit.ui" line="1864"/>
+        <location filename="generaledit.ui" line="1903"/>
+        <location filename="generaledit.ui" line="2049"/>
         <source>chn3</source>
         <translation>chn3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1827"/>
-        <location filename="generaledit.ui" line="1929"/>
-        <location filename="generaledit.ui" line="1968"/>
-        <location filename="generaledit.ui" line="2114"/>
+        <location filename="generaledit.ui" line="1767"/>
+        <location filename="generaledit.ui" line="1869"/>
+        <location filename="generaledit.ui" line="1908"/>
+        <location filename="generaledit.ui" line="2054"/>
         <source>chn4</source>
         <translation>chn4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1727"/>
+        <location filename="generaledit.ui" line="1667"/>
         <source>Mode</source>
         <translation>Modo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1120"/>
+        <location filename="generaledit.ui" line="858"/>
         <source>Show Owner Name on Splash</source>
         <translation>Mostra proprietario all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="944"/>
+        <location filename="generaledit.ui" line="1089"/>
         <source>Telemetry NO DATA Alarm</source>
         <translation>Allame mancanza telemetria</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="394"/>
+        <location filename="generaledit.ui" line="55"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="401"/>
+        <location filename="generaledit.ui" line="62"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="408"/>
+        <location filename="generaledit.ui" line="69"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="415"/>
+        <location filename="generaledit.ui" line="76"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="422"/>
+        <location filename="generaledit.ui" line="83"/>
         <source>GEA</source>
         <translation>GEA</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="429"/>
+        <location filename="generaledit.ui" line="90"/>
         <source>ID0</source>
         <translation>ID0</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="436"/>
+        <location filename="generaledit.ui" line="97"/>
         <source>ID1</source>
         <translation>ID1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="443"/>
+        <location filename="generaledit.ui" line="104"/>
         <source>ID2</source>
         <translation>ID2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="282"/>
+        <location filename="generaledit.ui" line="188"/>
         <source>Beeper Length</source>
         <translation>Lunghezza suono</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="837"/>
-        <location filename="generaledit.ui" line="1423"/>
+        <location filename="generaledit.ui" line="209"/>
+        <location filename="generaledit.ui" line="373"/>
         <source>X-Short</source>
         <translation>Extra Corto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="842"/>
-        <location filename="generaledit.ui" line="1428"/>
+        <location filename="generaledit.ui" line="214"/>
+        <location filename="generaledit.ui" line="378"/>
         <source>Short</source>
         <translation>Corto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="857"/>
-        <location filename="generaledit.ui" line="1443"/>
+        <location filename="generaledit.ui" line="229"/>
+        <location filename="generaledit.ui" line="393"/>
         <source>X-Long</source>
         <translation>Extra Lungo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="667"/>
+        <location filename="generaledit.ui" line="271"/>
         <source>Haptic Mode</source>
         <translation>Modalità vibrazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1404"/>
+        <location filename="generaledit.ui" line="284"/>
         <source>Only Alarms</source>
         <translation>Solo allarmi</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1414"/>
-        <location filename="generaledit.ui" line="1482"/>
+        <location filename="generaledit.ui" line="294"/>
+        <location filename="generaledit.ui" line="357"/>
         <source>All</source>
         <translation>Tutti</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1472"/>
+        <location filename="generaledit.ui" line="347"/>
         <source>Alarms Only</source>
         <translation>Solo allarmi</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="522"/>
+        <location filename="generaledit.ui" line="1275"/>
         <source>Timeshift from UTC</source>
         <translation>Differenza in ore da GMT</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="900"/>
+        <location filename="generaledit.ui" line="1297"/>
         <source>GPS Coordinates</source>
         <translation>Coordinate GPS</translation>
     </message>
     <message utf8="true">
-        <location filename="generaledit.ui" line="908"/>
+        <location filename="generaledit.ui" line="1305"/>
         <source>hh° (N/S) mm&apos; ss&apos;&apos;.dd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="913"/>
+        <location filename="generaledit.ui" line="1310"/>
         <source>NMEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1157"/>
+        <location filename="generaledit.ui" line="302"/>
         <source>Haptic Length</source>
         <translation>Lunghezza vibrazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1680"/>
+        <location filename="generaledit.ui" line="726"/>
         <source>LCD Display Type</source>
         <translation>Tipo display LCD</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="75"/>
+        <location filename="generaledit.ui" line="3015"/>
         <source>Store calib. and hw settings in selected profile</source>
         <translation>Memorizza calib. e settaggi HW nel profilo scelto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="88"/>
+        <location filename="generaledit.ui" line="3028"/>
         <source>Retrieve calib. and hw settings from profile</source>
         <translation>Recupera calib. e settaggi HW dal profilo scelto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="504"/>
+        <location filename="generaledit.ui" line="170"/>
         <source>Speaker</source>
         <translation>Altoparlante</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="509"/>
+        <location filename="generaledit.ui" line="175"/>
         <source>BeeperVoice</source>
         <translation>Buzzer e voce</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="514"/>
+        <location filename="generaledit.ui" line="180"/>
         <source>SpeakerVoice</source>
         <translation>Altoparlante e Voce</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1688"/>
+        <location filename="generaledit.ui" line="734"/>
         <source>Standard</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1693"/>
+        <location filename="generaledit.ui" line="739"/>
         <source>Optrex</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="865"/>
+        <location filename="generaledit.ui" line="448"/>
         <source>Speaker Volume</source>
         <translation>Volume altoparlante</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="923"/>
+        <location filename="generaledit.ui" line="434"/>
         <source>Haptic Strength</source>
         <translation>Intensità vibrazione (mod. HW)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1092"/>
+        <location filename="generaledit.ui" line="712"/>
         <source>BackLight Brightness</source>
         <translation>Luminosità retroilluminazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="780"/>
+        <location filename="generaledit.ui" line="914"/>
         <source>RotEnc Navigation</source>
         <translation>Navigazione con Encoder </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1106"/>
+        <location filename="generaledit.ui" line="634"/>
         <source>BackLight  Auto OFF after</source>
         <translation>Auto spegnimento luce dopo </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="232"/>
+        <location filename="generaledit.ui" line="924"/>
         <source>StickScroll</source>
         <translation>Scoll con stick</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1127"/>
+        <location filename="generaledit.ui" line="606"/>
         <source>CrossTrim</source>
         <translation>Trim incrociati</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="739"/>
+        <location filename="generaledit.ui" line="599"/>
         <source>BackLight Switch</source>
         <translation>Interruttore retroilluminazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1099"/>
+        <location filename="generaledit.ui" line="761"/>
         <source>BackLight On Stick Move</source>
         <translation>Retroilluminazione su stick</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1062"/>
+        <location filename="generaledit.ui" line="747"/>
         <source>BackLight Invert</source>
         <translation>Inversione retroilluminazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="155"/>
+        <location filename="generaledit.ui" line="136"/>
         <source>Country Code</source>
         <translation>Codice paese</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="173"/>
+        <location filename="generaledit.ui" line="154"/>
         <source>Europe</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="168"/>
+        <location filename="generaledit.ui" line="149"/>
         <source>Japan</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="163"/>
+        <location filename="generaledit.ui" line="144"/>
         <source>America</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1594"/>
+        <location filename="generaledit.ui" line="1262"/>
         <source>Metric</source>
         <translation>Sistema Metrico</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1599"/>
+        <location filename="generaledit.ui" line="1267"/>
         <source>Imperial</source>
         <translation>Imperiale</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1586"/>
+        <location filename="generaledit.ui" line="1254"/>
         <source>Measurement Units</source>
         <translation>Unità di misura</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="190"/>
+        <location filename="generaledit.ui" line="1075"/>
         <source>FrSky Internal Alarm</source>
         <translation>Allarme interno FrSky</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="794"/>
+        <location filename="generaledit.ui" line="1103"/>
         <source>PPMSim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1050"/>
+        <location filename="generaledit.ui" line="115"/>
         <source>Voice Language</source>
         <translation>Lingua per le voci</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1492"/>
+        <location filename="generaledit.ui" line="1534"/>
         <source>Beep volume</source>
         <translation>Volume Beeps</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1515"/>
+        <location filename="generaledit.ui" line="1557"/>
         <source>Wav volume</source>
         <translation>Volume file Wav</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1538"/>
+        <location filename="generaledit.ui" line="1580"/>
         <source>Vario volume</source>
         <translation>Volume per vario</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1561"/>
+        <location filename="generaledit.ui" line="1603"/>
         <source>Background volume</source>
         <translation>Volume sottofondo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1607"/>
+        <location filename="generaledit.ui" line="1237"/>
         <source>FAI Mode</source>
         <translation>Modalità FAI</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1614"/>
+        <location filename="generaledit.ui" line="1120"/>
+        <source>MAVLink Baud Rate</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1128"/>
+        <source>4800 Baud</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1133"/>
+        <source>9600 Baud</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1138"/>
+        <source>19200 Baud</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1244"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
         <translation>Se abilitate la modalità FAI, il variometro, le funzioni di lettura della telemetria e gli schermi telemetrici verrano disabilitati. Questa funzione non è disattivabile dalla radio.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1734"/>
+        <location filename="generaledit.ui" line="1674"/>
         <source>Input</source>
         <translation>Ingresso</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1741"/>
+        <location filename="generaledit.ui" line="1681"/>
         <source>Weight</source>
         <translation>Peso</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1748"/>
+        <location filename="generaledit.ui" line="1688"/>
         <source>Switch</source>
         <translation>Interruttore</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1783"/>
-        <location filename="generaledit.ui" line="1885"/>
-        <location filename="generaledit.ui" line="2026"/>
-        <location filename="generaledit.ui" line="2070"/>
+        <location filename="generaledit.ui" line="1723"/>
+        <location filename="generaledit.ui" line="1825"/>
+        <location filename="generaledit.ui" line="1966"/>
+        <location filename="generaledit.ui" line="2010"/>
         <source>+= (Sum)</source>
         <translation>+= (Somma)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1788"/>
-        <location filename="generaledit.ui" line="1890"/>
-        <location filename="generaledit.ui" line="2031"/>
-        <location filename="generaledit.ui" line="2075"/>
+        <location filename="generaledit.ui" line="1728"/>
+        <location filename="generaledit.ui" line="1830"/>
+        <location filename="generaledit.ui" line="1971"/>
+        <location filename="generaledit.ui" line="2015"/>
         <source>:= (Replace)</source>
         <translation>:= (Sostituisci)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1857"/>
-        <location filename="generaledit.ui" line="2818"/>
+        <location filename="generaledit.ui" line="1797"/>
+        <location filename="generaledit.ui" line="2758"/>
         <source>PPM 2</source>
         <translation>PPM 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1998"/>
-        <location filename="generaledit.ui" line="2825"/>
+        <location filename="generaledit.ui" line="1938"/>
+        <location filename="generaledit.ui" line="2765"/>
         <source>PPM 3</source>
         <translation>PPM 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2042"/>
-        <location filename="generaledit.ui" line="2832"/>
+        <location filename="generaledit.ui" line="1982"/>
+        <location filename="generaledit.ui" line="2772"/>
         <source>PPM 4</source>
         <translation>PPM 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2158"/>
+        <location filename="generaledit.ui" line="2098"/>
         <source>Telemetry</source>
         <translation>Telemetria</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2183"/>
+        <location filename="generaledit.ui" line="2123"/>
         <source>RSSI Alarm 1</source>
         <translation>Allarme RSSI 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2227"/>
-        <location filename="generaledit.ui" line="2302"/>
+        <location filename="generaledit.ui" line="2167"/>
+        <location filename="generaledit.ui" line="2242"/>
         <source>----</source>
         <translation>----</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2232"/>
-        <location filename="generaledit.ui" line="2307"/>
+        <location filename="generaledit.ui" line="2172"/>
+        <location filename="generaledit.ui" line="2247"/>
         <source>Yellow</source>
         <translation>Giallo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2237"/>
-        <location filename="generaledit.ui" line="2312"/>
+        <location filename="generaledit.ui" line="2177"/>
+        <location filename="generaledit.ui" line="2252"/>
         <source>Orange</source>
         <translation>Arancione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2242"/>
-        <location filename="generaledit.ui" line="2317"/>
+        <location filename="generaledit.ui" line="2182"/>
+        <location filename="generaledit.ui" line="2257"/>
         <source>Red</source>
         <translation>Rosso</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2258"/>
+        <location filename="generaledit.ui" line="2198"/>
         <source>RSSI Alarm 2</source>
         <translation>Allarme RSSI 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2327"/>
+        <location filename="generaledit.ui" line="2267"/>
         <source>NO DATA Alarm</source>
         <translation>Allarme NO DATA</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2361"/>
+        <location filename="generaledit.ui" line="2301"/>
         <source>Calibration</source>
         <translation>Calibrazione</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2485"/>
+        <location filename="generaledit.ui" line="2425"/>
         <source>STICK 1</source>
         <translation>STICK 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2534"/>
+        <location filename="generaledit.ui" line="2474"/>
         <source>STICK 2</source>
         <translation>STICK 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2465"/>
-        <location filename="generaledit.ui" line="3009"/>
+        <location filename="generaledit.ui" line="2405"/>
+        <location filename="generaledit.ui" line="2949"/>
         <source>Mid value</source>
         <translation>Valore intermedio</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2380"/>
+        <location filename="generaledit.ui" line="2320"/>
         <source>POT 4</source>
         <translation>POT 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2448"/>
+        <location filename="generaledit.ui" line="2388"/>
         <source>STICK 3</source>
         <translation>STICK 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2455"/>
-        <location filename="generaledit.ui" line="2999"/>
+        <location filename="generaledit.ui" line="2395"/>
+        <location filename="generaledit.ui" line="2939"/>
         <source>Negative span</source>
         <translation>Corsa negativa</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2475"/>
-        <location filename="generaledit.ui" line="3019"/>
+        <location filename="generaledit.ui" line="2415"/>
+        <location filename="generaledit.ui" line="2959"/>
         <source>Positive span</source>
         <translation>Corsa positiva</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2619"/>
+        <location filename="generaledit.ui" line="2559"/>
         <source>STICK 4</source>
         <translation>STICK 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2421"/>
+        <location filename="generaledit.ui" line="2361"/>
         <source>POT 1</source>
         <translation>POT 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2414"/>
+        <location filename="generaledit.ui" line="2354"/>
         <source>POT 2</source>
         <translation>POT 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2394"/>
+        <location filename="generaledit.ui" line="2334"/>
         <source>POT 3</source>
         <translation>POT 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2681"/>
+        <location filename="generaledit.ui" line="2621"/>
         <source>Battery</source>
         <translation>Batteria</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2691"/>
+        <location filename="generaledit.ui" line="2631"/>
         <source>v</source>
         <translation>v</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2710"/>
+        <location filename="generaledit.ui" line="2650"/>
         <source>PPM Multiplier</source>
         <translation>Moltiplicatore PPM</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2862"/>
+        <location filename="generaledit.ui" line="2802"/>
         <source>Current</source>
         <translation>Corrente</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1007"/>
+        <location filename="generaledit.cpp" line="1027"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
 This function cannot be disabled by the radio.
 Are you sure ?</source>
@@ -1098,28 +1118,28 @@ Questa funzione non è disabilitabile dalla radio.
 Siete sicuri ?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1229"/>
-        <location filename="generaledit.cpp" line="1270"/>
+        <location filename="generaledit.cpp" line="1249"/>
+        <location filename="generaledit.cpp" line="1290"/>
         <source>Warning</source>
         <translation>Avviso</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1229"/>
+        <location filename="generaledit.cpp" line="1249"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Dati errati nel profilo, la calibrazione della radio non è stata ripristinata</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1270"/>
+        <location filename="generaledit.cpp" line="1290"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Dati errati nel profilo, i settaggi HW della radio non sono stati ripristinati</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1295"/>
+        <location filename="generaledit.cpp" line="1315"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Volete salvare la calibrazione e i settaggi nel profilo %1&lt;br&gt;sovrascrivendo i settaggi esistenti ?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1326"/>
+        <location filename="generaledit.cpp" line="1346"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Dati di calibrazione e settaggi HW salvati.</translation>
     </message>
@@ -7143,8 +7163,9 @@ Bisogno di aiuto ?</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="26"/>
-        <source> Configuration AVRDUDE / SAM-BA</source>
-        <translation>Configurazione di AVRDUDE / SAM-BA</translation>
+        <source>Programmer Configuration</source>
+        <oldsource> Configuration AVRDUDE / SAM-BA</oldsource>
+        <translation>Configurazione del programmatore</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="64"/>
@@ -7274,25 +7295,43 @@ utilizzatelo solo se sapete cosa state facendo.  Non viene fatto alcun controllo
         <translation>Porta seriale per sam-ba</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="233"/>
-        <location filename="burnconfigdialog.cpp" line="244"/>
-        <location filename="burnconfigdialog.cpp" line="254"/>
+        <location filename="burnconfigdialog.cpp" line="22"/>
+        <source>DFU-UTIL Configuration</source>
+        <oldsource>DFU-UTIL Cconfiguration</oldsource>
+        <translation>Configurazione DFU-UTIL</translation>
+    </message>
+    <message>
+        <location filename="burnconfigdialog.cpp" line="40"/>
+        <source>SAM-BA Configuration</source>
+        <oldsource>SAM-BA Cconfiguration</oldsource>
+        <translation>Configurazione SAM-BA</translation>
+    </message>
+    <message>
+        <location filename="burnconfigdialog.cpp" line="56"/>
+        <source>AVRDUDE Configuration</source>
+        <oldsource>AVRDUDE Cconfiguration</oldsource>
+        <translation>Configurazione AVRDUDE</translation>
+    </message>
+    <message>
+        <location filename="burnconfigdialog.cpp" line="236"/>
+        <location filename="burnconfigdialog.cpp" line="247"/>
+        <location filename="burnconfigdialog.cpp" line="257"/>
         <source>Select Location</source>
         <translation>Seleziona eseguibile</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="325"/>
-        <location filename="burnconfigdialog.cpp" line="394"/>
+        <location filename="burnconfigdialog.cpp" line="328"/>
+        <location filename="burnconfigdialog.cpp" line="397"/>
         <source>companion9x</source>
         <translation>companion9x</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="326"/>
+        <location filename="burnconfigdialog.cpp" line="329"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses of  %1 to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
         <translation>&lt;b&gt;&lt;u&gt;ATTENZIONE!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Questa operazione ripristinerà i fuse del processore %1 ai valori di fabbrica.&lt;br&gt;Modificare i fuse pruo bloccare la radio.&lt;br&gt;Fatelo solo se siete assolutamente sicuri che siano sbagliati&lt;br&gt;sicuri di voler continuare ?</translation>
     </message>
     <message>
-        <location filename="burnconfigdialog.cpp" line="395"/>
+        <location filename="burnconfigdialog.cpp" line="398"/>
         <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normally CPU type is automatically selected according to the chosen firmware.&lt;br&gt;If you change the CPU type the resulting eeprom could be inconsistent.</source>
         <translation>&lt;b&gt;&lt;u&gt;Attenzione!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;Normalmente il processore viene selezionato automaticamente in base al firmware scelto.&lt;br&gt;Se cambiate il tipo di processore la EEPROM potrebbe risultare incoerente.</translation>
     </message>
