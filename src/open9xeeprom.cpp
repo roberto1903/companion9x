@@ -246,71 +246,55 @@ class SourcesConversionTable: public ConversionTable {
     }
 };
 
-class TimerModeField: public TransformedField {
+class TimerModeConversionTable: public ConversionTable {
+
   public:
-    TimerModeField(TimerMode & mode, BoardEnum board, unsigned int version):
-      TransformedField(internalField),
-      internalField(_mode),
+    TimerModeConversionTable(BoardEnum board, unsigned int version, unsigned long flags=0)
+    {
+      int val=0;
+
+      addConversion(TMRMODE_OFF, val++);
+      addConversion(TMRMODE_ABS, val++);
+      addConversion(TMRMODE_THs, val++);
+      addConversion(TMRMODE_THp, val++);
+      addConversion(TMRMODE_THt, val++);
+
+      int swCount = MAX_SWITCHES_POSITION(board) + MAX_CUSTOM_SWITCHES(board, version);
+
+      for (int i=0; i<swCount; i++) {
+        addConversion(TMRMODE_FIRST_SWITCH+i, val+i);
+        addConversion(TMRMODE_FIRST_MOMENT_SWITCH+i, val+i+swCount);
+        addConversion(TMRMODE_FIRST_NEG_SWITCH-i, -1-i);
+        addConversion(TMRMODE_FIRST_NEG_MOMENT_SWITCH-i, -1-i-swCount);
+      }
+    }
+};
+
+class TimerModeField: public ConversionField< SignedField<8> > {
+  public:
+    TimerModeField(TimerMode & mode, BoardEnum board, unsigned int version, unsigned long flags=0):
+      ConversionField< SignedField<8> >(_mode, &conversionTable, "TimerMode"),
+      conversionTable(board, version, flags),
       mode(mode),
-      board(board),
-      numCSW(MAX_CUSTOM_SWITCHES(board, version)),
       _mode(0)
     {
     }
 
-    virtual void beforeExport()
-    {
-      if (mode >= TMRMODE_OFF && mode <= TMRMODE_THt)
-        _mode = 0+mode-TMRMODE_OFF;
-      else if (mode >= TMRMODE_FIRST_MOMENT_SWITCH)
-        _mode = numCSW+14+mode-TMRMODE_FIRST_MOMENT_SWITCH;
-      else if (mode >= TMRMODE_FIRST_SWITCH+6)
-        _mode = 5+mode-TMRMODE_FIRST_SWITCH;
-      else if (mode >= TMRMODE_FIRST_SWITCH+3)
-        _mode = 2+mode-TMRMODE_FIRST_SWITCH;
-      else if (mode >= TMRMODE_FIRST_SWITCH)
-        _mode = 8+mode-TMRMODE_FIRST_SWITCH;
-      else if (mode <= TMRMODE_FIRST_NEG_MOMENT_SWITCH)
-        _mode = -numCSW-10+mode-TMRMODE_FIRST_NEG_MOMENT_SWITCH;
-      else if (mode <= TMRMODE_FIRST_NEG_SWITCH-6)
-        _mode = -1+mode-TMRMODE_FIRST_NEG_SWITCH;
-      else if (mode <= TMRMODE_FIRST_NEG_SWITCH-3)
-        _mode = +2+mode-TMRMODE_FIRST_NEG_SWITCH;
-      else if (mode <= TMRMODE_FIRST_NEG_SWITCH)
-        _mode = -4+mode-TMRMODE_FIRST_NEG_SWITCH;
-      else
-        _mode = 0;
-    }
+  virtual void beforeExport()
+  {
+    _mode = mode;
+    ConversionField< SignedField<8> >::beforeExport();
+  }
 
-    virtual void afterImport()
-    {
-      if (_mode <= -numCSW-10)
-        mode = TimerMode(TMRMODE_FIRST_NEG_MOMENT_SWITCH+(_mode+numCSW+10));
-      else if (_mode <= -7)
-        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+1));
-      else if (_mode <= -4)
-        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode+4));
-      else if (_mode <= -1)
-        mode = TimerMode(TMRMODE_FIRST_NEG_SWITCH+(_mode-2));
-      else if (_mode < 5)
-        mode = TimerMode(_mode);
-      else if (_mode < 8)
-       mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-2));
-      else if (_mode < 11)
-       mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-8));
-      else if (_mode < 14)
-        mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
-      else if (_mode < numCSW+14)
-        mode = TimerMode(TMRMODE_FIRST_SWITCH+(_mode-5));
-      else
-        mode = TimerMode(TMRMODE_FIRST_MOMENT_SWITCH+(_mode-numCSW-14));
-    }
+  virtual void afterImport()
+  {
+    ConversionField< SignedField<8> >::afterImport();
+    mode = (TimerMode)_mode;
+  }
 
   protected:
-    SignedField<8> internalField;
+    TimerModeConversionTable conversionTable;
     TimerMode & mode;
-    BoardEnum board;
-    int numCSW;
     int _mode;
 };
 
