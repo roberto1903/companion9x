@@ -131,6 +131,7 @@ simulatorDialog::simulatorDialog(QWidget *parent) :
 
 simulatorDialog::~simulatorDialog()
 {
+  delete timer;
   delete ui;
 }
 
@@ -138,8 +139,7 @@ void simulatorDialog::closeEvent (QCloseEvent *)
 {
   simulator->stop();
   timer->stop();
-  if (timer)
-    delete timer;
+  timer->thread()->wait();
 }
 
 void simulatorDialog::mousePressEvent(QMouseEvent *event)
