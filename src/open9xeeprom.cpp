@@ -262,10 +262,11 @@ class TimerModeConversionTable: public ConversionTable {
       int swCount = MAX_SWITCHES_POSITION(board) + MAX_CUSTOM_SWITCHES(board, version);
 
       for (int i=0; i<swCount; i++) {
-        addConversion(TMRMODE_FIRST_SWITCH+i, val+i);
-        addConversion(TMRMODE_FIRST_MOMENT_SWITCH+i, val+i+swCount);
-        addConversion(TMRMODE_FIRST_NEG_SWITCH-i, -1-i);
-        addConversion(TMRMODE_FIRST_NEG_MOMENT_SWITCH-i, -1-i-swCount);
+        int s = switchIndex(i+1, board, version) - 1;
+        addConversion(TMRMODE_FIRST_SWITCH+i, val+s);
+        addConversion(TMRMODE_FIRST_MOMENT_SWITCH+i, val+s+swCount);
+        addConversion(TMRMODE_FIRST_NEG_SWITCH-i, -1-s);
+        addConversion(TMRMODE_FIRST_NEG_MOMENT_SWITCH-i, -1-s-swCount);
       }
     }
 };
@@ -573,9 +574,17 @@ void importGvarParam(int & gvar, const int _gvar)
   else if (_gvar >= 512-5) {
     gvar = -10000 + _gvar - 512;
   }
+  else if (_gvar < -512) {
+    gvar = -10000 + _gvar + 513;
+  }
+  else if (_gvar < -512+5) {
+    gvar = 10000 + _gvar + 513;
+  }
   else {
     gvar = _gvar;
   }
+
+  // qDebug() << QString("import") << _gvar << gvar;
 }
 
 class MixField: public TransformedField {
@@ -1757,6 +1766,8 @@ void Open9xModelDataNew::beforeExport()
 
 void Open9xModelDataNew::afterImport()
 {
+  // qDebug() << QString("after import model") << modelData.name;
+
   for (int module=0; module<3; module++) {
     if (modelData.moduleData[module].protocol == PXX_XJT_X16) {
       if (subprotocols[module]>=0)
