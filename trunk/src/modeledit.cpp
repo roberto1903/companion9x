@@ -1580,6 +1580,7 @@ void ModelEdit::tabMixes()
     unsigned int curDest = 0;
     int i;
     unsigned int outputs = GetEepromInterface()->getCapability(Outputs);
+    int showNames=ui->showNames_Ckb->isChecked();
     for(i=0; i<GetEepromInterface()->getCapability(Mixes); i++)
     {
         MixData *md = &g_model.mixData[i];
@@ -1592,7 +1593,7 @@ void ModelEdit::tabMixes()
               str = tr("X%1  ").arg(curDest-outputs);
             } else {
               str = tr("CH%1%2").arg(curDest/10).arg(curDest%10);
-              if (GetEepromInterface()->getCapability(HasChNames)) {
+              if (GetEepromInterface()->getCapability(HasChNames) && showNames) {
                 QString name=g_model.limitData[curDest-1].name;
                 if (!name.isEmpty()) {
                   name.append("     ");
@@ -1612,7 +1613,7 @@ void ModelEdit::tabMixes()
         } else {
           str = tr("CH%1%2").arg(md->destCh/10).arg(md->destCh%10);
           str.append("  ");
-          if (GetEepromInterface()->getCapability(HasChNames)) {
+          if (GetEepromInterface()->getCapability(HasChNames) && showNames) {
             QString name=g_model.limitData[md->destCh-1].name;
             if (!name.isEmpty()) {
               name.append("     ");
@@ -4814,6 +4815,10 @@ void ModelEdit::on_AltitudeGPS_CB_toggled(bool checked)
   //AltitudeGPS_CB
 }
 
+void ModelEdit::on_showNames_Ckb_toggled(bool checked)
+{
+  tabMixes();
+}
 void ModelEdit::on_varioSourceCB_currentIndexChanged(int index)
 {
   if (telemetryLock) return;

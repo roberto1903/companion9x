@@ -329,6 +329,7 @@ private slots:
     void on_rssiAlarm1SB_editingFinished();
     void on_rssiAlarm2SB_editingFinished();
     void on_AltitudeGPS_CB_toggled(bool checked);
+    void on_showNames_Ckb_toggled(bool checked);
     void on_varioSourceCB_currentIndexChanged(int index);
     void on_varioLimitMin_DSB_editingFinished();
     void on_varioLimitMax_DSB_editingFinished();

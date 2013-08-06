@@ -9010,8 +9010,15 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
        <string>Mixes</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_18">
-       <item row="0" column="0">
+       <item row="1" column="0">
         <layout class="QGridLayout" name="mixersLayout"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="showNames_Ckb">
+         <property name="text">
+          <string>Show channels names in mixes</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -9030,8 +9037,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>908</width>
-            <height>481</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13893,8 +13900,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>923</width>
-            <height>467</height>
+            <width>1034</width>
+            <height>589</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -19044,8 +19051,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>654</width>
-            <height>482</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_74">
@@ -20487,8 +20494,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>354</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
