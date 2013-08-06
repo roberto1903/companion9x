@@ -138,7 +138,8 @@ void simulatorDialog::closeEvent (QCloseEvent *)
 {
   simulator->stop();
   timer->stop();
-  delete timer;
+  if (timer)
+    delete timer;
 }
 
 void simulatorDialog::mousePressEvent(QMouseEvent *event)
