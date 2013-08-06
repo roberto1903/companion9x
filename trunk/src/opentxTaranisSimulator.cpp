@@ -27,6 +27,7 @@
 #define FLIGHT_MODES
 #define FRSKY
 #define FRSKY_HUB
+#define FRSKY_SPORT
 #define GPS
 #define VARIO
 #define GAUGES
@@ -98,7 +99,7 @@ inline int geteepromsize() {
 #define SDCARD
 #include "../opentx/templates.cpp"
 #include "../opentx/translations.cpp"
-#include "../opentx/telemetry/frsky.cpp"
+#include "../opentx/telemetry/frsky_sport.cpp"
 #include "../opentx/targets/taranis/audio_driver.cpp"
 #include "../opentx/audio_arm.cpp"
 #include "../opentx/translations/tts_cz.cpp"
