@@ -106,6 +106,7 @@ xsimulatorDialog::xsimulatorDialog(QWidget *parent) :
 
 xsimulatorDialog::~xsimulatorDialog()
 {
+  delete timer;
   delete ui;
 }
 
@@ -113,7 +114,7 @@ void xsimulatorDialog::closeEvent (QCloseEvent *)
 {
   simulator->stop();
   timer->stop();
-  delete timer;
+  timer->thread()->wait();
 }
 
 void xsimulatorDialog::mousePressEvent(QMouseEvent *event)
