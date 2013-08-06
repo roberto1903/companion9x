@@ -80,7 +80,7 @@ IF( Subversion_FOUND )
   Subversion_WC_INFO( ${PROJECT_SOURCE_DIR} C9X )
 ENDIF( )
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/../opentx/fonts/std )
 
 SET( companion9x_SRCS
      eeprominterface.cpp
