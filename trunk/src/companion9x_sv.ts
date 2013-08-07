@@ -852,19 +852,19 @@ FAI-funktionen kan inte slås av av radion.
     </message>
     <message>
         <source>Beep volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljudstyrka varningston</translation>
     </message>
     <message>
         <source>Wav volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljudstyrka Wav</translation>
     </message>
     <message>
         <source>Vario volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljudstyrka Vario</translation>
     </message>
     <message>
         <source>Background volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljudstyrka Bakgrund</translation>
     </message>
 </context>
 <context>
@@ -3350,7 +3350,7 @@ Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och ga
     </message>
     <message>
         <source>Polarity</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaritet</translation>
     </message>
 </context>
 <context>
@@ -4574,11 +4574,11 @@ Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och ga
     </message>
     <message>
         <source>ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>ONE</translation>
     </message>
     <message>
         <source>!ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>!ONE</translation>
     </message>
     <message>
         <source>TRNs</source>
