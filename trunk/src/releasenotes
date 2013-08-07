@@ -1,3 +1,8 @@
+<h2>Version 1.45</h2>
+<ul>
+<li>Various fixes</li>
+</ul>
+
 <h2>Version 1.44</h2>
 <ul>
 <li>Fix regression on AND parameter in custom functions</li>
