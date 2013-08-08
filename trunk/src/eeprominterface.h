@@ -597,7 +597,7 @@ class PhaseData {
     int trimRef[NUM_STICKS]; //
     int trim[NUM_STICKS];
     RawSwitch swtch;
-    char name[6+1];
+    char name[10+1];
     unsigned int fadeIn;
     unsigned int fadeOut;
     int rotaryEncoders[2];
