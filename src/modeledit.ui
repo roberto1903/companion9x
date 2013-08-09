@@ -9037,8 +9037,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>908</width>
+            <height>481</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13900,8 +13900,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>589</height>
+            <width>923</width>
+            <height>467</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -19091,7 +19091,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw9</string>
+                   <string>CS9</string>
                   </property>
                  </widget>
                 </item>
@@ -19158,7 +19158,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwF</string>
+                   <string>CSF</string>
                   </property>
                  </widget>
                 </item>
@@ -19193,7 +19193,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwD</string>
+                   <string>CSD</string>
                   </property>
                  </widget>
                 </item>
@@ -19278,7 +19278,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw6</string>
+                   <string>CS6</string>
                   </property>
                  </widget>
                 </item>
@@ -19306,7 +19306,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw1</string>
+                   <string>CS1</string>
                   </property>
                  </widget>
                 </item>
@@ -19341,7 +19341,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw8</string>
+                   <string>CS8</string>
                   </property>
                  </widget>
                 </item>
@@ -19376,7 +19376,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw7</string>
+                   <string>CS7</string>
                   </property>
                  </widget>
                 </item>
@@ -19421,7 +19421,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwA</string>
+                   <string>CSA</string>
                   </property>
                  </widget>
                 </item>
@@ -19456,7 +19456,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwB</string>
+                   <string>CSB</string>
                   </property>
                  </widget>
                 </item>
@@ -19491,7 +19491,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwC</string>
+                   <string>CSC</string>
                   </property>
                  </widget>
                 </item>
@@ -19546,7 +19546,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw5</string>
+                   <string>CS5</string>
                   </property>
                  </widget>
                 </item>
@@ -19620,7 +19620,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw3</string>
+                   <string>CS3</string>
                   </property>
                  </widget>
                 </item>
@@ -19645,7 +19645,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw2</string>
+                   <string>CS2</string>
                   </property>
                  </widget>
                 </item>
@@ -19670,7 +19670,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwE</string>
+                   <string>CSE</string>
                   </property>
                  </widget>
                 </item>
@@ -19695,7 +19695,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwG</string>
+                   <string>CSG</string>
                   </property>
                  </widget>
                 </item>
@@ -19730,7 +19730,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSw4</string>
+                   <string>CS4</string>
                   </property>
                  </widget>
                 </item>
@@ -19823,7 +19823,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwT</string>
+                   <string>CST</string>
                   </property>
                  </widget>
                 </item>
@@ -19928,7 +19928,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwM</string>
+                   <string>CSM</string>
                   </property>
                  </widget>
                 </item>
@@ -19953,7 +19953,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwP</string>
+                   <string>CSP</string>
                   </property>
                  </widget>
                 </item>
@@ -19978,7 +19978,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwH</string>
+                   <string>CSH</string>
                   </property>
                  </widget>
                 </item>
@@ -20013,7 +20013,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwO</string>
+                   <string>CSO</string>
                   </property>
                  </widget>
                 </item>
@@ -20038,7 +20038,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwN</string>
+                   <string>CSN</string>
                   </property>
                  </widget>
                 </item>
@@ -20073,7 +20073,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwQ</string>
+                   <string>CSQ</string>
                   </property>
                  </widget>
                 </item>
@@ -20108,7 +20108,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwR</string>
+                   <string>CSR</string>
                   </property>
                  </widget>
                 </item>
@@ -20143,7 +20143,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwS</string>
+                   <string>CSS</string>
                   </property>
                  </widget>
                 </item>
@@ -20198,7 +20198,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwL</string>
+                   <string>CSL</string>
                   </property>
                  </widget>
                 </item>
@@ -20243,7 +20243,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwK</string>
+                   <string>CSK</string>
                   </property>
                  </widget>
                 </item>
@@ -20287,7 +20287,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwJ</string>
+                   <string>CSJ</string>
                   </property>
                  </widget>
                 </item>
@@ -20312,7 +20312,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwI</string>
+                   <string>CSI</string>
                   </property>
                  </widget>
                 </item>
@@ -20337,7 +20337,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwU</string>
+                   <string>CSU</string>
                   </property>
                  </widget>
                 </item>
@@ -20362,7 +20362,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwV</string>
+                   <string>CSV</string>
                   </property>
                  </widget>
                 </item>
@@ -20387,7 +20387,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                    <enum>QFrame::Raised</enum>
                   </property>
                   <property name="text">
-                   <string>CSwW</string>
+                   <string>CSW</string>
                   </property>
                  </widget>
                 </item>
@@ -20494,8 +20494,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>153</width>
+            <height>354</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
@@ -20903,8 +20903,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
-            <height>618</height>
+            <width>500</width>
+            <height>48</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_75">
