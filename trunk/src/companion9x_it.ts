@@ -578,14 +578,6 @@ Mode 4:
         <translation>PPM 1</translation>
     </message>
     <message>
-        <source>+=</source>
-        <translation type="obsolete">+=</translation>
-    </message>
-    <message>
-        <source>:=</source>
-        <translation type="obsolete">:=</translation>
-    </message>
-    <message>
         <location filename="generaledit.ui" line="1777"/>
         <location filename="generaledit.ui" line="1879"/>
         <location filename="generaledit.ui" line="1918"/>
@@ -919,6 +911,11 @@ Mode 4:
     <message>
         <location filename="generaledit.ui" line="1133"/>
         <source>9600 Baud</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1138"/>
+        <source>14400 Baud</source>
         <translation></translation>
     </message>
     <message>
@@ -3879,8 +3876,9 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     </message>
     <message>
         <location filename="modeledit.ui" line="19094"/>
-        <source>CSw9</source>
-        <translation>CSw9</translation>
+        <source>CS9</source>
+        <oldsource>CSw9</oldsource>
+        <translation>CS9</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19113"/>
@@ -3890,13 +3888,15 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     </message>
     <message>
         <location filename="modeledit.ui" line="19161"/>
-        <source>CSwF</source>
-        <translation>CSwF</translation>
+        <source>CSF</source>
+        <oldsource>CSwF</oldsource>
+        <translation>CSF</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19196"/>
-        <source>CSwD</source>
-        <translation>CSwD</translation>
+        <source>CSD</source>
+        <oldsource>CSwD</oldsource>
+        <translation>CSD</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19212"/>
@@ -3965,10 +3965,6 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
         <location filename="modeledit.ui" line="21407"/>
         <source>Vario</source>
         <translation>Variometro</translation>
-    </message>
-    <message>
-        <source>Center Max</source>
-        <translation type="obsolete">Centro Max</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21572"/>
@@ -4119,148 +4115,177 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     </message>
     <message>
         <location filename="modeledit.ui" line="19281"/>
-        <source>CSw6</source>
-        <translation>CSw6</translation>
+        <source>CS6</source>
+        <oldsource>CSw6</oldsource>
+        <translation>CS6</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19309"/>
-        <source>CSw1</source>
-        <translation>CSw1</translation>
+        <source>CS1</source>
+        <oldsource>CSw1</oldsource>
+        <translation>CS1</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19344"/>
-        <source>CSw8</source>
-        <translation>CSw8</translation>
+        <source>CS8</source>
+        <oldsource>CSw8</oldsource>
+        <translation>CS8</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19379"/>
-        <source>CSw7</source>
-        <translation>CSw7</translation>
+        <source>CS7</source>
+        <oldsource>CSw7</oldsource>
+        <translation>CS7</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19424"/>
-        <source>CSwA</source>
-        <translation>CSwA</translation>
+        <source>CSA</source>
+        <oldsource>CSwA</oldsource>
+        <translation>CSA</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19459"/>
-        <source>CSwB</source>
-        <translation>CSwB</translation>
+        <source>CSB</source>
+        <oldsource>CSwB</oldsource>
+        <translation>CSB</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19494"/>
-        <source>CSwC</source>
-        <translation>CSwC</translation>
+        <source>CSC</source>
+        <oldsource>CSwC</oldsource>
+        <translation>CSC</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19549"/>
-        <source>CSw5</source>
-        <translation>CSw5</translation>
+        <source>CS5</source>
+        <oldsource>CSw5</oldsource>
+        <translation>CS5</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19623"/>
-        <source>CSw3</source>
-        <translation>CSw3</translation>
+        <source>CS3</source>
+        <oldsource>CSw3</oldsource>
+        <translation>CS3</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19648"/>
-        <source>CSw2</source>
-        <translation>CSw2</translation>
+        <source>CS2</source>
+        <oldsource>CSw2</oldsource>
+        <translation>CS2</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19673"/>
-        <source>CSwE</source>
-        <translation>CSwE</translation>
+        <source>CSE</source>
+        <oldsource>CSwE</oldsource>
+        <translation>CSE</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19698"/>
-        <source>CSwG</source>
-        <translation></translation>
+        <source>CSG</source>
+        <oldsource>CSwG</oldsource>
+        <translation>CSG</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19733"/>
-        <source>CSw4</source>
-        <translation>CSw4</translation>
+        <source>CS4</source>
+        <oldsource>CSw4</oldsource>
+        <translation>CS4</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19826"/>
-        <source>CSwT</source>
-        <translation>CSwT</translation>
+        <source>CST</source>
+        <oldsource>CSwT</oldsource>
+        <translation>CST</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19931"/>
-        <source>CSwM</source>
-        <translation>CSwM</translation>
+        <source>CSM</source>
+        <oldsource>CSwM</oldsource>
+        <translation>CSM</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19956"/>
-        <source>CSwP</source>
-        <translation>CSwP</translation>
+        <source>CSP</source>
+        <oldsource>CSwP</oldsource>
+        <translation>CSP</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19981"/>
-        <source>CSwH</source>
-        <translation>CSwH</translation>
+        <source>CSH</source>
+        <oldsource>CSwH</oldsource>
+        <translation>CSH</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20016"/>
-        <source>CSwO</source>
-        <translation>CSwO</translation>
+        <source>CSO</source>
+        <oldsource>CSwO</oldsource>
+        <translation>CSO</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20041"/>
-        <source>CSwN</source>
-        <translation>CSwN</translation>
+        <source>CSN</source>
+        <oldsource>CSwN</oldsource>
+        <translation>CSN</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20076"/>
-        <source>CSwQ</source>
-        <translation>CSwQ</translation>
+        <source>CSQ</source>
+        <oldsource>CSwQ</oldsource>
+        <translation>CSQ</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20111"/>
-        <source>CSwR</source>
-        <translation>CSwR</translation>
+        <source>CSR</source>
+        <oldsource>CSwR</oldsource>
+        <translation>CSR</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20146"/>
-        <source>CSwS</source>
-        <translation>CSwS</translation>
+        <source>CSS</source>
+        <oldsource>CSwS</oldsource>
+        <translation>CSS</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20201"/>
-        <source>CSwL</source>
-        <translation>CSwL</translation>
+        <source>CSL</source>
+        <oldsource>CSwL</oldsource>
+        <translation>CSL</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20246"/>
-        <source>CSwK</source>
-        <translation>CSwK</translation>
+        <source>CSK</source>
+        <oldsource>CSwK</oldsource>
+        <translation>CSK</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20290"/>
-        <source>CSwJ</source>
-        <translation>CSwJ</translation>
+        <source>CSJ</source>
+        <oldsource>CSwJ</oldsource>
+        <translation>CSJ</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20315"/>
-        <source>CSwI</source>
-        <translation>CSwI</translation>
+        <source>CSI</source>
+        <oldsource>CSwI</oldsource>
+        <translation>CSI</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20340"/>
-        <source>CSwU</source>
-        <translation>CSwU</translation>
+        <source>CSU</source>
+        <oldsource>CSwU</oldsource>
+        <translation>CSU</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20365"/>
-        <source>CSwV</source>
-        <translation>CSwV</translation>
+        <source>CSV</source>
+        <oldsource>CSwV</oldsource>
+        <translation>CSV</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20390"/>
-        <source>CSwW</source>
-        <translation>CSwW</translation>
+        <source>CSW</source>
+        <oldsource>CSwW</oldsource>
+        <translation>CSW</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21163"/>
@@ -5230,7 +5255,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="helpers.cpp" line="151"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="153"/>
@@ -5514,7 +5539,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="helpers.cpp" line="1212"/>
         <source>Winged Shadow How High</source>
-        <translation>Winged Shadow How High</translation>
+        <translation type="unfinished">Winged Shadow How High</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1214"/>
@@ -5685,12 +5710,12 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Rpm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
@@ -5700,7 +5725,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
@@ -5715,12 +5740,12 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Cell</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="289"/>
         <source>MAX</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="249"/>
@@ -6130,7 +6155,7 @@ Se l&apos;opzione selezionata lo stick motore verrà rovesciato. Il minimo sarà
     <message>
         <location filename="open9xinterface.cpp" line="1153"/>
         <source>EEprom write progress bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra di avanzamento durante la scrittura della eeprom</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1155"/>
@@ -6391,105 +6416,105 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>S1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>S2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>LS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="255"/>
         <location filename="helpers.cpp" line="53"/>
         <source>RS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="264"/>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SG</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="265"/>
         <source>SH</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="268"/>
         <source>Batt</source>
-        <translation type="unfinished"></translation>
+        <translation>Batt</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Tx</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Rx</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Cels</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Vfas</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>Curr</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>Cnsp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>Powr</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
@@ -6514,7 +6539,7 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
         <source>VSpd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="271"/>
@@ -6529,27 +6554,27 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Alt-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Alt+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>Rpm+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>T1+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
         <source>T2+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="272"/>
@@ -6604,162 +6629,162 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS1</source>
-        <translation type="unfinished"></translation>
+        <translation>CS1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS2</source>
-        <translation type="unfinished"></translation>
+        <translation>CS2</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS3</source>
-        <translation type="unfinished"></translation>
+        <translation>CS3</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS4</source>
-        <translation type="unfinished"></translation>
+        <translation>CS4</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS5</source>
-        <translation type="unfinished"></translation>
+        <translation>CS5</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS6</source>
-        <translation type="unfinished"></translation>
+        <translation>CS6</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS7</source>
-        <translation type="unfinished"></translation>
+        <translation>CS7</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS8</source>
-        <translation type="unfinished"></translation>
+        <translation>CS8</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CS9</source>
-        <translation type="unfinished"></translation>
+        <translation>CS9</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="341"/>
         <source>CSA</source>
-        <translation type="unfinished"></translation>
+        <translation>CSA</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSB</source>
-        <translation type="unfinished"></translation>
+        <translation>CSB</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSC</source>
-        <translation type="unfinished"></translation>
+        <translation>CSC</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSD</source>
-        <translation type="unfinished"></translation>
+        <translation>CSD</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSE</source>
-        <translation type="unfinished"></translation>
+        <translation>CSE</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSF</source>
-        <translation type="unfinished"></translation>
+        <translation>CSF</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSG</source>
-        <translation type="unfinished"></translation>
+        <translation>CSG</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSH</source>
-        <translation type="unfinished"></translation>
+        <translation>CSH</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSI</source>
-        <translation type="unfinished"></translation>
+        <translation>CSI</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSJ</source>
-        <translation type="unfinished"></translation>
+        <translation>CSJ</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="342"/>
         <source>CSK</source>
-        <translation type="unfinished"></translation>
+        <translation>CSK</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSL</source>
-        <translation type="unfinished"></translation>
+        <translation>CSL</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSM</source>
-        <translation type="unfinished"></translation>
+        <translation>CSM</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSN</source>
-        <translation type="unfinished"></translation>
+        <translation>CSN</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSO</source>
-        <translation type="unfinished"></translation>
+        <translation>CSO</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSP</source>
-        <translation type="unfinished"></translation>
+        <translation>CSP</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSQ</source>
-        <translation type="unfinished"></translation>
+        <translation>CSQ</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSR</source>
-        <translation type="unfinished"></translation>
+        <translation>CSR</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSS</source>
-        <translation type="unfinished"></translation>
+        <translation>CSS</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CST</source>
-        <translation type="unfinished"></translation>
+        <translation>CST</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="343"/>
         <source>CSU</source>
-        <translation type="unfinished"></translation>
+        <translation>CSU</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="344"/>
         <source>CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="344"/>
         <source>CSW</source>
-        <translation type="unfinished"></translation>
+        <translation>CSW</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="359"/>
@@ -6821,7 +6846,7 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
     <message>
         <location filename="eeprominterface.cpp" line="293"/>
         <source>CS%1</source>
-        <translation type="unfinished"></translation>
+        <translation>CS%1</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="356"/>
@@ -7009,7 +7034,7 @@ la eeprom è 4096 bytes ma solo 2048 vengono utilizzati</translation>
         <source>Warning!
 splash image format stored in preferences has been changed!
 Check your settings again.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -10299,33 +10324,153 @@ Può essere differente dalla lingua del firmware</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1265"/>
-        <source>SW1</source>
-        <translation>SW1</translation>
+        <source>CS1</source>
+        <translation>CS1</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1296"/>
-        <source>SW2</source>
-        <translation>SW2</translation>
+        <source>CS2</source>
+        <translation>CS2</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1327"/>
-        <source>SW3</source>
-        <translation>SW3</translation>
+        <source>CS3</source>
+        <translation>CS3</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1358"/>
-        <source>SW4</source>
-        <translation>SW4</translation>
+        <source>CS4</source>
+        <translation>CS4</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1389"/>
-        <source>SW5</source>
-        <translation>SW5</translation>
+        <source>CS5</source>
+        <translation>CS5</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1420"/>
-        <source>SW6</source>
-        <translation>SW6</translation>
+        <source>CS6</source>
+        <translation>CS6</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1451"/>
+        <source>CS7</source>
+        <translation>CS7</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1482"/>
+        <source>CS8</source>
+        <translation>CS8</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1513"/>
+        <source>CS9</source>
+        <translation>CS9</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1544"/>
+        <source>CSA</source>
+        <translation>CSA</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1575"/>
+        <source>CSB</source>
+        <translation>CSB</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1606"/>
+        <source>CSC</source>
+        <translation>CSC</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1637"/>
+        <source>CSD</source>
+        <translation>CSD</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1668"/>
+        <source>CSE</source>
+        <translation>CSE</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1699"/>
+        <source>CSF</source>
+        <translation>CSF</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1730"/>
+        <source>CSG</source>
+        <translation>CSG</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1761"/>
+        <source>CSH</source>
+        <translation>CSH</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1792"/>
+        <source>CSI</source>
+        <translation>CSI</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1823"/>
+        <source>CSJ</source>
+        <translation>CSJ</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1885"/>
+        <source>CSL</source>
+        <translation>CSL</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1916"/>
+        <source>CSM</source>
+        <translation>CSM</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1947"/>
+        <source>CSN</source>
+        <translation>CSN</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="1978"/>
+        <source>CSO</source>
+        <translation>CSO</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2009"/>
+        <source>CSP</source>
+        <translation>CSP</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2040"/>
+        <source>CSQ</source>
+        <translation>CSQ</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2071"/>
+        <source>CSR</source>
+        <translation>CSR</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2102"/>
+        <source>CSS</source>
+        <translation>CSS</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2133"/>
+        <source>CST</source>
+        <translation>CST</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2164"/>
+        <source>CSU</source>
+        <translation>CSU</translation>
+    </message>
+    <message>
+        <location filename="simulatordialog.ui" line="2195"/>
+        <source>CSV</source>
+        <translation>CSV</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="806"/>
@@ -10333,134 +10478,16 @@ Può essere differente dalla lingua del firmware</translation>
         <translation>SUONO</translation>
     </message>
     <message>
-        <location filename="simulatordialog.ui" line="1451"/>
-        <source>SW7</source>
-        <translation>SW7</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1482"/>
-        <source>SW8</source>
-        <translation>SW8</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1513"/>
-        <source>SW9</source>
-        <translation>SW9</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1544"/>
-        <source>SWA</source>
-        <translation>SWA</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1575"/>
-        <source>SWB</source>
-        <translation>SWB</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1606"/>
-        <source>SWC</source>
-        <translation>SWC</translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1637"/>
-        <source>SWD</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1668"/>
-        <source>SWE</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1699"/>
-        <source>SWF</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1730"/>
-        <source>SWG</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1761"/>
-        <source>SWH</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1792"/>
-        <source>SWI</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1823"/>
-        <source>SWJ</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="simulatordialog.ui" line="1854"/>
-        <source>SWK</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1885"/>
-        <source>SWL</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1916"/>
-        <source>SWM</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1947"/>
-        <source>SWN</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="1978"/>
-        <source>SWO</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2009"/>
-        <source>SWP</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2040"/>
-        <source>SWQ</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2071"/>
-        <source>SWR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2102"/>
-        <source>SWS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2133"/>
-        <source>SWT</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2164"/>
-        <source>SWU</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="simulatordialog.ui" line="2195"/>
-        <source>SWV</source>
-        <translation></translation>
+        <source>CSK</source>
+        <oldsource>SWK</oldsource>
+        <translation>CSK</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2226"/>
-        <source>SWW</source>
-        <translation></translation>
+        <source>CSW</source>
+        <oldsource>SWW</oldsource>
+        <translation>CSW</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="2307"/>
@@ -10579,22 +10606,22 @@ Può essere differente dalla lingua del firmware</translation>
         <translation>Non riesco ad aprire il joystick, supporto joystick disabilitato</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="231"/>
+        <location filename="simulatordialog.cpp" line="230"/>
         <source>Firmware %1 error: %2</source>
         <translation>Firmware %1 errore: %2</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="240"/>
+        <location filename="simulatordialog.cpp" line="239"/>
         <source> - Flight mode: %1(%2)</source>
         <translation> - Fase di Volo: %1(%2)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="334"/>
+        <location filename="simulatordialog.cpp" line="333"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simulazione Tx (%1)</translation>
     </message>
     <message>
-        <location filename="simulatordialog.cpp" line="340"/>
+        <location filename="simulatordialog.cpp" line="339"/>
         <source>Simulating </source>
         <translation>Simulazione in corso</translation>
     </message>
@@ -10765,163 +10792,15 @@ Può essere differente dalla lingua del firmware</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="2896"/>
-        <source>SWK</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="2958"/>
-        <source>SWD</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3020"/>
-        <source>SWL</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3082"/>
-        <source>SW1</source>
-        <translation>SW1</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3113"/>
-        <source>SWH</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3144"/>
-        <source>SWG</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3175"/>
-        <source>SWE</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3206"/>
-        <source>SWF</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3330"/>
-        <source>SWM</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3361"/>
-        <source>SWJ</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3392"/>
-        <source>SWI</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3485"/>
-        <source>SW2</source>
-        <translation>SW2</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3516"/>
-        <source>SW3</source>
-        <translation>SW3</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3578"/>
-        <source>SWN</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3609"/>
-        <source>SWO</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3640"/>
-        <source>SWP</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3671"/>
-        <source>SWQ</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3702"/>
-        <source>SWR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3733"/>
-        <source>SWS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3764"/>
-        <source>SWT</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3795"/>
-        <source>SWU</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3826"/>
-        <source>SWV</source>
-        <translation></translation>
+        <source>CSK</source>
+        <oldsource>SWK</oldsource>
+        <translation>CSK</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="3857"/>
-        <source>SWW</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3423"/>
-        <source>SW4</source>
-        <translation>SW4</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3454"/>
-        <source>SW5</source>
-        <translation>SW5</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3547"/>
-        <source>SW6</source>
-        <translation>SW6</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="2989"/>
-        <source>SW7</source>
-        <translation>SW7</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3237"/>
-        <source>SW8</source>
-        <translation>SW8</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3268"/>
-        <source>SW9</source>
-        <translation>SW9</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3299"/>
-        <source>SWA</source>
-        <translation>SWA</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="3051"/>
-        <source>SWB</source>
-        <translation>SWB</translation>
-    </message>
-    <message>
-        <location filename="xsimulatordialog.ui" line="2927"/>
-        <source>SWC</source>
-        <translation>SWC</translation>
+        <source>CSW</source>
+        <oldsource>SWW</oldsource>
+        <translation>CSW</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1551"/>
@@ -11024,6 +10903,156 @@ Può essere differente dalla lingua del firmware</translation>
         <translation>CH16</translation>
     </message>
     <message>
+        <location filename="xsimulatordialog.ui" line="2927"/>
+        <source>CSC</source>
+        <translation>CSC</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="2958"/>
+        <source>CSD</source>
+        <translation>CSD</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="2989"/>
+        <source>CS7</source>
+        <translation>CS7</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3020"/>
+        <source>CSL</source>
+        <translation>CSL</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3051"/>
+        <source>CSB</source>
+        <translation>CSB</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3082"/>
+        <source>CS1</source>
+        <translation>CS1</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3113"/>
+        <source>CSH</source>
+        <translation>CSH</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3144"/>
+        <source>CSG</source>
+        <translation>CSG</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3175"/>
+        <source>CSE</source>
+        <translation>CSE</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3206"/>
+        <source>CSF</source>
+        <translation>CSF</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3237"/>
+        <source>CS8</source>
+        <translation>CS8</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3268"/>
+        <source>CS9</source>
+        <translation>CS9</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3299"/>
+        <source>CSA</source>
+        <translation>CSA</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3330"/>
+        <source>CSM</source>
+        <translation>CSM</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3361"/>
+        <source>CSJ</source>
+        <translation>CSJ</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3392"/>
+        <source>CSI</source>
+        <translation>CSI</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3423"/>
+        <source>CS4</source>
+        <translation>CS4</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3454"/>
+        <source>CS5</source>
+        <translation>CS5</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3485"/>
+        <source>CS2</source>
+        <translation>CS2</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3516"/>
+        <source>CS3</source>
+        <translation>CS3</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3547"/>
+        <source>CS6</source>
+        <translation>CS6</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3578"/>
+        <source>CSN</source>
+        <translation>CSN</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3609"/>
+        <source>CSO</source>
+        <translation>CSO</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3640"/>
+        <source>CSP</source>
+        <translation>CSP</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3671"/>
+        <source>CSQ</source>
+        <translation>CSQ</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3702"/>
+        <source>CSR</source>
+        <translation>CSR</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3733"/>
+        <source>CSS</source>
+        <translation>CSS</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3764"/>
+        <source>CST</source>
+        <translation>CST</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3795"/>
+        <source>CSU</source>
+        <translation>CSU</translation>
+    </message>
+    <message>
+        <location filename="xsimulatordialog.ui" line="3826"/>
+        <source>CSV</source>
+        <translation>CSV</translation>
+    </message>
+    <message>
         <location filename="xsimulatordialog.cpp" line="58"/>
         <location filename="xsimulatordialog.cpp" line="80"/>
         <source>Warning</source>
@@ -11040,22 +11069,22 @@ Può essere differente dalla lingua del firmware</translation>
         <translation>Non riesco ad aprire il joystick, supporto joystick disabilitato</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.cpp" line="199"/>
+        <location filename="xsimulatordialog.cpp" line="198"/>
         <source>Firmware %1 error: %2</source>
         <translation>Firmware %1 errore: %2</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.cpp" line="208"/>
+        <location filename="xsimulatordialog.cpp" line="207"/>
         <source> - Flight mode: %1(%2)</source>
         <translation> - Fase di Volo: %1(%2)</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.cpp" line="258"/>
+        <location filename="xsimulatordialog.cpp" line="257"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simulazione Tx (%1)</translation>
     </message>
     <message>
-        <location filename="xsimulatordialog.cpp" line="264"/>
+        <location filename="xsimulatordialog.cpp" line="263"/>
         <source>Simulating </source>
         <translation>Simulazione in corso</translation>
     </message>
