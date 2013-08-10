@@ -272,6 +272,13 @@ QString RawSource::toString()
                             QObject::tr("A2-"), QObject::tr("Alt-"), QObject::tr("Alt+"), QObject::tr("Rpm+"), QObject::tr("T1+"), QObject::tr("T2+"), QObject::tr("Spd+"), QObject::tr("Dst+"),
                             QObject::tr("Cur+"), QObject::tr("Pwr+"), QObject::tr("ACC "), QObject::tr("Time"),
                           };
+
+  static const QString virtualSwitches[] = { QObject::tr("CS1"), QObject::tr("CS2"), QObject::tr("CS3"), QObject::tr("CS4"), QObject::tr("CS5"), QObject::tr("CS6"), QObject::tr("CS7"), QObject::tr("CS8"), QObject::tr("CS9"), QObject::tr("CSA"),
+                                             QObject::tr("CSB"), QObject::tr("CSC"), QObject::tr("CSD"), QObject::tr("CSE"), QObject::tr("CSF"), QObject::tr("CSG"), QObject::tr("CSH"), QObject::tr("CSI"), QObject::tr("CSJ"), QObject::tr("CSK"),
+                                             QObject::tr("CSL"), QObject::tr("CSM"), QObject::tr("CSN"), QObject::tr("CSO"), QObject::tr("CSP"), QObject::tr("CSQ"), QObject::tr("CSR"), QObject::tr("CSS"), QObject::tr("CST"), QObject::tr("CSU"),
+                                             QObject::tr("CSV"), QObject::tr("CSW")
+                                           };
+  
   if (index<0) {
     return QObject::tr("----");
   }
@@ -290,7 +297,7 @@ QString RawSource::toString()
     case SOURCE_TYPE_SWITCH:
       return (IS_TARANIS(GetEepromInterface()->getBoard()) ? CHECK_IN_ARRAY(switchesX9D, index) : CHECK_IN_ARRAY(switches9X, index));
     case SOURCE_TYPE_CUSTOM_SWITCH:
-      return QObject::tr("CS%1").arg(index+1);
+      return virtualSwitches[index];
     case SOURCE_TYPE_CYC:
       return QObject::tr("CYC%1").arg(index+1);
     case SOURCE_TYPE_PPM:
