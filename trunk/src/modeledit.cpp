@@ -764,7 +764,32 @@ void ModelEdit::tabModelEditSetup()
   if (!GetEepromInterface()->getCapability(PermTimers)) {
     ui->timer1Perm->hide();
     ui->timer2Perm->hide();
+    ui->timer1PermValue->hide();
+    ui->timer2PermValue->hide();
   } else {
+    int sign=1;
+    int pvalue=g_model.timers[0].pvalue;
+    if (pvalue<0) {
+      pvalue=-pvalue;
+      sign=-1;
+    }
+    int hours=pvalue/3600;
+    pvalue-=hours*3600;
+    int minutes = pvalue/60;
+    int seconds = pvalue%60;
+    ui->timer1PermValue->setText(QString(" %1(%2:%3:%4)").arg(sign<0 ? "-" :" ").arg(hours,2,10,QLatin1Char('0')).arg(minutes,2,10,QLatin1Char('0')).arg(seconds,2,10,QLatin1Char('0')));
+    // QString QString::arg ( int a, int fieldWidth = 0, int base = 10, const QChar & fillChar = QLatin1Char( ' ' ) ) const
+    sign=1;
+    pvalue=g_model.timers[1].pvalue;
+    if (pvalue<0) {
+      pvalue=-pvalue;
+      sign=-1;
+    }    
+    hours=pvalue/3600;
+    pvalue-=hours*3600;
+    minutes = pvalue/60;
+    seconds = pvalue%60;
+    ui->timer2PermValue->setText(QString(" %1(%2:%3:%4)").arg(sign<0 ? "-" :" ").arg(hours,2,10,QLatin1Char('0')).arg(minutes,2,10,QLatin1Char('0')).arg(seconds,2,10,QLatin1Char('0')));
     ui->timer1Perm->setChecked(g_model.timers[0].persistent);
     ui->timer2Perm->setChecked(g_model.timers[1].persistent);
   }

@@ -727,6 +727,7 @@ class TimerData {
     bool      dir;    // 0=>Count Down, 1=>Count Up
     unsigned int val;
     bool      persistent;
+    int pvalue;
     void clear() { memset(this, 0, sizeof(TimerData)); }
 };
 
