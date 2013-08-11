@@ -7427,7 +7427,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7459,7 +7459,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7476,7 +7476,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7508,7 +7508,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7549,13 +7549,20 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="phase6Trim3Use"/>
+                    <widget class="QComboBox" name="phase6Trim3Use">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
                    </item>
                    <item>
                     <widget class="QSpinBox" name="phase6Trim3Value">
@@ -7581,7 +7588,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7598,7 +7605,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -7630,7 +7637,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>1</height>
+                       <height>40</height>
                       </size>
                      </property>
                     </spacer>
@@ -9037,8 +9044,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>908</width>
-            <height>481</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -13900,8 +13907,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>923</width>
-            <height>467</height>
+            <width>1034</width>
+            <height>589</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -20494,8 +20501,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>153</width>
-            <height>354</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="grid_tabSafetySwitches" rowstretch="0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" columnstretch="0,10,10">
@@ -20903,8 +20910,8 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>48</height>
+            <width>1034</width>
+            <height>618</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_75">
