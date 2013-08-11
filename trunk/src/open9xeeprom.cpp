@@ -1629,6 +1629,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
     internalField.Append(new TimerModeField(modelData.timers[i].mode, board, version));
     if (release21March2013) {
       internalField.Append(new UnsignedField<12>(modelData.timers[i].val));
+
       internalField.Append(new BoolField<1>(modelData.timers[i].countdownBeep));
       internalField.Append(new BoolField<1>(modelData.timers[i].minuteBeep));
       if (HAS_PERSISTENT_TIMERS(board)) {
@@ -1756,6 +1757,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
 void Open9xModelDataNew::beforeExport()
 {
+  // qDebug() << QString("before export model") << modelData.name;
   for (int module=0; module<3; module++) {
     if (modelData.moduleData[module].protocol >= PXX_XJT_X16 && modelData.moduleData[module].protocol <= PXX_XJT_LR12)
       subprotocols[module] = modelData.moduleData[module].protocol - PXX_XJT_X16;

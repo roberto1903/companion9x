@@ -3138,7 +3138,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
   else if (index==FuncPlaySound || index==FuncPlayHaptic || index==FuncPlayValue || index==FuncPlayPrompt || index==FuncPlayBoth || index==FuncBackgroundMusic) {
     if (modified) g_model.funcSw[i].repeatParam = fswtchRepeat[i]->itemData(fswtchRepeat[i]->currentIndex()).toInt();
     if (index != FuncBackgroundMusic) {
-      if (!GetEepromInterface()->getCapability(HasFuncRepeat)) {
+      if (GetEepromInterface()->getCapability(HasFuncRepeat)) {
         widgetsMask |= CUSTOM_FUNCTION_REPEAT;
       }
     }
@@ -3146,8 +3146,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
       if (modified) g_model.funcSw[i].param = fswtchParamT[i]->itemData(fswtchParamT[i]->currentIndex()).toInt();
       populateFuncParamCB(fswtchParamT[i], index, g_model.funcSw[i].param);
       widgetsMask |= CUSTOM_FUNCTION_SOURCE_PARAM + CUSTOM_FUNCTION_REPEAT;
-    }
-    else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
+    } else if (index==FuncPlayPrompt || index==FuncPlayBoth) {
       if (GetEepromInterface()->getCapability(VoicesAsNumbers)) {
         fswtchParam[i]->setDecimals(0);
         fswtchParam[i]->setSingleStep(1);
@@ -3298,8 +3297,8 @@ void ModelEdit::tabTelemetry()
   else {
     ui->AltitudeGPS_CB->setChecked(g_model.frsky.FrSkyGpsAlt);
   }
-
-  if (!GetEepromInterface()->getCapability(HasVario)) {
+  int varioCap=GetEepromInterface()->getCapability(HasVario);
+  if (!varioCap) {
     ui->varioLimitMax_DSB->hide();
     ui->varioLimitMinOff_ChkB->hide();
     ui->varioLimitMin_DSB->hide();
@@ -3332,6 +3331,15 @@ void ModelEdit::tabTelemetry()
     } else {
       ui->varioLimitMinOff_ChkB->setChecked(false);
       ui->varioLimitCenterMin_DSB->setValue((g_model.frsky.varioCenterMin/10.0)-0.5);
+    }
+    int mask=1;
+    for (int i=0; i< ui->varioSourceCB->count(); i++) {
+      if (!(varioCap&mask)) {
+        QModelIndex index = ui->varioSourceCB->model()->index(i, 0);
+        QVariant v(0);
+        ui->varioSourceCB->model()->setData(index, v, Qt::UserRole - 1);
+      }
+      mask <<=1;
     }
   }
 

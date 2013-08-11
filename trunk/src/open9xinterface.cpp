@@ -743,7 +743,7 @@ int Open9xInterface::getCapability(const Capability capability)
     case OptrexDisplay:
       return (board==BOARD_SKY9X ? true : false);
     case HasVario:
-      return 1;
+      return (IS_TARANIS(board) ? 28 : 31);
     case HasVarioSink:
       return ((board == BOARD_GRUVIN9X || IS_ARM(board)) ? true : false);
     case HasVariants:

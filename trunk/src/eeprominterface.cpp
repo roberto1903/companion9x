@@ -274,10 +274,10 @@ QString RawSource::toString()
                           };
 
   static const QString virtualSwitches[] = { QObject::tr("CS1"), QObject::tr("CS2"), QObject::tr("CS3"), QObject::tr("CS4"), QObject::tr("CS5"), QObject::tr("CS6"), QObject::tr("CS7"), QObject::tr("CS8"), QObject::tr("CS9"), QObject::tr("CSA"),
-                                             QObject::tr("CSB"), QObject::tr("CSC"), QObject::tr("CSD"), QObject::tr("CSE"), QObject::tr("CSF"), QObject::tr("CSG"), QObject::tr("CSH"), QObject::tr("CSI"), QObject::tr("CSJ"), QObject::tr("CSK"),
-                                             QObject::tr("CSL"), QObject::tr("CSM"), QObject::tr("CSN"), QObject::tr("CSO"), QObject::tr("CSP"), QObject::tr("CSQ"), QObject::tr("CSR"), QObject::tr("CSS"), QObject::tr("CST"), QObject::tr("CSU"),
-                                             QObject::tr("CSV"), QObject::tr("CSW")
-                                           };
+                            QObject::tr("CSB"), QObject::tr("CSC"), QObject::tr("CSD"), QObject::tr("CSE"), QObject::tr("CSF"), QObject::tr("CSG"), QObject::tr("CSH"), QObject::tr("CSI"), QObject::tr("CSJ"), QObject::tr("CSK"),
+                            QObject::tr("CSL"), QObject::tr("CSM"), QObject::tr("CSN"), QObject::tr("CSO"), QObject::tr("CSP"), QObject::tr("CSQ"), QObject::tr("CSR"), QObject::tr("CSS"), QObject::tr("CST"), QObject::tr("CSU"),
+                            QObject::tr("CSV"), QObject::tr("CSW")
+                          };
   
   if (index<0) {
     return QObject::tr("----");
