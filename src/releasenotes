@@ -1,3 +1,10 @@
+<h2>Version 1.46</h2>
+<ul>
+<li>Interface fixes (issues 224,225)</li>
+<li>Show persistent timers value in modeledit</li>
+<li>Consistent naming of Custom Switches in c9x</li>
+</ul>
+
 <h2>Version 1.45</h2>
 <ul>
 <li>Various fixes</li>
