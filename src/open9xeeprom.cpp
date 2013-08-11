@@ -1635,7 +1635,7 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
       if (HAS_PERSISTENT_TIMERS(board)) {
         internalField.Append(new BoolField<1>(modelData.timers[i].persistent));
         internalField.Append(new SpareBitsField<1>());
-        internalField.Append(new SpareBitsField<16>());
+        internalField.Append(new SignedField<16>(modelData.timers[i].pvalue));
       }
       else {
         internalField.Append(new SpareBitsField<2>());
