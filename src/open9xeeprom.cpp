@@ -3,7 +3,6 @@
 #include "helpers.h"
 #include "open9xeeprom.h"
 #include <QObject>
-// #include <QMessageBox>
 
 #define IS_DBLEEPROM(board, version)         ((board==BOARD_GRUVIN9X || board==BOARD_M128) && version >= 213)
 // Macro used for Gruvin9x board and M128 board between versions 213 and 214 (when there were stack overflows!)
@@ -1515,6 +1514,17 @@ class RSSIConversionTable: public ConversionTable
     }
 };
 
+class VarioConversionTable: public ConversionTable
+{
+  public:
+    VarioConversionTable()
+    {
+      addConversion(2, 0); // Vario
+      addConversion(3, 1); // A1
+      addConversion(4, 2); // A2
+    }
+};
+
 class FrskyField: public StructField {
   public:
     FrskyField(FrSkyData & frsky, BoardEnum board, unsigned int version):
@@ -1550,7 +1560,10 @@ class FrskyField: public StructField {
         for (int i=0; i<3; i++) {
           Append(new FrskyScreenField(frsky.screens[i], board, version));
         }
-        Append(new UnsignedField<8>(frsky.varioSource));
+        if (IS_TARANIS(board))
+          Append(new ConversionField< UnsignedField<8> >(frsky.varioSource, &varioConversionTable, "Vario Source"));
+        else
+          Append(new UnsignedField<8>(frsky.varioSource));
         Append(new SignedField<8>(frsky.varioCenterMax));
         Append(new SignedField<8>(frsky.varioCenterMin));
         Append(new SignedField<8>(frsky.varioMin));
@@ -1596,6 +1609,7 @@ class FrskyField: public StructField {
 
   protected:
     RSSIConversionTable rssiConversionTable[2];
+    VarioConversionTable varioConversionTable;
 };
 
 int exportPpmDelay(int delay) { return (delay - 300) / 50; }
