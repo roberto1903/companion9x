@@ -421,6 +421,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
 
     QByteArray qba = reply->readAll();
     int i = qba.indexOf("SVN_VERS");
+    int warning = qba.indexOf("WARNING");
 
     if(i>0)
     {
@@ -439,107 +440,116 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             return;
         }
         
-        if(rev>0)
-        {
-            NewFwRev=rev;
-            settings.beginGroup("FwRevisions");
-            OldFwRev = settings.value(fwToUpdate, 0).toInt();
-            settings.endGroup();
-            QMessageBox msgBox;
-            QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-            QGridLayout* layout = (QGridLayout*)msgBox.layout();
-            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());            
-            if (OldFwRev == 0) {
-                showcheckForUpdatesResult = false; // update is available - do not show dialog
-                QString rn = GetFirmware(fwToUpdate)->rnurl;
-                QAbstractButton *rnButton;
-                msgBox.setInformativeText(tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev));
-                QAbstractButton *YesButton = msgBox.addButton(trUtf8("Yes"), QMessageBox::YesRole);
-                msgBox.addButton(trUtf8("No"), QMessageBox::NoRole);
-                if (!rn.isEmpty()) {
-                   rnButton = msgBox.addButton(trUtf8("Release Notes"), QMessageBox::ActionRole);
-                }
-                msgBox.setIcon(QMessageBox::Question);
-                msgBox.resize(0,0);
-                msgBox.exec();
-                if( msgBox.clickedButton() == rnButton ) {
-                  contributorsDialog *cd = new contributorsDialog(this,2,rn);
-                  cd->exec();
-                  int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
-                        QMessageBox::Yes | QMessageBox::No);
-                  if (ret2 == QMessageBox::Yes) {
-                      download = true;
-                  } else {
-                      ignore = true;
-                  }                                    
-                } else if (msgBox.clickedButton() == YesButton ) {
-                    download = true;
-                } else {
-                    ignore = true;
-                }
-            } else if (NewFwRev > OldFwRev) {
-                showcheckForUpdatesResult = false; // update is available - do not show dialog
-                QString rn = GetFirmware(fwToUpdate)->rnurl;
-                QAbstractButton *rnButton;
-                msgBox.setText("companion9x");
-                msgBox.setInformativeText(tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate).arg(OldFwRev).arg(NewFwRev));
-                QAbstractButton *YesButton = msgBox.addButton(trUtf8("Yes"), QMessageBox::YesRole);
-                msgBox.addButton(trUtf8("No"), QMessageBox::NoRole);
-                if (!rn.isEmpty()) {
-                   rnButton = msgBox.addButton(trUtf8("Release Notes"), QMessageBox::ActionRole);
-                }
-                msgBox.setIcon(QMessageBox::Question);
-                msgBox.resize(0,0);
-                msgBox.exec(); 
-                if( msgBox.clickedButton() == rnButton ) {
-                  contributorsDialog *cd = new contributorsDialog(this,2,rn);
-                  cd->exec();
-                  int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
-                        QMessageBox::Yes | QMessageBox::No);
-                  if (ret2 == QMessageBox::Yes) {
-                      download = true;
-                  } else {
-                      ignore = true;
-                  }                                    
-                } else if (msgBox.clickedButton() == YesButton ) {
-                    download = true;
-                } else {
-                    ignore = true;
-                }
+        if(rev>0) {
+          NewFwRev=rev;
+          settings.beginGroup("FwRevisions");
+          OldFwRev = settings.value(fwToUpdate, 0).toInt();
+          settings.endGroup();
+          QMessageBox msgBox;
+          QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+          QGridLayout* layout = (QGridLayout*)msgBox.layout();
+          layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());            
+          if (OldFwRev == 0) {
+            showcheckForUpdatesResult = false; // update is available - do not show dialog
+            QString rn = GetFirmware(fwToUpdate)->rnurl;
+            QAbstractButton *rnButton;
+            msgBox.setInformativeText(tr("Firmware %1 does not seem to have ever been downloaded.\nVersion %2 is available.\nDo you want to download it now ?").arg(fwToUpdate).arg(NewFwRev));
+            QAbstractButton *YesButton = msgBox.addButton(trUtf8("Yes"), QMessageBox::YesRole);
+            msgBox.addButton(trUtf8("No"), QMessageBox::NoRole);
+            if (!rn.isEmpty()) {
+              rnButton = msgBox.addButton(trUtf8("Release Notes"), QMessageBox::ActionRole);
+            }
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.resize(0,0);
+            msgBox.exec();
+            if( msgBox.clickedButton() == rnButton ) {
+              contributorsDialog *cd = new contributorsDialog(this,2,rn);
+              cd->exec();
+              int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
+                    QMessageBox::Yes | QMessageBox::No);
+              if (ret2 == QMessageBox::Yes) {
+                download = true;
+              } else {
+                ignore = true;
+              }                                    
+            } else if (msgBox.clickedButton() == YesButton ) {
+              download = true;
             } else {
-                if(showcheckForUpdatesResult && check1done && check2done)
-                    QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
+              ignore = true;
             }
-            if (ignore) {
-                int res = QMessageBox::question(this, "companion9x",tr("Ignore this version (r%1)?").arg(rev) ,
-                                                QMessageBox::Yes | QMessageBox::No);
-                if (res==QMessageBox::Yes)   {
-                    settings.beginGroup("FwRevisions");
-                    settings.setValue(fwToUpdate, NewFwRev);
-                    settings.endGroup();
-                }
-            } else if (download == true) {
-                downloadedFW = fwToUpdate;
-                QString url = GetFirmware(fwToUpdate)->getUrl(fwToUpdate);
-                QString ext = url.mid(url.lastIndexOf("."));
-                needRename=false;
-                bool addversion=settings.value("rename_firmware_files", false).toBool();
-                QString fileName;
-                if (addversion) {
-                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + newrev + ext);
-                } else {
-                  fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext);
-                }
-                if (!fileName.isEmpty()) {
-                    downloadedFWFilename = fileName;
-                    settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
-                    downloadDialog * dd = new downloadDialog(this, url, fileName);
-                    currentFWrev_temp = NewFwRev;
-                    connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
-                    dd->exec();
-                    downloadedFW = fwToUpdate;
-                }
+          } else if (NewFwRev > OldFwRev) {
+            showcheckForUpdatesResult = false; // update is available - do not show dialog
+            QString rn = GetFirmware(fwToUpdate)->rnurl;
+            QAbstractButton *rnButton;
+            msgBox.setText("companion9x");
+            msgBox.setInformativeText(tr("A new version of %1 firmware is available (current %2 - newer %3).\nDo you want to download it now ?").arg(fwToUpdate).arg(OldFwRev).arg(NewFwRev));
+            QAbstractButton *YesButton = msgBox.addButton(trUtf8("Yes"), QMessageBox::YesRole);
+            msgBox.addButton(trUtf8("No"), QMessageBox::NoRole);
+            if (!rn.isEmpty()) {
+              rnButton = msgBox.addButton(trUtf8("Release Notes"), QMessageBox::ActionRole);
             }
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.resize(0,0);
+            msgBox.exec(); 
+            if( msgBox.clickedButton() == rnButton ) {
+              warning=0;
+              contributorsDialog *cd = new contributorsDialog(this,2,rn);
+              cd->exec();
+              int ret2 = QMessageBox::question(this, "companion9x", tr("Do you want to download release %1 now ?").arg(NewFwRev),
+                    QMessageBox::Yes | QMessageBox::No);
+              if (ret2 == QMessageBox::Yes) {
+                download = true;
+              } else {
+                ignore = true;
+              }                                    
+            } else if (msgBox.clickedButton() == YesButton ) {
+              download = true;
+            } else {
+              ignore = true;
+            }
+          } else {
+            if(showcheckForUpdatesResult && check1done && check2done)
+              QMessageBox::information(this, "companion9x", tr("No updates available at this time."));
+          }
+          if (ignore) {
+            int res = QMessageBox::question(this, "companion9x",tr("Ignore this version (r%1)?").arg(rev), QMessageBox::Yes | QMessageBox::No);
+            if (res==QMessageBox::Yes)   {
+              settings.beginGroup("FwRevisions");
+              settings.setValue(fwToUpdate, NewFwRev);
+              settings.endGroup();
+            }
+          } else if (download == true) {
+            if (warning>0) {
+              QString rn = GetFirmware(fwToUpdate)->rnurl;
+              if (!rn.isEmpty()) {
+                int ret2 = QMessageBox::warning(this, "companion9x", tr("Release notes contain very important informations. Do you want to see them now ?"), QMessageBox::Yes | QMessageBox::No);
+                if (ret2 == QMessageBox::Yes) {
+                  contributorsDialog *cd = new contributorsDialog(this,2,rn);
+                  cd->exec();
+                }
+              }
+            }
+            downloadedFW = fwToUpdate;
+            QString url = GetFirmware(fwToUpdate)->getUrl(fwToUpdate);
+            QString ext = url.mid(url.lastIndexOf("."));
+            needRename=false;
+            bool addversion=settings.value("rename_firmware_files", false).toBool();
+            QString fileName;
+            if (addversion) {
+              fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + newrev + ext);
+            } else {
+              fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext);
+            }
+            if (!fileName.isEmpty()) {
+              downloadedFWFilename = fileName;
+              settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
+              downloadDialog * dd = new downloadDialog(this, url, fileName);
+              currentFWrev_temp = NewFwRev;
+              connect(dd, SIGNAL(accepted()), this, SLOT(reply1Accepted()));
+              dd->exec();
+              downloadedFW = fwToUpdate;
+            }
+          }
         }
         else {
           QMessageBox::warning(this, "companion9x", tr("Unable to check for updates."));
