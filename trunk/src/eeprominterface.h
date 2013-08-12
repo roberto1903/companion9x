@@ -699,7 +699,7 @@ class FrSkyData {
     int varioCenterMax;
     int varioMax;
 
-    void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2, 45); rssiAlarms[1].clear(3, 42); }
+    void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2, 45); rssiAlarms[1].clear(3, 42); varioSource = 2/*VARIO*/; }
 };
 
 enum TimerMode {
