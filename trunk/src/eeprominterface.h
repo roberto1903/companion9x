@@ -49,7 +49,7 @@ enum BoardEnum {
   BOARD_TARANIS,
   BOARD_TARANIS_REV4a
 };
-
+#define IS_STOCK(board)       (board==BOARD_STOCK || board==BOARD_M128)
 #define IS_ARM(board)       (board==BOARD_SKY9X || board==BOARD_TARANIS  || board==BOARD_TARANIS_REV4a)
 #define IS_TARANIS(board)       (board==BOARD_TARANIS  || board==BOARD_TARANIS_REV4a)
 

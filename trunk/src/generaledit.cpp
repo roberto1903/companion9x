@@ -64,7 +64,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
     }
-    bool mavlink = (current_firmware_variant.id.contains("mavplane")||current_firmware_variant.id.contains("mavcopter"));  ;
+    bool mavlink = current_firmware_variant.id.contains("mavlink");
     if (!mavlink) {
       ui->mavbaud_CB->hide();
       ui->mavbaud_label->hide();
