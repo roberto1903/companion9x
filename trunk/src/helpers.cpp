@@ -340,7 +340,7 @@ QString FuncParam(uint function, unsigned int value, QString paramT,unsigned int
   }
   else if ((function==FuncPlayPrompt) || (function==FuncPlayBoth)) {
     if ( GetEepromInterface()->getCapability(VoicesAsNumbers)) {
-      return QString("%1").arg(value+256);
+      return QString("%1").arg(value);
     } else {
       return paramT;
     }
