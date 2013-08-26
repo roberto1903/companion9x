@@ -4461,7 +4461,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+2284"/>
         <source>Model Image</source>
-        <translation>Modell-bild</translation>
+        <translation>Modell-ikon</translation>
     </message>
     <message>
         <location line="-187"/>
