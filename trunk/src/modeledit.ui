@@ -135,7 +135,7 @@
            <item row="7" column="0">
             <widget class="QLabel" name="label_ttrace">
              <property name="text">
-              <string>Throttle Trace</string>
+              <string>Throttle Source</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -9284,7 +9284,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9395,7 +9395,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9462,7 +9462,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9507,7 +9507,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9571,7 +9571,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9591,7 +9591,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9749,7 +9749,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9835,7 +9835,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9899,7 +9899,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -9966,7 +9966,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10124,7 +10124,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10144,7 +10144,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10302,7 +10302,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10378,7 +10378,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10489,7 +10489,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -10684,7 +10684,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11535,7 +11535,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11555,7 +11555,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11575,7 +11575,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11801,7 +11801,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11865,7 +11865,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -11954,7 +11954,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12018,7 +12018,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12245,7 +12245,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12334,7 +12334,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12423,7 +12423,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12512,7 +12512,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12714,7 +12714,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12803,7 +12803,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12892,7 +12892,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -12981,7 +12981,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
@@ -13026,7 +13026,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                 </property>
                 <item>
                  <property name="text">
-                  <string>NOR</string>
+                  <string>---</string>
                  </property>
                 </item>
                 <item>
