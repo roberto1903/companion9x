@@ -5808,6 +5808,8 @@ void ModelEdit::mixerOpen()
 
 void ModelEdit::mixerAdd()
 {
+    if (!MixerlistWidget->currentItem())
+      return;
     int index = MixerlistWidget->currentItem()->data(Qt::UserRole).toByteArray().at(0);
 
     if(index<0) {  // if empty then return relavent index
@@ -5816,15 +5818,15 @@ void ModelEdit::mixerAdd()
       if (!gm_insertMix(index))
         return;
       g_model.mixData[index].destCh = i;
+      mixInserted=true;
     } else {
       index++;
       if (!gm_insertMix(index))
         return;
       g_model.mixData[index].destCh = g_model.mixData[index-1].destCh;
+      mixInserted=true;
     }
-
     gm_openMix(index);
-
 }
 
 void ModelEdit::expoOpen(QListWidgetItem *item)
@@ -5986,7 +5988,7 @@ void ModelEdit::fsw_customContextMenuRequested(QPoint pos)
     if (!label)
       return;
     int fsw=label->property("FunctionId").toInt();
-    if (!(fsw>0 && fsw<32))
+    if (!(fsw>0 && fsw<=32))
       return;
     selectedFunction=fsw-1;
     
