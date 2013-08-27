@@ -96,7 +96,7 @@ public slots:
     void paste();
     void burnTo();
     void simulate();
-    void print();
+    void print(int model=-1, QString filename="");
     void setModified();
     void updateTitle();
 
