@@ -15,7 +15,7 @@ class printDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit printDialog(QWidget *parent = 0, GeneralSettings *gg = 0, ModelData *gm = 0);
+    explicit printDialog(QWidget *parent = 0, GeneralSettings *gg = 0, ModelData *gm = 0, QString filename="");
     
     ~printDialog();
     void  closeEvent(QCloseEvent *event);
@@ -23,6 +23,7 @@ public:
     ModelData *g_model;
     GeneralSettings *g_eeGeneral;
     EEPROMInterface *eepromInterface;
+    QString printfilename;
 
 private:
     Ui::printDialog *ui;
@@ -38,6 +39,7 @@ private:
     void printSafetySwitches();
     void printFSwitches();
     void printFrSky();
+    void printToFile();
     
     QString fv(const QString name, const QString value);
     
@@ -49,6 +51,7 @@ private:
 private slots:
     void on_printButton_clicked();
     void on_printFileButton_clicked();
+    void autoClose();
 };
 
 #endif // PRINTDIALOG_H

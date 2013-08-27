@@ -652,11 +652,17 @@ void MdiChild::simulate()
     }
 }
 
-void MdiChild::print()
+void MdiChild::print(int model, QString filename)
 {
+  if (model>=0 && !filename.isEmpty()) {
+    
+    printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[model], filename);
+    pd->show();    
+  } else {
     if(ui->modelsList->currentRow()<1) return;
     printDialog *pd = new printDialog(this, &radioData.generalSettings, &radioData.models[ui->modelsList->currentRow()-1]);
     pd->show();
+  }
 }
 
 void MdiChild::viableModelSelected(bool viable)

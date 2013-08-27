@@ -52,6 +52,7 @@
 #include "flashinterface.h"
 #include "fusesdialog.h"
 #include "downloaddialog.h"
+#include "printdialog.h"
 #include "version.h"
 #include "contributorsdialog.h"
 #include "customizesplashdialog.h"
@@ -116,27 +117,44 @@ downloadDialog_forWait(NULL)
     QTimer::singleShot(1000, this, SLOT(displayWarnings()));
     QStringList strl = QApplication::arguments();
     QString str;
-    if(strl.count()>1) str = strl[1];
-    if(!str.isEmpty())
-    {
-        int fileType = getFileType(str);
-
-        if(fileType==FILE_TYPE_HEX)
-        {
-            burnToFlash(str);
-        }
-
-        if(fileType==FILE_TYPE_EEPE || fileType==FILE_TYPE_EEPM)
-        {
-            MdiChild *child = createMdiChild();
-            if (child->loadFile(str))
-            {
-                statusBar()->showMessage(tr("File loaded"), 2000);
-                child->show();
-            }
-        }
+    QString printfilename;
+    int printing=false;
+    int model=-1;
+    if (strl.contains("--print"))
+      printing=true;
+    int count=0;
+    foreach(QString arg, strl) {
+      count++;
+      if (arg.contains("--model")) {
+        model=strl[count].toInt()-1;
+      }
+      if (arg.contains("--filename")) {
+        printfilename=strl[count];
+      }
     }
-    
+    if(strl.count()>1) str = strl[1];
+    if(!str.isEmpty()) {
+      int fileType = getFileType(str);
+
+      if(fileType==FILE_TYPE_HEX) {
+        burnToFlash(str);
+      }
+
+      if(fileType==FILE_TYPE_EEPE || fileType==FILE_TYPE_EEPM || fileType==FILE_TYPE_BIN) {
+        MdiChild *child = createMdiChild();
+        if (child->loadFile(str)) {
+          if (!(printing && (model >=0 && model<GetEepromInterface()->getMaxModels()) && !printfilename.isEmpty()  )) {
+            statusBar()->showMessage(tr("File loaded"), 2000);
+            child->show();
+          } else {
+            child->show();            
+            child->print(model,printfilename);
+            child->close();
+            QTimer::singleShot(0, this, SLOT(autoClose()));
+          }
+        }
+      }
+    }    
 }
 
 void MainWindow::displayWarnings()
@@ -2141,4 +2159,9 @@ void MainWindow::dropEvent(QDropEvent *event)
         statusBar()->showMessage(tr("File loaded"), 2000);
         child->show();
     }
+}
+
+void MainWindow::autoClose()
+{
+  this->close();
 }

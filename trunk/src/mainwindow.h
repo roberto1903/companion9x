@@ -126,6 +126,7 @@ private slots:
     void setActiveSubWindow(QWidget *window);
     QMenu * createRecentFileMenu();
     QMenu * createProfilesMenu();
+    void autoClose();
 
 private:
     void createActions();

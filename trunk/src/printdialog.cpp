@@ -14,13 +14,14 @@
 #define ISIZE 200 // curve image size
 #define ISIZEW 400 // curve image size
 
-printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
+printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm, QString filename) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
     ui(new Ui::printDialog)
 {
     ui->setupUi(this);
     g_model = gm;
     g_eeGeneral = gg;
+    printfilename=filename;
     eepromInterface = GetEepromInterface();
     te = ui->textEdit;
 
@@ -53,6 +54,10 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm) :
     printFrSky();
     
     te->scrollToAnchor("1");
+    if (!printfilename.isEmpty()) {
+      printToFile();
+      QTimer::singleShot(0, this, SLOT(autoClose()));
+    }
 }
 
 void printDialog::closeEvent(QCloseEvent *event) 
@@ -977,4 +982,28 @@ void printDialog::on_printFileButton_clicked()
       QTextDocumentWriter writer(fn);
        writer.write(te->document());      
     }
+}
+
+void printDialog::printToFile()
+{
+    if (printfilename.isEmpty())
+      return;
+    if (! (printfilename.endsWith(".odt", Qt::CaseInsensitive) || printfilename.endsWith(".pdf", Qt::CaseInsensitive) || printfilename.endsWith(".htm", Qt::CaseInsensitive) || printfilename.endsWith(".html", Qt::CaseInsensitive)) )
+      printfilename += ".pdf"; // default
+    if (printfilename.endsWith(".pdf", Qt::CaseInsensitive)) {
+      QPrinter printer;
+      printer.setPageMargins(10.0,10.0,10.0,10.0,printer.Millimeter);
+      printer.setOutputFormat(QPrinter::PdfFormat);
+      printer.setColorMode(QPrinter::Color);
+      printer.setOutputFileName(printfilename);
+      te->print(&printer);
+    } else {
+      QTextDocumentWriter writer(printfilename);
+       writer.write(te->document());      
+    }
+}
+
+void printDialog::autoClose()
+{
+  this->close();
 }
