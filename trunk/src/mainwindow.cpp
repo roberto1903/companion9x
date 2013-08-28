@@ -150,11 +150,13 @@ downloadDialog_forWait(NULL)
             child->show();            
             child->print(model,printfilename);
             child->close();
-            QTimer::singleShot(0, this, SLOT(autoClose()));
           }
         }
       }
-    }    
+    } 
+    if (printing) {
+      QTimer::singleShot(0, this, SLOT(autoClose()));
+    }
 }
 
 void MainWindow::displayWarnings()
