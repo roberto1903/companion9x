@@ -27,9 +27,14 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm, QS
 
     setWindowTitle(tr("Setup for: ") + g_model->name);
     ui->textEdit->clear();
-    
-    curvefile5=QString("%1/%2-curve5.png").arg(qd->tempPath()).arg(g_model->name);
-    curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(g_model->name);
+    QString modelname=g_model->name;
+    if (modelname.isEmpty()) {
+      curvefile5=QString("%1/curve5.png").arg(qd->tempPath());
+      curvefile9=QString("%1/curve9.png").arg(qd->tempPath());      
+    } else {
+      curvefile5=QString("%1/%2-curve5.png").arg(qd->tempPath()).arg(modelname);
+      curvefile9=QString("%1/%2-curve9.png").arg(qd->tempPath()).arg(modelname);
+    }
     printSetup();
     int gvars=0;
     if (GetEepromInterface()->getCapability(HasVariants)) {
@@ -62,12 +67,14 @@ printDialog::printDialog(QWidget *parent, GeneralSettings *gg, ModelData *gm, QS
 
 void printDialog::closeEvent(QCloseEvent *event) 
 {
+  if (printfilename.isEmpty()) {
     QByteArray ba = curvefile5.toLatin1();
     char *name = ba.data(); 
     unlink(name);
     ba = curvefile9.toLatin1();
     name = ba.data(); 
-    unlink(name);    
+    unlink(name);
+  }
 }
 
 printDialog::~printDialog()
