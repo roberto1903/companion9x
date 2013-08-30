@@ -1149,6 +1149,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
@@ -1184,6 +1185,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
@@ -1213,6 +1215,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
@@ -1246,6 +1249,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("thrtrace", QObject::tr("Enable the throttle trace in Statistics"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
@@ -1275,6 +1279,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("pgbar", QObject::tr("EEprom write Progress bar"));
   open9x->addOption("imperial", QObject::tr("Imperial units"));
   open9x->addOptions(fai_options);
@@ -1299,6 +1304,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("nographics", QObject::tr("No graphical check boxes and sliders"));
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
@@ -1310,6 +1316,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
   open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
   open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+  open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
   open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
 
@@ -1321,6 +1328,7 @@ void RegisterOpen9xFirmwares()
     open9x->addOption("notemplates", QObject::tr("Disable TEMPLATES menu"));
     open9x->addOption("nogvars", QObject::tr("Disable Global variables"));
     open9x->addOption("ppmus", QObject::tr("PPM values displayed in us"));
+    open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
     open9x->addOptions(fai_options);
     firmwares.push_back(open9x);
   }
