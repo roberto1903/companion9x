@@ -6526,42 +6526,42 @@ Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och ga
     <message>
         <location filename="eeprominterface.cpp" line="-7"/>
         <source>SA</source>
-        <translation>BA</translation>
+        <translation>SA</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SB</source>
-        <translation>BB</translation>
+        <translation>SB</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SC</source>
-        <translation>BC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SD</source>
-        <translation>BD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>SE</source>
-        <translation>BE</translation>
+        <translation>SE</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SF</source>
-        <translation>BF</translation>
+        <translation>SF</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SG</source>
-        <translation>BG</translation>
+        <translation>SG</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>SH</source>
-        <translation>BH</translation>
+        <translation>SH</translation>
     </message>
     <message>
         <location line="+8"/>
