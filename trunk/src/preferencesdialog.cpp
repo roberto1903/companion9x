@@ -727,7 +727,25 @@ void preferencesDialog::on_SplashSelect_clicked()
     }
     ui->SplashFileName->setText(fileName);
     int width=ui->imageLabel->width();
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(width, 64).convertToFormat(QImage::Format_Mono)));
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image.scaled(width, 64)));
+    if (width==212) {
+      image=image.convertToFormat(QImage::Format_RGB32);
+      QRgb col;
+      int gray;
+      int height = image.height();
+      for (int i = 0; i < width; ++i)
+      {
+          for (int j = 0; j < height; ++j)
+          {
+              col = image.pixel(i, j);
+              gray = qGray(col);
+              image.setPixel(i, j, qRgb(gray, gray, gray));
+          }
+      }      
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    } else {
+      ui->imageLabel->setPixmap(QPixmap::fromImage(image.convertToFormat(QImage::Format_Mono)));
+    }
     ui->InvertPixels->setEnabled(true);
   }
 }
