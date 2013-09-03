@@ -4449,37 +4449,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="-1793"/>
         <source>SB</source>
-        <translation>BB</translation>
+        <translation>SB</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SD</source>
-        <translation>BD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SA</source>
-        <translation>BA</translation>
+        <translation>SA</translation>
     </message>
     <message>
         <location line="+124"/>
         <source>SC</source>
-        <translation>BC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <location line="+62"/>
         <source>SG</source>
-        <translation>BG</translation>
+        <translation>SG</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SE</source>
-        <translation>BE</translation>
+        <translation>SE</translation>
     </message>
     <message>
         <location line="+108"/>
         <source>SF</source>
-        <translation>BF</translation>
+        <translation>SF</translation>
     </message>
     <message>
         <location line="+185"/>
@@ -10716,19 +10716,19 @@ Får skilja från språket för mjukvaran</translation>
         <location line="+1035"/>
         <location line="+138"/>
         <source>SE</source>
-        <translation>BE</translation>
+        <translation>SE</translation>
     </message>
     <message>
         <location line="-236"/>
         <location line="+216"/>
         <source>SA</source>
-        <translation>BA</translation>
+        <translation>SA</translation>
     </message>
     <message>
         <location line="-272"/>
         <location line="+282"/>
         <source>SB</source>
-        <translation>BB</translation>
+        <translation>SB</translation>
     </message>
     <message>
         <location line="-842"/>
@@ -10774,25 +10774,25 @@ Får skilja från språket för mjukvaran</translation>
         <location line="-202"/>
         <location line="+61"/>
         <source>SH</source>
-        <translation>BH</translation>
+        <translation>SH</translation>
     </message>
     <message>
         <location line="-138"/>
         <location line="+128"/>
         <source>SG</source>
-        <translation>BG</translation>
+        <translation>SG</translation>
     </message>
     <message>
         <location line="-301"/>
         <location line="+291"/>
         <source>SD</source>
-        <translation>BD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <location line="-251"/>
         <location line="+241"/>
         <source>SC</source>
-        <translation>BC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <location line="+879"/>
