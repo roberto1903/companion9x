@@ -3137,8 +3137,10 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     fswtchParam[i]->setSingleStep(1);
     fswtchParam[i]->setMinimum(-125);
     fswtchParam[i]->setMaximum(125);
-    if (modified) g_model.funcSw[i].param = fswtchParam[i]->value();
-    fswtchParam[i]->setValue(g_model.funcSw[i].param);
+    if (modified) {
+      g_model.funcSw[i].param = fswtchParam[i]->value();
+    }
+    fswtchParam[i]->setValue((int16_t)g_model.funcSw[i].param);
     widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
   }  
   else if (index==FuncLogs) {
