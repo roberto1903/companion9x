@@ -3140,7 +3140,7 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     if (modified) {
       g_model.funcSw[i].param = fswtchParam[i]->value();
     }
-    fswtchParam[i]->setValue((int16_t)g_model.funcSw[i].param);
+    fswtchParam[i]->setValue(g_model.funcSw[i].param);
     widgetsMask |= CUSTOM_FUNCTION_NUMERIC_PARAM + CUSTOM_FUNCTION_ENABLE;
   }  
   else if (index==FuncLogs) {

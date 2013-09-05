@@ -1309,7 +1309,10 @@ class CustomFunctionField: public TransformedField {
           fn.enabled = (_delay & 0x01);
 
         unsigned int value = *((uint32_t *)_arm_param);
-        if (fn.func <= FuncInstantTrim) {
+        if (fn.func <= FuncTrainer) {
+            fn.param = (int)value;
+        }
+        else if (fn.func <= FuncInstantTrim) {
           fn.param = value;
         }
         else if (fn.func == FuncPlayPrompt || fn.func == FuncBackgroundMusic) {
