@@ -315,10 +315,13 @@ void populateFuncCB(QComboBox *b, unsigned int value)
   b->setMaxVisibleItems(10);
 }
 
-QString FuncParam(uint function, unsigned int value, QString paramT,unsigned int adjustmode)
+QString FuncParam(uint function, int value, QString paramT,unsigned int adjustmode)
 {
   QStringList qs;
-  if (function==FuncPlaySound) {
+  if (function <= FuncInstantTrim) {
+    return QString("%1").arg(value);
+  }
+  else if (function==FuncPlaySound) {
     qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
     if (value>=0 && value<(uint)qs.count())
