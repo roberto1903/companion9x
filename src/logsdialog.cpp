@@ -435,6 +435,9 @@ void logsDialog::on_fileOpen_BT_clicked()
 bool logsDialog::cvsFileParse() 
 {
   QFile file(ui->FileName_LE->text());
+  int errors=0;
+  int lines=-1;
+
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { //reading HEX TEXT file
     return false;
   } else {
@@ -449,7 +452,7 @@ bool logsDialog::cvsFileParse()
     } else {
       return false;
     }
-    
+    int numfields=-1;
     while (!file.atEnd()) {
       int pos2 = 0;
       QString buffer = file.readLine();
@@ -478,14 +481,28 @@ bool logsDialog::cvsFileParse()
           }
         }
       }
-      csvlog.append(list);
-      
+      if (numfields==-1) {
+        numfields=list.count();
+      }
+      if (list.count()==numfields) {
+        csvlog.append(list);
+      } else {
+        errors++;
+      }
+      lines++;
     }
-    
   }
+  
   file.close();
+  if (errors>1) {
+    QMessageBox::warning(this, "companion9x", tr("The selected logfile contains %1 invalid lines out of  %2 total lines").arg(errors).arg(lines));
+  }
   plotLock=true;
   int n=csvlog.count();
+  if (n==1) {
+    csvlog.clear();
+    return false;
+  }
   int lastvalue=0;
   int tmp;
   ui->sessions_CB->addItem("---");
