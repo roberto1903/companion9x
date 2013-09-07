@@ -87,7 +87,14 @@ class ProtocolsConversionTable: public ConversionTable
         addConversion(PXX_XJT_LR12, val++);
       }
       addConversion(PXX_DJT, val++);
-      addConversion(DSM2, val++);
+      if (IS_TARANIS(board)) {
+        addConversion(DSM2, val++);
+      }
+      else {
+        addConversion(LP45, val++);
+        addConversion(DSM2, val++);
+        addConversion(DSMX, val++);
+      }
     }
 };
 
