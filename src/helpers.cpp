@@ -422,7 +422,7 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
     populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_TRIMS);
   }
   else if (function==FuncPlayValue) {
-    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_SWITCHES|POPULATE_TRIMS|POPULATE_TELEMETRY);
+    populateSourceCB(b, RawSource(value), POPULATE_SOURCES|POPULATE_SWITCHES|POPULATE_GVARS|POPULATE_TRIMS|POPULATE_TELEMETRY);
   }
   else if (function>=FuncAdjustGV1 && function<=FuncAdjustGV5 ) {
     switch (adjustmode) {
