@@ -441,7 +441,7 @@ QImage FlashInterface::getSplash()
         unsigned int mask = (1 << (y%8));
         for (unsigned int x=0; x<splash_width; x++, idx+=4) {
           unsigned int z = ((flash.at(splash_offset+idx) & mask) ? 0x1 : 0) + ((flash.at(splash_offset+idx+1) & mask) ? 0x2 : 0) + ((flash.at(splash_offset+idx+2) & mask) ? 0x4 : 0) + ((flash.at(splash_offset+idx+3) & mask) ? 0x8 : 0);
-          z = 161-(z*161)/15;
+          z = 255-(z*255)/15;
           QRgb rgb = qRgb(z, z, z);
           image.setPixel(x, y, rgb);
         }
