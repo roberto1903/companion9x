@@ -275,7 +275,19 @@ void MixerDialog::widgetChanged()
 void MixerDialog::valuesChanged()
 {
     QCheckBox * cb_fp[] = {ui->cb_FP0,ui->cb_FP1,ui->cb_FP2,ui->cb_FP3,ui->cb_FP4,ui->cb_FP5,ui->cb_FP6,ui->cb_FP7,ui->cb_FP8 };
-    md->srcRaw    = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
+    md->srcRaw  = RawSource(ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt());
+    if ((ui->sourceCB->itemData(ui->sourceCB->currentIndex()).toInt()-65536)<4) {
+      if (!GetEepromInterface()->getCapability(MixesWithoutExpo)) {
+        ui->MixDR_CB->hide();
+        ui->label_MixDR->hide();
+      } else {
+        ui->MixDR_CB->setVisible(true);
+        ui->label_MixDR->setVisible(true);
+      }
+    } else {
+      ui->MixDR_CB->setHidden(true);
+      ui->label_MixDR->setHidden(true);
+    }
     if (ui->weightGV->isChecked()) {
       md->weight = ui->weightCB->itemData(ui->weightCB->currentIndex()).toInt();
     } else {
