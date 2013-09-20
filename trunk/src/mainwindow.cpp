@@ -195,24 +195,24 @@ void MainWindow::checkForUpdates(bool ignoreSettings, QString & fwId)
 
     if (!stamp.isEmpty()) {
         if (checkFW || ignoreSettings) {
+            check1done=false;
             manager1 = new QNetworkAccessManager(this);
             connect(manager1, SIGNAL(finished(QNetworkReply*)), this, SLOT(reply1Finished(QNetworkReply*)));
             QUrl url(stamp);
             QNetworkRequest request(url);
             request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
             manager1->get(request);
-            check1done=false;
         }
     }
     
     if (checkCompanion9x || ignoreSettings)
     {
+        check2done = false;
         manager2 = new QNetworkAccessManager(this);
         connect(manager2, SIGNAL(finished(QNetworkReply*)),this, SLOT(checkForUpdateFinished(QNetworkReply*)));
         QNetworkRequest request(QUrl(C9X_STAMP));
         request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
         manager2->get(request);
-        check2done = false;
     }
 
     if(ignoreSettings) {

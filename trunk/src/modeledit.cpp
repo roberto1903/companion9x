@@ -3338,12 +3338,17 @@ void ModelEdit::tabTelemetry()
   ui->rssiAlarm2CB->setCurrentIndex(g_model.frsky.rssiAlarms[1].level);
   
   if (!GetEepromInterface()->getCapability(HasAltitudeSel)) {
-    ui->AltitudeGPS_CB->hide();
-  }
-  else {
-    ui->AltitudeGPS_CB->setChecked(g_model.frsky.FrSkyGpsAlt);
+    ui->AltitudeGPS_ChkB->hide();
+  } else {
+    ui->AltitudeGPS_ChkB->setChecked(g_model.frsky.FrSkyGpsAlt);
   }
   int varioCap=GetEepromInterface()->getCapability(HasVario);
+//  if (IS_TARANIS(GetEepromInterface()->getBoard())) {   
+  if (false) {   
+    ui->AltitudeToolbar_ChkB->setChecked(g_model.frsky.altitudeDisplayed);
+  } else {
+    ui->AltitudeToolbar_ChkB->hide();  
+  }
   if (!varioCap) {
     ui->varioLimitMax_DSB->hide();
     ui->varioLimitMinOff_ChkB->hide();
@@ -3700,7 +3705,11 @@ void ModelEdit::on_modelImage_CB_currentIndexChanged(int index)
       }
       if (!image.isNull()) {
         ui->modelImage_image->setPixmap(QPixmap::fromImage(image.scaled( 64,32)));;
+      } else {
+        ui->modelImage_image->clear();
       }
+    } else {
+      ui->modelImage_image->clear();
     }
     updateSettings();
 }
@@ -4861,7 +4870,7 @@ void ModelEdit::on_rssiAlarm2SB_editingFinished() {
   updateSettings();    
 }
 
-void ModelEdit::on_AltitudeGPS_CB_toggled(bool checked)
+void ModelEdit::on_AltitudeGPS_ChkB_toggled(bool checked)
 {
   if (telemetryLock) return;
   g_model.frsky.FrSkyGpsAlt = checked;
@@ -5074,6 +5083,12 @@ void ModelEdit::on_thrTrimChkB_toggled(bool checked)
 void ModelEdit::on_thrExpoChkB_toggled(bool checked)
 {
     g_model.thrExpo = checked;
+    updateSettings();
+}
+
+void ModelEdit::on_AltitudeToolbar_ChkB_toggled(bool checked)
+{
+    g_model.frsky.altitudeDisplayed = checked;
     updateSettings();
 }
 

@@ -1,3 +1,15 @@
+<h2>Version 1.48</h2>
+<ul>
+<li>Interface fixes</li>
+</ul>
+
+<h2>Version 1.47</h2>
+<ul>
+<li>Interface fixes (issues 232,233,238,241)</li>
+<li>Function switch parameter on screen different than printout.</li>
+<li>Translations fixes</li>
+</ul>
+
 <h2>Version 1.46</h2>
 <ul>
 <li>Interface fixes (issues 224,225)</li>

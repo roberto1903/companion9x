@@ -32,8 +32,38 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     }
     settings.endGroup();
     EEPROMInterface *eepromInterface = GetEepromInterface();
+    QLabel * pmsl[] = {ui->ro_label,ui->ro1_label,ui->ro2_label,ui->ro3_label,ui->ro4_label,ui->ro5_label,ui->ro6_label,ui->ro7_label,ui->ro8_label, NULL};
+    QSlider * tpmsld[] = {ui->chkSA, ui->chkSB, ui->chkSC, ui->chkSD, ui->chkSE, ui->chkSF, ui->chkSG, ui->chkSH, NULL};
+
     if (IS_TARANIS(eepromInterface->getBoard())) {
+        ui->contrastSB->setMinimum(0);
+    }
+    if (false) {      
       ui->contrastSB->setMinimum(0);
+      uint16_t switchstate=(g_eeGeneral.switchUnlockStates);
+      ui->chkSA->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSB->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSC->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSD->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSE->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSF->setValue((switchstate & 0x3)/2);
+      switchstate >>= 2;
+      ui->chkSG->setValue(switchstate & 0x3);
+      switchstate >>= 2;
+      ui->chkSH->setValue(switchstate & 0x3);      
+    } else {
+      for (int i=0; pmsl[i]; i++) {
+        pmsl[i]->hide();
+      }
+      for (int i=0; tpmsld[i]; i++) {
+        tpmsld[i]->hide();
+      }
+      this->layout()->removeItem(ui->TaranisReadOnlyUnlock);
     }
     ui->profile_CB->clear();
     for ( int i = 0; i < MAX_PROFILES; ++i) {
@@ -58,8 +88,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     if (!GetEepromInterface()->getCapability(MultiLangVoice)) {
       ui->VoiceLang_label->hide();
       ui->voiceLang_CB->hide();
-    }
-    else {
+    } else {
       voiceLangEditLock=true;
       populateVoiceLangCB(ui->voiceLang_CB, g_eeGeneral.ttsLanguage);
       voiceLangEditLock=false;
@@ -98,8 +127,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     if (!GetEepromInterface()->getCapability(HasBlInvert)) {
       ui->blinvert_cb->hide();
       ui->blinvert_label->hide();
-    }
-    else {
+    } else {
       ui->blinvert_cb->setChecked(g_eeGeneral.blightinv);
     }
     if (!GetEepromInterface()->getCapability(HasFAIMode)) {
@@ -256,8 +284,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swtchCB_2->hide();
       ui->swtchCB_3->hide();
       ui->swtchCB_4->hide();
-    }
-    else {
+    } else {
       populateSwitchCB(ui->swtchCB_1,g_eeGeneral.trainer.mix[0].swtch);
       populateSwitchCB(ui->swtchCB_2,g_eeGeneral.trainer.mix[1].swtch);
       populateSwitchCB(ui->swtchCB_3,g_eeGeneral.trainer.mix[2].swtch);
@@ -267,8 +294,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->blOnStickMoveSB->setDisabled(true);
       ui->blOnStickMoveSB->hide();
       ui->label_blOnStickMove->hide();
-    }
-    else {
+    } else {
       ui->blOnStickMoveSB->setValue(g_eeGeneral.lightOnStickMove*5);
     }
     if (!GetEepromInterface()->getCapability(gsSwitchMask)) {
@@ -290,8 +316,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       ui->swID2ChkB->hide();
       ui->swtchWarnChkB->hide();
       this->layout()->removeItem(ui->switchMaskLayout);
-    }
-    else {
+    } else {
       ui->swtchWarnCB->setDisabled(true);
       ui->swtchWarnCB->hide();
       setSwitchDefPos();
@@ -361,11 +386,30 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     setValues();
     switchDefPosEditLock=false;
     QTimer::singleShot(0, this, SLOT(shrink()));
+    if (false)
+      for (int i=0; tpmsld[i]; i++) {
+        connect(tpmsld[i], SIGNAL(valueChanged(int)),this,SLOT(unlockSwitchEdited()));
+      }
 }
 
 GeneralEdit::~GeneralEdit()
 {
     delete ui;
+}
+
+void GeneralEdit::unlockSwitchEdited()
+{
+  int i=0;
+  i|=(((uint16_t)ui->chkSA->value())<<0);
+  i|=(((uint16_t)ui->chkSB->value())<<2);
+  i|=(((uint16_t)ui->chkSC->value())<<4);
+  i|=(((uint16_t)ui->chkSD->value())<<6);
+  i|=(((uint16_t)ui->chkSE->value())<<8);
+  i|=(((uint16_t)ui->chkSF->value())<<10);
+  i|=(((uint16_t)ui->chkSG->value())<<12);
+  i|=(((uint16_t)ui->chkSH->value())<<14);
+  g_eeGeneral.switchUnlockStates=i;
+  updateSettings();
 }
 
 void GeneralEdit::setValues()
@@ -1348,5 +1392,6 @@ void GeneralEdit::on_calstore_PB_clicked()
 }
 
 void GeneralEdit::shrink() {
+    resize(100,100);
     resize(0,0);
 }

@@ -149,6 +149,7 @@ private slots:
     void on_swGEAChkB_stateChanged(int );
     void on_calretrieve_PB_clicked();
     void on_calstore_PB_clicked();
+    void unlockSwitchEdited();
     void setValues();
     void shrink();
 };

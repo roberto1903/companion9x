@@ -324,14 +324,14 @@ QString FuncParam(uint function, int value, QString paramT,unsigned int adjustmo
   else if (function==FuncPlaySound) {
     qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
     qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
-    if (value>=0 && value<(uint)qs.count())
+    if (value>=0 && value<(int)qs.count())
       return qs.at(value);
     else
       return QObject::tr("<font color=red><b>Inconsistent parameter</b></font>");
   }
   else if (function==FuncPlayHaptic) {
     qs << "0" << "1" << "2" << "3";
-    if (value>=0 && value<(uint)qs.count())
+    if (value>=0 && value<(int)qs.count())
       return qs.at(value);
     else
       return QObject::tr("<font color=red><b>Inconsistent parameter</b></font>");
@@ -341,7 +341,7 @@ QString FuncParam(uint function, int value, QString paramT,unsigned int adjustmo
     qs.append( QObject::tr("Timer2"));
     qs.append( QObject::tr("All"));
     qs.append( QObject::tr("Telemetry"));
-    if (value>=0 && value<(uint)qs.count())
+    if (value>=0 && value<(int)qs.count())
       return qs.at(value);
     else
       return QObject::tr("<font color=red><b>Inconsistent parameter</b></font>");
