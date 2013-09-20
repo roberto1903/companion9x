@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1064</width>
+    <width>1130</width>
     <height>698</height>
    </rect>
   </property>
@@ -9058,7 +9058,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
+            <width>1100</width>
             <height>618</height>
            </rect>
           </property>
@@ -13921,7 +13921,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
+            <width>1100</width>
             <height>589</height>
            </rect>
           </property>
@@ -19072,7 +19072,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
+            <width>1100</width>
             <height>618</height>
            </rect>
           </property>
@@ -20515,7 +20515,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
+            <width>1100</width>
             <height>618</height>
            </rect>
           </property>
@@ -20924,7 +20924,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1034</width>
+            <width>1100</width>
             <height>618</height>
            </rect>
           </property>
@@ -21404,7 +21404,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                <number>1</number>
               </property>
               <item row="0" column="0">
-               <layout class="QGridLayout" name="gridLayout_30" rowstretch="1,1,1" columnstretch="0,1">
+               <layout class="QGridLayout" name="gridLayout_30" rowstretch="1,0,0" columnstretch="0,0">
                 <item row="0" column="1">
                  <widget class="QComboBox" name="varioSourceCB">
                   <property name="sizePolicy">
@@ -21441,7 +21441,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <layout class="QGridLayout" name="gridLayout_65" columnstretch="1,1,1,1">
+                 <layout class="QGridLayout" name="gridLayout_65" columnstretch="1,0,0,0">
                   <item row="0" column="0">
                    <widget class="QLabel" name="VarioLabel_1">
                     <property name="sizePolicy">
@@ -21630,11 +21630,34 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
                  </widget>
                 </item>
                 <item row="2" column="0" colspan="2">
-                 <widget class="QCheckBox" name="AltitudeGPS_CB">
-                  <property name="text">
-                   <string>Use GPS as altitude source</string>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_15">
+                  <item>
+                   <widget class="QCheckBox" name="AltitudeGPS_ChkB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Use GPS as altitude source</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="AltitudeToolbar_ChkB">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Display altitude in toolbar</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </item>
@@ -24426,7 +24449,6 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
   <tabstop>varioLimitMax_DSB</tabstop>
   <tabstop>varioLimitMin_DSB</tabstop>
   <tabstop>varioLimitMinOff_ChkB</tabstop>
-  <tabstop>AltitudeGPS_CB</tabstop>
   <tabstop>a2UnitCB</tabstop>
   <tabstop>rssiAlarm1CB</tabstop>
   <tabstop>rssiAlarm1SB</tabstop>

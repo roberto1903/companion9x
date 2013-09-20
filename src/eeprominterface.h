@@ -448,6 +448,7 @@ class GeneralSettings {
     int varioVolume;
     int backgroundVolume;
     unsigned int mavbaud;
+    unsigned int switchUnlockStates;
 };
 
 class ExpoData {
@@ -689,6 +690,7 @@ class FrSkyData {
     unsigned int imperial;
     unsigned int blades;
     unsigned int voltsSource;
+    bool altitudeDisplayed;
     unsigned int currentSource;
     unsigned int FrSkyGpsAlt;
     FrSkyScreenData screens[3];
