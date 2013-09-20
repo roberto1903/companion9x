@@ -318,6 +318,7 @@ IF( WIN32 )
 
   FIND_PROGRAM(NSIS_EXE makensis.exe PATHS
     "C:/Program Files/NSIS"
+    "C:/Program Files (x86)/NSIS"    
     "C:/Programs/NSIS"
   )
   
