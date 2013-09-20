@@ -1,13 +1,31 @@
 <h2>Version 1.48</h2>
 <ul>
 <li>Interface fixes</li>
+<li>Hide include dr/expo when not applicable</li>
+<li>Fix extraction of grayscale images from taranis firmwares</li>
+<li>No TX and RX in Taranis telemetry fields</li>
+<li>Issue 255 fixed - "No GVAR selection possible for PLAY VALUE"</li>
+<li>Issue 254 fixed - "SE Language for building opentx"</li>
+<li>Issue 253 fixed - "OpenTX doesn't accept this protocol (DSM2 on Sky9x)"</li>
+<li>Prevent segfault while parsing wrong log files or files with broken lines</li>
+<li>Small bug in model printout</li>
+<li>Fixed wrong display of values in custom functions</li>
+<li>Image in preferences was saved only black & white</li>
+<li>Issue 247 fixed - "Labelled items on radio should not be translated."</li>
+<li>Added support of tstick (taranis like stick) compile option for sky9x opentx firmware</li>
 </ul>
 
 <h2>Version 1.47</h2>
 <ul>
 <li>Interface fixes (issues 232,233,238,241)</li>
+<li>Fix for print/compare models</li>
 <li>Function switch parameter on screen different than printout.</li>
 <li>Translations fixes</li>
+<li>Command line print mode</li>
+<li>Better mavlink support</li>
+<li>SE tts language added for taranis</li>
+<li>Alternate font option for opentx added</li>
+
 </ul>
 
 <h2>Version 1.46</h2>

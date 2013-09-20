@@ -1305,6 +1305,7 @@ void RegisterOpen9xFirmwares()
   open9x->addOption("battgraph", QObject::tr("Battery graph"));
   open9x->addOption("nobold", QObject::tr("Don't use bold font for highlighting active items"));
   open9x->addOption("sqt5font", QObject::tr("Use alternative SQT5 font"));
+  open9x->addOption("tsticks", QObject::tr("Use FrSky's taranis like sticks"));
   open9x->addOption("bluetooth", QObject::tr("Bluetooth interface"));
   open9x->addOptions(fai_options);
   firmwares.push_back(open9x);
