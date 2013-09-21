@@ -30,7 +30,7 @@ int getFileType(const QString &fullFileName)
 
 FlashInterface::FlashInterface(QString fileName)
 {
-  char temp[MAX_FSIZE];
+  char * temp = (char *)malloc(MAX_FSIZE);
   date = "";
   time = "";
   svn = "";
@@ -49,9 +49,10 @@ FlashInterface::FlashInterface(QString fileName)
     if (flash_size == 0) {
       QFile file(fileName);
       file.open(QIODevice::ReadOnly);
-      char bin_flash[MAX_FSIZE];
+      char * bin_flash = (char *)malloc(MAX_FSIZE);
       flash_size = file.read(bin_flash, MAX_FSIZE);
       flash = QByteArray(bin_flash, flash_size);
+	  free(bin_flash);
     }
     else {
       flash = QByteArray(temp, flash_size);
@@ -67,6 +68,7 @@ FlashInterface::FlashInterface(QString fileName)
       isValidFlag = false;
     }
   }
+  free(temp);
 }
 
 QString FlashInterface::getDate(void)
