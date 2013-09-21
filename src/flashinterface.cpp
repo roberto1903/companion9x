@@ -30,7 +30,7 @@ int getFileType(const QString &fullFileName)
 
 FlashInterface::FlashInterface(QString fileName)
 {
-  uint8_t temp[MAX_FSIZE];
+  char temp[MAX_FSIZE];
   date = "";
   time = "";
   svn = "";
@@ -43,7 +43,7 @@ FlashInterface::FlashInterface(QString fileName)
   }
   else {
     QTextStream inputStream(&file);
-    flash_size = HexInterface(inputStream).load(temp, MAX_FSIZE);
+    flash_size = HexInterface(inputStream).load((uint8_t *)temp, MAX_FSIZE);
     file.close();
     inputStream.reset();
     if (flash_size == 0) {
@@ -51,10 +51,10 @@ FlashInterface::FlashInterface(QString fileName)
       file.open(QIODevice::ReadOnly);
       char bin_flash[MAX_FSIZE];
       flash_size = file.read(bin_flash, MAX_FSIZE);
-      flash = QByteArray::fromRawData(bin_flash, flash_size);
+      flash = QByteArray(bin_flash, flash_size);
     }
     else {
-      flash = QByteArray::fromRawData((const char *) temp, flash_size);
+      flash = QByteArray(temp, flash_size);
     }
     if (flash_size > 0) {
       SeekSvn();
