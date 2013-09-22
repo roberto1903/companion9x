@@ -322,8 +322,8 @@ QString FuncParam(uint function, int value, QString paramT,unsigned int adjustmo
     return QString("%1").arg(value);
   }
   else if (function==FuncPlaySound) {
-    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
-    qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ratata" << "Tick" << "Siren" << "Ring" ;
+    qs << "SciFi" << "Robot" << "Chirp" << "Tada" << "Crickt"  << "AlmClk"  ;
     if (value>=0 && value<(int)qs.count())
       return qs.at(value);
     else
@@ -400,8 +400,8 @@ void populateFuncParamCB(QComboBox *b, uint function, unsigned int value, unsign
   QStringList qs;
   b->clear();
   if (function==FuncPlaySound) {
-    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ring" << "SciFi" << "Robot";
-    qs << "Chirp" << "Tada" << "Crickt" << "Siren" << "AlmClk" << "Ratata" << "Tick";
+    qs <<"Beep 1" << "Beep 2" << "Beep 3" << "Warn1" << "Warn2" << "Cheep" << "Ratata" << "Tick" << "Siren" << "Ring" ;
+    qs << "SciFi" << "Robot" << "Chirp" << "Tada" << "Crickt"  << "AlmClk"  ;
     b->addItems(qs);
     b->setCurrentIndex(value);
   }
