@@ -427,6 +427,7 @@ void ModelEdit::tabModelEditSetup()
   } else {
     modelImageLock=true;
     QStringList items;
+    items.append("");
     QSettings settings("companion9x", "companion9x");
     QString path=settings.value("sdPath", ".").toString();
     path.append("/BMP/");
