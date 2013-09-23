@@ -962,7 +962,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="generaledit.ui" line="1690"/>
         <source>Readonly Unlock</source>
-        <translation type="unfinished"></translation>
+        <translation>Débloquage lecture seule</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1763"/>
@@ -1166,35 +1166,35 @@ p, li { white-space: pre-wrap; }
         <translation>Batterie</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1071"/>
+        <location filename="generaledit.cpp" line="1074"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
 This function cannot be disabled by the radio.
 Are you sure ?</source>
         <translation>Lorsque le mode FAI est activé, le variomètre ainsi que l&apos;écran et la lecture des valeurs de télémesure sont désactivés.\nCe mode ne peut pas être désactivé sur la radio.\nEtes-vous sûr?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1293"/>
-        <location filename="generaledit.cpp" line="1334"/>
+        <location filename="generaledit.cpp" line="1296"/>
+        <location filename="generaledit.cpp" line="1337"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1293"/>
+        <location filename="generaledit.cpp" line="1296"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Données du profil erronnées, l&apos;étalonnage n&apos;a pas été lu</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1334"/>
+        <location filename="generaledit.cpp" line="1337"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Données du profil erronnées, les paramètres hw n&apos;ont pas été lus</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1359"/>
+        <location filename="generaledit.cpp" line="1362"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Voulez-vous stocker l&apos;étalonnage dans le profil %1&lt;br&gt; et écraser l&apos;étalonnage existant?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1390"/>
+        <location filename="generaledit.cpp" line="1393"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Etalonnage et paramètres hw enregistrés avec succès.</translation>
     </message>
@@ -2790,7 +2790,7 @@ p, li { white-space: pre-wrap; }
         <translation>Incrément trims</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1724"/>
+        <location filename="modeledit.cpp" line="1725"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Ralentissement(u%1:d%2)</translation>
     </message>
@@ -2803,7 +2803,7 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Coller</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1722"/>
+        <location filename="modeledit.cpp" line="1723"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Délai(u%1:d%2)</translation>
     </message>
@@ -2855,7 +2855,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="10333"/>
         <location filename="modeledit.ui" line="11631"/>
-        <location filename="modeledit.cpp" line="1714"/>
+        <location filename="modeledit.cpp" line="1715"/>
         <source>Offset</source>
         <translation>SubTrim</translation>
     </message>
@@ -2899,7 +2899,7 @@ p, li { white-space: pre-wrap; }
         <translation>Expo des gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1725"/>
+        <location filename="modeledit.cpp" line="1726"/>
         <source> Warn(%1)</source>
         <translation> Alerte(%1)</translation>
     </message>
@@ -3076,8 +3076,8 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="20557"/>
         <location filename="modeledit.ui" line="20958"/>
         <location filename="modeledit.ui" line="21067"/>
-        <location filename="modeledit.cpp" line="1564"/>
-        <location filename="modeledit.cpp" line="1700"/>
+        <location filename="modeledit.cpp" line="1565"/>
+        <location filename="modeledit.cpp" line="1701"/>
         <source>Switch</source>
         <translation>Interrupteur</translation>
     </message>
@@ -3660,7 +3660,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="21656"/>
         <source>Display altitude in toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage de l&apos;altitude dans la barre de notifs</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21957"/>
@@ -4313,7 +4313,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <location filename="modeledit.ui" line="138"/>
         <source>Throttle Source</source>
         <oldsource>Throttle Trace</oldsource>
-        <translation type="unfinished">Graphe de Gaz</translation>
+        <translation>Source de Gaz</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2167"/>
@@ -4453,7 +4453,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
     <message>
         <location filename="modeledit.ui" line="336"/>
         <location filename="modeledit.ui" line="470"/>
-        <location filename="modeledit.cpp" line="2839"/>
+        <location filename="modeledit.cpp" line="2840"/>
         <source>ON</source>
         <translation></translation>
     </message>
@@ -4686,7 +4686,7 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>Êtes-vous sûr de vraiment vouloir effacer toutes les données d&apos;expos ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1521"/>
+        <location filename="modeledit.cpp" line="1522"/>
         <source>Weight</source>
         <oldsource>Weight(+%1%)</oldsource>
         <translation>Ratio</translation>
@@ -4702,51 +4702,51 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>Effacer les mixages</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1524"/>
-        <location filename="modeledit.cpp" line="1527"/>
+        <location filename="modeledit.cpp" line="1525"/>
+        <location filename="modeledit.cpp" line="1528"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1566"/>
-        <location filename="modeledit.cpp" line="1717"/>
+        <location filename="modeledit.cpp" line="1567"/>
+        <location filename="modeledit.cpp" line="1718"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1620"/>
-        <location filename="modeledit.cpp" line="1639"/>
-        <location filename="modeledit.cpp" line="1749"/>
+        <location filename="modeledit.cpp" line="1621"/>
+        <location filename="modeledit.cpp" line="1640"/>
+        <location filename="modeledit.cpp" line="1750"/>
         <source>CH%1%2</source>
         <translation>VOIE%1%2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1702"/>
+        <location filename="modeledit.cpp" line="1703"/>
         <source>No Trim</source>
         <translation>Pas de Trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1708"/>
+        <location filename="modeledit.cpp" line="1709"/>
         <source>No DR/Expo</source>
         <translation>Pas d&apos;expo/DR</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1711"/>
+        <location filename="modeledit.cpp" line="1712"/>
         <source>FMTrim</source>
         <translation>Trims des phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1716"/>
+        <location filename="modeledit.cpp" line="1717"/>
         <source>Diff</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3081"/>
+        <location filename="modeledit.cpp" line="3082"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3081"/>
+        <location filename="modeledit.cpp" line="3082"/>
         <source>Unable to find sound file %1!</source>
         <translation>Impossible de trouver le fichier %1!</translation>
     </message>
@@ -4939,75 +4939,75 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>PROF2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="621"/>
+        <location filename="modeledit.cpp" line="622"/>
         <source>S1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="622"/>
+        <location filename="modeledit.cpp" line="623"/>
         <source>S2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="623"/>
+        <location filename="modeledit.cpp" line="624"/>
         <source>LS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Rud</source>
         <translation>Dir</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Ele</source>
         <translation>Prf</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Thr</source>
         <translation>Gaz</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Ail</source>
         <translation>Ail</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1541"/>
-        <location filename="modeledit.cpp" line="1676"/>
+        <location filename="modeledit.cpp" line="1542"/>
+        <location filename="modeledit.cpp" line="1677"/>
         <source>Flight modes</source>
         <translation>Phases de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1543"/>
-        <location filename="modeledit.cpp" line="1678"/>
+        <location filename="modeledit.cpp" line="1544"/>
+        <location filename="modeledit.cpp" line="1679"/>
         <source>Flight mode</source>
         <translation>Phase de vol</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1560"/>
-        <location filename="modeledit.cpp" line="1696"/>
+        <location filename="modeledit.cpp" line="1561"/>
+        <location filename="modeledit.cpp" line="1697"/>
         <source>DISABLED</source>
         <translation>DESACTIVE</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1618"/>
-        <location filename="modeledit.cpp" line="1637"/>
-        <location filename="modeledit.cpp" line="1747"/>
+        <location filename="modeledit.cpp" line="1619"/>
+        <location filename="modeledit.cpp" line="1638"/>
+        <location filename="modeledit.cpp" line="1748"/>
         <source>X%1  </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1821"/>
-        <location filename="modeledit.cpp" line="1830"/>
-        <location filename="modeledit.cpp" line="2265"/>
-        <location filename="modeledit.cpp" line="2272"/>
+        <location filename="modeledit.cpp" line="1822"/>
+        <location filename="modeledit.cpp" line="1831"/>
+        <location filename="modeledit.cpp" line="2266"/>
+        <location filename="modeledit.cpp" line="2273"/>
         <source>CH %1</source>
         <translation>VOIE %1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2766"/>
+        <location filename="modeledit.cpp" line="2767"/>
         <source>CFN%1</source>
         <translation>FP%1</translation>
     </message>
@@ -7097,13 +7097,13 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>(VG%1)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1425"/>
+        <location filename="modeledit.cpp" line="1426"/>
         <location filename="modeledit.cpp" line="3724"/>
         <source>Flight Mode 0 (Default)</source>
         <translation>Phase de vol 0 (par défaut)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1427"/>
+        <location filename="modeledit.cpp" line="1428"/>
         <location filename="modeledit.cpp" line="3726"/>
         <source>FM %1</source>
         <translation>PV %1</translation>
@@ -7121,13 +7121,13 @@ Si cette option est cochée, la voie des gaz est inversée: le ralenti  est &apo
         <translation>openTx ne supporte pas cette fonction sur cette carte</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="1673"/>
-        <location filename="open9xeeprom.cpp" line="1750"/>
+        <location filename="open9xeeprom.cpp" line="1678"/>
+        <location filename="open9xeeprom.cpp" line="1755"/>
         <source>OpenTX doesn&apos;t accept this protocol</source>
         <translation>openTx ne supporte pas ce protocole</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="1680"/>
+        <location filename="open9xeeprom.cpp" line="1685"/>
         <source>OpenTX doesn&apos;t allow this number of channels</source>
         <translation>openTx ne supporte pas ce nombre de canaux</translation>
     </message>
