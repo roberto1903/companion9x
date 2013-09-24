@@ -21,6 +21,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     this->setWindowIcon(QIcon(":/icon.png"));
 
     QSettings settings("companion9x", "companion9x");
+    QString firmware_id = settings.value("firmware", default_firmware_variant.id).toString();
     ui->tabWidget->setCurrentIndex(settings.value("generalEditTab", 0).toInt());
     int profile_id=settings.value("profileId", 0).toInt();
     settings.beginGroup("Profiles");
@@ -36,26 +37,33 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     QSlider * tpmsld[] = {ui->chkSA, ui->chkSB, ui->chkSC, ui->chkSD, ui->chkSE, ui->chkSF, ui->chkSG, ui->chkSH, NULL};
 
     if (IS_TARANIS(eepromInterface->getBoard())) {
-        ui->contrastSB->setMinimum(0);
-    }
-    if (false) {      
       ui->contrastSB->setMinimum(0);
-      uint16_t switchstate=(g_eeGeneral.switchUnlockStates);
-      ui->chkSA->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSB->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSC->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSD->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSE->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSF->setValue((switchstate & 0x3)/2);
-      switchstate >>= 2;
-      ui->chkSG->setValue(switchstate & 0x3);
-      switchstate >>= 2;
-      ui->chkSH->setValue(switchstate & 0x3);      
+      if (firmware_id.contains("readonly")) {
+        uint16_t switchstate=(g_eeGeneral.switchUnlockStates);
+        ui->chkSA->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSB->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSC->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSD->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSE->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSF->setValue((switchstate & 0x3)/2);
+        switchstate >>= 2;
+        ui->chkSG->setValue(switchstate & 0x3);
+        switchstate >>= 2;
+        ui->chkSH->setValue(switchstate & 0x3);      
+      } else {
+        for (int i=0; pmsl[i]; i++) {
+          pmsl[i]->hide();
+        }
+        for (int i=0; tpmsld[i]; i++) {
+          tpmsld[i]->hide();
+        }
+        this->layout()->removeItem(ui->TaranisReadOnlyUnlock);
+      }
     } else {
       for (int i=0; pmsl[i]; i++) {
         pmsl[i]->hide();
@@ -63,7 +71,7 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
       for (int i=0; tpmsld[i]; i++) {
         tpmsld[i]->hide();
       }
-      this->layout()->removeItem(ui->TaranisReadOnlyUnlock);
+      this->layout()->removeItem(ui->TaranisReadOnlyUnlock);      
     }
     ui->profile_CB->clear();
     for ( int i = 0; i < MAX_PROFILES; ++i) {
@@ -386,10 +394,9 @@ GeneralEdit::GeneralEdit(RadioData &radioData, QWidget *parent) :
     setValues();
     switchDefPosEditLock=false;
     QTimer::singleShot(0, this, SLOT(shrink()));
-    if (false)
-      for (int i=0; tpmsld[i]; i++) {
-        connect(tpmsld[i], SIGNAL(valueChanged(int)),this,SLOT(unlockSwitchEdited()));
-      }
+    for (int i=0; tpmsld[i]; i++) {
+      connect(tpmsld[i], SIGNAL(valueChanged(int)),this,SLOT(unlockSwitchEdited()));
+    }
 }
 
 GeneralEdit::~GeneralEdit()
@@ -400,7 +407,7 @@ GeneralEdit::~GeneralEdit()
 void GeneralEdit::unlockSwitchEdited()
 {
   int i=0;
-  i|=(((uint16_t)ui->chkSA->value())<<0);
+  i|=(((uint16_t)ui->chkSA->value()));
   i|=(((uint16_t)ui->chkSB->value())<<2);
   i|=(((uint16_t)ui->chkSC->value())<<4);
   i|=(((uint16_t)ui->chkSD->value())<<6);
