@@ -1,3 +1,10 @@
+<h2>Version 1.49</h2>
+<ul>
+<li>Stack usage optimizations</li>
+<li>Playsound order is misaligned between companion9x and the TX</li>
+<li>Model image could not be reset.</li>
+</ul>
+
 <h2>Version 1.48</h2>
 <ul>
 <li>Interface fixes</li>
