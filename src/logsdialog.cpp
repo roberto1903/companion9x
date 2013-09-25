@@ -26,7 +26,7 @@ logsDialog::logsDialog(QWidget *parent) :
   ui->customPlot->yAxis->setAutoTickCount(10);
   ui->customPlot->xAxis2->setTicks(false);
   ui->customPlot->yAxis2->setTicks(false);
-  ui->customPlot->setRangeZoomFactor(2, 1);
+  ui->customPlot->setRangeZoomFactor(2, 2);
   QFont legendFont = font();
   legendFont.setPointSize(10);
   ui->customPlot->legend->setFont(legendFont);
@@ -172,23 +172,26 @@ void logsDialog::mousePress()
   
   if (ui->customPlot->xAxis->selected().testFlag(QCPAxis::spAxis))
     ui->customPlot->setRangeDrag(ui->customPlot->xAxis->orientation());
-//  else if (ui->customPlot->yAxis->selected().testFlag(QCPAxis::spAxis))
-//    ui->customPlot->setRangeDrag(ui->customPlot->yAxis->orientation());
+  else if (ui->customPlot->yAxis->selected().testFlag(QCPAxis::spAxis))
+    ui->customPlot->setRangeDrag(ui->customPlot->yAxis->orientation());
   else
-    ui->customPlot->setRangeDrag(Qt::Horizontal);
+    ui->customPlot->setRangeDrag(Qt::Horizontal|Qt::Vertical);
 }
 
 void logsDialog::mouseWheel()
 {
   // if an axis is selected, only allow the direction of that axis to be zoomed
   // if no axis is selected, both directions may be zoomed
-  
-  if (ui->customPlot->xAxis->selected().testFlag(QCPAxis::spAxis))
-    ui->customPlot->setRangeZoom(ui->customPlot->xAxis->orientation());
-  else if (ui->customPlot->yAxis->selected().testFlag(QCPAxis::spAxis))
-    ui->customPlot->setRangeZoom(ui->customPlot->yAxis->orientation());
-  else
-    ui->customPlot->setRangeZoom(Qt::Horizontal|Qt::Vertical);
+  int orientation=0;
+  if (ui->ZoomX_ChkB->isChecked()) {
+    orientation|=Qt::Horizontal;
+  }
+  if (ui->ZoomY_ChkB->isChecked()) {
+    orientation|=Qt::Vertical;
+  }
+  if (orientation) {
+    ui->customPlot->setRangeZoom((Qt::Orientation)orientation);
+  }
 }
 
 void logsDialog::plotValue(int index, int plot, int numplots)

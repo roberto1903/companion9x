@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>874</width>
-    <height>617</height>
+    <width>883</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,32 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,1,0,0,0" columnstretch="0,1" rowminimumheight="0,1,0,0,0">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="0,1,0,0,0">
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Filename</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="FileName_LE">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="fileOpen_BT">
+       <property name="text">
+        <string>Open LogFile</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item row="1" column="0" rowspan="4">
     <widget class="QTableWidget" name="FieldsTW">
      <property name="sizePolicy">
@@ -98,32 +123,79 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Filename</string>
+        <string>Zoom</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="FileName_LE">
-       <property name="readOnly">
-        <bool>true</bool>
+      <widget class="QCheckBox" name="ZoomX_ChkB">
+       <property name="text">
+        <string>X</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="fileOpen_BT">
+      <widget class="QCheckBox" name="ZoomY_ChkB">
        <property name="text">
-        <string>Open LogFile</string>
+        <string>Y</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
    <item row="3" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Fly sessions</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="sessions_CB">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="1">
     <widget class="QTableWidget" name="logTable">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -165,40 +237,6 @@
       <bool>false</bool>
      </attribute>
     </widget>
-   </item>
-   <item row="2" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Fly sessions</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="sessions_CB">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
