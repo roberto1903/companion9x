@@ -170,49 +170,49 @@ If blank then the expo is considered to be &quot;ON&quot; all the time.</source>
         <translation>Obecná nastavení</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3040"/>
+        <location filename="generaledit.ui" line="88"/>
         <source>Store calib. and hw settings in selected profile</source>
         <translation>Uložit kalibraci a HW nastavení do vybraného profilu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3053"/>
+        <location filename="generaledit.ui" line="59"/>
         <source>Retrieve calib. and hw settings from profile</source>
         <translation>Získat kalibraci a HW nastavení z profilu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="39"/>
+        <location filename="generaledit.ui" line="109"/>
         <source>General settings used throught the transmitter.
 These will be relevant for all models in the same EEPROM.</source>
         <translation>Obecná nastavení rádia.
 Tyto volby jsou platné pro všechny modely v jedné EEPROM.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="47"/>
+        <location filename="generaledit.ui" line="117"/>
         <source>Setup</source>
         <translation>Nastevní</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="813"/>
+        <location filename="generaledit.ui" line="1439"/>
         <source>Timer Beeps</source>
         <translation>Upozornění stopek</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="672"/>
+        <location filename="generaledit.ui" line="1456"/>
         <source>Contrast</source>
         <translation>Kontrast</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1412"/>
+        <location filename="generaledit.ui" line="1202"/>
         <source>Channel Order (For Templates)</source>
         <translation>Pořadí kanálů (pro šablony)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="312"/>
+        <location filename="generaledit.ui" line="1226"/>
         <source>Owner Name</source>
         <translation>Jméno pilota</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1358"/>
+        <location filename="generaledit.ui" line="502"/>
         <source>Mode selection:
 
 Mode 1:
@@ -253,95 +253,95 @@ Mode 4:
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1383"/>
+        <location filename="generaledit.ui" line="527"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mód1 (Směr.Výšk.Plyn.Křid)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1388"/>
+        <location filename="generaledit.ui" line="532"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mód2 (Směr.Plyn.Výšk.Křid)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1393"/>
+        <location filename="generaledit.ui" line="537"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mód3 (Křid.Výšk.Plyn.Směr)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1398"/>
+        <location filename="generaledit.ui" line="542"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mód4 (Křid.Plyn.Výšk.Směr)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="279"/>
-        <location filename="generaledit.ui" line="342"/>
+        <location filename="generaledit.ui" line="1328"/>
+        <location filename="generaledit.ui" line="1381"/>
         <source>Quiet</source>
         <translation>Tichý</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="284"/>
+        <location filename="generaledit.ui" line="1333"/>
         <source>Only Alarms</source>
         <translation>Jen alarm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="289"/>
-        <location filename="generaledit.ui" line="352"/>
+        <location filename="generaledit.ui" line="1338"/>
+        <location filename="generaledit.ui" line="1391"/>
         <source>No Keys</source>
         <translation>Bez kláves</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="294"/>
-        <location filename="generaledit.ui" line="357"/>
+        <location filename="generaledit.ui" line="1343"/>
+        <location filename="generaledit.ui" line="1396"/>
         <source>All</source>
         <translation>Vše</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1120"/>
+        <location filename="generaledit.ui" line="173"/>
         <source>MAVLink Baud Rate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1128"/>
+        <location filename="generaledit.ui" line="392"/>
         <source>4800 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1133"/>
+        <location filename="generaledit.ui" line="397"/>
         <source>9600 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1138"/>
+        <location filename="generaledit.ui" line="402"/>
         <source>14400 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1143"/>
+        <location filename="generaledit.ui" line="407"/>
         <source>19200 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1148"/>
+        <location filename="generaledit.ui" line="412"/>
         <source>38400 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1153"/>
+        <location filename="generaledit.ui" line="417"/>
         <source>57600 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1158"/>
+        <location filename="generaledit.ui" line="422"/>
         <source>76800 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1163"/>
+        <location filename="generaledit.ui" line="427"/>
         <source>115200 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1173"/>
+        <location filename="generaledit.ui" line="245"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -350,22 +350,22 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1180"/>
+        <location filename="generaledit.ui" line="252"/>
         <source>Every Minute</source>
         <translation>Každou celou minutu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1187"/>
+        <location filename="generaledit.ui" line="259"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
         <translation>Upozorní při 30s, 15s, 10s,  a pod 5 sekundami zbývajícího času stopek</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1190"/>
+        <location filename="generaledit.ui" line="262"/>
         <source>Count Down to Zero</source>
         <translation>Odpočet do nuly</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1197"/>
+        <location filename="generaledit.ui" line="269"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -374,18 +374,18 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1204"/>
+        <location filename="generaledit.ui" line="276"/>
         <source>Flash on beep</source>
         <translation>Blikat podsvětlením</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="653"/>
+        <location filename="generaledit.ui" line="1416"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
         <translation>Pokud tato hodnota není nula, každé stisknutí klávesy zapne podsvétlení a vypne ho až po uplynutí nastaveného počtu sekund.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="656"/>
-        <location filename="generaledit.ui" line="768"/>
+        <location filename="generaledit.ui" line="564"/>
+        <location filename="generaledit.ui" line="1419"/>
         <source> sec</source>
         <translation>s</translation>
     </message>
@@ -394,12 +394,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Auto. vypnutí podsvětlení po</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="468"/>
+        <location filename="generaledit.ui" line="1521"/>
         <source>Input Filter</source>
         <translation>Filtrování vstupů</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="948"/>
+        <location filename="generaledit.ui" line="604"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -411,15 +411,15 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="332"/>
-        <location filename="generaledit.ui" line="1733"/>
-        <location filename="generaledit.ui" line="1767"/>
-        <location filename="generaledit.ui" line="1835"/>
-        <location filename="generaledit.ui" line="1869"/>
-        <location filename="generaledit.ui" line="1908"/>
-        <location filename="generaledit.ui" line="1976"/>
-        <location filename="generaledit.ui" line="2020"/>
-        <location filename="generaledit.ui" line="2054"/>
+        <location filename="generaledit.ui" line="1371"/>
+        <location filename="generaledit.ui" line="2341"/>
+        <location filename="generaledit.ui" line="2375"/>
+        <location filename="generaledit.ui" line="2443"/>
+        <location filename="generaledit.ui" line="2477"/>
+        <location filename="generaledit.ui" line="2516"/>
+        <location filename="generaledit.ui" line="2584"/>
+        <location filename="generaledit.ui" line="2628"/>
+        <location filename="generaledit.ui" line="2662"/>
         <source>Beeper volume
 
 0 - Quiet.  No beeps at all.
@@ -436,17 +436,17 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
 4 - Extra Hlasitý.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="347"/>
+        <location filename="generaledit.ui" line="1386"/>
         <source>Alarms Only</source>
         <translation>Jen alarmy</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="679"/>
-        <location filename="generaledit.ui" line="891"/>
-        <location filename="generaledit.ui" line="980"/>
-        <location filename="generaledit.ui" line="1022"/>
-        <location filename="generaledit.ui" line="1052"/>
-        <location filename="generaledit.ui" line="2302"/>
+        <location filename="generaledit.ui" line="758"/>
+        <location filename="generaledit.ui" line="973"/>
+        <location filename="generaledit.ui" line="1146"/>
+        <location filename="generaledit.ui" line="1265"/>
+        <location filename="generaledit.ui" line="1538"/>
+        <location filename="generaledit.ui" line="2910"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -461,32 +461,32 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="319"/>
+        <location filename="generaledit.ui" line="557"/>
         <source>Beeper Mode</source>
         <translation>Mód zvuku</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1235"/>
-        <location filename="generaledit.ui" line="1743"/>
-        <location filename="generaledit.ui" line="1845"/>
-        <location filename="generaledit.ui" line="1986"/>
-        <location filename="generaledit.ui" line="2030"/>
+        <location filename="generaledit.ui" line="209"/>
+        <location filename="generaledit.ui" line="2351"/>
+        <location filename="generaledit.ui" line="2453"/>
+        <location filename="generaledit.ui" line="2594"/>
+        <location filename="generaledit.ui" line="2638"/>
         <source>Off</source>
         <translation>Vypnuto</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1240"/>
+        <location filename="generaledit.ui" line="214"/>
         <source>Switches Up</source>
         <translation>Spínače nahoru</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1245"/>
+        <location filename="generaledit.ui" line="219"/>
         <source>Switches Down</source>
         <translation>Spínače dolů</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="250"/>
-        <location filename="generaledit.ui" line="413"/>
+        <location filename="generaledit.ui" line="461"/>
+        <location filename="generaledit.ui" line="583"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -496,42 +496,42 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1003"/>
+        <location filename="generaledit.ui" line="1351"/>
         <source>Memory Startup Warning</source>
         <translation>Při zapnutí upozorňit na nízký stav paměti</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="209"/>
-        <location filename="generaledit.ui" line="373"/>
+        <location filename="generaledit.ui" line="1014"/>
+        <location filename="generaledit.ui" line="1091"/>
         <source>X-Short</source>
         <translation>Extra krátký</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="214"/>
-        <location filename="generaledit.ui" line="378"/>
+        <location filename="generaledit.ui" line="1019"/>
+        <location filename="generaledit.ui" line="1096"/>
         <source>Short</source>
         <translation>Krátký</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="219"/>
-        <location filename="generaledit.ui" line="383"/>
+        <location filename="generaledit.ui" line="1024"/>
+        <location filename="generaledit.ui" line="1101"/>
         <source>Normal</source>
         <translation>Normální</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="224"/>
-        <location filename="generaledit.ui" line="388"/>
+        <location filename="generaledit.ui" line="1029"/>
+        <location filename="generaledit.ui" line="1106"/>
         <source>Long</source>
         <translation>Dlouhý</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="229"/>
-        <location filename="generaledit.ui" line="393"/>
+        <location filename="generaledit.ui" line="1034"/>
+        <location filename="generaledit.ui" line="1111"/>
         <source>X-Long</source>
         <translation>Extra dlouhý</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="516"/>
+        <location filename="generaledit.ui" line="1652"/>
         <source>Battery warning voltage.
 This is the threashhold where the battery warning sounds.
 
@@ -540,165 +540,165 @@ Acceptable values are 5v..10v</source>
 Použitelné hodnoty jsou 5v..10v</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="497"/>
+        <location filename="generaledit.ui" line="1633"/>
         <source>Battery Warning</source>
         <translation>Alarm baterie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="55"/>
+        <location filename="generaledit.ui" line="700"/>
         <source>THR</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="62"/>
+        <location filename="generaledit.ui" line="707"/>
         <source>RUD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="69"/>
+        <location filename="generaledit.ui" line="714"/>
         <source>ELE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="76"/>
+        <location filename="generaledit.ui" line="721"/>
         <source>AIL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="83"/>
+        <location filename="generaledit.ui" line="728"/>
         <source>GEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="90"/>
+        <location filename="generaledit.ui" line="735"/>
         <source>ID0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="97"/>
+        <location filename="generaledit.ui" line="742"/>
         <source>ID1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="104"/>
+        <location filename="generaledit.ui" line="749"/>
         <source>ID2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="365"/>
+        <location filename="generaledit.ui" line="1564"/>
         <source>Sound Mode</source>
         <translation>Mód zvuku</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="941"/>
+        <location filename="generaledit.ui" line="482"/>
         <source>Reverse Throttle Operation</source>
         <translation>Reverzovat funkci plynu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="884"/>
+        <location filename="generaledit.ui" line="442"/>
         <source>Pot Scrolling Enable</source>
         <translation>Pohyb v menu potenciometry</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="547"/>
+        <location filename="generaledit.ui" line="1623"/>
         <source>Battery Calibration</source>
         <translation>Kalibrace měření baterie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="800"/>
+        <location filename="generaledit.ui" line="1719"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
         <translation>Pokud není nastaveno na nulu, bude zapnuto zvukové upozornění, že jste rádio nechali bez povšimnutí nastavený počet minut.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="803"/>
+        <location filename="generaledit.ui" line="1722"/>
         <source> min</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="845"/>
-        <location filename="generaledit.ui" line="848"/>
+        <location filename="generaledit.ui" line="1314"/>
+        <location filename="generaledit.ui" line="1317"/>
         <source>Show splash screen on startup</source>
         <translation>Zobrazit úvodní logo při zapnutí vysílčky</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="560"/>
+        <location filename="generaledit.ui" line="1597"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Kalibrace baterie:
 Tato hodnota bude přidána k měřenému napětí baterie.  Použijte tuto položku ke kalibraci pomocí externího voltmetru.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="476"/>
+        <location filename="generaledit.ui" line="1478"/>
         <source>Single</source>
         <translation>Jednoduché</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="481"/>
+        <location filename="generaledit.ui" line="1483"/>
         <source>Oversample</source>
         <translation>Převzorkování</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="486"/>
+        <location filename="generaledit.ui" line="1488"/>
         <source>Filter</source>
         <translation>Filtovaná hodnota</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="826"/>
+        <location filename="generaledit.ui" line="1132"/>
         <source>Show Splash Screen on Startup</source>
         <translation>Zobrazit úvodní logo</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="781"/>
+        <location filename="generaledit.ui" line="1739"/>
         <source>Inactivity Timer</source>
         <translation>Časovač nečinnosti</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="165"/>
+        <location filename="generaledit.ui" line="1067"/>
         <source>Beeper</source>
         <translation>Bzučák</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="170"/>
+        <location filename="generaledit.ui" line="1072"/>
         <source>Speaker</source>
         <translation>Reproduktor</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="175"/>
+        <location filename="generaledit.ui" line="1077"/>
         <source>BeeperVoice</source>
         <translation>Bzučák+Hlas</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="180"/>
+        <location filename="generaledit.ui" line="1082"/>
         <source>SpeakerVoice</source>
         <translation>Repro+Hlas</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="188"/>
+        <location filename="generaledit.ui" line="435"/>
         <source>Beeper Length</source>
         <translation>Délka zvuku</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1322"/>
+        <location filename="generaledit.ui" line="783"/>
         <source>GPS Coordinates</source>
         <translation>Souřadnice GPS</translation>
     </message>
     <message utf8="true">
-        <location filename="generaledit.ui" line="1330"/>
+        <location filename="generaledit.ui" line="791"/>
         <source>hh° (N/S) mm&apos; ss&apos;&apos;.dd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1335"/>
+        <location filename="generaledit.ui" line="796"/>
         <source>NMEA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1300"/>
+        <location filename="generaledit.ui" line="650"/>
         <source>Timeshift from UTC</source>
         <translation>Časový posun od UTC</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1425"/>
+        <location filename="generaledit.ui" line="822"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -708,17 +708,17 @@ Toto je použito šablonami k určení
 který kanál patří ke kterému výstupu.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="237"/>
+        <location filename="generaledit.ui" line="1003"/>
         <source>Speaker Pitch (spkr only)</source>
         <translation>Tón zvuku (pouze spkr)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="271"/>
+        <location filename="generaledit.ui" line="1216"/>
         <source>Haptic Mode</source>
         <translation>Mód vibrací</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1345"/>
+        <location filename="generaledit.ui" line="1209"/>
         <source>Stick Mode</source>
         <translation>Výchozí mód vysílačky</translation>
     </message>
@@ -727,22 +727,22 @@ který kanál patří ke kterému výstupu.</translation>
         <translation type="obsolete">Spínač podsvětlení</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1045"/>
+        <location filename="generaledit.ui" line="691"/>
         <source>Throttle Startup Warning</source>
         <translation>Kontrola výchozí polohy plynu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="858"/>
+        <location filename="generaledit.ui" line="996"/>
         <source>Show Owner Name on Splash</source>
         <translation>Jméno pilota v úvodním logu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1213"/>
+        <location filename="generaledit.ui" line="1732"/>
         <source>Switch Startup Warning</source>
         <translation>Kontrola výchozí polohy spínačů</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1089"/>
+        <location filename="generaledit.ui" line="1683"/>
         <source>Telemetry NO DATA Alarm</source>
         <translation>Alarm telemetrie NO DATA</translation>
     </message>
@@ -751,200 +751,245 @@ který kanál patří ke kterému výstupu.</translation>
         <translation type="obsolete">Podsvětlení při pohybu kniplu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="726"/>
+        <location filename="generaledit.ui" line="677"/>
         <source>LCD Display Type</source>
         <translation>Typ LCD zobrazovače</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="734"/>
+        <location filename="generaledit.ui" line="1289"/>
         <source>Standard</source>
         <translation>Běžný</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="739"/>
+        <location filename="generaledit.ui" line="1294"/>
         <source>Optrex</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="622"/>
+        <location filename="generaledit.ui" line="1502"/>
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
         <translation>Toto je volba spínače který zapne podsvětlení (pokud je nainstalováno).</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="448"/>
+        <location filename="generaledit.ui" line="1700"/>
         <source>Speaker Volume</source>
         <translation>Hlasitost reproduktoru</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="302"/>
+        <location filename="generaledit.ui" line="489"/>
         <source>Haptic Length</source>
         <translation>Délka vibrací</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="434"/>
+        <location filename="generaledit.ui" line="1059"/>
         <source>Haptic Strength</source>
         <translation>Síla vibrací</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="712"/>
+        <location filename="generaledit.ui" line="1446"/>
         <source>BackLight Brightness</source>
         <translation>Jas podsvětlení</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="961"/>
+        <location filename="generaledit.ui" line="954"/>
         <source>Alarm Warning</source>
         <translation>Upozornění na vypnutý alarm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="634"/>
+        <location filename="generaledit.ui" line="1470"/>
         <source>BackLight  Auto OFF after</source>
         <translation>Auto. vypnutí podsvětlení po</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="705"/>
+        <location filename="generaledit.ui" line="1514"/>
         <source>Bandgap Measuring Enable</source>
         <translation>Povolit měření s Bandgap</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="914"/>
+        <location filename="generaledit.ui" line="643"/>
         <source>RotEnc Navigation</source>
         <translation>Navigace otočným enkodérem</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="599"/>
+        <location filename="generaledit.ui" line="1584"/>
         <source>BackLight Switch</source>
         <translation>Spínač podsvětlení</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="761"/>
+        <location filename="generaledit.ui" line="617"/>
         <source>BackLight On Stick Move</source>
         <translation>Podsvětlení při pohybu kniplu</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="747"/>
+        <location filename="generaledit.ui" line="1233"/>
         <source>BackLight Invert</source>
         <translation>Invertovat funkci podsvětlení</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="136"/>
+        <location filename="generaledit.ui" line="138"/>
         <source>Country Code</source>
         <translation>Kód země</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="154"/>
+        <location filename="generaledit.ui" line="156"/>
         <source>Europe</source>
         <translation>Evropa</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="149"/>
+        <location filename="generaledit.ui" line="151"/>
         <source>Japan</source>
         <translation>Japonsko</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="144"/>
+        <location filename="generaledit.ui" line="146"/>
         <source>America</source>
         <translation>Amerika</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1287"/>
+        <location filename="generaledit.ui" line="1183"/>
         <source>Metric</source>
         <translation>Metrické</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1292"/>
+        <location filename="generaledit.ui" line="1188"/>
         <source>Imperial</source>
         <translation>Imperiální</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1279"/>
+        <location filename="generaledit.ui" line="236"/>
         <source>Measurement Units</source>
         <translation>Měrné jednotky</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1075"/>
+        <location filename="generaledit.ui" line="684"/>
         <source>FrSky Internal Alarm</source>
         <translation>Integrovaný alarm Frsky</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="924"/>
+        <location filename="generaledit.ui" line="1042"/>
         <source>StickScroll</source>
         <translation>StickScroll-ovládání menu pákou</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1103"/>
+        <location filename="generaledit.ui" line="381"/>
         <source>PPMSim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="115"/>
+        <location filename="generaledit.ui" line="182"/>
         <source>Voice Language</source>
         <translation>Jazyk hlasových zpráv</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="606"/>
+        <location filename="generaledit.ui" line="1528"/>
         <source>CrossTrim</source>
         <translation>CrossTrim -použít trimy druhé páky</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1559"/>
+        <location filename="generaledit.ui" line="287"/>
         <source>Beep volume</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1582"/>
+        <location filename="generaledit.ui" line="310"/>
         <source>Wav volume</source>
         <translation>Wav soubor</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1605"/>
+        <location filename="generaledit.ui" line="333"/>
         <source>Vario volume</source>
         <translation>Vario</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1628"/>
+        <location filename="generaledit.ui" line="356"/>
         <source>Background volume</source>
         <translation>Zvuk v pozadí</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1262"/>
+        <location filename="generaledit.ui" line="1052"/>
         <source>FAI Mode</source>
         <translation>FAI mód</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1269"/>
+        <location filename="generaledit.ui" line="806"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
         <translation>FAI je soutéžní mód (www.fai.org), zablokuje vario, zobrazení telemetrie a funkce hlasového hlášení. Tuto funkci nelze vypnout v menu rádia.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1667"/>
+        <location filename="generaledit.ui" line="1690"/>
+        <source>Readonly Unlock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1763"/>
+        <source>SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1825"/>
+        <source>SE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2120"/>
+        <source>SA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2136"/>
+        <source>SF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2152"/>
+        <source>SH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2168"/>
+        <source>SD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2184"/>
+        <source>SB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2249"/>
+        <source>SG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="2275"/>
         <source>Trainer</source>
         <translation>Trenér</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1692"/>
+        <location filename="generaledit.ui" line="2300"/>
         <source>Mode</source>
         <translation>Mód</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1699"/>
+        <location filename="generaledit.ui" line="2307"/>
         <source>Input</source>
         <translation>Vstup</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1706"/>
+        <location filename="generaledit.ui" line="2314"/>
         <source>Weight</source>
         <translation>Váha</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1713"/>
+        <location filename="generaledit.ui" line="2321"/>
         <source>Switch</source>
         <translation>Spínač</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1720"/>
-        <location filename="generaledit.ui" line="2406"/>
+        <location filename="generaledit.ui" line="2328"/>
+        <location filename="generaledit.ui" line="3014"/>
         <source>PPM 1</source>
         <translation></translation>
     </message>
@@ -957,200 +1002,200 @@ který kanál patří ke kterému výstupu.</translation>
         <translation type="obsolete">:=   (nahradit)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1777"/>
-        <location filename="generaledit.ui" line="1879"/>
-        <location filename="generaledit.ui" line="1918"/>
-        <location filename="generaledit.ui" line="2064"/>
+        <location filename="generaledit.ui" line="2385"/>
+        <location filename="generaledit.ui" line="2487"/>
+        <location filename="generaledit.ui" line="2526"/>
+        <location filename="generaledit.ui" line="2672"/>
         <source>chn1</source>
         <translation>kanál 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1782"/>
-        <location filename="generaledit.ui" line="1884"/>
-        <location filename="generaledit.ui" line="1923"/>
-        <location filename="generaledit.ui" line="2069"/>
+        <location filename="generaledit.ui" line="2390"/>
+        <location filename="generaledit.ui" line="2492"/>
+        <location filename="generaledit.ui" line="2531"/>
+        <location filename="generaledit.ui" line="2677"/>
         <source>chn2</source>
         <translation>kanál 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1787"/>
-        <location filename="generaledit.ui" line="1889"/>
-        <location filename="generaledit.ui" line="1928"/>
-        <location filename="generaledit.ui" line="2074"/>
+        <location filename="generaledit.ui" line="2395"/>
+        <location filename="generaledit.ui" line="2497"/>
+        <location filename="generaledit.ui" line="2536"/>
+        <location filename="generaledit.ui" line="2682"/>
         <source>chn3</source>
         <translation>kanál 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1792"/>
-        <location filename="generaledit.ui" line="1894"/>
-        <location filename="generaledit.ui" line="1933"/>
-        <location filename="generaledit.ui" line="2079"/>
+        <location filename="generaledit.ui" line="2400"/>
+        <location filename="generaledit.ui" line="2502"/>
+        <location filename="generaledit.ui" line="2541"/>
+        <location filename="generaledit.ui" line="2687"/>
         <source>chn4</source>
         <translation>kanál 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1822"/>
-        <location filename="generaledit.ui" line="2783"/>
+        <location filename="generaledit.ui" line="2430"/>
+        <location filename="generaledit.ui" line="3391"/>
         <source>PPM 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1963"/>
-        <location filename="generaledit.ui" line="2790"/>
+        <location filename="generaledit.ui" line="2571"/>
+        <location filename="generaledit.ui" line="3398"/>
         <source>PPM 3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2007"/>
-        <location filename="generaledit.ui" line="2797"/>
+        <location filename="generaledit.ui" line="2615"/>
+        <location filename="generaledit.ui" line="3405"/>
         <source>PPM 4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2123"/>
+        <location filename="generaledit.ui" line="2731"/>
         <source>Telemetry</source>
         <translation>Telemetrie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2148"/>
+        <location filename="generaledit.ui" line="2756"/>
         <source>RSSI Alarm 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2192"/>
-        <location filename="generaledit.ui" line="2267"/>
+        <location filename="generaledit.ui" line="2800"/>
+        <location filename="generaledit.ui" line="2875"/>
         <source>----</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2197"/>
-        <location filename="generaledit.ui" line="2272"/>
+        <location filename="generaledit.ui" line="2805"/>
+        <location filename="generaledit.ui" line="2880"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2202"/>
-        <location filename="generaledit.ui" line="2277"/>
+        <location filename="generaledit.ui" line="2810"/>
+        <location filename="generaledit.ui" line="2885"/>
         <source>Orange</source>
         <translation>Oranžová</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2207"/>
-        <location filename="generaledit.ui" line="2282"/>
+        <location filename="generaledit.ui" line="2815"/>
+        <location filename="generaledit.ui" line="2890"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2223"/>
+        <location filename="generaledit.ui" line="2831"/>
         <source>RSSI Alarm 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2292"/>
+        <location filename="generaledit.ui" line="2900"/>
         <source>NO DATA Alarm</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2326"/>
+        <location filename="generaledit.ui" line="2934"/>
         <source>Calibration</source>
         <translation>Kalibrace</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2345"/>
+        <location filename="generaledit.ui" line="2953"/>
         <source>POT 4</source>
         <translation>POTENCIOMETR 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2413"/>
+        <location filename="generaledit.ui" line="3021"/>
         <source>STICK 3</source>
         <translation>PÁKA 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2420"/>
-        <location filename="generaledit.ui" line="2964"/>
+        <location filename="generaledit.ui" line="3028"/>
+        <location filename="generaledit.ui" line="3572"/>
         <source>Negative span</source>
         <translation>Negativní poloha</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2430"/>
-        <location filename="generaledit.ui" line="2974"/>
+        <location filename="generaledit.ui" line="3038"/>
+        <location filename="generaledit.ui" line="3582"/>
         <source>Mid value</source>
         <translation>Hodnota střední polohy</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2440"/>
-        <location filename="generaledit.ui" line="2984"/>
+        <location filename="generaledit.ui" line="3048"/>
+        <location filename="generaledit.ui" line="3592"/>
         <source>Positive span</source>
         <translation>Pozitivní poloha</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2450"/>
+        <location filename="generaledit.ui" line="3058"/>
         <source>STICK 1</source>
         <translation>PÁKA 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2499"/>
+        <location filename="generaledit.ui" line="3107"/>
         <source>STICK 2</source>
         <translation>PÁKA 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2584"/>
+        <location filename="generaledit.ui" line="3192"/>
         <source>STICK 4</source>
         <translation>PÁKA 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2386"/>
+        <location filename="generaledit.ui" line="2994"/>
         <source>POT 1</source>
         <translation>POTENCIOMETR 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2379"/>
+        <location filename="generaledit.ui" line="2987"/>
         <source>POT 2</source>
         <translation>POTENCIOMETR 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2359"/>
+        <location filename="generaledit.ui" line="2967"/>
         <source>POT 3</source>
         <translation>POTENCIOMETR 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1748"/>
-        <location filename="generaledit.ui" line="1850"/>
-        <location filename="generaledit.ui" line="1991"/>
-        <location filename="generaledit.ui" line="2035"/>
+        <location filename="generaledit.ui" line="2356"/>
+        <location filename="generaledit.ui" line="2458"/>
+        <location filename="generaledit.ui" line="2599"/>
+        <location filename="generaledit.ui" line="2643"/>
         <source>+= (Sum)</source>
         <translation>+= (Sečíst)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1753"/>
-        <location filename="generaledit.ui" line="1855"/>
-        <location filename="generaledit.ui" line="1996"/>
-        <location filename="generaledit.ui" line="2040"/>
+        <location filename="generaledit.ui" line="2361"/>
+        <location filename="generaledit.ui" line="2463"/>
+        <location filename="generaledit.ui" line="2604"/>
+        <location filename="generaledit.ui" line="2648"/>
         <source>:= (Replace)</source>
         <translation>:= (Nahradit)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2646"/>
+        <location filename="generaledit.ui" line="3254"/>
         <source>Battery</source>
         <translation>Baterie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2656"/>
+        <location filename="generaledit.ui" line="3264"/>
         <source>v</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2675"/>
+        <location filename="generaledit.ui" line="3283"/>
         <source>PPM Multiplier</source>
         <translation>PPM Násobič</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2827"/>
+        <location filename="generaledit.ui" line="3435"/>
         <source>Current</source>
         <translation>Proud</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1027"/>
+        <location filename="generaledit.cpp" line="1078"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen.
 This function cannot be disabled by the radio.
 Are you sure ?</source>
@@ -1160,28 +1205,28 @@ Tuto funkci nelze vypnout v menu rádia.
 Opravdu to takto chcete ?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1249"/>
-        <location filename="generaledit.cpp" line="1290"/>
+        <location filename="generaledit.cpp" line="1300"/>
+        <location filename="generaledit.cpp" line="1341"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1249"/>
+        <location filename="generaledit.cpp" line="1300"/>
         <source>Wrong data in profile, radio calibration was not retrieved</source>
         <translation>Špatná data v profilu, není možné získat parametry kalibrace</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1290"/>
+        <location filename="generaledit.cpp" line="1341"/>
         <source>Wrong data in profile, hw related parameters were not retrieved</source>
         <translation>Špatná data v profilu, není možné získat HW parametry</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1315"/>
+        <location filename="generaledit.cpp" line="1366"/>
         <source>Do you want to store calibration in %1 profile&lt;br&gt;overwriting existing calibration?</source>
         <translation>Chcete uložit kalibraci do profilu %1&lt;br&gt;Přepsat existující kalibraci?</translation>
     </message>
     <message>
-        <location filename="generaledit.cpp" line="1346"/>
+        <location filename="generaledit.cpp" line="1397"/>
         <source>Calibration and HW parameters saved.</source>
         <translation>Kalibrace a HW parametry byly uloženy.</translation>
     </message>
@@ -1189,150 +1234,150 @@ Opravdu to takto chcete ?</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="107"/>
-        <location filename="mainwindow.cpp" line="683"/>
-        <location filename="mainwindow.cpp" line="700"/>
-        <location filename="mainwindow.cpp" line="711"/>
+        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="703"/>
+        <location filename="mainwindow.cpp" line="720"/>
+        <location filename="mainwindow.cpp" line="731"/>
         <source>companion9x - EEPROM Editor - firmware %1</source>
         <translation>companion9x - EEPROM Editor - firmware %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="134"/>
-        <location filename="mainwindow.cpp" line="600"/>
-        <location filename="mainwindow.cpp" line="636"/>
-        <location filename="mainwindow.cpp" line="2141"/>
+        <location filename="mainwindow.cpp" line="147"/>
+        <location filename="mainwindow.cpp" line="620"/>
+        <location filename="mainwindow.cpp" line="656"/>
+        <location filename="mainwindow.cpp" line="2161"/>
         <source>File loaded</source>
         <translation>Soubor byl načten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="148"/>
+        <location filename="mainwindow.cpp" line="168"/>
         <source>Display previous warning again at startup ?</source>
         <translation>Chcete zobrazit předchozí upozornění i příště ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="199"/>
+        <location filename="mainwindow.cpp" line="219"/>
         <source>Checking for updates</source>
         <translation>Kontroluji aktualizace</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="222"/>
-        <location filename="mainwindow.cpp" line="267"/>
-        <location filename="mainwindow.cpp" line="436"/>
-        <location filename="mainwindow.cpp" line="555"/>
-        <location filename="mainwindow.cpp" line="561"/>
+        <location filename="mainwindow.cpp" line="242"/>
+        <location filename="mainwindow.cpp" line="287"/>
+        <location filename="mainwindow.cpp" line="456"/>
+        <location filename="mainwindow.cpp" line="575"/>
+        <location filename="mainwindow.cpp" line="581"/>
         <source>Unable to check for updates.</source>
         <translation>Nelze ověřit aktualizace.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="236"/>
+        <location filename="mainwindow.cpp" line="256"/>
         <source>A new version of companion9x is available (version %1)&lt;br&gt;Would you like to download it?</source>
         <translation>Je dostupná nová verze companion9x (verze %1)&lt;br&gt;Chcete ji stáhnout nyní?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="244"/>
-        <location filename="mainwindow.cpp" line="246"/>
-        <location filename="mainwindow.cpp" line="287"/>
-        <location filename="mainwindow.cpp" line="539"/>
-        <location filename="mainwindow.cpp" line="541"/>
+        <location filename="mainwindow.cpp" line="264"/>
+        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="307"/>
+        <location filename="mainwindow.cpp" line="559"/>
+        <location filename="mainwindow.cpp" line="561"/>
         <source>Save As</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="246"/>
+        <location filename="mainwindow.cpp" line="266"/>
         <source>Executable (*.exe)</source>
         <translation>Spustitelný (*.exe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="257"/>
+        <location filename="mainwindow.cpp" line="277"/>
         <source>New release available</source>
         <translation>Je dostupné nové vydání</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="257"/>
+        <location filename="mainwindow.cpp" line="277"/>
         <source>A new release of companion is available please check the repository</source>
         <translation>Je dostupné nové vydání companion9x, prosím zkontrolujte repozitář</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="262"/>
-        <location filename="mainwindow.cpp" line="512"/>
+        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="532"/>
         <source>No updates available at this time.</source>
         <translation>žádné aktualizace nejsou nyní dostupné.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="293"/>
         <source>Would you like to launch the installer?</source>
         <translation>Chcete spustit instalátor?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="310"/>
-        <location filename="mainwindow.cpp" line="336"/>
-        <location filename="mainwindow.cpp" line="348"/>
-        <location filename="mainwindow.cpp" line="374"/>
-        <location filename="mainwindow.cpp" line="871"/>
-        <location filename="mainwindow.cpp" line="2045"/>
-        <location filename="mainwindow.cpp" line="2051"/>
-        <location filename="mainwindow.cpp" line="2059"/>
-        <location filename="mainwindow.cpp" line="2082"/>
-        <location filename="mainwindow.cpp" line="2088"/>
-        <location filename="mainwindow.cpp" line="2095"/>
-        <location filename="mainwindow.cpp" line="2103"/>
-        <location filename="mainwindow.cpp" line="2107"/>
+        <location filename="mainwindow.cpp" line="330"/>
+        <location filename="mainwindow.cpp" line="356"/>
+        <location filename="mainwindow.cpp" line="368"/>
+        <location filename="mainwindow.cpp" line="394"/>
+        <location filename="mainwindow.cpp" line="891"/>
+        <location filename="mainwindow.cpp" line="2065"/>
+        <location filename="mainwindow.cpp" line="2071"/>
+        <location filename="mainwindow.cpp" line="2079"/>
+        <location filename="mainwindow.cpp" line="2102"/>
+        <location filename="mainwindow.cpp" line="2108"/>
+        <location filename="mainwindow.cpp" line="2115"/>
+        <location filename="mainwindow.cpp" line="2123"/>
+        <location filename="mainwindow.cpp" line="2127"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="311"/>
-        <location filename="mainwindow.cpp" line="349"/>
-        <location filename="mainwindow.cpp" line="2051"/>
-        <location filename="mainwindow.cpp" line="2059"/>
-        <location filename="mainwindow.cpp" line="2095"/>
+        <location filename="mainwindow.cpp" line="331"/>
+        <location filename="mainwindow.cpp" line="369"/>
+        <location filename="mainwindow.cpp" line="2071"/>
+        <location filename="mainwindow.cpp" line="2079"/>
+        <location filename="mainwindow.cpp" line="2115"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="361"/>
+        <location filename="mainwindow.cpp" line="381"/>
         <source>Firmware does not fit in flash, due to selected firmware options</source>
         <translation>S těmito volbami se Firmware nevejde do paměti FLASH rádia. Je třeba některé funkce vypnout. Vhodné je zejména vypnout podporu loga zaškrtnutím &quot;nosplash&quot;, to ušetří značné místo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="326"/>
-        <location filename="mainwindow.cpp" line="364"/>
+        <location filename="mainwindow.cpp" line="346"/>
+        <location filename="mainwindow.cpp" line="384"/>
         <source>Compilation server termporary failure, try later</source>
         <translation>Server companion je dočasně nedostupný, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="105"/>
-        <location filename="mainwindow.cpp" line="689"/>
+        <location filename="mainwindow.cpp" line="106"/>
         <location filename="mainwindow.cpp" line="709"/>
+        <location filename="mainwindow.cpp" line="729"/>
         <source>companion9x - EEPROM Editor - firmware %1 - profile %2</source>
         <translation>companion9x - EEPROM Editor - firmware %1 - profil %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="323"/>
+        <location filename="mainwindow.cpp" line="343"/>
         <source>Firmware does not longer fit in flash, due to selected firmware options</source>
         <translation>Firmware s těmito vybranými součástmi, se již nevejde do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="329"/>
-        <location filename="mainwindow.cpp" line="367"/>
+        <location filename="mainwindow.cpp" line="349"/>
+        <location filename="mainwindow.cpp" line="387"/>
         <source>Compilation server too busy, try later</source>
         <translation>Server companion je zaneprázdněn, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="332"/>
-        <location filename="mainwindow.cpp" line="370"/>
+        <location filename="mainwindow.cpp" line="352"/>
+        <location filename="mainwindow.cpp" line="390"/>
         <source>Unknown server failure, try later</source>
         <translation>Neznámá chyba serveru, zkuste to později</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="398"/>
+        <location filename="mainwindow.cpp" line="418"/>
         <source>Do you want to flash the firmware now ?</source>
         <translation>Chcete nyní zapsat firmware do rádia ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="456"/>
+        <location filename="mainwindow.cpp" line="476"/>
         <source>Firmware %1 does not seem to have ever been downloaded.
 Version %2 is available.
 Do you want to download it now ?</source>
@@ -1341,31 +1386,31 @@ Verze %2 je dostupná.
 Chcete ho nyní stáhnout ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="457"/>
-        <location filename="mainwindow.cpp" line="486"/>
+        <location filename="mainwindow.cpp" line="477"/>
+        <location filename="mainwindow.cpp" line="506"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="458"/>
-        <location filename="mainwindow.cpp" line="487"/>
+        <location filename="mainwindow.cpp" line="478"/>
+        <location filename="mainwindow.cpp" line="507"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="460"/>
-        <location filename="mainwindow.cpp" line="489"/>
+        <location filename="mainwindow.cpp" line="480"/>
+        <location filename="mainwindow.cpp" line="509"/>
         <source>Release Notes</source>
         <translation>Poznámky k vydání</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="468"/>
-        <location filename="mainwindow.cpp" line="498"/>
+        <location filename="mainwindow.cpp" line="488"/>
+        <location filename="mainwindow.cpp" line="518"/>
         <source>Do you want to download release %1 now ?</source>
         <translation>Chcete nyní stáhnout vydání %1 ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="485"/>
+        <location filename="mainwindow.cpp" line="505"/>
         <source>A new version of %1 firmware is available (current %2 - newer %3).
 Do you want to download it now ?</source>
         <translation>Nová verze firmware %1 je dostupná.
@@ -1373,76 +1418,76 @@ Do you want to download it now ?</source>
 Chcete ji stáhnout nyní ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="515"/>
+        <location filename="mainwindow.cpp" line="535"/>
         <source>Ignore this version (r%1)?</source>
         <translation>Ignorovat tuto verzi (r%1)?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="525"/>
+        <location filename="mainwindow.cpp" line="545"/>
         <source>Release notes contain very important informations. Do you want to see them now ?</source>
         <translation>Poznámky k vydání mohou obsahovat důležité informace. Chcete si je přečíst nyní ?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="586"/>
+        <location filename="mainwindow.cpp" line="606"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="609"/>
-        <location filename="mainwindow.cpp" line="615"/>
+        <location filename="mainwindow.cpp" line="629"/>
+        <location filename="mainwindow.cpp" line="635"/>
         <source>File saved</source>
         <translation>Soubor byl uložen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="738"/>
+        <location filename="mainwindow.cpp" line="758"/>
         <source>Firmware updates</source>
         <translation>Aktualizace firmwaru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="738"/>
+        <location filename="mainwindow.cpp" line="758"/>
         <source>Current firmware does not provide release notes informations.</source>
         <translation>K tomuto firmwaru nejsou poznámky k vydání.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="872"/>
+        <location filename="mainwindow.cpp" line="892"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Nelze zapsat soubor %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1011"/>
-        <location filename="mainwindow.cpp" line="1069"/>
-        <location filename="mainwindow.cpp" line="1121"/>
-        <location filename="mainwindow.cpp" line="1143"/>
-        <location filename="mainwindow.cpp" line="1396"/>
+        <location filename="mainwindow.cpp" line="1031"/>
+        <location filename="mainwindow.cpp" line="1089"/>
+        <location filename="mainwindow.cpp" line="1141"/>
+        <location filename="mainwindow.cpp" line="1163"/>
+        <location filename="mainwindow.cpp" line="1416"/>
         <source>Taranis radio not found</source>
         <translation>Radio Taranis nenalezeno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1011"/>
-        <location filename="mainwindow.cpp" line="1069"/>
-        <location filename="mainwindow.cpp" line="1121"/>
-        <location filename="mainwindow.cpp" line="1143"/>
-        <location filename="mainwindow.cpp" line="1396"/>
+        <location filename="mainwindow.cpp" line="1031"/>
+        <location filename="mainwindow.cpp" line="1089"/>
+        <location filename="mainwindow.cpp" line="1141"/>
+        <location filename="mainwindow.cpp" line="1163"/>
+        <location filename="mainwindow.cpp" line="1416"/>
         <source>Impossible to identify the radio on your system, please verify the eeprom disk is connected.</source>
         <translation>Nebylo možné identifikovat rádio ve vašem systému, zkontrolujte zda je eeprom disk připojen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1016"/>
-        <location filename="mainwindow.cpp" line="1023"/>
-        <location filename="mainwindow.cpp" line="1401"/>
-        <location filename="mainwindow.cpp" line="1408"/>
+        <location filename="mainwindow.cpp" line="1036"/>
+        <location filename="mainwindow.cpp" line="1043"/>
+        <location filename="mainwindow.cpp" line="1421"/>
+        <location filename="mainwindow.cpp" line="1428"/>
         <source>Read EEPROM From Tx</source>
         <translation>Načíst EEPROM z TX</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1044"/>
+        <location filename="mainwindow.cpp" line="1064"/>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Zapsat %1 do paměti EEPROM?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1047"/>
+        <location filename="mainwindow.cpp" line="1067"/>
         <source>The file %1
 has not been recognized as a valid EEPROM
 Burn anyway ?</source>
@@ -1451,625 +1496,625 @@ nebyl rozpoznán jako platná EEPROM
 Chcete ji přesto naprogramovat?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1054"/>
-        <location filename="mainwindow.cpp" line="1317"/>
-        <location filename="mainwindow.cpp" line="1364"/>
+        <location filename="mainwindow.cpp" line="1074"/>
+        <location filename="mainwindow.cpp" line="1337"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>Backup is impossible</source>
         <translation>Není možné zálohovat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1054"/>
-        <location filename="mainwindow.cpp" line="1317"/>
-        <location filename="mainwindow.cpp" line="1364"/>
+        <location filename="mainwindow.cpp" line="1074"/>
+        <location filename="mainwindow.cpp" line="1337"/>
+        <location filename="mainwindow.cpp" line="1384"/>
         <source>The backup dir set in preferences does not exist</source>
         <translation>Složka pro zálohování zvolená v předvolbách neexistuje</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1074"/>
-        <location filename="mainwindow.cpp" line="1081"/>
-        <location filename="mainwindow.cpp" line="1126"/>
-        <location filename="mainwindow.cpp" line="1133"/>
-        <location filename="mainwindow.cpp" line="1330"/>
-        <location filename="mainwindow.cpp" line="1372"/>
+        <location filename="mainwindow.cpp" line="1094"/>
+        <location filename="mainwindow.cpp" line="1101"/>
+        <location filename="mainwindow.cpp" line="1146"/>
+        <location filename="mainwindow.cpp" line="1153"/>
+        <location filename="mainwindow.cpp" line="1350"/>
+        <location filename="mainwindow.cpp" line="1392"/>
         <source>Backup EEPROM From Tx</source>
         <translation>Zálohovat EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1097"/>
+        <location filename="mainwindow.cpp" line="1117"/>
         <source>Cannot check eeprom compatibility! Continue anyway?</source>
         <translation>Nelze ověřit kompatibilitu EEprom! Mám přesto pokračovat?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1105"/>
-        <location filename="mainwindow.cpp" line="1108"/>
+        <location filename="mainwindow.cpp" line="1125"/>
+        <location filename="mainwindow.cpp" line="1128"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1105"/>
+        <location filename="mainwindow.cpp" line="1125"/>
         <source>Firmware in radio is of a different family of eeprom written, check file and preferences!</source>
         <translation>Firmware rádia je z jiné rodiny než EEprom, zkontrolujte nastavení předvoleb!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1108"/>
+        <location filename="mainwindow.cpp" line="1128"/>
         <source>Firmware in flash is outdated, please upgrade!</source>
         <translation>Firmware rádia je zastaralý, aktualizujte ho prosím!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1148"/>
+        <location filename="mainwindow.cpp" line="1168"/>
         <source>Write EEPROM To Tx</source>
         <translation>Zápis EEPROM do TX</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1336"/>
-        <location filename="mainwindow.cpp" line="1379"/>
+        <location filename="mainwindow.cpp" line="1356"/>
+        <location filename="mainwindow.cpp" line="1399"/>
         <source>Write Flash To Tx</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1342"/>
+        <location filename="mainwindow.cpp" line="1362"/>
         <source>Conversion failed</source>
         <translation>Porovnání selhalo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1342"/>
+        <location filename="mainwindow.cpp" line="1362"/>
         <source>Cannot convert EEProm for this firmware, original EEProm file will be used</source>
         <translation>Nemohu konvertovat EEPROM pro tento firmware, bude použita původní EEPROM</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1347"/>
+        <location filename="mainwindow.cpp" line="1367"/>
         <source>Restore EEPROM To Tx</source>
         <translation>Zapsat EEPROM do rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1351"/>
+        <location filename="mainwindow.cpp" line="1371"/>
         <source>Restore failed</source>
         <translation>Zápis selhal</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1351"/>
+        <location filename="mainwindow.cpp" line="1371"/>
         <source>Cannot restore EEProm to TX, original EEProm file can be found at: %1</source>
         <translation>Nemohu obnovit EEPROM v rádiu, původní EEPROM najdete zde: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1354"/>
+        <location filename="mainwindow.cpp" line="1374"/>
         <source>Flash failed</source>
         <translation>Zápis firmware se nezdařil</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1354"/>
+        <location filename="mainwindow.cpp" line="1374"/>
         <source>Cannot flash the TX, original EEProm file can be found at: %1</source>
         <translation>Nemohu naprogramovat rádio, původní EEPROM najdete zde: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1357"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>Backup failed</source>
         <translation>Zálohování selhalo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1357"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>Cannot backup existing EEProm from TX, Flash process aborted</source>
         <translation>Nemohu zálohovat sávající EEPROM z rádia, Programování bylo přerušeno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1389"/>
+        <location filename="mainwindow.cpp" line="1409"/>
         <source>Read EEPROM memory to File</source>
         <translation>Načíst EEPROM z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1418"/>
+        <location filename="mainwindow.cpp" line="1438"/>
         <source>Read Flash to File</source>
         <translation>Načíst paměť FLASH z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1467"/>
+        <location filename="mainwindow.cpp" line="1487"/>
         <source>Copyright</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1468"/>
+        <location filename="mainwindow.cpp" line="1488"/>
         <source>Version %1 (revision %2), %3</source>
         <translation>Verze %1 (revize %2), %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1469"/>
+        <location filename="mainwindow.cpp" line="1489"/>
         <source>The companion9x project was originally forked from eePe</source>
         <translation>Projekt companion9x vznikl oddělením z eePe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1470"/>
+        <location filename="mainwindow.cpp" line="1490"/>
         <source>If you&apos;ve found this program useful, please support by</source>
         <translation>Pokud vám byl tento program užitečný, podpořte jej</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1472"/>
+        <location filename="mainwindow.cpp" line="1492"/>
         <source>donating</source>
         <translation>darem</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1474"/>
+        <location filename="mainwindow.cpp" line="1494"/>
         <source>About companion9x</source>
         <translation>O aplikaci Companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1538"/>
-        <location filename="mainwindow.cpp" line="1998"/>
-        <location filename="mainwindow.cpp" line="2019"/>
+        <location filename="mainwindow.cpp" line="1558"/>
+        <location filename="mainwindow.cpp" line="2018"/>
+        <location filename="mainwindow.cpp" line="2039"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1541"/>
+        <location filename="mainwindow.cpp" line="1561"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1569"/>
+        <location filename="mainwindow.cpp" line="1589"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1571"/>
+        <location filename="mainwindow.cpp" line="1591"/>
         <source>Create a new file</source>
         <translation>Vytvořit nový soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1574"/>
+        <location filename="mainwindow.cpp" line="1594"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otevřít...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1576"/>
+        <location filename="mainwindow.cpp" line="1596"/>
         <source>Open an existing file</source>
         <translation>Otevřít existující soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1579"/>
+        <location filename="mainwindow.cpp" line="1599"/>
         <source>&amp;loadBackup...</source>
         <translation>&amp;Načíst zálohu...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1580"/>
+        <location filename="mainwindow.cpp" line="1600"/>
         <source>Load backup from file</source>
         <translation>Načíst zálohu ze souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1583"/>
+        <location filename="mainwindow.cpp" line="1603"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1585"/>
+        <location filename="mainwindow.cpp" line="1605"/>
         <source>Save the document to disk</source>
         <translation>Uložit dokument na disk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1588"/>
+        <location filename="mainwindow.cpp" line="1608"/>
         <source>Save &amp;As...</source>
         <translation>Uložit j&amp;ako...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1590"/>
+        <location filename="mainwindow.cpp" line="1610"/>
         <source>Save the document under a new name</source>
         <translation>Uložit dokument s novým jménem</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1593"/>
+        <location filename="mainwindow.cpp" line="1613"/>
         <source>Lo&amp;gs</source>
         <translation>Lo&amp;gy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1594"/>
+        <location filename="mainwindow.cpp" line="1614"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1595"/>
+        <location filename="mainwindow.cpp" line="1615"/>
         <source>Open log file</source>
         <translation>Otevřít soubor s logy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1598"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Předvolby...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1599"/>
+        <location filename="mainwindow.cpp" line="1619"/>
         <source>Edit general preferences</source>
         <translation>Nastavení obecných předvoleb</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1602"/>
+        <location filename="mainwindow.cpp" line="1622"/>
         <source>&amp;Check for updates...</source>
         <translation>&amp;Zkontrolovat aktualizace...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1603"/>
+        <location filename="mainwindow.cpp" line="1623"/>
         <source>Check for new version of companion9x/er9x</source>
         <translation>Zkontolovat dostupnost nové verze companion9x/er9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1606"/>
+        <location filename="mainwindow.cpp" line="1626"/>
         <source>Contributors &amp;List...</source>
         <translation>&amp;Seznam přispěvatelů...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1607"/>
+        <location filename="mainwindow.cpp" line="1627"/>
         <source>Show companion9x contributors list</source>
         <translation>Zobrazit seznam přispěvatelů companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1630"/>
         <source>ChangeLog...</source>
         <translation>Změny...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1611"/>
+        <location filename="mainwindow.cpp" line="1631"/>
         <source>Show companion9x changelog</source>
         <translation>Zobrazit změny ve verzích companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1614"/>
+        <location filename="mainwindow.cpp" line="1634"/>
         <source>Firmware ChangeLog...</source>
         <translation>Změny firmware...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1615"/>
+        <location filename="mainwindow.cpp" line="1635"/>
         <source>Show firmware changelog</source>
         <translation>Zobrazit změny ve firmware</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1618"/>
+        <location filename="mainwindow.cpp" line="1638"/>
         <source>Compare...</source>
         <translation>Porovnat...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1619"/>
+        <location filename="mainwindow.cpp" line="1639"/>
         <source>Compare models</source>
         <translation>Porovnat modely</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1623"/>
+        <location filename="mainwindow.cpp" line="1643"/>
         <source>Customize your &amp;TX...</source>
         <translation>&amp;Přizpůsobení loga...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1624"/>
+        <location filename="mainwindow.cpp" line="1644"/>
         <source>Customize the splash screen of your TX</source>
         <translation>Přizpůsobení úvodního logo vašeho rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1629"/>
+        <location filename="mainwindow.cpp" line="1649"/>
         <source>E&amp;xit</source>
         <translation>U&amp;končit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1651"/>
         <source>Exit the application</source>
         <translation>Ukončit aplikaci companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1635"/>
+        <location filename="mainwindow.cpp" line="1655"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1637"/>
+        <location filename="mainwindow.cpp" line="1657"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Vyjmout aktuální výběr a uložit do schránky</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1641"/>
+        <location filename="mainwindow.cpp" line="1661"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1643"/>
+        <location filename="mainwindow.cpp" line="1663"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopírovat aktuální výběr do schránky</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1647"/>
+        <location filename="mainwindow.cpp" line="1667"/>
         <source>&amp;Paste</source>
         <translation>&amp;Vložit</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1649"/>
+        <location filename="mainwindow.cpp" line="1669"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Vložit obsah schránky na aktuální pozici</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1654"/>
+        <location filename="mainwindow.cpp" line="1674"/>
         <source>&amp;Write EEPROM To Tx</source>
         <translation>&amp;Zapsat do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1655"/>
+        <location filename="mainwindow.cpp" line="1675"/>
         <source>Ctrl+Alt+W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1656"/>
+        <location filename="mainwindow.cpp" line="1676"/>
         <source>Write EEPROM to transmitter</source>
         <translation>Zapsat do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1659"/>
+        <location filename="mainwindow.cpp" line="1679"/>
         <source>&amp;Read EEPROM From Tx</source>
         <translation>&amp;Načíst EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1660"/>
+        <location filename="mainwindow.cpp" line="1680"/>
         <source>Ctrl+Alt+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1661"/>
+        <location filename="mainwindow.cpp" line="1681"/>
         <source>Read EEPROM from transmitter</source>
         <translation>Načíst EEPROM z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1664"/>
+        <location filename="mainwindow.cpp" line="1684"/>
         <source>Write Flash memory</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1665"/>
+        <location filename="mainwindow.cpp" line="1685"/>
         <source>Write flash memory to transmitter</source>
         <translation>Zapsat do paměti FLASH rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1668"/>
+        <location filename="mainwindow.cpp" line="1688"/>
         <source>Write EEPROM memory from file</source>
         <translation>Zapsat ze souboru do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1669"/>
+        <location filename="mainwindow.cpp" line="1689"/>
         <source>Write EEPROM memory from file to transmitter</source>
         <translation>Zapsat ze souboru do EEPROM rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1672"/>
+        <location filename="mainwindow.cpp" line="1692"/>
         <source>Read EEPROM memory to file</source>
         <translation>Načíst EEPROM z rádia do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1673"/>
+        <location filename="mainwindow.cpp" line="1693"/>
         <source>Read EEPROM memory from transmitter to file</source>
         <translation>Načíst EEPROM z rádia a uložit do souboru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1676"/>
+        <location filename="mainwindow.cpp" line="1696"/>
         <source>Read Flash memory</source>
         <translation>Načíst paměť FLASH z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1677"/>
+        <location filename="mainwindow.cpp" line="1697"/>
         <source>Read flash memory to transmitter</source>
         <translation>Načíst paměť FLASH z rádia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1680"/>
+        <location filename="mainwindow.cpp" line="1700"/>
         <source>&amp;Configure...</source>
         <translation>&amp;Konfigurace...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1681"/>
+        <location filename="mainwindow.cpp" line="1701"/>
         <source>Configure burning software</source>
         <translation>Konfigurace programátoru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1685"/>
+        <location filename="mainwindow.cpp" line="1705"/>
         <source>&amp;List programmers</source>
         <translation>&amp;Seznam programátorů</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1686"/>
+        <location filename="mainwindow.cpp" line="1706"/>
         <source>List available programmers</source>
         <translation>Seznam použitelných programátorů</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1689"/>
+        <location filename="mainwindow.cpp" line="1709"/>
         <source>&amp;Fuses...</source>
         <translation>Pojistky &amp;mikrokontroléru...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1690"/>
+        <location filename="mainwindow.cpp" line="1710"/>
         <source>Show fuses dialog</source>
         <translation>Zobrazit dialog nastavení pojistek mikrokontroléru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1693"/>
+        <location filename="mainwindow.cpp" line="1713"/>
         <source>&amp;Simulate</source>
         <translation>&amp;Simulátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1694"/>
+        <location filename="mainwindow.cpp" line="1714"/>
         <source>Alt+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1695"/>
+        <location filename="mainwindow.cpp" line="1715"/>
         <source>Simulate selected model.</source>
         <translation>Simulovat vybraný model.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1699"/>
+        <location filename="mainwindow.cpp" line="1719"/>
         <source>&amp;Print</source>
         <translation>&amp;Tisk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1700"/>
+        <location filename="mainwindow.cpp" line="1720"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1701"/>
+        <location filename="mainwindow.cpp" line="1721"/>
         <source>Print current model.</source>
         <translation>Vytisknout aktuální model.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1705"/>
+        <location filename="mainwindow.cpp" line="1725"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1706"/>
+        <location filename="mainwindow.cpp" line="1726"/>
         <source>Close the active window</source>
         <translation>Zavřít aktivní okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1710"/>
+        <location filename="mainwindow.cpp" line="1730"/>
         <source>Close &amp;All</source>
         <translation>Zavřít &amp;Vše</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1711"/>
+        <location filename="mainwindow.cpp" line="1731"/>
         <source>Close all the windows</source>
         <translation>Zavřít všechna okna</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1715"/>
+        <location filename="mainwindow.cpp" line="1735"/>
         <source>&amp;Tile</source>
         <translation>D&amp;laždice</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1716"/>
+        <location filename="mainwindow.cpp" line="1736"/>
         <source>Tile the windows</source>
         <translation>Uspořádat okna jako dlaždice</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1719"/>
+        <location filename="mainwindow.cpp" line="1739"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Kaskáda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1720"/>
+        <location filename="mainwindow.cpp" line="1740"/>
         <source>Cascade the windows</source>
         <translation>Uspořádat okna do kaskády</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1723"/>
+        <location filename="mainwindow.cpp" line="1743"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Další</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1725"/>
+        <location filename="mainwindow.cpp" line="1745"/>
         <source>Move the focus to the next window</source>
         <translation>Aktivovat následující okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1729"/>
+        <location filename="mainwindow.cpp" line="1749"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Předchozí</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1731"/>
+        <location filename="mainwindow.cpp" line="1751"/>
         <source>Move the focus to the previous window</source>
         <translation>Aktivovat předchozí okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1739"/>
+        <location filename="mainwindow.cpp" line="1759"/>
         <source>&amp;About</source>
         <translation>&amp;O aplikaci</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1740"/>
+        <location filename="mainwindow.cpp" line="1760"/>
         <source>Show the application&apos;s About box</source>
         <translation>O aplikaci companion9x</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1743"/>
+        <location filename="mainwindow.cpp" line="1763"/>
         <source>Switch layout direction</source>
         <translation>Přepnout styl panelu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1744"/>
+        <location filename="mainwindow.cpp" line="1764"/>
         <source>Switch layout Left/Right</source>
         <translation>Přepnout styl rozložení panelu vlevo/vpravo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1764"/>
-        <location filename="mainwindow.cpp" line="1858"/>
+        <location filename="mainwindow.cpp" line="1784"/>
+        <location filename="mainwindow.cpp" line="1878"/>
         <source>Recent Files</source>
         <translation>Nedávné soubory</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1765"/>
-        <location filename="mainwindow.cpp" line="1868"/>
+        <location filename="mainwindow.cpp" line="1785"/>
+        <location filename="mainwindow.cpp" line="1888"/>
         <source>Firmware Profiles</source>
         <translation>Profily firmwaru</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1767"/>
+        <location filename="mainwindow.cpp" line="1787"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1792"/>
+        <location filename="mainwindow.cpp" line="1812"/>
         <source>&amp;Edit</source>
         <translation>&amp;Úpravy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1797"/>
+        <location filename="mainwindow.cpp" line="1817"/>
         <source>&amp;Burn</source>
         <translation>&amp;Programátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1815"/>
+        <location filename="mainwindow.cpp" line="1835"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1821"/>
+        <location filename="mainwindow.cpp" line="1841"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1851"/>
+        <location filename="mainwindow.cpp" line="1871"/>
         <source>File</source>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1888"/>
+        <location filename="mainwindow.cpp" line="1908"/>
         <source>Edit</source>
         <translation>Úpravy</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1893"/>
+        <location filename="mainwindow.cpp" line="1913"/>
         <source>Burn</source>
         <translation>Programátor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1905"/>
+        <location filename="mainwindow.cpp" line="1925"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1912"/>
+        <location filename="mainwindow.cpp" line="1932"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2045"/>
+        <location filename="mainwindow.cpp" line="2065"/>
         <source>Unable to find file %1!</source>
         <translation>Nemohu nalézt soubor %1!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2082"/>
-        <location filename="mainwindow.cpp" line="2088"/>
+        <location filename="mainwindow.cpp" line="2102"/>
+        <location filename="mainwindow.cpp" line="2108"/>
         <source>Invalid EEPROM File %1</source>
         <translation>Neplatný soubor EEPROM %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2103"/>
+        <location filename="mainwindow.cpp" line="2123"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2107"/>
+        <location filename="mainwindow.cpp" line="2127"/>
         <source>Invalid binary EEPROM File %1</source>
         <translation>Neplatný binární soubor EEPROM %1</translation>
     </message>
@@ -2102,16 +2147,16 @@ Chcete ji přesto naprogramovat?</translation>
         <location filename="mdichild.cpp" line="432"/>
         <location filename="mdichild.cpp" line="437"/>
         <location filename="mdichild.cpp" line="535"/>
-        <location filename="mdichild.cpp" line="681"/>
-        <location filename="mdichild.cpp" line="689"/>
-        <location filename="mdichild.cpp" line="701"/>
-        <location filename="mdichild.cpp" line="710"/>
+        <location filename="mdichild.cpp" line="687"/>
+        <location filename="mdichild.cpp" line="695"/>
+        <location filename="mdichild.cpp" line="707"/>
+        <location filename="mdichild.cpp" line="716"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="224"/>
-        <location filename="mdichild.cpp" line="681"/>
+        <location filename="mdichild.cpp" line="687"/>
         <source>Unable to find file %1!</source>
         <translation>Nemohu nalézt soubor %1!</translation>
     </message>
@@ -2119,7 +2164,7 @@ Chcete ji přesto naprogramovat?</translation>
         <location filename="mdichild.cpp" line="233"/>
         <location filename="mdichild.cpp" line="244"/>
         <location filename="mdichild.cpp" line="300"/>
-        <location filename="mdichild.cpp" line="690"/>
+        <location filename="mdichild.cpp" line="696"/>
         <source>Error opening file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
@@ -2133,7 +2178,7 @@ Chcete ji přesto naprogramovat?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="312"/>
-        <location filename="mdichild.cpp" line="702"/>
+        <location filename="mdichild.cpp" line="708"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Chyba při otevírání souboru %1:
@@ -2257,12 +2302,12 @@ Chcete ho uložit?</translation>
         <translation>Zápis EEPROM do TX</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="675"/>
+        <location filename="mdichild.cpp" line="681"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="711"/>
+        <location filename="mdichild.cpp" line="717"/>
         <source>Invalid binary backup File %1</source>
         <translation>Neplatný binární soubor zálohy %1</translation>
     </message>
@@ -2300,7 +2345,7 @@ Chcete ho uložit?</translation>
         <location filename="mixerdialog.ui" line="411"/>
         <location filename="mixerdialog.cpp" line="108"/>
         <location filename="mixerdialog.cpp" line="117"/>
-        <location filename="mixerdialog.cpp" line="330"/>
+        <location filename="mixerdialog.cpp" line="342"/>
         <source>Offset</source>
         <translation>Ofset</translation>
     </message>
@@ -2576,7 +2621,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="105"/>
-        <location filename="mixerdialog.cpp" line="328"/>
+        <location filename="mixerdialog.cpp" line="340"/>
         <source>FM Trim Value</source>
         <translation>Hodnota FM trimu</translation>
     </message>
@@ -2766,7 +2811,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="modeledit.ui" line="138"/>
-        <source>Throttle Trace</source>
+        <source>Throttle Source</source>
+        <oldsource>Throttle Trace</oldsource>
         <translation>Stopa plynu (pro spínání stopek)</translation>
     </message>
     <message>
@@ -2787,9 +2833,9 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="328"/>
         <location filename="modeledit.ui" line="974"/>
-        <location filename="modeledit.cpp" line="6592"/>
-        <location filename="modeledit.cpp" line="6763"/>
-        <location filename="modeledit.cpp" line="6885"/>
+        <location filename="modeledit.cpp" line="6631"/>
+        <location filename="modeledit.cpp" line="6802"/>
+        <location filename="modeledit.cpp" line="6924"/>
         <source>THR</source>
         <translation></translation>
     </message>
@@ -2946,43 +2992,43 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="352"/>
         <location filename="modeledit.ui" line="960"/>
-        <location filename="modeledit.cpp" line="6580"/>
-        <location filename="modeledit.cpp" line="6587"/>
-        <location filename="modeledit.cpp" line="6699"/>
-        <location filename="modeledit.cpp" line="6724"/>
-        <location filename="modeledit.cpp" line="6767"/>
-        <location filename="modeledit.cpp" line="6769"/>
-        <location filename="modeledit.cpp" line="6898"/>
+        <location filename="modeledit.cpp" line="6619"/>
+        <location filename="modeledit.cpp" line="6626"/>
+        <location filename="modeledit.cpp" line="6738"/>
+        <location filename="modeledit.cpp" line="6763"/>
+        <location filename="modeledit.cpp" line="6806"/>
+        <location filename="modeledit.cpp" line="6808"/>
+        <location filename="modeledit.cpp" line="6937"/>
         <source>RUD</source>
         <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="362"/>
         <location filename="modeledit.ui" line="967"/>
-        <location filename="modeledit.cpp" line="6582"/>
-        <location filename="modeledit.cpp" line="6589"/>
-        <location filename="modeledit.cpp" line="6691"/>
-        <location filename="modeledit.cpp" line="6695"/>
-        <location filename="modeledit.cpp" line="6717"/>
-        <location filename="modeledit.cpp" line="6721"/>
-        <location filename="modeledit.cpp" line="6774"/>
-        <location filename="modeledit.cpp" line="6776"/>
-        <location filename="modeledit.cpp" line="6889"/>
-        <location filename="modeledit.cpp" line="6890"/>
+        <location filename="modeledit.cpp" line="6621"/>
+        <location filename="modeledit.cpp" line="6628"/>
+        <location filename="modeledit.cpp" line="6730"/>
+        <location filename="modeledit.cpp" line="6734"/>
+        <location filename="modeledit.cpp" line="6756"/>
+        <location filename="modeledit.cpp" line="6760"/>
+        <location filename="modeledit.cpp" line="6813"/>
+        <location filename="modeledit.cpp" line="6815"/>
+        <location filename="modeledit.cpp" line="6928"/>
+        <location filename="modeledit.cpp" line="6929"/>
         <source>ELE</source>
         <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="372"/>
         <location filename="modeledit.ui" line="981"/>
-        <location filename="modeledit.cpp" line="6608"/>
-        <location filename="modeledit.cpp" line="6692"/>
-        <location filename="modeledit.cpp" line="6696"/>
-        <location filename="modeledit.cpp" line="6716"/>
-        <location filename="modeledit.cpp" line="6720"/>
-        <location filename="modeledit.cpp" line="6799"/>
-        <location filename="modeledit.cpp" line="6893"/>
-        <location filename="modeledit.cpp" line="6894"/>
+        <location filename="modeledit.cpp" line="6647"/>
+        <location filename="modeledit.cpp" line="6731"/>
+        <location filename="modeledit.cpp" line="6735"/>
+        <location filename="modeledit.cpp" line="6755"/>
+        <location filename="modeledit.cpp" line="6759"/>
+        <location filename="modeledit.cpp" line="6838"/>
+        <location filename="modeledit.cpp" line="6932"/>
+        <location filename="modeledit.cpp" line="6933"/>
         <source>AIL</source>
         <translation></translation>
     </message>
@@ -3005,7 +3051,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="336"/>
         <location filename="modeledit.ui" line="470"/>
-        <location filename="modeledit.cpp" line="2833"/>
+        <location filename="modeledit.cpp" line="2840"/>
         <source>ON</source>
         <translation>ZAPNUTO</translation>
     </message>
@@ -3096,7 +3142,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="modeledit.ui" line="3774"/>
-        <location filename="modeledit.cpp" line="3642"/>
+        <location filename="modeledit.cpp" line="3669"/>
         <source>Heli Setup</source>
         <translation>Heli</translation>
     </message>
@@ -3360,8 +3406,8 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="20557"/>
         <location filename="modeledit.ui" line="20958"/>
         <location filename="modeledit.ui" line="21067"/>
-        <location filename="modeledit.cpp" line="1564"/>
-        <location filename="modeledit.cpp" line="1700"/>
+        <location filename="modeledit.cpp" line="1565"/>
+        <location filename="modeledit.cpp" line="1701"/>
         <source>Switch</source>
         <translation>Spínač</translation>
     </message>
@@ -3409,40 +3455,8 @@ p, li { white-space: pre-wrap; }
         <translation>Limity</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="9287"/>
-        <location filename="modeledit.ui" line="9398"/>
-        <location filename="modeledit.ui" line="9465"/>
-        <location filename="modeledit.ui" line="9510"/>
-        <location filename="modeledit.ui" line="9574"/>
-        <location filename="modeledit.ui" line="9594"/>
-        <location filename="modeledit.ui" line="9752"/>
-        <location filename="modeledit.ui" line="9838"/>
-        <location filename="modeledit.ui" line="9902"/>
-        <location filename="modeledit.ui" line="9969"/>
-        <location filename="modeledit.ui" line="10127"/>
-        <location filename="modeledit.ui" line="10147"/>
-        <location filename="modeledit.ui" line="10305"/>
-        <location filename="modeledit.ui" line="10381"/>
-        <location filename="modeledit.ui" line="10492"/>
-        <location filename="modeledit.ui" line="10687"/>
-        <location filename="modeledit.ui" line="11538"/>
-        <location filename="modeledit.ui" line="11558"/>
-        <location filename="modeledit.ui" line="11578"/>
-        <location filename="modeledit.ui" line="11804"/>
-        <location filename="modeledit.ui" line="11868"/>
-        <location filename="modeledit.ui" line="11957"/>
-        <location filename="modeledit.ui" line="12021"/>
-        <location filename="modeledit.ui" line="12248"/>
-        <location filename="modeledit.ui" line="12337"/>
-        <location filename="modeledit.ui" line="12426"/>
-        <location filename="modeledit.ui" line="12515"/>
-        <location filename="modeledit.ui" line="12717"/>
-        <location filename="modeledit.ui" line="12806"/>
-        <location filename="modeledit.ui" line="12895"/>
-        <location filename="modeledit.ui" line="12984"/>
-        <location filename="modeledit.ui" line="13029"/>
         <source>NOR</source>
-        <translation>---</translation>
+        <translation type="obsolete">---</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="9292"/>
@@ -3490,7 +3504,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="10333"/>
         <location filename="modeledit.ui" line="11631"/>
-        <location filename="modeledit.cpp" line="1714"/>
+        <location filename="modeledit.cpp" line="1715"/>
         <source>Offset</source>
         <translation>Subtrim</translation>
     </message>
@@ -3657,18 +3671,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="10361"/>
         <location filename="modeledit.ui" line="11659"/>
-        <location filename="modeledit.ui" line="22729"/>
-        <location filename="modeledit.ui" line="23068"/>
-        <location filename="modeledit.ui" line="23519"/>
+        <location filename="modeledit.ui" line="22752"/>
+        <location filename="modeledit.ui" line="23091"/>
+        <location filename="modeledit.ui" line="23542"/>
         <source>Min</source>
         <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="10592"/>
         <location filename="modeledit.ui" line="11687"/>
-        <location filename="modeledit.ui" line="22749"/>
-        <location filename="modeledit.ui" line="23088"/>
-        <location filename="modeledit.ui" line="23539"/>
+        <location filename="modeledit.ui" line="22772"/>
+        <location filename="modeledit.ui" line="23111"/>
+        <location filename="modeledit.ui" line="23562"/>
         <source>Max</source>
         <translation></translation>
     </message>
@@ -4207,7 +4221,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <location filename="modeledit.ui" line="21261"/>
         <location filename="modeledit.ui" line="21306"/>
         <location filename="modeledit.ui" line="21433"/>
-        <location filename="modeledit.ui" line="21666"/>
+        <location filename="modeledit.ui" line="21689"/>
         <source>A1</source>
         <translation></translation>
     </message>
@@ -4215,7 +4229,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <location filename="modeledit.ui" line="21266"/>
         <location filename="modeledit.ui" line="21311"/>
         <location filename="modeledit.ui" line="21438"/>
-        <location filename="modeledit.ui" line="21987"/>
+        <location filename="modeledit.ui" line="22010"/>
         <source>A2</source>
         <translation></translation>
     </message>
@@ -4289,158 +4303,163 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation>Rozsah varia</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21635"/>
+        <location filename="modeledit.ui" line="21643"/>
         <source>Use GPS as altitude source</source>
         <translation>Použít GPS jako senzor výšky</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21689"/>
-        <location filename="modeledit.ui" line="22007"/>
+        <location filename="modeledit.ui" line="21656"/>
+        <source>Display altitude in toolbar</source>
+        <translation>Zobrazit výšku v nástrojové liště</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="21712"/>
+        <location filename="modeledit.ui" line="22030"/>
         <source>Unit</source>
         <translation>Jednotky</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21702"/>
-        <location filename="modeledit.ui" line="22020"/>
+        <location filename="modeledit.ui" line="21725"/>
+        <location filename="modeledit.ui" line="22043"/>
         <source>Max Value</source>
         <translation>Maximim</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21715"/>
-        <location filename="modeledit.ui" line="22033"/>
+        <location filename="modeledit.ui" line="21738"/>
+        <location filename="modeledit.ui" line="22056"/>
         <source>Alarm 1    </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21729"/>
-        <location filename="modeledit.ui" line="21792"/>
-        <location filename="modeledit.ui" line="22047"/>
-        <location filename="modeledit.ui" line="22110"/>
-        <location filename="modeledit.ui" line="22346"/>
-        <location filename="modeledit.ui" line="22423"/>
+        <location filename="modeledit.ui" line="21752"/>
+        <location filename="modeledit.ui" line="21815"/>
+        <location filename="modeledit.ui" line="22070"/>
+        <location filename="modeledit.ui" line="22133"/>
+        <location filename="modeledit.ui" line="22369"/>
+        <location filename="modeledit.ui" line="22446"/>
         <source>----</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21734"/>
-        <location filename="modeledit.ui" line="21797"/>
-        <location filename="modeledit.ui" line="22052"/>
-        <location filename="modeledit.ui" line="22115"/>
-        <location filename="modeledit.ui" line="22351"/>
-        <location filename="modeledit.ui" line="22428"/>
+        <location filename="modeledit.ui" line="21757"/>
+        <location filename="modeledit.ui" line="21820"/>
+        <location filename="modeledit.ui" line="22075"/>
+        <location filename="modeledit.ui" line="22138"/>
+        <location filename="modeledit.ui" line="22374"/>
+        <location filename="modeledit.ui" line="22451"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21739"/>
-        <location filename="modeledit.ui" line="21802"/>
-        <location filename="modeledit.ui" line="22057"/>
-        <location filename="modeledit.ui" line="22120"/>
-        <location filename="modeledit.ui" line="22356"/>
-        <location filename="modeledit.ui" line="22433"/>
+        <location filename="modeledit.ui" line="21762"/>
+        <location filename="modeledit.ui" line="21825"/>
+        <location filename="modeledit.ui" line="22080"/>
+        <location filename="modeledit.ui" line="22143"/>
+        <location filename="modeledit.ui" line="22379"/>
+        <location filename="modeledit.ui" line="22456"/>
         <source>Orange</source>
         <translation>Oranžová</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21744"/>
-        <location filename="modeledit.ui" line="21807"/>
-        <location filename="modeledit.ui" line="22062"/>
-        <location filename="modeledit.ui" line="22125"/>
-        <location filename="modeledit.ui" line="22361"/>
-        <location filename="modeledit.ui" line="22438"/>
+        <location filename="modeledit.ui" line="21767"/>
+        <location filename="modeledit.ui" line="21830"/>
+        <location filename="modeledit.ui" line="22085"/>
+        <location filename="modeledit.ui" line="22148"/>
+        <location filename="modeledit.ui" line="22384"/>
+        <location filename="modeledit.ui" line="22461"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21759"/>
-        <location filename="modeledit.ui" line="21822"/>
-        <location filename="modeledit.ui" line="22077"/>
-        <location filename="modeledit.ui" line="22140"/>
+        <location filename="modeledit.ui" line="21782"/>
+        <location filename="modeledit.ui" line="21845"/>
+        <location filename="modeledit.ui" line="22100"/>
+        <location filename="modeledit.ui" line="22163"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21764"/>
-        <location filename="modeledit.ui" line="21827"/>
-        <location filename="modeledit.ui" line="22082"/>
-        <location filename="modeledit.ui" line="22145"/>
+        <location filename="modeledit.ui" line="21787"/>
+        <location filename="modeledit.ui" line="21850"/>
+        <location filename="modeledit.ui" line="22105"/>
+        <location filename="modeledit.ui" line="22168"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21778"/>
-        <location filename="modeledit.ui" line="22096"/>
-        <location filename="modeledit.ui" line="22409"/>
+        <location filename="modeledit.ui" line="21801"/>
+        <location filename="modeledit.ui" line="22119"/>
+        <location filename="modeledit.ui" line="22432"/>
         <source>Alarm 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21841"/>
-        <location filename="modeledit.ui" line="22159"/>
+        <location filename="modeledit.ui" line="21864"/>
+        <location filename="modeledit.ui" line="22182"/>
         <source>Min Value</source>
         <translation>Minimum</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21934"/>
-        <location filename="modeledit.ui" line="22252"/>
+        <location filename="modeledit.ui" line="21957"/>
+        <location filename="modeledit.ui" line="22275"/>
         <source>Volts (V)</source>
         <translation>Volty (V)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21939"/>
-        <location filename="modeledit.ui" line="22257"/>
+        <location filename="modeledit.ui" line="21962"/>
+        <location filename="modeledit.ui" line="22280"/>
         <source>Amps (A)</source>
         <translation>Ampéry (A)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21944"/>
-        <location filename="modeledit.ui" line="22262"/>
+        <location filename="modeledit.ui" line="21967"/>
+        <location filename="modeledit.ui" line="22285"/>
         <source>Speed (m/s or ft/s)</source>
         <translation>Rychlost (m/s nebo ft/s)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21949"/>
-        <location filename="modeledit.ui" line="22267"/>
+        <location filename="modeledit.ui" line="21972"/>
+        <location filename="modeledit.ui" line="22290"/>
         <source>Raw (-)</source>
         <translation>Jednotky (-)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21954"/>
-        <location filename="modeledit.ui" line="22272"/>
+        <location filename="modeledit.ui" line="21977"/>
+        <location filename="modeledit.ui" line="22295"/>
         <source>Speed (km/h or miles/h)</source>
         <translation>Rychlost (km/h nebo míle/h)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21959"/>
-        <location filename="modeledit.ui" line="22277"/>
+        <location filename="modeledit.ui" line="21982"/>
+        <location filename="modeledit.ui" line="22300"/>
         <source>Meters (m or ft)</source>
         <translation>Vzdálenost (m nebo ft)</translation>
     </message>
     <message utf8="true">
-        <location filename="modeledit.ui" line="21964"/>
-        <location filename="modeledit.ui" line="22282"/>
+        <location filename="modeledit.ui" line="21987"/>
+        <location filename="modeledit.ui" line="22305"/>
         <source>Temp (°)</source>
         <translation>Teplota (°)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21969"/>
-        <location filename="modeledit.ui" line="22287"/>
+        <location filename="modeledit.ui" line="21992"/>
+        <location filename="modeledit.ui" line="22310"/>
         <source>Fuel (%)</source>
         <translation>Palivo (%)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="21974"/>
-        <location filename="modeledit.ui" line="22292"/>
+        <location filename="modeledit.ui" line="21997"/>
+        <location filename="modeledit.ui" line="22315"/>
         <source>mAmps (mA)</source>
         <translation>MiliAmpéry (mA)</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22311"/>
+        <location filename="modeledit.ui" line="22334"/>
         <source>RSSI</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22332"/>
+        <location filename="modeledit.ui" line="22355"/>
         <source>Alarm 1</source>
         <translation></translation>
     </message>
@@ -4449,37 +4468,37 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation type="obsolete">Telemetrické ukazatele</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22782"/>
-        <location filename="modeledit.ui" line="23121"/>
-        <location filename="modeledit.ui" line="23579"/>
+        <location filename="modeledit.ui" line="22805"/>
+        <location filename="modeledit.ui" line="23144"/>
+        <location filename="modeledit.ui" line="23602"/>
         <source>Gauge 1</source>
         <translation>Ukazatel 1</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22822"/>
-        <location filename="modeledit.ui" line="23161"/>
-        <location filename="modeledit.ui" line="23619"/>
+        <location filename="modeledit.ui" line="22845"/>
+        <location filename="modeledit.ui" line="23184"/>
+        <location filename="modeledit.ui" line="23642"/>
         <source>Gauge 2</source>
         <translation>Ukazatel 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22862"/>
-        <location filename="modeledit.ui" line="23201"/>
-        <location filename="modeledit.ui" line="23659"/>
+        <location filename="modeledit.ui" line="22885"/>
+        <location filename="modeledit.ui" line="23224"/>
+        <location filename="modeledit.ui" line="23682"/>
         <source>Gauge 3</source>
         <translation>Ukazatel 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22902"/>
-        <location filename="modeledit.ui" line="23241"/>
-        <location filename="modeledit.ui" line="23699"/>
+        <location filename="modeledit.ui" line="22925"/>
+        <location filename="modeledit.ui" line="23264"/>
+        <location filename="modeledit.ui" line="23722"/>
         <source>Gauge 4</source>
         <translation>Ukazatel 4</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22719"/>
-        <location filename="modeledit.ui" line="23058"/>
-        <location filename="modeledit.ui" line="23509"/>
+        <location filename="modeledit.ui" line="22742"/>
+        <location filename="modeledit.ui" line="23081"/>
+        <location filename="modeledit.ui" line="23532"/>
         <source>Source</source>
         <translation>Zdroj</translation>
     </message>
@@ -4504,16 +4523,52 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation>Stoupání Min</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22739"/>
-        <location filename="modeledit.ui" line="23078"/>
-        <location filename="modeledit.ui" line="23529"/>
+        <location filename="modeledit.ui" line="22762"/>
+        <location filename="modeledit.ui" line="23101"/>
+        <location filename="modeledit.ui" line="23552"/>
         <source>Gauge</source>
         <translation>Ukazatel</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22522"/>
+        <location filename="modeledit.ui" line="22545"/>
         <source>Telemetry screen 1</source>
         <translation>Panel telemetrie 1</translation>
+    </message>
+    <message>
+        <location filename="modeledit.ui" line="9287"/>
+        <location filename="modeledit.ui" line="9398"/>
+        <location filename="modeledit.ui" line="9465"/>
+        <location filename="modeledit.ui" line="9510"/>
+        <location filename="modeledit.ui" line="9574"/>
+        <location filename="modeledit.ui" line="9594"/>
+        <location filename="modeledit.ui" line="9752"/>
+        <location filename="modeledit.ui" line="9838"/>
+        <location filename="modeledit.ui" line="9902"/>
+        <location filename="modeledit.ui" line="9969"/>
+        <location filename="modeledit.ui" line="10127"/>
+        <location filename="modeledit.ui" line="10147"/>
+        <location filename="modeledit.ui" line="10305"/>
+        <location filename="modeledit.ui" line="10381"/>
+        <location filename="modeledit.ui" line="10492"/>
+        <location filename="modeledit.ui" line="10687"/>
+        <location filename="modeledit.ui" line="11538"/>
+        <location filename="modeledit.ui" line="11558"/>
+        <location filename="modeledit.ui" line="11578"/>
+        <location filename="modeledit.ui" line="11804"/>
+        <location filename="modeledit.ui" line="11868"/>
+        <location filename="modeledit.ui" line="11957"/>
+        <location filename="modeledit.ui" line="12021"/>
+        <location filename="modeledit.ui" line="12248"/>
+        <location filename="modeledit.ui" line="12337"/>
+        <location filename="modeledit.ui" line="12426"/>
+        <location filename="modeledit.ui" line="12515"/>
+        <location filename="modeledit.ui" line="12717"/>
+        <location filename="modeledit.ui" line="12806"/>
+        <location filename="modeledit.ui" line="12895"/>
+        <location filename="modeledit.ui" line="12984"/>
+        <location filename="modeledit.ui" line="13029"/>
+        <source>---</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="19182"/>
@@ -4694,70 +4749,70 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation type="obsolete">Střed Min</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22542"/>
-        <location filename="modeledit.ui" line="23269"/>
-        <location filename="modeledit.ui" line="23332"/>
+        <location filename="modeledit.ui" line="22565"/>
+        <location filename="modeledit.ui" line="23292"/>
+        <location filename="modeledit.ui" line="23355"/>
         <source>Custom Screen Type</source>
         <translation>Typ panelu</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22562"/>
-        <location filename="modeledit.ui" line="23289"/>
-        <location filename="modeledit.ui" line="23352"/>
+        <location filename="modeledit.ui" line="22585"/>
+        <location filename="modeledit.ui" line="23312"/>
+        <location filename="modeledit.ui" line="23375"/>
         <source>Nums</source>
         <translation>Hodnoty</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22567"/>
-        <location filename="modeledit.ui" line="23294"/>
-        <location filename="modeledit.ui" line="23357"/>
+        <location filename="modeledit.ui" line="22590"/>
+        <location filename="modeledit.ui" line="23317"/>
+        <location filename="modeledit.ui" line="23380"/>
         <source>Bars</source>
         <translation>Ukazatele</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="22923"/>
+        <location filename="modeledit.ui" line="22946"/>
         <source>Telemetry screen 2</source>
         <translation>Panel telemetrie 2</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="23318"/>
+        <location filename="modeledit.ui" line="23341"/>
         <source>Telemetry screen 3</source>
         <translation>Panel telemetrie 3</translation>
     </message>
     <message>
-        <location filename="modeledit.ui" line="23744"/>
+        <location filename="modeledit.ui" line="23767"/>
         <source>Templates</source>
         <translation>Šablony</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="197"/>
         <location filename="modeledit.cpp" line="229"/>
-        <location filename="modeledit.cpp" line="5884"/>
-        <location filename="modeledit.cpp" line="5908"/>
+        <location filename="modeledit.cpp" line="5923"/>
+        <location filename="modeledit.cpp" line="5947"/>
         <source>Move Up</source>
         <translation>Posunout nahoru</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="199"/>
         <location filename="modeledit.cpp" line="231"/>
-        <location filename="modeledit.cpp" line="5884"/>
-        <location filename="modeledit.cpp" line="5908"/>
+        <location filename="modeledit.cpp" line="5923"/>
+        <location filename="modeledit.cpp" line="5947"/>
         <source>Ctrl+Up</source>
         <translation></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="200"/>
         <location filename="modeledit.cpp" line="232"/>
-        <location filename="modeledit.cpp" line="5885"/>
-        <location filename="modeledit.cpp" line="5909"/>
+        <location filename="modeledit.cpp" line="5924"/>
+        <location filename="modeledit.cpp" line="5948"/>
         <source>Move Down</source>
         <translation>Posunout dolů</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="202"/>
         <location filename="modeledit.cpp" line="234"/>
-        <location filename="modeledit.cpp" line="5885"/>
-        <location filename="modeledit.cpp" line="5909"/>
+        <location filename="modeledit.cpp" line="5924"/>
+        <location filename="modeledit.cpp" line="5948"/>
         <source>Ctrl+Down</source>
         <translation></translation>
     </message>
@@ -4772,13 +4827,13 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation>Vymazat všechny mixy</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1521"/>
+        <location filename="modeledit.cpp" line="1522"/>
         <source>Weight</source>
         <translation>Váha</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1524"/>
-        <location filename="modeledit.cpp" line="1527"/>
+        <location filename="modeledit.cpp" line="1525"/>
+        <location filename="modeledit.cpp" line="1528"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
@@ -4787,110 +4842,110 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation type="obsolete">Fáze</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1566"/>
-        <location filename="modeledit.cpp" line="1717"/>
+        <location filename="modeledit.cpp" line="1567"/>
+        <location filename="modeledit.cpp" line="1718"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1620"/>
-        <location filename="modeledit.cpp" line="1639"/>
-        <location filename="modeledit.cpp" line="1749"/>
+        <location filename="modeledit.cpp" line="1621"/>
+        <location filename="modeledit.cpp" line="1640"/>
+        <location filename="modeledit.cpp" line="1750"/>
         <source>CH%1%2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1560"/>
-        <location filename="modeledit.cpp" line="1696"/>
+        <location filename="modeledit.cpp" line="1561"/>
+        <location filename="modeledit.cpp" line="1697"/>
         <source>DISABLED</source>
         <translation>ZAKÁZÁN</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="621"/>
+        <location filename="modeledit.cpp" line="622"/>
         <source>S1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="622"/>
+        <location filename="modeledit.cpp" line="623"/>
         <source>S2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="623"/>
+        <location filename="modeledit.cpp" line="624"/>
         <source>LS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Rud</source>
         <translation>Směrovka</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Ele</source>
         <translation>Výškovka</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Ail</source>
         <translation>Křidélka</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1159"/>
+        <location filename="modeledit.cpp" line="1160"/>
         <source>Thr</source>
         <translation>Plyn</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1541"/>
-        <location filename="modeledit.cpp" line="1676"/>
+        <location filename="modeledit.cpp" line="1542"/>
+        <location filename="modeledit.cpp" line="1677"/>
         <source>Flight modes</source>
         <translation>Letové režimy</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1543"/>
-        <location filename="modeledit.cpp" line="1678"/>
+        <location filename="modeledit.cpp" line="1544"/>
+        <location filename="modeledit.cpp" line="1679"/>
         <source>Flight mode</source>
         <translation>Letový režim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1618"/>
-        <location filename="modeledit.cpp" line="1637"/>
-        <location filename="modeledit.cpp" line="1747"/>
+        <location filename="modeledit.cpp" line="1619"/>
+        <location filename="modeledit.cpp" line="1638"/>
+        <location filename="modeledit.cpp" line="1748"/>
         <source>X%1  </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1702"/>
+        <location filename="modeledit.cpp" line="1703"/>
         <source>No Trim</source>
         <translation>Žádný trim</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1708"/>
+        <location filename="modeledit.cpp" line="1709"/>
         <source>No DR/Expo</source>
         <translation>Bez DR/Expo</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1711"/>
+        <location filename="modeledit.cpp" line="1712"/>
         <source>FMTrim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1716"/>
+        <location filename="modeledit.cpp" line="1717"/>
         <source>Diff</source>
         <translation>Dif</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1722"/>
+        <location filename="modeledit.cpp" line="1723"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Zpoždění(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1724"/>
+        <location filename="modeledit.cpp" line="1725"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Zpomalení(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1725"/>
+        <location filename="modeledit.cpp" line="1726"/>
         <source> Warn(%1)</source>
         <translation> Varování(%1)</translation>
     </message>
@@ -4899,367 +4954,367 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <translation type="obsolete">FS%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1821"/>
-        <location filename="modeledit.cpp" line="1830"/>
-        <location filename="modeledit.cpp" line="2265"/>
-        <location filename="modeledit.cpp" line="2272"/>
+        <location filename="modeledit.cpp" line="1822"/>
+        <location filename="modeledit.cpp" line="1831"/>
+        <location filename="modeledit.cpp" line="2266"/>
+        <location filename="modeledit.cpp" line="2273"/>
         <source>CH %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2760"/>
+        <location filename="modeledit.cpp" line="2767"/>
         <source>CFN%1</source>
         <translation>Fce%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3062"/>
+        <location filename="modeledit.cpp" line="3082"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3062"/>
+        <location filename="modeledit.cpp" line="3082"/>
         <source>Unable to find sound file %1!</source>
         <translation>Nemohu nalézt zvukový soubor %1!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3425"/>
+        <location filename="modeledit.cpp" line="3452"/>
         <source>Winged Shadow How High</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3428"/>
+        <location filename="modeledit.cpp" line="3455"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (nepodporován)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3474"/>
-        <location filename="modeledit.cpp" line="3475"/>
+        <location filename="modeledit.cpp" line="3501"/>
+        <location filename="modeledit.cpp" line="3502"/>
         <source>Range</source>
         <translation>Rozsah</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3637"/>
+        <location filename="modeledit.cpp" line="3664"/>
         <source>Simple 4-CH</source>
         <translation>Základní 4-kanál</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3638"/>
+        <location filename="modeledit.cpp" line="3665"/>
         <source>T-Cut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3639"/>
+        <location filename="modeledit.cpp" line="3666"/>
         <source>Sticky T-Cut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3640"/>
+        <location filename="modeledit.cpp" line="3667"/>
         <source>V-Tail</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3641"/>
+        <location filename="modeledit.cpp" line="3668"/>
         <source>Elevon\Delta</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3643"/>
+        <location filename="modeledit.cpp" line="3670"/>
         <source>Heli Setup with gyro gain control</source>
         <translation>Nastavení Heli s řízením zisku gyra</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3644"/>
+        <location filename="modeledit.cpp" line="3671"/>
         <source>Gyro gain control</source>
         <translation>Řízení zisku gyra</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3645"/>
+        <location filename="modeledit.cpp" line="3672"/>
         <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
         <translation>Nastavení Heli (Styl přiřazení kanálů - Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3646"/>
+        <location filename="modeledit.cpp" line="3673"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Nastavení Heli s řízením zisku gyra(Styl přiřazení kanálů - Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3647"/>
+        <location filename="modeledit.cpp" line="3674"/>
         <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation>Řízením zisku gyra(Styl přiřazení kanálů - Futaba)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3648"/>
+        <location filename="modeledit.cpp" line="3675"/>
         <source>Servo Test</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3649"/>
+        <location filename="modeledit.cpp" line="3676"/>
         <source>MultiCopter</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3650"/>
+        <location filename="modeledit.cpp" line="3677"/>
         <source>Use Model Config Wizard</source>
         <translation>Použít průvodce nastavením modelu</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5351"/>
+        <location filename="modeledit.cpp" line="5388"/>
         <source>Editing curve %1</source>
         <translation>Upravit křivku k%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5408"/>
+        <location filename="modeledit.cpp" line="5445"/>
         <source>Not enough available mixers!</source>
         <translation>Není k dispozici dostatek mixů!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5463"/>
+        <location filename="modeledit.cpp" line="5500"/>
         <source>Not enough available expos!</source>
         <translation>Není k dispozici dostatek exp!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5608"/>
+        <location filename="modeledit.cpp" line="5645"/>
         <source>Delete Selected Mixes?</source>
         <translation>Odstranit vybrané mixy?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5647"/>
+        <location filename="modeledit.cpp" line="5684"/>
         <source>Delete Selected Expos?</source>
         <translation>Odstranit vybraná expa?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5875"/>
-        <location filename="modeledit.cpp" line="5899"/>
+        <location filename="modeledit.cpp" line="5914"/>
+        <location filename="modeledit.cpp" line="5938"/>
         <source>&amp;Add</source>
         <translation>&amp;Přidat</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5875"/>
-        <location filename="modeledit.cpp" line="5899"/>
+        <location filename="modeledit.cpp" line="5914"/>
+        <location filename="modeledit.cpp" line="5938"/>
         <source>Ctrl+A</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5876"/>
-        <location filename="modeledit.cpp" line="5900"/>
+        <location filename="modeledit.cpp" line="5915"/>
+        <location filename="modeledit.cpp" line="5939"/>
         <source>&amp;Edit</source>
         <translation>&amp;Upravit</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5876"/>
-        <location filename="modeledit.cpp" line="5900"/>
+        <location filename="modeledit.cpp" line="5915"/>
+        <location filename="modeledit.cpp" line="5939"/>
         <source>Enter</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5878"/>
-        <location filename="modeledit.cpp" line="5902"/>
-        <location filename="modeledit.cpp" line="5975"/>
-        <location filename="modeledit.cpp" line="6000"/>
+        <location filename="modeledit.cpp" line="5917"/>
+        <location filename="modeledit.cpp" line="5941"/>
+        <location filename="modeledit.cpp" line="6014"/>
+        <location filename="modeledit.cpp" line="6039"/>
         <source>&amp;Delete</source>
         <translation>&amp;Odstranit</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5878"/>
-        <location filename="modeledit.cpp" line="5902"/>
-        <location filename="modeledit.cpp" line="5975"/>
-        <location filename="modeledit.cpp" line="6000"/>
+        <location filename="modeledit.cpp" line="5917"/>
+        <location filename="modeledit.cpp" line="5941"/>
+        <location filename="modeledit.cpp" line="6014"/>
+        <location filename="modeledit.cpp" line="6039"/>
         <source>Delete</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5879"/>
-        <location filename="modeledit.cpp" line="5903"/>
-        <location filename="modeledit.cpp" line="5976"/>
-        <location filename="modeledit.cpp" line="6001"/>
+        <location filename="modeledit.cpp" line="5918"/>
+        <location filename="modeledit.cpp" line="5942"/>
+        <location filename="modeledit.cpp" line="6015"/>
+        <location filename="modeledit.cpp" line="6040"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5879"/>
-        <location filename="modeledit.cpp" line="5903"/>
-        <location filename="modeledit.cpp" line="5976"/>
-        <location filename="modeledit.cpp" line="6001"/>
+        <location filename="modeledit.cpp" line="5918"/>
+        <location filename="modeledit.cpp" line="5942"/>
+        <location filename="modeledit.cpp" line="6015"/>
+        <location filename="modeledit.cpp" line="6040"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5880"/>
-        <location filename="modeledit.cpp" line="5904"/>
-        <location filename="modeledit.cpp" line="5977"/>
-        <location filename="modeledit.cpp" line="6002"/>
+        <location filename="modeledit.cpp" line="5919"/>
+        <location filename="modeledit.cpp" line="5943"/>
+        <location filename="modeledit.cpp" line="6016"/>
+        <location filename="modeledit.cpp" line="6041"/>
         <source>&amp;Cut</source>
         <translation>&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5880"/>
-        <location filename="modeledit.cpp" line="5904"/>
-        <location filename="modeledit.cpp" line="5977"/>
-        <location filename="modeledit.cpp" line="6002"/>
+        <location filename="modeledit.cpp" line="5919"/>
+        <location filename="modeledit.cpp" line="5943"/>
+        <location filename="modeledit.cpp" line="6016"/>
+        <location filename="modeledit.cpp" line="6041"/>
         <source>Ctrl+X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5881"/>
-        <location filename="modeledit.cpp" line="5905"/>
-        <location filename="modeledit.cpp" line="5978"/>
-        <location filename="modeledit.cpp" line="6003"/>
+        <location filename="modeledit.cpp" line="5920"/>
+        <location filename="modeledit.cpp" line="5944"/>
+        <location filename="modeledit.cpp" line="6017"/>
+        <location filename="modeledit.cpp" line="6042"/>
         <source>&amp;Paste</source>
         <translation>&amp;Vložit</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5881"/>
-        <location filename="modeledit.cpp" line="5905"/>
-        <location filename="modeledit.cpp" line="5978"/>
-        <location filename="modeledit.cpp" line="6003"/>
+        <location filename="modeledit.cpp" line="5920"/>
+        <location filename="modeledit.cpp" line="5944"/>
+        <location filename="modeledit.cpp" line="6017"/>
+        <location filename="modeledit.cpp" line="6042"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5882"/>
-        <location filename="modeledit.cpp" line="5906"/>
+        <location filename="modeledit.cpp" line="5921"/>
+        <location filename="modeledit.cpp" line="5945"/>
         <source>Du&amp;plicate</source>
         <translation>&amp;Duplikovat</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5882"/>
-        <location filename="modeledit.cpp" line="5906"/>
+        <location filename="modeledit.cpp" line="5921"/>
+        <location filename="modeledit.cpp" line="5945"/>
         <source>Ctrl+U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6216"/>
+        <location filename="modeledit.cpp" line="6255"/>
         <source>Are you sure you want to delete curve %1 ?</source>
         <translation>Opravdu chcete smazat křivku %1 ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6335"/>
+        <location filename="modeledit.cpp" line="6374"/>
         <source>Apply Template?</source>
         <translation>Použít šablonu?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6335"/>
+        <location filename="modeledit.cpp" line="6374"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Použít šablonu &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6360"/>
+        <location filename="modeledit.cpp" line="6399"/>
         <source>Clear Expos?</source>
         <translation>Vymazat expa?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6360"/>
+        <location filename="modeledit.cpp" line="6399"/>
         <source>Really clear all the expos?</source>
         <translation>Opravdu vymazat všechna expa?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6371"/>
-        <location filename="modeledit.cpp" line="7123"/>
-        <location filename="modeledit.cpp" line="7235"/>
+        <location filename="modeledit.cpp" line="6410"/>
+        <location filename="modeledit.cpp" line="7162"/>
+        <location filename="modeledit.cpp" line="7274"/>
         <source>Clear Mixes?</source>
         <translation>Vymazat mixy?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6371"/>
+        <location filename="modeledit.cpp" line="6410"/>
         <source>Really clear all the mixes?</source>
         <translation>Opravdu vymazat všechny mixy?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6382"/>
+        <location filename="modeledit.cpp" line="6421"/>
         <source>Clear Curves?</source>
         <translation>Vymazat křivky?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6382"/>
+        <location filename="modeledit.cpp" line="6421"/>
         <source>Really clear all the curves?</source>
         <translation>Opravdu vymazat všechny křivky?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6615"/>
-        <location filename="modeledit.cpp" line="6621"/>
-        <location filename="modeledit.cpp" line="6806"/>
-        <location filename="modeledit.cpp" line="6812"/>
+        <location filename="modeledit.cpp" line="6654"/>
+        <location filename="modeledit.cpp" line="6660"/>
+        <location filename="modeledit.cpp" line="6845"/>
+        <location filename="modeledit.cpp" line="6851"/>
         <source>AIL2</source>
         <translation>Křidélko2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6628"/>
-        <location filename="modeledit.cpp" line="6634"/>
-        <location filename="modeledit.cpp" line="6819"/>
-        <location filename="modeledit.cpp" line="6825"/>
+        <location filename="modeledit.cpp" line="6667"/>
+        <location filename="modeledit.cpp" line="6673"/>
+        <location filename="modeledit.cpp" line="6858"/>
+        <location filename="modeledit.cpp" line="6864"/>
         <source>ELE2</source>
         <translation>Výškovka2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6638"/>
-        <location filename="modeledit.cpp" line="6639"/>
-        <location filename="modeledit.cpp" line="6829"/>
-        <location filename="modeledit.cpp" line="6830"/>
-        <location filename="modeledit.cpp" line="6924"/>
-        <location filename="modeledit.cpp" line="6925"/>
+        <location filename="modeledit.cpp" line="6677"/>
+        <location filename="modeledit.cpp" line="6678"/>
+        <location filename="modeledit.cpp" line="6868"/>
+        <location filename="modeledit.cpp" line="6869"/>
+        <location filename="modeledit.cpp" line="6963"/>
+        <location filename="modeledit.cpp" line="6964"/>
         <source>FLAPS</source>
         <translation>Klapky</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6653"/>
-        <location filename="modeledit.cpp" line="6659"/>
-        <location filename="modeledit.cpp" line="6844"/>
-        <location filename="modeledit.cpp" line="6850"/>
-        <location filename="modeledit.cpp" line="6939"/>
-        <location filename="modeledit.cpp" line="6945"/>
+        <location filename="modeledit.cpp" line="6692"/>
+        <location filename="modeledit.cpp" line="6698"/>
+        <location filename="modeledit.cpp" line="6883"/>
+        <location filename="modeledit.cpp" line="6889"/>
+        <location filename="modeledit.cpp" line="6978"/>
+        <location filename="modeledit.cpp" line="6984"/>
         <source>FLAP%1</source>
         <translation>Klapka%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6693"/>
-        <location filename="modeledit.cpp" line="6697"/>
-        <location filename="modeledit.cpp" line="6718"/>
-        <location filename="modeledit.cpp" line="6722"/>
+        <location filename="modeledit.cpp" line="6732"/>
+        <location filename="modeledit.cpp" line="6736"/>
+        <location filename="modeledit.cpp" line="6757"/>
+        <location filename="modeledit.cpp" line="6761"/>
         <source>PITCH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6706"/>
-        <location filename="modeledit.cpp" line="6707"/>
-        <location filename="modeledit.cpp" line="6710"/>
-        <location filename="modeledit.cpp" line="6711"/>
-        <location filename="modeledit.cpp" line="6731"/>
-        <location filename="modeledit.cpp" line="6732"/>
-        <location filename="modeledit.cpp" line="6735"/>
-        <location filename="modeledit.cpp" line="6736"/>
+        <location filename="modeledit.cpp" line="6745"/>
+        <location filename="modeledit.cpp" line="6746"/>
+        <location filename="modeledit.cpp" line="6749"/>
+        <location filename="modeledit.cpp" line="6750"/>
+        <location filename="modeledit.cpp" line="6770"/>
+        <location filename="modeledit.cpp" line="6771"/>
+        <location filename="modeledit.cpp" line="6774"/>
+        <location filename="modeledit.cpp" line="6775"/>
         <source>GYRO</source>
         <translation>Gyro</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6854"/>
-        <location filename="modeledit.cpp" line="6855"/>
+        <location filename="modeledit.cpp" line="6893"/>
+        <location filename="modeledit.cpp" line="6894"/>
         <source>SPOIL</source>
         <translation>Spoiler</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6869"/>
-        <location filename="modeledit.cpp" line="6875"/>
+        <location filename="modeledit.cpp" line="6908"/>
+        <location filename="modeledit.cpp" line="6914"/>
         <source>SPOIL%1</source>
         <translation>Spoiler%1</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6914"/>
-        <location filename="modeledit.cpp" line="6920"/>
+        <location filename="modeledit.cpp" line="6953"/>
+        <location filename="modeledit.cpp" line="6959"/>
         <source>RUD2</source>
         <translation>Směrovka2</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7123"/>
+        <location filename="modeledit.cpp" line="7162"/>
         <source>Really clear existing mixes on CH6?</source>
         <translation>Opravdu vymazat současné mixy v kanálu CH6?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7235"/>
+        <location filename="modeledit.cpp" line="7274"/>
         <source>Really clear existing mixes on CH5?</source>
         <translation>Opravdu vymazat současné mixy v kanálu CH5?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7346"/>
+        <location filename="modeledit.cpp" line="7385"/>
         <source>Not enough free points in eeprom to store the curve.</source>
         <translation>Není dostatek volných pozic v eeprom pro uložení křivky.</translation>
     </message>
@@ -5577,6 +5632,16 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>Rx</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="269"/>
+        <source>SWR</source>
+        <translation>VSR</translation>
+    </message>
+    <message>
+        <location filename="eeprominterface.cpp" line="269"/>
+        <source>RSSI</source>
         <translation></translation>
     </message>
     <message>
@@ -5919,12 +5984,12 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     <message>
         <location filename="eeprominterface.cpp" line="366"/>
         <source>ONE</source>
-        <translation type="unfinished"></translation>
+        <translation> *</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="369"/>
         <source>!ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>! *</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="377"/>
@@ -5975,7 +6040,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
         <location filename="eeprominterface.cpp" line="283"/>
         <location filename="eeprominterface.cpp" line="315"/>
         <location filename="eeprominterface.cpp" line="407"/>
-        <location filename="helpers.cpp" line="466"/>
+        <location filename="helpers.cpp" line="478"/>
         <source>----</source>
         <translation></translation>
     </message>
@@ -6038,7 +6103,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="363"/>
-        <location filename="helpers.cpp" line="686"/>
+        <location filename="helpers.cpp" line="698"/>
         <source>ON</source>
         <translation>ZAPNUTO</translation>
     </message>
@@ -6048,7 +6113,7 @@ Funkce trimu bude opačná, stejně tak i varování polohy páky plynu.
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="395"/>
-        <location filename="helpers.cpp" line="686"/>
+        <location filename="helpers.cpp" line="698"/>
         <source>OFF</source>
         <translation>VYPNUTO</translation>
     </message>
@@ -6114,18 +6179,6 @@ a pochopitelně nebudou zobrazena žádná telem. data.)</translation>
         <translation>Podpora pro desku TelemetrEZ</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1123"/>
-        <location filename="open9xinterface.cpp" line="1125"/>
-        <source>Support for MAVLINK Copters devices</source>
-        <translation>Podpora pro MAVLINK Copters devices</translation>
-    </message>
-    <message>
-        <location filename="open9xinterface.cpp" line="1123"/>
-        <location filename="open9xinterface.cpp" line="1125"/>
-        <source>Support for MAVLINK Plane devices</source>
-        <translation>Podpora pro MAVLINK Plane devices</translation>
-    </message>
-    <message>
         <location filename="open9xinterface.cpp" line="1124"/>
         <source>Rotary Encoder use in menus navigation</source>
         <translation>Použít Rotary Encoder pro navigaci v menu</translation>
@@ -6149,29 +6202,29 @@ FAI je soutěžní mód (www.fai.org), zablokuje vario, zobrazení telemetrie a 
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1130"/>
-        <location filename="open9xinterface.cpp" line="1165"/>
-        <location filename="open9xinterface.cpp" line="1196"/>
-        <location filename="open9xinterface.cpp" line="1229"/>
-        <location filename="open9xinterface.cpp" line="1258"/>
+        <location filename="open9xinterface.cpp" line="1166"/>
+        <location filename="open9xinterface.cpp" line="1198"/>
+        <location filename="open9xinterface.cpp" line="1232"/>
+        <location filename="open9xinterface.cpp" line="1262"/>
         <source>Enable heli menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1131"/>
-        <location filename="open9xinterface.cpp" line="1166"/>
-        <location filename="open9xinterface.cpp" line="1197"/>
-        <location filename="open9xinterface.cpp" line="1230"/>
-        <location filename="open9xinterface.cpp" line="1259"/>
-        <location filename="open9xinterface.cpp" line="1288"/>
+        <location filename="open9xinterface.cpp" line="1167"/>
+        <location filename="open9xinterface.cpp" line="1199"/>
+        <location filename="open9xinterface.cpp" line="1233"/>
+        <location filename="open9xinterface.cpp" line="1263"/>
+        <location filename="open9xinterface.cpp" line="1293"/>
         <source>Enable TEMPLATES menu</source>
         <translation>Přidá menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1132"/>
-        <location filename="open9xinterface.cpp" line="1167"/>
-        <location filename="open9xinterface.cpp" line="1198"/>
-        <location filename="open9xinterface.cpp" line="1231"/>
+        <location filename="open9xinterface.cpp" line="1168"/>
+        <location filename="open9xinterface.cpp" line="1200"/>
+        <location filename="open9xinterface.cpp" line="1234"/>
         <source>No splash screen</source>
         <translation>Bez úvodního loga
 Firmware nebude obsahovat žádné logo, ani podporu pro něj.
@@ -6179,85 +6232,97 @@ Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkc
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1133"/>
-        <location filename="open9xinterface.cpp" line="1168"/>
-        <location filename="open9xinterface.cpp" line="1199"/>
-        <location filename="open9xinterface.cpp" line="1232"/>
-        <location filename="open9xinterface.cpp" line="1260"/>
-        <location filename="open9xinterface.cpp" line="1289"/>
+        <location filename="open9xinterface.cpp" line="1169"/>
+        <location filename="open9xinterface.cpp" line="1201"/>
+        <location filename="open9xinterface.cpp" line="1235"/>
+        <location filename="open9xinterface.cpp" line="1264"/>
+        <location filename="open9xinterface.cpp" line="1294"/>
         <source>No flight modes</source>
         <translation>Firmware nebude obsahovat podporu Letových Režimů</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1146"/>
-        <location filename="open9xinterface.cpp" line="1181"/>
-        <location filename="open9xinterface.cpp" line="1211"/>
-        <location filename="open9xinterface.cpp" line="1244"/>
-        <location filename="open9xinterface.cpp" line="1272"/>
-        <location filename="open9xinterface.cpp" line="1296"/>
+        <location filename="open9xinterface.cpp" line="1182"/>
+        <location filename="open9xinterface.cpp" line="1213"/>
+        <location filename="open9xinterface.cpp" line="1247"/>
+        <location filename="open9xinterface.cpp" line="1276"/>
+        <location filename="open9xinterface.cpp" line="1301"/>
         <source>In model setup menus automatically set source by moving some of them</source>
         <translation>V menu nastavení modelu automaticky nastavíte Zdroj jeho pohybem</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1153"/>
+        <location filename="open9xinterface.cpp" line="1152"/>
+        <location filename="open9xinterface.cpp" line="1188"/>
+        <location filename="open9xinterface.cpp" line="1218"/>
+        <location filename="open9xinterface.cpp" line="1252"/>
+        <location filename="open9xinterface.cpp" line="1282"/>
+        <location filename="open9xinterface.cpp" line="1307"/>
+        <location filename="open9xinterface.cpp" line="1320"/>
+        <location filename="open9xinterface.cpp" line="1332"/>
+        <source>Use alternative SQT5 font</source>
+        <translation>Použít alternativní znakovou sadu písma (jiný font)</translation>
+    </message>
+    <message>
+        <location filename="open9xinterface.cpp" line="1154"/>
         <source>EEprom write progress bar</source>
         <translation>Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1155"/>
-        <location filename="open9xinterface.cpp" line="1219"/>
+        <location filename="open9xinterface.cpp" line="1156"/>
+        <location filename="open9xinterface.cpp" line="1222"/>
         <source>No Winged Shadow How High support</source>
         <translation>Bez podpory -  Winged Shadow How High</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1156"/>
-        <location filename="open9xinterface.cpp" line="1220"/>
+        <location filename="open9xinterface.cpp" line="1157"/>
+        <location filename="open9xinterface.cpp" line="1223"/>
         <source>No vario support</source>
         <translation>Bez podpory varia</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1157"/>
-        <location filename="open9xinterface.cpp" line="1221"/>
+        <location filename="open9xinterface.cpp" line="1158"/>
+        <location filename="open9xinterface.cpp" line="1224"/>
         <source>No GPS support</source>
         <translation>Bez podpory GPS</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1158"/>
-        <location filename="open9xinterface.cpp" line="1222"/>
+        <location filename="open9xinterface.cpp" line="1159"/>
+        <location filename="open9xinterface.cpp" line="1225"/>
         <source>No gauges in the custom telemetry screen</source>
         <translation>Bez grafických ukazatelů hodnoty na obrazovkách telemetrie</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1194"/>
+        <location filename="open9xinterface.cpp" line="1196"/>
         <source>openTx for 9XR</source>
         <translation>openTx pro 9XR zákl desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1227"/>
+        <location filename="open9xinterface.cpp" line="1230"/>
         <source>openTx for 9XR with M128 chip</source>
         <translation>openTx pro 9XR zákl desku s M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1309"/>
-        <location filename="open9xinterface.cpp" line="1320"/>
+        <location filename="open9xinterface.cpp" line="1316"/>
+        <location filename="open9xinterface.cpp" line="1328"/>
         <source>Disable HELI menu and cyclic mix support</source>
         <translation>Odstranit funkce pro heli a nastavení typu mechaniky</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1310"/>
-        <location filename="open9xinterface.cpp" line="1321"/>
+        <location filename="open9xinterface.cpp" line="1317"/>
+        <location filename="open9xinterface.cpp" line="1329"/>
         <source>Disable TEMPLATES menu</source>
         <translation>Odstranit menu s jednoduchými
 šablonami modelu</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1311"/>
-        <location filename="open9xinterface.cpp" line="1322"/>
+        <location filename="open9xinterface.cpp" line="1318"/>
+        <location filename="open9xinterface.cpp" line="1330"/>
         <source>Disable Global variables</source>
         <translation>Odstranit Globální proměnné</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1319"/>
+        <location filename="open9xinterface.cpp" line="1327"/>
         <source>openTx for FrSky Taranis Rev4a</source>
         <translation>openTx pro FrSky Taranis Rev4a</translation>
     </message>
@@ -6267,19 +6332,19 @@ Toto se hodí pokud je potřeba ušetřit místo v paměti FLASH pro jiné funkc
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1134"/>
-        <location filename="open9xinterface.cpp" line="1169"/>
-        <location filename="open9xinterface.cpp" line="1200"/>
-        <location filename="open9xinterface.cpp" line="1233"/>
-        <location filename="open9xinterface.cpp" line="1261"/>
-        <location filename="open9xinterface.cpp" line="1290"/>
+        <location filename="open9xinterface.cpp" line="1170"/>
+        <location filename="open9xinterface.cpp" line="1202"/>
+        <location filename="open9xinterface.cpp" line="1236"/>
+        <location filename="open9xinterface.cpp" line="1265"/>
+        <location filename="open9xinterface.cpp" line="1295"/>
         <source>Disable curves menus</source>
         <translation>Bez uživatelsky definovatelných křivek</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1135"/>
-        <location filename="open9xinterface.cpp" line="1170"/>
-        <location filename="open9xinterface.cpp" line="1201"/>
-        <location filename="open9xinterface.cpp" line="1234"/>
+        <location filename="open9xinterface.cpp" line="1171"/>
+        <location filename="open9xinterface.cpp" line="1203"/>
+        <location filename="open9xinterface.cpp" line="1237"/>
         <source>Support for radio modified with regular speaker</source>
         <translation>Vylepšený zvukový výstup,
 funkční i s origo pípákem,
@@ -6288,43 +6353,43 @@ instalaci reproduktoru</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1136"/>
-        <location filename="open9xinterface.cpp" line="1171"/>
-        <location filename="open9xinterface.cpp" line="1202"/>
-        <location filename="open9xinterface.cpp" line="1235"/>
-        <location filename="open9xinterface.cpp" line="1263"/>
+        <location filename="open9xinterface.cpp" line="1172"/>
+        <location filename="open9xinterface.cpp" line="1204"/>
+        <location filename="open9xinterface.cpp" line="1238"/>
+        <location filename="open9xinterface.cpp" line="1267"/>
         <source>Used if you have modified your radio with voice mode</source>
         <translation>Hlasový výstup pro telemetrii,
 nutno zastavět hlasový modul</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1137"/>
-        <location filename="open9xinterface.cpp" line="1172"/>
-        <location filename="open9xinterface.cpp" line="1203"/>
-        <location filename="open9xinterface.cpp" line="1236"/>
+        <location filename="open9xinterface.cpp" line="1173"/>
+        <location filename="open9xinterface.cpp" line="1205"/>
+        <location filename="open9xinterface.cpp" line="1239"/>
         <source>Used if you have modified your radio with haptic mode</source>
         <translation>Výstrahy pomocí vibračního motoru
 (je třeba osadit)</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1150"/>
-        <location filename="open9xinterface.cpp" line="1185"/>
-        <location filename="open9xinterface.cpp" line="1214"/>
-        <location filename="open9xinterface.cpp" line="1247"/>
-        <location filename="open9xinterface.cpp" line="1276"/>
-        <location filename="open9xinterface.cpp" line="1300"/>
+        <location filename="open9xinterface.cpp" line="1186"/>
+        <location filename="open9xinterface.cpp" line="1216"/>
+        <location filename="open9xinterface.cpp" line="1250"/>
+        <location filename="open9xinterface.cpp" line="1280"/>
+        <location filename="open9xinterface.cpp" line="1305"/>
         <source>Battery graph</source>
         <translation>Grafické znázornění stavu baterie</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1152"/>
-        <location filename="open9xinterface.cpp" line="1187"/>
-        <location filename="open9xinterface.cpp" line="1216"/>
-        <location filename="open9xinterface.cpp" line="1249"/>
+        <location filename="open9xinterface.cpp" line="1153"/>
+        <location filename="open9xinterface.cpp" line="1189"/>
+        <location filename="open9xinterface.cpp" line="1219"/>
+        <location filename="open9xinterface.cpp" line="1253"/>
         <source>Enable the throttle trace in Statistics</source>
         <translation>Přidat Stopu Plynu (Throttle-trace) v panelu STATISTIKA</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1163"/>
+        <location filename="open9xinterface.cpp" line="1164"/>
         <source>openTx for M128 / 9X board</source>
         <translation>openTx pro 9X zákl. desku s M128</translation>
     </message>
@@ -6337,31 +6402,31 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">openTx pro 9XR zákl desku s M128</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1256"/>
+        <location filename="open9xinterface.cpp" line="1260"/>
         <source>openTx for Gruvin9x board / 9X</source>
         <translation>openTx pro Gruvin9x zákl desku / 9X</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1264"/>
+        <location filename="open9xinterface.cpp" line="1268"/>
         <source>Support of FrSky PXX protocol</source>
         <translation>Podpora pro Frsky PXX protokol</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1285"/>
+        <location filename="open9xinterface.cpp" line="1290"/>
         <source>openTx for Sky9x board / 9X</source>
         <translation>openTx pro Sky9x zákl. desku / 9X</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1308"/>
+        <location filename="open9xinterface.cpp" line="1315"/>
         <source>openTx for FrSky Taranis</source>
         <translation>openTx pro FrSky Taranis</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1139"/>
-        <location filename="open9xinterface.cpp" line="1174"/>
-        <location filename="open9xinterface.cpp" line="1205"/>
-        <location filename="open9xinterface.cpp" line="1238"/>
-        <location filename="open9xinterface.cpp" line="1265"/>
+        <location filename="open9xinterface.cpp" line="1175"/>
+        <location filename="open9xinterface.cpp" line="1207"/>
+        <location filename="open9xinterface.cpp" line="1241"/>
+        <location filename="open9xinterface.cpp" line="1269"/>
         <source>Support for DSM2 modules</source>
         <translation>Podpora DSM2 modulů</translation>
     </message>
@@ -6374,33 +6439,33 @@ velikost eeprom je 4096B, ale pouze prvních 2048B je použito.</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1140"/>
-        <location filename="open9xinterface.cpp" line="1175"/>
-        <location filename="open9xinterface.cpp" line="1206"/>
-        <location filename="open9xinterface.cpp" line="1239"/>
-        <location filename="open9xinterface.cpp" line="1267"/>
-        <location filename="open9xinterface.cpp" line="1291"/>
+        <location filename="open9xinterface.cpp" line="1176"/>
+        <location filename="open9xinterface.cpp" line="1208"/>
+        <location filename="open9xinterface.cpp" line="1242"/>
+        <location filename="open9xinterface.cpp" line="1271"/>
+        <location filename="open9xinterface.cpp" line="1296"/>
         <source>PPM center adjustment in limits</source>
         <translation>Možnost nastavovat střed serva šířkou pulzu</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1141"/>
-        <location filename="open9xinterface.cpp" line="1176"/>
-        <location filename="open9xinterface.cpp" line="1207"/>
-        <location filename="open9xinterface.cpp" line="1240"/>
-        <location filename="open9xinterface.cpp" line="1268"/>
-        <location filename="open9xinterface.cpp" line="1292"/>
-        <location filename="open9xinterface.cpp" line="1312"/>
-        <location filename="open9xinterface.cpp" line="1323"/>
+        <location filename="open9xinterface.cpp" line="1177"/>
+        <location filename="open9xinterface.cpp" line="1209"/>
+        <location filename="open9xinterface.cpp" line="1243"/>
+        <location filename="open9xinterface.cpp" line="1272"/>
+        <location filename="open9xinterface.cpp" line="1297"/>
+        <location filename="open9xinterface.cpp" line="1319"/>
+        <location filename="open9xinterface.cpp" line="1331"/>
         <source>PPM values displayed in us</source>
         <translation>hodnoty PPM budou zobrazeny v us (mikrosekundy)</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1143"/>
-        <location filename="open9xinterface.cpp" line="1178"/>
-        <location filename="open9xinterface.cpp" line="1209"/>
-        <location filename="open9xinterface.cpp" line="1242"/>
-        <location filename="open9xinterface.cpp" line="1270"/>
-        <location filename="open9xinterface.cpp" line="1294"/>
+        <location filename="open9xinterface.cpp" line="1179"/>
+        <location filename="open9xinterface.cpp" line="1211"/>
+        <location filename="open9xinterface.cpp" line="1245"/>
+        <location filename="open9xinterface.cpp" line="1274"/>
+        <location filename="open9xinterface.cpp" line="1299"/>
         <source>Symetrical Limits</source>
         <translation>Symetrické limity
 Přidá možnost volby mezi
@@ -6412,10 +6477,10 @@ nastavené limity tedy nemusí být rovny hodnotě -100% a 100%, ale budou pouze
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1124"/>
-        <location filename="open9xinterface.cpp" line="1210"/>
-        <location filename="open9xinterface.cpp" line="1243"/>
-        <location filename="open9xinterface.cpp" line="1271"/>
-        <location filename="open9xinterface.cpp" line="1295"/>
+        <location filename="open9xinterface.cpp" line="1212"/>
+        <location filename="open9xinterface.cpp" line="1246"/>
+        <location filename="open9xinterface.cpp" line="1275"/>
+        <location filename="open9xinterface.cpp" line="1300"/>
         <source>Pots use in menus navigation</source>
         <translation>Moznost zadávat hodnoty
 a pohybovat se v menu
@@ -6427,7 +6492,7 @@ pomocí potenciometrů</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1145"/>
-        <location filename="open9xinterface.cpp" line="1180"/>
+        <location filename="open9xinterface.cpp" line="1181"/>
         <source>SmartieParts 2.2 Backlight support</source>
         <translation>Podpora pro modul SmartieParts 2.2
 (programátor/podsvícení)
@@ -6435,20 +6500,20 @@ Není určeno pro starší verze Smartie Parts</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1147"/>
-        <location filename="open9xinterface.cpp" line="1182"/>
-        <location filename="open9xinterface.cpp" line="1212"/>
-        <location filename="open9xinterface.cpp" line="1245"/>
-        <location filename="open9xinterface.cpp" line="1273"/>
-        <location filename="open9xinterface.cpp" line="1297"/>
+        <location filename="open9xinterface.cpp" line="1183"/>
+        <location filename="open9xinterface.cpp" line="1214"/>
+        <location filename="open9xinterface.cpp" line="1248"/>
+        <location filename="open9xinterface.cpp" line="1277"/>
+        <location filename="open9xinterface.cpp" line="1302"/>
         <source>In model setup menus automatically set switch by moving some of them</source>
         <translation>Výběr spínače v mixu atd.
 se provádí jeho sepnutím</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1148"/>
-        <location filename="open9xinterface.cpp" line="1183"/>
-        <location filename="open9xinterface.cpp" line="1274"/>
-        <location filename="open9xinterface.cpp" line="1298"/>
+        <location filename="open9xinterface.cpp" line="1184"/>
+        <location filename="open9xinterface.cpp" line="1278"/>
+        <location filename="open9xinterface.cpp" line="1303"/>
         <source>Enable resetting values by pressing up and down at the same time</source>
         <translation>Rychlé nastavení hodnoty současným stiskem dvou tlačítek.
 (+) a (-) invertuje hodnotu
@@ -6458,21 +6523,21 @@ se provádí jeho sepnutím</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1149"/>
-        <location filename="open9xinterface.cpp" line="1184"/>
-        <location filename="open9xinterface.cpp" line="1213"/>
-        <location filename="open9xinterface.cpp" line="1246"/>
-        <location filename="open9xinterface.cpp" line="1275"/>
-        <location filename="open9xinterface.cpp" line="1299"/>
+        <location filename="open9xinterface.cpp" line="1185"/>
+        <location filename="open9xinterface.cpp" line="1215"/>
+        <location filename="open9xinterface.cpp" line="1249"/>
+        <location filename="open9xinterface.cpp" line="1279"/>
+        <location filename="open9xinterface.cpp" line="1304"/>
         <source>No graphical check boxes and sliders</source>
         <translation>Nahrazeni posuvníku a zatržítek (checkboxu) textem</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1151"/>
-        <location filename="open9xinterface.cpp" line="1186"/>
-        <location filename="open9xinterface.cpp" line="1215"/>
-        <location filename="open9xinterface.cpp" line="1248"/>
-        <location filename="open9xinterface.cpp" line="1277"/>
-        <location filename="open9xinterface.cpp" line="1301"/>
+        <location filename="open9xinterface.cpp" line="1187"/>
+        <location filename="open9xinterface.cpp" line="1217"/>
+        <location filename="open9xinterface.cpp" line="1251"/>
+        <location filename="open9xinterface.cpp" line="1281"/>
+        <location filename="open9xinterface.cpp" line="1306"/>
         <source>Don&apos;t use bold font for highlighting active items</source>
         <translation>Vypnout zvýraznění aktivních mixů/spínačů tučným písmem.
 Pokud není tato volby vybrána,
@@ -6485,20 +6550,20 @@ zobrazeny normálním písmem</translation>
         <translation type="obsolete">Nezobrazovat Stopu Plynu (Throttle-trace) v panelu STATISTIKA</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1188"/>
-        <location filename="open9xinterface.cpp" line="1217"/>
-        <location filename="open9xinterface.cpp" line="1250"/>
-        <location filename="open9xinterface.cpp" line="1278"/>
+        <location filename="open9xinterface.cpp" line="1190"/>
+        <location filename="open9xinterface.cpp" line="1220"/>
+        <location filename="open9xinterface.cpp" line="1254"/>
+        <location filename="open9xinterface.cpp" line="1283"/>
         <source>EEprom write Progress bar</source>
         <translation>Progresbar zobrazující zápis do EEPROM
 (tj. ukládání nastavení)</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1154"/>
-        <location filename="open9xinterface.cpp" line="1189"/>
-        <location filename="open9xinterface.cpp" line="1218"/>
-        <location filename="open9xinterface.cpp" line="1251"/>
-        <location filename="open9xinterface.cpp" line="1279"/>
+        <location filename="open9xinterface.cpp" line="1155"/>
+        <location filename="open9xinterface.cpp" line="1191"/>
+        <location filename="open9xinterface.cpp" line="1221"/>
+        <location filename="open9xinterface.cpp" line="1255"/>
+        <location filename="open9xinterface.cpp" line="1284"/>
         <source>Imperial units</source>
         <translation>Imerialní jednotky pro telemetrii
 (stopy, palce, míle atd.)</translation>
@@ -6508,7 +6573,7 @@ zobrazeny normálním písmem</translation>
         <translation type="obsolete">open9x pro 9XR zákl desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1302"/>
+        <location filename="open9xinterface.cpp" line="1309"/>
         <source>Bluetooth interface</source>
         <translation></translation>
     </message>
@@ -6518,11 +6583,11 @@ zobrazeny normálním písmem</translation>
     </message>
     <message>
         <location filename="open9xinterface.cpp" line="1142"/>
-        <location filename="open9xinterface.cpp" line="1177"/>
-        <location filename="open9xinterface.cpp" line="1208"/>
-        <location filename="open9xinterface.cpp" line="1241"/>
-        <location filename="open9xinterface.cpp" line="1269"/>
-        <location filename="open9xinterface.cpp" line="1293"/>
+        <location filename="open9xinterface.cpp" line="1178"/>
+        <location filename="open9xinterface.cpp" line="1210"/>
+        <location filename="open9xinterface.cpp" line="1244"/>
+        <location filename="open9xinterface.cpp" line="1273"/>
+        <location filename="open9xinterface.cpp" line="1298"/>
         <source>Global variables</source>
         <translation>Aktivuje Globální Proměnné
 Jsou to proměnné, které lze použít pro konfiguraci místo některých pevných číselných hodnot.
@@ -6539,12 +6604,12 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation type="obsolete">open9x pro gruvin9x zákl. desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1262"/>
+        <location filename="open9xinterface.cpp" line="1266"/>
         <source>Support for SD memory card</source>
         <translation>Podpora paměťové karty SD</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1265"/>
+        <location filename="open9xinterface.cpp" line="1269"/>
         <source>Support for DSM2 modules using ppm instead of true serial</source>
         <translation>Podpora DSM2 modulů s použitím PPM místo sériového protokolu</translation>
     </message>
@@ -6557,7 +6622,7 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation type="obsolete">open9x pro ersky9x desku</translation>
     </message>
     <message>
-        <location filename="open9xinterface.cpp" line="1287"/>
+        <location filename="open9xinterface.cpp" line="1292"/>
         <source>Enable HELI menu and cyclic mix support</source>
         <translation>Funkce pro heli, nastavení typu mechaniky</translation>
     </message>
@@ -6683,7 +6748,7 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <location filename="ersky9xinterface.cpp" line="254"/>
         <location filename="mdichild.cpp" line="160"/>
         <location filename="mdichild.cpp" line="650"/>
-        <location filename="modeledit.cpp" line="6201"/>
+        <location filename="modeledit.cpp" line="6240"/>
         <location filename="open9xinterface.cpp" line="472"/>
         <source>Warning</source>
         <translation>Varování</translation>
@@ -6837,7 +6902,7 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
     </message>
     <message>
         <location filename="helpers.cpp" line="110"/>
-        <location filename="helpers.cpp" line="440"/>
+        <location filename="helpers.cpp" line="452"/>
         <source>No repeat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6927,122 +6992,129 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation>Podsvětlení</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="462"/>
+        <location filename="helpers.cpp" line="330"/>
+        <location filename="helpers.cpp" line="337"/>
+        <location filename="helpers.cpp" line="347"/>
+        <source>&lt;font color=red&gt;&lt;b&gt;Inconsistent parameter&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="helpers.cpp" line="474"/>
         <source>!Flight mode %1</source>
         <translation>!Letový režim %1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="464"/>
+        <location filename="helpers.cpp" line="476"/>
         <source>Flight mode %1</source>
         <translation>Letový režim %1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1174"/>
+        <location filename="helpers.cpp" line="1186"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1176"/>
+        <location filename="helpers.cpp" line="1188"/>
         <source>Orange</source>
         <translation>Oranžová</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1178"/>
+        <location filename="helpers.cpp" line="1190"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1212"/>
+        <location filename="helpers.cpp" line="1224"/>
         <source>Winged Shadow How High</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1214"/>
+        <location filename="helpers.cpp" line="1226"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (nepodporován)</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1216"/>
+        <location filename="helpers.cpp" line="1228"/>
         <source>FrSky Sensor Hub</source>
         <translation>FrSky Senzor Hub</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1218"/>
+        <location filename="helpers.cpp" line="1230"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1226"/>
+        <location filename="helpers.cpp" line="1238"/>
         <source>Imperial</source>
         <translation>Imperiální</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1228"/>
+        <location filename="helpers.cpp" line="1240"/>
         <source>Metric</source>
         <translation>Metrické</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1343"/>
+        <location filename="helpers.cpp" line="1355"/>
         <source>Extra Fine</source>
         <translation>Extra jemný</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1344"/>
+        <location filename="helpers.cpp" line="1356"/>
         <source>Fine</source>
         <translation>Jemný</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1345"/>
+        <location filename="helpers.cpp" line="1357"/>
         <source>Medium</source>
         <translation>Střední</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1346"/>
+        <location filename="helpers.cpp" line="1358"/>
         <source>Coarse</source>
         <translation>Hrubý</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1347"/>
+        <location filename="helpers.cpp" line="1359"/>
         <source>Exponential</source>
         <translation>Exponenciální</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1353"/>
+        <location filename="helpers.cpp" line="1365"/>
         <source>Count Up</source>
         <translation>Přičítat</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1353"/>
+        <location filename="helpers.cpp" line="1365"/>
         <source>Count Down</source>
         <translation>Odečítat</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1354"/>
+        <location filename="helpers.cpp" line="1366"/>
         <source>%1:%2, </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1362"/>
+        <location filename="helpers.cpp" line="1374"/>
         <source>: %1 Channels, %2usec Delay</source>
         <translation>: %1 Kanálů, %2us pauza</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1378"/>
+        <location filename="helpers.cpp" line="1390"/>
         <source>Rudder</source>
         <translation>Směrovka</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1379"/>
+        <location filename="helpers.cpp" line="1391"/>
         <source>Elevator</source>
         <translation>Výškovka</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1380"/>
+        <location filename="helpers.cpp" line="1392"/>
         <source>Throttle</source>
         <translation>Plyn</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1381"/>
+        <location filename="helpers.cpp" line="1393"/>
         <source>Aileron</source>
         <translation>Křidélka</translation>
     </message>
@@ -7053,7 +7125,7 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
     </message>
     <message>
         <location filename="helpers.cpp" line="28"/>
-        <location filename="helpers.cpp" line="1201"/>
+        <location filename="helpers.cpp" line="1213"/>
         <source>---</source>
         <translation></translation>
     </message>
@@ -7129,67 +7201,67 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="268"/>
-        <location filename="helpers.cpp" line="331"/>
-        <location filename="helpers.cpp" line="402"/>
+        <location filename="helpers.cpp" line="340"/>
+        <location filename="helpers.cpp" line="414"/>
         <source>Timer1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="268"/>
-        <location filename="helpers.cpp" line="332"/>
-        <location filename="helpers.cpp" line="403"/>
+        <location filename="helpers.cpp" line="341"/>
+        <location filename="helpers.cpp" line="415"/>
         <source>Timer2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="333"/>
-        <location filename="helpers.cpp" line="404"/>
+        <location filename="helpers.cpp" line="342"/>
+        <location filename="helpers.cpp" line="416"/>
         <source>All</source>
         <translation>Vše</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="334"/>
-        <location filename="helpers.cpp" line="405"/>
+        <location filename="helpers.cpp" line="343"/>
+        <location filename="helpers.cpp" line="417"/>
         <source>Telemetry</source>
         <translation>Telemetrie</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="350"/>
+        <location filename="helpers.cpp" line="362"/>
         <source>Value </source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="360"/>
+        <location filename="helpers.cpp" line="372"/>
         <source>Decr:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="362"/>
+        <location filename="helpers.cpp" line="374"/>
         <source>Incr:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="443"/>
+        <location filename="helpers.cpp" line="455"/>
         <source>%1s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="451"/>
+        <location filename="helpers.cpp" line="463"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="452"/>
+        <location filename="helpers.cpp" line="464"/>
         <source>Source</source>
         <translation>Zdroj</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="453"/>
+        <location filename="helpers.cpp" line="465"/>
         <source>GVAR</source>
         <translation>Proměnná</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="454"/>
+        <location filename="helpers.cpp" line="466"/>
         <source>Increment</source>
         <translation>Upravit</translation>
     </message>
@@ -7202,77 +7274,77 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation type="obsolete">Fáze %1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="480"/>
+        <location filename="helpers.cpp" line="492"/>
         <source>Diff</source>
         <translation>Dif</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="497"/>
+        <location filename="helpers.cpp" line="509"/>
         <source>Expo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="537"/>
+        <location filename="helpers.cpp" line="549"/>
         <source>Own trim</source>
         <translation>Vlastní trim</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="542"/>
+        <location filename="helpers.cpp" line="554"/>
         <source>Flight mode %1 trim</source>
         <oldsource>Flight phase %1 trim</oldsource>
         <translation>Trim režimu LR%1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="550"/>
+        <location filename="helpers.cpp" line="562"/>
         <source>Own value</source>
         <translation>Vlastní hodnota</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="555"/>
+        <location filename="helpers.cpp" line="567"/>
         <source>Flight mode %1 value</source>
         <oldsource>Flight phase %1 value</oldsource>
         <translation>Hodnota režimu LR%1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="686"/>
+        <location filename="helpers.cpp" line="698"/>
         <source>Keys</source>
         <translation>Klávesy</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="686"/>
+        <location filename="helpers.cpp" line="698"/>
         <source>Sticks</source>
         <translation>Páky</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="686"/>
+        <location filename="helpers.cpp" line="698"/>
         <source>Keys + Sticks</source>
         <translation>Klávesy i páky</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="901"/>
+        <location filename="helpers.cpp" line="913"/>
         <source>-GV%1</source>
         <translation>-GP%1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1099"/>
+        <location filename="helpers.cpp" line="1111"/>
         <source>(-GV%1)</source>
         <translation>(-GP%1)</translation>
     </message>
     <message>
         <location filename="eeprominterface.cpp" line="313"/>
-        <location filename="helpers.cpp" line="915"/>
+        <location filename="helpers.cpp" line="927"/>
         <source>GV%1</source>
         <translation>GP%1</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1087"/>
+        <location filename="helpers.cpp" line="1099"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="161"/>
         <location filename="mdichild.cpp" line="651"/>
-        <location filename="modeledit.cpp" line="6202"/>
+        <location filename="modeledit.cpp" line="6241"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation>Simulátor pro tuto verzi firmware zatím není dostupný</translation>
     </message>
@@ -7336,13 +7408,13 @@ Nastavení hodnoty se provádí přímo v seznamu proměnných, nebo pomocí Fun
         <translation>OpenTX nepodporuje tuto funkci na této zákl. desce</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="1670"/>
-        <location filename="open9xeeprom.cpp" line="1747"/>
+        <location filename="open9xeeprom.cpp" line="1673"/>
+        <location filename="open9xeeprom.cpp" line="1750"/>
         <source>OpenTX doesn&apos;t accept this protocol</source>
         <translation>OpenTX nepodporuje tento protokol</translation>
     </message>
     <message>
-        <location filename="open9xeeprom.cpp" line="1677"/>
+        <location filename="open9xeeprom.cpp" line="1680"/>
         <source>OpenTX doesn&apos;t allow this number of channels</source>
         <translation>V OpenTX nelze použít tento počet kanálů</translation>
     </message>
@@ -7464,7 +7536,7 @@ Pořadí telemetrických kanálů bylo změněno, prosím zkontrolujte nastvení
 V konfiguraci DR/Expo byly provedeny změny, zkontrolujte nastavení než poletíte!</translation>
     </message>
     <message>
-        <location filename="helpers.cpp" line="1101"/>
+        <location filename="helpers.cpp" line="1113"/>
         <source>(GV%1)</source>
         <translation>(GP%1)</translation>
     </message>
@@ -7473,14 +7545,14 @@ V konfiguraci DR/Expo byly provedeny změny, zkontrolujte nastavení než polet�
         <translation type="obsolete">Fáze FP0 (Výchozí)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1425"/>
-        <location filename="modeledit.cpp" line="3694"/>
+        <location filename="modeledit.cpp" line="1426"/>
+        <location filename="modeledit.cpp" line="3725"/>
         <source>Flight Mode 0 (Default)</source>
         <translation>Letový Režim 0 (Výchozí)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="1427"/>
-        <location filename="modeledit.cpp" line="3696"/>
+        <location filename="modeledit.cpp" line="1428"/>
+        <location filename="modeledit.cpp" line="3727"/>
         <source>FM %1</source>
         <translation>LR %1</translation>
     </message>
@@ -9206,7 +9278,7 @@ p, li { white-space: pre-wrap; }
         <location filename="joystickdialog.ui" line="614"/>
         <location filename="joystickdialog.ui" line="701"/>
         <source>P3/LS</source>
-        <translation type="unfinished"></translation>
+        <translation>Potenciometr 3 /LS</translation>
     </message>
     <message>
         <location filename="joystickdialog.ui" line="122"/>
@@ -9335,17 +9407,32 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <translation>Companion9x - zobrazení logu</translation>
     </message>
     <message>
-        <location filename="logsdialog.ui" line="106"/>
+        <location filename="logsdialog.ui" line="29"/>
         <source>Filename</source>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="logsdialog.ui" line="120"/>
+        <location filename="logsdialog.ui" line="43"/>
         <source>Open LogFile</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="logsdialog.ui" line="174"/>
+        <location filename="logsdialog.ui" line="131"/>
+        <source>Zoom</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="logsdialog.ui" line="138"/>
+        <source>X</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="logsdialog.ui" line="145"/>
+        <source>Y</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="logsdialog.ui" line="169"/>
         <source>Fly sessions</source>
         <translation>Lety</translation>
     </message>
@@ -9360,14 +9447,19 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
         <translation>Čas</translation>
     </message>
     <message>
-        <location filename="logsdialog.cpp" line="392"/>
+        <location filename="logsdialog.cpp" line="395"/>
         <source>Select your log file</source>
         <translation>Vyberte soubor s logy</translation>
     </message>
     <message>
-        <location filename="logsdialog.cpp" line="403"/>
+        <location filename="logsdialog.cpp" line="406"/>
         <source>Available fields</source>
         <translation>Dostupná pole</translation>
+    </message>
+    <message>
+        <location filename="logsdialog.cpp" line="501"/>
+        <source>The selected logfile contains %1 invalid lines out of  %2 total lines</source>
+        <translation>Zvolený soubor logu obsahuje %1neplatných řádků z celkových %2</translation>
     </message>
 </context>
 <context>
@@ -9500,7 +9592,7 @@ Tlačítkem Zrušit přerušíte kalibraci</translation>
     <message>
         <location filename="modelconfigdialog.ui" line="407"/>
         <source>FlyBarLess</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="modelconfigdialog.ui" line="428"/>
@@ -9905,48 +9997,48 @@ Může být jiná než verze firmwaru</translation>
         <translation>Hlas tts</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1029"/>
-        <location filename="preferencesdialog.ui" line="1036"/>
-        <location filename="preferencesdialog.ui" line="1049"/>
-        <location filename="preferencesdialog.ui" line="1062"/>
-        <location filename="preferencesdialog.ui" line="1075"/>
-        <location filename="preferencesdialog.ui" line="1082"/>
-        <location filename="preferencesdialog.ui" line="1089"/>
-        <location filename="preferencesdialog.ui" line="1096"/>
-        <location filename="preferencesdialog.ui" line="1103"/>
-        <location filename="preferencesdialog.ui" line="1110"/>
-        <location filename="preferencesdialog.ui" line="1117"/>
-        <location filename="preferencesdialog.ui" line="1124"/>
-        <location filename="preferencesdialog.ui" line="1131"/>
-        <location filename="preferencesdialog.ui" line="1138"/>
-        <location filename="preferencesdialog.ui" line="1145"/>
-        <location filename="preferencesdialog.ui" line="1152"/>
+        <location filename="preferencesdialog.ui" line="1055"/>
+        <location filename="preferencesdialog.ui" line="1068"/>
+        <location filename="preferencesdialog.ui" line="1081"/>
+        <location filename="preferencesdialog.ui" line="1094"/>
+        <location filename="preferencesdialog.ui" line="1107"/>
+        <location filename="preferencesdialog.ui" line="1120"/>
+        <location filename="preferencesdialog.ui" line="1133"/>
+        <location filename="preferencesdialog.ui" line="1146"/>
         <location filename="preferencesdialog.ui" line="1159"/>
-        <location filename="preferencesdialog.ui" line="1166"/>
-        <location filename="preferencesdialog.ui" line="1173"/>
-        <location filename="preferencesdialog.ui" line="1180"/>
-        <location filename="preferencesdialog.ui" line="1187"/>
-        <location filename="preferencesdialog.ui" line="1194"/>
-        <location filename="preferencesdialog.ui" line="1201"/>
-        <location filename="preferencesdialog.ui" line="1208"/>
-        <location filename="preferencesdialog.ui" line="1215"/>
-        <location filename="preferencesdialog.ui" line="1222"/>
-        <location filename="preferencesdialog.ui" line="1229"/>
-        <location filename="preferencesdialog.ui" line="1236"/>
-        <location filename="preferencesdialog.ui" line="1243"/>
+        <location filename="preferencesdialog.ui" line="1172"/>
+        <location filename="preferencesdialog.ui" line="1185"/>
+        <location filename="preferencesdialog.ui" line="1198"/>
+        <location filename="preferencesdialog.ui" line="1211"/>
+        <location filename="preferencesdialog.ui" line="1224"/>
+        <location filename="preferencesdialog.ui" line="1237"/>
         <location filename="preferencesdialog.ui" line="1250"/>
-        <location filename="preferencesdialog.ui" line="1257"/>
-        <location filename="preferencesdialog.ui" line="1264"/>
-        <location filename="preferencesdialog.ui" line="1271"/>
-        <location filename="preferencesdialog.ui" line="1278"/>
-        <location filename="preferencesdialog.ui" line="1285"/>
-        <location filename="preferencesdialog.ui" line="1292"/>
-        <location filename="preferencesdialog.ui" line="1299"/>
-        <location filename="preferencesdialog.ui" line="1306"/>
-        <location filename="preferencesdialog.ui" line="1313"/>
-        <location filename="preferencesdialog.ui" line="1320"/>
-        <location filename="preferencesdialog.ui" line="1327"/>
-        <location filename="preferencesdialog.ui" line="1334"/>
+        <location filename="preferencesdialog.ui" line="1263"/>
+        <location filename="preferencesdialog.ui" line="1276"/>
+        <location filename="preferencesdialog.ui" line="1289"/>
+        <location filename="preferencesdialog.ui" line="1302"/>
+        <location filename="preferencesdialog.ui" line="1315"/>
+        <location filename="preferencesdialog.ui" line="1328"/>
+        <location filename="preferencesdialog.ui" line="1341"/>
+        <location filename="preferencesdialog.ui" line="1354"/>
+        <location filename="preferencesdialog.ui" line="1367"/>
+        <location filename="preferencesdialog.ui" line="1380"/>
+        <location filename="preferencesdialog.ui" line="1393"/>
+        <location filename="preferencesdialog.ui" line="1406"/>
+        <location filename="preferencesdialog.ui" line="1419"/>
+        <location filename="preferencesdialog.ui" line="1432"/>
+        <location filename="preferencesdialog.ui" line="1445"/>
+        <location filename="preferencesdialog.ui" line="1458"/>
+        <location filename="preferencesdialog.ui" line="1471"/>
+        <location filename="preferencesdialog.ui" line="1484"/>
+        <location filename="preferencesdialog.ui" line="1497"/>
+        <location filename="preferencesdialog.ui" line="1510"/>
+        <location filename="preferencesdialog.ui" line="1523"/>
+        <location filename="preferencesdialog.ui" line="1536"/>
+        <location filename="preferencesdialog.ui" line="1549"/>
+        <location filename="preferencesdialog.ui" line="1562"/>
+        <location filename="preferencesdialog.ui" line="1575"/>
+        <location filename="preferencesdialog.ui" line="1588"/>
         <source>CheckBox</source>
         <translation></translation>
     </message>
@@ -10156,7 +10248,7 @@ Mode 4:
         <translation>Cesta k obsahu SD karty</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.ui" line="1349"/>
+        <location filename="preferencesdialog.ui" line="1030"/>
         <source>Recent History Size</source>
         <translation>Počet položek nedávné historie</translation>
     </message>
@@ -10211,7 +10303,7 @@ Mode 4:
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="448"/>
-        <location filename="preferencesdialog.cpp" line="752"/>
+        <location filename="preferencesdialog.cpp" line="770"/>
         <source>No joysticks found</source>
         <translation>Joystick nenalezen</translation>
     </message>
@@ -10445,7 +10537,7 @@ nutno zastavět hlasový modul</translation>
         <translation>Tisk do souboru</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="27"/>
+        <location filename="printdialog.cpp" line="28"/>
         <source>Setup for: </source>
         <translation>Nastavení: </translation>
     </message>
@@ -10531,113 +10623,113 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">Exponenciální</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="117"/>
+        <location filename="printdialog.cpp" line="129"/>
         <source>printed on: %1</source>
         <translation>vytištěno: %1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="118"/>
+        <location filename="printdialog.cpp" line="130"/>
         <source>General Model Settings</source>
         <translation>Obecná nastavení modelu</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="120"/>
-        <location filename="printdialog.cpp" line="434"/>
-        <location filename="printdialog.cpp" line="464"/>
-        <location filename="printdialog.cpp" line="496"/>
+        <location filename="printdialog.cpp" line="132"/>
+        <location filename="printdialog.cpp" line="446"/>
+        <location filename="printdialog.cpp" line="476"/>
+        <location filename="printdialog.cpp" line="508"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="121"/>
+        <location filename="printdialog.cpp" line="133"/>
         <source>EEprom Size</source>
         <translation>Velikost EEPROM</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="122"/>
+        <location filename="printdialog.cpp" line="134"/>
         <source>Timer1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="123"/>
+        <location filename="printdialog.cpp" line="135"/>
         <source>Timer2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="124"/>
+        <location filename="printdialog.cpp" line="136"/>
         <source>Protocol</source>
         <translation>Protokol</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="125"/>
+        <location filename="printdialog.cpp" line="137"/>
         <source>Pulse Polarity</source>
         <translation>Polarita pulzů</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="126"/>
+        <location filename="printdialog.cpp" line="138"/>
         <source>Throttle Trim</source>
         <translation>Trim plynu</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="126"/>
-        <location filename="printdialog.cpp" line="127"/>
-        <location filename="printdialog.cpp" line="836"/>
+        <location filename="printdialog.cpp" line="138"/>
+        <location filename="printdialog.cpp" line="139"/>
+        <location filename="printdialog.cpp" line="848"/>
         <source>Enabled</source>
         <translation>Povoleno</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="126"/>
-        <location filename="printdialog.cpp" line="127"/>
+        <location filename="printdialog.cpp" line="138"/>
+        <location filename="printdialog.cpp" line="139"/>
         <source>Disabled</source>
         <translation>Zakázáno</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="127"/>
+        <location filename="printdialog.cpp" line="139"/>
         <source>Throttle Expo</source>
         <translation>Expo plynu</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="129"/>
+        <location filename="printdialog.cpp" line="141"/>
         <source>Trim Increment</source>
         <translation>Krok trimu</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="130"/>
+        <location filename="printdialog.cpp" line="142"/>
         <source>Center Beep</source>
         <translation>Zvuk ve středové poloze</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="154"/>
+        <location filename="printdialog.cpp" line="166"/>
         <source>Flight modes Settings</source>
         <oldsource>Flight Phases Settings</oldsource>
         <translation>Nastavení letových fází</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="156"/>
+        <location filename="printdialog.cpp" line="168"/>
         <source>Fades</source>
         <translation>Přechody</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="157"/>
+        <location filename="printdialog.cpp" line="169"/>
         <source>Trims</source>
         <translation>Trimy</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="159"/>
+        <location filename="printdialog.cpp" line="171"/>
         <source>Gvars</source>
         <translation>GProm</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="162"/>
+        <location filename="printdialog.cpp" line="174"/>
         <source>Rot.Enc.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="164"/>
-        <location filename="printdialog.cpp" line="306"/>
-        <location filename="printdialog.cpp" line="359"/>
-        <location filename="printdialog.cpp" line="805"/>
-        <location filename="printdialog.cpp" line="832"/>
+        <location filename="printdialog.cpp" line="176"/>
+        <location filename="printdialog.cpp" line="318"/>
+        <location filename="printdialog.cpp" line="371"/>
+        <location filename="printdialog.cpp" line="817"/>
+        <location filename="printdialog.cpp" line="844"/>
         <source>Switch</source>
         <translation>Spínač</translation>
     </message>
@@ -10646,39 +10738,39 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">Název</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="165"/>
+        <location filename="printdialog.cpp" line="177"/>
         <source>IN</source>
         <translation>(+)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="165"/>
+        <location filename="printdialog.cpp" line="177"/>
         <source>OUT</source>
         <translation>(-)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="180"/>
-        <location filename="printdialog.cpp" line="185"/>
-        <location filename="printdialog.cpp" line="196"/>
-        <location filename="printdialog.cpp" line="207"/>
+        <location filename="printdialog.cpp" line="192"/>
+        <location filename="printdialog.cpp" line="197"/>
+        <location filename="printdialog.cpp" line="208"/>
+        <location filename="printdialog.cpp" line="219"/>
         <source>FM</source>
         <oldsource>FP</oldsource>
         <translation>LR</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="220"/>
+        <location filename="printdialog.cpp" line="232"/>
         <source>Expo/Dr Settings</source>
         <translation>Expo/Nastavení DV</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="251"/>
+        <location filename="printdialog.cpp" line="263"/>
         <source>Weight</source>
         <translation>Váha</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="255"/>
-        <location filename="printdialog.cpp" line="257"/>
-        <location filename="printdialog.cpp" line="263"/>
-        <location filename="printdialog.cpp" line="265"/>
+        <location filename="printdialog.cpp" line="267"/>
+        <location filename="printdialog.cpp" line="269"/>
+        <location filename="printdialog.cpp" line="275"/>
+        <location filename="printdialog.cpp" line="277"/>
         <source>Expo</source>
         <translation></translation>
     </message>
@@ -10687,66 +10779,66 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">Fáze</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="309"/>
-        <location filename="printdialog.cpp" line="367"/>
-        <location filename="printdialog.cpp" line="580"/>
-        <location filename="printdialog.cpp" line="627"/>
-        <location filename="printdialog.cpp" line="668"/>
-        <location filename="printdialog.cpp" line="695"/>
-        <location filename="printdialog.cpp" line="697"/>
+        <location filename="printdialog.cpp" line="321"/>
+        <location filename="printdialog.cpp" line="379"/>
+        <location filename="printdialog.cpp" line="592"/>
+        <location filename="printdialog.cpp" line="639"/>
+        <location filename="printdialog.cpp" line="680"/>
+        <location filename="printdialog.cpp" line="707"/>
+        <location filename="printdialog.cpp" line="709"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="328"/>
+        <location filename="printdialog.cpp" line="340"/>
         <source>Mixers</source>
         <translation>Mixy</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="338"/>
-        <location filename="printdialog.cpp" line="430"/>
-        <location filename="printdialog.cpp" line="460"/>
-        <location filename="printdialog.cpp" line="492"/>
-        <location filename="printdialog.cpp" line="812"/>
+        <location filename="printdialog.cpp" line="350"/>
+        <location filename="printdialog.cpp" line="442"/>
+        <location filename="printdialog.cpp" line="472"/>
+        <location filename="printdialog.cpp" line="504"/>
+        <location filename="printdialog.cpp" line="824"/>
         <source>CH</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="360"/>
+        <location filename="printdialog.cpp" line="372"/>
         <source>noTrim</source>
         <translation>Žádný trim</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="362"/>
+        <location filename="printdialog.cpp" line="374"/>
         <source>FMTrim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="364"/>
-        <location filename="printdialog.cpp" line="439"/>
-        <location filename="printdialog.cpp" line="469"/>
-        <location filename="printdialog.cpp" line="501"/>
-        <location filename="printdialog.cpp" line="872"/>
+        <location filename="printdialog.cpp" line="376"/>
+        <location filename="printdialog.cpp" line="451"/>
+        <location filename="printdialog.cpp" line="481"/>
+        <location filename="printdialog.cpp" line="513"/>
+        <location filename="printdialog.cpp" line="884"/>
         <source>Offset</source>
         <translation>Ofset</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="366"/>
+        <location filename="printdialog.cpp" line="378"/>
         <source>Diff</source>
         <translation>Dif</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="369"/>
+        <location filename="printdialog.cpp" line="381"/>
         <source> Delay(u%1:d%2)</source>
         <translation> Zpoždění(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="370"/>
+        <location filename="printdialog.cpp" line="382"/>
         <source> Slow(u%1:d%2)</source>
         <translation> Zpomalení(u%1:d%2)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="371"/>
+        <location filename="printdialog.cpp" line="383"/>
         <source>Warn</source>
         <translation>Varování</translation>
     </message>
@@ -10755,82 +10847,82 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">Fáze</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="301"/>
-        <location filename="printdialog.cpp" line="404"/>
+        <location filename="printdialog.cpp" line="313"/>
+        <location filename="printdialog.cpp" line="416"/>
         <source>DISABLED</source>
         <translation>ZAKÁZÁN</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="426"/>
+        <location filename="printdialog.cpp" line="438"/>
         <source>Limits</source>
         <translation>Limity</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="444"/>
-        <location filename="printdialog.cpp" line="474"/>
-        <location filename="printdialog.cpp" line="506"/>
-        <location filename="printdialog.cpp" line="937"/>
+        <location filename="printdialog.cpp" line="456"/>
+        <location filename="printdialog.cpp" line="486"/>
+        <location filename="printdialog.cpp" line="518"/>
+        <location filename="printdialog.cpp" line="949"/>
         <source>Min</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="449"/>
-        <location filename="printdialog.cpp" line="479"/>
-        <location filename="printdialog.cpp" line="511"/>
-        <location filename="printdialog.cpp" line="937"/>
+        <location filename="printdialog.cpp" line="461"/>
+        <location filename="printdialog.cpp" line="491"/>
+        <location filename="printdialog.cpp" line="523"/>
+        <location filename="printdialog.cpp" line="949"/>
         <source>Max</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="454"/>
-        <location filename="printdialog.cpp" line="484"/>
-        <location filename="printdialog.cpp" line="516"/>
+        <location filename="printdialog.cpp" line="466"/>
+        <location filename="printdialog.cpp" line="496"/>
+        <location filename="printdialog.cpp" line="528"/>
         <source>Invert</source>
         <translation>Invertovat</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="456"/>
-        <location filename="printdialog.cpp" line="486"/>
-        <location filename="printdialog.cpp" line="518"/>
+        <location filename="printdialog.cpp" line="468"/>
+        <location filename="printdialog.cpp" line="498"/>
+        <location filename="printdialog.cpp" line="530"/>
         <source>INV</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="456"/>
-        <location filename="printdialog.cpp" line="486"/>
-        <location filename="printdialog.cpp" line="518"/>
+        <location filename="printdialog.cpp" line="468"/>
+        <location filename="printdialog.cpp" line="498"/>
+        <location filename="printdialog.cpp" line="530"/>
         <source>NOR</source>
         <translation>---</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="551"/>
+        <location filename="printdialog.cpp" line="563"/>
         <source>Curves</source>
         <translation>Křivky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="563"/>
+        <location filename="printdialog.cpp" line="575"/>
         <source>5 Points Curves</source>
         <translation>Pěti-bodové křivky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="567"/>
-        <location filename="printdialog.cpp" line="606"/>
-        <location filename="printdialog.cpp" line="680"/>
+        <location filename="printdialog.cpp" line="579"/>
+        <location filename="printdialog.cpp" line="618"/>
+        <location filename="printdialog.cpp" line="692"/>
         <source>pt %1</source>
         <translation>bod %1</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="604"/>
+        <location filename="printdialog.cpp" line="616"/>
         <source>9 Points Curves</source>
         <translation>Devíti-bodové křivky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="749"/>
+        <location filename="printdialog.cpp" line="761"/>
         <source>Custom Switches</source>
         <translation>Virtuální spínače</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="755"/>
+        <location filename="printdialog.cpp" line="767"/>
         <source>CS</source>
         <translation>VS</translation>
     </message>
@@ -10843,177 +10935,177 @@ nutno zastavět hlasový modul</translation>
         <translation type="obsolete">Trvání %1 sec</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="778"/>
+        <location filename="printdialog.cpp" line="790"/>
         <source>Global Variables</source>
         <translation>Globální proměnné</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="784"/>
+        <location filename="printdialog.cpp" line="796"/>
         <source>GV</source>
         <translation>GP</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="802"/>
+        <location filename="printdialog.cpp" line="814"/>
         <source>Safety Switches</source>
         <translation>Bezpečnostní spínače</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="806"/>
-        <location filename="printdialog.cpp" line="873"/>
-        <location filename="printdialog.cpp" line="874"/>
-        <location filename="printdialog.cpp" line="893"/>
-        <location filename="printdialog.cpp" line="894"/>
+        <location filename="printdialog.cpp" line="818"/>
+        <location filename="printdialog.cpp" line="885"/>
+        <location filename="printdialog.cpp" line="886"/>
+        <location filename="printdialog.cpp" line="905"/>
+        <location filename="printdialog.cpp" line="906"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="829"/>
+        <location filename="printdialog.cpp" line="841"/>
         <source>Function Switches</source>
         <translation>Funkce</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="833"/>
+        <location filename="printdialog.cpp" line="845"/>
         <source>Function</source>
         <translation>Funkce</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="834"/>
+        <location filename="printdialog.cpp" line="846"/>
         <source>Parameter</source>
         <translation>Parametr</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="835"/>
+        <location filename="printdialog.cpp" line="847"/>
         <source>Repeat</source>
         <translation>Opakování</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="841"/>
+        <location filename="printdialog.cpp" line="853"/>
         <source>FSW</source>
         <translation>FS</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="870"/>
+        <location filename="printdialog.cpp" line="882"/>
         <source>Telemetry Settings</source>
         <translation>Nastavení telemetrie</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="871"/>
-        <location filename="printdialog.cpp" line="892"/>
+        <location filename="printdialog.cpp" line="883"/>
+        <location filename="printdialog.cpp" line="904"/>
         <source>Alarm 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="871"/>
-        <location filename="printdialog.cpp" line="892"/>
+        <location filename="printdialog.cpp" line="883"/>
+        <location filename="printdialog.cpp" line="904"/>
         <source>Alarm 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="872"/>
+        <location filename="printdialog.cpp" line="884"/>
         <source>Analog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="872"/>
+        <location filename="printdialog.cpp" line="884"/>
         <source>Unit</source>
         <translation>Jednotky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="872"/>
+        <location filename="printdialog.cpp" line="884"/>
         <source>Scale</source>
         <translation>Rozsah</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="873"/>
-        <location filename="printdialog.cpp" line="874"/>
-        <location filename="printdialog.cpp" line="893"/>
-        <location filename="printdialog.cpp" line="894"/>
+        <location filename="printdialog.cpp" line="885"/>
+        <location filename="printdialog.cpp" line="886"/>
+        <location filename="printdialog.cpp" line="905"/>
+        <location filename="printdialog.cpp" line="906"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="873"/>
-        <location filename="printdialog.cpp" line="874"/>
-        <location filename="printdialog.cpp" line="893"/>
-        <location filename="printdialog.cpp" line="894"/>
+        <location filename="printdialog.cpp" line="885"/>
+        <location filename="printdialog.cpp" line="886"/>
+        <location filename="printdialog.cpp" line="905"/>
+        <location filename="printdialog.cpp" line="906"/>
         <source>Condition</source>
         <translation>Podmínka</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="880"/>
+        <location filename="printdialog.cpp" line="892"/>
         <source>A%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="895"/>
+        <location filename="printdialog.cpp" line="907"/>
         <source>RSSI Alarm</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="899"/>
+        <location filename="printdialog.cpp" line="911"/>
         <source>Frsky serial protocol</source>
         <translation>Sériový protokol Frsky</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="900"/>
+        <location filename="printdialog.cpp" line="912"/>
         <source>System of units</source>
         <translation>Systém jednotek</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="901"/>
+        <location filename="printdialog.cpp" line="913"/>
         <source>Propeller blades</source>
         <translation>Počet listů vrtule</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="936"/>
+        <location filename="printdialog.cpp" line="948"/>
         <source>Telemetry Bars</source>
         <translation>Telemetrické ukazatele</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="937"/>
+        <location filename="printdialog.cpp" line="949"/>
         <source>Bar Number</source>
         <translation>Číslo ukazatele</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="937"/>
+        <location filename="printdialog.cpp" line="949"/>
         <source>Source</source>
         <translation>Zdroj</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="964"/>
+        <location filename="printdialog.cpp" line="976"/>
         <source>ODF files (*.odt);;PDF Files(*.pdf);;HTML-Files (*.htm *.html);;All Files (*)</source>
         <translation>soubor ODF (*.odt);;soubor PDF (*.pdf);;soubor HTML (*.htm *.html);;Všechny (*)</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="910"/>
-        <location filename="printdialog.cpp" line="912"/>
+        <location filename="printdialog.cpp" line="922"/>
+        <location filename="printdialog.cpp" line="924"/>
         <source>Custom Telemetry View</source>
         <translation>Vlastní zobrazení telemetrie</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="164"/>
+        <location filename="printdialog.cpp" line="176"/>
         <source>Flight mode name</source>
         <translation>Název režimu</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="281"/>
-        <location filename="printdialog.cpp" line="384"/>
+        <location filename="printdialog.cpp" line="293"/>
+        <location filename="printdialog.cpp" line="396"/>
         <source>Flight modes</source>
         <translation>Letové režimy</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="283"/>
-        <location filename="printdialog.cpp" line="386"/>
+        <location filename="printdialog.cpp" line="295"/>
+        <location filename="printdialog.cpp" line="398"/>
         <source>Flight mode</source>
         <translation>Letový režim</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="956"/>
+        <location filename="printdialog.cpp" line="968"/>
         <source>Print Document</source>
         <translation>Vytisknout dokument</translation>
     </message>
     <message>
-        <location filename="printdialog.cpp" line="964"/>
+        <location filename="printdialog.cpp" line="976"/>
         <source>Select PDF output file</source>
         <translation>Vyberte cílový PDF soubor</translation>
     </message>
