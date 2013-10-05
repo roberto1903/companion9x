@@ -1058,7 +1058,11 @@ void compareDialog::printSwitches()
         str.append("<tr>");
         color=getColor1(sw1,sw2);
         str.append(QString("<td  width=\"45%\"><font color=%1>").arg(color)+sw1+"</font></td>");
-        str.append("<td align=\"center\" width=\"10%\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
+        if (i<9) {
+          str.append("<td align=\"center\" width=\"10%\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
+        } else {
+          str.append("<td align=\"center\" width=\"10%\"><b>"+tr("CS")+('A'+(i-9))+"</b></td>");
+        }
         color=getColor2(sw1,sw2);
         str.append(QString("<td  width=\"45%\"><font color=%1>").arg(color)+sw2+"</font></td>");
         str.append("</tr>");
@@ -1119,7 +1123,7 @@ void compareDialog::printFSwitches()
       } else {
         str.append("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
       }
-      str.append(doTC(tr("CFn")+QString("%1").arg(i+1),"",true));
+      str.append(doTC(tr("CF")+QString("%1").arg(i+1),"",true));
       if (g_model2->funcSw[i].swtch.type) {
         str.append(doTC(g_model2->funcSw[i].swtch.toString(),color2));
         str.append(doTC(getFuncName(g_model2->funcSw[i].func),color2));
