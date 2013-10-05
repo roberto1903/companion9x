@@ -764,7 +764,11 @@ void printDialog::printSwitches()
     for (int i=0; i<GetEepromInterface()->getCapability(CustomSwitches); i++) {
       if (g_model->customSw[i].func) {
         str.append("<tr>");
-        str.append("<td width=\"60\" align=\"center\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
+        if (i<9) {
+          str.append("<td width=\"60\" align=\"center\"><b>"+tr("CS")+QString("%1</b></td>").arg(i+1));
+        } else {
+          str.append("<td width=\"60\" align=\"center\"><b>"+tr("CS")+('A'+(i-9))+"</b></td>");
+        }
         QString tstr = getCustomSwitchStr(&g_model->customSw[i], *g_model);
         str.append(doTC(tstr,"green"));
         str.append("</tr>");
@@ -850,7 +854,7 @@ void printDialog::printFSwitches()
     for(int i=0; i<GetEepromInterface()->getCapability(CustomFunctions); i++) {
       if (g_model->funcSw[i].swtch.type!=SWITCH_TYPE_NONE) {
           str.append("<tr>");
-          str.append(doTC(tr("FSW")+QString("%1").arg(i+1),"",true));
+          str.append(doTC(tr("CF")+QString("%1").arg(i+1),"",true));
           str.append(doTC(g_model->funcSw[i].swtch.toString(),"green"));
           str.append(doTC(getFuncName(g_model->funcSw[i].func),"green"));
           str.append(doTC(FuncParam(g_model->funcSw[i].func,g_model->funcSw[i].param,g_model->funcSw[i].paramarm, g_model->funcSw[i].adjustMode),"green"));

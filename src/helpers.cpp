@@ -864,44 +864,6 @@ void populateSwitchCB(QComboBox *b, const RawSwitch & value, unsigned long attr,
   b->setMaxVisibleItems(10);
 }
 
-//TODO: Clean up
-/* void populateGVarCB(QComboBox *b, int value, int min, int max, int pgvars)
-{
-  int gvars=0;
-  if (GetEepromInterface()->getCapability(HasVariants)) {
-    if ((GetCurrentFirmwareVariant() & GVARS_VARIANT) & (pgvars>0)) {
-      gvars=1;
-    }
-  }
-  else {
-    if (pgvars>0)
-      gvars=1;
-  }
-  b->clear();
-
-  if (gvars) {
-    for (int i=-pgvars; i<=-1; i++) {
-      int16_t gval = (int16_t)(-10000+i);
-      b->addItem(QObject::tr("-GV%1").arg(-i), gval);
-      if (value == gval)
-        b->setCurrentIndex(b->count()-1);
-    }
-  }
-  for (int i=min; i<=max; i++) {
-    b->addItem(QString::number(i, 10), i);
-    if (value == i)
-      b->setCurrentIndex(b->count()-1);
-  }
-  if (gvars) {
-    for (int i=1; i<=pgvars; i++) {
-      int16_t gval = (int16_t)(10000+i);
-      b->addItem(QObject::tr("GV%1").arg(i), gval);
-      if (value == gval)
-        b->setCurrentIndex(b->count()-1);
-    }
-  }
-}*/
-
 void populateGVCB(QComboBox *b, int value)
 {
   int selected=0;
