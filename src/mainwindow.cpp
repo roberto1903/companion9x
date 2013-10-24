@@ -964,7 +964,6 @@ QString MainWindow::FindTaranisPath()
     QString path;
     QStringList drives;
     QString eepromfile;
-    QString device;
     QString fsname;
 #if defined WIN32 || !defined __GNUC__
     foreach( QFileInfo drive, QDir::drives() ) {
@@ -990,9 +989,8 @@ QString MainWindow::FindTaranisPath()
     struct mount_entry *entry;
     entry = read_file_system_list(true); 
     while (entry != NULL) {
-      device=entry->me_devname;
-      if (!drives.contains(device)) {
-        drives.append(device);
+      if (!drives.contains(entry->me_devname)) {
+        drives.append(entry->me_devname);
         eepromfile=entry->me_mountdir;
 
         eepromfile.append("/TARANIS.BIN");
