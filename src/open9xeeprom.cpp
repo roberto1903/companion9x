@@ -198,7 +198,7 @@ class SourcesConversionTable: public ConversionTable {
         if (release21March2013)
           addConversion(RawSource(SOURCE_TYPE_TELEMETRY, 0), val++);
 
-        for (int i=1; i<TELEMETRY_SOURCES_COUNT; i++)
+        for (int i=1; i<TELEMETRY_SOURCE_ACC; i++)
           addConversion(RawSource(SOURCE_TYPE_TELEMETRY, i), val++);
       }
     }
@@ -1615,6 +1615,17 @@ class FrskyField: public StructField {
     VarioConversionTable varioConversionTable;
 };
 
+class MavlinkField: public StructField {
+  public:
+    MavlinkField(MavlinkData & mavlink, BoardEnum board, unsigned int version):
+      StructField("MavLink")
+    {
+      Append(new UnsignedField<4>(mavlink.rc_rssi_scale, "Rc_rssi_scale"));
+      Append(new UnsignedField<1>(mavlink.pc_rssi_en, "Pc_rssi_en"));
+      Append(new SpareBitsField<3>());      
+    }
+};
+
 int exportPpmDelay(int delay) { return (delay - 300) / 50; }
 int importPpmDelay(int delay) { return 300 + 50 * delay; }
 
@@ -1737,6 +1748,8 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   if ((board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) || (variant & FRSKY_VARIANT)) {
     internalField.Append(new FrskyField(modelData.frsky, board, version));
+  } else if (((board == BOARD_STOCK || board == BOARD_M128) && version >= 215) && (variant & MAVLINK_VARIANT)) {
+    internalField.Append(new MavlinkField(modelData.mavlink, board, version));
   }
 
   if (IS_TARANIS(board) && version < 215) {

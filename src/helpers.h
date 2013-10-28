@@ -50,11 +50,12 @@ void populateTimerSwitchBCB(QComboBox *b, int value, int extrafields=0);
 QString getCustomSwitchStr(CustomSwData * customSw, const ModelData & model);
 QString getProtocolStr(const int proto);
 
-#define POPULATE_SOURCES   1
-#define POPULATE_TRIMS     2
-#define POPULATE_SWITCHES  4
-#define POPULATE_GVARS     8
-#define POPULATE_TELEMETRY 16
+#define POPULATE_SOURCES       1
+#define POPULATE_TRIMS         2
+#define POPULATE_SWITCHES      4
+#define POPULATE_GVARS         8
+#define POPULATE_TELEMETRY    16
+#define POPULATE_TELEMETRYEXT 32
 
 #define GVARS_VARIANT 0x0001
 #define FRSKY_VARIANT 0x0002

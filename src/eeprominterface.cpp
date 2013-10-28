@@ -420,6 +420,113 @@ GeneralSettings::GeneralSettings()
   QSettings settings("companion9x", "companion9x");
   templateSetup = settings.value("default_channel_order", 0).toInt();
   stickMode = settings.value("default_mode", 1).toInt();
+  int profile_id = settings.value("ActiveProfile", 0).toInt();
+  if (profile_id>0) {
+    settings.beginGroup("Profiles");
+    QString profile=QString("profile%1").arg(profile_id);
+    settings.beginGroup(profile);
+    QString t_calib=settings.value("StickPotCalib","").toString();
+    int potsnum=GetEepromInterface()->getCapability(Pots);
+    if (t_calib.isEmpty()) {
+      settings.endGroup();
+      settings.endGroup();
+      return;
+    } else {
+      QString t_trainercalib=settings.value("TrainerCalib","").toString();
+      int8_t t_vBatCalib=(int8_t)settings.value("VbatCalib", vBatCalib).toInt();
+      int8_t t_currentCalib=(int8_t)settings.value("currentCalib", currentCalib).toInt();
+      int8_t t_PPM_Multiplier=(int8_t)settings.value("PPM_Multiplier", PPM_Multiplier).toInt();
+      uint8_t t_stickMode=(uint8_t)settings.value("GSStickMode", stickMode).toUInt();
+      uint8_t t_vBatWarn=(uint8_t)settings.value("vBatWarn",vBatWarn).toUInt();
+      QString t_DisplaySet=settings.value("Display","").toString();
+      QString t_BeeperSet=settings.value("Beeper","").toString();
+      QString t_HapticSet=settings.value("Haptic","").toString();
+      QString t_SpeakerSet=settings.value("Speaker","").toString();
+      QString t_CountrySet=settings.value("countryCode","").toString();
+      settings.endGroup();
+      settings.endGroup();
+
+      if ((t_calib.length()==(NUM_STICKS+potsnum)*12) && (t_trainercalib.length()==16)) {
+        QString Byte;
+        int16_t byte16;
+        bool ok;
+        for (int i=0; i<(NUM_STICKS+potsnum); i++) {
+          Byte=t_calib.mid(i*12,4);
+          byte16=(int16_t)Byte.toInt(&ok,16);
+          if (ok)
+            calibMid[i]=byte16;
+          Byte=t_calib.mid(4+i*12,4);
+          byte16=(int16_t)Byte.toInt(&ok,16);
+          if (ok)
+            calibSpanNeg[i]=byte16;
+          Byte=t_calib.mid(8+i*12,4);
+          byte16=(int16_t)Byte.toInt(&ok,16);
+          if (ok)
+            calibSpanPos[i]=byte16;
+        }
+        for (int i=0; i<4; i++) {
+          Byte=t_trainercalib.mid(i*4,4);
+          byte16=(int16_t)Byte.toInt(&ok,16);
+          if (ok)
+            trainer.calib[i]=byte16;
+        }
+        currentCalib=t_currentCalib;
+        vBatCalib=t_vBatCalib;
+        vBatWarn=t_vBatWarn;
+        PPM_Multiplier=t_PPM_Multiplier;
+        stickMode = t_stickMode;
+      }
+      if ((t_DisplaySet.length()==6) && (t_BeeperSet.length()==4) && (t_HapticSet.length()==6) && (t_SpeakerSet.length()==6)) {
+        uint8_t byte8u;
+        int8_t byte8;
+        bool ok;
+        byte8=(int8_t)t_DisplaySet.mid(0,2).toInt(&ok,16);
+        if (ok)
+          optrexDisplay=(byte8==1 ? true : false);
+        byte8u=(uint8_t)t_DisplaySet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          contrast=byte8u;
+        byte8u=(uint8_t)t_DisplaySet.mid(4,2).toUInt(&ok,16);
+        if (ok)
+          backlightBright=byte8u;
+        byte8=(int8_t)t_BeeperSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          beeperMode=(BeeperMode)byte8;
+        byte8=(int8_t)t_BeeperSet.mid(2,2).toInt(&ok,16);
+        if (ok)
+          beeperLength=byte8;
+        byte8=(int8_t)t_HapticSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          hapticMode=(BeeperMode)byte8;
+        byte8u=(uint8_t)t_HapticSet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          hapticStrength=byte8u;
+        byte8=(int8_t)t_HapticSet.mid(4,2).toInt(&ok,16);
+        if (ok)
+          hapticLength=byte8;
+        byte8u=(uint8_t)t_SpeakerSet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          speakerMode=byte8u;
+        byte8u=(uint8_t)t_SpeakerSet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          speakerPitch=byte8u;
+        byte8u=(uint8_t)t_SpeakerSet.mid(4,2).toUInt(&ok,16);
+        if (ok)
+          speakerVolume=byte8u;
+        if (t_CountrySet.length()==6) {
+          byte8u=(uint8_t)t_CountrySet.mid(0,2).toUInt(&ok,16);
+          if (ok)
+            countryCode=byte8u;
+          byte8u=(uint8_t)t_CountrySet.mid(2,2).toUInt(&ok,16);
+          if (ok)
+            imperial=byte8u;
+          QString chars=t_CountrySet.mid(4,2);
+          ttsLanguage[0]=chars[0].toAscii();
+          ttsLanguage[1]=chars[1].toAscii();
+        }      
+      }
+    }
+  }
 }
 
 ModelData::ModelData()
