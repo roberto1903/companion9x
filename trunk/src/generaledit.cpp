@@ -1265,6 +1265,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
     QString BeeperSet=settings.value("Beeper","").toString();
     QString HapticSet=settings.value("Haptic","").toString();
     QString SpeakerSet=settings.value("Speaker","").toString();
+    QString CountrySet=settings.value("countryCode","").toString();
     settings.endGroup();
     settings.endGroup();
     
@@ -1303,6 +1304,7 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       g_eeGeneral.stickMode=GSStickMode;
       uint8_t byte8u;
       int8_t byte8;
+      QString chars;
       bool ok;
       byte8=(int8_t)DisplaySet.mid(0,2).toInt(&ok,16);
       if (ok)
@@ -1337,6 +1339,17 @@ void GeneralEdit::on_calretrieve_PB_clicked()
       byte8u=(uint8_t)SpeakerSet.mid(4,2).toUInt(&ok,16);
       if (ok)
         g_eeGeneral.speakerVolume=byte8u;
+      if (CountrySet.length()==6) {
+        byte8u=(uint8_t)CountrySet.mid(0,2).toUInt(&ok,16);
+        if (ok)
+          g_eeGeneral.countryCode=byte8u;
+        byte8u=(uint8_t)CountrySet.mid(2,2).toUInt(&ok,16);
+        if (ok)
+          g_eeGeneral.imperial=byte8u;
+        chars=CountrySet.mid(4,2);
+        g_eeGeneral.ttsLanguage[0]=chars[0].toAscii();
+        g_eeGeneral.ttsLanguage[1]=chars[1].toAscii();
+      }
     } else {
       QMessageBox::critical(this, tr("Warning"), tr("Wrong data in profile, hw related parameters were not retrieved"));
     }
@@ -1392,6 +1405,7 @@ void GeneralEdit::on_calstore_PB_clicked()
     settings.setValue("Beeper",QString("%1%2").arg(((uint8_t)g_eeGeneral.beeperMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.beeperLength, 2, 16, QChar('0')));
     settings.setValue("Haptic",QString("%1%2%3").arg(((uint8_t)g_eeGeneral.hapticMode), 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticStrength, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.hapticLength, 2, 16, QChar('0')));
     settings.setValue("Speaker",QString("%1%2%3").arg((uint8_t)g_eeGeneral.speakerMode, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.speakerPitch, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.speakerVolume, 2, 16, QChar('0')));
+    settings.setValue("countryCode",QString("%1%2%3").arg((uint8_t)g_eeGeneral.countryCode, 2, 16, QChar('0')).arg((uint8_t)g_eeGeneral.imperial, 2, 16, QChar('0')).arg(g_eeGeneral.ttsLanguage));
     settings.endGroup();
     settings.endGroup();
     QMessageBox::information(this, "companion9x", tr("Calibration and HW parameters saved."));

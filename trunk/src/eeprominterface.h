@@ -704,6 +704,14 @@ class FrSkyData {
     void clear() { memset(this, 0, sizeof(FrSkyData)); rssiAlarms[0].clear(2, 45); rssiAlarms[1].clear(3, 42); varioSource = 2/*VARIO*/; }
 };
 
+class MavlinkData {
+  public:
+    MavlinkData() { clear();}
+    unsigned int rc_rssi_scale;
+    unsigned int pc_rssi_en;
+    void clear() { memset(this, 0, sizeof(MavlinkData)); }
+};
+
 enum TimerMode {
   TMRMODE_OFF=0,
   TMRMODE_ABS,
@@ -801,7 +809,8 @@ class ModelData {
     uint8_t  gvsource[5];
     uint8_t  bt_telemetry;
     uint8_t  numVoice;
-    /* FrSky */    
+    MavlinkData mavlink;
+    /* FrSky */
     FrSkyData frsky;
     FrSkyErAlarmData frskyalarms[8];
     uint8_t customdisplay[6];

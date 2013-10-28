@@ -210,7 +210,15 @@ void preferencesDialog::firmwareChanged()
   QString stamp;
   stamp.append(variant.firmware->stamp);
   ui->fw_dnld->setEnabled(!variant.firmware->getUrl(variant.id).isNull());
-
+  QString url=variant.firmware->getUrl(variant.id);
+  // B-Plan 
+  if (false) {
+    ui->CPU_ID_LE->show();
+    ui->CPU_ID_LABEL->show();
+  } else {
+    ui->CPU_ID_LE->hide();
+    ui->CPU_ID_LABEL->hide();
+  }
   QSettings settings("companion9x", "companion9x");
   settings.beginGroup("FwRevisions");
   int fwrev = settings.value(variant.id, -1).toInt();
@@ -245,6 +253,7 @@ void preferencesDialog::writeValues()
   
   settings.setValue("default_channel_order", ui->channelorderCB->currentIndex());
   settings.setValue("default_mode", ui->stickmodeCB->currentIndex());
+  settings.setValue("cpu_id", ui->CPU_ID_LE->text());
   settings.setValue("startup_check_companion9x", ui->startupCheck_companion9x->isChecked());
   settings.setValue("startup_check_fw", ui->startupCheck_fw->isChecked());
   settings.setValue("rename_firmware_files", ui->renameFirmware->isChecked());
@@ -390,6 +399,7 @@ void preferencesDialog::initSettings()
   ui->startupCheck_fw->setChecked(settings.value("startup_check_fw", true).toBool());
   ui->burnFirmware->setChecked(settings.value("burnFirmware", true).toBool());
   ui->simuSW->setChecked(settings.value("simuSW", false).toBool());
+  ui->CPU_ID_LE->setText(settings.value("cpu_id", "").toString());
   QString Path=settings.value("libraryPath", "").toString();
   if (QDir(Path).exists()) {
     ui->libraryPath->setText(Path);

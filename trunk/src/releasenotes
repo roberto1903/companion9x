@@ -1,3 +1,10 @@
+<h2>Version 1.50</h2>
+<ul>
+<li>solved issue with taranis radio with some linux distributions</li>
+<li>blank eeprom created using a radio profile that holds calibration data, will contain calibration data from the profile</li>
+<li>new opentx compilation server (ip address changed to new fiber connection)</li>
+</ul>
+
 <h2>Version 1.49</h2>
 <ul>
 <li>Stack usage optimizations</li>
