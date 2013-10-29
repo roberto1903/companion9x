@@ -1622,7 +1622,10 @@ class MavlinkField: public StructField {
     {
       Append(new UnsignedField<4>(mavlink.rc_rssi_scale, "Rc_rssi_scale"));
       Append(new UnsignedField<1>(mavlink.pc_rssi_en, "Pc_rssi_en"));
-      Append(new SpareBitsField<3>());      
+      Append(new SpareBitsField<3>());
+      Append(new SpareBitsField<8>());
+      Append(new SpareBitsField<8>());
+      Append(new SpareBitsField<8>());
     }
 };
 
