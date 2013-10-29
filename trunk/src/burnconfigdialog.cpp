@@ -90,7 +90,7 @@ void burnConfigDialog::getSettings()
 #elif defined __APPLE__
     avrLoc   = settings.value("avrdude_location", "/usr/local/bin/avrdude").toString();
     sambaLoc = settings.value("samba_location", "/usr/local/bin/sam-ba").toString();
-    dfuLoc = settings.value("dfu_location", QFileInfo("/usr/local/bin/dfu-util").absoluteFilePath()).toString();
+    dfuLoc = settings.value("dfu_location", QFileInfo("/opt/local/bin/dfu-util").absoluteFilePath()).toString();
 #else
     avrLoc   = settings.value("avrdude_location", "/usr/bin/avrdude").toString();
     sambaLoc = settings.value("samba_location", "/usr/bin/sam-ba").toString();
