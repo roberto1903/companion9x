@@ -164,8 +164,14 @@ void MainWindow::displayWarnings()
   QSettings settings("companion9x", "companion9x");
   int warnId=settings.value("warningId", 0 ).toInt();
   if (warnId<WARNING_ID && warnId!=0) {
-    QMessageBox::warning(this, "companion9x", WARNING);
-    int res = QMessageBox::question(this, "companion9x",tr("Display previous warning again at startup ?"),QMessageBox::Yes | QMessageBox::No);
+    int res=0;
+    if (WARNING_LEVEL>0) {
+      QMessageBox::warning(this, "companion9x", WARNING);
+      res = QMessageBox::question(this, "companion9x",tr("Display previous warning again at startup ?"),QMessageBox::Yes | QMessageBox::No);
+    } else {
+      QMessageBox::about(this, "companion9x", WARNING);
+      res = QMessageBox::question(this, "companion9x",tr("Display previous message again at startup ?"),QMessageBox::Yes | QMessageBox::No);
+    }
     if (res == QMessageBox::No) {
       settings.setValue("warningId", WARNING_ID);
     }
