@@ -519,7 +519,7 @@ void preferencesDialog::on_fw_dnld_clicked()
 void preferencesDialog::on_voice_dnld_clicked()
 {
   ui->ProfSave_PB->setEnabled(true);
-  QString url="http://85.18.253.250/voices/";
+  QString url="http://93.51.182.154/voices/";
   FirmwareVariant variant = getFirmwareVariant();
   url.append(QString("%1/%2/").arg(variant.firmware->id).arg(ui->voiceCombo->currentText()));
   QDesktopServices::openUrl(url);
