@@ -52,13 +52,13 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
       }
     } else {
       if(wTitle.isEmpty())
-          setWindowTitle(getProgrammer() + tr(" result"));
+          setWindowTitle(getProgrammer() + " " + tr("result"));
       else
           setWindowTitle(getProgrammer() + " - " + wTitle);
       QFile exec;
       winTitle=wTitle;
       if (!(exec.exists(prog))) {
-        QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" executable not found"));
+        QMessageBox::critical(this, "companion9x", getProgrammer() + " " + tr("executable not found"));
         closeOpt = AVR_DIALOG_FORCE_CLOSE;
         QTimer::singleShot(0, this, SLOT(forceClose()));
       } else {
@@ -384,12 +384,12 @@ void avrOutputDialog::doFinished(int code=0)
     
     if (code) {
       ui->checkBox->setChecked(true);
-      addText("\n" + getProgrammer() + tr(" done - exit code %1").arg(code));
+      addText("\n" + getProgrammer() + " " + tr("done - exit code %1").arg(code));
     } else if (hasErrors) {
       ui->checkBox->setChecked(true);
-      addText("\n" + getProgrammer() + tr(" done with errors"));
+      addText("\n" + getProgrammer() + " " + tr("done with errors"));
     } else if (!cmdLine.isEmpty()) {
-      addText("\n" + getProgrammer() + tr(" done - SUCCESSFUL"));
+      addText("\n" + getProgrammer() + " " + tr("done - SUCCESSFUL"));
     } else {
       addText(tr("done - SUCCESSFUL"));
     }
@@ -416,9 +416,9 @@ void avrOutputDialog::doFinished(int code=0)
         if (hasErrors || code) {
           if (!cmdLine.isEmpty()) {
             if (getProgrammer()!="AVRDUDE") {
-               QMessageBox::critical(this, "companion9x", getProgrammer() + tr(" did not finish correctly"));
+               QMessageBox::critical(this, "companion9x", getProgrammer() + " " + tr("did not finish correctly"));
             } else {
-              int res = QMessageBox::question(this, "companion9x",getProgrammer() + tr(" did not finish correctly!\nDo you want some help ?"),QMessageBox::Yes | QMessageBox::No);
+              int res = QMessageBox::question(this, "companion9x",getProgrammer() + " " + tr("did not finish correctly!\nDo you want some help ?"),QMessageBox::Yes | QMessageBox::No);
               if (res != QMessageBox::No) {
                 errorWizard();
               }
@@ -430,7 +430,7 @@ void avrOutputDialog::doFinished(int code=0)
         } else {
           if (!cmdLine.isEmpty()) {
             ui->progressBar->setValue(100);
-            QMessageBox::information(this, "companion9x", getProgrammer() + tr(" finished correctly"));
+            QMessageBox::information(this, "companion9x", getProgrammer() + " " + tr("finished correctly"));
             accept();
           } else {
             QMessageBox::information(this, "companion9x", tr("Copy finished correctly"));
@@ -449,7 +449,7 @@ void avrOutputDialog::doFinished(int code=0)
 void avrOutputDialog::doProcessStarted()
 {
     addText(HLINE_SEPARATOR "\n");
-    addText(tr("Started ") + getProgrammer() + "\n");
+    addText(tr("Started") + " " + getProgrammer() + "\n");
     addText(cmdLine);
     addText("\n" HLINE_SEPARATOR "\n");
 }
