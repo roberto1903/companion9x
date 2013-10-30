@@ -1751,7 +1751,8 @@ Open9xModelDataNew::Open9xModelDataNew(ModelData & modelData, BoardEnum board, u
 
   if ((board != BOARD_STOCK && (board != BOARD_M128 || version < 215)) || (variant & FRSKY_VARIANT)) {
     internalField.Append(new FrskyField(modelData.frsky, board, version));
-  } else if (((board == BOARD_STOCK || board == BOARD_M128) && version >= 215) && (variant & MAVLINK_VARIANT)) {
+  }
+  else if ((board == BOARD_STOCK || board == BOARD_M128) && (variant & MAVLINK_VARIANT)) {
     internalField.Append(new MavlinkField(modelData.mavlink, board, version));
   }
 

@@ -22,38 +22,38 @@
 #include "eepromimportexport.h"
 #include <qbytearray.h>
 
-#define GVARS_VARIANT 0x0001
-#define FRSKY_VARIANT 0x0002
-#define POS3_VARIANT 0x0004
-#define MAVLINK_VARIANT 0x0008
-#define M128_VARIANT  0x8000
+#define GVARS_VARIANT          0x0001
+#define FRSKY_VARIANT          0x0002
+#define POS3_VARIANT           0x0004
+#define MAVLINK_VARIANT        0x0008
+#define M128_VARIANT           0x8000
 
-#define SIMU_STOCK_VARIANTS      (GVARS_VARIANT|FRSKY_VARIANT)
-#define SIMU_M128_VARIANTS       (M128_VARIANT|SIMU_STOCK_VARIANTS)
-#define SIMU_GRUVIN9X_VARIANTS   (0)
-#define SIMU_ARM_VARIANTS        (0)
+#define SIMU_STOCK_VARIANTS    (GVARS_VARIANT|FRSKY_VARIANT)
+#define SIMU_M128_VARIANTS     (M128_VARIANT|SIMU_STOCK_VARIANTS)
+#define SIMU_GRUVIN9X_VARIANTS (0)
+#define SIMU_ARM_VARIANTS      (0)
 
-#define O9X_MAX_TIMERS     2
-#define O9X_MAX_PHASES     5
-#define O9X_MAX_MIXERS     32
-#define O9X_MAX_EXPOS      14
-#define O9X_NUM_CHNOUT     16 // number of real output channels CH1-CH16
-#define O9X_NUM_CSW        12 // number of custom switches
-#define O9X_NUM_FSW        16 // number of functions assigned to switches
-#define O9X_MAX_CURVES     8
-#define O9X_NUM_POINTS     (112-O9X_MAX_CURVES)
-#define O9X_MAX_GVARS      5
+#define O9X_MAX_TIMERS         2
+#define O9X_MAX_PHASES         5
+#define O9X_MAX_MIXERS         32
+#define O9X_MAX_EXPOS          14
+#define O9X_NUM_CHNOUT         16 // number of real output channels CH1-CH16
+#define O9X_NUM_CSW            12 // number of custom switches
+#define O9X_NUM_FSW            16 // number of functions assigned to switches
+#define O9X_MAX_CURVES         8
+#define O9X_NUM_POINTS         (112-O9X_MAX_CURVES)
+#define O9X_MAX_GVARS          5
 
-#define O9X_ARM_MAX_PHASES  9
-#define O9X_ARM_MAX_MIXERS  64
-#define O9X_ARM_MAX_EXPOS   32
-#define O9X_ARM_NUM_CHNOUT  32 // number of real output channels CH1-CH16
-#define O9X_ARM_NUM_CSW     32 // number of custom switches
-#define O9X_ARM_NUM_FSW     32 // number of functions assigned to switches
-#define O9X_ARM_MAX_CURVES  16
-#define O9X_ARM_NUM_POINTS  512
-#define O9X_ARM_MAX_CSFUNCOLD 13
-#define O9X_ARM_MAX_CSFUNC 15
+#define O9X_ARM_MAX_PHASES     9
+#define O9X_ARM_MAX_MIXERS     64
+#define O9X_ARM_MAX_EXPOS      32
+#define O9X_ARM_NUM_CHNOUT     32 // number of real output channels CH1-CH16
+#define O9X_ARM_NUM_CSW        32 // number of custom switches
+#define O9X_ARM_NUM_FSW        32 // number of functions assigned to switches
+#define O9X_ARM_MAX_CURVES     16
+#define O9X_ARM_NUM_POINTS     512
+#define O9X_ARM_MAX_CSFUNCOLD  13
+#define O9X_ARM_MAX_CSFUNC     15
 
 class Open9xGeneralDataNew: public TransformedField {
   public:
