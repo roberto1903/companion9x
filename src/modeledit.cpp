@@ -5989,7 +5989,13 @@ void ModelEdit::fswPaste()
     FuncSwData *fsw = &g_model.funcSw[selectedFunction];
     memcpy(fsw, fswData.mid(0, sizeof(FuncSwData)).constData(), sizeof(FuncSwData));
     updateSettings();
-    tabCustomFunctions();
+    switchEditLock = true;
+    fswtchSwtch[selectedFunction]->clear();
+    fswtchFunc[selectedFunction]->clear();
+    populateSwitchCB(fswtchSwtch[selectedFunction], g_model.funcSw[selectedFunction].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
+    populateFuncCB(fswtchFunc[selectedFunction], g_model.funcSw[selectedFunction].func);
+    switchEditLock = false;
+    refreshCustomFunction(selectedFunction);
   }
 }
 
@@ -5997,7 +6003,13 @@ void ModelEdit::fswDelete()
 {
   g_model.funcSw[selectedFunction].clear();
   updateSettings();
-  tabCustomFunctions();
+  switchEditLock = true;
+  fswtchSwtch[selectedFunction]->clear();
+  fswtchFunc[selectedFunction]->clear();
+  populateSwitchCB(fswtchSwtch[selectedFunction], g_model.funcSw[selectedFunction].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
+  populateFuncCB(fswtchFunc[selectedFunction], g_model.funcSw[selectedFunction].func);
+  switchEditLock = false;
+  refreshCustomFunction(selectedFunction);
 }
 
 void ModelEdit::fswCopy()
