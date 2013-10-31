@@ -1864,7 +1864,7 @@ Open9xGeneralDataNew::Open9xGeneralDataNew(GeneralSettings & generalData, BoardE
   internalField.Append(new SpareBitsField<1>());
 
   internalField.Append(new UnsignedField<8>(generalData.inactivityTimer));
-  if (IS_STOCK(board) && version >= 215) {
+  if (version >= 215 || (!IS_ARM(board) && version >= 213)) {
     internalField.Append(new UnsignedField<3>(generalData.mavbaud));
   } else {
     internalField.Append(new BoolField<1>(generalData.throttleReversed));
