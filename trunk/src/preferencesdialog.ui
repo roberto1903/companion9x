@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>685</width>
+    <width>734</width>
     <height>710</height>
    </rect>
   </property>
@@ -946,7 +946,7 @@ May be different from firmware language</string>
       <widget class="QComboBox" name="downloadVerCB"/>
      </item>
      <item row="1" column="0" colspan="2">
-      <widget class="QLineEdit" name="CPU_ID_LE"/>
+      <widget class="QLineEdit" name="CUSTOM_ID_LE"/>
      </item>
     </layout>
    </item>
@@ -982,9 +982,9 @@ May be different from firmware language</string>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="CPU_ID_LABEL">
+      <widget class="QLabel" name="CUSTOM_ID_LABEL">
        <property name="text">
-        <string>Processor ID</string>
+        <string>Server access code</string>
        </property>
       </widget>
      </item>
