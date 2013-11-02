@@ -687,47 +687,55 @@ Mode 4:
     <message>
         <location line="+474"/>
         <source>Readonly Unlock</source>
-        <translation type="unfinished"></translation>
+        <translation>Upphäv skrivskyddet</translation>
     </message>
     <message>
         <location line="+73"/>
         <source>SC</source>
-        <translation type="unfinished">SC</translation>
+        <translatorcomment>SC</translatorcomment>
+        <translation>SC</translation>
     </message>
     <message>
         <location line="+62"/>
         <source>SE</source>
-        <translation type="unfinished">SE</translation>
+        <translatorcomment>SE</translatorcomment>
+        <translation>SE</translation>
     </message>
     <message>
         <location line="+295"/>
         <source>SA</source>
-        <translation type="unfinished">SA</translation>
+        <translatorcomment>SA</translatorcomment>
+        <translation>SA</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SF</source>
-        <translation type="unfinished">SF</translation>
+        <translatorcomment>SF</translatorcomment>
+        <translation>SF</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SH</source>
-        <translation type="unfinished">SH</translation>
+        <translatorcomment>SH</translatorcomment>
+        <translation>SH</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SD</source>
-        <translation type="unfinished">SD</translation>
+        <translatorcomment>SD</translatorcomment>
+        <translation>SD</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>SB</source>
-        <translation type="unfinished">SB</translation>
+        <translatorcomment>SB</translatorcomment>
+        <translation>SB</translation>
     </message>
     <message>
         <location line="+65"/>
         <source>SG</source>
-        <translation type="unfinished">SG</translation>
+        <translatorcomment>SG</translatorcomment>
+        <translation>SG</translation>
     </message>
     <message>
         <location line="+65"/>
@@ -1377,18 +1385,18 @@ Vill du ladda ned den nya versionen nu ?</translation>
     <message>
         <location line="-87"/>
         <source>Display previous message again at startup ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa meddelandet när programmet startas om?</translation>
     </message>
     <message>
         <location line="+180"/>
         <source>Compilation server temporary failure, try later</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillfälligt fel på byggservern. Försök igen senare</translation>
     </message>
     <message>
         <location line="+6"/>
         <location line="+40"/>
         <source>Compilation server requires registration, please check opentx web site</source>
-        <translation type="unfinished"></translation>
+        <translation>Du måste ha registrerat dig för att använda byggservern. Läs mer på websidan för openTX.</translation>
     </message>
     <message>
         <location line="+88"/>
@@ -4166,7 +4174,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location line="+1054"/>
         <source>CF%1</source>
-        <translation type="unfinished"></translation>
+        <translation>SF%1</translation>
     </message>
     <message>
         <location line="+877"/>
@@ -6651,12 +6659,12 @@ Gasen reverseras om alternativet väljs. Tomgång ligger då uppåt. Trim och ga
     <message>
         <location line="+4"/>
         <source>SWR</source>
-        <translation type="unfinished"></translation>
+        <translation>SWR</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>RSSI</source>
-        <translation type="unfinished">RSSI</translation>
+        <translation>RSSI</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -7104,7 +7112,7 @@ eeprom-storleken är 4096, men enbart den första hälften används</translation
     <message>
         <location line="+78"/>
         <source>Use FrSky Taranis sticks in a 9X/9XR</source>
-        <translation type="unfinished"></translation>
+        <translation>Taranis-spakar monterade i 9X/9XR</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -7165,7 +7173,11 @@ Kontrollera dina Inställningar.</translation>
 We are really sensible to that!
 
 The openTX/C9X Team.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tack för alla donationer, vänliga meddelanden och goda råd angående finansieringsmodellen för openTX/Companion9x.
+
+Vi uppskattar ert stöd!
+
+Gruppen bakom  openTX/C9X.</translation>
     </message>
 </context>
 <context>
@@ -8122,7 +8134,7 @@ m2560 för v4.1-kort</translation>
     <message>
         <location line="+34"/>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>SF</translation>
     </message>
     <message>
         <location line="+84"/>
@@ -8944,17 +8956,17 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
     <message>
         <location line="+88"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="logsdialog.cpp" line="+22"/>
@@ -8979,7 +8991,7 @@ Tryck på Avbryt för att avburyta kalibreringen</translation>
     <message>
         <location line="+95"/>
         <source>The selected logfile contains %1 invalid lines out of  %2 total lines</source>
-        <translation type="unfinished"></translation>
+        <translation>%1  rader av %2 i logfilen är felaktiga</translation>
     </message>
     <message>
         <location filename="logsdialog.ui" line="+24"/>
@@ -9839,7 +9851,7 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <location line="+929"/>
         <source>Processor ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Processor-ID</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -10192,7 +10204,7 @@ Får skilja från språket för mjukvaran</translation>
     <message>
         <location line="+12"/>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>SF</translation>
     </message>
     <message>
         <location line="+29"/>
