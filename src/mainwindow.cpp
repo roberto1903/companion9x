@@ -302,19 +302,19 @@ void MainWindow::updateDownloaded()
 
 void MainWindow::downloadLatestFW(FirmwareInfo * firmware, const QString & firmwareId)
 {
-    QString url, ext, cpuid;
+    QString url, ext, customid;
     QSettings settings("companion9x", "companion9x");
     url = firmware->getUrl(firmwareId);
-    cpuid=settings.value("cpuid","").toString();
+    customid=settings.value("custom_id","").toString();
     ext = url.mid(url.lastIndexOf("."));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + firmwareId + ext);
     if (!fileName.isEmpty()) {
       downloadedFW = firmwareId;
       needRename=true;
       downloadedFWFilename = fileName;
-      if (!cpuid.isEmpty()) {
-        url.append("&cpuid=");
-        url.append(cpuid);
+      if (!customid.isEmpty()) {
+        url.append("&customid=");
+        url.append(customid);
       }
       settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());
       downloadDialog * dd = new downloadDialog(this, url, fileName);
@@ -443,7 +443,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     check1done = true;
     bool download = false;
     bool ignore = false;
-    QString cpuid;
+    QString customid;
     
     if(check1done && check2done && downloadDialog_forWait) {
       downloadDialog_forWait->close();
@@ -451,7 +451,7 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
     }
     
     QSettings settings("companion9x", "companion9x");
-    cpuid=settings.value("cpuid","").toString();
+    customid=settings.value("custom_id","").toString();
     QByteArray qba = reply->readAll();
     int i = qba.indexOf("SVN_VERS");
     int warning = qba.indexOf("WARNING");
@@ -572,9 +572,9 @@ void MainWindow::reply1Finished(QNetworkReply * reply)
             fileName = QFileDialog::getSaveFileName(this, tr("Save As"), settings.value("lastFlashDir").toString() + "/" + fwToUpdate + ext);
           }
           if (!fileName.isEmpty()) {
-            if (!cpuid.isEmpty()) {
-              url.append("&cpuid=");
-              url.append(cpuid);
+            if (!customid.isEmpty()) {
+              url.append("&customid=");
+              url.append(customid);
             }              
             downloadedFWFilename = fileName;
             settings.setValue("lastFlashDir", QFileInfo(fileName).dir().absolutePath());

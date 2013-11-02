@@ -3248,7 +3248,15 @@ void ModelEdit::refreshCustomFunction(int i, bool modified)
     fswtchParamArmT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_FILE_PARAM);
     fswtchEnable[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_ENABLE);
     if (!(widgetsMask & CUSTOM_FUNCTION_ENABLE)) fswtchEnable[i]->setChecked(false);
-    fswtchRepeat[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_REPEAT);
+    if (widgetsMask & CUSTOM_FUNCTION_REPEAT) {
+      bool sel=switchEditLock;
+      if (!sel) switchEditLock = true;
+      populateRepeatCB(fswtchRepeat[i], g_model.funcSw[i].repeatParam);
+      if (!sel) switchEditLock = false;
+      fswtchRepeat[i]->setVisible(true);
+    } else {
+      fswtchRepeat[i]->setVisible(false);
+    }
     fswtchGVmode[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_GV_MODE);
 #ifdef PHONON
     playBT[i]->setVisible(widgetsMask & CUSTOM_FUNCTION_PLAY);
@@ -5994,8 +6002,8 @@ void ModelEdit::fswPaste()
     fswtchFunc[selectedFunction]->clear();
     populateSwitchCB(fswtchSwtch[selectedFunction], g_model.funcSw[selectedFunction].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
     populateFuncCB(fswtchFunc[selectedFunction], g_model.funcSw[selectedFunction].func);
-    switchEditLock = false;
     refreshCustomFunction(selectedFunction);
+    switchEditLock = false;
   }
 }
 
@@ -6008,8 +6016,8 @@ void ModelEdit::fswDelete()
   fswtchFunc[selectedFunction]->clear();
   populateSwitchCB(fswtchSwtch[selectedFunction], g_model.funcSw[selectedFunction].swtch, POPULATE_MSWITCHES|POPULATE_ONOFF);
   populateFuncCB(fswtchFunc[selectedFunction], g_model.funcSw[selectedFunction].func);
-  switchEditLock = false;
   refreshCustomFunction(selectedFunction);
+  switchEditLock = false;
 }
 
 void ModelEdit::fswCopy()
