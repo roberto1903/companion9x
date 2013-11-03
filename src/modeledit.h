@@ -70,6 +70,7 @@ private:
     int selectedFunction;
     QDoubleSpinBox  * cswitchValue[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchOffset[C9X_NUM_CSW];
+    QTimeEdit  * cswitchTOffset[C9X_NUM_CSW];
     QComboBox * cswitchAnd[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchDuration[C9X_NUM_CSW];
     QDoubleSpinBox  * cswitchDelay[C9X_NUM_CSW];
