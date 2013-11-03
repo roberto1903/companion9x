@@ -2441,18 +2441,35 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource1[i]->setVisible(true);
         cswitchSource2[i]->setVisible(false);
         cswitchValue[i]->setVisible(false);
-        cswitchOffset[i]->setVisible(true);
         populateSourceCB(cswitchSource1[i], source, POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
-        cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
-        cswitchOffset[i]->setSingleStep(source.getStep(g_model));
-        if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
-          cswitchOffset[i]->setMinimum(source.getStep(g_model)*-127);
-          cswitchOffset[i]->setMaximum(source.getStep(g_model)*127);
-          cswitchOffset[i]->setValue(source.getStep(g_model)*g_model.customSw[i].val2);
+        if (source.type==SOURCE_TYPE_TELEMETRY && (source.index==1 || source.index==2)) {
+          cswitchTOffset[i]->setVisible(true);
+          cswitchOffset[i]->setVisible(false);
+          if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
+            int value=source.getStep(g_model)*127;
+            cswitchTOffset[i]->setMaximumTime(QTime(0,value/60,value%60));
+            value=source.getStep(g_model)*g_model.customSw[i].val2;
+            cswitchTOffset[i]->setTime(QTime(0,value/60,value%60));
+          } else {
+            int value=source.getMax(g_model);
+            cswitchTOffset[i]->setMaximumTime(QTime(0,value/60,value%60));
+            value=source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model);
+            cswitchTOffset[i]->setTime(QTime(0,value/60,value%60));
+          }
         } else {
-          cswitchOffset[i]->setMinimum(source.getMin(g_model));
-          cswitchOffset[i]->setMaximum(source.getMax(g_model));
-          cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+          cswitchTOffset[i]->setVisible(false);
+          cswitchOffset[i]->setVisible(true);
+          cswitchOffset[i]->setDecimals(source.getDecimals(g_model));
+          cswitchOffset[i]->setSingleStep(source.getStep(g_model));
+          if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
+            cswitchOffset[i]->setMinimum(source.getStep(g_model)*-127);
+            cswitchOffset[i]->setMaximum(source.getStep(g_model)*127);
+            cswitchOffset[i]->setValue(source.getStep(g_model)*g_model.customSw[i].val2);
+          } else {
+            cswitchOffset[i]->setMinimum(source.getMin(g_model));
+            cswitchOffset[i]->setMaximum(source.getMax(g_model));
+            cswitchOffset[i]->setValue(source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model));
+          }
         }
         break;
       case CS_FAMILY_VBOOL:
@@ -2460,6 +2477,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource2[i]->setVisible(true);
         cswitchValue[i]->setVisible(false);
         cswitchOffset[i]->setVisible(false);
+        cswitchTOffset[i]->setVisible(false);
         populateSwitchCB(cswitchSource1[i], RawSwitch(g_model.customSw[i].val1));
         populateSwitchCB(cswitchSource2[i], RawSwitch(g_model.customSw[i].val2));
         break;
@@ -2468,6 +2486,7 @@ void ModelEdit::setSwitchWidgetVisibility(int i)
         cswitchSource2[i]->setVisible(true);
         cswitchValue[i]->setVisible(false);
         cswitchOffset[i]->setVisible(false);
+        cswitchTOffset[i]->setVisible(false);
         populateSourceCB(cswitchSource1[i], RawSource(g_model.customSw[i].val1), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         populateSourceCB(cswitchSource2[i], RawSource(g_model.customSw[i].val2), POPULATE_SOURCES | (GetEepromInterface()->getCapability(ExtraTrims) ? POPULATE_TRIMS : 0) | POPULATE_SWITCHES | POPULATE_TELEMETRY | (GetEepromInterface()->getCapability(GvarsInCS) ? POPULATE_GVARS : 0));
         break;
@@ -2577,6 +2596,13 @@ void ModelEdit::tabCustomSwitches()
         connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
         ui->gridLayout_21->addWidget(cswitchOffset[i],i+1,3);
         cswitchOffset[i]->setVisible(false);
+        cswitchTOffset[i] = new QTimeEdit(this);
+        cswitchTOffset[i]->setProperty("index",i);
+        cswitchTOffset[i]->setAccelerated(true);
+        cswitchTOffset[i]->setDisplayFormat("mm:ss");
+        connect(cswitchTOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+        ui->gridLayout_21->addWidget(cswitchTOffset[i],i+1,3);
+        cswitchTOffset[i]->setVisible(false);
         cswitchAnd[i] = new QComboBox(this);
         cswitchAnd[i]->setProperty("index",i);
         connect(cswitchAnd[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
@@ -2648,6 +2674,13 @@ void ModelEdit::tabCustomSwitches()
           connect(cswitchOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
           ui->gridLayout_22->addWidget(cswitchOffset[i],i-15,3);
           cswitchOffset[i]->setVisible(false);
+          cswitchTOffset[i] = new QTimeEdit(this);
+          cswitchTOffset[i]->setProperty("index",i);
+          cswitchTOffset[i]->setAccelerated(true);
+          cswitchTOffset[i]->setDisplayFormat("mm:ss");
+          connect(cswitchTOffset[i],SIGNAL(editingFinished()),this,SLOT(customSwitchesEdited()));
+          ui->gridLayout_22->addWidget(cswitchTOffset[i],i-15,3);
+          cswitchTOffset[i]->setVisible(false);
           cswitchAnd[i] = new QComboBox(this);
           cswitchAnd[i]->setProperty("index",i);
           connect(cswitchAnd[i],SIGNAL(currentIndexChanged(int)),this,SLOT(customSwitchesEdited()));
@@ -2929,12 +2962,26 @@ void ModelEdit::customSwitchesEdited()
           setSwitchWidgetVisibility(i);
        } else {
           source=RawSource(g_model.customSw[i].val1);
-          if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
-            g_model.customSw[i].val2 = (cswitchOffset[i]->value()/source.getStep(g_model));
-            cswitchOffset[i]->setValue(g_model.customSw[i].val2*source.getStep(g_model));
+          if (source.type==SOURCE_TYPE_TELEMETRY && (source.index==1 || source.index==2)) {
+            if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
+              int value=cswitchTOffset[i]->time().minute()*60+cswitchTOffset[i]->time().second();
+              g_model.customSw[i].val2 = (value/source.getStep(g_model));
+              value=g_model.customSw[i].val2*source.getStep(g_model);
+              cswitchTOffset[i]->setTime(QTime(0,value/60,value%60));
+            } else {
+              int value=cswitchTOffset[i]->time().minute()*60+cswitchTOffset[i]->time().second();
+              g_model.customSw[i].val2 = ((value-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+              value=source.getStep(g_model)*(g_model.customSw[i].val2+source.getRawOffset(g_model))+source.getOffset(g_model);
+              cswitchTOffset[i]->setTime(QTime(0,value/60,value%60));
+            }
           } else {
-            g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
-            cswitchOffset[i]->setValue((g_model.customSw[i].val2 +source.getRawOffset(g_model))*source.getStep(g_model)+source.getOffset(g_model));            
+            if (g_model.customSw[i].func>CS_FN_ELESS && g_model.customSw[i].func<CS_FN_VEQUAL) {
+              g_model.customSw[i].val2 = (cswitchOffset[i]->value()/source.getStep(g_model));
+              cswitchOffset[i]->setValue(g_model.customSw[i].val2*source.getStep(g_model));
+            } else {
+              g_model.customSw[i].val2 = ((cswitchOffset[i]->value()-source.getOffset(g_model))/source.getStep(g_model))-source.getRawOffset(g_model);
+              cswitchOffset[i]->setValue((g_model.customSw[i].val2 +source.getRawOffset(g_model))*source.getStep(g_model)+source.getOffset(g_model));            
+            }
           }
         }
         break;
