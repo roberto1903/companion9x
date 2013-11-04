@@ -4,25 +4,9 @@
 <context>
     <name>ExpoDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <location filename="expodialog.ui" line="91"/>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expo value&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Expo value&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="50"/>
@@ -33,15 +17,6 @@ p, li { white-space: pre-wrap; }
         <location filename="expodialog.ui" line="36"/>
         <source>Name</source>
         <translation>Name</translation>
-    </message>
-    <message>
-        <source>The value of the weight</source>
-        <translation type="obsolete">Der Wert des Weges</translation>
-    </message>
-    <message>
-        <source>Phases</source>
-        <oldsource>Phase</oldsource>
-        <translation type="obsolete">Phase</translation>
     </message>
     <message>
         <location filename="expodialog.ui" line="59"/>
@@ -139,10 +114,6 @@ Bei keiner Eingabe ist Expo generell eingeschaltet.</translation>
         <translation>Angewendete Kurve für Expo</translation>
     </message>
     <message>
-        <source>Mode</source>
-        <translation type="obsolete">Modus</translation>
-    </message>
-    <message>
         <location filename="expodialog.ui" line="357"/>
         <source>NEG</source>
         <translation>NEG</translation>
@@ -184,13 +155,12 @@ Dieses sind für alle Modelle im gleichen EEPROM gültig.</translation>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1456"/>
+        <location filename="generaledit.ui" line="1413"/>
         <source>Contrast</source>
         <translation>Kontrast</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="461"/>
-        <location filename="generaledit.ui" line="583"/>
+        <location filename="generaledit.ui" line="259"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -201,39 +171,27 @@ p, li { white-space: pre-wrap; }
 Die Werte können sein</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1564"/>
+        <location filename="generaledit.ui" line="1503"/>
         <source>Sound Mode</source>
         <translation>Sound Modus</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1067"/>
+        <location filename="generaledit.ui" line="1044"/>
         <source>Beeper</source>
         <translation>Piepser</translation>
     </message>
     <message>
-        <source>PiSpkr</source>
-        <translation type="obsolete">PiSpkr</translation>
-    </message>
-    <message>
-        <source>PcmWav</source>
-        <translation type="obsolete">PcmWav</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1003"/>
+        <location filename="generaledit.ui" line="990"/>
         <source>Speaker Pitch (spkr only)</source>
         <translation>Lautstärke (nur PiSpkr)</translation>
     </message>
     <message>
-        <source>Haptic Strength (spkr only)</source>
-        <translation type="obsolete">Haptik Stärke (nur PiSpkr)</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1633"/>
+        <location filename="generaledit.ui" line="1559"/>
         <source>Battery Warning</source>
         <translation>Batteriewarnung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1652"/>
+        <location filename="generaledit.ui" line="1578"/>
         <source>Battery warning voltage.
 This is the threashhold where the battery warning sounds.
 
@@ -244,111 +202,76 @@ Dies ist die Warnschwelle bei der die  Batteriewarnung piepst
 Mögliche Werte von 5V..10V</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1623"/>
+        <location filename="generaledit.ui" line="1549"/>
         <source>Battery Calibration</source>
         <translation>Kalibrierung Batteriespannung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1597"/>
+        <location filename="generaledit.ui" line="1523"/>
         <source>Battery calibration:
 This value will be added to the measured battery voltage.  Use this value to calibrate the meter with an external meter.</source>
         <translation>Kalibrierung Batteriespannung:
 Dieser Wert wird zur gemessenen Batteriespannung addiert. Dieser Wert wird zur Kalibrierung der Anzeige mittels externen Messgerät genutzt.</translation>
     </message>
     <message>
-        <source>Backlight Switch</source>
-        <translation type="obsolete">Schalter Hintergrundbeleuchtung</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1502"/>
-        <source>This is the switch selectrion for turning on the backlight (if installed).
-
-</source>
-        <translation>Dies ist der Schalter für das Anschalten der Hintergrundbeleuchtung (falls eingebaut).
-
-</translation>
-    </message>
-    <message>
-        <source>Backlight Auto On/OFF after</source>
-        <translation type="obsolete">Automatische Hintergrundbeleuchtung EIN/AUS nach</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="1416"/>
+        <location filename="generaledit.ui" line="1373"/>
         <source>If this value is not 0, any keypress will turn on the backlight and turn it off after the specified number of seconds.</source>
         <translation>Wenn dieser Wert ungleich 0 ist, wird die Hintergrundbeleuchtung nach irgendeinem Tastendruck eingeschaltet
 und nach einer eingestellten Zeit in Sekunden ausgeschaltet.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="564"/>
-        <location filename="generaledit.ui" line="1419"/>
+        <location filename="generaledit.ui" line="588"/>
+        <location filename="generaledit.ui" line="1376"/>
         <source> sec</source>
         <translation>sek</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1739"/>
+        <location filename="generaledit.ui" line="1665"/>
         <source>Inactivity Timer</source>
         <translation>Inaktivitätstimer</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1719"/>
+        <location filename="generaledit.ui" line="1645"/>
         <source>If not zero will sound beeps if the transmitter has been left without inputs for the specified number of minutes.</source>
         <translation>Falls ungleich 0 ertönt ein Piepston wenn der Sender für eine bestimmte Anzahl Minuten nicht bedient wurde.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1722"/>
+        <location filename="generaledit.ui" line="1648"/>
         <source> min</source>
         <translation>Min</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1439"/>
+        <location filename="generaledit.ui" line="1396"/>
         <source>Timer Beeps</source>
         <translation>Piepston Timer</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="245"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Single Beep Every whole Minute&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Einzelton jede volle Minute</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="252"/>
+        <location filename="generaledit.ui" line="285"/>
         <source>Every Minute</source>
         <translation>Jede Minute</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="259"/>
+        <location filename="generaledit.ui" line="292"/>
         <source>Beeps at 30, 15, 10, and down from5 seconds</source>
         <translation>Piepston bei 30, 15, 10 und 5 Sekunden</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="262"/>
+        <location filename="generaledit.ui" line="295"/>
         <source>Count Down to Zero</source>
         <translation>Countdown bis 0</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="269"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Flash backlight on timer  beep&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Blinken der Hintergrundbeleuchtung nach Timerablauf</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="276"/>
+        <location filename="generaledit.ui" line="305"/>
         <source>Flash on beep</source>
         <translation>Blinken während Piepsen</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="482"/>
+        <location filename="generaledit.ui" line="506"/>
         <source>Reverse Throttle Operation</source>
         <translation>Gasminimum vorne</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="604"/>
+        <location filename="generaledit.ui" line="601"/>
         <source>Reverse throttle operation.
 If this is checked the throttle will be reversed.  Idle will be forward, trim will also be reversed and the throttle warning will be reversed as well.
 
@@ -357,28 +280,23 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
 Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufstellung ist vorne, die Trimmung sowie die Knüppelstellungswarnung ist ebenfalls umgedreht.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1132"/>
+        <location filename="generaledit.ui" line="1109"/>
         <source>Show Splash Screen on Startup</source>
         <translation>Zeige Startbildschirm während Start</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1314"/>
-        <location filename="generaledit.ui" line="1317"/>
+        <location filename="generaledit.ui" line="1271"/>
+        <location filename="generaledit.ui" line="1274"/>
         <source>Show splash screen on startup</source>
         <translation>Zeige Startbildschirm während Start</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="691"/>
+        <location filename="generaledit.ui" line="688"/>
         <source>Throttle Startup Warning</source>
         <translation>Warnung Gasknüppelstellung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="758"/>
-        <location filename="generaledit.ui" line="973"/>
-        <location filename="generaledit.ui" line="1146"/>
-        <location filename="generaledit.ui" line="1265"/>
-        <location filename="generaledit.ui" line="1538"/>
-        <location filename="generaledit.ui" line="2910"/>
+        <location filename="generaledit.ui" line="960"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -399,37 +317,37 @@ Warnung stummer Betrieb - Wird angezeigt, wenn der Piepser ausgeschaltet ist
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1732"/>
+        <location filename="generaledit.ui" line="1658"/>
         <source>Switch Startup Warning</source>
         <translation>Warnung Schalterstellung beim Einschalten</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1351"/>
+        <location filename="generaledit.ui" line="1308"/>
         <source>Memory Startup Warning</source>
         <translation>Warnung Speicherplatz beim Einschalten</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="954"/>
+        <location filename="generaledit.ui" line="941"/>
         <source>Alarm Warning</source>
         <translation>Warnung Alarm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="442"/>
+        <location filename="generaledit.ui" line="471"/>
         <source>Pot Scrolling Enable</source>
         <translation>PotScroll einschalten</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1514"/>
+        <location filename="generaledit.ui" line="1450"/>
         <source>Bandgap Measuring Enable</source>
         <translation>Bandgap Messung aktivieren</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1202"/>
+        <location filename="generaledit.ui" line="1169"/>
         <source>Channel Order (For Templates)</source>
         <translation>Kanalanordnung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="822"/>
+        <location filename="generaledit.ui" line="809"/>
         <source>Channel order
 
 This is used by the templated to determine which channel goes to what number output.</source>
@@ -438,12 +356,12 @@ This is used by the templated to determine which channel goes to what number out
 Damit werden die Kanäle den Ausgängen zugeordnet.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1209"/>
+        <location filename="generaledit.ui" line="1176"/>
         <source>Stick Mode</source>
         <translation>Knüppelmodus</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="502"/>
+        <location filename="generaledit.ui" line="526"/>
         <source>Mode selection:
 
 Mode 1:
@@ -484,40 +402,32 @@ Mode 4:
 </translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="527"/>
+        <location filename="generaledit.ui" line="551"/>
         <source>Mode 1 (RUD ELE THR AIL)</source>
         <translation>Mode 1 (RUD ELE THR AIL)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="532"/>
+        <location filename="generaledit.ui" line="556"/>
         <source>Mode 2 (RUD THR ELE AIL)</source>
         <translation>Mode 2 (RUD THR ELE AIL)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="537"/>
+        <location filename="generaledit.ui" line="561"/>
         <source>Mode 3 (AIL ELE THR RUD)</source>
         <translation>Mode 3 (AIL ELE THR RUD)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="542"/>
+        <location filename="generaledit.ui" line="566"/>
         <source>Mode 4 (AIL THR ELE RUD)</source>
         <translation>Mode 4 (AIL THR ELE RUD)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="557"/>
+        <location filename="generaledit.ui" line="581"/>
         <source>Beeper Mode</source>
         <translation>Modus Piepser</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1371"/>
-        <location filename="generaledit.ui" line="2341"/>
-        <location filename="generaledit.ui" line="2375"/>
-        <location filename="generaledit.ui" line="2443"/>
-        <location filename="generaledit.ui" line="2477"/>
-        <location filename="generaledit.ui" line="2516"/>
-        <location filename="generaledit.ui" line="2584"/>
-        <location filename="generaledit.ui" line="2628"/>
-        <location filename="generaledit.ui" line="2662"/>
+        <location filename="generaledit.ui" line="1328"/>
         <source>Beeper volume
 
 0 - Quiet.  No beeps at all.
@@ -534,60 +444,60 @@ Mode 4:
 4 - Sehr laut.</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1328"/>
-        <location filename="generaledit.ui" line="1381"/>
+        <location filename="generaledit.ui" line="1285"/>
+        <location filename="generaledit.ui" line="1338"/>
         <source>Quiet</source>
         <translation>Stumm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1338"/>
-        <location filename="generaledit.ui" line="1391"/>
+        <location filename="generaledit.ui" line="1295"/>
+        <location filename="generaledit.ui" line="1348"/>
         <source>No Keys</source>
         <translation>Kein Tastaturpieps</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1024"/>
-        <location filename="generaledit.ui" line="1101"/>
+        <location filename="generaledit.ui" line="1011"/>
+        <location filename="generaledit.ui" line="1078"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1029"/>
-        <location filename="generaledit.ui" line="1106"/>
+        <location filename="generaledit.ui" line="1016"/>
+        <location filename="generaledit.ui" line="1083"/>
         <source>Long</source>
         <translation>Lange</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1521"/>
+        <location filename="generaledit.ui" line="1457"/>
         <source>Input Filter</source>
         <translation>Filter Eingang</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1478"/>
+        <location filename="generaledit.ui" line="2201"/>
         <source>Single</source>
         <translation>Einfach</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1483"/>
+        <location filename="generaledit.ui" line="2206"/>
         <source>Oversample</source>
         <translation>Oversample</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1488"/>
+        <location filename="generaledit.ui" line="2211"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1226"/>
+        <location filename="generaledit.ui" line="1193"/>
         <source>Owner Name</source>
         <translation>Besitzer</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="209"/>
-        <location filename="generaledit.ui" line="2351"/>
-        <location filename="generaledit.ui" line="2453"/>
-        <location filename="generaledit.ui" line="2594"/>
-        <location filename="generaledit.ui" line="2638"/>
+        <location filename="generaledit.ui" line="2290"/>
+        <location filename="generaledit.ui" line="2380"/>
+        <location filename="generaledit.ui" line="2503"/>
+        <location filename="generaledit.ui" line="2541"/>
         <source>Off</source>
         <translation>Aus</translation>
     </message>
@@ -602,167 +512,155 @@ Mode 4:
         <translation>Schalter unten</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2275"/>
+        <location filename="generaledit.ui" line="2220"/>
         <source>Trainer</source>
         <translation>Trainer</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2328"/>
-        <location filename="generaledit.ui" line="3014"/>
+        <location filename="generaledit.ui" line="2273"/>
+        <location filename="generaledit.ui" line="2895"/>
         <source>PPM 1</source>
         <translation>PPM 1</translation>
     </message>
     <message>
-        <source>+=</source>
-        <translation type="obsolete">+=</translation>
-    </message>
-    <message>
-        <source>:=</source>
-        <translation type="obsolete">:=</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="2385"/>
-        <location filename="generaledit.ui" line="2487"/>
-        <location filename="generaledit.ui" line="2526"/>
-        <location filename="generaledit.ui" line="2672"/>
+        <location filename="generaledit.ui" line="2318"/>
+        <location filename="generaledit.ui" line="2408"/>
+        <location filename="generaledit.ui" line="2441"/>
+        <location filename="generaledit.ui" line="2569"/>
         <source>chn1</source>
         <translation>chn1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2390"/>
-        <location filename="generaledit.ui" line="2492"/>
-        <location filename="generaledit.ui" line="2531"/>
-        <location filename="generaledit.ui" line="2677"/>
+        <location filename="generaledit.ui" line="2323"/>
+        <location filename="generaledit.ui" line="2413"/>
+        <location filename="generaledit.ui" line="2446"/>
+        <location filename="generaledit.ui" line="2574"/>
         <source>chn2</source>
         <translation>chn2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2395"/>
-        <location filename="generaledit.ui" line="2497"/>
-        <location filename="generaledit.ui" line="2536"/>
-        <location filename="generaledit.ui" line="2682"/>
+        <location filename="generaledit.ui" line="2328"/>
+        <location filename="generaledit.ui" line="2418"/>
+        <location filename="generaledit.ui" line="2451"/>
+        <location filename="generaledit.ui" line="2579"/>
         <source>chn3</source>
         <translation>chn3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2400"/>
-        <location filename="generaledit.ui" line="2502"/>
-        <location filename="generaledit.ui" line="2541"/>
-        <location filename="generaledit.ui" line="2687"/>
+        <location filename="generaledit.ui" line="2333"/>
+        <location filename="generaledit.ui" line="2423"/>
+        <location filename="generaledit.ui" line="2456"/>
+        <location filename="generaledit.ui" line="2584"/>
         <source>chn4</source>
         <translation>chn4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2300"/>
+        <location filename="generaledit.ui" line="2245"/>
         <source>Mode</source>
         <translation>Modus</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1683"/>
+        <location filename="generaledit.ui" line="1609"/>
         <source>Telemetry NO DATA Alarm</source>
         <translation>Telemetrie Alarm aktivieren</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="996"/>
+        <location filename="generaledit.ui" line="983"/>
         <source>Show Owner Name on Splash</source>
         <translation>Zeige Besitzernamen in Startbildschirm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1333"/>
+        <location filename="generaledit.ui" line="1290"/>
         <source>Only Alarms</source>
         <translation>nur Alarme</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1343"/>
-        <location filename="generaledit.ui" line="1396"/>
+        <location filename="generaledit.ui" line="1300"/>
+        <location filename="generaledit.ui" line="1353"/>
         <source>All</source>
         <translation>Alles</translation>
     </message>
     <message>
-        <source>Backlight On Stick Move</source>
-        <translation type="obsolete">HG Licht bei Knüppelbewegung</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="700"/>
+        <location filename="generaledit.ui" line="697"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="707"/>
+        <location filename="generaledit.ui" line="704"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="714"/>
+        <location filename="generaledit.ui" line="711"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="721"/>
+        <location filename="generaledit.ui" line="718"/>
         <source>AIL</source>
         <translatorcomment>leave it as abreviation?</translatorcomment>
         <translation>AIL</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="728"/>
+        <location filename="generaledit.ui" line="725"/>
         <source>GEA</source>
         <translation>GEA</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="735"/>
+        <location filename="generaledit.ui" line="732"/>
         <source>ID0</source>
         <translation>ID0</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="742"/>
+        <location filename="generaledit.ui" line="739"/>
         <source>ID1</source>
         <translation>ID1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="749"/>
+        <location filename="generaledit.ui" line="746"/>
         <source>ID2</source>
         <translation>ID2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="435"/>
+        <location filename="generaledit.ui" line="464"/>
         <source>Beeper Length</source>
         <translation>Piepser Länge</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1014"/>
-        <location filename="generaledit.ui" line="1091"/>
+        <location filename="generaledit.ui" line="1001"/>
+        <location filename="generaledit.ui" line="1068"/>
         <source>X-Short</source>
         <translation>X-kurz</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1019"/>
-        <location filename="generaledit.ui" line="1096"/>
+        <location filename="generaledit.ui" line="1006"/>
+        <location filename="generaledit.ui" line="1073"/>
         <source>Short</source>
         <translation>Kurz</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1034"/>
-        <location filename="generaledit.ui" line="1111"/>
+        <location filename="generaledit.ui" line="1021"/>
+        <location filename="generaledit.ui" line="1088"/>
         <source>X-Long</source>
         <translation>X-lang</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1216"/>
+        <location filename="generaledit.ui" line="1183"/>
         <source>Haptic Mode</source>
         <translation>Haptik Modus</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1386"/>
+        <location filename="generaledit.ui" line="1343"/>
         <source>Alarms Only</source>
         <translation>nur Alarme</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="489"/>
+        <location filename="generaledit.ui" line="513"/>
         <source>Haptic Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="783"/>
+        <location filename="generaledit.ui" line="770"/>
         <source>GPS Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
@@ -777,87 +675,87 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1072"/>
+        <location filename="generaledit.ui" line="1049"/>
         <source>Speaker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1077"/>
+        <location filename="generaledit.ui" line="1054"/>
         <source>BeeperVoice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1082"/>
+        <location filename="generaledit.ui" line="1059"/>
         <source>SpeakerVoice</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="generaledit.ui" line="791"/>
+        <location filename="generaledit.ui" line="778"/>
         <source>hh° (N/S) mm&apos; ss&apos;&apos;.dd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="796"/>
+        <location filename="generaledit.ui" line="783"/>
         <source>NMEA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="650"/>
+        <location filename="generaledit.ui" line="647"/>
         <source>Timeshift from UTC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="677"/>
+        <location filename="generaledit.ui" line="674"/>
         <source>LCD Display Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1289"/>
+        <location filename="generaledit.ui" line="1246"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1294"/>
+        <location filename="generaledit.ui" line="1251"/>
         <source>Optrex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1700"/>
+        <location filename="generaledit.ui" line="1626"/>
         <source>Speaker Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1059"/>
+        <location filename="generaledit.ui" line="1036"/>
         <source>Haptic Strength</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1446"/>
+        <location filename="generaledit.ui" line="1403"/>
         <source>BackLight Brightness</source>
         <translation>Helligkeit der Hintergrundbeleuchtung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="643"/>
+        <location filename="generaledit.ui" line="640"/>
         <source>RotEnc Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1470"/>
+        <location filename="generaledit.ui" line="1427"/>
         <source>BackLight  Auto OFF after</source>
         <translation>Automatische Hintergrundbeleuchtung AUS nach</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1584"/>
+        <location filename="generaledit.ui" line="1510"/>
         <source>BackLight Switch</source>
         <translation>Schalter Hintergrundbeleuchtung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="617"/>
+        <location filename="generaledit.ui" line="614"/>
         <source>BackLight On Stick Move</source>
         <translation>HG Licht bei Knüppelbewegung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1233"/>
+        <location filename="generaledit.ui" line="1200"/>
         <source>BackLight Invert</source>
         <translation>Hintergrundbeleuchtung invertieren</translation>
     </message>
@@ -882,17 +780,17 @@ Mode 4:
         <translation>Amerika</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="684"/>
+        <location filename="generaledit.ui" line="681"/>
         <source>FrSky Internal Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1042"/>
+        <location filename="generaledit.ui" line="243"/>
         <source>StickScroll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="381"/>
+        <location filename="generaledit.ui" line="410"/>
         <source>PPMSim</source>
         <translation type="unfinished"></translation>
     </message>
@@ -902,27 +800,27 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1528"/>
+        <location filename="generaledit.ui" line="1464"/>
         <source>CrossTrim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="287"/>
+        <location filename="generaledit.ui" line="316"/>
         <source>Beep volume</source>
         <translation>Piepser lautstärke</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="310"/>
+        <location filename="generaledit.ui" line="339"/>
         <source>Wav volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="333"/>
+        <location filename="generaledit.ui" line="362"/>
         <source>Vario volume</source>
         <translation>Vario Lautstärke</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="356"/>
+        <location filename="generaledit.ui" line="385"/>
         <source>Background volume</source>
         <translation>Hintergrundlautstärke</translation>
     </message>
@@ -932,17 +830,17 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1183"/>
+        <location filename="generaledit.ui" line="1150"/>
         <source>Metric</source>
         <translation type="unfinished">Metrisch</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1188"/>
+        <location filename="generaledit.ui" line="1155"/>
         <source>Imperial</source>
         <translation type="unfinished">Imperial</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1052"/>
+        <location filename="generaledit.ui" line="1029"/>
         <source>FAI Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -952,313 +850,299 @@ Mode 4:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="392"/>
+        <location filename="generaledit.ui" line="282"/>
+        <source>Single Beep Every whole Minute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="302"/>
+        <source>Flash backlight on timer beep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="421"/>
         <source>4800 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="397"/>
+        <location filename="generaledit.ui" line="426"/>
         <source>9600 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="402"/>
+        <location filename="generaledit.ui" line="431"/>
         <source>14400 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="407"/>
+        <location filename="generaledit.ui" line="436"/>
         <source>19200 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="412"/>
+        <location filename="generaledit.ui" line="441"/>
         <source>38400 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="417"/>
+        <location filename="generaledit.ui" line="446"/>
         <source>57600 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="422"/>
+        <location filename="generaledit.ui" line="451"/>
         <source>76800 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="427"/>
+        <location filename="generaledit.ui" line="456"/>
         <source>115200 Baud</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="806"/>
+        <location filename="generaledit.ui" line="490"/>
+        <source>LCD Screen Contrast\nValues can be 20-45</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="793"/>
         <source>If you enable FAI, you loose the vario, the play functions, the telemetry screen. This function cannot be disabled by the radio.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1690"/>
+        <location filename="generaledit.ui" line="1232"/>
+        <source>Will alert if there&apos;s not a lot of memory left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1440"/>
+        <source>This is the switch selection for turning on the backlight (if installed).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1474"/>
+        <source>Will alert if the throttle is not at idle during startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="generaledit.ui" line="1616"/>
         <source>Readonly Unlock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1763"/>
+        <location filename="generaledit.ui" line="1689"/>
         <source>SC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="1825"/>
+        <location filename="generaledit.ui" line="1751"/>
         <source>SE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2120"/>
+        <location filename="generaledit.ui" line="2046"/>
         <source>SA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2136"/>
+        <location filename="generaledit.ui" line="2062"/>
         <source>SF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2152"/>
+        <location filename="generaledit.ui" line="2078"/>
         <source>SH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2168"/>
+        <location filename="generaledit.ui" line="2094"/>
         <source>SD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2184"/>
+        <location filename="generaledit.ui" line="2110"/>
         <source>SB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2249"/>
+        <location filename="generaledit.ui" line="2175"/>
         <source>SG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2307"/>
+        <location filename="generaledit.ui" line="2252"/>
         <source>Input</source>
         <translation>Eingang</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2314"/>
+        <location filename="generaledit.ui" line="2259"/>
         <source>Weight</source>
         <translation>Weg</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2321"/>
+        <location filename="generaledit.ui" line="2266"/>
         <source>Switch</source>
         <translation>Schalter</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2356"/>
-        <location filename="generaledit.ui" line="2458"/>
-        <location filename="generaledit.ui" line="2599"/>
-        <location filename="generaledit.ui" line="2643"/>
+        <location filename="generaledit.ui" line="2295"/>
+        <location filename="generaledit.ui" line="2385"/>
+        <location filename="generaledit.ui" line="2508"/>
+        <location filename="generaledit.ui" line="2546"/>
         <source>+= (Sum)</source>
         <translation>+= (add)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2361"/>
-        <location filename="generaledit.ui" line="2463"/>
-        <location filename="generaledit.ui" line="2604"/>
-        <location filename="generaledit.ui" line="2648"/>
+        <location filename="generaledit.ui" line="2300"/>
+        <location filename="generaledit.ui" line="2390"/>
+        <location filename="generaledit.ui" line="2513"/>
+        <location filename="generaledit.ui" line="2551"/>
         <source>:= (Replace)</source>
         <translation>:= (ersetzen)</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2430"/>
-        <location filename="generaledit.ui" line="3391"/>
+        <location filename="generaledit.ui" line="2363"/>
+        <location filename="generaledit.ui" line="3197"/>
         <source>PPM 2</source>
         <translation>PPM 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2571"/>
-        <location filename="generaledit.ui" line="3398"/>
+        <location filename="generaledit.ui" line="2486"/>
+        <location filename="generaledit.ui" line="3204"/>
         <source>PPM 3</source>
         <translation>PPM 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2615"/>
-        <location filename="generaledit.ui" line="3405"/>
+        <location filename="generaledit.ui" line="2524"/>
+        <location filename="generaledit.ui" line="3211"/>
         <source>PPM 4</source>
         <translation>PPM 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2731"/>
+        <location filename="generaledit.ui" line="2628"/>
         <source>Telemetry</source>
         <translation>Telemetrie</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2756"/>
+        <location filename="generaledit.ui" line="2653"/>
         <source>RSSI Alarm 1</source>
         <translation>RSSI Alarm 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2800"/>
-        <location filename="generaledit.ui" line="2875"/>
+        <location filename="generaledit.ui" line="2697"/>
+        <location filename="generaledit.ui" line="2772"/>
         <source>----</source>
         <translation>----</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2805"/>
-        <location filename="generaledit.ui" line="2880"/>
+        <location filename="generaledit.ui" line="2702"/>
+        <location filename="generaledit.ui" line="2777"/>
         <source>Yellow</source>
         <translation>gelb</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2810"/>
-        <location filename="generaledit.ui" line="2885"/>
+        <location filename="generaledit.ui" line="2707"/>
+        <location filename="generaledit.ui" line="2782"/>
         <source>Orange</source>
         <translation>orange</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2815"/>
-        <location filename="generaledit.ui" line="2890"/>
+        <location filename="generaledit.ui" line="2712"/>
+        <location filename="generaledit.ui" line="2787"/>
         <source>Red</source>
         <translation>Rot</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2831"/>
+        <location filename="generaledit.ui" line="2728"/>
         <source>RSSI Alarm 2</source>
         <translation>RSSI Alarm 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2900"/>
+        <location filename="generaledit.ui" line="2797"/>
         <source>NO DATA Alarm</source>
         <translation>KEINE DATEN Alarm</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2934"/>
+        <location filename="generaledit.ui" line="2821"/>
         <source>Calibration</source>
         <translation>Kalibrierung</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2953"/>
+        <location filename="generaledit.ui" line="2837"/>
         <source>POT 4</source>
         <translation type="unfinished">POT 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3435"/>
+        <location filename="generaledit.ui" line="3241"/>
         <source>Current</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3038"/>
-        <location filename="generaledit.ui" line="3582"/>
+        <location filename="generaledit.ui" line="2919"/>
+        <location filename="generaledit.ui" line="3361"/>
         <source>Mid value</source>
         <oldsource>Mid Value</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Negative</source>
-        <translation type="obsolete">Negativ</translation>
-    </message>
-    <message>
-        <source>Mid</source>
-        <translation type="obsolete">Mitte</translation>
-    </message>
-    <message>
-        <source>Positive</source>
-        <translation type="obsolete">Positiv</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="3058"/>
+        <location filename="generaledit.ui" line="2939"/>
         <source>STICK 1</source>
         <translation>KNÜPPEL 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3107"/>
+        <location filename="generaledit.ui" line="2979"/>
         <source>STICK 2</source>
         <translation>KNÜPPEL 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3021"/>
+        <location filename="generaledit.ui" line="2902"/>
         <source>STICK 3</source>
         <translation>KNÜPPEL 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3028"/>
-        <location filename="generaledit.ui" line="3572"/>
+        <location filename="generaledit.ui" line="2909"/>
+        <location filename="generaledit.ui" line="3351"/>
         <source>Negative span</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3048"/>
-        <location filename="generaledit.ui" line="3592"/>
+        <location filename="generaledit.ui" line="2929"/>
+        <location filename="generaledit.ui" line="3371"/>
         <source>Positive span</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3192"/>
+        <location filename="generaledit.ui" line="3046"/>
         <source>STICK 4</source>
         <translation>KNÜPPEL 4</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2994"/>
+        <location filename="generaledit.ui" line="2875"/>
         <source>POT 1</source>
         <translation>POT 1</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2987"/>
+        <location filename="generaledit.ui" line="2868"/>
         <source>POT 2</source>
         <translation>POT 2</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="2967"/>
+        <location filename="generaledit.ui" line="2851"/>
         <source>POT 3</source>
         <translation>POT 3</translation>
     </message>
     <message>
-        <location filename="generaledit.ui" line="3254"/>
+        <location filename="generaledit.ui" line="3099"/>
         <source>Battery</source>
         <translation>Akku</translation>
     </message>
     <message>
-        <source>ANALOG 1</source>
-        <translation type="obsolete">ANALOG 1</translation>
-    </message>
-    <message>
-        <source>ANALOG 2</source>
-        <translation type="obsolete">ANALOG 2</translation>
-    </message>
-    <message>
-        <source>ANALOG 3</source>
-        <translation type="obsolete">ANALOG 3</translation>
-    </message>
-    <message>
-        <source>ANALOG 4</source>
-        <translation type="obsolete">ANALOG 4</translation>
-    </message>
-    <message>
-        <source>ANALOG 5</source>
-        <translation type="obsolete">ANALOG 5</translation>
-    </message>
-    <message>
-        <source>ANALOG 6</source>
-        <translation type="obsolete">ANALOG 6</translation>
-    </message>
-    <message>
-        <source>ANALOG 7</source>
-        <translation type="obsolete">ANALOG 7</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="3264"/>
+        <location filename="generaledit.ui" line="3106"/>
         <source>v</source>
         <translation>v</translation>
     </message>
     <message>
-        <source>PPM In</source>
-        <translation type="obsolete">PPM In</translation>
-    </message>
-    <message>
-        <location filename="generaledit.ui" line="3283"/>
+        <location filename="generaledit.ui" line="3125"/>
         <source>PPM Multiplier</source>
         <translation>PPM Multiplikator</translation>
     </message>
@@ -1299,24 +1183,12 @@ Are you sure ?</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>eePe - EEPROM Editor</source>
-        <translation type="obsolete">eePe EEPROM Editor</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="147"/>
         <location filename="mainwindow.cpp" line="635"/>
         <location filename="mainwindow.cpp" line="669"/>
         <location filename="mainwindow.cpp" line="2161"/>
         <source>File loaded</source>
         <translation>Datei geladen</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
-        <source>A new version of ER9x is available&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version des ER9X ist vorhanden. Möchtest Du diese herunterladen ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="268"/>
@@ -1326,10 +1198,6 @@ Are you sure ?</source>
         <location filename="mainwindow.cpp" line="572"/>
         <source>Save As</source>
         <translation>Speichern unter</translation>
-    </message>
-    <message>
-        <source>EEPROM hex files (*.hex);;EEPROM bin files (*.bin)</source>
-        <translation type="obsolete">EEPROM hex Datei (*.hex);;EEPROM bin Datei (*.bin)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="285"/>
@@ -1345,14 +1213,6 @@ Are you sure ?</source>
         <location filename="mainwindow.cpp" line="593"/>
         <source>Unable to check for updates.</source>
         <translation>Kann nicht auf Updates überprüfen.</translation>
-    </message>
-    <message>
-        <source>A new version of eePe is available&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von eePe ist vorhanden. Möchtest Du diese herunterladen ?</translation>
-    </message>
-    <message>
-        <source>A new version of ER9x (%2) is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von ER9x(%2) ist vorhanden(r%1)&lt;br&gt;Möchtest Du diese herunterladen ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="270"/>
@@ -1377,10 +1237,6 @@ Möchten Sie sie jetzt herunterladen?</translation>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>EEPROM files (*.bin *.hex);;BIN files (*.bin);;HEX files (*.hex)</source>
-        <translation type="obsolete">EEPROM Dateien (*.bin *.hex);;BIN Dateien (*.bin);;HEX Dateien (*.hex)</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="644"/>
         <location filename="mainwindow.cpp" line="650"/>
         <source>File saved</source>
@@ -1395,34 +1251,14 @@ Möchten Sie sie jetzt herunterladen?</translation>
         <translation>Lese EEPROM vom Sender</translation>
     </message>
     <message>
-        <source>Choose file to write to EEPROM memory</source>
-        <translation type="obsolete">Wähle Datei zum Schreiben in den EEPROM Speicher</translation>
-    </message>
-    <message>
-        <source>FLASH files (*.bin *.hex);;BIN files (*.bin);;HEX files (*.hex)</source>
-        <translation type="obsolete">FLASH Dateien (*.bin *.hex);;BIN Dateien (*.bin);;HEX Dateien (*.hex)</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="1079"/>
         <source>Write %1 to EEPROM memory?</source>
         <translation>Brenne %1 in den Sender ?</translation>
     </message>
     <message>
-        <source>Choose file to write to flash memory</source>
-        <translation type="obsolete">Wähle Datei zum Schreiben in den Flashspeicher</translation>
-    </message>
-    <message>
-        <source>Write %1 to flash memory?</source>
-        <translation type="obsolete">Schreibe %1 in den Flashspeicher ?</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="1416"/>
         <source>Read EEPROM memory to File</source>
         <translation>Lese EEPROM Speicher und speichere in Datei</translation>
-    </message>
-    <message>
-        <source>HEX files (*.hex);;BIN files (*.bin);;FLASH files (*.bin *.hex)</source>
-        <translation type="obsolete">HEX Dateien (*.hex);;BIN Dateien (*.bin);;FLASH Dateien (*.bin *.hex)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1444"/>
@@ -1435,18 +1271,9 @@ Möchten Sie sie jetzt herunterladen?</translation>
         <translation>Copyright</translation>
     </message>
     <message>
-        <source>If you&apos;ve found this program and/or the er9x firmware useful please support by</source>
-        <oldsource>If you&apos;ve found this program and/or the Firmware useful please support by</oldsource>
-        <translation type="obsolete">Wenn Du dieses Programm und/oder die Firmware nützlich findest dann unterstütze uns durch</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="1497"/>
         <source>donating</source>
         <translation>spenden</translation>
-    </message>
-    <message>
-        <source>About eePe</source>
-        <translation type="obsolete">Über eePe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1563"/>
@@ -1514,10 +1341,6 @@ Möchten Sie sie jetzt herunterladen?</translation>
         <location filename="mainwindow.cpp" line="1625"/>
         <source>&amp;Check for updates...</source>
         <translation>&amp;Überprüfe auf Updates...</translation>
-    </message>
-    <message>
-        <source>Check for new version of eePe/er9x</source>
-        <translation type="obsolete">Überprüfe auf eine neue Version von eePe/er9x</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="108"/>
@@ -2184,14 +2007,6 @@ Trotzdem brennen?</translation>
         <translation type="unfinished">Ungültige EEPROM Programmdatei %1</translation>
     </message>
     <message>
-        <source>&amp;Contributors</source>
-        <translation type="obsolete">&amp;Mitwirkende</translation>
-    </message>
-    <message>
-        <source>List er9x/eePe Contributors</source>
-        <translation type="obsolete">Zeige die er9x/eePe Mitwirkende</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="1767"/>
         <source>Switch layout Left/Right</source>
         <translation>Schalte Layout um Rechts/Links</translation>
@@ -2213,10 +2028,6 @@ Trotzdem brennen?</translation>
         <translation>Schalte Programmlayout um</translation>
     </message>
     <message>
-        <source>companion9x - EEPROM Editor</source>
-        <translation type="obsolete">companion9x - EEPROM Editor</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="224"/>
         <source>Checking for updates</source>
         <translation>Überprüfe auf Updates</translation>
@@ -2225,10 +2036,6 @@ Trotzdem brennen?</translation>
         <location filename="mainwindow.cpp" line="546"/>
         <source>Ignore this version (r%1)?</source>
         <translation>Diese Version ignorieren (%1)?</translation>
-    </message>
-    <message>
-        <source>A new version of eePe is available (r%1)&lt;br&gt;Would you like to download it?</source>
-        <translation type="obsolete">Eine neue Version von eePe ist vorhanden /r%1)&lt;br&gt;Möchtest Du diese herunterladen ?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1815"/>
@@ -2279,14 +2086,6 @@ Trotzdem brennen?</translation>
 <context>
     <name>MdiChild</name>
     <message>
-        <source>General Settings</source>
-        <translation type="obsolete">Generelle Einstellungen</translation>
-    </message>
-    <message>
-        <source>Delete Selected Models?</source>
-        <translation type="obsolete">Gewähltes Modell löschen ?</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="224"/>
         <location filename="mdichild.cpp" line="232"/>
         <location filename="mdichild.cpp" line="243"/>
@@ -2310,26 +2109,9 @@ Trotzdem brennen?</translation>
         <translation>Fehler</translation>
     </message>
     <message>
-        <source>Unable set data!</source>
-        <translation type="obsolete">Kann die Daten nicht setzen !</translation>
-    </message>
-    <message>
-        <source>Unable set model!</source>
-        <translation type="obsolete">Kann das Modell nicht anlegen !</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="198"/>
         <source>Editing model %1: </source>
         <translation>Modell %1 bearbeiten :</translation>
-    </message>
-    <message>
-        <source>Unable to read settings!</source>
-        <translation type="obsolete">Kann die Einstellungen nicht lesen !</translation>
-    </message>
-    <message>
-        <source>document%1.eepe</source>
-        <oldsource>document%1.hex</oldsource>
-        <translation type="obsolete">Dokument%1.hex</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="224"/>
@@ -2338,35 +2120,12 @@ Trotzdem brennen?</translation>
         <translation>Kann die Datei %1 nicht finden !</translation>
     </message>
     <message>
-        <source>Cannot read file %1:
-%2.</source>
-        <translation type="obsolete">Kann die Datei %1:
-%2 nicht lesen.</translation>
-    </message>
-    <message>
-        <source>Error reading file %1!</source>
-        <translation type="obsolete">Fehler beim Lesen der Datei %1 !</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="312"/>
         <location filename="mdichild.cpp" line="708"/>
         <source>Error reading file %1:
 %2.</source>
         <translation>Fehler beim Lesen der Datei %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>Error loading file %1:
-%2.</source>
-        <oldsource>File wrong size - %1</oldsource>
-        <translation type="obsolete">Fehler beim Lesen der datei %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Error reading file:
-File wrong size - %1</source>
-        <translation type="obsolete">Fehler beim Lesen der Datei:
-Dateigröße falsch - %1</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="233"/>
@@ -2387,10 +2146,6 @@ Dateigröße falsch - %1</translation>
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <source>EEPROM hex files (*.hex);;EEPROM bin files (*.bin)</source>
-        <translation type="obsolete">EEPROM hex Datei (*.hex);;EEPROM bin Datei (*.bin)</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="399"/>
         <location filename="mdichild.cpp" line="405"/>
         <location filename="mdichild.cpp" line="413"/>
@@ -2401,30 +2156,12 @@ Dateigröße falsch - %1</translation>
 %2 nicht schreiben.</translation>
     </message>
     <message>
-        <source>:20%1000</source>
-        <translation type="obsolete">:20%1000</translation>
-    </message>
-    <message>
-        <source>%1</source>
-        <translation type="obsolete">%1</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="432"/>
         <location filename="mdichild.cpp" line="437"/>
         <source>Error writing file %1:
 %2.</source>
         <translation>Fehler beim Schreiben der Datei %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePee</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; has been modified.
-Do you want to save your changes?</source>
-        <translation type="obsolete">&apos;%1&apos; wurde geändert.
-Möchtest Du die Änderungen speichern ?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="133"/>
@@ -2534,74 +2271,9 @@ Do you want to save your changes?</source>
 Wollen Sie Ihre Änderungen sichern?</translation>
     </message>
     <message>
-        <source>Write %1 to EEPROM memory?</source>
-        <oldsource>Burn %1 to transmitter?</oldsource>
-        <translation type="obsolete">Brenne %1 in den Sender ?</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="535"/>
         <source>Cannot write temporary file!</source>
         <translation>Kann temporäre Datei nicht schreiben! </translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Löschen</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Kopieren</translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
-        <translation type="obsolete">Ctrl+C</translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation type="obsolete">&amp;Ausschneiden</translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
-        <translation type="obsolete">Ctrl+X</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">&amp;Einfügen</translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation type="obsolete">Ctrl+V</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">D&amp;uplizieren</translation>
-    </message>
-    <message>
-        <source>Ctrl+U</source>
-        <translation type="obsolete">Ctrl+U</translation>
-    </message>
-    <message>
-        <source>&amp;Simulate</source>
-        <translation type="obsolete">&amp;Simulieren</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
-        <source>&amp;Write To Tx</source>
-        <translation type="obsolete">&amp;Schreibe in den Sender</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+W</source>
-        <translation type="obsolete">Ctrl+Alt+W</translation>
     </message>
 </context>
 <context>
@@ -2630,10 +2302,6 @@ Wollen Sie Ihre Änderungen sichern?</translation>
         <translation>Gewichtung</translation>
     </message>
     <message>
-        <source>The value of the mixer is multiplied by this value and divided by 100.</source>
-        <translation type="obsolete">Der Mischerwert wird mit diesem Wert multipliziert und durch 100 dividiert.</translation>
-    </message>
-    <message>
         <location filename="mixerdialog.ui" line="411"/>
         <location filename="mixerdialog.cpp" line="108"/>
         <location filename="mixerdialog.cpp" line="117"/>
@@ -2642,22 +2310,9 @@ Wollen Sie Ihre Änderungen sichern?</translation>
         <translation>Offset</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This value is added to the &lt;span style=&quot; font-weight:600;&quot;&gt;input &lt;/span&gt;of the mixer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">Dieser Wert wird zum Eingang addiert</translation>
-    </message>
-    <message>
         <location filename="mixerdialog.ui" line="425"/>
         <source>Include Trim</source>
         <translation>Trimmung einschliessen</translation>
-    </message>
-    <message>
-        <source>If checked - will add the trim from the source (if available)</source>
-        <translatorcomment>??</translatorcomment>
-        <translation type="obsolete">Wenn angewählt wird die Trimmung zur Quelle addiert (falls vorhanden)</translation>
     </message>
     <message>
         <location filename="mixerdialog.cpp" line="134"/>
@@ -2717,10 +2372,6 @@ Wenn leer ist der Mischer immer aktiv.</translation>
         <location filename="mixerdialog.ui" line="418"/>
         <source>Curve/Differential</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Phases</source>
-        <translation type="obsolete">Phasen</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="467"/>
@@ -2843,17 +2494,9 @@ Diese Einstellung bestimmt wie die Mischerwerte behandelt werden.
         <translation type="unfinished">8</translation>
     </message>
     <message>
-        <source>Phase</source>
-        <translation type="obsolete">Phase</translation>
-    </message>
-    <message>
         <location filename="mixerdialog.ui" line="432"/>
         <source>Enable FM Trim</source>
         <translation>FPh Trimmung einschl</translation>
-    </message>
-    <message>
-        <source>Differential</source>
-        <translation type="obsolete">Differential</translation>
     </message>
     <message>
         <location filename="mixerdialog.ui" line="32"/>
@@ -2947,10 +2590,6 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
         <location filename="modeledit.ui" line="20"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Trainer</source>
-        <translation type="obsolete">Trainer</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1032"/>
@@ -3105,74 +2744,6 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
         <translation>CH16</translation>
     </message>
     <message>
-        <source>Function switches</source>
-        <translation type="obsolete">Funktionsschalter</translation>
-    </message>
-    <message>
-        <source>FSwitch13</source>
-        <translation type="obsolete">FSchalter13</translation>
-    </message>
-    <message>
-        <source>FSwitch15</source>
-        <translation type="obsolete">FSchalter15</translation>
-    </message>
-    <message>
-        <source>FSwitch14</source>
-        <translation type="obsolete">FSchalter14</translation>
-    </message>
-    <message>
-        <source>FSwitch1</source>
-        <translation type="obsolete">FSchalter 1</translation>
-    </message>
-    <message>
-        <source>FSwitch2</source>
-        <translation type="obsolete">FSchalter2</translation>
-    </message>
-    <message>
-        <source>FSwitch3</source>
-        <translation type="obsolete">FSchalter3</translation>
-    </message>
-    <message>
-        <source>FSwitch4</source>
-        <translation type="obsolete">FSchalter4</translation>
-    </message>
-    <message>
-        <source>FSwitch5</source>
-        <translation type="obsolete">FSchalter5</translation>
-    </message>
-    <message>
-        <source>FSwitch6</source>
-        <translation type="obsolete">FSchalter6</translation>
-    </message>
-    <message>
-        <source>FSwitch7</source>
-        <translation type="obsolete">FSchalter7</translation>
-    </message>
-    <message>
-        <source>FSwitch8</source>
-        <translation type="obsolete">FSchalter8</translation>
-    </message>
-    <message>
-        <source>FSwitch9</source>
-        <translation type="obsolete">FSchalter9</translation>
-    </message>
-    <message>
-        <source>FSwitch10</source>
-        <translation type="obsolete">FSchalter10</translation>
-    </message>
-    <message>
-        <source>FSwitch11</source>
-        <translation type="obsolete">FSchalter11</translation>
-    </message>
-    <message>
-        <source>FSwitch12</source>
-        <translation type="obsolete">FSchalter12</translation>
-    </message>
-    <message>
-        <source>FSwitch16</source>
-        <translation type="obsolete">FSchalter16</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="20990"/>
         <location filename="modeledit.ui" line="21099"/>
         <source>Param</source>
@@ -3217,7 +2788,7 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
     <message>
         <location filename="modeledit.ui" line="336"/>
         <location filename="modeledit.ui" line="470"/>
-        <location filename="modeledit.cpp" line="2822"/>
+        <location filename="modeledit.cpp" line="2855"/>
         <source>ON</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3408,90 +2979,10 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CSwitchF</source>
-        <translation type="obsolete">CSchalterF</translation>
-    </message>
-    <message>
-        <source>CSwitchD</source>
-        <translation type="obsolete">CSchalterD</translation>
-    </message>
-    <message>
-        <source>CSwitchE</source>
-        <translation type="obsolete">CSchalterE</translation>
-    </message>
-    <message>
-        <source>CSwitchG</source>
-        <translation type="obsolete">CSchalterG</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="19773"/>
         <location filename="modeledit.ui" line="20469"/>
         <source>Delay</source>
         <translation type="unfinished">Verzögerung</translation>
-    </message>
-    <message>
-        <source>CSwitchT</source>
-        <translation type="obsolete">CSchalterT</translation>
-    </message>
-    <message>
-        <source>CSwitchM</source>
-        <translation type="obsolete">CSchalterM</translation>
-    </message>
-    <message>
-        <source>CSwitchP</source>
-        <translation type="obsolete">CSchalterP</translation>
-    </message>
-    <message>
-        <source>CSwitchH</source>
-        <translation type="obsolete">CSchalterH</translation>
-    </message>
-    <message>
-        <source>CSwitchO</source>
-        <translation type="obsolete">CSchalterO</translation>
-    </message>
-    <message>
-        <source>CSwitchN</source>
-        <translation type="obsolete">CSchalterN</translation>
-    </message>
-    <message>
-        <source>CSwitchQ</source>
-        <translation type="obsolete">CSchalterQ</translation>
-    </message>
-    <message>
-        <source>CSwitchR</source>
-        <translation type="obsolete">CSchalterR</translation>
-    </message>
-    <message>
-        <source>CSwitchS</source>
-        <translation type="obsolete">CSchalterS</translation>
-    </message>
-    <message>
-        <source>CSwitchL</source>
-        <translation type="obsolete">CSchalterL</translation>
-    </message>
-    <message>
-        <source>CSwitchK</source>
-        <translation type="obsolete">CSchalterK</translation>
-    </message>
-    <message>
-        <source>CSwitchJ</source>
-        <translation type="obsolete">CSchalterJ</translation>
-    </message>
-    <message>
-        <source>CSwitchI</source>
-        <translation type="obsolete">CSchalterI</translation>
-    </message>
-    <message>
-        <source>CSwitchU</source>
-        <translation type="obsolete">CSchalterU</translation>
-    </message>
-    <message>
-        <source>CSwitchV</source>
-        <translation type="obsolete">CSchalterV</translation>
-    </message>
-    <message>
-        <source>CSwitchW</source>
-        <translation type="obsolete">CSchalterW</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20914"/>
@@ -3540,70 +3031,6 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FSwitch17</source>
-        <translation type="obsolete">FSchalter17</translation>
-    </message>
-    <message>
-        <source>FSwitch18</source>
-        <translation type="obsolete">FSchalter18</translation>
-    </message>
-    <message>
-        <source>FSwitch19</source>
-        <translation type="obsolete">FSchalter19</translation>
-    </message>
-    <message>
-        <source>FSwitch20</source>
-        <translation type="obsolete">FSchalter20</translation>
-    </message>
-    <message>
-        <source>FSwitch21</source>
-        <translation type="obsolete">FSchalter21</translation>
-    </message>
-    <message>
-        <source>FSwitch22</source>
-        <translation type="obsolete">FSchalter22</translation>
-    </message>
-    <message>
-        <source>FSwitch23</source>
-        <translation type="obsolete">FSchalter23</translation>
-    </message>
-    <message>
-        <source>FSwitch24</source>
-        <translation type="obsolete">FSchalter24</translation>
-    </message>
-    <message>
-        <source>FSwitch25</source>
-        <translation type="obsolete">FSchalter25</translation>
-    </message>
-    <message>
-        <source>FSwitch26</source>
-        <translation type="obsolete">FSchalter26</translation>
-    </message>
-    <message>
-        <source>FSwitch27</source>
-        <translation type="obsolete">FSchalter27</translation>
-    </message>
-    <message>
-        <source>FSwitch28</source>
-        <translation type="obsolete">FSchalter28</translation>
-    </message>
-    <message>
-        <source>FSwitch29</source>
-        <translation type="obsolete">FSchalter29</translation>
-    </message>
-    <message>
-        <source>FSwitch30</source>
-        <translation type="obsolete">FSchalter30</translation>
-    </message>
-    <message>
-        <source>FSwitch31</source>
-        <translation type="obsolete">FSchalter31</translation>
-    </message>
-    <message>
-        <source>FSwitch32</source>
-        <translation type="obsolete">FSchalter32</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="21145"/>
         <source>Telemetry</source>
         <translation>Telemetrie</translation>
@@ -3621,10 +3048,6 @@ Anzahl Sekunden fest, welche der Mischer für einen Durchgang von -100 bis +100 
         <location filename="modeledit.ui" line="22030"/>
         <source>Unit</source>
         <translation>Einheit</translation>
-    </message>
-    <message>
-        <source>Volts (v)</source>
-        <translation type="obsolete">Volt(v)</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21972"/>
@@ -4452,10 +3875,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Telemetry Gauges</source>
-        <translation type="obsolete">Telemetrie Balkenanzeigen</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="22742"/>
         <location filename="modeledit.ui" line="23081"/>
         <location filename="modeledit.ui" line="23532"/>
@@ -4475,14 +3894,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <location filename="modeledit.ui" line="23602"/>
         <source>Gauge 1</source>
         <translation>Balken 1</translation>
-    </message>
-    <message>
-        <source>TX Alarm</source>
-        <translation type="obsolete">TX Alarm</translation>
-    </message>
-    <message>
-        <source>RX Alarm</source>
-        <translation type="obsolete">RX Alarm</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="22845"/>
@@ -4531,14 +3942,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <translation>Modell Name</translation>
     </message>
     <message>
-        <source>Timer Mode</source>
-        <translation type="obsolete">Modus Stoppuhr</translation>
-    </message>
-    <message>
-        <source>Timer Direction</source>
-        <translation type="obsolete">Richtung Stoppuhr</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="2135"/>
         <location filename="modeledit.ui" line="2229"/>
         <source>Count Down</source>
@@ -4549,10 +3952,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <location filename="modeledit.ui" line="2234"/>
         <source>Count Up</source>
         <translation>Hinaufzählen</translation>
-    </message>
-    <message>
-        <source>Timer Value</source>
-        <translation type="obsolete">Einstellung Stoppuhr</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="2127"/>
@@ -4601,10 +4000,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <translation>Expo Gas</translation>
     </message>
     <message>
-        <source>instaTrim Switch</source>
-        <translation type="obsolete">instaTrim Schalter</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="155"/>
         <source>Center beep</source>
         <translation>Zentrierpiepston</translation>
@@ -4612,52 +4007,52 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
     <message>
         <location filename="modeledit.ui" line="352"/>
         <location filename="modeledit.ui" line="960"/>
-        <location filename="modeledit.cpp" line="6549"/>
-        <location filename="modeledit.cpp" line="6556"/>
-        <location filename="modeledit.cpp" line="6668"/>
-        <location filename="modeledit.cpp" line="6693"/>
-        <location filename="modeledit.cpp" line="6736"/>
-        <location filename="modeledit.cpp" line="6738"/>
-        <location filename="modeledit.cpp" line="6867"/>
+        <location filename="modeledit.cpp" line="6616"/>
+        <location filename="modeledit.cpp" line="6623"/>
+        <location filename="modeledit.cpp" line="6735"/>
+        <location filename="modeledit.cpp" line="6760"/>
+        <location filename="modeledit.cpp" line="6803"/>
+        <location filename="modeledit.cpp" line="6805"/>
+        <location filename="modeledit.cpp" line="6934"/>
         <source>RUD</source>
         <translation>RUD</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="362"/>
         <location filename="modeledit.ui" line="967"/>
-        <location filename="modeledit.cpp" line="6551"/>
-        <location filename="modeledit.cpp" line="6558"/>
-        <location filename="modeledit.cpp" line="6660"/>
-        <location filename="modeledit.cpp" line="6664"/>
-        <location filename="modeledit.cpp" line="6686"/>
-        <location filename="modeledit.cpp" line="6690"/>
-        <location filename="modeledit.cpp" line="6743"/>
-        <location filename="modeledit.cpp" line="6745"/>
-        <location filename="modeledit.cpp" line="6858"/>
-        <location filename="modeledit.cpp" line="6859"/>
+        <location filename="modeledit.cpp" line="6618"/>
+        <location filename="modeledit.cpp" line="6625"/>
+        <location filename="modeledit.cpp" line="6727"/>
+        <location filename="modeledit.cpp" line="6731"/>
+        <location filename="modeledit.cpp" line="6753"/>
+        <location filename="modeledit.cpp" line="6757"/>
+        <location filename="modeledit.cpp" line="6810"/>
+        <location filename="modeledit.cpp" line="6812"/>
+        <location filename="modeledit.cpp" line="6925"/>
+        <location filename="modeledit.cpp" line="6926"/>
         <source>ELE</source>
         <translation>ELE</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="328"/>
         <location filename="modeledit.ui" line="974"/>
-        <location filename="modeledit.cpp" line="6561"/>
-        <location filename="modeledit.cpp" line="6732"/>
-        <location filename="modeledit.cpp" line="6854"/>
+        <location filename="modeledit.cpp" line="6628"/>
+        <location filename="modeledit.cpp" line="6799"/>
+        <location filename="modeledit.cpp" line="6921"/>
         <source>THR</source>
         <translation>THR</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="372"/>
         <location filename="modeledit.ui" line="981"/>
-        <location filename="modeledit.cpp" line="6577"/>
-        <location filename="modeledit.cpp" line="6661"/>
-        <location filename="modeledit.cpp" line="6665"/>
-        <location filename="modeledit.cpp" line="6685"/>
-        <location filename="modeledit.cpp" line="6689"/>
-        <location filename="modeledit.cpp" line="6768"/>
-        <location filename="modeledit.cpp" line="6862"/>
-        <location filename="modeledit.cpp" line="6863"/>
+        <location filename="modeledit.cpp" line="6644"/>
+        <location filename="modeledit.cpp" line="6728"/>
+        <location filename="modeledit.cpp" line="6732"/>
+        <location filename="modeledit.cpp" line="6752"/>
+        <location filename="modeledit.cpp" line="6756"/>
+        <location filename="modeledit.cpp" line="6835"/>
+        <location filename="modeledit.cpp" line="6929"/>
+        <location filename="modeledit.cpp" line="6930"/>
         <source>AIL</source>
         <translation>AIL</translation>
     </message>
@@ -4720,10 +4115,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <translation>ch</translation>
     </message>
     <message>
-        <source>ppm Delay</source>
-        <translation type="obsolete">ppm Verzögerung</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="1175"/>
         <location filename="modeledit.ui" line="1429"/>
         <location filename="modeledit.ui" line="1748"/>
@@ -4737,7 +4128,7 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
     </message>
     <message>
         <location filename="modeledit.ui" line="3774"/>
-        <location filename="modeledit.cpp" line="3631"/>
+        <location filename="modeledit.cpp" line="3686"/>
         <source>Heli Setup</source>
         <translation>Hubschrauber Setup</translation>
     </message>
@@ -4798,66 +4189,6 @@ Wenn dieses angewählt wurde ist der Knüppelweg für Gas reversiert. Leerlaufst
         <translation>Collective Pitch invertieren</translation>
     </message>
     <message>
-        <source>Expo/Dr</source>
-        <translation type="obsolete">Expo/Dir</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="obsolete">HOCH</translation>
-    </message>
-    <message>
-        <source>MID</source>
-        <translation type="obsolete">MITTE</translation>
-    </message>
-    <message>
-        <source>LOW</source>
-        <translation type="obsolete">NIEDRIG</translation>
-    </message>
-    <message>
-        <source>Expo
-Left</source>
-        <translation type="obsolete">Expo links</translation>
-    </message>
-    <message>
-        <source>D/R
-Left</source>
-        <translation type="obsolete">D/R links</translation>
-    </message>
-    <message>
-        <source>D/R
-Right</source>
-        <translation type="obsolete">D/R rechts</translation>
-    </message>
-    <message>
-        <source>Expo
-Right</source>
-        <translation type="obsolete">Expo rechts</translation>
-    </message>
-    <message>
-        <source>Switch1</source>
-        <translation type="obsolete">Schalter1</translation>
-    </message>
-    <message>
-        <source>Switch2</source>
-        <translation type="obsolete">Schalter2</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation type="obsolete">Seitenruder</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation type="obsolete">Querruder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation type="obsolete">Gas</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation type="obsolete">Höhenruder</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="9031"/>
         <source>Mixes</source>
         <translation>Mischer</translation>
@@ -4866,10 +4197,6 @@ Right</source>
         <location filename="modeledit.ui" line="9048"/>
         <source>Limits</source>
         <translation>Grenzen</translation>
-    </message>
-    <message>
-        <source>NOR</source>
-        <translation type="obsolete">NOR</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="9292"/>
@@ -4984,18 +4311,6 @@ Right</source>
         <translation>Erweiterte Trimmung</translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation type="obsolete">Phasen</translation>
-    </message>
-    <message>
-        <source>Flight Phase 0 (default)</source>
-        <translation type="obsolete">Flugphase 0 (standard)</translation>
-    </message>
-    <message>
-        <source>Phase Name</source>
-        <translation type="obsolete">Phasen Name</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="3931"/>
         <location filename="modeledit.ui" line="4618"/>
         <location filename="modeledit.ui" line="5175"/>
@@ -5074,27 +4389,6 @@ Right</source>
         <translation>Trimmung3</translation>
     </message>
     <message>
-        <source>Flight Phase 1</source>
-        <translation type="obsolete">Flugphase 1</translation>
-    </message>
-    <message>
-        <source>Flight Phase 2</source>
-        <translation type="obsolete">Flugphase 2</translation>
-    </message>
-    <message>
-        <source>Flight Phase 3</source>
-        <translation type="obsolete">Flugpase3</translation>
-    </message>
-    <message>
-        <source>Flight Phase 4</source>
-        <translation type="obsolete">Flugphase 4</translation>
-    </message>
-    <message>
-        <source>Expos/DR</source>
-        <oldsource>Expos</oldsource>
-        <translation type="obsolete">Expos/DR</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="14101"/>
         <source>Curve 3</source>
         <translation>Kurve 3</translation>
@@ -5171,34 +4465,6 @@ Right</source>
         <translation>Alle Kurven löschen</translation>
     </message>
     <message>
-        <source>Switches</source>
-        <translation type="obsolete">Schalter</translation>
-    </message>
-    <message>
-        <source>CSwitch1</source>
-        <translation type="obsolete">CSchalter1</translation>
-    </message>
-    <message>
-        <source>CSwitch2</source>
-        <translation type="obsolete">CSchalter2</translation>
-    </message>
-    <message>
-        <source>CSwitch3</source>
-        <translation type="obsolete">CSchalter3</translation>
-    </message>
-    <message>
-        <source>CSwitch4</source>
-        <translation type="obsolete">CSchalter4</translation>
-    </message>
-    <message>
-        <source>CSwitch5</source>
-        <translation type="obsolete">CSchalter5</translation>
-    </message>
-    <message>
-        <source>CSwitch6</source>
-        <translation type="obsolete">CSchalter6</translation>
-    </message>
-    <message>
         <location filename="modeledit.ui" line="19619"/>
         <location filename="modeledit.ui" line="20286"/>
         <location filename="modeledit.ui" line="20974"/>
@@ -5222,33 +4488,6 @@ Right</source>
         <location filename="modeledit.ui" line="19908"/>
         <source>V2</source>
         <translation>V2</translation>
-    </message>
-    <message>
-        <source>CSwitch7</source>
-        <translation type="obsolete">CSchalter7</translation>
-    </message>
-    <message>
-        <source>CSwitch8</source>
-        <translation type="obsolete">CSchalter8</translation>
-    </message>
-    <message>
-        <source>CSwitch9</source>
-        <translation type="obsolete">CSchalter9</translation>
-    </message>
-    <message>
-        <source>CSwitchA</source>
-        <oldsource>CSwitch10</oldsource>
-        <translation type="obsolete">CSchalterA</translation>
-    </message>
-    <message>
-        <source>CSwitchB</source>
-        <oldsource>CSwitch11</oldsource>
-        <translation type="obsolete">CSchalterB</translation>
-    </message>
-    <message>
-        <source>CSwitchC</source>
-        <oldsource>CSwitch12</oldsource>
-        <translation type="obsolete">CSchalterC</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="20499"/>
@@ -5278,47 +4517,11 @@ Right</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <source>Trims</source>
-        <translation type="obsolete">Trimmer</translation>
-    </message>
-    <message>
-        <source>STICK 1</source>
-        <translation type="obsolete">KNÜPPEL 1</translation>
-    </message>
-    <message>
-        <source>STICK 2</source>
-        <translation type="obsolete">KNÜPPEL 2</translation>
-    </message>
-    <message>
-        <source>STICK 4</source>
-        <translation type="obsolete">KNÜPPEL 4</translation>
-    </message>
-    <message>
-        <source>STICK 3</source>
-        <translation type="obsolete">KNÜPPEL 3</translation>
-    </message>
-    <message>
         <location filename="modeledit.cpp" line="1608"/>
         <location filename="modeledit.cpp" line="1627"/>
         <location filename="modeledit.cpp" line="1734"/>
         <source>CH%1%2</source>
         <translation>CH%1%2</translation>
-    </message>
-    <message>
-        <source> Switch(</source>
-        <translation type="obsolete">Schalter(</translation>
-    </message>
-    <message>
-        <source> noTrim</source>
-        <translation type="obsolete">kein Trimmer</translation>
-    </message>
-    <message>
-        <source> Offset(%1%)</source>
-        <translation type="obsolete"> Offset(%1%)</translation>
-    </message>
-    <message>
-        <source> Curve(%1)</source>
-        <translation type="obsolete">Kurve(%1)</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1708"/>
@@ -5336,28 +4539,16 @@ Right</source>
         <translation>Warnung(%1)</translation>
     </message>
     <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Kurve %1</translation>
-    </message>
-    <message>
         <location filename="modeledit.cpp" line="1515"/>
         <location filename="modeledit.cpp" line="1518"/>
         <source>Expo</source>
         <translation>Expo</translation>
     </message>
     <message>
-        <source>Phase</source>
-        <translation type="obsolete">Phase</translation>
-    </message>
-    <message>
         <location filename="modeledit.cpp" line="1557"/>
         <location filename="modeledit.cpp" line="1703"/>
         <source>Curve</source>
         <translation>Kurve</translation>
-    </message>
-    <message>
-        <source>noTrim</source>
-        <translation type="obsolete">keinTrim</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1698"/>
@@ -5370,333 +4561,333 @@ Right</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="2749"/>
+        <location filename="modeledit.cpp" line="2782"/>
         <source>CF%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3064"/>
+        <location filename="modeledit.cpp" line="3111"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3064"/>
+        <location filename="modeledit.cpp" line="3111"/>
         <source>Unable to find sound file %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3420"/>
+        <location filename="modeledit.cpp" line="3475"/>
         <source>Winged Shadow How High</source>
         <translation>Winged Shadow How High</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3422"/>
+        <location filename="modeledit.cpp" line="3477"/>
         <source>Winged Shadow How High (not supported)</source>
         <translation>Winged Shadow How High (nicht unterstützt)</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3465"/>
-        <location filename="modeledit.cpp" line="3466"/>
+        <location filename="modeledit.cpp" line="3520"/>
+        <location filename="modeledit.cpp" line="3521"/>
         <source>Range</source>
         <translation>Bereich</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3626"/>
+        <location filename="modeledit.cpp" line="3681"/>
         <source>Simple 4-CH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3627"/>
+        <location filename="modeledit.cpp" line="3682"/>
         <source>T-Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3628"/>
+        <location filename="modeledit.cpp" line="3683"/>
         <source>Sticky T-Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3629"/>
+        <location filename="modeledit.cpp" line="3684"/>
         <source>V-Tail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3630"/>
+        <location filename="modeledit.cpp" line="3685"/>
         <source>Elevon\Delta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3632"/>
+        <location filename="modeledit.cpp" line="3687"/>
         <source>Heli Setup with gyro gain control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3633"/>
+        <location filename="modeledit.cpp" line="3688"/>
         <source>Gyro gain control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3634"/>
+        <location filename="modeledit.cpp" line="3689"/>
         <source>Heli Setup (Futaba&apos;s channel assignment style)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3635"/>
+        <location filename="modeledit.cpp" line="3690"/>
         <source>Heli Setup with gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3636"/>
+        <location filename="modeledit.cpp" line="3691"/>
         <source>Gyro gain control (Futaba&apos;s channel assignment style)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3637"/>
+        <location filename="modeledit.cpp" line="3692"/>
         <source>Servo Test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3638"/>
+        <location filename="modeledit.cpp" line="3693"/>
         <source>MultiCopter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="3639"/>
+        <location filename="modeledit.cpp" line="3694"/>
         <source>Use Model Config Wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5392"/>
+        <location filename="modeledit.cpp" line="5447"/>
         <source>Not enough available mixers!</source>
         <translation>Nicht genügend Mischer verfügbar!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5447"/>
+        <location filename="modeledit.cpp" line="5502"/>
         <source>Not enough available expos!</source>
         <translation>Nicht genügend Expos verfügbar!</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5588"/>
+        <location filename="modeledit.cpp" line="5643"/>
         <source>Delete Selected Mixes?</source>
         <translation>Lösche ausgewählte Mischer?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5849"/>
-        <location filename="modeledit.cpp" line="5873"/>
+        <location filename="modeledit.cpp" line="5904"/>
+        <location filename="modeledit.cpp" line="5928"/>
         <source>&amp;Add</source>
         <translation>&amp;Addieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5849"/>
-        <location filename="modeledit.cpp" line="5873"/>
+        <location filename="modeledit.cpp" line="5904"/>
+        <location filename="modeledit.cpp" line="5928"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+a</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5850"/>
-        <location filename="modeledit.cpp" line="5874"/>
+        <location filename="modeledit.cpp" line="5905"/>
+        <location filename="modeledit.cpp" line="5929"/>
         <source>&amp;Edit</source>
         <translation>&amp;Editieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5850"/>
-        <location filename="modeledit.cpp" line="5874"/>
+        <location filename="modeledit.cpp" line="5905"/>
+        <location filename="modeledit.cpp" line="5929"/>
         <source>Enter</source>
         <translation>Eingabe</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5852"/>
-        <location filename="modeledit.cpp" line="5876"/>
-        <location filename="modeledit.cpp" line="5949"/>
-        <location filename="modeledit.cpp" line="5974"/>
+        <location filename="modeledit.cpp" line="5907"/>
+        <location filename="modeledit.cpp" line="5931"/>
+        <location filename="modeledit.cpp" line="6004"/>
+        <location filename="modeledit.cpp" line="6029"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5852"/>
-        <location filename="modeledit.cpp" line="5876"/>
-        <location filename="modeledit.cpp" line="5949"/>
-        <location filename="modeledit.cpp" line="5974"/>
+        <location filename="modeledit.cpp" line="5907"/>
+        <location filename="modeledit.cpp" line="5931"/>
+        <location filename="modeledit.cpp" line="6004"/>
+        <location filename="modeledit.cpp" line="6029"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5853"/>
-        <location filename="modeledit.cpp" line="5877"/>
-        <location filename="modeledit.cpp" line="5950"/>
-        <location filename="modeledit.cpp" line="5975"/>
+        <location filename="modeledit.cpp" line="5908"/>
+        <location filename="modeledit.cpp" line="5932"/>
+        <location filename="modeledit.cpp" line="6005"/>
+        <location filename="modeledit.cpp" line="6030"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5853"/>
-        <location filename="modeledit.cpp" line="5877"/>
-        <location filename="modeledit.cpp" line="5950"/>
-        <location filename="modeledit.cpp" line="5975"/>
+        <location filename="modeledit.cpp" line="5908"/>
+        <location filename="modeledit.cpp" line="5932"/>
+        <location filename="modeledit.cpp" line="6005"/>
+        <location filename="modeledit.cpp" line="6030"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+c</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5854"/>
-        <location filename="modeledit.cpp" line="5878"/>
-        <location filename="modeledit.cpp" line="5951"/>
-        <location filename="modeledit.cpp" line="5976"/>
+        <location filename="modeledit.cpp" line="5909"/>
+        <location filename="modeledit.cpp" line="5933"/>
+        <location filename="modeledit.cpp" line="6006"/>
+        <location filename="modeledit.cpp" line="6031"/>
         <source>&amp;Cut</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5854"/>
-        <location filename="modeledit.cpp" line="5878"/>
-        <location filename="modeledit.cpp" line="5951"/>
-        <location filename="modeledit.cpp" line="5976"/>
+        <location filename="modeledit.cpp" line="5909"/>
+        <location filename="modeledit.cpp" line="5933"/>
+        <location filename="modeledit.cpp" line="6006"/>
+        <location filename="modeledit.cpp" line="6031"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+x</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5855"/>
-        <location filename="modeledit.cpp" line="5879"/>
-        <location filename="modeledit.cpp" line="5952"/>
-        <location filename="modeledit.cpp" line="5977"/>
+        <location filename="modeledit.cpp" line="5910"/>
+        <location filename="modeledit.cpp" line="5934"/>
+        <location filename="modeledit.cpp" line="6007"/>
+        <location filename="modeledit.cpp" line="6032"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5855"/>
-        <location filename="modeledit.cpp" line="5879"/>
-        <location filename="modeledit.cpp" line="5952"/>
-        <location filename="modeledit.cpp" line="5977"/>
+        <location filename="modeledit.cpp" line="5910"/>
+        <location filename="modeledit.cpp" line="5934"/>
+        <location filename="modeledit.cpp" line="6007"/>
+        <location filename="modeledit.cpp" line="6032"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+v</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5856"/>
-        <location filename="modeledit.cpp" line="5880"/>
+        <location filename="modeledit.cpp" line="5911"/>
+        <location filename="modeledit.cpp" line="5935"/>
         <source>Du&amp;plicate</source>
         <translation>D&amp;uplizieren</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6186"/>
+        <location filename="modeledit.cpp" line="6253"/>
         <source>Are you sure you want to delete curve %1 ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6584"/>
-        <location filename="modeledit.cpp" line="6590"/>
-        <location filename="modeledit.cpp" line="6775"/>
-        <location filename="modeledit.cpp" line="6781"/>
+        <location filename="modeledit.cpp" line="6651"/>
+        <location filename="modeledit.cpp" line="6657"/>
+        <location filename="modeledit.cpp" line="6842"/>
+        <location filename="modeledit.cpp" line="6848"/>
         <source>AIL2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6597"/>
-        <location filename="modeledit.cpp" line="6603"/>
-        <location filename="modeledit.cpp" line="6788"/>
-        <location filename="modeledit.cpp" line="6794"/>
+        <location filename="modeledit.cpp" line="6664"/>
+        <location filename="modeledit.cpp" line="6670"/>
+        <location filename="modeledit.cpp" line="6855"/>
+        <location filename="modeledit.cpp" line="6861"/>
         <source>ELE2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6607"/>
-        <location filename="modeledit.cpp" line="6608"/>
-        <location filename="modeledit.cpp" line="6798"/>
-        <location filename="modeledit.cpp" line="6799"/>
-        <location filename="modeledit.cpp" line="6893"/>
-        <location filename="modeledit.cpp" line="6894"/>
+        <location filename="modeledit.cpp" line="6674"/>
+        <location filename="modeledit.cpp" line="6675"/>
+        <location filename="modeledit.cpp" line="6865"/>
+        <location filename="modeledit.cpp" line="6866"/>
+        <location filename="modeledit.cpp" line="6960"/>
+        <location filename="modeledit.cpp" line="6961"/>
         <source>FLAPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6622"/>
-        <location filename="modeledit.cpp" line="6628"/>
-        <location filename="modeledit.cpp" line="6813"/>
-        <location filename="modeledit.cpp" line="6819"/>
-        <location filename="modeledit.cpp" line="6908"/>
-        <location filename="modeledit.cpp" line="6914"/>
+        <location filename="modeledit.cpp" line="6689"/>
+        <location filename="modeledit.cpp" line="6695"/>
+        <location filename="modeledit.cpp" line="6880"/>
+        <location filename="modeledit.cpp" line="6886"/>
+        <location filename="modeledit.cpp" line="6975"/>
+        <location filename="modeledit.cpp" line="6981"/>
         <source>FLAP%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6662"/>
-        <location filename="modeledit.cpp" line="6666"/>
-        <location filename="modeledit.cpp" line="6687"/>
-        <location filename="modeledit.cpp" line="6691"/>
+        <location filename="modeledit.cpp" line="6729"/>
+        <location filename="modeledit.cpp" line="6733"/>
+        <location filename="modeledit.cpp" line="6754"/>
+        <location filename="modeledit.cpp" line="6758"/>
         <source>PITCH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6675"/>
-        <location filename="modeledit.cpp" line="6676"/>
-        <location filename="modeledit.cpp" line="6679"/>
-        <location filename="modeledit.cpp" line="6680"/>
-        <location filename="modeledit.cpp" line="6700"/>
-        <location filename="modeledit.cpp" line="6701"/>
-        <location filename="modeledit.cpp" line="6704"/>
-        <location filename="modeledit.cpp" line="6705"/>
+        <location filename="modeledit.cpp" line="6742"/>
+        <location filename="modeledit.cpp" line="6743"/>
+        <location filename="modeledit.cpp" line="6746"/>
+        <location filename="modeledit.cpp" line="6747"/>
+        <location filename="modeledit.cpp" line="6767"/>
+        <location filename="modeledit.cpp" line="6768"/>
+        <location filename="modeledit.cpp" line="6771"/>
+        <location filename="modeledit.cpp" line="6772"/>
         <source>GYRO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6823"/>
-        <location filename="modeledit.cpp" line="6824"/>
+        <location filename="modeledit.cpp" line="6890"/>
+        <location filename="modeledit.cpp" line="6891"/>
         <source>SPOIL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6838"/>
-        <location filename="modeledit.cpp" line="6844"/>
+        <location filename="modeledit.cpp" line="6905"/>
+        <location filename="modeledit.cpp" line="6911"/>
         <source>SPOIL%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6883"/>
-        <location filename="modeledit.cpp" line="6889"/>
+        <location filename="modeledit.cpp" line="6950"/>
+        <location filename="modeledit.cpp" line="6956"/>
         <source>RUD2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7092"/>
+        <location filename="modeledit.cpp" line="7159"/>
         <source>Really clear existing mixes on CH6?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7204"/>
+        <location filename="modeledit.cpp" line="7271"/>
         <source>Really clear existing mixes on CH5?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="7315"/>
+        <location filename="modeledit.cpp" line="7382"/>
         <source>Not enough free points in eeprom to store the curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="197"/>
         <location filename="modeledit.cpp" line="229"/>
-        <location filename="modeledit.cpp" line="5858"/>
-        <location filename="modeledit.cpp" line="5882"/>
+        <location filename="modeledit.cpp" line="5913"/>
+        <location filename="modeledit.cpp" line="5937"/>
         <source>Move Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="199"/>
         <location filename="modeledit.cpp" line="231"/>
-        <location filename="modeledit.cpp" line="5858"/>
-        <location filename="modeledit.cpp" line="5882"/>
+        <location filename="modeledit.cpp" line="5913"/>
+        <location filename="modeledit.cpp" line="5937"/>
         <source>Ctrl+Up</source>
         <translation>Ctrl+Up</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="200"/>
         <location filename="modeledit.cpp" line="232"/>
-        <location filename="modeledit.cpp" line="5859"/>
-        <location filename="modeledit.cpp" line="5883"/>
+        <location filename="modeledit.cpp" line="5914"/>
+        <location filename="modeledit.cpp" line="5938"/>
         <source>Move Down</source>
         <translation>Nach unten</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="202"/>
         <location filename="modeledit.cpp" line="234"/>
-        <location filename="modeledit.cpp" line="5859"/>
-        <location filename="modeledit.cpp" line="5883"/>
+        <location filename="modeledit.cpp" line="5914"/>
+        <location filename="modeledit.cpp" line="5938"/>
         <source>Ctrl+Down</source>
         <translation>Ctrl+Down</translation>
     </message>
@@ -5795,64 +4986,60 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5335"/>
+        <location filename="modeledit.cpp" line="5390"/>
         <source>Editing curve %1</source>
         <translation>Kurve %1 bearbeiten</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="5626"/>
+        <location filename="modeledit.cpp" line="5681"/>
         <source>Delete Selected Expos?</source>
         <translation>Ausgewählte Expos löschen?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6304"/>
+        <location filename="modeledit.cpp" line="6371"/>
         <source>Apply Template?</source>
         <translation>Vorlage anwenden ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6304"/>
+        <location filename="modeledit.cpp" line="6371"/>
         <source>Apply template &quot;%1&quot;?</source>
         <translation>Vorlage anwenden &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6329"/>
+        <location filename="modeledit.cpp" line="6396"/>
         <source>Clear Expos?</source>
         <translation>Expo löschen?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6329"/>
+        <location filename="modeledit.cpp" line="6396"/>
         <source>Really clear all the expos?</source>
         <translation>Wirklich alle Expos löschen?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6340"/>
-        <location filename="modeledit.cpp" line="7092"/>
-        <location filename="modeledit.cpp" line="7204"/>
+        <location filename="modeledit.cpp" line="6407"/>
+        <location filename="modeledit.cpp" line="7159"/>
+        <location filename="modeledit.cpp" line="7271"/>
         <source>Clear Mixes?</source>
         <translation>Mischer löschen?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6340"/>
+        <location filename="modeledit.cpp" line="6407"/>
         <source>Really clear all the mixes?</source>
         <translation>Wirklich alle Mischer löschen ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6351"/>
+        <location filename="modeledit.cpp" line="6418"/>
         <source>Clear Curves?</source>
         <translation>Kurven löschen ?</translation>
     </message>
     <message>
-        <location filename="modeledit.cpp" line="6351"/>
+        <location filename="modeledit.cpp" line="6418"/>
         <source>Really clear all the curves?</source>
         <translation>Wirklich alle Kurven löschen ?</translation>
     </message>
     <message>
-        <source>D&amp;uplicate</source>
-        <translation type="obsolete">D&amp;uplizieren</translation>
-    </message>
-    <message>
-        <location filename="modeledit.cpp" line="5856"/>
-        <location filename="modeledit.cpp" line="5880"/>
+        <location filename="modeledit.cpp" line="5911"/>
+        <location filename="modeledit.cpp" line="5935"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+u</translation>
     </message>
@@ -5990,10 +5177,6 @@ Right</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>Safety</source>
-        <translation type="obsolete">Sicherheit</translation>
-    </message>
-    <message>
         <location filename="helpers.cpp" line="8"/>
         <location filename="helpers.cpp" line="14"/>
         <source>FM%1</source>
@@ -6066,18 +5249,9 @@ Right</source>
         <translation>Instant Trim</translation>
     </message>
     <message>
-        <source>Trims2Offsets</source>
-        <translation type="obsolete">Trims2Offsets</translation>
-    </message>
-    <message>
         <location filename="helpers.cpp" line="135"/>
         <source>Play Sound</source>
         <translation>Audio abspielen</translation>
-    </message>
-    <message>
-        <source>Play Somo</source>
-        <translatorcomment>no idea</translatorcomment>
-        <translation type="obsolete">Play Somo</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="149"/>
@@ -6459,10 +5633,6 @@ Right</source>
         <location filename="helpers.cpp" line="549"/>
         <source>Own trim</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flight phase %1 trim</source>
-        <translation type="obsolete">FPHase %1 Trimmung</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="562"/>
@@ -7503,114 +6673,6 @@ Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CYC1</source>
-        <translation type="obsolete">CYC1</translation>
-    </message>
-    <message>
-        <source>CYC2</source>
-        <translation type="obsolete">CYC2</translation>
-    </message>
-    <message>
-        <source>CYC3</source>
-        <translation type="obsolete">CYC3</translation>
-    </message>
-    <message>
-        <source>PPM1</source>
-        <translation type="obsolete">PPM1</translation>
-    </message>
-    <message>
-        <source>PPM2</source>
-        <translation type="obsolete">PPM2</translation>
-    </message>
-    <message>
-        <source>PPM3</source>
-        <translation type="obsolete">PPM3</translation>
-    </message>
-    <message>
-        <source>PPM4</source>
-        <translation type="obsolete">PPM4</translation>
-    </message>
-    <message>
-        <source>PPM5</source>
-        <translation type="obsolete">PPM5</translation>
-    </message>
-    <message>
-        <source>PPM6</source>
-        <translation type="obsolete">PPM6</translation>
-    </message>
-    <message>
-        <source>PPM7</source>
-        <translation type="obsolete">PPM7</translation>
-    </message>
-    <message>
-        <source>PPM8</source>
-        <translation type="obsolete">PPM8</translation>
-    </message>
-    <message>
-        <source>CH1</source>
-        <translation type="obsolete">CH1</translation>
-    </message>
-    <message>
-        <source>CH2</source>
-        <translation type="obsolete">CH2</translation>
-    </message>
-    <message>
-        <source>CH3</source>
-        <translation type="obsolete">CH3</translation>
-    </message>
-    <message>
-        <source>CH4</source>
-        <translation type="obsolete">CH4</translation>
-    </message>
-    <message>
-        <source>CH5</source>
-        <translation type="obsolete">CH5</translation>
-    </message>
-    <message>
-        <source>CH6</source>
-        <translation type="obsolete">CH6</translation>
-    </message>
-    <message>
-        <source>CH7</source>
-        <translation type="obsolete">CH7</translation>
-    </message>
-    <message>
-        <source>CH8</source>
-        <translation type="obsolete">CH8</translation>
-    </message>
-    <message>
-        <source>CH9</source>
-        <translation type="obsolete">CH9</translation>
-    </message>
-    <message>
-        <source>CH10</source>
-        <translation type="obsolete">CH10</translation>
-    </message>
-    <message>
-        <source>CH11</source>
-        <translation type="obsolete">CH11</translation>
-    </message>
-    <message>
-        <source>CH12</source>
-        <translation type="obsolete">CH12</translation>
-    </message>
-    <message>
-        <source>CH13</source>
-        <translation type="obsolete">CH13</translation>
-    </message>
-    <message>
-        <source>CH14</source>
-        <translation type="obsolete">CH14</translation>
-    </message>
-    <message>
-        <source>CH15</source>
-        <translation type="obsolete">CH15</translation>
-    </message>
-    <message>
-        <source>CH16</source>
-        <translation type="obsolete">CH16</translation>
-    </message>
-    <message>
         <location filename="eeprominterface.cpp" line="268"/>
         <location filename="helpers.cpp" line="340"/>
         <location filename="helpers.cpp" line="414"/>
@@ -7635,18 +6697,6 @@ Right</source>
         <translation>A2</translation>
     </message>
     <message>
-        <source>ALT</source>
-        <translation type="obsolete">ALT</translation>
-    </message>
-    <message>
-        <source>RPM</source>
-        <translation type="obsolete">RPM</translation>
-    </message>
-    <message>
-        <source>FUEL</source>
-        <translation type="obsolete">FUEL</translation>
-    </message>
-    <message>
         <location filename="eeprominterface.cpp" line="269"/>
         <source>T1</source>
         <translation>T1</translation>
@@ -7655,14 +6705,6 @@ Right</source>
         <location filename="eeprominterface.cpp" line="270"/>
         <source>T2</source>
         <translation>T2</translation>
-    </message>
-    <message>
-        <source>SPEED</source>
-        <translation type="obsolete">SPEED</translation>
-    </message>
-    <message>
-        <source>CELL</source>
-        <translation type="obsolete">Zelle</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="1067"/>
@@ -7838,34 +6880,6 @@ Right</source>
         <translation>er9x</translation>
     </message>
     <message>
-        <source>open9x for stock board</source>
-        <translation type="obsolete">open9x für Standard Board</translation>
-    </message>
-    <message>
-        <source>open9x for v4 board</source>
-        <translation type="obsolete">open9x für v4 Board</translation>
-    </message>
-    <message>
-        <source>er9x - JETI</source>
-        <translation type="obsolete">er9x - JETI</translation>
-    </message>
-    <message>
-        <source>er9x - FrSky</source>
-        <translation type="obsolete">er9x - FrSky</translation>
-    </message>
-    <message>
-        <source>gruvin9x stable for stock board</source>
-        <translation type="obsolete">gruvin9x stabile Version für Standard Board</translation>
-    </message>
-    <message>
-        <source>gruvin9x stable for v4 board</source>
-        <translation type="obsolete">gruvin9x stabile Version für v4 Board</translation>
-    </message>
-    <message>
-        <source>gruvin9x trunk for stock board</source>
-        <translation type="obsolete">gruvin9x Entwickler Version für Standard Board</translation>
-    </message>
-    <message>
         <location filename="eeprominterface.cpp" line="302"/>
         <source>CYC%1</source>
         <translation type="unfinished"></translation>
@@ -7909,10 +6923,6 @@ Right</source>
         <translation type="unfinished">TRN</translation>
     </message>
     <message>
-        <source>SW%1</source>
-        <translation type="obsolete">SW%1</translation>
-    </message>
-    <message>
         <location filename="eeprominterface.cpp" line="363"/>
         <location filename="helpers.cpp" line="698"/>
         <source>ON</source>
@@ -7923,10 +6933,6 @@ Right</source>
         <location filename="helpers.cpp" line="698"/>
         <source>OFF</source>
         <translation type="unfinished">AUS</translation>
-    </message>
-    <message>
-        <source>gruvin9x trunk for v4 board</source>
-        <translation type="obsolete">gruvin9x Entwickler Version für v4 Board</translation>
     </message>
     <message>
         <location filename="er9xeeprom.cpp" line="285"/>
@@ -8003,7 +7009,7 @@ Right</source>
         <location filename="ersky9xinterface.cpp" line="254"/>
         <location filename="mdichild.cpp" line="160"/>
         <location filename="mdichild.cpp" line="650"/>
-        <location filename="modeledit.cpp" line="6171"/>
+        <location filename="modeledit.cpp" line="6238"/>
         <location filename="open9xinterface.cpp" line="472"/>
         <source>Warning</source>
         <translation>Warnung</translation>
@@ -8057,7 +7063,7 @@ Right</source>
     <message>
         <location filename="mdichild.cpp" line="161"/>
         <location filename="mdichild.cpp" line="651"/>
-        <location filename="modeledit.cpp" line="6172"/>
+        <location filename="modeledit.cpp" line="6239"/>
         <source>Simulator for this firmware is not yet available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8087,13 +7093,13 @@ Right</source>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1421"/>
-        <location filename="modeledit.cpp" line="3687"/>
+        <location filename="modeledit.cpp" line="3742"/>
         <source>Flight Mode 0 (Default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="1423"/>
-        <location filename="modeledit.cpp" line="3689"/>
+        <location filename="modeledit.cpp" line="3744"/>
         <source>FM %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8111,7 +7117,7 @@ Right</source>
     </message>
     <message>
         <location filename="open9xeeprom.cpp" line="1687"/>
-        <location filename="open9xeeprom.cpp" line="1766"/>
+        <location filename="open9xeeprom.cpp" line="1767"/>
         <source>OpenTX doesn&apos;t accept this protocol</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8143,22 +7149,6 @@ The openTX/C9X Team.</source>
         <translation>Zeige Details</translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation type="obsolete">Textlabel</translation>
-    </message>
-    <message>
-        <source>AVRDUDE result</source>
-        <translation type="obsolete">Ergebnisse AVRDUDE</translation>
-    </message>
-    <message>
-        <source>AVRDUDE - </source>
-        <translation type="obsolete">AVRDUDE - </translation>
-    </message>
-    <message>
-        <source>AVRDUDE executable not found</source>
-        <translation type="obsolete">AVRDUDE Programm nicht gefunden</translation>
-    </message>
-    <message>
         <location filename="avroutputdialog.cpp" line="55"/>
         <source>result</source>
         <oldsource> result</oldsource>
@@ -8171,113 +7161,107 @@ The openTX/C9X Team.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="137"/>
-        <location filename="avroutputdialog.cpp" line="144"/>
+        <location filename="avroutputdialog.cpp" line="138"/>
+        <location filename="avroutputdialog.cpp" line="145"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="137"/>
+        <location filename="avroutputdialog.cpp" line="138"/>
         <source>Cannot open source file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="144"/>
+        <location filename="avroutputdialog.cpp" line="145"/>
         <source>Cannot write destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="147"/>
+        <location filename="avroutputdialog.cpp" line="148"/>
         <source>Writing file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="299"/>
+        <location filename="avroutputdialog.cpp" line="296"/>
         <source>ie: OpenTX for 9X board or OpenTX for 9XR board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="303"/>
+        <location filename="avroutputdialog.cpp" line="300"/>
         <source>ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="311"/>
+        <location filename="avroutputdialog.cpp" line="308"/>
         <source>ie: OpenTX for Gruvin9X  board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="318"/>
+        <location filename="avroutputdialog.cpp" line="315"/>
         <source>Your radio uses a %1 CPU!!!
 
 Please check advanced burn options to set the correct cpu type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="321"/>
+        <location filename="avroutputdialog.cpp" line="318"/>
         <source>Your radio uses a %1 CPU!!!
 
 Please select an appropriate firmware type to program it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="321"/>
+        <location filename="avroutputdialog.cpp" line="318"/>
         <source>
 You are currently using:
  %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="341"/>
-        <location filename="avroutputdialog.cpp" line="343"/>
+        <location filename="avroutputdialog.cpp" line="338"/>
+        <location filename="avroutputdialog.cpp" line="340"/>
         <source>Writing</source>
         <translation>Schreiben</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="351"/>
-        <location filename="avroutputdialog.cpp" line="353"/>
+        <location filename="avroutputdialog.cpp" line="348"/>
+        <location filename="avroutputdialog.cpp" line="350"/>
         <source>Reading</source>
         <translation>Lesen</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="358"/>
-        <location filename="avroutputdialog.cpp" line="360"/>
+        <location filename="avroutputdialog.cpp" line="355"/>
+        <location filename="avroutputdialog.cpp" line="357"/>
         <source>Verifying</source>
         <translation>Prüfen</translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="387"/>
+        <location filename="avroutputdialog.cpp" line="383"/>
         <source>done - exit code %1</source>
         <oldsource> done - exit code %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="390"/>
+        <location filename="avroutputdialog.cpp" line="386"/>
         <source>done with errors</source>
         <oldsource> done with errors</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="392"/>
-        <location filename="avroutputdialog.cpp" line="394"/>
+        <location filename="avroutputdialog.cpp" line="388"/>
+        <location filename="avroutputdialog.cpp" line="390"/>
         <source>done - SUCCESSFUL</source>
         <oldsource> done - SUCCESSFUL</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="392"/>
-        <location filename="avroutputdialog.cpp" line="394"/>
-        <source>done - SUCCESSFUL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="avroutputdialog.cpp" line="419"/>
+        <location filename="avroutputdialog.cpp" line="414"/>
         <source>did not finish correctly</source>
         <oldsource> did not finish correctly</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="421"/>
+        <location filename="avroutputdialog.cpp" line="416"/>
         <source>did not finish correctly!
 Do you want some help ?</source>
         <oldsource> did not finish correctly!
@@ -8285,49 +7269,29 @@ Do you want some help ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="427"/>
+        <location filename="avroutputdialog.cpp" line="422"/>
         <source>Copy did not finish correctly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="433"/>
+        <location filename="avroutputdialog.cpp" line="428"/>
         <source>finished correctly</source>
         <oldsource> finished correctly</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="436"/>
+        <location filename="avroutputdialog.cpp" line="431"/>
         <source>Copy finished correctly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="avroutputdialog.cpp" line="452"/>
+        <location filename="avroutputdialog.cpp" line="445"/>
         <source>Started</source>
         <oldsource>Started </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AVRDUDE done - exit code %1</source>
-        <translation type="obsolete">AVRDUDE ist fertig - Exit code %1</translation>
-    </message>
-    <message>
-        <source>AVRDUDE done - SUCCESSFUL</source>
-        <translation type="obsolete">AVRDUDE ist fertig - ERFOLGREICH</translation>
-    </message>
-    <message>
-        <source>AVRDUDE did not finish correctly</source>
-        <translation type="obsolete">AVRDUDE konnte nicht richtig beendet werden</translation>
-    </message>
-    <message>
-        <source>AVRDUDE finished correctly</source>
-        <translation type="obsolete">AVRDUDE richtig beendet</translation>
-    </message>
-    <message>
-        <source>Started AVRDUDE</source>
-        <translation type="obsolete">AVRDUDE gestartet</translation>
-    </message>
-    <message>
-        <location filename="avroutputdialog.cpp" line="462"/>
+        <location filename="avroutputdialog.cpp" line="455"/>
         <source>FUSES: Low=%1 High=%2 Ext=%3</source>
         <translation>FUSES: Low=%1 High=%2 Ext=%3</translation>
     </message>
@@ -8352,10 +7316,6 @@ Do you want some help ?</oldsource>
         <source>The location of the AVRDUDE executable.</source>
         <oldsource>The location of the AVRDUDE.EXE executable.</oldsource>
         <translation>Speicherort der AVRDUDE Anwendung.</translation>
-    </message>
-    <message>
-        <source>Use this button to browse and look for the AVRDUDE.EXE executable file.</source>
-        <translation type="obsolete">Drücke diesen Knopf um nach der AVRDUDE.exe zu suchen.</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="26"/>
@@ -8459,11 +7419,6 @@ Bitte nutze dies nur wenn Du weißt was Du machst. Es gibt keine Plausibilitäts
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>avrdoper</source>
-        <translatorcomment>What that ?</translatorcomment>
-        <translation type="obsolete">avrdoper</translation>
-    </message>
-    <message>
         <location filename="burnconfigdialog.ui" line="544"/>
         <location filename="burnconfigdialog.ui" line="657"/>
         <source>Port</source>
@@ -8529,22 +7484,6 @@ Bitte nutze dies nur wenn Du weißt was Du machst. Es gibt keine Plausibilitäts
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;&lt;u&gt;WARNING!&lt;/u&gt;&lt;/b&gt;&lt;br&gt;This will reset the fuses to the factory settings.&lt;br&gt;Writing fuses can mess up your radio.&lt;br&gt;Do this only if you are sure they are wrong!&lt;br&gt;Are you sure you want to continue?</source>
-        <translatorcomment>wrong ? Shouldnt it be right ?</translatorcomment>
-        <translation type="obsolete">Warnung !
-Dies wird die Fuses auf Werkseinstellungen zurücksetzen. Das Schreiben der Fuses kann Deine Fernsteuerung unbrauchbar machen.
-Mache dies nur, wenn Du weißt daß diese richtig sind!
-Bist Du sicher ?</translation>
-    </message>
-    <message>
-        <source>mcu (not used for V4)</source>
-        <translation type="obsolete">mcu (nicht benützt für V4)</translation>
-    </message>
-    <message>
         <location filename="burnconfigdialog.ui" line="574"/>
         <location filename="burnconfigdialog.ui" line="604"/>
         <source>CPU of your TX</source>
@@ -8560,19 +7499,6 @@ m2560 for v4.1 boards</source>
 Sollte m64 sein für Standard Radios,
 m2560 fürRadios mit v4.1 Boards</translation>
     </message>
-    <message>
-        <source>m64</source>
-        <translation type="obsolete">m64</translation>
-    </message>
-    <message>
-        <source>m128</source>
-        <translation type="obsolete">m128</translation>
-    </message>
-    <message>
-        <source>m2560</source>
-        <oldsource>m328p</oldsource>
-        <translation type="obsolete">m328p</translation>
-    </message>
 </context>
 <context>
     <name>burnDialog</name>
@@ -8585,10 +7511,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <location filename="burndialog.ui" line="261"/>
         <source>Load Firmware</source>
         <translation>Firmware laden</translation>
-    </message>
-    <message>
-        <source>Version:</source>
-        <translation type="obsolete">Version:</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="123"/>
@@ -8619,10 +7541,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <location filename="burndialog.ui" line="213"/>
         <source>SVN</source>
         <translation>SVN</translation>
-    </message>
-    <message>
-        <source>MOD/Build</source>
-        <translation type="obsolete">MOD/Build</translation>
     </message>
     <message>
         <location filename="burndialog.ui" line="446"/>
@@ -8704,10 +7622,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <location filename="burndialog.cpp" line="151"/>
         <source>Open</source>
         <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>iHEX (*.hex);;BIN Files (*.bin)</source>
-        <translation type="obsolete">iHEX (*.hex);;BIN Files (*.bin)</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="243"/>
@@ -8795,19 +7709,11 @@ m2560 fürRadios mit v4.1 Boards</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Invalid EEPROM File %1</source>
-        <translation type="obsolete">Ungültige EEPROM Datei %1</translation>
-    </message>
-    <message>
         <location filename="burndialog.cpp" line="324"/>
         <source>Error reading file %1:
 %2.</source>
         <translation type="unfinished">Fehler beim Lesen der Datei %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>Invalid binary EEPROM File %1</source>
-        <translation type="obsolete">Ungültige EEPROM Programmdatei %1</translation>
     </message>
     <message>
         <location filename="burndialog.cpp" line="354"/>
@@ -8895,82 +7801,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Count Up</source>
-        <translation type="obsolete">Hinaufzählen</translation>
-    </message>
-    <message>
-        <source>Count Down</source>
-        <translation type="obsolete">Herunterzählen</translation>
-    </message>
-    <message>
-        <source>%1:%2, </source>
-        <translation type="obsolete">%1:%2, </translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %2msec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %2msec Verzögerung</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation type="obsolete">Seitenruder</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation type="obsolete">Höhenruder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation type="obsolete">Gas</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation type="obsolete">Querruder</translation>
-    </message>
-    <message>
-        <source>Extra Fine</source>
-        <translation type="obsolete">Sehr fein</translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation type="obsolete">Fein</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">Mittel</translation>
-    </message>
-    <message>
-        <source>Exponential</source>
-        <translation type="obsolete">Exponential</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="obsolete">orange</translation>
-    </message>
-    <message>
-        <source>---</source>
-        <translation type="obsolete">---</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High</source>
-        <translation type="obsolete">Winged Shadow How High</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High (not supported)</source>
-        <translation type="obsolete">Winged Shadow How High (nicht unterstützt)</translation>
-    </message>
-    <message>
-        <source>FrSky Sensor Hub</source>
-        <translation type="obsolete">FrSky Sensor Hub</translation>
-    </message>
-    <message>
-        <source>Imperial</source>
-        <translation type="obsolete">Imperial</translation>
-    </message>
-    <message>
-        <source>Metric</source>
-        <translation type="obsolete">Metrisch</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="246"/>
         <source>General Model Settings</source>
         <translation type="unfinished">Allg. Modell Einstellungen</translation>
@@ -9053,10 +7883,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished">Zentrierpieps</translation>
     </message>
     <message>
-        <source>Flight Phases Settings</source>
-        <translation type="obsolete">Einstellung Flugphasen</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="304"/>
         <location filename="comparedialog.cpp" line="405"/>
         <source>Fades</source>
@@ -9083,10 +7909,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished">Schalter</translation>
     </message>
     <message>
-        <source>Phase name</source>
-        <translation type="obsolete">Name FPhase</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="306"/>
         <location filename="comparedialog.cpp" line="407"/>
         <source>IN</source>
@@ -9097,10 +7919,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <location filename="comparedialog.cpp" line="407"/>
         <source>OUT</source>
         <translation type="unfinished">OUT</translation>
-    </message>
-    <message>
-        <source>FP</source>
-        <translation type="obsolete">FPh</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="352"/>
@@ -9211,10 +8029,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Phases</source>
-        <translation type="obsolete">Phasen</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="685"/>
         <location filename="comparedialog.cpp" line="764"/>
         <location filename="comparedialog.cpp" line="869"/>
@@ -9308,14 +8122,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SW</source>
-        <translation type="obsolete">FSch</translation>
-    </message>
-    <message>
-        <source>Function Switches</source>
-        <translation type="obsolete">Freie Schalter</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="1086"/>
         <location filename="comparedialog.cpp" line="1092"/>
         <source>Function</source>
@@ -9332,10 +8138,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <location filename="comparedialog.cpp" line="1095"/>
         <source>Enable</source>
         <translation type="unfinished">aktivieren</translation>
-    </message>
-    <message>
-        <source>FSW</source>
-        <translation type="obsolete">FSch</translation>
     </message>
     <message>
         <location filename="comparedialog.cpp" line="1210"/>
@@ -9496,10 +8298,6 @@ m2560 fürRadios mit v4.1 Boards</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>: %1 Channels, %2usec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %2usec Verzögerung {1 ?} {2u?}</translation>
-    </message>
-    <message>
         <location filename="comparedialog.cpp" line="1456"/>
         <source>Print Document</source>
         <translation type="unfinished">Drucke Dokument</translation>
@@ -9626,10 +8424,6 @@ p, li { white-space: pre-wrap; }
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>HEX files (*.hex);;</source>
-        <translation type="obsolete">HEX files (*.hex);;</translation>
-    </message>
-    <message>
         <location filename="customizesplashdialog.cpp" line="50"/>
         <source>Select an image to customize your splash &lt;br /&gt;or save actual firmware splash</source>
         <translation>Bitte Bild zum Bearbeiten des Startbildschirms auswählen&lt;br /&gt;oder aktueller Startbildschirm sichern</translation>
@@ -9697,13 +8491,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>donatorsDialog</name>
-    <message>
-        <source>List of Contributors</source>
-        <translation type="obsolete">Liste der Mitwirkenden</translation>
-    </message>
-</context>
-<context>
     <name>downloadDialog</name>
     <message>
         <location filename="downloaddialog.ui" line="14"/>
@@ -9721,10 +8508,6 @@ p, li { white-space: pre-wrap; }
         <translation>companion9x</translation>
     </message>
     <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
         <location filename="downloaddialog.cpp" line="55"/>
         <source>Download failed: %1.</source>
         <translation>Herunterladen fehlgeschlagen: %1.</translation>
@@ -9738,61 +8521,9 @@ p, li { white-space: pre-wrap; }
         <translation>Fuses</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Reads the current fuses in the AVR AtMega 64 controller.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Proper states:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;EEPROM erase fuse not set: 0E, 81, FF&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;EEPROM erase fuse set: 0E, 89, FF&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">Liest die aktuellen Fuses im AVR ATMEGA 64
-Richtiger Status:
-EEPROM Lösche fuses nicht gesetzt: 0E, 81, FF
-EEPROM Lösche fuses gesetzt: 0E, 89, FF</translation>
-    </message>
-    <message>
         <location filename="fusesdialog.ui" line="39"/>
         <source>Read Fuses</source>
         <translation>Lese Fuses</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Reset Fuses&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Fuses in the AVR tell it how to behave.  Pressing this button sets the fuses to the default parameters needed in the er9x FW.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This button also sets the &amp;quot;EEPROM protect&amp;quot; Fuse.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This prevents erasing of the EEPROM when the flash memory is written.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;WARNING&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Setting fuses can lead to problems and even a total lockout from your controller.  Do this only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;When in doubt consult either the project&apos;s page or the forums @ RCG and RXModelreviews.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;If you do get locked out - go to the project&apos;s homepage and lookup &amp;quot;dealing with Fuse Bricks&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Einstellungen der FUSES im AVR:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;
-Das Drücken dieses Knopfes setzt die Einstellungen der Fuses auf die Parameter zurück welche von der Firmware genutzt werden.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;
-Dieser Knopf setzt auch das EEPROM protect Fuse&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;
-Dies verhindert das Löschen des EEPROMs wenn der Flashspeicher beschrieben wird.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Warnung&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Das Setzen der Fuses kann zu Problemen führen und der Zugriff auf den Kontroller verhindern. Mache das nur wenn Du weißt was Du machst.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Wenn Du Zweifel hast konsultiere die Projectseite oder die Foren auf RCG und RXModelreviews.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Wenn der Zugriff auf den Kontroller nicht mehr möglich ist , gehe auf die Porjectseite und sehe nach wie Du mit den Fuse Bricks umgehen mußt.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="63"/>
@@ -9800,32 +8531,6 @@ Dies verhindert das Löschen des EEPROMs wenn der Flashspeicher beschrieben wird
 EEPROM - PROTECT</source>
         <translation>Fuses zurücksetzen
 EEPROM - PROTECT</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;Reset Fuses&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Fuses in the AVR tell it how to behave.  Pressing this button sets the fuses to the default parameters needed in the er9x FW.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This button also clears the &amp;quot;EEPROM protect&amp;quot; Fuse.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This causes erasing of the EEPROM when the flash memory is written.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline;&quot;&gt;WARNING&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Setting fuses can lead to problems and even a total lockout from your controller.  Do this only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;When in doubt consult either the project&apos;s page or the forums @ RCG and RXModelreviews.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;If you do get locked out - go to the project&apos;s homepage and lookup &amp;quot;dealing with Fuse Bricks&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">Einstellungen der FUSES im AVR:
-Das Drücken dieses Knopfes setzt die Einstellungen der Fuses auf die Parameter zurück welche von der er9X-Firmware genutzt werden.
-Dieser Knopf löscht auch das EEPROM protect Fuse
-Dies ermöglicht das Löschen des EEPROMs wenn der Flashspeicher beschrieben wird.
-Warnung
-Das Setzen der Fuses kann zu Problemen führen und der Zugriff auf den Kontroller verhindern. Mache das nur wenn Du weißt was Du machst.
-Wenn Du Zweifel hast konsultiere die Projectseite oder die Foren auf RCG und RXModelreviews.
-Wenn der Zugriff auf den Kontroller nicht mehr möglich ist , gehe auf die Porjectseite und sehe nach wie Du mit den Fuse Bricks umgehen mußt.</translation>
     </message>
     <message>
         <location filename="fusesdialog.ui" line="24"/>
@@ -9998,10 +8703,6 @@ Mache nur weiter, wenn Du weißt was Du machst</translation>
         <location filename="joystickdialog.ui" line="696"/>
         <source>P2</source>
         <translation>P2</translation>
-    </message>
-    <message>
-        <source>P3</source>
-        <translation type="obsolete">P3</translation>
     </message>
     <message>
         <location filename="joystickdialog.ui" line="117"/>
@@ -10655,33 +9356,9 @@ Wähle &quot;abbrechen&quot;, um die Kalibration abzubrechen</translation>
         <translation>Sprache (Benötigt Neustart)</translation>
     </message>
     <message>
-        <source>er9x</source>
-        <translation type="obsolete">er9x</translation>
-    </message>
-    <message>
-        <source>eePe</source>
-        <translation type="obsolete">eePe</translation>
-    </message>
-    <message>
         <location filename="preferencesdialog.ui" line="273"/>
         <source>Show Splash Screen</source>
         <translation>Startbild anzeigen</translation>
-    </message>
-    <message>
-        <source>Version to download</source>
-        <translation type="obsolete">Version zum Herunterladen</translation>
-    </message>
-    <message>
-        <source>er9x - JETI</source>
-        <translation type="obsolete">er9x - JETI</translation>
-    </message>
-    <message>
-        <source>er9x - FrSky</source>
-        <translation type="obsolete">er9x - FrSky</translation>
-    </message>
-    <message>
-        <source>er9x - Ardupilot</source>
-        <translation type="obsolete">er9x - Ardupilot</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="1040"/>
@@ -10753,10 +9430,6 @@ Mode 4:
   Rechter Knüppel:  Höhe, Seite
 
 </translation>
-    </message>
-    <message>
-        <source>Check selected Fw updates</source>
-        <translation type="obsolete">Prüfe ausgewählte Fw Updates</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="711"/>
@@ -10851,11 +9524,6 @@ May be different from firmware language</source>
     <message>
         <location filename="preferencesdialog.ui" line="977"/>
         <source>SD Structure path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="preferencesdialog.ui" line="987"/>
-        <source>Processor ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11006,6 +9674,11 @@ May be different from firmware language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="preferencesdialog.ui" line="987"/>
+        <source>Server access code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="preferencesdialog.ui" line="433"/>
         <source>Ask for flashing after Download</source>
         <translation type="unfinished"></translation>
@@ -11029,10 +9702,6 @@ May be different from firmware language</source>
         <location filename="preferencesdialog.ui" line="141"/>
         <source>Invert Pixels</source>
         <translation>Pixel invertieren</translation>
-    </message>
-    <message>
-        <source>BackLight Color</source>
-        <translation type="obsolete">HG Beleuchtung</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="353"/>
@@ -11089,10 +9758,6 @@ May be different from firmware language</source>
         <location filename="preferencesdialog.cpp" line="705"/>
         <source>Open Profile to import</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select your library dir</source>
-        <translation type="obsolete">Bitte Bibliothek Verzeichnis wählen</translation>
     </message>
     <message>
         <location filename="preferencesdialog.cpp" line="729"/>
@@ -11160,120 +9825,12 @@ May be different from firmware language</source>
         <translation>Einstellung für:</translation>
     </message>
     <message>
-        <source>Count Up</source>
-        <translation type="obsolete">Hinaufzählen</translation>
-    </message>
-    <message>
-        <source>Count Down</source>
-        <translation type="obsolete">Herunterzählen</translation>
-    </message>
-    <message>
-        <source>%1:%2, </source>
-        <translation type="obsolete">%1:%2, </translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %3msec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %3msec Verzögerung</translation>
-    </message>
-    <message>
-        <source>&lt;a name=1&gt;&lt;/a&gt;&lt;h1&gt;ER9x Model: %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">ER9x Modell: %1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;General Model Settings&lt;/h2&gt;&lt;br&gt;</source>
-        <translation type="obsolete">Generelle Modelleinstellungen</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="132"/>
         <location filename="printdialog.cpp" line="446"/>
         <location filename="printdialog.cpp" line="476"/>
         <location filename="printdialog.cpp" line="508"/>
         <source>Name</source>
         <translation>Name</translation>
-    </message>
-    <message>
-        <source>Timer</source>
-        <translation type="obsolete">Stoppuhr</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="obsolete">gelb</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="obsolete">orange</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="obsolete">rot</translation>
-    </message>
-    <message>
-        <source>---</source>
-        <translation type="obsolete">---</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High</source>
-        <translation type="obsolete">Winged Shadow How High</translation>
-    </message>
-    <message>
-        <source>Winged Shadow How High (not supported)</source>
-        <translation type="obsolete">Winged Shadow How High (nicht unterstützt)</translation>
-    </message>
-    <message>
-        <source>FrSky Sensor Hub</source>
-        <translation type="obsolete">FrSky Sensor Hub</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">keine</translation>
-    </message>
-    <message>
-        <source>Imperial</source>
-        <translation type="obsolete">Imperial</translation>
-    </message>
-    <message>
-        <source>Metric</source>
-        <translation type="obsolete">Metrisch</translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %2msec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %2msec Verzögerung</translation>
-    </message>
-    <message>
-        <source>Rudder</source>
-        <translation type="obsolete">Seitenruder</translation>
-    </message>
-    <message>
-        <source>Elevator</source>
-        <translation type="obsolete">Höhenruder</translation>
-    </message>
-    <message>
-        <source>Throttle</source>
-        <translation type="obsolete">Gas</translation>
-    </message>
-    <message>
-        <source>Aileron</source>
-        <translation type="obsolete">Querruder</translation>
-    </message>
-    <message>
-        <source>Extra Fine</source>
-        <translation type="obsolete">Sehr fein</translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation type="obsolete">Fein</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">Mittel</translation>
-    </message>
-    <message>
-        <source>Coarse</source>
-        <translation type="obsolete">grob</translation>
-    </message>
-    <message>
-        <source>Exponential</source>
-        <translation type="obsolete">Exponential</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="129"/>
@@ -11334,10 +9891,6 @@ May be different from firmware language</source>
         <translation>Expo Gas</translation>
     </message>
     <message>
-        <source>Flight Phases Settings</source>
-        <translation type="obsolete">Einstellung Flugphasen</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="168"/>
         <source>Fades</source>
         <translation>Übergänge</translation>
@@ -11346,10 +9899,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="169"/>
         <source>Trims</source>
         <translation>Trimmer</translation>
-    </message>
-    <message>
-        <source>Trim Switch</source>
-        <translation type="obsolete">Trimmerschalter</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="141"/>
@@ -11362,78 +9911,6 @@ May be different from firmware language</source>
         <translation>Zentrierpieps</translation>
     </message>
     <message>
-        <source>&lt;h2&gt;Expo/Dr Settings&lt;/h2&gt;</source>
-        <translation type="obsolete">Expo/Dr Einstellungen</translation>
-    </message>
-    <message>
-        <source>Switch 1:</source>
-        <translation type="obsolete">Schalter 1:</translation>
-    </message>
-    <message>
-        <source>Switch 2:</source>
-        <translation type="obsolete">Schalter 2:</translation>
-    </message>
-    <message>
-        <source>Expo Left</source>
-        <translation type="obsolete">Expo links</translation>
-    </message>
-    <message>
-        <source>D/R Left</source>
-        <translation type="obsolete">D/R links</translation>
-    </message>
-    <message>
-        <source>D/R Right</source>
-        <translation type="obsolete">D/R rechts</translation>
-    </message>
-    <message>
-        <source>Expo Right</source>
-        <translation type="obsolete">Expo rechts</translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="obsolete">HOCH</translation>
-    </message>
-    <message>
-        <source>Mid</source>
-        <translation type="obsolete">Mitte</translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="obsolete">Niedrig</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Mixers&lt;/h2&gt;&lt;br&gt;</source>
-        <translation type="obsolete">Mischer</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;CH%1&lt;/b&gt;</source>
-        <translation type="obsolete">CH%1</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation type="obsolete">%1%</translation>
-    </message>
-    <message>
-        <source> +%1%</source>
-        <translation type="obsolete"> +%1%</translation>
-    </message>
-    <message>
-        <source> Switch(</source>
-        <translation type="obsolete">Schalter(</translation>
-    </message>
-    <message>
-        <source> noTrim</source>
-        <translation type="obsolete">kein Trimmer</translation>
-    </message>
-    <message>
-        <source> Offset(%1%)</source>
-        <translation type="obsolete"> Offset(%1%)</translation>
-    </message>
-    <message>
-        <source> Curve(%1)</source>
-        <translation type="obsolete">Kurve(%1)</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="381"/>
         <source> Delay(u%1:d%2)</source>
         <translation>Verzögerung(u%1:d%2)</translation>
@@ -11444,43 +9921,11 @@ May be different from firmware language</source>
         <translation>Langsam/u%1:d%2)</translation>
     </message>
     <message>
-        <source> Warn(%1)</source>
-        <translation type="obsolete">Warnung(%1)</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Limits&lt;/h2&gt;</source>
-        <translation type="obsolete">Grenzen</translation>
-    </message>
-    <message>
-        <source>CH%1</source>
-        <translation type="obsolete">CH%1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Curves&lt;/h2&gt;</source>
-        <translation type="obsolete">Kurven</translation>
-    </message>
-    <message>
-        <source>5-point Curves</source>
-        <translation type="obsolete">5-Punkt-Kurven</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="579"/>
         <location filename="printdialog.cpp" line="618"/>
         <location filename="printdialog.cpp" line="692"/>
         <source>pt %1</source>
         <translation>pt %1</translation>
-    </message>
-    <message>
-        <source>Curve %1</source>
-        <translation type="obsolete">Kurve %1</translation>
-    </message>
-    <message>
-        <source>9-point Curves</source>
-        <translation type="obsolete">9-Punkt-Kurve</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Custom Switches&lt;/h2&gt;</source>
-        <translation type="obsolete">Spezifische Schalter</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="953"/>
@@ -11495,10 +9940,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="888"/>
         <source>Offset</source>
         <translation>Offset</translation>
-    </message>
-    <message>
-        <source>: %1 Channels, %2usec Delay</source>
-        <translation type="obsolete">: %1 Kanäle, %2usec Verzögerung {1 ?} {2u?}</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="171"/>
@@ -11557,14 +9998,6 @@ May be different from firmware language</source>
         <translation>Funktion</translation>
     </message>
     <message>
-        <source>SW%1</source>
-        <translation type="obsolete">SW%1</translation>
-    </message>
-    <message>
-        <source>&lt;h2&gt;Safety Switches&lt;/h2&gt;</source>
-        <translation type="obsolete">&lt;h2&gt;Sicherheitsschalter&lt;/h2&gt;</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="176"/>
         <location filename="printdialog.cpp" line="318"/>
         <location filename="printdialog.cpp" line="371"/>
@@ -11572,10 +10005,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="848"/>
         <source>Switch</source>
         <translation>Schalter</translation>
-    </message>
-    <message>
-        <source>Phase name</source>
-        <translation type="obsolete">Name FPhase</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="177"/>
@@ -11586,10 +10015,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="177"/>
         <source>OUT</source>
         <translation>OUT</translation>
-    </message>
-    <message>
-        <source>FP</source>
-        <translation type="obsolete">FPh</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="232"/>
@@ -11608,14 +10033,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="277"/>
         <source>Expo</source>
         <translation>Expo</translation>
-    </message>
-    <message>
-        <source>Phases</source>
-        <translation type="obsolete">Phasen</translation>
-    </message>
-    <message>
-        <source>Phase</source>
-        <translation type="obsolete">FPhase</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="313"/>
@@ -11731,10 +10148,6 @@ May be different from firmware language</source>
         <translation>Freie Schalter</translation>
     </message>
     <message>
-        <source>SW</source>
-        <translation type="obsolete">FSch</translation>
-    </message>
-    <message>
         <location filename="printdialog.cpp" line="818"/>
         <source>Safety Switches</source>
         <translation>Sicherheitsschalter</translation>
@@ -11762,10 +10175,6 @@ May be different from firmware language</source>
         <location filename="printdialog.cpp" line="851"/>
         <source>Repeat</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FSW</source>
-        <translation type="obsolete">FSch</translation>
     </message>
     <message>
         <location filename="printdialog.cpp" line="886"/>
@@ -11983,25 +10392,9 @@ May be different from firmware language</source>
         <translation>ID2</translation>
     </message>
     <message>
-        <source>SW1</source>
-        <translation type="obsolete">SW1</translation>
-    </message>
-    <message>
-        <source>SW2</source>
-        <translation type="obsolete">SW2</translation>
-    </message>
-    <message>
-        <source>SW3</source>
-        <translation type="obsolete">SW3</translation>
-    </message>
-    <message>
         <location filename="simulatordialog.ui" line="806"/>
         <source>BEEP</source>
         <translation>Piepston</translation>
-    </message>
-    <message>
-        <source>SW4</source>
-        <translation type="obsolete">SW4</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="80"/>
@@ -12027,41 +10420,6 @@ May be different from firmware language</source>
         <location filename="simulatordialog.ui" line="1239"/>
         <source>Outputs</source>
         <translation>Ausgaben</translation>
-    </message>
-    <message>
-        <source>SW5</source>
-        <translation type="obsolete">SW5</translation>
-    </message>
-    <message>
-        <source>SW6</source>
-        <translation type="obsolete">SW6</translation>
-    </message>
-    <message>
-        <source>SW7</source>
-        <translation type="obsolete">SW7</translation>
-    </message>
-    <message>
-        <source>SW8</source>
-        <translation type="obsolete">SW8</translation>
-    </message>
-    <message>
-        <source>SW9</source>
-        <translation type="obsolete">SW9</translation>
-    </message>
-    <message>
-        <source>SWA</source>
-        <oldsource>SW10</oldsource>
-        <translation type="obsolete">SW10</translation>
-    </message>
-    <message>
-        <source>SWB</source>
-        <oldsource>SW11</oldsource>
-        <translation type="obsolete">SW11</translation>
-    </message>
-    <message>
-        <source>SWC</source>
-        <oldsource>SW12</oldsource>
-        <translation type="obsolete">SW12</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="1854"/>
@@ -12352,10 +10710,6 @@ May be different from firmware language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> - Phase: %1(%2)</source>
-        <translation type="obsolete"> - Phase: %1(%2)</translation>
-    </message>
-    <message>
         <location filename="simulatordialog.cpp" line="333"/>
         <source>Simulating Tx (%1)</source>
         <translation>Simuliere Tx (%1)</translation>
@@ -12433,10 +10787,6 @@ May be different from firmware language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>P2</source>
-        <translation type="obsolete">P2</translation>
-    </message>
-    <message>
         <location filename="xsimulatordialog.ui" line="347"/>
         <location filename="xsimulatordialog.ui" line="605"/>
         <location filename="xsimulatordialog.ui" line="991"/>
@@ -12477,14 +10827,6 @@ May be different from firmware language</source>
         <translation type="unfinished">Halte Y</translation>
     </message>
     <message>
-        <source>P1</source>
-        <translation type="obsolete">P1</translation>
-    </message>
-    <message>
-        <source>P3</source>
-        <translation type="obsolete">P3</translation>
-    </message>
-    <message>
         <location filename="xsimulatordialog.ui" line="514"/>
         <location filename="xsimulatordialog.ui" line="575"/>
         <source>SH</source>
@@ -12518,58 +10860,6 @@ May be different from firmware language</source>
         <source>CSK</source>
         <oldsource>SWK</oldsource>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SW1</source>
-        <translation type="obsolete">SW1</translation>
-    </message>
-    <message>
-        <source>SW2</source>
-        <translation type="obsolete">SW2</translation>
-    </message>
-    <message>
-        <source>SW3</source>
-        <translation type="obsolete">SW3</translation>
-    </message>
-    <message>
-        <source>SW4</source>
-        <translation type="obsolete">SW4</translation>
-    </message>
-    <message>
-        <source>SW5</source>
-        <translation type="obsolete">SW5</translation>
-    </message>
-    <message>
-        <source>SW6</source>
-        <translation type="obsolete">SW6</translation>
-    </message>
-    <message>
-        <source>BEEP</source>
-        <translation type="obsolete">Piepston</translation>
-    </message>
-    <message>
-        <source>SW7</source>
-        <translation type="obsolete">SW7</translation>
-    </message>
-    <message>
-        <source>SW8</source>
-        <translation type="obsolete">SW8</translation>
-    </message>
-    <message>
-        <source>SW9</source>
-        <translation type="obsolete">SW9</translation>
-    </message>
-    <message>
-        <source>SWA</source>
-        <translation type="obsolete">SW10</translation>
-    </message>
-    <message>
-        <source>SWB</source>
-        <translation type="obsolete">SW11</translation>
-    </message>
-    <message>
-        <source>SWC</source>
-        <translation type="obsolete">SW12</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="1551"/>
@@ -12881,10 +11171,6 @@ May be different from firmware language</source>
         <location filename="xsimulatordialog.cpp" line="207"/>
         <source> - Flight mode: %1(%2)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> - Phase: %1(%2)</source>
-        <translation type="obsolete"> - Phase: %1(%2)</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.cpp" line="257"/>
