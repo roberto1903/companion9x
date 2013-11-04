@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>795</width>
+    <width>838</width>
     <height>912</height>
    </rect>
   </property>
@@ -237,16 +237,49 @@ These will be relevant for all models in the same EEPROM.</string>
          </property>
         </widget>
        </item>
+       <item row="18" column="0">
+        <widget class="QLabel" name="StickScrollLB">
+         <property name="text">
+          <string>StickScroll</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QSpinBox" name="speakerPitchSB">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>20</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
        <item row="15" column="1" colspan="4">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QCheckBox" name="beepMinuteChkB">
            <property name="whatsThis">
-            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Single Beep Every whole Minute&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>Single Beep Every whole Minute</string>
            </property>
            <property name="text">
             <string>Every Minute</string>
@@ -266,11 +299,7 @@ p, li { white-space: pre-wrap; }
          <item>
           <widget class="QCheckBox" name="beepFlashChkB">
            <property name="whatsThis">
-            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Flash backlight on timer  beep&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>Flash backlight on timer beep</string>
            </property>
            <property name="text">
             <string>Flash on beep</string>
@@ -458,12 +487,7 @@ p, li { white-space: pre-wrap; }
           <string/>
          </property>
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>LCD Screen Contrast\nValues can be 20-45</string>
          </property>
          <property name="minimum">
           <number>10</number>
@@ -568,33 +592,6 @@ Mode 4:
          </property>
          <property name="singleStep">
           <number>5</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QSpinBox" name="speakerPitchSB">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;LCD Screen Contrast&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Values can be 20-45&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>20</number>
-         </property>
-         <property name="value">
-          <number>1</number>
          </property>
         </widget>
        </item>
@@ -755,17 +752,7 @@ If this is checked the throttle will be reversed.  Idle will be forward, trim wi
        <item row="17" column="1">
         <widget class="QCheckBox" name="PotScrollEnableChkB">
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there's not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string/>
          </property>
          <property name="text">
           <string/>
@@ -1036,16 +1023,6 @@ p, li { white-space: pre-wrap; }
          </item>
         </widget>
        </item>
-       <item row="18" column="0">
-        <widget class="QLabel" name="StickScrollLB">
-         <property name="text">
-          <string>StickScroll</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="29" column="0">
         <widget class="QLabel" name="label_faimode">
          <property name="text">
@@ -1143,17 +1120,7 @@ p, li { white-space: pre-wrap; }
        <item row="21" column="4">
         <widget class="QCheckBox" name="BandGapEnableChkB">
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there's not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string/>
          </property>
          <property name="text">
           <string/>
@@ -1262,17 +1229,7 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there's not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Will alert if there's not a lot of memory left</string>
          </property>
          <property name="text">
           <string/>
@@ -1471,25 +1428,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
-        <widget class="QComboBox" name="inputfilterCB">
-         <item>
-          <property name="text">
-           <string>Single</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Oversample</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Filter</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="10" column="1">
         <widget class="QComboBox" name="backlightswCB">
          <property name="toolTip">
@@ -1499,9 +1437,7 @@ p, li { white-space: pre-wrap; }
           <string/>
          </property>
          <property name="whatsThis">
-          <string>This is the switch selectrion for turning on the backlight (if installed).
-
-</string>
+          <string>This is the switch selection for turning on the backlight (if installed).</string>
          </property>
          <property name="currentIndex">
           <number>-1</number>
@@ -1535,17 +1471,7 @@ p, li { white-space: pre-wrap; }
        <item row="21" column="1">
         <widget class="QCheckBox" name="thrwarnChkB">
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there's not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Will alert if the throttle is not at idle during startup</string>
          </property>
          <property name="text">
           <string/>
@@ -1555,13 +1481,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="tristate">
           <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLabel" name="label_soundMode">
-         <property name="text">
-          <string>Sound Mode</string>
          </property>
         </widget>
        </item>
@@ -1577,6 +1496,13 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_soundMode">
+         <property name="text">
+          <string>Sound Mode</string>
+         </property>
+        </widget>
        </item>
        <item row="10" column="0">
         <widget class="QLabel" name="label_4">
@@ -2268,6 +2194,25 @@ Acceptable values are 5v..10v</string>
          </item>
         </layout>
        </item>
+       <item row="8" column="1">
+        <widget class="QComboBox" name="inputfilterCB">
+         <item>
+          <property name="text">
+           <string>Single</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Oversample</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Filter</string>
+          </property>
+         </item>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tabTrainer">
@@ -2338,13 +2283,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2372,13 +2311,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2440,13 +2373,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2474,13 +2401,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2513,13 +2434,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2581,13 +2496,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2625,13 +2534,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2659,13 +2562,7 @@ Acceptable values are 5v..10v</string>
           <string/>
          </property>
          <property name="whatsThis">
-          <string>Beeper volume
-
-0 - Quiet.  No beeps at all.
-1 - No Keys.  Normal beeps but menu keys do not beep.
-2 - Normal.
-3 - Loud.
-4 - Extra loud.</string>
+          <string/>
          </property>
          <item>
           <property name="text">
@@ -2907,17 +2804,7 @@ Acceptable values are 5v..10v</string>
           <bool>true</bool>
          </property>
          <property name="whatsThis">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Warnings&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These will define startup warnings.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Throttle warning - will alert if the throttle is not at idle during startup&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Switch warning - will alert if switches are not in their defaul position&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Memory warning - will alert if there's not a lot of memory left&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Silent mode warning - will alert you if the beeper is set to quiet (0)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string/>
          </property>
          <property name="text">
           <string/>
@@ -2936,9 +2823,6 @@ p, li { white-space: pre-wrap; }
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0" columnstretch="0,1,1,1,0,0,1,1,1">
        <item row="1" column="7">
         <widget class="QSpinBox" name="ana5Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -2970,9 +2854,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="6">
         <widget class="QSpinBox" name="ana5Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3061,9 +2942,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="1">
         <widget class="QSpinBox" name="ana1Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3074,9 +2952,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="2">
         <widget class="QSpinBox" name="ana1Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3090,9 +2965,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="3">
         <widget class="QSpinBox" name="ana1Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3110,9 +2982,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="1">
         <widget class="QSpinBox" name="ana2Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3123,9 +2992,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="2">
         <widget class="QSpinBox" name="ana2Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3136,9 +3002,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="3">
         <widget class="QSpinBox" name="ana2Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3149,9 +3012,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="1">
         <widget class="QSpinBox" name="ana3Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3162,9 +3022,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="2">
         <widget class="QSpinBox" name="ana3Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3175,9 +3032,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="3">
         <widget class="QSpinBox" name="ana3Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3195,9 +3049,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="1">
         <widget class="QSpinBox" name="ana4Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3211,9 +3062,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="2">
         <widget class="QSpinBox" name="ana4Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3224,9 +3072,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="3">
         <widget class="QSpinBox" name="ana4Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3257,9 +3102,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="11" column="1">
         <widget class="QDoubleSpinBox" name="battCalib">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="suffix">
           <string>v</string>
          </property>
@@ -3311,15 +3153,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="16" column="1">
         <widget class="QSpinBox" name="PPM2">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3330,15 +3163,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="17" column="1">
         <widget class="QSpinBox" name="PPM3">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3349,15 +3173,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="18" column="1">
         <widget class="QSpinBox" name="PPM4">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3368,15 +3183,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="14" column="1">
         <widget class="QSpinBox" name="PPM1">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3438,9 +3244,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="8">
         <widget class="QSpinBox" name="ana5Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3451,9 +3254,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="6">
         <widget class="QSpinBox" name="ana6Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3464,9 +3264,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="7">
         <widget class="QSpinBox" name="ana6Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3477,9 +3274,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="8">
         <widget class="QSpinBox" name="ana6Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3490,9 +3284,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="6">
         <widget class="QSpinBox" name="ana7Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3503,9 +3294,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="7">
         <widget class="QSpinBox" name="ana7Mid">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3516,9 +3304,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="8">
         <widget class="QSpinBox" name="ana7Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3529,9 +3314,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="6">
         <widget class="QSpinBox" name="ana8Neg">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>
@@ -3555,9 +3337,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="8">
         <widget class="QSpinBox" name="ana8Pos">
-         <property name="statusTip">
-          <string/>
-         </property>
          <property name="minimum">
           <number>-9999</number>
          </property>

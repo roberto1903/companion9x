@@ -52,9 +52,9 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
       }
     } else {
       if(wTitle.isEmpty())
-          setWindowTitle(getProgrammer() + " " + tr("result"));
+        setWindowTitle(getProgrammer() + " " + tr("result"));
       else
-          setWindowTitle(getProgrammer() + " - " + wTitle);
+        setWindowTitle(getProgrammer() + " - " + wTitle);
       QFile exec;
       winTitle=wTitle;
       if (!(exec.exists(prog))) {
@@ -93,81 +93,82 @@ avrOutputDialog::avrOutputDialog(QWidget *parent, QString prog, QStringList arg,
 }
 
 # if !__GNUC__
-BOOL KillProcessByName(char *szProcessToKill){
-        HANDLE hProcessSnap;
-        HANDLE hProcess;
-        PROCESSENTRY32 pe32;
-        DWORD dwPriorityClass;
+BOOL KillProcessByName(char *szProcessToKill)
+{
+    HANDLE hProcessSnap;
+    HANDLE hProcess;
+    PROCESSENTRY32 pe32;
+    DWORD dwPriorityClass;
 
-        hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  // Takes a snapshot of all the processes
+    hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  // Takes a snapshot of all the processes
 
-        if(hProcessSnap == INVALID_HANDLE_VALUE){
-                return( FALSE );
-        }
+    if(hProcessSnap == INVALID_HANDLE_VALUE){
+      return( FALSE );
+    }
 
-        pe32.dwSize = sizeof(PROCESSENTRY32);
+    pe32.dwSize = sizeof(PROCESSENTRY32);
 
-        if(!Process32First(hProcessSnap, &pe32)){
-                CloseHandle(hProcessSnap);
-                return( FALSE );
-        }
+    if(!Process32First(hProcessSnap, &pe32)){
+      CloseHandle(hProcessSnap);
+      return( FALSE );
+    }
 
-        do{
-                if(!strcmp(pe32.szExeFile,szProcessToKill)){    //  checks if process at current position has the name of to be killed app
-                        hProcess = OpenProcess(PROCESS_TERMINATE,0, pe32.th32ProcessID);  // gets handle to process
-                        TerminateProcess(hProcess,0);   // Terminate process by handle
-                        CloseHandle(hProcess);  // close the handle
-                }
-        }while(Process32Next(hProcessSnap,&pe32));  // gets next member of snapshot
+    do{
+      if(!strcmp(pe32.szExeFile,szProcessToKill)){    //  checks if process at current position has the name of to be killed app
+        hProcess = OpenProcess(PROCESS_TERMINATE,0, pe32.th32ProcessID);  // gets handle to process
+        TerminateProcess(hProcess,0);   // Terminate process by handle
+        CloseHandle(hProcess);  // close the handle
+      }
+    } while(Process32Next(hProcessSnap,&pe32));  // gets next member of snapshot
 
-        CloseHandle(hProcessSnap);  // closes the snapshot handle
-        return( TRUE );
+    CloseHandle(hProcessSnap);  // closes the snapshot handle
+    return( TRUE );
 }
 #endif
 
 void avrOutputDialog::doCopy() 
 {
-  hasErrors=false;
-  char buf[READBUF];
-  char * pointer=buf;
-  QFile source(sourceFile);
-  int blocks=(source.size()/BLKSIZE);
-   ui->progressBar->setMaximum(blocks-1);
-  if (!source.open(QIODevice::ReadOnly)) {
-    QMessageBox::warning(this, tr("Error"),tr("Cannot open source file"));
-    hasErrors=true;
-  } else {
-    source.read(buf,READBUF);
-    source.close();
-    QFile dest(destFile);
-    if (!dest.open(QIODevice::WriteOnly)) {
-      QMessageBox::warning(this, tr("Error"),tr("Cannot write destination"));
+    hasErrors=false;
+    char buf[READBUF];
+    char * pointer=buf;
+    QFile source(sourceFile);
+    int blocks=(source.size()/BLKSIZE);
+     ui->progressBar->setMaximum(blocks-1);
+    if (!source.open(QIODevice::ReadOnly)) {
+      QMessageBox::warning(this, tr("Error"),tr("Cannot open source file"));
       hasErrors=true;
     } else {
-      addText(tr("Writing file: "));
-      for (int i=0;i<blocks;i++) {
-        if (dest.write(pointer,BLKSIZE)!=BLKSIZE) {
-          hasErrors=true;
-          break;
-        };
-        dest.flush();
-        pointer+=BLKSIZE;
-        ui->progressBar->setValue(i);
-        if ((i%2)!=0)
-          addText("#");
+      source.read(buf,READBUF);
+      source.close();
+      QFile dest(destFile);
+      if (!dest.open(QIODevice::WriteOnly)) {
+        QMessageBox::warning(this, tr("Error"),tr("Cannot write destination"));
+        hasErrors=true;
+      } else {
+        addText(tr("Writing file: "));
+        for (int i=0;i<blocks;i++) {
+          if (dest.write(pointer,BLKSIZE)!=BLKSIZE) {
+            hasErrors=true;
+            break;
+          };
+          dest.flush();
+          pointer+=BLKSIZE;
+          ui->progressBar->setValue(i);
+          if ((i%2)!=0)
+            addText("#");
+        }
+        dest.close();
       }
-      dest.close();
     }
-  }
-  doFinished(0);
+    doFinished(0);
 }
 
 void avrOutputDialog::killTimerElapsed()
 {
-  delete kill_timer;
-  kill_timer = NULL;
+    delete kill_timer;
+    kill_timer = NULL;
 # if !__GNUC__
-  KillProcessByName("tasklist.exe");
+    KillProcessByName("tasklist.exe");
 #endif
 }
 
@@ -218,9 +219,9 @@ void avrOutputDialog::doAddTextStdOut()
       ui->progressBar->setMaximum(size/2048);
     }
     if (currStdLine.contains("\n")) {
-        nlPos=currStdLine.lastIndexOf("\n");
-        prevStdLine=currStdLine.left(nlPos).trimmed();
-        currStdLine=currStdLine.mid(nlPos+1);
+      nlPos=currStdLine.lastIndexOf("\n");
+      prevStdLine=currStdLine.left(nlPos).trimmed();
+      currStdLine=currStdLine.mid(nlPos+1);
     }
     if (!currStdLine.isEmpty()) {
       if (currStdLine.at(0)==QChar('.')) {
@@ -252,75 +253,71 @@ void avrOutputDialog::doAddTextStdOut()
 
     //addText("\n=====\n" + text + "\n=====\n");
 
-    if(text.contains(":010000")) //contains fuse info
-    {
-        QStringList stl = text.split(":01000000");
+    if(text.contains(":010000")) { //contains fuse info    
+      QStringList stl = text.split(":01000000");
 
-        foreach (QString t, stl)
-        {
-            bool ok = false;
-            if(!lfuse)        lfuse = t.left(2).toInt(&ok,16);
-            if(!hfuse && !ok) hfuse = t.left(2).toInt(&ok,16);
-            if(!efuse && !ok) efuse = t.left(2).toInt(&ok,16);
-        }
+      foreach (QString t, stl) {
+        bool ok = false;
+        if(!lfuse)        lfuse = t.left(2).toInt(&ok,16);
+        if(!hfuse && !ok) hfuse = t.left(2).toInt(&ok,16);
+        if(!efuse && !ok) efuse = t.left(2).toInt(&ok,16);
+      }
     }
-
     if (text.contains("-E-")) {
       hasErrors = true;
     }
-
 }
 
 QString avrOutputDialog::getProgrammer()
 {
-  EEPROMInterface *eepromInterface = GetEepromInterface();
-  if (IS_TARANIS(eepromInterface->getBoard())) {
-    return "DFU Util";
-  } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
-    return "SAM-BA";
-  } else {
-    return "AVRDUDE";
-  }
+    EEPROMInterface *eepromInterface = GetEepromInterface();
+    if (IS_TARANIS(eepromInterface->getBoard())) {
+      return "DFU Util";
+    } else if (eepromInterface->getBoard()==BOARD_SKY9X) {
+      return "SAM-BA";
+    } else {
+      return "AVRDUDE";
+    }
 }
 
 void avrOutputDialog::errorWizard()
 {
-  QString output=ui->plainTextEdit->toPlainText();
-  if (output.contains("avrdude: Expected signature for")) { // wrong signature
-    int pos=output.indexOf("avrdude: Device signature = ");
-    bool fwexist=false;
-    QString DeviceStr="Unknown";
-    QString FwStr="";
+    QString output=ui->plainTextEdit->toPlainText();
+    if (output.contains("avrdude: Expected signature for")) { // wrong signature
+      int pos=output.indexOf("avrdude: Device signature = ");
+      bool fwexist=false;
+      QString DeviceStr="Unknown";
+      QString FwStr="";
 
-    if (pos>0) {
-      QString DeviceId=output.mid(pos+28,8);
-      if (DeviceId=="0x1e9602") {
-        DeviceStr="Atmega 64";
-        FwStr="\n"+tr("ie: OpenTX for 9X board or OpenTX for 9XR board");
-        fwexist=true;
-      } else if (DeviceId=="0x1e9702") {
-        DeviceStr="Atmega 128";
-        FwStr="\n"+tr("ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip");
-        fwexist=true;
-      } else if (DeviceId=="0x1e9703") {
-        DeviceStr="Atmega 1280";
-      } else if (DeviceId=="0x1e9704") {
-        DeviceStr="Atmega 1281";
-      } else if (DeviceId=="0x1e9801") {
-        DeviceStr="Atmega 2560";
-        FwStr="\n"+tr("ie: OpenTX for Gruvin9X  board");
-        fwexist=true;
-      } else if (DeviceId=="0x1e9802") {
-        DeviceStr="Atmega 2561";
+      if (pos>0) {
+        QString DeviceId=output.mid(pos+28,8);
+        if (DeviceId=="0x1e9602") {
+          DeviceStr="Atmega 64";
+          FwStr="\n"+tr("ie: OpenTX for 9X board or OpenTX for 9XR board");
+          fwexist=true;
+        } else if (DeviceId=="0x1e9702") {
+          DeviceStr="Atmega 128";
+          FwStr="\n"+tr("ie: OpenTX for M128 / 9X board or OpenTX for 9XR board with M128 chip");
+          fwexist=true;
+        } else if (DeviceId=="0x1e9703") {
+          DeviceStr="Atmega 1280";
+        } else if (DeviceId=="0x1e9704") {
+          DeviceStr="Atmega 1281";
+        } else if (DeviceId=="0x1e9801") {
+          DeviceStr="Atmega 2560";
+          FwStr="\n"+tr("ie: OpenTX for Gruvin9X  board");
+          fwexist=true;
+        } else if (DeviceId=="0x1e9802") {
+          DeviceStr="Atmega 2561";
+        }
+      }
+      if (fwexist==false) {
+        QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease check advanced burn options to set the correct cpu type.").arg(DeviceStr));
+      } else {
+        FirmwareInfo *firmware = GetCurrentFirmware();
+        QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease select an appropriate firmware type to program it.").arg(DeviceStr)+FwStr+tr("\nYou are currently using:\n %1").arg(firmware->name));
       }
     }
-    if (fwexist==false) {
-      QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease check advanced burn options to set the correct cpu type.").arg(DeviceStr));
-    } else {
-      FirmwareInfo *firmware = GetCurrentFirmware();
-      QMessageBox::warning(this, "companion9x - Tip of the day", tr("Your radio uses a %1 CPU!!!\n\nPlease select an appropriate firmware type to program it.").arg(DeviceStr)+FwStr+tr("\nYou are currently using:\n %1").arg(firmware->name));
-    }
-  }
 }
 
 void avrOutputDialog::doAddTextStdErr()
@@ -333,45 +330,44 @@ void avrOutputDialog::doAddTextStdErr()
 
     currLine.append(text);
     if (currLine.contains("#")) {
-        avrphase=currLine.left(1).toLower();
-        if (avrphase=="w") {
-            ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #ff0000; text-align:center;}:");
-            phase=1;
-            if(winTitle.isEmpty())
-                setWindowTitle(getProgrammer() + " - " + tr("Writing"));
-            else
-                setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Writing"));
-            pbvalue=currLine.count("#")*2;
-            ui->progressBar->setValue(pbvalue);
+      avrphase=currLine.left(1).toLower();
+      if (avrphase=="w") {
+        ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #ff0000; text-align:center;}:");
+        phase=1;
+        if(winTitle.isEmpty())
+          setWindowTitle(getProgrammer() + " - " + tr("Writing"));
+        else
+          setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Writing"));
+        pbvalue=currLine.count("#")*2;
+        ui->progressBar->setValue(pbvalue);
+      }
+      if (avrphase=="r") {
+        if (phase==0) {
+          ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #00ff00; text-align:center;}:");
+          if(winTitle.isEmpty())
+            setWindowTitle(getProgrammer() + " - " + tr("Reading"));
+          else
+            setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Reading"));
+        } else {
+          ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #0000ff; text-align:center;}:");
+          phase=2;
+          if(winTitle.isEmpty())
+            setWindowTitle(getProgrammer() + " - " + tr("Verifying"));
+          else
+            setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Verifying"));
         }
-        if (avrphase=="r") {
-            if (phase==0) {
-                ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #00ff00; text-align:center;}:");
-                if(winTitle.isEmpty())
-                    setWindowTitle(getProgrammer() + " - " + tr("Reading"));
-                else
-                    setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Reading"));
-            } else {
-                ui->progressBar->setStyleSheet("QProgressBar  {text-align: center;} QProgressBar::chunk { background-color: #0000ff; text-align:center;}:");
-                phase=2;
-                if(winTitle.isEmpty())
-                    setWindowTitle(getProgrammer() + " - " + tr("Verifying"));
-                else
-                    setWindowTitle(getProgrammer() + " - " + winTitle + " - " + tr("Verifying"));
-            }
-            pbvalue=currLine.count("#")*2;
-            ui->progressBar->setValue(pbvalue);
-        }
+        pbvalue=currLine.count("#")*2;
+        ui->progressBar->setValue(pbvalue);
+      }
     }
     if (currLine.contains("\n")) {
-        nlPos=currLine.lastIndexOf("\n");
-        prevLine=currLine.left(nlPos).trimmed();
-        currLine=currLine.mid(nlPos+1);
+      nlPos=currLine.lastIndexOf("\n");
+      prevLine=currLine.left(nlPos).trimmed();
+      currLine=currLine.mid(nlPos+1);
     }
     if (text.contains("-E-") && !text.contains("-E- No receive file name")) {
       hasErrors = true;
     }
-
     addText(text);
 }
 
@@ -397,8 +393,7 @@ void avrOutputDialog::doFinished(int code=0)
 
     if(lfuse || hfuse || efuse) addReadFuses();
     
-    switch(closeOpt)
-    {
+    switch(closeOpt) {
       case AVR_DIALOG_CLOSE_IF_SUCCESSFUL:
         if (!hasErrors && !code) accept();
         if (code) {
@@ -442,8 +437,6 @@ void avrOutputDialog::doFinished(int code=0)
     default: //AVR_DIALOG_KEEP_OPEN
       break;
     }
-
-
 }
 
 void avrOutputDialog::doProcessStarted()
@@ -465,10 +458,10 @@ void avrOutputDialog::addReadFuses()
 
 void avrOutputDialog::on_checkBox_toggled(bool checked) {
     if (checked) {
-        ui->plainTextEdit->show();
+      ui->plainTextEdit->show();
     } else {
-        ui->plainTextEdit->hide();
-        QTimer::singleShot(0, this, SLOT(shrink()));
+      ui->plainTextEdit->hide();
+      QTimer::singleShot(0, this, SLOT(shrink()));
     }
 }
 
