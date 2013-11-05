@@ -751,7 +751,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
         <source>This is the switch selectrion for turning on the backlight (if installed).
 
 </source>
-        <translation>To jest przełacznik do włacznie podswietlenia (jeśli zainstalowany).</translation>
+        <translation>To jest przełacznik do włącznie podswietlenia (jeśli zainstalowany).</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1700"/>
@@ -801,7 +801,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="617"/>
         <source>BackLight On Stick Move</source>
-        <translation>Podświetlenie właczone przy ruchu drążka</translation>
+        <translation>Podświetlenie włączone przy ruchu drążka</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1233"/>
@@ -876,7 +876,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="310"/>
         <source>Wav volume</source>
-        <translation>Głośnośc WAV</translation>
+        <translation>Głośność WAV</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="333"/>
@@ -886,7 +886,7 @@ To ustawienie jest używane przez szablony, jakie wyjście przypisane jest do ka
     <message>
         <location filename="generaledit.ui" line="356"/>
         <source>Background volume</source>
-        <translation>Głośnośc tła</translation>
+        <translation>Głośność tła</translation>
     </message>
     <message>
         <location filename="generaledit.ui" line="1052"/>
@@ -1644,7 +1644,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1594"/>
         <source>Create a new file</source>
-        <translation>Utwór nowy plik</translation>
+        <translation>Utwórz nowy plik</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1597"/>
@@ -1714,7 +1714,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1625"/>
         <source>&amp;Check for updates...</source>
-        <translation>&amp;Sprawdź aktualizaje...</translation>
+        <translation>&amp;Sprawdź aktualizacje...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1626"/>
@@ -1764,7 +1764,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1646"/>
         <source>Customize your &amp;TX...</source>
-        <translation>&amp;personalizuj swoje radio...</translation>
+        <translation>&amp;Personalizuj swoje radio...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1647"/>
@@ -1809,7 +1809,7 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1672"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation>Wklej zawartośc schowka na aktualnej pozycji</translation>
+        <translation>Wklej zawartość schowka na aktualnej pozycji</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1677"/>
@@ -1844,12 +1844,12 @@ Zapisać mimo wszytko?</translation>
     <message>
         <location filename="mainwindow.cpp" line="1687"/>
         <source>Write Flash memory</source>
-        <translation>Zapsz pamięć FLASH</translation>
+        <translation>Zapisz pamięć FLASH</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1688"/>
         <source>Write flash memory to transmitter</source>
-        <translation>Zapsz pamięć FLASH do radia</translation>
+        <translation>Zapisz pamięć FLASH do radia</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1691"/>
@@ -2752,7 +2752,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="modeledit.ui" line="236"/>
         <source>Switch startup  Warning</source>
-        <translation>Startowe ostrzezenie o przełacznikach</translation>
+        <translation>Startowe ostrzeżenie o przełacznikach</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="1065"/>
@@ -3009,7 +3009,7 @@ p, li { white-space: pre-wrap; }
         <location filename="modeledit.ui" line="470"/>
         <location filename="modeledit.cpp" line="2822"/>
         <source>ON</source>
-        <translation>Włacz</translation>
+        <translation>Włącz</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="341"/>
@@ -3961,7 +3961,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.ui" line="21184"/>
         <source>Volt source</source>
-        <translation>Zródło napięcia</translation>
+        <translation>Żródło napięcia</translation>
     </message>
     <message>
         <location filename="modeledit.ui" line="21198"/>
@@ -4574,7 +4574,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="modeledit.cpp" line="203"/>
         <source>Clear Expo Settings</source>
-        <translation>Wyczyśc ustawienia Expo</translation>
+        <translation>Wyczyść ustawienia Expo</translation>
     </message>
     <message>
         <location filename="modeledit.cpp" line="235"/>
@@ -6559,7 +6559,7 @@ Wolne obroty będą na górze, trymer i ostrzeżenie o otwartym gazie również 
     <message>
         <location filename="helpers.cpp" line="120"/>
         <source>Safety %1</source>
-        <translation>Zabezpieczenie (zamek) %1</translation>
+        <translation>Bezpieczny %1</translation>
     </message>
     <message>
         <location filename="helpers.cpp" line="123"/>
@@ -7342,7 +7342,7 @@ Potrzebujesz pomocy ?</translation>
     <message>
         <location filename="burnconfigdialog.ui" line="71"/>
         <source>Location of AVRDUDE executable</source>
-        <translation>Połozenie wykonywalnego AVRDUDE</translation>
+        <translation>Położenie wykonywalnego AVRDUDE</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="54"/>
@@ -7350,12 +7350,12 @@ Potrzebujesz pomocy ?</translation>
         <location filename="burnconfigdialog.ui" line="637"/>
         <location filename="burnconfigdialog.ui" line="670"/>
         <source>The location of the AVRDUDE executable.</source>
-        <translation>Połozenie wykonywalnego AVRDUDE.</translation>
+        <translation>Położenie wykonywalnego AVRDUDE.</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="64"/>
         <source>DFU-Util Location</source>
-        <translation>połozenie narzędzia DFU</translation>
+        <translation>Położenie narzędzia DFU</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="84"/>
@@ -7469,7 +7469,7 @@ m2560 dla platformy V4</translation>
     <message>
         <location filename="burnconfigdialog.ui" line="624"/>
         <source>SAM-BA Location</source>
-        <translation>Połozenie SAM-BA</translation>
+        <translation>Położenie SAM-BA</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="680"/>
@@ -7480,7 +7480,7 @@ m2560 dla platformy V4</translation>
         <location filename="burnconfigdialog.ui" line="51"/>
         <location filename="burnconfigdialog.ui" line="634"/>
         <source>Location of sam-ba executable</source>
-        <translation>Połozenie plików wykonywalnych sam-ba</translation>
+        <translation>Położenie plików wykonywalnych sam-ba</translation>
     </message>
     <message>
         <location filename="burnconfigdialog.ui" line="564"/>
@@ -9663,7 +9663,7 @@ This is used by the templated to determine which channel goes to what number out
     <message>
         <location filename="preferencesdialog.ui" line="676"/>
         <source>Default Channel Order</source>
-        <translation>Bazowa kolejnośc kanałów</translation>
+        <translation>Bazowa kolejność kanałów</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="273"/>
@@ -9769,7 +9769,7 @@ Mode 4:
     <message>
         <location filename="preferencesdialog.ui" line="1040"/>
         <source>Recent History Size</source>
-        <translation>Wielkośc zapamietanej historii</translation>
+        <translation>Wielkość zapamietanej historii</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="783"/>
@@ -10449,25 +10449,25 @@ Mode 4:
         <location filename="simulatordialog.ui" line="264"/>
         <location filename="simulatordialog.ui" line="636"/>
         <source>Hold X</source>
-        <translation>Zatrzymaj X</translation>
+        <translation>Przytrzymaj X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="294"/>
         <location filename="simulatordialog.ui" line="666"/>
         <source>Fix X</source>
-        <translation>Ustaw X</translation>
+        <translation>Zablokuj X</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="324"/>
         <location filename="simulatordialog.ui" line="696"/>
         <source>Fix Y</source>
-        <translation>Ustaw Y</translation>
+        <translation>Zablokuj Y</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="354"/>
         <location filename="simulatordialog.ui" line="726"/>
         <source>Hold Y</source>
-        <translation>Zatrzymaj Y</translation>
+        <translation>Zablokuj Y</translation>
     </message>
     <message>
         <location filename="simulatordialog.ui" line="374"/>
@@ -10930,19 +10930,19 @@ Mode 4:
         <location filename="xsimulatordialog.ui" line="210"/>
         <location filename="xsimulatordialog.ui" line="776"/>
         <source>Fix X</source>
-        <translation>Ustaw X</translation>
+        <translation>Zablokuj X</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="180"/>
         <location filename="xsimulatordialog.ui" line="746"/>
         <source>Fix Y</source>
-        <translation>Ustaw Y</translation>
+        <translation>Zablokuj Y</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="150"/>
         <location filename="xsimulatordialog.ui" line="716"/>
         <source>Hold Y</source>
-        <translation>Zatrzymaj Y</translation>
+        <translation>Przytrzymaj Y</translation>
     </message>
     <message>
         <location filename="xsimulatordialog.ui" line="514"/>
